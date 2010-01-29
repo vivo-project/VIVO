@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<project name="VIVO" default="describe" basedir=".">
+
+	<property file="config/build.properties" />
+
+	<!-- ================================= 
+          target: describe              
+         ================================= -->
+	<target name="describe" depends="" description="describes the available targets.">
+		<echo>
+Available targets:
+all    -- Runs "clean", then "deploy".
+clean  -- Removes any artifacts from previous builds, so the next build will be
+            a clean one.
+deploy -- Rssembles the VIVO application and deploys it to the "webapps" 
+            directory of your Tomcat server.
+		</echo>
+	</target>
+
+	<!-- ================================= 
+          target: all              
+         ================================= -->
+	<target name="all" depends="clean, deploy" description="description" />
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="Start with a fresh build.">
+		<delete dir="${deploy.staging.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: deploy              
+         ================================= -->
+	<target name="deploy"
+	        depends="runCoreBuild"
+	        description="Assemble the VIVO application and deploy it.">
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: prepare                      
+          
+          Move everything into a work-area, so we can merge core with vivoweb.
+         - - - - - - - - - - - - - - - - - -->
+	<target name="prepare">
+		<mkdir dir="${deploy.staging.dir}" />
+		<copy todir="${deploy.staging.dir}">
+			<fileset dir="vitro-core">
+				<exclude name="${themes.blocking.path}" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: properties                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="properties" depends="prepare">
+		<fail message="You must create a &quot;${deploy.properties.file}&quot; file.">
+			<condition>
+				<not>
+					<available file="${deploy.properties.file}" />
+				</not>
+			</condition>
+		</fail>
+
+		<property file="${deploy.properties.file}" prefix="deploy." />
+		<fail unless="deploy.tomcat.home"
+		      message="${deploy.properties.file} must contain a value for tomcat.home" />
+		<fail unless="deploy.webapp.name"
+		      message="${deploy.properties.file} must contain a value for webapp.name" />
+		<fail unless="deploy.upload.directory"
+		      message="${deploy.properties.file} must contain a value for upload.directory" />
+		<fail unless="deploy.LuceneSetup.indexDir"
+		      message="${deploy.properties.file} must contain a value for LuceneSetup.indexDir" />
+		<fail unless="deploy.Vitro.defaultNamespace"
+		      message="${deploy.properties.file} must contain a value for Vitro.defaultNamespace" />
+		<fail unless="deploy.Vitro.smtpHost"
+		      message="${deploy.properties.file} must contain a value for Vitro.smtpHost (may be empty)" />
+		<fail unless="deploy.VitroConnection.DataSource.url"
+		      message="${deploy.properties.file} must contain a value for VitroConnection.DataSource.url" />
+		<fail unless="deploy.VitroConnection.DataSource.username"
+		      message="${deploy.properties.file} must contain a value for VitroConnection.DataSource.username" />
+		<fail unless="deploy.VitroConnection.DataSource.password"
+		      message="${deploy.properties.file} must contain a value for VitroConnection.DataSource.password" />
+		<fail unless="deploy.initialAdminUser"
+		      message="${deploy.properties.file} must contain a value for initialAdminUser" />
+
+		<dependset>
+			<srcfilelist dir="." files="${deploy.properties.file}" />
+			<targetfilelist dir="."
+			                files="${globalbuild.properties.file},${connection.properties.file},${upload.properties.file},${lucene.properties.file}, ${vitroUsers.owl.file}" />
+		</dependset>
+
+		<copy file="${globalbuild.template.file}"
+		      tofile="${globalbuild.properties.file}"
+		      filtering="true">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+
+		<copy file="${connection.template.file}"
+		      tofile="${connection.properties.file}"
+		      filtering="true">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+
+		<copy file="${upload.template.file}" tofile="${upload.properties.file}" filtering="true">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+
+		<copy file="${lucene.template.file}" tofile="${lucene.properties.file}" filtering="true">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+
+		<copy file="${vitroUsers.template.file}" tofile="${vitroUsers.owl.file}" filtering="true">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: themes                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="themes">
+		<copy todir="${themes.destination.dir}">
+			<fileset dir="${themes.source.dir}" />
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: ontology
+         - - - - - - - - - - - - - - - - - -->
+	<target name="ontology">
+		<copy todir="${ontology.destination.dir}">
+			<fileset dir="${ontology.source.dir}" />
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: model
+         - - - - - - - - - - - - - - - - - -->
+	<target name="model">
+		<copy todir="${submodels.destination.dir}">
+			<fileset dir="${submodels.source.dir}" />
+		</copy>
+		<copy todir="${init-data.destination.dir}">
+			<fileset dir="${init-data.source.dir}" />
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: modifications                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="modifications">
+		<copy todir="${modifications.destination.dir}">
+			<fileset dir="${modifications.source.dir}" />
+		</copy>
+    </target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: runCoreBuild                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="runCoreBuild" depends="properties, themes, ontology, model, modifications">
+		<ant antfile="${vitro-core.build.file}" inheritall="false" target="deploy" />
+	</target>
+
+</project>

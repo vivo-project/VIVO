@@ -1,0 +1,204 @@
+
+-------------------------------------------------------------------------------
+ 
+This is a brief summary of the VIVO installation process. A more detailed 
+explanation of the procedure can be found at:
+
+     http://vivoweb.org/support/user-guide/installation
+     
+The VIVO user guide is available at:
+
+    http://vivoweb.org/support/user-guide
+    
+PLEASE NOTE: It is assumed that you are performing a clean install, including
+emptying an existing database and removing a previous installation from the 
+tomcat webapps directory. Product functionality may not be as expected if you 
+install over an existing installation of an earlier version.
+ 
+-------------------------------------------------------------------------------
+ 
+    * I. Install required software
+    * II. Create an empty MySQL database
+    * III. Download the VIVO code distribution
+    * IV. Specify deployment properties
+    * V. Compile and deploy
+    * VI. Set Tomcat JVM Parameters
+    * VII. Start Tomcat
+    * VIII. Log in and add RDF data
+    * IX. Create an initial Lucene search index
+
+-------------------------------------------------------------------------------
+ 
+I. Install required software
+
+Before installing VIVO, make sure that the following software is installed on 
+the desired machine:
+
+    * Java (SE) 1.5 or higher
+    * Apache Tomcat 5.x or higher*
+    * Apache Ant
+    * MySQL 4.1 or higher
+    * Subversion client
+
+-------------------------------------------------------------------------------
+ 
+II. Create an empty MySQL database
+
+Decide on a database name, username, and password. Log into your mysql server 
+and create a new database in MySQL that uses UTF-8 encoding. You will need 
+these values for step IV when you configure the deployment properties. At the 
+mysql command line you can create the database and user with these commands 
+substituting your values for "dbname", "username", and "password". Most of the 
+time, the "hostname" will equal "localhost".
+
+CREATE DATABASE dbname CHARACTER SET utf8;
+
+Grant access to a database user. For example:
+
+GRANT ALL ON dbname.* TO 'username'@'hostname' IDENTIFIED BY 'password';
+
+Keep track of the database name, username, and password for the next step.
+
+-------------------------------------------------------------------------------
+ 
+III. Download the VIVO code distribution
+
+Download either a zip or gz file and unpack it on your web server:
+ftp://download.mannlib.cornell.edu/pub/Vivo/rel-0.9.zip
+ftp://download.mannlib.cornell.edu/pub/Vivo/rel-0.9.tar.gz
+
+-------------------------------------------------------------------------------
+ 
+IV. Specify deployment properties
+
+At the top level of the unpacked distribution, copy the file 
+example.deploy.properties to a file named simply deploy.properties. This file 
+sets several properties used in compilation and deployment.
+
+                Directory where tomcat is installed
+property name:  tomcat.home
+example value:  /usr/local/tomcat
+
+                Name of your VIVO application
+property name:  webapp.name
+example value:  vivo
+
+                Directory where uploaded files will be stored
+property name:  upload.directory
+example value:  /usr/local/vivo/data/uploads
+
+                Directory where the Lucene search index will be built. 	
+property name:  LuceneSetup.indexDir 	
+example value:  /usr/local/vivo/data/luceneIndex
+
+                Specify the namespace in which the Vitro editor should create new ABox and portal resources
+                Note that the trailing slash is essential.
+property name:  Vitro.defaultNamespace 	
+example value:  http://vivo.mydomain.edu/individual/
+
+                Specify an SMTP host that the form will use for sending e-mail (Optional)
+property name:  Vitro.smtpHost 	
+example value:  smtp.servername.edu
+
+                Specify the JDBC URL of your database.  Change the end of the
+                URL to reflect your database name (if it is not "vivo").
+property name:  VitroConnection.DataSource.url 	
+example value:  jdbc:mysql://localhost/vivo
+
+                Change the username to match the authorized user you created in MySQL
+property name:  VitroConnection.DataSource.username
+example value:  username
+
+                Change the password to match the password you created in MySQL 	
+property name:  VitroConnection.DataSource.password
+example value:  password
+	  	 
+                Specify the name of your first admin user for the VIVO application. This user 
+                will have an initial password of 'defaultAdmin'.  This will be changed on first 
+                login. 	
+property name:  initialAdminUser 	
+example value:  defaultAdmin
+
+-------------------------------------------------------------------------------
+ 
+V. Compile and deploy
+
+At the command line, from the top level of the unpacked distribution directory,
+type:
+
+ant clean deploy
+
+to build VIVO and deploy to Tomcat's webapps directory.
+
+-------------------------------------------------------------------------------
+
+VI. Set Tomcat JVM Parameters
+
+Currently, VIVO copies the contents of your RDF database into memory in order
+to serve Web requests quickly. (The in-memory copy and the underlying database
+ are kept in synch as edits are performed.)
+
+VIVO will require more memory than that allocated to Tomcat by default. With
+most installations of Tomcat, the setenv.sh or setenv.bat file in Tomcat's bin
+directory is a convenient place to set the memory parameters. For example: 
+export CATALINA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=64m" sets Tomcat to
+allocate an initial heap of 1024 megabytes, a maximum heap of 1024 megabytes,
+and a PermGen space of 64 megs. 1024 megabytes is a minimum practical heap size
+for production installations storing data for large academic institutions, and
+additional heap space is preferable. For testing with small sets of data, 256m 
+to 512m should be sufficient.
+
+If an OutOfMemoryError is encountered during VIVO execution, increasing the 
+heap parameters is the typical remedy.
+
+-------------------------------------------------------------------------------
+ 
+VII. Start Tomcat
+
+Most Tomcat installations can be started by running startup.sh or startup.bat 
+in Tomcat's bin directory. Point your browser to http://localhost:8080/vivo/ 
+to test the application.
+
+If Tomcat does not start up, or the VIVO application is not visible, check the 
+catalina.out file in Tomcat's logs directory. (More information about detailed 
+error logging to be added here.)
+
+-------------------------------------------------------------------------------
+ 
+VIII. Log in and add RDF data
+
+If the startup was successful, you will see a relatively empty screen with the 
+VIVO logo in the header. Click the "Log in" link near the upper right corner. 
+Log in with the initialAdminUser username you set up in step IV. The initial 
+password the initialAdminUser is defaultAdmin. On first login, you will be 
+prompted to select a new password and verify it a second time.
+
+After verifying your new password, you will be presented with a menu of 
+editing options. Here you can create OWL classes, object properties, datatype 
+properties, and configure the display of data. Currently, any classes you wish 
+to make visible on your website must be part of a Class Group, and there a 
+number of visibility and display options available for each ontology entity. 
+More documentation is forthcoming.
+
+VIVO comes with an ontology, but you may also upload another ontology from an 
+RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." Note 
+that Vitro currently works best with OWL-DL ontologies and has only limited 
+support for pure RDF data. You can enter a URL pointing to the RDF data you 
+wish to load or upload a file on your local machine. Ensure that the "add RDF" 
+radio button is selected. You will also likely want to check "create 
+classgroups automatically." Clicking the "Index" tab in the navigation bar at 
+the top left of the page will show a simple index of the knowledge base.  
+See more documentation for configuring VIVO at vivoweb.org.
+
+-------------------------------------------------------------------------------
+ 
+IX. Create an initial Lucene search index
+
+Invoke the indexing servlet by requesting http://localhost:8080/vivo/SearchIndex
+
+You will not see any output to the browser (though this will change in future 
+versions). When your browser switches to a blank screen, the indexing has 
+completed and the search box on the Vitro portal will be usable. Individuals 
+that are created, edited, or deleted from the Vitro editing interface will 
+trigger incremental updates of the search index.
+
