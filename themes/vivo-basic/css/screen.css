@@ -445,6 +445,10 @@ are necessary for cross-browser consistency
   margin-top: 3em;
 }
 
+#adminDashboard .add-action-button {
+    margin-top: .75em;
+}
+
 #logoutPanel {
   float: right;
   margin-right: 4.5em;
@@ -634,6 +638,12 @@ span.statementWrap:hover em.nonEditable {
   width: 8em;
   left: -8em;
   font-style: normal;
+}
+
+.verbosePropertyListing {
+    color: gray;
+    font-size: 0.75em;
+    margin-left: 1em;
 }
 
 
