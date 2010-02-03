@@ -94,7 +94,7 @@ deploy -- Rssembles the VIVO application and deploys it to the "webapps"
 		<dependset>
 			<srcfilelist dir="." files="${deploy.properties.file}" />
 			<targetfilelist dir="."
-			                files="${globalbuild.properties.file},${connection.properties.file},${upload.properties.file},${lucene.properties.file}, ${vitroUsers.owl.file}" />
+			                files="${globalbuild.properties.file},${vitrodeploy.properties.file},${vitroUsers.owl.file}" />
 		</dependset>
 
 		<copy file="${globalbuild.template.file}"
@@ -105,21 +105,9 @@ deploy -- Rssembles the VIVO application and deploys it to the "webapps"
 			</filterchain>
 		</copy>
 
-		<copy file="${connection.template.file}"
-		      tofile="${connection.properties.file}"
+		<copy file="${vitrodeploy.template.file}"
+		      tofile="${vitrodeploy.properties.file}"
 		      filtering="true">
-			<filterchain>
-				<expandproperties />
-			</filterchain>
-		</copy>
-
-		<copy file="${upload.template.file}" tofile="${upload.properties.file}" filtering="true">
-			<filterchain>
-				<expandproperties />
-			</filterchain>
-		</copy>
-
-		<copy file="${lucene.template.file}" tofile="${lucene.properties.file}" filtering="true">
 			<filterchain>
 				<expandproperties />
 			</filterchain>

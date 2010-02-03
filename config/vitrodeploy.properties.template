@@ -1,0 +1,45 @@
+# -----------------------------------------------------------------------------
+#
+# Vitro deployment properties
+#
+# This file exists as a template in the vivoweb distribution. The property
+# values are substituted in by the build script.
+#
+# -----------------------------------------------------------------------------
+
+#
+# The location where the VIVO application will store uploaded files 
+# (usually images). You should arrange for these files to be backed up in some
+# way.
+#
+UploadImagesServlet.sourceDirName = ${deploy.upload.directory}
+
+#
+# The location where the VIVO application will create its Lucene search 
+# index. 
+#
+LuceneSetup.indexDir = ${deploy.LuceneSetup.indexDir}
+
+# 
+# This namespace will be used when generating URIs for objects created in the 
+# editor. Change it to reflect your own domain. For example, Cornell's 
+# namespace is http://vivo.cornell.edu/individual/
+#
+# Note: it is essential that this namespace end with a trailing slash.
+#
+Vitro.defaultNamespace = ${deploy.Vitro.defaultNamespace}
+
+#
+# SMTP host which the "Contact Us" form can use to send mail. If this is left 
+# empty, the "Contact Us" form will be disabled.
+#
+Vitro.smtpHost = 
+
+#
+# The basic parameters for a MySQL database connection. Change the end of the 
+# URL to reflect your database name (if it is not "vitro"). Change the username 
+# and password to match the authorized user you created in MySQL.
+#
+VitroConnection.DataSource.url = ${deploy.VitroConnection.DataSource.url}
+VitroConnection.DataSource.username = ${deploy.VitroConnection.DataSource.username}
+VitroConnection.DataSource.password = ${deploy.VitroConnection.DataSource.password}
