@@ -14,6 +14,7 @@ require 'fileutils'
 class LicenserStats
   attr_reader :substitutions
   attr_reader :missing_tags
+  attr_reader :known_exceptions
   attr_reader :file_count
   attr_reader :dir_count
 
@@ -32,9 +33,9 @@ class LicenserStats
   public
   # ------------------------------------------------------------------------------------
 
-  def initialize(file_matchers, full)
+  def initialize(root_dir, file_matchers, full)
+    @root_dir = "#{root_dir}/".gsub('//', '/')
     @file_matchers = file_matchers
-
     @full = full
 
     # keep track of how many substitutions for all file types
@@ -46,6 +47,9 @@ class LicenserStats
     # keep track of missing tags, only in file types that have missing tags
     @missing_tags =  Hash.new(0)
 
+    # keep track of how many known non-licensed files we encounter, and what types.
+    @known_exceptions =  Hash.new(0)
+
     # keep track of how many files are copied
     @file_count = 0
     
@@ -53,36 +57,45 @@ class LicenserStats
     @dir_count = 0
   end
 
-  def enter_without_mods(path)
+  def enter_directory(path)
     @dir_count += 1
-    puts "Entering, no mods: #{path}" if @full
+    puts "Entering directory: #{path}" if @full
   end
 
-  def enter_with_mods(path)
-    @dir_count += 1
-    puts "Entering, with mods: #{path}" if @full
-  end
-
-  def record_copy_without_mods(filename)
+  def record_scan_non_matching(filename)
     @file_count += 1
-    puts "    Copying, without mods: #{filename}" if @full
+    puts "    Scan without mods: #{filename}" if @full
   end
 
-  def record_copy_with_mods(filename)
+  def record_copy_non_matching(filename)
     @file_count += 1
-    puts "    Copying, with mods: #{filename}" if @full
+    puts "    Copy without mods: #{filename}" if @full
   end
 
-  def record_substitution(filename)
+  def record_scan_matching(filename)
+    @file_count += 1
+    puts "    Scan with mods: #{filename}" if @full
+  end
+
+  def record_copy_matching(filename)
+    @file_count += 1
+    puts "    Copy with mods: #{filename}" if @full
+  end
+
+  def record_known_exception(filename)
+    @file_count += 1
+    puts "    Known exception:              #{filename}" if @full
+    @known_exceptions[which_match(filename)] += 1
+  end
+
+def record_tag(filename)
     puts "    Substituted license text into #{filename}" if @full
-    matcher = which_match(filename)
-    @substitutions[matcher] += 1
+    @substitutions[which_match(filename)] += 1
   end
 
-  def record_missing_tag(filename, source_path)
-    puts "WARN: Found no license tag in #{source_path}"
-    matcher = which_match(filename)
-    @missing_tags[matcher] += 1
+  def record_no_tag(filename, source_path)
+    puts "WARN: Found no license tag in #{source_path.sub(@root_dir, '')}"
+    @missing_tags[which_match(filename)] += 1
   end
 end
 
@@ -107,15 +120,93 @@ class Licenser
     end
     return text
   end
-
-  # Prepare the license-applicable directories as absolute paths.
+  
+  # The globs in the exceptions file are assumed to be 
+  # relative to the source directory. Make them explicitly so.
   #
-  def prepare_license_dir_paths(source_dir, license_dirs)
-    paths = []
-    license_dirs.each do |dir|
-      paths << "#{source_dir}/#{dir}".gsub('//', '/')
+  # Ignore any blank lines or lines that start with a '#'
+  #
+  def prepare_exception_globs(exceptions_file, source_dir)
+    globs = []
+    File.open(exceptions_file) do |file|
+      file.each do |line|
+        glob = line.strip
+        if (glob.length > 0) && (glob[0..0] != '#')
+          globs << "#{source_dir}/#{glob}".gsub('//', '/')
+        end
+      end
     end
-    return paths
+    return globs
+  end
+
+  # Recursively scan this directory, and copy if we are not scan-only.
+  #
+  def scan_dir(source_dir, target_dir)
+    @stats.enter_directory(source_dir)
+
+    Dir.mkdir(target_dir) if !@scan_only
+    
+    Dir.foreach(source_dir) do |filename|
+      source_path = "#{source_dir}/#{filename}"
+      target_path = "#{target_dir}/#{filename}"
+
+      # What kind of beast is this?
+      if filename == '.' || filename == '..'
+        is_skipped_directory = true
+      else
+        if File.directory?(source_path)
+          is_directory = true
+        else
+          if filename_matches_pattern?(filename)
+            if path_matches_exception?(source_path)
+              is_exception = true
+            else
+              is_match = true
+            end
+          else
+            is_ignored = true
+          end
+        end
+      end
+      
+
+      if is_skipped_directory
+        # do nothing
+      elsif is_directory
+        scan_dir(source_path, target_path)
+      elsif is_match
+        if @scan_only
+          @stats.record_scan_matching(filename)
+          scan_file(source_path, filename)
+        else
+          @stats.record_copy_matching(filename)
+          copy_file_with_license(source_path, target_path, filename)
+        end
+      elsif is_exception
+        @stats.record_known_exception(filename)
+        if @scan_only
+          # do nothing
+        else
+          copy_file_without_license(source_path, target_path)
+        end
+      else # not a match
+        if @scan_only
+          @stats.record_scan_non_matching(filename)
+        else
+          @stats.record_copy_non_matching(filename)
+          copy_file_without_license(source_path, target_path)
+        end
+      end
+    end
+  end
+
+  # Does this file path match any of the exceptions?
+  #
+  def path_matches_exception?(path)
+    @known_exceptions.each do |pattern|
+      return true if File.fnmatch(pattern, path)
+    end
+    return false
   end
 
   # Does this filename match any of the patterns?
@@ -126,68 +217,32 @@ class Licenser
     end
     return false
   end
-
-  # Recursively copy this directory, without adding license mods to any files,
-  # unless we hit one of the licensed directories.
+  
+  # This file would be eligible for licensing if we weren't in scan-only mode.
   #
-  def copy_dir_without_mods(source_dir, target_dir)
-    @stats.enter_without_mods(source_dir)
-    Dir.mkdir(target_dir)
-    Dir.foreach(source_dir) do |filename|
-      source_path = "#{source_dir}/#{filename}"
-      target_path = "#{target_dir}/#{filename}"
-
-      if filename == '.'
-      elsif filename == '..'
-      elsif @license_dir_paths.include?(source_path)
-        copy_dir_with_mods(source_path, target_path)
-      elsif File.directory?(source_path)
-        copy_dir_without_mods(source_path, target_path)
-      else
-        copy_file_without_mods(source_dir, target_dir, filename)
+  def scan_file(source_path, filename)
+    found = 0
+    File.open(source_path) do |source_file|
+      source_file.each do |line|
+        if line.include?(MAGIC_STRING)
+          found += 1
+        end
       end
+    end
+
+    if found == 0
+      @stats.record_no_tag(filename, source_path)
+    elsif found == 1
+      @stats.record_tag(filename)
+    else
+      raise("File contains #{found} license lines: #{source_path}")
     end
   end
 
-  # Recursively copy this directory, adding license mods to any suitable files.
+  # This file matches at least one of the file-matching strings, and does not
+  # match any exceptions. Replace the magic string with the license text.
   #
-  def copy_dir_with_mods(source_dir, target_dir)
-    @stats.enter_with_mods(source_dir)
-
-    Dir.mkdir(target_dir)
-    Dir.foreach(source_dir) do |filename|
-      source_path = "#{source_dir}/#{filename}"
-      target_path = "#{target_dir}/#{filename}"
-
-      if filename == '.'
-      elsif filename == '..'
-      elsif File.directory?(source_path)
-        copy_dir_with_mods(source_path, target_path)
-      elsif filename_matches_pattern?(filename)
-        copy_file_with_mods(source_dir, target_dir, filename)
-      else
-        copy_file_without_mods(source_dir, target_dir, filename)
-      end
-    end
-  end
-
-  # This file either is not in a licensed directory, or doesn't match any of the
-  # file-matching strings
-  #
-  def copy_file_without_mods(source_dir, target_dir, filename)
-    @stats.record_copy_without_mods(filename)
-    source_path = "#{source_dir}/#{filename}"
-    target_path = "#{target_dir}/#{filename}"
-    FileUtils.cp(source_path, target_path)
-  end
-
-  # This file is in a licensed directory, and matches at least one of the
-  # file-matching strings. Replace the magic string with the license text.
-  #
-  def copy_file_with_mods(source_dir, target_dir, filename)
-    @stats.record_copy_with_mods(filename)
-    source_path = "#{source_dir}/#{filename}"
-    target_path = "#{target_dir}/#{filename}"
+  def copy_file_with_license(source_path, target_path, filename)
     found = 0
     File.open(source_path) do |source_file|
       File.open(target_path, "w") do |target_file|
@@ -203,9 +258,9 @@ class Licenser
     end
 
     if found == 0
-      @stats.record_missing_tag(filename, source_path)
+      @stats.record_no_tag(filename, source_path)
     elsif found == 1
-      @stats.record_substitution(filename)
+      @stats.record_tag(filename)
     else
       raise("File contains #{found} license lines: #{source_path}")
     end
@@ -227,6 +282,13 @@ class Licenser
 
     target_file.print "#{ends[1].strip}\n"
   end
+  
+  # This file either doesn't match any of the file-matching strings, or
+  # matches an exception
+  #
+  def copy_file_without_license(source_path, target_path)
+    FileUtils.cp(source_path, target_path)
+  end
 
   # ------------------------------------------------------------------------------------
   public
@@ -235,44 +297,61 @@ class Licenser
   # Setup and get ready to process.
   # * source_dir is a String -- the path to the top level directory to be copied
   # * target_dir is a String -- the path to the top level directory to copy into
-  #      (must not already exist!)
-  # * license_dirs is an array of Strings -- relative paths to the directories that
-  #      require license mods.
-  # * file_matchers
+  #      (must not exist, but its parent must exist!)(ignored if scan_only is set)
+  # * file_matchers is an array of Strings -- filename globs that match the files we 
+  #      want to license.
   # * license_file is a String -- the path to the text of the license agreement
   #      (with a ${year} token in it)
+  # * known_exceptions_file is a String -- the path to a list of filename/path globs 
+  #      that match the files that we know should have no license tags in them.
+  # * scan_only is a Boolean -- if true, we scan the entire source dir without copying, 
+  #      and target_dir is ignored.
   # * full_report is a Boolean -- if true, we give a full log instead of just a summary.
   #
-  def initialize(source_dir, target_dir, license_dirs, file_matchers, license_file, full_report)
+  def initialize(source_dir, target_dir, file_matchers, license_file, known_exceptions_file, scan_only, full_report)
     if !File.exist?(source_dir)
       raise "Source directory does not exist: #{source_dir}"
     end
 
-    if File.exist?(target_dir)
-      raise "Target directory already exists: #{target_dir}"
+    if !scan_only 
+      if File.exist?(target_dir)
+        raise "Target directory already exists: #{target_dir}"
+      end
+      
+      target_parent = File.dirname(target_dir)
+      if !File.exist?(target_parent)
+        raise "Path to target directory doesn't exist: #{target_parent}"
+      end
+    end
+    
+    if !File.exist?(license_file)
+      raise "License file does not exist: #{license_file}"
     end
 
-    if !File.exist?(license_file)
-      raise "Source directory does not exist: #{license_file}"
+    if !File.exist?(known_exceptions_file)
+      raise "Known exceptions file does not exist: #{known_exceptions_file}"
     end
 
     @source_dir = source_dir
     @target_dir = target_dir
+    
     @file_matchers = file_matchers
-
-    @license_dirs = license_dirs
-    @license_dir_paths = prepare_license_dir_paths(source_dir, license_dirs)
 
     @license_file = license_file
     @license_text = prepare_license_text(license_file)
 
+    @known_exceptions_file = known_exceptions_file
+    @known_exceptions = prepare_exception_globs(known_exceptions_file, source_dir)
+    
+    @scan_only = scan_only
+    
     @full_report = full_report
-    @stats = LicenserStats.new(file_matchers, full_report)
+    @stats = LicenserStats.new(source_dir, file_matchers, full_report)
   end
 
-  # Start the recursive copying.
+  # Start the recursive scanning (and copying).
   def process()
-    copy_dir_without_mods(@source_dir, @target_dir)
+    scan_dir(@source_dir, @target_dir)
   end
 
   # Report the summary statistics
@@ -285,6 +364,11 @@ class Licenser
       printf("%5d %s\n", line[1], line[0])
     end
     puts
+    puts 'Known non-licensed files'
+    @stats.known_exceptions.sort.each do |line|
+      printf("%5d %s\n", line[1], line[0])
+    end
+    puts
     puts 'Missing tags'
     @stats.missing_tags.sort.each do |line|
       printf("%5d %s\n", line[1], line[0])
@@ -293,49 +377,46 @@ class Licenser
     puts 'parameters:'
     puts "    source_dir = #{@source_dir}"
     puts "    target_dir = #{@target_dir}"
-    puts "    license_dirs = #{@license_dirs.join(', ')}"
     puts "    file_matchers = #{@file_matchers.join(', ')}"
     puts "    license_file = #{@license_file}"
+    puts "    known_exceptions_file = #{@known_exceptions_file}"
+    puts "    scan_only = #{@scan_only}"
     puts "    full_report = #{@full_report}"
   end
 end
 
+
 # ------------------------------------------------------------------------
-# BOGUS test harness
+# Main routine
 # ------------------------------------------------------------------------
 
+
+# BOGUS test harness
 =begin
 source_dir = '/Vivoweb_Stuff/Testing_licenser/sourceDir'
 target_dir = '/Vivoweb_Stuff/Testing_licenser/targetDir'
-
-license_dirs = []
-license_dirs << '/licensed'
-
-license_file = '../doc/license.txt'
+license_file = "#{File.dirname(File.dirname(File.expand_path(__FILE__)))}/doc/license.txt"
+known_exceptions_file = '/Vivoweb_Stuff/Testing_licenser/known_exceptions.txt'
+full_report = true;
+scan_only = true;
 =end
 
-#=begin
-source_dir = '/Vivoweb_Stuff/Testing_licenser/trunk'
-target_dir = '/Vivoweb_Stuff/Testing_licenser/distribution'
 
-license_dirs = []
-license_dirs << '/themes'
-license_dirs << '/vitro-core/webapp'
-license_dirs << '/vitro-core/services'
+source_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
+license_file = "#{source_dir}/doc/license.txt"
+known_exceptions_file = "#{source_dir}/utilities/known_exceptions.txt"
+full_report = false;
 
-file_matchers = []
-file_matchers << '*.java'
-file_matchers << '*.jsp'
-file_matchers << '*.tld'
-file_matchers << '*.xsl'
-file_matchers << '*.xslt'
-file_matchers << '*.css'
-file_matchers << '*.js'
-file_matchers << 'build.xml'
+if ARGV.length == 0
+  scan_only = true;
+  target_dir = "";
+else
+  scan_only = false;
+  target_dir = ARGV[0]
+end
 
-license_file = '/Vivoweb_Stuff/Testing_licenser/trunk/doc/license.txt'
-#=end
+file_matchers = ['*.java', '*.jsp', '*.tld', '*.xsl', '*.xslt', '*.css', '*.js', 'build.xml']
 
-l = Licenser.new(source_dir, target_dir, license_dirs, file_matchers, license_file, false)
+l = Licenser.new(source_dir, target_dir, file_matchers, license_file, known_exceptions_file, scan_only, full_report)
 l.process
 l.report
