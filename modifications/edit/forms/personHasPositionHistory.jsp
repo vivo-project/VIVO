@@ -61,44 +61,12 @@
       ?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYear .
 </v:jsonset>
 
-<v:jsonset var="startYearMonthExisting" >      
-      SELECT ?startYearMonthExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#startYearMonth> ?startYearMonthExisting }
-</v:jsonset>
-<v:jsonset var="startYearMonthAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#startYearMonth> ?startYearMonth .
-</v:jsonset>
-
-<v:jsonset var="startDateExisting" >      
-      SELECT ?startDateExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#startDate> ?startDateExisting }
-</v:jsonset>
-<v:jsonset var="startDateAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#startDate> ?startDate .
-</v:jsonset>
-
 <v:jsonset var="endYearExisting" >      
       SELECT ?endYearExisting WHERE {  
       	?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYearExisting }
 </v:jsonset>
 <v:jsonset var="endYearAssertion" >
       ?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYear .
-</v:jsonset>
-
-<v:jsonset var="endYearMonthExisting" >      
-      SELECT ?endYearMonthExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#endYearMonth> ?endYearMonthExisting }
-</v:jsonset>
-<v:jsonset var="endYearMonthAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#endYearMonth> ?endYearMonth .
-</v:jsonset>
-
-<v:jsonset var="endDateExisting" >      
-      SELECT ?endDateExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#endDate> ?endDateExisting }
-</v:jsonset>
-<v:jsonset var="endDateAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#endDate> ?endDate .
 </v:jsonset>
 
 <%--  Note there is really no difference in how things are set up for an object property except
@@ -139,15 +107,13 @@
     
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}" ],
     "n3optional"    : [ "${organizationNameAssertion}","${organizationUriAssertion}",
-                        "${startYearAssertion}","${startYearMonthAssertion}","${startDateAssertion}",
-                        "${endYearAssertion}","${endYearMonthAssertion}","${endDateAssertion}"],
+                        "${startYearAssertion}","${endYearAssertion}"],
     "newResources"  : { "positionUri" : "${defaultNamespace}/position" },
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "organizationUri" ],
     "literalsOnForm" :  [ "title", "organizationName", 
-    					  "startYear", "startYearMonth", "startDate",
-                          "endYear",   "endYearMonth",   "endDate" ],
+    					  "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -155,11 +121,7 @@
         "title"              : "${titleExisting}",
         "organizationName"   : "${organizationNameExisting}",
         "startYear"          : "${startYearExisting}",
-        "startYearMonth"     : "${startYearMonthExisting}",
-        "startDate"          : "${startDateExisting}",
-        "endYear"            : "${endYearExisting}",
-        "endYearMonth"       : "${endYearMonthExisting}",
-        "endDate"            : "${endDateExisting}"
+        "endYear"            : "${endYearExisting}"
     },
     "sparqlForExistingUris" : {
         "organizationUri"   : "${organizationUriExisting}"
@@ -200,7 +162,7 @@
       },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ ],
+         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -209,31 +171,9 @@
          "rangeLang"        : "",         
          "assertions"       : ["${startYearAssertion}"]
       },
-      "startYearMonth" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [ ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYearMonth";
-         "rangeLang"        : "",         
-         "assertions"       : [ "${startYearMonthAssertion}" ]
-      },
-      "startDate" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#Date",
-         "rangeLang"        : "",         
-         "assertions"       : [ "${startDateAssertion}" ]
-      },
       "endYear" : {
          "newResource"      : "false",
-         "validators"       : [ ],
+         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -241,29 +181,7 @@
          "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYear",
          "rangeLang"        : "",         
          "assertions"       : ["${endYearAssertion}"]
-      },
-      "endYearMonth" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [ ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYearMonth";
-         "rangeLang"        : "",         
-         "assertions"       : [ "${endYearMonthAssertion}" ]
-      },
-      "endDate" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#Date",
-         "rangeLang"        : "",         
-         "assertions"       : [ "${endDateAssertion}" ]
-    }
+      }
   }
 }
 </c:set>
@@ -304,20 +222,8 @@
 	<v:input type="text" label="title" id="title" size="30" />
 	<v:input type="select" label="organization" id="organizationUri"  />
 	<v:input type="text" label="organization name (if not in dropdown above)" id="organizationName" size="30" />
-
-    <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>
-    
-    <%--
-    <v:input type="text" label="startYearMonth" id="startYearMonth" size="7"/>
-    <v:input type="text" label="start date" id="startDate" size="10"/>
-    --%>
-    
+    <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>    
     <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
-    
-    <%--
-    <v:input type="text" label="end year-month" id="endYearMonth" size="7"/>
-    <v:input type="text" label="end date" id="endDate" size="10"/>
-    --%>
     <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
 </form>
 
