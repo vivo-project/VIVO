@@ -1,0 +1,12 @@
+# The "build directory"
+.deployStaging/**/*
+
+# The JSON Java source files from json.org
+vitro-core/webapp/src/org/json/*
+
+# TinyMCE from tinymce.moxiecode.com
+vitro-core/webapp/web/js/tiny_mce/*
+vitro-core/webapp/web/js/tiny_mce/**/*
+
+# What is this?
+vitro-core/webapp/web/js/jquery_plugins/*
