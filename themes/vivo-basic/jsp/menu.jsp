@@ -47,6 +47,7 @@
      if(uri != null){
     	 request.setAttribute("indexClass", uri.endsWith("browsecontroller") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexJspClass", uri.endsWith("browsecontroller-jsp") ? "class=\"activeTab\"" : "");
+         request.setAttribute("indexJsp2Class", uri.endsWith("browsecontroller-jsp2") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexStringTemplateClass", uri.endsWith("browsecontroller-stringtemplate") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexFreeMarkerClass", uri.endsWith("browsecontroller-freemarker") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexVelocityClass", uri.endsWith("browsecontroller-velocity") ? "class=\"activeTab\"" : "");
@@ -121,9 +122,14 @@
             Index - JSP</a>
       </li>
       <li>
+         <a ${indexJsp2Class} href="<c:url value="/browsecontroller-jsp2"/>"
+            title="list all contents by type">
+            Index - JSP-2</a>
+      </li>
+      <li>
          <a ${indexStringTemplateClass} href="<c:url value="/browsecontroller-stringtemplate"/>"
             title="list all contents by type">
-            Index - StringTemplate</a>
+            Index - ST</a>
       </li>
       <li>
          <a ${indexVelocityClass} href="<c:url value="/browsecontroller-velocity"/>"
@@ -133,7 +139,7 @@
       <li>
          <a ${indexFreeMarkerClass} href="<c:url value="/browsecontroller-freemarker"/>"
             title="list all contents by type">
-            Index - FreeMarker</a>
+            Index - FM</a>
       </li>
       <li>
          <a ${indexWicketClass} href="<c:url value="/browsecontroller-wicket"/>"
