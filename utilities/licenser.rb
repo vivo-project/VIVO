@@ -88,7 +88,7 @@ class LicenserStats
     @known_exceptions[which_match(filename)] += 1
   end
 
-def record_tag(filename)
+  def record_tag(filename)
     puts "    Substituted license text into #{filename}" if @full
     @substitutions[which_match(filename)] += 1
   end
@@ -356,8 +356,9 @@ class Licenser
 
   # Report the summary statistics
   def report()
+    verb = @scan_only ? "scanned" : "copied"
     puts "Licenser: run completed at #{DateTime.now.strftime("%H:%M:%S on %b %d, %Y")}"
-    puts "          copied #{@stats.file_count} files in #{@stats.dir_count} directories."
+    puts "          #{verb} #{@stats.file_count} files in #{@stats.dir_count} directories."
     puts
     puts 'Substitutions'
     @stats.substitutions.sort.each do |line|
