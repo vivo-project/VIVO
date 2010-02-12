@@ -123,8 +123,16 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
     <c:set var="aboutHref">
       <c:out value="${aboutHref}" escapeXml="true"/>
     </c:set>
-  
+    
+    <c:url var="aboutStHref" value="/about-stringtemplate">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>
+    <c:set var="aboutStHref">
+      <c:out value="${aboutStHref}" escapeXml="true"/>
+    </c:set>
+    
     <li class="border"><a href="${aboutHref}" title="more about this web site">About</a></li>
+    <li class="border"><a href="${aboutStHref}" title="more about this web site">About-ST</a></li>
     <li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
   </ul>
 

@@ -19,7 +19,6 @@
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/aduna-commons-text-2.2.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/aduna-commons-webapp-core-2.3.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/aduna-commons-xml-2.2.jar"/>
-	<classpathentry kind="lib" path="vitro-core/webapp/lib/antlr-2.7.5.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/arq-extra.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/arq.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/aterm-java-1.6.jar"/>
@@ -154,5 +153,7 @@
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/xpp3_min-1.1.3.4.O.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/xsdlib.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/xstream-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/Users/rjy7/Workspace/vivodev/vitro-core/webapp/lib/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="/Users/rjy7/Workspace/vivodev/vitro-core/webapp/lib/stringtemplate-3.2.1.jar" sourcepath="/Users/rjy7/Workspace/stringtemplate-3.2.1/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
