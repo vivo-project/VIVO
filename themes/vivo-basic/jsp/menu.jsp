@@ -48,6 +48,7 @@
     	 request.setAttribute("indexClass", uri.endsWith("browsecontroller") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexJspClass", uri.endsWith("browsecontroller-jsp") ? "class=\"activeTab\"" : "");         
          request.setAttribute("indexStringTemplateClass", uri.endsWith("browsecontroller-stringtemplate") ? "class=\"activeTab\"" : "");
+         request.setAttribute("indexStringTemplateGroupFileClass", uri.endsWith("browsecontroller-stringtemplategroupfile") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexFreeMarkerClass", uri.endsWith("browsecontroller-freemarker") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexVelocityClass", uri.endsWith("browsecontroller-velocity") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexWicketClass", uri.endsWith("browsecontroller-wicket") ? "class=\"activeTab\"" : "");
@@ -124,6 +125,11 @@
          <a ${indexStringTemplateClass} href="<c:url value="/browsecontroller-stringtemplate"/>"
             title="list all contents by type">
             Index - ST</a>
+      </li>
+      <li>
+         <a ${indexStringTemplateClass} href="<c:url value="/browsecontroller-stringtemplategroupfile"/>"
+            title="list all contents by type">
+            Index - STGF</a>
       </li>
       <li>
          <a ${indexVelocityClass} href="<c:url value="/browsecontroller-velocity"/>"
