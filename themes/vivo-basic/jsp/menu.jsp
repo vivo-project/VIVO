@@ -126,11 +126,13 @@
             title="list all contents by type">
             Index - ST</a>
       </li>
+      <%-- 
       <li>
          <a ${indexStringTemplateClass} href="<c:url value="/browsecontroller-stringtemplategroupfile"/>"
             title="list all contents by type">
             Index - STGF</a>
       </li>
+      --%>
       <li>
          <a ${indexVelocityClass} href="<c:url value="/browsecontroller-velocity"/>"
             title="list all contents by type">
