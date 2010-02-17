@@ -12,8 +12,10 @@
      ====================================================================== -->
 <project name="vivoweb" default="describe">
 
+	<!--
+		Load the properties from deploy.properties.
+	-->
 	<property name="deploy.properties.file" location="deploy.properties" />
-
 	<fail message="You must create a &quot;${deploy.properties.file}&quot; file.">
 		<condition>
 			<not>
@@ -21,12 +23,20 @@
 			</not>
 		</condition>
 	</fail>
-
 	<property file="${deploy.properties.file}" />
-
 	<fail unless="vitro.core.dir"
 	      message="${deploy.properties.file} must contain a value for vitro.core.dir" />
 
+	
+	<!--
+		Set this property so the core themes will not be included in the build.
+	-->
+	<property name="skip.core.themes" value="true"/>
+	
+	
+	<!--
+		Now get the standard product-build file.
+	-->
 	<import file="${vitro.core.dir}/webapp/product-build.xml" />
 
 </project>
