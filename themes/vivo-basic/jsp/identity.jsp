@@ -150,7 +150,7 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
     <li class="border"><a href="${aboutHref}" title="more about this web site">About</a></li>
     <li class="border"><a href="${aboutStHref}" title="more about this web site">About-ST</a></li>
     <%-- <li class="border"><a href="${aboutStgfHref}" title="more about this web site">About-STGF</a></li> --%>   
-    <li class="border"><a href="${aboutVHref}" title="more about this web site">About-V</a></li>
+    <li class="border"><a href="${aboutVHref}" title="more about this web site">About-Velocity</a></li>
    <li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
   </ul>
 
