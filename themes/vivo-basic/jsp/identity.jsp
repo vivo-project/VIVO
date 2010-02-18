@@ -139,11 +139,19 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
       <c:out value="${aboutStgfHref}" escapeXml="true"/>
     </c:set>
     --%> 
-      
+
+    <c:url var="aboutVHref" value="/about-velocity">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>
+    <c:set var="aboutVHref">
+      <c:out value="${aboutVHref}" escapeXml="true"/>
+    </c:set>
+         
     <li class="border"><a href="${aboutHref}" title="more about this web site">About</a></li>
     <li class="border"><a href="${aboutStHref}" title="more about this web site">About-ST</a></li>
     <%-- <li class="border"><a href="${aboutStgfHref}" title="more about this web site">About-STGF</a></li> --%>   
-    <li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
+    <li class="border"><a href="${aboutVHref}" title="more about this web site">About-V</a></li>
+   <li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
   </ul>
 
 </div><!-- end identity -->
