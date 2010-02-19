@@ -150,6 +150,15 @@ deploy -- Rssembles the VIVO application and deploys it to the "webapps"
 		</copy>
 	</target>
 
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: velocity                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="velocity">
+        <copy todir="${velocity.destination.dir}">
+            <fileset dir="${velocity.source.dir}" />
+        </copy>
+    </target>
+	
 	<!-- - - - - - - - - - - - - - - - - - 
           target: modifications                      
          - - - - - - - - - - - - - - - - - -->
@@ -158,11 +167,11 @@ deploy -- Rssembles the VIVO application and deploys it to the "webapps"
 			<fileset dir="${modifications.source.dir}" />
 		</copy>
     </target>
-
+ 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: runCoreBuild                      
          - - - - - - - - - - - - - - - - - -->
-	<target name="runCoreBuild" depends="properties, themes, ontology, model, modifications">
+	<target name="runCoreBuild" depends="properties, themes, ontology, model, velocity, modifications">
 		<ant antfile="${vitro-core.build.file}" inheritall="false" target="deploy" />
 	</target>
 
