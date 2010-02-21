@@ -7,7 +7,7 @@
          xml:base="http://vitro.mannlib.cornell.edu/ns/vitro/default">
 
 <vitro:User rdf:about="#defaultAdminUser">
-    <vitro:username rdf:datatype="http://www.w3.org/2001/XMLSchema#string">${deploy.initialAdminUser}</vitro:username>
+    <vitro:username rdf:datatype="http://www.w3.org/2001/XMLSchema#string">${initialAdminUser}</vitro:username>
     <vitro:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">22BA075EC8951A70960A0A95C0BC2294</vitro:md5password>
     <vitro:roleURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string">role:/50</vitro:roleURI>    
 </vitro:User>
