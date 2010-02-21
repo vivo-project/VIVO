@@ -30,6 +30,11 @@
 	<fail unless="vitro.core.dir"
 	      message="${deploy.properties.file} must contain a value for vitro.core.dir" />
 
+	<!--
+		Override the default location for project modifications.
+	-->
+	<property name="product.modifications.dir" location="./productMods" />
+
 
 	<!--
 		Set this property so the core themes will not be included in the build.
