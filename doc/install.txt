@@ -14,6 +14,10 @@ PLEASE NOTE: It is assumed that you are performing a clean install, including
 emptying an existing database and removing a previous installation from the 
 tomcat webapps directory. Product functionality may not be as expected if you 
 install over an existing installation of an earlier version.
+
+VIVO DEVELOPERS:
+If you are working the VIVO source code from Subversion, the instructions are
+slightly different. Please consult "developers.txt" in this directory.
  
 -------------------------------------------------------------------------------
  
@@ -74,6 +78,11 @@ IV. Specify deployment properties
 At the top level of the unpacked distribution, copy the file 
 example.deploy.properties to a file named simply deploy.properties. This file 
 sets several properties used in compilation and deployment.
+
+                Directory where Vitro code is located
+                (this is used by developers, and should not be changed)
+property name:  vitro.core.dir
+example value:  ./vitro-core
 
                 Directory where tomcat is installed
 property name:  tomcat.home
