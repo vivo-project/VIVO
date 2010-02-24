@@ -46,7 +46,7 @@
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/dwr-2.0.M2.8.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/fedora-client.jar"/>
-	<classpathentry kind="lib" path="vitro-core/webapp/lib/freemarker.jar"/>
+	<classpathentry kind="lib" path="vitro-core/webapp/lib/freemarker.jar" sourcepath="/freemarker-2.3.16/src"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/icu4j_3_4.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/iri.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/jakarta-jstl1.2-jstl.jar"/>
@@ -146,7 +146,7 @@
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/taglibs-string.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/trippi-1.3.2-core.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/velocity-1.6.3.jar" sourcepath="/velocity-1.6.3/src"/>
-	<classpathentry kind="lib" path="vitro-core/webapp/lib/velocity-tools-view-1.4.jar" sourcepath="/velocity-tools-1.4-src/src"/>
+	<classpathentry kind="lib" path="vitro-core/webapp/lib/velocity-tools-view-1.4.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/wsdl4j-1.5.2.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/wstx-asl-3.0.0.jar"/>
 	<classpathentry kind="lib" path="vitro-core/webapp/lib/xalan.jar"/>
