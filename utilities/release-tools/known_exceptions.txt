@@ -91,6 +91,14 @@ vitro-core/webapp/web/src/widget/*
 vitro-core/webapp/web/src/widget/**/*
 vitro-core/webapp/web/src/xml/*
 
+# Third-party tlds
+vitro-core/webapp/config/c.tld
+vitro-core/webapp/config/fn.tld
+vitro-core/webapp/config/sparqltag.tld
+vitro-core/webapp/config/taglibs-mailer.tld
+vitro-core/webapp/config/taglibs-random.tld
+vitro-core/webapp/config/taglibs-string.tld
+
 # PROBLEM: It appears that these files require a LICENSE file to accompany them.
 themes/vivo-basic/css/blueprint/grid.css
 themes/vivo-basic/css/blueprint/ie.css
