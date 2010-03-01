@@ -51,7 +51,7 @@
          request.setAttribute("indexStringTemplateGroupFileClass", uri.endsWith("browsecontroller-stringtemplategroupfile") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexFreeMarkerClass", uri.endsWith("browsecontroller-freemarker") ? "class=\"activeTab\"" : "");
          request.setAttribute("indexVelocityClass", uri.endsWith("browsecontroller-velocity") ? "class=\"activeTab\"" : "");
-         request.setAttribute("indexWicketClass", uri.endsWith("browsecontroller-wicket") ? "class=\"activeTab\"" : "");
+         //request.setAttribute("indexWicketClass", uri.endsWith("browsecontroller-wicket") ? "class=\"activeTab\"" : "");
 
          if ( uri.indexOf("about") > 0) {
            request.setAttribute("aboutClass","class=\"activeTab\"");
@@ -143,11 +143,14 @@
             title="list all contents by type">
             Index - FM</a>
       </li>
+      
+      <%-- 
       <li>
          <a ${indexWicketClass} href="<c:url value="/browsecontroller-wicket"/>"
             title="list all contents by type">
             Index - Wicket</a>
       </li>
+      --%>
     </ul>
   
   </div><!--END 'primaryAndOther'-->
