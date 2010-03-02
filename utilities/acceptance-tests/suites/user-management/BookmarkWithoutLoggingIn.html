@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8080/vivo" />
+<link rel="selenium.base" href="" />
 <title>Bookmark Without Logging In</title>
 <style type="text/css">
 .testName {
@@ -30,8 +30,18 @@
 <tr><td rowspan="1" colspan="3" class="testName">Bookmark Without Logging In</td></tr>
 </thead><tbody>
 <tr>
+	<td>comment</td>
+	<td class="comment">Try to view Data Property Hierarchy page without logging in</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>./showDataPropertyHierarchy?home=1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">It takes us to login page instead</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,13 +65,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
+	<td>comment</td>
+	<td class="comment">After logging in, we go to the Data Property Hierarchy page, as intended.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
 	<td>Data Property Hierarchy</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Data Property Hierarchy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
 	<td></td>
 </tr>
 <tr>

@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>EditUserInfo</title>
+<title>Edit User Info</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">EditUserInfo</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">Edit User Info</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -37,6 +37,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Login as default admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,6 +75,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Go to user management for our new user account</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=User accounts</td>
 	<td></td>
@@ -90,6 +100,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Open the editing form</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Edit User Account']</td>
 	<td></td>
@@ -97,6 +112,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Change the User Name and the Last Name</td>
 	<td></td>
 </tr>
 <tr>
@@ -120,23 +140,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit User Account']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>User Account Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>_cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>User Account Control Panel</td>
+	<td>comment</td>
+	<td class="comment">Open the "Reset Password" form</td>
 	<td></td>
 </tr>
 <tr>
@@ -147,6 +152,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try two passwords that don't match</td>
 	<td></td>
 </tr>
 <tr>
@@ -170,6 +180,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Try passwords that match, but are too long</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>passwordConfirmation</td>
 	<td>otherPassword</td>
@@ -182,6 +197,11 @@
 <tr>
 	<td>assertAlert</td>
 	<td>Please enter a password between 6 and 12 characters long.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try a good password, with a good match.</td>
 	<td></td>
 </tr>
 <tr>
@@ -202,6 +222,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
 	<td></td>
 </tr>
 <tr>
