@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>Create 3 Users in Different Roles</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">Create 3 Users in Different Roles</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log in as default admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>defaultAdmin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">go to User Accounts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=User accounts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Create new Unprivileged user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add new user account']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Username</td>
+	<td>Joe User</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>FirstName</td>
+	<td>Joe</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LastName</td>
+	<td>User</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Md5password</td>
+	<td>firstTime</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>firstTime</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='See All User Accounts']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Create new Editor user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add new user account']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Username</td>
+	<td>Sally Editor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>FirstName</td>
+	<td>Sally</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LastName</td>
+	<td>Editor</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>RoleURI</td>
+	<td>label=editor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Md5password</td>
+	<td>firstTime</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>firstTime</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='See All User Accounts']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Create new Curator user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add new user account']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Username</td>
+	<td>John Curator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>FirstName</td>
+	<td>John</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LastName</td>
+	<td>Curator</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>RoleURI</td>
+	<td>label=curator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Md5password</td>
+	<td>firstTime</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>firstTime</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='See All User Accounts']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">do they all exist?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Joe User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=John Curator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Sally Editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
