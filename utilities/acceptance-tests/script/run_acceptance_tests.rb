@@ -6,18 +6,24 @@ Run the acceptance tests, and summarize their output.
 --------------------------------------------------------------------------------
 
 Parameters:
-    -- the root directory for the tests. Probably something ending in 
+    -- the root directory for the tests. Probably something ending in
          vivoweb/utilities/acceptance-tests/suites
     -- the directory for the output.
-    -- the directory for user-extensions.js
+    -- the path to the user extensions script.
     -- the directory of the Firefox profile template.
     -- the URL of the web site under test.
 
 --------------------------------------------------------------------------------
 
-What we doing?
+What are we doing?
+-- Test the parameters.
+  -- Does each directory exist? Is it readable? writeable?
+  -- Does the URL produce a response?
+  -- Does user-extensions.js exist?
 -- For each subdirectory in the suites folder:
-  -- Find the Suite.html 
+  -- Run the reset process, whatever that is.
+    -- Stop tomcat, reset MySql database, start tomcat
+  -- Find the Suite.html
     -- If none, throw warning into the log and continue.
   -- Run the suite, sending the output to a file named after the subdirectory
     -- If failure, throw error into the log and continue.
@@ -27,11 +33,13 @@ What we doing?
      number of tests:                 -- sum from all suites.
      number of passing tests:         -- sum from all suites.
      number of failing tests:         -- sum from all suites.
-     
+
      Table of links to the suite output files.
 --------------------------------------------------------------------------------
 =end
+require 'open-uri'
 
+=begin
 <h1>Test suite results </h1>
 <table>
 <tr><td>result:</td><td>passed</td></tr>
@@ -56,3 +64,127 @@ What we doing?
   </tbody></table>
   </td><td>&nbsp;</td></tr>
 </table>
+=end
+
+class AcceptanceRunner
+  # ------------------------------------------------------------------------------------
+  private
+  # ------------------------------------------------------------------------------------
+  #
+  # Confirm that the parameters are reasonable. They point to valid files, directories,
+  # and URL.
+  #
+  def sanity_checks_on_parameters()
+    confirm_is_readable_directory(@test_root_directory, "Test root directory")
+    if !has_sub_directories?(@test_root_directory)
+      raise "Test root directory '#{@test_root_directory}' has no sub-directories."
+    end
+
+    confirm_is_readable_directory(@output_directory, "Output directory")
+    if !File.writable?(@output_directory)
+      raise "Output directory '#{@output_directory}' is not writable."
+    end
+
+    if File.basename(@user_extensions_path) != "user-extensions.js"
+      raise "User extensions file must be named 'user-extensions.js', not '#{File.basename(@user_extensions_path)}'"
+    end
+    confirm_is_readable_file(@user_extensions_path, "User extensions file")
+
+    confirm_is_readable_directory(@firefox_profile_template_path, "Firefox profile template")
+
+    begin
+      open(@website_url) {|f|}
+    rescue Exception
+      raise "Unable to connect to web-site at '#{@website_url}'"
+    end
+  end
+
+  # Does this path point to an existing, readable directory?
+  #
+  def confirm_is_readable_directory(path, label)
+    confirm_is_readable(path, label)
+    if !File.directory?(path)
+      raise "#{label} '#{path}' is not a directory."
+    end
+  end
+
+  # Does this path point to an existing, readable file?
+  #
+  def confirm_is_readable_file(path, label)
+    confirm_is_readable(path, label)
+    if !File.file?(path)
+      raise "#{label} '#{path}' is not a directory."
+    end
+  end
+
+  # Does this path point to something that exists and is readable?
+  #
+  def confirm_is_readable(path, label)
+    if !File.exist?(path)
+      raise "#{label} '#{path}' does not exist."
+    end
+    if !File.readable?(path)
+      raise "#{label} '#{path}' is not readable."
+    end
+  end
+
+  # Does this directory contain any sub-directories?
+  #
+  def has_sub_directories?(directory_path)
+    found_one = false
+    Dir.foreach(directory_path) do |filename|
+      if filename[0,1] != '.'
+        path = File.expand_path(filename, directory_path)
+        found_one = true if File.directory?(path)
+      end
+    end
+    return found_one
+  end
+
+  def run_all_suites()
+    # get a list of all sub-directories
+    # for each sub-directory
+    # -- run the cleanser
+    # -- run the suite
+    puts "BOGUS run_all_suites()"
+  end
+
+  def create_summary_html()
+    puts "BOGUS create_summary_html()"
+  end
+
+  # ------------------------------------------------------------------------------------
+  public
+  # ------------------------------------------------------------------------------------
+
+  # Set up and get ready to process.
+  #
+  def initialize(website_url, test_root_directory, output_directory, user_extensions_path, firefox_profile_template_path)
+    @website_url = website_url
+    @test_root_directory = test_root_directory
+    @output_directory = output_directory
+    @user_extensions_path = user_extensions_path
+    @firefox_profile_template_path = firefox_profile_template_path
+    sanity_checks_on_parameters()
+  end
+
+  # Run all of the test suites and produce an output summary page.
+  def run
+    run_all_suites()
+    create_summary_html()
+  end
+end
+
+# ------------------------------------------------------------------------
+# Main routine
+# ------------------------------------------------------------------------
+
+# BOGUS test harness
+website_url = "http://localhost:8080/vivo/"
+test_root_directory = "C:\\eclipseVitroWorkspace\\vivoweb\\utilities\\acceptance-tests\\suites"
+output_directory = "C:\\eclipseVitroWorkspace\\vivoweb\\utilities\\acceptance-tests\\script\\output"
+user_extensions_path = "C:\\eclipseVitroWorkspace\\vivoweb\\utilities\\acceptance-tests\\selenium\\user-extensions.js"
+firefox_profile_template_path = "C:\\Vitro_stuff\\Selenium\\experiments\\profiles\\selenium"
+
+ar = AcceptanceRunner.new(website_url, test_root_directory, output_directory, user_extensions_path, firefox_profile_template_path)
+ar.run()
