@@ -34,39 +34,47 @@
       and in the literalsOnForm --%>
 <v:jsonset var="titleExisting" >      
 	SELECT ?titleExisting WHERE {
-	  	?positionUri <http://vivoweb.org/ontology/core#titleOrRole> ?titleExisting }
+	  	?activityUri <http://vivoweb.org/ontology/core#titleOrRole> ?titleExisting }
 </v:jsonset>
 
 <%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="titleAssertion" >      
-	?positionUri <http://vivoweb.org/ontology/core#titleOrRole> ?title .
-	?positionUri <http://www.w3.org/2000/01/rdf-schema#label> ?title. 
+	?activityUri <http://vivoweb.org/ontology/core#titleOrRole> ?title .
+	?activityUri <http://www.w3.org/2000/01/rdf-schema#label> ?title. 
+</v:jsonset>
+
+<v:jsonset var="descriptionExisting" >      
+    SELECT ?descriptionExisting WHERE {
+        ?activityUri <http://vivoweb.org/ontology/core#description> ?descriptionExisting }
+</v:jsonset>
+<v:jsonset var="descriptionAssertion" >      
+    ?activityUri <http://vivoweb.org/ontology/core#description> ?description . 
 </v:jsonset>
 
 <v:jsonset var="organizationNameExisting" >      
       SELECT ?existingOrgName WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#involvedOrganizationName> ?existingOrgName }
+      	?activityUri <http://vivoweb.org/ontology/core#involvedOrganizationName> ?existingOrgName }
 </v:jsonset>
 <v:jsonset var="organizationNameAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#involvedOrganizationName> ?organizationName .
+      ?activityUri <http://vivoweb.org/ontology/core#involvedOrganizationName> ?organizationName .
 </v:jsonset>
 
-<v:jsonset var="startYearExisting" >      
-      SELECT ?startYearExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYearExisting }
+<v:jsonset var="startYearMonthExisting" >      
+      SELECT ?startYearMonthExisting WHERE {  
+      	?activityUri <http://vivoweb.org/ontology/core#startYearMonth> ?startYearMonthExisting }
 </v:jsonset>
-<v:jsonset var="startYearAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYear .
+<v:jsonset var="startYearMonthAssertion" >
+      ?activityUri <http://vivoweb.org/ontology/core#startYearMonth> ?startYearMonth .
 </v:jsonset>
 
-<v:jsonset var="endYearExisting" >      
-      SELECT ?endYearExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYearExisting }
+<v:jsonset var="endYearMonthExisting" >      
+      SELECT ?endYearMonthExisting WHERE {  
+      	?activityUri <http://vivoweb.org/ontology/core#endYearMonth> ?endYearMonthExisting }
 </v:jsonset>
-<v:jsonset var="endYearAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYear .
+<v:jsonset var="endYearMonthAssertion" >
+      ?activityUri <http://vivoweb.org/ontology/core#endYearMonth> ?endYearMonth .
 </v:jsonset>
 
 <%--  Note there is really no difference in how things are set up for an object property except
@@ -74,24 +82,24 @@
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
 <v:jsonset var="organizationUriExisting" >      
 	SELECT ?existingOrgUri WHERE {
-		?positionUri <http://vivoweb.org/ontology/core#positionInOrganization> ?existingOrgUri }
+		?activityUri <http://vivoweb.org/ontology/core#activityRelatedOrganization> ?existingOrgUri }
 </v:jsonset>
 <v:jsonset var="organizationUriAssertion" >      
-	?positionUri <http://vivoweb.org/ontology/core#positionInOrganization> ?organizationUri .
-	?organizationUri <http://vivoweb.org/ontology/core#organizationForPosition> ?positionUri .
+    ?activityUri <http://vivoweb.org/ontology/core#activityRelatedOrganization> ?organizationUri .
+    ?organizationUri <http://vivoweb.org/ontology/core#organizationRelatedActivity> ?activityUri .
 </v:jsonset>
 
 <v:jsonset var="n3ForStmtToPerson"  >
     @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.    
     @prefix core: <http://vivoweb.org/ontology/core#>.    
 
-    ?person      core:personInPosition  ?positionUri .
-    ?positionUri core:positionForPerson ?person .
-    ?positionUri rdf:type               core:Position .
-    ?positionUri rdf:type <${flagURI}> .
+    ?person      core:professionalServiceActivity ?activityUri .
+    ?activityUri core:professionalServiceActivityBy ?person .
+    ?activityUri rdf:type               core:ServiceActivity .
+    ?activityUri rdf:type <${flagURI}> .
 </v:jsonset>
 
-<v:jsonset var="postionClass">http://vivoweb.org/ontology/core#Position</v:jsonset>
+<v:jsonset var="activityClass">http://vivoweb.org/ontology/core#ServiceActivity</v:jsonset>
 <v:jsonset var="organizationClass">http://xmlns.com/foaf/0.1/Organization</v:jsonset>
 
 
@@ -103,25 +111,26 @@
 
     "subject"   : ["person",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
-    "object"    : ["positionUri", "${objectUriJson}", "URI" ],
+    "object"    : ["activityUri", "${objectUriJson}", "URI" ],
     
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}" ],
-    "n3optional"    : [ "${organizationNameAssertion}","${organizationUriAssertion}",
-                        "${startYearAssertion}","${endYearAssertion}"],
-    "newResources"  : { "positionUri" : "${defaultNamespace}/position" },
+    "n3optional"    : [ "${descriptionAssertion}", "${organizationNameAssertion}","${organizationUriAssertion}",
+                        "${startYearMonthAssertion}","${endYearMonthAssertion}"],
+    "newResources"  : { "activityUri" : "${defaultNamespace}/serviceactivity" },
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "organizationUri" ],
-    "literalsOnForm" :  [ "title", "organizationName", 
-    					  "startYear", "endYear" ],
+    "literalsOnForm" :  [ "title", "description", "organizationName", 
+    					  "startYearMonth", "endYearMonth" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "title"              : "${titleExisting}",
+        "description"        : "${descriptionExisting}",
         "organizationName"   : "${organizationNameExisting}",
-        "startYear"          : "${startYearExisting}",
-        "endYear"            : "${endYearExisting}"
+        "startYearMonth"     : "${startYearMonthExisting}",
+        "endYearMonth"       : "${endYearMonthExisting}"
     },
     "sparqlForExistingUris" : {
         "organizationUri"   : "${organizationUriExisting}"
@@ -137,6 +146,17 @@
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ "${titleAssertion}" ]
+      },
+      "description" : {
+         "newResource"      : "false",
+         "validators"       : [ ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "", 
+         "rangeLang"        : "",
+         "assertions"       : [ "${descriptionAssertion}" ]
       },
      "organizationUri" : {
          "newResource"      : "false",
@@ -160,27 +180,27 @@
          "rangeLang"        : "",         
          "assertions"       : [ "${organizationNameAssertion}" ]
       },
-      "startYear" : {
+      "startYearMonth" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
+         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYearMonth" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYear",
+         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYearMonth",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : ["${startYearMonthAssertion}"]
       },
-      "endYear" : {
+      "endYearMonth" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
+         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYearMonth" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYear",
+         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYearMonth",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
+         "assertions"       : ["${endYearMonthAssertion}"]
       }
   }
 }
@@ -207,11 +227,11 @@
 	Individual subject = (Individual) request.getAttribute("subject");	
 	String submitLabel = ""; 	
 	if (objectUri != null) {
-		request.setAttribute("title","Edit position history entry for "+ subject.getName());
+		request.setAttribute("title","Edit professional service activity entry for "+ subject.getName());
 		submitLabel = "Save changes";
 	} else {
-		request.setAttribute("title","Create a new position history entry for " + subject.getName());
-		submitLabel = "Create new position history entry";
+		request.setAttribute("title","Create a new professional service activity entry for " + subject.getName());
+		submitLabel = "Create new professional service activity entry";
 	}
 %>
 
@@ -220,10 +240,11 @@
 <h2>${title}</h2>
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="title" id="title" size="30" />
+	<v:input type="textarea" label="description" id="description" rows="5" cols="30" />
 	<v:input type="select" label="organization" id="organizationUri"  />
 	<v:input type="text" label="organization name (if not in dropdown above)" id="organizationName" size="30" />
-    <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>    
-    <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
+    <v:input type="text" label="start year and month (YYYY-MM)" id="startYearMonth" size="7"/>    
+    <v:input type="text" label="end year and month (YYYY-MM)" id="endYearMonth" size="7"/>
     <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
 </form>
 
