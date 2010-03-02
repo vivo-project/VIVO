@@ -1,0 +1,1335 @@
+<html>
+<head><style type='text/css'>
+body, table {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    font-style: italic;
+}
+
+.selected {
+    background-color: #ffffcc;
+}
+
+.status_done {
+    background-color: #eeffee;
+}
+
+.status_passed {
+    background-color: #ccffcc;
+}
+
+.status_failed {
+    background-color: #ffcccc;
+}
+
+.breakpoint {
+    background-color: #cccccc;
+    border: 1px solid black;
+}
+</style><title>Test suite results</title></head>
+<body>
+<h1>Test suite results </h1>
+
+<table>
+<tr>
+<td>result:</td>
+<td>failed</td>
+</tr>
+<tr>
+<td>totalTime:</td>
+<td>13</td>
+</tr>
+<tr>
+<td>numTestTotal:</td>
+<td>7</td>
+</tr>
+<tr>
+<td>numTestPasses:</td>
+<td>6</td>
+</tr>
+<tr>
+<td>numTestFailures:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>numCommandPasses:</td>
+<td>72</td>
+</tr>
+<tr>
+<td>numCommandFailures:</td>
+<td>0</td>
+</tr>
+<tr>
+<td>numCommandErrors:</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Selenium Version:</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Selenium Revision:</td>
+<td>a1</td>
+</tr>
+<tr>
+<td>
+<table id="suiteTable" class="selenium" border="1" cellpadding="1" cellspacing="1"><tbody>
+<tr class="title status_failed"><td><b>Test Suite</b></td></tr>
+<tr class="  status_passed"><td><a href="#testresult0">Create New User</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult1">First Time Login</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult2">Try New Password</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult3">Edit User Info</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult4">Confirm Edited Info</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult5">Delete New User</a></td></tr>
+<tr class="  status_failed"><td><a href="#testresult6">Bookmark Without Logging In</a></td></tr>
+</tbody></table>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table><table><tr>
+<td><a name="testresult0">CreateNewUser.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3" class="testName">Create New User</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Login as defaultAdmin</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>defaultAdmin</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Create a new user</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=User accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>//input[@value='Add new user account']</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>Username</td>
+	<td>User Mgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>FirstName</td>
+	<td>User</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>LastName</td>
+	<td>Mgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>Md5password</td>
+	<td>UserMgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Enter a mis-matched confirmation password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>somethingElse</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertAlert</td>
+	<td>The passwords do not match.</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Now enter a correct password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>UserMgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Confirm values for new user</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyText</td>
+	<td>//tr[1]/td[2]</td>
+	<td>User Mgmt</td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyText</td>
+	<td>//tr[2]/td[2]</td>
+	<td>User</td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>Mgmt</td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyText</td>
+	<td>//tr[4]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>unprivileged</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult1">FirstTimeLogin.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3" class="testName">First Time Login</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Login for the first time</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Try the wrong password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>User Mgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>incorrect</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>(1st login; initial password entered incorrectly)</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Please try entering provided password again</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Now the correct password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>UserMgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>(1st login; changing to new private password)</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Please now choose a private password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Try changing to an invalid password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>junk</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertAlert</td>
+	<td>Please enter a password between 6 and 12 characters long</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Now try a valid one</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>newPassword</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>(changing to new password)</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Please re-enter new private password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Re-enter it incorrectly</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>garbage</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>(password incorrect)</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Incorrect password: try again</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Now re-enter it correctly</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>newPassword</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Are we logged in?</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Logged in as</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>User Mgmt</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult2">TryNewPassword.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3" class="testName">Try New Password</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log in with new password</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>User Mgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>newPassword</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Confirm that it worked</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Logged in as</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>User Mgmt</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult3">EditUserInfo.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3" class="testName">EditUserInfo</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>defaultAdmin</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=User accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=User Mgmt</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit User Account']</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>Username</td>
+	<td>User Management</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>LastName</td>
+	<td>Management</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit User Account']</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>_cancel</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>//input[@value='Reset Password']</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>Md5password</td>
+	<td>otherPassword</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>somethingElse</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertAlert</td>
+	<td>The passwords do not match.</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>otherPassword</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertAlert</td>
+	<td>Please enter a password between 6 and 12 characters long.</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>Md5password</td>
+	<td>resetPasswd</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>passwordConfirmation</td>
+	<td>resetPasswd</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult4">ConfirmEditedInfo.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3" class="testName">Confirm Edited Info</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Try to log in with original username</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>User Mgmt</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>resetPasswd</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>(unknown username)</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Unknown username</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Now log in with new username (and new password)</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>User Management</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>resetPasswd</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Logged in as</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>User Management</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult5">DeleteNewUser.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3" class="testName">Delete New User</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>.</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log in as default admin</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>defaultAdmin</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Go to User Accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=User accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyElementPresent</td>
+	<td>link=User Management</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">View the new user account, and edit it.</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=User Management</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit User Account']</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Account Editing Form</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Delete the account</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this user? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>User Accounts</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>verifyElementNotPresent</td>
+	<td>link=User Management</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult6">BookmarkWithoutLoggingIn.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_failed"><td rowspan="1" colspan="3" class="testName">BookmarkWithoutLoggingIn</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>./showDataPropertyHierarchy?home=1</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>username</td>
+	<td>defaultAdmin</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr class="  status_failed" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>Data Property Hierarchy</td>
+	<td>Actual&nbsp;value&nbsp;'VIVO&nbsp;Site&nbsp;Administration'&nbsp;did&nbsp;not&nbsp;match&nbsp;'Data&nbsp;Property&nbsp;Hierarchy'</td>
+</tr>
+<tr class="" style="cursor: pointer;">
+	<td>verifyTextPresent</td>
+	<td>Data Property Hierarchy</td>
+	<td></td>
+</tr>
+<tr class="" style="cursor: pointer;">
+	<td>click</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr class="" style="cursor: pointer;">
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</div></td>
+<td>&nbsp;</td>
+</tr></table><pre>
+info: Starting test /selenium-server/tests/CreateNewUser.html
+info: Executing: |open | . |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542015944
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542015945
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542015991
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542015991
+info: Executing: |assertTitle | VIVO |  |
+info: Executing: |comment | Login as defaultAdmin |  |
+info: Executing: |clickAndWait | link=Log in |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |type | username | defaultAdmin |
+info: Executing: |type | password | Password |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |comment | Create a new user |  |
+info: Executing: |clickAndWait | link=User accounts |  |
+info: Executing: |assertTitle | User Accounts |  |
+info: Executing: |clickAndWait | //input[@value=&apos;Add new user account&apos;] |  |
+info: Executing: |assertTitle | User Account Editing Form |  |
+info: Executing: |type | Username | User Mgmt |
+info: Executing: |type | FirstName | User |
+info: Executing: |type | LastName | Mgmt |
+info: Executing: |type | Md5password | UserMgmt |
+info: Executing: |comment | Enter a mis-matched confirmation password |  |
+info: Executing: |type | passwordConfirmation | somethingElse |
+info: Executing: |click | primaryAction |  |
+info: Executing: |assertAlert | The passwords do not match. |  |
+info: Executing: |comment | Now enter a correct password |  |
+info: Executing: |type | passwordConfirmation | UserMgmt |
+info: Executing: |clickAndWait | primaryAction |  |
+info: Executing: |assertTitle | User Account Control Panel |  |
+info: Executing: |comment | Confirm values for new user |  |
+info: Executing: |verifyText | //tr[1]/td[2] | User Mgmt |
+info: Executing: |verifyText | //tr[2]/td[2] | User |
+info: Executing: |verifyText | //tr[3]/td[2] | Mgmt |
+info: Executing: |verifyText | //tr[4]/td[2] | 0 |
+info: Executing: |verifyTextPresent | unprivileged |  |
+info: Executing: |comment | Log out |  |
+info: Executing: |clickAndWait | link=Log out |  |
+info: Executing: |assertTitle | VIVO |  |
+info: Starting test /selenium-server/tests/FirstTimeLogin.html
+info: Executing: |open | . |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542017777
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542017777
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542017785
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542017785
+info: Executing: |assertTitle | VIVO |  |
+info: Executing: |comment | Login for the first time |  |
+info: Executing: |clickAndWait | link=Log in |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |comment | Try the wrong password |  |
+info: Executing: |type | username | User Mgmt |
+info: Executing: |type | password | incorrect |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |verifyTextPresent | (1st login; initial password entered incorrectly) |  |
+info: Executing: |verifyTextPresent | Please try entering provided password again |  |
+info: Executing: |comment | Now the correct password |  |
+info: Executing: |type | password | UserMgmt |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |verifyTextPresent | (1st login; changing to new private password) |  |
+info: Executing: |verifyTextPresent | Please now choose a private password |  |
+info: Executing: |comment | Try changing to an invalid password |  |
+info: Executing: |type | password | junk |
+info: Executing: |click | loginSubmitMode |  |
+info: Executing: |assertAlert | Please enter a password between 6 and 12 characters long |  |
+info: Executing: |comment | Now try a valid one |  |
+info: Executing: |type | password | newPassword |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |verifyTextPresent | (changing to new password) |  |
+info: Executing: |verifyTextPresent | Please re-enter new private password |  |
+info: Executing: |comment | Re-enter it incorrectly |  |
+info: Executing: |type | password | garbage |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |verifyTextPresent | (password incorrect) |  |
+info: Executing: |verifyTextPresent | Incorrect password: try again |  |
+info: Executing: |comment | Now re-enter it correctly |  |
+info: Executing: |type | password | newPassword |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |comment | Are we logged in? |  |
+info: Executing: |verifyTextPresent | Logged in as |  |
+info: Executing: |verifyTextPresent | User Mgmt |  |
+info: Executing: |comment | Log out |  |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO |  |
+info: Starting test /selenium-server/tests/TryNewPassword.html
+info: Executing: |open | . |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542020879
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542020879
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542020896
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542020896
+info: Executing: |assertTitle | VIVO |  |
+info: Executing: |comment | Log in with new password |  |
+info: Executing: |clickAndWait | link=Log in |  |
+info: Executing: |type | username | User Mgmt |
+info: Executing: |type | password | newPassword |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |comment | Confirm that it worked |  |
+info: Executing: |verifyTextPresent | Logged in as |  |
+info: Executing: |verifyTextPresent | User Mgmt |  |
+info: Executing: |comment | Log out |  |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO |  |
+info: Starting test /selenium-server/tests/EditUserInfo.html
+info: Executing: |open | . |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542022553
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542022553
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542022572
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542022572
+info: Executing: |assertTitle | VIVO |  |
+info: Executing: |clickAndWait | link=Log in |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |type | username | defaultAdmin |
+info: Executing: |type | password | Password |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |clickAndWait | link=User accounts |  |
+info: Executing: |assertTitle | User Accounts |  |
+info: Executing: |clickAndWait | link=User Mgmt |  |
+info: Executing: |assertTitle | User Account Control Panel |  |
+info: Executing: |clickAndWait | //input[@value=&apos;Edit User Account&apos;] |  |
+info: Executing: |assertTitle | User Account Editing Form |  |
+info: Executing: |type | Username | User Management |
+info: Executing: |type | LastName | Management |
+info: Executing: |clickAndWait | primaryAction |  |
+info: Executing: |assertTitle | User Account Control Panel |  |
+info: Executing: |clickAndWait | //input[@value=&apos;Edit User Account&apos;] |  |
+info: Executing: |assertTitle | User Account Editing Form |  |
+info: Executing: |clickAndWait | _cancel |  |
+info: Executing: |assertTitle | User Account Control Panel |  |
+info: Executing: |clickAndWait | //input[@value=&apos;Reset Password&apos;] |  |
+info: Executing: |assertTitle | User Account Editing Form |  |
+info: Executing: |type | Md5password | otherPassword |
+info: Executing: |type | passwordConfirmation | somethingElse |
+info: Executing: |click | primaryAction |  |
+info: Executing: |assertAlert | The passwords do not match. |  |
+info: Executing: |type | passwordConfirmation | otherPassword |
+info: Executing: |click | primaryAction |  |
+info: Executing: |assertAlert | Please enter a password between 6 and 12 characters long. |  |
+info: Executing: |type | Md5password | resetPasswd |
+info: Executing: |type | passwordConfirmation | resetPasswd |
+info: Executing: |clickAndWait | primaryAction |  |
+info: Executing: |assertTitle | User Account Control Panel |  |
+info: Executing: |clickAndWait | link=Log out |  |
+info: Executing: |assertTitle | VIVO |  |
+info: Starting test /selenium-server/tests/ConfirmEditedInfo.html
+info: Executing: |open | . |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542025594
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542025594
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542025613
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542025613
+info: Executing: |assertTitle | VIVO |  |
+info: Executing: |comment | Try to log in with original username |  |
+info: Executing: |clickAndWait | link=Log in |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |type | username | User Mgmt |
+info: Executing: |type | password | resetPasswd |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |verifyTextPresent | (unknown username) |  |
+info: Executing: |verifyTextPresent | Unknown username |  |
+info: Executing: |comment | Now log in with new username (and new password) |  |
+info: Executing: |type | username | User Management |
+info: Executing: |type | password | resetPasswd |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |verifyTextPresent | Logged in as |  |
+info: Executing: |verifyTextPresent | User Management |  |
+info: Executing: |comment | Log out |  |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO |  |
+info: Starting test /selenium-server/tests/DeleteNewUser.html
+info: Executing: |open | . |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542026736
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542026736
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542026760
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542026760
+info: Executing: |assertTitle | VIVO |  |
+info: Executing: |comment | Log in as default admin |  |
+info: Executing: |clickAndWait | link=Log in |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |type | username | defaultAdmin |
+info: Executing: |type | password | Password |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |comment | Go to User Accounts |  |
+info: Executing: |clickAndWait | link=User accounts |  |
+info: Executing: |assertTitle | User Accounts |  |
+info: Executing: |verifyElementPresent | link=User Management |  |
+info: Executing: |comment | View the new user account, and edit it. |  |
+info: Executing: |clickAndWait | link=User Management |  |
+info: Executing: |assertTitle | User Account Control Panel |  |
+info: Executing: |clickAndWait | //input[@value=&apos;Edit User Account&apos;] |  |
+info: Executing: |assertTitle | User Account Editing Form |  |
+info: Executing: |comment | Delete the account |  |
+info: Executing: |click | _delete |  |
+info: Executing: |assertConfirmation | Are you SURE you want to delete this user? If in doubt, CANCEL. |  |
+info: Executing: |waitForPageToLoad | 5000 |  |
+info: Executing: |assertTitle | User Accounts |  |
+info: Executing: |verifyElementNotPresent | link=User Management |  |
+info: Executing: |comment | Log out |  |
+info: Executing: |clickAndWait | link=Log out |  |
+info: Executing: |assertTitle | VIVO |  |
+info: Starting test /selenium-server/tests/BookmarkWithoutLoggingIn.html
+info: Executing: |open | ./showDataPropertyHierarchy?home=1 |  |
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542028593
+info: onXhrStateChange(): xhr.readyState = 1 method = HEAD time = 1267542028593
+info: onXhrStateChange(): xhr.readyState = 2 method = HEAD time = 1267542028642
+info: onXhrStateChange(): xhr.readyState = 3 method = HEAD time = 1267542028642
+info: onXhrStateChange(): xhr.readyState = 3 method = HEAD time = 1267542028643
+info: onXhrStateChange(): xhr.readyState = 4 method = HEAD time = 1267542028643
+info: Executing: |assertTitle | VIVO Site Administration |  |
+info: Executing: |type | username | defaultAdmin |
+info: Executing: |type | password | Password |
+info: Executing: |clickAndWait | loginSubmitMode |  |
+info: Executing: |assertTitle | Data Property Hierarchy |  |
+error: Actual value &apos;VIVO Site Administration&apos; did not match &apos;Data Property Hierarchy&apos;
+warn: currentTest.recordFailure: Actual value &apos;VIVO Site Administration&apos; did not match &apos;Data Property Hierarchy&apos;
+</pre></body></html>
