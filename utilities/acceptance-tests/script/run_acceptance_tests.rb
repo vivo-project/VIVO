@@ -38,6 +38,7 @@ What are we doing?
 --------------------------------------------------------------------------------
 =end
 require 'open-uri'
+require 'database_cleanser'
 
 =begin
 <h1>Test suite results </h1>
@@ -76,7 +77,7 @@ class AcceptanceRunner
   #
   def sanity_checks_on_parameters()
     confirm_is_readable_directory(@test_root_directory, "Test root directory")
-    if !has_sub_directories?(@test_root_directory)
+    if get_sub_directories(@test_root_directory).empty?
       raise "Test root directory '#{@test_root_directory}' has no sub-directories."
     end
 
@@ -128,25 +129,35 @@ class AcceptanceRunner
     end
   end
 
-  # Does this directory contain any sub-directories?
+  # Get an array of paths to all of the sub-directories in this directory.
   #
-  def has_sub_directories?(directory_path)
-    found_one = false
+  def get_sub_directories(directory_path)
+    subs = []
     Dir.foreach(directory_path) do |filename|
       if filename[0,1] != '.'
         path = File.expand_path(filename, directory_path)
-        found_one = true if File.directory?(path)
+        subs << path if File.directory?(path)
       end
     end
-    return found_one
+    return subs
   end
 
+  # For each directory under the test root, cleanse the data model and run
+  # the test suite.
+  #
   def run_all_suites()
-    # get a list of all sub-directories
-    # for each sub-directory
-    # -- run the cleanser
-    # -- run the suite
-    puts "BOGUS run_all_suites()"
+    get_sub_directories(@test_root_directory).each do |suite_path|
+      cleanse_data_model()
+      run_test_suite(suite_path)
+    end
+  end
+  
+  def cleanse_data_model()
+    puts "BOGUS cleanse_data_model()"
+  end
+  
+  def run_test_suite(suite_path)
+    puts "BOGUS run_test_suite()"
   end
 
   def create_summary_html()
