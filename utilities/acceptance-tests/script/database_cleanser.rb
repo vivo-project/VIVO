@@ -41,19 +41,13 @@ class DatabaseCleanser
     raise("Properties file must contain a value for 'mysql_password'") if @mysql_password == nil
     raise("Properties file must contain a value for 'database_name'") if @database_name == nil
 
-    # Check that we can connect to the webapp.
-    begin
-      open(@webapp_url) {|f|}
-    rescue Exception
-      raise "Can't connect to VIVO application at '#{@webapp_url}'"
-    end
-
     # Check that we can connect to the Tomcat manager app.
     begin
-      open(@server_url + "manager/list", @tomcat_auth_options) {|f|}
+      url = @server_url + "manager/list"
+      open(url, @tomcat_auth_options) {|f|}
     rescue Exception
       raise "Can't connect to Tomcat manager application at " +
-      "'#{@server_url + "manager/list"}', with this authorization: #{@tomcat_auth_options}"
+      "'#{url}', with this authorization: #{@tomcat_auth_options}"
     end
 
     # Check that we can connect to the MySQL database.
@@ -80,6 +74,39 @@ class DatabaseCleanser
     end
   end
 
+  def stop_the_webapp()
+    puts "   Stopping the webapp..."
+    begin
+      url = @server_url + "manager/stop?path=/#{@webapp_name}"
+      open(url, @tomcat_auth_options) do |f|
+        raise "Failed to stop the webapp: status = #{f.status}" if f.status[0] != '200'
+      end
+    rescue OpenURI::HTTPError
+      raise "Can't connect to Tomcat manager application at " +
+      "'#{url}', with this authorization: #{@tomcat_auth_options}"
+    end
+    puts "   ... stopped."
+  end
+
+  def start_the_webapp()
+    puts "   Starting the webapp..."
+    begin
+      url = @server_url + "manager/start?path=/#{@webapp_name}"
+      open(url, @tomcat_auth_options) do |f|
+        raise "Failed to start the webapp: status = #{f.status}" if f.status[0] != '200'
+      end
+    rescue OpenURI::HTTPError
+      raise "Can't connect to Tomcat manager application at " +
+      "'#{url}', with this authorization: #{@tomcat_auth_options}"
+    end
+    puts "   ... started."
+  end
+
+  def drop_database_and_create_again()
+    puts ">>>>>>>>>> BOGUS BOGUS drop_database_and_create_again()"
+    # mysql --user=vitrodbUsername --password=vitrodbPassword --database=vivo --execute="drop database vivo; create database vivo character set utf8;"
+  end
+
   # ------------------------------------------------------------------------------------
   public
   # ------------------------------------------------------------------------------------
@@ -99,6 +126,14 @@ class DatabaseCleanser
 
     sanity_checks_on_parameters()
   end
+
+  # Cleanse the database.
+  #
+  def cleanse()
+    stop_the_webapp()
+    drop_database_and_create_again()
+    start_the_webapp()
+  end
 end
 
 #
@@ -117,3 +152,5 @@ end
 properties = PropertyFileReader.read(ARGV[0])
 
 dc = DatabaseCleanser.new(properties)
+dc.cleanse()
+dc.cleanse()
