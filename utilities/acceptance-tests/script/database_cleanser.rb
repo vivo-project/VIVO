@@ -1,25 +1,29 @@
 =begin
 --------------------------------------------------------------------------------
 
-Stop the vivo application, delete all mysql tables, and start the application
-again.
+Stop the Vitro application, delete all MySQL tables from the Vitro database, and
+start the application again.
 
 --------------------------------------------------------------------------------
 
 Parameters:
-  -- the base URL of the vivo application: e.g. "http://localhost:8080/vivo"
-  -- the username and password of a Tomcat account authorized as a "manager".
-  -- the username and password of the MySQL account for the vivo application
-  -- the name of the MySQL database for the vivo application
+  tomcat_stop_command
+    A "shell" command that will stop the Tomcat server.
+  tomcat_stop_delay
+    Number of seconds to wait after the tomcat_stop_command returns before
+    proceeding.
+  tomcat_start_command
+    A "shell" command that will start the Tomcat server.
+  tomcat_start_delay
+    Number of seconds to wait after the tomcat_start_command returns before
+    proceeding.
+  mysql_username
+    A user account that has authority to drop the Vitro database in MySQL.
+  mysql_password
+    The password for mysql_username.
+  database_name
+    The name of the Vitro database in MySQL.
 
---------------------------------------------------------------------------------
-
-What are we doing?
-  -- Break the URL into parts, so we can get the base Tomcat URL and the name
-     of the webapp.
-  -- Tell Tomcat's manager to stop the app.
-  -- Tell MySQL to drop the database and rebuild it.
-  -- Tell Tomcat's manager to start the app.
 --------------------------------------------------------------------------------
 =end
 require 'open-uri'
@@ -34,21 +38,13 @@ class DatabaseCleanser
   #
   def sanity_checks_on_parameters()
     # Check that all necessary properties are here.
-    raise("Properties file must contain a value for 'webapp_url'") if @webapp_url == nil
-    raise("Properties file must contain a value for 'tomcat_username'") if @tomcat_username == nil
-    raise("Properties file must contain a value for 'tomcat_password'") if @tomcat_password == nil
+    raise("Properties file must contain a value for 'tomcat_stop_command'") if @tomcat_stop_command == nil
+    raise("Properties file must contain a value for 'tomcat_stop_delay'") if @tomcat_stop_delay == nil
+    raise("Properties file must contain a value for 'tomcat_start_command'") if @tomcat_start_command == nil
+    raise("Properties file must contain a value for 'tomcat_start_delay'") if @tomcat_start_delay == nil
     raise("Properties file must contain a value for 'mysql_username'") if @mysql_username == nil
     raise("Properties file must contain a value for 'mysql_password'") if @mysql_password == nil
     raise("Properties file must contain a value for 'database_name'") if @database_name == nil
-
-    # Check that we can connect to the Tomcat manager app.
-    begin
-      url = @server_url + "manager/list"
-      open(url, @tomcat_auth_options) {|f|}
-    rescue Exception
-      raise "Can't connect to Tomcat manager application at " +
-      "'#{url}', with this authorization: #{@tomcat_auth_options}"
-    end
 
     # Check that we can connect to the MySQL database.
     args = []
@@ -62,49 +58,40 @@ class DatabaseCleanser
     raise("Error connecting to MySQL database.") if $?.exitstatus != 0
   end
 
-  # The Webapp URL must be a valid URL, and the path must be a single token
-  # (with an optional trailing slash).
+  # Issue the Tomcat stop command and pause for it to take effect.
   #
-  def parse_webapp_url(webapp_url)
-    match = %r{(\w+://.+/)([^/]+)/?}.match(webapp_url)
-    if match
-      return [match[1], match[2]]
-    else
-      raise "Can't parse the webapp name from this URL: '#{webapp_url}'"
-    end
-  end
-
   def stop_the_webapp()
     puts "   Stopping the webapp..."
-    begin
-      url = @server_url + "manager/stop?path=/#{@webapp_name}"
-      open(url, @tomcat_auth_options) do |f|
-        raise "Failed to stop the webapp: status = #{f.status}" if f.status[0] != '200'
-      end
-    rescue OpenURI::HTTPError
-      raise "Can't connect to Tomcat manager application at " +
-      "'#{url}', with this authorization: #{@tomcat_auth_options}"
-    end
+    system(@tomcat_stop_command)
+    puts "   Waiting #{@tomcat_stop_delay} seconds..."
+    sleep(@tomcat_stop_delay)
     puts "   ... stopped."
   end
 
+  # Issue the Tomcat start command, pause for it to take effect, and wait
+  # until the server responds to an HTTP request.
+  #
   def start_the_webapp()
     puts "   Starting the webapp..."
-    begin
-      url = @server_url + "manager/start?path=/#{@webapp_name}"
-      open(url, @tomcat_auth_options) do |f|
-        raise "Failed to start the webapp: status = #{f.status}" if f.status[0] != '200'
-      end
-    rescue OpenURI::HTTPError
-      raise "Can't connect to Tomcat manager application at " +
-      "'#{url}', with this authorization: #{@tomcat_auth_options}"
-    end
+    system(@tomcat_start_command)
+    puts "   Waiting #{@tomcat_start_delay} seconds..."
+    sleep(@tomcat_start_delay)
+    open("http://localhost:8080"){|f|}
     puts "   ... started."
   end
 
+  # Tell MySQL to drop the database and re-create it.
+  #
   def drop_database_and_create_again()
-    puts ">>>>>>>>>> BOGUS BOGUS drop_database_and_create_again()"
-    # mysql --user=vitrodbUsername --password=vitrodbPassword --database=vivo --execute="drop database vivo; create database vivo character set utf8;"
+    args = []
+    args << "--user=#{@mysql_username}"
+    args << "--password=#{@mysql_password}"
+    args << "--database=#{@database_name}"
+    args << "--execute=drop database #{@database_name}; create database #{@database_name} character set utf8;"
+    result = system("mysql", *args)
+    raise("Can't find the 'mysql' command!") if result == nil
+    raise("Can't clean the MySQL database: command was 'mysql' #{args}") if !result
+    raise("Error code from MySQL: #{$?.exitstatus}, command was 'mysql' #{args}") if $?.exitstatus != 0
   end
 
   # ------------------------------------------------------------------------------------
@@ -114,15 +101,13 @@ class DatabaseCleanser
   # Get the parameters and check them
   #
   def initialize(properties)
-    @webapp_url = properties['webapp_url']
-    @tomcat_username = properties['tomcat_username']
-    @tomcat_password = properties['tomcat_password']
+    @tomcat_stop_command = properties['tomcat_stop_command']
+    @tomcat_stop_delay = properties['tomcat_stop_delay'].to_i
+    @tomcat_start_command = properties['tomcat_start_command']
+    @tomcat_start_delay = properties['tomcat_start_delay'].to_i
     @mysql_username = properties['mysql_username']
     @mysql_password = properties['mysql_password']
     @database_name = properties['database_name']
-
-    @server_url, @webapp_name = parse_webapp_url(@webapp_url)
-    @tomcat_auth_options = {:http_basic_authentication => [@tomcat_username, @tomcat_password]}
 
     sanity_checks_on_parameters()
   end
@@ -152,5 +137,4 @@ end
 properties = PropertyFileReader.read(ARGV[0])
 
 dc = DatabaseCleanser.new(properties)
-dc.cleanse()
 dc.cleanse()
