@@ -113,9 +113,9 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["activityUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearMonthAssertion}" ],
     "n3optional"    : [ "${descriptionAssertion}", "${organizationNameAssertion}","${organizationUriAssertion}",
-                        "${startYearMonthAssertion}","${endYearMonthAssertion}"],
+                        "${endYearMonthAssertion}"],
     "newResources"  : { "activityUri" : "${defaultNamespace}/serviceactivity" },
     "urisInScope"    : { },
     "literalsInScope": { },
@@ -182,7 +182,7 @@
       },
       "startYearMonth" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYearMonth" ],
+         "validators"       : [ "nonempty", "datatype:http://www.w3.org/2001/XMLSchema#gYearMonth" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",

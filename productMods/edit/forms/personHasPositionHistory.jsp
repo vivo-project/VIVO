@@ -105,9 +105,9 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
     "n3optional"    : [ "${organizationNameAssertion}","${organizationUriAssertion}",
-                        "${startYearAssertion}","${endYearAssertion}"],
+                        "${endYearAssertion}"],
     "newResources"  : { "positionUri" : "${defaultNamespace}/position" },
     "urisInScope"    : { },
     "literalsInScope": { },
@@ -162,7 +162,7 @@
       },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
+         "validators"       : [ "nonempty", "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",

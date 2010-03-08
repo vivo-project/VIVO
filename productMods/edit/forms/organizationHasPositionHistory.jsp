@@ -47,16 +47,6 @@
 	?positionUri <http://www.w3.org/2000/01/rdf-schema#label> ?title. 
 </v:jsonset>
 
-<%--
-<v:jsonset var="organizationNameExisting" >      
-      SELECT ?existingOrgName WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#involvedOrganizationName> ?existingOrgName }
-</v:jsonset>
-<v:jsonset var="organizationNameAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#involvedOrganizationName> ?organizationName .
-</v:jsonset>
- --%>
- 
 <v:jsonset var="startYearExisting" >      
       SELECT ?startYearExisting WHERE {  
       	?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYearExisting }
@@ -65,44 +55,12 @@
       ?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYear .
 </v:jsonset>
 
-<v:jsonset var="startYearMonthExisting" >      
-      SELECT ?startYearMonthExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#startYearMonth> ?startYearMonthExisting }
-</v:jsonset>
-<v:jsonset var="startYearMonthAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#startYearMonth> ?startYearMonth .
-</v:jsonset>
-
-<v:jsonset var="startDateExisting" >      
-      SELECT ?startDateExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#startDate> ?startDateExisting }
-</v:jsonset>
-<v:jsonset var="startDateAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#startDate> ?startDate .
-</v:jsonset>
-
 <v:jsonset var="endYearExisting" >      
       SELECT ?endYearExisting WHERE {  
       	?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYearExisting }
 </v:jsonset>
 <v:jsonset var="endYearAssertion" >
       ?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYear .
-</v:jsonset>
-
-<v:jsonset var="endYearMonthExisting" >      
-      SELECT ?endYearMonthExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#endYearMonth> ?endYearMonthExisting }
-</v:jsonset>
-<v:jsonset var="endYearMonthAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#endYearMonth> ?endYearMonth .
-</v:jsonset>
-
-<v:jsonset var="endDateExisting" >      
-      SELECT ?endDateExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#endDate> ?endDateExisting }
-</v:jsonset>
-<v:jsonset var="endDateAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#endDate> ?endDate .
 </v:jsonset>
 
 <%--  Note there is really no difference in how things are set up for an object property except
@@ -136,27 +94,20 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}" ],
-    "n3optional"    : [ "${startYearAssertion}","${startYearMonthAssertion}","${startDateAssertion}",
-                        "${endYearAssertion}","${endYearMonthAssertion}","${endDateAssertion}"],
+    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}", "${startYearAssertion}" ],
+    "n3optional"    : [ "${endYearAssertion}" ],
     "newResources"  : { "positionUri" : "${defaultNamespace}/position" },
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "personUri" ],
-    "literalsOnForm" :  [ "title", 
-    					  "startYear", "startYearMonth", "startDate",
-                          "endYear",   "endYearMonth",   "endDate" ],
+    "literalsOnForm" :  [ "title", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "title"              : "${titleExisting}",
         "startYear"          : "${startYearExisting}",
-        "startYearMonth"     : "${startYearMonthExisting}",
-        "startDate"          : "${startDateExisting}",
         "endYear"            : "${endYearExisting}",
-        "endYearMonth"       : "${endYearMonthExisting}",
-        "endDate"            : "${endDateExisting}"
     },
     "sparqlForExistingUris" : {
         "personUri"   : "${personUriExisting}"
@@ -186,7 +137,7 @@
       },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ ],
+         "validators"       : [ "nonempty", "datatype:http://www.w3.org/2001/XMLSchema#gYear"],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -195,31 +146,9 @@
          "rangeLang"        : "",         
          "assertions"       : ["${startYearAssertion}"]
       },
-      "startYearMonth" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [ ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYearMonth";
-         "rangeLang"        : "",         
-         "assertions"       : [ "${startYearMonthAssertion}" ]
-      },
-      "startDate" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#Date",
-         "rangeLang"        : "",         
-         "assertions"       : [ "${startDateAssertion}" ]
-      },
       "endYear" : {
          "newResource"      : "false",
-         "validators"       : [ ],
+         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -227,29 +156,7 @@
          "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYear",
          "rangeLang"        : "",         
          "assertions"       : ["${endYearAssertion}"]
-      },
-      "endYearMonth" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [ ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYearMonth";
-         "rangeLang"        : "",         
-         "assertions"       : [ "${endYearMonthAssertion}" ]
-      },
-      "endDate" : {
-         "newResource"      : "false",
-         "validators"       : [],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#Date",
-         "rangeLang"        : "",         
-         "assertions"       : [ "${endDateAssertion}" ]
-    }
+      }
   }
 }
 </c:set>
@@ -287,22 +194,11 @@
 
 <h2>${title}</h2>
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-	<v:input type="text" label="title" id="title" size="30" />
+	<v:input type="text" label="title" id="title" size="30"/>
 	<v:input type="select" label="person" id="personUri"  />
     <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>
-    
-    <%--
-    <v:input type="text" label="startYearMonth" id="startYearMonth" size="7"/>
-    <v:input type="text" label="start date" id="startDate" size="10"/>
-    --%>
-    
     <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
-    
-    <%--
-    <v:input type="text" label="end year-month" id="endYearMonth" size="7"/>
-    <v:input type="text" label="end date" id="endDate" size="10"/>
-    --%>
-    <v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/>
+    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
 </form>
 
 <jsp:include page="${postForm}"/>

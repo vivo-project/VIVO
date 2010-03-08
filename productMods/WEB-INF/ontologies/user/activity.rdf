@@ -8,7 +8,7 @@
 
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ServiceActivity">
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#ActivityDescription"/>
-    <j.0:customShortViewAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">professionalServiceActivityShortView.jsp</j.0:customShortViewAnnot>
+    <j.0:customShortViewAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">serviceActivityShortView.jsp</j.0:customShortViewAnnot>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#professionalServiceActivity">
