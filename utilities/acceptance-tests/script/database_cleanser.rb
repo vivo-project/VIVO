@@ -27,7 +27,7 @@ Parameters:
 --------------------------------------------------------------------------------
 =end
 require 'open-uri'
-require 'property_file_reader'
+require File.expand_path('property_file_reader', File.dirname(File.expand_path(__FILE__)))
 
 class DatabaseCleanser
   # ------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ class DatabaseCleanser
     args << "--user=#{@mysql_username}"
     args << "--password=#{@mysql_password}"
     args << "--database=#{@database_name}"
-    args << "--version"
+    args << "--execute=show databases;"
     result = system("mysql", *args)
     raise("Can't find the 'mysql' command!") if result == nil
     raise("Can't connect to MySQL database.") if !result
@@ -125,16 +125,22 @@ end
 #
 # ------------------------------------------------------------------------------------
 # Standalone calling.
+#
+# Do this if this program was called from the command line. That is, if the command
+# expands to the path of this file.
 # ------------------------------------------------------------------------------------
 #
-if ARGV.length == 0
-  raise("No arguments - usage is: database_cleanser.rb <properties_file>")
-end
-if !File.file?(ARGV[0])
-  raise "File does not exist: '#{ARGV[0]}'."
-end
 
-properties = PropertyFileReader.read(ARGV[0])
+if File.expand_path($0) == File.expand_path(__FILE__)
+  if ARGV.length == 0
+    raise("No arguments - usage is: ruby database_cleanser.rb <properties_file>")
+  end
+  if !File.file?(ARGV[0])
+    raise "File does not exist: '#{ARGV[0]}'."
+  end
 
-dc = DatabaseCleanser.new(properties)
-dc.cleanse()
+  properties = PropertyFileReader.read(ARGV[0])
+
+  dc = DatabaseCleanser.new(properties)
+  dc.cleanse()
+end

@@ -10,5 +10,5 @@ SET SEL_OPTS=%SEL_OPTS% -htmlSuite "*firefox"  "http://localhost:8080/vivo/" "..
 SET Path=%Path%;C:\Program Files (x86)\Mozilla Firefox
 
 @echo on
-java -jar selenium-server.jar %SEL_OPTS%
+java -jar ..\selenium\selenium-server.jar %SEL_OPTS%
 

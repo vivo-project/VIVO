@@ -38,7 +38,8 @@ What are we doing?
 --------------------------------------------------------------------------------
 =end
 require 'open-uri'
-require 'database_cleanser'
+require File.expand_path('database_cleanser', File.dirname(File.expand_path(__FILE__)))
+require File.expand_path('property_file_reader', File.dirname(File.expand_path(__FILE__)))
 
 =begin
 <h1>Test suite results </h1>
@@ -76,6 +77,14 @@ class AcceptanceRunner
   # and URL.
   #
   def sanity_checks_on_parameters()
+    raise("Properties file must contain a value for 'website_url'") if @website_url == nil
+    raise("Properties file must contain a value for 'test_root_directory'") if @test_root_directory == nil
+    raise("Properties file must contain a value for 'output_directory'") if @output_directory == nil
+    raise("Properties file must contain a value for 'user_extensions_path'") if @user_extensions_path == nil
+    raise("Properties file must contain a value for 'firefox_profile_template_path'") if @firefox_profile_template_path == nil
+    raise("Properties file must contain a value for 'suite_timeout_limit'") if @suite_timeout_limit == nil
+    raise("Properties file must contain a value for 'selenium_jar_path'") if @selenium_jar_path == nil
+
     confirm_is_readable_directory(@test_root_directory, "Test root directory")
     if get_sub_directories(@test_root_directory).empty?
       raise "Test root directory '#{@test_root_directory}' has no sub-directories."
@@ -147,21 +156,54 @@ class AcceptanceRunner
   #
   def run_all_suites()
     get_sub_directories(@test_root_directory).each do |suite_path|
-      cleanse_data_model()
-      run_test_suite(suite_path)
+      suite_file_path = File.expand_path("Suite.html", suite_path)
+      if File.exist?(suite_file_path)
+        cleanse_data_model()
+        run_test_suite(suite_file_path)
+      end
     end
   end
-  
+
+  # Before each suite, call the cleanser.
   def cleanse_data_model()
-    puts "BOGUS cleanse_data_model()"
+    # puts "BOGUS cleanse_data_model()"
+    @database_cleanser.cleanse()
   end
-  
-  def run_test_suite(suite_path)
-    puts "BOGUS run_test_suite()"
+
+  def run_test_suite(suite_file_path)
+    puts "BOGUS run_test_suite(#{suite_file_path})"
+
+    suite_name = File.basename(File.dirname(suite_file_path))
+    output_file = File.expand_path("#{suite_name}_output.html", @output_directory)
+
+    args = []
+    args << "-jar" << @selenium_jar_path
+    args << "-singleWindow"
+    args << "-timeout" << @suite_timeout_limit.to_s
+    args << "-userExtensions" << @user_extensions_path
+    args << "-firefoxProfileTemplate" << @firefox_profile_template_path
+    args << "-htmlSuite" << "*firefox" << @website_url << suite_file_path << output_file
+
+    result = system("java", *args)
+    raise("Can't find the 'java' command!") if result == nil
+    if !result
+      puts ">>>> result: #{result}"
+      puts ">>>> $?: #{$?}"
+      log_error("Can't run the suite at '#{suite_file_path}: command was 'java' #{args}") if !result
+    elsif $?.exitstatus != 0
+      log_error("Suite failed at '#{suite_file_path}: return code was #{$?.exitstatus}, command was 'java' #{args}")
+    end
   end
 
   def create_summary_html()
     puts "BOGUS create_summary_html()"
+  end
+
+  def log_error(message)
+    File.open(@log_file, File::CREAT | File::APPEND | File::WRONLY) do |f|
+      f.print(message + "\n")
+    end
+    puts "LOG LOG: '#{message}'"
   end
 
   # ------------------------------------------------------------------------------------
@@ -170,13 +212,21 @@ class AcceptanceRunner
 
   # Set up and get ready to process.
   #
-  def initialize(website_url, test_root_directory, output_directory, user_extensions_path, firefox_profile_template_path)
-    @website_url = website_url
-    @test_root_directory = test_root_directory
-    @output_directory = output_directory
-    @user_extensions_path = user_extensions_path
-    @firefox_profile_template_path = firefox_profile_template_path
+  def initialize(properties)
+    @website_url = properties['website_url']
+    @test_root_directory = properties['test_root_directory']
+    @output_directory = properties['output_directory']
+    @user_extensions_path = properties['user_extensions_path']
+    @firefox_profile_template_path = properties['firefox_profile_template_path']
+    @suite_timeout_limit = properties['suite_timeout_limit'].to_i
+    @selenium_jar_path = properties['selenium_jar_path']
+
     sanity_checks_on_parameters()
+
+    @database_cleanser = DatabaseCleanser.new(properties)
+
+    @log_file = File.expand_path("log_file.txt", @output_directory)
+
   end
 
   # Run all of the test suites and produce an output summary page.
@@ -186,16 +236,20 @@ class AcceptanceRunner
   end
 end
 
-# ------------------------------------------------------------------------
-# Main routine
-# ------------------------------------------------------------------------
+#
+#
+# ------------------------------------------------------------------------------------
+# Standalone calling.
+# ------------------------------------------------------------------------------------
+#
+if ARGV.length == 0
+  raise("No arguments - usage is: ruby run_acceptance_test.rb <properties_file>")
+end
+if !File.file?(ARGV[0])
+  raise "File does not exist: '#{ARGV[0]}'."
+end
 
-# BOGUS test harness
-website_url = "http://localhost:8080/vivo/"
-test_root_directory = "C:\\eclipseVitroWorkspace\\vivoweb\\utilities\\acceptance-tests\\suites"
-output_directory = "C:\\eclipseVitroWorkspace\\vivoweb\\utilities\\acceptance-tests\\script\\output"
-user_extensions_path = "C:\\eclipseVitroWorkspace\\vivoweb\\utilities\\acceptance-tests\\selenium\\user-extensions.js"
-firefox_profile_template_path = "C:\\Vitro_stuff\\Selenium\\experiments\\profiles\\selenium"
+properties = PropertyFileReader.read(ARGV[0])
 
-ar = AcceptanceRunner.new(website_url, test_root_directory, output_directory, user_extensions_path, firefox_profile_template_path)
+ar = AcceptanceRunner.new(properties)
 ar.run()
