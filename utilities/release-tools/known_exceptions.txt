@@ -1,5 +1,19 @@
+#
+# A list of files and directories that are known exceptions to the 
+# license-insertion process.
+#
+# Files will only be altered if they contain a "magic" license place-holder, 
+# but if they match one of the file-matchers and don't contain a place-holder,
+# the process will write a warning.
+#
+# File-matchers are:
+# '*.java', '*.jsp', '*.tld', '*.xsl', '*.xslt', '*.css', '*.js', 'build.xml'
+#
+# Known exceptions listed here produce no warnings.
+#
+
 # The "build directory"
-.deployStaging/**/*
+.build/**/*
 
 # The JSON Java source files from json.org
 vitro-core/webapp/src/org/json/*
