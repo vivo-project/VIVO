@@ -38,8 +38,10 @@ What are we doing?
 --------------------------------------------------------------------------------
 =end
 require 'open-uri'
+require 'date'
 require File.expand_path('database_cleanser', File.dirname(File.expand_path(__FILE__)))
 require File.expand_path('property_file_reader', File.dirname(File.expand_path(__FILE__)))
+require File.expand_path('output_manager', File.dirname(File.expand_path(__FILE__)))
 
 =begin
 <h1>Test suite results </h1>
@@ -79,7 +81,6 @@ class AcceptanceRunner
   def sanity_checks_on_parameters()
     raise("Properties file must contain a value for 'website_url'") if @website_url == nil
     raise("Properties file must contain a value for 'test_root_directory'") if @test_root_directory == nil
-    raise("Properties file must contain a value for 'output_directory'") if @output_directory == nil
     raise("Properties file must contain a value for 'user_extensions_path'") if @user_extensions_path == nil
     raise("Properties file must contain a value for 'firefox_profile_template_path'") if @firefox_profile_template_path == nil
     raise("Properties file must contain a value for 'suite_timeout_limit'") if @suite_timeout_limit == nil
@@ -88,11 +89,6 @@ class AcceptanceRunner
     confirm_is_readable_directory(@test_root_directory, "Test root directory")
     if get_sub_directories(@test_root_directory).empty?
       raise "Test root directory '#{@test_root_directory}' has no sub-directories."
-    end
-
-    confirm_is_readable_directory(@output_directory, "Output directory")
-    if !File.writable?(@output_directory)
-      raise "Output directory '#{@output_directory}' is not writable."
     end
 
     if File.basename(@user_extensions_path) != "user-extensions.js"
@@ -155,26 +151,30 @@ class AcceptanceRunner
   # the test suite.
   #
   def run_all_suites()
+    time_stamp("Start time")
     get_sub_directories(@test_root_directory).each do |suite_path|
       suite_file_path = File.expand_path("Suite.html", suite_path)
       if File.exist?(suite_file_path)
-        cleanse_data_model()
+        # BOGUS - disable the tests.
+        # cleanse_data_model()
+        # BOGUS - disable the tests.
         run_test_suite(suite_file_path)
+      else
+        log_warn("No suite file found in #{suite_path}")
       end
     end
+    time_stamp("End time")
   end
 
   # Before each suite, call the cleanser.
   def cleanse_data_model()
-    # puts "BOGUS cleanse_data_model()"
     @database_cleanser.cleanse()
   end
 
   def run_test_suite(suite_file_path)
-    puts "BOGUS run_test_suite(#{suite_file_path})"
-
     suite_name = File.basename(File.dirname(suite_file_path))
-    output_file = File.expand_path("#{suite_name}_output.html", @output_directory)
+    log_info("Running suite #{suite_name}")
+    output_file = @output_manager.output_filename(suite_name)
 
     args = []
     args << "-jar" << @selenium_jar_path
@@ -184,26 +184,31 @@ class AcceptanceRunner
     args << "-firefoxProfileTemplate" << @firefox_profile_template_path
     args << "-htmlSuite" << "*firefox" << @website_url << suite_file_path << output_file
 
-    result = system("java", *args)
-    raise("Can't find the 'java' command!") if result == nil
-    if !result
-      puts ">>>> result: #{result}"
-      puts ">>>> $?: #{$?}"
-      log_error("Can't run the suite at '#{suite_file_path}: command was 'java' #{args}") if !result
-    elsif $?.exitstatus != 0
-      log_error("Suite failed at '#{suite_file_path}: return code was #{$?.exitstatus}, command was 'java' #{args}")
-    end
+    #    result = system("java", *args)
+    #    raise("Can't find the 'java' command!") if result == nil
+    #    if $?.exitstatus != 0
+    #      log_error("Suite failed at '#{suite_file_path}: return code was #{$?.exitstatus}, command was 'java' #{args}")
+    #    end
   end
 
-  def create_summary_html()
-    puts "BOGUS create_summary_html()"
+  def time_stamp(label)
+    log_info("#{label}: #{DateTime.now.strftime('%Y/%m/%d %H:%M:%S')}")
+  end
+
+  def log_info(message)
+    @output_manager.log("INFO ", message)
+  end
+
+  def log_warn(message)
+    @output_manager.log("WARN ", message)
   end
 
   def log_error(message)
-    File.open(@log_file, File::CREAT | File::APPEND | File::WRONLY) do |f|
-      f.print(message + "\n")
-    end
-    puts "LOG LOG: '#{message}'"
+    @output_manager.log("ERROR", message)
+  end
+
+  def create_summary_html()
+    @output_manager.summarize()
   end
 
   # ------------------------------------------------------------------------------------
@@ -215,7 +220,6 @@ class AcceptanceRunner
   def initialize(properties)
     @website_url = properties['website_url']
     @test_root_directory = properties['test_root_directory']
-    @output_directory = properties['output_directory']
     @user_extensions_path = properties['user_extensions_path']
     @firefox_profile_template_path = properties['firefox_profile_template_path']
     @suite_timeout_limit = properties['suite_timeout_limit'].to_i
@@ -224,8 +228,7 @@ class AcceptanceRunner
     sanity_checks_on_parameters()
 
     @database_cleanser = DatabaseCleanser.new(properties)
-
-    @log_file = File.expand_path("log_file.txt", @output_directory)
+    @output_manager = OutputManager.new(properties)
 
   end
 
