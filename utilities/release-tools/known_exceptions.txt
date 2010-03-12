@@ -15,6 +15,9 @@
 # The "build directory"
 .build/**/*
 
+# ContentType from Google gdata API, Apache 2.0 license included in file.
+vitro-core/webapp/src/edu/cornell/mannlib/vitro/webapp/web/ContentType.java
+
 # The JSON Java source files from json.org
 vitro-core/webapp/src/org/json/*
 
