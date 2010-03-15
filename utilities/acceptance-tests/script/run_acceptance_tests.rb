@@ -119,7 +119,7 @@ class AcceptanceRunner
   def confirm_is_readable_file(path, label)
     confirm_is_readable(path, label)
     if !File.file?(path)
-      raise "#{label} '#{path}' is not a directory."
+      raise "#{label} '#{path}' is not a file."
     end
   end
 
@@ -155,9 +155,7 @@ class AcceptanceRunner
     get_sub_directories(@test_root_directory).each do |suite_path|
       suite_file_path = File.expand_path("Suite.html", suite_path)
       if File.exist?(suite_file_path)
-        # BOGUS - disable the tests.
-        # cleanse_data_model()
-        # BOGUS - disable the tests.
+        cleanse_data_model()
         run_test_suite(suite_file_path)
       else
         log_warn("No suite file found in #{suite_path}")
@@ -184,11 +182,11 @@ class AcceptanceRunner
     args << "-firefoxProfileTemplate" << @firefox_profile_template_path
     args << "-htmlSuite" << "*firefox" << @website_url << suite_file_path << output_file
 
-    #    result = system("java", *args)
-    #    raise("Can't find the 'java' command!") if result == nil
-    #    if $?.exitstatus != 0
-    #      log_error("Suite failed at '#{suite_file_path}: return code was #{$?.exitstatus}, command was 'java' #{args}")
-    #    end
+    result = system("java", *args)
+    raise("Can't find the 'java' command!") if result == nil
+    if $?.exitstatus != 0
+      log_warn("Suite failed: '#{suite_name}, return code was #{$?.exitstatus}")
+    end
   end
 
   def time_stamp(label)
