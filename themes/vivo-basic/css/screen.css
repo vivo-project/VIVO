@@ -201,10 +201,10 @@ div#breadcrumbs a:hover { color: #000; }
 Individual Pages
 ************************/
 
-div#label { margin-bottom: 1.5em; }
+div#labelAndMoniker { margin-bottom: 1.5em; }
 
 
-#label div {
+#labelAndMoniker div {
     display: inline;
 }
 
@@ -212,10 +212,6 @@ div#label { margin-bottom: 1.5em; }
 #label h3 {
   display: inline;
   padding-right: 6px;
-}
-
-#label .editLinks {
-    margin-top: -6px;
 }
 
 em.moniker { 
@@ -614,6 +610,7 @@ ul.datatypePropertyValue li {
   position: relative; 
 }
 
+
 span.editLinks,
 em.nonEditable { 
   display: none; 
@@ -644,6 +641,18 @@ span.editLinks a.edit { padding-right: 4px; }
   z-index: 10;
   text-align: center;
 }
+
+
+#label .editLinks {
+    margin-top: -6px;
+}
+
+#moniker .statementWrap:hover span.editLinks {
+    position: static;
+    display: inline;
+    margin-left: 6px;
+}
+
 
 span.statementWrap:hover em.nonEditable {
   padding-top: 5px;
