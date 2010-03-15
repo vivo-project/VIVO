@@ -47,4 +47,26 @@
 	-->
 	<import file="${vitro.core.dir}/webapp/product-build.xml" />
 
+	<!-- ================================= 
+          target: acceptance              
+         ================================= -->
+	<target name="acceptance" description="--> Run the acceptance tests">
+		<property name="acceptance.properties.file"
+		          location="utilities/acceptance-tests/script/acceptance_test.properties" />
+		<fail message="You must create a &quot;${acceptance.properties.file}&quot; file.">
+			<condition>
+				<not>
+					<available file="${acceptance.properties.file}" />
+				</not>
+			</condition>
+		</fail>
+		<property file="${acceptance.properties.file}" prefix="acceptance." />
+
+		<exec executable="ruby" dir="utilities/acceptance-tests/script" failonerror="true">
+			<redirector output="${acceptance.output_directory}/ant_output.txt" alwayslog="true" />
+			<arg value="run_acceptance_tests.rb" />
+			<arg value="${acceptance.properties.file}" />
+		</exec>
+	</target>
+
 </project>
