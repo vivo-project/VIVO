@@ -203,13 +203,24 @@ Individual Pages
 
 div#label { margin-bottom: 1.5em; }
 
+
+#label div {
+    display: inline;
+}
+
 #label h2,
 #label h3 {
   display: inline;
   padding-right: 6px;
 }
 
-em.moniker { color: #9c9c9c; }
+#label .editLinks {
+    margin-top: -6px;
+}
+
+em.moniker { 
+    color: #9c9c9c; 
+}
 
 ul.externalLinks { margin: 0 0 1.5em 0; }
 
@@ -596,8 +607,9 @@ ul.properties li {
   list-style-type: none;
 }
 
-ul.properties li,
+div.vitroNsPropertyValue,
 div.datatypePropertyValue,
+ul.properties li,
 ul.datatypePropertyValue li { 
   position: relative; 
 }
@@ -619,8 +631,8 @@ span.editLinks a:hover { color: #000; }
 
 span.editLinks a.edit { padding-right: 4px; }
 
-span.statementWrap:hover span.editLinks,
-span.statementWrap:hover em.nonEditable {
+.statementWrap:hover span.editLinks,
+.statementWrap:hover em.nonEditable {
   display: block;
   width: 6em;
   padding: 2px 0 4px 0;
