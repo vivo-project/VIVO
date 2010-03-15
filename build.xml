@@ -60,9 +60,12 @@
 				</not>
 			</condition>
 		</fail>
+
+		<property name="acceptance.script.directory" location="utilities/acceptance-tests/script"/>
+
 		<property file="${acceptance.properties.file}" prefix="acceptance." />
 
-		<exec executable="ruby" dir="utilities/acceptance-tests/script" failonerror="true">
+		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
 			<redirector output="${acceptance.output_directory}/ant_output.txt" alwayslog="true" />
 			<arg value="run_acceptance_tests.rb" />
 			<arg value="${acceptance.properties.file}" />
