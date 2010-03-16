@@ -48,7 +48,11 @@
 	<import file="${vitro.core.dir}/webapp/product-build.xml" />
 
 	<!-- ================================= 
-          target: acceptance              
+          target: acceptance             
+          
+          Hudson (continuous integration) 
+          uses this to run the acceptance 
+          tests. 
          ================================= -->
 	<target name="acceptance" description="--> Run the acceptance tests">
 		<property name="acceptance.properties.file"
@@ -67,9 +71,9 @@
 			<arg value="run_acceptance_tests.rb" />
 			<arg value="${acceptance.properties.file}" />
 		</exec>
-		<fail message="Just testing to see what a broken build does." />
+
 		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
-			<arg value="run_acceptance_tests.rb" />
+			<arg value="output_manager.rb" />
 			<arg value="${acceptance.properties.file}" />
 		</exec>
 	</target>
