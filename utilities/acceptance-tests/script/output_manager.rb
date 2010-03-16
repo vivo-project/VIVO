@@ -30,6 +30,7 @@ require 'date'
 require 'fileutils'
 require File.expand_path('output_suite_parser', File.dirname(File.expand_path(__FILE__)))
 require File.expand_path('output_summary_formatter', File.dirname(File.expand_path(__FILE__)))
+require File.expand_path('property_file_reader', File.dirname(File.expand_path(__FILE__)))
 
 class TestInfo
   attr :test_name, true
@@ -141,26 +142,31 @@ class OutputManager
   #
   def initialize(properties)
     @output_directory = properties['output_directory']
-      
+
     test_root_directory = properties['test_root_directory']
     @ignored_tests_file = File.expand_path("ignored_tests.txt", test_root_directory)
 
     sanity_checks_on_parameters()
 
     @log_file = File.expand_path("log_file.txt", @output_directory)
-    FileUtils::remove_file(@log_file) if File.exist?(@log_file)
 
-    @output_summary_file = File.expand_path("index.html", @output_directory)
+    @output_summary_file = File.expand_path("summary.html", @output_directory)
     FileUtils::remove_file(@output_summary_file) if File.exist?(@output_summary_file)
 
     @ignored_tests = load_list_of_ignored_tests()
+  end
+
+  # Start with an empty log file.
+  #
+  def empty_log()
+    FileUtils::remove_file(@log_file) if File.exist?(@log_file)
   end
 
   # Write a message to the log file
   #
   def log(level, message)
     File.open(@log_file, File::CREAT | File::APPEND | File::WRONLY) do |f|
-      f.print("#{level} #{message}\n")
+      f.print("#{DateTime.now.strftime('%Y/%m/%d %H:%M:%S')} #{level} #{message}\n")
     end
   end
 
@@ -191,13 +197,43 @@ class OutputManager
   # This is the big one -- produce the output summary.
   #
   def summarize()
+    log("INFO ", "Parsing test output")
     @osp = OutputSuiteParser.new(self, @log_file)
     @osp.parse()
 
+    log("INFO ", "Copying CSS file to output directory")
     copy_css_file()
+
+    log("INFO ", "Producing summary file")
     File.open(@output_summary_file, File::CREAT | File::WRONLY) do |f|
       osf = OutputSummaryFormatter.new(@osp, @log_file)
       osf.format(f)
     end
+
+    log("INFO ", "Summary complete")
   end
+end
+
+#
+#
+# ------------------------------------------------------------------------------------
+# Standalone calling.
+#
+# Do this if this program was called from the command line. That is, if the command
+# expands to the path of this file.
+# ------------------------------------------------------------------------------------
+#
+
+if File.expand_path($0) == File.expand_path(__FILE__)
+  if ARGV.length == 0
+    raise("No arguments - usage is: ruby output_manager.rb <properties_file>")
+  end
+  if !File.file?(ARGV[0])
+    raise "File does not exist: '#{ARGV[0]}'."
+  end
+
+  properties = PropertyFileReader.read(ARGV[0])
+
+  om = OutputManager.new(properties)
+  om.summarize()
 end

@@ -205,10 +205,6 @@ class AcceptanceRunner
     @output_manager.log("ERROR", message)
   end
 
-  def create_summary_html()
-    @output_manager.summarize()
-  end
-
   # ------------------------------------------------------------------------------------
   public
   # ------------------------------------------------------------------------------------
@@ -226,14 +222,15 @@ class AcceptanceRunner
     sanity_checks_on_parameters()
 
     @database_cleanser = DatabaseCleanser.new(properties)
+    
     @output_manager = OutputManager.new(properties)
-
+    @output_manager.empty_log()
   end
 
-  # Run all of the test suites and produce an output summary page.
+  # Run all of the test suites
   def run
     run_all_suites()
-    create_summary_html()
+    # To collate the output from the suites, use OutputManager.new(properties).summarize()
   end
 end
 

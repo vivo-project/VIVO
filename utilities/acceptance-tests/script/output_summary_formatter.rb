@@ -170,7 +170,7 @@ END_STATS
 
     if ignores.empty?
       f.print "    <tr>\n"
-      f.print "      <td colspan=\"2\">No tests ignored.</td>\n"
+      f.print "      <td colspan=\"3\">No tests ignored.</td>\n"
       f.print "    </tr>\n"
     else
       ignores.each do |t|

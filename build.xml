@@ -65,12 +65,26 @@
 			</condition>
 		</fail>
 
-		<property name="acceptance.script.directory" location="utilities/acceptance-tests/script"/>
+		<property name="acceptance.script.directory" location="utilities/acceptance-tests/script" />
 
 		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
 			<arg value="run_acceptance_tests.rb" />
 			<arg value="${acceptance.properties.file}" />
+			<redirector outputproperty="acceptance.test.output" alwayslog="true" />
 		</exec>
+
+		<fail message="Errors were detected in the console output from the acceptance tests.">
+			<condition>
+				<or>
+					<contains string="${acceptance.test.output}"
+					          substring="error"
+					          casesensitive="false" />
+					<contains string="${acceptance.test.output}"
+					          substring="exception"
+					          casesensitive="false" />
+				</or>
+			</condition>
+		</fail>
 
 		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
 			<arg value="output_manager.rb" />

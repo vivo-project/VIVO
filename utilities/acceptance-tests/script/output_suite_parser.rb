@@ -8,6 +8,8 @@ Parameters:
 --------------------------------------------------------------------------------
 =end
 require 'date'
+# This one is needed to get Time.parse() ????? Go figure.
+require 'open-uri'
 
 class OutputSuiteParser
   attr :errors
