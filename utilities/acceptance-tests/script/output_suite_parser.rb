@@ -55,12 +55,12 @@ class OutputSuiteParser
           @suite_names << md[1]
         end
 
-        md = %r{^ERROR\s*(.*)}.match line
+        md = %r{ERROR\s*(.*)}.match line
         if md
           @errors << md[1]
         end
 
-        md = %r{^WARN\s*(.*)}.match line
+        md = %r{WARN\s*(.*)}.match line
         if md
           @warnings << md[1]
         end
