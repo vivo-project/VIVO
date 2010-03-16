@@ -36,6 +36,7 @@ class TestInfo
   attr :suite_name, true
   attr :output_link, true
   attr :status, true
+  attr :reason_for_ignoring, true
 end
 
 class SuiteInfo
@@ -107,9 +108,14 @@ class OutputManager
         line.strip!
         if line.length == 0 || line[0] == ?# || line[0] == ?!
           # ignore blank lines, and lines starting with '#' or '!'.
-        elsif line =~ /^([^,]+),([^,]+)$/
+        elsif line =~ /^([^,#]+),([^,#]+)(\s*#(.*))?$/
           # suite name and test name separated by ',' and optional whitespace.
-          ignored_tests << [$1.strip, $2.strip]
+          # Optional comment on the end of the line, starting with a '#'
+          if $4 == nil
+            ignored_tests << [$1.strip, $2.strip, '']
+          else
+            ignored_tests << [$1.strip, $2.strip, $4]
+          end
         else
           raise "Invalid line in ignored tests file: '#{line}'"
         end
@@ -166,12 +172,23 @@ class OutputManager
   # Have we decided to ignore this test if it fails?
   #
   def ignore_test?(suite_name, test_name)
-    @ignored_tests.each do |pair|
-      return true if pair[0] == suite_name && pair[1] == test_name
+    @ignored_tests.each do |t|
+      return true if t[0] == suite_name && t[1] == test_name
     end
     return false
   end
 
+  # Why are we ignoring this test?
+  #
+  def get_reason_for_ignoring(suite_name, test_name)
+    @ignored_tests.each do |t|
+      return t[2] if t[0] == suite_name && t[1] == test_name
+    end
+    return ''
+  end
+
+  # This is the big one -- produce the output summary.
+  #
   def summarize()
     @osp = OutputSuiteParser.new(self, @log_file)
     @osp.parse()

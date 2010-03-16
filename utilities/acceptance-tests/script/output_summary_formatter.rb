@@ -55,7 +55,7 @@ class OutputSummaryFormatter
 <body>
   
   <div class="heading">
-    Acceptance test results: 3:45 p.m. March 10, 2010
+    Acceptance test results: #{@osp.start_time}
     <div class="#{html_class} one-word">#{status}</div>
   </div>
   
@@ -166,7 +166,7 @@ END_STATS
     end
 
     f.print "  <div class=section>Ignored tests</div>\n\n  <table cellspacing=\"0\">\n"
-    f.print "    <tr><th>Suite name</th><th>Test name</th></tr>\n"
+    f.print "    <tr><th>Suite name</th><th>Test name</th><th>Reason for ignoring</th></tr>\n"
 
     if ignores.empty?
       f.print "    <tr>\n"
@@ -177,6 +177,7 @@ END_STATS
         f.print "    <tr class=\"#{Status::html_class(t.status)}\">\n"
         f.print "      <td>#{t.suite_name}</td>\n"
         f.print "      <td><a href=\"#{t.output_link}\">#{t.test_name}</a></td>\n"
+        f.print "      <td>#{t.reason_for_ignoring}</td>\n"
         f.print "    </tr>\n"
       end
     end

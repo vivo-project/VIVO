@@ -93,8 +93,9 @@ class OutputSuiteParser
             t.output_link = s.output_link + md[2]
             if md[1] == 'status_passed'
               t.status = Status::GOOD
-            elsif        @output_manager.ignore_test?(t.suite_name, t.test_name)
+            elsif @output_manager.ignore_test?(t.suite_name, t.test_name)
               t.status = Status::FAIR
+              t.reason_for_ignoring = @output_manager.get_reason_for_ignoring(t.suite_name, t.test_name)
             else
               t.status = Status::BAD
             end
