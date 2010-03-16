@@ -141,7 +141,9 @@ class OutputManager
   #
   def initialize(properties)
     @output_directory = properties['output_directory']
-    @ignored_tests_file = properties['ignored_tests_file']
+      
+    test_root_directory = properties['test_root_directory']
+    @ignored_tests_file = File.expand_path("ignored_tests.txt", test_root_directory)
 
     sanity_checks_on_parameters()
 
@@ -152,7 +154,6 @@ class OutputManager
     FileUtils::remove_file(@output_summary_file) if File.exist?(@output_summary_file)
 
     @ignored_tests = load_list_of_ignored_tests()
-    puts ">>>ignored tests: #{@ignored_tests}"
   end
 
   # Write a message to the log file
