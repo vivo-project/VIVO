@@ -61,9 +61,13 @@
 			</condition>
 		</fail>
 
-		<property file="${acceptance.properties.file}" prefix="acceptance." />
 		<property name="acceptance.script.directory" location="utilities/acceptance-tests/script"/>
 
+		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
+			<arg value="run_acceptance_tests.rb" />
+			<arg value="${acceptance.properties.file}" />
+		</exec>
+		<fail message="Just testing to see what a broken build does." />
 		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
 			<arg value="run_acceptance_tests.rb" />
 			<arg value="${acceptance.properties.file}" />
