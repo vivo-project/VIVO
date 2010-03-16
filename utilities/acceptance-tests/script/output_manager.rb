@@ -80,6 +80,42 @@ class OutputManager
     if !File.writable?(@output_directory)
       raise "Output directory '#{@output_directory}' is not writable."
     end
+
+    if @ignored_tests_file == nil
+      raise("Properties file must contain a value for 'ignored_tests_file'")
+    end
+
+    if !File.exist?(@ignored_tests_file)
+      raise "Ignored tests file  '#{@ignored_tests_file}' does not exist."
+    end
+
+    if !File.readable?(@ignored_tests_file)
+      raise "Ignored tests file  '#{@ignored_tests_file}' is not readable."
+    end
+
+    if !File.file?(@ignored_tests_file)
+      raise "Ignored tests file  '#{@ignored_tests_file}' is not a file."
+    end
+  end
+
+  # Load the list of ignored tests. Each line is [suite_name], [test_name]
+  #
+  def load_list_of_ignored_tests()
+    ignored_tests = []
+    File.open(@ignored_tests_file) do |f|
+      f.each_line do |line|
+        line.strip!
+        if line.length == 0 || line[0] == ?# || line[0] == ?!
+          # ignore blank lines, and lines starting with '#' or '!'.
+        elsif line =~ /^([^,]+),([^,]+)$/
+          # suite name and test name separated by ',' and optional whitespace.
+          ignored_tests << [$1.strip, $2.strip]
+        else
+          raise "Invalid line in ignored tests file: '#{line}'"
+        end
+      end
+    end
+    return ignored_tests
   end
 
   # The CSS file for the output summary exists in the script directory.
@@ -99,14 +135,18 @@ class OutputManager
   #
   def initialize(properties)
     @output_directory = properties['output_directory']
+    @ignored_tests_file = properties['ignored_tests_file']
 
     sanity_checks_on_parameters()
 
     @log_file = File.expand_path("log_file.txt", @output_directory)
     FileUtils::remove_file(@log_file) if File.exist?(@log_file)
 
-    @output_summary_file = File.expand_path("summary.html", @output_directory)
+    @output_summary_file = File.expand_path("index.html", @output_directory)
     FileUtils::remove_file(@output_summary_file) if File.exist?(@output_summary_file)
+
+    @ignored_tests = load_list_of_ignored_tests()
+    puts ">>>ignored tests: #{@ignored_tests}"
   end
 
   # Write a message to the log file
@@ -126,7 +166,10 @@ class OutputManager
   # Have we decided to ignore this test if it fails?
   #
   def ignore_test?(suite_name, test_name)
-    false
+    @ignored_tests.each do |pair|
+      return true if pair[0] == suite_name && pair[1] == test_name
+    end
+    return false
   end
 
   def summarize()
