@@ -78,7 +78,7 @@ END_HEADER
       how_many_ignore += 1 if t.status == Status::FAIR
       how_many_fail += 1 if t.status == Status::BAD
     end
-    
+
     if how_many_pass > 0
       pass_class = Status::html_class(Status::GOOD)
     else
@@ -150,8 +150,8 @@ END_STATS
         f.print "      <td>#{t.suite_name}</td>\n"
         f.print "      <td><a href=\"#{t.output_link}\">#{t.test_name}</a></td>\n"
         f.print "    </tr>\n"
-        
-        puts "Test failed: #{t.suite_name}, #{t.test_name}"
+
+        puts ">>>>>TEST FAILED: #{t.suite_name}, #{t.test_name} (not in ignored_tests.txt)"
       end
     end
 
