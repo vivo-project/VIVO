@@ -211,6 +211,11 @@ class OutputManager
     end
 
     log("INFO ", "Summary complete")
+
+    if @osp.overall_status == Status::BAD
+      log("ERROR", "Tests failed.")
+      raise("Tests failed.")
+    end
   end
 end
 
@@ -235,5 +240,5 @@ if File.expand_path($0) == File.expand_path(__FILE__)
   properties = PropertyFileReader.read(ARGV[0])
 
   om = OutputManager.new(properties)
-  om.summarize()
+  success = om.summarize()
 end

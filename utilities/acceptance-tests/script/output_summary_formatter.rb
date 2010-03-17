@@ -127,6 +127,8 @@ END_STATS
   # Write a table of failed tests to the summary file, with links
   # to the detailed output for each test.
   #
+  # While we're at it, write the list of failed tests to the console.
+  #
   # f -- a file, already open for output.
   #
   def write_summary_failure_section(f)
@@ -148,6 +150,8 @@ END_STATS
         f.print "      <td>#{t.suite_name}</td>\n"
         f.print "      <td><a href=\"#{t.output_link}\">#{t.test_name}</a></td>\n"
         f.print "    </tr>\n"
+        
+        puts "Test failed: #{t.suite_name}, #{t.test_name}"
       end
     end
 
