@@ -75,13 +75,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Class hierarchy</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">add a person to associate Joe User with.</td>
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Class Hierarchy</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>link=exact:foaf:Agent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Class Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add New Individual in This Class']</td>
 	<td></td>
 </tr>
 <tr>
@@ -100,18 +120,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Type']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Type Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>TypeURI</td>
+	<td>label=core:Faculty Member</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">comment pause for class inference</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>500</td>
 	<td></td>
 </tr>
 <tr>
