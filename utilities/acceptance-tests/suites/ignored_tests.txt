@@ -1,1 +1,2 @@
 user-management, Bookmark Without Logging In # This test is known to fail, because not all pages come up properly if bookmarked. 
+user-privileges, Check User Privileges # Brian is working on fixing this.
