@@ -40,6 +40,7 @@ What are we doing?
 require 'open-uri'
 require 'date'
 require File.expand_path('database_cleanser', File.dirname(File.expand_path(__FILE__)))
+require File.expand_path('upload_area_cleanser', File.dirname(File.expand_path(__FILE__)))
 require File.expand_path('property_file_reader', File.dirname(File.expand_path(__FILE__)))
 require File.expand_path('output_manager', File.dirname(File.expand_path(__FILE__)))
 
@@ -155,7 +156,7 @@ class AcceptanceRunner
     get_sub_directories(@test_root_directory).each do |suite_path|
       suite_file_path = File.expand_path("Suite.html", suite_path)
       if File.exist?(suite_file_path)
-        cleanse_data_model()
+        cleanse_the_model()
         run_test_suite(suite_file_path)
       else
         log_warn("No suite file found in #{suite_path}")
@@ -164,9 +165,10 @@ class AcceptanceRunner
     time_stamp("End time")
   end
 
-  # Before each suite, call the cleanser.
-  def cleanse_data_model()
+  # Before each suite, call the cleansers.
+  def cleanse_the_model()
     @database_cleanser.cleanse()
+    @upload_area_cleanser.cleanse()
   end
 
   def run_test_suite(suite_file_path)
@@ -222,6 +224,7 @@ class AcceptanceRunner
     sanity_checks_on_parameters()
 
     @database_cleanser = DatabaseCleanser.new(properties)
+    @upload_area_cleanser = UploadAreaCleanser.new(properties)
     
     @output_manager = OutputManager.new(properties)
     @output_manager.empty_log()

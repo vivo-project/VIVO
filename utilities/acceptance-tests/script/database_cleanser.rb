@@ -42,6 +42,7 @@ class DatabaseCleanser
     raise("Properties file must contain a value for 'tomcat_stop_delay'") if @tomcat_stop_delay == nil
     raise("Properties file must contain a value for 'tomcat_start_command'") if @tomcat_start_command == nil
     raise("Properties file must contain a value for 'tomcat_start_delay'") if @tomcat_start_delay == nil
+    raise("Properties file must contain a value for 'website_url'") if @website_url == nil
     raise("Properties file must contain a value for 'mysql_username'") if @mysql_username == nil
     raise("Properties file must contain a value for 'mysql_password'") if @mysql_password == nil
     raise("Properties file must contain a value for 'database_name'") if @database_name == nil
@@ -76,7 +77,12 @@ class DatabaseCleanser
     system(@tomcat_start_command)
     puts "   Waiting #{@tomcat_start_delay} seconds..."
     sleep(@tomcat_start_delay)
-    open("http://localhost:8080"){|f|}
+    begin
+    open(@website_url){|f|}
+    rescue Timeout::Error
+      puts ">>> HTTP request timed out!"
+      raise
+    end
     puts "   ... started."
   end
 
@@ -105,6 +111,7 @@ class DatabaseCleanser
     @tomcat_stop_delay = properties['tomcat_stop_delay'].to_i
     @tomcat_start_command = properties['tomcat_start_command']
     @tomcat_start_delay = properties['tomcat_start_delay'].to_i
+    @website_url = properties['website_url']
     @mysql_username = properties['mysql_username']
     @mysql_password = properties['mysql_password']
     @database_name = properties['database_name']
