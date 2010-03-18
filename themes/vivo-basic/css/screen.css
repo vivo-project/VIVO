@@ -603,7 +603,7 @@ ul.properties li {
   list-style-type: none;
 }
 
-div.vitroNsPropertyValue,
+/*div.vitroNsPropertyValue,*/
 div.datatypePropertyValue,
 ul.properties li,
 ul.datatypePropertyValue li { 
