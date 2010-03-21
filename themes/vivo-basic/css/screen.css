@@ -208,6 +208,10 @@ div#labelAndMoniker { margin-bottom: 1.5em; }
     display: inline;
 }
 
+.editing #labelAndMoniker div {
+    display: block;
+}
+
 #label h2,
 #label h3 {
   display: inline;
@@ -216,6 +220,11 @@ div#labelAndMoniker { margin-bottom: 1.5em; }
 
 em.moniker { 
     color: #9c9c9c; 
+}
+
+.editing #moniker {
+    display: block;
+    margin-top: 1em;
 }
 
 ul.externalLinks { margin: 0 0 1.5em 0; }
@@ -603,7 +612,6 @@ ul.properties li {
   list-style-type: none;
 }
 
-/*div.vitroNsPropertyValue,*/
 div.datatypePropertyValue,
 ul.properties li,
 ul.datatypePropertyValue li { 
@@ -647,10 +655,10 @@ span.editLinks a.edit { padding-right: 4px; }
     margin-top: -6px;
 }
 
-#moniker .statementWrap:hover span.editLinks {
-    position: static;
-    display: inline;
-    margin-left: 6px;
+/* Needed when citation appears without a thumbnail, at the bottom of
+the individual display page. */
+.statementWrap .citation {
+    clear: both;
 }
 
 
