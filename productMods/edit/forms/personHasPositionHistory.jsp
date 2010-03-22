@@ -108,7 +108,7 @@
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
     "n3optional"    : [ "${organizationNameAssertion}","${organizationUriAssertion}",
                         "${endYearAssertion}"],
-    "newResources"  : { "positionUri" : "${defaultNamespace}/position" },
+    "newResources"  : { "positionUri" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "organizationUri" ],

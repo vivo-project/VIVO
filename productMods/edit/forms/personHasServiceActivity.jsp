@@ -116,7 +116,7 @@
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearMonthAssertion}" ],
     "n3optional"    : [ "${descriptionAssertion}", "${organizationNameAssertion}","${organizationUriAssertion}",
                         "${endYearMonthAssertion}"],
-    "newResources"  : { "activityUri" : "${defaultNamespace}/serviceactivity" },
+    "newResources"  : { "activityUri" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "organizationUri" ],
