@@ -89,6 +89,10 @@
     ?organizationUri <http://vivoweb.org/ontology/core#organizationRelatedActivity> ?activityUri .
 </v:jsonset>
 
+<v:jsonset var="serviceSubClassAssertion">
+	?activityUri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?serviceSubClass . 
+</v:jsonset>
+
 <v:jsonset var="n3ForStmtToPerson"  >
     @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.    
     @prefix core: <http://vivoweb.org/ontology/core#>.    
@@ -102,7 +106,6 @@
 <v:jsonset var="activityClass">http://vivoweb.org/ontology/core#ServiceActivity</v:jsonset>
 <v:jsonset var="organizationClass">http://xmlns.com/foaf/0.1/Organization</v:jsonset>
 
-
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
@@ -115,11 +118,11 @@
     
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearMonthAssertion}" ],
     "n3optional"    : [ "${descriptionAssertion}", "${organizationNameAssertion}","${organizationUriAssertion}",
-                        "${endYearMonthAssertion}"],
+                        "${endYearMonthAssertion}", "${serviceSubClassAssertion}"],
     "newResources"  : { "activityUri" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "organizationUri" ],
+    "urisOnForm"     : [ "organizationUri" , "serviceSubClass" ],
     "literalsOnForm" :  [ "title", "description", "organizationName", 
     					  "startYearMonth", "endYearMonth" ],
     "filesOnForm"    : [ ],
@@ -168,7 +171,18 @@
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ "${organizationUriAssertion}" ]
-      },      
+      },   
+     "serviceSubClass" : {
+         "newResource"      : "false",
+         "validators"       : [  ],
+         "optionsType"      : "CHILD_VCLASSES",
+         "literalOptions"   : [ "--" ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "${activityClass}",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",
+         "assertions"       : [ "${serviceSubClassAssertion}" ]
+      },          
       "organizationName" : {
          "newResource"      : "false",
          "validators"       : [  ],
@@ -240,6 +254,7 @@
 <h2>${title}</h2>
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="title" id="title" size="30" />
+	<v:input type="select" label="activity type" id="serviceSubClass"/>
 	<v:input type="textarea" label="description" id="description" rows="5" cols="30" />
 	<v:input type="select" label="organization" id="organizationUri"  />
 	<v:input type="text" label="organization name (if not in dropdown above)" id="organizationName" size="30" />
