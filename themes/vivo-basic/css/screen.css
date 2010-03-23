@@ -650,16 +650,6 @@ span.editLinks a.edit { padding-right: 4px; }
 }
 
 
-#label .editLinks {
-    margin-top: -6px;
-}
-
-/* Needed when citation appears without a thumbnail, at the bottom of
-the individual display page. */
-.statementWrap .citation {
-    clear: both;
-}
-
 
 span.statementWrap:hover em.nonEditable {
   padding-top: 5px;
