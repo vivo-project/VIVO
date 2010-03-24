@@ -92,4 +92,38 @@
 		</exec>
 	</target>
 
+	<!-- ================================= 
+          target: licenser             
+          
+          Hudson (continuous integration) 
+          uses this to check that all 
+          appropriate files have license tags. 
+         ================================= -->
+	<target name="licenser" description="--> Check licensing tags">
+		<property name="licenser.script.directory" location="utilities/release_tools" />
+
+		<property name="licenser.properties.file"
+		          location="${licenser.script.directory}/licenser.properties" />
+		<fail message="You must create a &quot;${licenser.properties.file}&quot; file.">
+			<condition>
+				<not>
+					<available file="${licenser.properties.file}" />
+				</not>
+			</condition>
+		</fail>
+
+		<exec executable="ruby" dir="${licenser.script.directory}" failonerror="true">
+			<arg value="licenser.rb" />
+			<arg value="${licenser.properties.file}" />
+			<redirector outputproperty="licenser.test.output" alwayslog="true" />
+		</exec>
+
+		<fail message="Errors were detected in the console output from the licenser.">
+			<condition>
+				<contains string="${licenser.test.output}"
+				          substring="WARN: Found no license tag"
+				          casesensitive="false" />
+			</condition>
+		</fail>
+	</target>
 </project>
