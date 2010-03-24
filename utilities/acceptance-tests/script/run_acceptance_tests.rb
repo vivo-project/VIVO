@@ -44,33 +44,6 @@ require File.expand_path('upload_area_cleanser', File.dirname(File.expand_path(_
 require File.expand_path('property_file_reader', File.dirname(File.expand_path(__FILE__)))
 require File.expand_path('output_manager', File.dirname(File.expand_path(__FILE__)))
 
-=begin
-<h1>Test suite results </h1>
-<table>
-<tr><td>result:</td><td>passed</td></tr>
-<tr><td>totalTime:</td><td>12</td></tr>
-<tr><td>numTestTotal:</td><td>6</td></tr>
-<tr><td>numTestPasses:</td><td>6</td></tr>
-<tr><td>numTestFailures:</td><td>0</td></tr>
-<tr><td>numCommandPasses:</td><td>71</td></tr>
-<tr><td>numCommandFailures:</td><td>0</td></tr>
-<tr><td>numCommandErrors:</td><td>0</td></tr>
-<tr><td>Selenium Version:</td><td>2.0</td></tr>
-<tr><td>Selenium Revision:</td><td>a1</td></tr>
-<tr><td>
-  <table id="suiteTable" class="selenium" border="1" cellpadding="1" cellspacing="1"><tbody>
-  <tr class="title status_passed"><td><b>Test Suite</b></td></tr>
-  <tr class="  status_passed"><td><a href="#testresult0">Create New User</a></td></tr>
-  <tr class="  status_passed"><td><a href="#testresult1">First Time Login</a></td></tr>
-  <tr class="  status_passed"><td><a href="#testresult2">Try New Password</a></td></tr>
-  <tr class="  status_passed"><td><a href="#testresult3">Edit User Info</a></td></tr>
-  <tr class="  status_passed"><td><a href="#testresult4">Confirm Edited Info</a></td></tr>
-  <tr class="  status_passed"><td><a href="#testresult5">Delete New User</a></td></tr>
-  </tbody></table>
-  </td><td>&nbsp;</td></tr>
-</table>
-=end
-
 class AcceptanceRunner
   # ------------------------------------------------------------------------------------
   private
