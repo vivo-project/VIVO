@@ -7,7 +7,6 @@ Create a copy of the source files, with licensing information inserted.
 2010-01-26 initial version J.Blake
 --------------------------------------------------------------------------------
 =end
-
 require 'date'
 require 'fileutils'
 
@@ -52,7 +51,7 @@ class LicenserStats
 
     # keep track of how many files are copied
     @file_count = 0
-    
+
     #keep track of how many directories are copied
     @dir_count = 0
   end
@@ -120,8 +119,8 @@ class Licenser
     end
     return text
   end
-  
-  # The globs in the exceptions file are assumed to be 
+
+  # The globs in the exceptions file are assumed to be
   # relative to the source directory. Make them explicitly so.
   #
   # Ignore any blank lines or lines that start with a '#'
@@ -145,7 +144,7 @@ class Licenser
     @stats.enter_directory(source_dir)
 
     Dir.mkdir(target_dir) if !@scan_only
-    
+
     Dir.foreach(source_dir) do |filename|
       source_path = "#{source_dir}/#{filename}"
       target_path = "#{target_dir}/#{filename}"
@@ -168,7 +167,6 @@ class Licenser
           end
         end
       end
-      
 
       if is_skipped_directory
         # do nothing
@@ -217,7 +215,7 @@ class Licenser
     end
     return false
   end
-  
+
   # This file would be eligible for licensing if we weren't in scan-only mode.
   #
   def scan_file(source_path, filename)
@@ -282,7 +280,7 @@ class Licenser
 
     target_file.print "#{ends[1].strip}\n"
   end
-  
+
   # This file either doesn't match any of the file-matching strings, or
   # matches an exception
   #
@@ -298,13 +296,13 @@ class Licenser
   # * source_dir is a String -- the path to the top level directory to be copied
   # * target_dir is a String -- the path to the top level directory to copy into
   #      (must not exist, but its parent must exist!)(ignored if scan_only is set)
-  # * file_matchers is an array of Strings -- filename globs that match the files we 
+  # * file_matchers is an array of Strings -- filename globs that match the files we
   #      want to license.
   # * license_file is a String -- the path to the text of the license agreement
   #      (with a ${year} token in it)
-  # * known_exceptions_file is a String -- the path to a list of filename/path globs 
+  # * known_exceptions_file is a String -- the path to a list of filename/path globs
   #      that match the files that we know should have no license tags in them.
-  # * scan_only is a Boolean -- if true, we scan the entire source dir without copying, 
+  # * scan_only is a Boolean -- if true, we scan the entire source dir without copying,
   #      and target_dir is ignored.
   # * full_report is a Boolean -- if true, we give a full log instead of just a summary.
   #
@@ -313,17 +311,17 @@ class Licenser
       raise "Source directory does not exist: #{source_dir}"
     end
 
-    if !scan_only 
+    if !scan_only
       if File.exist?(target_dir)
         raise "Target directory already exists: #{target_dir}"
       end
-      
+
       target_parent = File.dirname(target_dir)
       if !File.exist?(target_parent)
         raise "Path to target directory doesn't exist: #{target_parent}"
       end
     end
-    
+
     if !File.exist?(license_file)
       raise "License file does not exist: #{license_file}"
     end
@@ -334,7 +332,7 @@ class Licenser
 
     @source_dir = source_dir
     @target_dir = target_dir
-    
+
     @file_matchers = file_matchers
 
     @license_file = license_file
@@ -342,9 +340,9 @@ class Licenser
 
     @known_exceptions_file = known_exceptions_file
     @known_exceptions = prepare_exception_globs(known_exceptions_file, source_dir)
-    
+
     @scan_only = scan_only
-    
+
     @full_report = full_report
     @stats = LicenserStats.new(source_dir, file_matchers, full_report)
   end
@@ -386,11 +384,9 @@ class Licenser
   end
 end
 
-
 # ------------------------------------------------------------------------
 # Main routine
 # ------------------------------------------------------------------------
-
 
 # BOGUS test harness
 =begin
@@ -401,7 +397,6 @@ known_exceptions_file = '/Vivoweb_Stuff/Testing_licenser/known_exceptions.txt'
 full_report = true;
 scan_only = true;
 =end
-
 
 source_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 license_file = "#{source_dir}/doc/license.txt"
