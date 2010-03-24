@@ -9,6 +9,7 @@ Create a copy of the source files, with licensing information inserted.
 =end
 require 'date'
 require 'fileutils'
+require File.expand_path('acceptance-tests/script/property_file_reader', File.dirname(File.dirname(File.expand_path(__FILE__))))
 
 class LicenserStats
   attr_reader :substitutions
@@ -106,11 +107,53 @@ class Licenser
   private
   # ------------------------------------------------------------------------------------
   #
+  # Confirm that the parameters are reasonable.
+  #
+  def sanity_checks_on_parameters()
+    # Check that all necessary properties are here.
+    raise("Properties file must contain a value for 'source_dir'") if @source_dir == nil
+    raise("Properties file must contain a value for 'known_exceptions'") if @known_exceptions_file == nil
+    raise("Properties file must contain a value for 'file_matchers'") if @file_match_list == nil
+    raise("Properties file must contain a value for 'full_report'") if @full_report_string == nil
+
+    if !File.exist?(@source_dir)
+      raise "Source directory does not exist: #{@source_dir}"
+    end
+
+    if !File.exist?(@known_exceptions_file)
+      raise "Known exceptions file does not exist: #{@known_exceptions_file}"
+    end
+
+    if !@scan_only
+      raise("Properties file must contain a value for 'target_dir'") if @target_dir == nil
+      raise("Properties file must contain a value for 'license_file'") if @license_file == nil
+
+      if File.exist?(@target_dir)
+        raise "Target directory already exists: #{@target_dir}"
+      end
+
+      target_parent = File.dirname(@target_dir)
+      if !File.exist?(@target_parent)
+        raise "Path to target directory doesn't exist: #{@target_parent}"
+      end
+
+      if !File.exist?(@license_file)
+        raise "License file does not exist: #{@license_file}"
+      end
+    end
+  end
+
+  #
   # Prepare the license as an array of lines of text,
   # with the current year substituted in for ${year}
   #
   def prepare_license_text(license_file)
+    if (license_file == nil)
+      return []
+    end
+
     year_string = DateTime.now.year.to_s
+
     text = []
     File.open(license_file) do |file|
       file.each do |line|
@@ -126,12 +169,13 @@ class Licenser
   # Ignore any blank lines or lines that start with a '#'
   #
   def prepare_exception_globs(exceptions_file, source_dir)
+    source_path = File.expand_path(source_dir)
     globs = []
     File.open(exceptions_file) do |file|
       file.each do |line|
         glob = line.strip
         if (glob.length > 0) && (glob[0..0] != '#')
-          globs << "#{source_dir}/#{glob}".gsub('//', '/')
+          globs << "#{source_path}/#{glob}".gsub('//', '/')
         end
       end
     end
@@ -201,6 +245,7 @@ class Licenser
   # Does this file path match any of the exceptions?
   #
   def path_matches_exception?(path)
+    path = File.expand_path(path)
     @known_exceptions.each do |pattern|
       return true if File.fnmatch(pattern, path)
     end
@@ -293,58 +338,30 @@ class Licenser
   # ------------------------------------------------------------------------------------
 
   # Setup and get ready to process.
-  # * source_dir is a String -- the path to the top level directory to be copied
-  # * target_dir is a String -- the path to the top level directory to copy into
-  #      (must not exist, but its parent must exist!)(ignored if scan_only is set)
-  # * file_matchers is an array of Strings -- filename globs that match the files we
-  #      want to license.
-  # * license_file is a String -- the path to the text of the license agreement
-  #      (with a ${year} token in it)
-  # * known_exceptions_file is a String -- the path to a list of filename/path globs
-  #      that match the files that we know should have no license tags in them.
-  # * scan_only is a Boolean -- if true, we scan the entire source dir without copying,
-  #      and target_dir is ignored.
-  # * full_report is a Boolean -- if true, we give a full log instead of just a summary.
   #
-  def initialize(source_dir, target_dir, file_matchers, license_file, known_exceptions_file, scan_only, full_report)
-    if !File.exist?(source_dir)
-      raise "Source directory does not exist: #{source_dir}"
-    end
+  # * properties is a map of keys to values, probably parsed from a properties file.
+  # * apply is a boolean.
+  #       If false, just scan the source directory for problems.
+  #       If true, copy from the source directory to the target, applying the license.
+  #
+  def initialize(properties, apply)
+    @scan_only = !apply
 
-    if !scan_only
-      if File.exist?(target_dir)
-        raise "Target directory already exists: #{target_dir}"
-      end
+    @source_dir = properties['source_dir']
+    @target_dir = properties['target_dir']
+    @file_match_list = properties['file_matchers']
+    @license_file = properties['license_file']
+    @known_exceptions_file = properties['known_exceptions']
+    @full_report_string = properties['full_report']
 
-      target_parent = File.dirname(target_dir)
-      if !File.exist?(target_parent)
-        raise "Path to target directory doesn't exist: #{target_parent}"
-      end
-    end
+    sanity_checks_on_parameters()
 
-    if !File.exist?(license_file)
-      raise "License file does not exist: #{license_file}"
-    end
+    @full_report = @full_report_string === 'true' || @full_report_string === 'yes'
+    @file_matchers = @file_match_list.strip.split(/,\s*/)
+    @license_text = prepare_license_text(@license_file)
+    @known_exceptions = prepare_exception_globs(@known_exceptions_file, @source_dir)
 
-    if !File.exist?(known_exceptions_file)
-      raise "Known exceptions file does not exist: #{known_exceptions_file}"
-    end
-
-    @source_dir = source_dir
-    @target_dir = target_dir
-
-    @file_matchers = file_matchers
-
-    @license_file = license_file
-    @license_text = prepare_license_text(license_file)
-
-    @known_exceptions_file = known_exceptions_file
-    @known_exceptions = prepare_exception_globs(known_exceptions_file, source_dir)
-
-    @scan_only = scan_only
-
-    @full_report = full_report
-    @stats = LicenserStats.new(source_dir, file_matchers, full_report)
+    @stats = LicenserStats.new(@source_dir, @file_matchers, @full_report)
   end
 
   # Start the recursive scanning (and copying).
@@ -382,37 +399,48 @@ class Licenser
     puts "    scan_only = #{@scan_only}"
     puts "    full_report = #{@full_report}"
   end
+  
+  # Were we successful or not?
+  def success?
+    return @stats.missing_tags.empty?
+  end
 end
 
-# ------------------------------------------------------------------------
-# Main routine
-# ------------------------------------------------------------------------
+#
+#
+# ------------------------------------------------------------------------------------
+# Standalone calling.
+#
+# Do this if this program was called from the command line. That is, if the command
+# expands to the path of this file.
+# ------------------------------------------------------------------------------------
+#
 
-# BOGUS test harness
-=begin
-source_dir = '/Vivoweb_Stuff/Testing_licenser/sourceDir'
-target_dir = '/Vivoweb_Stuff/Testing_licenser/targetDir'
-license_file = "#{File.dirname(File.dirname(File.expand_path(__FILE__)))}/doc/license.txt"
-known_exceptions_file = '/Vivoweb_Stuff/Testing_licenser/known_exceptions.txt'
-full_report = true;
-scan_only = true;
-=end
+if File.expand_path($0) == File.expand_path(__FILE__)
+  if ARGV.length == 0
+    raise("No arguments - usage is: ruby licenser.rb <properties_file> [apply_to_target]")
+  end
+  if !File.file?(ARGV[0])
+    raise "File does not exist: '#{ARGV[0]}'."
+  end
 
-source_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
-license_file = "#{source_dir}/doc/license.txt"
-known_exceptions_file = "#{source_dir}/utilities/known_exceptions.txt"
-full_report = false;
+  properties = PropertyFileReader.read(ARGV[0])
 
-if ARGV.length == 0
-  scan_only = true;
-  target_dir = "";
-else
-  scan_only = false;
-  target_dir = ARGV[0]
+  if ARGV.length > 1
+    if ARGV[1] == "apply_to_target"
+      apply = true
+    else
+      apply = false
+    end
+  end
+
+  l = Licenser.new(properties, apply)
+  l.process
+  l.report
+
+  if l.success?
+    return 0
+  else 
+    return 1
+  end
 end
-
-file_matchers = ['*.java', '*.jsp', '*.tld', '*.xsl', '*.xslt', '*.css', '*.js', 'build.xml']
-
-l = Licenser.new(source_dir, target_dir, file_matchers, license_file, known_exceptions_file, scan_only, full_report)
-l.process
-l.report
