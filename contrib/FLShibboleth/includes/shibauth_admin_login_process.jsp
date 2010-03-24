@@ -1,3 +1,5 @@
+<%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
+
 <%@ page isThreadSafe="false" %>
 <%@ page import="java.util.*" %>
 <%@ page import="javax.servlet.*" %>

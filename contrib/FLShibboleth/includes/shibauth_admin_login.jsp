@@ -1,3 +1,5 @@
+<%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
+
 <%@ taglib prefix="form" uri="http://vitro.mannlib.cornell.edu/edit/tags" %>
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Portal" %>
