@@ -100,7 +100,7 @@
           appropriate files have license tags. 
          ================================= -->
 	<target name="licenser" description="--> Check licensing tags">
-		<property name="licenser.script.directory" location="utilities/release_tools" />
+		<property name="licenser.script.directory" location="utilities/release-tools" />
 
 		<property name="licenser.properties.file"
 		          location="${licenser.script.directory}/licenser.properties" />
