@@ -108,13 +108,13 @@ vitro-core/webapp/web/src/widget/*
 vitro-core/webapp/web/src/widget/**/*
 vitro-core/webapp/web/src/xml/*
 
-# Third-party tlds
-vitro-core/webapp/config/c.tld
-vitro-core/webapp/config/fn.tld
-vitro-core/webapp/config/sparqltag.tld
-vitro-core/webapp/config/taglibs-mailer.tld
-vitro-core/webapp/config/taglibs-random.tld
-vitro-core/webapp/config/taglibs-string.tld
+# PROBLEM? Third-party tlds - where do they come from?
+vitro-core/webapp/config/tlds/c.tld
+vitro-core/webapp/config/tlds/fn.tld
+vitro-core/webapp/config/tlds/sparqltag.tld
+vitro-core/webapp/config/tlds/taglibs-mailer.tld
+vitro-core/webapp/config/tlds/taglibs-random.tld
+vitro-core/webapp/config/tlds/taglibs-string.tld
 
 # PROBLEM: It appears that these files require a LICENSE file to accompany them.
 themes/vivo-basic/css/blueprint/grid.css
