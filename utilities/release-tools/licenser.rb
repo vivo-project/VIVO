@@ -439,8 +439,10 @@ if File.expand_path($0) == File.expand_path(__FILE__)
   l.report
 
   if l.success?
-    return 0
+    puts "Licenser was successful."
+    exit 0
   else 
-    return 1
+    puts "Licenser found problems."
+    exit 1
   end
 end
