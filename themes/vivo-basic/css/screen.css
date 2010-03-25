@@ -664,6 +664,12 @@ span.statementWrap:hover em.nonEditable {
     margin-left: 1em;
 }
 
+#dprop-vitro-links.editing li {
+    display: block;
+    border: 0;
+    padding: 0;
+    margin-bottom: .5em;
+}
 
 /************************
 Backend forms

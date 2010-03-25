@@ -27,6 +27,7 @@
     vreq.setAttribute("flagURI",flagURI);
 %>
 
+<%-- RY *** SET VARIABLES for uris & namespaces --%>
 
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
       to convey that the expression is used to retrieve any existing value for the field in an existing individual.
