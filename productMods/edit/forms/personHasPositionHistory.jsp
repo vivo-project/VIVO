@@ -230,8 +230,11 @@
         submitLabel = "Create new position history entry";
     }
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("../js/customForms/personHasPositionHistory.js"));
+    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/personHasPositionHistory.js"));
     request.setAttribute("customJs", customJs);
+    
+    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/personHasPositionHistory.css"));
+    request.setAttribute("customCss", customCss);   
 %>
 
 <jsp:include page="${preForm}" />
@@ -240,7 +243,7 @@
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
     <div id="orgNotListed">
-    If your organization is not listed, please <a href="#">add a new organization</a>
+    If your organization is not listed, please <a href="#">add a new organization</a>.
     </div>
     
     <div id="existingOrg">

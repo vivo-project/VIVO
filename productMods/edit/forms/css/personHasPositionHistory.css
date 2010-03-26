@@ -1,0 +1,14 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+#content form {
+    width: 50%;
+}
+
+#orgNotListed {
+    float: right;
+    margin-right: 20em;
+    width: 200px;
+    padding: 10px 0px 10px 16px;
+    border: 1px solid #9c9c9c;
+    
+}
