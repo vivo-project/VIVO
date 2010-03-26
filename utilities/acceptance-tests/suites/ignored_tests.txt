@@ -1,1 +1,13 @@
+#
+# This is a list of tests that we don't expect to have pass. When they
+# fail, they appear as warnings instead of errors.
+#
+# Each line contains the suite name, the test name, and an optional comment.
+# Like this:
+#     <suite name>, <test name> # Comment text
+
 user-management, Bookmark Without Logging In # This test is known to fail, because not all pages come up properly if bookmarked. 
+AdminSecurity,   AdminFirstLogin             # I need to talk to Holly
+AdminSecurity,   AdminBadLogin               # I need to talk to Holly
+AdminSecurity,   AdminChangePassword         # I need to talk to Holly
+AdminSecurity,   AdminLogouts                # I need to talk to Holly
