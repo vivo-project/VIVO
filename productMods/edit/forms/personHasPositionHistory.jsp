@@ -19,10 +19,10 @@
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
 <%
-	VitroRequest vreq = new VitroRequest(request);
-	WebappDaoFactory wdf = vreq.getWebappDaoFactory();
-	vreq.setAttribute("defaultNamespace", wdf.getDefaultNamespace());
-	
+    VitroRequest vreq = new VitroRequest(request);
+    WebappDaoFactory wdf = vreq.getWebappDaoFactory();
+    vreq.setAttribute("defaultNamespace", wdf.getDefaultNamespace());
+    
     String flagURI = null;
     if (vreq.getAppBean().isFlag1Active()) {
         flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
@@ -45,22 +45,22 @@
       and in the literalsOnForm --%>
 <c:set var="titlePred" value="${vivo}titleOrRole" />
 <v:jsonset var="titleExisting" >    
-	SELECT ?titleExisting WHERE {
-	  	?positionUri <${titlePred}> ?titleExisting }
+    SELECT ?titleExisting WHERE {
+          ?positionUri <${titlePred}> ?titleExisting }
 </v:jsonset>
 
 <%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="titleAssertion" >      
-	?positionUri <${titlePred}> ?title .
-	?positionUri <${rdf}label> ?title. 
+    ?positionUri <${titlePred}> ?title .
+    ?positionUri <${rdf}label> ?title. 
 </v:jsonset>
 
 <c:set var="involvedOrgNamePred" value="${vivo}involvedOrganizationName" />
 <v:jsonset var="organizationNameExisting" >      
       SELECT ?existingOrgName WHERE {  
-      	?positionUri <${involvedOrgNamePred}> ?existingOrgName }
+          ?positionUri <${involvedOrgNamePred}> ?existingOrgName }
 </v:jsonset>
 <v:jsonset var="organizationNameAssertion" >
       ?positionUri <${involvedOrgNamePred}> ?organizationName .
@@ -69,7 +69,7 @@
 <c:set var="startYearPred" value="${vivo}startYear" />
 <v:jsonset var="startYearExisting" >      
       SELECT ?startYearExisting WHERE {  
-      	?positionUri <${startYearPred}> ?startYearExisting }
+          ?positionUri <${startYearPred}> ?startYearExisting }
 </v:jsonset>
 <v:jsonset var="startYearAssertion" >
       ?positionUri <${startYearPred}> ?startYear .
@@ -78,7 +78,7 @@
 <c:set var="endYearPred" value="${vivo}endYear" />
 <v:jsonset var="endYearExisting" >      
       SELECT ?endYearExisting WHERE {  
-      	?positionUri <${endYearPred}> ?endYearExisting }
+          ?positionUri <${endYearPred}> ?endYearExisting }
 </v:jsonset>
 <v:jsonset var="endYearAssertion" >
       ?positionUri <${endYearPred}> ?endYear .
@@ -89,12 +89,12 @@
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
 <c:set var="positionInOrgPred" value="${vivo}positionInOrganization" />
 <v:jsonset var="organizationUriExisting" >      
-	SELECT ?existingOrgUri WHERE {
-		?positionUri <${positionInOrgPred}> ?existingOrgUri }
+    SELECT ?existingOrgUri WHERE {
+        ?positionUri <${positionInOrgPred}> ?existingOrgUri }
 </v:jsonset>
 <v:jsonset var="organizationUriAssertion" >      
-	?positionUri <${positionInOrgPred}> ?organizationUri .
-	?organizationUri <${vivo}organizationForPosition> ?positionUri .
+    ?positionUri <${positionInOrgPred}> ?organizationUri .
+    ?organizationUri <${vivo}organizationForPosition> ?positionUri .
 </v:jsonset>
 
 <v:jsonset var="n3ForStmtToPerson"  >
@@ -129,7 +129,7 @@
     "literalsInScope": { },
     "urisOnForm"     : [ "organizationUri" ],
     "literalsOnForm" :  [ "title", "organizationName", 
-    					  "startYear", "endYear" ],
+                          "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -158,7 +158,7 @@
          "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
-         "literalOptions"   : [ "--" ],
+         "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
          "objectClassUri"   : "${organizationClass}",
          "rangeDatatypeUri" : "",
@@ -203,35 +203,35 @@
 </c:set>
 <%
 
-	EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
-	if (editConfig == null) {
-		editConfig = new EditConfiguration(
-				(String) request
-				.getAttribute("editjson"));
-		EditConfiguration.putConfigInSession(editConfig,session);
-	}
-	
-	Model model = (Model) application.getAttribute("jenaOntModel");
-	String objectUri = (String) request.getAttribute("objectUri");
-	if (objectUri != null) {
-		editConfig.prepareForObjPropUpdate(model);
-	} else {
-		editConfig.prepareForNonUpdate(model);
-	}
-	
-	/* prepare the page title and text for the submit button */
-	String subjectName = ((Individual) request.getAttribute("subject")).getName();
-	String submitLabel = ""; 	
-	if (objectUri != null) {
-		request.setAttribute("title","Edit position entry for "+ subjectName);
-		submitLabel = "Save changes";
-	} else {
-		request.setAttribute("title","Create a new position entry for " + subjectName);
-		submitLabel = "Create new position history entry";
-	}
-	
-	List<String> customJs = new ArrayList<String>(Arrays.asList("../js/customForms/personHasPositionHistory.js"));
-	request.setAttribute("customJs", customJs);
+    EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
+    if (editConfig == null) {
+        editConfig = new EditConfiguration(
+                (String) request
+                .getAttribute("editjson"));
+        EditConfiguration.putConfigInSession(editConfig,session);
+    }
+    
+    Model model = (Model) application.getAttribute("jenaOntModel");
+    String objectUri = (String) request.getAttribute("objectUri");
+    if (objectUri != null) {
+        editConfig.prepareForObjPropUpdate(model);
+    } else {
+        editConfig.prepareForNonUpdate(model);
+    }
+    
+    /* prepare the page title and text for the submit button */
+    String subjectName = ((Individual) request.getAttribute("subject")).getName();
+    String submitLabel = "";     
+    if (objectUri != null) {
+        request.setAttribute("title","Edit position entry for "+ subjectName);
+        submitLabel = "Save changes";
+    } else {
+        request.setAttribute("title","Create a new position entry for " + subjectName);
+        submitLabel = "Create new position history entry";
+    }
+    
+    List<String> customJs = new ArrayList<String>(Arrays.asList("../js/customForms/personHasPositionHistory.js"));
+    request.setAttribute("customJs", customJs);
 %>
 
 <jsp:include page="${preForm}" />
@@ -239,6 +239,10 @@
 <h2>${title}</h2>
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+    <div id="orgNotListed">
+    If your organization is not listed, please <a href="#">add a new organization</a>
+    </div>
+    
     <div id="existingOrg">
         <v:input type="select" label="Organization" id="organizationUri"  />  
     </div>
@@ -248,7 +252,7 @@
     </div>
     
     <div id="position"> 
-	   <v:input type="text" label="Position Title" id="title" size="30" />
+        <v:input type="text" label="Position Title" id="title" size="30" />
         <v:input type="select" label="Position Type" id="type" />
 
         <v:input type="text" label="Start Year" id="startYear" size="4"/>    
