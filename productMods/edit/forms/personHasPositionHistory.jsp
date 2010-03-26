@@ -1,5 +1,9 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Arrays" %>
+
 <%@ page import="com.hp.hpl.jena.rdf.model.Literal"%>
 <%@ page import="com.hp.hpl.jena.rdf.model.Model"%>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
@@ -225,17 +229,32 @@
 		request.setAttribute("title","Create a new position entry for " + subjectName);
 		submitLabel = "Create new position history entry";
 	}
+	
+	List<String> customJs = new ArrayList<String>(Arrays.asList("../js/customForms/personHasPositionHistory.js"));
+	request.setAttribute("customJs", customJs);
 %>
 
-<jsp:include page="${preForm}"/>
+<jsp:include page="${preForm}" />
 
 <h2>${title}</h2>
+
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-	<v:input type="text" label="title" id="title" size="30" />
-	<v:input type="select" label="organization" id="organizationUri"  />
-	<v:input type="text" label="organization name (if not in dropdown above)" id="organizationName" size="30" />
-    <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>    
-    <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
+    <div id="existingOrg">
+        <v:input type="select" label="Organization" id="organizationUri"  />  
+    </div>
+    
+    <div id="newOrg">
+    
+    </div>
+    
+    <div id="position"> 
+	   <v:input type="text" label="Position Title" id="title" size="30" />
+        <v:input type="select" label="Position Type" id="type" />
+
+        <v:input type="text" label="Start Year" id="startYear" size="4"/>    
+        <v:input type="text" label="End Year" id="endYear" size="4"/>
+    </div>
+    
     <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
 </form>
 
