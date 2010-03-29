@@ -20,17 +20,17 @@ form textarea {
 }
 
 form a:link.cancel, form a:visited.cancel {
-	color: #f00;
-	border-color: #f00;
-}
-
-form select option{
-	padding-right: 5px;
+	color: #f70;
+	border-color: #f70;
 }
 
 form a:hover.cancel {
 	color: #fff;
-	background: #f00;
+	background: #f70;
+}
+
+form select option{
+	padding-right: 5px;
 }
 
 form dl {
@@ -55,5 +55,6 @@ form dl dt, form dl dd {
 }
 
 p.submit {
+  clear: left;
   margin-top: 1em;
 }

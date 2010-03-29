@@ -1,13 +1,21 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#content form {
-    width: 50%;
+#content form div {
+  clear: left;
 }
 
-#orgNotListed {
-    float: right;
-    margin-right: 20em;
+#content form #existing {
+  float: left;
+  clear: none;
+/*  width: 300px;*/
+  display: inline-block;
+}
+
+#content form #notListed {
+    float: left;
+    clear: none;
     width: 200px;
+    margin-left: 4em;
     padding: 10px 0px 10px 16px;
     border: 1px solid #9c9c9c;
     

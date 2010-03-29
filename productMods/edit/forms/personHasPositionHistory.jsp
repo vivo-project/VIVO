@@ -241,28 +241,28 @@
 
 <h2>${title}</h2>
 
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-    <div id="orgNotListed">
+<form action="<c:url value="/edit/processRdfForm2.jsp"/>"
+  <div id="existing">
+    <v:input type="select" label="Organization" id="organizationUri"  />  
+  </div>
+  
+  <div id="notListed">
     If your organization is not listed, please <a href="#">add a new organization</a>.
-    </div>
-    
-    <div id="existingOrg">
-        <v:input type="select" label="Organization" id="organizationUri"  />  
-    </div>
-    
-    <div id="newOrg">
-    
-    </div>
-    
-    <div id="position"> 
-        <v:input type="text" label="Position Title" id="title" size="30" />
-        <v:input type="select" label="Position Type" id="type" />
+  </div>
+  
+  <div id="newOrg">
+  
+  </div>
+  
+  <div id="position"> 
+    <v:input type="text" label="Position Title" id="title" size="30" />
+    <v:input type="select" label="Position Type" id="type" />
 
-        <v:input type="text" label="Start Year" id="startYear" size="4"/>    
-        <v:input type="text" label="End Year" id="endYear" size="4"/>
-    </div>
-    
-    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
+    <v:input type="text" label="Start Year" id="startYear" size="4"/>    
+    <v:input type="text" label="End Year" id="endYear" size="4"/>
+  </div>
+  
+  <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
 </form>
 
 <jsp:include page="${postForm}"/>
