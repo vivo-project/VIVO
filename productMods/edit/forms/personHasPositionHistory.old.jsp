@@ -43,16 +43,14 @@
 
 <c:set var="vivo" value="http://vivoweb.org/ontology/core#" />
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
-<c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
-<c:set var="label" value="${rdfs}label" />
-<c:set var="type" value="${rdf}type" />
+<c:set var="rdfs" value="<% VitroVocabulary.RDFS %>" />
 
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
       to convey that the expression is used to retrieve any existing value for the field in an existing individual.
       Each of these must then be referenced in the sparqlForExistingLiterals section of the JSON block below
       and in the literalsOnForm --%>
 <c:set var="titlePred" value="${vivo}titleOrRole" />
-<v:jsonset var="titleExisting" >  
+<v:jsonset var="titleExisting" >    
     SELECT ?titleExisting WHERE {
           ?positionUri <${titlePred}> ?titleExisting }
 </v:jsonset>
@@ -62,7 +60,16 @@
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="titleAssertion" >      
     ?positionUri <${titlePred}> ?title .
-    ?positionUri <${label}> ?title. 
+    ?positionUri <${rdf}label> ?title. 
+</v:jsonset>
+
+<c:set var="involvedOrgNamePred" value="${vivo}involvedOrganizationName" />
+<v:jsonset var="organizationNameExisting" >      
+      SELECT ?existingOrgName WHERE {  
+          ?positionUri <${involvedOrgNamePred}> ?existingOrgName }
+</v:jsonset>
+<v:jsonset var="organizationNameAssertion" >
+      ?positionUri <${involvedOrgNamePred}> ?organizationName .
 </v:jsonset>
 
 <c:set var="startYearPred" value="${vivo}startYear" />
@@ -87,41 +94,23 @@
       below in the n3ForEdit section, in whether the ..Existing variable goes in SparqlForExistingLiterals
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
 <c:set var="positionInOrgPred" value="${vivo}positionInOrganization" />
-<c:set var="orgForPositionPred" value="${vivo}organizationForPosition" />
 <v:jsonset var="organizationUriExisting" >      
     SELECT ?existingOrgUri WHERE {
         ?positionUri <${positionInOrgPred}> ?existingOrgUri }
 </v:jsonset>
 <v:jsonset var="organizationUriAssertion" >      
     ?positionUri <${positionInOrgPred}> ?organizationUri .
-    ?organizationUri <${orgForPositionPred}> ?positionUri .
+    ?organizationUri <${vivo}organizationForPosition> ?positionUri .
 </v:jsonset>
 
-<v:jsonset var="newOrgNameAssertion">
-    ?newOrg <${label}> ?newOrgName .
-</v:jsonset>
-
-<v:jsonset var="newOrgTypeAssertion">
-    ?newOrg <${type}> ?newOrgType .
-</v:jsonset>
-
-<v:jsonset var="n3ForStmtToPerson">       
-    @prefix core: <${vivo}> .     
+<v:jsonset var="n3ForStmtToPerson"  >
+    @prefix rdf:  <${rdf}>.    
+    @prefix core: <${vivo}>.    
 
     ?person      core:personInPosition  ?positionUri .
     ?positionUri core:positionForPerson ?person .
-    ?positionUri <${type}>   core:Position .
-    ?positionUri <${type}> <${flagURI}> .
-</v:jsonset>
-
-<v:jsonset var="n3ForNewOrg">
-    @prefix rdf: <${rdf}> .
-    @prefix rdfs: <${rdfs}> .
-    
-    ?newOrg <${label}> ?newOrgName .
-    ?newOrg <${type}> ?newOrgType .
-    ?positionUri <${positionInOrgPred}> ?newOrg .
-    ?newOrg <${orgForPositionPred}> ?positionUri .
+    ?positionUri rdf:type               core:Position .
+    ?positionUri rdf:type <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="postionClass">http://vivoweb.org/ontology/core#Position</v:jsonset>
@@ -139,18 +128,13 @@
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
-    
-    "n3optional"    : [ "${organizationUriAssertion}",                         
-                        "${n3ForNewOrg}", "${newOrgNameAsertion}", "${newOrgTypeAssertion}",                       
+    "n3optional"    : [ "${organizationNameAssertion}","${organizationUriAssertion}",
                         "${endYearAssertion}"],
-                        
-    "newResources"  : { "positionUri" : "${defaultNamespace}",
-                        "newOrg" : "${defaultNamespace}" },
-
+    "newResources"  : { "positionUri" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "organizationUri", "newOrgType" ],
-    "literalsOnForm" :  [ "title", "newOrgName", 
+    "urisOnForm"     : [ "organizationUri" ],
+    "literalsOnForm" :  [ "title", "organizationName", 
                           "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
@@ -187,8 +171,8 @@
          "rangeLang"        : "",
          "assertions"       : [ "${organizationUriAssertion}" ]
       },      
-      "newOrgName" : {
-         "newResource"      : "true",
+      "organizationName" : {
+         "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
@@ -196,19 +180,8 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : [ "${newOrgNameAssertion}" ]
+         "assertions"       : [ "${organizationNameAssertion}" ]
       },
-     "newOrgType" : {
-         "newResource"      : "false",
-         "validators"       : [  ],
-         "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
-         "literalOptions"   : [ "Select one" ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "${organizationClass}",
-         "rangeDatatypeUri" : "",
-         "rangeLang"        : "",
-         "assertions"       : [ "${newOrgTypeAssertion}" ]
-      },      
       "startYear" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
@@ -239,44 +212,35 @@
 
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     if (editConfig == null) {
-        editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
+        editConfig = new EditConfiguration(
+                (String) request
+                .getAttribute("editjson"));
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
-    if (objectUri != null) { // editing existing
+    if (objectUri != null) {
         editConfig.prepareForObjPropUpdate(model);
-    } else { // adding new
+    } else {
         editConfig.prepareForNonUpdate(model);
     }
     
+    /* prepare the page title and text for the submit button */
     String subjectName = ((Individual) request.getAttribute("subject")).getName();
-%> 
-
-    <c:set var="subjectName" value="<%= subjectName %>" />
-<%
-    if (objectUri != null) { // editing existing entry
-%>
-        <c:set var="editType" value="edit" />
-        <c:set var="title" value="Edit position entry for ${subjectName}" />
-        <c:set var="submitLabel" value="Save changes" />
-<% 
-    } else { // adding new entry
-%>
-        <c:set var="editType" value="add" />
-        <c:set var="title" value="Create a new position entry for ${subjectName}" />
-        <c:set var="submitLabel" value="position" />
-<%  } 
+    String submitLabel = "";     
+    if (objectUri != null) {
+        request.setAttribute("title","Edit position entry for "+ subjectName);
+        submitLabel = "Save changes";
+    } else {
+        request.setAttribute("title","Create a new position entry for " + subjectName);
+        submitLabel = "Create new position history entry";
+    }
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
-                                                                //, "forms/js/personHasPositionHistory.js"
-                                                                ));
+    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/personHasPositionHistory.js"));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css" 
-                                                                 //, "forms/css/personHasPositionHistory.css"
-                                                                 ));
+    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/personHasPositionHistory.css"));
     request.setAttribute("customCss", customCss);   
 %>
 
@@ -285,37 +249,27 @@
 <h2>${title}</h2>
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-    <c:if test="${editType == 'add'}">
-        
-        <!--  Hide on initial load in case JavaScript turned off. -->
-        <div id="addNewLink">
-            If your organization is not listed, please <a href="#">add a new organization</a>.
-        </div>
-    </c:if>
+    <div id="orgNotListed">
+    If your organization is not listed, please <a href="#">add a new organization</a>.
+    </div>
     
-    <div id="existing">
+    <div id="existingOrg">
         <v:input type="select" label="Organization" id="organizationUri"  />  
     </div>
     
-    <div id="new">
-        <h6>Add a New Organization</h6>
-        <v:input type="text" label="Organization Name" id="newOrgName" />
-        <v:input type="select" label="Select Organization Type" id="newOrgType" />
+    <div id="newOrg">
+    
     </div>
     
-    <div id="entry"> 
+    <div id="position"> 
         <v:input type="text" label="Position Title" id="title" size="30" />
         <v:input type="select" label="Position Type" id="type" />
 
-        <p class="inline"><v:input type="text" label="Start Year" id="startYear" size="4" /></p>    
-        <p class="inline"><v:input type="text" label="End Year" id="endYear" size="4" /></p>
+        <v:input type="text" label="Start Year" id="startYear" size="4"/>    
+        <v:input type="text" label="End Year" id="endYear" size="4"/>
     </div>
     
-    <!-- For Javascript -->
-    <input type="hidden" name="editType" value="add" />
-    <input type="hidden" name="entryType" value="position" /> 
-    
-    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
 </form>
 
 <jsp:include page="${postForm}"/>
