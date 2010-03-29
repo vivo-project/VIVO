@@ -99,6 +99,14 @@
     ?organizationUri <${orgForPositionPred}> ?positionUri .
 </v:jsonset>
 
+<v:jsonset var="positionTypeExisting">
+    SELECT ?existingPositionType WHERE {
+        ?positionUri <${type}> ?existingPositionType }
+</v:jsonset>
+<v:jsonset var="positionTypeAssertion">
+    ?positionUri <${type}> ?positionType .
+</v:jsonset>
+
 <v:jsonset var="newOrgNameAssertion">
     ?newOrg <${label}> ?newOrgName .
 </v:jsonset>
@@ -150,7 +158,7 @@
 
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "organizationUri", "newOrgType" ],
+    "urisOnForm"     : [ "organizationUri", "newOrgType", "positionType" ],
     "literalsOnForm" :  [ "title", "newOrgName", 
                           "startYear", "endYear" ],
     "filesOnForm"    : [ ],
@@ -158,12 +166,12 @@
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "title"              : "${titleExisting}",
-        "organizationName"   : "${organizationNameExisting}",
         "startYear"          : "${startYearExisting}",
         "endYear"            : "${endYearExisting}"
     },
     "sparqlForExistingUris" : {
-        "organizationUri"   : "${organizationUriExisting}"
+        "organizationUri"   : "${organizationUriExisting}",
+        "positionType"      : "${positionTypeExisting}"
     },
     "fields" : {
       "title" : {
@@ -186,7 +194,7 @@
          "objectClassUri"   : "${positionClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ ]
+         "assertions"       : [ "${positionTypeAssertion}" ]
       },         
      "organizationUri" : {
          "newResource"      : "false",
