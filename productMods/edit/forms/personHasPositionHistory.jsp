@@ -41,17 +41,19 @@
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
 %>
 
-<c:set var="vivo" value="http://vivoweb.org/ontology/core#" />
+<c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="type" value="${rdf}type" />
+<c:set var="positionClass" value="${vivoCore}Position" />
+<c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
       to convey that the expression is used to retrieve any existing value for the field in an existing individual.
       Each of these must then be referenced in the sparqlForExistingLiterals section of the JSON block below
       and in the literalsOnForm --%>
-<c:set var="titlePred" value="${vivo}titleOrRole" />
+<c:set var="titlePred" value="${vivoCore}titleOrRole" />
 <v:jsonset var="titleExisting" >  
     SELECT ?titleExisting WHERE {
           ?positionUri <${titlePred}> ?titleExisting }
@@ -65,7 +67,7 @@
     ?positionUri <${label}> ?title. 
 </v:jsonset>
 
-<c:set var="startYearPred" value="${vivo}startYear" />
+<c:set var="startYearPred" value="${vivoCore}startYear" />
 <v:jsonset var="startYearExisting" >      
       SELECT ?startYearExisting WHERE {  
           ?positionUri <${startYearPred}> ?startYearExisting }
@@ -74,7 +76,7 @@
       ?positionUri <${startYearPred}> ?startYear .
 </v:jsonset>
 
-<c:set var="endYearPred" value="${vivo}endYear" />
+<c:set var="endYearPred" value="${vivoCore}endYear" />
 <v:jsonset var="endYearExisting" >      
       SELECT ?endYearExisting WHERE {  
           ?positionUri <${endYearPred}> ?endYearExisting }
@@ -86,8 +88,8 @@
 <%--  Note there is really no difference in how things are set up for an object property except
       below in the n3ForEdit section, in whether the ..Existing variable goes in SparqlForExistingLiterals
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
-<c:set var="positionInOrgPred" value="${vivo}positionInOrganization" />
-<c:set var="orgForPositionPred" value="${vivo}organizationForPosition" />
+<c:set var="positionInOrgPred" value="${vivoCore}positionInOrganization" />
+<c:set var="orgForPositionPred" value="${vivoCore}organizationForPosition" />
 <v:jsonset var="organizationUriExisting" >      
     SELECT ?existingOrgUri WHERE {
         ?positionUri <${positionInOrgPred}> ?existingOrgUri }
@@ -106,11 +108,11 @@
 </v:jsonset>
 
 <v:jsonset var="n3ForStmtToPerson">       
-    @prefix core: <${vivo}> .     
+    @prefix core: <${vivoCore}> .     
 
     ?person      core:personInPosition  ?positionUri .
     ?positionUri core:positionForPerson ?person .
-    ?positionUri <${type}>   core:Position .
+    ?positionUri <${type}>  ?positionType .
     ?positionUri <${type}> <${flagURI}> .
 </v:jsonset>
 
@@ -124,9 +126,8 @@
     ?newOrg <${orgForPositionPred}> ?positionUri .
 </v:jsonset>
 
-<v:jsonset var="postionClass">http://vivoweb.org/ontology/core#Position</v:jsonset>
-<v:jsonset var="organizationClass">http://xmlns.com/foaf/0.1/Organization</v:jsonset>
-
+<v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
+<v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
 
 <c:set var="editjson" scope="request">
   {
@@ -176,13 +177,24 @@
          "rangeLang"        : "",
          "assertions"       : [ "${titleAssertion}" ]
       },
+     "positionType" : {
+         "newResource"      : "false",
+         "validators"       : [  ],
+         "optionsType"      : "CHILD_VCLASSES_WITH_PARENT",
+         "literalOptions"   : [ "Select one" ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "${positionClassUriJson}",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",
+         "assertions"       : [ ]
+      },         
      "organizationUri" : {
          "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${organizationClass}",
+         "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ "${organizationUriAssertion}" ]
@@ -305,7 +317,7 @@
     
     <div id="entry"> 
         <v:input type="text" label="Position Title" id="title" size="30" />
-        <v:input type="select" label="Position Type" id="type" />
+        <v:input type="select" label="Position Type" id="positionType" />
 
         <p class="inline"><v:input type="text" label="Start Year" id="startYear" size="4" /></p>    
         <p class="inline"><v:input type="text" label="End Year" id="endYear" size="4" /></p>

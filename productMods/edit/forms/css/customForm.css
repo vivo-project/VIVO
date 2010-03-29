@@ -49,3 +49,7 @@ select,
 .addNewLink {
     display: none;
 }
+
+option {
+    padding: 0 2px;
+}
