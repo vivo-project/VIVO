@@ -133,8 +133,8 @@ class Licenser
       end
 
       target_parent = File.dirname(@target_dir)
-      if !File.exist?(@target_parent)
-        raise "Path to target directory doesn't exist: #{@target_parent}"
+      if !File.exist?(target_parent)
+        raise "Path to target directory doesn't exist: #{target_parent}"
       end
 
       if !File.exist?(@license_file)
