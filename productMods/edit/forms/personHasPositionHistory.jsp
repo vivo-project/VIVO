@@ -129,6 +129,7 @@
     ?newOrg <${type}> ?newOrgType .
     ?positionUri <${positionInOrgPred}> ?newOrg .
     ?newOrg <${orgForPositionPred}> ?positionUri .
+    ?newOrg <${type}> <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
@@ -178,7 +179,7 @@
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${titleAssertion}" ]
       },
@@ -205,7 +206,7 @@
          "assertions"       : [ "${organizationUriAssertion}" ]
       },      
       "newOrgName" : {
-         "newResource"      : "true",
+         "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],

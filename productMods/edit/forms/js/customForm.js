@@ -38,11 +38,16 @@ var customForm = {
         // Clear all form data and error messages
         $('input:text').val('');
         $('.error').text('');
+        
         // Remove previously bound event handlers
-        //this.cancel.unbind('click');
-        this.button.unbind('click');    
+        this.cancel.unbind('click');
+        this.button.unbind('click'); 
+        
+        removeRequiredHints();
         
         initAddForm();
+        
+        return false;
     },
 
     // Set up add form on page load, or when returning to initial state
@@ -85,6 +90,7 @@ var customForm = {
             $(this).unbind('click');
             
             // RY This would return us to step 1, but it's not working
+            //customForm.cancel.unbind('click');
             //customForm.cancel.bind('click', customForm.resetAddForm);  
             
             return false;              
