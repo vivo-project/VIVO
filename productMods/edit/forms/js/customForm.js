@@ -2,7 +2,7 @@
 
 var customForm = {
 
-    requiredHintText: ' <span class="requiredHint"> *</span>',  
+
 
     onLoad: function() {
 
@@ -15,9 +15,9 @@ var customForm = {
         this.existing = $('#existing'),
         this.addNew = $('#new'),
         this.entry = $('#entry'),
-        this.cancel = this.form.children('.cancel'),
+        this.cancel = this.form.find('.cancel'),
         this.requiredLegend = $('#requiredLegend'), 
-        this.requiredHints = $('.requiredHint'),
+        this.requiredHints = this.form.find('.requiredHint'),
         
         // Read values used to control display
         this.editType = $("input[name='editType']").val(),
@@ -32,9 +32,16 @@ var customForm = {
         }                      
     },
     
-    // Restore the form to its initial state when returning to step 1
-    resetAddForm: function() {
 
+    // Set up add form on page load, or when returning to initial state
+    // (The latter is not yet implemented, but we are preparing for it. Note
+    // that initializations to occur ONLY on page load are done in the onLoad() method.)    
+    // RY *** SOME of this will be shared with the edit form - figure out which
+    initAddForm: function() {
+
+        // Reset form to initial state
+        // Resetting should only need to be done after we've gone to step 2 and back to step 1,
+        // but for some reason it can be required on a page reload as well.
         // Clear all form data and error messages
         $('input:text').val('');
         $('.error').text('');
@@ -43,19 +50,12 @@ var customForm = {
         this.cancel.unbind('click');
         this.button.unbind('click'); 
         
-        removeRequiredHints();
+        // RY Make toggleRequiredHints take multiple args
+        //this.toggleRequiredHints('remove', this.existing, this.addNew);
+        this.toggleRequiredHints('remove', this.addNew, this.existing);
+        //this.toggleRequiredHints('remove', this.addNew);
+        // end reset
         
-        initAddForm();
-        
-        return false;
-    },
-
-    // Set up add form on page load, or when returning to initial state
-    // (The latter is not yet implemented, but we are preparing for it. Note
-    // that initializations to occur ONLY on page load are done in the onLoad() method.)    
-    // RY *** SOME of this will be shared with the edit form - figure out which
-    initAddForm: function() {
-
         // Step 1 of the form
         this.addNewLink.show();
         this.existing.show();
@@ -72,12 +72,11 @@ var customForm = {
             customForm.showFields(customForm.addNew);
             customForm.entry.show();
             customForm.requiredLegend.show();
+            
             customForm.button.val('Create ' + customForm.entryType + ' & ' + customForm.newType);
             customForm.button.unbind('click');
             
-            // RY This would return us to step 1, but it's not working
-            //customForm.cancel.unbind('click');
-            //customForm.cancel.bind('click', customForm.resetAddForm);
+            customForm.doCancel();
         });
             
         // button => step 2a
@@ -86,12 +85,11 @@ var customForm = {
             customForm.showFields(customForm.existing);          
             customForm.addNewLink.hide();
             customForm.requiredLegend.show();
+            
             $(this).val('Create ' + customForm.entryType);
             $(this).unbind('click');
             
-            // RY This would return us to step 1, but it's not working
-            //customForm.cancel.unbind('click');
-            //customForm.cancel.bind('click', customForm.resetAddForm);  
+            customForm.doCancel();
             
             return false;              
         });
@@ -100,36 +98,41 @@ var customForm = {
     initEditForm: function() {
     
     },
-     
-    // Add required hints to required fields.
-    // Use when the non-Javascript version should not show the required hint,
-    // because the field is not required in that version.
-    addRequiredHints: function(el) {
-
-        var labelText;
-
-        el.children('label.required').each(function() {
-            labelText = $(this).html();
-            $(this).html(labelText + customForm.requiredHintText);
-        });
-
-    },
     
-    // We will need to remove some of the required hints when we return to step 1.
-    // Not used for now.
-    removeRequiredHints: function(el) {
-        var labelText;
+    // Add required hints to required fields in element array elArray.
+    // Use when the non-Javascript version should not show the required hint,
+    // because the field is not required in that version. 
+    // Arguments: action = 'add' or 'remove'
+    // Varargs: element(s)
+    toggleRequiredHints: function(action /* elements */) {
+        var labelText,
+            newLabelText,
+            requiredHintText = '<span class="requiredHint"> *</span>';
 
-        el.children('label.required').each(function() {
-            labelText = $(this).html();
-            $(this).html(labelText.replace(customForm.requiredHintText, ''));
-        });    
+        for (var i = 1; i < arguments.length; i++) {          
+            arguments[i].find('label.required').each(function() {
+                labelText = $(this).html();
+                newLabelText = action == 'add' ? labelText + requiredHintText : 
+                                                 labelText.replace(requiredHintText, ''); 
+                $(this).html(newLabelText);
+            });
+        }
+
     },
     
     showFields: function(el) {
         el.show();
-        this.addRequiredHints(el);
+        this.toggleRequiredHints('add', el);
     },    
+    
+    // Add event listener to the cancel link in step 2
+    doCancel: function() {
+        this.cancel.unbind('click');
+        this.cancel.bind('click', function() {
+            customForm.initAddForm();
+            return false;
+        });         
+    }
 
 };
 

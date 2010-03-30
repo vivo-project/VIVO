@@ -294,8 +294,8 @@
                                                                 ));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css", 
-                                                                 "forms/css/personHasPositionHistory.css"
+    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css"
+                                                                 , "forms/css/personHasPositionHistory.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
