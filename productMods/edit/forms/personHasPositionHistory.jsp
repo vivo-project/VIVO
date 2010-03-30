@@ -320,7 +320,7 @@
     </div>
     
     <div id="new">
-        <h5>Add a New Organization</h5>
+        <h6>Add a New Organization</h6>
         <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
         <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
     </div>

@@ -10,6 +10,10 @@
   clear: left;
 }
 
+#content form h6 {
+    font-size: 110%;
+}
+
 #addNewLink {
     float: right;
     margin-right: 18em;
