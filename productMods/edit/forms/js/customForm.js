@@ -41,6 +41,7 @@ var customForm = {
         // Remove previously bound event handlers
         this.cancel.unbind('click');
         this.button.unbind('click');    
+        this.addNewLink.unbind('click');
         
         this.toggleRequiredHints('remove', this.addNew, this.existing);        
     },
@@ -97,7 +98,7 @@ var customForm = {
         this.showFields(this.existing);
         this.addNewLink.show();
         this.addNew.hide();       
-        this.showFields(this.entry);
+        this.entry.show();
         this.requiredLegend.show();
         this.button.val('Save Changes'); 
 
@@ -129,7 +130,6 @@ var customForm = {
                 $(this).html(newLabelText);
             });
         }
-
     },
     
     showFields: function(el) {
