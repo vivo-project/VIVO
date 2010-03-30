@@ -125,9 +125,6 @@
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
-    @prefix rdf: <${rdf}> .
-    @prefix rdfs: <${rdfs}> .
-    
     ?newOrg <${label}> ?newOrgName .
     ?newOrg <${type}> ?newOrgType .
     ?positionUri <${positionInOrgPred}> ?newOrg .
@@ -150,7 +147,7 @@
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
-                        "${n3ForNewOrg}", "${newOrgNameAsertion}", "${newOrgTypeAssertion}",                       
+                        "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
                         "${endYearAssertion}"],
                         
     "newResources"  : { "positionUri" : "${defaultNamespace}",
@@ -221,10 +218,10 @@
      "newOrgType" : {
          "newResource"      : "false",
          "validators"       : [  ],
-         "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
+         "optionsType"      : "CHILD_VCLASSES",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${organizationClass}",
+         "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ "${newOrgTypeAssertion}" ]
@@ -280,13 +277,15 @@
 %>
         <c:set var="editType" value="edit" />
         <c:set var="title" value="Edit position entry for ${subjectName}" />
+        <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Save changes" />
 <% 
     } else { // adding new entry
 %>
         <c:set var="editType" value="add" />
         <c:set var="title" value="Create a new position entry for ${subjectName}" />
-        <c:set var="submitLabel" value="position" />
+        <%-- NB This will be the button text when Javascript is disabled. --%>
+        <c:set var="submitLabel" value="Create position" />
 <%  } 
     
     List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
@@ -294,11 +293,14 @@
                                                                 ));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css" 
-                                                                 //, "forms/css/personHasPositionHistory.css"
+    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css", 
+                                                                 "forms/css/personHasPositionHistory.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
+
+<c:set var="yearHint" value="<span class='hint'>&nbsp;(YYYY)</span>" />
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -314,28 +316,31 @@
     </c:if>
     
     <div id="existing">
-        <v:input type="select" label="Organization" id="organizationUri"  />  
+        <v:input type="select" label="Organization" labelClass="required" id="organizationUri"  />  
     </div>
     
     <div id="new">
-        <h6>Add a New Organization</h6>
-        <v:input type="text" label="Organization Name" id="newOrgName" />
-        <v:input type="select" label="Select Organization Type" id="newOrgType" />
+        <h5>Add a New Organization</h5>
+        <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
+        <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
     </div>
     
     <div id="entry"> 
-        <v:input type="text" label="Position Title" id="title" size="30" />
-        <v:input type="select" label="Position Type" id="positionType" />
+        <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />
+        <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
-        <p class="inline"><v:input type="text" label="Start Year" id="startYear" size="4" /></p>    
-        <p class="inline"><v:input type="text" label="End Year" id="endYear" size="4" /></p>
+        <p class="inline year"><v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="4" /></p>    
+        <p class="inline year"><v:input type="text" label="End Year ${yearHint}" id="endYear" size="4" /></p>
     </div>
     
     <!-- For Javascript -->
     <input type="hidden" name="editType" value="add" />
     <input type="hidden" name="entryType" value="position" /> 
+    <input type="hidden" name="newType" value="organization" />
     
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
+    
+    <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
 <jsp:include page="${postForm}"/>

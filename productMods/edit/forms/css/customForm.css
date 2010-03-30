@@ -21,10 +21,9 @@
 }
 
 #content form #existing {
-  float: left;
-  clear: none;
-/*  width: 300px;*/
-  display: inline-block;
+    float: left;
+    clear: none;
+    display: inline-block;
 }
 
 #new {
@@ -32,12 +31,23 @@
     border: 1px solid #9c9c9c;
 }
 
+/* #content form p.inline span,*/
 #content form p.inline input {
-    margin-right: 50em;
-    margin-top: -1.75em;
     float: right;
     clear: right;
 }
+
+#content form p.inline.year input {
+    margin-right: 46em;
+    margin-top: -1.75em;
+}
+
+/*
+#content form p.inline.year span.hint {
+    margin-right: 38.5em;
+    margin-top: -2.4em;
+}
+*/
 
 input,
 select, 
@@ -46,10 +56,24 @@ select,
 }
 
 /* This div starts off hidden in case Javascript is disabled. Javascript will show it. */
-.addNewLink {
+#addNewLink {
     display: none;
 }
 
 option {
     padding: 0 2px;
+}
+
+#content form .hint {
+    color: #9c9c9c;
+    font-weight: normal;
+}
+
+#content form .requiredHint {
+    color: #ff7700;
+    font-weight: normal;
+}
+
+#content form #requiredLegend {
+    font-style: italic;
 }
