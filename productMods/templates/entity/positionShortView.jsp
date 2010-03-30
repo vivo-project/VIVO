@@ -3,11 +3,26 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://vitro.mannlib.cornell.edu/vitro/tags/StringProcessorTag" prefix="p" %>
+<jsp:useBean id="now" class="org.joda.time.DateTime"/>
 
+
+	
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Position, not the Person or Organization --%>
+	
         <c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
         <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
+        <c:if test="${!empty startYear}">
+	        <c:choose>
+	            <c:when test="${!empty endYear}">
+	                <c:set var="timeSpan" value=", ${startYear} - ${endYear}"/>
+	            </c:when>
+	            <c:otherwise>
+	                <c:set var="timeSpan" value=", ${startYear} - "/>
+	            </c:otherwise>
+	        </c:choose>
+		</c:if>
+        	
         <c:choose><%-- use working title in preference to HR title --%>
             <c:when test="${!empty individual.dataPropertyMap['http://vivoweb.org/ontology/core#titleOrRole'].dataPropertyStatements[0].data}">
                 <c:set var="title" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#titleOrRole'].dataPropertyStatements[0].data}"/>
@@ -18,7 +33,8 @@
             <c:otherwise>
                 <c:set var="title" value="${individual.name}"/>
             </c:otherwise>
-        </c:choose>
+        </c:choose>           
+
 		<c:choose>
 			<c:when test="${!empty predicateUri}">
  			    <c:choose>
@@ -49,9 +65,25 @@
                                 </c:choose>
 				            </c:otherwise>
 				        </c:choose>
+				        
+						<c:choose>
+					    	<c:when test="${!empty objUri}">
+					            <c:url var="objLink" value="/entity"><c:param name="uri" value="${objUri}"/></c:url>
+				                <a href="<c:out value="${objLink}"/>"><p:process>${objName}</p:process></a> <p:process>${objLabel} ${timeSpan}</p:process>
+				            </c:when>
+				            <c:otherwise>
+				                <p:process><strong>${objName}</strong> ${objLabel} ${timeSpan}</p:process> 
+				            </c:otherwise>
+		        		</c:choose>
 				    </c:when>
-				    <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#organizationForPosition'}"><%-- SUBJECT is an Organization, so get info from Position about the related Person --%>
+			    			    
+					<c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#organizationForPosition'}"><%-- SUBJECT is an Organization, so get info from Position about the related Person --%>
 				    	<c:choose>
+				    	   
+				    	   <c:when test="${not empty endYear && now.year > endYear}" >
+				    	   	<%-- don't show because the position is not current --%>
+				    	   </c:when> 
+				    	   
 				    		<c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#positionForPerson']}"><%-- there is a related Person --%>
 					    		<c:set var="objName" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#positionForPerson'].objectPropertyStatements[0].object.name}"/>
 					    		<c:choose>
@@ -63,37 +95,31 @@
 					    		    </c:otherwise>
 					    		</c:choose>
 					    		<c:set var="objUri" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#positionForPerson'].objectPropertyStatements[0].object.URI}"/>
+								
+								<c:choose>
+							    	<c:when test="${!empty objUri}">
+							            <c:url var="objLink" value="/entity"><c:param name="uri" value="${objUri}"/></c:url>
+						                <a href="<c:out value="${objLink}"/>"><p:process>${objName}</p:process></a> <p:process>${objLabel} ${timeSpan}</p:process>
+						            </c:when>
+						            <c:otherwise>
+						                <p:process><strong>${objName}</strong> ${objLabel} ${timeSpan}</p:process> 
+						            </c:otherwise>
+				        		</c:choose>				        									
 					    	</c:when>
+					    	
 					    	<c:otherwise><%-- no related Person, which should not happen --%>
 					    		<c:set var="objName" value="${individual.name}"/>
 					    		<c:set var="objLabel" value="${title}"/>
 					        </c:otherwise>
 					    </c:choose>
 					</c:when>
+					
 				    <c:otherwise>
 				        <c:set var="objName" value="unknown predicate"/>
 				        <c:set var="objUri" value="${predicateUri}"/>
 				    </c:otherwise>
-			    </c:choose>
-			    <c:if test="${!empty startYear}">
-			        <c:choose>
-			            <c:when test="${!empty endYear}">
-			                <c:set var="timeSpan" value=", ${startYear} - ${endYear}"/>
-			            </c:when>
-			            <c:otherwise>
-			                <c:set var="timeSpan" value=", ${startYear} - "/>
-			            </c:otherwise>
-			        </c:choose>
-			    </c:if>
-			    <c:choose>
-			    	<c:when test="${!empty objUri}">
-			            <c:url var="objLink" value="/entity"><c:param name="uri" value="${objUri}"/></c:url>
-		                <a href="<c:out value="${objLink}"/>"><p:process>${objName}</p:process></a> <p:process>${objLabel} ${timeSpan}</p:process>
-		            </c:when>
-		            <c:otherwise>
-		                <p:process><strong>${objName}</strong> ${objLabel} ${timeSpan}</p:process> 
-		            </c:otherwise>
-		        </c:choose>
+			    </c:choose>			
+			
 			</c:when>
 			<c:otherwise>
 				<c:out value="No predicate available for custom rendering ..."/>
