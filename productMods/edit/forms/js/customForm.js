@@ -2,8 +2,6 @@
 
 var customForm = {
 
-
-
     onLoad: function() {
 
         // Create references to form elements.
@@ -25,13 +23,27 @@ var customForm = {
         this.newType = $("input[name='newType']").val().capitalize();
         
         if (this.editType == 'add') { //adding a new entry
-            this.initAddForm();
-       
+            this.initAddForm();       
+            
         } else { // editing existing entry
             this.initEditForm();
-        }                      
+        }            
     },
     
+    // Reset add form to initial state (step 1)
+    // Should only be needed after returning to step 1 from step 2, 
+    // but sometimes seems to be needed on page load as well, so call it from initAddForm()
+    resetAddForm: function() {
+        // Clear all form data and error messages
+        $('input:text').val('');
+        $('.error').text('');
+        
+        // Remove previously bound event handlers
+        this.cancel.unbind('click');
+        this.button.unbind('click');    
+        
+        this.toggleRequiredHints('remove', this.addNew, this.existing);        
+    },
 
     // Set up add form on page load, or when returning to initial state
     // (The latter is not yet implemented, but we are preparing for it. Note
@@ -39,22 +51,7 @@ var customForm = {
     // RY *** SOME of this will be shared with the edit form - figure out which
     initAddForm: function() {
 
-        // Reset form to initial state
-        // Resetting should only need to be done after we've gone to step 2 and back to step 1,
-        // but for some reason it can be required on a page reload as well.
-        // Clear all form data and error messages
-        $('input:text').val('');
-        $('.error').text('');
-        
-        // Remove previously bound event handlers
-        this.cancel.unbind('click');
-        this.button.unbind('click'); 
-        
-        // RY Make toggleRequiredHints take multiple args
-        //this.toggleRequiredHints('remove', this.existing, this.addNew);
-        this.toggleRequiredHints('remove', this.addNew, this.existing);
-        //this.toggleRequiredHints('remove', this.addNew);
-        // end reset
+        this.resetAddForm();
         
         // Step 1 of the form
         this.addNewLink.show();
@@ -96,7 +93,22 @@ var customForm = {
     },
     
     initEditForm: function() {
-    
+
+        this.showFields(this.existing);
+        this.addNewLink.show();
+        this.addNew.hide();       
+        this.showFields(this.entry);
+        this.requiredLegend.show();
+        this.button.val('Save Changes'); 
+
+        this.addNewLink.bind('click', function() {
+            $(this).hide();
+            customForm.existing.hide();
+            customForm.showFields(customForm.addNew);
+            
+            customForm.button.val('Create ' + customForm.newType + ' & Save Changes');
+        });
+        
     },
     
     // Add required hints to required fields in element array elArray.

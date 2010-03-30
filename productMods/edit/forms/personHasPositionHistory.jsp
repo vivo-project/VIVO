@@ -214,7 +214,7 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : [ "${newOrgNameAssertion}" ]
+         "assertions"       : [ "${n3ForNewOrg}" ]
       },
      "newOrgType" : {
          "newResource"      : "false",
@@ -308,13 +308,10 @@
 <h2>${title}</h2>
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-    <c:if test="${editType == 'add'}">
-        
-        <!--  Hide on initial load in case JavaScript turned off. -->
-        <div id="addNewLink">
-            If your organization is not listed, please <a href="#">add a new organization</a>.
-        </div>
-    </c:if>
+
+    <div id="addNewLink">
+        If your organization is not listed, please <a href="#">add a new organization</a>.
+    </div>
     
     <div id="existing">
         <v:input type="select" label="Organization" labelClass="required" id="organizationUri"  />  
@@ -335,7 +332,7 @@
     </div>
     
     <!-- For Javascript -->
-    <input type="hidden" name="editType" value="add" />
+    <input type="hidden" name="editType" value="${editType}" />
     <input type="hidden" name="entryType" value="position" /> 
     <input type="hidden" name="newType" value="organization" />
     

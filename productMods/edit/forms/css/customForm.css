@@ -16,12 +16,14 @@
 
 #addNewLink {
     float: right;
-    margin-right: 18em;
+    /* This right margin works pretty well for both the add and edit version of the form.
+    Could customize for each of these versions later. */
+    margin-right: 15em;
     margin-top: .8em;
     width: 30%;
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
-    
+    display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
 
 #content form #existing {
@@ -33,6 +35,7 @@
 #new {
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
+    width: 70%;
 }
 
 /* #content form p.inline span,*/
