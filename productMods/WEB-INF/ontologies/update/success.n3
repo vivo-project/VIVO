@@ -1,0 +1,9 @@
+@prefix vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+
+<http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology [
+    a owl:Thing ;
+    vitro:updatedOntology <http://vivoweb.org/ontology/core> ;
+    vitro:fromOntologyVersion "0.9" ;
+    vitro:toOntologyVersion "1.0" ;
+] .
