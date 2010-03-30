@@ -134,3 +134,4 @@ http://vivoweb.org/ontology/core#researchActivities	http://vivoweb.org/ontology/
 http://www.w3.org/2004/02/skos/core#editorOf	http://vivoweb.org/ontology/core#editorOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasOrganizationalAffiliate	http://vivoweb.org/ontology/core#affiliatedOrganization	Yes	Map	Use-instead
 http://vivoweb.org/ontology/core#organizationalAffiliateOf	http://vivoweb.org/ontology/core#affiliatedOrganization	Yes	Map	Use-instead
+http://vivoweb.org/ontology/core#conferenceDate http://vivoweb.org/ontology/core#atTime Yes Map Use-instead
