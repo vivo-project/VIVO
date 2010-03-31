@@ -1585,4 +1585,25 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Catalog">
     <rdfs:label xml:lang="en-US">Catalog</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/">
+    <rdfs:label xml:lang="en-US">FOAF</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core">
+    <rdfs:label xml:lang="en-US">SKOS (Simple Knowledge Organization System)</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/elements/1.1/">
+    <rdfs:label xml:lang="en-US">Dublin Core elements</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/dc/terms/">
+    <rdfs:label xml:lang="en-US">Dublin Core terms</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl">
+    <rdfs:label xml:lang="en-US">Event Ontology</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/">
+    <rdfs:label xml:lang="en-US">Bibontology</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core">
+    <rdfs:label xml:lang="en-US">VIVO core</rdfs:label>
+  </rdf:Description>
 </rdf:RDF>
