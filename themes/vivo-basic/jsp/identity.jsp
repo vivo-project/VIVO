@@ -13,7 +13,8 @@
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 
-<jsp:useBean id="loginHandler" class="edu.cornell.mannlib.vedit.beans.LoginFormBean" scope="session" />
+
+<%@page import="edu.cornell.mannlib.vitro.webapp.controller.ContactMailServlet"%><jsp:useBean id="loginHandler" class="edu.cornell.mannlib.vedit.beans.LoginFormBean" scope="session" />
 
 <%
     /**
@@ -60,13 +61,16 @@
       }
       String fixedTabStr=(fixedTabStr=request.getParameter("fixed"))==null?null:fixedTabStr.equals("")?null:fixedTabStr;
 
+      
 %>
+
 <c:set var='context' value="<%=vreq.getContextPath()%>" />
 <c:set var='themePath'>
   <c:if test="${!empty context && context != ''}">/${context}</c:if>/<%=portal.getThemeDir()%>
 </c:set>
 <c:set var='themeDir'><c:out value='${themePath}' default='/themes/vivo-basic/' /></c:set>
 <c:set var="currentPortal" value="<%=portal.getPortalId()%>"/>
+<c:set var="contactMailSetup" value="<%= ContactMailServlet.getSmtpHostFromProperties() != null %>"/>
 
 <%
 String homeURL = (portal.getRootBreadCrumbURL()!=null && portal.getRootBreadCrumbURL().length()>0) ?
@@ -123,9 +127,12 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
     <c:set var="aboutHref">
       <c:out value="${aboutHref}" escapeXml="true"/>
     </c:set>
-  
+     
     <li class="border"><a href="${aboutHref}" title="more about this web site">About</a></li>
-    <li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
+    
+    <c:if test="${contactMailSetup}" >
+    	<li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
+    </c:if>
   </ul>
 
 </div><!-- end identity -->
