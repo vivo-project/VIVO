@@ -32,11 +32,17 @@
     display: inline-block;
 }
 
+#existingOrNew {
+    font-style:italic;
+    margin-left: 1em;
+}
+
 #new {
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
     width: 70%;
 }
+
 
 /* #content form p.inline span,*/
 #content form p.inline input {
