@@ -333,7 +333,7 @@
     <!-- Processing information for Javascript -->
     <input type="hidden" name="editType" value="${editType}" />
     <input type="hidden" name="entryType" value="position" /> 
-    <input type="hidden" name="newType" value="organization" />
+    <input type="hidden" name="secondaryType" value="organization" />
     
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
     

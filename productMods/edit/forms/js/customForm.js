@@ -56,7 +56,8 @@ var customForm = {
         // Read values used to control display
         this.editType = $("input[name='editType']").val();
         this.entryType = $("input[name='entryType']").val().capitalize();
-        this.newType = $("input[name='newType']").val().capitalize();
+        this.secondaryType = $("input[name='secondaryType']").val().capitalize();
+
     },
     
     // On page load, make changes to the non-Javascript version for the Javascript version.
@@ -85,6 +86,9 @@ var customForm = {
     // Set up add form on page load, or when returning to initial state from step 2
     initAddForm: function() {
         
+    	this.defaultButtonText = 'Create ' + this.entryType;
+    	this.addNewButtonText = 'Create ' + this.secondaryType + ' & ' + this.entryType;
+    	
         // If there are validation errors on the page, we're returning from 
         // an attempted submission that failed validation, and we need to go
         // directly to step 2.
@@ -93,7 +97,6 @@ var customForm = {
         } else {
             this.doAddFormStep1();
         }
-
     },
     
     // Reset add form to initial state (step 1) after cancelling out of step 2
@@ -129,74 +132,35 @@ var customForm = {
     // Set up form when returning directly to step 2, such as after validation errors
     // on the form submission.
     doAddFormStep2: function() {
+
+    	var view = customForm.getPreviousViewFromFormData();
         
-        // If possible, determine which view of the form we were on
-        var existingInputs = this.existing.find(':input'),
-            existingInputsLen = existingInputs.length,
-            addNewInputs = this.addNew.find(':input'),
-            addNewInputsLen = addNewInputs.length,
-            input,
-            i,
-            fn = null;
-        
-        // If a value was entered in the addNew section, go back to the addNew view
-        for (i = 0; i < addNewInputsLen; i++) {
-            input = $(addNewInputs[i]);
-            if (input.val() != '') {
-                fn = this.doAddFormStep2AddNew;
-                break;
-            }
-        }
-        
-        // If a value was selected in the existing section, go back to the existing view
-        if (fn === null) {
-            for (i = 0; i < existingInputsLen; i++) {
-                input = $(existingInputs[i]);
-                if (input.val() != '') {
-                    fn = this.doAddFormStep2SelectExisting;
-                    break;
-                }
-            }
-        }
-        
-        // Otherwise, default to the combined view
-        // (same as view used to edit existing entry)
-        if (fn === null) {
-            fn = this.doAddFormStep2Combined;
-        }
+    	switch (view) {
+			case "existing": { fn = this.doAddFormStep2SelectExisting; break; }
+    		case "addNew": { fn = this.doAddFormStep2AddNew; break; }
+    		default: { fn = this.doAddFormStep2Combined; break; }
+    	}
 
         fn.call();             
     },
-    
+
     // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
     // customForm when the method is called from an event listener. Only if the method never
     // gets called from an event listener can we use the 'this' reference.
     
     // Step 2: selecting an existing individual
     doAddFormStep2SelectExisting: function() {
-        
-        customForm.entry.show();  
-        customForm.showFields(customForm.existing);  
-        customForm.addNew.hide();
-        customForm.addNewLink.hide();
-        customForm.requiredLegend.show();
-        
-        customForm.doButtonForStep2('Create ' + customForm.entryType);
+
+    	customForm.showSelectExistingFields();
+        customForm.doButtonForStep2(customForm.defaultButtonText);
         customForm.doCancelForStep2();        
     },
     
     // Step 2: adding a new individual
     doAddFormStep2AddNew: function() {
 
-        // NB Use customForm instead of 'this', because 'this' 
-        // doesn't reference customForm when called from an event handler.
-        customForm.addNewLink.hide();
-        customForm.existing.hide();
-        customForm.showFields(customForm.addNew);
-        customForm.entry.show();
-        customForm.requiredLegend.show();
-
-        customForm.doButtonForStep2('Create ' + customForm.entryType + ' & ' + customForm.newType);
+        customForm.showAddNewFields();
+        customForm.doButtonForStep2(customForm.addNewButtonText);
         customForm.doCancelForStep2();
     },
     
@@ -204,23 +168,53 @@ var customForm = {
     // can't determine which view of the form we had been on.
     doAddFormStep2Combined: function() {
         
-        customForm.showCombinedView();
-        customForm.doAddNewLink();        
-        customForm.doButtonForStep2('Create ' + customForm.newType);        
+        customForm.showCombinedFields();
+        customForm.doAddNewLink(customForm.addNewButtonText);        
+        customForm.doButtonForStep2(customForm.defaultButtonText);        
         customForm.doCancelForStep2();
     },
     
 
     /***** Edit form *****/
 
-    // RY Here we need logic for returning from validation errors, as in add form ********
     initEditForm: function() {
 
-    	this.showCombinedView();
-        this.doAddNewLink();       
-        this.button.val('Save Changes'); 
-        // Cancel just takes us back to the individual page - no event listener needed
-        
+    	var view;
+    	
+    	this.defaultButtonText = 'Save Changes';
+    	this.addNewButtonText = 'Create ' + this.secondaryType + ' & Save Changes';
+    	
+        // If there are validation errors on the page, we're returning from 
+        // an attempted submission that failed validation, and we need to go
+        // directly to step 2.
+        if (this.findValidationErrors()) {
+        	view = this.getPreviousViewFromFormData();
+        	
+        	switch (view) {
+    			case "existing": { fn = this.doEditFormSelectExisting; break; }
+    			case "addNew": { fn = this.doEditFormAddNew; break; }
+    			default: { fn = this.doEditFormDefaultView; break; }
+        	}
+        } else {
+        	fn = this.doEditFormDefaultView;
+        }    
+        fn.call(customForm);        
+    },
+    
+    doEditFormSelectExisting: function() {   	
+    	this.showSelectExistingFields();
+    	this.button.val(this.defaultButtonText);
+    },
+    
+    doEditFormAddNew: function() {   	
+    	this.showAddNewFields();
+    	this.button.val(this.addNewButtonText);   	
+    },
+    
+    doEditFormDefaultView: function() {    	
+    	this.showCombinedFields();
+    	this.button.val(this.defaultButtonText);   
+    	this.doAddNewLink(this.addNewButtonText);
     },
     
     /***** Utilities *****/
@@ -237,9 +231,12 @@ var customForm = {
     
     // Clear data from form elements in element el
     clearFields: function(el) {
-        el.find('input:text').val('');
         el.find('select').val('');
         el.find('textarea').val('');
+        // Specify input types to exclude submit and hidden inputs
+        el.find('input:text').val('');
+        el.find('input:checkbox').val('');
+        el.find('input:radio').val('');
         
         // For now we can remove the error elements. Later we may include them in
         // the markup, for customized positioning, in which case we will empty them
@@ -298,15 +295,19 @@ var customForm = {
         });         
     },
     
-    doAddNewLink: function() {
+    doAddNewLink: function(buttonText) {
 
     	customForm.addNewLink.unbind('click');
     	customForm.addNewLink.bind('click', function() {
             $(this).hide();
+            // Make sure to clear out what's in the existing select element,
+            // else it could be submitted even when hidden.
             customForm.hideFields(customForm.existing);
             customForm.showFields(customForm.addNew);
             
-            customForm.button.val('Create ' + customForm.newType + ' & Save Changes');
+            if (buttonText) {
+                customForm.button.val(buttonText);            	
+            }
         });  
     },
     
@@ -347,17 +348,73 @@ var customForm = {
         customForm.toggleRequiredHints('remove', customForm.addNew, customForm.existing);     	
     },
     
+    showSelectExistingFields: function() {
+    	
+        customForm.showFields(customForm.existing);  
+        customForm.addNewLink.hide();
+        customForm.addNew.hide();
+        customForm.showFieldsForAllViews();
+    },
+    
+    showAddNewFields: function() {
+
+        customForm.existing.hide();
+        customForm.addNewLink.hide();
+        customForm.showFields(customForm.addNew);
+        customForm.showFieldsForAllViews();      
+    },
+    
     // This version of the form shows both the existing select and add new link.
     // Used when loading edit form, and when returning from failed submission
     // of add form when we can't determine which view was being used to make
     // the submission.
-    showCombinedView: function() {
+    showCombinedFields: function() {
 
     	customForm.showFields(customForm.existing);
     	customForm.addNewLink.show();
     	customForm.addNew.hide();       
-    	customForm.entry.show();
-    	customForm.requiredLegend.show();
+        customForm.showFieldsForAllViews();
+    },
+    
+    // Show fields that appear in all views for add form step 2 and edit form
+    showFieldsForAllViews: function() {
+        customForm.entry.show();  
+        customForm.requiredLegend.show();     	
+    },
+    
+    // When returning to the add/edit form after a failed form submission (due to 
+    // validation errors), attempt to determine which view the form was on when
+    // submitted, based on the form data present.
+    getPreviousViewFromFormData: function() {
+    	
+        var existingInputs = this.existing.find(':input'),
+        	existingInputsLen = existingInputs.length,
+        	addNewInputs = this.addNew.find(':input'),
+        	addNewInputsLen = addNewInputs.length,
+        	input,
+        	i,
+        	view = null;
+    
+	    // If a value was entered in the addNew section, go back to the addNew view
+	    for (i = 0; i < addNewInputsLen; i++) {
+	        input = $(addNewInputs[i]);
+	        if (input.val() != '') {
+	            view = "addNew";
+	            break;
+	        }
+	    }
+	    
+	    // If a value was selected in the existing section, go back to the existing view
+	    if (view === null) {
+	        for (i = 0; i < existingInputsLen; i++) {
+	            input = $(existingInputs[i]);
+	            if (input.val() != '') {
+	                view = "existing";
+	                break;
+	            }
+	        }
+	    }  
+	    return view;
     }
 
 };
