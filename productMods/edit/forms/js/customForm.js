@@ -231,12 +231,7 @@ var customForm = {
     
     // Clear data from form elements in element el
     clearFields: function(el) {
-        el.find('select').val('');
-        el.find('textarea').val('');
-        // Specify input types to exclude submit and hidden inputs
-        el.find('input:text').val('');
-        el.find('input:checkbox').val('');
-        el.find('input:radio').val('');
+    	el.find(':input[type!="hidden"][type!="submit"][type!="button"]').val('');
         
         // For now we can remove the error elements. Later we may include them in
         // the markup, for customized positioning, in which case we will empty them
@@ -387,6 +382,7 @@ var customForm = {
     // submitted, based on the form data present.
     getPreviousViewFromFormData: function() {
     	
+    	// NB ':input' selector includes select elements
         var existingInputs = this.existing.find(':input'),
         	existingInputsLen = existingInputs.length,
         	addNewInputs = this.addNew.find(':input'),
