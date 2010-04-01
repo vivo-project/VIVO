@@ -1,13 +1,11 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-/* Some of these styles should most likely apply to all forms. */
-
 #content form {
     width: 50%;
 }
 
 #content form div {
-  clear: left;
+  clear: both;
 }
 
 #content form h6 {
@@ -15,9 +13,9 @@
 }
 
 #addNewLink {
+    /* Right float isn't the right way to do this, because the correct right margin 
+    depends on window size. Should be floated left instead. */
     float: right;
-    /* This right margin works pretty well for both the add and edit version of the form.
-    Could customize for each of these versions later. */
     margin-right: 15em;
     margin-top: .8em;
     width: 30%;
@@ -33,7 +31,7 @@
 }
 
 #existingOrNew {
-    font-style:italic;
+    font-style: italic;
     margin-left: 1em;
 }
 
@@ -67,11 +65,6 @@ input,
 select, 
 #content form p {
     margin-bottom: 1em;
-}
-
-/* This div starts off hidden in case Javascript is disabled. Javascript will show it. */
-#addNewLink {
-    display: none;
 }
 
 option {

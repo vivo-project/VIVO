@@ -300,14 +300,13 @@
     request.setAttribute("customCss", customCss);   
 %>
 
-<c:set var="yearHint" value="<span class='hint'>&nbsp;(YYYY)</span>" />
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
 <jsp:include page="${preForm}" />
 
 <h2>${title}</h2>
 
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form class="${editType}" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <div id="addNewLink">
         If your organization is not listed, please <a href="#">add a new organization</a>.    
@@ -316,8 +315,6 @@
     <div id="existing">
         <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span id="existingOrNew">or</span>
     </div>
-    
-
     
     <div id="new">
         <h6>Add a New Organization</h6>
@@ -329,11 +326,11 @@
         <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
-        <p class="inline year"><v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="4" /></p>    
-        <p class="inline year"><v:input type="text" label="End Year ${yearHint}" id="endYear" size="4" /></p>
+        <p class="inline year"><v:input type="text" label="Start Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" /></p>    
+        <p class="inline year"><v:input type="text" label="End Year <span id='endYearHint' class='hint'>(YYYY)</span>" id="endYear" size="4" /></p>
     </div>
     
-    <!-- For Javascript -->
+    <!-- Processing information for Javascript -->
     <input type="hidden" name="editType" value="${editType}" />
     <input type="hidden" name="entryType" value="position" /> 
     <input type="hidden" name="newType" value="organization" />
