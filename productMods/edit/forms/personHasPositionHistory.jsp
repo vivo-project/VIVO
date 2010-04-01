@@ -308,14 +308,14 @@
 
 <form class="${editType}" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <div id="addNewLink">
-        If your organization is not listed, please <a href="#">add a new organization</a>.    
-    </div>
-    
     <div id="existing">
         <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span id="existingOrNew">or</span>
     </div>
     
+    <div id="addNewLink">
+        If your organization is not listed, please <a href="#">add a new organization</a>.    
+    </div>
+       
     <div id="new">
         <h6>Add a New Organization</h6>
         <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />

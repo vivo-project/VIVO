@@ -5,19 +5,18 @@
 }
 
 #content form div {
-  clear: both;
+    clear: left;
 }
 
 #content form h6 {
     font-size: 110%;
 }
 
-#addNewLink {
-    /* Right float isn't the right way to do this, because the correct right margin 
-    depends on window size. Should be floated left instead. */
-    float: right;
-    margin-right: 15em;
-    margin-top: .8em;
+#content form div#addNewLink {
+    float: left;
+    clear: none;
+    margin-left: 5em;
+    margin-top: .9em;
     width: 30%;
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
@@ -27,7 +26,6 @@
 #content form #existing {
     float: left;
     clear: none;
-    display: inline-block;
 }
 
 #existingOrNew {
