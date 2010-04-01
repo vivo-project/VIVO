@@ -7,7 +7,3 @@
 #     <suite name>, <test name> # Comment text
 
 user-management, Bookmark Without Logging In # This test is known to fail, because not all pages come up properly if bookmarked. 
-AdminSecurity,   AdminFirstLogin             # I need to talk to Holly
-AdminSecurity,   AdminBadLogin               # I need to talk to Holly
-AdminSecurity,   AdminChangePassword         # I need to talk to Holly
-AdminSecurity,   AdminLogouts                # I need to talk to Holly
