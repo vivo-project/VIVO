@@ -4,8 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://vitro.mannlib.cornell.edu/vitro/tags/StringProcessorTag" prefix="p" %>
 <jsp:useBean id="now" class="org.joda.time.DateTime"/>
-
-
 	
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Position, not the Person or Organization --%>
