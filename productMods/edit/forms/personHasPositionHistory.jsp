@@ -26,8 +26,8 @@
 %>
 <%
     VitroRequest vreq = new VitroRequest(request);
-    WebappDaoFactory wdf = vreq.getWebappDaoFactory();
-    vreq.setAttribute("defaultNamespace", wdf.getDefaultNamespace());
+    WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
+    vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
     String flagURI = null;
     if (vreq.getAppBean().isFlag1Active()) {
