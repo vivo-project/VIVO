@@ -99,29 +99,29 @@ var customForm = {
     // Reset add form to initial state (step 1) after cancelling out of step 2
     resetAddFormToStep1: function() {   
 
-    	this.resetForm();        
-        this.doAddFormStep1();
+    	customForm.resetForm();        
+    	customForm.doAddFormStep1();
     },
 
     // Set up the add form for step 1
     doAddFormStep1: function() {
 
-        this.existing.show();
-        this.addNewLink.show();
-        this.addNew.hide();
-        this.entry.hide();    
-        this.requiredLegend.hide();
-        this.button.val('Continue');  
+    	customForm.existing.show();
+    	customForm.addNewLink.show();
+    	customForm.addNew.hide();
+    	customForm.entry.hide();    
+    	customForm.requiredLegend.hide();
+    	customForm.button.val('Continue');  
         
         // Assign event listeners 
         //this.button.unbind('click');   // RY *** Don't need this if we've done a reset
-        this.button.bind('click', function() {
+    	customForm.button.bind('click', function() {
             customForm.doAddFormStep2SelectExisting();           
             return false;              
         });
         
         //this.addNewLink.unbind('click'); // RY *** Don't need this if we've done a reset
-        this.addNewLink.bind('click', function() {
+    	customForm.addNewLink.bind('click', function() {
             customForm.doAddFormStep2AddNew();
         });     
     },
@@ -168,11 +168,13 @@ var customForm = {
         fn.call();             
     },
     
+    // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
+    // customForm when the method is called from an event listener. Only if the method never
+    // gets called from an event listener can we use the 'this' reference.
+    
     // Step 2: selecting an existing individual
     doAddFormStep2SelectExisting: function() {
         
-        // NB Use 'customForm' instead of 'this', because 'this' 
-        // doesn't reference customForm when called from an event handler.
         customForm.entry.show();  
         customForm.showFields(customForm.existing);  
         customForm.addNew.hide();
@@ -202,10 +204,10 @@ var customForm = {
     // can't determine which view of the form we had been on.
     doAddFormStep2Combined: function() {
         
-        this.showCombinedView();
-        this.doAddNewLink();        
-        this.doButtonForStep2('Create ' + this.newType);        
-        this.doCancelForStep2();
+        customForm.showCombinedView();
+        customForm.doAddNewLink();        
+        customForm.doButtonForStep2('Create ' + customForm.newType);        
+        customForm.doCancelForStep2();
     },
     
 
@@ -222,23 +224,28 @@ var customForm = {
     },
     
     /***** Utilities *****/
-    
+ 
     unbindEventListeners: function() {
-        this.cancel.unbind('click');
-        this.button.unbind('click');    
-        this.addNewLink.unbind('click');   	
+    	customForm.cancel.unbind('click');
+    	customForm.button.unbind('click');    
+    	customForm.addNewLink.unbind('click');   	
     },
     
     clearFormData: function() {
-        this.form.find('input:text').val('');
-        this.form.find('select').val('');
-        this.form.find('textarea').val('');
+    	customForm.clearFields(customForm.form);
+    },
+    
+    // Clear data from form elements in element el
+    clearFields: function(el) {
+        el.find('input:text').val('');
+        el.find('select').val('');
+        el.find('textarea').val('');
         
         // For now we can remove the error elements. Later we may include them in
         // the markup, for customized positioning, in which case we will empty them
         // but not remove them here. See findValidationErrors().
         //this.form.find('.validationError').text('');   
-        this.form.find('.validationError').remove();
+        el.find('.validationError').remove();    	
     },
     
     // Add required hints to required fields in a list of elements.
@@ -266,17 +273,16 @@ var customForm = {
     
     showFields: function(el) {
         el.show();
-        this.toggleRequiredHints('add', el);
+        customForm.toggleRequiredHints('add', el);
     },    
     
     hideFields: function(el) {
         // Clear any input, so if we reshow the element the input won't still be there.
-        el.find('input:text').val('');
-        alert('here');
+        customForm.clearFields(el);
         el.hide();
     },
 
-
+    // Add event listener to the submit button in step 2
     doButtonForStep2: function(text) {
     	customForm.button.unbind('click');
     	customForm.button.val(text);
@@ -294,8 +300,8 @@ var customForm = {
     
     doAddNewLink: function() {
 
-    	this.addNewLink.unbind('click');
-        this.addNewLink.bind('click', function() {
+    	customForm.addNewLink.unbind('click');
+    	customForm.addNewLink.bind('click', function() {
             $(this).hide();
             customForm.hideFields(customForm.existing);
             customForm.showFields(customForm.addNew);
@@ -307,7 +313,7 @@ var customForm = {
     // Return true iff there are validation errors on the form
     findValidationErrors: function() {
 
-        return this.form.find('.validationError').length > 0;
+        return customForm.form.find('.validationError').length > 0;
     	
 // RY For now, we just need to look for the presence of the error elements.
 // Later, however, we may generate empty error messages in the markup, for
@@ -332,13 +338,13 @@ var customForm = {
     resetForm: function() {
     	
         // Clear all form data and error messages
-        this.clearFormData();
+        customForm.clearFormData();
         
         // Remove previously bound event handlers
-        this.unbindEventListeners();
+        customForm.unbindEventListeners();
        
         // Remove required field hints
-        this.toggleRequiredHints('remove', this.addNew, this.existing);     	
+        customForm.toggleRequiredHints('remove', customForm.addNew, customForm.existing);     	
     },
     
     // This version of the form shows both the existing select and add new link.
@@ -347,11 +353,11 @@ var customForm = {
     // the submission.
     showCombinedView: function() {
 
-        this.showFields(this.existing);
-        this.addNewLink.show();
-        this.addNew.hide();       
-        this.entry.show();
-        this.requiredLegend.show();
+    	customForm.showFields(customForm.existing);
+    	customForm.addNewLink.show();
+    	customForm.addNew.hide();       
+    	customForm.entry.show();
+    	customForm.requiredLegend.show();
     }
 
 };
