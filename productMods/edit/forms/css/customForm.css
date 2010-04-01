@@ -82,3 +82,8 @@ option {
 #content form #requiredLegend {
     font-style: italic;
 }
+
+#content form p.validationError {
+    clear: both;
+    margin-bottom: 1.25em;
+}
