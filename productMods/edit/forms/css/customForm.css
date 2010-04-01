@@ -45,13 +45,14 @@
 
 
 /* #content form p.inline span,*/
-#content form p.inline input {
-    float: right;
-    clear: right;
+#content form p.inline input,
+#content form p.inline label {
+    float: left;
+    clear: left;
 }
 
 #content form p.inline.year input {
-    margin-right: 46em;
+    margin-left: 12em;
     margin-top: -1.75em;
 }
 
