@@ -12,7 +12,7 @@
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %><%/* this odd thing points to something in web.xml */ %>
 
-<jsp:useBean id="loginHandler" class="edu.cornell.mannlib.vedit.beans.LoginFormBean" scope="session" />
+<%@page import="edu.cornell.mannlib.vitro.webapp.controller.ContactMailServlet"%><jsp:useBean id="loginHandler" class="edu.cornell.mannlib.vedit.beans.LoginFormBean" scope="session" />
 <%
     /**
      * @version 1.00
@@ -48,6 +48,7 @@
 </c:set>
 <c:set var='themeDir'><c:out value='${themePath}' default='/themes/vivo-basic/' /></c:set>
 <c:set var="currentPortal" value="<%=portal.getPortalId()%>"/>
+<c:set var="contactMailSetup" value="<%= ContactMailServlet.getSmtpHostFromProperties() != null %>"/>
 
 <div id='footer'>
   
@@ -73,7 +74,9 @@
         <c:set var="contactHref">
           <c:out value="${contactHref}" escapeXml="true"/>
         </c:set>
-        <li class="last"><a href="${contactHref}" title="feedback form">Contact Us</a></li>
+        <c:if test="${contactMailSetup}">
+          <li class="last"><a href="${contactHref}" title="feedback form">Contact Us</a></li>
+        </c:if>
       </ul>
 
     </div>
