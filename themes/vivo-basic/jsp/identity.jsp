@@ -86,9 +86,11 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
 <div id="identity">
   
   <h1><a title="Home" href="<%=homeURL%>"><%out.print(portal.getAppName());%></a></h1>
+  <!--
   <% if (portal.getShortHand() != null) { %>
     <em><%out.print(portal.getShortHand());%></em>
   <% } %>
+  -->
    
   <ul id="otherMenu">
   

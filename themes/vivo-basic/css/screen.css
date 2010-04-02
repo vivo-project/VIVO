@@ -61,18 +61,19 @@ div#identity { position: relative; }
 /*  position: absolute;
   top: 33px;
   left: 10px;*/
-  padding-top: 25px;
+  padding-top: 20px;
   margin-left: 20px;
-  margin-bottom: 5px;
-  width: 141px;
-  height: 43px;
+  margin-bottom: 20px;
+  width: 361px;
+  height: 55px;
   text-indent: -9999px;
-  background: url(../site_icons/vivo_logo.gif) bottom left no-repeat;
+  background: url(../site_icons/vivo-logo.jpg) bottom left no-repeat;
+
 }
 
 #identity h1 a {
-  width: 141px;
-  height: 43px;
+  width: 361px;
+  height: 55px;
   display: block;
   overflow: hidden; /* hide the extended outline in firefox */
 /*  background: url(images/layout/transparent.gif) top left no-repeat;*/
