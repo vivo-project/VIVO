@@ -322,7 +322,7 @@
         <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
     </div>
     
-    <div id="entry"> 
+    <div class="entry"> 
         <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 

@@ -51,7 +51,7 @@ var customFormTwoStep = {
         this.addNewLink = $('#addNewLink');
         this.existing = $('#existing');
         this.addNew = $('#new');
-        this.entry = $('#entry');
+        this.entry = $('.entry');
         this.existingOrNew = $('#existingOrNew');
 
         this.cancel = this.form.find('.cancel');

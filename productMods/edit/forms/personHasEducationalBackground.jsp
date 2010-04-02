@@ -388,8 +388,8 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     </div>
     
     <div class="entry"> 
-        <v:input type="text" label="Department or School Name within the Organization" id="dept" size="30" />
-        <v:input type="text" label="Supplemental Information" id="info" size="30" />
+        <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
+        <v:input type="text" label="Supplemental Information" id="info" size="50" />
         <p>e.g., <em>Magna cum laude</em> or <em>Graduate School Fellowship, 1975-1976</em></p>    
     </div>
     
