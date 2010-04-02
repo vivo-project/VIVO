@@ -272,7 +272,7 @@
     <rdfs:label xml:lang="en-US">upc</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
-    <rdfs:label xml:lang="en-US">webpage</rdfs:label>
+    <rdfs:label xml:lang="en-US">web page</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#displayOrder">
     <rdfs:label xml:lang="en-US">display order</rdfs:label>
@@ -464,7 +464,7 @@
     <rdfs:label xml:lang="en-US">features</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Webpage">
-    <rdfs:label xml:lang="en-US">Webpage</rdfs:label>
+    <rdfs:label xml:lang="en-US">Web Page</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSubOrganization">
     <rdfs:label xml:lang="en-US">has organization</rdfs:label>
@@ -1208,7 +1208,7 @@
     <rdfs:label xml:lang="en-US">Collection</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#PrivateCompany">
-    <rdfs:label xml:lang="en-US">PrivateCompany</rdfs:label>
+    <rdfs:label xml:lang="en-US">Private Company</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/DocumentStatus">
     <rdfs:label xml:lang="en-US">Document Status</rdfs:label>
@@ -1355,7 +1355,7 @@
     <rdfs:label xml:lang="en-US">subject</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#StudentOrganization">
-    <rdfs:label xml:lang="en-US">StudentOrganization</rdfs:label>
+    <rdfs:label xml:lang="en-US">Student Organization</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/coden">
     <rdfs:label xml:lang="en-US">coden</rdfs:label>
