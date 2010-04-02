@@ -16,6 +16,12 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 CONSTRUCT {
    _:teachingActivity rdf:type core:TeachingActivity .
    _:teachingActivity rdfs:label ?teachingFocus .
+   _:teachingActivity rdf:type ?flag .
+   ?s core:hasTeachingActivity _:teachingActivity .
 } WHERE {
    ?s core:teachingFocus ?teachingFocus 
+   OPTIONAL {
+      ?s rdf:type ?flag
+      FILTER (regex(str(?flag),"http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1"))
+   }
 }

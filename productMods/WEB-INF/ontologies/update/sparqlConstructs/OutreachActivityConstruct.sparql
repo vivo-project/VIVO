@@ -16,6 +16,12 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 CONSTRUCT {
    _:outreachActivity rdf:type core:OutreachActivity .
    _:outreachActivity rdfs:label ?outreachFocus .
+   _:outreachActivity rdf:type ?flag .
+   ?s core:hasOutreachActivity _:outreachActivity .
 } WHERE {
-   ?s core:outreachFocus ?outreachFocus 
+   ?s core:outreachFocus ?outreachFocus
+   OPTIONAL {
+      ?s rdf:type ?flag
+      FILTER (regex(str(?flag),"http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1"))
+   } 
 }
