@@ -1,6 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-/* RY In a later iteration of the custom form Javascript, this will subclass the customForm object. */
+/* RY In a later iteration of the custom form Javascript, we'll create a customForm object
+ * with subclasses for one-step and two-step forms. The parent object will contain
+ * the utilities used by all form types. 
+ */
 
 /* Two-step custom form workflow:
  * 
@@ -27,9 +30,19 @@
  * Looks like add form step 2 except shows add new link 
  * Has same three view variants as step 2 add form
  * 
+ * 
+ * One-step custom form workflow:
+ *             
+ * Has three view variations:
+ * 		- Select an existing secondary individual view
+ *      - Add new secondary individual view
+ *      - Combined view, if we are returning from a failed validation and can't determine 
+ *        which variant of the view we had submitted the form from. Contains the select
+ *        existing element plus the add new link.
  */
+ 
 
-var customFormTwoStep = {
+var customForm = {
 
     onLoad: function() {
 
@@ -38,7 +51,7 @@ var customFormTwoStep = {
         this.initForm();      
     },
     
-    // On page load, create references within the customFormTwoStep scope to DOM elements.
+    // On page load, create references within the customForm scope to DOM elements.
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function() {
 
@@ -57,10 +70,13 @@ var customFormTwoStep = {
         this.cancel = this.form.find('.cancel');
         this.requiredHints = this.form.find('.requiredHint');        
         
+        this.close = this.form.find('.close');
+        
         // Read values used to control display
         this.editType = $("input[name='editType']").val();
         this.entryType = $("input[name='entryType']").val().capitalizeWords();
         this.secondaryType = $("input[name='secondaryType']").val().capitalizeWords();
+        this.formSteps = $("input[name='steps']").val();
 
     },
     
@@ -96,7 +112,7 @@ var customFormTwoStep = {
         // If there are validation errors on the page, we're returning from 
         // an attempted submission that failed validation, and we need to go
         // directly to step 2.
-        if (this.findValidationErrors()) {
+        if (this.formSteps == 1 || this.findValidationErrors()) {
             this.doAddFormStep2();
         } else {
             this.doAddFormStep1();
@@ -106,30 +122,30 @@ var customFormTwoStep = {
     // Reset add form to initial state (step 1) after cancelling out of step 2
     resetAddFormToStep1: function() {   
 
-    	customFormTwoStep.resetForm();        
-    	customFormTwoStep.doAddFormStep1();
+    	customForm.resetForm();        
+    	customForm.doAddFormStep1();
     },
 
     // Set up the add form for step 1
     doAddFormStep1: function() {
 
-    	customFormTwoStep.existing.show();
-    	customFormTwoStep.addNewLink.show();
-    	customFormTwoStep.addNew.hide();
-    	customFormTwoStep.entry.hide();    
-    	customFormTwoStep.requiredLegend.hide();
-    	customFormTwoStep.button.val('Continue');  
+    	customForm.existing.show();
+    	customForm.addNewLink.show();
+    	customForm.addNew.hide();
+    	customForm.entry.hide();    
+    	customForm.requiredLegend.hide();
+    	customForm.button.val('Continue');  
         
         // Assign event listeners 
         //this.button.unbind('click');   // RY *** Don't need this if we've done a reset
-    	customFormTwoStep.button.bind('click', function() {
-            customFormTwoStep.doAddFormStep2SelectExisting();           
+    	customForm.button.bind('click', function() {
+            customForm.doAddFormStep2SelectExisting();           
             return false;              
         });
         
         //this.addNewLink.unbind('click'); // RY *** Don't need this if we've done a reset
-    	customFormTwoStep.addNewLink.bind('click', function() {
-            customFormTwoStep.doAddFormStep2AddNew();
+    	customForm.addNewLink.bind('click', function() {
+            customForm.doAddFormStep2AddNew();
         });     
     },
     
@@ -137,7 +153,7 @@ var customFormTwoStep = {
     // on the form submission.
     doAddFormStep2: function() {
 
-    	var view = customFormTwoStep.getPreviousViewFromFormData();
+    	var view = customForm.getPreviousViewFromFormData();
         
     	switch (view) {
 			case "existing": { fn = this.doAddFormStep2SelectExisting; break; }
@@ -148,34 +164,34 @@ var customFormTwoStep = {
         fn.call();             
     },
 
-    // Most methods below use 'customFormTwoStep' rather than 'this', because 'this' doesn't reference
-    // customFormTwoStep when the method is called from an event listener. Only if the method never
+    // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
+    // customForm when the method is called from an event listener. Only if the method never
     // gets called from an event listener can we use the 'this' reference.
     
     // Step 2: selecting an existing individual
     doAddFormStep2SelectExisting: function() {
 
-    	customFormTwoStep.showSelectExistingFields();
-        customFormTwoStep.doButtonForStep2(customFormTwoStep.defaultButtonText);
-        customFormTwoStep.doCancelForStep2();        
+    	customForm.showSelectExistingFields();
+        customForm.doButtonForStep2(customForm.defaultButtonText);
+        customForm.doCancelForStep2();        
     },
     
     // Step 2: adding a new individual
     doAddFormStep2AddNew: function() {
 
-        customFormTwoStep.showAddNewFields();
-        customFormTwoStep.doButtonForStep2(customFormTwoStep.addNewButtonText);
-        customFormTwoStep.doCancelForStep2();
+        customForm.showAddNewFields();
+        customForm.doButtonForStep2(customForm.addNewButtonText);
+        customForm.doCancelForStep2();
     },
     
     // Step 2: combined view, when we are returning from validation errors and we
     // can't determine which view of the form we had been on.
     doAddFormStep2Combined: function() {
         
-        customFormTwoStep.showCombinedFields();
-        customFormTwoStep.doAddNewLink(customFormTwoStep.addNewButtonText);        
-        customFormTwoStep.doButtonForStep2(customFormTwoStep.defaultButtonText);        
-        customFormTwoStep.doCancelForStep2();
+        customForm.showCombinedFields();
+        customForm.doAddNewLink(customForm.addNewButtonText);        
+        customForm.doButtonForStep2(customForm.defaultButtonText);        
+        customForm.doCancelForStep2();
     },
     
 
@@ -202,7 +218,7 @@ var customFormTwoStep = {
         } else {
         	fn = this.doEditFormDefaultView;
         }    
-        fn.call(customFormTwoStep);        
+        fn.call(customForm);        
     },
     
     doEditFormSelectExisting: function() {   	
@@ -224,13 +240,13 @@ var customFormTwoStep = {
     /***** Utilities *****/
  
     unbindEventListeners: function() {
-    	customFormTwoStep.cancel.unbind('click');
-    	customFormTwoStep.button.unbind('click');    
-    	customFormTwoStep.addNewLink.unbind('click');   	
+    	customForm.cancel.unbind('click');
+    	customForm.button.unbind('click');    
+    	customForm.addNewLink.unbind('click');   	
     },
     
     clearFormData: function() {
-    	customFormTwoStep.clearFields(customFormTwoStep.form);
+    	customForm.clearFields(customForm.form);
     },
     
     // Clear data from form elements in element el
@@ -269,43 +285,43 @@ var customFormTwoStep = {
     
     showFields: function(el) {
         el.show();
-        customFormTwoStep.toggleRequiredHints('add', el);
+        customForm.toggleRequiredHints('add', el);
     },    
     
     hideFields: function(el) {
         // Clear any input, so if we reshow the element the input won't still be there.
-        customFormTwoStep.clearFields(el);
+        customForm.clearFields(el);
         el.hide();
     },
 
     // Add event listener to the submit button in step 2
     doButtonForStep2: function(text) {
-    	customFormTwoStep.button.unbind('click');
-    	customFormTwoStep.button.val(text);
+    	customForm.button.unbind('click');
+    	customForm.button.val(text);
     },
     
     // Add event listener to the cancel link in step 2
     doCancelForStep2: function() {
     	
-        customFormTwoStep.cancel.unbind('click');
-        customFormTwoStep.cancel.bind('click', function() {
-            customFormTwoStep.resetAddFormToStep1();
+        customForm.cancel.unbind('click');
+        customForm.cancel.bind('click', function() {
+            customForm.resetAddFormToStep1();
             return false;
         });         
     },
     
     doAddNewLink: function(buttonText) {
 
-    	customFormTwoStep.addNewLink.unbind('click');
-    	customFormTwoStep.addNewLink.bind('click', function() {
+    	customForm.addNewLink.unbind('click');
+    	customForm.addNewLink.bind('click', function() {
             $(this).hide();
             // Make sure to clear out what's in the existing select element,
             // else it could be submitted even when hidden.
-            customFormTwoStep.hideFields(customFormTwoStep.existing);
-            customFormTwoStep.showFields(customFormTwoStep.addNew);
+            customForm.hideFields(customForm.existing);
+            customForm.showFields(customForm.addNew);
             
             if (buttonText) {
-                customFormTwoStep.button.val(buttonText);            	
+                customForm.button.val(buttonText);            	
             }
         });  
     },
@@ -313,7 +329,7 @@ var customFormTwoStep = {
     // Return true iff there are validation errors on the form
     findValidationErrors: function() {
 
-        return customFormTwoStep.form.find('.validationError').length > 0;
+        return customForm.form.find('.validationError').length > 0;
     	
 // RY For now, we just need to look for the presence of the error elements.
 // Later, however, we may generate empty error messages in the markup, for
@@ -338,29 +354,29 @@ var customFormTwoStep = {
     resetForm: function() {
     	
         // Clear all form data and error messages
-        customFormTwoStep.clearFormData();
+        customForm.clearFormData();
         
         // Remove previously bound event handlers
-        customFormTwoStep.unbindEventListeners();
+        customForm.unbindEventListeners();
        
         // Remove required field hints
-        customFormTwoStep.toggleRequiredHints('remove', customFormTwoStep.addNew, customFormTwoStep.existing);     	
+        customForm.toggleRequiredHints('remove', customForm.addNew, customForm.existing);     	
     },
     
     showSelectExistingFields: function() {
     	
-        customFormTwoStep.showFields(customFormTwoStep.existing);  
-        customFormTwoStep.addNewLink.hide();
-        customFormTwoStep.addNew.hide();
-        customFormTwoStep.showFieldsForAllViews();
+        customForm.showFields(customForm.existing);  
+        customForm.addNewLink.hide();
+        customForm.addNew.hide();
+        customForm.showFieldsForAllViews();
     },
     
     showAddNewFields: function() {
 
-        customFormTwoStep.existing.hide();
-        customFormTwoStep.addNewLink.hide();
-        customFormTwoStep.showFields(customFormTwoStep.addNew);
-        customFormTwoStep.showFieldsForAllViews();      
+        customForm.existing.hide();
+        customForm.addNewLink.hide();
+        customForm.showFields(customForm.addNew);
+        customForm.showFieldsForAllViews();      
     },
     
     // This version of the form shows both the existing select and add new link.
@@ -369,16 +385,16 @@ var customFormTwoStep = {
     // the submission.
     showCombinedFields: function() {
 
-    	customFormTwoStep.showFields(customFormTwoStep.existing);
-    	customFormTwoStep.addNewLink.show();
-    	customFormTwoStep.addNew.hide();       
-        customFormTwoStep.showFieldsForAllViews();
+    	customForm.showFields(customForm.existing);
+    	customForm.addNewLink.show();
+    	customForm.addNew.hide();       
+        customForm.showFieldsForAllViews();
     },
     
     // Show fields that appear in all views for add form step 2 and edit form
     showFieldsForAllViews: function() {
-        customFormTwoStep.entry.show();  
-        customFormTwoStep.requiredLegend.show();     	
+        customForm.entry.show();  
+        customForm.requiredLegend.show();     	
     },
     
     // When returning to the add/edit form after a failed form submission (due to 
@@ -420,5 +436,5 @@ var customFormTwoStep = {
 };
 
 $(document).ready(function(){   
-    customFormTwoStep.onLoad();
+    customForm.onLoad();
 });

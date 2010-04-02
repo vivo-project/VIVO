@@ -289,8 +289,8 @@
         <c:set var="submitLabel" value="Create position" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customFormTwoStep.js"
-                                                                //, "forms/js/customForm.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
+                                                                //, "forms/js/customFormTwoStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
@@ -336,7 +336,8 @@
     <input type="hidden" name="editType" value="${editType}" />
     <input type="hidden" name="entryType" value="position" /> 
     <input type="hidden" name="secondaryType" value="organization" />
-    
+    <input type="hidden" name="steps" value="2" />
+       
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>

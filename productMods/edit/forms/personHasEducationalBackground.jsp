@@ -131,7 +131,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
         ?edBackgroundUri <${hasDegree}> ?existingDegreeUri }
 </v:jsonset>
 <v:jsonset var="degreeAssertion" >      
-    ?educationalBackgroundUri <${hasDegree}> ?degreeUri .
+    ?edBackgroundUri <${hasDegree}> ?degreeUri .
     ?degreeUri <${degreeFor}> ?edBackgroundUri .
 </v:jsonset>
 
@@ -193,11 +193,11 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edBackgroundUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}", "${yearAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${majorFieldAssertion}", "${yearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
                         "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${deptAssertion}", "${infoAssertion}" ],
+                        "${deptAssertion}", "${infoAssertion}", "${degreeAssertion}" ],
                         
     "newResources"  : { "edBackgroundUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -222,7 +222,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     "fields" : {
       "degreeUri" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty" ],
+         "validators"       : [  ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
@@ -348,8 +348,8 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
         <c:set var="submitLabel" value="Create New Educational Background" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customFormOneStep.js"
-                                                                //, "forms/js/customForm.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
+                                                                //, "forms/js/customFormOneStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
@@ -375,7 +375,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
      
     <div class="relatedIndividual">
         <div class="existing">
-            <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span class="existingOrNew">or</span>
+            <v:input type="select" label="Organization Granting Degree" labelClass="required" id="organizationUri"  /><span class="existingOrNew">or</span>
         </div>
     
         <div class="addNewLink">
@@ -399,6 +399,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     <input type="hidden" name="editType" value="${editType}" />
     <input type="hidden" name="entryType" value="educational background" /> 
     <input type="hidden" name="secondaryType" value="organization" />
+    <input type="hidden" name="steps" value="1" />
     
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
     

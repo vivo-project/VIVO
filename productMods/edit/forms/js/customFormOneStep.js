@@ -31,11 +31,11 @@ var customFormOneStep = {
         
         // These may need to be changed to classes rather than ids, if there are
         // multiple sets of divs to show/hide during the workflow.
-        this.addNewLink = $('#addNewLink');
-        this.existing = $('#existing');
-        this.addNew = $('#new');
+        this.addNewLink = $('.addNewLink');
+        this.existing = $('.existing');
+        this.addNew = $('.new');
         this.entry = $('.entry');
-        this.existingOrNew = $('#existingOrNew');
+        this.existingOrNew = $('.existingOrNew');
 
         this.cancel = this.form.find('.cancel');
         this.requiredHints = this.form.find('.requiredHint');    
@@ -53,7 +53,7 @@ var customFormOneStep = {
     // These are features that will NOT CHANGE throughout the workflow of the Javascript version..
     adjustForJs: function() {
     
-        var selectExistingLabel = $('#existing label');
+        var selectExistingLabel = $('.existing label');
         selectExistingLabel.html(selectExistingLabel.html().replace(/Select (Existing )?/, ''));
         
         this.existingOrNew.hide();
@@ -82,7 +82,7 @@ var customFormOneStep = {
         // an attempted submission that failed validation, and we need to go
         // directly to step 2.
         if (this.findValidationErrors()) {
-            this.doAddFormStep2();
+        	this.doAddFormStep2();
         } else {
             this.doAddFormStep1();
         }
