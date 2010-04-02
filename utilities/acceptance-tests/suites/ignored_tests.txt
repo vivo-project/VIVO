@@ -9,3 +9,4 @@
 user-management, Bookmark Without Logging In # This test is known to fail, because not all pages come up properly if bookmarked. 
 CreatePeople,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
 CreatePeople,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
+CreatePeople,    AddFacultyPosition          # Position workflow has changed.
