@@ -308,19 +308,21 @@
 
 <form class="${editType}" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <div id="existing">
-        <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span id="existingOrNew">or</span>
-    </div>
+    <div class="relatedIndividual">
+        <div class="existing">
+            <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span class="existingOrNew">or</span>
+        </div>
     
-    <div id="addNewLink">
-        If your organization is not listed, please <a href="#">add a new organization</a>.    
-    </div>
-       
-    <div id="new">
-        <h6>Add a New Organization</h6>
-        <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
-        <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
-    </div>
+        <div class="addNewLink">
+            If your organization is not listed, please <a href="#">add a new organization</a>.    
+        </div>
+      
+        <div class="new">
+            <h6>Add a New Organization</h6>
+            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
+            <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
+        </div>   
+    </div>   
     
     <div class="entry"> 
         <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />

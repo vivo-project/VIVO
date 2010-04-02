@@ -34,11 +34,13 @@ var customFormOneStep = {
         this.addNewLink = $('#addNewLink');
         this.existing = $('#existing');
         this.addNew = $('#new');
-        this.entry = $('#entry');
+        this.entry = $('.entry');
         this.existingOrNew = $('#existingOrNew');
 
         this.cancel = this.form.find('.cancel');
-        this.requiredHints = this.form.find('.requiredHint');        
+        this.requiredHints = this.form.find('.requiredHint');    
+        
+        this.close = this.form.find('.close');
         
         // Read values used to control display
         this.editType = $("input[name='editType']").val();

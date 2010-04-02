@@ -12,7 +12,7 @@
     font-size: 110%;
 }
 
-#content form div#addNewLink {
+#content form div.addNewLink {
     float: left;
     clear: none;
     margin-left: 5em;
@@ -23,17 +23,17 @@
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
 
-#content form #existing {
+#content form .existing {
     float: left;
     clear: none;
 }
 
-#existingOrNew {
+.existingOrNew {
     font-style: italic;
     margin-left: 1em;
 }
 
-#new {
+.new {
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
     width: 70%;
@@ -85,4 +85,8 @@ option {
 #content form p.validationError {
     clear: both;
     margin-bottom: 1.25em;
+}
+
+.close {
+    display: none; /* Hide if Javascript disabled. Javascript will show. */
 }

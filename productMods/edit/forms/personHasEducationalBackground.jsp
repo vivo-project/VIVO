@@ -372,20 +372,22 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
         <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />      
         <p class="inline year"><v:input type="text" label="Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="year" size="4" /></p>  
     </div>
-        
-    <div id="existing">
-        <v:input type="select" label="Organization Granting Degree" labelClass="required" id="organizationUri"  /><span id="existingOrNew">or</span>
-    </div>
+     
+    <div class="relatedIndividual">
+        <div class="existing">
+            <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span class="existingOrNew">or</span>
+        </div>
     
-    <div id="addNewLink">
-        If your organization is not listed, please <a href="#">add a new organization</a>.    
-    </div>
-       
-    <div id="new">
-        <h6>Add a New Organization</h6>
-        <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
-        <v:input type="select" label="Organization Type" labelClass="required" id="newOrgType" />
-    </div>
+        <div class="addNewLink">
+            If your organization is not listed, please <a href="#">add a new organization</a>.    
+        </div>
+      
+        <div class="new">
+            <h6>Add a New Organization</h6>
+            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
+            <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
+        </div>   
+    </div> 
     
     <div class="entry"> 
         <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
