@@ -3773,4 +3773,19 @@
     <j.0:inClassGroup rdf:resource="http://vivoweb.org/ontology#vitroClassGrouporganizations"/>
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
+  
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#blurb">
+    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#dbAdmin"/> 
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#citation">
+    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#dbAdmin"/> 
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description">
+    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#dbAdmin"/> 
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#moniker">
+    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#editor"/> 
+  </rdf:Description>
+  
 </rdf:RDF>
