@@ -1606,6 +1606,7 @@
     <j.0:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.0:offerCreateNewOptionAnnot>
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <j.0:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.0:selectFromExistingAnnot>
+    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">personHasEducationalBackground.jsp</j.0:customEntryFormAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortIT">
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>

@@ -59,8 +59,8 @@ var customFormTwoStep = {
         
         // Read values used to control display
         this.editType = $("input[name='editType']").val();
-        this.entryType = $("input[name='entryType']").val().capitalize();
-        this.secondaryType = $("input[name='secondaryType']").val().capitalize();
+        this.entryType = $("input[name='entryType']").val().capitalizeWords();
+        this.secondaryType = $("input[name='secondaryType']").val().capitalizeWords();
 
     },
     

@@ -46,59 +46,106 @@
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="type" value="${rdf}type" />
-<c:set var="positionClass" value="${vivoCore}Position" />
+<c:set var="edBackgroundClass" value="${vivoCore}EducationalBackground" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
+<c:set var="degreeClass" value="${vivoCore}AcademicDegree" />
+<%--
+Classes: 
+core:EducationalBackground - new entity
+foaf:Person
+foaf:Organization
+core:AcademicDegree
 
+Data properties of EducationalBackground:
+core:majorField
+core:year
+core:departmentOrSchool
+core:supplementalInformation
+
+Object properties (domain : range)
+
+core:educationalBackground (Person : EducationalBackground) - inverse of educationalBackgroundOf
+core:educationalBackgroundOf (EducationalBackground : Person) - inverse of educationalBackground
+
+core:degreeTypeAwarded (EducationalBackground : AcademicDegree) - inverse of awardedTo
+core:awardedTo (AcademicDegree : EducationalBackground) - inverse of degreeTypeAwarded
+
+core:organizationGrantingDegree (EducationalBackground : Organization) - no inverse
+
+ --%>
+
+
+<%-- Data properties --%>
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
       to convey that the expression is used to retrieve any existing value for the field in an existing individual.
       Each of these must then be referenced in the sparqlForExistingLiterals section of the JSON block below
       and in the literalsOnForm --%>
-<c:set var="titlePred" value="${vivoCore}titleOrRole" />
-<v:jsonset var="titleExisting" >  
-    SELECT ?titleExisting WHERE {
-          ?positionUri <${titlePred}> ?titleExisting }
+<c:set var="majorFieldPred" value="${vivoCore}majorField" />
+<v:jsonset var="majorFieldExisting" >  
+    SELECT ?majorFieldExisting WHERE {
+          ?edBackgroundUri <${majorFieldPred}> ?majorFieldExisting }
 </v:jsonset>
 
 <%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
-<v:jsonset var="titleAssertion" >      
-    ?positionUri <${titlePred}> ?title .
-    ?positionUri <${label}> ?title. 
+<v:jsonset var="majorFieldAssertion" >      
+    ?edBackgroundUri <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
-<c:set var="startYearPred" value="${vivoCore}startYear" />
-<v:jsonset var="startYearExisting" >      
-      SELECT ?startYearExisting WHERE {  
-          ?positionUri <${startYearPred}> ?startYearExisting }
+<c:set var="yearPred" value="${vivoCore}year" />
+<v:jsonset var="yearExisting" >  
+    SELECT ?existingYear WHERE {
+          ?edBackgroundUri <${yearPred}> ?existingYear }
 </v:jsonset>
-<v:jsonset var="startYearAssertion" >
-      ?positionUri <${startYearPred}> ?startYear .
-</v:jsonset>
-
-<c:set var="endYearPred" value="${vivoCore}endYear" />
-<v:jsonset var="endYearExisting" >      
-      SELECT ?endYearExisting WHERE {  
-          ?positionUri <${endYearPred}> ?endYearExisting }
-</v:jsonset>
-<v:jsonset var="endYearAssertion" >
-      ?positionUri <${endYearPred}> ?endYear .
+<v:jsonset var="yearAssertion" >      
+    ?edBackgroundUri <${yearPred}> ?year .
 </v:jsonset>
 
+<c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
+<v:jsonset var="deptExisting" >  
+    SELECT ?existingDept WHERE {
+          ?edBackgroundUri <${deptPred}> ?existingDept }
+</v:jsonset>
+<v:jsonset var="deptAssertion" >      
+    ?edBackgroundUri <${deptPred}> ?dept .
+</v:jsonset>
+
+<c:set var="infoPred" value="${vivoCore}supplementalInformation" />
+<v:jsonset var="infoExisting" >  
+    SELECT ?existingInfo WHERE {
+          ?edBackgroundUri <${infoPred}> ?existingInfo }
+</v:jsonset>
+<v:jsonset var="infoAssertion" >      
+    ?edBackgroundUri <${infoPred}> ?info .
+</v:jsonset>
+
+<%-- Object properties --%>
 <%--  Note there is really no difference in how things are set up for an object property except
       below in the n3ForEdit section, in whether the ..Existing variable goes in SparqlForExistingLiterals
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
-<c:set var="positionInOrgPred" value="${vivoCore}positionInOrganization" />
-<c:set var="orgForPositionPred" value="${vivoCore}organizationForPosition" />
-<v:jsonset var="organizationUriExisting" >      
-    SELECT ?existingOrgUri WHERE {
-        ?positionUri <${positionInOrgPred}> ?existingOrgUri }
+<c:set var="hasDegree" value="${vivoCore}degreeTypeAwarded" />
+<c:set var="degreeFor" value="${vivoCore}awardedTo" />
+<v:jsonset var="degreeExisting" >      
+    SELECT ?existingDegreeUri WHERE {
+        ?edBackgroundUri <${hasDegree}> ?existingDegreeUri }
 </v:jsonset>
-<v:jsonset var="organizationUriAssertion" >      
-    ?positionUri <${positionInOrgPred}> ?organizationUri .
-    ?organizationUri <${orgForPositionPred}> ?positionUri .
+<v:jsonset var="degreeAssertion" >      
+    ?educationalBackgroundUri <${hasDegree}> ?degreeUri .
+    ?degreeUri <${degreeFor}> ?edBackgroundUri .
 </v:jsonset>
 
+<c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />
+<%-- This property has no inverse --%>
+<v:jsonset var="organizationUriExisting" >      
+    SELECT ?existingOrgUri WHERE {
+        ?edBackgroundUri <${orgGrantingDegree}> ?existingOrgUri }
+</v:jsonset>
+<v:jsonset var="organizationUriAssertion" >      
+    ?edBackgroundUri <${orgGrantingDegree}> ?organizationUri .
+</v:jsonset>
+
+<%-- Do we need anything like this? EducationalBackground has no subtypes 
 <v:jsonset var="positionTypeExisting">
     SELECT ?existingPositionType WHERE {
         ?positionUri <${type}> ?existingPositionType }
@@ -106,6 +153,7 @@
 <v:jsonset var="positionTypeAssertion">
     ?positionUri <${type}> ?positionType .
 </v:jsonset>
+--%>
 
 <v:jsonset var="newOrgNameAssertion">
     ?newOrg <${label}> ?newOrgName .
@@ -118,22 +166,22 @@
 <v:jsonset var="n3ForStmtToPerson">       
     @prefix core: <${vivoCore}> .     
 
-    ?person      core:personInPosition  ?positionUri .
-    ?positionUri core:positionForPerson ?person .
-    ?positionUri <${type}>  ?positionType .
-    ?positionUri <${type}> <${flagURI}> .
+    ?person      core:educationalBackground  ?edBackgroundUri .
+    ?edBackgroundUri core:educationalBackgroundOf ?person .
+    ?edBackgroundUri <${type}>  core:EducationalBackground .
+    ?edBackgroundUri <${type}> <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
     ?newOrg <${label}> ?newOrgName .
     ?newOrg <${type}> ?newOrgType .
-    ?positionUri <${positionInOrgPred}> ?newOrg .
-    ?newOrg <${orgForPositionPred}> ?positionUri .
+    ?edBackgroundUri <${orgGrantingDegree}> ?newOrg .
     ?newOrg <${type}> <${flagURI}> .
 </v:jsonset>
 
-<v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
+<v:jsonset var="edBackgroundClassUriJson">${edBackgroundClass}</v:jsonset>
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
+<v:jsonset var="degreeClassUriJson">${degreeClass}</v:jsonset>
 
 <c:set var="editjson" scope="request">
   {
@@ -143,57 +191,68 @@
 
     "subject"   : ["person",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
-    "object"    : ["positionUri", "${objectUriJson}", "URI" ],
+    "object"    : ["edBackgroundUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}", "${yearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
                         "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${endYearAssertion}"],
+                        "${deptAssertion}", "${infoAssertion}" ],
                         
-    "newResources"  : { "positionUri" : "${defaultNamespace}",
+    "newResources"  : { "edBackgroundUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
 
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "organizationUri", "newOrgType", "positionType" ],
-    "literalsOnForm" :  [ "title", "newOrgName", 
-                          "startYear", "endYear" ],
+    "urisOnForm"     : [ "organizationUri", "newOrgType", "degreeUri" ],
+    "literalsOnForm" : [ "majorField", "year", "dept", "info", "newOrgName"],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
-        "title"              : "${titleExisting}",
-        "startYear"          : "${startYearExisting}",
-        "endYear"            : "${endYearExisting}"
+        "majorField"         : "${majorFieldExisting}",
+        "year"               : "${yearExisting}",
+        "dept"               : "${deptExisting}",
+        "info"               : "${infoExisting}"
     },
     "sparqlForExistingUris" : {
         "organizationUri"   : "${organizationUriExisting}",
-        "positionType"      : "${positionTypeExisting}"
+        "degreeUri"         : "${degreeExisting}"
     },
     "fields" : {
-      "title" : {
+      "degreeUri" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty" ],
+         "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
+         "literalOptions"   : [ "Select one" ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "${degreeClassUriJson}",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",
+         "assertions"       : [ "${degreeAssertion}" ]
+      },   
+      "majorField" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
-         "assertions"       : [ "${titleAssertion}" ]
+         "assertions"       : [ "${majorFieldAssertion}" ]
       },
-     "positionType" : {
+      "year" : {
          "newResource"      : "false",
-         "validators"       : [  ],
-         "optionsType"      : "CHILD_VCLASSES_WITH_PARENT",
-         "literalOptions"   : [ "Select one" ],
+         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${positionClassUriJson}",
-         "rangeDatatypeUri" : "",
-         "rangeLang"        : "",
-         "assertions"       : [ "${positionTypeAssertion}" ]
-      },         
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${yearAssertion}"]
+      },     
      "organizationUri" : {
          "newResource"      : "false",
          "validators"       : [  ],
@@ -227,28 +286,28 @@
          "rangeLang"        : "",
          "assertions"       : [ "${newOrgTypeAssertion}" ]
       },      
-      "startYear" : {
+      "dept" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : ["${deptAssertion}"]
       },
-      "endYear" : {
+      "info" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
-      }
+         "assertions"       : ["${infoAssertion}"]
+      }    
   }
 }
 </c:set>
@@ -277,16 +336,16 @@
     if (objectUri != null) { // editing existing entry
 %>
         <c:set var="editType" value="edit" />
-        <c:set var="title" value="Edit position entry for ${subjectName}" />
+        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Save changes" />
 <% 
     } else { // adding new entry
 %>
         <c:set var="editType" value="add" />
-        <c:set var="title" value="Create a new position entry for ${subjectName}" />
+        <c:set var="title" value="Create a new educational background entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Create position" />
+        <c:set var="submitLabel" value="Create New Educational Background" />
 <%  } 
     
     List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customFormOneStep.js"
@@ -294,8 +353,8 @@
                                                                 ));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css"
-                                                                 //, "forms/css/personHasEducationalbackground.css"
+    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css",
+                                                                 "forms/css/personHasEducationalBackground.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
@@ -308,8 +367,14 @@
 
 <form class="${editType}" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
+    <div class="entry"> 
+        <v:input type="select" label="Degree ${requiredHint}" labelClass="required" id="degreeUri"  />  
+        <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />      
+        <p class="inline year"><v:input type="text" label="Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="year" size="4" /></p>  
+    </div>
+        
     <div id="existing">
-        <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span id="existingOrNew">or</span>
+        <v:input type="select" label="Organization Granting Degree" labelClass="required" id="organizationUri"  /><span id="existingOrNew">or</span>
     </div>
     
     <div id="addNewLink">
@@ -319,20 +384,18 @@
     <div id="new">
         <h6>Add a New Organization</h6>
         <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
-        <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
+        <v:input type="select" label="Organization Type" labelClass="required" id="newOrgType" />
     </div>
     
-    <div id="entry"> 
-        <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />
-        <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
-
-        <p class="inline year"><v:input type="text" label="Start Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" /></p>    
-        <p class="inline year"><v:input type="text" label="End Year <span id='endYearHint' class='hint'>(YYYY)</span>" id="endYear" size="4" /></p>
+    <div class="entry"> 
+        <v:input type="text" label="Department or School Name within the Organization" id="dept" size="30" />
+        <v:input type="text" label="Supplemental Information" id="info" size="30" />
+        <p>e.g., <em>Magna cum laude</em> or <em>Graduate School Fellowship, 1975-1976</em></p>    
     </div>
     
     <!-- Processing information for Javascript -->
     <input type="hidden" name="editType" value="${editType}" />
-    <input type="hidden" name="entryType" value="position" /> 
+    <input type="hidden" name="entryType" value="educational background" /> 
     <input type="hidden" name="secondaryType" value="organization" />
     
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
