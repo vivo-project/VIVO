@@ -1,7 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 #content form {
-    width: 50%;
+/*    width: 50%;*/
 }
 
 #content form div {
@@ -17,8 +17,8 @@
     clear: none;
     margin-left: 5em;
     margin-top: .9em;
-    width: 30%;
-    padding: .6em 0 .6em 1.5em;
+    width: 200px;
+    padding: 0.8em;
     border: 1px solid #9c9c9c;
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
@@ -36,7 +36,7 @@
 .new {
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
-    width: 70%;
+    width: 300px;
 }
 
 
@@ -74,7 +74,7 @@ option {
 }
 
 #content form .requiredHint {
-    color: #ff7700;
+    color: #f00;
     font-weight: normal;
 }
 
