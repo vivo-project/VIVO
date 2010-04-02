@@ -142,7 +142,7 @@
 <tr>
 	<td>select</td>
 	<td>TypeURI</td>
-	<td>label=core:FacultyMember</td>
+	<td>label=core:Faculty Member</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -231,7 +231,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>exact:http://vivo.mydomain.edu/individual/UserJoe</td>
+	<td>User may edit as the following Individuals:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>UserJoe</td>
 	<td></td>
 </tr>
 <tr>
@@ -291,12 +296,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=FacultyMember</td>
+	<td>link=Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>FacultyMember</td>
+	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
