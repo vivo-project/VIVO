@@ -1466,6 +1466,7 @@
     <j.0:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.0:selectFromExistingAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EducationalBackground">
+    <j.0:customShortViewAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">edBackgroundShortView.jsp</j.0:customShortViewAnnot>
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</j.0:displayLimitAnnot>
     <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</j.0:displayRankAnnot>
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
