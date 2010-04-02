@@ -22,7 +22,7 @@
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
 <%! 
-    public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.personHasPositionHistory.jsp");
+    public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.personHasEducationalBackground.jsp");
 %>
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -289,13 +289,13 @@
         <c:set var="submitLabel" value="Create position" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customFormTwoStep.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customFormOneStep.js"
                                                                 //, "forms/js/customForm.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
     List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css"
-                                                                 , "forms/css/personHasPositionHistory.css"
+                                                                 //, "forms/css/personHasEducationalbackground.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
