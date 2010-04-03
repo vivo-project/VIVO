@@ -42,10 +42,8 @@
 %>
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
-<c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
-<c:set var="type" value="${rdf}type" />
 <c:set var="positionClass" value="${vivoCore}Position" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 
@@ -63,8 +61,8 @@
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="titleAssertion" >      
-    ?positionUri <${titlePred}> ?title .
-    ?positionUri <${label}> ?title. 
+    ?positionUri <${titlePred}> ?title ;
+                 <${label}> ?title. 
 </v:jsonset>
 
 <c:set var="startYearPred" value="${vivoCore}startYear" />
@@ -101,10 +99,10 @@
 
 <v:jsonset var="positionTypeExisting">
     SELECT ?existingPositionType WHERE {
-        ?positionUri <${type}> ?existingPositionType }
+        ?positionUri a ?existingPositionType }
 </v:jsonset>
 <v:jsonset var="positionTypeAssertion">
-    ?positionUri <${type}> ?positionType .
+    ?positionUri a ?positionType .
 </v:jsonset>
 
 <v:jsonset var="newOrgNameAssertion">
@@ -112,24 +110,26 @@
 </v:jsonset>
 
 <v:jsonset var="newOrgTypeAssertion">
-    ?newOrg <${type}> ?newOrgType .
+    ?newOrg a ?newOrgType .
 </v:jsonset>
 
 <v:jsonset var="n3ForStmtToPerson">       
     @prefix core: <${vivoCore}> .     
 
     ?person      core:personInPosition  ?positionUri .
-    ?positionUri core:positionForPerson ?person .
-    ?positionUri <${type}>  ?positionType .
-    ?positionUri <${type}> <${flagURI}> .
+    
+    ?positionUri core:positionForPerson ?person ;
+                 a  ?positionType ;
+                 a <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
-    ?newOrg <${label}> ?newOrgName .
-    ?newOrg <${type}> ?newOrgType .
     ?positionUri <${positionInOrgPred}> ?newOrg .
-    ?newOrg <${orgForPositionPred}> ?positionUri .
-    ?newOrg <${type}> <${flagURI}> .
+    
+    ?newOrg <${label}> ?newOrgName ;
+            a ?newOrgType ;
+            <${orgForPositionPred}> ?positionUri ;
+            a <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
@@ -157,8 +157,7 @@
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "organizationUri", "newOrgType", "positionType" ],
-    "literalsOnForm" :  [ "title", "newOrgName", 
-                          "startYear", "endYear" ],
+    "literalsOnForm" :  [ "title", "newOrgName", "startYear", "endYear" ],                          
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },

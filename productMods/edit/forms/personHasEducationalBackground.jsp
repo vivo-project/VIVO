@@ -45,16 +45,15 @@
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
-<c:set var="type" value="${rdf}type" />
 <c:set var="edBackgroundClass" value="${vivoCore}EducationalBackground" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 <c:set var="degreeClass" value="${vivoCore}AcademicDegree" />
 <%--
 Classes: 
-core:EducationalBackground - new entity
-foaf:Person
-foaf:Organization
-core:AcademicDegree
+core:EducationalBackground - primary new individual being created
+foaf:Person - existing individual
+foaf:Organization - new or existing individual
+core:AcademicDegree - existing individual
 
 Data properties of EducationalBackground:
 core:majorField
@@ -71,9 +70,6 @@ core:degreeTypeAwarded (EducationalBackground : AcademicDegree) - inverse of awa
 core:awardedTo (AcademicDegree : EducationalBackground) - inverse of degreeTypeAwarded
 
 core:organizationGrantingDegree (EducationalBackground : Organization) - no inverse
-
- --%>
-
 
 <%-- Data properties --%>
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
@@ -160,23 +156,25 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
 </v:jsonset>
 
 <v:jsonset var="newOrgTypeAssertion">
-    ?newOrg <${type}> ?newOrgType .
+    ?newOrg a ?newOrgType .
 </v:jsonset>
 
 <v:jsonset var="n3ForStmtToPerson">       
     @prefix core: <${vivoCore}> .     
 
-    ?person      core:educationalBackground  ?edBackgroundUri .
-    ?edBackgroundUri core:educationalBackgroundOf ?person .
-    ?edBackgroundUri <${type}>  core:EducationalBackground .
-    ?edBackgroundUri <${type}> <${flagURI}> .
+    ?person core:educationalBackground  ?edBackgroundUri .
+    
+    ?edBackgroundUri core:educationalBackgroundOf ?person ;
+                     a core:EducationalBackground ;
+                     a <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
-    ?newOrg <${label}> ?newOrgName .
-    ?newOrg <${type}> ?newOrgType .
+    ?newOrg <${label}> ?newOrgName ;
+            a ?newOrgType ;
+            a <${flagURI}> .
+            
     ?edBackgroundUri <${orgGrantingDegree}> ?newOrg .
-    ?newOrg <${type}> <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="edBackgroundClassUriJson">${edBackgroundClass}</v:jsonset>
@@ -193,11 +191,11 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edBackgroundUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${majorFieldAssertion}", "${yearAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}", "${yearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
                         "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${deptAssertion}", "${infoAssertion}", "${degreeAssertion}" ],
+                        "${deptAssertion}", "${infoAssertion}" ],
                         
     "newResources"  : { "edBackgroundUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -222,7 +220,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     "fields" : {
       "degreeUri" : {
          "newResource"      : "false",
-         "validators"       : [  ],
+         "validators"       : [ "nonempty" ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
@@ -338,7 +336,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
         <c:set var="editType" value="edit" />
         <c:set var="title" value="Edit educational background entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Save changes" />
+        <c:set var="submitLabel" value="Save Changes" />
 <% 
     } else { // adding new entry
 %>
