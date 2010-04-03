@@ -30,7 +30,7 @@
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
     String flagURI = null;
-    if (vreq.getAppBean().isFlag1Active()) {
+    if (wdf.getApplicationDao().isFlag1Active()) {
         flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
     } else {
         flagURI = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
