@@ -10,12 +10,6 @@
 	In this JSP that is the  Educational Background, not the Person, Organization or DegreeType
  --%>
 
-<c:if test="${sessionScope.loginHandler != null &&
-              sessionScope.loginHandler.loginStatus == 'authenticated' &&
-              sessionScope.loginHandler.loginRole >= sessionScope.loginHandler.dba }">
-              <c:set var="showEdBackgroundContextNode" value="true"/>
-</c:if>
-
 <c:choose>
 	<c:when test="${!empty individual}">		   		
 	    <c:choose>
@@ -45,26 +39,21 @@
 				<c:set var="degreeAbbreviation" value="${degreeType.dataPropertyMap['http://vivoweb.org/ontology/core#degreeAbbreviation'].dataPropertyStatements[0].data}"/>
 				<c:if test="${ empty degreeAbbreviation }">
 					  <c:set var="degreeAbbreviation" value="${degreeType.name}"/>
-				</c:if>
-	
-				<c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
-				<c:if test="${showEdBackgroundContextNode}">
-					<c:set var="contextNodeURL" value="<a href='${objLink}'> context node</a>"/>
-				</c:if>
+				</c:if>			
 				
 				<c:choose>
 				   <%-- degreeMajor, year, org and abbreviation are all required --%>
 			    	<c:when test="${!empty degreeAbbreviation && ! empty year && ! empty degreeMajor && ! empty selectedOrganizationStr }">			            
-						<p:process>${degreeAbbreviation} in ${degreeMajor}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
+						<p:process>${degreeAbbreviation} in ${degreeMajor}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeSupplementalInfo}</p:process> 
 		            </c:when>		            
 		            <c:when test="${!empty degreeAbbreviation && ! empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
-		                <p:process>${degreeAbbreviation}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
+		                <p:process>${degreeAbbreviation}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process>
 		            </c:when>
 		            <c:when test="${!empty degreeAbbreviation &&  empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
-		                <p:process>${degreeAbbreviation}</p:process> {selectedOrganizationStr} <p:process> ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
+		                <p:process>${degreeAbbreviation}</p:process> {selectedOrganizationStr} <p:process> ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> 
 		            </c:when>
 		            <c:when test="${!empty degreeAbbreviation &&  ! empty year &&  empty degreeMajor && empty selectedOrganizationStr }">
-		                <p:process>${degreeAbbreviation} ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
+		                <p:process>${degreeAbbreviation} ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process>
 		            </c:when>
 		            <c:otherwise>
 	        			<a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>		                 
