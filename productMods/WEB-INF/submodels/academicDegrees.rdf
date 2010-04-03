@@ -331,4 +331,439 @@
   <j.0:AcademicDegree rdf:about="http://vivoweb.org/ontology/core#academicDegree91">
     <rdfs:label xml:lang="en-US">M.S. Master of Science</rdfs:label>
   </j.0:AcademicDegree>
+      <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree1">
+        <j.0:degreeAbbreviation>A.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree10">
+        <j.0:degreeAbbreviation>B.Ag.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree100">
+        <j.0:degreeAbbreviation>Sc.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree101">
+        <j.0:degreeAbbreviation>S.J.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree102">
+        <j.0:degreeAbbreviation>S.J.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree103">
+        <j.0:degreeAbbreviation>S.Sc.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree104">
+        <j.0:degreeAbbreviation>S.T.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree105">
+        <j.0:degreeAbbreviation>S.T.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree106">
+        <j.0:degreeAbbreviation>S.T.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree107">
+        <j.0:degreeAbbreviation>Th.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree108">
+        <j.0:degreeAbbreviation>Th.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree109">
+        <j.0:degreeAbbreviation>Th.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree11">
+        <j.0:degreeAbbreviation>B.A.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree12">
+        <j.0:degreeAbbreviation>B.Arch.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree13">
+        <j.0:degreeAbbreviation>B.B.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree14">
+        <j.0:degreeAbbreviation>B.C.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree15">
+        <j.0:degreeAbbreviation>B.Ch.E</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree16">
+        <j.0:degreeAbbreviation>B.C.L.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree17">
+        <j.0:degreeAbbreviation>B.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree18">
+        <j.0:degreeAbbreviation>B.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree19">
+        <j.0:degreeAbbreviation>B.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree2">
+        <j.0:degreeAbbreviation>AeEng.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree20">
+        <j.0:degreeAbbreviation>B.E.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree21">
+        <j.0:degreeAbbreviation>B.F.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree22">
+        <j.0:degreeAbbreviation>B.F.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree23">
+        <j.0:degreeAbbreviation>B.J.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree24">
+        <j.0:degreeAbbreviation>B.L.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree25">
+        <j.0:degreeAbbreviation>B.L.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree26">
+        <j.0:degreeAbbreviation>B.Lit.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree27">
+        <j.0:degreeAbbreviation>B.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree28">
+        <j.0:degreeAbbreviation>B.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree29">
+        <j.0:degreeAbbreviation>B.M.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree3">
+        <j.0:degreeAbbreviation>A.M.T.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree30">
+        <j.0:degreeAbbreviation>B.N.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree31">
+        <j.0:degreeAbbreviation>B.Pharm.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree32">
+        <j.0:degreeAbbreviation>B.R.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree33">
+        <j.0:degreeAbbreviation>B.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree34">
+        <j.0:degreeAbbreviation>B.S.Ed.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree35">
+        <j.0:degreeAbbreviation>C.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree36">
+        <j.0:degreeAbbreviation>Ch.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree37">
+        <j.0:degreeAbbreviation>D.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree38">
+        <j.0:degreeAbbreviation>D.A.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree39">
+        <j.0:degreeAbbreviation>D.B.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree4">
+        <j.0:degreeAbbreviation>B.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree40">
+        <j.0:degreeAbbreviation>D.C.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree41">
+        <j.0:degreeAbbreviation>D.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree42">
+        <j.0:degreeAbbreviation>D.D.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree43">
+        <j.0:degreeAbbreviation>D.D.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree44">
+        <j.0:degreeAbbreviation>D.Ed.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree45">
+        <j.0:degreeAbbreviation>D.L.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree46">
+        <j.0:degreeAbbreviation>D.M.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree47">
+        <j.0:degreeAbbreviation>D.O.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree48">
+        <j.0:degreeAbbreviation>D.M.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree49">
+        <j.0:degreeAbbreviation>D.P.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree5">
+        <j.0:degreeAbbreviation>B.A.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree50">
+        <j.0:degreeAbbreviation>D.P.H.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree51">
+        <j.0:degreeAbbreviation>D.R.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree52">
+        <j.0:degreeAbbreviation>D.S.W.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree53">
+        <j.0:degreeAbbreviation>D.S.W.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree54">
+        <j.0:degreeAbbreviation>D.Sc.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree55">
+        <j.0:degreeAbbreviation>D.V.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree56">
+        <j.0:degreeAbbreviation>Ed.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree57">
+        <j.0:degreeAbbreviation>Ed.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree58">
+        <j.0:degreeAbbreviation>E.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree59">
+        <j.0:degreeAbbreviation>E.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree6">
+        <j.0:degreeAbbreviation>B.A.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree60">
+        <j.0:degreeAbbreviation>E.Met.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree61">
+        <j.0:degreeAbbreviation>I.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree62">
+        <j.0:degreeAbbreviation>I.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree63">
+        <j.0:degreeAbbreviation>J.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree64">
+        <j.0:degreeAbbreviation>J.S.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree65">
+        <j.0:degreeAbbreviation>L.H.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree66">
+        <j.0:degreeAbbreviation>Litt.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree67">
+        <j.0:degreeAbbreviation>Litt.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree68">
+        <j.0:degreeAbbreviation>LL.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree69">
+        <j.0:degreeAbbreviation>LL.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree7">
+        <j.0:degreeAbbreviation>B.A.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree70">
+        <j.0:degreeAbbreviation>LL.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree71">
+        <j.0:degreeAbbreviation>M.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree72">
+        <j.0:degreeAbbreviation>M.Aero.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree73">
+        <j.0:degreeAbbreviation>M.B.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree74">
+        <j.0:degreeAbbreviation>M.C.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree75">
+        <j.0:degreeAbbreviation>M.C.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree76">
+        <j.0:degreeAbbreviation>M.C.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree77">
+        <j.0:degreeAbbreviation>M.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree78">
+        <j.0:degreeAbbreviation>M.Div.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree79">
+        <j.0:degreeAbbreviation>M.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree8">
+        <j.0:degreeAbbreviation>B.A.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree80">
+        <j.0:degreeAbbreviation>M.Ed.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree81">
+        <j.0:degreeAbbreviation>M.Eng.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree82">
+        <j.0:degreeAbbreviation>M.F.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree83">
+        <j.0:degreeAbbreviation>M.H.A.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree84">
+        <j.0:degreeAbbreviation>M.L.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree85">
+        <j.0:degreeAbbreviation>M.M.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree86">
+        <j.0:degreeAbbreviation>M.M.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree87">
+        <j.0:degreeAbbreviation>M.M.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree88">
+        <j.0:degreeAbbreviation>M.Mus.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree89">
+        <j.0:degreeAbbreviation>M.N.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree9">
+        <j.0:degreeAbbreviation>B.A.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree90">
+        <j.0:degreeAbbreviation>M.R.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree91">
+        <j.0:degreeAbbreviation>M.S.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree92">
+        <j.0:degreeAbbreviation>M.S.W.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree93">
+        <j.0:degreeAbbreviation>M.Th.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree94">
+        <j.0:degreeAbbreviation>Nuc.E.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree95">
+        <j.0:degreeAbbreviation>O.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree96">
+        <j.0:degreeAbbreviation>Pharm.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree97">
+        <j.0:degreeAbbreviation>Ph.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree98">
+        <j.0:degreeAbbreviation>Ph.D.</j.0:degreeAbbreviation>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#academicDegree99">
+        <j.0:degreeAbbreviation>S.B.</j.0:degreeAbbreviation>
+    </rdf:Description>
 </rdf:RDF>
