@@ -54,20 +54,20 @@
 				
 				<c:choose>
 				   <%-- degreeMajor, year, org and abbreviation are all required --%>
-			    	<c:when test="${! empty year && ! empty degreeMajor && ! empty selectedOrganizationStr }">			            
+			    	<c:when test="${!empty degreeAbbreviation && ! empty year && ! empty degreeMajor && ! empty selectedOrganizationStr }">			            
 						<p:process>${degreeAbbreviation} in ${degreeMajor}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
 		            </c:when>		            
-		            <c:when test="${! empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
+		            <c:when test="${!empty degreeAbbreviation && ! empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
 		                <p:process>${degreeAbbreviation}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
 		            </c:when>
-		            <c:when test="${ empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
+		            <c:when test="${!empty degreeAbbreviation &&  empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
 		                <p:process>${degreeAbbreviation}</p:process> {selectedOrganizationStr} <p:process> ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
 		            </c:when>
-		            <c:when test="${ ! empty year &&  empty degreeMajor && empty selectedOrganizationStr }">
+		            <c:when test="${!empty degreeAbbreviation &&  ! empty year &&  empty degreeMajor && empty selectedOrganizationStr }">
 		                <p:process>${degreeAbbreviation} ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> ${contextNodeURL }
 		            </c:when>
 		            <c:otherwise>
-	        			<a href="${objLink}"><p:process>${individual.name}</p:process></a>		                 
+	        			<a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>		                 
 		            </c:otherwise>
 	       		</c:choose>
 		    </c:when>
@@ -80,28 +80,28 @@
 		        <c:set var="selectedOrganization" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#organizationGrantingDegree'].objectPropertyStatements[0].object}"/>
 		        <c:set var="selectedOrganizationName" value="${selectedOrganization.name}"/>		        		        
 	
-				<c:set var="personName" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#educationalBackgroundOf'].objectPropertyStatements[0].object.name}"/>
+				<c:set var="person" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#educationalBackgroundOf'].objectPropertyStatements[0].object}"/>
+				<c:set var="personName" value="${person.name}"/>
+				<c:url var="personURL" value="/individual"><c:param name="uri" value="${person.URI}"/></c:url>
+				<c:set var="personLink" ><a href='${personURL}'><p:process>${personName}</p:process></a></c:set>
+				
+				<c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
 				
 				<c:choose>
-			    	<c:when test="${! empty personName && ! empty year && ! empty degreeMajor && ! empty selectedOrganizationName  }">
-			            <c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
-		                <a href="<c:out value="${objLink}"/>"><p:process>${personName} in ${degreeMajor}</p:process></a> <p:process>${selectedOrganizationName}, ${year}</p:process>
+			    	<c:when test="${! empty personName && ! empty year && ! empty degreeMajor && ! empty selectedOrganizationName  }">			            
+		                ${personLink} <p:process> in ${degreeMajor}, ${selectedOrganizationName}, ${year}</p:process>
 		            </c:when>
 		            <c:when test="${! empty personName && empty year && ! empty degreeMajor && ! empty selectedOrganizationName  }">
-			            <c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
-		                <a href="<c:out value="${objLink}"/>"><p:process>${personName} in ${degreeMajor}</p:process></a> <p:process>${selectedOrganizationName}</p:process>
+		            	${personLink} <p:process> in ${degreeMajor}, ${selectedOrganizationName}</p:process>			            		                
 		            </c:when>
 		            <c:when test="${! empty personName && empty year && ! empty degreeMajor && empty selectedOrganizationName  }">
-			            <c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
-		                <a href="<c:out value="${objLink}"/>"><p:process>${personName} in ${degreeMajor}</p:process></a>
+		            	${personLink} <p:process> in ${degreeMajor}</p:process>			            		                
 		            </c:when>
 		            <c:when test="${! empty personName && ! empty year && empty degreeMajor && ! empty selectedOrganizationName  }">
-			            <c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
-		                <a href="<c:out value="${objLink}"/>"><p:process>${personName}</p:process></a> <p:process>${selectedOrganizationName}, ${year}</p:process>
+		            	${personLink} <p:process> ${selectedOrganizationName}, ${year}</p:process>			            		                
 		            </c:when>
-		            <c:otherwise>
-		                <c:url var="objLink" value="/individual"><c:param name="uri" value="${individual.URI}"/></c:url>
-	        			<a href="${objLink}"><p:process>${individual.name}</p:process></a>		                 
+		            <c:otherwise>		                
+	        			<a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>		                 
 		            </c:otherwise>
 	       		</c:choose>
 		    </c:when>    			    		
