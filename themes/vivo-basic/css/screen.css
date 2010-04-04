@@ -603,7 +603,10 @@ a.add {
   overflow: hidden;
 }
 
-a.add:hover { background-color: #000; }
+a.add:hover {
+  background-image: url(../site_icons/plus_transparent_hover.gif);
+  background-color: #000; 
+}
 
 ul.properties { margin: 0; }
 
