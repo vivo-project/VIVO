@@ -44,10 +44,10 @@
 				<c:choose>
 				   <%-- degreeMajor, year, org and abbreviation are all required --%>
 			    	<c:when test="${!empty degreeAbbreviation && ! empty year && ! empty degreeMajor && ! empty selectedOrganizationStr }">			            
-						<p:process>${degreeAbbreviation} in ${degreeMajor}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeSupplementalInfo}</p:process> 
+						<p:process>${degreeAbbreviation} in ${degreeMajor}</p:process> ${selectedOrganizationStr}, <p:process>${year} ${degreeSupplementalInfo}</p:process> 
 		            </c:when>		            
 		            <c:when test="${!empty degreeAbbreviation && ! empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
-		                <p:process>${degreeAbbreviation}</p:process> ${selectedOrganizationStr},<p:process> ${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process>
+		                <p:process>${degreeAbbreviation}</p:process> ${selectedOrganizationStr}, <p:process>${year} ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process>
 		            </c:when>
 		            <c:when test="${!empty degreeAbbreviation &&  empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
 		                <p:process>${degreeAbbreviation}</p:process> {selectedOrganizationStr} <p:process> ${degreeDeptOrSchool} ${degreeSupplementalInfo}</p:process> 
