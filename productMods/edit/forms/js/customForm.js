@@ -66,12 +66,14 @@ var customForm = {
 
         this.form = $('#content form');
         this.button = $('#submit');
+        this.or = $('span.or');
         this.requiredLegend = $('#requiredLegend');
         
         // These may need to be changed to classes rather than ids, if there are
         // multiple sets of divs to show/hide during the workflow.
         this.addNewLink = $('.addNewLink');
         this.existing = $('.existing');
+        this.existingSelect = this.existing.children('select');
         this.addNew = $('.new');
         this.entry = $('.entry');
         this.existingOrNew = $('.existingOrNew');
@@ -149,12 +151,14 @@ var customForm = {
     	customForm.addNew.hide();
     	customForm.entry.hide();    
     	customForm.requiredLegend.hide();
-    	customForm.button.val('Continue');  
+    	customForm.button.hide(); customForm.or.hide();
         
         // Assign event listeners 
-    	customForm.button.bind('click', function() {
-    		customForm.doAddFormStep2(customForm.views.SELECT_EXISTING);
-            return false;              
+    	customForm.existingSelect.bind('change', function() {
+    		if ($(this).val() != '') {
+    			customForm.doAddFormStep2(customForm.views.SELECT_EXISTING);
+    			return false; 
+    		}
         });
         // Note that addNewLink event listener is different
     	// in different views.
@@ -177,7 +181,10 @@ var customForm = {
     		default: { fn = this.doAddFormStep2Combined; break; }
     	}
 
-        fn.call(customForm);             
+        fn.call(customForm);  
+        
+        customForm.button.show();
+        customForm.or.show();
     },
 
     // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
@@ -259,6 +266,7 @@ var customForm = {
     	customForm.button.unbind('click');    
     	customForm.addNewLink.unbind('click');  
     	customForm.close.unbind('click');
+    	customForm.existingSelect.unbind('change');
     },
     
     clearFormData: function() {
