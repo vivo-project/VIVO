@@ -135,7 +135,9 @@ var customForm = {
     doAddFormStep1: function() {
     	
     	if (this.formSteps == 1) {
+    		customForm.addNewLink.css('margin-bottom', '1em');
     		customForm.doAddFormStep2();
+    		customForm.doClose();
     		return;
     	}
     	
@@ -250,7 +252,7 @@ var customForm = {
     unbindEventListeners: function() {
     	customForm.cancel.unbind('click');
     	customForm.button.unbind('click');    
-    	customForm.addNewLink.unbind('click');   	
+    	customForm.addNewLink.unbind('click');   
     },
     
     clearFormData: function() {
@@ -299,6 +301,7 @@ var customForm = {
     hideFields: function(el) {
         // Clear any input, so if we reshow the element the input won't still be there.
         customForm.clearFields(el);
+        customForm.toggleRequiredHints('remove', el);
         el.hide();
     },
 
@@ -325,15 +328,32 @@ var customForm = {
     	customForm.addNewLink.unbind('click');
     	customForm.addNewLink.bind('click', function() {
             $(this).hide();
+            
             // Make sure to clear out what's in the existing select element,
             // else it could be submitted even when hidden.
+            // RY When we have multiple existing and addNew divs, we won't
+            // show/hide them all, only the siblings of the addNewLink.
             customForm.hideFields(customForm.existing);
             customForm.showFields(customForm.addNew);
             
             if (buttonText) {
                 customForm.button.val(buttonText);            	
             }
+            return false;
         });  
+    },
+    
+    doClose: function() {
+    	// This can be bound once on page load, doesn't need to be unbound
+    	// or rebound.
+    	customForm.close.click(function() {
+    		// RY When we have multiple existing and addNew divs, we won't
+    		// show/hide them all, only the siblings of the addNewLink.
+    		customForm.showFields(customForm.existing);
+    		customForm.hideFields(customForm.addNew);
+    		customForm.addNewLink.show();
+    		return false;
+    	});
     },
     
     // Return true iff there are validation errors on the form

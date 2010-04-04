@@ -318,7 +318,7 @@
       
         <div class="new">
             <h6>Add a New Organization</h6>
-            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
+            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" size="30" />
             <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
         </div>   
     </div>   

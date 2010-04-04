@@ -380,9 +380,11 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
             If your organization is not listed, please <a href="#">add a new organization</a>.    
         </div>
       
-        <div class="new">
+        <div class="new">            
+            <a class="close" href="#">close</a>
             <h6>Add a New Organization</h6>
-            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" />
+
+            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" size="30" />
             <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
         </div>   
     </div> 
