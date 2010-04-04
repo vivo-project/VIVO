@@ -39,14 +39,13 @@
  * One-step custom form workflow:
  *             
  * Has three view variations:
- * 		- Select an existing secondary individual view
- *      - Add new secondary individual view
- *      - Combined view, if we are returning from a failed validation and can't determine 
- *        which variant of the view we had submitted the form from. Contains the select
- *        existing element plus the add new link.
+ *      - Combined view, as above for two step form. This is the default view for
+ *        the one-step form, which shows unless we have clicked the add new link
+ *        or are returning from a validation error where we had been in the add new view.
+ *      - Add new secondary individual view. As above for two step form, but add new
+ *        box contains a close link to return to combined view.
  */
  
-
 var customForm = {
 
     onLoad: function() {
@@ -103,7 +102,7 @@ var customForm = {
         // Editing an existing entry
         } else { 
             this.initEditForm();
-        }         	
+        } 
     },
         
     /***** ADD form *****/
@@ -153,7 +152,8 @@ var customForm = {
             customForm.doAddFormStep2SelectExisting();           
             return false;              
         });
-        
+        // Note that addNewLink event listener is different
+    	// in different views.
     	customForm.addNewLink.bind('click', function() {
             customForm.doAddFormStep2AddNew();
         });     
@@ -192,6 +192,7 @@ var customForm = {
         customForm.showAddNewFields();
         customForm.doButtonForStep2(customForm.addNewButtonText);
         customForm.doCancelForStep2();
+        customForm.doClose();
     },
     
     // Step 2: combined view, when we are returning from validation errors and we
@@ -199,7 +200,7 @@ var customForm = {
     doAddFormStep2Combined: function() {
         
         customForm.showCombinedFields();
-        customForm.doAddNewLink();        
+        customForm.doAddNewLinkForCombinedView();        
         customForm.doButtonForStep2(customForm.defaultButtonText);        
         customForm.doCancelForStep2();
     },
@@ -244,7 +245,7 @@ var customForm = {
     doEditFormDefaultView: function() {    	
     	this.showCombinedFields();
     	this.button.val(this.defaultButtonText);   
-    	this.doAddNewLink();
+    	this.doAddNewLinkForCombinedView();
     },
     
     /***** Utilities *****/
@@ -252,7 +253,8 @@ var customForm = {
     unbindEventListeners: function() {
     	customForm.cancel.unbind('click');
     	customForm.button.unbind('click');    
-    	customForm.addNewLink.unbind('click');   
+    	customForm.addNewLink.unbind('click');  
+    	customForm.close.unbind('click');
     },
     
     clearFormData: function() {
@@ -323,7 +325,7 @@ var customForm = {
         });         
     },
     
-    doAddNewLink: function() {
+    doAddNewLinkForCombinedView: function() {
 
     	customForm.addNewLink.unbind('click');
     	customForm.addNewLink.bind('click', function() {
@@ -338,21 +340,24 @@ var customForm = {
             customForm.hideFields(customForm.existing);
             customForm.showFields(customForm.addNew);
             customForm.button.val(customForm.addNewButtonText);            	
-
+            customForm.doClose();
             return false;
         });  
     },
     
     doClose: function() {
-    	// This can be bound once on page load, doesn't need to be unbound
-    	// or rebound.
-    	customForm.close.click(function() {
+
+    	if (customForm.formSteps > 1) { return; }
+
+    	customForm.close.unbind('click');
+    	customForm.close.bind('click', function() {
     		// RY When we have multiple existing and addNew divs, we won't
     		// show/hide them all, only the siblings of the addNewLink.
     		customForm.showFields(customForm.existing);
     		customForm.hideFields(customForm.addNew);
     		customForm.addNewLink.show();
     		customForm.button.val(customForm.defaultButtonText);
+    		customForm.doAddNewLinkForCombinedView();
     		return false;
     	});
     },
@@ -463,7 +468,6 @@ var customForm = {
 	    }  
 	    return view;
     }
-
 };
 
 $(document).ready(function(){   
