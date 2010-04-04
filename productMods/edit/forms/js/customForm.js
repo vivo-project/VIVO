@@ -48,6 +48,12 @@
  
 var customForm = {
 
+	views: {
+		ADD_NEW: 1,
+		SELECT_EXISTING: 2,
+		COMBINED: 3
+	},
+
     onLoad: function() {
 
 		this.initObjects();		
@@ -149,29 +155,33 @@ var customForm = {
         
         // Assign event listeners 
     	customForm.button.bind('click', function() {
-            customForm.doAddFormStep2SelectExisting();           
+            //customForm.doAddFormStep2SelectExisting(); 
+    		customForm.doAddFormStep2(customForm.views.SELECT_EXISTING);
             return false;              
         });
         // Note that addNewLink event listener is different
     	// in different views.
     	customForm.addNewLink.bind('click', function() {
-            customForm.doAddFormStep2AddNew();
+            //customForm.doAddFormStep2AddNew();
+    		customForm.doAddFormStep2(customForm.views.ADD_NEW);    		
         });     
     },
     
     // Set up form when returning directly to step 2, such as after validation errors
     // on the form submission.
-    doAddFormStep2: function() {
+    doAddFormStep2: function(view) {
 
-    	var view = customForm.getPreviousViewFromFormData();
+    	if (!view) {
+    		view = customForm.getPreviousViewFromFormData();
+    	}
         
     	switch (view) {
-			case "existing": { fn = this.doAddFormStep2SelectExisting; break; }
-    		case "addNew": { fn = this.doAddFormStep2AddNew; break; }
+			case customForm.views.SELECT_EXISTING: { fn = this.doAddFormStep2SelectExisting; break; }
+    		case customForm.views.ADD_NEW: { fn = this.doAddFormStep2AddNew; break; }
     		default: { fn = this.doAddFormStep2Combined; break; }
     	}
 
-        fn.call();             
+        fn.call(customForm);             
     },
 
     // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
@@ -222,8 +232,8 @@ var customForm = {
         	view = this.getPreviousViewFromFormData();
         	
         	switch (view) {
-    			case "existing": { fn = this.doEditFormSelectExisting; break; }
-    			case "addNew": { fn = this.doEditFormAddNew; break; }
+    			case this.views.SELECT_EXISTING: { fn = this.doEditFormSelectExisting; break; }
+    			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
     			default: { fn = this.doEditFormDefaultView; break; }
         	}
         } else {
@@ -451,7 +461,7 @@ var customForm = {
 	    for (i = 0; i < addNewInputsLen; i++) {
 	        input = $(addNewInputs[i]);
 	        if (input.val() != '') {
-	            view = "addNew";
+	            view = customForm.views.ADD_NEW;
 	            break;
 	        }
 	    }
@@ -461,7 +471,7 @@ var customForm = {
 	        for (i = 0; i < existingInputsLen; i++) {
 	            input = $(existingInputs[i]);
 	            if (input.val() != '') {
-	                view = "existing";
+	                view = customForm.views.SELECT_EXISTING;
 	                break;
 	            }
 	        }
