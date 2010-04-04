@@ -199,7 +199,7 @@ var customForm = {
     doAddFormStep2Combined: function() {
         
         customForm.showCombinedFields();
-        customForm.doAddNewLink(customForm.addNewButtonText);        
+        customForm.doAddNewLink();        
         customForm.doButtonForStep2(customForm.defaultButtonText);        
         customForm.doCancelForStep2();
     },
@@ -244,7 +244,7 @@ var customForm = {
     doEditFormDefaultView: function() {    	
     	this.showCombinedFields();
     	this.button.val(this.defaultButtonText);   
-    	this.doAddNewLink(this.addNewButtonText);
+    	this.doAddNewLink();
     },
     
     /***** Utilities *****/
@@ -323,7 +323,7 @@ var customForm = {
         });         
     },
     
-    doAddNewLink: function(buttonText) {
+    doAddNewLink: function() {
 
     	customForm.addNewLink.unbind('click');
     	customForm.addNewLink.bind('click', function() {
@@ -333,12 +333,12 @@ var customForm = {
             // else it could be submitted even when hidden.
             // RY When we have multiple existing and addNew divs, we won't
             // show/hide them all, only the siblings of the addNewLink.
+            // And we'll need to figure out the button text based on which
+            // div we're opening.
             customForm.hideFields(customForm.existing);
             customForm.showFields(customForm.addNew);
-            
-            if (buttonText) {
-                customForm.button.val(buttonText);            	
-            }
+            customForm.button.val(customForm.addNewButtonText);            	
+
             return false;
         });  
     },
@@ -352,6 +352,7 @@ var customForm = {
     		customForm.showFields(customForm.existing);
     		customForm.hideFields(customForm.addNew);
     		customForm.addNewLink.show();
+    		customForm.button.val(customForm.defaultButtonText);
     		return false;
     	});
     },
