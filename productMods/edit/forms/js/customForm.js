@@ -27,18 +27,17 @@
  *                existing element plus the add new link.
  *              
  * EDIT existing property form
- * Looks like add form step 2 except shows add new link 
- * Has same three view variants as step 2 add form
+ * View variations are like one-step form, though button text is specific to edit version.
  * 
  * 
  * We're jerry-rigging one-step forms into the two-step form process due to time constraints.
  * In a later iteration of the custom form Javascript, we'll create a customForm object
  * with subclasses for one-step and two-step forms. The parent object will contain
- * the utilities used by all form types. 
+ * the utilities used by all form types. The two-step edit form will essentially be a one-step form.
  * 
  * One-step custom form workflow:
  *             
- * Has three view variations:
+ * Has two view variations:
  *      - Combined view, as above for two step form. This is the default view for
  *        the one-step form, which shows unless we have clicked the add new link
  *        or are returning from a validation error where we had been in the add new view.
@@ -49,7 +48,7 @@
 var customForm = {
 
 	views: {
-		ADD_NEW: 1,
+		ADD_NEW: 1, // not 0, else can't test if (!view)
 		SELECT_EXISTING: 2,
 		COMBINED: 3
 	},
@@ -140,8 +139,7 @@ var customForm = {
     doAddFormStep1: function() {
     	
     	if (this.formSteps == 1) {
-    		customForm.addNewLink.css('margin-bottom', '1em');
-    		customForm.doAddFormStep2();
+    		customForm.doAddFormStep2(customForm.views.COMBINED);
     		customForm.doClose();
     		return;
     	}
@@ -155,14 +153,12 @@ var customForm = {
         
         // Assign event listeners 
     	customForm.button.bind('click', function() {
-            //customForm.doAddFormStep2SelectExisting(); 
     		customForm.doAddFormStep2(customForm.views.SELECT_EXISTING);
             return false;              
         });
         // Note that addNewLink event listener is different
     	// in different views.
     	customForm.addNewLink.bind('click', function() {
-            //customForm.doAddFormStep2AddNew();
     		customForm.doAddFormStep2(customForm.views.ADD_NEW);    		
         });     
     },
@@ -191,6 +187,10 @@ var customForm = {
     // Step 2: selecting an existing individual
     doAddFormStep2SelectExisting: function() {
 
+    	if (customForm.formSteps == 1) {
+    		customForm.doAddFormStep2Combined();
+    		return;
+    	}
     	customForm.showSelectExistingFields();
         customForm.doButtonForStep2(customForm.defaultButtonText);
         customForm.doCancelForStep2();        
@@ -232,7 +232,6 @@ var customForm = {
         	view = this.getPreviousViewFromFormData();
         	
         	switch (view) {
-    			case this.views.SELECT_EXISTING: { fn = this.doEditFormSelectExisting; break; }
     			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
     			default: { fn = this.doEditFormDefaultView; break; }
         	}
@@ -240,11 +239,6 @@ var customForm = {
         	fn = this.doEditFormDefaultView;
         }    
         fn.call(customForm);        
-    },
-    
-    doEditFormSelectExisting: function() {   	
-    	this.showSelectExistingFields();
-    	this.button.val(this.defaultButtonText);
     },
     
     doEditFormAddNew: function() {   	
@@ -277,8 +271,7 @@ var customForm = {
         
         // For now we can remove the error elements. Later we may include them in
         // the markup, for customized positioning, in which case we will empty them
-        // but not remove them here. See findValidationErrors().
-        //this.form.find('.validationError').text('');   
+        // but not remove them here. See findValidationErrors().  
         el.find('.validationError').remove();    	
     },
     
@@ -433,6 +426,7 @@ var customForm = {
 
     	customForm.showFields(customForm.existing);
     	customForm.addNewLink.show();
+    	customForm.addNewLink.css('margin-bottom', '1em');
     	customForm.addNew.hide();       
         customForm.showFieldsForAllViews();
     },
@@ -477,7 +471,7 @@ var customForm = {
 	        }
 	    }  
 	    return view;
-    }
+    } 
 };
 
 $(document).ready(function(){   
