@@ -2013,6 +2013,7 @@
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasTeachingActivity">
+    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">personHasActivity.jsp</j.0:customEntryFormAnnot>
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</j.0:displayLimitAnnot>
     <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</j.0:displayRankAnnot>
     <j.0:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasTeachingActivity</j.0:fullPropertyNameAnnot>
@@ -2096,6 +2097,7 @@
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasResearchActivity">
+    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">personHasActivity.jsp</j.0:customEntryFormAnnot>
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</j.0:displayLimitAnnot>
     <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">25</j.0:displayRankAnnot>
     <j.0:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasResearchActivity</j.0:fullPropertyNameAnnot>
@@ -2642,6 +2644,7 @@
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasOutreachActivity">
+    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">personHasActivity.jsp</j.0:customEntryFormAnnot>
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</j.0:displayLimitAnnot>
     <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</j.0:displayRankAnnot>
     <j.0:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasOutreachActivity</j.0:fullPropertyNameAnnot>
@@ -3517,7 +3520,7 @@
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasProfessionalServiceActivity">
-    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">personHasServiceActivity.jsp</j.0:customEntryFormAnnot>
+    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">personHasActivity.jsp</j.0:customEntryFormAnnot>
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</j.0:displayLimitAnnot>
     <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</j.0:displayRankAnnot>
     <j.0:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasProfessionalActivity</j.0:fullPropertyNameAnnot>
