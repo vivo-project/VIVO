@@ -50,7 +50,7 @@
 
 <c:set var="researchActivityUri" value="${vivoCore}hasResearchActivity" />
 <c:set var="teachingActivityUri" value="${vivoCore}hasTeachingActivity" />
-<c:set var="serviceActivityUri" value="${vivoCore}professionalServiceActivity" />
+<c:set var="serviceActivityUri" value="${vivoCore}hasProfessionalServiceActivity" />
 <c:set var="outreachActivityUri" value="${vivoCore}hasOutreachActivity" />
 
 <c:choose>
