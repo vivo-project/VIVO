@@ -3787,5 +3787,9 @@
   <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#moniker">
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#editor"/> 
   </rdf:Description>
-  
+ 
+<rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl">
+    <j.0:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">geo</j.0:ontologyPrefixAnnot>
+</rdf:Description>
+ 
 </rdf:RDF>
