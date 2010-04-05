@@ -381,7 +381,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
         </div>
       
         <div class="new">            
-            <a class="close" href="#">close</a>
+            <a class="close" href="#">cancel</a>
             <h6>Add a New Organization</h6>
 
             <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" size="30" />
