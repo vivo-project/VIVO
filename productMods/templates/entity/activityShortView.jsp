@@ -43,15 +43,31 @@
                 <%-- Get the role of the person in the activity --%>
                 <c:set var="role" value=" ${activity.dataPropertyMap['http://vivoweb.org/ontology/core#role'].dataPropertyStatements[0].data}"/>
                                                
-                <%-- Get the start date of the activity --%>
-                <c:set var="startDate" value="${activity.dataPropertyMap['http://vivoweb.org/ontology/core#startYearMonth'].dataPropertyStatements[0].data}"/>
+                <%-- Get the time span of the service activity --%>
+                <c:set var="startYearMonth" value="${activity.dataPropertyMap['http://vivoweb.org/ontology/core#startYearMonth'].dataPropertyStatements[0].data}"/>
+                <c:set var="endYearMonth" value="${activity.dataPropertyMap['http://vivoweb.org/ontology/core#endYearMonth'].dataPropertyStatements[0].data}"/>
+                <c:if test="${!empty startYearMonth}">
+                    <%-- RY Don't know whether we should display just the year, or month and year.
+                    Latter looks like too much info, but why collect it if we aren't going to display it?
+                    Needs reformatting, otherwise we get e.g., "2008-10 - 2009-12"
+                    <c:set var="startDate" value="${fn:substring(startYearMonth, 0, 4)}" /> --%>
+                    <c:set var="start" value="${fn:split(startYearMonth, '-')}" />
+                    <c:set var="startDate" value="${start[1]}/${start[0]}" />
+                    <c:set var="timeSpan" value=", ${startDate} - "/>
+                    <c:if test="${!empty endYearMonth}">
+                        <%-- <c:set var="endDate" value="${fn:substring(endYearMonth, 0, 4)}" /> --%>
+                        <c:set var="end" value="${fn:split(endYearMonth, '-')}" />
+                        <c:set var="endDate" value="${end[1]}/${end[0]}" />                        
+                        <c:set var="timeSpan" value="${timeSpan}${endDate}"/>
+                    </c:if>
+                </c:if>
     
                 <%-- Create an html link element to the activity --%>
                 <c:url var="activityUrl" value="/individual"><c:param name="uri" value="${activity.URI}"/></c:url>
                 <c:set var="activityLink" ><a href='${activityUrl}'><p:process>${activityLabel}</p:process></a></c:set>
 
                 <%-- Final output --%>                        
-                <strong>${activityLink}</strong> <p:process>${role}, ${startDate}</p:process>
+                <strong>${activityLink}</strong> <p:process>${role} ${timeSpan}</p:process>
             </c:when>
             
             <c:otherwise> <%-- no predicate --%>
