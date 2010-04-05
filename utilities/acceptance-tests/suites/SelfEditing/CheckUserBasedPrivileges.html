@@ -161,7 +161,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>500</td>
+	<td>1500</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,8 +200,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>link=Select a person</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,12 +231,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>User may edit as the following Individuals:</td>
+	<td>Change or Remove Association</td>
 	<td></td>
 </tr>
 <tr>
@@ -406,7 +406,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=delete</td>
+	<td>link=Change or Remove Association</td>
 	<td></td>
 </tr>
 <tr>
@@ -422,6 +422,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>User Account Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This user account is not associated with a person</td>
 	<td></td>
 </tr>
 <tr>
