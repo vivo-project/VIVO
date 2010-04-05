@@ -33,7 +33,7 @@
  * We're jerry-rigging one-step forms into the two-step form process due to time constraints.
  * In a later iteration of the custom form Javascript, we'll create a customForm object
  * with subclasses for one-step and two-step forms. The parent object will contain
- * the utilities used by all form types. The two-step edit form will essentially be a one-step form.
+ * the utilities used by all form types. The two-step edit form will be a type of one-step form.
  * 
  * One-step custom form workflow:
  *             
@@ -167,8 +167,9 @@ var customForm = {
         });     
     },
     
-    // Set up form when returning directly to step 2, such as after validation errors
-    // on the form submission.
+    // Set up add form for step 2. If no view is passed in, we're returning
+    // from a failed submission due to validation errors, and will attempt to
+    // determine the previous view from the form data that's been entered.
     doAddFormStep2: function(view) {
 
     	if (!view) {

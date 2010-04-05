@@ -335,6 +335,8 @@
     <input type="hidden" name="editType" value="${editType}" />
     <input type="hidden" name="entryType" value="position" /> 
     <input type="hidden" name="secondaryType" value="organization" />
+    <%-- RY If set steps to 1 when editType == 'edit', may be able to combine the
+    step 1 and edit cases in the Javascript.  --%>
     <input type="hidden" name="steps" value="2" />
        
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
