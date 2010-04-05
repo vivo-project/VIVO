@@ -184,7 +184,7 @@
       },
      "positionType" : {
          "newResource"      : "false",
-         "validators"       : [  ],
+         "validators"       : [ "nonempty" ],
          "optionsType"      : "CHILD_VCLASSES_WITH_PARENT",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
