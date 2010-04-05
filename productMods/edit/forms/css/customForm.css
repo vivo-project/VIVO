@@ -98,5 +98,8 @@ option {
     /*display: none;  Hide if Javascript disabled. Javascript will show. */
     border-color: #FF7700;
     color: #FF7700;
+}
 
+#content form textarea {
+    width: 30%;
 }

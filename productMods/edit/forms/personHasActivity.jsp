@@ -25,20 +25,20 @@
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
 <%! 
-    public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.personHasPositionHistory.jsp");
+    public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.personHasActivity.jsp");
 %>
 <%
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
-    
-    String flagURI = null;
-    if (vreq.getAppBean().isFlag1Active()) {
-        flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
+
+    String flagUri = null;
+    if (wdf.getApplicationDao().isFlag1Active()) {
+        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
     } else {
-        flagURI = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
+        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
     }
-    vreq.setAttribute("flagURI",flagURI);
+    vreq.setAttribute("flagUri",flagUri);
     
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearMonthDatatypeUriJson", MiscWebUtils.escape(XSD.gYearMonth.toString()));
@@ -46,7 +46,7 @@
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
-<c:set var="label" value="${rdfs}label" />
+<c:set var="labelUri" value="${rdfs}label" />
 
 <c:set var="researchActivityUri" value="${vivoCore}hasResearchActivity" />
 <c:set var="teachingActivityUri" value="${vivoCore}hasTeachingActivity" />
@@ -55,21 +55,26 @@
 
 <c:choose>
     <c:when test="${predicateUri == researchActivityUri}">
-        <c:set var="inverseUri" value="${vivoCore}researchActivityBy" scope="page" />
+        <c:set var="inverseUri" value="${vivoCore}researchActivityBy" />
+        <c:set var="activityClass" value="${vivoCore}ResearchActivity" />
     </c:when>
     <c:when test="${predicateUri == teachingActivityUri}">
-        <c:set var="inverseUri" value="${vivoCore}teachingActivityBy" scope="page" />
+        <c:set var="inverseUri" value="${vivoCore}teachingActivityBy" />
+        <c:set var="activityClass" value="${vivoCore}TeachingActivity" />
     </c:when>
     <c:when test="${predicateUri == serviceActivityUri}">
-        <c:set var="inverseUri" value="${vivoCore}professionalServiceActivityBy" scope="page" />
+        <c:set var="inverseUri" value="${vivoCore}professionalServiceActivityBy" />
+        <c:set var="activityClass" value="${vivoCore}ServiceActivity" />
     </c:when>
     <c:when test="${predicateUri == outreachActivityUri}">
-        <c:set var="inverseUri" value="${vivoCore}outreachActivityBy" scope="page" />
+        <c:set var="inverseUri" value="${vivoCore}outreachActivityBy" />
+        <c:set var="activityClass" value="${vivoCore}OutreachActivity" />
     </c:when>
 </c:choose>
 
-<c:set var="activityUri" value="${vivoCore}hasActivity" />
-<c:set var="inverseActivityUri" value="${vivoCore}activityBy" />
+<c:set var="activitySuperClass" value="${vivoCore}Activity" />
+<c:set var="superPropertyUri" value="${vivoCore}hasActivity" />
+<c:set var="inverseSuperPropertyUri" value="${vivoCore}activityBy" />
 
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
       to convey that the expression is used to retrieve any existing value for the field in an existing individual.
@@ -77,14 +82,14 @@
       and in the literalsOnForm --%>
 <v:jsonset var="labelExisting" >  
     SELECT ?existingLabel WHERE {
-          ?activityUri <${label}> ?existingLabel }
+          ?activityUri <${labelUri}> ?existingLabel }
 </v:jsonset>
 
 <%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="labelAssertion" >      
-    ?activityUri <${label}> ?label . 
+    ?activityUri <${labelUri}> ?label . 
 </v:jsonset>
 
 <c:set var="descriptionUri" value="${vivoCore}description" />
@@ -125,16 +130,16 @@
 
 <v:jsonset var="n3ForStmtToPerson">  
 
-    ?activityUri <${label}> ?label ;
-                 a <${predicateUri}> ;
-                 a <${activityUri} ;
-                 a <${flagUri} ;   
+    ?activityUri <${labelUri}> ?label ;
+                 a <${activityClass}> ;
+                 a <${activitySuperClass}> ;
+                 a <${flagUri}> ;   
                  <${inverseUri}> ?person ;
-                 <${inverseActivityUri}> ?person .
+                 <${inverseSuperPropertyUri}> ?person .
 
     ?person <${predicateUri}>  ?activityUri ;
-            <${activityUri}>   ?activityUri .
-    s
+            <${superPropertyUri}> ?activityUri .
+    
 </v:jsonset>
 
 <c:set var="editjson" scope="request">
@@ -155,13 +160,13 @@
 
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "activityUri"],
-    "literalsOnForm" :  [ "name", "description", "role", "startYearMonth", "endYearMonth" ],                          
+    "urisOnForm"     : [ ],
+    "literalsOnForm" :  [ "label", "description", "role", "startYearMonth", "endYearMonth" ],                          
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
-        "name"               : "${labelExisting}",
+        "label"              : "${labelExisting}",
         "description"        : "${descriptionExisting}",
         "role"               : "${roleExisting}",
         "startYearMonth"     : "${startYearMonthExisting}",
@@ -170,7 +175,7 @@
     "sparqlForExistingUris" : { },
 
     "fields" : {
-      "name" : {
+      "label" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty" ],
          "optionsType"      : "UNDEFINED",
@@ -201,7 +206,7 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
-         "assertions"       : [ "${descriptionAssertion}" ]
+         "assertions"       : [ "${roleAssertion}" ]
       }, 
       "startYearMonth" : {
          "newResource"      : "false",
@@ -228,7 +233,7 @@
   }
 }
 </c:set>
-<%
+<% 
     log.debug(request.getAttribute("editjson"));
 
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
@@ -248,6 +253,7 @@
     String subjectName = ((Individual) request.getAttribute("subject")).getName();
 %> 
     <c:set var="subjectName" value="<%= subjectName %>" />
+
     <c:choose>
         <c:when test="${predicateUri == researchActivityUri}">
             <c:set var="propertyName" value="research focus and activity" scope="request" />
@@ -294,7 +300,7 @@
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <v:input type="text" label="Name ${requiredHint}" id="label" size="30" />
-    <v:input type="textarea" label="Description  ${requiredHint}" id="description" rows="5" cols="30" />
+    <v:input type="textarea" label="Description  ${requiredHint}" id="description" rows="5" cols="20" />
     <v:input type="text" label="Role ${requiredHint}" id="role" size="30" />
     
     <v:input type="text" label="Start Year and Month ${yearMonthHint}" id="startYearMonth" size="7"/>    
