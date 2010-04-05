@@ -248,7 +248,6 @@
     String subjectName = ((Individual) request.getAttribute("subject")).getName();
 %> 
     <c:set var="subjectName" value="<%= subjectName %>" />
-  <h1></h1>
     <c:choose>
         <c:when test="${predicateUri == researchActivityUri}">
             <c:set var="propertyName" value="research focus and activity" scope="request" />
