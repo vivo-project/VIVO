@@ -299,7 +299,7 @@
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <v:input type="text" label="Name ${requiredHint}" id="label" size="30" />
+    <v:input type="text" label="Activity Name ${requiredHint}" id="label" size="30" />
     <v:input type="textarea" label="Description  ${requiredHint}" id="description" rows="5" cols="20" />
     <v:input type="text" label="Role ${requiredHint}" id="role" size="30" />
     
