@@ -1,0 +1,101 @@
+Upgrading NIH VIVO
+ 
+Steps to Upgrade from Version 1 Release 0.9 to Release 1.0
+
+This file provides a short description of the steps involved in upgrading your 
+installation of �NIH VIVO� from version 1 release 0.9 to release 1.0.
+
+----------
+Before Performing the Upgrade
+----------
+
+The bullet points listed below are important to know before beginning the 
+upgrade process. 
+
+The upgrade process is like the original install process with the following 
+exceptions:
+* DO NOT re-install MySQL or re-create the MySQL database. Please ensure that 
+    you back-up the MySQL database.
+* It is not necessary to add RDF data, initialize the Lucene Search Index, or 
+    re-configure the Apache HTTP Server.
+* First-time login of the administrator account will use the password 
+    previously set, NOT the password in deploy.properties.
+* Any image files that have been uploaded into the system will not be disturbed 
+    by the upgrade.
+* The first time that Apache Tomcat starts up after the upgrade, it will 
+    initiate a process which modifies the data in the model, aligning the data 
+    with the revised ontology. For the most part, data in the model will not be 
+    lost. See the section on "Ontology Changes" (below) for more information.
+* If you make any changes to the application, they should be made in the source 
+    directory and deployed, and not made directly within Apache Tomcat.
+    
+----------
+The Process
+----------
+
+1. Ensure that backups are created of the Tomcat webapps directory, the 
+    original source directory, and the MySQL database.
+
+2. Download the new distribution file and unpack it into a new source directory.
+
+3. Create deploy.properties, using the same values as in your original 
+    installation. Be aware that deploy.properties now requires an additional 
+    property:
+       vitro.core.dir = ./vitro-core
+    The file example.deploy.properties has been modified to show this. 
+
+4. Apply any changes you have made to the new source directory.
+
+   Note: In many cases, simply copying the modified files from your original 
+      source directory will not work since the files on which they are based 
+      have changed. It will be necessary to inspect the new source files and 
+      add any changes to them at that time.
+      
+   Note: At a minimum it will be necessary to apply the Google Analytics Tracking 
+      code to footer.jsp in the theme:
+             [new_source_directory]/themes/[theme_dir]/jsp/footer.jsp
+      For additional information and a copy your institution's tracking code, 
+        see the Google Analytics wiki page.
+        
+   Note: Release 0.9 contained two directories called "modifications" and 
+      "ontology". These directories have been combined into a directory called 
+      "productMods". If your site has made changes to the ontology ensure that 
+      those changes are moved into "productMods".
+      
+5. If you had modified web.xml to configure the "Pellet Reasoner" (as described
+    in the installation instructions), repeat that modification.
+
+6. Run ant deploy by typing: ant
+
+7. Lastly, start "Apache Tomcat" and login to VIVO.
+
+----------
+Ontology Changes
+----------
+
+There are changes in the ontology that may require sites to modify the data in 
+their model.
+
+For example, if there is a split in a combined class 
+(e.g., SchoolOrCollegeWithinUniversity into School and College) it is 
+impossible to determine which class of individuals were added to the combined 
+class and which class those individuals should be assigned.
+
+Note: When "Apache Tomcat" starts up following the upgrade, it will initiate 
+a process which may modify the data in the model, to align the data to the 
+current ontology. Refer to your institutions ontology team representative for 
+additional information on ontology changes affecting data prior to performing 
+the upgrade.
+
+The ontology alignment process will create these files in the Tomcat webapps directory:
+* WEB-INF/ontologies/update/logs/knowledgeBaseUpdate.log 
+    a log of updates that were made to the knowledge base and notes about some 
+    of the recommended manual reviews.
+* WEB-INF/ontologies/update/logs/knowledgeBaseUpdate.error.log 
+    a log of errors that were encoundered during the upgrade process.
+* WEB-INF/ontologies/update/removedData/removedData.rdf 
+    a file containing the stataements that were removed from the data model.
+* WEB-INF/ontologies/update/addedData/addedData.rdf 
+    a file containing the statements that were added to the data model.
+After Apache Tomcat is started, you should review these files to see whether 
+you need to edit any data in response to the ontology changes.
