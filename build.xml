@@ -3,7 +3,7 @@
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <!-- ====================================================================== 
-	 Build script for the VIVOweb product.
+	 Build script for the NIH VIVO product.
 	 
 	 The deploy.properties file contains both build properties and runtime 
 	 properties.
@@ -13,7 +13,7 @@
 	    tomcat.home
 	    webapp.name
 	     ====================================================================== -->
-<project name="vivoweb" default="describe">
+<project name="nihvivo" default="describe">
 
 	<!--
 		Load the properties from deploy.properties.
