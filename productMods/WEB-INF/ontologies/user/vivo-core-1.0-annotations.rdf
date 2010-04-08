@@ -1728,10 +1728,10 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus">
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</j.0:displayLimitAnnot>
-    <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">20</j.0:displayRankAnnot>
+    <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">51</j.0:displayRankAnnot>
     <j.0:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">domesticGeographicFocus</j.0:fullPropertyNameAnnot>
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <j.0:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGrouplocation"/>
+    <j.0:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupresearch"/>
     <j.0:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.0:offerCreateNewOptionAnnot>
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <j.0:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.0:selectFromExistingAnnot>
