@@ -1,0 +1,22 @@
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+# In version 1.0, web page links should still use the vitro:Link 
+# class and associated properties.  This will be phased out in 
+# a future version.
+
+CONSTRUCT {
+   ?link rdf:type vitro:Link .
+   ?s vitro:additionalLink ?link .
+   ?link vitro:linkURL ?url .
+   ?link vitro:linkAnchor ?anchor .
+} WHERE {
+   ?link rdf:type core:URLLink .
+   ?s core:webpage ?link .
+   ?link core:linkURI ?url .
+   ?link core:linkAnchorText ?anchor .
+}
