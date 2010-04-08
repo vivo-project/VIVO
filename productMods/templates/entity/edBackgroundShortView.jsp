@@ -14,69 +14,62 @@
     <c:when test="${!empty individual}">                
         <c:choose>
             <%-- SUBJECT is a Person  --%>
-            <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#educationalBackground'}">             
-                <c:set var="year" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#year'].dataPropertyStatements[0].data}"/>
+            <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#educationalBackground'}">         
+            
+                <%-- Degree type and major --%>
+                <c:set var="degreeStr" value="" />
+                <c:set var="degreeType" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#degreeTypeAwarded'].objectPropertyStatements[0].object}"/>
+                <c:set var="degreeAbbreviation" value="${degreeType.dataPropertyMap['http://vivoweb.org/ontology/core#degreeAbbreviation'].dataPropertyStatements[0].data}"/>
+                <c:set var="degreeStr" value="${!empty degreeAbbreviation ? degreeAbbreviation : degreeType.name }" />
                 <c:set var="degreeMajor" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#majorField'].dataPropertyStatements[0].data}"/>
+                <c:if test="${ ! empty degreeMajor }">
+                    <c:set var="degreeStr" value="${degreeStr} in ${degreeMajor}" />
+                </c:if>
+                <c:if test="${ ! empty degreeStr }">
+                    <c:set var="degreeStr"><p:process>${degreeStr}</p:process></c:set>
+                </c:if>
                 
-                <c:set var="degreeSupplementalInfo" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#supplementalInformation'].dataPropertyStatements[0].data}"/>
-                <c:if test="${ not empty degreeSupplementalInfo }">
-                    <c:set var="degreeSupplementalInfo" value=", ${degreeSupplementalInfo}"/> 
-                </c:if>             
-                
-                <c:set var="selectedOrganizationStr" value="" />
+                <%-- Organization granting degree --%>
                 <c:set var="selectedOrganization" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#organizationGrantingDegree'].objectPropertyStatements[0].object}"/>              
-                <c:if test="${!empty selectedOrganization}">         
+                <c:if test="${ ! empty selectedOrganization }">                        
                     <c:url var="selectedOrganizationURL" value="/individual">
                         <c:param name="uri" value="${selectedOrganization.URI}"/>
                     </c:url>
                     <c:set var="selectedOrganizationStr" ><a href='${selectedOrganizationURL}'><p:process>${selectedOrganization.name}</p:process></a></c:set>
                 </c:if>
                 
+                <%-- Optional department/school to organization --%>
                 <c:set var="degreeDeptOrSchool" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#departmentOrSchool'].dataPropertyStatements[0].data}"/>
-                <c:if test="${ not empty degreeDeptOrSchool }">
-                    <c:set var="degreeDeptOrSchool"><p:process>${degreeDeptOrSchool}</p:process></c:set>
-                    <c:choose>
-                        <c:when test="${!empty selectedOrganizationStr}">
-                            <c:set var="selectedOrganizationStr" value="${selectedOrganizationStr}, ${degreeDeptOrSchool}" />
-                        </c:when>  
-                        <c:otherwise>
-                            <c:set var="selectedOrganizationStr" value="${degreeDeptOrSchool}" />
-                        </c:otherwise>                  
-                    </c:choose> 
+                <c:if test="${ ! empty degreeDeptOrSchool }"> 
                 </c:if>
-                <c:if test="${!empty selectedOrganizationStr}">
-                    <c:set var="selectedOrganizationStr" value=", ${selectedOrganizationStr}" />
+                        
+                <%-- Year of degree --%>                             
+                <c:set var="year" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#year'].dataPropertyStatements[0].data}"/>
+                <c:if test="${ ! empty year }">
+                    <c:set var="year"><p:process>${year}</p:process></c:set>
                 </c:if>
-
-                <c:set var="degreeType" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#degreeTypeAwarded'].objectPropertyStatements[0].object}"/>
-                <c:set var="degreeAbbreviation" value="${degreeType.dataPropertyMap['http://vivoweb.org/ontology/core#degreeAbbreviation'].dataPropertyStatements[0].data}"/>
-                <c:if test="${ empty degreeAbbreviation }">
-                      <c:set var="degreeAbbreviation" value="${degreeType.name}"/>
-                </c:if>         
-
+                
+                <%-- Supplemental information --%>
+                <c:set var="degreeSupplementalInfo" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#supplementalInformation'].dataPropertyStatements[0].data}"/>
+                <c:if test="${ ! empty degreeSupplementalInfo }">
+                    <c:set var="degreeSupplementalInfo"><p:process>${degreeSupplementalInfo}</p:process></c:set>
+                </c:if>           
+                
+                <%-- Build the output string --%>
                 <c:choose>
-                    <%-- degreeMajor, year, org and abbreviation are all required --%>
-                    <c:when test="${!empty degreeAbbreviation && ! empty year && ! empty degreeMajor && ! empty selectedOrganizationStr }">                     
-                        <p:process>${degreeAbbreviation} in ${degreeMajor}</p:process> ${selectedOrganizationStr}, <p:process>${year} ${degreeSupplementalInfo}</p:process> 
-                    </c:when>  
-                    <c:when test="${!empty degreeAbbreviation && ! empty year && ! empty degreeMajor && empty selectedOrganizationStr }">                     
-                        <p:process>${degreeAbbreviation} in ${degreeMajor}, ${year} ${degreeSupplementalInfo}</p:process> 
-                    </c:when>                 
-                    <c:when test="${!empty degreeAbbreviation && ! empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
-                        <p:process>${degreeAbbreviation}</p:process> ${selectedOrganizationStr}, <p:process>${year} ${degreeSupplementalInfo}</p:process>
-                    </c:when>
-                    <c:when test="${!empty degreeAbbreviation &&  empty year && empty degreeMajor && ! empty selectedOrganizationStr  }">
-                        <p:process>${degreeAbbreviation}</p:process> {selectedOrganizationStr} <p:process> ${degreeSupplementalInfo}</p:process> 
-                    </c:when>
-                    <c:when test="${!empty degreeAbbreviation &&  ! empty year &&  empty degreeMajor && empty selectedOrganizationStr }">
-                        <p:process>${degreeAbbreviation} ${year} ${degreeSupplementalInfo}</p:process>
+                    <c:when test="${ ! empty degreeStr }">
+                        ${degreeStr}
+                        <c:if test="${ ! empty selectedOrganizationStr}">, ${selectedOrganizationStr}</c:if>
+                        <c:if test="${ ! empty degreeDeptOrSchool}">, ${degreeDeptOrSchool}</c:if>
+                        <c:if test="${ ! empty year }">, ${year}</c:if>
+                        <c:if test="${ ! empty degreeSupplementalInfo }">, ${degreeSupplementalInfo}</c:if>             
                     </c:when>
                     <c:otherwise>
-                        <a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>                        
+                        <a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>
                     </c:otherwise>
                 </c:choose>
             </c:when>
-                
+              
             <%-- SUBJECT is a Degree Type  --%>                     
             <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#awardedTo'}">             
                 <c:set var="year" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#year'].dataPropertyStatements[0].data}"/>
