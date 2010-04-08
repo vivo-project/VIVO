@@ -3,7 +3,7 @@ Upgrading NIH VIVO
 Steps to Upgrade from Version 1 Release 0.9 to Release 1.0
 
 This file provides a short description of the steps involved in upgrading your 
-installation of �NIH VIVO� from version 1 release 0.9 to release 1.0.
+installation of �NIH VIVO� from Version 1 Release 0.9 to Version 1 Release 1.0.
 
 ----------
 Before Performing the Upgrade
@@ -57,10 +57,10 @@ The Process
       For additional information and a copy your institution's tracking code, 
         see the Google Analytics wiki page.
         
-   Note: Release 0.9 contained two directories called "modifications" and 
-      "ontology". These directories have been combined into a directory called 
-      "productMods". If your site has made changes to the ontology ensure that 
-      those changes are moved into "productMods".
+   Note: Version 1 Release 0.9 contained two directories called "modifications"
+      and "ontology". These directories have been combined into a directory 
+      called "productMods". If your site has made changes to the ontology 
+      ensure that those changes are moved into "productMods".
       
 5. If you had modified web.xml to configure the "Pellet Reasoner" (as described
     in the installation instructions), repeat that modification.
