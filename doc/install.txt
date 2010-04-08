@@ -211,3 +211,38 @@ completed and the search box on the Vitro portal will be usable. Individuals
 that are created, edited, or deleted from the Vitro editing interface will 
 trigger incremental updates of the search index.
 
+-------------------------------------------------------------------------------
+
+X. Was the installation successful?
+
+If you have completed the previous steps, you have good indications that the 
+installation was successful. 
+
+* Step VII showed that Tomcat recognized the webapp, and that the webapp was 
+    able to present the initial page.
+* Step VIII verified that you can log in to the administrator account.
+* Step IX initialized the Lucene Search system. Though there is very little 
+    feedback for a successful installation, there are dramatic indications
+    for failures.
+
+Here is a simple test to see whether the ontology files were loaded:
+* Point your browser to http://localhost:8080/vivo, and click the "Log in" link 
+    near the upper right corner. Log in with the initialAdminUser username you
+    set up in step IV. If this is your first time logging in, you will be 
+    prompted to change the password.
+* Click on the "Index" link on the upper left, below the logo. You should see
+    a "locations" section, with links for "Country" and "Geographic Location".
+    The index is built in a background thread, so on your first login, you may
+    see an empty index instead. Refresh the page periodically to see whether 
+    the index will be populated. This may take some time: with VIVO installed
+    on a modest laptop computer, loading the ontology files and building the 
+    index took more than 5 minutes from the time that Tomcat was started.
+* Click on the "Country" link. You should see an alphabetical list of the 
+    countries of the world.
+    
+Finally, test the search index. 
+* The search box is on the right side, directly opposite the "Index" link.
+    Type the word "Afghanistan" into the box, and click on the "Search" 
+    button.You should see a page of results, with links to countries that
+    border Afghanistan, entities that include Afghanistan, and to 
+    Afghanistan itself.
