@@ -53,10 +53,6 @@
                 <c:if test="${ empty degreeAbbreviation }">
                       <c:set var="degreeAbbreviation" value="${degreeType.name}"/>
                 </c:if>         
-                <h1>ORG ${selectedOrganizationStr}</h1>
-                <h1>MAJOR ${degreeMajor}</h1>
-                <h1>YR ${year}</h1>
-                <h1>DEGREE ${degreeAbbreviation}</h1>
 
                 <c:choose>
                     <%-- degreeMajor, year, org and abbreviation are all required --%>
