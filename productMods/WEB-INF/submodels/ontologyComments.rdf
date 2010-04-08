@@ -130,7 +130,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Bachelor of Arts (B.A.)</vitro:exampleAnnot>
+    >B.A. Bachelor of Arts</vitro:exampleAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</vitro:shortDef>
   </rdf:Description>
