@@ -1876,9 +1876,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#description">
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</j.0:displayLimitAnnot>
     <j.0:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">30</j.0:displayRankAnnot>
-    <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
     <j.0:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
-    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#type">
     <j.0:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A generic type field, optionally used via a restriction on a class when no subclass is needed and moniker or title does not provide enough distinction</j.0:descriptionAnnot>

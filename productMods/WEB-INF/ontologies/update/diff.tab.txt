@@ -135,3 +135,8 @@ http://www.w3.org/2004/02/skos/core#editorOf	http://vivoweb.org/ontology/core#ed
 http://vivoweb.org/ontology/core#hasOrganizationalAffiliate	http://vivoweb.org/ontology/core#affiliatedOrganization	Yes	Map	Use-instead
 http://vivoweb.org/ontology/core#organizationalAffiliateOf	http://vivoweb.org/ontology/core#affiliatedOrganization	Yes	Map	Use-instead
 http://vivoweb.org/ontology/core#conferenceDate	http://vivoweb.org/ontology/core#atTime	Yes	Map	Use-instead
+http://vivoweb.org/ontology/core#description	http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)
+http://vivoweb.org/ontology/core#URLLink	http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Link	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)
+http://vivoweb.org/ontology/core#linkURI	http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkURL	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)
+http://vivoweb.org/ontology/core#linkAnchorText	http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkAnchor	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)
+http://vivoweb.org/ontology/core#webpage	http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)
