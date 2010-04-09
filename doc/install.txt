@@ -30,6 +30,9 @@ slightly different. Please consult "developers.txt" in this directory.
     * VII. Start Tomcat
     * VIII. Log in and add RDF data
     * IX. Create an initial Lucene search index
+    * X. Setup Apache Tomcat Connector
+    * XI. Configure Pellet Reasoner
+    * XII. Was the Installation Successful?
 
 -------------------------------------------------------------------------------
  
@@ -38,11 +41,11 @@ I. Install required software
 Before installing VIVO, make sure that the following software is installed on 
 the desired machine:
 
-    * Java (SE) 1.5 or higher
-    * Apache Tomcat 5.x or higher*
-    * Apache Ant
-    * MySQL 4.1 or higher
-    * Subversion client
+    * Java (SE) 1.5 or higher [http://java.sun.com/javase/downloads/]
+    * Apache Tomcat 5.x or higher* [http://tomcat.apache.org]
+    * Apache Ant [http://ant.apache.org/]
+    * MySQL 4.1 or higher [http://www.mysql.com/downloads/mysql/#downloads]
+    * Subversion client (developers only)
 
 -------------------------------------------------------------------------------
  
@@ -68,8 +71,8 @@ Keep track of the database name, username, and password for the next step.
 III. Download the VIVO code distribution
 
 Download either a zip or gz file and unpack it on your web server:
-ftp://download.mannlib.cornell.edu/pub/Vivo/rel-0.9.zip
-ftp://download.mannlib.cornell.edu/pub/Vivo/rel-0.9.tar.gz
+ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.0.zip
+ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.0.tar.gz
 
 -------------------------------------------------------------------------------
  
@@ -213,7 +216,55 @@ trigger incremental updates of the search index.
 
 -------------------------------------------------------------------------------
 
-X. Was the installation successful?
+X. Setup Apache Tomcat Connector
+
+It is recommend that a Tomcat Connector, such as mod_jk be used to ensure that 
+the site address does not include the port number and any extraneous Tomcat 
+context.
+
+For example - http://example.com instead of http://example.com:8080/vivo
+
+Using the mod_jk connector allows for communication between Tomcat and the 
+primary web server. The "Quick Start HowTo" on the Apache site 
+http://tomcat.apache.org/connectors-doc/generic_howto/quick.html describes 
+the minimum server configurations for several popular web servers.
+
+-------------------------------------------------------------------------------
+ 
+XI. Configure Pellet Reasoner
+
+VIVO uses the “Pellet” engine to perform reasoning, which runs in the 
+background at startup and also when the knowledge base is edited. VIVO 
+continues serving pages while the reasoner continues working; when it finishes, 
+the new inferences appear. Inferred statements are cached in a database graph 
+so that they are available immediately when VIVO is restarted.
+
+By default, “Pellet” is fed only an incomplete view of your ontology and only 
+certain inferences are materialized. These include rdf:type, 
+rdfs:subClassOf,owl:equivalentClass, and owl:disjointWith. This mode is 
+typically suitable for ontologies with a lot of instance data.  If you would 
+like to keep the default mode, skip to the next step.
+
+To enable "complete" OWL inference (materialize all significant entailed 
+statements), openvitro-core/webapp/config/web.xml and search for 
+PelletReasonerSetup.
+
+Then change the name of the listener class to PelletReasonerSetupComplete. 
+Because "complete" reasoning can be very resource intensive, there is also an 
+option to materialize nearly all inferences except owl:sameAs and 
+owl:differentFrom.
+
+This is enabled by specifying PelletReasonerSetupPseudocomplete. For ontologies 
+with large numbers of individuals, this mode can offer enormous performance 
+improvements over the "complete" mode.
+
+Finally, a class called PelletReasonerSetupPseudocompleteIgnoreDataproperties 
+is provided to improve performance on ontologies with large literals where 
+datatype property entailments are not needed.
+
+-------------------------------------------------------------------------------
+
+XII. Was the installation successful?
 
 If you have completed the previous steps, you have good indications that the 
 installation was successful. 
