@@ -61,7 +61,6 @@ http://vivoweb.org/ontology/core#degreeRecipient		No	Delete	not set
 http://vivoweb.org/ontology/core#altFirstName		No	Delete	not set
 http://vivoweb.org/ontology/core#hasNameVariant		No	Delete	not set
 http://vivoweb.org/ontology/core#CitationFormat		No	Delete	not set
-http://vivoweb.org/ontology/core#centerOrInstituteWithin		No	Delete	not set
 http://vivoweb.org/ontology/core#relatedActivityOrEvent		No	Delete	not set
 http://vivoweb.org/ontology/core#issueOf		No	Delete	not set
 http://vivoweb.org/ontology/core#nameVariantFor		No	Delete	not set
@@ -81,6 +80,7 @@ http://vivoweb.org/ontology/core#degreeAbbrev		No	Delete	not set
 http://vivoweb.org/ontology/core#conferenceDate		No	Delete	not set
 http://vivoweb.org/ontology/core#publishedInTitle		No	Delete	not set
 http://vivoweb.org/ontology/core#hasLab	http://vivoweb.org/ontology/core#hasSubOrganization	Yes	Map	Use-instead
+http://vivoweb.org/ontology/core#centerOrInstituteWithin	http://vivoweb.org/ontology/core#subOrganizationWithin	Yes	Map	Use-instead
 http://vivoweb.org/ontology/core#collegeOrSchoolWithin	http://vivoweb.org/ontology/core#subOrganizationWithin	Yes	Map	Use-instead
 http://vivoweb.org/ontology/core#labWithin	http://vivoweb.org/ontology/core#subOrganizationWithin	Yes	Map	Use-instead
 http://vivoweb.org/ontology/core#countryOfStateOrProvince	http://vivoweb.org/ontology/core#geographicallyContains	Yes	Map	Use-instead
