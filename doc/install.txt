@@ -18,7 +18,7 @@ in this directory.
 
 VIVO Developers:
 If you are working on the VIVO source code from Subversion, the instructions 
-are slightly different. Please consult "developers.txt" in this directory.
+are slightly different. Please consult developers.txt in this directory.
  
 -------------------------------------------------------------------------------
  
@@ -236,7 +236,7 @@ trigger incremental updates of the search index.
 
 -------------------------------------------------------------------------------
 
-X. Setup Apache Tomcat Connector
+X. Set up Apache Tomcat Connector
 
 It is recommended that a Tomcat Connector such as mod_jk be used to ensure that 
 the site address does not include the port number (e.g. 8080) and an additional 
