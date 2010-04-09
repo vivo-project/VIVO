@@ -1,13 +1,29 @@
+
+-------------------------------------------------------------------------------
+
 Upgrading NIH VIVO
  
 Steps to Upgrade from Release 1 Version 0.9 to Release 1 Version 1.0
 
 This file provides a short description of the steps involved in upgrading your 
 installation of NIH VIVO from Release 1 Version 0.9 to Release 1 Version 1.0.
+This and other documentation can be found at:
 
-----------
-Before Performing the Upgrade
-----------
+http://vivoweb.org/support
+
+Installation:
+If you need to do a fresh install, please consult the install.txt in this 
+directory.
+
+-------------------------------------------------------------------------------
+
+I. Before Performing the Upgrade
+II. The Upgrade Process
+III. Ontology Changes
+
+-------------------------------------------------------------------------------
+
+I. Before Performing the Upgrade
 
 Please read the bullet points below BEFORE beginning the upgrade. 
 
@@ -28,9 +44,10 @@ exceptions:
 * Any changes to the application should be made in the source 
     directory and deployed, and not made directly within Apache Tomcat.
     
-----------
-The Process
-----------
+-------------------------------------------------------------------------------
+
+II. The Upgrade Process
+
 
 1. Ensure that backups are created of the Tomcat webapps directory, the 
     original source directory, and the MySQL database.
@@ -65,7 +82,7 @@ The Process
 5. If you had modified web.xml to configure the "Pellet Reasoner" (as described
     in the installation instructions), repeat that modification.
 
-6. Run ant deploy by typing: ant
+6. Run ant deploy by typing: ant all
 
 7. Start "Apache Tomcat" and login to VIVO.
 
@@ -74,9 +91,10 @@ the install process. This step will ensure that changes in the RDF
 data to align with the latest version of the core ontology
 will be reflected in the search index.
 
-----------
-Ontology Changes
-----------
+-------------------------------------------------------------------------------
+
+III. Ontology Changes
+
 
 Changes to the VIVO core ontology may require corresponding
 modifications of the knowledge base instance data and local ontology
@@ -125,15 +143,19 @@ the following types of changes:
   
 The ontology alignment process will create the following files in the
 Tomcat webapps/vivo/WEB-INF directory:
+
 */ontologies/update/logs/knowledgeBaseUpdate.log 
     a log of a summary of updates that were made to the knowledge base and notes 
     about some recommended manual reviews. This file should end with
     "Successfully finished processing ontology changes".
+    
 */ontologies/update/logs/knowledgeBaseUpdate.error.log 
     a log of errors that were encountered during the upgrade process. This file
     should be empty if the upgrade was successful.
+    
 */ontologies/update/removedData/removedData.rdf 
     a file containing all the statements that were removed from the knowledge base.
+    
 */ontologies/update/addedData/addedData.rdf 
     a file containing all the statements that were added to the knowledge base.
     
