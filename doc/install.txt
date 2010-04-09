@@ -43,7 +43,7 @@ Before installing VIVO, make sure that the following software is installed on
 the desired machine:
 
     * Java (SE) 1.5 or higher [http://java.sun.com]
-    * Apache Tomcat 5.x or higher* [http://tomcat.apache.org]
+    * Apache Tomcat 5.x or higher [http://tomcat.apache.org]
     * Apache Ant [http://ant.apache.org]
     * MySQL 4.1 or higher [http://www.mysql.com]
 
@@ -51,7 +51,7 @@ the desired machine:
  
 II. Create an empty MySQL database
 
-Decide on a database name, username, and password. Log into your mysql server 
+Decide on a database name, username, and password. Log into your MySQL server 
 and create a new database in MySQL that uses UTF-8 encoding. You will need 
 these values for step IV when you configure the deployment properties. At the 
 mysql command line you can create the database and user with these commands 
@@ -82,7 +82,7 @@ At the top level of the unpacked distribution, copy the file
 example.deploy.properties to a file named simply deploy.properties. This file 
 sets several properties used in compilation and deployment.
 
-                VIVO installations make their RDF resources available for harvest 
+                Default namespace: VIVO installations make their RDF resources available for harvest 
                 using linked data. Requests for RDF resource URIs redirect to HTML 
                 or RDF representations as specified by the client. To make this 
                 possible, VIVO's default namespace must have certain structure and 
@@ -155,7 +155,7 @@ V. Compile and deploy
 At the command line, from the top level of the unpacked distribution directory,
 type:
 
-ant clean deploy
+ant all
 
 to build VIVO and deploy to Tomcat's webapps directory.
 
@@ -209,10 +209,10 @@ time.
 After verifying your new password, you will be presented with a menu of 
 editing options. Here you can create OWL classes, object properties, data 
 properties, and configure the display of data. Currently, any classes you wish 
-to make visible on your website must be part of a Class Group, and there a 
+to make visible on your website must be part of a class group, and there a 
 number of visibility and display options available for each ontology entity. 
 
-VIVO comes with an ontology, but you may also upload another ontology from an 
+VIVO comes with a core VIVO ontology, but you may also other ontologies from an 
 RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." Note 
 that Vitro currently works best with OWL-DL ontologies and has only limited 
 support for pure RDF data. You can enter a URL pointing to the RDF data you 
@@ -238,8 +238,8 @@ trigger incremental updates of the search index.
 
 X. Setup Apache Tomcat Connector
 
-It is recommended that a Tomcat Connector, such as mod_jk be used to ensure that 
-the site address does not include the port number (e.g. 8080) and the additional 
+It is recommended that a Tomcat Connector such as mod_jk be used to ensure that 
+the site address does not include the port number (e.g. 8080) and an additional 
 reference to the Tomcat context name (e.g. /vivo).
 
 For example - http://example.com instead of http://example.com:8080/vivo
@@ -253,13 +253,13 @@ the minimum server configurations for several popular web servers.
  
 XI. Configure Pellet Reasoner
 
-VIVO uses the "Pellet" engine to perform reasoning, which runs in the 
+VIVO uses the Pellet engine to perform reasoning, which runs in the 
 background at startup and also when the knowledge base is edited. VIVO 
-continues serving pages while the reasoner continues working; when it finishes, 
-the new inferences appear. Inferred statements are cached in a database graph 
-so that they are available immediately when VIVO is restarted.
+continues serving pages while the reasoner continues working; when the
+reasoner finishes, the new inferences appear. Inferred statements are cached 
+in a database graph so that they are available immediately when VIVO is restarted.
 
-By default, "Pellet" is fed only an incomplete view of your ontology and only 
+By default, Pellet is fed only an incomplete view of your ontology and only 
 certain inferences are materialized. These include rdf:type, 
 rdfs:subClassOf,owl:equivalentClass, and owl:disjointWith. This mode is 
 typically suitable for ontologies with a lot of instance data.  If you would 
@@ -297,7 +297,7 @@ installation was successful.
     for failures.
 
 Here is a simple test to see whether the ontology files were loaded:
-* Point your browser to http://localhost:8080/vivo, and click the "Log in" link 
+* Point your browser to the home page of your website, and click the "Log in" link 
     near the upper right corner. Log in with the initialAdminUser username you
     set up in step IV. If this is your first time logging in, you will be 
     prompted to change the password.
@@ -312,7 +312,7 @@ Here is a simple test to see whether the ontology files were loaded:
     countries of the world.
 
 Here is a test to see whether your system is configured to serve linked data:
-* Point your browser to http://localhost:8080/vivo, and click the "Log in" link 
+* Point your browser to the home page of your website, and click the "Log in" link 
     near the upper right corner. Log in with the initialAdminUser username you
     set up in step IV. If this is your first time logging in, you will be 
     prompted to change the password.
@@ -325,17 +325,17 @@ Here is a test to see whether your system is configured to serve linked data:
 	the next step. 
 * Open a new web browser or browser tab to the page "http://marbles.sourceforge.net/".
   	In the pink box on that page enter the URI of the individual you created in the
-  	previous step and click "open".
+  	previous step and click "open."
 * In the resulting page search for the URI of the "test individual".  You should 
 	find it towards the bottom of the page next to a red dot followed by "redirect (303)"
-	This indicates that you are successful serving linked RDF data.
+	This indicates that you are successfully serving linked RDF data.
 	If the URI of the "test individual" is followed by "failed (400)" you are not 
 	successfully serving linked data.
      
 Finally, test the search index (assuming you have created the initial Lucene 
 index in Step IX). 
 * The search box is on the right side, directly opposite the "Index" link.
-    Type the word "Afghanistan" into the box, and click on the "Search" 
+    Type the word "Australia" into the box, and click on the "Search" 
     button.You should see a page of results, with links to countries that
-    border Afghanistan, individuals that include Afghanistan, and to 
-    Afghanistan itself.
+    border Australia, individuals that include Australia, and to 
+    Australia itself.
