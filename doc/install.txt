@@ -1,23 +1,24 @@
 
 -------------------------------------------------------------------------------
  
-This is a brief summary of the VIVO installation process. A more detailed 
-explanation of the procedure can be found at:
+This is a summary of the VIVO installation process. This and other documentation
+can be found at:
 
-     http://vivoweb.org/support/user-guide/installation
-     
-The VIVO user guide is available at:
-
-    http://vivoweb.org/support/user-guide
+     http://vivoweb.org/support
     
-PLEASE NOTE: It is assumed that you are performing a clean install, including
-emptying an existing database and removing a previous installation from the 
-tomcat webapps directory. Product functionality may not be as expected if you 
-install over an existing installation of an earlier version.
+PLEASE NOTE!
+These instructions assume that you are performing a clean install, 
+including emptying an existing database and removing a previous installation 
+from the tomcat webapps directory. Product functionality may not be as expected 
+if you install over an existing installation of an earlier version.
 
-VIVO DEVELOPERS:
-If you are working the VIVO source code from Subversion, the instructions are
-slightly different. Please consult "developers.txt" in this directory.
+Upgrade:
+If you are going to upgrade an existing service, please consult the upgrade.txt
+in this directory.
+
+VIVO Developers:
+If you are working on the VIVO source code from Subversion, the instructions 
+are slightly different. Please consult "developers.txt" in this directory.
  
 -------------------------------------------------------------------------------
  
