@@ -151,7 +151,8 @@ var customForm = {
     	customForm.addNew.hide();
     	customForm.entry.hide();    
     	customForm.requiredLegend.hide();
-    	customForm.button.hide(); customForm.or.hide();
+    	customForm.button.hide(); 
+    	customForm.or.hide();
         
         // Assign event listeners 
     	customForm.existingSelect.bind('change', function() {
