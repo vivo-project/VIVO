@@ -433,6 +433,7 @@ are necessary for cross-browser consistency
 #adminDashboard .pageBodyGroup {
   float: left;
   clear: right;
+  display: inline-block;
   width: 45%;
   margin-top: 2em;
   margin-bottom: 1em;
