@@ -46,7 +46,6 @@ the desired machine:
     * Apache Tomcat 5.x or higher* [http://tomcat.apache.org]
     * Apache Ant [http://ant.apache.org]
     * MySQL 4.1 or higher [http://www.mysql.com]
-    * Subversion client (developers only)
 
 -------------------------------------------------------------------------------
  
@@ -254,13 +253,13 @@ the minimum server configurations for several popular web servers.
  
 XI. Configure Pellet Reasoner
 
-VIVO uses the “Pellet” engine to perform reasoning, which runs in the 
+VIVO uses the "Pellet" engine to perform reasoning, which runs in the 
 background at startup and also when the knowledge base is edited. VIVO 
 continues serving pages while the reasoner continues working; when it finishes, 
 the new inferences appear. Inferred statements are cached in a database graph 
 so that they are available immediately when VIVO is restarted.
 
-By default, “Pellet” is fed only an incomplete view of your ontology and only 
+By default, "Pellet" is fed only an incomplete view of your ontology and only 
 certain inferences are materialized. These include rdf:type, 
 rdfs:subClassOf,owl:equivalentClass, and owl:disjointWith. This mode is 
 typically suitable for ontologies with a lot of instance data.  If you would 
@@ -334,7 +333,7 @@ Here is a test to see whether your system is configured to serve linked data:
 	successfully serving linked data.
      
 Finally, test the search index (assuming you have created the initial Lucene 
-index in Step !X). 
+index in Step IX). 
 * The search box is on the right side, directly opposite the "Index" link.
     Type the word "Afghanistan" into the box, and click on the "Search" 
     button.You should see a page of results, with links to countries that
