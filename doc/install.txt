@@ -241,13 +241,13 @@ the minimum server configurations for several popular web servers.
  
 XI. Configure Pellet Reasoner
 
-VIVO uses the ÒPelletÓ engine to perform reasoning, which runs in the 
+VIVO uses the ï¿½Pelletï¿½ engine to perform reasoning, which runs in the 
 background at startup and also when the knowledge base is edited. VIVO 
 continues serving pages while the reasoner continues working; when it finishes, 
 the new inferences appear. Inferred statements are cached in a database graph 
 so that they are available immediately when VIVO is restarted.
 
-By default, ÒPelletÓ is fed only an incomplete view of your ontology and only 
+By default, ï¿½Pelletï¿½ is fed only an incomplete view of your ontology and only 
 certain inferences are materialized. These include rdf:type, 
 rdfs:subClassOf,owl:equivalentClass, and owl:disjointWith. This mode is 
 typically suitable for ontologies with a lot of instance data.  If you would 
@@ -298,7 +298,29 @@ Here is a simple test to see whether the ontology files were loaded:
     index took more than 5 minutes from the time that Tomcat was started.
 * Click on the "Country" link. You should see an alphabetical list of the 
     countries of the world.
-    
+
+Here is a test to see whether your system is configured to serve linked data:
+* Point your browser to http://localhost:8080/vivo, and click the "Log in" link 
+    near the upper right corner. Log in with the initialAdminUser username you
+    set up in step IV. If this is your first time logging in, you will be 
+    prompted to change the password.
+* After you have successfully logged in, click "site admin" in the upper right 
+	corner.  In the drop down under "Data Input", select "Faculty Member(core)"
+	and click the "Add individual of this class" button.
+* Enter the name "test individual" under the field "Individual Name", scroll to
+	the bottom, and click "Create New Record".You will be taken to the "Individual
+	Control Panel". Make note of the value of the field "URI", it will be used in 
+	the next step. 
+* Open a new web browser or browser tab to the page "http://marbles.sourceforge.net/".
+  	In the pink box on that page enter the URI of the individual you created in the
+  	previous step and click "open"  
+* In the resulting page search for the URI of the "test individual".  You should 
+	find it towards the bottom of the page next to a red dot followed by "redirect (303)"
+	This indicates that you are successful serving linked RDF data.
+	If the URI of the "test individual" is followed by "failed (400)" you are not 
+	successfully serving linked data.
+
+     
 Finally, test the search index (assuming you have created the initial Lucene 
 index in Step !X). 
 * The search box is on the right side, directly opposite the "Index" link.
