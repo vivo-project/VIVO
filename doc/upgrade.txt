@@ -1,9 +1,9 @@
 Upgrading NIH VIVO
  
-Steps to Upgrade from Version 1 Release 0.9 to Release 1.0
+Steps to Upgrade from Release 1 Version 0.9 to Release 1 Version 1.0
 
 This file provides a short description of the steps involved in upgrading your 
-installation of NIH VIVO from Version 1 Release 0.9 to Version 1 Release 1.0.
+installation of NIH VIVO from Release 1 Version 0.9 to Release 1 Version 1.0.
 
 ----------
 Before Performing the Upgrade
