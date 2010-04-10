@@ -9,7 +9,7 @@ can be found at:
 PLEASE NOTE!
 These instructions assume that you are performing a clean install, 
 including emptying an existing database and removing a previous installation 
-from the tomcat webapps directory. Product functionality may not be as expected 
+from the Tomcat webapps directory. Product functionality may not be as expected 
 if you install over an existing installation of an earlier version.
 
 Upgrade:
@@ -212,9 +212,9 @@ properties, and configure the display of data. Currently, any classes you wish
 to make visible on your website must be part of a class group, and there a 
 number of visibility and display options available for each ontology entity. 
 
-VIVO comes with a core VIVO ontology, but you may also other ontologies from an 
-RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." Note 
-that Vitro currently works best with OWL-DL ontologies and has only limited 
+VIVO comes with a core VIVO ontology, but you may also upload other ontologies 
+from an RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." 
+Note that Vitro currently works best with OWL-DL ontologies and has only limited 
 support for pure RDF data. You can enter a URL pointing to the RDF data you 
 wish to load or upload a file on your local machine. Ensure that the "add RDF" 
 radio button is selected. You will also likely want to check "create 
@@ -297,10 +297,6 @@ installation was successful.
     for failures.
 
 Here is a simple test to see whether the ontology files were loaded:
-* Point your browser to the home page of your website, and click the "Log in" link 
-    near the upper right corner. Log in with the initialAdminUser username you
-    set up in step IV. If this is your first time logging in, you will be 
-    prompted to change the password.
 * Click on the "Index" link on the upper left, below the logo. You should see
     a "locations" section, with links for "Country" and "Geographic Location".
     The index is built in a background thread, so on your first login, you may
