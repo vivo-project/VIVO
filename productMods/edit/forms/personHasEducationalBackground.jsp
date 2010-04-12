@@ -141,21 +141,15 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     ?edBackgroundUri <${orgGrantingDegree}> ?organizationUri .
 </v:jsonset>
 
-<%-- Do we need anything like this? EducationalBackground has no subtypes 
-<v:jsonset var="positionTypeExisting">
-    SELECT ?existingPositionType WHERE {
-        ?positionUri <${type}> ?existingPositionType }
-</v:jsonset>
-<v:jsonset var="positionTypeAssertion">
-    ?positionUri <${type}> ?positionType .
-</v:jsonset>
---%>
-
 <v:jsonset var="newOrgNameAssertion">
     ?newOrg <${label}> ?newOrgName .
 </v:jsonset>
-
+<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
+the org type still gets asserted. --%>
 <v:jsonset var="newOrgTypeAssertion">
+    ?newOrg a <${orgClass}> .
+</v:jsonset>
+<v:jsonset var="newOrgSubClassAssertion">
     ?newOrg a ?newOrgType .
 </v:jsonset>
 
@@ -171,10 +165,15 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
 
 <v:jsonset var="n3ForNewOrg">
     ?newOrg <${label}> ?newOrgName ;
-            a ?newOrgType ;
-            a <${flagURI}> .
+            a <${orgClass}> ,
+              <${flagURI}> .
             
     ?edBackgroundUri <${orgGrantingDegree}> ?newOrg .
+</v:jsonset>
+<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
+the type still gets asserted. --%>
+<v:jsonset var="n3ForNewOrgSubClass">
+    ?newOrg a ?newOrgType .
 </v:jsonset>
 
 <v:jsonset var="edBackgroundClassUriJson">${edBackgroundClass}</v:jsonset>
@@ -194,8 +193,8 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
     "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}", "${yearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
-                        "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${deptAssertion}", "${infoAssertion}" ],
+                        "${n3ForNewOrg}", "${n3ForNewOrgSubClass}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
+                        "${newOrgSubClassAssertion}", "${deptAssertion}", "${infoAssertion}" ],
                         
     "newResources"  : { "edBackgroundUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -271,7 +270,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : [ "${n3ForNewOrg}" ]
+         "assertions"       : [ "${n3ForNewOrg}", "${n3ForNewOrgSubClass}" ]
       },
      "newOrgType" : {
          "newResource"      : "false",
@@ -282,7 +281,7 @@ core:organizationGrantingDegree (EducationalBackground : Organization) - no inve
          "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ "${newOrgTypeAssertion}" ]
+         "assertions"       : [ "${newOrgTypeAssertion}",  "${newOrgSubClassAssertion}" ]
       },      
       "dept" : {
          "newResource"      : "false",
