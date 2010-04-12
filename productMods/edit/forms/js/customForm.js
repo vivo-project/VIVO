@@ -53,6 +53,7 @@ var customForm = {
 		COMBINED: 3
 	},
 
+
     onLoad: function() {
 
 		this.initObjects();		
@@ -76,7 +77,7 @@ var customForm = {
         this.existingSelect = this.existing.children('select');
         this.addNew = $('.new');
         this.entry = $('.entry');
-        this.existingOrNew = $('.existingOrNew');
+        this.existingOrNew = $('.existingOrNew'); // just the word "or" between existing and add new
 
         this.cancel = this.form.find('.cancel');
         this.requiredHints = this.form.find('.requiredHint');        
@@ -289,23 +290,42 @@ var customForm = {
     // Use when the non-Javascript version should not show the required hint,
     // because the field is not required in that version (e.g., it's one of two
     // fields, where one of the two must be filled in but neither one is required). 
+    // Showing the asterisks cannot simply be done once on page load, because in
+    // step 1 the select existing field should not be marked required.
     // Arguments: action = 'add' or 'remove'
     // Varargs: element(s)
     toggleRequiredHints: function(action /* elements */) {
     
         var labelText,
-            newLabelText,
+            newLabelText,               
             requiredHintText = '<span class="requiredHint"> *</span>',
-            numArgs = arguments.length;
+            numArgs = arguments.length, 
+            element,
+            el;
 
-        for (var i = 1; i < numArgs; i++) {          
-            arguments[i].find('label.required').each(function() {
-                labelText = $(this).html();
-                newLabelText = action == 'add' ? labelText + requiredHintText : 
-                                                 labelText.replace(requiredHintText, ''); 
-                $(this).html(newLabelText);
-            });
+            for (var i = 1; i < numArgs; i++) {
+                element = arguments[i];
+                if (action  == 'add') {
+                    element.find('label.required').each(function(){
+                        el = $(this);
+                        labelText = el.html();                  
+                        newLabelText = labelText + requiredHintText;
+                        el.html(newLabelText);
+                    });
+                }
+                else {
+                    /* NB IE modifies the html text when it's inserted. E.g.,
+                     * the requiredHintText becomes <SPAN class=requiredHint> *</SPAN>
+                     * So a replace of the text with an empty string won't work, unless
+                     * we first convert to a regexp such as /<span class="?requiredHint"?> \*<\/span>/i
+                     * However, the remove() call is simpler anyway.
+                     */
+                    element.find('span.requiredHint').remove();
+                }
+            
+    
         }
+       
     },
     
     showFields: function(el) {
