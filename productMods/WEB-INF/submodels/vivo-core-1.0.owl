@@ -2043,7 +2043,6 @@ We suggest to use this property instead of the deprecated "bibo:content" one.</j
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Activity">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:nodeID="A202"/>
     <rdfs:subClassOf rdf:nodeID="A203"/>
     <rdfs:subClassOf rdf:nodeID="A204"/>
     <rdfs:subClassOf rdf:nodeID="A205"/>
@@ -4230,11 +4229,6 @@ sources.</dc:description>
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/alternative"/>
     <j.3:term_status>stable</j.3:term_status>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A202">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <owl:onProperty rdf:resource="http://purl.org/dc/elements/1.1/description"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeopoliticalEntity">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
