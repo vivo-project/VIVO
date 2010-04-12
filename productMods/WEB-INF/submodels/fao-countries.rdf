@@ -6531,7 +6531,6 @@
     <j.2:codeCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SI$</j.2:codeCurrency>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#south-eastern_Asia">
-    <j.0:geographicFocusOf rdf:resource="http://example.org/vivoontology/individual/TheEssentialElectronicAgriculturalLibraryTEEAL"/>
     <j.2:nameShortEN rdf:datatype="http://www.w3.org/2001/XMLSchema#string">south-eastern Asia</j.2:nameShortEN>
     <j.2:nameListRU rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Юго-Восточная Азия</j.2:nameListRU>
     <j.2:nameShortAR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">جنوب شرقي آسيا</j.2:nameShortAR>
@@ -15556,7 +15555,6 @@
     <j.2:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#Liberia"/>
     <j.2:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#Kenya"/>
     <j.2:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#Togo"/>
-    <j.0:geographicFocusOf rdf:resource="http://example.org/vivoontology/individual/TheEssentialElectronicAgriculturalLibraryTEEAL"/>
     <j.2:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#Zambia"/>
     <j.2:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#South_Africa"/>
     <j.2:hasMember rdf:resource="http://aims.fao.org/aos/geopolitical.owl#Mozambique"/>
