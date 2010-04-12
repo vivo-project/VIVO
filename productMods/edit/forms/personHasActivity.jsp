@@ -45,6 +45,7 @@
 %>
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
+<c:set var="vitroNs" value="<%= VitroVocabulary.vitroURI %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="labelUri" value="${rdfs}label" />
 
@@ -92,7 +93,7 @@
     ?activityUri <${labelUri}> ?label . 
 </v:jsonset>
 
-<c:set var="descriptionUri" value="${vivoCore}description" />
+<c:set var="descriptionUri" value="${vitroNs}description" />
 <v:jsonset var="descriptionExisting" >  
     SELECT ?existingDescription WHERE {
           ?activityUri <${descriptionUri}> ?existingDescription }
