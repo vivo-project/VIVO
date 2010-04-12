@@ -108,8 +108,12 @@
 <v:jsonset var="newOrgNameAssertion">
     ?newOrg <${label}> ?newOrgName .
 </v:jsonset>
-
+<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
+the type still gets asserted. --%>
 <v:jsonset var="newOrgTypeAssertion">
+    ?newOrg a <${orgClass}> .
+</v:jsonset>
+<v:jsonset var="newOrgSubClassAssertion">
     ?newOrg a ?newOrgType .
 </v:jsonset>
 
@@ -119,17 +123,24 @@
     ?person      core:personInPosition  ?positionUri .
     
     ?positionUri core:positionForPerson ?person ;
-                 a  ?positionType ;
-                 a <${flagURI}> .
+                 a  ?positionType ,
+                    <${flagURI}> .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
     ?positionUri <${positionInOrgPred}> ?newOrg .
     
-    ?newOrg <${label}> ?newOrgName ;
-            a ?newOrgType ;
-            <${orgForPositionPred}> ?positionUri ;
-            a <${flagURI}> .
+    ?newOrg <${label}> ?newOrgName .
+
+    ?newOrg a <${orgClass}> ,
+              <${flagURI}> ;
+            <${orgForPositionPred}> ?positionUri .
+
+</v:jsonset>
+<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
+the type still gets asserted. --%>
+<v:jsonset var="n3ForNewOrgSubClass">
+    ?newOrg a ?newOrgType .
 </v:jsonset>
 
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
@@ -148,8 +159,8 @@
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
-                        "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${endYearAssertion}"],
+                        "${n3ForNewOrg}", "${n3ForNewOrgSubClass}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
+                        "${newOrgSubClassAssertion}", "${endYearAssertion}"],
                         
     "newResources"  : { "positionUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -213,7 +224,7 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : [ "${n3ForNewOrg}" ]
+         "assertions"       : [ "${n3ForNewOrg}", "${n3ForNewOrgSubClass}" ]
       },
      "newOrgType" : {
          "newResource"      : "false",
@@ -224,7 +235,7 @@
          "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ "${newOrgTypeAssertion}" ]
+         "assertions"       : [ "${newOrgTypeAssertion}", "${newOrgSubClassAssertion}" ]
       },      
       "startYear" : {
          "newResource"      : "false",
