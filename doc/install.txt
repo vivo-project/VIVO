@@ -94,7 +94,7 @@ sets several properties used in compilation and deployment.
                 default namespace must be set to http://www.example.edu/vivo/individual/
                 Note:  The namespace must end with "individual/" (including the 
                 trailing slash).
-property name:  Vitro.defaultNamespace 	
+property name:  Vitro.defaultNamespace 
 example value:  http://vivo.mydomain.edu/individual/
 
                 Directory where Vitro code is located. In most deployments, 
@@ -117,35 +117,35 @@ example value:  vivo
 property name:  upload.directory
 example value:  /usr/local/vivo/data/uploads
 
-                Directory where the Lucene search index will be built. 	
+                Directory where the Lucene search index will be built. 
                 Depending on your permissions and who Tomcat is running as, 
                 you may need to create these directories ahead of time.
-property name:  LuceneSetup.indexDir 	
+property name:  LuceneSetup.indexDir 
 example value:  /usr/local/vivo/data/luceneIndex
 
                 Specify an SMTP host that the form will use for sending 
                 e-mail (Optional). If this is left blank, the contact form 
                 will be hidden and disabled.
-property name:  Vitro.smtpHost 	
+property name:  Vitro.smtpHost 
 example value:  smtp.servername.edu
 
                 Specify the JDBC URL of your database.  Change the end of the
                 URL to reflect your database name (if it is not "vivo").
-property name:  VitroConnection.DataSource.url 	
+property name:  VitroConnection.DataSource.url 
 example value:  jdbc:mysql://localhost/vivo
 
                 Change the username to match the authorized user you created in MySQL
 property name:  VitroConnection.DataSource.username
 example value:  username
 
-                Change the password to match the password you created in MySQL 	
+                Change the password to match the password you created in MySQL 
 property name:  VitroConnection.DataSource.password
 example value:  password
-	  	 
+   
                 Specify the name of your first admin user for the VIVO application. 
                 This user will have an initial temporary password of 'defaultAdmin'. 
                 You will be prompted to create a new password on first login.
-property name:  initialAdminUser 	
+property name:  initialAdminUser 
 example value:  defaultAdmin
 
 -------------------------------------------------------------------------------
@@ -313,20 +313,20 @@ Here is a test to see whether your system is configured to serve linked data:
     set up in step IV. If this is your first time logging in, you will be 
     prompted to change the password.
 * After you have successfully logged in, click "site admin" in the upper right 
-	corner.  In the drop down under "Data Input", select "Faculty Member(core)"
-	and click the "Add individual of this class" button.
+    corner.  In the drop down under "Data Input", select "Faculty Member(core)"
+    and click the "Add individual of this class" button.
 * Enter the name "test individual" under the field "Individual Name", scroll to
-	the bottom, and click "Create New Record".You will be taken to the "Individual
-	Control Panel". Make note of the value of the field "URI", it will be used in 
-	the next step. 
+    the bottom, and click "Create New Record".You will be taken to the "Individual
+    Control Panel". Make note of the value of the field "URI", it will be used in 
+    the next step. 
 * Open a new web browser or browser tab to the page "http://marbles.sourceforge.net/".
-  	In the pink box on that page enter the URI of the individual you created in the
-  	previous step and click "open."
+    In the pink box on that page enter the URI of the individual you created in the
+    previous step and click "open."
 * In the resulting page search for the URI of the "test individual".  You should 
-	find it towards the bottom of the page next to a red dot followed by "redirect (303)"
-	This indicates that you are successfully serving linked RDF data.
-	If the URI of the "test individual" is followed by "failed (400)" you are not 
-	successfully serving linked data.
+    find it towards the bottom of the page next to a red dot followed by "redirect (303)"
+    This indicates that you are successfully serving linked RDF data.
+    If the URI of the "test individual" is followed by "failed (400)" you are not 
+    successfully serving linked data.
      
 Finally, test the search index (assuming you have created the initial Lucene 
 index in Step IX). 
