@@ -64,13 +64,18 @@
 				            </c:otherwise>
 				        </c:choose>
 				        
+				        <%-- Hack to control extra spaces...should be done differently though. --%>
+                        <c:if test="${!empty objName && !empty objLabel}" >
+                            <c:set var="objLabel" value=" ${objLabel}" />
+                        </c:if>
+                        
 						<c:choose>
 					    	<c:when test="${!empty objUri}">
 					            <c:url var="objLink" value="/entity"><c:param name="uri" value="${objUri}"/></c:url>
-				                <a href="<c:out value="${objLink}"/>"><p:process>${objName}</p:process></a> <p:process>${objLabel} ${timeSpan}</p:process>
+				                <a href="<c:out value="${objLink}"/>"><p:process>${objName}</p:process></a><p:process>${objLabel}${timeSpan}</p:process>
 				            </c:when>
 				            <c:otherwise>
-				                <p:process><strong>${objName}</strong> ${objLabel} ${timeSpan}</p:process> 
+				                <p:process><strong>${objName}</strong>${objLabel}${timeSpan}</p:process> 
 				            </c:otherwise>
 		        		</c:choose>
 				    </c:when>
