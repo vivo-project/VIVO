@@ -44,7 +44,7 @@
     <rdfs:label xml:lang="en-US">end year and month</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CaseStudy">
-    <rdfs:label xml:lang="en-US">CaseStudy</rdfs:label>
+    <rdfs:label xml:lang="en-US">Case Study</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/section">
     <rdfs:label xml:lang="en-US">section</rdfs:label>
@@ -233,7 +233,7 @@
     <rdfs:label xml:lang="en-US">refereed status</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SubnationalRegion">
-    <rdfs:label xml:lang="en-US">SubnationalRegion</rdfs:label>
+    <rdfs:label xml:lang="en-US">Subnational Region</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory">
     <rdfs:label xml:lang="en-US">territory</rdfs:label>
@@ -581,7 +581,7 @@
     <rdfs:label xml:lang="en-US">linked author</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#TransnationalRegion">
-    <rdfs:label xml:lang="en-US">TransnationalRegion</rdfs:label>
+    <rdfs:label xml:lang="en-US">Transnational Region</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#degreeAbbreviation">
     <rdfs:label xml:lang="en-US">degree abbreviation</rdfs:label>
@@ -809,7 +809,7 @@
     <rdfs:label xml:lang="en-US">doi</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeopoliticalEntity">
-    <rdfs:label xml:lang="en-US">GeopoliticalEntity</rdfs:label>
+    <rdfs:label xml:lang="en-US">Geopolitical Entity</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AbstractInformation">
     <rdfs:label xml:lang="en-US">Abstract Information</rdfs:label>
@@ -881,7 +881,7 @@
     <rdfs:label xml:lang="en-US">isVersionOf</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#WorkingPaper">
-    <rdfs:label xml:lang="en-US">WorkingPaper</rdfs:label>
+    <rdfs:label xml:lang="en-US">Working Paper</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Email">
     <rdfs:label xml:lang="en-US">EMail</rdfs:label>
@@ -974,7 +974,7 @@
     <rdfs:label xml:lang="en-US">recipient</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EventSeries">
-    <rdfs:label xml:lang="en-US">EventSeries</rdfs:label>
+    <rdfs:label xml:lang="en-US">Event Series</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Building">
     <rdfs:label xml:lang="en-US">Building</rdfs:label>
@@ -1148,7 +1148,7 @@
     <rdfs:label xml:lang="en-US">Map</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#PostDoc">
-    <rdfs:label xml:lang="en-US">PostDoc</rdfs:label>
+    <rdfs:label xml:lang="en-US">Postdoc</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
     <rdfs:label xml:lang="en-US">self_governing</rdfs:label>
@@ -1235,7 +1235,7 @@
     <rdfs:label xml:lang="en-US">economic_region</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#StateOrProvince">
-    <rdfs:label xml:lang="en-US">StateOrProvince</rdfs:label>
+    <rdfs:label xml:lang="en-US">State or Province</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#day">
     <rdfs:label xml:lang="en-US">day</rdfs:label>
@@ -1475,7 +1475,7 @@
     <rdfs:label xml:lang="en-US">middle name or initial</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#WorkshopSeries">
-    <rdfs:label xml:lang="en-US">WorkshopSeries</rdfs:label>
+    <rdfs:label xml:lang="en-US">Workshop Series</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl#isAgentIn">
     <rdfs:label xml:lang="en-US">is agent in</rdfs:label>
@@ -1584,6 +1584,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Catalog">
     <rdfs:label xml:lang="en-US">Catalog</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ConferenceSeries">
+    <rdfs:label xml:lang="en-US">Conference Series</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/">
     <rdfs:label xml:lang="en-US">FOAF</rdfs:label>
