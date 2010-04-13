@@ -1,7 +1,7 @@
 
 -------------------------------------------------------------------------------
  
-This is a summary of the VIVO installation process. This and other documentation
+This document is a summary of the VIVO installation process. This and other documentation
 can be found at:
 
      http://vivoweb.org/support
@@ -9,7 +9,7 @@ can be found at:
 PLEASE NOTE!
 These instructions assume that you are performing a clean install, 
 including emptying an existing database and removing a previous installation 
-from the tomcat webapps directory. Product functionality may not be as expected 
+from the Tomcat webapps directory. Product functionality may not be as expected 
 if you install over an existing installation of an earlier version.
 
 Upgrade:
@@ -18,7 +18,7 @@ in this directory.
 
 VIVO Developers:
 If you are working on the VIVO source code from Subversion, the instructions 
-are slightly different. Please consult "developers.txt" in this directory.
+are slightly different. Please consult developers.txt in this directory.
  
 -------------------------------------------------------------------------------
  
@@ -42,17 +42,16 @@ I. Install required software
 Before installing VIVO, make sure that the following software is installed on 
 the desired machine:
 
-    * Java (SE) 1.5 or higher [http://java.sun.com/javase/downloads/]
-    * Apache Tomcat 5.x or higher* [http://tomcat.apache.org]
-    * Apache Ant [http://ant.apache.org/]
-    * MySQL 4.1 or higher [http://www.mysql.com/downloads/mysql/#downloads]
-    * Subversion client (developers only)
+    * Java (SE) 1.5 or higher [http://java.sun.com]
+    * Apache Tomcat 5.x or higher [http://tomcat.apache.org]
+    * Apache Ant [http://ant.apache.org]
+    * MySQL 4.1 or higher [http://www.mysql.com]
 
 -------------------------------------------------------------------------------
  
 II. Create an empty MySQL database
 
-Decide on a database name, username, and password. Log into your mysql server 
+Decide on a database name, username, and password. Log into your MySQL server 
 and create a new database in MySQL that uses UTF-8 encoding. You will need 
 these values for step IV when you configure the deployment properties. At the 
 mysql command line you can create the database and user with these commands 
@@ -65,7 +64,7 @@ Grant access to a database user. For example:
 
 GRANT ALL ON dbname.* TO 'username'@'hostname' IDENTIFIED BY 'password';
 
-Keep track of the database name, username, and password for the next step.
+Keep track of the database name, username, and password for Step IV.
 
 -------------------------------------------------------------------------------
  
@@ -83,8 +82,24 @@ At the top level of the unpacked distribution, copy the file
 example.deploy.properties to a file named simply deploy.properties. This file 
 sets several properties used in compilation and deployment.
 
-                Directory where Vitro code is located
-                (this is used by developers, and should not be changed)
+                Default namespace: VIVO installations make their RDF resources available for harvest 
+                using linked data. Requests for RDF resource URIs redirect to HTML 
+                or RDF representations as specified by the client. To make this 
+                possible, VIVO's default namespace must have certain structure and 
+                begin with the public web address of the VIVO installation. 
+                For example, if the web address of a VIVO installation is 
+                http://vivo.example.edu/ the default namespace must be set to 
+                http://vivo.example.edu/individual/ in order to support linked data.
+                Similarly, if VIVO is installed at http://www.example.edu/vivo the 
+                default namespace must be set to http://www.example.edu/vivo/individual/
+                Note:  The namespace must end with "individual/" (including the 
+                trailing slash).
+property name:  Vitro.defaultNamespace 	
+example value:  http://vivo.mydomain.edu/individual/
+
+                Directory where Vitro code is located. In most deployments, 
+                this is set to ./vitro-core, but it commonly points elsewhere 
+                during development.
 property name:  vitro.core.dir
 example value:  ./vitro-core
 
@@ -96,20 +111,21 @@ example value:  /usr/local/tomcat
 property name:  webapp.name
 example value:  vivo
 
-                Directory where uploaded files will be stored
+                Directory where uploaded files will be stored. Depending on 
+                your permissions and who Tomcat is running as, you may need
+                to create these directories ahead of time.
 property name:  upload.directory
 example value:  /usr/local/vivo/data/uploads
 
                 Directory where the Lucene search index will be built. 	
+                Depending on your permissions and who Tomcat is running as, 
+                you may need to create these directories ahead of time.
 property name:  LuceneSetup.indexDir 	
 example value:  /usr/local/vivo/data/luceneIndex
 
-                Specify the namespace in which the Vitro editor should create new ABox and portal resources
-                Note that the trailing slash is essential.
-property name:  Vitro.defaultNamespace 	
-example value:  http://vivo.mydomain.edu/individual/
-
-                Specify an SMTP host that the form will use for sending e-mail (Optional)
+                Specify an SMTP host that the form will use for sending 
+                e-mail (Optional). If this is left blank, the contact form 
+                will be hidden and disabled.
 property name:  Vitro.smtpHost 	
 example value:  smtp.servername.edu
 
@@ -126,9 +142,9 @@ example value:  username
 property name:  VitroConnection.DataSource.password
 example value:  password
 	  	 
-                Specify the name of your first admin user for the VIVO application. This user 
-                will have an initial password of 'defaultAdmin'.  This will be changed on first 
-                login. 	
+                Specify the name of your first admin user for the VIVO application. 
+                This user will have an initial temporary password of 'defaultAdmin'. 
+                You will be prompted to create a new password on first login.
 property name:  initialAdminUser 	
 example value:  defaultAdmin
 
@@ -139,7 +155,7 @@ V. Compile and deploy
 At the command line, from the top level of the unpacked distribution directory,
 type:
 
-ant clean deploy
+ant all
 
 to build VIVO and deploy to Tomcat's webapps directory.
 
@@ -153,16 +169,20 @@ to serve Web requests quickly. (The in-memory copy and the underlying database
 
 VIVO will require more memory than that allocated to Tomcat by default. With
 most installations of Tomcat, the setenv.sh or setenv.bat file in Tomcat's bin
-directory is a convenient place to set the memory parameters. For example: 
-export CATALINA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=64m" sets Tomcat to
-allocate an initial heap of 1024 megabytes, a maximum heap of 1024 megabytes,
-and a PermGen space of 64 megs. 1024 megabytes is a minimum practical heap size
-for production installations storing data for large academic institutions, and
-additional heap space is preferable. For testing with small sets of data, 256m 
-to 512m should be sufficient.
+directory is a convenient place to set the memory parameters. 
+
+For example: 
+
+export CATALINA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=64m"
+
+This sets Tomcat to allocate an initial heap of 1024 megabytes, a maximum heap 
+of 1024 megabytes, and a PermGen space of 64 megs. 1024 megabytes is a minimum 
+practical heap size for production installations storing data for large academic 
+institutions, and additional heap space is preferable. For testing with small 
+sets of data, 256m to 512m should be sufficient.
 
 If an OutOfMemoryError is encountered during VIVO execution, increasing the 
-heap parameters is the typical remedy.
+heap parameters and restarting Tomcat is the typical remedy.
 
 -------------------------------------------------------------------------------
  
@@ -173,39 +193,55 @@ in Tomcat's bin directory. Point your browser to http://localhost:8080/vivo/
 to test the application.
 
 If Tomcat does not start up, or the VIVO application is not visible, check the 
-catalina.out file in Tomcat's logs directory. (More information about detailed 
-error logging to be added here.)
+catalina.out file in Tomcat's logs directory. 
 
 -------------------------------------------------------------------------------
  
 VIII. Log in and add RDF data
 
-If the startup was successful, you will see a relatively empty screen with the 
-VIVO logo in the header. Click the "Log in" link near the upper right corner. 
-Log in with the initialAdminUser username you set up in step IV. The initial 
-password the initialAdminUser is defaultAdmin. On first login, you will be 
-prompted to select a new password and verify it a second time.
+If the startup was successful, you will see a welcome message informing you 
+that you have successfully installed VIVO. Click the "Log in" link near the 
+upper right corner. Log in with the initialAdminUser username you set up in 
+step IV. The initial password the initialAdminUser is defaultAdmin. On first 
+login, you will be prompted to select a new password and verify it a second 
+time.
 
 After verifying your new password, you will be presented with a menu of 
-editing options. Here you can create OWL classes, object properties, datatype 
+editing options. Here you can create OWL classes, object properties, data 
 properties, and configure the display of data. Currently, any classes you wish 
-to make visible on your website must be part of a Class Group, and there a 
+to make visible on your website must be part of a class group, and there a 
 number of visibility and display options available for each ontology entity. 
-More documentation is forthcoming.
 
-VIVO comes with an ontology, but you may also upload another ontology from an 
-RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." Note 
-that Vitro currently works best with OWL-DL ontologies and has only limited 
+VIVO comes with a core VIVO ontology, but you may also upload other ontologies 
+from an RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." 
+Note that Vitro currently works best with OWL-DL ontologies and has only limited 
 support for pure RDF data. You can enter a URL pointing to the RDF data you 
 wish to load or upload a file on your local machine. Ensure that the "add RDF" 
 radio button is selected. You will also likely want to check "create 
 classgroups automatically." Clicking the "Index" tab in the navigation bar at 
 the top left of the page will show a simple index of the knowledge base.  
-See more documentation for configuring VIVO at vivoweb.org.
+See more documentation for configuring VIVO at http://vivoweb.org/support.
+
+-------------------------------------------------------------------------------
+
+IX. Set the Contact Email Address (if using "Contact Us" form)
+
+If you have configured your application to use the "Contact Us" feature in Step
+IV (Vitro.smtpHost), you will also need to add an email address to the VIVO 
+application.  This is the email that the contact form submits to.  It can be a 
+list server or an individual's email address.  
+
+Log in as a system administrator.  Navigate to the "Site Admin" table of contents
+(link in the right side of the header).  Go to "Site Information" (under "Site 
+Configuration").  In the "Site Information Editing Form", enter a functional 
+email address in the field "Contact Email Address." and submit the change.
+
+If you set the Vitro.smtpHost in Step IV and do NOT provide an email address
+in this step, your users will receive a java error in the interface.
 
 -------------------------------------------------------------------------------
  
-IX. Create an initial Lucene search index
+X. Create an initial Lucene search index
 
 Invoke the indexing servlet by requesting http://localhost:8080/vivo/SearchIndex
 
@@ -217,11 +253,11 @@ trigger incremental updates of the search index.
 
 -------------------------------------------------------------------------------
 
-X. Setup Apache Tomcat Connector
+XI. Set up Apache Tomcat Connector
 
-It is recommend that a Tomcat Connector, such as mod_jk be used to ensure that 
-the site address does not include the port number and any extraneous Tomcat 
-context.
+It is recommended that a Tomcat Connector such as mod_jk be used to ensure that 
+the site address does not include the port number (e.g. 8080) and an additional 
+reference to the Tomcat context name (e.g. /vivo).
 
 For example - http://example.com instead of http://example.com:8080/vivo
 
@@ -232,22 +268,22 @@ the minimum server configurations for several popular web servers.
 
 -------------------------------------------------------------------------------
  
-XI. Configure Pellet Reasoner
+XII. Configure Pellet Reasoner
 
-VIVO uses the “Pellet” engine to perform reasoning, which runs in the 
+VIVO uses the Pellet engine to perform reasoning, which runs in the 
 background at startup and also when the knowledge base is edited. VIVO 
-continues serving pages while the reasoner continues working; when it finishes, 
-the new inferences appear. Inferred statements are cached in a database graph 
-so that they are available immediately when VIVO is restarted.
+continues serving pages while the reasoner continues working; when the
+reasoner finishes, the new inferences appear. Inferred statements are cached 
+in a database graph so that they are available immediately when VIVO is restarted.
 
-By default, “Pellet” is fed only an incomplete view of your ontology and only 
+By default, Pellet is fed only an incomplete view of your ontology and only 
 certain inferences are materialized. These include rdf:type, 
 rdfs:subClassOf,owl:equivalentClass, and owl:disjointWith. This mode is 
 typically suitable for ontologies with a lot of instance data.  If you would 
 like to keep the default mode, skip to the next step.
 
 To enable "complete" OWL inference (materialize all significant entailed 
-statements), openvitro-core/webapp/config/web.xml and search for 
+statements), open "vitro-core/webapp/config/web.xml" and search for 
 PelletReasonerSetup.
 
 Then change the name of the listener class to PelletReasonerSetupComplete. 
@@ -260,12 +296,12 @@ with large numbers of individuals, this mode can offer enormous performance
 improvements over the "complete" mode.
 
 Finally, a class called PelletReasonerSetupPseudocompleteIgnoreDataproperties 
-is provided to improve performance on ontologies with large literals where 
-datatype property entailments are not needed.
+is provided to improve performance on ontologies with large literals where data 
+property entailments are not needed.
 
 -------------------------------------------------------------------------------
 
-XII. Was the installation successful?
+XIII. Was the installation successful?
 
 If you have completed the previous steps, you have good indications that the 
 installation was successful. 
@@ -273,15 +309,11 @@ installation was successful.
 * Step VII showed that Tomcat recognized the webapp, and that the webapp was 
     able to present the initial page.
 * Step VIII verified that you can log in to the administrator account.
-* Step IX initialized the Lucene Search system. Though there is very little 
+* Step X initialized the Lucene Search system. Though there is very little 
     feedback for a successful installation, there are dramatic indications
     for failures.
 
 Here is a simple test to see whether the ontology files were loaded:
-* Point your browser to http://localhost:8080/vivo, and click the "Log in" link 
-    near the upper right corner. Log in with the initialAdminUser username you
-    set up in step IV. If this is your first time logging in, you will be 
-    prompted to change the password.
 * Click on the "Index" link on the upper left, below the logo. You should see
     a "locations" section, with links for "Country" and "Geographic Location".
     The index is built in a background thread, so on your first login, you may
@@ -291,10 +323,32 @@ Here is a simple test to see whether the ontology files were loaded:
     index took more than 5 minutes from the time that Tomcat was started.
 * Click on the "Country" link. You should see an alphabetical list of the 
     countries of the world.
-    
-Finally, test the search index. 
+
+Here is a test to see whether your system is configured to serve linked data:
+* Point your browser to the home page of your website, and click the "Log in" link 
+    near the upper right corner. Log in with the initialAdminUser username you
+    set up in step IV. If this is your first time logging in, you will be 
+    prompted to change the password.
+* After you have successfully logged in, click "site admin" in the upper right 
+	corner.  In the drop down under "Data Input", select "Faculty Member(core)"
+	and click the "Add individual of this class" button.
+* Enter the name "test individual" under the field "Individual Name", scroll to
+	the bottom, and click "Create New Record".You will be taken to the "Individual
+	Control Panel". Make note of the value of the field "URI", it will be used in 
+	the next step. 
+* Open a new web browser or browser tab to the page "http://marbles.sourceforge.net/".
+  	In the pink box on that page enter the URI of the individual you created in the
+  	previous step and click "open."
+* In the resulting page search for the URI of the "test individual".  You should 
+	find it towards the bottom of the page next to a red dot followed by "redirect (303)"
+	This indicates that you are successfully serving linked RDF data.
+	If the URI of the "test individual" is followed by "failed (400)" you are not 
+	successfully serving linked data.
+     
+Finally, test the search index (assuming you have created the initial Lucene 
+index in Step X). 
 * The search box is on the right side, directly opposite the "Index" link.
-    Type the word "Afghanistan" into the box, and click on the "Search" 
+    Type the word "Australia" into the box, and click on the "Search" 
     button.You should see a page of results, with links to countries that
-    border Afghanistan, entities that include Afghanistan, and to 
-    Afghanistan itself.
+    border Australia, individuals that include Australia, and to 
+    Australia itself.
