@@ -266,6 +266,29 @@ primary web server. The "Quick Start HowTo" on the Apache site
 http://tomcat.apache.org/connectors-doc/generic_howto/quick.html describes 
 the minimum server configurations for several popular web servers.
 
+After setting up the mod_jk connector above, you will need to modify the Tomcat's 
+server.xml ([tomcat root]/conf/) to respond to requests from Apache via the connector.
+
+Look for the <connector> directive and add the following properties: 
+
+	connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000" 
+
+Note: the value for maxThreads (320) is equal to the value for MaxClients in the 
+httpd.conf file.
+
+Locate the <Host name="localhost"...> directive and update as follows:
+
+	<Alias>example.com</Alias>
+	<Context path=""
+		docBase="/usr/local/tomcat/webapps/vivo"
+		reloadable="true"
+		cookies="true" >
+		<Environment type="java.lang.String" override="false" 
+			name="path.configuration" 
+			value="deploy.properties"
+		/>
+	</Context>
+
 -------------------------------------------------------------------------------
  
 XII. Configure Pellet Reasoner
