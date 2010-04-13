@@ -110,6 +110,13 @@ II. The Upgrade Process
 			value="deploy.properties"
 		/>
 	</Context>
+	
+	Also, if you have these 3 lines in your Apache virtual host configuration, 
+	please remove them!
+	
+	<Location "/edit/forms">
+        deny from all
+    <Location>
 
 8. Start "Apache Tomcat" and login to VIVO.
 
