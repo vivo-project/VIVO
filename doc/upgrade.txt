@@ -155,11 +155,11 @@ ontologies/update/logs/knowledgeBaseUpdate.error.log
     a log of errors that were encountered during the upgrade process. This file
     should be empty if the upgrade was successful.
     
-ontologies/update/changedData/removedData.rdf 
-    a file containing all the statements that were removed from the knowledge base.
+ontologies/update/changedData/removedData.n3
+    an N3 file containing all the statements that were removed from the knowledge base.
     
-ontologies/update/changedData/addedData.rdf 
-    a file containing all the statements that were added to the knowledge base.
+ontologies/update/changedData/addedData.n3
+    an N3 file containing all the statements that were added to the knowledge base.
 
     
 After Apache Tomcat is started, these files should be reviewed to verify that
