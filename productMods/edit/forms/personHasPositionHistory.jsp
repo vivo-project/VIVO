@@ -110,12 +110,7 @@
 <v:jsonset var="newOrgNameAssertion">
     ?newOrg <${label}> ?newOrgName .
 </v:jsonset>
-<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
-the type still gets asserted. --%>
 <v:jsonset var="newOrgTypeAssertion">
-    ?newOrg a <${orgClass}> .
-</v:jsonset>
-<v:jsonset var="newOrgSubClassAssertion">
     ?newOrg a ?newOrgType .
 </v:jsonset>
 
@@ -132,17 +127,11 @@ the type still gets asserted. --%>
 <v:jsonset var="n3ForNewOrg">
     ?positionUri <${positionInOrgPred}> ?newOrg .
     
-    ?newOrg <${label}> ?newOrgName .
-
-    ?newOrg a <${orgClass}> ,
+    ?newOrg <${label}> ?newOrgName ;
+            a ?newOrgType ,
               <${flagURI}> ;
             <${orgForPositionPred}> ?positionUri .
 
-</v:jsonset>
-<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
-the type still gets asserted. --%>
-<v:jsonset var="n3ForNewOrgSubClass">
-    ?newOrg a ?newOrgType .
 </v:jsonset>
 
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
@@ -161,8 +150,8 @@ the type still gets asserted. --%>
     "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
-                        "${n3ForNewOrg}", "${n3ForNewOrgSubClass}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${newOrgSubClassAssertion}", "${endYearAssertion}"],
+                        "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
+                        "${endYearAssertion}"],
                         
     "newResources"  : { "positionUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -226,7 +215,7 @@ the type still gets asserted. --%>
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : [ "${n3ForNewOrg}", "${n3ForNewOrgSubClass}" ]
+         "assertions"       : [ "${n3ForNewOrg}" ]
       },
      "newOrgType" : {
          "newResource"      : "false",
@@ -237,7 +226,7 @@ the type still gets asserted. --%>
          "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ "${newOrgTypeAssertion}", "${newOrgSubClassAssertion}" ]
+         "assertions"       : [ "${newOrgTypeAssertion}" ]
       },      
       "startYear" : {
          "newResource"      : "false",
