@@ -20,6 +20,7 @@ directory.
 I. Before Performing the Upgrade
 II. The Upgrade Process
 III. Ontology Changes
+IV. Special Note re: Default Namespce
 
 -------------------------------------------------------------------------------
 
@@ -164,3 +165,17 @@ ontologies/update/changedData/addedData.n3
     
 After Apache Tomcat is started, these files should be reviewed to verify that
 the automated upgrade process was executed successfully.
+
+-------------------------------------------------------------------------------
+
+IV. Special Note re: Default Namespace
+
+We do not recommend changing the default namespace after you have populated 
+your VIVO knowledge base, since there is currently no tool to migrate existing 
+data to reflect the new namespace.  Note that your VIVO installation will not 
+support linked data access methods unless the namespace corresponds to the base 
+URL of your site, as outlined in section IV of the VIVO installation document, so 
+if you set up an additional server, such as a test server, using your production 
+data, the linked data functionality will not work.  If you have questions about 
+your current namespace setting or need to change it, please contact the VIVO team 
+at http://vivoweb.org/contact.
