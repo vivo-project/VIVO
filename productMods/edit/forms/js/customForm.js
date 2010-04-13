@@ -79,8 +79,7 @@ var customForm = {
         this.entry = $('.entry');
         this.existingOrNew = $('.existingOrNew'); // just the word "or" between existing and add new
 
-        this.cancel = this.form.find('.cancel');
-        this.requiredHints = this.form.find('.requiredHint');        
+        this.cancel = this.form.find('.cancel');   
         
         this.close = this.form.find('.close');
         
@@ -101,7 +100,7 @@ var customForm = {
         
         this.existingOrNew.hide();
         
-        this.addRequiredHints();
+        this.toggleRequiredHints('show', this.addNew); 
     },
     
     initForm: function() {
@@ -113,20 +112,6 @@ var customForm = {
         } else { 
             this.initEditForm();
         } 
-    },
-    
-    addRequiredHints: function() {
-        
-        var requiredHintText = '<span class="requiredHint"> *</span>',
-            labels = this.existing.find('label.required').add(this.addNew.find('label.required'));
-
-        	labels.each(function() {
-        		var el = $(this),
-        			labelText = el.html(), 
-        			newLabelText = labelText + requiredHintText;
-
-                el.html(newLabelText);        		
-        	});       
     },
         
     /***** ADD form *****/
@@ -164,7 +149,7 @@ var customForm = {
     	}
     	
     	customForm.existing.show();
-        customForm.existing.find('span.requiredHint').hide();
+        customForm.toggleRequiredHints('hide', customForm.existing);
     	customForm.addNewLink.show();
     	customForm.addNew.hide();
     	customForm.entry.hide();    
@@ -205,6 +190,7 @@ var customForm = {
         
         customForm.button.show();
         customForm.or.show();
+        customForm.toggleRequiredHints('show', customForm.existing, customForm.addNew);        
     },
 
     // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
@@ -219,6 +205,8 @@ var customForm = {
     		return;
     	}
     	customForm.showSelectExistingFields();
+    	// This hint shows in step 2 but not in step 1
+        customForm.toggleRequiredHints('show', customForm.existing);
         customForm.doButtonForStep2(customForm.defaultButtonText);
         customForm.doCancelForStep2();        
     },
@@ -251,6 +239,7 @@ var customForm = {
     	
     	this.defaultButtonText = 'Save Changes';
     	this.addNewButtonText = 'Create ' + this.secondaryType + ' & Save Changes';
+    	this.toggleRequiredHints('show', this.existing);
     	
         // If there are validation errors on the page, we're returning from 
         // an attempted submission that failed validation, and we need to go
@@ -304,7 +293,7 @@ var customForm = {
     }, 
     
     hideFields: function(el) {
-        // Clear any input, so if we reshow the element the input won't still be there.
+        // Clear any input, so if we re-show the element the input won't still be there.
         customForm.clearFields(el);
         el.hide();
     },
@@ -400,8 +389,7 @@ var customForm = {
     
     showSelectExistingFields: function() {
     	
-        customForm.existing.show();
-        customForm.existing.find('span.requiredHint').show();
+    	customForm.existing.show();
         customForm.addNewLink.hide();
         customForm.addNew.hide();
         customForm.showFieldsForAllViews();
@@ -468,7 +456,25 @@ var customForm = {
 	        }
 	    }  
 	    return view;
-    } 
+    },
+    
+    toggleRequiredHints: function(action /* elements */) {
+    	
+    	var hints,
+    	    selector = 'span.requiredHint',
+    	    numArgs = arguments.length;
+    	
+    	if (numArgs < 2) {
+    		return;
+    	}
+    	hints = arguments[1].find(selector);
+    	for (var i = 2; i < numArgs; i++) { 
+    		hints.add(arguments[i].find(selector));
+    	}
+
+    	action == 'show' ? hints.show() : hints.hide();
+    }
+
 };
 
 $(document).ready(function(){   

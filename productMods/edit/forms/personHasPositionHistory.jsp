@@ -320,7 +320,7 @@ the type still gets asserted. --%>
 
     <div class="relatedIndividual">
         <div class="existing">
-            <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span class="existingOrNew">or</span>
+            <v:input type="select" label="Select Existing Organization ${requiredHint}" id="organizationUri"  /><span class="existingOrNew">or</span>
         </div>
     
         <div class="addNewLink">
@@ -329,8 +329,8 @@ the type still gets asserted. --%>
       
         <div class="new">
             <h6>Add a New Organization</h6>
-            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" size="30" />
-            <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
+            <v:input type="text" label="Organization Name ${requiredHint}" id="newOrgName" size="30" />
+            <v:input type="select" label="Select Organization Type ${requiredHint}" id="newOrgType" />
         </div>   
     </div>   
     

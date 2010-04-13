@@ -23,6 +23,11 @@
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
 
+#content form .existing span.requiredHint, 
+#content form .new span.requiredHint {
+    display: none; /* Hide if Javascript disabled. Javascript will show. */
+}
+
 #content form .existing {
     float: left;
     clear: none;
