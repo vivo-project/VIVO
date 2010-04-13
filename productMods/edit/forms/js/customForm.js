@@ -301,11 +301,7 @@ var customForm = {
         // the markup, for customized positioning, in which case we will empty them
         // but not remove them here. See findValidationErrors().  
         el.find('.validationError').remove();    	
-    },
-
-    showFields: function(el) {
-        el.show();
-    },    
+    }, 
     
     hideFields: function(el) {
         // Clear any input, so if we reshow the element the input won't still be there.
@@ -344,7 +340,7 @@ var customForm = {
             // And we'll need to figure out the button text based on which
             // div we're opening.
             customForm.hideFields(customForm.existing);
-            customForm.showFields(customForm.addNew);
+            customForm.addNew.show();
             customForm.button.val(customForm.addNewButtonText);            	
             customForm.doClose();
             return false;
@@ -359,7 +355,7 @@ var customForm = {
     	customForm.close.bind('click', function() {
     		// RY When we have multiple existing and addNew divs, we won't
     		// show/hide them all, only the siblings of the addNewLink.
-    		customForm.showFields(customForm.existing);
+    		customForm.existing.show();
     		customForm.hideFields(customForm.addNew);
     		customForm.addNewLink.show();
     		customForm.button.val(customForm.defaultButtonText);
@@ -404,7 +400,7 @@ var customForm = {
     
     showSelectExistingFields: function() {
     	
-        customForm.showFields(customForm.existing); 
+        customForm.existing.show();
         customForm.existing.find('span.requiredHint').show();
         customForm.addNewLink.hide();
         customForm.addNew.hide();
@@ -415,7 +411,7 @@ var customForm = {
 
         customForm.existing.hide();
         customForm.addNewLink.hide();
-        customForm.showFields(customForm.addNew);
+        customForm.addNew.show();
         customForm.showFieldsForAllViews();      
     },
     
@@ -425,7 +421,7 @@ var customForm = {
     // the submission.
     showCombinedFields: function() {
 
-    	customForm.showFields(customForm.existing);
+    	customForm.existing.show();
     	customForm.addNewLink.show();
     	customForm.addNewLink.css('margin-bottom', '1em');
     	customForm.addNew.hide();       
