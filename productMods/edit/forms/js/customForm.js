@@ -100,6 +100,8 @@ var customForm = {
         selectExistingLabel.html(selectExistingLabel.html().replace(/Select (Existing )?/, ''));
         
         this.existingOrNew.hide();
+        
+        this.addRequiredHints();
     },
     
     initForm: function() {
@@ -111,6 +113,20 @@ var customForm = {
         } else { 
             this.initEditForm();
         } 
+    },
+    
+    addRequiredHints: function() {
+        
+        var requiredHintText = '<span class="requiredHint"> *</span>',
+            labels = this.existing.find('label.required').add(this.addNew.find('label.required'));
+
+        	labels.each(function() {
+        		var el = $(this),
+        			labelText = el.html(), 
+        			newLabelText = labelText + requiredHintText;
+
+                el.html(newLabelText);        		
+        	});       
     },
         
     /***** ADD form *****/
@@ -148,6 +164,7 @@ var customForm = {
     	}
     	
     	customForm.existing.show();
+        customForm.existing.find('span.requiredHint').hide();
     	customForm.addNewLink.show();
     	customForm.addNew.hide();
     	customForm.entry.hide();    
@@ -284,59 +301,11 @@ var customForm = {
         // the markup, for customized positioning, in which case we will empty them
         // but not remove them here. See findValidationErrors().  
         el.find('.validationError').remove();    	
-    },
-    
-    // Add required hints to required fields in a list of elements.
-    // Use when the non-Javascript version should not show the required hint,
-    // because the field is not required in that version (e.g., it's one of two
-    // fields, where one of the two must be filled in but neither one is required). 
-    // Showing the asterisks cannot simply be done once on page load, because in
-    // step 1 the select existing field should not be marked required.
-    // Arguments: action = 'add' or 'remove'
-    // Varargs: element(s)
-    toggleRequiredHints: function(action /* elements */) {
-    
-        var labelText,
-            newLabelText,               
-            requiredHintText = '<span class="requiredHint"> *</span>',
-            numArgs = arguments.length, 
-            element,
-            el;
-
-            for (var i = 1; i < numArgs; i++) {
-                element = arguments[i];
-                if (action  == 'add') {
-                    element.find('label.required').each(function(){
-                        el = $(this);
-                        labelText = el.html();                  
-                        newLabelText = labelText + requiredHintText;
-                        el.html(newLabelText);
-                    });
-                }
-                else {
-                    /* NB IE modifies the html text when it's inserted. E.g.,
-                     * the requiredHintText becomes <SPAN class=requiredHint> *</SPAN>
-                     * So a replace of the text with an empty string won't work, unless
-                     * we first convert to a regexp such as /<span class="?requiredHint"?> \*<\/span>/i
-                     * However, the remove() call is simpler anyway.
-                     */
-                    element.find('span.requiredHint').remove();
-                }
-            
-    
-        }
-       
-    },
-    
-    showFields: function(el) {
-        el.show();
-        customForm.toggleRequiredHints('add', el);
-    },    
+    }, 
     
     hideFields: function(el) {
         // Clear any input, so if we reshow the element the input won't still be there.
         customForm.clearFields(el);
-        customForm.toggleRequiredHints('remove', el);
         el.hide();
     },
 
@@ -371,7 +340,7 @@ var customForm = {
             // And we'll need to figure out the button text based on which
             // div we're opening.
             customForm.hideFields(customForm.existing);
-            customForm.showFields(customForm.addNew);
+            customForm.addNew.show();
             customForm.button.val(customForm.addNewButtonText);            	
             customForm.doClose();
             return false;
@@ -386,7 +355,7 @@ var customForm = {
     	customForm.close.bind('click', function() {
     		// RY When we have multiple existing and addNew divs, we won't
     		// show/hide them all, only the siblings of the addNewLink.
-    		customForm.showFields(customForm.existing);
+    		customForm.existing.show();
     		customForm.hideFields(customForm.addNew);
     		customForm.addNewLink.show();
     		customForm.button.val(customForm.defaultButtonText);
@@ -426,15 +395,13 @@ var customForm = {
         customForm.clearFormData();
         
         // Remove previously bound event handlers
-        customForm.unbindEventListeners();
-       
-        // Remove required field hints
-        customForm.toggleRequiredHints('remove', customForm.addNew, customForm.existing);     	
+        customForm.unbindEventListeners();    	
     },
     
     showSelectExistingFields: function() {
     	
-        customForm.showFields(customForm.existing);  
+        customForm.existing.show();
+        customForm.existing.find('span.requiredHint').show();
         customForm.addNewLink.hide();
         customForm.addNew.hide();
         customForm.showFieldsForAllViews();
@@ -444,7 +411,7 @@ var customForm = {
 
         customForm.existing.hide();
         customForm.addNewLink.hide();
-        customForm.showFields(customForm.addNew);
+        customForm.addNew.show();
         customForm.showFieldsForAllViews();      
     },
     
@@ -454,7 +421,7 @@ var customForm = {
     // the submission.
     showCombinedFields: function() {
 
-    	customForm.showFields(customForm.existing);
+    	customForm.existing.show();
     	customForm.addNewLink.show();
     	customForm.addNewLink.css('margin-bottom', '1em');
     	customForm.addNew.hide();       
