@@ -17,6 +17,8 @@
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPositionValidator"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -271,6 +273,9 @@ the type still gets asserted. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
+    editConfig.addValidator(new PersonHasPositionValidator() );
+    editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
+    		
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { // editing existing
