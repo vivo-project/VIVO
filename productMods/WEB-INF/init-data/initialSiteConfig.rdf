@@ -11,7 +11,7 @@
     <j.0:dayLimit rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</j.0:dayLimit>
     <j.0:tabBody rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;h3&gt;Welcome! You have successfully installed VIVO!&lt;/h3&gt;
 
-&lt;p&gt;Your next step is to &lt;a href="siteAdmin?home=1&amp;login=block"&gt;login&lt;/a&gt; and change your password. You can find the login link in the header on the right above.&lt;/p&gt;
+&lt;p&gt;Your next step is to &lt;a href="siteAdmin?home=1&amp;login=block"&gt;log in&lt;/a&gt; and change your password. You can find the login link in the header on the right above.&lt;/p&gt;
 
 &lt;p&gt;Please see the &lt;a href="http://vivoweb.org/support/user-guide" target="_blank"&gt;VIVO User Guide&lt;/a&gt; for help.  The user guide includes information on &lt;a href="siteAdmin?home=1"&gt;Site Administration&lt;/a&gt;.  You may want to read about the &lt;a href="http://vivoweb.org/support/user-guide/site-configuration" target="_blank"&gt;Site Configuration&lt;/a&gt; topics next:&lt;/p&gt;
 &lt;ul&gt;
