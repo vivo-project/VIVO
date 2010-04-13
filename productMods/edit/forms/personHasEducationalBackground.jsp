@@ -357,6 +357,7 @@ the type still gets asserted. --%>
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+<c:set var="view" value='<%= vreq.getAttribute("view") %>' />
 
 <jsp:include page="${preForm}" />
 
@@ -399,6 +400,7 @@ the type still gets asserted. --%>
     <input type="hidden" name="entryType" value="educational background" /> 
     <input type="hidden" name="secondaryType" value="organization" />
     <input type="hidden" name="steps" value="1" />
+    <input type="hidden" name="view" value="${view}" />
     
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
     

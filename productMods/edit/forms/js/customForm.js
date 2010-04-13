@@ -48,9 +48,10 @@
 var customForm = {
 
 	views: {
-		ADD_NEW: 1, // not 0, else can't test if (!view)
-		SELECT_EXISTING: 2,
-		COMBINED: 3
+	    ADD_STEP_ONE: 1, // not 0, else can't test if (!view)
+		ADD_NEW: 2, 
+		SELECT_EXISTING: 3,
+		COMBINED: 4
 	},
 
 
@@ -78,6 +79,7 @@ var customForm = {
         this.addNew = $('.new');
         this.entry = $('.entry');
         this.existingOrNew = $('.existingOrNew'); // just the word "or" between existing and add new
+        this.viewField = $("input[name='view']");
 
         this.cancel = this.form.find('.cancel');   
         
@@ -88,6 +90,7 @@ var customForm = {
         this.entryType = $("input[name='entryType']").val().capitalizeWords();
         this.secondaryType = $("input[name='secondaryType']").val().capitalizeWords();
         this.formSteps = $("input[name='steps']").val();
+        this.viewVal = parseInt(this.viewField.val());
 
     },
     
@@ -125,11 +128,17 @@ var customForm = {
         // If there are validation errors on the page, we're returning from 
         // an attempted submission that failed validation, and we need to go
         // directly to step 2.
-        if (this.findValidationErrors()) {
-            this.doAddFormStep2();
-        } else {
-            this.doAddFormStep1();
-        }
+//        if (this.findValidationErrors()) {
+//            this.doAddFormStep2();
+//        } else {
+//            this.doAddFormStep1();
+//        }
+    	if (this.viewVal) {
+    		this.doAddFormStep2(this.viewVal);
+    	} else {
+    		this.doAddFormStep1();
+    	}
+    	
     },
     
     // Reset add form to initial state (step 1) after cancelling out of step 2
@@ -156,6 +165,7 @@ var customForm = {
     	customForm.requiredLegend.hide();
     	customForm.button.hide(); 
     	customForm.or.hide();
+    	customForm.setViewValue(customForm.views.ADD_STEP_ONE);
         
         // Assign event listeners 
     	customForm.existingSelect.bind('change', function() {
@@ -175,15 +185,11 @@ var customForm = {
     // from a failed submission due to validation errors, and will attempt to
     // determine the previous view from the form data that's been entered.
     doAddFormStep2: function(view) {
-
-    	if (!view) {
-    		view = customForm.getPreviousViewFromFormData();
-    	}
         
     	switch (view) {
-			case customForm.views.SELECT_EXISTING: { fn = this.doAddFormStep2SelectExisting; break; }
-    		case customForm.views.ADD_NEW: { fn = this.doAddFormStep2AddNew; break; }
-    		default: { fn = this.doAddFormStep2Combined; break; }
+			case customForm.views.SELECT_EXISTING: { fn = customForm.doAddFormStep2SelectExisting; break; }
+    		case customForm.views.ADD_NEW: { fn = customForm.doAddFormStep2AddNew; break; }
+    		default: { fn = customForm.doAddFormStep2Combined; break; }
     	}
 
         fn.call(customForm);  
@@ -209,6 +215,7 @@ var customForm = {
         customForm.toggleRequiredHints('show', customForm.existing);
         customForm.doButtonForStep2(customForm.defaultButtonText);
         customForm.doCancelForStep2();        
+    	customForm.setViewValue(customForm.views.SELECT_EXISTING);
     },
     
     // Step 2: adding a new individual
@@ -218,6 +225,7 @@ var customForm = {
         customForm.doButtonForStep2(customForm.addNewButtonText);
         customForm.doCancelForStep2();
         customForm.doClose();
+    	customForm.setViewValue(customForm.views.ADD_NEW);
     },
     
     // Step 2: combined view, when we are returning from validation errors and we
@@ -228,44 +236,37 @@ var customForm = {
         customForm.doAddNewLinkForCombinedView();        
         customForm.doButtonForStep2(customForm.defaultButtonText);        
         customForm.doCancelForStep2();
+    	customForm.setViewValue(customForm.views.COMBINED);
     },
     
 
     /***** Edit form *****/
 
     initEditForm: function() {
-
-    	var view;
     	
     	this.defaultButtonText = 'Save Changes';
     	this.addNewButtonText = 'Create ' + this.secondaryType + ' & Save Changes';
     	this.toggleRequiredHints('show', this.existing);
     	
-        // If there are validation errors on the page, we're returning from 
-        // an attempted submission that failed validation, and we need to go
-        // directly to step 2.
-        if (this.findValidationErrors()) {
-        	view = this.getPreviousViewFromFormData();
-        	
-        	switch (view) {
-    			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
-    			default: { fn = this.doEditFormDefaultView; break; }
-        	}
-        } else {
-        	fn = this.doEditFormDefaultView;
-        }    
+    	switch (this.viewVal) {
+			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
+			default: { fn = this.doEditFormDefaultView; break; }
+    	}
+  
         fn.call(customForm);        
     },
     
     doEditFormAddNew: function() {   	
     	this.showAddNewFields();
-    	this.button.val(this.addNewButtonText);   	
+    	this.button.val(this.addNewButtonText);  
+    	this.setViewValue(this.views.ADD_NEW);
     },
     
     doEditFormDefaultView: function() {    	
     	this.showCombinedFields();
     	this.button.val(this.defaultButtonText);   
     	this.doAddNewLinkForCombinedView();
+    	this.setViewValue(this.views.COMBINED);
     },
     
     /***** Utilities *****/
@@ -473,6 +474,10 @@ var customForm = {
     	}
 
     	action == 'show' ? hints.show() : hints.hide();
+    },
+    
+    setViewValue: function(value) {
+    	customForm.viewField.val(value);
     }
 
 };
