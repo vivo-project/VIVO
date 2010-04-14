@@ -1,0 +1,873 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vivo="http://vivo.library.cornell.edu/ns/0.1#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Film">
+    <rdfs:comment xml:lang="en">aka movie.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Audiovisual recording in film format</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Room">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Room that provides a particular service or is used for a particular activity.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >100 Caldwell Hall; 114 Martha Van Rensselaer (Rushmore Conference Room)</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Chapter">
+    <rdfs:comment xml:lang="en">A chapter of a book.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A main division of a book</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Seminar">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A meeting for an exchange of ideas.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ReserachProposal">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A proposal for a research grant that has been submitted but not approved; does not represent an existing activity</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Periodical">
+    <rdfs:comment xml:lang="en">A group of related documents issued at regular intervals.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Committee">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A group of people organized for a specific purpose (e.g., a reporting or advisory role), often with a charge and for a specific duration</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Curriculum Steering Committee; PhD Advisory Committee</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Note">
+    <rdfs:comment xml:lang="en">Notes or annotations about a resource.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Notes or annotations about a resource</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Report">
+    <rdfs:comment xml:lang="en">A document describing an account or statement describing in detail an event, situation, or the like, usually as the result of observation, inquiry, etc..</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document describing an account or statement describing in detail an event, situation, or the like, usually as the result of observation, inquiry, etc.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#disputed">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Teritories subject to disagreement and debate.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >West Sahara</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Standard">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A specification giving a precise statement of a process or a service requirement, often sanctioned by a nation or industry</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A document describing a standard</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#area">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Top level of the geopolitical.owl ontology.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Not meant for use in classifying areas. But can display all areas.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/LegalDocument">
+    <rdfs:comment xml:lang="en">A legal document; for example, a court decision, a brief, and so forth.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >a document that states some contractual relationship or grants some right</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AcademicTerm">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Fall 2009; Summer 2010</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An explicit individual academic term, quarter, or semester rather than the generic fall, spring, or summer semester</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Continent">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A large contiguous landmass  that is at least partially surrounded by water, together with any islands on its continental shelf.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The seven commonly recognized continents are Africa; Antarctica; Asia; Australia; Europe; North America; South America</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CoreLaboratory">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A lab providing services such as training, protocols, or access to instruments or software</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#BlogPosting">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An online article or commentary appearing on a blog</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A specific blog posting</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Collection">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Hill Ornithology Collection; Wiley Interscience Online Books Biochemisty Collection</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">A collection of Documents or Collections</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Collection of documents or information resources that have a unified identity</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CaseStudy">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A qualitative descriptive research study of individuals or a group</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SeminarSeries">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An organized series of a meeting for an exchange of ideas, typically put on by a department or center.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Applied Microeconomics Seminars; Future of Rural New York Seminar Series</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Review">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An article reviewing one or more other information resources (a book, one or more other articles, movies, etc)</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/DocumentStatus">
+    <rdfs:comment xml:lang="en">The status of the publication of a document.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The status of document.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Working; Submitted; Accepted; Published</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#USPostalAddress">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1320 East 10th Street, Wells Library 021 Bloomington, IN 47405</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Formal address in US postal address system. </vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >B.A. Bachelor of Arts</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Legislation">
+    <rdfs:comment xml:lang="en">A legal document proposing or enacting a law or a group of laws.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Enactments of legislative bodies, published in either statute or code form</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#economic_region">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Region divided by economic factors.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Arab Maghreb Union (AMU); Central American Council of Agriculture (CAC); Caribbean Community and Common Market (CARICOM)</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#StateOrProvince">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Minnesota; Michigan; Indiana; New York; Quebec; Manitoba; Ontario</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >One of a number of areas or communities having their own governments and forming a federation under a sovereign government, as in the US.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Activity">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Only use if no specific subclasses of core:Activity desribe the activity.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A generic class encompassing several types of activities frequently reported on CVs or in annual reporting systems.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#non_self_governing">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Countries that, according to the United Nations, are non-decolonized.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >American Samoa; Anguilla; Aruba; Guadeloupe; Puerto Rico; United States Virgin Islands</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">UN Cartographic Section       </rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Location">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Use subclasses of core:Location when classsifying items.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Top level of all location classes.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Webpage">
+    <rdfs:comment xml:lang="en">A web page is an online document available (at least initially) on the world wide web. A web page is written first and foremost to appear on the web, as distinct from other online resources such as books, manuscripts or audio documents which use the web primarily as a distribution mechanism alongside other more traditional methods such as print.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >One section of a website that appears at a unique address within the parent site's address or URL on the World Wide Web </vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#College">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A primary academic unit within a University or a free-standing higher education organization without graduate degree programs</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >College of Arts &amp; Sciences; Ivy Tech Community College</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/AudioDocument">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >phonograph record; tape; CD; DVD; DAT</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">An audio document; aka record.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Recorded audio in any format</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/BookSection">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A section of a book</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A section of a book.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#WorkingPaper">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document created as a basis for discussion or a very early draft of a formal paper</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Email">
+    <rdfs:comment xml:lang="en">A written communication addressed to a person or organization and transmitted electronically.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A written communication addressed to a person or organization and transmitted electronically</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/LegalDecision">
+    <rdfs:comment xml:lang="en">A document containing an authoritative determination (as a decree or judgment) made after consideration of facts or law.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The written determination of a case, motion or claim by a court or tribunal</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NonAcademicPosition">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Accounting &amp; Research Services Assistant; Director of Information Technology</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A position classified as professional, staff, support, or any other non-academic role</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#other">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Territories not belonging to self-governing, non-self-governing, and disputed classes.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Antarctica</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#TimeInterval">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A period or duration.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Normally not used for classifying items. But, will display instances from the subclasses.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/AudioVisualDocument">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Audiovisual recording in any format</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >film; video; Blu-ray</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">An audio-visual document; film, video, and so forth.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Country">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Afghanistan; Antigua and Barbuda; Cameroon; Iceland; Jamaica; Nigeria; United States of America</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An area of land distinguished by its political autonomy. Politically independent territories.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ExtensionUnit">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A unit devoted primarily to extension activities, whether for outreach or research</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeographicRegion">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A location having coordinates in geographic space.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Prefer core:Geographic Region subclasses instead of this class.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Interview">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A conversation between two or more people where questions are asked by the interviewer to obtain information from the interviewee.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >radio or newspaper interview</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">A formalized discussion between two or more people.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Patent">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document describing the exclusive right granted by a government to an inventor to manufacture, use, or sell an invention for a certain number of years</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A document describing the exclusive right granted by a government to an inventor to manufacture, use, or sell an invention for a certain number of years.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Quote">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An excerpted collection of words</vitro:shortDef>
+    <rdfs:comment xml:lang="en">An excerpted collection of words.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Journal">
+    <rdfs:comment xml:lang="en">A periodical of scholarly journal Articles.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Contains original scholarly research or review articles by experts in the field</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Journal of Information Science; IEEE Intelligent System; Scientometrics</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Newspaper">
+    <rdfs:comment xml:lang="en">A periodical of documents, usually issued daily or weekly, containing current news, editorials, feature articles, and usually advertising.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Contains news articles, opinions, features, advertising, and is usually issued daily or weekly</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >USA Today</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NonFacultyAcademicPosition">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A position involving academic work but without faculty status</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Researcher; Academic Extension Associate; Postdoctoral Associate</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/LegalCaseDocument">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Official court  papers for a case</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A document accompanying a legal case.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/PersonalCommunicationDocument">
+    <rdfs:comment xml:lang="en">A personal communication manifested in some document.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A personal communication manifested in some document</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/CourtReporter">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Collection of legal cases</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A collection of legal cases.</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Supreme Court Reporter</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#FundingOrganization">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A defined class of organizations that fund Grants</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Screenplay">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Written script for a film production, including dialogue and descriptions of gestures, actions, shooting directions</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AwardOrDistinction">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2003, Outstanding Junior Faculty Award</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An award, honor, or distinction received by a person on a particular date (not the award itself as given repeatedly, and not a grant award).</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#OutreachActivity">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An outreach or community service activity directed outside a person's primary profession and institution</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Communicating Astronomy to the Public</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Facility">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Prefer core:Facility subclasses instead of this class.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Something designed, built, installed, etc., to serve a specific function or activity affording a convenience or service.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AdvisingActivity">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The activity of a professor advising a student, typically including start and end date and the title of the student's project or thesis work.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >R statistical tools for regression analysis</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Person">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The most general classification of a person</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EditorialArticle">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An article of opinion, typically published in a newspaper. For academics, most commonly Op Ed pieces</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Series">
+    <rdfs:comment xml:lang="en">A loose, thematic, collection of Documents, often Books.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A thematic collection of documents, usually books, issued at regular or irregular intervals</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Methods in Molecular Biology</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Blog">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Library of Congress Blog</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Regularly updated online journal or newsletter by one or more writers, called bloggers, containing articles and commentary of interest to the blogger</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#organization">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Food and Agriculture Organization of the United Nations (FAO)</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >International organizations.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SubjectArea">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >academic disciplines or more detailed research area</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >semantic web; information visualization</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Slideshow">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A presentation of a series of slides, usually presented in front of an audience with written text and images</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A presentation of a series of slides, usually presented in front of an audience with written text and images.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Service">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >UITS service</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A regularly offered service in support of an academic, research, or administrative function (not personal or professional service by an individual)</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Manual">
+    <rdfs:comment xml:lang="en">A small reference book, especially one giving instructions.</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SDB User Manual</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A book of instructions or guide to a specific topic</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EducationalBackground">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Currently any abstract name is given to members of this class. This could change in the future.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Education once received. Contains department or school, major field of degree, year, and supplemental information.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#TransnationalRegion">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Any region that goes beyond national boundaries and does not fit into any subclass of core:TransnationalRegion.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >None as yet.</vitro:exampleAnnot>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sub-Saharan Africa, North America</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#URLLink">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Uniform Resource Locator (URL) specifies where an identified resource is available and the mechanism for retrieving it.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://info.slis.indiana.edu/~katy/</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Campus">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cornell Ithaca; Cornell Geneva; Cornell New York City; Cornell Qatar</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The grounds of a school, college, university, or hospital. Or, a large, usually suburban, landscaped business or industrial site.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#FacultyAdministrativePosition">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Associate Dean</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An academic administrative position (associate dean, etc.) as distinct from a professional administrative position (non-academic)</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Equipment">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Something provided for specific purpose, task or occupation. </vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >server; Bruker Vector-33 FT-IR</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#DependentResource">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Director of Admissions and Placement</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Resource dependent on other entities</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EventSeries">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Two or more events that follow on one after the other or are connected one after the other.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Only use if no specific subclasses of core:EventSeries desribe the activity.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Building">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Building that provides a particular service or is used for a particular activity.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martha Van Rensselaer Hall (VR); Caldwell Hall (CD); University Auditorium</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#County">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Alachua; Baker; Bradford; Kenora; Ottawa; Waterloo</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The largest administrative division of most states or provinces.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Article">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a periodical or book</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication, as a newspaper or magazine.</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A specific journal article</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Slide">
+    <rdfs:comment xml:lang="en">A slide in a slideshow</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A slide in a slideshow</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Position">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Director of Admissions and Placement; Core Faculty of Cognitive Science</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Particular position in an organization, commonly identified by job title</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NonAcademic">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A person working in a position not considered to be an academic appointment</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Manuscript">
+    <rdfs:comment xml:lang="en">An unpublished Document, which may also be submitted to a publisher for publication.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Works prepared by hand including handwritten or typescript drafts of pre-publication papers or works not otherwise reproduced in multiple copies</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Statute">
+    <rdfs:comment xml:lang="en">A bill enacted into law.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A bill enacted into law</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Laboratory">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An organizational unit (as opposed to the physical facility) that performs research, provides services, or processes materials</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NonFacultyAcademic">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A person not considered a faculty member but holding an academic appointment</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Excerpt">
+    <rdfs:comment xml:lang="en">A passage selected from a larger work.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A passage selected from a larger work</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Code">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Code of Federal Regulations</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A work consisting of texts of rules and regulations related to statutes issued by executive or administrative agencies</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A collection of statutes.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SubnationalRegion">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >For example, the Midwest, northeast U.S.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Smaller administrative division into which a country may be divided.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Boroughs; townships; districts; the Midwest</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Proceedings">
+    <rdfs:comment xml:lang="en">A compilation of documents published from an event, such as a conference.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A compilation of documents published from an event, such as a conference</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A type of geopolitical area. Not meant for use. Use subclasses within.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Not meant for use in classifying areas. But can display all territories.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/DocumentPart">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A distinct part of a larger document or collected document</vitro:shortDef>
+    <rdfs:comment xml:lang="en">a distinct part of a larger document or collected document.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ServiceActivity">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An activity of an individual within his or her profession or institution; use outreach activity for community service or other activities outside the profession.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Member of the International Conference on Complex Systems Organizing Committee</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeographicLocation">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Prefer core:Geographic Location subclasses instead of this class.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A location having coordinates in geographic space.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Score">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Written musical composition for voice or instruments or both</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An intramural or extramural award to support scholarly work, such as UF09179 (VIVO)</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Financial assistance mechanism providing money, property, or both to an eligible entity to carry out an approved project or activity</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Book">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A written or printed work of fiction or nonfiction, usually on sheets of paper fastened or bound together within covers</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A written or printed work of fiction or nonfiction, usually on sheets of paper fastened or bound together within covers.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ResearchLaboratory">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A laboratory that exists primarily to conduct research vs. to provide services</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Institute">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An Institute normally has a research focus but may also fulfill instructional or outreach roles</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Performance">
+    <rdfs:comment xml:lang="en">A public performance.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Letter">
+    <rdfs:comment xml:lang="en">A written or printed communication addressed to a person or organization and usually transmitted by mail.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Personal or professional correspondence</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Dataset">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A named collection of data, usually containing only one type of data</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >US Patent Data; US Job Data</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Competition">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Intel Talent Search; poetry contest</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An occasion on which a winner is selected from among two or more contestants.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ConferencePaper">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A paper presented at a conference; optionally collected into a Proceedings or a special Journal issue</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Software">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Computer program and its related documentation; directs the operation of a computer</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ConferencePoster">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The digital file (or physical equivalent), if available after the conference, vs. the act of attending/presenting: use ConferencePresentation for information about date/time/location/name of the event where the poster was presented</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Website">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Facebook; VIVOweb.org; Flickr</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A group of webpages available within a specific parent address or URL on the World Wide Web</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A group of Webpages accessible on the Web.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#group">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A type of geopolitical area. Not meant for use. Use subclasses within.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Not meant for use in classifying areas. But can display all groups.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Hearing">
+    <rdfs:comment xml:lang="en">An instance or a session in which testimony and arguments are presented, esp. before an official, as a judge in a lawsuit.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Association">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Special Libraries Association; Association for Computing Machinery(ACM); American Medical Informatics Association(AMIA)</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A formal organization of people or groups of people around a subject or practice.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#WorkshopSeries">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An organized series of workshop events, whether repetitions of the same workshop or multiple different workshops.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Brief">
+    <rdfs:comment xml:lang="en">A written argument submitted to a court.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document stating the facts and points of law of a client's case</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Video">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Audiovisual recording in video format</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/CollectedDocument">
+    <rdfs:comment xml:lang="en">A document that simultaneously contains other documents.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Work consisting of collections of previously published works</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Issue">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >something that is printed or published and distributed, esp. a given number of a periodical</vitro:shortDef>
+    <rdfs:comment xml:lang="en">something that is printed or published and distributed, esp. a given number of a periodical</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#TeachingActivity">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Information visualization</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Use for teaching experiences other than specific for-credit courses within a person's home institution.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Newsletter">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Usually issued periodically, prepared by or for a group or institution to present information to a specific audience, often also made available to the press and public</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The Ornithological Newsletter</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl#Event">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Something that happens at a given place and time.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Only use if no specific subclasses of event:Event desribe the activity.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AcademicYear">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The period considered by an academic institution to be its primary academic cycle.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2009-2010</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Course">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Education imparted in a series of lessons or meetings; typically given in a single semester.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ENGL 4940 - Honors Essay Tutorial II; BIOAP 4250 - Gamete Physiology and Fertilization </vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Team">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An informal organization brought together for the purposes of a project or event</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#PresentationActivity">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >User-Friendly Cyberinfrastructures and Their Utility for Scholarly Knowledge Management</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A talk, poster presentation, or demo at a conference; use Conference Paper or Conference Poster for the product of the talk.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#special_group">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Groups created for special needs.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Least developed countries (LDC); Low income and food deficit countries (LIFDC); World</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Program">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A Cornell graduate field (http://vivo.cornell.edu/index.jsp?home=65535&amp;collection=820)</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An ongoing academic initiative not formalized with department or division status</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/ThesisDegree">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The academic degree of a Thesis.</vitro:shortDef>
+    <rdfs:comment xml:lang="en">The academic degree of a Thesis</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Doctor of Philosophy (Ph.D.)</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Magazine">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >New Yorker</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">A periodical of magazine Articles. A magazine is a publication that is issued periodically, usually bound in a paper cover, and typically contains essays, stories, poems, etc., by many writers, and often photographs and drawings, frequently specializing in a particular subject or area, as hobbies, news, or sports.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Contains articles of current events or general interest, geared to the reading public as being informative or recreational</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Address">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >University of Waterloo, 200 University Avenue West, Waterloo, Ontario, Canada N2L 3G1</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A code and abstract concept expressing a location on the Earth's surface. To classify US specific addresses, use core:US Postal Code.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Center">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Alchohol Education Center; Center for Arts and Public Policy; Hearing Research Center</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A place where a particular activity or service is concentrated.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#LibrarianPosition">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Librarian; Library Systems Analyst; Music Bibliographer</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A position held  by library and information science professionals, or academic or technical experts, in support of providing information services or materials</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Image">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A visual representation such as a photograph or graph</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A document that presents visual or diagrammatic information.</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >photograph; diagram</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Thesis">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Works created to satisfy the requirements for an academic certification or degree; also called dissertation</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A document created to summarize research findings associated with the completion of an academic degree.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#VocabularySourceReference">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.getty.edu/vow/AATHierarchy?find=&amp;logic=AND&amp;note=&amp;english=N&amp;subjectid=300000000</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The concept name, URL, and source vocabulary name of a Subject Area.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Document">
+    <rdfs:comment xml:lang="en">A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A bounded physical representation of a body of information designed with the capacity (and usually intent) to communicate</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Bill">
+    <rdfs:comment xml:lang="en">Draft legislation presented for discussion to a legal body.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Draft legislation presented for discussion to a legal body</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CourseSection">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A section of a course taught by one or more people, in a semester, at a time, in a place.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Section A; Section III</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/AcademicArticle">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Written by scholars for other scholars, typically published in an academic journal with an abstract and bibliography</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A specific academic journal article</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">A scholarly academic article, typically published in a journal.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/ReferenceSource">
+    <rdfs:comment xml:lang="en">A document that presents authoritative reference information, such as a dictionary or encylopedia .</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document that presents authoritative reference information, such as a dictionary or encylopedia</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NewsRelease">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A short written piece focused on an event or announcement of note, having a defined publication time and of less enduring interest than a news feature.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#geographical_region">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Region divided by a demarcated area of the Earth.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Africa; Americas; Asia; Caribbean; Polynesia; Middle Africa; Northern America; Southern Asia</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Authorship">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Contains the authors name, their rank in the publication, and whether or not they are a corresponding author on the publication.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Currently any abstract name is given to members of this class. This could change in the future.</vitro:exampleAnnot>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Workshop">
+    <rdfs:comment xml:lang="en">A seminar, discussion group, or the like, that emphasizes zxchange of ideas and the demonstration and application of techniques, skills, etc.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#FacultyPosition">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Academic position in a university or institution</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Professor; Associate Professor; Assistant Professor</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/EditedBook">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Best American Science Writing 2009</vitro:exampleAnnot>
+    <rdfs:comment xml:lang="en">An edited book.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An edited collection of stand-alone articles published as a book</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/PersonalCommunication">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A communication between an agent and one or more specific recipients.</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A communication between an agent and one or more specific recipients.</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Phone call; Email</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Map">
+    <rdfs:comment xml:lang="en">A graphical depiction of geographic features.</rdfs:comment>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A graphical depiction of geographic features, scientific discipline, scientific data analytical results</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#PostDoc">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A Person holding an academic employment appointment focused on research rather than teaching; temporary (or for some defined term)</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Politically independent territories.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Afghanistan; Antigua and Barbuda; Cameroon; Iceland; Jamaica; Nigeria; United States of America</vitro:exampleAnnot>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    > UN Cartographic Section      </rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Database">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A structured file of information or a set of logically related data stored and retrieved using computer-based means</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PubMed</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Translation">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The result of rendering a work from one language to another</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeopoliticalEntity">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Prefer core:GeopoliticalEntity subclasses instead of this class.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A geographical area which is associated with some sort of political  structure.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AbstractInformation">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Information (typically not physical in nature) and not used for primary display, but instead contributing to the primary display of people, events, and other top level classes and their subclasses.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Normally not used for classifying items. But, will display instances from the subclasses under core:Abstract Information</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#InternationalActivity">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An activity explicitly international in nature, typically involving collaboration, informal or formal agreements for ongoing overseas work, and special expertise in the international domain involved.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >International discussion on semantic web</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/Conference">
+    <rdfs:comment xml:lang="en">A meeting for consultation or discussion.</rdfs:comment>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2010 International Congress on Autoimmunity; American Libraries Association 2009</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A meeting for consultation or discussion.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ResearchActivity">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An activity involving research (funded or unfunded), only sometimes linked to a grant</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Bacteria-resistant bandage; Termite prevention system; Hurricane resistant houses</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Catalog">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NLM Catalog</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A list of items in a collection; an ordered compilation of item descriptions and sufficient information to afford access to them</vitro:shortDef>
+  </rdf:Description>
+</rdf:RDF>

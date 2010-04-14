@@ -17,12 +17,13 @@
   <env-entry>
     <env-entry-name>jdbc/vitro/connectionType</env-entry-name>
     <!--
-                           How to get a DataSource, Valid valies:
-                        SERVER_XML_POOL gets a named DataSource connection from the
-                        JNDI context, most likely that was set up tomcat/conf/server.xml
-                        PROPERTIES_FILE_POOL makes a DataSource using properties from
-                        a file in the classpath at /beans/connection.properties
-           -->
+    How to get a DataSource, Valid values:
+        SERVER_XML_POOL gets a named DataSource connection from the JNDI context, 
+                most likely that was set up tomcat/conf/server.xml
+        PROPERTIES_FILE_POOL makes a DataSource using properties from a file that
+                is pointed to by the JNDI name "java:comp/env/path.configuration"
+                (set in the Tomcat context).
+    -->
     <!--            <env-entry-value>SERVER_XML_POOL</env-entry-value> -->
     <env-entry-type>java.lang.String</env-entry-type>
     <env-entry-value>PROPERTIES_FILE_POOL</env-entry-value>

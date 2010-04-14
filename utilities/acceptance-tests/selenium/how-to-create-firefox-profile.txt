@@ -1,0 +1,3 @@
+Here is an excellent description of how to create a Firefox profile for use when running Selenium tests.
+
+http://girliemangalo.wordpress.com/2009/02/05/creating-firefox-profile-for-your-selenium-rc-tests/

@@ -1,11 +1,11 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /****************************************
  vivo-basic theme: screen styles
  
  Original version
  2009-04-30 mw542
 *****************************************/
-
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 @import url("blueprint/reset.css");
 @import url("blueprint/forms.css");
@@ -61,18 +61,19 @@ div#identity { position: relative; }
 /*  position: absolute;
   top: 33px;
   left: 10px;*/
-  padding-top: 25px;
+  padding-top: 20px;
   margin-left: 20px;
-  margin-bottom: 5px;
-  width: 141px;
-  height: 43px;
+  margin-bottom: 20px;
+  width: 361px;
+  height: 55px;
   text-indent: -9999px;
-  background: url(../site_icons/vivo_logo.gif) bottom left no-repeat;
+  background: url(../site_icons/vivo-logo.jpg) bottom left no-repeat;
+
 }
 
 #identity h1 a {
-  width: 141px;
-  height: 43px;
+  width: 361px;
+  height: 55px;
   display: block;
   overflow: hidden; /* hide the extended outline in firefox */
 /*  background: url(images/layout/transparent.gif) top left no-repeat;*/
@@ -201,7 +202,12 @@ div#breadcrumbs a:hover { color: #000; }
 Individual Pages
 ************************/
 
-div#label { margin-bottom: 1.5em; }
+div#labelAndMoniker { margin-bottom: 1.5em; }
+
+
+#labelAndMoniker div {
+    display: inline;
+}
 
 #label h2,
 #label h3 {
@@ -209,7 +215,9 @@ div#label { margin-bottom: 1.5em; }
   padding-right: 6px;
 }
 
-em.moniker { color: #9c9c9c; }
+em.moniker { 
+    color: #9c9c9c; 
+}
 
 ul.externalLinks { margin: 0 0 1.5em 0; }
 
@@ -237,6 +245,10 @@ a.externalLink:active {
 }
 
 a.externalLink { color: #84a655; }
+
+#dprop-vitro-image div.citation {
+    margin-top: .5em;   
+}
 
 div.description { margin-bottom: 1.5em; }
 
@@ -417,6 +429,7 @@ are necessary for cross-browser consistency
 #adminDashboard .pageBodyGroup {
   float: left;
   clear: right;
+  display: inline-block;
   width: 45%;
   margin-top: 2em;
   margin-bottom: 1em;
@@ -445,6 +458,10 @@ are necessary for cross-browser consistency
   margin-top: 3em;
 }
 
+#adminDashboard .add-action-button {
+    margin-top: .75em;
+}
+
 #logoutPanel {
   float: right;
   margin-right: 4.5em;
@@ -467,7 +484,7 @@ div.admin {
 div.panelContents  {
   color: #777;
   background: #e5e3d5;
-  display: none;
+/*  display: none;*/
   padding: 12px;
 }
 
@@ -583,7 +600,10 @@ a.add {
   overflow: hidden;
 }
 
-a.add:hover { background-color: #000; }
+a.add:hover {
+  background-image: url(../site_icons/plus_transparent_hover.gif);
+  background-color: #000; 
+}
 
 ul.properties { margin: 0; }
 
@@ -592,11 +612,12 @@ ul.properties li {
   list-style-type: none;
 }
 
-ul.properties li,
 div.datatypePropertyValue,
+ul.properties li,
 ul.datatypePropertyValue li { 
   position: relative; 
 }
+
 
 span.editLinks,
 em.nonEditable { 
@@ -615,8 +636,8 @@ span.editLinks a:hover { color: #000; }
 
 span.editLinks a.edit { padding-right: 4px; }
 
-span.statementWrap:hover span.editLinks,
-span.statementWrap:hover em.nonEditable {
+.statementWrap:hover span.editLinks,
+.statementWrap:hover em.nonEditable {
   display: block;
   width: 6em;
   padding: 2px 0 4px 0;
@@ -629,6 +650,8 @@ span.statementWrap:hover em.nonEditable {
   text-align: center;
 }
 
+
+
 span.statementWrap:hover em.nonEditable {
   padding-top: 5px;
   width: 8em;
@@ -636,6 +659,18 @@ span.statementWrap:hover em.nonEditable {
   font-style: normal;
 }
 
+.verbosePropertyListing {
+    color: gray;
+    font-size: 0.75em;
+    margin-left: 1em;
+}
+
+#dprop-vitro-links.editing li {
+    display: block;
+    border: 0;
+    padding: 0;
+    margin-bottom: .5em;
+}
 
 /************************
 Backend forms
@@ -646,4 +681,12 @@ div.sparqlform label {
   display: inline;
 }
 
+em.note {
+  font-size: 0.92em;
+  color: #777;
+}
 
+h3.associate {
+  margin-bottom: 0;
+  text-align: left;
+}
