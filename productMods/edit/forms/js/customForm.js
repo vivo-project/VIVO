@@ -124,14 +124,9 @@ var customForm = {
     	this.defaultButtonText = 'Create ' + this.entryType;
     	this.addNewButtonText = 'Create ' + this.secondaryType + ' & ' + this.entryType;
     	
-        // If there are validation errors on the page, we're returning from 
-        // an attempted submission that failed validation, and we need to go
-        // directly to step 2.
-//        if (this.findValidationErrors()) {
-//            this.doAddFormStep2();
-//        } else {
-//            this.doAddFormStep1();
-//        }
+    	// If a returnView has been specified in the hidden input field, it means we are
+    	// returning from a failed submission due to validation errors. We need to restore
+    	// the view we were on when the form was submitted.
     	if (this.returnView) {
     		this.doAddFormStep2(this.returnView);
     	} else {
@@ -397,6 +392,10 @@ var customForm = {
         customForm.addNewLink.hide();
         customForm.hideFields(customForm.addNew);
         customForm.showFieldsForAllViews();
+        
+        // Adjust the validation error that has been inserted by the server, which
+        // is phrased appropriately for the non-Javascript version of the form.
+        $('#organizationUri_validationError').html('Must select an organization.'); 
     },
     
     showAddNewFields: function() {
@@ -404,7 +403,11 @@ var customForm = {
     	customForm.hideFields(customForm.existing);
         customForm.addNewLink.hide();
         customForm.addNew.show();
-        customForm.showFieldsForAllViews();      
+        customForm.showFieldsForAllViews();  
+        
+        // Adjust the validation error that has been inserted by the server, which
+        // is phrased appropriately for the non-Javascript version of the form.
+        $('#newOrgName_validationError').html('Must specify an organization.'); 
     },
     
     // This version of the form shows both the existing select and add new link.
@@ -443,6 +446,8 @@ var customForm = {
     	action == 'show' ? hints.show() : hints.hide();
     },
     
+    // Set the hidden input field indicating the view to return to if
+    // the submission fails due to validation errors.
     setReturnView: function(value) {
     	customForm.returnViewField.val(value);
     }
