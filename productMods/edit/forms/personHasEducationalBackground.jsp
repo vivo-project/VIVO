@@ -14,7 +14,7 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPositionValidator"%>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 
@@ -309,6 +309,8 @@ the org type still gets asserted. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
+    editConfig.addValidator(new PersonHasPositionValidator());
+    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { // editing existing
@@ -400,4 +402,3 @@ the org type still gets asserted. --%>
 </form>
 
 <jsp:include page="${postForm}"/>
-
