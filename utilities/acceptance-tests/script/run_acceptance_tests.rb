@@ -147,6 +147,7 @@ class AcceptanceRunner
   def run_test_suite(suite_file_path)
     suite_name = File.basename(File.dirname(suite_file_path))
     log_info("Running suite #{suite_name}")
+    puts ">>>> Running suite #{suite_name}")
     output_file = @output_manager.output_filename(suite_name)
 
     args = []
@@ -160,7 +161,7 @@ class AcceptanceRunner
     result = system("java", *args)
     raise("Can't find the 'java' command!") if result == nil
     if $?.exitstatus != 0
-      log_warn("Suite failed: '#{suite_name}, return code was #{$?.exitstatus}")
+      log_warn("Suite failed: '#{suite_name}', return code was #{$?.exitstatus}")
     end
   end
 
