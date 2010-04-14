@@ -79,18 +79,17 @@ var customForm = {
         this.addNew = $('.new');
         this.entry = $('.entry');
         this.existingOrNew = $('.existingOrNew'); // just the word "or" between existing and add new
-        this.viewField = $("input[name='view']");
+        this.returnViewField = $("input[name='view']");
 
-        this.cancel = this.form.find('.cancel');   
-        
+        this.cancel = this.form.find('.cancel');           
         this.close = this.form.find('.close');
         
         // Read values used to control display
         this.editType = $("input[name='editType']").val();
         this.entryType = $("input[name='entryType']").val().capitalizeWords();
         this.secondaryType = $("input[name='secondaryType']").val().capitalizeWords();
-        this.formSteps = $("input[name='steps']").val();
-        this.viewVal = parseInt(this.viewField.val());
+        this.formSteps = $("input[name='steps']").val();        
+        this.returnView = parseInt(this.returnViewField.val()); // returns NaN for empty string
 
     },
     
@@ -109,7 +108,7 @@ var customForm = {
     initForm: function() {
         
     	//Adding a new entry
-        if (this.editType == 'add') { 
+        if (this.editType === 'add') { 
             this.initAddForm();    
         // Editing an existing entry
         } else { 
@@ -133,8 +132,8 @@ var customForm = {
 //        } else {
 //            this.doAddFormStep1();
 //        }
-    	if (this.viewVal) {
-    		this.doAddFormStep2(this.viewVal);
+    	if (this.returnView) {
+    		this.doAddFormStep2(this.returnView);
     	} else {
     		this.doAddFormStep1();
     	}
@@ -160,12 +159,12 @@ var customForm = {
     	customForm.existing.show();
         customForm.toggleRequiredHints('hide', customForm.existing);
     	customForm.addNewLink.show();
-    	customForm.addNew.hide();
-    	customForm.entry.hide();    
+    	customForm.hideFields(customForm.addNew);
+    	customForm.hideFields(customForm.entry);   
     	customForm.requiredLegend.hide();
     	customForm.button.hide(); 
     	customForm.or.hide();
-    	customForm.setViewValue(customForm.views.ADD_STEP_ONE);
+    	customForm.setReturnView(customForm.views.ADD_STEP_ONE);
         
         // Assign event listeners 
     	customForm.existingSelect.bind('change', function() {
@@ -215,7 +214,7 @@ var customForm = {
         customForm.toggleRequiredHints('show', customForm.existing);
         customForm.doButtonForStep2(customForm.defaultButtonText);
         customForm.doCancelForStep2();        
-    	customForm.setViewValue(customForm.views.SELECT_EXISTING);
+    	customForm.setReturnView(customForm.views.SELECT_EXISTING);
     },
     
     // Step 2: adding a new individual
@@ -225,7 +224,7 @@ var customForm = {
         customForm.doButtonForStep2(customForm.addNewButtonText);
         customForm.doCancelForStep2();
         customForm.doClose();
-    	customForm.setViewValue(customForm.views.ADD_NEW);
+    	customForm.setReturnView(customForm.views.ADD_NEW);
     },
     
     // Step 2: combined view, when we are returning from validation errors and we
@@ -236,7 +235,7 @@ var customForm = {
         customForm.doAddNewLinkForCombinedView();        
         customForm.doButtonForStep2(customForm.defaultButtonText);        
         customForm.doCancelForStep2();
-    	customForm.setViewValue(customForm.views.COMBINED);
+    	customForm.setReturnView(customForm.views.COMBINED);
     },
     
 
@@ -248,9 +247,9 @@ var customForm = {
     	this.addNewButtonText = 'Create ' + this.secondaryType + ' & Save Changes';
     	this.toggleRequiredHints('show', this.existing);
     	
-    	switch (this.viewVal) {
+    	switch (this.returnView) {
 			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
-			default: { fn = this.doEditFormDefaultView; break; }
+			default: { fn = this.doEditFormCombinedView; break; }
     	}
   
         fn.call(customForm);        
@@ -259,14 +258,15 @@ var customForm = {
     doEditFormAddNew: function() {   	
     	this.showAddNewFields();
     	this.button.val(this.addNewButtonText);  
-    	this.setViewValue(this.views.ADD_NEW);
+    	this.setReturnView(this.views.ADD_NEW);
+    	this.doClose();
     },
     
-    doEditFormDefaultView: function() {    	
+    doEditFormCombinedView: function() {    	
     	this.showCombinedFields();
     	this.button.val(this.defaultButtonText);   
     	this.doAddNewLinkForCombinedView();
-    	this.setViewValue(this.views.COMBINED);
+    	this.setReturnView(this.views.COMBINED);
     },
     
     /***** Utilities *****/
@@ -285,16 +285,18 @@ var customForm = {
     
     // Clear data from form elements in element el
     clearFields: function(el) {
-    	el.find(':input[type!="hidden"][type!="submit"][type!="button"]').val('');
-        
+    	el.find(':input[type!="hidden"][type!="submit"][type!="button"]').val(''); 	
+    	
         // For now we can remove the error elements. Later we may include them in
         // the markup, for customized positioning, in which case we will empty them
         // but not remove them here. See findValidationErrors().  
-        el.find('.validationError').remove();    	
+        el.find('.validationError').remove();      
     }, 
     
+    // This method should always be called instead of calling hide() directly on any
+    // element containing form fields.
     hideFields: function(el) {
-        // Clear any input, so if we re-show the element the input won't still be there.
+        // Clear any input and error message, so if we re-show the element it won't still be there.
         customForm.clearFields(el);
         el.hide();
     },
@@ -333,6 +335,7 @@ var customForm = {
             customForm.addNew.show();
             customForm.button.val(customForm.addNewButtonText);            	
             customForm.doClose();
+            customForm.setReturnView(customForm.views.ADD_NEW);
             return false;
         });  
     },
@@ -392,13 +395,13 @@ var customForm = {
     	
     	customForm.existing.show();
         customForm.addNewLink.hide();
-        customForm.addNew.hide();
+        customForm.hideFields(customForm.addNew);
         customForm.showFieldsForAllViews();
     },
     
     showAddNewFields: function() {
 
-        customForm.existing.hide();
+    	customForm.hideFields(customForm.existing);
         customForm.addNewLink.hide();
         customForm.addNew.show();
         customForm.showFieldsForAllViews();      
@@ -413,7 +416,7 @@ var customForm = {
     	customForm.existing.show();
     	customForm.addNewLink.show();
     	customForm.addNewLink.css('margin-bottom', '1em');
-    	customForm.addNew.hide();       
+    	customForm.hideFields(customForm.addNew);      
         customForm.showFieldsForAllViews();
     },
     
@@ -421,42 +424,6 @@ var customForm = {
     showFieldsForAllViews: function() {
         customForm.entry.show();  
         customForm.requiredLegend.show();     	
-    },
-    
-    // When returning to the add/edit form after a failed form submission (due to 
-    // validation errors), attempt to determine which view the form was on when
-    // submitted, based on the form data present.
-    getPreviousViewFromFormData: function() {
-    	
-    	// NB ':input' selector includes select elements
-        var existingInputs = this.existing.find(':input'),
-        	existingInputsLen = existingInputs.length,
-        	addNewInputs = this.addNew.find(':input'),
-        	addNewInputsLen = addNewInputs.length,
-        	input,
-        	i,
-        	view = null;
-    
-	    // If a value was entered in the addNew section, go back to the addNew view
-	    for (i = 0; i < addNewInputsLen; i++) {
-	        input = $(addNewInputs[i]);
-	        if (input.val() != '') {
-	            view = customForm.views.ADD_NEW;
-	            break;
-	        }
-	    }
-	    
-	    // If a value was selected in the existing section, go back to the existing view
-	    if (view === null) {
-	        for (i = 0; i < existingInputsLen; i++) {
-	            input = $(existingInputs[i]);
-	            if (input.val() != '') {
-	                view = customForm.views.SELECT_EXISTING;
-	                break;
-	            }
-	        }
-	    }  
-	    return view;
     },
     
     toggleRequiredHints: function(action /* elements */) {
@@ -476,8 +443,8 @@ var customForm = {
     	action == 'show' ? hints.show() : hints.hide();
     },
     
-    setViewValue: function(value) {
-    	customForm.viewField.val(value);
+    setReturnView: function(value) {
+    	customForm.returnViewField.val(value);
     }
 
 };
