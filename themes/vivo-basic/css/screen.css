@@ -209,10 +209,6 @@ div#labelAndMoniker { margin-bottom: 1.5em; }
     display: inline;
 }
 
-.editing #labelAndMoniker div {
-    display: block;
-}
-
 #label h2,
 #label h3 {
   display: inline;
@@ -221,10 +217,6 @@ div#labelAndMoniker { margin-bottom: 1.5em; }
 
 em.moniker { 
     color: #9c9c9c; 
-}
-
-.editing #moniker {
-    display: block;
 }
 
 ul.externalLinks { margin: 0 0 1.5em 0; }
@@ -253,6 +245,10 @@ a.externalLink:active {
 }
 
 a.externalLink { color: #84a655; }
+
+#dprop-vitro-image div.citation {
+    margin-top: .5em;   
+}
 
 div.description { margin-bottom: 1.5em; }
 
