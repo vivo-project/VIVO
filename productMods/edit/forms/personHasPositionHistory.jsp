@@ -281,6 +281,7 @@
     if (objectUri != null) { // editing existing entry
 %>
         <c:set var="editType" value="edit" />
+        <c:set var="formSteps" value="1" />
         <c:set var="title" value="Edit position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Save changes" />
@@ -288,6 +289,7 @@
     } else { // adding new entry
 %>
         <c:set var="editType" value="add" />
+        <c:set var="formSteps" value="2" />
         <c:set var="title" value="Create a new position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Create position" />
@@ -343,7 +345,7 @@
     <input type="hidden" name="secondaryType" value="organization" />
     <%-- RY If set steps to 1 when editType == 'edit', may be able to combine the
     step 1 and edit cases in the Javascript.  --%>
-    <input type="hidden" name="steps" value="2" />
+    <input type="hidden" name="steps" value="${formSteps}" />
     <input type="hidden" name="view" value="${view}" />
        
     <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>

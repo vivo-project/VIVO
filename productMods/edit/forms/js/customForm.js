@@ -82,7 +82,6 @@ var customForm = {
         this.returnViewField = $("input[name='view']");
 
         this.cancel = this.form.find('.cancel');           
-        this.close = this.form.find('.close');
         
         // Read values used to control display
         this.editType = $("input[name='editType']").val();
@@ -94,7 +93,7 @@ var customForm = {
     },
     
     // On page load, make changes to the non-Javascript version for the Javascript version.
-    // These are features that will NOT CHANGE throughout the workflow of the Javascript version..
+    // These are features that will NOT CHANGE throughout the workflow of the Javascript version.
     adjustForJs: function() {
     
         var selectExistingLabel = $('.existing label');
@@ -103,6 +102,17 @@ var customForm = {
         this.existingOrNew.hide();
         
         this.toggleRequiredHints('show', this.addNew); 
+
+        // The close link in the addNew div closes the addNew div and restores the
+        // combined view. It is needed for the one-step add form and the edit form
+        // (which is a one-step form), but not for the two-step add form, since we'd
+        // want it to restore step 1, but the Cancel link at the bottom of the form
+        // already performs that function.
+        if (this.formSteps == 1) {
+        	this.addNew.prepend('<a class="close" href="#">cancel</a>');
+        }
+        this.close = this.form.find('.close');
+        
     },
     
     initForm: function() {
@@ -337,8 +347,6 @@ var customForm = {
     
     doClose: function() {
 
-    	if (customForm.formSteps > 1) { return; }
-
     	customForm.close.unbind('click');
     	customForm.close.bind('click', function() {
     		// RY When we have multiple existing and addNew divs, we won't
@@ -348,8 +356,9 @@ var customForm = {
     		customForm.addNewLink.show();
     		customForm.button.val(customForm.defaultButtonText);
     		customForm.doAddNewLinkForCombinedView();
+    		customForm.setReturnView(customForm.views.COMBINED);
     		return false;
-    	});
+    	});   	
     },
     
     // Return true iff there are validation errors on the form

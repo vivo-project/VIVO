@@ -375,9 +375,7 @@ the org type still gets asserted. --%>
         </div>
       
         <div class="new">            
-            <a class="close" href="#">cancel</a>
             <h6>Add a New Organization</h6>
-
             <v:input type="text" label="Organization Name ${requiredHint}" id="newOrgName" size="30" />
             <v:input type="select" label="Select Organization Type ${requiredHint}" id="newOrgType" />
         </div>   

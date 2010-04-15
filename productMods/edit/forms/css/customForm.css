@@ -100,7 +100,6 @@ option {
 
 #content form a.close:link, 
 #content form a.close:visited {
-    /*display: none;  Hide if Javascript disabled. Javascript will show. */
     border-color: #FF7700;
     color: #FF7700;
 }
