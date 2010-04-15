@@ -256,6 +256,16 @@ var customForm = {
 			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
 			default: { fn = this.doEditFormCombinedView; break; }
     	}
+    	
+    	// Remember the original org. If we click the add new org link
+    	// but then cancel out of it, we want to restore this value.
+    	this.originalOrg = this.existingSelect.val();
+    	// But we only want to restore the original value from when the
+    	// form loaded. If we've already changed to a new value, we don't
+    	// want to restore that.
+    	this.existingSelect.bind('change', function() {
+    		customForm.originalOrg = null;
+        });
   
         fn.call(customForm);        
     },
@@ -357,6 +367,11 @@ var customForm = {
     		customForm.button.val(customForm.defaultButtonText);
     		customForm.doAddNewLinkForCombinedView();
     		customForm.setReturnView(customForm.views.COMBINED);
+    		
+    		if (customForm.originalOrg) {
+    			customForm.existingSelect.val(customForm.originalOrg);
+    		}
+    		
     		return false;
     	});   	
     },
