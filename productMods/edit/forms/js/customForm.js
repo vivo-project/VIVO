@@ -87,7 +87,8 @@ var customForm = {
         this.editType = $("input[name='editType']").val();
         this.entryType = $("input[name='entryType']").val().capitalizeWords();
         this.secondaryType = $("input[name='secondaryType']").val().capitalizeWords();
-        this.formSteps = $("input[name='steps']").val();        
+        // Enforce one step for edit forms, in case the form forgets to
+        this.formSteps = this.editType === 'edit' ? '1' : $("input[name='steps']").val();        
         this.returnView = parseInt(this.returnViewField.val()); // returns NaN for empty string
 
     },
