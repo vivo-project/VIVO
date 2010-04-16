@@ -70,6 +70,7 @@ II. The Upgrade Process
              [new_source_directory]/themes/[theme_dir]/jsp/footer.jsp
       For additional information and a copy your institution's tracking code, 
         see the Google Analytics wiki page.
+        https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI
         
    Note: Version 1 Release 0.9 contained two directories called "modifications"
       and "ontology". These directories have been combined into a directory 
