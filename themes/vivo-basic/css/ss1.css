@@ -1,0 +1,12 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+h2 {
+    color: red;
+}
+
+p.noticeme {
+    color: red;
+    background-color: #ccc;
+    padding: .8em;
+    border: 1px red solid;
+}
