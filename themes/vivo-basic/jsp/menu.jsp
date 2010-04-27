@@ -46,7 +46,12 @@
      String uri = (String)request.getAttribute("javax.servlet.forward.request_uri");
      if(uri != null){
     	 request.setAttribute("indexClass", uri.indexOf("browsecontroller") > 0 ? "class=\"activeTab\"" : "");
-
+         request.setAttribute("indexJspClass", uri.endsWith("browsecontroller-jsp") ? "class=\"activeTab\"" : "");         
+         request.setAttribute("indexStringTemplateClass", uri.endsWith("browsecontroller-stringtemplate") ? "class=\"activeTab\"" : "");
+         request.setAttribute("indexStringTemplateGroupFileClass", uri.endsWith("browsecontroller-stringtemplategroupfile") ? "class=\"activeTab\"" : "");
+         request.setAttribute("indexFreeMarkerClass", uri.endsWith("browsecontroller-freemarker") ? "class=\"activeTab\"" : "");
+         request.setAttribute("indexVelocityClass", uri.endsWith("browsecontroller-velocity") ? "class=\"activeTab\"" : "");
+         
          if ( uri.indexOf("about") > 0) {
            request.setAttribute("aboutClass","class=\"activeTab\"");
          }
@@ -109,6 +114,34 @@
          <a ${indexClass} href="<c:url value="/browsecontroller"/>"
             title="list all contents by type">
             Index</a>
+      </li>
+      
+      <li>
+         <a ${indexJspClass} href="<c:url value="/browsecontroller-jsp"/>"
+            title="list all contents by type">
+            Index - JSP</a>
+      </li>
+      <li>
+         <a ${indexStringTemplateClass} href="<c:url value="/browsecontroller-stringtemplate"/>"
+            title="list all contents by type">
+            Index - ST</a>
+      </li>
+      <%-- 
+      <li>
+         <a ${indexStringTemplateClass} href="<c:url value="/browsecontroller-stringtemplategroupfile"/>"
+            title="list all contents by type">
+            Index - STGF</a>
+      </li>
+      --%>
+      <li>
+         <a ${indexVelocityClass} href="<c:url value="/browsecontroller-velocity"/>"
+            title="list all contents by type">
+            Index - Velocity</a>
+      </li>
+      <li>
+         <a ${indexFreeMarkerClass} href="<c:url value="/browsecontroller-freemarker"/>"
+            title="list all contents by type">
+            Index - FM</a>
       </li>
     </ul>
   

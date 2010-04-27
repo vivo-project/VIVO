@@ -129,9 +129,44 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
     <c:set var="aboutHref">
       <c:out value="${aboutHref}" escapeXml="true"/>
     </c:set>
-     
-    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>
+
+    <c:url var="aboutStHref" value="/about-stringtemplate">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>
+    <c:set var="aboutStHref">
+      <c:out value="${aboutStHref}" escapeXml="true"/>
+    </c:set>
+       
+    <%--
+    <c:url var="aboutStgfHref" value="/about-stringtemplategroupfile">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>   
+    <c:set var="aboutStgfHref">
+      <c:out value="${aboutStgfHref}" escapeXml="true"/>
+    </c:set>
+    --%> 
+
+    <c:url var="aboutVHref" value="/about-velocity">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>
+    <c:set var="aboutVHref">
+      <c:out value="${aboutVHref}" escapeXml="true"/>
+    </c:set>
     
+    <c:url var="aboutFMHref" value="/about-freemarker">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>
+    <c:set var="aboutFMHref">
+      <c:out value="${aboutFMHref}" escapeXml="true"/>
+    </c:set>
+         
+    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>
+
+    <li class="border"><a href="${aboutStHref}" title="more about this web site">About-ST</a></li>
+    <%-- <li class="border"><a href="${aboutStgfHref}" title="more about this web site">About-STGF</a></li> --%>   
+    <li class="border"><a href="${aboutVHref}" title="more about this web site">About-Velocity</a></li>
+    <li class="border"><a href="${aboutFMHref}" title="more about this web site">About-FreeMarker</a></li>
+       
     <c:if test="${contactMailSetup}" >
     	<li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
     </c:if>
