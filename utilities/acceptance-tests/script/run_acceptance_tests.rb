@@ -147,7 +147,7 @@ class AcceptanceRunner
   def run_test_suite(suite_file_path)
     suite_name = File.basename(File.dirname(suite_file_path))
     log_info("Running suite #{suite_name}")
-    puts ">>>> Running suite #{suite_name}")
+    puts ">>>> Running suite #{suite_name}"
     output_file = @output_manager.output_filename(suite_name)
 
     args = []
