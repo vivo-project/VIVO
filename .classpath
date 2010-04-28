@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="/vitrodev/webapp/lib/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="/vitrodev/webapp/lib/aduna-appbase-core-3.4.jar"/>
 	<classpathentry kind="lib" path="/vitrodev/webapp/lib/aduna-appbase-logging-api-3.4.jar"/>
