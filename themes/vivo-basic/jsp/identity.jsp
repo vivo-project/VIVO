@@ -160,12 +160,12 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
       <c:out value="${aboutFMHref}" escapeXml="true"/>
     </c:set>
          
-    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>
+    <li><a href="${aboutHref}" title="more about this web site">About</a></li>
 
     <li class="border"><a href="${aboutStHref}" title="more about this web site">About-ST</a></li>
     <%-- <li class="border"><a href="${aboutStgfHref}" title="more about this web site">About-STGF</a></li> --%>   
     <li class="border"><a href="${aboutVHref}" title="more about this web site">About-Velocity</a></li>
-    <li class="border"><a href="${aboutFMHref}" title="more about this web site">About-FreeMarker</a></li>
+    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutFMHref}" title="more about this web site">About-FreeMarker</a></li>
        
     <c:if test="${contactMailSetup}" >
     	<li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
