@@ -66,7 +66,7 @@
           <c:out value="${aboutHref}" escapeXml="true"/>
         </c:set>
         
-        <li><a href="${aboutHref}" title="more about this web site">About</a></li>
+        <li<c:if test="${!empty contactMailSetup}"> class="last"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>
       
         <c:url var="contactHref" value="/comments">
           <c:param name="home" value="${currentPortal}"/>
