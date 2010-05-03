@@ -129,8 +129,16 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
     <c:set var="aboutHref">
       <c:out value="${aboutHref}" escapeXml="true"/>
     </c:set>
-     
-    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>
+
+    <c:url var="aboutFMHref" value="/about-fm">
+      <c:param name="home" value="${currentPortal}"/>
+    </c:url>
+    <c:set var="aboutFMHref">
+      <c:out value="${aboutFMHref}" escapeXml="true"/>
+    </c:set>
+ 
+    <li class="border"><a href="${aboutHref}" title="more about this web site">About</a></li>   
+    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutFMHref}" title="more about this web site">About - FM</a></li>
     
     <c:if test="${contactMailSetup}" >
     	<li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
