@@ -160,7 +160,7 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
       <c:out value="${aboutFMHref}" escapeXml="true"/>
     </c:set>
          
-    <li><a href="${aboutHref}" title="more about this web site">About</a></li>
+    <li class="border"><a href="${aboutHref}" title="more about this web site">About</a></li>
 
     <li class="border"><a href="${aboutStHref}" title="more about this web site">About-ST</a></li>
     <%-- <li class="border"><a href="${aboutStgfHref}" title="more about this web site">About-STGF</a></li> --%>   
