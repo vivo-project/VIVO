@@ -46,7 +46,7 @@
      String uri = (String)request.getAttribute("javax.servlet.forward.request_uri");
      if(uri != null){
          request.setAttribute("indexClass", uri.endsWith("browsecontroller") ? "class=\"activeTab\"" : "");
-         request.setAttribute("indexFMClass", uri.endsWith("browsecontroller-fm") ? "class=\"activeTab\"" : "");
+         request.setAttribute("indexFMClass", uri.endsWith("browse") ? "class=\"activeTab\"" : "");
          
          if ( uri.indexOf("about") > 0) {
            request.setAttribute("aboutClass","class=\"activeTab\"");
@@ -112,7 +112,7 @@
             Index</a>
       </li>
       <li>
-         <a ${indexFMClass} href="<c:url value="/browsecontroller-fm"/>"
+         <a ${indexFMClass} href="<c:url value="/browse"/>"
             title="list all contents by type">
             Index - FM</a>
       </li>
