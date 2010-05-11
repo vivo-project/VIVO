@@ -45,8 +45,8 @@
 
      String uri = (String)request.getAttribute("javax.servlet.forward.request_uri");
      if(uri != null){
-    	 request.setAttribute("indexClass", uri.indexOf("browsecontroller") > 0 ? "class=\"activeTab\"" : "");
-
+         request.setAttribute("indexClass", uri.endsWith("browsecontroller") ? "class=\"activeTab\"" : "");
+         
          if ( uri.indexOf("about") > 0) {
            request.setAttribute("aboutClass","class=\"activeTab\"");
          }

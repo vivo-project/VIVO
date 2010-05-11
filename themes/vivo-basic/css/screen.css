@@ -101,9 +101,14 @@ ul#otherMenu li {
   margin-left: 4px;
 }
 
-ul#otherMenu li.border {
+ul#otherMenu li {
   padding-right: 4px;
   border-right: 1px solid #ccc;
+}
+
+ul#otherMenu li.last {
+  padding-right: 0;
+  border-right: none;
 }
 
 

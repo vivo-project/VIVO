@@ -106,11 +106,11 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
         <c:param name="home" value="${currentPortal}" />
       </c:url>
  
-      <li class="border">
+      <li>
         Logged in as <strong><%= loginName %></strong> (<a href="${logoutHref}">Log out</a>)     
       </li>
       
-      <li class="border"><a href="${siteAdminHref}" >Site Admin</a></li>
+      <li><a href="${siteAdminHref}" >Site Admin</a></li>
        
     <%-- A user is not logged in --%>
     <% } else { %>
@@ -120,7 +120,7 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
         <c:param name="login" value="block"/>
       </c:url>
     
-      <li class="border"><a title="log in to manage this site" href="${loginHref}">Log in</a></li>
+      <li><a title="log in to manage this site" href="${loginHref}">Log in</a></li>
     <% } %>
 
     <c:url var="aboutHref" value="<%= Controllers.ABOUT %>">
@@ -129,11 +129,11 @@ portal.getRootBreadCrumbURL() : request.getContextPath()+"/";
     <c:set var="aboutHref">
       <c:out value="${aboutHref}" escapeXml="true"/>
     </c:set>
-     
-    <li<c:if test="${contactMailSetup}"> class="border"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>
+
+    <li<c:if test="${!contactMailSetup}"> class="last"</c:if>><a href="${aboutHref}" title="more about this web site">About</a></li>   
     
     <c:if test="${contactMailSetup}" >
-    	<li><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
+    	<li class="last"><a href='<c:url value="/comments"><c:param name="home" value="${currentPortal}"/></c:url>'>Contact Us</a></li>
     </c:if>
   </ul>
 
