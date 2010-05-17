@@ -23,6 +23,8 @@
 
         <div id="contentwrap">      
             <div id="content" <#if contentClass??> class="${contentClass}" </#if>>
+                <#-- We don't do title here because some pages don't get a title, or it may not be the same as the <title> text.
+                <h2>${title}</h2> -->               
                 ${body} 
             </div> <!-- content -->
         </div> <!-- contentwrap -->
