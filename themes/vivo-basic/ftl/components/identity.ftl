@@ -23,7 +23,7 @@
                  <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>,
             </#if> 
             
-            <li><a href="${urls.about}$">About</a></li>,
+            <li><a href="${urls.about}">About</a></li>,
             <#if urls.contact??>
                 <li><a href="${urls.contact}">Contact Us</a></li>
             </#if> 
