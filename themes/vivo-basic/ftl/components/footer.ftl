@@ -25,5 +25,3 @@
 
 </div>
 
-<#-- SCRIPT TAGS SHOULD GO HERE --> 
-<#include "googleAnalytics.ftl">
