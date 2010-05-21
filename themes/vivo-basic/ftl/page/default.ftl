@@ -37,9 +37,13 @@
 </body>
 </html>
 
-<#-- How to add a stylesheet:
+<#-- Three ways to add a stylesheet:
+
+A. In theme directory:
 ${stylesheets.addFromTheme("/sample.css");
-${stylesheets.add("/themes/vivo-basic/css/sample.css"}
-NOT (gets contextPath added twice):
 ${stylesheets.add(stylesheetDir + "/sample.css")}
+
+B. Any location
+${stylesheets.add("/edit/forms/css/sample.css"}
+
 -->

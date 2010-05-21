@@ -64,3 +64,8 @@ input.button { margin: 1em 0; }
 form#contact_form .buttons {
     margin-top: 1em;
 }
+
+form#contact_form .buttons input {
+    margin-right: .75em;
+}
+}
