@@ -334,7 +334,7 @@ ul.tabEntities li {
 ul.tabEntities a { font-weight: bold; }
 
 ul.tabEntities a.externalLink, 
-.entityList a.externalLink {
+.individualList a.externalLink {
   text-decoration: none;
   font-weight: normal;
 }
@@ -345,21 +345,21 @@ div.blurb a { font-weight: normal; }
 
 /* Index and List pages */
 .siteMap ul,
-.entityList ul { margin-left: 0; }
+.individualList ul { margin-left: 0; }
 
 .siteMap li { 
   list-style-type: none; 
   color: #9c9c9c;
 }
 
-.entityList li { 
+.individualList li { 
   list-style-type: none;
   color: #9c9c9c;
   margin-bottom: .5em;
  }
  
 .siteMap li a,
-.entityList li a { font-weight: bold; }
+.individualList li a { font-weight: bold; }
  
 .siteMap h2 { margin-bottom: .5em; }
 
