@@ -58,3 +58,9 @@ input.button { margin: 1em 0; }
 .error a    { color: #8a1f11; }
 .notice a   { color: #514721; }
 .success a  { color: #264409; }
+
+
+/* Comment Form */
+form#contact_form .buttons {
+    margin-top: 1em;
+}
