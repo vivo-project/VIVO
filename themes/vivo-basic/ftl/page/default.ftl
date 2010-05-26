@@ -1,22 +1,22 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#include "/components/doctype.html">
+<#include "partials/doctype.html">
 
-<#include "/components/head.ftl">
+<#include "partials/head.ftl">
 
 <body>
     <div id="wrap" class="container">
         <div id="header">
         
-            <#include "/components/identity.ftl">
+            <#include "partials/identity.ftl">
             
             <#-- Note to UI team: do not change this div without also making the corresponding change in menu.jsp -->
             <div id="navAndSearch" class="block">
-                <#include "/components/menu.ftl">  
-                <#include "/components/search.ftl">                
+                <#include "partials/menu.ftl">  
+                <#include "partials/search.ftl">                
             </div> <!-- navAndSearch --> 
 
-            <#-- <#include "/components/breadcrumbs.ftl"> -->         
+            <#-- <#include "/partials/breadcrumbs.ftl"> -->         
         </div> <!-- header --> 
 
         <hr class="hidden" />
@@ -29,11 +29,11 @@
             </div> <!-- content -->
         </div> <!-- contentwrap -->
     
-        <#include "/components/footer.ftl">
+        <#include "partials/footer.ftl">
                                       
     </div> <!-- wrap -->  
 
-    <#include "/components/scripts.ftl"> 
+    <#include "partials/scripts.ftl"> 
 </body>
 </html>
 
