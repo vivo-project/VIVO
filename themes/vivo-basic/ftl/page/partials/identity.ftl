@@ -13,7 +13,7 @@
     -->
     
     <ul id="otherMenu">  
-        <@l.makeList>  
+        <@l.firstLastList>  
             <#if loginName??>
                 <li>
                     Logged in as <strong>${loginName}</strong> (<a href="${urls.logout}">Log out</a>)     
@@ -27,6 +27,6 @@
             <#if urls.contact??>
                 <li><a href="${urls.contact}">Contact Us</a></li>
             </#if> 
-        </@l.makeList>       
+        </@l.firstLastList>       
     </ul>   
 </div>

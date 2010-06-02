@@ -339,6 +339,20 @@ ul.tabEntities a.externalLink,
   font-weight: normal;
 }
 
+.individualList ul.individualData {
+    display: inline;
+}
+
+.individualList ul.individualData li {
+    display: inline;
+    border-right: solid 1px #a0a0a0;
+    padding-right: .3em;
+}
+
+.individualList ul.individualData li.last {
+    border: none;
+}
+
 div.blurb { color: #999; }
 
 div.blurb a { font-weight: normal; }
