@@ -7,7 +7,7 @@
 <%-- 
     This is a custom short view render for educational background.
     The variable individual is the OBJECT of the property statement to be rendered. -- 
-    In this JSP that is the  Educational Background, not the Person, Organization or DegreeType
+    In this JSP that is the  Educational Attainment object, not the Person, Organization or DegreeType
  --%>
 
 <c:choose>

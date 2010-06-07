@@ -45,17 +45,17 @@
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
-<c:set var="edBackgroundClass" value="${vivoCore}EducationalBackground" />
+<c:set var="edBackgroundClass" value="${vivoCore}EducationalAttainment" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 <c:set var="degreeClass" value="${vivoCore}AcademicDegree" />
 <%--
 Classes: 
-core:EducationalBackground - primary new individual being created
+core:EducationalAttainment - primary new individual being created
 foaf:Person - existing individual
 foaf:Organization - new or existing individual
 core:AcademicDegree - existing individual
 
-Data properties of EducationalBackground:
+Data properties of EducationalAttainment:
 core:majorField
 core:year
 core:departmentOrSchool
@@ -63,13 +63,13 @@ core:supplementalInformation
 
 Object properties (domain : range)
 
-core:educationalBackground (Person : EducationalBackground) - inverse of educationalBackgroundOf
-core:educationalBackgroundOf (EducationalBackground : Person) - inverse of educationalBackground
+core:educationalBackground (Person : EducationalAttainment) - inverse of educationalBackgroundOf
+core:educationalBackgroundOf (EducationalAttainment : Person) - inverse of educationalBackground
 
-core:degreeTypeAwarded (EducationalBackground : AcademicDegree) - inverse of awardedTo
-core:awardedTo (AcademicDegree : EducationalBackground) - inverse of degreeTypeAwarded
+core:degreeTypeAwarded (EducationalAttainment : AcademicDegree) - inverse of awardedTo
+core:awardedTo (AcademicDegree : EducationalAttainment) - inverse of degreeTypeAwarded
 
-core:organizationGrantingDegree (EducationalBackground : Organization) - no inverse
+core:organizationGrantingDegree (EducationalAttainment : Organization) - no inverse
 
 <%-- Data properties --%>
 <%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
@@ -156,7 +156,7 @@ the org type still gets asserted. --%>
     ?person core:educationalBackground  ?edBackgroundUri .
     
     ?edBackgroundUri core:educationalBackgroundOf ?person ;
-                     a core:EducationalBackground ,
+                     a core:EducationalAttainment ,
                        <${flagURI}> .
 </v:jsonset>
 
