@@ -1398,7 +1398,7 @@ source: http://www.fao.org/countryprofiles/geopol_v10/dataproperties/geopolitica
     <j.0:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Currently any abstract name is given to members of this class. This could change in the future.</j.0:exampleAnnot>
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <j.0:customShortViewAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">edBackgroundShortView.jsp</j.0:customShortViewAnnot>
+    <j.0:customShortViewAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">educationalAttainmentShortView.jsp</j.0:customShortViewAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/degree">
     <j.0:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The source of the public description and this info is found here:  http://bibotools.googlecode.com/svn/bibo-ontology/trunk/doc/index.html.  Bibo considers this term "unstable".  The bibo editorial note is: "We are not defining, using an enumeration, the range of the bibo:degree to the defined list of bibo:ThesisDegree. We won't do it because we want people to be able to define new degress if needed by some special usecases. Creating such an enumeration would restrict this to happen."</j.0:descriptionAnnot>
