@@ -11,10 +11,7 @@
     <div class="footerLinks">
         <ul class="otherNav">  
             <@l.firstLastList> 
-                <li><a href="${urls.about}" title="more about this web site">About</a></li>,
-                <#if urls.contact??>    
-                    <li><a href="${urls.contact}" title="feedback form">Contact Us</a></li>
-                </#if> 
+                <#include "subMenuLinks.ftl">
             </@l.firstLastList>
         </ul>
     </div>
