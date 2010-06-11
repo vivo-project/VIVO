@@ -1,9 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#content form {
-/*    width: 50%;*/
-}
-
 #content form div {
     clear: left;
 }

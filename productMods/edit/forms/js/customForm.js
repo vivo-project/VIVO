@@ -479,6 +479,6 @@ var customForm = {
 
 };
 
-$(document).ready(function(){   
+$(document).ready(function() {   
     customForm.onLoad();
 });

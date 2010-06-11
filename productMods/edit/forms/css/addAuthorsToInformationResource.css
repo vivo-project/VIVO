@@ -1,0 +1,47 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+ul.authors {
+    margin-left: 0;
+}
+
+ul.authors li {
+    list-style: none;
+    margin-bottom: .75em;
+}
+
+ul.authors span.authorName {
+    display: inline-block;
+    width: 15em;
+}
+
+/* Hide elements not used in non-JS version of form */
+#showFormButton,
+a.remove {
+    display: none;
+}
+
+#content form p.inline {
+    clear: left;
+    margin-bottom: 0;
+    padding-top: 1em;
+}
+
+#content form p.inline input,
+#content form p.inline label {
+    float: left;
+    clear: none;
+}
+
+#content form p.inline label {
+    width: 10em;
+    margin-top: 0;
+
+}
+
+#content form p.inline input {
+    margin-bottom: 0;
+}
+
+#content form p.inline span.hint {
+    margin-left: .5em;
+}
