@@ -95,6 +95,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?edAttainmentUri <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
+<%-- 
 <c:set var="dateTimeValue" value="${vivoCore}DateTimeValue" />
 <c:set var="hasDateTimeValue" value="${vivoCore}dateTimeValue" />
 <c:set var="precisionValue" value="${vivoCore}YearPrecision" />
@@ -111,7 +112,17 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
               core:dateTimeValuePrecision core:YearPrecision .
     ?edAttainmentUri core:dateTimeValue ?dateTime .
 </v:jsonset>
-
+--%>
+<%--
+<c:set var="yearPred" value="${vivoCore}year" />
+<v:jsonset var="yearExisting" >  
+    SELECT ?existingYear WHERE {
+          ?edBackgroundUri <${yearPred}> ?existingYear }
+</v:jsonset>
+<v:jsonset var="yearAssertion" >      
+    ?edBackgroundUri <${yearPred}> ?year .
+</v:jsonset>
+ --%>
 <c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
 <v:jsonset var="deptExisting" >  
     SELECT ?existingDept WHERE {
@@ -214,7 +225,7 @@ the org type still gets asserted. --%>
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "majorField"         : "${majorFieldExisting}",
-        "year"               : "${yearExisting}",
+        /*"year"               : "${yearExisting}",*/
         "dept"               : "${deptExisting}",
         "info"               : "${infoExisting}"
     },
@@ -252,7 +263,7 @@ the org type still gets asserted. --%>
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#dateTime",
+         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
          "rangeLang"        : "",         
          "assertions"       : ["${yearAssertion}"]
       },     

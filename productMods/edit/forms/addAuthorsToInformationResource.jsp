@@ -57,12 +57,172 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
     vreq.setAttribute("flagUri",flagUri);
     
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
+    vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(XSD.xint.toString()));
+%>
 
+<c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
+<c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
+<c:set var="label" value="${rdfs}label" />
+<c:set var="foaf" value="http://xmlns.com/foaf/0.1/" />
+
+<%-- Unlike other custom forms, this form does not allow edits of existing authors, so there are no
+SPARQL queries for existing values. --%>
+<%-- RY Is this claim correct, or do we need them to retrieve an existing individual? --%>
+<%-- Data properties --%>
+
+<v:jsonset var="newPersonFirstNameAssertion">
+    @prefix foaf: <${foaf}> . 
+    
+    ?newPerson foaf:firstName ?firstName .
+</v:jsonset>
+
+<v:jsonset var="newPersonMiddleNameAssertion">
+    @prefix core: <${vivoCore}> .
+    
+    ?newPerson core:middleName ?middleName .
+</v:jsonset>
+
+<v:jsonset var="newPersonLastNameAssertion">
+    @prefix foaf: <${foaf}> . 
+    
+    ?newPerson foaf:lastName ?lastName .
+</v:jsonset>
+
+<v:jsonset var="authorshipRankAssertion">
+    @prefix core: <${vivoCore}> .
+    
+    ?authorshipUri core:authorRank ?rank
+</v:jsonset>
+
+<%-- This much applies to both new and existing person --%>
+<v:jsonset var="n3ForNewAuthorship">
+    @prefix core: <${vivoCore}> .
+    
+    ?authorshipUri a core:Authorship ,
+                     <${flagURI}> ;
+                   core:linkedInformationResource ?infoResource .
+                   
+    ?infoResource core:informationResourceInAuthorship ?authorshipUri .      
+</v:jsonset>
+
+<v:jsonset var="n3ForExistingPerson">
+    @prefix core: <${vivoCore}> .
+    ?authorshipUri core:linkedAuthor ?personUri
+    ?personUri core:authorInAuthorship ?authorshipUri
+</v:jsonset>
+
+<v:jsonset var="n3ForNewPerson">
+    @prefix foaf: <${foaf}> . 
+    @prefix core: <${vivoCore}> .
+    
+    ?newPerson a foaf:Person ,
+                 <${flagURI}> ;
+               core:firstName ?firstName ;
+               core:middleName ?middleName ;
+               core:lastName ?lastName .
+               
+    ?authorshipUri core:linkedAuthor ?newPerson
+    ?newPerson core:authorInAuthorship ?authorshipUri                 
+</v:jsonset>
+
+<c:set var="editjson" scope="request">
+{
+    "formUrl" : "${formUrl}",
+    "editKey" : "${editKey}",
+    "urlPatternToReturnTo" : "/entity",
+
+    "subject"   : ["infoResource", "${subjectUriJson}" ],
+    "predicate" : ["predicate", "${predicateUriJson}" ],
+    "object"    : ["authorshipUri", "${objectUriJson}", "URI" ],
+    
+    "n3required"    : [ "${n3ForNewAuthorship}", "${authorshipRankAssertion}" ],
+    
+    "n3optional"    : [ "${newPersonFirstNameAssertion}", "${newPersonMiddleNameAssertion}", 
+                        "${newPersonLastNameAssertion}", 
+                        "${n3ForNewPerson}", "${n3ForExistingPerson}" ],                                                
+                        
+    "newResources"  : { "authorshipUri" : "${defaultNamespace}",
+                        "newPerson" : "${defaultNamespace}" },
+
+    "urisInScope"    : { },
+    "literalsInScope": { },
+    "urisOnForm"     : [ "authorshipUri", "personUri" ],
+    "literalsOnForm" : [ "firstName", "middleName", "lastName", "rank" ],
+    "filesOnForm"    : [ ],
+    "sparqlForLiterals" : { },
+    "sparqlForUris" : {  },
+    "sparqlForExistingLiterals" : { },
+    "sparqlForExistingUris" : { },
+    "fields" : {
+      "firstName" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : [ "${newPersonFirstNameAssertion}" ]
+      },   
+      "middleName" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : [ "${newPersonMiddleNameAssertion}" ]
+      },
+      "lastName" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : [ "${newPersonLastNameAssertion}" ]
+      },  
+      "rank" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${intDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${authorshipRankAssertion}"]
+      }
+  }
+}
+</c:set>
+   
+<% 
+
+    log.debug(request.getAttribute("editjson"));
+
+    EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
+    if (editConfig == null) {
+        editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
+        EditConfiguration.putConfigInSession(editConfig,session);
+    }
+
+    Model model = (Model) application.getAttribute("jenaOntModel");
+    String objectUri = (String) request.getAttribute("objectUri");
+    System.out.println("OBJECT URI: " + objectUri);
+    editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
+    
     String subjectUri = vreq.getParameter("subjectUri");
     String predicateUri = vreq.getParameter("predicateUri");
     Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
     vreq.setAttribute("infoResourceName", infoResource.getName());
+    vreq.setAttribute("rank", authorships.size()+1); // new author ranked last when added
     
     String linkedAuthorProperty = "http://vivoweb.org/ontology/core#linkedAuthor";
 
@@ -97,7 +257,6 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
                 <% 
             }
         }
-
     %>
     
 </ul>
@@ -110,7 +269,8 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint}" size="20" />${initialHint}</p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
     
-    <input type="hidden" name="newAuthor" value="true" />
+    <input type="hidden" name="personUri" value="" />
+    <input type="hidden" name="rank" value="${rank}" />
     
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="${param.subjectUri}"/></p>
     
