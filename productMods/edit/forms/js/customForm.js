@@ -57,9 +57,15 @@ var customForm = {
 
     onLoad: function() {
 
+    	this.mixIn();
 		this.initObjects();		
         this.adjustForJs();             
         this.initForm();      
+    },
+    
+    mixIn: function() {
+    	// Mix in the custom form utility methods
+    	vitro.utils.borrowMethods(vitro.customFormUtils, this);    	
     },
     
     // On page load, create references within the customForm scope to DOM elements.
@@ -117,7 +123,7 @@ var customForm = {
     },
     
     initForm: function() {
-        
+    	
     	//Adding a new entry
         if (this.editType === 'add') { 
             this.initAddForm();    
@@ -284,8 +290,6 @@ var customForm = {
     	this.doAddNewLinkForCombinedView();
     	this.setReturnView(this.views.COMBINED);
     },
-    
-    /***** Utilities *****/
  
     unbindEventListeners: function() {
     	customForm.cancel.unbind('click');
@@ -293,28 +297,6 @@ var customForm = {
     	customForm.addNewLink.unbind('click');  
     	customForm.close.unbind('click');
     	customForm.existingSelect.unbind('change');
-    },
-    
-    clearFormData: function() {
-    	customForm.clearFields(customForm.form);
-    },
-    
-    // Clear data from form elements in element el
-    clearFields: function(el) {
-    	el.find(':input[type!="hidden"][type!="submit"][type!="button"]').val(''); 	
-    	
-        // For now we can remove the error elements. Later we may include them in
-        // the markup, for customized positioning, in which case we will empty them
-        // but not remove them here. See findValidationErrors().  
-        el.find('.validationError').remove();      
-    }, 
-    
-    // This method should always be called instead of calling hide() directly on any
-    // element containing form fields.
-    hideFields: function(el) {
-        // Clear any input and error message, so if we re-show the element it won't still be there.
-        customForm.clearFields(el);
-        el.hide();
     },
 
     // Add event listener to the submit button in step 2

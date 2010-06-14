@@ -225,10 +225,10 @@ SPARQL queries for existing values. --%>
     
     String linkedAuthorProperty = "http://vivoweb.org/ontology/core#linkedAuthor";
 
-    List<String> customJs = new ArrayList<String>(Arrays.asList(
-            "/js/utils.js",
-            "/js/customFormUtils.js",
-            "/edit/forms/js/addAuthorsToInformationResource.js"));            
+    List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",
+                                                                "/js/customFormUtils.js",
+                                                                "/edit/forms/js/addAuthorsToInformationResource.js"
+                                                                ));            
     request.setAttribute("customJs", customJs);
 
     List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css",

@@ -4,11 +4,16 @@ var addAuthorForm = {
 
     onLoad: function() {
 
+		this.mixIn();
         this.initObjects();     
         this.adjustForJs();             
         this.initForm();       
     },
 
+    mixIn: function() {
+    	// Mix in the custom form utility methods
+    	vitro.utils.borrowMethods(vitro.customFormUtils, this);
+    },
     
     // On page load, create references within the customForm scope to DOM elements.
     // NB These must be assigned after the elements have been loaded onto the page.
@@ -34,8 +39,7 @@ var addAuthorForm = {
     
     initForm: function() {
     	
-    	// Mix in the custom form utility methods
-    	vitro.utils.borrowMethods(vitro.customFormUtils, this);
+
     	
     	this.showFormButton.click(function() {
     		addAuthorForm.showFormDiv.hide();

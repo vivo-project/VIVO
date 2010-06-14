@@ -295,7 +295,9 @@
         <c:set var="submitLabel" value="Create position" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("/edit/forms/js/customForm.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",            
+                                                                "/js/customFormUtils.js",           
+                                                                "/edit/forms/js/customForm.js"
                                                                 //, "/edit/forms/js/customFormTwoStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
