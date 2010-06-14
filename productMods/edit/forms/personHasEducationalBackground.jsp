@@ -364,13 +364,13 @@ the org type still gets asserted. --%>
         <c:set var="submitLabel" value="Create New Educational Background" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
-                                                                //, "forms/js/customFormOneStep.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("/edit/forms/js/customForm.js"
+                                                                //, "/edit/forms/js/customFormOneStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css",
-                                                                 "forms/css/personHasEducationalBackground.css"
+    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css",
+                                                                 "/edit/forms/css/personHasEducationalBackground.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>

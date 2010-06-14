@@ -295,13 +295,13 @@
         <c:set var="submitLabel" value="Create position" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
-                                                                //, "forms/js/customFormTwoStep.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("/edit/forms/js/customForm.js"
+                                                                //, "/edit/forms/js/customFormTwoStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css"
-                                                                 , "forms/css/personHasPositionHistory.css"
+    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css"
+                                                                 , "/edit/forms/css/personHasPositionHistory.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>

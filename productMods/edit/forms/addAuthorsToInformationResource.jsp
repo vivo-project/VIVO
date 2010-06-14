@@ -91,10 +91,10 @@ SPARQL queries for existing values. --%>
 <v:jsonset var="authorshipRankAssertion">
     @prefix core: <${vivoCore}> .
     
-    ?authorshipUri core:authorRank ?rank
+    ?authorshipUri core:authorRank ?rank .
 </v:jsonset>
 
-<%-- This much applies to both new and existing person --%>
+<%-- This applies to both new and existing person --%>
 <v:jsonset var="n3ForNewAuthorship">
     @prefix core: <${vivoCore}> .
     
@@ -225,11 +225,14 @@ SPARQL queries for existing values. --%>
     
     String linkedAuthorProperty = "http://vivoweb.org/ontology/core#linkedAuthor";
 
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/addAuthorsToInformationResource.js"));            
+    List<String> customJs = new ArrayList<String>(Arrays.asList(
+            "/js/utils.js",
+            "/js/customFormUtils.js",
+            "/edit/forms/js/addAuthorsToInformationResource.js"));            
     request.setAttribute("customJs", customJs);
 
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css",
-                                                                 "forms/css/addAuthorsToInformationResource.css"                                                                
+    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css",
+                                                                 "/edit/forms/css/addAuthorsToInformationResource.css"                                                                
                                                                 ));                                                                                                                                 
     request.setAttribute("customCss", customCss); 
 %>

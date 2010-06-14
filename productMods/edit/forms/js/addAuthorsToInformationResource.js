@@ -34,6 +34,9 @@ var addAuthorForm = {
     
     initForm: function() {
     	
+    	// Mix in the custom form utility methods
+    	vitro.utils.borrowMethods(vitro.customFormUtils, this);
+    	
     	this.showFormButton.click(function() {
     		addAuthorForm.showFormDiv.hide();
     		addAuthorForm.form.show();
@@ -41,7 +44,7 @@ var addAuthorForm = {
     	});
     	
     	this.cancel.click(function() {
-    		addAuthorForm.form.hide();
+    		addAuthorForm.hideFields(addAuthorForm.form);
     		addAuthorForm.showFormDiv.show();
     		return false;
     	});
@@ -51,6 +54,7 @@ var addAuthorForm = {
     	// when clicking remove: remove the author, and change link text to "undo"
     	// when clicking undo: add the author back, and change link text to "remove"
     }
+
 }
 
 $(document).ready(function() {   

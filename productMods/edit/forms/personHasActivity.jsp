@@ -289,7 +289,7 @@
 <%  } 
     
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css"                                                                
+    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css"                                                                
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
