@@ -1,23 +1,37 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-ul.authors {
+#authors {
     margin-left: 0;
 }
 
-ul.authors li {
+#authors li {
     list-style: none;
     margin-bottom: .75em;
 }
 
-ul.authors span.authorName {
+#authors a.authorName {
     display: inline-block;
     width: 15em;
 }
 
 /* Hide elements not used in non-JS version of form */
-#showFormButton,
+#showAddForm,
 a.remove {
     display: none;
+}
+
+form a:link.cancel, form a:visited.cancel,
+#authors a:link.remove, #authors a:visited.remove, 
+#showAddForm a:link.cancel, #showAddForm a:visited.cancel {
+    color: #f70;
+    border-color: #f70;
+}
+
+form a:hover.cancel,
+#authors a:hover.remove,
+#showAddForm a:hover.cancel {
+    color: #fff;
+    background: #f70;
 }
 
 #content form p.inline {

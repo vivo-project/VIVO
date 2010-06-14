@@ -15,8 +15,10 @@ var addAuthorForm = {
     initObjects: function() {
     	
     	this.form = $('#addAuthorForm');
-    	this.showFormButton = $('#showAddForm');
+    	this.showFormDiv = $('#showAddForm');
+    	this.showFormButton = $('#showAddFormButton');
     	this.removeLinks = $('a.remove');
+        this.cancel = this.form.find('.cancel'); 
     },
 
     // On page load, make changes to the non-Javascript version for the Javascript version.
@@ -24,7 +26,7 @@ var addAuthorForm = {
     adjustForJs: function() {
     	
     	// Show elements that are hidden by css on load since not used in non-JS version
-    	this.showFormButton.show();
+    	this.showFormDiv.show();
     	this.removeLinks.show();
     	
     	this.form.hide();
@@ -32,9 +34,16 @@ var addAuthorForm = {
     
     initForm: function() {
     	
-    	this.showFormButton.bind('click', function() {
-    		$(this).hide();
+    	this.showFormButton.click(function() {
+    		addAuthorForm.showFormDiv.hide();
     		addAuthorForm.form.show();
+    		return false;
+    	});
+    	
+    	this.cancel.click(function() {
+    		addAuthorForm.form.hide();
+    		addAuthorForm.showFormDiv.show();
+    		return false;
     	});
     },
     

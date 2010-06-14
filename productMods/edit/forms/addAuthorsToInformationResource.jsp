@@ -214,7 +214,6 @@ SPARQL queries for existing values. --%>
 
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
-    System.out.println("OBJECT URI: " + objectUri);
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
     
     String subjectUri = vreq.getParameter("subjectUri");
@@ -242,17 +241,19 @@ SPARQL queries for existing values. --%>
 <jsp:include page="${preForm}" />
 
 <h2>${title}</h2>
-       
-<ul class="authors">
+      
+<ul id="authors">
     <%
         for ( Individual authorship : authorships ) {
-            List<Individual> authors = authorship.getRelatedIndividuals(linkedAuthorProperty);
-            if ( !authors.isEmpty() ) {
-                Individual author = authors.get(0);   
-                String authorName = getAuthorName(author);
+            Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
+            if ( author != null ) {
+                request.setAttribute("author", author);
                 %> 
-                
-                <li><span class="authorName"><%= authorName %></span><a href="" class="remove">Remove</a></li> 
+                <%-- RY Should use author short view here? --%>
+                <c:url var="authorHref" value="/individual">
+                    <c:param name="uri" value="${author.URI}"/>
+                </c:url> 
+                <li><a href="${authorHref}" class="authorName"><%= getAuthorName(author) %></a><a href="" class="remove">Remove</a></li> 
                 
                 <% 
             }
@@ -261,7 +262,10 @@ SPARQL queries for existing values. --%>
     
 </ul>
 
-<input type="button" value="Add Author" id="showAddForm" />
+<div id="showAddForm">
+    <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="${param.subjectUri}" cancelLabel="Done" />
+</div> 
+
 
 <form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
     
@@ -272,7 +276,7 @@ SPARQL queries for existing values. --%>
     <input type="hidden" name="personUri" value="" />
     <input type="hidden" name="rank" value="${rank}" />
     
-    <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="${param.subjectUri}" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
