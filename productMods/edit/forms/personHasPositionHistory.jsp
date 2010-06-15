@@ -31,13 +31,13 @@
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
-    String flagURI = null;
+    String flagUri = null;
     if (vreq.getAppBean().isFlag1Active()) {
-        flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
+        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
     } else {
-        flagURI = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
+        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
     }
-    vreq.setAttribute("flagURI",flagURI);
+    vreq.setAttribute("flagUri",flagUri);
     
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
@@ -121,7 +121,7 @@
     
     ?positionUri core:positionForPerson ?person ;
                  a  ?positionType ,
-                    <${flagURI}> .
+                    <${flagUri}> .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
@@ -129,7 +129,7 @@
     
     ?newOrg <${label}> ?newOrgName ;
             a ?newOrgType ,
-              <${flagURI}> ;
+              <${flagUri}> ;
             <${orgForPositionPred}> ?positionUri .
 
 </v:jsonset>

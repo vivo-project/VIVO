@@ -20,6 +20,14 @@ a.remove {
     display: none;
 }
 
+#showAddForm span.or {
+    display: none;
+}
+
+#showAddForm a.cancel {
+    margin-left: 2em;
+}
+
 form a:link.cancel, form a:visited.cancel,
 #authors a:link.remove, #authors a:visited.remove, 
 #showAddForm a:link.cancel, #showAddForm a:visited.cancel {

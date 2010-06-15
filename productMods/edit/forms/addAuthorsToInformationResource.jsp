@@ -30,6 +30,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.CreateLabelFromNameFields"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
@@ -71,26 +72,22 @@ SPARQL queries for existing values. --%>
 <%-- Data properties --%>
 
 <v:jsonset var="newPersonFirstNameAssertion">
-    @prefix foaf: <${foaf}> . 
-    
+    @prefix foaf: <${foaf}> .     
     ?newPerson foaf:firstName ?firstName .
 </v:jsonset>
 
 <v:jsonset var="newPersonMiddleNameAssertion">
-    @prefix core: <${vivoCore}> .
-    
+    @prefix core: <${vivoCore}> .   
     ?newPerson core:middleName ?middleName .
 </v:jsonset>
 
 <v:jsonset var="newPersonLastNameAssertion">
-    @prefix foaf: <${foaf}> . 
-    
+    @prefix foaf: <${foaf}> .     
     ?newPerson foaf:lastName ?lastName .
 </v:jsonset>
 
 <v:jsonset var="authorshipRankAssertion">
-    @prefix core: <${vivoCore}> .
-    
+    @prefix core: <${vivoCore}> .   
     ?authorshipUri core:authorRank ?rank .
 </v:jsonset>
 
@@ -99,16 +96,17 @@ SPARQL queries for existing values. --%>
     @prefix core: <${vivoCore}> .
     
     ?authorshipUri a core:Authorship ,
-                     <${flagURI}> ;
-                   core:linkedInformationResource ?infoResource .
+                     <${flagUri}> ;
+                   core:linkedInformationResource ?infoResource ;
+                   core:authorRank ?rank .
                    
     ?infoResource core:informationResourceInAuthorship ?authorshipUri .      
 </v:jsonset>
 
 <v:jsonset var="n3ForExistingPerson">
     @prefix core: <${vivoCore}> .
-    ?authorshipUri core:linkedAuthor ?personUri
-    ?personUri core:authorInAuthorship ?authorshipUri
+    ?authorshipUri core:linkedAuthor ?personUri .
+    ?personUri core:authorInAuthorship ?authorshipUri .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewPerson">
@@ -116,13 +114,11 @@ SPARQL queries for existing values. --%>
     @prefix core: <${vivoCore}> .
     
     ?newPerson a foaf:Person ,
-                 <${flagURI}> ;
-               core:firstName ?firstName ;
-               core:middleName ?middleName ;
-               core:lastName ?lastName .
+                 <${flagUri}> ;
+               <${label}> ?label .
                
-    ?authorshipUri core:linkedAuthor ?newPerson
-    ?newPerson core:authorInAuthorship ?authorshipUri                 
+    ?authorshipUri core:linkedAuthor ?newPerson .
+    ?newPerson core:authorInAuthorship ?authorshipUri .               
 </v:jsonset>
 
 <c:set var="editjson" scope="request">
@@ -147,13 +143,24 @@ SPARQL queries for existing values. --%>
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "authorshipUri", "personUri" ],
-    "literalsOnForm" : [ "firstName", "middleName", "lastName", "rank" ],
+    "literalsOnForm" : [ "firstName", "middleName", "lastName", "rank", "label" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : { },
     "sparqlForExistingUris" : { },
     "fields" : {
+      "label" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : [ "${n3ForNewPerson}" ]
+      },   
       "firstName" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
@@ -203,7 +210,6 @@ SPARQL queries for existing values. --%>
 </c:set>
    
 <% 
-
     log.debug(request.getAttribute("editjson"));
 
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
@@ -212,6 +218,11 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
 
+    // For now the field names in CreateLabelFromFieldNames.processEditSubmission() are
+    // hard-coded. If we want the flexibility in naming them, we can pass in a map of
+    // the field names when creating the preprocessor. 
+    editConfig.addEditSubmissionPreprocessor(new CreateLabelFromNameFields(editConfig));
+    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
@@ -220,6 +231,7 @@ SPARQL queries for existing values. --%>
     String predicateUri = vreq.getParameter("predicateUri");
     Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
+    
     vreq.setAttribute("infoResourceName", infoResource.getName());
     vreq.setAttribute("rank", authorships.size()+1); // new author ranked last when added
     
@@ -252,11 +264,11 @@ SPARQL queries for existing values. --%>
             if ( author != null ) {
                 request.setAttribute("author", author);
                 %> 
-                <%-- RY Should use author short view here? --%>
+                <%-- RY Should use author short view here instead? --%>
                 <c:url var="authorHref" value="/individual">
                     <c:param name="uri" value="${author.URI}"/>
                 </c:url> 
-                <li><a href="${authorHref}" class="authorName"><%= getAuthorName(author) %></a><a href="" class="remove">Remove</a></li> 
+                <li><a href="${authorHref}" class="authorName">${author.name}</a><a href="" class="remove">Remove</a></li> 
                 
                 <% 
             }
@@ -266,7 +278,7 @@ SPARQL queries for existing values. --%>
 </ul>
 
 <div id="showAddForm">
-    <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="${param.subjectUri}" cancelLabel="Done" />
+    <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="${param.subjectUri}" cancelLabel="Return to Publication" />
 </div> 
 
 
@@ -276,7 +288,10 @@ SPARQL queries for existing values. --%>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint}" size="20" />${initialHint}</p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
     
-    <input type="hidden" name="personUri" value="" />
+    <%-- These fields will have values populated/modified by JavaScript --%>
+ <%--  <p class="inline"><v:input type="text" id="label" label="Label" size="20" />${initialHint}</p>--%>
+
+    <input type="hidden" name="personUri" value="" />    
     <input type="hidden" name="rank" value="${rank}" />
     
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="${param.subjectUri}" /></p>
@@ -287,6 +302,10 @@ SPARQL queries for existing values. --%>
 <jsp:include page="${postForm}"/>
 
 <%!
+// We'll just rely on rdfs:label for now. In future, the label will be created by the app from
+// last name, first name, and middle name fields, so we don't have to worry about inconsistent
+// ordering.
+/*
 public String getAuthorName(Individual author) {
     String name;
     
@@ -305,5 +324,5 @@ public String getAuthorName(Individual author) {
     }
     return name;
 }
-
+*/
 %>
