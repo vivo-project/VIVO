@@ -23,11 +23,13 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.Collections" %>
 
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.CreateLabelFromNameFields"%>
@@ -121,11 +123,13 @@ SPARQL queries for existing values. --%>
     ?newPerson core:authorInAuthorship ?authorshipUri .               
 </v:jsonset>
 
+<c:set var="returnPath" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
+
 <c:set var="editjson" scope="request">
 {
     "formUrl" : "${formUrl}",
     "editKey" : "${editKey}",
-    "urlPatternToReturnTo" : "/entity",
+    "urlPatternToReturnTo" : "${returnPath}",
 
     "subject"   : ["infoResource", "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
@@ -229,11 +233,14 @@ SPARQL queries for existing values. --%>
     
     String subjectUri = vreq.getParameter("subjectUri");
     String predicateUri = vreq.getParameter("predicateUri");
-    Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
+    
+    Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);   
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
+    String rankUri = "http://vivoweb.org/ontology/core#authorRank";
+    DataPropertyComparator comp = new DataPropertyComparator(rankUri);
+    Collections.sort(authorships, comp);
     
     vreq.setAttribute("infoResourceName", infoResource.getName());
-    vreq.setAttribute("rank", authorships.size()+1); // new author ranked last when added
     
     String linkedAuthorProperty = "http://vivoweb.org/ontology/core#linkedAuthor";
 
@@ -249,7 +256,7 @@ SPARQL queries for existing values. --%>
     request.setAttribute("customCss", customCss); 
 %>
 
-<c:set var="title" value="Manage authors of <em>${infoResourceName}</em>" />
+<c:set var="title" value="<em>${infoResourceName}</em>: Authors" />
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="initialHint" value="<span class='hint'>initial okay</span>" />
 
@@ -259,7 +266,9 @@ SPARQL queries for existing values. --%>
       
 <ul id="authors">
     <%
+        String rank;
         for ( Individual authorship : authorships ) {
+            rank = authorship.getDataValue(rankUri);
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
                 request.setAttribute("author", author);
@@ -272,7 +281,11 @@ SPARQL queries for existing values. --%>
                 
                 <% 
             }
+            
         }
+        // A new author will be ranked last when added.
+        // This doesn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
+        vreq.setAttribute("rank", rank+1); 
     %>
     
 </ul>
@@ -288,10 +301,7 @@ SPARQL queries for existing values. --%>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint}" size="20" />${initialHint}</p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
     
-    <%-- These fields will have values populated/modified by JavaScript --%>
- <%--  <p class="inline"><v:input type="text" id="label" label="Label" size="20" />${initialHint}</p>--%>
-
-    <input type="hidden" name="personUri" value="" />    
+    <input type="hidden" name="personUri" value="" /> <!-- Field value populated by JavaScript -->   
     <input type="hidden" name="rank" value="${rank}" />
     
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="${param.subjectUri}" /></p>
