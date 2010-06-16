@@ -266,9 +266,9 @@ SPARQL queries for existing values. --%>
       
 <ul id="authors">
     <%
-        String rank;
+        int rank = 0;
         for ( Individual authorship : authorships ) {
-            rank = authorship.getDataValue(rankUri);
+            rank = Integer.valueOf(authorship.getDataValue(rankUri));
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
                 request.setAttribute("author", author);
@@ -285,7 +285,7 @@ SPARQL queries for existing values. --%>
         }
         // A new author will be ranked last when added.
         // This doesn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
-        vreq.setAttribute("rank", rank+1); 
+        vreq.setAttribute("rank", rank + 1);
     %>
     
 </ul>
