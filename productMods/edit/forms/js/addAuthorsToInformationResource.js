@@ -38,9 +38,7 @@ var addAuthorForm = {
     },
     
     initForm: function() {
-    	
 
-    	
     	this.showFormButton.click(function() {
     		addAuthorForm.showFormDiv.hide();
     		addAuthorForm.form.show();
@@ -52,7 +50,18 @@ var addAuthorForm = {
     		addAuthorForm.showFormDiv.show();
     		return false;
     	});
+    	
+    	//this.setUpAutocomplete();
     },
+    
+//    setUpAutocomplete: function() {
+//
+//    	var names = ["Adams", "Bell", "Smith", "Smile", "Smelt", "Younes", "Young"];
+//    	$('#lastName').autocomplete({
+//    		source: names
+//    	});
+//
+//    },
     
     toggleRemoveLink: function() {
     	// when clicking remove: remove the author, and change link text to "undo"

@@ -36,6 +36,8 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -243,14 +245,16 @@ SPARQL queries for existing values. --%>
     vreq.setAttribute("infoResourceName", infoResource.getName());
     
     String linkedAuthorProperty = "http://vivoweb.org/ontology/core#linkedAuthor";
-
-    List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",
-                                                                "/js/customFormUtils.js",
+    
+    List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
+                                                                JavaScript.UTILS.path(),
+                                                                JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/edit/forms/js/addAuthorsToInformationResource.js"
                                                                 ));            
     request.setAttribute("customJs", customJs);
 
-    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css",
+    List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
+                                                                 Css.CUSTOM_FORM.path(),
                                                                  "/edit/forms/css/addAuthorsToInformationResource.css"                                                                
                                                                 ));                                                                                                                                 
     request.setAttribute("customCss", customCss); 
