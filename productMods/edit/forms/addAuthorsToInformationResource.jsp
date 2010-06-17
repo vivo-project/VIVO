@@ -125,13 +125,13 @@ SPARQL queries for existing values. --%>
     ?newPerson core:authorInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-<c:set var="returnPath" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
+<c:set var="returnPathAfterSubmit" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
 
 <c:set var="editjson" scope="request">
 {
     "formUrl" : "${formUrl}",
     "editKey" : "${editKey}",
-    "urlPatternToReturnTo" : "${returnPath}",
+    "urlPatternToReturnTo" : "${returnPathAfterSubmit}",
 
     "subject"   : ["infoResource", "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
@@ -224,10 +224,11 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
 
+    // Doing this in Javascript instead.
     // For now the field names in CreateLabelFromFieldNames.processEditSubmission() are
-    // hard-coded. If we want the flexibility in naming them, we can pass in a map of
+    // hard-coded. If we want flexibility in naming them, we can pass in a map of
     // the field names when creating the preprocessor. 
-    editConfig.addEditSubmissionPreprocessor(new CreateLabelFromNameFields(editConfig));
+    // editConfig.addEditSubmissionPreprocessor(new CreateLabelFromNameFields(editConfig));
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -295,7 +296,7 @@ SPARQL queries for existing values. --%>
 </ul>
 
 <div id="showAddForm">
-    <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="${param.subjectUri}" cancelLabel="Return to Publication" />
+    <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
 </div> 
 
 
@@ -304,11 +305,14 @@ SPARQL queries for existing values. --%>
     <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" size="30" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint}" size="20" />${initialHint}</p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
-    
-    <input type="hidden" name="personUri" value="" /> <!-- Field value populated by JavaScript -->   
+
     <input type="hidden" name="rank" value="${rank}" />
     
-    <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="${param.subjectUri}" /></p>
+    <!-- Field values populated by JavaScript -->     
+    <input type="hidden" id="label" name="label" value="" />
+    <input type="hidden" id="personUri" name="personUri" value="" />  
+    
+    <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>

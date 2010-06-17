@@ -310,7 +310,7 @@
     <v:input type="text" label="Start Year and Month ${yearMonthHint}" id="startYearMonth" size="7"/>    
     <v:input type="text" label="End Year and Month ${yearMonthHint}" id="endYearMonth" size="7"/>
 
-    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="true"/></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>

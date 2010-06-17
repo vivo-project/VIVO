@@ -23,7 +23,15 @@ var addAuthorForm = {
     	this.showFormDiv = $('#showAddForm');
     	this.showFormButton = $('#showAddFormButton');
     	this.removeLinks = $('a.remove');
+    	this.submit = this.form.find(':submit');
         this.cancel = this.form.find('.cancel'); 
+        this.labelField = $('#label');
+        this.firstNameField = $('#firstName');
+        this.middleNameField = $('#middleName');
+        this.lastNameField = $('#lastName');
+        this.personUriField = $('#personUri');
+        this.firstNameWrapper = this.firstNameField.parent();
+        this.middleNameWrapper = this.middleNameField.parent();
     },
 
     // On page load, make changes to the non-Javascript version for the Javascript version.
@@ -38,11 +46,18 @@ var addAuthorForm = {
     },
     
     initForm: function() {
-
+    	
+    	//this.firstNameWrapper.hide();
+    	//this.middleNameWrapper.hide();
+    	
     	this.showFormButton.click(function() {
     		addAuthorForm.showFormDiv.hide();
     		addAuthorForm.form.show();
     		return false;
+    	});
+    	
+    	this.submit.click(function() {
+    		addAuthorForm.insertLabel(); // might be insertLabelOrPersonUri
     	});
     	
     	this.cancel.click(function() {
@@ -50,8 +65,9 @@ var addAuthorForm = {
     		addAuthorForm.showFormDiv.show();
     		return false;
     	});
+
+//    	this.setUpAutocomplete();
     	
-    	//this.setUpAutocomplete();
     },
     
 //    setUpAutocomplete: function() {
@@ -62,6 +78,32 @@ var addAuthorForm = {
 //    	});
 //
 //    },
+    
+    insertLabel: function() {
+    	var firstName,
+    	    middleName,
+    	    lastName,
+    	    name;
+    	
+    	if (!this.firstNameField.is(':hidden')) {
+    		firstName = this.firstNameField.val();
+    		middleName = this.middleNameField.val();
+    		lastName = this.lastNameField.val();
+    		
+    		name = lastName;
+    		if (firstName) {
+    			name += ", " + firstName;
+    		}
+    		if (middleName) {
+    			name += " " + middleName;
+    		}
+    		
+    		this.labelField.val(name);
+    	}
+    	else {
+
+    	}
+    },
     
     toggleRemoveLink: function() {
     	// when clicking remove: remove the author, and change link text to "undo"

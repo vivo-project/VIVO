@@ -198,7 +198,7 @@
 	<v:input type="select" label="person" id="personUri"  />
     <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>
     <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
-    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="true"/></p>
 </form>
 
 <jsp:include page="${postForm}"/>

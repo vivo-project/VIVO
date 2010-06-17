@@ -421,7 +421,7 @@ the org type still gets asserted. --%>
     <input type="hidden" name="steps" value="1" />
     <input type="hidden" name="view" value="${view}" />
     
-    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="true"/></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
