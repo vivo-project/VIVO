@@ -307,7 +307,7 @@ SPARQL queries for existing values. --%>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
 
     <input type="hidden" name="rank" value="${rank}" />
-    
+    <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person" />" />
     <!-- Field values populated by JavaScript -->     
     <input type="hidden" id="label" name="label" value="" />
     <input type="hidden" id="personUri" name="personUri" value="" />  

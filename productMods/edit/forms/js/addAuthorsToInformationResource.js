@@ -47,8 +47,8 @@ var addAuthorForm = {
     
     initForm: function() {
     	
-    	//this.firstNameWrapper.hide();
-    	//this.middleNameWrapper.hide();
+    	this.firstNameWrapper.hide();
+    	this.middleNameWrapper.hide();
     	
     	this.showFormButton.click(function() {
     		addAuthorForm.showFormDiv.hide();
@@ -66,18 +66,36 @@ var addAuthorForm = {
     		return false;
     	});
 
-//    	this.setUpAutocomplete();
+    	this.setUpAutocomplete();
     	
     },
     
-//    setUpAutocomplete: function() {
-//
-//    	var names = ["Adams", "Bell", "Smith", "Smile", "Smelt", "Younes", "Young"];
-//    	$('#lastName').autocomplete({
-//    		source: names
-//    	});
-//
-//    },
+    setUpAutocomplete: function() {
+
+    	var cache = {};
+    	var url = $('#acUrl').val();
+    	$('#lastName').autocomplete({
+    		minLength: 2,
+    		source: function(request, response) {
+    			if (request.term in cache) {
+    				response(cache[request.term]);
+    				return;
+    			}
+    			
+    			$.ajax({
+    				url: url,
+    				dataType: "json",
+    				data: request,
+    				success: function(data) {
+    					cache[request.term] = data;
+    					response(data);
+    				}
+    			    // on select: fill in person uri
+    			});
+    		}
+    	});
+
+    },
     
     insertLabel: function() {
     	var firstName,
@@ -115,3 +133,21 @@ var addAuthorForm = {
 $(document).ready(function() {   
     addAuthorForm.onLoad();
 });
+
+/* "value" : uri
+ * label: gets displayed in form field = rdfs:label
+ * 
+ * on select: put the uri into the person uri form field
+ */
+/*[ { "id": "Somateria mollissima", "label": "Common Eider", "value": "Common Eider" }, 
+{ "id": "Crex crex", "label": "Corncrake", "value": "Corncrake" }, 
+{ "id": "Grus grus", "label": "Common Crane", "value": "Common Crane" }, 
+{ "id": "Charadrius hiaticula", "label": "Common Ringed Plover", "value": "Common Ringed Plover" }, 
+{ "id": "Gallinago gallinago", "label": "Common Snipe", "value": "Common Snipe" },
+{ "id": "Tringa totanus", "label": "Common Redshank", "value": "Common Redshank" }, 
+{ "id": "Sterna hirundo", "label": "Common Tern", "value": "Common Tern" }, 
+{ "id": "Alcedo atthis", "label": "Common Kingfisher", "value": "Common Kingfisher" }, 
+{ "id": "Corvus corax", "label": "Common Raven", "value": "Common Raven" }, 
+{ "id": "Emberiza calandra", "label": "Corn Bunting", "value": "Corn Bunting" }, 
+{ "id": "Phalacrocorax carbo", "label": "Great Cormorant", "value": "Great Cormorant" }, 
+{ "id": "Tadorna tadorna", "label": "Common Shelduck", "value": "Common Shelduck" } ]*/
