@@ -1,0 +1,207 @@
+
+-------------------------------------------------------------------------------
+
+Upgrading NIH VIVO
+ 
+Steps to Upgrade from Release 1 Version 1.0 to Release 1 Version 1.1
+
+This file provides a short description of the steps involved in upgrading your 
+installation of NIH VIVO from Release 1 Version 1.0 to Release 1 Version 1.1.
+This and other documentation can be found at:
+
+http://vivoweb.org/support
+
+Installation:
+If you need to do a fresh install, please consult the install.txt in this 
+directory.
+
+-------------------------------------------------------------------------------
+
+I.   Before Performing the Upgrade
+II.  The Upgrade Process
+III. Ontology Changes
+IV.  File Storage Changes
+
+-------------------------------------------------------------------------------
+
+I. Before Performing the Upgrade
+
+Please read the bullet points below BEFORE beginning the upgrade. 
+
+The upgrade process is similar to the original install process with the following 
+exceptions:
+
+* DO NOT reinstall MySQL or recreate the MySQL database. Please ensure that 
+    you back-up the MySQL database.
+* It is not necessary to add RDF data or reconfigure the Apache HTTP Server.
+* First-time login of the administrator account will use the password 
+    previously set, NOT the password in deploy.properties.
+* The first time Apache Tomcat starts up after the upgrade, it will 
+    initiate a process that modifies the knowledge base to align the data 
+    with the revised ontology. See the section on "Ontology Changes"
+    below for  more information.
+* The first time Apache Tomcat starts up after the upgrade, it will 
+    initiate a process that modifies the uploads directory (images), to align
+    the uploaded files with the revised file storage scheme. See the section
+    on "File Storage Changes" below for more information.
+         
+-------------------------------------------------------------------------------
+
+II. The Upgrade Process
+
+
+1. Ensure that backups are created of the Tomcat webapps directory, the 
+    original source directory, the MySQL database, and the uploaded files 
+    directory (images).
+
+2. Download the new distribution file and unpack it into a new source directory.
+
+3. Create deploy.properties, using the same values as in your previous 
+    installation.  
+
+4. Apply any changes you have made to the new source directory.
+
+   Note: In many cases, simply copying the modified files from your original 
+      source directory will not work since the files on which they are based 
+      have changed. It will be necessary to inspect the new source files and 
+      add any changes to them at that time.
+
+  >>>>>> TBD -- Note on Google Analytics Tracking code to footer.jsp? (lines 68-73 in update-1.0.txt)      
+      
+   Note: This process assumes any changes made to the application were made in 
+      the source directory and deployed, and were not made directly within 
+      Apache Tomcat webapp.
+      
+5. If you had modified web.xml to configure the Pellet Reasoner (as described
+    in the installation instructions), repeat that modification.
+
+6. Stop "Apache Tomcat" and run ant deploy by typing: ant deploy
+
+7. If you have setup the Apache Tomcat Connector using mod_jk and modified your
+	tomcat/conf/server.xml file, you will need to add a line to your context
+	section specifying a "Manager" tag; see examples below.
+	
+	Context section before:
+	
+	<Context path=""
+		docBase="/usr/local/tomcat/webapps/vivo"
+		reloadable="true"
+		cookies="true" >
+		<Environment type="java.lang.String" override="false" 
+			name="path.configuration" 
+			value="deploy.properties"
+		/>
+	</Context>
+	
+	Context section after:
+	
+	<Context path=""
+		docBase="/usr/local/tomcat/webapps/vivo"
+		reloadable="true"
+		cookies="true" >
+        <Manager pathname="" />
+		<Environment type="java.lang.String" override="false" 
+			name="path.configuration" 
+			value="deploy.properties"
+		/>
+	</Context>
+	
+8. Start "Apache Tomcat" and login to VIVO.
+
+9. Rebuild the Lucene search index as described in step IX of
+the install process. This step will ensure that changes in the RDF
+data to align with the latest version of the core ontology
+will be reflected in the search index.
+
+-------------------------------------------------------------------------------
+
+III. Ontology Changes
+
+ >>>>>> TBD
+
+-------------------------------------------------------------------------------
+
+IV. File Storage Changes
+
+Changes to the File Storage system in VIVO result in new properties to describe
+the relationships involving files, and a new directory structure in which to 
+store the files.
+
+Uploaded files are stored in the VIVO upload directory, as defined in the
+deploy.properties file. Previously, images were stored in the "images" folder 
+of the upload directory. Now, all uploaded files will be stored in the 
+"file_storage_root" folder of the upload directory.
+
+Previously, image files were served from the images directory within the web 
+application, within Tomcat, and copied to the upload directory for backup 
+purposes. Now, image files are stored only in the upload directory, and served
+directly from there. The image directory within the web application is no 
+longer used.
+
+When Apache Tomcat starts up following the upgrade, it will initiate a process
+which makes the required changes:
+
+  Initializing the file storage system
+    Each file will now be assigned a unique ID, in addition to its filename.
+    Both the ID and filename are used to store the file within the system.
+    Uploading two images with identical filenames will not cause a conflict.
+
+  Pruning dead image references
+    Previous versions allowed manual editing of file paths, sometimes resulting
+    in erroneous information. Any image properties that refer to non-existent
+    files will be removed.
+    
+  Removing unreferenced images
+    Any uploaded image which is no longer referred to by an Individual will
+    be removed.
+    
+  Generating main images and/or thumbnails
+    Each image will be represented by both a main image file and a 
+    thumbnail image file. If either of these is missing for a particular 
+    individual, it will be created.  
+    
+  Converting image properties on Individuals
+    Image properties previously were simple data properties, referring to 
+    the filename and path. These are replaced by object properties, which
+    refer to the file by its unique ID.
+    
+  Translating images into the new directory structure
+    Each image file will be copied to its new location in the upload
+    directory.
+  
+  Cleaning the old image directory.
+    All image files are removed from their old locations in the upload 
+    directory.
+    
+The File Storage upgrade process will create these files in the Vivo upload
+directory:
+
+upgrade/upgradeLog.2010-00-00T00-00-00.txt
+    A log of the upgrade process. The actual filename includes a timestamp 
+    that tells when the upgrade executed. This file should be inspected 
+    for warnings or errors. The file should end with "File Storage update 
+    is complete." 
+    
+upgrade/translatedImages
+    Contains the images that were translated to the new file storage system.
+    
+upgrade/unreferencedImages
+    Contains the images which were in the "images" directory, but were no
+    longer referred to by any Individual. 
+    
+file_storage_root 
+    A directory where the uploaded images are stored. Within the root, the
+    path to the image is derived from its unique ID and its filename. 
+
+file_storage_namespaces.properties
+    Contains the URL prefix used when serving the image files.
+
+If, for any reason, the File Storage upgrade process is not successful,
+VIVO will not start. Attempts to open VIVO in the browser will result in a
+404 error. Tomcat's "localhost" log file will contain an exception listing
+with more information.
+
+Once you are satisfied that the File Storage upgrade process is successful,
+you may delete the "images" folder and the "upgrade" folder from the upload 
+directory. You may also delete the WEB-INF/images directory from within
+your Tomcat web application. 
