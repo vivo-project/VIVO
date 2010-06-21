@@ -1,6 +1,5 @@
-<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
-
-<#-- NOTICE: This is SAMPLE Google Analytics code. You must replace it with your institution's code. -->
+<#-- NOTICE: This is SAMPLE Google Analytics code. You must replace it with your institution's code. 
+Please see documentation at https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI. -->
 
 <#--
 <script type="text/javascript">  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E")); 

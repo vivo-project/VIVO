@@ -18,3 +18,5 @@ themes/vivo-basic/css/blueprint/ie.css
 
 # PROBLEM: This is from www.involutionstudios.com, not blueprint. What are the license restrictions? 
 themes/vivo-basic/css/blueprint/liquid.css
+
+themes/vivo-basic/templates/page/partials/googleAnalytics.ftl
