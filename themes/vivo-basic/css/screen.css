@@ -43,6 +43,18 @@ body {
   clear: both;
 }
 
+#research_instance {
+	background-color:red;
+	color:white;
+	font-size:1.25em;
+	font-weight:bold;
+	text-align:center;
+}
+
+#research_instance a {
+	color:white;
+}
+	
 /****************
 Global classes
 ****************/
