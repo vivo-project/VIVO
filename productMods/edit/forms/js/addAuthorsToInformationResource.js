@@ -61,6 +61,11 @@ var addAuthorForm = {
     	this.submit.click(function() {
     		addAuthorForm.prepareFieldValuesForSubmit(); 
     	});   	
+    	
+    	this.lastNameField.blur(function() {
+    		addAuthorForm.firstNameWrapper.show();
+    		addAuthorForm.middleNameWrapper.show();
+    	});
     },
 
     // This view shows the list of existing authors and hides the form.
