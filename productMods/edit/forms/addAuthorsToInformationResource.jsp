@@ -28,14 +28,14 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
 
-<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.CreateLabelFromNameFields"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
@@ -69,6 +69,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="foaf" value="http://xmlns.com/foaf/0.1/" />
+<c:set var="personClassUri" value="${foaf}Person" />
 
 <%-- Unlike other custom forms, this form does not allow edits of existing authors, so there are no
 SPARQL queries for existing values. --%>
@@ -125,6 +126,8 @@ SPARQL queries for existing values. --%>
     ?newPerson core:authorInAuthorship ?authorshipUri .               
 </v:jsonset>
 
+<v:jsonset var="personClassUriJson">${personClassUri}</v:jsonset>
+
 <c:set var="returnPathAfterSubmit" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
 
 <c:set var="editjson" scope="request">
@@ -169,7 +172,7 @@ SPARQL queries for existing values. --%>
       },   
       "firstName" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -191,7 +194,7 @@ SPARQL queries for existing values. --%>
       },
       "lastName" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -210,6 +213,17 @@ SPARQL queries for existing values. --%>
          "rangeDatatypeUri" : "${intDatatypeUriJson}",
          "rangeLang"        : "",         
          "assertions"       : ["${authorshipRankAssertion}"]
+      },  
+      "personUri" : {
+         "newResource"      : "false",
+         "validators"       : [ ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "${personClassUriJson}",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",         
+         "assertions"       : ["${n3ForExistingPerson}"]
       }
   }
 }
@@ -223,12 +237,8 @@ SPARQL queries for existing values. --%>
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
     }
-
-    // Doing this in Javascript instead.
-    // For now the field names in CreateLabelFromFieldNames.processEditSubmission() are
-    // hard-coded. If we want flexibility in naming them, we can pass in a map of
-    // the field names when creating the preprocessor. 
-    // editConfig.addEditSubmissionPreprocessor(new CreateLabelFromNameFields(editConfig));
+    
+    //editConfig.addValidator(new PublicationHasAuthorValidator());
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -295,23 +305,34 @@ SPARQL queries for existing values. --%>
     
 </ul>
 
+<%
+    if (authorships.size() == 0) {
+        %><p>This publication currently has no authors specified.</p><% 
+    }
+%>
+
 <div id="showAddForm">
     <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
 </div> 
 
-
 <form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+
+    <h3>Add an Author</h3>
     
     <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" size="30" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint}" size="20" />${initialHint}</p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
-
+    <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
+    
+    <div id="selectedAuthor">
+        <%-- RY maybe make this a label and input field. See what looks best. --%>
+        <p class="inline"><label>Selected author: </label><span id="selectedAuthorName"></span></p>
+        <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
+    </div>
+    
     <input type="hidden" name="rank" value="${rank}" />
     <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person" />" />
-    <!-- Field values populated by JavaScript -->     
-    <input type="hidden" id="label" name="label" value="" />
-    <input type="hidden" id="personUri" name="personUri" value="" />  
-    
+
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>

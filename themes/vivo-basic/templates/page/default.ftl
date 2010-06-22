@@ -26,11 +26,12 @@
                 <#-- We don't do title here because some pages don't get a title, or it may not be the same as the <title> text.
                 <h2>${title}</h2> -->               
                 ${body} 
+                <#-- <@dumpDataModel /> -->
             </div> <!-- content -->
         </div> <!-- contentwrap -->
     
         <#include "partials/footer.ftl">
-                                      
+                                    
     </div> <!-- wrap -->  
 
     <#include "partials/scripts.ftl"> 

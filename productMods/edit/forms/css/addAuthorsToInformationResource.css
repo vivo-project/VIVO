@@ -16,7 +16,8 @@
 
 /* Hide elements not used in non-JS version of form */
 #showAddForm,
-a.remove {
+a.remove,
+#selectedAuthor {
     display: none;
 }
 
@@ -26,6 +27,10 @@ a.remove {
 
 #showAddForm a.cancel {
     margin-left: 2em;
+}
+
+form h3 {
+    margin-bottom: .5em;
 }
 
 form a:link.cancel, form a:visited.cancel,
@@ -66,4 +71,8 @@ form a:hover.cancel,
 
 #content form p.inline span.hint {
     margin-left: .5em;
+}
+
+#selectedAuthor {
+    clear: left;
 }

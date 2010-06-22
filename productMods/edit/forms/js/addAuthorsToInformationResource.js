@@ -5,9 +5,8 @@ var addAuthorForm = {
     onLoad: function() {
 
 		this.mixIn();
-        this.initObjects();     
-        this.adjustForJs();             
-        this.initForm();       
+        this.initObjects();                 
+        this.initPage();       
     },
 
     mixIn: function() {
@@ -15,12 +14,12 @@ var addAuthorForm = {
     	vitro.utils.borrowMethods(vitro.customFormUtils, this);
     },
     
-    // On page load, create references within the customForm scope to DOM elements.
+    // On page load, create references within the addAuthorForm scope to DOM elements.
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function() {
     	
     	this.form = $('#addAuthorForm');
-    	this.showFormDiv = $('#showAddForm');
+    	this.showFormButtonWrapper = $('#showAddForm');
     	this.showFormButton = $('#showAddFormButton');
     	this.removeLinks = $('a.remove');
     	this.submit = this.form.find(':submit');
@@ -32,42 +31,103 @@ var addAuthorForm = {
         this.personUriField = $('#personUri');
         this.firstNameWrapper = this.firstNameField.parent();
         this.middleNameWrapper = this.middleNameField.parent();
-    },
+        this.lastNameWrapper = this.lastNameField.parent();
+        this.selectedAuthor = $('#selectedAuthor');
+        this.selectedAuthorName = $('#selectedAuthorName');
 
-    // On page load, make changes to the non-Javascript version for the Javascript version.
-    // These are features that will NOT CHANGE throughout the workflow of the Javascript version.
-    adjustForJs: function() {
-    	
-    	// Show elements that are hidden by css on load since not used in non-JS version
-    	this.showFormDiv.show();
-    	this.removeLinks.show();
-    	
-    	this.form.hide();
     },
     
-    initForm: function() {
+    // Initial page setup. Called only at page load.
+    initPage: function() {
+
+    	// Show elements hidden by CSS for the non-JavaScript-enabled version.
+    	// NB The non-JavaScript version of this form is currently not functional.
+    	this.removeLinks.show();
     	
-    	this.firstNameWrapper.hide();
-    	this.middleNameWrapper.hide();
+    	this.bindEventListeners();
+    	
+    	this.setUpAutocomplete();
+    	
+    	this.initAuthorListOnlyView();
+    },
+    
+    bindEventListeners: function() {
     	
     	this.showFormButton.click(function() {
-    		addAuthorForm.showFormDiv.hide();
-    		addAuthorForm.form.show();
+    		addAuthorForm.initFormView();
     		return false;
     	});
     	
     	this.submit.click(function() {
-    		addAuthorForm.insertLabel(); // might be insertLabelOrPersonUri
-    	});
+    		addAuthorForm.prepareFieldValuesForSubmit(); 
+    	});   	
+    },
+
+    // This view shows the list of existing authors and hides the form.
+    // There is a button to show the form.
+    initAuthorListOnlyView: function() {
+    	this.hideForm();
+    	this.showFormButtonWrapper.show();
+    },
+    
+    // Initial view of add author form
+    initFormView: function() {
+
+    	// Hide the button that shows the form
+		this.showFormButtonWrapper.hide(); 
+
+		// Hide form fields that shouldn't display on first view.
+		// Includes clearing their contents.
+		this.hideFields(this.firstNameWrapper);
+		this.hideFields(this.middleNameWrapper);
+    	this.hideSelectedAuthor();
     	
-    	this.cancel.click(function() {
-    		addAuthorForm.hideFields(addAuthorForm.form);
-    		addAuthorForm.showFormDiv.show();
+    	this.cancel.unbind('click');
+    	this.cancel.bind('click', function() {
+    		addAuthorForm.initAuthorListOnlyView();
     		return false;
     	});
-
-    	this.setUpAutocomplete();
     	
+    	// Reset the last name field. It had been hidden if we selected an author from
+    	// the autocomplete field.
+    	this.lastNameWrapper.show();
+    	// This shouldn't be needed, because calling this.hideFormFields(this.lastNameWrapper)
+    	// from showSelectedAuthor should do it. However, it doesn't work from there,
+    	// or in the cancel action, or if referring to this.lastNameField. None of those work,
+    	// however.
+    	$('#lastName').val('');
+    	
+		// Show the form
+		this.form.show();
+
+		return false;
+    },
+    
+    // Action taken after selecting an author from the autocomplete list
+    showSelectedAuthor: function(ui) {
+
+		this.personUriField.val(ui.item.uri);
+		this.selectedAuthor.show();
+
+		// Transfer the name from the autocomplete field to the selected author
+		// name display, and hide the last name field.
+		this.selectedAuthorName.html(this.lastNameField.val());
+		// NB For some reason this doesn't delete the value from the last name
+		// field when the form is redisplayed. Need to do in initFormView.
+		this.hideFields(this.lastNameWrapper);
+		
+		// Cancel restores form to initial state
+		this.cancel.unbind('click');
+		this.cancel.bind('click', function() {
+			addAuthorForm.initFormView();
+			return false;
+		});
+    },
+    
+    hideSelectedAuthor: function() {
+    	this.selectedAuthor.hide();
+    	this.selectedAuthorName.html('');
+    	this.personUriField.val('');
     },
     
     setUpAutocomplete: function() {
@@ -84,45 +144,53 @@ var addAuthorForm = {
     			
     			$.ajax({
     				url: url,
-    				dataType: "json",
+    				dataType: 'json',
     				data: request,
     				success: function(data) {
     					cache[request.term] = data;
     					response(data);
     				}
-    			    // on select: fill in person uri
+
     			});
-    		}
+    		},
+		    select: function(event, ui) {
+    			addAuthorForm.showSelectedAuthor(ui);		
+			}
     	});
 
     },
     
-    insertLabel: function() {
+    prepareFieldValuesForSubmit: function() {
     	var firstName,
     	    middleName,
     	    lastName,
     	    name;
     	
-    	if (!this.firstNameField.is(':hidden')) {
+    	// If selecting an existing person, don't submit name fields
+    	if (this.personUriField.val() != '') {
+    		this.firstNameField.attr('disabled', 'disabled');
+    		this.middleNameField.attr('disabled', 'disabled');
+    		this.lastNameField.attr('disabled', 'disabled');
+    	} 
+    	else {
     		firstName = this.firstNameField.val();
     		middleName = this.middleNameField.val();
     		lastName = this.lastNameField.val();
     		
     		name = lastName;
     		if (firstName) {
-    			name += ", " + firstName;
+    			name += ', ' + firstName;
     		}
     		if (middleName) {
-    			name += " " + middleName;
+    			name += ' ' + middleName;
     		}
     		
     		this.labelField.val(name);
     	}
-    	else {
 
-    	}
     },
     
+    // RY To be implemented later.
     toggleRemoveLink: function() {
     	// when clicking remove: remove the author, and change link text to "undo"
     	// when clicking undo: add the author back, and change link text to "remove"

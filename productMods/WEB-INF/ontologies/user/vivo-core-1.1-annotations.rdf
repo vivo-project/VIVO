@@ -3,7 +3,7 @@
     xmlns:j.0="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" > 
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#pmcid">
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <j.0:prohibitedFrinformationResourceHasomUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#nihmsid">
     <j.0:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
@@ -1796,6 +1796,7 @@
     <j.0:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.0:offerCreateNewOptionAnnot>
     <j.0:objectIndividualSortProperty rdf:resource="http://vivoweb.org/ontology/core#authorRank"/>
     <j.0:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <j.0:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">addAuthorsToInformationResource.jsp</j.0:customEntryFormAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/isbn10">
     <j.0:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</j.0:displayLimitAnnot>
