@@ -11,6 +11,9 @@
 #
 # Known exceptions listed here produce no warnings.
 #
+# Any files added to this list should include a comment, so we know where they
+# came from, or why they don't require a license statement.
+#
 
 # PROBLEM: It appears that these files require a LICENSE file to accompany them.
 themes/vivo-basic/css/blueprint/grid.css
@@ -19,4 +22,5 @@ themes/vivo-basic/css/blueprint/ie.css
 # PROBLEM: This is from www.involutionstudios.com, not blueprint. What are the license restrictions? 
 themes/vivo-basic/css/blueprint/liquid.css
 
+# Sample code from Google.
 themes/vivo-basic/templates/page/partials/googleAnalytics.ftl
