@@ -9,9 +9,14 @@
     margin-bottom: .75em;
 }
 
-#authors a.authorName {
+#authors a.existingAuthor {
     display: inline-block;
     width: 15em;
+}
+
+/* These are only here for JavaScript to pick up. Don't display!! */
+#authors span.existingAuthorUri {
+    display: none;
 }
 
 /* Hide elements not used in non-JS version of form */

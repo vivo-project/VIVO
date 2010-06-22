@@ -238,7 +238,7 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
-    //editConfig.addValidator(new PublicationHasAuthorValidator());
+    editConfig.addValidator(new PublicationHasAuthorValidator());
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -288,11 +288,14 @@ SPARQL queries for existing values. --%>
             if ( author != null ) {
                 request.setAttribute("author", author);
                 %> 
-                <%-- RY Should use author short view here instead? --%>
                 <c:url var="authorHref" value="/individual">
                     <c:param name="uri" value="${author.URI}"/>
-                </c:url> 
-                <li><a href="${authorHref}" class="authorName">${author.name}</a><a href="" class="remove">Remove</a></li> 
+                </c:url>                
+                <li>
+                    <span class="existingAuthorUri">${author.URI}</span>
+                    <a href="${authorHref}" class="existingAuthor">${author.name}</a>
+                    <a href="" class="remove">Remove</a>
+                </li> 
                 
                 <% 
             }
@@ -340,28 +343,3 @@ SPARQL queries for existing values. --%>
 
 <jsp:include page="${postForm}"/>
 
-<%!
-// We'll just rely on rdfs:label for now. In future, the label will be created by the app from
-// last name, first name, and middle name fields, so we don't have to worry about inconsistent
-// ordering.
-/*
-public String getAuthorName(Individual author) {
-    String name;
-    
-    String lastName = author.getDataValue("http://xmlns.com/foaf/0.1/lastName");
-    String firstName = author.getDataValue("http://xmlns.com/foaf/0.1/firstName");
-
-    if (lastName != null && firstName != null) {
-        name = lastName + ", " + firstName; 
-        String middleName = author.getDataValue("http://vivoweb.org/ontology/core#middleName");
-        if (middleName != null) {
-            name += " " + middleName;
-        }
-    }
-    else {
-        name = author.getName();
-    }
-    return name;
-}
-*/
-%>

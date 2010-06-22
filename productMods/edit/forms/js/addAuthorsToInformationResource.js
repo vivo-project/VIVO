@@ -134,30 +134,51 @@ var addAuthorForm = {
 
     	var cache = {};
     	var url = $('#acUrl').val();
+    	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();  
+    	console.log(existingAuthorUris);
+    	jQuery.each(existingAuthorUris, function(index, element) {
+    		url += '&filter=' + element;
+    	});
     	$('#lastName').autocomplete({
     		minLength: 2,
-    		source: function(request, response) {
-    			if (request.term in cache) {
-    				response(cache[request.term]);
-    				return;
-    			}
-    			
-    			$.ajax({
-    				url: url,
-    				dataType: 'json',
-    				data: request,
-    				success: function(data) {
-    					cache[request.term] = data;
-    					response(data);
-    				}
-
-    			});
-    		},
+    		source: url,
+// RY For now, not using cache because there are complex interactions between filtering and caching.
+// We want to filter out existingAuthors from autocomplete results, and this seems easiest to do
+// server-side. But if an author gets removed, we need to put them back in the results. If results
+// are cached, the cache needs to be cleared on a remove. Not sure if we have access to it there.
+// Lots of complexity involved, so for now let's try without the cache.
+//    		source: function(request, response) {
+//    			if (request.term in cache) {
+//    				//console.log("found term in cache");
+//    				response(cache[request.term]);
+//    				return;
+//    			}
+//    			
+//    			$.ajax({
+//    				url: url,
+//    				dataType: 'json',
+//    				data: request,
+//    				success: function(data) {
+//    					cache[request.term] = data;
+//    					//console.log("not getting term from cache");
+//    					response(data);
+//    				}
+//
+//    			});
+//    		},
 		    select: function(event, ui) {
     			addAuthorForm.showSelectedAuthor(ui);		
 			}
     	});
 
+    },
+    
+    getExistingAuthorUris: function() {
+    	var authorUris = $('span.existingAuthorUri'); 
+    	return authorUris.map(function() {
+    		return $(this).html();
+    	});
+    	
     },
     
     prepareFieldValuesForSubmit: function() {
