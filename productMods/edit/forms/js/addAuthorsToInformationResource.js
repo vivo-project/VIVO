@@ -48,7 +48,13 @@ var addAuthorForm = {
     	
     	this.setUpAutocomplete();
     	
-    	this.initAuthorListOnlyView();
+    	// On this form, validation errors entail that a new person was being entered.
+    	if (this.findValidationErrors()) {
+    		this.initFormView();
+    		this.showFieldsForNewPerson();
+    	} else {
+    		this.initAuthorListOnlyView();
+    	}
     },
     
     bindEventListeners: function() {
@@ -59,13 +65,35 @@ var addAuthorForm = {
     	});
     	
     	this.submit.click(function() {
+    		// NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
+    		// in prepareFieldValuesForSubmit. If we do
+    		// this.submit.click(this.prepareFieldValuesForSubmit); then
+    		// this != addAuthorForm in prepareFieldValuesForSubmit.
     		addAuthorForm.prepareFieldValuesForSubmit(); 
     	});   	
-    	
+
     	this.lastNameField.blur(function() {
-    		addAuthorForm.firstNameWrapper.show();
-    		addAuthorForm.middleNameWrapper.show();
+    		console.log("in blur")
+    		addAuthorForm.onLastNameChange();
     	});
+    	// Prevent form submission when hitting enter in last name field
+    	this.lastNameField.keydown(function(event) {
+    		if (event.keyCode === 13) {
+    			console.log('in keydown')
+    		    addAuthorForm.onLastNameChange();
+    			return false;
+    		}
+    	});
+    },
+    
+    onLastNameChange: function() {
+    	this.showFieldsForNewPerson();
+    	this.firstNameField.focus();
+    },
+    
+    showFieldsForNewPerson: function() {
+    	this.firstNameWrapper.show();
+    	this.middleNameWrapper.show();
     },
 
     // This view shows the list of existing authors and hides the form.
@@ -139,11 +167,12 @@ var addAuthorForm = {
 
     	var cache = {};
     	var url = $('#acUrl').val();
-    	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();  
-    	console.log(existingAuthorUris);
+    	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();
+    	
     	jQuery.each(existingAuthorUris, function(index, element) {
     		url += '&filter=' + element;
     	});
+    	
     	$('#lastName').autocomplete({
     		minLength: 2,
     		source: url,

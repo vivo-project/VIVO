@@ -273,7 +273,7 @@ SPARQL queries for existing values. --%>
 
 <c:set var="title" value="<em>${infoResourceName}</em>: Authors" />
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-<c:set var="initialHint" value="<span class='hint'>initial okay</span>" />
+<c:set var="initialHint" value="<span class='hint'>(initial okay)</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -323,8 +323,8 @@ SPARQL queries for existing values. --%>
     <h3>Add an Author</h3>
     
     <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" size="30" /></p>
-    <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint}" size="20" />${initialHint}</p>
-    <p class="inline"><v:input type="text" id="middleName" label="Middle name" size="20" />${initialHint}</p>
+    <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint} ${initialHint}" size="20" /></p>
+    <p class="inline"><v:input type="text" id="middleName" label="Middle name ${initialHint}" size="20" /></p>
     <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
     
     <div id="selectedAuthor">

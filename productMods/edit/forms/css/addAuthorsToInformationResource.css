@@ -65,7 +65,7 @@ form a:hover.cancel,
 }
 
 #content form p.inline label {
-    width: 10em;
+    width: 13em;
     margin-top: 0;
 
 }
@@ -80,4 +80,8 @@ form a:hover.cancel,
 
 #selectedAuthor {
     clear: left;
+}
+
+#content form p.submit {
+    margin-top: 3em;
 }
