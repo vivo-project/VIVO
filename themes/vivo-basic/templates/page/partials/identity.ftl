@@ -7,7 +7,7 @@
     <h1><a title="Home" href="${urls.home}">${siteName}</a></h1>
     
     <#-- RY We will need this in non-NIHVIVO versions
-    <#if siteTagline>
+    <#if siteTagline.has_content>
         <em>${siteTagline}</em>
     </#if>
     -->
