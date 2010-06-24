@@ -168,7 +168,7 @@ var addAuthorForm = {
     	var cache = {};
     	var url = $('#acUrl').val();
     	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();
-    	
+
     	jQuery.each(existingAuthorUris, function(index, element) {
     		url += '&filter=' + element;
     	});
@@ -208,9 +208,10 @@ var addAuthorForm = {
     },
     
     getExistingAuthorUris: function() {
-    	var authorUris = $('span.existingAuthorUri'); 
-    	return authorUris.map(function() {
-    		return $(this).html();
+
+    	var existingAuthors = $('#authors .existingAuthor'); 
+    	return existingAuthors.map(function() {
+    		return $(this).attr('id');
     	});
     	
     },

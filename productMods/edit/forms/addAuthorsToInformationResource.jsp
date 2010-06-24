@@ -24,6 +24,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.Collections" %>
+<%@ page import="java.net.URLEncoder" %>
 
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
@@ -287,13 +288,15 @@ SPARQL queries for existing values. --%>
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
                 request.setAttribute("author", author);
+                // Doesn't seem to need urlencoding to add as id attribute value
+                //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
+                request.setAttribute("authorUri", author.getURI());
                 %> 
                 <c:url var="authorHref" value="/individual">
-                    <c:param name="uri" value="${author.URI}"/>
+                    <c:param name="uri" value="${authorUri}"/>
                 </c:url>                
                 <li>
-                    <span class="existingAuthorUri">${author.URI}</span>
-                    <a href="${authorHref}" class="existingAuthor">${author.name}</a>
+                    <a id="${authorUri}" href="${authorHref}" class="existingAuthor">${author.name}</a>
                     <a href="" class="remove">Remove</a>
                 </li> 
                 
@@ -302,7 +305,7 @@ SPARQL queries for existing values. --%>
             
         }
         // A new author will be ranked last when added.
-        // This doesn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
+        // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
         vreq.setAttribute("rank", rank + 1);
     %>
     
