@@ -7,7 +7,7 @@
         <#if showFlag1SearchField??>
             <select id="search-form-modifier" name="flag1" class="form-item" >
                 <option value="nofiltering" selected="selected">entire database (${loginName})</option>
-                <option value="${portalId}">${tagline!}</option>
+                <option value="${portalId}">${siteTagline!}</option>
             </select>
         <#else>
             <input type="hidden" name="flag1" value="${portalId}" />
