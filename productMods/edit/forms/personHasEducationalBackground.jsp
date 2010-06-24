@@ -3,29 +3,29 @@
 <%-- Custom form for adding an educational attainment to an individual
 
 Classes: 
-core:EducationalAttainment - primary new individual being created
+core:EducationalTraining - primary new individual being created
 foaf:Person - existing individual
 foaf:Organization - new or existing individual
 core:AcademicDegree - existing individual
 core:DateTimeValue
 core:DateTimeValuePrecision
 
-Data properties of EducationalAttainment:
+Data properties of EducationalTraining:
 core:majorField
 core:departmentOrSchool
 core:supplementalInformation
 
 Object properties (domain : range)
 
-core:educationalBackground (Person : EducationalAttainment) - inverse of educationalBackgroundOf
-core:educationalBackgroundOf (EducationalAttainment : Person) - inverse of educationalBackground
+core:educationalBackground (Person : EducationalTraining) - inverse of educationalBackgroundOf
+core:educationalBackgroundOf (EducationalTraining : Person) - inverse of educationalBackground
 
-core:degreeTypeAwarded (EducationalAttainment : AcademicDegree) - inverse of awardedTo
-core:awardedTo (AcademicDegree : EducationalAttainment) - inverse of degreeTypeAwarded
+core:degreeTypeAwarded (EducationalTraining : AcademicDegree) - inverse of awardedTo
+core:awardedTo (AcademicDegree : EducationalTraining) - inverse of degreeTypeAwarded
 
-core:organizationGrantingDegree (EducationalAttainment : Organization) - no inverse
+core:organizationGrantingDegree (EducationalTraining : Organization) - no inverse
 
-core:dateTimeValue (EducationalAttainment : DateTimeValue)
+core:dateTimeValue (EducationalTraining : DateTimeValue)
 core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 --%>
 
@@ -73,7 +73,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
-<c:set var="edAttainmentClass" value="${vivoCore}EducationalAttainment" />
+<c:set var="edAttainmentClass" value="${vivoCore}EducationalTraining" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 <c:set var="degreeClass" value="${vivoCore}AcademicDegree" />
 
@@ -85,14 +85,14 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="majorFieldPred" value="${vivoCore}majorField" />
 <v:jsonset var="majorFieldExisting" >  
     SELECT ?majorFieldExisting WHERE {
-          ?edAttainmentUri <${majorFieldPred}> ?majorFieldExisting }
+          ?edTrainingUri <${majorFieldPred}> ?majorFieldExisting }
 </v:jsonset>
 
 <%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="majorFieldAssertion" >      
-    ?edAttainmentUri <${majorFieldPred}> ?majorField .
+    ?edTrainingUri <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
 <%-- 
@@ -103,14 +103,14 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
 <v:jsonset var="yearExisting" >  
     SELECT ?existingYear WHERE {
-          ?edAttainmentUri <${hasDateTimeValue}> ?existingYear }
+          ?edTrainingUri <${hasDateTimeValue}> ?existingYear }
 </v:jsonset>
 <v:jsonset var="yearAssertion" > 
     @prefix core: <${vivoCore}> .   
     ?dateTime a core:DateTimeValue ;
               core:dateTime ?year ;
               core:dateTimeValuePrecision core:YearPrecision .
-    ?edAttainmentUri core:dateTimeValue ?dateTime .
+    ?edTrainingUri core:dateTimeValue ?dateTime .
 </v:jsonset>
 --%>
 <%--
@@ -126,19 +126,19 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
 <v:jsonset var="deptExisting" >  
     SELECT ?existingDept WHERE {
-          ?edAttainmentUri <${deptPred}> ?existingDept }
+          ?edTrainingUri <${deptPred}> ?existingDept }
 </v:jsonset>
 <v:jsonset var="deptAssertion" >      
-    ?edAttainmentUri <${deptPred}> ?dept .
+    ?edTrainingUri <${deptPred}> ?dept .
 </v:jsonset>
 
 <c:set var="infoPred" value="${vivoCore}supplementalInformation" />
 <v:jsonset var="infoExisting" >  
     SELECT ?existingInfo WHERE {
-          ?edAttainmentUri <${infoPred}> ?existingInfo }
+          ?edTrainingUri <${infoPred}> ?existingInfo }
 </v:jsonset>
 <v:jsonset var="infoAssertion" >      
-    ?edAttainmentUri <${infoPred}> ?info .
+    ?edTrainingUri <${infoPred}> ?info .
 </v:jsonset>
 
 <%-- Object properties --%>
@@ -149,21 +149,21 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="degreeFor" value="${vivoCore}awardedTo" />
 <v:jsonset var="degreeExisting" >      
     SELECT ?existingDegreeUri WHERE {
-        ?edAttainmentUri <${hasDegree}> ?existingDegreeUri }
+        ?edTrainingUri <${hasDegree}> ?existingDegreeUri }
 </v:jsonset>
 <v:jsonset var="degreeAssertion" >      
-    ?edAttainmentUri <${hasDegree}> ?degreeUri .
-    ?degreeUri <${degreeFor}> ?edAttainmentUri .
+    ?edTrainingUri <${hasDegree}> ?degreeUri .
+    ?degreeUri <${degreeFor}> ?edTrainingUri .
 </v:jsonset>
 
 <c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />
 <%-- This property has no inverse --%>
 <v:jsonset var="organizationUriExisting" >      
     SELECT ?existingOrgUri WHERE {
-        ?edAttainmentUri <${orgGrantingDegree}> ?existingOrgUri }
+        ?edTrainingUri <${orgGrantingDegree}> ?existingOrgUri }
 </v:jsonset>
 <v:jsonset var="organizationUriAssertion" >      
-    ?edAttainmentUri <${orgGrantingDegree}> ?organizationUri .
+    ?edTrainingUri <${orgGrantingDegree}> ?organizationUri .
 </v:jsonset>
 
 <v:jsonset var="newOrgNameAssertion">
@@ -178,10 +178,10 @@ the org type still gets asserted. --%>
 <v:jsonset var="n3ForStmtToPerson">       
     @prefix core: <${vivoCore}> .     
 
-    ?person core:educationalBackground  ?edAttainmentUri .
+    ?person core:educationalBackground  ?edTrainingUri .
     
-    ?edAttainmentUri core:educationalBackgroundOf ?person ;
-                     a core:EducationalAttainment ,
+    ?edTrainingUri core:educationalBackgroundOf ?person ;
+                     a core:EducationalTraining ,
                        <${flagUri}> .
 </v:jsonset>
 
@@ -190,7 +190,7 @@ the org type still gets asserted. --%>
             a ?newOrgType ,
               <${flagUri}> .
             
-    ?edAttainmentUri <${orgGrantingDegree}> ?newOrg .
+    ?edTrainingUri <${orgGrantingDegree}> ?newOrg .
 </v:jsonset>
 
 <v:jsonset var="edAttainmentClassUriJson">${edAttainmentClass}</v:jsonset>
@@ -205,7 +205,7 @@ the org type still gets asserted. --%>
 
     "subject"   : ["person",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
-    "object"    : ["edAttainmentUri", "${objectUriJson}", "URI" ],
+    "object"    : ["edTrainingUri", "${objectUriJson}", "URI" ],
     
     "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}", "${yearAssertion}" ],
     
@@ -213,7 +213,7 @@ the org type still gets asserted. --%>
                         "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
                         "${deptAssertion}", "${infoAssertion}" ],
                         
-    "newResources"  : { "edAttainmentUri" : "${defaultNamespace}",
+    "newResources"  : { "edTrainingUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
 
     "urisInScope"    : { },
