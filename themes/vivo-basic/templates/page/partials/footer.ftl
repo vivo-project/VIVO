@@ -4,7 +4,7 @@
 
 <div id="footer">
 
-    <#if bannerImageUrl??>
+    <#if urls.bannerImage??>
         <img class="footerLogo" src="${urls.bannerImage}" alt="${siteTagline!}" />
     </#if>
     
