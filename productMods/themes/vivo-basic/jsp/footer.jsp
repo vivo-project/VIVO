@@ -8,7 +8,7 @@
     // since it's the first jsp we hit.
     String footer = (String) request.getAttribute("ftl_footer");
     if (footer == null) {
-        FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request, response);
+        FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request);
     } 
 %>
 

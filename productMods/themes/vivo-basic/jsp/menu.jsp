@@ -9,7 +9,7 @@
     // since it's the first jsp we hit.
     String menu = (String) request.getAttribute("ftl_menu");
     if (menu == null) {
-        FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request, response);
+        FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request);
     } 
 %>
 

@@ -4,7 +4,7 @@
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreeMarkerHttpServlet" %>
 <% 
-FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request, response);
+FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request);
 %>
 
 ${ftl_identity}
