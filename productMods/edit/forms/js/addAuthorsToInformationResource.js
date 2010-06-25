@@ -148,6 +148,8 @@ var addAuthorForm = {
 		// NB For some reason this doesn't delete the value from the last name
 		// field when the form is redisplayed. Need to do in initFormView.
 		this.hideFields(this.lastNameWrapper);
+		this.hideFields(this.firstNameWrapper);
+		this.hideFields(this.middleNameWrapper);
 		
 		// Cancel restores form to initial state
 		this.cancel.unbind('click');
@@ -170,7 +172,7 @@ var addAuthorForm = {
     	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();
 
     	jQuery.each(existingAuthorUris, function(index, element) {
-    		url += '&filter=' + element;
+    		url += '&excludeUri=' + element;
     	});
     	
     	$('#lastName').autocomplete({
