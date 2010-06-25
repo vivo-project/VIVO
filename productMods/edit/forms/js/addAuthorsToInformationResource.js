@@ -48,10 +48,8 @@ var addAuthorForm = {
     	
     	this.setUpAutocomplete();
     	
-    	// On this form, validation errors entail that a new person was being entered.
     	if (this.findValidationErrors()) {
-    		this.initFormView();
-    		this.showFieldsForNewPerson();
+    		this.initFormAfterInvalidSubmission();
     	} else {
     		this.initAuthorListOnlyView();
     	}
@@ -73,7 +71,6 @@ var addAuthorForm = {
     	});   	
 
     	this.lastNameField.blur(function() {
-    		console.log("in blur")
     		addAuthorForm.onLastNameChange();
     	});
     	// Prevent form submission when hitting enter in last name field
@@ -103,19 +100,47 @@ var addAuthorForm = {
     	this.showFormButtonWrapper.show();
     },
     
-    // Initial view of add author form
-    initFormView: function() {
+    
+    // View of form after returning from an invalid submission. On this form,
+    // validation errors entail that we were entering a new person, so we show
+    // all the fields straightaway.
+    initFormAfterInvalidSubmission: function() {
+    	this.initForm();
+ 		this.firstNameWrapper.show();
+ 		this.middleNameWrapper.show();
+    },
 
+    // Initial view of add author form. We get here by clicking the show form button,
+    // or by cancelling out of an autocomplete selection.
+    initFormView: function() {
+    	
+    	this.initForm();
+    	
+		// Hide form fields that shouldn't display on first view.
+		// Includes clearing their contents.
+		this.hideFields(this.firstNameWrapper); 
+		this.hideFields(this.middleNameWrapper);  
+
+    	// This shouldn't be needed, because calling this.hideFormFields(this.lastNameWrapper)
+    	// from showSelectedAuthor should do it. However, it doesn't work from there,
+    	// or in the cancel action, or if referring to this.lastNameField. None of those work,
+    	// however.
+    	$('#lastName').val(''); 
+    	
+    	return false; 
+    	
+    },
+    
+    // Form initialization common to both a 'clean' form view and when
+    // returning from an invalid submission.
+    initForm: function() {
+    	
     	// Hide the button that shows the form
 		this.showFormButtonWrapper.hide(); 
 
-		// Hide form fields that shouldn't display on first view.
-		// Includes clearing their contents.
-		this.hideFields(this.firstNameWrapper);
-		this.hideFields(this.middleNameWrapper);
     	this.hideSelectedAuthor();
-    	
-    	this.cancel.unbind('click');
+
+    	this.cancel.unbind('click'); 
     	this.cancel.bind('click', function() {
     		addAuthorForm.initAuthorListOnlyView();
     		return false;
@@ -123,17 +148,10 @@ var addAuthorForm = {
     	
     	// Reset the last name field. It had been hidden if we selected an author from
     	// the autocomplete field.
-    	this.lastNameWrapper.show();
-    	// This shouldn't be needed, because calling this.hideFormFields(this.lastNameWrapper)
-    	// from showSelectedAuthor should do it. However, it doesn't work from there,
-    	// or in the cancel action, or if referring to this.lastNameField. None of those work,
-    	// however.
-    	$('#lastName').val('');
-    	
+    	this.lastNameWrapper.show(); 
+   	
 		// Show the form
-		this.form.show();
-
-		return false;
+		this.form.show(); 
     },
     
     // Action taken after selecting an author from the autocomplete list
@@ -142,12 +160,14 @@ var addAuthorForm = {
 		this.personUriField.val(ui.item.uri);
 		this.selectedAuthor.show();
 
-		// Transfer the name from the autocomplete field to the selected author
+		// Transfer the name from the autocomplete to the selected author
 		// name display, and hide the last name field.
-		this.selectedAuthorName.html(this.lastNameField.val());
+		this.selectedAuthorName.html(ui.item.label);
 		// NB For some reason this doesn't delete the value from the last name
-		// field when the form is redisplayed. Need to do in initFormView.
+		// field when the form is redisplayed. Thus it's done explicitly in initFormView.
 		this.hideFields(this.lastNameWrapper);
+		// This shouldn't be needed, because they are already hidden, but for some reason on select 
+		// these fields get displayed, even before entering the select event listener.
 		this.hideFields(this.firstNameWrapper);
 		this.hideFields(this.middleNameWrapper);
 		
@@ -260,20 +280,3 @@ $(document).ready(function() {
     addAuthorForm.onLoad();
 });
 
-/* "value" : uri
- * label: gets displayed in form field = rdfs:label
- * 
- * on select: put the uri into the person uri form field
- */
-/*[ { "id": "Somateria mollissima", "label": "Common Eider", "value": "Common Eider" }, 
-{ "id": "Crex crex", "label": "Corncrake", "value": "Corncrake" }, 
-{ "id": "Grus grus", "label": "Common Crane", "value": "Common Crane" }, 
-{ "id": "Charadrius hiaticula", "label": "Common Ringed Plover", "value": "Common Ringed Plover" }, 
-{ "id": "Gallinago gallinago", "label": "Common Snipe", "value": "Common Snipe" },
-{ "id": "Tringa totanus", "label": "Common Redshank", "value": "Common Redshank" }, 
-{ "id": "Sterna hirundo", "label": "Common Tern", "value": "Common Tern" }, 
-{ "id": "Alcedo atthis", "label": "Common Kingfisher", "value": "Common Kingfisher" }, 
-{ "id": "Corvus corax", "label": "Common Raven", "value": "Common Raven" }, 
-{ "id": "Emberiza calandra", "label": "Corn Bunting", "value": "Corn Bunting" }, 
-{ "id": "Phalacrocorax carbo", "label": "Great Cormorant", "value": "Great Cormorant" }, 
-{ "id": "Tadorna tadorna", "label": "Common Shelduck", "value": "Common Shelduck" } ]*/
