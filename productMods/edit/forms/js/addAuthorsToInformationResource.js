@@ -73,6 +73,15 @@ var addAuthorForm = {
     	this.lastNameField.blur(function() {
     		addAuthorForm.onLastNameChange();
     	});
+    	
+    	// This is somewhat questionable. If we return to the last name
+    	// field to look again for an existing person, we'd want to hide those
+    	// fields. If we return to it to correct spelling of last name, say,
+    	// we wouldn't. 
+    	this.lastNameField.focus(function() {
+    		addAuthorForm.hideFieldsForNewPerson();
+    	});
+    	
     	// Prevent form submission when hitting enter in last name field
     	this.lastNameField.keydown(function(event) {
     		if (event.keyCode === 13) {
@@ -86,13 +95,24 @@ var addAuthorForm = {
     onLastNameChange: function() {
     	this.showFieldsForNewPerson();
     	this.firstNameField.focus();
+    	// This is persisting and showing old results in some cases unless we
+    	// explicitly wipe it out.
+    	$('ul.ui-autocomplete li').remove();
+    	$('ul.ui-autocomplete').hide();
     },
     
     showFieldsForNewPerson: function() {
     	this.firstNameWrapper.show();
     	this.middleNameWrapper.show();
     },
-
+    
+    hideFieldsForNewPerson: function() {   
+    	// Hide form fields that shouldn't display on first view.
+    	// Includes clearing their contents.
+    	this.hideFields(this.firstNameWrapper); 
+    	this.hideFields(this.middleNameWrapper); 
+    },
+    
     // This view shows the list of existing authors and hides the form.
     // There is a button to show the form.
     initAuthorListOnlyView: function() {
@@ -106,8 +126,7 @@ var addAuthorForm = {
     // all the fields straightaway.
     initFormAfterInvalidSubmission: function() {
     	this.initForm();
- 		this.firstNameWrapper.show();
- 		this.middleNameWrapper.show();
+    	this.showFieldsForNewPerson();
     },
 
     // Initial view of add author form. We get here by clicking the show form button,
@@ -116,10 +135,7 @@ var addAuthorForm = {
     	
     	this.initForm();
     	
-		// Hide form fields that shouldn't display on first view.
-		// Includes clearing their contents.
-		this.hideFields(this.firstNameWrapper); 
-		this.hideFields(this.middleNameWrapper);  
+    	this.hideFieldsForNewPerson();
 
     	// This shouldn't be needed, because calling this.hideFormFields(this.lastNameWrapper)
     	// from showSelectedAuthor should do it. However, it doesn't work from there,
@@ -214,8 +230,9 @@ var addAuthorForm = {
 //    				url: url,
 //    				dataType: 'json',
 //    				data: request,
-//    				success: function(data) {
+//    				complete: function(data) {
 //    					cache[request.term] = data;
+//    					console.log(data);
 //    					//console.log("not getting term from cache");
 //    					response(data);
 //    				}
