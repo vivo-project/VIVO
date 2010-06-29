@@ -9,7 +9,6 @@
     margin-bottom: .75em;
 }
 
-
 #authors a.existingAuthor {
     display: inline-block;
     width: 15em;
@@ -17,14 +16,6 @@
 
 /* These are only here for JavaScript to pick up. Don't display!! */
 #authors span.existingAuthorUri {
-    display: none;
-}
-
-/* Hide elements not used in non-JS version of form */
-#showAddForm,
-a.remove,
-a.undo,
-#selectedAuthor {
     display: none;
 }
 
@@ -92,4 +83,25 @@ form a:hover.cancel,
 
 #content form p.submit {
     margin-top: 3em;
+}
+
+a.undo, 
+#selectedAuthor {
+    display:  none;
+}
+
+/* Hide elements not used in non-JS version of form */
+/* rjy7 Currently not supporting non-JS version of this form. */
+/*
+#showAddForm,
+a.remove,
+a.undo,
+#selectedAuthor {
+    display: none;
+}
+*/
+
+/* These styles will need to be redone or removed to support a non-JS version of the form. */
+form#addAuthorForm {
+    display: none;
 }

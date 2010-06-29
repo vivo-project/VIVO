@@ -29,6 +29,7 @@ var addAuthorForm = {
         this.firstNameField = $('#firstName');
         this.middleNameField = $('#middleName');
         this.lastNameField = $('#lastName');
+        this.lastNameLabel = $('label[for=lastName]');
         this.personUriField = $('#personUri');
         this.firstNameWrapper = this.firstNameField.parent();
         this.middleNameWrapper = this.middleNameField.parent();
@@ -134,18 +135,42 @@ var addAuthorForm = {
     onLastNameChange: function() {
     	this.showFieldsForNewPerson();
     	this.firstNameField.focus();
+    	this.fixNames();
     },
     
-    showFieldsForNewPerson: function() {
+    showFieldsForNewPerson: function() { 	
     	this.firstNameWrapper.show();
     	this.middleNameWrapper.show();
+    	this.toggleLastNameLabel('Name', 'Last name');
+    },
+    
+    // User may have typed first name as well as last name into last name field.
+    // If so, when showing first and middle name fields, move anything after a comma
+    // into the first name field.
+    fixNames: function() {
+    	var lastNameInput = this.lastNameField.val(),
+    	    names = lastNameInput.split(','), 
+    	    lastName = names[0].replace(/[, ]+$/, ''),
+    	    firstName;
+ 
+    	this.lastNameField.val(lastName);
+    	
+    	if (names.length > 1) {
+    		firstName = names[1].replace(/^[, ]+/, '');
+        	this.firstNameField.val(firstName);
+    	} 
     },
     
     hideFieldsForNewPerson: function() {   
-    	// Hide form fields that shouldn't display on first view.
-    	// Includes clearing their contents.
     	this.hideFields(this.firstNameWrapper); 
     	this.hideFields(this.middleNameWrapper); 
+    	this.toggleLastNameLabel('Last name', 'Name');
+    },
+    
+    toggleLastNameLabel: function(currentText, newText) {
+    	var lastNameLabelText = this.lastNameLabel.html(),
+    		newLastNameLabelText = lastNameLabelText.replace(currentText, newText);
+    	this.lastNameLabel.html(newLastNameLabelText);	
     },
     
     // This view shows the list of existing authors and hides the form.

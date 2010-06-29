@@ -279,9 +279,23 @@ SPARQL queries for existing values. --%>
 <jsp:include page="${preForm}" />
 
 <h2>${title}</h2>
-      
+
+<% 
+        // Try this in order to get the  new author hightlighted after page reload.
+        // If we do an ajax submit, we won't need it.
+        //String processedForm = (String) vreq.getAttribute("processedForm");
+        //String ulClass = "";
+        //if (processedForm != null && processedForm.equals("true")) {
+        //    ulClass = "class='processedSubmission'";          
+        //}
+        //System.out.println(vreq.getAttribute("entToReturnTo"));
+%>
+     
 <ul id="authors">
     <%
+    
+
+	    
         int rank = 0;
         for ( Individual authorship : authorships ) {
             rank = Integer.valueOf(authorship.getDataValue(rankUri));
@@ -292,6 +306,8 @@ SPARQL queries for existing values. --%>
                 //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
                 request.setAttribute("authorUri", author.getURI());
                 request.setAttribute("authorshipUri", authorship.getURI());
+                
+
                 %> 
                 <c:url var="authorHref" value="/individual">
                     <c:param name="uri" value="${authorUri}"/>
@@ -329,7 +345,7 @@ SPARQL queries for existing values. --%>
 
     <h3>Add an Author</h3>
     
-    <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" size="30" /></p>
+    <p class="inline"><v:input type="text" id="lastName" label="Name ${requiredHint}" size="30" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint} ${initialHint}" size="20" /></p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name ${initialHint}" size="20" /></p>
     <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
