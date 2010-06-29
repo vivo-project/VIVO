@@ -9,6 +9,7 @@
     margin-bottom: .75em;
 }
 
+
 #authors a.existingAuthor {
     display: inline-block;
     width: 15em;
@@ -22,6 +23,7 @@
 /* Hide elements not used in non-JS version of form */
 #showAddForm,
 a.remove,
+a.undo,
 #selectedAuthor {
     display: none;
 }
@@ -39,7 +41,8 @@ form h3 {
 }
 
 form a:link.cancel, form a:visited.cancel,
-#authors a:link.remove, #authors a:visited.remove, 
+#authors a:link.remove, #authors a:visited.remove,
+#authors a:link.undo, #authors a:visited.undo,  
 #showAddForm a:link.cancel, #showAddForm a:visited.cancel {
     color: #f70;
     border-color: #f70;
@@ -47,9 +50,14 @@ form a:link.cancel, form a:visited.cancel,
 
 form a:hover.cancel,
 #authors a:hover.remove,
+#authors a:hover.undo,
 #showAddForm a:hover.cancel {
     color: #fff;
     background: #f70;
+}
+
+#authors a.undo {
+    margin-left: 1em;
 }
 
 #content form p.inline {

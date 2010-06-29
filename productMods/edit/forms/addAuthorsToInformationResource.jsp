@@ -291,13 +291,17 @@ SPARQL queries for existing values. --%>
                 // Doesn't seem to need urlencoding to add as id attribute value
                 //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
                 request.setAttribute("authorUri", author.getURI());
+                request.setAttribute("authorshipUri", authorship.getURI());
                 %> 
                 <c:url var="authorHref" value="/individual">
                     <c:param name="uri" value="${authorUri}"/>
-                </c:url>                
-                <li>
-                    <a id="${authorUri}" href="${authorHref}" class="existingAuthor">${author.name}</a>
-                    <a href="" class="remove">Remove</a>
+                </c:url>
+                <c:url var="deleteAuthorshipHref" value="/edit/primitiveRdfDelete" />
+                <c:url var="undoHref" value="/edit/addAuthorToInformationResource" />              
+                <li class="author" id="${authorUri}">
+                    <span class="authorName"><a href="${authorHref}" class="existingAuthor">${author.name}</a></span>
+                    <a href="${deleteAuthorshipHref}" id="${authorshipUri}" class="remove">Remove</a>
+                    <a href="${undoHref}" class="undo">Undo</a>
                 </li> 
                 
                 <% 

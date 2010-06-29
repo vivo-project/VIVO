@@ -21,7 +21,8 @@ var addAuthorForm = {
     	this.form = $('#addAuthorForm');
     	this.showFormButtonWrapper = $('#showAddForm');
     	this.showFormButton = $('#showAddFormButton');
-    	this.removeLinks = $('a.remove');
+    	this.removeAuthorshipLinks = $('a.remove');
+    	this.undoLinks = $('a.undo');
     	this.submit = this.form.find(':submit');
         this.cancel = this.form.find('.cancel'); 
         this.labelField = $('#label');
@@ -42,7 +43,9 @@ var addAuthorForm = {
 
     	// Show elements hidden by CSS for the non-JavaScript-enabled version.
     	// NB The non-JavaScript version of this form is currently not functional.
-    	this.removeLinks.show();
+    	this.removeAuthorshipLinks.show();
+    	
+    	this.undoLinks.hide();
     	
     	this.bindEventListeners();
     	
@@ -82,7 +85,8 @@ var addAuthorForm = {
     		addAuthorForm.hideFieldsForNewPerson();
     	});
     	
-    	// Prevent form submission when hitting enter in last name field
+    	// When hitting enter in last name field, if not an autocomplete
+    	// selection, show first and middle name fields.
     	this.lastNameField.keydown(function(event) {
     		if (event.keyCode === 13) {
     			console.log('in keydown')
@@ -90,15 +94,46 @@ var addAuthorForm = {
     			return false;
     		}
     	});
+    	
+    	this.removeAuthorshipLinks.click(function() {
+    		$.ajax({
+    			url: $(this).attr('href'),
+    			type: 'POST', 
+    			data: {
+    				deletion: $(this).attr('id')
+    			},
+    			dataType: 'json',
+    			context: $(this), // context for callback
+    			complete: function(request, status) {
+    				var author = $(this).siblings('span.authorName');
+    				var authorLink = author.children('a.existingAuthor');
+    				var authorName = authorLink.html();
+    				if (status === 'success') {
+    					$(this).hide();
+    					$(this).siblings('.undo').show();
+    					author.html(authorName + ' has been removed');
+    					author.css('width', 'auto');
+    					author.effect("highlight", {}, 3000);
+    				} else {
+    					alert('Error processing request');
+    				}
+    			}
+    		});
+    		return false;
+    	});
+    	
+    	this.undoLinks.click(function() {
+    		$.ajax({
+    			url: $(this).attr('href')
+    		});
+    		return false;    		
+    	});
+    	
     },
     
     onLastNameChange: function() {
     	this.showFieldsForNewPerson();
     	this.firstNameField.focus();
-    	// This is persisting and showing old results in some cases unless we
-    	// explicitly wipe it out.
-    	$('ul.ui-autocomplete li').remove();
-    	$('ul.ui-autocomplete').hide();
     },
     
     showFieldsForNewPerson: function() {
@@ -193,6 +228,8 @@ var addAuthorForm = {
 			addAuthorForm.initFormView();
 			return false;
 		});
+		
+		return false;
     },
     
     hideSelectedAuthor: function() {
@@ -248,7 +285,7 @@ var addAuthorForm = {
     
     getExistingAuthorUris: function() {
 
-    	var existingAuthors = $('#authors .existingAuthor'); 
+    	var existingAuthors = $('#authors li'); 
     	return existingAuthors.map(function() {
     		return $(this).attr('id');
     	});
