@@ -357,7 +357,7 @@ SPARQL queries for existing values. --%>
     </div>
     
     <input type="hidden" name="rank" value="${rank}" />
-    <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person" />" />
+    <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />" />
 
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
     
