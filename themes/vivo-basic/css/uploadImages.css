@@ -1,0 +1,101 @@
+/* styles for uploading a picture */
+#photoUploadContainer{
+	margin-left: 0px;
+	width:500px;
+	height:280px;
+	background:#fff;
+	border:1px solid grey;
+	padding:15px;
+	
+	
+}
+
+#photoUploadDefaultImageContainer{
+	
+	width:120px;
+	float:left;
+
+	
+}
+
+#photoUploadDefaultImageContainer img{
+	
+	border:3px solid #CCC;
+	margin-bottom:10px;
+	
+}
+
+#photoUploadForm{
+	width:280px;
+	float:left;
+	padding-top:90px;
+	padding-left:15px;
+	
+}
+
+#photoUploadForm form label{
+	display:block;
+	padding-bottom:10px;
+
+	
+}
+
+#photoUploadForm  label span{
+	font-size:0.7em;
+
+	
+}
+
+#photoUploadForm form input{
+	margin-bottom:10px;
+
+	
+}
+
+
+/* styles for cropping a picture */
+
+#photoCroppingContainer{
+	margin-left: 0px;
+	width:700px;
+	height:450px;
+	background:#fff;
+	border:1px solid grey;
+	padding:15px;
+	
+	
+}
+
+#photoCroppingPreview{
+	width:180px;
+	float:left;
+
+}
+
+
+.photoCroppingNote{
+	margin-top:15px;
+	font-size:0.8em;
+}
+
+#photoCropping{
+	width:500px;
+	float:right;
+	padding-top:30px;
+	padding-left:15px;
+
+	
+}
+
+
+/* styles for deleting a picture */
+
+#photoDeletingContainer{
+	margin-left: 0px;
+	width:500px;
+	height:330px;
+	background:#fff;
+	border:1px solid grey;
+	padding:15px;
+	
+}
