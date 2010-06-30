@@ -24,3 +24,6 @@ themes/vivo-basic/css/blueprint/liquid.css
 
 # Sample code from Google.
 themes/vivo-basic/templates/page/partials/googleAnalytics.ftl
+
+# CSS for the JCrop plugin.
+themes/vivo-basic/css/jquery.Jcrop.css
