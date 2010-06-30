@@ -317,7 +317,7 @@ SPARQL queries for existing values. --%>
                 <li class="author" id="${authorUri}">
                     <span class="authorName"><a href="${authorHref}" class="existingAuthor">${author.name}</a></span>
                     <a href="${deleteAuthorshipHref}" id="${authorshipUri}" class="remove">Remove</a>
-                    <a href="${undoHref}" class="undo">Undo</a>
+                    <%-- <a href="${undoHref}" class="undo">Undo</a>  --%>
                 </li> 
                 
                 <% 

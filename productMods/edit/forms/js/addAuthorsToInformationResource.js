@@ -22,7 +22,7 @@ var addAuthorForm = {
     	this.showFormButtonWrapper = $('#showAddForm');
     	this.showFormButton = $('#showAddFormButton');
     	this.removeAuthorshipLinks = $('a.remove');
-    	this.undoLinks = $('a.undo');
+    	//this.undoLinks = $('a.undo');
     	this.submit = this.form.find(':submit');
         this.cancel = this.form.find('.cancel'); 
         this.labelField = $('#label');
@@ -46,7 +46,7 @@ var addAuthorForm = {
     	// NB The non-JavaScript version of this form is currently not functional.
     	this.removeAuthorshipLinks.show();
     	
-    	this.undoLinks.hide();
+    	//this.undoLinks.hide();
     	
     	this.bindEventListeners();
     	
@@ -97,6 +97,11 @@ var addAuthorForm = {
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
+    		// RY Upgrade this to a modal window
+    		var message = "Are you sure you want to remove this author?";
+    		if (!confirm(message)) {
+    			return false;
+    		}
     		$.ajax({
     			url: $(this).attr('href'),
     			type: 'POST', 
@@ -106,15 +111,19 @@ var addAuthorForm = {
     			dataType: 'json',
     			context: $(this), // context for callback
     			complete: function(request, status) {
-    				var author = $(this).siblings('span.authorName');
-    				var authorLink = author.children('a.existingAuthor');
-    				var authorName = authorLink.html();
+    				var authorListing = $(this).parent();
+//    				var author = $(this).siblings('span.authorName');
+//    				var authorLink = author.children('a.existingAuthor');
+//    				var authorName = authorLink.html();
     				if (status === 'success') {
-    					$(this).hide();
-    					$(this).siblings('.undo').show();
-    					author.html(authorName + ' has been removed');
-    					author.css('width', 'auto');
-    					author.effect("highlight", {}, 3000);
+    					authorListing.fadeOut(400, function() {
+    						$(this).remove();
+    					});
+//    					$(this).hide();
+//    					$(this).siblings('.undo').show();
+//    					author.html(authorName + ' has been removed');
+//    					author.css('width', 'auto');
+//    					author.effect("highlight", {}, 3000);
     				} else {
     					alert('Error processing request');
     				}
@@ -123,12 +132,12 @@ var addAuthorForm = {
     		return false;
     	});
     	
-    	this.undoLinks.click(function() {
-    		$.ajax({
-    			url: $(this).attr('href')
-    		});
-    		return false;    		
-    	});
+//    	this.undoLinks.click(function() {
+//    		$.ajax({
+//    			url: $(this).attr('href')
+//    		});
+//    		return false;    		
+//    	});
     	
     },
     
