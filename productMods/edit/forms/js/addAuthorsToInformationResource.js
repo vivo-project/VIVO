@@ -274,7 +274,7 @@ var addAuthorForm = {
     },
     
     initAuthorReordering: function() {
-    	$('#authors').sortable({
+    	$('#authorships').sortable({
     		update: function() {
     			addAuthorForm.reorderAuthorships();
     		}
@@ -283,32 +283,45 @@ var addAuthorForm = {
     
     reorderAuthorships: function() {
     	
-    	var rankPred = '<' + $('#rankPred').val() + '>',
-    		rankTypeSuffix = $('#rankXsdType').val(),
+    	var predicateUri = '<' + $('#rankPred').val() + '>',
+    		rankXsdType = $('#rankXsdType').val(),
     		additions = '',
-    		retractions = '';
-
+    		retractions = '',
+    		authorships = [];
+    	
     	$('li.authorship').each(function(index) {
-    		// This value does double duty, for removal and reordering
-    		var uri = '<' + $(this).attr('id') + '>',
-    			newRank = index + 1,
-    			newRankVal,
+            var uri = $(this).attr('id'),
+            	subjectUri = '<' + uri + '>',
+                oldRankVal = $(this).children('.rank').attr('id'),
+                newRank = index + 1,                            
+    			newRankForN3,
     			oldRank,
     			oldRankType,
-    			oldRankVal,
+    			oldRankForN3,
     			rankVals;
 
-    		rankVals = $(this).children('.rank').attr('id').split('_'); // e.g., 1_http://www.w3.org/2001/XMLSchema#int
+    		rankVals = oldRankVal.split('_');  // e.g., 1_http://www.w3.org/2001/XMLSchema#int
     		oldRank = rankVals[0];
     		oldRankType = rankVals[1];    		
-    		oldRankVal = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);
+    		oldRankForN3 = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);
 
-    		newRankVal = addAuthorForm.makeRankDataPropVal(newRank, rankTypeSuffix);
+    		newRankForN3 = addAuthorForm.makeRankDataPropVal(newRank, rankXsdType);
     		
-    		additions += uri + ' ' + rankPred + ' ' + newRankVal +  ' .';
-    		retractions += uri + ' ' + rankPred + ' ' + oldRankVal + ' .';
+    		additions += subjectUri + ' ' + predicateUri + ' ' + newRankForN3 +  ' .';
+    		retractions += subjectUri + ' ' + predicateUri + ' ' + oldRankForN3 + ' .';
+    		
+    		// This object will be used to modify the page after success or failure of the
+    		// Ajax request.
+    		authorship = {
+    	        uri: uri,
+    	        oldRank: oldRank,
+    	        newRank: newRank + '_' + rankXsdType
+    		};
+    		authorships.push(authorship);
+    		
     	});
     	
+    	// console.log(authorships)
     	// console.log("additions: " + additions);
     	// console.log("retractions: " + retractions);
     	
@@ -318,17 +331,15 @@ var addAuthorForm = {
     			additions: additions,
     			retractions: retractions
     		},
-    		additions: additions,
-    		retractions: retractions,
+    		authorships: authorships,
     		processData: 'false',
     		dataType: 'json',
     		type: 'POST',
     		success: function(data, status, request) {
-    			addAuthorForm.resetRankVals(this.additions);
-    			console.log(this.additions)
+    			addAuthorForm.updateRanks(this.authorships);
     		},
     		error: function(request, status, error) {
-    			addAuthorForm.restorePreviousOrder();
+    			addAuthorForm.resetOrder(this.authorships);
     			alert('Reordering of author ranks failed.');
     		}
     	});    	
@@ -342,11 +353,19 @@ var addAuthorForm = {
     	return rankVal;
     },
     
-    resetRankVals: function() {
-    	
+    // After drag-and-drop reorder, update the rank vals stored with the authorships;
+    // otherwise, additional reorderings will issue incorrect retractions in the request.
+    updateRanks: function(authorships) {
+    	$.each(authorships, function(index, obj) {
+    		// find the element with this uri as id
+    		var el = $('li[id=' + obj.uri + ']');   
+    		// set the new rank for this element 
+    		el.children('.rank').attr('id', obj.newRank);    		
+    	});
     },
     
-    restorePreviousOrder: function() {
+    // After drag-and-drop failure, reset to original order
+    resetOrder: function(authorships) {
     	// restore existing rankings after reordering failure
     	// use span.rank id attr value to determine
     },
@@ -398,7 +417,7 @@ var addAuthorForm = {
     
     getExistingAuthorUris: function() {
 
-    	var existingAuthors = $('#authors li'); 
+    	var existingAuthors = $('#authorships li'); 
     	return existingAuthors.map(function() {
     		return $(this).attr('id');
     	});

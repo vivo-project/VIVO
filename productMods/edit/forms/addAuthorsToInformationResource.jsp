@@ -295,7 +295,7 @@ SPARQL queries for existing values. --%>
         //System.out.println(vreq.getAttribute("entToReturnTo"));
 %>
      
-<ul id="authors">
+<ul id="authorships">
     <%
  
         int rank = 0;
