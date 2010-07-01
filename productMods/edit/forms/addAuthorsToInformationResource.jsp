@@ -63,7 +63,10 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
     vreq.setAttribute("flagUri",flagUri);
     
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
-    vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(XSD.xint.toString()));
+    
+    String intDatatypeUri = XSD.xint.toString();    
+    vreq.setAttribute("intDatatypeUri", intDatatypeUri);
+    vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
 %>
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
@@ -293,12 +296,17 @@ SPARQL queries for existing values. --%>
      
 <ul id="authors">
     <%
-    
-
-	    
+ 
         int rank = 0;
         for ( Individual authorship : authorships ) {
-            rank = Integer.valueOf(authorship.getDataValue(rankUri));
+            int rank1  = Integer.valueOf(authorship.getDataValue(rankUri));
+            String rankValue = authorship.getDataValue(rankUri); // full value, including xsd type if present
+            if (rankValue == null) {
+                rankValue = "";
+                rank = 0;
+            } else {
+                rank = Integer.valueOf(rankValue); // just the integer value
+            }
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
                 request.setAttribute("author", author);
@@ -306,27 +314,31 @@ SPARQL queries for existing values. --%>
                 //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
                 request.setAttribute("authorUri", author.getURI());
                 request.setAttribute("authorshipUri", authorship.getURI());
-                
+                request.setAttribute("rank", rank);
 
                 %> 
                 <c:url var="authorHref" value="/individual">
                     <c:param name="uri" value="${authorUri}"/>
                 </c:url>
                 <c:url var="deleteAuthorshipHref" value="/edit/primitiveRdfDelete" />
-                <c:url var="undoHref" value="/edit/addAuthorToInformationResource" />              
-                <li class="author" id="${authorUri}">
-                    <span class="authorName"><a href="${authorHref}" class="existingAuthor">${author.name}</a></span>
-                    <a href="${deleteAuthorshipHref}" id="${authorshipUri}" class="remove">Remove</a>
-                    <%-- <a href="${undoHref}" class="undo">Undo</a>  --%>
+
+                <%-- <c:url var="undoHref" value="/edit/addAuthorToInformationResource" /> --%>          
+                <li class="authorship" id="${authorshipUri}">
+                    <span class="rank" id="${rankValue}" />
+                    <%-- This span will be used in the next phase, when we display a message that the author has been
+                    removed. That text will replace the a.authorLink. --%>
+                    <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${author.name}</a>
+                    <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
+                    <%-- <a href="${undoHref}" class="undo">Undo</a>  --%></span>
                 </li> 
                 
                 <% 
-            }
-            
+            }          
         }
         // A new author will be ranked last when added.
         // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
-        vreq.setAttribute("rank", rank + 1);
+        vreq.setAttribute("newRank", rank + 1);
+        vreq.setAttribute("rankPred", rankUri);
     %>
     
 </ul>
@@ -356,8 +368,11 @@ SPARQL queries for existing values. --%>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
-    <input type="hidden" name="rank" value="${rank}" />
+    <input type="hidden" name="rankPred" value="<${rankPred}>" />
+    <input type="hidden" name="rankXsdType" value="${intDatatypeUri}" />
+    <input type="hidden" name="rank" value="${newRank}" />
     <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />" />
+    <input type="hidden" name="reorderUrl" id="reorderUrl" value="<c:url value="/edit/primitiveRdfEdit" />" />
 
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
     

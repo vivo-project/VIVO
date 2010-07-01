@@ -7,16 +7,13 @@
 #authors li {
     list-style: none;
     margin-bottom: .75em;
+    padding-left: 1em;
+    background: url("../images/sortable_icon.png") no-repeat left center;
 }
 
-#authors a.existingAuthor {
+#authors a.authorLink {
     display: inline-block;
     width: 15em;
-}
-
-/* These are only here for JavaScript to pick up. Don't display!! */
-#authors span.existingAuthorUri {
-    display: none;
 }
 
 #showAddForm span.or {
@@ -85,10 +82,15 @@ form a:hover.cancel,
     margin-top: 3em;
 }
 
+
+
+/* Disabling undo links for the present. Add back later. */
+/*
 a.undo, 
 #selectedAuthor {
     display:  none;
 }
+*/
 
 /* Hide elements not used in non-JS version of form */
 /* rjy7 Currently not supporting non-JS version of this form. */

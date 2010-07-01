@@ -50,7 +50,9 @@ var addAuthorForm = {
     	
     	this.bindEventListeners();
     	
-    	this.setUpAutocomplete();
+    	this.initAutocomplete();
+    	
+    	this.initAuthorReordering();
     	
     	if (this.findValidationErrors()) {
     		this.initFormAfterInvalidSubmission();
@@ -97,6 +99,7 @@ var addAuthorForm = {
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
+    		console.log($(this).parents('.authorship'));
     		// RY Upgrade this to a modal window
     		var message = "Are you sure you want to remove this author?";
     		if (!confirm(message)) {
@@ -106,17 +109,17 @@ var addAuthorForm = {
     			url: $(this).attr('href'),
     			type: 'POST', 
     			data: {
-    				deletion: $(this).attr('id')
+    				deletion: $(this).parents('.authorship').attr('id')
     			},
     			dataType: 'json',
     			context: $(this), // context for callback
     			complete: function(request, status) {
-    				var authorListing = $(this).parent();
-//    				var author = $(this).siblings('span.authorName');
-//    				var authorLink = author.children('a.existingAuthor');
+    				var authorship = $(this).parents('.authorship');
+//    				var author = $(this).siblings('span.author');
+//    				var authorLink = author.children('a.authorLink');
 //    				var authorName = authorLink.html();
     				if (status === 'success') {
-    					authorListing.fadeOut(400, function() {
+    					authorship.fadeOut(400, function() {
     						$(this).remove();
     					});
 //    					$(this).hide();
@@ -272,7 +275,58 @@ var addAuthorForm = {
     	this.personUriField.val('');
     },
     
-    setUpAutocomplete: function() {
+    initAuthorReordering: function() {
+    	$('#authors').sortable({
+    		update: function() {
+    			addAuthorForm.resetRankings();
+    		}
+    	});   	
+    },
+    
+    resetRankings: function() {
+    	var rankPred = '<' + $('#rankPred').val() + '>',
+    	    additions = '',
+    	    retractions = '',
+    	    rankTypeSuffix = '^^<' + $('#rankType').val() + '>', 
+    	    uri,
+    	    newRank,
+    	    oldRank;
+    	$('li.authorship').each(function(index) {
+    		// This value does double duty, for removal and reordering
+    		uri = $(this).children('.remove').attr('id');
+    		oldRank = $(this).children('.rank').attr('id'); // already contains the rankSuffix, if present
+    		newRank = index + 1;
+    		additions += uri + ' ' + rankPred + ' ' + '"' + newRank + '"' + rankTypeSuffix + ' .';
+    		retractions += uri + ' ' + rankPred + ' ' + '"' + oldRank + ' .';
+    	});
+    	console.log(additions);
+    	console.log(retractions);
+    	$.ajax({
+    		url: $('#reorderUrl').val(),
+    		data: {
+    			additions: additions,
+    			retractions: retractions
+    		},
+    		dataType: 'json',
+    		type: 'POST',
+    		success: function(xhr, status, error) {
+    			// reset rank in the span
+    			// can just do from values we computed, if easier than getting data back from server
+    			// 
+    		},
+    		error: function(data, status, request) {
+    			addAuthorForm.restorePreviousRankings();
+    			alert('Reordering of author ranks failed.');
+    		}
+    	});    	
+    },
+    
+    restorePreviousRankings: function() {
+    	// restore existing rankings after reordering failure
+    	// use span.rank id attr value to determine
+    },
+    
+    initAutocomplete: function() {
 
     	var cache = {};
     	var url = $('#acUrl').val();
