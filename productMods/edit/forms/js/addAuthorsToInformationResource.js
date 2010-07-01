@@ -276,50 +276,77 @@ var addAuthorForm = {
     initAuthorReordering: function() {
     	$('#authors').sortable({
     		update: function() {
-    			addAuthorForm.resetRankings();
+    			addAuthorForm.reorderAuthorships();
     		}
     	});   	
     },
     
-    resetRankings: function() {
+    reorderAuthorships: function() {
+    	
     	var rankPred = '<' + $('#rankPred').val() + '>',
-    	    additions = '',
-    	    retractions = '',
-    	    rankTypeSuffix = '^^<' + $('#rankType').val() + '>', 
-    	    uri,
-    	    newRank,
-    	    oldRank;
+    		rankTypeSuffix = $('#rankXsdType').val(),
+    		additions = '',
+    		retractions = '';
+
     	$('li.authorship').each(function(index) {
     		// This value does double duty, for removal and reordering
-    		uri = $(this).children('.remove').attr('id');
-    		oldRank = $(this).children('.rank').attr('id'); // already contains the rankSuffix, if present
-    		newRank = index + 1;
-    		additions += uri + ' ' + rankPred + ' ' + '"' + newRank + '"' + rankTypeSuffix + ' .';
-    		retractions += uri + ' ' + rankPred + ' ' + '"' + oldRank + ' .';
+    		var uri = '<' + $(this).attr('id') + '>',
+    			newRank = index + 1,
+    			newRankVal,
+    			oldRank,
+    			oldRankType,
+    			oldRankVal,
+    			rankVals;
+
+    		rankVals = $(this).children('.rank').attr('id').split('_'); // e.g., 1_http://www.w3.org/2001/XMLSchema#int
+    		oldRank = rankVals[0];
+    		oldRankType = rankVals[1];    		
+    		oldRankVal = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);
+
+    		newRankVal = addAuthorForm.makeRankDataPropVal(newRank, rankTypeSuffix);
+    		
+    		additions += uri + ' ' + rankPred + ' ' + newRankVal +  ' .';
+    		retractions += uri + ' ' + rankPred + ' ' + oldRankVal + ' .';
     	});
-    	console.log(additions);
-    	console.log(retractions);
+    	
+    	// console.log("additions: " + additions);
+    	// console.log("retractions: " + retractions);
+    	
     	$.ajax({
     		url: $('#reorderUrl').val(),
     		data: {
     			additions: additions,
     			retractions: retractions
     		},
+    		additions: additions,
+    		retractions: retractions,
+    		processData: 'false',
     		dataType: 'json',
     		type: 'POST',
-    		success: function(xhr, status, error) {
-    			// reset rank in the span
-    			// can just do from values we computed, if easier than getting data back from server
-    			// 
+    		success: function(data, status, request) {
+    			addAuthorForm.resetRankVals(this.additions);
+    			console.log(this.additions)
     		},
-    		error: function(data, status, request) {
-    			addAuthorForm.restorePreviousRankings();
+    		error: function(request, status, error) {
+    			addAuthorForm.restorePreviousOrder();
     			alert('Reordering of author ranks failed.');
     		}
     	});    	
     },
     
-    restorePreviousRankings: function() {
+    makeRankDataPropVal: function(rank, xsdType) {
+    	var rankVal = '"' + rank + '"';
+    	if (xsdType) {
+    		rankVal += '^^<' + xsdType + '>'
+    	}
+    	return rankVal;
+    },
+    
+    resetRankVals: function() {
+    	
+    },
+    
+    restorePreviousOrder: function() {
     	// restore existing rankings after reordering failure
     	// use span.rank id attr value to determine
     },

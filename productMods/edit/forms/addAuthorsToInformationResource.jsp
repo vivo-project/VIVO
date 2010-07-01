@@ -31,6 +31,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator" %>
@@ -299,14 +300,21 @@ SPARQL queries for existing values. --%>
  
         int rank = 0;
         for ( Individual authorship : authorships ) {
-            rank = Integer.valueOf(authorship.getDataValue(rankPredicateUri)); 
+            String rankDatatypeUri = "";
+            DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
+            if (rankStmt != null) {
+                rank = Integer.valueOf(rankStmt.getData());           
+                rankDatatypeUri = rankStmt.getDatatypeURI();
+            }
+            
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
-                request.setAttribute("author", author);
+                request.setAttribute("authorName", author.getName());
                 // Doesn't seem to need urlencoding to add as id attribute value
                 //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
                 request.setAttribute("authorUri", author.getURI());
                 request.setAttribute("authorshipUri", authorship.getURI());
+                request.setAttribute("rankValue", rank + "_" + rankDatatypeUri);
                 request.setAttribute("rank", rank);
 
                 %> 
@@ -317,10 +325,10 @@ SPARQL queries for existing values. --%>
 
                 <%-- <c:url var="undoHref" value="/edit/addAuthorToInformationResource" /> --%>          
                 <li class="authorship" id="${authorshipUri}">
-                    <span class="rank" id="${rank}" />
+                    <span class="rank" id="${rankValue}" /> <%--  ${rankDatatypeUri}</span>--%>
                     <%-- This span will be used in the next phase, when we display a message that the author has been
                     removed. That text will replace the a.authorLink. --%>
-                    <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${author.name}</a>
+                    <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${authorName}</a>
                     <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
                     <%-- <a href="${undoHref}" class="undo">Undo</a>  --%></span>
                 </li> 
@@ -361,9 +369,9 @@ SPARQL queries for existing values. --%>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
-    <input type="hidden" name="rankPred" value="${rankPred}" />
-    <input type="hidden" name="rankXsdType" value="${intDatatypeUri}" />
-    <input type="hidden" name="rank" value="${newRank}" />
+    <input type="hidden" name="rankPred" id="rankPred" value="${rankPred}" />
+    <input type="hidden" name="rankXsdType" id="rankXsdType" value="${intDatatypeUri}" />
+    <input type="hidden" name="rank" id="rank" value="${newRank}" />
     <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />" />
     <input type="hidden" name="reorderUrl" id="reorderUrl" value="<c:url value="/edit/primitiveRdfEdit" />" />
 
