@@ -253,8 +253,8 @@ SPARQL queries for existing values. --%>
     
     Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);   
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
-    String rankUri = "http://vivoweb.org/ontology/core#authorRank";
-    DataPropertyComparator comp = new DataPropertyComparator(rankUri);
+    String rankPredicateUri = "http://vivoweb.org/ontology/core#authorRank";
+    DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
     Collections.sort(authorships, comp);
     
     vreq.setAttribute("infoResourceName", infoResource.getName());
@@ -299,14 +299,7 @@ SPARQL queries for existing values. --%>
  
         int rank = 0;
         for ( Individual authorship : authorships ) {
-            int rank1  = Integer.valueOf(authorship.getDataValue(rankUri));
-            String rankValue = authorship.getDataValue(rankUri); // full value, including xsd type if present
-            if (rankValue == null) {
-                rankValue = "";
-                rank = 0;
-            } else {
-                rank = Integer.valueOf(rankValue); // just the integer value
-            }
+            rank = Integer.valueOf(authorship.getDataValue(rankPredicateUri)); 
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
                 request.setAttribute("author", author);
@@ -324,7 +317,7 @@ SPARQL queries for existing values. --%>
 
                 <%-- <c:url var="undoHref" value="/edit/addAuthorToInformationResource" /> --%>          
                 <li class="authorship" id="${authorshipUri}">
-                    <span class="rank" id="${rankValue}" />
+                    <span class="rank" id="${rank}" />
                     <%-- This span will be used in the next phase, when we display a message that the author has been
                     removed. That text will replace the a.authorLink. --%>
                     <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${author.name}</a>
@@ -337,8 +330,8 @@ SPARQL queries for existing values. --%>
         }
         // A new author will be ranked last when added.
         // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
-        vreq.setAttribute("newRank", rank + 1);
-        vreq.setAttribute("rankPred", rankUri);
+        request.setAttribute("newRank", rank + 1);
+        request.setAttribute("rankPred", rankPredicateUri);
     %>
     
 </ul>
@@ -368,7 +361,7 @@ SPARQL queries for existing values. --%>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
-    <input type="hidden" name="rankPred" value="<${rankPred}>" />
+    <input type="hidden" name="rankPred" value="${rankPred}" />
     <input type="hidden" name="rankXsdType" value="${intDatatypeUri}" />
     <input type="hidden" name="rank" value="${newRank}" />
     <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />" />

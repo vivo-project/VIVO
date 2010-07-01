@@ -92,7 +92,6 @@ var addAuthorForm = {
     	// selection, show first and middle name fields.
     	this.lastNameField.keydown(function(event) {
     		if (event.keyCode === 13) {
-    			console.log('in keydown')
     		    addAuthorForm.onLastNameChange();
     			return false;
     		}
@@ -158,18 +157,17 @@ var addAuthorForm = {
     
     // User may have typed first name as well as last name into last name field.
     // If so, when showing first and middle name fields, move anything after a comma
-    // into the first name field.
+    // or space into the first name field.
     fixNames: function() {
     	var lastNameInput = this.lastNameField.val(),
-    	    names = lastNameInput.split(','), 
-    	    lastName = names[0].replace(/[, ]+$/, ''),
-    	    firstName;
+    	    names = lastNameInput.split(/[, ]+/), 
+    	    lastName = names[0];
  
     	this.lastNameField.val(lastName);
     	
     	if (names.length > 1) {
-    		firstName = names[1].replace(/^[, ]+/, '');
-        	this.firstNameField.val(firstName);
+    		//firstName = names[1].replace(/^[, ]+/, '');
+        	this.firstNameField.val(names[1]);
     	} 
     },
     
