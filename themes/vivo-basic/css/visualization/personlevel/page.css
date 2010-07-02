@@ -1,19 +1,12 @@
-#ego_sparkline {
-	cursor: pointer;
-	height: 36px;
-	margin-left: 24%;
-	/*margin-top:-18%;*/
-	position: absolute;
-	width: 471px;
-}
+
 
 .author_name {
-	color: #7BA69E;
+	color: #111111;
 	font-weight: bold;
 }
 
 .author_moniker {
-	color: #4C4C4C;
+	color: #9C9C9C;
 }
 
 a.no_href_styles {
@@ -52,8 +45,15 @@ p.datatable {
 }
 
 .datatable img {
-	float: right;
+	float: left;
 	cursor: pointer;
+}
+
+/*
+
+.datatable table thead th {
+	color: #4C4C4C;
+	background-color: white;
 }
 
 .datatable table caption {
@@ -61,4 +61,7 @@ p.datatable {
 	margin: 0;
 	padding: 0;
 	font-size: 14px;
+	background-color: white;
 }
+
+*/
