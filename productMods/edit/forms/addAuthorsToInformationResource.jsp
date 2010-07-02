@@ -300,6 +300,7 @@ SPARQL queries for existing values. --%>
  
         int rank = 0;
         int index = 0;
+        request.setAttribute("authorshipCount", authorships.size());
         for ( Individual authorship : authorships ) {
             String rankDatatypeUri = "";
             DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
@@ -329,13 +330,12 @@ SPARQL queries for existing values. --%>
                     <c:param name="uri" value="${authorUri}"/>
                 </c:url>
                 <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
-
-                <%-- <c:url var="undoHref" value="/edit/addAuthorToInformationResource" /> --%>          
+        
                 <li class="authorship" id="${authorshipUri}">
                     <span class="rank" id="${rankValue}"></span> 
                     <span class="position" id="${position}"></span> 
                     <%-- This span will be used in the next phase, when we display a message that the author has been
-                    removed. That text will replace the a.authorLink. --%>
+                    removed. That text will replace the a.authorLink, which will be removed. --%>
                     <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${authorName}</a>
                     <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
                     <%-- <a href="${undoHref}" class="undo">Undo</a>  --%></span>

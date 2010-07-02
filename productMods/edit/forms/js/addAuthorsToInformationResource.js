@@ -97,7 +97,6 @@ var addAuthorForm = {
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
-    		console.log($(this).parents('.authorship'));
     		// RY Upgrade this to a modal window
     		var message = "Are you sure you want to remove this author?";
     		if (!confirm(message)) {
@@ -122,17 +121,22 @@ var addAuthorForm = {
     						var pos = parseInt($(this).children('.position').attr('id'));
     						$(this).children('.position').attr('id', pos-1);
     					});
+    					
     					authorship.fadeOut(400, function() {
     						$(this).remove();
+        					// If there's just one author remaining, remove the drag and drop title message.
+        					if ($('.authorship').length == 1) {
+        						addAuthorForm.disableAuthorDD();
+        					}
     					});
-    					
+	
 //    					$(this).hide();
 //    					$(this).siblings('.undo').show();
 //    					author.html(authorName + ' has been removed');
 //    					author.css('width', 'auto');
 //    					author.effect("highlight", {}, 3000);
     				} else {
-    					alert('Error processing request');
+    					alert('Error processing request: author not removed');
     				}
     			}
     		});
@@ -146,6 +150,14 @@ var addAuthorForm = {
 //    		return false;    		
 //    	});
     	
+    },
+    
+    // Disable DD and cues if only one author remaining
+    disableAuthorDD: function() {
+    	var author = $('.authorship');
+    	$('#authorships').sortable({ disable: true} );
+    	author.css('background', 'none');
+    	author.css('padding-left', '0');
     },
     
     onLastNameChange: function() {
@@ -279,7 +291,21 @@ var addAuthorForm = {
     },
     
     initAuthorReordering: function() {
-    	$('#authorships').sortable({
+    	
+    	var authorshipList = $('#authorships'),
+    		authorships = authorshipList.children();
+    	
+    	if (authorships.length < 2) {
+    		return;
+    	}
+    	
+    	authorships.each(function() {
+    		// Make sure all browsers support title attribute on elements other than link and image.
+    		// If not, move title to the author link.
+    		$(this).attr('title', 'Drag and drop to reorder authors');
+    	});
+    	
+    	authorshipList.sortable({
     		stop: function(event, ui) {
         		var predicateUri = '<' + $('.rankPred').attr('id') + '>',
         			rankXsdType = $('.rankXsdType').attr('id'),

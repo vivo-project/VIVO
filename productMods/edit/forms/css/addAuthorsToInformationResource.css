@@ -7,8 +7,11 @@
 #authorships li {
     list-style: none;
     margin-bottom: .75em;
+}
+
+#authorships.ui-sortable li {
     padding-left: 1em;
-    background: url("../images/sortable_icon.png") no-repeat left center;
+    background: url("../images/sortable_icon.png") no-repeat left center;    
 }
 
 #authorships a.authorLink {
@@ -94,8 +97,6 @@ form a:hover.cancel,
 #content form p.submit {
     margin-top: 3em;
 }
-
-
 
 /* Disabling undo links for the present. Add back later. */
 /*
