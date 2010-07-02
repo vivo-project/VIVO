@@ -118,9 +118,15 @@ var addAuthorForm = {
 //    				var authorLink = author.children('a.authorLink');
 //    				var authorName = authorLink.html();
     				if (status === 'success') {
+    					// Reset the position value of each succeeding authorship
+    					authorship.next().each(function() {
+    						var pos = parseInt($(this).children('.position').attr('id'));
+    						$(this).children('.position').attr('id', pos-1);
+    					});
     					authorship.fadeOut(400, function() {
     						$(this).remove();
     					});
+    					
 //    					$(this).hide();
 //    					$(this).siblings('.undo').show();
 //    					author.html(authorName + ' has been removed');
@@ -275,74 +281,89 @@ var addAuthorForm = {
     
     initAuthorReordering: function() {
     	$('#authorships').sortable({
-    		update: function() {
-    			addAuthorForm.reorderAuthorships();
-    		}
+    		stop: function(event, ui) {
+        		var predicateUri = '<' + $('#rankPred').val() + '>',
+        		rankXsdType = $('#rankXsdType').val(),
+        		additions = '',
+        		retractions = '',
+        		authorships = [];
+
+        		$('li.authorship').each(function(index) {
+        			var uri = $(this).attr('id'),
+        			subjectUri = '<' + uri + '>',
+        			oldRankVal = $(this).children('.rank').attr('id'),
+        			newRank = index + 1,                            
+        			newRankForN3,
+        			oldRank,
+        			oldRankType,
+        			oldRankForN3,
+        			rankVals;
+
+        			rankVals = oldRankVal.split('_');  // e.g., 1_http://www.w3.org/2001/XMLSchema#int
+        			oldRank = rankVals[0];
+        			oldRankType = rankVals[1];    		
+        			oldRankForN3 = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);
+
+        			newRankForN3 = addAuthorForm.makeRankDataPropVal(newRank, rankXsdType);
+    		
+        			additions += subjectUri + ' ' + predicateUri + ' ' + newRankForN3 +  ' .';
+        			retractions += subjectUri + ' ' + predicateUri + ' ' + oldRankForN3 + ' .';
+    		
+        			// This data will be used to modify the page after successful completion
+        			// of the Ajax request.
+        			authorship = {
+        		        uri: uri,
+        				newRank: newRank + '_' + rankXsdType
+        			};
+        			authorships.push(authorship);
+        			
+        		});
+    	
+        		// console.log(authorships)
+        		// console.log("additions: " + additions);
+        		// console.log("retractions: " + retractions);
+    	
+        		$.ajax({
+        			url: $('#reorderUrl').val(),
+        			data: {
+        				additions: additions,
+        				retractions: retractions
+        			},
+        			authorships: authorships,
+        			processData: 'false',
+        			dataType: 'json',
+        			type: 'POST',
+        			movedItem: ui.item,
+        			success: function(data, status, request) {
+        		    	$.each(authorships, function(index, obj) {
+        		    		// find the element with this uri as id
+        		    		var el = $('li[id=' + obj.uri + ']'),
+        		    			rank = obj.newRank,
+        		    			pos = rank.split('_')[0];
+        		    		// set the new rank for this element 
+        		    		el.children('.rank').attr('id', rank);   
+        		    		el.children('.position').attr('id', pos);
+        		    	});
+        			},
+        			error: function(request, status, error) {
+        				// Put the moved item back to its original position.
+        				// Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
+        				var pos = ui.item.children('.position').attr('id'),
+        				    nextpos = parseInt(pos) + 1,
+        				    authorships = $('#authorships'),
+        				    next = authorships.find('.position[id=' + nextpos + ']').parent();
+        				
+        				if (next.length > 0) {
+        					ui.item.insertBefore(next);
+        				} else {
+        					ui.item.appendTo(authorships);
+        				}       					       				
+    				
+        				alert('Reordering of authors failed.');
+        			}
+        		});    	
+    		} // end stop callback
     	});   	
-    },
-    
-    reorderAuthorships: function() {
-    	
-    	var predicateUri = '<' + $('#rankPred').val() + '>',
-    		rankXsdType = $('#rankXsdType').val(),
-    		additions = '',
-    		retractions = '',
-    		authorships = [];
-    	
-    	$('li.authorship').each(function(index) {
-            var uri = $(this).attr('id'),
-            	subjectUri = '<' + uri + '>',
-                oldRankVal = $(this).children('.rank').attr('id'),
-                newRank = index + 1,                            
-    			newRankForN3,
-    			oldRank,
-    			oldRankType,
-    			oldRankForN3,
-    			rankVals;
-
-    		rankVals = oldRankVal.split('_');  // e.g., 1_http://www.w3.org/2001/XMLSchema#int
-    		oldRank = rankVals[0];
-    		oldRankType = rankVals[1];    		
-    		oldRankForN3 = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);
-
-    		newRankForN3 = addAuthorForm.makeRankDataPropVal(newRank, rankXsdType);
-    		
-    		additions += subjectUri + ' ' + predicateUri + ' ' + newRankForN3 +  ' .';
-    		retractions += subjectUri + ' ' + predicateUri + ' ' + oldRankForN3 + ' .';
-    		
-    		// This object will be used to modify the page after success or failure of the
-    		// Ajax request.
-    		authorship = {
-    	        uri: uri,
-    	        oldRank: oldRank,
-    	        newRank: newRank + '_' + rankXsdType
-    		};
-    		authorships.push(authorship);
-    		
-    	});
-    	
-    	// console.log(authorships)
-    	// console.log("additions: " + additions);
-    	// console.log("retractions: " + retractions);
-    	
-    	$.ajax({
-    		url: $('#reorderUrl').val(),
-    		data: {
-    			additions: additions,
-    			retractions: retractions
-    		},
-    		authorships: authorships,
-    		processData: 'false',
-    		dataType: 'json',
-    		type: 'POST',
-    		success: function(data, status, request) {
-    			addAuthorForm.updateRanks(this.authorships);
-    		},
-    		error: function(request, status, error) {
-    			addAuthorForm.resetOrder(this.authorships);
-    			alert('Reordering of author ranks failed.');
-    		}
-    	});    	
     },
     
     makeRankDataPropVal: function(rank, xsdType) {
@@ -351,23 +372,6 @@ var addAuthorForm = {
     		rankVal += '^^<' + xsdType + '>'
     	}
     	return rankVal;
-    },
-    
-    // After drag-and-drop reorder, update the rank vals stored with the authorships;
-    // otherwise, additional reorderings will issue incorrect retractions in the request.
-    updateRanks: function(authorships) {
-    	$.each(authorships, function(index, obj) {
-    		// find the element with this uri as id
-    		var el = $('li[id=' + obj.uri + ']');   
-    		// set the new rank for this element 
-    		el.children('.rank').attr('id', obj.newRank);    		
-    	});
-    },
-    
-    // After drag-and-drop failure, reset to original order
-    resetOrder: function(authorships) {
-    	// restore existing rankings after reordering failure
-    	// use span.rank id attr value to determine
     },
     
     initAutocomplete: function() {

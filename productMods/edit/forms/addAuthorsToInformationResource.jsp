@@ -299,6 +299,7 @@ SPARQL queries for existing values. --%>
     <%
  
         int rank = 0;
+        int index = 0;
         for ( Individual authorship : authorships ) {
             String rankDatatypeUri = "";
             DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
@@ -309,6 +310,7 @@ SPARQL queries for existing values. --%>
             
             Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
             if ( author != null ) {
+                index++;
                 request.setAttribute("authorName", author.getName());
                 // Doesn't seem to need urlencoding to add as id attribute value
                 //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
@@ -316,16 +318,22 @@ SPARQL queries for existing values. --%>
                 request.setAttribute("authorshipUri", authorship.getURI());
                 request.setAttribute("rankValue", rank + "_" + rankDatatypeUri);
                 request.setAttribute("rank", rank);
+                
+                // This value is used to replace a moved element after a failed reorder.
+                // It's not the same as rank, because ranks may have gaps. It's easier to
+                // reposition the element using ordering.
+                request.setAttribute("position", index);
 
                 %> 
                 <c:url var="authorHref" value="/individual">
                     <c:param name="uri" value="${authorUri}"/>
                 </c:url>
-                <c:url var="deleteAuthorshipHref" value="/edit/primitiveRdfDelete" />
+                <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
 
                 <%-- <c:url var="undoHref" value="/edit/addAuthorToInformationResource" /> --%>          
                 <li class="authorship" id="${authorshipUri}">
-                    <span class="rank" id="${rankValue}" /> <%--  ${rankDatatypeUri}</span>--%>
+                    <span class="rank" id="${rankValue}"></span> 
+                    <span class="position" id="${position}"></span> 
                     <%-- This span will be used in the next phase, when we display a message that the author has been
                     removed. That text will replace the a.authorLink. --%>
                     <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${authorName}</a>
