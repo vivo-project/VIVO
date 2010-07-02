@@ -24,6 +24,10 @@
     margin-left: 2em;
 }
 
+#infoForJs {
+    display: none;
+}
+
 form h3 {
     margin-bottom: .5em;
 }
@@ -76,6 +80,15 @@ form a:hover.cancel,
 
 #selectedAuthor {
     clear: left;
+}
+
+#content form #selectedAuthor p.inline label {
+    width: 10em;
+}
+
+#selectedAuthorName {
+    background-color: #d9d9d9;
+    padding: .5em 1em;
 }
 
 #content form p.submit {

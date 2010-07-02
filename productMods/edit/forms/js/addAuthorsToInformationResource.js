@@ -70,10 +70,9 @@ var addAuthorForm = {
     	
     	this.submit.click(function() {
     		// NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
-    		// in prepareFieldValuesForSubmit. If we do
-    		// this.submit.click(this.prepareFieldValuesForSubmit); then
-    		// this != addAuthorForm in prepareFieldValuesForSubmit.
-    		addAuthorForm.prepareFieldValuesForSubmit(); 
+    		// in prepareSubmit. If we do this.submit.click(prepareSubmit); then
+    		// this != addAuthorForm in prepareSubmit.
+    		addAuthorForm.prepareSubmit(); 
     	});   	
 
     	this.lastNameField.blur(function() {
@@ -282,11 +281,11 @@ var addAuthorForm = {
     initAuthorReordering: function() {
     	$('#authorships').sortable({
     		stop: function(event, ui) {
-        		var predicateUri = '<' + $('#rankPred').val() + '>',
-        		rankXsdType = $('#rankXsdType').val(),
-        		additions = '',
-        		retractions = '',
-        		authorships = [];
+        		var predicateUri = '<' + $('.rankPred').attr('id') + '>',
+        			rankXsdType = $('.rankXsdType').attr('id'),
+        			additions = '',
+        			retractions = '',
+        			authorships = [];
 
         		$('li.authorship').each(function(index) {
         			var uri = $(this).attr('id'),
@@ -324,7 +323,7 @@ var addAuthorForm = {
         		// console.log("retractions: " + retractions);
     	
         		$.ajax({
-        			url: $('#reorderUrl').val(),
+        			url: $('.reorderUrl').attr('id'),
         			data: {
         				additions: additions,
         				retractions: retractions
@@ -333,7 +332,6 @@ var addAuthorForm = {
         			processData: 'false',
         			dataType: 'json',
         			type: 'POST',
-        			movedItem: ui.item,
         			success: function(data, status, request) {
         		    	$.each(authorships, function(index, obj) {
         		    		// find the element with this uri as id
@@ -377,7 +375,7 @@ var addAuthorForm = {
     initAutocomplete: function() {
 
     	var cache = {};
-    	var url = $('#acUrl').val();
+    	var url = $('.acUrl').attr('id');
     	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();
 
     	jQuery.each(existingAuthorUris, function(index, element) {
@@ -420,15 +418,16 @@ var addAuthorForm = {
     },
     
     getExistingAuthorUris: function() {
-
-    	var existingAuthors = $('#authorships li'); 
+    	// NB This only gets the id of the first one
+    	// return $('#authorships .authorLink').attr('id');
+    	var existingAuthors = $('#authorships .authorLink'); 
     	return existingAuthors.map(function() {
     		return $(this).attr('id');
     	});
     	
     },
     
-    prepareFieldValuesForSubmit: function() {
+    prepareSubmit: function() {
     	var firstName,
     	    middleName,
     	    lastName,

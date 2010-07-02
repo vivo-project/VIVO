@@ -362,6 +362,13 @@ SPARQL queries for existing values. --%>
     <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
 </div> 
 
+<div id="infoForJs">
+    <span class="rankPred" id="${rankPred}"></span>
+    <span class="rankXsdType" id="${intDatatypeUri}"></span>
+    <span class="acUrl" id="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />"></span>
+    <span class="reorderUrl" id="<c:url value="/edit/primitiveRdfEdit" />"></span>
+</div>
+
 <form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <h3>Add an Author</h3>
@@ -377,11 +384,7 @@ SPARQL queries for existing values. --%>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
-    <input type="hidden" name="rankPred" id="rankPred" value="${rankPred}" />
-    <input type="hidden" name="rankXsdType" id="rankXsdType" value="${intDatatypeUri}" />
     <input type="hidden" name="rank" id="rank" value="${newRank}" />
-    <input type="hidden" name="acUrl" id="acUrl" value="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />" />
-    <input type="hidden" name="reorderUrl" id="reorderUrl" value="<c:url value="/edit/primitiveRdfEdit" />" />
 
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
     
