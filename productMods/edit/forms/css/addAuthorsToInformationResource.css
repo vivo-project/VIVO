@@ -9,6 +9,7 @@
     margin-bottom: .75em;
 }
 
+#authorships.dd li,
 #authorships.ui-sortable li {
     padding-left: 1em;
     background: url("../images/sortable_icon.png") no-repeat left center;    

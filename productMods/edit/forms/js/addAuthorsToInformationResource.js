@@ -3,7 +3,6 @@
 var addAuthorForm = {
 
     onLoad: function() {
-
 		this.mixIn();
         this.initObjects();                 
         this.initPage();       
@@ -111,20 +110,32 @@ var addAuthorForm = {
     			dataType: 'json',
     			context: $(this), // context for callback
     			complete: function(request, status) {
-    				var authorship = $(this).parents('.authorship');
-//    				var author = $(this).siblings('span.author');
-//    				var authorLink = author.children('a.authorLink');
-//    				var authorName = authorLink.html();
+    				var authorship = $(this).parents('.authorship'),
+    					nextAuthorships = authorship.next(),
+    					rank;
+//    				    author = $(this).siblings('span.author'),
+//    				    authorLink = author.children('a.authorLink'),
+//    				    authorName = authorLink.html();
+    				
     				if (status === 'success') {
-    					// Reset the position value of each succeeding authorship
-    					authorship.next().each(function() {
-    						var pos = parseInt($(this).children('.position').attr('id'));
-    						$(this).children('.position').attr('id', pos-1);
-    					});
-    					
+
+    					if (nextAuthorships.length) {
+    						// Reset the position value of each succeeding authorship
+    						nextAuthorships.each(function() {
+        						//var pos = parseInt($(this).children('.position').attr('id'));
+        						//$(this).children('.position').attr('id', pos-1);
+        						var pos = addAuthorForm.getPosition(this);
+        						addAuthorForm.setPosition(this, pos-1);    						
+        					});
+    					} else {
+    						// Removed author was last in rank: reset the rank hidden form field
+        					rank = addAuthorForm.getRank(authorship); 
+        					$('input#rank').val(rank);    						
+    					}
+
     					authorship.fadeOut(400, function() {
     						$(this).remove();
-        					// If there's just one author remaining, remove the drag and drop title message.
+        					// If there's just one author remaining, disable drag-drop
         					if ($('.authorship').length == 1) {
         						addAuthorForm.disableAuthorDD();
         					}
@@ -152,12 +163,13 @@ var addAuthorForm = {
     	
     },
     
-    // Disable DD and cues if only one author remaining
+    // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
-    	var author = $('.authorship');
+    	var authorship = $('.authorship');
     	$('#authorships').sortable({ disable: true} );
-    	author.css('background', 'none');
-    	author.css('padding-left', '0');
+    	authorship.css('background', 'none');
+    	authorship.css('padding-left', '0');
+    	authorship.children('.author').attr('title', '');
     },
     
     onLastNameChange: function() {
@@ -300,9 +312,7 @@ var addAuthorForm = {
     	}
     	
     	authorships.each(function() {
-    		// Make sure all browsers support title attribute on elements other than link and image.
-    		// If not, move title to the author link.
-    		$(this).attr('title', 'Drag and drop to reorder authors');
+    		$(this).children('.author').attr('title', 'Drag and drop to reorder authors');
     	});
     	
     	authorshipList.sortable({
@@ -316,7 +326,7 @@ var addAuthorForm = {
         		$('li.authorship').each(function(index) {
         			var uri = $(this).attr('id'),
         			subjectUri = '<' + uri + '>',
-        			oldRankVal = $(this).children('.rank').attr('id'),
+        			oldRankVal = addAuthorForm.getRankVal(this),
         			newRank = index + 1,                            
         			newRankForN3,
         			oldRank,
@@ -338,7 +348,7 @@ var addAuthorForm = {
         			// of the Ajax request.
         			authorship = {
         		        uri: uri,
-        				newRank: newRank + '_' + rankXsdType
+        				rankVal: newRank + '_' + rankXsdType
         			};
         			authorships.push(authorship);
         			
@@ -362,22 +372,24 @@ var addAuthorForm = {
         		    	$.each(authorships, function(index, obj) {
         		    		// find the element with this uri as id
         		    		var el = $('li[id=' + obj.uri + ']'),
-        		    			rank = obj.newRank,
-        		    			pos = rank.split('_')[0];
-        		    		// set the new rank for this element 
-        		    		el.children('.rank').attr('id', rank);   
-        		    		el.children('.position').attr('id', pos);
+        		    			// because all ranks have been reordered without gaps,
+        		    			// we can get the position from the rank
+        		    			pos = obj.rankVal.split('_')[0];
+        		    		// set the new rank and position for this element 
+        		    		addAuthorForm.setRankVal(el, obj.rankVal);
+        		    		addAuthorForm.setPosition(el, pos);
         		    	});
         			},
         			error: function(request, status, error) {
         				// Put the moved item back to its original position.
         				// Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
-        				var pos = ui.item.children('.position').attr('id'),
-        				    nextpos = parseInt(pos) + 1,
+        				var pos = addAuthorForm.getPosition(ui.item),
+        					//ui.item.children('.position').attr('id'),
+        				    nextpos = pos + 1,
         				    authorships = $('#authorships'),
         				    next = authorships.find('.position[id=' + nextpos + ']').parent();
         				
-        				if (next.length > 0) {
+        				if (next.length) {
         					ui.item.insertBefore(next);
         				} else {
         					ui.item.appendTo(authorships);
@@ -390,6 +402,28 @@ var addAuthorForm = {
     	});   	
     },
     
+    getPosition: function(authorship) {
+    	return parseInt($(authorship).children('.position').attr('id'));
+    },
+    
+    setPosition: function(authorship, pos) {
+    	$(authorship).children('.position').attr('id', pos);
+    },
+    
+    // Get the authorship rank value, which includes xsd type
+    getRankVal: function(authorship) {
+    	return $(authorship).children('.rank').attr('id');
+    },
+    
+    // Get the integer value from the authorship rank value
+    getRank: function(authorship) {
+    	return this.getRankVal(authorship).split('_')[0];
+    },
+    
+    setRankVal: function(authorship, rank) {
+    	$(authorship).children('.rank').attr('id', rank);
+    },
+     
     makeRankDataPropVal: function(rank, xsdType) {
     	var rankVal = '"' + rank + '"';
     	if (xsdType) {
