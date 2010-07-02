@@ -285,19 +285,16 @@ SPARQL queries for existing values. --%>
 <h2>${title}</h2>
 
 <% 
-        // Try this in order to get the  new author hightlighted after page reload.
-        // If we do an ajax submit, we won't need it.
-        //String processedForm = (String) vreq.getAttribute("processedForm");
-        //String ulClass = "";
-        //if (processedForm != null && processedForm.equals("true")) {
-        //    ulClass = "class='processedSubmission'";          
-        //}
-        //System.out.println(vreq.getAttribute("entToReturnTo"));
         String ulClass = "";
+
         if (authorships.size() > 1) {
             // This class triggers application of dd styles. Don't wait for js to add 
             // the ui-sortable class, because then the page flashes as the styles are updated.
-            ulClass = "class='dd'";
+            ulClass = "dd";
+        }
+        
+        if (! "".equals(ulClass)) {
+            ulClass = "class='" + ulClass + "'";
         }
 %>
      

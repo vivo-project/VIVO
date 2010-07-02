@@ -111,7 +111,7 @@ var addAuthorForm = {
     			context: $(this), // context for callback
     			complete: function(request, status) {
     				var authorship = $(this).parents('.authorship'),
-    					nextAuthorships = authorship.next(),
+    					nextAuthorships = authorship.nextAll(),
     					rank;
 //    				    author = $(this).siblings('span.author'),
 //    				    authorLink = author.children('a.authorLink'),
