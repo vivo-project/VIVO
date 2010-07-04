@@ -96,27 +96,42 @@ var addAuthorForm = {
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
-            // RY Upgrade this to a modal window
-            var message = "Are you sure you want to remove this author?";
-            if (!confirm(message)) {
-                return false;
-            }
-            $.ajax({
-                url: $(this).attr('href'),
-                type: 'POST', 
-                data: {
-                    deletion: $(this).parents('.authorship').attr('id')
-                },
-                dataType: 'json',
-                context: $(this), // context for callback
-                complete: function(request, status) {
-                    var authorship = $(this).parents('.authorship'),
-                        nextAuthorships = authorship.nextAll(),
-                        rank;
-//                      author = $(this).siblings('span.author'),
-//                      authorLink = author.children('a.authorLink'),
-//                      authorName = authorLink.html();
-                
+            addAuthorForm.removeAuthorship(this);
+
+            return false;
+    	});
+    	
+//    	this.undoLinks.click(function() {
+//    		$.ajax({
+//    			url: $(this).attr('href')
+//    		});
+//    		return false;    		
+//    	});
+    	
+    },
+    
+    removeAuthorship: function(link) {
+        // RY Upgrade this to a modal window
+        var message = "Are you sure you want to remove this author?";
+        if (!confirm(message)) {
+            return false;
+        }
+        $.ajax({
+            url: $(link).attr('href'),
+            type: 'POST', 
+            data: {
+                deletion: $(link).parents('.authorship').attr('id')
+            },
+            dataType: 'json',
+            context: link, // context for callback
+            complete: function(request, status) {
+                var authorship = $(this).parents('.authorship'),
+                    nextAuthorships = authorship.nextAll(),
+                    rank;
+//                  author = $(this).siblings('span.author'),
+//                  authorLink = author.children('a.authorLink'),
+//                  authorName = authorLink.html();
+            
                 if (status === 'success') {
 
                     if (nextAuthorships.length) {
@@ -132,7 +147,7 @@ var addAuthorForm = {
                         rank = addAuthorForm.getRank(authorship); 
                         $('input#rank').val(rank);                          
                     }
-                    
+                
                     // In future, do this selectively by only clearing terms that match the
                     // deleted author's name
                     addAuthorForm.acCache = {};
@@ -149,26 +164,16 @@ var addAuthorForm = {
                         addAuthorForm.setAcUrl();
                     });
 
-//                      $(this).hide();
-//                      $(this).siblings('.undo').show();
-//                      author.html(authorName + ' has been removed');
-//                      author.css('width', 'auto');
-//                      author.effect("highlight", {}, 3000);
+//                  $(this).hide();
+//                  $(this).siblings('.undo').show();
+//                  author.html(authorName + ' has been removed');
+//                  author.css('width', 'auto');
+//                  author.effect("highlight", {}, 3000);
                 } else {
                     alert('Error processing request: author not removed');
                 }
             }
         });        
-            return false;
-    	});
-    	
-//    	this.undoLinks.click(function() {
-//    		$.ajax({
-//    			url: $(this).attr('href')
-//    		});
-//    		return false;    		
-//    	});
-    	
     },
     
     // Disable DD and associated cues if only one author remains
@@ -452,11 +457,11 @@ var addAuthorForm = {
     		minLength: 2,
     		source: function(request, response) {
     			if (request.term in addAuthorForm.acCache) {
-    				console.log("found term in cache");
+    				// console.log("found term in cache");
     				response(addAuthorForm.acCache[request.term]);
     				return;
     			}
-    			console.log("not getting term from cache");
+    			// console.log("not getting term from cache");
     			
                 // If the url query params are too long, we could do a post
                 // here instead of a get. Add the exclude uris to the data
