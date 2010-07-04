@@ -51,7 +51,7 @@ var addAuthorForm = {
     	
     	this.initAutocomplete();
     	
-    	this.initAuthorReordering();
+    	this.initAuthorDD();
     	
     	if (this.findValidationErrors()) {
     		this.initFormAfterInvalidSubmission();
@@ -96,65 +96,70 @@ var addAuthorForm = {
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
-    		// RY Upgrade this to a modal window
-    		var message = "Are you sure you want to remove this author?";
-    		if (!confirm(message)) {
-    			return false;
-    		}
-    		$.ajax({
-    			url: $(this).attr('href'),
-    			type: 'POST', 
-    			data: {
-    				deletion: $(this).parents('.authorship').attr('id')
-    			},
-    			dataType: 'json',
-    			context: $(this), // context for callback
-    			complete: function(request, status) {
-    				var authorship = $(this).parents('.authorship'),
-    					nextAuthorships = authorship.nextAll(),
-    					rank;
-//    				    author = $(this).siblings('span.author'),
-//    				    authorLink = author.children('a.authorLink'),
-//    				    authorName = authorLink.html();
-    				
-    				if (status === 'success') {
+            // RY Upgrade this to a modal window
+            var message = "Are you sure you want to remove this author?";
+            if (!confirm(message)) {
+                return false;
+            }
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'POST', 
+                data: {
+                    deletion: $(this).parents('.authorship').attr('id')
+                },
+                dataType: 'json',
+                context: $(this), // context for callback
+                complete: function(request, status) {
+                    var authorship = $(this).parents('.authorship'),
+                        nextAuthorships = authorship.nextAll(),
+                        rank;
+//                      author = $(this).siblings('span.author'),
+//                      authorLink = author.children('a.authorLink'),
+//                      authorName = authorLink.html();
+                
+                if (status === 'success') {
 
-    					if (nextAuthorships.length) {
-    						// Reset the position value of each succeeding authorship
-    						nextAuthorships.each(function() {
-        						//var pos = parseInt($(this).children('.position').attr('id'));
-        						//$(this).children('.position').attr('id', pos-1);
-        						var pos = addAuthorForm.getPosition(this);
-        						addAuthorForm.setPosition(this, pos-1);    						
-        					});
-    					} else {
-    						// Removed author was last in rank: reset the rank hidden form field
-        					rank = addAuthorForm.getRank(authorship); 
-        					$('input#rank').val(rank);    						
-    					}
+                    if (nextAuthorships.length) {
+                        // Reset the position value of each succeeding authorship
+                        nextAuthorships.each(function() {
+                            //var pos = parseInt($(this).children('.position').attr('id'));
+                            //$(this).children('.position').attr('id', pos-1);
+                            var pos = addAuthorForm.getPosition(this);
+                            addAuthorForm.setPosition(this, pos-1);                         
+                        });
+                    } else {
+                        // Removed author was last in rank: reset the rank hidden form field
+                        rank = addAuthorForm.getRank(authorship); 
+                        $('input#rank').val(rank);                          
+                    }
+                    
+                    // In future, do this selectively by only clearing terms that match the
+                    // deleted author's name
+                    addAuthorForm.acCache = {};
 
-    					authorship.fadeOut(400, function() {
-    						$(this).remove();
-        					// If there's just one author remaining, disable drag-drop
-        					if ($('.authorship').length == 1) {
-        						addAuthorForm.disableAuthorDD();
-        					}
-        					// Reset the excluded uris in the autocomplete url so that the
-        					// author just removed is no longer excluded.
-        					$('#lastName').autocomplete('option', 'source', addAuthorForm.getAcUrl());
-    					});
+                    authorship.fadeOut(400, function() {
+                        $(this).remove();
+                        // Actions that depend on the author having been removed from the DOM:
+                        // If there's just one author remaining, disable drag-drop
+                        if ($('.authorship').length == 1) {
+                            addAuthorForm.disableAuthorDD();
+                        }
+                        // Reset the excluded uris in the autocomplete url so that the
+                        //author just removed is no longer excluded.
+                        addAuthorForm.setAcUrl();
+                    });
 
-//    					$(this).hide();
-//    					$(this).siblings('.undo').show();
-//    					author.html(authorName + ' has been removed');
-//    					author.css('width', 'auto');
-//    					author.effect("highlight", {}, 3000);
-    				} else {
-    					alert('Error processing request: author not removed');
-    				}
-    			}
-    		});
-    		return false;
+//                      $(this).hide();
+//                      $(this).siblings('.undo').show();
+//                      author.html(authorName + ' has been removed');
+//                      author.css('width', 'auto');
+//                      author.effect("highlight", {}, 3000);
+                } else {
+                    alert('Error processing request: author not removed');
+                }
+            }
+        });        
+            return false;
     	});
     	
 //    	this.undoLinks.click(function() {
@@ -305,7 +310,7 @@ var addAuthorForm = {
     	this.personUriField.val('');
     },
     
-    initAuthorReordering: function() {
+    initAuthorDD: function() {
     	
     	var authorshipList = $('#authorships'),
     		authorships = authorshipList.children();
@@ -437,37 +442,39 @@ var addAuthorForm = {
     
     initAutocomplete: function() {
 
-    	//var cache = {};
-    	// RY change to this.cache = {}
-    	// then we'll have access to it when removing an author
+    	// Make cache a property of this so we can access it after removing 
+    	// an author.
+    	this.acCache = {};
+    	this.baseAcUrl = $('.acUrl').attr('id');    	
+    	this.setAcUrl();
     	
     	$('#lastName').autocomplete({
     		minLength: 2,
-    		source: addAuthorForm.getAcUrl(),
-// RY For now, not using cache because there are complex interactions between filtering and caching.
-// We want to filter out existingAuthors from autocomplete results, and this seems easiest to do
-// server-side. But if an author gets removed, we need to put them back in the results. If results
-// are cached, the cache needs to be cleared on a remove. 
-//    		source: function(request, response) {
-//    			if (request.term in cache) {
-//    				//console.log("found term in cache");
-//    				response(cache[request.term]);
-//    				return;
-//    			}
-//    			
-//    			$.ajax({
-//    				url: url,
-//    				dataType: 'json',
-//    				data: request,
-//    				complete: function(data) {
-//    					cache[request.term] = data;
-//    					console.log(data);
-//    					//console.log("not getting term from cache");
-//    					response(data);
-//    				}
-//
-//    			});
-//    		},
+    		source: function(request, response) {
+    			if (request.term in addAuthorForm.acCache) {
+    				console.log("found term in cache");
+    				response(addAuthorForm.acCache[request.term]);
+    				return;
+    			}
+    			console.log("not getting term from cache");
+    			
+                // If the url query params are too long, we could do a post
+                // here instead of a get. Add the exclude uris to the data
+                // rather than to the url.
+    			$.ajax({
+    				url: addAuthorForm.acUrl,
+    				dataType: 'json',
+    				data: request,
+    				complete: function(xhr) {
+                        // Not sure why, but we need an explicit json parse here. jQuery
+                        // should parse the response text and return an json object.
+                        var results = jQuery.parseJSON(xhr.responseText);
+    					addAuthorForm.acCache[request.term] = results;  
+    					response(results);
+    				}
+
+    			});
+    		},
 		    select: function(event, ui) {
     			addAuthorForm.showSelectedAuthor(ui);		
 			}
@@ -475,15 +482,18 @@ var addAuthorForm = {
 
     },
     
-    getAcUrl: function() {
-    	var url = $('.acUrl').attr('id'),
+    setAcUrl: function() {
+    	var url = this.baseAcUrl, 
     		existingAuthors = $('#authorships .authorLink'); 
+    	
+    	//console.log("in setAcUrl()");
+    	//console.log("number of existing authors: " + existingAuthors.length);
     	
     	existingAuthors.each(function() {
     		url += '&excludeUri=' + $(this).attr('id');
     	});
-    	
-    	return url;
+
+    	this.acUrl = url;
     },
     
     prepareSubmit: function() {
