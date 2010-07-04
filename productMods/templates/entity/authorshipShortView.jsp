@@ -38,9 +38,9 @@
 				    	<c:choose>
 				    		<c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedAuthor']}"><%-- there is a related Person --%>
 				    		    <c:set var="author" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedAuthor'].objectPropertyStatements[0].object}" />
-					    		<c:set var="name"  value="${author.name}"/>
-                                <c:set var="label" value="${author.moniker}"/>
-                                <c:set var="uri"   value="${author.URI}"/>
+					    		<c:set var="name" value="${author.name}"/>
+                                <c:set var="label" value="${author.dataPropertyMap['http://vivoweb.org/ontology/core#preferredTitle'].dataPropertyStatements[0].data}" />
+                                <c:set var="uri" value="${author.URI}"/>
 					    	</c:when>
 					    	<c:when test="${!empty individual.dataPropertyMap['http://vivoweb.org/ontology/core#authorNameAsListed'].dataPropertyStatements[0].data}"><%-- only an author name has been specified --%>
                                 <c:set var="name" value="<strong>${individual.dataPropertyMap['http://vivoweb.org/ontology/core#authorNameAsListed'].dataPropertyStatements[0].data}</strong>"/>
