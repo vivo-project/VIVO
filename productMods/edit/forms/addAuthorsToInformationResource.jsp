@@ -21,7 +21,6 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 --%>
 
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.Collections" %>
