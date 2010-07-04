@@ -161,11 +161,11 @@ var addAuthorForm = {
             minLength: 2,
             source: function(request, response) {
                 if (request.term in addAuthorForm.acCache) {
-                    // console.log("found term in cache");
+                    // console.log('found term in cache');
                     response(addAuthorForm.acCache[request.term]);
                     return;
                 }
-                // console.log("not getting term from cache");
+                // console.log('not getting term from cache');
                 
                 // If the url query params are too long, we could do a post
                 // here instead of a get. Add the exclude uris to the data
@@ -195,8 +195,8 @@ var addAuthorForm = {
         var url = this.baseAcUrl, 
             existingAuthors = $('#authorships .authorLink'); 
         
-        //console.log("in setAcUrl()");
-        //console.log("number of existing authors: " + existingAuthors.length);
+        //console.log('in setAcUrl()');
+        //console.log('number of existing authors: ' + existingAuthors.length);
         
         existingAuthors.each(function() {
             url += '&excludeUri=' + $(this).attr('id');
@@ -286,8 +286,8 @@ var addAuthorForm = {
                 });
         
                 // console.log(authorships)
-                // console.log("additions: " + additions);
-                // console.log("retractions: " + retractions);
+                // console.log('additions: ' + additions);
+                // console.log('retractions: ' + retractions);
         
                 $.ajax({
                     url: $('.reorderUrl').attr('id'),
@@ -469,7 +469,7 @@ var addAuthorForm = {
      
     removeAuthorship: function(link) {
         // RY Upgrade this to a modal window
-        var message = "Are you sure you want to remove this author?";
+        var message = 'Are you sure you want to remove this author?';
         if (!confirm(message)) {
             return false;
         }
@@ -525,7 +525,7 @@ var addAuthorForm = {
 //                  $(this).siblings('.undo').show();
 //                  author.html(authorName + ' has been removed');
 //                  author.css('width', 'auto');
-//                  author.effect("highlight", {}, 3000);
+//                  author.effect('highlight', {}, 3000);
                 } else {
                     alert('Error processing request: author not removed');
                 }
@@ -544,8 +544,8 @@ var addAuthorForm = {
 
     // RY To be implemented later.
     toggleRemoveLink: function() {
-    	// when clicking remove: remove the author, and change link text to "undo"
-    	// when clicking undo: add the author back, and change link text to "remove"
+    	// when clicking remove: remove the author, and change link text to 'undo'
+    	// when clicking undo: add the author back, and change link text to 'remove'
     }
 
 };

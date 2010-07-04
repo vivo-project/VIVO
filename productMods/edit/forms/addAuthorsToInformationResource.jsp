@@ -21,6 +21,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 --%>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.Collections" %>
@@ -38,6 +39,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.StringUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
@@ -234,7 +236,7 @@ SPARQL queries for existing values. --%>
 }
 </c:set>
    
-<% 
+<%
     log.debug(request.getAttribute("editjson"));
 
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
@@ -274,6 +276,19 @@ SPARQL queries for existing values. --%>
                                                                  "/edit/forms/css/addAuthorsToInformationResource.css"                                                                
                                                                 ));                                                                                                                                 
     request.setAttribute("customCss", customCss); 
+    
+    String ulClass = "";
+    List<String> ulClasses = new ArrayList<String>();
+    
+    if (authorships.size() > 1) {
+        // This class triggers application of dd styles. Don't wait for js to add 
+        // the ui-sortable class, because then the page flashes as the styles are updated.
+        ulClasses.add("dd");
+    }
+
+    if (ulClasses.size() > 0) {
+        ulClass="class=\"" + StringUtils.join(ulClasses, " ") + "\"";
+    }
 %>
 
 <c:set var="title" value="<em>${infoResourceName}</em>: Authors" />
@@ -284,20 +299,6 @@ SPARQL queries for existing values. --%>
 
 <h2>${title}</h2>
 
-<% 
-        String ulClass = "";
-
-        if (authorships.size() > 1) {
-            // This class triggers application of dd styles. Don't wait for js to add 
-            // the ui-sortable class, because then the page flashes as the styles are updated.
-            ulClass = "dd";
-        }
-        
-        if (! "".equals(ulClass)) {
-            ulClass = "class='" + ulClass + "'";
-        }
-%>
-     
 <ul id="authorships" <%= ulClass %>>
     <%
  
