@@ -139,8 +139,11 @@ var addAuthorForm = {
         					if ($('.authorship').length == 1) {
         						addAuthorForm.disableAuthorDD();
         					}
+        					// Reset the excluded uris in the autocomplete url so that the
+        					// author just removed is no longer excluded.
+        					$('#lastName').autocomplete('option', 'source', addAuthorForm.getAcUrl());
     					});
-	
+
 //    					$(this).hide();
 //    					$(this).siblings('.undo').show();
 //    					author.html(authorName + ' has been removed');
@@ -434,22 +437,17 @@ var addAuthorForm = {
     
     initAutocomplete: function() {
 
-    	var cache = {};
-    	var url = $('.acUrl').attr('id');
-    	var existingAuthorUris = addAuthorForm.getExistingAuthorUris();
-
-    	jQuery.each(existingAuthorUris, function(index, element) {
-    		url += '&excludeUri=' + element;
-    	});
+    	//var cache = {};
+    	// RY change to this.cache = {}
+    	// then we'll have access to it when removing an author
     	
     	$('#lastName').autocomplete({
     		minLength: 2,
-    		source: url,
+    		source: addAuthorForm.getAcUrl(),
 // RY For now, not using cache because there are complex interactions between filtering and caching.
 // We want to filter out existingAuthors from autocomplete results, and this seems easiest to do
 // server-side. But if an author gets removed, we need to put them back in the results. If results
-// are cached, the cache needs to be cleared on a remove. Not sure if we have access to it there.
-// Lots of complexity involved, so for now let's try without the cache.
+// are cached, the cache needs to be cleared on a remove. 
 //    		source: function(request, response) {
 //    			if (request.term in cache) {
 //    				//console.log("found term in cache");
@@ -477,14 +475,15 @@ var addAuthorForm = {
 
     },
     
-    getExistingAuthorUris: function() {
-    	// NB This only gets the id of the first one
-    	// return $('#authorships .authorLink').attr('id');
-    	var existingAuthors = $('#authorships .authorLink'); 
-    	return existingAuthors.map(function() {
-    		return $(this).attr('id');
+    getAcUrl: function() {
+    	var url = $('.acUrl').attr('id'),
+    		existingAuthors = $('#authorships .authorLink'); 
+    	
+    	existingAuthors.each(function() {
+    		url += '&excludeUri=' + $(this).attr('id');
     	});
     	
+    	return url;
     },
     
     prepareSubmit: function() {
