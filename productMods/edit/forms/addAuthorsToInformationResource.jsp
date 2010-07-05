@@ -257,7 +257,9 @@ SPARQL queries for existing values. --%>
     String vivoCore = "http://vivoweb.org/ontology/core#";
     
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
-    
+    // We could do this instead, then iterate through the statements, but we still can't use PropertyRanker because
+    // it compares Property objects rather than statements.
+    // List<ObjectPropertyStatement> authorshipStmts = infoResource.getObjectPropertyStatements(vivoCore + "informationResourceInAuthorship");    
     vreq.setAttribute("infoResourceName", infoResource.getName());
     
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
@@ -299,15 +301,18 @@ SPARQL queries for existing values. --%>
 <%
 	String rankPredicateUri = vivoCore + "authorRank";
 	
-    // RY Should get authorRank object property stmts rather than Authorship individuals; then can use
-    // existing PropertyRanker. But since PropertyRanker is a private class of EntityMergedPropertyListController,
-    // this isn't so straightforward.
+    // RY Would be nice to use PropertyRanker, which is used on the Individual page to sort properties, 
+    // but the types are wrong. We could get the ObjectPropertyStatements instead of the Authorships, but
+    // PropertyRanker.compare uses a list of Property objects.
     DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
     Collections.sort(authorships, comp);
         
     int maxRank = 0;
     int authorshipCount = 0;  
-    
+
+    // for ( ObjectPropertyStatement stmt : authorshipStmts) {
+    //     Individual authorship = stmt.getObject();
+        
     for ( Individual authorship : authorships ) {
         Individual author = authorship.getRelatedIndividual(vivoCore + "linkedAuthor");
         if ( author != null ) {
