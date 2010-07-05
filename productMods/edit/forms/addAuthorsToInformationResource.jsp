@@ -330,11 +330,8 @@ SPARQL queries for existing values. --%>
             }                                                
         }
         request.setAttribute("rankValue", rankValue);
-
-        Individual author = authorship.getRelatedIndividual(vivoCore + "linkedAuthor");
-        if ( author != null ) {        
-            request.setAttribute("author", author);
-        } 
+       
+        request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor"));
         
         // This value is used to replace a moved element after a failed reorder.
         // It's not the same as rank, because ranks may have gaps. 
@@ -347,18 +344,22 @@ SPARQL queries for existing values. --%>
             <%-- span.author will be used in the next phase, when we display a message that the author has been
             removed. That text will replace the a.authorLink, which will be removed. --%>    
             <span class="author">
+                <c:choose>
+                    <c:when test="${!empty author}">
+                        <c:url var="authorHref" value="/individual">
+                            <c:param name="uri" value="${author.URI}"/>
+                        </c:url> 
+                        <a href="${authorHref}" id="${author.URI}" class="authorLink">${author.name}</a>                   
+                    </c:when>
 
-<%          if (author != null) { // c:choose not working here, don't know why %>
-	            <c:url var="authorHref" value="/individual">
-	                <c:param name="uri" value="${author.URI}"/>
-	            </c:url> 
-	            <a href="${authorHref}" id="${author.URI}" class="authorLink">${author.name}</a>
-<%          } else { %>
-	            <c:url var="authorshipHref" value="/individual">
-	                <c:param name="uri" value="${authorshipUri}"/>
-	            </c:url>                
-	            <a href="${authorshipHref}" id="${authorshipUri}" class="authorLink noAuthor">${authorshipName}</a> <em>(no linked author)</em>
-<%          } %>
+                    <c:otherwise>
+	                   <c:url var="authorshipHref" value="/individual">
+	                       <c:param name="uri" value="${authorshipUri}"/>
+	                   </c:url>                
+	                   <a href="${authorshipHref}" id="${authorshipUri}" class="authorLink">${authorshipName}<em> (no linked author)</em></a>
+                    </c:otherwise>
+                </c:choose>
+                
                 <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
                 <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
                 <%-- <a href="${undoHref}" class="undo">Undo</a>  --%>

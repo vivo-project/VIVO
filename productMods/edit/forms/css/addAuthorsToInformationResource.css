@@ -20,10 +20,6 @@
     width: 15em;
 }
 
-#authorships a.authorLink.noAuthor {
-    width: auto;
-}
-
 #showAddForm span.or {
     display: none;
 }
