@@ -15,7 +15,7 @@
     background: url("../images/sortable_icon.png") no-repeat left center;    
 }
 
-#authorships a.authorLink {
+#authorships .authorLinkWrapper {
     display: inline-block;
     width: 15em;
 }

@@ -344,22 +344,25 @@ SPARQL queries for existing values. --%>
             <%-- span.author will be used in the next phase, when we display a message that the author has been
             removed. That text will replace the a.authorLink, which will be removed. --%>    
             <span class="author">
-                <c:choose>
-                    <c:when test="${!empty author}">
-                        <c:url var="authorHref" value="/individual">
-                            <c:param name="uri" value="${author.URI}"/>
-                        </c:url> 
-                        <a href="${authorHref}" id="${author.URI}" class="authorLink">${author.name}</a>                   
-                    </c:when>
-
-                    <c:otherwise>
-	                   <c:url var="authorshipHref" value="/individual">
-	                       <c:param name="uri" value="${authorshipUri}"/>
-	                   </c:url>                
-	                   <a href="${authorshipHref}" id="${authorshipUri}" class="authorLink">${authorshipName}<em> (no linked author)</em></a>
-                    </c:otherwise>
-                </c:choose>
-                
+                <%-- This span is here to assign a width to. We can't assign directly to the a.authorLink,
+                for the case when it's followed by an em tag - we want the width to apply to the whole thing. --%>
+                <span class="authorLinkWrapper">
+	                <c:choose>
+	                    <c:when test="${!empty author}">
+	                        <c:url var="authorHref" value="/individual">
+	                            <c:param name="uri" value="${author.URI}"/>
+	                        </c:url> 
+	                        <a href="${authorHref}" id="${author.URI}" class="authorLink">${author.name}</a>                   
+	                    </c:when>
+	
+	                    <c:otherwise>
+		                   <c:url var="authorshipHref" value="/individual">
+		                       <c:param name="uri" value="${authorshipUri}"/>
+		                   </c:url>                
+		                   <a href="${authorshipHref}" id="${authorshipUri}" class="authorLink">${authorshipName}</a><em> (no linked author)</em>
+	                    </c:otherwise>
+	                </c:choose>
+                </span>
                 <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
                 <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
                 <%-- <a href="${undoHref}" class="undo">Undo</a>  --%>
