@@ -5,7 +5,7 @@
 Classes: 
 core:InformationResource - the information resource being edited
 core:Authorship - primary new individual being created
-foaf:Person - new or existing individual
+foaf:Person - new or existing individual being linked to
 
 Data properties of Authorship:
 core:authorRank
@@ -31,6 +31,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
+<%-- <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.EntityMergedPropertyListController.PropertyRanker" %> --%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
@@ -256,8 +257,6 @@ SPARQL queries for existing values. --%>
     Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);   
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
     String rankPredicateUri = "http://vivoweb.org/ontology/core#authorRank";
-    DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
-    Collections.sort(authorships, comp);
     
     vreq.setAttribute("infoResourceName", infoResource.getName());
     
@@ -299,59 +298,65 @@ SPARQL queries for existing values. --%>
 <h2>${title}</h2>
 
 <ul id="authorships" <%= ulClass %>>
-    <%
- 
-        int rank = 0;
-        int index = 0;
+<%
+
+    // RY Should get authorRank properties rather than Authorship individuals; then can use
+    // existing PropertyRanker
+    DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
+    Collections.sort(authorships, comp);
         
-        for ( Individual authorship : authorships ) {
-            String rankDatatypeUri = "";
+    int maxRank = 0;
+    int position = 0;  
+    
+    for ( Individual authorship : authorships ) {
+        Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
+        if ( author != null ) {
+            position++;
+            String rankValue = "";
             DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
             if (rankStmt != null) {
-                rank = Integer.valueOf(rankStmt.getData());           
-                rankDatatypeUri = rankStmt.getDatatypeURI();
+                rankValue = rankStmt.getData();
+                maxRank = Integer.valueOf(rankValue);
+                String rankDatatypeUri = rankStmt.getDatatypeURI();
+                if ( !StringUtils.isEmpty(rankDatatypeUri) ) {
+                    rankValue += "_" + rankDatatypeUri;
+                }                                                
             }
-            
-            Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
-            if ( author != null ) {
-                index++;
-                request.setAttribute("authorName", author.getName());
-                // Doesn't seem to need urlencoding to add as id attribute value
-                //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
-                request.setAttribute("authorUri", author.getURI());
-                request.setAttribute("authorshipUri", authorship.getURI());
-                request.setAttribute("rankValue", rank + "_" + rankDatatypeUri);
-                request.setAttribute("rank", rank);
-                
-                // This value is used to replace a moved element after a failed reorder.
-                // It's not the same as rank, because ranks may have gaps. It's easier to
-                // reposition the element using ordering.
-                request.setAttribute("position", index);
+            request.setAttribute("rankValue", rankValue);
+            request.setAttribute("authorName", author.getName());
+            // Doesn't seem to need urlencoding to add as id attribute value
+            //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
+            request.setAttribute("authorUri", author.getURI());
+            request.setAttribute("authorshipUri", authorship.getURI());
 
-                %> 
-                <c:url var="authorHref" value="/individual">
-                    <c:param name="uri" value="${authorUri}"/>
-                </c:url>
-                <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
-        
-                <li class="authorship" id="${authorshipUri}">
-                    <span class="rank" id="${rankValue}"></span> 
-                    <span class="position" id="${position}"></span> 
-                    <%-- This span will be used in the next phase, when we display a message that the author has been
-                    removed. That text will replace the a.authorLink, which will be removed. --%>
-                    <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${authorName}</a>
-                    <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
-                    <%-- <a href="${undoHref}" class="undo">Undo</a>  --%></span>
-                </li> 
+            // This value is used to replace a moved element after a failed reorder.
+            // It's not the same as rank, because ranks may have gaps. 
+            request.setAttribute("position", position);
                 
-                <% 
-            }          
-        }
-        // A new author will be ranked last when added.
-        // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
-        request.setAttribute("newRank", rank + 1);
-        request.setAttribute("rankPred", rankPredicateUri);
-    %>
+            %> 
+            <c:url var="authorHref" value="/individual">
+                <c:param name="uri" value="${authorUri}"/>
+            </c:url>
+            <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
+        
+            <li class="authorship" id="${authorshipUri}">
+                <span class="rank" id="${rankValue}"></span> 
+                <span class="position" id="${position}"></span> 
+                <%-- This span will be used in the next phase, when we display a message that the author has been
+                removed. That text will replace the a.authorLink, which will be removed. --%>
+                <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${authorName}</a>
+                <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
+                <%-- <a href="${undoHref}" class="undo">Undo</a>  --%></span>
+            </li> 
+                
+            <% 
+        }          
+    }
+    // A new author will be ranked last when added.
+    // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
+    request.setAttribute("newRank", maxRank + 1);
+    request.setAttribute("rankPred", rankPredicateUri);
+%>
     
 </ul>
 

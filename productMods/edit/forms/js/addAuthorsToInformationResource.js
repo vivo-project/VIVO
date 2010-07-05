@@ -265,16 +265,19 @@ var addAuthorForm = {
                     oldRankForN3,
                     rankVals;
 
-                    rankVals = oldRankVal.split('_');  // e.g., 1_http://www.w3.org/2001/XMLSchema#int
-                    oldRank = rankVals[0];
-                    oldRankType = rankVals[1];          
-                    oldRankForN3 = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);
+                    if (oldRankVal) {
+                        // e.g., 1_http://www.w3.org/2001/XMLSchema#int
+                        // We handle typeless values formatted as either "1" or "1_".
+                        rankVals = oldRankVal.split('_');  
+                        oldRank = rankVals[0];
+                        oldRankType = rankVals.length > 1 ? rankVals[1] : '';                      
+                        oldRankForN3 = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);                        
+                        retractions += subjectUri + ' ' + predicateUri + ' ' + oldRankForN3 + ' .';
+                    }
 
-                    newRankForN3 = addAuthorForm.makeRankDataPropVal(newRank, rankXsdType);
-            
+                    newRankForN3 = addAuthorForm.makeRankDataPropVal(newRank, rankXsdType);           
                     additions += subjectUri + ' ' + predicateUri + ' ' + newRankForN3 +  ' .';
-                    retractions += subjectUri + ' ' + predicateUri + ' ' + oldRankForN3 + ' .';
-            
+                               
                     // This data will be used to modify the page after successful completion
                     // of the Ajax request.
                     authorship = {
