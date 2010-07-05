@@ -31,7 +31,6 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
-<%-- <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.EntityMergedPropertyListController.PropertyRanker" %> --%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
@@ -255,12 +254,11 @@ SPARQL queries for existing values. --%>
     String predicateUri = vreq.getParameter("predicateUri");
     
     Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);   
+    String vivoCore = "http://vivoweb.org/ontology/core#";
+    
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
-    String rankPredicateUri = "http://vivoweb.org/ontology/core#authorRank";
     
     vreq.setAttribute("infoResourceName", infoResource.getName());
-    
-    String linkedAuthorProperty = "http://vivoweb.org/ontology/core#linkedAuthor";
     
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.UTILS.path(),
@@ -299,19 +297,21 @@ SPARQL queries for existing values. --%>
 
 <ul id="authorships" <%= ulClass %>>
 <%
-
-    // RY Should get authorRank properties rather than Authorship individuals; then can use
-    // existing PropertyRanker
+	String rankPredicateUri = vivoCore + "authorRank";
+	
+    // RY Should get authorRank object property stmts rather than Authorship individuals; then can use
+    // existing PropertyRanker. But since PropertyRanker is a private class of EntityMergedPropertyListController,
+    // this isn't so straightforward.
     DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
     Collections.sort(authorships, comp);
         
     int maxRank = 0;
-    int position = 0;  
+    int authorshipCount = 0;  
     
     for ( Individual authorship : authorships ) {
-        Individual author = authorship.getRelatedIndividual(linkedAuthorProperty);
+        Individual author = authorship.getRelatedIndividual(vivoCore + "linkedAuthor");
         if ( author != null ) {
-            position++;
+            authorshipCount++;
             String rankValue = "";
             DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
             if (rankStmt != null) {
@@ -324,14 +324,12 @@ SPARQL queries for existing values. --%>
             }
             request.setAttribute("rankValue", rankValue);
             request.setAttribute("authorName", author.getName());
-            // Doesn't seem to need urlencoding to add as id attribute value
-            //request.setAttribute("authorUri", URLEncoder.encode(author.getURI(), "UTF-8"));
             request.setAttribute("authorUri", author.getURI());
             request.setAttribute("authorshipUri", authorship.getURI());
 
             // This value is used to replace a moved element after a failed reorder.
             // It's not the same as rank, because ranks may have gaps. 
-            request.setAttribute("position", position);
+            request.setAttribute("position", authorshipCount);
                 
             %> 
             <c:url var="authorHref" value="/individual">
@@ -361,7 +359,7 @@ SPARQL queries for existing values. --%>
 </ul>
 
 <%
-    if (authorships.size() == 0) {
+    if (authorshipCount == 0) {
         %><p>This publication currently has no authors specified.</p><% 
     }
 %>
