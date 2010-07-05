@@ -314,47 +314,59 @@ SPARQL queries for existing values. --%>
     //     Individual authorship = stmt.getObject();
         
     for ( Individual authorship : authorships ) {
-        Individual author = authorship.getRelatedIndividual(vivoCore + "linkedAuthor");
-        if ( author != null ) {
-            authorshipCount++;
-            String rankValue = "";
-            DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
-            if (rankStmt != null) {
-                rankValue = rankStmt.getData();
-                maxRank = Integer.valueOf(rankValue);
-                String rankDatatypeUri = rankStmt.getDatatypeURI();
-                if ( !StringUtils.isEmpty(rankDatatypeUri) ) {
-                    rankValue += "_" + rankDatatypeUri;
-                }                                                
-            }
-            request.setAttribute("rankValue", rankValue);
-            request.setAttribute("authorName", author.getName());
-            request.setAttribute("authorUri", author.getURI());
-            request.setAttribute("authorshipUri", authorship.getURI());
+        authorshipCount++;
 
-            // This value is used to replace a moved element after a failed reorder.
-            // It's not the same as rank, because ranks may have gaps. 
-            request.setAttribute("position", authorshipCount);
-                
-            %> 
-            <c:url var="authorHref" value="/individual">
-                <c:param name="uri" value="${authorUri}"/>
-            </c:url>
-            <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
+        request.setAttribute("authorshipUri", authorship.getURI());
+        request.setAttribute("authorshipName", authorship.getName());
         
-            <li class="authorship" id="${authorshipUri}">
-                <span class="rank" id="${rankValue}"></span> 
-                <span class="position" id="${position}"></span> 
-                <%-- This span will be used in the next phase, when we display a message that the author has been
-                removed. That text will replace the a.authorLink, which will be removed. --%>
-                <span class="author"><a href="${authorHref}" id="${authorUri}" class="authorLink">${authorName}</a>
+        String rankValue = "";
+        DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
+        if (rankStmt != null) {
+            rankValue = rankStmt.getData();
+            maxRank = Integer.valueOf(rankValue);
+            String rankDatatypeUri = rankStmt.getDatatypeURI();
+            if ( !StringUtils.isEmpty(rankDatatypeUri) ) {
+                rankValue += "_" + rankDatatypeUri;
+            }                                                
+        }
+        request.setAttribute("rankValue", rankValue);
+
+        Individual author = authorship.getRelatedIndividual(vivoCore + "linkedAuthor");
+        if ( author != null ) {        
+            request.setAttribute("author", author);
+        } 
+        
+        // This value is used to replace a moved element after a failed reorder.
+        // It's not the same as rank, because ranks may have gaps. 
+        request.setAttribute("position", authorshipCount);                
+%> 
+        <li class="authorship" id="${authorshipUri}">
+            <span class="rank" id="${rankValue}"></span> 
+            <span class="position" id="${position}"></span> 
+
+            <%-- span.author will be used in the next phase, when we display a message that the author has been
+            removed. That text will replace the a.authorLink, which will be removed. --%>    
+            <span class="author">
+
+<%          if (author != null) { // c:choose not working here, don't know why %>
+	            <c:url var="authorHref" value="/individual">
+	                <c:param name="uri" value="${author.URI}"/>
+	            </c:url> 
+	            <a href="${authorHref}" id="${author.URI}" class="authorLink">${author.name}</a>
+<%          } else { %>
+	            <c:url var="authorshipHref" value="/individual">
+	                <c:param name="uri" value="${authorshipUri}"/>
+	            </c:url>                
+	            <a href="${authorshipHref}" id="${authorshipUri}" class="authorLink noAuthor">${authorshipName}</a> <em>(no linked author)</em>
+<%          } %>
+                <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
                 <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
-                <%-- <a href="${undoHref}" class="undo">Undo</a>  --%></span>
-            </li> 
-                
-            <% 
-        }          
+                <%-- <a href="${undoHref}" class="undo">Undo</a>  --%>
+            </span>
+        </li>             
+<%         
     }
+    
     // A new author will be ranked last when added.
     // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
     request.setAttribute("newRank", maxRank + 1);
@@ -363,11 +375,10 @@ SPARQL queries for existing values. --%>
     
 </ul>
 
-<%
-    if (authorshipCount == 0) {
-        %><p>This publication currently has no authors specified.</p><% 
-    }
-%>
+<%  if (authorshipCount == 0) { %>   
+        <p>This publication currently has no authors specified.</p>
+<%  } %>
+
 
 <div id="showAddForm">
     <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
