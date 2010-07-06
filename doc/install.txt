@@ -42,10 +42,10 @@ I. Install required software
 Before installing VIVO, make sure that the following software is installed on 
 the desired machine:
 
-    * Java (SE) 1.5 or higher [http://java.sun.com]
-    * Apache Tomcat 5.x or higher [http://tomcat.apache.org]
-    * Apache Ant [http://ant.apache.org]
-    * MySQL 4.1 or higher [http://www.mysql.com]
+    * Java (SE) 1.6 or higher [http://java.sun.com]
+    * Apache Tomcat 6.x or higher [http://tomcat.apache.org]
+    * Apache Ant 1.7 or higher [http://ant.apache.org]
+    * MySQL 5.1 or higher [http://www.mysql.com]
 
 -------------------------------------------------------------------------------
  
@@ -71,8 +71,8 @@ Keep track of the database name, username, and password for Step IV.
 III. Download the VIVO code distribution
 
 Download either a zip or gz file and unpack it on your web server:
-ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.0.zip
-ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.0.tar.gz
+ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.1.zip
+ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.1.tar.gz
 
 -------------------------------------------------------------------------------
  
@@ -111,15 +111,14 @@ example value:  /usr/local/tomcat
 property name:  webapp.name
 example value:  vivo
 
-                Directory where uploaded files will be stored. Depending on 
-                your permissions and who Tomcat is running as, you may need
-                to create these directories ahead of time.
+                Directory where uploaded files will be stored. You must create 
+                this directory ahead of time.
 property name:  upload.directory
 example value:  /usr/local/vivo/data/uploads
 
                 Directory where the Lucene search index will be built. 	
                 Depending on your permissions and who Tomcat is running as, 
-                you may need to create these directories ahead of time.
+                you may need to create this directory ahead of time.
 property name:  LuceneSetup.indexDir 	
 example value:  /usr/local/vivo/data/luceneIndex
 
@@ -283,6 +282,7 @@ Locate the <Host name="localhost"...> directive and update as follows:
 		docBase="/usr/local/tomcat/webapps/vivo"
 		reloadable="true"
 		cookies="true" >
+        <Manager pathname="" />
 		<Environment type="java.lang.String" override="false" 
 			name="path.configuration" 
 			value="deploy.properties"
