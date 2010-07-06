@@ -20,8 +20,8 @@ Object properties (domain : range)
 core:educationalBackground (Person : EducationalTraining) - inverse of educationalBackgroundOf
 core:educationalBackgroundOf (EducationalTraining : Person) - inverse of educationalBackground
 
-core:degreeTypeAwarded (EducationalTraining : AcademicDegree) - inverse of awardedTo
-core:awardedTo (AcademicDegree : EducationalTraining) - inverse of degreeTypeAwarded
+core:degreeEarned (EducationalTraining : AcademicDegree) - inverse of degreeOutcomeOf
+core:degreeOutcomeOf (AcademicDegree : EducationalTraining) - inverse of degreeEarned
 
 core:organizationGrantingDegree (EducationalTraining : Organization) - no inverse
 
@@ -145,15 +145,15 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <%--  Note there is really no difference in how things are set up for an object property except
       below in the n3ForEdit section, in whether the ..Existing variable goes in SparqlForExistingLiterals
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
-<c:set var="hasDegree" value="${vivoCore}degreeTypeAwarded" />
-<c:set var="degreeFor" value="${vivoCore}awardedTo" />
+<c:set var="degreeEarned" value="${vivoCore}degreeEarned" />
+<c:set var="degreeOutcomeOf" value="${vivoCore}degreeOutcomeOf" />
 <v:jsonset var="degreeExisting" >      
     SELECT ?existingDegreeUri WHERE {
-        ?edTrainingUri <${hasDegree}> ?existingDegreeUri }
+        ?edTrainingUri <${degreeEarned}> ?existingDegreeUri }
 </v:jsonset>
 <v:jsonset var="degreeAssertion" >      
-    ?edTrainingUri <${hasDegree}> ?degreeUri .
-    ?degreeUri <${degreeFor}> ?edTrainingUri .
+    ?edTrainingUri <${degreeEarned}> ?degreeUri .
+    ?degreeUri <${degreeOutcomeOf}> ?edTrainingUri .
 </v:jsonset>
 
 <c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />

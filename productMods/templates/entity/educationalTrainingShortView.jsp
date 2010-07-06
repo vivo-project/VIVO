@@ -18,9 +18,9 @@
             
                 <%-- Degree type and major --%>
                 <c:set var="degreeStr" value="" />
-                <c:set var="degreeType" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#degreeTypeAwarded'].objectPropertyStatements[0].object}"/>
-                <c:set var="degreeAbbreviation" value="${degreeType.dataPropertyMap['http://vivoweb.org/ontology/core#degreeAbbreviation'].dataPropertyStatements[0].data}"/>
-                <c:set var="degreeStr" value="${!empty degreeAbbreviation ? degreeAbbreviation : degreeType.name }" />
+                <c:set var="degreeType" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#degreeEarned'].objectPropertyStatements[0].object}"/>
+                <c:set var="degreeAbbr" value="${degreeType.dataPropertyMap['http://vivoweb.org/ontology/core#abbreviation'].dataPropertyStatements[0].data}"/>
+                <c:set var="degreeStr" value="${!empty degreeAbbr ? degreeAbbr : degreeType.name }" />
                 <c:set var="degreeMajor" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#majorField'].dataPropertyStatements[0].data}"/>
                 <c:if test="${ ! empty degreeMajor }">
                     <c:set var="degreeStr" value="${degreeStr} in ${degreeMajor}" />
@@ -71,7 +71,7 @@
             </c:when>
               
             <%-- SUBJECT is a Degree Type  --%>                     
-            <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#awardedTo'}">             
+            <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#degreeOutcomeOf'}">             
                 <c:set var="year" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#year'].dataPropertyStatements[0].data}"/>
                 <c:set var="degreeMajor" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#majorField'].dataPropertyStatements[0].data}"/>
                 
