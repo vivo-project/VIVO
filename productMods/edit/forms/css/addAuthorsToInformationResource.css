@@ -94,19 +94,13 @@ form a:hover.cancel,
     width: 10em;
 }
 
-#selectedAuthorName {
-    background-color: #d9d9d9;
-    padding: .5em 1em;
-}
-
 #content form p.submit {
     margin-top: 3em;
 }
 
 /* Disabling undo links for the present. Add back later. */
 /*
-a.undo, 
-#selectedAuthor {
+a.undo {
     display:  none;
 }
 */
@@ -116,8 +110,7 @@ a.undo,
 /*
 #showAddForm,
 a.remove,
-a.undo,
-#selectedAuthor {
+a.undo {
     display: none;
 }
 */

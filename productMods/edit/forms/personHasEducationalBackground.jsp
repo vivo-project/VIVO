@@ -7,8 +7,6 @@ core:EducationalTraining - primary new individual being created
 foaf:Person - existing individual
 foaf:Organization - new or existing individual
 core:AcademicDegree - existing individual
-core:DateTimeValue
-core:DateTimeValuePrecision
 
 Data properties of EducationalTraining:
 core:majorField
@@ -25,6 +23,12 @@ core:degreeOutcomeOf (AcademicDegree : EducationalTraining) - inverse of degreeE
 
 core:organizationGrantingDegree (EducationalTraining : Organization) - no inverse
 
+Future version
+--------------
+Classes:
+core:DateTimeValue
+core:DateTimeValuePrecision
+Object properties:
 core:dateTimeValue (EducationalTraining : DateTimeValue)
 core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 --%>

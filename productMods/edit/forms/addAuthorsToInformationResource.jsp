@@ -102,7 +102,7 @@ SPARQL queries for existing values. --%>
     ?authorshipUri core:authorRank ?rank .
 </v:jsonset>
 
-<%-- This applies to both new and existing person --%>
+<%-- This applies to both a new and an existing person --%>
 <v:jsonset var="n3ForNewAuthorship">
     @prefix core: <${vivoCore}> .
     
@@ -157,7 +157,7 @@ SPARQL queries for existing values. --%>
 
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "authorshipUri", "personUri" ],
+    "urisOnForm"     : [ "personUri" ],
     "literalsOnForm" : [ "firstName", "middleName", "lastName", "rank", "label" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
@@ -252,25 +252,25 @@ SPARQL queries for existing values. --%>
     
     String subjectUri = vreq.getParameter("subjectUri");
     String predicateUri = vreq.getParameter("predicateUri");
-    
-    Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);   
+
     String vivoCore = "http://vivoweb.org/ontology/core#";
     
-    List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);
-    // We could do this instead, then iterate through the statements, but we still can't use PropertyRanker because
-    // it compares Property objects rather than statements.
-    // List<ObjectPropertyStatement> authorshipStmts = infoResource.getObjectPropertyStatements(vivoCore + "informationResourceInAuthorship");    
+    //Individual infoResource = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
+    Individual infoResource = ((Individual) request.getAttribute("subject"));
     vreq.setAttribute("infoResourceName", infoResource.getName());
     
+    List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);   
+      
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.UTILS.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/edit/forms/js/addAuthorsToInformationResource.js"
-                                                                ));            
+                                                               ));            
     request.setAttribute("customJs", customJs);
 
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
+                                                                 "/edit/forms/css/autocomplete.css",
                                                                  "/edit/forms/css/addAuthorsToInformationResource.css"                                                                
                                                                 ));                                                                                                                                 
     request.setAttribute("customCss", customCss); 
@@ -398,14 +398,14 @@ SPARQL queries for existing values. --%>
 
     <h3>Add an Author</h3>
     
-    <p class="inline"><v:input type="text" id="lastName" label="Name ${requiredHint}" size="30" /></p>
+    <p class="inline"><v:input type="text" id="lastName" label="Name ${requiredHint}" cssClass="acInput" size="30" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint} ${initialHint}" size="20" /></p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name ${initialHint}" size="20" /></p>
     <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
     
-    <div id="selectedAuthor">
+    <div id="selectedAuthor" class="acSelection">
         <%-- RY maybe make this a label and input field. See what looks best. --%>
-        <p class="inline"><label>Selected author: </label><span id="selectedAuthorName"></span></p>
+        <p class="inline"><label>Selected author: </label><span class="acSelectionName" id="selectedAuthorName"></span></p>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
