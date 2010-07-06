@@ -7,9 +7,6 @@ foaf:Person - the individual being edited
 core:Authorship - primary new individual being created
 core:InformationResource - new or existing individual being linked to 
 
-Data properties of Authorship:
-core:authorRank
-
 Object properties (domain : range)
 
 core:informationResourceInAuthorship (InformationResource : Authorship) 
@@ -19,5 +16,3 @@ core:linkedAuthor (Authorship : Person)
 core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 
 --%>
-
-hello world

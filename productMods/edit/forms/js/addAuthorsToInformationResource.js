@@ -242,8 +242,9 @@ var addAuthorForm = {
             return;
         }
         
-        authorships.each(function() {
-            $(this).children('.author').attr('title', 'Drag and drop to reorder authors');
+        $('.authorLinkWrapper').each(function() {
+            $(this).attr('title', 'Drag and drop to reorder authors');
+            $(this).attr('cursor', 'pointer'); // not working??
         });
         
         authorshipList.sortable({
@@ -538,11 +539,13 @@ var addAuthorForm = {
     
     // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
-    	var authorship = $('.authorship');
-    	$('#authorships').sortable({ disable: true} );
+    	var authorship = $('.authorship'),
+            authorLinkWrapper = $('.authorLinkWrapper');
+    	$('#authorships').sortable({ disable: true } );
     	authorship.css('background', 'none');
     	authorship.css('padding-left', '0');
-    	authorship.children('.author').attr('title', '');
+    	authorLinkWrapper.attr('title', '');
+        authorLinkWrapper.attr('cursor', '');
     },
 
     // RY To be implemented later.
