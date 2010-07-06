@@ -207,11 +207,11 @@ the org type still gets asserted. --%>
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edTrainingUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}", "${yearAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
                         "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${deptAssertion}", "${infoAssertion}" ],
+                        "${deptAssertion}", "${infoAssertion}", "${yearAssertion}" ],
                         
     "newResources"  : { "edTrainingUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -258,7 +258,7 @@ the org type still gets asserted. --%>
       },
       "year" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -389,7 +389,7 @@ the org type still gets asserted. --%>
     <div class="entry"> 
         <v:input type="select" label="Degree ${requiredHint}" labelClass="required" id="degreeUri"  />  
         <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />      
-        <p class="inline year"><v:input type="text" label="Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="year" size="4" /></p>  
+        <p class="inline year"><v:input type="text" label="Year <span class='hint'>(YYYY)</span>" id="year" size="4" /></p>  
     </div>
      
     <div class="relatedIndividual">
@@ -411,7 +411,7 @@ the org type still gets asserted. --%>
     <div class="entry"> 
         <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
         <v:input type="text" label="Supplemental Information" id="info" size="50" />
-        <p>e.g., <em>Magna cum laude</em> or <em>Graduate School Fellowship, 1975-1976</em></p>    
+        <p>e.g., <em>Postdoctoral training</em> or <em>Transferred</em></p>    
     </div>
     
     <!-- Processing information for Javascript -->
