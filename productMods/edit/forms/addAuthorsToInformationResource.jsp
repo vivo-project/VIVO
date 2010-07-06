@@ -10,7 +10,7 @@ foaf:Person - new or existing individual being linked to
 Data properties of Authorship:
 core:authorRank
 
-Object properties (domain : range)
+Object properties (domain : range):
 
 core:informationResourceInAuthorship (InformationResource : Authorship) 
 core:linkedInformationResource (Authorship : InformationResource) - inverse of informationResourceInAuthorship
@@ -79,7 +79,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 
 <%-- Unlike other custom forms, this form does not allow edits of existing authors, so there are no
 SPARQL queries for existing values. --%>
-<%-- RY Is this claim correct, or do we need them to retrieve an existing individual? --%>
+
 <%-- Data properties --%>
 
 <v:jsonset var="newPersonFirstNameAssertion">

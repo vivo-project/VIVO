@@ -244,7 +244,6 @@ var addAuthorForm = {
         
         $('.authorLinkWrapper').each(function() {
             $(this).attr('title', 'Drag and drop to reorder authors');
-            $(this).attr('cursor', 'pointer'); // not working??
         });
         
         authorshipList.sortable({
@@ -539,13 +538,17 @@ var addAuthorForm = {
     
     // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
-    	var authorship = $('.authorship'),
+    	var authorships = $('#authorships'),
+            authorship = $('.authorship'),
             authorLinkWrapper = $('.authorLinkWrapper');
-    	$('#authorships').sortable({ disable: true } );
+            
+    	authorships.sortable({ disable: true } );
+        authorships.removeClass('dd');
+        
     	authorship.css('background', 'none');
     	authorship.css('padding-left', '0');
+        
     	authorLinkWrapper.attr('title', '');
-        authorLinkWrapper.attr('cursor', '');
     },
 
     // RY To be implemented later.

@@ -95,7 +95,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?edTrainingUri <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
-<%-- 
+<%-- For new datetime handling in ontology - v1.2
 <c:set var="dateTimeValue" value="${vivoCore}DateTimeValue" />
 <c:set var="hasDateTimeValue" value="${vivoCore}dateTimeValue" />
 <c:set var="precisionValue" value="${vivoCore}YearPrecision" />
@@ -113,16 +113,16 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?edTrainingUri core:dateTimeValue ?dateTime .
 </v:jsonset>
 --%>
-<%--
+
 <c:set var="yearPred" value="${vivoCore}year" />
 <v:jsonset var="yearExisting" >  
     SELECT ?existingYear WHERE {
-          ?edBackgroundUri <${yearPred}> ?existingYear }
+          ?edTrainingUri <${yearPred}> ?existingYear }
 </v:jsonset>
 <v:jsonset var="yearAssertion" >      
-    ?edBackgroundUri <${yearPred}> ?year .
+    ?edTrainingUri <${yearPred}> ?year .
 </v:jsonset>
- --%>
+
 <c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
 <v:jsonset var="deptExisting" >  
     SELECT ?existingDept WHERE {
