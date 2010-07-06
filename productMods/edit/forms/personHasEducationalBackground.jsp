@@ -207,11 +207,11 @@ the org type still gets asserted. --%>
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edTrainingUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${degreeAssertion}", "${majorFieldAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}",  "${majorFieldAssertion}" ],
     
-    "n3optional"    : [ "${organizationUriAssertion}",                         
-                        "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${deptAssertion}", "${infoAssertion}", "${yearAssertion}" ],
+    "n3optional"    : [ "${organizationUriAssertion}",  "${n3ForNewOrg}",                       
+                        "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
+                        "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}", "${yearAssertion}" ],
                         
     "newResources"  : { "edTrainingUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -236,7 +236,7 @@ the org type still gets asserted. --%>
     "fields" : {
       "degreeUri" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty" ],
+         "validators"       : [ ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
@@ -258,7 +258,7 @@ the org type still gets asserted. --%>
       },
       "year" : {
          "newResource"      : "false",
-         "validators"       : [ ],
+         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -387,7 +387,7 @@ the org type still gets asserted. --%>
 <form class="${editType}" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <div class="entry"> 
-        <v:input type="select" label="Degree ${requiredHint}" labelClass="required" id="degreeUri"  />  
+        <v:input type="select" label="Degree" id="degreeUri"  />  
         <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />      
         <p class="inline year"><v:input type="text" label="Year <span class='hint'>(YYYY)</span>" id="year" size="4" /></p>  
     </div>
