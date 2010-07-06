@@ -301,9 +301,8 @@ SPARQL queries for existing values. --%>
 <%
 	String rankPredicateUri = vivoCore + "authorRank";
 	
-    // RY Would be nice to use PropertyRanker, which is used on the Individual page to sort properties, 
-    // but the types are wrong. We could get the ObjectPropertyStatements instead of the Authorships, but
-    // PropertyRanker.compare uses a list of Property objects.
+    // RY We should use whatever is used on the individual profile page to list
+    // this property in rank order...
     DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
     Collections.sort(authorships, comp);
         
