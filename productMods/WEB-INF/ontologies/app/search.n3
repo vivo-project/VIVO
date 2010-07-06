@@ -17,4 +17,5 @@
 	vitroDisplay:excludeClass vivo:Authorship ;
 	vitroDisplay:excludeClass vivo:SubjectArea ; 
 	vitroDisplay:excludeClass vivo:Position ; 
+	vitroDisplay:excludeClass vivo:ResearchActivity ;
 	vitroDisplay:excludeClass vivo:EducationalBackground .
