@@ -13,6 +13,7 @@
 @import url("blueprint/liquid.css");
 @import url("blueprint/ie.css");
 @import url("institution.css");
+@import url("individual.css");
 
 body {
   position: relative;
@@ -704,4 +705,8 @@ em.note {
 h3.associate {
   margin-bottom: 0;
   text-align: left;
+}
+
+div.thumbnail img { 
+border:2px solid #d5d5d5;
 }
