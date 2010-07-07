@@ -6,9 +6,8 @@
 	width:500px;
 	height:280px;
 	background:#fff;
-	border:1px solid grey;
 	padding:15px;
-	
+
 	
 }
 
@@ -62,7 +61,7 @@
 	width:700px;
 	height:450px;
 	background:#fff;
-	border:1px solid grey;
+
 	padding:15px;
 	
 	
@@ -101,3 +100,29 @@
 	padding:15px;
 	
 }
+/* styles for error alerts */
+#errorAlert{
+	width:500px;
+	background-color:#900;
+	color:#FFF;
+	padding:1em;
+	margin-bottom: 15px;
+	font-family: Helvetica, sans-serif,Arial;
+	font-size: 1em;
+	line-height:1.2em;
+	
+}
+
+
+/*#errorAlert img{
+	float:left;
+	margin:0;
+	padding:0;
+	vertical-align:middle;
+	
+}
+
+#errorAlert  p{
+	/*padding-left:40px;*/
+	
+}*/
