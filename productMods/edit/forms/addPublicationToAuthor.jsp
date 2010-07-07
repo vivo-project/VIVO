@@ -66,8 +66,8 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
 %>
-
-<c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
+<c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="infoResourceClassUri" value="${vivoCore}InformationResource" />
@@ -112,8 +112,9 @@ SPARQL queries for existing values. --%>
     ?newPub core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-<v:jsonset var="infoResourceClassUriJson">${infoResourceClassUri}</v:jsonset>
-
+<%-- <v:jsonset var="infoResourceClassUriJson">${infoResourceClassUri}</v:jsonset> --%>
+<c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
+<v:jsonset var="publicationsClassGroupUriJson">${publicationsClassGroupUri}</v:jsonset>
 
 <c:set var="editjson" scope="request">
 {
@@ -157,10 +158,10 @@ SPARQL queries for existing values. --%>
       "pubType" : {
          "newResource"      : "false",
          "validators"       : [ ],
-         "optionsType"      : "CHILD_VCLASSES",
+         "optionsType"      : "VCLASSGROUP",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${infoResourceClassUriJson}",
+         "objectClassUri"   : "${publicationsClassGroupUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ "${newPubTypeAssertion}" ]
