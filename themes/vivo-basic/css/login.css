@@ -1,0 +1,164 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* styles for log in */
+#formLogin{
+	width:300px;
+	padding:20px;
+	border: 1px solid grey;
+	margin:0px;
+	text-align:left;
+	background-color:#FFF;
+	
+}
+
+.noOutterBox{
+	width:340px;
+	padding:0px;
+	border: none;
+	margin:0px;
+	
+	
+}
+
+#formLogin h2 {
+font-size:1.5em;
+line-height:1;
+margin-top:0px;
+margin-bottom:1em;
+color:#111;
+}
+
+
+#formLogin h6 {
+font-size:1.2em;
+line-height:1;
+margin-top:0px;
+margin-bottom:1em;
+color:#111;
+}
+
+#formLogin form {
+margin: 0;
+padding: 2em 2em .5em 2em;
+border: 1px solid #CCC; 
+}
+
+#formLogin label{
+display:block;
+margin-bottom:0.5em;
+font-weight:bold;
+
+
+}
+
+#formLogin label span{
+color:#900;
+
+
+}
+
+#formLogin input{
+display:block;
+margin-bottom:1.5em;
+width: 200px;
+
+}
+#formLogin textarea{
+width: 300px;
+display:block;
+margin-bottom:1.5em;
+
+
+}
+
+#formLogin .checkBox{
+display:inline;
+width:1em;
+margin-bottom: 1em;
+
+}
+#formLogin p.small{
+	font-size: 0.8em;
+	
+}
+
+
+
+#formLogin input.submit{
+
+	width: auto;
+	padding: 0 0.9em;
+	display:inline;
+	
+}
+
+.requestAccount{
+	padding: 1em 0 0 2em;
+	margin-bottom:0;
+}
+
+.requestAccountNoOutterBox{
+	padding: 1em 0 0 0;
+	margin-bottom:0;
+}
+
+#errorAlert{
+	background-color:#900;
+	color:#FFF;
+	padding:1em 1em 0.2em 1em;
+	margin-bottom: 15px;
+	
+}
+
+
+#errorAlert img{
+	float:left;
+	margin:0;
+	padding:0;
+	vertical-align:middle;
+	
+}
+
+#errorAlert  p{
+padding-left:40px;
+	
+}
+
+
+
+
+#confirmationAlert{
+	background-color:#7AA600;
+	color:#FFF;
+	padding:1em 1em 0.2em 1em;
+	margin-bottom: 15px;
+	
+}
+
+
+#confirmationAlert  img{
+	float:left;
+	margin:0;
+	padding:0;
+	vertical-align:middle;
+	
+}
+
+#confirmationAlert  p{
+padding-left:40px;
+	
+}
+
+
+.formFieldAlert{
+	border:2px solid #900;
+
+}
+
+.red{
+color:#900;	
+}
+
+
+
+
