@@ -220,12 +220,12 @@ SPARQL queries for existing values. --%>
 
     <v:input type="select" label="Publication type" id="pubType" />
     
-    <v:input type="text" id="title" label="title" cssClass="acInput" size="50" />
+    <v:input type="text" id="title" label="title" cssClass="acInput newIndLabel" size="50" />
 
     <div class="acSelection">
         <%-- RY maybe make this a label and input field. See what looks best. --%>
         <p class="inline"><label>Selected :</label><span class="acSelectionName"></span></p>
-        <input type="hidden" id="pubUri" name="pubUri" value="" /> <!-- Field value populated by JavaScript -->
+        <input type="hidden" id="pubUri" name="pubUri" cssClass="existingIndUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
     <p class="submit"><v:input type="submit" id="submit" value="Create Publication" cancel="true" /></p>

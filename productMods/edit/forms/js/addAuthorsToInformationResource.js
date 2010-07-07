@@ -130,20 +130,20 @@ var addAuthorForm = {
     showFieldsForNewPerson: function() {    
         this.firstNameWrapper.show();
         this.middleNameWrapper.show();
-        this.toggleLastNameLabel('Name', 'Last name');
+        // this.toggleLastNameLabel('Name', 'Last name');
     },
 
     hideFieldsForNewPerson: function() {   
         this.hideFields(this.firstNameWrapper); 
         this.hideFields(this.middleNameWrapper); 
-        this.toggleLastNameLabel('Last name', 'Name');
+        // this.toggleLastNameLabel('Last name', 'Name');
     },
         
-    toggleLastNameLabel: function(currentText, newText) {
-        var lastNameLabelText = this.lastNameLabel.html(),
-            newLastNameLabelText = lastNameLabelText.replace(currentText, newText);
-        this.lastNameLabel.html(newLastNameLabelText);  
-    },
+//    toggleLastNameLabel: function(currentText, newText) {
+//        var lastNameLabelText = this.lastNameLabel.html(),
+//            newLastNameLabelText = lastNameLabelText.replace(currentText, newText);
+//        this.lastNameLabel.html(newLastNameLabelText);  
+//    },
     
         
     /* *** Ajax initializations *** */
@@ -451,24 +451,26 @@ var addAuthorForm = {
     onLastNameChange: function() {
         this.showFieldsForNewPerson();
         this.firstNameField.focus();
-        this.fixNames();
+        // this.fixNames();
     },
     
     // User may have typed first name as well as last name into last name field.
     // If so, when showing first and middle name fields, move anything after a comma
     // or space into the first name field.
-    fixNames: function() {
-        var lastNameInput = this.lastNameField.val(),
-            names = lastNameInput.split(/[, ]+/), 
-            lastName = names[0];
- 
-        this.lastNameField.val(lastName);
-        
-        if (names.length > 1) {
-            //firstName = names[1].replace(/^[, ]+/, '');
-            this.firstNameField.val(names[1]);
-        } 
-    },
+    // RY Space is problematic because they may be entering "<firstname> <lastname>", but
+    // comma is a clear case. 
+//    fixNames: function() {
+//        var lastNameInput = this.lastNameField.val(),
+//            names = lastNameInput.split(/[, ]+/), 
+//            lastName = names[0];
+// 
+//        this.lastNameField.val(lastName);
+//        
+//        if (names.length > 1) {
+//            //firstName = names[1].replace(/^[, ]+/, '');
+//            this.firstNameField.val(names[1]);
+//        } 
+//    },
      
     removeAuthorship: function(link) {
         // RY Upgrade this to a modal window
