@@ -521,8 +521,11 @@ var addAuthorForm = {
 //                  authorName = authorLink.html();
             
                 if (status === 'success') {
-                    // Both these cases can be replaced by calling a reorder. And we could
-                    // do away with the position span altogether in that case.   
+                    // Both these cases can be replaced by calling a reorder: 
+                    // positions are not needed if we always eliminate gaps in rank 
+                    // (what about an error on the reorder call, though?)
+                    // The reset of the rank hidden form field is done in the
+                    // reorder callback.   
                     if (nextAuthorships.length) {
                         // Reset the position value of each succeeding authorship
                         nextAuthorships.each(function() {
