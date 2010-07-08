@@ -20,14 +20,18 @@ var customFormWATS = {
     initObjects: function(){
         
         this.form = $('#content form');
+        this.fullViewOnly = $('#fullViewOnly');
         this.button = $('#submit');
-        this.or = $('span.or');
         this.requiredLegend = $('#requiredLegend');
+        this.typeSelector = this.form.find('#typeSelector');
+        
+        this.or = $('span.or');       
+        this.cancel = this.form.find('.cancel');
+        
+        // These are classed rather than id'd in case we want more than one autocomplete on a form.
+        this.acSelector = this.form.find('.acSelector');
+        this.acSelection = this.form.find('.acSelection'); 
 
-        this.typeSelector = this.form.find('.typeSelector');
-        this.acInput = this.form.find('.acInput');
-        this.acSelection = this.form.find('.acSelection');        
-        this.cancel = this.form.find('cancel');
            
     },
 
@@ -47,30 +51,50 @@ var customFormWATS = {
         this.requiredLegend.hide();
 
         this.cancel.unbind('click');
-        this.cancel('click', function() {
-            
-        });                
+              
     },
     
     initFormFullView: function() {
         
-        this.button.show();
+        this.fullViewOnly.show();
         this.or.show();
         this.requiredLegend.show();
+        this.button.show();
+        this.button.val('Create Publication');
         
-        this.cancel.unbind('click');
-        this.cancel('click', function() {
-            
+        this.cancel.click(function() {
+            customFormWATS.initFormTypeView();            
         });        
     },
     
-    // Bind event listeners that apply to all form views
+    // Bind event listeners that can persist over the life of the page.
     bindEventListeners: function() {
         
+        this.typeSelector.change(function() {
+            var labelField,
+                labelFieldLabel,
+                labelText,
+                selectedText;
+                
+            if ($(this).val().length) {
+                
+                // Set label for label field
+                labelField = $('#label');
+                labelFieldLabel = $('label[for=' + labelField.attr('id') + ']');
+                labelText = labelFieldLabel.html();
+                selectedText = $(this).find(':selected').html();
+                labelFieldLabel.html(selectedText + ' ' + labelText);
+                
+                customFormWATS.initFormFullView();
+                
+                // set ac type 
+            }
+        });        
     },
     
     initAutocomplete: function() {
         
+        // ac selection: disable typeSelector and acSelector
     }
     
 

@@ -209,16 +209,18 @@ SPARQL queries for existing values. --%>
 
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <v:input type="select" label="Publication type" name="pubType" id="typeSelector" />
+    <p class="inline"><v:input type="select" label="Publication Type" name="pubType" id="typeSelector" /></p>
     
-    <v:input type="text" id="title" label="title" cssClass="acInput newIndLabel" size="50" />
+    <div id="fullViewOnly">
+	    <v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" />
 
-    <div class="acSelection">
-        <%-- RY maybe make this a label and input field. See what looks best. --%>
-        <p class="inline"><label>Selected :</label><span class="acSelectionName"></span></p>
-        <input type="hidden" id="pubUri" name="pubUri" cssClass="existingIndUri" value="" /> <!-- Field value populated by JavaScript -->
-    </div>
-    
+	    <div class="acSelection">
+	        <%-- RY maybe make this a label and input field. See what looks best. --%>
+	        <p class="inline"><label>Selected :</label><span class="acSelectionName"></span></p>
+	        <input type="hidden" id="pubUri" name="pubUri" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
+	    </div>
+    </div>   
+     
     <p class="submit"><v:input type="submit" id="submit" value="Create Publication" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
