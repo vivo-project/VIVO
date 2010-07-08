@@ -131,16 +131,16 @@ a{
 color:#FF7700; 
 }
 
-a.cancel:link,  a.cancel:visited {
+a.cancelUpload:link,  a.cancelUpload:visited {
 color:#FF7700; 
 }
 
-a.cancel:hover {
-color:#FFF; !important;
+a.cancelUpload:hover {
+color:#FFF;
 background-color:#FF7700;
 }
 
-form a.cancel:active {
-color:#FF7700; !important;
+a.cancelUpload:active {
+color:#FF7700;
 }
 
