@@ -362,6 +362,8 @@ SPARQL queries for existing values. --%>
     
     // A new author will be ranked last when added.
     // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
+    // This value is now inserted by JavaScript, but leave it here as a safety net in case page
+    // load reordering returns an error. 
     request.setAttribute("newRank", maxRank + 1);
     request.setAttribute("rankPred", rankPredicateUri);
 %>
