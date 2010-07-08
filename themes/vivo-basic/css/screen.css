@@ -707,6 +707,18 @@ h3.associate {
   text-align: left;
 }
 
+/************************
+Upload Images
+************************/
+
 div.thumbnail img { 
 border:3px solid #d5d5d5;
+}
+
+/************************
+Miscellaneous
+************************/
+
+.clear{
+clear:both;
 }
