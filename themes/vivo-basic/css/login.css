@@ -3,8 +3,7 @@
 /* styles for log in */
 #formLogin{
 	width:300px;
-	padding:20px;
-	border: 1px solid grey;
+	padding:0px;
 	margin:0px;
 	text-align:left;
 	background-color:#FFF;
@@ -21,8 +20,8 @@
 }
 
 #formLogin h2 {
-font-size:1.5em;
-line-height:1;
+font-size:1.3em;
+line-height:1em;
 margin-top:0px;
 margin-bottom:1em;
 color:#111;
@@ -31,7 +30,7 @@ color:#111;
 
 #formLogin h6 {
 font-size:1.2em;
-line-height:1;
+line-height:1em;
 margin-top:0px;
 margin-bottom:1em;
 color:#111;
@@ -39,8 +38,8 @@ color:#111;
 
 #formLogin form {
 margin: 0;
-padding: 2em 2em .5em 2em;
-border: 1px solid #CCC; 
+padding: 0;
+
 }
 
 #formLogin label{
@@ -103,10 +102,11 @@ margin-bottom: 1em;
 }
 
 #errorAlert{
-	background-color:#900;
-	color:#FFF;
-	padding:1em 1em 0.2em 1em;
-	margin-bottom: 15px;
+	color:#900;
+	padding:0px;
+	margin-bottom:5px;
+	
+	height:30px;
 	
 }
 
@@ -117,37 +117,44 @@ margin-bottom: 1em;
 	padding:0;
 	vertical-align:middle;
 	
+	
 }
 
 #errorAlert  p{
-padding-left:40px;
+padding-left:30px;
+font-size:0.9em;
+line-height:30px;
 	
 }
 
 
-
-
-#confirmationAlert{
-	background-color:#7AA600;
-	color:#FFF;
-	padding:1em 1em 0.2em 1em;
-	margin-bottom: 15px;
+##confirmationAlert {
+	color:#900;
+	padding:0px;
+	margin-bottom:5px;
+	
+	height:30px;
 	
 }
 
 
-#confirmationAlert  img{
+##confirmationAlert  img{
 	float:left;
 	margin:0;
 	padding:0;
 	vertical-align:middle;
 	
-}
-
-#confirmationAlert  p{
-padding-left:40px;
 	
 }
+
+##confirmationAlert   p{
+padding-left:30px;
+font-size:0.9em;
+line-height:30px;
+	
+}
+
+
 
 
 .formFieldAlert{
