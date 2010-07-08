@@ -16,7 +16,7 @@
                 <#include "search.ftl">                
             </div> <!-- navAndSearch --> 
 
-            <#-- <#include "/partials/breadcrumbs.ftl"> -->         
+            <#-- <#include "breadcrumbs.ftl"> -->         
         </div> <!-- header --> 
 
         <hr class="hidden" />
