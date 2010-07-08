@@ -71,17 +71,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>Sis Admin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginPassword</td>
 	<td>myPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,12 +96,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>(1st login; changing to new private password)</td>
+	<td>Create Your New Password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please now choose a private password</td>
+	<td>Please enter a password with more than 5 characters</td>
 	<td></td>
 </tr>
 <tr>
@@ -111,12 +111,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>newPassword</td>
+	<td>myPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
 	<td>myPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,72 +136,52 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>(1st login; changing to new private password)</td>
+	<td>Create Your New Password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please pick a different password from the one provided initially</td>
+	<td>Please choose a different password from the temporary one provided initially.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter a password with more than 5 characters</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Type in a different new password</td>
+	<td class="comment">Type in a different new password, mispelling the confirmation password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>newPassword</td>
 	<td>newPassword</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(changing to new password)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please re-enter new private password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Type in wrong spelling on confirmation</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>password</td>
+	<td>confirmPassword</td>
 	<td>newPasword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(password incorrect)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Incorrect password: try again</td>
+	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Rejected due to type in confirmed password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -206,12 +191,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>newPassword</td>
+	<td>newPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
 	<td>newPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -222,6 +212,11 @@
 <tr>
 	<td>comment</td>
 	<td class="comment">Log in accepted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logged in as Sis Admin</td>
 	<td></td>
 </tr>
 <tr>
