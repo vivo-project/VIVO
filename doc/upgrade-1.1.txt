@@ -54,7 +54,8 @@ II. The Upgrade Process
     original source directory, the MySQL database, and the uploaded files 
     directory (images).
 
-2. Download the new distribution file and unpack it into a new source directory.
+2. Download the new distribution file and unpack it into a new source 
+    directory.
 
 3. Create deploy.properties, using the same values as in your previous 
     installation.  
@@ -66,7 +67,17 @@ II. The Upgrade Process
       have changed. It will be necessary to inspect the new source files and 
       add any changes to them at that time.
 
-  >>>>>> TBD -- Note on Google Analytics Tracking code to footer.jsp? (lines 68-73 in update-1.0.txt)      
+   Note: At a minimum it will be necessary to apply the Google Analytics 
+      Tracking Code to googleAnalytics.ftl in the theme:
+      [new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl
+      
+      A sample googleAnalytics.ftl is included in the built-in theme. This file 
+      serves only as an example, and you must replace the tracking code shown 
+      with your institution's own tracking code.
+      
+      For additional information and a copy your institution's tracking code, 
+      see the Google Analytics wiki page.
+      https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI     
       
    Note: This process assumes any changes made to the application were made in 
       the source directory and deployed, and were not made directly within 
