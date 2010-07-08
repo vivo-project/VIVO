@@ -28,3 +28,18 @@ Follow these steps:
   4) Follow the instructions in "install.txt" to complete the installation, 
      omitting step III.
  
+-------------------------------------------------------------------------------
+Answers to Frequently Asked Questions:
+-------------------------------------------------------------------------------
+
+Q: I'm running VIVO in Tomcat on a MacIntosh. When I upload an image file, a 
+   strange icon appears in the dock. What's up with that?
+   
+A: The image processing code in VIVO uses javax.imageio.ImageIO, which in turn
+   uses code in the java.awt package. By default, this package will open a work
+   area on your screen, producing this icon even though no visible window is
+   created.
+   
+   You can prevent this by editing {tomcat}/conf/setenv.sh, and adding the 
+   "java.awt.headless" option. For example,
+       export CATALINA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=64m -Djava.awt.headless=true"
