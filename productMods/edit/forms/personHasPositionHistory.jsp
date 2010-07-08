@@ -31,14 +31,6 @@
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
-    String flagUri = null;
-    if (vreq.getAppBean().isFlag1Active()) {
-        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagUri",flagUri);
-    
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
 %>
@@ -120,16 +112,14 @@
     ?person      core:personInPosition  ?positionUri .
     
     ?positionUri core:positionForPerson ?person ;
-                 a  ?positionType ,
-                    <${flagUri}> .
+                 a  ?positionType .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
     ?positionUri <${positionInOrgPred}> ?newOrg .
     
     ?newOrg <${label}> ?newOrgName ;
-            a ?newOrgType ,
-              <${flagUri}> ;
+            a ?newOrgType ;
             <${orgForPositionPred}> ?positionUri .
 
 </v:jsonset>

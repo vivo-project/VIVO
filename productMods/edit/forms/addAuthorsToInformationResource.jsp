@@ -55,14 +55,6 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
-
-    String flagUri = null;
-    if (wdf.getApplicationDao().isFlag1Active()) {
-        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagUri",flagUri);
     
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     
@@ -106,8 +98,7 @@ SPARQL queries for existing values. --%>
 <v:jsonset var="n3ForNewAuthorship">
     @prefix core: <${vivoCore}> .
     
-    ?authorshipUri a core:Authorship ,
-                     <${flagUri}> ;
+    ?authorshipUri a core:Authorship ;
                    core:linkedInformationResource ?infoResource ;
                    core:authorRank ?rank .
                    
@@ -124,8 +115,7 @@ SPARQL queries for existing values. --%>
     @prefix foaf: <${foaf}> . 
     @prefix core: <${vivoCore}> .
     
-    ?newPerson a foaf:Person ,
-                 <${flagUri}> ;
+    ?newPerson a foaf:Person ;
                <${label}> ?label .
                
     ?authorshipUri core:linkedAuthor ?newPerson .

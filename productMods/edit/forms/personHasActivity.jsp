@@ -32,14 +32,6 @@
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
-
-    String flagUri = null;
-    if (wdf.getApplicationDao().isFlag1Active()) {
-        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagUri",flagUri);
     
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearMonthDatatypeUriJson", MiscWebUtils.escape(XSD.gYearMonth.toString()));
@@ -134,8 +126,7 @@
 
     ?activityUri <${labelUri}> ?label ;
                  a <${activityClass}> ;
-                 a <${activitySuperClass}> ;
-                 a <${flagUri}> ;   
+                 a <${activitySuperClass}> ;  
                  <${inverseUri}> ?person ;
                  <${inverseSuperPropertyUri}> ?person .
 

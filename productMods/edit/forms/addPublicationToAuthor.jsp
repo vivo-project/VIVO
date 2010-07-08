@@ -51,14 +51,6 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
-
-    String flagUri = null;
-    if (wdf.getApplicationDao().isFlag1Active()) {
-        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagUri",flagUri);
     
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     
@@ -87,8 +79,7 @@ SPARQL queries for existing values. --%>
 <v:jsonset var="n3ForNewAuthorship">
     @prefix core: <${vivoCore}> .
     
-    ?authorshipUri a core:Authorship ,
-                     <${flagUri}> ;
+    ?authorshipUri a core:Authorship ;
                    core:linkedAuthor ?person .  
                      
     ?person core:authorInAuthorship ?authorshipUri .                
@@ -104,8 +95,7 @@ SPARQL queries for existing values. --%>
 <v:jsonset var="n3ForNewPub">
     @prefix core: <${vivoCore}> .
     
-    ?newPub a ?pubType ,
-              <${flagUri}> ;
+    ?newPub a ?pubType ;
             <${label}> ?title .
                
     ?authorshipUri core:linkedInformationResource ?newPub .
@@ -219,7 +209,7 @@ SPARQL queries for existing values. --%>
 
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <v:input type="select" label="Publication type" id="pubType" />
+    <v:input type="select" label="Publication type" name="pubType" id="typeSelector" />
     
     <v:input type="text" id="title" label="title" cssClass="acInput newIndLabel" size="50" />
 

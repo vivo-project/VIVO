@@ -15,7 +15,7 @@ var addAuthorForm = {
     	vitro.utils.borrowMethods(vitro.customFormUtils, this);
     },
     
-    // On page load, create references within the addAuthorForm scope to DOM elements.
+    // On page load, create references for easy access to form elements.
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function() {
     	

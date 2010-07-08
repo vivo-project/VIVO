@@ -17,15 +17,7 @@
 <%
 	VitroRequest vreq = new VitroRequest(request);
 	WebappDaoFactory wdf = vreq.getWebappDaoFactory();
-	vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior	
-	
-    String flagURI = null;
-    if (vreq.getAppBean().isFlag1Active()) {
-        flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagURI = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagURI",flagURI);    
+	vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior	  
 %>
 
 <v:jsonset var="personClassUri">http://xmlns.com/foaf/0.1/Person</v:jsonset>
@@ -80,8 +72,7 @@
     @prefix core: <http://vivoweb.org/ontology/core#>.    
 	?organizationUri core:organizationForPosition  ?positionUri .
 	?positionUri     core:positionInOrganization   ?organizationUri .	
-    ?positionUri rdf:type               core:Position .
-    ?positionUri rdf:type <${flagURI}> .    
+    ?positionUri rdf:type               core:Position .    
 </v:jsonset>
 
 <c:set var="editjson" scope="request">

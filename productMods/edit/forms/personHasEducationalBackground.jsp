@@ -62,14 +62,6 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
-    String flagUri = null;
-    if (wdf.getApplicationDao().isFlag1Active()) {
-        flagUri = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagUri = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagUri",flagUri);
-    
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
 %>
@@ -185,14 +177,12 @@ the org type still gets asserted. --%>
     ?person core:educationalBackground  ?edTrainingUri .
     
     ?edTrainingUri core:educationalBackgroundOf ?person ;
-                     a core:EducationalTraining ,
-                       <${flagUri}> .
+                     a core:EducationalTraining .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
     ?newOrg <${label}> ?newOrgName ;
-            a ?newOrgType ,
-              <${flagUri}> .
+            a ?newOrgType .
             
     ?edTrainingUri <${orgGrantingDegree}> ?newOrg .
 </v:jsonset>
