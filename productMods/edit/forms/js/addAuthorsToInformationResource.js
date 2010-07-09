@@ -180,7 +180,7 @@ var addAuthorForm = {
                     data: request,
                     complete: function(xhr) {
                         // Not sure why, but we need an explicit json parse here. jQuery
-                        // should parse the response text and return an json object.
+                        // should parse the response text and return a json object.
                         var results = jQuery.parseJSON(xhr.responseText);
                         addAuthorForm.acCache[request.term] = results;  
                         response(results);

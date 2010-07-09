@@ -86,15 +86,18 @@ var customForm = {
     bindEventListeners: function() {
         
         this.typeSelector.change(function() {
-            if ($(this).val().length) {                
+            var typeVal = $(this).val();
+            // Set the type of individual that the autocomplete will search for.
+            // We do this even if typeVal is empty, to clear out a previous value.
+            customForm.resetAutocomplete(typeVal); 
+            if (typeVal.length) {                
                 customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
-                customForm.initFormFullView();
-                // Set the type of individual that the autocomplete will search for
-                customForm.setAcUrl($(this).val());
-                console.log("ac url = " + customForm.acUrl);
-            }            
-            // do we need else case? i.e. if user has set back to "select one", we should undo
-            // above settings? Will it matter? they can't proceed till they've made a new selection.
+                customForm.initFormFullView();              
+            } else {
+                // If no selection, go back to type view. This prevents problems like trying to run autocomplete
+                // or submitting form without a type selection.
+                customForm.initFormTypeView();
+            }     
         });        
     },
     
@@ -119,7 +122,7 @@ var customForm = {
                     data: request,
                     complete: function(xhr) {
                         // Not sure why, but we need an explicit json parse here. jQuery
-                        // should parse the response text and return an json object.
+                        // should parse the response text and return a json object.
                         var results = jQuery.parseJSON(xhr.responseText);
                         customForm.acCache[request.term] = results;  
                         response(results);
@@ -135,10 +138,15 @@ var customForm = {
 
     },
 
-    // Append the type parameter to the base autocomplete url
-    setAcUrl: function(typeVal) {
+    // Reset some autocomplete values after type is changed
+    resetAutocomplete: function(typeVal) {
+        // Append the type parameter to the base autocomplete url
         var glue = this.baseAcUrl.indexOf('?') > -1 ? '&' : '?';
         this.acUrl = this.baseAcUrl + glue + 'type=' + typeVal;
+        
+        // Flush autocomplete cache when type is reset, since the cached values 
+        // are relevant only to the previous type.
+        this.acCache = {};
     },       
         
     showAutocompleteSelection: function(ui) {
