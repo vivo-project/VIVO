@@ -35,11 +35,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">First-time Editor login</td>
-	<td></td>
-</tr>
-<tr>
 	<td>open</td>
 	<td>/vivo/</td>
 	<td></td>
@@ -51,7 +46,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Login for the first time</td>
+	<td class="comment">Must not be logged in already</td>
 	<td></td>
 </tr>
 <tr>
@@ -66,22 +61,22 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Try the wrong password</td>
+	<td class="comment">Try logging in with wrong password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>Eddie Editor</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginPassword</td>
 	<td>incorrect</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -91,27 +86,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>(1st login; initial password entered incorrectly)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please try entering provided password again</td>
+	<td>The email or password you entered is incorrect.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Now the correct password</td>
+	<td class="comment">Login with correct password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginName</td>
+	<td>Eddie Editor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
 	<td>myPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -120,108 +115,118 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>(1st login; changing to new private password)</td>
+	<td>comment</td>
+	<td class="comment">Now it's time to change the password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please now choose a private password</td>
+	<td>Create Your New Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter a password with more than 5 characters</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Try changing to an invalid password</td>
+	<td class="comment">Try an invalid password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>newPassword</td>
+	<td>junk</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
 	<td>junk</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>loginSubmitMode</td>
+	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertAlert</td>
-	<td>Please enter a password between 6 and 12 characters long</td>
+	<td>Please enter a password between 5 and 99 characters long</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Now try a valid one</td>
+	<td class="comment">Try using the original password as the new one</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>newPassword</td>
+	<td>myPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>myPassword</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please choose a different password from the temporary one provided initially.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try using 2 different passwords</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>newPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>newPasword</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Passwords do not match</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Change password correctly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>newPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
 	<td>newPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(changing to new password)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please re-enter new private password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Re-enter it incorrectly</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password</td>
-	<td>garbage</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(password incorrect)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Incorrect password: try again</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now re-enter it correctly</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password</td>
-	<td>newPassword</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -231,17 +236,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Are we logged in?</td>
+	<td class="comment">Verify that account is logged in</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Logged in as</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Eddie Editor</td>
+	<td>Logged in as Eddie Editor (Log out)</td>
 	<td></td>
 </tr>
 <tr>
@@ -251,7 +251,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>link=Log out</td>
 	<td></td>
 </tr>
 <tr>
