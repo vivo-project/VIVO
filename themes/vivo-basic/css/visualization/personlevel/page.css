@@ -7,10 +7,11 @@ a.no_href_styles {
 	border: 0;
 }
 
-.vis-stats {
-	width: 760px;
+.vis_stats {
+	/*width: 760px;*/
 	margin: 0;
-	padding: 0;
+	padding-left:10px;
+	padding-top:10px;
 }
 
 .vis-tables {
