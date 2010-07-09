@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>NewAdminFirstLogin</title>
+<title>temp</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,21 +27,16 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">NewAdminFirstLogin</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">temp</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">First login attempt for new site admin</td>
+	<td class="comment">Login for first time with new admin account</td>
 	<td></td>
 </tr>
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,6 +50,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in already</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
 	<td></td>
@@ -65,8 +65,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Log in</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
-	<td class="comment">Login as Sis Admin, the new site admin account</td>
+	<td class="comment">Login with new account name and password</td>
 	<td></td>
 </tr>
 <tr>
@@ -91,7 +96,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Asked to provide a new password</td>
+	<td class="comment">Then prompted to create the new password</td>
 	<td></td>
 </tr>
 <tr>
@@ -106,7 +111,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Type in old password as new one</td>
+	<td class="comment">Try using the original password as the new password</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,12 +136,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Rejected using same password again</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create Your New Password</td>
+	<td class="comment">Get error because you cannot reuse the original password</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,7 +151,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Type in a different new password, mispelling the confirmation password</td>
+	<td class="comment">Type in the new password correctly in the first box and wrong in the second one</td>
 	<td></td>
 </tr>
 <tr>
@@ -165,28 +165,23 @@
 	<td>newPasword</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>comment</td>
+	<td class="comment">Are told that the passwords do not match</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Passwords do not match</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Rejected due to type in confirmed password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Successfully type in new password for a second time</td>
+	<td class="comment">Type in both passwords correctly</td>
 	<td></td>
 </tr>
 <tr>
@@ -211,7 +206,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Log in accepted</td>
+	<td class="comment">Verify new account is logged in and has access to all admin options</td>
 	<td></td>
 </tr>
 <tr>
