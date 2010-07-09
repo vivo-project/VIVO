@@ -71,7 +71,67 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Login with new account name and password</td>
+	<td class="comment">Try logging in without a password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>Sis Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Please enter a password to log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try logging in with the wrong password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>Sis Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>wrong</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The email or password you entered is incorrect.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Login with the correct password</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,7 +156,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Then prompted to create the new password</td>
+	<td class="comment">Now need to set a new password</td>
 	<td></td>
 </tr>
 <tr>
@@ -106,7 +166,67 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Please enter a password with more than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Confirm Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try entering nothing in both fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Please enter a password between 5 and 99 characters long</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter in an invalid password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>junk</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>junk</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Please enter a password between 5 and 99 characters long</td>
 	<td></td>
 </tr>
 <tr>
@@ -135,11 +255,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Get error because you cannot reuse the original password</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Please choose a different password from the temporary one provided initially.</td>
 	<td></td>
@@ -151,7 +266,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Type in the new password correctly in the first box and wrong in the second one</td>
+	<td class="comment">Try entering in different passwords in each field</td>
 	<td></td>
 </tr>
 <tr>
@@ -170,18 +285,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Are told that the passwords do not match</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertAlert</td>
 	<td>Passwords do not match</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Type in both passwords correctly</td>
+	<td class="comment">Enter valid passwords</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,12 +316,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify new account is logged in and has access to all admin options</td>
+	<td class="comment">Verify new account is logged in and has access to correct options</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Logged in as Sis Admin</td>
+	<td>Logged in as Sis Admin (Log out)</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +346,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Log out</td>
+	<td class="comment">log out</td>
 	<td></td>
 </tr>
 <tr>
