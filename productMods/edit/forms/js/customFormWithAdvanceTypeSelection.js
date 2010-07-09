@@ -24,6 +24,12 @@ var customForm = {
         this.button = $('#submit');
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
+
+        // This is the label element for the field with name 'label'
+        this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');        
+        // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
+        // because it may have already been modified for a previous selection.
+        this.baseLabelText = this.labelFieldLabel.html();
         
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
@@ -37,9 +43,15 @@ var customForm = {
     // Set up the form on page load
     initPage: function() {
         
-        this.initFormTypeView();
         this.bindEventListeners();
-        //this.initAutocomplete();
+        
+        this.initAutocomplete();
+        
+        if (this.findValidationErrors()) {
+            this.initFormFullView();
+        } else {
+            this.initFormTypeView();
+        }
  
     },
     
@@ -64,34 +76,24 @@ var customForm = {
         
         this.cancel.unbind('click');
         this.cancel.click(function() {
+            customForm.clearFormData(); // clear any input and validation errors
             customForm.initFormTypeView();
             return false;            
         });        
     },
     
-    // Bind event listeners that can persist over the life of the page.
+    // Bind event listeners that persist over the life of the page.
     bindEventListeners: function() {
         
         this.typeSelector.change(function() {
-            var labelField,
-                labelFieldLabel,
-                labelText,
-                selectedText;
-                
-            if ($(this).val().length) {
-                
-                // Set label for label field
-                labelField = $('#label');
-                labelFieldLabel = $('label[for=' + labelField.attr('id') + ']');
-                labelText = labelFieldLabel.html();
-                labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + labelText);
-                
+            if ($(this).val().length) {                
+                customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
                 customForm.initFormFullView();
                 
-                // set ac type 
+                // *** set ac type 
             }            
             // do we need else case? i.e. if user has set back to "select one", we should undo
-            // above settings?
+            // above settings? YES - undo ac type and label field label
         });        
     },
     
