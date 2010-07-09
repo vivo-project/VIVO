@@ -121,7 +121,7 @@ margin-bottom: 1em;
 }
 
 #errorAlert  p{
-padding-left:30px;
+padding-left:35px;
 font-size:0.9em;
 line-height:30px;
 	
@@ -129,7 +129,7 @@ line-height:30px;
 
 
 ##confirmationAlert {
-	color:#900;
+	color:#169f43;
 	padding:0px;
 	margin-bottom:5px;
 	
@@ -167,5 +167,14 @@ color:#900;
 }
 
 
+
+
+p.passwordNote{
+margin:0;
+padding:0;
+margin-top:-8px;
+font-size:0.8em;
+color:#615e5e;	
+}
 
 

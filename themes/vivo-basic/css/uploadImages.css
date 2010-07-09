@@ -7,8 +7,6 @@
 	height:280px;
 	background:#fff;
 	padding:15px;
-
-	
 }
 
 #photoUploadDefaultImageContainer{
@@ -143,4 +141,6 @@ background-color:#FF7700;
 a.cancelUpload:active {
 color:#FF7700;
 }
+
+
 

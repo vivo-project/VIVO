@@ -722,3 +722,38 @@ Miscellaneous
 .clear{
 clear:both;
 }
+
+.hidden{
+display:none !important;
+}
+
+
+
+
+/************************
+style for those with javascript disable
+************************/
+
+#javascriptDisableWrapper{
+margin-top:15px;
+width:500px;
+height:300px;
+}
+
+#javascriptDisableContent{
+width:500px;
+height:100px;
+border:3px solid #bee6f8;
+}
+#javascriptDisableContent img{
+float:left;
+margin-top:36px;
+margin-left:30px;
+}
+
+#javascriptDisableContent p{
+font-size:1.1em;
+color:#384c5d;	
+line-height:100px;
+padding-left:65px;
+}
