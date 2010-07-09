@@ -89,17 +89,17 @@ var customForm = {
             if ($(this).val().length) {                
                 customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
                 customForm.initFormFullView();
-                
-                // *** set ac type 
+                // Set the type of individual that the autocomplete will search for
+                customForm.setAcUrl($(this).val());
+                console.log("ac url = " + customForm.acUrl);
             }            
             // do we need else case? i.e. if user has set back to "select one", we should undo
-            // above settings? YES - undo ac type and label field label
+            // above settings? Will it matter? they can't proceed till they've made a new selection.
         });        
     },
     
     initAutocomplete: function() {
-        // Make cache a property of this so we can access it after removing 
-        // an author.
+
         this.acCache = {};
         this.baseAcUrl = $('.acUrl').attr('id');        
         
@@ -113,9 +113,6 @@ var customForm = {
                 }
                 // console.log('not getting term from cache');
                 
-                // If the url query params are too long, we could do a post
-                // here instead of a get. Add the exclude uris to the data
-                // rather than to the url.
                 $.ajax({
                     url: customForm.acUrl,
                     dataType: 'json',
@@ -136,7 +133,13 @@ var customForm = {
             }
         });
 
-    },        
+    },
+
+    // Append the type parameter to the base autocomplete url
+    setAcUrl: function(typeVal) {
+        var glue = this.baseAcUrl.indexOf('?') > -1 ? '&' : '?';
+        this.acUrl = this.baseAcUrl + glue + 'type=' + typeVal;
+    },       
         
     showAutocompleteSelection: function(ui) {
         
