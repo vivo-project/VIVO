@@ -60,7 +60,7 @@
     <rdfs:label xml:lang="en-US">section</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CaseStudy">
-    <rdfs:label xml:lang="en-US">CaseStudy</rdfs:label>
+    <rdfs:label xml:lang="en-US">Case Study</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SeminarSeries">
     <rdfs:label xml:lang="en-US">Seminar Series</rdfs:label>
@@ -988,7 +988,7 @@
     <rdfs:label xml:lang="en-US">College</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#WorkingPaper">
-    <rdfs:label xml:lang="en-US">WorkingPaper</rdfs:label>
+    <rdfs:label xml:lang="en-US">Working Paper</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/dc/terms/isVersionOf">
     <rdfs:label xml:lang="en-US">isVersionOf</rdfs:label>
