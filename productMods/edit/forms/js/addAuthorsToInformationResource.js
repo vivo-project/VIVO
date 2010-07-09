@@ -226,7 +226,7 @@ var addAuthorForm = {
         this.hideFields(this.firstNameWrapper);
         this.hideFields(this.middleNameWrapper);
         
-        // Cancel restores form to initial state
+        // Cancel restores initial form view
         this.cancel.unbind('click');
         this.cancel.bind('click', function() {
             addAuthorForm.initFormView();

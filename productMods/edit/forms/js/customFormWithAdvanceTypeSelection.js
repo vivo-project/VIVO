@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-var customFormWATS = {
+var customForm = {
     
     /* *** Initial page setup *** */
    
@@ -31,8 +31,7 @@ var customFormWATS = {
         // These are classed rather than id'd in case we want more than one autocomplete on a form.
         this.acSelector = this.form.find('.acSelector');
         this.acSelection = this.form.find('.acSelection'); 
-
-           
+    
     },
 
     // Set up the form on page load
@@ -40,15 +39,16 @@ var customFormWATS = {
         
         this.initFormTypeView();
         this.bindEventListeners();
-        this.initAutocomplete();
+        //this.initAutocomplete();
  
     },
     
     initFormTypeView: function() {
 
+        this.hideFields(this.fullViewOnly);
         this.button.hide();
-        this.or.hide();
         this.requiredLegend.hide();
+        this.or.hide();
 
         this.cancel.unbind('click');
               
@@ -62,8 +62,10 @@ var customFormWATS = {
         this.button.show();
         this.button.val('Create Publication');
         
+        this.cancel.unbind('click');
         this.cancel.click(function() {
-            customFormWATS.initFormTypeView();            
+            customForm.initFormTypeView();
+            return false;            
         });        
     },
     
@@ -82,24 +84,87 @@ var customFormWATS = {
                 labelField = $('#label');
                 labelFieldLabel = $('label[for=' + labelField.attr('id') + ']');
                 labelText = labelFieldLabel.html();
-                selectedText = $(this).find(':selected').html();
-                labelFieldLabel.html(selectedText + ' ' + labelText);
+                labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + labelText);
                 
-                customFormWATS.initFormFullView();
+                customForm.initFormFullView();
                 
                 // set ac type 
-            }
+            }            
+            // do we need else case? i.e. if user has set back to "select one", we should undo
+            // above settings?
         });        
     },
     
     initAutocomplete: function() {
+        // Make cache a property of this so we can access it after removing 
+        // an author.
+        this.acCache = {};
+        this.baseAcUrl = $('.acUrl').attr('id');        
         
-        // ac selection: disable typeSelector and acSelector
+        this.acSelector.autocomplete({
+            minLength: 3,
+            source: function(request, response) {
+                if (request.term in customForm.acCache) {
+                    // console.log('found term in cache');
+                    response(customForm.acCache[request.term]);
+                    return;
+                }
+                // console.log('not getting term from cache');
+                
+                // If the url query params are too long, we could do a post
+                // here instead of a get. Add the exclude uris to the data
+                // rather than to the url.
+                $.ajax({
+                    url: customForm.acUrl,
+                    dataType: 'json',
+                    data: request,
+                    complete: function(xhr) {
+                        // Not sure why, but we need an explicit json parse here. jQuery
+                        // should parse the response text and return an json object.
+                        var results = jQuery.parseJSON(xhr.responseText);
+                        customForm.acCache[request.term] = results;  
+                        response(results);
+                    }
+
+                });
+            },
+            select: function(event, ui) {
+                customForm.showAutocompleteSelection(ui);   
+                    
+            }
+        });
+
+    },        
+        
+    showAutocompleteSelection: function(ui) {
+        
+        this.acSelector.hide();
+        this.acSelector.attr('disabled', 'disabled');
+ 
+        this.acSelection.find('label').html('Selected ' + this.getSelectedTypeName() + ':');       
+        this.acSelection.show();
+
+        this.acReceiver.val(ui.item.uri);
+        this.acSelectionInfo.html(ui.item.label);
+        
+        this.button.val('Add Publication');
+        
+        this.cancel.unbind('click');
+        this.cancel.click(function() {
+            // TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.
+            // do we do it in the initfullview method, or here?
+            customForm.initFormFullView();
+            return false;
+        });
+
+    },
+    
+    getSelectedTypeName: function() {
+        return this.typeSelector.find(':selected').html();
     }
     
-
 };
 
 $(document).ready(function() {   
-    customFormWATS.onLoad();
+    customForm.onLoad();
 });

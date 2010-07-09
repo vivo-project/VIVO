@@ -19,22 +19,17 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.Collections" %>
-<%@ page import="java.net.URLEncoder" %>
 
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.StringUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
@@ -180,6 +175,8 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
+    editConfig.addValidator(new PersonHasPublicationValidator());
+    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
@@ -203,20 +200,25 @@ SPARQL queries for existing values. --%>
     request.setAttribute("customCss", customCss); 
 %>
 
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+
 <jsp:include page="${preForm}" />
 
 <h2>Create a new publication entry for <%= subjectName %></h2>
 
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <p class="inline"><v:input type="select" label="Publication Type" name="pubType" id="typeSelector" /></p>
+    <div id="infoForJs">
+        <span class="acUrl" id="<c:url value="/autocomplete?stem=true" />"></span>
+    </div>
+    <p class="inline"><v:input type="select" label="Publication Type ${requiredHint}" name="pubType" id="typeSelector" /></p>
     
     <div id="fullViewOnly">
 	    <v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" />
 
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
-	        <p class="inline"><label>Selected :</label><span class="acSelectionName"></span></p>
+	        <p class="inline"><label></label><span class="acSelectionInfo"></span></p>
 	        <input type="hidden" id="pubUri" name="pubUri" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
     </div>   

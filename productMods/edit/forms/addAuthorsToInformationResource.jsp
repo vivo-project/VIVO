@@ -24,7 +24,6 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.Collections" %>
-<%@ page import="java.net.URLEncoder" %>
 
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
@@ -42,6 +41,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
+<%@ page import="org.json.JSONObject" %>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 
@@ -397,7 +397,7 @@ SPARQL queries for existing values. --%>
     
     <div id="selectedAuthor" class="acSelection">
         <%-- RY maybe make this a label and input field. See what looks best. --%>
-        <p class="inline"><label>Selected author: </label><span class="acSelectionName" id="selectedAuthorName"></span></p>
+        <p class="inline"><label>Selected author: </label><span class="acSelectionInfo" id="selectedAuthorName"></span></p>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
     
