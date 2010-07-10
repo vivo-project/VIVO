@@ -3327,6 +3327,7 @@ display level 	</vitro:publicDescriptionAnnot>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has authorship</vitro:fullPropertyNameAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This relates a person to their authorship information.</vitro:publicDescriptionAnnot>
+    <vitro:skipEditForm rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:skipEditForm>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
