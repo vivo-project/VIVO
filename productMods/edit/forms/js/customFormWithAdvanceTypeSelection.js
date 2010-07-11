@@ -25,8 +25,11 @@ var customForm = {
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
         
-        //if there isn't a two stage setup, don't do two stage behavior
-        this.twoStageForm = ( this.typeSelector.length > 1 );
+        if (!this.typeSelector) {
+            this.formSteps = 1;
+        } else {
+            this.formSteps = 2;
+        }
         
         // This is the label element for the field with name 'label'
         this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');        
@@ -40,6 +43,8 @@ var customForm = {
         // These are classed rather than id'd in case we want more than one autocomplete on a form.
         this.acSelector = this.form.find('.acSelector');
         this.acSelection = this.form.find('.acSelection'); 
+        
+        $.extend(this, customFormData);
     
     },
 
@@ -50,7 +55,7 @@ var customForm = {
         
         this.initAutocomplete();
         
-        if (this.findValidationErrors() || ! this.twoStageForm) {
+        if (this.findValidationErrors() || this.formSteps == 1) {
             this.initFormFullView();
         } else {
             this.initFormTypeView();
@@ -65,8 +70,8 @@ var customForm = {
         this.requiredLegend.hide();
         this.or.hide();
 
-        if( twoStageForm ){
-         this.cancel.unbind('click');
+        if( this.formSteps > 1 ){
+            this.cancel.unbind('click');
         }
     },
     
@@ -78,7 +83,7 @@ var customForm = {
         this.button.show();
         this.button.val('Create Publication');
         
-        if( twoStageForm ){
+        if( this.formSteps > 1 ){
         	this.cancel.unbind('click');
         	this.cancel.click(function() {
         		customForm.clearFormData(); // clear any input and validation errors
@@ -109,8 +114,7 @@ var customForm = {
     
     initAutocomplete: function() {
         
-        var acFilter = this.getAcFilter();
-        
+        this.getAcFilter();
         this.acCache = {};
         this.baseAcUrl = customFormData.acUrl; 
         
@@ -131,11 +135,10 @@ var customForm = {
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
-                        var results = jQuery.parseJSON(xhr.responseText);
-                        
-                        customForm.acCache[request.term] = results;
-
-                        response(results);
+                        var results = $.parseJSON(xhr.responseText), 
+                            filteredResults = customForm.filterAcResults(results);
+                        customForm.acCache[request.term] = filteredResults;
+                        response(filteredResults);
                     }
 
                 });
@@ -150,7 +153,8 @@ var customForm = {
     
     getAcFilter: function() {
         // RY This gets put on the page for now. May want to put into a js file instead.
-        var url = $('.sparqlQueryUrl').attr('id');    
+        var url = $('.sparqlQueryUrl').attr('id'),
+            filter;
 
         $.ajax({
             url: customFormData.sparqlQueryUrl,
@@ -159,9 +163,36 @@ var customForm = {
                 query: customFormData.sparqlForAcFilter
             },
             success: function(data, status, xhr) {
-                console.log(data);
+                // Not sure why, but we need an explicit json parse here. jQuery
+                // should parse the response text and return a json object.
+                customForm.setAcFilter($.parseJSON(data));
             }
-        })
+        });
+    },
+    
+    setAcFilter: function(data) {
+        var filter = [];
+        $.each(data.results.bindings, function() {
+            filter.push(this.individual.value);
+        });
+        this.acFilter = filter;          
+    },
+    
+    filterAcResults: function(results) {
+        var filteredResults = [];
+        if (!this.acFilter.length) {
+            return results;
+        }
+        $.each(results, function() {
+            if (! $.inArray(this.uri, this.acFilter)) {
+                filteredResults.push(this);
+            }
+// Debugging
+//            else {
+//                console.log("filtering out " + this.label);
+//            }
+        });
+        return filteredResults;
     },
 
     // Reset some autocomplete values after type is changed
@@ -188,7 +219,7 @@ var customForm = {
         
         this.button.val('Add Publication');
                 
-        if( this.twoStageForm){
+        if( this.formSteps > 1){
         	this.cancel.unbind('click');
         	this.cancel.click(function() {
         		// TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.

@@ -109,7 +109,7 @@ SPARQL queries for existing values. --%>
 
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?pubUri .}
+PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?individual .}
 </c:set>
 
 <c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
@@ -214,15 +214,9 @@ PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAu
 
 <c:url var="acUrl" value="/autocomplete?stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+
 <jsp:include page="${preForm}" />
-<script>
-var customFormData  = {
-    sparqlForAcFilter: '${sparqlForAcFilter}',
-    sparqlQueryUrl: '${sparqlQueryUrl}',
-    acUrl: '${acUrl}'
-}
-//var sparqlForAcFilter = "${sparqlForAcFilter}";
-</script>
+
 <h2>Create a new publication entry for <%= subjectName %></h2>
 
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
@@ -244,4 +238,11 @@ var customFormData  = {
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
+<script>
+var customFormData  = {
+    sparqlForAcFilter: '${sparqlForAcFilter}',
+    sparqlQueryUrl: '${sparqlQueryUrl}',
+    acUrl: '${acUrl}'
+};
+</script>
 <jsp:include page="${postForm}"/>
