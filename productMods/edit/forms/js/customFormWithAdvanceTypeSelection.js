@@ -24,7 +24,10 @@ var customForm = {
         this.button = $('#submit');
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
-
+        
+        //if there isn't a two stage setup, don't do two stage behavior
+        this.twoStageForm = ( this.typeSelector.length > 1 );
+        
         // This is the label element for the field with name 'label'
         this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');        
         // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
@@ -47,7 +50,7 @@ var customForm = {
         
         this.initAutocomplete();
         
-        if (this.findValidationErrors()) {
+        if (this.findValidationErrors() || ! this.twoStageForm) {
             this.initFormFullView();
         } else {
             this.initFormTypeView();
@@ -62,8 +65,9 @@ var customForm = {
         this.requiredLegend.hide();
         this.or.hide();
 
-        this.cancel.unbind('click');
-              
+        if( twoStageForm ){
+         this.cancel.unbind('click');
+        }
     },
     
     initFormFullView: function() {
@@ -74,12 +78,14 @@ var customForm = {
         this.button.show();
         this.button.val('Create Publication');
         
-        this.cancel.unbind('click');
-        this.cancel.click(function() {
-            customForm.clearFormData(); // clear any input and validation errors
-            customForm.initFormTypeView();
-            return false;            
-        });        
+        if( twoStageForm ){
+        	this.cancel.unbind('click');
+        	this.cancel.click(function() {
+        		customForm.clearFormData(); // clear any input and validation errors
+        		customForm.initFormTypeView();
+        		return false;            
+        	});
+        }
     },
     
     // Bind event listeners that persist over the life of the page.
@@ -181,14 +187,16 @@ var customForm = {
         this.acSelectionInfo.html(ui.item.label);
         
         this.button.val('Add Publication');
-        
-        this.cancel.unbind('click');
-        this.cancel.click(function() {
-            // TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.
-            // do we do it in the initfullview method, or here?
-            customForm.initFormFullView();
-            return false;
-        });
+                
+        if( this.twoStageForm){
+        	this.cancel.unbind('click');
+        	this.cancel.click(function() {
+        		// TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.
+        		//do we do it in the initfullview method, or here?
+        		customForm.initFormFullView();
+        		return false;
+        	});
+        }
 
     },
     
