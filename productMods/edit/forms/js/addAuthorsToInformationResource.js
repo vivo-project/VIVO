@@ -178,7 +178,7 @@ var addAuthorForm = {
                     url: addAuthorForm.acUrl,
                     dataType: 'json',
                     data: request,
-                    complete: function(xhr) {
+                    complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
                         var results = jQuery.parseJSON(xhr.responseText);

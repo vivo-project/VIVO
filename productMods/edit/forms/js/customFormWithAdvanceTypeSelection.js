@@ -102,9 +102,11 @@ var customForm = {
     },
     
     initAutocomplete: function() {
-
+        
+        var acFilter = this.getAcFilter();
+        
         this.acCache = {};
-        this.baseAcUrl = $('.acUrl').attr('id');        
+        this.baseAcUrl = customFormData.acUrl; 
         
         this.acSelector.autocomplete({
             minLength: 3,
@@ -120,11 +122,13 @@ var customForm = {
                     url: customForm.acUrl,
                     dataType: 'json',
                     data: request,
-                    complete: function(xhr) {
+                    complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
                         var results = jQuery.parseJSON(xhr.responseText);
-                        customForm.acCache[request.term] = results;  
+                        
+                        customForm.acCache[request.term] = results;
+
                         response(results);
                     }
 
@@ -136,6 +140,22 @@ var customForm = {
             }
         });
 
+    },
+    
+    getAcFilter: function() {
+        // RY This gets put on the page for now. May want to put into a js file instead.
+        var url = $('.sparqlQueryUrl').attr('id');    
+
+        $.ajax({
+            url: customFormData.sparqlQueryUrl,
+            data: {
+                resultFormat: 'RS_JSON',
+                query: customFormData.sparqlForAcFilter
+            },
+            success: function(data, status, xhr) {
+                console.log(data);
+            }
+        })
     },
 
     // Reset some autocomplete values after type is changed

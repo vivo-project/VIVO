@@ -47,14 +47,24 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
+    String subjectUri = vreq.getParameter("subjectUri");
+    String predicateUri = vreq.getParameter("predicateUri");    
+    String subjectName = ((Individual) request.getAttribute("subject")).getName();
+    vreq.setAttribute("subjectUriJson", MiscWebUtils.escape(subjectUri));
+    
+    String vivoOnt = "http://vivoweb.org/ontology";
+    String vivoCore = vivoOnt + "/core#";   
+    vreq.setAttribute("vivoOnt", vivoOnt);
+    vreq.setAttribute("vivoCore", vivoCore);
+    vreq.setAttribute("vivoCoreJson", MiscWebUtils.escape(vivoCore));
+    
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
 %>
-<c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
-<c:set var="vivoCore" value="${vivoOnt}/core#" />
+
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="infoResourceClassUri" value="${vivoCore}InformationResource" />
@@ -97,7 +107,11 @@ SPARQL queries for existing values. --%>
     ?newPub core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-<%-- <v:jsonset var="infoResourceClassUriJson">${infoResourceClassUri}</v:jsonset> --%>
+<%-- Must be all one line for JavaScript. --%>
+<c:set var="sparqlForAcFilter">
+PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?pubUri .}
+</c:set>
+
 <c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
 <v:jsonset var="publicationsClassGroupUriJson">${publicationsClassGroupUri}</v:jsonset>
 
@@ -180,15 +194,11 @@ SPARQL queries for existing values. --%>
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
-    
-    String subjectUri = vreq.getParameter("subjectUri");
-    String predicateUri = vreq.getParameter("predicateUri");    
-    String subjectName = ((Individual) request.getAttribute("subject")).getName();
   
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.UTILS.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
-                                                                "/edit/forms/js/customFormWithAdvanceTypeSelection.js"
+                                                                "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
                                                                ));            
     request.setAttribute("customJs", customJs);
     
@@ -202,15 +212,21 @@ SPARQL queries for existing values. --%>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
+<c:url var="acUrl" value="/autocomplete?stem=true" />
+<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
 <jsp:include page="${preForm}" />
-
+<script>
+var customFormData  = {
+    sparqlForAcFilter: '${sparqlForAcFilter}',
+    sparqlQueryUrl: '${sparqlQueryUrl}',
+    acUrl: '${acUrl}'
+}
+//var sparqlForAcFilter = "${sparqlForAcFilter}";
+</script>
 <h2>Create a new publication entry for <%= subjectName %></h2>
 
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <div id="infoForJs">
-        <span class="acUrl" id="<c:url value="/autocomplete?stem=true" />"></span>
-    </div>
     <p class="inline"><v:input type="select" label="Publication Type ${requiredHint}" name="pubType" id="typeSelector" /></p>
     
     <div id="fullViewOnly">
