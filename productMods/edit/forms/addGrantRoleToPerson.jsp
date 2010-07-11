@@ -20,7 +20,6 @@ This is intended to create a set of statements like:
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
@@ -54,18 +53,22 @@ This is intended to create a set of statements like:
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="label" value="${rdfs}label" />
 
-
-<%  // set role type based on predicate 
+<%  // set role type based on predicate
+String subjectName = ((Individual) request.getAttribute("subject")).getName();
 if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvestigatorRole") ) { %>
- 	<v:jsonset var="roleType">${vivoOnt}#PrincipalInvestigatorRole</v:jsonset>
+ 	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#PrincipalInvestigatorRole</v:jsonset>
+ 	<c:set var="submitButtonLabel">Create principal investigator</c:set>
+ 	<c:set var="formHeading">Create a new principal investigator entry for <%= subjectName %></c:set>
  <% }else{ %>
- 	<v:jsonset var="roleType">${vivoOnt}#hasCo-PrincipalInvestigatorRole</v:jsonset>
+ 	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole</v:jsonset>
+ 	<c:set var="submitButtonLabel">Create co-principal investigator</c:set>
+ 	<c:set var="formHeading">Create a new co-principal investigator entry for <%= subjectName %></c:set>
  <% } %>
  
 <v:jsonset var="n3ForGrantRole">
     @prefix core: <${vivoCore}> .
     @prefix rdf: <${rdf}> .
-    
+       
 	?person  ?rolePredicate ?role.
 	?role rdf:type ?roleType ;
     	  core:relatedRole ?grant .               
@@ -159,8 +162,7 @@ PREFIX core: <${vivoCore}> SELECT ?grantURI WHERE {<${subjectUri}> core:hasPrinc
     editConfig.setEntityToReturnTo("?grant");
     
     String subjectUri = vreq.getParameter("subjectUri");
-    String predicateUri = vreq.getParameter("predicateUri");    
-    String subjectName = ((Individual) request.getAttribute("subject")).getName();
+    String predicateUri = vreq.getParameter("predicateUri");        
   
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.UTILS.path(),
@@ -192,20 +194,19 @@ var customFormData  = {
 }
 </script>
 
-<h2>Create a new principal investigator entry for <%= subjectName %></h2>
+<h2>${formHeading}</h2>
 
 <form id="addGrantRoleToPerson" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
     <v:input type="text" id="label" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" />
 
     <div class="acSelection">
-        <%-- RY maybe make this a label and input field. See what looks best. --%>
         <p class="inline"><label></label><span class="acSelectionInfo"></span></p>
         <%-- bdc34: for some odd reason id and name should not be grant in this input element. --%>
-        <input type="hidden" id="pubUri" name="pubUri" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
+        <input type="hidden" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
     </div>
             
-    <p class="submit"><v:input type="submit" id="submit" value="Create principal investigator" cancel="true" /></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonLabel}" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
