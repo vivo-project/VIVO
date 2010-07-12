@@ -225,8 +225,12 @@ var customForm = {
         
         this.acSelectorWrapper.hide();
         this.acSelector.attr('disabled', 'disabled');
- 
-        this.acSelection.find('label').html('Selected ' + this.getSelectedTypeName() + ':');       
+        
+        // If only one form step, type is pre-selected, and this label is coded in the html.
+        if (this.formSteps > 1) {
+            this.acSelection.find('label').html('Selected ' + this.getSelectedTypeName() + ':');
+        }
+              
         this.acSelection.show();
 
         this.acReceiver.val(uri);

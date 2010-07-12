@@ -190,10 +190,10 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPri
 
 <form id="addGrantRoleToPerson" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
-    <v:input type="text" id="label" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" />
+    <p><v:input type="text" id="label" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
 
     <div class="acSelection">
-        <p class="inline"><label></label><span class="acSelectionInfo"></span></p>
+        <p class="inline"><label>Selected Grant:</label><span class="acSelectionInfo"></span><a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
         <%-- bdc34: for some odd reason id and name should not be grant in this input element. --%>
         <input type="hidden" id="grant" name="grant" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
     </div>
