@@ -439,15 +439,7 @@ var addAuthorForm = {
     	this.lastNameField.blur(function() {
     		addAuthorForm.onLastNameChange();
     	});
-    	
-    	// This is somewhat questionable. If we return to the last name
-    	// field to look again for an existing person, we'd want to hide those
-    	// fields. If we return to it to correct spelling of last name, say,
-    	// we wouldn't. 
-    	this.lastNameField.focus(function() {
-    		addAuthorForm.hideFieldsForNewPerson();
-    	});
-    	
+    	    	
     	// When hitting enter in last name field, if not an autocomplete
     	// selection, show first and middle name fields.
     	this.lastNameField.keydown(function(event) {

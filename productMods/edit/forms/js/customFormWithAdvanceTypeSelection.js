@@ -40,7 +40,8 @@ var customForm = {
         
         // These are classed rather than id'd in case we want more than one autocomplete on a form.
         this.acSelector = this.form.find('.acSelector');
-        this.acSelection = this.form.find('.acSelection'); 
+        this.acSelection = this.form.find('.acSelection');
+        this.acSelectionInfo = this.form.find('.acSelectionInfo');
         this.acReceiver = this.form.find('.acReceiver');
     
     },
@@ -190,9 +191,9 @@ var customForm = {
                 // console.log("adding " + this.label + " to filtered results");
                 filteredResults.push(this);
             }
-//            else {
-//                console.log("filtering out " + this.label);
-//            }
+            else {
+                // console.log("filtering out " + this.label);
+            }
         });
         return filteredResults;
     },
