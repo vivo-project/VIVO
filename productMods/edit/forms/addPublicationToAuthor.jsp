@@ -52,19 +52,14 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     String subjectName = ((Individual) request.getAttribute("subject")).getName();
     vreq.setAttribute("subjectUriJson", MiscWebUtils.escape(subjectUri));
     
-    String vivoOnt = "http://vivoweb.org/ontology";
-    String vivoCore = vivoOnt + "/core#";   
-    vreq.setAttribute("vivoOnt", vivoOnt);
-    vreq.setAttribute("vivoCore", vivoCore);
-    vreq.setAttribute("vivoCoreJson", MiscWebUtils.escape(vivoCore));
-    
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
 %>
-
+<c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="infoResourceClassUri" value="${vivoCore}InformationResource" />
@@ -107,7 +102,7 @@ SPARQL queries for existing values. --%>
     ?newPub core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-<%-- Must be all one line for JavaScript. --%>
+<%-- Must be all one line for JavaScript. Must use ?individual since Javascript will look for that property in the data returned. --%>
 <c:set var="sparqlForAcFilter">
 PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?individual .}
 </c:set>

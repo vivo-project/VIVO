@@ -89,9 +89,9 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?grant rdfs:label ?grantLabel .               
 </v:jsonset>
 
-<%-- Must be all one line for JavaScript. --%>
+<%-- Must be all one line for JavaScript. Must use ?individual since Javascript will look for that property in the data returned. --%>
 <c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?grantURI WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?grantURI .}
+PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?individual .}
 </c:set>
 
 <v:jsonset var="grantTypeUriJson">${vivoOnt}#Grant</v:jsonset>
@@ -189,14 +189,7 @@ PREFIX core: <${vivoCore}> SELECT ?grantURI WHERE {<${subjectUri}> core:hasPrinc
 
 <c:url var="acUrl" value="/autocomplete?stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
-<script>
-var customFormData  = {
-    sparqlForAcFilter: '${sparqlForAcFilter}',
-    sparqlQueryUrl: '${sparqlQueryUrl}',
-    acUrl: '${acUrl}',
-    acType: 'http://vivo.cornel.jdkjfldk#Grant'       
-}
-</script>
+
 
 <h2>${formHeading}</h2>
 
@@ -214,5 +207,14 @@ var customFormData  = {
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
+
+<script>
+var customFormData  = {
+    sparqlForAcFilter: '${sparqlForAcFilter}',
+    sparqlQueryUrl: '${sparqlQueryUrl}',
+    acUrl: '${acUrl}',
+    acType: '${vivoCore}Grant'       
+}
+</script>
 
 <jsp:include page="${postForm}"/>

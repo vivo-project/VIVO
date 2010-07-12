@@ -27,9 +27,11 @@ var customForm = {
         
         if (!this.typeSelector) {
             this.formSteps = 1;
+        // there's also going to be a 3-step form
         } else {
             this.formSteps = 2;
         }
+        
         
         // This is the label element for the field with name 'label'
         this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');        
@@ -100,7 +102,8 @@ var customForm = {
             var typeVal = $(this).val();
             // Set the type of individual that the autocomplete will search for.
             // We do this even if typeVal is empty, to clear out a previous value.
-            customForm.resetAutocomplete(typeVal); 
+            //customForm.resetAutocomplete(typeVal); 
+            customForm.acType = typeVal;
             if (typeVal.length) {                
                 customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
                 customForm.initFormFullView();              
@@ -116,7 +119,7 @@ var customForm = {
         
         this.getAcFilter();
         this.acCache = {};
-        this.baseAcUrl = customFormData.acUrl; 
+        //this.baseAcUrl = customFormData.acUrl; 
         
         this.acSelector.autocomplete({
             minLength: 3,
@@ -127,11 +130,14 @@ var customForm = {
                     return;
                 }
                 // console.log('not getting term from cache');
-                
+
                 $.ajax({
                     url: customForm.acUrl,
                     dataType: 'json',
-                    data: request,
+                    data: {
+                        term: request.term,
+                        type: customForm.acType,
+                    },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
@@ -152,9 +158,6 @@ var customForm = {
     },
     
     getAcFilter: function() {
-        // RY This gets put on the page for now. May want to put into a js file instead.
-        var url = $('.sparqlQueryUrl').attr('id'),
-            filter;
 
         $.ajax({
             url: customFormData.sparqlQueryUrl,
@@ -184,13 +187,13 @@ var customForm = {
             return results;
         }
         $.each(results, function() {
-            if (! $.inArray(this.uri, this.acFilter)) {
+            if ($.inArray(this.uri, customForm.acFilter) == -1) {
+                console.log("adding " + this.label + " to filtered results");
                 filteredResults.push(this);
             }
-// Debugging
-//            else {
-//                console.log("filtering out " + this.label);
-//            }
+            else {
+                console.log("filtering out " + this.label);
+            }
         });
         return filteredResults;
     },
