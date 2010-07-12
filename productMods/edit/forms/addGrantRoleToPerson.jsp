@@ -26,15 +26,9 @@ This is intended to create a set of statements like:
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
-<%@ page import="org.apache.commons.logging.Log" %>
-<%@ page import="org.apache.commons.logging.LogFactory" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
-<%! 
-    public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addAuthorsToInformationResource.jsp");
-%>
 <%
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
@@ -45,9 +39,16 @@ This is intended to create a set of statements like:
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
-        
+    String predicateUri = (String)request.getAttribute("predicateUri");
+    ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
+    if( op != null &&  op.getURIInverse() != null ){
+		%> <c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
+    }else{
+    	%> <c:set var="inversePredicate"></c:set> <%
+    }
 %>
-<c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+
+<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
@@ -69,9 +70,14 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     @prefix core: <${vivoCore}> .
     @prefix rdf: <${rdf}> .
        
-	?person  ?rolePredicate ?role.
-	?role rdf:type ?roleType ;
-    	  core:relatedRole ?grant .               
+	?person ?rolePredicate ?role.	
+	?role   rdf:type ?roleType .		  
+    ?role   core:relatedRole ?grant .
+    ?grant  core:inRole ?role .
+</v:jsonset>
+
+<v:jsonset var="n3ForInverse"> 
+	?role   ?inverseRolePredicate ?person.
 </v:jsonset>
 
 <v:jsonset var="n3ForNewGrant">
@@ -101,12 +107,13 @@ PREFIX core: <${vivoCore}> SELECT ?grantURI WHERE {<${subjectUri}> core:hasPrinc
     
     "n3required"    : [ "${n3ForGrantRole}" ],
     
-    "n3optional"    : [ "${n3ForNewGrant}" ],        
+    "n3optional"    : [ "${n3ForNewGrant}" , "${n3ForInverse}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "grant" : "${defaultNamespace}" },
 
-    "urisInScope"    : { "roleType" : "${roleType}" },
+    "urisInScope"    : { "roleType" : "${roleType}",
+    					 "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "grant" ],
     "literalsOnForm" : [ "grantLabel" ],
@@ -143,8 +150,6 @@ PREFIX core: <${vivoCore}> SELECT ?grantURI WHERE {<${subjectUri}> core:hasPrinc
 </c:set>
    
 <%
-    log.debug(request.getAttribute("editjson"));
-
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     
     if (editConfig == null) {
@@ -161,8 +166,7 @@ PREFIX core: <${vivoCore}> SELECT ?grantURI WHERE {<${subjectUri}> core:hasPrinc
     //this will return the browser to the new grant entity after an edit.
     editConfig.setEntityToReturnTo("?grant");
     
-    String subjectUri = vreq.getParameter("subjectUri");
-    String predicateUri = vreq.getParameter("predicateUri");        
+    String subjectUri = vreq.getParameter("subjectUri");       
   
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.UTILS.path(),
