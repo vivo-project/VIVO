@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Upload image for Jane Faculty</td>
+	<td class="comment">Upload image for Jane Faculty in the backend</td>
 	<td></td>
 </tr>
 <tr>
@@ -71,17 +71,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>testAdmin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -130,6 +130,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Verify no photo currently exists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='no image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Select to update this individual</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='content']/div[1]/h3</td>
 	<td></td>
@@ -150,68 +165,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Select to upload an image</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Upload Image']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Upload Image</td>
+	<td>Upload image for Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select Image File</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>file1</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submitMode</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Upload Image</td>
+	<td>Photo Upload</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Results from processing input file:<br /> updated individual Jane Faculty<br />Link to check uploaded image:<br /> &lt;Jane1.html&gt;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
+	<td>Current Photo </td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that image is present</td>
+	<td class="comment">Cancel out before adding a photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
@@ -220,9 +205,179 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyAttribute</td>
-	<td>//img[@title='Jane Faculty']@src</td>
-	<td>/vivo/images/people/Jane1.jpg</td>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='no image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Select a photo to add and then cancel out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Upload image for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='no image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Cancel after uploading the picture</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Upload image for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Crop Photo for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='no image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Now really add a photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Upload image for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Crop Photo for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Your profile photo will look like the image below. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>To make adjustments, you can drag around and resize the photo to the right. When you are happy with your photo click the &quot;Save Photo&quot; button. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='click to view larger image']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>comment</td>

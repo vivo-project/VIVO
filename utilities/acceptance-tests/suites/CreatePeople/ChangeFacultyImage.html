@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Change the uploaded picture for Jane Faculty</td>
+	<td class="comment">Change the uploaded picture for Jane Faculty in the backend</td>
 	<td></td>
 </tr>
 <tr>
@@ -71,17 +71,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>testAdmin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -125,6 +125,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Select to edit Jane Faculty's profile</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='content']/div[1]/h3</td>
 	<td></td>
@@ -146,7 +151,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to upload an image</td>
+	<td class="comment">Select to upload an image to replace other one</td>
 	<td></td>
 </tr>
 <tr>
@@ -156,12 +161,47 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Upload Image</td>
+	<td>Replace image for Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select Image File</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Crop Photo for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
