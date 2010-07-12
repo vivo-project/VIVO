@@ -254,6 +254,8 @@ var customForm = {
     undoAutocompleteSelection: function() {
         
         this.acSelectorWrapper.show();
+        this.acSelector.attr('disabled', '');
+        this.acSelector.val('');
         this.hideFields(this.acSelection);
         this.acReceiver.val('');
         this.acSelectionInfo.html('');
