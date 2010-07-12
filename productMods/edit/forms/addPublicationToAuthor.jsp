@@ -68,11 +68,11 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
 SPARQL queries for existing values. --%>
 
 <v:jsonset var="newPubTypeAssertion">
-    ?newPub a ?pubType .    
+    ?pubUri a ?pubType .    
 </v:jsonset>
 
 <v:jsonset var="newPubNameAssertion">
-    ?newPub <${label}> ?title .   
+    ?pubUri <${label}> ?title .   
 </v:jsonset>
 
 <%-- This applies to both a new and an existing publication --%>
@@ -95,11 +95,11 @@ SPARQL queries for existing values. --%>
 <v:jsonset var="n3ForNewPub">
     @prefix core: <${vivoCore}> .
     
-    ?newPub a ?pubType ;
+    ?pubUri a ?pubType ;
             <${label}> ?title .
                
-    ?authorshipUri core:linkedInformationResource ?newPub .
-    ?newPub core:informationResourceInAuthorship ?authorshipUri .               
+    ?authorshipUri core:linkedInformationResource ?pubUri .
+    ?pubUri core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
 <%-- Must be all one line for JavaScript. Must use ?individual since Javascript will look for that property in the data returned. --%>
@@ -114,7 +114,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
 {
     "formUrl" : "${formUrl}",
     "editKey" : "${editKey}",
-    "urlPatternToReturnTo" : "", // this will be a problem in the case of a new infoResource - we don't have the uri yet
+    "urlPatternToReturnTo" : "/individual",
 
     "subject"   : ["person", "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
@@ -126,7 +126,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
                         "${newPubNameAssertion}", "${newPubTypeAssertion}" ],        
                                                                                         
     "newResources"  : { "authorshipUri" : "${defaultNamespace}",
-                        "newPub" : "${defaultNamespace}" },
+                        "pubUri" : "${defaultNamespace}" },
 
     "urisInScope"    : { },
     "literalsInScope": { },
@@ -161,7 +161,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
          "assertions"       : [ "${newPubTypeAssertion}" ]
       },               
       "pubUri" : {
-         "newResource"      : "false",
+         "newResource"      : "true",
          "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
@@ -189,7 +189,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
-  
+  	editConfig.setEntityToReturnTo("?pubUri");
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.UTILS.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
