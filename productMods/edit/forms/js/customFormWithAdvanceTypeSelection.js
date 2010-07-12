@@ -29,21 +29,25 @@ var customForm = {
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
 
+        // These are classed rather than id'd in case we want more than one autocomplete on a form.
+        // At that point we'll use ids to match them up with one another.
+        this.acSelector = this.form.find('.acSelector');
+        this.acSelection = this.form.find('.acSelection');
+        this.acSelectionInfo = this.form.find('.acSelectionInfo');
+        this.acReceiver = this.form.find('.acReceiver');
+        this.verifyMatch = this.form.find('.verifyMatch');    
+        this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
+        this.acSelectorWrapper = this.acSelector.parent();
+        
         // This is the label element for the field with name 'label'
-        this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');        
+        this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');       
         // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
         // because it may have already been modified for a previous selection.
         this.baseLabelText = this.labelFieldLabel.html();
         
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
-        
-        // These are classed rather than id'd in case we want more than one autocomplete on a form.
-        this.acSelector = this.form.find('.acSelector');
-        this.acSelection = this.form.find('.acSelection');
-        this.acSelectionInfo = this.form.find('.acSelectionInfo');
-        this.acReceiver = this.form.find('.acReceiver');
-    
+
     },
 
     // Set up the form on page load
@@ -87,12 +91,12 @@ var customForm = {
         this.button.val('Create ' + this.baseButtonText);
         
         if( this.formSteps > 1 ){
-        	this.cancel.unbind('click');
-        	this.cancel.click(function() {
-        		customForm.clearFormData(); // clear any input and validation errors
-        		customForm.initFormTypeView();
-        		return false;            
-        	});
+            this.cancel.unbind('click');
+            this.cancel.click(function() {
+                customForm.clearFormData(); // clear any input and validation errors
+                customForm.initFormTypeView();
+                return false;            
+            });
         }
     },
     
@@ -107,13 +111,19 @@ var customForm = {
             customForm.acType = typeVal;
             if (typeVal.length) {                
                 customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
-                customForm.initFormFullView();              
+                customForm.initFormFullView(); 
+                customForm.hideFields(customForm.acSelection);            
             } else {
                 // If no selection, go back to type view. This prevents problems like trying to run autocomplete
                 // or submitting form without a type selection.
                 customForm.initFormTypeView();
             }     
-        });        
+        }); 
+        
+        this.verifyMatch.click(function() {
+            Window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
+            return false;
+        });      
     },
     
     initAutocomplete: function() {
@@ -211,25 +221,28 @@ var customForm = {
         
     showAutocompleteSelection: function(ui) {
         
-        this.acSelector.hide();
+        var uri = ui.item.uri;
+        
+        this.acSelectorWrapper.hide();
         this.acSelector.attr('disabled', 'disabled');
  
         this.acSelection.find('label').html('Selected ' + this.getSelectedTypeName() + ':');       
         this.acSelection.show();
 
-        this.acReceiver.val(ui.item.uri);
+        this.acReceiver.val(uri);
         this.acSelectionInfo.html(ui.item.label);
+        this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
         this.button.val('Add ' + this.baseButtonText);
                 
         if( this.formSteps > 1){
-        	this.cancel.unbind('click');
-        	this.cancel.click(function() {
-        		// TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.
-        		//do we do it in the initfullview method, or here?
-        		customForm.initFormFullView();
-        		return false;
-        	});
+            this.cancel.unbind('click');
+            this.cancel.click(function() {
+                // TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.
+                //do we do it in the initfullview method, or here?
+                customForm.initFormFullView();
+                return false;
+            });
         }
 
     },

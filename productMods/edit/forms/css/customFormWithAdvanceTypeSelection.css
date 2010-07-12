@@ -15,3 +15,11 @@
     float: none;
     margin-right: 1em;
 }
+
+.acSelection {
+    margin-top: 2em;
+}
+
+.verifyMatch {
+    margin-left: .5em;
+}

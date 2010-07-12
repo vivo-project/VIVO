@@ -225,17 +225,16 @@ var addAuthorForm = {
         }
         $.each(results, function() {
             if ($.inArray(this.uri, addAuthorForm.acFilter) == -1) {
-                console.log("adding " + this.label + " to filtered results");
+                // console.log("adding " + this.label + " to filtered results");
                 filteredResults.push(this);
             }
             else {
-                console.log("filtering out " + this.label);
+                // console.log("filtering out " + this.label);
             }
         });
         return filteredResults;
     },
     
-
     // Action taken after selecting an author from the autocomplete list
     showSelectedAuthor: function(ui) {
 
