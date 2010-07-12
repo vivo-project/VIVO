@@ -401,14 +401,14 @@ SPARQL queries for existing values. --%>
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
-<c:url var="baseAcUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
+<c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
 <c:url var="reorderUrl" value="/edit/primitiveRdfEdit" />
 
 <script type="text/javascript">
 var customFormData = {
 	rankPred: '${rankPred}',
 	rankXsdType: '${intDatatypeUri}',
-	baseAcUrl: '${baseAcUrl}',
+	acUrl: '${acUrl}',
 	reorderUrl: '${reorderUrl}'
 };
 </script>

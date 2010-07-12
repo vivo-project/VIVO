@@ -160,8 +160,8 @@ var addAuthorForm = {
 
         // Make cache a property of this so we can access it after removing 
         // an author.
-        this.acCache = {};      
-        this.setAcUrl();
+        this.acCache = {};  
+        this.setAcFilter();    
         
         $('#lastName').autocomplete({
             minLength: 2,
@@ -179,13 +179,16 @@ var addAuthorForm = {
                 $.ajax({
                     url: addAuthorForm.acUrl,
                     dataType: 'json',
-                    data: request,
+                    data: {
+                        term: request.term
+                    }, 
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
                         // should parse the response text and return a json object.
-                        var results = jQuery.parseJSON(xhr.responseText);
-                        addAuthorForm.acCache[request.term] = results;  
-                        response(results);
+                        var results = jQuery.parseJSON(xhr.responseText),
+                            filteredResults = addAuthorForm.filterAcResults(results);
+                        addAuthorForm.acCache[request.term] = filteredResults;  
+                        response(filteredResults);
                     }
 
                 });
@@ -197,19 +200,41 @@ var addAuthorForm = {
 
     },
 
-    setAcUrl: function() {
-        var url = this.baseAcUrl, 
-            existingAuthors = $('#authorships .authorLink'); 
-        
-        //console.log('in setAcUrl()');
-        //console.log('number of existing authors: ' + existingAuthors.length);
+    setAcFilter: function() {
+
+        var existingAuthors = $('#authorships .authorLink'); 
+        this.acFilter = [];
         
         existingAuthors.each(function() {
-            url += '&excludeUri=' + $(this).attr('id');
-        });
-
-        this.acUrl = url;
+            var uri = $(this).attr('id');
+            addAuthorForm.acFilter.push(uri);
+         });
     },
+    
+    removeAuthorFromAcFilter: function(author) {
+        var index = $.inArray(author, this.acFilter);
+        if (index > -1) { // this should always be true
+            this.acFilter.splice(index, 1);
+        }   
+    },
+    
+    filterAcResults: function(results) {
+        var filteredResults = [];
+        if (!this.acFilter.length) {
+            return results;
+        }
+        $.each(results, function() {
+            if ($.inArray(this.uri, addAuthorForm.acFilter) == -1) {
+                console.log("adding " + this.label + " to filtered results");
+                filteredResults.push(this);
+            }
+            else {
+                console.log("filtering out " + this.label);
+            }
+        });
+        return filteredResults;
+    },
+    
 
     // Action taken after selecting an author from the autocomplete list
     showSelectedAuthor: function(ui) {
@@ -517,6 +542,7 @@ var addAuthorForm = {
             complete: function(request, status) {
                 var authorship = $(this).parents('.authorship'),
                     nextAuthorships = authorship.nextAll(),
+                    author = authorship.find('.authorLink').attr('id'),
                     rank;
 //                  author = $(this).siblings('span.author'),
 //                  authorLink = author.children('a.authorLink'),
@@ -543,7 +569,11 @@ var addAuthorForm = {
                     // In future, do this selectively by only clearing terms that match the
                     // deleted author's name
                     addAuthorForm.acCache = {};
-
+                    
+                    // Remove this author from the acFilter so it can be returned in autocomplete
+                    // results again.
+                    addAuthorForm.removeAuthorFromAcFilter(author);
+                    
                     authorship.fadeOut(400, function() {
                         $(this).remove();
                         // Actions that depend on the author having been removed from the DOM:
@@ -551,9 +581,6 @@ var addAuthorForm = {
                         if ($('.authorship').length == 1) {
                             addAuthorForm.disableAuthorDD();
                         }
-                        // Reset the excluded uris in the autocomplete url so that the
-                        //author just removed is no longer excluded.
-                        addAuthorForm.setAcUrl();
                     });
 
 //                  $(this).hide();
