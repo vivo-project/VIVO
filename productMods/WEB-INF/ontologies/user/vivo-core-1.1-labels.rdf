@@ -264,7 +264,7 @@
     <rdfs:label xml:lang="en-US">annotates</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SubnationalRegion">
-    <rdfs:label xml:lang="en-US">SubnationalRegion</rdfs:label>
+    <rdfs:label xml:lang="en-US">Subnational Region</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory">
     <rdfs:label xml:lang="en-US">territory</rdfs:label>
@@ -649,7 +649,7 @@
     <rdfs:label xml:lang="en-US">linked author</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#TransnationalRegion">
-    <rdfs:label xml:lang="en-US">TransnationalRegion</rdfs:label>
+    <rdfs:label xml:lang="en-US">Transnational Region</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#degreeOutcomeOf">
     <rdfs:label xml:lang="en-US">degree outcome of</rdfs:label>
@@ -907,7 +907,7 @@
     <rdfs:label xml:lang="en-US">doi</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeopoliticalEntity">
-    <rdfs:label xml:lang="en-US">GeopoliticalEntity</rdfs:label>
+    <rdfs:label xml:lang="en-US">Geopolitical Entity</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AbstractInformation">
     <rdfs:label xml:lang="en-US">Abstract Information</rdfs:label>
@@ -1284,9 +1284,6 @@
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Map">
     <rdfs:label xml:lang="en-US">Map</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#PostDoc">
-    <rdfs:label xml:lang="en-US">PostDoc</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#self_governing">
     <rdfs:label xml:lang="en-US">self_governing</rdfs:label>
   </rdf:Description>
@@ -1378,7 +1375,7 @@
     <rdfs:label xml:lang="en-US">economic_region</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#StateOrProvince">
-    <rdfs:label xml:lang="en-US">StateOrProvince</rdfs:label>
+    <rdfs:label xml:lang="en-US">State Or Province</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#day">
     <rdfs:label xml:lang="en-US">day</rdfs:label>
@@ -1616,6 +1613,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#currentlyHeadOf">
     <rdfs:label xml:lang="en-US">currently head of</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Postdoc">
+    <rdfs:label xml:lang="en-US">Postdoc</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#seatingCapacity">
     <rdfs:label xml:lang="en-US">seating capacity</rdfs:label>
