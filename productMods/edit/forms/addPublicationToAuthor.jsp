@@ -191,7 +191,6 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
   	editConfig.setEntityToReturnTo("?pubUri");
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
-                                                                JavaScript.UTILS.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
                                                                ));            

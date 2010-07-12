@@ -169,7 +169,6 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPri
     String subjectUri = vreq.getParameter("subjectUri");       
   
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
-                                                                JavaScript.UTILS.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/edit/forms/js/customFormWithAdvanceTypeSelection.js"
                                                                ));            

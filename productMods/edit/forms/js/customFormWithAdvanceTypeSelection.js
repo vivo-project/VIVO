@@ -12,7 +12,7 @@ var customForm = {
 
     mixIn: function() {
         // Mix in the custom form utility methods
-        vitro.utils.borrowMethods(vitro.customFormUtils, this);
+        $.extend(this, vitro.customFormUtils);
 
         // Get the custom form data from the page
         $.extend(this, customFormData);

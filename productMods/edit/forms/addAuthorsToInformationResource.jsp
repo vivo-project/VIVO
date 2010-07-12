@@ -252,7 +252,6 @@ SPARQL queries for existing values. --%>
     List<Individual> authorships = infoResource.getRelatedIndividuals(predicateUri);   
       
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
-                                                                JavaScript.UTILS.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/edit/forms/js/addAuthorsToInformationResource.js"
                                                                ));            
