@@ -72,8 +72,8 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
        
 	?person ?rolePredicate ?role.	
 	?role   rdf:type ?roleType .		  
-    ?role   core:relatedRole ?grant .
-    ?grant  core:inRole ?role .
+    ?role   core:roleIn ?grant .
+    ?grant  core:relatedRole ?role .
 </v:jsonset>
 
 <v:jsonset var="n3ForInverse"> 
