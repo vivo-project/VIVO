@@ -1,14 +1,17 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
-
-
+ 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://vitro.mannlib.cornell.edu/vitro/tags/StringProcessorTag" prefix="p" %>
 
-<c:set var="personToRolePredicate">http://vivoweb.org/ontology/core#hasCo-PrincipalInvestigatorRole</c:set>
-<c:set var="roleActivityToRolePredicate">http://vivoweb.org/ontology/core#roleIn</c:set>
-<c:set var="roleActivityLabel">grant</c:set>
-
+<%-- 
+ This short view is intended to be called to handle short views for roles
+ 
+ The following vars should be set by the jsp that is calling this short view 
+ personToRolePredicate: URI of the person to role predicate. 
+ roleActivityToRolePredicate: URI of the activity to role predicate. 
+ roleActivityLabel: human readable label of activity.   --%>
+ 
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
         <%-- c:set var="authorRank" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#authorRank'].dataPropertyStatements[0].data}"/ --%>
@@ -17,7 +20,7 @@
  			    <c:choose>
  			    
  			    	<%-- SUBJECT is a Person, so get info from other part of the role --%>
-				    <c:when test="${predicateUri == personToRolePredicate}">
+				    <c:when test="${predicateUri == param.personToRolePredicate}">
 					    <c:choose>
                             <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#relatedRole']}">
 					            <c:set var="roleActivity" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#relatedRole'].objectPropertyStatements[0].object}" />
@@ -36,14 +39,14 @@
                                         <c:set var="name" value="unlabeled role"/>
                                     </c:otherwise>
  				                </c:choose>
-                                <c:set var="label" >(no ${roleActivityLabel} linked yet)</c:set>
+                                <c:set var="label" >(no ${param.roleActivityLabel} linked yet)</c:set>
                                 <c:set var="uri" value="${individual.URI}"/>
 				            </c:otherwise>
 				        </c:choose>
 				    </c:when>
 				    
 				    <%-- SUBJECT is an activity of some sort, so get info from the Role about the related Person --%>
-				    <c:when test="${predicateUri == roleActivityToRolePredicate}">				    				   
+				    <c:when test="${predicateUri == param.roleActivityToRolePredicate}">				    				   
 				    	<c:choose>
 				    	
 				    	    <%-- there is a related Person --%>
