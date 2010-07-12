@@ -58,11 +58,11 @@ This is intended to create a set of statements like:
 String subjectName = ((Individual) request.getAttribute("subject")).getName();
 if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvestigatorRole") ) { %>
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#PrincipalInvestigatorRole</v:jsonset>
- 	<c:set var="submitButtonLabel">Create principal investigator</c:set>
+ 	<c:set var="submitButtonLabel">Principal Investigator</c:set>
  	<c:set var="formHeading">Create a new principal investigator entry for <%= subjectName %></c:set>
  <% }else{ %>
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole</v:jsonset>
- 	<c:set var="submitButtonLabel">Create co-principal investigator</c:set>
+ 	<c:set var="submitButtonLabel">Co-Principal Investigator</c:set>
  	<c:set var="formHeading">Create a new co-principal investigator entry for <%= subjectName %></c:set>
  <% } %>
  

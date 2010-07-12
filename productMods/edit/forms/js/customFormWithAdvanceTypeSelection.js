@@ -22,17 +22,10 @@ var customForm = {
         this.form = $('#content form');
         this.fullViewOnly = $('#fullViewOnly');
         this.button = $('#submit');
+        this.baseButtonText = this.button.val();
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
-        
-        if (!this.typeSelector) {
-            this.formSteps = 1;
-        // there's also going to be a 3-step form
-        } else {
-            this.formSteps = 2;
-        }
-        
-        
+
         // This is the label element for the field with name 'label'
         this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');        
         // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
@@ -45,6 +38,7 @@ var customForm = {
         // These are classed rather than id'd in case we want more than one autocomplete on a form.
         this.acSelector = this.form.find('.acSelector');
         this.acSelection = this.form.find('.acSelection'); 
+        this.acReceiver = this.form.find('.acReceiver');
         
         $.extend(this, customFormData);
     
@@ -52,12 +46,19 @@ var customForm = {
 
     // Set up the form on page load
     initPage: function() {
-        
+
+        if (!this.typeSelector.length) {
+            this.formSteps = 1;
+        // there's also going to be a 3-step form
+        } else {
+            this.formSteps = 2;
+        }
+                
         this.bindEventListeners();
         
         this.initAutocomplete();
         
-        if (this.findValidationErrors() || this.formSteps == 1) {
+        if (this.formSteps == 1 || this.findValidationErrors()) {
             this.initFormFullView();
         } else {
             this.initFormTypeView();
@@ -72,9 +73,7 @@ var customForm = {
         this.requiredLegend.hide();
         this.or.hide();
 
-        if( this.formSteps > 1 ){
-            this.cancel.unbind('click');
-        }
+        this.cancel.unbind('click');
     },
     
     initFormFullView: function() {
@@ -83,7 +82,7 @@ var customForm = {
         this.or.show();
         this.requiredLegend.show();
         this.button.show();
-        this.button.val('Create Publication');
+        this.button.val('Create ' + this.baseButtonText);
         
         if( this.formSteps > 1 ){
         	this.cancel.unbind('click');
@@ -119,7 +118,6 @@ var customForm = {
         
         this.getAcFilter();
         this.acCache = {};
-        //this.baseAcUrl = customFormData.acUrl; 
         
         this.acSelector.autocomplete({
             minLength: 3,
@@ -160,10 +158,10 @@ var customForm = {
     getAcFilter: function() {
 
         $.ajax({
-            url: customFormData.sparqlQueryUrl,
+            url: customForm.sparqlQueryUrl,
             data: {
                 resultFormat: 'RS_JSON',
-                query: customFormData.sparqlForAcFilter
+                query: customForm.sparqlForAcFilter
             },
             success: function(data, status, xhr) {
                 // Not sure why, but we need an explicit json parse here. jQuery
@@ -188,12 +186,12 @@ var customForm = {
         }
         $.each(results, function() {
             if ($.inArray(this.uri, customForm.acFilter) == -1) {
-                console.log("adding " + this.label + " to filtered results");
+                // console.log("adding " + this.label + " to filtered results");
                 filteredResults.push(this);
             }
-            else {
-                console.log("filtering out " + this.label);
-            }
+//            else {
+//                console.log("filtering out " + this.label);
+//            }
         });
         return filteredResults;
     },
@@ -205,7 +203,7 @@ var customForm = {
         this.acUrl = this.baseAcUrl + glue + 'type=' + typeVal;
         
         // Flush autocomplete cache when type is reset, since the cached values 
-        // are relevant only to the previous type.
+        // pertain only to the previous type.
         this.acCache = {};
     },       
         
@@ -220,7 +218,7 @@ var customForm = {
         this.acReceiver.val(ui.item.uri);
         this.acSelectionInfo.html(ui.item.label);
         
-        this.button.val('Add Publication');
+        this.button.val('Add ' + this.baseButtonText);
                 
         if( this.formSteps > 1){
         	this.cancel.unbind('click');

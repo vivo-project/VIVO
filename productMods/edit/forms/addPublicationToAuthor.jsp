@@ -228,7 +228,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
 	    </div>
     </div>   
      
-    <p class="submit"><v:input type="submit" id="submit" value="Create Publication" cancel="true" /></p>
+    <p class="submit"><v:input type="submit" id="submit" value="Publication" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
