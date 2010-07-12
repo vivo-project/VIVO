@@ -89,9 +89,9 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?grant rdfs:label ?grantLabel .               
 </v:jsonset>
 
-<%-- Must be all one line for JavaScript. Must use ?individual since Javascript will look for that property in the data returned. --%>
+<%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?individual .}
+PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?grantUri .}
 </c:set>
 
 <v:jsonset var="grantTypeUriJson">${vivoOnt}#Grant</v:jsonset>

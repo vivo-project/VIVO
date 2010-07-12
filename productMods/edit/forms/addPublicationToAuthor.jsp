@@ -102,9 +102,9 @@ SPARQL queries for existing values. --%>
     ?pubUri core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-<%-- Must be all one line for JavaScript. Must use ?individual since Javascript will look for that property in the data returned. --%>
+<%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?individual .}
+PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?pubUri .}
 </c:set>
 
 <c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />

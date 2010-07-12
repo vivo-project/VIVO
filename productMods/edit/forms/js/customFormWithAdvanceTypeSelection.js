@@ -89,9 +89,10 @@ var customForm = {
         this.requiredLegend.show();
         this.button.show();
         this.button.val('Create ' + this.baseButtonText);
-        
+        this.cancel.unbind('click');     
+           
         if( this.formSteps > 1 ){
-            this.cancel.unbind('click');
+
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
@@ -184,9 +185,10 @@ var customForm = {
     },
     
     setAcFilter: function(data) {
-        var filter = [];
+        var filter = [],
+            key = data.head.vars[0];
         $.each(data.results.bindings, function() {
-            filter.push(this.individual.value);
+            filter.push(this[key].value);
         });
         this.acFilter = filter;          
     },
@@ -237,18 +239,31 @@ var customForm = {
         this.acSelectionInfo.html(ui.item.label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
-        this.button.val('Add ' + this.baseButtonText);
-                
-        if( this.formSteps > 1){
-            this.cancel.unbind('click');
-            this.cancel.click(function() {
-                // TODO Check out cancel action for authors form. Need to undo/empty some of the stuff above.
-                //do we do it in the initfullview method, or here?
-                customForm.initFormFullView();
-                return false;
-            });
-        }
+        this.button.val('Add ' + this.baseButtonText);               
 
+        this.cancel.unbind('click');
+        this.cancel.click(function() {
+            customForm.undoAutocompleteSelection();
+            customForm.initFormFullView();
+            return false;
+        });
+    },
+    
+    // Cancel action after making an autocomplete selection: undo autocomplete 
+    // selection (from showAutocomplete) before returning to full view.
+    undoAutocompleteSelection: function() {
+        
+        this.acSelectorWrapper.show();
+        this.hideFields(this.acSelection);
+        this.acReceiver.val('');
+        this.acSelectionInfo.html('');
+        this.verifyMatch.attr('href', this.verifyMatchBaseHref);
+        this.button.val('Create ' + this.baseButtonText)
+        
+        if (this.formSteps > 1) {
+            this.acSelection.find('label').html('Selected ');
+        }
+                
     },
     
     getSelectedTypeName: function() {
