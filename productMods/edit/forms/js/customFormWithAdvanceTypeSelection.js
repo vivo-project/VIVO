@@ -106,14 +106,18 @@ var customForm = {
         
         this.typeSelector.change(function() {
             var typeVal = $(this).val();
+            
+            // If an autocomplete selection has been made, undo it
+            customForm.undoAutocompleteSelection();
+            
             // Set the type of individual that the autocomplete will search for.
             // We do this even if typeVal is empty, to clear out a previous value.
             //customForm.resetAutocomplete(typeVal); 
             customForm.acType = typeVal;
+            
             if (typeVal.length) {                
                 customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
-                customForm.initFormFullView(); 
-                customForm.hideFields(customForm.acSelection);            
+                customForm.initFormFullView();            
             } else {
                 // If no selection, go back to type view. This prevents problems like trying to run autocomplete
                 // or submitting form without a type selection.
