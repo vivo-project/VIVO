@@ -124,7 +124,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPri
     "sparqlForExistingUris" : { },
     "fields" : {  
       "grant" : {
-         "newResource"      : "true",
+         "newResource"      : "false",
          "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
@@ -187,10 +187,6 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPri
 
 <jsp:include page="${preForm}" />
 
-<c:url var="acUrl" value="/autocomplete?stem=true" />
-<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
-
-
 <h2>${formHeading}</h2>
 
 <form id="addGrantRoleToPerson" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
@@ -200,7 +196,7 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPri
     <div class="acSelection">
         <p class="inline"><label></label><span class="acSelectionInfo"></span></p>
         <%-- bdc34: for some odd reason id and name should not be grant in this input element. --%>
-        <input type="hidden" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
+        <input type="hidden" id="grant" name="grant" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
     </div>
             
     <p class="submit"><v:input type="submit" id="submit" value="${submitButtonLabel}" cancel="true" /></p>
@@ -208,13 +204,16 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:hasPri
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
-<script>
+<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+
+<script type="text/javascript">
 var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
     acType: '${vivoCore}Grant'       
-}
+};
 </script>
 
 <jsp:include page="${postForm}"/>

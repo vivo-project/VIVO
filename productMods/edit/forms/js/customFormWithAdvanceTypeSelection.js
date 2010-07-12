@@ -13,6 +13,9 @@ var customForm = {
     mixIn: function() {
         // Mix in the custom form utility methods
         vitro.utils.borrowMethods(vitro.customFormUtils, this);
+
+        // Get the custom form data from the page
+        $.extend(this, customFormData);
     },
     
     // On page load, create references for easy access to form elements.
@@ -39,8 +42,6 @@ var customForm = {
         this.acSelector = this.form.find('.acSelector');
         this.acSelection = this.form.find('.acSelection'); 
         this.acReceiver = this.form.find('.acReceiver');
-        
-        $.extend(this, customFormData);
     
     },
 
@@ -49,7 +50,7 @@ var customForm = {
 
         if (!this.typeSelector.length) {
             this.formSteps = 1;
-        // there's also going to be a 3-step form
+        // there's also going to be a 3-step form - look for this.subTypeSelector
         } else {
             this.formSteps = 2;
         }

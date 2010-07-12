@@ -207,9 +207,6 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
-<c:url var="acUrl" value="/autocomplete?stem=true" />
-<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
-
 <jsp:include page="${preForm}" />
 
 <h2>Create a new publication entry for <%= subjectName %></h2>
@@ -233,7 +230,10 @@ PREFIX core: <${vivoCore}> SELECT ?individual WHERE {<${subjectUri}> core:author
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
-<script>
+<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+
+<script type="text/javascript">
 var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',

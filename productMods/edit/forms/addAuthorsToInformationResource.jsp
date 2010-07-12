@@ -379,13 +379,6 @@ SPARQL queries for existing values. --%>
     <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
 </div> 
 
-<div id="infoForJs">
-    <span class="rankPred" id="${rankPred}"></span>
-    <span class="rankXsdType" id="${intDatatypeUri}"></span>
-    <span class="acUrl" id="<c:url value="/autocomplete?type=${foaf}Person&stem=false" />"></span>
-    <span class="reorderUrl" id="<c:url value="/edit/primitiveRdfEdit" />"></span>
-</div>
-
 <form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <h3>Add an Author</h3>
@@ -407,6 +400,18 @@ SPARQL queries for existing values. --%>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
+
+<c:url var="baseAcUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
+<c:url var="reorderUrl" value="/edit/primitiveRdfEdit" />
+
+<script type="text/javascript">
+var customFormData = {
+	rankPred: '${rankPred}',
+	rankXsdType: '${intDatatypeUri}',
+	baseAcUrl: '${baseAcUrl}',
+	reorderUrl: '${reorderUrl}'
+};
+</script>
 
 <jsp:include page="${postForm}"/>
 

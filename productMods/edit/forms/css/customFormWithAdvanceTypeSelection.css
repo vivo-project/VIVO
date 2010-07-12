@@ -9,11 +9,6 @@
     display: none;
 }
 
-/* Always hidden, JS or no JS */
-#infoForJs {
-    display: none;
-}
-
 #content form p.inline label {
     display: inline;
     clear: none;

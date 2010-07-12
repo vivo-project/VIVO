@@ -13,6 +13,9 @@ var addAuthorForm = {
     mixIn: function() {
     	// Mix in the custom form utility methods
     	vitro.utils.borrowMethods(vitro.customFormUtils, this);
+        
+        // Get the custom form data from the page
+        $.extend(this, customFormData);
     },
     
     // On page load, create references for easy access to form elements.
@@ -157,8 +160,7 @@ var addAuthorForm = {
 
         // Make cache a property of this so we can access it after removing 
         // an author.
-        this.acCache = {};
-        this.baseAcUrl = $('.acUrl').attr('id');        
+        this.acCache = {};      
         this.setAcUrl();
         
         $('#lastName').autocomplete({
@@ -260,8 +262,8 @@ var addAuthorForm = {
     // Reorder authors. Called on page load and after author drag-and-drop.
     // Event and ui parameters are defined only in the case of drag-and-drop.
     reorderAuthors: function(event, ui) {
-        var predicateUri = '<' + $('.rankPred').attr('id') + '>',
-            rankXsdType = $('.rankXsdType').attr('id'),
+        var predicateUri = '<' + this.rankPred + '>',
+            rankXsdType = this.rankXsdType,
             additions = '',
             retractions = '',
             authorships = [];
@@ -305,7 +307,7 @@ var addAuthorForm = {
         // console.log('retractions: ' + retractions);
 
         $.ajax({
-            url: $('.reorderUrl').attr('id'),
+            url: addAuthorForm.reorderUrl,
             data: {
                 additions: additions,
                 retractions: retractions
