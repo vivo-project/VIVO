@@ -173,7 +173,9 @@ var customForm = {
     },
     
     getAcFilter: function() {
-
+        // Define this.acFilter here, so in case the sparql query fails
+        // we don't get an error when referencing it later.
+        this.acFilter = [];
         $.ajax({
             url: customForm.sparqlQueryUrl,
             data: {
@@ -189,12 +191,11 @@ var customForm = {
     },
     
     setAcFilter: function(data) {
-        var filter = [],
-            key = data.head.vars[0];
+        var key = data.head.vars[0];
+        
         $.each(data.results.bindings, function() {
-            filter.push(this[key].value);
-        });
-        this.acFilter = filter;          
+            this.acFilter.push(this[key].value);
+        });         
     },
     
     filterAcResults: function(results) {
