@@ -1,12 +1,9 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://vitro.mannlib.cornell.edu/vitro/tags/StringProcessorTag" prefix="p" %>
 
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Authorship individual, not the Person or Publication --%>
-        <%-- c:set var="authorRank" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#authorRank'].dataPropertyStatements[0].data}"/ --%>
  		<c:choose>
 			<c:when test="${!empty predicateUri}">
  			    <c:choose>
@@ -16,8 +13,7 @@
 					            <c:set var="infoResource" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedInformationResource'].objectPropertyStatements[0].object}" />
 					            <c:set var="name"  value="${infoResource.name}"/>
                                 <c:set var="moniker" value="${infoResource.moniker}"/>
-                                <c:set var="year" value="${infoResource.dataPropertyMap['http://vivoweb.org/ontology/core#year'].dataPropertyStatements[0].data}"/>
-                                <c:set var="label" value="${moniker} ${year}"/>
+                                <c:set var="label" value="${moniker}"/>
                                 <c:set var="uri" value="${infoResource.URI}"/>
                             </c:when>
  				            <c:otherwise><%-- this Position is not linked to a Publication yet; use Authorship name as a placeholder and add link to the Authorship so user can add more information --%>
@@ -64,10 +60,10 @@
 			    <c:choose>
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
-		                <a href="<c:out value="${olink}"/>"><p:process>${name}</p:process></a> <p:process>${label}</p:process>
+		                <a href="<c:out value="${olink}"/>">${name}</a> ${label}
 		            </c:when>
 		            <c:otherwise>
-		                <p:process><strong>${name}</strong> ${label}</p:process> 
+		                <strong>${name}</strong> ${label}
 		            </c:otherwise>
 		        </c:choose>
 			</c:when>
