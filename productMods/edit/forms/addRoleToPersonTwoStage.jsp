@@ -49,7 +49,8 @@
    sparqlForAcFilter
     role type
     predicate inverse          
-    role activity type label (should be singular) 
+    role activity type label (should be singular)
+    super type of role types for roleActivityType select list generation 
 --%>
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
@@ -57,6 +58,7 @@ PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAu
 </c:set>
 <c:set var="roleActivityTypeLabel">clinical activity</c:set>
 <c:set var="roleType">${vivoCore}ClinicalRole</c:set>
+<c:set var="roleActivitySuperType">${vivoCore}Process</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -150,10 +152,10 @@ PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAu
       "roleActivityType" : {
          "newResource"      : "true",
          "validators"       : [ ],
-         "optionsType"      : "VCLASSGROUP",
+         "optionsType"      : "CHILD_VCLASSES",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${publicationsClassGroupUriJson}",
+         "objectClassUri"   : "${roleActivitySuperType}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ ]
@@ -220,7 +222,7 @@ PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAu
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
 	        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-	        <input type="hidden" id="pubUri" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
+	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
     </div>   
      
