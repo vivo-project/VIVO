@@ -278,13 +278,15 @@ SPARQL queries for existing values. --%>
     }
 %>
 
-<c:set var="title" value="<em>${infoResourceName}</em>: Authors" />
+<c:set var="title" value="<em>${infoResourceName}</em>"/>
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="initialHint" value="<span class='hint'>(initial okay)</span>" />
 
 <jsp:include page="${preForm}" />
 
 <h2>${title}</h2>
+
+<h3>Manage Authors</h3>
 
 <ul id="authorships" <%= ulClass %>>
 <%
@@ -340,7 +342,7 @@ SPARQL queries for existing values. --%>
 	                        <c:url var="authorHref" value="/individual">
 	                            <c:param name="uri" value="${author.URI}"/>
 	                        </c:url> 
-	                        <a href="${authorHref}" id="${author.URI}" class="authorLink">${author.name}</a>                   
+	                        <a href="#" id="${author.URI}" class="authorLink">${author.name}</a>
 	                    </c:when>
 	
 	                    <c:otherwise>
