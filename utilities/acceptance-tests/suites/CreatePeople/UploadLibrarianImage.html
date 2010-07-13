@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>UploadFacultyImage</title>
+<title>UploadLibrarianImage</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">UploadFacultyImage</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">UploadLibrarianImage</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Upload image for Jane Faculty in the backend</td>
+	<td class="comment">Upload image for Jane Faculty in the frontend</td>
 	<td></td>
 </tr>
 <tr>
@@ -106,27 +106,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty Member</td>
+	<td>Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
+	<td>link=Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Jane Faculty</td>
+	<td>Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -141,27 +141,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to update this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='content']/div[1]/h3</td>
+	<td class="comment">Select to update this individual's picture</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Jane Faculty</td>
+	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -170,13 +155,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Upload Image']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
-	<td>Upload image for Jane Faculty</td>
+	<td>Upload image for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,7 +186,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,12 +196,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Upload Image']</td>
+	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Upload image for Jane Faculty</td>
+	<td>Upload image for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -242,7 +222,7 @@
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Lily1.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -251,7 +231,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -261,12 +241,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Upload Image']</td>
+	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Upload image for Jane Faculty</td>
+	<td>Upload image for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -287,7 +267,7 @@
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Lily1.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -296,7 +276,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Jane Faculty</td>
+	<td>Crop Photo for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,42 +286,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Verify photo is not there</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,22 +311,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
+	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Upload Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Upload image for Jane Faculty</td>
+	<td>Upload image for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -397,7 +337,7 @@
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Lily1.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -406,7 +346,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Jane Faculty</td>
+	<td>Crop Photo for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -430,49 +370,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Verify photo is there</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jane Faculty</td>
+	<td>Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyAttribute</td>
 	<td>//img[@title='click to view larger image']@src</td>
-	<td>/vivo/file/*/thumbnail_Jane1.jpg</td>
+	<td>/vivo/file/*/thumbnail_Lily1.jpg</td>
 </tr>
 <tr>
 	<td>comment</td>
