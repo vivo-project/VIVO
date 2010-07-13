@@ -59,7 +59,10 @@
 <c:set var="sparqlForAcFilter">${param.sparqlForAcFilter}</c:set>
 <c:set var="roleActivityTypeLabel">${param.roleActivityTypeLabel}</c:set>
 <c:set var="roleType">${param.roleType}</c:set>
-<c:set var="roleActivitySuperType">${param.roleActivitySuperType}</c:set>
+
+<c:set var="roleActivityType_optionsType" >${param.roleActivityType_optionsType}</c:set>
+<c:set var="roleActivityType_objectClassUri" >${param.roleActivityType_objectClassUri}</c:set> 
+<c:set var="roleActivityType_literalOptions" >${param.roleActivityType_literalOptions}</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -153,10 +156,10 @@
       "roleActivityType" : {
          "newResource"      : "true",
          "validators"       : [ ],
-         "optionsType"      : "CHILD_VCLASSES",
-         "literalOptions"   : [ "Select one" ],
+         "optionsType"      : "${roleActivityType_optionsType}",
+         "literalOptions"   : [ ${roleActivityType_literalOptions } ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${roleActivitySuperType}",
+         "objectClassUri"   : "${roleActivityType_objectClassUri}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ ]
