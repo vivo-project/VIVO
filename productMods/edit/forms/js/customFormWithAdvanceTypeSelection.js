@@ -194,15 +194,18 @@ var customForm = {
         var key = data.head.vars[0];
         
         $.each(data.results.bindings, function() {
-            this.acFilter.push(this[key].value);
+            customForm.acFilter.push(this[key].value);
         });         
     },
     
     filterAcResults: function(results) {
-        var filteredResults = [];
+        var filteredResults;
+        
         if (!this.acFilter.length) {
             return results;
         }
+        
+        filteredResults = [];
         $.each(results, function() {
             if ($.inArray(this.uri, customForm.acFilter) == -1) {
                 // console.log("adding " + this.label + " to filtered results");
