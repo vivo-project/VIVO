@@ -769,3 +769,38 @@ color:#384c5d;
 line-height:100px;
 padding-left:65px;
 }
+
+
+/* styles for error alerts */
+
+#errorAlert{
+	color:#900;
+	padding:0px;
+	margin-bottom:5px;
+	
+	height:30px;
+	
+}
+
+
+#errorAlert img{
+	float:left;
+	margin:0;
+	padding:0;
+	vertical-align:middle;
+	
+	
+}
+
+#errorAlert  p{
+padding-left:35px;
+font-size:0.9em;
+line-height:30px;
+	
+}
+
+/* styles for contact us page */
+.contactUsReturnHome{
+margin-top:30px;
+margin-bottom:250px;
+}
