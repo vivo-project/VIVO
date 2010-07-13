@@ -100,30 +100,30 @@
 }
 /* styles for error alerts */
 #errorAlert{
-	width:500px;
-	background-color:#900;
-	color:#FFF;
-	padding:1em;
-	margin-bottom: 15px;
-	font-family: Helvetica, sans-serif,Arial;
-	font-size: 1em;
-	line-height:1.2em;
+	color:#900;
+	padding:0px;
+	margin-bottom:5px;
+	
+	height:30px;
 	
 }
 
 
-/*#errorAlert img{
+#errorAlert img{
 	float:left;
 	margin:0;
 	padding:0;
 	vertical-align:middle;
 	
+	
 }
 
 #errorAlert  p{
-	/*padding-left:40px;*/
+padding-left:35px;
+font-size:0.9em;
+line-height:30px;
 	
-}*/
+}
 
 a{
 color:#FF7700; 
