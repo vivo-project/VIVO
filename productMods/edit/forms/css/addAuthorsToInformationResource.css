@@ -20,8 +20,10 @@
     width: 15em;
 }
 
-#authorships.dd .authorLinkWrapper {
-    cursor: pointer;
+#authorships.dd .authorLinkWrapper,
+#authorships.dd li,
+#authorships.dd a.authorLink {
+    cursor: move;
 }
 
 #showAddForm span.or {

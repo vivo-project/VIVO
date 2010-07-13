@@ -276,10 +276,6 @@ var addAuthorForm = {
             $(this).attr('title', 'Drag and drop to reorder authors');
         });
         
-        $('.authorLinkWrapper,#authorships.dd li, a.authorLink').hover(function() {
-            $(this).css('cursor','move');
-        })
-        
         authorshipList.sortable({
             cursor: 'move',
             stop: function(event, ui) {
