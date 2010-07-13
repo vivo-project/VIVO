@@ -64,16 +64,32 @@ var customForm = {
         
         this.initAutocomplete();
         
+        this.initFormView();
+
+    },
+    
+    initFormView: function() {
+        
+        var typeVal = this.typeSelector.val();   
+        
         if (this.formSteps == 1 || this.findValidationErrors()) {
             this.initFormFullView();
-        } else {
-            this.initFormTypeView();
         }
- 
+        // If type is already selected when the page loads (Firefox retains value
+        // on a refresh), go directly to full view. Otherwise user has to reselect
+        // twice to get to full view.
+        else if (typeVal.length) {
+            this.acType = typeVal;
+            this.setLabelFieldLabel();
+            this.initFormFullView();
+        }
+        else {
+            this.initFormTypeView();
+        }     
     },
     
     initFormTypeView: function() {
-
+  
         this.hideFields(this.fullViewOnly);
         this.button.hide();
         this.requiredLegend.hide();
@@ -83,7 +99,7 @@ var customForm = {
     },
     
     initFormFullView: function() {
-        
+
         this.fullViewOnly.show();
         this.or.show();
         this.requiredLegend.show();
@@ -112,11 +128,10 @@ var customForm = {
             
             // Set the type of individual that the autocomplete will search for.
             // We do this even if typeVal is empty, to clear out a previous value.
-            //customForm.resetAutocomplete(typeVal); 
             customForm.acType = typeVal;
             
-            if (typeVal.length) {                
-                customForm.labelFieldLabel.html(customForm.getSelectedTypeName() + ' ' + customForm.baseLabelText);
+            if (typeVal.length) {    
+                customForm.setLabelFieldLabel();            
                 customForm.initFormFullView();            
             } else {
                 // If no selection, go back to type view. This prevents problems like trying to run autocomplete
@@ -278,6 +293,10 @@ var customForm = {
     
     getSelectedTypeName: function() {
         return this.typeSelector.find(':selected').html();
+    },
+    
+    setLabelFieldLabel: function() {
+        this.labelFieldLabel.html(this.getSelectedTypeName() + ' ' + this.baseLabelText);        
     }
     
 };
