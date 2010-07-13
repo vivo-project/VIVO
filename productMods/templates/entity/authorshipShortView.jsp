@@ -12,8 +12,8 @@
                             <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedInformationResource']}"><%-- this Authorship is linked to an InformationResource --%>
 					            <c:set var="infoResource" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedInformationResource'].objectPropertyStatements[0].object}" />
 					            <c:set var="name"  value="${infoResource.name}"/>
-                                <c:set var="moniker" value="${infoResource.moniker}"/>
-                                <c:set var="label" value="${moniker}"/>
+					            <%-- <c:set var="label" value="${infoResource.moniker}" /> --%>
+                                <c:set var="label" value="${infoResource.VClass.name}"/>
                                 <c:set var="uri" value="${infoResource.URI}"/>
                             </c:when>
  				            <c:otherwise><%-- this Position is not linked to a Publication yet; use Authorship name as a placeholder and add link to the Authorship so user can add more information --%>
