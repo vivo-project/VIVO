@@ -16,6 +16,10 @@
            core:relatedRole ?someActivity .
   ?someActivity rdf:type core:ResearchActivity .
   ?someActivity rdfs:label "activity title" .
+  
+  Important: This form cannot be directly used as a custom form.  It has parameters that must be set.
+  See addClinicalRoleToPerson.jsp for an example.
+  
 --%>           
 
 <%@ page import="java.util.List" %>
@@ -45,20 +49,17 @@
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 
 <%--
-  It may make sense to parameterize this jsp:
+  These are the parameters that MUST be set of this form:
    sparqlForAcFilter
-    role type
-    predicate inverse          
-    role activity type label (should be singular)
-    super type of role types for roleActivityType select list generation 
+   role type
+   predicate inverse          
+   role activity type label (should be singular)
+   super type of role types for roleActivityType select list generation 
 --%>
-<%-- Must be all one line for JavaScript. --%>
-<c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?pubUri .}
-</c:set>
-<c:set var="roleActivityTypeLabel">clinical activity</c:set>
-<c:set var="roleType">${vivoCore}ClinicalRole</c:set>
-<c:set var="roleActivitySuperType">${vivoCore}Process</c:set>
+<c:set var="sparqlForAcFilter">${param.sparqlForAcFilter}</c:set>
+<c:set var="roleActivityTypeLabel">${param.roleActivityTypeLabel}</c:set>
+<c:set var="roleType">${param.roleType}</c:set>
+<c:set var="roleActivitySuperType">${param.roleActivitySuperType}</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
