@@ -125,6 +125,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='click to view larger image']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Select to edit Jane Faculty's profile</td>
 	<td></td>
@@ -205,33 +210,103 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Select file to upload</td>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='click to view larger image']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>file1</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
+	<td>comment</td>
+	<td class="comment">Select to edit Jane Faculty's profile again</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/div[1]/h3</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submitMode</td>
+	<td>link=edit this individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Upload Image</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Results from processing input file:<br /> updated individual Jane Faculty<br />Link to check uploaded image:<br /> &lt;Jane2.html&gt;</td>
+	<td>Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Select file to upload again</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
+	<td>//input[@value='Upload Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Replace image for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Crop Photo for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Your profile photo will look like the image below. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>To make adjustments, you can drag around and resize the photo to the right. When you are happy with your photo click the &quot;Save Photo&quot; button. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save photo']</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,8 +321,8 @@
 </tr>
 <tr>
 	<td>verifyAttribute</td>
-	<td>//img[@title='Jane Faculty']@src</td>
-	<td>/vivo/images/people/Jane2.jpg</td>
+	<td>//img[@title='click to view larger image']@src</td>
+	<td>/vivo/file/n5348/thumbnail_Jane2.jpg</td>
 </tr>
 <tr>
 	<td>comment</td>
