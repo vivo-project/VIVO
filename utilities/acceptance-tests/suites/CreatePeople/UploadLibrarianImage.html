@@ -186,7 +186,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Current Photo </td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,27 +206,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Jane Faculty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//img[@title='no image']</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Select a photo to add and then cancel out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -232,6 +222,21 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Upload image for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,27 +251,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Jane Faculty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//img[@title='no image']</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Cancel after uploading the picture</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -277,6 +267,21 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Upload image for Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -301,12 +306,52 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify photo is not there</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
 	<td>Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>//img[@title='no image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[@title='click to view larger image']</td>
 	<td></td>
 </tr>
 <tr>
@@ -335,6 +380,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>datafile</td>
 	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane1.jpg</td>
@@ -356,12 +416,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Your profile photo will look like the image below. </td>
+	<td>Your profile photo will look like the image below.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>To make adjustments, you can drag around and resize the photo to the right. When you are happy with your photo click the &quot;Save Photo&quot; button. </td>
+	<td>To make adjustments, you can drag around and resize the photo to the right. When you are happy with your photo click the &quot;Save Photo&quot; button.</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,13 +431,48 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify photo is there</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
 	<td>Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//img[@title='click to view larger image']</td>
-	<td></td>
+	<td>verifyAttribute</td>
+	<td>//img[@title='click to view larger image']@src</td>
+	<td>/vivo/file/*/thumbnail_Jane1.jpg</td>
 </tr>
 <tr>
 	<td>comment</td>
