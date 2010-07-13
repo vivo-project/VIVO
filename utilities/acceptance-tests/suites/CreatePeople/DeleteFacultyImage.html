@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>ChangeFacultyImage</title>
+<title>DeleteFacultyImage</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">ChangeFacultyImage</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">DeleteFacultyImage</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Change the uploaded picture for Jane Faculty in the backend</td>
+	<td class="comment">Delete the uploaded picture for Jane Faculty in the backend</td>
 	<td></td>
 </tr>
 <tr>
@@ -120,13 +120,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Verify picture does exist</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyAttribute</td>
+	<td>//img[@title='click to view larger image']@src</td>
+	<td>/vivo/file/*/thumbnail_Jane2.jpg</td>
+</tr>
+<tr>
 	<td>comment</td>
-	<td class="comment">Select to edit Jane Faculty's profile</td>
+	<td class="comment">Select to edit Jane Faculty in the backend</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,7 +161,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to upload an image to replace other one</td>
+	<td class="comment">Select to upload an image to be able to delete the picture</td>
 	<td></td>
 </tr>
 <tr>
@@ -180,53 +190,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Upload photo']</td>
+	<td>link=Delete photo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Jane Faculty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jane Faculty</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select file to upload</td>
+	<td class="comment">Verify image has been deleted</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>file1</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>submitMode</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Upload Image</td>
+	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Results from processing input file:<br /> updated individual Jane Faculty<br />Link to check uploaded image:<br /> &lt;Jane2.html&gt;</td>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
@@ -240,14 +235,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Verify image has been updated to new one</td>
+	<td>verifyElementPresent</td>
+	<td>//img[@title='no image']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>verifyAttribute</td>
-	<td>//img[@title='Jane Faculty']@src</td>
-	<td>/vivo/images/people/Jane2.jpg</td>
 </tr>
 <tr>
 	<td>comment</td>
