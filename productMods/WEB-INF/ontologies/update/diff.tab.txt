@@ -3,7 +3,7 @@
 	http://vivoweb.org/ontology/core#Agreement	No	Add	not set
 	http://vivoweb.org/ontology/core#Contract	No	Add	not set
 	http://vivoweb.org/ontology/core#PrimaryURLLink	No	Add	not set
-	http://vivoweb.org/ontology/core#Meeting		No	Add	not set
+	http://vivoweb.org/ontology/core#Meeting	No	Add	not set
 	http://vivoweb.org/ontology/core#InvitedTalk	No	Add	not set
 	http://vivoweb.org/ontology/core#PostdocPosition	No	Add	not set
 	http://vivoweb.org/ontology/core#pmcid	No	Add	not set
@@ -18,7 +18,7 @@
 	http://vivoweb.org/ontology/core#researchOverview	No	Add	not set
 	http://vivoweb.org/ontology/core#outreachOverview	No	Add	not set
 	http://vivoweb.org/ontology/core#contributingAdvising	No	Add	not set
-	http://vivoweb.org/ontology/core#http://vivoweb.org/ontology/core#advisingContributionTo	No	Add	not set
+	http://vivoweb.org/ontology/core#advisingContributionTo	No	Add	not set
 	http://vivoweb.org/ontology/core#clinicalRoleOf	No	Add	not set
 	http://vivoweb.org/ontology/core#hasClinicalRole	No	Add	not set
 	http://vivoweb.org/ontology/core#fundedByAgent	No	Add	not set
@@ -44,61 +44,61 @@
 	http://vivoweb.org/ontology/core#ClinicalRole	No	Add	not set
 	http://vivoweb.org/ontology/core#ClinicalOrganization	No	Add	not set
 	http://vivoweb.org/ontology/core#ResearchOrganization	No	Add	not set
-http://vivoweb.org/ontology/core#URLLinkType			No	Delete	not set
-http://purl.org/ontology/bibo/PersonalCommunication			No	Delete	not set
-http://purl.org/ontology/bibo/PersonalCommunicationDocument			No	Delete	not set
-http://purl.org/ontology/bibo/Email			No	Delete	not set
-http://purl.org/ontology/bibo/Letter			No	Delete	not set
-http://vivoweb.org/ontology/core#Seminar	No	Delete	not set
-http://purl.org/dc/terms/alternative			No	Delete	not set
-http://purl.org/ontology/bibo/shortTitle			No	Delete	not set
-http://purl.org/ontology/bibo/content			No	Delete	not set
-http://vivoweb.org/ontology/core#collaboratorOn			No	Delete	not set
-http://vivoweb.org/ontology/core#hasSection			No	Delete	not set
-http://vivoweb.org/ontology/core#sectionOf			No	Delete	not set
-http://purl.org/NET/c4dm/event.owl#time			No	Delete	not set
-http://purl.org/ontology/bibo/argued			No	Delete	not set
-http://vivoweb.org/ontology/core#degreeStatus			No	Delete	not set
-http://vivoweb.org/ontology/core#type			No	Delete	not set
-vitro:citation	No	Delete	not set
-http://vivoweb.org/ontology/core#referencedPublicationCityName			No	Delete	not set
-http://vivoweb.org/ontology/core#referencedPublisherName			No	Delete	not set
-http://vivoweb.org/ontology/core#referencedAuthorOrEditor			No	Delete	not set
-http://vivoweb.org/ontology/core#hasCoPrincipalInvestigator			No	Delete	mapped
-http://vivoweb.org/ontology/core#coPrincipalInvestigatorOn			No	Delete	mapped
-http://vivoweb.org/ontology/core#principalInvestigatorOn			No	Delete	mapped
-http://vivoweb.org/ontology/core#hasPrincipalInvestigator			No	Delete	mapped
-http://purl.org/ontology/bibo/contributorList			No	Delete	not set
-http://purl.org/ontology/bibo/authorList			No	Delete	not set
-http://purl.org/ontology/bibo/editorList			No	Delete	not set
-http://vivoweb.org/ontology/core#onlineContentFrom			No	Delete	not set
-http://vivoweb.org/ontology/core#onlineContent			No	Delete	not set
-http://vivoweb.org/ontology/core#invitedStatus			No	Delete	not set
-http://vivoweb.org/ontology/core#refereedStatus			No	Delete	not set
-http://vivoweb.org/ontology/core#publisherName			No	Delete	not set
-http://vivoweb.org/ontology/core#publicationStatus			No	Delete	not set
-http://vivoweb.org/ontology/core#publicationMonth			No	Delete	not set
-http://vivoweb.org/ontology/core#courseTaughtBy			No	Delete	not set
-http://vivoweb.org/ontology/core#recentCourseTaught			No	Delete	not set
-http://vivoweb.org/ontology/core#investigatorOn			No	Delete	not set
-http://vivoweb.org/ontology/core#hasInvestigator			No	Delete	not set
-http://vivoweb.org/ontology/core#PresentationActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#presentationActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#presentationActivityBy			No	Delete	not set
-http://vivoweb.org/ontology/core#ResearchActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#researchActivityBy			No	Delete	not set
-http://vivoweb.org/ontology/core#hasResearchActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#InternationalActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#contributingParticipantIn			No	Delete	not set
-http://vivoweb.org/ontology/core#hasContributingParticipant			No	Delete	not set
-http://vivoweb.org/ontology/core#organizationRelatedActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#activityRelatedOrganization			No	Delete	not set
-http://vivoweb.org/ontology/core#activityRelatedInformationResource			No	Delete	not set
-http://vivoweb.org/ontology/core#informationResourceRelatedActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#activityRelatedGrant			No	Delete	not set
-http://vivoweb.org/ontology/core#grantRelatedActivity			No	Delete	not set
-http://vivoweb.org/ontology/core#activityRelatedEvent			No	Delete	not set
-http://vivoweb.org/ontology/core#eventRelatedActivity			No	Delete	not set
+http://vivoweb.org/ontology/core#URLLinkType		No	Delete	not set
+http://purl.org/ontology/bibo/PersonalCommunication		No	Delete	not set
+http://purl.org/ontology/bibo/PersonalCommunicationDocument		No	Delete	not set
+http://purl.org/ontology/bibo/Email		No	Delete	not set
+http://purl.org/ontology/bibo/Letter		No	Delete	not set
+http://vivoweb.org/ontology/core#Seminar		No	Delete	not set
+http://purl.org/dc/terms/alternative		No	Delete	not set
+http://purl.org/ontology/bibo/shortTitle		No	Delete	not set
+http://purl.org/ontology/bibo/content		No	Delete	not set
+http://vivoweb.org/ontology/core#collaboratorOn		No	Delete	not set
+http://vivoweb.org/ontology/core#hasSection		No	Delete	not set
+http://vivoweb.org/ontology/core#sectionOf		No	Delete	not set
+http://purl.org/NET/c4dm/event.owl#time		No	Delete	not set
+http://purl.org/ontology/bibo/argued		No	Delete	not set
+http://vivoweb.org/ontology/core#degreeStatus		No	Delete	not set
+http://vivoweb.org/ontology/core#type		No	Delete	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#citation		No	Delete	not set	
+http://vivoweb.org/ontology/core#referencedPublicationCityName		No	Delete	not set
+http://vivoweb.org/ontology/core#referencedPublisherName		No	Delete	not set
+http://vivoweb.org/ontology/core#referencedAuthorOrEditor		No	Delete	not set
+http://vivoweb.org/ontology/core#hasCoPrincipalInvestigator		No	Delete	mapped
+http://vivoweb.org/ontology/core#coPrincipalInvestigatorOn		No	Delete	mapped
+http://vivoweb.org/ontology/core#principalInvestigatorOn		No	Delete	mapped
+http://vivoweb.org/ontology/core#hasPrincipalInvestigator		No	Delete	mapped
+http://purl.org/ontology/bibo/contributorList		No	Delete	not set
+http://purl.org/ontology/bibo/authorList		No	Delete	not set
+http://purl.org/ontology/bibo/editorList		No	Delete	not set
+http://vivoweb.org/ontology/core#onlineContentFrom		No	Delete	not set
+http://vivoweb.org/ontology/core#onlineContent		No	Delete	not set
+http://vivoweb.org/ontology/core#invitedStatus		No	Delete	not set
+http://vivoweb.org/ontology/core#refereedStatus		No	Delete	not set
+http://vivoweb.org/ontology/core#publisherName		No	Delete	not set
+http://vivoweb.org/ontology/core#publicationStatus		No	Delete	not set
+http://vivoweb.org/ontology/core#publicationMonth		No	Delete	not set
+http://vivoweb.org/ontology/core#courseTaughtBy		No	Delete	not set
+http://vivoweb.org/ontology/core#recentCourseTaught		No	Delete	not set
+http://vivoweb.org/ontology/core#investigatorOn		No	Delete	not set
+http://vivoweb.org/ontology/core#hasInvestigator		No	Delete	not set
+http://vivoweb.org/ontology/core#PresentationActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#presentationActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#presentationActivityBy		No	Delete	not set
+http://vivoweb.org/ontology/core#ResearchActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#researchActivityBy		No	Delete	not set
+http://vivoweb.org/ontology/core#hasResearchActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#InternationalActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#contributingParticipantIn		No	Delete	not set
+http://vivoweb.org/ontology/core#hasContributingParticipant		No	Delete	not set
+http://vivoweb.org/ontology/core#organizationRelatedActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#activityRelatedOrganization		No	Delete	not set
+http://vivoweb.org/ontology/core#activityRelatedInformationResource		No	Delete	not set
+http://vivoweb.org/ontology/core#informationResourceRelatedActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#activityRelatedGrant		No	Delete	not set
+http://vivoweb.org/ontology/core#grantRelatedActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#activityRelatedEvent		No	Delete	not set
+http://vivoweb.org/ontology/core#eventRelatedActivity		No	Delete	not set
 http://vivoweb.org/ontology/core#Activity	http://vivoweb.org/ontology/core#Role	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#activityBy	http://vivoweb.org/ontology/core#roleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasActivity	http://vivoweb.org/ontology/core#hasRole	Yes	Map	Directly-changed
@@ -137,7 +137,5 @@ http://vivoweb.org/ontology/core#educationalBackground	http://vivoweb.org/ontolo
 http://vivoweb.org/ontology/core#educationalBackgroundOf	http://vivoweb.org/ontology/core#educationalTrainingOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#memberOf	http://vivoweb.org/ontology/core#currentMemberOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasMember	http://vivoweb.org/ontology/core#hasCurrentMember	Yes	Map	Directly-changed
-http://www.vivoweb.org/ontology/v0.9/vivo-on-vivo/hasMember	http://vivoweb.org/ontology/core#hasCurrentMember	Yes	Map	Directly-changed
-http://www.vivoweb.org/ontology/v0.9/vivo-on-vivo/memberOf	http://vivoweb.org/ontology/core#currentMemberOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#role	http://vivoweb.org/ontology/core#description	Yes	Map	Directly-changed
 http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	http://vivoweb.org/ontology/core#description	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)

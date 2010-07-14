@@ -15,7 +15,7 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
      _:role a core:PresenterRole .
-     _ :role core:roleIn ?event .
+     _:role core:roleIn ?event .
      ?event core:relatedRole _:role .
      ?person core:hasPresenterRole _:role  .
      _:role core:presenterRoleOf ?person .

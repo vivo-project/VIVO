@@ -15,7 +15,7 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
      _:role a core:TeacherRole .
-     _ :role core:roleIn ?course .
+     _:role core:roleIn ?course .
      ?course core:relatedRole _:role .
      ?person core:hasTeacherRole _:role  .
      _:role core:teacherRoleOf ?person .

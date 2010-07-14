@@ -15,7 +15,7 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
      _:role a core:InvestigatorRole .
-     _ :role core:roleIn ?grant .
+     _:role core:roleIn ?grant .
      ?grant core:relatedRole _:role .
      ?person core:hasInvestigatorRole _:role  .
      _:role core:investigatorRoleOf ?person .
