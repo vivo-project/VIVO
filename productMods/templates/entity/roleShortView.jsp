@@ -10,8 +10,10 @@
  The following vars should be set by the jsp that is calling this short view 
  personToRolePredicate: URI of the person to role predicate.
  roleToPersonPredicate: URI of the role to person predicate. 
- roleActivityToRolePredicate: URI of the activity to role predicate. 
- roleActivityLabel: human readable label of activity.   --%>
+ roleActivityToRolePredicate: URI of the activity to role predicate.
+ roleLabelForPerson: human readable label for person when viewing from non-person side of role 
+ roleActivityLabel: human readable label of activity used for error messages   
+ --%>
  
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
@@ -52,7 +54,12 @@
 				    		<c:when test="${!empty individual.objectPropertyMap[ param.roleToPersonPredicate ]}">				    		
 				    		    <c:set var="person" value="${individual.objectPropertyMap[ param.roleToPersonPredicate ].objectPropertyStatements[0].object}" />
 					    		<c:set var="name" value="${person.name}"/>
-<%--                                <c:set var="label" value="${person.dataPropertyMap['http://vivoweb.org/ontology/core#preferredTitle'].dataPropertyStatements[0].data}" />  --%>
+                                <c:if test="${param.roleLabelForPerson == 'USE_MONIKER'}">
+                                    <c:set var="label" value="${person.moniker}" />
+                                </c:if>  
+                                <c:if test="${param.roleLabelForPerson != 'USE_MONIKER'}">
+                                    <c:set var="label" value="${param.roleLabelForPerson}" />
+                                </c:if>
                                 <c:set var="uri" value="${person.URI}"/>
 					    	</c:when>					    						    	
 					    	

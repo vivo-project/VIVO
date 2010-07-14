@@ -5,4 +5,5 @@
 	<jsp:param name="roleToPersonPredicate" value="http://vivoweb.org/ontology/core#outreachProviderRoleOf"/>
 	<jsp:param name="roleActivityToRolePredicate" value="http://vivoweb.org/ontology/core#relatedRole"/>
 	<jsp:param name="roleActivityLabel" value="outreach role"/>
+    <jsp:param name="roleLabelForPerson" value="USE_MONIKER"/>
 </jsp:include>
