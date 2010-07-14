@@ -2,7 +2,7 @@
 
 /* Although Javascript hides these on page load, hide here as well to avoid the flash on page load.
    This needs to be removed to support a non-JS version of the form. */
-#fullViewOnly, 
+.fullViewOnly, 
 #submit, 
 .or,
 #requiredLegend {

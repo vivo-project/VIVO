@@ -218,7 +218,7 @@
 
     <p class="inline"><v:input type="select" label="${roleActivityTypeLabel} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
     
-    <div id="fullViewOnly">
+    <div class="fullViewOnly">
         
 	    <p><v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" /></p>
 
@@ -239,7 +239,7 @@
 
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
-SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role .?role <...> ?indUri .}
+SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}relatedRole> ?indUri .}
 </c:set>
 
 <script type="text/javascript">

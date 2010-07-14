@@ -23,7 +23,7 @@ var customForm = {
     initObjects: function(){
         
         this.form = $('#content form');
-        this.fullViewOnly = $('#fullViewOnly');
+        this.fullViewOnly = $('.fullViewOnly');
         this.button = $('#submit');
         this.baseButtonText = this.button.val();
         this.requiredLegend = $('#requiredLegend');
@@ -223,11 +223,11 @@ var customForm = {
         filteredResults = [];
         $.each(results, function() {
             if ($.inArray(this.uri, customForm.acFilter) == -1) {
-                // console.log("adding " + this.label + " to filtered results");
+                console.log("adding " + this.label + " to filtered results");
                 filteredResults.push(this);
             }
             else {
-                // console.log("filtering out " + this.label);
+                console.log("filtering out " + this.label);
             }
         });
         return filteredResults;

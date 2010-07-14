@@ -210,7 +210,7 @@ SPARQL queries for existing values. --%>
 
     <p class="inline"><v:input type="select" label="Publication Type ${requiredHint}" name="pubType" id="typeSelector" /></p>
     
-    <div id="fullViewOnly">
+    <div class="fullViewOnly">
         
 	   <p><v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" /></p>
 

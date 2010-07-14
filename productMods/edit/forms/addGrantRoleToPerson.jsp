@@ -205,7 +205,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
 
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?grantUri .}
+PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole . ?grantRole core:roleIn ?grantUri .}
 </c:set>
 
 <script type="text/javascript">
