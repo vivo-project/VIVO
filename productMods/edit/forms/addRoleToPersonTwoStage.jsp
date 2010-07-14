@@ -97,6 +97,9 @@
 <c:set var="label" value="${rdfs}label" />
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
+<%-- label is required if we are doing an update --%> 
+<c:set var="labelRequired" ><%= request.getAttribute("objectUri")== null?"":"\"nonempty\","  %></c:set>
+
 <c:set var="startYearUri" value="${vivoCore}startYear" />
 <v:jsonset var="startYearAssertion" >
       ?role <${startYearUri}> ?startYear .
@@ -116,13 +119,39 @@
     ?roleActivity  core:relatedRole ?role .    
 </v:jsonset>
 
-<v:jsonset var="n3ForNewActivity">
-    ?roleActivity <${label}> ?title .  
+<v:jsonset var="n3ForNewActivityType">     
     ?roleActivity a ?roleActivityType .
+</v:jsonset>
+
+<v:jsonset var="n3ForNewActivityTitle">
+    ?roleActivity <${label}> ?title .
 </v:jsonset>
 
 <v:jsonset var="n3ForInverse"> 
 	?role  ?inverseRolePredicate ?person.
+</v:jsonset>
+
+<v:jsonset var="titleQuery">
+  PREFIX core: <${vivoCore}>
+  PREFIX rdfs: <${rdfs}> 
+  SELECT ?existingTitle WHERE {
+        ?role  core:roleIn ?existingActivity .
+        ?existingActivity rdfs:label ?existingTitle . }
+</v:jsonset>
+
+<v:jsonset var="startYearMonthQuery">
+  PREFIX core: <${vivoCore}>  
+  SELECT ?existingStartYear WHERE { ?role  core:startYear ?existingStartYear .}       
+</v:jsonset>
+
+<v:jsonset var="endYearMonthQuery">
+  PREFIX core: <${vivoCore}>  
+  SELECT ?existingStartYear WHERE { ?role  core:endYear ?existingStartYear .}
+</v:jsonset>
+
+<v:jsonset var="activityQuery">
+  PREFIX core: <${vivoCore}>  
+  SELECT ?existingActivity WHERE { ?role  core:roleIn ?existingActivity . }
 </v:jsonset>
 
 <c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
@@ -138,8 +167,8 @@
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}" ],    
-    "n3optional"    : [ "${n3ForNewActivity}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}" ],        
+    "n3optional"    : [ "${n3ForNewActivityTitle}", "${n3ForNewActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}" },
@@ -151,19 +180,19 @@
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { },
-    "sparqlForExistingUris" : { },
+    "sparqlForExistingLiterals" : { "title":"${titleQuery}", "startYearMonth":"${startYearMonthQuery}", "endYearMonth":"${endYearMonthQuery}" },
+    "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" },
     "fields" : {
       "title" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ ${labelRequired} "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
-         "assertions"       : [ ]
+         "assertions"       : ["${n3ForNewActivityTitle}" ]
       },   
       "roleActivityType" : {
          "newResource"      : "true",
@@ -174,7 +203,7 @@
          "objectClassUri"   : "${roleActivityType_objectClassUri}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ ]
+         "assertions"       : ["${n3ForNewActivityType}" ]
       },               
       "roleActivity" : {
          "newResource"      : "true",
@@ -227,7 +256,11 @@
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
-    editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
+    if (objectUri != null) { 
+        editConfig.prepareForObjPropUpdate(model);
+    } else { 
+        editConfig.prepareForNonUpdate(model);
+    }        
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
