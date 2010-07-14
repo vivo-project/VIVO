@@ -777,7 +777,6 @@ padding-left:65px;
 	color:#900;
 	padding:0px;
 	margin-bottom:5px;
-	
 	height:30px;
 	
 }
@@ -787,16 +786,16 @@ padding-left:65px;
 	float:left;
 	margin:0;
 	padding:0;
-	vertical-align:middle;
+
 	
 	
 }
 
 #errorAlert  p{
-padding-left:35px;
+padding-left:40px;
 font-size:0.9em;
-line-height:30px;
-	
+
+
 }
 
 /* styles for contact us page */
