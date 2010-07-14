@@ -110,12 +110,17 @@
       ?role <${endYearUri}> ?endYear .
 </v:jsonset>
 
+<v:jsonset var="roleLabelAssertion" >
+    ?role <${label}> ?roleLabel .
+</v:jsonset>
+
 <v:jsonset var="n3ForNewRole">
 	@prefix core: <${vivoCore}> .
        
 	?person ?rolePredicate ?role.	
 	?role   a <${roleType}> .		  
     ?role   core:roleIn ?roleActivity .
+    ?role <${label}> ?roleLabel .
     ?roleActivity  core:relatedRole ?role .    
 </v:jsonset>
 
@@ -154,8 +159,9 @@
   SELECT ?existingActivity WHERE { ?role  core:roleIn ?existingActivity . }
 </v:jsonset>
 
-<c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
-<v:jsonset var="publicationsClassGroupUriJson">${publicationsClassGroupUri}</v:jsonset>
+<v:jsonset var="roleLabelQuery">
+  SELECT ?existingRoleLabel WHERE { ?role  <${label}> ?existingRoleLabel . }
+</v:jsonset>
 
 <c:set var="editjson" scope="request">
 {
@@ -167,7 +173,7 @@
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${roleLabel}", "${startYearAssertion}" ],        
     "n3optional"    : [ "${n3ForNewActivityTitle}", "${n3ForNewActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
@@ -176,11 +182,11 @@
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "title", "startYear", "endYear" ],
+    "literalsOnForm" : [ "title", "roleLabel", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { "title":"${titleQuery}", "startYear":"${startYearMonthQuery}", "endYear":"${endYearMonthQuery}" },
+    "sparqlForExistingLiterals" : { "title":"${titleQuery}", "roleLabel":"${roleLabelQuery}", "startYearMonth":"${startYearMonthQuery}", "endYearMonth":"${endYearMonthQuery}" },
     "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" },
     "fields" : {
       "title" : {
@@ -215,6 +221,17 @@
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
          "assertions"       : [ ]
+      },
+      "roleLabel" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty","datatype:${stringDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : ["${roleLabelAssertion}" ]
       },
       "startYear" : {
          "newResource"      : "false",
@@ -297,9 +314,11 @@
 	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
 
+        <p><v:input type="text" id="roleLabel" name="roleLabel" label="Role in X ${requiredHint}" cssClass="acSelector" size="50" /></p>
+        
         <h4>Dates of Participation</h4>	   
-    <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
-    <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
+        <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
+        <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
     </div>   
      
     <p class="submit"><v:input type="submit" id="submit" value="${roleActivityTitleCase}" cancel="true" /></p>
