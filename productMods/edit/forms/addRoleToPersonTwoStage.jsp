@@ -119,8 +119,7 @@
        
 	?person ?rolePredicate ?role.	
 	?role   a <${roleType}> .		  
-    ?role   core:roleIn ?roleActivity .
-    ?role <${label}> ?roleLabel .
+    ?role   core:roleIn ?roleActivity .    
     ?roleActivity  core:relatedRole ?role .    
 </v:jsonset>
 
@@ -128,15 +127,15 @@
     ?roleActivity a ?roleActivityType .
 </v:jsonset>
 
-<v:jsonset var="n3ForNewActivityTitle">
-    ?roleActivity <${label}> ?title .
+<v:jsonset var="n3ForNewActivityLabel">
+    ?roleActivity <${label}> ?activityLabel .
 </v:jsonset>
 
 <v:jsonset var="n3ForInverse"> 
 	?role  ?inverseRolePredicate ?person.
 </v:jsonset>
 
-<v:jsonset var="titleQuery">
+<v:jsonset var="activityLabelQuery">
   PREFIX core: <${vivoCore}>
   PREFIX rdfs: <${rdfs}> 
   SELECT ?existingTitle WHERE {
@@ -173,8 +172,8 @@
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${roleLabel}", "${startYearAssertion}" ],        
-    "n3optional"    : [ "${n3ForNewActivityTitle}", "${n3ForNewActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${roleLabel}", "${startYearAssertion}", "${roleLabelAssertion}" ],        
+    "n3optional"    : [ "${n3ForNewActivityLabel}", "${n3ForNewActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}" },
@@ -182,14 +181,14 @@
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "title", "roleLabel", "startYear", "endYear" ],
+    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { "title":"${titleQuery}", "roleLabel":"${roleLabelQuery}", "startYearMonth":"${startYearMonthQuery}", "endYearMonth":"${endYearMonthQuery}" },
+    "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYearMonth":"${startYearMonthQuery}", "endYearMonth":"${endYearMonthQuery}" },
     "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" },
     "fields" : {
-      "title" : {
+      "activityLabel" : {
          "newResource"      : "false",
          "validators"       : [ ${labelRequired} "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
@@ -198,7 +197,7 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
-         "assertions"       : ["${n3ForNewActivityTitle}" ]
+         "assertions"       : ["${n3ForNewActivityLabel}" ]
       },   
       "roleActivityType" : {
          "newResource"      : "true",
@@ -306,7 +305,7 @@
     
     <div class="fullViewOnly">
         
-	    <p><v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" /></p>
+	    <p><v:input type="text" id="activityLabel" name="activityLabel" label="Title" cssClass="acSelector" size="50" /></p>
 
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
@@ -314,7 +313,7 @@
 	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
 
-        <p><v:input type="text" id="roleLabel" name="roleLabel" label="Role in X ${requiredHint}" cssClass="acSelector" size="50" /></p>
+        <p><v:input type="text" id="roleLabel" name="roleLabel" label="Role in X ${requiredHint}" size="50" /></p>
         
         <h4>Dates of Participation</h4>	   
         <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
