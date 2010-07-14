@@ -61,22 +61,30 @@ var addAuthorForm = {
     	if (this.findValidationErrors()) {
     		this.initFormAfterInvalidSubmission();
     	} else {
-    		this.initAuthorListOnlyView();
+            this.initAuthorListOnlyView();
     	}
     },
     
     
     /* *** Set up the various page views *** */
-    
-    // This view shows the list of existing authors and hides the form.
-    // There is a button to show the form.
-    initAuthorListOnlyView: function() {
-        this.hideForm();
-        this.showFormButtonWrapper.show();
-        // We reorder authors on page load so that previously unranked authors get a rank. Otherwise,
+   
+   initAuthorListOnlyView: function() {
+        // Reorder authors on page load so that previously unranked authors get a rank. Otherwise,
         // when we add a new author, it will get put ahead of any previously unranked authors, instead
         // of at the end of the list. (It is also helpful to normalize the data before we get started.)
-        this.reorderAuthors();
+        // This is done only on page load, not when returning to author list only view after hitting 'cancel.'
+        if ($('.authorship').length) {  // make sure we have at least one author
+            this.reorderAuthors();
+        }
+        this.showAuthorListOnlyView();       
+   },
+    
+    // This view shows the list of existing authors and hides the form.
+    // There is a button to show the form. We do this on page load, and after
+    // hitting 'cancel' from full view.
+    showAuthorListOnlyView: function() {
+        this.hideForm();
+        this.showFormButtonWrapper.show();
     },
 
     // View of form after returning from an invalid submission. On this form,
@@ -116,7 +124,7 @@ var addAuthorForm = {
 
         this.cancel.unbind('click'); 
         this.cancel.bind('click', function() {
-            addAuthorForm.initAuthorListOnlyView();
+            addAuthorForm.showAuthorListOnlyView();
             return false;
         });
         
@@ -293,6 +301,7 @@ var addAuthorForm = {
             retractions = '',
             authorships = [];
 
+        
         $('li.authorship').each(function(index) {
             var uri = $(this).attr('id'),
             subjectUri = '<' + uri + '>',
