@@ -400,7 +400,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#startDateTime">
     <rdfs:label xml:lang="en-US">start date and time</rdfs:label>
-    <rdfs:label xml:lang="en-US">start</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeISO2">
     <rdfs:label xml:lang="en-US">codeISO2</rdfs:label>
