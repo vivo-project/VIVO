@@ -69,7 +69,6 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
-<c:set var="edAttainmentClass" value="${vivoCore}EducationalTraining" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 <c:set var="degreeClass" value="${vivoCore}AcademicDegree" />
 
@@ -187,7 +186,6 @@ the org type still gets asserted. --%>
     ?edTrainingUri <${orgGrantingDegree}> ?newOrg .
 </v:jsonset>
 
-<v:jsonset var="edAttainmentClassUriJson">${edAttainmentClass}</v:jsonset>
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
 <v:jsonset var="degreeClassUriJson">${degreeClass}</v:jsonset>
 
@@ -219,7 +217,7 @@ the org type still gets asserted. --%>
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "majorField"         : "${majorFieldExisting}",
-        /*"year"               : "${yearExisting}",*/
+        "year"               : "${yearExisting}",
         "dept"               : "${deptExisting}",
         "info"               : "${infoExisting}"
     },
