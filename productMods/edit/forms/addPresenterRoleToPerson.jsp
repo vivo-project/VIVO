@@ -5,7 +5,7 @@
 	<jsp:param name="roleActivityTypeLabel" value="presentation" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#PresenterRole" />	
 	
-	<jsp:param name="roleActivityType_optionsType" value="LITERALS" />
+	<jsp:param name="roleActivityType_optionsType" value="UNSORTED_LITERALS" />
 	<jsp:param name="roleActivityType_objectClassUri" value="" /> 
-	<jsp:param name="roleActivityType_literalOptions" value='["http://vivoweb.org/ontology/core#Presentation", "Presentation" ], [ "http://vivoweb.org/ontology/core#InvitedTalk","Invited Talk"] ' />
+	<jsp:param name="roleActivityType_literalOptions" value='["Select one"], ["http://vivoweb.org/ontology/core#Presentation", "Presentation" ], [ "http://vivoweb.org/ontology/core#InvitedTalk","Invited Talk"] ' />
 </jsp:include>

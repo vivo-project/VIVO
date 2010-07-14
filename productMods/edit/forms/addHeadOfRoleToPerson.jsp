@@ -4,11 +4,12 @@
 	<jsp:param name="roleActivityTypeLabel" value="head of" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#LeaderRole" />
 	
-	<jsp:param name="roleActivityType_optionsType" value="LITERALS" />
+	<jsp:param name="roleActivityType_optionsType" value="UNSORTED_LITERALS" />
 	<jsp:param name="roleActivityType_objectClassUri" value="" />
 	 
 	<jsp:param name="roleActivityType_literalOptions" 
-	value='["http://purl.org/NET/c4dm/event.owl#Event", "Event" ], 
+	value='["Select one"],	
+	       ["http://purl.org/NET/c4dm/event.owl#Event", "Event" ], 
 	       ["http://xmlns.com/foaf/0.1/Organization", "Organization" ],
 	       ["http://vivoweb.org/ontology/core#Project", "Project" ],
 	       [ "http://vivoweb.org/ontology/core#Program", "Program" ],

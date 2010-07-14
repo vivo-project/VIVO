@@ -25,6 +25,7 @@ This is intended to create a set of statements like:
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -39,6 +40,7 @@ This is intended to create a set of statements like:
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
+    
     vreq.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
     
     String predicateUri = (String)request.getAttribute("predicateUri");
@@ -194,6 +196,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     
     //validator for addGrantRoleToPerson.jsp? 
 	//editConfig.addValidator(new AddGrantRoleToPersonValidator());
+    editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") );
         
     Model model = (Model) application.getAttribute("jenaOntModel");
     editConfig.prepareForNonUpdate(model); 

@@ -9,7 +9,6 @@ import com.hp.hpl.jena.rdf.model.Literal;
 
 public class PublicationHasAuthorValidator implements N3Validator {
 
-    private static String MISSING_AUTHOR_ERROR = "Must specify a new or existing author.";
     private static String MISSING_FIRST_NAME_ERROR = "Must specify the author's first name.";
     private static String MISSING_LAST_NAME_ERROR = "Must specify the author's last name.";
     private static String MALFORMED_LAST_NAME_ERROR = "Last name may not contain a comma. Please enter first name in first name field.";
