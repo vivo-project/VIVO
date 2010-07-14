@@ -239,7 +239,7 @@
 
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">
-SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}relatedRole> ?indUri .}
+SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}roleIn> ?indUri .}
 </c:set>
 
 <script type="text/javascript">

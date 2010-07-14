@@ -226,11 +226,11 @@ var customForm = {
         filteredResults = [];
         $.each(results, function() {
             if ($.inArray(this.uri, customForm.acFilter) == -1) {
-                console.log("adding " + this.label + " to filtered results");
+                // console.log("adding " + this.label + " to filtered results");
                 filteredResults.push(this);
             }
             else {
-                console.log("filtering out " + this.label);
+                // console.log("filtering out " + this.label);
             }
         });
         return filteredResults;
