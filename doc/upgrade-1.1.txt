@@ -86,7 +86,7 @@ II. The Upgrade Process
 5. If you had modified web.xml to configure the Pellet Reasoner (as described
     in the installation instructions), repeat that modification.
 
-6. Stop "Apache Tomcat" and run ant deploy by typing: ant deploy
+6. Stop "Apache Tomcat" and run ant by typing: ant all
 
 7. If you have setup the Apache Tomcat Connector using mod_jk and modified your
 	tomcat/conf/server.xml file, you will need to add a line to your context
@@ -110,7 +110,7 @@ II. The Upgrade Process
 		docBase="/usr/local/tomcat/webapps/vivo"
 		reloadable="true"
 		cookies="true" >
-        <Manager pathname="" />
+		<Manager pathname="" />
 		<Environment type="java.lang.String" override="false" 
 			name="path.configuration" 
 			value="deploy.properties"
@@ -118,11 +118,6 @@ II. The Upgrade Process
 	</Context>
 	
 8. Start "Apache Tomcat" and login to VIVO.
-
-9. Rebuild the Lucene search index as described in step IX of
-the install process. This step will ensure that changes in the RDF
-data to align with the latest version of the core ontology
-will be reflected in the search index.
 
 -------------------------------------------------------------------------------
 
