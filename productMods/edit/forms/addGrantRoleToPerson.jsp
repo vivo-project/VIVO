@@ -234,6 +234,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
         <input type="hidden" id="grant" name="grant" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
     </div>
 
+    <h4>Dates of Participation in Grant</h4>
     <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
     <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
                    
