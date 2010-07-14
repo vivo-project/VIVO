@@ -37,6 +37,8 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.TitleCase" %>
+
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -65,6 +67,7 @@
 <c:set var="roleActivityType_literalOptions" >${param.roleActivityType_literalOptions}</c:set>
 
 <%
+
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     //vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
@@ -79,7 +82,8 @@
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
-    
+
+    vreq.setAttribute("roleActivityTitleCase", TitleCase.toTitleCase(vreq.getParameter("roleActivityTypeLabel")));
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
 		%> <c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
@@ -216,7 +220,7 @@
 
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <p class="inline"><v:input type="select" label="${roleActivityTypeLabel} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
+    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
     
     <div class="fullViewOnly">
         
@@ -229,7 +233,7 @@
 	    </div>
     </div>   
      
-    <p class="submit"><v:input type="submit" id="submit" value="${roleActivityTypeLabel}" cancel="true" /></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${roleActivityTitleCase}" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
