@@ -15,7 +15,7 @@
     <c:when test="${!empty individual}">                
         <c:choose>
             <%-- SUBJECT is a Person  --%>
-            <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#educationalBackground'}">         
+            <c:when test="${predicateUri == 'http://vivoweb.org/ontology/core#educationalTraining'}">         
             
                 <%-- Degree type and major --%>               
                 <c:set var="degreeLabel" value="" />
@@ -85,7 +85,7 @@
                 <c:set var="selectedOrganization" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#organizationGrantingDegree'].objectPropertyStatements[0].object}"/>
                 <c:set var="selectedOrganizationName" value="${selectedOrganization.name}"/>                                
     
-                <c:set var="person" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#educationalBackgroundOf'].objectPropertyStatements[0].object}"/>
+                <c:set var="person" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#educationalTrainingOf'].objectPropertyStatements[0].object}"/>
                 <c:set var="personName" value="${person.name}"/>
                 <c:url var="personURL" value="/individual"><c:param name="uri" value="${person.URI}"/></c:url>
                 <c:set var="personLink" ><a href='${personURL}'>${personName}</a></c:set>
@@ -123,6 +123,6 @@
     
     <%-- This clause is when there is no object individual defined, it should never be reached. --%>
     <c:otherwise>
-        <c:out value="Nothing to draw in edBackgroundShortView"/>
+        <c:out value="Nothing to draw in educationalTrainingShortView"/>
     </c:otherwise>
 </c:choose>

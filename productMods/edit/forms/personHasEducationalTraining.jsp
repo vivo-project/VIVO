@@ -15,11 +15,11 @@ core:supplementalInformation
 
 Object properties (domain : range)
 
-core:educationalBackground (Person : EducationalTraining) - inverse of educationalBackgroundOf
-core:educationalBackgroundOf (EducationalTraining : Person) - inverse of educationalBackground
+core:educationalTraining (Person : EducationalTraining) - inverse of core:educationalTrainingOf
+core:educationalTrainingOf (EducationalTraining : Person) - inverse of core:educationalTraining
 
-core:degreeEarned (EducationalTraining : AcademicDegree) - inverse of degreeOutcomeOf
-core:degreeOutcomeOf (AcademicDegree : EducationalTraining) - inverse of degreeEarned
+core:degreeEarned (EducationalTraining : AcademicDegree) - inverse of core:degreeOutcomeOf
+core:degreeOutcomeOf (AcademicDegree : EducationalTraining) - inverse of core:degreeEarned
 
 core:organizationGrantingDegree (EducationalTraining : Organization) - no inverse
 
@@ -174,9 +174,9 @@ the org type still gets asserted. --%>
 <v:jsonset var="n3ForStmtToPerson">       
     @prefix core: <${vivoCore}> .     
 
-    ?person core:educationalBackground  ?edTrainingUri .
+    ?person core:educationalTraining  ?edTrainingUri .
     
-    ?edTrainingUri core:educationalBackgroundOf ?person ;
+    ?edTrainingUri core:educationalTrainingOf ?person ;
                      a core:EducationalTraining .
 </v:jsonset>
 
@@ -366,7 +366,7 @@ the org type still gets asserted. --%>
     request.setAttribute("customJs", customJs);
     
     List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css",
-                                                                 "/edit/forms/css/personHasEducationalBackground.css"
+                                                                 "/edit/forms/css/personHasEducationalTraining.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
