@@ -202,7 +202,7 @@ var addAuthorForm = {
 
     setAcFilter: function() {
 
-        var existingAuthors = $('#authorships .authorLink'); 
+        var existingAuthors = $('#authorships .authorName'); 
         this.acFilter = [];
         
         existingAuthors.each(function() {
@@ -272,7 +272,7 @@ var addAuthorForm = {
             return;
         }
         
-        $('.authorLinkWrapper').each(function() {
+        $('.authorNameWrapper').each(function() {
             $(this).attr('title', 'Drag and drop to reorder authors');
         });
         
@@ -534,7 +534,7 @@ var addAuthorForm = {
             complete: function(request, status) {
                 var authorship = $(this).parents('.authorship'),
                     nextAuthorships = authorship.nextAll(),
-                    author = authorship.find('.authorLink').attr('id'),
+                    author = authorship.find('.authorName').attr('id'),
                     rank;
 //                  author = $(this).siblings('span.author'),
 //                  authorLink = author.children('a.authorLink'),
@@ -591,7 +591,7 @@ var addAuthorForm = {
     disableAuthorDD: function() {
     	var authorships = $('#authorships'),
             authorship = $('.authorship'),
-            authorLinkWrapper = $('.authorLinkWrapper');
+            authorNameWrapper = $('.authorNameWrapper');
             
     	authorships.sortable({ disable: true } );
         authorships.removeClass('dd');
@@ -599,7 +599,7 @@ var addAuthorForm = {
     	authorship.css('background', 'none');
     	authorship.css('padding-left', '0');
         
-    	authorLinkWrapper.attr('title', '');
+    	authorNameWrapper.attr('title', '');
     },
 
     // RY To be implemented later.

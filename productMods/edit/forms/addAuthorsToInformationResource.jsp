@@ -332,24 +332,24 @@ SPARQL queries for existing values. --%>
             <span class="position" id="${position}"></span> 
 
             <%-- span.author will be used in the next phase, when we display a message that the author has been
-            removed. That text will replace the a.authorLink, which will be removed. --%>    
+            removed. That text will replace the a.authorName, which will be removed. --%>    
             <span class="author">
-                <%-- This span is here to assign a width to. We can't assign directly to the a.authorLink,
+                <%-- This span is here to assign a width to. We can't assign directly to the a.authorName,
                 for the case when it's followed by an em tag - we want the width to apply to the whole thing. --%>
-                <span class="authorLinkWrapper">
+                <span class="authorNameWrapper">
 	                <c:choose>
 	                    <c:when test="${!empty author}">
 	                        <c:url var="authorHref" value="/individual">
 	                            <c:param name="uri" value="${author.URI}"/>
 	                        </c:url> 
-	                        <a href="#" id="${author.URI}" class="authorLink">${author.name}</a>
+	                        <span class="authorName">${author.name}</span>
 	                    </c:when>
 	
 	                    <c:otherwise>
 		                   <c:url var="authorshipHref" value="/individual">
 		                       <c:param name="uri" value="${authorshipUri}"/>
 		                   </c:url>                
-		                   <a href="${authorshipHref}" id="${authorshipUri}" class="authorLink">${authorshipName}</a><em> (no linked author)</em>
+		                   <a href="${authorshipHref}" id="${authorshipUri}" class="authorName">${authorshipName}</a><em> (no linked author)</em>
 	                    </c:otherwise>
 	                </c:choose>
                 </span>

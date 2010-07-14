@@ -15,14 +15,14 @@
     background: url("../images/sortable_icon.png") no-repeat left center;    
 }
 
-#authorships .authorLinkWrapper {
+#authorships .authorNameWrapper {
     display: inline-block;
     width: 15em;
 }
 
-#authorships.dd .authorLinkWrapper,
+#authorships.dd .authorNameWrapper,
 #authorships.dd li,
-#authorships.dd a.authorLink {
+#authorships.dd span.authorName {
     cursor: move;
 }
 
