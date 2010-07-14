@@ -78,14 +78,11 @@ var customForm = {
         // If type is already selected when the page loads (Firefox retains value
         // on a refresh), go directly to full view. Otherwise user has to reselect
         // twice to get to full view.
-// RY Can't do this now: role forms don't have an empy option at the top (and can't at the
-// moment, since there's no way to specify literal options without having them sorted).
-// So when the page loads there's already a value selected.
-//        else if (typeVal.length) {
-//            this.acType = typeVal;
-//            this.setLabelFieldLabel();
-//            this.initFormFullView();
-//        }
+        else if (typeVal.length) {
+            this.acType = typeVal;
+            this.setLabelFieldLabel();
+            this.initFormFullView();
+        }
         else {
             this.initFormTypeView();
         }     
