@@ -91,9 +91,8 @@
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
-<c:set var="defualtNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
+<c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
-<c:set var="infoResourceClassUri" value="${vivoCore}InformationResource" />
 
 <v:jsonset var="n3ForNewRole">
 	@prefix core: <${vivoCore}> .
@@ -221,7 +220,7 @@
     
     <div id="fullViewOnly">
         
-	   <p><v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" /></p>
+	    <p><v:input type="text" id="label" name="title" label="Title" cssClass="acSelector" size="50" /></p>
 
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
@@ -237,6 +236,11 @@
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+
+<%-- Must be all one line for JavaScript. --%>
+<c:set var="sparqlForAcFilter">
+SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role .?role <...> ?indUri .}
+</c:set>
 
 <script type="text/javascript">
 var customFormData  = {

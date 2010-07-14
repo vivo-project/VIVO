@@ -89,10 +89,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?grant rdfs:label ?grantLabel .               
 </v:jsonset>
 
-<%-- Must be all one line for JavaScript. --%>
-<c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?grantUri .}
-</c:set>
+
 
 <v:jsonset var="grantTypeUriJson">${vivoOnt}#Grant</v:jsonset>
 <c:set var="editjson" scope="request">
@@ -205,6 +202,11 @@ PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> core:hasPrinc
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+
+<%-- Must be all one line for JavaScript. --%>
+<c:set var="sparqlForAcFilter">
+PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> core:hasPrincipalInvestigatorRole ?grantRole .?grantRole core:relatedRole ?grantUri .}
+</c:set>
 
 <script type="text/javascript">
 var customFormData  = {

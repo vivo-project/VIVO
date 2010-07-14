@@ -102,10 +102,6 @@ SPARQL queries for existing values. --%>
     ?pubUri core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-<%-- Must be all one line for JavaScript. --%>
-<c:set var="sparqlForAcFilter">
-PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri .?authorshipUri core:linkedInformationResource ?pubUri .}
-</c:set>
 
 <c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
 <v:jsonset var="publicationsClassGroupUriJson">${publicationsClassGroupUri}</v:jsonset>
@@ -232,6 +228,11 @@ PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAu
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+
+<%-- Must be all one line for JavaScript. --%>
+<c:set var="sparqlForAcFilter">
+PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAuthorship ?authorshipUri . ?authorshipUri core:linkedInformationResource ?pubUri .}
+</c:set>
 
 <script type="text/javascript">
 var customFormData  = {
