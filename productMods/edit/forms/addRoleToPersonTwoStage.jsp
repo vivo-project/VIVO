@@ -38,7 +38,7 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.TitleCase" %>
-
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartDateBeforeEndDate"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -83,6 +83,8 @@
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
 
+    vreq.setAttribute("gYearMonthDatatypeUriJson", MiscWebUtils.escape(XSD.gYearMonth.toString()));
+    
     vreq.setAttribute("roleActivityTitleCase", TitleCase.toTitleCase(vreq.getParameter("roleActivityTypeLabel")));
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
@@ -97,6 +99,23 @@
 <c:set var="label" value="${rdfs}label" />
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
+<c:set var="startYearMonthUri" value="${vivoCore}startYearMonth" />
+<v:jsonset var="startYearMonthExisting" >      
+      SELECT ?existingStartYearMonth WHERE {  
+        ?role <${startYearMonthUri}> ?existingStartYearMonth }
+</v:jsonset>
+<v:jsonset var="startYearMonthAssertion" >
+      ?role <${startYearMonthUri}> ?startYearMonth .
+</v:jsonset>
+
+<c:set var="endYearMonthUri" value="${vivoCore}endYearMonth" /> 
+<v:jsonset var="endYearMonthExisting">     
+      SELECT ?existingEndYearMonth WHERE {  
+        ?role <${endYearMonthUri}> ?existingEndYearMonth }
+</v:jsonset>
+<v:jsonset var="endYearMonthAssertion" >
+      ?role <${endYearMonthUri}> ?endYearMonth .
+</v:jsonset>
 
 <v:jsonset var="n3ForNewRole">
 	@prefix core: <${vivoCore}> .
@@ -129,8 +148,8 @@
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}" ],    
-    "n3optional"    : [ "${n3ForNewActivity}", "${n3ForInverse}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${startYearMonthAssertion}" ],    
+    "n3optional"    : [ "${n3ForNewActivity}", "${n3ForInverse}", "${endYearMonthAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}" },
@@ -138,7 +157,7 @@
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "title" ],
+    "literalsOnForm" : [ "title", "startYearMonth", "endYearMonth" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -177,6 +196,28 @@
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
          "assertions"       : [ ]
+      },
+      "startYearMonth" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${gYearMonthDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${gYearMonthDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${startYearMonthAssertion}"]
+      },
+      "endYearMonth" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${gYearMonthDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${gYearMonthDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${endYearMonthAssertion}"]
       }
   }
 }
@@ -189,7 +230,7 @@
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
-    //editConfig.addValidator(new PersonHasPublicationValidator());
+    editConfig.addValidator(new StartDateBeforeEndDate("startYearMonth","endYearMonth") ); 
     
     //this will return the browser to the new activity entity after an edit.
     editConfig.setEntityToReturnTo("?roleActivity");
@@ -213,6 +254,7 @@
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+<c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -231,6 +273,9 @@
 	        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
 	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
+	   
+        <v:input type="text" label="Start Year and Month ${yearMonthHint} ${requiredHint}" id="startYearMonth" size="7"/>    
+        <v:input type="text" label="End Year and Month ${yearMonthHint}" id="endYearMonth" size="7"/>
     </div>   
      
     <p class="submit"><v:input type="submit" id="submit" value="${roleActivityTitleCase}" cancel="true" /></p>

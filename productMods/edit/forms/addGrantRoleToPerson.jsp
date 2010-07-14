@@ -39,6 +39,8 @@ This is intended to create a set of statements like:
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
+    vreq.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
+    
     String predicateUri = (String)request.getAttribute("predicateUri");
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
@@ -69,7 +71,17 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
  	<c:set var="submitButtonLabel">Investigator</c:set>
  	<c:set var="formHeading">Create a new investigator entry for <%= subjectName %></c:set>
  <% } %>
- 
+
+<c:set var="startYearUri" value="${vivoCore}startYear" />
+<v:jsonset var="startYearAssertion" >
+      ?role <${startYearUri}> ?startYear .
+</v:jsonset>
+
+<c:set var="endYearUri" value="${vivoCore}endYear" /> 
+<v:jsonset var="endYearAssertion" >
+      ?role <${endYearUri}> ?endYear .
+</v:jsonset>
+
 <v:jsonset var="n3ForGrantRole">
     @prefix core: <${vivoCore}> .
     @prefix rdf: <${rdf}> .
@@ -106,9 +118,9 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForGrantRole}" ],
+    "n3required"    : [ "${n3ForGrantRole}", "${startYearAssertion}" ],
     
-    "n3optional"    : [ "${n3ForNewGrant}" , "${n3ForInverse}" ],        
+    "n3optional"    : [ "${n3ForNewGrant}", "${n3ForInverse}", "${endYearAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "grant" : "${defaultNamespace}" },
@@ -117,7 +129,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     					 "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "grant" ],
-    "literalsOnForm" : [ "grantLabel" ],
+    "literalsOnForm" : [ "grantLabel", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -145,6 +157,28 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
          "assertions"       : ["${n3ForExistingPub}"]
+      },
+      "startYear" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${startYearAssertion}"]
+      },
+      "endYear" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${endYearAssertion}"]
       }
   }
 }
@@ -184,6 +218,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -198,7 +233,10 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
         <%-- bdc34: for some odd reason id and name should not be grant in this input element. --%>
         <input type="hidden" id="grant" name="grant" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
     </div>
-            
+
+    <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
+    <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
+                   
     <p class="submit"><v:input type="submit" id="submit" value="${submitButtonLabel}" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
