@@ -283,12 +283,14 @@ PREFIX core: <${vivoCore}>
 PREFIX core: <${vivoCore}> SELECT ?grantUri WHERE {<${subjectUri}> <${predicateUri}> ?grantRole . ?grantRole core:roleIn ?grantUri .}
 </c:set>
 
+<c:set var="isUpdate"><%= request.getAttribute("objectUri")!=null %></c:set>
 <script type="text/javascript">
 var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
-    acType: '${vivoCore}Grant'       
+    acType: '${vivoCore}Grant',     
+    isUpdate: '${isUpdate}', 
 };
 </script>
 
