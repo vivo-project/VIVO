@@ -60,10 +60,14 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#PrincipalInvestigatorRole</v:jsonset>
  	<c:set var="submitButtonLabel">Principal Investigator</c:set>
  	<c:set var="formHeading">Create a new principal investigator entry for <%= subjectName %></c:set>
- <% }else{ %>
+ <% }else if ( ((String)request.getAttribute("predicateUri")).endsWith("hasCo-PrincipalInvestigatorRole") ) { %>
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole</v:jsonset>
  	<c:set var="submitButtonLabel">Co-Principal Investigator</c:set>
  	<c:set var="formHeading">Create a new co-principal investigator entry for <%= subjectName %></c:set>
+ <% }else { %>
+ 	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#InvestigatorRole</v:jsonset>
+ 	<c:set var="submitButtonLabel">Investigator</c:set>
+ 	<c:set var="formHeading">Create a new investigator entry for <%= subjectName %></c:set>
  <% } %>
  
 <v:jsonset var="n3ForGrantRole">
