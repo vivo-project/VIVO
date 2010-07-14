@@ -180,7 +180,7 @@
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { "title":"${titleQuery}", "startYearMonth":"${startYearMonthQuery}", "endYearMonth":"${endYearMonthQuery}" },
+    "sparqlForExistingLiterals" : { "title":"${titleQuery}", "startYear":"${startYearMonthQuery}", "endYear":"${endYearMonthQuery}" },
     "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" },
     "fields" : {
       "title" : {
