@@ -6,5 +6,5 @@
 	
 	<jsp:param name="roleActivityType_optionsType" value="LITERALS" />
 	<jsp:param name="roleActivityType_objectClassUri" value="" /> 
-	<jsp:param name="roleActivityType_literalOptions" value='["", "Select one" ], ["http://purl.org/ontology/bibo/Conference", "Conference" ], [ "http://vivoweb.org/ontology/core#Course","Course"], [ "http://purl.org/ontology/bibo/Workshop","Workshop"] ' />
+	<jsp:param name="roleActivityType_literalOptions" value='["http://purl.org/ontology/bibo/Conference", "Conference" ], [ "http://vivoweb.org/ontology/core#Course","Course"], [ "http://purl.org/ontology/bibo/Workshop","Workshop"] ' />
 </jsp:include>
