@@ -71,17 +71,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>testAdmin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,14 +150,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>click</td>
+	<td>showAddFormButton</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>Frank Furter</td>
+	<td>lastName</td>
+	<td>Furter</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Frank</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -166,7 +171,27 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Effect of Nintendo on Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manage Authors</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Publication</td>
 	<td></td>
 </tr>
 <tr>
