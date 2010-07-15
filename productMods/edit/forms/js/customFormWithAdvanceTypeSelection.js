@@ -45,6 +45,10 @@ var customForm = {
         // because it may have already been modified for a previous selection.
         this.baseLabelText = this.labelFieldLabel.html();
         
+        // Label field for new individual being created
+//        this.newIndLabelFieldLabel = $('label[for=' + $('#newIndividualLabel').attr('id') + ']');
+//        this.newIndBaseLabelText = this.newIndLabelFieldLabel.html();
+        
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
 
@@ -53,7 +57,11 @@ var customForm = {
     // Set up the form on page load
     initPage: function() {
 
-        if (!this.typeSelector.length) {
+        if (!this.editMode) {
+            this.editMode = "add"; // edit vs add: default to add
+        }
+        
+        if (!this.typeSelector.length || this.editMode == "edit") {
             this.formSteps = 1;
         // there's also going to be a 3-step form - look for this.subTypeSelector
         } else {
@@ -67,7 +75,7 @@ var customForm = {
         this.initFormView();
 
     },
-    
+
     initFormView: function() {
         
         var typeVal = this.typeSelector.val();   
@@ -80,7 +88,7 @@ var customForm = {
         // twice to get to full view.
         else if (typeVal.length) {
             this.acType = typeVal;
-            this.setLabelFieldLabel();
+            this.setLabelFieldLabels();
             this.initFormFullView();
         }
         else {
@@ -104,7 +112,7 @@ var customForm = {
         this.or.show();
         this.requiredLegend.show();
         this.button.show();
-        this.button.val('Create ' + this.baseButtonText);
+        this.toggleButtonText("new");
         this.cancel.unbind('click');     
            
         if( this.formSteps > 1 ){
@@ -131,7 +139,7 @@ var customForm = {
             customForm.acType = typeVal;
             
             if (typeVal.length) {    
-                customForm.setLabelFieldLabel();            
+                customForm.setLabelFieldLabels();         
                 customForm.initFormFullView();            
             } else {
                 // If no selection, go back to type view. This prevents problems like trying to run autocomplete
@@ -262,7 +270,7 @@ var customForm = {
         this.acSelectionInfo.html(ui.item.label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
-        this.button.val('Add ' + this.baseButtonText);               
+        this.toggleButtonText('existing');            
 
         this.cancel.unbind('click');
         this.cancel.click(function() {
@@ -283,7 +291,7 @@ var customForm = {
         this.acReceiver.val('');
         this.acSelectionInfo.html('');
         this.verifyMatch.attr('href', this.verifyMatchBaseHref);
-        this.button.val('Create ' + this.baseButtonText)
+        this.toggleButtonText('new');
         
         if (this.formSteps > 1) {
             this.acSelection.find('label').html('Selected ');
@@ -295,8 +303,31 @@ var customForm = {
         return this.typeSelector.find(':selected').html();
     },
     
-    setLabelFieldLabel: function() {
-        this.labelFieldLabel.html(this.getSelectedTypeName() + ' ' + this.baseLabelText);        
+    setLabelFieldLabels: function() {
+//        var newLabelTextForNewInd;
+        
+        this.labelFieldLabel.html(this.getSelectedTypeName() + ' ' + this.baseLabelText);
+        
+//        if (this.newIndLabelFieldLabel.length) {
+//            newLabelTextForNewInd = this.newIndBaseLabelText.replace('X', this.getSelectedTypeName);
+//            this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
+//        }      
+          
+    },
+    
+    toggleButtonText: function(newOrExisting) {
+        if (this.editMode == "edit") {
+            this.button.val("Edit " + this.baseButtonText);
+        }
+        // RY Make this better for roles and grants forms later. The verbs
+        // don't quite work. It should be "Create X and <role>" vs.
+        // "Create <role>" or "Add <role>"
+        else if (newOrExisting == "new") {
+            this.button.val("Create " + this.baseButtonText);                
+        }
+        else {
+            this.button.val("Add " + this.baseButtonText);
+        } 
     }
     
 };

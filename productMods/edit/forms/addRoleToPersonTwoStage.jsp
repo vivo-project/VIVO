@@ -303,17 +303,30 @@
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
 
+<c:choose>
+    <c:when test="<%= request.getAttribute("objectUri")!=null %>">
+        <c:set var="titleText" value="Edit" />
+        <c:set var="buttonText" value="Edit" />
+        <c:set var="editMode" value="edit" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="titleText" value="Create a new" />
+        <c:set var="buttonText" value="Create" />
+        <c:set var="editMode" value="add" />
+    </c:otherwise>
+</c:choose>
 <jsp:include page="${preForm}" />
 
-<h2>Create a new ${roleActivityTypeLabel} entry for <%= subjectName %></h2>
+<h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 
+<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
     
     <div class="fullViewOnly">
         
-	    <p><v:input type="text" id="activityLabel" name="activityLabel" label="Title" cssClass="acSelector" size="50" /></p>
+	    <p><v:input type="text" id="label" name="activityLabel" label="Title" cssClass="acSelector" size="50" /></p>
 
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
@@ -321,7 +334,7 @@
 	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
 
-        <p><v:input type="text" id="roleLabel" name="roleLabel" label="Role in X ${requiredHint}" size="50" /></p>
+        <p><v:input type="text" id="newIndividualLabel" name="roleLabel" label="Role Name ${requiredHint}" size="50" /></p>
         
         <h4>Dates of Participation</h4>	   
         <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
@@ -345,7 +358,8 @@ SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCor
 var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
-    acUrl: '${acUrl}'
+    acUrl: '${acUrl}',
+    editMode: '${editMode}' 
 };
 </script>
 <jsp:include page="${postForm}"/>

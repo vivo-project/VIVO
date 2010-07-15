@@ -206,6 +206,7 @@ SPARQL queries for existing values. --%>
 
 <h2>Create a new publication entry for <%= subjectName %></h2>
 
+<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <p class="inline"><v:input type="select" label="Publication Type ${requiredHint}" name="pubType" id="typeSelector" /></p>

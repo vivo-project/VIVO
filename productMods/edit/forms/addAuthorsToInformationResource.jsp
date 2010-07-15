@@ -284,6 +284,7 @@ SPARQL queries for existing values. --%>
 
 <jsp:include page="${preForm}" />
 
+<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE ON THIS PAGE WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <h2>${title}</h2>
 
 <h3>Manage Authors</h3>
@@ -380,6 +381,7 @@ SPARQL queries for existing values. --%>
     <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
 </div> 
 
+<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <h3>Add an Author</h3>
