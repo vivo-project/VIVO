@@ -39,8 +39,9 @@ var customForm = {
         this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
         
+        this.existingIndividualLabel = $('#label');
         // This is the label element for the field with name 'label'
-        this.labelFieldLabel = $('label[for=' + $('#label').attr('id') + ']');       
+        this.labelFieldLabel = $('label[for=' + this.existingIndividualLabel.attr('id') + ']');       
         // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
         // because it may have already been modified for a previous selection.
         this.baseLabelText = this.labelFieldLabel.html();
@@ -58,10 +59,10 @@ var customForm = {
     initPage: function() {
 
         if (!this.editMode) {
-            this.editMode = "add"; // edit vs add: default to add
+            this.editMode = 'add'; // edit vs add: default to add
         }
         
-        if (!this.typeSelector.length || this.editMode == "edit") {
+        if (!this.typeSelector.length || this.editMode == 'edit') {
             this.formSteps = 1;
         // there's also going to be a 3-step form - look for this.subTypeSelector
         } else {
@@ -97,7 +98,7 @@ var customForm = {
     },
     
     initFormTypeView: function() {
-  
+        
         this.hideFields(this.fullViewOnly);
         this.button.hide();
         this.requiredLegend.hide();
@@ -107,22 +108,31 @@ var customForm = {
     },
     
     initFormFullView: function() {
-
+        
+        if (this.editMode == 'edit') {
+            this.initFormEditView();
+        }
+        
         this.fullViewOnly.show();
         this.or.show();
         this.requiredLegend.show();
         this.button.show();
-        this.toggleButtonText("new");
+        this.toggleButtonText('new');
         this.cancel.unbind('click');     
            
         if( this.formSteps > 1 ){
-
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
                 return false;            
             });
         }
+    },
+    
+    initFormEditView: function() {
+        // These should not be editable: only properties of the role are editable.
+        this.typeSelector.attr('disabled', 'disabled');
+        this.existingIndividualLabel.attr('disabled', 'disabled');
     },
     
     // Bind event listeners that persist over the life of the page.
@@ -231,11 +241,11 @@ var customForm = {
         filteredResults = [];
         $.each(results, function() {
             if ($.inArray(this.uri, customForm.acFilter) == -1) {
-                // console.log("adding " + this.label + " to filtered results");
+                // console.log('adding ' + this.label + ' to filtered results');
                 filteredResults.push(this);
             }
             else {
-                // console.log("filtering out " + this.label);
+                // console.log('filtering out ' + this.label);
             }
         });
         return filteredResults;
@@ -316,17 +326,17 @@ var customForm = {
     },
     
     toggleButtonText: function(newOrExisting) {
-        if (this.editMode == "edit") {
-            this.button.val("Edit " + this.baseButtonText);
+        if (this.editMode == 'edit') {
+            this.button.val('Edit ' + this.baseButtonText);
         }
         // RY Make this better for roles and grants forms later. The verbs
         // don't quite work. It should be "Create X and <role>" vs.
         // "Create <role>" or "Add <role>"
-        else if (newOrExisting == "new") {
-            this.button.val("Create " + this.baseButtonText);                
+        else if (newOrExisting == 'new') {
+            this.button.val('Create ' + this.baseButtonText);                
         }
         else {
-            this.button.val("Add " + this.baseButtonText);
+            this.button.val('Add ' + this.baseButtonText);
         } 
     }
     

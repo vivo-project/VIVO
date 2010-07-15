@@ -315,6 +315,7 @@
         <c:set var="editMode" value="add" />
     </c:otherwise>
 </c:choose>
+
 <jsp:include page="${preForm}" />
 
 <h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
@@ -326,7 +327,7 @@
     
     <div class="fullViewOnly">
         
-	    <p><v:input type="text" id="label" name="activityLabel" label="Title" cssClass="acSelector" size="50" /></p>
+	    <p><v:input type="text" id="label" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
 
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
