@@ -11,8 +11,9 @@
  personToRolePredicate: URI of the person to role predicate.
  roleToPersonPredicate: URI of the role to person predicate. 
  roleActivityToRolePredicate: URI of the activity to role predicate.
- roleLabelForPerson: human readable label for person when viewing from non-person side of role. Some short views 
-     don't specify this value because the role name is displayed instead. 
+ roleLabelForPerson: human readable label for person when viewing from non-person side of role. Most short views 
+     don't specify this value because the role name is displayed instead. Grant-related short views specify
+     this value because there is no specific role name. 
  roleActivityLabel: human readable label of activity used for error messages   
  --%>
  

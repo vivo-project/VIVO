@@ -132,6 +132,13 @@ var customForm = {
         // These should not be editable: only properties of the role are editable.
         this.typeSelector.attr('disabled', 'disabled');
         this.relatedIndLabel.attr('disabled', 'disabled');
+        
+        this.form.submit(function() {
+            // Re-enable these fields so they get submitted, since they are required
+            // in the edit config.
+            customForm.typeSelector.attr('disabled', '');
+            customForm.relatedIndLabel.attr('disabled', '');
+        });
     },
     
     // Bind event listeners that persist over the life of the page.
