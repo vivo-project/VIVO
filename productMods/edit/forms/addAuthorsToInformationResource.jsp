@@ -343,7 +343,7 @@ SPARQL queries for existing values. --%>
 	                        <c:url var="authorHref" value="/individual">
 	                            <c:param name="uri" value="${author.URI}"/>
 	                        </c:url> 
-	                        <span class="authorName">${author.name}</span>
+	                        <span id="${author.URI}" class="authorName">${author.name}</span>
 	                    </c:when>
 	
 	                    <c:otherwise>
