@@ -270,7 +270,7 @@ Locate the <Host name="localhost"...> directive and update as follows:
 		docBase="/usr/local/tomcat/webapps/vivo"
 		reloadable="true"
 		cookies="true" >
-        <Manager pathname="" />
+		<Manager pathname="" />
 		<Environment type="java.lang.String" override="false" 
 			name="path.configuration" 
 			value="deploy.properties"
