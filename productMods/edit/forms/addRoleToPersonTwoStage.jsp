@@ -123,11 +123,11 @@
     ?roleActivity  core:relatedRole ?role .    
 </v:jsonset>
 
-<v:jsonset var="n3ForNewActivityType">     
+<v:jsonset var="n3ForActivityType">     
     ?roleActivity a ?roleActivityType .
 </v:jsonset>
 
-<v:jsonset var="n3ForNewActivityLabel">
+<v:jsonset var="n3ForActivityLabel">
     ?roleActivity <${label}> ?activityLabel .
 </v:jsonset>
 
@@ -143,12 +143,12 @@
         ?existingActivity rdfs:label ?existingTitle . }
 </v:jsonset>
 
-<v:jsonset var="startYearMonthQuery">
+<v:jsonset var="startYearQuery">
   PREFIX core: <${vivoCore}>  
   SELECT ?existingStartYear WHERE { ?role  core:startYear ?existingStartYear .}       
 </v:jsonset>
 
-<v:jsonset var="endYearMonthQuery">
+<v:jsonset var="endYearQuery">
   PREFIX core: <${vivoCore}>  
   SELECT ?existingStartYear WHERE { ?role  core:endYear ?existingStartYear .}
 </v:jsonset>
@@ -172,8 +172,8 @@
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${roleLabel}", "${startYearAssertion}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForNewActivityLabel}", "${n3ForNewActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}", "${roleLabelAssertion}" ],        
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}" },
@@ -185,7 +185,7 @@
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYearMonth":"${startYearMonthQuery}", "endYearMonth":"${endYearMonthQuery}" },
+    "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYear":"${startYearQuery}", "endYear":"${endYearQuery}" },
     "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" },
     "fields" : {
       "activityLabel" : {
@@ -197,7 +197,7 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
-         "assertions"       : ["${n3ForNewActivityLabel}" ]
+         "assertions"       : ["${n3ForActivityLabel}" ]
       },   
       "roleActivityType" : {
          "newResource"      : "true",
@@ -208,7 +208,7 @@
          "objectClassUri"   : "${roleActivityType_objectClassUri}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : ["${n3ForNewActivityType}" ]
+         "assertions"       : ["${n3ForActivityType}" ]
       },               
       "roleActivity" : {
          "newResource"      : "true",
