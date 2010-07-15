@@ -14,17 +14,17 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     _:role a core:ResearcherRole .
-     ?person core:hasResearcherRole _:role  .
-     _:role core:researcherRoleOf ?person .
+     _:role a core:ServiceProviderRole .
+     ?person core:hasServiceProviderRole _:role  .
+     _:role core:serviceProviderRoleOf ?person .
      _:role core:roleIn ?grant .
      ?grant core:relatedRole _:role .
      
 } where {
-     ?person core:hasResearchActivity ?activity .
+     ?person core:hasProfessionalServiceActivity ?activity .
      
-      optional {
+     optional {
         ?activity core:activityRelatedGrant ?grant .
-      }
+     }
       
 }

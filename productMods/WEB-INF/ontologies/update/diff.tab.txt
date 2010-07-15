@@ -93,6 +93,8 @@ http://vivoweb.org/ontology/core#contributingParticipantIn		No	Delete	not set
 http://vivoweb.org/ontology/core#hasContributingParticipant		No	Delete	not set
 http://vivoweb.org/ontology/core#organizationRelatedActivity		No	Delete	not set
 http://vivoweb.org/ontology/core#activityRelatedOrganization		No	Delete	not set
+http://vivoweb.org/ontology/core#hasOutreachActivity		No	Delete	not set
+http://vivoweb.org/ontology/core#hasProfessionalServiceActivity		No	Delete	not set
 http://vivoweb.org/ontology/core#activityRelatedInformationResource		No	Delete	not set
 http://vivoweb.org/ontology/core#informationResourceRelatedActivity		No	Delete	not set
 http://vivoweb.org/ontology/core#activityRelatedGrant		No	Delete	not set
@@ -103,12 +105,10 @@ http://vivoweb.org/ontology/core#Activity	http://vivoweb.org/ontology/core#Role	
 http://vivoweb.org/ontology/core#activityBy	http://vivoweb.org/ontology/core#roleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasActivity	http://vivoweb.org/ontology/core#hasRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#PostDoc	http://vivoweb.org/ontology/core#Postdoc	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#OutreachActivity	http://vivoweb.org/ontology/core#OutreachProviderRole	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#outreachActivityBy	http://vivoweb.org/ontology/core#outreachProviderRoleOf	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#hasOutreachActivity	http://vivoweb.org/ontology/core#hasOutreachProviderRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#ServiceActivity	http://vivoweb.org/ontology/core#ServiceProviderRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#professionalServiceActivityBy	http://vivoweb.org/ontology/core#serviceProviderRoleOf	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#hasProfessionalServiceActivity	http://vivoweb.org/ontology/core#hasServiceProviderRole	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#OutreachActivity	http://vivoweb.org/ontology/core#OutreachProviderRole	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#outreachActivityBy	http://vivoweb.org/ontology/core#outreachProviderRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#TeachingActivity	http://vivoweb.org/ontology/core#TeacherRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#teachingActivityBy	http://vivoweb.org/ontology/core#teacherRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasTeachingActivity	http://vivoweb.org/ontology/core#hasTeacherRole	Yes	Map	Directly-changed

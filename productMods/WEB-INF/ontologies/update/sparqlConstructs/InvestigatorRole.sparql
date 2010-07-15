@@ -20,5 +20,5 @@ Construct {
      ?person core:hasInvestigatorRole _:role  .
      _:role core:investigatorRoleOf ?person .
 } where {
-     ?person core:investigatorOn ?grant
+     ?person core:investigatorOn ?grant .
 }
