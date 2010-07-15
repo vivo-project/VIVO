@@ -17,11 +17,21 @@
  
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
-        <%-- c:set var="authorRank" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#authorRank'].dataPropertyStatements[0].data}"/ --%>
  		<c:choose>
 			<c:when test="${!empty predicateUri}">
+			
+				<c:set var="roleLabel" value="${individual.name}"/>
+				
+			    <%-- get years off role --%>
+				<c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
+                <c:if test="${not empty startYear}">
+                    <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
+                    <c:if test="${not empty endYear }">
+                      <c:set var="endYear">-${endYear}</c:set>
+                    </c:if>
+                </c:if>
+                
  			    <c:choose>
- 			    
  			    	<%-- SUBJECT is a Person, so get info from other part of the role --%>
 				    <c:when test="${predicateUri == param.personToRolePredicate}">
 					    <c:choose>
@@ -29,7 +39,7 @@
 					            <c:set var="roleActivity" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn'].objectPropertyStatements[0].object}" />
 					            <c:set var="name"  value="${roleActivity.name}"/>
                                 <c:set var="label" value="${roleActivity.moniker}"/>
-                                <c:set var="uri" value="${roleActivity.URI}"/>
+                                <c:set var="uri" value="${roleActivity.URI}"/>                                                                
                             </c:when>
  				            <c:otherwise><%-- this Role is not linked to a anything yet; use name as a placeholder and add link to the Role so user can add more information --%>
  				                <c:choose>
@@ -82,15 +92,17 @@
 				    </c:otherwise>
 			    </c:choose>
 			    
+			    <%-- output the actual html --%>
 			    <c:choose>
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
-		                <a href="<c:out value="${olink}"/>"><p:process>${name}</p:process></a> <p:process>${label}</p:process>
+		                <a href="<c:out value="${olink}"/>">${name}</a> ${roleLabel}&nbsp;${label}&nbsp;${startYear}${endYear}
 		            </c:when>
 		            <c:otherwise>
 		                <p:process><strong>${name}</strong> ${label}</p:process> 
 		            </c:otherwise>
 		        </c:choose>
+		        
 			</c:when>
 			<c:otherwise>
 				<c:out value="No predicate available for custom rendering ..."/>
