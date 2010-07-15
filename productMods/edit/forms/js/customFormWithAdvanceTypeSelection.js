@@ -177,6 +177,10 @@ var customForm = {
     
     initAutocomplete: function() {
         
+        if (this.editMode === 'edit') {
+            return;
+        }
+        
         this.getAcFilter();
         this.acCache = {};
         
@@ -205,7 +209,6 @@ var customForm = {
                         customForm.acCache[request.term] = filteredResults;
                         response(filteredResults);
                     }
-
                 });
             },
             select: function(event, ui) {
@@ -217,6 +220,15 @@ var customForm = {
     },
     
     getAcFilter: function() {
+        
+        if (!this.sparqlForAcFilter) {
+            //console.log('autocomplete filtering turned off');
+            this.acFilter = null;
+            return;
+        }
+        
+        //console.log("sparql for autocomplete filter: " + this.sparqlForAcFilter);
+        
         // Define this.acFilter here, so in case the sparql query fails
         // we don't get an error when referencing it later.
         this.acFilter = [];
@@ -245,18 +257,19 @@ var customForm = {
     filterAcResults: function(results) {
         var filteredResults;
         
-        if (!this.acFilter.length) {
+        if (!this.acFilter || !this.acFilter.length) {
+            //console.log('no autocomplete filtering applied');
             return results;
         }
         
         filteredResults = [];
         $.each(results, function() {
             if ($.inArray(this.uri, customForm.acFilter) == -1) {
-                // console.log('adding ' + this.label + ' to filtered results');
+                //console.log('adding ' + this.label + ' to filtered results');
                 filteredResults.push(this);
             }
             else {
-                // console.log('filtering out ' + this.label);
+                //console.log('filtering out ' + this.label);
             }
         });
         return filteredResults;

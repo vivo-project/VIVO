@@ -358,7 +358,6 @@ SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCor
 
 <script type="text/javascript">
 var customFormData  = {
-    sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
     editMode: '${editMode}',
