@@ -40,7 +40,9 @@
                             <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn']}">
 					            <c:set var="roleActivity" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn'].objectPropertyStatements[0].object}" />
 					            <c:set var="name"  value="${roleActivity.name}"/> 
-					            <c:set var="label" value="${roleLabel}" /> 
+					            <%-- On the person page, it's redundant to display the role label in this case, since the object property
+					            label contains the same information. --%>
+					            <c:set var="label" value="${! empty param.roleLabelForPerson ? '' : individual.name}" /> 
                                 <c:set var="uri" value="${roleActivity.URI}"/>                                                                
                             </c:when>
  				            <c:otherwise><%-- this Role is not linked to anything yet; use name as a placeholder and add link to the Role so user can add more information --%>
