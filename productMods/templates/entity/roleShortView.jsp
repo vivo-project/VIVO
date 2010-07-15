@@ -22,7 +22,7 @@
  		<c:choose>
 			<c:when test="${!empty predicateUri}">
 			
-				<c:set var="roleLabel" value="${! empty params.roleLabelForPerson ? params.roleLabelForPerson : individual.name}"/>
+				<c:set var="roleLabel" value="${! empty param.roleLabelForPerson ? param.roleLabelForPerson : individual.name}"/>
 				
 			    <%-- get years off role --%>
 				<c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
