@@ -239,7 +239,8 @@ PREFIX core: <${vivoCore}> SELECT ?pubUri WHERE {<${subjectUri}> core:authorInAu
 var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
-    acUrl: '${acUrl}'
+    acUrl: '${acUrl}',
+    submitButtonType: 'simple'
 };
 </script>
 <jsp:include page="${postForm}"/>

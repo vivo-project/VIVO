@@ -326,7 +326,7 @@ var customForm = {
     
     setLabelFieldLabels: function() {
         var newLabelTextForNewInd,
-            selectedTypeName = this.getSelectedTypeName();
+            selectedTypeName = this.getTypeName();
         
         this.labelFieldLabel.html(selectedTypeName + ' ' + this.baseLabelText);
                
@@ -338,18 +338,30 @@ var customForm = {
     },
     
     toggleButtonText: function(newOrExisting) {
-        if (this.editMode == 'edit') {
+        
+        if (this.editMode === 'edit') {
             this.button.val('Edit ' + this.baseButtonText);
+        }  
+        // creating new related individual      
+        else if (newOrExisting === 'new') {
+            if (this.submitButtonType == 'compound') { // use == to tolerate nulls
+                // e.g., 'Create Grant & Principal Investigator'
+                this.button.val('Create ' + this.getTypeName() + ' & ' + this.baseButtonText);                
+            } else {
+                // e.g., 'Create Publication'
+                this.button.val('Create ' + this.baseButtonText);
+            }            
         }
-        // RY Make this better for roles and grants forms later. The verbs
-        // don't quite work. It should be "Create X and <role>" vs.
-        // "Create <role>" or "Add <role>"
-        else if (newOrExisting == 'new') {
-            this.button.val('Create ' + this.baseButtonText);                
-        }
-        else {
+        // using existing related individual
+        else {  
             this.button.val('Add ' + this.baseButtonText);
         } 
+    },
+    
+    getTypeName: function() {
+        // If there's no type field, the type comes hard-coded in the customFormData.
+        // Otherwise, get the selected type from the type selector field.
+        return this.typeName ? this.typeName : this.getSelectedTypeName();        
     }
     
 };

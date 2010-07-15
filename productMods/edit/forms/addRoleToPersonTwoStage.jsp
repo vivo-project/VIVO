@@ -309,12 +309,10 @@
 <c:choose>
     <c:when test="<%= request.getAttribute("objectUri")!=null %>">
         <c:set var="titleText" value="Edit" />
-        <c:set var="buttonText" value="Edit" />
         <c:set var="editMode" value="edit" />
     </c:when>
     <c:otherwise>
         <c:set var="titleText" value="Create a new" />
-        <c:set var="buttonText" value="Create" />
         <c:set var="editMode" value="add" />
     </c:otherwise>
 </c:choose>
@@ -363,7 +361,8 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
-    editMode: '${editMode}' 
+    editMode: '${editMode}',
+    submitButtonType: 'compound' 
 };
 </script>
 <jsp:include page="${postForm}"/>

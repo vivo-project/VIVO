@@ -66,15 +66,15 @@ String subjectName = ((Individual) request.getAttribute("subject")).getName();
 if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvestigatorRole") ) { %>
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#PrincipalInvestigatorRole</v:jsonset>
  	<c:set var="submitButtonLabel">Principal Investigator</c:set>
- 	<c:set var="formHeading">Create a new principal investigator entry for <%= subjectName %></c:set>
+ 	<c:set var="formHeading">principal investigator entry for <%= subjectName %></c:set>
  <% }else if ( ((String)request.getAttribute("predicateUri")).endsWith("hasCo-PrincipalInvestigatorRole") ) { %>
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole</v:jsonset>
  	<c:set var="submitButtonLabel">Co-Principal Investigator</c:set>
- 	<c:set var="formHeading">Create a new co-principal investigator entry for <%= subjectName %></c:set>
+ 	<c:set var="formHeading">co-principal investigator entry for <%= subjectName %></c:set>
  <% }else { %>
  	<v:jsonset var="roleType">http://vivoweb.org/ontology/core#InvestigatorRole</v:jsonset>
  	<c:set var="submitButtonLabel">Investigator</c:set>
- 	<c:set var="formHeading">Create a new investigator entry for <%= subjectName %></c:set>
+ 	<c:set var="formHeading">investigator entry for <%= subjectName %></c:set>
  <% } %>
 
 <c:set var="startYearUri" value="${vivoCore}startYear" />
@@ -252,6 +252,17 @@ PREFIX core: <${vivoCore}>
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
+<c:choose>
+    <c:when test="<%= request.getAttribute("objectUri")!=null %>">
+        <c:set var="formHeading" value="Edit ${formHeading}" />
+        <c:set var="editMode" value="edit" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="formHeading" value="Create a new ${formHeading}" />
+        <c:set var="editMode" value="add" />
+    </c:otherwise>
+</c:choose>
+
 <jsp:include page="${preForm}" />
 
 <h2>${formHeading}</h2>
@@ -259,7 +270,7 @@ PREFIX core: <${vivoCore}>
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addGrantRoleToPerson" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
-    <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
+    <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
 
     <div class="acSelection">
         <p class="inline"><label>Selected Grant:</label><span class="acSelectionInfo"></span><a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
@@ -289,7 +300,10 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
-    acType: '${vivoCore}Grant',         
+    acType: '${vivoCore}Grant',
+    editMode: '${editMode}',
+    submitButtonType: 'compound',
+    typeName: 'Grant'         
 };
 </script>
 
