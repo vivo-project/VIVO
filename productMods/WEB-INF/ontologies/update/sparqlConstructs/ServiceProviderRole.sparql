@@ -14,11 +14,8 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     _:role a core:ServiceProviderRole .
-     ?person core:hasServiceProviderRole _:role  .
-     _:role core:serviceProviderRoleOf ?person .
-     _:role core:roleIn ?grant .
-     ?grant core:relatedRole _:role .
+     ?activity core:roleIn ?grant .
+     ?grant core:relatedRole ?activity .
      
 } where {
      ?person core:hasProfessionalServiceActivity ?activity .

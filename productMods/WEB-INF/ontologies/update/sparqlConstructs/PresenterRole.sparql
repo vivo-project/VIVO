@@ -22,13 +22,13 @@ Construct {
      ?event bibo:presents ?infores .
      ?infores bibo:presentedAt ?event.
 } where {
-     ?person core:presentationActivity ?pactivity .
+     ?person core:presentationActivity ?activity .
 
      optional {
-        ?pactivity core:activityRelatedEvent ?event .
+        ?activity core:activityRelatedEvent ?event .
      }
 
      optional {
-        ?pactivity core:activityRelatedInformationResource ?infores .
+        ?activity core:activityRelatedInformationResource ?infores .
      }
 }
