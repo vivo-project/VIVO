@@ -327,7 +327,7 @@
     
     <div class="fullViewOnly">
         
-	    <p><v:input type="text" id="label" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
+	    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
 
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
@@ -335,7 +335,7 @@
 	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
 
-        <p><v:input type="text" id="newIndividualLabel" name="roleLabel" label="Role Name ${requiredHint}" size="50" /></p>
+        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role Name ${requiredHint}" size="50" /></p>
         
         <h4>Dates of Participation</h4>	   
         <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   

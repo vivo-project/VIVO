@@ -39,9 +39,8 @@ var customForm = {
         this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
         
-        this.existingIndividualLabel = $('#label');
-        // This is the label element for the field with name 'label'
-        this.labelFieldLabel = $('label[for=' + this.existingIndividualLabel.attr('id') + ']');       
+        this.relatedIndLabel = $('#relatedIndLabel');
+        this.labelFieldLabel = $('label[for=' + this.relatedIndLabel.attr('id') + ']');       
         // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
         // because it may have already been modified for a previous selection.
         this.baseLabelText = this.labelFieldLabel.html();
@@ -132,7 +131,7 @@ var customForm = {
     initFormEditView: function() {
         // These should not be editable: only properties of the role are editable.
         this.typeSelector.attr('disabled', 'disabled');
-        this.existingIndividualLabel.attr('disabled', 'disabled');
+        this.relatedIndLabel.attr('disabled', 'disabled');
     },
     
     // Bind event listeners that persist over the life of the page.
