@@ -5,6 +5,5 @@
 	<jsp:param name="roleToPersonPredicate" value="http://vivoweb.org/ontology/core#presenterRoleOf"/>
 	<jsp:param name="roleActivityToRolePredicate" value="http://vivoweb.org/ontology/core#relatedRole"/>
 	<jsp:param name="roleActivityLabel" value="presenter role"/>
-    <jsp:param name="roleLabelForPerson" value="presenter"/>
 </jsp:include>
 

@@ -5,5 +5,4 @@
 	<jsp:param name="roleToPersonPredicate" value="http://vivoweb.org/ontology/core#serviceProviderRoleOf"/>
 	<jsp:param name="roleActivityToRolePredicate" value="http://vivoweb.org/ontology/core#relatedRole"/>
 	<jsp:param name="roleActivityLabel" value="service to profession role"/>
-	<jsp:param name="roleLabelForPerson" value="provider of service"/>
 </jsp:include>

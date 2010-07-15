@@ -11,7 +11,8 @@
  personToRolePredicate: URI of the person to role predicate.
  roleToPersonPredicate: URI of the role to person predicate. 
  roleActivityToRolePredicate: URI of the activity to role predicate.
- roleLabelForPerson: human readable label for person when viewing from non-person side of role 
+ roleLabelForPerson: human readable label for person when viewing from non-person side of role. Some short views 
+     don't specify this value because the role name is displayed instead. 
  roleActivityLabel: human readable label of activity used for error messages   
  --%>
  
@@ -20,7 +21,7 @@
  		<c:choose>
 			<c:when test="${!empty predicateUri}">
 			
-				<c:set var="roleLabel" value="${individual.name}"/>
+				<c:set var="roleLabel" value="${! empty params.roleLabelForPerson ? params.roleLabelForPerson : individual.name}"/>
 				
 			    <%-- get years off role --%>
 				<c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
@@ -37,11 +38,11 @@
 					    <c:choose>
                             <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn']}">
 					            <c:set var="roleActivity" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn'].objectPropertyStatements[0].object}" />
-					            <c:set var="name"  value="${roleActivity.name}"/>
-                                <c:set var="label" value="${roleActivity.moniker}"/>
+					            <c:set var="name"  value="${roleActivity.name}"/> 
+					            <c:set var="label" value="${roleLabel}" /> 
                                 <c:set var="uri" value="${roleActivity.URI}"/>                                                                
                             </c:when>
- 				            <c:otherwise><%-- this Role is not linked to a anything yet; use name as a placeholder and add link to the Role so user can add more information --%>
+ 				            <c:otherwise><%-- this Role is not linked to anything yet; use name as a placeholder and add link to the Role so user can add more information --%>
  				                <c:choose>
  				                    <c:when test="${!empty individual.name}"> 				                    	
  				                        <c:set var="name" value="${individual.name}"/>
@@ -64,12 +65,7 @@
 				    		<c:when test="${!empty individual.objectPropertyMap[ param.roleToPersonPredicate ]}">				    		
 				    		    <c:set var="person" value="${individual.objectPropertyMap[ param.roleToPersonPredicate ].objectPropertyStatements[0].object}" />
 					    		<c:set var="name" value="${person.name}"/>
-                                <c:if test="${param.roleLabelForPerson == 'USE_MONIKER'}">
-                                    <c:set var="label" value="${person.moniker}" />
-                                </c:if>  
-                                <c:if test="${param.roleLabelForPerson != 'USE_MONIKER'}">
-                                    <c:set var="label" value="${param.roleLabelForPerson}" />
-                                </c:if>
+					    		<c:set var="label" value="${roleLabel}" />
                                 <c:set var="uri" value="${person.URI}"/>
 					    	</c:when>					    						    	
 					    	
@@ -96,7 +92,7 @@
 			    <c:choose>
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
-		                <a href="<c:out value="${olink}"/>">${name}</a> ${roleLabel}&nbsp;${label}&nbsp;${startYear}${endYear}
+		                <a href="<c:out value="${olink}"/>">${name}</a>&nbsp;${label}&nbsp;${startYear}${endYear}
 		            </c:when>
 		            <c:otherwise>
 		                <p:process><strong>${name}</strong> ${label}</p:process> 

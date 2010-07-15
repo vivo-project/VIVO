@@ -335,7 +335,7 @@
 	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
 	    </div>
 
-        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role Name ${requiredHint}" size="50" /></p>
+        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role ${requiredHint}" size="50" /></p>
         
         <h4>Dates of Participation</h4>	   
         <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   

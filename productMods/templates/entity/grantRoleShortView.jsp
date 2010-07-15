@@ -5,5 +5,5 @@
 	<jsp:param name="roleToPersonPredicate" value="http://vivoweb.org/ontology/core#investigatorRoleOf"/>
 	<jsp:param name="roleActivityToRolePredicate" value="http://vivoweb.org/ontology/core#relatedRole"/>
 	<jsp:param name="roleActivityLabel" value="grant"/>
-    <jsp:param name="roleLabelForPerson" value="investigator"/>
+    <jsp:param name="roleLabelForPerson" value="Investigator"/>
 </jsp:include>
