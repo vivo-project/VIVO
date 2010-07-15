@@ -46,11 +46,14 @@ var customForm = {
         this.baseLabelText = this.labelFieldLabel.html();
         
         // Label field for new individual being created
-//        this.newIndLabelFieldLabel = $('label[for=' + $('#newIndividualLabel').attr('id') + ']');
-//        this.newIndBaseLabelText = this.newIndLabelFieldLabel.html();
+        this.newIndLabel = $('#newIndLabel');
+        this.newIndLabelFieldLabel = $('label[for=' + this.newIndLabel.attr('id') + ']');
+        this.newIndBaseLabelText = this.newIndLabelFieldLabel.html();
         
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
+        
+        this.placeHolderText = '###';
 
     },
 
@@ -132,6 +135,8 @@ var customForm = {
         // These should not be editable: only properties of the role are editable.
         this.typeSelector.attr('disabled', 'disabled');
         this.relatedIndLabel.attr('disabled', 'disabled');
+        
+        this.setLabelFieldLabels();
         
         this.form.submit(function() {
             // Re-enable these fields so they get submitted, since they are required
@@ -320,14 +325,15 @@ var customForm = {
     },
     
     setLabelFieldLabels: function() {
-//        var newLabelTextForNewInd;
+        var newLabelTextForNewInd,
+            selectedTypeName = this.getSelectedTypeName();
         
-        this.labelFieldLabel.html(this.getSelectedTypeName() + ' ' + this.baseLabelText);
-        
-//        if (this.newIndLabelFieldLabel.length) {
-//            newLabelTextForNewInd = this.newIndBaseLabelText.replace('X', this.getSelectedTypeName);
-//            this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
-//        }      
+        this.labelFieldLabel.html(selectedTypeName + ' ' + this.baseLabelText);
+               
+        if (this.newIndLabel.length) {
+            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, selectedTypeName);
+            this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
+        }      
           
     },
     
