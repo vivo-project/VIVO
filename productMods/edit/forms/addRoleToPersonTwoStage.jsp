@@ -162,6 +162,14 @@
   SELECT ?existingRoleLabel WHERE { ?role  <${label}> ?existingRoleLabel . }
 </v:jsonset>
 
+<v:jsonset var="activityTypeQuery">
+  PREFIX core: <${vivoCore}>
+  SELECT ?existingActivityType WHERE { 
+      ?role core:roleIn ?existingActivity .
+      ?existingActivity a ?existingActivityType . 
+  }
+</v:jsonset>
+
 <c:set var="editjson" scope="request">
 {
     "formUrl" : "${formUrl}",
@@ -186,7 +194,7 @@
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYear":"${startYearQuery}", "endYear":"${endYearQuery}" },
-    "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" },
+    "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" , "roleActivityType":"${activityTypeQuery}" },
     "fields" : {
       "activityLabel" : {
          "newResource"      : "false",
