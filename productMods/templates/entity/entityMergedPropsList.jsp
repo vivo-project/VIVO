@@ -208,7 +208,19 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
             			
 						<div id="${dataProp.localName}" class="propsItem dataItem${first}${last}${multiItem}${addable}" style="${dataStyle}">
 							<h4>${dataProp.editLabel}</h4>
-					    	
+					    	<c:if test="${showSelfEdits || showCuratorEdits}">
+                                <c:choose>
+                                    <c:when test="${dataRows == 1 && displayLimit==1 }">
+                                    	<%-- just put in a single "edit" link, not an "add" link that expands to reveal edit/delete links --%>
+                                        <c:set var="editLinks"><edLnk:editLinks item="${dataProp.dataPropertyStatements[0]}" icons="false"/></c:set>
+                             					  <c:if test="${!empty editLinks}"><span class="editLinks">${editLinks}</span></c:if>
+                             					  <c:if test="${empty editLinks}"><em class="nonEditable">(non-editable)</em></c:if>
+                                    </c:when>
+                                    <c:otherwise><%-- creates an add link, even if displayLimit is unset, i.e. -1 --%>
+                                        <edLnk:editLinks item="${dataProp}" icons="false"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if>
                             <c:if test="${displayLimit<0}">
                             	<%-- set to an arbitrary but high positive limit if unset on property, i.e. -1 --%>
                                 <c:set var="displayLimit" value="32"/>
