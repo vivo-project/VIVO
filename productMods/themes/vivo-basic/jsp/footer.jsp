@@ -13,3 +13,4 @@
 %>
 
 ${ftl_footer}
+${ftl_googleAnalytics}
