@@ -89,9 +89,9 @@ II. The Upgrade Process
 
 6. Stop "Apache Tomcat" and run ant by typing: ant all
 
-7. If you have setup the Apache Tomcat Connector using mod_jk and modified your
-	tomcat/conf/server.xml file, you will need to add a line to your context
-	section specifying a "Manager" tag; see examples below.
+7. If you have set up the Apache Tomcat Connector using mod_jk and modified 
+	your tomcat/conf/server.xml file, you will need to add a line to your 
+	context section specifying a "Manager" tag; see examples below.
 	
 	Context section before:
 	
@@ -118,7 +118,7 @@ II. The Upgrade Process
 		/>
 	</Context>
 	
-8. Start "Apache Tomcat" and login to VIVO.
+8. Start "Apache Tomcat" and log in to VIVO.
 
 -------------------------------------------------------------------------------
 
@@ -302,21 +302,21 @@ B. If you created your own theme directory in VIVO 1.0, follow the steps below
 to upgrade your theme to VIVO 1.1.
 
     1. Copy the directory /vivo/themes/vivo-basic/templates into your theme
-       directory.
+       directory /vivo/themes/<your-theme-name>.
 
     2. Follow step a or b below, whichever is applicable to your theme:
 
         a. If you did not apply any customizations to the JSPs in your VIVO 1.0 
-           theme then you do not need to apply any additional changes to the 
-           VIVO 1.1 theme emplates during the upgrade process.
+           theme, then you do not need to apply any additional changes to the 
+           VIVO 1.1 theme templates during the upgrade process.
 
         b. If you did apply customizations to the JSPs in your VIVO 1.0 theme, 
-           you will need to replicate those modifications in the new FTL theme 
-           templates.
+           you will need to hand-replicate those modifications in the new theme
+           template files. 
            
-           A VIVO 1.0 theme contained three JSP files: menu.jsp, identity.jsp, 
-           and footer.jsp. The VIVO 1.1 theme contains five FTL files, 
-           corresponding to the earlier JSPs as follows:
+           The theme template content that was previously contained in three
+           JSP files is now contained in five FTL files. The correspondence
+           between the 1.0 JSPs and the 1.1 FTLs is as follows:
 
                identity.jsp => identity.ftl
                menu.jsp => menu.ftl and search.ftl
@@ -337,7 +337,7 @@ to upgrade your theme to VIVO 1.1.
            the syntax and available built-in constructs. Template authors need 
            not be concerned with the Programmer's Guide or Java API documentation.
 
-
+        c. Remove the jsp directory from your themes directory.
 
 
 
