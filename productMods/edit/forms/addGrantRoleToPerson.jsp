@@ -256,6 +256,7 @@ PREFIX core: <${vivoCore}>
     <c:when test="<%= request.getAttribute("objectUri")!=null %>">
         <c:set var="formHeading" value="Edit ${formHeading}" />
         <c:set var="editMode" value="edit" />
+        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
     </c:when>
     <c:otherwise>
         <c:set var="formHeading" value="Create a new ${formHeading}" />
@@ -302,7 +303,7 @@ var customFormData  = {
     acUrl: '${acUrl}',
     acType: '${vivoCore}Grant',
     editMode: '${editMode}',
-    submitButtonType: 'compound',
+    submitButtonTextType: 'compound',
     typeName: 'Grant'         
 };
 </script>

@@ -310,10 +310,12 @@
     <c:when test="<%= request.getAttribute("objectUri")!=null %>">
         <c:set var="titleText" value="Edit" />
         <c:set var="editMode" value="edit" />
+        <c:set var="submitButtonText" value="Edit ${roleActivityTitleCase}" />
     </c:when>
     <c:otherwise>
         <c:set var="titleText" value="Create a new" />
         <c:set var="editMode" value="add" />
+        <c:set var="submitButtonText" value="${roleActivityTitleCase}" />
     </c:otherwise>
 </c:choose>
 
@@ -338,12 +340,12 @@
 
         <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
         
-        <h4>Dates of Participation</h4>	   
+        <h4 id="dateHeader">Dates of Participation in </h4>	   
         <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
         <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
     </div>   
      
-    <p class="submit"><v:input type="submit" id="submit" value="${roleActivityTitleCase}" cancel="true" /></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
@@ -361,7 +363,7 @@ var customFormData  = {
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
     editMode: '${editMode}',
-    submitButtonType: 'compound' 
+    submitButtonTextType: 'compound' 
 };
 </script>
 <jsp:include page="${postForm}"/>

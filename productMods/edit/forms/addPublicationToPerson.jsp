@@ -240,7 +240,7 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
-    submitButtonType: 'simple'
+    submitButtonTextType: 'simple'
 };
 </script>
 <jsp:include page="${postForm}"/>
