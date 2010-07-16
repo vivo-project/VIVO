@@ -14,7 +14,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     _:activity core:roleIn ?grant .
+     ?activity core:roleIn ?grant .
      ?grant core:relatedRole ?activity .
      
 } where {
