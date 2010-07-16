@@ -21,6 +21,7 @@ I.   Before Performing the Upgrade
 II.  The Upgrade Process
 III. Ontology Changes
 IV.  File Storage Changes
+V.   Theme Changes
 
 -------------------------------------------------------------------------------
 
@@ -277,3 +278,68 @@ Once you are satisfied that the File Storage upgrade process is successful,
 you may delete the "images" folder and the "upgrade" folder from the upload 
 directory. You may also delete the WEB-INF/images directory from within
 your Tomcat web application. 
+
+
+-------------------------------------------------------------------------------
+
+V. Theme Changes
+
+VIVO 1.1 introduces the first step in a transition from JavaServer Pages (JSPs)
+to the FreeMarker template engine for generating web pages. As part of this 
+process, the JSP files that were used for theme customization in earlier 
+versions of VIVO have been replaced by a set of FreeMarker templates. 
+In the 1.1 install package, these files are located in 
+/vivo/themes/vivo-basic/templates and have an ftl (for FreeMarker Template
+Language) extension.
+
+Follow step A or B below, whichever is applicable to your site:
+
+A. If you did not create a customized theme for your site in VIVO 1.0, but used
+the vivo-basic theme that shipped with VIVO 1.0, you need not take any action
+in order to convert your site to the VIVO 1.1 theme.
+
+B. If you created your own theme directory in VIVO 1.0, follow the steps below
+to upgrade your theme to VIVO 1.1.
+
+    1. Copy the directory /vivo/themes/vivo-basic/templates into your theme
+       directory.
+
+    2. Follow step a or b below, whichever is applicable to your theme:
+
+        a. If you did not apply any customizations to the JSPs in your VIVO 1.0 
+           theme then you do not need to apply any additional changes to the 
+           VIVO 1.1 theme emplates during the upgrade process.
+
+        b. If you did apply customizations to the JSPs in your VIVO 1.0 theme, 
+           you will need to replicate those modifications in the new FTL theme 
+           templates.
+           
+           A VIVO 1.0 theme contained three JSP files: menu.jsp, identity.jsp, 
+           and footer.jsp. The VIVO 1.1 theme contains five FTL files, 
+           corresponding to the earlier JSPs as follows:
+
+               identity.jsp => identity.ftl
+               menu.jsp => menu.ftl and search.ftl
+               footer.jsp => footer.ftl 
+    
+               googleAnalytics.ftl is a new file included from footer.ftl to
+               which you will add your site's Google Analytics Tracking Code 
+               (see section II).
+           
+           Because the FreeMarker Template Language uses many syntactic 
+           conventions that will be familiar to template authors from JSP or 
+           other common templating systems, the translation of your JSP changes
+           into the new FTLs should be relatively straightforward. 
+   
+           Consult the FreeMarker Template Author's Guide at 
+           http://freemarker.org/docs/dgui.html and the Reference at 
+           http://freemarker.org/docs/ref.html for complete documentation of 
+           the syntax and available built-in constructs. Template authors need 
+           not be concerned with the Programmer's Guide or Java API documentation.
+
+
+
+
+
+
+
