@@ -253,7 +253,7 @@ PREFIX core: <${vivoCore}>
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <c:choose>
-    <c:when test="<%= request.getAttribute("objectUri")!=null %>">
+    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
         <c:set var="formHeading" value="Edit ${formHeading}" />
         <c:set var="editMode" value="edit" />
         <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />

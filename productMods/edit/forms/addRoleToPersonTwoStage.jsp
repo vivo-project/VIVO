@@ -307,7 +307,7 @@
 <c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
 
 <c:choose>
-    <c:when test="<%= request.getAttribute("objectUri")!=null %>">
+    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
         <c:set var="titleText" value="Edit" />
         <c:set var="editMode" value="edit" />
         <c:set var="submitButtonText" value="Edit ${roleActivityTitleCase}" />
