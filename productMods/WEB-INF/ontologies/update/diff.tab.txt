@@ -92,9 +92,6 @@ http://vivoweb.org/ontology/core#activityRelatedGrant		No	Delete	not set
 http://vivoweb.org/ontology/core#grantRelatedActivity		No	Delete	not set
 http://vivoweb.org/ontology/core#activityRelatedEvent		No	Delete	not set
 http://vivoweb.org/ontology/core#eventRelatedActivity		No	Delete	not set
-http://vivoweb.org/ontology/core#PresentationActivity		No	Delete	not set
-http://vivoweb.org/ontology/core#presentationActivity		No	Delete	not set
-http://vivoweb.org/ontology/core#presentationActivityBy		No	Delete	not set
 http://vivoweb.org/ontology/core#InternationalActivity		No	Delete	not set
 http://vivoweb.org/ontology/core#Activity	http://vivoweb.org/ontology/core#Role	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#activityBy	http://vivoweb.org/ontology/core#roleOf	Yes	Map	Directly-changed
@@ -108,6 +105,9 @@ http://vivoweb.org/ontology/core#hasOutreachActivity	http://vivoweb.org/ontology
 http://vivoweb.org/ontology/core#ServiceActivity	http://vivoweb.org/ontology/core#ServiceProviderRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#professionalServiceActivityBy	http://vivoweb.org/ontology/core#serviceProviderRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasProfessionalServiceActivity	http://vivoweb.org/ontology/core#hasServiceProviderRole	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#PresentationActivity	http://vivoweb.org/ontology/core#PresenterRole	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#presentationActivity	http://vivoweb.org/ontology/core#hasPresenterRole	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#presentationActivityBy	http://vivoweb.org/ontology/core#PresenterRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#TeachingActivity	http://vivoweb.org/ontology/core#TeacherRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#teachingActivityBy	http://vivoweb.org/ontology/core#teacherRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasTeachingActivity	http://vivoweb.org/ontology/core#hasTeacherRole	Yes	Map	Directly-changed

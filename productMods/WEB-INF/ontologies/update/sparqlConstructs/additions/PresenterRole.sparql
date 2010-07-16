@@ -14,11 +14,8 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     _:role a core:PresenterRole .
-     _:role core:roleIn ?event .
-     ?event core:relatedRole _:role .
-     ?person core:hasPresenterRole _:role  .
-     _:role core:presenterRoleOf ?person .
+     ?activity core:roleIn ?event .
+     ?event core:relatedRole ?activity .
      ?event bibo:presents ?infores .
      ?infores bibo:presentedAt ?event.
 } where {
