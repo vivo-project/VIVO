@@ -306,12 +306,27 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Now really add a photo</td>
+	<td class="comment">Try to add an image that is smaller than required</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Upload image for Lily Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\lilysmall.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload photo']</td>
 	<td></td>
 </tr>
 <tr>
@@ -326,12 +341,67 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>The uploaded image should be at least 115 pixels high and 115 pixels wide.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Current Photo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try to add an image that is larger than allowed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>datafile</td>
+	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\lilylarge.jpg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Upload photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Upload image for Lily Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Photo Upload</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please upload an image smaller than 6 megabytes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Now really add a photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Upload image for Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
