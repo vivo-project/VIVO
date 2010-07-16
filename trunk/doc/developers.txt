@@ -1,0 +1,45 @@
+
+-------------------------------------------------------------------------------
+
+Instructions for VIVO developers
+
+-------------------------------------------------------------------------------
+
+If you are working from the VIVO distribution files, you should follow the 
+instructions in "install.txt", in this directory.
+
+-------------------------------------------------------------------------------
+
+If you are working from the VIVO source files, checked out from the Subversion
+repository, then your working area does not contain the "vitro-core" directory.
+
+Follow these steps:
+
+  1) In the VIVO working area, create deploy.properties as a copy of 
+     example.deploy.properties
+     
+  2) Check out the Vitro source files from Subversion into a separate working 
+     area.
+
+  3) Modify deploy.properties (created in step 1) so vitro.core.dir points to
+     the Vitro working area (created in step 2). For example:
+        vitro.core.dir = ../vitro
+        
+  4) Follow the instructions in "install.txt" to complete the installation, 
+     omitting step III.
+ 
+-------------------------------------------------------------------------------
+Answers to Frequently Asked Questions:
+-------------------------------------------------------------------------------
+
+Q: I'm running VIVO in Tomcat on a MacIntosh. When I upload an image file, a 
+   strange icon appears in the dock. What's up with that?
+   
+A: The image processing code in VIVO uses javax.imageio.ImageIO, which in turn
+   uses code in the java.awt package. By default, this package will open a work
+   area on your screen, producing this icon even though no visible window is
+   created.
+   
+   You can prevent this by editing {tomcat}/conf/setenv.sh, and adding the 
+   "java.awt.headless" option. For example,
+       export CATALINA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=64m -Djava.awt.headless=true"

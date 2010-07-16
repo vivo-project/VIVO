@@ -1,0 +1,76 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/****************************************
+ vivo-basic theme: print styles
+ 
+ Original version
+ 2009-04-30 mw542
+*****************************************/
+
+body {
+  line-height: 1.3;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;   
+  color:#000;
+  background: none;
+  font-size: 10pt;
+}
+
+
+/************************
+Hide unnecessary stuff
+************************/
+
+
+div#header, 
+div#footer,
+div#cu-identity,
+div#dashboard,
+span.entityMoreSpan {
+    display: none !important;
+}
+
+div.admin, a.edit, a.delete, a.add, a.backToTop {
+    display: none !important;
+}
+
+div.empty {
+    display: none !important;
+}
+
+/************************
+Show hidden content
+************************/
+
+div.extraEntities {
+    display: block !important; /* statements that are normally hidden by togglers */
+}
+
+
+/************************
+Headings and Text
+************************/
+
+h1{font-size:20pt;}
+h2{font-size:16pt;}
+h3{font-size:14pt;}
+h4,h5,h6{font-size:12pt;}
+
+h1,h2,h3,h4,h5,h6 { font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif; clear: left; }
+
+h3.propertyName {
+  font-size: 12pt;
+}
+
+
+/************************
+Links and images
+************************/
+
+a:link, a:visited {
+  background: transparent;
+  font-weight:700;
+  text-decoration: underline;
+}
+
+img { clear: left; float:left; margin:0 1.5em 1.5em 0; }
+a img { border:none; }
