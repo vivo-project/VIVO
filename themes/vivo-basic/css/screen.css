@@ -266,7 +266,8 @@ a.externalLink { color: #84a655; }
 
 div.description { margin-bottom: 1.5em; }
 
-.propertyName {
+.propertyName,
+.propsItem h4 {
   font-size: 1em;
   line-height: 1em;
   color: #666;
