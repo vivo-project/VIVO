@@ -44,11 +44,14 @@ var customForm = {
         // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
         // because it may have already been modified for a previous selection.
         this.baseLabelText = this.labelFieldLabel.html();
-        
+
         // Label field for new individual being created
         this.newIndLabel = $('#newIndLabel');
         this.newIndLabelFieldLabel = $('label[for=' + this.newIndLabel.attr('id') + ']');
         this.newIndBaseLabelText = this.newIndLabelFieldLabel.html();
+        
+        this.dateHeader = $('#dateHeader');
+        this.baseDateHeaderText = this.dateHeader.html();
         
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
@@ -66,7 +69,7 @@ var customForm = {
         
         if (!this.typeSelector.length || this.editMode == 'edit') {
             this.formSteps = 1;
-        // there's also going to be a 3-step form - look for this.subTypeSelector
+        // there may also be a 3-step form - look for this.subTypeSelector
         } else {
             this.formSteps = 2;
         }
@@ -90,8 +93,6 @@ var customForm = {
         // on a refresh), go directly to full view. Otherwise user has to reselect
         // twice to get to full view.
         else if (typeVal.length) {
-            this.acType = typeVal;
-            this.setLabelFieldLabels();
             this.initFormFullView();
         }
         else {
@@ -101,6 +102,7 @@ var customForm = {
     
     initFormTypeView: function() {
         
+        this.setType(); // empty any previous values (perhaps not needed)
         this.hideFields(this.fullViewOnly);
         this.button.hide();
         this.requiredLegend.hide();
@@ -114,12 +116,14 @@ var customForm = {
         if (this.editMode == 'edit') {
             this.initFormEditView();
         }
-        
+
+        this.setType();        
         this.fullViewOnly.show();
         this.or.show();
         this.requiredLegend.show();
         this.button.show();
-        this.toggleButtonText('new');
+        this.setButtonText('new');
+        this.setLabels();
         this.cancel.unbind('click');     
            
         if( this.formSteps > 1 ){
@@ -135,8 +139,6 @@ var customForm = {
         // These should not be editable: only properties of the role are editable.
         this.typeSelector.attr('disabled', 'disabled');
         this.relatedIndLabel.attr('disabled', 'disabled');
-        
-        this.setLabelFieldLabels();
         
         this.form.submit(function() {
             // Re-enable these fields so they get submitted, since they are required
@@ -154,19 +156,11 @@ var customForm = {
             
             // If an autocomplete selection has been made, undo it
             customForm.undoAutocompleteSelection();
-            
-            // Set the type of individual that the autocomplete will search for.
-            // We do this even if typeVal is empty, to clear out a previous value.
-            customForm.acType = typeVal;
-            
-            if (typeVal.length) {    
-                customForm.setLabelFieldLabels();         
-                customForm.initFormFullView();            
-            } else {
-                // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-                // or submitting form without a type selection.
-                customForm.initFormTypeView();
-            }     
+
+            // If no selection, go back to type view. This prevents problems like trying to run autocomplete
+            // or submitting form without a type selection.            
+            typeVal.length ? customForm.initFormFullView() : customForm.initFormTypeView();
+    
         }); 
         
         this.verifyMatch.click(function() {
@@ -293,9 +287,9 @@ var customForm = {
         this.acSelectorWrapper.hide();
         this.acSelector.attr('disabled', 'disabled');
         
-        // If only one form step, type is pre-selected, and this label is coded in the html.
+        // If only one form step, type is pre-selected, and the label is coded in the html.
         if (this.formSteps > 1) {
-            this.acSelection.find('label').html('Selected ' + this.getSelectedTypeName() + ':');
+            this.acSelection.find('label').html('Selected ' + this.typeName + ':');
         }
               
         this.acSelection.show();
@@ -304,7 +298,7 @@ var customForm = {
         this.acSelectionInfo.html(ui.item.label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
-        this.toggleButtonText('existing');            
+        this.setButtonText('existing');            
 
         this.cancel.unbind('click');
         this.cancel.click(function() {
@@ -325,7 +319,6 @@ var customForm = {
         this.acReceiver.val('');
         this.acSelectionInfo.html('');
         this.verifyMatch.attr('href', this.verifyMatchBaseHref);
-        this.toggleButtonText('new');
         
         if (this.formSteps > 1) {
             this.acSelection.find('label').html('Selected ');
@@ -333,49 +326,73 @@ var customForm = {
                 
     },
     
-    getSelectedTypeName: function() {
-        return this.typeSelector.find(':selected').html();
-    },
-    
-    setLabelFieldLabels: function() {
-        var newLabelTextForNewInd,
-            selectedTypeName = this.getTypeName();
+    // Set type uri for autocomplete, and type name for labels and button text.
+    // Note: we still need this in edit mode, to set the text values.
+    setType: function() {
         
-        this.labelFieldLabel.html(selectedTypeName + ' ' + this.baseLabelText);
-               
+        var selectedType;
+        
+        // If there's no type selector, these values have been specified in customFormData,
+        // and will not change over the life of the form.
+        if (!this.typeSelector.length) {
+            return;
+        }
+
+        selectedType = this.typeSelector.find(':selected'); 
+        if (selectedType.length) {
+            this.acType = selectedType.val();
+            this.typeName = selectedType.html();
+        } 
+        // reset to empty values; may not need
+        else {
+            this.acType = '';
+            this.typeName = '';
+        }
+    },
+
+    // Set field labels based on type selection. Although these won't change in edit
+    // mode, it's easier to specify the text here than in the jsp.
+    setLabels: function() {
+        var newLabelTextForNewInd;
+            
+        this.labelFieldLabel.html(this.typeName + ' ' + this.baseLabelText);
+        
+        if (this.dateHeader.length) {
+            this.dateHeader.html(this.baseDateHeaderText + this.typeName);
+        } 
+                   
         if (this.newIndLabel.length) {
-            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, selectedTypeName);
+            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, this.typeName);
             this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
-        }      
-          
+        }  
+
     },
     
-    toggleButtonText: function(newOrExisting) {
+    // Set button text based on both type selection and whether it's an autocomplete selection
+    // or a new related individual. Called when setting up full view of form, and after
+    // an autocomplete selection.
+    setButtonText: function(newOrExisting) {
         
+        // Edit mode button doesn't change, so it's specified in the jsp
         if (this.editMode === 'edit') {
-            this.button.val('Edit ' + this.baseButtonText);
+            return;
         }  
-        // creating new related individual      
-        else if (newOrExisting === 'new') {
-            if (this.submitButtonType == 'compound') { // use == to tolerate nulls
+        
+        // Creating new related individual      
+        if (newOrExisting === 'new') {
+            if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
-                this.button.val('Create ' + this.getTypeName() + ' & ' + this.baseButtonText);                
+                this.button.val('Create ' + this.typeName + ' & ' + this.baseButtonText);                
             } else {
                 // e.g., 'Create Publication'
                 this.button.val('Create ' + this.baseButtonText);
             }            
         }
-        // using existing related individual
+        // Using existing related individual
         else {  
             this.button.val('Add ' + this.baseButtonText);
         } 
     },
-    
-    getTypeName: function() {
-        // If there's no type field, the type comes hard-coded in the customFormData.
-        // Otherwise, get the selected type from the type selector field.
-        return this.typeName ? this.typeName : this.getSelectedTypeName();        
-    }
     
 };
 

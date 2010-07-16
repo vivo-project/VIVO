@@ -263,7 +263,7 @@ img.screenshot {
 }
 
 #personWrap div.datatypeProperties {
-/*    font-size: 1.2em;*/
+    font-size: 0.9em;
 }
 
 #personWrap div.datatypeProperties p, /* resetting font sizes for html inside data props */
@@ -455,7 +455,7 @@ ul.keywords li {
 }
 
 #personWrap #overview a.delete {
-    display: none;
+/*    display: none;*/
 }
 
 #personWrap #overview a.edit {

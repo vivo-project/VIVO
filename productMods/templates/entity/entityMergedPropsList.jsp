@@ -32,7 +32,8 @@
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.filters.VitroRequestPrep" %>
 <%@ page import="edu.cornell.mannlib.vedit.beans.LoginFormBean" %>
-<jsp:useBean id="loginHandler" class="edu.cornell.mannlib.vedit.beans.LoginFormBean" scope="session" />
+
+<%@page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%><jsp:useBean id="loginHandler" class="edu.cornell.mannlib.vedit.beans.LoginFormBean" scope="session" />
 <%! 
 public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.templates.entity.entityMergedPropsList.jsp");
 %>
@@ -162,24 +163,12 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
            							<c:url var="propertyLink" value="/entity">
                							<c:param name="home" value="${portal.portalId}"/>
                							<c:param name="uri" value="${objPropertyStmt.object.URI}"/>
-               							<%--
-<%										ObjectPropertyStatement oStmt = (ObjectPropertyStatement)request.getAttribute("opStmt");
-										if (oStmt!=null) {
-											Individual obj= (Individual)oStmt.getObject();
-											if (obj != null) {
-												if (!obj.doesFlag1Match(currentPortalId)) {%>
-													<c:param name="jump" value="true"/>
-<%												}
-											}
-										}%>
-										--%>
            							</c:url>
+           							
+           							<% String customShortView = MiscWebUtils.getCustomShortView(request); %>
+	         						<c:set var="altRenderJsp" value="<%= customShortView %>" />	         						
 									<c:remove var="opStmt" scope="request"/>
-                                    <c:forEach items="${objPropertyStmt.object.VClasses}" var="type">
-                                        <c:if test="${!empty type.customShortView}">
-                                            <c:set var="altRenderJsp" value="${type.customShortView}"/>
-                                        </c:if>
-                                    </c:forEach>
+									
                                     <c:choose>
                                         <c:when test="${!empty altRenderJsp}">
                                             <c:set scope="request" var="individual" value="${objPropertyStmt.object}"/>
@@ -251,7 +240,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
                                             <c:when test='${dataRows==1}'>
                                               <span class="statementWrap">
                                               	${dataPropertyStmt.data}
-                                            	<c:if test='${displayLimit>1 && (showSelfEdits || showCuratorEdits)}'>
+                                            	<c:if test='${showSelfEdits || showCuratorEdits}'>
                                             	    <c:set var="editLinks"><edLnk:editLinks item="${dataPropertyStmt}" icons="false"/></c:set>
                                        					  <c:if test="${!empty editLinks}"><span class="editLinks">${editLinks}</span></c:if>
                                        					  <c:if test="${empty editLinks}"><em class="nonEditable">(non-editable)</em></c:if>
