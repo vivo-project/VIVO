@@ -102,7 +102,7 @@ var customForm = {
     
     initFormTypeView: function() {
         
-        this.setType(); // empty any previous values
+        this.setType(); // empty any previous values (perhaps not needed)
         this.hideFields(this.fullViewOnly);
         this.button.hide();
         this.requiredLegend.hide();
@@ -378,7 +378,7 @@ var customForm = {
             return;
         }  
         
-        // creating new related individual      
+        // Creating new related individual      
         if (newOrExisting === 'new') {
             if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
@@ -388,7 +388,7 @@ var customForm = {
                 this.button.val('Create ' + this.baseButtonText);
             }            
         }
-        // using existing related individual
+        // Using existing related individual
         else {  
             this.button.val('Add ' + this.baseButtonText);
         } 
