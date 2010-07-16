@@ -93,7 +93,6 @@ var customForm = {
         // on a refresh), go directly to full view. Otherwise user has to reselect
         // twice to get to full view.
         else if (typeVal.length) {
-            this.setType();
             this.initFormFullView();
         }
         else {
@@ -103,6 +102,7 @@ var customForm = {
     
     initFormTypeView: function() {
         
+        this.setType(); // empty any previous values
         this.hideFields(this.fullViewOnly);
         this.button.hide();
         this.requiredLegend.hide();
@@ -116,7 +116,8 @@ var customForm = {
         if (this.editMode == 'edit') {
             this.initFormEditView();
         }
-        
+
+        this.setType();        
         this.fullViewOnly.show();
         this.or.show();
         this.requiredLegend.show();
@@ -139,9 +140,6 @@ var customForm = {
         this.typeSelector.attr('disabled', 'disabled');
         this.relatedIndLabel.attr('disabled', 'disabled');
         
-        this.setType();
-        this.setLabels();
-        
         this.form.submit(function() {
             // Re-enable these fields so they get submitted, since they are required
             // in the edit config.
@@ -158,11 +156,6 @@ var customForm = {
             
             // If an autocomplete selection has been made, undo it
             customForm.undoAutocompleteSelection();
-            
-            // Set the type of individual that the autocomplete will search for,
-            // and the type name for labels and button text.
-            // We do this even if typeVal is empty, to clear out a previous value.
-            customForm.setType();
 
             // If no selection, go back to type view. This prevents problems like trying to run autocomplete
             // or submitting form without a type selection.            
@@ -339,7 +332,8 @@ var customForm = {
         
         var selectedType;
         
-        // If there's no type selector, these values have been specified in customFormData.
+        // If there's no type selector, these values have been specified in customFormData,
+        // and will not change over the life of the form.
         if (!this.typeSelector.length) {
             return;
         }
