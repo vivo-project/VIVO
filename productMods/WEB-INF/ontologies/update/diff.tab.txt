@@ -107,7 +107,7 @@ http://vivoweb.org/ontology/core#professionalServiceActivityBy	http://vivoweb.or
 http://vivoweb.org/ontology/core#hasProfessionalServiceActivity	http://vivoweb.org/ontology/core#hasServiceProviderRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#PresentationActivity	http://vivoweb.org/ontology/core#PresenterRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#presentationActivity	http://vivoweb.org/ontology/core#hasPresenterRole	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#presentationActivityBy	http://vivoweb.org/ontology/core#PresenterRoleOf	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#presentationActivityBy	http://vivoweb.org/ontology/core#presenterRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#TeachingActivity	http://vivoweb.org/ontology/core#TeacherRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#teachingActivityBy	http://vivoweb.org/ontology/core#teacherRoleOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasTeachingActivity	http://vivoweb.org/ontology/core#hasTeacherRole	Yes	Map	Directly-changed
