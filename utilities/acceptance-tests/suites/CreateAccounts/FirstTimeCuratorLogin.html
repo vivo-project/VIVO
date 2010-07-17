@@ -35,6 +35,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Check first time login process</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/vivo/</td>
 	<td></td>
@@ -125,11 +130,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a password with more than 5 characters</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Try an invalid password</td>
 	<td></td>
@@ -137,21 +137,21 @@
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
-	<td>junk</td>
+	<td>junky</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>confirmPassword</td>
-	<td>junk</td>
+	<td>junky</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>Please enter a password between 5 and 99 characters long</td>
+	<td>verifyTextPresent</td>
+	<td>Please enter a password between 6 and 12 characters in length.</td>
 	<td></td>
 </tr>
 <tr>
@@ -200,13 +200,13 @@
 	<td>newPasword</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>passwordChangeForm</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>Passwords do not match</td>
+	<td>verifyTextPresent</td>
+	<td>The passwords entered do not match.</td>
 	<td></td>
 </tr>
 <tr>
