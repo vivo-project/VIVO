@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>temp</title>
+<title>NewAdminFirstLogin</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">temp</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">NewAdminFirstLogin</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
@@ -90,8 +90,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>Please enter a password to log in</td>
+	<td>verifyTextPresent</td>
+	<td>Please enter your password.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Email or Username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Password</td>
 	<td></td>
 </tr>
 <tr>
@@ -171,11 +181,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Please enter a password with more than 5 characters</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Confirm Password</td>
 	<td></td>
 </tr>
@@ -200,8 +205,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>Please enter a password between 5 and 99 characters long</td>
+	<td>verifyTextPresent</td>
+	<td>Please enter your new password.</td>
 	<td></td>
 </tr>
 <tr>
@@ -212,12 +217,12 @@
 <tr>
 	<td>type</td>
 	<td>newPassword</td>
-	<td>junk</td>
+	<td>junky</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>confirmPassword</td>
-	<td>junk</td>
+	<td>junky</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -225,8 +230,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>Please enter a password between 5 and 99 characters long</td>
+	<td>verifyTextPresent</td>
+	<td>Please enter a password between 6 and 12 characters in length.</td>
 	<td></td>
 </tr>
 <tr>
@@ -260,11 +265,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a password with more than 5 characters</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Try entering in different passwords in each field</td>
 	<td></td>
@@ -285,8 +285,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>Passwords do not match</td>
+	<td>verifyTextPresent</td>
+	<td>The passwords entered do not match.</td>
 	<td></td>
 </tr>
 <tr>
