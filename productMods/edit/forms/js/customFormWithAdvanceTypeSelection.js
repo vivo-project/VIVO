@@ -34,7 +34,8 @@ var customForm = {
         this.acSelector = this.form.find('.acSelector');
         this.acSelection = this.form.find('.acSelection');
         this.acSelectionInfo = this.form.find('.acSelectionInfo');
-        this.acReceiver = this.form.find('.acReceiver');
+        this.acUriReceiver = this.form.find('.acUriReceiver');
+        this.acLabelReceiver = this.form.find('.acLabelReceiver');
         this.verifyMatch = this.form.find('.verifyMatch');    
         this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
@@ -85,14 +86,16 @@ var customForm = {
     initFormView: function() {
         
         var typeVal = this.typeSelector.val();   
-        
-        if (this.formSteps == 1 || this.findValidationErrors()) {
-            this.initFormFullView();
+
+        if (this.findValidationErrors()) {
+            this.initFormWithValidationErrors();
+            //this.initFormFullView();
         }
+        // this.formSteps == 1 includes edit mode.
         // If type is already selected when the page loads (Firefox retains value
         // on a refresh), go directly to full view. Otherwise user has to reselect
-        // twice to get to full view.
-        else if (typeVal.length) {
+        // twice to get to full view.        
+        else if ( this.formSteps == 1 || typeVal.length ) {
             this.initFormFullView();
         }
         else {
@@ -126,7 +129,7 @@ var customForm = {
         this.setLabels();
         this.cancel.unbind('click');     
            
-        if( this.formSteps > 1 ){
+        if( this.formSteps > 1 ){  // NB includes this.editMode == 1
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
@@ -135,8 +138,19 @@ var customForm = {
         }
     },
     
+    initFormWithValidationErrors: function() {
+        var uri = this.acUriReceiver.val(), 
+            label = this.acLabelReceiver.val();
+        
+        if (uri) {
+            
+            this.showAutocompleteSelection(label, uri);
+        }
+        this.initFormFullView();
+    },
+    
     initFormEditView: function() {
-        // These should not be editable: only properties of the role are editable.
+        // These are not editable: only properties of the role are editable.
         this.typeSelector.attr('disabled', 'disabled');
         this.relatedIndLabel.attr('disabled', 'disabled');
         
@@ -148,7 +162,8 @@ var customForm = {
         });
     },
     
-    // Bind event listeners that persist over the life of the page.
+    // Bind event listeners that persist over the life of the page. Event listeners
+    // that depend on the view should be initialized in the view setup method.
     bindEventListeners: function() {
         
         this.typeSelector.change(function() {
@@ -206,7 +221,7 @@ var customForm = {
                 });
             },
             select: function(event, ui) {
-                customForm.showAutocompleteSelection(ui);   
+                customForm.showAutocompleteSelection(ui.item.label, ui.item.uri);   
                     
             }
         });
@@ -280,10 +295,8 @@ var customForm = {
         this.acCache = {};
     },       
         
-    showAutocompleteSelection: function(ui) {
-        
-        var uri = ui.item.uri;
-        
+    showAutocompleteSelection: function(label, uri) {
+
         this.acSelectorWrapper.hide();
         this.acSelector.attr('disabled', 'disabled');
         
@@ -294,8 +307,9 @@ var customForm = {
               
         this.acSelection.show();
 
-        this.acReceiver.val(uri);
-        this.acSelectionInfo.html(ui.item.label);
+        this.acUriReceiver.val(uri);
+        this.acLabelReceiver.val(label);
+        this.acSelectionInfo.html(label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
         this.setButtonText('existing');            
@@ -316,7 +330,7 @@ var customForm = {
         this.acSelector.attr('disabled', '');
         this.acSelector.val('');
         this.hideFields(this.acSelection);
-        this.acReceiver.val('');
+        this.acUriReceiver.val('');
         this.acSelectionInfo.html('');
         this.verifyMatch.attr('href', this.verifyMatchBaseHref);
         
