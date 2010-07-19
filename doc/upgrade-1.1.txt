@@ -295,7 +295,7 @@ Language) extension.
 Follow step A or B below, whichever is applicable to your site:
 
 A. If you did not create a customized theme for your site in VIVO 1.0, but used
-the vivo-basic theme that shipped with VIVO 1.0, you need not take any action
+the 1.0 vivo-basic theme in its original directory, you need not take any action
 in order to convert your site to the VIVO 1.1 theme.
 
 B. If you created your own theme directory in VIVO 1.0, follow the steps below

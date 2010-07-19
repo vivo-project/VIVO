@@ -189,7 +189,7 @@
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear" ],
+    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear", "existingActivityLabel" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -229,6 +229,17 @@
          "rangeLang"        : "",         
          "assertions"       : [ ]
       },
+      "existingActivityLabel" : { /* Needed iff we return from an invalid submission */
+         "newResource"      : "false",
+         "validators"       :  [ ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",         
+         "assertions"       : [ ]
+      },
       "roleLabel" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty","datatype:${stringDatatypeUriJson}" ],
@@ -242,7 +253,7 @@
       },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -274,10 +285,7 @@
     }
     
     editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
-    
 
-    
-    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { 
@@ -324,7 +332,7 @@
 <h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
     
@@ -335,7 +343,8 @@
 	    <div class="acSelection">
 	        <%-- RY maybe make this a label and input field. See what looks best. --%>
 	        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-	        <input type="hidden" id="roleActivityURI" name="roleActivity" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
+	        <v:input type="hidden" id="roleActivityURI" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
+	        <v:input type="hidden" id="existingActivityLabel" name="existingActivityLabel" cssClass="acLabelReceiver" /> <%-- Needed iff we return from an invalid submission --%> 
 	    </div>
 
         <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>

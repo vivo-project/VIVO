@@ -157,7 +157,7 @@ PREFIX core: <${vivoCore}>
     					 "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "grant" ],
-    "literalsOnForm" : [ "grantLabel", "startYear", "endYear" ],
+    "literalsOnForm" : [ "grantLabel", "startYear", "endYear", "existingGrantLabel" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : {  },
     "sparqlForUris" : {   },
@@ -181,14 +181,25 @@ PREFIX core: <${vivoCore}>
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${personClassUriJson}",
+         "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
          "assertions"       : ["${n3ForGrantLabel}"]
       },
+      "existingGrantLabel" : { /* Needed iff we return from an invalid submission */
+         "newResource"      : "false",
+         "validators"       :  [ ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",         
+         "assertions"       : [ ]
+      },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -275,8 +286,8 @@ PREFIX core: <${vivoCore}>
 
     <div class="acSelection">
         <p class="inline"><label>Selected Grant:</label><span class="acSelectionInfo"></span><a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-        <%-- bdc34: for some odd reason id and name should not be grant in this input element. --%>
-        <input type="hidden" id="grant" name="grant" class="acReceiver" value="" /> <!-- Field value populated by JavaScript -->
+        <v:input type="hidden" id="grant" name="grant" cssClass="acUriReceiver"  /> <%-- Field value populated by JavaScript --%>
+        <v:input type="hidden" id="existingGrantLabel" name="existingGrantLabel" cssClass="acLabelReceiver" /> <%-- Needed iff we return from an invalid submission --%> 
     </div>
 
     <h4>Dates of Participation in Grant</h4>
