@@ -242,7 +242,7 @@
       },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -274,10 +274,7 @@
     }
     
     editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
-    
 
-    
-    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { 

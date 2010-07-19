@@ -188,7 +188,7 @@ PREFIX core: <${vivoCore}>
       },
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
