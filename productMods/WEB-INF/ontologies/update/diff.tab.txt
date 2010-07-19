@@ -49,7 +49,6 @@ http://purl.org/ontology/bibo/PersonalCommunication		No	Delete	not set
 http://purl.org/ontology/bibo/PersonalCommunicationDocument		No	Delete	not set
 http://purl.org/ontology/bibo/Email		No	Delete	not set
 http://purl.org/ontology/bibo/Letter		No	Delete	not set
-http://vivoweb.org/ontology/core#Seminar		No	Delete	not set
 http://purl.org/dc/terms/alternative		No	Delete	not set
 http://purl.org/ontology/bibo/shortTitle		No	Delete	not set
 http://purl.org/ontology/bibo/content		No	Delete	not set
@@ -119,6 +118,7 @@ http://vivoweb.org/ontology/core#advisedBy	http://vivoweb.org/ontology/core#advi
 http://vivoweb.org/ontology/core#PostDoc	http://vivoweb.org/ontology/core#Postdoc	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#ReserachProposal	http://vivoweb.org/ontology/core#ResearchProposal	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#Talk	http://vivoweb.org/ontology/core#Presentation	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#Seminar	http://vivoweb.org/ontology/core#Presentation	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#degreeAbbreviation	http://vivoweb.org/ontology/core#abbreviation	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#cityOfPublication	http://vivoweb.org/ontology/core#placeOfPublication	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasSubEvent	http://vivoweb.org/ontology/core#includesEvent	Yes	Map	Directly-changed
@@ -138,4 +138,4 @@ http://vivoweb.org/ontology/core#educationalBackgroundOf	http://vivoweb.org/onto
 http://vivoweb.org/ontology/core#memberOf	http://vivoweb.org/ontology/core#currentMemberOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasMember	http://vivoweb.org/ontology/core#hasCurrentMember	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#role	http://vivoweb.org/ontology/core#description	Yes	Map	Directly-changed
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	http://vivoweb.org/ontology/core#description	Yes	Map	Special mapping for VIVO 1.0 application (not a real ontology change)
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	http://vivoweb.org/ontology/core#description	Yes	Map	Special mapping for VIVO 1.1 application (not a real ontology change)
