@@ -31,7 +31,7 @@
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add roles for Jane Faculty</td>
+	<td class="comment">Add grant roles for Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
@@ -126,7 +126,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Co-principal Investigator role for Jane Faculty</td>
+	<td class="comment">Cancel out before adding Co-principal Investigator</td>
 	<td></td>
 </tr>
 <tr>
@@ -137,6 +137,56 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter invalid Co-principal Investigator role</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>NIH VIVO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add good Co-principal Investigator role</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,7 +251,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that Co-principal Investigator role is showing up</td>
+	<td class="comment">Verify Co-principal Investigator role is showing up</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,12 +271,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Principal Investigator role for Jane Faculty</td>
+	<td class="comment">Add second Co-principal Investigator role</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasPrincipalInvestigatorRole']/a</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -237,22 +287,17 @@
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>NIH</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>ui-active-menuitem</td>
-	<td></td>
+	<td>VIVO Cornell Grant</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>startYear</td>
-	<td>2010</td>
+	<td>2007</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>endYear</td>
-	<td>2011</td>
+	<td>2009</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -261,7 +306,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>NIH VIVO</td>
+	<td>VIVO Cornell Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -301,7 +346,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that Principal Investigator role is showing up</td>
+	<td class="comment">Verify both Co-principal Investigator roles are showing up</td>
 	<td></td>
 </tr>
 <tr>
@@ -311,17 +356,57 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010-2011</td>
+	<td>2009-2010</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasPrincipalInvestigatorRole']/ul/li/span/a</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2007-2009</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li[2]/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Investigator role for Jane Faculty</td>
+	<td class="comment">Cancel out before adding Investigator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasInvestigatorRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter invalid Investigator role</td>
 	<td></td>
 </tr>
 <tr>
@@ -337,12 +422,52 @@
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>DataStaR</td>
+	<td>VIVO Cornell Grant</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=(Verify this match)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>verifyMatchWindow</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add good Investigator role</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasInvestigatorRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>VIVO Cornell Grant</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>startYear</td>
-	<td>2008</td>
+	<td>2009</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -356,7 +481,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>DataStaR</td>
+	<td>VIVO Cornell Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -401,12 +526,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>DataStaR</td>
+	<td>VIVO Cornell Grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2008-2009</td>
+	<td>2009-2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -416,7 +541,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add second Principal investigator for Jane Faculty</td>
+	<td class="comment">Add Principal Investigator role</td>
 	<td></td>
 </tr>
 <tr>
@@ -432,12 +557,22 @@
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>Dat</td>
+	<td>NIH VIVO</td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>ui-active-menuitem</td>
 	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=(Verify this match)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>verifyMatchWindow</td>
+	<td>30000</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -451,7 +586,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>DataStaR</td>
+	<td>NIH VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,7 +631,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>DataStaR</td>
+	<td>NIH VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -506,7 +641,72 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasPrincipalInvestigatorRole']/ul/li[1]/span</td>
+	<td>//div[@id='hasPrincipalInvestigatorRole']/ul/li/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify that all grant roles are still there</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>NIH VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2007-2009</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009-2009</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='hasInvestigatorRole']/ul/li/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>NIH VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='hasPrincipalInvestigatorRole']/ul/li/span</td>
 	<td></td>
 </tr>
 <tr>
