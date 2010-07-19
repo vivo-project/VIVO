@@ -240,10 +240,11 @@ if (VitroRequestPrep.isSelfEditing(request) || LoginFormBean.loggedIn(request, L
                 </div> <!-- end dprop-vitro-links  -->
             </c:if>
 
-            <%-- Description --%>              
+            <%-- Description --%> 
+            <%--               
             <c:if test="${ showEdits || !empty entity.description}">
             	<c:if test="${not empty entity.description }">
-					<c:set var="editLinksForExisitngDesc"><edLnk:editLinks item="<%= VitroVocabulary.DESCRIPTION %>" data="${entity.description}" icons="false"/></c:set>
+					<c:set var="editLinksForExistingDesc"><edLnk:editLinks item="<%= VitroVocabulary.DESCRIPTION %>" data="${entity.description}" icons="false"/></c:set>
             	</c:if>
             	<c:set var="editLinksForNewDesc"><edLnk:editLinks item="<%= VitroVocabulary.DESCRIPTION %>" icons="false"/></c:set>            	
             	<c:set var="mayEditDesc" value="${showEdits && ((empty entity.description and not empty editLinksForNewDesc) or (not empty entity.description and not empty editLinksForExisitngDesc))}"/>
@@ -258,8 +259,8 @@ if (VitroRequestPrep.isSelfEditing(request) || LoginFormBean.loggedIn(request, L
                         <div class="datatypePropertyValue">
                             <div class="statementWrap">
                                 <div class="description"><p:process>${entity.description}</p:process></div>                                 
-                                <c:if test="${showEdits && !empty editLinksForExisitngDesc}">	                                    
-                                	<span class="editLinks">${editLinksForExisitngDesc}</span>                                                                     
+                                <c:if test="${showEdits && !empty editLinksForExistingDesc}">	                                    
+                                	<span class="editLinks">${editLinksForExistingDesc}</span>                                                                     
                                 </c:if> 
                             </div>
                         </div>
@@ -269,7 +270,7 @@ if (VitroRequestPrep.isSelfEditing(request) || LoginFormBean.loggedIn(request, L
             		</div>
             	</c:if>
             </c:if>
-                            
+            --%>                
             
             <%-- Ontology properties --%>
             <c:import url="${entityMergedPropsListJsp}">
