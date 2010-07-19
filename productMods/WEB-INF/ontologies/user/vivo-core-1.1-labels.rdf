@@ -252,7 +252,7 @@
     <rdfs:label xml:lang="en-US">Excerpt</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPublicationVenue">
-    <rdfs:label xml:lang="en-US">publishedIn</rdfs:label>
+    <rdfs:label xml:lang="en-US">published in</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#advisorIn">
     <rdfs:label xml:lang="en-US">advisor in</rdfs:label>
