@@ -111,22 +111,37 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
+	<td>Academic Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
 	<td>Article</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to Site Admin</td>
+	<td class="comment">Navigate to Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
+	<td>link=Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
@@ -135,63 +150,248 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='authorInAuthorship']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create a new publication entry for Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Article (bibo)</td>
+	<td>typeSelector</td>
+	<td>label=Academic Article</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>comment</td>
+	<td class="comment">Cancel out before adding anything</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
+	<td>click</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Enter article name and URL info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Name</td>
-	<td>Effect of Nintendo on Kids</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Url</td>
-	<td>http://cnn.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Anchor</td>
-	<td>CNN News Article</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td class="comment">Select to add an Article again</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that article has been added</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Create a new publication entry for Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Effect of Nintendo on Kids</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Effect of Nintendo on Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add more info to publication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='dprop-vitro-links']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Cancel out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Hit add button without entering anything</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='dprop-vitro-links']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This field must not be empty.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add with only URL field entered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>url</td>
+	<td>http://www.cnn.com/</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>anchor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>url</td>
+	<td>http://www.cnn.com/</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This field must not be empty.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add with only Link Anchor Text field entered</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>url</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>anchor</td>
+	<td>Special Report</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This field must not be empty.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>anchor</td>
+	<td>Special Report</td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Now add all required fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>url</td>
+	<td>http://www.cnn.com/</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>anchor</td>
+	<td>Special Report</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
 	<td>Effect of Nintendo on Kids</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>exact:bibo:Article</td>
+	<td>Special Report</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>(primary link)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='dprop-vitro-links']/ul/li/span/em</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
@@ -215,8 +415,143 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Academic Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='content']/div/ul[2]/li[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='content']/div/ul[2]/li[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify article shows up for Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Article</td>
+	<td>publication(s) within the last 10 years incomplete data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='pub_count_short_sparkline_vis']/table/tbody/tr/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>View all publications over career and co-author network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Effect of Nintendo on Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Academic Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='authorInAuthorship']/ul/li[1]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Find article via search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>search</td>
+	<td>nintendo</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>nintendo - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Effect of Nintendo on Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Academic Article </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='content']/div/ul/li</td>
 	<td></td>
 </tr>
 <tr>
