@@ -189,7 +189,7 @@
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear" ],
+    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear", "existingActivityLabel" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -332,7 +332,7 @@
 <h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
     

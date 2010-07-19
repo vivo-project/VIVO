@@ -126,10 +126,10 @@ var customForm = {
         this.requiredLegend.show();
         this.button.show();
         this.setButtonText('new');
-        this.setLabels();
-        this.cancel.unbind('click');     
+        this.setLabels(); 
            
         if( this.formSteps > 1 ){  // NB includes this.editMode == 1
+            this.cancel.unbind('click');   
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
@@ -142,11 +142,23 @@ var customForm = {
         var uri = this.acUriReceiver.val(), 
             label = this.acLabelReceiver.val();
         
-        if (uri) {
-            
+        // Call initFormFullView first, because showAutocompleteSelection needs
+        // acType, which is set in initFormFullView. 
+        this.initFormFullView();
+        
+        if (uri) {            
             this.showAutocompleteSelection(label, uri);
         }
-        this.initFormFullView();
+        
+        this.cancel.unbind('click');
+        this.cancel.click(function() {
+           // Cancel back to full view with only type selection showing
+           customForm.undoAutocompleteSelection();
+           customForm.clearFields(customForm.fullViewOnly);
+           customForm.initFormFullView(); 
+           return false;
+        });
+       
     },
     
     initFormEditView: function() {
