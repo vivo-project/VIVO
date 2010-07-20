@@ -21,7 +21,7 @@ var customForm = {
     // On page load, create references for easy access to form elements.
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function(){
-        
+
         this.form = $('#content form');
         this.fullViewOnly = $('.fullViewOnly');
         this.button = $('#submit');
@@ -84,7 +84,7 @@ var customForm = {
     },
 
     initFormView: function() {
-        
+      
         var typeVal = this.typeSelector.val();   
 
         if (this.findValidationErrors()) {
@@ -104,7 +104,7 @@ var customForm = {
     },
     
     initFormTypeView: function() {
-        
+
         this.setType(); // empty any previous values (perhaps not needed)
         this.hideFields(this.fullViewOnly);
         this.button.hide();
@@ -177,7 +177,7 @@ var customForm = {
     // Bind event listeners that persist over the life of the page. Event listeners
     // that depend on the view should be initialized in the view setup method.
     bindEventListeners: function() {
-        
+
         this.typeSelector.change(function() {
             var typeVal = $(this).val();
             
@@ -197,7 +197,7 @@ var customForm = {
     },
     
     initAutocomplete: function() {
-        
+
         if (this.editMode === 'edit') {
             return;
         }
@@ -220,7 +220,7 @@ var customForm = {
                     dataType: 'json',
                     data: {
                         term: request.term,
-                        type: customForm.acType,
+                        type: customForm.acType
                     },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
@@ -233,15 +233,13 @@ var customForm = {
                 });
             },
             select: function(event, ui) {
-                customForm.showAutocompleteSelection(ui.item.label, ui.item.uri);   
-                    
+                customForm.showAutocompleteSelection(ui.item.label, ui.item.uri);                     
             }
         });
-
     },
     
     getAcFilter: function() {
-        
+
         if (!this.sparqlForAcFilter) {
             //console.log('autocomplete filtering turned off');
             this.acFilter = null;
@@ -249,7 +247,7 @@ var customForm = {
         }
         
         //console.log("sparql for autocomplete filter: " + this.sparqlForAcFilter);
-        
+
         // Define this.acFilter here, so in case the sparql query fails
         // we don't get an error when referencing it later.
         this.acFilter = [];
@@ -268,6 +266,7 @@ var customForm = {
     },
     
     setAcFilter: function(data) {
+
         var key = data.head.vars[0];
         
         $.each(data.results.bindings, function() {
@@ -418,7 +417,7 @@ var customForm = {
         else {  
             this.button.val('Add ' + this.baseButtonText);
         } 
-    },
+    }
     
 };
 
