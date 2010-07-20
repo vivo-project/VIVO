@@ -137,11 +137,11 @@ public class VisualizationRequestHandler {
     			
     			try {
     				
-    				String thumbnailAccessURL = getThumnailInformation(
+    				String thumbnailAccessURL = getThumbnailInformation(
     																imageQueryHandler.getResultSet(),
     																fieldLabelToOutputFieldLabel);
     				
-    				System.out.println("thumnail access URL " + thumbnailAccessURL);
+    				System.out.println("thumbnail access URL " + thumbnailAccessURL);
     				prepareVisualizationQueryResponse(thumbnailAccessURL);
     				return;
     				
@@ -227,7 +227,7 @@ public class VisualizationRequestHandler {
 
 	}
 
-	private String getThumnailInformation(ResultSet resultSet, 
+	private String getThumbnailInformation(ResultSet resultSet, 
 												   Map<String, String> fieldLabelToOutputFieldLabel) {
 		
 		String finalThumbNailLocation = "";
