@@ -209,7 +209,6 @@ var addAuthorForm = {
     },
 
     setAcFilter: function() {
-
         var existingAuthors = $('#authorships .authorName'); 
         this.acFilter = [];
         
