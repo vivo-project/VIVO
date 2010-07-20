@@ -740,14 +740,6 @@ clear:both;
 display:none !important;
 }
 
-/* Fix IE6/7 bug: display:none alone doesn't override another display setting */
-.invisible {
-   display: none !important;
-   visibility: hidden;
-}
-
-
-
 
 /************************
 style for those with javascript disable
