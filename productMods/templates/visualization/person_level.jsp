@@ -148,9 +148,14 @@ table.sparkline_wrapper_table td, th {
 
 	<div style="clear:both;"></div>
 	
+	<c:choose>
+	<c:when test='${numOfAuthors > 0}'>
+	
 	<div id="incomplete-data">This information is based solely on publications which have been loaded into the VIVO system. 
 	This may only be a small sample of the person's total work. </div>
 	
+
+
 	<%-- Sparkline --%>
 		<h2 class="sub_headings">General Statistics</h2>
 			<div id="${egoPubSparklineContainerID}">
@@ -174,11 +179,16 @@ table.sparkline_wrapper_table td, th {
 		        </c:if>
 		        
 		        <span id="no_coauthorships">Currently there are no ${authorsText} papers for 
-		        	<span id="no_coauthorships_person" class="author_name">this author</span> in the VIVO database.</span>
+		        	<a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the VIVO database.</span>
 		    </c:otherwise>
 		</c:choose>
 		
-
+	</c:when>
+	<c:otherwise>
+		<span id="no_coauthorships">Currently there are no papers for <a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">
+		this author</span></a> in the VIVO database.</span>
+	</c:otherwise>
+	</c:choose>
 
 </div>	
 
