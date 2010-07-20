@@ -391,9 +391,7 @@ var addAuthorForm = {
                     alert('Reordering of authors failed.');                                 
                 } // What should we do if the reordering fails?
                 else {
-                }
-                
-                
+                }      
             }
         });           
     },

@@ -220,7 +220,7 @@ var customForm = {
                     dataType: 'json',
                     data: {
                         term: request.term,
-                        type: customForm.acType,
+                        type: customForm.acType
                     },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
@@ -418,7 +418,7 @@ var customForm = {
         else {  
             this.button.val('Add ' + this.baseButtonText);
         } 
-    },
+    }
     
 };
 
