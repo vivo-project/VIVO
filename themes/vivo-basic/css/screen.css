@@ -811,3 +811,9 @@ font-size:0.9em;
 margin-top:30px;
 margin-bottom:250px;
 }
+
+
+/* fix bad alignment in IE 6 and 7 */
+.or, .cancel{
+vertical-align:top;
+}
