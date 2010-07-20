@@ -1,187 +1,138 @@
 <rdf:RDF
-    xmlns:j.0="http://aims.fao.org/aos/geopolitical.owl#"
-    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
-    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
-    xmlns:core="http://vivoweb.org/ontology/core#"
-    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
-    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:bibo="http://purl.org/ontology/bibo/"
-    xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupaffiliation">
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Affiliations and other informal associations between people and organizations</vitro:publicDescriptionAnnot>
+    xmlns:j.0="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupaffiliation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Affiliations and other informal associations between people and organizations</j.0:publicDescriptionAnnot>
     <rdfs:label xml:lang="en-US">affiliation</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T09:47:01</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >30</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T09:47:01</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">30</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:label xml:lang="en-US">identity</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >properties holding unique and non-unique identifiers, names, and other identification information</vitro:publicDescriptionAnnot>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T09:16:01</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >200</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupaddress">
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">properties holding unique and non-unique identifiers, names, and other identification information</j.0:publicDescriptionAnnot>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T09:16:01</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">200</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupaddress">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">contact</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T09:15:07</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >properties related to postal and email addresses</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >120</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouplinks">
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >link relationships</vitro:publicDescriptionAnnot>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T09:15:07</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">properties related to postal and email addresses</j.0:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">120</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouplinks">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">link relationships</j.0:publicDescriptionAnnot>
     <rdfs:label xml:lang="en-US">links</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T14:00:43</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >99</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibliographic">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T14:00:43</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">99</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibliographic">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">publications</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T09:12:36</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >primary bibliographic properties of publications to prioritize in display</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >40</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouptopic">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T09:12:36</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">primary bibliographic properties of publications to prioritize in display</j.0:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">40</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouptopic">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">other</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T13:38:57</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >97</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupteaching">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T13:38:57</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">97</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupteaching">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:label xml:lang="en-US">teaching</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T15:37:48</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >60</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupresearch">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T15:37:48</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">60</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupresearch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:label xml:lang="en-US">research</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T15:30:25</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >50</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupoutreach">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T15:30:25</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupoutreach">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:label xml:lang="en-US">service</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T15:38:51</vitro:modTime>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >70</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupoverview">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T15:38:51</j.0:modTime>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">70</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupoverview">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-12T07:11:40</vitro:modTime>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-12T07:11:40</j.0:modTime>
     <rdfs:label xml:lang="en-US">overview</rdfs:label>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >10</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline">
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">related documents</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T16:50:29</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >reference information to online content, translations, etc.</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >190</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbiography">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T16:50:29</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reference information to online content, translations, etc.</j.0:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">190</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbiography">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">background</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T12:36:28</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >biographical information about a person, past or present</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >80</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupemployment">
-    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <rdfs:label xml:lang="en-US">employment</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T09:46:17</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Appointments and other formally-defined employment relationships</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >20</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibmapping">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T12:36:28</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">biographical information about a person, past or present</j.0:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">80</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibmapping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">bib mapping</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T21:12:31</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Bibliographic properties in other namespaces mapped within VIVO core</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >2033</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupmapping">
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T21:31:36</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Properties included in VIVO core to support mappings to other ontologies</vitro:publicDescriptionAnnot>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T21:12:31</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bibliographic properties in other namespaces mapped within VIVO core</j.0:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2033</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupmapping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T21:31:36</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Properties included in VIVO core to support mappings to other ontologies</j.0:publicDescriptionAnnot>
     <rdfs:label xml:lang="en-US">mapping</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >2034</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouptime">
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2034</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouptime">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
     <rdfs:label xml:lang="en-US">time</rdfs:label>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T13:54:45</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Dates and times for events, employment, etc.</vitro:publicDescriptionAnnot>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >195</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure">
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T13:54:45</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dates and times for events, employment, etc.</j.0:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">195</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:label xml:lang="en-US">additional document info</rdfs:label>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >obscure bibontology properties not likely to be used in VIVO</vitro:publicDescriptionAnnot>
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2010-01-10T16:55:11</vitro:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">obscure bibontology properties not likely to be used in VIVO</j.0:publicDescriptionAnnot>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-10T16:55:11</j.0:modTime>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >2032</vitro:displayRank>
-  </owl:Thing>
-  <owl:Thing rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouplocation">
-    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2009-12-28T13:05:00</vitro:modTime>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Relationships of place</vitro:publicDescriptionAnnot>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2032</j.0:displayRank>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology#vitroPropertyGrouplocation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <j.0:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-12-28T13:05:00</j.0:modTime>
+    <j.0:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationships of place</j.0:publicDescriptionAnnot>
     <rdfs:label xml:lang="en-US">location</rdfs:label>
     <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup"/>
-    <vitro:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-    >96</vitro:displayRank>
-  </owl:Thing>
+    <j.0:displayRank rdf:datatype="http://www.w3.org/2001/XMLSchema#int">96</j.0:displayRank>
+  </rdf:Description>
 </rdf:RDF>
