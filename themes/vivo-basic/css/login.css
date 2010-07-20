@@ -148,27 +148,28 @@ line-height:30px;
 	
 }
 
-##confirmationAlert   p{
+#confirmationAlert   p{
 padding-left:30px;
 font-size:0.9em;
 line-height:30px;
 	
 }
 
-
-
-
 .formFieldAlert{
 	border:2px solid #900;
-
 }
 
 .red{
 color:#900;	
 }
 
-
-
+/* In IE6/7, .hidden defined in screen.css doesn't override
+ * display: inline-block defined for #adminDashboard .pageBodyGroup,
+ * so define again with context selector here.
+ */
+#adminDashboard .pageBodyGroup.hidden {
+    display: none !important;   
+}
 
 p.passwordNote{
 margin:0;
