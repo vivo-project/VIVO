@@ -59,7 +59,6 @@ http://purl.org/NET/c4dm/event.owl#time		No	Delete	not set
 http://purl.org/ontology/bibo/argued		No	Delete	not set
 http://vivoweb.org/ontology/core#degreeStatus		No	Delete	not set
 http://vivoweb.org/ontology/core#type		No	Delete	not set
-http://vivoweb.org/ontology/core#role		No	Delete	not set
 http://vitro.mannlib.cornell.edu/ns/vitro/0.7#citation		No	Delete	not set	
 http://vivoweb.org/ontology/core#referencedPublicationCityName		No	Delete	not set
 http://vivoweb.org/ontology/core#referencedPublisherName		No	Delete	not set
@@ -138,4 +137,5 @@ http://vivoweb.org/ontology/core#educationalBackground	http://vivoweb.org/ontolo
 http://vivoweb.org/ontology/core#educationalBackgroundOf	http://vivoweb.org/ontology/core#educationalTrainingOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#memberOf	http://vivoweb.org/ontology/core#currentMemberOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasMember	http://vivoweb.org/ontology/core#hasCurrentMember	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#role	http://vivoweb.org/ontology/core#description	Yes	Map	Directly-changed
 http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	http://vivoweb.org/ontology/core#description	Yes	Map	Special mapping for VIVO 1.1 application (not a real ontology change)
