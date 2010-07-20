@@ -290,7 +290,7 @@ PREFIX core: <${vivoCore}>
         <v:input type="hidden" id="existingGrantLabel" name="existingGrantLabel" cssClass="acLabelReceiver" /> <%-- Needed iff we return from an invalid submission --%> 
     </div>
 
-    <h4>Dates of Participation in Grant</h4>
+    <h4>Years of Participation in Grant</h4>
     <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
     <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
                    

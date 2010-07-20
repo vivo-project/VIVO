@@ -63,6 +63,7 @@
 <c:set var="roleActivityType_optionsType" >${param.roleActivityType_optionsType}</c:set>
 <c:set var="roleActivityType_objectClassUri" >${param.roleActivityType_objectClassUri}</c:set> 
 <c:set var="roleActivityType_literalOptions" >${param.roleActivityType_literalOptions}</c:set>
+<c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
 
 <%
 
@@ -100,14 +101,29 @@
 <%-- label is required if we are doing an update --%> 
 <c:set var="labelRequired" ><%= request.getAttribute("objectUri")== null?"":"\"nonempty\","  %></c:set>
 
-<c:set var="startYearUri" value="${vivoCore}startYear" />
+<%-- 
+<c:choose>
+    <c:when test="${numDateFields == 1}">
+        <c:set var="startYearPredicate" value="${vivoCore}year" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="startYearPredicate" value="${vivoCore}startYear" />    
+    </c:otherwise>
+</c:choose>
+--%>
+<c:set var="startYearPredicate">
+    <c:choose>
+        <c:when test="${numDateFields == 1}">${vivoCore}year</c:when>
+        <c:otherwise>${vivoCore}startYear</c:otherwise>
+    </c:choose>
+</c:set>
 <v:jsonset var="startYearAssertion" >
-      ?role <${startYearUri}> ?startYear .
+      ?role <${startYearPredicate}> ?startYear .
 </v:jsonset>
 
-<c:set var="endYearUri" value="${vivoCore}endYear" /> 
+<c:set var="endYearPredicate" value="${vivoCore}endYear" /> 
 <v:jsonset var="endYearAssertion" >
-      ?role <${endYearUri}> ?endYear .
+      ?role <${endYearPredicate}> ?endYear .
 </v:jsonset>
 
 <v:jsonset var="roleLabelAssertion" >
@@ -144,13 +160,11 @@
 </v:jsonset>
 
 <v:jsonset var="startYearQuery">
-  PREFIX core: <${vivoCore}>  
-  SELECT ?existingStartYear WHERE { ?role  core:startYear ?existingStartYear .}       
+  SELECT ?existingStartYear WHERE { ?role  <${startYearPredicate}> ?existingStartYear .}       
 </v:jsonset>
 
 <v:jsonset var="endYearQuery">
-  PREFIX core: <${vivoCore}>  
-  SELECT ?existingStartYear WHERE { ?role  core:endYear ?existingStartYear .}
+  SELECT ?existingStartYear WHERE { ?role  <${endYearPredicate}> ?existingStartYear .}
 </v:jsonset>
 
 <v:jsonset var="activityQuery">
@@ -349,9 +363,17 @@
 
         <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
         
-        <h4 id="dateHeader">Dates of Participation in </h4>	   
-        <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
-        <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
+        <c:choose>
+            <c:when test="${numDateFields == 1}">
+                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
+            </c:when>
+            <c:otherwise>
+                <h4 id="dateHeader">Years of Participation in </h4>    
+                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
+                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
+            </c:otherwise>
+        </c:choose>
+ 
     </div>   
      
     <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true" /></p>
