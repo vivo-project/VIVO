@@ -110,13 +110,13 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
             <c:if test="${group.statementCount==0}"><c:set var="groupStyle" value="display: block"/></c:if>
 
 
-            	<%-- Getting the count of properties in each group --%>
+        <%-- Getting the count of properties in each group --%>
 				<c:set var="counter" value="0"/>
-            	<c:set var="propTotal" value="0"/>
+        <c:set var="propTotal" value="0"/>
 				<% int propTotal = g.getPropertyList().size(); %>
 				<c:set var="propTotal" value="<%=propTotal%>" />
 				
-            
+    <c:if test="${propTotal>0}">  
 			<div class="propsCategory" id="<%=g.getLocalName()%>">
 				<h3><strong><%=g.getName()%></strong></h3>
 				<div class="propsWrap">
@@ -148,6 +148,45 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
                             <div class="propsItem${first}${last}" id="${objProp.localName}">
                                 <h4>${objProp.editLabel}</h4>
 					    		<c:if test="${showSelfEdits || showCuratorEdits}"><edLnk:editLinks item="${objProp}" icons="false" /></c:if>
+					    		<%-- Verbose property display additions for object properties, using context variable verbosePropertyListing --%>
+                          <c:if test="${showCuratorEdits && verbosePropertyListing}">
+                              <c:url var="propertyEditLink" value="/propertyEdit">
+                                  <c:param name="home" value="${portal.portalId}"/>
+                                  <c:param name="uri" value="${objProp.URI}"/>
+                              </c:url>
+                              <c:choose>
+                                  <c:when test="${!empty objProp.hiddenFromDisplayBelowRoleLevel.label}"><c:set var="displayCue" value="${objProp.hiddenFromDisplayBelowRoleLevel.label}"/></c:when>
+                                  <c:otherwise><c:set var="displayCue" value="unspecified"/></c:otherwise>
+                              </c:choose>
+                              <c:choose>
+                                  <c:when test="${!empty objProp.prohibitedFromUpdateBelowRoleLevel.label}"><c:set var="updateCue" value="${objProp.prohibitedFromUpdateBelowRoleLevel.label}"/></c:when>
+                                  <c:otherwise><c:set var="updateCue" value="unspecified"/></c:otherwise>
+                              </c:choose>
+                              <c:choose>
+                                  <c:when test="${!empty objProp.localNameWithPrefix}"><c:set var="localName" value="${objProp.localNameWithPrefix}"/></c:when>
+                                  <c:otherwise><c:set var="localName" value="no local name"/></c:otherwise>
+                              </c:choose>
+                              <c:choose>
+                                  <c:when test="${!empty objProp.domainDisplayTier}"><c:set var="displayTier" value="${objProp.domainDisplayTier}"/></c:when>
+                                  <c:otherwise><c:set var="displayTier" value="blank"/></c:otherwise>
+                              </c:choose>
+                              <c:choose>
+                                  <c:when test="${!empty objProp.groupURI}">
+      <%                              PropertyGroup pg = pgDao.getGroupByURI(op.getGroupURI());
+                                      if (pg!=null && pg.getName()!=null) {
+                                          request.setAttribute("groupName",pg.getName());%>
+                                          <span class="verbosePropertyListing"><a class="propertyLink" href="${propertyEditLink}"/>${localName}</a> (object property); display tier ${displayTier} within group ${groupName}; display level: ${displayCue}; update level: ${updateCue}</span>
+      <%                              } else {%>
+                                          <span class="verbosePropertyListing"><a class="propertyLink" href="${propertyEditLink}"/>${localName}</a> (object property); display tier ${displayTier}; display level: ${displayCue}; update level: ${updateCue}</span>
+      <%                              } %>
+                                  </c:when>
+                                  <c:otherwise>
+                                      <span class="verbosePropertyListing"><a class="propertyLink" href="${propertyEditLink}"/>${localName}</a> (object property); display tier ${displayTier}; display level: ${displayCue}; update level: ${updateCue}</span>
+                                  </c:otherwise>
+                              </c:choose>
+                          </c:if>
+        					<%-- end Verbose property display additions for object properties --%>
+					    		
 	    						<c:set var="displayLimit" value="${objProp.domainDisplayLimit}"/>
 
 								<c:if test="${displayLimit<0}">
@@ -221,6 +260,46 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
                                     </c:otherwise>
                                 </c:choose>
                             </c:if>
+                            
+                            <%-- Verbose property display additions for data properties, using context variable verbosePropertyListing --%>
+                	                <c:if test="${showCuratorEdits && verbosePropertyListing}">
+                	                    <c:url var="propertyEditLink" value="/datapropEdit">
+                	                        <c:param name="home" value="${portal.portalId}"/>
+                	                        <c:param name="uri" value="${dataProp.URI}"/>
+                	                    </c:url>
+                	                    <c:choose>
+                	                        <c:when test="${!empty dataProp.hiddenFromDisplayBelowRoleLevel.label}"><c:set var="displayCue" value="${dataProp.hiddenFromDisplayBelowRoleLevel.label}"/></c:when>
+                	                        <c:otherwise><c:set var="displayCue" value="unspecified"/></c:otherwise>
+                	                    </c:choose>
+                	                    <c:choose>
+                	                        <c:when test="${!empty dataProp.prohibitedFromUpdateBelowRoleLevel.label}"><c:set var="updateCue" value="${dataProp.prohibitedFromUpdateBelowRoleLevel.label}"/></c:when>
+                	                        <c:otherwise><c:set var="updateCue" value="unspecified"/></c:otherwise>
+                	                    </c:choose>
+                	                    <c:choose>
+                	                        <c:when test="${!empty dataProp.localNameWithPrefix}"><c:set var="localName" value="${dataProp.localNameWithPrefix}"/></c:when>
+                	                        <c:otherwise><c:set var="localName" value="no local name"/></c:otherwise>
+                	                    </c:choose>
+                	                    <c:choose>
+                	                        <c:when test="${!empty dataProp.displayTier}"><c:set var="displayTier" value="${dataProp.displayTier}"/></c:when>
+                	                        <c:otherwise><c:set var="displayTier" value="blank"/></c:otherwise>
+                	                    </c:choose>
+                	                    <c:choose>
+                	                        <c:when test="${!empty dataProp.groupURI}">
+                	<%                          PropertyGroup pg = pgDao.getGroupByURI(dp.getGroupURI());
+                	                            if (pg!=null && pg.getName()!=null) {
+                	                                request.setAttribute("groupName",pg.getName());%>
+                	                                <span class="verbosePropertyListing"><a class="propertyLink" href="${propertyEditLink}"/>${localName}</a> (data property); display tier ${displayTier} within group ${groupName}; display level: ${displayCue}; update level: ${updateCue}</span>
+                	<%                          } else {%>
+                	                                <span class="verbosePropertyListing"><a class="propertyLink" href="${propertyEditLink}"/>${localName}</a> (data property); display tier ${displayTier}; display level: ${displayCue}; update level: ${updateCue}</span>
+                	<%                          } %>
+                	                        </c:when>
+                	                        <c:otherwise>
+                	                            <span class="verbosePropertyListing"><a class="propertyLink" href="${propertyEditLink}"/>${localName}</a> (data property); display tier ${displayTier}; display level: ${displayCue}; update level: ${updateCue}</span>
+                	                        </c:otherwise>
+                	                    </c:choose>
+                	                </c:if>
+                	                <%-- end Verbose property display additions for data properties --%>
+                            
                             <c:if test="${displayLimit<0}">
                             	<%-- set to an arbitrary but high positive limit if unset on property, i.e. -1 --%>
                                 <c:set var="displayLimit" value="32"/>
@@ -285,6 +364,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 				%>
 				</div><!-- propsWrap -->
 			</div><!-- class="propsCategory" -->
+		</c:if>
 			<c:if test="${showSelfEdits || showCuratorEdits}">
 		    	<a class="backToTop" href="#wrap" title="jump to top of the page">back to top</a>
 			</c:if>

@@ -224,7 +224,6 @@ img.screenshot {
 }
 
 #personWrap div.propsCategory div.propsItem { /* being more specific here to leave borders off ungrouped (single) properties */
-
 /*    border-top: 1px solid #fff;*/
 /*    border-bottom: 1px solid #f0ede4;*/
     border-bottom: 1px solid #f2f2f2;
