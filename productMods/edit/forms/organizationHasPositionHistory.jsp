@@ -60,7 +60,7 @@
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
 <v:jsonset var="personUriExisting" >      
 	SELECT ?existingPersonUri WHERE {
-		?positionUri <http://vivoweb.org/ontology/core#???> ?existingPersonUri }
+		?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?existingPersonUri }
 </v:jsonset>
 <v:jsonset var="personUriAssertion" >      
 	?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?personUri .
