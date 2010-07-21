@@ -237,12 +237,12 @@ PREFIX core: <${vivoCore}>
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { 
         editConfig.prepareForObjPropUpdate(model);
+        // Return browser to person individual after editing an existing role.
     } else { 
         editConfig.prepareForNonUpdate(model);
+        // Return the browser to the new activity entity after adding a new role.
+        editConfig.setEntityToReturnTo("?grant");
     }
-    
-    //this will return the browser to the new grant entity after an edit.
-    editConfig.setEntityToReturnTo("?grant");
     
     String subjectUri = vreq.getParameter("subjectUri");       
   
