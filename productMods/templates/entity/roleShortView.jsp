@@ -21,9 +21,7 @@
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
  		<c:choose>
 			<c:when test="${!empty predicateUri}">
-			
-				<c:set var="roleLabel" value="${! empty param.roleLabelForPerson ? param.roleLabelForPerson : individual.name}"/>
-				
+											
 			    <%-- get years off role --%>
 				<c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
                 <c:if test="${not empty startYear}">
@@ -39,10 +37,11 @@
 					    <c:choose>
                             <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn']}">
 					            <c:set var="roleActivity" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn'].objectPropertyStatements[0].object}" />
-					            <c:set var="name"  value="${roleActivity.name}"/> 
+					            <c:set var="name"  value="${roleActivity.name}"/> 					            
 					            <%-- On the person page, it's redundant to display the role label in this case, since the object property
 					            label contains the same information. --%>
-					            <c:set var="label" value="${! empty param.roleLabelForPerson ? '' : individual.name}" /> 
+					            <c:set var="label" value="${! empty param.roleLabelForPerson ? '' : (! empty individual.rdfsLabel ? individual.rdfsLabel: '')}" /> 
+					            					            
                                 <c:set var="uri" value="${roleActivity.URI}"/>                                                                
                             </c:when>
  				            <c:otherwise><%-- this Role is not linked to anything yet; use name as a placeholder and add link to the Role so user can add more information --%>
@@ -68,7 +67,7 @@
 				    		<c:when test="${!empty individual.objectPropertyMap[ param.roleToPersonPredicate ]}">				    		
 				    		    <c:set var="person" value="${individual.objectPropertyMap[ param.roleToPersonPredicate ].objectPropertyStatements[0].object}" />
 					    		<c:set var="name" value="${person.name}"/>
-					    		<c:set var="label" value="${roleLabel}" />
+					            <c:set var="label" value="${! empty individual.rdfsLabel ? individual.rdfsLabel :(! empty param.roleLabelForPerson ? param.roleLabelForPerson : '' )}"/>					    							    		
                                 <c:set var="uri" value="${person.URI}"/>
 					    	</c:when>					    						    	
 					    	
