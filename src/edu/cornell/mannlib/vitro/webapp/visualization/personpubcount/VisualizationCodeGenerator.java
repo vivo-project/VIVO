@@ -488,15 +488,8 @@ public class VisualizationCodeGenerator {
 		} else {
 			visualizationContextCode = generateFullVisContext();
 		}
-		
-		
-		
-		
-		
 
-//		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		log.debug(visualizationContextCode);
-//		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
 		return visualizationContextCode;
 	}

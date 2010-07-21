@@ -136,8 +136,8 @@ function setProfileMoniker(monikerContainerID, moniker, doEllipsis) {
 
 }
 
-function setProfileName(nameContainerID, name) {
-
+function setProfileName(nameContainerID, name, doNameEllipsis) {
+	
 	if (nameContainerID == "") {
 		return;
 	}
@@ -147,8 +147,20 @@ function setProfileName(nameContainerID, name) {
 		return;
 	}
 
-	$("#" + nameContainerID).empty().text(name);
-
+	var finalDisplayName;
+	
+	if (name.length > 30 && doNameEllipsis) {
+		
+		finalDisplayName = name.substr(0,30) + "...";
+		
+	} else {
+		
+		finalDisplayName = name;
+		
+	}
+	
+	$("#" + nameContainerID).empty().text(finalDisplayName);
+	$("#" + nameContainerID).attr('title', name);
 
 }
 
@@ -156,8 +168,8 @@ function processProfileInformation(nameContainerID,
 		monikerContainerID,
 		imageContainerID,
 		profileInfoJSON,
-		doMonikerEllipsis) {
-
+		doMonikerEllipsis,
+		doNameEllipsis) {
 
 	var name, mainImageURL, imageContextPath, moniker;
 
@@ -183,7 +195,7 @@ function processProfileInformation(nameContainerID,
 
 	});
 
-	setProfileName(nameContainerID, name);
+	setProfileName(nameContainerID, name, doNameEllipsis);
 	setProfileMoniker(monikerContainerID, moniker, doMonikerEllipsis);
 	setProfileImage(imageContainerID, mainImageURL, imageContextPath);
 
@@ -240,7 +252,6 @@ function nodeClickedJS(json){
 	var obj = jQuery.parseJSON(json);
 
 	$("#dataPanel").attr("style","visibility:visible");
-	$("#authorName").empty().append(obj.name);
 	$("#works").empty().append(obj.number_of_authored_works);
 
 	/*
@@ -264,10 +275,11 @@ function nodeClickedJS(json){
 		
 		$("#profileUrl").attr("href", getWellFormedURLs(obj.url, "profile"));
 		$("#coAuthorshipVisUrl").attr("href", getWellFormedURLs(obj.url, "coauthorship"));
-		processProfileInformation("", 
+		processProfileInformation("authorName", 
 				"profileMoniker",
 				"profileImage",
 				jQuery.parseJSON(getWellFormedURLs(obj.url, "profile_info")),
+				true,
 				true);
 		
 		
@@ -276,8 +288,6 @@ function nodeClickedJS(json){
 		$("#profileUrl").attr("href","#");
 		$("#coAuthorshipVisUrl").attr("href","#");
 	}
-
-	$("#coAuthorName").empty().append(obj.name);	
 
 	$("#coAuthors").empty().append(obj.num_coauthors);	
 	
@@ -329,7 +339,7 @@ function renderCoAuthorshipVisualization() {
 				"src", swfLink,
 				"flashVars", "graphmlUrl=" + egoCoAuthorshipDataFeederURL,			
 				"width", "600",
-				"height", "790",
+				"height", "805",
 				"align", "top",
 				"id", "CoAuthor",
 				"quality", "high",
