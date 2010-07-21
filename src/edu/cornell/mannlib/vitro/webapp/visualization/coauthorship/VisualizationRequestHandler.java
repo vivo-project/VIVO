@@ -306,15 +306,10 @@ public class VisualizationRequestHandler {
 
         Portal portal = vreq.getPortal();
 
-//        request.setAttribute("visContentCode", visContentCode);
-//        request.setAttribute("visContextCode", visContextCode);
-
         request.setAttribute("egoURIParam", egoURIParam);
         
         request.setAttribute("bodyJsp", "/templates/visualization/co_authorship.jsp");
         request.setAttribute("portalBean", portal);
-//        request.setAttribute("title", "Individual Publication Count Visualization");
-//        request.setAttribute("scripts", "/templates/visualization/visualization_scripts.jsp");
 
 	}
 

@@ -204,7 +204,7 @@ function createTable(tableID, tableContainer, tableData) {
 	var table = $('<table>');
 	table.attr('id', tableID);
 	
-	table.append($('<caption>').html("Co-Authors <a href=\"" + egoCoAuthorsListDataFileURL + "\">(.CSV File)</a>"));  
+	table.append($('<caption>').html("Co-authors <a href=\"" + egoCoAuthorsListDataFileURL + "\">(.CSV File)</a>"));  
 	
 	var header = $('<thead>');
 	
