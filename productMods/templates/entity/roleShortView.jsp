@@ -17,6 +17,7 @@
  roleActivityLabel: human readable label of activity used for error messages   
  --%>
  
+<c:set var="errorMsg" value=""/>
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
  		<c:choose>
@@ -40,21 +41,16 @@
 					            <c:set var="name"  value="${roleActivity.name}"/> 					            
 					            <%-- On the person page, it's redundant to display the role label in this case, since the object property
 					            label contains the same information. --%>
-					            <c:set var="label" value="${! empty param.roleLabelForPerson ? '' : (! empty individual.rdfsLabel ? individual.rdfsLabel: '')}" /> 
-					            					            
+					            <c:set var="label" value="${! empty param.roleLabelForPerson ? '' : (! empty individual.rdfsLabel ? individual.rdfsLabel: '')}" /> 					            					           
                                 <c:set var="uri" value="${roleActivity.URI}"/>                                                                
                             </c:when>
- 				            <c:otherwise><%-- this Role is not linked to anything yet; use name as a placeholder and add link to the Role so user can add more information --%>
- 				                <c:choose>
- 				                    <c:when test="${!empty individual.name}"> 				                    	
- 				                        <c:set var="name" value="${individual.name}"/>
- 				                    </c:when>
- 				                    <c:otherwise>
-                                        <c:set var="name" value="unlabeled role"/>
-                                    </c:otherwise>
- 				                </c:choose>
-                                <c:set var="label" >(no ${param.roleActivityLabel} linked yet)</c:set>
-                                <c:set var="uri" value="${individual.URI}"/>
+ 				            <c:otherwise>
+ 				            <%-- This Role is not linked to anything yet; use name as a placeholder and 
+ 				                 add link to the Role so user can add more information. --%> 				                 				                     				                    
+								<c:set var="name" value="unknown"/>
+ 				                <c:set var="errorMsg" value="&nbsp;(unidentified activity - please edit)"/>
+ 				                <c:set var="label" value="${! empty individual.rdfsLabel ? individual.rdfsLabel:'unlabeled role'}"/>
+                                <c:set var="uri" value=""/>
 				            </c:otherwise>
 				        </c:choose>
 				    </c:when>
@@ -76,9 +72,11 @@
                                 <c:choose>
                                     <c:when test="${!empty individual.name}"><c:set var="name" value="${individual.name}"/></c:when>
                                     <c:otherwise><c:set var="name" value="unlabeled ${param.roleActivityLabel} to person relation"/></c:otherwise>
-                               </c:choose>                    
-                               <c:set var="label" value="(no person linked yet)"/>
-                               <c:set var="uri" value="${individual.URI}"/>
+                               </c:choose>
+                               <c:set var="name" value="unknown person"/>
+                               <c:set var="label" value="${!empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabled param.roleActivityLabel to person relation' }"/>                   
+                               <c:set var="errorMsg" value="&nbsp;(unidentified person - please edit)"/>
+                               <c:set var="uri" value=""/>
 					        </c:otherwise>
 					    </c:choose>
 					</c:when>
@@ -90,14 +88,19 @@
 				    </c:otherwise>
 			    </c:choose>
 			    
+			    <%-- only show error messages if logged in --%>
+			    <c:if test="${ ! showSelfEdits}">
+			       <c:set var="errorMsg" value=""/>
+			    </c:if>
+			    
 			    <%-- output the actual html --%>
 			    <c:choose>
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
-		                <a href="<c:out value="${olink}"/>">${name}</a>&nbsp;${label}&nbsp;${startYear}${endYear}
+		                <a href="<c:out value="${olink}"/>">${name}</a>&nbsp;${label}&nbsp;${startYear}${endYear} ${errorMsg}
 		            </c:when>
 		            <c:otherwise>
-		                <p:process><strong>${name}</strong> ${label}</p:process> 
+		                <p:process><strong>${name}</strong> ${label}</p:process> ${errorMsg}
 		            </c:otherwise>
 		        </c:choose>
 		        
