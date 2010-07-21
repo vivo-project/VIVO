@@ -85,13 +85,16 @@ var customForm = {
 
     initFormView: function() {
       
-        var typeVal = this.typeSelector.val();   
-
-        if (this.findValidationErrors()) {
-            this.initFormWithValidationErrors();
-            //this.initFormFullView();
+        var typeVal = this.typeSelector.val();  
+        
+        // Put this case first, because in edit mode with
+        // validation errors we just want initFormFullView.
+        if (this.editMode == 'edit') {
+            this.initFormFullView();
         }
-        // this.formSteps == 1 includes edit mode.
+        else if (this.findValidationErrors()) {
+            this.initFormWithValidationErrors();
+        }
         // If type is already selected when the page loads (Firefox retains value
         // on a refresh), go directly to full view. Otherwise user has to reselect
         // twice to get to full view.        
