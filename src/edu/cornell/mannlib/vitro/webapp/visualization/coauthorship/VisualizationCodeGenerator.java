@@ -430,7 +430,7 @@ public class VisualizationCodeGenerator {
 				"sparklineImgTD.attr('class', '" + visualizationStyleClass + "');" +
 				"row.append(sparklineImgTD);" +
 				"var sparklineNumberTD = $('<td>');" +
-				"sparklineNumberTD.attr('width', '5');" +
+				"sparklineNumberTD.attr('width', '30');" +
 				"sparklineNumberTD.attr('align', 'right');" +
 				"sparklineNumberTD.attr('class', 'sparkline_number');" +
 				"row.append(sparklineNumberTD);" +
