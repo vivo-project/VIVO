@@ -185,11 +185,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
 	<td>NIH VIVO</td>
