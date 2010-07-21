@@ -2,28 +2,15 @@
 
 /* styles for log in */
 #formLogin{
-	width:600px;
-	padding:0px;
-	margin:0px;
+	padding:0;
+	margin:0;
 	text-align:left;
 	background-color:#FFF;
-	
-	
 }
-
-.noOutterBox{
-	width:340px;
-	padding:0px;
-	border: none;
-	margin:0px;
-	
-	
-}
-
 #formLogin h2 {
 font-size:1.3em;
 line-height:1em;
-margin-top:0px;
+margin-top:0;
 margin-bottom:1em;
 color:#111;
 }
@@ -32,7 +19,7 @@ color:#111;
 #formLogin h6 {
 font-size:1.2em;
 line-height:1em;
-margin-top:0px;
+margin-top:0;
 margin-bottom:1em;
 color:#111;
 }
@@ -104,7 +91,7 @@ margin-bottom: 1em;
 
 #errorAlert{
 	color:#900;
-	padding:0px;
+	padding:0;
 	margin-bottom:5px;
 	
 	height:30px;
@@ -129,30 +116,24 @@ line-height:30px;
 }
 
 
-##confirmationAlert {
+#confirmationAlert {
 	color:#169f43;
-	padding:0px;
+	padding:0;
 	margin-bottom:5px;
-	
 	height:30px;
-	
 }
 
-
-##confirmationAlert  img{
+#confirmationAlert  img{
 	float:left;
 	margin:0;
 	padding:0;
 	vertical-align:middle;
-	
-	
 }
 
 #confirmationAlert   p{
-padding-left:30px;
-font-size:0.9em;
-line-height:30px;
-	
+	padding-left:30px;
+	font-size:0.9em;
+	line-height:30px;
 }
 
 .formFieldAlert{
@@ -160,7 +141,7 @@ line-height:30px;
 }
 
 .red{
-color:#900;	
+	color:#900;	
 }
 
 /* In IE6/7, .hidden defined in screen.css doesn't override
@@ -172,11 +153,11 @@ color:#900;
 }
 
 p.passwordNote{
-margin:0;
-padding:0;
-margin-top:-8px;
-font-size:0.8em;
-color:#615e5e;	
+	margin:0;
+	padding:0;
+	margin-top:-8px;
+	font-size:0.8em;
+	color:#615e5e;	
 }
 
 
