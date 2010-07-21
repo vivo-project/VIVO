@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
@@ -252,9 +253,12 @@ public class VisualizationRequestHandler {
 		
 		StringBuilder coAuthorsMerged = new StringBuilder();
 		
+		String coAuthorSeparator = "; ";
 		for (Node currCoAuthor : coAuthors) {
-			coAuthorsMerged.append(currCoAuthor.getNodeName() + "; ");
+			coAuthorsMerged.append(currCoAuthor.getNodeName() + coAuthorSeparator);
 		}
+		
+		StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);
 		
 		return coAuthorsMerged.toString();
 	}
