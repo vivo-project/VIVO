@@ -258,9 +258,7 @@ public class VisualizationRequestHandler {
 			coAuthorsMerged.append(currCoAuthor.getNodeName() + coAuthorSeparator);
 		}
 		
-		StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);
-		
-		return coAuthorsMerged.toString();
+		return StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);
 	}
 	
 	private Map<String, Set<Node>> getCoAuthorsStats(VisVOContainer authorNodesAndEdges) {

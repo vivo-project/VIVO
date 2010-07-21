@@ -251,13 +251,13 @@ function nodeClickedJS(json){
 		if (obj.url == egoURI) {
 			
 			$("#authorName").addClass('author_name').removeClass('neutral_author_name');
-			$('#num_works > .author_stats_text').text('Work(s)');
+			$('#num_works > .author_stats_text').text('Publication(s)');
 			$('#num_authors > .author_stats_text').text('Co-author(s)');
 			
 		} else {
 
 			$("#authorName").addClass('neutral_author_name').removeClass('author_name');
-			$('#num_works > .author_stats_text').text('Joint Work(s)');
+			$('#num_works > .author_stats_text').text('Joint Publication(s)');
 			$('#num_authors > .author_stats_text').text('Joint Co-author(s)');
 			
 		}

@@ -602,9 +602,7 @@ public class VisualizationCodeGenerator {
 							+ "=" + URLEncoder.encode(VisualizationFrameworkConstants.STANDALONE_RENDER_MODE_URL_VALUE, 
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 			
-			System.out.println("context parth full n/w " + contextPath);
-			
-			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all publications over career and co-author network</a><br />";
+			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO publications and corresponding co-author network</a>.<br />";
 			
 			valueObjectContainer.setFullTimelineNetworkLink(fullTimelineNetworkURL);
 			
