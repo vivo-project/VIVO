@@ -216,7 +216,7 @@ table.sparkline_wrapper_table td, th {
 		<div class="italicize"><span id="profileMoniker" class="author_moniker"></span></div>
 		<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
 		<br />
-		<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;<span class="author_stats_text">Work(s)</span></div>
+		<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;<span class="author_stats_text">Publication(s)</span></div>
 		<div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>&nbsp;&nbsp;<span class="author_stats_text">Co-author(s)</span></div>
 		
 		<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
