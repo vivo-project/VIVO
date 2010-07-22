@@ -212,6 +212,8 @@ function visLoaded(nodes){
 }
 
 function createTable(tableID, tableContainer, tableData) {
+	
+	console.log(tableData);
 
 	var table = $('<table>');
 	table.attr('id', tableID);
@@ -236,7 +238,7 @@ function createTable(tableID, tableContainer, tableData) {
 
 		var row = $('<tr>'); 
 
-		row.append($('<td>').html(item.name));
+		row.append($('<td>').html(item.label));
 		row.append($('<td>').html(item.number_of_authored_works));
 
 		table.append(row);
