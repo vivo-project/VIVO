@@ -235,10 +235,10 @@ public class VisualizationRequestHandler {
 		* To make sure that null/empty records for author names do not cause any mischief.
 		* */
 		if (authorName == null) {
-		authorName = "";
+		authorName = "author";
 		}
 		
-		String outputFileName = UtilityFunctions.slugify(authorName) + "pub-count-sparkline" + ".csv";
+		String outputFileName = UtilityFunctions.slugify(authorName) + "_publications-per-year" + ".csv";
 		
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition","attachment;filename=" + outputFileName);
