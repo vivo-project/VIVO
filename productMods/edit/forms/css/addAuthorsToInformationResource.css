@@ -20,9 +20,7 @@
     width: 15em;
 }
 
-#authorships.dd .authorNameWrapper,
-#authorships.dd li,
-#authorships.dd span.authorName {
+#authorships.dd li {
     cursor: move;
 }
 
