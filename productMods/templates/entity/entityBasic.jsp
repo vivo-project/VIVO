@@ -160,8 +160,8 @@ if (VitroRequestPrep.isSelfEditing(request) || LoginFormBean.loggedIn(request, L
 	                    <div class="datatypeProperties">
 	                        <div class="datatypePropertyValue">
 	                            <div class="statementWrap thumbnail">
-	                                <a class="image" href="<c:url value='${entity.imageUrl}'/>">
-                                        <img src="<c:url value='${entity.thumbUrl}'/>" 
+	                                <a class="image" href="${pageContext.request.contextPath}${entity.imageUrl}">
+                                        <img src="${pageContext.request.contextPath}${entity.thumbUrl}" 
                                                 title="click to view larger image" 
                                                 alt="" width="115"/>
 	                                </a>
