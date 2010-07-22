@@ -1,9 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 /* styles for uploading a picture */
+
 #photoUploadContainer{
 	margin-left: 0px;
-	width:720px;
 	height:280px;
 	background:#fff;
 	padding:15px;
@@ -134,12 +134,12 @@ color:#FF7700;
 }
 
 a.cancelUpload:hover {
-color:#FFF;
-background-color:#FF7700;
+	color:#FFF;
+	background-color:#FF7700;
 }
 
 a.cancelUpload:active {
-color:#FF7700;
+	color:#FF7700;
 }
 .or{
 	display:inline;
