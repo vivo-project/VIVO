@@ -253,6 +253,7 @@ SPARQL queries for existing values. --%>
       
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
+                                                                "/js/browserUtils.js",
                                                                 "/edit/forms/js/addAuthorsToInformationResource.js"
                                                                ));            
     request.setAttribute("customJs", customJs);
@@ -287,6 +288,9 @@ SPARQL queries for existing values. --%>
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE ON THIS PAGE WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <h2>${title}</h2>
 
+<%@ include file="unsupportedBrowserMessage.jsp" %>
+
+<div class="noIE67">
 <h3>Manage Authors</h3>
 
 <ul id="authorships" <%= ulClass %>>
@@ -403,6 +407,7 @@ SPARQL queries for existing values. --%>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
+</div>
 
 <c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
 <c:url var="reorderUrl" value="/edit/primitiveRdfEdit" />

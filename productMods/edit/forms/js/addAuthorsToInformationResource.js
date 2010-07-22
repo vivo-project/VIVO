@@ -5,11 +5,15 @@ var addAuthorForm = {
     /* *** Initial page setup *** */
    
     onLoad: function() {
+        
+        if (this.disableFormInUnsupportedBrowsers()) {
+            return;
+        }        
 		this.mixIn();
         this.initObjects();                 
         this.initPage();       
     },
-
+    
     mixIn: function() {
     	// Mix in the custom form utility methods
         $.extend(this, vitro.customFormUtils);
@@ -192,6 +196,8 @@ var addAuthorForm = {
 
                 });
             },
+            // Select event not triggered in IE6/7 when selecting with enter key rather
+            // than mouse.
             select: function(event, ui) {
                 addAuthorForm.showSelectedAuthor(ui);      
             }
@@ -439,13 +445,15 @@ var addAuthorForm = {
     		addAuthorForm.onLastNameChange();
     	});
     	    	
-    	// When hitting enter in last name field, if not an autocomplete
-    	// selection, show first and middle name fields.
+    	// When hitting enter in last name field, show first and middle name fields.
+        // NB This event fires when selecting an autocomplete suggestion with the enter
+        // key, and there's no way to prevent it. Since it fires first, we undo its
+        // effects in the ac select event listener.
     	this.lastNameField.keydown(function(event) {
-    		if (event.keyCode === 13) {
-    		    addAuthorForm.onLastNameChange();
-    			return false; // don't submit form
-    		}
+            if (event.which === 13) {
+                addAuthorForm.onLastNameChange();
+                return false; // don't submit form
+            }
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
