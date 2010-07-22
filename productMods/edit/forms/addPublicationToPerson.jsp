@@ -229,7 +229,7 @@ SPARQL queries for existing values. --%>
 
 <h2>Create a new publication entry for <%= subjectName %></h2>
 
-<%@ include file="unsupportedBrowserMessage.jsp" %
+<%@ include file="unsupportedBrowserMessage.jsp" %>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addPublicationForm" class="noIE67"  action="<c:url value="/edit/processRdfForm2.jsp"/>" >

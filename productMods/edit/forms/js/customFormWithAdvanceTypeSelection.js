@@ -21,7 +21,7 @@ var customForm = {
         if (this.disableWrapper.length) {
             if (vitro.browserUtils.isIELessThan8()) {
                 this.disableWrapper.show();
-                $('form.noIE67').hide();
+                $('.noIE67').hide();
                 return true;
             }
         }            
