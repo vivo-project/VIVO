@@ -1,9 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 /* styles for uploading a picture */
+
 #photoUploadContainer{
 	margin-left: 0px;
-	width:500px;
 	height:280px;
 	background:#fff;
 	padding:15px;
@@ -31,6 +31,8 @@
 	padding-left:15px;
 	
 }
+
+
 
 #photoUploadForm form label{
 	display:block;
@@ -91,7 +93,7 @@
 
 #photoDeletingContainer{
 	margin-left: 0px;
-	width:500px;
+	width:720px;
 	height:330px;
 	background:#fff;
 	border:1px solid grey;
@@ -103,7 +105,6 @@
 	color:#900;
 	padding:0px;
 	margin-bottom:5px;
-	
 	height:30px;
 	
 }
@@ -113,15 +114,14 @@
 	float:left;
 	margin:0;
 	padding:0;
-	vertical-align:middle;
-	
-	
+	vertical-align:middle;	
 }
 
 #errorAlert  p{
 padding-left:35px;
 font-size:0.9em;
 line-height:30px;
+
 	
 }
 
@@ -134,12 +134,16 @@ color:#FF7700;
 }
 
 a.cancelUpload:hover {
-color:#FFF;
-background-color:#FF7700;
+	color:#FFF;
+	background-color:#FF7700;
 }
 
 a.cancelUpload:active {
-color:#FF7700;
+	color:#FF7700;
+}
+.or{
+	display:inline;
+	vertical-align:middle;
 }
 
 

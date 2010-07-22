@@ -104,3 +104,7 @@ option {
     width: 30%;
 }
 
+/* fix bad alignment in IE 6 and 7 */
+.or, .cancel{
+vertical-align:top;
+}
