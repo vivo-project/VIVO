@@ -136,12 +136,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Frank Furter</td>
+	<td>link=Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Frank Furter</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Frank Furter</td>
+	<td>Create a new publication entry for Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +186,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to add an Article again</td>
+	<td class="comment">Select to add an Article again, this time without a title</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,7 +196,52 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Frank Furter</td>
+	<td>Create a new publication entry for Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Must specify a publication title.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Select to add an Article again, this time do it right</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create a new publication entry for Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -391,7 +436,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Frank Furter</td>
+	<td>link=Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -415,13 +460,63 @@
 	<td></td>
 </tr>
 <tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Academic Article</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='content']/div/ul[2]/li[1]</td>
+	<td>verifyTextPresent</td>
+	<td>Academic Article (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -430,8 +525,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='content']/div/ul[2]/li[2]</td>
+	<td>verifyTextPresent</td>
+	<td>Article (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -451,7 +546,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Frank Furter</td>
+	<td>link=Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -481,7 +576,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Frank Furter</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -495,8 +590,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=View all VIVO publications and corresponding co-author network</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>View all publications over career and co-author network</td>
+	<td>View all VIVO publications and corresponding co-author network.</td>
 	<td></td>
 </tr>
 <tr>
@@ -546,7 +646,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Academic Article </td>
+	<td>Academic Article</td>
 	<td></td>
 </tr>
 <tr>
