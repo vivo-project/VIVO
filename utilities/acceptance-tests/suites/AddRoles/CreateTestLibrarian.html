@@ -105,8 +105,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Lily Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Lily</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Librarian</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Edit Jane Faculty to add title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
 	<td></td>
 </tr>
 <tr>
@@ -115,24 +160,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Add Associate Librarian Lily Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Name</td>
-	<td>Lily Librarian</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>MonikerSelectAlt</td>
 	<td>Associate Librarian</td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Creating New Record</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -151,7 +181,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Lily Librarian</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Associate Librarian</td>
 	<td></td>
 </tr>
 <tr>
