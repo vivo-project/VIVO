@@ -23,6 +23,7 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
 
+<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
@@ -41,6 +42,7 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
 
 <%! 
     public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addAuthorsToInformationResource.jsp");
+    public static String nodeToPubProp = "http://vivoweb.org/ontology/core#linkedInformationResource";
 %>
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -57,7 +59,27 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
+                   
+    Individual subject = (Individual) request.getAttribute("subject");
+	Individual obj = (Individual) request.getAttribute("object");
+	
+	//check to see if this is an edit of existing, if yes redirect to pub 
+	if( obj != null ){     	
+    	List<ObjectPropertyStatement> stmts =  obj.getObjectPropertyStatements( nodeToPubProp );
+    	if( stmts != null && stmts.size() > 0 ){    		
+    		ObjectPropertyStatement ops = stmts.get(0);
+    		String pubUri = ops.getObjectURI();
+    		if( pubUri != null ){
+    			%>  
+            	<jsp:forward page="/individual">
+            		<jsp:param value="<%= pubUri %>" name="uri"/>
+            	</jsp:forward>  
+            	<%	
+    		} 
+    	}
+	}
 %>
+
 <c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
