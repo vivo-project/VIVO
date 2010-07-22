@@ -277,6 +277,8 @@ div.description { margin-bottom: 1.5em; }
 /*  margin-bottom: .75em;*/
   padding: 4px 12px;
   float: left;
+  /* Fixes in IE6 the cut off text for data and object property names for individual display property groups. */
+  *padding-left:24px !important;
 }
 
 .propsItem,
