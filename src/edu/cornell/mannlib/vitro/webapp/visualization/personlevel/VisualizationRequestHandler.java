@@ -380,8 +380,10 @@ public class VisualizationRequestHandler {
         
         request.setAttribute("egoURIParam", egoURIParam);
         
+        String title = "";
         if (coAuthorshipVO.getNodes() != null) {
         	request.setAttribute("numOfAuthors", coAuthorshipVO.getNodes().size());
+        	title = "for " + coAuthorshipVO.getEgoNode().getNodeName();
 		}
 		
 		if (coAuthorshipVO.getEdges() != null) {
@@ -395,7 +397,7 @@ public class VisualizationRequestHandler {
         request.setAttribute("egoPubSparklineContainerID", egoPubSparklineVisContainer);
         request.setAttribute("uniqueCoauthorsSparklineVisContainerID", uniqueCoauthorsSparklineVisContainer);
         
-        request.setAttribute("title", "Person Level Visualization");
+        request.setAttribute("title", "Person Level Visualization " + title);
         request.setAttribute("portalBean", portal);
         request.setAttribute("scripts", "/templates/visualization/person_level_inject_head.jsp");
         
