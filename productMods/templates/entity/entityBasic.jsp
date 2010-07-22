@@ -277,7 +277,7 @@ if (VitroRequestPrep.isSelfEditing(request) || LoginFormBean.loggedIn(request, L
                 <c:param name="mode" value="${showEdits ? 'edit' : ''}"/>
                 <c:param name="grouped" value="true"/>
                 <%-- unless a value is provided, properties not assigned to a group will not have a tab or appear on the page --%>
-                <c:param name="unassignedPropsGroupName" value=""/>
+                <c:param name="unassignedPropsGroupName" value="other"/>
             </c:import>
 
             <%-- Blurb --%>                              
