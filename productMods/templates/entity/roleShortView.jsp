@@ -36,12 +36,16 @@
  			    	<%-- SUBJECT is a Person, so get info from other part of the role --%>
 				    <c:when test="${predicateUri == param.personToRolePredicate}">
 					    <c:choose>
-                            <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn']}">
+                            <c:when test="${ ! empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn'] }">
 					            <c:set var="roleActivity" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#roleIn'].objectPropertyStatements[0].object}" />
 					            <c:set var="name"  value="${roleActivity.name}"/> 					            
 					            <%-- On the person page, it's redundant to display the role label in this case, since the object property
 					            label contains the same information. --%>
-					            <c:set var="label" value="${! empty param.roleLabelForPerson ? '' : (! empty individual.rdfsLabel ? individual.rdfsLabel: '')}" /> 					            					           
+					            <c:set var="label" value=""/>
+					            <c:if test="${ empty param.roleLabelForPerson }" >
+					            	<c:set var="label" value="${ ! empty individual.rdfsLabel ? individual.rdfsLabel : ''}" />
+					            </c:if>
+					             					            					           
                                 <c:set var="uri" value="${roleActivity.URI}"/>                                                                
                             </c:when>
  				            <c:otherwise>
@@ -49,7 +53,7 @@
  				                 add link to the Role so user can add more information. --%> 				                 				                     				                    
 								<c:set var="name" value="unknown"/>
  				                <c:set var="errorMsg" value="&nbsp;(unidentified activity - please edit)"/>
- 				                <c:set var="label" value="${! empty individual.rdfsLabel ? individual.rdfsLabel:'unlabeled role'}"/>
+ 				                <c:set var="label" value="${ ! empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabeled role' }"/>
                                 <c:set var="uri" value=""/>
 				            </c:otherwise>
 				        </c:choose>
@@ -63,7 +67,12 @@
 				    		<c:when test="${!empty individual.objectPropertyMap[ param.roleToPersonPredicate ]}">				    		
 				    		    <c:set var="person" value="${individual.objectPropertyMap[ param.roleToPersonPredicate ].objectPropertyStatements[0].object}" />
 					    		<c:set var="name" value="${person.name}"/>
-					            <c:set var="label" value="${! empty individual.rdfsLabel ? individual.rdfsLabel :(! empty param.roleLabelForPerson ? param.roleLabelForPerson : '' )}"/>					    							    		
+					    		
+					    		<c:set var="label" value="${individual.rdfsLabel}"/>
+					    		<c:if test="${ empty individual.rdfsLabel }">
+					    		   <c:set var="label" value="${ ! empty param.roleLabelForPerson ? param.roleLabelForPerson : '' }"/>
+					    		</c:if>
+					            					    							    		
                                 <c:set var="uri" value="${person.URI}"/>
 					    	</c:when>					    						    	
 					    	
@@ -74,7 +83,7 @@
                                     <c:otherwise><c:set var="name" value="unlabeled ${param.roleActivityLabel} to person relation"/></c:otherwise>
                                </c:choose>
                                <c:set var="name" value="unknown person"/>
-                               <c:set var="label" value="${!empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabled param.roleActivityLabel to person relation' }"/>                   
+                               <c:set var="label" value="${ ! empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabled param.roleActivityLabel to person relation' }"/>                   
                                <c:set var="errorMsg" value="&nbsp;(unidentified person - please edit)"/>
                                <c:set var="uri" value=""/>
 					        </c:otherwise>
