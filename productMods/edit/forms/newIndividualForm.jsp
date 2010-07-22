@@ -178,7 +178,7 @@ parameter set up by editRequestDispatch.
 	
 	<c:if test="${isPersonType}">
 	  <v:input type="text" label="First Name ${requiredHint}" id="firstName" size="30" />
- 	  <v:input type="text" label="lastName ${requiredHint}" id="lastName" size="30" />
+ 	  <v:input type="text" label="Last Name ${requiredHint}" id="lastName" size="30" />
     </c:if>
     
     <c:set var="submitLabel" value="Create ${typeName}" />       
