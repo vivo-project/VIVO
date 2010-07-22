@@ -164,6 +164,15 @@ public class VisVOContainer {
 		
 			schemaAttributes = new LinkedHashMap<String, String>();
 		
+			schemaAttributes.put("id", "label");
+			schemaAttributes.put("for", "node");
+			schemaAttributes.put("attr.name", "label");
+			schemaAttributes.put("attr.type", "string");
+		
+		nodeSchema.add(schemaAttributes);
+		
+			schemaAttributes = new LinkedHashMap<String, String>();
+		
 			schemaAttributes.put("id", "profile_url");
 			schemaAttributes.put("for", "node");
 			schemaAttributes.put("attr.name", "profile_url");

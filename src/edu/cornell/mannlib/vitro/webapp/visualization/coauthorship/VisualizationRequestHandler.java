@@ -197,12 +197,12 @@ public class VisualizationRequestHandler {
 		
 		if (authorNodesAndEdges.getNodes() == null || authorNodesAndEdges.getNodes().size() < 1 ) {
 			
-			outputFileName = "no-coauthors" + ".csv";
+			outputFileName = "no_coauthors-per-year" + ".csv";
 			
 		} else {
 			
 			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges.getEgoNode().getNodeName()) 
-			+ "-coauthors" + ".csv";
+			+ "_coauthors-per-year" + ".csv";
 			
 			yearToCoauthors = getCoAuthorsStats(authorNodesAndEdges);
 			

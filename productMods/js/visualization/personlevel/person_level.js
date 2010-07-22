@@ -350,10 +350,11 @@ function renderCoAuthorshipVisualization() {
 				"pluginspage", "http://www.adobe.com/go/getflashplayer"
 		);
 	} else {  // flash is too old or we can't detect the plugin
-		var alternateContent = 'Alternate HTML content should be placed here. '
+		var alternateContent = '<br /><h3 style="color: red;">'
 			+ 'This content requires the Adobe Flash Player. '
-			+ '<a href=http://www.adobe.com/go/getflash/>Get Flash</a>';
+			+ '<a href=http://www.adobe.com/go/getflash/>Get Flash</a></h3>';
 		document.write(alternateContent);  // insert non-flash content
+		
 	}
 
 }

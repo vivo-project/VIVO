@@ -256,12 +256,12 @@ public class VisualizationRequestHandler {
 		
 		if (coAuthorsipVO.getNodes() == null || coAuthorsipVO.getNodes().size() < 1) {
 			
-			outputFileName = "no-coauthorship-net" + ".csv";
+			outputFileName = "no_coauthor-network.graphml" + ".xml";
 			
 		} else {
 			
 			outputFileName = UtilityFunctions.slugify(coAuthorsipVO.getEgoNode().getNodeName()) 
-			+ "-coauthor-net" + ".xml";
+			+ "_coauthor-network.graphml" + ".xml";
 			
 		}
 		
@@ -296,12 +296,12 @@ public class VisualizationRequestHandler {
 		
 		if (coAuthorsipVO.getNodes() == null || coAuthorsipVO.getNodes().size() < 1 ) {
 			
-			outputFileName = "no-coauthors-list" + ".csv";
+			outputFileName = "no_coauthors" + ".csv";
 			
 		} else {
 			
 			outputFileName = UtilityFunctions.slugify(coAuthorsipVO.getEgoNode().getNodeName()) 
-										+ "-coauthors-list" + ".csv";
+										+ "_coauthors" + ".csv";
 			
 			coAuthorsToCount = getCoAuthorsList(coAuthorsipVO);
 			

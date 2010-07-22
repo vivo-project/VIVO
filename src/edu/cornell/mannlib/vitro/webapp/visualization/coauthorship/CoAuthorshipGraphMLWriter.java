@@ -216,6 +216,7 @@ public class CoAuthorshipGraphMLWriter {
 		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
 		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURL() + "</data>\n");
 		graphMLContent.append("\t<data key=\"name\">" + node.getNodeName() + "</data>\n");
+		graphMLContent.append("\t<data key=\"label\">" + node.getNodeName() + "</data>\n");
 		
 		if (profileURL != null) {
 			graphMLContent.append("\t<data key=\"profile_url\">" + profileURL + "</data>\n");
