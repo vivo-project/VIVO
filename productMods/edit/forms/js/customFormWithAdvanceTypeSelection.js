@@ -74,6 +74,8 @@ var customForm = {
         } else {
             this.formSteps = 2;
         }
+        if( this.editMode == 'repair')
+        	this.formSteps = 2;
                 
         this.bindEventListeners();
         
@@ -89,7 +91,7 @@ var customForm = {
         
         // Put this case first, because in edit mode with
         // validation errors we just want initFormFullView.
-        if (this.editMode == 'edit') {
+        if (this.editMode == 'edit' || this.editMode == 'repair') {
             this.initFormFullView();
         }
         else if (this.findValidationErrors()) {

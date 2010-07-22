@@ -47,7 +47,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
-<c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+
+<%!
+public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addRoleToPersonTwoStage.jsp");
+%>
+
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 
 <%--
@@ -66,7 +71,6 @@
 <c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
 
 <%
-
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     //vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
@@ -92,6 +96,47 @@
     	%> <c:set var="inversePredicate"></c:set> <%
     }
 %>
+
+<%-- There are 4 modes that this form can be in: 
+  1.  Add, there is a subject and a predicate but no role and nothing else. 
+        
+  2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
+     the other end of the object's core:roleIn stmt. 
+  
+  3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
+     other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
+     
+  4. Really bad node. multiple roleIn statements.
+   
+--%>
+<%
+ /* check to see if this is mode 3 */
+ int mode = 1;
+ Individual obj = (Individual)request.getAttribute("object");
+ if( obj != null){
+	 List<ObjectPropertyStatement> stmts = obj.getObjectPropertyStatements("http://vivoweb.org/ontology/core#roleIn");
+	 if( stmts != null){
+		 if( stmts.size() > 1 ){
+			 mode = 4; // Multiple roleIn statements, yuck.
+		 }else if( stmts.size() == 0 ){
+			 mode = 3; // need to repair the role node
+		 }else if(stmts.size() == 1 ){
+			 mode = 2;
+		 }
+	 }		 	 
+ }
+ if( mode == 1 )
+	 log.debug("This form will be for an add");
+ else if(mode == 2){
+	 log.debug("This form will be for a normal edit");
+	 %> <c:set var="editMode" value="edit"/><%
+ } else if(mode == 3){
+	 log.debug("This form will be for the repair of a bad role node");
+	 %> <c:set var="editMode" value="repair"/><%
+ }else if(mode == 4)
+	 log.debug("No form will be shown, since there are multiple core:roleIn statements");
+%>
+
 <c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
@@ -99,7 +144,7 @@
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
 <%-- label is required if we are doing an update --%> 
-<c:set var="labelRequired" ><%= request.getAttribute("objectUri")== null?"":"\"nonempty\","  %></c:set>
+<c:set var="labelRequired" ><%= mode == 2 ?"\"nonempty\"," : "" %></c:set>
 
 <%-- 
 <c:choose>
@@ -141,6 +186,11 @@
 
 <v:jsonset var="n3ForActivityType">     
     ?roleActivity a ?roleActivityType .
+</v:jsonset>
+
+<v:jsonset var="n3ForRoleToActivity"> 
+	@prefix core: <${vivoCore}> .    
+    ?role core:roleIn ?roleActivity .
 </v:jsonset>
 
 <v:jsonset var="n3ForActivityLabel">
@@ -241,7 +291,7 @@
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : [ ]
+         "assertions"       : [ "${n3ForRoleToActivity}" ]
       },
       "existingActivityLabel" : { /* Needed iff we return from an invalid submission */
          "newResource"      : "false",
@@ -329,9 +379,8 @@
 <c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
 
 <c:choose>
-    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
-        <c:set var="titleText" value="Edit" />
-        <c:set var="editMode" value="edit" />
+    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">    	
+        <c:set var="titleText" value="Edit" />        
         <c:set var="submitButtonText" value="Edit ${roleActivityTitleCase}" />
     </c:when>
     <c:otherwise>
@@ -343,58 +392,65 @@
 
 <jsp:include page="${preForm}" />
 
-<h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
+<% if( mode == 4 ){ %>
+ <div>This form is unable to handle the editing of this role because it is associated with 
+      multiple ${param.roleActivityTypeLabel} individuals.</div>      
+<% }else{ %>
+	
+	<h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
+	
+	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
+	<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+	
+	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
+	    
+	    <div class="fullViewOnly">
+	        
+		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
+	
+		    <div class="acSelection">
+		        <%-- RY maybe make this a label and input field. See what looks best. --%>
+		        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
+		        <v:input type="hidden" id="roleActivityURI" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
+		        <v:input type="hidden" id="existingActivityLabel" name="existingActivityLabel" cssClass="acLabelReceiver" /> <%-- Needed iff we return from an invalid submission --%> 
+		    </div>
+	
+	        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
+	        
+	        <c:choose>
+	            <c:when test="${numDateFields == 1}">
+	                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
+	            </c:when>
+	            <c:otherwise>
+	                <h4 id="dateHeader">Years of Participation in </h4>    
+	                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
+	                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
+	            </c:otherwise>
+	        </c:choose>
+	 
+	    </div>   
+	     
+	    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true" /></p>
+	    
+	    <p id="requiredLegend" class="requiredHint">* required fields</p>
+	</form>
+	
+	<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+	<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+	
+	<%-- Must be all one line for JavaScript. --%>
+	<c:set var="sparqlForAcFilter">
+	SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}roleIn> ?indUri .}
+	</c:set>
+	
+	<script type="text/javascript">
+	var customFormData  = {
+	    sparqlQueryUrl: '${sparqlQueryUrl}',
+	    acUrl: '${acUrl}',
+	    editMode: '${editMode}',
+	    submitButtonTextType: 'compound' 
+	};
+	</script>
+<% } %>
 
-<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-
-    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
-    
-    <div class="fullViewOnly">
-        
-	    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
-
-	    <div class="acSelection">
-	        <%-- RY maybe make this a label and input field. See what looks best. --%>
-	        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-	        <v:input type="hidden" id="roleActivityURI" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
-	        <v:input type="hidden" id="existingActivityLabel" name="existingActivityLabel" cssClass="acLabelReceiver" /> <%-- Needed iff we return from an invalid submission --%> 
-	    </div>
-
-        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
-        
-        <c:choose>
-            <c:when test="${numDateFields == 1}">
-                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
-            </c:when>
-            <c:otherwise>
-                <h4 id="dateHeader">Years of Participation in </h4>    
-                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
-                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
-            </c:otherwise>
-        </c:choose>
- 
-    </div>   
-     
-    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true" /></p>
-    
-    <p id="requiredLegend" class="requiredHint">* required fields</p>
-</form>
-
-<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
-<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
-
-<%-- Must be all one line for JavaScript. --%>
-<c:set var="sparqlForAcFilter">
-SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}roleIn> ?indUri .}
-</c:set>
-
-<script type="text/javascript">
-var customFormData  = {
-    sparqlQueryUrl: '${sparqlQueryUrl}',
-    acUrl: '${acUrl}',
-    editMode: '${editMode}',
-    submitButtonTextType: 'compound' 
-};
-</script>
 <jsp:include page="${postForm}"/>
