@@ -9,7 +9,7 @@
 <div id="ie67DisableWrapper">
 	<div id="ie67DisableContent">
 		<img src="${themeDir}site_icons/iconAlertBig.png" alt="Alert Icon"/>
-		<p>This form is not supported for use in Internet Explorer 6 or 7. Please upgrade to Internet Explorer 8, or
+		<p>This form is not supported for use in versions of Internet Explorer below 8. Please upgrade to Internet Explorer 8, or
 		switch to another browser, such as FireFox.</p>
 	</div>
 </div>
