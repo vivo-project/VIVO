@@ -108,3 +108,10 @@ option {
 .or, .cancel{
 vertical-align:top;
 }
+
+/* Message displayed for an unsupported browser. Hide on page load; JavaScript
+ * shows if needed.
+ */
+#ie67DisableWrapper {
+    display: none;
+}
