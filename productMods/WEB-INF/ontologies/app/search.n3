@@ -16,7 +16,6 @@
 	vitroDisplay:excludeClass core:Role ;
 	vitroDisplay:excludeClass core:AdvisingRelationship ;
 	vitroDisplay:excludeClass core:Authorship ;
-	vitroDisplay:excludeClass core:SubjectArea ; 
 	vitroDisplay:excludeClass core:Position ; 
 	vitroDisplay:excludeClass core:ResearchActivity ;
 	vitroDisplay:excludeClass core:EducationalTraining .	
