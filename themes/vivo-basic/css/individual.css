@@ -263,6 +263,10 @@ img.screenshot {
     color: #888;
 }
 
+ul.properties h5.collate {
+  margin-top: 1em;
+}
+
 #personWrap div.datatypeProperties {
     font-size: 0.9em;
 }
