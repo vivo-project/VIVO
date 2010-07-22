@@ -153,6 +153,7 @@ public class VisVOContainer {
 		
 		nodeSchema.add(schemaAttributes);
 	
+			/*
 			schemaAttributes = new LinkedHashMap<String, String>();
 			
 			schemaAttributes.put("id", "name");
@@ -161,6 +162,7 @@ public class VisVOContainer {
 			schemaAttributes.put("attr.type", "string");
 		
 		nodeSchema.add(schemaAttributes);
+		*/
 		
 			schemaAttributes = new LinkedHashMap<String, String>();
 		

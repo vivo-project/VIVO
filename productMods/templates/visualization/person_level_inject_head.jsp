@@ -10,7 +10,7 @@
 	<c:param name="vis" value="coauthorship" />
 	<c:param name="render_mode" value="data" />
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
-	<c:param name="labelField" value="name" />
+	<c:param name="labelField" value="label" />
 </c:url>
 
 <c:url var="egoCoAuthorsListDataFileURL" value="/admin/visQuery">
