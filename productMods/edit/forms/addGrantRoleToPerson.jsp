@@ -276,22 +276,11 @@ PREFIX core: <${vivoCore}>
     </c:otherwise>
 </c:choose>
 
-<c:set var="portal" value="${requestScope.portalBean}"/>
-<c:set var="contextPath"><c:out value="${pageContext.request.contextPath}" /></c:set>
-<c:set var="themeDir" value="${contextPath}/${portal.themeDir}"/>
-
-
 <jsp:include page="${preForm}" />
 
 <h2>${formHeading}</h2>
 
-<div id="ie67DisableWrapper">
-	<div id="ie67DisableContent">
-		<img src="${themeDir}siteIcons/iconAlertBig.png" alt="Alert Icon"/>
-		<p>This form is not supported for use in Internet Explorer 6 or 7. Please upgrade to Internet Explorer 8, or
-		switch to another browser, such as FireFox.</p>
-	</div>
-</div>
+<%@ include file="unsupportedBrowserMessage.jsp" %>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addGrantRoleToPerson" class="noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
