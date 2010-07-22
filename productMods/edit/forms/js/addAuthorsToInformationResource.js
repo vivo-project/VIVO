@@ -145,21 +145,12 @@ var addAuthorForm = {
     showFieldsForNewPerson: function() {    
         this.firstNameWrapper.show();
         this.middleNameWrapper.show();
-        // this.toggleLastNameLabel('Name', 'Last name');
     },
 
     hideFieldsForNewPerson: function() {   
         this.hideFields(this.firstNameWrapper); 
         this.hideFields(this.middleNameWrapper); 
-        // this.toggleLastNameLabel('Last name', 'Name');
     },
-        
-//    toggleLastNameLabel: function(currentText, newText) {
-//        var lastNameLabelText = this.lastNameLabel.html(),
-//            newLastNameLabelText = lastNameLabelText.replace(currentText, newText);
-//        this.lastNameLabel.html(newLastNameLabelText);  
-//    },
-    
         
     /* *** Ajax initializations *** */
 
@@ -171,7 +162,7 @@ var addAuthorForm = {
         this.acCache = {};  
         this.setAcFilter();    
         
-        $('#lastName').autocomplete({
+        this.lastNameField.autocomplete({
             minLength: 2,
             source: function(request, response) {
                 if (request.term in addAuthorForm.acCache) {
@@ -202,7 +193,7 @@ var addAuthorForm = {
                 });
             },
             select: function(event, ui) {
-                addAuthorForm.showSelectedAuthor(ui);       
+                addAuthorForm.showSelectedAuthor(ui);      
             }
         });
 
@@ -256,8 +247,10 @@ var addAuthorForm = {
         this.hideFields(this.lastNameWrapper);
         // This shouldn't be needed, because they are already hidden, but for some reason on select 
         // these fields get displayed, even before entering the select event listener.
-        this.hideFields(this.firstNameWrapper);
-        this.hideFields(this.middleNameWrapper);
+        // These get displayed if the selection was made through an enter keystroke,
+        // since the keydown event on the last name field is also triggered (and
+        // executes first).
+        this.hideFieldsForNewPerson(); 
         
         // Cancel restores initial form view
         this.cancel.unbind('click');
@@ -451,7 +444,7 @@ var addAuthorForm = {
     	this.lastNameField.keydown(function(event) {
     		if (event.keyCode === 13) {
     		    addAuthorForm.onLastNameChange();
-    			return false;
+    			return false; // don't submit form
     		}
     	});
     	
