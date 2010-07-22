@@ -248,6 +248,7 @@ PREFIX core: <${vivoCore}>
   
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
+                                                                "/js/browserUtils.js",
                                                                 "/edit/forms/js/customFormWithAdvanceTypeSelection.js"
                                                                ));            
     request.setAttribute("customJs", customJs);
@@ -275,12 +276,25 @@ PREFIX core: <${vivoCore}>
     </c:otherwise>
 </c:choose>
 
+<c:set var="portal" value="${requestScope.portalBean}"/>
+<c:set var="contextPath"><c:out value="${pageContext.request.contextPath}" /></c:set>
+<c:set var="themeDir" value="${contextPath}/${portal.themeDir}"/>
+
+
 <jsp:include page="${preForm}" />
 
 <h2>${formHeading}</h2>
 
+<div id="ie67DisableWrapper">
+	<div id="ie67DisableContent">
+		<img src="${themeDir}siteIcons/iconAlertBig.png" alt="Alert Icon"/>
+		<p>This form is not supported for use in Internet Explorer 6 or 7. Please upgrade to Internet Explorer 8, or
+		switch to another browser, such as FireFox.</p>
+	</div>
+</div>
+
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addGrantRoleToPerson" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addGrantRoleToPerson" class="noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
     <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
 
@@ -298,6 +312,7 @@ PREFIX core: <${vivoCore}>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
+
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />

@@ -5,9 +5,27 @@ var customForm = {
     /* *** Initial page setup *** */
    
     onLoad: function() {
+        
+        if (this.disableFormInUnsupportedBrowsers()) {
+            return;
+        }
         this.mixIn();
         this.initObjects();                 
         this.initPage();       
+    },
+    
+    disableFormInUnsupportedBrowsers: function() {       
+        this.disableWrapper = $('#ie67DisableWrapper');
+        
+        // Check for unsupported browsers only if the element exists on the page
+        if (this.disableWrapper.length) {
+            if (vitro.browserUtils.isIELessThan8()) {
+                this.disableWrapper.show();
+                $('form.noIE67').hide();
+                return true;
+            }
+        }            
+        return false;      
     },
 
     mixIn: function() {
