@@ -248,6 +248,7 @@ PREFIX core: <${vivoCore}>
   
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
+                                                                "/js/browserUtils.js",
                                                                 "/edit/forms/js/customFormWithAdvanceTypeSelection.js"
                                                                ));            
     request.setAttribute("customJs", customJs);
@@ -279,8 +280,10 @@ PREFIX core: <${vivoCore}>
 
 <h2>${formHeading}</h2>
 
+<%@ include file="unsupportedBrowserMessage.jsp" %>
+
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addGrantRoleToPerson" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addGrantRoleToPerson" class="noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
     <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
 
@@ -298,6 +301,7 @@ PREFIX core: <${vivoCore}>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
+
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 <c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />

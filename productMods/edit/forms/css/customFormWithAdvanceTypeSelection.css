@@ -9,6 +9,10 @@
     display: none;
 }
 
+#ie67DisableWrapper {
+    display: none;
+}
+
 #content form p.inline label {
     display: inline;
     clear: none;

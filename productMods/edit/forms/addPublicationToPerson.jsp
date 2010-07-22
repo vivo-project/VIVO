@@ -210,6 +210,7 @@ SPARQL queries for existing values. --%>
   	editConfig.setEntityToReturnTo("?pubUri");
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
+                                                                "/js/browserUtils.js",
                                                                 "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
                                                                ));            
     request.setAttribute("customJs", customJs);
@@ -228,8 +229,10 @@ SPARQL queries for existing values. --%>
 
 <h2>Create a new publication entry for <%= subjectName %></h2>
 
+<%@ include file="unsupportedBrowserMessage.jsp" %
+
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addPublicationForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addPublicationForm" class="noIE67"  action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <p class="inline"><v:input type="select" label="Publication Type ${requiredHint}" name="pubType" id="typeSelector" /></p>
     
