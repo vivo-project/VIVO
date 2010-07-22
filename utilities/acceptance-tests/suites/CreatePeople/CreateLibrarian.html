@@ -106,23 +106,63 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Creating New Record</td>
+	<td>Create a new Librarian individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Create new indiviidual</td>
+	<td class="comment">Create a librarian individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>Name</td>
-	<td>Lily Librarian</td>
+	<td>firstName</td>
+	<td>Lily</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Librarian</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Make individual an Assistant Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -146,7 +186,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Lily Librarian</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -185,11 +230,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Search for new librarian</td>
 	<td></td>
@@ -197,7 +237,7 @@
 <tr>
 	<td>type</td>
 	<td>search</td>
-	<td>lily librarian</td>
+	<td>librarian</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -206,22 +246,22 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>lily librarian - VIVO Search Results</td>
+	<td>librarian - VIVO Search Results</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Search Results for 'lily librarian'</td>
+	<td>Search Results for 'librarian'</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Lily Librarian</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Lily Librarian | Assistant Librarian</td>
+	<td>Librarian, Lily | Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
