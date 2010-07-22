@@ -58,6 +58,10 @@ parameter set up by editRequestDispatch.
     		}
     	}    	
     }
+    
+    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css"
+                                                                 ));
+    request.setAttribute("customCss", customCss);
 %>
 
 <c:set var="typeName" ><%= type.getName() %></c:set>
