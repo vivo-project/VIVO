@@ -69,15 +69,16 @@ II. The Upgrade Process
       add any changes to them at that time.
 
    Note: At a minimum it will be necessary to apply the Google Analytics 
-      Tracking Code to googleAnalytics.ftl in the theme:
+      Tracking Code (GATC) to googleAnalytics.ftl in the theme:
       [new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl
       
       A sample googleAnalytics.ftl is included in the built-in theme. This file 
       serves only as an example, and you must replace the tracking code shown 
       with your institution's own tracking code.
       
-      For additional information and a copy your institution's tracking code, 
-      see the Google Analytics wiki page.
+      For additional information about the GATC for the NIH-funded VIVO 
+      implementation sites and a copy your institution's tracking code, see the 
+      VIVO Google Analytics wiki page:
       https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI     
       
    Note: This process assumes any changes made to the application were made in 
