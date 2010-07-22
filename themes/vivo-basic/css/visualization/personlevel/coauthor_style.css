@@ -39,3 +39,8 @@
 	width: 40px;
 	float:left;
 }
+
+/* container override from liquid.css */
+.container {
+ width: inherit; 
+}
