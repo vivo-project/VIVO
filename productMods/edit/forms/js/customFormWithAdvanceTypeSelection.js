@@ -74,6 +74,8 @@ var customForm = {
         } else {
             this.formSteps = 2;
         }
+        // RY This should probably be done from initFormFullView, since there
+        // are not two form steps in this case.
         if( this.editMode == 'repair')
         	this.formSteps = 2;
                 
