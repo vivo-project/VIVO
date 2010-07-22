@@ -747,28 +747,36 @@ display:none !important;
 style for those with javascript disable
 ************************/
 
-#javascriptDisableWrapper{
+#javascriptDisableWrapper, ie67DisableWrapper{
 margin-top:15px;
 width:500px;
 height:300px;
 }
 
-#javascriptDisableContent{
+#javascriptDisableContent, #ie67DisableContent{
 width:500px;
 height:100px;
 border:3px solid #bee6f8;
 }
-#javascriptDisableContent img{
+#ie67DisableContent{
+width:80%;
+margin-bottom:200px;
+}
+#javascriptDisableContent img, #ie67DisableContent img{
 float:left;
 margin-top:36px;
 margin-left:30px;
 }
 
-#javascriptDisableContent p{
+#javascriptDisableContent p, #ie67DisableContent p{
 font-size:1.1em;
 color:#384c5d;	
 line-height:100px;
 padding-left:65px;
+}
+#ie67DisableContent p{
+line-height:normal;
+padding-top:36px;
 }
 
 
