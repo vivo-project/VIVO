@@ -69,10 +69,12 @@ public class UtilityFunctions {
 	 * @return
 	 */
 	public static String slugify(String textToBeSlugified) {
-		return StringUtils.substring(textToBeSlugified.toLowerCase()
-											.replaceAll("[^a-zA-Z0-9-]+", "-"), 
-									 0, 
-									 VisConstants.MAX_NAME_TEXT_LENGTH);
+		String textBlockSeparator = "-";
+		return StringUtils.removeEnd(StringUtils.substring(textToBeSlugified.toLowerCase().trim()
+											.replaceAll("[^a-zA-Z0-9-]+", textBlockSeparator), 
+											0, 
+											VisConstants.MAX_NAME_TEXT_LENGTH),
+									 textBlockSeparator);
 	}
 
 }
