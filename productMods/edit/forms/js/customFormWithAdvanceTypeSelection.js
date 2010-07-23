@@ -186,13 +186,6 @@ var customForm = {
         // These are not editable: only properties of the role are editable.
         this.typeSelector.attr('disabled', 'disabled');
         this.relatedIndLabel.attr('disabled', 'disabled');
-        
-        this.form.submit(function() {
-            // Re-enable these fields so they get submitted, since they are required
-            // in the edit config.
-            customForm.typeSelector.attr('disabled', '');
-            customForm.relatedIndLabel.attr('disabled', '');
-        });
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
@@ -215,7 +208,8 @@ var customForm = {
         this.verifyMatch.click(function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
-        });      
+        });   
+        
     },
     
     initAutocomplete: function() {
@@ -246,7 +240,6 @@ var customForm = {
                     },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. jQuery
-                        // should parse the response text and return a json object.
                         var results = $.parseJSON(xhr.responseText), 
                             filteredResults = customForm.filterAcResults(results);
                         customForm.acCache[request.term] = filteredResults;
@@ -341,7 +334,8 @@ var customForm = {
         this.acSelection.show();
 
         this.acUriReceiver.val(uri);
-        this.acLabelReceiver.val(label);
+        this.acLabelReceiver.val(label); // RY PROBABLY DON"T NEED THIS AT ALL????
+        this.acSelector.val(label);
         this.acSelectionInfo.html(label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
@@ -364,6 +358,7 @@ var customForm = {
         this.acSelector.val('');
         this.hideFields(this.acSelection);
         this.acUriReceiver.val('');
+        this.acLabelReceiver.val('');
         this.acSelectionInfo.html('');
         this.verifyMatch.attr('href', this.verifyMatchBaseHref);
         
@@ -423,7 +418,7 @@ var customForm = {
     // or a new related individual. Called when setting up full view of form, and after
     // an autocomplete selection.
     setButtonText: function(newOrExisting) {
-        var typeText;
+        var typeText, buttonText;
         
         // Edit mode button doesn't change, so it's specified in the jsp
         if (this.editMode === 'edit') {
@@ -438,16 +433,19 @@ var customForm = {
         if (newOrExisting === 'new') {
             if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
-                this.button.val('Create ' + typeText + ' & ' + this.baseButtonText);                
+                buttonText = 'Create ' + typeText + ' & ' + this.baseButtonText;                
             } else {
                 // e.g., 'Create Publication'
-                this.button.val('Create ' + this.baseButtonText);
+                buttonText = 'Create ' + this.baseButtonText;
             }            
         }
         // Using existing related individual
         else {  
-            this.button.val('Add ' + this.baseButtonText);
+            // In repair mode, baseButtonText is "Edit X". Keep that for this case.
+            buttonText = this.editMode == 'repair' ? this.baseButtonText : 'Add ' + this.baseButtonText;
         } 
+        
+        this.button.val(buttonText);
     }
     
 };
