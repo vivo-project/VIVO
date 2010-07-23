@@ -48,15 +48,20 @@ parameter set up by editRequestDispatch.
     
     VClass type = wdf.getVClassDao().getVClassByURI(vreq.getParameter("typeOfNew"));
     
+    //If the type of the new indivuidal is to be a person, we use a slightly different form.
     Boolean isPersonType = Boolean.FALSE;
-    List<String> superTypes = wdf.getVClassDao().getAllSuperClassURIs(vreq.getParameter("typeOfNew"));    
-    if( superTypes != null ){
-    	for( String typeUri : superTypes){
-    		if( FOAF_PERSON.equals(typeUri)) {
-    			isPersonType = Boolean.TRUE;
-    			break;
-    		}
-    	}    	
+    if( type != null && FOAF_PERSON.equals( type.getURI() ) ){
+    	isPersonType = Boolean.TRUE;
+    }else{
+    	List<String> superTypes = wdf.getVClassDao().getAllSuperClassURIs(vreq.getParameter("typeOfNew"));    
+	    if( superTypes != null ){
+	    	for( String typeUri : superTypes){
+	    		if( FOAF_PERSON.equals(typeUri)) {
+	    			isPersonType = Boolean.TRUE;
+	    			break;
+	    		}
+	    	}    	
+	    }
     }
     
     List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css"
