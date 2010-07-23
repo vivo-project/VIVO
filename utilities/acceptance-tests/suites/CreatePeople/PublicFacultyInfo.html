@@ -86,12 +86,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
+	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Jane Faculty</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,7 +121,47 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>What can I say?</td>
+	<td>I am named after Jane in the Tarzan stories. Yes, my last name really is faculty.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Assistant Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Apes Rock</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Academic Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates Rock and Roll</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Academic Department</td>
 	<td></td>
 </tr>
 <tr>
@@ -136,12 +176,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Mozambique</td>
+	<td>link=Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>geographical_region</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Africa</td>
+	<td>link=Mozambique</td>
 	<td></td>
 </tr>
 <tr>
@@ -155,6 +200,56 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Chimps</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Foundation of Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Advising Relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=SPCA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Advising Relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Advanced Primates 301</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Intermediate Primates 201</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Semester Class</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>I teach apes how to communicate with humans.</td>
 	<td></td>
@@ -162,6 +257,26 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>I travel the world teaching apes how to communicate with humans.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Humane Society of Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Advising Relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates Unite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Advising Relationship</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,17 +296,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>African Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>African Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>African Chimps</td>
+	<td>Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
@@ -207,6 +312,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=exact:http://primates-r-us.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primary URL Link</td>
 	<td></td>
 </tr>
 <tr>
@@ -260,6 +370,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Address</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextNotPresent</td>
 	<td>Mrs.</td>
 	<td></td>
@@ -290,13 +405,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>987654321</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>verifyTextNotPresent</td>
 	<td>3333333</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>African Apes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>African Primates</td>
 	<td></td>
 </tr>
 <tr>
