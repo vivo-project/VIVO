@@ -19,8 +19,12 @@ directory.
 
 I.   Before Performing the Upgrade
 II.  The Upgrade Process
-III. Ontology Changes
-IV.  File Storage Changes
+III. Ontology Upgrade
+     A. Verify Ontology upgrade process
+     B. Ontology knowledge base manual r
+IV.  New File Storage System
+     A. Verifying the File Storage upgrade
+     B. File Storage changes
 V.   Theme Changes
 
 -------------------------------------------------------------------------------
@@ -63,26 +67,32 @@ II. The Upgrade Process
 
 4. Apply any changes you have made to the new source directory.
 
-   Note: In many cases, simply copying the modified files from your original 
-      source directory will not work since the files on which they are based 
-      have changed. It will be necessary to inspect the new source files and 
-      add any changes to them at that time.
+    ************* Special notes regarding source files ********************
+    
+    This process assumes any changes made to the application were made in 
+       the source directory and deployed, and were not made directly within 
+       Apache Tomcat webapp.
+       
+    In many cases, simply copying the modified files from your original 
+       source directory will not work since the files on which they are based 
+       have changed. It will be necessary to inspect the new source files and 
+       add any changes to them at that time.
 
-   Note: At a minimum it will be necessary to apply the Google Analytics 
-      Tracking Code to googleAnalytics.ftl in the theme:
+    At a minimum it will be necessary to apply the Google Analytics Tracking 
+       Code (GATC) to googleAnalytics.ftl in the theme:
+      
       [new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl
       
       A sample googleAnalytics.ftl is included in the built-in theme. This file 
       serves only as an example, and you must replace the tracking code shown 
       with your institution's own tracking code.
       
-      For additional information and a copy your institution's tracking code, 
-      see the Google Analytics wiki page.
-      https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI     
+      For additional information about the GATC for the NIH-funded VIVO 
+      implementation sites and a copy your institution's tracking code, see the 
+      VIVO Google Analytics wiki page:
+      https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI
       
-   Note: This process assumes any changes made to the application were made in 
-      the source directory and deployed, and were not made directly within 
-      Apache Tomcat webapp.
+   ************************************************************************     
       
 5. If you had modified web.xml to configure the Pellet Reasoner (as described
     in the installation instructions), repeat that modification.
@@ -123,6 +133,29 @@ II. The Upgrade Process
 -------------------------------------------------------------------------------
 
 III. Ontology Changes
+
+A. Verify Ontology upgrade process
+
+After Apache Tomcat is started, these files should be reviewed to verify that
+the automated upgrade process was executed successfully.  The ontology alignment 
+process will create the following files in the Tomcat webapps/vivo/WEB-INF directory:
+
+ontologies/update/logs/knowledgeBaseUpdate.log 
+    a log of a summary of updates that were made to the knowledge base and notes 
+    about some recommended manual reviews. This file should end with
+    "Successfully finished processing ontology changes".
+    
+ontologies/update/logs/knowledgeBaseUpdate.error.log 
+    a log of errors that were encountered during the upgrade process. This file
+    should be empty if the upgrade was successful.
+    
+ontologies/update/changedData/removedData.n3
+    an N3 file containing all the statements that were removed from the knowledge base.
+    
+ontologies/update/changedData/addedData.n3
+    an N3 file containing all the statements that were added to the knowledge base.
+
+B. Ontology knowledge base manual review
 
 Changes to the VIVO core ontology may require corresponding
 modifications of the knowledge base instance data and local ontology
@@ -168,33 +201,42 @@ the following types of changes:
     If a site is using the default value of a vitro annotation, and the
     default has been changed in the new version of the ontology, then
     the new default value will be propagated to the knowledge base.
-  
-The ontology alignment process will create the following files in the
-Tomcat webapps/vivo/WEB-INF directory:
-
-ontologies/update/logs/knowledgeBaseUpdate.log 
-    a log of a summary of updates that were made to the knowledge base and notes 
-    about some recommended manual reviews. This file should end with
-    "Successfully finished processing ontology changes".
-    
-ontologies/update/logs/knowledgeBaseUpdate.error.log 
-    a log of errors that were encountered during the upgrade process. This file
-    should be empty if the upgrade was successful.
-    
-ontologies/update/changedData/removedData.n3
-    an N3 file containing all the statements that were removed from the knowledge base.
-    
-ontologies/update/changedData/addedData.n3
-    an N3 file containing all the statements that were added to the knowledge base.
-
-    
-After Apache Tomcat is started, these files should be reviewed to verify that
-the automated upgrade process was executed successfully.
-
 
 -------------------------------------------------------------------------------
 
-IV. File Storage Changes
+IV. New File Storage System
+
+A. Verifying the File Storage upgrade
+
+If, for any reason, the File Storage upgrade process is not successful,
+VIVO will not start. Attempts to open VIVO in the browser will result in a
+404 error. Tomcat's "localhost" log file will contain an exception listing
+with more information.
+
+The File Storage upgrade process will create these files in the Vivo upload
+directory:
+
+upgrade/upgradeLog.2010-00-00T00-00-00.txt
+    A log of the upgrade process. The actual filename includes a timestamp 
+    that tells when the upgrade executed. This file should be inspected 
+    for warnings or errors. The file should end with "File Storage update 
+    is complete." 
+    
+upgrade/translatedImages
+    Contains the images that were translated to the new file storage system.
+    
+upgrade/unreferencedImages
+    Contains the images which were in the "images" directory, but were no
+    longer referred to by any Individual. 
+    
+file_storage_root 
+    A directory where the uploaded images are stored. Within the root, the
+    path to the image is derived from its unique ID and its filename. 
+
+file_storage_namespaces.properties
+    Contains the URL prefix used when serving the image files.
+
+B. File Storage changes
 
 Changes to the File Storage system in VIVO result in new properties to describe
 the relationships involving files, and a new directory structure in which to 
@@ -245,40 +287,11 @@ which makes the required changes:
   Cleaning the old image directory.
     All image files are removed from their old locations in the upload 
     directory.
-    
-The File Storage upgrade process will create these files in the Vivo upload
-directory:
-
-upgrade/upgradeLog.2010-00-00T00-00-00.txt
-    A log of the upgrade process. The actual filename includes a timestamp 
-    that tells when the upgrade executed. This file should be inspected 
-    for warnings or errors. The file should end with "File Storage update 
-    is complete." 
-    
-upgrade/translatedImages
-    Contains the images that were translated to the new file storage system.
-    
-upgrade/unreferencedImages
-    Contains the images which were in the "images" directory, but were no
-    longer referred to by any Individual. 
-    
-file_storage_root 
-    A directory where the uploaded images are stored. Within the root, the
-    path to the image is derived from its unique ID and its filename. 
-
-file_storage_namespaces.properties
-    Contains the URL prefix used when serving the image files.
-
-If, for any reason, the File Storage upgrade process is not successful,
-VIVO will not start. Attempts to open VIVO in the browser will result in a
-404 error. Tomcat's "localhost" log file will contain an exception listing
-with more information.
 
 Once you are satisfied that the File Storage upgrade process is successful,
 you may delete the "images" folder and the "upgrade" folder from the upload 
 directory. You may also delete the WEB-INF/images directory from within
 your Tomcat web application. 
-
 
 -------------------------------------------------------------------------------
 
@@ -345,10 +358,3 @@ to upgrade your theme to VIVO 1.1.
        style upgrades that your theme should pick up.  Instead, you should 
        use the vivo-basic 1.1 stylesheets as a starting point, and manually
        merge your 1.0 style modifications in as needed.
-
-       
-
-
-
-
-
