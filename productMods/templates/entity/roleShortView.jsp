@@ -22,7 +22,8 @@ Optional vars:
  --%>
 
 <c:set var="startYearPredicate">${! empty param.startYearPredicate ? param.startYearPredicate : 'http://vivoweb.org/ontology/core#startYear'}</c:set>
- 
+<c:set var="showDateRange">${ startYearPredicate == 'http://vivoweb.org/ontology/core#startYear' }</c:set>
+
 <c:set var="errorMsg" value=""/>
 <c:choose>
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
@@ -31,10 +32,13 @@ Optional vars:
 											
 			    <%-- get years off role --%>
 				<c:set var="startYear" value="${individual.dataPropertyMap[startYearPredicate].dataPropertyStatements[0].data}"/>
-                <c:if test="${not empty startYear}">
-                    <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
-                    <c:if test="${not empty endYear }">
-                      <c:set var="endYear">-${endYear}</c:set>
+                <c:if test="${not empty startYear}">                   
+                    <c:if test="${showDateRange}">
+                        <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
+                        <c:set var="endYearVal" value = " -" />
+                        <c:if test="${! empty endYear}">
+                            <c:set var="endYearVal" value="${endYearVal} ${endYear}" />
+                        </c:if>
                     </c:if>
                 </c:if>
                 
@@ -112,7 +116,7 @@ Optional vars:
 			    <c:choose>
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
-		                <a href="<c:out value="${olink}"/>">${name}</a>&nbsp;${label}&nbsp;${startYear}${endYear} ${errorMsg}
+		                <a href="<c:out value="${olink}"/>">${name}</a>&nbsp;${label}&nbsp;${startYear}${endYearVal} ${errorMsg}
 		            </c:when>
 		            <c:otherwise>
 		                <p:process><strong>${name}</strong> ${label}</p:process> ${errorMsg}
