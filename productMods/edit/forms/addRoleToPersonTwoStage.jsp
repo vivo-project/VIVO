@@ -147,8 +147,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="label" value="${rdfs}label" />
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
-<%-- label is required if we are doing an update --%> 
-<c:set var="labelRequired" ><%= mode == 2 ?"\"nonempty\"," : "" %></c:set>
+<%-- label and type required if we are doing an add or a repair, but not an edit --%> 
+<c:set var="labelRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
+<c:set var="typeRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
 
 <%-- 
 <c:choose>
@@ -277,7 +278,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
       },   
       "roleActivityType" : {
          "newResource"      : "true",
-         "validators"       : [ ],
+         "validators"       : [ ${typeRequired} ],
          "optionsType"      : "${roleActivityType_optionsType}",
          "literalOptions"   : [ ${roleActivityType_literalOptions } ],
          "predicateUri"     : "",
