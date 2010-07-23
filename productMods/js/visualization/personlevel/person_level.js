@@ -339,7 +339,7 @@ function renderCoAuthorshipVisualization() {
 				"src", swfLink,
 				"flashVars", "graphmlUrl=" + egoCoAuthorshipDataFeederURL,			
 				"width", "600",
-				"height", "840",
+				"height", "850",
 				"align", "top",
 				"id", "CoAuthor",
 				"quality", "high",

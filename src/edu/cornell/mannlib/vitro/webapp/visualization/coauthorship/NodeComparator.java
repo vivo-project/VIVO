@@ -1,0 +1,15 @@
+package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
+
+import java.util.Comparator;
+
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
+
+
+public class NodeComparator implements Comparator<Node> {
+
+	@Override
+	public int compare(Node arg0, Node arg1) {
+		return arg1.getNodeID() - arg0.getNodeID();
+	}
+
+}

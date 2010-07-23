@@ -4,6 +4,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -86,8 +89,11 @@ public class CoAuthorshipGraphMLWriter {
 		
 		Set<Edge> edges = visVOContainer.getEdges();
 		
+		List<Edge> orderedEdges = new ArrayList<Edge>(edges);
+		
+		Collections.sort(orderedEdges, new EdgeComparator());
 
-		for (Edge currentEdge : edges) {
+		for (Edge currentEdge : orderedEdges) {
 			
 			/*
 			 * This method actually creates the XML code for a single edge. "graphMLContent"
@@ -182,8 +188,13 @@ public class CoAuthorshipGraphMLWriter {
 		 * */
 		getNodeContent(graphMLContent, egoNode);
 		
+		List<Node> orderedAuthorNodes = new ArrayList<Node>(authorNodes);
+		orderedAuthorNodes.remove(egoNode);
 		
-		for (Node currNode : authorNodes) {
+		Collections.sort(orderedAuthorNodes, new NodeComparator());
+		
+		
+		for (Node currNode : orderedAuthorNodes) {
 			
 			/*
 			 * We have already printed the Ego Node info.
