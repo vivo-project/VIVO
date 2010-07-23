@@ -208,10 +208,8 @@ IV. New File Storage System
 
 A. Verifying the File Storage upgrade
 
-If, for any reason, the File Storage upgrade process is not successful,
-VIVO will not start. Attempts to open VIVO in the browser will result in a
-404 error. Tomcat's "localhost" log file will contain an exception listing
-with more information.
+If the File Storage upgrade process is not successful, Tomcat's "vivo.all.log" 
+log file will contain an exception listing with more information.
 
 The File Storage upgrade process will create these files in the Vivo upload
 directory:
