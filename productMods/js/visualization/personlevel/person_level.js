@@ -213,8 +213,6 @@ function visLoaded(nodes){
 
 function createTable(tableID, tableContainer, tableData) {
 	
-	console.log(tableData);
-
 	var table = $('<table>');
 	table.attr('id', tableID);
 	
