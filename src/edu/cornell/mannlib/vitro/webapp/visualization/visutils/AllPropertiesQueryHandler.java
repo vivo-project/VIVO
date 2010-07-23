@@ -123,8 +123,6 @@ public class AllPropertiesQueryHandler {
 							+ filterClause
 							+ "}";
 
-		System.out.println(sparqlQuery);
-		
 		return sparqlQuery;
 	}
 
