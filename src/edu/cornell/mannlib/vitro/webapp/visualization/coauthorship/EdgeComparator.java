@@ -11,7 +11,7 @@ public class EdgeComparator implements Comparator<Edge> {
 
 	@Override
 	public int compare(Edge arg0, Edge arg1) {
-		return arg1.getEdgeID() - arg0.getEdgeID();
+		return arg0.getEdgeID() - arg1.getEdgeID();
 	}
 
 }

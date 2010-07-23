@@ -11,7 +11,7 @@ public class NodeComparator implements Comparator<Node> {
 
 	@Override
 	public int compare(Node arg0, Node arg1) {
-		return arg1.getNodeID() - arg0.getNodeID();
+		return arg0.getNodeID() - arg1.getNodeID();
 	}
 
 }

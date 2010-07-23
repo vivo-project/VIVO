@@ -381,12 +381,12 @@ public class VisualizationRequestHandler {
         request.setAttribute("egoURIParam", egoURIParam);
         
         String title = "";
-        if (coAuthorshipVO.getNodes() != null) {
+        if (coAuthorshipVO.getNodes() != null && coAuthorshipVO.getNodes().size() > 0) {
         	request.setAttribute("numOfAuthors", coAuthorshipVO.getNodes().size());
         	title = "for " + coAuthorshipVO.getEgoNode().getNodeName();
 		}
 		
-		if (coAuthorshipVO.getEdges() != null) {
+		if (coAuthorshipVO.getEdges() != null && coAuthorshipVO.getEdges().size() > 0) {
 			request.setAttribute("numOfCoAuthorShips", coAuthorshipVO.getEdges().size());
 		}
 		
