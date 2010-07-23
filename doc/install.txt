@@ -24,7 +24,7 @@ are slightly different. Please consult developers.txt in this directory.
  
     * I. Install required software
     * II. Create an empty MySQL database
-    * III. Download the VIVO code distribution
+    * III. Download the VIVO Application Source
     * IV. Specify deployment properties
     * V. Compile and deploy
     * VI. Set Tomcat JVM Parameters
@@ -68,7 +68,7 @@ Keep track of the database name, username, and password for Step IV.
 
 -------------------------------------------------------------------------------
  
-III. Download the VIVO code distribution
+III. Download the VIVO Application Source
 
 Download either a zip or gz file and unpack it on your web server:
 ftp://download.mannlib.cornell.edu/pub/Vivo/rel-1.1.zip
@@ -219,7 +219,8 @@ wish to load or upload a file on your local machine. Ensure that the "add RDF"
 radio button is selected. You will also likely want to check "create 
 classgroups automatically." Clicking the "Index" tab in the navigation bar at 
 the top left of the page will show a simple index of the knowledge base.  
-See more documentation for configuring VIVO at http://vivoweb.org/support.
+See more documentation for configuring VIVO, ingesting data, and manually 
+adding data  at http://vivoweb.org/support.
 
 -------------------------------------------------------------------------------
 
