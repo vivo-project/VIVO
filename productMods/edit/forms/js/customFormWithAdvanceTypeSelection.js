@@ -400,16 +400,20 @@ var customForm = {
     // Set field labels based on type selection. Although these won't change in edit
     // mode, it's easier to specify the text here than in the jsp.
     setLabels: function() {
-        var newLabelTextForNewInd;
+        var newLabelTextForNewInd, 
+            // if this.acType is empty, we are in repair mode with no activity type selected.
+            // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
+            typeText = this.acType ? this.typeName : 'Activity';
             
-        this.labelFieldLabel.html(this.typeName + ' ' + this.baseLabelText);
+        
+        this.labelFieldLabel.html(typeText + ' ' + this.baseLabelText);
         
         if (this.dateHeader.length) {
-            this.dateHeader.html(this.baseDateHeaderText + this.typeName);
+            this.dateHeader.html(this.baseDateHeaderText + typeText);
         } 
                    
         if (this.newIndLabel.length) {
-            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, this.typeName);
+            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, typeText);
             this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
         }  
 
@@ -419,17 +423,22 @@ var customForm = {
     // or a new related individual. Called when setting up full view of form, and after
     // an autocomplete selection.
     setButtonText: function(newOrExisting) {
+        var typeText;
         
         // Edit mode button doesn't change, so it's specified in the jsp
         if (this.editMode === 'edit') {
             return;
         }  
-        
+
+        // if this.acType is empty, we are in repair mode with no activity type selected.
+        // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
+        typeText = this.acType ? this.typeName : 'Activity';
+                
         // Creating new related individual      
         if (newOrExisting === 'new') {
             if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
-                this.button.val('Create ' + this.typeName + ' & ' + this.baseButtonText);                
+                this.button.val('Create ' + typeText + ' & ' + this.baseButtonText);                
             } else {
                 // e.g., 'Create Publication'
                 this.button.val('Create ' + this.baseButtonText);
