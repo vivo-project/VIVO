@@ -54,41 +54,7 @@ public class GenericQueryHandler {
 		this.log = log;
 		
 	}
-/*
-	private GenericQueryMap createJavaValueObjects(ResultSet resultSet) {
-		
-		GenericQueryMap queryResultVO = new GenericQueryMap();
-		
-		while (resultSet.hasNext()) {
-			QuerySolution solution = resultSet.nextSolution();
-			
-			
-			RDFNode predicateNode = solution.get(QueryFieldLabels.PREDICATE);
-			RDFNode objectNode = solution.get(QueryFieldLabels.OBJECT);
-			
-			if (predicateNode != null && objectNode != null) {
-				queryResultVO.addEntry(predicateNode.toString(), 
-									   objectNode.toString());
-			} 
-			
-			
-			for (String currentOutputFieldLabel : this.fieldLabelToOutputFieldLabel.values()) {
-				
-				RDFNode currentFieldNode = solution.get(currentOutputFieldLabel);
-				if (currentFieldNode != null) {
-//					biboDocument.setDocumentBlurb(currentFieldNode.toString());
-					
-					TupleSet
-				}
-				
-			}
-			
-		}
-		
-		return queryResultVO;
-	}
 
-	*/
 	private ResultSet executeQuery(String queryText,
 								   String resultFormatParam, 
 								   String rdfResultFormatParam, 
@@ -139,7 +105,7 @@ public class GenericQueryHandler {
 		
 		sparqlQuery.append("}\n");
 		
-		System.out.println("GENERIC QEURY >>>>> " + sparqlQuery);
+//		System.out.println("GENERIC QEURY >>>>> " + sparqlQuery);
 		
 		return sparqlQuery.toString();
 	}
