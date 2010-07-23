@@ -298,17 +298,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
          "rangeLang"        : "",         
          "assertions"       : [ "${n3ForRoleToActivity}" ]
       },
-      "existingActivityLabel" : { /* Needed iff we return from an invalid submission */
-         "newResource"      : "false",
-         "validators"       :  [ ],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [ ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
-         "rangeLang"        : "",         
-         "assertions"       : [ ]
-      },
       "roleLabel" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty","datatype:${stringDatatypeUriJson}" ],
@@ -417,7 +406,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 		        <%-- RY maybe make this a label and input field. See what looks best. --%>
 		        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
 		        <v:input type="hidden" id="roleActivityURI" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
-		        <v:input type="hidden" id="existingActivityLabel" name="existingActivityLabel" cssClass="acLabelReceiver" /> <%-- Needed iff we return from an invalid submission --%> 
 		    </div>
 	
 	        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>

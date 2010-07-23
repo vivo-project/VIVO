@@ -53,7 +53,7 @@ var customForm = {
         this.acSelection = this.form.find('.acSelection');
         this.acSelectionInfo = this.form.find('.acSelectionInfo');
         this.acUriReceiver = this.form.find('.acUriReceiver');
-        this.acLabelReceiver = this.form.find('.acLabelReceiver');
+        //this.acLabelReceiver = this.form.find('.acLabelReceiver');
         this.verifyMatch = this.form.find('.verifyMatch');    
         this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
@@ -161,7 +161,7 @@ var customForm = {
     
     initFormWithValidationErrors: function() {
         var uri = this.acUriReceiver.val(), 
-            label = this.acLabelReceiver.val();
+            label = this.acSelector.val(); 
         
         // Call initFormFullView first, because showAutocompleteSelection needs
         // acType, which is set in initFormFullView. 
@@ -324,7 +324,7 @@ var customForm = {
     showAutocompleteSelection: function(label, uri) {
 
         this.acSelectorWrapper.hide();
-        this.acSelector.attr('disabled', 'disabled');
+        //this.acSelector.attr('disabled', 'disabled');
         
         // If only one form step, type is pre-selected, and the label is coded in the html.
         if (this.formSteps > 1) {
@@ -334,7 +334,6 @@ var customForm = {
         this.acSelection.show();
 
         this.acUriReceiver.val(uri);
-        this.acLabelReceiver.val(label); // RY PROBABLY DON"T NEED THIS AT ALL????
         this.acSelector.val(label);
         this.acSelectionInfo.html(label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
@@ -354,11 +353,9 @@ var customForm = {
     undoAutocompleteSelection: function() {
         
         this.acSelectorWrapper.show();
-        this.acSelector.attr('disabled', '');
-        this.acSelector.val('');
         this.hideFields(this.acSelection);
+        this.acSelector.val('');
         this.acUriReceiver.val('');
-        this.acLabelReceiver.val('');
         this.acSelectionInfo.html('');
         this.verifyMatch.attr('href', this.verifyMatchBaseHref);
         
