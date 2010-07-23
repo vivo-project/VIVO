@@ -32,9 +32,12 @@ Optional vars:
 											
 			    <%-- get years off role --%>
 				<c:set var="startYear" value="${individual.dataPropertyMap[startYearPredicate].dataPropertyStatements[0].data}"/>
-                <c:if test="${not empty startYear}">                   
-                    <c:if test="${showDateRange}">
-                        <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
+                <c:if test="${! empty startYear}">
+                	<c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
+                    <c:if test="${startYear == endYear}">
+                        <c:set var="showDateRange" value="false" />
+                    </c:if>
+                	<c:if test="${showDateRange}">                       
                         <c:set var="endYearVal" value = " -" />
                         <c:if test="${! empty endYear}">
                             <c:set var="endYearVal" value="${endYearVal} ${endYear}" />
