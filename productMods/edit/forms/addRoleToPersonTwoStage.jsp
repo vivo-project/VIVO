@@ -196,6 +196,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <v:jsonset var="n3ForRoleToActivity"> 
 	@prefix core: <${vivoCore}> .    
     ?role core:roleIn ?roleActivity .
+    ?roleActivity  core:relatedRole ?role .   
 </v:jsonset>
 
 <v:jsonset var="n3ForActivityLabel">
