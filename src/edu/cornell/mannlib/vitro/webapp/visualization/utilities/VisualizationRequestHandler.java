@@ -141,7 +141,7 @@ public class VisualizationRequestHandler {
     																imageQueryHandler.getResultSet(),
     																fieldLabelToOutputFieldLabel);
     				
-    				System.out.println("thumbnail access URL " + thumbnailAccessURL);
+//    				System.out.println("thumbnail access URL " + thumbnailAccessURL);
     				prepareVisualizationQueryResponse(thumbnailAccessURL);
     				return;
     				
