@@ -86,16 +86,12 @@ var customForm = {
             this.editMode = 'add'; // edit vs add: default to add
         }
         
-        if (!this.typeSelector.length || this.editMode == 'edit') {
+        if (!this.typeSelector.length || this.editMode == 'edit' || this.editMode == 'repair') {
             this.formSteps = 1;
         // there may also be a 3-step form - look for this.subTypeSelector
         } else {
             this.formSteps = 2;
         }
-        // RY This should probably be done from initFormFullView, since there
-        // are not two form steps in this case.
-        if( this.editMode == 'repair')
-        	this.formSteps = 2;
                 
         this.bindEventListeners();
         
@@ -210,8 +206,9 @@ var customForm = {
             customForm.undoAutocompleteSelection();
 
             // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-            // or submitting form without a type selection.            
-            typeVal.length ? customForm.initFormFullView() : customForm.initFormTypeView();
+            // or submitting form without a type selection. Exception: in repair editMode, stay in full view,
+            // else we lose the role information.          
+            (typeVal.length || customForm.editMode == 'repair') ? customForm.initFormFullView() : customForm.initFormTypeView();
     
         }); 
         
@@ -403,16 +400,20 @@ var customForm = {
     // Set field labels based on type selection. Although these won't change in edit
     // mode, it's easier to specify the text here than in the jsp.
     setLabels: function() {
-        var newLabelTextForNewInd;
+        var newLabelTextForNewInd, 
+            // if this.acType is empty, we are in repair mode with no activity type selected.
+            // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
+            typeText = this.acType ? this.typeName : 'Activity';
             
-        this.labelFieldLabel.html(this.typeName + ' ' + this.baseLabelText);
+        
+        this.labelFieldLabel.html(typeText + ' ' + this.baseLabelText);
         
         if (this.dateHeader.length) {
-            this.dateHeader.html(this.baseDateHeaderText + this.typeName);
+            this.dateHeader.html(this.baseDateHeaderText + typeText);
         } 
                    
         if (this.newIndLabel.length) {
-            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, this.typeName);
+            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, typeText);
             this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
         }  
 
@@ -422,17 +423,22 @@ var customForm = {
     // or a new related individual. Called when setting up full view of form, and after
     // an autocomplete selection.
     setButtonText: function(newOrExisting) {
+        var typeText;
         
         // Edit mode button doesn't change, so it's specified in the jsp
         if (this.editMode === 'edit') {
             return;
         }  
-        
+
+        // if this.acType is empty, we are in repair mode with no activity type selected.
+        // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
+        typeText = this.acType ? this.typeName : 'Activity';
+                
         // Creating new related individual      
         if (newOrExisting === 'new') {
             if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
-                this.button.val('Create ' + this.typeName + ' & ' + this.baseButtonText);                
+                this.button.val('Create ' + typeText + ' & ' + this.baseButtonText);                
             } else {
                 // e.g., 'Create Publication'
                 this.button.val('Create ' + this.baseButtonText);
