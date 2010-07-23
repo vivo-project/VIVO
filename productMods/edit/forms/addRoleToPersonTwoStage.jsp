@@ -64,6 +64,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 --%>
 
 <c:set var="roleActivityTypeLabel">${param.roleActivityTypeLabel}</c:set>
+<c:set var="buttonLabel" scope="request">${! empty param.buttonLabel ? param.buttonLabel : param.roleActivityTypeLabel}</c:set>
 <c:set var="roleType">${param.roleType}</c:set>
 <c:set var="roleActivityType_optionsType" >${param.roleActivityType_optionsType}</c:set>
 <c:set var="roleActivityType_objectClassUri" >${param.roleActivityType_objectClassUri}</c:set> 
@@ -89,6 +90,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     vreq.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
     
     vreq.setAttribute("roleActivityTitleCase", TitleCase.toTitleCase(vreq.getParameter("roleActivityTypeLabel")));
+    String buttonLabel = (String) vreq.getAttribute("buttonLabel");
+    vreq.setAttribute("buttonLabel", TitleCase.toTitleCase(buttonLabel));
+    
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
 		%> <c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
@@ -381,12 +385,12 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:choose>
     <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">    	
         <c:set var="titleText" value="Edit" />        
-        <c:set var="submitButtonText" value="Edit ${roleActivityTitleCase}" />
+        <c:set var="submitButtonText" value="Edit ${buttonLabel}" />
     </c:when>
     <c:otherwise>
         <c:set var="titleText" value="Create a new" />
         <c:set var="editMode" value="add" />
-        <c:set var="submitButtonText" value="${roleActivityTitleCase}" />
+        <c:set var="submitButtonText" value="${buttonLabel}" />
     </c:otherwise>
 </c:choose>
 

@@ -3,6 +3,7 @@
 
 <jsp:include page="addRoleToPersonTwoStage.jsp">    
 	<jsp:param name="roleActivityTypeLabel" value="presentation" />
+	<jsp:param name="buttonLabel" value="presenter" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#PresenterRole" />	
 	<jsp:param name="numDateFields" value="1" />
 	<jsp:param name="roleActivityType_optionsType" value="HARDCODED_LITERALS" />
