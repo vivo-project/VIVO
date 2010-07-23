@@ -86,16 +86,12 @@ var customForm = {
             this.editMode = 'add'; // edit vs add: default to add
         }
         
-        if (!this.typeSelector.length || this.editMode == 'edit') {
+        if (!this.typeSelector.length || this.editMode == 'edit' || this.editMode == 'repair') {
             this.formSteps = 1;
         // there may also be a 3-step form - look for this.subTypeSelector
         } else {
             this.formSteps = 2;
         }
-        // RY This should probably be done from initFormFullView, since there
-        // are not two form steps in this case.
-        if( this.editMode == 'repair')
-        	this.formSteps = 2;
                 
         this.bindEventListeners();
         
@@ -210,8 +206,9 @@ var customForm = {
             customForm.undoAutocompleteSelection();
 
             // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-            // or submitting form without a type selection.            
-            typeVal.length ? customForm.initFormFullView() : customForm.initFormTypeView();
+            // or submitting form without a type selection. Exception: in repair editMode, stay in full view,
+            // else we lose the role information.          
+            (typeVal.length || customForm.editMode == 'repair') ? customForm.initFormFullView() : customForm.initFormTypeView();
     
         }); 
         
