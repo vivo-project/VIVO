@@ -5,17 +5,23 @@
 <%@ taglib uri="http://vitro.mannlib.cornell.edu/vitro/tags/StringProcessorTag" prefix="p" %>
 
 <%-- 
- This short view is intended to be called to handle short views for roles
+This short view is intended to be called to handle short views for roles
  
- The following vars should be set by the jsp that is calling this short view 
- personToRolePredicate: URI of the person to role predicate.
- roleToPersonPredicate: URI of the role to person predicate. 
- roleActivityToRolePredicate: URI of the activity to role predicate.
- roleLabelForPerson: human readable label for person when viewing from non-person side of role. Most short views 
-     don't specify this value because the role name is displayed instead. Grant-related short views specify
-     this value because there is no specific role name. 
- roleActivityLabel: human readable label of activity used for error messages   
+The following vars should be set by the jsp that is calling this short view 
+    personToRolePredicate: URI of the person to role predicate.
+    roleToPersonPredicate: URI of the role to person predicate. 
+    roleActivityToRolePredicate: URI of the activity to role predicate.
+
+    roleActivityLabel: human readable label of activity used for error messages   
+ 
+Optional vars:
+    roleLabelForPerson: human readable label for person when viewing from non-person side of role. Most short views 
+        don't specify this value because the role name is displayed instead. Grant-related short views specify
+        this value because there is no specific role name. 	
+    startYearPredicate: defaults to http://vivoweb.org/ontology/core#startYear if not specified
  --%>
+
+<c:set var="startYearPredicate">${! empty param.startYearPredicate ? param.startYearPredicate : 'http://vivoweb.org/ontology/core#startYear'}</c:set>
  
 <c:set var="errorMsg" value=""/>
 <c:choose>
@@ -24,7 +30,7 @@
 			<c:when test="${!empty predicateUri}">
 											
 			    <%-- get years off role --%>
-				<c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
+				<c:set var="startYear" value="${individual.dataPropertyMap[startYearPredicate].dataPropertyStatements[0].data}"/>
                 <c:if test="${not empty startYear}">
                     <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
                     <c:if test="${not empty endYear }">
