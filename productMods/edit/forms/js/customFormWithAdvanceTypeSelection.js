@@ -136,10 +136,6 @@ var customForm = {
     },
     
     initFormFullView: function() {
-        
-        if (this.editMode == 'edit') {
-            this.initFormEditView();
-        }
 
         this.setType();        
         this.fullViewOnly.show();
@@ -180,12 +176,6 @@ var customForm = {
            return false;
         });
        
-    },
-    
-    initFormEditView: function() {
-        // These are not editable: only properties of the role are editable.
-        this.typeSelector.attr('disabled', 'disabled');
-        this.relatedIndLabel.attr('disabled', 'disabled');
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
