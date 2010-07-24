@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeleteEverythingElsen</title>
+<title>DeleteEverythingElse</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">DeleteEverythingElsen</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">DeleteEverythingElse</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
@@ -102,6 +102,36 @@
 <tr>
 	<td>comment</td>
 	<td class="comment">Verify everything to be deleted is there</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Semester Class (3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Course (3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>topics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Subject Area (3)</td>
 	<td></td>
 </tr>
 <tr>
@@ -490,8 +520,73 @@
 	<td></td>
 </tr>
 <tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Verify everything is gone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Course</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>topics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
