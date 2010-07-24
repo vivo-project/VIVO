@@ -58,9 +58,6 @@ This is intended to create a set of statements like:
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="label" value="${rdfs}label" />
 
-<%-- grantLabel is required if we are doing an update --%> 
-<c:set var="labelRequired" ><%= request.getAttribute("objectUri")== null?"":"\"nonempty\","  %></c:set>
-
 <%  // set role type based on predicate
 String subjectName = ((Individual) request.getAttribute("subject")).getName();
 if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvestigatorRole") ) { %>
@@ -76,6 +73,22 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
  	<c:set var="submitButtonLabel">Investigator</c:set>
  	<c:set var="formHeading">investigator entry for <%= subjectName %></c:set>
  <% } %>
+ 
+<c:choose>
+    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
+        <c:set var="formHeading" value="Edit ${formHeading}" />
+        <c:set var="editMode" value="edit" />
+        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
+        <c:set var="labelRequired" value="" />
+        <c:set var="disabledVal" value="disabled" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="formHeading" value="Create a new ${formHeading}" />
+        <c:set var="editMode" value="add" />
+        <c:set var="labelRequired" value="\"nonempty\"," />
+        <c:set var="disabledVal" value="" />
+    </c:otherwise>
+</c:choose>
 
 <c:set var="startYearUri" value="${vivoCore}startYear" />
 <v:jsonset var="startYearAssertion" >
@@ -264,18 +277,6 @@ PREFIX core: <${vivoCore}>
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
-<c:choose>
-    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
-        <c:set var="formHeading" value="Edit ${formHeading}" />
-        <c:set var="editMode" value="edit" />
-        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
-    </c:when>
-    <c:otherwise>
-        <c:set var="formHeading" value="Create a new ${formHeading}" />
-        <c:set var="editMode" value="add" />
-    </c:otherwise>
-</c:choose>
-
 <jsp:include page="${preForm}" />
 
 <h2>${formHeading}</h2>
@@ -285,8 +286,14 @@ PREFIX core: <${vivoCore}>
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addGrantRoleToPerson" class="noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
-    <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
+    <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" disabled="${disabledVal}" /></p>
 
+    <%-- Store this value in a hidden field, because the displayed field is disabled and don't submit. This ensures that when
+    returning from a validation error, we retain the value. --%>
+    <c:if test="${editMode == 'edit'}">
+       <v:input type="hidden" id="grantLabel" />
+    </c:if>
+            
     <div class="acSelection">
         <p class="inline"><label>Selected Grant:</label><span class="acSelectionInfo"></span><a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
         <v:input type="hidden" id="grant" name="grant" cssClass="acUriReceiver"  /> <%-- Field value populated by JavaScript --%>

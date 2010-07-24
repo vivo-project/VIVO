@@ -149,7 +149,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
 <%-- label and type required if we are doing an add or a repair, but not an edit --%> 
 <c:set var="labelRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
-<c:set var="typeRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
+<c:set var="typeRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"" : "" %></c:set>
 
 <%-- 
 <c:choose>
@@ -259,7 +259,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear", "existingActivityLabel" ],
+    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -377,11 +377,13 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">    	
         <c:set var="titleText" value="Edit" />        
         <c:set var="submitButtonText" value="Edit ${buttonLabel}" />
+        <c:set var="disabledVal" value="disabled" />
     </c:when>
     <c:otherwise>
         <c:set var="titleText" value="Create a new" />
         <c:set var="editMode" value="add" />
         <c:set var="submitButtonText" value="${buttonLabel}" />
+        <c:set var="disabledVal" value="" />
     </c:otherwise>
 </c:choose>
 
@@ -393,16 +395,22 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <% }else{ %>
 	
 	<h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
-	
 	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 	<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	
-	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" id="typeSelector" /></p>
+	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
 	    
 	    <div class="fullViewOnly">
 	        
-		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" /></p>
+		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 	
+	        <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
+	        returning from a validation error, we retain the values. --%>
+	        <c:if test="${editMode == 'edit'}">
+	           <v:input type="hidden" id="roleActivityType" />
+	           <v:input type="hidden" id="activityLabel" />
+	        </c:if>
+	        
 		    <div class="acSelection">
 		        <%-- RY maybe make this a label and input field. See what looks best. --%>
 		        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
