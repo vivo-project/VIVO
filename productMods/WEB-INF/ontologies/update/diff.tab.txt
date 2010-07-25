@@ -138,4 +138,5 @@ http://vivoweb.org/ontology/core#educationalBackgroundOf	http://vivoweb.org/onto
 http://vivoweb.org/ontology/core#memberOf	http://vivoweb.org/ontology/core#currentMemberOf	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasMember	http://vivoweb.org/ontology/core#hasCurrentMember	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#role	http://vivoweb.org/ontology/core#description	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#presenterInformation	http://vivoweb.org/ontology/core#description	Yes	Map	Directly-changed
 http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	http://vivoweb.org/ontology/core#description	Yes	Map	Special mapping for VIVO 1.1 application (not a real ontology change)
