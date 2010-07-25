@@ -315,7 +315,7 @@ to upgrade your theme to VIVO 1.1.
     1. Copy the directory /vivo/themes/vivo-basic/templates into your theme
        directory /vivo/themes/<your-theme-name>.
 
-    2. Follow step a or b below, whichever is applicable to your theme:
+    2. Follow step a or b below, whichever is applicable to your theme. Then proceed to Steps 3 and 4:
 
         a. If you did not apply any customizations to the JSPs in your VIVO 1.0 
            theme, then you do not need to apply any additional changes to the 
@@ -348,9 +348,9 @@ to upgrade your theme to VIVO 1.1.
            the syntax and available built-in constructs. Template authors need 
            not be concerned with the Programmer's Guide or Java API documentation.
 
-        c. Remove the jsp directory from your themes directory.
+    3. Remove the jsp directory from your themes directory.
         
-    3. VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
+    4. VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
        styles in your VIVO 1.0 theme, you will not be able to simply copy the  
        1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
        style upgrades that your theme should pick up.  Instead, you should 
