@@ -196,7 +196,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -267,6 +267,41 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate back to Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -386,7 +421,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Grant </td>
+	<td>Role in Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -401,7 +436,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -491,7 +526,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Teaching Activity Type </td>
+	<td>Teaching Activity Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -521,7 +556,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,7 +676,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -746,7 +781,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Workshop </td>
+	<td>Role in Workshop</td>
 	<td></td>
 </tr>
 <tr>
@@ -761,7 +796,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -866,7 +901,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Clinical Activity Type </td>
+	<td>Clinical Activity Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -891,7 +926,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -996,7 +1031,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Clinical Activity Type </td>
+	<td>Clinical Activity Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -1021,7 +1056,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
