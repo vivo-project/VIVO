@@ -54,7 +54,7 @@ II. Create an empty MySQL database
 Decide on a database name, username, and password. Log into your MySQL server 
 and create a new database in MySQL that uses UTF-8 encoding. You will need 
 these values for step IV when you configure the deployment properties. At the 
-mysql command line you can create the database and user with these commands 
+MySQL command line you can create the database and user with these commands 
 substituting your values for "dbname", "username", and "password". Most of the 
 time, the "hostname" will equal "localhost".
 
@@ -164,8 +164,8 @@ to build VIVO and deploy to Tomcat's webapps directory.
 VI. Set Tomcat JVM Parameters
 
 Currently, VIVO copies the contents of your RDF database into memory in order
-to serve Web requests quickly. (The in-memory copy and the underlying database
- are kept in synch as edits are performed.)
+to serve Web requests quickly (the in-memory copy and the underlying database
+ are kept in synch as edits are performed).
 
 VIVO will require more memory than that allocated to Tomcat by default. With
 most installations of Tomcat, the setenv.sh or setenv.bat file in Tomcat's bin
@@ -181,8 +181,8 @@ practical heap size for production installations storing data for large academic
 institutions, and additional heap space is preferable. For testing with small 
 sets of data, 256m to 512m should be sufficient.
 
-If an OutOfMemoryError is encountered during VIVO execution, increasing the 
-heap parameters and restarting Tomcat is the typical remedy.
+If an OutOfMemoryError is encountered during VIVO execution, it can be remedied 
+by increasing the heap parameters and restarting Tomcat.
 
 -------------------------------------------------------------------------------
  
@@ -202,7 +202,7 @@ VIII. Log in and add RDF data
 If the startup was successful, you will see a welcome message informing you 
 that you have successfully installed VIVO. Click the "Log in" link near the 
 upper right corner. Log in with the initialAdminUser username you set up in 
-step IV. The initial password the initialAdminUser is defaultAdmin. On first 
+Step IV. The initial password for initialAdminUser is defaultAdmin. On first 
 login, you will be prompted to select a new password and verify it a second 
 time.
 
@@ -213,7 +213,7 @@ to make visible on your website must be part of a class group, and there a
 number of visibility and display options available for each ontology entity. 
 
 VIVO comes with a core VIVO ontology, but you may also upload other ontologies 
-from an RDF file. Under the "Advanced Data Tools", click "Add/Remove RDF Data." 
+from an RDF file. Under the "Advanced Data Tools" click "Add/Remove RDF Data." 
 Note that Vitro currently works best with OWL-DL ontologies and has only limited 
 support for pure RDF data. You can enter a URL pointing to the RDF data you 
 wish to load or upload a file on your local machine. Ensure that the "add RDF" 
@@ -233,8 +233,8 @@ application.  This is the email that the contact form submits to.  It can be a
 list server or an individual's email address.  
 
 Log in as a system administrator.  Navigate to the "Site Admin" table of contents
-(link in the right side of the header).  Go to "Site Information" (under "Site 
-Configuration").  In the "Site Information Editing Form", enter a functional 
+(link in the right side of the header). Go to "Site Information" (under "Site 
+Configuration").  In the "Site Information Editing Form," enter a functional 
 email address in the field "Contact Email Address." and submit the change.
 
 If you set the Vitro.smtpHost in Step IV and do NOT provide an email address
@@ -325,7 +325,7 @@ installation was successful.
 
 Here is a simple test to see whether the ontology files were loaded:
 * Click on the "Index" link on the upper left, below the logo. You should see
-    a "locations" section, with links for "Country" and "Geographic Location".
+    a "locations" section, with links for "Country" and "Geographic Location."
     The index is built in a background thread, so on your first login, you may
     see an empty index instead. Refresh the page periodically to see whether 
     the index will be populated. This may take some time: with VIVO installed
@@ -337,21 +337,21 @@ Here is a simple test to see whether the ontology files were loaded:
 Here is a test to see whether your system is configured to serve linked data:
 * Point your browser to the home page of your website, and click the "Log in" link 
     near the upper right corner. Log in with the initialAdminUser username you
-    set up in step IV. If this is your first time logging in, you will be 
+    set up in Step IV. If this is your first time logging in, you will be 
     prompted to change the password.
 * After you have successfully logged in, click "site admin" in the upper right 
-	corner.  In the drop down under "Data Input", select "Faculty Member(core)"
+	corner.  In the drop down under "Data Input" select "Faculty Member(core)"
 	and click the "Add individual of this class" button.
-* Enter the name "test individual" under the field "Individual Name", scroll to
-	the bottom, and click "Create New Record".You will be taken to the "Individual
-	Control Panel". Make note of the value of the field "URI", it will be used in 
+* Enter the name "test individual" under the field "Individual Name," scroll to
+	the bottom, and click "Create New Record." You will be taken to the "Individual
+	Control Panel." Make note of the value of the field "URI" it will be used in 
 	the next step. 
-* Open a new web browser or browser tab to the page "http://marbles.sourceforge.net/".
+* Open a new web browser or browser tab to the page http://marbles.sourceforge.net/.
   	In the pink box on that page enter the URI of the individual you created in the
   	previous step and click "open."
-* In the resulting page search for the URI of the "test individual".  You should 
-	find it towards the bottom of the page next to a red dot followed by "redirect (303)"
-	This indicates that you are successfully serving linked RDF data.
+* In the resulting page search for the URI of the "test individual." You should 
+	find it towards the bottom of the page next to a red dot followed by "redirect 
+	(303)." This indicates that you are successfully serving linked RDF data.
 	If the URI of the "test individual" is followed by "failed (400)" you are not 
 	successfully serving linked data.
      
