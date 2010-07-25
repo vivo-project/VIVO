@@ -46,9 +46,9 @@ exceptions:
     with the revised ontology. See the section on "Ontology Changes"
     below for  more information.
 * The first time Apache Tomcat starts up after the upgrade, it will 
-    initiate a process that modifies the uploads directory (images), to align
-    the uploaded files with the revised file storage scheme. See the section
-    on "File Storage Changes" below for more information.
+    initiate a process that modifies the uploaded files directory (images), to 
+    align the uploaded files with the revised file storage scheme. See the 
+    section on "File Storage Changes" below for more information.
          
 -------------------------------------------------------------------------------
 
@@ -141,19 +141,19 @@ the automated upgrade process was executed successfully.  The ontology alignment
 process will create the following files in the Tomcat webapps/vivo/WEB-INF directory:
 
 ontologies/update/logs/knowledgeBaseUpdate.log 
-    a log of a summary of updates that were made to the knowledge base and notes 
+    A log of a summary of updates that were made to the knowledge base and notes 
     about some recommended manual reviews. This file should end with
     "Successfully finished processing ontology changes".
     
 ontologies/update/logs/knowledgeBaseUpdate.error.log 
-    a log of errors that were encountered during the upgrade process. This file
+    A log of errors that were encountered during the upgrade process. This file
     should be empty if the upgrade was successful.
     
 ontologies/update/changedData/removedData.n3
-    an N3 file containing all the statements that were removed from the knowledge base.
+    An N3 file containing all the statements that were removed from the knowledge base.
     
 ontologies/update/changedData/addedData.n3
-    an N3 file containing all the statements that were added to the knowledge base.
+    An N3 file containing all the statements that were added to the knowledge base.
 
 B. Ontology knowledge base manual review
 
@@ -195,7 +195,7 @@ the following types of changes:
     should be reasserted using the newly added property.
 
   Annotation property default values
-    It a site has modified the value of a vitro annotation (such as
+    If a site has modified the value of a vitro annotation (such as
     displayRankAnnot or displayLimitAnnot) so that it is
     no longer using the default, then that setting will be left unchanged.
     If a site is using the default value of a vitro annotation, and the
@@ -211,7 +211,7 @@ A. Verifying the File Storage upgrade
 If the File Storage upgrade process is not successful, Tomcat's "vivo.all.log" 
 log file will contain an exception listing with more information.
 
-The File Storage upgrade process will create these files in the Vivo upload
+The File Storage upgrade process will create these files in the VIVO upload
 directory:
 
 upgrade/upgradeLog.2010-00-00T00-00-00.txt
@@ -282,7 +282,7 @@ which makes the required changes:
     Each image file will be copied to its new location in the upload
     directory.
   
-  Cleaning the old image directory.
+  Cleaning the old image directory
     All image files are removed from their old locations in the upload 
     directory.
 
