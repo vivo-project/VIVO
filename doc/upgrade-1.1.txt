@@ -12,7 +12,7 @@ This and other documentation can be found at:
 http://vivoweb.org/support
 
 Installation:
-If you need to do a fresh install, please consult the install-1.1.txt in this 
+If you need to do a fresh install, please consult the install.txt in this 
 directory.
 
 -------------------------------------------------------------------------------
