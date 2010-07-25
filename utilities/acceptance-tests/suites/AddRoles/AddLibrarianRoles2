@@ -171,12 +171,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Start Year </td>
+	<td>Start Year</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -261,7 +261,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Membership Type </td>
+	<td>Membership Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -291,7 +291,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -356,12 +356,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Cerify Head of and Member of roles display</td>
+	<td class="comment">Verify Head of and Member of roles display</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Reference Division</td>
+	<td>verifyElementPresent</td>
+	<td>link=Reference Division</td>
 	<td></td>
 </tr>
 <tr>
@@ -370,8 +370,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/display/n881</td>
+	<td>verifyElementPresent</td>
+	<td>//div[@id='hasLeaderRole']/ul/li/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Amercian Library Association</td>
 	<td></td>
 </tr>
 <tr>

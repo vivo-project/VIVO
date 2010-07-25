@@ -220,8 +220,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/edit/editRequestDispatch.jsp?subjectUri=http%3A%2F%2Fvivo.local.edu%2Findividual%2Fn6284&amp;predicateUri=http%3A%2F%2Fvivoweb.org%2Fontology%2Fcore%23hasPresenterRole</td>
+	<td>verifyTextPresent</td>
+	<td>Presentation Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,8 +270,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/edit/editRequestDispatch.jsp?subjectUri=http%3A%2F%2Fvivo.local.edu%2Findividual%2Fn6284&amp;predicateUri=http%3A%2F%2Fvivoweb.org%2Fontology%2Fcore%23hasPresenterRole</td>
+	<td>verifyTextPresent</td>
+	<td>Presentation Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -661,7 +661,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -761,7 +761,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Museum </td>
+	<td>Role in Museum</td>
 	<td></td>
 </tr>
 <tr>
@@ -771,12 +771,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Start Year </td>
+	<td>Start Year</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -936,7 +936,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -1036,7 +1036,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Role in Event </td>
+	<td>Role in Event</td>
 	<td></td>
 </tr>
 <tr>
@@ -1051,7 +1051,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>End Year </td>
+	<td>End Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -1082,6 +1082,41 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Show Me the Primates!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate back to Lily Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
