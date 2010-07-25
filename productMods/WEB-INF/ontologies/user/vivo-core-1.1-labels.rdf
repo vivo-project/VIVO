@@ -1529,9 +1529,6 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude">
     <rdfs:label xml:lang="en-US">hasMinLatitude</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#presenterInformation">
-    <rdfs:label xml:lang="en-US">about the presenter</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#workPhone">
     <rdfs:label xml:lang="en-US">work phone</rdfs:label>
   </rdf:Description>
