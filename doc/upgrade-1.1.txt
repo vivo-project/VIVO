@@ -306,53 +306,65 @@ Language) extension.
 Follow step A or B below, whichever is applicable to your site:
 
 A. If you did not create a customized theme for your site in VIVO 1.0, but used
-the 1.0 vivo-basic theme in its original directory, you need not take any action
-in order to convert your site to the VIVO 1.1 theme.
+the 1.0 vivo-basic theme in its original directory, you need not take any 
+action in order to convert your site to the VIVO 1.1 theme.
 
 B. If you created your own theme directory in VIVO 1.0, follow the steps below
-to upgrade your theme to VIVO 1.1.
+under sections "Templates," "Stylesheets,"  and "Site Icons" to upgrade your 
+theme to VIVO 1.1.
 
-    1. Copy the directory /vivo/themes/vivo-basic/templates into your theme
-       directory /vivo/themes/<your-theme-name>.
+    1. Templates
 
-    2. Follow step a or b below, whichever is applicable to your theme. Then proceed to Steps 3 and 4:
+       a. Copy the directory /vivo/themes/vivo-basic/templates into your theme
+          directory /vivo/themes/<your-theme-name>.
 
-        a. If you did not apply any customizations to the JSPs in your VIVO 1.0 
-           theme, then you do not need to apply any additional changes to the 
-           VIVO 1.1 theme templates during the upgrade process.
+       b. Follow step i or ii below, whichever is applicable to your theme. 
 
-        b. If you did apply customizations to the JSPs in your VIVO 1.0 theme, 
-           you will need to hand-replicate those modifications in the new theme
-           template files. 
+           i. If you did not apply any customizations to the JSPs in your VIVO  
+              1.0 theme, then you do not need to apply any additional changes 
+              to the VIVO 1.1 theme templates during the upgrade process.
+
+           ii. If you did apply customizations to the JSPs in your VIVO 1.0  
+               theme,you will need to hand-replicate those modifications in the 
+               new theme template files. 
            
-           The theme template content that was previously contained in three
-           JSP files is now contained in five FTL files. The correspondence
-           between the 1.0 JSPs and the 1.1 FTLs is as follows:
-
-               identity.jsp => identity.ftl
-               menu.jsp => menu.ftl and search.ftl
-               footer.jsp => footer.ftl 
+               The theme template content that was previously contained in 
+               three JSP files is now contained in five FTL files. The 
+               correspondence between the 1.0 JSPs and the 1.1 FTLs is as 
+               follows:
+               
+                   identity.jsp => identity.ftl
+                   menu.jsp => menu.ftl and search.ftl
+                   footer.jsp => footer.ftl 
     
-               googleAnalytics.ftl is a new file included from footer.ftl to
-               which you will add your site's Google Analytics Tracking Code 
-               (see section II).
+                   googleAnalytics.ftl is a new file included from footer.ftl to
+                   which you will add your site's Google Analytics Tracking Code 
+                   (see section II).
            
-           Because the FreeMarker Template Language uses many syntactic 
-           conventions that will be familiar to template authors from JSP or 
-           other common templating systems, the translation of your JSP changes
-           into the new FTLs should be relatively straightforward. 
+               Because the FreeMarker Template Language uses many syntactic 
+               conventions that will be familiar to template authors from JSP 
+               or other common templating systems, the translation of your JSP 
+               changes into the new FTLs should be relatively straightforward. 
    
-           Consult the FreeMarker Template Author's Guide at 
-           http://freemarker.org/docs/dgui.html and the Reference at 
-           http://freemarker.org/docs/ref.html for complete documentation of 
-           the syntax and available built-in constructs. Template authors need 
-           not be concerned with the Programmer's Guide or Java API documentation.
+               Consult the FreeMarker Template Author's Guide at 
+               http://freemarker.org/docs/dgui.html and the Reference at 
+               http://freemarker.org/docs/ref.html for complete documentation  
+               of the syntax and available built-in constructs. Template 
+               authors need  not be concerned with the Programmer's Guide or 
+               Java API documentation.
 
-    3. Remove the jsp directory from your themes directory.
+           c. Remove the jsp directory from your themes directory.
+    
+    2. Stylesheets
         
-    4. VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
-       styles in your VIVO 1.0 theme, you will not be able to simply copy the  
-       1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
-       style upgrades that your theme should pick up.  Instead, you should 
-       use the vivo-basic 1.1 stylesheets as a starting point, and manually
-       merge your 1.0 style modifications in as needed.
+    VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
+    styles in your VIVO 1.0 theme, you will not be able to simply copy the  
+    1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
+    style upgrades that your theme should pick up.  Instead, you should 
+    use the vivo-basic 1.1 stylesheets as a starting point, and manually
+    merge your 1.0 style modifications in as needed.
+    
+    3. Site Icons
+    
+    Copy the site icons from your 1.0 theme into the site_icons folder in
+    your 1.1 theme.
