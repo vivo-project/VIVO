@@ -9,5 +9,6 @@ CONSTRUCT {
            || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupSWRL> 
            || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupother>
            || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupemployment>
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGrouptopic>
          )
 }
