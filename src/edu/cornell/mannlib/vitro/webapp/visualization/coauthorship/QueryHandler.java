@@ -3,6 +3,7 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -104,6 +105,7 @@ public class QueryHandler {
 				}
 			}
 			
+			
 			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
 			BiboDocument biboDocument;
 			
@@ -144,7 +146,11 @@ public class QueryHandler {
 					coAuthorNode.setNodeName(coAuthorLabelNode.toString());
 				}
 			}
-			
+			/*
+			System.out.print("PERSON_URL:" + egoAuthorURLNode.toString() + "|");
+			System.out.print("DOCUMENT_URL:" + documentNode.toString() + "|");
+			System.out.println("CO_AUTHOR_URL:" + coAuthorURLNode.toString());
+			*/
 			coAuthorNode.addAuthorDocument(biboDocument);
 			
 			Set<Node> coAuthorsForCurrentBiboDocument;
@@ -193,19 +199,13 @@ public class QueryHandler {
 							edges);
 		
 		
-/*		System.out.println(collegeURLToVO);
-		System.out.println("------------------------------------------------------------");
-		System.out.println(departmentURLToVO);
-		System.out.println("------------------------------------------------------------");
-		System.out.println(employeeURLToVO);
-		System.out.println("------------------------------------------------------------");
-*/		
 		return new VisVOContainer(egoNode, nodes, edges);
 	}
 
 	private void createCoAuthorEdges(
 			Map<String, BiboDocument> biboDocumentURLToVO,
 			Map<String, Set<Node>> biboDocumentURLToCoAuthors, Set<Edge> edges) {
+		
 		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry : biboDocumentURLToCoAuthors.entrySet()) {
 			/*
 			 * If there was only one co-author (other than ego) then we dont have to create any edges. so 
@@ -214,10 +214,11 @@ public class QueryHandler {
 			if (currentBiboDocumentEntry.getValue().size() > 1) {
 			
 				/*
-				 * In order to leverage the nested "for loop" for making edges between all the co=authors
+				 * In order to leverage the nested "for loop" for making edges between all the co-authors
 				 * we need to create a list out of the set first. 
 				 * */
 				List<Node> coAuthorNodes = new ArrayList<Node>(currentBiboDocumentEntry.getValue());
+				Collections.sort(coAuthorNodes, new NodeComparator());
 				
 				int numOfCoAuthors = coAuthorNodes.size();
 				
@@ -375,10 +376,10 @@ public class QueryHandler {
 							+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . " 
 							+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . " 
 							+ "OPTIONAL {  ?document vitro:description ?documentDescription } " 
-//							+ "FILTER (<" + queryURI + "> != ?coAuthorPerson ) . "
-							+ "}";
+							+ "} " 
+							+ "ORDER BY ?document ?coAuthorPerson";
 
-//		System.out.println(sparqlQuery);
+		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}

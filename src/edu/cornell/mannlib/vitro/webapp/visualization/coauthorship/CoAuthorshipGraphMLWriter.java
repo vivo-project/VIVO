@@ -107,6 +107,11 @@ public class CoAuthorshipGraphMLWriter {
 
 	private void getEdgeContent(StringBuilder graphMLContent, Edge currentEdge) {
 		
+		/*
+		System.out.print("EDGE_ID:" + currentEdge.getEdgeID() + "|");
+		System.out.print("EDGE_SOURCE:" + currentEdge.getSourceNode().getNodeURL() + "|");
+		System.out.println("EDGE_TARGET:" + currentEdge.getTargetNode().getNodeURL());
+		*/
 		graphMLContent.append("<edge " 
 									+ "id=\"" + currentEdge.getEdgeID() + "\" " 
 									+ "source=\"" + currentEdge.getSourceNode().getNodeID() + "\" "
@@ -223,10 +228,11 @@ public class CoAuthorshipGraphMLWriter {
 		}
 		
 		
-		
+//		System.out.print("NODE_ID:" + node.getNodeID() + "|");
 		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
 		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURL() + "</data>\n");
 //		graphMLContent.append("\t<data key=\"name\">" + node.getNodeName() + "</data>\n");
+//		System.out.println("NODE_NAME:" + node.getNodeURL());
 		graphMLContent.append("\t<data key=\"label\">" + node.getNodeName() + "</data>\n");
 		
 		if (profileURL != null) {
