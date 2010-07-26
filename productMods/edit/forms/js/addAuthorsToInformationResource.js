@@ -448,12 +448,12 @@ var addAuthorForm = {
     		return false;
     	});
     	
-    	this.submit.click(function() {
-    		// NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
-    		// in prepareSubmit. If we do this.submit.click(prepareSubmit); then
-    		// this != addAuthorForm in prepareSubmit.
-    		addAuthorForm.prepareSubmit(); 
-    	});   	
+        this.form.submit(function() {
+            // NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
+            // in prepareSubmit. If we do this.form.submit(prepareSubmit); then
+            // this != addAuthorForm in prepareSubmit.
+            addAuthorForm.prepareSubmit(); 
+        });       	
 
     	this.lastNameField.blur(function() {
     		addAuthorForm.onLastNameChange();
