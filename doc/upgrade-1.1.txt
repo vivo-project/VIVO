@@ -357,14 +357,14 @@ theme to VIVO 1.1.
     
     2. Stylesheets
         
-    VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
-    styles in your VIVO 1.0 theme, you will not be able to simply copy the  
-    1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
-    style upgrades that your theme should pick up.  Instead, you should 
-    use the vivo-basic 1.1 stylesheets as a starting point, and manually
-    merge your 1.0 style modifications in as needed.
+       VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
+       styles in your VIVO 1.0 theme, you will not be able to simply copy the  
+       1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
+       style upgrades that your theme should pick up.  Instead, you should 
+       use the vivo-basic 1.1 stylesheets as a starting point, and manually
+       merge your 1.0 style modifications in as needed.
     
     3. Site Icons
     
-    Copy the site icons from your 1.0 theme into the site_icons folder in
-    your 1.1 theme.
+       Copy the site icons from your 1.0 theme into the site_icons folder in
+       your 1.1 theme.
