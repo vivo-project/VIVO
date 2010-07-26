@@ -58,19 +58,16 @@
 
 #photoCroppingContainer{
 	margin-left: 0px;
-	width:750px;
 	height:450px;
 	background:#fff;
+	padding:15px 0 15px 15px;
+	margin-right:0;
 
-	padding:15px;
-	
-	
 }
 
 #photoCroppingPreview{
 	width:180px;
 	float:left;
-
 }
 
 
@@ -80,12 +77,12 @@
 }
 
 #photoCropping{
-	width:500px;
-	float:right;
+	width:400px;
+	float:left;
 	padding-top:30px;
 	padding-left:15px;
-
-	
+	margin-left:0;
+	margin-right:0;
 }
 
 
