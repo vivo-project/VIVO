@@ -352,8 +352,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
         // Return browser to person individual after editing an existing role.
     } else { 
         editConfig.prepareForNonUpdate(model);
+        // NIHVIVO-1014 Return browser to person individual after editing an existing role.
         // Return the browser to the new activity entity after adding a new role.
-        editConfig.setEntityToReturnTo("?roleActivity");
+        // editConfig.setEntityToReturnTo("?roleActivity");
     }        
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
