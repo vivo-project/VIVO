@@ -238,6 +238,11 @@ SPARQL queries for existing values. --%>
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
+    
+    //for some reason we are comming from the add new and that is working 
+    //but we also come from the edit, and that is not working.
+    editConfig.setObject(""); //this will force the edit config to always be an add, never an update
+    
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
     
     String subjectUri = vreq.getParameter("subjectUri");
