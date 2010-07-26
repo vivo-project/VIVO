@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddBook</title>
+<title>ValidateFields</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddBook</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">ValidateFields</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -102,16 +102,6 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that no books currently exist</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Book</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,13 +196,13 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to add a book</td>
+	<td class="comment">Select to add a book chapter</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
-	<td>label=Book</td>
+	<td>label=Chapter</td>
 </tr>
 <tr>
 	<td>comment</td>
@@ -226,7 +216,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to add an book again, this time without a title</td>
+	<td class="comment">Select to add an book chapter again, this time without a title</td>
 	<td></td>
 </tr>
 <tr>
@@ -247,11 +237,11 @@
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
-	<td>label=Book</td>
+	<td>label=Chapter</td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Book Title</td>
+	<td>Chapter Title</td>
 	<td></td>
 </tr>
 <tr>
@@ -271,7 +261,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to add a Book again, this time do it right</td>
+	<td class="comment">Select to add a Book Chapter again, this time do it right</td>
 	<td></td>
 </tr>
 <tr>
@@ -292,12 +282,17 @@
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
-	<td>label=Book</td>
+	<td>label=Chapter</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Chapter Title</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
+	<td>Nintendo O.K. for Kids</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -306,7 +301,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
+	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -321,7 +316,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add web page for Book</td>
+	<td class="comment">Add Image, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Web Page, validating field first</td>
 	<td></td>
 </tr>
 <tr>
@@ -336,7 +336,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Create a new primary link for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -347,11 +347,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Link anchor text</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,12 +356,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Hit add button without entering anything</td>
+	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -381,7 +371,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Create a new primary link for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -406,7 +396,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Create a new primary link for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -422,11 +412,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add with only URL field entered</td>
 	<td></td>
 </tr>
 <tr>
@@ -451,7 +436,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Create a new primary link for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -467,11 +452,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add with only Link Anchor Text field entered</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,7 +476,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Create a new primary link for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -512,11 +492,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now add all required fields for web page</td>
 	<td></td>
 </tr>
 <tr>
@@ -536,37 +511,37 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that web page appears properly</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Company Homepage</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(primary link)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='dprop-vitro-links']/ul/li/span/em</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Furter, Frank</td>
+	<td class="comment">Add Author, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Add Editor, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Volume, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Number, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Start Page, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Chapter, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add End Page, validating field first</td>
 	<td></td>
 </tr>
 <tr>
@@ -591,6 +566,11 @@
 </tr>
 <tr>
 	<td>comment</td>
+	<td class="comment">Add Published In, validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
 	<td class="comment">Add Edition, validating field first</td>
 	<td></td>
 </tr>
@@ -606,97 +586,87 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Has Part, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Part Of, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Domestic Geo Focus, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add International Geo Focus, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Contact Webpage, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Transcript of, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Year, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Year and Month, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add PMID, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Number of Pages, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Subject Area, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Keywords, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Reproduced In, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Add Reproduces, validating field first</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Verify all fields display properly</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
+	<td class="comment">Verify Index is correct</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment"></td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Naviage back to Index</td>
+	<td class="comment">Navigate back to Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
@@ -707,86 +677,6 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that an Article link now appears</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Academic Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Academic Article (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Article (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify article shows up for Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
@@ -805,108 +695,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
 	<td>Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>publication(s) within the last 10 years incomplete data</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='pub_count_short_sparkline_vis']/table/tbody/tr/td[3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=View all VIVO publications and corresponding co-author network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>View all VIVO publications and corresponding co-author network.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Effect of Nintendo on Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='authorInAuthorship']/ul/li[1]/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Find article via search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>nintendo</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>nintendo - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=publications</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Effect of Nintendo on Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='content']/div/ul/li</td>
 	<td></td>
 </tr>
 <tr>
