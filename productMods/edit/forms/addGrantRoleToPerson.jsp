@@ -253,8 +253,9 @@ PREFIX core: <${vivoCore}>
         // Return browser to person individual after editing an existing role.
     } else { 
         editConfig.prepareForNonUpdate(model);
+        // NIHVIVO-1014 Return browser to person individual after editing an existing role.
         // Return the browser to the new activity entity after adding a new role.
-        editConfig.setEntityToReturnTo("?grant");
+        // editConfig.setEntityToReturnTo("?grant");
     }
     
     String subjectUri = vreq.getParameter("subjectUri");       
