@@ -178,7 +178,7 @@ parameter set up by editRequestDispatch.
 
 <jsp:include page="${preForm}" />
 
-<h2>Create a new ${typeName} individual</h2>
+<h2>Create a new ${typeName}</h2>
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<c:if test="${! isPersonType}">

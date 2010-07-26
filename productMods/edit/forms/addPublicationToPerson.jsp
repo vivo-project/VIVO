@@ -227,7 +227,7 @@ SPARQL queries for existing values. --%>
 
 <jsp:include page="${preForm}" />
 
-<h2>Create a new publication entry for <%= subjectName %></h2>
+<h2>Create publication entry for <%= subjectName %></h2>
 
 <%@ include file="unsupportedBrowserMessage.jsp" %>
 

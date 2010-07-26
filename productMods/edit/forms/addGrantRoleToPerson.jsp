@@ -83,7 +83,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
         <c:set var="disabledVal" value="disabled" />
     </c:when>
     <c:otherwise>
-        <c:set var="formHeading" value="Create a new ${formHeading}" />
+        <c:set var="formHeading" value="Create ${formHeading}" />
         <c:set var="editMode" value="add" />
         <c:set var="labelRequired" value="\"nonempty\"," />
         <c:set var="disabledVal" value="" />
