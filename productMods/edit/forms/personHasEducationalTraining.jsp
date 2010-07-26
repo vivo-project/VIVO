@@ -351,9 +351,9 @@ the org type still gets asserted. --%>
     } else { // adding new entry
 %>
         <c:set var="editType" value="add" />
-        <c:set var="title" value="Create a new educational background entry for ${subjectName}" />
+        <c:set var="title" value="Create educational background entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Create New Educational Background" />
+        <c:set var="submitLabel" value="Create Educational Background" />
 <%  } 
     
     List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",            

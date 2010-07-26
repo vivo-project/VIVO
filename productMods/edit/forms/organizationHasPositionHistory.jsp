@@ -176,8 +176,8 @@
 		request.setAttribute("title","Edit position history entry for "+ subject.getName());
 		submitLabel = "Save changes";
 	} else {
-		request.setAttribute("title","Create a new position history entry for " + subject.getName());
-		submitLabel = "Create new position history entry";
+		request.setAttribute("title","Create position history entry for " + subject.getName());
+		submitLabel = "Create position history entry";
 	}
 %>
 

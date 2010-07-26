@@ -381,7 +381,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
         <c:set var="disabledVal" value="disabled" />
     </c:when>
     <c:otherwise>
-        <c:set var="titleText" value="Create a new" />
+        <c:set var="titleText" value="Create" />
         <c:set var="editMode" value="add" />
         <c:set var="submitButtonText" value="${buttonLabel}" />
         <c:set var="disabledVal" value="" />

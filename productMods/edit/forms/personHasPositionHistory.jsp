@@ -280,7 +280,7 @@
 %>
         <c:set var="editType" value="add" />
         <c:set var="formSteps" value="2" />
-        <c:set var="title" value="Create a new position entry for ${subjectName}" />
+        <c:set var="title" value="Create position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Create position" />
 <%  } 
