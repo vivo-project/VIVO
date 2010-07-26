@@ -196,21 +196,6 @@ public class VisualizationRequestHandler {
 		}
 
 	}
-/*
-	private Map<String, Integer> getUniqueCoauthorsCountPerYear(
-			edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisVOContainer coAuthorshipVO) {
-		Map<String, Integer> yearToUniqueCoauthorCount = new TreeMap<String, Integer>();
-		
-		Map<String, Set<Node>> yearToUniqueCoauthors = getUniqueCoAuthorsPerYear(coAuthorshipVO);
-			
-		for (Entry<String, Set<Node>> currentEntry : yearToUniqueCoauthors.entrySet()) {
-			
-			yearToUniqueCoauthorCount.put(currentEntry.getKey(), currentEntry.getValue().size());
-			
-		}
-		return yearToUniqueCoauthorCount;
-	}
-	*/
 	
 	private Map<String, Set<Node>> getUniqueCoAuthorsPerYear(edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisVOContainer authorNodesAndEdges) {
 
