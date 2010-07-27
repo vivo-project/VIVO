@@ -231,7 +231,6 @@ public class VisualizationRequestHandler {
 				}
 		}
 		
-		
 		return yearToCoAuthors;
 	}
 

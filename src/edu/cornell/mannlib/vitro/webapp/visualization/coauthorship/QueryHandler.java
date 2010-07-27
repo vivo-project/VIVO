@@ -76,6 +76,7 @@ public class QueryHandler {
 		Map<String, BiboDocument> biboDocumentURLToVO = new HashMap<String, BiboDocument>();
 		Map<String, Set<Node>> biboDocumentURLToCoAuthors = new HashMap<String, Set<Node>>();
 		Map<String, Node> nodeURLToVO = new HashMap<String, Node>();
+		Map<String, Edge> edgeUniqueIdentifierToVO = new HashMap<String, Edge>();
 		
 		Node egoNode = null;
 
@@ -146,6 +147,7 @@ public class QueryHandler {
 					coAuthorNode.setNodeName(coAuthorLabelNode.toString());
 				}
 			}
+			
 			/*
 			System.out.print("PERSON_URL:" + egoAuthorURLNode.toString() + "|");
 			System.out.print("DOCUMENT_URL:" + documentNode.toString() + "|");
@@ -164,7 +166,7 @@ public class QueryHandler {
 			
 			coAuthorsForCurrentBiboDocument.add(coAuthorNode);
 			
-			Edge egoCoAuthorEdge = getExistingEdge(egoNode, coAuthorNode, edges);
+			Edge egoCoAuthorEdge = getExistingEdge(egoNode, coAuthorNode, edgeUniqueIdentifierToVO);
 			
 			/*
 			 * If "egoCoAuthorEdge" is null it means that no edge exists in between the egoNode & current 
@@ -176,6 +178,10 @@ public class QueryHandler {
 			} else {
 				egoCoAuthorEdge = new Edge(egoNode, coAuthorNode, biboDocument, edgeIDGenerator);
 				edges.add(egoCoAuthorEdge);
+				edgeUniqueIdentifierToVO.put(
+						getEdgeUniqueIdentifier(egoNode.getNodeID(),
+												coAuthorNode.getNodeID()), 
+						egoCoAuthorEdge);
 			}
 			
 			
@@ -196,7 +202,8 @@ public class QueryHandler {
 		 * */
 		createCoAuthorEdges(biboDocumentURLToVO, 
 							biboDocumentURLToCoAuthors,
-							edges);
+							edges,
+							edgeUniqueIdentifierToVO);
 		
 		
 		return new VisVOContainer(egoNode, nodes, edges);
@@ -204,7 +211,8 @@ public class QueryHandler {
 
 	private void createCoAuthorEdges(
 			Map<String, BiboDocument> biboDocumentURLToVO,
-			Map<String, Set<Node>> biboDocumentURLToCoAuthors, Set<Edge> edges) {
+			Map<String, Set<Node>> biboDocumentURLToCoAuthors, Set<Edge> edges, 
+			Map<String, Edge> edgeUniqueIdentifierToVO) {
 		
 		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry : biboDocumentURLToCoAuthors.entrySet()) {
 			/*
@@ -212,6 +220,9 @@ public class QueryHandler {
 			 * the below condition will take care of that.
 			 * */
 			if (currentBiboDocumentEntry.getValue().size() > 1) {
+				
+				
+				Set<Edge> newlyAddedEdges = new HashSet<Edge>();
 			
 				/*
 				 * In order to leverage the nested "for loop" for making edges between all the co-authors
@@ -228,7 +239,7 @@ public class QueryHandler {
 						Node coAuthor1 = coAuthorNodes.get(ii);
 						Node coAuthor2 = coAuthorNodes.get(jj);
 						
-						Edge coAuthor1_2Edge = getExistingEdge(coAuthor1, coAuthor2, edges);
+						Edge coAuthor1_2Edge = getExistingEdge(coAuthor1, coAuthor2, edgeUniqueIdentifierToVO);
 						
 						BiboDocument currentBiboDocument = biboDocumentURLToVO
 																.get(currentBiboDocumentEntry.getKey());
@@ -237,11 +248,15 @@ public class QueryHandler {
 							coAuthor1_2Edge.addCollaboratorDocument(currentBiboDocument);
 						} else {
 							coAuthor1_2Edge = new Edge(coAuthor1, coAuthor2, currentBiboDocument, edgeIDGenerator);
-							edges.add(coAuthor1_2Edge);
+							newlyAddedEdges.add(coAuthor1_2Edge);
+							edgeUniqueIdentifierToVO.put(
+									getEdgeUniqueIdentifier(coAuthor1.getNodeID(),
+															coAuthor2.getNodeID()), 
+									coAuthor1_2Edge);
 						}
 					}
 				}
-			
+				edges.addAll(newlyAddedEdges);
 			}
 			
 		}
@@ -250,31 +265,25 @@ public class QueryHandler {
 	private Edge getExistingEdge(
 			Node collaboratingNode1, 
 			Node collaboratingNode2, 
-			Set<Edge> edges) {
+			Map<String, Edge> edgeUniqueIdentifierToVO) {
 		
-		Edge duplicateEdge = null;
+		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getNodeID(), 
+															  collaboratingNode2.getNodeID());
 		
-		for (Edge currentEdge : edges) {
-			
-			/*
-			 * We first check if either the source or target node of the current edge is
-			 * the collaboratingNode1. If yes then we go on to check if the collaboratingNode2
-			 * matches either the source or the target node. We dont care about the directionality
-			 * of the edge. 
-			 * */
-			if (currentEdge.getSourceNode().getNodeID() == collaboratingNode1.getNodeID() 
-					|| currentEdge.getTargetNode().getNodeID() == collaboratingNode1.getNodeID()) {
-				
-				if (currentEdge.getSourceNode().getNodeID() == collaboratingNode2.getNodeID() 
-						|| currentEdge.getTargetNode().getNodeID() == collaboratingNode2.getNodeID()) {
-					
-					duplicateEdge = currentEdge;
-					break;
-				} 				
-			} 
+		return edgeUniqueIdentifierToVO.get(edgeUniqueIdentifier);
+		
+	}
+
+	private String getEdgeUniqueIdentifier(int nodeID1, int nodeID2) {
+
+		String separator = "*"; 
+		
+		if (nodeID1 < nodeID2) {
+			return nodeID1 + separator + nodeID2;
+		} else {
+			return nodeID2 + separator + nodeID1;
 		}
-		
-		return duplicateEdge;
+			
 	}
 
 	public Map<String, VivoCollegeOrSchool> getCollegeURLToVO() {
@@ -387,7 +396,11 @@ public class QueryHandler {
 	
 	public VisVOContainer getVisualizationJavaValueObjects()
 		throws MalformedQueryParametersException {
-
+		/*
+		System.out.println("***************************************************************************************");
+		System.out.println("Entered into coauthorship query handler at " + System.currentTimeMillis());
+		System.out.println("***************************************************************************************");
+*/
         if (this.egoURLParam == null || "".equals(egoURLParam)) {
         	throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         } else {
@@ -399,7 +412,7 @@ public class QueryHandler {
     		IRI iri = iRIFactory.create(this.egoURLParam);
             if (iri.hasViolation(false)) {
                 String errorMsg = ((Violation)iri.violations(false).next()).getShortMessage()+" ";
-                log.error("Ego Co Authorship Vis Query " + errorMsg);
+                log.error("Ego Co-Authorship Vis Query " + errorMsg);
                 throw new MalformedQueryParametersException("URI provided for an individual is malformed.");
             }
         }
@@ -408,8 +421,10 @@ public class QueryHandler {
 										   this.resultFormatParam,
 										   this.rdfResultFormatParam,
 										   this.dataSource);
-
-		return createJavaValueObjects(resultSet);
+/*
+		System.out.println("***************************************************************************************");
+		System.out.println("***************************************************************************************");
+		*/return createJavaValueObjects(resultSet);
 	}
 
 	public Map<String, Integer> getYearToPublicationCount(
