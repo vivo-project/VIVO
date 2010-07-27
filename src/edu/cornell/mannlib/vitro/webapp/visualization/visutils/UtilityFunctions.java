@@ -16,8 +16,6 @@ public class UtilityFunctions {
 	public static Map<String, Integer> getYearToPublicationCount(
 			Set<BiboDocument> authorDocuments) {
 
-		//List<Integer> publishedYears = new ArrayList<Integer>();
-
     	/*
     	 * Create a map from the year to number of publications. Use the BiboDocument's
     	 * parsedPublicationYear to populate the data.
@@ -52,10 +50,6 @@ public class UtilityFunctions {
     		} else {
     			yearToPublicationCount.put(publicationYear, 1);
     		}
-
-//    		if (!parsedPublicationYear.equalsIgnoreCase(BiboDocument.DEFAULT_PUBLICATION_YEAR)) {
-//    			publishedYears.add(Integer.parseInt(parsedPublicationYear));
-//    		}
 
     	}
 

@@ -25,65 +25,60 @@ import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipGraphMLWriter;
-import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipQueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.VisualizationCodeGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountQueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class VisualizationRequestHandler {
+public class PersonLevelRequestHandler extends VisualizationRequestHandler {
 
-	private VitroRequest vitroRequest;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private Log log;
-	
-	public VisualizationRequestHandler(VitroRequest vitroRequest,
+    private static final String EGO_PUB_SPARKLINE_VIS_CONTAINER_ID = "ego_pub_sparkline";
+    private static final String UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID = 
+    									"unique_coauthors_sparkline";
+    
+	public PersonLevelRequestHandler(VitroRequest vitroRequest,
 			HttpServletRequest request, HttpServletResponse response, Log log) {
 
-		this.vitroRequest = vitroRequest;
-		this.request = request;
-		this.response = response;
-		this.log = log;
-
+		super(vitroRequest, request, response, log);
+		
 	}
 
 	public void generateVisualization(DataSource dataSource) {
 
-		String resultFormatParam = "RS_TEXT";
-        String rdfResultFormatParam = "RDF/XML-ABBREV";
+		VitroRequest vitroRequest = super.getVitroRequest();
+        String egoURIParam = vitroRequest.getParameter(
+        							VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
 
-        String egoURIParam = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
-
-        String renderMode = vitroRequest.getParameter(VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE);
+        String renderMode = vitroRequest.getParameter(
+        							VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE);
         
-        String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
+        String visMode = vitroRequest.getParameter(
+        							VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
         
-        String coAuthorsListMode = "coauthors";
-
-        String egoPubSparklineVisContainerID = "ego_pub_sparkline";
-        String uniqueCoauthorsSparklineVisContainerID = "unique_coauthors_sparkline";
+        Log log = super.getLog();
+		QueryHandler<CoAuthorshipVOContainer> 
+			coAuthorshipQueryManager =
+	        	new CoAuthorshipQueryHandler(egoURIParam,
+							     dataSource,
+							     log);
         
-        edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.QueryHandler coAuthorshipQueryManager =
-        	new edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.QueryHandler(egoURIParam,
-						     resultFormatParam,
-						     rdfResultFormatParam,
-						     dataSource,
-						     log);
-        
-        edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.QueryHandler publicationQueryManager =
-        	new edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.QueryHandler(egoURIParam,
-						   	 resultFormatParam,
-						     rdfResultFormatParam,
-						     dataSource,
-						     log);
+        QueryHandler<List<BiboDocument>> publicationQueryManager =
+        	new PersonPublicationCountQueryHandler(egoURIParam,
+											   	   dataSource,
+											       log);
         
 		try {
 			
-			edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisVOContainer coAuthorshipVO = 
-					coAuthorshipQueryManager.getVisualizationJavaValueObjects();
+			CoAuthorshipVOContainer coAuthorshipVO = coAuthorshipQueryManager
+															.getVisualizationJavaValueObjects();
 			
 	    	/*
 	    	 * In order to avoid unneeded computations we have pushed this "if" condition up.
@@ -91,27 +86,30 @@ public class VisualizationRequestHandler {
 	    	 * HTML code to render sparkline, tables etc. Ideally I would want to avoid this flow.
 	    	 * It is ugly! 
 	    	 * */
-	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) { 
+	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE
+	    				.equalsIgnoreCase(renderMode)) { 
 			
 					/* 
 			    	 * We will be using the same visualization package for providing data for both 
-			    	 * list of unique coauthors & network of coauthors (used in the flash vis). We will 
-			    	 * use "VIS_MODE_URL_HANDLE" as a modifier to differentiate between these two.
-			    	 * The defualt will be to provide data used to render the coauthorship network vis.
+			    	 * list of unique coauthors & network of coauthors (used in the flash vis). 
+			    	 * We will use "VIS_MODE_URL_HANDLE" as a modifier to differentiate between 
+			    	 * these two. The defualt will be to provide data used to render the co-
+			    	 * authorship network vis.
 			    	 * */ 
 					
-					if (coAuthorsListMode.equalsIgnoreCase(visMode)) { 
+					if (VisualizationFrameworkConstants.COAUTHORSLIST_VIS_MODE_URL_VALUE
+								.equalsIgnoreCase(visMode)) { 
 		    			/*
-		    			 * When the csv file is required - containing the unique co-authors vs how many times
-		    			 * they have co-authored with the ego.
+		    			 * When the csv file is required - containing the unique co-authors vs how 
+		    			 * many times they have co-authored with the ego.
 		    			 * */
 							prepareVisualizationQueryListCoauthorsDataResponse(coAuthorshipVO);
 							return;
 			    		
 					} else {
 			    			/*
-			    			 * When the graphML file is required - based on which coauthorship network visualization 
-			    			 * will be rendered.
+			    			 * When the graphML file is required - based on which co-authorship 
+			    			 * network visualization will be rendered.
 			    			 * */
 			    			prepareVisualizationQueryNetworkDataResponse(coAuthorshipVO);
 							return;
@@ -120,17 +118,15 @@ public class VisualizationRequestHandler {
 	    		
 			}
 					
-			List<BiboDocument> authorDocuments = publicationQueryManager.getVisualizationJavaValueObjects();
-			
+			List<BiboDocument> authorDocuments = publicationQueryManager
+														.getVisualizationJavaValueObjects();
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
-	    	Map<String, Integer> yearToPublicationCount = publicationQueryManager
-	    														.getYearToPublicationCount(authorDocuments);
-	    														
-//	    	Map<String, Integer> yearToUniqueCoauthorCount = getUniqueCoauthorsCountPerYear(coAuthorshipVO);
-	    		
+	    	Map<String, Integer> yearToPublicationCount = 
+	    			((PersonPublicationCountQueryHandler) publicationQueryManager)
+	    					.getYearToPublicationCount(authorDocuments);
 	    														
 	    	/*
 	    	 * Computations required to generate HTML for the sparklines & related context.
@@ -139,23 +135,23 @@ public class VisualizationRequestHandler {
 	    	SparklineVOContainer publicationSparklineVO = new SparklineVOContainer();
 	    	SparklineVOContainer uniqueCoauthorsSparklineVO = new SparklineVOContainer();
 
-	    	edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.VisualizationCodeGenerator personPubCountVisCodeGenerator = 
-	    		new edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.VisualizationCodeGenerator(
+	    	PersonPublicationCountVisCodeGenerator personPubCountVisCodeGenerator = 
+	    		new PersonPublicationCountVisCodeGenerator(
 	    			vitroRequest.getRequestURI(),
 	    			egoURIParam,
-	    			VisualizationCodeGenerator.FULL_SPARKLINE_MODE_URL_HANDLE,
-	    			egoPubSparklineVisContainerID,
+	    			PersonPublicationCountVisCodeGenerator.FULL_SPARKLINE_MODE_URL_HANDLE,
+	    			EGO_PUB_SPARKLINE_VIS_CONTAINER_ID,
 	    			authorDocuments,
 	    			yearToPublicationCount,
 	    			publicationSparklineVO,
 	    			log);	  
 	    	
-	    	edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisualizationCodeGenerator uniqueCoauthorsVisCodeGenerator = 
-	    		new edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisualizationCodeGenerator(
+	    	CoAuthorshipVisCodeGenerator uniqueCoauthorsVisCodeGenerator = 
+	    		new CoAuthorshipVisCodeGenerator(
 	    			vitroRequest.getRequestURI(),
 	    			egoURIParam,
-	    			VisualizationCodeGenerator.FULL_SPARKLINE_MODE_URL_HANDLE,
-	    			uniqueCoauthorsSparklineVisContainerID,
+	    			PersonPublicationCountVisCodeGenerator.FULL_SPARKLINE_MODE_URL_HANDLE,
+	    			UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID,
 	    			getUniqueCoAuthorsPerYear(coAuthorshipVO),
 	    			uniqueCoauthorsSparklineVO,
 	    			log);
@@ -163,21 +159,20 @@ public class VisualizationRequestHandler {
 			
 			RequestDispatcher requestDispatcher = null;
 
-	    	prepareVisualizationQueryStandaloneResponse(egoURIParam, 
-	    												publicationSparklineVO,
-	    												uniqueCoauthorsSparklineVO,
-	    												coAuthorshipVO,
-	    												egoPubSparklineVisContainerID,
-	    												uniqueCoauthorsSparklineVisContainerID,
-	    												request, 
-	    												response, 
-	    												vitroRequest);
+			HttpServletRequest request = super.getRequest();
 
-//	    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
+			prepareVisualizationQueryStandaloneResponse(
+					egoURIParam, 
+	    			publicationSparklineVO,
+	    			uniqueCoauthorsSparklineVO,
+	    			coAuthorshipVO,
+	    			EGO_PUB_SPARKLINE_VIS_CONTAINER_ID,
+	    			UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID);
+
 			requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
 
 	    	try {
-	            requestDispatcher.forward(request, response);
+	            requestDispatcher.forward(request, super.getResponse());
 	        } catch (Exception e) {
 	            log.error("EntityEditController could not forward to view.");
 	            log.error(e.getMessage());
@@ -194,10 +189,10 @@ public class VisualizationRequestHandler {
 			}
 			return;
 		}
-
 	}
 	
-	private Map<String, Set<Node>> getUniqueCoAuthorsPerYear(edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisVOContainer authorNodesAndEdges) {
+	private Map<String, Set<Node>> getUniqueCoAuthorsPerYear(
+			CoAuthorshipVOContainer authorNodesAndEdges) {
 
 		Map<String, Set<Node>> yearToCoAuthors = new TreeMap<String, Set<Node>>();
 		
@@ -230,27 +225,26 @@ public class VisualizationRequestHandler {
 					
 				}
 		}
-		
 		return yearToCoAuthors;
 	}
 
-	private void prepareVisualizationQueryNetworkDataResponse(VisVOContainer coAuthorsipVO) {
+	private void prepareVisualizationQueryNetworkDataResponse(
+			CoAuthorshipVOContainer coAuthorsipVO) {
 
 		String outputFileName = "";
 		
-		if (coAuthorsipVO.getNodes() == null || coAuthorsipVO.getNodes().size() < 1) {
+		if (coAuthorsipVO.getNodes() != null && coAuthorsipVO.getNodes().size() > 0) {
 			
-			outputFileName = "no_coauthor-network.graphml" + ".xml";
+			outputFileName = UtilityFunctions.slugify(coAuthorsipVO.getEgoNode().getNodeName()) 
+									+ "_coauthor-network.graphml" + ".xml";
 			
 		} else {
 			
-			outputFileName = UtilityFunctions.slugify(coAuthorsipVO.getEgoNode().getNodeName()) 
-			+ "_coauthor-network.graphml" + ".xml";
+			outputFileName = "no_coauthor-network.graphml" + ".xml";			
 			
 		}
 		
-		
-		
+		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
 		
@@ -262,7 +256,8 @@ public class VisualizationRequestHandler {
 		 * We are side-effecting responseWriter since we are directly manipulating the response 
 		 * object of the servlet.
 		 * */
-		CoAuthorshipGraphMLWriter coAuthorShipGraphMLWriter = new CoAuthorshipGraphMLWriter(coAuthorsipVO);
+		CoAuthorshipGraphMLWriter coAuthorShipGraphMLWriter = 
+				new CoAuthorshipGraphMLWriter(coAuthorsipVO);
 		
 		responseWriter.append(coAuthorShipGraphMLWriter.getCoAuthorshipGraphMLContent());
 		
@@ -273,24 +268,26 @@ public class VisualizationRequestHandler {
 		}
 	}
 	
-	private void prepareVisualizationQueryListCoauthorsDataResponse(VisVOContainer coAuthorsipVO) {
+	private void prepareVisualizationQueryListCoauthorsDataResponse(
+			CoAuthorshipVOContainer coAuthorshipVO) {
 
 		String outputFileName = "";
 		Map<String, Integer> coAuthorsToCount = new TreeMap<String, Integer>();
 		
-		if (coAuthorsipVO.getNodes() == null || coAuthorsipVO.getNodes().size() < 1 ) {
+		if (coAuthorshipVO.getNodes() != null && coAuthorshipVO.getNodes().size() > 0) {
 			
-			outputFileName = "no_coauthors" + ".csv";
+			outputFileName = UtilityFunctions.slugify(coAuthorshipVO.getEgoNode().getNodeName()) 
+									+ "_coauthors" + ".csv";
+
+			coAuthorsToCount = getCoAuthorsList(coAuthorshipVO);
 			
 		} else {
 			
-			outputFileName = UtilityFunctions.slugify(coAuthorsipVO.getEgoNode().getNodeName()) 
-										+ "_coauthors" + ".csv";
-			
-			coAuthorsToCount = getCoAuthorsList(coAuthorsipVO);
+			outputFileName = "no_coauthors" + ".csv";
 			
 		}
 			
+		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
 		
@@ -313,7 +310,7 @@ public class VisualizationRequestHandler {
 	}
 	
 	
-	private Map<String, Integer> getCoAuthorsList(VisVOContainer coAuthorsipVO) {
+	private Map<String, Integer> getCoAuthorsList(CoAuthorshipVOContainer coAuthorsipVO) {
 		
 		Map<String, Integer> coAuthorsToCount = new TreeMap<String, Integer>();
 		
@@ -327,14 +324,12 @@ public class VisualizationRequestHandler {
 				coAuthorsToCount.put(currNode.getNodeName(), currNode.getNumOfAuthoredWorks());
 				
 			}
-			
 		}
-		
-		
 		return coAuthorsToCount;
 	}
 
-	private void generateCsvFileBuffer(Map<String, Integer> coAuthorsToCount, PrintWriter printWriter) {
+	private void generateCsvFileBuffer(Map<String, Integer> coAuthorsToCount, 
+									   PrintWriter printWriter) {
 		
 	    	printWriter.append("\"Co-Author\", \"Count\"\n");
 			
@@ -348,20 +343,17 @@ public class VisualizationRequestHandler {
 		printWriter.flush();
 	}
 	
-	
 	private void prepareVisualizationQueryStandaloneResponse(
-		String egoURIParam, 
-		SparklineVOContainer egoPubSparklineVO, 
-		SparklineVOContainer uniqueCoauthorsSparklineVO, 
-		VisVOContainer coAuthorshipVO, 
-		String egoPubSparklineVisContainer, 
-		String uniqueCoauthorsSparklineVisContainer, 
-		HttpServletRequest request,
-		HttpServletResponse response, 
-		VitroRequest vreq) {
+					String egoURIParam, 
+					SparklineVOContainer egoPubSparklineVO, 
+					SparklineVOContainer uniqueCoauthorsSparklineVO, 
+					CoAuthorshipVOContainer coAuthorshipVO, 
+					String egoPubSparklineVisContainer, 
+					String uniqueCoauthorsSparklineVisContainer) {
 
-        Portal portal = vreq.getPortal();
+        Portal portal = super.getVitroRequest().getPortal();
         
+		HttpServletRequest request = super.getRequest();
         request.setAttribute("egoURIParam", egoURIParam);
         
         String title = "";
@@ -379,7 +371,8 @@ public class VisualizationRequestHandler {
         request.setAttribute("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
         
         request.setAttribute("egoPubSparklineContainerID", egoPubSparklineVisContainer);
-        request.setAttribute("uniqueCoauthorsSparklineVisContainerID", uniqueCoauthorsSparklineVisContainer);
+        request.setAttribute("uniqueCoauthorsSparklineVisContainerID", 
+        					 uniqueCoauthorsSparklineVisContainer);
         
         request.setAttribute("title", "Person Level Visualization " + title);
         request.setAttribute("portalBean", portal);
@@ -391,8 +384,9 @@ public class VisualizationRequestHandler {
 	private void handleMalformedParameters(String errorMessage)
 			throws ServletException, IOException {
 
-		Portal portal = vitroRequest.getPortal();
+		Portal portal = super.getVitroRequest().getPortal();
 
+		HttpServletRequest request = super.getRequest();
 		request.setAttribute("error", errorMessage);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
@@ -401,8 +395,9 @@ public class VisualizationRequestHandler {
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 
 		try {
-			requestDispatcher.forward(request, response);
+			requestDispatcher.forward(request, super.getResponse());
 		} catch (Exception e) {
+			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

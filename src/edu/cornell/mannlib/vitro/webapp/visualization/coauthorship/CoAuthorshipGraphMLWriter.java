@@ -12,6 +12,7 @@ import java.util.Set;
 
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 
@@ -27,7 +28,7 @@ public class CoAuthorshipGraphMLWriter {
 
 	private final String GRAPHML_FOOTER = "</graphml>";
 	
-	public CoAuthorshipGraphMLWriter(VisVOContainer visVOContainer) {
+	public CoAuthorshipGraphMLWriter(CoAuthorshipVOContainer visVOContainer) {
 		
 		coAuthorshipGraphMLContent = createCoAuthorshipGraphMLContent(visVOContainer);
 		
@@ -38,7 +39,7 @@ public class CoAuthorshipGraphMLWriter {
 	}
 
 	private StringBuilder createCoAuthorshipGraphMLContent(
-			VisVOContainer visVOContainer) {
+			CoAuthorshipVOContainer visVOContainer) {
 		
 		StringBuilder graphMLContent = new StringBuilder();
 		
@@ -62,7 +63,7 @@ public class CoAuthorshipGraphMLWriter {
 		return graphMLContent;
 	}
 
-	private void generateGraphContent(VisVOContainer visVOContainer,
+	private void generateGraphContent(CoAuthorshipVOContainer visVOContainer,
 			StringBuilder graphMLContent) {
 
 		graphMLContent.append("\n<graph edgedefault=\"undirected\">\n");
@@ -82,7 +83,7 @@ public class CoAuthorshipGraphMLWriter {
 		
 	}
 
-	private void generateEdgeSectionContent(VisVOContainer visVOContainer,
+	private void generateEdgeSectionContent(CoAuthorshipVOContainer visVOContainer,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- edges -->\n");
@@ -118,8 +119,13 @@ public class CoAuthorshipGraphMLWriter {
 									+ "target=\"" + currentEdge.getTargetNode().getNodeID() + "\" "
 									+ ">\n");
 		
-		graphMLContent.append("\t<data key=\"collaborator1\">" + currentEdge.getSourceNode().getNodeName() + "</data>\n");
-		graphMLContent.append("\t<data key=\"collaborator2\">" + currentEdge.getTargetNode().getNodeName() + "</data>\n");
+		graphMLContent.append("\t<data key=\"collaborator1\">" 
+								+ currentEdge.getSourceNode().getNodeName() 
+								+ "</data>\n");
+		
+		graphMLContent.append("\t<data key=\"collaborator2\">" 
+								+ currentEdge.getTargetNode().getNodeName() 
+								+ "</data>\n");
 		
 		graphMLContent.append("\t<data key=\"number_of_coauthored_works\">" 
 								+ currentEdge.getNumOfCoAuthoredWorks()
@@ -132,8 +138,8 @@ public class CoAuthorshipGraphMLWriter {
 			 * we are sure to have only one entry on the map. So using the for loop.
 			 * I am feeling dirty just about now. 
 			 * */
-			for (Map.Entry<String, Integer> publicationInfo : 
-						currentEdge.getEarliestCollaborationYearCount().entrySet()) {
+			for (Map.Entry<String, Integer> publicationInfo
+						: currentEdge.getEarliestCollaborationYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"earliest_collaboration\">" 
 											+ publicationInfo.getKey() 
@@ -150,8 +156,8 @@ public class CoAuthorshipGraphMLWriter {
 		
 		if (currentEdge.getLatestCollaborationYearCount() != null) {
 			
-			for (Map.Entry<String, Integer> publicationInfo : 
-						currentEdge.getLatestCollaborationYearCount().entrySet()) {
+			for (Map.Entry<String, Integer> publicationInfo 
+						: currentEdge.getLatestCollaborationYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"latest_collaboration\">" 
 											+ publicationInfo.getKey() 
@@ -177,7 +183,7 @@ public class CoAuthorshipGraphMLWriter {
 		
 	}
 
-	private void generateNodeSectionContent(VisVOContainer visVOContainer,
+	private void generateNodeSectionContent(CoAuthorshipVOContainer visVOContainer,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- nodes -->\n");
@@ -251,8 +257,8 @@ public class CoAuthorshipGraphMLWriter {
 			 * we are sure to have only one entry on the map. So using the for loop.
 			 * I am feeling dirty just about now. 
 			 * */
-			for (Map.Entry<String, Integer> publicationInfo : 
-						node.getEarliestPublicationYearCount().entrySet()) {
+			for (Map.Entry<String, Integer> publicationInfo 
+						: node.getEarliestPublicationYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"earliest_publication\">" 
 											+ publicationInfo.getKey() 
@@ -269,8 +275,8 @@ public class CoAuthorshipGraphMLWriter {
 		
 		if (node.getLatestPublicationYearCount() != null) {
 			
-			for (Map.Entry<String, Integer> publicationInfo : 
-						node.getLatestPublicationYearCount().entrySet()) {
+			for (Map.Entry<String, Integer> publicationInfo 
+						: node.getLatestPublicationYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"latest_publication\">" 
 											+ publicationInfo.getKey() 
@@ -296,7 +302,7 @@ public class CoAuthorshipGraphMLWriter {
 		graphMLContent.append("</node>\n");
 	}
 
-	private void generateKeyDefinitionContent(VisVOContainer visVOContainer, 
+	private void generateKeyDefinitionContent(CoAuthorshipVOContainer visVOContainer, 
 											  StringBuilder graphMLContent) {
 		
 		/*
@@ -319,7 +325,8 @@ public class CoAuthorshipGraphMLWriter {
 			
 			graphMLContent.append("\n<key ");
 			
-			for (Map.Entry<String, String> currentAttributeKey : currentNodeSchemaAttribute.entrySet()) {
+			for (Map.Entry<String, String> currentAttributeKey 
+						: currentNodeSchemaAttribute.entrySet()) {
 				
 				graphMLContent.append(currentAttributeKey.getKey() 
 										+ "=\"" + currentAttributeKey.getValue() 

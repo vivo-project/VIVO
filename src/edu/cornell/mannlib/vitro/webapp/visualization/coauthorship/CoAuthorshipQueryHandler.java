@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.iri.IRI;
@@ -30,9 +30,11 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 
 
@@ -40,12 +42,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
 /**
  * @author cdtank
  */
-public class QueryHandler {
+public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOContainer> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String egoURLParam, resultFormatParam, rdfResultFormatParam;
-	private Map<String, VivoCollegeOrSchool> collegeURLToVO = new HashMap<String, VivoCollegeOrSchool>();
+	private String egoURLParam;
+	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
+			new HashMap<String, VivoCollegeOrSchool>();
+	
 	private DataSource dataSource;
 
 	private Log log;
@@ -54,13 +58,10 @@ public class QueryHandler {
 
 	private UniqueIDGenerator edgeIDGenerator;
 
-	public QueryHandler(String egoURLParam,
-			String resultFormatParam, String rdfResultFormatParam,
+	public CoAuthorshipQueryHandler(String egoURLParam,
 			DataSource dataSource, Log log) {
 
 		this.egoURLParam = egoURLParam;
-		this.resultFormatParam = resultFormatParam;
-		this.rdfResultFormatParam = rdfResultFormatParam;
 		this.dataSource = dataSource;
 		this.log = log;
 		
@@ -69,7 +70,7 @@ public class QueryHandler {
 
 	}
 
-	private VisVOContainer createJavaValueObjects(ResultSet resultSet) {
+	private CoAuthorshipVOContainer createJavaValueObjects(ResultSet resultSet) {
 		
 		Set<Node> nodes = new HashSet<Node>();
 		
@@ -84,7 +85,6 @@ public class QueryHandler {
 		
 		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
-			
 			
 			/*
 			 * We only want to create only ONE ego node.
@@ -158,10 +158,12 @@ public class QueryHandler {
 			Set<Node> coAuthorsForCurrentBiboDocument;
 			
 			if (biboDocumentURLToCoAuthors.containsKey(biboDocument.getDocumentURL())) {
-				coAuthorsForCurrentBiboDocument = biboDocumentURLToCoAuthors.get(biboDocument.getDocumentURL());
+				coAuthorsForCurrentBiboDocument = biboDocumentURLToCoAuthors
+														.get(biboDocument.getDocumentURL());
 			} else {
 				coAuthorsForCurrentBiboDocument = new HashSet<Node>();
-				biboDocumentURLToCoAuthors.put(biboDocument.getDocumentURL(), coAuthorsForCurrentBiboDocument);
+				biboDocumentURLToCoAuthors.put(biboDocument.getDocumentURL(), 
+											   coAuthorsForCurrentBiboDocument);
 			}
 			
 			coAuthorsForCurrentBiboDocument.add(coAuthorNode);
@@ -169,9 +171,9 @@ public class QueryHandler {
 			Edge egoCoAuthorEdge = getExistingEdge(egoNode, coAuthorNode, edgeUniqueIdentifierToVO);
 			
 			/*
-			 * If "egoCoAuthorEdge" is null it means that no edge exists in between the egoNode & current 
-			 * coAuthorNode. Else create a new edge, add it to the edges set & add the collaborator document 
-			 * to it.
+			 * If "egoCoAuthorEdge" is null it means that no edge exists in between the egoNode 
+			 * & current coAuthorNode. Else create a new edge, add it to the edges set & add 
+			 * the collaborator document to it.
 			 * */
 			if (egoCoAuthorEdge != null) {
 				egoCoAuthorEdge.addCollaboratorDocument(biboDocument);
@@ -196,9 +198,10 @@ public class QueryHandler {
 		 * 		A - B 
 		 * 
 		 * We are side-effecting "edges" here. The only reason to do this is because we are adding 
-		 * edges en masse for all the co-authors on all the publications considered so far. The other
-		 * reason being we dont want to compare against 2 sets of edges (edges created before & co-
-		 * author edges created during the course of this method) when we are creating a new edge.
+		 * edges en masse for all the co-authors on all the publications considered so far. The 
+		 * other reason being we dont want to compare against 2 sets of edges (edges created before 
+		 * & co-author edges created during the course of this method) when we are creating a new 
+		 * edge.
 		 * */
 		createCoAuthorEdges(biboDocumentURLToVO, 
 							biboDocumentURLToCoAuthors,
@@ -206,7 +209,7 @@ public class QueryHandler {
 							edgeUniqueIdentifierToVO);
 		
 		
-		return new VisVOContainer(egoNode, nodes, edges);
+		return new CoAuthorshipVOContainer(egoNode, nodes, edges);
 	}
 
 	private void createCoAuthorEdges(
@@ -214,10 +217,11 @@ public class QueryHandler {
 			Map<String, Set<Node>> biboDocumentURLToCoAuthors, Set<Edge> edges, 
 			Map<String, Edge> edgeUniqueIdentifierToVO) {
 		
-		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry : biboDocumentURLToCoAuthors.entrySet()) {
+		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry 
+					: biboDocumentURLToCoAuthors.entrySet()) {
 			/*
-			 * If there was only one co-author (other than ego) then we dont have to create any edges. so 
-			 * the below condition will take care of that.
+			 * If there was only one co-author (other than ego) then we dont have to create any 
+			 * edges. so the below condition will take care of that.
 			 * */
 			if (currentBiboDocumentEntry.getValue().size() > 1) {
 				
@@ -225,8 +229,8 @@ public class QueryHandler {
 				Set<Edge> newlyAddedEdges = new HashSet<Edge>();
 			
 				/*
-				 * In order to leverage the nested "for loop" for making edges between all the co-authors
-				 * we need to create a list out of the set first. 
+				 * In order to leverage the nested "for loop" for making edges between all the 
+				 * co-authors we need to create a list out of the set first. 
 				 * */
 				List<Node> coAuthorNodes = new ArrayList<Node>(currentBiboDocumentEntry.getValue());
 				Collections.sort(coAuthorNodes, new NodeComparator());
@@ -239,15 +243,21 @@ public class QueryHandler {
 						Node coAuthor1 = coAuthorNodes.get(ii);
 						Node coAuthor2 = coAuthorNodes.get(jj);
 						
-						Edge coAuthor1_2Edge = getExistingEdge(coAuthor1, coAuthor2, edgeUniqueIdentifierToVO);
+						Edge coAuthor1_2Edge = getExistingEdge(coAuthor1, 
+															   coAuthor2, 
+															   edgeUniqueIdentifierToVO);
 						
 						BiboDocument currentBiboDocument = biboDocumentURLToVO
-																.get(currentBiboDocumentEntry.getKey());
+																.get(currentBiboDocumentEntry
+																			.getKey());
 			
 						if (coAuthor1_2Edge != null) {
 							coAuthor1_2Edge.addCollaboratorDocument(currentBiboDocument);
 						} else {
-							coAuthor1_2Edge = new Edge(coAuthor1, coAuthor2, currentBiboDocument, edgeIDGenerator);
+							coAuthor1_2Edge = new Edge(coAuthor1, 
+													   coAuthor2, 
+													   currentBiboDocument, 
+													   edgeIDGenerator);
 							newlyAddedEdges.add(coAuthor1_2Edge);
 							edgeUniqueIdentifierToVO.put(
 									getEdgeUniqueIdentifier(coAuthor1.getNodeID(),
@@ -314,7 +324,8 @@ public class QueryHandler {
 				biboDocument.setPublicationYear(publicationYearNode.toString());
 			}
 			
-			RDFNode publicationYearMonthNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
+			RDFNode publicationYearMonthNode = solution.get(QueryFieldLabels
+																.DOCUMENT_PUBLICATION_YEAR_MONTH);
 			if (publicationYearMonthNode != null) {
 				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
 			}
@@ -328,29 +339,24 @@ public class QueryHandler {
 	}
 	
 	private ResultSet executeQuery(String queryText,
-								   String resultFormatParam, 
-								   String rdfResultFormatParam, 
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try{
+        try {
             Query query = QueryFactory.create(queryText, SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
 //            qs.add("authPerson", queryParam); // bind resource to s
             
             queryExecution = QueryExecutionFactory.create(query, dataSource);
-            
 
-            //remocve this if loop after knowing what is describe & construct sparql stuff.
-            if (query.isSelectType()){
+            if (query.isSelectType()) {
                 return queryExecution.execSelect();
             }
         } finally {
-            if(queryExecution != null) {
+            if (queryExecution != null) {
             	queryExecution.close();
             }
-
         }
 		return null;
     }
@@ -359,34 +365,39 @@ public class QueryHandler {
 //		Resource uri1 = ResourceFactory.createResource(queryURI);
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-							+ "SELECT "
-							+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") " 
-							+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") " 
-							+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") " 
-							+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") "
-							+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") "
-							+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") "
-							+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") "
-							+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") "
-							+ "		(str(?publicationYear) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR + ") "
-							+ "		(str(?publicationYearMonth) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH + ") " 
-							+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") " 
-							+ "WHERE { "
-							+ "<" + queryURI + "> rdf:type foaf:Person ; rdfs:label ?authorLabel ; core:authorInAuthorship ?authorshipNode . "
-							+ "?authorshipNode rdf:type core:Authorship ; core:linkedInformationResource ?document . "
-							+ "?document rdf:type bibo:Document . " 
-							+ "?document rdfs:label ?documentLabel . " 
-							+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . " 
-							+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . " 
-							+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . "
-							+ "OPTIONAL {  ?document core:year ?publicationYear } . " 
-							+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } . " 
-							+ "OPTIONAL {  ?document core:date ?publicationDate } . "  
-							+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . " 
-							+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . " 
-							+ "OPTIONAL {  ?document vitro:description ?documentDescription } " 
-							+ "} " 
-							+ "ORDER BY ?document ?coAuthorPerson";
+			+ "SELECT "
+			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") " 
+			+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") " 
+			+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") " 
+			+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") "
+			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") "
+			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") "
+			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") "
+			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") "
+			+ "		(str(?publicationYear) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR + ") "
+			+ "		(str(?publicationYearMonth) as ?" 
+						+ QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH + ") " 
+			+ "		(str(?publicationDate) as ?" 
+						+ QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") " 
+			+ "WHERE { "
+			+ "<" + queryURI + "> rdf:type foaf:Person ;" 
+								+ " rdfs:label ?authorLabel ;" 
+								+ " core:authorInAuthorship ?authorshipNode . "
+			+ "?authorshipNode rdf:type core:Authorship ;" 
+								+ " core:linkedInformationResource ?document . "
+			+ "?document rdf:type bibo:Document . " 
+			+ "?document rdfs:label ?documentLabel . " 
+			+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . " 
+			+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . " 
+			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . "
+			+ "OPTIONAL {  ?document core:year ?publicationYear } . " 
+			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } . " 
+			+ "OPTIONAL {  ?document core:date ?publicationDate } . "  
+			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . " 
+			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . " 
+			+ "OPTIONAL {  ?document vitro:description ?documentDescription } " 
+			+ "} " 
+			+ "ORDER BY ?document ?coAuthorPerson";
 
 		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
@@ -394,84 +405,36 @@ public class QueryHandler {
 	}
 
 	
-	public VisVOContainer getVisualizationJavaValueObjects()
+	public CoAuthorshipVOContainer getVisualizationJavaValueObjects()
 		throws MalformedQueryParametersException {
 		/*
 		System.out.println("***************************************************************************************");
 		System.out.println("Entered into coauthorship query handler at " + System.currentTimeMillis());
 		System.out.println("***************************************************************************************");
 */
-        if (this.egoURLParam == null || "".equals(egoURLParam)) {
-        	throw new MalformedQueryParametersException("URI parameter is either null or empty.");
-        } else {
-
-        	/*
+		if (StringUtils.isNotBlank(this.egoURLParam)) {
+			/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
     		IRI iri = iRIFactory.create(this.egoURLParam);
             if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation)iri.violations(false).next()).getShortMessage()+" ";
+                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Ego Co-Authorship Vis Query " + errorMsg);
-                throw new MalformedQueryParametersException("URI provided for an individual is malformed.");
+                throw new MalformedQueryParametersException(
+                		"URI provided for an individual is malformed.");
             }
+        } else {
+            throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }
 
 		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURLParam),
-										   this.resultFormatParam,
-										   this.rdfResultFormatParam,
 										   this.dataSource);
 /*
 		System.out.println("***************************************************************************************");
 		System.out.println("***************************************************************************************");
-		*/return createJavaValueObjects(resultSet);
+		*/
+		return createJavaValueObjects(resultSet);
 	}
-
-	public Map<String, Integer> getYearToPublicationCount(
-			Set<BiboDocument> authorDocuments) {
-
-    	/*
-    	 * Create a map from the year to number of publications. Use the BiboDocument's
-    	 * parsedPublicationYear to populate the data.
-    	 * 
-    	 * I am pushing the logic to check for validity of year in "getPublicationYear" itself
-		 * because,
-		 * 	1. We will be using getPub... multiple times & this will save us duplication of code
-		 * 	2. If we change the logic of validity of a pub year we would not have to make changes
-		 * all throughout the codebase.
-		 * 	3. We are asking for a publication year & we should get a proper one or NOT at all.
-		 * */
-    	Map<String, Integer> yearToPublicationCount = new TreeMap<String, Integer>();
-
-    	for (BiboDocument curr : authorDocuments) {
-
-    		/*
-    		 * Increment the count because there is an entry already available for
-    		 * that particular year.
-    		 * */
-    		String publicationYear;
-    		if (curr.getPublicationYear() != null) {
-    			publicationYear = curr.getPublicationYear();
-    		} else {
-    			publicationYear = curr.getParsedPublicationYear();
-    		}
-    		
-			if (yearToPublicationCount.containsKey(publicationYear)) {
-    			yearToPublicationCount.put(publicationYear,
-    									   yearToPublicationCount
-    									   		.get(publicationYear) + 1);
-
-    		} else {
-    			yearToPublicationCount.put(publicationYear, 1);
-    		}
-
-    	}
-
-		return yearToPublicationCount;
-	}
-
-
-
-
 
 }

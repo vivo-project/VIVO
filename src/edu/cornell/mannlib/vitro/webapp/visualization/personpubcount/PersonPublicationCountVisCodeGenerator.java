@@ -23,18 +23,20 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineVOContainer;
 
 
-public class VisualizationCodeGenerator {
+public class PersonPublicationCountVisCodeGenerator {
 
-	private final static Map<String, String> visDivNames = new HashMap<String, String>() {{
+	private static final int MINIMUM_YEARS_CONSIDERED = 10;
+	
+	private static final Map<String, String> VIS_DIV_NAMES = new HashMap<String, String>() { {
 
 		put("SHORT_SPARK", "pub_count_short_sparkline_vis");
 		put("FULL_SPARK", "pub_count_full_sparkline_vis");
 
-	}};
+	} };
 
-	private static final String visualizationStyleClass = "sparkline_style";
+	private static final String VISUALIZATION_STYLE_CLASS = "sparkline_style";
 	
-	private static final String defaultVisContainerDivID = "pub_count_vis_container";
+	private static final String DEFAULT_VIS_CONTAINER_DIV_ID = "pub_count_vis_container";
 	
 	public static final String SHORT_SPARKLINE_MODE_URL_HANDLE = "short";
 	
@@ -50,7 +52,7 @@ public class VisualizationCodeGenerator {
 
 	private String individualURIParam;
 
-	public VisualizationCodeGenerator(String contextPath, 
+	public PersonPublicationCountVisCodeGenerator(String contextPath, 
 									  String individualURIParam, 
 									  String visMode, 
 									  String visContainer, 
@@ -94,7 +96,7 @@ public class VisualizationCodeGenerator {
 
 		int numOfYearsToBeRendered = 0;
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		int shortSparkMinYear = currentYear - 10 + 1;
+		int shortSparkMinYear = currentYear - MINIMUM_YEARS_CONSIDERED + 1;
 		
     	/*
     	 * This is required because when deciding the range of years over which the vis
@@ -114,14 +116,15 @@ public class VisualizationCodeGenerator {
 		
 		StringBuilder visualizationCode = new StringBuilder();
 
-//		System.out.println(yearToPublicationCount);
 		if (yearToPublicationCount.size() > 0) {
 			try {
 				minPublishedYear = Integer.parseInt(Collections.min(publishedYears));
 			} catch (NoSuchElementException e1) {
-				log.debug("vis: " + e1.getMessage() + " error occurred for " + yearToPublicationCount.toString());
+				log.debug("vis: " + e1.getMessage() + " error occurred for " 
+								+ yearToPublicationCount.toString());
 			} catch (NumberFormatException e2) {
-				log.debug("vis: " + e2.getMessage() + " error occurred for " + yearToPublicationCount.toString());
+				log.debug("vis: " + e2.getMessage() + " error occurred for " 
+								+ yearToPublicationCount.toString());
 			}
 		}
 		
@@ -141,64 +144,45 @@ public class VisualizationCodeGenerator {
 		
 		numOfYearsToBeRendered = currentYear - minPubYearConsidered + 1;
 		
-		visualizationCode.append("<style type='text/css'>" +
-										"." + visualizationStyleClass + " table{" +
-										"		margin: 0;" +
-										"  		padding: 0;" +
-										"  		width: auto;" +
-										"  		border-collapse: collapse;" +
-										"    	border-spacing: 0;" +
-										"    	vertical-align: inherit;" +
-										"}" +
-										"table.sparkline_wrapper_table td, th {" +
-										"	vertical-align: bottom;" +
-										"}" +
-										".vis_link a{" +
-										"	padding-top: 5px;" +
-										"}" +
-										"td.sparkline_number { text-align:right; padding-right:5px; }" +
-										"td.sparkline_text   {text-align:left;}" +
-										".incomplete-data-holder {" +
-										"" +
-										"}" +
-										/*"#sparkline_data_table {" +
-												"width: auto;" +
-										"}" +
-										"#sparkline_data_table tfoot {" +
-												"color: red;" +
-												"font-size:0.9em;" +
-										"}" +
-										".sparkline_text {" +
-												"margin-left:72px;" +
-												"position:absolute;" +
-										"}" +
-										".sparkline_range {" +
-												"color:#7BA69E;" +
-												"font-size:0.9em;" +
-												"font-style:italic;" +
-										"}" +*/
-								"</style>\n");
+		visualizationCode.append("<style type='text/css'>" 
+										+ "." + VISUALIZATION_STYLE_CLASS + " table{" 
+										+ "		margin: 0;" 
+										+ "  		padding: 0;" 
+										+ "  		width: auto;" 
+										+ "  		border-collapse: collapse;" 
+										+ "    	border-spacing: 0;" 
+										+ "    	vertical-align: inherit;" 
+										+ "}" 
+										+ "table.sparkline_wrapper_table td, th {" 
+										+ "	vertical-align: bottom;" 
+										+ "}" 
+										+ ".vis_link a{" 
+										+ "	padding-top: 5px;" 
+										+ "}" 
+										+ "td.sparkline_number { text-align:right; " 
+										+ "padding-right:5px; }" 
+										+ "td.sparkline_text   {text-align:left;}" 
+										+ ".incomplete-data-holder {" 
+										+ "" 
+										+ "}" 
+										+ "</style>\n");
 		
-//		.sparkline {display:inline; margin:0; padding:0; width:600px }
-
-
-
-//		td.sparkline-img  {margin:0; padding:0; } 
-		
-
-		visualizationCode.append("<script type=\"text/javascript\">\n" +
-								"function drawPubCountVisualization(providedSparklineImgTD) {\n" +
-									"var data = new google.visualization.DataTable();\n" +
-									"data.addColumn('string', 'Year');\n" +
-									"data.addColumn('number', 'Publications');\n" +
-									"data.addRows(" + numOfYearsToBeRendered + ");\n");
+		visualizationCode.append("<script type=\"text/javascript\">\n" 
+									+ "function drawPubCountVisualization(providedSparklineImgTD) " 
+									+ "{\n" 
+									+ "var data = new google.visualization.DataTable();\n" 
+									+ "data.addColumn('string', 'Year');\n" 
+									+ "data.addColumn('number', 'Publications');\n" 
+									+ "data.addRows(" + numOfYearsToBeRendered + ");\n");
 
 		int publicationCounter = 0;
 		int totalPublications = 0;
 		int renderedFullSparks = 0;
 
 		
-		for (int publicationYear = minPubYearConsidered; publicationYear <= currentYear; publicationYear++) {
+		for (int publicationYear = minPubYearConsidered; 
+					publicationYear <= currentYear; 
+					publicationYear++) {
 
 				String stringPublishedYear = String.valueOf(publicationYear);
 				Integer currentPublications = yearToPublicationCount.get(stringPublishedYear);
@@ -236,16 +220,17 @@ public class VisualizationCodeGenerator {
 		Integer unknownYearPublications = 0;
 		if (yearToPublicationCount.get(VOConstants.DEFAULT_PUBLICATION_YEAR) != null) {
 			totalPublications += yearToPublicationCount.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
-			unknownYearPublications = yearToPublicationCount.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
+			unknownYearPublications = yearToPublicationCount
+											.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
 		}
 
-		String sparklineDisplayOptions = "{width: 63, height: 21, showAxisLines: false, " +
-										  "showValueLabels: false, labelPosition: 'none'}";
+		String sparklineDisplayOptions = "{width: 63, height: 21, showAxisLines: false, " 
+												+ "showValueLabels: false, labelPosition: 'none'}";
 		
 		if (providedVisContainerID != null) {
 			visContainerID = providedVisContainerID;
 		} else {
-			visContainerID = defaultVisContainerDivID;
+			visContainerID = DEFAULT_VIS_CONTAINER_DIV_ID;
 		}
 		
 		
@@ -265,8 +250,8 @@ public class VisualizationCodeGenerator {
 		
 		/*
 		 * Since building StringBuilder objects (which is being used to store the vis code) is 
-		 * essentially a side-effecting process, we have both the activators method as side-effecting.
-		 * They both side-effect "visualizationCode" 
+		 * essentially a side-effecting process, we have both the activators method as side-
+		 * effecting. They both side-effect "visualizationCode" 
 		 * */
 		if (SHORT_SPARKLINE_MODE_URL_HANDLE.equalsIgnoreCase(visMode)) {
 			
@@ -276,7 +261,6 @@ public class VisualizationCodeGenerator {
 													   visContainerID, 
 													   visualizationCode,
 													   unknownYearPublications,
-													   totalPublications, 
 													   sparklineDisplayOptions);	
 		} else {
 			generateFullSparklineVisualizationContent(currentYear,
@@ -284,100 +268,98 @@ public class VisualizationCodeGenerator {
 					   								  visContainerID,
 													  visualizationCode,
 													  unknownYearPublications,
-													  totalPublications, 
 													  renderedFullSparks,
 													  sparklineDisplayOptions);
 		}
-		
-		
-		
-		
-		
-
-//		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		log.debug(visualizationCode);
-//		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
 		return visualizationCode.toString();
 	}
 	
 	private void generateShortSparklineVisualizationContent(int currentYear,
-			int shortSparkMinYear, String visContainerID,
-			StringBuilder visualizationCode, int unknownYearPublications,
-			int totalPublications, String sparklineDisplayOptions) {
+															int shortSparkMinYear, 
+															String visContainerID,
+															StringBuilder visualizationCode, 
+															int unknownYearPublications,
+															String sparklineDisplayOptions) {
 		
 		/*
 		 * Create a view of the data containing only the column pertaining to publication count.  
 		 * */
-		visualizationCode.append("var shortSparklineView = new google.visualization.DataView(data);\n" +
-								 "shortSparklineView.setColumns([1]);\n");		
+		visualizationCode.append("var shortSparklineView = " 
+									+ "new google.visualization.DataView(data);\n" 
+									+ "shortSparklineView.setColumns([1]);\n");		
 
 		/*
 		 * For the short view we only want the last 10 year's view of publication count, 
 		 * hence we filter the data we actually want to use for render.
 		 * */
-		visualizationCode.append("shortSparklineView.setRows(" +
-									"data.getFilteredRows([{column: 0, " +
-										"minValue: '" + shortSparkMinYear + "', " +
-										"maxValue: '" + currentYear+ "'}])" +
-								 ");\n");
+		visualizationCode.append("shortSparklineView.setRows(" 
+									+ "data.getFilteredRows([{column: 0, " 
+									+ "minValue: '" + shortSparkMinYear + "', " 
+									+ "maxValue: '" + currentYear + "'}])" 
+									+ ");\n");
 
 		/*
 		 * Create the vis object and draw it in the div pertaining to short-sparkline.
 		 * */
-		visualizationCode.append("var short_spark = new google.visualization.ImageSparkLine(" +
-//														"document.getElementById('" + visDivNames.get("SHORT_SPARK") + "')" +
-														"providedSparklineImgTD[0]" +
-								 ");\n" +
-								 "short_spark.draw(shortSparklineView, " + sparklineDisplayOptions + ");\n");
+		visualizationCode.append("var short_spark = new google.visualization.ImageSparkLine(" 
+									+ "providedSparklineImgTD[0]" 
+									+ ");\n" 
+									+ "short_spark.draw(shortSparklineView, " 
+									+ sparklineDisplayOptions + ");\n");
 
 		/*
 		 * We want to display how many publication counts were considered, so this is used 
 		 * to calculate this.
 		 * */
-		visualizationCode.append("var shortSparkRows = shortSparklineView.getViewRows();\n" +
-								 "var renderedShortSparks = 0;\n" +
-								 "$.each(shortSparkRows, function(index, value) {" +
-								 		"renderedShortSparks += data.getValue(value, 1);" +
-								 "});\n");
-
-		
+		visualizationCode.append("var shortSparkRows = shortSparklineView.getViewRows();\n" 
+									+ "var renderedShortSparks = 0;\n" 
+									+ "$.each(shortSparkRows, function(index, value) {" 
+									+ "renderedShortSparks += data.getValue(value, 1);" 
+									+ "});\n");
 		
 		/*
 		 * Generate the text introducing the vis.
 		 * */
 		
 		
-		String imcompleteDataText = "This information is based solely on publications which have been loaded into the VIVO system. " +
-									"This may only be a small sample of the person\\'s total work.";
+		String imcompleteDataText = "This information is based solely on publications which " 
+										+ "have been loaded into the VIVO system. " 
+										+ "This may only be a small sample of the person\\'s " 
+										+ "total work.";
 		
-		visualizationCode.append("$('#" + visDivNames.get("SHORT_SPARK") + " td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(" + unknownYearPublications + "));");
-		visualizationCode.append("var shortSparksText = ''" +
-														"+ ' publication(s) within the last 10 years " +
-														"<span class=\"incomplete-data-holder\" title=\"" + imcompleteDataText + "\">incomplete data</span>'" +
-														/*"+ ' " + totalPublications + " '" +
-														"+ ' total " +
-														"<span class=\"sparkline_range\">" +
-														"(" + shortSparkMinYear + " - " + currentYear + ")" +
-														"</span>'" +*/
-														"+ '';" +
-								"$('#" + visDivNames.get("SHORT_SPARK") + " td.sparkline_text').html(shortSparksText);");
+		visualizationCode.append("$('#" + VIS_DIV_NAMES.get("SHORT_SPARK") 
+										+ " td.sparkline_number').text(" 
+										+ "parseInt(renderedShortSparks) " 
+										+ "+ parseInt(" + unknownYearPublications + "));");
+		
+		visualizationCode.append("var shortSparksText = ''" 
+									+ "+ ' publication(s) within the last 10 years " 
+									+ "<span class=\"incomplete-data-holder\" title=\"" 
+									+ imcompleteDataText + "\">incomplete data</span>'" 
+									+ "+ '';" 
+									+ "$('#" + VIS_DIV_NAMES.get("SHORT_SPARK") + " " 
+									+ "td.sparkline_text').html(shortSparksText);");
 
 		visualizationCode.append("}\n ");
 		
 		/*
-		 * Generate the code that will activate the visualization. It takes care of creating div elements to hold 
-		 * the actual sparkline image and then calling the drawPubCountVisualization function. 
+		 * Generate the code that will activate the visualization. It takes care of creating 
+		 * div elements to hold the actual sparkline image and then calling the 
+		 * drawPubCountVisualization function. 
 		 * */
-		visualizationCode.append(generateVisualizationActivator(visDivNames.get("SHORT_SPARK"), visContainerID));
+		visualizationCode.append(generateVisualizationActivator(VIS_DIV_NAMES.get("SHORT_SPARK"), 
+																visContainerID));
 		
 	}
 	
 	private void generateFullSparklineVisualizationContent(
-			int currentYear, int minPubYearConsidered, String visContainerID, 
+			int currentYear, 
+			int minPubYearConsidered, 
+			String visContainerID, 
 			StringBuilder visualizationCode,
 			int unknownYearPublications,
-			int totalPublications, int renderedFullSparks,
+			int renderedFullSparks,
 			String sparklineDisplayOptions) {
 		
 		String csvDownloadURLHref = ""; 
@@ -385,7 +367,8 @@ public class VisualizationCodeGenerator {
 		try {
 			if (getCSVDownloadURL() != null) {
 				
-				csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() + "\" class=\"inline_href\">(.CSV File)</a>";
+				csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() 
+											+ "\" class=\"inline_href\">(.CSV File)</a>";
 				
 			} else {
 				
@@ -398,86 +381,85 @@ public class VisualizationCodeGenerator {
 		}
 		
 		
-		visualizationCode.append("var fullSparklineView = new google.visualization.DataView(data);\n" +
-								 "fullSparklineView.setColumns([1]);\n");
+		visualizationCode.append("var fullSparklineView = " 
+									+ "new google.visualization.DataView(data);\n" 
+									+ "fullSparklineView.setColumns([1]);\n");
 		
-		visualizationCode.append("var full_spark = new google.visualization.ImageSparkLine(" +
-//												"document.getElementById('" + visDivNames.get("FULL_SPARK") + "')" +
-														"providedSparklineImgTD[0]" +
-								");\n" +
-								"full_spark.draw(fullSparklineView, " + sparklineDisplayOptions + ");\n");
+		visualizationCode.append("var full_spark = new google.visualization.ImageSparkLine(" 
+									+ "providedSparklineImgTD[0]" 
+									+ ");\n" 
+									+ "full_spark.draw(fullSparklineView, " 
+									+ sparklineDisplayOptions + ");\n");
 		
-		visualizationCode.append("$('#" + visDivNames.get("FULL_SPARK") + " td.sparkline_number').text('" + (renderedFullSparks + unknownYearPublications) + "');");
+		visualizationCode.append("$('#" + VIS_DIV_NAMES.get("FULL_SPARK") 
+									+ " td.sparkline_number').text('" + (renderedFullSparks 
+									+ unknownYearPublications) + "');");
 		
-		visualizationCode.append("var allSparksText = ''" +
-												 "+ ' publication(s) '" +
-												 /*"+ ' " + totalPublications + " '" +*/
-												 "+ ' from " +
-												"<span class=\"sparkline_range\">" +
-												"" + minPubYearConsidered + " to " + currentYear + "" +
-												"</span> '" +
-												"+ ' " + csvDownloadURLHref + " ';" +
-								"$('#" + visDivNames.get("FULL_SPARK") + " td.sparkline_text').html(allSparksText);");
+		visualizationCode.append("var allSparksText = ''" 
+									+ "+ ' publication(s) '" 
+									+ "+ ' from " 
+									+ "<span class=\"sparkline_range\">" 
+									+ "" + minPubYearConsidered + " to " + currentYear + "" 
+									+ "</span> '" 
+									+ "+ ' " + csvDownloadURLHref + " ';" 
+									+ "$('#" + VIS_DIV_NAMES.get("FULL_SPARK") 
+									+ " td.sparkline_text').html(allSparksText);");
 		
 		visualizationCode.append("}\n ");
 		
-		visualizationCode.append(generateVisualizationActivator(visDivNames.get("FULL_SPARK"), visContainerID));
+		visualizationCode.append(generateVisualizationActivator(VIS_DIV_NAMES.get("FULL_SPARK"), 
+																visContainerID));
 		
 	}
+	
 	private String generateVisualizationActivator(String sparklineID, String visContainerID) {
 		
-		String sparklineTableWrapper = "\n" +
-				"var table = $('<table>');" +
-				"table.attr('class', 'sparkline_wrapper_table');" +
-				"var row = $('<tr>');" +
-				"sparklineImgTD = $('<td>');" +
-				"sparklineImgTD.attr('id', '" + sparklineID + "_img');" +
-				"sparklineImgTD.attr('width', '65');" +
-				"sparklineImgTD.attr('align', 'right');" +
-				"sparklineImgTD.attr('class', '" + visualizationStyleClass + "');" +
-				"row.append(sparklineImgTD);" +
-				"var sparklineNumberTD = $('<td>');" +
-				"sparklineNumberTD.attr('width', '30');" +
-				"sparklineNumberTD.attr('align', 'right');" +
-				"sparklineNumberTD.attr('class', 'sparkline_number');" +
-				"row.append(sparklineNumberTD);" +
-				"var sparklineTextTD = $('<td>');" +
-				"sparklineTextTD.attr('width', '350');" +
-				"sparklineTextTD.attr('class', 'sparkline_text');" +
-				"row.append(sparklineTextTD);" +
-				"table.append(row);" +
-				"table.prependTo('#" + sparklineID + "');\n";
+		String sparklineTableWrapper = "\n" 
+				+ "var table = $('<table>');" 
+				+ "table.attr('class', 'sparkline_wrapper_table');" 
+				+ "var row = $('<tr>');" 
+				+ "sparklineImgTD = $('<td>');" 
+				+ "sparklineImgTD.attr('id', '" + sparklineID + "_img');" 
+				+ "sparklineImgTD.attr('width', '65');" 
+				+ "sparklineImgTD.attr('align', 'right');" 
+				+ "sparklineImgTD.attr('class', '" + VISUALIZATION_STYLE_CLASS + "');" 
+				+ "row.append(sparklineImgTD);" 
+				+ "var sparklineNumberTD = $('<td>');" 
+				+ "sparklineNumberTD.attr('width', '30');" 
+				+ "sparklineNumberTD.attr('align', 'right');" 
+				+ "sparklineNumberTD.attr('class', 'sparkline_number');" 
+				+ "row.append(sparklineNumberTD);" 
+				+ "var sparklineTextTD = $('<td>');" 
+				+ "sparklineTextTD.attr('width', '350');" 
+				+ "sparklineTextTD.attr('class', 'sparkline_text');" 
+				+ "row.append(sparklineTextTD);" 
+				+ "table.append(row);" 
+				+ "table.prependTo('#" + sparklineID + "');\n";
 		
-		return "$(document).ready(function() {" +
-								
-								"var sparklineImgTD; " +
-								
+		return "$(document).ready(function() {" 
+				+ "var sparklineImgTD; " 
 		
-								/*
-								 * This is a nuclear option (creating the container in which everything goes)
-								 * the only reason this will be ever used is the API user never submitted a 
-								 * container ID in which everything goes. The alternative was to let the 
-								 * vis not appear in the calling page at all. So now atleast vis appears but 
-								 * appended at the bottom of the body.
-								 * */
-								"if ($('#" + visContainerID + "').length === 0) {" +
-								"	$('<div/>', {'id': '" + visContainerID + "'" +
-								"     }).appendTo('body');" +
-								"}" +
-								
-								"if ($('#" + sparklineID + "').length === 0) {" +
-								
-								"$('<div/>', {'id': '" + sparklineID + "'," +
-											 "'class': '" + visualizationStyleClass + "'" +
-										"}).prependTo('#" + visContainerID + "');" +
-								
-								sparklineTableWrapper +
-										
-								"}" +
-								
-								"drawPubCountVisualization(sparklineImgTD);" +
-								"});" +
-								"</script>\n";
+				/*
+				 * This is a nuclear option (creating the container in which everything goes)
+				 * the only reason this will be ever used is the API user never submitted a 
+				 * container ID in which everything goes. The alternative was to let the 
+				 * vis not appear in the calling page at all. So now atleast vis appears but 
+				 * appended at the bottom of the body.
+				 * */
+				
+				+ "if ($('#" + visContainerID + "').length === 0) {" 
+				+ "	$('<div/>', {'id': '" + visContainerID + "'" 
+				+ "     }).appendTo('body');" 
+				+ "}" 
+				+ "if ($('#" + sparklineID + "').length === 0) {" 
+				+ "$('<div/>', {'id': '" + sparklineID + "'," 
+				+ "'class': '" + VISUALIZATION_STYLE_CLASS + "'" 
+				+ "}).prependTo('#" + visContainerID + "');" 
+				+ sparklineTableWrapper 
+				+ "}" 
+				+ "drawPubCountVisualization(sparklineImgTD);" 
+				+ "});" 
+				+ "</script>\n";
 	}
 
 	private String getVisualizationContextCode(String visMode) {
@@ -505,7 +487,8 @@ public class VisualizationCodeGenerator {
 			try {
 				if (getCSVDownloadURL() != null) {
 					
-					csvDownloadURLHref = "Download data as <a href='" + getCSVDownloadURL() + "'>.csv</a> file.<br />";
+					csvDownloadURLHref = "Download data as <a href='" 
+											+ getCSVDownloadURL() + "'>.csv</a> file.<br />";
 					valueObjectContainer.setDownloadDataLink(getCSVDownloadURL());
 					
 				} else {
@@ -525,8 +508,7 @@ public class VisualizationCodeGenerator {
 		
 		String tableCode = generateDataTable();
 		
-		divContextCode.append("<p>" + tableCode +
-					csvDownloadURLHref + "</p>");
+		divContextCode.append("<p>" + tableCode + csvDownloadURLHref + "</p>");
 		
 		valueObjectContainer.setTable(tableCode);
 		
@@ -549,22 +531,24 @@ public class VisualizationCodeGenerator {
 							 + secondaryContextPath
 							 + "?" + VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
 							 + "=" + URLEncoder.encode(individualURIParam, 
-									 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
+									 				   VisualizationController.URL_ENCODING_SCHEME)
+									 				   .toString() 
 							 + "&" + VisualizationFrameworkConstants.VIS_TYPE_URL_HANDLE 
-							 + "=" + URLEncoder.encode(VisualizationController
-									 						.PERSON_PUBLICATION_COUNT_VIS_URL_VALUE, 
-									 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
+							 + "=" + URLEncoder.encode(
+										 			VisualizationController
+										 				.PERSON_PUBLICATION_COUNT_VIS_URL_VALUE,
+									 				VisualizationController.URL_ENCODING_SCHEME)
+								 				.toString() 
 							 + "&" + VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE 
-							 + "=" + URLEncoder.encode(VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE, 
-					 				 				   VisualizationController.URL_ENCODING_SCHEME).toString();
-//		System.out.println(" ----- >>>> " + contextPath + " XX " + individualURIParam + " XX " + downloadURL);
+							 + "=" + URLEncoder.encode(VisualizationFrameworkConstants
+									 						.DATA_RENDER_MODE_URL_VALUE, 
+					 				 				   VisualizationController.URL_ENCODING_SCHEME)
+			 				 				   .toString();
 			return downloadURL;
 		} else {
 			return null;
 		}
-		
 	}
-	
 	
 	private String generateShortVisContext() {
 
@@ -592,10 +576,12 @@ public class VisualizationCodeGenerator {
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
 		 				    + "&"
 		 				    + VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE
-							+ "=" + URLEncoder.encode(VisualizationFrameworkConstants.STANDALONE_RENDER_MODE_URL_VALUE, 
+							+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
+															.STANDALONE_RENDER_MODE_URL_VALUE, 
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 			
-			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO publications and corresponding co-author network</a>.<br />";
+			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO " 
+									+ "publications and corresponding co-author network</a>.<br />";
 			
 			valueObjectContainer.setFullTimelineNetworkLink(fullTimelineNetworkURL);
 			
@@ -608,13 +594,12 @@ public class VisualizationCodeGenerator {
 		divContextCode.append("<span class=\"vis_link\">" + fullTimelineLink + "</span>");
 		
 		} catch (UnsupportedEncodingException e) {
-		e.printStackTrace();
+			log.error(e);
 		}
 		
 		return divContextCode.toString();
 		
 	}
-	
 	
 	private String generateDataTable() {
 		
@@ -637,26 +622,24 @@ public class VisualizationCodeGenerator {
 		
 		StringBuilder dataTable = new StringBuilder();
 		
-		dataTable.append("<table id='sparkline_data_table'>" +
-								"<caption>Publications per year " + csvDownloadURLHref + "</caption>" +
-								"<thead>" +
-										"<tr>" +
-											"<th>Year</th>" +
-											"<th>Publications</th>" +
-										"</tr>" +
-								"</thead>" +
-								"<tbody>");
+		dataTable.append("<table id='sparkline_data_table'>" 
+							+ "<caption>Publications per year " + csvDownloadURLHref + "</caption>" 
+							+ "<thead>" 
+							+ "<tr>" 
+							+ "<th>Year</th>" 
+							+ "<th>Publications</th>" 
+							+ "</tr>" 
+							+ "</thead>" 
+							+ "<tbody>");
 		
 		for (Entry<String, Integer> currentEntry : yearToPublicationCount.entrySet()) {
-			dataTable.append("<tr>" +
-								"<td>" + currentEntry.getKey() + "</td>" +
-								"<td>" + currentEntry.getValue() + "</td>" +
-							"</tr>");
+			dataTable.append("<tr>" 
+								+ "<td>" + currentEntry.getKey() + "</td>" 
+								+ "<td>" + currentEntry.getValue() + "</td>" 
+								+ "</tr>");
 		}
 										
-		dataTable.append("</tbody>\n" +
-						"</table>\n");
-		
+		dataTable.append("</tbody>\n </table>\n");
 		
 		return dataTable.toString();
 	}

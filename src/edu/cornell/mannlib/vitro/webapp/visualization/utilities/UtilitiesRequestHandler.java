@@ -33,69 +33,64 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.AllPropertiesQueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.GenericQueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class VisualizationRequestHandler {
+public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 	
-	private VitroRequest vitroRequest;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private Log log;
-
-
-	
-	public VisualizationRequestHandler(VitroRequest vitroRequest,
+	public UtilitiesRequestHandler(VitroRequest vitroRequest,
 			HttpServletRequest request, HttpServletResponse response, Log log) {
 
-		this.vitroRequest = vitroRequest;
-		this.request = request;
-		this.response = response;
-		this.log = log;
+		super(vitroRequest, request, response, log);
 
 	}
 
 	public void generateVisualization(DataSource dataSource) {
 
-        String individualURIParam = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
+		VitroRequest vitroRequest = super.getVitroRequest();
+        String individualURIParam = vitroRequest.getParameter(
+        									VisualizationFrameworkConstants
+        											.INDIVIDUAL_URI_URL_HANDLE);
 
-        String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
+        String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants
+        											.VIS_MODE_URL_HANDLE);
         
-        String profileInfoMode = "PROFILE_INFO";
-        String profileVisMode = "PROFILE_URL";
-        String coAuthorVisMode = "COAUTHORSHIP_URL";
-        String personLevelVisMode = "PERSON_LEVEL_URL";
-        String imageVisMode = "IMAGE_URL";
-        
-		String resultFormatParam = "RS_TEXT";
-        String rdfResultFormatParam = "RDF/XML-ABBREV";
-
         String preparedURL = "";
 
+        Log log = super.getLog();
+        HttpServletRequest request = super.getRequest();
         try {
         
             /*
     		 * If the info being requested is about a profile which includes the name, moniker
     		 * & image url.
     		 * */
-    		if (profileInfoMode.equalsIgnoreCase(visMode)) {
+    		if (VisualizationFrameworkConstants.PROFILE_INFO_UTILS_VIS_MODE
+    					.equalsIgnoreCase(visMode)) {
     			
     			
-    			String filterRule = "?predicate = j.2:mainImage || ?predicate = vitro:moniker  || ?predicate = rdfs:label";
-    			AllPropertiesQueryHandler profileQueryHandler = new AllPropertiesQueryHandler(individualURIParam, 
-    																			filterRule, 
-    																			resultFormatParam, 
-    																			rdfResultFormatParam, 
-    																			dataSource, 
-    																			log);
+    			String filterRule = "?predicate = j.2:mainImage " 
+    									+ "|| ?predicate = vitro:moniker  " 
+    									+ "|| ?predicate = rdfs:label";
+    			
+    			QueryHandler<GenericQueryMap> profileQueryHandler = 
+    					new AllPropertiesQueryHandler(individualURIParam, 
+    												  filterRule,
+    												  dataSource,
+    												  log);
     			
     			try {
     				
-    				GenericQueryMap profilePropertiesToValues = profileQueryHandler.getJavaValueObjects();
+    				GenericQueryMap profilePropertiesToValues = 
+    							profileQueryHandler.getVisualizationJavaValueObjects();
     				
-    				profilePropertiesToValues.addEntry("imageContextPath", request.getContextPath());
+    				profilePropertiesToValues.addEntry("imageContextPath", 
+    												   request.getContextPath());
     				
     				Gson profileInformation = new Gson();
     				
-    				prepareVisualizationQueryResponse(profileInformation.toJson(profilePropertiesToValues));
+    				prepareVisualizationQueryResponse(profileInformation
+    														.toJson(profilePropertiesToValues));
     				
     				return;
     				
@@ -112,36 +107,39 @@ public class VisualizationRequestHandler {
     			}
     			
     			
-    		} else if (imageVisMode.equalsIgnoreCase(visMode)) {
+    		} else if (VisualizationFrameworkConstants.IMAGE_UTILS_VIS_MODE
+    						.equalsIgnoreCase(visMode)) {
     			/*
-        		 * If the url being requested is about a standalone image, which is used when we want
-        		 * to render an image & other info for a co-author OR ego for that matter.
+        		 * If the url being requested is about a standalone image, which is used when we 
+        		 * want to render an image & other info for a co-author OR ego for that matter.
         		 * */
     			
     			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-    			fieldLabelToOutputFieldLabel.put("downloadLocation", QueryFieldLabels.THUMBNAIL_LOCATION_URL);
+    			fieldLabelToOutputFieldLabel.put("downloadLocation", 
+    											  QueryFieldLabels.THUMBNAIL_LOCATION_URL);
     			fieldLabelToOutputFieldLabel.put("fileName", QueryFieldLabels.THUMBNAIL_FILENAME);
     			
-    			String whereClause = "<" + individualURIParam + "> j.2:thumbnailImage ?thumbnailImage .  " 
-    									+ "?thumbnailImage j.2:downloadLocation ?downloadLocation ; j.2:filename ?fileName .";
+    			String whereClause = "<" + individualURIParam 
+    									+ "> j.2:thumbnailImage ?thumbnailImage .  " 
+    									+ "?thumbnailImage j.2:downloadLocation " 
+    									+ "?downloadLocation ; j.2:filename ?fileName .";
     			
     			
     			
-    			GenericQueryHandler imageQueryHandler = new GenericQueryHandler(individualURIParam,
-    																			fieldLabelToOutputFieldLabel,
-    																			whereClause,
-    																			resultFormatParam, 
-    																			rdfResultFormatParam, 
-    																			dataSource, 
-    																			log);
+    			QueryHandler<ResultSet> imageQueryHandler = 
+    					new GenericQueryHandler(individualURIParam,
+    											fieldLabelToOutputFieldLabel,
+    											whereClause,
+    											dataSource,
+    											log);
     			
     			try {
     				
-    				String thumbnailAccessURL = getThumbnailInformation(
-    																imageQueryHandler.getResultSet(),
-    																fieldLabelToOutputFieldLabel);
+    				String thumbnailAccessURL = 
+    						getThumbnailInformation(
+    								imageQueryHandler.getVisualizationJavaValueObjects(),
+    								fieldLabelToOutputFieldLabel);
     				
-//    				System.out.println("thumbnail access URL " + thumbnailAccessURL);
     				prepareVisualizationQueryResponse(thumbnailAccessURL);
     				return;
     				
@@ -158,10 +156,11 @@ public class VisualizationRequestHandler {
     			}
     			
     			
-    		} else if (coAuthorVisMode.equalsIgnoreCase(visMode)) {
+    		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
+    						.equalsIgnoreCase(visMode)) {
     	    	/*
-    	    	 * By default we will be generating profile url else some specific url like coAuthorShip vis 
-    	    	 * url for that individual.
+    	    	 * By default we will be generating profile url else some specific url like 
+    	    	 * coAuthorShip vis url for that individual.
     	    	 * */
 				
 				preparedURL += request.getContextPath()
@@ -176,17 +175,20 @@ public class VisualizationRequestHandler {
 						 				 VisualizationController.URL_ENCODING_SCHEME).toString()
 			 				    + "&"
 			 				    + VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE
-								+ "=" + URLEncoder.encode(VisualizationFrameworkConstants.STANDALONE_RENDER_MODE_URL_VALUE, 
-						 				 VisualizationController.URL_ENCODING_SCHEME).toString();
+								+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
+																.STANDALONE_RENDER_MODE_URL_VALUE, 
+														VisualizationController.URL_ENCODING_SCHEME)
+												  .toString();
 				
 
 				prepareVisualizationQueryResponse(preparedURL);
 				return;
 
-			} else if (personLevelVisMode.equalsIgnoreCase(visMode)) {
+			} else if (VisualizationFrameworkConstants.PERSON_LEVEL_UTILS_VIS_MODE
+							.equalsIgnoreCase(visMode)) {
     	    	/*
-    	    	 * By default we will be generating profile url else some specific url like coAuthorShip vis 
-    	    	 * url for that individual.
+    	    	 * By default we will be generating profile url else some specific url like 
+    	    	 * coAuthorShip vis url for that individual.
     	    	 * */
 				
 				preparedURL += request.getContextPath()
@@ -201,7 +203,8 @@ public class VisualizationRequestHandler {
 						 				 VisualizationController.URL_ENCODING_SCHEME).toString()
 			 				    + "&"
 			 				    + VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE
-								+ "=" + URLEncoder.encode(VisualizationFrameworkConstants.STANDALONE_RENDER_MODE_URL_VALUE, 
+								+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
+																.STANDALONE_RENDER_MODE_URL_VALUE, 
 						 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 				
 				prepareVisualizationQueryResponse(preparedURL);
@@ -227,8 +230,8 @@ public class VisualizationRequestHandler {
 
 	}
 
-	private String getThumbnailInformation(ResultSet resultSet, 
-												   Map<String, String> fieldLabelToOutputFieldLabel) {
+	private String getThumbnailInformation(ResultSet resultSet,
+										   Map<String, String> fieldLabelToOutputFieldLabel) {
 		
 		String finalThumbNailLocation = "";
 		
@@ -236,13 +239,16 @@ public class VisualizationRequestHandler {
 			QuerySolution solution = resultSet.nextSolution();
 			
 			
-			RDFNode downloadLocationNode = solution.get(fieldLabelToOutputFieldLabel.get("downloadLocation"));
+			RDFNode downloadLocationNode = solution.get(
+													fieldLabelToOutputFieldLabel
+															.get("downloadLocation"));
 			RDFNode fileNameNode = solution.get(fieldLabelToOutputFieldLabel.get("fileName"));
 			
 			if (downloadLocationNode != null && fileNameNode != null) {
-				finalThumbNailLocation = FileServingHelper
-												.getBytestreamAliasUrl(downloadLocationNode.toString(),
-																	   fileNameNode.toString());
+				finalThumbNailLocation = 
+						FileServingHelper
+								.getBytestreamAliasUrl(downloadLocationNode.toString(),
+										fileNameNode.toString());
 			}
 			
 		}
@@ -252,11 +258,11 @@ public class VisualizationRequestHandler {
 	
 	private void prepareVisualizationQueryResponse(String preparedURL) {
 
-		response.setContentType("text/plain");
+		super.getResponse().setContentType("text/plain");
 		
 		try {
 		
-		PrintWriter responseWriter = response.getWriter();
+		PrintWriter responseWriter = super.getResponse().getWriter();
 		
 		responseWriter.append(preparedURL);
 		
@@ -270,8 +276,9 @@ public class VisualizationRequestHandler {
 	private void handleMalformedParameters(String errorMessage)
 		throws ServletException, IOException {
 	
-		Portal portal = vitroRequest.getPortal();
+		Portal portal = super.getVitroRequest().getPortal();
 		
+		HttpServletRequest request = super.getRequest();
 		request.setAttribute("error", errorMessage);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
@@ -280,8 +287,9 @@ public class VisualizationRequestHandler {
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 		
 		try {
-			requestDispatcher.forward(request, response);
+			requestDispatcher.forward(request, super.getResponse());
 		} catch (Exception e) {
+			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

@@ -16,7 +16,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants.Empl
 public class VivoEmployee extends Individual {
 
 	private EmployeeType employeeType; 
-	private Set<VivoDepartmentOrDivision> parentDepartments = new HashSet<VivoDepartmentOrDivision>();
+	private Set<VivoDepartmentOrDivision> parentDepartments = 
+				new HashSet<VivoDepartmentOrDivision>();
 	private Set<BiboDocument> authorDocuments = new HashSet<BiboDocument>();
 
 	public VivoEmployee(String employeeURL, 

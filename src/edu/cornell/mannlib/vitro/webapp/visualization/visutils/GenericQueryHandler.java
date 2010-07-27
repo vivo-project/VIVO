@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.iri.IRI;
@@ -26,11 +27,11 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
  * @author cdtank
  *
  */
-public class GenericQueryHandler {
+public class GenericQueryHandler implements QueryHandler<ResultSet> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String whereClause, individualURLParam, resultFormatParam, rdfResultFormatParam;
+	private String whereClause, individualURLParam;
 	private DataSource dataSource;
 
 	private Log log;
@@ -40,28 +41,22 @@ public class GenericQueryHandler {
 	public GenericQueryHandler(String individualURLParam,
 							   Map<String, String> fieldLabelToOutputFieldLabel, 
 							   String whereClause,
-							   String resultFormatParam, 
-							   String rdfResultFormatParam,
 							   DataSource dataSource, 
 							   Log log) {
 
 		this.individualURLParam = individualURLParam;
 		this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
 		this.whereClause = whereClause;
-		this.resultFormatParam = resultFormatParam;
-		this.rdfResultFormatParam = rdfResultFormatParam;
 		this.dataSource = dataSource;
 		this.log = log;
 		
 	}
 
 	private ResultSet executeQuery(String queryText,
-								   String resultFormatParam, 
-								   String rdfResultFormatParam, 
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try{
+        try {
             Query query = QueryFactory.create(queryText, SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
@@ -71,11 +66,11 @@ public class GenericQueryHandler {
             
 
             //remocve this if loop after knowing what is describe & construct sparql stuff.
-            if (query.isSelectType()){
+            if (query.isSelectType()) {
                 return queryExecution.execSelect();
             }
         } finally {
-            if(queryExecution != null) {
+            if (queryExecution != null) {
             	queryExecution.close();
             }
 
@@ -95,7 +90,7 @@ public class GenericQueryHandler {
 				: this.fieldLabelToOutputFieldLabel.entrySet()) {
 			
 			sparqlQuery.append("\t(str(?" + currentfieldLabelToOutputFieldLabel.getKey() + ") as ?" 
-											+ currentfieldLabelToOutputFieldLabel.getValue() + ")\n");
+									+ currentfieldLabelToOutputFieldLabel.getValue() + ")\n");
 			
 		}
 		
@@ -105,34 +100,29 @@ public class GenericQueryHandler {
 		
 		sparqlQuery.append("}\n");
 		
-//		System.out.println("GENERIC QEURY >>>>> " + sparqlQuery);
-		
 		return sparqlQuery.toString();
 	}
 
 	
-	public ResultSet getResultSet()
-		throws MalformedQueryParametersException {
-
-        if (this.individualURLParam == null || "".equals(individualURLParam)) {
-        	throw new MalformedQueryParametersException("URI parameter is either null or empty.");
-        } else {
-
+	public ResultSet getVisualizationJavaValueObjects()
+			throws MalformedQueryParametersException {
+		if (StringUtils.isNotBlank(this.individualURLParam)) {
         	/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
     		IRI iri = iRIFactory.create(this.individualURLParam);
             if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation)iri.violations(false).next()).getShortMessage()+" ";
+                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Generic Query " + errorMsg);
-                throw new MalformedQueryParametersException("URI provided for an individual is malformed.");
-            }
+                throw new MalformedQueryParametersException(
+                		"URI provided for an individual is malformed.");
+            }        	
+        } else {
+            throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }
 
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(),
-										   this.resultFormatParam,
-										   this.rdfResultFormatParam,
 										   this.dataSource);
 
 		return resultSet;

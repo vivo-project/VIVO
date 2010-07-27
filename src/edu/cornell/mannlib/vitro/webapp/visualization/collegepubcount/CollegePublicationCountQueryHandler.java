@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.iri.IRI;
@@ -30,6 +31,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoDepartmentOrDivision;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoEmployee;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 
 
 
@@ -37,23 +39,21 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoEmployee;
  * @author cdtank
  *
  */
-public class QueryHandler {
+public class CollegePublicationCountQueryHandler implements QueryHandler<Set<VivoEmployee>> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String collegeURIParam, resultFormatParam, rdfResultFormatParam;
-	private Map<String, VivoCollegeOrSchool> collegeURLToVO = new HashMap<String, VivoCollegeOrSchool>();
+	private String collegeURIParam;
+	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
+			new HashMap<String, VivoCollegeOrSchool>();
 	private DataSource dataSource;
 
 	private Log log;
 
-	public QueryHandler(String collegeURIParam,
-			String resultFormatParam, String rdfResultFormatParam,
+	public CollegePublicationCountQueryHandler(String collegeURIParam,
 			DataSource dataSource, Log log) {
 
 		this.collegeURIParam = collegeURIParam;
-		this.resultFormatParam = resultFormatParam;
-		this.rdfResultFormatParam = rdfResultFormatParam;
 		this.dataSource = dataSource;
 		this.log = log;
 
@@ -63,7 +63,8 @@ public class QueryHandler {
 		
 		Set<VivoEmployee> collegeAcademicEmployees = new HashSet<VivoEmployee>();
 		
-		Map<String, VivoDepartmentOrDivision> departmentURLToVO = new HashMap<String, VivoDepartmentOrDivision>();
+		Map<String, VivoDepartmentOrDivision> departmentURLToVO = 
+				new HashMap<String, VivoDepartmentOrDivision>();
 		Map<String, VivoEmployee> employeeURLToVO = new HashMap<String, VivoEmployee>();
 		
 		while (resultSet.hasNext()) {
@@ -119,7 +120,9 @@ public class QueryHandler {
 				currentEmployee = employeeURLToVO.get(employeeNode.toString());
 				currentEmployee.addParentDepartment(currentDepartment);
 			} else {
-				currentEmployee = new VivoEmployee(employeeNode.toString(), currentEmployeeType, currentDepartment);
+				currentEmployee = new VivoEmployee(employeeNode.toString(), 
+												   currentEmployeeType, 
+												   currentDepartment);
 				RDFNode authorLabelNode = solution.get(QueryFieldLabels.AUTHOR_LABEL);
 				if (authorLabelNode != null) {
 					currentEmployee.setIndividualLabel(authorLabelNode.toString());
@@ -131,17 +134,19 @@ public class QueryHandler {
 			if (documentNode != null) {
 				
 				/*
-				 * A document can have multiple authors but if the same author serves in multiple departments
-				 * then we need to account for "An Authored Document" only once. This check will make sure that
-				 * a document by same author is not added twice just because that author serves in 2 distinct 
-				 * department.
+				 * A document can have multiple authors but if the same author serves in 
+				 * multiple departments then we need to account for "An Authored Document" 
+				 * only once. This check will make sure that a document by same author is 
+				 * not added twice just because that author serves in 2 distinct department.
 				 * */
 				boolean isNewDocumentAlreadyAdded = testForDuplicateEntryOfDocument(
 															currentEmployee, 
 															documentNode);
 				
 				if (!isNewDocumentAlreadyAdded) {
-					currentEmployee.addAuthorDocument(createAuthorDocumentsVO(solution, documentNode.toString()));
+					currentEmployee.addAuthorDocument(
+							createAuthorDocumentsVO(solution, 
+													documentNode.toString()));
 				}
 				
 			}
@@ -149,14 +154,6 @@ public class QueryHandler {
 			collegeAcademicEmployees.add(currentEmployee);
 		}
 		
-		
-/*		System.out.println(collegeURLToVO);
-		System.out.println("------------------------------------------------------------");
-		System.out.println(departmentURLToVO);
-		System.out.println("------------------------------------------------------------");
-		System.out.println(employeeURLToVO);
-		System.out.println("------------------------------------------------------------");
-*/		
 		return collegeAcademicEmployees;
 	}
 
@@ -165,7 +162,8 @@ public class QueryHandler {
 		boolean isNewDocumentAlreadyAdded = false;
 		
 		for (BiboDocument currentAuthoredDocument : currentEmployee.getAuthorDocuments()) {
-			if (currentAuthoredDocument.getDocumentURL().equalsIgnoreCase(documentNode.toString())) {
+			if (currentAuthoredDocument.getDocumentURL()
+					.equalsIgnoreCase(documentNode.toString())) {
 				isNewDocumentAlreadyAdded = true;
 				break;
 			}
@@ -206,7 +204,9 @@ public class QueryHandler {
 				biboDocument.setPublicationYear(publicationYearNode.toString());
 			}
 			
-			RDFNode publicationYearMonthNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
+			RDFNode publicationYearMonthNode = solution.get(
+													QueryFieldLabels
+															.DOCUMENT_PUBLICATION_YEAR_MONTH);
 			if (publicationYearMonthNode != null) {
 				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
 			}
@@ -220,29 +220,24 @@ public class QueryHandler {
 	}
 	
 	private ResultSet executeQuery(String queryText,
-								   String resultFormatParam, 
-								   String rdfResultFormatParam, 
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try{
+        try {
             Query query = QueryFactory.create(queryText, SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
 //            qs.add("authPerson", queryParam); // bind resource to s
             
             queryExecution = QueryExecutionFactory.create(query, dataSource);
-            
 
-            //remocve this if loop after knowing what is describe & construct sparql stuff.
-            if (query.isSelectType()){
+            if (query.isSelectType()) {
                 return queryExecution.execSelect();
             }
         } finally {
-            if(queryExecution != null) {
+            if (queryExecution != null) {
             	queryExecution.close();
             }
-
         }
 		return null;
     }
@@ -304,25 +299,23 @@ public class QueryHandler {
 	public Set<VivoEmployee> getVisualizationJavaValueObjects()
 		throws MalformedQueryParametersException {
 
-        if (this.collegeURIParam == null || "".equals(collegeURIParam)) {
-        	throw new MalformedQueryParametersException("URI parameter is either null or empty.");
-        } else {
-
+		if (StringUtils.isNotBlank(this.collegeURIParam)) {
         	/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
     		IRI iri = iRIFactory.create(this.collegeURIParam);
             if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation)iri.violations(false).next()).getShortMessage()+" ";
+                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Pub Count Vis Query " + errorMsg);
-                throw new MalformedQueryParametersException("URI provided for an individual is malformed.");
+                throw new MalformedQueryParametersException(
+                		"URI provided for an individual is malformed.");
             }
+        } else {
+            throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }
 
 		ResultSet resultSet	= executeQuery(generateCollegeEmployeeSparqlQuery(this.collegeURIParam),
-										   this.resultFormatParam,
-										   this.rdfResultFormatParam,
 										   this.dataSource);
 
 		return createJavaValueObjects(resultSet);

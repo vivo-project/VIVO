@@ -28,49 +28,46 @@ import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class VisualizationRequestHandler {
+public class PersonPublicationCountRequestHandler extends VisualizationRequestHandler {
 	
-	private VitroRequest vitroRequest;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private Log log;
-
-
-	
-	public VisualizationRequestHandler(VitroRequest vitroRequest,
+	public PersonPublicationCountRequestHandler(VitroRequest vitroRequest,
 			HttpServletRequest request, HttpServletResponse response, Log log) {
 
-		this.vitroRequest = vitroRequest;
-		this.request = request;
-		this.response = response;
-		this.log = log;
-
+		super(vitroRequest, request, response, log);
+		
 	}
 
 	public void generateVisualization(DataSource dataSource) {
+		
+		VitroRequest vitroRequest = super.getVitroRequest();
+        String individualURIParam = vitroRequest.getParameter(
+        									VisualizationFrameworkConstants
+        											.INDIVIDUAL_URI_URL_HANDLE);
 
-		String resultFormatParam = "RS_TEXT";
-        String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-        String individualURIParam = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
-
-        String renderMode = vitroRequest.getParameter(VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE);
+        String renderMode = vitroRequest.getParameter(
+        									VisualizationFrameworkConstants
+        											.RENDER_MODE_URL_HANDLE);
         
-        String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
+        String visMode = vitroRequest.getParameter(
+        									VisualizationFrameworkConstants
+        											.VIS_MODE_URL_HANDLE);
 
-        String visContainer = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_URL_HANDLE);
+        String visContainer = vitroRequest.getParameter(
+        									VisualizationFrameworkConstants
+        											.VIS_CONTAINER_URL_HANDLE);
 
-        QueryHandler queryManager =
-        	new QueryHandler(individualURIParam,
-        										   resultFormatParam,
-        										   rdfResultFormatParam,
+        Log log = super.getLog();
+        QueryHandler<List<BiboDocument>> queryManager =
+        	new PersonPublicationCountQueryHandler(individualURIParam,
         										   dataSource,
         										   log);
 
@@ -82,7 +79,8 @@ public class VisualizationRequestHandler {
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
 	    	Map<String, Integer> yearToPublicationCount =
-	    		queryManager.getYearToPublicationCount(authorDocuments);
+	    			((PersonPublicationCountQueryHandler) queryManager)
+	    					.getYearToPublicationCount(authorDocuments);
 	    	
 	    	/*
 	    	 * In order to avoid unneeded computations we have pushed this "if" condition up.
@@ -90,16 +88,21 @@ public class VisualizationRequestHandler {
 	    	 * HTML code to render sparkline, tables etc. Ideally I would want to avoid this flow.
 	    	 * It is ugly! 
 	    	 * */
-	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) { 
-				prepareVisualizationQueryDataResponse(queryManager.getAuthor(),
+	    	Individual author = ((PersonPublicationCountQueryHandler) queryManager).getAuthor();
+			if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE
+	    				.equalsIgnoreCase(renderMode)) {
+	    		
+				prepareVisualizationQueryDataResponse(author,
 													  authorDocuments,
 													  yearToPublicationCount);
 				return;
 			}
 	    	
 	    	
-	    	if (VisualizationFrameworkConstants.PDF_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) { 
-				prepareVisualizationQueryPDFResponse(queryManager.getAuthor(),
+	    	if (VisualizationFrameworkConstants.PDF_RENDER_MODE_URL_VALUE
+	    				.equalsIgnoreCase(renderMode)) {
+	    		
+				prepareVisualizationQueryPDFResponse(author,
 													 authorDocuments,
 													 yearToPublicationCount);
 				return;
@@ -111,8 +114,8 @@ public class VisualizationRequestHandler {
 	    	
 	    	SparklineVOContainer valueObjectContainer = new SparklineVOContainer();
 
-	    	VisualizationCodeGenerator visualizationCodeGenerator = 
-	    		new VisualizationCodeGenerator(vitroRequest.getContextPath(),
+	    	PersonPublicationCountVisCodeGenerator visualizationCodeGenerator = 
+	    		new PersonPublicationCountVisCodeGenerator(vitroRequest.getContextPath(),
 	    									   individualURIParam,
 	    									   visMode,
 	    									   visContainer,
@@ -127,8 +130,11 @@ public class VisualizationRequestHandler {
 	    	 * a page with visualization on it.
 	    	 * */
 			RequestDispatcher requestDispatcher = null;
-
-			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) {
+			HttpServletRequest request = super.getRequest();
+			HttpServletResponse response = super.getResponse();
+			
+			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE_URL_VALUE
+						.equalsIgnoreCase(renderMode)) {
 
 				prepareVisualizationQueryDynamicResponse(request, response, vitroRequest,
 						valueObjectContainer, yearToPublicationCount);
@@ -162,8 +168,10 @@ public class VisualizationRequestHandler {
 
 	}
 
-	private void prepareVisualizationQueryPDFResponse(Individual author, List<BiboDocument> authorDocuments,
-													   Map<String, Integer> yearToPublicationCount) {
+	private void prepareVisualizationQueryPDFResponse(
+					Individual author,
+					List<BiboDocument> authorDocuments,
+					Map<String, Integer> yearToPublicationCount) {
 		
 		String authorName = null; 
 		
@@ -179,10 +187,11 @@ public class VisualizationRequestHandler {
 		 * To make sure that null/empty records for author names do not cause any mischief.
 		 * */
 		if (authorName == null) {
-			authorName = "";
+			authorName = "no";
 		}
 		
-		String outputFileName = UtilityFunctions.slugify(authorName) + "report" + ".pdf";
+		String outputFileName = UtilityFunctions.slugify(authorName) + "_report" + ".pdf";
+		HttpServletResponse response = super.getResponse();
 		
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
@@ -197,7 +206,10 @@ public class VisualizationRequestHandler {
 				PdfWriter pdfWriter = PdfWriter.getInstance(document, baos);
 				document.open();
 				
-				PDFDocument pdfDocument = new PDFDocument(authorName, yearToPublicationCount, document, pdfWriter);
+				PDFDocument pdfDocument = new PDFDocument(authorName, 
+														  yearToPublicationCount, 
+														  document, 
+														  pdfWriter);
 				
 				document.close();
 
@@ -218,8 +230,10 @@ public class VisualizationRequestHandler {
 			}
 	}
 
-	private void prepareVisualizationQueryDataResponse(Individual author, List<BiboDocument> authorDocuments,
-			   Map<String, Integer> yearToPublicationCount) {
+	private void prepareVisualizationQueryDataResponse(
+						Individual author,
+						List<BiboDocument> authorDocuments,
+						Map<String, Integer> yearToPublicationCount) {
 
 		String authorName = null; 
 		
@@ -235,13 +249,15 @@ public class VisualizationRequestHandler {
 		* To make sure that null/empty records for author names do not cause any mischief.
 		* */
 		if (authorName == null) {
-		authorName = "author";
+		authorName = "no-author";
 		}
 		
-		String outputFileName = UtilityFunctions.slugify(authorName) + "_publications-per-year" + ".csv";
+		String outputFileName = UtilityFunctions.slugify(authorName) 
+										+ "_publications-per-year" + ".csv";
 		
+		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition","attachment;filename=" + outputFileName);
+		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
 		
 		try {
 			
@@ -295,8 +311,11 @@ public class VisualizationRequestHandler {
 
 	}
 
-	private void prepareVisualizationQueryDynamicResponse(HttpServletRequest request,
-			HttpServletResponse response, VitroRequest vreq, SparklineVOContainer valueObjectContainer, 
+	private void prepareVisualizationQueryDynamicResponse(
+			HttpServletRequest request,
+			HttpServletResponse response, 
+			VitroRequest vreq, 
+			SparklineVOContainer valueObjectContainer, 
 			Map<String, Integer> yearToPublicationCount) {
 
         Portal portal = vreq.getPortal();
@@ -317,8 +336,9 @@ public class VisualizationRequestHandler {
 	private void handleMalformedParameters(String errorMessage)
 			throws ServletException, IOException {
 
-		Portal portal = vitroRequest.getPortal();
-
+		Portal portal = super.getVitroRequest().getPortal();
+		HttpServletRequest request = super.getRequest();
+		
 		request.setAttribute("error", errorMessage);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
@@ -327,8 +347,9 @@ public class VisualizationRequestHandler {
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 
 		try {
-			requestDispatcher.forward(request, response);
+			requestDispatcher.forward(request, super.getResponse());
 		} catch (Exception e) {
+			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

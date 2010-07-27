@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.iri.IRI;
@@ -27,6 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 
 
 
@@ -34,11 +36,11 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
  * @author cdtank
  *
  */
-public class QueryHandler {
+public class PersonPublicationCountQueryHandler implements QueryHandler<List<BiboDocument>> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String queryParam, resultFormatParam, rdfResultFormatParam;
+	private String queryParam;
 	private DataSource dataSource;
 
 	private Individual author; 
@@ -49,34 +51,31 @@ public class QueryHandler {
 
 	private Log log;
 
-	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" +
-			"SELECT (str(?authorLabel) as ?authorLabelLit) " +
-			"		(str(?document) as ?documentLit) " +
-			"		(str(?documentMoniker) as ?documentMonikerLit) " +
-			"		(str(?documentLabel) as ?documentLabelLit) " +
-			"		(str(?documentBlurb) as ?documentBlurbLit) " +
-			"		(str(?publicationYear) as ?publicationYearLit) " +
-			"		(str(?publicationYearMonth) as ?publicationYearMonthLit) " +
-			"		(str(?publicationDate) as ?publicationDateLit) " +
-			"		(str(?documentDescription) as ?documentDescriptionLit) ";
+	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
+			+ "SELECT (str(?authorLabel) as ?authorLabelLit) " 
+			+ "		(str(?document) as ?documentLit) " 
+			+ "		(str(?documentMoniker) as ?documentMonikerLit) " 
+			+ "		(str(?documentLabel) as ?documentLabelLit) " 
+			+ "		(str(?documentBlurb) as ?documentBlurbLit) " 
+			+ "		(str(?publicationYear) as ?publicationYearLit) " 
+			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) " 
+			+ "		(str(?publicationDate) as ?publicationDateLit) " 
+			+ "		(str(?documentDescription) as ?documentDescriptionLit) ";
 
-	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" +
-			"?document rdf:type bibo:Document ." +
-			"?document rdfs:label ?documentLabel ." +
-			"OPTIONAL {  ?document core:year ?publicationYear } ." +
-			"OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } ." +
-			"OPTIONAL {  ?document core:date ?publicationDate } ." +
-			"OPTIONAL {  ?document vitro:moniker ?documentMoniker } ." +
-			"OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." +
-			"OPTIONAL {  ?document vitro:description ?documentDescription }";
+	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
+			+ "?document rdf:type bibo:Document ." 
+			+ "?document rdfs:label ?documentLabel ." 
+			+ "OPTIONAL {  ?document core:year ?publicationYear } ." 
+			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } ." 
+			+ "OPTIONAL {  ?document core:date ?publicationDate } ." 
+			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } ." 
+			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." 
+			+ "OPTIONAL {  ?document vitro:description ?documentDescription }";
 	
-	public QueryHandler(String queryParam,
-			String resultFormatParam, String rdfResultFormatParam,
+	public PersonPublicationCountQueryHandler(String queryParam,
 			DataSource dataSource, Log log) {
 
 		this.queryParam = queryParam;
-		this.resultFormatParam = resultFormatParam;
-		this.rdfResultFormatParam = rdfResultFormatParam;
 		this.dataSource = dataSource;
 		this.log = log;
 
@@ -118,7 +117,9 @@ public class QueryHandler {
 				biboDocument.setPublicationYear(publicationYearNode.toString());
 			}
 			
-			RDFNode publicationYearMonthNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
+			RDFNode publicationYearMonthNode = solution.get(
+													QueryFieldLabels
+															.DOCUMENT_PUBLICATION_YEAR_MONTH);
 			if (publicationYearMonthNode != null) {
 				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
 			}
@@ -149,10 +150,10 @@ public class QueryHandler {
 	}
 
 	private ResultSet executeQuery(String queryURI,
-            String resultFormatParam, String rdfResultFormatParam, DataSource dataSource) {
+            DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try{
+        try {
             Query query = QueryFactory.create(generateSparqlQuery(queryURI), SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
@@ -161,15 +162,13 @@ public class QueryHandler {
             queryExecution = QueryExecutionFactory.create(query, dataSource);
             
 
-            //remocve this if loop after knowing what is describe & construct sparql stuff.
-            if( query.isSelectType() ){
+            if (query.isSelectType()) {
                 return queryExecution.execSelect();
             }
         } finally {
-            if(queryExecution != null) {
+            if (queryExecution != null) {
             	queryExecution.close();
             }
-
         }
 		return null;
     }
@@ -181,22 +180,22 @@ public class QueryHandler {
 							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
 							+ "(str(<" + queryURI + ">) as ?authPersonLit) "
 							+ "WHERE { "
-							+ "<" + queryURI + "> rdf:type foaf:Person ; rdfs:label ?authorLabel ; core:authorInAuthorship ?authorshipNode .  " 
-							+ "	?authorshipNode rdf:type core:Authorship ; core:linkedInformationResource ?document . "
+							+ "<" + queryURI + "> rdf:type foaf:Person ;" 
+							+ 					" rdfs:label ?authorLabel ;" 
+							+ 					" core:authorInAuthorship ?authorshipNode .  " 
+							+ "	?authorshipNode rdf:type core:Authorship ;" 
+							+ 					" core:linkedInformationResource ?document . "
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
 							+ "}";
 
 //		System.out.println("SPARQL query for person pub count -> \n" + sparqlQuery);
-
 		return sparqlQuery;
 	}
 
 	public List<BiboDocument> getVisualizationJavaValueObjects()
 		throws MalformedQueryParametersException {
 
-        if(this.queryParam == null || "".equals(queryParam)) {
-        	throw new MalformedQueryParametersException("URL parameter is either null or empty.");
-        } else {
+        if (StringUtils.isNotBlank(this.queryParam)) {
 
         	/*
         	 * To test for the validity of the URI submitted.
@@ -204,15 +203,17 @@ public class QueryHandler {
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
     		IRI iri = iRIFactory.create(this.queryParam);
             if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation)iri.violations(false).next()).getShortMessage()+" ";
+                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Pub Count vis Query " + errorMsg);
-                throw new MalformedQueryParametersException("URI provided for an individual is malformed.");
+                throw new MalformedQueryParametersException(
+                		"URI provided for an individual is malformed.");
             }
+        	
+        } else {
+        	throw new MalformedQueryParametersException("URL parameter is either null or empty.");
         }
 
 		ResultSet resultSet	= executeQuery(this.queryParam,
-										   this.resultFormatParam,
-										   this.rdfResultFormatParam,
 										   this.dataSource);
 
 		return createJavaValueObjects(resultSet);
@@ -238,8 +239,8 @@ public class QueryHandler {
     		 * I am pushing the logic to check for validity of year in "getPublicationYear" itself
     		 * because,
     		 * 	1. We will be using getPub... multiple times & this will save us duplication of code
-    		 * 	2. If we change the logic of validity of a pub year we would not have to make changes
-    		 * all throughout the codebase.
+    		 * 	2. If we change the logic of validity of a pub year we would not have to make 
+    		 * changes all throughout the codebase.
     		 * 	3. We are asking for a publication year & we should get a proper one or NOT at all.
     		 * */
     		String publicationYear;
