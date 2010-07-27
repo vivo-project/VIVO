@@ -39,8 +39,9 @@ exceptions:
 * DO NOT reinstall MySQL or recreate the MySQL database. Please ensure that 
     you back-up the MySQL database.
 * It is not necessary to add RDF data or reconfigure the Apache HTTP Server.
-* First-time login of the administrator account will use the password 
-    previously set, NOT the initial password referenced in deploy.properties.
+* First-time login of the administrator account after the upgrade process is 
+    complete will use the password previously set, NOT the default password used 
+    on the first login after the initial installation.
 * The first time Apache Tomcat starts up after the upgrade, it will 
     initiate a process that modifies the knowledge base to align the data 
     with the revised ontology. See the section on "Ontology Changes"
