@@ -130,15 +130,15 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	 }		 	 
  }
  if( mode == 1 )
-	 log.debug("This form will be for an add");
+	 log.debug("This form will be for an add. Setting mode to " + mode);
  else if(mode == 2){
-	 log.debug("This form will be for a normal edit");
+	 log.debug("This form will be for a normal edit. Setting mode to " + mode);
 	 %> <c:set var="editMode" value="edit"/><%
  } else if(mode == 3){
-	 log.debug("This form will be for the repair of a bad role node");
+	 log.debug("This form will be for the repair of a bad role node. Setting mode to " + mode);
 	 %> <c:set var="editMode" value="repair"/><%
  }else if(mode == 4)
-	 log.debug("No form will be shown, since there are multiple core:roleIn statements");
+	 log.debug("No form will be shown, since there are multiple core:roleIn statements. Setting mode to " + mode);
 %>
 
 <c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
@@ -375,10 +375,11 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
 
 <c:choose>
-    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">    	
+    <%-- Includes edit AND repair mode --%>
+    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">     	
         <c:set var="titleText" value="Edit" />        
         <c:set var="submitButtonText" value="Edit ${buttonLabel}" />
-        <c:set var="disabledVal" value="disabled" />
+        <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>
     </c:when>
     <c:otherwise>
         <c:set var="titleText" value="Create" />
@@ -440,11 +441,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	
 	<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 	<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
-	
-	<%-- Must be all one line for JavaScript. --%>
-	<c:set var="sparqlForAcFilter">
-	SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}roleIn> ?indUri .}
-	</c:set>
 	
 	<script type="text/javascript">
 	var customFormData  = {
