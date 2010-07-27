@@ -1,12 +1,12 @@
 
 -------------------------------------------------------------------------------
 
-Upgrading NIH VIVO
+Upgrading VIVO
  
 Steps to Upgrade from Release 1 Version 1.0 to Release 1 Version 1.1
 
 This file provides a short description of the steps involved in upgrading your 
-installation of NIH VIVO from Release 1 Version 1.0 to Release 1 Version 1.1.
+installation of VIVO from Release 1 Version 1.0 to Release 1 Version 1.1.
 This and other documentation can be found at:
 
 http://vivoweb.org/support
@@ -40,7 +40,7 @@ exceptions:
     you back-up the MySQL database.
 * It is not necessary to add RDF data or reconfigure the Apache HTTP Server.
 * First-time login of the administrator account will use the password 
-    previously set, NOT the password in deploy.properties.
+    previously set, NOT the initial password referenced in deploy.properties.
 * The first time Apache Tomcat starts up after the upgrade, it will 
     initiate a process that modifies the knowledge base to align the data 
     with the revised ontology. See the section on "Ontology Changes"
@@ -65,13 +65,13 @@ II. The Upgrade Process
 3. Create deploy.properties, using the same values as in your previous 
     installation.  
 
-4. Apply any changes you have made to the new source directory.
+4. Apply any previous changes you have made to the new source directory.
 
     ************* Special notes regarding source files ********************
     
     This process assumes any changes made to the application were made in 
        the source directory and deployed, and were not made directly within 
-       Apache Tomcat webapp.
+       the Tomcat webapps directory.
        
     In many cases, simply copying the modified files from your original 
        source directory will not work since the files on which they are based 
@@ -335,7 +335,7 @@ theme to VIVO 1.1.
                
                    identity.jsp => identity.ftl
                    menu.jsp => menu.ftl and search.ftl
-                   footer.jsp => footer.ftl 
+                   footer.jsp => footer.ftl and googleAnalytics.ftl
     
                    googleAnalytics.ftl is a new file included from footer.ftl to
                    which you will add your site's Google Analytics Tracking Code 
@@ -353,7 +353,7 @@ theme to VIVO 1.1.
                authors need  not be concerned with the Programmer's Guide or 
                Java API documentation.
 
-           c. Remove the jsp directory from your themes directory.
+       c. Remove the jsp directory from your themes directory.
     
     2. Stylesheets
         
