@@ -159,7 +159,7 @@
  
   <listener>
     <listener-class>
-        edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreeMarkerSetup
+        edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
     </listener-class>
   </listener>
 
@@ -333,11 +333,11 @@
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>FreeMarkerTestController</servlet-name>
+    <servlet-name>FreemarkerTestController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.TestController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FreeMarkerTestController</servlet-name>
+    <servlet-name>FreemarkerTestController</servlet-name>
     <url-pattern>/freemarkertest</url-pattern>
   </servlet-mapping>
   
