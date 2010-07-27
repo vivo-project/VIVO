@@ -687,8 +687,8 @@
     <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupaddress"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">40</vitro:displayRankAnnot>
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The core:webpage relates to an intermediate node (of type core:URLLink) that allows specifying the homepage URL as a literal, as well as a human-readable label ("anchor text") for the link. </vitro:publicDescriptionAnnot>
   </rdf:Description>
@@ -2621,15 +2621,15 @@ display level 	</vitro:publicDescriptionAnnot>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasOutreachActivity</vitro:fullPropertyNameAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpageOf">
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The core:webpage relates to an intermediate node (of type core:URLLink) that allows specifying the homepage URL as a literal, as well as a human-readable label ("anchor text") for the link.</vitro:publicDescriptionAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">webpageOf</vitro:fullPropertyNameAnnot>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
     <vitro:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:selectFromExistingAnnot>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">40</vitro:displayRankAnnot>
     <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
-    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#grantSubcontractedThrough">
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
