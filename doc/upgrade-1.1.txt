@@ -337,9 +337,8 @@ theme to VIVO 1.1.
                    menu.jsp => menu.ftl and search.ftl
                    footer.jsp => footer.ftl and googleAnalytics.ftl
     
-                   googleAnalytics.ftl is a new file included from footer.ftl to
-                   which you will add your site's Google Analytics Tracking Code 
-                   (see section II).
+                   googleAnalytics.ftl is a new file to which you will add
+                   your site's Google Analytics Tracking Code (see section II).
            
                Because the FreeMarker Template Language uses many syntactic 
                conventions that will be familiar to template authors from JSP 
