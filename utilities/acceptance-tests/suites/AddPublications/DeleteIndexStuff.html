@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddArticle</title>
+<title>DeleteIndexStuff</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddArticle</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">DeleteIndexStuff</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add CNN article in backend (old way)</td>
+	<td class="comment">Delete everything left in the index</td>
 	<td></td>
 </tr>
 <tr>
@@ -106,342 +106,77 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that no articles currently exist</td>
+	<td class="comment">Verify that publications currently exist</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Academic Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Article</td>
+	<td>publications</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to Frank Furter</td>
+	<td class="comment">Delete other stuff</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Subject Area</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Furter, Frank</td>
+	<td>link=Child Development</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add an Article</td>
+	<td>Child Development</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='authorInAuthorship']/a</td>
+	<td>link=edit this individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Publication Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Academic Article</td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before adding anything</td>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Cancel</td>
+	<td>_delete</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Select to add an Article again, this time without a title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Publication Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Academic Article</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>relatedIndLabel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this entity? If in doubt, CANCEL.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Must specify a publication title.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add an Article again, this time do it right</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Publication Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Academic Article</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>relatedIndLabel</td>
-	<td>Effect of Nintendo on Kids</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Effect of Nintendo on Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add more info to publication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-links']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Hit add button without entering anything</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-links']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add with only URL field entered</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
-	<td>http://www.cnn.com/</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyValue</td>
-	<td>url</td>
-	<td>http://www.cnn.com/</td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add with only Link Anchor Text field entered</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
-	<td>Special Report</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyValue</td>
-	<td>anchor</td>
-	<td>Special Report</td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now add all required fields</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
-	<td>http://www.cnn.com/</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
-	<td>Special Report</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Effect of Nintendo on Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Special Report</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(primary link)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='dprop-vitro-links']/ul/li/span/em</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Naviage back to Index</td>
+	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
@@ -455,203 +190,68 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Verify that an Article link now appears</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Academic Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Academic Article (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Article (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify article shows up for Frank Furter</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>link=Putnam</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Furter, Frank</td>
+	<td>Putnam</td>
 	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>publication(s) within the last 10 years incomplete data</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='pub_count_short_sparkline_vis']/table/tbody/tr/td[3]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=View all VIVO publications and corresponding co-author network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>View all VIVO publications and corresponding co-author network.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Effect of Nintendo on Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='authorInAuthorship']/ul/li[1]/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Find article via search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>nintendo</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=edit this individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>nintendo - VIVO Search Results</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=publications</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Effect of Nintendo on Kids</td>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
+	<td>click</td>
+	<td>_delete</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='content']/div/ul/li</td>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this entity? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
