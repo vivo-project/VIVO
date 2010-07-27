@@ -442,11 +442,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
 	<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
 	
-	<%-- Must be all one line for JavaScript. --%>
-	<c:set var="sparqlForAcFilter">
-	SELECT ?indUri WHERE {<${subjectUri}> <${predicateUri}> ?role . ?role <${vivoCore}roleIn> ?indUri .}
-	</c:set>
-	
 	<script type="text/javascript">
 	var customFormData  = {
 	    sparqlQueryUrl: '${sparqlQueryUrl}',
