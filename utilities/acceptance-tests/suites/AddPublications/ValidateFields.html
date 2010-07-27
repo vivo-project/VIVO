@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Book</td>
+	<td class="comment">Add Book Chapter to validate fields</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +186,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
+	<td>Create publication entry for Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +226,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
+	<td>Create publication entry for Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -271,7 +271,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
+	<td>Create publication entry for Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +466,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo O.K. for Kids</td>
+	<td>Create primary link for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -840,8 +840,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/edit/editDatapropStmtRequestDispatch.jsp?subjectUri=http%3A%2F%2Fvivo.local.edu%2Findividual%2Fn5787&amp;predicateUri=http%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2Fnumber</td>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: number</td>
 	<td></td>
 </tr>
 <tr>
@@ -1145,8 +1145,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/edit/editRequestDispatch.jsp?subjectUri=http%3A%2F%2Fvivo.local.edu%2Findividual%2Fn5787&amp;predicateUri=http%3A%2F%2Fvivoweb.org%2Fontology%2Fcore%23publisher</td>
+	<td>verifyTextPresent</td>
+	<td>There are no entries in the system to select from.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2000,11 +2000,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//div[@id='year']/a</td>
 	<td></td>
@@ -2021,7 +2016,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Use when start year and end year are not appropriate display level </td>
+	<td>Use when start year and end year are not appropriate display level</td>
 	<td></td>
 </tr>
 <tr>
@@ -2081,7 +2076,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Use when a single year-month value is appropriate rather than a separate start and end display level </td>
+	<td>Use when a single year-month value is appropriate rather than a separate start and end display level</td>
 	<td></td>
 </tr>
 <tr>
@@ -2215,8 +2210,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/edit/editDatapropStmtRequestDispatch.jsp?subjectUri=http%3A%2F%2Fvivo.local.edu%2Findividual%2Fn5787&amp;predicateUri=http%3A%2F%2Fpurl.org%2Fontology%2Fbibo%2FnumPages</td>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: number of pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -2315,13 +2310,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>verifyTextPresent</td>
+	<td>Edit &quot;subject area&quot; entry for Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Edit &quot;subject area&quot; entry for Nintendo O.K. for Kids</td>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasSubjectArea']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -2337,6 +2342,16 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Child Development</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -2388,6 +2403,11 @@
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Children</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2470,8 +2490,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Nintendo: Good or Bad for Kids?</td>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: reproduces</td>
 	<td></td>
 </tr>
 <tr>
@@ -2566,7 +2586,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>13</td>
+	<td>15</td>
 	<td></td>
 </tr>
 <tr>

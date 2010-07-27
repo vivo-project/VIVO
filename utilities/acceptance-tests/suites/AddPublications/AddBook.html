@@ -156,47 +156,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Publication Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before doing anything</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a Publication again</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='authorInAuthorship']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
+	<td>Create publication entry for Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
@@ -215,84 +175,9 @@
 	<td>label=Book</td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before entering in title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add an book again, this time without a title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Publication Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Book</td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Book Title</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Must specify a publication title.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a Book again, this time do it right</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new publication entry for Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Publication Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeSelector</td>
-	<td>label=Book</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -321,12 +206,242 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add web page for Book</td>
+	<td class="comment">Add details for Book</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-links']/a</td>
+	<td>//div[@id='publisher']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeOfNew</td>
+	<td>label=Publisher (core)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Putnam</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='placeOfPublication']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>New York</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='status']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=in press</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='year']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='numPages']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>258</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasSubjectArea']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Child Development</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='freetextKeyword']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Children</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='freetextKeyword']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Games</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Validate unique field LCCN</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='lccn']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -336,22 +451,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Add new entry for: lccn</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>URL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Link anchor text</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out</td>
+	<td>The Library of Congress Control Number or LCCN is a serially based system of numbering cataloging records in the Library of Congress in the United States.</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,37 +466,17 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Hit add button without entering anything</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-links']/a</td>
+	<td>//div[@id='lccn']/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>URL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Link anchor text</td>
 	<td></td>
 </tr>
 <tr>
@@ -401,47 +486,17 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>URL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Link anchor text</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add with only URL field entered</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
-	<td>http://www.nintendo.com/</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
+	<td class="comment">Validate unique field ISBN-10</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>//div[@id='isbn10']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -451,42 +506,57 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Add new entry for: isbn-10</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>URL</td>
+	<td>The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster. The 10-digit ISBN format was developed by the International Organization for Standardization and was published in 1970 as international standard ISO 2108.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Link anchor text</td>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Add with only Link Anchor Text field entered</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='isbn10']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>url</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
-	<td>Company Homepage</td>
+	<td>tinymce</td>
+	<td>5555555555</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Validate unique field ISBN-13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='isbn13']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,38 +566,38 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new primary link for Nintendo: Good or Bad for Kids?</td>
+	<td>Add new entry for: isbn-13</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>URL</td>
+	<td>The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster.Since 1 January 2007, ISBNs have contained 13 digits, a format that is compatible with Bookland EAN-13s.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Link anchor text</td>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Now add all required fields for web page</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='isbn13']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>url</td>
-	<td>http://www.nintendo.com/</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
-	<td>Company Homepage</td>
+	<td>tinymce</td>
+	<td>7777777777777</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -535,163 +605,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Verify that web page appears properly</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Company Homepage</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(primary link)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='dprop-vitro-links']/ul/li/span/em</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Editor, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Features, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Publisher, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Place of Publication, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Abstract, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Edition, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Presented At, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Status, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add XXXXXX, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment"></td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
@@ -711,7 +626,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that an Article link now appears</td>
+	<td class="comment">Verify Book link now appears</td>
 	<td></td>
 </tr>
 <tr>
@@ -762,31 +677,26 @@
 <tr>
 	<td>refreshAndWait</td>
 	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Academic Article</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Academic Article (1)</td>
+	<td>publications</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Article</td>
+	<td>link=Book</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Article (1)</td>
+	<td>Book (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify article shows up for Frank Furter</td>
+	<td class="comment">Verify Book shows up for Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
@@ -805,33 +715,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
 	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -856,12 +766,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Effect of Nintendo on Kids</td>
+	<td>link=Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
+	<td>Book</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Nintendo: Good or Bad for Kids? Book</td>
 	<td></td>
 </tr>
 <tr>
@@ -871,47 +786,92 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Find article via search</td>
+	<td class="comment">Verify book details</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>search</td>
-	<td>nintendo</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>nintendo - VIVO Search Results</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=publications</td>
+	<td>link=Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Effect of Nintendo on Kids</td>
+	<td>Putnam</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
+	<td>Putnam | Publisher</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>New York</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='content']/div/ul/li</td>
+	<td>link=in press</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>in press | document status</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>258</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Child Development | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>5555555555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>7777777777777</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Children</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Games</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Logout</td>
+	<td class="comment">Log out</td>
 	<td></td>
 </tr>
 <tr>
