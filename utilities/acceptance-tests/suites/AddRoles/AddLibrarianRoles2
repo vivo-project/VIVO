@@ -141,7 +141,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new head of entry for Librarian, Lily</td>
+	<td>Create head of entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,7 +201,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Reference Division</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +256,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new membership entry for Librarian, Lily</td>
+	<td>Create membership entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,7 +316,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Amercian Library Association</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>

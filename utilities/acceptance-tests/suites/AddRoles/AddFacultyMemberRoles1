@@ -241,7 +241,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new co-principal investigator entry for Faculty, Jane</td>
+	<td>Create co-principal investigator entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -286,7 +286,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>NIH VIVO</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,7 +361,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new co-principal investigator entry for Faculty, Jane</td>
+	<td>Create co-principal investigator entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -406,7 +406,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Cornell Grant</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,7 +496,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new investigator entry for Faculty, Jane</td>
+	<td>Create investigator entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -546,7 +546,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new investigator entry for Faculty, Jane</td>
+	<td>Create investigator entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,7 +601,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new investigator entry for Faculty, Jane</td>
+	<td>Create investigator entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -646,7 +646,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Cornell Grant</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -721,7 +721,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new principal investigator entry for Faculty, Jane</td>
+	<td>Create principal investigator entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -766,7 +766,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>NIH VIVO</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>

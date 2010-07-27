@@ -136,7 +136,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -171,7 +171,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +186,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -231,7 +231,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,12 +246,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Research Activity Type </td>
+	<td>Research Activity Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,7 +306,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -321,12 +321,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Research Activity Type </td>
+	<td>Research Activity Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -426,7 +426,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -441,7 +441,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new research activity entry for Faculty, Jane</td>
+	<td>Create research activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -501,7 +501,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Habitats for Apes</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,7 +556,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new teaching activity entry for Faculty, Jane</td>
+	<td>Create teaching activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -621,7 +621,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ape World</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -681,7 +681,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new teaching activity entry for Faculty, Jane</td>
+	<td>Create teaching activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -741,7 +741,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Introduction to the Ape World</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -801,7 +801,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new teaching activity entry for Faculty, Jane</td>
+	<td>Create teaching activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -861,7 +861,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Working with Primates</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -916,7 +916,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new clinical activity entry for Faculty, Jane</td>
+	<td>Create clinical activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -931,7 +931,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new clinical activity entry for Faculty, Jane</td>
+	<td>Create clinical activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -991,7 +991,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Prototype New Ape Home</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -1046,7 +1046,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new clinical activity entry for Faculty, Jane</td>
+	<td>Create clinical activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -1061,7 +1061,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new clinical activity entry for Faculty, Jane</td>
+	<td>Create clinical activity entry for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -1121,7 +1121,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ape Health Program</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>

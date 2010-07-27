@@ -141,7 +141,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,7 +181,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,7 +216,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,7 +266,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -321,7 +321,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -376,7 +376,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,12 +421,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Researching Primates</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate back to Jane Faculty</td>
+	<td class="comment">Navigate back to Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -476,7 +476,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -491,7 +491,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new presentation entry for Librarian, Lily</td>
+	<td>Create presentation entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -536,7 +536,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Animal Librarianship</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -626,7 +626,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new service to the profession entry for Librarian, Lily</td>
+	<td>Create service to the profession entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -686,7 +686,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Carroll College</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -741,7 +741,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new service to the profession entry for Librarian, Lily</td>
+	<td>Create service to the profession entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -811,7 +811,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primates of the World</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -901,7 +901,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new outreach &amp; community service entry for Librarian, Lily</td>
+	<td>Create outreach &amp; community service entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -961,7 +961,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Librarians for the Better Treatment of Primates</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -1016,7 +1016,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new outreach &amp; community service entry for Librarian, Lily</td>
+	<td>Create outreach &amp; community service entry for Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -1081,7 +1081,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Show Me the Primates!</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
