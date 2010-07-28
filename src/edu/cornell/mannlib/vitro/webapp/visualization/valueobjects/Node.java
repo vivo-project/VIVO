@@ -95,9 +95,9 @@ public class Node extends Individual {
 			final String earliestYear = Collections.min(yearsToBeConsidered);
 			final Integer earliestYearPubCount = yearToPublicationCount.get(earliestYear);
 			
-			return new HashMap<String, Integer>(){{
+			return new HashMap<String, Integer>() { {
 				put(earliestYear, earliestYearPubCount);
-			}};
+			} };
 		} else {
 			return null;
 		}
@@ -127,9 +127,9 @@ public class Node extends Individual {
 			final String latestYear = Collections.max(yearsToBeConsidered);
 			final Integer latestYearPubCount = yearToPublicationCount.get(latestYear);
 			
-			return new HashMap<String, Integer>(){{
+			return new HashMap<String, Integer>() { {
 				put(latestYear, latestYearPubCount);
-			}};
+			} };
 		} else {
 			return null;
 		}
@@ -141,7 +141,8 @@ public class Node extends Individual {
 			yearToPublicationCount = UtilityFunctions.getYearToPublicationCount(authorDocuments);
 		}
 		
-		Integer unknownYearPubCount = yearToPublicationCount.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
+		Integer unknownYearPubCount = yearToPublicationCount
+											.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
 		
 		/*
 		 * If there is no unknown year available then we should imply so by returning a "null".

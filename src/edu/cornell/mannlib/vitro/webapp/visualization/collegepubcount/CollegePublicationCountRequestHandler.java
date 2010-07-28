@@ -17,6 +17,7 @@ import java.util.Map.Entry;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +34,6 @@ import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
@@ -41,44 +41,39 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoDepartmentOrDivision;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoEmployee;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class VisualizationRequestHandler {
+public class CollegePublicationCountRequestHandler extends VisualizationRequestHandler {
 
-	private VitroRequest vitroRequest;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private Log log;
-
-
-	
-	public VisualizationRequestHandler(VitroRequest vitroRequest,
+	public CollegePublicationCountRequestHandler(VitroRequest vitroRequest,
 			HttpServletRequest request, HttpServletResponse response, Log log) {
-
-		this.vitroRequest = vitroRequest;
-		this.request = request;
-		this.response = response;
-		this.log = log;
+		
+		super(vitroRequest, request, response, log);
 
 	}
 
 	public void generateVisualization(DataSource dataSource) {
 
-		String resultFormatParam = "RS_TEXT";
-        String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-        String collegeURIParam = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
-
-        String renderMode = vitroRequest.getParameter(VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE);
+        ServletRequest vitroRequest = super.getVitroRequest();
         
-        String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
+		String collegeURIParam = vitroRequest.getParameter(
+										VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
 
-        String visContainer = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_URL_HANDLE);
+        String renderMode = vitroRequest.getParameter(
+        								VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE);
+        
+        String visMode = vitroRequest.getParameter(
+        								VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
 
-        QueryHandler queryManager =
-        	new QueryHandler(collegeURIParam,
-						     resultFormatParam,
-						     rdfResultFormatParam,
+        String visContainer = vitroRequest.getParameter(
+        								VisualizationFrameworkConstants.VIS_CONTAINER_URL_HANDLE);
+
+        Log log = super.getLog();
+		QueryHandler<Set<VivoEmployee>> queryManager =
+        	new CollegePublicationCountQueryHandler(collegeURIParam,
 						     dataSource,
 						     log);
 
@@ -87,33 +82,34 @@ public class VisualizationRequestHandler {
 			Set<VivoEmployee> employees = queryManager.getVisualizationJavaValueObjects();
 			
 			Map<VivoDepartmentOrDivision, Map<String, Integer>> departmentToPublicationsOverTime = 
-				new HashMap<VivoDepartmentOrDivision, Map<String,Integer>>();
+				new HashMap<VivoDepartmentOrDivision, Map<String, Integer>>();
 			
 			Set<String> publishedYearsForCollege = new HashSet<String>();
 			
 			for (VivoEmployee currentEmployee : employees) {
 				
 				Map<String, Integer> currentEmployeeYearToPublicationCount = 
-					UtilityFunctions.getYearToPublicationCount(currentEmployee.getAuthorDocuments());
+					UtilityFunctions.getYearToPublicationCount(
+							currentEmployee.getAuthorDocuments());
 				
 				if (currentEmployeeYearToPublicationCount.size() > 0) {
 					
 					
 					publishedYearsForCollege.addAll(currentEmployeeYearToPublicationCount.keySet());
 				
-					for (VivoDepartmentOrDivision currentDepartment : currentEmployee.getParentDepartments()) {
+					for (VivoDepartmentOrDivision currentDepartment 
+								: currentEmployee.getParentDepartments()) {
 						
-						departmentToPublicationsOverTime.put(currentDepartment, 
-															 getUpdatedDepartmentPublicationsOverTime(
-																	 currentEmployeeYearToPublicationCount,
-																	 departmentToPublicationsOverTime
-																	 		.get(currentDepartment)));
+						departmentToPublicationsOverTime
+								.put(currentDepartment, 
+										 getUpdatedDepartmentPublicationsOverTime(
+												 currentEmployeeYearToPublicationCount,
+												 departmentToPublicationsOverTime
+												 		.get(currentDepartment)));
 						
 					}
-				
 				}
 			}
-
 
 	    	/*
 	    	 * In order to avoid unneeded computations we have pushed this "if" condition up.
@@ -124,7 +120,7 @@ public class VisualizationRequestHandler {
 	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) { 
 				prepareVisualizationQueryDataResponse(
 													  departmentToPublicationsOverTime,
-													  queryManager.getCollegeURLToVO());
+													  ((CollegePublicationCountQueryHandler) queryManager).getCollegeURLToVO());
 				
 				log.debug(publishedYearsForCollege);
 				return;
@@ -150,52 +146,6 @@ public class VisualizationRequestHandler {
 	    	 * */
 	    	publishedYearsForCollege.remove(VOConstants.DEFAULT_PUBLICATION_YEAR);
 
-	    	/*
-	    	VisualizationCodeGenerator visualizationCodeGenerator = 
-	    		new VisualizationCodeGenerator(yearToPublicationCount, log);
-	    	
-			String visContentCode = visualizationCodeGenerator
-										.getMainVisualizationCode(authorDocuments,
-															  	  publishedYears,
-															  	  visMode,
-															  	  visContainer);
-
-			String visContextCode = visualizationCodeGenerator
-										.getVisualizationContextCode(vitroRequest.getRequestURI(), 
-																	 collegeURIParam,
-																	 visMode);
-																	 */
-
-	    	/*
-	    	 * This is side-effecting because the response of this method is just to redirect to
-	    	 * a page with visualization on it.
-	    	 * */
-			
-			/*
-			RequestDispatcher requestDispatcher = null;
-
-			if (DYNAMIC_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) {
-
-				prepareVisualizationQueryDynamicResponse(request, response, vitroRequest,
-		    			visContentCode, visContextCode);
-		    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
-
-			} else {
-		    	prepareVisualizationQueryStandaloneResponse(request, response, vitroRequest,
-		    			visContentCode, visContextCode);
-
-		    	requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
-			}
-
-	    	try {
-	            requestDispatcher.forward(request, response);
-	        } catch (Exception e) {
-	            log.error("EntityEditController could not forward to view.");
-	            log.error(e.getMessage());
-	            log.error(e.getStackTrace());
-	        }
-
-*/
 		} catch (MalformedQueryParametersException e) {
 			try {
 				handleMalformedParameters(e.getMessage());
@@ -210,30 +160,30 @@ public class VisualizationRequestHandler {
 	}
 
 	private Map<String, Integer> getUpdatedDepartmentPublicationsOverTime(
-										Map<String, Integer> currentEmployeeYearToPublicationCount,
-										Map<String, Integer> currentDepartmentYearToPublicationCount) {
+					Map<String, Integer> currentEmployeeYearToPublicationCount,
+					Map<String, Integer> currentDepartmentYearToPublicationCount) {
 		
 		Map<String, Integer> departmentYearToPublicationCount;
 		
-//		System.out.println("inside get updated dept pub obr time");
-		
 		/*
-		 * In case this is the first time we are consolidating publication counts over time for a department.
+		 * In case this is the first time we are consolidating publication counts 
+		 * over time for a department.
 		 * */
 		if (currentDepartmentYearToPublicationCount == null) {
+
 			departmentYearToPublicationCount = new TreeMap<String, Integer>();
-			
-//			System.out.println("new dept yr pub cnt");
 			
 		} else {
 			departmentYearToPublicationCount = currentDepartmentYearToPublicationCount;
 		}
 		
 		
-		Iterator employeePubCountIterator = currentEmployeeYearToPublicationCount.entrySet().iterator();
+		Iterator employeePubCountIterator = currentEmployeeYearToPublicationCount
+													.entrySet().iterator();
 		
 		while (employeePubCountIterator.hasNext()) {
-			Map.Entry<String, Integer> employeePubCountEntry = (Map.Entry) employeePubCountIterator.next();
+			Map.Entry<String, Integer> employeePubCountEntry = 
+				(Map.Entry) employeePubCountIterator.next();
 			
 			String employeePublicationYear = employeePubCountEntry.getKey();
 			Integer employeePublicationCount = employeePubCountEntry.getValue();
@@ -246,7 +196,10 @@ public class VisualizationRequestHandler {
 															+ employeePublicationCount);
 
     		} else {
-    			departmentYearToPublicationCount.put(employeePublicationYear, employeePublicationCount);
+    			
+    			departmentYearToPublicationCount.put(employeePublicationYear, 
+    												 employeePublicationCount);
+    			
     		}	
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -280,8 +233,9 @@ public class VisualizationRequestHandler {
 		String outputFileName = UtilityFunctions.slugify(authorName + "-report") 
 								+ ".pdf";
 		
+		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition","attachment;filename=" + outputFileName);
+		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
  
 			ServletOutputStream responseOutputStream;
 			try {
@@ -316,8 +270,8 @@ public class VisualizationRequestHandler {
 	}
 
 	private void prepareVisualizationQueryDataResponse(
-				Map<VivoDepartmentOrDivision, Map<String, Integer>> departmentToPublicationsOverTime,
-				Map<String, VivoCollegeOrSchool> collegeURLToVO) {
+			Map<VivoDepartmentOrDivision, Map<String, Integer>> departmentToPublicationsOverTime,
+			Map<String, VivoCollegeOrSchool> collegeURLToVO) {
 
 		String collegeName = null; 
 		
@@ -325,9 +279,12 @@ public class VisualizationRequestHandler {
 		* To protect against cases where there are no author documents associated with the
 		* individual. 
 		* */
-//		System.out.println(collegeURLToVO);
+
 		if (collegeURLToVO.size() > 0) {
-			collegeName = ((VivoCollegeOrSchool) collegeURLToVO.values().iterator().next()).getCollegeLabel();
+			
+			collegeName = ((VivoCollegeOrSchool) collegeURLToVO.values()
+									.iterator().next()).getCollegeLabel();
+			
 		}
 		
 		/*
@@ -339,8 +296,9 @@ public class VisualizationRequestHandler {
 		
 		String outputFileName = UtilityFunctions.slugify(collegeName) + "depts-pub-count" + ".csv";
 		
+		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition","attachment;filename=" + outputFileName);
+		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
 		
 		try {
 		
@@ -377,14 +335,16 @@ public class VisualizationRequestHandler {
 				String collegeLabel = college.getCollegeLabel();
 				for (VivoDepartmentOrDivision currentDepartment : college.getDepartments()) {
 					
-					Map<String, Integer> currentDepartmentPublicationsOverTime = departmentToPublicationsOverTime.get(currentDepartment);
+					Map<String, Integer> currentDepartmentPublicationsOverTime = 
+							departmentToPublicationsOverTime.get(currentDepartment);
 					
 					/*
 					 * This because many departments might not have any publication.
 					 * */
 					if (currentDepartmentPublicationsOverTime != null) {
 						
-					for (Entry<String, Integer> currentEntry : currentDepartmentPublicationsOverTime.entrySet()) {
+					for (Entry<String, Integer> currentEntry 
+								: currentDepartmentPublicationsOverTime.entrySet()) {
 						csvWriter.append(new Object[]{collegeLabel,
 													  currentDepartment.getDepartmentLabel(),
 													  currentEntry.getKey(), 
@@ -437,8 +397,9 @@ public class VisualizationRequestHandler {
 	private void handleMalformedParameters(String errorMessage)
 			throws ServletException, IOException {
 
-		Portal portal = vitroRequest.getPortal();
+		Portal portal = super.getVitroRequest().getPortal();
 
+		HttpServletRequest request = super.getRequest();
 		request.setAttribute("error", errorMessage);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
@@ -447,8 +408,9 @@ public class VisualizationRequestHandler {
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 
 		try {
-			requestDispatcher.forward(request, response);
+			requestDispatcher.forward(request, super.getResponse());
 		} catch (Exception e) {
+			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

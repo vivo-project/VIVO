@@ -12,8 +12,9 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
  * @author cdtank
  *
  */
-public class BiboDocument extends Individual{
+public class BiboDocument extends Individual {
 
+	private static final int NUM_CHARS_IN_YEAR_FORMAT = 4;
 	public static final int MINIMUM_PUBLICATION_YEAR = 1800;
 	private static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -116,18 +117,20 @@ public class BiboDocument extends Individual{
 		 * core:yearMonth points to internally.
 		 * */
 		if (publicationYearMonth != null 
-				&& publicationYearMonth.length() >= 4
-				&& isValidPublicationYear(publicationYearMonth.substring(0, 4))) {
+				&& publicationYearMonth.length() >= NUM_CHARS_IN_YEAR_FORMAT
+				&& isValidPublicationYear(publicationYearMonth.substring(
+													0,
+													NUM_CHARS_IN_YEAR_FORMAT))) {
 			
-			return publicationYearMonth.substring(0, 4); 
+			return publicationYearMonth.substring(0, NUM_CHARS_IN_YEAR_FORMAT); 
 			
 		} 
 		
 		if (publicationDate != null 
-				&& publicationDate.length() >= 4
-				&& isValidPublicationYear(publicationDate.substring(0, 4))) {
+				&& publicationDate.length() >= NUM_CHARS_IN_YEAR_FORMAT
+				&& isValidPublicationYear(publicationDate.substring(0, NUM_CHARS_IN_YEAR_FORMAT))) {
 			
-			return publicationDate.substring(0, 4); 
+			return publicationDate.substring(0, NUM_CHARS_IN_YEAR_FORMAT); 
 		}
 		
 		/*
@@ -137,8 +140,8 @@ public class BiboDocument extends Individual{
 	}
 
 	/*
-	 * This publicationYear value is directly from the data supported by the ontology. If this is empty only 
-	 * then use the parsedPublicationYear.
+	 * This publicationYear value is directly from the data supported by the ontology. 
+	 * If this is empty only then use the parsedPublicationYear.
 	 * */
 	public String getPublicationYear() {
 		if (publicationYear != null && isValidPublicationYear(publicationYear)) {
@@ -172,7 +175,7 @@ public class BiboDocument extends Individual{
 	private boolean isValidPublicationYear(String testPublicationYear) {
 		
 		if (testPublicationYear.length() != 0 
-				&& testPublicationYear.trim().length() == 4
+				&& testPublicationYear.trim().length() == NUM_CHARS_IN_YEAR_FORMAT
 				&& testPublicationYear.matches("\\d+")
 				&& Integer.parseInt(testPublicationYear) >= MINIMUM_PUBLICATION_YEAR) {
 			return true;

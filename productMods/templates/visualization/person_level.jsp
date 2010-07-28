@@ -267,7 +267,7 @@ $(document).ready(function(){
 							  "ego_profile_image",
 							  jQuery.parseJSON(getWellFormedURLs("${requestScope.egoURIParam}", "profile_info")));
 
-	<c:if test='${numOfCoAuthorShips <= 0}'>
+	<c:if test='${empty numOfCoAuthorShips || empty numOfAuthors}'>
 
 		if ($('#ego_label').text().length > 0) {
 			setProfileName('no_coauthorships_person', $('#ego_label').text());

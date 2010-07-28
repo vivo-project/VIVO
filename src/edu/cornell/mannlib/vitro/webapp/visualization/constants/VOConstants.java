@@ -13,6 +13,4 @@ public class VOConstants {
 		ACADEMIC_FACULTY_EMPLOYEE, ACADEMIC_STAFF_EMPLOYEE
 	} 
 	
-	
-	
 }

@@ -1,16 +1,14 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
+package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 
-public class VisVOContainer {
+public class CoAuthorshipVOContainer {
 	
 	private Set<Node> nodes;
 	private Set<Edge> edges;
@@ -18,7 +16,7 @@ public class VisVOContainer {
 	private Set<Map<String, String>> NODE_SCHEMA;
 	private Set<Map<String, String>> EDGE_SCHEMA;
 		
-	public VisVOContainer(Node egoNode, Set<Node> nodes, Set<Edge> edges) {
+	public CoAuthorshipVOContainer(Node egoNode, Set<Node> nodes, Set<Edge> edges) {
 		this.egoNode = egoNode;
 		this.nodes = nodes;
 		this.edges = edges;
@@ -62,7 +60,7 @@ public class VisVOContainer {
 
 	private Set<Map<String, String>> initializeEdgeSchema() {
 
-		Set<Map<String, String>> edgeSchema = new HashSet<Map<String,String>>();
+		Set<Map<String, String>> edgeSchema = new HashSet<Map<String, String>>();
 		
 			Map<String, String> schemaAttributes = new LinkedHashMap<String, String>();
 			
@@ -142,7 +140,7 @@ public class VisVOContainer {
 
 	private Set<Map<String, String>> initializeNodeSchema() {
 		
-		Set<Map<String, String>> nodeSchema = new HashSet<Map<String,String>>();
+		Set<Map<String, String>> nodeSchema = new HashSet<Map<String, String>>();
 
 			Map<String, String> schemaAttributes = new LinkedHashMap<String, String>();   
 			
@@ -153,17 +151,6 @@ public class VisVOContainer {
 		
 		nodeSchema.add(schemaAttributes);
 	
-			/*
-			schemaAttributes = new LinkedHashMap<String, String>();
-			
-			schemaAttributes.put("id", "name");
-			schemaAttributes.put("for", "node");
-			schemaAttributes.put("attr.name", "name");
-			schemaAttributes.put("attr.type", "string");
-		
-		nodeSchema.add(schemaAttributes);
-		*/
-		
 			schemaAttributes = new LinkedHashMap<String, String>();
 		
 			schemaAttributes.put("id", "label");
@@ -239,7 +226,5 @@ public class VisVOContainer {
 		
 		return nodeSchema;
 	}
-	
-	
 	
 }

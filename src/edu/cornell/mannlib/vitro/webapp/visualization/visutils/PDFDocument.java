@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization;
+package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -29,7 +29,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PDFDocument{
+public class PDFDocument {
 
 	
 	static Stroke stroke = new BasicStroke(5.f, BasicStroke.CAP_ROUND,

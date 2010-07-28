@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,20 +46,23 @@ import com.hp.hpl.jena.query.DatasetFactory;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelMaker;
-import com.hp.hpl.jena.sparql.resultset.ResultSetFormat;
 
 import edu.cornell.mannlib.vedit.beans.LoginFormBean;
 import edu.cornell.mannlib.vedit.controller.BaseEditController;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.CollegePublicationCountRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler;
 
 /**
- * Services a sparql query.  This will return a simple error message and a 501 if
+ * Services a visualization request. This will return a simple error message and a 501 if
  * there is no jena Model.
  *
- * @author bdc34
- *
+ * @author cdtank
  */
 public class VisualizationController extends BaseEditController {
 
@@ -74,35 +76,7 @@ public class VisualizationController extends BaseEditController {
 
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-    protected static HashMap<String,ResultSetFormat> formatSymbols = new HashMap<String,ResultSetFormat>();
-    static{
-        formatSymbols.put( ResultSetFormat.syntaxXML.getSymbol(),     ResultSetFormat.syntaxXML);
-        formatSymbols.put( ResultSetFormat.syntaxRDF_XML.getSymbol(), ResultSetFormat.syntaxRDF_XML);
-        formatSymbols.put( ResultSetFormat.syntaxRDF_N3.getSymbol(),  ResultSetFormat.syntaxRDF_N3);
-        formatSymbols.put( ResultSetFormat.syntaxText.getSymbol() ,   ResultSetFormat.syntaxText);
-        formatSymbols.put( ResultSetFormat.syntaxJSON.getSymbol() ,   ResultSetFormat.syntaxJSON);
-        formatSymbols.put( "vitro:csv", null);
-    }
-
-    protected static HashMap<String,String> rdfFormatSymbols = new HashMap<String,String>();
-    static {
-    	rdfFormatSymbols.put( "RDF/XML", "application/rdf+xml" );
-    	rdfFormatSymbols.put( "RDF/XML-ABBREV", "application/rdf+xml" );
-    	rdfFormatSymbols.put( "N3", "text/n3" );
-    	rdfFormatSymbols.put( "N-TRIPLE", "text/plain" );
-    	rdfFormatSymbols.put( "TTL", "application/x-turtle" );
-    }
-
-    protected static HashMap<String, String> mimeTypes = new HashMap<String,String>();
-    static{
-        mimeTypes.put( ResultSetFormat.syntaxXML.getSymbol() ,         "text/xml" );
-        mimeTypes.put( ResultSetFormat.syntaxRDF_XML.getSymbol(),      "application/rdf+xml"  );
-        mimeTypes.put( ResultSetFormat.syntaxRDF_N3.getSymbol(),       "text/plain" );
-        mimeTypes.put( ResultSetFormat.syntaxText.getSymbol() ,        "text/plain");
-        mimeTypes.put( ResultSetFormat.syntaxJSON.getSymbol(),         "application/javascript" );
-        mimeTypes.put( "vitro:csv",                                    "text/csv");
-    }
-
+    //TODO: For later, might want to improve these names for clarity.
     public static final String PERSON_PUBLICATION_COUNT_VIS_URL_VALUE
     								= "person_pub_count";
     
@@ -125,25 +99,24 @@ public class VisualizationController extends BaseEditController {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-    {
-        this.doGet(request,response);
+    throws ServletException, IOException {
+        this.doGet(request, response);
     }
-
+    
+    //TODO: Set it up so visualizations register themselves with this object. Don't tie this class to each visualization.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-    {
+    throws ServletException, IOException {
     	super.doGet(request, response);
 
     	VitroRequest vreq = handleLoginAuthentication(request, response);
 
+    	String visTypeURLHandle = vreq.getParameter(VIS_TYPE_URL_HANDLE);
+    	
+		if (PERSON_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
 
-    	if (PERSON_PUBLICATION_COUNT_VIS_URL_VALUE
-    			.equalsIgnoreCase(vreq.getParameter(VIS_TYPE_URL_HANDLE))) {
-
-    		edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.VisualizationRequestHandler visRequestHandler =
-    			new edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.VisualizationRequestHandler(vreq, request, response, log);
+    		PersonPublicationCountRequestHandler visRequestHandler =
+    			new PersonPublicationCountRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
 
@@ -153,7 +126,7 @@ public class VisualizationController extends BaseEditController {
             											rdfResultFormatParam);
 
             if (dataSource != null) {
-
+            	
             	/*
             	 * This is side-effecting because the visualization content is added
             	 * to the request object.
@@ -165,11 +138,10 @@ public class VisualizationController extends BaseEditController {
             	log.error("ERROR! Data Model Empty");
             }
 
-    	} else if (COLLEGE_PUBLICATION_COUNT_VIS_URL_VALUE
-    			.equalsIgnoreCase(vreq.getParameter(VIS_TYPE_URL_HANDLE))) {
+    	} else if (COLLEGE_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.VisualizationRequestHandler visRequestHandler =
-    			new edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.VisualizationRequestHandler(vreq, request, response, log);
+    		CollegePublicationCountRequestHandler visRequestHandler =
+    			new CollegePublicationCountRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
 
@@ -190,11 +162,10 @@ public class VisualizationController extends BaseEditController {
             	log.error("ERROR! data model empoty");
             }
  
-    	} else if (COAUTHORSHIP_VIS_URL_VALUE
-    			.equalsIgnoreCase(vreq.getParameter(VIS_TYPE_URL_HANDLE))) {
+    	} else if (COAUTHORSHIP_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisualizationRequestHandler visRequestHandler =
-    			new edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.VisualizationRequestHandler(vreq, request, response, log);
+    		CoAuthorshipRequestHandler visRequestHandler =
+    			new CoAuthorshipRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
 
@@ -215,11 +186,10 @@ public class VisualizationController extends BaseEditController {
             	log.error("ERROR! data model empoty");
             }
  
-    	} else if (PERSON_LEVEL_VIS_URL_VALUE
-    			.equalsIgnoreCase(vreq.getParameter(VIS_TYPE_URL_HANDLE))) {
+    	} else if (PERSON_LEVEL_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		edu.cornell.mannlib.vitro.webapp.visualization.personlevel.VisualizationRequestHandler visRequestHandler =
-    			new edu.cornell.mannlib.vitro.webapp.visualization.personlevel.VisualizationRequestHandler(vreq, request, response, log);
+    		PersonLevelRequestHandler visRequestHandler =
+    			new PersonLevelRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
 
@@ -239,15 +209,12 @@ public class VisualizationController extends BaseEditController {
             } else {
             	log.error("ERROR! data model empoty");
             }
- 
-    	} else if (PDF_REPORT_VIS_URL_VALUE
-    			.equalsIgnoreCase(vreq.getParameter(VIS_TYPE_URL_HANDLE))) {
  
     	} else if (UTILITIES_URL_VALUE
-    			.equalsIgnoreCase(vreq.getParameter(VIS_TYPE_URL_HANDLE))) {
+    			.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationRequestHandler visRequestHandler =
-    			new edu.cornell.mannlib.vitro.webapp.visualization.utilities.VisualizationRequestHandler(vreq, request, response, log);
+    		UtilitiesRequestHandler visRequestHandler =
+    			new UtilitiesRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
 
@@ -279,7 +246,9 @@ public class VisualizationController extends BaseEditController {
     		 * added to the request object. From where it is redirected to
     		 * the error page.
     		 * */
-    		handleMalformedParameters("Inappropriate query parameters were submitted. ", request, response);
+    		handleMalformedParameters("Inappropriate query parameters were submitted. ", 
+    								  request, 
+    								  response);
     	}
 
         return;
@@ -301,9 +270,10 @@ public class VisualizationController extends BaseEditController {
 		        LoginFormBean loginHandler = null;
 
 
-		        if( obj != null && obj instanceof LoginFormBean )
-		            loginHandler = ((LoginFormBean)obj);
-
+		        if (obj != null && obj instanceof LoginFormBean) {
+		        	loginHandler = ((LoginFormBean) obj);
+		        }
+		    
 		        /*
 		         * what is the speciality of 5 in the conditions?
 		         *
@@ -327,32 +297,33 @@ public class VisualizationController extends BaseEditController {
 			String rdfResultFormatParam) {
 
 		Model model = vreq.getJenaOntModel(); // getModel()
-        if( model == null ){
-            doNoModelInContext(request,response);
+        if (model == null) {
+            doNoModelInContext(request, response);
             return null;
         }
 
         log.debug("rdfResultFormat was: " + rdfResultFormatParam);
 
-        DataSource dataSource = DatasetFactory.create() ;
+        DataSource dataSource = DatasetFactory.create();
         ModelMaker maker = (ModelMaker) getServletContext().getAttribute("vitroJenaModelMaker");
 
-        	dataSource.setDefaultModel(model) ;
+    	dataSource.setDefaultModel(model);
 
         return dataSource;
 	}
 
-    private void doNoModelInContext(HttpServletRequest request, HttpServletResponse res){
+    private void doNoModelInContext(HttpServletRequest request, HttpServletResponse res) {
         try {
             res.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
             ServletOutputStream sos = res.getOutputStream();
-            sos.println("<html><body>this service is not supporeted by the current " +
-                    "webapp configuration. A jena model is required in the servlet context.</body></html>" );
+            sos.println("<html><body>this service is not supporeted by the current " 
+            			+ "webapp configuration. A jena model is required in the " 
+            			+ "servlet context.</body></html>");
+            
         } catch (IOException e) {
             log.error("Could not write to ServletOutputStream");
         }
     }
-
 
     private void handleMalformedParameters(String errorMessage, HttpServletRequest request,
     					HttpServletResponse response)
