@@ -57,6 +57,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.CollegePub
 import edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
 /**
  * Services a visualization request. This will return a simple error message and a 501 if
@@ -115,7 +116,7 @@ public class VisualizationController extends BaseEditController {
     	
 		if (PERSON_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
 
-    		PersonPublicationCountRequestHandler visRequestHandler =
+    		VisualizationRequestHandler visRequestHandler =
     			new PersonPublicationCountRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
@@ -140,7 +141,7 @@ public class VisualizationController extends BaseEditController {
 
     	} else if (COLLEGE_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		CollegePublicationCountRequestHandler visRequestHandler =
+    		VisualizationRequestHandler visRequestHandler =
     			new CollegePublicationCountRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
@@ -164,7 +165,7 @@ public class VisualizationController extends BaseEditController {
  
     	} else if (COAUTHORSHIP_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		CoAuthorshipRequestHandler visRequestHandler =
+    		VisualizationRequestHandler visRequestHandler =
     			new CoAuthorshipRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
@@ -188,7 +189,7 @@ public class VisualizationController extends BaseEditController {
  
     	} else if (PERSON_LEVEL_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		PersonLevelRequestHandler visRequestHandler =
+    		VisualizationRequestHandler visRequestHandler =
     			new PersonLevelRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
@@ -213,7 +214,7 @@ public class VisualizationController extends BaseEditController {
     	} else if (UTILITIES_URL_VALUE
     			.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		UtilitiesRequestHandler visRequestHandler =
+    		VisualizationRequestHandler visRequestHandler =
     			new UtilitiesRequestHandler(vreq, request, response, log);
 
             String rdfResultFormatParam = "RDF/XML-ABBREV";
