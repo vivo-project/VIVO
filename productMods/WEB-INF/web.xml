@@ -85,19 +85,21 @@
     </listener-class>
   </listener> 
   
+  
+  <!-- Attaching submodels permits extra RDF files to be made visible without storing the data in the DB. -->
+  <listener>
+     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels</listener-class>
+  </listener>
+
+
   <!-- Invokes a process to move any uploaded files into the new file storage system. -->
-  <!-- Needs to run after FileStorageSetup and JenaDataSourceSetup. -->
+  <!-- Needs to run after FileStorageSetup, JenaDataSourceSetup and AttachSubmodels. -->
   <!-- Should run before Pellet is set up. -->  
   <listener>
     <listener-class>
         edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateUploadedFiles
     </listener-class>
   </listener> 
-  
-  <!-- Attaching submodels permits extra RDF files to be made visible without storing the data in the DB. -->
-  <listener>
-     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels</listener-class>
-  </listener>
 
   <!-- Pellet setup enables reasoning.  Inferences are cached in a separate DB graph. -->
   <!-- Changing the class name sets the kinds of inferences that are materialized. -->
