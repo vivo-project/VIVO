@@ -102,12 +102,17 @@ public class VisualizationController extends BaseEditController {
     public static final String UTILITIES_URL_VALUE
 									= "utilities";
 
-	public VisualizationController() {
-		super();
-		
-		try {
+    @Override
+    public void init() throws ServletException {
+    	super.init();
+    	try {
+			
+			String resourcePath = 
+				getServletContext()
+					.getRealPath("/WEB-INF/visualization/visualizations-beans-injection.xml");
+			
 			ApplicationContext context = new ClassPathXmlApplicationContext(
-			"WEB-INF/visualization/visualizations-beans-injection.xml");
+					resourcePath);
 
 			BeanFactory factory = context;
 			
@@ -118,10 +123,10 @@ public class VisualizationController extends BaseEditController {
 
 		} catch (Exception e) {
 
-			System.out.println(e.getMessage());
+			e.printStackTrace();
+			System.out.println(e);
 		}
-				
-	}
+    }
     
 
     @Override
@@ -144,30 +149,25 @@ public class VisualizationController extends BaseEditController {
     	
 		if (PERSON_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
 
-    		visRequestHandler =
-    			new PersonPublicationCountRequestHandler(vreq, request, response, log);
+    		visRequestHandler = new PersonPublicationCountRequestHandler();
 
     	} else if (COLLEGE_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		visRequestHandler =
-    			new CollegePublicationCountRequestHandler(vreq, request, response, log);
+    		visRequestHandler = new CollegePublicationCountRequestHandler();
 
     	} else if (COAUTHORSHIP_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		visRequestHandler =
-    			new CoAuthorshipRequestHandler(vreq, request, response, log);
+    		visRequestHandler = new CoAuthorshipRequestHandler();
 
  
     	} else if (PERSON_LEVEL_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		visRequestHandler =
-    			new PersonLevelRequestHandler(vreq, request, response, log);
+    		visRequestHandler = new PersonLevelRequestHandler();
 
     	} else if (UTILITIES_URL_VALUE
     			.equalsIgnoreCase(visTypeURLHandle)) {
     		
-    		visRequestHandler =
-    			new UtilitiesRequestHandler(vreq, request, response, log);
+    		visRequestHandler = new UtilitiesRequestHandler();
 
     	} else {
     		
@@ -198,7 +198,7 @@ public class VisualizationController extends BaseEditController {
         	 * This is side-effecting because the visualization content is added
         	 * to the request object.
         	 * */
-        	visRequestHandler.generateVisualization(dataSource);
+        	visRequestHandler.generateVisualization(vreq, request, response, log, dataSource);
         	
         	System.out.println(" VIS ID TO CLASS " + visualizationIDsToClass);
 
@@ -239,8 +239,8 @@ public class VisualizationController extends BaseEditController {
 		            HttpSession session = request.getSession(true);
 
 		            session.setAttribute("postLoginRequest",
-		                    vreq.getRequestURI()+( vreq.getQueryString()!=null?('?' + vreq.getQueryString()):"" ));
-		            String redirectURL = request.getContextPath() + Controllers.SITE_ADMIN + "?login=block";
+            vreq.getRequestURI()+( vreq.getQueryString()!=null?('?' + vreq.getQueryString()):"" ));
+            String redirectURL = request.getContextPath() + Controllers.SITE_ADMIN + "?login=block";
 		            response.sendRedirect(redirectURL);
 		            return null;
 		        }

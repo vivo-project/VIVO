@@ -37,18 +37,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class PersonPublicationCountRequestHandler extends VisualizationRequestHandler {
+public class PersonPublicationCountRequestHandler implements VisualizationRequestHandler {
 	
-	public PersonPublicationCountRequestHandler(VitroRequest vitroRequest,
-			HttpServletRequest request, HttpServletResponse response, Log log) {
-
-		super(vitroRequest, request, response, log);
+	public void generateVisualization(VitroRequest vitroRequest,
+									  HttpServletRequest request, 
+									  HttpServletResponse response, 
+									  Log log, 
+									  DataSource dataSource) {
 		
-	}
-
-	public void generateVisualization(DataSource dataSource) {
-		
-		VitroRequest vitroRequest = super.getVitroRequest();
         String individualURIParam = vitroRequest.getParameter(
         									VisualizationFrameworkConstants
         											.INDIVIDUAL_URI_URL_HANDLE);
@@ -65,7 +61,6 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
         									VisualizationFrameworkConstants
         											.VIS_CONTAINER_URL_HANDLE);
 
-        Log log = super.getLog();
         QueryHandler<List<BiboDocument>> queryManager =
         	new PersonPublicationCountQueryHandler(individualURIParam,
         										   dataSource,
@@ -94,7 +89,8 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 	    		
 				prepareVisualizationQueryDataResponse(author,
 													  authorDocuments,
-													  yearToPublicationCount);
+													  yearToPublicationCount,
+													  response);
 				return;
 			}
 	    	
@@ -104,7 +100,8 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 	    		
 				prepareVisualizationQueryPDFResponse(author,
 													 authorDocuments,
-													 yearToPublicationCount);
+													 yearToPublicationCount,
+													 response);
 				return;
 			}
 	    	
@@ -130,8 +127,6 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 	    	 * a page with visualization on it.
 	    	 * */
 			RequestDispatcher requestDispatcher = null;
-			HttpServletRequest request = super.getRequest();
-			HttpServletResponse response = super.getResponse();
 			
 			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE_URL_VALUE
 						.equalsIgnoreCase(renderMode)) {
@@ -157,7 +152,7 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 
 		} catch (MalformedQueryParametersException e) {
 			try {
-				handleMalformedParameters(e.getMessage());
+				handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
 			} catch (ServletException e1) {
 				log.error(e1.getStackTrace());
 			} catch (IOException e1) {
@@ -171,7 +166,8 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 	private void prepareVisualizationQueryPDFResponse(
 					Individual author,
 					List<BiboDocument> authorDocuments,
-					Map<String, Integer> yearToPublicationCount) {
+					Map<String, Integer> yearToPublicationCount, 
+					HttpServletResponse response) {
 		
 		String authorName = null; 
 		
@@ -191,7 +187,6 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 		}
 		
 		String outputFileName = UtilityFunctions.slugify(authorName) + "_report" + ".pdf";
-		HttpServletResponse response = super.getResponse();
 		
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
@@ -233,7 +228,8 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 	private void prepareVisualizationQueryDataResponse(
 						Individual author,
 						List<BiboDocument> authorDocuments,
-						Map<String, Integer> yearToPublicationCount) {
+						Map<String, Integer> yearToPublicationCount, 
+						HttpServletResponse response) {
 
 		String authorName = null; 
 		
@@ -255,7 +251,6 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 		String outputFileName = UtilityFunctions.slugify(authorName) 
 										+ "_publications-per-year" + ".csv";
 		
-		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
 		
@@ -333,11 +328,14 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 
 	}
 
-	private void handleMalformedParameters(String errorMessage)
+	private void handleMalformedParameters(String errorMessage, 
+			VitroRequest vitroRequest, 
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Log log)
 			throws ServletException, IOException {
 
-		Portal portal = super.getVitroRequest().getPortal();
-		HttpServletRequest request = super.getRequest();
+		Portal portal = vitroRequest.getPortal();
 		
 		request.setAttribute("error", errorMessage);
 
@@ -347,9 +345,8 @@ public class PersonPublicationCountRequestHandler extends VisualizationRequestHa
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 
 		try {
-			requestDispatcher.forward(request, super.getResponse());
+			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

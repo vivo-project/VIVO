@@ -31,19 +31,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
+public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
-	
-	public CoAuthorshipRequestHandler(VitroRequest vitroRequest,
-			HttpServletRequest request, HttpServletResponse response, Log log) {
-		
-		super(vitroRequest, request, response, log);
-		
-	}
+	public void generateVisualization(VitroRequest vitroRequest,
+									  HttpServletRequest request, 
+									  HttpServletResponse response, 
+									  Log log, 
+									  DataSource dataSource) {
 
-	public void generateVisualization(DataSource dataSource) {
-
-        VitroRequest vitroRequest = super.getVitroRequest();
 		String egoURIParam = vitroRequest.getParameter(
         										VisualizationFrameworkConstants
         												.INDIVIDUAL_URI_URL_HANDLE);
@@ -56,7 +51,6 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
         										VisualizationFrameworkConstants
         												.VIS_MODE_URL_HANDLE);
 
-        Log log = super.getLog();
 		QueryHandler<CoAuthorshipVOContainer> queryManager =
         	new CoAuthorshipQueryHandler(egoURIParam,
 						     dataSource,
@@ -89,7 +83,8 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 	    			 * When the csv file is required - based on which sparkline visualization will 
 	    			 * be rendered.
 	    			 * */
-						prepareVisualizationQuerySparklineDataResponse(authorNodesAndEdges);
+						prepareVisualizationQuerySparklineDataResponse(authorNodesAndEdges, 
+																	   response);
 						return;
 		    		
 				} else {
@@ -97,14 +92,14 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 		    			 * When the graphML file is required - based on which coauthorship network 
 		    			 * visualization will be rendered.
 		    			 * */
-		    			prepareVisualizationQueryNetworkDataResponse(authorNodesAndEdges);
+		    			prepareVisualizationQueryNetworkDataResponse(authorNodesAndEdges, response);
 						return;
 				}
 			}
 			
 		} catch (MalformedQueryParametersException e) {
 			try {
-				handleMalformedParameters(e.getMessage());
+				handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
 			} catch (ServletException e1) {
 				log.error(e1.getStackTrace());
 			} catch (IOException e1) {
@@ -116,13 +111,13 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 	}
 
 	private void prepareVisualizationQueryNetworkDataResponse(
-			CoAuthorshipVOContainer authorNodesAndEdges) {
+			CoAuthorshipVOContainer authorNodesAndEdges, HttpServletResponse response) {
 
-		super.getResponse().setContentType("text/xml");
+		response.setContentType("text/xml");
 		
 		try {
 		
-		PrintWriter responseWriter = super.getResponse().getWriter();
+		PrintWriter responseWriter = response.getWriter();
 		
 		/*
 		 * We are side-effecting responseWriter since we are directly manipulating the response 
@@ -141,7 +136,7 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 	}
 	
 	private void prepareVisualizationQuerySparklineDataResponse(
-			CoAuthorshipVOContainer authorNodesAndEdges) {
+			CoAuthorshipVOContainer authorNodesAndEdges, HttpServletResponse response) {
 		
 		String outputFileName;
 		Map<String, Set<Node>> yearToCoauthors = new TreeMap<String, Set<Node>>();
@@ -159,7 +154,6 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 			outputFileName = "no_coauthors-per-year" + ".csv";			
 		}
 		
-		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", 
 									  "attachment;filename=" + outputFileName);
@@ -247,12 +241,15 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 		return yearToCoAuthors;
 	}
 
-	private void handleMalformedParameters(String errorMessage)
+	private void handleMalformedParameters(String errorMessage, 
+			VitroRequest vitroRequest, 
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Log log)
 			throws ServletException, IOException {
 
-		Portal portal = super.getVitroRequest().getPortal();
+		Portal portal = vitroRequest.getPortal();
 
-		HttpServletRequest request = super.getRequest();
 		request.setAttribute("error", errorMessage);
 
 		RequestDispatcher requestDispatcher = 
@@ -264,9 +261,8 @@ public class CoAuthorshipRequestHandler extends VisualizationRequestHandler {
 										"Visualization Query Error - Individual Publication Count");
 
 		try {
-			requestDispatcher.forward(request, super.getResponse());
+			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

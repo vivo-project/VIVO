@@ -46,19 +46,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class CollegePublicationCountRequestHandler extends VisualizationRequestHandler {
+public class CollegePublicationCountRequestHandler implements VisualizationRequestHandler {
 
-	public CollegePublicationCountRequestHandler(VitroRequest vitroRequest,
-			HttpServletRequest request, HttpServletResponse response, Log log) {
-		
-		super(vitroRequest, request, response, log);
+	public void generateVisualization(VitroRequest vitroRequest,
+									  HttpServletRequest request, 
+									  HttpServletResponse response, 
+									  Log log, 
+									  DataSource dataSource) {
 
-	}
-
-	public void generateVisualization(DataSource dataSource) {
-
-        ServletRequest vitroRequest = super.getVitroRequest();
-        
 		String collegeURIParam = vitroRequest.getParameter(
 										VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
 
@@ -71,7 +66,6 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
         String visContainer = vitroRequest.getParameter(
         								VisualizationFrameworkConstants.VIS_CONTAINER_URL_HANDLE);
 
-        Log log = super.getLog();
 		QueryHandler<Set<VivoEmployee>> queryManager =
         	new CollegePublicationCountQueryHandler(collegeURIParam,
 						     dataSource,
@@ -119,8 +113,9 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 	    	 * */
 	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) { 
 				prepareVisualizationQueryDataResponse(
-													  departmentToPublicationsOverTime,
-													  ((CollegePublicationCountQueryHandler) queryManager).getCollegeURLToVO());
+						departmentToPublicationsOverTime,
+						((CollegePublicationCountQueryHandler) queryManager).getCollegeURLToVO(),
+						response);
 				
 				log.debug(publishedYearsForCollege);
 				return;
@@ -148,7 +143,7 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 
 		} catch (MalformedQueryParametersException e) {
 			try {
-				handleMalformedParameters(e.getMessage());
+				handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
 			} catch (ServletException e1) {
 				log.error(e1.getStackTrace());
 			} catch (IOException e1) {
@@ -211,7 +206,8 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 
 	private void prepareVisualizationQueryPDFResponse(Individual college, 
 													  List<BiboDocument> authorDocuments,
-													  Map<String, Integer> yearToPublicationCount) {
+													  Map<String, Integer> yearToPublicationCount, 
+													  HttpServletResponse response) {
 		
 		String authorName = null; 
 		
@@ -233,7 +229,6 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 		String outputFileName = UtilityFunctions.slugify(authorName + "-report") 
 								+ ".pdf";
 		
-		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
  
@@ -271,7 +266,7 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 
 	private void prepareVisualizationQueryDataResponse(
 			Map<VivoDepartmentOrDivision, Map<String, Integer>> departmentToPublicationsOverTime,
-			Map<String, VivoCollegeOrSchool> collegeURLToVO) {
+			Map<String, VivoCollegeOrSchool> collegeURLToVO, HttpServletResponse response) {
 
 		String collegeName = null; 
 		
@@ -296,7 +291,6 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 		
 		String outputFileName = UtilityFunctions.slugify(collegeName) + "depts-pub-count" + ".csv";
 		
-		HttpServletResponse response = super.getResponse();
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
 		
@@ -394,12 +388,15 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 
 	}
 
-	private void handleMalformedParameters(String errorMessage)
+	private void handleMalformedParameters(String errorMessage, 
+			VitroRequest vitroRequest, 
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Log log)
 			throws ServletException, IOException {
 
-		Portal portal = super.getVitroRequest().getPortal();
+		Portal portal = vitroRequest.getPortal();
 
-		HttpServletRequest request = super.getRequest();
 		request.setAttribute("error", errorMessage);
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
@@ -408,9 +405,8 @@ public class CollegePublicationCountRequestHandler extends VisualizationRequestH
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 
 		try {
-			requestDispatcher.forward(request, super.getResponse());
+			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());
