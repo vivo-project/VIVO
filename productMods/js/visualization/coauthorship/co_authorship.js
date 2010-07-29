@@ -12,7 +12,7 @@ function getWellFormedURLs(given_uri, type) {
 	if (type == "coauthorship") {
 
 		var finalURL = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "COAUTHORSHIP_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
@@ -27,7 +27,7 @@ function getWellFormedURLs(given_uri, type) {
 	} else if (type == "profile") {
 
 		var finalURL = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "PROFILE_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
@@ -40,7 +40,7 @@ function getWellFormedURLs(given_uri, type) {
 	} else if (type == "image") {
 
 		var finalURL = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "IMAGE_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
@@ -53,7 +53,7 @@ function getWellFormedURLs(given_uri, type) {
 	} else if (type == "profile_info") {
 
 		var profileInfoJSON = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "PROFILE_INFO", uri: given_uri}),
 			dataType: "json",
 			async: false,

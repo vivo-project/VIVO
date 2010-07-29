@@ -44,6 +44,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
  */
 public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOContainer> {
 
+	private static final int MAX_AUTHORS_PER_PAPER_ALLOWED = 100;
+
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String egoURLParam;
@@ -105,7 +107,6 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 					egoNode.setNodeName(authorLabelNode.toString());
 				}
 			}
-			
 			
 			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
 			BiboDocument biboDocument;
@@ -190,6 +191,38 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 		}
 		
 		/*
+		 * This code snippet takes out all the edges belong to documents that have more than 
+		 * 100 authors. We conjecture that these papers do not provide much insight. However, 
+		 * we have left the documents be, just the edges are removed.  
+		 * */
+		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry 
+					: biboDocumentURLToCoAuthors.entrySet()) {
+				
+				if (currentBiboDocumentEntry.getValue().size() > MAX_AUTHORS_PER_PAPER_ALLOWED) {
+					
+					BiboDocument currentBiboDocument = biboDocumentURLToVO
+															.get(currentBiboDocumentEntry.getKey());
+					
+					Set<Edge> edgesToBeRemoved = new HashSet<Edge>();
+					
+					for (Edge currentEdge : edges) {
+						Set<BiboDocument> currentCollaboratorDocuments = 
+									currentEdge.getCollaboratorDocuments();
+						
+						if (currentCollaboratorDocuments.contains(currentBiboDocument)) {
+							currentCollaboratorDocuments.remove(currentBiboDocument);
+							if (currentCollaboratorDocuments.isEmpty()) {
+								edgesToBeRemoved.add(currentEdge);
+							}
+						}
+					}
+						
+					edges.removeAll(edgesToBeRemoved);
+					
+				}
+		}
+		
+		/*
 		 * We need to create edges between 2 co-authors. E.g. On a paper there were 3 authors
 		 * ego, A & B then we have already created edges like,
 		 * 		ego - A
@@ -222,8 +255,14 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			/*
 			 * If there was only one co-author (other than ego) then we dont have to create any 
 			 * edges. so the below condition will take care of that.
+			 * 
+			 * We are restricting edges between co-author if a particular document has more than
+			 * 100 co-authors. Our conjecture is that such edges do not provide any good insight
+			 * & causes unnecessary computations causing the server to time-out.
 			 * */
-			if (currentBiboDocumentEntry.getValue().size() > 1) {
+			if (currentBiboDocumentEntry.getValue().size() > 1 
+					&& currentBiboDocumentEntry.getValue().size() 
+							<= MAX_AUTHORS_PER_PAPER_ALLOWED) {
 				
 				
 				Set<Edge> newlyAddedEdges = new HashSet<Edge>();

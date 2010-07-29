@@ -4,13 +4,13 @@ package edu.cornell.mannlib.vitro.webapp.controller.visualization;
 
 public class VisualizationFrameworkConstants {
 	
+	public static final String VISUALIZATION_URL_PREFIX = "/visualization";
+	
 	public static final String VIS_TYPE_URL_HANDLE = "vis";
 	public static final String VIS_CONTAINER_URL_HANDLE = "container";
 	public static final String INDIVIDUAL_URI_URL_HANDLE = "uri";
 	public static final String VIS_MODE_URL_HANDLE = "vis_mode";
 	public static final String RENDER_MODE_URL_HANDLE = "render_mode";
-	
-	
 	
 	public static final String STANDALONE_RENDER_MODE_URL_VALUE = "standalone";
 	public static final String DYNAMIC_RENDER_MODE_URL_VALUE = "dynamic";
@@ -24,5 +24,8 @@ public class VisualizationFrameworkConstants {
 	public static final String COAUTHOR_UTILS_VIS_MODE = "COAUTHORSHIP_URL";
 	public static final String PERSON_LEVEL_UTILS_VIS_MODE = "PERSON_LEVEL_URL";
 	public static final String IMAGE_UTILS_VIS_MODE = "IMAGE_URL";
+	
+	
+	
 	
 }
