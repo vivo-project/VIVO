@@ -159,7 +159,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
     	    	 * */
 				
 				preparedURL += request.getContextPath()
-								+ "/admin/visQuery"
+								+ VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX
 								+ "?" 
 								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
 								+ "=" + URLEncoder.encode(individualURIParam, 
@@ -187,7 +187,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
     	    	 * */
 				
 				preparedURL += request.getContextPath()
-								+ "/admin/visQuery"
+								+ VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX
 								+ "?" 
 								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
 								+ "=" + URLEncoder.encode(individualURIParam, 

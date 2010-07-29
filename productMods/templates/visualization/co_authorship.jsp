@@ -12,7 +12,7 @@
 	<c:out value="${pageContext.request.contextPath}" />
 </c:set>
 
-<c:url var="egoCoAuthorshipDataURL" value="/admin/visQuery">
+<c:url var="egoCoAuthorshipDataURL" value="/visualization">
 	<c:param name="vis" value="coauthorship" />
 	<c:param name="render_mode" value="data" />
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
@@ -20,7 +20,7 @@
 </c:url>
 
 
-<c:url var="egoSparklineVisURL" value="/admin/visQuery">
+<c:url var="egoSparklineVisURL" value="/visualization">
 	<c:param name="render_mode" value="dynamic"/>
 	<c:param name="container" value="ego_sparkline"/>
 	<c:param name="vis" value="person_pub_count"/>
@@ -178,7 +178,7 @@ renderCoAuthorshipVisualization();
 
 </div>
 
-Download co-authorship newtwork as <a href="/vivo1/admin/visQuery?uri=http%3A%2F%2Fvivo.library.cornell.edu%2Fns%2F0.1%23individual5748&amp;vis=person_pub_count&amp;render_mode=data">.graphml</a> file.
+Download co-authorship newtwork as <a href="/vivo1/visualization?uri=http%3A%2F%2Fvivo.library.cornell.edu%2Fns%2F0.1%23individual5748&amp;vis=person_pub_count&amp;render_mode=data">.graphml</a> file.
 
 <div id="bottomShadow"></div>
 
@@ -214,7 +214,7 @@ Download co-authorship newtwork as <a href="/vivo1/admin/visQuery?uri=http%3A%2F
 	</tbody>
 </table>
 
-Download data as <a href="/vivo1/admin/visQuery?uri=http%3A%2F%2Fvivo.library.cornell.edu%2Fns%2F0.1%23individual5748&amp;vis=person_pub_count&amp;render_mode=data">.csv</a> file.
+Download data as <a href="/vivo1/visualization?uri=http%3A%2F%2Fvivo.library.cornell.edu%2Fns%2F0.1%23individual5748&amp;vis=person_pub_count&amp;render_mode=data">.csv</a> file.
 
 <table id="coauthorships_data_table">
 	<caption>Co - Authorhips</caption>

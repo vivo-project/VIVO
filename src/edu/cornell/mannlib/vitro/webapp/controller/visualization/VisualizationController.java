@@ -129,7 +129,6 @@ public class VisualizationController extends BaseEditController {
         this.doGet(request, response);
     }
     
-    //TODO: Set it up so visualizations register themselves with this object. Don't tie this class to each visualization.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -166,8 +165,6 @@ public class VisualizationController extends BaseEditController {
         	 * */
         	visRequestHandler.generateVisualization(vreq, request, response, log, dataSource);
         	
-        	System.out.println(" VIS ID TO CLASS " + visualizationIDsToClass);
-
         } else {
         	
     		String errorMessage = "Data Model Empty &/or Inappropriate " 

@@ -44,6 +44,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator
  */
 public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOContainer> {
 
+	private static final int MAX_AUTHORS_PER_PAPER_ALLOWED = 101;
+
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String egoURLParam;
@@ -222,8 +224,13 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			/*
 			 * If there was only one co-author (other than ego) then we dont have to create any 
 			 * edges. so the below condition will take care of that.
+			 * 
+			 * We are restricting edges between co-author if a particular document has more than
+			 * 100 co-authors. Our conjecture is that such edges do not provide any good insight
+			 * & causes unnecessary computations causing the server to time-out.
 			 * */
-			if (currentBiboDocumentEntry.getValue().size() > 1) {
+			if (currentBiboDocumentEntry.getValue().size() > 1 
+					&& currentBiboDocumentEntry.getValue().size() < MAX_AUTHORS_PER_PAPER_ALLOWED) {
 				
 				
 				Set<Edge> newlyAddedEdges = new HashSet<Edge>();

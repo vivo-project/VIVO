@@ -22,13 +22,13 @@
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
-<c:url var="egoSparklineDataURL" value="/admin/visQuery">
+<c:url var="egoSparklineDataURL" value="/visualization">
 	<c:param name="render_mode" value="data" />
 	<c:param name="vis" value="person_pub_count" />
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
-<c:url var="coAuthorshipDownloadFile" value="/admin/visQuery">
+<c:url var="coAuthorshipDownloadFile" value="/visualization">
 	<c:param name="vis" value="person_level" />
 	<c:param name="render_mode" value="data" />
 	<c:param name="uri" value="${requestScope.egoURIParam}" />

@@ -54,7 +54,7 @@
 <c:url var="loadingImageLink" value="/${themeDir}site_icons/visualization/ajax-loader.gif"></c:url>
 
 	<!-- START Visualization Code -->            
-	<c:url var="visualizationURL" value="/admin/visQuery">
+	<c:url var="visualizationURL" value="/visualization">
 		<c:param name="render_mode" value="dynamic"/>
 		<c:param name="container" value="vis_container"/>
 		<c:param name="vis" value="person_pub_count"/>
@@ -66,7 +66,7 @@
 	
 	For now we have disabled this.
 	             
-	<c:url var="pdfURL" value="/admin/visQuery">
+	<c:url var="pdfURL" value="/visualization">
 		<c:param name="render_mode" value="pdf"/>
 		<c:param name="container" value="vis_container"/>
 		<c:param name="vis" value="person_pub_count"/>

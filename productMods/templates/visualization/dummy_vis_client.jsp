@@ -6,20 +6,20 @@
 <c:set var="portal" value="${requestScope.portalBean}"/>
 <c:set var="themeDir"><c:out value="${portal.themeDir}" /></c:set>
 
-<c:url var="staticHref" value="/admin/visQuery">
+<c:url var="staticHref" value="/visualization">
 	<c:param name="vis" value="person_pub_count"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="vis_mode" value="wth"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5156"/>
 </c:url>
 
-<c:url var="staticHref2" value="/admin/visQuery">
+<c:url var="staticHref2" value="/visualization">
 	<c:param name="vis" value="person_pub_count"/>
 	<c:param name="vis_mode" value="short"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5611"/>
 </c:url>
 
-<c:url var="staticHref_d" value="/admin/visQuery">
+<c:url var="staticHref_d" value="/visualization">
 	<c:param name="render_mode" value="dynamic"/>
 	<c:param name="container" value="ajax_recipient"/>
 	<c:param name="vis" value="person_pub_count"/>
@@ -27,7 +27,7 @@
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5156"/>
 </c:url>
 
-<c:url var="staticHref2_d" value="/admin/visQuery">
+<c:url var="staticHref2_d" value="/visualization">
 	<c:param name="render_mode" value="dynamic"/>
 	<c:param name="container" value="ajax_recipient"/>
 	<c:param name="vis" value="person_pub_count"/>
@@ -36,14 +36,14 @@
 </c:url>
 
 
-<c:url var="staticHref3" value="/admin/visQuery">
+<c:url var="staticHref3" value="/visualization">
 	<c:param name="vis" value="person_pub_count"/>
 	<c:param name="vis_mode" value="short"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5748"/>
 </c:url>
 
 
-<c:url var="staticHref3_d" value="/admin/visQuery">
+<c:url var="staticHref3_d" value="/visualization">
 	<c:param name="render_mode" value="dynamic"/>
 	<c:param name="vis" value="person_pub_count"/>
 	<c:param name="container" value="ajax_recipient"/>
@@ -52,14 +52,14 @@
 
 
 
-<c:url var="collegeCSV" value="/admin/visQuery">
+<c:url var="collegeCSV" value="/visualization">
 	<c:param name="vis" value="college_pub_count"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="wth"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5249"/>
 </c:url>
 
-<c:url var="collegeCSV2" value="/admin/visQuery">
+<c:url var="collegeCSV2" value="/visualization">
 	<c:param name="vis" value="college_pub_count"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="wth"/>
@@ -67,7 +67,7 @@
 </c:url>
 
 
-<c:url var="collegeCSV3" value="/admin/visQuery">
+<c:url var="collegeCSV3" value="/visualization">
 	<c:param name="vis" value="college_pub_count"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="wth"/>
@@ -75,152 +75,152 @@
 </c:url>
 
 
-<c:url var="collegeCSV4" value="/admin/visQuery">
+<c:url var="collegeCSV4" value="/visualization">
 	<c:param name="vis" value="college_pub_count"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="wth"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual250"/>
 </c:url>
 
-<c:url var="collegeCSV5" value="/admin/visQuery">
+<c:url var="collegeCSV5" value="/visualization">
 	<c:param name="vis" value="college_pub_count"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="wth"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual192"/>
 </c:url>
 
-<c:url var="coAuthorship1Data" value="/admin/visQuery">
+<c:url var="coAuthorship1Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5748"/>
 </c:url>
 
-<c:url var="coAuthorship2Data" value="/admin/visQuery">
+<c:url var="coAuthorship2Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5156"/>
 </c:url>
 
-<c:url var="coAuthorship3Data" value="/admin/visQuery">
+<c:url var="coAuthorship3Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5611"/>
 </c:url>
 
 
-<c:url var="coAuthorship4Data" value="/admin/visQuery">
+<c:url var="coAuthorship4Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5412"/>
 </c:url>
 
-<c:url var="coAuthorship1" value="/admin/visQuery">
+<c:url var="coAuthorship1" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5748"/>
 </c:url>
 
-<c:url var="coAuthorship2" value="/admin/visQuery">
+<c:url var="coAuthorship2" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5156"/>
 </c:url>
 
-<c:url var="coAuthorship3" value="/admin/visQuery">
+<c:url var="coAuthorship3" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5611"/>
 </c:url>
 
-<c:url var="coAuthorship4" value="/admin/visQuery">
+<c:url var="coAuthorship4" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5412"/>
 </c:url>
 
 
-<c:url var="coAuthorship5" value="/admin/visQuery">
+<c:url var="coAuthorship5" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5714"/>
 </c:url>
 
-<c:url var="coAuthorship5Data" value="/admin/visQuery">
+<c:url var="coAuthorship5Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5714"/>
 </c:url>
 
 
-<c:url var="coAuthorship6" value="/admin/visQuery">
+<c:url var="coAuthorship6" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual240"/>
 </c:url>
 
-<c:url var="coAuthorship6Data" value="/admin/visQuery">
+<c:url var="coAuthorship6Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual240"/>
 </c:url>
 
-<c:url var="coAuthorship7" value="/admin/visQuery">
+<c:url var="coAuthorship7" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual37"/>
 </c:url>
 
-<c:url var="coAuthorship7Data" value="/admin/visQuery">
+<c:url var="coAuthorship7Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual37"/>
 </c:url>
 
-<c:url var="coAuthorship8" value="/admin/visQuery">
+<c:url var="coAuthorship8" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5355"/>
 </c:url>
 
-<c:url var="coAuthorship8Data" value="/admin/visQuery">
+<c:url var="coAuthorship8Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5355"/>
 </c:url>
 
-<c:url var="coAuthorship9" value="/admin/visQuery">
+<c:url var="coAuthorship9" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5734"/>
 </c:url>
 
 
-<c:url var="coAuthorship9Data" value="/admin/visQuery">
+<c:url var="coAuthorship9Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5734"/>
 </c:url>
 
-<c:url var="coAuthorship10" value="/admin/visQuery">
+<c:url var="coAuthorship10" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual12053"/>
 </c:url>
 
-<c:url var="coAuthorship10Data" value="/admin/visQuery">
+<c:url var="coAuthorship10Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual12053"/>
 </c:url>
 
-<c:url var="coAuthorshipSparklineData" value="/admin/visQuery">
+<c:url var="coAuthorshipSparklineData" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="vis_mode" value="sparkline"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5748"/>
 </c:url>
 
-<c:url var="personLevel1" value="/admin/visQuery">
+<c:url var="personLevel1" value="/visualization">
 	<c:param name="vis" value="person_level"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="container" value="ego_sparkline"/>

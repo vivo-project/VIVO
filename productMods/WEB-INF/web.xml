@@ -1139,7 +1139,7 @@
 
   <servlet-mapping>
     <servlet-name>VisualizationController</servlet-name>
-    <url-pattern>/admin/visQuery</url-pattern>
+    <url-pattern>/visualization</url-pattern>
   </servlet-mapping>
 
   <servlet>
