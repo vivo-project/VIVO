@@ -48,20 +48,27 @@
 var customForm = {
 
 	views: {
-		ADD_NEW: 1, // not 0, else can't test if (!view)
-		SELECT_EXISTING: 2,
-		COMBINED: 3
+	    ADD_STEP_ONE: 1, // not 0, else can't test if (!view)
+		ADD_NEW: 2, 
+		SELECT_EXISTING: 3,
+		COMBINED: 4
 	},
 
 
     onLoad: function() {
 
+    	this.mixIn();
 		this.initObjects();		
         this.adjustForJs();             
         this.initForm();      
     },
     
-    // On page load, create references within the customForm scope to DOM elements.
+    mixIn: function() {
+    	// Mix in the custom form utility methods
+    	vitro.utils.borrowMethods(vitro.customFormUtils, this);    	
+    },
+    
+    // On page load, create references for easy access to form elements.
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function() {
 
@@ -78,22 +85,22 @@ var customForm = {
         this.addNew = $('.new');
         this.entry = $('.entry');
         this.existingOrNew = $('.existingOrNew'); // just the word "or" between existing and add new
+        this.returnViewField = $("input[name='view']");
 
-        this.cancel = this.form.find('.cancel');
-        this.requiredHints = this.form.find('.requiredHint');        
-        
-        this.close = this.form.find('.close');
+        this.cancel = this.form.find('.cancel');           
         
         // Read values used to control display
         this.editType = $("input[name='editType']").val();
         this.entryType = $("input[name='entryType']").val().capitalizeWords();
         this.secondaryType = $("input[name='secondaryType']").val().capitalizeWords();
-        this.formSteps = $("input[name='steps']").val();
+        // Enforce one step for edit forms, in case the form forgets to
+        this.formSteps = this.editType === 'edit' ? '1' : $("input[name='steps']").val();        
+        this.returnView = parseInt(this.returnViewField.val()); // returns NaN for empty string
 
     },
     
     // On page load, make changes to the non-Javascript version for the Javascript version.
-    // These are features that will NOT CHANGE throughout the workflow of the Javascript version..
+    // These are features that will NOT CHANGE throughout the workflow of the Javascript version.
     adjustForJs: function() {
     
         var selectExistingLabel = $('.existing label');
@@ -101,32 +108,29 @@ var customForm = {
         
         this.existingOrNew.hide();
         
-        this.addRequiredHints();
+        this.toggleRequiredHints('show', this.addNew); 
+
+        // The close link in the addNew div closes the addNew div and restores the
+        // combined view. It is needed for the one-step add form and the edit form
+        // (which is a one-step form), but not for the two-step add form, since we'd
+        // want it to restore step 1, but the Cancel link at the bottom of the form
+        // already performs that function.
+        if (this.formSteps == 1) {
+        	this.addNew.prepend('<a class="close" href="#">cancel</a>');
+        }
+        this.close = this.form.find('.close');
+        
     },
     
     initForm: function() {
-        
+    	
     	//Adding a new entry
-        if (this.editType == 'add') { 
+        if (this.editType === 'add') { 
             this.initAddForm();    
         // Editing an existing entry
         } else { 
             this.initEditForm();
         } 
-    },
-    
-    addRequiredHints: function() {
-        
-        var requiredHintText = '<span class="requiredHint"> *</span>',
-            labels = this.existing.find('label.required').add(this.addNew.find('label.required'));
-
-        	labels.each(function() {
-        		var el = $(this),
-        			labelText = el.html(), 
-        			newLabelText = labelText + requiredHintText;
-
-                el.html(newLabelText);        		
-        	});       
     },
         
     /***** ADD form *****/
@@ -137,14 +141,15 @@ var customForm = {
     	this.defaultButtonText = 'Create ' + this.entryType;
     	this.addNewButtonText = 'Create ' + this.secondaryType + ' & ' + this.entryType;
     	
-        // If there are validation errors on the page, we're returning from 
-        // an attempted submission that failed validation, and we need to go
-        // directly to step 2.
-        if (this.findValidationErrors()) {
-            this.doAddFormStep2();
-        } else {
-            this.doAddFormStep1();
-        }
+    	// If a returnView has been specified in the hidden input field, it means we are
+    	// returning from a failed submission due to validation errors. We need to restore
+    	// the view we were on when the form was submitted.
+    	if (this.returnView) {
+    		this.doAddFormStep2(this.returnView);
+    	} else {
+    		this.doAddFormStep1();
+    	}
+    	
     },
     
     // Reset add form to initial state (step 1) after cancelling out of step 2
@@ -164,13 +169,14 @@ var customForm = {
     	}
     	
     	customForm.existing.show();
-        customForm.existing.find('span.requiredHint').hide();
+        customForm.toggleRequiredHints('hide', customForm.existing);
     	customForm.addNewLink.show();
-    	customForm.addNew.hide();
-    	customForm.entry.hide();    
+    	customForm.hideFields(customForm.addNew);
+    	customForm.hideFields(customForm.entry);   
     	customForm.requiredLegend.hide();
     	customForm.button.hide(); 
     	customForm.or.hide();
+    	customForm.setReturnView(customForm.views.ADD_STEP_ONE);
         
         // Assign event listeners 
     	customForm.existingSelect.bind('change', function() {
@@ -190,21 +196,18 @@ var customForm = {
     // from a failed submission due to validation errors, and will attempt to
     // determine the previous view from the form data that's been entered.
     doAddFormStep2: function(view) {
-
-    	if (!view) {
-    		view = customForm.getPreviousViewFromFormData();
-    	}
         
     	switch (view) {
-			case customForm.views.SELECT_EXISTING: { fn = this.doAddFormStep2SelectExisting; break; }
-    		case customForm.views.ADD_NEW: { fn = this.doAddFormStep2AddNew; break; }
-    		default: { fn = this.doAddFormStep2Combined; break; }
+			case customForm.views.SELECT_EXISTING: { fn = customForm.doAddFormStep2SelectExisting; break; }
+    		case customForm.views.ADD_NEW: { fn = customForm.doAddFormStep2AddNew; break; }
+    		default: { fn = customForm.doAddFormStep2Combined; break; }
     	}
 
         fn.call(customForm);  
         
         customForm.button.show();
         customForm.or.show();
+        customForm.toggleRequiredHints('show', customForm.existing, customForm.addNew);        
     },
 
     // Most methods below use 'customForm' rather than 'this', because 'this' doesn't reference
@@ -219,8 +222,11 @@ var customForm = {
     		return;
     	}
     	customForm.showSelectExistingFields();
+    	// This hint shows in step 2 but not in step 1
+        customForm.toggleRequiredHints('show', customForm.existing);
         customForm.doButtonForStep2(customForm.defaultButtonText);
         customForm.doCancelForStep2();        
+    	customForm.setReturnView(customForm.views.SELECT_EXISTING);
     },
     
     // Step 2: adding a new individual
@@ -230,6 +236,7 @@ var customForm = {
         customForm.doButtonForStep2(customForm.addNewButtonText);
         customForm.doCancelForStep2();
         customForm.doClose();
+    	customForm.setReturnView(customForm.views.ADD_NEW);
     },
     
     // Step 2: combined view, when we are returning from validation errors and we
@@ -240,46 +247,49 @@ var customForm = {
         customForm.doAddNewLinkForCombinedView();        
         customForm.doButtonForStep2(customForm.defaultButtonText);        
         customForm.doCancelForStep2();
+    	customForm.setReturnView(customForm.views.COMBINED);
     },
     
 
     /***** Edit form *****/
 
     initEditForm: function() {
-
-    	var view;
     	
     	this.defaultButtonText = 'Save Changes';
     	this.addNewButtonText = 'Create ' + this.secondaryType + ' & Save Changes';
+    	this.toggleRequiredHints('show', this.existing);
     	
-        // If there are validation errors on the page, we're returning from 
-        // an attempted submission that failed validation, and we need to go
-        // directly to step 2.
-        if (this.findValidationErrors()) {
-        	view = this.getPreviousViewFromFormData();
-        	
-        	switch (view) {
-    			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
-    			default: { fn = this.doEditFormDefaultView; break; }
-        	}
-        } else {
-        	fn = this.doEditFormDefaultView;
-        }    
+    	switch (this.returnView) {
+			case this.views.ADD_NEW: { fn = this.doEditFormAddNew; break; }
+			default: { fn = this.doEditFormCombinedView; break; }
+    	}
+    	
+    	// Remember the original org. If we click the add new org link
+    	// but then cancel out of it, we want to restore this value.
+    	this.originalOrg = this.existingSelect.val();
+    	// But we only want to restore the original value from when the
+    	// form loaded. If we've already changed to a new value, we don't
+    	// want to restore that.
+    	this.existingSelect.bind('change', function() {
+    		customForm.originalOrg = null;
+        });
+  
         fn.call(customForm);        
     },
     
     doEditFormAddNew: function() {   	
     	this.showAddNewFields();
-    	this.button.val(this.addNewButtonText);   	
+    	this.button.val(this.addNewButtonText);  
+    	this.setReturnView(this.views.ADD_NEW);
+    	this.doClose();
     },
     
-    doEditFormDefaultView: function() {    	
+    doEditFormCombinedView: function() {    	
     	this.showCombinedFields();
     	this.button.val(this.defaultButtonText);   
     	this.doAddNewLinkForCombinedView();
+    	this.setReturnView(this.views.COMBINED);
     },
-    
-    /***** Utilities *****/
  
     unbindEventListeners: function() {
     	customForm.cancel.unbind('click');
@@ -287,26 +297,6 @@ var customForm = {
     	customForm.addNewLink.unbind('click');  
     	customForm.close.unbind('click');
     	customForm.existingSelect.unbind('change');
-    },
-    
-    clearFormData: function() {
-    	customForm.clearFields(customForm.form);
-    },
-    
-    // Clear data from form elements in element el
-    clearFields: function(el) {
-    	el.find(':input[type!="hidden"][type!="submit"][type!="button"]').val('');
-        
-        // For now we can remove the error elements. Later we may include them in
-        // the markup, for customized positioning, in which case we will empty them
-        // but not remove them here. See findValidationErrors().  
-        el.find('.validationError').remove();    	
-    }, 
-    
-    hideFields: function(el) {
-        // Clear any input, so if we reshow the element the input won't still be there.
-        customForm.clearFields(el);
-        el.hide();
     },
 
     // Add event listener to the submit button in step 2
@@ -343,13 +333,12 @@ var customForm = {
             customForm.addNew.show();
             customForm.button.val(customForm.addNewButtonText);            	
             customForm.doClose();
+            customForm.setReturnView(customForm.views.ADD_NEW);
             return false;
         });  
     },
     
     doClose: function() {
-
-    	if (customForm.formSteps > 1) { return; }
 
     	customForm.close.unbind('click');
     	customForm.close.bind('click', function() {
@@ -360,33 +349,14 @@ var customForm = {
     		customForm.addNewLink.show();
     		customForm.button.val(customForm.defaultButtonText);
     		customForm.doAddNewLinkForCombinedView();
+    		customForm.setReturnView(customForm.views.COMBINED);
+    		
+    		if (customForm.originalOrg) {
+    			customForm.existingSelect.val(customForm.originalOrg);
+    		}
+    		
     		return false;
-    	});
-    },
-    
-    // Return true iff there are validation errors on the form
-    findValidationErrors: function() {
-
-        return customForm.form.find('.validationError').length > 0;
-    	
-// RY For now, we just need to look for the presence of the error elements.
-// Later, however, we may generate empty error messages in the markup, for
-// customized positioning, in which case we need to look for whether they have 
-// content. See clearFormData().
-//    	var foundErrors = false,
-//    	    errors = this.form.find('.validationError'),
-//    	    numErrors = errors.length,
-//    	    i,
-//    	    error;
-//    	
-//    	for (i = 0; foundErrors == false && i < numErrors; i++) {
-//    		error = errors[i];
-//    		if (error.html() != '') {
-//    			foundErrors = true;
-//    		}
-//    	}
-//    	
-//    	return foundErrors;
+    	});   	
     },
     
     resetForm: function() {
@@ -400,19 +370,26 @@ var customForm = {
     
     showSelectExistingFields: function() {
     	
-        customForm.existing.show();
-        customForm.existing.find('span.requiredHint').show();
+    	customForm.existing.show();
         customForm.addNewLink.hide();
-        customForm.addNew.hide();
+        customForm.hideFields(customForm.addNew);
         customForm.showFieldsForAllViews();
+        
+        // Adjust the validation error that has been inserted by the server, which
+        // is phrased appropriately for the non-Javascript version of the form.
+        $('#organizationUri_validationError').html('Must select an organization.'); 
     },
     
     showAddNewFields: function() {
 
-        customForm.existing.hide();
+    	customForm.hideFields(customForm.existing);
         customForm.addNewLink.hide();
         customForm.addNew.show();
-        customForm.showFieldsForAllViews();      
+        customForm.showFieldsForAllViews();  
+        
+        // Adjust the validation error that has been inserted by the server, which
+        // is phrased appropriately for the non-Javascript version of the form.
+        $('#newOrgName_validationError').html('Must specify an organization.'); 
     },
     
     // This version of the form shows both the existing select and add new link.
@@ -424,7 +401,7 @@ var customForm = {
     	customForm.existing.show();
     	customForm.addNewLink.show();
     	customForm.addNewLink.css('margin-bottom', '1em');
-    	customForm.addNew.hide();       
+    	customForm.hideFields(customForm.addNew);      
         customForm.showFieldsForAllViews();
     },
     
@@ -434,43 +411,31 @@ var customForm = {
         customForm.requiredLegend.show();     	
     },
     
-    // When returning to the add/edit form after a failed form submission (due to 
-    // validation errors), attempt to determine which view the form was on when
-    // submitted, based on the form data present.
-    getPreviousViewFromFormData: function() {
+    toggleRequiredHints: function(action /* elements */) {
     	
-    	// NB ':input' selector includes select elements
-        var existingInputs = this.existing.find(':input'),
-        	existingInputsLen = existingInputs.length,
-        	addNewInputs = this.addNew.find(':input'),
-        	addNewInputsLen = addNewInputs.length,
-        	input,
-        	i,
-        	view = null;
+    	var hints,
+    	    selector = 'span.requiredHint',
+    	    numArgs = arguments.length;
+    	
+    	if (numArgs < 2) {
+    		return;
+    	}
+    	hints = arguments[1].find(selector);
+    	for (var i = 2; i < numArgs; i++) { 
+    		hints.add(arguments[i].find(selector));
+    	}
+
+    	action == 'show' ? hints.show() : hints.hide();
+    },
     
-	    // If a value was entered in the addNew section, go back to the addNew view
-	    for (i = 0; i < addNewInputsLen; i++) {
-	        input = $(addNewInputs[i]);
-	        if (input.val() != '') {
-	            view = customForm.views.ADD_NEW;
-	            break;
-	        }
-	    }
-	    
-	    // If a value was selected in the existing section, go back to the existing view
-	    if (view === null) {
-	        for (i = 0; i < existingInputsLen; i++) {
-	            input = $(existingInputs[i]);
-	            if (input.val() != '') {
-	                view = customForm.views.SELECT_EXISTING;
-	                break;
-	            }
-	        }
-	    }  
-	    return view;
-    } 
+    // Set the hidden input field indicating the view to return to if
+    // the submission fails due to validation errors.
+    setReturnView: function(value) {
+    	customForm.returnViewField.val(value);
+    }
+
 };
 
-$(document).ready(function(){   
+$(document).ready(function() {   
     customForm.onLoad();
 });

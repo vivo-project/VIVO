@@ -13,6 +13,7 @@
 @import url("blueprint/liquid.css");
 @import url("blueprint/ie.css");
 @import url("institution.css");
+@import url("individual.css");
 
 body {
   position: relative;
@@ -32,6 +33,7 @@ body {
   padding: 16px 12px;
   background: #fff;
   font-size: 108.33%; /* bumping up content text from 12px to 13px */
+  min-height:350px;
 }
 
 #footer {
@@ -43,6 +45,18 @@ body {
   clear: both;
 }
 
+#research_instance {
+	background-color:red;
+	color:white;
+	font-size:1.25em;
+	font-weight:bold;
+	text-align:center;
+}
+
+#research_instance a {
+	color:white;
+}
+	
 /****************
 Global classes
 ****************/
@@ -101,9 +115,14 @@ ul#otherMenu li {
   margin-left: 4px;
 }
 
-ul#otherMenu li.border {
+ul#otherMenu li {
   padding-right: 4px;
   border-right: 1px solid #ccc;
+}
+
+ul#otherMenu li.last {
+  padding-right: 0;
+  border-right: none;
 }
 
 
@@ -246,13 +265,10 @@ a.externalLink:active {
 
 a.externalLink { color: #84a655; }
 
-#dprop-vitro-image div.citation {
-    margin-top: .5em;   
-}
-
 div.description { margin-bottom: 1.5em; }
 
-.propertyName {
+.propertyName,
+.propsItem h4 {
   font-size: 1em;
   line-height: 1em;
   color: #666;
@@ -262,6 +278,8 @@ div.description { margin-bottom: 1.5em; }
 /*  margin-bottom: .75em;*/
   padding: 4px 12px;
   float: left;
+  /* Fixes in IE6 the cut off text for data and object property names for individual display property groups. */
+  *padding-left:24px !important;
 }
 
 .propsItem,
@@ -329,9 +347,23 @@ ul.tabEntities li {
 ul.tabEntities a { font-weight: bold; }
 
 ul.tabEntities a.externalLink, 
-.entityList a.externalLink {
+.individualList a.externalLink {
   text-decoration: none;
   font-weight: normal;
+}
+
+.individualList ul.individualData {
+    display: inline;
+}
+
+.individualList ul.individualData li {
+    display: inline;
+    border-right: solid 1px #a0a0a0;
+    padding-right: .3em;
+}
+
+.individualList ul.individualData li.last {
+    border: none;
 }
 
 div.blurb { color: #999; }
@@ -340,21 +372,21 @@ div.blurb a { font-weight: normal; }
 
 /* Index and List pages */
 .siteMap ul,
-.entityList ul { margin-left: 0; }
+.individualList ul { margin-left: 0; }
 
 .siteMap li { 
   list-style-type: none; 
   color: #9c9c9c;
 }
 
-.entityList li { 
+.individualList li { 
   list-style-type: none;
   color: #9c9c9c;
   margin-bottom: .5em;
  }
  
 .siteMap li a,
-.entityList li a { font-weight: bold; }
+.individualList li a { font-weight: bold; }
  
 .siteMap h2 { margin-bottom: .5em; }
 
@@ -602,7 +634,7 @@ a.add {
 
 a.add:hover {
   background-image: url(../site_icons/plus_transparent_hover.gif);
-  background-color: #000; 
+  background-color: #576772; 
 }
 
 ul.properties { margin: 0; }
@@ -689,4 +721,96 @@ em.note {
 h3.associate {
   margin-bottom: 0;
   text-align: left;
+}
+
+/************************
+Upload Images
+************************/
+
+div.thumbnail img { 
+border:3px solid #d5d5d5;
+}
+
+/************************
+Miscellaneous
+************************/
+
+.clear{
+clear:both;
+}
+
+.hidden{
+display:none !important;
+}
+
+
+/************************
+style for those with javascript disable
+************************/
+
+#javascriptDisableWrapper, ie67DisableWrapper{
+margin-top:15px;
+width:500px;
+height:300px;
+}
+
+#javascriptDisableContent, #ie67DisableContent{
+width:500px;
+height:100px;
+border:3px solid #bee6f8;
+}
+#ie67DisableContent{
+width:80%;
+margin-bottom:200px;
+}
+#javascriptDisableContent img, #ie67DisableContent img{
+float:left;
+margin-top:36px;
+margin-left:30px;
+}
+
+#javascriptDisableContent p, #ie67DisableContent p{
+font-size:1.1em;
+color:#384c5d;	
+line-height:100px;
+padding-left:65px;
+}
+#ie67DisableContent p{
+line-height:normal;
+padding-top:36px;
+}
+
+
+/* styles for error alerts */
+
+#errorAlert{
+	color:#900;
+	padding:0px;
+	margin-bottom:5px;
+	height:30px;
+	
+}
+
+
+#errorAlert img{
+	float:left;
+	margin:0;
+	padding:0;
+
+	
+	
+}
+
+#errorAlert  p{
+padding-left:40px;
+font-size:0.9em;
+
+
+}
+
+/* styles for contact us page */
+
+.contactUsReturnHome{
+margin-top:30px;
+margin-bottom:250px;
 }

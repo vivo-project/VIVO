@@ -14,11 +14,11 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPositionValidator"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPositionValidator"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -30,14 +30,6 @@
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
-    
-    String flagURI = null;
-    if (vreq.getAppBean().isFlag1Active()) {
-        flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagURI = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagURI",flagURI);
     
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
@@ -120,16 +112,14 @@
     ?person      core:personInPosition  ?positionUri .
     
     ?positionUri core:positionForPerson ?person ;
-                 a  ?positionType ,
-                    <${flagURI}> .
+                 a  ?positionType .
 </v:jsonset>
 
 <v:jsonset var="n3ForNewOrg">
     ?positionUri <${positionInOrgPred}> ?newOrg .
     
     ?newOrg <${label}> ?newOrgName ;
-            a ?newOrgType ,
-              <${flagURI}> ;
+            a ?newOrgType ;
             <${orgForPositionPred}> ?positionUri .
 
 </v:jsonset>
@@ -281,6 +271,7 @@
     if (objectUri != null) { // editing existing entry
 %>
         <c:set var="editType" value="edit" />
+        <c:set var="formSteps" value="1" />
         <c:set var="title" value="Edit position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Save changes" />
@@ -288,23 +279,27 @@
     } else { // adding new entry
 %>
         <c:set var="editType" value="add" />
-        <c:set var="title" value="Create a new position entry for ${subjectName}" />
+        <c:set var="formSteps" value="2" />
+        <c:set var="title" value="Create position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Create position" />
 <%  } 
     
-    List<String> customJs = new ArrayList<String>(Arrays.asList("forms/js/customForm.js"
-                                                                //, "forms/js/customFormTwoStep.js"
+    List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",            
+                                                                "/js/customFormUtils.js",           
+                                                                "/edit/forms/js/customForm.js"
+                                                                //, "/edit/forms/js/customFormTwoStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
-    List<String> customCss = new ArrayList<String>(Arrays.asList("forms/css/customForm.css"
-                                                                 , "forms/css/personHasPositionHistory.css"
+    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css"
+                                                                 , "/edit/forms/css/personHasPositionHistory.css"
                                                                  ));
     request.setAttribute("customCss", customCss);   
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+<c:set var="view" value='<%= vreq.getAttribute("view") %>' />
 
 <jsp:include page="${preForm}" />
 
@@ -314,7 +309,7 @@
 
     <div class="relatedIndividual">
         <div class="existing">
-            <v:input type="select" label="Select Existing Organization" labelClass="required" id="organizationUri"  /><span class="existingOrNew">or</span>
+            <v:input type="select" label="Select Existing Organization ${requiredHint}" id="organizationUri"  /><span class="existingOrNew">or</span>
         </div>
     
         <div class="addNewLink">
@@ -323,8 +318,8 @@
       
         <div class="new">
             <h6>Add a New Organization</h6>
-            <v:input type="text" label="Organization Name" labelClass="required" id="newOrgName" size="30" />
-            <v:input type="select" label="Select Organization Type" labelClass="required" id="newOrgType" />
+            <v:input type="text" label="Organization Name ${requiredHint}" id="newOrgName" size="30" />
+            <v:input type="select" label="Select Organization Type ${requiredHint}" id="newOrgType" />
         </div>   
     </div>   
     
@@ -342,9 +337,10 @@
     <input type="hidden" name="secondaryType" value="organization" />
     <%-- RY If set steps to 1 when editType == 'edit', may be able to combine the
     step 1 and edit cases in the Javascript.  --%>
-    <input type="hidden" name="steps" value="2" />
+    <input type="hidden" name="steps" value="${formSteps}" />
+    <input type="hidden" name="view" value="${view}" />
        
-    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="true"/></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>

@@ -1,0 +1,198 @@
+
+-------------------------------------------------------------------------------
+
+Upgrading NIH VIVO
+ 
+Steps to Upgrade from Release 1 Version 0.9 to Release 1 Version 1.0
+
+This file provides a short description of the steps involved in upgrading your 
+installation of NIH VIVO from Release 1 Version 0.9 to Release 1 Version 1.0.
+This and other documentation can be found at:
+
+http://vivoweb.org/support
+
+Installation:
+If you need to do a fresh install, please consult the install.txt in this 
+directory.
+
+-------------------------------------------------------------------------------
+
+I. Before Performing the Upgrade
+II. The Upgrade Process
+III. Ontology Changes
+
+-------------------------------------------------------------------------------
+
+I. Before Performing the Upgrade
+
+Please read the bullet points below BEFORE beginning the upgrade. 
+
+The upgrade process is similar to the original install process with the following 
+exceptions:
+
+* DO NOT reinstall MySQL or recreate the MySQL database. Please ensure that 
+    you back-up the MySQL database.
+* It is not necessary to add RDF data or reconfigure the Apache HTTP Server.
+* First-time login of the administrator account will use the password 
+    previously set, NOT the password in deploy.properties.
+* Any image files that have been uploaded into the system will not be disturbed 
+    by the upgrade.
+* The first time Apache Tomcat starts up after the upgrade, it will 
+    initiate a process that modifies the knowledge base to align the data 
+    with the revised ontology. See the section on "Ontology Changes"
+    below for  more information.
+    
+-------------------------------------------------------------------------------
+
+II. The Upgrade Process
+
+
+1. Ensure that backups are created of the Tomcat webapps directory, the 
+    original source directory, and the MySQL database.
+
+2. Download the new distribution file and unpack it into a new source directory.
+
+3. Create deploy.properties, using the same values as in your original 
+    installation. Be aware that deploy.properties now requires an additional 
+    property:
+       vitro.core.dir = ./vitro-core
+    The file example.deploy.properties has been modified to show this. 
+
+4. Apply any changes you have made to the new source directory.
+
+   Note: In many cases, simply copying the modified files from your original 
+      source directory will not work since the files on which they are based 
+      have changed. It will be necessary to inspect the new source files and 
+      add any changes to them at that time.
+      
+   Note: At a minimum it will be necessary to apply the Google Analytics Tracking 
+      code to footer.jsp in the theme:
+             [new_source_directory]/themes/[theme_dir]/jsp/footer.jsp
+      For additional information and a copy your institution's tracking code, 
+        see the Google Analytics wiki page.
+        https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI
+        
+   Note: Version 1 Release 0.9 contained two directories called "modifications"
+      and "ontology". These directories have been combined into a directory 
+      called "productMods". If your site has made changes to the ontology 
+      ensure that those changes are moved into the appropriate subdirectory of
+      "productMods".
+      
+   Note: This process assumes any changes made to the application were made in 
+      the source directory and deployed, and were not made directly within 
+      Apache Tomcat webapp.
+      
+5. If you had modified web.xml to configure the Pellet Reasoner (as described
+    in the installation instructions), repeat that modification.
+
+6. Stop "Apache Tomcat" and run ant deploy by typing: ant deploy
+
+7. If you have setup the Apache Tomcat Connector using mod_jk and modified your
+	tomcat/conf/server.xml file, you will need to add 4 lines to your context
+	section, see examples below.
+	
+	Context section before:
+	
+	<Context path=""
+		docBase="/usr/local/tomcat/webapps/vivo"
+		reloadable="true"
+		cookies="true" >
+	</Context>
+	
+	Context section after:
+	
+	<Context path=""
+		docBase="/usr/local/tomcat/webapps/vivo"
+		reloadable="true"
+		cookies="true" >
+		<Environment type="java.lang.String" override="false" 
+			name="path.configuration" 
+			value="deploy.properties"
+		/>
+	</Context>
+	
+	Also, if you have these 3 lines in your Apache virtual host configuration, 
+	please remove them!
+	
+	<Location "/edit/forms">
+        deny from all
+    <Location>
+
+8. Start "Apache Tomcat" and login to VIVO.
+
+9. Rebuild the Lucene search index as described in step IX of
+the install process. This step will ensure that changes in the RDF
+data to align with the latest version of the core ontology
+will be reflected in the search index.
+
+-------------------------------------------------------------------------------
+
+III. Ontology Changes
+
+
+Changes to the VIVO core ontology may require corresponding
+modifications of the knowledge base instance data and local ontology
+extensions.
+
+When Apache Tomcat starts up following the upgrade, it will initiate 
+a process to examine the knowledge base and apply necessary changes.
+Not all of the modifications that may be required can be automated,
+so manual review of the knowledge base is recommended after the
+automated upgrade process. The automated process will make only 
+the following types of changes:
+
+  Class or Property renaming
+    All references to the class (in the subject or object position) will
+    be updated to the new name. References to the property will be
+    updated to the new name.
+  
+  Class or Property deletion
+    All individuals in a deleted class will be changed to
+    belong to the nearest available superclass (which may be owl:Thing).
+   
+    All statements using a deleted property will be changed
+    to use the nearest available superproperty. If there is no available
+    superproperty then the statement will be deleted from the
+    knowledge base. Note that all removed and added data
+    is recorded in the files in the changedData directory.
+    
+  Class or Property addition
+    If a newly added class has a superclass and there are
+    individuals in that superclass, then a note will be
+    added to the log file suggesting review of those individuals to
+    see if they should be reasserted in the newly added class.
+  
+    If a newly added property has a superproperty and there are
+    statements using the superproperty, then a note will be added to
+    the log file suggesting review of those statements to see if they
+    should be reasserted using the newly added property.
+
+  Annotation property default values
+    It a site has modified the value of a vitro annotation (such as
+    displayRankAnnot or displayLimitAnnot) so that it is
+    no longer using the default, then that setting will be left unchanged.
+    If a site is using the default value of a vitro annotation, and the
+    default has been changed in the new version of the ontology, then
+    the new default value will be propagated to the knowledge base.
+  
+The ontology alignment process will create the following files in the
+Tomcat webapps/vivo/WEB-INF directory:
+
+ontologies/update/logs/knowledgeBaseUpdate.log 
+    a log of a summary of updates that were made to the knowledge base and notes 
+    about some recommended manual reviews. This file should end with
+    "Successfully finished processing ontology changes".
+    
+ontologies/update/logs/knowledgeBaseUpdate.error.log 
+    a log of errors that were encountered during the upgrade process. This file
+    should be empty if the upgrade was successful.
+    
+ontologies/update/changedData/removedData.n3
+    an N3 file containing all the statements that were removed from the knowledge base.
+    
+ontologies/update/changedData/addedData.n3
+    an N3 file containing all the statements that were added to the knowledge base.
+
+    
+After Apache Tomcat is started, these files should be reviewed to verify that
+the automated upgrade process was executed successfully.

@@ -71,17 +71,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>testAdmin</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
+	<td>loginPassword</td>
 	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
@@ -132,7 +132,7 @@
 <tr>
 	<td>select</td>
 	<td>ParentURI</td>
-	<td>label=time (event)</td>
+	<td>label=timeIntervalFor (core)</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -165,11 +165,6 @@
 	<td>visiting hours</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>RangePublic</td>
-	<td>visiting hours for</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>NamespaceInverse</td>
 	<td>label=Bibontology</td>
@@ -178,6 +173,16 @@
 	<td>select</td>
 	<td>DomainVClassURI</td>
 	<td>label=Museum (VIVO core)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LocalNameInverse</td>
+	<td>visitingHoursFor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>RangePublic</td>
+	<td>visiting hours for</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -196,7 +201,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Create New Record']</td>
+	<td>primaryAction</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,7 +221,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=exact:event:time</td>
+	<td>link=exact:core:timeIntervalFor</td>
 	<td></td>
 </tr>
 <tr>
@@ -255,18 +260,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='See All Properties']</td>
+	<td>verifyTextPresent</td>
+	<td>unspecified</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Object Properties</td>
+	<td>verifyTextPresent</td>
+	<td>true</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=visiting hours</td>
+	<td>verifyTextPresent</td>
+	<td>false</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://purl.org/ontology/bibo/visitingHours</td>
 	<td></td>
 </tr>
 <tr>

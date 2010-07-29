@@ -41,6 +41,11 @@
 	-->
 	<property name="skip.core.themes" value="true" />
 
+	<!--
+		Tell the licenser where to find its properties for this product.
+	-->
+	<property name="licenser.product.properties.file"
+	          location="config/licenser/licenser.properties" />
 
 	<!--
 		Now get the standard product-build file.
@@ -48,82 +53,13 @@
 	<import file="${vitro.core.dir}/webapp/product-build.xml" />
 
 	<!-- ================================= 
-          target: acceptance             
-          
-          Hudson (continuous integration) 
-          uses this to run the acceptance 
-          tests. 
+          target: acceptance              
          ================================= -->
-	<target name="acceptance" description="--> Run the acceptance tests">
-		<property name="acceptance.properties.file"
-		          location="utilities/acceptance-tests/script/acceptance_test.properties" />
-		<fail message="You must create a &quot;${acceptance.properties.file}&quot; file.">
-			<condition>
-				<not>
-					<available file="${acceptance.properties.file}" />
-				</not>
-			</condition>
-		</fail>
-
-		<property name="acceptance.script.directory" location="utilities/acceptance-tests/script" />
-
-		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
-			<arg value="run_acceptance_tests.rb" />
-			<arg value="${acceptance.properties.file}" />
-			<redirector outputproperty="acceptance.test.output" alwayslog="true" />
-		</exec>
-
-		<fail message="Errors were detected in the console output from the acceptance tests.">
-			<condition>
-				<or>
-					<contains string="${acceptance.test.output}"
-					          substring="error"
-					          casesensitive="false" />
-					<contains string="${acceptance.test.output}"
-					          substring="exception"
-					          casesensitive="false" />
-				</or>
-			</condition>
-		</fail>
-
-		<exec executable="ruby" dir="${acceptance.script.directory}" failonerror="true">
-			<arg value="output_manager.rb" />
-			<arg value="${acceptance.properties.file}" />
-		</exec>
+	<target name="acceptance" description="--> Run the Selenium acceptance tests.">
+		<ant dir="${vitro.core.dir}/utilities/testrunner" target="run" inheritall="false">
+			<property name="acceptance.dir" location="${basedir}/utilities/acceptance-tests" />
+			<property name="acceptance.batch" value="${acceptance.batch}" />
+		</ant>
 	</target>
 
-	<!-- ================================= 
-          target: licenser             
-          
-          Hudson (continuous integration) 
-          uses this to check that all 
-          appropriate files have license tags. 
-         ================================= -->
-	<target name="licenser" description="--> Check licensing tags">
-		<property name="licenser.script.directory" location="utilities/release-tools" />
-
-		<property name="licenser.properties.file"
-		          location="${licenser.script.directory}/licenser.properties" />
-		<fail message="You must create a &quot;${licenser.properties.file}&quot; file.">
-			<condition>
-				<not>
-					<available file="${licenser.properties.file}" />
-				</not>
-			</condition>
-		</fail>
-
-		<exec executable="ruby" dir="${licenser.script.directory}" failonerror="true">
-			<arg value="licenser.rb" />
-			<arg value="${licenser.properties.file}" />
-			<redirector outputproperty="licenser.test.output" alwayslog="true" />
-		</exec>
-
-		<fail message="Errors were detected in the console output from the licenser.">
-			<condition>
-				<contains string="${licenser.test.output}"
-				          substring="WARN: Found no license tag"
-				          casesensitive="false" />
-			</condition>
-		</fail>
-	</target>
 </project>

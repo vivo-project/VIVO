@@ -17,15 +17,7 @@
 <%
 	VitroRequest vreq = new VitroRequest(request);
 	WebappDaoFactory wdf = vreq.getWebappDaoFactory();
-	vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior	
-	
-    String flagURI = null;
-    if (vreq.getAppBean().isFlag1Active()) {
-        flagURI = VitroVocabulary.vitroURI+"Flag1Value"+vreq.getPortal().getPortalId()+"Thing";
-    } else {
-        flagURI = wdf.getVClassDao().getTopConcept().getURI();  // fall back to owl:Thing if not portal filtering
-    }
-    vreq.setAttribute("flagURI",flagURI);    
+	vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior	  
 %>
 
 <v:jsonset var="personClassUri">http://xmlns.com/foaf/0.1/Person</v:jsonset>
@@ -68,7 +60,7 @@
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
 <v:jsonset var="personUriExisting" >      
 	SELECT ?existingPersonUri WHERE {
-		?positionUri <http://vivoweb.org/ontology/core#???> ?existingPersonUri }
+		?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?existingPersonUri }
 </v:jsonset>
 <v:jsonset var="personUriAssertion" >      
 	?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?personUri .
@@ -80,8 +72,7 @@
     @prefix core: <http://vivoweb.org/ontology/core#>.    
 	?organizationUri core:organizationForPosition  ?positionUri .
 	?positionUri     core:positionInOrganization   ?organizationUri .	
-    ?positionUri rdf:type               core:Position .
-    ?positionUri rdf:type <${flagURI}> .    
+    ?positionUri rdf:type               core:Position .    
 </v:jsonset>
 
 <c:set var="editjson" scope="request">
@@ -185,8 +176,8 @@
 		request.setAttribute("title","Edit position history entry for "+ subject.getName());
 		submitLabel = "Save changes";
 	} else {
-		request.setAttribute("title","Create a new position history entry for " + subject.getName());
-		submitLabel = "Create new position history entry";
+		request.setAttribute("title","Create position history entry for " + subject.getName());
+		submitLabel = "Create position history entry";
 	}
 %>
 
@@ -198,7 +189,7 @@
 	<v:input type="select" label="person" id="personUri"  />
     <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>
     <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
-    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="${param.subjectUri}"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="true"/></p>
 </form>
 
 <jsp:include page="${postForm}"/>

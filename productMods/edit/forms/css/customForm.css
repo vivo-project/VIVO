@@ -1,9 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#content form {
-/*    width: 50%;*/
-}
-
 #content form div {
     clear: left;
 }
@@ -20,6 +16,11 @@
     width: 200px;
     padding: 0.8em;
     border: 1px solid #9c9c9c;
+    display: none; /* Hide if Javascript disabled. Javascript will show. */
+}
+
+#content form .existing span.requiredHint, 
+#content form .new span.requiredHint {
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
 
@@ -95,11 +96,22 @@ option {
 
 #content form a.close:link, 
 #content form a.close:visited {
-    /*display: none;  Hide if Javascript disabled. Javascript will show. */
     border-color: #FF7700;
     color: #FF7700;
 }
 
 #content form textarea {
     width: 30%;
+}
+
+/* fix bad alignment in IE 6 and 7 */
+.or, .cancel{
+vertical-align:top;
+}
+
+/* Message displayed for an unsupported browser. Hide on page load; JavaScript
+ * shows if needed.
+ */
+#ie67DisableWrapper {
+    display: none;
 }
