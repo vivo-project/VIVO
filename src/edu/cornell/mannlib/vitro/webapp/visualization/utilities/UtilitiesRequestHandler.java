@@ -92,7 +92,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
     				
     			} catch (MalformedQueryParametersException e) {
     				try {
-    					handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
+    					handleMalformedParameters(e.getMessage(), 
+    											  vitroRequest, 
+    											  request, 
+    											  response, 
+    											  log);
     				} catch (ServletException e1) {
     					log.error(e1.getStackTrace());
     				} catch (IOException e1) {
@@ -141,7 +145,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
     				
     			} catch (MalformedQueryParametersException e) {
     				try {
-    					handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
+    					handleMalformedParameters(e.getMessage(), 
+    											  vitroRequest, 
+    											  request, 
+    											  response, 
+    											  log);
     				} catch (ServletException e1) {
     					log.error(e1.getStackTrace());
     				} catch (IOException e1) {
