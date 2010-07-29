@@ -105,15 +105,22 @@ public class VisualizationController extends BaseEditController {
 	public VisualizationController() {
 		super();
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-											"META-INF/visualizations-beans-injection.xml");
+		try {
+			ApplicationContext context = new ClassPathXmlApplicationContext(
+			"WEB-INF/visualization/visualizations-beans-injection.xml");
 
-		BeanFactory factory = context;
-		VisualizationInjector visualizationInjector = (VisualizationInjector) factory
-				.getBean("visualizationInjector");
-		
-		visualizationIDsToClass = visualizationInjector.getVisualizationIDToClass();
-		
+			BeanFactory factory = context;
+			
+			VisualizationInjector visualizationInjector = 
+					(VisualizationInjector) factory.getBean("visualizationInjector");
+			
+			visualizationIDsToClass = visualizationInjector.getVisualizationIDToClass();
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+		}
+				
 	}
     
 
