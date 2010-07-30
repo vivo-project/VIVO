@@ -65,7 +65,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 							     dataSource,
 							     log);
         
-        QueryHandler<List<BiboDocument>> publicationQueryManager =
+        QueryHandler<Set<BiboDocument>> publicationQueryManager =
         	new PersonPublicationCountQueryHandler(egoURIParam,
 											   	   dataSource,
 											       log);
@@ -114,15 +114,14 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    		
 			}
 					
-			List<BiboDocument> authorDocuments = publicationQueryManager
+			Set<BiboDocument> authorDocuments = publicationQueryManager
 														.getVisualizationJavaValueObjects();
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
 	    	Map<String, Integer> yearToPublicationCount = 
-	    			((PersonPublicationCountQueryHandler) publicationQueryManager)
-	    					.getYearToPublicationCount(authorDocuments);
+	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
 	    														
 	    	/*
 	    	 * Computations required to generate HTML for the sparklines & related context.

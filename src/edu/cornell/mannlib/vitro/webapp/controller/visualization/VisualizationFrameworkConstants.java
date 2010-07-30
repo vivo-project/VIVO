@@ -4,6 +4,16 @@ package edu.cornell.mannlib.vitro.webapp.controller.visualization;
 
 public class VisualizationFrameworkConstants {
 	
+	/*
+	 * Contains the location of bean containing info on all the visualizations available
+	 * in that instance. Currently it is stored under "productMods/WEB-INF..."
+	 * */
+	public static final String RELATIVE_LOCATION_OF_VISUALIZATIONS_BEAN = 
+									"/WEB-INF/visualization/visualizations-beans-injection.xml";
+	
+	/*
+	 * Vis URL prefix that is seen by all the users
+	 * */
 	public static final String VISUALIZATION_URL_PREFIX = "/visualization";
 	
 	public static final String VIS_TYPE_URL_HANDLE = "vis";

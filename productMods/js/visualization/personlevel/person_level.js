@@ -211,8 +211,13 @@ function visLoaded(nodes){
 
 }
 
+
+function changeVisHeight(newHeight) {
+	$("#CoAuthorVis").css("height", newHeight);
+	$("#bodyPannel").css("height", newHeight);
+}
+
 function createTable(tableID, tableContainer, tableData) {
-	
 	var table = $('<table>');
 	table.attr('id', tableID);
 	
@@ -324,7 +329,7 @@ function renderCoAuthorshipVisualization() {
 				"width", "600",
 				"height", "840",
 				"align", "middle",
-				"id", "CoAuthor",
+				"id", "CoAuthorVis",
 				"quality", "high",
 				"bgcolor", "#ffffff",
 				"name", "CoAuthor",
@@ -341,7 +346,7 @@ function renderCoAuthorshipVisualization() {
 				"width", "600",
 				"height", "850",
 				"align", "top",
-				"id", "CoAuthor",
+				"id", "CoAuthorVis",
 				"quality", "high",
 				"bgcolor", "#ffffff",
 				"name", "CoAuthor",

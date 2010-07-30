@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -56,7 +55,7 @@ public class PersonPublicationCountVisCodeGenerator {
 									  String individualURIParam, 
 									  String visMode, 
 									  String visContainer, 
-									  List<BiboDocument> authorDocuments, 
+									  Set<BiboDocument> authorDocuments, 
 									  Map<String, Integer> yearToPublicationCount, 
 									  SparklineVOContainer valueObjectContainer, 
 									  Log log) {
@@ -79,7 +78,7 @@ public class PersonPublicationCountVisCodeGenerator {
 	
 	private void generateVisualizationCode(String visMode,
 										   String visContainer, 
-										   List<BiboDocument> authorDocuments) {
+										   Set<BiboDocument> authorDocuments) {
 		
     	valueObjectContainer.setSparklineContent(getMainVisualizationCode(authorDocuments, 
     																	  visMode, 
@@ -90,7 +89,7 @@ public class PersonPublicationCountVisCodeGenerator {
     	
 	}
 
-	private String getMainVisualizationCode(List<BiboDocument> authorDocuments,
+	private String getMainVisualizationCode(Set<BiboDocument> authorDocuments,
 										    String visMode, 
 										    String providedVisContainerID) {
 

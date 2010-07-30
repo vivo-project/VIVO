@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
@@ -61,21 +62,20 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
         									VisualizationFrameworkConstants
         											.VIS_CONTAINER_URL_HANDLE);
 
-        QueryHandler<List<BiboDocument>> queryManager =
+        QueryHandler<Set<BiboDocument>> queryManager =
         	new PersonPublicationCountQueryHandler(individualURIParam,
         										   dataSource,
         										   log);
 
 		try {
-			List<BiboDocument> authorDocuments = queryManager.getVisualizationJavaValueObjects();
+			Set<BiboDocument> authorDocuments = queryManager.getVisualizationJavaValueObjects();
 
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
-	    	Map<String, Integer> yearToPublicationCount =
-	    			((PersonPublicationCountQueryHandler) queryManager)
-	    					.getYearToPublicationCount(authorDocuments);
+	    	Map<String, Integer> yearToPublicationCount = 
+	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
 	    	
 	    	/*
 	    	 * In order to avoid unneeded computations we have pushed this "if" condition up.
@@ -165,7 +165,7 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
 
 	private void prepareVisualizationQueryPDFResponse(
 					Individual author,
-					List<BiboDocument> authorDocuments,
+					Set<BiboDocument> authorDocuments,
 					Map<String, Integer> yearToPublicationCount, 
 					HttpServletResponse response) {
 		
@@ -227,7 +227,7 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
 
 	private void prepareVisualizationQueryDataResponse(
 						Individual author,
-						List<BiboDocument> authorDocuments,
+						Set<BiboDocument> authorDocuments,
 						Map<String, Integer> yearToPublicationCount, 
 						HttpServletResponse response) {
 

@@ -105,7 +105,8 @@ public class VisualizationController extends BaseEditController {
 			
 			String resourcePath = 
 				getServletContext()
-					.getRealPath("/WEB-INF/visualization/visualizations-beans-injection.xml");
+					.getRealPath(VisualizationFrameworkConstants
+							.RELATIVE_LOCATION_OF_VISUALIZATIONS_BEAN);
 			
 			ApplicationContext context = new ClassPathXmlApplicationContext(
 												"file:" + resourcePath);
@@ -118,7 +119,7 @@ public class VisualizationController extends BaseEditController {
 			visualizationIDsToClass = visualizationInjector.getVisualizationIDToClass();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e);
 		}
     }
     
