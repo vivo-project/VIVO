@@ -152,6 +152,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#affiliatedOrganization">
     <rdfs:label xml:lang="en-US">affiliated organization</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl">
+    <rdfs:label xml:lang="en-US">geopolitical.owl</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core">
     <rdfs:label xml:lang="en-US">SKOS (Simple Knowledge Organization System)</rdfs:label>
   </rdf:Description>
@@ -252,7 +255,7 @@
     <rdfs:label xml:lang="en-US">Excerpt</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPublicationVenue">
-    <rdfs:label xml:lang="en-US">publishedIn</rdfs:label>
+    <rdfs:label xml:lang="en-US">published in</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#advisorIn">
     <rdfs:label xml:lang="en-US">advisor in</rdfs:label>
@@ -516,7 +519,7 @@
     <rdfs:label xml:lang="en-US">Webpage</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSubOrganization">
-    <rdfs:label xml:lang="en-US">has organization</rdfs:label>
+    <rdfs:label xml:lang="en-US">has sub-organization</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#InvestigatorRole">
     <rdfs:label xml:lang="en-US">Investigator Role</rdfs:label>
@@ -914,9 +917,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasTimeInterval">
     <rdfs:label xml:lang="en-US">time interval</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#keyword">
-    <rdfs:label xml:lang="en-US">keyword</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Room">
     <rdfs:label xml:lang="en-US">Room</rdfs:label>
   </rdf:Description>
@@ -1112,9 +1112,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#linkedInformationResource">
     <rdfs:label xml:lang="en-US">linked information resource</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicFocusOf">
-    <rdfs:label xml:lang="en-US">international geographic focus of</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/homepage">
     <rdfs:label xml:lang="en-US">homepage</rdfs:label>
   </rdf:Description>
@@ -1123,6 +1120,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Library">
     <rdfs:label xml:lang="en-US">Library</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#internationalGeographicFocusOf">
+    <rdfs:label xml:lang="en-US">international geographic focus of</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#value">
     <rdfs:label xml:lang="en-US">value</rdfs:label>
@@ -1531,9 +1531,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude">
     <rdfs:label xml:lang="en-US">hasMinLatitude</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#presenterInformation">
-    <rdfs:label xml:lang="en-US">presenter information</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#workPhone">
     <rdfs:label xml:lang="en-US">work phone</rdfs:label>
