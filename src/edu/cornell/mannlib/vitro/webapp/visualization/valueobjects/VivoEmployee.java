@@ -9,9 +9,9 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants.Empl
 
 /**
  * 
- * This is the Value Object equivalent for vivo's Employee object type.
+ * This is the equivalent for vivo's Employee object type.
+ * 
  * @author cdtank
- *
  */
 public class VivoEmployee extends Individual {
 
@@ -27,8 +27,8 @@ public class VivoEmployee extends Individual {
 		addParentDepartment(parentDepartment);
 	}
 
-	public String getEmployeeURL() {
-		return this.getIndividualURL();
+	public String getEmployeeURI() {
+		return this.getIndividualURI();
 	}
 
 	public String getEmployeeName() {

@@ -2,14 +2,27 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.apache.commons.lang.StringUtils;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+
+import edu.cornell.mannlib.vitro.webapp.beans.Portal;
+import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 
 public class UtilityFunctions {
 	
@@ -31,8 +44,8 @@ public class UtilityFunctions {
     		 * I am pushing the logic to check for validity of year in "getPublicationYear" itself
     		 * because,
     		 * 	1. We will be using getPub... multiple times & this will save us duplication of code
-    		 * 	2. If we change the logic of validity of a pub year we would not have to make changes
-    		 * all throughout the codebase.
+    		 * 	2. If we change the logic of validity of a pub year we would not have to make 
+    		 * changes all throughout the codebase.
     		 * 	3. We are asking for a publication year & we should get a proper one or NOT at all.
     		 * */
     		String publicationYear;
@@ -57,6 +70,49 @@ public class UtilityFunctions {
 	}
 	
 	/**
+	 * This method is used to return a mapping between publication year & all the co-authors
+	 * that published with ego in that year. 
+	 * @param authorNodesAndEdges
+	 * @return
+	 */
+	public static Map<String, Set<Node>> getPublicationYearToCoAuthors(
+										CoAuthorshipData authorNodesAndEdges) {
+
+		Map<String, Set<Node>> yearToCoAuthors = new TreeMap<String, Set<Node>>();
+		
+		Node egoNode = authorNodesAndEdges.getEgoNode();
+		
+		for (Node currNode : authorNodesAndEdges.getNodes()) {
+					
+				/*
+				 * We have already printed the Ego Node info.
+				 * */
+				if (currNode != egoNode) {
+					
+					for (String year : currNode.getYearToPublicationCount().keySet()) {
+						
+						Set<Node> coAuthorNodes;
+						
+						if (yearToCoAuthors.containsKey(year)) {
+							
+							coAuthorNodes = yearToCoAuthors.get(year);
+							coAuthorNodes.add(currNode);
+							
+						} else {
+							
+							coAuthorNodes = new HashSet<Node>();
+							coAuthorNodes.add(currNode);
+							yearToCoAuthors.put(year, coAuthorNodes);
+						}
+						
+					}
+					
+				}
+		}
+		return yearToCoAuthors;
+	}
+	
+	/**
 	 * Currently the approach for slugifying filenames is naive. In future if there is need, 
 	 * we can write more sophisticated method.
 	 * @param textToBeSlugified
@@ -69,6 +125,33 @@ public class UtilityFunctions {
 											0, 
 											VisConstants.MAX_NAME_TEXT_LENGTH),
 									 textBlockSeparator);
+	}
+	
+	
+	public static void handleMalformedParameters(String errorMessage,
+												 String errorPageTitle,
+												 VitroRequest vitroRequest,
+												 HttpServletRequest request,
+												 HttpServletResponse response,
+												 Log log)
+			throws ServletException, IOException {
+
+		Portal portal = vitroRequest.getPortal();
+
+		request.setAttribute("error", errorMessage);
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
+		request.setAttribute("bodyJsp", "/templates/visualization/visualization_error.jsp");
+		request.setAttribute("portalBean", portal);
+		request.setAttribute("title", errorPageTitle);
+
+		try {
+			requestDispatcher.forward(request, response);
+		} catch (Exception e) {
+			log.error("EntityEditController could not forward to view.");
+			log.error(e.getMessage());
+			log.error(e.getStackTrace());
+		}
 	}
 
 }

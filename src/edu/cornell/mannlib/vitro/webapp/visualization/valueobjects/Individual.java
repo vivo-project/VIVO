@@ -5,15 +5,15 @@ package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 public class Individual {
 	
 	private String individualLabel;
-	private String individualURL;
+	private String individualURI;
 	
-	public Individual(String individualURL, String individualLabel) {
-		this.individualURL = individualURL;
+	public Individual(String individualURI, String individualLabel) {
+		this.individualURI = individualURI;
 		this.individualLabel = individualLabel;
 	}
 	
-	public Individual(String individualURL) {
-		this(individualURL, "");
+	public Individual(String individualURI) {
+		this(individualURI, "");
 	}
 	
 	public String getIndividualLabel() {
@@ -24,8 +24,8 @@ public class Individual {
 		this.individualLabel = individualLabel;
 	}
 
-	public String getIndividualURL() {
-		return individualURL;
+	public String getIndividualURI() {
+		return individualURI;
 	}
 	
 

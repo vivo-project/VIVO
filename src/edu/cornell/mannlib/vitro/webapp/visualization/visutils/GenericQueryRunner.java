@@ -24,10 +24,12 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 
 
 /**
+ * This query runner is used to run a generic sparql query based on the "select", 
+ * "where" & "filter" rules provided to it.  
+ * 
  * @author cdtank
- *
  */
-public class GenericQueryHandler implements QueryHandler<ResultSet> {
+public class GenericQueryRunner implements QueryRunner<ResultSet> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
@@ -38,7 +40,7 @@ public class GenericQueryHandler implements QueryHandler<ResultSet> {
 
 	private Map<String, String> fieldLabelToOutputFieldLabel;
 
-	public GenericQueryHandler(String individualURLParam,
+	public GenericQueryRunner(String individualURLParam,
 							   Map<String, String> fieldLabelToOutputFieldLabel, 
 							   String whereClause,
 							   DataSource dataSource, 
@@ -102,9 +104,8 @@ public class GenericQueryHandler implements QueryHandler<ResultSet> {
 		
 		return sparqlQuery.toString();
 	}
-
 	
-	public ResultSet getVisualizationJavaValueObjects()
+	public ResultSet getQueryResult()
 			throws MalformedQueryParametersException {
 		if (StringUtils.isNotBlank(this.individualURLParam)) {
         	/*
@@ -127,6 +128,4 @@ public class GenericQueryHandler implements QueryHandler<ResultSet> {
 
 		return resultSet;
 	}
-
-
 }

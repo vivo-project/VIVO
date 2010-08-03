@@ -4,13 +4,11 @@ package edu.cornell.mannlib.vitro.webapp.visualization.coauthorship;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,17 +18,24 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
-import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
+/**
+ * This request handler is used when information related to co-authorship network
+ * for an individual is requested. It currently provides 2 outputs,
+ * 		1. Graphml content representing the individual's co-authorship network 
+ * 		1. CSV file containing the list(& count) of unique co-authors with which 
+ * the individual has worked over the years. This data powers the related sparkline.
+ *  
+ * @author cdtank
+ */
 public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 	public void generateVisualization(VitroRequest vitroRequest,
@@ -39,51 +44,41 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 									  Log log, 
 									  DataSource dataSource) {
 
-		String egoURIParam = vitroRequest.getParameter(
+		String egoURI = vitroRequest.getParameter(
         										VisualizationFrameworkConstants
-        												.INDIVIDUAL_URI_URL_HANDLE);
+        												.INDIVIDUAL_URI_KEY);
 
         String renderMode = vitroRequest.getParameter(
         										VisualizationFrameworkConstants
-        												.RENDER_MODE_URL_HANDLE);
+        												.RENDER_MODE_KEY);
         
         String visMode = vitroRequest.getParameter(
         										VisualizationFrameworkConstants
-        												.VIS_MODE_URL_HANDLE);
+        												.VIS_MODE_KEY);
 
-		QueryHandler<CoAuthorshipVOContainer> queryManager =
-        	new CoAuthorshipQueryHandler(egoURIParam,
-						     dataSource,
-						     log);
-
+		QueryRunner<CoAuthorshipData> queryManager =
+        	new CoAuthorshipQueryRunner(egoURI, dataSource, log);
+	
 		try {
+			CoAuthorshipData authorNodesAndEdges = 
+					queryManager.getQueryResult();
 			
-			CoAuthorshipVOContainer authorNodesAndEdges = 
-					queryManager.getVisualizationJavaValueObjects();
-			
-	    	/*
-	    	 * In order to avoid unneeded computations we have pushed this "if" condition up.
-	    	 * This case arises when the render mode is data. In that case we dont want to generate 
-	    	 * HTML code to render sparkline, tables etc. Ideally I would want to avoid this flow.
-	    	 * It is ugly!
-	    	 * */
 	    	
-			if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE
+			if (VisualizationFrameworkConstants.DATA_RENDER_MODE
 					.equalsIgnoreCase(renderMode)) {
 				
 		    	/* 
 		    	 * We will be using the same visualization package for both sparkline & coauthorship
-		    	 * flash vis. We will use "VIS_MODE_URL_HANDLE" as a modifier to differentiate 
-		    	 * between these two. The defualt will be to render the coauthorship network vis.
+		    	 * flash vis. We will use "VIS_MODE_KEY" as a modifier to differentiate 
+		    	 * between these two. The default will be to render the coauthorship network vis.
 		    	 * */ 
-				
-				if (VisualizationFrameworkConstants.SPARKLINE_VIS_MODE_URL_VALUE
+				if (VisualizationFrameworkConstants.SPARKLINE_VIS_MODE
 						.equalsIgnoreCase(visMode)) { 
 	    			/*
 	    			 * When the csv file is required - based on which sparkline visualization will 
 	    			 * be rendered.
 	    			 * */
-						prepareVisualizationQuerySparklineDataResponse(authorNodesAndEdges, 
+						prepareSparklineDataResponse(authorNodesAndEdges, 
 																	   response);
 						return;
 		    		
@@ -92,14 +87,20 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		    			 * When the graphML file is required - based on which coauthorship network 
 		    			 * visualization will be rendered.
 		    			 * */
-		    			prepareVisualizationQueryNetworkDataResponse(authorNodesAndEdges, response);
+		    			prepareNetworkDataResponse(authorNodesAndEdges, response);
 						return;
 				}
 			}
 			
 		} catch (MalformedQueryParametersException e) {
 			try {
-				handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
+				UtilityFunctions.handleMalformedParameters(
+						e.getMessage(), 
+						"Visualization Query Error - Co-authorship Network",
+						vitroRequest, 
+						request, 
+						response, 
+						log);
 			} catch (ServletException e1) {
 				log.error(e1.getStackTrace());
 			} catch (IOException e1) {
@@ -110,9 +111,90 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 	}
 
-	private void prepareVisualizationQueryNetworkDataResponse(
-			CoAuthorshipVOContainer authorNodesAndEdges, HttpServletResponse response) {
+	private void writeCoauthorsPerYearCSV(Map<String, Set<Node>> yearToCoauthors, 
+									   PrintWriter printWriter) {
+		
+//        	printWriter.append("\"Year\", \"Count\", \"Co-Author(s)\"\n");
+        	printWriter.append("Year, Count, Co-Author(s)\n");
+			
+			for (Entry<String, Set<Node>> currentEntry : yearToCoauthors.entrySet()) {
+				
+				printWriter.append("\"" + currentEntry.getKey() + "\"," 
+								   + "\"" + currentEntry.getValue().size() + "\","
+								   + "\"" + getCoauthorNamesAsString(currentEntry.getValue()) 
+								   + "\"\n");
+			}
+			
+		printWriter.flush();
+	}
+	
+	private String getCoauthorNamesAsString(Set<Node> coAuthors) {
+		
+		StringBuilder coAuthorsMerged = new StringBuilder();
+		
+		String coAuthorSeparator = "; ";
+		for (Node currCoAuthor : coAuthors) {
+			coAuthorsMerged.append(currCoAuthor.getNodeName() + coAuthorSeparator);
+		}
+		
+		return StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);
+	}
 
+	/**
+	 * Provides response when a csv file containing number & names of unique co-authors per 
+	 * year is requested. 
+	 * @param authorNodesAndEdges
+	 * @param response
+	 */
+	private void prepareSparklineDataResponse(CoAuthorshipData authorNodesAndEdges, 
+											  HttpServletResponse response) {
+		
+		String outputFileName;
+		Map<String, Set<Node>> yearToCoauthors = new TreeMap<String, Set<Node>>();
+		
+		if (authorNodesAndEdges.getNodes() != null && authorNodesAndEdges.getNodes().size() > 0) {
+			
+			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges
+									.getEgoNode().getNodeName())
+			+ "_coauthors-per-year" + ".csv";
+			
+			yearToCoauthors = UtilityFunctions.getPublicationYearToCoAuthors(authorNodesAndEdges);
+			
+		} else {
+			
+			outputFileName = "no_coauthors-per-year" + ".csv";			
+		}
+		
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", 
+									  "attachment;filename=" + outputFileName);
+		
+		try {
+		
+		PrintWriter responseWriter = response.getWriter();
+		
+		/*
+		 * We are side-effecting responseWriter since we are directly manipulating the response 
+		 * object of the servlet.
+		 * */
+		writeCoauthorsPerYearCSV(yearToCoauthors, responseWriter);
+	
+		responseWriter.close();
+		
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Provides a response when graphml formatted co-authorship network is requested, typically by 
+	 * the flash vis.
+	 * @param authorNodesAndEdges
+	 * @param response
+	 */
+	private void prepareNetworkDataResponse(
+			CoAuthorshipData authorNodesAndEdges, HttpServletResponse response) {
+	
 		response.setContentType("text/xml");
 		
 		try {
@@ -135,138 +217,4 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		}
 	}
 	
-	private void prepareVisualizationQuerySparklineDataResponse(
-			CoAuthorshipVOContainer authorNodesAndEdges, HttpServletResponse response) {
-		
-		String outputFileName;
-		Map<String, Set<Node>> yearToCoauthors = new TreeMap<String, Set<Node>>();
-		
-		if (authorNodesAndEdges.getNodes() != null && authorNodesAndEdges.getNodes().size() > 0) {
-			
-			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges
-									.getEgoNode().getNodeName())
-			+ "_coauthors-per-year" + ".csv";
-			
-			yearToCoauthors = getCoAuthorsStats(authorNodesAndEdges);
-			
-		} else {
-			
-			outputFileName = "no_coauthors-per-year" + ".csv";			
-		}
-		
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", 
-									  "attachment;filename=" + outputFileName);
-		
-		try {
-		
-		PrintWriter responseWriter = response.getWriter();
-		
-		/*
-		 * We are side-effecting responseWriter since we are directly manipulating the response 
-		 * object of the servlet.
-		 * */
-		generateCsvFileBuffer(yearToCoauthors, 
-							  responseWriter);
-
-		responseWriter.close();
-		
-		} catch (IOException e) {
-		e.printStackTrace();
-		}
-	}
-	
-	private void generateCsvFileBuffer(Map<String, Set<Node>> yearToCoauthors, 
-									   PrintWriter printWriter) {
-		
-        	printWriter.append("\"Year\", \"Number of Co-Authors\", \"Co-Author(s)\"\n");
-			
-			for (Entry<String, Set<Node>> currentEntry : yearToCoauthors.entrySet()) {
-				
-				printWriter.append("\"" + currentEntry.getKey() + "\"," 
-								   + "\"" + currentEntry.getValue().size() + "\","
-								   + "\"" + getCoauthorsString(currentEntry.getValue()) + "\"\n"
-											  );
-			}
-			
-		printWriter.flush();
-	}
-	
-	private String getCoauthorsString(Set<Node> coAuthors) {
-		
-		StringBuilder coAuthorsMerged = new StringBuilder();
-		
-		String coAuthorSeparator = "; ";
-		for (Node currCoAuthor : coAuthors) {
-			coAuthorsMerged.append(currCoAuthor.getNodeName() + coAuthorSeparator);
-		}
-		
-		return StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);
-	}
-	
-	private Map<String, Set<Node>> getCoAuthorsStats(CoAuthorshipVOContainer authorNodesAndEdges) {
-
-		Map<String, Set<Node>> yearToCoAuthors = new TreeMap<String, Set<Node>>();
-		
-		Node egoNode = authorNodesAndEdges.getEgoNode();
-		
-		for (Node currNode : authorNodesAndEdges.getNodes()) {
-					
-				/*
-				 * We have already printed the Ego Node info.
-				 * */
-				if (currNode != egoNode) {
-					
-					for (String year : currNode.getYearToPublicationCount().keySet()) {
-						
-						Set<Node> coAuthorNodes;
-						
-						if (yearToCoAuthors.containsKey(year)) {
-							
-							coAuthorNodes = yearToCoAuthors.get(year);
-							coAuthorNodes.add(currNode);
-							
-						} else {
-							
-							coAuthorNodes = new HashSet<Node>();
-							coAuthorNodes.add(currNode);
-							yearToCoAuthors.put(year, coAuthorNodes);
-						}
-						
-					}
-					
-				}
-		}
-		
-		return yearToCoAuthors;
-	}
-
-	private void handleMalformedParameters(String errorMessage, 
-			VitroRequest vitroRequest, 
-			HttpServletRequest request, 
-			HttpServletResponse response, 
-			Log log)
-			throws ServletException, IOException {
-
-		Portal portal = vitroRequest.getPortal();
-
-		request.setAttribute("error", errorMessage);
-
-		RequestDispatcher requestDispatcher = 
-				request.getRequestDispatcher(Controllers.BASIC_JSP);
-		request.setAttribute("bodyJsp", 
-										"/templates/visualization/visualization_error.jsp");
-		request.setAttribute("portalBean", portal);
-		request.setAttribute("title", 
-										"Visualization Query Error - Individual Publication Count");
-
-		try {
-			requestDispatcher.forward(request, response);
-		} catch (Exception e) {
-			log.error("EntityEditController could not forward to view.");
-			log.error(e.getMessage());
-			log.error(e.getStackTrace());
-		}
-	}
-
 }

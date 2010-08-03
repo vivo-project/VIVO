@@ -2,12 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.personpubcount;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -30,19 +26,21 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 
 
 /**
+ * This query runner is used to execute a sparql query that will fetch all the publications
+ * defined by bibo:Document property for a particular individual.
+ * 
  * @author cdtank
- *
  */
-public class PersonPublicationCountQueryHandler implements QueryHandler<Set<BiboDocument>> {
+public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDocument>> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String queryParam;
+	private String personURI;
 	private DataSource dataSource;
 
 	private Individual author; 
@@ -74,10 +72,10 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<Set<Bibo
 			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." 
 			+ "OPTIONAL {  ?document vitro:description ?documentDescription }";
 	
-	public PersonPublicationCountQueryHandler(String queryParam,
+	public PersonPublicationCountQueryRunner(String personURI,
 			DataSource dataSource, Log log) {
 
-		this.queryParam = queryParam;
+		this.personURI = personURI;
 		this.dataSource = dataSource;
 		this.log = log;
 
@@ -143,7 +141,6 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<Set<Bibo
 				if (authorLabelNode != null) {
 					author.setIndividualLabel(authorLabelNode.toString());
 				}
-				
 			}
 
 			authorDocuments.add(biboDocument);
@@ -156,7 +153,7 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<Set<Bibo
 
         QueryExecution queryExecution = null;
         try {
-            Query query = QueryFactory.create(generateSparqlQuery(queryURI), SYNTAX);
+            Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
 //            qs.add("authPerson", queryParam); // bind resource to s
@@ -175,7 +172,7 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<Set<Bibo
 		return null;
     }
 
-	private String generateSparqlQuery(String queryURI) {
+	private String getSparqlQuery(String queryURI) {
 //		Resource uri1 = ResourceFactory.createResource(queryURI);
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
@@ -194,16 +191,16 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<Set<Bibo
 		return sparqlQuery;
 	}
 
-	public Set<BiboDocument> getVisualizationJavaValueObjects()
+	public Set<BiboDocument> getQueryResult()
 		throws MalformedQueryParametersException {
 
-        if (StringUtils.isNotBlank(this.queryParam)) {
+        if (StringUtils.isNotBlank(this.personURI)) {
 
         	/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.queryParam);
+    		IRI iri = iRIFactory.create(this.personURI);
             if (iri.hasViolation(false)) {
                 String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Pub Count vis Query " + errorMsg);
@@ -215,7 +212,7 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<Set<Bibo
         	throw new MalformedQueryParametersException("URL parameter is either null or empty.");
         }
 
-		ResultSet resultSet	= executeQuery(this.queryParam,
+		ResultSet resultSet	= executeQuery(this.personURI,
 										   this.dataSource);
 
 		return createJavaValueObjects(resultSet);

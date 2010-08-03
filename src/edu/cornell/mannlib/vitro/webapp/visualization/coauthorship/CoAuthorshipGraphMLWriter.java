@@ -12,7 +12,7 @@ import java.util.Set;
 
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 
@@ -28,7 +28,7 @@ public class CoAuthorshipGraphMLWriter {
 
 	private final String GRAPHML_FOOTER = "</graphml>";
 	
-	public CoAuthorshipGraphMLWriter(CoAuthorshipVOContainer visVOContainer) {
+	public CoAuthorshipGraphMLWriter(CoAuthorshipData visVOContainer) {
 		
 		coAuthorshipGraphMLContent = createCoAuthorshipGraphMLContent(visVOContainer);
 		
@@ -39,7 +39,7 @@ public class CoAuthorshipGraphMLWriter {
 	}
 
 	private StringBuilder createCoAuthorshipGraphMLContent(
-			CoAuthorshipVOContainer visVOContainer) {
+			CoAuthorshipData coAuthorshipData) {
 		
 		StringBuilder graphMLContent = new StringBuilder();
 		
@@ -50,30 +50,30 @@ public class CoAuthorshipGraphMLWriter {
 		 * another String object to hold key definition data will be redundant & will
 		 * not serve the purpose.
 		 * */
-		generateKeyDefinitionContent(visVOContainer, graphMLContent);
+		generateKeyDefinitionContent(coAuthorshipData, graphMLContent);
 		
 		/*
 		 * Used to generate graph content. It will contain both the nodes & edge information.
 		 * We are side-effecting "graphMLContent".
 		 * */
-		generateGraphContent(visVOContainer, graphMLContent);
+		generateGraphContent(coAuthorshipData, graphMLContent);
 		
 		graphMLContent.append(GRAPHML_FOOTER);
 		
 		return graphMLContent;
 	}
 
-	private void generateGraphContent(CoAuthorshipVOContainer visVOContainer,
+	private void generateGraphContent(CoAuthorshipData coAuthorshipData,
 			StringBuilder graphMLContent) {
 
 		graphMLContent.append("\n<graph edgedefault=\"undirected\">\n");
 		
-		if (visVOContainer.getNodes() != null & visVOContainer.getNodes().size() > 0) {
-			generateNodeSectionContent(visVOContainer, graphMLContent);
+		if (coAuthorshipData.getNodes() != null & coAuthorshipData.getNodes().size() > 0) {
+			generateNodeSectionContent(coAuthorshipData, graphMLContent);
 		}
 		
-		if (visVOContainer.getEdges() != null & visVOContainer.getEdges().size() > 0) {
-			generateEdgeSectionContent(visVOContainer, graphMLContent);
+		if (coAuthorshipData.getEdges() != null & coAuthorshipData.getEdges().size() > 0) {
+			generateEdgeSectionContent(coAuthorshipData, graphMLContent);
 		}
 		
 		graphMLContent.append("</graph>\n");
@@ -83,12 +83,12 @@ public class CoAuthorshipGraphMLWriter {
 		
 	}
 
-	private void generateEdgeSectionContent(CoAuthorshipVOContainer visVOContainer,
+	private void generateEdgeSectionContent(CoAuthorshipData coAuthorshipData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- edges -->\n");
 		
-		Set<Edge> edges = visVOContainer.getEdges();
+		Set<Edge> edges = coAuthorshipData.getEdges();
 		
 		List<Edge> orderedEdges = new ArrayList<Edge>(edges);
 		
@@ -108,11 +108,6 @@ public class CoAuthorshipGraphMLWriter {
 
 	private void getEdgeContent(StringBuilder graphMLContent, Edge currentEdge) {
 		
-		/*
-		System.out.print("EDGE_ID:" + currentEdge.getEdgeID() + "|");
-		System.out.print("EDGE_SOURCE:" + currentEdge.getSourceNode().getNodeURL() + "|");
-		System.out.println("EDGE_TARGET:" + currentEdge.getTargetNode().getNodeURL());
-		*/
 		graphMLContent.append("<edge " 
 									+ "id=\"" + currentEdge.getEdgeID() + "\" " 
 									+ "source=\"" + currentEdge.getSourceNode().getNodeID() + "\" "
@@ -136,7 +131,6 @@ public class CoAuthorshipGraphMLWriter {
 			/*
 			 * There is no clean way of getting the map contents in java even though
 			 * we are sure to have only one entry on the map. So using the for loop.
-			 * I am feeling dirty just about now. 
 			 * */
 			for (Map.Entry<String, Integer> publicationInfo
 						: currentEdge.getEarliestCollaborationYearCount().entrySet()) {
@@ -148,8 +142,6 @@ public class CoAuthorshipGraphMLWriter {
 				graphMLContent.append("\t<data key=\"num_earliest_collaboration\">" 
 											+ publicationInfo.getValue() 
 										+ "</data>\n");
-				
-				
 			}
 			
 		}
@@ -179,17 +171,15 @@ public class CoAuthorshipGraphMLWriter {
 		}
 		
 		graphMLContent.append("</edge>\n");
-		
-		
 	}
 
-	private void generateNodeSectionContent(CoAuthorshipVOContainer visVOContainer,
+	private void generateNodeSectionContent(CoAuthorshipData coAuthorshipData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- nodes -->\n");
 		
-		Node egoNode = visVOContainer.getEgoNode();
-		Set<Node> authorNodes = visVOContainer.getNodes();
+		Node egoNode = coAuthorshipData.getEgoNode();
+		Set<Node> authorNodes = coAuthorshipData.getNodes();
 		
 		/*
 		 * This method actually creates the XML code for a single node. "graphMLContent"
@@ -224,21 +214,17 @@ public class CoAuthorshipGraphMLWriter {
 		
 		String profileURL = null;
 		try {
-			profileURL = "/individual?" 
-								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
-								+ "=" + URLEncoder.encode(node.getNodeURL(),
+			profileURL = VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX + "?" 
+								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+								+ "=" + URLEncoder.encode(node.getNodeURI(),
 														  VisualizationController
 														  		.URL_ENCODING_SCHEME).toString();
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("URL Encoding ERRor. Move this to use log.error ASAP");
 		}
 		
-		
-//		System.out.print("NODE_ID:" + node.getNodeID() + "|");
 		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
-		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURL() + "</data>\n");
-//		graphMLContent.append("\t<data key=\"name\">" + node.getNodeName() + "</data>\n");
-//		System.out.println("NODE_NAME:" + node.getNodeURL());
+		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURI() + "</data>\n");
 		graphMLContent.append("\t<data key=\"label\">" + node.getNodeName() + "</data>\n");
 		
 		if (profileURL != null) {
@@ -267,8 +253,6 @@ public class CoAuthorshipGraphMLWriter {
 				graphMLContent.append("\t<data key=\"num_earliest_publication\">" 
 											+ publicationInfo.getValue() 
 										+ "</data>\n");
-				
-				
 			}
 			
 		}
@@ -285,8 +269,6 @@ public class CoAuthorshipGraphMLWriter {
 				graphMLContent.append("\t<data key=\"num_latest_publication\">" 
 											+ publicationInfo.getValue() 
 										+ "</data>\n");
-				
-				
 			}
 			
 		}
@@ -302,7 +284,7 @@ public class CoAuthorshipGraphMLWriter {
 		graphMLContent.append("</node>\n");
 	}
 
-	private void generateKeyDefinitionContent(CoAuthorshipVOContainer visVOContainer, 
+	private void generateKeyDefinitionContent(CoAuthorshipData visVOContainer, 
 											  StringBuilder graphMLContent) {
 		
 		/*
@@ -345,8 +327,6 @@ public class CoAuthorshipGraphMLWriter {
 			} else {
 				graphMLContent.append("/>\n");
 			}
-			
 		}
 	}
-
 }

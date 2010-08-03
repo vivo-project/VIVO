@@ -7,8 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-
-public class CoAuthorshipVOContainer {
+public class CoAuthorshipData {
 	
 	private Set<Node> nodes;
 	private Set<Edge> edges;
@@ -16,7 +15,7 @@ public class CoAuthorshipVOContainer {
 	private Set<Map<String, String>> NODE_SCHEMA;
 	private Set<Map<String, String>> EDGE_SCHEMA;
 		
-	public CoAuthorshipVOContainer(Node egoNode, Set<Node> nodes, Set<Edge> edges) {
+	public CoAuthorshipData(Node egoNode, Set<Node> nodes, Set<Edge> edges) {
 		this.egoNode = egoNode;
 		this.nodes = nodes;
 		this.edges = edges;

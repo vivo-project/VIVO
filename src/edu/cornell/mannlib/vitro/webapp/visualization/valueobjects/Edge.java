@@ -14,7 +14,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 
 /**
  * 
- * This is the Value Object for storing edge information mainly for co-author vis.
+ * This is stores edge information mainly for co-author vis.
+ * 
  * @author cdtank
  *
  */
@@ -129,7 +130,6 @@ public class Edge {
 		}
 	}
 	
-	@SuppressWarnings("serial")
 	public Integer getUnknownCollaborationYearCount() {
 		if (yearToPublicationCount == null) {
 			yearToPublicationCount = UtilityFunctions

@@ -31,29 +31,28 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoDepartmentOrDivision;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoEmployee;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 
 
 /**
  * @author cdtank
- *
  */
-public class CollegePublicationCountQueryHandler implements QueryHandler<Set<VivoEmployee>> {
+public class CollegePublicationCountQueryRunner implements QueryRunner<Set<VivoEmployee>> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String collegeURIParam;
+	private String collegeURI;
 	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
 			new HashMap<String, VivoCollegeOrSchool>();
 	private DataSource dataSource;
 
 	private Log log;
 
-	public CollegePublicationCountQueryHandler(String collegeURIParam,
+	public CollegePublicationCountQueryRunner(String collegeURI,
 			DataSource dataSource, Log log) {
 
-		this.collegeURIParam = collegeURIParam;
+		this.collegeURI = collegeURI;
 		this.dataSource = dataSource;
 		this.log = log;
 
@@ -296,15 +295,15 @@ public class CollegePublicationCountQueryHandler implements QueryHandler<Set<Viv
 		
 	}
 	
-	public Set<VivoEmployee> getVisualizationJavaValueObjects()
+	public Set<VivoEmployee> getQueryResult()
 		throws MalformedQueryParametersException {
 
-		if (StringUtils.isNotBlank(this.collegeURIParam)) {
+		if (StringUtils.isNotBlank(this.collegeURI)) {
         	/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.collegeURIParam);
+    		IRI iri = iRIFactory.create(this.collegeURI);
             if (iri.hasViolation(false)) {
                 String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Pub Count Vis Query " + errorMsg);
@@ -315,7 +314,7 @@ public class CollegePublicationCountQueryHandler implements QueryHandler<Set<Viv
             throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }
 
-		ResultSet resultSet	= executeQuery(generateCollegeEmployeeSparqlQuery(this.collegeURIParam),
+		ResultSet resultSet	= executeQuery(generateCollegeEmployeeSparqlQuery(this.collegeURI),
 										   this.dataSource);
 
 		return createJavaValueObjects(resultSet);

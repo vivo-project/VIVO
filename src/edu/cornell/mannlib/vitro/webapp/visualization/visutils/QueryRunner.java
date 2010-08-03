@@ -4,8 +4,8 @@ package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 
-public interface QueryHandler<QueryResponse> {
+public interface QueryRunner<QueryResult> {
 	
-	QueryResponse getVisualizationJavaValueObjects() throws MalformedQueryParametersException; 
+	QueryResult getQueryResult() throws MalformedQueryParametersException; 
 
 }

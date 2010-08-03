@@ -26,25 +26,26 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryM
 
 
 /**
- * Very dumb name of the class. change it.
+ * This query runner is used to execute a sparql query that will fetch all the 
+ * properties  available for the provided individual URI.
+ * 
  * @author cdtank
- *
  */
-public class AllPropertiesQueryHandler implements QueryHandler<GenericQueryMap> {
+public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String filterRule, individualURLParam;
+	private String filterRule, individualURI;
 	private DataSource dataSource;
 
 	private Log log;
 
-	public AllPropertiesQueryHandler(String individualURLParam,
+	public AllPropertiesQueryRunner(String individualURI,
 							   String filterRule,
 							   DataSource dataSource, 
 							   Log log) {
 
-		this.individualURLParam = individualURLParam;
+		this.individualURI = individualURI;
 		this.filterRule = filterRule;
 		this.dataSource = dataSource;
 		this.log = log;
@@ -53,7 +54,7 @@ public class AllPropertiesQueryHandler implements QueryHandler<GenericQueryMap> 
 
 	private GenericQueryMap createJavaValueObjects(ResultSet resultSet) {
 		
-		GenericQueryMap queryResultVO = new GenericQueryMap();
+		GenericQueryMap queryResult = new GenericQueryMap();
 		
 		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
@@ -63,16 +64,15 @@ public class AllPropertiesQueryHandler implements QueryHandler<GenericQueryMap> 
 			RDFNode objectNode = solution.get(QueryFieldLabels.OBJECT);
 			
 			if (predicateNode != null && objectNode != null) {
-				queryResultVO.addEntry(predicateNode.toString(), 
+				queryResult.addEntry(predicateNode.toString(), 
 									   objectNode.toString());
 			} 
 			
 		}
 		
-		return queryResultVO;
+		return queryResult;
 	}
 
-	
 	private ResultSet executeQuery(String queryText,
 								   DataSource dataSource) {
 
@@ -118,16 +118,15 @@ public class AllPropertiesQueryHandler implements QueryHandler<GenericQueryMap> 
 
 		return sparqlQuery;
 	}
-
 	
-	public GenericQueryMap getVisualizationJavaValueObjects()
+	public GenericQueryMap getQueryResult()
 			throws MalformedQueryParametersException {
-		if (StringUtils.isNotBlank(this.individualURLParam)) {
+		if (StringUtils.isNotBlank(this.individualURI)) {
         	/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.individualURLParam);
+    		IRI iri = iRIFactory.create(this.individualURI);
             if (iri.hasViolation(false)) {
                 String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Generic Query " + errorMsg);
@@ -140,12 +139,10 @@ public class AllPropertiesQueryHandler implements QueryHandler<GenericQueryMap> 
         }
 
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(
-												this.individualURLParam, 
+												this.individualURI, 
 												this.filterRule),
 										   this.dataSource);
 
 		return createJavaValueObjects(resultSet);
 	}
-
-
 }

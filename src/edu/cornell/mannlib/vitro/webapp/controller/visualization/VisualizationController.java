@@ -2,34 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.controller.visualization;
 
-/*
-Copyright (c) 2010, Cornell University
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-    * Redistributions of source code must retain the above copyright notice,
-      this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright notice,
-      this list of conditions and the following disclaimer in the documentation
-      and/or other materials provided with the distribution.
-    * Neither the name of Cornell University nor the names of its contributors
-      may be used to endorse or promote products derived from this software
-      without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -51,7 +23,6 @@ import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelMaker;
 
-import edu.cornell.mannlib.vedit.beans.LoginFormBean;
 import edu.cornell.mannlib.vedit.controller.BaseEditController;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
@@ -69,8 +40,6 @@ public class VisualizationController extends BaseEditController {
 
 	private Map<String, VisualizationRequestHandler> visualizationIDsToClass;
 
-	private static final String VIS_TYPE_URL_HANDLE = "vis";
-	
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
 
 	private static final long serialVersionUID = 1L;
@@ -79,25 +48,11 @@ public class VisualizationController extends BaseEditController {
 
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-    //TODO: For later, might want to improve these names for clarity.
-    public static final String PERSON_PUBLICATION_COUNT_VIS_URL_VALUE
-    								= "person_pub_count";
-    
-    public static final String PDF_REPORT_VIS_URL_VALUE
-									= "pdf_report";
-    
-    public static final String COLLEGE_PUBLICATION_COUNT_VIS_URL_VALUE
-									= "college_pub_count";
-    
-    public static final String COAUTHORSHIP_VIS_URL_VALUE
-									= "coauthorship";
-    
-    public static final String PERSON_LEVEL_VIS_URL_VALUE
-									= "person_level";
-    
-    public static final String UTILITIES_URL_VALUE
-									= "utilities";
-
+    /* This method is overridden to inject vis dependencies i.e. the vis algorithms that are 
+     * being implemented into the vis controller. Modified Dependency Injection pattern is 
+     * used here. XML file containing the location of all the vis is saved in accessible folder. 
+     * @see javax.servlet.GenericServlet#init()
+     */
     @Override
     public void init() throws ServletException {
     	super.init();
@@ -135,36 +90,42 @@ public class VisualizationController extends BaseEditController {
     throws ServletException, IOException {
     	super.doGet(request, response);
 
-    	VitroRequest vreq = handleLoginAuthentication(request, response);
-
-    	String visTypeURLHandle = vreq.getParameter(VIS_TYPE_URL_HANDLE);
+    	VitroRequest vitroRequest = new VitroRequest(request);
     	
-    	VisualizationRequestHandler visRequestHandler = null;
-    	try {
-    		visRequestHandler = visualizationIDsToClass.get(visTypeURLHandle);
-    	} catch (NullPointerException nullKey) {
-
-    		/*
-    		 * This is side-effecting because the error content is directly 
-    		 * added to the request object. From where it is redirected to
-    		 * the error page.
-    		 * */
-    		handleMalformedParameters("Inappropriate query parameters were submitted. ", 
-					  request, 
-					  response);
-		}
+    	/*
+    	 * Based on the query parameters passed via URI get the appropriate visualization 
+    	 * request handler.
+    	 * */
+    	VisualizationRequestHandler visRequestHandler = 
+    			getVisualizationRequestHandler(request, response, vitroRequest);
     	
-        DataSource dataSource = setupJENADataSource(request,
+    	/*
+    	 * Pass the query to the selected visualization request handler & render the visualization.
+    	 * Since the visualization content is directly added to the response object we are side-
+    	 * effecting this method.
+    	 * */
+        renderVisualization(request, response, vitroRequest, visRequestHandler);
+
+        return;
+    }
+
+
+	private void renderVisualization(HttpServletRequest request,
+									 HttpServletResponse response, 
+									 VitroRequest vitroRequest,
+									 VisualizationRequestHandler visRequestHandler)
+			throws ServletException, IOException {
+		
+		DataSource dataSource = setupJENADataSource(request,
         											response,
-        											vreq);
-
+        											vitroRequest);
         if (dataSource != null && visRequestHandler != null) {
         	
-        	/*
-        	 * This is side-effecting because the visualization content is added
-        	 * to the request object.
-        	 * */
-        	visRequestHandler.generateVisualization(vreq, request, response, log, dataSource);
+        	visRequestHandler.generateVisualization(vitroRequest, 
+        											request, 
+        											response, 
+        											log, 
+        											dataSource);
         	
         } else {
         	
@@ -177,46 +138,31 @@ public class VisualizationController extends BaseEditController {
     		
 			log.error(errorMessage);
         }
+	}
 
-        return;
-    }
+	private VisualizationRequestHandler getVisualizationRequestHandler(
+				HttpServletRequest request, 
+				HttpServletResponse response,
+				VitroRequest vitroRequest) 
+			throws ServletException, IOException {
+		
+		String visType = vitroRequest.getParameter(VisualizationFrameworkConstants
+																	.VIS_TYPE_KEY);
+    	VisualizationRequestHandler visRequestHandler = null;
+    	try {
+    		visRequestHandler = visualizationIDsToClass.get(visType);
+    	} catch (NullPointerException nullKeyException) {
 
-	private VitroRequest handleLoginAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		//        This might not be required
-		        /*
-		         * why are there multiple places where the login is checked? shud be abtracted into
-		         * new methoid?
-		         * */
-//		        if( !checkLoginStatus(request, response) )
-//		        	return null;
-
-		        VitroRequest vreq = new VitroRequest(request);
-
-		        Object obj = vreq.getSession().getAttribute("loginHandler");
-		        LoginFormBean loginHandler = null;
-
-
-		        if (obj != null && obj instanceof LoginFormBean) {
-		        	loginHandler = ((LoginFormBean) obj);
-		        }
-		    
-		        /*
-		         * what is the speciality of 5 in the conditions?
-		         *
-		        if( loginHandler == null ||
-		            ! "authenticated".equalsIgnoreCase(loginHandler.getLoginStatus()) ||
-		             Integer.parseInt(loginHandler.getLoginRole()) <= 5 ){
-		            HttpSession session = request.getSession(true);
-
-		            session.setAttribute("postLoginRequest",
-            vreq.getRequestURI()+( vreq.getQueryString()!=null?('?' + vreq.getQueryString()):"" ));
-            String redirectURL = request.getContextPath() + Controllers.SITE_ADMIN + "?login=block";
-		            response.sendRedirect(redirectURL);
-		            return null;
-		        }
-		        */
-		return vreq;
+    		/*
+    		 * This is side-effecting because the error content is directly 
+    		 * added to the request object. From where it is redirected to
+    		 * the error page.
+    		 * */
+    		handleMalformedParameters("Inappropriate query parameters were submitted. ", 
+					  request, 
+					  response);
+		}
+		return visRequestHandler;
 	}
 
 	private DataSource setupJENADataSource(HttpServletRequest request,

@@ -30,25 +30,27 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 
-
-
 /**
+ * This query runner is used to execute a sparql query to get all the publications
+ * for a particular individual. It will also fetch all the authors that worked
+ * on that particular publication. 
+ * 
  * @author cdtank
  */
-public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOContainer> {
+public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	private static final int MAX_AUTHORS_PER_PAPER_ALLOWED = 100;
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String egoURLParam;
+	private String egoURI;
 	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
 			new HashMap<String, VivoCollegeOrSchool>();
 	
@@ -60,10 +62,10 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 
 	private UniqueIDGenerator edgeIDGenerator;
 
-	public CoAuthorshipQueryHandler(String egoURLParam,
+	public CoAuthorshipQueryRunner(String egoURI,
 			DataSource dataSource, Log log) {
 
-		this.egoURLParam = egoURLParam;
+		this.egoURI = egoURI;
 		this.dataSource = dataSource;
 		this.log = log;
 		
@@ -72,7 +74,7 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 
 	}
 
-	private CoAuthorshipVOContainer createJavaValueObjects(ResultSet resultSet) {
+	private CoAuthorshipData createQueryResult(ResultSet resultSet) {
 		
 		Set<Node> nodes = new HashSet<Node>();
 		
@@ -149,11 +151,6 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 				}
 			}
 			
-			/*
-			System.out.print("PERSON_URL:" + egoAuthorURLNode.toString() + "|");
-			System.out.print("DOCUMENT_URL:" + documentNode.toString() + "|");
-			System.out.println("CO_AUTHOR_URL:" + coAuthorURLNode.toString());
-			*/
 			coAuthorNode.addAuthorDocument(biboDocument);
 			
 			Set<Node> coAuthorsForCurrentBiboDocument;
@@ -190,11 +187,49 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			
 		}
 		
+		
+		
 		/*
-		 * This code snippet takes out all the edges belong to documents that have more than 
-		 * 100 authors. We conjecture that these papers do not provide much insight. However, 
-		 * we have left the documents be, just the edges are removed.  
+		 * This method takes out all the authors & edges between authors that belong to documents 
+		 * that have more than 100 authors. We conjecture that these papers do not provide much 
+		 * insight. However, we have left the documents be.
+		 * 
+		 * This method side-effects "nodes" & "edges".  
 		 * */
+		removeLowQualityNodesAndEdges(nodes, 
+									  biboDocumentURLToVO, 
+									  biboDocumentURLToCoAuthors, 
+									  edges);
+		
+		/*
+		 * We need to create edges between 2 co-authors. E.g. On a paper there were 3 authors
+		 * ego, A & B then we have already created edges like,
+		 * 		ego - A
+		 * 		ego - B
+		 * The below sub-routine will take care of,
+		 * 		A - B 
+		 * 
+		 * We are side-effecting "edges" here. The only reason to do this is because we are adding 
+		 * edges en masse for all the co-authors on all the publications considered so far. The 
+		 * other reason being we dont want to compare against 2 sets of edges (edges created before 
+		 * & co-author edges created during the course of this method) when we are creating a new 
+		 * edge.
+		 * */
+		createCoAuthorEdges(biboDocumentURLToVO, 
+							biboDocumentURLToCoAuthors,
+							edges,
+							edgeUniqueIdentifierToVO);
+		
+		
+		return new CoAuthorshipData(egoNode, nodes, edges);
+	}
+
+	private void removeLowQualityNodesAndEdges(Set<Node> nodes,
+											   Map<String, BiboDocument> biboDocumentURLToVO,
+											   Map<String, Set<Node>> biboDocumentURLToCoAuthors, 
+											   Set<Edge> edges) {
+		
+		Set<Node> nodesToBeRemoved = new HashSet<Node>();
 		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry 
 					: biboDocumentURLToCoAuthors.entrySet()) {
 				
@@ -218,31 +253,16 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 					}
 						
 					edges.removeAll(edgesToBeRemoved);
-					
+
+					for (Node currentCoAuthor : currentBiboDocumentEntry.getValue()) {
+						currentCoAuthor.getAuthorDocuments().remove(currentBiboDocument);
+						if (currentCoAuthor.getAuthorDocuments().isEmpty()) {
+							nodesToBeRemoved.add(currentCoAuthor);
+						}
+					}
 				}
 		}
-		
-		/*
-		 * We need to create edges between 2 co-authors. E.g. On a paper there were 3 authors
-		 * ego, A & B then we have already created edges like,
-		 * 		ego - A
-		 * 		ego - B
-		 * The below sub-routine will take care of,
-		 * 		A - B 
-		 * 
-		 * We are side-effecting "edges" here. The only reason to do this is because we are adding 
-		 * edges en masse for all the co-authors on all the publications considered so far. The 
-		 * other reason being we dont want to compare against 2 sets of edges (edges created before 
-		 * & co-author edges created during the course of this method) when we are creating a new 
-		 * edge.
-		 * */
-		createCoAuthorEdges(biboDocumentURLToVO, 
-							biboDocumentURLToCoAuthors,
-							edges,
-							edgeUniqueIdentifierToVO);
-		
-		
-		return new CoAuthorshipVOContainer(egoNode, nodes, edges);
+		nodes.removeAll(nodesToBeRemoved);
 	}
 
 	private void createCoAuthorEdges(
@@ -252,6 +272,7 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 		
 		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry 
 					: biboDocumentURLToCoAuthors.entrySet()) {
+			
 			/*
 			 * If there was only one co-author (other than ego) then we dont have to create any 
 			 * edges. so the below condition will take care of that.
@@ -312,9 +333,9 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 	}
 
 	private Edge getExistingEdge(
-			Node collaboratingNode1, 
-			Node collaboratingNode2, 
-			Map<String, Edge> edgeUniqueIdentifierToVO) {
+					Node collaboratingNode1, 
+					Node collaboratingNode2, 
+					Map<String, Edge> edgeUniqueIdentifierToVO) {
 		
 		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getNodeID(), 
 															  collaboratingNode2.getNodeID());
@@ -438,25 +459,21 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			+ "} " 
 			+ "ORDER BY ?document ?coAuthorPerson";
 
-		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
+//		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}
 
 	
-	public CoAuthorshipVOContainer getVisualizationJavaValueObjects()
+	public CoAuthorshipData getQueryResult()
 		throws MalformedQueryParametersException {
-		/*
-		System.out.println("***************************************************************************************");
-		System.out.println("Entered into coauthorship query handler at " + System.currentTimeMillis());
-		System.out.println("***************************************************************************************");
-*/
-		if (StringUtils.isNotBlank(this.egoURLParam)) {
+
+		if (StringUtils.isNotBlank(this.egoURI)) {
 			/*
         	 * To test for the validity of the URI submitted.
         	 * */
         	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.egoURLParam);
+    		IRI iri = iRIFactory.create(this.egoURI);
             if (iri.hasViolation(false)) {
                 String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Ego Co-Authorship Vis Query " + errorMsg);
@@ -467,13 +484,9 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
             throw new MalformedQueryParametersException("URI parameter is either null or empty.");
         }
 
-		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURLParam),
+		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI),
 										   this.dataSource);
-/*
-		System.out.println("***************************************************************************************");
-		System.out.println("***************************************************************************************");
-		*/
-		return createJavaValueObjects(resultSet);
+		return createQueryResult(resultSet);
 	}
 
 }

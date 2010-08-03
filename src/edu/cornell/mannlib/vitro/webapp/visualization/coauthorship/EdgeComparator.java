@@ -7,6 +7,11 @@ import java.util.Comparator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 
 
+/**
+ * This Comparator is used to sort the edges based on their IDs in ascending order.
+ * @author cdtank
+ *
+ */
 public class EdgeComparator implements Comparator<Edge> {
 
 	@Override

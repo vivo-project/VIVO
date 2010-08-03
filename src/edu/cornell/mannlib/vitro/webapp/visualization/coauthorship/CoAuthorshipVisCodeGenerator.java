@@ -18,14 +18,23 @@ import org.apache.commons.logging.Log;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineVOContainer;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
 
 
+@SuppressWarnings("serial")
 public class CoAuthorshipVisCodeGenerator {
 
-	private static final int MINIMUM_YEARS_CONSIDERED = 10;
-
+	/*
+	 * There are 2 modes of sparkline that are available via this visualization.
+	 * 		1. Short Sparkline - This sparkline will render all the data points (or sparks),
+	 * 			which in this case are the coauthors over the years, from the last 10 years.
+	 * 
+	 * 		2. Full Sparkline - This sparkline will render all the data points (or sparks) 
+	 * 			spanning the career of the person & last 10 years at the minimum, in case if
+	 * 			the person started his career in the last 10 yeras.
+	 * */
 	private static final Map<String, String> VIS_DIV_NAMES = new HashMap<String, String>() { {
 
 		put("SHORT_SPARK", "unique_coauthors_short_sparkline_vis");
@@ -37,47 +46,52 @@ public class CoAuthorshipVisCodeGenerator {
 	
 	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_coauthors_vis_container";
 	
-	public static final String SHORT_SPARKLINE_MODE_URL_HANDLE = "short";
-	
-	public static final String FULL_SPARKLINE_MODE_URL_HANDLE = "full";
-	
 	private Map<String, Set<Node>> yearToUniqueCoauthors;
 
 	private Log log;
 
-	private SparklineVOContainer valueObjectContainer;
+	private SparklineData sparklineData;
 
 	private String contextPath;
 
-	private String individualURIParam;
+	private String individualURI;
 
 	public CoAuthorshipVisCodeGenerator(String contextPath, 
-									  String individualURIParam, 
+									  String individualURI, 
 									  String visMode, 
 									  String visContainer, 
 									  Map<String, Set<Node>> yearToUniqueCoauthors, 
-									  SparklineVOContainer valueObjectContainer, 
 									  Log log) {
 		
 		this.contextPath = contextPath;
-		this.individualURIParam = individualURIParam;
+		this.individualURI = individualURI;
 		
 		this.yearToUniqueCoauthors = yearToUniqueCoauthors;
-		this.valueObjectContainer = valueObjectContainer;
+		this.sparklineData = new SparklineData();
 		
 		this.log = log;
 		
 		generateVisualizationCode(visMode, visContainer);
 	}
 	
+	/**
+	 * This method is used to generate the visualization code (HMTL, CSS & JavaScript).
+	 * There 2 parts to it - 1. Actual Content Code & 2. Context Code.
+	 * 		1. Actual Content code in this case is the sparkline image, text related to 
+	 * data and the wrapping tables. This is generated via call to google vis API through
+	 * JavaScript.
+	 * 		2. Context code is generally optional but contains code pertaining to tabulated
+	 * data & links to download files etc.
+	 * @param visMode
+	 * @param visContainer
+	 */
 	private void generateVisualizationCode(String visMode,
 										   String visContainer) {
 		
-    	valueObjectContainer.setSparklineContent(getMainVisualizationCode(visMode, 
+    	sparklineData.setSparklineContent(getMainVisualizationCode(visMode, 
     																	  visContainer));
     	
-    	
-    	valueObjectContainer.setSparklineContext(getVisualizationContextCode(visMode));
+    	sparklineData.setSparklineContext(getVisualizationContextCode(visMode));
     	
 	}
 
@@ -86,13 +100,15 @@ public class CoAuthorshipVisCodeGenerator {
 
 		int numOfYearsToBeRendered = 0;
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		int shortSparkMinYear = currentYear - MINIMUM_YEARS_CONSIDERED + 1;
+		int shortSparkMinYear = currentYear 
+									- VisConstants.MINIMUM_YEARS_CONSIDERED_FOR_SPARKLINE 
+									+ 1;
 		
     	/*
     	 * This is required because when deciding the range of years over which the vis
     	 * was rendered we dont want to be influenced by the "DEFAULT_PUBLICATION_YEAR".
     	 * */
-		Set<String> publishedYears = new HashSet(yearToUniqueCoauthors.keySet());
+		Set<String> publishedYears = new HashSet<String>(yearToUniqueCoauthors.keySet());
     	publishedYears.remove(VOConstants.DEFAULT_PUBLICATION_YEAR);
 		
 		/*
@@ -159,7 +175,6 @@ public class CoAuthorshipVisCodeGenerator {
 									+ "data.addRows(" + numOfYearsToBeRendered + ");\n");
 
 		int uniqueCoAuthorCounter = 0;
-		int totalUniqueCoAuthors = 0;
 		int renderedFullSparks = 0;
 		Set<Node> allCoAuthorsWithKnownAuthorshipYears = new HashSet<Node>();
 		
@@ -167,8 +182,8 @@ public class CoAuthorshipVisCodeGenerator {
 					publicationYear <= currentYear; 
 					publicationYear++) {
 
-				String stringPublishedYear = String.valueOf(publicationYear);
-				Set<Node> currentCoAuthors = yearToUniqueCoauthors.get(stringPublishedYear);
+				String publicationYearAsString = String.valueOf(publicationYear);
+				Set<Node> currentCoAuthors = yearToUniqueCoauthors.get(publicationYearAsString);
 				
 				Integer currentUniqueCoAuthors = null;
 				
@@ -182,7 +197,7 @@ public class CoAuthorshipVisCodeGenerator {
 				visualizationCode.append("data.setValue("
 												+ uniqueCoAuthorCounter
 												+ ", 0, '"
-												+ stringPublishedYear
+												+ publicationYearAsString
 												+ "');\n");
 
 				visualizationCode.append("data.setValue("
@@ -193,22 +208,20 @@ public class CoAuthorshipVisCodeGenerator {
 				uniqueCoAuthorCounter++;
 		}
 
-		totalUniqueCoAuthors = allCoAuthorsWithKnownAuthorshipYears.size();
-		
 		/*
-		 * Sparks that will be rendered in full mode will always be the one's which has any year
+		 * For the purpose of this visualization I have come up with a term "Sparks" which 
+		 * essentially means data points. 
+		 * Sparks that will be rendered in full mode will always be the one's which have any year
 		 * associated with it. Hence.
 		 * */
-		renderedFullSparks = totalUniqueCoAuthors;
+		renderedFullSparks = allCoAuthorsWithKnownAuthorshipYears.size();
 
 		/*
 		 * Total publications will also consider publications that have no year associated with
-		 * it. Hence.
+		 * them. Hence.
 		 * */
 		Integer unknownYearCoauthors = 0;
 		if (yearToUniqueCoauthors.get(VOConstants.DEFAULT_PUBLICATION_YEAR) != null) {
-			totalUniqueCoAuthors += yearToUniqueCoauthors
-											.get(VOConstants.DEFAULT_PUBLICATION_YEAR).size();
 			unknownYearCoauthors = yearToUniqueCoauthors
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR).size();
 		}
@@ -228,12 +241,12 @@ public class CoAuthorshipVisCodeGenerator {
 		 * "short" sparkline mode we will set the Earliest RenderedPublication year to
 		 * "currentYear - 10". 
 		 * */
-		valueObjectContainer.setEarliestRenderedPublicationYear(minPublishedYear);
-		valueObjectContainer.setLatestRenderedPublicationYear(currentYear);
+		sparklineData.setEarliestRenderedPublicationYear(minPublishedYear);
+		sparklineData.setLatestRenderedPublicationYear(currentYear);
 		
 		/*
 		 * The Full Sparkline will be rendered by default. Only if the url has specific mention of
-		 * SHORT_SPARKLINE_MODE_URL_HANDLE then we render the short sparkline and not otherwise.
+		 * SHORT_SPARKLINE_MODE_KEY then we render the short sparkline and not otherwise.
 		 * */
 		
 		
@@ -242,15 +255,14 @@ public class CoAuthorshipVisCodeGenerator {
 		 * essentially a side-effecting process, we have both the activators method as 
 		 * side-effecting. They both side-effect "visualizationCode" 
 		 * */
-		if (SHORT_SPARKLINE_MODE_URL_HANDLE.equalsIgnoreCase(visMode)) {
+		if (VisualizationFrameworkConstants.SHORT_SPARKLINE_VIS_MODE.equalsIgnoreCase(visMode)) {
 			
-			valueObjectContainer.setEarliestRenderedPublicationYear(shortSparkMinYear);
+			sparklineData.setEarliestRenderedPublicationYear(shortSparkMinYear);
 			generateShortSparklineVisualizationContent(currentYear,
 													   shortSparkMinYear, 
 													   visContainerID, 
 													   visualizationCode,
 													   unknownYearCoauthors,
-													   totalUniqueCoAuthors, 
 													   sparklineDisplayOptions);	
 		} else {
 			generateFullSparklineVisualizationContent(currentYear,
@@ -268,9 +280,11 @@ public class CoAuthorshipVisCodeGenerator {
 	}
 	
 	private void generateShortSparklineVisualizationContent(int currentYear,
-			int shortSparkMinYear, String visContainerID,
-			StringBuilder visualizationCode, int unknownYearCoauthors,
-			int totalUniqueCoAuthors, String sparklineDisplayOptions) {
+															int shortSparkMinYear, 
+															String visContainerID,
+															StringBuilder visualizationCode, 
+															int unknownYearCoauthors,
+															String sparklineDisplayOptions) {
 		
 		/*
 		 * Create a view of the data containing only the column pertaining to publication count.  
@@ -345,27 +359,22 @@ public class CoAuthorshipVisCodeGenerator {
 		
 	}
 	
-	private void generateFullSparklineVisualizationContent(
-			int currentYear, 
-			int minPubYearConsidered, 
-			String visContainerID, 
-			StringBuilder visualizationCode,
-			int unknownYearCoauthors, 
-			int renderedFullSparks, 
-			String sparklineDisplayOptions) {
+	private void generateFullSparklineVisualizationContent(int currentYear,
+														   int minPubYearConsidered,
+														   String visContainerID,
+														   StringBuilder visualizationCode,
+														   int unknownYearCoauthors,
+														   int renderedFullSparks,
+														   String sparklineDisplayOptions) {
 		
 		String csvDownloadURLHref = ""; 
 		
 		try {
 			if (getCSVDownloadURL() != null) {
-				
 				csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() 
 										+ "\" class=\"inline_href\">(.CSV File)</a>";
-				
 			} else {
-				
 				csvDownloadURLHref = "";
-				
 			}
 
 		} catch (UnsupportedEncodingException e) {
@@ -454,7 +463,7 @@ public class CoAuthorshipVisCodeGenerator {
 	private String getVisualizationContextCode(String visMode) {
 
 		String visualizationContextCode = "";
-		if (SHORT_SPARKLINE_MODE_URL_HANDLE.equalsIgnoreCase(visMode)) {
+		if (VisualizationFrameworkConstants.SHORT_SPARKLINE_VIS_MODE.equalsIgnoreCase(visMode)) {
 			visualizationContextCode = generateShortVisContext();
 		} else {
 			visualizationContextCode = generateFullVisContext();
@@ -478,12 +487,10 @@ public class CoAuthorshipVisCodeGenerator {
 					
 					csvDownloadURLHref = "Download data as <a href='" 
 											+ getCSVDownloadURL() + "'>.csv</a> file.<br />";
-					valueObjectContainer.setDownloadDataLink(getCSVDownloadURL());
+					sparklineData.setDownloadDataLink(getCSVDownloadURL());
 					
 				} else {
-					
 					csvDownloadURLHref = "";
-					
 				}
 
 			} catch (UnsupportedEncodingException e) {
@@ -496,16 +503,14 @@ public class CoAuthorshipVisCodeGenerator {
 		
 		String tableCode = generateDataTable();
 		
-		divContextCode.append("<p>" + tableCode 
-								+ csvDownloadURLHref + "</p>");
+		divContextCode.append("<p>" + tableCode + csvDownloadURLHref + "</p>");
 		
-		valueObjectContainer.setTable(tableCode);
+		sparklineData.setTable(tableCode);
 		
 		return divContextCode.toString();
 	}
 
-	private String getCSVDownloadURL()
-			throws UnsupportedEncodingException {
+	private String getCSVDownloadURL() throws UnsupportedEncodingException {
 		
 		if (yearToUniqueCoauthors.size() > 0) {
 			
@@ -517,25 +522,24 @@ public class CoAuthorshipVisCodeGenerator {
 			
 		String downloadURL = contextPath
 			 + secondaryContextPath
-			 + "?" + VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
-			 + "=" + URLEncoder.encode(individualURIParam, 
+			 + "?" + VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+			 + "=" + URLEncoder.encode(individualURI, 
 					 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
-			 + "&" + VisualizationFrameworkConstants.VIS_TYPE_URL_HANDLE 
-			 + "=" + URLEncoder.encode(VisualizationController
-					 						.COAUTHORSHIP_VIS_URL_VALUE, 
+			 + "&" + VisualizationFrameworkConstants.VIS_TYPE_KEY 
+			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants
+					 						.COAUTHORSHIP_VIS, 
 					 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
-			 + "&" + VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE
+			 + "&" + VisualizationFrameworkConstants.VIS_MODE_KEY
 			 + "=" + URLEncoder.encode("sparkline", 
 					 				   VisualizationController.URL_ENCODING_SCHEME).toString()
-			 + "&" + VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE 
-			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE, 
+			 + "&" + VisualizationFrameworkConstants.RENDER_MODE_KEY 
+			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants.DATA_RENDER_MODE, 
 	 				 				   VisualizationController.URL_ENCODING_SCHEME).toString();
 		
 			return downloadURL;
 		} else {
 			return null;
 		}
-		
 	}
 	
 	private String generateShortVisContext() {
@@ -555,33 +559,31 @@ public class CoAuthorshipVisCodeGenerator {
 			String fullTimelineNetworkURL = contextPath
 							+ secondaryContextPath
 							+ "?" 
-							+ VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
-							+ "=" + URLEncoder.encode(individualURIParam, 
+							+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+							+ "=" + URLEncoder.encode(individualURI, 
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
 					 	    + "&"
-		 				    + VisualizationFrameworkConstants.VIS_TYPE_URL_HANDLE 
+		 				    + VisualizationFrameworkConstants.VIS_TYPE_KEY 
 							+ "=" + URLEncoder.encode("person_level", 
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
 					 	    + "&"
-		 				    + VisualizationFrameworkConstants.VIS_CONTAINER_URL_HANDLE 
+		 				    + VisualizationFrameworkConstants.VIS_CONTAINER_KEY 
 							+ "=" + URLEncoder.encode("ego_sparkline", 
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
 		 				    + "&"
-		 				    + VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE
+		 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
 							+ "=" + URLEncoder.encode(
 											VisualizationFrameworkConstants
-													.STANDALONE_RENDER_MODE_URL_VALUE,
+													.STANDALONE_RENDER_MODE,
 											VisualizationController.URL_ENCODING_SCHEME).toString();
 			
 			fullTimelineLink = "<a href='" + fullTimelineNetworkURL 
 									+ "'>View full timeline and co-author network</a><br />";
 			
-			valueObjectContainer.setFullTimelineNetworkLink(fullTimelineNetworkURL);
+			sparklineData.setFullTimelineNetworkLink(fullTimelineNetworkURL);
 			
 		} else {
-			
 			fullTimelineLink = "No data available to render full timeline.<br />";
-		
 		}
 		
 		divContextCode.append("<p>" + fullTimelineLink + "</p>");
@@ -618,5 +620,9 @@ public class CoAuthorshipVisCodeGenerator {
 		dataTable.append("</tbody>\n </table>\n");
 		
 		return dataTable.toString();
+	}
+
+	public SparklineData getValueObjectContainer() {
+		return sparklineData;
 	}
 }

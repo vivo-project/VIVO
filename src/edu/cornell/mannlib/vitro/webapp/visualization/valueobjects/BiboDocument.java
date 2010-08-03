@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,10 +12,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
  *
  */
 public class BiboDocument extends Individual {
-
-	private static final int NUM_CHARS_IN_YEAR_FORMAT = 4;
-	public static final int MINIMUM_PUBLICATION_YEAR = 1800;
-	private static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
 	private String documentMoniker;
 	private String documentBlurb;
@@ -31,7 +26,7 @@ public class BiboDocument extends Individual {
 	}
 	
 	public String getDocumentURL() {
-		return this.getIndividualURL();
+		return this.getIndividualURI();
 	}
 	
 	public String getDocumentMoniker() {
@@ -68,7 +63,6 @@ public class BiboDocument extends Individual {
 		 * This pattern will match all group of numbers which have only 4 digits
 		 * delimited by the word boundary.
 		 * */
-//		String pattern = "\\b\\d{4}\\b";
 		String pattern = "(?<!-)\\b\\d{4}\\b(?=[^-])";
 		
 		Pattern yearPattern = Pattern.compile(pattern);
@@ -86,8 +80,8 @@ public class BiboDocument extends Individual {
              * Published year has to be equal or less than the current year
              * and more than a minimum default year.
              * */
-			if (candidateYearInteger <= CURRENT_YEAR
-					&& candidateYearInteger >= MINIMUM_PUBLICATION_YEAR) {
+			if (candidateYearInteger <= VOConstants.CURRENT_YEAR
+					&& candidateYearInteger >= VOConstants.MINIMUM_PUBLICATION_YEAR) {
             	publishedYear = candidateYearInteger.toString();
             }
 
@@ -117,20 +111,22 @@ public class BiboDocument extends Individual {
 		 * core:yearMonth points to internally.
 		 * */
 		if (publicationYearMonth != null 
-				&& publicationYearMonth.length() >= NUM_CHARS_IN_YEAR_FORMAT
+				&& publicationYearMonth.length() >= VOConstants.NUM_CHARS_IN_YEAR_FORMAT
 				&& isValidPublicationYear(publicationYearMonth.substring(
 													0,
-													NUM_CHARS_IN_YEAR_FORMAT))) {
+													VOConstants.NUM_CHARS_IN_YEAR_FORMAT))) {
 			
-			return publicationYearMonth.substring(0, NUM_CHARS_IN_YEAR_FORMAT); 
+			return publicationYearMonth.substring(0, VOConstants.NUM_CHARS_IN_YEAR_FORMAT); 
 			
 		} 
 		
 		if (publicationDate != null 
-				&& publicationDate.length() >= NUM_CHARS_IN_YEAR_FORMAT
-				&& isValidPublicationYear(publicationDate.substring(0, NUM_CHARS_IN_YEAR_FORMAT))) {
+				&& publicationDate.length() >= VOConstants.NUM_CHARS_IN_YEAR_FORMAT
+				&& isValidPublicationYear(publicationDate
+												.substring(0,
+														   VOConstants.NUM_CHARS_IN_YEAR_FORMAT))) {
 			
-			return publicationDate.substring(0, NUM_CHARS_IN_YEAR_FORMAT); 
+			return publicationDate.substring(0, VOConstants.NUM_CHARS_IN_YEAR_FORMAT); 
 		}
 		
 		/*
@@ -175,9 +171,9 @@ public class BiboDocument extends Individual {
 	private boolean isValidPublicationYear(String testPublicationYear) {
 		
 		if (testPublicationYear.length() != 0 
-				&& testPublicationYear.trim().length() == NUM_CHARS_IN_YEAR_FORMAT
+				&& testPublicationYear.trim().length() == VOConstants.NUM_CHARS_IN_YEAR_FORMAT
 				&& testPublicationYear.matches("\\d+")
-				&& Integer.parseInt(testPublicationYear) >= MINIMUM_PUBLICATION_YEAR) {
+				&& Integer.parseInt(testPublicationYear) >= VOConstants.MINIMUM_PUBLICATION_YEAR) {
 			return true;
 		}
 		

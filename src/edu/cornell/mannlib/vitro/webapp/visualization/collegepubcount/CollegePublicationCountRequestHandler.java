@@ -14,10 +14,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +29,6 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
-import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
@@ -42,7 +39,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOr
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoDepartmentOrDivision;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoEmployee;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -55,25 +52,25 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 									  DataSource dataSource) {
 
 		String collegeURIParam = vitroRequest.getParameter(
-										VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE);
+										VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
         String renderMode = vitroRequest.getParameter(
-        								VisualizationFrameworkConstants.RENDER_MODE_URL_HANDLE);
+        								VisualizationFrameworkConstants.RENDER_MODE_KEY);
         
         String visMode = vitroRequest.getParameter(
-        								VisualizationFrameworkConstants.VIS_MODE_URL_HANDLE);
+        								VisualizationFrameworkConstants.VIS_MODE_KEY);
 
         String visContainer = vitroRequest.getParameter(
-        								VisualizationFrameworkConstants.VIS_CONTAINER_URL_HANDLE);
+        								VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryHandler<Set<VivoEmployee>> queryManager =
-        	new CollegePublicationCountQueryHandler(collegeURIParam,
+		QueryRunner<Set<VivoEmployee>> queryManager =
+        	new CollegePublicationCountQueryRunner(collegeURIParam,
 						     dataSource,
 						     log);
 
 		try {
 			
-			Set<VivoEmployee> employees = queryManager.getVisualizationJavaValueObjects();
+			Set<VivoEmployee> employees = queryManager.getQueryResult();
 			
 			Map<VivoDepartmentOrDivision, Map<String, Integer>> departmentToPublicationsOverTime = 
 				new HashMap<VivoDepartmentOrDivision, Map<String, Integer>>();
@@ -111,10 +108,10 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 	    	 * HTML code to render sparkline, tables etc. Ideally I would want to avoid this flow.
 	    	 * It is ugly! 
 	    	 * */
-	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE_URL_VALUE.equalsIgnoreCase(renderMode)) { 
-				prepareVisualizationQueryDataResponse(
+	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE.equalsIgnoreCase(renderMode)) { 
+				prepareDataResponse(
 						departmentToPublicationsOverTime,
-						((CollegePublicationCountQueryHandler) queryManager).getCollegeURLToVO(),
+						((CollegePublicationCountQueryRunner) queryManager).getCollegeURLToVO(),
 						response);
 				
 				log.debug(publishedYearsForCollege);
@@ -143,7 +140,13 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 
 		} catch (MalformedQueryParametersException e) {
 			try {
-				handleMalformedParameters(e.getMessage(), vitroRequest, request, response, log);
+				UtilityFunctions.handleMalformedParameters(
+						e.getMessage(), 
+						"Visualization Query Error - College Publication Count", 
+						vitroRequest, 
+						request, 
+						response, 
+						log);
 			} catch (ServletException e1) {
 				log.error(e1.getStackTrace());
 			} catch (IOException e1) {
@@ -204,7 +207,7 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 		return departmentYearToPublicationCount;
 	}
 
-	private void prepareVisualizationQueryPDFResponse(Individual college, 
+	private void preparePDFResponse(Individual college, 
 													  List<BiboDocument> authorDocuments,
 													  Map<String, Integer> yearToPublicationCount, 
 													  HttpServletResponse response) {
@@ -264,7 +267,7 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 			}
 	}
 
-	private void prepareVisualizationQueryDataResponse(
+	private void prepareDataResponse(
 			Map<VivoDepartmentOrDivision, Map<String, Integer>> departmentToPublicationsOverTime,
 			Map<String, VivoCollegeOrSchool> collegeURLToVO, HttpServletResponse response) {
 
@@ -358,7 +361,7 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 		
 	}
 
-	private void prepareVisualizationQueryStandaloneResponse(HttpServletRequest request,
+	private void prepareStandaloneResponse(HttpServletRequest request,
 			HttpServletResponse response, VitroRequest vreq,
 			String visContentCode, String visContextCode) {
 
@@ -374,7 +377,7 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
 
 	}
 
-	private void prepareVisualizationQueryDynamicResponse(HttpServletRequest request,
+	private void prepareDynamicResponse(HttpServletRequest request,
 			HttpServletResponse response, VitroRequest vreq,
 			String visContentCode, String visContextCode) {
 
@@ -386,31 +389,6 @@ public class CollegePublicationCountRequestHandler implements VisualizationReque
         request.setAttribute("portalBean", portal);
         request.setAttribute("bodyJsp", "/templates/visualization/ajax_vis_content.jsp");
 
-	}
-
-	private void handleMalformedParameters(String errorMessage, 
-			VitroRequest vitroRequest, 
-			HttpServletRequest request, 
-			HttpServletResponse response, 
-			Log log)
-			throws ServletException, IOException {
-
-		Portal portal = vitroRequest.getPortal();
-
-		request.setAttribute("error", errorMessage);
-
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
-		request.setAttribute("bodyJsp", "/templates/visualization/visualization_error.jsp");
-		request.setAttribute("portalBean", portal);
-		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
-
-		try {
-			requestDispatcher.forward(request, response);
-		} catch (Exception e) {
-			log.error("EntityEditController could not forward to view.");
-			log.error(e.getMessage());
-			log.error(e.getStackTrace());
-		}
 	}
 
 }

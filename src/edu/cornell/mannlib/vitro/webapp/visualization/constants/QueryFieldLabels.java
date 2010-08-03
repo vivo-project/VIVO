@@ -2,6 +2,10 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.constants;
 
+/**
+ * Thsi contains the sparql fields which are used to capture data for the value objects.  
+ * @author cdtank
+ */
 public class QueryFieldLabels {
 	
 	/*
@@ -22,7 +26,6 @@ public class QueryFieldLabels {
 	public static final String DOCUMENT_PUBLICATION_YEAR = "publicationYearLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR_MONTH = "publicationYearMonthLit";
 	public static final String DOCUMENT_PUBLICATION_DATE = "publicationDateLit";
-	
 	
 	/*
 	 * Image related field labels

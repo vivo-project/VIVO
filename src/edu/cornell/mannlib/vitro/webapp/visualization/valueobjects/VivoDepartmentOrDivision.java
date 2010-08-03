@@ -7,16 +7,16 @@ import java.util.Set;
 
 /**
  * 
- * This is the Value Object equivalent for vivo:AcademicDepartmentOrDivision object type.
+ * This is equivalent for vivo:AcademicDepartmentOrDivision object type.
+ * 
  * @author cdtank
- *
  */
 public class VivoDepartmentOrDivision extends Individual {
 
 	private Set<VivoCollegeOrSchool> parentColleges = new HashSet<VivoCollegeOrSchool>();
 
-	public VivoDepartmentOrDivision(String departmentURL, VivoCollegeOrSchool parentCollege) {
-		super(departmentURL);
+	public VivoDepartmentOrDivision(String departmentURI, VivoCollegeOrSchool parentCollege) {
+		super(departmentURI);
 		addParentCollege(parentCollege);
 	}
 
@@ -28,8 +28,8 @@ public class VivoDepartmentOrDivision extends Individual {
 		this.parentColleges.add(parentCollege);
 	}
 
-	public String getDepartmentURL() {
-		return this.getIndividualURL();
+	public String getDepartmentURI() {
+		return this.getIndividualURI();
 	}
 
 	public String getDepartmentLabel() {

@@ -7,6 +7,10 @@ import java.util.Comparator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 
 
+/**
+ * This Comparator is used to sort the nodes based on their IDs in ascending order.
+ * @author cdtank
+ */
 public class NodeComparator implements Comparator<Node> {
 
 	@Override

@@ -14,9 +14,9 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 
 /**
  * 
- * This is the Value Object for storing node information mainly for co-author vis.
+ * This stores node information mainly for co-author vis.
+ * 
  * @author cdtank
- *
  */
 public class Node extends Individual {
 
@@ -25,9 +25,9 @@ public class Node extends Individual {
 
 	private Set<BiboDocument> authorDocuments = new HashSet<BiboDocument>();
 
-	public Node(String nodeURL,
+	public Node(String nodeURI,
 				UniqueIDGenerator uniqueIDGenerator) {
-		super(nodeURL);
+		super(nodeURI);
 		nodeID = uniqueIDGenerator.getNextNumericID();
 	}
 
@@ -35,8 +35,8 @@ public class Node extends Individual {
 		return nodeID;
 	}
 	
-	public String getNodeURL() {
-		return this.getIndividualURL();
+	public String getNodeURI() {
+		return this.getIndividualURI();
 	}
 
 	public String getNodeName() {
@@ -59,13 +59,13 @@ public class Node extends Individual {
 		this.authorDocuments.add(authorDocument);
 	}
 	
-	
 	public Map<String, Integer> getYearToPublicationCount() {
 		if (yearToPublicationCount == null) {
 			yearToPublicationCount = UtilityFunctions.getYearToPublicationCount(authorDocuments);
 		}
 		return yearToPublicationCount;
 	}
+	
 	/*
 	 * getEarliest, Latest & Unknown Publication YearCount should only be used after 
 	 * the parsing of the entire sparql is done. Else it will give results based on
@@ -153,6 +153,4 @@ public class Node extends Individual {
 			return null;
 		}
 	}
-	
-
 }
