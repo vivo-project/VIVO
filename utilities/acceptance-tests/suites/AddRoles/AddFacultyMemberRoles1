@@ -31,7 +31,7 @@
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add grant roles for Jane Faculty</td>
+	<td class="comment">Add grant roles for Jane Faculty--originally tested auto-complete but doesn't work well within Selenium</td>
 	<td></td>
 </tr>
 <tr>
@@ -572,12 +572,7 @@
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>VIVO Cornell Grant</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>ui-active-menuitem</td>
-	<td></td>
+	<td>VIVO Cornell Grant Too</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -627,7 +622,7 @@
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>VIVO Cornell Grant</td>
+	<td>VIVO Cornell Grant Too</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -691,7 +686,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant</td>
+	<td>VIVO Cornell Grant Too</td>
 	<td></td>
 </tr>
 <tr>
@@ -747,12 +742,7 @@
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>NIH VIVO</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>ui-active-menuitem</td>
-	<td></td>
+	<td>NIH VIVO Too</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -811,7 +801,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>NIH VIVO</td>
+	<td>NIH VIVO Too</td>
 	<td></td>
 </tr>
 <tr>
@@ -861,7 +851,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant</td>
+	<td>VIVO Cornell Grant Too</td>
 	<td></td>
 </tr>
 <tr>
@@ -876,7 +866,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>NIH VIVO</td>
+	<td>NIH VIVO Too</td>
 	<td></td>
 </tr>
 <tr>
