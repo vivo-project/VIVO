@@ -31,7 +31,7 @@
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test repair mode using  Jane Faculty</td>
+	<td class="comment">Test repair mode using Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -91,7 +91,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty</td>
+	<td class="comment">Navigate to Lily Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -106,22 +106,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,17 +142,17 @@
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
-	<td>label=Extension Unit</td>
+	<td>label=Association</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>Cornell Cooperative Extension</td>
+	<td>American Library Association (ALA)</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>newIndLabel</td>
-	<td>Extension Agent</td>
+	<td>Member at Large</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -171,7 +171,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,32 +181,32 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Cornell Cooperative Extension</td>
+	<td>link=American Library Association (ALA)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Extension Agent 1999 - 2009</td>
+	<td>Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Cornell Cooperative Extension</td>
+	<td>link=American Library Association (ALA)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Cornell Cooperative Extension</td>
+	<td>American Library Association (ALA)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Extension Agent 1999 - 2009</td>
+	<td>Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,12 +216,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=American Library Association (ALA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>American Library Association (ALA)</td>
 	<td></td>
 </tr>
 <tr>
@@ -241,22 +251,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane</td>
+	<td>American Library Association (ALA)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>member of</td>
+	<td>verifyElementPresent</td>
+	<td>link=related role</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Extension Agent</td>
+	<td>verifyElementPresent</td>
+	<td>link=Member at Large</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to delete the role in the backend</td>
+	<td class="comment">Delete relation between role node and non-person thing</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,7 +276,7 @@
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete the property<br />Extension Agent member of?</td>
+	<td>Are you sure you want to delete the property<br />Member at Large related role?</td>
 	<td></td>
 </tr>
 <tr>
@@ -280,28 +290,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Verify role is gone</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane</td>
+	<td>American Library Association (ALA)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>member of</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=related role</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>Extension Agent</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Member at Large</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Go back to Jane Faculty in front end</td>
+	<td class="comment">Go back to Lily Librarian in front end</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,27 +336,167 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Edit Jane Faculty's membership role in the front end</td>
+	<td class="comment">Verify condition of MEMBER OF</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>unknown Member at Large (unidentified activity - please edit)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Edit MEMBER OF to add data back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasMemberRole']/ul/li/span/span/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Edit membership entry for Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Membership Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Activity Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Role in Activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Years of Participation in Activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Start Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>End Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Don't select anything--just press enter button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This field must not be empty.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Have to re-select Association</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Association</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Forgot to enter name of organization so error occurred</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>This field must not be empty.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Now enter the missing information</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>American Library Association (ALA)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=American Library Association (ALA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
 <tr>
