@@ -562,22 +562,6 @@ var addAuthorForm = {
 //                  authorName = authorLink.html();
             
                 if (status === 'success') {
-                    // Both these cases can be replaced by calling a reorder: 
-                    // positions are not needed if we always eliminate gaps in rank 
-                    // (what about an error on the reorder call, though?)
-                    // The reset of the rank hidden form field is done in the
-                    // reorder callback.   
-                    if (nextAuthorships.length) {
-                        // Reset the position value of each succeeding authorship
-                        nextAuthorships.each(function() {
-                            var pos = addAuthorForm.getPosition(this);
-                            addAuthorForm.setPosition(this, pos-1);                         
-                        });
-                    } else {
-                        // Removed author was last in rank: reset the rank hidden form field
-                        rank = addAuthorForm.getRankIntVal(authorship); 
-                        $('input#rank').val(rank);                          
-                    }
                 
                     // In future, do this selectively by only clearing terms that match the
                     // deleted author's name
@@ -588,11 +572,22 @@ var addAuthorForm = {
                     addAuthorForm.removeAuthorFromAcFilter(author);
                     
                     authorship.fadeOut(400, function() {
+                        var numAuthors;
+                        
                         $(this).remove();
+                        
                         // Actions that depend on the author having been removed from the DOM:
-                        // If there's just one author remaining, disable drag-drop
-                        if ($('.authorship').length == 1) {
-                            addAuthorForm.disableAuthorDD();
+                        numAuthors = $('.authorship').length;
+                        if (numAuthors > 0) {
+                            // Reorder to remove any gaps
+                            // RY if we do this based on js objects rather than rank stored in the DOM,
+                            // this wouldn't depend on removing the author from the DOM.
+                            addAuthorForm.reorderAuthors();
+                            
+                            // If just one author remaining, disable drag-drop
+                            if (numAuthors == 1) {
+                                addAuthorForm.disableAuthorDD();
+                            }                           
                         }
                     });
 
