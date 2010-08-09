@@ -1,279 +1,261 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
+<%@ page import="edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData"%>
+
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="portalBean" value="${requestScope.portalBean}" />
-<c:set var="portalBean" value="${requestScope.portalBean}" />
-<c:set var="themeDir">
-	<c:out value="${portalBean.themeDir}" />
-</c:set>
-<c:set var="contextPath">
-	<c:out value="${pageContext.request.contextPath}" />
-</c:set>
+<c:set var="themeDir"><c:out value="${portalBean.themeDir}" /></c:set>
+<c:url var="visImageContextPath" value="/${themeDir}site_icons/visualization/" />
+<c:url var="loadingImageLink" value="/${themeDir}site_icons/visualization/ajax-loader.gif"></c:url>
 
-<c:url var="egoCoAuthorshipDataURL" value="/visualization">
-	<c:param name="vis" value="coauthorship" />
+<c:set var='numOfAuthors' value='${requestScope.numOfAuthors}' />
+<c:set var='numOfCoAuthorShips' value='${requestScope.numOfCoAuthorShips}' />
+
+<c:url var="egoVivoProfileURL" value="/individual">
+	<c:param name="uri" value="${requestScope.egoURIParam}" />
+</c:url>
+
+<c:url var="egoSparklineDataURL" value="/visualization">
+	<c:param name="render_mode" value="data" />
+	<c:param name="vis" value="person_pub_count" />
+	<c:param name="uri" value="${requestScope.egoURIParam}" />
+</c:url>
+
+<c:url var="coAuthorshipDownloadFile" value="/visualization">
+	<c:param name="vis" value="person_level" />
 	<c:param name="render_mode" value="data" />
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
-	<c:param name="labelField" value="name" />
 </c:url>
-
-
-<c:url var="egoSparklineVisURL" value="/visualization">
-	<c:param name="render_mode" value="dynamic"/>
-	<c:param name="container" value="ego_sparkline"/>
-	<c:param name="vis" value="person_pub_count"/>
-	<c:param name="vis_mode" value="full"/>
-	<c:param name="uri" value="${requestScope.egoURIParam}"/>
-</c:url>
-
-<c:url var="jquery" value="/js/jquery.js" />
-<c:url var="adobeFlashDetector" value="/js/visualization/coauthorship/AC_OETags.js" />
-<c:url var="coAuthorShipJavaScript" value="/js/visualization/coauthorship/co_authorship.js" />
-<c:url var="googleVisualizationAPI" value="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D"/>
-<c:url var="style" value="/${themeDir}css/visualization/coauthorship/style.css" />
-<c:url var="noImage" value="/${themeDir}site_icons/visualization/coauthorship/no_image.png" />
-<c:url var="swfLink" value="/${themeDir}site_icons/visualization/coauthorship/CoAuthor.swf" />
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-
-
-<title>Co-Authorship Visualization</title>
-
-<script type="text/javascript" src="${adobeFlashDetector}"></script>
-
-
-<script language="JavaScript" type="text/javascript">
-<!--
-// -----------------------------------------------------------------------------
-// Globals
-// Major version of Flash required
-var requiredMajorVersion = 10;
-// Minor version of Flash required
-var requiredMinorVersion = 0;
-// Minor version of Flash required
-var requiredRevision = 0;
-// -----------------------------------------------------------------------------
-
-
-var swfLink = "${swfLink}";
-var egoCoAuthorshipDataURL = "${egoCoAuthorshipDataURL}";
-var contextPath = "${contextPath}";
-
-
-// -->
-</script>
-
-<script type="text/javascript" src="${jquery}"></script>
-<script type="text/javascript" src="${googleVisualizationAPI}"></script>
-<link href="${style}" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="${coAuthorShipJavaScript}"></script>
-
-<style type="text/css">
-		#ego_sparkline {
-			cursor:pointer;
-			height:36px;
-			margin-left:24%;
-			/*margin-top:-18%;*/
-			position:absolute;
-			width:471px;
-		}
-	</style>
-	
-</head>
-
-<body>
-
 
 <div id="body">
 
-                    
-<%-- Label --%>
-<div class="datatypePropertyValue">
-	<div class="statementWrap">
-		<span id="ego_label"></span>
-    </div>
-</div>
 
-<%-- Moniker--%>                       
-<div class="datatypeProperties">
-    <div class="datatypePropertyValue">
-        <div class="statementWrap">
-            <span id="ego_moniker" class="moniker"></span>                       
-        </div>
-    </div>
-</div>
-    
-<%-- Image --%>  
-<div class="datatypeProperties">
-    <div class="datatypePropertyValue">
-        <div id="ego_profile-image" class="statementWrap thumbnail"> 
-        </div>
-    </div>
-</div> 
+<style type="text/css">
 
-<%-- Sparkline --%>  
-<div class="datatypeProperties">
-    <div class="datatypePropertyValue">
-        <div id="ego_sparkline">
-        
-        ${requestScope.egoURIParam}
-         
-        </div>
-    </div>
-</div> 
+#profileImage img{
+	width: 90px;
+	height: auto;
+}
 
-	             
-<div id="topShadow"></div>
-<div id="bodyPannel" style="height: 900px;"><br class="spacer" />
-<div id="visPanel" style="float: left; width: 610px;">
+#body h1 {
+	margin:0.0em;
+} 
 
-<script type="text/javascript">
+.sparkline_wrapper_table {
+	display: inline;
+	vertical-align: bottom;
+}
 
-<!--
+.author_name {
+	color: #13968c;
+	font-weight: bold;
+}
 
-renderCoAuthorshipVisualization();
+.neutral_author_name {
+	color: black;
+	font-weight: bold;
+}
 
-//-->
+.author_moniker {
+	color: #9C9C9C;
+}
 
-</script>
+.sub_headings {
+	color: #121b3c;
+	padding-top: 10px;
+	margin-bottom: 0.3em;
+}
+
+.sub_headings a {
+	font-size:0.7em;
+	font-weight:normal;
+}
+
+table.sparkline_wrapper_table td, th {
+	vertical-align: bottom;
+}
+
+.inline_href {
+}
 
 
-</div>
-<div id="dataPanel" style="float: left; width: 150px;"><br />
-<br />
-<br />
-<br />
-<br />
-<br />
+#ego_profile {
+	padding-left:10px;
+	padding-top:10px;
+	min-height: 100px;
+}
 
-	<div id="newsLetter" style="visibility: hidden">
-		<span class="nltop"></span>
-		<div class="middle" id="nodeData">
-		<div id="profileImage"></div>
-		<div class="bold"><strong><span id="authorName">&nbsp;</span></strong></div>
-		<div class="italicize"><span id="profileMoniker"></span></div>
-		<div class="works"><span class="numbers" style="width: 40px;"
-			id="works">6</span>&nbsp;&nbsp;<span class="title">Works</span></div>
-		<div class="works"><span class="numbers" style="width: 40px;"
-			id="coAuthors">78</span>&nbsp;&nbsp;<span>Co-author(s)</span></div>
+#ego_label {
+	font-size:1.1em;
+}
+
+#ego_profile_image {
+	float:left;
+	padding-right: 5px;
+}
+
+#ego_profile_image img{
+	width: 90px;
+	height: auto;
+}
+
+#ego_sparkline {
+	cursor:pointer;
+	height:36px;
+	width:471px;
+}
+
+
+#coauthorships_table th {
+	vertical-align: top;
+}
+
+</style>
+
+<!--[if IE]>
+	<style type="text/css">
+	
+	#${egoPubSparklineContainerID},
+	#${uniqueCoauthorsSparklineVisContainerID} {
+		padding-bottom:15px;
+	}
+	
+	#ego_label {
+		margin-left:-3px;
+	}
+	</style>
+<![endif]-->
+
+<div id="ego_profile">
+
+	
+	<%-- Image --%>
+			<div id="ego_profile_image" class="thumbnail"></div>
+			
+	<%-- Label --%>
+			<a href="${egoVivoProfileURL}"><h1><span id="ego_label" class="author_name"></span></h1></a>
+	
+	<%-- Moniker--%>
+			<span id="ego_moniker" class="author_moniker"></span>
+
+
+	<div style="clear:both;"></div>
+	
+	<c:choose>
+		<c:when test='${numOfAuthors > 0}'>
+	
+	<div id="incomplete-data">This information is based solely on publications which have been loaded into the VIVO system. 
+	This may only be a small sample of the person's total work. </div>
+	
+		<h2 class="sub_headings">Co-Author Network 
+		<c:choose>
+		    <c:when test="${numOfCoAuthorShips > 0 || numOfAuthors > 0}">
+		       <a href="${coAuthorshipDownloadFile}">(GraphML File)</a></h2>
+		    </c:when>
+		    <c:otherwise>
+		        </h2>
+		        
+		        <c:if test='${numOfAuthors > 0}'>
+		        	<c:set var='authorsText' value='multi-author' />
+		        </c:if>
+		        
+		        <span id="no_coauthorships">Currently there are no ${authorsText} papers for 
+		        	<a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the VIVO database.</span>
+		    </c:otherwise>
+		</c:choose>
+		
+	</c:when>
+	<c:otherwise>
+		<span id="no_coauthorships">Currently there are no papers for <a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">
+		this author</span></a> in the VIVO database.</span>
+	</c:otherwise>
+	</c:choose>
+
+</div>	
+
+<c:if test='${numOfCoAuthorShips > 0 || numOfAuthors > 0}'>
+
+<div id="bodyPannel">
+	
+	
+	<div id="visPanel" style="float: left; width: 600px;">
+		<script language="JavaScript" type="text/javascript">
+			<!--
+			renderCoAuthorshipVisualization();
+			//-->
+		</script>
+	</div>
+	
+	<div id="dataPanel">
+		
 		<br />
-		<div id="firstPublication"><span></span>&nbsp;<span>First
-		Publication</span></div>
-		<div id="lastPublication"><span></span>&nbsp;Last Publication</div>
 		<br />
-		<div><a href="#" id="profileUrl">VIVO profile</a></div>
+		<div id="profileImage" class="thumbnail"></div>
+		
+		<div class="bold"><strong><span id="authorName" class="neutral_author_name">&nbsp;</span></strong></div>
+		
+		<div class="italicize"><span id="profileMoniker" class="author_moniker"></span></div>
+		<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
 		<br />
-		<div><a href="#" id="coAuthorshipVisUrl">Co-author network of <span id="coAuthorName"></span></a></div>
-		</div>
-		<br class="spacer"> <span class="nlbottom"></span>
+		<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;<span class="author_stats_text">Publication(s)</span></div>
+		<div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>&nbsp;&nbsp;<span class="author_stats_text">Co-author(s)</span></div>
+		
+		<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
+		<div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>&nbsp;&nbsp;<span>Last Publication</span></div>
+		
 	</div>
 
 </div>
 
-Download co-authorship newtwork as <a href="/vivo1/visualization?uri=http%3A%2F%2Fvivo.library.cornell.edu%2Fns%2F0.1%23individual5748&amp;vis=person_pub_count&amp;render_mode=data">.graphml</a> file.
+</c:if>
 
-<div id="bottomShadow"></div>
+<c:if test='${numOfAuthors > 0}'>
 
-
-</div>
-
-<br class="spacer" />
-
-<table id="publications_data_table">
-	<caption>Publications per year</caption>
-	<thead>
-		<tr>
-			<th>Year</th>
-			<th>Publications</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>2004</td>
-			<td>4</td>
-		</tr>
-		<tr>
-			<td>2005</td>
-			<td>2</td>
-		</tr>
-		<tr>
-			<td>11</td>
-		</tr>
-		<tr>
-			<td>Unknown</td>
-			<td>1</td>
-		</tr>
-	</tbody>
-</table>
-
-Download data as <a href="/vivo1/visualization?uri=http%3A%2F%2Fvivo.library.cornell.edu%2Fns%2F0.1%23individual5748&amp;vis=person_pub_count&amp;render_mode=data">.csv</a> file.
-
-<table id="coauthorships_data_table">
-	<caption>Co - Authorhips</caption>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Publications</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>2004</td>
-			<td>4</td>
-		</tr>
-		<tr>
-			<td>2005</td>
-			<td>2</td>
-		</tr>
-		<tr>
-			<td>11</td>
-		</tr>
-		<tr>
-			<td>Unknown</td>
-			<td>1</td>
-		</tr>
-	</tbody>
-</table>
-
-
-
+	<div class="vis_stats">
+	
+	<h2 class="sub_headings">Tables</h2>
+	
+		<div class="vis-tables">
+			<p id="publications_table_container" class="datatable">
+				${egoPubSparkline.table} 
+			</p>
+		</div>
+		
+		<c:if test='${numOfCoAuthorShips > 0}'>
+	
+			<div class="vis-tables">
+				<p id="coauth_table_container" class="datatable"></p>
+			</div>
+		
+		</c:if>
+		
+		<div style="clear:both;"></div>
+	
+	</div>
+</c:if>
 
 </div>
-<script>
+
+<script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
 
+		<c:if test='${numOfCoAuthorShips > 0}'>
+	    	$("#coauth_table_container").empty().html('<img id="loadingData" with="auto" src="${loadingImageLink}" />');
+	    </c:if>
+	    	
 	processProfileInformation("ego_label", 
 							  "ego_moniker",
-							  "ego_profile-image",
+							  "ego_profile_image",
 							  jQuery.parseJSON(getWellFormedURLs("${requestScope.egoURIParam}", "profile_info")));
 
-	renderSparklineVisualization("${egoSparklineVisURL}");
-	
+	<c:if test='${empty numOfCoAuthorShips || empty numOfAuthors}'>
 
-	var obj = jQuery.parseJSON('{"name":"John"}');
-	//console.log(obj)
+		if ($('#ego_label').text().length > 0) {
+			setProfileName('no_coauthorships_person', $('#ego_label').text());
+		}
+		
+	</c:if>	
 
-	var obj = jQuery.parseJSON('{"imageOffset2":["sup"],"A":["2001","2002","2003","2090","Unknown"],"B":["2001","2002","2003","2090","Unknown"],"C":["2001","2002","2003","2090","Unknown"],"imageOffset":["2090","2002","2003","2001"]}');
-	//console.log(obj)
-
-	 $.each(obj, function(i, item){
-		 //console.log("i - " + i + " item - " + item);
-				$.each(item, function(index, vals) {
-						//console.log(index + " - val - " + vals);
-					});
-		 
-       });
-	
 });
 </script>
-
-</body>
-</html>

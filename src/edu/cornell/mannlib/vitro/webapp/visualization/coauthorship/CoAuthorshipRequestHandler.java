@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,8 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
 
+import edu.cornell.mannlib.vitro.webapp.beans.Portal;
+import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
@@ -90,6 +93,27 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		    			prepareNetworkDataResponse(authorNodesAndEdges, response);
 						return;
 				}
+			} else {
+				
+				RequestDispatcher requestDispatcher = null;
+
+				prepareStandaloneResponse(
+						egoURI, 
+						authorNodesAndEdges,
+		    			vitroRequest,
+		    			request);
+
+				requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
+
+		    	try {
+		            requestDispatcher.forward(request, response);
+		        } catch (Exception e) {
+		            log.error("EntityEditController could not forward to view.");
+		            log.error(e.getMessage());
+		            log.error(e.getStackTrace());
+		        }
+				
+				
 			}
 			
 		} catch (MalformedQueryParametersException e) {
@@ -215,6 +239,40 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * When the page for person level visualization is requested.
+	 * @param egoURI
+	 * @param coAuthorshipVO
+	 * @param vitroRequest
+	 * @param request
+	 */
+	private void prepareStandaloneResponse(
+					String egoURI, 
+					CoAuthorshipData coAuthorshipVO, 
+					VitroRequest vitroRequest, 
+					HttpServletRequest request) {
+
+        Portal portal = vitroRequest.getPortal();
+        
+        request.setAttribute("egoURIParam", egoURI);
+        
+        String title = "";
+        if (coAuthorshipVO.getNodes() != null && coAuthorshipVO.getNodes().size() > 0) {
+        	request.setAttribute("numOfAuthors", coAuthorshipVO.getNodes().size());
+        	title = coAuthorshipVO.getEgoNode().getNodeName() + " - ";
+		}
+		
+		if (coAuthorshipVO.getEdges() != null && coAuthorshipVO.getEdges().size() > 0) {
+			request.setAttribute("numOfCoAuthorShips", coAuthorshipVO.getEdges().size());
+		}
+		
+        
+        request.setAttribute("title",  title + "Co-Authorship Visualization");
+        request.setAttribute("portalBean", portal);
+        request.setAttribute("scripts", "/templates/visualization/person_level_inject_head.jsp");
+        request.setAttribute("bodyJsp", "/templates/visualization/co_authorship.jsp");
 	}
 	
 }
