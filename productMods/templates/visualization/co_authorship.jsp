@@ -210,18 +210,12 @@ table.sparkline_wrapper_table td, th {
 
 </c:if>
 
-<c:if test='${numOfAuthors > 0}'>
+<c:if test='${numOfCoAuthorShips > 0}'>
 
 	<div class="vis_stats">
 	
-	<h2 class="sub_headings">Tables</h2>
+	<h2 class="sub_headings">Table</h2>
 	
-		<div class="vis-tables">
-			<p id="publications_table_container" class="datatable">
-				${egoPubSparkline.table} 
-			</p>
-		</div>
-		
 		<c:if test='${numOfCoAuthorShips > 0}'>
 	
 			<div class="vis-tables">
