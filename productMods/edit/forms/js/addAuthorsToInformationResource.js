@@ -318,7 +318,6 @@ var addAuthorForm = {
             authorships = [];
         
         $('li.authorship').each(function(index) {
-            //var uri = $(this).attr('id'),
             var uri = $(this).data('authorshipUri'),
                 subjectUri = '<' + uri + '>',
                 oldRankVal = addAuthorForm.getRankStrVal(this),
@@ -394,9 +393,8 @@ var addAuthorForm = {
                         nextpos = pos + 1, 
                         authorships = $('#authorships'), 
                         next = addAuthorForm.findAuthorship('position', nextpos);
-                        //authorships.find('.position[id=' + nextpos + ']').parent();
                     
-                    if (next) {
+                    if (next.length) {
                         ui.item.insertBefore(next);
                     }
                     else {
@@ -460,14 +458,16 @@ var addAuthorForm = {
     },
     
     findAuthorship: function(key, value) {
-        var matchingAuthorship = null;
+        var matchingAuthorship = $(); // if we don't find one, return an empty jQuery set
+        
         $('.authorship').each(function() {
             var authorship = $(this);
             if ( authorship.data(key) === value ) {
-                matchingAuthorship = authorship; // **** return authorship or this (this = DOM element; authorship = jquery object) ??
+                matchingAuthorship = authorship; 
                 return false; // stop the loop
             }
-        }); 
+        });
+         
         return matchingAuthorship;       
     },
     
@@ -588,13 +588,6 @@ var addAuthorForm = {
             complete: function(request, status) {
                 var authorship,
                     authorUri;
-                    
-//                var authorship = $(this).parents('.authorship'),
-//                    author = authorship.find('.authorName').attr('id'),
-//                    rank;
-//                  author = $(this).siblings('span.author'),
-//                  authorLink = author.children('a.authorLink'),
-//                  authorName = authorLink.html();
             
                 if (status === 'success') {
                     
