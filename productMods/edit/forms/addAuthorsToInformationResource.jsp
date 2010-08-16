@@ -312,7 +312,12 @@ SPARQL queries for existing values. --%>
 
     // for ( ObjectPropertyStatement stmt : authorshipStmts) {
     //     Individual authorship = stmt.getObject();
-        
+%>        
+    <script type="text/javascript">
+        var authorshipData = [];
+    </script>
+    
+<%    
     for ( Individual authorship : authorships ) {
         authorshipCount++;
 
@@ -320,9 +325,11 @@ SPARQL queries for existing values. --%>
         request.setAttribute("authorshipName", authorship.getName());
         
         String rankValue = "";
+        String numericRank = "";
         DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
         if (rankStmt != null) {
             rankValue = rankStmt.getData();
+            numericRank = rankValue;
             maxRank = Integer.valueOf(rankValue);
             String rankDatatypeUri = rankStmt.getDatatypeURI();
             if ( !StringUtils.isEmpty(rankDatatypeUri) ) {
@@ -330,17 +337,11 @@ SPARQL queries for existing values. --%>
             }                                                
         }
         request.setAttribute("rankValue", rankValue);
+        request.setAttribute("numericRank", numericRank);
        
-        request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor"));
-        
-        // This value is used to replace a moved element after a failed reorder.
-        // It's not the same as rank, because ranks may have gaps. 
-        request.setAttribute("position", authorshipCount);                
+        request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor"));               
 %> 
         <li class="authorship" id="${authorshipUri}">
-            <span class="rank" id="${rankValue}"></span> 
-            <span class="position" id="${position}"></span> 
-
             <%-- span.author will be used in the next phase, when we display a message that the author has been
             removed. That text will replace the a.authorName, which will be removed. --%>    
             <span class="author">
@@ -349,17 +350,21 @@ SPARQL queries for existing values. --%>
                 <span class="authorNameWrapper">
 	                <c:choose>
 	                    <c:when test="${!empty author}">
+	                        <c:set var="authorUri" value="${author.URI}" />
+                            <c:set var="authorName" value="${author.name}" />
 	                        <c:url var="authorHref" value="/individual">
-	                            <c:param name="uri" value="${author.URI}"/>
+	                            <c:param name="uri" value="${authorUri}"/>
 	                        </c:url> 
-	                        <span id="${author.URI}" class="authorName">${author.name}</span>
+	                        <span class="authorName">${authorName}</span>
 	                    </c:when>
 	
 	                    <c:otherwise>
+	                       <c:set var="authorUri" value="" />
+                           <c:set var="authorName" value="" />
 		                   <c:url var="authorshipHref" value="/individual">
 		                       <c:param name="uri" value="${authorshipUri}"/>
 		                   </c:url>                
-		                   <a href="${authorshipHref}" id="${authorshipUri}" class="authorName">${authorshipName}</a><em> (no linked author)</em>
+		                   <span class="authorName">${authorshipName}</span><em> (no linked author)</em>
 	                    </c:otherwise>
 	                </c:choose>
                 </span>
@@ -367,12 +372,21 @@ SPARQL queries for existing values. --%>
                 <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
                 <%-- <a href="${undoHref}" class="undo">Undo</a>  --%>
             </span>
-        </li>             
+        </li>    
+        
+        <script type="text/javascript">
+            authorshipData.push({
+                "authorshipUri": "${authorshipUri}",
+                //"numericRank": "${numericRank}",
+                "rankVal": "${rankValue}",
+                "authorUri": "${authorUri}",
+                "authorName": "${authorName}"                
+            });
+        </script>         
 <%         
     }
     
     // A new author will be ranked last when added.
-    // This wouldn't handle gaps in the ranking: vreq.setAttribute("rank", authorships.size()+1);
     // This value is now inserted by JavaScript, but leave it here as a safety net in case page
     // load reordering returns an error. 
     request.setAttribute("newRank", maxRank + 1);
@@ -394,7 +408,7 @@ SPARQL queries for existing values. --%>
 <form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <h3>Add an Author</h3>
-    
+
     <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" cssClass="acSelector" size="30" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint} ${initialHint}" size="20" /></p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name ${initialHint}" size="20" /></p>
@@ -405,11 +419,11 @@ SPARQL queries for existing values. --%>
         <p class="inline"><label>Selected author: </label><span class="acSelectionInfo" id="selectedAuthorName"></span></p>
         <input type="hidden" id="personUri" name="personUri" value="" /> <!-- Field value populated by JavaScript -->
     </div>
-    
+
     <input type="hidden" name="rank" id="rank" value="${newRank}" />
 
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
-    
+
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 </div>

@@ -64,6 +64,8 @@ var addAuthorForm = {
     // Initial page setup. Called only at page load.
     initPage: function() {
 
+        this.initAuthorshipData();
+            
     	// Show elements hidden by CSS for the non-JavaScript-enabled version.
     	// NB The non-JavaScript version of this form is currently not functional.
     	this.removeAuthorshipLinks.show();
@@ -86,14 +88,16 @@ var addAuthorForm = {
     
     /* *** Set up the various page views *** */
    
+   // This initialization is done only on page load, not when returning to author list only view 
+   // after hitting 'cancel.'
    initAuthorListOnlyView: function() {
-        // Reorder authors on page load so that previously unranked authors get a rank. Otherwise,
-        // when we add a new author, it will get put ahead of any previously unranked authors, instead
-        // of at the end of the list. (It is also helpful to normalize the data before we get started.)
-        // This is done only on page load, not when returning to author list only view after hitting 'cancel.'
+       
         if ($('.authorship').length) {  // make sure we have at least one author
+            // Reorder authors on page load so that previously unranked authors get a rank. Otherwise,
+            // when we add a new author, it will get put ahead of any previously unranked authors, instead
+            // of at the end of the list. (It is also helpful to normalize the data before we get started.)            
             this.reorderAuthors();
-        }
+        }        
         this.showAuthorListOnlyView();       
    },
     
@@ -148,10 +152,11 @@ var addAuthorForm = {
         
         // Reset the last name field. It had been hidden if we selected an author from
         // the autocomplete field.
-        this.lastNameWrapper.show(); 
-    
+        this.lastNameWrapper.show();         
+
         // Show the form
-        this.form.show(); 
+        this.form.show();                 
+        this.lastNameField.focus();
     },   
     
     hideSelectedAuthor: function() {
@@ -220,11 +225,11 @@ var addAuthorForm = {
     },
 
     setAcFilter: function() {
-        var existingAuthors = $('#authorships .authorName'); 
+        //var existingAuthors = $('#authorships .authorName'); 
         this.acFilter = [];
         
-        existingAuthors.each(function() {
-            var uri = $(this).attr('id');
+        $('.authorship').each(function() {
+            var uri = $(this).data('authorUri');
             addAuthorForm.acFilter.push(uri);
          });
     },
@@ -286,7 +291,7 @@ var addAuthorForm = {
     initAuthorDD: function() {
         
         var authorshipList = $('#authorships'),
-            authorships = authorshipList.children();
+            authorships = authorshipList.children('li');
         
         if (authorships.length < 2) {
             return;
@@ -312,18 +317,18 @@ var addAuthorForm = {
             additions = '',
             retractions = '',
             authorships = [];
-
         
         $('li.authorship').each(function(index) {
-            var uri = $(this).attr('id'),
-            subjectUri = '<' + uri + '>',
-            oldRankVal = addAuthorForm.getRankStrVal(this),
-            newRank = index + 1,                            
-            newRankForN3,
-            oldRank,
-            oldRankType,
-            oldRankForN3,
-            rankVals;
+            //var uri = $(this).attr('id'),
+            var uri = $(this).data('authorshipUri'),
+                subjectUri = '<' + uri + '>',
+                oldRankVal = addAuthorForm.getRankStrVal(this),
+                newRank = index + 1,                            
+                newRankForN3,
+                oldRank,
+                oldRankType,
+                oldRankForN3,
+                rankVals;
 
             if (oldRankVal) {
                 // e.g., 1_http://www.w3.org/2001/XMLSchema#int
@@ -364,34 +369,32 @@ var addAuthorForm = {
             type: 'POST',
             success: function(data, status, request) {
                 var maxRank;
-                
                 $.each(authorships, function(index, obj) {
-                    // find the element with this uri as id
-                    var el = $('li[id=' + obj.uri + ']'),
+                    // find the authorship with this uri
+                    var authorship = addAuthorForm.findAuthorship('authorshipUri', obj.uri),
+                    //var el = $('li[id=' + obj.uri + ']'),
                         // because all ranks have been reordered without gaps,
                         // we can get the position from the rank
-                        pos = obj.rankVal.split('_')[0];
+                        rank = addAuthorForm.getRankIntValFromRankVal(obj.rankVal);
                     // set the new rank and position for this element 
-                    addAuthorForm.setRankStrVal(el, obj.rankVal);
-                    addAuthorForm.setPosition(el, pos);
+                    addAuthorForm.setRank(authorship, obj.rankVal);
+                    addAuthorForm.setPosition(authorship, rank);
+                    maxRank = rank;
+                    // console.log(authorship.data('authorshipUri') + ' is at rank ' + authorship.data('rankVal'));
                 });      
 
-                // On page load, we're calling reorder to assign a rank to any
-                // unranked authorships. We thus need to set the rank form field
-                // to the new highest rank + 1.
-                if (!ui) {
-                    maxRank = addAuthorForm.getRankIntVal($('.authorship:last'));
-                    $('#rank').val(maxRank + 1);                    
-                }
+                // Set the form rank field value.
+                $('#rank').val(maxRank + 1);                    
             },
             error: function(request, status, error) {
                 // This is performed only after drag-and-drop.
                 if (ui) {
                     // Put the moved item back to its original position.
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
-                    var pos = addAuthorForm.getPosition(ui.item), //ui.item.children('.position').attr('id'),                        
+                    var pos = addAuthorForm.getPosition(ui.item),                       
                         nextpos = pos + 1, authorships = $('#authorships'), 
-                        next = authorships.find('.position[id=' + nextpos + ']').parent();
+                        next = addAuthorForm.findAuthorship('position', nextpos);
+                        //authorships.find('.position[id=' + nextpos + ']').parent();
                     
                     if (next.length) {
                         ui.item.insertBefore(next);
@@ -401,41 +404,71 @@ var addAuthorForm = {
                     }
                     
                     alert('Reordering of authors failed.');                                 
-                } // What should we do if the reordering fails?
-                else {
                 }      
             }
         });           
     },
+    
+    // On page load, associate data with each authorship element. Then we don't
+    // have to keep retrieving data from or modifying the DOM as we manipulate the
+    // authorships.
+    initAuthorshipData: function() {
+        $('.authorship').each(function(index) {
+            $(this).data(authorshipData[index]);    
+            
+            // RY We might still need position to put back an element after reordering
+            // failure. Rank might already have been reset? Check.
+            // We also may need position to implement undo links: we want the removed authorship
+            // to show up in the list, but it has no rank.
+            $(this).data('position', index+1);      
+        });
+    },
 
     getPosition: function(authorship) {
-        return parseInt($(authorship).children('.position').attr('id'));
+        return $(authorship).data('position');
     },
     
     setPosition: function(authorship, pos) {
-        $(authorship).children('.position').attr('id', pos);
+        $(authorship).data('position', pos);
     },
     
     // Get the authorship rank value, which includes xsd type
     getRankStrVal: function(authorship) {
-        return $(authorship).children('.rank').attr('id');
+        return $(authorship).data('rankVal');
     },
     
-    // Get the integer rank value from the authorship rank string
+    // Get the authorship numeric rank
     getRankIntVal: function(authorship) {
-        return parseInt(this.getRankStrVal(authorship).split('_')[0]);
+        var rankVal = getRankStrVal(authorship);
+        return this.getRankIntValFromRankVal(rankVal);
     },
     
-    setRankStrVal: function(authorship, rank) {
-        $(authorship).children('.rank').attr('id', rank);
+    getRankIntValFromRankVal: function(rankVal) {
+        return parseInt(rankVal.split('_')[0]);
     },
-     
+    
+    setRank: function(authorship, rankVal) {
+        $(authorship).data('rankVal', rankVal);
+    },
+    
     makeRankDataPropVal: function(rank, xsdType) {
         var rankVal = '"' + rank + '"';
         if (xsdType) {
             rankVal += '^^<' + xsdType + '>'
         }
         return rankVal;
+    },
+    
+    findAuthorship: function(key, value) {
+        var matchingAuthorship = null;
+        $('.authorship').each(function() {
+            var authorship = $(this);
+            if ( authorship.data(key) === value ) {
+                matchingAuthorship = authorship; // **** return authorship or this (this = DOM element; authorship = jquery object) ??
+                return false; // stop the loop
+            }
+        }); 
+        return matchingAuthorship;       
     },
     
                
@@ -553,15 +586,20 @@ var addAuthorForm = {
             dataType: 'json',
             context: link, // context for callback
             complete: function(request, status) {
-                var authorship = $(this).parents('.authorship'),
-                    nextAuthorships = authorship.nextAll(),
-                    author = authorship.find('.authorName').attr('id'),
-                    rank;
+                var authorship,
+                    authorUri;
+                    
+//                var authorship = $(this).parents('.authorship'),
+//                    author = authorship.find('.authorName').attr('id'),
+//                    rank;
 //                  author = $(this).siblings('span.author'),
 //                  authorLink = author.children('a.authorLink'),
 //                  authorName = authorLink.html();
             
                 if (status === 'success') {
+                    
+                    authorship = $(this).parents('.authorship');
+                    authorUri = $(authorship).data('authorUri');
                 
                     // In future, do this selectively by only clearing terms that match the
                     // deleted author's name
@@ -569,11 +607,14 @@ var addAuthorForm = {
                     
                     // Remove this author from the acFilter so it can be returned in autocomplete
                     // results again.
-                    addAuthorForm.removeAuthorFromAcFilter(author);
+                    addAuthorForm.removeAuthorFromAcFilter(authorUri);
                     
                     authorship.fadeOut(400, function() {
                         var numAuthors;
+ 
+                        // For undo link: add to a deletedAuthorships array
                         
+                        // Remove from the DOM                       
                         $(this).remove();
                         
                         // Actions that depend on the author having been removed from the DOM:
@@ -584,8 +625,8 @@ var addAuthorForm = {
                             // this wouldn't depend on removing the author from the DOM.
                             addAuthorForm.reorderAuthors();
                             
-                            // If just one author remaining, disable drag-drop
-                            if (numAuthors == 1) {
+                            // If less than two authors remaining, disable drag-drop
+                            if (numAuthors < 2) {
                                 addAuthorForm.disableAuthorDD();
                             }                           
                         }
