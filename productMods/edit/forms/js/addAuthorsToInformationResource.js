@@ -225,7 +225,6 @@ var addAuthorForm = {
     },
 
     setAcFilter: function() {
-        //var existingAuthors = $('#authorships .authorName'); 
         this.acFilter = [];
         
         $('.authorship').each(function() {
@@ -372,31 +371,32 @@ var addAuthorForm = {
                 $.each(authorships, function(index, obj) {
                     // find the authorship with this uri
                     var authorship = addAuthorForm.findAuthorship('authorshipUri', obj.uri),
-                    //var el = $('li[id=' + obj.uri + ']'),
                         // because all ranks have been reordered without gaps,
                         // we can get the position from the rank
-                        rank = addAuthorForm.getRankIntValFromRankVal(obj.rankVal);
+                        pos = addAuthorForm.getRankIntValFromRankVal(obj.rankVal);
                     // set the new rank and position for this element 
                     addAuthorForm.setRank(authorship, obj.rankVal);
-                    addAuthorForm.setPosition(authorship, rank);
-                    maxRank = rank;
+                    addAuthorForm.setPosition(authorship, pos);
+                    maxRank = pos;
                     // console.log(authorship.data('authorshipUri') + ' is at rank ' + authorship.data('rankVal'));
                 });      
 
                 // Set the form rank field value.
-                $('#rank').val(maxRank + 1);                    
+                $('#rank').val(maxRank + 1);   
+                // console.log("value of rank field = " + $('#rank').val());        
             },
             error: function(request, status, error) {
-                // This is performed only after drag-and-drop.
+                // ui is undefined on page load and after an authorship removal.
                 if (ui) {
                     // Put the moved item back to its original position.
                     // Seems we need to do this by hand. Can't see any way to do it with jQuery UI. ??
                     var pos = addAuthorForm.getPosition(ui.item),                       
-                        nextpos = pos + 1, authorships = $('#authorships'), 
+                        nextpos = pos + 1, 
+                        authorships = $('#authorships'), 
                         next = addAuthorForm.findAuthorship('position', nextpos);
                         //authorships.find('.position[id=' + nextpos + ']').parent();
                     
-                    if (next.length) {
+                    if (next) {
                         ui.item.insertBefore(next);
                     }
                     else {
@@ -439,7 +439,7 @@ var addAuthorForm = {
     
     // Get the authorship numeric rank
     getRankIntVal: function(authorship) {
-        var rankVal = getRankStrVal(authorship);
+        var rankVal = this.getRankStrVal(authorship);
         return this.getRankIntValFromRankVal(rankVal);
     },
     
@@ -621,8 +621,6 @@ var addAuthorForm = {
                         numAuthors = $('.authorship').length;
                         if (numAuthors > 0) {
                             // Reorder to remove any gaps
-                            // RY if we do this based on js objects rather than rank stored in the DOM,
-                            // this wouldn't depend on removing the author from the DOM.
                             addAuthorForm.reorderAuthors();
                             
                             // If less than two authors remaining, disable drag-drop
