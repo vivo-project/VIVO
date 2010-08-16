@@ -189,11 +189,11 @@ var addAuthorForm = {
             minLength: 2,
             source: function(request, response) {
                 if (request.term in addAuthorForm.acCache) {
-                    // console.log('found term in cache');
+                    console.log('found term in cache');
                     response(addAuthorForm.acCache[request.term]);
                     return;
                 }
-                // console.log('not getting term from cache');
+                console.log('not getting term from cache');
                 
                 // If the url query params are too long, we could do a post
                 // here instead of a get. Add the exclude uris to the data
@@ -255,6 +255,18 @@ var addAuthorForm = {
             }
         });
         return filteredResults;
+    },
+    
+    // After removing an authorship, selectively clear matching autocomplete
+    // cache entries, else the associated author will not be included in 
+    // subsequent autocomplete suggestions.
+    clearAcCacheEntries: function(name) {
+        name = name.toLowerCase();
+        $.each(this.acCache, function(key, value) {
+            if (name.indexOf(key) == 0) {
+                delete addAuthorForm.acCache[key];
+            }
+        });
     },
     
     // Action taken after selecting an author from the autocomplete list
@@ -581,7 +593,8 @@ var addAuthorForm = {
             url: $(link).attr('href'),
             type: 'POST', 
             data: {
-                deletion: $(link).parents('.authorship').attr('id')
+                //deletion: $(link).parents('.authorship').attr('id')
+                deletion: $(link).parents('.authorship').data('authorshipUri')
             },
             dataType: 'json',
             context: link, // context for callback
@@ -592,15 +605,14 @@ var addAuthorForm = {
                 if (status === 'success') {
                     
                     authorship = $(this).parents('.authorship');
-                    authorUri = $(authorship).data('authorUri');
                 
-                    // In future, do this selectively by only clearing terms that match the
-                    // deleted author's name
-                    addAuthorForm.acCache = {};
+                    // Clear autocomplete cache entries matching this author's name, else
+                    // autocomplete will be retrieved from the cache, which excludes the removed author.
+                    addAuthorForm.clearAcCacheEntries(authorship.data('authorName'));
                     
-                    // Remove this author from the acFilter so it can be returned in autocomplete
+                    // Remove this author from the acFilter so it is included in autocomplete
                     // results again.
-                    addAuthorForm.removeAuthorFromAcFilter(authorUri);
+                    addAuthorForm.removeAuthorFromAcFilter(authorship.data('authorUri'));
                     
                     authorship.fadeOut(400, function() {
                         var numAuthors;
@@ -611,7 +623,7 @@ var addAuthorForm = {
                         $(this).remove();
                         
                         // Actions that depend on the author having been removed from the DOM:
-                        numAuthors = $('.authorship').length;
+                        numAuthors = $('.authorship').length; // retrieve the length after removing authorship from the DOM
                         if (numAuthors > 0) {
                             // Reorder to remove any gaps
                             addAuthorForm.reorderAuthors();

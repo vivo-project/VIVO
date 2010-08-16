@@ -341,7 +341,7 @@ SPARQL queries for existing values. --%>
        
         request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor"));               
 %> 
-        <li class="authorship" id="${authorshipUri}">
+        <li class="authorship">
             <%-- span.author will be used in the next phase, when we display a message that the author has been
             removed. That text will replace the a.authorName, which will be removed. --%>    
             <span class="author">
