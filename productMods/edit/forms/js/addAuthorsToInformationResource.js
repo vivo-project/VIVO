@@ -189,11 +189,11 @@ var addAuthorForm = {
             minLength: 2,
             source: function(request, response) {
                 if (request.term in addAuthorForm.acCache) {
-                    console.log('found term in cache');
+                    //console.log('found term in cache');
                     response(addAuthorForm.acCache[request.term]);
                     return;
                 }
-                console.log('not getting term from cache');
+                //console.log('not getting term from cache');
                 
                 // If the url query params are too long, we could do a post
                 // here instead of a get. Add the exclude uris to the data
@@ -216,9 +216,10 @@ var addAuthorForm = {
                 });
             },
             // Select event not triggered in IE6/7 when selecting with enter key rather
-            // than mouse.
+            // than mouse. Thus form is disabled in these browsers.
             select: function(event, ui) {
-                addAuthorForm.showSelectedAuthor(ui);      
+                addAuthorForm.showSelectedAuthor(ui); 
+                return false;
             }
         });
 
@@ -281,11 +282,9 @@ var addAuthorForm = {
         // NB For some reason this doesn't delete the value from the last name
         // field when the form is redisplayed. Thus it's done explicitly in initFormView.
         this.hideFields(this.lastNameWrapper);
-        // This shouldn't be needed, because they are already hidden, but for some reason on select 
-        // these fields get displayed, even before entering the select event listener.
         // These get displayed if the selection was made through an enter keystroke,
         // since the keydown event on the last name field is also triggered (and
-        // executes first).
+        // executes first). So re-hide them here.
         this.hideFieldsForNewPerson(); 
         
         // Cancel restores initial form view
@@ -294,8 +293,6 @@ var addAuthorForm = {
             addAuthorForm.initFormView();
             return false;
         });
-        
-        return false;
     },
         
     /* Drag-and-drop */
@@ -495,19 +492,23 @@ var addAuthorForm = {
     	
     	this.form.submit(function() {
     		// NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
-    		// in prepareSubmit. If we do this.form.submit(prepareSubmit); then
+    		// in prepareSubmit. If we do this.form.submit(this.prepareSubmit); then
     		// this != addAuthorForm in prepareSubmit.
     		addAuthorForm.prepareSubmit(); 
     	});   	
 
     	this.lastNameField.blur(function() {
+            // If personUri field has a value, the autocomplete select event has already fired;
+            // don't do anything.
+            if (addAuthorForm.personUriField.val()) {
+                return;
+            }
     		addAuthorForm.onLastNameChange();
     	});
     	    	
     	// When hitting enter in last name field, show first and middle name fields.
         // NB This event fires when selecting an autocomplete suggestion with the enter
-        // key, and there's no way to prevent it. Since it fires first, we undo its
-        // effects in the ac select event listener.
+        // key. Since it fires first, we undo its effects in the ac select event listener.
     	this.lastNameField.keydown(function(event) {
             if (event.which === 13) {
                 addAuthorForm.onLastNameChange();
