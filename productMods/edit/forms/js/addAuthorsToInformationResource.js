@@ -144,7 +144,7 @@ var addAuthorForm = {
 
         this.hideSelectedAuthor();
 
-        this.cancel.unbind('click'); 
+        this.cancel.unbind('click');
         this.cancel.bind('click', function() {
             addAuthorForm.showAuthorListOnlyView();
             return false;
@@ -498,9 +498,11 @@ var addAuthorForm = {
     	});   	
 
     	this.lastNameField.blur(function() {
-            // If personUri field has a value, the autocomplete select event has already fired;
-            // don't do anything.
-            if (addAuthorForm.personUriField.val()) {
+            // Cases where this event should be ignored:
+            // 1. personUri field has a value: the autocomplete select event has already fired.
+            // 2. The last name field is empty (especially since the field has focus when the form is displayed).
+            // 3. Autocomplete suggestions are showing.
+            if ( addAuthorForm.personUriField.val() || !$(this).val() || $('ul.ui-autocomplete li.ui-menu-item').length ) {
                 return;
             }
     		addAuthorForm.onLastNameChange();
