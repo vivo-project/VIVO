@@ -189,11 +189,11 @@ var addAuthorForm = {
             minLength: 2,
             source: function(request, response) {
                 if (request.term in addAuthorForm.acCache) {
-                    //console.log('found term in cache');
+                    // console.log('found term in cache');
                     response(addAuthorForm.acCache[request.term]);
                     return;
                 }
-                //console.log('not getting term from cache');
+                // console.log('not getting term from cache');
                 
                 // If the url query params are too long, we could do a post
                 // here instead of a get. Add the exclude uris to the data
@@ -516,6 +516,12 @@ var addAuthorForm = {
                 addAuthorForm.onLastNameChange();
                 return false; // don't submit form
             }
+            // TimW would like to be able to make a selection using the arrow keys, but jQuery UI doesn't recognize 
+            // that as a selection unless you actually hit enter or click the mouse on it. We could trigger the event, 
+            // as shown, but need to pass in the ui item for it to work. Think more about this.
+            // else if (event.which === 38 || event.which === 40) {
+            //    addAuthorForm.lastNameField.autocomplete('option', 'select')();
+            // }
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
@@ -596,7 +602,6 @@ var addAuthorForm = {
             url: $(link).attr('href'),
             type: 'POST', 
             data: {
-                //deletion: $(link).parents('.authorship').attr('id')
                 deletion: $(link).parents('.authorship').data('authorshipUri')
             },
             dataType: 'json',
