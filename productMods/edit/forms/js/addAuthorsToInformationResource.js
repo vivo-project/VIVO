@@ -217,6 +217,10 @@ var addAuthorForm = {
             },
             // Select event not triggered in IE6/7 when selecting with enter key rather
             // than mouse. Thus form is disabled in these browsers.
+            // jQuery UI bug: when scrolling through the ac suggestions with up/down arrow
+            // keys, the input element gets filled with the highlighted text, even though no
+            // select event has been triggered. To trigger a select, the user must hit enter
+            // or click on the selection with the mouse. This appears to confuse some users.
             select: function(event, ui) {
                 addAuthorForm.showSelectedAuthor(ui); 
                 return false;
@@ -317,7 +321,7 @@ var addAuthorForm = {
         });     
     },
     
-    // Reorder authors. Called on page load and after author drag-and-drop.
+    // Reorder authors. Called on page load and after author drag-and-drop and remove.
     // Event and ui parameters are defined only in the case of drag-and-drop.
     reorderAuthors: function(event, ui) {
         var predicateUri = '<' + this.rankPred + '>',
@@ -516,12 +520,6 @@ var addAuthorForm = {
                 addAuthorForm.onLastNameChange();
                 return false; // don't submit form
             }
-            // TimW would like to be able to make a selection using the arrow keys, but jQuery UI doesn't recognize 
-            // that as a selection unless you actually hit enter or click the mouse on it. We could trigger the event, 
-            // as shown, but need to pass in the ui item for it to work. Think more about this.
-            // else if (event.which === 38 || event.which === 40) {
-            //    addAuthorForm.lastNameField.autocomplete('option', 'select')();
-            // }
     	});
     	
     	this.removeAuthorshipLinks.click(function() {
