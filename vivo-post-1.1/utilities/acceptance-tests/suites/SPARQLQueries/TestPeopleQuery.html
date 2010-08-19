@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>TestPeopleQuery</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">TestPeopleQuery</td></tr>
+</thead><tbody>
+<tr>
+	<td>comment</td>
+	<td class="comment">Run SPARQL query to list all people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must login as site admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testAdmin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to SPARQL query option on Site Administration page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SPARQL query</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>SPARQL Query</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter query</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>query</td>
+	<td>PREFIX rdf:&nbsp;&nbsp;&nbsp;&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;<br />PREFIX rdfs:&nbsp;&nbsp;&lt;http://www.w3.org/2000/01/rdf-schema#&gt;<br />PREFIX xsd:&nbsp;&nbsp;&nbsp;&lt;http://www.w3.org/2001/XMLSchema#&gt;<br />PREFIX owl:&nbsp;&nbsp;&nbsp;&lt;http://www.w3.org/2002/07/owl#&gt;<br />PREFIX swrl:&nbsp;&nbsp;&lt;http://www.w3.org/2003/11/swrl#&gt;<br />PREFIX swrlb: &lt;http://www.w3.org/2003/11/swrlb#&gt;<br />PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;<br />PREFIX vivo:&nbsp;&nbsp;&lt;http://vivo.library.cornell.edu/ns/0.1#&gt;<br />PREFIX foaf:&nbsp;&nbsp;&lt;http://xmlns.com/foaf/0.1/&gt;<br />PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;<br />PREFIX bibo: &lt;http://purl.org/ontology/bibo#&gt;<br /><br />#&nbsp;&nbsp;This query returns name and&nbsp;&nbsp;NameURI,<br />#&nbsp;&nbsp;remove the comment pound sign in front of lines to &quot;uncomment&quot; them<br />#&nbsp;&nbsp;uncomment the filter line and edit name text &quot;Jill&quot; to return specific people<br /><br />SELECT ?personL ?person<br />WHERE<br />{<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?person rdf:type foaf:Person .<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?person rdfs:label ?personL .<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#filter(regex(?personL,&quot;Jill&quot;,&quot;i&quot;))<br />}<br />ORDER BY ?personL<br />LIMIT 100</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Run Query']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>50000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify query output</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>personL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&quot;Jane Faculty&quot;@en-US</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&quot;Lilly Librarian&quot;@en-US</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;http://vivo.local.edu/individual/n</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>&lt;http://vivo.local.edu/individual/n</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>SPARQL Query</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

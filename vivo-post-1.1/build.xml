@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- ====================================================================== 
+	 Build script for the NIH VIVO product.
+	 
+	 The deploy.properties file contains both build properties and runtime 
+	 properties.
+	     
+	 The required build properties are:
+	 	vitroCore.dir
+	    tomcat.home
+	    webapp.name
+	     ====================================================================== -->
+<project name="nihvivo" default="describe">
+
+	<!--
+		Load the properties from deploy.properties.
+	-->
+	<property name="deploy.properties.file" location="deploy.properties" />
+	<fail message="You must create a &quot;${deploy.properties.file}&quot; file.">
+		<condition>
+			<not>
+				<available file="${deploy.properties.file}" />
+			</not>
+		</condition>
+	</fail>
+	<property file="${deploy.properties.file}" />
+	<fail unless="vitro.core.dir"
+	      message="${deploy.properties.file} must contain a value for vitro.core.dir" />
+
+	<!--
+		Locate the core script in terms that the product script requires.
+	-->
+	<property name="inner.basedir" location="${vitro.core.dir}/webapp" />
+
+	<!--
+		Override the default location for project modifications.
+	-->
+	<property name="product.modifications.dir" location="./productMods" />
+
+
+	<!--
+		Set this property so the core themes will not be included in the build.
+	-->
+	<property name="skip.core.themes" value="true" />
+
+	<!--
+		Tell the licenser where to find its properties for this product.
+	-->
+	<property name="licenser.product.properties.file"
+	          location="config/licenser/licenser.properties" />
+
+	<!--
+		Now get the standard product-build file.
+	-->
+	<import file="${vitro.core.dir}/webapp/product-build.xml" />
+
+	<!-- ================================= 
+          target: acceptance              
+         ================================= -->
+	<target name="acceptance" description="--> Run the Selenium acceptance tests.">
+		<ant dir="${vitro.core.dir}/utilities/testrunner" target="run" inheritall="false">
+			<property name="acceptance.dir" location="${basedir}/utilities/acceptance-tests" />
+			<property name="acceptance.batch" value="${acceptance.batch}" />
+		</ant>
+	</target>
+
+</project>

@@ -1,0 +1,655 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/*************************************************
+ vivo-basic theme: TEMPORARY individual styles
+**************************************************/
+
+/*@import url("thickbox.css");*/
+
+#personWrap #vitroPropertyGroupname {
+/*    display: none;*/
+}
+
+#personWrap #content.person {
+    padding: 30px 0 20px 4px;
+/*    width: 69%;*/
+    width: auto;
+/*    min-width: 600px;*/
+/*    margin-right: 280px;*/
+/*    padding-top: 10px;*/
+}
+
+#personWrap #contentwrap {
+/*  background: #fff url(../site_icons/grouping/bg_page_person.gif) no-repeat right top;*/
+}
+
+#personWrap {
+/*  background: url(../site_icons/grouping/bg_innerwrap_person.gif) repeat-y right top;*/
+    padding-top: 20px;
+/*    margin-top: 25px;*/
+    clear: both;
+}
+
+#personWrap .entity {
+  padding-top: 0;
+}
+
+/* ------ duplicate styles for department pages ----- */
+
+#deptWrap div.admin {
+/*    display: none;*/
+}
+
+#deptWrap #content {
+/*    padding: 0 0 20px 4px;*/
+    padding-top: 0;
+/*    width: 69%;*/
+    width: auto;
+    min-width: 600px;
+    margin-right: 280px;
+}
+
+#deptWrap {
+	background: url(../site_icons/grouping/bg_innerwrap_person.gif) repeat-y right top;
+    padding-top: 26px;
+    clear: both;
+}
+
+#deptWrap #dashboard {
+    padding: 0 0 100px 0;
+    display: inline-block; /* fixes IE double top-padding bug, discussed at: http://exscale.se/archives/2007/06/13/ie-double-padding-bug/ */
+    background: none;
+    text-align: left;
+    width: 255px;
+}
+
+#deptWrap em.moniker {
+    color: #888888;
+}
+
+#deptWrap div.description {
+/*    font-size: 1.2em;*/
+}
+
+#deptWrap div.description p,
+#deptWrap div.description li {
+/*    font-size: 1em;*/
+}
+
+img.screenshot {
+    display: block;
+    margin: 4px 0;
+    border: 3px solid #C7C3BB;
+}
+
+#deptWrap #dashboard a:link {
+/*    color: #55AABB;*/
+/*    border-color: #55AABB;*/
+}
+
+#deptWrap ul.externalLinks {
+    padding-left: 21px;
+    padding-right: 20px;
+}
+
+#deptWrap ul.externalLinks li {
+    display: block;
+    margin-bottom: 21px;
+    padding-left: 0;
+    border: 0;
+}
+
+/* ------------------------------------------------- */
+
+#personWrap #entity {
+    clear: left;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+#personWrap #entity h2,
+#personWrap #entity em.moniker {
+    float: none;
+/*    display: inline;*/
+    display: block;
+}
+
+#personWrap #entity h2 {
+/*    padding-right: 16px;*/
+/*    line-height: 2.5em;*/
+    line-height: 1.3em;
+    margin: 0;
+    padding-top: 10px;
+}
+
+#personWrap em.moniker {
+    clear: none;
+    display: inline-block;
+    padding: 2px 0 0 0;
+}
+
+#personWrap div#profileImage {
+    width: 87px;
+    float: left;
+}
+
+#personWrap img.headshot,
+#personWrap a.img img.headshot {
+    width: 75px;
+    float: left;
+    margin: 0 12px 3px 0;
+/*    border: 1px solid #333333;*/
+    border: 1px solid #777;
+}
+
+#personWrap #entity div.citation {
+    clear: left;
+    display: inline;
+    font-size: .8em;
+    line-height: 1.2em;
+    color: #888;
+}
+
+#personWrap div#overview {
+    position: relative;
+    clear: left;
+    margin: 0;
+    padding-top: 6px;
+    font-size: 1.1em;
+}
+
+#personWrap div#overview.loggedIn {
+/*    padding-right: 4em;*/
+}
+
+#personWrap ol,
+#personWrap ul {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#personWrap #content ol li,
+#personWrap #content ul li {
+    padding-left: 0;
+/*    font-size: 1em;*/
+}
+
+#personWrap div.propsCategory h3 {
+    float: left;
+    display: inline;
+    height: 24px;
+    margin: 0 0 0 -1px;
+    padding: 0 0 0 12px;
+    font-size: 1.08em;
+    color: #fff;
+    background: url(../site_icons/grouping/h3_tab_left.gif) left top no-repeat;
+    border: 0;
+}
+
+#personWrap div.propsCategory h3 strong {
+    float: left;
+    display: inline;
+    height: 19px;
+    padding: 5px 16px 0 0;
+    background: url(../site_icons/grouping/h3_tab_right.gif) right top no-repeat;
+}
+
+#personWrap div.propsCategory {
+    clear: left;
+    background: #fff url(../site_icons/grouping/bg_propsCategory.gif) right top no-repeat;
+/*    border-left: 1px solid #d9d9d9;*/
+    border-left: 1px solid #dedede;
+/*    border-bottom: 1px solid #d9d9d9;*/
+    border-bottom: 1px solid #dedede;
+/*    margin-bottom: 30px;*/
+    margin: 25px 0;
+}
+
+#personWrap div.propsWrap {
+    clear: left;
+    margin: 0;
+    padding: 8px 16px;
+/*    background: url(../site_icons/grouping/bg_propsWrap.gif) right top no-repeat;*/
+/*    border-top: 1px solid transparent;*/
+/*    border-right: 1px solid transparent;*/
+/*    background: #f7f7f7;*/
+}
+
+#personWrap div.propsItem {
+    position: relative;
+    background: none;
+    border: 0;
+    margin: 0;
+    padding: 14px 0;
+}
+
+#personWrap div.propsCategory div.propsItem { /* being more specific here to leave borders off ungrouped (single) properties */
+
+
+/*    border-top: 1px solid #fff;*/
+/*    border-bottom: 1px solid #f0ede4;*/
+    border-bottom: 1px solid #f2f2f2;
+/*  background: #faf8f3;*/
+}
+
+/* temporary patch - can't reliably apply class of first to some properties */
+
+#personWrap div.propsCategory div.propsItem.first,
+#personWrap div.propsCategory div.propsItem:first-child {
+    border-top: 0;
+}
+
+#personWrap div.propsCategory div.propsItem.last,
+#personWrap div.propsCategory div.propsItem:last-child {
+    border-bottom: 0;
+}
+
+#personWrap div.propsCategory div.propsItem:first-child { /* temporary patch - can't apply class of first to initial property under affiliations group */
+    border-top: 0;
+}
+
+#personWrap div.propsCategory div.propsItem:last-child {
+    border-bottom: 0;
+}
+
+#personWrap div.propsItem h4 {
+    margin-bottom: 1.25em;
+    margin-left: -16px;
+}
+
+#personWrap ul.properties {
+/*    font-size: 1.2em;*/
+    padding-left: 0;
+    color: #888;
+}
+
+ul.properties h5.collate {
+  margin-top: 1em;
+}
+
+#personWrap div.datatypeProperties {
+    font-size: 0.9em;
+}
+
+#personWrap div.datatypeProperties p, /* resetting font sizes for html inside data props */
+#personWrap div.datatypeProperties ul {
+/*    font-size: 1em;*/
+    line-height: 1.5em;
+}
+
+#personWrap div.datatypeProperties ul {
+    margin: 0;
+    padding: 0 0 .5em 1.5em;
+}
+
+#personWrap div.datatypeProperties ol {
+    list-style-type: decimal;
+    margin: 0;
+    padding: 0 0 .5em 2em;
+}
+
+#personWrap div.datatypeProperties ul li {
+    list-style-type: disc;
+}
+
+#personWrap div.datatypeProperties ul.datatypePropertyValue {
+    padding-left: 0;
+}
+
+/* multi-item data properties should not have initial bullets */
+#personWrap div.datatypeProperties ul.datatypePropertyValue li {
+    list-style-type: none;
+}
+
+#personWrap div.datatypeProperties ul.datatypePropertyValue ul li {
+    list-style-type: disc;
+}
+
+#personWrap div.datatypeProperties ul.datatypePropertyValue ol li {
+    list-style-type: decimal;
+}
+
+
+#personWrap div.datatypeProperties ul ol,
+#personWrap div.datatypeProperties ul ul {
+    margin-left: 1.5em;
+    list-style-position: inside; /* resetting from vivo.css */
+}
+
+
+/* ----------------- Dashboard ---------------- */
+
+#personWrap #dashboard {
+    padding: 32px 0 100px 0;
+    display: inline-block; /* fixes IE double top-padding bug, discussed at: http://exscale.se/archives/2007/06/13/ie-double-padding-bug/ */
+    background: none;
+    text-align: left;
+    width: 256px;
+}
+
+#personWrap #dashboard li {
+  list-style-type: none;
+}
+
+#personWrap #dashboard a {
+/*  color: #B31B1B;*/
+}
+
+#personWrap #propGroupNav  {
+    margin-bottom: 20px;
+    border: 2px solid #F0EEE4;
+    border-left: 0;
+    border-right: 0;
+}
+
+#personWrap #propGroupNav li {
+    padding: 0 0 1px 0;
+}
+
+#personWrap #propGroupNav h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.08em;
+    text-align: left;
+    text-transform: uppercase;
+/*    background: #6d8e80;*/
+}
+
+#personWrap #dashboard #propGroupNav h2 a {
+    display: block;
+    padding: 5px 14px 5px 14px;
+    border: 0;
+    color: #fff;
+/*    background: #6d8e80;*/
+    background: #baa280 url(../site_icons/grouping/bg_propGroupNav-active.gif) top right repeat-y;
+}
+
+#personWrap #dashboard #propGroupNav h2 a.inactive {
+    color: #b4bfba;
+    background: #baa280 url(../site_icons/grouping/bg_propGroupNav-inactive.gif) top right repeat-y;
+}
+
+#personWrap #dashboard #propGroupNav h2 a:hover {
+    color: #fff;
+    background: #b31b1b;
+    background-image: none;
+}
+
+#personWrap #dashboard #propGroupNav h2 a#currentCat {
+    background: #b3a37c;
+}
+
+#personWrap #dashboard strong.contactLink {
+    padding-left: 22px;
+    margin-left: 14px;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    background: url(../site_icons/contactinfo.gif) left center no-repeat;
+    font-weight: bold;
+    display: block;
+}
+
+#personWrap #dashboardExtras {
+    position: relative;
+    height: 1%;
+    margin: 10px 14px;
+/*    padding: 10px;*/
+/*    border: 1px solid #CBCBCB;*/
+/*    background: #e6e6e6;*/
+}
+
+#personWrap #dashboardExtras h3 {
+    display: inline;
+    font-size: 1em;
+    line-height: 1.5em;
+    margin: 0 0 .5em 0;
+}
+
+#personWrap #dashboardExtras a img {
+/*    border: 1px solid #ccc;*/
+/*    display: block;*/
+/*    width: auto;*/
+/*    margin: 4px 0 0 0;*/
+/*    text-decoration: none;*/
+}
+
+#personWrap ul.profileLinks {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+#personWrap ul.profileLinks li {
+    padding-left: 0;
+    margin-bottom: 10px;
+    background: none;
+}
+
+ul.keywords li {
+    font-size: 0.9em;
+}
+
+#personWrap #links,
+#personWrap #keywords {
+/*    position: relative;*/
+    clear: both;
+    width: 100%;
+}
+
+#personWrap #links {
+    margin-bottom: 1em;
+}
+
+/* ----------------- Editing Controls ---------------- */
+
+#personWrap #dashboard #dashboardExtras a.add, 
+#personWrap #dashboard #dashboardExtras a.edit, 
+#personWrap #dashboard #dashboardExtras a.delete { /* being overly specific because IE6 had difficulties */
+    color: #209ae0;
+}
+
+#personWrap #dashboardExtras a.add {
+    position: absolute;
+/*    top: 0;*/
+    right: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+#personWrap #content a.delete {
+/*    display: none;*/
+}
+
+#personWrap #overview a.delete {
+/*    display: none;*/
+}
+
+#personWrap #overview a.edit {
+    padding-left: 5px;
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 16px;*/
+}
+
+#personWrap a.add, #personWrap a.edit, #personWrap a.delete {
+    color: #209ae0;
+    text-decoration: underline;
+}
+
+#personWrap a.add:hover, #personWrap a.edit:hover, #personWrap a.delete:hover,
+#personWrap a.add:active, #personWrap a.edit:active, #personWrap a.delete:active {
+    color: #FF8811;
+} 
+
+/*#personWrap div.propsCategory a.add,
+#personWrap div.propsCategory a.edit {
+    margin: 0;
+    padding: 0;
+}
+
+#personWrap div.propsCategory div.highlighted a.add,
+#personWrap div.propsCategory div.highlighted a.edit {
+    right: 15px;
+}*/
+
+#personWrap div.dataItem a.delete {
+    display: none;
+}
+
+#personWrap div.datatypeProperties a.delete {
+    display: inline;
+}
+
+#personWrap #content .properties a.edit,
+#personWrap #content .properties a.delete,
+#personWrap #content .datatypeProperties a.edit,
+#personWrap #content .datatypeProperties a.delete {
+    position: static; /* reset for edit links for property statements */
+    padding-right: 2px;
+}
+
+div.editBox.editMode {
+    border: 2px solid #b5d6e8;
+    background: #FFFEDB;
+/*    padding: 12px 10px;*/
+    padding: 12px 10px;
+    margin-top: 3px;
+}
+
+
+#personWrap div.datatypeProperties div.editMode ol li,
+#personWrap div.datatypeProperties div.editMode ul li {
+    list-style-type: none;
+}
+
+div.editBox.editMode.editing {
+    background: #F4F8FE;
+}
+
+
+#personWrap div.editing ul.properties,
+#personWrap div.editing div.datatypeProperties {
+    color: #888;
+/*    display: none;*/
+}
+
+div.button {
+    padding: 16px 0 0 0;
+}
+
+div.editBox button {
+    color: #209ae0;
+    padding: 3px 6px 3px 6px;
+}
+
+a.addNewButton {
+/*    color: #209ae0;
+    border: 1px solid #5394c3;
+    padding: 6px 16px;
+    line-height: 3em;
+    background: url(../site_icons/grouping/bg_links_addnew.gif) center center repeat-x;*/
+}
+
+a.addNewButton button {
+    color: #209AE0;
+}
+
+#personWrap a.cancel {
+    color: red;
+    border-color: #E7B6B9;
+}
+
+#personWrap .editForm input#submit {
+    color: #209AE0;
+}
+
+#personWrap div.editBox .editForm {
+    margin: 10px 0;
+}
+
+#personWrap table.mceEditor,
+#personWrap div.editBox textarea {
+    margin: 5px 0;
+}
+
+#personWrap p.propEntryHelpText {
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+    padding: 5px 0;
+    line-height: 1.2em;
+    color: #439CBD;
+}
+
+#personWrap #keywords div.editBox a.edit {
+    display: none;
+}
+
+a.backToTop {
+    float: right;
+    margin-top: -22px;
+    font-size: .9em;
+    color: #aaa;   
+    border-color: #ddd;
+}
+
+a.backToTop:link, 
+a.backToTop:visited {
+/* color: #118855;   */
+}
+
+#personWrap div.propsCategory div.highlighted {
+/*	background: #faf8f3 url(../site_icons/grouping/bg_propsItem_highlighted.gif) left top repeat-y;*/
+	border-top-color: #faf8f3;
+/*	border-top-color: #F0EDE4;*/
+	border-bottom-color: #faf8f3;
+/*	border-top: 1px solid #F0EDE4;*/
+	margin-left: -16px;
+	padding-left: 16px;
+	margin-right: -15px;
+	padding-right: 15px;
+}
+
+/* ----------------- Colors ---------------- 
+
+Light Blue (edit links): #209ae0
+Bright Orange (link hover): #FF8811
+Dark Green (links): #118855
+*/
+
+/* fixes IE double top-padding bug, discussed at: http://exscale.se/archives/2007/06/13/ie-double-padding-bug/ 
+ -- recent versions of Firefox and Safari don't ignore inline-block anymore */
+
+* html #personWrap div.propsWrap {
+    display: inline-block; 
+}
+
+*:first-child+html #personWrap div.propsWrap {
+    display: inline-block;
+}
+
+* html div.editBox button {
+    padding: 1px 3px 2px 3px;
+} 
+    
+*:first-child+html div.editBox button {
+    padding: 1px 3px 2px 3px;}
+}
+
+* html #personWrap #entity h2,
+* html #personWrap #entity em.moniker {
+    height: 1%; /* fixes IE6 peekaboo bug */
+}
+
+* html #personWrap #dashboardExtras,
+* html #personWrap div.propsCategory,
+* html #personWrap div.propsItem {
+    height: 1%; /* fixes IE6 peekaboo and absolute position bug described at http://www.positioniseverything.net/abs_relbugs.html */
+}
+
+* html #personWrap div.admin {
+    height: 1%;
+}
+* html #personWrap #content div.propsItem {
+    border-color: #f0ede4;
+    border-top: 0;
+}
