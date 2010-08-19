@@ -308,7 +308,7 @@ SPARQL queries for existing values. --%>
     Collections.sort(authorships, comp);
         
     int maxRank = 0;
-    int authorshipCount = 0;  
+    int authorshipCount = authorships.size();  
 
     // for ( ObjectPropertyStatement stmt : authorshipStmts) {
     //     Individual authorship = stmt.getObject();
@@ -319,7 +319,6 @@ SPARQL queries for existing values. --%>
     
 <%    
     for ( Individual authorship : authorships ) {
-        authorshipCount++;
 
         request.setAttribute("authorshipUri", authorship.getURI());
         request.setAttribute("authorshipName", authorship.getName());
@@ -339,7 +338,8 @@ SPARQL queries for existing values. --%>
         request.setAttribute("rankValue", rankValue);
         request.setAttribute("numericRank", numericRank);
        
-        request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor"));               
+        request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor")); 
+
 %> 
         <li class="authorship">
             <%-- span.author will be used in the next phase, when we display a message that the author has been

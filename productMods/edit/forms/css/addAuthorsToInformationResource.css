@@ -9,19 +9,15 @@
     margin-bottom: .75em;
 }
 
-#authorships.dd li,
-#authorships.ui-sortable li {
+#authorships li.dd {
     padding-left: 1em;
-    background: url("../images/sortable_icon.png") no-repeat left center;    
+    background: url("../images/sortable_icon.png") no-repeat left center;  
+    cursor: move;  
 }
 
 #authorships .authorNameWrapper {
     display: inline-block;
     width: 15em;
-}
-
-#authorships.dd li {
-    cursor: move;
 }
 
 #showAddForm span.or {
