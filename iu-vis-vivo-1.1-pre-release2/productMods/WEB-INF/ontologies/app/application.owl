@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY display "http://vitro.mannlib.cornell.edu/ontologies/display/1.1#" >
+    <!ENTITY display2 "http://vitro.mannlib.cornell.edu/ontologies/display/1.1/" >
+]>
+
+
+<rdf:RDF xmlns="http://vitro.mannlib.cornell.edu/ontologies/display/1.1#"
+     xml:base="http://vitro.mannlib.cornell.edu/ontologies/display/1.1"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:display2="http://vitro.mannlib.cornell.edu/ontologies/display/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:display="http://vitro.mannlib.cornell.edu/ontologies/display/1.1#">
+    <owl:Ontology rdf:about="http://vitro.mannlib.cornell.edu/ontologies/display/1.1/">
+        <rdfs:label>Vitro display ontology</rdfs:label>
+        <owl:versionInfo>1.1</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&owl;versionInfo"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;label"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresValues -->
+
+    <owl:ObjectProperty rdf:about="&display;requiresValues">
+        <rdfs:label>requires values</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#toPage -->
+
+    <owl:ObjectProperty rdf:about="&display;toPage">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1/excludeClass -->
+
+    <owl:ObjectProperty rdf:about="&display2;excludeClass">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1/includeClass -->
+
+    <owl:ObjectProperty rdf:about="&display2;includeClass">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <owl:ObjectProperty rdf:about="&owl;topObjectProperty"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#javaClassName -->
+
+    <owl:DatatypeProperty rdf:about="&display;javaClassName">
+        <rdfs:label>Java Class Name</rdfs:label>
+        <rdfs:comment>Java package and class name.  ex edu.cornell.mannlib.vitro.webapps.functions.ExampleFunction</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#menuPosition -->
+
+    <owl:DatatypeProperty rdf:about="&display;menuPosition">
+        <rdfs:label>menu position</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#parameterName -->
+
+    <owl:DatatypeProperty rdf:about="&display;parameterName">
+        <rdfs:label>parameter name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#parameterValue -->
+
+    <owl:DatatypeProperty rdf:about="&display;parameterValue">
+        <rdfs:label>parameter value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresBodyTemplate -->
+
+    <owl:DatatypeProperty rdf:about="&display;requiresBodyTemplate">
+        <rdfs:label>Body Template</rdfs:label>
+        <rdfs:comment>Indicates that a page requires a body template.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title -->
+
+    <owl:DatatypeProperty rdf:about="&display;title">
+        <rdfs:label>title</rdfs:label>
+        <rdfs:comment>Value for HTML title element.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping -->
+
+    <owl:DatatypeProperty rdf:about="&display;urlMapping">
+        <rdfs:comment>Values from HttpRequest.getPathInfo() will be mapped to values from urlMapping.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topDataProperty -->
+
+    <owl:DatatypeProperty rdf:about="&owl;topDataProperty"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#NavigationElement -->
+
+    <owl:Class rdf:about="&display;NavigationElement">
+        <rdfs:label>Navigation Element</rdfs:label>
+        <rdfs:comment>This represents a menu item or other general navigation item.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page -->
+
+    <owl:Class rdf:about="&display;Page">
+        <rdfs:label>Page</rdfs:label>
+        <rdfs:comment>Class of pages.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Events -->
+
+    <owl:NamedIndividual rdf:about="&display;Events">
+        <rdf:type rdf:resource="&display;Page"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#EventsMenuItem -->
+
+    <owl:NamedIndividual rdf:about="&display;EventsMenuItem">
+        <rdf:type rdf:resource="&display;NavigationElement"/>
+        <toPage rdf:resource="&display;Events"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Home -->
+
+    <owl:NamedIndividual rdf:about="&display;Home">
+        <rdf:type rdf:resource="&display;Page"/>
+        <title>Home</title>
+        <requiresBodyTemplate>home.ftl</requiresBodyTemplate>
+        <urlMapping>/home</urlMapping>
+        <requiresValues rdf:resource="&display;HomeValues"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomeMenuItem -->
+
+    <owl:NamedIndividual rdf:about="&display;HomeMenuItem">
+        <rdf:type rdf:resource="&display;NavigationElement"/>
+        <toPage rdf:resource="&display;Home"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomeValues -->
+
+    <owl:Thing rdf:about="&display;HomeValues">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <javaClassName>edu.cornell.mannlib.vitro.webapp.valuemap.HomeValueMap</javaClassName>
+    </owl:Thing>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Organizations -->
+
+    <owl:NamedIndividual rdf:about="&display;Organizations">
+        <rdf:type rdf:resource="&display;Page"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#OrganizationsMenuItem -->
+
+    <owl:NamedIndividual rdf:about="&display;OrganizationsMenuItem">
+        <rdf:type rdf:resource="&display;NavigationElement"/>
+        <toPage rdf:resource="&display;Organizations"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#People -->
+
+    <owl:NamedIndividual rdf:about="&display;People">
+        <rdf:type rdf:resource="&display;Page"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PeopleMenuItem -->
+
+    <owl:NamedIndividual rdf:about="&display;PeopleMenuItem">
+        <rdf:type rdf:resource="&display;NavigationElement"/>
+        <toPage rdf:resource="&display;People"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Publications -->
+
+    <owl:NamedIndividual rdf:about="&display;Publications">
+        <rdf:type rdf:resource="&display;Page"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PublicationsMenuItem -->
+
+    <owl:NamedIndividual rdf:about="&display;PublicationsMenuItem">
+        <rdf:type rdf:resource="&display;NavigationElement"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.0.0.1451) http://owlapi.sourceforge.net -->
+

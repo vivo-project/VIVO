@@ -1,0 +1,25 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* Although Javascript hides these on page load, hide here as well to avoid the flash on page load.
+   This needs to be removed to support a non-JS version of the form. */
+#fullViewOnly, 
+#submit, 
+.or,
+#requiredLegend {
+    display: none;
+}
+
+#content form p.inline label {
+    display: inline;
+    clear: none;
+    float: none;
+    margin-right: 1em;
+}
+
+.acSelection {
+    margin-top: 2em;
+}
+
+.verifyMatch {
+    margin-left: .5em;
+}

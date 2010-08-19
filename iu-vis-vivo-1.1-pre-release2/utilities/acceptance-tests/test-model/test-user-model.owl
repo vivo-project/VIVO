@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+         xmlns="http://vitro.mannlib.cornell.edu/ns/vitro/default#"
+         xml:base="http://vitro.mannlib.cornell.edu/ns/vitro/default">
+
+<vitro:User rdf:about="#defaultAdminUser">
+    <vitro:username rdf:datatype="http://www.w3.org/2001/XMLSchema#string">testAdmin</vitro:username>
+    <vitro:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DC647EB65E6711E155375218212B3964</vitro:md5password>
+    <vitro:roleURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string">role:/50</vitro:roleURI>  
+    <vitro:firstTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-03-09T16:06:45</vitro:firstTime>  
+    <vitro:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:loginCount>  
+</vitro:User>
+
+<vitro:User rdf:about="http://vivo.mydomain.edu/individual/JoeUser">
+    <vitro:username rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Joe User</vitro:username>
+    <vitro:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8A1A62B7B58B8B95564483BEA60CD99A</vitro:md5password>
+    <vitro:roleURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string">role:/1</vitro:roleURI>    
+    <vitro:firstTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-03-09T16:06:45</vitro:firstTime>  
+    <vitro:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:loginCount>  
+</vitro:User>
+
+<vitro:User rdf:about="http://vivo.mydomain.edu/individual/SallyEditor">
+    <vitro:username rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sally Editor</vitro:username>
+    <vitro:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8A1A62B7B58B8B95564483BEA60CD99A</vitro:md5password>
+    <vitro:roleURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string">role:/4</vitro:roleURI>    
+    <vitro:firstTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-03-09T16:06:45</vitro:firstTime>  
+    <vitro:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:loginCount>  
+</vitro:User>
+
+<vitro:User rdf:about="http://vivo.mydomain.edu/individual/JohnCurator">
+    <vitro:username rdf:datatype="http://www.w3.org/2001/XMLSchema#string">John Curator</vitro:username>
+    <vitro:md5password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8A1A62B7B58B8B95564483BEA60CD99A</vitro:md5password>
+    <vitro:roleURI rdf:datatype="http://www.w3.org/2001/XMLSchema#string">role:/5</vitro:roleURI>    
+    <vitro:firstTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-03-09T16:06:45</vitro:firstTime>  
+    <vitro:loginCount rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:loginCount>  
+</vitro:User>
+
+</rdf:RDF>

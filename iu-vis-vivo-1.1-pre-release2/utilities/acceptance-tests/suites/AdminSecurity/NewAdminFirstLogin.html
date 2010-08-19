@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>temp</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">temp</td></tr>
+</thead><tbody>
+<tr>
+	<td>comment</td>
+	<td class="comment">Login for first time with new admin account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in already</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try logging in without a password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>Sis Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Please enter a password to log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try logging in with the wrong password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>Sis Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>wrong</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The email or password you entered is incorrect.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Login with the correct password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>Sis Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>myPassword</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Now need to set a new password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create Your New Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter a password with more than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Confirm Password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try entering nothing in both fields</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Please enter a password between 5 and 99 characters long</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter in an invalid password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>junk</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>junk</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Please enter a password between 5 and 99 characters long</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try using the original password as the new password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>myPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>myPassword</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please choose a different password from the temporary one provided initially.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter a password with more than 5 characters</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Try entering in different passwords in each field</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>newPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>newPasword</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Passwords do not match</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter valid passwords</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newPassword</td>
+	<td>newPassword</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>newPassword</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify new account is logged in and has access to correct options</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logged in as Sis Admin (Log out)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Data Input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Site Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ontology Editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Advanced Data Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

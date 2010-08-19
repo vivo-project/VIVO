@@ -1,0 +1,67 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/*
+  Formats for the output summary from the acceptance tests.
+*/
+body {
+	background: rgb(95%, 95%, 95%);
+	font-family: sans-serif;
+}
+
+.heading {
+	border: groove;
+	background: white;
+	padding: 10px 20px 8px 20px;
+	margin-top: 50px;
+	font-size: large;
+}
+
+table {
+	border: thin double gray;
+	background: white;
+}
+
+td,th {
+	padding: 4px 12px 2px 12px;
+}
+
+th {
+	border-bottom: 1px solid black;
+}
+
+table.summary {
+	border: none;
+	background: inherit;
+}
+
+table.summary td {
+	padding-right: 30;
+	border: none;
+	vertical-align: top;
+}
+
+.section {
+	background: rgb(70%, 85%, 85%);
+	font-size: larger;
+	margin: 50px 0px 15px 0px;
+	padding: 4px 12px 2px 12px;
+}
+
+.good {
+	background: rgb(60%, 100%, 60%);
+}
+
+.bad {
+	background: rgb(100%, 60%, 60%);
+}
+
+.fair {
+	background: rgb(100%, 100%, 60%);
+}
+
+.one-word {
+	width: 20%;
+	text-align: center;
+	margin: 15px 0px 0px 0px;
+	border: 1px solid black;
+}

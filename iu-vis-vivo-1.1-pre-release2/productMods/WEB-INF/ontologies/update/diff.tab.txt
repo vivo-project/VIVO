@@ -1,0 +1,3 @@
+	http://vivoweb.org/ontology/core#Agreement	No	Add	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#description	http://vivoweb.org/ontology/core#description	Yes	Map	Use-instead
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#citation		No	Delete	not set
