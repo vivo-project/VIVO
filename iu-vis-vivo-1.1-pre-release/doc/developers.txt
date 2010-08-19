@@ -1,0 +1,30 @@
+
+-------------------------------------------------------------------------------
+
+Instructions for VIVO developers
+
+-------------------------------------------------------------------------------
+
+If you are working from the VIVO distribution files, you should follow the 
+instructions in "install.txt", in this directory.
+
+-------------------------------------------------------------------------------
+
+If you are working from the VIVO source files, checked out from the Subversion
+repository, then your working area does not contain the "vitro-core" directory.
+
+Follow these steps:
+
+  1) In the VIVO working area, create deploy.properties as a copy of 
+     example.deploy.properties
+     
+  2) Check out the Vitro source files from Subversion into a separate working 
+     area.
+
+  3) Modify deploy.properties (created in step 1) so vitro.core.dir points to
+     the Vitro working area (created in step 2). For example:
+        vitro.core.dir = ../vitro
+        
+  4) Follow the instructions in "install.txt" to complete the installation, 
+     omitting step III.
+ 

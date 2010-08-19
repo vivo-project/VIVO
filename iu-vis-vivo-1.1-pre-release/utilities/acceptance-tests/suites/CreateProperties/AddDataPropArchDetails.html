@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>AddDataPropArchDetails</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">AddDataPropArchDetails</td></tr>
+</thead><tbody>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Data Property of architectual details to the Place Propery Group</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in already</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must log in as site admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>testAdmin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginSubmitMode</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to Data Property Hierarchy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Data property hierarchy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Data Property Hierarchy</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify that architectural details does not already exist</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=architectural details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add new data property']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Data Property Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add architectural details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>PublicName</td>
+	<td>architectural details</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>GroupURI</td>
+	<td>label=Place</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor,curator,dbAdmin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
+	<td>label=public</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
+	<td>label=editor,curator,dbAdmin</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>Namespace</td>
+	<td>label=VIVO core</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>LocalName</td>
+	<td>architecturalDetails</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>DomainClassURI</td>
+	<td>label=Agent (FOAF)</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>RangeDatatypeURI</td>
+	<td>label=string</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>primaryAction</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Data Property Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify that architectural details has been added properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>exact:core:architecturalDetails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO core</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>architectural details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=exact:http://xmlns.com/foaf/0.1/Agent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://www.w3.org/2001/XMLSchema#string</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Place</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>public</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>editor,curator,dbAdmin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
