@@ -9,7 +9,10 @@
     margin-bottom: .75em;
 }
 
-#authorships li.dd {
+/* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove
+ * the class if there's fewer than one author. 
+ */
+#authorships.dd li {
     padding-left: 1em;
     background: url("../images/sortable_icon.png") no-repeat left center;  
     cursor: move;  

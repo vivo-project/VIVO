@@ -308,8 +308,6 @@ var addAuthorForm = {
             return;
         }
         
-        authorships.addClass('dd');
-        
         $('.authorNameWrapper').each(function() {
             $(this).attr('title', 'Drag and drop to reorder authors');
         });
@@ -662,8 +660,6 @@ var addAuthorForm = {
             
     	authorships.sortable({ disable: true } );
         authorships.removeClass('dd');
-        
-        authorship.removeClass('dd');  
               
     	authorNameWrapper.removeAttr('title');
     },
