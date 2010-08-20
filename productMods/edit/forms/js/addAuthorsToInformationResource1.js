@@ -5,7 +5,7 @@ var addAuthorForm = {
     /* *** Initial page setup *** */
    
     onLoad: function() {
-        console.log($('#rank').val());
+        
         if (this.disableFormInUnsupportedBrowsers()) {
             return;
         }        
@@ -323,78 +323,29 @@ var addAuthorForm = {
     // Reorder authors. Called on page load and after author drag-and-drop and remove.
     // Event and ui parameters are defined only in the case of drag-and-drop.
     reorderAuthors: function(event, ui) {
-        var predicateUri = '<' + this.rankPred + '>',
-            rankXsdType = this.rankXsdType,
-            additions = '',
-            retractions = '',
-            authorships = [];
-        
-        $('li.authorship').each(function(index) {
-            var uri = $(this).data('authorshipUri'),
-                subjectUri = '<' + uri + '>',
-                oldRankVal = addAuthorForm.getRankStrVal(this),
-                newRank = index + 1,                            
-                newRankForN3,
-                oldRank,
-                oldRankType,
-                oldRankForN3,
-                rankVals;
-
-            if (oldRankVal) {
-                // e.g., 1_http://www.w3.org/2001/XMLSchema#int
-                // We handle typeless values formatted as either "1" or "1_".
-                rankVals = oldRankVal.split('_');  
-                oldRank = rankVals[0];
-                oldRankType = rankVals.length > 1 ? rankVals[1] : '';                      
-                oldRankForN3 = addAuthorForm.makeRankDataPropVal(oldRank, oldRankType);                        
-                retractions += subjectUri + ' ' + predicateUri + ' ' + oldRankForN3 + ' .';
-            }
-
-            newRankForN3 = addAuthorForm.makeRankDataPropVal(newRank, rankXsdType);           
-            additions += subjectUri + ' ' + predicateUri + ' ' + newRankForN3 +  ' .';
-                       
-            // This data will be used to modify the page after successful completion
-            // of the Ajax request.
-            authorship = {
-                uri: uri,
-                rankVal: newRank + '_' + rankXsdType
-            };
-            authorships.push(authorship);
-            
-        });
-
-        // console.log(authorships)
-        // console.log('additions: ' + additions);
-        // console.log('retractions: ' + retractions);
+        var authorships = $('li.authorship').map(function(index, el) {
+            return $(this).data('authorshipUri');
+        }).get();
 
         $.ajax({
             url: addAuthorForm.reorderUrl,
             data: {
-                additions: additions,
-                retractions: retractions
+                predicate: addAuthorForm.rankPredicate,
+                individuals: authorships
             },
-            authorships: authorships,
-            processData: 'false',
+            traditional: true, // serialize the array of individuals for the server
             dataType: 'json',
             type: 'POST',
             success: function(data, status, request) {
-                var maxRank;
-                $.each(authorships, function(index, obj) {
-                    // find the authorship with this uri
-                    var authorship = addAuthorForm.findAuthorship('authorshipUri', obj.uri),
-                        // because all ranks have been reordered without gaps,
-                        // we can get the position from the rank
-                        pos = addAuthorForm.getRankIntValFromRankVal(obj.rankVal);
-                    // set the new rank and position for this element 
-                    addAuthorForm.setRank(authorship, obj.rankVal);
-                    addAuthorForm.setPosition(authorship, pos);
-                    maxRank = pos;
-                    // console.log(authorship.data('authorshipUri') + ' is at rank ' + authorship.data('rankVal'));
-                });      
-
+                var pos;
+                $('.authorship').each(function(index){
+                    pos = index + 1;
+                    // Set the new position for this element. The only function of this value 
+                    // is so we can reset an element to its original position in case reordering fails.
+                    addAuthorForm.setPosition(this, pos);                
+                });
                 // Set the form rank field value.
-                $('#rank').val(maxRank + 1);   
-                // console.log("value of rank field = " + $('#rank').val());        
+                $('#rank').val(pos + 1);        
             },
             error: function(request, status, error) {
                 // ui is undefined on page load and after an authorship removal.
