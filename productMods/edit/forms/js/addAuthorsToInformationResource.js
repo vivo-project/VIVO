@@ -655,10 +655,14 @@ var addAuthorForm = {
     // Disable DD and associated cues if only one author remains
     disableAuthorDD: function() {
     	var authorships = $('#authorships'),
-            authorship = $('.authorship'),
             authorNameWrapper = $('.authorNameWrapper');
             
     	authorships.sortable({ disable: true } );
+        
+        // Use class dd rather than jQuery UI's class ui-sortable, so that we can remove
+        // the class if there's fewer than one author. We don't want to remove the ui-sortable
+        // class, in case we want to re-enable DD without a page reload (e.g., if implementing
+        // adding an author via Ajax request). 
         authorships.removeClass('dd');
               
     	authorNameWrapper.removeAttr('title');
