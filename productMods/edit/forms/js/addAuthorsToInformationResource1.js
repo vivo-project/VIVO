@@ -393,33 +393,6 @@ var addAuthorForm = {
         $(authorship).data('position', pos);
     },
     
-    // Get the authorship rank value, which includes xsd type
-    getRankStrVal: function(authorship) {
-        return $(authorship).data('rankVal');
-    },
-    
-    // Get the authorship numeric rank
-    getRankIntVal: function(authorship) {
-        var rankVal = this.getRankStrVal(authorship);
-        return this.getRankIntValFromRankVal(rankVal);
-    },
-    
-    getRankIntValFromRankVal: function(rankVal) {
-        return parseInt(rankVal.split('_')[0]);
-    },
-    
-    setRank: function(authorship, rankVal) {
-        $(authorship).data('rankVal', rankVal);
-    },
-    
-    makeRankDataPropVal: function(rank, xsdType) {
-        var rankVal = '"' + rank + '"';
-        if (xsdType) {
-            rankVal += '^^<' + xsdType + '>'
-        }
-        return rankVal;
-    },
-    
     findAuthorship: function(key, value) {
         var matchingAuthorship = $(); // if we don't find one, return an empty jQuery set
         
