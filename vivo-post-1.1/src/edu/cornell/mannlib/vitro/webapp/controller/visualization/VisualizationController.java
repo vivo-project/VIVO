@@ -36,13 +36,12 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  *
  * @author cdtank
  */
+@SuppressWarnings("serial")
 public class VisualizationController extends BaseEditController {
 
 	private Map<String, VisualizationRequestHandler> visualizationIDsToClass;
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
-
-	private static final long serialVersionUID = 1L;
 
 	private static final Log log = LogFactory.getLog(VisualizationController.class.getName());
 
