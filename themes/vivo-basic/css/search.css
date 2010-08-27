@@ -6,13 +6,26 @@
  
 **************************************************/
 
+/***** Class and subclass refinement links *****/
+
 .searchTOC {
     margin-bottom: 1.5em;
 }
 
+
+/***** Search results *****/
+
 .searchhits li {
     margin-top: 1em;
 }
+
+span.SearchTerm, h1 span.SearchTerm, a:link span.SearchTerm, a:visited span.SearchTerm {
+  font-weight: bold;
+  color: #7D7D7D;
+}
+
+
+/***** Paging links *****/
 
 .searchpages {
     margin-top: 2em;
