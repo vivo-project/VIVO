@@ -6,26 +6,37 @@
  
 **************************************************/
 
+.searchTOC {
+    margin-bottom: 1.5em;
+}
+
 .searchhits li {
-    margin-top: .75em;
+    margin-top: 1em;
 }
 
-.pagingLink {
+.searchpages {
+    margin-top: 2em;
+}
+
+.searchpages a, .searchpages span {
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+.searchpages a:link, .searchpages a:visited {
     text-decoration: none;
-    margin-left: .25em;
-    margin-right: .25em;
 }
 
-.pagingLink:hover {
+.searchpages a:hover, .searchpages a:active {
     text-decoration: underline;
 }
 
-.pagingLink.prev {
+.searchpages a.prev {
     margin-right: 1em;
     text-decoration: underline;
 }
 
-.pagingLink.next {
+.searchpages a.next {
     margin-left: 1em;
     text-decoration: underline;
 }
