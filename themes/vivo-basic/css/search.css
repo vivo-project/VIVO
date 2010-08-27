@@ -2,7 +2,31 @@
 
 /*************************************************
 
- vivo-basic theme: search result styles
+ vivo-basic theme: search results styles
  
 **************************************************/
+
+.searchhits li {
+    margin-top: .75em;
+}
+
+.pagingLink {
+    text-decoration: none;
+    margin-left: .25em;
+    margin-right: .25em;
+}
+
+.pagingLink:hover {
+    text-decoration: underline;
+}
+
+.pagingLink.prev {
+    margin-right: 1em;
+    text-decoration: underline;
+}
+
+.pagingLink.next {
+    margin-left: 1em;
+    text-decoration: underline;
+}
  
