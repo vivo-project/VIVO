@@ -352,7 +352,7 @@
 
   <servlet>
     <servlet-name>SiteAdminController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.FreemarkerSiteAdminController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SiteAdminController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SiteAdminController</servlet-name>
