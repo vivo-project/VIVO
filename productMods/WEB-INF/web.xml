@@ -352,7 +352,7 @@
 
   <servlet>
     <servlet-name>SiteAdminController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.SiteAdminController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.FreemarkerSiteAdminController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SiteAdminController</servlet-name>
@@ -361,19 +361,6 @@
   <servlet-mapping>
     <servlet-name>SiteAdminController</servlet-name>
     <url-pattern>/siteAdmin.jsp</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>FmSiteAdminController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.FreemarkerSiteAdminController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FmSiteAdminController</servlet-name>
-    <url-pattern>/fm-siteAdmin</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>FmSiteAdminController</servlet-name>
-    <url-pattern>/fm-siteAdmin.jsp</url-pattern>
   </servlet-mapping>
     
   <servlet>
