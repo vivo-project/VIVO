@@ -196,6 +196,15 @@
 	 then filter-mapping <servlet-name> order in web.xml -->
 
   <filter>
+    <filter-name>Session Timeout Limiting Filter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.SessionTimeoutLimitingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Session Timeout Limiting Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
     <filter-name>Character Set Encoding Filter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.CharsetEncodingFilter</filter-class>
   </filter>
@@ -203,6 +212,7 @@
     <filter-name>Character Set Encoding Filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
   <filter>
     <filter-name>JSession Strip Filter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.JSessionStripFilter</filter-class>
@@ -220,6 +230,7 @@
     <filter-name>URL Rewriter Filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
   <filter>
     <filter-name>Portal Picker Filter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.PortalPickerFilter</filter-class>
