@@ -373,7 +373,6 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                    Css.CUSTOM_FORM.path(),
-                                                   "/edit/forms/css/autocomplete.css",
                                                    "/edit/forms/css/customFormWithAutocomplete.css"
                                                   ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
@@ -388,36 +387,33 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
 <form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
+    <v:input type="select" label="Degree" id="degree"  />  
+    
+    <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />   
+       
+    <v:input type="text" label="Year ${yearHint}" id="year" size="4" />  
+    
     <p class="inline"><v:input type="select" label="Organization Type ${requiredHint}" name="orgType" disabled="${disabledVal}" id="typeSelector" /></p>
-
-    <div class="fullViewOnly">
-            
-        <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
-
-        <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
-        returning from a validation error, we retain the values. --%>
-        <c:if test="${editMode == 'edit'}">
-           <v:input type="hidden" id="orgType" />
-           <v:input type="hidden" id="orgLabel" />
-        </c:if>
-
-        <div class="acSelection">
-            <%-- RY maybe make this a label and input field. See what looks best. --%>
-            <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-            <v:input type="hidden" id="org" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
-        </div>
-                          
-        <v:input type="select" label="Degree" id="degree"  />  
-        
-        <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />   
            
-        <v:input type="text" label="Year ${yearHint}" id="year" size="4" />  
-        
-        <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
-        
-        <v:input type="text" label="Supplemental Information" id="info" size="50" />
-        <p>e.g., <em>Postdoctoral training</em> or <em>Transferred</em></p>    
+    <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+
+    <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
+    returning from a validation error, we retain the values. --%>
+    <c:if test="${editMode == 'edit'}">
+       <v:input type="hidden" id="orgType" />
+       <v:input type="hidden" id="orgLabel" />
+    </c:if>
+
+    <div class="acSelection">
+        <%-- RY maybe make this a label and input field. See what looks best. --%>
+        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
+        <v:input type="hidden" id="org" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
     </div>
+
+    <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
+    
+    <v:input type="text" label="Supplemental Information" id="info" size="50" />
+    <p>e.g., <em>Postdoctoral training</em> or <em>Transferred</em></p>    
     
     <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true"/></p>
     
@@ -430,7 +426,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 var customFormData  = {
     acUrl: '${acUrl}',
     editMode: '${editMode}',
-    submitButtonTextType: 'compound' 
+    submitButtonTextType: 'compound',
+    defaultTypeName: 'organization'
 };
 </script>
 

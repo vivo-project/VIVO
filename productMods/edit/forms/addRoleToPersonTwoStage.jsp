@@ -355,7 +355,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
                                                                  "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
@@ -388,6 +387,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	
 	<h2>${titleVerb}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
+	
 	<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	
 	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
@@ -435,7 +435,8 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	var customFormData  = {
 	    acUrl: '${acUrl}',
 	    editMode: '${editMode}',
-	    submitButtonTextType: 'compound' 
+	    submitButtonTextType: 'compound',
+	    defaultTypeName: 'activity' // used in repair mode, to generate button text and org name field label
 	};
 	</script>
 <% } %>

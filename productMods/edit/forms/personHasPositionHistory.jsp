@@ -301,7 +301,6 @@
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
                                                                  "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
@@ -320,6 +319,7 @@
   
     <div class="fullViewOnly">
             
+        <%-- <p> needed to create wrapper for show/hide --%>
         <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 
         <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when

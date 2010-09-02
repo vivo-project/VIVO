@@ -85,12 +85,15 @@ var customForm = {
         if (!this.editMode) {
             this.editMode = 'add'; // edit vs add: default to add
         }
-        
-        if (!this.typeSelector.length || this.editMode == 'edit' || this.editMode == 'repair') {
-            this.formSteps = 1;
-        // there may also be a 3-step form - look for this.subTypeSelector
-        } else {
-            this.formSteps = 2;
+               
+        if (!this.formSteps) { // Don't override formSteps specified in form data
+            if (!this.typeSelector.length || !this.fullViewOnly.length || this.editMode === 'edit' || this.editMode === 'repair') {
+                this.formSteps = 1;
+            // there may also be a 3-step form - look for this.subTypeSelector
+            }
+            else {
+                this.formSteps = 2;
+            }
         }
                 
         this.bindEventListeners();
@@ -145,13 +148,19 @@ var customForm = {
         this.setButtonText('new');
         this.setLabels(); 
            
-        if( this.formSteps > 1 ){  // NB includes this.editMode == 1
+        if (this.formSteps > 1) {  // includes this.editMode == 1
             this.cancel.unbind('click');   
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
                 return false;            
             });
+        // In one-step forms, if there is a type selection field, but no value is selected,
+        // hide the acSelector field. The type selection must be made first so that the
+        // autocomplete type can be determined. If a type selection has been made, 
+        // unhide the acSelector field.
+        } else if (this.typeSelector.length) {
+            this.typeSelector.val() ? this.acSelectorWrapper.show() : this.acSelectorWrapper.hide();
         }
     },
     
@@ -189,9 +198,9 @@ var customForm = {
             customForm.undoAutocompleteSelection();
 
             // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-            // or submitting form without a type selection. Exception: in repair editMode, stay in full view,
-            // else we lose the role information.          
-            (typeVal.length || customForm.editMode == 'repair') ? customForm.initFormFullView() : customForm.initFormTypeView();
+            // or submitting form without a type selection. Exception: if formSteps == 1 (e.g., a one-step form,
+            // or a two-step form in repair editMode) stay in full view, else we lose the role information.          
+            (typeVal.length || customForm.formSteps === 1) ? customForm.initFormFullView() : customForm.initFormTypeView();
     
         }); 
         
@@ -383,9 +392,7 @@ var customForm = {
     // mode, it's easier to specify the text here than in the jsp.
     setLabels: function() {
         var newLabelTextForNewInd, 
-            // if this.acType is empty, we are in repair mode with no activity type selected.
-            // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
-            typeText = this.acType ? this.typeName : 'Activity';
+            typeText = this.getTypeNameForLabels();
             
         
         this.labelFieldLabel.html(typeText + ' ' + this.baseLabelText);
@@ -412,9 +419,7 @@ var customForm = {
             return;
         }  
 
-        // if this.acType is empty, we are in repair mode with no activity type selected.
-        // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
-        typeText = this.acType ? this.typeName : 'Activity';
+        typeText = this.getTypeNameForLabels();
                 
         // Creating new related individual      
         if (newOrExisting === 'new') {
@@ -433,6 +438,13 @@ var customForm = {
         } 
         
         this.button.val(buttonText);
+    },
+    
+    getTypeNameForLabels: function() {
+        // If this.acType is empty, we are either in a one-step form with no type yet selected,
+        // or in repair mode in a two-step form with no type selected. Use the default type
+        // name specified in the form data (this.typeName is 'Select one').
+        return this.acType ? this.typeName : this.capitalize(this.defaultTypeName);
     }
     
 };
