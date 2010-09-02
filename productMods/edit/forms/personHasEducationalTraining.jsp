@@ -47,9 +47,10 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPositionValidator"%>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -72,23 +73,14 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 <c:set var="degreeClass" value="${vivoCore}AcademicDegree" />
 
-<%-- Data properties --%>
-<%--  Then enter a SPARQL query for each field, by convention concatenating the field id with "Existing"
-      to convey that the expression is used to retrieve any existing value for the field in an existing individual.
-      Each of these must then be referenced in the sparqlForExistingLiterals section of the JSON block below
-      and in the literalsOnForm --%>
+<%-- Define predicates used in n3 assertions and sparql queries --%>
 <c:set var="majorFieldPred" value="${vivoCore}majorField" />
-<v:jsonset var="majorFieldExisting" >  
-    SELECT ?majorFieldExisting WHERE {
-          ?edTrainingUri <${majorFieldPred}> ?majorFieldExisting }
-</v:jsonset>
-
-<%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
-      The actual assertion inserted in the model will be created via string substitution into the ? variables.
-      NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
-<v:jsonset var="majorFieldAssertion" >      
-    ?edTrainingUri <${majorFieldPred}> ?majorField .
-</v:jsonset>
+<c:set var="yearPred" value="${vivoCore}year" />
+<c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
+<c:set var="infoPred" value="${vivoCore}supplementalInformation" />
+<c:set var="degreeEarned" value="${vivoCore}degreeEarned" />
+<c:set var="degreeOutcomeOf" value="${vivoCore}degreeOutcomeOf" />
+<c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />
 
 <%-- For new datetime handling in ontology - v1.2
 <c:set var="dateTimeValue" value="${vivoCore}DateTimeValue" />
@@ -96,95 +88,111 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="precisionValue" value="${vivoCore}YearPrecision" />
 <c:set var="hasPrecision" value="${vivoCore}dateTimePrecision" />
 
-<v:jsonset var="yearExisting" >  
+<v:jsonset var="existingYearQuery" >  
     SELECT ?existingYear WHERE {
-          ?edTrainingUri <${hasDateTimeValue}> ?existingYear }
+          ?edTraining <${hasDateTimeValue}> ?existingYear . }
 </v:jsonset>
 <v:jsonset var="yearAssertion" > 
     @prefix core: <${vivoCore}> .   
     ?dateTime a core:DateTimeValue ;
               core:dateTime ?year ;
               core:dateTimeValuePrecision core:YearPrecision .
-    ?edTrainingUri core:dateTimeValue ?dateTime .
+    ?edTraining core:dateTimeValue ?dateTime .
 </v:jsonset>
 --%>
 
-<c:set var="yearPred" value="${vivoCore}year" />
-<v:jsonset var="yearExisting" >  
-    SELECT ?existingYear WHERE {
-          ?edTrainingUri <${yearPred}> ?existingYear }
-</v:jsonset>
-<v:jsonset var="yearAssertion" >      
-    ?edTrainingUri <${yearPred}> ?year .
+<%-- Assertions for adding a new educational training entry --%>
+
+<v:jsonset var="orgTypeAssertion">
+    ?org a ?orgType .
 </v:jsonset>
 
-<c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
-<v:jsonset var="deptExisting" >  
-    SELECT ?existingDept WHERE {
-          ?edTrainingUri <${deptPred}> ?existingDept }
-</v:jsonset>
-<v:jsonset var="deptAssertion" >      
-    ?edTrainingUri <${deptPred}> ?dept .
+<v:jsonset var="orgLabelAssertion">
+    ?org <${label}> ?orgLabel .
 </v:jsonset>
 
-<c:set var="infoPred" value="${vivoCore}supplementalInformation" />
-<v:jsonset var="infoExisting" >  
-    SELECT ?existingInfo WHERE {
-          ?edTrainingUri <${infoPred}> ?existingInfo }
-</v:jsonset>
-<v:jsonset var="infoAssertion" >      
-    ?edTrainingUri <${infoPred}> ?info .
-</v:jsonset>
-
-<%-- Object properties --%>
-<%--  Note there is really no difference in how things are set up for an object property except
-      below in the n3ForEdit section, in whether the ..Existing variable goes in SparqlForExistingLiterals
-      or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
-<c:set var="degreeEarned" value="${vivoCore}degreeEarned" />
-<c:set var="degreeOutcomeOf" value="${vivoCore}degreeOutcomeOf" />
-<v:jsonset var="degreeExisting" >      
-    SELECT ?existingDegreeUri WHERE {
-        ?edTrainingUri <${degreeEarned}> ?existingDegreeUri }
-</v:jsonset>
 <v:jsonset var="degreeAssertion" >      
-    ?edTrainingUri <${degreeEarned}> ?degreeUri .
-    ?degreeUri <${degreeOutcomeOf}> ?edTrainingUri .
+    ?edTraining <${degreeEarned}> ?degree .
+    ?degree <${degreeOutcomeOf}> ?edTraining .
 </v:jsonset>
 
-<c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />
-<%-- This property has no inverse --%>
-<v:jsonset var="organizationUriExisting" >      
-    SELECT ?existingOrgUri WHERE {
-        ?edTrainingUri <${orgGrantingDegree}> ?existingOrgUri }
-</v:jsonset>
-<v:jsonset var="organizationUriAssertion" >      
-    ?edTrainingUri <${orgGrantingDegree}> ?organizationUri .
+<v:jsonset var="majorFieldAssertion" >      
+    ?edTraining <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
-<v:jsonset var="newOrgNameAssertion">
-    ?newOrg <${label}> ?newOrgName .
-</v:jsonset>
-<%-- Break up the new org type and subclass assertions, so that if there is no subclass, 
-the org type still gets asserted. --%>
-<v:jsonset var="newOrgTypeAssertion">
-    ?newOrg a ?newOrgType .
+<v:jsonset var="yearAssertion" >      
+    ?edTraining <${yearPred}> ?year .
 </v:jsonset>
 
-<v:jsonset var="n3ForStmtToPerson">       
+<v:jsonset var="deptAssertion" >      
+    ?edTraining <${deptPred}> ?dept .
+</v:jsonset>
+
+<v:jsonset var="infoAssertion" >      
+    ?edTraining <${infoPred}> ?info .
+</v:jsonset>
+
+<v:jsonset var="n3ForNewEdTraining">       
     @prefix core: <${vivoCore}> .     
 
-    ?person core:educationalTraining  ?edTrainingUri .
+    ?person core:educationalTraining  ?edTraining .
     
-    ?edTrainingUri core:educationalTrainingOf ?person ;
-                     a core:EducationalTraining .
+    ?edTraining  a core:EducationalTraining ;
+                 core:educationalTrainingOf ?person ;
+                 <${orgGrantingDegree}> ?org .
 </v:jsonset>
 
-<v:jsonset var="n3ForNewOrg">
-    ?newOrg <${label}> ?newOrgName ;
-            a ?newOrgType .
-            
-    ?edTrainingUri <${orgGrantingDegree}> ?newOrg .
+<%-- This property has no inverse --%>
+<v:jsonset var="n3ForEdTrainingToOrg" >      
+    ?edTraining <${orgGrantingDegree}> ?org .
 </v:jsonset>
+
+<%-- Queries for editing an existing educational training entry --%>
+
+<v:jsonset var="orgQuery" >      
+    SELECT ?existingOrg WHERE {
+        ?edTraining <${orgGrantingDegree}> ?existingOrg . }
+</v:jsonset>
+
+<v:jsonset var="orgLabelQuery" >      
+    SELECT ?existingOrgLabel WHERE {
+        ?edTraining <${orgGrantingDegree}> ?existingOrg .
+        ?existingOrg <${label}> ?existingOrgLabel .
+    }
+</v:jsonset>
+
+<v:jsonset var="orgTypeQuery" >      
+    SELECT ?existingOrgType WHERE {
+        ?edTraining <${orgGrantingDegree}> ?existingOrg .
+        ?existingOrg a ?existingOrgType .
+    }
+</v:jsonset>
+
+<v:jsonset var="degreeQuery" >      
+    SELECT ?existingDegree WHERE {
+        ?edTraining <${degreeEarned}> ?existingDegree . }
+</v:jsonset>
+
+<v:jsonset var="majorFieldQuery" >  
+    SELECT ?existingMajorField WHERE {
+          ?edTraining <${majorFieldPred}> ?existingMajorField . }
+</v:jsonset>
+
+<v:jsonset var="yearQuery" >  
+    SELECT ?existingYear WHERE {
+          ?edTraining <${yearPred}> ?existingYear . }
+</v:jsonset>
+
+<v:jsonset var="deptQuery" >  
+    SELECT ?existingDept WHERE {
+          ?edTraining <${deptPred}> ?existingDept . }
+</v:jsonset>
+
+<v:jsonset var="infoQuery" >  
+    SELECT ?existingInfo WHERE {
+          ?edTraining <${infoPred}> ?existingInfo . }
+</v:jsonset>
+
 
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
 <v:jsonset var="degreeClassUriJson">${degreeClass}</v:jsonset>
@@ -197,36 +205,38 @@ the org type still gets asserted. --%>
 
     "subject"   : ["person",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
-    "object"    : ["edTrainingUri", "${objectUriJson}", "URI" ],
+    "object"    : ["edTraining", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}",  "${majorFieldAssertion}" ],
+    "n3required"    : [ "${n3ForNewEdTraining}",  "${majorFieldAssertion}" ],
     
-    "n3optional"    : [ "${organizationUriAssertion}",  "${n3ForNewOrg}",                       
-                        "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
+    "n3optional"    : [ "${n3ForEdTrainingToOrg}",                       
+                        "${orgLabelAssertion}", "${orgTypeAssertion}",                       
                         "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}", "${yearAssertion}" ],
                         
-    "newResources"  : { "edTrainingUri" : "${defaultNamespace}",
-                        "newOrg" : "${defaultNamespace}" },
+    "newResources"  : { "edTraining" : "${defaultNamespace}",
+                        "org" : "${defaultNamespace}" },
 
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "organizationUri", "newOrgType", "degreeUri" ],
-    "literalsOnForm" : [ "majorField", "year", "dept", "info", "newOrgName"],
+    "urisOnForm"     : [ "org", "orgType", "degree" ],
+    "literalsOnForm" : [ "orgLabel", "majorField", "year", "dept", "info" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
-        "majorField"         : "${majorFieldExisting}",
-        "year"               : "${yearExisting}",
-        "dept"               : "${deptExisting}",
-        "info"               : "${infoExisting}"
+        "orgLabel"           : "${orgLabelQuery}",
+        "majorField"         : "${majorFieldQuery}",
+        "year"               : "${yearQuery}",
+        "dept"               : "${deptQuery}",
+        "info"               : "${infoQuery}"
     },
     "sparqlForExistingUris" : {
-        "organizationUri"   : "${organizationUriExisting}",
-        "degreeUri"         : "${degreeExisting}"
+        "org"            : "${orgQuery}",
+        "orgType"        : "${orgTypeQuery}",
+        "degree"         : "${degreeQuery}"
     },
     "fields" : {
-      "degreeUri" : {
+      "degree" : {
          "newResource"      : "false",
          "validators"       : [ ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
@@ -259,7 +269,7 @@ the org type still gets asserted. --%>
          "rangeLang"        : "",         
          "assertions"       : ["${yearAssertion}"]
       },     
-     "organizationUri" : {
+     "org" : {
          "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "INDIVIDUALS_VIA_VCLASS",
@@ -268,9 +278,9 @@ the org type still gets asserted. --%>
          "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ "${organizationUriAssertion}" ]
+         "assertions"       : [ "${n3ForEdTrainingToOrg}" ]
       },      
-      "newOrgName" : {
+      "orgLabel" : {
          "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "UNDEFINED",
@@ -279,9 +289,9 @@ the org type still gets asserted. --%>
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : [ "${n3ForNewOrg}" ]
+         "assertions"       : [ "${orgLabelAssertion}" ]
       },
-     "newOrgType" : {
+     "orgType" : {
          "newResource"      : "false",
          "validators"       : [  ],
          "optionsType"      : "CHILD_VCLASSES",
@@ -290,7 +300,7 @@ the org type still gets asserted. --%>
          "objectClassUri"   : "${orgClassUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [ "${newOrgTypeAssertion}" ]
+         "assertions"       : [ "${orgTypeAssertion}" ]
       },      
       "dept" : {
          "newResource"      : "false",
@@ -326,8 +336,6 @@ the org type still gets asserted. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
-    editConfig.addValidator(new PersonHasPositionValidator());
-    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { // editing existing
@@ -343,79 +351,87 @@ the org type still gets asserted. --%>
 <%
     if (objectUri != null) { // editing existing entry
 %>
-        <c:set var="editType" value="edit" />
+        <c:set var="editMode" value="edit" />
+        <c:set var="titleVerb" value="Edit" />
         <c:set var="title" value="Edit educational background entry for ${subjectName}" />
-        <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Save Changes" />
+        <c:set var="submitButtonText" value="Edit Educational Training" />
+        <c:set var="disabledVal" value="disabled" />
 <% 
     } else { // adding new entry
 %>
-        <c:set var="editType" value="add" />
-        <c:set var="title" value="Create educational background entry for ${subjectName}" />
-        <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Create Educational Background" />
+        <c:set var="editMode" value="add" />
+        <c:set var="titleVerb" value="Create" />
+        <c:set var="submitButtonText" value="Educational Training" />
+        <c:set var="disabledVal" value="" />
 <%  } 
-    
-    List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",            
-                                                                "/js/customFormUtils.js",           
-                                                                "/edit/forms/js/customForm.js"
-                                                                //, "/edit/forms/js/customFormOneStep.js"
-                                                                ));
+
+    List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
+                                                                JavaScript.CUSTOM_FORM_UTILS.path(),
+                                                                "/edit/forms/js/customFormWithAutocomplete.js"                                                    
+                                                               ));            
     request.setAttribute("customJs", customJs);
-    
-    List<String> customCss = new ArrayList<String>(Arrays.asList("/edit/forms/css/customForm.css",
-                                                                 "/edit/forms/css/personHasEducationalTraining.css"
-                                                                 ));
-    request.setAttribute("customCss", customCss);   
+
+    List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
+                                                   Css.CUSTOM_FORM.path(),
+                                                   "/edit/forms/css/autocomplete.css",
+                                                   "/edit/forms/css/customFormWithAutocomplete.css"
+                                                  ));                                                                                                                                   
+    request.setAttribute("customCss", customCss); 
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-<c:set var="view" value='<%= vreq.getAttribute("view") %>' />
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
 
-<h2>${title}</h2>
+<h2>${titleVerb}&nbsp;educational training entry for <%= subjectName %></h2>
 
-<form class="${editType}" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
-    <div class="entry"> 
-        <v:input type="select" label="Degree" id="degreeUri"  />  
-        <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />      
-        <p class="inline year"><v:input type="text" label="Year <span class='hint'>(YYYY)</span>" id="year" size="4" /></p>  
-    </div>
-     
-    <div class="relatedIndividual">
-        <div class="existing">
-            <v:input type="select" label="Organization Granting Degree ${requiredHint}" id="organizationUri"  /><span class="existingOrNew">or</span>
+    <p class="inline"><v:input type="select" label="Organization Type ${requiredHint}" name="orgType" disabled="${disabledVal}" id="typeSelector" /></p>
+
+    <div class="fullViewOnly">
+            
+        <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+
+        <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
+        returning from a validation error, we retain the values. --%>
+        <c:if test="${editMode == 'edit'}">
+           <v:input type="hidden" id="orgType" />
+           <v:input type="hidden" id="orgLabel" />
+        </c:if>
+
+        <div class="acSelection">
+            <%-- RY maybe make this a label and input field. See what looks best. --%>
+            <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
+            <v:input type="hidden" id="org" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
         </div>
-    
-        <div class="addNewLink">
-            If your organization is not listed, please <a href="#">add a new organization</a>.    
-        </div>
-      
-        <div class="new">            
-            <h6>Add a New Organization</h6>
-            <v:input type="text" label="Organization Name ${requiredHint}" id="newOrgName" size="30" />
-            <v:input type="select" label="Select Organization Type ${requiredHint}" id="newOrgType" />
-        </div>   
-    </div> 
-    
-    <div class="entry"> 
+                          
+        <v:input type="select" label="Degree" id="degree"  />  
+        
+        <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />   
+           
+        <v:input type="text" label="Year ${yearHint}" id="year" size="4" />  
+        
         <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
+        
         <v:input type="text" label="Supplemental Information" id="info" size="50" />
         <p>e.g., <em>Postdoctoral training</em> or <em>Transferred</em></p>    
     </div>
     
-    <!-- Processing information for Javascript -->
-    <input type="hidden" name="editType" value="${editType}" />
-    <input type="hidden" name="entryType" value="educational background" /> 
-    <input type="hidden" name="secondaryType" value="organization" />
-    <input type="hidden" name="steps" value="1" />
-    <input type="hidden" name="view" value="${view}" />
-    
-    <p class="submit"><v:input type="submit" id="submit" value="${submitLabel}" cancel="true"/></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true"/></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
+
+<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+
+<script type="text/javascript">
+var customFormData  = {
+    acUrl: '${acUrl}',
+    editMode: '${editMode}',
+    submitButtonTextType: 'compound' 
+};
+</script>
 
 <jsp:include page="${postForm}"/>
