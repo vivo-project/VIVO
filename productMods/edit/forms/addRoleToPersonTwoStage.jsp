@@ -394,7 +394,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	    
 	    <div class="fullViewOnly">
 	        
-		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 	
 	        <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
 	        returning from a validation error, we retain the values. --%>
@@ -409,14 +409,14 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 		        <v:input type="hidden" id="roleActivityUri" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
 		    </div>
 	
-	        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
+	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
 	                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
 	            </c:when>
 	            <c:otherwise>
-	                <h4 id="dateHeader">Years of Participation in </h4>    
+	                <h4 class="label">Years of Participation in ###</h4>    
 	                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
 	                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
 	            </c:otherwise>

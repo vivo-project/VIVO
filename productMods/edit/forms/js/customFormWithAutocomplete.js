@@ -58,25 +58,8 @@ var customForm = {
         this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
         
-        this.relatedIndLabel = $('#relatedIndLabel');
-        this.labelFieldLabel = $('label[for=' + this.relatedIndLabel.attr('id') + ']');       
-        // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
-        // because it may have already been modified for a previous selection.
-        this.baseLabelText = this.labelFieldLabel.html();
-
-        // Label field for new individual being created
-        this.newIndLabel = $('#newIndLabel');
-        this.newIndLabelFieldLabel = $('label[for=' + this.newIndLabel.attr('id') + ']');
-        this.newIndBaseLabelText = this.newIndLabelFieldLabel.html();
-        
-        this.dateHeader = $('#dateHeader');
-        this.baseDateHeaderText = this.dateHeader.html();
-        
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
-        
-        this.placeHolderText = '###';
-
     },
 
     // Set up the form on page load
@@ -87,7 +70,7 @@ var customForm = {
         }
                
         if (!this.formSteps) { // Don't override formSteps specified in form data
-            if (!this.typeSelector.length || !this.fullViewOnly.length || this.editMode === 'edit' || this.editMode === 'repair') {
+            if ( !this.fullViewOnly.length || this.editMode === 'edit' || this.editMode === 'repair' ) {
                 this.formSteps = 1;
             // there may also be a 3-step form - look for this.subTypeSelector
             }
@@ -99,6 +82,8 @@ var customForm = {
         this.bindEventListeners();
         
         this.initAutocomplete();
+        
+        this.initPlaceholderData();
         
         this.initFormView();
 
@@ -252,6 +237,17 @@ var customForm = {
         });
     },
     
+    initPlaceholderData: function() {
+        this.placeholderText = '###';
+        this.labelsWithPlaceholders = this.form.find('label, .label').filter(function() {
+            return $(this).html().match(customForm.placeholderText);
+        });
+        
+        this.labelsWithPlaceholders.each(function(){
+            $(this).data('originalLabel', $(this).html());
+        });
+    },
+    
     getAcFilter: function() {
 
         if (!this.sparqlForAcFilter) {
@@ -391,20 +387,12 @@ var customForm = {
     // Set field labels based on type selection. Although these won't change in edit
     // mode, it's easier to specify the text here than in the jsp.
     setLabels: function() {
-        var newLabelTextForNewInd, 
-            typeText = this.getTypeNameForLabels();
-            
-        
-        this.labelFieldLabel.html(typeText + ' ' + this.baseLabelText);
-        
-        if (this.dateHeader.length) {
-            this.dateHeader.html(this.baseDateHeaderText + typeText);
-        } 
-                   
-        if (this.newIndLabel.length) {
-            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, typeText);
-            this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
-        }  
+        var typeName = this.getTypeNameForLabels();
+
+        this.labelsWithPlaceholders.each(function() {
+            var newLabel = $(this).data('originalLabel').replace(customForm.placeholderText, typeName);
+            $(this).html(newLabel);
+        });
 
     },
     

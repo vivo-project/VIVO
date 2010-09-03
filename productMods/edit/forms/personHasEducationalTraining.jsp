@@ -395,7 +395,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     
     <p class="inline"><v:input type="select" label="Organization Type ${requiredHint}" name="orgType" disabled="${disabledVal}" id="typeSelector" /></p>
            
-    <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+    <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 
     <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
     returning from a validation error, we retain the values. --%>
@@ -410,7 +410,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         <v:input type="hidden" id="org" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
     </div>
 
-    <v:input type="text" label="Department or School Name within the Organization" id="dept" size="50" />
+    <v:input type="text" label="Department or School Name within the ###" id="dept" size="50" />
     
     <v:input type="text" label="Supplemental Information" id="info" size="50" />
     <p>e.g., <em>Postdoctoral training</em> or <em>Transferred</em></p>    

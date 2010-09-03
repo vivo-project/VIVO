@@ -320,7 +320,7 @@
     <div class="fullViewOnly">
             
         <%-- <p> needed to create wrapper for show/hide --%>
-        <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+        <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 
         <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
         returning from a validation error, we retain the values. --%>
@@ -335,7 +335,7 @@
             <v:input type="hidden" id="org" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
         </div>
                                 
-        <v:input type="text" label="Position Title ${requiredHint}" name="positionTitle" id="newIndLabel" size="30" />
+        <v:input type="text" label="Position Title ${requiredHint}" id="positionTitle" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
         <v:input type="text" label="Start Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" />   

@@ -286,7 +286,7 @@ PREFIX core: <${vivoCore}>
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <form id="addGrantRoleToPerson" class="noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
-    <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Name ${requiredHint}" cssClass="acSelector" size="50" disabled="${disabledVal}" /></p>
+    <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" disabled="${disabledVal}" /></p>
 
     <%-- Store this value in a hidden field, because the displayed field is disabled and don't submit. This ensures that when
     returning from a validation error, we retain the value. --%>
