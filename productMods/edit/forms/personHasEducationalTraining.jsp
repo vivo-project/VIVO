@@ -207,10 +207,9 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edTraining", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewEdTraining}",  "${majorFieldAssertion}" ],
+    "n3required"    : [ "${n3ForNewEdTraining}",  "${majorFieldAssertion}", "${orgLabelAssertion}", "${orgTypeAssertion}" ],
     
-    "n3optional"    : [ "${n3ForEdTrainingToOrg}",                       
-                        "${orgLabelAssertion}", "${orgTypeAssertion}",                       
+    "n3optional"    : [ "${n3ForEdTrainingToOrg}",                                            
                         "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}", "${yearAssertion}" ],
                         
     "newResources"  : { "edTraining" : "${defaultNamespace}",
@@ -282,7 +281,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
       },      
       "orgLabel" : {
          "newResource"      : "false",
-         "validators"       : [  ],
+         "validators"       : [  "nonempty" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -293,7 +292,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
       },
      "orgType" : {
          "newResource"      : "false",
-         "validators"       : [  ],
+         "validators"       : [ "nonempty" ],
          "optionsType"      : "CHILD_VCLASSES",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",

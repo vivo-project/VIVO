@@ -145,7 +145,12 @@ var customForm = {
         // autocomplete type can be determined. If a type selection has been made, 
         // unhide the acSelector field.
         } else if (this.typeSelector.length) {
-            this.typeSelector.val() ? this.acSelectorWrapper.show() : this.acSelectorWrapper.hide();
+            if (this.typeSelector.val()) {
+                this.acSelectorWrapper.show()
+            }
+            else {
+                this.acSelectorWrapper.hide();
+            }
         }
     },
     
@@ -183,8 +188,8 @@ var customForm = {
             customForm.undoAutocompleteSelection();
 
             // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-            // or submitting form without a type selection. Exception: if formSteps == 1 (e.g., a one-step form,
-            // or a two-step form in repair editMode) stay in full view, else we lose the role information.          
+            // or submitting form without a type selection. Exceptions: (1) a one-step form; (2) a two-step
+            // form in repair mode, so we don't lose the other data in the form.      
             (typeVal.length || customForm.formSteps === 1) ? customForm.initFormFullView() : customForm.initFormTypeView();
     
         }); 
@@ -321,8 +326,9 @@ var customForm = {
         this.acSelectorWrapper.hide();
         //this.acSelector.attr('disabled', 'disabled');
         
-        // If only one form step, type is pre-selected, and the label is coded in the html.
-        if (this.formSteps > 1) {
+        // If form has a type selector, add type name to label. If form has no type selector,
+        // type name is coded into the html.
+        if (this.typeSelector.length) {
             this.acSelection.find('label').html('Selected ' + this.typeName + ':');
         }
               
