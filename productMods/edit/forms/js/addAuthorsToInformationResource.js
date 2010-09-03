@@ -15,12 +15,12 @@ var addAuthorForm = {
     },
 
     disableFormInUnsupportedBrowsers: function() {       
-        this.disableWrapper = $('#ie67DisableWrapper');
+        var disableWrapper = $('#ie67DisableWrapper');
         
         // Check for unsupported browsers only if the element exists on the page
-        if (this.disableWrapper.length) {
+        if (disableWrapper.length) {
             if (vitro.browserUtils.isIELessThan8()) {
-                this.disableWrapper.show();
+                disableWrapper.show();
                 $('.noIE67').hide();
                 return true;
             }

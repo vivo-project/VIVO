@@ -15,12 +15,12 @@ var customForm = {
     },
     
     disableFormInUnsupportedBrowsers: function() {       
-        this.disableWrapper = $('#ie67DisableWrapper');
+        var disableWrapper = $('#ie67DisableWrapper');
         
         // Check for unsupported browsers only if the element exists on the page
-        if (this.disableWrapper.length) {
+        if (disableWrapper.length) {
             if (vitro.browserUtils.isIELessThan8()) {
-                this.disableWrapper.show();
+                disableWrapper.show();
                 $('.noIE67').hide();
                 return true;
             }
@@ -43,7 +43,6 @@ var customForm = {
         this.form = $('#content form');
         this.fullViewOnly = $('.fullViewOnly');
         this.button = $('#submit');
-        this.baseButtonText = this.button.val();
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
 
@@ -55,7 +54,6 @@ var customForm = {
         this.acUriReceiver = this.form.find('.acUriReceiver');
         //this.acLabelReceiver = this.form.find('.acLabelReceiver');
         this.verifyMatch = this.form.find('.verifyMatch');    
-        this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
         
         this.or = $('span.or');       
@@ -83,7 +81,7 @@ var customForm = {
         
         this.initAutocomplete();
         
-        this.initPlaceholderData();
+        this.initElementData();
         
         this.initFormView();
 
@@ -241,15 +239,23 @@ var customForm = {
         });
     },
     
-    initPlaceholderData: function() {
+    // Store original or base text with elements that will have text substitutions.
+    // Generally the substitution cannot be made on the current value, since that value
+    // may have changed from the original. So we store the original text with the element to
+    // use as a base for substitutions.
+    initElementData: function() {
+        
         this.placeholderText = '###';
         this.labelsWithPlaceholders = this.form.find('label, .label').filter(function() {
             return $(this).html().match(customForm.placeholderText);
+        });        
+        this.labelsWithPlaceholders.each(function(){
+            $(this).data('baseText', $(this).html());
         });
         
-        this.labelsWithPlaceholders.each(function(){
-            $(this).data('originalLabel', $(this).html());
-        });
+        this.button.data('baseText', this.button.val());
+   
+        this.verifyMatch.data('baseHref', this.verifyMatch.attr('href'));
     },
     
     getAcFilter: function() {
@@ -335,7 +341,7 @@ var customForm = {
         this.acUriReceiver.val(uri);
         this.acSelector.val(label);        
         this.acSelectionInfo.html(label);
-        this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
+        this.verifyMatch.attr('href', this.verifyMatch.data('baseHref') + uri);
         
         this.setButtonText('existing');            
 
@@ -356,7 +362,7 @@ var customForm = {
         this.acSelector.val('');
         this.acUriReceiver.val('');
         this.acSelectionInfo.html('');
-        this.verifyMatch.attr('href', this.verifyMatchBaseHref);
+        this.verifyMatch.attr('href', this.verifyMatch.data('baseHref'));
         
         if (this.formSteps > 1) {
             this.acSelection.find('label').html('Selected ');
@@ -394,7 +400,7 @@ var customForm = {
         var typeName = this.getTypeNameForLabels();
 
         this.labelsWithPlaceholders.each(function() {
-            var newLabel = $(this).data('originalLabel').replace(customForm.placeholderText, typeName);
+            var newLabel = $(this).data('baseText').replace(customForm.placeholderText, typeName);
             $(this).html(newLabel);
         });
 
@@ -404,7 +410,9 @@ var customForm = {
     // or a new related individual. Called when setting up full view of form, and after
     // an autocomplete selection.
     setButtonText: function(newOrExisting) {
-        var typeText, buttonText;
+        var typeText, 
+            buttonText,
+            baseButtonText = this.button.data('baseText');
         
         // Edit mode button doesn't change, so it's specified in the jsp
         if (this.editMode === 'edit') {
@@ -417,16 +425,16 @@ var customForm = {
         if (newOrExisting === 'new') {
             if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
-                buttonText = 'Create ' + typeText + ' & ' + this.baseButtonText;                
+                buttonText = 'Create ' + typeText + ' & ' + baseButtonText;          
             } else {
                 // e.g., 'Create Publication'
-                buttonText = 'Create ' + this.baseButtonText;
+                buttonText = 'Create ' + baseButtonText;
             }            
         }
         // Using existing related individual
         else {  
             // In repair mode, baseButtonText is "Edit X". Keep that for this case.
-            buttonText = this.editMode == 'repair' ? this.baseButtonText : 'Add ' + this.baseButtonText;
+            buttonText = this.editMode == 'repair' ? baseButtonText : 'Add ' + baseButtonText;
         } 
         
         this.button.val(buttonText);
