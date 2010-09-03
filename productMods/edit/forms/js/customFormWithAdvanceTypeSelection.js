@@ -167,15 +167,6 @@ var customForm = {
             this.showAutocompleteSelection(label, uri);
         }
         
-        this.cancel.unbind('click');
-        this.cancel.click(function() {
-           // Cancel back to full view with only type selection showing
-           customForm.undoAutocompleteSelection();
-           customForm.clearFields(customForm.fullViewOnly);
-           customForm.initFormFullView(); 
-           return false;
-        });
-       
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
