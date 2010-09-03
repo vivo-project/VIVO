@@ -145,12 +145,7 @@ var customForm = {
         // autocomplete type can be determined. If a type selection has been made, 
         // unhide the acSelector field.
         } else if (this.typeSelector.length) {
-            if (this.typeSelector.val()) {
-                this.acSelectorWrapper.show()
-            }
-            else {
-                this.acSelectorWrapper.hide();
-            }
+            this.typeSelector.val() ? this.acSelectorWrapper.show() : this.hideFields(this.acSelectorWrapper);
         }
     },
     
@@ -323,9 +318,8 @@ var customForm = {
         
     showAutocompleteSelection: function(label, uri) {
 
-        this.acSelectorWrapper.hide();
-        //this.acSelector.attr('disabled', 'disabled');
-        
+        this.hideFields(this.acSelectorWrapper);
+              
         // If form has a type selector, add type name to label. If form has no type selector,
         // type name is coded into the html.
         if (this.typeSelector.length) {
