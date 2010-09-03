@@ -179,14 +179,18 @@ var customForm = {
         this.typeSelector.change(function() {
             var typeVal = $(this).val();
             
-            // If an autocomplete selection has been made, undo it
-            customForm.undoAutocompleteSelection();
-
-            // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-            // or submitting form without a type selection. Exceptions: (1) a one-step form; (2) a two-step
-            // form in repair mode, so we don't lose the other data in the form.      
-            (typeVal.length || customForm.formSteps === 1) ? customForm.initFormFullView() : customForm.initFormTypeView();
-    
+            // If an autocomplete selection has been made, undo it.
+            // The test is not just for efficiency: undoAutocompleteSelection empties the acSelector value,
+            // which we don't want to do if user has manually entered a value, since he may intend to
+            // change the type but keep the value. If no new value has been selected, form initialization
+            // below will correctly empty the value anyway.
+            if (!customForm.acSelection.is(':hidden')) {
+                customForm.undoAutocompleteSelection();
+            }
+            
+            // Reinitialize view. If no type selection in a two-step form, go back to type view;
+            // otherwise, reinitialize full view.
+            (!typeVal.length && customForm.formSteps > 1) ? customForm.initFormTypeView() : customForm.initFormFullView();
         }); 
         
         this.verifyMatch.click(function() {
@@ -329,7 +333,7 @@ var customForm = {
         this.acSelection.show();
 
         this.acUriReceiver.val(uri);
-        this.acSelector.val(label);
+        this.acSelector.val(label);        
         this.acSelectionInfo.html(label);
         this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
         
