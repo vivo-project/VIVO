@@ -158,15 +158,6 @@ var customForm = {
         if (uri) {            
             this.showAutocompleteSelection(label, uri);
         }
-        
-        this.cancel.unbind('click');
-        this.cancel.click(function() {
-           // Cancel back to full view with only type selection showing
-           customForm.undoAutocompleteSelection();
-           customForm.clearFields(customForm.fullViewOnly);
-           customForm.initFormFullView(); 
-           return false;
-        });
        
     },
     
@@ -178,14 +169,8 @@ var customForm = {
             var typeVal = $(this).val();
             
             // If an autocomplete selection has been made, undo it.
-            // The test is not just for efficiency: undoAutocompleteSelection empties the acSelector value,
-            // which we don't want to do if user has manually entered a value, since he may intend to
-            // change the type but keep the value. If no new value has been selected, form initialization
-            // below will correctly empty the value anyway.
-            if (!customForm.acSelection.is(':hidden')) {
-                customForm.undoAutocompleteSelection();
-            }
-            
+            customForm.undoAutocompleteSelection();
+
             // Reinitialize view. If no type selection in a two-step form, go back to type view;
             // otherwise, reinitialize full view.
             (!typeVal.length && customForm.formSteps > 1) ? customForm.initFormTypeView() : customForm.initFormFullView();
@@ -356,18 +341,23 @@ var customForm = {
     // Cancel action after making an autocomplete selection: undo autocomplete 
     // selection (from showAutocomplete) before returning to full view.
     undoAutocompleteSelection: function() {
-        
-        this.acSelectorWrapper.show();
-        this.hideFields(this.acSelection);
-        this.acSelector.val('');
-        this.acUriReceiver.val('');
-        this.acSelectionInfo.html('');
-        this.verifyMatch.attr('href', this.verifyMatch.data('baseHref'));
-        
-        if (this.formSteps > 1) {
-            this.acSelection.find('label').html('Selected ');
-        }
-                
+ 
+        // The test is not just for efficiency: undoAutocompleteSelection empties the acSelector value,
+        // which we don't want to do if user has manually entered a value, since he may intend to
+        // change the type but keep the value. If no new value has been selected, form initialization
+        // below will correctly empty the value anyway.
+        if (!this.acSelection.is(':hidden')) {       
+            this.acSelectorWrapper.show();
+            this.hideFields(this.acSelection);
+            this.acSelector.val('');
+            this.acUriReceiver.val('');
+            this.acSelectionInfo.html('');
+            this.verifyMatch.attr('href', this.verifyMatch.data('baseHref'));
+            
+            if (this.formSteps > 1) {
+                this.acSelection.find('label').html('Selected ');
+            }
+        }      
     },
     
     // Set type uri for autocomplete, and type name for labels and button text.
