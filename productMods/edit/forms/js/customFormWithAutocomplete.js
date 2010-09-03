@@ -130,9 +130,9 @@ var customForm = {
         this.button.show();
         this.setButtonText('new');
         this.setLabels(); 
-           
-        if (this.formSteps > 1) {  // includes this.editMode == 1
-            this.cancel.unbind('click');   
+
+        this.cancel.unbind('click');           
+        if (this.formSteps > 1) {     
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
