@@ -127,6 +127,10 @@
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
 
+<%-- Start year is required if we are doing an add but not an edit (so editors don't have to look up the start date in order
+to edit an existing entry with no start date. --%> 
+<c:set var="startYearRequired" ><%= request.getAttribute("objectUri") == null ? "\"nonempty\"," : "" %></c:set>
+
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
@@ -137,11 +141,11 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}", "${startYearAssertion}" ],
+    "n3required"    : [ "${n3ForStmtToPerson}", "${titleAssertion}" ],
     
     "n3optional"    : [ "${organizationUriAssertion}",                         
                         "${n3ForNewOrg}", "${newOrgNameAssertion}", "${newOrgTypeAssertion}",                       
-                        "${endYearAssertion}"],
+                        "${startYearAssertion}", "${endYearAssertion}" ],
                         
     "newResources"  : { "positionUri" : "${defaultNamespace}",
                         "newOrg" : "${defaultNamespace}" },
@@ -220,7 +224,7 @@
       },      
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ${startYearRequired} "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
