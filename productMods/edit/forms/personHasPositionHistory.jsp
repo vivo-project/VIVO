@@ -138,6 +138,36 @@
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
 
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
+
+<%-- Configure add vs. edit --%>
+<%
+
+    String objectUri = (String) request.getAttribute("objectUri");
+    if (objectUri != null) { // editing existing entry
+%>
+        <c:set var="editMode" value="edit" />
+        <c:set var="titleVerb" value="Edit" />
+        <c:set var="submitButtonText" value="Edit Position" />
+        <c:set var="disabledVal" value="disabled" />
+        <%-- Start year is required for an add but not an edit (so editors don't have to look up the start date in order
+             to edit an existing entry with no start date). --%> 
+        <c:set var="startYearRequired" value="" />
+        <c:set var="startYearRequiredHint" value="" />
+<% 
+    } else { // adding new entry
+%>
+        <c:set var="editMode" value="add" />
+        <c:set var="titleVerb" value="Create" />
+        <c:set var="submitButtonText" value="Position" />
+        <c:set var="disabledVal" value="" />
+        <c:set var="startYearRequired" value="\"nonempty\"," />
+        <c:set var="startYearRequiredHint" value="${requiredHint}" />
+<%  } %> 
+
+
+
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
@@ -149,9 +179,9 @@
     "object"    : ["position", "${objectUriJson}", "URI" ],
     
     "n3required"    : [ "${n3ForNewPosition}", "${positionTitleAssertion}", "${positionTypeAssertion}", 
-    					"${orgLabelAssertion}", "${orgTypeAssertion}", "${startYearAssertion}" ],
+    					"${orgLabelAssertion}", "${orgTypeAssertion}" ],
     
-    "n3optional"    : [ "${endYearAssertion}" ],                        
+    "n3optional"    : [ "${startYearAssertion}", "${endYearAssertion}" ],                        
                                                                      
     "newResources"  : { "position" : "${defaultNamespace}",
                         "org" : "${defaultNamespace}" },
@@ -232,7 +262,7 @@
       },      
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ${startYearRequired} "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -255,6 +285,7 @@
   }
 }
 </c:set>
+
 <%
     log.debug(request.getAttribute("editjson"));
 
@@ -267,32 +298,12 @@
     editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
             
     Model model = (Model) application.getAttribute("jenaOntModel");
-    String objectUri = (String) request.getAttribute("objectUri");
+    
     if (objectUri != null) { // editing existing
         editConfig.prepareForObjPropUpdate(model);
     } else { // adding new
         editConfig.prepareForNonUpdate(model);
     }
-    
-    String subjectName = ((Individual) request.getAttribute("subject")).getName();
-%> 
-
-    <c:set var="subjectName" value="<%= subjectName %>" />
-<%
-    if (objectUri != null) { // editing existing entry
-%>
-        <c:set var="editMode" value="edit" />
-        <c:set var="titleVerb" value="Edit" />
-        <c:set var="submitButtonText" value="Edit Position" />
-        <c:set var="disabledVal" value="disabled" />
-<% 
-    } else { // adding new entry
-%>
-        <c:set var="editMode" value="add" />
-        <c:set var="titleVerb" value="Create" />
-        <c:set var="submitButtonText" value="Position" />
-        <c:set var="disabledVal" value="" />
-<%  } 
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
@@ -304,11 +315,10 @@
                                                                  Css.CUSTOM_FORM.path(),
                                                                  "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
-    request.setAttribute("customCss", customCss); 
+    request.setAttribute("customCss", customCss);
+    
+    String subjectName = ((Individual) request.getAttribute("subject")).getName();
 %>
-
-<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -339,7 +349,7 @@
         <v:input type="text" label="Position Title ${requiredHint}" id="positionTitle" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
-        <v:input type="text" label="Start Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" />   
+        <v:input type="text" label="Start Year ${startYearRequiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" />   
         <v:input type="text" label="End Year <span class='hint'>(YYYY)</span>" id="endYear" size="4" />
     
     </div>
