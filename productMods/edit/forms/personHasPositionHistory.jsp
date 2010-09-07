@@ -126,10 +126,38 @@
 
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
-<%-- Start year is required if we are doing an add but not an edit (so editors don't have to look up the start date in order
-to edit an existing entry with no start date. --%> 
-<c:set var="startYearRequired" ><%= request.getAttribute("objectUri") == null ? "\"nonempty\"," : "" %></c:set>
+<%
+    String subjectName = ((Individual) request.getAttribute("subject")).getName();
+%>
+    <c:set var="subjectName" value="<%= subjectName %>" />
+
+<%-- Configure add vs. edit --%>    
+<% 
+    String objectUri = (String) request.getAttribute("objectUri");
+    if (objectUri != null) { // editing existing entry
+%>
+        <c:set var="editType" value="edit" />
+        <c:set var="formSteps" value="1" />
+        <c:set var="title" value="Edit position entry for ${subjectName}" />
+        <%-- NB This will be the button text when Javascript is disabled. --%>
+        <c:set var="submitLabel" value="Save changes" />
+        <c:set var="startYearRequired" value="" />
+        <c:set var="startYearRequiredHint" value="" />
+<% 
+    } else { // adding new entry
+%>
+        <c:set var="editType" value="add" />
+        <c:set var="formSteps" value="2" />
+        <c:set var="title" value="Create position entry for ${subjectName}" />
+        <%-- NB This will be the button text when Javascript is disabled. --%>
+        <c:set var="submitLabel" value="Create position" />
+        <%-- Start year is required if we are doing an add but not an edit (so editors don't have to look up the start date in order
+             to edit an existing entry with no start date. --%> 
+        <c:set var="startYearRequired" value="\"nonempty\"," />
+        <c:set var="startYearRequiredHint" value="${requiredHint}" />
+<%  } %>
 
 <c:set var="editjson" scope="request">
   {
@@ -260,39 +288,16 @@ to edit an existing entry with no start date. --%>
     editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
     		
     Model model = (Model) application.getAttribute("jenaOntModel");
-    String objectUri = (String) request.getAttribute("objectUri");
+
     if (objectUri != null) { // editing existing
         editConfig.prepareForObjPropUpdate(model);
     } else { // adding new
         editConfig.prepareForNonUpdate(model);
     }
-    
-    String subjectName = ((Individual) request.getAttribute("subject")).getName();
-%> 
 
-    <c:set var="subjectName" value="<%= subjectName %>" />
-<%
-    if (objectUri != null) { // editing existing entry
-%>
-        <c:set var="editType" value="edit" />
-        <c:set var="formSteps" value="1" />
-        <c:set var="title" value="Edit position entry for ${subjectName}" />
-        <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Save changes" />
-<% 
-    } else { // adding new entry
-%>
-        <c:set var="editType" value="add" />
-        <c:set var="formSteps" value="2" />
-        <c:set var="title" value="Create position entry for ${subjectName}" />
-        <%-- NB This will be the button text when Javascript is disabled. --%>
-        <c:set var="submitLabel" value="Create position" />
-<%  } 
-    
     List<String> customJs = new ArrayList<String>(Arrays.asList("/js/utils.js",            
                                                                 "/js/customFormUtils.js",           
                                                                 "/edit/forms/js/customForm.js"
-                                                                //, "/edit/forms/js/customFormTwoStep.js"
                                                                 ));
     request.setAttribute("customJs", customJs);
     
@@ -302,7 +307,6 @@ to edit an existing entry with no start date. --%>
     request.setAttribute("customCss", customCss);   
 %>
 
-<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="view" value='<%= vreq.getAttribute("view") %>' />
 
 <jsp:include page="${preForm}" />
@@ -331,7 +335,7 @@ to edit an existing entry with no start date. --%>
         <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
-        <p class="inline year"><v:input type="text" label="Start Year ${requiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" /></p>    
+        <p class="inline year"><v:input type="text" label="Start Year ${startYearRequiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" /></p>    
         <p class="inline year"><v:input type="text" label="End Year <span id='endYearHint' class='hint'>(YYYY)</span>" id="endYear" size="4" /></p>
     </div>
     
