@@ -145,6 +145,7 @@ var customForm = {
         } else if (this.typeSelector.length) {
             this.typeSelector.val() ? this.acSelectorWrapper.show() : this.hideFields(this.acSelectorWrapper);
         }
+
     },
     
     initFormWithValidationErrors: function() {
@@ -173,7 +174,13 @@ var customForm = {
 
             // Reinitialize view. If no type selection in a two-step form, go back to type view;
             // otherwise, reinitialize full view.
-            (!typeVal.length && customForm.formSteps > 1) ? customForm.initFormTypeView() : customForm.initFormFullView();
+			if (!typeVal.length && customForm.formSteps > 1) {
+				customForm.initFormTypeView();
+			}
+			else {
+				customForm.initFormFullView();
+				customForm.acSelector.focus();
+			}
         }); 
         
         this.verifyMatch.click(function() {

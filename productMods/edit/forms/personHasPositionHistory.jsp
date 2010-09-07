@@ -166,8 +166,6 @@
         <c:set var="startYearRequiredHint" value="${requiredHint}" />
 <%  } %> 
 
-
-
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
