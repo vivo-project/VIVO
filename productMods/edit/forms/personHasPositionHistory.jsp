@@ -148,9 +148,10 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["position", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewPosition}", "${positionTitleAssertion}", "${positionTypeAssertion}", "${startYearAssertion}" ],
+    "n3required"    : [ "${n3ForNewPosition}", "${positionTitleAssertion}", "${positionTypeAssertion}", 
+    					"${orgLabelAssertion}", "${orgTypeAssertion}", "${startYearAssertion}" ],
     
-    "n3optional"    : [ "${orgLabelAssertion}", "${orgTypeAssertion}", "${endYearAssertion}" ],                        
+    "n3optional"    : [ "${endYearAssertion}" ],                        
                                                                      
     "newResources"  : { "position" : "${defaultNamespace}",
                         "org" : "${defaultNamespace}" },
@@ -209,7 +210,7 @@
       },      
       "orgLabel" : {
          "newResource"      : "false",
-         "validators"       : [  ],
+         "validators"       : [ "nonempty" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -220,7 +221,7 @@
       },
      "orgType" : {
          "newResource"      : "false",
-         "validators"       : [  ],
+         "validators"       : [ "nonempty" ],
          "optionsType"      : "CHILD_VCLASSES",
          "literalOptions"   : [ "Select one" ],
          "predicateUri"     : "",
