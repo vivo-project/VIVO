@@ -151,6 +151,16 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="labelRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
 <c:set var="typeRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"" : "" %></c:set>
 
+<%-- 
+<c:choose>
+    <c:when test="${numDateFields == 1}">
+        <c:set var="startYearPredicate" value="${vivoCore}year" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="startYearPredicate" value="${vivoCore}startYear" />    
+    </c:otherwise>
+</c:choose>
+--%>
 <c:set var="startYearPredicate">
     <c:choose>
         <c:when test="${numDateFields == 1}">${vivoCore}year</c:when>
@@ -164,11 +174,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="endYearPredicate" value="${vivoCore}endYear" /> 
 <v:jsonset var="endYearAssertion" >
     ?role <${endYearPredicate}> ?endYear .
-</v:jsonset>
-
-<c:set var="descriptionPredicate" value="${vivoCore}description" />
-<v:jsonset var="descriptionAssertion">
-    ?role  <${descriptionPredicate}> ?roleDescription .
 </v:jsonset>
 
 <v:jsonset var="roleLabelAssertion" >
@@ -218,10 +223,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   SELECT ?existingStartYear WHERE { ?role  <${endYearPredicate}> ?existingStartYear .}
 </v:jsonset>
 
-<v:jsonset var="descriptionQuery">
-    SELECT ?description WHERE { ?role <${descriptionPredicate}> ?description . }
-</v:jsonset>
-
 <v:jsonset var="activityQuery">
   PREFIX core: <${vivoCore}>  
   SELECT ?existingActivity WHERE { ?role  core:roleIn ?existingActivity . }
@@ -250,25 +251,19 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
     "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${endYearAssertion}", "${descriptionAssertion}" ],        
-                                                                                            
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
+                                                                                        
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}" },
 
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear", "roleDescription" ],
+    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { 
-        "activityLabel"     : "${activityLabelQuery}", 
-        "roleLabel"         : "${roleLabelQuery}", 
-        "startYear"         : "${startYearQuery}", 
-        "endYear"           : "${endYearQuery}",
-        "roleDescription"   : "${descriptionQuery}"
-    },
+    "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYear":"${startYearQuery}", "endYear":"${endYearQuery}" },
     "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" , "roleActivityType":"${activityTypeQuery}" },
     "fields" : {
       "activityLabel" : {
@@ -336,17 +331,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
          "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
          "rangeLang"        : "",         
          "assertions"       : ["${endYearAssertion}"]
-      },
-      "roleDescription" : {
-         "newResource"      : "false",
-         "validators"       : [ ],
-         "optionsType"      : "UNDEFINED",
-         "literalOptions"   : [ ],
-         "predicateUri"     : "",
-         "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
-         "rangeLang"        : "",         
-         "assertions"       : ["${descriptionAssertion}"]
       }
   }
 }
@@ -437,7 +421,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	
 	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
 	        
-	        <v:input type="text" id="roleDescription" label="Role Description" size="50" />
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
 	                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
