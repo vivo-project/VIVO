@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>CreateOrganization</title>
+<title>CreateActivity</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,11 +27,11 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CreateOrganization</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CreateActivity</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Validate adding Organization</td>
+	<td class="comment">Validate adding Activity</td>
 	<td></td>
 </tr>
 <tr>
@@ -102,7 +102,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=Grant (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -116,12 +116,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Name</td>
+	<td>Create a new Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,7 +137,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=Grant (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -156,12 +151,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Name</td>
+	<td>Create a new Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -187,7 +177,7 @@
 <tr>
 	<td>type</td>
 	<td>label</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -196,7 +186,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,18 +196,83 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='overview']/a</td>
+	<td>//div[@id='administeredBy']/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Organization for Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate Colleges of the World</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='grantAwardedBy']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Organization for Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate Research Laboratory</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='abstract']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: abstract</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>tinymce</td>
-	<td>The Primate College of America is a privately-funded college for the study of primates.</td>
+	<td>Purpose of grant is to determine the appropriate environment, physical activity, and diet for primates as they age.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -226,147 +281,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='currentlyHeadedBy']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Person for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Non-Faculty Academic (core)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Edit &quot;currently headed by&quot; entry for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>ME Tarzan</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='fundingAgentFor']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Process (core)</td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Privately Funded</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='memberRoleOf']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='offersDegree']/a</td>
+	<td>//div[@id='grantSubcontractedThrough']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -377,7 +297,7 @@
 <tr>
 	<td>select</td>
 	<td>objectVar</td>
-	<td>label=B.S. Bachelor of Science</td>
+	<td>label=Primate Colleges of the World</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -386,32 +306,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasPredecessorOrganization']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='awardsGrant']/a</td>
+	<td>//div[@id='totalAwardAmount']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,12 +321,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Grant for Primate College of America</td>
+	<td>Add new entry for: total award amount</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>$1,234,567</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='grantDirectCosts']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -436,8 +351,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>Primate Habitat Research Grant</td>
+	<td>tinymce</td>
+	<td>$999,999</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -446,42 +361,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='subcontractsGrant']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='sponsorsAward']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>//div[@id='sponsorAwardId']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -491,8 +376,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>Primate Student of the Year</td>
+	<td>tinymce</td>
+	<td>1234-5678</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -501,12 +386,17 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Test time entry</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='awardConferred']/a</td>
+	<td>//div[@id='startDate']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -515,24 +405,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasEquipment']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: start date</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>Primate Habitat</td>
+	<td>yearstartDateEdited</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>monthstartDateEdited</td>
+	<td>label=September</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>daystartDateEdited</td>
+	<td>label=1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -541,37 +431,227 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='endDate']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: end date</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>yearendDateEdited</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>monthendDateEdited</td>
+	<td>label=August</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>dayendDateEdited</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test affiliation entry</td>
+	<td class="comment">Test identity entry</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test publications entry</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='localAwardId']/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test service entry</td>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test location entry</td>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: local award id</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test contact entry</td>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>P999-1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Test other entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='fundingVehicleFor']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: funding vehicle for</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate Student of the Year</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasSubjectArea']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Subject Area for Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Edit &quot;subject area&quot; entry for Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Elderly Care</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify everything entered is displaying properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World | Consortium</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Purpose of grant is to determine the appropriate environment, physical activity, and diet for primates as they age.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World | Consortium</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>$1,234,567</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>$999,999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234-5678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010-09-01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2012-08-31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>P999-1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Student of the Year | Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Elderly Care | Subject Area</td>
 	<td></td>
 </tr>
 <tr>
