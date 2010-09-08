@@ -1051,6 +1051,11 @@
   </servlet>
 
   <servlet>
+    <servlet-name>individual</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.IndividualController</servlet-class>
+  </servlet>
+  
+  <servlet>
     <servlet-name>updateEntityFlags</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.UpdateEntityFlagServlet</servlet-class>
   </servlet>
@@ -1198,6 +1203,7 @@
     <servlet-name>mailusers</servlet-name>
     <url-pattern>/mailusers</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>entity</servlet-name>
     <url-pattern>/entity</url-pattern>
@@ -1214,6 +1220,24 @@
     <servlet-name>entity</servlet-name>
     <url-pattern>/display/*</url-pattern>
   </servlet-mapping>
+    
+  <servlet-mapping>
+    <servlet-name>individual</servlet-name>
+    <url-pattern>/entityfm</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>individual</servlet-name>
+    <url-pattern>/entityfm/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>individual</servlet-name>
+    <url-pattern>/individualfm/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>individual</servlet-name>
+    <url-pattern>/displayfm/*</url-pattern>
+  </servlet-mapping>    
+
   <servlet-mapping>
     <servlet-name>updateEntityFlags</servlet-name>
     <url-pattern>/updateEntityFlags</url-pattern>
