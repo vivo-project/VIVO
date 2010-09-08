@@ -5,33 +5,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>CheckPublicView</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CheckPublicView</td></tr>
+<tr><td rowspan="1" colspan="3">CheckPublicView</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Check public view of Jane Faculty and Lily Librarian</td>
+	<td>Check public view of non-person things</td>
 	<td></td>
 </tr>
 <tr>
@@ -51,12 +33,287 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">No need to login</td>
+	<td>No need to login</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty</td>
+	<td>Navigate to Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify People-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Non-Faculty Academic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Non-Faculty Academic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ME Tarzan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>ME Tarzan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America Dr., 1999 - </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<!--Go back to Index-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Courses-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Course</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Course</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness | Invited Talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Learn the basics about the general health of primates.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ME Tarzan | Non-Faculty Academic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Fall 2010 | Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Africa | geographical_region</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>the United States of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Liberia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ME Tarzan at metarzan@primates.edu or 555-555-5553</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010-09-06</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010-12-07</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Fall 2010 | Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check | Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health | Subject Area</td>
+	<td></td>
+</tr>
+<!--Go back to Index-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Activities-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World | Consortium</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Purpose of grant is to determine the appropriate environment, physical activity, and diet for primates as they age.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World | Consortium</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>$1,234,567</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>$999,999</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234-5678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010-09-01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2012-08-31</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>P999-1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Student of the Year | Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Elderly Care | Subject Area</td>
 	<td></td>
 </tr>
 <tr>
@@ -71,147 +328,79 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Primate Habitat Research Grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify roles for Jane Faculty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Prototype New Ape Home</td>
+	<td>Primate Habitat Research Grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Designer 1990 - 1991</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Ape Health Program</td>
+	<td>Primate College of America | College</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Founder 1993 -</td>
+	<td>Primate College of America | College</td>
 	<td></td>
 </tr>
+<!--Go back to Index-->
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=History of Apes in Africa</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Consultant 2010 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Habitats for Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Researcher 1980 - 1985</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=NIH VIVO Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2010 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO Cornell Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2007 - 2009</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=NIH VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2009 - 2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO Cornell Grant Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2009</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Working with Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Co-Instructor 2000 - 2005</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Introduction to the Ape World</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Creator 2000 - 2001</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Ape World</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Planner 2009</td>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Topics-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Subject Area</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Lily Librarian</td>
+	<td>assertTitle</td>
+	<td>Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Animal Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Animal Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Conference | Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health | Subject Area</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,112 +415,915 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Librarian</td>
+	<td>link=Subject Area</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Librarian</td>
+	<td>Subject Area</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Librarian, Lily</td>
+	<td>link=Elderly Care</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Librarian, Lily</td>
+	<td>Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Elderly Care | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Diet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Diet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Feeder | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ME Tarzan | Non-Faculty Academic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Not sure | Vocabulary Source Reference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Diet | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Elderly Care | Subject Area</td>
+	<td></td>
+</tr>
+<!--Go back to Index-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Events-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Fall 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Fall 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Winter 2011</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Winter 2011</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Conference | Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness | Invited Talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>First annual conference for those interested in the general health of primates.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>self_governing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kenya</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Chad</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>the Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>info@primateconf.org</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2011-01-05</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2011-01-09</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Winter 2011 | Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check | Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PrimHConf</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Invited Talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Invited Talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America Organizer 2008</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Conference | Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America Organizer 2008</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Conference | Conference</td>
+	<td></td>
+</tr>
+<!--Go back to Index-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Organizations-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The Primate College of America is a privately-funded college for the study of primates.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ME Tarzan | Non-Faculty Academic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Privately Funded | Process</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ME Tarzan | Non-Faculty Academic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>B.S. Bachelor of Science | Academic Degree</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Habitat Research Grant | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Habitat Research Grant | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Student of the Year | Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>D.V.M. Doctor of Veterinary Medicine | Academic Degree</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Portable Primate Habitat | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate History Library | Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>ME Tarzan Dr., 1999 - </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates-r-us Funding source 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World Member 2009 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate History Library | Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Heart Health Clinic Founder 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness Organizer 2008</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check Sponsor 2008 - 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>info@primates.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5554</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234 Northern African Nation | Address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PCoA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Gorillas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Colleges of the World</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Elderly Care | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America Member 2009 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Elderly Care | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate History Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Elderly Care | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Feeder | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jane Memorial Building | Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primates-r-us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America Funding source 2010 -</td>
+	<td></td>
+</tr>
+<!--Go back to Index-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Equipment-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Portable Primate Habitat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Portable Primate Habitat</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jane Memorial Building | Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Feeder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Lab Room 123 | Facility</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Diet | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Diet</td>
+	<td></td>
+</tr>
+<!--Go back to Index-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<!--Verify Locations-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Lab Admin Office | Room</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Campus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Portable Primate Habitat | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Lab Room 123 | Facility</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Room</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Room</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Lab Admin Office</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Lab Admin Office</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jane Memorial Building | Building</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify roles for Lily Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Reference Division</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Head Librarian 2009 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Amercian Library Association</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Member 1988 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Animal Librarianship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Member of panel 2003</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Researching Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Presenter 2009</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primates of the World</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Board 2001 - 2003</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Carroll College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Consultant 2010 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Show Me the Primates!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Booth 2001</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Librarians for the Better Treatment of Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Chair 2009 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Go back to VIVO home page</td>
+	<td>Go back to VIVO home page</td>
 	<td></td>
 </tr>
 <tr>
