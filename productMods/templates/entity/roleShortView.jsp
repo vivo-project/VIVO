@@ -29,7 +29,9 @@ Optional vars:
 	<c:when test="${!empty individual}"><%-- individual is the OBJECT of the property referenced -- the Role individual, not the Person or grant --%>
  		<c:choose>
 			<c:when test="${!empty predicateUri}">
-											
+				
+				<c:set var="description" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#description'].dataPropertyStatements[0].data}" />
+				                							
 			    <%-- get years off role --%>
 				<c:set var="startYear" value="${individual.dataPropertyMap[startYearPredicate].dataPropertyStatements[0].data}"/>
                 <c:if test="${! empty startYear}">
@@ -110,6 +112,8 @@ Optional vars:
 				    </c:otherwise>
 			    </c:choose>
 			    
+
+			    
 			    <%-- only show error messages if logged in --%>
 			    <c:if test="${ ! showSelfEdits}">
 			       <c:set var="errorMsg" value=""/>
@@ -120,12 +124,14 @@ Optional vars:
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
 		                <a href="<c:out value="${olink}"/>">${name}</a>&nbsp;${label}&nbsp;${startYear}${endYearVal} ${errorMsg}
+		                <c:if test="${! empty description}">
+		                  <br />${description}
+		                </c:if>
 		            </c:when>
 		            <c:otherwise>
 		                <p:process><strong>${name}</strong> ${label}</p:process> ${errorMsg}
 		            </c:otherwise>
-		        </c:choose>
-		        
+		        </c:choose>                		        
 			</c:when>
 			<c:otherwise>
 				<c:out value="No predicate available for custom rendering ..."/>
