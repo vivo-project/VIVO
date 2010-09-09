@@ -17,3 +17,13 @@ span.incomplete-data-holder,
   margin-top: 1.6em;
   font-size: 1.0em;
 }
+
+/* RY Removed cursor:pointer: makes the whole div look clickable when it isn't. */
+#vis_container {
+    /*cursor:pointer; */
+    /*height:36px;
+    margin-left:24%;
+    margin-top:-2%;
+    position:absolute;
+    width:380px;*/
+}
