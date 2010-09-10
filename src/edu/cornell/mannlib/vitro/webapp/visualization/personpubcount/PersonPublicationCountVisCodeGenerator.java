@@ -224,7 +224,7 @@ public class PersonPublicationCountVisCodeGenerator {
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
 		}
 
-		String sparklineDisplayOptions = "{width: 63, height: 21, showAxisLines: false, " 
+		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, " 
 												+ "showValueLabels: false, labelPosition: 'none'}";
 		
 		if (providedVisContainerID != null) {
