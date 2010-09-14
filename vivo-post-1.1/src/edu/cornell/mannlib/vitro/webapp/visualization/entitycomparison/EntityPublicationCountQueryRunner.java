@@ -46,7 +46,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 	private Individual author; 
 
 	public Individual getAuthor() {
-		return author;
+		return this.author;
 	}
 
 	private Log log;
@@ -82,9 +82,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 	}
 
 	private Set<BiboDocument> createJavaValueObjects(ResultSet resultSet) {
+		
 		Set<BiboDocument> authorDocuments = new HashSet<BiboDocument>();
 		
 		while (resultSet.hasNext()) {
+			
 			QuerySolution solution = resultSet.nextSolution();
 
 			BiboDocument biboDocument = new BiboDocument(
