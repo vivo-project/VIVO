@@ -24,7 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData
 
 
 @SuppressWarnings("serial")
-public class PersonPublicationCountVisCodeGenerator {
+public class EntityPublicationCountVisCodeGenerator {
 
 	/*
 	 * There are 2 modes of sparkline that are available via this visualization.
@@ -56,7 +56,7 @@ public class PersonPublicationCountVisCodeGenerator {
 
 	private String individualURI;
 
-	public PersonPublicationCountVisCodeGenerator(String contextPath, 
+	public EntityPublicationCountVisCodeGenerator(String contextPath, 
 									  String individualURIParam, 
 									  String visMode, 
 									  String visContainer, 

@@ -38,29 +38,25 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-/**
+//TODO: Class description.
+/**  
+ * To be described.
  * 
- * This request handler is used to serve the content related to an individual's
- * publications over the years like,
- * 		1. Sprakline representing this
- * 		2. An entire page dedicated to the sparkline vis which will also have links to
- * download the data using which the sparkline was rendered & its tabular representation etc.
- * 		3. Downloadable CSV file containing number of publications over the years.
- * 		4. Downloadable PDf file containing the publications content, among other things. 
- * Currently this is disabled because the feature is half-baked. We plan to activate this in 
- * the next major release.  
- * 
- * @author cdtank
+ * @author bkoniden
  */
-public class PersonPublicationCountRequestHandler implements VisualizationRequestHandler {
+public class EntityPublicationCountRequestHandler implements VisualizationRequestHandler {
 	
+	/*
+	 * Vis container holds the "id" of the div on the final response
+	 *  html page that the visualization actually appears on. 
+	 */
 	public void generateVisualization(VitroRequest vitroRequest,
 									  HttpServletRequest request, 
 									  HttpServletResponse response, 
 									  Log log, 
 									  DataSource dataSource) {
 		
-        String peronURI = vitroRequest.getParameter(
+        String personURI = vitroRequest.getParameter(
         									VisualizationFrameworkConstants
         											.INDIVIDUAL_URI_KEY);
 
@@ -77,7 +73,7 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
         											.VIS_CONTAINER_KEY);
 
         QueryRunner<Set<BiboDocument>> queryManager =
-        	new PersonPublicationCountQueryRunner(peronURI, dataSource, log);
+        	new EntityPublicationCountQueryRunner(personURI, dataSource, log);
 
 		try {
 			Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
@@ -89,7 +85,7 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
 	    	Map<String, Integer> yearToPublicationCount = 
 	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
 	    	
-	    	Individual author = ((PersonPublicationCountQueryRunner) queryManager).getAuthor();
+	    	Individual author = ((EntityPublicationCountQueryRunner) queryManager).getAuthor();
 
 	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE
 	    				.equalsIgnoreCase(renderMode)) {
@@ -120,9 +116,9 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
 	    	/*
 	    	 * Computations required to generate HTML for the sparkline & related context.
 	    	 * */
-	    	PersonPublicationCountVisCodeGenerator visualizationCodeGenerator = 
-	    		new PersonPublicationCountVisCodeGenerator(vitroRequest.getContextPath(),
-	    									   peronURI,
+	    	EntityPublicationCountVisCodeGenerator visualizationCodeGenerator = 
+	    		new EntityPublicationCountVisCodeGenerator(vitroRequest.getContextPath(),
+	    									   personURI,
 	    									   visMode,
 	    									   visContainer,
 	    									   authorDocuments,

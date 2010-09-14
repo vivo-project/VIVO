@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
  * 
  * @author cdtank
  */
-public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDocument>> {
+public class EntityPublicationCountQueryRunner implements QueryRunner<Set<BiboDocument>> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
@@ -72,7 +72,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." 
 			+ "OPTIONAL {  ?document vitro:description ?documentDescription }";
 	
-	public PersonPublicationCountQueryRunner(String personURI,
+	public EntityPublicationCountQueryRunner(String personURI,
 			DataSource dataSource, Log log) {
 
 		this.personURI = personURI;
