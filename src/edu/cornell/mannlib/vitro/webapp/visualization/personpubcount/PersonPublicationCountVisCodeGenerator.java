@@ -588,7 +588,7 @@ public class PersonPublicationCountVisCodeGenerator {
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 			
 			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO " 
-									+ "publications and corresponding co-author network</a>.<br />";
+									+ "publications and corresponding co-author network.</a>";
 			
 			sparklineData.setFullTimelineNetworkLink(fullTimelineNetworkURL);
 			

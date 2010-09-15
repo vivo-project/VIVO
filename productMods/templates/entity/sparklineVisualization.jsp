@@ -131,11 +131,21 @@
 	}
 	
 	.vis_link a{
-		padding:10px;
+		padding: 5px;
 		display: block;
 	}
 	
+	</style>
+<![endif]-->
+
+<!--[if lt IE 8]>
+	<style type="text/css">
 	
+	.vis_link {
+		padding-top:15px;
+		display: block;
+	}
+
 	</style>
 <![endif]-->
 	
