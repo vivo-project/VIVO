@@ -217,7 +217,6 @@ SPARQL queries for existing values. --%>
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
                                                                  "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 

@@ -1,25 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-.acSelection {
-    display: none;
-    margin-top: 2em;
-}
-
-.acSelectionInfo {
-    background-color: #d9d9d9;
-    padding: .5em 1em;
-}
-
-
-/* jQuery UI autocomplete */
-ul.ui-autocomplete {
-    font-size: .95em;
-}
-
-li.ui-menu-item a.ui-corner-all {
-    text-align: left;
-    padding-left: .25em;
-}
+@import url("autocomplete.css"); 
 
 /* Although Javascript hides these on page load, hide here as well to avoid the flash on page load.
    This needs to be removed to support a non-JS version of the form. */
