@@ -56,7 +56,7 @@ public class EntityPublicationCountRequestHandler implements VisualizationReques
 									  Log log, 
 									  DataSource dataSource) {
 		
-        String personURI = vitroRequest.getParameter(
+        String departmentURI = vitroRequest.getParameter(
         									VisualizationFrameworkConstants
         											.INDIVIDUAL_URI_KEY);
 
@@ -73,17 +73,17 @@ public class EntityPublicationCountRequestHandler implements VisualizationReques
         											.VIS_CONTAINER_KEY);
 
         QueryRunner<Set<BiboDocument>> queryManager =
-        	new EntityPublicationCountQueryRunner(personURI, dataSource, log);
+        	new EntityPublicationCountQueryRunner(departmentURI, dataSource, log);
 
 		try {
-			Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
+			Set<BiboDocument> departmentDocuments = queryManager.getQueryResult();
 
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
 	    	Map<String, Integer> yearToPublicationCount = 
-	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
+	    			UtilityFunctions.getYearToPublicationCount(departmentDocuments);
 	    	
 	    	Individual author = ((EntityPublicationCountQueryRunner) queryManager).getAuthor();
 
@@ -91,7 +91,7 @@ public class EntityPublicationCountRequestHandler implements VisualizationReques
 	    				.equalsIgnoreCase(renderMode)) {
 	    		
 				prepareDataResponse(author,
-													  authorDocuments,
+													  departmentDocuments,
 													  yearToPublicationCount,
 													  response);
 				return;
@@ -118,10 +118,10 @@ public class EntityPublicationCountRequestHandler implements VisualizationReques
 	    	 * */
 	    	EntityPublicationCountVisCodeGenerator visualizationCodeGenerator = 
 	    		new EntityPublicationCountVisCodeGenerator(vitroRequest.getContextPath(),
-	    									   personURI,
+	    									   departmentURI,
 	    									   visMode,
 	    									   visContainer,
-	    									   authorDocuments,
+	    									   departmentDocuments,
 	    									   yearToPublicationCount, 
 	    									   log);
 	    	

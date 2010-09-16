@@ -42,15 +42,14 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 
 	private String personURI;
 	private DataSource dataSource;
-
 	private Individual author; 
+	private Log log;
+
 
 	public Individual getAuthor() {
 		return this.author;
 	}
-
-	private Log log;
-
+	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
 			+ "SELECT (str(?authorLabel) as ?authorLabelLit) " 
 			+ "		(str(?document) as ?documentLit) " 
