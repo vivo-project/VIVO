@@ -383,9 +383,6 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT">
     <rdfs:label xml:lang="en-US">codeFAOSTAT</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#occursDuring">
-    <rdfs:label xml:lang="en-US">occurs during</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AttendeeRole">
     <rdfs:label xml:lang="en-US">Attendee Role</rdfs:label>
   </rdf:Description>
