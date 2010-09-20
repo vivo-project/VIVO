@@ -58,6 +58,7 @@ var customForm = {
         
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
+        this.acHelpTextClass = 'acSelectorWithHelpText';
     },
 
     // Set up the form on page load
@@ -131,6 +132,9 @@ var customForm = {
         this.setButtonText('new');
         this.setLabels(); 
 
+        // Set the initial autocomplete help text in the acSelector field.
+        this.addAcHelpText();
+
         this.cancel.unbind('click');           
         if (this.formSteps > 1) {     
             this.cancel.click(function() {
@@ -187,6 +191,18 @@ var customForm = {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });   
+        
+        this.acSelector.focus(function() {
+            customForm.deleteAcHelpText();
+        });   
+        
+        this.acSelector.blur(function() {
+            customForm.addAcHelpText();
+        }); 
+        
+        this.form.submit(function() {
+            customForm.deleteAcHelpText();
+        });
         
     },
     
@@ -442,8 +458,26 @@ var customForm = {
         // or in repair mode in a two-step form with no type selected. Use the default type
         // name specified in the form data (this.typeName is 'Select one').
         return this.acType ? this.typeName : this.capitalize(this.defaultTypeName);
-    }
-    
+    },
+
+    // Set the intial help text that appears in the autocomplete field and change the class name
+    addAcHelpText: function() {
+        var typeText;
+
+        if (!this.acSelector.val()) {            
+        	typeText = getTypeNameForLabels();            
+			this.acSelector.val("Select an existing " + typeText + " or create a new one.")
+		               	   .addClass(this.acHelpTextClass);     
+		}
+	},
+
+    deleteAcHelpText: function() {
+        if (this.acSelector.hasClass(this.acHelpTextClass)) {
+			this.acSelector.val('')
+		                   .removeClass(this.acHelpTextClass);
+		}
+	}
+	
 };
 
 $(document).ready(function() {   
