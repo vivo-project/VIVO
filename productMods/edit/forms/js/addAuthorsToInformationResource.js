@@ -314,7 +314,7 @@ var addAuthorForm = {
         
         authorshipList.sortable({
             cursor: 'move',
-            stop: function(event, ui) {
+            update: function(event, ui) {
                 addAuthorForm.reorderAuthors(event, ui);
             }
         });     
