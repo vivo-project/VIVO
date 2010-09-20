@@ -76,6 +76,7 @@ var customForm = {
         this.cancel = this.form.find('.cancel');
         
         this.placeHolderText = '###';
+        this.acHelpTextClass = 'acSelectorWithHelpText';
 
     },
 
@@ -144,6 +145,9 @@ var customForm = {
         this.button.show();
         this.setButtonText('new');
         this.setLabels(); 
+
+        // Set the initial autocomplete help text in the acSelector field.
+        this.addAcHelpText();
            
         this.cancel.unbind('click');  
         if( this.formSteps > 1 ){         
@@ -190,6 +194,18 @@ var customForm = {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });   
+        
+        this.acSelector.focus(function() {
+            customForm.deleteAcHelpText();
+        });   
+        
+        this.acSelector.blur(function() {
+            customForm.addAcHelpText();
+        }); 
+        
+        this.form.submit(function() {
+            customForm.deleteAcHelpText();
+        });
         
     },
     
@@ -424,7 +440,26 @@ var customForm = {
         } 
         
         this.button.val(buttonText);
-    }
+    },
+
+	    // Set the intial help text that appears in the autocomplete field and change the class name
+	    addAcHelpText: function() {
+	        var typeText;
+
+	        if (!this.acSelector.val()) {
+	            // In trunk, use getTypeNameForLabels() instead
+	            typeText = this.acType ? this.typeName : 'item';
+	            this.acSelector.val("Select an existing " + typeText + " or create a new one.")
+	                           .addClass(this.acHelpTextClass);     
+	        }
+	    },
+
+	    deleteAcHelpText: function() {
+	        if (this.acSelector.hasClass(this.acHelpTextClass)) {
+	            this.acSelector.val('')
+	                           .removeClass(this.acHelpTextClass);
+	        }
+	    }
     
 };
 
