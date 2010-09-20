@@ -395,7 +395,7 @@ SPARQL queries for existing values. --%>
 
     <h3>Add an Author</h3>
     
-    <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" cssClass="acSelector" size="30" /></p>
+    <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" cssClass="acSelector" size="35" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint} ${initialHint}" size="20" /></p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name ${initialHint}" size="20" /></p>
     <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
