@@ -24,3 +24,8 @@ li.ui-menu-item a.ui-corner-all {
     text-align: left;
     padding-left: .25em;
 }
+
+.acSelectorWithHelpText{
+	font-style: italic;
+	color: #555;	
+}
