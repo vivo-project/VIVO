@@ -183,7 +183,8 @@ var customForm = {
 			}
 			else {
 				customForm.initFormFullView();
-				customForm.acSelector.focus();
+				// TW Setting focus here was clearing autocomplete help text, so commented it out
+				// customForm.acSelector.focus();
 			}
         }); 
         
@@ -465,7 +466,7 @@ var customForm = {
         var typeText;
 
         if (!this.acSelector.val()) {            
-        	typeText = getTypeNameForLabels();            
+        	typeText = this.getTypeNameForLabels();            
 			this.acSelector.val("Select an existing " + typeText + " or create a new one.")
 		               	   .addClass(this.acHelpTextClass);     
 		}
