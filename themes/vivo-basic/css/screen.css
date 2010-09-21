@@ -727,8 +727,9 @@ h3.associate {
 Upload Images
 ************************/
 
-div.thumbnail img { 
-border:3px solid #d5d5d5;
+div.thumbnail img,
+div#thumbnail img { 
+    border:3px solid #d5d5d5;
 }
 
 /************************
