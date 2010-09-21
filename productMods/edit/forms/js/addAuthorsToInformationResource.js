@@ -47,6 +47,7 @@ var addAuthorForm = {
         //this.undoLinks = $('a.undo');
         this.submit = this.form.find(':submit');
         this.cancel = this.form.find('.cancel'); 
+        this.acSelector = this.form.find('.acSelector');
         this.labelField = $('#label');
         this.firstNameField = $('#firstName');
         this.middleNameField = $('#middleName');
@@ -58,6 +59,7 @@ var addAuthorForm = {
         this.lastNameWrapper = this.lastNameField.parent();
         this.selectedAuthor = $('#selectedAuthor');
         this.selectedAuthorName = $('#selectedAuthorName');
+        this.acHelpTextClass = 'acSelectorWithHelpText';
 
     },
     
@@ -130,6 +132,8 @@ var addAuthorForm = {
         // or in the cancel action, or if referring to this.lastNameField. None of those work,
         // however.
         $('#lastName').val(''); 
+        // Set the initial autocomplete help text in the acSelector field.
+        this.addAcHelpText();
         
         return false; 
         
@@ -156,7 +160,7 @@ var addAuthorForm = {
 
         // Show the form
         this.form.show();                 
-        this.lastNameField.focus();
+        //this.lastNameField.focus();
     },   
     
     hideSelectedAuthor: function() {
@@ -421,7 +425,8 @@ var addAuthorForm = {
             // NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
             // in prepareSubmit. If we do this.form.submit(this.prepareSubmit); then
             // this != addAuthorForm in prepareSubmit.
-            addAuthorForm.prepareSubmit(); 
+            addAuthorForm.deleteAcHelpText();
+			addAuthorForm.prepareSubmit(); 
         });     
 
         this.lastNameField.blur(function() {
@@ -434,6 +439,14 @@ var addAuthorForm = {
             }
             addAuthorForm.onLastNameChange();
         });
+
+    	this.acSelector.focus(function() {
+        	addAuthorForm.deleteAcHelpText();
+    	});   
+
+    	this.acSelector.blur(function() {
+        	addAuthorForm.addAcHelpText();
+    	}); 
                 
         // When hitting enter in last name field, show first and middle name fields.
         // NB This event fires when selecting an autocomplete suggestion with the enter
@@ -596,11 +609,26 @@ var addAuthorForm = {
     toggleRemoveLink: function() {
         // when clicking remove: remove the author, and change link text to 'undo'
         // when clicking undo: add the author back, and change link text to 'remove'
-    }
+    },
 
+	// Set the initial help text in the lastName field and change the class name.
+	addAcHelpText: function() {
+        var typeText;
+
+        if (!this.acSelector.val()) {
+			this.acSelector.val("Select an existing Author or add a new one.")
+						   .addClass(this.acHelpTextClass);
+		}
+	},
+	
+	deleteAcHelpText: function() {
+	    if (this.acSelector.hasClass(this.acHelpTextClass)) {
+	            this.acSelector.val('')
+	                           .removeClass(this.acHelpTextClass);
+	        }
+	    }
 };
 
 $(document).ready(function() {   
     addAuthorForm.onLoad();
-});
-
+}); 
