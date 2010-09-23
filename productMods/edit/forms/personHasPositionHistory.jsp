@@ -143,8 +143,6 @@
         <c:set var="title" value="Edit position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Save changes" />
-        <c:set var="startYearRequired" value="" />
-        <c:set var="startYearRequiredHint" value="" />
 <% 
     } else { // adding new entry
 %>
@@ -153,10 +151,6 @@
         <c:set var="title" value="Create position entry for ${subjectName}" />
         <%-- NB This will be the button text when Javascript is disabled. --%>
         <c:set var="submitLabel" value="Create position" />
-        <%-- Start year is required if we are doing an add but not an edit (so editors don't have to look up the start date in order
-             to edit an existing entry with no start date. --%> 
-        <c:set var="startYearRequired" value="\"nonempty\"," />
-        <c:set var="startYearRequiredHint" value="${requiredHint}" />
 <%  } %>
 
 <c:set var="editjson" scope="request">
@@ -252,7 +246,7 @@
       },      
       "startYear" : {
          "newResource"      : "false",
-         "validators"       : [ ${startYearRequired} "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -335,7 +329,7 @@
         <v:input type="text" label="Position Title ${requiredHint}" id="title" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
-        <p class="inline year"><v:input type="text" label="Start Year ${startYearRequiredHint} <span class='hint'>(YYYY)</span>" id="startYear" size="4" /></p>    
+        <p class="inline year"><v:input type="text" label="Start Year <span class='hint'>(YYYY)</span>" id="startYear" size="4" /></p>    
         <p class="inline year"><v:input type="text" label="End Year <span id='endYearHint' class='hint'>(YYYY)</span>" id="endYear" size="4" /></p>
     </div>
     
