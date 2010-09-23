@@ -461,11 +461,12 @@ var customForm = {
         return this.acType ? this.typeName : this.capitalize(this.defaultTypeName);
     },
 
-    // Set the intial help text that appears in the autocomplete field and change the class name
+    // Set the initial help text that appears in the autocomplete field and change the class name
     addAcHelpText: function() {
         var typeText;
-
-        if (!this.acSelector.val()) {            
+    
+        // First case applies on page load; second case applies when the type gets changed.
+        if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {            
         	typeText = this.getTypeNameForLabels();            
 			this.acSelector.val("Select an existing " + typeText + " or create a new one.")
 		               	   .addClass(this.acHelpTextClass);     
