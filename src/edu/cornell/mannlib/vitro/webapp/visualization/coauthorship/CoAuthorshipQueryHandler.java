@@ -438,7 +438,7 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			+ "} " 
 			+ "ORDER BY ?document ?coAuthorPerson";
 
-		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
+//		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}
