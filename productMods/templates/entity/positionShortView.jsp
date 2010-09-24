@@ -10,16 +10,21 @@
 	
         <c:set var="startYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#startYear'].dataPropertyStatements[0].data}"/>
         <c:set var="endYear" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#endYear'].dataPropertyStatements[0].data}"/>
-        <c:if test="${!empty startYear}">
-	        <c:choose>
-	            <c:when test="${!empty endYear}">
-	                <c:set var="timeSpan" value=", ${startYear} - ${endYear}"/>
-	            </c:when>
-	            <c:otherwise>
-	                <c:set var="timeSpan" value=", ${startYear} - "/>
-	            </c:otherwise>
-	        </c:choose>
-		</c:if>
+        <c:choose>
+	        <c:when test="${! empty startYear}">
+		        <c:choose>
+		            <c:when test="${! empty endYear}">
+		                <c:set var="timeSpan" value=", ${startYear} - ${endYear}"/>
+		            </c:when>
+		            <c:otherwise>
+		                <c:set var="timeSpan" value=", ${startYear} - "/>
+		            </c:otherwise>
+		        </c:choose>
+			</c:when>
+			<c:when test="${! empty endYear}">
+                <c:set var="timeSpan" value=", - ${endYear}" />
+			</c:when>
+		</c:choose>
         	
         <c:choose><%-- use working title in preference to HR title --%>
             <c:when test="${!empty individual.dataPropertyMap['http://vivoweb.org/ontology/core#titleOrRole'].dataPropertyStatements[0].data}">
