@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -54,7 +55,7 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 	
 	private DataSource dataSource;
 
-	private Log log;
+	private static final Log log = LogFactory.getLog(CoAuthorshipQueryHandler.class);
 
 	private UniqueIDGenerator nodeIDGenerator;
 
@@ -65,7 +66,8 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 
 		this.egoURLParam = egoURLParam;
 		this.dataSource = dataSource;
-		this.log = log;
+		//bdc34: static Log is set for class   
+		//this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
 		this.edgeIDGenerator = new UniqueIDGenerator();
@@ -150,9 +152,9 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			}
 			
 			/*
-			System.out.print("PERSON_URL:" + egoAuthorURLNode.toString() + "|");
-			System.out.print("DOCUMENT_URL:" + documentNode.toString() + "|");
-			System.out.println("CO_AUTHOR_URL:" + coAuthorURLNode.toString());
+			log.debug("PERSON_URL:" + egoAuthorURLNode.toString() + "|");
+			log.debug("DOCUMENT_URL:" + documentNode.toString() + "|");
+			log.debug("CO_AUTHOR_URL:" + coAuthorURLNode.toString());
 			*/
 			coAuthorNode.addAuthorDocument(biboDocument);
 			
@@ -438,7 +440,7 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 			+ "} " 
 			+ "ORDER BY ?document ?coAuthorPerson";
 
-//		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
+		log.debug("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}
@@ -447,9 +449,9 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 	public CoAuthorshipVOContainer getVisualizationJavaValueObjects()
 		throws MalformedQueryParametersException {
 		/*
-		System.out.println("***************************************************************************************");
-		System.out.println("Entered into coauthorship query handler at " + System.currentTimeMillis());
-		System.out.println("***************************************************************************************");
+		log.debug("***************************************************************************************");
+		log.debug("Entered into coauthorship query handler at " + System.currentTimeMillis());
+		log.debug("***************************************************************************************");
 */
 		if (StringUtils.isNotBlank(this.egoURLParam)) {
 			/*
@@ -470,8 +472,8 @@ public class CoAuthorshipQueryHandler implements QueryHandler<CoAuthorshipVOCont
 		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURLParam),
 										   this.dataSource);
 /*
-		System.out.println("***************************************************************************************");
-		System.out.println("***************************************************************************************");
+		log.debug("***************************************************************************************");
+		log.debug("***************************************************************************************");
 		*/
 		return createJavaValueObjects(resultSet);
 	}
