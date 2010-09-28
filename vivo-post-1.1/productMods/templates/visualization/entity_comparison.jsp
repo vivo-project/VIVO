@@ -87,6 +87,7 @@
             var selectedValue = $("select option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
 			$('.yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
+			loadData(jsonData);
         });
         
         /*
@@ -111,7 +112,8 @@
             dataType: 'json',
             success: loadData
         });
-*/
+*/		
+
         
         /* 
          *  function to populate the schools object with the
