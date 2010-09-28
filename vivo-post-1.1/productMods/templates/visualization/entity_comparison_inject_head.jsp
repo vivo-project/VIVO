@@ -12,14 +12,14 @@
 <c:url var="jgrowl" value="/js/jquery_plugins/jgrowl/jquery.jgrowl.js"/>
 <c:url var="pagination" value="/js/jquery_plugins/pagination/jquery.pagination.js"/>
 
-<c:url var="entityComparisonUtils" value="/js/visualization/entityComparison/utils.js" />
+<c:url var="entityComparisonUtils" value="/js/visualization/entityComparison/util.js" />
 <c:url var="entityComparisonConstants" value="/js/visualization/entityComparison/constants.js" />
 
 <!-- css related to jgrowl and pagination js files. -->
-<c:url var="paginationStyle" value="/${themeDir}css/visualization/entityComparison/pagination.css" />
+<c:url var="paginationStyle" value="/js/jquery_plugins/pagination/pagination.css" />
 <c:url var="jgrowlStyle" value="/js/jquery_plugins/jgrowl/jquery.jgrowl.css" />
 
-<c:url var="entityComparisonStyle" value="/js/jquery_plugins/pagination/layout.css" />
+<c:url var="entityComparisonStyle" value="/${themeDir}css/visualization/entityComparison/layout.css" />
 <c:url var="vizStyle" value="/${themeDir}css/visualization/visualization.css" />
 
 <!-- Including jquery, entity comparison related javascript files -->
