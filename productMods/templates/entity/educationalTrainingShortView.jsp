@@ -64,15 +64,15 @@
                 
                 <%-- Build the output string --%>
                 <c:choose>
-                    <c:when test="${ ! empty degreeStr }">
-                        ${degreeStr}
-                        <c:if test="${ ! empty selectedOrganizationStr}">, ${selectedOrganizationStr}</c:if>
-                        <c:if test="${ ! empty degreeDeptOrSchool}">, ${degreeDeptOrSchool}</c:if>
-                        <c:if test="${ ! empty year }">, ${year}</c:if>
-                        <c:if test="${ ! empty degreeSupplementalInfo }">, ${degreeSupplementalInfo}</c:if>             
+                    <c:when test="${empty degreeStr && empty selectedOrganizationStr && empty degreeDeptOrSchool}">
+                        <a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>        
                     </c:when>
-                    <c:otherwise>
-                        <a href="${objLink}"><p:process>educational background ${individual.name}</p:process></a>
+                    <c:otherwise>                       
+                        <%= StringUtils.join(", ", (String) pageContext.getAttribute("degreeStr"),
+                                                   (String) pageContext.getAttribute("selectedOrganizationStr"), 
+                                                   (String) pageContext.getAttribute("degreeDeptOrSchool"),
+                                                   (String) pageContext.getAttribute("year"), 
+                                                   (String) pageContext.getAttribute("degreeSupplementalInfo") ) %>                     
                     </c:otherwise>
                 </c:choose>
             </c:when>
