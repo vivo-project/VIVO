@@ -7,7 +7,7 @@
 <c:set var="contextPath"><c:out value="${pageContext.request.contextPath}" /></c:set>
 
 <c:url var="jquery" value="/js/jquery.js"/>
-<c:url var="flot" value="/js/jquery_plugins/flot/*.js"/>
+<c:url var="flot" value="/js/jquery_plugins/flot/jquery.flot.js"/>
 <c:url var="fliptext" value="/js/jquery_plugins/fliptext/jquery.mb.flipText.js"/>
 <c:url var="jgrowl" value="/js/jquery_plugins/jgrowl/jquery.jgrowl.js"/>
 <c:url var="pagination" value="/js/jquery_plugins/pagination/jquery.pagination.js"/>
