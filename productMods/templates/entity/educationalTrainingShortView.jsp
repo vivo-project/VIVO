@@ -72,12 +72,7 @@
                                                    (String) pageContext.getAttribute("selectedOrganizationStr"), 
                                                    (String) pageContext.getAttribute("degreeDeptOrSchool"),
                                                    (String) pageContext.getAttribute("year"), 
-                                                   (String) pageContext.getAttribute("degreeSupplementalInfo") ) %>
-                        <%-- <c:if test="${ ! empty degreeStr}">${degreeStr}</c:if>
-                        <c:if test="${ ! empty selectedOrganizationStr}">, ${selectedOrganizationStr}</c:if>
-                        <c:if test="${ ! empty degreeDeptOrSchool}">, ${degreeDeptOrSchool}</c:if>
-                        <c:if test="${ ! empty year }">, ${year}</c:if>
-                        <c:if test="${ ! empty degreeSupplementalInfo }">, ${degreeSupplementalInfo}</c:if>   --%>                         
+                                                   (String) pageContext.getAttribute("degreeSupplementalInfo") ) %>                     
                     </c:otherwise>
                 </c:choose>
             </c:when>
