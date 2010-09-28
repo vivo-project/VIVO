@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+body{
+	background-color: white;
+}
+
 head,body {
 	font: 0.9em Helvetica;
 }
