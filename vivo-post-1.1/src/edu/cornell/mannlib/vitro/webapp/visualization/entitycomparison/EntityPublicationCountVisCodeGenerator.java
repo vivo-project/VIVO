@@ -20,6 +20,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFr
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
 
 
@@ -60,7 +61,7 @@ public class EntityPublicationCountVisCodeGenerator {
 									  String individualURIParam, 
 									  String visMode, 
 									  String visContainer, 
-									  Set<BiboDocument> authorDocuments, 
+									  Set<Entity> departmentDocuments, 
 									  Map<String, Integer> yearToPublicationCount, 
 									  Log log) {
 		
@@ -72,7 +73,7 @@ public class EntityPublicationCountVisCodeGenerator {
 		
 		this.log = log;
 		
-		generateVisualizationCode(visMode, visContainer, authorDocuments);
+		generateVisualizationCode(visMode, visContainer, departmentDocuments);
 	}
 	
 	/**
@@ -85,13 +86,13 @@ public class EntityPublicationCountVisCodeGenerator {
 	 * data & links to download files etc.
 	 * @param visMode
 	 * @param visContainer
-	 * @param authorDocuments
+	 * @param departmentDocuments
 	 */
 	private void generateVisualizationCode(String visMode,
 										   String visContainer, 
-										   Set<BiboDocument> authorDocuments) {
+										   Set<Entity> departmentDocuments) {
 		
-    	sparklineData.setSparklineContent(getMainVisualizationCode(authorDocuments, 
+    	sparklineData.setSparklineContent(getMainVisualizationCode(departmentDocuments, 
 																   visMode, 
 																   visContainer));
     	
@@ -100,7 +101,7 @@ public class EntityPublicationCountVisCodeGenerator {
     	
 	}
 
-	private String getMainVisualizationCode(Set<BiboDocument> authorDocuments,
+	private String getMainVisualizationCode(Set<Entity> departmentDocuments,
 										    String visMode, 
 										    String providedVisContainerID) {
 

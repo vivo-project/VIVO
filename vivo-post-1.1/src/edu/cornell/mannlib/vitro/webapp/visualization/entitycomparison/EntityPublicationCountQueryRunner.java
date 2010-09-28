@@ -2,8 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -25,196 +25,276 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
-
-
 /**
- * This query runner is used to execute a sparql query that will fetch all the publications
- * defined by bibo:Document property for a particular individual.
+ * This query runner is used to execute a sparql query that will fetch all the
+ * publications defined by bibo:Document property for a particular department/school/university.
  * 
- * @author cdtank
+ * @author bkoniden
  */
-public class EntityPublicationCountQueryRunner implements QueryRunner<Set<BiboDocument>> {
+public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String personURI;
+	private String entityURI;
 	private DataSource dataSource;
-	private Individual author; 
 	private Log log;
+	private String visMode;
 
+	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
+			+ "		(str(?Person) as ?personLit) "
+			+ "		(str(?PersonLabel) as ?personLabelLit) "
+			+ "		(str(?Document) as ?documentLit) "
+			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
+			+ "		(str(?publicationYear) as ?publicationYearLit) "
+			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) "
+			+ "		(str(?publicationDate) as ?publicationDateLit) ";
 
-	public Individual getAuthor() {
-		return this.author;
-	}
-	
-	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
-			+ "SELECT (str(?authorLabel) as ?authorLabelLit) " 
-			+ "		(str(?document) as ?documentLit) " 
-			+ "		(str(?documentMoniker) as ?documentMonikerLit) " 
-			+ "		(str(?documentLabel) as ?documentLabelLit) " 
-			+ "		(str(?documentBlurb) as ?documentBlurbLit) " 
-			+ "		(str(?publicationYear) as ?publicationYearLit) " 
-			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) " 
-			+ "		(str(?publicationDate) as ?publicationDateLit) " 
-			+ "		(str(?documentDescription) as ?documentDescriptionLit) ";
+	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
+			+ "?Document rdf:type bibo:Document ;"
+			+ " rdfs:label ?DocumentLabel ."
+			+ "OPTIONAL {  ?Document core:year ?publicationYear } ."
+			+ "OPTIONAL {  ?Document core:yearMonth ?publicationYearMonth } ."
+			+ "OPTIONAL {  ?Document core:date ?publicationDate } .";
 
-	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
-			+ "?document rdf:type bibo:Document ." 
-			+ "?document rdfs:label ?documentLabel ." 
-			+ "OPTIONAL {  ?document core:year ?publicationYear } ." 
-			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } ." 
-			+ "OPTIONAL {  ?document core:date ?publicationDate } ." 
-			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } ." 
-			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." 
-			+ "OPTIONAL {  ?document vitro:description ?documentDescription }";
-	
-	public EntityPublicationCountQueryRunner(String personURI,
-			DataSource dataSource, Log log) {
+	private static String ENTITY_LABEL;
+	private static String ENTITY_URL;
+	private static String SUBENTITY_LABEL;
+	private static String SUBENTITY_URL;
 
-		this.personURI = personURI;
+	public EntityPublicationCountQueryRunner(String entityURI,
+			DataSource dataSource, Log log, String visMode) {
+
+		this.entityURI = entityURI;
 		this.dataSource = dataSource;
 		this.log = log;
+		this.visMode = visMode;
 
 	}
 
-	private Set<BiboDocument> createJavaValueObjects(ResultSet resultSet) {
-		
-		Set<BiboDocument> authorDocuments = new HashSet<BiboDocument>();
-		
+	private Entity createJavaValueObjects(ResultSet resultSet) {
+
+		Entity entity = null;
+		Map<String, BiboDocument> biboDocumentURLToVO = new HashMap<String, BiboDocument>();
+		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
+
 		while (resultSet.hasNext()) {
-			
+
 			QuerySolution solution = resultSet.nextSolution();
 
-			BiboDocument biboDocument = new BiboDocument(
-											solution.get(QueryFieldLabels.DOCUMENT_URL)
-												.toString());
-
-			RDFNode documentLabelNode = solution.get(QueryFieldLabels.DOCUMENT_LABEL);
-			if (documentLabelNode != null) {
-				biboDocument.setDocumentLabel(documentLabelNode.toString());
+			if (entity == null) {
+				entity = new Entity(solution.get(ENTITY_URL)
+						.toString(), solution.get(ENTITY_LABEL)
+						.toString());
 			}
 
+			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
+			BiboDocument biboDocument;
 
-			RDFNode documentBlurbNode = solution.get(QueryFieldLabels.DOCUMENT_BLURB);
-			if (documentBlurbNode != null) {
-				biboDocument.setDocumentBlurb(documentBlurbNode.toString());
-			}
+			if (biboDocumentURLToVO.containsKey(documentNode.toString())) {
+				biboDocument = biboDocumentURLToVO.get(documentNode.toString());
 
-			RDFNode documentmonikerNode = solution.get(QueryFieldLabels.DOCUMENT_MONIKER);
-			if (documentmonikerNode != null) {
-				biboDocument.setDocumentMoniker(documentmonikerNode.toString());
-			}
+			} else {
 
-			RDFNode documentDescriptionNode = solution.get(QueryFieldLabels.DOCUMENT_DESCRIPTION);
-			if (documentDescriptionNode != null) {
-				biboDocument.setDocumentDescription(documentDescriptionNode.toString());
-			}
+				biboDocument = new BiboDocument(documentNode.toString());
+				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
 
-			RDFNode publicationYearNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-			if (publicationYearNode != null) {
-				biboDocument.setPublicationYear(publicationYearNode.toString());
-			}
-			
-			RDFNode publicationYearMonthNode = solution.get(
-													QueryFieldLabels
-															.DOCUMENT_PUBLICATION_YEAR_MONTH);
-			if (publicationYearMonthNode != null) {
-				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
-			}
-			
-			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			if (publicationDateNode != null) {
-				biboDocument.setPublicationDate(publicationDateNode.toString());
-			}
-			
-			/*
-			 * Since we are getting publication count for just one author at a time we need
-			 * to create only one "Individual" instance. We test against the null for "author" to
-			 * make sure that it has not already been instantiated. 
-			 * */
-			RDFNode authorURLNode = solution.get(QueryFieldLabels.AUTHOR_URL);
-			if (authorURLNode != null && author == null) {
-				author = new Individual(authorURLNode.toString());
-				RDFNode authorLabelNode = solution.get(QueryFieldLabels.AUTHOR_LABEL);
-				if (authorLabelNode != null) {
-					author.setIndividualLabel(authorLabelNode.toString());
+				RDFNode documentLabelNode = solution
+						.get(QueryFieldLabels.DOCUMENT_LABEL);
+				if (documentLabelNode != null) {
+					biboDocument.setDocumentLabel(documentLabelNode.toString());
 				}
+
+				RDFNode publicationYearNode = solution
+						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
+				if (publicationYearNode != null) {
+					biboDocument.setPublicationYear(publicationYearNode
+							.toString());
+				}
+
+				RDFNode publicationYearMonthNode = solution
+						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
+				if (publicationYearMonthNode != null) {
+					biboDocument
+							.setPublicationYearMonth(publicationYearMonthNode
+									.toString());
+				}
+
+				RDFNode publicationDateNode = solution
+						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+				if (publicationDateNode != null) {
+					biboDocument.setPublicationDate(publicationDateNode
+							.toString());
+				}
+
 			}
 
-			authorDocuments.add(biboDocument);
+			RDFNode subEntityURLNode = solution.get(SUBENTITY_URL);
+			if (subEntityURLNode != null) {
+				SubEntity subEntity;
+				if (subentityURLToVO.containsKey(subEntityURLNode.toString())) {
+					subEntity = subentityURLToVO.get(subEntityURLNode.toString());
+				} else {
+					subEntity = new SubEntity(subEntityURLNode.toString());
+					subentityURLToVO.put(subEntityURLNode.toString(), subEntity);
+				}
+
+				RDFNode subEntityLabelNode = solution
+						.get(SUBENTITY_LABEL);
+				if (subEntityLabelNode != null) {
+					subEntity.setIndividualLabel(subEntityLabelNode.toString());
+				}
+				entity.addSubEntity(subEntity);
+				subEntity.addPublications(biboDocument);
+			}
+
+			entity.addPublications(biboDocument);
 		}
-		return authorDocuments;
+
+		return entity;
 	}
 
-	private ResultSet executeQuery(String queryURI,
-            DataSource dataSource) {
+	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
 
-        QueryExecution queryExecution = null;
-        try {
-            Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
+		QueryExecution queryExecution = null;
+		try {
+			Query query = QueryFactory.create(getSparqlQuery(queryURI,
+					this.visMode), SYNTAX);
+			queryExecution = QueryExecutionFactory.create(query, dataSource);
 
-//            QuerySolutionMap qs = new QuerySolutionMap();
-//            qs.add("authPerson", queryParam); // bind resource to s
-            
-            queryExecution = QueryExecutionFactory.create(query, dataSource);
-            
-
-            if (query.isSelectType()) {
-                return queryExecution.execSelect();
-            }
-        } finally {
-            if (queryExecution != null) {
-            	queryExecution.close();
-            }
-        }
+			if (query.isSelectType()) {
+				return queryExecution.execSelect();
+			}
+		} finally {
+			if (queryExecution != null) {
+				queryExecution.close();
+			}
+		}
 		return null;
-    }
+	}
 
-	private String getSparqlQuery(String queryURI) {
-//		Resource uri1 = ResourceFactory.createResource(queryURI);
+	private String getSparqlQuery(String queryURI, String visMode) {
+		String result = "";
+
+		if (visMode.equals("DEPARTMENT")) {
+			result = getSparqlQueryForDepartment(queryURI);
+			ENTITY_URL = QueryFieldLabels.DEPARTMENT_URL;
+			ENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;
+			SUBENTITY_URL = QueryFieldLabels.PERSON_URL;
+			SUBENTITY_LABEL = QueryFieldLabels.PERSON_LABEL;
+		} else if (visMode.equals("SCHOOL")) {
+			result = getSparqlQueryForSchool(queryURI);
+			ENTITY_URL = QueryFieldLabels.SCHOOL_URL;
+			ENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
+			SUBENTITY_URL = QueryFieldLabels.DEPARTMENT_URL;
+			SUBENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;			
+		} else {
+			result = getSparqlQueryForUniversity(queryURI);
+			ENTITY_URL = QueryFieldLabels.UNIVERSITY_URL;
+			ENTITY_LABEL = QueryFieldLabels.UNIVERSITY_LABEL;
+			SUBENTITY_URL = QueryFieldLabels.SCHOOL_URL;
+			SUBENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;			
+		}
+		return result;
+	}
+
+	private String getSparqlQueryForDepartment(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
-							+ "(str(<" + queryURI + ">) as ?authPersonLit) "
-							+ "WHERE { "
-							+ "<" + queryURI + "> rdf:type foaf:Person ;" 
-							+ 					" rdfs:label ?authorLabel ;" 
-							+ 					" core:authorInAuthorship ?authorshipNode .  " 
-							+ "	?authorshipNode rdf:type core:Authorship ;" 
-							+ 					" core:linkedInformationResource ?document . "
-							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
-							+ "}";
-
-//		System.out.println("SPARQL query for person pub count -> \n" + sparqlQuery);
+				+ "SELECT (str(?DepartmentLabel) as ?departmentLabelLit) "
+				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
+				+ ">) as ?" + QueryFieldLabels.DEPARTMENT_URL + ") "
+				+ "WHERE { " + "<" + queryURI + "> rdf:type core:Department ;"
+				+ " rdfs:label ?DepartmentLabel ;"
+				+ " core:organizationForPosition ?Position .  "
+				+ "	?Position rdf:type core:Position ;"
+				+ " core:positionForPerson ?Person .  "
+				+ "	?Person  core:authorInAuthorship ?Resource ;  "
+				+ " rdfs:label ?PersonLabel .  "
+				+ " ?Resource core:linkedInformationResource ?Document ."
+				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+				+ " ORDER BY ?DocumentLabel";
+		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
 		return sparqlQuery;
+
 	}
 
-	public Set<BiboDocument> getQueryResult()
-		throws MalformedQueryParametersException {
+	private String getSparqlQueryForUniversity(String queryURI) {
 
-        if (StringUtils.isNotBlank(this.personURI)) {
+		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+				+ "SELECT (str(?UniversityLabel) as ?universityLabelLit) "
+				+ "	 	(str(?School) as ?schoolLit) "
+				+ "		(str(?SchoolLabel) as ?schoolLabelLit) "
+				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE 
+				+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.UNIVERSITY_URL + ") "
+				+ "WHERE { " + "<" + queryURI + "> rdf:type core:University ;"
+				+ " rdfs:label ?UniversityLabel ;"
+				+ " core:hasSubOrganization ?School ."
+				+ " ?School rdf:type core:School; rdfs:label ?SchoolLabel ;"
+				+ " core:organizationForPosition ?Position .  "
+				+ "	?Position rdf:type core:Position ;"
+				+ " core:positionForPerson ?Person .  "
+				+ "	?Person  core:authorInAuthorship ?Resource ;  "
+				+ " rdfs:label ?PersonLabel .  "
+				+ " ?Resource core:linkedInformationResource ?Document ."
+				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+				+ " ORDER BY ?DocumentLabel";
+		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+		return sparqlQuery;
 
-        	/*
-        	 * To test for the validity of the URI submitted.
-        	 * */
-        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.personURI);
-            if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
-                log.error("Pub Count vis Query " + errorMsg);
-                throw new MalformedQueryParametersException(
-                		"URI provided for an individual is malformed.");
-            }
-        	
-        } else {
-        	throw new MalformedQueryParametersException("URL parameter is either null or empty.");
-        }
+	}
 
-		ResultSet resultSet	= executeQuery(this.personURI,
-										   this.dataSource);
+	private String getSparqlQueryForSchool(String queryURI) {
+
+		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+				+ "SELECT (str(?SchoolLabel) as ?schoolLabelLit) "
+				+ "	 	(str(?Department) as ?departmentLit) "
+				+ "		(str(?DepartmentLabel) as ?departmentLabelLit) "
+				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
+				+ ">) as ?" + QueryFieldLabels.SCHOOL_URL + ") " + "WHERE { "
+				+ "<" + queryURI + "> rdf:type core:School ;"
+				+ " rdfs:label ?SchoolLabel ;"
+				+ " core:hasSubOrganization ?Department ."
+				+ " ?Department rdf:type core:Department; rdfs:label ?DepartmentLabel ;"				
+				+ " core:organizationForPosition ?Position .  "
+				+ "	?Position rdf:type core:Position ;"
+				+ " core:positionForPerson ?Person .  "
+				+ "	?Person  core:authorInAuthorship ?Resource ;  "
+				+ " rdfs:label ?PersonLabel .  "
+				+ " ?Resource core:linkedInformationResource ?Document ."
+				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+				+ " ORDER BY ?DocumentLabel";
+		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+		return sparqlQuery;
+
+	}
+
+	public Entity getQueryResult() throws MalformedQueryParametersException {
+
+		if (StringUtils.isNotBlank(this.entityURI)) {
+
+			/*
+			 * To test for the validity of the URI submitted.
+			 */
+			IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+			IRI iri = iRIFactory.create(this.entityURI);
+			if (iri.hasViolation(false)) {
+				String errorMsg = ((Violation) iri.violations(false).next())
+						.getShortMessage();
+				log.error("Entity Comparison vis Query " + errorMsg);
+				throw new MalformedQueryParametersException(
+						"URI provided for an entity is malformed.");
+			}
+
+		} else {
+			throw new MalformedQueryParametersException(
+					"URL parameter is either null or empty.");
+		}
+
+		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
 
 		return createJavaValueObjects(resultSet);
 	}

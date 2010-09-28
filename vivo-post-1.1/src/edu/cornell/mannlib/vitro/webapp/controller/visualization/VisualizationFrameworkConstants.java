@@ -55,6 +55,10 @@ public class VisualizationFrameworkConstants {
 	public static final String COAUTHOR_UTILS_VIS_MODE = "COAUTHORSHIP_URL";
 	public static final String PERSON_LEVEL_UTILS_VIS_MODE = "PERSON_LEVEL_URL";
 	public static final String IMAGE_UTILS_VIS_MODE = "IMAGE_URL";
+	public static final String UNIVERSITY_COMPARISON_VIS_MODE = "UNIVERSITY";
+	public static final String SCHOOL_COMPARISON_VIS_MODE = "SCHOOL";
+	public static final String DEPARTMENT_COMPARISON_VIS_MODE = "DEPARTMENT";
+	
 
 	/*
 	 * These values represent possible visualizations provided as values to the "vis" url key.
@@ -65,5 +69,6 @@ public class VisualizationFrameworkConstants {
 	public static final String COAUTHORSHIP_VIS = "coauthorship";
 	public static final String PERSON_LEVEL_VIS = "person_level";
 	public static final String UTILITIES_VIS = "utilities";
+	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
 
 }

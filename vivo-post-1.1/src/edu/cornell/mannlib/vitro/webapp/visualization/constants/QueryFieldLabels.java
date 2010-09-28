@@ -51,11 +51,7 @@ public class QueryFieldLabels {
 	public static final String COLLEGE_URL = "collegeLit";
 	public static final String COLLEGE_LABEL = "collegeLabelLit";
 	
-	/*
-	 * Department related field labels 
-	 * */
-	public static final String DEPARTMENT_URL = "departmentLit";
-	public static final String DEPARTMENT_LABEL = "departmentLabelLit";
+
 	
 	/*
 	 * Employee related field labels 
@@ -63,4 +59,28 @@ public class QueryFieldLabels {
 	public static final String ACADEMIC_FACULTY_EMPLOYEE_URL = "academicFacultyEmployeeLit";
 	public static final String ACADEMIC_STAFF_EMPLOYEE_URL = "academicStaffEmployeeLit";
 	
+	/*
+	 * Person related field Labels
+	 */
+	public static final String PERSON_URL = "personLit";
+	public static final String PERSON_LABEL = "personLabelLit";
+	
+	/*
+	 * University related field Labels
+	 */
+	public static final String UNIVERSITY_URL = "universityLit";
+	public static final String UNIVERSITY_LABEL = "universityLabelLit";
+	
+	/*
+	 * School related field labels
+	 */
+	public static final String SCHOOL_URL = "schoolLit";
+	public static final String SCHOOL_LABEL = "schoolLabelLit";
+	
+	/*
+	 * Department related field labels 
+	 * */
+	public static final String DEPARTMENT_URL = "departmentLit";
+	public static final String DEPARTMENT_LABEL = "departmentLabelLit";	
+
 }

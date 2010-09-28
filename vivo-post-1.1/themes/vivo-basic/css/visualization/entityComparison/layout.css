@@ -1,0 +1,93 @@
+@CHARSET "UTF-8";
+
+head,body {
+	font: 0.9em Helvetica;
+}
+
+h1 {
+	font-size: 1.2em;
+	margin-left: 5%;
+	color: #12968c;
+}
+
+h2 {
+	font-size: 1.1em;
+}
+
+h3 {
+	font-size: 1.01em;
+}
+.yaxislabel{
+	margin-left: 32px;
+	font-size: 12px;
+	margin-right: -5px;
+}
+.xaxislabel{
+	font-size: 12px;
+	margin-top: -5px;
+	margin-left: 250px;
+}
+#bar {
+	height: 20px;
+	float: left;
+	background-color: #fff;
+	width: 250px;
+	margin-left: 10px;
+}
+
+#label {
+	float: left;
+	font-size: 12px;
+	width: 160px;
+	text-align: right;
+}
+
+#searchresult {
+	margin-top: 50px;
+}
+
+#bottom,#graphContainer {
+	float: right;
+}
+
+#graphContainer {
+	margin-bottom: 15px;
+}
+
+#leftblock {
+	float: left;
+	margin-left: 5%;
+	width: 26%;
+	border: ridge #c8c8c8 4px;
+	padding-left: 12px;
+}
+
+#text {
+	margin-left: 5px;
+}
+
+#searchresult a {
+	text-decoration: none;
+	color: black;
+	font-family: Helvetica;
+	font-size: 13px;
+}
+
+#label a,#text {
+	text-decoration: none;
+	color: black;
+	font-family: Helvetica;
+	font-size: 1em;
+}
+
+#rightblock {
+	margin-right: 8%;
+}
+
+#counter,#total {
+	color: red;
+}
+
+#heading {
+	margin-top: 50px;
+}
