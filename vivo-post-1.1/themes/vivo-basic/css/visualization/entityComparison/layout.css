@@ -1,10 +1,10 @@
 @CHARSET "UTF-8";
 
-body{
+#body{
 	background-color: white;
 }
 
-head,body {
+head,#body {
 	font: 0.9em Helvetica;
 }
 

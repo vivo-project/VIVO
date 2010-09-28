@@ -10,7 +10,7 @@
 
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
 
-<body>
+<div id="body">
 <h1>Entity Comparison Visualization</h1>
 <div id="leftblock">
 <h2>How do you want to compare?</h2>
@@ -44,19 +44,13 @@
 <c:out value="${portalBean.themeDir}" /> <br />
 </div>
  -->
-<script type="text/javascript"><!--
+<script type="text/javascript">
 	
 	$(document).ready(function() {
 
 		var jsonString = '${jsonContent}';
-		var jsonData = jQuery.parseJSON(jsonString);
-
-		console.log(jsonData);
-		$.each(jsonData, function(index, value) {
-			console.log(value.entityURI);
-			});	
-
-
+		var jsonData;
+        prepareJSONData(jsonString. jsonData);
         var data = [];
         
         /*
@@ -87,14 +81,14 @@
             var selectedValue = $("select option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
 			$('.yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
-			loadData(jsonData);
+
         });
         
         /*
          * initial display of the grid when the page loads
          */
         init(graphContainer);
-        
+
         /*
          * by default have all the checkboxes unchecked
          */
@@ -371,5 +365,5 @@
 
 	});
 	
---></script>
-</body>
+</script>
+</div>
