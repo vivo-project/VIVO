@@ -1,9 +1,8 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 /**
  * JsonObject is used for creating data in JSON format, 
  * by just using the fields that are required to be included.
@@ -13,7 +12,6 @@ import java.util.Map;
 public class JsonObject {
 	
 	private String label;
-	//ssprivate Map<String, Integer> yearToPublicationCount = new HashMap<String, Integer>();
 	private List<List<Integer>> yearToPublicationCount = new ArrayList<List<Integer>>();
 	private String entityURI;
 	private String visMode;
@@ -34,6 +32,20 @@ public class JsonObject {
 		this.visMode = visMode;
 	}
 
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public List<List<Integer>> getYearToPublicationCount() {
+		return yearToPublicationCount;
+	}
+
+
+	
 	public JsonObject(String label){
 		this.label = label;
 	}

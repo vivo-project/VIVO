@@ -31,7 +31,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 /**
  * This query runner is used to execute a sparql query that will fetch all the
- * publications defined by bibo:Document property for a particular department/school/university.
+ * publications defined by bibo:Document property for a particular
+ * department/school/university.
  * 
  * @author bkoniden
  */
@@ -86,9 +87,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			QuerySolution solution = resultSet.nextSolution();
 
 			if (entity == null) {
-				entity = new Entity(solution.get(ENTITY_URL)
-						.toString(), solution.get(ENTITY_LABEL)
-						.toString());
+				entity = new Entity(solution.get(ENTITY_URL).toString(),
+						solution.get(ENTITY_LABEL).toString());
 			}
 
 			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
@@ -136,14 +136,15 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			if (subEntityURLNode != null) {
 				SubEntity subEntity;
 				if (subentityURLToVO.containsKey(subEntityURLNode.toString())) {
-					subEntity = subentityURLToVO.get(subEntityURLNode.toString());
+					subEntity = subentityURLToVO.get(subEntityURLNode
+							.toString());
 				} else {
 					subEntity = new SubEntity(subEntityURLNode.toString());
-					subentityURLToVO.put(subEntityURLNode.toString(), subEntity);
+					subentityURLToVO
+							.put(subEntityURLNode.toString(), subEntity);
 				}
 
-				RDFNode subEntityLabelNode = solution
-						.get(SUBENTITY_LABEL);
+				RDFNode subEntityLabelNode = solution.get(SUBENTITY_LABEL);
 				if (subEntityLabelNode != null) {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
@@ -161,8 +162,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 		QueryExecution queryExecution = null;
 		try {
-			Query query = QueryFactory.create(getSparqlQuery(queryURI,
-					this.visMode), SYNTAX);
+			Query query = QueryFactory.create(
+					getSparqlQuery(queryURI, this.visMode), SYNTAX);
 			queryExecution = QueryExecutionFactory.create(query, dataSource);
 
 			if (query.isSelectType()) {
@@ -190,13 +191,13 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			ENTITY_URL = QueryFieldLabels.SCHOOL_URL;
 			ENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
 			SUBENTITY_URL = QueryFieldLabels.DEPARTMENT_URL;
-			SUBENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;			
+			SUBENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;
 		} else {
 			result = getSparqlQueryForUniversity(queryURI);
 			ENTITY_URL = QueryFieldLabels.UNIVERSITY_URL;
 			ENTITY_LABEL = QueryFieldLabels.UNIVERSITY_LABEL;
 			SUBENTITY_URL = QueryFieldLabels.SCHOOL_URL;
-			SUBENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;			
+			SUBENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
 		}
 		return result;
 	}
@@ -228,8 +229,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				+ "SELECT (str(?UniversityLabel) as ?universityLabelLit) "
 				+ "	 	(str(?School) as ?schoolLit) "
 				+ "		(str(?SchoolLabel) as ?schoolLabelLit) "
-				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE 
-				+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.UNIVERSITY_URL + ") "
+				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
+				+ ">) as ?" + QueryFieldLabels.UNIVERSITY_URL + ") "
 				+ "WHERE { " + "<" + queryURI + "> rdf:type core:University ;"
 				+ " rdfs:label ?UniversityLabel ;"
 				+ " core:hasSubOrganization ?School ."
@@ -253,12 +254,19 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				+ "SELECT (str(?SchoolLabel) as ?schoolLabelLit) "
 				+ "	 	(str(?Department) as ?departmentLit) "
 				+ "		(str(?DepartmentLabel) as ?departmentLabelLit) "
-				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
-				+ ">) as ?" + QueryFieldLabels.SCHOOL_URL + ") " + "WHERE { "
-				+ "<" + queryURI + "> rdf:type core:School ;"
+				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
+				+ "		(str(<"
+				+ queryURI
+				+ ">) as ?"
+				+ QueryFieldLabels.SCHOOL_URL
+				+ ") "
+				+ "WHERE { "
+				+ "<"
+				+ queryURI
+				+ "> rdf:type core:School ;"
 				+ " rdfs:label ?SchoolLabel ;"
 				+ " core:hasSubOrganization ?Department ."
-				+ " ?Department rdf:type core:Department; rdfs:label ?DepartmentLabel ;"				
+				+ " ?Department rdf:type core:Department; rdfs:label ?DepartmentLabel ;"
 				+ " core:organizationForPosition ?Position .  "
 				+ "	?Position rdf:type core:Position ;"
 				+ " core:positionForPerson ?Person .  "
