@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
 #body{
-	background-color: white;
-}
+	width:1000px; margin:0 auto; position:relative;
+	}
 
 head,#body {
 	font: 0.9em Helvetica;
