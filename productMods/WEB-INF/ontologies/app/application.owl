@@ -305,21 +305,12 @@
     </owl:NamedIndividual>
     
 
-
     <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#PublicationsMenuItem -->
 
     <owl:NamedIndividual rdf:about="&display;PublicationsMenuItem">
         <rdf:type rdf:resource="&display;NavigationElement"/>
     </owl:NamedIndividual>
-    
-    
-    <!-- RY Move this to vivocornell -->
-    <!-- http://vitro.mannlib.cornell.edu/ontologies/display/1.1#weillCornellNamespace -->
-    
-    <owl:NamedIndividual rdf:about="&display;weillCornellNamespace">
-        <rdf:type rdf:resource="&display;ExternallyLinkedNamespace" />
-        <linkedNamespace>http://vivo.med.cornell.edu/individual</linkedNamespace>
-    </owl:NamedIndividual>
+
     
 </rdf:RDF>
 
