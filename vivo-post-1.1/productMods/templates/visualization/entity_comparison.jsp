@@ -55,8 +55,6 @@
 			}
 		};
 		
-		jsonData.prepare(jQuery.parseJSON(jsonString));		
-
         var data = [];
 
 /*    	console.log(jsonData);
@@ -69,7 +67,7 @@
          */
         var graphContainer = $("#graphContainer");
         
-/*        var colors = {};
+        var colors = {};
         var free_colors = [
                              TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
                              SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
@@ -81,7 +79,7 @@
         var col_id = 0;
         var schools = {};
         var labels = [];
-*/
+
 		/*
 		 * When the intra-entity parameters are clicked,
 		 * update the status accordingly.	
@@ -103,6 +101,7 @@
          * by default have all the checkboxes unchecked
          */
         $("input.school").attr("checked", 0);
+        jsonData.prepare(jQuery.parseJSON(jsonString));	
         
         /*
          * Also load the data when the page is loaded
@@ -125,18 +124,6 @@
          *  dynamically generate checkboxes
          */
         function loadData(jsonData){
-    		var colors = {};
-    		var free_colors = [
-                         TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
-                         SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
-                         PURPLE
-                      ];
-    		var prev_color = {};
-    		var color_to_assign, color_to_remove;
-    
-    		var col_id = 0;
-    		var schools = {};
-    		var labels = [];
             var max_val;
             var min_max_array = [];
             var lcl_min_max_array = [];
