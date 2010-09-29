@@ -340,13 +340,13 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, n
 	 };
 }
 
-function removeUnknowns(data) {
+function removeUnknowns(jsonObject) {
 	var i = 0;
-	for (i = 0; i < data.length; i++) {
-		if (data[i][0] == -1) {
-			console.log('Removing ['+ '0,' +data[i][1] + '] from data'
-					+' at position: ' + i);
-			data.splice(i, 1);
+	for (i = 0; i < jsonObject.data.length; i++) {
+		if (jsonObject.data[i][0] == -1) {
+			console.log('Removing [0, ' + jsonObject.data[i][1] + '] from '
+					+ jsonObject.label + ' at position: ' + i);
+			jsonObject.data.splice(i, 1);
 			i--;
 		}
 	}
