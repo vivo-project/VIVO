@@ -49,7 +49,7 @@
 	$(document).ready(function() {
 
 		var jsonString = '${jsonContent}';
-		var jsonData = {
+		var jsonObject = {
 			prepare : function(arg1){
 				loadData(arg1);
 			}
@@ -101,7 +101,7 @@
          * by default have all the checkboxes unchecked
          */
         $("input.school").attr("checked", 0);
-        jsonData.prepare(jQuery.parseJSON(jsonString));	
+        jsonObject.prepare(jQuery.parseJSON(jsonString));	
         
         /*
          * Also load the data when the page is loaded
