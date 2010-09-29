@@ -125,7 +125,18 @@
          *  dynamically generate checkboxes
          */
         function loadData(jsonData){
-        
+    		var colors = {};
+    		var free_colors = [
+                         TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
+                         SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
+                         PURPLE
+                      ];
+    		var prev_color = {};
+    		var color_to_assign, color_to_remove;
+    
+    		var col_id = 0;
+    		var schools = {};
+    		var labels = [];
             var max_val;
             var min_max_array = [];
             var lcl_min_max_array = [];
