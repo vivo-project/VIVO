@@ -107,7 +107,7 @@
          * Also load the data when the page is loaded
          */
 /*        var dataurl = $("#file").attr('href');
-        //console.log("Dataurl: " + dataurl);
+        console.log("Dataurl: " + dataurl);
         
         $.ajax({
             url: dataurl,
@@ -135,16 +135,16 @@
                 val.data = val.yearToPublicationCount;
                 schools[val.label] = val;
                 //  createGraphic(val.label);
-                //console.log(val.label);
+                console.log(val.label);
             });
-            //console.log('----');
+            console.log('----');
             
             max_val = calcMax(schools);
             min_max_array = calcMinandMaxYears(schools);
             year_range = (min_max_array[1] - min_max_array[0]);
             
-            //console.log("Max value is " + max_val);
-            //console.log('min_year is: ' + min_max_array[0] + ' and max_year is: ' + min_max_array[1]);
+            console.log("Max value is " + max_val);
+            console.log('min_year is: ' + min_max_array[0] + ' and max_year is: ' + min_max_array[1]);
             
             //  stuffZeros(schools, min_max_array);
             setLineWidthAndTickSize(year_range, FlotOptions);
@@ -163,11 +163,11 @@
                 var items_per_page = 10;
                 var max_elem = Math.min((page_index + 1) * items_per_page, labels.length);
                 
-                //console.log('labels length: ' + labels.length);
-                //console.log('items per page: ' + items_per_page);
-                //console.log('page_index: ' + page_index);
-                //console.log('max_elem: ' + max_elem);
-                //console.log(labels);
+                console.log('labels length: ' + labels.length);
+                console.log('items per page: ' + items_per_page);
+                console.log('page_index: ' + page_index);
+                console.log('max_elem: ' + max_elem);
+                console.log(labels);
                 
                 
                 var new_content = '';
@@ -189,7 +189,7 @@
                         
                         
                     });
-                    //console.log(checked_flag);
+                    console.log(checked_flag);
                     new_content += '<p><dt><input type = "checkbox" class="if_clicked_on_school" value="' + labels[i] + '"' + checked_flag + ' ' + disabled_flag + '><a href="" ' + font_weight + ' >' + labels[i] + '<\/a><\/dt><\/p>';
                     
                 }
@@ -200,7 +200,7 @@
                  * Replace the old content with new content
                  */
                 $('#searchresult').html(new_content);
-                //console.log(new_content);
+                console.log(new_content);
                 
                 /*
                  * When the elements in the paginated div
@@ -208,7 +208,7 @@
                  */
                 $("input.if_clicked_on_school").click(function(){
                 
-                    //console.log($(this).attr("value") + ' is clicked');
+                    console.log($(this).attr("value") + ' is clicked');
                     var checkbox = $(this);
                     var checkbox_value = $(this).attr("value");
                     
@@ -226,7 +226,7 @@
                     var div_bar = hidden_checkbox.next();
                     var div_label = hidden_checkbox.prev();
                     var span_element = div_bar.next('span');
-                    //console.log(hidden_checkbox);
+                    console.log(hidden_checkbox);
                     var checkbox_value = $(this).attr("value");
                     var entity = schools[checkbox_value];
                    // entity.data = schools[checkbox_value].yearToPublicationCount;
@@ -242,12 +242,12 @@
                          */
                         if (contains(free_colors, prev_color[entity.label])) {
                             var index = contains(free_colors, prev_color[entity.label]);
-                            //console.log('Past color present in free_colors!');
+                            console.log('Past color present in free_colors!');
                             color_to_assign = free_colors[index];
                             free_colors.splice(index, 1);
                         }
                         else {
-                            //console.log('Past color not present in free_colors!');
+                            console.log('Past color not present in free_colors!');
                             color_to_assign = free_colors.shift();
                         }
                         
@@ -259,7 +259,7 @@
                         entity.color = color_to_assign;
                         colors[entity.label] = color_to_assign;
                         
-                        //console.log('Color removed from the head of free_colors: ' + color_to_assign);
+                        console.log('Color removed from the head of free_colors: ' + color_to_assign);
                         
                         /*
                          * calculating the sum of x-values
@@ -267,7 +267,7 @@
                         var sum = 0, sum_num = 0;
                         sum = calcSum(entity);
                         sum_num = Math.floor(300 * (sum / max_val));
-                        //console.log('sum_num: ' + sum_num);
+                        console.log('sum_num: ' + sum_num);
                         
                         /*
                          * append a div and modify its CSS
@@ -282,7 +282,7 @@
                         data.push(entity);
                         lcl_min_max_array = calcMinandMaxYears(data);
                         stuffZeros(data, lcl_min_max_array);
-                        //console.log('current min_year is: ' + lcl_min_max_array[0] + ' and current max_year is: ' + lcl_min_max_array[1]);
+                        console.log('current min_year is: ' + lcl_min_max_array[0] + ' and current max_year is: ' + lcl_min_max_array[1]);
                         
                     }
                     
@@ -303,14 +303,14 @@
                          */
                             free_colors.push(color_to_remove);
                             
-                            //console.log('Color added to the tail of free_colors:' + color_to_remove);
+                            console.log('Color added to the tail of free_colors:' + color_to_remove);
                             div_bar.css("background-color", "#fff");
                             div_label.children("a").html("");
                             
                         /*
                          * removing the item that is unchecked
                          */
-                            //console.log(data);
+                            console.log(data);
                             var i = 0;
                             while (i < data.length) {
                                 if (data[i].label == entity.label) {
@@ -320,7 +320,7 @@
                                 else 
                                     i++;
                             }
-                            //console.log(data);
+                            console.log(data);
                             lcl_min_max_array = calcZeroLessMinAndMax(data);
                             unStuffZeros(data, lcl_min_max_array);
                             checkbox.next('a').css("font-weight", "normal");
@@ -341,8 +341,8 @@
                     else 
                         $.plot(graphContainer, data, FlotOptions);
                     
-                    //console.log('linewidth is :' + FlotOptions.series.lines.lineWidth);
-                    //console.log('ticksize is :' + FlotOptions.xaxis.tickSize);
+                    console.log('linewidth is :' + FlotOptions.series.lines.lineWidth);
+                    console.log('ticksize is :' + FlotOptions.xaxis.tickSize);
                     
                     /*
                      *  notification about the colors
