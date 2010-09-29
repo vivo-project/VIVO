@@ -50,27 +50,24 @@ function unStuffZeros(jsonObject, arrayOfMinAndMaxYears) {
 
 	var currentMinYear = arrayOfMinAndMaxYears[0], currentMaxYear = arrayOfMinAndMaxYears[1];
 
-	console.log('Inside unStuffZeros - ' + 'current Min Year is: '
-			+ currentMinYear + ' and current Max Year is: ' + currentMaxYear);
+	//console.log('Inside unStuffZeros - ' + 'current Min Year is: '
+	//		+ currentMinYear + ' and current Max Year is: ' + currentMaxYear);
 
-	$
-			.each(
-					jsonObject,
-					function(key, val) {
-						var i = 0;
-						for (i = 0; i < val.yearToPublicationCount.length; i++) {
-							if (((val.yearToPublicationCount[i][0] < currentMinYear) || (val.yearToPublicationCount[i][0] > currentMaxYear))
-									&& val.yearToPublicationCount[i][1] == 0) {
-								console.log('Removing ['
-										+ val.yearToPublicationCount[i][0] + ',0] from '
-										+ val.label + ' at position: '
-										+ i);
-								val.yearToPublicationCount.splice(i, 1);
-								i--;
-							} else
-								continue;
-						}
-					});
+			$.each(jsonObject, function(key, val) {
+				var i = 0;
+				for (i = 0; i < val.yearToPublicationCount.length; i++) {
+					if (((val.yearToPublicationCount[i][0] < currentMinYear) || (val.yearToPublicationCount[i][0] > currentMaxYear))
+							&& val.yearToPublicationCount[i][1] == 0) {
+						//console.log('Removing ['
+					//	+ val.yearToPublicationCount[i][0] + ',0] from '
+					//	+ val.label + ' at position: '
+					//	+ i);
+			val.yearToPublicationCount.splice(i, 1);
+			i--;
+					} else
+						continue;
+				}
+			});
 }
 
 /**
@@ -85,8 +82,8 @@ function removeZeros(jsonObject) {
 	var i = 0;
 	for (i = 0; i < jsonObject.yearToPublicationCount.length; i++) {
 		if (jsonObject.yearToPublicationCount[i][1] == 0) {
-			console.log('Removing [' + jsonObject.yearToPublicationCount[i][0] + ',0] from '
-					+ jsonObject.label + ' at position: ' + i);
+			//console.log('Removing [' + jsonObject.yearToPublicationCount[i][0] + ',0] from '
+			//		+ jsonObject.label + ' at position: ' + i);
 			jsonObject.yearToPublicationCount.splice(i, 1);
 			i--;
 		}
@@ -109,35 +106,32 @@ function removeZeros(jsonObject) {
  */
 function stuffZeros(jsonObject, arrayOfMinAndMaxYears) {
 
-	$
-			.each(
-					jsonObject,
-					function(key, val) {
-						var position = arrayOfMinAndMaxYears[0], i = 0;
+	$.each(jsonObject,function(key, val) {
+		var position = arrayOfMinAndMaxYears[0], i = 0;
 
-						for (i = 0; i < (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1; i++) {
+		for (i = 0; i < (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1; i++) {
 
-							if (val.yearToPublicationCount[i]) {
+			if (val.yearToPublicationCount[i]) {
 
-								if (val.yearToPublicationCount[i][0] != position
-										&& position <= arrayOfMinAndMaxYears[1]) {
-									console.log('Inserting [' + position
-											+ ',0] into ' + val.label
-											+ ' at position: ' + i);
-									val.yearToPublicationCount.splice(i, 0,
-											[ position, 0 ]);
-								}
-							}
+				if (val.yearToPublicationCount[i][0] != position
+						&& position <= arrayOfMinAndMaxYears[1]) {
+					//console.log('Inserting [' + position
+				//	+ ',0] into ' + val.label
+				//	+ ' at position: ' + i);
+	val.yearToPublicationCount.splice(i, 0,
+			[ position, 0 ]);
+				}
+			}
 
-							else {
-								console.log('Inserting [' + position
-										+ ',0] into ' + val.label
-										+ ' at position: ' + i);
-								val.yearToPublicationCount.push( [ position, 0 ]);
-							}
-							position++;
-						}
-					});
+			else {
+				//console.log('Inserting [' + position
+			//	+ ',0] into ' + val.label
+			//	+ ' at position: ' + i);
+				val.yearToPublicationCount.push( [ position, 0 ]);
+			}
+			position++;
+		}
+	});
 }
 /**
  * During runtime, when the user checks/unchecks a checkbox, the zeroes have to
@@ -174,10 +168,10 @@ function calcZeroLessMinAndMax(jsonObject) {
 		if (globalMaxYear < maxYear)
 			globalMaxYear = maxYear;
 		
-		console.log('[' + minYear + '] ' + ' [' + maxYear + ']');
+		//console.log('[' + minYear + '] ' + ' [' + maxYear + ']');
 	});
-	console.log('Inside calcZeroLessMinAndMax and curr_min_year is '
-			+ globalMinYear + ' curr_max_year is ' + globalMaxYear);
+	//console.log('Inside calcZeroLessMinAndMax and curr_min_year is '
+		//	+ globalMinYear + ' curr_max_year is ' + globalMaxYear);
 	return [ globalMinYear, globalMaxYear ];
 }
 
@@ -218,7 +212,7 @@ function calcMax(jsonObject) {
 		for (i = 0; i < val.yearToPublicationCount.length; i++)
 			sum += val.yearToPublicationCount[i][1];
 
-		console.log(val.label + '->' + sum);
+		//console.log(val.label + '->' + sum);
 
 		if (maxCount < sum)
 			maxCount = sum;
@@ -242,7 +236,7 @@ function calcSum(jsonObject) {
 	for (i = 0; i < jsonObject.yearToPublicationCount.length; i++)
 		sum += jsonObject.yearToPublicationCount[i][1];
 
-	console.log(sum);
+	//console.log(sum);
 	return sum;
 }
 
@@ -293,12 +287,54 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
  */
 function createGraphic(entityLabel, bottomDiv) {
 
-	var newHTML = '';
+/*	var newHTML = '';
 	newHTML += '<p><div id="label"><a href=""><\/a><\/div>';
 	newHTML += '<label class="school" type="hidden" value="' + entityLabel + '">';
 	newHTML += '<div id="bar"><\/div>';
 	newHTML += '<span id = "text"><\/span><\/p><br\/>' ;
-	bottomDiv.children('a').after(newHTML);
+	bottomDiv.children('p.displayCounter').after(newHTML);*/
+	
+	console.log(entityLabel);
+	console.log(slugify(entityLabel));
+	
+	var parentP = $('<p>');
+	parentP.attr('id', slugify(entityLabel));
+	
+	var labelDiv = $('<div>')
+	labelDiv.attr('id', 'label');
+	labelDiv.html('<a href=""></a>');
+	
+	parentP.append(labelDiv);
+	
+	var hiddenLabel = $('<label>');
+	hiddenLabel.attr('class', 'school');
+	hiddenLabel.attr('type', 'hidden');
+	hiddenLabel.attr('value', entityLabel);
+
+	var barDiv = $('<div>');
+	barDiv.attr('id', 'bar');
+	
+	var numAttributeText = $('<span>');
+	numAttributeText.attr('id', 'text');
+	
+	parentP.append(labelDiv);
+	parentP.append(hiddenLabel);
+	parentP.append(barDiv);
+	parentP.append(numAttributeText);
+	
+	bottomDiv.children('p.displayCounter').after(parentP);
+	
+	console.log(bottomDiv);
+	console.log(parentP);
+	console.log(numAttributeText);
+	
+	
+	return hiddenLabel;
+
+}
+
+function slugify(textToBeSlugified) {
+    return textToBeSlugified.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
 }
 
 /**
@@ -313,14 +349,16 @@ function createGraphic(entityLabel, bottomDiv) {
  * @param {Object}
  * 			  span           
  */
-function removeGraphic(label, bar, checkbox, span) {
-
-	span.next('br').remove();
-	span.remove();
-	label.remove();
-	bar.remove();
-	checkbox.remove();
+function removeGraphic(pToBeRemovedIdentifier) {
+	
+	console.log($('#' + slugify(pToBeRemovedIdentifier)));
+	
+	$('p#' + slugify(pToBeRemovedIdentifier)).remove();
+	
+	console.log($('#' + slugify(pToBeRemovedIdentifier)));
+	
 }
+
 /**
  * These are the options passed to by $.pagination(). Basically they define
  * the items visible per page, number of navigation tabs, and number of edge navigation tabs.
@@ -340,13 +378,17 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, n
 	 };
 }
 
+/*
+ * function for removing "unknown" values (-1)
+ * just before data plotting.
+ */
 function removeUnknowns(jsonRecords) {
 	var i = 0, j = 0;
 	while (j < jsonRecords.length) {
 		for (i = 0; i < jsonRecords[j].data.length; i++) {
 			if (jsonRecords[j].data[i][0] == -1) {
-				console.log('Removing [0, ' + jsonRecords[j].data[i][1] + '] from '
-						+ jsonRecords[j].label + ' at position: ' + i);
+				//console.log('Removing [-1, ' + jsonRecords[j].data[i][1] + '] from '
+					//	+ jsonRecords[j].label + ' at position: ' + i);
 				jsonRecords[j].data.splice(i, 1);
 				i--;
 			}

@@ -11,38 +11,34 @@
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
 
 <div id="body">
-<h1>Entity Comparison Visualization</h1>
-<div id="leftblock">
-<h2>How do you want to compare?</h2>
-<select class="comparisonValues">
-	<option value="Publications">Publications</option>
-	<option value="Grants">Grants</option>
-	<option value="People">People</option>
-	<option value="Item4">Item4</option>
-	<option value="Item5">Item5</option>
+	<h1>Entity Comparison Visualization</h1>
+	<div id="leftblock">
+		<h2>How do you want to compare?</h2>
+		<select class="comparisonValues">
+			<option value="Publications">Publications</option>
+			<option value="Grants">Grants</option>
+			<option value="People">People</option>
+			<option value="Item4">Item4</option>
+			<option value="Item5">Item5</option>
+		</select> 
 
-</select> <!-- pagination div is for the top navigating buttons -->
-<h2 id="heading">Select schools to compare</h2>
-<div id="pagination"></div>
-<!-- #searchresult is for inserting the data from schools -->
-<dl id="searchresult">
-</dl>
-</div>
-<div id="rightblock"><span class="yaxislabel"></span>
-<div id="graphContainer" style="width: 500px; height: 250px;"></div>
-<div id="bottom" style="width: 500px;">
-<div class="xaxislabel">Year</div>
-<h3><span id="comparisonParameter"></span></h3>
-<p>You have selected <span id="counter">0</span> of a maximum <span
-	id="total">10</span> schools to compare.</p>
-</div>
-</div>
+		<!-- pagination div is for the top navigating buttons -->
+		<h2 id="heading">Select schools to compare</h2>
+		<div id="pagination"></div>
 
-<!-- <div id="entity_comparison_vis_container"><c:out
-	value="${jsonContent}" /> <br />
-<c:out value="${portalBean.themeDir}" /> <br />
+		<!-- #searchresult is for inserting the data from schools -->
+			<dl id="searchresult"></dl>
+		</div>
+		<div id="rightblock"><span class="yaxislabel"></span>
+			<div id="graphContainer" style="width: 500px; height: 250px;"></div>
+			<div id="bottom" style="width: 500px;">
+				<div class="xaxislabel">Year</div>
+				<h3><span id="comparisonParameter"></span></h3>
+			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
+			id="total">10</span> schools to compare.</p>
+			</div>
+		</div>
 </div>
- -->
 <script type="text/javascript"><!--
 	
 	$(document).ready(function() {
@@ -56,11 +52,6 @@
 		
         var data = [];
 
-/*    	console.log(jsonData);
-    	$.each(jsonData, function(index, value) {
-    		console.log(value.entityURI);
-    		});	
-*/        
         /*
          * options and various global variables
          */
@@ -82,9 +73,7 @@
 		/*
 		 * When the intra-entity parameters are clicked,
 		 * update the status accordingly.	
-		 */	
-
-        
+		 */	        
         $("select.comparisonValues").click(function(){
             var selectedValue = $("select option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
@@ -100,6 +89,11 @@
          * by default have all the checkboxes unchecked
          */
         $("input.school").attr("checked", 0);
+
+        /*
+         * parse the json returned by jsp and pass it 
+         * to loadData
+         */
         jsonObject.prepare(jQuery.parseJSON(jsonString));	
         
         
@@ -119,16 +113,16 @@
                 labels.push(val.label);
                 val.data = val.yearToPublicationCount;
                 schools[val.label] = val;
-                console.log(val.label);
+                //console.log(val.label);
             });
-            console.log('----');
+            //console.log('----');
             
             max_val = calcMax(schools);
             min_max_array = calcMinandMaxYears(schools);
             year_range = (min_max_array[1] - min_max_array[0]);
             
-            console.log("Max value is " + max_val);
-            console.log('min_year is: ' + min_max_array[0] + ' and max_year is: ' + min_max_array[1]);
+            //console.log("Max value is " + max_val);
+            //console.log('min_year is: ' + min_max_array[0] + ' and max_year is: ' + min_max_array[1]);
             
             setLineWidthAndTickSize(year_range, FlotOptions);
         	paginationOptions.callback = pageSelectCallback;       
@@ -146,11 +140,11 @@
                 var items_per_page = 10;
                 var max_elem = Math.min((page_index + 1) * items_per_page, labels.length);
                 
-                console.log('labels length: ' + labels.length);
-                console.log('items per page: ' + items_per_page);
-                console.log('page_index: ' + page_index);
-                console.log('max_elem: ' + max_elem);
-                console.log(labels);
+                //console.log('labels length: ' + labels.length);
+                //console.log('items per page: ' + items_per_page);
+                //console.log('page_index: ' + page_index);
+                //console.log('max_elem: ' + max_elem);
+                //console.log(labels);
                 
                 
                 var new_content = '';
@@ -172,7 +166,7 @@
                         
                         
                     });
-                    console.log(checked_flag);
+                    //console.log(checked_flag);
                     new_content += '<p><dt><input type = "checkbox" class="if_clicked_on_school" value="' + labels[i] + '"' + checked_flag + ' ' + disabled_flag + '><a href="" ' + font_weight + ' >' + labels[i] + '<\/a><\/dt><\/p>';
                     
                 }
@@ -183,7 +177,7 @@
                  * Replace the old content with new content
                  */
                 $('#searchresult').html(new_content);
-                console.log(new_content);
+                //console.log(new_content);
                 
                 /*
                  * When the elements in the paginated div
@@ -191,7 +185,7 @@
                  */
                 $("input.if_clicked_on_school").click(function(){
                 
-                    console.log($(this).attr("value") + ' is clicked');
+                    //console.log($(this).attr("value") + ' is clicked');
                     var checkbox = $(this);
                     var checkbox_value = $(this).attr("value");
                     
@@ -199,19 +193,29 @@
                      * Dynamically generate the bar, checkbox and label.
                      */
                     var bottomDiv = $("#bottom");
-                    createGraphic(checkbox_value, bottomDiv);
+                    var hidden_label = createGraphic(checkbox_value, bottomDiv);
+
+                    console.log(bottomDiv);
                     
                     var entity = schools[checkbox_value];
-                    var hidden_checkbox = $("label:hidden").filter(function(){
-                        if ($(this).attr("value") == checkbox_value) 
-                            return $(this);
-                    });
-                    var div_bar = hidden_checkbox.next();
-                    var div_label = hidden_checkbox.prev();
+
+                    console.log(checkbox_value, schools, entity );
+                    
+ //                   var hidden_label = $("label:hidden").filter(function(){
+  //                      if ($(this).attr("value") == checkbox_value) 
+   //                         return $(this);
+    //                });
+
+					console.log(hidden_label);
+                    
+                    var div_bar = hidden_label.next();
+                    var div_label = hidden_label.prev();
                     var span_element = div_bar.next('span');
-                    console.log(hidden_checkbox);
+                    //console.log(hidden_label);
                     var checkbox_value = $(this).attr("value");
                     var entity = schools[checkbox_value];
+
+                    console.log(slugify(checkbox_value));
                     
                     
                     /*
@@ -224,12 +228,12 @@
                          */
                         if (contains(free_colors, prev_color[entity.label])) {
                             var index = contains(free_colors, prev_color[entity.label]);
-                            console.log('Past color present in free_colors!');
+                            //console.log('Past color present in free_colors!');
                             color_to_assign = free_colors[index];
                             free_colors.splice(index, 1);
                         }
                         else {
-                            console.log('Past color not present in free_colors!');
+                            //console.log('Past color not present in free_colors!');
                             color_to_assign = free_colors.shift();
                         }
                         
@@ -241,7 +245,7 @@
                         entity.color = color_to_assign;
                         colors[entity.label] = color_to_assign;
                         
-                        console.log('Color removed from the head of free_colors: ' + color_to_assign);
+                        //console.log('Color removed from the head of free_colors: ' + color_to_assign);
                         
                         /*
                          * calculating the sum of x-values
@@ -249,7 +253,7 @@
                         var sum = 0, sum_num = 0;
                         sum = calcSum(entity);
                         sum_num = Math.floor(300 * (sum / max_val));
-                        console.log('sum_num: ' + sum_num);
+                        //console.log('sum_num: ' + sum_num);
                         
                         /*
                          * append a div and modify its CSS
@@ -258,13 +262,18 @@
                         div_bar.css("width", sum_num);
                         div_label.children("a").html(checkbox_value);
                         span_element.text(sum);
+
+						console.log(div_bar);
+						console.log(div_label);
+						console.log(sum);
+                        
                         checkbox.next('a').css("font-weight", "bold");
                         
                         
                         data.push(entity);
                         lcl_min_max_array = calcMinandMaxYears(data);
                         stuffZeros(data, lcl_min_max_array);
-                        console.log('current min_year is: ' + lcl_min_max_array[0] + ' and current max_year is: ' + lcl_min_max_array[1]);
+                        //console.log('current min_year is: ' + lcl_min_max_array[0] + ' and current max_year is: ' + lcl_min_max_array[1]);
                         
                     }
                     
@@ -285,14 +294,14 @@
                          */
                             free_colors.push(color_to_remove);
                             
-                            console.log('Color added to the tail of free_colors:' + color_to_remove);
+                            //console.log('Color added to the tail of free_colors:' + color_to_remove);
                             div_bar.css("background-color", "#fff");
                             div_label.children("a").html("");
                             
                         /*
                          * removing the item that is unchecked
                          */
-                            console.log(data);
+                            //console.log(data);
                             var i = 0;
                             while (i < data.length) {
                                 if (data[i].label == entity.label) {
@@ -302,7 +311,7 @@
                                 else 
                                     i++;
                             }
-                            console.log(data);
+                            //console.log(data);
                             lcl_min_max_array = calcZeroLessMinAndMax(data);
                             unStuffZeros(data, lcl_min_max_array);
                             checkbox.next('a').css("font-weight", "normal");
@@ -310,11 +319,12 @@
                         /*
                          * Remove the graphic
                          */
-                          	console.log("Removing ", $(div_label), $(div_bar), $(hidden_checkbox), $(span_element));
+                         removeGraphic(checkbox_value);
+                          	//console.log("Removing ", $(div_label), $(div_bar), $(hidden_label), $(span_element));
                         }
 					
-                    console.log('data to be plotted ',data);
-                    console.log(graphContainer,FlotOptions);
+                    //console.log('data to be plotted ',data);
+                    //console.log(graphContainer,FlotOptions);
                     /*
                      *  and plot all we got
                      */
@@ -325,8 +335,8 @@
                         $.plot(graphContainer, data, FlotOptions);
                     }
                     
-                    console.log('linewidth is :' + FlotOptions.series.lines.lineWidth);
-                    console.log('ticksize is :' + FlotOptions.xaxis.tickSize);
+                    //console.log('linewidth is :' + FlotOptions.series.lines.lineWidth);
+                    //console.log('ticksize is :' + FlotOptions.xaxis.tickSize);
                     
                     /*
                      *  notification about the colors
@@ -349,9 +359,8 @@
             }
             
             $("#pagination").pagination(labels.length, paginationOptions);
-        }	
+        }
 
 	});
 	
 --></script>
-</div>
