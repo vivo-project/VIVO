@@ -69,7 +69,7 @@
          */
         var graphContainer = $("#graphContainer");
         
-        var colors = {};
+/*        var colors = {};
         var free_colors = [
                              TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
                              SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
@@ -81,7 +81,7 @@
         var col_id = 0;
         var schools = {};
         var labels = [];
-
+*/
 		/*
 		 * When the intra-entity parameters are clicked,
 		 * update the status accordingly.	
