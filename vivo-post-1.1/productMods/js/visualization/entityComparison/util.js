@@ -340,3 +340,14 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, n
 	 };
 }
 
+/*function prepareJSONData(jsonString, jsonData){
+	
+	jsonData = jQuery.parseJSON(jsonString);
+
+	console.log(jsonData);
+	$.each(jsonData, function(index, value) {
+		console.log(value.entityURI);
+		});	
+	
+}
+*/

@@ -44,15 +44,26 @@
 <c:out value="${portalBean.themeDir}" /> <br />
 </div>
  -->
-<script type="text/javascript">
+<script type="text/javascript"><!--
 	
 	$(document).ready(function() {
 
 		var jsonString = '${jsonContent}';
-		var jsonData;
-        prepareJSONData(jsonString. jsonData);
+		var jsonData = {
+			prepare : function(arg1){
+				loadData(arg1);
+			}
+		};
+		
+		jsonData.prepare(jQuery.parseJSON(jsonString));		
+
         var data = [];
-        
+
+/*    	console.log(jsonData);
+    	$.each(jsonData, function(index, value) {
+    		console.log(value.entityURI);
+    		});	
+*/        
         /*
          * options and various global variables
          */
@@ -81,7 +92,6 @@
             var selectedValue = $("select option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
 			$('.yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
-
         });
         
         /*
@@ -121,10 +131,6 @@
             var lcl_min_max_array = [];
             var year_range;
 
-			//for converting years and counts into ints
-            $.each(jsonData, function(index, val){
-				
-                });
             $.each(jsonData, function(index, val){
                 var new_html = '';
                 labels.push(val.label);
@@ -365,5 +371,5 @@
 
 	});
 	
-</script>
+--></script>
 </div>
