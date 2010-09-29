@@ -213,6 +213,7 @@
                     console.log(hidden_checkbox);
                     var checkbox_value = $(this).attr("value");
                     var entity = schools[checkbox_value];
+                  	console.log("Adding ", div_label, div_bar, hidden_checkbox, span_element);
                     
                     
                     /*
