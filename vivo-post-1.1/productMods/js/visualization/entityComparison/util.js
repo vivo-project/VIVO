@@ -340,14 +340,14 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, n
 	 };
 }
 
-/*function prepareJSONData(jsonString, jsonData){
-	
-	jsonData = jQuery.parseJSON(jsonString);
-
-	console.log(jsonData);
-	$.each(jsonData, function(index, value) {
-		console.log(value.entityURI);
-		});	
-	
+function removeUnknowns(jsonObject) {
+	var i = 0;
+	for (i = 0; i < jsonObject.data.length; i++) {
+		if (jsonObject.data[i][0] == -1) {
+			console.log('Removing ['+ '0,' + jsonObject.data[i][1] + '] from '
+					+ jsonObject.label + ' at position: ' + i);
+			jsonObject.data.splice(i, 1);
+			i--;
+		}
+	}
 }
-*/
