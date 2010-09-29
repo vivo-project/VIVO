@@ -340,14 +340,17 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, n
 	 };
 }
 
-function removeUnknowns(jsonObject) {
-	var i = 0;
-	for (i = 0; i < jsonObject.data.length; i++) {
-		if (jsonObject.data[i][0] == -1) {
-			console.log('Removing [0, ' + jsonObject.data[i][1] + '] from '
-					+ jsonObject.label + ' at position: ' + i);
-			jsonObject.data.splice(i, 1);
-			i--;
+function removeUnknowns(jsonRecords) {
+	var i = 0, j = 0;
+	while (j < jsonRecords.length) {
+		for (i = 0; i < jsonRecords[j].data.length; i++) {
+			if (jsonRecords[j].data[i][0] == -1) {
+				console.log('Removing [0, ' + jsonRecords[j].data[i][1] + '] from '
+						+ jsonRecords[j].label + ' at position: ' + i);
+				jsonRecords[j].data.splice(i, 1);
+				i--;
+			}
 		}
+		j++;
 	}
 }
