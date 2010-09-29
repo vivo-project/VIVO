@@ -103,20 +103,6 @@
         $("input.school").attr("checked", 0);
         jsonObject.prepare(jQuery.parseJSON(jsonString));	
         
-        /*
-         * Also load the data when the page is loaded
-         */
-/*        var dataurl = $("#file").attr('href');
-        console.log("Dataurl: " + dataurl);
-        
-        $.ajax({
-            url: dataurl,
-            method: 'GET',
-            dataType: 'json',
-            success: loadData
-        });
-*/		
-
         
         /* 
          *  function to populate the schools object with the
@@ -134,7 +120,6 @@
                 labels.push(val.label);
                 val.data = val.yearToPublicationCount;
                 schools[val.label] = val;
-                //  createGraphic(val.label);
                 console.log(val.label);
             });
             console.log('----');
@@ -146,7 +131,6 @@
             console.log("Max value is " + max_val);
             console.log('min_year is: ' + min_max_array[0] + ' and max_year is: ' + min_max_array[1]);
             
-            //  stuffZeros(schools, min_max_array);
             setLineWidthAndTickSize(year_range, FlotOptions);
         	paginationOptions.callback = pageSelectCallback;       
 
@@ -229,7 +213,6 @@
                     console.log(hidden_checkbox);
                     var checkbox_value = $(this).attr("value");
                     var entity = schools[checkbox_value];
-                   // entity.data = schools[checkbox_value].yearToPublicationCount;
                     
                     
                     /*
@@ -328,6 +311,7 @@
                         /*
                          * Remove the graphic
                          */
+                          	console.log("Removing ", div_label, div_bar, hidden_checkbox, span_element);
                             removeGraphic(div_label, div_bar, hidden_checkbox, span_element);
                         }
 					
