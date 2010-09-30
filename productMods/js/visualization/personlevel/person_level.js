@@ -1,6 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 function getWellFormedURLs(given_uri, type) {
+	
+	if (!given_uri || given_uri == "") {
+		return;
+	}
 
 	// general best practice is to put javascript code inside document.ready
 	// but in this case when i do that the function does not get called
@@ -86,8 +90,9 @@ function setProfileImage(imageContainerID, mainImageURL, contextPath) {
 		return;
 	}
 	
-	if (!mainImageURL) {
+	if (!mainImageURL || mainImageURL == "") {
 		$("#" + imageContainerID).empty();
+		return;
 	}
 	
 	var rawPath = getWellFormedURLs(mainImageURL, "image");
@@ -172,6 +177,10 @@ function processProfileInformation(nameContainerID,
 		doNameEllipsis) {
 
 	var name, mainImageURL, imageContextPath, moniker;
+	
+	if (jQuery.isEmptyObject(profileInfoJSON)) {
+		return;
+	}
 
 	$.each(profileInfoJSON, function(key, set){
 
@@ -211,13 +220,8 @@ function visLoaded(nodes){
 
 }
 
-
-function changeVisHeight(newHeight) {
-	$("#CoAuthorVis").css("height", newHeight);
-	$("#bodyPannel").css("height", newHeight);
-}
-
 function createTable(tableID, tableContainer, tableData) {
+	
 	var table = $('<table>');
 	table.attr('id', tableID);
 	
@@ -329,7 +333,7 @@ function renderCoAuthorshipVisualization() {
 				"width", "600",
 				"height", "840",
 				"align", "middle",
-				"id", "CoAuthorVis",
+				"id", "CoAuthor",
 				"quality", "high",
 				"bgcolor", "#ffffff",
 				"name", "CoAuthor",
@@ -346,7 +350,7 @@ function renderCoAuthorshipVisualization() {
 				"width", "600",
 				"height", "850",
 				"align", "top",
-				"id", "CoAuthorVis",
+				"id", "CoAuthor",
 				"quality", "high",
 				"bgcolor", "#ffffff",
 				"name", "CoAuthor",
