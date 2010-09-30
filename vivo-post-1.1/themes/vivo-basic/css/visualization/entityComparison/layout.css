@@ -1,14 +1,16 @@
 @CHARSET "UTF-8";
 
-/*#body{
-	width:1000px; margin:0 auto; position:relative;
-	}
-*/
 head,#body {
 	font: 0.9em Helvetica;
 }
 
+#body{
+	background-color: #fff;
+	height: 800px;
+}
+
 h1 {
+	padding-top:10px;
 	font-size: 1.2em;
 	margin-left: 5%;
 	color: #12968c;
