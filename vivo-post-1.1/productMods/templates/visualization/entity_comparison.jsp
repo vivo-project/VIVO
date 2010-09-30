@@ -11,7 +11,7 @@
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
 
 <div id="body">
-	<h1>Entity Comparison Visualization</h1>
+	<h1>Temporal Graph Visualization</h1>
 	<div id="leftblock">
 		<h2>How do you want to compare?</h2>
 		<select class="comparisonValues">
@@ -188,17 +188,15 @@
                     //console.log($(this).attr("value") + ' is clicked');
                     var checkbox = $(this);
                     var checkbox_value = $(this).attr("value");
+                    var entity = schools[checkbox_value];
                     
                     /*
                      * Dynamically generate the bar, checkbox and label.
                      */
                     var bottomDiv = $("#bottom");
-                    var hidden_label = createGraphic(checkbox_value, bottomDiv);
+                    var hidden_label = createGraphic(entity, bottomDiv);
 
                     console.log(bottomDiv);
-                    
-                    var entity = schools[checkbox_value];
-
                     console.log(checkbox_value, schools, entity );
                     
  //                   var hidden_label = $("label:hidden").filter(function(){

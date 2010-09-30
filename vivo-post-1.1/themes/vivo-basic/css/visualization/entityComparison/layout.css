@@ -4,13 +4,13 @@ head,#body {
 	font: 0.9em Helvetica;
 }
 
-#body{
+#body {
 	background-color: #fff;
 	height: 800px;
 }
 
 h1 {
-	padding-top:10px;
+	padding-top: 10px;
 	font-size: 1.2em;
 	margin-left: 5%;
 	color: #12968c;

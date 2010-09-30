@@ -285,31 +285,25 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
  * @param {Object}
  *            entityLabel
  */
-function createGraphic(entityLabel, bottomDiv) {
+function createGraphic(entity, bottomDiv) {
 
-/*	var newHTML = '';
-	newHTML += '<p><div id="label"><a href=""><\/a><\/div>';
-	newHTML += '<label class="school" type="hidden" value="' + entityLabel + '">';
-	newHTML += '<div id="bar"><\/div>';
-	newHTML += '<span id = "text"><\/span><\/p><br\/>' ;
-	bottomDiv.children('p.displayCounter').after(newHTML);*/
-	
-	console.log(entityLabel);
-	console.log(slugify(entityLabel));
+	console.log(entity.label);
+	console.log(slugify(entity.label));
 	
 	var parentP = $('<p>');
-	parentP.attr('id', slugify(entityLabel));
+	parentP.attr('id', slugify(entity.label));
 	
 	var labelDiv = $('<div>')
 	labelDiv.attr('id', 'label');
-	labelDiv.html('<a href=""></a>');
+	labelDiv.html('<a href="'+ getEntityURL(entity) +'"></a>');
+	console.log('Well formed URL is ' +getEntityURL(entity));
 	
 	parentP.append(labelDiv);
 	
 	var hiddenLabel = $('<label>');
 	hiddenLabel.attr('class', 'school');
 	hiddenLabel.attr('type', 'hidden');
-	hiddenLabel.attr('value', entityLabel);
+	hiddenLabel.attr('value', entity.label);
 
 	var barDiv = $('<div>');
 	barDiv.attr('id', 'bar');
@@ -332,6 +326,17 @@ function createGraphic(entityLabel, bottomDiv) {
 	return hiddenLabel;
 
 }
+
+function getEntityURL(entity){
+	
+	var path = "/vivo1/visualization?";
+	var visAndRenderMode = "vis=entity_comparison&render_mode=standalone&";
+	var visMode = "vis_mode="+entity.visMode + "&";
+	var uri = "uri="+entity.entityURI;
+	
+	return (path + visAndRenderMode + visMode + uri);
+}
+
 
 function slugify(textToBeSlugified) {
     return textToBeSlugified.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
