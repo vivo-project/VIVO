@@ -13,6 +13,7 @@ a.no_href_styles {
 	margin: 0;
 	padding-left:10px;
 	padding-top:10px;
+	background: #fff;
 }
 
 .vis-tables {
@@ -56,3 +57,83 @@ p.datatable {
 }
 
 */
+
+
+#profileImage img{
+	width: 90px;
+	height: auto;
+}
+
+#body h1 {
+	margin:0.0em;
+} 
+
+#ego_profile h1 a {
+  text-decoration: none;
+}
+
+.sparkline_wrapper_table {
+	display: inline;
+	vertical-align: bottom;
+}
+
+.author_name {
+	color: #13968c;
+	font-weight: bold;
+}
+
+.neutral_author_name {
+	color: black;
+	font-weight: bold;
+}
+
+.author_moniker {
+	color: #9C9C9C;
+}
+
+.sub_headings {
+	color: #121b3c;
+	padding-top: 10px;
+	margin-bottom: 0.3em;
+}
+
+.sub_headings a {
+	font-size:0.7em;
+	font-weight:normal;
+}
+
+table.sparkline_wrapper_table td, th {
+	vertical-align: bottom;
+}
+
+#ego_profile {
+  height: 1%; /* this was the key to killing the IE6 bug (no upper photo and sparklines jump on hover). Solution? Give the parent layout */
+  background: #fff;
+  padding-left:10px;
+  padding-top:10px;
+  min-height: 100px;
+}
+
+#ego_label {
+	font-size:1.1em;
+}
+
+#ego_profile_image {
+  float:left;
+  padding-right: 5px;
+}
+
+#ego_profile_image img {
+  width: 90px;
+  height: auto;
+}
+
+#ego_sparkline {
+	cursor:pointer;
+	height:36px;
+	width:471px;
+}
+
+#coauthorships_table th {
+	vertical-align: top;
+}

@@ -34,90 +34,30 @@
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
+<script language="JavaScript" type="text/javascript">
+$(document).ready(function(){
+
+		<c:if test='${numOfCoAuthorShips > 0}'>
+	    	$("#coauth_table_container").empty().html('<img id="loadingData" with="auto" src="${loadingImageLink}" />');
+	    </c:if>
+	    	
+	processProfileInformation("ego_label", 
+							  "ego_moniker",
+							  "ego_profile_image",
+							  jQuery.parseJSON(getWellFormedURLs("${requestScope.egoURIParam}", "profile_info")));
+
+	<c:if test='${empty numOfCoAuthorShips || empty numOfAuthors}'>
+
+		if ($('#ego_label').text().length > 0) {
+			setProfileName('no_coauthorships_person', $('#ego_label').text());
+		}
+		
+	</c:if>	
+
+});
+</script>
+
 <div id="body">
-
-
-<style type="text/css">
-
-#profileImage img{
-	width: 90px;
-	height: auto;
-}
-
-#body h1 {
-	margin:0.0em;
-} 
-
-.sparkline_wrapper_table {
-	display: inline;
-	vertical-align: bottom;
-}
-
-.author_name {
-	color: #13968c;
-	font-weight: bold;
-}
-
-.neutral_author_name {
-	color: black;
-	font-weight: bold;
-}
-
-.author_moniker {
-	color: #9C9C9C;
-}
-
-.sub_headings {
-	color: #121b3c;
-	padding-top: 10px;
-	margin-bottom: 0.3em;
-}
-
-.sub_headings a {
-	font-size:0.7em;
-	font-weight:normal;
-}
-
-table.sparkline_wrapper_table td, th {
-	vertical-align: bottom;
-}
-
-.inline_href {
-}
-
-
-#ego_profile {
-	padding-left:10px;
-	padding-top:10px;
-	min-height: 100px;
-}
-
-#ego_label {
-	font-size:1.1em;
-}
-
-#ego_profile_image {
-	float:left;
-	padding-right: 5px;
-}
-
-#ego_profile_image img{
-	width: 90px;
-	height: auto;
-}
-
-#ego_sparkline {
-	cursor:pointer;
-	height:36px;
-	width:471px;
-}
-
-
-#coauthorships_table th {
-	vertical-align: top;
-}
-
-</style>
 
 <!--[if IE]>
 	<style type="text/css">
@@ -140,7 +80,7 @@ table.sparkline_wrapper_table td, th {
 			<div id="ego_profile_image" class="thumbnail"></div>
 			
 	<%-- Label --%>
-			<a href="${egoVivoProfileURL}"><h1><span id="ego_label" class="author_name"></span></h1></a>
+			<h1><a href="${egoVivoProfileURL}"><span id="ego_label" class="author_name"></span></a></h1>
 	
 	<%-- Moniker--%>
 			<span id="ego_moniker" class="author_moniker"></span>
@@ -153,8 +93,6 @@ table.sparkline_wrapper_table td, th {
 	
 	<div id="incomplete-data">This information is based solely on publications which have been loaded into the VIVO system. 
 	This may only be a small sample of the person's total work. </div>
-	
-
 
 	<%-- Sparkline --%>
 		<h2 class="sub_headings">General Statistics</h2>
@@ -254,26 +192,3 @@ table.sparkline_wrapper_table td, th {
 </c:if>
 
 </div>
-
-<script language="JavaScript" type="text/javascript">
-$(document).ready(function(){
-
-		<c:if test='${numOfCoAuthorShips > 0}'>
-	    	$("#coauth_table_container").empty().html('<img id="loadingData" with="auto" src="${loadingImageLink}" />');
-	    </c:if>
-	    	
-	processProfileInformation("ego_label", 
-							  "ego_moniker",
-							  "ego_profile_image",
-							  jQuery.parseJSON(getWellFormedURLs("${requestScope.egoURIParam}", "profile_info")));
-
-	<c:if test='${empty numOfCoAuthorShips || empty numOfAuthors}'>
-
-		if ($('#ego_label').text().length > 0) {
-			setProfileName('no_coauthorships_person', $('#ego_label').text());
-		}
-		
-	</c:if>	
-
-});
-</script>
