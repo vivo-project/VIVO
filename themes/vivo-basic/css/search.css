@@ -6,6 +6,13 @@
  
 **************************************************/
 
+/***** Search form *****/
+
+.advancedSearchForm .form-button {
+    margin-top: 1em;
+}
+
+
 /***** Class and subclass refinement links *****/
 
 .searchTOC {
