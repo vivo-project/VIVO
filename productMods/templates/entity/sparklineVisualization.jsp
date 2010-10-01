@@ -131,6 +131,7 @@
 	}
 	
 	.vis_link a{
+	  margin-top: 15px;
 		padding:10px;
 		display: block;
 	}
