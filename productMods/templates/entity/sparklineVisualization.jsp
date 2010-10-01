@@ -35,8 +35,7 @@
             throw new JspException(e);
         } else {
         	for (VClass currClass : entity.getVClasses()) {
-        		//System.out.println(">> " + currClass.getName());
-            	if (currClass.getName().equalsIgnoreCase("Person")) {
+        		if ("http://xmlns.com/foaf/0.1/Person".equalsIgnoreCase(currClass.getURI())) {
             		displayVisualization = true;
             		break;
             	}
