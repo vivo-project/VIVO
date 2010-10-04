@@ -64,20 +64,15 @@
     <rdfs:label xml:lang="en-US">LL.B. Bachelor of Laws</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree113">
-    <rdfs:label xml:lang="en-US">B.Sc. Bachelor of Science</rdfs:label>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree101">
+    <core:degreeAbbreviation>S.J.D.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">B.Sc.</core:degreeAbbreviation>
+    <rdfs:label xml:lang="en-US">S.J.D. Doctor of Juridical Science</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree13">
     <core:degreeAbbreviation>B.B.A.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
     <rdfs:label xml:lang="en-US">B.B.A. Bachelor of Business Administration</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree101">
-    <core:degreeAbbreviation>S.J.D.</core:degreeAbbreviation>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-    <rdfs:label xml:lang="en-US">S.J.D. Doctor of Juridical Science</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree53">
     <core:degreeAbbreviation>D.S.W.</core:degreeAbbreviation>
@@ -128,11 +123,6 @@
     <core:degreeAbbreviation>B.S.Ed.</core:degreeAbbreviation>
     <rdfs:label xml:lang="en-US">B.S.Ed. Bachelor of Science in Education</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree114">
-    <rdfs:label xml:lang="en-US">M.Phil. Master of Philosophy </rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">M.Phil.</core:degreeAbbreviation>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree67">
     <core:degreeAbbreviation>Litt.M.</core:degreeAbbreviation>
@@ -217,11 +207,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree31">
     <core:degreeAbbreviation>B.Pharm.</core:degreeAbbreviation>
     <rdfs:label xml:lang="en-US">B.Pharm. Bachelor of Pharmacy</rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree115">
-    <rdfs:label xml:lang="en-US">D.Phil. Doctor of Philosophy</rdfs:label>
-    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">D.Phil.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree97">
@@ -338,6 +323,11 @@
     <core:degreeAbbreviation>B.A.E.</core:degreeAbbreviation>
     <rdfs:label xml:lang="en-US">B.A.E. Aeronautical Engineering</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree110">
+    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">B.Sc.</core:degreeAbbreviation>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+    <rdfs:label xml:lang="en-US">B.Sc. Bachelor of Science</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree17">
     <core:degreeAbbreviation>B.D.</core:degreeAbbreviation>
@@ -469,6 +459,11 @@
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
     <rdfs:label xml:lang="en-US">B.L.S. Bachelor of Library Science</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree112">
+    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">D.Phil.</core:degreeAbbreviation>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+    <rdfs:label xml:lang="en-US">D.Phil. Doctor of Philosophy</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree35">
     <core:degreeAbbreviation>C.E.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
@@ -523,6 +518,11 @@
     <core:degreeAbbreviation>B.Lit.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
     <rdfs:label xml:lang="en-US">B.Lit. Bachelor of Literature</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree111">
+    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">M.Phil.</core:degreeAbbreviation>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+    <rdfs:label xml:lang="en-US">M.Phil. Master of Philosophy </rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree8">
     <core:degreeAbbreviation>B.A.E.</core:degreeAbbreviation>
