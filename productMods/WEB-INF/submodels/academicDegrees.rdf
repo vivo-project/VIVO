@@ -64,6 +64,11 @@
     <rdfs:label xml:lang="en-US">LL.B. Bachelor of Laws</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree113">
+    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">M.P.H.</core:degreeAbbreviation>
+    <rdfs:label xml:lang="en-US">M.P.H. Master of Public Health</rdfs:label>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree101">
     <core:degreeAbbreviation>S.J.D.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
@@ -122,6 +127,11 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree34">
     <core:degreeAbbreviation>B.S.Ed.</core:degreeAbbreviation>
     <rdfs:label xml:lang="en-US">B.S.Ed. Bachelor of Science in Education</rdfs:label>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree114">
+    <rdfs:label xml:lang="en-US">M.S.P.H. Master of Science in Public Health</rdfs:label>
+    <core:degreeAbbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">M.S.P.H.</core:degreeAbbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree67">
