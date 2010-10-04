@@ -2,13 +2,13 @@
 
 <%-- DO NOT MODIFY THIS FILE. IT IS NOT USED IN THEME CUSTOMIZATION. --%>
 
-<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreeMarkerHttpServlet" %>
 <% 
     // This is here as a safety net. We should have gotten the values in identity.jsp,
     // since it's the first jsp we hit.
     String footer = (String) request.getAttribute("ftl_footer");
     if (footer == null) {
-        FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
+        FreeMarkerHttpServlet.getFreeMarkerComponentsForJsp(request);
     } 
 %>
 
