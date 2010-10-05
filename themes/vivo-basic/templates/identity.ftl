@@ -2,6 +2,11 @@
 
 <#import "listMacros.ftl" as l>
 
+<#-- uncomment this div to place your institutional branding/identity at the top of every page
+<div id="institution">
+</div>
+-->
+
 <div id="identity">
 
     <h1><a title="Home" href="${urls.home}">${siteName}</a></h1>
