@@ -15,15 +15,22 @@
 	<div id="leftblock">
 		<h2>How do you want to compare?</h2>
 		<select class="comparisonValues">
-			<option value="Publications">Publications</option>
+		<!--
+		TODO: add "selecte" option for publications
+		-->
+			<option value="Publications" selected="selected">Publications</option>
 			<option value="Grants">Grants</option>
 			<option value="People">People</option>
 			<option value="Item4">Item4</option>
 			<option value="Item5">Item5</option>
-		</select> 
+		</select>
+		<br/>
+		<button type ="button" align="left"> clear</button>
 
-		<!-- pagination div is for the top navigating buttons -->
-		<h2 id="heading">Select schools to compare</h2>
+		<!-- pagination div is for the top navigating buttons 
+		TODO: change the wording to be generalized
+		-->
+		<h2 id="heading">Select sub entities to compare</h2>
 		<div id="pagination"></div>
 
 		<!-- #searchresult is for inserting the data from schools -->
@@ -35,9 +42,10 @@
 				<div class="xaxislabel">Year</div>
 				<h3><span id="comparisonParameter"></span></h3>
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
-			id="total">10</span> schools to compare.</p>
+			id="total">10</span> sub-entities to compare.</p>
 			</div>
 		</div>
+		
 </div>
 <script type="text/javascript"><!--
 	
@@ -58,17 +66,14 @@
         var graphContainer = $("#graphContainer");
         
         var colors = {};
-        var free_colors = [
-                             TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
-                             SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
-                             PURPLE
-                          ];
-        var prev_color = {};
-        var color_to_assign, color_to_remove;
+
+        //TODO: either remove this free-colors or remove the gloabl one
+
+        var prevColor = {};
+        var colorToAssign, colorToRemove;
         
-        var col_id = 0;
-        var schools = {};
-        var labels = [];
+        var labelToEntityRecord = {};
+        var setOfLabels = [];
 
 		/*
 		 * When the intra-entity parameters are clicked,
@@ -79,7 +84,15 @@
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
 			$('.yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
         });
-        
+
+		/*
+		 * click event handler for clear button
+		 */
+		$("button").click(function(){
+			console.log("clear button is clicked!");
+			init(graphContainer);
+		});
+
         /*
          * initial display of the grid when the page loads
          */
@@ -94,80 +107,71 @@
          * parse the json returned by jsp and pass it 
          * to loadData
          */
-        jsonObject.prepare(jQuery.parseJSON(jsonString));	
-        
-        
+        jsonObject.prepare(jQuery.parseJSON(jsonString));
+
         /* 
-         *  function to populate the schools object with the
+         *  function to populate the labelToEntityRecord object with the
          *  values from the json file and
          *  dynamically generate checkboxes
          */
         function loadData(jsonData){
-            var max_val;
-            var min_max_array = [];
-            var lcl_min_max_array = [];
-            var year_range;
+            var maxValueOfComparisonParameter;
+            var ArrayOfMinAndMaxYear = [];
+            var ArrayOfLocalMinAndMaxYear = [];
+            var yearRange;
 
             $.each(jsonData, function(index, val){
-                var new_html = '';
-                labels.push(val.label);
+                setOfLabels.push(val.label);
                 val.data = val.yearToPublicationCount;
-                schools[val.label] = val;
-                //console.log(val.label);
+                labelToEntityRecord[val.label] = val;
             });
-            //console.log('----');
-            
-            max_val = calcMax(schools);
-            min_max_array = calcMinandMaxYears(schools);
-            year_range = (min_max_array[1] - min_max_array[0]);
-            
-            //console.log("Max value is " + max_val);
-            //console.log('min_year is: ' + min_max_array[0] + ' and max_year is: ' + min_max_array[1]);
-            
-            setLineWidthAndTickSize(year_range, FlotOptions);
+
+
+            //TOOO: rename the variable name to convey what do you mean by calcMaxOfComparisonParameter.. as in whose max is caluculated
+            maxValueOfComparisonParameter = calcMaxOfComparisonParameter(labelToEntityRecord);
+            ArrayOfMinAndMaxYear = calcMinandMaxYears(labelToEntityRecord);
+            //TODO: see if you want to change the return type to dict/map 
+            yearRange = (ArrayOfMinAndMaxYear[1] - ArrayOfMinAndMaxYear[0]);
+
+            //TODO: maintian naming conventions
+            setLineWidthAndTickSize(yearRange, FlotOptions);
         	paginationOptions.callback = pageSelectCallback;       
 
             
             /*
              * pageSelectCallback is a callback function that
              * creates the new_content div and inserts the corresponding html into it.
-             * @param {Object} page_index
+             * @param {Object} pageIndex
              * @param {Object} jq
              * @returns false to prevent infinite loop!
              */
-            function pageSelectCallback(page_index, jq){
+            function pageSelectCallback(pageIndex, jq){
+
+                 console.log(pageIndex, jq);
             
-                var items_per_page = 10;
-                var max_elem = Math.min((page_index + 1) * items_per_page, labels.length);
-                
-                //console.log('labels length: ' + labels.length);
-                //console.log('items per page: ' + items_per_page);
-                //console.log('page_index: ' + page_index);
-                //console.log('max_elem: ' + max_elem);
-                //console.log(labels);
-                
+                //TODO: what is max_epem.. rename it.
+                var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);
                 
                 var new_content = '';
                 
                 /*
-                 * Iterate through the list of school labels and build an HTML string
+                 * Iterate through the list of school setOfLabels and build an HTML string
                  * Also check if some of the checkboxes are previously checked? If they are checked,
                  * then they should be on this time too!
                  */
-                for (var i = page_index * items_per_page; i < max_elem; i++) {
-                    var checked_flag = '', j = 0, font_weight = '', disabled_flag = '';
-                    var white_space = '';
+                 //TODO: refactor this function .. move it out & pass the p[arameters
+                for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
+                    var checkedFlag = '', j = 0, fontWeight = '', disabledFlag = '';
                     $.each(data, function(){
-                        if (data[j].label == labels[i]) {
-                            checked_flag = "checked";
-                            font_weight = " style='font-weight:bold;' ";
+                        if (data[j].label == setOfLabels[i]) {
+                            checkedFlag = "checked";
+                            fontWeight = " style='font-weight:bold;' ";
                         }
                         j++;
                         
                         
                     });
-                    //console.log(checked_flag);
-                    new_content += '<p><dt><input type = "checkbox" class="if_clicked_on_school" value="' + labels[i] + '"' + checked_flag + ' ' + disabled_flag + '><a href="" ' + font_weight + ' >' + labels[i] + '<\/a><\/dt><\/p>';
+                    new_content += '<p><dt><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + disabledFlag + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/dt><\/p>';
                     
                 }
                 
@@ -177,7 +181,6 @@
                  * Replace the old content with new content
                  */
                 $('#searchresult').html(new_content);
-                //console.log(new_content);
                 
                 /*
                  * When the elements in the paginated div
@@ -185,169 +188,141 @@
                  */
                 $("input.if_clicked_on_school").click(function(){
                 
-                    //console.log($(this).attr("value") + ' is clicked');
                     var checkbox = $(this);
-                    var checkbox_value = $(this).attr("value");
-                    var entity = schools[checkbox_value];
+                    var checkboxValue = $(this).attr("value");
+                    var entity = labelToEntityRecord[checkboxValue];
                     
                     /*
                      * Dynamically generate the bar, checkbox and label.
                      */
                     var bottomDiv = $("#bottom");
-                    var hidden_label = createGraphic(entity, bottomDiv);
+                    var hiddenLabel = createGraphic(entity, bottomDiv);
 
-                    console.log(bottomDiv);
-                    console.log(checkbox_value, schools, entity );
                     
- //                   var hidden_label = $("label:hidden").filter(function(){
-  //                      if ($(this).attr("value") == checkbox_value) 
-   //                         return $(this);
-    //                });
+                    var divBar = hiddenLabel.next();
+                    var divLabel = hiddenLabel.prev();
+                    var spanElement = divBar.next('span');
+                    var entity = labelToEntityRecord[checkboxValue];
 
-					console.log(hidden_label);
-                    
-                    var div_bar = hidden_label.next();
-                    var div_label = hidden_label.prev();
-                    var span_element = div_bar.next('span');
-                    //console.log(hidden_label);
-                    var checkbox_value = $(this).attr("value");
-                    var entity = schools[checkbox_value];
-
-                    console.log(slugify(checkbox_value));
-                    
-                    
                     /*
                      * If the checkbox is checked
                      */
                     if (checkbox.is(':checked')) {
                     
-                        /* check free_colors is not empty and
-                         * Remove the first element out of free_colors
+                        /* check freeColors is not empty and
+                         * Remove the first element out of freeColors
                          */
-                        if (contains(free_colors, prev_color[entity.label])) {
-                            var index = contains(free_colors, prev_color[entity.label]);
-                            //console.log('Past color present in free_colors!');
-                            color_to_assign = free_colors[index];
-                            free_colors.splice(index, 1);
-                        }
-                        else {
-                            //console.log('Past color not present in free_colors!');
-                            color_to_assign = free_colors.shift();
+
+                         //TODO: move this color assignm,ent code out
+                        if (contains(freeColors, prevColor[entity.label])) {
+                            var index = contains(freeColors, prevColor[entity.label]);
+                            colorToAssign = freeColors[index];
+                            freeColors.splice(index, 1);
+                        } else {
+                            colorToAssign = freeColors.shift();
                         }
                         
                         
                         /*
-                         * use color_to_assign to plot the current linegraph
+                         * use colorToAssign to plot the current linegraph
                          * also store it in colors
                          */
-                        entity.color = color_to_assign;
-                        colors[entity.label] = color_to_assign;
+                        entity.color = colorToAssign;
+                        colors[entity.label] = colorToAssign;
                         
-                        //console.log('Color removed from the head of free_colors: ' + color_to_assign);
                         
                         /*
                          * calculating the sum of x-values
                          */
+                         //TODO: sum_num -> normalized_width etc
                         var sum = 0, sum_num = 0;
+                        //TODO: rename calcSu..-> calculateEntiryPubli..
                         sum = calcSum(entity);
-                        sum_num = Math.floor(300 * (sum / max_val));
-                        //console.log('sum_num: ' + sum_num);
+                        sum_num = Math.floor(300 * (sum / maxValueOfComparisonParameter));
                         
                         /*
                          * append a div and modify its CSS
                          */
-                        div_bar.css("background-color", color_to_assign);
-                        div_bar.css("width", sum_num);
-                        div_label.children("a").html(checkbox_value);
-                        span_element.text(sum);
-
-						console.log(div_bar);
-						console.log(div_label);
-						console.log(sum);
+                        divBar.css("background-color", colorToAssign);
+                        divBar.css("width", sum_num);
+                        divLabel.children("a").html(checkboxValue);
+                        spanElement.text(sum);
                         
                         checkbox.next('a').css("font-weight", "bold");
                         
                         
                         data.push(entity);
-                        lcl_min_max_array = calcMinandMaxYears(data);
-                        stuffZeros(data, lcl_min_max_array);
-                        //console.log('current min_year is: ' + lcl_min_max_array[0] + ' and current max_year is: ' + lcl_min_max_array[1]);
+
+                        //TODO: rename this to something appropriate
+                        //TODO: move this calcminmax... inside stuffZerosIntoLineGraphs
+                        ArrayOfLocalMinAndMaxYear = calcMinandMaxYears(data);
+                        stuffZerosIntoLineGraphs(data, ArrayOfLocalMinAndMaxYear);
                         
-                    }
-                    
-                    /*
-                     * If the checkbox is unchecked
-                     */
-                    else 
-                        if (!checkbox.is(':checked')) {
-                        
+                    } else if (!checkbox.is(':checked')) {
+                        /*
+                         * If the checkbox is unchecked
+                         */
+
+                        	//TODO: move this color de-assignment code out
                             if (colors[entity.label]) {
-                                color_to_remove = colors[entity.label];
-                                prev_color[entity.label] = color_to_remove;
+                                colorToRemove = colors[entity.label];
+                                prevColor[entity.label] = colorToRemove;
                                 entity.color = "";
                             }
                             
                         /*
-                         * Insert it at the end of free_colors
+                         * Insert it at the end of freeColors
                          */
-                            free_colors.push(color_to_remove);
-                            
-                            //console.log('Color added to the tail of free_colors:' + color_to_remove);
-                            div_bar.css("background-color", "#fff");
-                            div_label.children("a").html("");
-                            
+                            freeColors.push(colorToRemove);
+
                         /*
                          * removing the item that is unchecked
                          */
-                            //console.log(data);
-                            var i = 0;
-                            while (i < data.length) {
-                                if (data[i].label == entity.label) {
-                                    removeZeros(data[i]);
-                                    data.splice(i, 1);
-                                }
-                                else 
-                                    i++;
+                            var ii = 0;
+                            while (ii < data.length) {
+                                if (data[ii].label == entity.label) {
+                                    unStuffZerosFromLineGraph(data[ii]);
+                                    data.splice(ii, 1);
+                                } else {
+                                	ii++;
+                                    } 
+                                    
                             }
-                            //console.log(data);
-                            lcl_min_max_array = calcZeroLessMinAndMax(data);
-                            unStuffZeros(data, lcl_min_max_array);
+                            ArrayOfLocalMinAndMaxYear = calcZeroLessMinAndMax(data);
+                            unStuffZerosFromLineGraphs(data, ArrayOfLocalMinAndMaxYear);
+
+							//TODO: change this logic. by defualt it should be normal.
+							//click -> bold
+							//unclick -> normal
                             checkbox.next('a').css("font-weight", "normal");
                             
                         /*
                          * Remove the graphic
                          */
-                         removeGraphic(checkbox_value);
-                          	//console.log("Removing ", $(div_label), $(div_bar), $(hidden_label), $(span_element));
+                         removeGraphic(checkboxValue);
                         }
 					
-                    //console.log('data to be plotted ',data);
-                    //console.log(graphContainer,FlotOptions);
                     /*
                      *  and plot all we got
                      */
-                    if (data.length == 0) 
-                        init(graphContainer);
-                    else {
+                    if (data.length == 0) {
+                    	init(graphContainer);
+                    } else {
                     	removeUnknowns(data);
                         $.plot(graphContainer, data, FlotOptions);
                     }
                     
-                    //console.log('linewidth is :' + FlotOptions.series.lines.lineWidth);
-                    //console.log('ticksize is :' + FlotOptions.xaxis.tickSize);
                     
                     /*
                      *  notification about the colors
                      */
-                    $("#counter").text((FlotOptions.colors.length - free_colors.length));
+                    $("#counter").text((FlotOptions.colors.length - freeColors.length));
                     
-                    if (free_colors.length == 0) {
-                        $.jGrowl("Colors left: " + free_colors.length, {
+                    if (freeColors.length == 0) {
+                        $.jGrowl("Colors left: " + freeColors.length, {
                             life: 50
                         });
-						
-
-                    }
+                    } 
                 });
                 
                 /*
@@ -356,7 +331,8 @@
                 return false;
             }
             
-            $("#pagination").pagination(labels.length, paginationOptions);
+            $("#pagination").pagination(setOfLabels.length, paginationOptions);
+
         }
 
 	});

@@ -8,6 +8,7 @@
  */
 function init(graphContainer) {
 	
+	//TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select option:selected").val());
 	$('.yaxislabel').html("Number of " + $("select option:selected").val() + lotsofSpaceCharacters).mbFlipText(false);
 	
@@ -31,7 +32,7 @@ function init(graphContainer) {
 }
 
 /**
- * unStuffZeros removes the previously stuffed zero values. r is the current
+ * unStuffZerosFromLineGraphs removes the previously stuffed zero values. r is the current
  * data object. s is the current min and max {year} values. All the datapoints <
  * curr_min{year} && > > curr_max{year} are removed, so that they don't show up
  * on the graph
@@ -46,22 +47,16 @@ function init(graphContainer) {
 // the variable name, I should at least have a good idea what it is.
 // TODO: Write in the domain of the problem! (for variables, function names,
 // comments, etc...)
-function unStuffZeros(jsonObject, arrayOfMinAndMaxYears) {
+function unStuffZerosFromLineGraphs(jsonObject, arrayOfMinAndMaxYears) {
 
 	var currentMinYear = arrayOfMinAndMaxYears[0], currentMaxYear = arrayOfMinAndMaxYears[1];
-
-	//console.log('Inside unStuffZeros - ' + 'current Min Year is: '
-	//		+ currentMinYear + ' and current Max Year is: ' + currentMaxYear);
 
 			$.each(jsonObject, function(key, val) {
 				var i = 0;
 				for (i = 0; i < val.yearToPublicationCount.length; i++) {
 					if (((val.yearToPublicationCount[i][0] < currentMinYear) || (val.yearToPublicationCount[i][0] > currentMaxYear))
 							&& val.yearToPublicationCount[i][1] == 0) {
-						//console.log('Removing ['
-					//	+ val.yearToPublicationCount[i][0] + ',0] from '
-					//	+ val.label + ' at position: '
-					//	+ i);
+
 			val.yearToPublicationCount.splice(i, 1);
 			i--;
 					} else
@@ -71,19 +66,17 @@ function unStuffZeros(jsonObject, arrayOfMinAndMaxYears) {
 }
 
 /**
- * while unStuffZeros is for a group of data objects, removeZeros is for a
+ * while unStuffZerosFromLineGraphs is for a group of data objects, unStuffZerosFromLineGraph is for a
  * single data object. It removes zeroes from the single object passed as
  * parameter.
  * 
  * @param {Object}
  *            jsonObject
  */
-function removeZeros(jsonObject) {
+function unStuffZerosFromLineGraph(jsonObject) {
 	var i = 0;
 	for (i = 0; i < jsonObject.yearToPublicationCount.length; i++) {
 		if (jsonObject.yearToPublicationCount[i][1] == 0) {
-			//console.log('Removing [' + jsonObject.yearToPublicationCount[i][0] + ',0] from '
-			//		+ jsonObject.label + ' at position: ' + i);
 			jsonObject.yearToPublicationCount.splice(i, 1);
 			i--;
 		}
@@ -91,9 +84,9 @@ function removeZeros(jsonObject) {
 }
 
 /**
- * stuffZeros is used to fill discontinuities in data points. For example, if a
+ * stuffZerosIntoLineGraphs is used to fill discontinuities in data points. For example, if a
  * linegraph has the following data points [1990, 2],[1992,3],[1994,
- * 5],[1996,5],[2000,4],[2001,1]. stuffZeros inserts
+ * 5],[1996,5],[2000,4],[2001,1]. stuffZerosIntoLineGraphs inserts
  * [1991,0],[1993,0],1995,0]..and so on. It also inserts zeroes at the beginning
  * and the end if the max and min{year} of the current linegraph fall in between
  * the global max and min{year}
@@ -104,7 +97,7 @@ function removeZeros(jsonObject) {
  *            arrayOfMinAndMaxYears
  * @returns jsonObject with stuffed data points.
  */
-function stuffZeros(jsonObject, arrayOfMinAndMaxYears) {
+function stuffZerosIntoLineGraphs(jsonObject, arrayOfMinAndMaxYears) {
 
 	$.each(jsonObject,function(key, val) {
 		var position = arrayOfMinAndMaxYears[0], i = 0;
@@ -115,18 +108,12 @@ function stuffZeros(jsonObject, arrayOfMinAndMaxYears) {
 
 				if (val.yearToPublicationCount[i][0] != position
 						&& position <= arrayOfMinAndMaxYears[1]) {
-					//console.log('Inserting [' + position
-				//	+ ',0] into ' + val.label
-				//	+ ' at position: ' + i);
 	val.yearToPublicationCount.splice(i, 0,
 			[ position, 0 ]);
 				}
 			}
 
 			else {
-				//console.log('Inserting [' + position
-			//	+ ',0] into ' + val.label
-			//	+ ' at position: ' + i);
 				val.yearToPublicationCount.push( [ position, 0 ]);
 			}
 			position++;
@@ -168,10 +155,8 @@ function calcZeroLessMinAndMax(jsonObject) {
 		if (globalMaxYear < maxYear)
 			globalMaxYear = maxYear;
 		
-		//console.log('[' + minYear + '] ' + ' [' + maxYear + ']');
 	});
-	//console.log('Inside calcZeroLessMinAndMax and curr_min_year is '
-		//	+ globalMinYear + ' curr_max_year is ' + globalMaxYear);
+
 	return [ globalMinYear, globalMaxYear ];
 }
 
@@ -206,13 +191,11 @@ function calcMinandMaxYears(jsonObject) {
  *            jsonObject
  * @returns maxCount
  */
-function calcMax(jsonObject) {
+function calcMaxOfComparisonParameter(jsonObject) {
 	var sum = 0, i = 0, maxCount = 0;
 	$.each(jsonObject, function(key, val) {
 		for (i = 0; i < val.yearToPublicationCount.length; i++)
 			sum += val.yearToPublicationCount[i][1];
-
-		//console.log(val.label + '->' + sum);
 
 		if (maxCount < sum)
 			maxCount = sum;
@@ -236,7 +219,6 @@ function calcSum(jsonObject) {
 	for (i = 0; i < jsonObject.yearToPublicationCount.length; i++)
 		sum += jsonObject.yearToPublicationCount[i][1];
 
-	//console.log(sum);
 	return sum;
 }
 
@@ -286,9 +268,6 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
  *            entityLabel
  */
 function createGraphic(entity, bottomDiv) {
-
-	console.log(entity.label);
-	console.log(slugify(entity.label));
 	
 	var parentP = $('<p>');
 	parentP.attr('id', slugify(entity.label));
@@ -296,10 +275,7 @@ function createGraphic(entity, bottomDiv) {
 	var labelDiv = $('<div>')
 	labelDiv.attr('id', 'label');
 	labelDiv.html('<a href="'+ getEntityURL(entity) +'"></a>');
-	console.log('Well formed URL is ' +getEntityURL(entity));
-	
-	parentP.append(labelDiv);
-	
+		
 	var hiddenLabel = $('<label>');
 	hiddenLabel.attr('class', 'school');
 	hiddenLabel.attr('type', 'hidden');
@@ -317,12 +293,7 @@ function createGraphic(entity, bottomDiv) {
 	parentP.append(numAttributeText);
 	
 	bottomDiv.children('p.displayCounter').after(parentP);
-	
-	console.log(bottomDiv);
-	console.log(parentP);
-	console.log(numAttributeText);
-	
-	
+		
 	return hiddenLabel;
 
 }
@@ -356,11 +327,7 @@ function slugify(textToBeSlugified) {
  */
 function removeGraphic(pToBeRemovedIdentifier) {
 	
-	console.log($('#' + slugify(pToBeRemovedIdentifier)));
-	
 	$('p#' + slugify(pToBeRemovedIdentifier)).remove();
-	
-	console.log($('#' + slugify(pToBeRemovedIdentifier)));
 	
 }
 
@@ -383,17 +350,17 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, n
 	 };
 }
 
-/*
+/**
  * function for removing "unknown" values (-1)
  * just before data plotting.
+ * @jsonRecords the set of entities from which the unknowns
+ *  have to be removed.
  */
 function removeUnknowns(jsonRecords) {
 	var i = 0, j = 0;
 	while (j < jsonRecords.length) {
 		for (i = 0; i < jsonRecords[j].data.length; i++) {
 			if (jsonRecords[j].data[i][0] == -1) {
-				//console.log('Removing [-1, ' + jsonRecords[j].data[i][1] + '] from '
-					//	+ jsonRecords[j].label + ' at position: ' + i);
 				jsonRecords[j].data.splice(i, 1);
 				i--;
 			}

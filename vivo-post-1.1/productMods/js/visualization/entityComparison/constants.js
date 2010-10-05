@@ -17,6 +17,11 @@ var colorConstantQueue =
        SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
        PURPLE
     ];
+var freeColors = [
+                   TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
+                   SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
+                   PURPLE
+                ];
 var lotsofSpaceCharacters = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 /*
@@ -49,7 +54,7 @@ FlotOptions.colors = colorConstantQueue;
  * options for Pagination
  */
 var paginationOptions = {
-		items_per_page : 10,
+		items_per_page : 2,
 		num_display_entries : 3,
 		num_edge_entries : 2,
 		prev_text : "Prev",
