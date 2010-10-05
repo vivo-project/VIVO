@@ -12,7 +12,7 @@ import java.util.List;
 public class JsonObject {
 	
 	private String label;
-	private List<List<Integer>> yearToPublicationCount = new ArrayList<List<Integer>>();
+	private List<List<Integer>> data = new ArrayList<List<Integer>>();
 	private String entityURI;
 	private String visMode;
 	
@@ -41,7 +41,7 @@ public class JsonObject {
 	}
 
 	public List<List<Integer>> getYearToPublicationCount() {
-		return yearToPublicationCount;
+		return data;
 	}
 
 
@@ -51,7 +51,7 @@ public class JsonObject {
 	}
 	
 	public void setYearToPublicationCount(List<List<Integer>> yearToPublicationCount){
-		this.yearToPublicationCount = yearToPublicationCount;
+		this.data = yearToPublicationCount;
 	}
 	
 }
