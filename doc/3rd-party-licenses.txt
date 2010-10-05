@@ -1,0 +1,181 @@
+Dependencies Licenses
+
+
+Apache License 2.0
+------------------
+licenses/apache.LICENSE.txt
+
+commons-beanutils-core
+commons-betwixt
+commons-cli
+commons-codec
+commons-collections
+commons-dbcp
+commons-digester
+commons-discovery
+commons-fileupload
+commons-httpclient
+commons-io
+commons-lang
+commons-logging
+commons-pool
+csv
+dwr
+gson
+jakarta-jstl
+jakarta-oro
+joda-time
+json-taglib
+log4j
+lucene-analyzers
+lucene-core
+lucene-highlighter
+solr
+spring
+stax-api
+taglibs-mailer
+taglibs-random
+taglibs-string
+xalan
+xbean
+xbean-spring
+xercesImpl
+xml-apis
+XmlSchema
+wstx-asl
+
+
+BSD
+---
+aduna-appbase (licenses/aduna.LICENSE.txt)
+aduna-commons (licenses/aduna.LICENSE.txt)
+antlr (licenses/antlr.LICENSE.txt)
+arq-extra (licenses/jena.LICENSE.txt)
+arq (licenses/jena.LICENSE.txt)
+dom4j (licenses/dom4j.LICENSE.txt)
+freemarker (licenses/freemarker.LICENSE.txt)
+iri (licenses/jena.LICENSE.txt)
+jaxen (licenses/jaxen.LICENSE.txt)
+jena (licenses/jena.LICENSE.txt)
+jenatest (licenses/jena.LICENSE.txt)
+ldap (licenses/ldap.LICENSE.txt)
+sdb (licenses/sdb.LICENSE.txt)
+sesame-console (licenses/aduna.LICENSE.txt)
+sesame-http (licenses/aduna.LICENSE.txt)
+sesame-model (licenses/aduna.LICENSE.txt)
+sesame-query (licenses/aduna.LICENSE.txt)
+sesame-queryalgebra (licenses/aduna.LICENSE.txt)
+sesame-queryparser (licenses/aduna.LICENSE.txt)
+sesame-queryresultio (licenses/aduna.LICENSE.txt)
+sesame-repository (licenses/aduna.LICENSE.txt)
+sesame-rio (licenses/aduna.LICENSE.txt)
+sesame-runtime (licenses/aduna.LICENSE.txt)
+sesame-sail (licenses/aduna.LICENSE.txt)
+sparqltag (licenses/sparqltag.LICENSE.txt)
+xpp3_min (licenses/extreme.LICENSE.txt)
+xstream (licenses/xstream.LICENSE.txt)
+
+
+CDDL 1.0
+--------
+jaxrpc (licenses/cddl.LICENSE.txt)
+saaj (licenses/cddl.LICENSE.txt)
+
+
+GNU AGPL 3
+----------	
+licenses/agpl.LICENSE.txt
+
+iText
+pellet-cli
+pellet-core
+pellet-datatypes
+pellet-dig
+pellet-el
+pellet-explanation
+pellet
+pellet-jena
+pellet-modularity
+pellet-owlapi
+pellet-pellint
+pellet-query
+pellet-rules
+pellet-test
+
+
+GNU GPL 2
+---------
+licenses/gpl2.LICENSE.txt
+
+jaxrpc
+mysql-connector-java
+rowset
+rsslib4j
+saaj
+
+
+GNU LGPL 2.1
+------------
+licenses/lgpl2.LICENSE.txt
+
+jcalendar
+wstx-asl
+
+
+GNU LGPL 3
+----------
+licenses/lgpl3.LICENSE.txt
+
+fedora-client
+jga
+
+
+JRL 1.5
+-------
+licenses/java.LICENSE.txt
+
+jai_codec
+jai_core
+
+
+MIT
+---
+icu4j (licenses/icu.LICENSE.txt)
+slf4j-api (licenses/mit.LICENSE.txt)
+slf4j-log4j12 (licenses/mit.LICENSE.txt)
+
+
+MPL 1.1
+-------
+licenses/mpl.LICENSE.txt
+
+saxon9he
+
+
+Sun
+---
+activation (licenses/sun_binary.LICENSE.txt)
+jsp-api (licenses/sun_binary.LICENSE.txt)
+mail (licenses/sun_mail.LICENSE.txt)
+servlet-api (licenses/sun_binary.LICENSE.txt)
+
+
+Others
+------
+cos (licenses/cos.LICENSE.txt)
+jdom (licenses/jdom.LICENSE.txt)
+jtidy (licenses/jtidy.LICENSE.txt)
+ojdbc (licenses/oracle.LICENSE.txt)
+
+
+Unknown
+-------
+aterm-java
+relaxngDatatype
+xsdlib
+
+
+None
+----
+Concurrent
+Trippi
