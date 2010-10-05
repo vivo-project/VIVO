@@ -21,9 +21,9 @@
 </head>
 <body>
 <div id="wrap">
-	<jsp:include page="/${themeDir}jsp/identity.jsp" flush="true"/>
+	<jsp:include page="/templates/page/freemarkerTransition/identity.jsp" flush="true"/>
 	<div id="contentwrap">
-		<jsp:include page="/${themeDir}jsp/menu.jsp" flush="true"/>
+		<jsp:include page="/templates/page/freemarkerTransition/menu.jsp" flush="true"/>
 		<div id="content" class="full">
             <div align="center">
                 If you are a member of the Cornell community and would like to edit you profile
@@ -37,7 +37,7 @@
         </div>
 		<!-- END div 'content' -->
 	</div><!-- END div 'contentwrap' -->
-	<jsp:include page="/${themeDir}jsp/footer.jsp" flush="true"/>
+	<jsp:include page="/templates/page/freemarkerTransition/footer.jsp" flush="true"/>
 </div><!-- END div 'wrap' -->
 </body>
 </html>
