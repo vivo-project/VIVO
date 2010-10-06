@@ -24,3 +24,17 @@ themes/vivo-basic/css/blueprint/liquid.css
 
 # Sample code from Google.
 themes/vivo-basic/templates/googleAnalytics.ftl
+
+# Stylesheet for Pictos fonts by pictos.drewwilson.com
+themes/wilma/css/pictos.css
+
+# Script for enabling new HTML5 semantic markup in IE browsers. 
+# remysharp.com/2009/01/07/html5-enabling-script/
+js/html5.js
+
+# selectivizr is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8. selectivizr.com
+js/selectivizr.js
+
+# Supersleight jQuery Plugin for Transparent PNGs in IE6. allinthehead.com/retro/338/supersleight-jquery-plugin
+js/supersleight.js
+js/supersleightUtils.js
