@@ -30,11 +30,11 @@ themes/wilma/css/pictos.css
 
 # Script for enabling new HTML5 semantic markup in IE browsers. 
 # remysharp.com/2009/01/07/html5-enabling-script/
-js/html5.js
+webapp/web/js/html5.js
 
 # selectivizr is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8. selectivizr.com
-js/selectivizr.js
+webapp/web/js/selectivizr.js
 
 # Supersleight jQuery Plugin for Transparent PNGs in IE6. allinthehead.com/retro/338/supersleight-jquery-plugin
-js/supersleight.js
-js/supersleightUtils.js
+webapp/web/js/supersleight.js
+webapp/web/js/supersleightUtils.js
