@@ -74,7 +74,7 @@ Keep track of the database name, username, and password for Step IV.
  
 III. Download the VIVO Application Source
 
-Download the VIVO application source as either rel-1.1.zip or rel-1.1.gz file 
+Download the VIVO application source as either rel-1.1.1.zip or rel-1.1.1.gz file 
 and unpack it on your web server:
       
       http://vivoweb.org/download
