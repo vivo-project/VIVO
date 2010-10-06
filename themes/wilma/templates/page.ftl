@@ -102,12 +102,12 @@ ${headScripts.tags}
 <script type="text/javascript" src="http://use.typekit.com/chp2uea.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 ${scripts.add("/js/jquery.js")}
-${scripts.tags}
+
 
 
 <!--[if lt IE 7]>
-${scripts.add("/js/supersleight.js")}
-${scripts.add("/js/supersleightUtils.js")}
+${scripts.add("/js/jquery_plugins/supersleight.js")}
+${scripts.addFromTheme("/js/utils.js")}
 <link rel="stylesheet" href="css/ie6.css" />
 <![endif]-->
 <!--[if IE 7]>
@@ -116,7 +116,7 @@ ${scripts.add("/js/supersleightUtils.js")}
 <!--[if (gte IE 6)&(lte IE 8)]>
 ${scripts.add("/js/selectivizr.js")}
 <![endif]-->
+${scripts.tags}
 
-<#include "googleAnalytics.ftl">
 </body>
 </html>
