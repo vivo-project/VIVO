@@ -19,5 +19,5 @@
 	vitroDisplay:excludeClass core:Authorship ;
 	vitroDisplay:excludeClass core:Position ; 
 	vitroDisplay:excludeClass core:ResearchActivity ;
-	vitroDisplay:excludeClass core:EducationalTraining .	
+	vitroDisplay:excludeClass core:EducationalTraining ;	
 	vitroDisplay:excludeClass bibo:DocumentStatus .	
