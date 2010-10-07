@@ -5,11 +5,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>CheckPublicView</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CheckPublicView</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CheckPublicView</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
@@ -51,40 +69,34 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify People-->
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Non-Faculty Academic</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Non-Faculty Academic</td>
+	<td>comment</td>
+	<td class="comment">Verify People</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=ME Tarzan</td>
+	<td>link=Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>ME Tarzan</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate College of America | College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate College of America Dr., 1999 - </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate College of America | College</td>
+	<td>Primate College of America Dr., 1999 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -97,7 +109,11 @@
 	<td>Introduction to Primate Health | Semester Class</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -108,7 +124,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Courses-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Courses</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Course</td>
@@ -141,7 +161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>ME Tarzan | Non-Faculty Academic</td>
+	<td>Faculty, Jane | Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
@@ -224,7 +244,11 @@
 	<td>Primate Health | Subject Area</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -235,7 +259,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Activities-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Activities</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Grant</td>
@@ -356,7 +384,11 @@
 	<td>Primate College of America | College</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -367,7 +399,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Topics-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Topics</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Subject Area</td>
@@ -520,7 +556,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>ME Tarzan | Non-Faculty Academic</td>
+	<td>Faculty, Jane | Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
@@ -543,7 +579,11 @@
 	<td>Elderly Care | Subject Area</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -554,7 +594,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Events-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Events</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Academic Term</td>
@@ -805,7 +849,11 @@
 	<td>Primate Health Conference | Conference</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -816,7 +864,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Organizations-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Organizations</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Organization</td>
@@ -844,17 +896,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>ME Tarzan | Non-Faculty Academic</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Privately Funded | Process</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>ME Tarzan | Non-Faculty Academic</td>
 	<td></td>
 </tr>
 <tr>
@@ -889,7 +931,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>D.V.M. Doctor of Veterinary Medicine | Academic Degree</td>
+	<td>Primate Student of the Year | Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
@@ -899,12 +941,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Primate History Library | Library</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>ME Tarzan Dr., 1999 - </td>
+	<td>Position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Dr., 1999 - </td>
 	<td></td>
 </tr>
 <tr>
@@ -940,6 +997,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Primate Health Check Sponsor 2008 - 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>northern Africa | geographical_region</td>
 	<td></td>
 </tr>
 <tr>
@@ -1049,6 +1111,11 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Primate College of America | College</td>
 	<td></td>
 </tr>
@@ -1137,7 +1204,11 @@
 	<td>Primate College of America Funding source 2010 -</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -1148,7 +1219,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Equipment-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Equipment</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Equipment</td>
@@ -1229,7 +1304,11 @@
 	<td>Animal Diet</td>
 	<td></td>
 </tr>
-<!--Go back to Index-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Go back to Index</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -1240,7 +1319,11 @@
 	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
-<!--Verify Locations-->
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Locations</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Building</td>
