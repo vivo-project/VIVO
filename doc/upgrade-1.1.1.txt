@@ -3,10 +3,10 @@
 
 Upgrading VIVO
  
-Steps to Upgrade from Release 1 Version 1.0 to Release 1 Version 1.1
+Steps to Upgrade from Release 1 Version 1.1 to Release 1 Version 1.1.1
 
 This file provides a short description of the steps involved in upgrading your 
-installation of VIVO from Release 1 Version 1.0 to Release 1 Version 1.1.
+installation of VIVO from Release 1 Version 1.1 to Release 1 Version 1.1.1.
 This and other documentation can be found at:
 
 http://vivoweb.org/support
@@ -97,33 +97,8 @@ II. The Upgrade Process
 6. Stop "Apache Tomcat" and run ant by typing: ant all
 
 7. If you have set up the Apache Tomcat Connector using mod_jk and modified 
-	your tomcat/conf/server.xml file, you will need to add a line to your 
-	context section specifying a "Manager" tag; see examples below.
-	
-	Context section before:
-	
-	<Context path=""
-		docBase="/usr/local/tomcat/webapps/vivo"
-		reloadable="true"
-		cookies="true" >
-		<Environment type="java.lang.String" override="false" 
-			name="path.configuration" 
-			value="deploy.properties"
-		/>
-	</Context>
-	
-	Context section after:
-	
-	<Context path=""
-		docBase="/usr/local/tomcat/webapps/vivo"
-		reloadable="true"
-		cookies="true" >
-		<Manager pathname="" />
-		<Environment type="java.lang.String" override="false" 
-			name="path.configuration" 
-			value="deploy.properties"
-		/>
-	</Context>
+	your tomcat/conf/server.xml file, there are no changes in this upgrade. 
+	For upgrades from V1.0 to V1.1.1, please see the upgrade-1.1.txt file.  
 	
 8. Start "Apache Tomcat" and log in to VIVO.
 
