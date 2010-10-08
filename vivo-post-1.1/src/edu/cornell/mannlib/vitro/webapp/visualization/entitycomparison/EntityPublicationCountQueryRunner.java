@@ -186,19 +186,20 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			ENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;
 			SUBENTITY_URL = QueryFieldLabels.PERSON_URL;
 			SUBENTITY_LABEL = QueryFieldLabels.PERSON_LABEL;
-		} else if (visMode.equals("SCHOOL")) {
-			result = getSparqlQueryForSchool(queryURI);
-			ENTITY_URL = QueryFieldLabels.SCHOOL_URL;
-			ENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
-			SUBENTITY_URL = QueryFieldLabels.DEPARTMENT_URL;
-			SUBENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;
 		} else {
-			result = getSparqlQueryForUniversity(queryURI);
-			ENTITY_URL = QueryFieldLabels.UNIVERSITY_URL;
-			ENTITY_LABEL = QueryFieldLabels.UNIVERSITY_LABEL;
-			SUBENTITY_URL = QueryFieldLabels.SCHOOL_URL;
-			SUBENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
-		}
+			result = getSparqlQueryForOrganization(queryURI);
+			ENTITY_URL = QueryFieldLabels.ORGANIZATION_URL;
+			ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
+			SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
+			SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
+		} 
+//		else {
+//			result = getSparqlQueryForOrganization(queryURI);
+//			ENTITY_URL = QueryFieldLabels.UNIVERSITY_URL;
+//			ENTITY_LABEL = QueryFieldLabels.UNIVERSITY_LABEL;
+//			SUBENTITY_URL = QueryFieldLabels.SCHOOL_URL;
+//			SUBENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
+//		}
 		return result;
 	}
 
@@ -223,18 +224,18 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 	}
 
-	private String getSparqlQueryForUniversity(String queryURI) {
+	private String getSparqlQueryForOrganization(String queryURI) {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-				+ "SELECT (str(?UniversityLabel) as ?universityLabelLit) "
-				+ "	 	(str(?School) as ?schoolLit) "
-				+ "		(str(?SchoolLabel) as ?schoolLabelLit) "
+				+ "SELECT (str(?organizationLabel) as ?organizationLabelLit) "
+				+ "	 	(str(?subOrganization) as ?subOrganizationLit) "
+				+ "		(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
 				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
-				+ ">) as ?" + QueryFieldLabels.UNIVERSITY_URL + ") "
-				+ "WHERE { " + "<" + queryURI + "> rdf:type core:University ;"
-				+ " rdfs:label ?UniversityLabel ;"
-				+ " core:hasSubOrganization ?School ."
-				+ " ?School rdf:type core:School; rdfs:label ?SchoolLabel ;"
+				+ ">) as ?" + QueryFieldLabels.ORGANIZATION_URL + ") "
+				+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
+				+ " rdfs:label ?organizationLabel ;"
+				+ " core:hasSubOrganization ?subOrganization ."
+				+ " ?subOrganization rdfs:label ?subOrganizationLabel ;"
 				+ " core:organizationForPosition ?Position .  "
 				+ "	?Position rdf:type core:Position ;"
 				+ " core:positionForPerson ?Person .  "
@@ -248,37 +249,37 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 	}
 
-	private String getSparqlQueryForSchool(String queryURI) {
-
-		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-				+ "SELECT (str(?SchoolLabel) as ?schoolLabelLit) "
-				+ "	 	(str(?Department) as ?departmentLit) "
-				+ "		(str(?DepartmentLabel) as ?departmentLabelLit) "
-				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
-				+ "		(str(<"
-				+ queryURI
-				+ ">) as ?"
-				+ QueryFieldLabels.SCHOOL_URL
-				+ ") "
-				+ "WHERE { "
-				+ "<"
-				+ queryURI
-				+ "> rdf:type core:School ;"
-				+ " rdfs:label ?SchoolLabel ;"
-				+ " core:hasSubOrganization ?Department ."
-				+ " ?Department rdf:type core:Department; rdfs:label ?DepartmentLabel ;"
-				+ " core:organizationForPosition ?Position .  "
-				+ "	?Position rdf:type core:Position ;"
-				+ " core:positionForPerson ?Person .  "
-				+ "	?Person  core:authorInAuthorship ?Resource ;  "
-				+ " rdfs:label ?PersonLabel .  "
-				+ " ?Resource core:linkedInformationResource ?Document ."
-				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
-				+ " ORDER BY ?DocumentLabel";
-		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
-		return sparqlQuery;
-
-	}
+//	private String getSparqlQueryForSchool(String queryURI) {
+//
+//		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+//				+ "SELECT (str(?SchoolLabel) as ?schoolLabelLit) "
+//				+ "	 	(str(?Department) as ?departmentLit) "
+//				+ "		(str(?DepartmentLabel) as ?departmentLabelLit) "
+//				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
+//				+ "		(str(<"
+//				+ queryURI
+//				+ ">) as ?"
+//				+ QueryFieldLabels.SCHOOL_URL
+//				+ ") "
+//				+ "WHERE { "
+//				+ "<"
+//				+ queryURI
+//				+ "> rdf:type core:School ;"
+//				+ " rdfs:label ?SchoolLabel ;"
+//				+ " core:hasSubOrganization ?Department ."
+//				+ " ?Department rdf:type core:Department; rdfs:label ?DepartmentLabel ;"
+//				+ " core:organizationForPosition ?Position .  "
+//				+ "	?Position rdf:type core:Position ;"
+//				+ " core:positionForPerson ?Person .  "
+//				+ "	?Person  core:authorInAuthorship ?Resource ;  "
+//				+ " rdfs:label ?PersonLabel .  "
+//				+ " ?Resource core:linkedInformationResource ?Document ."
+//				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+//				+ " ORDER BY ?DocumentLabel";
+//		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+//		return sparqlQuery;
+//
+//	}
 
 	public Entity getQueryResult() throws MalformedQueryParametersException {
 
