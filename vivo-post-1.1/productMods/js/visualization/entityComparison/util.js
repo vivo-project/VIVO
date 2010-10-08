@@ -7,18 +7,20 @@
  *            is the div that contains the main graph.
  */
 function init(graphContainer) {
-	
-	//TODO: make use of the id on the select field instead of a generic one.
-	$("#comparisonParameter").text("Total Number of " + $("select option:selected").val());
-	$('.yaxislabel').html("Number of " + $("select option:selected").val() + lotsofSpaceCharacters).mbFlipText(false);
+
+	// TODO: make use of the id on the select field instead of a generic one.
+	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
+	$('.yaxislabel').html("Number of " + $("select.comparisonValues option:selected").val()+ lotsofSpaceCharacters).mbFlipText(false);
+	$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
+	$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
 	
 	var defaultFlotOptions = {
-		xaxis : {
-			min : 1999,
-			max : 2019,
-			tickDecimals : 0,
-			tickSize : 2
-		}
+			xaxis : {
+		min : 1999,
+		max : 2019,
+		tickDecimals : 0,
+		tickSize : 2
+	}
 	};
 
 	/*
@@ -32,10 +34,10 @@ function init(graphContainer) {
 }
 
 /**
- * unStuffZerosFromLineGraphs removes the previously stuffed zero values. r is the current
- * data object. s is the current min and max {year} values. All the datapoints <
- * curr_min{year} && > > curr_max{year} are removed, so that they don't show up
- * on the graph
+ * unStuffZerosFromLineGraphs removes the previously stuffed zero values. r is
+ * the current data object. s is the current min and max {year} values. All the
+ * datapoints < curr_min{year} && > > curr_max{year} are removed, so that they
+ * don't show up on the graph
  * 
  * @param {Object}
  *            jsonObject
@@ -43,53 +45,56 @@ function init(graphContainer) {
  *            arrayOfMinAndMaxYears
  * @returns jsonObject with modified data points.
  */
-// TODO: Change all variable names to be informatively named. If I read _only_
-// the variable name, I should at least have a good idea what it is.
-// TODO: Write in the domain of the problem! (for variables, function names,
-// comments, etc...)
-function unStuffZerosFromLineGraphs(jsonObject, arrayOfMinAndMaxYears) {
 
-	var currentMinYear = arrayOfMinAndMaxYears[0], currentMaxYear = arrayOfMinAndMaxYears[1];
+//TODO: side-effect year.
+function unStuffZerosFromLineGraphs(jsonObject, year) {
 
-			$.each(jsonObject, function(key, val) {
+	calcZeroLessMinAndMax(jsonObject, year);
+	var currentMinYear = year.globalMin, currentMaxYear = year.globalMax;
+
+	$
+	.each(
+			jsonObject,
+			function(key, val) {
 				var i = 0;
-				for (i = 0; i < val.yearToPublicationCount.length; i++) {
-					if (((val.yearToPublicationCount[i][0] < currentMinYear) || (val.yearToPublicationCount[i][0] > currentMaxYear))
-							&& val.yearToPublicationCount[i][1] == 0) {
+				for (i = 0; i < val.data.length; i++) {
+					if (((val.data[i][0] < currentMinYear) || (val.data[i][0] > currentMaxYear))
+							&& val.data[i][1] == 0) {
 
-			val.yearToPublicationCount.splice(i, 1);
-			i--;
-					} else
+						val.data.splice(i, 1);
+						i--;
+					} else {
 						continue;
+					}
 				}
 			});
 }
 
 /**
- * while unStuffZerosFromLineGraphs is for a group of data objects, unStuffZerosFromLineGraph is for a
- * single data object. It removes zeroes from the single object passed as
- * parameter.
+ * while unStuffZerosFromLineGraphs is for a group of data objects,
+ * unStuffZerosFromLineGraph is for a single data object. It removes zeroes from
+ * the single object passed as parameter.
  * 
  * @param {Object}
  *            jsonObject
  */
 function unStuffZerosFromLineGraph(jsonObject) {
 	var i = 0;
-	for (i = 0; i < jsonObject.yearToPublicationCount.length; i++) {
-		if (jsonObject.yearToPublicationCount[i][1] == 0) {
-			jsonObject.yearToPublicationCount.splice(i, 1);
+	for (i = 0; i < jsonObject.data.length; i++) {
+		if (jsonObject.data[i][1] == 0) {
+			jsonObject.data.splice(i, 1);
 			i--;
 		}
 	}
 }
 
 /**
- * stuffZerosIntoLineGraphs is used to fill discontinuities in data points. For example, if a
- * linegraph has the following data points [1990, 2],[1992,3],[1994,
- * 5],[1996,5],[2000,4],[2001,1]. stuffZerosIntoLineGraphs inserts
- * [1991,0],[1993,0],1995,0]..and so on. It also inserts zeroes at the beginning
- * and the end if the max and min{year} of the current linegraph fall in between
- * the global max and min{year}
+ * stuffZerosIntoLineGraphs is used to fill discontinuities in data points. For
+ * example, if a linegraph has the following data points [1990,
+ * 2],[1992,3],[1994, 5],[1996,5],[2000,4],[2001,1]. stuffZerosIntoLineGraphs
+ * inserts [1991,0],[1993,0],1995,0]..and so on. It also inserts zeroes at the
+ * beginning and the end if the max and min{year} of the current linegraph fall
+ * in between the global max and min{year}
  * 
  * @param {Object}
  *            jsonObject
@@ -97,28 +102,34 @@ function unStuffZerosFromLineGraph(jsonObject) {
  *            arrayOfMinAndMaxYears
  * @returns jsonObject with stuffed data points.
  */
-function stuffZerosIntoLineGraphs(jsonObject, arrayOfMinAndMaxYears) {
+function stuffZerosIntoLineGraphs(jsonObject, year) {
 
-	$.each(jsonObject,function(key, val) {
-		var position = arrayOfMinAndMaxYears[0], i = 0;
+	calcZeroLessMinAndMax(jsonObject, year);
 
-		for (i = 0; i < (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1; i++) {
+	var arrayOfMinAndMaxYears = [ year.globalMin, year.globalMax ];
 
-			if (val.yearToPublicationCount[i]) {
+	$
+	.each(
+			jsonObject,
+			function(key, val) {
+				var position = arrayOfMinAndMaxYears[0], i = 0;
 
-				if (val.yearToPublicationCount[i][0] != position
-						&& position <= arrayOfMinAndMaxYears[1]) {
-	val.yearToPublicationCount.splice(i, 0,
-			[ position, 0 ]);
+				for (i = 0; i < (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1; i++) {
+
+					if (val.data[i]) {
+
+						if (val.data[i][0] != position
+								&& position <= arrayOfMinAndMaxYears[1]) {
+							val.data.splice(i, 0, [ position, 0 ]);
+						}
+					}
+
+					else {
+						val.data.push( [ position, 0 ]);
+					}
+					position++;
 				}
-			}
-
-			else {
-				val.yearToPublicationCount.push( [ position, 0 ]);
-			}
-			position++;
-		}
-	});
+			});
 }
 /**
  * During runtime, when the user checks/unchecks a checkbox, the zeroes have to
@@ -130,22 +141,22 @@ function stuffZerosIntoLineGraphs(jsonObject, arrayOfMinAndMaxYears) {
  *            jsonObject
  * @returns an array of current min and max years.
  */
-function calcZeroLessMinAndMax(jsonObject) {
+function calcZeroLessMinAndMax(jsonObject, year) {
 
 	var globalMinYear = 5000, globalMaxYear = 0, minYear, maxYear, i = 0;
 
 	$.each(jsonObject, function(key, val) {
 
-		for (i = 0; i < val.yearToPublicationCount.length; i++) {
-			if (val.yearToPublicationCount[i][1] != 0 ) {
-				minYear = val.yearToPublicationCount[i][0];
+		for (i = 0; i < val.data.length; i++) {
+			if (val.data[i][1] != 0) {
+				minYear = val.data[i][0];
 				break;
 			}
 		}
-		
-		for (i = val.yearToPublicationCount.length - 1; i >= 0; i--) {
-			if (val.yearToPublicationCount[i][1] != 0 && val.yearToPublicationCount[i][0] != -1) {
-				maxYear = val.yearToPublicationCount[i][0];
+
+		for (i = val.data.length - 1; i >= 0; i--) {
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				maxYear = val.data[i][0];
 				break;
 			}
 
@@ -154,10 +165,11 @@ function calcZeroLessMinAndMax(jsonObject) {
 			globalMinYear = minYear;
 		if (globalMaxYear < maxYear)
 			globalMaxYear = maxYear;
-		
+
 	});
 
-	return [ globalMinYear, globalMaxYear ];
+	year.globalMin = globalMinYear;
+	year.globalMax = globalMaxYear;
 }
 
 /**
@@ -168,19 +180,22 @@ function calcZeroLessMinAndMax(jsonObject) {
  *            jsonObject
  * @returns [minYear, maxYear]
  */
-function calcMinandMaxYears(jsonObject) {
+function calcMinandMaxYears(jsonObject, year) {
 	var minYear = 5000, maxYear = 0;
 	$.each(jsonObject, function(key, val) {
-		if (minYear > val.yearToPublicationCount[0][0]){
-			minYear = val.yearToPublicationCount[0][0];
+		if (minYear > val.data[0][0]) {
+			minYear = val.data[0][0];
 		}
-		if (maxYear < val.yearToPublicationCount[val.yearToPublicationCount.length - 1][0] && val.yearToPublicationCount[val.yearToPublicationCount.length - 1][0] != -1)
-			maxYear = val.yearToPublicationCount[val.yearToPublicationCount.length - 1][0];
-		else {
-			maxYear = val.yearToPublicationCount[val.yearToPublicationCount.length - 2][0];
+		if (maxYear < val.data[val.data.length - 1][0]
+		        && val.data[val.data.length - 1][0] != -1){
+			maxYear = val.data[val.data.length - 1][0];
+		}else {
+			maxYear = val.data[val.data.length - 2][0];
 		}
 	});
-	return [ minYear, maxYear ];
+
+	year.min = minYear;
+	year.max = maxYear;
 }
 
 /**
@@ -194,8 +209,8 @@ function calcMinandMaxYears(jsonObject) {
 function calcMaxOfComparisonParameter(jsonObject) {
 	var sum = 0, i = 0, maxCount = 0;
 	$.each(jsonObject, function(key, val) {
-		for (i = 0; i < val.yearToPublicationCount.length; i++)
-			sum += val.yearToPublicationCount[i][1];
+		for (i = 0; i < val.data.length; i++)
+			sum += val.data[i][1];
 
 		if (maxCount < sum)
 			maxCount = sum;
@@ -214,11 +229,14 @@ function calcMaxOfComparisonParameter(jsonObject) {
  *            jsonObject
  * @returns sum{values}.
  */
-function calcSum(jsonObject) {
-	var sum = 0, i = 0;
-	for (i = 0; i < jsonObject.yearToPublicationCount.length; i++)
-		sum += jsonObject.yearToPublicationCount[i][1];
+function calcSumOfComparisonParameter(jsonObject) {
 
+	var sum = 0, i = 0;
+	for (i = 0; i < jsonObject.data.length; i++) {
+		sum += jsonObject.data[i][1];
+	}
+
+	// sum += jsonObject.publicationCount;
 	return sum;
 }
 
@@ -247,7 +265,7 @@ function contains(objectArray, object) {
  *            yearRange
  */
 function setLineWidthAndTickSize(yearRange, flotOptions) {
-	
+
 	if (yearRange > 0 && yearRange < 15) {
 		flotOptions.series.lines.lineWidth = 4.5;
 		flotOptions.xaxis.tickSize = 1;
@@ -268,49 +286,80 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
  *            entityLabel
  */
 function createGraphic(entity, bottomDiv) {
-	
+
 	var parentP = $('<p>');
 	parentP.attr('id', slugify(entity.label));
-	
+
 	var labelDiv = $('<div>')
 	labelDiv.attr('id', 'label');
-	labelDiv.html('<a href="'+ getEntityURL(entity) +'"></a>');
-		
+	labelDiv.html('<a href="' + getEntityURL(entity) + '"></a>');
+	
+	var checkbox = $('<input>');
+	checkbox.attr('type','checkbox');
+	checkbox.attr('checked', true);
+	checkbox.attr('id','checkbox');
+	checkbox.attr('class', 'easyDeselectCheckbox');
+	checkbox.attr('value', entity.label);
+	
 	var hiddenLabel = $('<label>');
-	hiddenLabel.attr('class', 'school');
+	//hiddenLabel.attr('class', 'school');
 	hiddenLabel.attr('type', 'hidden');
 	hiddenLabel.attr('value', entity.label);
 
 	var barDiv = $('<div>');
 	barDiv.attr('id', 'bar');
-	
+
 	var numAttributeText = $('<span>');
 	numAttributeText.attr('id', 'text');
-	
+
+	parentP.append(checkbox);
 	parentP.append(labelDiv);
 	parentP.append(hiddenLabel);
 	parentP.append(barDiv);
 	parentP.append(numAttributeText);
-	
+
 	bottomDiv.children('p.displayCounter').after(parentP);
-		
+
 	return hiddenLabel;
 
 }
 
-function getEntityURL(entity){
+function getEntityURL(entity) {
 	
-	var path = "/vivo1/visualization?";
-	var visAndRenderMode = "vis=entity_comparison&render_mode=standalone&";
-	var visMode = "vis_mode="+entity.visMode + "&";
-	var uri = "uri="+entity.entityURI;
+	var result = '', path = '', uri = '';
 	
-	return (path + visAndRenderMode + visMode + uri);
+	if(entity.visMode == "PERSON"){
+		path = "/vivo1/individual?";
+		uri = "uri=" + entity.entityURI;
+		var home = "&home=1";
+		result = (path + uri + home);
+	}else{
+		path = "/vivo1/visualization?";
+		var visAndRenderMode = "vis=entity_comparison&render_mode=standalone&";
+		var visMode = "vis_mode=" + entity.visMode + "&";
+		uri = "uri=" + entity.entityURI;
+		result = (path + visAndRenderMode + visMode + uri);
+	}
+	return result;
 }
 
+function getVIVOProfileURL(given_uri) {
+	
+	finalURL = $.ajax({
+		url: contextPath + "/visualization",
+		data: ({vis: "utilities", vis_mode: "PROFILE_URL", uri: given_uri}),
+		dataType: "text",
+		async: false,
+		success:function(data){
+	}
+	}).responseText;
+
+	return finalURL;
+	
+}
 
 function slugify(textToBeSlugified) {
-    return textToBeSlugified.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
+	return textToBeSlugified.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-]/g, '').toLowerCase();
 }
 
 /**
@@ -323,48 +372,326 @@ function slugify(textToBeSlugified) {
  * @param {Object}
  *            checkbox
  * @param {Object}
- * 			  span           
+ *            span
  */
-function removeGraphic(pToBeRemovedIdentifier) {
+function removeGraphic(checkbox) {
 	
+	console.log("removeGraphic is called for "+$(checkbox).attr("value"));
+	var pToBeRemovedIdentifier = $(checkbox).attr("value");
 	$('p#' + slugify(pToBeRemovedIdentifier)).remove();
 	
+    $(checkbox).next('a').css("font-weight", "normal");
 }
 
 /**
- * These are the options passed to by $.pagination(). Basically they define
- * the items visible per page, number of navigation tabs, and number of edge navigation tabs.
+ * These are the options passed to by $.pagination(). Basically they define the
+ * items visible per page, number of navigation tabs, and number of edge
+ * navigation tabs.
+ * 
  * @param object
  * @param itemsPerPage
  * @param numberOfDisplayEntries
  * @param numOfEdgeEntries
  */
-function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries, numOfEdgeEntries){
-	 
+function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries,
+		numOfEdgeEntries) {
+
 	object = {
-			 items_per_page: itemsPerPage,
-			 num_display_entries: numberOfDisplayEntries,
-			 num_edge_entries: numOfEdgeEntries,
-			 prev_text: "Prev",
-			 next_text: "Next"
-	 };
+			items_per_page : itemsPerPage,
+			num_display_entries : numberOfDisplayEntries,
+			num_edge_entries : numOfEdgeEntries,
+			prev_text : "Prev",
+			next_text : "Next"
+	};
 }
 
 /**
- * function for removing "unknown" values (-1)
- * just before data plotting.
- * @jsonRecords the set of entities from which the unknowns
- *  have to be removed.
+ * function for removing "unknown" values (-1) just before data plotting.
+ * 
+ * @jsonRecords the set of entities from which the unknowns have to be removed.
  */
 function removeUnknowns(jsonRecords) {
 	var i = 0, j = 0;
+
 	while (j < jsonRecords.length) {
+
+		jsonRecords[j].unknownsValue = -1;
+
 		for (i = 0; i < jsonRecords[j].data.length; i++) {
 			if (jsonRecords[j].data[i][0] == -1) {
+				jsonRecords[j].unknownsValue = jsonRecords[j].data[i][1];
 				jsonRecords[j].data.splice(i, 1);
 				i--;
 			}
 		}
 		j++;
 	}
+}
+
+function insertBackUnknowns(jsonRecords) {
+	var i = 0, j = 0;
+
+	while (j < jsonRecords.length) {
+		if (jsonRecords[j].unknownsValue != -1) {
+			jsonRecords[j].data.push( [ -1, jsonRecords[j].unknownsValue ]);
+		}
+		j++;
+	}
+}
+
+/**
+ * function to get the next free color in the queue
+ * side-effecting entity here.
+ */
+function getNextFreeColor(entity){
+   
+	/* check freeColors is not empty and
+     * Remove the first element out of freeColors
+     */
+
+    if (contains(freeColors, prevColor[entity.label])) {
+        var index = contains(freeColors, prevColor[entity.label]);
+        colorToAssign = freeColors[index];
+        freeColors.splice(index, 1);
+    } else {
+        colorToAssign = freeColors.shift();
+    }    
+    /*
+     * use colorToAssign to plot the current linegraph
+     * also store it in colors
+     */
+    entity.color = colorToAssign;
+    colors[entity.label] = colorToAssign;
+}
+
+/**
+ * generate the corresponding bar (representing area under the linegraph)
+ * and label of the entity clicked
+ * @param entity
+ * @param divBar
+ * @param divLabel
+ * @return
+ */
+function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
+	
+	var sum = calcSumOfComparisonParameter(entity);
+	var normalizedWidth = getNormalizedWidth(entity, sum);
+	var checkboxValue = $(checkbox).attr("value");
+	
+	//append a div and modify its css
+    divBar.css("background-color", colorToAssign);
+    divBar.css("width", normalizedWidth);
+    divLabel.children("a").html(checkboxValue);
+    spanElement.text(sum);
+    checkbox.next('a').css("font-weight", "bold");
+
+}
+
+function getNormalizedWidth(entity, sum){
+	
+	 var maxValueOfComparisonParameter = calcMaxOfComparisonParameter(labelToEntityRecord);
+	 var normalizedWidth = 0;
+	 
+	 normalizedWidth = Math.floor(300 * (sum / maxValueOfComparisonParameter));
+	 
+	 return normalizedWidth;
+}
+
+function renderLineGraph(renderedObjects, entity){
+	
+    renderedObjects.push(entity);
+    stuffZerosIntoLineGraphs(renderedObjects, year);
+    
+}
+
+
+function removeUsedColor(entity){
+	
+    if (colors[entity.label]) {
+        colorToRemove = colors[entity.label];
+        prevColor[entity.label] = colorToRemove;
+        entity.color = "";
+    }
+    
+	//Insert it at the end of freeColors
+    freeColors.push(colorToRemove);
+}
+
+function removeEntityUnChecked(renderedObjects, entity){
+	
+	//remove the entity that is unchecked
+    var ii = 0;
+    while (ii < renderedObjects.length) {
+        if (renderedObjects[ii].label == entity.label) {
+            unStuffZerosFromLineGraph(renderedObjects[ii]);
+            renderedObjects.splice(ii, 1);
+        } else {
+        	ii++;
+            }             
+    }
+    unStuffZerosFromLineGraphs(renderedObjects, year);
+    
+}
+
+function createCheckBoxesInsidePaginatedDiv(pageIndex){
+	
+    var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);                
+    var newContent = ' ';
+    
+    /*
+     * Iterate through the list of school setOfLabels and build an HTML string
+     * Also check if some of the checkboxes are previously checked? If they are checked,
+     * then they should be on this time too!
+     */
+    for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
+        var checkedFlag = ' ', j = 0, fontWeight = ' ';
+        $.each(renderedObjects, function(){
+            if (renderedObjects[j].label == setOfLabels[i]) {
+                checkedFlag = "checked";
+            	fontWeight = " style='font-weight:bold;' ";
+            }
+            j++;                        
+        });
+        newContent += '<p><dt><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/dt><\/p>';        
+    }
+	               
+	// replace old content with new content
+    $('#searchresult').html(newContent);
+    populateMapOfCheckedEntities();
+
+}
+
+function populateMapOfCheckedEntities(){
+	var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
+	$.each(checkedEntities, function(index, val){
+		labelToCheckedEntities[$(val).attr("value")] = val;
+	});
+}
+
+function generateCheckBoxes(label, checkedFlag, fontFlag){
+	
+	var parentP = $('<p>');
+	
+	var dt = $('<dt>');
+	
+	var checkbox = $('<input>');
+	checkbox.attr('type','checkbox');
+	checkbox.attr('class','if_clicked_on_school');
+	checkbox.attr('value', label);
+	if(checkedFlag == 1){
+		checkbox.attr('checked');
+	}
+	
+	var a = $('<a/>');
+	if(fontFlag == 1){
+		a.css("font-weight", "bold");
+	}
+	a.html(label);
+	
+	parentP.append(dt);
+	parentP.append(checkbox);
+	parentP.append(a);
+	
+    return parentP;
+}
+
+function clearRenderedObjects(){
+	
+	$.each(labelToCheckedEntities, function(index, val){
+		if($(val).is(':checked')){
+			$(val).attr("checked", false);
+			removeUsedColor(labelToEntityRecord[$(val).attr("value")]);
+			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
+			removeGraphic(val);
+			displayLineGraphs();
+			console.log(index);
+		}
+	});
+	
+	labelToCheckedEntities = {};
+	updateCounter();
+
+}
+
+function updateCounter(){
+	//notification about the max items that can be clicked
+	$("#counter").text(renderedObjects.length);
+	if (freeColors.length == 0) {
+        $.jGrowl("Colors left: " + freeColors.length, {
+            life: 50
+        });
+    } 
+}
+
+function displayLineGraphs(){
+	//plot all we got
+    if (renderedObjects.length == 0) {
+    	init(graphContainer);
+    } else {
+    	removeUnknowns(renderedObjects);
+        $.plot(graphContainer, renderedObjects, FlotOptions);
+        insertBackUnknowns(renderedObjects);
+    }
+}
+
+function removeCheckBoxFromGlobalSet(checkbox){
+    //remove checkbox object from the globals
+	var value = $(checkbox).attr("value");
+	if(labelToCheckedEntities[value]){
+		delete labelToCheckedEntities[value];
+	}
+}
+
+function sortByParameterDesc(value1, value2){
+	var entity1 = labelToEntityRecord[value1];
+	var entity2 = labelToEntityRecord[value2];
+	
+	var sum1 = calcSumOfComparisonParameter(entity1);
+	var sum2 = calcSumOfComparisonParameter(entity2);
+	
+	return (sum2 - sum1);
+}
+
+function sortByParameterAsc(value1, value2){
+	var entity1 = labelToEntityRecord[value1];
+	var entity2 = labelToEntityRecord[value2];
+	
+	var sum1 = calcSumOfComparisonParameter(entity1);
+	var sum2 = calcSumOfComparisonParameter(entity2);
+	
+	return (sum1 - sum2);
+}
+
+function sortByEntityLabelDesc(value1, value2){
+	
+	var result;
+	
+	if(value1 > value2){
+		result = -1;
+	}else if(value1 < value2){
+		result = 1;
+	 }else {
+		 result = 0;
+	 }
+	return result;
+}
+
+function sortByEntityLabelAsc(value1, value2){
+	
+	var result;
+	
+	if (value1 > value2) {
+		result = 1;
+	} else if(value1 < value2) {
+		result = -1;
+	 } else {
+		 result = 0;
+	 }
+	return result;
+}
+
+function renderPaginatedDiv(){
+
+    //$("#entityTitleSortBy").trigger('click', "azdesc");          
+    paginationDiv.pagination(setOfLabels.length, paginationOptions);
 }

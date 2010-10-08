@@ -37,3 +37,11 @@
 <link href="${jgrowlStyle}" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" type="text/css" href="${vizStyle}" />
+
+<script language="JavaScript" type="text/javascript">
+<!--
+
+var contextPath = "${contextPath}";
+
+// -->
+</script>

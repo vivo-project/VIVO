@@ -18,6 +18,7 @@ h1 {
 
 h2 {
 	font-size: 1.1em;
+	margin-top: 10px;
 }
 
 h3 {
@@ -26,7 +27,7 @@ h3 {
 
 button{
 	margin-top: 30px;
-	margin-bottom: -40px;	
+	margin-bottom: -10px;	
 }
 
 .yaxislabel{
@@ -39,6 +40,11 @@ button{
 	margin-top: -5px;
 	margin-left: 250px;
 }
+
+#functions{
+	margin-top: 20px;
+	margin-bottom: -40px;	
+}
 #bar {
 	height: 20px;
 	float: left;
@@ -46,7 +52,9 @@ button{
 	width: 250px;
 	margin-left: 10px;
 }
-
+#checkbox{
+	float:left;	
+}
 #label {
 	float: left;
 	font-size: 12px;
@@ -70,7 +78,7 @@ button{
 	float: left;
 	margin-left: 5%;
 	width: 26%;
-	border: ridge #c8c8c8 4px;
+/*	border: ridge #c8c8c8 4px; */
 	padding-left: 12px;
 }
 
@@ -83,6 +91,7 @@ button{
 	color: black;
 	font-family: Helvetica;
 	font-size: 13px;
+	font-weight: normal;
 }
 
 #label a,#text {
@@ -101,5 +110,5 @@ button{
 }
 
 #heading {
-	margin-top: 50px;
+	margin-top: 65px;
 }

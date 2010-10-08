@@ -17,16 +17,35 @@ var colorConstantQueue =
        SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
        PURPLE
     ];
+
 var freeColors = [
                    TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
                    SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
                    PURPLE
                 ];
+
+var year = {
+		min: 1998,
+		max: 2018,
+		globalMin: 1995,
+		globalMax: 2025
+};
+
+var colors = {};
+var prevColor = {};
+var colorToAssign, colorToRemove;
+var renderedObjects = [];
+var labelToEntityRecord = {};
+var setOfLabels = [];
+var labelToCheckedEntities = {};
+
+var graphContainer;
+var paginationDiv;
+
 var lotsofSpaceCharacters = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-/*
- * options for jquery.plot
- */
+
+//options for Flot
 var FlotOptions = {
 		legend : {
 			show : false
@@ -46,17 +65,15 @@ var FlotOptions = {
 				lineWidth : 7
 			}
 		}
-	};
+};
 
 FlotOptions.colors = colorConstantQueue;
 
-/*
- * options for Pagination
- */
+//options for pagination
 var paginationOptions = {
 		items_per_page : 2,
 		num_display_entries : 3,
 		num_edge_entries : 2,
 		prev_text : "Prev",
 		next_text : "Next"
-	};
+};
