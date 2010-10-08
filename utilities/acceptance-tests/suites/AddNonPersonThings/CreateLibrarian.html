@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddOntology</title>
+<title>CreateLibrarian</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,11 +27,16 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddOntology</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CreateLibrarian</td></tr>
 </thead><tbody>
 <tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
-	<td class="comment">Add SWRC ontology</td>
+	<td class="comment">Create Librarian person</td>
 	<td></td>
 </tr>
 <tr>
@@ -86,58 +91,83 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to Ontology List</td>
+	<td class="comment">Navigate to add new individual page</td>
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>VClassURI</td>
+	<td>label=Librarian (core)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Ontology list</td>
+	<td>//input[@value='Add individual of this class']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontologies</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create a new Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Make sure SWRC does not already exist</td>
+	<td class="comment">Create a librarian individual</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>SWRC</td>
-	<td></td>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Lily</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Librarian</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add new ontology']</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontology Editing Form</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add SWRC</td>
+	<td class="comment">Make individual an Assistant Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>Name</td>
-	<td>SWRC</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>URI</td>
-	<td>http://swrc.ontoware.org/ontology</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Prefix</td>
-	<td>swrc</td>
+	<td>MonikerSelectAlt</td>
+	<td>Assistant Librarian</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -146,42 +176,47 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontology Control Panel</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that SWRC has been added</td>
+	<td class="comment">Verify that individual was added sucessfully</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>SWRC</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>http://swrc.ontoware.org/ontology#</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>swrc</td>
+	<td>Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='All Ontologies']</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontologies</td>
+	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>SWRC</td>
+	<td>Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian</td>
 	<td></td>
 </tr>
 <tr>

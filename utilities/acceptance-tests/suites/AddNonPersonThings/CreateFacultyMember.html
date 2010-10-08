@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddOntology</title>
+<title>CreateFacultyMember</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,11 +27,16 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddOntology</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CreateFacultyMember</td></tr>
 </thead><tbody>
 <tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
-	<td class="comment">Add SWRC ontology</td>
+	<td class="comment">Add a Faculty member named Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
@@ -46,7 +51,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
+	<td class="comment">Must be logged off to start</td>
 	<td></td>
 </tr>
 <tr>
@@ -61,7 +66,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
+	<td class="comment">Must login as the site admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,59 +90,74 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Ontology List</td>
+	<td>verifyTextPresent</td>
+	<td>Data Input</td>
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>VClassURI</td>
+	<td>label=Faculty Member (core)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Ontology list</td>
+	<td>//input[@value='Add individual of this class']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add Jane Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Jane</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Faculty</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontologies</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Make sure SWRC does not already exist</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>SWRC</td>
+	<td class="comment">Make Jane Faculty an Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add new ontology']</td>
+	<td>link=edit this individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontology Editing Form</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Add SWRC</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>Name</td>
-	<td>SWRC</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>URI</td>
-	<td>http://swrc.ontoware.org/ontology</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Prefix</td>
-	<td>swrc</td>
+	<td>MonikerSelectAlt</td>
+	<td>Assistant Professor</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -146,42 +166,22 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Ontology Control Panel</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that SWRC has been added</td>
+	<td class="comment">Verify that account was created</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>SWRC</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>http://swrc.ontoware.org/ontology#</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>swrc</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='All Ontologies']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Ontologies</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>SWRC</td>
+	<td>Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
