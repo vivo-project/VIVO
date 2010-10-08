@@ -7,6 +7,7 @@ Steps to Upgrade from Release 1 Version 1.1 to Release 1 Version 1.1.1
 
 This file provides a short description of the steps involved in upgrading your 
 installation of VIVO from Release 1 Version 1.1 to Release 1 Version 1.1.1.
+For upgrades from V1.0 to V1.1.1 please see the upgrade-1.1.txt file.
 This and other documentation can be found at:
 
 http://vivoweb.org/support
@@ -38,14 +39,6 @@ exceptions:
 * First-time login of the administrator account after the upgrade process is 
     complete will use the password previously set, NOT the default password used 
     on the first login after the initial installation.
-* The first time Apache Tomcat starts up after the upgrade, it will 
-    initiate a process that modifies the knowledge base to align the data 
-    with the revised ontology. See the section on "Ontology Upgrade"
-    below for  more information.
-* The first time Apache Tomcat starts up after the upgrade, it will 
-    initiate a process that modifies the uploaded files directory (images), to 
-    align the uploaded files with the revised file storage scheme. See the 
-    section on "File Storage Changes" below for more information.
          
 -------------------------------------------------------------------------------
 
