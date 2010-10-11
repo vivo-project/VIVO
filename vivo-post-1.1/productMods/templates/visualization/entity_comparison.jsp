@@ -28,16 +28,21 @@
 			<br/>
 			<input class="sort-by" type="radio" name="sort" value="parameterdesc" /> <span id="paramdesc"></span>
 			<input class="sort-by" type="radio" name="sort" value="parameterasc" /> <span id="paramasc"></span>
-			<button type ="button"> clear</button>
+			<button type ="button">clear</button>
 		</div>
+		<form method="get" autocomplete="off">
+			<div><h2>Search for the sub-entity.</h2>
+				<input type="text" value="" name="livesearch" id="livesearch" />
+			</div> 
+		</form>
 		<!-- pagination div is for the top navigating buttons 
 		TODO: change the wording to be generalized
 		-->
-		<h2 id="heading">Select sub entities to compare</h2>
+		<h2 id="heading">Select sub-entities to compare</h2>
 		<div id="pagination"></div>
 
 		<!-- #searchresult is for displaying individual objects from json object -->
-			<dl id="searchresult"></dl>
+			<ul id="searchresult"></ul>
 		</div>
 		<div id="rightblock"><span class="yaxislabel"></span>
 			<div id="graphContainer" style="width: 500px; height: 250px;"></div>
@@ -83,8 +88,11 @@
 			clearRenderedObjects();
 		});
 
-
-		
+		//Whenever the text receives focus, liveUpdate is called.
+//		$('#livesearch').liveUpdate('#searchresult').focus(); 
+		$('#livesearch').focus(function(){
+			$.fn.liveUpdate('#searchresult');
+		});
 
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
 			

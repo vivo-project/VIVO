@@ -552,7 +552,7 @@ function createCheckBoxesInsidePaginatedDiv(pageIndex){
             }
             j++;                        
         });
-        newContent += '<p><dt><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/dt><\/p>';        
+        newContent += '<li><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/li>';        
     }
 	               
 	// replace old content with new content
@@ -572,7 +572,7 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 	
 	var parentP = $('<p>');
 	
-	var dt = $('<dt>');
+	var li = $('<li>');
 	
 	var checkbox = $('<input>');
 	checkbox.attr('type','checkbox');
@@ -588,7 +588,7 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 	}
 	a.html(label);
 	
-	parentP.append(dt);
+	parentP.append(li);
 	parentP.append(checkbox);
 	parentP.append(a);
 	
@@ -695,3 +695,44 @@ function renderPaginatedDiv(){
     //$("#entityTitleSortBy").trigger('click', "azdesc");          
     paginationDiv.pagination(setOfLabels.length, paginationOptions);
 }
+
+
+//jQuery.fn.liveUpdate = function(list){
+//	
+//	list = jQuery(list);
+//
+//	if ( list.length ) {
+//		var rows = list.children('li').children('a'),
+//			cache = rows.map(function(){
+//				console.log($(this).text().toLowerCase());
+//				return $(this).text().toLowerCase();
+//			});
+//			
+//		list.keyup(filter).keyup().parents('form').submit(function(){
+//				return false;
+//			});
+//	}
+//		
+//	return this;
+//		
+//	function filter(){
+//		console.log('Inside filter()');
+//		var term = $.trim( $(this).val().toLowerCase() ), scores = [];
+//		
+//		if ( !term ) {
+//			rows.show();
+//		} else {
+//			rows.hide();
+//
+//			cache.each(function(i){
+//				var score = this.score(term);
+//				if (score > 0) { scores.push([score, i]); }
+//			});
+//
+//			jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
+//				jQuery(rows[ $(this[1]) ]).show();
+//			});
+//		}
+//	}
+//};
+

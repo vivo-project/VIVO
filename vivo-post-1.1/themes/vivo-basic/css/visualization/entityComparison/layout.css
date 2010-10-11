@@ -19,6 +19,7 @@ h1 {
 h2 {
 	font-size: 1.1em;
 	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
 h3 {
@@ -26,10 +27,14 @@ h3 {
 }
 
 button{
-	margin-top: 30px;
-	margin-bottom: -10px;	
+	margin-top: 10px;
+/*	margin-bottom: -10px;	*/
 }
 
+form{
+	margin-top:70px;
+	margin-bottom: -50px;	
+}
 .yaxislabel{
 	margin-left: 32px;
 	font-size: 12px;
@@ -85,7 +90,6 @@ button{
 #text {
 	margin-left: 5px;
 }
-
 #searchresult a {
 	text-decoration: none;
 	color: black;
@@ -111,4 +115,9 @@ button{
 
 #heading {
 	margin-top: 65px;
+}
+
+li{
+	padding: 5px;
+	list-style: none;
 }
