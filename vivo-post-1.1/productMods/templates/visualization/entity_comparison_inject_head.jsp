@@ -23,6 +23,10 @@
 <c:url var="paginationStyle" value="/js/jquery_plugins/pagination/pagination.css" />
 <c:url var="jgrowlStyle" value="/js/jquery_plugins/jgrowl/jquery.jgrowl.css" />
 
+<!-- css related to dataTable js files. -->
+<c:url var="demopage" value="/js/jquery_plugins/datatable/demo_page.css" />
+<c:url var="demoTable" value="/js/jquery_plugins/datatable/demo_table.css" />
+
 <c:url var="entityComparisonStyle" value="/${themeDir}css/visualization/entityComparison/layout.css" />
 <c:url var="vizStyle" value="/${themeDir}css/visualization/visualization.css" />
 
@@ -42,6 +46,9 @@
 <link href="${entityComparisonStyle}" rel="stylesheet" type="text/css" />
 <link href="${paginationStyle}" rel="stylesheet" type="text/css" />
 <link href="${jgrowlStyle}" rel="stylesheet" type="text/css" />
+<link href="${demopage}" rel="stylesheet" type="text/css" />
+<link href="${demoTable}" rel="stylesheet" type="text/css" />
+
 
 <link rel="stylesheet" type="text/css" href="${vizStyle}" />
 
