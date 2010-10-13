@@ -12,6 +12,8 @@
 <c:url var="jgrowl" value="/js/jquery_plugins/jgrowl/jquery.jgrowl.js"/>
 <c:url var="pagination" value="/js/jquery_plugins/pagination/jquery.pagination.js"/>
 <c:url var="livesearch" value="/js/jquery_plugins/jquery.livesearch.js"/>
+<c:url var="datatable" value="/js/jquery_plugins/datatable/jquery.dataTables.js"/>
+
 
 
 <c:url var="entityComparisonUtils" value="/js/visualization/entityComparison/util.js" />
@@ -32,6 +34,7 @@
 <script type="text/javascript" src="${jgrowl}"></script>
 <script type="text/javascript" src="${pagination}"></script>
 <script type="text/javascript" src="${livesearch}"></script>
+<script type="text/javascript" src="${datatable}"></script>
 <script type="text/javascript" src="${entityComparisonUtils}"></script>
 <script type="text/javascript" src="${entityComparisonConstants}"></script>
 

@@ -697,42 +697,169 @@ function renderPaginatedDiv(){
 }
 
 
-//jQuery.fn.liveUpdate = function(list){
-//	
-//	list = jQuery(list);
-//
-//	if ( list.length ) {
-//		var rows = list.children('li').children('a'),
-//			cache = rows.map(function(){
-//				console.log($(this).text().toLowerCase());
-//				return $(this).text().toLowerCase();
-//			});
-//			
-//		list.keyup(filter).keyup().parents('form').submit(function(){
-//				return false;
-//			});
-//	}
-//		
-//	return this;
-//		
-//	function filter(){
-//		console.log('Inside filter()');
-//		var term = $.trim( $(this).val().toLowerCase() ), scores = [];
-//		
-//		if ( !term ) {
-//			rows.show();
-//		} else {
-//			rows.hide();
-//
-//			cache.each(function(i){
-//				var score = this.score(term);
-//				if (score > 0) { scores.push([score, i]); }
-//			});
-//
-//			jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
-//				jQuery(rows[ $(this[1]) ]).show();
-//			});
-//		}
-//	}
-//};
+jQuery.fn.liveUpdate = function(list){
+	
+	  list = jQuery(list);
+	
+	  if ( list.length ) {
+	    var rows = list.children('li');	    
+	    var cache = rows.map(function(){
+	    	  console.log($(this).children('a').text().toLowerCase());
+	        return $(this).children('a').text().toLowerCase();
+	      });
+	    
+	    console.log("rows: ", rows , " cache: ", cache);
+	     
+	    this.keyup(filter).keyup().parents('form').submit(function(){
+	        return false;
+	      });
+	  }
+	   
+	  return this;
+	   
+	  function filter(){
+		  
+	    var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
+	    console.log("this: ",this, " term: " +term);
+	    
+	    if ( !term ) {
+	      rows.show();
+	    } else {
+	      rows.hide();
+	      cache.each(function(i){
+	    	 var score = this.score(term);
+	    	 if (score > 0) { 
+	        	scores.push([score, i]); 
+	         }
+	      });
+
+	      jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
+	        jQuery(rows[ this[1] ]).show();
+		      console.log("showing : ", ($(rows[this[1]]).children('a').text()));
+	      });
+	    }
+	  }
+	};
+
+function prepareTableForDataTablePagination(jsonData){
+	
+	var table = $('<table>');
+	table.attr('cellpadding', '0');
+	table.attr('cellspacing', '0');
+	table.attr('border', '0');
+	table.attr('id', 'datatable');
+	
+	var thead = $('<thead>');
+	var tr = $('<tr>');
+	
+	var checkboxTH = $('<th>');
+	checkboxTH.html(' ');
+	
+	var entityLabelTH = $('<th>');
+	entityLabelTH.html('Entity Label');
+	
+	var publicationCountTH = $('<th>');
+	publicationCountTH.html('Publication Count');
+
+	var entityTypeTH = $('<th>');
+	entityTypeTH.html('Entity Type');
+
+	tr.append(checkboxTH);
+	tr.append(entityLabelTH);
+	tr.append(publicationCountTH);
+	tr.append(entityTypeTH);
+	
+	thead.append(tr);
+	
+	table.append(thead);
+	
+	var tbody = $('<tbody>');
+	
+	$.each(labelToEntityRecord, function(index, val){
+		var row = $('<tr>'); 
+		
+		var checkboxTD = $('<td>');
+		checkboxTD.html('<input type="checkbox" class="if_clicked_on_school" value="' + index + '"'+'/>');
+		
+		var labelTD =  $('<td>');
+		labelTD.html(index);
+		
+		var publicationCountTD =  $('<td>');
+		publicationCountTD.html(calcSumOfComparisonParameter(val));
+		
+		var entityTypeTD =  $('<td>');
+		entityTypeTD.html(val.visMode);
+		
+		row.append(checkboxTD);
+		row.append(labelTD);
+		row.append(publicationCountTD);
+		row.append(entityTypeTD);
+		
+		tbody.append(row);
+	});
+	
+	table.append(tbody);
+	tableDiv.append(table);
+	
+	$('#datatable').dataTable();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

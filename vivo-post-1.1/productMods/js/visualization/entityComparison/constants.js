@@ -41,6 +41,7 @@ var labelToCheckedEntities = {};
 
 var graphContainer;
 var paginationDiv;
+var tableDiv;
 
 var lotsofSpaceCharacters = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";

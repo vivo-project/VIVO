@@ -1,5 +1,5 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
-
+<script type="text/javascript" src="http://orderedlist.com/demos/quicksilverjs/javascripts/quicksilver.js"></script>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
@@ -7,9 +7,7 @@
 <c:set var="themeDir">
 	<c:out value="${portalBean.themeDir}" />
 </c:set>
-
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
-
 <div id="body">
 	<h1>Temporal Graph Visualization</h1>
 	<div id="leftblock">
@@ -30,19 +28,18 @@
 			<input class="sort-by" type="radio" name="sort" value="parameterasc" /> <span id="paramasc"></span>
 			<button type ="button">clear</button>
 		</div>
-		<form method="get" autocomplete="off">
+<!-- 		<form method="get" autocomplete="off">
 			<div><h2>Search for the sub-entity.</h2>
 				<input type="text" value="" name="livesearch" id="livesearch" />
 			</div> 
 		</form>
-		<!-- pagination div is for the top navigating buttons 
-		TODO: change the wording to be generalized
-		-->
+ -->		
 		<h2 id="heading">Select sub-entities to compare</h2>
-		<div id="pagination"></div>
-
-		<!-- #searchresult is for displaying individual objects from json object -->
+<!-- 		<div id="pagination"></div>
 			<ul id="searchresult"></ul>
+ -->			
+		<div id="paginatedTable">
+		</div>	
 		</div>
 		<div id="rightblock"><span class="yaxislabel"></span>
 			<div id="graphContainer" style="width: 500px; height: 250px;"></div>
@@ -52,8 +49,7 @@
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
 			id="total">10</span> sub-entities to compare.</p>
 			</div>
-		</div>
-		
+		</div>		
 </div>
 <script type="text/javascript">
 	
@@ -67,6 +63,7 @@
 			};
 		paginationDiv = $("#pagination");
 		graphContainer = $("#graphContainer");
+		tableDiv = $('#paginatedTable');
  		// initial display of the grid when the page loads
  		init(graphContainer);
 		
@@ -89,10 +86,10 @@
 		});
 
 		//Whenever the text receives focus, liveUpdate is called.
-//		$('#livesearch').liveUpdate('#searchresult').focus(); 
-		$('#livesearch').focus(function(){
+		//$('#livesearch').liveUpdate('#searchresult').focus(); 
+		/*$('#livesearch').focus(function(){
 			$.fn.liveUpdate('#searchresult');
-		});
+		});*/
 
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
 			
@@ -156,6 +153,8 @@
                 setOfLabels.push(val.label);
                 labelToEntityRecord[val.label] = val;
             });
+
+			prepareTableForDataTablePagination(jsonData);
 			
             calcMinandMaxYears(labelToEntityRecord, year);
 			yearRange = (year.max - year.min);
@@ -219,6 +218,8 @@
 	
 			renderPaginatedDiv();
         }
+
+        $('#livesearch').liveUpdate('#searchresult').focus(); 
 
 	});
 	
