@@ -29,18 +29,19 @@ h3 {
 button{
 	margin-top: 10px;
 /*	margin-bottom: -10px;	*/
+	float:right;
 }
 
 form{
 	margin-top:70px;
 	margin-bottom: -50px;	
 }
-.yaxislabel{
-	margin-left: 32px;
+#yaxislabel{
 	font-size: 12px;
-	margin-right: -5px;
+	float:right;
 }
-.xaxislabel{
+
+#xaxislabel{
 	font-size: 12px;
 	margin-top: -5px;
 	margin-left: 250px;
@@ -82,9 +83,7 @@ form{
 #leftblock {
 	float: left;
 	margin-left: 5%;
-	width: 26%;
-/*	border: ridge #c8c8c8 4px; */
-	padding-left: 12px;
+	width: 36%;
 }
 
 #text {
@@ -106,7 +105,9 @@ form{
 }
 
 #rightblock {
-	margin-right: 8%;
+	float:right;
+	margin-right:5%;
+	width:54%;
 }
 
 #counter,#total {
@@ -114,7 +115,7 @@ form{
 }
 
 #heading {
-	margin-top: 65px;
+	margin-top: 10px;
 }
 
 li{
@@ -123,4 +124,10 @@ li{
 }
 
 #paginatedTable{
+	margin-top: 10px;
+}
+
+.sDomSearchBar{
+	margin-bottom: 10px;
+	margin-left: 41%;
 }

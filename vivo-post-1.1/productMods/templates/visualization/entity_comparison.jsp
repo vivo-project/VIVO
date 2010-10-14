@@ -20,14 +20,13 @@
 			<option value="Item5">Item5</option>
 		</select>
 		<br/>
-		<div id="functions">
-			<input id="entityTitleSortBy" class="sort-by" type="radio" name="sort" value="azdesc"/> <span> Entity(desc)</span>
-			<input class="sort-by" type="radio" name="sort" value="azasc"/> <span> Entity(asc)</span>
-			<br/>
-			<input class="sort-by" type="radio" name="sort" value="parameterdesc" /> <span id="paramdesc"></span>
-			<input class="sort-by" type="radio" name="sort" value="parameterasc" /> <span id="paramasc"></span>
-			<button type ="button">clear</button>
-		</div>
+<!--		<div id="functions">-->
+<!--			<input id="entityTitleSortBy" class="sort-by" type="radio" name="sort" value="azdesc"/> <span> Entity(desc)</span>-->
+<!--			<input class="sort-by" type="radio" name="sort" value="azasc"/> <span> Entity(asc)</span>-->
+<!--			<br/>-->
+<!--			<input class="sort-by" type="radio" name="sort" value="parameterdesc" /> <span id="paramdesc"></span>-->
+<!--			<input class="sort-by" type="radio" name="sort" value="parameterasc" /> <span id="paramasc"></span>-->
+<!--		</div>-->
 <!-- 		<form method="get" autocomplete="off">
 			<div><h2>Search for the sub-entity.</h2>
 				<input type="text" value="" name="livesearch" id="livesearch" />
@@ -40,14 +39,17 @@
  -->			
 		<div id="paginatedTable">
 		</div>	
-		</div>
-		<div id="rightblock"><span class="yaxislabel"></span>
-			<div id="graphContainer" style="width: 500px; height: 250px;"></div>
-			<div id="bottom" style="width: 525px;">
-				<div class="xaxislabel">Year</div>
+	</div>
+		<div id="rightblock">
+			<div id="graphContainer" style="width: 450px; height: 250px;"></div>
+			<div id="yaxislabel"></div>
+			<div id="bottom" style="width: 450px;">
+				<div id="xaxislabel">Year</div>
+				<button type ="button">clear</button>
 				<h3><span id="comparisonParameter"></span></h3>
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
 			id="total">10</span> sub-entities to compare.</p>
+
 			</div>
 		</div>		
 </div>
@@ -74,7 +76,7 @@
         $("select.comparisonValues").click(function(){
             var selectedValue = $("select.comparisonValues option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
-			$('.yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
+			$('#yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
 			$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
 			$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
         });

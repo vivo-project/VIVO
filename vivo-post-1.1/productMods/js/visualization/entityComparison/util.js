@@ -10,7 +10,7 @@ function init(graphContainer) {
 
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
-	$('.yaxislabel').html("Number of " + $("select.comparisonValues option:selected").val()+ lotsofSpaceCharacters).mbFlipText(false);
+	$('#yaxislabel').html("Number of " + $("select.comparisonValues option:selected").val()+ lotsofSpaceCharacters).mbFlipText(false);
 	$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
 	$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
 	
@@ -492,7 +492,7 @@ function getNormalizedWidth(entity, sum){
 	 var maxValueOfComparisonParameter = calcMaxOfComparisonParameter(labelToEntityRecord);
 	 var normalizedWidth = 0;
 	 
-	 normalizedWidth = Math.floor(300 * (sum / maxValueOfComparisonParameter));
+	 normalizedWidth = Math.floor(225 * (sum / maxValueOfComparisonParameter));
 	 
 	 return normalizedWidth;
 }
@@ -741,6 +741,11 @@ jQuery.fn.liveUpdate = function(list){
 	  }
 	};
 
+/*
+ * function to create a table to be 
+ * used by jquery.dataTables. The JsonObject 
+ * returned is used to populate the pagination table.
+ */	
 function prepareTableForDataTablePagination(jsonData){
 	
 	var table = $('<table>');
@@ -801,65 +806,10 @@ function prepareTableForDataTablePagination(jsonData){
 	table.append(tbody);
 	tableDiv.append(table);
 	
-	$('#datatable').dataTable();
+	$('#datatable').dataTable({
+		"sDom": '<"sDomSearchBar"f>tl'
+//		"bLengthChange": false,
+//		"bAutoWidth": false
+	});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
