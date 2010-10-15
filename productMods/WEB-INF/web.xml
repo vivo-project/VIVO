@@ -104,10 +104,11 @@
   <!-- See documentation for details. -->
   <!-- If used, must be run after JenaDataSourceSetup -->
 
+<!--
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.PelletReasonerSetup</listener-class>
   </listener>
-
+-->
 
   <!-- The followng listener records all edit changes, in reified form, to another database model -->
   <!-- still at an experimental stage -->
