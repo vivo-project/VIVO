@@ -39,6 +39,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	static String SUBORGANISATION_TYPE_LABEL;
 	public static Map<String, Integer> subOrganizationTypesToCount = new HashMap<String, Integer>();
 	public static Set<String> stopWords = new HashSet<String>();
+	public static Set<String> subOrganizations = new HashSet<String>();
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
 		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
@@ -137,6 +138,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
 					updateSubOrganizationTypesToCount(subOrganizationType.toString());
+					subOrganizations.add(subOrganizationLabel.toString());
 				}
 			}else{
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
@@ -144,6 +146,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 					subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
 					updateSubOrganizationTypesToCount(subOrganizationType.toString());
+					subOrganizations.add(subOrganizationLabel.toString());
 				}
 			}
 		}
@@ -168,7 +171,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 		int count = 0;
 		if(subOrganizationTypesToCount.containsKey(typeLabel)){
 			count = subOrganizationTypesToCount.get(typeLabel);
-			subOrganizationTypesToCount.put(typeLabel, count++);
+			subOrganizationTypesToCount.put(typeLabel, ++count);
 		}else{
 			subOrganizationTypesToCount.put(typeLabel, 1);
 		}
