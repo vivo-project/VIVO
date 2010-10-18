@@ -55,6 +55,9 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 		this.dataSource = dataSource;
 		this.log = log;
 		this.visMode = visMode;
+		stopWords.clear();
+		subOrganizations.clear();
+		subOrganizationTypesToCount.clear();
 	}
 	
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
@@ -161,7 +164,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 		System.out.println("Inside collectStopWords \n-----------------------------\n");
 		for(Map.Entry<String, Integer> typesCount : subOrganizationTypesToCount.entrySet()){
 			System.out.println(typesCount.getKey() + ": "+ typesCount.getValue());
-			if(typesCount.getValue() == subOrganizations.size()){
+			if(typesCount.getValue() >= subOrganizations.size()){
 				stopWords.add(typesCount.getKey());
 			}
 		}
