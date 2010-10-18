@@ -11,8 +11,6 @@
 
 	<bean id="person_pub_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler" />
-	<bean id="college_pub_count"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.CollegePublicationCountRequestHandler" />
 	<bean id="coauthorship"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler" />
 	<bean id="person_level"
@@ -29,9 +27,6 @@
 			<map>
 				<entry key="person_pub_count">
 					<ref bean="person_pub_count"></ref>
-				</entry>
-				<entry key="college_pub_count">
-					<ref bean="college_pub_count"></ref>
 				</entry>
 				<entry key="coauthorship">
 					<ref bean="coauthorship"></ref>
