@@ -14,10 +14,10 @@
 		<h2>How do you want to compare?</h2>
 		<select class="comparisonValues">
 			<option value="Publications" selected="selected">Publications</option>
-			<option value="Grants">Grants</option>
-			<option value="People">People</option>
-			<option value="Item4">Item4</option>
-			<option value="Item5">Item5</option>
+			<option value="Grants" disabled="disabled">Grants</option>
+			<option value="People" disabled="disabled">People</option>
+			<option value="Item4" disabled="disabled">Item4</option>
+			<option value="Item5" disabled="disabled">Item5</option>
 		</select>
 		<br/>
 <!--		<div id="functions">-->

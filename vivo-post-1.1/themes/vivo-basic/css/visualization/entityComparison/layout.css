@@ -131,3 +131,7 @@ li{
 	margin-bottom: 10px;
 	margin-left: 41%;
 }
+
+.datatablerowhighlight {
+background-color: #ECFFB3 !important;
+}

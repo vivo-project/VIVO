@@ -807,7 +807,12 @@ function prepareTableForDataTablePagination(jsonData){
 	tableDiv.append(table);
 	
 	$('#datatable').dataTable({
-		"sDom": '<f>tl'
+		"sDom": '<f>tl',
+		"fnDrawCallback": function(){
+	      $('td').bind('mouseenter', function () { $(this).parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
+	      $('td').bind('mouseleave', function () { $(this).parent().children().each(function(){$(this).removeClass('datatablerowhighlight');}); });
+	}
+
 //		"bLengthChange": false,
 //		"bAutoWidth": false
 	});
