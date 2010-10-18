@@ -17,6 +17,14 @@ public class JsonObject {
 	private String visMode;
 	private List<String> organizationType = new ArrayList<String>();
 	
+	public List<String> getOrganizationType() {
+		return organizationType;
+	}
+
+	public void setOrganizationType(List<String> organizationType) {
+		this.organizationType = organizationType;
+	}
+
 	public String getEntityURI() {
 		return entityURI;
 	}
