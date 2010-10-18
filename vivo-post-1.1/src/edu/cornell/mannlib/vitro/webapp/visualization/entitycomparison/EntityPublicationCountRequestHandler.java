@@ -68,7 +68,7 @@ public class EntityPublicationCountRequestHandler implements
 				+ "\nVis Containter: " + visContainer);
 
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-				entityURI, dataSource, log, ENTITY_VIS_MODE);
+				entityURI, dataSource, log, ENTITY_VIS_MODE);		
 
 		try {
 			Entity entity = queryManager.getQueryResult();
@@ -120,6 +120,21 @@ public class EntityPublicationCountRequestHandler implements
 //					System.out.println(school.getIndividualLabel());
 //
 //				}
+			}
+			
+			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+					entityURI, dataSource, log);
+			
+			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
+			
+			System.out.println("Sub Organization Types With Their Labels \n------------------");
+			
+			for(String label: subOrganizationTypesResult.keySet()){
+				System.out.println("Label :"+ label);
+				for(String type : subOrganizationTypesResult.get(label)){
+					System.out.println("type: "+ type);
+				}
+				System.out.println();
 			}
 
 			RequestDispatcher requestDispatcher = null;
