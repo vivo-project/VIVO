@@ -793,7 +793,7 @@ function prepareTableForDataTablePagination(jsonData){
 		publicationCountTD.html(calcSumOfComparisonParameter(val));
 		
 		var entityTypeTD =  $('<td>');
-		entityTypeTD.html(val.visMode);
+		entityTypeTD.html(val.organizationType.join(", "));
 		
 		row.append(checkboxTD);
 		row.append(labelTD);
@@ -807,7 +807,7 @@ function prepareTableForDataTablePagination(jsonData){
 	tableDiv.append(table);
 	
 	$('#datatable').dataTable({
-		"sDom": '<"sDomSearchBar"f>tl'
+		"sDom": '<f>tl'
 //		"bLengthChange": false,
 //		"bAutoWidth": false
 	});
