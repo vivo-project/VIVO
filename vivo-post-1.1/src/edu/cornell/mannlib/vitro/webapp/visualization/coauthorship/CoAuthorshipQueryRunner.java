@@ -33,7 +33,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
+//import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 
@@ -51,8 +51,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String egoURI;
-	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
-			new HashMap<String, VivoCollegeOrSchool>();
+//	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
+//			new HashMap<String, VivoCollegeOrSchool>();
 	
 	private DataSource dataSource;
 
@@ -356,9 +356,9 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			
 	}
 
-	public Map<String, VivoCollegeOrSchool> getCollegeURLToVO() {
-		return collegeURLToVO;
-	}
+//	public Map<String, VivoCollegeOrSchool> getCollegeURLToVO() {
+//		return collegeURLToVO;
+//	}
 
 	private BiboDocument createDocumentVO(QuerySolution solution, String documentURL) {
 
