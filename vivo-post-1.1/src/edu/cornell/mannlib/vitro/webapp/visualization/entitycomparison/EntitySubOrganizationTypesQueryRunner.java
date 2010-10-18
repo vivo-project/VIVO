@@ -155,9 +155,10 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 
 	
 	private void collectStopWords() {
+		System.out.println("Inside collectStopWords \n-----------------------------\n");
 		for(Map.Entry<String, Integer> typesCount : subOrganizationTypesToCount.entrySet()){
+			System.out.println(typesCount.getKey() + ": "+ typesCount.getValue());
 			if(typesCount.getValue() == subOrganizationTypesToCount.size()){
-				System.out.println(typesCount.getKey() + ": "+ typesCount.getValue());
 				stopWords.add(typesCount.getKey());
 			}
 		}
