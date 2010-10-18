@@ -1,6 +1,6 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
-<script type="text/javascript" src="http://orderedlist.com/demos/quicksilverjs/javascripts/quicksilver.js"></script>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
+<!--<script type="text/javascript" src="http://orderedlist.com/demos/quicksilverjs/javascripts/quicksilver.js"></script>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>-->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="portalBean" value="${requestScope.portalBean}" />
@@ -38,6 +38,9 @@
 			<ul id="searchresult"></ul>
  -->			
 		<div id="paginatedTable">
+		</div>
+		<div id = "stopwordsdiv">
+			* The entity types core:Person, foaf:Organization have been excluded as they are too general.
 		</div>	
 	</div>
 		<div id="rightblock">

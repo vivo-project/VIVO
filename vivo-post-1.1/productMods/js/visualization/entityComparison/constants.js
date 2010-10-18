@@ -38,6 +38,7 @@ var renderedObjects = [];
 var labelToEntityRecord = {};
 var setOfLabels = [];
 var labelToCheckedEntities = {};
+var stopWordsToCount = {};
 
 var graphContainer;
 var paginationDiv;

@@ -44,6 +44,7 @@ public class EntityPublicationCountRequestHandler implements
 	public static String ENTITY_VIS_MODE;
 	public static String SUB_ENTITY_VIS_MODE;
 
+
 	@SuppressWarnings("null")
 	public void generateVisualization(VitroRequest vitroRequest,
 			HttpServletRequest request, HttpServletResponse response, Log log,

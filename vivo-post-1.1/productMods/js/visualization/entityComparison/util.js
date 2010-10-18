@@ -748,6 +748,7 @@ jQuery.fn.liveUpdate = function(list){
  */	
 function prepareTableForDataTablePagination(jsonData){
 	
+	resetStopWordCount();
 	var table = $('<table>');
 	table.attr('cellpadding', '0');
 	table.attr('cellspacing', '0');
@@ -781,6 +782,7 @@ function prepareTableForDataTablePagination(jsonData){
 	var tbody = $('<tbody>');
 	
 	$.each(labelToEntityRecord, function(index, val){
+		var entityTypesWithoutStopWords = removeStopWords(val);
 		var row = $('<tr>'); 
 		
 		var checkboxTD = $('<td>');
@@ -793,7 +795,8 @@ function prepareTableForDataTablePagination(jsonData){
 		publicationCountTD.html(calcSumOfComparisonParameter(val));
 		
 		var entityTypeTD =  $('<td>');
-		entityTypeTD.html(val.organizationType.join(", "));
+		//entityTypeTD.html(val.organizationType.join(", "));
+		entityTypeTD.html(entityTypesWithoutStopWords);
 		
 		row.append(checkboxTD);
 		row.append(labelTD);
@@ -818,3 +821,22 @@ function prepareTableForDataTablePagination(jsonData){
 	});
 }
 
+function resetStopWordCount(){
+	stopWordsToCount["Person"] = 0;
+	stopWordsToCount["Organization"] = 0;
+}
+
+function removeStopWords(val){
+	var typeStringWithoutStopWords = "";
+	$.each(val.organizationType, function(index, value){
+		if(value == "Person"){
+			stopWordsToCount["Person"]++;
+		}else if(value == "Organization"){
+			stopWordsToCount["Organization"]++;
+		}else{
+			typeStringWithoutStopWords += ', '+ value; 
+		}
+	});
+	console.log(stopWordsToCount["Person"],stopWordsToCount["Organization"]);
+	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
+}

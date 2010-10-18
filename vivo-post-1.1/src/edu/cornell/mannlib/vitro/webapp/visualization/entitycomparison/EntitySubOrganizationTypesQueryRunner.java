@@ -40,6 +40,12 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	public static Map<String, Integer> subOrganizationTypesToCount = new HashMap<String, Integer>();
 	public static Set<String> stopWords = new HashSet<String>();
 	public static Set<String> subOrganizations = new HashSet<String>();
+	public static Set<String> STOP_WORDS = new HashSet<String>() {
+		{
+			add("Person");
+			add("Organization");
+		}
+	};
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
 		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
