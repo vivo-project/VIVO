@@ -33,8 +33,8 @@
 			</div> 
 		</form>
  -->		
-		<h2 id="heading">Select sub-entities to compare</h2>
-<!-- 		<div id="pagination"></div>
+<!-- 		<h2 id="heading">Select sub-entities to compare</h2>
+		<div id="pagination"></div>
 			<ul id="searchresult"></ul>
  -->			
 		<div id="paginatedTable">
