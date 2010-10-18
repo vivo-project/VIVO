@@ -136,14 +136,14 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
-					updateSubOrganizationTypesToCount(subOrganizationLabel.toString());
+					updateSubOrganizationTypesToCount(subOrganizationType.toString());
 				}
 			}else{
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
-					updateSubOrganizationTypesToCount(subOrganizationLabel.toString());
+					updateSubOrganizationTypesToCount(subOrganizationType.toString());
 				}
 			}
 		}
