@@ -123,7 +123,7 @@ public class EntityPublicationCountRequestHandler implements
 			}
 			
 			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-					entityURI, dataSource, log);
+					entityURI, dataSource, log, ENTITY_VIS_MODE);
 			
 			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
 			

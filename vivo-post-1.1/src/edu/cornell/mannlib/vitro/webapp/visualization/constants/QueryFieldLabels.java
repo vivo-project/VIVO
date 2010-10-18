@@ -64,6 +64,8 @@ public class QueryFieldLabels {
 	 */
 	public static final String PERSON_URL = "personLit";
 	public static final String PERSON_LABEL = "personLabelLit";
+	public static final String PERSON_TYPE = "personTypeLit";
+	public static final String PERSON_TYPE_LABEL = "personTypeLabelLit";
 	
 	
 	/*
