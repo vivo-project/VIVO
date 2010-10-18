@@ -65,17 +65,17 @@ public class QueryFieldLabels {
 	public static final String PERSON_URL = "personLit";
 	public static final String PERSON_LABEL = "personLabelLit";
 	
-//	/*
-//	 * University related field Labels
-//	 */
-//	public static final String UNIVERSITY_URL = "universityLit";
-//	public static final String UNIVERSITY_LABEL = "universityLabelLit";
-//	
-//	/*
-//	 * School related field labels
-//	 */
-//	public static final String SCHOOL_URL = "schoolLit";
-//	public static final String SCHOOL_LABEL = "schoolLabelLit";
+	
+	/*
+	 * Position related field labels
+	 */
+	public static final String SECONDARY_POSITION_LABEL = "SecondaryPositionLabelLit";
+	
+	/*
+	 * start year related field labels
+	 */
+	public static final String START_YEAR_LABEL = "StartYearLit";
+	
 	
 	/*
 	 * Organization related field Labels

@@ -15,6 +15,7 @@ public class JsonObject {
 	private List<List<Integer>> data = new ArrayList<List<Integer>>();
 	private String entityURI;
 	private String visMode;
+	private List<String> organizationType = new ArrayList<String>();
 	
 	public String getEntityURI() {
 		return entityURI;

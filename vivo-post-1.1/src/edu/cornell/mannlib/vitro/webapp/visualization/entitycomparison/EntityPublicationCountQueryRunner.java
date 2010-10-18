@@ -48,18 +48,22 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
 			+ "		(str(?Person) as ?personLit) "
 			+ "		(str(?PersonLabel) as ?personLabelLit) "
+			+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
 			+ "		(str(?Document) as ?documentLit) "
 			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
 			+ "		(str(?publicationYear) as ?publicationYearLit) "
 			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) "
-			+ "		(str(?publicationDate) as ?publicationDateLit) ";
+			+ "		(str(?publicationDate) as ?publicationDateLit) "
+			+ "		(str(?StartYear) as ?StartYearLit)";
+
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
 			+ "?Document rdf:type bibo:Document ;"
 			+ " rdfs:label ?DocumentLabel ."
 			+ "OPTIONAL {  ?Document core:year ?publicationYear } ."
 			+ "OPTIONAL {  ?Document core:yearMonth ?publicationYearMonth } ."
-			+ "OPTIONAL {  ?Document core:date ?publicationDate } .";
+			+ "OPTIONAL {  ?Document core:date ?publicationDate } ."
+			+ "OPTIONAL {  ?SecondaryPosition core:startYear ?StartYear } .";
 
 	private static String ENTITY_LABEL;
 	private static String ENTITY_URL;
@@ -133,6 +137,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			}
 
 			RDFNode subEntityURLNode = solution.get(SUBENTITY_URL);
+			
 			if (subEntityURLNode != null) {
 				SubEntity subEntity;
 				if (subentityURLToVO.containsKey(subEntityURLNode.toString())) {
@@ -193,13 +198,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
 			SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
 		} 
-//		else {
-//			result = getSparqlQueryForOrganization(queryURI);
-//			ENTITY_URL = QueryFieldLabels.UNIVERSITY_URL;
-//			ENTITY_LABEL = QueryFieldLabels.UNIVERSITY_LABEL;
-//			SUBENTITY_URL = QueryFieldLabels.SCHOOL_URL;
-//			SUBENTITY_LABEL = QueryFieldLabels.SCHOOL_LABEL;
-//		}
+
 		return result;
 	}
 
@@ -215,8 +214,9 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				+ "	?Position rdf:type core:Position ;"
 				+ " core:positionForPerson ?Person .  "
 				+ "	?Person  core:authorInAuthorship ?Resource ;  "
-				+ " rdfs:label ?PersonLabel .  "
+				+ " rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition .  "
 				+ " ?Resource core:linkedInformationResource ?Document ."
+				+ "	?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."				
 				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 				+ " ORDER BY ?DocumentLabel";
 		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
@@ -240,47 +240,16 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				+ "	?Position rdf:type core:Position ;"
 				+ " core:positionForPerson ?Person .  "
 				+ "	?Person  core:authorInAuthorship ?Resource ;  "
-				+ " rdfs:label ?PersonLabel .  "
+				+ " rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition .  "
 				+ " ?Resource core:linkedInformationResource ?Document ."
+				+ "	?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
 				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 				+ " ORDER BY ?DocumentLabel";
 		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
 		return sparqlQuery;
 
 	}
-
-//	private String getSparqlQueryForSchool(String queryURI) {
-//
-//		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-//				+ "SELECT (str(?SchoolLabel) as ?schoolLabelLit) "
-//				+ "	 	(str(?Department) as ?departmentLit) "
-//				+ "		(str(?DepartmentLabel) as ?departmentLabelLit) "
-//				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
-//				+ "		(str(<"
-//				+ queryURI
-//				+ ">) as ?"
-//				+ QueryFieldLabels.SCHOOL_URL
-//				+ ") "
-//				+ "WHERE { "
-//				+ "<"
-//				+ queryURI
-//				+ "> rdf:type core:School ;"
-//				+ " rdfs:label ?SchoolLabel ;"
-//				+ " core:hasSubOrganization ?Department ."
-//				+ " ?Department rdf:type core:Department; rdfs:label ?DepartmentLabel ;"
-//				+ " core:organizationForPosition ?Position .  "
-//				+ "	?Position rdf:type core:Position ;"
-//				+ " core:positionForPerson ?Person .  "
-//				+ "	?Person  core:authorInAuthorship ?Resource ;  "
-//				+ " rdfs:label ?PersonLabel .  "
-//				+ " ?Resource core:linkedInformationResource ?Document ."
-//				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
-//				+ " ORDER BY ?DocumentLabel";
-//		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
-//		return sparqlQuery;
-//
-//	}
-
+	
 	public Entity getQueryResult() throws MalformedQueryParametersException {
 
 		if (StringUtils.isNotBlank(this.entityURI)) {

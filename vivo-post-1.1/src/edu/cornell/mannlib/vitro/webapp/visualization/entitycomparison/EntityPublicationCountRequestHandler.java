@@ -74,55 +74,52 @@ public class EntityPublicationCountRequestHandler implements
 			Entity entity = queryManager.getQueryResult();
 
 			if (ENTITY_VIS_MODE.equals("DEPARTMENT")) {
+				
 				SUB_ENTITY_VIS_MODE = "PERSON";
-				System.out
-						.println("\n\nDocuments within the Entity\n---------------------------------------------");
-				for (BiboDocument document : entity.getPublications()) {
-					System.out.println(document.getDocumentLabel() + " > "
-							+ document.getDocumentURL());
-				}
-
-				System.out
-						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-
-				for (SubEntity person : entity.getSubEntities()) {
-					System.out.println(person.getIndividualLabel());
-				}
-			}
-
-			else if (ENTITY_VIS_MODE.equals("SCHOOL")) {
+//				System.out
+//						.println("\n\nDocuments within the Entity\n---------------------------------------------");
+//				for (BiboDocument document : entity.getPublications()) {
+//					System.out.println(document.getDocumentLabel() + " > "
+//							+ document.getDocumentURL());
+//				}
+//
+//				System.out
+//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
+//
+//				for (SubEntity person : entity.getSubEntities()) {
+//					System.out.println(person.getIndividualLabel());
+//				}
+			}else if (ENTITY_VIS_MODE.equals("SCHOOL")) {
+				
 				SUB_ENTITY_VIS_MODE = "DEPARTMENT";
-				System.out
-						.println("\nDocuments within the Entity\n---------------------------------------------");
-				for (BiboDocument document : entity.getPublications()) {
-					System.out.println(document.getDocumentLabel() + " > "
-							+ document.getDocumentURL());
-				}
-
-				System.out
-						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-				for (SubEntity department : entity.getSubEntities()) {
-					System.out.println(department.getIndividualLabel());
-				}
-			}
-
-			else {
-				// default is UNIVERSITY
+//				System.out
+//						.println("\nDocuments within the Entity\n---------------------------------------------");
+//				for (BiboDocument document : entity.getPublications()) {
+//					System.out.println(document.getDocumentLabel() + " > "
+//							+ document.getDocumentURL());
+//				}
+//
+//				System.out
+//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
+//				for (SubEntity department : entity.getSubEntities()) {
+//					System.out.println(department.getIndividualLabel());
+//				}
+			}else {
 				SUB_ENTITY_VIS_MODE = "SCHOOL";
-				System.out
-						.println("\nDocuments within the Entity\n---------------------------------------------");
-				for (BiboDocument document : entity.getPublications()) {
-					System.out.println(document.getDocumentLabel() + " > "
-							+ document.getDocumentURL());
-				}
-
-				System.out
-						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-
-				for (SubEntity school : entity.getSubEntities()) {
-					System.out.println(school.getIndividualLabel());
-
-				}
+//				System.out
+//						.println("\nDocuments within the Entity\n---------------------------------------------");
+//				for (BiboDocument document : entity.getPublications()) {
+//					System.out.println(document.getDocumentLabel() + " > "
+//							+ document.getDocumentURL());
+//				}
+//
+//				System.out
+//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
+//
+//				for (SubEntity school : entity.getSubEntities()) {
+//					System.out.println(school.getIndividualLabel());
+//
+//				}
 			}
 
 			RequestDispatcher requestDispatcher = null;
@@ -242,8 +239,9 @@ public class EntityPublicationCountRequestHandler implements
 	 * @param visMode
 	 */
 	private String writePublicationsOverTimeJSON(Set<SubEntity> subentities) {
-		System.out.println("\nsub entity vis mode ------>"
-				+ SUB_ENTITY_VIS_MODE + "\n");
+//		System.out.println("\nsub entity vis mode ------>"
+//				+ SUB_ENTITY_VIS_MODE + "\n");
+		System.out.println("Creating JSONObject \n-----------------------");
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
 
@@ -271,6 +269,7 @@ public class EntityPublicationCountRequestHandler implements
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
+			System.out.println("Adding object with uri: "+ entityJson.getEntityURI() + " vismode: "+entityJson.getVisMode() + " label: "+ entityJson.getLabel());
 			subEntitiesJson.add(entityJson);
 		}
 

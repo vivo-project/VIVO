@@ -1,16 +1,29 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
 public class SubEntity extends Individual {
 
 	Set<BiboDocument> publications = new HashSet<BiboDocument>();
+	Map<String, Map<String, String>> personToPositionAndStartYear = new HashMap<String, Map<String, String>>(); 
 	
 	public SubEntity(String individualURI) {
 		super(individualURI);
 	}
 	
+	
+	public Map<String, Map<String, String>> getPersonToPositionAndStartYear() {
+		return personToPositionAndStartYear;
+	}
+
+	public void setPersonToPositionAndStartYear(
+			Map<String, Map<String, String>> personToPositionAndStartYear) {
+		this.personToPositionAndStartYear = personToPositionAndStartYear;
+	}
+
 	public Set<BiboDocument> getDocuments() {
 		return publications;
 	}
