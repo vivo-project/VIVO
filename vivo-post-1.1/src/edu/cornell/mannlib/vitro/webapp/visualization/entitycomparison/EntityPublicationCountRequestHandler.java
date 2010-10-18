@@ -295,7 +295,8 @@ public class EntityPublicationCountRequestHandler implements
 					+ entityJson.getOrganizationType().toString());
 			subEntitiesJson.add(entityJson);
 		}
-
+		
+		System.out.println("\nStopWords are "+ EntitySubOrganizationTypesQueryRunner.stopWords.toString() + "\n");
 		return json.toJson(subEntitiesJson);
 
 	}

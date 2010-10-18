@@ -37,6 +37,8 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	private String visMode;
 	static String SUBORGANISATION_LABEL;
 	static String SUBORGANISATION_TYPE_LABEL;
+	public static Map<String, Integer> subOrganizationTypesToCount = new HashMap<String, Integer>();
+	public static Set<String> stopWords = new HashSet<String>();
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
 		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
@@ -134,20 +136,42 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
+					updateSubOrganizationTypesToCount(subOrganizationLabel.toString());
 				}
 			}else{
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
+					updateSubOrganizationTypesToCount(subOrganizationLabel.toString());
 				}
 			}
 		}
+		
+		collectStopWords();
 		
 		return subOrganizationLabelToTypes;
 	}
 
 	
+	private void collectStopWords() {
+		for(Map.Entry<String, Integer> typesCount : subOrganizationTypesToCount.entrySet()){
+			if(typesCount.getValue() == subOrganizationTypesToCount.size()){
+				stopWords.add(typesCount.getKey());
+			}
+		}
+	}
+
+	private void updateSubOrganizationTypesToCount(String typeLabel) {
+		int count = 0;
+		if(subOrganizationTypesToCount.containsKey(typeLabel)){
+			count = subOrganizationTypesToCount.get(typeLabel);
+			subOrganizationTypesToCount.put(typeLabel, count++);
+		}else{
+			subOrganizationTypesToCount.put(typeLabel, 1);
+		}
+	}
+
 	public Map<String, Set<String>> getQueryResult() throws MalformedQueryParametersException {
 
 		if (StringUtils.isNotBlank(this.entityURI)) {
