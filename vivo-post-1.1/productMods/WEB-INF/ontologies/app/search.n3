@@ -5,6 +5,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
 
 # All instances of a class can be excluded from the lucene 
 # index by adding a vitroDisplay:excludeClass property between 
@@ -18,4 +19,5 @@
 	vitroDisplay:excludeClass core:Authorship ;
 	vitroDisplay:excludeClass core:Position ; 
 	vitroDisplay:excludeClass core:ResearchActivity ;
-	vitroDisplay:excludeClass core:EducationalTraining .	
+	vitroDisplay:excludeClass core:EducationalTraining ;	
+	vitroDisplay:excludeClass bibo:DocumentStatus .	

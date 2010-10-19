@@ -443,7 +443,6 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 								+ " core:authorInAuthorship ?authorshipNode . "
 			+ "?authorshipNode rdf:type core:Authorship ;" 
 								+ " core:linkedInformationResource ?document . "
-			+ "?document rdf:type bibo:Document . " 
 			+ "?document rdfs:label ?documentLabel . " 
 			+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . " 
 			+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . " 

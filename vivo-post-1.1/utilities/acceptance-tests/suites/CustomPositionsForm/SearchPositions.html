@@ -70,8 +70,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Search Results for 'lecturer'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll College | College</td>
 	<td></td>
 </tr>
 <tr>
@@ -87,6 +107,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Faculty, Jane | Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>... positions Professor positions Lecturer positions Assistant Professor ...</td>
 	<td></td>
 </tr>
 <tr>
@@ -110,13 +135,48 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Search Results for 'professor'</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=Carroll University</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane | Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>... positions Professor positions Lecturer positions Assistant Professor ...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll University | University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>... people Professor people Assistant Professor ...</td>
 	<td></td>
 </tr>
 <tr>
@@ -140,13 +200,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Search Results for 'carroll'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll College | College</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll University | University</td>
 	<td></td>
 </tr>
 <tr>
@@ -155,26 +235,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>search</td>
-	<td>carroll college</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>carroll college - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Carroll College</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Carroll College</td>
 	<td></td>
@@ -185,19 +245,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Link to Carroll University to verify Jane Faculty is listed</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>search</td>
-	<td>carroll university</td>
+	<td>carroll</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -206,12 +256,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>carroll university - VIVO Search Results</td>
+	<td>carroll - VIVO Search Results</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Carroll University</td>
+	<td>comment</td>
+	<td class="comment">Link to Carroll University to verify Jane Faculty is listed</td>
 	<td></td>
 </tr>
 <tr>
@@ -225,7 +275,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty Position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
@@ -255,13 +310,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Search Results for 'university'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Cornell University</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Cornell University | University</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll University | University</td>
 	<td></td>
 </tr>
 <tr>

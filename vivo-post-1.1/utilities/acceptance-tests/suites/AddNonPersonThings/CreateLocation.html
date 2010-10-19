@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>CreateOrganization</title>
+<title>CreateLocation</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,11 +27,11 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CreateOrganization</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CreateLocation</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Validate adding Organization</td>
+	<td class="comment">Validate adding Location</td>
 	<td></td>
 </tr>
 <tr>
@@ -102,7 +102,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=Building (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -116,12 +116,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Name</td>
+	<td>Create a new Building</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,7 +137,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=Building (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -156,12 +151,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Name</td>
+	<td>Create a new Building</td>
 	<td></td>
 </tr>
 <tr>
@@ -187,7 +177,7 @@
 <tr>
 	<td>type</td>
 	<td>label</td>
-	<td>Primate College of America</td>
+	<td>Jane Memorial Building</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -196,352 +186,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test overview entry (image and webpage have been tested)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='overview']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>The Primate College of America is a privately-funded college for the study of primates.</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='currentlyHeadedBy']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Person for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Non-Faculty Academic (core)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Edit &quot;currently headed by&quot; entry for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>ME Tarzan</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='fundingAgentFor']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Process (core)</td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Privately Funded</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='memberRoleOf']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='offersDegree']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=B.S. Bachelor of Science</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasPredecessorOrganization']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='awardsGrant']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Grant for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Primate Habitat Research Grant</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='subcontractsGrant']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='sponsorsAward']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Primate Student of the Year</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='awardConferred']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasEquipment']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Primate Habitat</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
+	<td>Jane Memorial Building</td>
 	<td></td>
 </tr>
 <tr>
@@ -550,13 +195,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test publications entry</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='facilityFor']/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test service entry</td>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Thing for Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate Research Laboratory</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
 	<td></td>
 </tr>
 <tr>
@@ -565,13 +230,188 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test contact entry</td>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasRoom']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Room for Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Edit &quot;rooms&quot; entry for Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Lab Admin Office</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='geographicallyContains']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Geographic Location for Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeOfNew</td>
+	<td>label=Campus (core)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Edit &quot;geographically contains&quot; entry for Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Primate Research Laboratory</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Test other entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='locationOfEquipment']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: location of equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='geographicLocationOf']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: geographic location of</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate Research Lab Room 123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify everything entered is displaying properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Lab Admin Office | Room</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Campus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Portable Primate Habitat | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Lab Room 123 | Facility</td>
 	<td></td>
 </tr>
 <tr>

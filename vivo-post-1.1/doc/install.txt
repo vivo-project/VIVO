@@ -27,13 +27,13 @@ are slightly different. Please consult developers.txt in this directory.
     * III. Download the VIVO Application Source
     * IV. Specify deployment properties
     * V. Compile and deploy
-    * VI. Set Tomcat JVM Parameters
+    * VI. Set Tomcat JVM parameters and security limits
     * VII. Start Tomcat
     * VIII. Log in and add RDF data
     * IX. Set the Contact Email Address (if using "Contact Us" form)
     * X. Setup Apache Tomcat Connector
     * XI. Configure Pellet Reasoner
-    * XII. Was the Installation Successful?
+    * XII. Was the installation successful?
 
 -------------------------------------------------------------------------------
  
@@ -47,7 +47,7 @@ the desired machine:
     * Apache Ant 1.7 or higher [http://ant.apache.org]
     * MySQL 5.1 or higher [http://www.mysql.com]
 
-Be sure to setup the environment variables for “JAVA_HOME” and “ANT_HOME” and 
+Be sure to setup the environment variables for "JAVA_HOME" and "ANT_HOME" and 
 add the executables to your path per your operating system and installation 
 directions from the software support web sites.
 
@@ -74,7 +74,7 @@ Keep track of the database name, username, and password for Step IV.
  
 III. Download the VIVO Application Source
 
-Download the VIVO application source as either rel-1.1.zip or rel-1.1.gz file 
+Download the VIVO application source as either rel-1.1.1.zip or rel-1.1.1.gz file 
 and unpack it on your web server:
       
       http://vivoweb.org/download
@@ -88,8 +88,8 @@ example.deploy.properties to a file named simply deploy.properties. This file
 sets several properties used in compilation and deployment.
 
 NOTE: For those installing on Windows operating system, include the windows 
-directory and use the forward slash “/” and not the back slash “\” in the 
-directory locations, e.g. “c:/tomcat”.
+drive and use the forward slash "/" and not the back slash "\" in the 
+directory locations, e.g. "c:/tomcat".
 
                 Default namespace: VIVO installations make their RDF resources available for harvest 
                 using linked data. Requests for RDF resource URIs redirect to HTML 
@@ -169,7 +169,7 @@ to build VIVO and deploy to Tomcat's webapps directory.
 
 -------------------------------------------------------------------------------
 
-VI. Set Tomcat JVM Parameters
+VI. Set Tomcat JVM parameters and security limits
 
 Currently, VIVO copies the contents of your RDF database into memory in order
 to serve Web requests quickly (the in-memory copy and the underlying database
@@ -191,6 +191,14 @@ sets of data, 256m to 512m should be sufficient.
 
 If an OutOfMemoryError is encountered during VIVO execution, it can be remedied 
 by increasing the heap parameters and restarting Tomcat.
+
+Security limits: VIVO is a multithreaded web application that may require more threads than are 
+permitted under your Linux installation's default configuration. Ensure that 
+your installation can support the required number of threads by making the 
+following edits to /etc/security/limits.conf:
+
+    apache    hard    nproc   400
+    tomcat6   hard    nproc   1500 
 
 -------------------------------------------------------------------------------
  

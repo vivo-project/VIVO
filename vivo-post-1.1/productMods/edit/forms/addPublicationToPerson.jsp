@@ -211,14 +211,13 @@ SPARQL queries for existing values. --%>
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/js/browserUtils.js",
-                                                                "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
+                                                                "/edit/forms/js/customFormWithAutocomplete.js"                                                    
                                                                ));            
     request.setAttribute("customJs", customJs);
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
-                                                                 "/edit/forms/css/customFormWithAdvanceTypeSelection.css"
+                                                                 "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
 %>

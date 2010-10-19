@@ -168,12 +168,12 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     </c:choose>
 </c:set>
 <v:jsonset var="startYearAssertion" >
-      ?role <${startYearPredicate}> ?startYear .
+    ?role <${startYearPredicate}> ?startYear .
 </v:jsonset>
 
 <c:set var="endYearPredicate" value="${vivoCore}endYear" /> 
 <v:jsonset var="endYearAssertion" >
-      ?role <${endYearPredicate}> ?endYear .
+    ?role <${endYearPredicate}> ?endYear .
 </v:jsonset>
 
 <v:jsonset var="roleLabelAssertion" >
@@ -359,30 +359,29 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
-                                                                "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
+                                                                "/edit/forms/js/customFormWithAutocomplete.js"                                                    
                                                                ));            
     request.setAttribute("customJs", customJs);
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
-                                                                 "/edit/forms/css/customFormWithAdvanceTypeSelection.css"
+                                                                 "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-<c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <c:choose>
     <%-- Includes edit AND repair mode --%>
     <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">     	
-        <c:set var="titleText" value="Edit" />        
+        <c:set var="titleVerb" value="Edit" />        
         <c:set var="submitButtonText" value="Edit ${buttonLabel}" />
         <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>
     </c:when>
     <c:otherwise>
-        <c:set var="titleText" value="Create" />
+        <c:set var="titleVerb" value="Create" />
         <c:set var="editMode" value="add" />
         <c:set var="submitButtonText" value="${buttonLabel}" />
         <c:set var="disabledVal" value="" />
@@ -396,15 +395,16 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
       multiple ${param.roleActivityTypeLabel} individuals.</div>      
 <% }else{ %>
 	
-	<h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
+	<h2>${titleVerb}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
+	
 	<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	
 	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
 	    
 	    <div class="fullViewOnly">
 	        
-		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 	
 	        <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
 	        returning from a validation error, we retain the values. --%>
@@ -416,17 +416,17 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 		    <div class="acSelection">
 		        <%-- RY maybe make this a label and input field. See what looks best. --%>
 		        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-		        <v:input type="hidden" id="roleActivityURI" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
+		        <v:input type="hidden" id="roleActivityUri" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
 		    </div>
 	
-	        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
+	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
 	                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
 	            </c:when>
 	            <c:otherwise>
-	                <h4 id="dateHeader">Years of Participation in </h4>    
+	                <h4 class="label">Years of Participation in ###</h4>    
 	                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
 	                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
 	            </c:otherwise>
@@ -440,14 +440,13 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	</form>
 	
 	<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
-	<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
 	
 	<script type="text/javascript">
 	var customFormData  = {
-	    sparqlQueryUrl: '${sparqlQueryUrl}',
 	    acUrl: '${acUrl}',
 	    editMode: '${editMode}',
-	    submitButtonTextType: 'compound' 
+	    submitButtonTextType: 'compound',
+	    defaultTypeName: 'activity' // used in repair mode, to generate button text and org name field label
 	};
 	</script>
 <% } %>

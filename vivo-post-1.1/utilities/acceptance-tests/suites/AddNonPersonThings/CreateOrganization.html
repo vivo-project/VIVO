@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<link rel="selenium.base" href="http://localhost:8080/vivo" />
 <title>CreateOrganization</title>
 <style type="text/css">
 .testName {
@@ -236,56 +236,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='currentlyHeadedBy']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Person for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Non-Faculty Academic (core)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Edit &quot;currently headed by&quot; entry for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>ME Tarzan</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//div[@id='fundingAgentFor']/a</td>
 	<td></td>
 </tr>
@@ -323,31 +273,6 @@
 	<td>type</td>
 	<td>name</td>
 	<td>Privately Funded</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='memberRoleOf']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add an entry to: member role of</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -536,6 +461,31 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>//div[@id='awardConferred']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Award or Honor for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>//div[@id='hasEquipment']/a</td>
 	<td></td>
 </tr>
@@ -710,11 +660,6 @@
 	<td>1999</td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/vivo/edit/editRequestDispatch.jsp?subjectUri=http%3A%2F%2Fvivo.local.edu%2Findividual%2Fn3441&amp;predicateUri=http%3A%2F%2Fvivoweb.org%2Fontology%2Fcore%23organizationForPosition</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
 	<td></td>
@@ -730,8 +675,233 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Create head of entry for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Organization</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Primates-r-us</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newIndLabel</td>
+	<td>Funding source</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='affiliatedOrganization']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate Research Laboratory</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasMemberRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create membership entry for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Consortium</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Primate Colleges of the World</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newIndLabel</td>
+	<td>Member</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasCollaborator']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: collaborator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Primate History Library</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasClinicalRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create clinical activity entry for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Service</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Primate Heart Health Clinic</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newIndLabel</td>
+	<td>Founder</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Test publications entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasPresenterRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create presentation entry for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Invited Talk</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Primate Health and Fitness</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newIndLabel</td>
+	<td>Organizer</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
 	<td></td>
 </tr>
 <tr>
@@ -740,8 +910,83 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasOutreachProviderRole']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create outreach &amp; community service entry for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeSelector</td>
+	<td>label=Event</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Primate Health Check</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>newIndLabel</td>
+	<td>Sponsor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2008</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endYear</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Test location entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='hasGeographicLocation']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=northern Africa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
 	<td></td>
 </tr>
 <tr>
@@ -750,8 +995,333 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='workEmail']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>info@primates.edu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='workPhone']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: work phone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>555-555-5555</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='workFax']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: work fax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>555-555-5554</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='mailingAddress']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Address for Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>1234 Northern African Nation</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Test other entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='abbreviation']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: abbreviation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>PCoA</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='freetextKeyword']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: keywords</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Gorillas</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify everything entered is displaying properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The Primate College of America is a privately-funded college for the study of primates.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Privately Funded | Process</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>B.S. Bachelor of Science | Academic Degree</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Habitat Research Grant | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Habitat Research Grant | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Student of the Year | Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Student of the Year | Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Portable Primate Habitat | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate History Library | Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Dr., 1999 - </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates-r-us Funding source 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World Member 2009 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate History Library | Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Heart Health Clinic Founder 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness Organizer 2008</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check Sponsor 2008 - 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>northern Africa | geographical_region</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>info@primates.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5555</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>555-555-5554</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234 Northern African Nation | Address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>PCoA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Gorillas</td>
 	<td></td>
 </tr>
 <tr>

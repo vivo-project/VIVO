@@ -300,8 +300,8 @@ SPARQL queries for existing values. --%>
 
 <ul id="authorships" <%= ulClass %>>
 <%
-	String rankPredicateUri = vivoCore + "authorRank";
-	
+    String rankPredicateUri = vivoCore + "authorRank";
+    
     // RY We should use whatever is used on the individual profile page to list
     // this property in rank order...
     DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
@@ -323,20 +323,10 @@ SPARQL queries for existing values. --%>
         request.setAttribute("authorshipUri", authorship.getURI());
         request.setAttribute("authorshipName", authorship.getName());
         
-        String rankValue = "";
-        String numericRank = "";
         DataPropertyStatement rankStmt = authorship.getDataPropertyStatement(rankPredicateUri);
         if (rankStmt != null) {
-            rankValue = rankStmt.getData();
-            numericRank = rankValue;
-            maxRank = Integer.valueOf(rankValue);
-            String rankDatatypeUri = rankStmt.getDatatypeURI();
-            if ( !StringUtils.isEmpty(rankDatatypeUri) ) {
-                rankValue += "_" + rankDatatypeUri;
-            }                                                
+            maxRank = Integer.parseInt(rankStmt.getData());   
         }
-        request.setAttribute("rankValue", rankValue);
-        request.setAttribute("numericRank", numericRank);
        
         request.setAttribute("author", authorship.getRelatedIndividual(vivoCore + "linkedAuthor")); 
 
@@ -348,25 +338,25 @@ SPARQL queries for existing values. --%>
                 <%-- This span is here to assign a width to. We can't assign directly to the a.authorName,
                 for the case when it's followed by an em tag - we want the width to apply to the whole thing. --%>
                 <span class="authorNameWrapper">
-	                <c:choose>
-	                    <c:when test="${!empty author}">
-	                        <c:set var="authorUri" value="${author.URI}" />
+                    <c:choose>
+                        <c:when test="${!empty author}">
+                            <c:set var="authorUri" value="${author.URI}" />
                             <c:set var="authorName" value="${author.name}" />
-	                        <c:url var="authorHref" value="/individual">
-	                            <c:param name="uri" value="${authorUri}"/>
-	                        </c:url> 
-	                        <span class="authorName">${authorName}</span>
-	                    </c:when>
-	
-	                    <c:otherwise>
-	                       <c:set var="authorUri" value="" />
+                            <c:url var="authorHref" value="/individual">
+                                <c:param name="uri" value="${authorUri}"/>
+                            </c:url> 
+                            <span class="authorName">${authorName}</span>
+                        </c:when>
+    
+                        <c:otherwise>
+                           <c:set var="authorUri" value="" />
                            <c:set var="authorName" value="" />
-		                   <c:url var="authorshipHref" value="/individual">
-		                       <c:param name="uri" value="${authorshipUri}"/>
-		                   </c:url>                
-		                   <span class="authorName">${authorshipName}</span><em> (no linked author)</em>
-	                    </c:otherwise>
-	                </c:choose>
+                           <c:url var="authorshipHref" value="/individual">
+                               <c:param name="uri" value="${authorshipUri}"/>
+                           </c:url>                
+                           <span class="authorName">${authorshipName}</span><em> (no linked author)</em>
+                        </c:otherwise>
+                    </c:choose>
                 </span>
                 <c:url var="deleteAuthorshipHref" value="/edit/primitiveDelete" />
                 <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
@@ -377,20 +367,19 @@ SPARQL queries for existing values. --%>
         <script type="text/javascript">
             authorshipData.push({
                 "authorshipUri": "${authorshipUri}",
-                //"numericRank": "${numericRank}",
-                "rankVal": "${rankValue}",
                 "authorUri": "${authorUri}",
                 "authorName": "${authorName}"                
             });
         </script>         
 <%         
     }
-    
+
     // A new author will be ranked last when added.
     // This value is now inserted by JavaScript, but leave it here as a safety net in case page
     // load reordering returns an error. 
     request.setAttribute("newRank", maxRank + 1);
-    request.setAttribute("rankPred", rankPredicateUri);
+    System.out.println("request rank: " + request.getAttribute("newRank"));
+    request.setAttribute("rankPredicate", rankPredicateUri);
 %>
     
 </ul>
@@ -398,7 +387,6 @@ SPARQL queries for existing values. --%>
 <%  if (authorshipCount == 0) { %>   
         <p>This publication currently has no authors specified.</p>
 <%  } %>
-
 
 <div id="showAddForm">
     <v:input type="submit" value="Add Author" id="showAddFormButton" cancel="true" cancelLabel="Return to Publication" cancelUrl="/individual" />
@@ -409,7 +397,7 @@ SPARQL queries for existing values. --%>
 
     <h3>Add an Author</h3>
 
-    <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" cssClass="acSelector" size="30" /></p>
+    <p class="inline"><v:input type="text" id="lastName" label="Last name ${requiredHint}" cssClass="acSelector" size="35" /></p>
     <p class="inline"><v:input type="text" id="firstName" label="First name ${requiredHint} ${initialHint}" size="20" /></p>
     <p class="inline"><v:input type="text" id="middleName" label="Middle name ${initialHint}" size="20" /></p>
     <input type="hidden" id="label" name="label" value="" />  <!-- Field value populated by JavaScript -->
@@ -421,7 +409,6 @@ SPARQL queries for existing values. --%>
     </div>
 
     <input type="hidden" name="rank" id="rank" value="${newRank}" />
-
     <p class="submit"><v:input type="submit" id="submit" value="Add Author" cancel="true" /></p>
 
     <p id="requiredLegend" class="requiredHint">* required fields</p>
@@ -429,14 +416,13 @@ SPARQL queries for existing values. --%>
 </div>
 
 <c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
-<c:url var="reorderUrl" value="/edit/primitiveRdfEdit" />
+<c:url var="reorderUrl" value="/edit/reorder" />
 
 <script type="text/javascript">
 var customFormData = {
-	rankPred: '${rankPred}',
-	rankXsdType: '${intDatatypeUri}',
-	acUrl: '${acUrl}',
-	reorderUrl: '${reorderUrl}'
+    rankPredicate: '${rankPredicate}',
+    acUrl: '${acUrl}',
+    reorderUrl: '${reorderUrl}'
 };
 </script>
 

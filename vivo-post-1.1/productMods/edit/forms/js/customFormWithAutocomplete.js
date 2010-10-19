@@ -15,12 +15,12 @@ var customForm = {
     },
     
     disableFormInUnsupportedBrowsers: function() {       
-        this.disableWrapper = $('#ie67DisableWrapper');
+        var disableWrapper = $('#ie67DisableWrapper');
         
         // Check for unsupported browsers only if the element exists on the page
-        if (this.disableWrapper.length) {
+        if (disableWrapper.length) {
             if (vitro.browserUtils.isIELessThan8()) {
-                this.disableWrapper.show();
+                disableWrapper.show();
                 $('.noIE67').hide();
                 return true;
             }
@@ -43,7 +43,6 @@ var customForm = {
         this.form = $('#content form');
         this.fullViewOnly = $('.fullViewOnly');
         this.button = $('#submit');
-        this.baseButtonText = this.button.val();
         this.requiredLegend = $('#requiredLegend');
         this.typeSelector = this.form.find('#typeSelector');
 
@@ -55,28 +54,11 @@ var customForm = {
         this.acUriReceiver = this.form.find('.acUriReceiver');
         //this.acLabelReceiver = this.form.find('.acLabelReceiver');
         this.verifyMatch = this.form.find('.verifyMatch');    
-        this.verifyMatchBaseHref = this.verifyMatch.attr('href');    
         this.acSelectorWrapper = this.acSelector.parent();
-        
-        this.relatedIndLabel = $('#relatedIndLabel');
-        this.labelFieldLabel = $('label[for=' + this.relatedIndLabel.attr('id') + ']');       
-        // Get this on page load, so we can prepend to it. We can't just prepend to the current label text,
-        // because it may have already been modified for a previous selection.
-        this.baseLabelText = this.labelFieldLabel.html();
-
-        // Label field for new individual being created
-        this.newIndLabel = $('#newIndLabel');
-        this.newIndLabelFieldLabel = $('label[for=' + this.newIndLabel.attr('id') + ']');
-        this.newIndBaseLabelText = this.newIndLabelFieldLabel.html();
-        
-        this.dateHeader = $('#dateHeader');
-        this.baseDateHeaderText = this.dateHeader.html();
         
         this.or = $('span.or');       
         this.cancel = this.form.find('.cancel');
-        
-        this.placeHolderText = '###';
-
+        this.acHelpTextClass = 'acSelectorWithHelpText';
     },
 
     // Set up the form on page load
@@ -85,17 +67,22 @@ var customForm = {
         if (!this.editMode) {
             this.editMode = 'add'; // edit vs add: default to add
         }
-        
-        if (!this.typeSelector.length || this.editMode == 'edit' || this.editMode == 'repair') {
-            this.formSteps = 1;
-        // there may also be a 3-step form - look for this.subTypeSelector
-        } else {
-            this.formSteps = 2;
+               
+        if (!this.formSteps) { // Don't override formSteps specified in form data
+            if ( !this.fullViewOnly.length || this.editMode === 'edit' || this.editMode === 'repair' ) {
+                this.formSteps = 1;
+            // there may also be a 3-step form - look for this.subTypeSelector
+            }
+            else {
+                this.formSteps = 2;
+            }
         }
                 
         this.bindEventListeners();
         
         this.initAutocomplete();
+        
+        this.initElementData();
         
         this.initFormView();
 
@@ -144,15 +131,25 @@ var customForm = {
         this.button.show();
         this.setButtonText('new');
         this.setLabels(); 
-           
-        if( this.formSteps > 1 ){  // NB includes this.editMode == 1
-            this.cancel.unbind('click');   
+
+        // Set the initial autocomplete help text in the acSelector field.
+        this.addAcHelpText();
+
+        this.cancel.unbind('click');           
+        if (this.formSteps > 1) {     
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
                 return false;            
             });
+        // In one-step forms, if there is a type selection field, but no value is selected,
+        // hide the acSelector field. The type selection must be made first so that the
+        // autocomplete type can be determined. If a type selection has been made, 
+        // unhide the acSelector field.
+        } else if (this.typeSelector.length) {
+            this.typeSelector.val() ? this.acSelectorWrapper.show() : this.hideFields(this.acSelectorWrapper);
         }
+
     },
     
     initFormWithValidationErrors: function() {
@@ -166,15 +163,6 @@ var customForm = {
         if (uri) {            
             this.showAutocompleteSelection(label, uri);
         }
-        
-        this.cancel.unbind('click');
-        this.cancel.click(function() {
-           // Cancel back to full view with only type selection showing
-           customForm.undoAutocompleteSelection();
-           customForm.clearFields(customForm.fullViewOnly);
-           customForm.initFormFullView(); 
-           return false;
-        });
        
     },
     
@@ -185,20 +173,37 @@ var customForm = {
         this.typeSelector.change(function() {
             var typeVal = $(this).val();
             
-            // If an autocomplete selection has been made, undo it
+            // If an autocomplete selection has been made, undo it.
             customForm.undoAutocompleteSelection();
 
-            // If no selection, go back to type view. This prevents problems like trying to run autocomplete
-            // or submitting form without a type selection. Exception: in repair editMode, stay in full view,
-            // else we lose the role information.          
-            (typeVal.length || customForm.editMode == 'repair') ? customForm.initFormFullView() : customForm.initFormTypeView();
-    
+            // Reinitialize view. If no type selection in a two-step form, go back to type view;
+            // otherwise, reinitialize full view.
+			if (!typeVal.length && customForm.formSteps > 1) {
+				customForm.initFormTypeView();
+			}
+			else {
+				customForm.initFormFullView();
+				// TW Setting focus here was clearing autocomplete help text, so commented it out
+				// customForm.acSelector.focus();
+			}
         }); 
         
         this.verifyMatch.click(function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });   
+        
+        this.acSelector.focus(function() {
+            customForm.deleteAcHelpText();
+        });   
+        
+        this.acSelector.blur(function() {
+            customForm.addAcHelpText();
+        }); 
+        
+        this.form.submit(function() {
+            customForm.deleteAcHelpText();
+        });
         
     },
     
@@ -241,6 +246,25 @@ var customForm = {
                 customForm.showAutocompleteSelection(ui.item.label, ui.item.uri);                     
             }
         });
+    },
+    
+    // Store original or base text with elements that will have text substitutions.
+    // Generally the substitution cannot be made on the current value, since that value
+    // may have changed from the original. So we store the original text with the element to
+    // use as a base for substitutions.
+    initElementData: function() {
+        
+        this.placeholderText = '###';
+        this.labelsWithPlaceholders = this.form.find('label, .label').filter(function() {
+            return $(this).html().match(customForm.placeholderText);
+        });        
+        this.labelsWithPlaceholders.each(function(){
+            $(this).data('baseText', $(this).html());
+        });
+        
+        this.button.data('baseText', this.button.val());
+   
+        this.verifyMatch.data('baseHref', this.verifyMatch.attr('href'));
     },
     
     getAcFilter: function() {
@@ -313,20 +337,20 @@ var customForm = {
         
     showAutocompleteSelection: function(label, uri) {
 
-        this.acSelectorWrapper.hide();
-        //this.acSelector.attr('disabled', 'disabled');
-        
-        // If only one form step, type is pre-selected, and the label is coded in the html.
-        if (this.formSteps > 1) {
+        this.hideFields(this.acSelectorWrapper);
+              
+        // If form has a type selector, add type name to label. If form has no type selector,
+        // type name is coded into the html.
+        if (this.typeSelector.length) {
             this.acSelection.find('label').html('Selected ' + this.typeName + ':');
         }
               
         this.acSelection.show();
 
         this.acUriReceiver.val(uri);
-        this.acSelector.val(label);
+        this.acSelector.val(label);        
         this.acSelectionInfo.html(label);
-        this.verifyMatch.attr('href', this.verifyMatchBaseHref + uri);
+        this.verifyMatch.attr('href', this.verifyMatch.data('baseHref') + uri);
         
         this.setButtonText('existing');            
 
@@ -341,18 +365,23 @@ var customForm = {
     // Cancel action after making an autocomplete selection: undo autocomplete 
     // selection (from showAutocomplete) before returning to full view.
     undoAutocompleteSelection: function() {
-        
-        this.acSelectorWrapper.show();
-        this.hideFields(this.acSelection);
-        this.acSelector.val('');
-        this.acUriReceiver.val('');
-        this.acSelectionInfo.html('');
-        this.verifyMatch.attr('href', this.verifyMatchBaseHref);
-        
-        if (this.formSteps > 1) {
-            this.acSelection.find('label').html('Selected ');
-        }
-                
+ 
+        // The test is not just for efficiency: undoAutocompleteSelection empties the acSelector value,
+        // which we don't want to do if user has manually entered a value, since he may intend to
+        // change the type but keep the value. If no new value has been selected, form initialization
+        // below will correctly empty the value anyway.
+        if (!this.acSelection.is(':hidden')) {       
+            this.acSelectorWrapper.show();
+            this.hideFields(this.acSelection);
+            this.acSelector.val('');
+            this.acUriReceiver.val('');
+            this.acSelectionInfo.html('');
+            this.verifyMatch.attr('href', this.verifyMatch.data('baseHref'));
+            
+            if (this.formSteps > 1) {
+                this.acSelection.find('label').html('Selected ');
+            }
+        }      
     },
     
     // Set type uri for autocomplete, and type name for labels and button text.
@@ -382,22 +411,12 @@ var customForm = {
     // Set field labels based on type selection. Although these won't change in edit
     // mode, it's easier to specify the text here than in the jsp.
     setLabels: function() {
-        var newLabelTextForNewInd, 
-            // if this.acType is empty, we are in repair mode with no activity type selected.
-            // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
-            typeText = this.acType ? this.typeName : 'Activity';
-            
-        
-        this.labelFieldLabel.html(typeText + ' ' + this.baseLabelText);
-        
-        if (this.dateHeader.length) {
-            this.dateHeader.html(this.baseDateHeaderText + typeText);
-        } 
-                   
-        if (this.newIndLabel.length) {
-            newLabelTextForNewInd = this.newIndBaseLabelText.replace(this.placeHolderText, typeText);
-            this.newIndLabelFieldLabel.html(newLabelTextForNewInd);
-        }  
+        var typeName = this.getTypeNameForLabels();
+
+        this.labelsWithPlaceholders.each(function() {
+            var newLabel = $(this).data('baseText').replace(customForm.placeholderText, typeName);
+            $(this).html(newLabel);
+        });
 
     },
     
@@ -405,36 +424,62 @@ var customForm = {
     // or a new related individual. Called when setting up full view of form, and after
     // an autocomplete selection.
     setButtonText: function(newOrExisting) {
-        var typeText, buttonText;
+        var typeText, 
+            buttonText,
+            baseButtonText = this.button.data('baseText');
         
         // Edit mode button doesn't change, so it's specified in the jsp
         if (this.editMode === 'edit') {
             return;
         }  
 
-        // if this.acType is empty, we are in repair mode with no activity type selected.
-        // Prevent the labels from showing 'Select one' by using the generic term 'Activity' 
-        typeText = this.acType ? this.typeName : 'Activity';
+        typeText = this.getTypeNameForLabels();
                 
         // Creating new related individual      
         if (newOrExisting === 'new') {
             if (this.submitButtonTextType == 'compound') { // use == to tolerate nulls
                 // e.g., 'Create Grant & Principal Investigator'
-                buttonText = 'Create ' + typeText + ' & ' + this.baseButtonText;                
+                buttonText = 'Create ' + typeText + ' & ' + baseButtonText;          
             } else {
                 // e.g., 'Create Publication'
-                buttonText = 'Create ' + this.baseButtonText;
+                buttonText = 'Create ' + baseButtonText;
             }            
         }
         // Using existing related individual
         else {  
             // In repair mode, baseButtonText is "Edit X". Keep that for this case.
-            buttonText = this.editMode == 'repair' ? this.baseButtonText : 'Add ' + this.baseButtonText;
+            buttonText = this.editMode == 'repair' ? baseButtonText : 'Add ' + baseButtonText;
         } 
         
         this.button.val(buttonText);
-    }
+    },
     
+    getTypeNameForLabels: function() {
+        // If this.acType is empty, we are either in a one-step form with no type yet selected,
+        // or in repair mode in a two-step form with no type selected. Use the default type
+        // name specified in the form data (this.typeName is 'Select one').
+        return this.acType ? this.typeName : this.capitalize(this.defaultTypeName);
+    },
+
+    // Set the initial help text that appears in the autocomplete field and change the class name
+    addAcHelpText: function() {
+        var typeText;
+    
+        // First case applies on page load; second case applies when the type gets changed.
+        if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {            
+        	typeText = this.getTypeNameForLabels();            
+			this.acSelector.val("Select an existing " + typeText + " or create a new one.")
+		               	   .addClass(this.acHelpTextClass);     
+		}
+	},
+
+    deleteAcHelpText: function() {
+        if (this.acSelector.hasClass(this.acHelpTextClass)) {
+			this.acSelector.val('')
+		                   .removeClass(this.acHelpTextClass);
+		}
+	}
+	
 };
 
 $(document).ready(function() {   

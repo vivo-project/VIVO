@@ -40,7 +40,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import edu.cornell.mannlib.vedit.beans.LoginFormBean;
 import edu.cornell.mannlib.vedit.controller.BaseEditController;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
@@ -70,9 +69,12 @@ public class DummyVisClientController extends BaseEditController {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
+		if (!checkLoginStatus(request, response))
+			return;
+    	
     	super.doGet(request, response);
 
-    	VitroRequest vreq = handleLoginAuthentication(request, response);
+    	VitroRequest vreq = new VitroRequest(request);
     	prepareVisualizationQueryResponse(request, response, vreq);
 
         return;
@@ -97,42 +99,6 @@ public class DummyVisClientController extends BaseEditController {
 			log.error(e.getStackTrace());
 		}
 
-	}
-
-	private VitroRequest handleLoginAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		//        This might not be required
-		        /*
-		         * why are there multiple places where the login is checked? shud be abtracted into
-		         * new methoid?
-		         * */
-//		        if( !checkLoginStatus(request, response) )
-//		        	return null;
-
-		        VitroRequest vreq = new VitroRequest(request);
-
-		        Object obj = vreq.getSession().getAttribute("loginHandler");
-		        LoginFormBean loginHandler = null;
-
-		        if( obj != null && obj instanceof LoginFormBean )
-		            loginHandler = ((LoginFormBean)obj);
-
-
-		        /*
-		         * what is the speciality of 5 in the conditions?
-		         *
-		        if( loginHandler == null ||
-		            ! "authenticated".equalsIgnoreCase(loginHandler.getLoginStatus()) ||
-		             Integer.parseInt(loginHandler.getLoginRole()) <= 5 ){
-		            HttpSession session = request.getSession(true);
-
-		            session.setAttribute("postLoginRequest",
-		                    vreq.getRequestURI()+( vreq.getQueryString()!=null?('?' + vreq.getQueryString()):"" ));
-		            String redirectURL = request.getContextPath() + Controllers.SITE_ADMIN + "?login=block";
-		            response.sendRedirect(redirectURL);
-		            return null;
-		        }*/
-		return vreq;
 	}
 
 }

@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>VerifyAllRolesSearchable</title>
+<title>VerifyAllThingsSearchable</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,11 +27,11 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">VerifyAllRolesSearchable</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">VerifyAllThingsSearchable</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify all roles are searchable</td>
+	<td>Verify all roles are searchable</td>
 	<td></td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">No need to log in</td>
+	<td>No need to log in</td>
 	<td></td>
 </tr>
 <tr>
@@ -56,13 +56,13 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify search results for VIVO</td>
+	<td>Verify search results for VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>search</td>
-	<td>VIVO</td>
+	<td>primates</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -71,242 +71,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>NIH VIVO | Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>NIH VIVO Too | Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant | Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant Too | Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=NIH VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=NIH VIVO Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO Cornell Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO Cornell Grant Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify search results for APE</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>ape</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>ape - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=events</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Habitats for Apes | Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Ape World | Conference</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>History of Apes in Africa | Project</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Introduction to the Ape World | Course</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Prototype New Ape Home | Project</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Ape Health Program | Service</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Habitats for Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Ape World</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=History of Apes in Africa</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Introduction to the Ape World</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Prototype New Ape Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Ape Health Program</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify search results for PRIMATE</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>primate</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=events</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Working with Primates | Workshop</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Researching Primates | Presentation</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primates of the World | Museum</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Show Me the Primates! | Event</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Librarians for the Better Treatment of Primates | Committee</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Working with Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Researching Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primates of the World</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Show Me the Primates!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Librarians for the Better Treatment of Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify search results for LIBRARIAN</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>librarian</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>primates - VIVO Search Results</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,52 +81,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Librarian, Lily | Associate Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Librarians for the Better Treatment of Primates | Committee</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Reference Division | Department</td>
+	<td>link=courses</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Librarian, Lily</td>
+	<td>link=activities</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Librarians for the Better Treatment of Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Reference Division</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify search results for ANIMAL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>animal</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=topics</td>
 	<td></td>
 </tr>
 <tr>
@@ -370,138 +100,213 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Animal Librarianship | Invited Talk</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Animal Librarianship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify search results for CARROLL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>carroll</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=organizations</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Carroll College | College</td>
+	<td>verifyElementPresent</td>
+	<td>link=equipment</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Carroll College</td>
+	<td>link=locations</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Verify search results for LIBRARY</td>
+	<td>verifyTextPresent</td>
+	<td>Primate Diet | Subject Area</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>search</td>
-	<td>library</td>
+	<td>verifyTextPresent</td>
+	<td>Primate History Library | Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates-r-us | Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Habitat Research Grant | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Colleges of the World | Consortium</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Student of the Year | Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health and Fitness | Invited Talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Check | Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Feeder | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Heart Health Clinic | Service</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Laboratory | Campus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane | Assistant Professor </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Health | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Portable Primate Habitat | Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Research Lab Room 123 | Facility</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Elderly Care | Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate College of America | College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jane Memorial Building | Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Fall 2010 | Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Introduction to Primate Health | Semester Class</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Elderly Care | Subject Area</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Health Conference | Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Privately Funded | Process</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=organizations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Amercian Library Association | Association</td>
+	<td>assertTitle</td>
+	<td>primates - VIVO Search Results</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>B.L.S. Bachelor of Library Science | Academic Degree</td>
+	<td>Winter 2011 | Academic Term</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>D.L.S. Doctor of Library Science | Academic Degree</td>
+	<td>Not sure | Vocabulary Source Reference</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>M.L.S. Master of Library Science | Academic Degree</td>
+	<td>B.S. Bachelor of Science | Academic Degree</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Amercian Library Association</td>
+	<td>verifyTextPresent</td>
+	<td>1234 Northern African Nation | Address</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=B.L.S. Bachelor of Library Science</td>
+	<td>verifyTextPresent</td>
+	<td>northern Africa | geographical_region</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=D.L.S. Doctor of Library Science</td>
+	<td>verifyTextPresent</td>
+	<td>Africa | geographical_region</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=M.L.S. Master of Library Science</td>
+	<td>verifyTextPresent</td>
+	<td>Liberia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Kenya</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Chad</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>the Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>the United States of America</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify search results for FACULTY</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>search</td>
-	<td>faculty</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=people</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane | Assistant Professor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">All done</td>
+	<td>All done</td>
 	<td></td>
 </tr>
 <tr>

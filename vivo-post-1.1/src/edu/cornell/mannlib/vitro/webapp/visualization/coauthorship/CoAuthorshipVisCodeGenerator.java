@@ -578,7 +578,7 @@ public class CoAuthorshipVisCodeGenerator {
 											VisualizationController.URL_ENCODING_SCHEME).toString();
 			
 			fullTimelineLink = "<a href='" + fullTimelineNetworkURL 
-									+ "'>View full timeline and co-author network</a><br />";
+									+ "'>View full timeline and co-author network.</a>";
 			
 			sparklineData.setFullTimelineNetworkLink(fullTimelineNetworkURL);
 			

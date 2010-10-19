@@ -1,6 +1,11 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#import "listMacros.ftl" as l>
+<#import "lib-list.ftl" as l>
+
+<#-- uncomment this div to place your institutional branding/identity at the top of every page
+<div id="institution">
+</div>
+-->
 
 <div id="identity">
 

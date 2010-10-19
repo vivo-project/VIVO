@@ -1,5 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+@import url("autocomplete.css"); 
+
 /* Although Javascript hides these on page load, hide here as well to avoid the flash on page load.
    This needs to be removed to support a non-JS version of the form. */
 .fullViewOnly, 
@@ -16,11 +18,12 @@
     margin-right: 1em;
 }
 
-.acSelection {
-    margin-top: 2em;
-}
-
 .verifyMatch {
     margin-left: .5em;
+}
+
+#content form h4 {
+    margin-top: 1em;
+    margin-bottom: .75em;
 }
 
