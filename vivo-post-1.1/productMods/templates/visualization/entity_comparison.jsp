@@ -9,7 +9,7 @@
 </c:set>
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
 <div id="body">
-	<h1>Temporal Graph Visualization</h1>
+	<h1>Temporal Graph Visualization<span id="entitylevelheading"><i> School level</i></span></h1>
 	<div id="leftblock">
 		<h2>How do you want to compare?</h2>
 		<select class="comparisonValues">
@@ -51,7 +51,7 @@
 				<button type ="button">clear</button>
 				<h3><span id="comparisonParameter"></span></h3>
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
-			id="total">10</span> sub-entities to compare.</p>
+			id="total">10</span> <span id="entityleveltext"> schools</span> to compare.</p>
 
 			</div>
 		</div>		
@@ -159,8 +159,9 @@
                 labelToEntityRecord[val.label] = val;
             });
 
+			getEntityVisMode(jsonData);
 			prepareTableForDataTablePagination(jsonData);
-			
+			setEntityLevel();
             calcMinandMaxYears(labelToEntityRecord, year);
 			yearRange = (year.max - year.min);
 

@@ -16,11 +16,14 @@ function init(graphContainer) {
 	
 	var defaultFlotOptions = {
 			xaxis : {
-		min : 1999,
-		max : 2019,
-		tickDecimals : 0,
-		tickSize : 2
-	}
+				min : 1996,
+				max : 2008,
+				tickDecimals : 0,
+				tickSize : 2
+			},
+			yaxis: {
+				tickSize : 1
+			}
 	};
 
 	/*
@@ -267,13 +270,13 @@ function contains(objectArray, object) {
 function setLineWidthAndTickSize(yearRange, flotOptions) {
 
 	if (yearRange > 0 && yearRange < 15) {
-		flotOptions.series.lines.lineWidth = 4.5;
-		flotOptions.xaxis.tickSize = 1;
-	} else if (yearRange > 15 && yearRange < 70) {
 		flotOptions.series.lines.lineWidth = 3;
 		flotOptions.xaxis.tickSize = 1;
+	} else if (yearRange > 15 && yearRange < 70) {
+		flotOptions.series.lines.lineWidth = 2;
+		flotOptions.xaxis.tickSize = 1;
 	} else {
-		flotOptions.series.lines.lineWidth = 1.5;
+		flotOptions.series.lines.lineWidth = 1;
 		flotOptions.xaxis.tickSize = 1;
 	}
 
@@ -819,7 +822,8 @@ function prepareTableForDataTablePagination(jsonData){
 	tableDiv.append(table);
 	
 	$('#datatable').dataTable({
-		"sDom": '<f>tl',
+		"sDom": '<f>tlp',
+		"iDisplayLength": 10,
 		"fnDrawCallback": function(){
 	      $('td').bind('mouseenter', function () { $(this).parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
 	      $('td').bind('mouseleave', function () { $(this).parent().children().each(function(){$(this).removeClass('datatablerowhighlight');}); });
@@ -828,6 +832,9 @@ function prepareTableForDataTablePagination(jsonData){
 //		"bLengthChange": false,
 //		"bAutoWidth": false
 	});
+	
+
+	 populateMapOfCheckedEntities();
 }
 
 function resetStopWordCount(){
@@ -848,4 +855,20 @@ function removeStopWords(val){
 	});
 	console.log(stopWordsToCount["Person"],stopWordsToCount["Organization"]);
 	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
+}
+
+function setEntityLevel(){
+	$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' level').css('font-style', 'italic');
+	$('#entityleveltext').text('  ' + entityLevel.toLowerCase() + 's ').css('font-style', 'italic');
+}
+
+function getEntityVisMode(jsonData){
+	$.each(jsonData, function(index, val){
+		entityLevel = val.visMode;
+		return;
+	});
+}
+
+function toCamelCase(string){
+	return (string.substr(0,1).toUpperCase() + string.substr(1, string.length-1).toLowerCase());
 }

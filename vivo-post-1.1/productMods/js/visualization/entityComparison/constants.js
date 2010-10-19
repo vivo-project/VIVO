@@ -43,6 +43,7 @@ var stopWordsToCount = {};
 var graphContainer;
 var paginationDiv;
 var tableDiv;
+var entityLevel;
 
 var lotsofSpaceCharacters = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -66,6 +67,9 @@ var FlotOptions = {
 			lines : {
 				lineWidth : 7
 			}
+		},
+		yaxis : {
+			tickSize : 1
 		}
 };
 
