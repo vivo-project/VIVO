@@ -51,8 +51,6 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String egoURI;
-//	private Map<String, VivoCollegeOrSchool> collegeURLToVO = 
-//			new HashMap<String, VivoCollegeOrSchool>();
 	
 	private DataSource dataSource;
 
