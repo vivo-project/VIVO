@@ -297,7 +297,7 @@ public class EntityPublicationCountRequestHandler implements
 			subEntitiesJson.add(entityJson);
 		}
 		
-		System.out.println("\nStopWords are "+ EntitySubOrganizationTypesQueryRunner.stopWords.toString() + "\n");
+	//	System.out.println("\nStopWords are "+ EntitySubOrganizationTypesQueryRunner.stopWords.toString() + "\n");
 		return json.toJson(subEntitiesJson);
 
 	}

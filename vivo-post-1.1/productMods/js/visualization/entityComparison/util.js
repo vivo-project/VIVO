@@ -292,7 +292,8 @@ function createGraphic(entity, bottomDiv) {
 
 	var labelDiv = $('<div>')
 	labelDiv.attr('id', 'label');
-	labelDiv.html('<a href="' + getEntityURL(entity) + '"></a>');
+	labelDiv.html('<a id="entityURL" href="' + getEntityURL(entity) + '"></a>');
+	labelDiv.children('a').after('<a id="vivoURL" href="' + getVIVOURL(entity) + '"></a>');
 	
 	var checkbox = $('<input>');
 	checkbox.attr('type','checkbox');
@@ -302,7 +303,6 @@ function createGraphic(entity, bottomDiv) {
 	checkbox.attr('value', entity.label);
 	
 	var hiddenLabel = $('<label>');
-	//hiddenLabel.attr('class', 'school');
 	hiddenLabel.attr('type', 'hidden');
 	hiddenLabel.attr('value', entity.label);
 
@@ -322,6 +322,12 @@ function createGraphic(entity, bottomDiv) {
 
 	return hiddenLabel;
 
+}
+
+function getVIVOURL(entity){
+	
+	var result  = "/vivo1/individual?uri="+entity.entityURI+"&home=1";
+	return result;
 }
 
 function getEntityURL(entity) {
@@ -481,7 +487,10 @@ function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
 	//append a div and modify its css
     divBar.css("background-color", colorToAssign);
     divBar.css("width", normalizedWidth);
-    divLabel.children("a").html(checkboxValue);
+    divLabel.children("a#entityURL").html(checkboxValue + "    ");
+    divLabel.children("a#vivoURL").html("   | VIVO profile");
+    divLabel.children("a#vivoURL").css("text-decoration", "underline");
+    divLabel.children("a").css("font-size", "0.8em");
     spanElement.text(sum);
     checkbox.next('a').css("font-weight", "bold");
 

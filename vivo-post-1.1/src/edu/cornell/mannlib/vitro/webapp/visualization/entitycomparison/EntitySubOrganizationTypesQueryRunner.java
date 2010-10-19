@@ -37,15 +37,15 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	private String visMode;
 	static String SUBORGANISATION_LABEL;
 	static String SUBORGANISATION_TYPE_LABEL;
-	public static Map<String, Integer> subOrganizationTypesToCount = new HashMap<String, Integer>();
-	public static Set<String> stopWords = new HashSet<String>();
-	public static Set<String> subOrganizations = new HashSet<String>();
-	public static Set<String> STOP_WORDS = new HashSet<String>() {
-		{
-			add("Person");
-			add("Organization");
-		}
-	};
+//	public static Map<String, Integer> subOrganizationTypesToCount = new HashMap<String, Integer>();
+//	public static Set<String> stopWords = new HashSet<String>();
+//	public static Set<String> subOrganizations = new HashSet<String>();
+//	public static Set<String> STOP_WORDS = new HashSet<String>() {
+//		{
+//			add("Person");
+//			add("Organization");
+//		}
+//	};
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
 		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
@@ -61,9 +61,9 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 		this.dataSource = dataSource;
 		this.log = log;
 		this.visMode = visMode;
-		stopWords.clear();
-		subOrganizations.clear();
-		subOrganizationTypesToCount.clear();
+//		stopWords.clear();
+//		subOrganizations.clear();
+//		subOrganizationTypesToCount.clear();
 	}
 	
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
@@ -146,45 +146,45 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
-					updateSubOrganizationTypesToCount(subOrganizationType.toString());
-					subOrganizations.add(subOrganizationLabel.toString());
+//					updateSubOrganizationTypesToCount(subOrganizationType.toString());
+//					subOrganizations.add(subOrganizationLabel.toString());
 				}
 			}else{
 				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
 				if(subOrganizationType != null){
 					subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
 					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
-					updateSubOrganizationTypesToCount(subOrganizationType.toString());
-					subOrganizations.add(subOrganizationLabel.toString());
+//					updateSubOrganizationTypesToCount(subOrganizationType.toString());
+//					subOrganizations.add(subOrganizationLabel.toString());
 				}
 			}
 		}
 		
-		collectStopWords();
+//		collectStopWords();
 		
 		return subOrganizationLabelToTypes;
 	}
 
 	
-	private void collectStopWords() {
-		System.out.println("Inside collectStopWords \n-----------------------------\n");
-		for(Map.Entry<String, Integer> typesCount : subOrganizationTypesToCount.entrySet()){
-			System.out.println(typesCount.getKey() + ": "+ typesCount.getValue());
-			if(typesCount.getValue() >= subOrganizations.size()){
-				stopWords.add(typesCount.getKey());
-			}
-		}
-	}
-
-	private void updateSubOrganizationTypesToCount(String typeLabel) {
-		int count = 0;
-		if(subOrganizationTypesToCount.containsKey(typeLabel)){
-			count = subOrganizationTypesToCount.get(typeLabel);
-			subOrganizationTypesToCount.put(typeLabel, ++count);
-		}else{
-			subOrganizationTypesToCount.put(typeLabel, 1);
-		}
-	}
+//	private void collectStopWords() {
+//		System.out.println("Inside collectStopWords \n-----------------------------\n");
+//		for(Map.Entry<String, Integer> typesCount : subOrganizationTypesToCount.entrySet()){
+//			System.out.println(typesCount.getKey() + ": "+ typesCount.getValue());
+//			if(typesCount.getValue() >= subOrganizations.size()){
+//				stopWords.add(typesCount.getKey());
+//			}
+//		}
+//	}
+//
+//	private void updateSubOrganizationTypesToCount(String typeLabel) {
+//		int count = 0;
+//		if(subOrganizationTypesToCount.containsKey(typeLabel)){
+//			count = subOrganizationTypesToCount.get(typeLabel);
+//			subOrganizationTypesToCount.put(typeLabel, ++count);
+//		}else{
+//			subOrganizationTypesToCount.put(typeLabel, 1);
+//		}
+//	}
 
 	public Map<String, Set<String>> getQueryResult() throws MalformedQueryParametersException {
 
