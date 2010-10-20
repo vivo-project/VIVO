@@ -716,7 +716,7 @@ jQuery.fn.liveUpdate = function(list){
 	  if ( list.length ) {
 	    var rows = list.children('li');	    
 	    var cache = rows.map(function(){
-	    	  //console.log($(this).children('a').text().toLowerCase());
+	    	//  console.log($(this).children('a').text().toLowerCase());
 	        return $(this).children('a').text().toLowerCase();
 	      });
 	    
