@@ -385,7 +385,7 @@ function slugify(textToBeSlugified) {
  */
 function removeGraphic(checkbox) {
 	
-	console.log("removeGraphic is called for "+$(checkbox).attr("value"));
+	//console.log("removeGraphic is called for "+$(checkbox).attr("value"));
 	var pToBeRemovedIdentifier = $(checkbox).attr("value");
 	$('p#' + slugify(pToBeRemovedIdentifier)).remove();
 	
@@ -616,7 +616,7 @@ function clearRenderedObjects(){
 			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
 			removeGraphic(val);
 			displayLineGraphs();
-			console.log(index);
+			//console.log(index);
 		}
 	});
 	
@@ -716,11 +716,11 @@ jQuery.fn.liveUpdate = function(list){
 	  if ( list.length ) {
 	    var rows = list.children('li');	    
 	    var cache = rows.map(function(){
-	    	  console.log($(this).children('a').text().toLowerCase());
+	    	  //console.log($(this).children('a').text().toLowerCase());
 	        return $(this).children('a').text().toLowerCase();
 	      });
 	    
-	    console.log("rows: ", rows , " cache: ", cache);
+	    //console.log("rows: ", rows , " cache: ", cache);
 	     
 	    this.keyup(filter).keyup().parents('form').submit(function(){
 	        return false;
@@ -732,7 +732,7 @@ jQuery.fn.liveUpdate = function(list){
 	  function filter(){
 		  
 	    var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
-	    console.log("this: ",this, " term: " +term);
+	    //console.log("this: ",this, " term: " +term);
 	    
 	    if ( !term ) {
 	      rows.show();
@@ -747,7 +747,7 @@ jQuery.fn.liveUpdate = function(list){
 
 	      jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
 	        jQuery(rows[ this[1] ]).show();
-		      console.log("showing : ", ($(rows[this[1]]).children('a').text()));
+		      //console.log("showing : ", ($(rows[this[1]]).children('a').text()));
 	      });
 	    }
 	  }
@@ -853,7 +853,7 @@ function removeStopWords(val){
 			typeStringWithoutStopWords += ', '+ value; 
 		}
 	});
-	console.log(stopWordsToCount["Person"],stopWordsToCount["Organization"]);
+	//console.log(stopWordsToCount["Person"],stopWordsToCount["Organization"]);
 	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
 }
 

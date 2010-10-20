@@ -86,7 +86,7 @@
 
 		//click event handler for clear button
 		$("button").click(function(){
-			console.log("clear button is clicked!");
+			//console.log("clear button is clicked!");
 			clearRenderedObjects();
 		});
 
@@ -101,11 +101,11 @@
 			var checkbox = $(this);
 			var checkboxValue = $(this).attr("value");
 			var linkedCheckbox = labelToCheckedEntities[checkboxValue];
-			console.log('checkbox value is '+ checkboxValue);
+			//console.log('checkbox value is '+ checkboxValue);
 			var entityToBeRemoved = labelToEntityRecord[checkboxValue];
 
 			if(!checkbox.is(':checked')){
-				console.log("Easy deselect checkbox is unclicked!");
+				//console.log("Easy deselect checkbox is unclicked!");
 				removeUsedColor(entityToBeRemoved);
 				removeEntityUnChecked(renderedObjects, entityToBeRemoved);                          
              	removeGraphic(linkedCheckbox);
