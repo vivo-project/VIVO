@@ -203,13 +203,13 @@
 <c:url var="coAuthorship10" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
-	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual12053"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/BrnerKaty"/>
 </c:url>
 
 <c:url var="coAuthorship10Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
-	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual12053"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/BrnerKaty"/>
 </c:url>
 
 <c:url var="coAuthorshipSparklineData" value="/visualization">
