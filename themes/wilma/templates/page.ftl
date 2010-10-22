@@ -69,7 +69,7 @@ ${headScripts.tags}
   </nav>
   <div id="wrapper-content">
 	
-    ${body}
+    ${body!}
  
   </div>
   <footer>

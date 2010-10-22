@@ -344,6 +344,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>HomePageController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageController</servlet-name>
+    <url-pattern>/index.jsp</url-pattern>
+  </servlet-mapping>
+   
+  <servlet>
     <servlet-name>FreemarkerTestController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.TestController</servlet-class>
   </servlet>
@@ -949,18 +958,6 @@
   <servlet-mapping>
     <servlet-name>TabEntitiesController</servlet-name>
     <url-pattern>/TabEntitiesController</url-pattern>
-  </servlet-mapping>
-
-  <!--  NOTICE: index.jsp is mapped to TabControler so that we 
-    		can have the urls that use to be in the system still work even 
-            though we no longer use index.jsp           -->
-  <servlet>
-    <servlet-name>TabController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.TabController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TabController</servlet-name>
-    <url-pattern>/index.jsp</url-pattern>
   </servlet-mapping>
 
   <!-- <servlet>
