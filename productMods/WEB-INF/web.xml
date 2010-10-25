@@ -39,6 +39,10 @@
 
   <!-- Listeners ****************************************************** -->
 
+  <listener>
+    <listener-class>edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup</listener-class>
+  </listener>
+
   <!-- DefaultThemeSetup needs to run before the JenaDataSourceSetup
        to allow creation of default portal and tab -->
   <listener>
