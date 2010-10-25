@@ -1,5 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<#-- Page template for home page -->
+
 <#include "doctype.html">
 
 <#include "head.ftl">
@@ -23,11 +25,8 @@
 
         <div id="contentwrap">      
             <div id="content">
-                <#-- UI team: the home page controller currently does not produce a ${body} string,
-                anticipating that you would put all the markup directly in page-home.ftl. If you want
-                it to work the way other pages do, with a separate template to produce the body,
-                <#-- ${body!}  -->             
-                <p>This is the home page of the VIVO vivo-basic theme.</p>
+                <h2>Welcome to VIVO!</h2>
+                ${body}             
             </div> <!-- content -->
         </div> <!-- contentwrap -->
     
