@@ -5,6 +5,7 @@
 <meta charset="utf-8" />
 <title>${title}</title>
 <link rel="stylesheet" href="${themeDir}/css/style.css" />
+${stylesheets.tags}
 <!-- script for enabling new HTML5 semantic markup in IE browsers-->
 ${headScripts.add("/js/html5.js")}
 ${headScripts.tags}
@@ -68,9 +69,7 @@ ${headScripts.tags}
 	    </ul>
   </nav>
   <div id="wrapper-content">
-	
     ${body}
- 
   </div>
   <footer>
     <div id="footer-content">
@@ -81,7 +80,7 @@ ${headScripts.tags}
 				<#else>
 		    		${copyright.text}
 				</#if> 
-			All Rights Reserved | <a class="terms" href="${urls.termsOfUse}">Terms of Use</a></small> | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</em></a></p>
+			All Rights Reserved | <a class="terms" href="${urls.termsOfUse}">Terms of Use</a></small> | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a></p>
 		</#if>
       <nav>
         <ul id="footer-nav">
@@ -93,7 +92,6 @@ ${headScripts.tags}
         </ul>
       </nav>
     </div>
-    </section>
   </footer>
 </div>
 
@@ -102,21 +100,23 @@ ${headScripts.tags}
 <script type="text/javascript" src="http://use.typekit.com/chp2uea.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 ${scripts.add("/js/jquery.js")}
-
+${scripts.tags}
 
 
 <!--[if lt IE 7]>
-${scripts.add("/js/jquery_plugins/supersleight.js")}
-${scripts.addFromTheme("/js/utils.js")}
+<script type="text/javascript" src="${themeDir}/js/jquery_plugins/supersleight.js"></script>
+<script type="text/javascript" src="${themeDir}/js/utils.js"></script>
 <link rel="stylesheet" href="css/ie6.css" />
 <![endif]-->
+
 <!--[if IE 7]>
 <link rel="stylesheet" href="css/ie7.css" />
 <![endif]-->
-<!--[if (gte IE 6)&(lte IE 8)]>
-${scripts.add("/js/selectivizr.js")}
-<![endif]-->
-${scripts.tags}
 
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="${themeDir}/js/selectivizr.js"></script>
+<![endif]-->
+
+<#include "googleAnalytics.ftl">
 </body>
 </html>
