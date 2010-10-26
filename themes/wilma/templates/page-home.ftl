@@ -9,6 +9,20 @@ ${stylesheets.tags}
 <!-- script for enabling new HTML5 semantic markup in IE browsers-->
 ${headScripts.add("/js/html5.js")}
 ${headScripts.tags}
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="${themeDir}/js/jquery_plugins/supersleight.js"></script>
+<script type="text/javascript" src="${themeDir}/js/utils.js"></script>
+<link rel="stylesheet" href="css/ie6.css" />
+<![endif]-->
+
+<!--[if IE 7]>
+<link rel="stylesheet" href="css/ie7.css" />
+<![endif]-->
+
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="${themeDir}/js/selectivizr.js"></script>
+<![endif]-->
 </head>
 <body>
 <div id="wrapper">
@@ -227,21 +241,6 @@ ${headScripts.tags}
 
 ${scripts.add("/js/jquery.js")}
 ${scripts.tags}
-
-
-<!--[if lt IE 7]>
-<script type="text/javascript" src="${themeDir}/js/jquery_plugins/supersleight.js"></script>
-<script type="text/javascript" src="${themeDir}/js/utils.js"></script>
-<link rel="stylesheet" href="css/ie6.css" />
-<![endif]-->
-
-<!--[if IE 7]>
-<link rel="stylesheet" href="css/ie7.css" />
-<![endif]-->
-
-<!--[if (gte IE 6)&(lte IE 8)]>
-<script type="text/javascript" src="${themeDir}/js/selectivizr.js"></script>
-<![endif]-->
 
 <#include "googleAnalytics.ftl">
 </body>
