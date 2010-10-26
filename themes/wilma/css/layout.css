@@ -597,7 +597,7 @@ p.publication-content span {
 }
 #footer-content p.copyright {
 	float:left;
-	padding-top:48px;
+	padding-top:55px;
 	padding-left: 30px;
 	width:500px;
 }
@@ -605,7 +605,7 @@ ul#footer-nav {
 	float:right;
 	list-style: none;
 	width:200px;
-	height:30px;
+	height:20px;
 	margin:0;
 	padding:0;
 	padding-top:50px;
@@ -616,7 +616,7 @@ ul#footer-nav li {
 	display:block;
 	padding-left:10px;
 	padding-right:10px;
-	border-right:1px solid #4e5051;
+	border-right:1px solid #c9c8c8;
 }
 ul#footer-nav li:last-child {
 	border-right:none;

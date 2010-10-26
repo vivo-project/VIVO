@@ -73,7 +73,7 @@ ${headScripts.tags}
 
 <section id="intro">
      <h3>What is VIVO?</h3>
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus adipiscing ipsum et ligula accumsan aliquam. Vestibulum posuere mollis arcu quis condimentum. Sed rhoncus nibh vitae lectus mattis accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum eleifend ante vel aliquam. Fusce non pellentesque leo. Nunc rhoncus vehicula metus, a pellentesque velit elementum ibh vitae lectus mattis accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elem. <a href="#">More<span class="pictos-arrow-14"> 4</span></a></p>
+     <p>VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with researcher interests, activities, and accomplishments, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually,  brought into VIVO in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases, or from database providers such as publication aggregators and funding agencies. <a href="#">More<span class="pictos-arrow-14"> 4</span></a></p>
      <section id="search-home">
        <h3>Search VIVO</h3>
        <fieldset>
@@ -111,26 +111,27 @@ ${headScripts.tags}
    <section id="browse">
      <h2>Browse</h2>
      <ul id="browse-classGroups">
-       <li><a  class="selected" href="#">class group 1<span class="count-classes"> (280)</span></a></li>
-       <li><a href="#">class group 2<span class="count-classes"> (280)</span></a></li>
-       <li><a href="#">class group 3<span class="count-classes"> (280)</span></a></li>
-       <li><a href="#">class group 4<span class="count-classes"> (280)</span></a></li>
-       <li><a href="#">class group 5<span class="count-classes"> (280)</span></a></li>
-       <li><a href="#">class group 6<span class="count-classes"> (280)</span></a></li>
-       <li><a href="#">class group n<span class="count-classes"> (280)</span></a></li>
+         <li><a  class="selected" href="#">People<span class="count-classes"> (1,280)</span></a></li>
+         <li><a href="#">Courses<span class="count-classes"> (1,300)</span></a></li>
+         <li><a href="#">Activities<span class="count-classes"> (980)</span></a></li>
+         <li><a href="#">Topics<span class="count-classes"> (345)</span></a></li>
+         <li><a href="#">Events<span class="count-classes"> (670)</span></a></li>
+         <li><a href="#">Organizations<span class="count-classes"> (440)</span></a></li>
+         <li><a href="#">Publications<span class="count-classes"> (670)</span></a></li>
+         <li><a href="#">Locations<span class="count-classes"> (903)</span></a></li>
      </ul>
      <section id="browse-classes">
        <nav>
          <ul id="class-group-list">
-           <li><a  class="selected" href="#">class 1<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 2<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 3<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 4<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 5<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 6<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 7<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 8<span class="count-individuals"> (280)</span></a></li>
-           <li><a href="#">class 9<span class="count-individuals"> (280)</span></a></li>
+              <li><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
+                 <li><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
+                 <li><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>
+                 <li><a href="#">Non-Academic 	  	 <span class="count-individuals"> (280)</span></a></li>
+                 <li><a href="#">Non-Faculty Academic <span class="count-individuals"> (2,380)</span></a></li>
+                 <li><a href="#">Person<span class="count-individuals"> (2,480)</span></a></li>
+                 <li><a href="#">Postdoc <span class="count-individuals"> (1,380)</span></a></li>
+                 <li><a href="#">Professor Emeritus<span class="count-individuals"> (680)</span></a></li>
+                 <li><a href="#">Undergraduate Student<span class="count-individuals"> (880)</span></a></li>
          </ul>
        </nav>
        <section id="visual-graph">
@@ -153,49 +154,51 @@ ${headScripts.tags}
      <section id="upcoming-events" class="global-highlights">
        <h3>UPCOMING EVENTS</h3>
        <article class="vevent">
-         <time class="dtstart" datetime="2010-02-13T20:00Z">20<span>Aug</span></time>
-         <p class="summary">individualName. eventClass
-           <time>9:30 AM</time>
+         <time class="dtstart" datetime="2010-02-13T20:00Z">21<span>Dec</span></time>
+         <p class="summary">Understanding Patent Writing
+           <time>3:30 PM</time>
          </p>
        </article>
        <article class="vevent">
-         <time class="dtstart" datetime="2010-02-13T20:00Z">20<span>Aug</span></time>
-         <p class="summary">individualName. eventClass
-           <time>9:30 AM</time>
+         <time class="dtstart" datetime="2010-02-13T20:00Z">20<span>Nov</span></time>
+         <p class="summary">Voters, Dictators, and Peons
+           <time>4:30 PM</time>
          </p>
        </article>
        <article class="vevent">
-         <time class="dtstart" datetime="2010-02-13T20:00Z">20<span>Aug</span></time>
-         <p class="summary">individualName. eventClass
-           <time>9:30 AM</time>
+         <time class="dtstart" datetime="2010-02-13T20:00Z">19<span>Nov</span></time>
+         <p class="summary">Proton-Coupled Electron Transfer II
+           <time>5:30 PM</time>
          </p>
        </article>
        <p class="view-all"><a class="view-all-style" href="#">View All <span class="pictos-arrow-10">4</span></a></p>
-     </section><!-- upcoming-events -->
+     </section>
+     <!-- upcoming-events -->
      <section id="latest-publications" class="global-highlights">
        <h3>LATEST PUBLICATIONS</h3>
        <article class="latest-publications-item">
-         <p class="publication-content">individualName<span><em>Audio Content</em>
-           <time datetime="2010-02-13T20:00Z"> | March 2010</time>
+         <p class="publication-content">Solar masses<span><em>Journal</em>
+           <time datetime="2010-02-13T20:00Z"> | December 2010</time>
          </p>
        </article>
        <article class="latest-publications-item">
-         <p class="publication-content">individualName<span><em>Audio Content</em>
-           <time datetime="2010-02-13T20:00Z"> | March 2010</time>
+         <p class="publication-content">Link data and the Web<span><em>Article</em>
+           <time datetime="2010-02-13T20:00Z"> | December 2010</time>
          </p>
        </article>
        <article class="latest-publications-item">
-         <p class="publication-content">individualName<span><em>Audio Content</em>
-           <time datetime="2010-02-13T20:00Z"> | March 2010</time>
+         <p class="publication-content">Building a community<span><em>Book</em>
+           <time datetime="2010-02-13T20:00Z"> | November 2010</time>
          </p>
        </article>
        <article class="latest-publications-item">
-         <p class="publication-content">individualName<span><em>Audio Content</em>
-           <time datetime="2010-02-13T20:00Z"> | March 2010</time>
+         <p class="publication-content">Biology 101<span><em>Series</em>
+           <time datetime="2010-02-13T20:00Z"> | November 2010</time>
          </p>
        </article>
        <p class="view-all"><a class="view-all-style" href="#">View All <span class="pictos-arrow-10">4</span></a></p>
-     </section><!-- latest-publications -->
+     </section>
+     <!-- latest-publications -->
    </section>
 </div>
   <footer>
@@ -222,10 +225,6 @@ ${headScripts.tags}
   </footer>
 </div>
 
-
-
-<script type="text/javascript" src="http://use.typekit.com/chp2uea.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 ${scripts.add("/js/jquery.js")}
 ${scripts.tags}
 

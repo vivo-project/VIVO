@@ -94,11 +94,8 @@ ${headScripts.tags}
     </div>
   </footer>
 </div>
-
-
-
-<script type="text/javascript" src="http://use.typekit.com/chp2uea.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<!--<script type="text/javascript" src="http://use.typekit.com/chp2uea.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
 ${scripts.add("/js/jquery.js")}
 ${scripts.tags}
 
