@@ -20,9 +20,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#pmcid">
     <rdfs:label xml:lang="en-US">PubMed Central ID</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#startYear">
-    <rdfs:label xml:lang="en-US">start year</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#nihmsid">
     <rdfs:label xml:lang="en-US">NIH Manuscript Submission System ID</rdfs:label>
   </rdf:Description>
@@ -53,14 +50,11 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#sourceVocabularyReference">
     <rdfs:label xml:lang="en-US">source vocabulary reference</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#endYearMonth">
-    <rdfs:label xml:lang="en-US">end year and month</rdfs:label>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CaseStudy">
+    <rdfs:label xml:lang="en-US">Case Study</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/section">
     <rdfs:label xml:lang="en-US">section</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#CaseStudy">
-    <rdfs:label xml:lang="en-US">Case Study</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SeminarSeries">
     <rdfs:label xml:lang="en-US">Seminar Series</rdfs:label>
@@ -101,17 +95,8 @@
   <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/">
     <rdfs:label xml:lang="en-US">FOAF</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#startYearMonth">
-    <rdfs:label xml:lang="en-US">start year and month</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#organizationGrantingDegree">
-    <rdfs:label xml:lang="en-US">organization granting degree</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices">
     <rdfs:label xml:lang="en-US">GDPTotalInCurrentPrices</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#startTime">
-    <rdfs:label xml:lang="en-US">start time</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMaxLatitude">
     <rdfs:label xml:lang="en-US">hasMaxLatitude</rdfs:label>
@@ -224,9 +209,6 @@
   <rdf:Description rdf:about="http://purl.org/dc/elements/1.1/">
     <rdfs:label xml:lang="en-US">Dublin Core elements</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#endTime">
-    <rdfs:label xml:lang="en-US">end time</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLongitude">
     <rdfs:label xml:lang="en-US">hasMinLongitude</rdfs:label>
   </rdf:Description>
@@ -269,11 +251,11 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#territory">
     <rdfs:label xml:lang="en-US">territory</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant">
-    <rdfs:label xml:lang="en-US">Grant</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Score">
     <rdfs:label xml:lang="en-US">Score</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Grant">
+    <rdfs:label xml:lang="en-US">Grant</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialZH">
     <rdfs:label xml:lang="en-US">nameOfficialZH</rdfs:label>
@@ -392,23 +374,17 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicLocationOf">
     <rdfs:label xml:lang="en-US">geographic location of</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasLeaderRole">
-    <rdfs:label xml:lang="en-US">head of</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NewsRelease">
     <rdfs:label xml:lang="en-US">News Release</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#startDateTime">
-    <rdfs:label xml:lang="en-US">start date and time</rdfs:label>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasLeaderRole">
+    <rdfs:label xml:lang="en-US">head of</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeISO2">
     <rdfs:label xml:lang="en-US">codeISO2</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#equipmentInFacility">
     <rdfs:label xml:lang="en-US">in facility</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#workEmail">
-    <rdfs:label xml:lang="en-US">work email</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameOfficialFR">
     <rdfs:label xml:lang="en-US">nameOfficialFR</rdfs:label>
@@ -433,9 +409,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/pmid">
     <rdfs:label xml:lang="en-US">pmid</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#endDateTime">
-    <rdfs:label xml:lang="en-US">end date and time</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Film">
     <rdfs:label xml:lang="en-US">Film</rdfs:label>
@@ -463,9 +436,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#disputed">
     <rdfs:label xml:lang="en-US">disputed</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#yearMonth">
-    <rdfs:label xml:lang="en-US">year and month</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/LegalDocument">
     <rdfs:label xml:lang="en-US">Legal Document</rdfs:label>
@@ -704,11 +674,11 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalArea">
     <rdfs:label xml:lang="en-US">agriculturalArea</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publisherOf">
-    <rdfs:label xml:lang="en-US">publisher of</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#contributingAdvising">
     <rdfs:label xml:lang="en-US">contributing advising relationship</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publisherOf">
+    <rdfs:label xml:lang="en-US">publisher of</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#vocabularyReferenceFor">
     <rdfs:label xml:lang="en-US">vocabulary reference for</rdfs:label>
@@ -767,11 +737,11 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#educationalTraining">
     <rdfs:label xml:lang="en-US">educational training</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#group">
-    <rdfs:label xml:lang="en-US">group</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#informationResourceInAuthorship">
     <rdfs:label xml:lang="en-US">authors</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#group">
+    <rdfs:label xml:lang="en-US">group</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/isbn10">
     <rdfs:label xml:lang="en-US">isbn-10</rdfs:label>
@@ -817,6 +787,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#special_group">
     <rdfs:label xml:lang="en-US">special_group</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#educationalOrganization">
+    <rdfs:label xml:lang="en-US">educational organization</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSuccessorOrganization">
     <rdfs:label xml:lang="en-US">successor organization</rdfs:label>
@@ -902,9 +875,6 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#isAdministeredBy">
     <rdfs:label xml:lang="en-US">isAdministeredBy</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasTimeInterval">
-    <rdfs:label xml:lang="en-US">time interval</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Room">
     <rdfs:label xml:lang="en-US">Room</rdfs:label>
   </rdf:Description>
@@ -977,9 +947,6 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasStatistics">
     <rdfs:label xml:lang="en-US">hasStatistics</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#title">
-    <rdfs:label xml:lang="en-US">title</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#GDP">
     <rdfs:label xml:lang="en-US">GDP</rdfs:label>
   </rdf:Description>
@@ -1039,9 +1006,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasCode">
     <rdfs:label xml:lang="en-US">hasCode</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://purl.org/dc/elements/1.1/title">
-    <rdfs:label xml:lang="en-US">title</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasOutreachProviderRole">
     <rdfs:label xml:lang="en-US">outreach and community service</rdfs:label>
@@ -1112,9 +1076,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#internationalGeographicFocusOf">
     <rdfs:label xml:lang="en-US">international geographic focus of</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#value">
-    <rdfs:label xml:lang="en-US">value</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#outcomeOf">
     <rdfs:label xml:lang="en-US">outcome of</rdfs:label>
   </rdf:Description>
@@ -1160,6 +1121,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Relationship">
     <rdfs:label xml:lang="en-US">Relationship</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#email">
+    <rdfs:label xml:lang="en-US">email</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Division">
     <rdfs:label xml:lang="en-US">Division</rdfs:label>
   </rdf:Description>
@@ -1174,6 +1138,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#sectionCredits">
     <rdfs:label xml:lang="en-US">credits</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Agent">
+    <rdfs:label xml:lang="en-US">Agent</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#reviewedIn">
     <rdfs:label xml:lang="en-US">reviewed in</rdfs:label>
@@ -1247,11 +1214,11 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaUnit">
     <rdfs:label xml:lang="en-US">agriculturalAreaUnit</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTimePrecision">
-    <rdfs:label xml:lang="en-US">date/time precision</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#subOrganizationWithin">
     <rdfs:label xml:lang="en-US">organization within</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTimePrecision">
+    <rdfs:label xml:lang="en-US">date/time precision</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl#agent">
     <rdfs:label xml:lang="en-US">agent</rdfs:label>
@@ -1349,9 +1316,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole">
     <rdfs:label xml:lang="en-US">principal investigator on</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#startDate">
-    <rdfs:label xml:lang="en-US">start date</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrDistinctionFor">
     <rdfs:label xml:lang="en-US">award or distinction for</rdfs:label>
   </rdf:Description>
@@ -1360,9 +1324,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#StateOrProvince">
     <rdfs:label xml:lang="en-US">State Or Province</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#day">
-    <rdfs:label xml:lang="en-US">day</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/pageEnd">
     <rdfs:label xml:lang="en-US">end page</rdfs:label>
@@ -1388,9 +1349,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#sponsorsAward">
     <rdfs:label xml:lang="en-US">sponsors award or honor</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#TimeInterval">
-    <rdfs:label xml:lang="en-US">Time Interval</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#EmeritusProfessor">
     <rdfs:label xml:lang="en-US">Professor Emeritus</rdfs:label>
   </rdf:Description>
@@ -1412,9 +1370,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ConferenceSeries">
     <rdfs:label xml:lang="en-US">ConferenceSeries</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#issueDate">
-    <rdfs:label xml:lang="en-US">issue date</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#UndergraduateStudent">
     <rdfs:label xml:lang="en-US">Undergraduate Student</rdfs:label>
   </rdf:Description>
@@ -1423,9 +1378,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/lastName">
     <rdfs:label xml:lang="en-US">last name</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#endDate">
-    <rdfs:label xml:lang="en-US">end date</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Quote">
     <rdfs:label xml:lang="en-US">Quote</rdfs:label>
@@ -1508,14 +1460,14 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#URLLink">
     <rdfs:label xml:lang="en-US">URLLink</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#endYear">
-    <rdfs:label xml:lang="en-US">end year</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMember">
     <rdfs:label xml:lang="en-US">hasMember</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Exhibit">
     <rdfs:label xml:lang="en-US">Exhibit</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#primaryEmail">
+    <rdfs:label xml:lang="en-US">primary email</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude">
     <rdfs:label xml:lang="en-US">hasMinLatitude</rdfs:label>
@@ -1537,9 +1489,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Statute">
     <rdfs:label xml:lang="en-US">Statute</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#filingDate">
-    <rdfs:label xml:lang="en-US">filing date</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#fundingVehicleFor">
     <rdfs:label xml:lang="en-US">funding vehicle for</rdfs:label>
@@ -1583,9 +1532,6 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityZH">
     <rdfs:label xml:lang="en-US">nationalityZH</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#atTime">
-    <rdfs:label xml:lang="en-US">at time</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#currentlyHeadOf">
     <rdfs:label xml:lang="en-US">currently head of</rdfs:label>
   </rdf:Description>
@@ -1609,9 +1555,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/numPages">
     <rdfs:label xml:lang="en-US">number of pages</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#year">
-    <rdfs:label xml:lang="en-US">year</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/editor">
     <rdfs:label xml:lang="en-US">editor</rdfs:label>
@@ -1673,9 +1616,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasProceedings">
     <rdfs:label xml:lang="en-US">proceedings</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#timeIntervalFor">
-    <rdfs:label xml:lang="en-US">time interval for</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Image">
     <rdfs:label xml:lang="en-US">Image</rdfs:label>
   </rdf:Description>
@@ -1690,9 +1630,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/organizer">
     <rdfs:label xml:lang="en-US">organizer</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#date">
-    <rdfs:label xml:lang="en-US">date</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#memberRoleOf">
     <rdfs:label xml:lang="en-US">member role of</rdfs:label>
@@ -1720,6 +1657,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTime">
     <rdfs:label xml:lang="en-US">date and time</rdfs:label>
+    <rdfs:label xml:lang="en-US">date/time</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/gtin14">
     <rdfs:label xml:lang="en-US">gtin14</rdfs:label>
