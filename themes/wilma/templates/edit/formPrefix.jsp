@@ -105,5 +105,5 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
 <body class="formsEdit">
 <div id="wrapper">
     ${ftl_menu}
-    <div id="wrapper-content">
+    <div id="content">
     <!-- end of formPrefix.jsp -->

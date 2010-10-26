@@ -50,7 +50,7 @@
 }
 
 #deptWrap {
-	background: url(../site_icons/grouping/bg_innerwrap_person.gif) repeat-y right top;
+	background: url(../images/transition/individual/grouping/bg_innerwrap_person.gif) repeat-y right top;
     padding-top: 26px;
     clear: both;
 }
@@ -182,7 +182,7 @@ img.screenshot {
     padding: 0 0 0 12px;
     font-size: 1.08em;
     color: #fff;
-    background: url(../site_icons/grouping/h3_tab_left.gif) left top no-repeat;
+    background: url(../images/transition/individual/grouping/h3_tab_left.gif) left top no-repeat;
     border: 0;
 }
 
@@ -192,13 +192,13 @@ img.screenshot {
     height: 19px;
 	line-height:19px;
     padding: 5px 16px 0 0;
-    background: url(../site_icons/grouping/h3_tab_right.gif) right top no-repeat;
+    background: url(../images/transition/individual/grouping/h3_tab_right.gif) right top no-repeat;
 	color:#fff;
 }
 
 #personWrap div.propsCategory {
     clear: left;
-    background: #fff url(../site_icons/grouping/bg_propsCategory.gif) right top no-repeat;
+    background: #fff url(../images/transition/individual/grouping/bg_propsCategory.gif) right top no-repeat;
 /*    border-left: 1px solid #d9d9d9;*/
     border-left: 1px solid #dedede;
 /*    border-bottom: 1px solid #d9d9d9;*/
@@ -363,12 +363,12 @@ ul.properties h5.collate {
     border: 0;
     color: #fff;
 /*    background: #6d8e80;*/
-    background: #baa280 url(../site_icons/grouping/bg_propGroupNav-active.gif) top right repeat-y;
+    background: #baa280 url(../images/transition/individual/grouping/bg_propGroupNav-active.gif) top right repeat-y;
 }
 
 #personWrap #dashboard #propGroupNav h2 a.inactive {
     color: #b4bfba;
-    background: #baa280 url(../site_icons/grouping/bg_propGroupNav-inactive.gif) top right repeat-y;
+    background: #baa280 url(../images/transition/individual/grouping/bg_propGroupNav-inactive.gif) top right repeat-y;
 }
 
 #personWrap #dashboard #propGroupNav h2 a:hover {

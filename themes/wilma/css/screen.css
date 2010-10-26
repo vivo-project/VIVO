@@ -634,13 +634,13 @@ a.add {
   width: 1em;
   height: 1em;
   padding: 4px;
-  background: #ebebeb url(../site_icons/plus_transparent.gif) center center no-repeat;
+  background: #ebebeb url(../images/transition/individual/plus_transparent.gif) center center no-repeat;
   text-indent: -9999px;
   overflow: hidden;
 }
 
 a.add:hover {
-  background-image: url(../site_icons/plus_transparent_hover.gif);
+  background-image: url(../images/transition/individual/plus_transparent_hover.gif);
   background-color: #576772; 
 }
 
