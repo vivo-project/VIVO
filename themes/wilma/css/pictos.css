@@ -6,14 +6,14 @@
 * from Drew Wilson. The fonts are protected under domestic and international trademark and 
 * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
 * distributing this font software.
-*
+* 
 * This font is NOT free. It is illegal to use this font without paying for a license. 
 */
 
 @font-face {
 	font-family: 'Pictos';
 	src: url('../pictos-font/pictos-web.eot'); /* IE */
-	src: local('☺'), url('../pictos-font/pictos-web.woff') format('../pictos-font/woff'), url('../pictos-font/pictos-web.ttf') format('../pictos-font/truetype'), url('../pictos-font/pictos-web.svg#webfontphKv1xv9') format('svg');/* non-IE */  
+	src: local('☺'), url('../pictos-font/pictos-web.woff') format('woff'), url('../pictos-font/pictos-web.ttf') format('truetype'), url('../pictos-font/pictos-web.svg#webfontphKv1xv9') format('svg');/* non-IE */  
 	font-weight: normal;
 	font-style: normal;
 }
