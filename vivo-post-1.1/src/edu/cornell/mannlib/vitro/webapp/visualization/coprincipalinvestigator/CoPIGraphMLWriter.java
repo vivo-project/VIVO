@@ -115,7 +115,7 @@ public class CoPIGraphMLWriter {
 								+ currentEdge.getTargetNode().getNodeName() 
 								+ "</data>\n");
 		
-		graphMLContent.append("\t<data key=\"number_of_copied_grants\">" 
+		graphMLContent.append("\t<data key=\"number_of_coinvestigated_grants\">" 
 								+ currentEdge.getNumberOfCoInvestigatedGrants()
 							+ "</data>\n");
 		
@@ -226,7 +226,7 @@ public class CoPIGraphMLWriter {
 		}
 		
 		
-		graphMLContent.append("\t<data key=\"number_of_pied_works\">" 
+		graphMLContent.append("\t<data key=\"number_of_investigated_grants\">" 
 								+ node.getNumberOfInvestigatedGrants() 
 							+ "</data>\n");
 		
