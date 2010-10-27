@@ -20,7 +20,7 @@
 	<bean id="entity_comparison"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
 	<bean id="coprincipalinvestigator"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPICountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
 		
 
 
