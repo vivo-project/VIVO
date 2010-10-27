@@ -82,7 +82,8 @@ ${headScripts.tags}
 	    </ul>
   </nav>
   <div id="wrapper-content">
-    ${body}
+    <#-- ${body} -->                          
+    <#include bodyTemplate>
   </div>
   <footer>
     <div id="footer-content">

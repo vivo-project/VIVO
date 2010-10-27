@@ -26,7 +26,8 @@
         <div id="contentwrap">      
             <div id="content">
                 <h2>Welcome to VIVO!</h2>
-                ${body}             
+                <#-- ${body} -->                          
+                <#include bodyTemplate>             
             </div> <!-- content -->
         </div> <!-- contentwrap -->
     
