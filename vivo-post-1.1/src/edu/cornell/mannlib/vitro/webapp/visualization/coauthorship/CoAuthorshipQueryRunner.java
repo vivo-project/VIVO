@@ -33,7 +33,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Edge;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
-//import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.VivoCollegeOrSchool;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 
