@@ -337,6 +337,7 @@ Tabs
 ul.tabEntities {
   color: #9c9c9c;
   margin: 1em 0;
+  font-size: 0.8em;
 }
 
 ul.tabEntities li {

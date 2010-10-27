@@ -18,7 +18,7 @@ VIVO theme: screen styles
 @import url("pictos.css");
 @import url("screen.css"); /*don't move it*/
 @import url("layout.css");
-@import url("top-level.css");
+@import url("menupage.css");
 /*@import url("individual.css");*/ /* already included by screen.css, but once we remove this borrowed file (from vivo-basic theme), we will need to update this */ 
 @import url("forms.css");
 @import url("formedit.css");
