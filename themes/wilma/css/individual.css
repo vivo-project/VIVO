@@ -190,7 +190,8 @@ img.screenshot {
     float: left;
     display: inline;
     height: 19px;
-	line-height:19px;
+    line-height:19px;
+    font-size: 0.75em;
     padding: 5px 16px 0 0;
     background: url(../images/transition/individual/grouping/h3_tab_right.gif) right top no-repeat;
 	color:#fff;
@@ -257,6 +258,7 @@ img.screenshot {
 #personWrap div.propsItem h4 {
     margin-bottom: 1.25em;
     margin-left: -16px;
+    font-size: 0.8em;
 }
 
 #personWrap ul.properties {
@@ -475,6 +477,8 @@ ul.keywords li {
 #personWrap a.add, #personWrap a.edit, #personWrap a.delete {
     color: #209ae0;
     text-decoration: underline;
+    height: 0.8em;
+    line-height: 0.8em;
 }
 
 #personWrap a.add:hover, #personWrap a.edit:hover, #personWrap a.delete:hover,

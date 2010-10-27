@@ -51,9 +51,6 @@
             throw new JspException(e);
         }
         */
-        
-        // This is here as a safety net. We should have gotten the values in identity.jsp,
-        // since it's the first jsp we hit.
 %>
 
 
@@ -80,22 +77,38 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>${title}</title>
-    <link rel="stylesheet" href="<%=themeDir%>css/style.css" />
+    <head>
+        <meta charset="utf-8" />
+        <title>${title}</title>
+        <link rel="stylesheet" href="<%=themeDir%>css/style.css" />
 
-    <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-    <%-- ${headScripts.add("/js/html5.js")} --%>
-    <c:if test="${!empty scripts}"><jsp:include page="${scripts}"/></c:if>
-</head>
-<body ${requestScope.bodyAttr}>
-<div id="wrapper">
-    ${ftl_menu}
-    <div id="wrapper-content">
-        <c:import url="${bodyJsp}"/>
-    </div>
-    ${ftl_footer}
+        <!-- script for enabling new HTML5 semantic markup in IE browsers-->
+        <%-- ${headScripts.add("/js/html5.js")} --%>
+        <c:if test="${!empty scripts}"><jsp:include page="${scripts}"/></c:if>
+        
+        <!--[if lt IE 7]>
+        <script type="text/javascript" src="<%=themeDir%>js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="<%=themeDir%>js/utils.js"></script>
+        <link rel="stylesheet" href="css/ie6.css" />
+        <![endif]-->
 
-</body>
+        <!--[if IE 7]>
+        <link rel="stylesheet" href="css/ie7.css" />
+        <![endif]-->
+
+        <!--[if (gte IE 6)&(lte IE 8)]>
+        <script type="text/javascript" src="<%=themeDir%>js/selectivizr.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body ${requestScope.bodyAttr}>
+        <div id="wrapper">
+            ${ftl_menu}
+            <div id="wrapper-content">
+                <c:import url="${bodyJsp}"/>
+            </div>
+            
+            ${ftl_footer}
+
+    </body>
 </html>

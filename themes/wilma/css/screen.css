@@ -231,6 +231,7 @@ div#labelAndMoniker { margin-bottom: 1.5em; }
 #label h3 {
   display: inline;
   padding-right: 6px;
+  font-size: 1.7em;
 }
 
 em.moniker { 
@@ -268,7 +269,7 @@ div.description { margin-bottom: 1.5em; }
 
 .propertyName,
 .propsItem h4 {
-  font-size: 1em;
+  font-size: 0.8em;
   line-height: 1em;
   color: #666;
   background: #ebebeb;
@@ -654,7 +655,8 @@ ul.properties li {
 div.datatypePropertyValue,
 ul.properties li,
 ul.datatypePropertyValue li { 
-  position: relative; 
+  position: relative;
+  font-size: 0.7em; 
 }
 
 

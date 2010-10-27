@@ -22,3 +22,4 @@ VIVO theme: screen styles
 @import url("individual.css");
 @import url("forms.css");
 @import url("formedit.css");
+@import url("../../../css/login.css"); /* this is here temporarily as we transition to freemarker - something is up with adding stylesheets ever since the body template was adjusted last week*/
