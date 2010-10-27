@@ -11,9 +11,9 @@
 */
 
 @font-face {
-	font-family: 'Pictos';
-	src: url('../pictos-font/pictos-web.eot'); /* IE */
-	src: local('☺'), url('../pictos-font/pictos-web.woff') format('woff'), url('../pictos-font/pictos-web.ttf') format('truetype'), url('../pictos-font/pictos-web.svg#webfontphKv1xv9') format('svg');/* non-IE */  
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'Pictos';
+    src: url('../pictos-font/pictos-web.eot'); /* IE */
+    src: local('☺'), url('../pictos-font/pictos-web.woff') format('woff'), url('../pictos-font/pictos-web.ttf') format('truetype'), url('../pictos-font/pictos-web.svg#webfontphKv1xv9') format('svg');/* non-IE */  
+    font-weight: normal;
+    font-style: normal;
 }
