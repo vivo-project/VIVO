@@ -635,6 +635,10 @@ a.powered-by-vivo:hover {
     left:-9999px;
 }
 
+a {
+    text-decoration: underline;
+}
+
 /* STYLED BUTTONS ------>  */
 .button,
 .button:visited {
