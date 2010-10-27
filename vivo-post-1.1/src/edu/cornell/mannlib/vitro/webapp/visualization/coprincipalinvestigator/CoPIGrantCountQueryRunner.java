@@ -77,15 +77,15 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
 			+ "WHERE { "
 			+ "<" + queryURI + "> rdfs:label ?PILabel ;" 
-								+ " core:hasCo-PrincipalInvestigatorRole ?Role ." 
-			+ "?Role core:roleIn ?Grant ." 
+								+ " core:hasCo-PrincipalInvestigatorRole ?Role . " 
+			+ "?Role core:roleIn ?Grant . " 
 			+ "?Grant rdfs:label ?GrantLabel ; " 
 			+ "core:startDate ?GrantStartDate ; " 
 			+ "core:endDate ?GrantEndDate ;" 
 			+ "core:relatedRole ?RelatedRole . "
-			+ "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI ." 
+			+ "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 			+ "?CoPI rdfs:label ?CoPILabel . " 
-			;
+			+ " }";
 
 		System.out.println("COPI QUERY - " + sparqlQuery);
 		
