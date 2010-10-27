@@ -51,7 +51,8 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
     </section> <!-- #search-home -->
 </section> <!-- #intro -->
 
-${ftl_login}
+<%-- Couldn't get the login to work on the home page after refactoring in JSP/FTL mashup world, so disabling for now --%>
+<%-- ${ftl_login} --%>
 
 <section id="browse">
     <h2>Browse</h2>
