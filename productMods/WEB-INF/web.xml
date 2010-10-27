@@ -346,15 +346,6 @@
     <servlet-name>AboutController</servlet-name>
     <url-pattern>/about</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>HomePageController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HomePageController</servlet-name>
-    <url-pattern>/index.jsp?primary=1</url-pattern>
-  </servlet-mapping>
    
   <servlet>
     <servlet-name>FreemarkerTestController</servlet-name>
@@ -877,7 +868,7 @@
   
   <servlet>
     <servlet-name>SearchController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.PagedSearchController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.FreemarkerPagedSearchController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
@@ -976,6 +967,16 @@
       <url-pattern>/index.jsp</url-pattern>
     </servlet-mapping>
 
+<!--
+    <servlet>
+      <servlet-name>HomePageController</servlet-name>
+      <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>HomePageController</servlet-name>
+      <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+-->   
   <!-- <servlet>
        <servlet-name>EntityPropertyListController</servlet-name>     
        <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityPropertyListController</servlet-class>
