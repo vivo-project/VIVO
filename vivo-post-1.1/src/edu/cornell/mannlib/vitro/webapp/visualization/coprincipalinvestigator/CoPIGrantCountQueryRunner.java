@@ -87,7 +87,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+ "?CoPI rdfs:label ?CoPILabel . " 
 			;
 
-//		System.out.println("COPI QUERY - " + sparqlQuery);
+		System.out.println("COPI QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}
