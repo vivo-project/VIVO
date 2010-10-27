@@ -46,6 +46,7 @@ public class VisualizationFrameworkConstants {
 	public static final String COAUTHORSLIST_VIS_MODE = "coauthors";
 	public static final String SHORT_SPARKLINE_VIS_MODE = "short";
 	public static final String FULL_SPARKLINE_VIS_MODE = "full";
+	public static final String COPI_VIS_MODE = "copi";
 
 	/*
 	 * These values represent possible utilities vis modes.
@@ -70,5 +71,7 @@ public class VisualizationFrameworkConstants {
 	public static final String PERSON_LEVEL_VIS = "person_level";
 	public static final String UTILITIES_VIS = "utilities";
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
+	public static final String CO_PI_VIS = "coprincipalinvestigator";
+	
 
 }

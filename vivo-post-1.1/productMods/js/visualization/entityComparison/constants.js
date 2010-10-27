@@ -69,7 +69,9 @@ var FlotOptions = {
 			}
 		},
 		yaxis : {
-			tickSize : 1
+			tickSize : 1,
+			tickDecimals : 0,
+			min : 0
 		}
 };
 

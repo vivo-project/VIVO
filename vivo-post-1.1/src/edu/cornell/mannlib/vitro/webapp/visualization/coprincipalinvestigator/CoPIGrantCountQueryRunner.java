@@ -1,5 +1,13 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
@@ -11,16 +19,24 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPIData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPIEdge;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
 
-public class CoPIGrantCountQueryRunner {
+public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
+	
+	private static final int MAX_PI_PER_GRANT_ALLOWED = 100;
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
@@ -51,37 +67,25 @@ public class CoPIGrantCountQueryRunner {
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 			+ "SELECT "
-			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") " 
-			+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") " 
-			+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") " 
-			+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") "
-			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") "
-			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") "
-			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") "
-			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") "
-			+ "		(str(?publicationYear) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR + ") "
-			+ "		(str(?publicationYearMonth) as ?" 
-						+ QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH + ") " 
-			+ "		(str(?publicationDate) as ?" 
-						+ QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") " 
+			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.PI_URL + ") " 
+			+ "		(str(?PILabel) as ?" + QueryFieldLabels.PI_LABEL + ") " 
+			+ "		(str(?Grant) as ?"	+ QueryFieldLabels.GRANT_URL + ") "	
+			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") " 
+			+ "		(str(?GrantStartDate) as ?" + QueryFieldLabels.GRANT_START_DATE + ") "
+			+ "		(str(?GrantEndDate) as ?" + QueryFieldLabels.GRANT_END_DATE + ") "
+			+ "		(str(?CoPI) as ?" + QueryFieldLabels.CO_PI_URL + ") "
+			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
 			+ "WHERE { "
-			+ "<" + queryURI + "> rdf:type foaf:Person ;" 
-								+ " rdfs:label ?authorLabel ;" 
-								+ " core:authorInAuthorship ?authorshipNode . "
-			+ "?authorshipNode rdf:type core:Authorship ;" 
-								+ " core:linkedInformationResource ?document . "
-			+ "?document rdfs:label ?documentLabel . " 
-			+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . " 
-			+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . " 
-			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . "
-			+ "OPTIONAL {  ?document core:year ?publicationYear } . " 
-			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } . " 
-			+ "OPTIONAL {  ?document core:date ?publicationDate } . "  
-			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . " 
-			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . " 
-			+ "OPTIONAL {  ?document vitro:description ?documentDescription } " 
-			+ "} " 
-			+ "ORDER BY ?document ?coAuthorPerson";
+			+ "<" + queryURI + "> rdfs:label ?PILabel ;" 
+								+ " core:hasCo-PrincipalInvestigatorRole ?Role ." 
+			+ "?Role core:roleIn ?Grant ." 
+			+ "?Grant rdfs:label ?GrantLabel ; " 
+			+ "core:startDate ?GrantStartDate ; " 
+			+ "core:endDate ?GrantEndDate ;" 
+			+ "core:relatedRole ?RelatedRole . "
+			+ "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI ." 
+			+ "?CoPI rdfs:label ?CoPILabel . " 
+			;
 
 //		System.out.println("COPI QUERY - " + sparqlQuery);
 		
@@ -107,7 +111,7 @@ public class CoPIGrantCountQueryRunner {
 		return null;
 	}
 	
-	public CoAuthorshipData getQueryResult()
+	public CoPIData getQueryResult()
 	throws MalformedQueryParametersException {
 
 	if (StringUtils.isNotBlank(this.egoURI)) {
@@ -129,10 +133,306 @@ public class CoPIGrantCountQueryRunner {
 	ResultSet resultSet	= executeQuery(generateEgoCoPIquery(this.egoURI),
 									   this.dataSource);
 	return createQueryResult(resultSet);
-}
+	}
+	
+	
+	private CoPIEdge getExistingEdge(
+			CoPINode collaboratingNode1, 
+			CoPINode collaboratingNode2, 
+			Map<String, CoPIEdge> edgeUniqueIdentifierToVO) {
 
-	private CoAuthorshipData createQueryResult(ResultSet resultSet) {
+		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getNodeID(), 
+				collaboratingNode2.getNodeID());
+
+		return edgeUniqueIdentifierToVO.get(edgeUniqueIdentifier);
+
+	}
+
+	private String getEdgeUniqueIdentifier(int nodeID1, int nodeID2) {
+
+		String separator = "*"; 
+
+		if (nodeID1 < nodeID2) {
+			return nodeID1 + separator + nodeID2;
+		} else {
+			return nodeID2 + separator + nodeID1;
+		}
+
+	}
+	
+	private CoPIData createQueryResult(ResultSet resultSet) {
 		
-		return null;
+		Set<CoPINode> nodes = new HashSet<CoPINode>();
+		
+		Map<String, Grant> grantURLToVO = new HashMap<String, Grant>();
+		Map<String, Set<CoPINode>> grantURLToCoPIs = new HashMap<String, Set<CoPINode>>();
+		Map<String, CoPINode> nodeURLToVO = new HashMap<String, CoPINode>();
+		Map<String, CoPIEdge> edgeUniqueIdentifierToVO = new HashMap<String, CoPIEdge>();
+		
+		CoPINode egoNode = null;
+
+		Set<CoPIEdge> edges = new HashSet<CoPIEdge>();
+
+			while (resultSet.hasNext()) {
+				QuerySolution solution = resultSet.nextSolution();
+				
+				/*
+				 * We only want to create only ONE ego node.
+				 * */
+				RDFNode egoPIURLNode = solution.get(QueryFieldLabels.PI_URL);
+				if (nodeURLToVO.containsKey(egoPIURLNode.toString())) {
+	
+					egoNode = nodeURLToVO.get(egoPIURLNode.toString());
+					
+				} else {
+					
+					egoNode = new CoPINode(egoPIURLNode.toString(), nodeIDGenerator);
+					nodes.add(egoNode);
+					nodeURLToVO.put(egoPIURLNode.toString(), egoNode);
+					
+					RDFNode authorLabelNode = solution.get(QueryFieldLabels.PI_LABEL);
+					if (authorLabelNode != null) {
+						egoNode.setNodeName(authorLabelNode.toString());
+					}
+				}
+				
+				RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
+				Grant grant;
+				
+				if (grantURLToVO.containsKey(grantNode.toString())) {
+					grant = grantURLToVO.get(grantNode.toString());
+				} else {
+					grant = createGrantVO(solution, grantNode.toString());
+					grantURLToVO.put(grantNode.toString(), grant);	
+				}
+				
+				egoNode.addGrant(grant);
+				
+				/*
+				 * After some discussion we concluded that for the purpose of this visualization
+				 * we do not want a co-pi node or edge if the grant has only one
+				 * pi and that happens to be the ego.
+				 * */
+				if (solution.get(QueryFieldLabels.PI_URL).toString().equalsIgnoreCase(
+						solution.get(QueryFieldLabels.CO_PI_URL).toString())) {
+					continue;
+				}
+				
+				CoPINode coPINode;
+				
+				RDFNode coPIURLNode = solution.get(QueryFieldLabels.CO_PI_URL);
+				if (nodeURLToVO.containsKey(coPIURLNode.toString())) {
+	
+					coPINode = nodeURLToVO.get(coPIURLNode.toString());
+					
+				} else {
+					
+					coPINode = new CoPINode(coPIURLNode.toString(), nodeIDGenerator);
+					nodes.add(coPINode);
+					nodeURLToVO.put(coPIURLNode.toString(), coPINode);
+					
+					RDFNode coPILabelNode = solution.get(QueryFieldLabels.CO_PI_LABEL);
+					if (coPILabelNode != null) {
+						coPINode.setNodeName(coPILabelNode.toString());
+					}
+				}
+				
+				coPINode.addGrant(grant);
+				
+				Set<CoPINode> coPIsForCurrentGrant;
+				
+				if (grantURLToCoPIs.containsKey(grant.getGrantURL())) {
+					coPIsForCurrentGrant = grantURLToCoPIs
+															.get(grant.getGrantURL());
+				} else {
+					coPIsForCurrentGrant = new HashSet<CoPINode>();
+					grantURLToCoPIs.put(grant.getGrantURL(), 
+												   coPIsForCurrentGrant);
+				}
+				
+				coPIsForCurrentGrant.add(coPINode);
+				
+				CoPIEdge egoCoPIEdge = getExistingEdge(egoNode, coPINode, edgeUniqueIdentifierToVO);
+				
+				/*
+				 * If "egoCoPIEdge" is null it means that no edge exists in between the egoNode 
+				 * & current coPINode. Else create a new edge, add it to the edges set & add 
+				 * the collaborator grant to it.
+				 * */
+				if (egoCoPIEdge != null) {
+					egoCoPIEdge.addCollaboratorGrant(grant);
+				} else {
+					egoCoPIEdge = new CoPIEdge(egoNode, coPINode, grant, edgeIDGenerator);
+					edges.add(egoCoPIEdge);
+					edgeUniqueIdentifierToVO.put(
+							getEdgeUniqueIdentifier(egoNode.getNodeID(),
+													coPINode.getNodeID()), 
+							egoCoPIEdge);
+				}
+				
+		}
+		
+			
+			/*
+			 * This method takes out all the PIs & edges between PIs that belong to grants 
+			 * that have more than 100 PIs. We conjecture that these grants do not provide much 
+			 * insight. However, we have left the grants be.
+			 * 
+			 * This method side-effects "nodes" & "edges".  
+			 * */
+			removeLowQualityNodesAndEdges(nodes, 
+					  grantURLToVO, 
+					  grantURLToCoPIs, 
+					  edges);
+			/*
+			 * We need to create edges between 2 co-PIs. E.g. On a grant there were 3 PI
+			 * ego, A & B then we have already created edges like,
+			 * 		ego - A
+			 * 		ego - B
+			 * The below sub-routine will take care of,
+			 * 		A - B 
+			 * 
+			 * We are side-effecting "edges" here. The only reason to do this is because we are adding 
+			 * edges en masse for all the co-PIs on all the grants considered so far. The 
+			 * other reason being we dont want to compare against 2 sets of edges (edges created before 
+			 * & co-PI edges created during the course of this method) when we are creating a new 
+			 * edge.
+			 * */
+			createCoPIEdges(grantURLToVO, 
+								grantURLToCoPIs,
+								edges,
+								edgeUniqueIdentifierToVO);
+			
+			
+			return new CoPIData(egoNode, nodes, edges);
+	}
+
+	private void createCoPIEdges(Map<String, Grant> grantURLToVO,
+			Map<String, Set<CoPINode>> grantURLToCoPIs, Set<CoPIEdge> edges,
+			Map<String, CoPIEdge> edgeUniqueIdentifierToVO) {
+		
+		for (Map.Entry<String, Set<CoPINode>> currentGrantEntry 
+				: grantURLToCoPIs.entrySet()) {
+		
+		/*
+		 * If there was only one co-PI (other than ego) then we dont have to create any 
+		 * edges. so the below condition will take care of that.
+		 * 
+		 * We are restricting edges between co-PI if a particular grant has more than
+		 * 100 co-PIs. Our conjecture is that such edges do not provide any good insight
+		 * & causes unnecessary computations causing the server to time-out.
+		 * */
+		if (currentGrantEntry.getValue().size() > 1 
+				&& currentGrantEntry.getValue().size() 
+						<= MAX_PI_PER_GRANT_ALLOWED) {
+			
+			
+			Set<CoPIEdge> newlyAddedEdges = new HashSet<CoPIEdge>();
+		
+			/*
+			 * In order to leverage the nested "for loop" for making edges between all the 
+			 * co-PIs we need to create a list out of the set first. 
+			 * */
+			List<CoPINode> coPINodes = new ArrayList<CoPINode>(currentGrantEntry.getValue());
+			Collections.sort(coPINodes, new CoPINodeComparator());
+			
+			int numOfCoPIs = coPINodes.size();
+			
+			for (int ii = 0; ii < numOfCoPIs - 1; ii++) {
+				for (int jj = ii + 1; jj < numOfCoPIs; jj++) {
+					
+					CoPINode coPI1 = coPINodes.get(ii);
+					CoPINode coPI2 = coPINodes.get(jj);
+					
+					CoPIEdge coPI1_2Edge = getExistingEdge(coPI1, 
+														   coPI2, 
+														   edgeUniqueIdentifierToVO);
+					
+					Grant currentGrant = grantURLToVO.get(currentGrantEntry.getKey());
+		
+					if (coPI1_2Edge != null) {
+						coPI1_2Edge.addCollaboratorGrant(currentGrant);
+					} else {
+						coPI1_2Edge = new CoPIEdge(coPI1, 
+												   coPI2, 
+												   currentGrant, 
+												   edgeIDGenerator);
+						newlyAddedEdges.add(coPI1_2Edge);
+						edgeUniqueIdentifierToVO.put(
+								getEdgeUniqueIdentifier(coPI1.getNodeID(),
+														coPI2.getNodeID()), 
+								coPI1_2Edge);
+					}
+				}
+			}
+			edges.addAll(newlyAddedEdges);
+		}
+		
+	}
+		
+	}
+
+	private void removeLowQualityNodesAndEdges(Set<CoPINode> nodes,
+			Map<String, Grant> grantURLToVO,
+			Map<String, Set<CoPINode>> grantURLToCoPIs, Set<CoPIEdge> edges) {
+		
+		Set<CoPINode> nodesToBeRemoved = new HashSet<CoPINode>();
+		for (Map.Entry<String, Set<CoPINode>> currentGrantEntry 
+					: grantURLToCoPIs.entrySet()) {
+				
+				if (currentGrantEntry.getValue().size() > MAX_PI_PER_GRANT_ALLOWED) {
+					
+					Grant currentGrant = grantURLToVO.get(currentGrantEntry.getKey());
+					
+					Set<CoPIEdge> edgesToBeRemoved = new HashSet<CoPIEdge>();
+					
+					for (CoPIEdge currentEdge : edges) {
+						Set<Grant> currentCollaboratorGrants = 
+									currentEdge.getCollaboratorGrants();
+						
+						if (currentCollaboratorGrants.contains(currentGrant)) {
+							currentCollaboratorGrants.remove(currentGrant);
+							if (currentCollaboratorGrants.isEmpty()) {
+								edgesToBeRemoved.add(currentEdge);
+							}
+						}
+					}
+						
+					edges.removeAll(edgesToBeRemoved);
+
+					for (CoPINode currentCoPI : currentGrantEntry.getValue()) {
+						currentCoPI.getInvestigatedGrants().remove(currentGrant);
+						if (currentCoPI.getInvestigatedGrants().isEmpty()) {
+							nodesToBeRemoved.add(currentCoPI);
+						}
+					}
+				}
+		}
+		nodes.removeAll(nodesToBeRemoved);
+		
+	}
+
+	private Grant createGrantVO(QuerySolution solution, String grantURL) {
+		
+		Grant grant = new Grant(grantURL);
+
+		RDFNode grantLabelNode = solution.get(QueryFieldLabels.GRANT_LABEL);
+		if (grantLabelNode != null) {
+			grant.setIndividualLabel(grantLabelNode.toString());
+		}
+
+
+		RDFNode grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE);
+		if (grantStartYear != null) {
+			grant.setGrantStartDate(grantStartYear.toString());
+		}
+		
+		RDFNode grantEndDate = solution.get(QueryFieldLabels
+															.GRANT_END_DATE);
+		if (grantEndDate != null) {
+			grant.setGrantEndDate(grantEndDate.toString());
+		}
+		
+		return grant;
 	}
 }

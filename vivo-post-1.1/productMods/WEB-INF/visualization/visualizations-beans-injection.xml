@@ -19,6 +19,9 @@
 		class="edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler" />
 	<bean id="entity_comparison"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
+	<bean id="coprincipalinvestigator"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPICountRequestHandler" />
+		
 
 
 	<bean id="visualizationInjector"
@@ -39,6 +42,9 @@
 				</entry>
 				<entry key="entity_comparison">
 					<ref bean="entity_comparison"></ref>
+				</entry>
+				<entry key="coprincipalinvestigator">
+					<ref bean="coprincipalinvestigator"></ref>
 				</entry>
 			</map>
 		</property>

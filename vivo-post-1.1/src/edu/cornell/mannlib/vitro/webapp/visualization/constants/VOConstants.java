@@ -11,6 +11,7 @@ import java.util.Calendar;
 public class VOConstants {
 	
 	public static final String DEFAULT_PUBLICATION_YEAR = "Unknown";
+	public static final String DEFAULT_GRANT_YEAR = "Unknown";
 	
 	/*
 	 * Employee related constants 

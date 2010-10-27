@@ -104,5 +104,17 @@ public class QueryFieldLabels {
 	 * */
 	public static final String DEPARTMENT_URL = "departmentLit";
 	public static final String DEPARTMENT_LABEL = "departmentLabelLit";	
-
+	
+	/*
+	 * Co-PI related field labels
+	 */
+	public static final String PI_URL = "PILit";
+	public static final String PI_LABEL = "PILabelLit";
+	public static final String CO_PI_URL = "coPILit";
+	public static final String CO_PI_LABEL = "coPILabelLit";
+	public static final String GRANT_URL = "grantLit";
+	public static final String GRANT_LABEL = "grantLabelLit";
+	public static final String GRANT_START_DATE = "grantStartDateLit";
+	public static final String GRANT_END_DATE = "grantEndDateLit";
+	
 }

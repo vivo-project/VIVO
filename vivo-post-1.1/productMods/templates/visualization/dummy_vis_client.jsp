@@ -270,6 +270,12 @@
 	<c:param name="uri" value="http://vivo.iu.edu/individual/IndianaUniversityBloomington"/>
 </c:url>
 
+<c:url var="coprincipalinvestigatordata" value="/visualization">
+	<c:param name="vis" value="coprincipalinvestigator"/>
+	<c:param name="render_mode" value="data"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/McDonaldRobertH"/>
+</c:url>
+
 <style type="text/css">
 	.get_vis {
 		background-color:Yellow;
@@ -390,6 +396,9 @@ $(document).ready(function() {
 <a href='<c:out value="${universityPublications}"/>'>University Publications</a>
 &nbsp;&nbsp;<a href='<c:out value="${universityPublicationsdata}"/>'>Data</a><br />
 
+<br /><br /><br />
+
+<a href='<c:out value="${coprincipalinvestigatordata}"/>'>Co-PI data </a>
 
 <br /><br /><br />
 

@@ -22,7 +22,9 @@ function init(graphContainer) {
 				tickSize : 2
 			},
 			yaxis: {
-				tickSize : 1
+				tickDecimals : 0,
+				min : 0,
+				max: 5
 			}
 	};
 
