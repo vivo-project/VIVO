@@ -156,15 +156,16 @@ ${headScripts.tags}
    <section id="highlights">
      <h2>Highlights</h2>
      <section id="fearuted-people" class="global-highlights">
-       <h3>FEATURED PEOPLE</h3>
-       <!--use Hs-->
-       <article class="featured-people vcard"> <img  class="individual-photo" src="${themeDir}/images/person-thumbnail.jpg" width="80" height="80" />
-         <p class="fn">foaf:lastName, foaf:firstName <span class="title">core:preferredTitle</span><span class="org">currentPosition(s)</span></p>
-       </article>
-       <article class="featured-people vcard"> <img  class="individual-photo" src="${themeDir}/images/person-thumbnail.jpg" width="80" height="80" />
-         <p class="fn">foaf:lastName, foaf:firstName <span class="title">core:preferredTitle</span><span class="org">currentPosition(s)</span></p>
-       </article>
-     </section><!-- featured-people -->
+         <h3>FEATURED PEOPLE</h3>
+             <!--use Hs-->
+             <article class="featured-people vcard"><a href="#"><img  class="individual-photo" src="${themeDir}/images/person-thumbnail-sample.jpg" width="80" height="80" />
+               <p class="fn">Hayworth, Rita<span class="title">Actress, dancer</span><span class="org">Sabbatic year for ever</span></p>
+               </a> </article>
+             <article class="featured-people vcard"><a href="#"><img  class="individual-photo" src="${themeDir}/images/person-thumbnail-sample-2.jpg" width="80" height="80" />
+               <p class="fn">Wiedmann, Martin <span class="title">Associate Professor</span><span class="org">Cornell faculty</span></p>
+               </a> </article>
+           </section>
+           <!-- featured-people -->
      <section id="upcoming-events" class="global-highlights">
        <h3>UPCOMING EVENTS</h3>
        <article class="vevent">
