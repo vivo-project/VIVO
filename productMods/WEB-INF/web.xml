@@ -883,6 +883,7 @@
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
+  
   <!-- for now, need to make sure the links on CALS' site doesn't break -->
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
@@ -976,7 +977,6 @@
       <url-pattern>/index.jsp</url-pattern>
     </servlet-mapping>
 
-<!--
     <servlet>
       <servlet-name>HomePageController</servlet-name>
       <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
@@ -985,7 +985,7 @@
       <servlet-name>HomePageController</servlet-name>
       <url-pattern>/home</url-pattern>
     </servlet-mapping>
--->   
+      
   <!-- <servlet>
        <servlet-name>EntityPropertyListController</servlet-name>     
        <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityPropertyListController</servlet-class>

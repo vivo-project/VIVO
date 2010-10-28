@@ -2,9 +2,7 @@
 <#-- This is a temporary file and will be removed once we have completed the transition to freemarker -->
 
 
-<#if loginName??>
-    <#-- nothing to see here -->
-<#else>
+<#if ! loginName??>
 
 <section id="log-in">
     <h3>Log in</h3>
