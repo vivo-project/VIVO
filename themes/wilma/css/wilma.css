@@ -33,6 +33,7 @@ body {
     min-height: 100%; /* real browsers */
     margin: 0 auto;
 }
+
 /* HEADER ------>  */
 #branding {
     position: relative;
@@ -171,6 +172,11 @@ ul#main-nav {
     padding: 20px;
 }
 /* INTRO ------>  */
+h2{
+    padding: 10px 0 12px 0;
+    font-size: 18px;
+    color: #2485ae; 
+}Å
 #intro {
     float: left;
     width: 570px;
