@@ -1,0 +1,63 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/*************************************************
+
+ vivo-basic theme: search results styles
+ 
+**************************************************/
+
+/***** Search form *****/
+
+.advancedSearchForm .form-button {
+    margin-top: 1em;
+}
+
+
+/***** Class and subclass refinement links *****/
+
+.searchTOC {
+    margin-bottom: 1.5em;
+}
+
+
+/***** Search results *****/
+
+.searchhits li {
+    margin-top: 1em;
+}
+
+span.SearchTerm, h1 span.SearchTerm, a:link span.SearchTerm, a:visited span.SearchTerm {
+  font-weight: bold;
+  color: #7D7D7D;
+}
+
+
+/***** Paging links *****/
+
+.searchpages {
+    margin-top: 2em;
+}
+
+.searchpages a, .searchpages span {
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+.searchpages a:link, .searchpages a:visited {
+    text-decoration: none;
+}
+
+.searchpages a:hover, .searchpages a:active {
+    text-decoration: underline;
+}
+
+.searchpages a.prev {
+    margin-right: 1em;
+    text-decoration: underline;
+}
+
+.searchpages a.next {
+    margin-left: 1em;
+    text-decoration: underline;
+}
+ 

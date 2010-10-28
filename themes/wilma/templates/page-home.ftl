@@ -1,4 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<#import "lib-list.ftl" as l>
+                
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,7 +36,7 @@
                 <#if siteTagline?has_content>
                     <em>${siteTagline}</em>
                 </#if>-->
-                <#import "lib-list.ftl" as l>
+
                 
                 <nav>
                     <ul id="header-nav">
