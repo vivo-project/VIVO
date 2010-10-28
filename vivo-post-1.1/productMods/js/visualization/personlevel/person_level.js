@@ -309,6 +309,10 @@ function nodeClickedJS(json){
 
 }
 
+function encodeURL(url){
+	return url.replace('&','%26');
+}
+
 function renderCoAuthorshipVisualization() {
 
 	// Version check for the Flash Player that has the ability to start Player
@@ -330,13 +334,13 @@ function renderCoAuthorshipVisualization() {
 		AC_FL_RunContent(
 				"src", "playerProductInstall",
 				"FlashVars", "MMredirectURL="+MMredirectURL+'&MMplayerType='+MMPlayerType+'&MMdoctitle='+MMdoctitle+"",
-				"width", "600",
+				"width", "800",
 				"height", "840",
 				"align", "middle",
-				"id", "CoAuthor",
+				"id", "EgoCentric",
 				"quality", "high",
 				"bgcolor", "#ffffff",
-				"name", "CoAuthor",
+				"name", "EgoCentric",
 				"allowScriptAccess","sameDomain",
 				"type", "application/x-shockwave-flash",
 				"pluginspage", "http://www.adobe.com/go/getflashplayer"
@@ -346,14 +350,14 @@ function renderCoAuthorshipVisualization() {
 		// embed the Flash Content SWF when all tests are passed
 		AC_FL_RunContent(
 				"src", swfLink,
-				"flashVars", "graphmlUrl=" + egoCoAuthorshipDataFeederURL,			
-				"width", "600",
+				"flashVars", "coAuthorUrl=" + encodeURL(egoCoAuthorshipDataFeederURL) +"&coPIUrl=" + encodeURL(egoCoPIDataFeederURL) ,			
+				"width", "800",
 				"height", "850",
 				"align", "top",
-				"id", "CoAuthor",
+				"id", "EgoCentric",
 				"quality", "high",
 				"bgcolor", "#ffffff",
-				"name", "CoAuthor",
+				"name", "EgoCentric",
 				"allowScriptAccess","sameDomain",
 				"type", "application/x-shockwave-flash",
 				"pluginspage", "http://www.adobe.com/go/getflashplayer"

@@ -13,6 +13,14 @@
 	<c:param name="labelField" value="label" />
 </c:url>
 
+<c:url var="egoCoPIDataFeederURL" value="/visualization">
+	<c:param name="vis" value="coprincipalinvestigator" />
+	<c:param name="render_mode" value="data" />
+	<c:param name="uri" value="${requestScope.egoURIParam}" />
+	<c:param name="labelField" value="label" />
+</c:url>
+
+
 <c:url var="egoCoAuthorsListDataFileURL" value="/visualization">
 	<c:param name="vis" value="person_level" />
 	<c:param name="render_mode" value="data" />
@@ -20,7 +28,7 @@
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
-<c:url var="swfLink" value="/${themeDir}site_icons/visualization/coauthorship/CoAuthor.swf" />
+<c:url var="swfLink" value="/${themeDir}site_icons/visualization/coauthorship/EgoCentric.swf" />
 
 <c:url var="jquery" value="/js/jquery.js"/>
 <c:url var="adobeFlashDetector" value="/js/visualization/coauthorship/AC_OETags.js" />
@@ -48,6 +56,7 @@ var swfLink = "${swfLink}";
 var egoURI = "${requestScope.egoURIParam}";
 var egoCoAuthorshipDataFeederURL = "${egoCoAuthorshipDataFeederURL}";
 var egoCoAuthorsListDataFileURL = "${egoCoAuthorsListDataFileURL}";
+var egoCoPIDataFeederURL = "${egoCoPIDataFeederURL}";
 var contextPath = "${contextPath}";
 
 // -->
