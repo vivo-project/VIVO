@@ -103,7 +103,6 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
     <link rel="stylesheet" type="text/css" href="<c:url value="/js/jquery_plugins/thickbox/thickbox.css"/>" />
 </head>
 <body class="formsEdit">
-<div id="wrapper">
     ${ftl_menu}
     <div id="content">
     <!-- end of formPrefix.jsp -->

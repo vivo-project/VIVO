@@ -102,7 +102,7 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
     </head>
     
     <body ${requestScope.bodyAttr}>
-        <div id="wrapper">
+        
             ${ftl_menu}
             <div id="wrapper-content">
                 <c:import url="${bodyJsp}"/>

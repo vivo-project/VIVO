@@ -20,20 +20,14 @@ body {
     padding: 0;
     height: 100%; /* needed for container min-height */
     background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
-    font-family: "museo-sans-1", "museo-sans-2", helvetica, sans-serif, arial; /*font-size: 62.5%;*/
-    /* Consider these fonts: "Lucida Sans Unicode","Lucida Grande",Geneva,*/    ;
-}
-/* PAGE WRAPPER ------>  */
-#wrapper {
-    position: relative; /* needed for footer positioning*/
-    /*margin:0 auto;  center, not in IE5 */
-    width: 970px;
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    /*font-size: 62.5%;*/
+    
     height: auto !important; /* real browsers */
     height: 100%; /* IE6: treaded as min-height*/;
     min-height: 100%; /* real browsers */
     margin: 0 auto;
 }
-
 /* HEADER ------>  */
 #branding {
     position: relative;
@@ -587,7 +581,7 @@ p.publication-content span {
     font-weight: normal;
 }
 /* FOOTER------>  */
-#footer-content {
+footer {
     clear: both;
     width: 970px;
     height: 88px;
@@ -596,7 +590,7 @@ p.publication-content span {
     color: #4e5051;
     background-color: #fff;
 }
-#footer-content p.copyright {
+footer p.copyright {
     float: left;
     padding-top: 55px;
     padding-left: 30px;

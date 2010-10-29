@@ -29,7 +29,6 @@
     </head>
     
     <body>
-        <div id="wrapper">
             <header id="branding">
                 <h2 class="vivo-logo"><a href="${urls.home}"><span class="displace">${siteName}</span></a></h2>
                 <!-- Since we are using a graphic text for the tagline, we won't render ${siteTagline}
@@ -214,7 +213,6 @@
                 </section> <!-- $highlights -->
             </div> <!-- #wrapper-content -->
             <footer>
-                <div id="footer-content">
                 <#if copyright??>
                     <p class="copyright"><small>&copy;${copyright.year?c} 
                 <#if copyright.url??>
@@ -233,9 +231,7 @@
                             <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                         </ul>
                     </nav>
-                </div> <!-- #footer-content -->
             </footer>
-        </div> <!-- #wrapper -->
         
         ${scripts.add("/js/jquery.js")}
         ${scripts.tags}

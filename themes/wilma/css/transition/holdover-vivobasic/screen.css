@@ -34,6 +34,8 @@ body {
   background: #fff;
   font-size: 108.33%; /* bumping up content text from 12px to 13px */
   min-height:350px;
+  width: 946px;
+  margin: 0 auto;
 }
 
 #footer {

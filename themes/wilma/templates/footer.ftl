@@ -2,7 +2,6 @@
 <#-- This is a temporary file and will be removed once we have completed the transition to freemarker -->
 
     <footer>
-        <div id="footer-content">
         <#if copyright??>
             <p class="copyright"><small>&copy;${copyright.year?c} 
         <#if copyright.url??>
@@ -22,10 +21,9 @@
                     <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 </ul>
             </nav>
-        </div> <!-- #footer-content -->
     </footer>
 
-</div> <!-- #wrapper -->
+
 
 ${scripts.add("/js/jquery.js")}
 ${scripts.tags}
