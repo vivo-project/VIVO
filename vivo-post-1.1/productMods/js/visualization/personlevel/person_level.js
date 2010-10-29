@@ -310,7 +310,8 @@ function nodeClickedJS(json){
 }
 
 function encodeURL(url){
-	return url.replace('&','%26');
+	var domainURL = 'http://vivo-vis-bkoniden.slis.indiana.edu/';
+	return domainURL + url.replace(/&/g,'%26');
 }
 
 function renderCoAuthorshipVisualization() {
@@ -348,9 +349,10 @@ function renderCoAuthorshipVisualization() {
 	} else if (hasRequestedVersion) {
 		// if we've detected an acceptable version
 		// embed the Flash Content SWF when all tests are passed
+		//coAuthorUrl=/vivo1/visualization?vis=coauthorship%26render_mode=data%26uri=http%3A%2F%2Fvivo.iu.edu%2Findividual%2FBrnerKaty&labelField=label&coPIUrl=/vivo1/visualization?vis=coprincipalinvestigator%26render_mode=data%26uri=http%3A%2F%2Fvivo.iu.edu%2Findividual%2FBrnerKaty&labelField=label
 		AC_FL_RunContent(
 				"src", swfLink,
-				"flashVars", "coAuthorUrl=" + encodeURL(egoCoAuthorshipDataFeederURL) +"&coPIUrl=" + encodeURL(egoCoPIDataFeederURL) ,			
+				"flashVars", 'coAuthorUrl='+ encodeURL(egoCoAuthorshipDataFeederURL) + '&coPIUrl=' + encodeURL(egoCoPIDataFeederURL) ,			
 				"width", "800",
 				"height", "850",
 				"align", "top",

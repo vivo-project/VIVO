@@ -195,7 +195,9 @@ function calcMinandMaxYears(jsonObject, year) {
 		        && val.data[val.data.length - 1][0] != -1){
 			maxYear = val.data[val.data.length - 1][0];
 		}else {
-			maxYear = val.data[val.data.length - 2][0];
+			if(val.data.length != 1){
+				maxYear = val.data[val.data.length - 2][0];
+			}
 		}
 	});
 
