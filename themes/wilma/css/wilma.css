@@ -19,14 +19,15 @@ body {
     margin: 0;
     padding: 0;
     height: 100%; /* needed for container min-height */
-    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat;
     font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
     /*font-size: 62.5%;*/
-    
     height: auto !important; /* real browsers */
     height: 100%; /* IE6: treaded as min-height*/;
     min-height: 100%; /* real browsers */
     margin: 0 auto;
+}
+body{
+   background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
 }
 /* HEADER ------>  */
 #branding {
@@ -170,7 +171,7 @@ h2{
     padding: 10px 0 12px 0;
     font-size: 18px;
     color: #2485ae; 
-}Å
+}
 #intro {
     float: left;
     width: 570px;
