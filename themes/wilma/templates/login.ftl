@@ -31,4 +31,6 @@
     </div>
 </section> <!-- #log-in -->
 
+${stylesheets.add("/css/login.css")}
+
 </#if>

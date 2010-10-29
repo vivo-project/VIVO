@@ -79,8 +79,7 @@
                 </ul>
             </nav>
             <div id="wrapper-content">
-                <#-- ${body} -->                          
-                <#include bodyTemplate>
+                ${body}                         
             </div> <!-- #wrapper-content -->
             <footer>
                 <#if copyright??>

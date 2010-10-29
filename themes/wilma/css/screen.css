@@ -23,15 +23,10 @@ VIVO wilma theme: screen styles
 /* This is our holdover vivo-basic theme file used for transition to wilma theme. This is temporary and it will be removed.*/
 @import url("transition/holdover-vivobasic/screen.css");
 
-
-
-
 @import url("reset.css");
 @import url("pictos.css");
 @import url("wilma.css");
 @import url("forms.css");
 @import url("formedit.css");
 
-
-@import url("../../../css/login.css"); /* this is here temporarily as we transition to freemarker - something is up with adding stylesheets ever since the body template was adjusted last week*/
 @import url("../../../css/menupage/menupage.css"); /* we need to call it from the theme until freemarker controller and menupage.ftl are created */
