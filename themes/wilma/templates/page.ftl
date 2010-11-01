@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <title>${title}</title>
         <link rel="stylesheet" href="${themeDir}/css/screen.css" />
+        ${stylesheets.tags}
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
         <script type="text/javascript" src="/js/html5.js"></script>
         ${headScripts.tags}

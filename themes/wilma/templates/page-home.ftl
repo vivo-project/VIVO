@@ -12,7 +12,7 @@
         ${stylesheets.addFromTheme("/css/screen.css")}
         ${stylesheets.tags}
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-        ${headScripts.add("/js/html5.js")}
+        <script type="text/javascript" src="/js/html5.js"></script>
         ${headScripts.tags}
 
         <!--[if lt IE 7]>
