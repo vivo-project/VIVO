@@ -640,14 +640,12 @@ a.powered-by-vivo:hover {
     color: #4e5051;
     text-decoration: none;
 }
-/* MISCELLANEOUS------>  */
-.displace {
-    position: absolute;
-    left: -9999px;
+
+/* GENERAL STYLE------>  */
+p{
+    margin-bottom:1.3em;
 }
-a {
-    text-decoration: underline
-}
+
 /* STYLED BUTTONS ------>  */
 .button,
 .button:visited {
@@ -699,3 +697,11 @@ a {
     background-color: #58a2c1
 }
 
+/* MISCELLANEOUS------>  */
+.displace {
+    position: absolute;
+    left: -9999px;
+}
+a {
+    text-decoration: underline
+}
