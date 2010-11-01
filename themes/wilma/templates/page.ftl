@@ -5,12 +5,11 @@
         <meta charset="utf-8" />
         <title>${title}</title>
         <link rel="stylesheet" href="${themeDir}/css/screen.css" />
-        ${stylesheets.tags}
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-        ${headScripts.add("/js/html5.js")}
+        <script type="text/javascript" src="/js/html5.js"></script>
         ${headScripts.tags}
         <!--[if lt IE 7]>
-        <script type="text/javascript" src="${themeDir}/js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="/js/jquery_plugins/supersleight.js"></script>
         <script type="text/javascript" src="${themeDir}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
