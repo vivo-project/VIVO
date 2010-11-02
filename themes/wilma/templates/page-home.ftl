@@ -12,11 +12,11 @@
         ${stylesheets.addFromTheme("/css/screen.css")}
         ${stylesheets.tags}
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-        <script type="text/javascript" src="/js/html5.js"></script>
+        <script type="text/javascript" src="${urls.home}/js/html5.js"></script>
         ${headScripts.tags}
 
         <!--[if lt IE 7]>
-        <script type="text/javascript" src="${themeDir}/js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
         <script type="text/javascript" src="${themeDir}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
@@ -26,7 +26,7 @@
         <![endif]-->
 
         <!--[if (gte IE 6)&(lte IE 8)]>
-        <script type="text/javascript" src="${themeDir}/js/selectivizr.js"></script>
+        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
         <![endif]-->
     </head>
     
