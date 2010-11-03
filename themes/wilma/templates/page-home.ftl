@@ -2,13 +2,14 @@
 
 <#import "lib-list.ftl" as l>
 <#import "widget-login.ftl" as login>
-                
+<@login.assets />
+                       
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <title>${title}</title>
-        <@login.styles />
+
         ${stylesheets.addFromTheme("/css/screen.css")}
         ${stylesheets.tags}
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
