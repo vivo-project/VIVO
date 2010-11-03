@@ -37,7 +37,7 @@ body{
     margin: 0 auto;
 }
 /* BRANDING ------>  */
-h2.vivo-logo {
+h1.vivo-logo {
     position: absolute;
     width: 386px;
     height: 59px;
@@ -45,7 +45,7 @@ h2.vivo-logo {
     left: 0;
     background: url(../images/VIVO-logo.png) 0 0 no-repeat;
 }
-h2.vivo-logo a {
+h1.vivo-logo a {
     display: block;
     width: 386px;
     height: 59px;
