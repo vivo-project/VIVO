@@ -1,68 +1,64 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-
-/*fix for page-homepage*/
-
-	
-html, body {
-	background-position:center, 0;
-	background-repeat:no-repeat;
+/* Fix for homepage in IE6 browsers */
+html,
+body {
+    background-position: center, 0;
+    background-repeat: no-repeat;
 }
-#intro h3 {
-	margin-left:24px;
-}
-#intro p {
-	margin-left:24px;
-}
-#log-in {
-	margin-right:20px;
-}
-#search-home h3 {
-	margin-left:0;
-}
+#intro h3 { 
+    margin-left: 24px; 
+    }
+#intro p { 
+    margin-left: 24px; 
+    }
+#log-in { 
+    margin-right: 20px; 
+    }
+#search-home h3 { 
+    margin-left: 0; 
+    }
 #log-in input {
-	width:200px;
-	margin-left:-28px;
+    width: 200px;
+    margin-left: -28px;
 }
-ul#browse-classGroups {
-	margin-left:20px;
-}
-#browse-classes {
-	width:600px;
-}
+ul#browse-classGroups { 
+    margin-left: 20px; 
+    }
+#browse-classes { 
+    width: 600px; 
+    }
 .global-highlights {
-	width:220px;
-	padding:18px;
+    width: 220px;
+    padding: 18px;
 }
 ul#browse-classGroups a.selected {
-	background-position-x: 0px;
-	background-position-y: 12px;
+    background-position-x: 0px;
+    background-position-y: 12px;
 }
-/*fix for page-topLevel*/
-
+/* fix for menupages */
 ul#foaf-person-childClasses {
-	float:left;
-	width:265px;
-	margin-left:15px;
+    float: left;
+    width: 265px;
+    margin-left: 15px;
 }
 ul#browse-childClasses {
-	width:284px;
-	margin-left:0;
-	padding-left:10px;
-	margin-left:15px;
+    width: 284px;
+    margin-left: 0;
+    padding-left: 10px;
+    margin-left: 15px;
 }
-#individuals-in-childClass {
-	width:450px;
-}
+#individuals-in-childClass { width: 450px }
 #individuals-in-childClass h3 {
-	padding: 10px 0 10px 30px;
-	margin:0;
+    padding: 10px 0 10px 30px;
+    margin: 0;
 }
 article.individual-foaf-person {
- width:400px margin-left:10px;
-	margin-right:10px;
-	padding:0;
-	margin-bottom:10px;
+    width: 400px margin-left:10px;
+    margin-right: 10px;
+    padding: 0;
+    margin-bottom: 10px;
 }
-#profile-photo-display {
-	width:620px;
+#profile-photo-display { 
+    width: 620px;
 }
+
