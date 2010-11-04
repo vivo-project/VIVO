@@ -19,24 +19,7 @@
 			<option value="Item4" disabled="disabled">Item4</option>
 			<option value="Item5" disabled="disabled">Item5</option>
 		</select>
-		<br/>
-<!--		<div id="functions">-->
-<!--			<input id="entityTitleSortBy" class="sort-by" type="radio" name="sort" value="azdesc"/> <span> Entity(desc)</span>-->
-<!--			<input class="sort-by" type="radio" name="sort" value="azasc"/> <span> Entity(asc)</span>-->
-<!--			<br/>-->
-<!--			<input class="sort-by" type="radio" name="sort" value="parameterdesc" /> <span id="paramdesc"></span>-->
-<!--			<input class="sort-by" type="radio" name="sort" value="parameterasc" /> <span id="paramasc"></span>-->
-<!--		</div>-->
-<!-- 		<form method="get" autocomplete="off">
-			<div><h2>Search for the sub-entity.</h2>
-				<input type="text" value="" name="livesearch" id="livesearch" />
-			</div> 
-		</form>
- -->		
-<!-- 		<h2 id="heading">Select sub-entities to compare</h2>
-		<div id="pagination"></div>
-			<ul id="searchresult"></ul>
- -->			
+		<br/>		
 		<div id="paginatedTable">
 		</div>
 		<div id = "stopwordsdiv">
@@ -90,12 +73,15 @@
 			clearRenderedObjects();
 		});
 
-		//Whenever the text receives focus, liveUpdate is called.
-		//$('#livesearch').liveUpdate('#searchresult').focus(); 
-		/*$('#livesearch').focus(function(){
-			$.fn.liveUpdate('#searchresult');
-		});*/
+		//click event handler for next/previous icons
+		$('#datatable_previous').live('click', function(){
+			populateMapOfCheckedEntities();
+		});
 
+		$('#datatable_next').live('click',function(){
+			populateMapOfCheckedEntities();
+		});
+		
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
 			
 			var checkbox = $(this);
@@ -115,33 +101,7 @@
 				updateCounter();				
     		}
 		});
-		
-		//select event handler for sort radio button
-		$("input[type=radio].sort-by").click(function(event, sortBy){
-			var toBeSortedBy = '';
-
-			if (sortBy) {
-				toBeSortedBy = sortBy;
-			} else {
-				toBeSortedBy = $(this).attr("value");
-			}	
-			
-			if(toBeSortedBy == "azdesc"){
-//				console.log("sort by A-Z desc is clicked");
-	            setOfLabels.sort(sortByEntityLabelDesc);
-			} else if(toBeSortedBy == "azasc") {
-//				console.log("sort by A-Z asc is clicked");
-				setOfLabels.sort(sortByEntityLabelAsc);
-			  } else if(toBeSortedBy == "parameterdesc"){
-//					console.log("sort by param desc is clicked");
-					setOfLabels.sort(sortByParameterDesc);					
-				  } else{
-//						console.log("sort by param asc is clicked");
-						setOfLabels.sort(sortByParameterAsc);						
-					  }
-			renderPaginatedDiv();
-		});
-								
+							
 		//parse the json object and pass it to loadData
         jsonObject.prepare(jQuery.parseJSON(jsonString));
 
@@ -178,12 +138,12 @@
              */
             function pageSelectCallback(pageIndex, paginationDiv){
 
- 				createCheckBoxesInsidePaginatedDiv(pageIndex);
+ 				//createCheckBoxesInsidePaginatedDiv(pageIndex);
                 /*
                  * When the elements in the paginated div
                  * are clicked this event handler is called
                  */
-                $("input.if_clicked_on_school").click(function(){
+                $("input.if_clicked_on_school").live('click', function(){
                 
                     var checkbox = $(this);
                     var checkboxValue = $(this).attr("value");

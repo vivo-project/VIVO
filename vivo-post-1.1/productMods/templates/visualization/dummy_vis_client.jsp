@@ -235,16 +235,7 @@
 	<c:param name="uri" value="http://vivo.iu.edu/individual/DigitalLibraryProgram"/>
 </c:url>
 
-
-<!--<c:url var="departmentPublications" value="/visualization">
-	<c:param name="vis" value="entity_comparison"/>
-	<c:param name="render_mode" value="standalone"/>
-	<c:param name="vis_mode" value="DEPARTMENT"/>
-	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/DepartmentBL-GRAD"/>
-</c:url>
-
-
---><c:url var="schoolPublications" value="/visualization">
+<c:url var="schoolPublications" value="/visualization">
 	<c:param name="vis" value="entity_comparison"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="vis_mode" value="SCHOOL"/>
@@ -265,14 +256,7 @@
 	<c:param name="uri" value="http://vivo.iu.edu/individual/DigitalLibraryProgram"/>
 </c:url>
 
-<!--<c:url var="departmentPublicationsdata" value="/visualization">
-	<c:param name="vis" value="entity_comparison"/>
-	<c:param name="render_mode" value="data"/>
-	<c:param name="vis_mode" value="DEPARTMENT"/>
-	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/DepartmentBL-SLIS"/>
-</c:url>
-
---><c:url var="schoolPublicationsdata" value="/visualization">
+<c:url var="schoolPublicationsdata" value="/visualization">
 	<c:param name="vis" value="entity_comparison"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="SCHOOL"/>
@@ -291,6 +275,13 @@
 	<c:param name="render_mode" value="data"/>
 	<c:param name="uri" value="http://vivo.iu.edu/individual/McDonaldRobertH"/>
 </c:url>
+
+<c:url var="freemarkertest" value="/visualization">
+	<c:param name="vis" value="freemarker"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/McDonaldRobertH"/>
+</c:url>
+
 
 <style type="text/css">
 	.get_vis {
@@ -417,6 +408,11 @@ $(document).ready(function() {
 <a href='<c:out value="${coprincipalinvestigatordata}"/>'>Co-PI data </a>
 
 <br /><br /><br />
+
+<a href='<c:out value="${freemarkertest}"/>'>Freemarker Test</a>
+
+<br /><br /><br />
+
 
 <a href='<c:out value="${collegeCSV}"/>'>vis data query for college -> "School of Industrial and Labor Relations (ILR)"</a><br />
 <a href='<c:out value="${collegeCSV2}"/>'>vis data query for college -> "College of Agriculture and Life Sciences (CALS)"</a><br />

@@ -549,35 +549,36 @@ function removeEntityUnChecked(renderedObjects, entity){
     
 }
 
-function createCheckBoxesInsidePaginatedDiv(pageIndex){
-	
-    var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);                
-    var newContent = ' ';
-    
-    /*
-     * Iterate through the list of school setOfLabels and build an HTML string
-     * Also check if some of the checkboxes are previously checked? If they are checked,
-     * then they should be on this time too!
-     */
-    for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
-        var checkedFlag = ' ', j = 0, fontWeight = ' ';
-        $.each(renderedObjects, function(){
-            if (renderedObjects[j].label == setOfLabels[i]) {
-                checkedFlag = "checked";
-            	fontWeight = " style='font-weight:bold;' ";
-            }
-            j++;                        
-        });
-        newContent += '<li><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/li>';        
-    }
-	               
-	// replace old content with new content
-    $('#searchresult').html(newContent);
-    populateMapOfCheckedEntities();
-
-}
+//function createCheckBoxesInsidePaginatedDiv(pageIndex){
+//	
+//    var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);                
+//    var newContent = ' ';
+//    
+//    /*
+//     * Iterate through the list of school setOfLabels and build an HTML string
+//     * Also check if some of the checkboxes are previously checked? If they are checked,
+//     * then they should be on this time too!
+//     */
+//    for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
+//        var checkedFlag = ' ', j = 0, fontWeight = ' ';
+//        $.each(renderedObjects, function(){
+//            if (renderedObjects[j].label == setOfLabels[i]) {
+//                checkedFlag = "checked";
+//            	fontWeight = " style='font-weight:bold;' ";
+//            }
+//            j++;                        
+//        });
+//        newContent += '<li><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/li>';        
+//    }
+//	               
+//	// replace old content with new content
+//    $('#searchresult').html(newContent);
+//    populateMapOfCheckedEntities();
+//
+//}
 
 function populateMapOfCheckedEntities(){
+		
 	var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
 	$.each(checkedEntities, function(index, val){
 		labelToCheckedEntities[$(val).attr("value")] = val;
@@ -765,6 +766,7 @@ jQuery.fn.liveUpdate = function(list){
 function prepareTableForDataTablePagination(jsonData){
 	
 	resetStopWordCount();
+	var checkboxCount = 0;
 	var table = $('<table>');
 	table.attr('cellpadding', '0');
 	table.attr('cellspacing', '0');
@@ -820,7 +822,10 @@ function prepareTableForDataTablePagination(jsonData){
 		row.append(entityTypeTD);
 		
 		tbody.append(row);
+		checkboxCount++;
 	});
+	
+//	console.log('creating '+ checkboxCount + ' checkboxes inside the data table');
 	
 	table.append(tbody);
 	tableDiv.append(table);
