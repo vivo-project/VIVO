@@ -232,7 +232,7 @@
 	<c:param name="vis" value="entity_comparison"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="vis_mode" value="DEPARTMENT"/>
-	<c:param name="uri" value="http://vivo.iu.edu/individual/DigitalLibraryProgram"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/DepartmentBL-SLIS"/>
 </c:url>
 
 <c:url var="schoolPublications" value="/visualization">
@@ -246,14 +246,14 @@
 	<c:param name="vis" value="entity_comparison"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="vis_mode" value="UNIVERSITY"/>
-	<c:param name="uri" value="http://vivo.iu.edu/individual/IndianaUniversityBloomington"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/n7971"/>
 </c:url>
 
 <c:url var="departmentPublicationsdata" value="/visualization">
 	<c:param name="vis" value="entity_comparison"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="DEPARTMENT"/>
-	<c:param name="uri" value="http://vivo.iu.edu/individual/DigitalLibraryProgram"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/DepartmentBL-SLIS"/>
 </c:url>
 
 <c:url var="schoolPublicationsdata" value="/visualization">
@@ -267,7 +267,7 @@
 	<c:param name="vis" value="entity_comparison"/>
 	<c:param name="render_mode" value="data"/>
 	<c:param name="vis_mode" value="UNIVERSITY"/>
-	<c:param name="uri" value="http://vivo.iu.edu/individual/IndianaUniversityBloomington"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/n7971"/>
 </c:url>
 
 <c:url var="coprincipalinvestigatordata" value="/visualization">
