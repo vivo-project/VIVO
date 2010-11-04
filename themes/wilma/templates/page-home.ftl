@@ -41,7 +41,7 @@
 
             <nav>
                 <ul id="header-nav">
-                    	
+                        
                 <#if loginName??>
                     <li><span class="pictos-arrow-10">U</span> ${loginName}</li>
                     <li><a href="${urls.logout}">Log out</a></li>
@@ -132,7 +132,7 @@
                             <li><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
                             <li><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
                             <li><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>
-                            <li><a href="#">Non-Academic 	  	 <span class="count-individuals"> (280)</span></a></li>
+                            <li><a href="#">Non-Academic         <span class="count-individuals"> (280)</span></a></li>
                             <li><a href="#">Non-Faculty Academic <span class="count-individuals"> (2,380)</span></a></li>
                             <li><a href="#">Person<span class="count-individuals"> (2,480)</span></a></li>
                             <li><a href="#">Postdoc <span class="count-individuals"> (1,380)</span></a></li>

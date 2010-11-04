@@ -12,11 +12,11 @@
 <#import "lib-list.ftl" as l>
 
     <nav>
-        <ul id="header-nav">	
+        <ul id="header-nav">    
             <#if loginName??>
                 <li><span class="pictos-arrow-10">U</span> ${loginName}</li>
-    			<li><a href="${urls.logout}">Log out</a></li>
-    	        <li><a href="${urls.siteAdmin}">Site Admin</a></li>
+                <li><a href="${urls.logout}">Log out</a></li>
+                <li><a href="${urls.siteAdmin}">Site Admin</a></li>
             <#else>
                 <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>

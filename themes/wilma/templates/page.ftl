@@ -26,8 +26,8 @@
         <![endif]-->
     </head>
     
-	<body>
-		<header id="branding">
+    <body>
+        <header id="branding">
             <h1 class="vivo-logo"><a href="${urls.home}"><span class="displace">${siteName}</span></a></h2>
             <!-- Since we are using a graphic text for the tagline, we won't render ${siteTagline}
             <#if siteTagline?has_content>
@@ -86,8 +86,11 @@
             </ul>
         </nav>
         
-        <div id="wrapper-content">
-            ${body}                         
+        <div id="wrapper-content"> 
+            <#-- mb863: using for now until we have controllers page.ftl to render the two templates commented below-->
+            <#--<#include "menupage/menupage.ftl">-->
+            <#--<#include "menupage/menupage--classgroup-people.ftl">-->
+            ${body}                       
         </div> <!-- #wrapper-content -->
         
         <footer>
@@ -114,7 +117,7 @@
         
         ${scripts.add("/js/jquery.js")}
         ${scripts.tags}
-        
+
         <#include "googleAnalytics.ftl">
     </body>
 </html>
