@@ -521,7 +521,7 @@ div.admin {
   background: #aaa;
   padding: 6px;
   height: 1%; /* IE likes this */
-  width: 100%; /* and this */
+  width: 98%; /* and this */
 }
 
 div.panelContents  {
@@ -532,7 +532,7 @@ div.panelContents  {
 }
 
 div.top {
-  margin: 0 -12px;
+  margin: 0;
   padding: 0 24px 0 0;
   position: relative;
   top: -16px;
