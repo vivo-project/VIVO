@@ -41,7 +41,6 @@ var labelToCheckedEntities = {};
 var stopWordsToCount = {};
 
 var graphContainer;
-var paginationDiv;
 var tableDiv;
 var entityLevel;
 
@@ -77,11 +76,3 @@ var FlotOptions = {
 
 FlotOptions.colors = colorConstantQueue;
 
-//options for pagination
-var paginationOptions = {
-		items_per_page : 2,
-		num_display_entries : 3,
-		num_edge_entries : 2,
-		prev_text : "Prev",
-		next_text : "Next"
-};

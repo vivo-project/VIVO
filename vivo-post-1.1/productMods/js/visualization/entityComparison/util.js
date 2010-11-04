@@ -278,12 +278,26 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
 		flotOptions.xaxis.tickSize = 1;
 	} else if (yearRange > 15 && yearRange < 70) {
 		flotOptions.series.lines.lineWidth = 2;
-		flotOptions.xaxis.tickSize = 1;
+		flotOptions.xaxis.tickSize = 4;
 	} else {
 		flotOptions.series.lines.lineWidth = 1;
-		flotOptions.xaxis.tickSize = 1;
+		flotOptions.xaxis.tickSize = 10;
 	}
 
+}
+
+/**
+ * Dynamically change the ticksize of y-axis.
+ */
+function setTickSizeOfYAxis(maxValue, flotOptions){
+	
+	if (maxValue > 0 && maxValue < 15) {
+		flotOptions.yaxis.tickSize = 3;
+	} else if (maxValue > 15 && maxValue < 70) {
+		flotOptions.yaxis.tickSize = 7;
+	} else {
+		flotOptions.yaxis.tickSize = 10;
+	}
 }
 /**
  * Create a div that represents the rectangular bar A hidden input class that is
@@ -549,39 +563,18 @@ function removeEntityUnChecked(renderedObjects, entity){
     
 }
 
-//function createCheckBoxesInsidePaginatedDiv(pageIndex){
-//	
-//    var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);                
-//    var newContent = ' ';
-//    
-//    /*
-//     * Iterate through the list of school setOfLabels and build an HTML string
-//     * Also check if some of the checkboxes are previously checked? If they are checked,
-//     * then they should be on this time too!
-//     */
-//    for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
-//        var checkedFlag = ' ', j = 0, fontWeight = ' ';
-//        $.each(renderedObjects, function(){
-//            if (renderedObjects[j].label == setOfLabels[i]) {
-//                checkedFlag = "checked";
-//            	fontWeight = " style='font-weight:bold;' ";
-//            }
-//            j++;                        
-//        });
-//        newContent += '<li><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/li>';        
-//    }
-//	               
-//	// replace old content with new content
-//    $('#searchresult').html(newContent);
-//    populateMapOfCheckedEntities();
-//
-//}
-
 function populateMapOfCheckedEntities(){
-		
-	var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
-	$.each(checkedEntities, function(index, val){
-		labelToCheckedEntities[$(val).attr("value")] = val;
+	console.log('populating checked entities');
+	
+//	var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
+//	$.each(checkedEntities, function(index, val){
+//		labelToCheckedEntities[$(val).attr("value")] = val;
+//		console.log('checked ', $(val).attr("value"));
+//	});
+	
+	$.each(labelToCheckedEntities, function(index, val){
+	//	labelToCheckedEntities[$(val).attr("value")] = val;
+		console.log('checked ', $(val).attr("value"));
 	});
 }
 
@@ -626,6 +619,7 @@ function clearRenderedObjects(){
 	});
 	
 	labelToCheckedEntities = {};
+	checkIfColorLimitIsReached();
 	updateCounter();
 
 }
@@ -659,104 +653,6 @@ function removeCheckBoxFromGlobalSet(checkbox){
 	}
 }
 
-function sortByParameterDesc(value1, value2){
-	var entity1 = labelToEntityRecord[value1];
-	var entity2 = labelToEntityRecord[value2];
-	
-	var sum1 = calcSumOfComparisonParameter(entity1);
-	var sum2 = calcSumOfComparisonParameter(entity2);
-	
-	return (sum2 - sum1);
-}
-
-function sortByParameterAsc(value1, value2){
-	var entity1 = labelToEntityRecord[value1];
-	var entity2 = labelToEntityRecord[value2];
-	
-	var sum1 = calcSumOfComparisonParameter(entity1);
-	var sum2 = calcSumOfComparisonParameter(entity2);
-	
-	return (sum1 - sum2);
-}
-
-function sortByEntityLabelDesc(value1, value2){
-	
-	var result;
-	
-	if(value1 > value2){
-		result = -1;
-	}else if(value1 < value2){
-		result = 1;
-	 }else {
-		 result = 0;
-	 }
-	return result;
-}
-
-function sortByEntityLabelAsc(value1, value2){
-	
-	var result;
-	
-	if (value1 > value2) {
-		result = 1;
-	} else if(value1 < value2) {
-		result = -1;
-	 } else {
-		 result = 0;
-	 }
-	return result;
-}
-
-function renderPaginatedDiv(){
-
-    //$("#entityTitleSortBy").trigger('click', "azdesc");          
-    paginationDiv.pagination(setOfLabels.length, paginationOptions);
-}
-
-
-jQuery.fn.liveUpdate = function(list){
-	
-	  list = jQuery(list);
-	
-	  if ( list.length ) {
-	    var rows = list.children('li');	    
-	    var cache = rows.map(function(){
-	    	//  console.log($(this).children('a').text().toLowerCase());
-	        return $(this).children('a').text().toLowerCase();
-	      });
-	    
-	    //console.log("rows: ", rows , " cache: ", cache);
-	     
-	    this.keyup(filter).keyup().parents('form').submit(function(){
-	        return false;
-	      });
-	  }
-	   
-	  return this;
-	   
-	  function filter(){
-		  
-	    var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
-	    //console.log("this: ",this, " term: " +term);
-	    
-	    if ( !term ) {
-	      rows.show();
-	    } else {
-	      rows.hide();
-	      cache.each(function(i){
-	    	 var score = this.score(term);
-	    	 if (score > 0) { 
-	        	scores.push([score, i]); 
-	         }
-	      });
-
-	      jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
-	        jQuery(rows[ this[1] ]).show();
-		      //console.log("showing : ", ($(rows[this[1]]).children('a').text()));
-	      });
-	    }
-	  }
-	};
 
 /*
  * function to create a table to be 
@@ -832,7 +728,7 @@ function prepareTableForDataTablePagination(jsonData){
 	
 	$('#datatable').dataTable({
 		"sDom": '<f>tlp',
-		"iDisplayLength": 10,
+		"iDisplayLength": 15,
 		"fnDrawCallback": function(){
 	      $('td').bind('mouseenter', function () { $(this).parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
 	      $('td').bind('mouseleave', function () { $(this).parent().children().each(function(){$(this).removeClass('datatablerowhighlight');}); });
@@ -881,3 +777,175 @@ function getEntityVisMode(jsonData){
 function toCamelCase(string){
 	return (string.substr(0,1).toUpperCase() + string.substr(1, string.length-1).toLowerCase());
 }
+
+function getSize(map){
+	var size = 0;
+	
+	$.each(map, function(){
+		size++;
+	});
+	
+	return size;
+}
+
+function disableUncheckedEntities(){
+	console.log('Inside disableUncheckedEntities');
+	
+	var unCheckedBoxes = $("input[type=checkbox].if_clicked_on_school").filter(function(){
+								if(!$(this).is(':checked')){
+									console.log($(this).attr("value"));
+									return $(this);
+								}
+						});
+	
+	$.each(unCheckedBoxes, function(index, val){
+		$(val).attr('disabled', true);
+	});
+}
+
+function enableUncheckedEntities(){
+	var disabledCheckedBoxes = $("input[type=checkbox].if_clicked_on_school").filter(function(){
+		if($(this).attr('disabled', true)){
+			console.log($(this).attr("value"));
+			return $(this);
+		}
+	});
+	
+	$.each(disabledCheckedBoxes, function(index, val){
+		$(val).attr('disabled', false);
+	});
+}
+
+function checkIfColorLimitIsReached(){
+	
+	if(getSize(labelToCheckedEntities) >= 10){
+		disableUncheckedEntities();
+	}else{
+		enableUncheckedEntities();
+	}
+}
+//function sortByEntityLabelDesc(value1, value2){
+//
+//var result;
+//
+//if(value1 > value2){
+//	result = -1;
+//}else if(value1 < value2){
+//	result = 1;
+// }else {
+//	 result = 0;
+// }
+//return result;
+//}
+//
+//function sortByEntityLabelAsc(value1, value2){
+//
+//var result;
+//
+//if (value1 > value2) {
+//	result = 1;
+//} else if(value1 < value2) {
+//	result = -1;
+// } else {
+//	 result = 0;
+// }
+//return result;
+//}
+
+//function renderPaginatedDiv(){
+//
+////$("#entityTitleSortBy").trigger('click', "azdesc");          
+//paginationDiv.pagination(setOfLabels.length, paginationOptions);
+//}
+
+//
+//jQuery.fn.liveUpdate = function(list){
+//
+//  list = jQuery(list);
+//
+//  if ( list.length ) {
+//    var rows = list.children('li');	    
+//    var cache = rows.map(function(){
+//    	//  console.log($(this).children('a').text().toLowerCase());
+//        return $(this).children('a').text().toLowerCase();
+//      });
+//    
+//    //console.log("rows: ", rows , " cache: ", cache);
+//     
+//    this.keyup(filter).keyup().parents('form').submit(function(){
+//        return false;
+//      });
+//  }
+//   
+//  return this;
+//   
+//  function filter(){
+//	  
+//    var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
+//    //console.log("this: ",this, " term: " +term);
+//    
+//    if ( !term ) {
+//      rows.show();
+//    } else {
+//      rows.hide();
+//      cache.each(function(i){
+//    	 var score = this.score(term);
+//    	 if (score > 0) { 
+//        	scores.push([score, i]); 
+//         }
+//      });
+//
+//      jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
+//        jQuery(rows[ this[1] ]).show();
+//	      //console.log("showing : ", ($(rows[this[1]]).children('a').text()));
+//      });
+//    }
+//  }
+//};
+//function sortByParameterDesc(value1, value2){
+//var entity1 = labelToEntityRecord[value1];
+//var entity2 = labelToEntityRecord[value2];
+//
+//var sum1 = calcSumOfComparisonParameter(entity1);
+//var sum2 = calcSumOfComparisonParameter(entity2);
+//
+//return (sum2 - sum1);
+//}
+//
+//function sortByParameterAsc(value1, value2){
+//var entity1 = labelToEntityRecord[value1];
+//var entity2 = labelToEntityRecord[value2];
+//
+//var sum1 = calcSumOfComparisonParameter(entity1);
+//var sum2 = calcSumOfComparisonParameter(entity2);
+//
+//return (sum1 - sum2);
+//}
+//
+//function createCheckBoxesInsidePaginatedDiv(pageIndex){
+//
+//var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);                
+//var newContent = ' ';
+//
+///*
+// * Iterate through the list of school setOfLabels and build an HTML string
+// * Also check if some of the checkboxes are previously checked? If they are checked,
+// * then they should be on this time too!
+// */
+//for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
+//    var checkedFlag = ' ', j = 0, fontWeight = ' ';
+//    $.each(renderedObjects, function(){
+//        if (renderedObjects[j].label == setOfLabels[i]) {
+//            checkedFlag = "checked";
+//        	fontWeight = " style='font-weight:bold;' ";
+//        }
+//        j++;                        
+//    });
+//    newContent += '<li><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/li>';        
+//}
+//               
+//// replace old content with new content
+//$('#searchresult').html(newContent);
+//populateMapOfCheckedEntities();
+//
+//}

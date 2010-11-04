@@ -49,9 +49,10 @@
 					loadData(arg1);
 				}
 			};
-		paginationDiv = $("#pagination");
+		
 		graphContainer = $("#graphContainer");
 		tableDiv = $('#paginatedTable');
+
  		// initial display of the grid when the page loads
  		init(graphContainer);
 		
@@ -69,17 +70,18 @@
 
 		//click event handler for clear button
 		$("button").click(function(){
-			//console.log("clear button is clicked!");
 			clearRenderedObjects();
 		});
 
 		//click event handler for next/previous icons
 		$('#datatable_previous').live('click', function(){
-			populateMapOfCheckedEntities();
+			//populateMapOfCheckedEntities();
+			checkIfColorLimitIsReached();
 		});
 
 		$('#datatable_next').live('click',function(){
-			populateMapOfCheckedEntities();
+			//populateMapOfCheckedEntities();
+			checkIfColorLimitIsReached();
 		});
 		
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
@@ -97,6 +99,7 @@
              	removeGraphic(linkedCheckbox);
              	removeCheckBoxFromGlobalSet(linkedCheckbox);
              	$(linkedCheckbox).attr('checked', false);
+             	checkIfColorLimitIsReached();
                 displayLineGraphs();
 				updateCounter();				
     		}
@@ -125,67 +128,53 @@
             calcMinandMaxYears(labelToEntityRecord, year);
 			yearRange = (year.max - year.min);
 
-            setLineWidthAndTickSize(yearRange, FlotOptions);
-        	paginationOptions.callback = pageSelectCallback;       
-
-            
+            setLineWidthAndTickSize(yearRange, FlotOptions);     
+			setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
             /*
-             * pageSelectCallback is a callback function that
-             * creates the newContent div and inserts the corresponding html into it.
-             * @param {Object} pageIndex
-             * @param {Object} jquery object
-             * @returns false to prevent infinite loop!
+             * When the elements in the paginated div
+             * are clicked this event handler is called
              */
-            function pageSelectCallback(pageIndex, paginationDiv){
-
- 				//createCheckBoxesInsidePaginatedDiv(pageIndex);
-                /*
-                 * When the elements in the paginated div
-                 * are clicked this event handler is called
-                 */
-                $("input.if_clicked_on_school").live('click', function(){
+            $("input.if_clicked_on_school").live('click', function(){
+            
+                var checkbox = $(this);
+                var checkboxValue = $(this).attr("value");
+                var entity = labelToEntityRecord[checkboxValue];
                 
-                    var checkbox = $(this);
-                    var checkboxValue = $(this).attr("value");
-                    var entity = labelToEntityRecord[checkboxValue];
-                    
-					//Dynamically generate the bar, checkbox and label.
+				//Dynamically generate the bar, checkbox and label.
 
-                    var bottomDiv = $("#bottom");
-                    var hiddenLabel = createGraphic(entity, bottomDiv);
+                var bottomDiv = $("#bottom");
+                var hiddenLabel = createGraphic(entity, bottomDiv);
 
-                    
-                    var divBar = hiddenLabel.next();
-                    var divLabel = hiddenLabel.prev();
-                    var spanElement = divBar.next('span');
-
-                    if (checkbox.is(':checked')) {
-                    
-						getNextFreeColor(entity);
-						generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement) ; 
-						renderLineGraph(renderedObjects, entity);
-						                     
-                    } else if (!checkbox.is(':checked')) {
-
-							removeUsedColor(entity);
-							removeEntityUnChecked(renderedObjects, entity);                          
-                         	removeGraphic(checkbox);
-                         	removeCheckBoxFromGlobalSet(checkbox);
-                         
-                        }
-				    populateMapOfCheckedEntities();                    
-                    displayLineGraphs();
-					updateCounter(); 
-
-                });
                 
-               return false;
-            }  
-	
-			renderPaginatedDiv();
+                var divBar = hiddenLabel.next();
+                var divLabel = hiddenLabel.prev();
+                var spanElement = divBar.next('span');
+
+                if (checkbox.is(':checked')) {
+                
+					getNextFreeColor(entity);
+					generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement) ; 
+					renderLineGraph(renderedObjects, entity);
+					labelToCheckedEntities[checkboxValue] = checkbox;
+					                     
+		        } else if (!checkbox.is(':checked')) {
+		
+					removeUsedColor(entity);
+					removeEntityUnChecked(renderedObjects, entity);                          
+		            removeGraphic(checkbox);
+		            removeCheckBoxFromGlobalSet(checkbox);
+		                     
+		        	}
+				console.log('Number of checked entities: ' + getSize(labelToCheckedEntities));
+				//disableUncheckedEntities();
+				
+				checkIfColorLimitIsReached();
+		    	populateMapOfCheckedEntities();                    
+		        displayLineGraphs();
+				updateCounter(); 
+		
+		    });
         }
-
-        $('#livesearch').liveUpdate('#searchresult').focus(); 
 
 	});
 	
