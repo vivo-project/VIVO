@@ -18,6 +18,8 @@
 <c:set var='numOfAuthors' value='${requestScope.numOfAuthors}' />
 <c:set var='numOfCoAuthorShips' value='${requestScope.numOfCoAuthorShips}' />
 
+<c:set var='completeURL' value='${requestScope.completeURL}' />
+
 <c:url var="egoVivoProfileURL" value="/individual">
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
@@ -59,6 +61,7 @@ $(document).ready(function(){
 
 <div id="body">
 
+<div>complete URL = '${completeURL} '</div>
 <!--[if IE]>
 	<style type="text/css">
 	

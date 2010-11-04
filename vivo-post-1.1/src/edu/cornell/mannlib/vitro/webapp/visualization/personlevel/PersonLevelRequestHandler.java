@@ -4,6 +4,8 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personlevel;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -332,7 +334,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 					String uniqueCoauthorsSparklineVisContainer, 
 					VitroRequest vitroRequest, 
 					HttpServletRequest request) {
-
+		
+		String completeURL = "";
         Portal portal = vitroRequest.getPortal();
         
         request.setAttribute("egoURIParam", egoURI);
@@ -348,7 +351,14 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		}
 		
         
-        request.setAttribute("egoPubSparklineVO", egoPubSparklineVO);
+		try {
+			completeURL = getCompleteURL(request);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+        request.setAttribute("completeURL", completeURL);
+		request.setAttribute("egoPubSparklineVO", egoPubSparklineVO);
         request.setAttribute("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
         
         request.setAttribute("egoPubSparklineContainerID", egoPubSparklineVisContainer);
@@ -360,4 +370,17 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         request.setAttribute("scripts", "/templates/visualization/person_level_inject_head.jsp");
         request.setAttribute("bodyJsp", "/templates/visualization/person_level.jsp");
 	}
+
+	private String getCompleteURL(HttpServletRequest request) throws MalformedURLException {
+		
+		String file = request.getRequestURI();
+		if(request.getQueryString()!= null){
+			file += '?' + request.getQueryString();
+		}
+
+		URL reconstructedURL = new URL(request.getScheme(), request.getServerName(), request.getServerPort(), file);
+		
+		return reconstructedURL.toString();
+	}
+	
 }
