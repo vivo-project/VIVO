@@ -197,13 +197,17 @@
         </div> <!-- #wrapper-content -->
         <footer>
             <#if copyright??>
-                <p class="copyright"><small>&copy;${copyright.year?c} 
+                <p class="copyright"><small>&copy;${copyright.year?c}
                 <#if copyright.url??>
                     <a href="${copyright.url}">${copyright.text}</a>  
                 <#else>
                     ${copyright.text}
                 </#if> 
-                All Rights Reserved | <a class="terms" href="${urls.termsOfUse}">Terms of Use</a></small> | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a></p>
+                    All Rights Reserved | <a class="terms" href="${urls.termsOfUse}">Terms of Use</a></small> | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a> 
+                    <#if loginName??>
+                        | Version <a href="${version.moreInfoUrl}">${version.label}</a>
+                    </#if>
+                </p>
             </#if>
             <nav>
                 <ul id="footer-nav">
