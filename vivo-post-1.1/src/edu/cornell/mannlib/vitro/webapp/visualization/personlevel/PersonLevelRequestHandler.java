@@ -376,9 +376,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		String file = request.getRequestURI();
 		System.out.println("getRequestURI() = "+ file + "getQueryString() ="+request.getQueryString()+ "getScheme() = "+ request.getScheme());
 		System.out.println("getServerName() = "+ request.getServerName() + "getServerPort() ="+request.getServerPort());
-		if(request.getQueryString()!= null){
-			file += '?' + request.getQueryString();
-		}
 
 		URL reconstructedURL = new URL(request.getScheme(), request.getServerName(), request.getServerPort(), file);
 		

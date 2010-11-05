@@ -256,6 +256,7 @@ function createTable(tableID, tableContainer, tableData) {
 	$('#' + tableContainer + " #loadingData").remove();
 }
 
+//renderStatsOnNodeClicked, CoRelations, noOfCoRelations
 function nodeClickedJS(json){
 
 	var obj = jQuery.parseJSON(json);

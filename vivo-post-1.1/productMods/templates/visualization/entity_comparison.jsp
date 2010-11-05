@@ -165,7 +165,7 @@
 		            removeCheckBoxFromGlobalSet(checkbox);
 		                     
 		        	}
-				console.log('Number of checked entities: ' + getSize(labelToCheckedEntities));
+				//console.log('Number of checked entities: ' + getSize(labelToCheckedEntities));
 				//disableUncheckedEntities();
 				
 				checkIfColorLimitIsReached();

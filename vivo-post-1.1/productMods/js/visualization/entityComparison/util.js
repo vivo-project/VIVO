@@ -564,7 +564,7 @@ function removeEntityUnChecked(renderedObjects, entity){
 }
 
 function populateMapOfCheckedEntities(){
-	console.log('populating checked entities');
+	//console.log('populating checked entities');
 	
 //	var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
 //	$.each(checkedEntities, function(index, val){
@@ -574,7 +574,7 @@ function populateMapOfCheckedEntities(){
 	
 	$.each(labelToCheckedEntities, function(index, val){
 	//	labelToCheckedEntities[$(val).attr("value")] = val;
-		console.log('checked ', $(val).attr("value"));
+		//console.log('checked ', $(val).attr("value"));
 	});
 }
 
@@ -789,11 +789,11 @@ function getSize(map){
 }
 
 function disableUncheckedEntities(){
-	console.log('Inside disableUncheckedEntities');
+	//console.log('Inside disableUncheckedEntities');
 	
 	var unCheckedBoxes = $("input[type=checkbox].if_clicked_on_school").filter(function(){
 								if(!$(this).is(':checked')){
-									console.log($(this).attr("value"));
+									//console.log($(this).attr("value"));
 									return $(this);
 								}
 						});
@@ -806,7 +806,7 @@ function disableUncheckedEntities(){
 function enableUncheckedEntities(){
 	var disabledCheckedBoxes = $("input[type=checkbox].if_clicked_on_school").filter(function(){
 		if($(this).attr('disabled', true)){
-			console.log($(this).attr("value"));
+			//console.log($(this).attr("value"));
 			return $(this);
 		}
 	});
