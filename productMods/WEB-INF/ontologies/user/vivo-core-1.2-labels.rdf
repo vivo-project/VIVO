@@ -135,7 +135,7 @@
     <rdfs:label xml:lang="en-US">co-principal investigator role of</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#affiliatedOrganization">
-    <rdfs:label xml:lang="en-US">affiliated organization</rdfs:label>
+    <rdfs:label xml:lang="en-US">affliliated organization</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl">
     <rdfs:label xml:lang="en-US">geopolitical.owl</rdfs:label>
@@ -181,6 +181,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameListFR">
     <rdfs:label xml:lang="en-US">nameListFR</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrHonor">
+    <rdfs:label xml:lang="en-US">awards and honors</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#organization">
     <rdfs:label xml:lang="en-US">organization</rdfs:label>
@@ -320,9 +323,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Video">
     <rdfs:label xml:lang="en-US">Video</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#conferringOrganization">
-    <rdfs:label xml:lang="en-US">conferring organization</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Issue">
     <rdfs:label xml:lang="en-US">Issue</rdfs:label>
   </rdf:Description>
@@ -334,6 +334,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AcademicYear">
     <rdfs:label xml:lang="en-US">Academic Year</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrHonorFor">
+    <rdfs:label xml:lang="en-US">award or honor for</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#roomWithinBuilding">
     <rdfs:label xml:lang="en-US">room within building</rdfs:label>
@@ -358,9 +361,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#LibrarianPosition">
     <rdfs:label xml:lang="en-US">Librarian Position</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasProgram">
-    <rdfs:label xml:lang="en-US">has program</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT">
     <rdfs:label xml:lang="en-US">codeFAOSTAT</rdfs:label>
@@ -443,6 +443,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#grantDirectCosts">
     <rdfs:label xml:lang="en-US">direct costs</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardConferredBy">
+    <rdfs:label xml:lang="en-US">award conferred by</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Continent">
     <rdfs:label xml:lang="en-US">Continent</rdfs:label>
   </rdf:Description>
@@ -475,6 +478,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/dc/terms/language">
     <rdfs:label xml:lang="en-US">language</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#trainingAtOrganization">
+    <rdfs:label xml:lang="en-US">educational organization</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SemesterClass">
     <rdfs:label xml:lang="en-US">Semester Class</rdfs:label>
@@ -665,9 +671,6 @@
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/presentedAt">
     <rdfs:label xml:lang="en-US">presented at</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#programOf">
-    <rdfs:label xml:lang="en-US">program of</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#GeographicLocation">
     <rdfs:label xml:lang="en-US">Geographic Location</rdfs:label>
   </rdf:Description>
@@ -787,9 +790,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#special_group">
     <rdfs:label xml:lang="en-US">special_group</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#educationalOrganization">
-    <rdfs:label xml:lang="en-US">educational organization</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasSuccessorOrganization">
     <rdfs:label xml:lang="en-US">successor organization</rdfs:label>
@@ -1022,6 +1022,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Service">
     <rdfs:label xml:lang="en-US">Service</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#receiptOf">
+    <rdfs:label xml:lang="en-US">receipt of</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#identifier">
     <rdfs:label xml:lang="en-US">identifier</rdfs:label>
   </rdf:Description>
@@ -1126,9 +1129,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Division">
     <rdfs:label xml:lang="en-US">Division</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrDistinction">
-    <rdfs:label xml:lang="en-US">awards and distinctions</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Newsletter">
     <rdfs:label xml:lang="en-US">Newsletter</rdfs:label>
@@ -1316,9 +1316,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole">
     <rdfs:label xml:lang="en-US">principal investigator on</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrDistinctionFor">
-    <rdfs:label xml:lang="en-US">award or distinction for</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#economic_region">
     <rdfs:label xml:lang="en-US">economic_region</rdfs:label>
   </rdf:Description>
@@ -1369,6 +1366,12 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#ConferenceSeries">
     <rdfs:label xml:lang="en-US">ConferenceSeries</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#receipts">
+    <rdfs:label xml:lang="en-US">receipts</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Speech">
+    <rdfs:label xml:lang="en-US">Speech</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#UndergraduateStudent">
     <rdfs:label xml:lang="en-US">Undergraduate Student</rdfs:label>
@@ -1490,6 +1493,9 @@
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Statute">
     <rdfs:label xml:lang="en-US">Statute</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AwardOrHonorReceipt">
+    <rdfs:label xml:lang="en-US">Award or Honor Receipt</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#fundingVehicleFor">
     <rdfs:label xml:lang="en-US">funding vehicle for</rdfs:label>
   </rdf:Description>
@@ -1595,6 +1601,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#taughtBy">
     <rdfs:label xml:lang="en-US">taught by</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#organizationForTraining">
+    <rdfs:label xml:lang="en-US">organization for training</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMaxLongitude">
     <rdfs:label xml:lang="en-US">hasMaxLongitude</rdfs:label>
   </rdf:Description>
@@ -1629,7 +1638,7 @@
     <rdfs:label xml:lang="en-US">GDPUnit</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/organizer">
-    <rdfs:label xml:lang="en-US">organizer</rdfs:label>
+    <rdfs:label xml:lang="en-US">organized by</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#memberRoleOf">
     <rdfs:label xml:lang="en-US">member role of</rdfs:label>
