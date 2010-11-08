@@ -32,7 +32,7 @@ ul#browse-classGroups {
     padding: 18px;
 }
 ul#browse-classGroups a.selected {
-    background-position-x: 0px;
+    background-position-x: 0;
     background-position-y: 12px;
 }
 /* fix for menupages */
@@ -47,7 +47,9 @@ ul#browse-childClasses {
     padding-left: 10px;
     margin-left: 15px;
 }
-#individuals-in-childClass { width: 450px }
+#individuals-in-childClass { 
+    width: 450px; 
+    }
 #individuals-in-childClass h3 {
     padding: 10px 0 10px 30px;
     margin: 0;

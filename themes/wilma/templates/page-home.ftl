@@ -94,7 +94,7 @@
             <@login.markup />
  
             <section id="browse">
-                <h2>Browse</h2>
+                <h4>Browse</h4>
                 
                 <ul id="browse-classGroups">
                     <li><a  class="selected" href="#">People<span class="count-classes"> (1,280)</span></a></li>
@@ -130,10 +130,10 @@
             </section> <!-- #browse -->
             
             <section id="highlights">
-                <h2>Highlights</h2>
+                <h4>Highlights</h4>
                 
                 <section id="featured-people" class="global-highlights">
-                    <h3>FEATURED PEOPLE</h3>
+                    <h5>FEATURED PEOPLE</h5>
                     
                     <!--use Hs-->
                     <article class="featured-people vcard">
@@ -152,7 +152,7 @@
                 </section> <!-- #featured-people -->
                 
                 <section id="upcoming-events" class="global-highlights">
-                    <h3>UPCOMING EVENTS</h3>
+                    <h5>UPCOMING EVENTS</h5>
                     
                     <article class="vevent">
                         <time class="dtstart" datetime="2010-02-13T20:00Z">21<span>Dec</span></time>
@@ -173,7 +173,7 @@
                 </section> <!-- #upcoming-events -->
                 
                 <section id="latest-publications" class="global-highlights">
-                    <h3>LATEST PUBLICATIONS</h3>
+                    <h5>LATEST PUBLICATIONS</h5>
                     
                     <article class="latest-publications-item">
                         <p class="publication-content">Solar masses<span><em>Journal</em> <time datetime="2010-02-13T20:00Z"> | December 2010</time></p>

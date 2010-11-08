@@ -11,7 +11,7 @@
     float: left;
 }
 #photoUploadDefaultImageContainer img {
-    border: 3px solid #CCC;
+    border: 3px solid #ccc;
     margin-bottom: 10px;
 }
 #photoUploadForm {
@@ -24,8 +24,12 @@
     display: block;
     padding-bottom: 10px;
 }
-#photoUploadForm  label span {    font-size: 0.7em }
-#photoUploadForm form input {    margin-bottom: 10px }
+#photoUploadForm  label span {    
+    font-size: 0.7em;
+}
+#photoUploadForm form input {    
+    margin-bottom: 10px;
+}
 /* styles for cropping a picture */
 #photoCroppingContainer {
     margin-left: 0px;
@@ -56,7 +60,7 @@
     width: 720px;
     height: 330px;
     background: #fff;
-    border: 1px solid grey;
+    border: 1px solid #bdbcbc;
     padding: 15px;
 }
 /* styles for error alerts */

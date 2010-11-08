@@ -65,7 +65,7 @@ ul#header-nav li {
     padding-right: 10px;
     border-right: 1px solid grey;
     font-size: 0.7em;
-    color: white;
+    color: #fff;
 }
 ul#header-nav li.last {
     border-right: none;
@@ -169,7 +169,8 @@ ul#main-nav {
 /* INTRO ------>  */
 h2{
     padding: 10px 0 12px 0;
-    font-size: 18px;
+    margin:0;
+    font-size: 22px;
     color: #2485ae; 
 }
 #intro {
@@ -182,10 +183,8 @@ h2{
     width: 920px;
     padding-bottom: 40px;  
 }
-#intro h3, #intro-no-login h3 {
+#intro h2, #intro-no-login h2 {
     padding: 35px 0 12px 24px;
-    font-size: 22px;
-    color: #2485ae;
     border-bottom: none;
 }
 #intro p, #intro-no-login p {
@@ -295,6 +294,12 @@ p.request-account a{
     color:#fff;
 }
 /* HOME SEARCH ------>  */
+h3{
+    padding: 10px 0 12px 0;
+    margin:0;
+    font-size: 18px;
+    color: #2485ae; 
+}
 #search-home {
     float: left;
     width: 533px;
@@ -303,7 +308,6 @@ p.request-account a{
 #search-home h3 {
     padding: 0;
     font-size: 22px;
-    color: #2485ae;
     margin-bottom: 15px;
 }
 #search-home-field {
@@ -331,6 +335,12 @@ input.search-home-vivo {
     padding-left: 30px;
 }
 /* BROWSE ------>  */
+h4{
+    padding: 10px 0 12px 0;
+    margin:0;
+    font-size: 16px;
+    color: #2485ae; 
+}
 #browse {
     clear: both;
     width: 920px;
@@ -340,17 +350,16 @@ input.search-home-vivo {
     overflow: hidden;
     padding-bottom: 30px;
 }
-#browse h2,
-#highlights h2 {
+#browse h4 {
     width: 10%;
-    height: 44px;
+    height: 30px;
     margin-bottom: 27px;
     padding-left: 15px;
-    font-size: 1.0em;
     font-weight: normal;
-    line-height: 44px;
+    line-height: 38px;
     color: #fff;
     background: #5e6363;
+    font-size: 20px;
 }
 /* BROWSE CLASS GROUPS ------>  */
 ul#browse-classGroups {
@@ -465,10 +474,18 @@ ul#class-group-list .count-individuals {
     background: #f7f9f9;
     padding-bottom: 30px;
 }
-#highlights h2 {
-    width: 14%
+#highlights h4 {
+    width: 13%;
+    height: 30px;
+    margin-bottom: 27px;
+    padding-left: 15px;
+    font-weight: normal;
+    line-height: 38px;
+    color: #fff;
+    background: #5e6363;
+    font-size: 20px;
 }
-#highlights h3 {
+#highlights h5 {
     color: #91b039;
     font-size: 14px;
     padding-bottom: 20px;
