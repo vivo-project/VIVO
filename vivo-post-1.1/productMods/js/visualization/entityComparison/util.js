@@ -509,6 +509,7 @@ function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
     divBar.css("background-color", colorToAssign);
     divBar.css("width", normalizedWidth);
     divLabel.children("a#entityURL").html(checkboxValue + "    ");
+    divLabel.children("a#entityURL").autoEllipsis();
     divLabel.children("a#vivoURL").html("   | VIVO profile");
     divLabel.children("a#vivoURL").css("text-decoration", "underline");
     divLabel.children("a").css("font-size", "0.8em");
