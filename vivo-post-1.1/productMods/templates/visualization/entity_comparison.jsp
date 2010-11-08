@@ -115,7 +115,7 @@
          */
         function loadData(jsonData){
             
-            var yearRange;
+           // var yearRange;
 
             $.each(jsonData, function(index, val){
                 setOfLabels.push(val.label);
@@ -125,11 +125,11 @@
 			getEntityVisMode(jsonData);
 			prepareTableForDataTablePagination(jsonData);
 			setEntityLevel();
-            calcMinandMaxYears(labelToEntityRecord, year);
-			yearRange = (year.max - year.min);
+           // calcMinandMaxYears(labelToEntityRecord, year);
+			//yearRange = (year.max - year.min);
 
-            setLineWidthAndTickSize(yearRange, FlotOptions);     
-			setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
+           // setLineWidthAndTickSize(yearRange, FlotOptions);     
+			//setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
             /*
              * When the elements in the paginated div
              * are clicked this event handler is called
@@ -167,9 +167,9 @@
 		        	}
 				//console.log('Number of checked entities: ' + getSize(labelToCheckedEntities));
 				//disableUncheckedEntities();
-				
+				setTickSizeOfAxes();
 				checkIfColorLimitIsReached();
-		    	populateMapOfCheckedEntities();                    
+		    	//populateMapOfCheckedEntities();                    
 		        displayLineGraphs();
 				updateCounter(); 
 		

@@ -215,15 +215,37 @@ function calcMinandMaxYears(jsonObject, year) {
  */
 function calcMaxOfComparisonParameter(jsonObject) {
 	var sum = 0, i = 0, maxCount = 0;
+	
+		$.each(jsonObject, function(key, val) {
+			for (i = 0; i < val.data.length; i++)
+				sum += val.data[i][1];
+
+			if (maxCount < sum)
+				maxCount = sum;
+
+			sum = 0;
+		});
+
+//	console.log('returning max value' + maxCount);
+	return maxCount;
+}
+
+function calcMaxWithinComparisonParameter(jsonObject){
+	
+	var value = 0, i = 0, maxCount = 0;
+	
 	$.each(jsonObject, function(key, val) {
-		for (i = 0; i < val.data.length; i++)
-			sum += val.data[i][1];
-
-		if (maxCount < sum)
-			maxCount = sum;
-
-		sum = 0;
+		for (i = 0; i < val.data.length; i++){
+			value = val.data[i][1];
+			console.log(val.data[i][1]);
+		
+			if (maxCount < value){
+				maxCount = value;
+			}
+		}
 	});
+	
+	console.log('max value: ' + maxCount);
 	return maxCount;
 }
 
@@ -291,12 +313,16 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
  */
 function setTickSizeOfYAxis(maxValue, flotOptions){
 	
-	if (maxValue > 0 && maxValue < 15) {
+	if (maxValue > 0 && maxValue <= 5) {
+		flotOptions.yaxis.tickSize = 1;
+	} else if (maxValue > 5 && maxValue <= 10) {
+		flotOptions.yaxis.tickSize = 2;
+	} else 	if (maxValue > 10 && maxValue <= 15) {
 		flotOptions.yaxis.tickSize = 3;
-	} else if (maxValue > 15 && maxValue < 70) {
-		flotOptions.yaxis.tickSize = 7;
+	} else if (maxValue > 15 && maxValue <= 70) {
+		flotOptions.yaxis.tickSize = maxValue/5;
 	} else {
-		flotOptions.yaxis.tickSize = 10;
+		flotOptions.yaxis.tickSize = maxValue/7;
 	}
 }
 /**
@@ -564,20 +590,6 @@ function removeEntityUnChecked(renderedObjects, entity){
     
 }
 
-function populateMapOfCheckedEntities(){
-	//console.log('populating checked entities');
-	
-//	var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
-//	$.each(checkedEntities, function(index, val){
-//		labelToCheckedEntities[$(val).attr("value")] = val;
-//		console.log('checked ', $(val).attr("value"));
-//	});
-	
-	$.each(labelToCheckedEntities, function(index, val){
-	//	labelToCheckedEntities[$(val).attr("value")] = val;
-		//console.log('checked ', $(val).attr("value"));
-	});
-}
 
 function generateCheckBoxes(label, checkedFlag, fontFlag){
 	
@@ -740,7 +752,7 @@ function prepareTableForDataTablePagination(jsonData){
 	});
 	
 
-	 populateMapOfCheckedEntities();
+	// populateMapOfCheckedEntities();
 }
 
 function resetStopWordCount(){
@@ -824,6 +836,22 @@ function checkIfColorLimitIsReached(){
 	}else{
 		enableUncheckedEntities();
 	}
+}
+
+function setTickSizeOfAxes(){
+	
+	var checkedLabelToEntityRecord = {};
+	var yearRange;
+	
+	$.each(labelToCheckedEntities, function(index, val){
+		checkedLabelToEntityRecord[index] = labelToEntityRecord[index];
+	});
+	
+    calcMinandMaxYears(checkedLabelToEntityRecord, year);
+	yearRange = (year.max - year.min);
+	
+    setLineWidthAndTickSize(yearRange, FlotOptions);     
+	setTickSizeOfYAxis(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), FlotOptions);
 }
 //function sortByEntityLabelDesc(value1, value2){
 //
@@ -949,4 +977,18 @@ function checkIfColorLimitIsReached(){
 //$('#searchresult').html(newContent);
 //populateMapOfCheckedEntities();
 //
+//}
+//function populateMapOfCheckedEntities(){
+////console.log('populating checked entities');
+//
+////var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
+////$.each(checkedEntities, function(index, val){
+////	labelToCheckedEntities[$(val).attr("value")] = val;
+////	console.log('checked ', $(val).attr("value"));
+////});
+//
+//$.each(labelToCheckedEntities, function(index, val){
+////	labelToCheckedEntities[$(val).attr("value")] = val;
+//	//console.log('checked ', $(val).attr("value"));
+//});
 //}
