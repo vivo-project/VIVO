@@ -89,10 +89,13 @@
         </nav>
         
         <div id="wrapper-content"> 
-            <#-- mb863: using for now until we have controllers page.ftl to render the two templates commented below-->
+            <#-- mb863: using for now until we have controllers page.ftl to render the templates commented below-->
             <#--<#include "menupage/menupage.ftl">-->
             <#--<#include "menupage/menupage--classgroup-people.ftl">-->
-            ${body}                       
+            <#--<#include "individual/individual--generic-class.ftl">-->
+            <#--<#include "individual/individual--foaf-person.ftl">-->
+            
+            ${body}
         </div> <!-- #wrapper-content -->
         
         <footer>

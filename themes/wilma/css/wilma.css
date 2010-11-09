@@ -29,6 +29,31 @@ body {
 body{
    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
 }
+/* h1,h2,h3,h4,h5,h6 ------>  */
+h2{
+    padding: 10px 0 12px 0;
+    margin:0;
+    font-size: 22px;
+    color: #2485ae; 
+}
+h3{
+    padding: 10px 0 12px 0;
+    margin:0;
+    font-size: 18px;
+    color: #2485ae; 
+}
+h4{
+    padding: 10px 0 12px 0;
+    margin:0;
+    font-size: 16px;
+    color: #2485ae; 
+}
+h5{
+    padding: 10px 0 12px 0;
+    margin:0;
+    font-size: 14px;
+    color: #2485ae; 
+}
 /* HEADER ------>  */
 #branding {
     position: relative;
@@ -167,12 +192,6 @@ ul#main-nav {
     padding: 20px;
 }
 /* INTRO ------>  */
-h2{
-    padding: 10px 0 12px 0;
-    margin:0;
-    font-size: 22px;
-    color: #2485ae; 
-}
 #intro {
     float: left;
     width: 570px;
@@ -294,12 +313,6 @@ p.request-account a{
     color:#fff;
 }
 /* HOME SEARCH ------>  */
-h3{
-    padding: 10px 0 12px 0;
-    margin:0;
-    font-size: 18px;
-    color: #2485ae; 
-}
 #search-home {
     float: left;
     width: 533px;
@@ -335,12 +348,6 @@ input.search-home-vivo {
     padding-left: 30px;
 }
 /* BROWSE ------>  */
-h4{
-    padding: 10px 0 12px 0;
-    margin:0;
-    font-size: 16px;
-    color: #2485ae; 
-}
 #browse {
     clear: both;
     width: 920px;
