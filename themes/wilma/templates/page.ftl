@@ -1,11 +1,14 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<#import "lib-list.ftl" as l>
+            
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <title>${title}</title>
         
-        <link rel="stylesheet" href="${themeDir}/css/screen.css" />
+        ${stylesheets.addFromTheme("/css/screen.css")}
         ${stylesheets.tags}
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
         <script type="text/javascript" src="${urls.home}/js/html5.js"></script>
@@ -33,8 +36,7 @@
             <#if siteTagline?has_content>
                 <em>${siteTagline}</em>
             </#if>-->
-            <#import "lib-list.ftl" as l>
-            
+
             <nav>
                 <ul id="header-nav">
                     <#if loginName??>
