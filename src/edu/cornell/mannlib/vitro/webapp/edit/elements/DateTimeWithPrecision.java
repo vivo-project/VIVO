@@ -37,7 +37,8 @@ public class DateTimeWithPrecision implements EditElement {
             EditSubmission editSub, Configuration fmConfig) {                        
         Map map = getMapForTemplate(fieldName, editConfig, editSub);
         map.putAll( FreemarkerHttpServlet.getDirectives());
-        return (new FreemarkerHelper( fmConfig )).mergeMapToTemplate(TEMPATE_NAME, map);        
+//        return (new FreemarkerHelper( fmConfig )).mergeMapToTemplate(TEMPATE_NAME, map);
+        return "problem with DateTimeWithPrecision"; // TODO - just so this will compile.
     }
 
     /**
