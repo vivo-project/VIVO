@@ -17,7 +17,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHelper;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.TemplateProcessingHelper;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditSubmission;
