@@ -2,22 +2,24 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.elements;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.TemplateProcessingHelper;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditSubmission;
@@ -28,19 +30,26 @@ import freemarker.template.Configuration;
  * datetime with precision and to convert he submitted parameters into 
  * varname -> Literal and varname -> URI maps.
  */
-public class DateTimeWithPrecision implements EditElement {
+public class DateTimeWithPrecision extends BaseEditElement {
     private static final Log log = LogFactory.getLog(DateTimeWithPrecision.class);
     private String TEMPATE_NAME = "DateTimeWithPrecision.ftl";
+    protected  String[] PRECISIONS = {
+            "http://bogus.com/precision/none",
+            "http://bogus.com/precision/year",
+            "http://bogus.com/precision/month",
+            "http://bogus.com/precision/day",
+            "http://bogus.com/precision/hour",
+            "http://bogus.com/precision/minute",
+            "http://bogus.com/precision/second" };
     
     @Override
     public String draw(String fieldName, EditConfiguration editConfig,
             EditSubmission editSub, Configuration fmConfig) {                        
         Map map = getMapForTemplate(fieldName, editConfig, editSub);
-        map.putAll( FreemarkerHttpServlet.getDirectives());
-//        return (new FreemarkerHelper( fmConfig )).mergeMapToTemplate(TEMPATE_NAME, map);
-        return "problem with DateTimeWithPrecision"; // TODO - just so this will compile.
-    }
-
+        map.putAll( FreemarkerHttpServlet.getDirectives());        
+        return merge( fmConfig, TEMPATE_NAME, map);
+    }    
+    
     /**
      * This produces a map for use in the template.
      */
@@ -58,13 +67,6 @@ public class DateTimeWithPrecision implements EditElement {
         map.put("second", Integer.toString(value.getSecondOfMinute() )) ;
                
         map.put("precision", getPrecision(fieldName,editConfig,editSub));
-        
-        Collection<String> possiblePrecisions = new ArrayList<String>();
-        possiblePrecisions.add("http://bogus.com/yearonly");
-        possiblePrecisions.add("http://bogus.com/yearMonth");
-        possiblePrecisions.add("http://bogus.com/yearMonthDay");
-        possiblePrecisions.add("http://bogus.com/YearMonthDayTime");
-        map.put("possiblePrecisions", possiblePrecisions); 
         
         //maybe we should put in empty validation errors to show what they would be?
         //ex: map.put("year.error","");
@@ -98,47 +100,111 @@ public class DateTimeWithPrecision implements EditElement {
         
         return literalMap;
     }
-
-    /**
-     * This gets the URIs for a submitted form from the queryParmeters. 
-     * It will only be called if getValidationErrors() doesn't return any errors.
-     */
-    public Map<String, String> getURIs(String fieldName,
-            EditConfiguration editConfig, Map<String, String[]> queryParameters) {
-        Map<String,String> uriMap = new HashMap<String,String>();                
-        
-        String precisionUri = getSubmittedPrecision( fieldName, queryParameters);
-        uriMap.put(fieldName+".precision", precisionUri);
-        
-        return uriMap;
-    }
     
-    private Literal getDateTime(String fieldName,
+    protected Literal getDateTime(String fieldName,
             Map<String, String[]> queryParameters) {
         Integer year = parseToInt(fieldName+".year", queryParameters);
         Integer month = parseToInt(fieldName+".month", queryParameters);
+        if( month == null || month == 0 ) 
+            month = 1;        
         Integer day = parseToInt(fieldName+".day", queryParameters);
+        if( day == null || day == 0 )
+            day = 1;
         Integer hour = parseToInt(fieldName+".hour", queryParameters);
+        if( hour == null )
+            hour = 0;
         Integer minute = parseToInt(fieldName+".minute", queryParameters);
+        if( minute == null )
+            minute = 0;
         Integer second = parseToInt(fieldName+".second", queryParameters);
+        if( second == null )
+            second = 0;
         int mills = 0;
+        
         
         DateTime value = new DateTime(
                 year.intValue(),month.intValue(),day.intValue(),
                 hour.intValue(),minute.intValue(),second.intValue(),mills);
         
-        return ResourceFactory.createTypedLiteral(value.toDate());
+        Date dValue = value.toDate();
+        
+        /*This isn't doing what I want it to do.  It is recording the correct instance of timeb
+         * but it is recording it with the timezone UTC/zulu */          
+        //return ResourceFactory.createTypedLiteral(ISODateTimeFormat.dateTimeNoMillis().print(value),XSDDatatype.XSDdateTime);
+         
+        Calendar c = Calendar.getInstance();
+        c.setTime(value.toDate());        
+        
+        Model m = ModelFactory.createDefaultModel();
+        Literal lit = m.createTypedLiteral( c );  
+        return lit;
     }
 
-    private String getSubmittedPrecision(String fieldName, 
-            Map<String, String[]> queryParameters) {
-        String rv= null;
-        String[] precisionUri = queryParameters.get(fieldName+".precision");
-        if( precisionUri != null && precisionUri.length > 0)
-            rv = precisionUri[0];
-        else
-            rv = null;
-        return rv;
+    /**
+     * This gets the URIs for a submitted form from the queryParmeters. 
+     * It will only be called if getValidationErrors() doesn't return any errors.
+     */
+    @Override
+    public Map<String, String> getURIs(String fieldName,
+            EditConfiguration editConfig, Map<String, String[]> queryParameters) {                                
+        String precisionUri;
+        try {
+            precisionUri = getSubmittedPrecision( fieldName, queryParameters);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            log.error("getURIS() should only be called on input that passed getValidationErrors()");
+            return Collections.emptyMap();        
+        }
+        Map<String,String> uriMap = new HashMap<String,String>();
+        uriMap.put(fieldName+".precision", precisionUri);        
+        return uriMap;
+    }
+    
+    /**
+     * Precision is based on the values returned by the form. Throws an exception with
+     * the error message if the queryParameters cannot make a valid date/precision because
+     * there are values missing.
+     */
+    protected String getSubmittedPrecision(String fieldName, 
+            Map<String, String[]> queryParameters) throws Exception {
+        
+        Integer year = parseToInt(fieldName+".year",queryParameters);
+        Integer month = parseToInt(fieldName+".month",queryParameters);
+        Integer day = parseToInt(fieldName+".day",queryParameters);
+        Integer hour  = parseToInt(fieldName+".hour",queryParameters);
+        Integer minute = parseToInt(fieldName+".minute",queryParameters);
+        Integer second = parseToInt(fieldName+".second",queryParameters);
+        Integer[] values = { year, month, day, hour, minute, second };
+        
+        /*  find the most significant date field that is null. */
+        int indexOfFirstNull= -1;        
+        for(int i=0; i < values.length ; i++){
+            if( values[i] == null ){
+                indexOfFirstNull = i;
+                break;
+            }            
+        }
+        
+        /* if they all had values then we have seconds precision */
+        if( indexOfFirstNull == -1 )
+            return PRECISIONS[6];
+       
+        
+        /* check that there are no values after the most significant null field 
+         * that are non-null. */         
+        boolean nonNullAfterFirstNull=false;
+        for(int i=0; i < values.length ; i++){
+            if( i > indexOfFirstNull && values[i] != null ){
+                nonNullAfterFirstNull = true;
+                break;
+            }
+        }
+        if( nonNullAfterFirstNull )
+            throw new Exception("cannot determine precision, there were filledout values after the first un-filledout value, ");
+        else{
+           
+            return PRECISIONS[ indexOfFirstNull ];
+        }
     }
     
     @Override
@@ -162,6 +228,7 @@ public class DateTimeWithPrecision implements EditElement {
      * This checks for invalid date times like "2010-02-31" or "2010-02-01T99:99:99".
      */
     private Map<String,String> checkDate(String fieldName, Map<String, String[]> queryParameters){
+        //TODO
         //see EditSubmission.getDateTime() for an example of checking for valid dates.
         
 //        Integer year,month,day,hour,minute,second;
@@ -178,30 +245,27 @@ public class DateTimeWithPrecision implements EditElement {
 //        
 
         return Collections.emptyMap();
-    }
-    
-    
-    private boolean hasNoneOrSingle(String key, Map<String, String[]> queryParameters){
-        String[] vt = queryParameters.get(key);
-        return vt == null || vt.length == 0 || vt.length==1;
-    }
+    }       
     
     private Integer parseToInt(String key,Map<String, String[]> queryParameters){        
         Integer out = null;
         try{
-            String[] vt = queryParameters.get(key);            
-            out = Integer.parseInt(vt[0]);
+            String[] vt = queryParameters.get(key);
+            if( vt == null || vt.length ==0 || vt[0] == null)
+                out = null;
+            else
+                out = Integer.parseInt(vt[0]);
         }catch(IndexOutOfBoundsException iex){
-            out =  new Integer(0);
+            out =  null;
         }catch(NumberFormatException nfe){
-            out =  new Integer(0);
+            out =  null;
         }catch(NullPointerException npe){
-            out = new Integer(0);
-        }
-        if( out == null )
-            out =  new Integer(0);
+            out = null;
+        }        
         return out;
     }
+    
+    
 //    
 //    /**
 //     * Create the var->value map for the datetimeprec.ftl template. 

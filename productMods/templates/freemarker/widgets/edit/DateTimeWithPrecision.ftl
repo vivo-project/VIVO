@@ -9,8 +9,3 @@ hour: <input name="${fieldName}.hour" type="text" value="${hour}"/> <br/>
 minute: <input name=${fieldName}.minute" type="text" value="${minute}"/> <br/>
 second: <input name=${fieldName}.second" type="text" value="${second}"/> <br/>
 <br/>
-<select name="${fieldName}.precision" >
-  <#list possiblePrecisions as uri>  
-    <option value="${uri}"<#if uri == precision>selected="selected"</#if>>${uri}</option>
-  </#list>
-</select>
