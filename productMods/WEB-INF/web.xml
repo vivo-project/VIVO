@@ -242,6 +242,15 @@
   </filter-mapping>
 
   <filter>
+    <filter-name>WebappDaoFactorySDBPrep</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.WebappDaoFactorySDBPrep</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>WebappDaoFactorySDBPrep</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
     <filter-name>VitroRequestPrep</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.VitroRequestPrep</filter-class>
   </filter>
