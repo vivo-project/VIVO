@@ -94,9 +94,10 @@
     </listener-class>
   </listener> 
   
-  <!-- Attaching submodels permits extra RDF files to be made visible without storing the data in the DB. -->
+  <!-- Reads Core VIVO ABox and TBox models from the file system each time the application starts. -->
+  <!-- Needs to run after JenaDataSourceSetup -->
   <listener>
-     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels</listener-class>
+     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup</listener-class>
   </listener>
 
   <!-- Pellet setup enables reasoning.  Inferences are cached in a separate DB graph. -->
