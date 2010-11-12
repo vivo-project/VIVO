@@ -41,6 +41,10 @@ form{
 #yaxislabel{
 	font-size: 12px;
 	float:right;
+	background-color: white;
+	color:black;
+	display: block;
+
 }
 
 #xaxislabel{

@@ -31,6 +31,7 @@
 			<div id="yaxislabel"></div>
 			<div id="bottom" style="width: 450px;">
 				<div id="xaxislabel">Year</div>
+				<div><button type="button" onClick="window.print()"> Print me!</button></div>
 				<button type ="button">clear</button>
 				<h3><span id="comparisonParameter"></span></h3>
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
@@ -63,7 +64,7 @@
         $("select.comparisonValues").click(function(){
             var selectedValue = $("select.comparisonValues option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
-			$('#yaxislabel').html("Number of " + selectedValue + lotsofSpaceCharacters).mbFlipText(false);
+			$('#yaxislabel').html("Number of " + selectedValue ).mbFlipText(false);
 			$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
 			$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
         });

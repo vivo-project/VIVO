@@ -7,10 +7,11 @@
  *            is the div that contains the main graph.
  */
 function init(graphContainer) {
-
+	
+	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
-	$('#yaxislabel').html("Number of " + $("select.comparisonValues option:selected").val()+ lotsofSpaceCharacters).mbFlipText(false);
+	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
 	$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
 	$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
 	
@@ -237,7 +238,7 @@ function calcMaxWithinComparisonParameter(jsonObject){
 	$.each(jsonObject, function(key, val) {
 		for (i = 0; i < val.data.length; i++){
 			value = val.data[i][1];
-			console.log(val.data[i][1]);
+		//	console.log(val.data[i][1]);
 		
 			if (maxCount < value){
 				maxCount = value;
@@ -245,7 +246,7 @@ function calcMaxWithinComparisonParameter(jsonObject){
 		}
 	});
 	
-	console.log('max value: ' + maxCount);
+	//console.log('max value: ' + maxCount);
 	return maxCount;
 }
 
