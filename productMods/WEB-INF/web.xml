@@ -79,9 +79,12 @@
   <!-- Invokes process to perform updates to align with ontology changes if needed -->
   <!-- Needs to run before submodels are attached and Pellet is set up -->
   
+  <!--
+  Commenting out during 1.2 development of kb mapping  
   <listener>
      <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase</listener-class>
   </listener>
+ -->
  
   <listener>
     <listener-class>
