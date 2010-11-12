@@ -449,6 +449,16 @@
     <servlet-name>JenaIngestController</servlet-name>
     <url-pattern>/ingest</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>JenaCsv2RdfController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.jena.JenaCsv2RdfController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JenaCsv2RdfController</servlet-name>
+    <url-pattern>/csv2rdf</url-pattern>
+  </servlet-mapping>
+  
 
   <servlet>
     <servlet-name>JenaExportController</servlet-name>
