@@ -44,9 +44,6 @@ var graphContainer;
 var tableDiv;
 var entityLevel;
 
-var lotsofSpaceCharacters = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
 //options for Flot
 var FlotOptions = {
 		legend : {

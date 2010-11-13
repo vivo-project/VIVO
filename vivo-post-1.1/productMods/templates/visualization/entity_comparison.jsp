@@ -74,16 +74,6 @@
 			clearRenderedObjects();
 		});
 
-		//click event handler for next/previous icons
-		$('#datatable_previous').live('click', function(){
-			//populateMapOfCheckedEntities();
-			checkIfColorLimitIsReached();
-		});
-
-		$('#datatable_next').live('click',function(){
-			//populateMapOfCheckedEntities();
-			checkIfColorLimitIsReached();
-		});
 		
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
 			
@@ -95,6 +85,7 @@
 
 			if(!checkbox.is(':checked')){
 				//console.log("Easy deselect checkbox is unclicked!");
+				updateRowHighlighter(linkedCheckbox);
 				removeUsedColor(entityToBeRemoved);
 				removeEntityUnChecked(renderedObjects, entityToBeRemoved);                          
              	removeGraphic(linkedCheckbox);
@@ -152,7 +143,7 @@
                 var spanElement = divBar.next('span');
 
                 if (checkbox.is(':checked')) {
-                
+                	
 					getNextFreeColor(entity);
 					generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement) ; 
 					renderLineGraph(renderedObjects, entity);

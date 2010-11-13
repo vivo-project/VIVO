@@ -624,6 +624,7 @@ function clearRenderedObjects(){
 	$.each(labelToCheckedEntities, function(index, val){
 		if($(val).is(':checked')){
 			$(val).attr("checked", false);
+			updateRowHighlighter(val);
 			removeUsedColor(labelToEntityRecord[$(val).attr("value")]);
 			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
 			removeGraphic(val);
@@ -741,11 +742,12 @@ function prepareTableForDataTablePagination(jsonData){
 	tableDiv.append(table);
 	
 	$('#datatable').dataTable({
-		"sDom": '<f>tlp',
-		"iDisplayLength": 15,
-		"fnDrawCallback": function(){
-	      $('td').bind('mouseenter', function () { $(this).parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
-	      $('td').bind('mouseleave', function () { $(this).parent().children().each(function(){$(this).removeClass('datatablerowhighlight');}); });
+		"sDom": '<f>ptl',
+		"iDisplayLength": 10,
+		"sPaginationType": "full_numbers",
+		"fnDrawCallback": function() {
+	    $('tr>td:nth-child(1)>input').bind('click', function () { $(this).parent().parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
+	    $('tr>td:nth-child(1)>input').bind('click', function () { if(!$(this).is(':checked')) { $(this).parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});} });
 	}
 
 //		"bLengthChange": false,
@@ -753,8 +755,25 @@ function prepareTableForDataTablePagination(jsonData){
 	});
 	
 
-	// populateMapOfCheckedEntities();
+	bindPaginatedTabsToEvents();
 }
+
+function bindPaginatedTabsToEvents(){
+	$('#datatable_paginate>span').bind('click', function(){
+		console.log($(this));
+		checkIfColorLimitIsReached();
+	});
+	$('#datatable_paginate>span>span').bind('click', function(){
+		console.log($(this));
+		checkIfColorLimitIsReached();
+	});
+	
+}
+
+function updateRowHighlighter(linkedCheckBox){	
+	 linkedCheckBox.parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});	
+}
+
 
 function resetStopWordCount(){
 	stopWordsToCount["Person"] = 0;
