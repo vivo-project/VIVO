@@ -6,16 +6,16 @@ head,#body {
 
 #body {
 	background-color: #fff;
-	height: 800px;
-	width: 900px;
+	min-height: 800px;
+	width: 100%;
+	min-width: 900px;
 	margin: auto;
 }
 
 h1 {
 	padding-top: 10px;
-	font-size: 1.2em;
+	font-size: 1.5em;
 	margin-left: 5%;
-	color: #12968c;
 }
 
 h2 {
@@ -30,7 +30,6 @@ h3 {
 
 button{
 	margin-top: 10px;
-/*	margin-bottom: -10px;	*/
 	float:right;
 }
 
@@ -139,5 +138,46 @@ li{
 }
 
 .datatablerowhighlight {
-background-color: #ECFFB3 !important;
+	background-color: #ECFFB3 !important;
+}
+
+.metallic{
+	background-color: #212D34;
+	color: white;
+	margin-left: 20px;
+}
+
+#leftUpper{
+	border: 1px #3D454E solid;
+	border-top: 10px #3D454E solid;
+}
+
+#leftLower{
+	border: 1px #3D454E solid;
+	border-top: 10px #3D454E solid;
+}
+
+#navcontainer{
+	background: none repeat scroll 0 0 #3D454E;
+	height: 1%;
+	padding: 8px 22em 8px 20px;
+	position: relative;
+}
+
+#navlist li
+{
+	display: inline;
+	list-style-type: none;
+	padding: 20px;
+}
+
+#navlist li a{
+	color: white;
+	text-decoration: none;
+}
+		
+#bottomButtons{
+	width: 50%;
+	float:right;
+	margin-right: 5%;
 }

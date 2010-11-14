@@ -366,7 +366,7 @@ function createGraphic(entity, bottomDiv) {
 	parentP.append(barDiv);
 	parentP.append(numAttributeText);
 
-	bottomDiv.children('p.displayCounter').after(parentP);
+	bottomDiv.children('hr').after(parentP);
 
 	return hiddenLabel;
 
@@ -537,12 +537,21 @@ function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
     divBar.css("width", normalizedWidth);
     divLabel.children("a#entityURL").html(checkboxValue + "    ");
     divLabel.children("a#entityURL").autoEllipsis();
-    divLabel.children("a#vivoURL").html("   | VIVO profile");
-    divLabel.children("a#vivoURL").css("text-decoration", "underline");
+    createVIVOProfileImage(divLabel.children("a#vivoURL"));
     divLabel.children("a").css("font-size", "0.8em");
     spanElement.text(sum);
     checkbox.next('a').css("font-weight", "bold");
 
+}
+
+function createVIVOProfileImage(url){
+	
+	var vivoImage = $(url);
+	
+	vivoImage.html("VIVO");
+	vivoImage.css("background-color","#212D34" );
+	vivoImage.css("color", "white");
+	vivoImage.css("padding", "2px");
 }
 
 function getNormalizedWidth(entity, sum){
@@ -756,19 +765,27 @@ function prepareTableForDataTablePagination(jsonData){
 	
 
 	bindPaginatedTabsToEvents();
+	
 }
 
 function bindPaginatedTabsToEvents(){
+
 	$('#datatable_paginate>span').bind('click', function(){
 		console.log($(this));
 		checkIfColorLimitIsReached();
-	});
-	$('#datatable_paginate>span>span').bind('click', function(){
-		console.log($(this));
-		checkIfColorLimitIsReached();
+//		bindInnerPaginatedTabsToEvents();
+//		$.each($('#datatable_paginate>span>span'), function(index, val){
+//			console.log('child: ', $(this));
+//		});
 	});
 	
 }
+
+//function bindInnerPaginatedTabsToEvents(){
+//	$('#datatable_paginate>span>span').live('click', function(){
+//		console.log($(this), 'is clicked');
+//	});
+//}
 
 function updateRowHighlighter(linkedCheckBox){	
 	 linkedCheckBox.parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});	
