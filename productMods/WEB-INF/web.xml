@@ -1107,8 +1107,13 @@
   </servlet>
 
   <servlet>
-    <servlet-name>loginShibboleth</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginShibboleth</servlet-class>
+    <servlet-name>loginShibbolethSetup</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginShibbolethSetup</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>loginShibbolethReturn</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginShibbolethReturn</servlet-class>
   </servlet>
 
   <servlet>
@@ -1292,8 +1297,12 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>loginShibboleth</servlet-name>
+    <servlet-name>loginShibbolethSetup</servlet-name>
     <url-pattern>/loginShibboleth</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>loginShibbolethReturn</servlet-name>
+    <url-pattern>/loginShibbolethReturn</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <!-- for backward-compatibility -->
