@@ -8,6 +8,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <!-- Google Chrome Frame open source plug-in brings Google Chrome's open web technologies and speedy JavaScript engine to Internet Explorer-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
         <title>${title}</title>
 
         ${stylesheets.addFromTheme("/css/screen.css")}
@@ -18,7 +21,7 @@
 
         <!--[if lt IE 7]>
         <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${themeDir}/js/utils.js"></script>
+        <script type="text/javascript" src="${urls.home}/${themeDir}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
 
