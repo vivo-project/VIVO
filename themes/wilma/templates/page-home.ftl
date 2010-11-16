@@ -19,7 +19,7 @@
 
         <!--[if lt IE 7]>
         <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${urls.home}/${themeDir}/js/utils.js"></script>
+        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
 
@@ -146,7 +146,7 @@
                     
                     <section id="visual-graph">
                         <h4>Visual Graph</h4>
-                        <img src="${themeDir}/images/visual-graph.jpg" />
+                        <img src="${urls.theme}/images/visual-graph.jpg" />
                     </section>
                 </section> <!-- #browse-classes -->
             </section> <!-- #browse -->
@@ -160,14 +160,14 @@
                     <!--use Hs-->
                     <article class="featured-people vcard">
                         <a href="#">
-                            <img  class="individual-photo" src="${themeDir}/images/person-thumbnail-sample.jpg" width="80" height="80" />
+                            <img  class="individual-photo" src="${urls.theme}/images/person-thumbnail-sample.jpg" width="80" height="80" />
                             <p class="fn">Hayworth, Rita<span class="title">Actress, dancer</span><span class="org">Sabbatic year for ever</span></p>
                         </a>
                     </article>
                     
                     <article class="featured-people vcard">
                         <a href="#">
-                            <img  class="individual-photo" src="${themeDir}/images/person-thumbnail-sample-2.jpg" width="80" height="80" />
+                            <img  class="individual-photo" src="${urls.theme}/images/person-thumbnail-sample-2.jpg" width="80" height="80" />
                             <p class="fn">Wiedmann, Martin <span class="title">Associate Professor</span><span class="org">Cornell faculty</span></p>
                         </a>
                     </article>

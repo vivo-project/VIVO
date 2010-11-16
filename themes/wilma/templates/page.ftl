@@ -19,7 +19,7 @@
         
         <!--[if lt IE 7]>
         <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${urls.home}/${themeDir}/js/utils.js"></script>
+        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
 
