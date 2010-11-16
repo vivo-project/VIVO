@@ -1295,9 +1295,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#subjectAreaFor">
     <rdfs:label xml:lang="en-US">subject area for</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#fundingAgentFor">
-    <rdfs:label xml:lang="en-US">funds</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval">
     <rdfs:label xml:lang="en-US">date/time interval</rdfs:label>
   </rdf:Description>
@@ -1480,9 +1477,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#County">
     <rdfs:label xml:lang="en-US">County</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#fundedByAgent">
-    <rdfs:label xml:lang="en-US">funded by</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/eissn">
     <rdfs:label xml:lang="en-US">eissn</rdfs:label>
