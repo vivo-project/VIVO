@@ -1,8 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#import "lib-list.ftl" as l>
-<#import "widget-login.ftl" as login>
-<@login.assets />
+<@widget name="login" include="assets" /> 
                        
 <!DOCTYPE html>
 <html lang="en">
@@ -112,9 +110,11 @@
                     </fieldset>
                 </section> <!-- #search-home -->
             </section> <!-- #intro -->
+          
+            <section id="login-container">
+                <@widget name="login" />
+            </section>
             
-            <@login.markup />
- 
             <section id="browse">
                 <h4>Browse</h4>
                 

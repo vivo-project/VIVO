@@ -222,7 +222,6 @@ ul#main-nav {
 }
 /* LOG IN------>  */            
 #log-in {
-    float:right;
     width:314px;
     height:390px;
     border:1px solid #e8ece9;
@@ -230,6 +229,10 @@ ul#main-nav {
     margin-top:20px;
     padding-bottom:30px;
     margin-bottom:30px;
+}
+/* Login container on home page */
+#login-container {
+    float: right;
 }
 #log-in h2 {
     font-size: 22px;
