@@ -48,7 +48,6 @@
 				<h3><span id="comparisonParameter"></span></h3>
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
 			id="total">10</span> <span id="entityleveltext"> schools</span> to compare.</p>
-			<hr/>
 			</div>
 		</div>		
 		<div id="bottomButtons">

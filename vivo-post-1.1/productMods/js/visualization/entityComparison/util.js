@@ -366,7 +366,7 @@ function createGraphic(entity, bottomDiv) {
 	parentP.append(barDiv);
 	parentP.append(numAttributeText);
 
-	bottomDiv.children('hr').after(parentP);
+	bottomDiv.children('p.displayCounter').after(parentP);
 
 	return hiddenLabel;
 
@@ -751,9 +751,10 @@ function prepareTableForDataTablePagination(jsonData){
 	tableDiv.append(table);
 	
 	$('#datatable').dataTable({
-		"sDom": '<f>ptl',
+		"sDom": '<"searchbar"f><"paginatedtabs"p><"datatablewrapper"t><"showentries"l>',
 		"iDisplayLength": 10,
 		"sPaginationType": "full_numbers",
+		"aLengthMenu" : [5,10,15],
 		"fnDrawCallback": function() {
 	    $('tr>td:nth-child(1)>input').bind('click', function () { $(this).parent().parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
 	    $('tr>td:nth-child(1)>input').bind('click', function () { if(!$(this).is(':checked')) { $(this).parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});} });

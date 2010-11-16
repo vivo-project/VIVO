@@ -150,6 +150,7 @@ li{
 #leftUpper{
 	border: 1px #3D454E solid;
 	border-top: 10px #3D454E solid;
+	background-color: #D9D9D9;
 }
 
 #leftLower{
@@ -169,6 +170,7 @@ li{
 	display: inline;
 	list-style-type: none;
 	padding: 20px;
+	
 }
 
 #navlist li a{
@@ -180,4 +182,13 @@ li{
 	width: 50%;
 	float:right;
 	margin-right: 5%;
+}
+
+#stopwordsdiv{
+	margin-top: 10px;
+}
+
+p.displayCounter{
+	padding-bottom: 4px;
+	border-bottom: 1px solid gray;
 }
