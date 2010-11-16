@@ -443,7 +443,7 @@ public class PersonPublicationCountVisCodeGenerator {
 				+ "sparklineNumberTD.attr('class', 'sparkline_number');" 
 				+ "row.append(sparklineNumberTD);" 
 				+ "var sparklineTextTD = $('<td>');" 
-				+ "sparklineTextTD.attr('width', '350');" 
+				+ "sparklineTextTD.attr('width', '450');" 
 				+ "sparklineTextTD.attr('class', 'sparkline_text');" 
 				+ "row.append(sparklineTextTD);" 
 				+ "table.append(row);" 
