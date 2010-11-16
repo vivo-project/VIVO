@@ -90,8 +90,14 @@
                 </#list>
             </ul>
         </nav>
-        
-        <div id="wrapper-content"> 
+ 
+        <div id="wrapper-content">        
+            <#if flash?has_content>
+                <div id="flash-message">
+                    ${flash}
+                </div>
+            </#if>
+   
             <#-- mb863: using for now until we have controllers page.ftl to render the templates commented below-->
             <#--<#include "menupage/menupage.ftl">-->
             <#--<#include "menupage/menupage--classgroup-people.ftl">-->

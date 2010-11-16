@@ -90,8 +90,14 @@
                 </#list>
             </ul>
         </nav>
-            
+       
         <div id="wrapper-content">
+            <#if flash?has_content>
+                <div id="flash-message">
+                    ${flash}
+                </div>
+            </#if>
+        
             <section id="intro">
                 <h3>What is VIVO?</h3>
                 
