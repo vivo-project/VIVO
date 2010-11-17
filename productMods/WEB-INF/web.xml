@@ -137,11 +137,9 @@
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
   </listener>
   
-	<!--<listener>
-		<listener-class>
-	        edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup
-		</listener-class>
-	</listener>  -->
+  <listener>
+    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup</listener-class>
+  </listener> 
     
     <listener>
         <listener-class>
