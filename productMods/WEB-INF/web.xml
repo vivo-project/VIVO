@@ -320,6 +320,15 @@
     <servlet-name>IndexController</servlet-name>
     <url-pattern>/SearchIndex</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>N3EditFormController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.N3EditFormController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>N3EditFormController</servlet-name>
+    <url-pattern>/N3EditForm</url-pattern>
+  </servlet-mapping>
 
 <!-- This is the new navigation controller.  It is not ready for the 1.1 release
      see http://issues.library.cornell.edu/browse/NIHVIVO-597  
