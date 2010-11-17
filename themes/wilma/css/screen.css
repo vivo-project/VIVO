@@ -28,8 +28,3 @@ VIVO wilma theme: screen styles
 @import url("wilma.css");
 @import url("forms.css");
 @import url("formedit.css");
-
-@import url("../../../css/menupage/menupage.css"); /* we need to call it from the theme until freemarker controller and menupage.ftl are created */
-@import url("../../../css/individual/individual.css"); /* we need to call it from the theme until freemarker controller and individual.ftl are created */
-
-@import url("../../../css/edit.css");

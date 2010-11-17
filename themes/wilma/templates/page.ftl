@@ -12,7 +12,7 @@
         <title>${title}</title>
         
         ${stylesheets.addFromTheme("/css/screen.css")}
-        ${stylesheets.tags}
+        <#include "stylesheets.ftl">
         <!-- script for enabling new HTML5 semantic markup in IE browsers-->
         <script type="text/javascript" src="${urls.home}/js/html5.js"></script>
         ${headScripts.tags}
