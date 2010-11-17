@@ -203,6 +203,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#equipmentFor">
     <rdfs:label xml:lang="en-US">equipment for</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicFocus">
+    <rdfs:label xml:lang="en-US">geographic focus</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeGAUL">
     <rdfs:label xml:lang="en-US">codeGAUL</rdfs:label>
   </rdf:Description>
@@ -588,7 +591,7 @@
     <rdfs:label xml:lang="en-US">semester</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/presents">
-    <rdfs:label xml:lang="en-US">presentations</rdfs:label>
+    <rdfs:label xml:lang="en-US">related documents</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#distributesFundingFrom">
     <rdfs:label xml:lang="en-US">distributes funding from</rdfs:label>
@@ -1066,6 +1069,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#linkedInformationResource">
     <rdfs:label xml:lang="en-US">linked information resource</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#geographicFocusOf">
+    <rdfs:label xml:lang="en-US">geographic focus of</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/homepage">
     <rdfs:label xml:lang="en-US">homepage</rdfs:label>
