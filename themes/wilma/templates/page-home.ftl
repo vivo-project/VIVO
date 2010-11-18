@@ -12,10 +12,8 @@
         <title>${title}</title>
 
         ${stylesheets.addFromTheme("/css/screen.css")}
-        ${stylesheets.tags}
-        <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-        <script type="text/javascript" src="${urls.home}/js/html5.js"></script>
-        ${headScripts.tags}
+        <#include "stylesheets.ftl">
+        <#include "headScripts.ftl">
 
         <!--[if lt IE 7]>
         <link rel="stylesheet" href="css/ie6.css" />
