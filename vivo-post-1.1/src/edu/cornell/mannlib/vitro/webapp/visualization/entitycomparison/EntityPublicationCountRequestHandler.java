@@ -77,50 +77,14 @@ public class EntityPublicationCountRequestHandler implements
 			if (ENTITY_VIS_MODE.equals("DEPARTMENT")) {
 				
 				SUB_ENTITY_VIS_MODE = "PERSON";
-//				System.out
-//						.println("\n\nDocuments within the Entity\n---------------------------------------------");
-//				for (BiboDocument document : entity.getPublications()) {
-//					System.out.println(document.getDocumentLabel() + " > "
-//							+ document.getDocumentURL());
-//				}
-//
-//				System.out
-//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-//
-//				for (SubEntity person : entity.getSubEntities()) {
-//					System.out.println(person.getIndividualLabel());
-//				}
+
 			}else if (ENTITY_VIS_MODE.equals("SCHOOL")) {
 				
 				SUB_ENTITY_VIS_MODE = "DEPARTMENT";
-//				System.out
-//						.println("\nDocuments within the Entity\n---------------------------------------------");
-//				for (BiboDocument document : entity.getPublications()) {
-//					System.out.println(document.getDocumentLabel() + " > "
-//							+ document.getDocumentURL());
-//				}
-//
-//				System.out
-//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-//				for (SubEntity department : entity.getSubEntities()) {
-//					System.out.println(department.getIndividualLabel());
-//				}
+
 			}else {
 				SUB_ENTITY_VIS_MODE = "SCHOOL";
-//				System.out
-//						.println("\nDocuments within the Entity\n---------------------------------------------");
-//				for (BiboDocument document : entity.getPublications()) {
-//					System.out.println(document.getDocumentLabel() + " > "
-//							+ document.getDocumentURL());
-//				}
-//
-//				System.out
-//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-//
-//				for (SubEntity school : entity.getSubEntities()) {
-//					System.out.println(school.getIndividualLabel());
-//
-//				}
+
 			}
 			
 			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
