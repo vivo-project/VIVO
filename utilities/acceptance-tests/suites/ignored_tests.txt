@@ -10,5 +10,5 @@
 
 CreatePeople,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
 CreatePeople,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
-CreatePeopleOld,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
-CreatePeopleOld,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
+CreatePeopleVB,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
+CreatePeopleVB,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
