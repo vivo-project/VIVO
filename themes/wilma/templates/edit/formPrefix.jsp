@@ -36,7 +36,7 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
 <html lang="en">
 <head> <!-- formPrefix.jsp -->
     <meta charset="utf-8" />
-    <title>${title}</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="<%=themeDir%>/css/screen.css" />
 
     <!-- script for enabling new HTML5 semantic markup in IE browsers-->
