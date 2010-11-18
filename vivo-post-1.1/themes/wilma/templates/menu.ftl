@@ -1,7 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 <#-- This is a temporary file and will be removed once we have completed the transition to freemarker -->
 
-<header id="branding">
+<header id="branding" role="banner">
     <h1 class="vivo-logo"><a href="${urls.home}"><span class="displace">${siteName}</span></a></h1>
     <!-- Since we are using a graphic text for the tagline, we won't render ${siteTagline}
 
@@ -11,7 +11,7 @@
     
 <#import "lib-list.ftl" as l>
 
-    <nav>
+    <nav role="navigation">
         <ul id="header-nav">    
             <#if loginName??>
                 <li><span class="pictos-arrow-10">U</span> ${loginName}</li>
@@ -32,11 +32,11 @@
         </ul>
     </nav>
 
-    <section id="search">
+    <section id="search" role="region">
         <fieldset>
             <legend>Search form</legend>
 
-            <form id="searchForm" action="${urls.search}" name="searchForm"> 
+            <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
                 <#if showFlag1SearchField??>
                     <select id="search-form-modifier" name="flag1" class="form-item" >
                         <option value="nofiltering" selected="selected">entire database (${loginName})</option>
@@ -58,10 +58,11 @@
     </section>
 </header>
 
-<nav>
+<nav role="navigation">
     <ul id="main-nav">
         <#list tabMenu.items as item>
             <li><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>          
         </#list>
     </ul>
 </nav>
+<div id="wrapper-content">  

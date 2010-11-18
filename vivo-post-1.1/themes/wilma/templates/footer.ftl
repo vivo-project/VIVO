@@ -1,7 +1,8 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 <#-- This is a temporary file and will be removed once we have completed the transition to freemarker -->
 
-<footer>
+</div> <!-- #wrapper-content -->
+<footer role="contentinfo">
     <#if copyright??>
         <p class="copyright"><small>&copy;${copyright.year?c} 
         <#if copyright.url??>
@@ -16,7 +17,7 @@
         </p>
     </#if>
     
-    <nav>
+    <nav role="navigation">
         <ul id="footer-nav">
             <li><a href="${urls.about}">About</a></li>
             <#if urls.contact??>

@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.elements;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,17 +12,19 @@ import org.junit.Test;
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field;
 
 
-public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
+public class DateTimeWithPrecisionTest {
 
     @Test
     public void precisionSecondsValidationTest() throws Exception{
         String FIELDNAME = "testfield";       
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -38,7 +39,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertTrue(validationMsgs.size() == 0 );
         
         String precisionURI = null;        
-        precisionURI = dtwp.getSubmittedPrecision(FIELDNAME, queryParameters);
+        precisionURI = dtwp.getSubmittedPrecision( queryParameters);
         
         Assert.assertNotNull(precisionURI);
         Assert.assertEquals(dtwp.PRECISIONS[6], precisionURI);        
@@ -47,7 +48,9 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
     @Test
     public void precisionMinutesValidationTest() throws Exception{
         String FIELDNAME = "testfield";       
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -63,7 +66,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertTrue(validationMsgs.size() == 0 );
         
         String precisionURI = null;        
-        precisionURI = dtwp.getSubmittedPrecision(FIELDNAME, queryParameters);
+        precisionURI = dtwp.getSubmittedPrecision( queryParameters);
         
         Assert.assertNotNull(precisionURI);
         Assert.assertEquals(dtwp.PRECISIONS[5], precisionURI);        
@@ -72,7 +75,9 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
     @Test
     public void precisionHourssValidationTest() throws Exception{
         String FIELDNAME = "testfield";        
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -88,7 +93,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertTrue(validationMsgs.size() == 0 );
         
         String precisionURI = null;
-        precisionURI = dtwp.getSubmittedPrecision(FIELDNAME, queryParameters);
+        precisionURI = dtwp.getSubmittedPrecision( queryParameters);
         
         Assert.assertNotNull(precisionURI);
         Assert.assertEquals(dtwp.PRECISIONS[4], precisionURI);        
@@ -97,7 +102,9 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
     @Test
     public void precisionDaysValidationTest()  throws Exception{        
         String FIELDNAME = "testfield";        
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -113,7 +120,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertTrue(validationMsgs.size() == 0 );
         
         String precisionURI = null;        
-        precisionURI = dtwp.getSubmittedPrecision(FIELDNAME, queryParameters);
+        precisionURI = dtwp.getSubmittedPrecision( queryParameters);
         
         Assert.assertNotNull(precisionURI);
         Assert.assertEquals(dtwp.PRECISIONS[3], precisionURI);        
@@ -122,7 +129,9 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
     @Test
     public void precisionMonthsValidationTest()throws Exception{
         String FIELDNAME = "testfield";        
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -138,7 +147,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertTrue(validationMsgs.size() == 0 );
         
         String precisionURI = null;
-        precisionURI = dtwp.getSubmittedPrecision(FIELDNAME, queryParameters);
+        precisionURI = dtwp.getSubmittedPrecision( queryParameters);
         
         Assert.assertNotNull(precisionURI);
         Assert.assertEquals(dtwp.PRECISIONS[2], precisionURI);        
@@ -147,7 +156,9 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
     @Test
     public void precisionYearValidationTest() throws Exception{
         String FIELDNAME = "testfield";       
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -163,7 +174,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertTrue(validationMsgs.size() == 0 );
         
         String precisionURI = null;
-        precisionURI = dtwp.getSubmittedPrecision(FIELDNAME, queryParameters);
+        precisionURI = dtwp.getSubmittedPrecision( queryParameters);
         
         Assert.assertNotNull(precisionURI);
         Assert.assertEquals(dtwp.PRECISIONS[1], precisionURI);        
@@ -172,7 +183,9 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
     @Test
     public void getDateLiteralTest(){
         String FIELDNAME = "testfield";       
-        DateTimeWithPrecision dtwp = new DateTimeWithPrecision();
+        Field field = new Field();
+        field.setName(FIELDNAME);
+        DateTimeWithPrecision dtwp = new DateTimeWithPrecision(field);
         
         Map<String,String[]> queryParameters = new HashMap<String, String[]>();                        
         queryParameters.put(FIELDNAME+".year", new String[]{"1999" });
@@ -187,7 +200,7 @@ public class DateTimeWithPrecisionTest extends DateTimeWithPrecision {
         Assert.assertNotNull(validationMsgs);
         Assert.assertTrue(validationMsgs.size() == 0 );
                 
-        Literal date = dtwp.getDateTime(FIELDNAME, queryParameters);        
+        Literal date = dtwp.getDateTime( queryParameters);        
         Assert.assertNotNull(date);        
         Assert.assertEquals( XSDDatatype.XSDdateTime.getURI() ,date.getDatatypeURI() );
         

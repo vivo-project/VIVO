@@ -12,14 +12,10 @@
         <title>${title}</title>
         
         ${stylesheets.addFromTheme("/css/screen.css")}
-        ${stylesheets.tags}
-        <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-        <script type="text/javascript" src="${urls.home}/js/html5.js"></script>
-        ${headScripts.tags}
+        <#include "stylesheets.ftl">
+        <#include "headScripts.ftl">
         
         <!--[if lt IE 7]>
-        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
 
@@ -27,20 +23,17 @@
         <link rel="stylesheet" href="css/ie7.css" />
         <![endif]-->
 
-        <!--[if (gte IE 6)&(lte IE 8)]>
-        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
-        <![endif]-->
     </head>
     
     <body>
-        <header id="branding">
+        <header id="branding" role="banner">
             <h1 class="vivo-logo"><a href="${urls.home}"><span class="displace">${siteName}</span></a></h1>
             <!-- Since we are using a graphic text for the tagline, we won't render ${siteTagline}
             <#if siteTagline?has_content>
                 <em>${siteTagline}</em>
             </#if>-->
 
-            <nav>
+            <nav role="navigation">
                 <ul id="header-nav">
                     <#if loginName??>
                         <li><span class="pictos-arrow-10">U</span> ${loginName}</li>
@@ -58,11 +51,11 @@
                 </ul>
             </nav>
             
-            <section id="search">
+            <section id="search" role="region">
                 <fieldset>
                     <legend>Search form</legend>
                     
-                    <form id="searchForm" action="${urls.search}" name="searchForm"> 
+                    <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
                         <#if showFlag1SearchField??>
                             <select id="search-form-modifier" name="flag1" class="form-item" >
                                 <option value="nofiltering" selected="selected">entire database (${loginName})</option>
@@ -83,7 +76,7 @@
             </section>
         </header>
         
-        <nav>
+        <nav role="navigation">
             <ul id="main-nav">
                 <#list tabMenu.items as item>
                     <li><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
@@ -107,7 +100,7 @@
             ${body}
         </div> <!-- #wrapper-content -->
         
-        <footer>
+        <footer role="contentinfo">
             <#if copyright??>
                 <p class="copyright"><small>&copy;${copyright.year?c} 
                 <#if copyright.url??>
@@ -121,7 +114,7 @@
                 </p>
             </#if>
                
-            <nav>
+            <nav role="navigation">
                 <ul id="footer-nav">
                     <li><a href="${urls.about}">About</a></li>
                     <#if urls.contact??>
@@ -134,7 +127,16 @@
         
         ${scripts.add("/js/jquery.js")}
         ${scripts.tags}
+        
+        <!--[if lt IE 7]>
+        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
+        <![endif]-->
 
+        <!--[if (gte IE 6)&(lte IE 8)]>
+        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
+        <![endif]-->
+        
         <#include "googleAnalytics.ftl">
     </body>
 </html>

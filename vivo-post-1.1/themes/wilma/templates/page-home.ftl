@@ -12,14 +12,10 @@
         <title>${title}</title>
 
         ${stylesheets.addFromTheme("/css/screen.css")}
-        ${stylesheets.tags}
-        <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-        <script type="text/javascript" src="${urls.home}/js/html5.js"></script>
-        ${headScripts.tags}
+        <#include "stylesheets.ftl">
+        <#include "headScripts.ftl">
 
         <!--[if lt IE 7]>
-        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
 
@@ -27,20 +23,17 @@
         <link rel="stylesheet" href="css/ie7.css" />
         <![endif]-->
 
-        <!--[if (gte IE 6)&(lte IE 8)]>
-        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
-        <![endif]-->
     </head>
     
     <body>
-        <header id="branding">
+        <header id="branding" role="banner">
             <h1 class="vivo-logo"><a href="${urls.home}"><span class="displace">${siteName}</span></a></h1>
             <!-- Since we are using a graphic text for the tagline, we won't render ${siteTagline}
             <#if siteTagline?has_content>
                 <em>${siteTagline}</em>
             </#if>-->
 
-            <nav>
+            <nav role="navigation">
                 <ul id="header-nav">
                         
                 <#if loginName??>
@@ -60,11 +53,11 @@
                 </ul>
             </nav>
                 
-            <section id="search">
+            <section id="search" role="region">
                 <fieldset>
                     <legend>Search form</legend>
 
-                    <form id="searchForm" action="${urls.search}" name="searchForm"> 
+                    <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
                        <#if showFlag1SearchField??>
                            <select id="search-form-modifier" name="flag1" class="form-item" >
                                <option value="nofiltering" selected="selected">entire database (${loginName})</option>
@@ -83,7 +76,7 @@
             </section>
         </header>
             
-        <nav>
+        <nav role="navigation">
             <ul id="main-nav">
                 <#list tabMenu.items as item>
                     <li><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>          
@@ -98,16 +91,16 @@
                 </div>
             </#if>
         
-            <section id="intro">
+            <section id="intro" role="region">
                 <h3>What is VIVO?</h3>
                 
                 <p>VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with researcher interests, activities, and accomplishments, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually,  brought into VIVO in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases, or from database providers such as publication aggregators and funding agencies. <a href="#">More<span class="pictos-arrow-14"> 4</span></a></p>
-                <section id="search-home">
+                <section id="search-home" role="region">
                     <h3>Search VIVO</h3>
                     
                     <fieldset>
                         <legend>Search form</legend>
-                        <form id="search-home-vivo" action="${urls.search}" method="post" name="search">
+                        <form id="search-home-vivo" action="${urls.search}" method="post" name="search" role="search">
                             <div id="search-home-field">
                                 <input name="search-home-vivo" class="search-home-vivo" id="search-home-vivo"  type="text" />
                                 <a class ="submit" href="#">Search</a>
@@ -117,11 +110,11 @@
                 </section> <!-- #search-home -->
             </section> <!-- #intro -->
           
-            <section id="login-container">
+            <section id="login-container" role="region">
                 <@widget name="login" />
             </section>
             
-            <section id="browse">
+            <section id="browse" role="region">
                 <h4>Browse</h4>
                 
                 <ul id="browse-classGroups">
@@ -135,7 +128,7 @@
                     <li><a href="#">Locations<span class="count-classes"> (903)</span></a></li>
                 </ul>
                 
-                <section id="browse-classes">
+                <section id="browse-classes" role="navigation">
                     <nav>
                         <ul id="class-group-list">
                             <li><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
@@ -150,49 +143,49 @@
                         </ul>
                     </nav>
                     
-                    <section id="visual-graph">
+                    <section id="visual-graph" role="region">
                         <h4>Visual Graph</h4>
-                        <img src="${urls.theme}/images/visual-graph.jpg" />
+                        <img src="${urls.theme}/images/visual-graph.jpg" alt=""/>
                     </section>
                 </section> <!-- #browse-classes -->
             </section> <!-- #browse -->
             
-            <section id="highlights">
+            <section id="highlights" role="navigation">
                 <h4>Highlights</h4>
                 
-                <section id="featured-people" class="global-highlights">
+                <section id="featured-people" class="global-highlights" role="region">
                     <h5>FEATURED PEOPLE</h5>
                     
                     <!--use Hs-->
-                    <article class="featured-people vcard">
+                    <article class="featured-people vcard" role="article">
                         <a href="#">
-                            <img  class="individual-photo" src="${urls.theme}/images/person-thumbnail-sample.jpg" width="80" height="80" />
+                            <img  class="individual-photo" src="${urls.theme}/images/person-thumbnail-sample.jpg" alt="" width="80" height="80" />
                             <p class="fn">Hayworth, Rita<span class="title">Actress, dancer</span><span class="org">Sabbatic year for ever</span></p>
                         </a>
                     </article>
                     
-                    <article class="featured-people vcard">
+                    <article class="featured-people vcard" role="article">
                         <a href="#">
-                            <img  class="individual-photo" src="${urls.theme}/images/person-thumbnail-sample-2.jpg" width="80" height="80" />
+                            <img  class="individual-photo" src="${urls.theme}/images/person-thumbnail-sample-2.jpg" alt="" width="80" height="80" />
                             <p class="fn">Wiedmann, Martin <span class="title">Associate Professor</span><span class="org">Cornell faculty</span></p>
                         </a>
                     </article>
                 </section> <!-- #featured-people -->
                 
-                <section id="upcoming-events" class="global-highlights">
+                <section id="upcoming-events" class="global-highlights" role="region">
                     <h5>UPCOMING EVENTS</h5>
                     
-                    <article class="vevent">
+                    <article class="vevent" role="article">
                         <time class="dtstart" datetime="2010-02-13T20:00Z">21<span>Dec</span></time>
                         <p class="summary">Understanding Patent Writing <time>3:30 PM</time></p>
                     </article>
                     
-                    <article class="vevent">
+                    <article class="vevent" role="article">
                         <time class="dtstart" datetime="2010-02-13T20:00Z">20<span>Nov</span></time>
                         <p class="summary">Voters, Dictators, and Peons <time>4:30 PM</time></p>
                     </article>
                     
-                    <article class="vevent">
+                    <article class="vevent" role="article">
                         <time class="dtstart" datetime="2010-02-13T20:00Z">19<span>Nov</span></time>
                         <p class="summary">Proton-Coupled Electron Transfer II <time>5:30 PM</time></p>
                     </article>
@@ -200,22 +193,22 @@
                     <p class="view-all"><a class="view-all-style" href="#">View All <span class="pictos-arrow-10">4</span></a></p>
                 </section> <!-- #upcoming-events -->
                 
-                <section id="latest-publications" class="global-highlights">
+                <section id="latest-publications" class="global-highlights" role="region">
                     <h5>LATEST PUBLICATIONS</h5>
                     
-                    <article class="latest-publications-item">
+                    <article class="latest-publications-item" role="article">
                         <p class="publication-content">Solar masses<span><em>Journal</em> <time datetime="2010-02-13T20:00Z"> | December 2010</time></p>
                     </article>
                     
-                    <article class="latest-publications-item">
+                    <article class="latest-publications-item" role="article">
                         <p class="publication-content">Link data and the Web<span><em>Article</em> <time datetime="2010-02-13T20:00Z"> | December 2010</time></p>
                     </article>
                     
-                    <article class="latest-publications-item">
+                    <article class="latest-publications-item" role="article">
                         <p class="publication-content">Building a community<span><em>Book</em> <time datetime="2010-02-13T20:00Z"> | November 2010</time></p>
                     </article>
                     
-                    <article class="latest-publications-item">
+                    <article class="latest-publications-item" role="article">
                         <p class="publication-content">Biology 101<span><em>Series</em> <time datetime="2010-02-13T20:00Z"> | November 2010</time></p>
                     </article>
                     
@@ -223,7 +216,7 @@
                 </section> <!-- #latest-publications -->
             </section> <!-- $highlights -->
         </div> <!-- #wrapper-content -->
-        <footer>
+        <footer role="contentinfo">
             <#if copyright??>
                 <p class="copyright"><small>&copy;${copyright.year?c}
                 <#if copyright.url??>
@@ -237,7 +230,7 @@
                     </#if>
                 </p>
             </#if>
-            <nav>
+            <nav role="navigation">
                 <ul id="footer-nav">
                     <li><a href="${urls.about}">About</a></li>
                 <#if urls.contact??>
@@ -250,7 +243,16 @@
 
         ${scripts.add("/js/jquery.js")}
         ${scripts.tags}
+        
+        <!--[if lt IE 7]>
+        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
+        <![endif]-->
 
+        <!--[if (gte IE 6)&(lte IE 8)]>
+        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
+        <![endif]-->
+        
         <#include "googleAnalytics.ftl">
     </body>
 </html>
