@@ -1,17 +1,17 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- this is in request.subject.name -->
+
 <#assign subjectName = "Bogus, Al">
 
-<#-- where is the context path suppose to come from? -->
-<#assign contextPath = "/vivo">
-
-<#assign editMode="edit">
-<#assign editMode=editConfig.object!"add">
+<#if editConfig.object?has_content>
+    <#assign editMode = "edit">
+<#else>
+    <#assign editMode = "add">
+</#if>
 
 <#if editMode == "edit">        
         <#assign titleVerb="Edit">        
-        <#assign title="Edit educational background entry for subjectName" />
         <#assign submitButtonText="Edit Educational Training">
         <#assign disabledVal="disabled">
 <#else>
@@ -21,11 +21,10 @@
 </#if>
 <#assign requiredHint="<span class='requiredHint'> *</span>"/>
 
-
 <div class="form">
 <h2>${titleVerb}&nbsp;educational training entry for ${subjectName}</h2>
 
-<form class="${editMode}" action="${contextPath}${editConfig.submitToUrl}" >
+<form class="${editMode}" action="${urls.base}/${editConfig.submitToUrl}" >
 
     <div class="entry">
       <label for="degreeUri">Degree</label>      
@@ -81,7 +80,7 @@
         <input type="submit" id="submit" value="${submitButtonText}"/>
         
         <#assign cancelParams = "editKey=${editConfig.editKey}&cancel=true" >
-        <span class="or">or</span><a class="cancel" href="${contextPath}/edit/postEditCleanUp.jsp?${cancelParams?url}" title="Cancel">Cancel</a>
+        <span class="or">or</span><a class="cancel" href="${urls.base}/edit/postEditCleanUp.jsp?${cancelParams?url}" title="Cancel">Cancel</a>
     </p>
      
     <p id="requiredLegend" class="requiredHint">* required fields</p>
@@ -99,3 +98,12 @@ var customFormData  = {
 </script>
 
 </div>
+
+${stylesheets.add("/edit/forms/css/customForm.css", 
+                  "/edit/forms/css/personHasEducationalTraining.css")}
+${scripts.add("/js/utils.js",
+              "/js/customFormUtils.js",
+              "/edit/forms/js/customFormWithAutocomplete.js")}
+              
+
+ 
