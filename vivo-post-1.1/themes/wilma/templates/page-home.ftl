@@ -134,7 +134,7 @@
                             <li><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
                             <li><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
                             <li><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>
-                            <li><a href="#">Non-Academic <span class="count-individuals"> (280)</span></a></li>
+                            <li><a href="#">Non-Academic         <span class="count-individuals"> (280)</span></a></li>
                             <li><a href="#">Non-Faculty Academic <span class="count-individuals"> (2,380)</span></a></li>
                             <li><a href="#">Person<span class="count-individuals"> (2,480)</span></a></li>
                             <li><a href="#">Postdoc <span class="count-individuals"> (1,380)</span></a></li>
@@ -245,12 +245,12 @@
         ${scripts.tags}
         
         <!--[if lt IE 7]>
-        <script type="text/javascript" src="${urls.base}/js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
         <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
         <![endif]-->
 
         <!--[if (gte IE 6)&(lte IE 8)]>
-        <script type="text/javascript" src="${urls.base}/js/selectivizr.js"></script>
+        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
         <![endif]-->
         
         <#include "googleAnalytics.ftl">
