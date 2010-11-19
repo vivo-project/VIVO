@@ -125,16 +125,16 @@
             </nav>
         </footer>
         
-        ${scripts.add("/js/jquery.js")}
+        <script type="text/javascript" src="${urls.base}/js/jquery.js"></script>
         ${scripts.tags}
         
         <!--[if lt IE 7]>
-        <script type="text/javascript" src="${urls.home}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
+        <script type="text/javascript" src="${urls.base}/js/jquery_plugins/supersleight.js"></script>
+        <script type="text/javascript" src="${urls.base}/js/utils.js"></script>
         <![endif]-->
 
         <!--[if (gte IE 6)&(lte IE 8)]>
-        <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
+        <script type="text/javascript" src="${urls.base}/js/selectivizr.js"></script>
         <![endif]-->
         
         <#include "googleAnalytics.ftl">
