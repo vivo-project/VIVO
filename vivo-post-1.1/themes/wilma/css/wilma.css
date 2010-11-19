@@ -714,7 +714,6 @@ p{
 .green.button,
 .green.button:visited {
     background-color: #749a02;
-    color:#fff;
 }
 .green.button:hover {
     background-color: #b2d15a;
@@ -722,7 +721,6 @@ p{
 .blue.button,
 .blue.button:visited {
     background-color: #398aac;
-    color:#fff;
 }
 .blue.button:hover {
     background-color: #58a2c1;

@@ -1,0 +1,342 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/******************* styles copied from old global.css.jsp ********************************/
+
+.buttonForm {
+    margin-top       : 0;
+    margin-bottom    : 0;
+    margin-right     : 0;
+    margin-left      : 0.5em;
+    padding-bottom   : 0.5em;
+    color            : #444444;
+    font-family      : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    line-height      : 16px;
+    min-height       : 100px;
+    display          : inline;
+}
+    
+.editingForm {
+    margin-top       : 0;
+    margin-bottom    : 0;
+    margin-right     : 0;
+    margin-left      : 0;
+    padding-bottom   : 1em;
+    color            : #444444;
+    font-family      : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    line-height      : 16px;
+    background-color : #eee; /* cals+vivo themes were: #dddddd; */
+    min-height       : 100px;
+    font-size        : 0.9em;
+}
+
+.editingForm table {
+    text-align   : left;
+    border-width : 1px;
+    border-style : solid;
+    border-color : black;
+    border-collapse:separate;
+}
+
+.editingForm td{
+    padding: 2px 2px 2px 2px;
+    font-size : 1em;
+}
+
+td.verticalfieldlabel {
+    font-size   : 11px;
+    line-height : 13px;
+}
+
+.editingForm .entryFormHead {
+    text-align      : center;
+    padding         : 0.2em;
+    background-color: #f8f8c8;
+    border-width    : 1px;
+    border-style    : solid;
+    border-color    : black;
+}
+
+.editingForm .entryFormHead h2{
+    margin   : 0.1em;
+    padding  : 0em;
+    font-size: 1.4em;
+    color    : black;
+}
+
+.editingForm .entryFormHead h3{
+    margin     : 0.1em;
+    padding    : 0em;
+    font-size  : 1.2em;
+    font-weight: 600; /* cals theme was: 650 */
+    color      : red;
+}
+
+.editingForm .entryFormHead .entryFormHeadInstructions {
+    margin    : 0em;
+    padding   : 0em;
+    font-size : 0.8em;
+}
+
+.editingForm .form-item {
+    background-color: #FAFAD2;
+    border-color    : #2E440C;
+    font-family     : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size       : 10px;
+    border-width    : 1px;
+}
+
+.editingForm .form-button {
+    background-color: #ccf;
+    border-color    : #ccf;
+    font-family     : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size       : 1em;
+    border-width    : 1px;
+    margin-top      : 2px;
+    width           : auto;
+    overflow        : visible;
+}
+
+tr.form-row-even {
+    background-color : #e9f0ff;
+    border-color     : #eec; 
+    font-family      : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size        : 10px;
+    border-width     : 1px;
+    margin-top       : 2px;
+}
+
+tr.form-row-odd {
+    background-color : #e9f9ff;
+    border-color     : #eec; 
+    font-family      : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size        : 10px;
+    border-width     : 1px;
+    margin-top       : 2px;
+}
+
+.form-editingRow {
+    background-color: #ff9;
+    border-color    : #eec; 
+    font-family     : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size       : 10px;
+    border-width    : 1px;
+    margin-top      : 2px;
+}
+
+/* DWR apparently no longer used
+.form-subEditingRow {
+    background-color : #ffb;
+    border-color : #eec; 
+    font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    border-width : 1px;
+    margin-top : 2px;
+} */
+
+table.form-background td {
+    padding-left    : 1em;
+    padding-right   : 1em;
+}
+
+table.form-background td form {
+    padding : 0.2em;
+}
+
+.form-background {
+    background-color : #C8D8F8;
+    border-color     : #CCCCFF;
+    font-family      : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size        : 10px;
+    border-width     : 1px;
+    margin-top       : 2px;
+}
+
+.form-background.vclass {
+    background-color : #E05550;
+}
+
+.form-background.property {
+    background-color : #A8F0A0;
+}
+
+
+.form-table-head {
+    background-color: #ccf;
+    border-color    : #eec; 
+    font-family     : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size       : 10px;
+    border-width    : 1px;
+    margin-top      : 2px;
+}
+
+.navlinkblock {
+    color           : black; /*#4B0082;*/
+    font-family     : Verdana,Arial, Helvetica, sans-serif;
+    font-size       : 10px;
+    font-weight     : normal;
+    margin-top      : 1px;
+    margin-bottom   : 1px;
+    padding-top     : 1px;
+    padding-bottom  : 4px;
+}
+
+td.editformcell {
+    font-size: 9px;
+}
+
+td.editformcell select {
+    margin: 0;
+}
+
+.header {
+    background-color: #B0C4DE;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+.database_header {
+    background-color: #B0C4DE;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+
+.database_upperleftcorner {
+    background-color: #B0C4DE;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+
+.database_upperleftcenter {
+    background-color: #B0C4DE;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : center;
+}
+
+.rownumheader {
+    background-color: #B0C4DE;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : center;
+}
+
+
+.headercenter {
+    background-color: #9370DB;
+    color           :  black;
+    font-family     :  Arial, Helvetica, sans-serif;
+    font-size       :  10pt;
+    font-style      :  normal;
+    text-align      :  center;
+}
+
+.postheader {
+    background-color: #E6E6FA;
+    color           : #777777;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+
+.database_postheader {
+    background-color: #E6E6FA;
+    color           : #777777;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+
+.postheadercenter {
+    background-color: #E6E6FA;
+    color           : #4682B4;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : center;
+}
+
+.postheaderright {
+    background-color: #E6E6FA;
+    color           : #4682B4;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : right;
+}
+
+.verticalfieldlabel {
+    background-color: #DEDEDF;
+    color           : black;
+    font-family     : Verdana, Arial, Helvetica, sans-serif;
+    font-size       : 8pt;
+    font-style      : normal;
+    text-align      : right;
+    vertical-align      : top;
+}
+
+.row, .rowvert {
+    background-color: #F0FFFF;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+
+.rowalternate {
+    background-color: #F8F8FF;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : left;
+}
+
+.rowbold {
+    background-color: #FFFAFA;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    font-weight : bold;
+    text-align      : left;
+}
+
+.rownum {
+    background-color: #87CEFA;
+    color           : black;
+    font-family     : Arial, Helvetica, sans-serif;
+    font-size       : 10pt;
+    font-style      : normal;
+    text-align      : center;
+}
+
+span.entityRelationsSpan {
+    padding-top     : 4px;
+    margin          : 0 0 0 1em;
+    font-weight     : bold;
+    font-size       : 90%;
+    color           : #2E440C;
+    text-align      : center;
+}
+
+
+/* Temporary hack to remove stuff from forms in vivoweb only */
+.hideFromVivoWeb {
+    display: none;
+    height: 0;
+}

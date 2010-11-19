@@ -137,9 +137,11 @@
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
   </listener>
   
-  <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup</listener-class>
-  </listener> 
+	<!--<listener>
+		<listener-class>
+	        edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup
+		</listener-class>
+	</listener>  -->
     
     <listener>
         <listener-class>
@@ -319,15 +321,6 @@
   <servlet-mapping>
     <servlet-name>IndexController</servlet-name>
     <url-pattern>/SearchIndex</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>N3EditFormController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.N3EditFormController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>N3EditFormController</servlet-name>
-    <url-pattern>/N3EditForm</url-pattern>
   </servlet-mapping>
 
 <!-- This is the new navigation controller.  It is not ready for the 1.1 release
@@ -1123,28 +1116,19 @@
   </servlet>
 
   <servlet>
-    <servlet-name>loginExternalAuthSetup</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginExternalAuthSetup</servlet-class>
+    <servlet-name>loginShibbolethSetup</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginShibbolethSetup</servlet-class>
   </servlet>
 
   <servlet>
-    <servlet-name>loginExternalAuthReturn</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginExternalAuthReturn</servlet-class>
+    <servlet-name>loginShibbolethReturn</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.LoginShibbolethReturn</servlet-class>
   </servlet>
 
   <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
-
-  <servlet>
-    <servlet-name>unrecognizedUser</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.UnrecognizedUserController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>unrecognizedUser</servlet-name>
-    <url-pattern>/unrecognizedUser</url-pattern>
-  </servlet-mapping>
 
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
@@ -1324,12 +1308,12 @@
   </servlet-mapping>
   -->
   <servlet-mapping>
-    <servlet-name>loginExternalAuthSetup</servlet-name>
-    <url-pattern>/loginExternalAuth</url-pattern>
+    <servlet-name>loginShibbolethSetup</servlet-name>
+    <url-pattern>/loginShibboleth</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>loginExternalAuthReturn</servlet-name>
-    <url-pattern>/loginExternalAuthReturn</url-pattern>
+    <servlet-name>loginShibbolethReturn</servlet-name>
+    <url-pattern>/loginShibbolethReturn</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <!-- for backward-compatibility -->
@@ -1363,71 +1347,6 @@
   <servlet-mapping>
     <servlet-name>generic_delete</servlet-name>
     <url-pattern>/generic_delete</url-pattern>
-  </servlet-mapping>
-
-  <!-- ==================== sparql query builder ==================== -->
-  
-  <servlet>
-    <servlet-name>SparlQueryBuilder</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SparqlQueryBuilderServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SparlQueryBuilder</servlet-name>
-    <url-pattern>/admin/sparqlquerybuilder</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetAllClasses</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.sparql.GetAllClasses</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetAllClasses</servlet-name>
-    <url-pattern>/admin/getAllClasses</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetAllPrefix</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.sparql.GetAllPrefix</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetAllPrefix</servlet-name>
-    <url-pattern>/admin/getAllPrefix</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetClazzDataProperties</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.sparql.GetClazzDataProperties</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetClazzDataProperties</servlet-name>
-    <url-pattern>/admin/getClazzDataProperties</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>GetClazzAllProperties</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.sparql.GetClazzAllProperties</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetClazzAllProperties</servlet-name>
-    <url-pattern>/admin/getClazzAllProperties</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetClazzObjectProperties</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.sparql.GetClazzObjectProperties</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetClazzObjectProperties</servlet-name>
-    <url-pattern>/admin/getClazzObjectProperties</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetObjectClasses</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.sparql.GetObjectClasses</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetObjectClasses</servlet-name>
-    <url-pattern>/admin/getObjectClasses</url-pattern>
   </servlet-mapping>
 
   <!-- ==================== tag libraries ============================== -->

@@ -81,9 +81,9 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
         <meta charset="utf-8" />
         <title>${title}</title>
         <link rel="stylesheet" href="<%=themeDir%>css/screen.css" />
-        ${ftl_stylesheets}
-        ${ftl_headScripts}
-        
+
+        <!-- script for enabling new HTML5 semantic markup in IE browsers-->
+        <%-- ${headScripts.add("/js/html5.js")} --%>
         <c:if test="${!empty scripts}"><jsp:include page="${scripts}"/></c:if>
         
         <!--[if lt IE 7]>

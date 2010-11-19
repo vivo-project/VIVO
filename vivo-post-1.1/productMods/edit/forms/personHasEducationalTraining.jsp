@@ -68,7 +68,6 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 %>
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
-<c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
@@ -76,16 +75,12 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
 <%-- Define predicates used in n3 assertions and sparql queries --%>
 <c:set var="majorFieldPred" value="${vivoCore}majorField" />
+<c:set var="yearPred" value="${vivoCore}year" />
 <c:set var="deptPred" value="${vivoCore}departmentOrSchool" />
 <c:set var="infoPred" value="${vivoCore}supplementalInformation" />
 <c:set var="degreeEarned" value="${vivoCore}degreeEarned" />
 <c:set var="degreeOutcomeOf" value="${vivoCore}degreeOutcomeOf" />
 <c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />
-
-<c:set var="hasDateTimeValue" value="${vivoCore}hasDateTimeValue"/>
-<c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
-<c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
-<c:set var="edToDateTime" value="${vivoCore}dateTimeInterval"/>
 
 <%-- For new datetime handling in ontology - v1.2
 <c:set var="dateTimeValue" value="${vivoCore}DateTimeValue" />
@@ -125,11 +120,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?edTraining <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
-<v:jsonset var="dateTimeAssertions">
-    ?edTraining    <${edToDateTime}> ?dateTimeNode .
-    ?dateTimeNode  <${type}> <${dateTimeValueType}> .
-    ?dateTimeNode  <${hasDateTimeValue}> ?dateTime.value .
-    ?dateTimeNode  <${dateTimePrecision}> ?dateTime.precision . 
+<v:jsonset var="yearAssertion" >      
+    ?edTraining <${yearPred}> ?year .
 </v:jsonset>
 
 <v:jsonset var="deptAssertion" >      
@@ -186,6 +178,11 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
           ?edTraining <${majorFieldPred}> ?existingMajorField . }
 </v:jsonset>
 
+<v:jsonset var="yearQuery" >  
+    SELECT ?existingYear WHERE {
+          ?edTraining <${yearPred}> ?existingYear . }
+</v:jsonset>
+
 <v:jsonset var="deptQuery" >  
     SELECT ?existingDept WHERE {
           ?edTraining <${deptPred}> ?existingDept . }
@@ -210,25 +207,25 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edTraining", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewEdTraining}",  "${majorFieldAssertion}", "${orgLabelAssertion}", "${orgTypeAssertion}", "${dateTimeAssertions}" ],
+    "n3required"    : [ "${n3ForNewEdTraining}",  "${majorFieldAssertion}", "${orgLabelAssertion}", "${orgTypeAssertion}" ],
     
     "n3optional"    : [ "${n3ForEdTrainingToOrg}",                                            
-                        "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}" ],
+                        "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}", "${yearAssertion}" ],
                         
     "newResources"  : { "edTraining" : "${defaultNamespace}",
-                        "org" : "${defaultNamespace}" ,
-                        "dateTimeNode" : "${defaultNamespace}" },
+                        "org" : "${defaultNamespace}" },
 
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "org", "orgType", "degree" ],
-    "literalsOnForm" : [ "orgLabel", "majorField", "dept", "info" ],
+    "literalsOnForm" : [ "orgLabel", "majorField", "year", "dept", "info" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "orgLabel"           : "${orgLabelQuery}",
         "majorField"         : "${majorFieldQuery}",
+        "year"               : "${yearQuery}",
         "dept"               : "${deptQuery}",
         "info"               : "${infoQuery}"
     },
@@ -259,19 +256,18 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${majorFieldAssertion}" ]
-      },       
-      "dateTime" : {
-            "editElement"       : "edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision",
-            "newResource"       : "true",
-            "validators"        : [  ],
-            "optionsType"       : "UNDEFINED",
-            "literalOptions"    : [ ],
-            "predicateUri"      : "",
-            "objectClassUri"    : "",
-            "rangeDatatypeUri"  : "",
-            "rangeLang"         : "",
-            "assertions"        : [ "${dateTimeAssertions}" ]
-        },
+      },
+      "year" : {
+         "newResource"      : "false",
+         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeLang"        : "",         
+         "assertions"       : ["${yearAssertion}"]
+      },     
      "org" : {
          "newResource"      : "false",
          "validators"       : [  ],
@@ -338,7 +334,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
     }
-        
+    
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { // editing existing
@@ -347,14 +343,26 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         editConfig.prepareForNonUpdate(model);
     }
     
-    editConfig.setTemplate("personHasEducationalTraining.ftl"); 
-    editConfig.setSubmitToUrl("/edit/processRdfForm2.jsp");
-        
     String subjectName = ((Individual) request.getAttribute("subject")).getName();
 %> 
 
     <c:set var="subjectName" value="<%= subjectName %>" />
-
+<%
+    if (objectUri != null) { // editing existing entry
+%>
+        <c:set var="editMode" value="edit" />
+        <c:set var="titleVerb" value="Edit" />
+        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
+        <c:set var="submitButtonText" value="Edit Educational Training" />
+        <c:set var="disabledVal" value="disabled" />
+<% 
+    } else { // adding new entry
+%>
+        <c:set var="editMode" value="add" />
+        <c:set var="titleVerb" value="Create" />
+        <c:set var="submitButtonText" value="Educational Training" />
+        <c:set var="disabledVal" value="" />
+<%  } 
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
@@ -369,14 +377,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     request.setAttribute("customCss", customCss); 
 %>
 
-<jsp:forward page="/N3EditForm"/>
-
- <%-- 
-<jsp:include page="${postForm}"/>
-
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-
-
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -388,19 +390,21 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     
     <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />   
        
-    <v:input id="dateTime" />  
+    <v:input type="text" label="Year ${yearHint}" id="year" size="4" />  
     
     <p class="inline"><v:input type="select" label="Organization Type ${requiredHint}" name="orgType" disabled="${disabledVal}" id="typeSelector" /></p>
            
     <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 
+    <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
+    returning from a validation error, we retain the values. --%>
     <c:if test="${editMode == 'edit'}">
        <v:input type="hidden" id="orgType" />
        <v:input type="hidden" id="orgLabel" />
     </c:if>
 
     <div class="acSelection">
-
+        <%-- RY maybe make this a label and input field. See what looks best. --%>
         <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
         <v:input type="hidden" id="org" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
     </div>
@@ -426,4 +430,4 @@ var customFormData  = {
 };
 </script>
 
---%>
+<jsp:include page="${postForm}"/>
