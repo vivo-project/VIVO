@@ -42,7 +42,7 @@ I. Install required software
 Before installing VIVO, make sure that the following software is installed on 
 the desired machine:
 
-    * Java (SE) 1.6 or higher [http://java.sun.com] (Not OpenJDK)
+    * Java (SE) 1.6 or higher [http://java.sun.com]
     * Apache Tomcat 6.x or higher [http://tomcat.apache.org]
     * Apache Ant 1.7 or higher [http://ant.apache.org]
     * MySQL 5.1 or higher [http://www.mysql.com]
@@ -282,10 +282,6 @@ Note: the value for maxThreads (320) is equal to the value for MaxClients in the
 httpd.conf file.
 
 Locate the <Host name="localhost"...> directive and update as follows:
-    <Host name="localhost" appBase="webapps"
-        DeployOnStartup="false"
-        unpackWARs="true" autoDeploy="false"
-        xmlValidation="false" xmlNamespaceAware="false">
 
 	<Alias>example.com</Alias>
 	<Context path=""

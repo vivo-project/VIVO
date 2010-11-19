@@ -1,0 +1,14 @@
+CONSTRUCT {
+   ?pg ?p ?o
+} WHERE {
+  ?pg a <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup> .
+  ?pg ?p ?o
+  FILTER (    ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupadministration> 
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupbibliographiclocator> 
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupsupplemental> 
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupSWRL> 
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupother>
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGroupemployment>
+           || ?pg = <http://vivoweb.org/ontology#vitroPropertyGrouptopic>
+         )
+}

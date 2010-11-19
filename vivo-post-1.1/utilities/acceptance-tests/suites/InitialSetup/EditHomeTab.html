@@ -5,11 +5,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>EditHomeTab</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">EditHomeTab</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">EditHomeTab</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -18,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Edit Home Tab Body (then reset it to default)</td>
+	<td class="comment">Edit Home Tab Body (then reset it to default)</td>
 	<td></td>
 </tr>
 <tr>
@@ -33,7 +51,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Must be logged out</td>
+	<td class="comment">Must be logged out</td>
 	<td></td>
 </tr>
 <tr>
@@ -48,7 +66,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Must login as site admin</td>
+	<td class="comment">Must login as site admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -73,7 +91,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Navigate to Tab Management</td>
+	<td class="comment">Navigate to Tab Management</td>
 	<td></td>
 </tr>
 <tr>
@@ -118,7 +136,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Edit Home Tab body to add the word &quot;test&quot; between VIVO and !</td>
+	<td class="comment">Edit Home Tab body to add the word "test" between VIVO and !</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,17 +166,17 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Verify that Home Tab body text has changed</td>
+	<td class="comment">Verify that Home Tab body text has changed</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This is the home page of the VIVO vivo-basic theme.</td>
+	<td>Welcome! You have successfully installed VIVO test!</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
+	<td>link=Site Administration</td>
 	<td></td>
 </tr>
 <tr>
@@ -208,7 +226,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Reset Home Tab body to installation default</td>
+	<td class="comment">Reset Home Tab body to installation default</td>
 	<td></td>
 </tr>
 <tr>
@@ -238,17 +256,17 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Verify Home Tab body is back to default</td>
+	<td class="comment">Verify Home Tab body is back to default</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This is the home page of the VIVO vivo-basic theme.</td>
+	<td>Welcome! You have successfully installed VIVO!</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td>Logout</td>
+	<td class="comment">Logout</td>
 	<td></td>
 </tr>
 <tr>
