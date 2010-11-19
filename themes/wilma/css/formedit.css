@@ -1,9 +1,11 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 /*************************************************
- vivo-basic theme: editing form styles
+This styles will change for wilma theme.
+
+wilma theme: editing form styles copied from vivo-basic
  
- This document is included by formPrefix.jsp
+This document is included by formPrefix.jsp
  
 **************************************************/
 
@@ -25,8 +27,7 @@ form a:link.cancel, form a:visited.cancel {
 }
 
 form a:hover.cancel {
-    color: #fff;
-    background: #f70;
+    text-decoration: none;
 }
 
 form select option{
