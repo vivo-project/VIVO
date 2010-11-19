@@ -197,18 +197,22 @@ ul#main-nav {
     width: 570px;
     padding-bottom: 40px;
 }
-
-#intro h2 {
+#intro-no-login{
+    float: left;
+    width: 920px;
+    padding-bottom: 40px;  
+}
+#intro h2, #intro-no-login h2 {
     padding: 35px 0 12px 24px;
     border-bottom: none;
 }
-#intro p{
+#intro p, #intro-no-login p {
     font-size: 16px;
     color: #5f6464;
     line-height: 1.3em;
     padding: 0 24px 30px 24px;
 }
-#intro a {
+#intro a, #intro-no-login a {
     color: #2485ae
 }
 .pictos-arrow-14 {

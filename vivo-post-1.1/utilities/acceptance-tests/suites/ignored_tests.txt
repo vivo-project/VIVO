@@ -1,0 +1,14 @@
+#
+# This is a list of tests that we don't expect to have pass. When they
+# fail, they appear as warnings instead of errors.
+#
+# Each line contains the suite name, the test name, and an optional comment.
+# Like this:
+#     <suite name>, <test name> # Comment text
+#
+# If the test name is "*", then entire suite is ignored.
+
+CreatePeople,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
+CreatePeople,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
+CreatePeopleVB,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
+CreatePeopleVB,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
