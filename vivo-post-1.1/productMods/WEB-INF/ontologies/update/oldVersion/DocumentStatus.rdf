@@ -1,0 +1,151 @@
+<rdf:RDF
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:core="http://vivoweb.org/ontology/core#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/peerReviewed">
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-07T00:00:00</vitro:sunrise>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <rdfs:label xml:lang="en-US">peer reviewed</rdfs:label>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T15:14:00</vitro:modTime>
+    <vitro:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >&amp;nbsp;Peer review is the process by which articles are chosen to be included in a refereed journal. An editorial board consisting of experts in the same field as the author review the article and decide if it is authoritative enough for publication.</vitro:description>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://vivoweb.org/ontology/core#inPress">
+    <rdfs:label xml:lang="en-US">in press</rdfs:label>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T15:13:19</vitro:modTime>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <vitro:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Document to be published</vitro:description>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-07T00:00:00</vitro:sunrise>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+  </bibo:DocumentStatus>
+  <owl:Thing rdf:about="http://vivoweb.org/ontology/core#invited">
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-07T00:00:00</vitro:sunrise>
+    <rdfs:label xml:lang="en-US">invited</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T15:13:38</vitro:modTime>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+  </owl:Thing>
+  <core:AbstractInformation rdf:about="http://purl.org/ontology/bibo/rejected">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+    <rdf:type rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    <rdfs:label xml:lang="en-US">rejected</rdfs:label>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T14:26:31</vitro:modTime>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T14:25:00</vitro:sunrise>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+  </core:AbstractInformation>
+  <core:AbstractInformation rdf:about="http://purl.org/ontology/bibo/unpublished">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdf:type rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    <rdfs:label xml:lang="en-US">unpublished</rdfs:label>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T14:29:00</vitro:sunrise>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T14:30:03</vitro:modTime>
+  </core:AbstractInformation>
+  <owl:Thing rdf:about="http://vivoweb.org/ontology/core#submitted">
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-07T00:00:00</vitro:sunrise>
+    <rdfs:label xml:lang="en-US">submitted</rdfs:label>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T15:15:11</vitro:modTime>
+    <rdf:type rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+  </owl:Thing>
+  <vitro:Flag1Value1Thing rdf:about="http://purl.org/ontology/bibo/accepted">
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T15:12:44</vitro:modTime>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Accepted for publication after peer reviewing</vitro:description>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-07T00:00:00</vitro:sunrise>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <rdfs:label xml:lang="en-US">accepted</rdfs:label>
+    <rdf:type rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+  </vitro:Flag1Value1Thing>
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/published">
+    <rdfs:label xml:lang="en-US">published</rdfs:label>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Published document</vitro:description>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T15:14:28</vitro:modTime>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-07T00:00:00</vitro:sunrise>
+  </bibo:DocumentStatus>
+  <owl:Thing rdf:about="http://purl.org/ontology/bibo/draft">
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AbstractInformation"/>
+    <rdf:type rdf:resource="http://purl.org/ontology/bibo/DocumentStatus"/>
+    <rdfs:label xml:lang="en-US">draft</rdfs:label>
+    <rdf:type rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing"/>
+    <vitro:moniker rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >document status</vitro:moniker>
+    <vitro:sunrise rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T14:27:00</vitro:sunrise>
+    <vitro:sunset rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >9999-12-31T00:00:00</vitro:sunset>
+    <vitro:modTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2010-06-08T14:28:08</vitro:modTime>
+  </owl:Thing>
+</rdf:RDF>

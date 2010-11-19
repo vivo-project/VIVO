@@ -802,7 +802,7 @@ padding-top:36px;
 }
 
 #errorAlert  p{
-padding-left:40px;
+padding-left:30px;
 font-size:0.9em;
 
 
@@ -813,4 +813,8 @@ font-size:0.9em;
 .contactUsReturnHome{
 margin-top:30px;
 margin-bottom:250px;
+}
+/* This css rules will override the one in individual.css */
+.green {
+    color:#000 !important;
 }
