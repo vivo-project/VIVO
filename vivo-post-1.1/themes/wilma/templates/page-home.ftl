@@ -86,9 +86,9 @@
        
         <div id="wrapper-content">
             <#if flash?has_content>
-                <div id="flash-message">
+                <section id="flash-message" role="alert">
                     ${flash}
-                </div>
+                </section>
             </#if>
         
             <section id="intro" role="region">
