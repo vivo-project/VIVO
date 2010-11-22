@@ -339,6 +339,11 @@ p.passwordNote{
     color: #949696;
     padding-left:38px;   
 }
+#flash-message{
+    border:1px dotted #E2C822;
+    background-color:#FFF9D7;
+    padding:0.8em;  
+}
 /* HOME SEARCH ------>  */
 #search-home {
     float: left;
