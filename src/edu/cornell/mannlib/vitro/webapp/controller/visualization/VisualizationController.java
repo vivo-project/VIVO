@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -36,13 +37,12 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequ
  *
  * @author cdtank
  */
+@SuppressWarnings("serial")
 public class VisualizationController extends BaseEditController {
 
 	private Map<String, VisualizationRequestHandler> visualizationIDsToClass;
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
-
-	private static final long serialVersionUID = 1L;
 
 	private static final Log log = LogFactory.getLog(VisualizationController.class.getName());
 

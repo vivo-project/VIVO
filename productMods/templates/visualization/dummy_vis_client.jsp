@@ -35,7 +35,6 @@
 	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5611"/>
 </c:url>
 
-
 <c:url var="staticHref3" value="/visualization">
 	<c:param name="vis" value="person_pub_count"/>
 	<c:param name="vis_mode" value="short"/>
@@ -204,13 +203,13 @@
 <c:url var="coAuthorship10" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="standalone"/>
-	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual12053"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/BrnerKaty"/>
 </c:url>
 
 <c:url var="coAuthorship10Data" value="/visualization">
 	<c:param name="vis" value="coauthorship"/>
 	<c:param name="render_mode" value="data"/>
-	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual12053"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/BrnerKaty"/>
 </c:url>
 
 <c:url var="coAuthorshipSparklineData" value="/visualization">
@@ -228,6 +227,61 @@
 </c:url>
 
 <c:url var="loadingImageLink" value="/${themeDir}site_icons/visualization/ajax-loader.gif"></c:url>
+
+<c:url var="departmentPublications" value="/visualization">
+	<c:param name="vis" value="entity_comparison"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="vis_mode" value="DEPARTMENT"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/DepartmentBL-SLIS"/>
+</c:url>
+
+<c:url var="schoolPublications" value="/visualization">
+	<c:param name="vis" value="entity_comparison"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="vis_mode" value="SCHOOL"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/SchoolofLibraryandInformationScience"/>
+</c:url>
+
+<c:url var="universityPublications" value="/visualization">
+	<c:param name="vis" value="entity_comparison"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="vis_mode" value="UNIVERSITY"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/n7971"/>
+</c:url>
+
+<c:url var="departmentPublicationsdata" value="/visualization">
+	<c:param name="vis" value="entity_comparison"/>
+	<c:param name="render_mode" value="data"/>
+	<c:param name="vis_mode" value="DEPARTMENT"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/DepartmentBL-SLIS"/>
+</c:url>
+
+<c:url var="schoolPublicationsdata" value="/visualization">
+	<c:param name="vis" value="entity_comparison"/>
+	<c:param name="render_mode" value="data"/>
+	<c:param name="vis_mode" value="SCHOOL"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/SchoolofLibraryandInformationScience"/>
+</c:url>
+
+<c:url var="universityPublicationsdata" value="/visualization">
+	<c:param name="vis" value="entity_comparison"/>
+	<c:param name="render_mode" value="data"/>
+	<c:param name="vis_mode" value="UNIVERSITY"/>
+	<c:param name="uri" value="http://vivo-trunk.indiana.edu/individual/n7971"/>
+</c:url>
+
+<c:url var="coprincipalinvestigatordata" value="/visualization">
+	<c:param name="vis" value="coprincipalinvestigator"/>
+	<c:param name="render_mode" value="data"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/McDonaldRobertH"/>
+</c:url>
+
+<c:url var="freemarkertest" value="/visualization">
+	<c:param name="vis" value="freemarker"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="uri" value="http://vivo.iu.edu/individual/McDonaldRobertH"/>
+</c:url>
+
 
 <style type="text/css">
 	.get_vis {
@@ -316,7 +370,7 @@ $(document).ready(function() {
 
 <h1 id="test-bed">Visualization Testbed (Not to be seen by eventual end users)</h1>
 
-
+<h2>Hello World!</h2>
 
 <a href='<c:out value="${coAuthorship1}"/>'>vis link for coauthorship -> "Erb, Hollis Nancy"</a>
 &nbsp;&nbsp;<a href='<c:out value="${coAuthorship1Data}"/>'>Data</a>
@@ -342,7 +396,23 @@ $(document).ready(function() {
 <a href='<c:out value="${coAuthorship10}"/>'>vis link for coauthorship -> "Not Working"</a>&nbsp;
 <a href='<c:out value="${coAuthorship10Data}"/>'>Data</a><br />
 
+<a href='<c:out value="${departmentPublications}"/>'>Department Publications</a>
+&nbsp;&nbsp;<a href='<c:out value="${departmentPublicationsdata}"/>'>Data</a><br />
+<a href='<c:out value="${schoolPublications}"/>'>School Publications</a>
+&nbsp;&nbsp;<a href='<c:out value="${schoolPublicationsdata}"/>'>Data</a><br />
+<a href='<c:out value="${universityPublications}"/>'>University Publications</a>
+&nbsp;&nbsp;<a href='<c:out value="${universityPublicationsdata}"/>'>Data</a><br />
+
 <br /><br /><br />
+
+<a href='<c:out value="${coprincipalinvestigatordata}"/>'>Co-PI data </a>
+
+<br /><br /><br />
+
+<a href='<c:out value="${freemarkertest}"/>'>Freemarker Test</a>
+
+<br /><br /><br />
+
 
 <a href='<c:out value="${collegeCSV}"/>'>vis data query for college -> "School of Industrial and Labor Relations (ILR)"</a><br />
 <a href='<c:out value="${collegeCSV2}"/>'>vis data query for college -> "College of Agriculture and Life Sciences (CALS)"</a><br />

@@ -22,7 +22,11 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPIData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPINode;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
+
 
 public class UtilityFunctions {
 	
@@ -152,6 +156,88 @@ public class UtilityFunctions {
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());
 		}
+	}
+
+	public static Map<String, Set<CoPINode>> getGrantYearToCoPI(
+			CoPIData pINodesAndEdges) {
+		
+
+		Map<String, Set<CoPINode>> yearToCoPIs = new TreeMap<String, Set<CoPINode>>();
+		
+		CoPINode egoNode = pINodesAndEdges.getEgoNode();
+		
+		for (CoPINode currNode : pINodesAndEdges.getNodes()) {
+					
+				/*
+				 * We have already printed the Ego Node info.
+				 * */
+				if (currNode != egoNode) {
+					
+					for (String year : currNode.getYearToGrantCount().keySet()) {
+						
+						Set<CoPINode> coPINodes;
+						
+						if (yearToCoPIs.containsKey(year)) {
+							
+							coPINodes = yearToCoPIs.get(year);
+							coPINodes.add(currNode);
+							
+						} else {
+							
+							coPINodes = new HashSet<CoPINode>();
+							coPINodes.add(currNode);
+							yearToCoPIs.put(year, coPINodes);
+						}
+						
+					}
+					
+				}
+		}
+		return yearToCoPIs;
+
+	}
+
+	public static Map<String, Integer> getYearToGrantCount(Set<Grant> pIGrants) {
+		
+    	/*
+    	 * Create a map from the year to number of grants. Use the Grant's
+    	 * parsedGrantStartYear to populate the data.
+    	 * */
+    	Map<String, Integer> yearToGrantCount = new TreeMap<String, Integer>();
+
+    	for (Grant curr : pIGrants) {
+
+    		/*
+    		 * Increment the count because there is an entry already available for
+    		 * that particular year.
+    		 * 
+    		 * I am pushing the logic to check for validity of year in "getGrantYear" itself
+    		 * because,
+    		 * 	1. We will be using getGra... multiple times & this will save us duplication of code
+    		 * 	2. If we change the logic of validity of a grant year we would not have to make 
+    		 * changes all throughout the codebase.
+    		 * 	3. We are asking for a grant year & we should get a proper one or NOT at all.
+    		 * */
+    		String grantYear;
+    		if (curr.getGrantStartYear() != null) { 
+    			grantYear = curr.getGrantStartYear();
+    		} else {
+    			grantYear = curr.getParsedGrantStartYear();
+    		}
+    		
+			if (yearToGrantCount.containsKey(grantYear)) {
+    			yearToGrantCount.put(grantYear,
+    									   yearToGrantCount
+    									   		.get(grantYear) + 1);
+
+    		} else {
+    			yearToGrantCount.put(grantYear, 1);
+    		}
+
+    	}
+
+		return yearToGrantCount;
+		
 	}
 
 }
