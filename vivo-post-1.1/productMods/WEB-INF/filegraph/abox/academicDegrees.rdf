@@ -1,5 +1,5 @@
 <rdf:RDF
-    xmlns:j.0="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
     xmlns:event="http://purl.org/NET/c4dm/event.owl#"
     xmlns:dcelem="http://purl.org/dc/elements/1.1/"
@@ -599,8 +599,8 @@
     <core:abbreviation>L.H.D.</core:abbreviation>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree88">
-    <core:abbreviation>M.Mus.</core:abbreviation>
     <rdfs:label xml:lang="en-US">M.Mus. Master of Music</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+    <core:abbreviation>M.Mus.</core:abbreviation>
   </rdf:Description>
 </rdf:RDF>
