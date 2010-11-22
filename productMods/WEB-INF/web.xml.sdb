@@ -73,7 +73,7 @@
 
   <!-- This listener is required in order to use a Jena triple store (currently the only option) -->
   <listener>
-    <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaDataSourceSetup</listener-class>
+    <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaDataSourceSetupSDB</listener-class>
   </listener>
 
   <!-- Invokes process to perform updates to align with ontology changes if needed -->
