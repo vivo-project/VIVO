@@ -374,10 +374,12 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	private String getCompleteURL(HttpServletRequest request) throws MalformedURLException {
 		
 		String file = request.getRequestURI();
-		System.out.println("getRequestURI() = "+ file + "getQueryString() ="+request.getQueryString()+ "getScheme() = "+ request.getScheme());
-		System.out.println("getServerName() = "+ request.getServerName() + "getServerPort() ="+request.getServerPort());
+//		System.out.println("\ngetRequestURI() -->  "+ file + "\ngetQueryString() -->  "+request.getQueryString()+ "\ngetScheme() -->  "+ request.getScheme());
+//		System.out.println("\ngetServerName() -->  "+ request.getServerName() + "\ngetServerPort() -->  "+request.getServerPort());
 
 		URL reconstructedURL = new URL(request.getScheme(), request.getServerName(), request.getServerPort(), file);
+		
+//		System.out.println("\nReconstructed URL is -->  " + reconstructedURL);
 		
 		return reconstructedURL.toString();
 	}

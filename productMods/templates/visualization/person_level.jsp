@@ -18,8 +18,6 @@
 <c:set var='numOfAuthors' value='${requestScope.numOfAuthors}' />
 <c:set var='numOfCoAuthorShips' value='${requestScope.numOfCoAuthorShips}' />
 
-<c:set var='completeURL' value='${requestScope.completeURL}' />
-
 <c:url var="egoVivoProfileURL" value="/individual">
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
@@ -38,11 +36,12 @@
 
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
-
+		
 		<c:if test='${numOfCoAuthorShips > 0}'>
 	    	$("#coauth_table_container").empty().html('<img id="loadingData" with="auto" src="${loadingImageLink}" />');
 	    </c:if>
-	    	
+
+		    	
 	processProfileInformation("ego_label", 
 							  "ego_moniker",
 							  "ego_profile_image",
@@ -61,7 +60,6 @@ $(document).ready(function(){
 
 <div id="body">
 
-<div>complete URL = '${completeURL} '</div>
 <!--[if IE]>
 	<style type="text/css">
 	

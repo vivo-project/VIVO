@@ -310,9 +310,25 @@ function nodeClickedJS(json){
 
 }
 
-function encodeURL(url){
-	var domainURL = 'http://vivo-vis-bkoniden.slis.indiana.edu/';
-	return domainURL + url.replace(/&/g,'%26');
+/*
+ * Inside both of these functions, '&' are replaced with '%26' because we are externally
+ * passing two parameters to the flash code using flashvars (see renderCoAuthorshipVisualization())
+ * and they are delimited using '&' too.
+ */
+
+function getEncodedCoAuthorURL(){
+	
+	var queryString = "uri="+ egoURI + "&vis=coauthorship&render_mode=data";
+//	console.log('domainParam is '+ domainParam);
+//	console.log('CoAuthorURL is ' + domainParam + '?' + queryString.replace(/&/g, '%26'));
+	return domainParam + '?' + queryString.replace(/&/g, '%26');	
+}
+
+function getEncodedCoPIURL(){
+	
+	var queryString = "uri="+ egoURI+ "&vis=coprincipalinvestigator&render_mode=data";
+//	console.log('CoPIURL is ' + domainParam + '?' + queryString.replace(/&/g, '%26') );	
+	return domainParam + '?' + queryString.replace(/&/g, '%26');
 }
 
 function renderCoAuthorshipVisualization() {
@@ -353,7 +369,8 @@ function renderCoAuthorshipVisualization() {
 		//coAuthorUrl=/vivo1/visualization?vis=coauthorship%26render_mode=data%26uri=http%3A%2F%2Fvivo.iu.edu%2Findividual%2FBrnerKaty&labelField=label&coPIUrl=/vivo1/visualization?vis=coprincipalinvestigator%26render_mode=data%26uri=http%3A%2F%2Fvivo.iu.edu%2Findividual%2FBrnerKaty&labelField=label
 		AC_FL_RunContent(
 				"src", swfLink,
-				"flashVars", 'coAuthorUrl='+ encodeURL(egoCoAuthorshipDataFeederURL) + '&coPIUrl=' + encodeURL(egoCoPIDataFeederURL) ,			
+//				"flashVars", 'coAuthorUrl='+ encodeURL(egoCoAuthorshipDataFeederURL) + '&coPIUrl=' + encodeURL(egoCoPIDataFeederURL) ,			
+				"flashVars", 'coAuthorUrl='+ getEncodedCoAuthorURL() + '&coPIUrl=' + getEncodedCoPIURL() ,
 				"width", "800",
 				"height", "850",
 				"align", "top",
