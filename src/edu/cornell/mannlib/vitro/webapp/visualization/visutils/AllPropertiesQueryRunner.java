@@ -77,7 +77,7 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try {
+//        try {
             Query query = QueryFactory.create(queryText, SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
@@ -85,16 +85,16 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
             
             queryExecution = QueryExecutionFactory.create(query, dataSource);
             
-            if (query.isSelectType()) {
+           // if (query.isSelectType()) {
                 return queryExecution.execSelect();
-            }
-        } finally {
-            if (queryExecution != null) {
-            	queryExecution.close();
-            }
-
-        }
-		return null;
+//            }
+//        } finally {
+//            if (queryExecution != null) {
+//            	queryExecution.close();
+//            }
+//
+//        }
+//		return null;
     }
 
 	private String generateGenericSparqlQuery(String queryURI, String filterRule) {

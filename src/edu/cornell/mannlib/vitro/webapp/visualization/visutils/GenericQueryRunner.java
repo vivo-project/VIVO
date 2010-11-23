@@ -58,7 +58,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try {
+//        try {
             Query query = QueryFactory.create(queryText, SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
@@ -68,16 +68,16 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
             
 
             //remocve this if loop after knowing what is describe & construct sparql stuff.
-            if (query.isSelectType()) {
+//            if (query.isSelectType()) {
                 return queryExecution.execSelect();
-            }
-        } finally {
-            if (queryExecution != null) {
-            	queryExecution.close();
-            }
-
-        }
-		return null;
+//            }
+//        } finally {
+//            if (queryExecution != null) {
+//            	queryExecution.close();
+//            }
+//
+//        }
+//		return null;
     }
 
 	private String generateGenericSparqlQuery() {
