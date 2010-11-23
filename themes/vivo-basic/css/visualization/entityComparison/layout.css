@@ -43,13 +43,15 @@ form{
 	background-color: white;
 	color:black;
 	display: block;
-
+	height: 150px;
+	text-align: center;
+	padding-top: 50px;
 }
 
 #xaxislabel{
 	font-size: 12px;
 	margin-top: -5px;
-	margin-left: 250px;
+	text-align: center;
 }
 
 #functions{

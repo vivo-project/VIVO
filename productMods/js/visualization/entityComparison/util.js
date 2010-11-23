@@ -12,8 +12,6 @@ function init(graphContainer) {
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
-	$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
-	$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
 	
 	var defaultFlotOptions = {
 			xaxis : {

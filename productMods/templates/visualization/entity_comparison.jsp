@@ -20,19 +20,21 @@
 		<h1>Temporal Graph Visualization<span id="entitylevelheading"><i> School Level</i></span></h1>
 	<div id="leftblock">
 		<div id="leftUpper">
-			<h2 style="background-color:#3D454E; color: white; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">How do you want to compare?</h2>
-			<p style="float:left; margin-left:10px; margin-right: 10px; margin-top: 6px;">Select </p>
+			<h2 style="background-color:#3D454E; padding-left: 3px; color: white; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">How do you want to compare?</h2>
+			<div style="text-align: center;">
+			<p style="margin-right: 10px; margin-top: 6px; font-size: 1.2em;">Select </p>
 			<select class="comparisonValues" style="margin-bottom: 20px;">
 				<option value="Publications" selected="selected">Publications</option>
-				<option value="Grants" disabled="disabled">Grants</option>
+				<option value="Grants">Grants</option>
 				<option value="People" disabled="disabled">People</option>
 				<option value="Item4" disabled="disabled">Item4</option>
 				<option value="Item5" disabled="disabled">Item5</option>
 			</select>
+			</div>
 		</div>
 		<br/>	
 		<div id="leftLower">
-			<h2 style="background-color:#3D454E; color: white; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">Choose</h2>
+			<h2 style="background-color:#3D454E; color: white; padding-left: 3px; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">Choose</h2>
 			<div id="paginatedTable">
 			</div>
 		</div>
@@ -80,9 +82,7 @@
         $("select.comparisonValues").click(function(){
             var selectedValue = $("select.comparisonValues option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
-			$('#yaxislabel').html("Number of " + selectedValue ).mbFlipText(false);
-			$("span#paramdesc").text($("select.comparisonValues option:selected").val() + ' (desc)');	
-			$("span#paramasc").text($("select.comparisonValues option:selected").val() + ' (asc)');	
+			$('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
         });
 
 		//click event handler for clear button
