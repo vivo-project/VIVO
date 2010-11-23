@@ -399,23 +399,23 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try {
+ //       try {
             Query query = QueryFactory.create(queryText, SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
 //            qs.add("authPerson", queryParam); // bind resource to s
             
             queryExecution = QueryExecutionFactory.create(query, dataSource);
-
-            if (query.isSelectType()) {
+			System.out.println("\n\nquery.isSelectType() is "+ query.isSelectType()+ " \n\n");
+//            if (query.isSelectType()) {
                 return queryExecution.execSelect();
-            }
-        } finally {
-            if (queryExecution != null) {
-            	queryExecution.close();
-            }
-        }
-		return null;
+//            }
+//        } finally {
+//            if (queryExecution != null) {
+//            	queryExecution.close();
+//            }
+//        }
+//		return null;
     }
 
 	private String generateEgoCoAuthorshipSparqlQuery(String queryURI) {

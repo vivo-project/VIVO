@@ -151,7 +151,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
             DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-        try {
+//        try {
             Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
 
 //            QuerySolutionMap qs = new QuerySolutionMap();
@@ -160,15 +160,15 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
             queryExecution = QueryExecutionFactory.create(query, dataSource);
             
 
-            if (query.isSelectType()) {
+//            if (query.isSelectType()) {
                 return queryExecution.execSelect();
-            }
-        } finally {
-            if (queryExecution != null) {
-            	queryExecution.close();
-            }
-        }
-		return null;
+//            }
+//        } finally {
+//            if (queryExecution != null) {
+//            	queryExecution.close();
+//            }
+//        }
+//		return null;
     }
 
 	private String getSparqlQuery(String queryURI) {

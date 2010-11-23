@@ -56,7 +56,29 @@ public class CoPIData {
 		
 		return EDGE_SCHEMA;
 	}
-
+	
+	public void print(){
+		
+		System.out.println("\n-----------------------------");
+		
+		System.out.println("Ego node is "+ this.getEgoNode().getNodeName());
+		
+		System.out.println("\nNodes are: ");
+		
+		for(CoPINode node : this.getNodes()){
+			System.out.println(node.getNodeName());
+		}
+		
+		System.out.println("\nEdges are: ");
+		
+		for(CoPIEdge edge : this.getEdges()){
+			System.out.println(edge.getSourceNode() + "-->" + edge.getTargetNode());
+		}
+		
+		System.out.println("\n-----------------------------");
+		
+	}
+	
 	private Set<Map<String, String>> initializeEdgeSchema() {
 
 		Set<Map<String, String>> edgeSchema = new HashSet<Map<String, String>>();

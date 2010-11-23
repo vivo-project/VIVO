@@ -61,13 +61,7 @@ public class EntityPublicationCountRequestHandler implements
 
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
-
-		System.out
-				.println("\nInside EntityPublicationCountRequestHandler! \n----------------------------------------- ");
-		System.out.println("\nEntity URI: " + entityURI + "\nRender Mode: "
-				+ renderMode + "\nVis Mode: " + ENTITY_VIS_MODE
-				+ "\nVis Containter: " + visContainer);
-
+		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
 				entityURI, dataSource, log, ENTITY_VIS_MODE);		
 
@@ -77,68 +71,23 @@ public class EntityPublicationCountRequestHandler implements
 			if (ENTITY_VIS_MODE.equals("DEPARTMENT")) {
 				
 				SUB_ENTITY_VIS_MODE = "PERSON";
-//				System.out
-//						.println("\n\nDocuments within the Entity\n---------------------------------------------");
-//				for (BiboDocument document : entity.getPublications()) {
-//					System.out.println(document.getDocumentLabel() + " > "
-//							+ document.getDocumentURL());
-//				}
-//
-//				System.out
-//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-//
-//				for (SubEntity person : entity.getSubEntities()) {
-//					System.out.println(person.getIndividualLabel());
-//				}
+
 			}else if (ENTITY_VIS_MODE.equals("SCHOOL")) {
 				
 				SUB_ENTITY_VIS_MODE = "DEPARTMENT";
-//				System.out
-//						.println("\nDocuments within the Entity\n---------------------------------------------");
-//				for (BiboDocument document : entity.getPublications()) {
-//					System.out.println(document.getDocumentLabel() + " > "
-//							+ document.getDocumentURL());
-//				}
-//
-//				System.out
-//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-//				for (SubEntity department : entity.getSubEntities()) {
-//					System.out.println(department.getIndividualLabel());
-//				}
+
 			}else {
 				SUB_ENTITY_VIS_MODE = "SCHOOL";
-//				System.out
-//						.println("\nDocuments within the Entity\n---------------------------------------------");
-//				for (BiboDocument document : entity.getPublications()) {
-//					System.out.println(document.getDocumentLabel() + " > "
-//							+ document.getDocumentURL());
-//				}
-//
-//				System.out
-//						.println("\n\nSubEntities within the Entity\n---------------------------------------------");
-//
-//				for (SubEntity school : entity.getSubEntities()) {
-//					System.out.println(school.getIndividualLabel());
-//
-//				}
+
 			}
 			
 			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
 					entityURI, dataSource, log, ENTITY_VIS_MODE);
 			
 			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
-			
-			System.out.println("Sub Organization Types With Their Labels \n------------------");
-			
-			for(String label: subOrganizationTypesResult.keySet()){
-				System.out.println("Label :"+ label);
-				for(String type : subOrganizationTypesResult.get(label)){
-					System.out.println("type: "+ type);
-				}
-				System.out.println();
-			}
-
+						
 			RequestDispatcher requestDispatcher = null;
+			
 			if (VisualizationFrameworkConstants.DATA_RENDER_MODE
 					.equalsIgnoreCase(renderMode)) {
 
@@ -288,7 +237,8 @@ public class EntityPublicationCountRequestHandler implements
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
-			entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
+			setEntityVisMode(entityJson);
+			//entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
 			System.out.println("Adding object with uri: "
 					+ entityJson.getEntityURI() + " vismode: "
 					+ entityJson.getVisMode() + " label: "
@@ -300,5 +250,16 @@ public class EntityPublicationCountRequestHandler implements
 	//	System.out.println("\nStopWords are "+ EntitySubOrganizationTypesQueryRunner.stopWords.toString() + "\n");
 		return json.toJson(subEntitiesJson);
 
+	}
+
+	private void setEntityVisMode(JsonObject entityJson) {
+		if(entityJson.getOrganizationType().contains("Department")){
+			entityJson.setVisMode("DEPARTMENT");
+		}else if(entityJson.getOrganizationType().contains("School")){
+			entityJson.setVisMode("SCHOOL");
+		}else{
+			entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
+		}
+		
 	}
 }

@@ -166,86 +166,123 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
 
 		QueryExecution queryExecution = null;
-		try {
+//		try {
 			Query query = QueryFactory.create(
 					getSparqlQuery(queryURI, this.visMode), SYNTAX);
 			queryExecution = QueryExecutionFactory.create(query, dataSource);
-
-			if (query.isSelectType()) {
-				return queryExecution.execSelect();
-			}
-		} finally {
-			if (queryExecution != null) {
-				queryExecution.close();
-			}
-		}
-		return null;
+			System.out.println("\n\nquery.isSelectType() is "+ query.isSelectType()+ " \n\n");
+			return queryExecution.execSelect();
+//			if (query.isSelectType()) {
+//				return queryExecution.execSelect();
+//			}
+//		} finally {
+//			if (queryExecution != null) {
+//				queryExecution.close();
+//			}
+//		}
+//		return null;
 	}
 
 	private String getSparqlQuery(String queryURI, String visMode) {
 		String result = "";
 
 		if (visMode.equals("DEPARTMENT")) {
-			result = getSparqlQueryForDepartment(queryURI);
+		//	result = getSparqlQueryForDepartment(queryURI);
 			ENTITY_URL = QueryFieldLabels.DEPARTMENT_URL;
 			ENTITY_LABEL = QueryFieldLabels.DEPARTMENT_LABEL;
 			SUBENTITY_URL = QueryFieldLabels.PERSON_URL;
 			SUBENTITY_LABEL = QueryFieldLabels.PERSON_LABEL;
 		} else {
-			result = getSparqlQueryForOrganization(queryURI);
+		//	result = getSparqlQueryForOrganization(queryURI);
 			ENTITY_URL = QueryFieldLabels.ORGANIZATION_URL;
 			ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
 			SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
 			SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
 		} 
+		result = getSparqlQueryForOrganization(queryURI);
 
 		return result;
 	}
 
-	private String getSparqlQueryForDepartment(String queryURI) {
+//	private String getSparqlQueryForDepartment(String queryURI) {
+//
+//		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+//				+ "SELECT (str(?DepartmentLabel) as ?departmentLabelLit) "
+//				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
+//				+ ">) as ?" + QueryFieldLabels.DEPARTMENT_URL + ") "
+//				+ "WHERE { " + "<" + queryURI + "> rdf:type core:Department ;"
+//				+ " rdfs:label ?DepartmentLabel ;"
+//				+ " core:organizationForPosition ?Position .  "
+//				+ "	?Position rdf:type core:Position ;"
+//				+ " core:positionForPerson ?Person .  "
+//				+ "	?Person  core:authorInAuthorship ?Resource ;  "
+//				+ " rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition .  "
+//				+ " ?Resource core:linkedInformationResource ?Document ."
+//				+ "	?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."				
+//				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+//				+ " ORDER BY ?DocumentLabel";
+//		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+//		return sparqlQuery;
+//
+//	}
 
+//	private String getSparqlQueryForOrganization(String queryURI) {
+//
+//		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+//				+ "SELECT (str(?organizationLabel) as ?organizationLabelLit) "
+//				+ "	 	(str(?subOrganization) as ?subOrganizationLit) "
+//				+ "		(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
+//				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
+//				+ ">) as ?" + QueryFieldLabels.ORGANIZATION_URL + ") "
+//				+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
+//				+ " rdfs:label ?organizationLabel ;"
+//				+ " core:hasSubOrganization ?subOrganization ."
+//				+ " ?subOrganization rdfs:label ?subOrganizationLabel ;"
+//				+ " core:organizationForPosition ?Position .  "
+//				+ "	?Position rdf:type core:Position ;"
+//				+ " core:positionForPerson ?Person .  "
+//				+ "	?Person  core:authorInAuthorship ?Resource ;  "
+//				+ " rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition .  "
+//				+ " ?Resource core:linkedInformationResource ?Document ."
+//				+ "	?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
+//				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+//				+ " ORDER BY ?DocumentLabel";
+//		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+//		return sparqlQuery;
+//
+//	}
+	
+	private String getSparqlQueryForOrganization(String queryURI){
+		
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-				+ "SELECT (str(?DepartmentLabel) as ?departmentLabelLit) "
-				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
-				+ ">) as ?" + QueryFieldLabels.DEPARTMENT_URL + ") "
-				+ "WHERE { " + "<" + queryURI + "> rdf:type core:Department ;"
-				+ " rdfs:label ?DepartmentLabel ;"
-				+ " core:organizationForPosition ?Position .  "
-				+ "	?Position rdf:type core:Position ;"
-				+ " core:positionForPerson ?Person .  "
-				+ "	?Person  core:authorInAuthorship ?Resource ;  "
-				+ " rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition .  "
-				+ " ?Resource core:linkedInformationResource ?Document ."
-				+ "	?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."				
-				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
-				+ " ORDER BY ?DocumentLabel";
+		+ "SELECT 	(str(?organizationLabel) as ?organizationLabelLit) "
+		+ "	 		(str(?subOrganization) as ?subOrganizationLit) "
+		+ "			(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
+		+ "			(str(?DepartmentLabel) as ?departmentLabelLit) "
+		+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
+		+ ">) as ?" + ENTITY_URL + ") "
+		+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
+		+ " rdfs:label ?organizationLabel ."
+		+ "{ "
+		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
+		+ "?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
+		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
+		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Resource core:linkedInformationResource ?Document .  "
+		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
+		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ "UNION "
+		+ "{ "
+		+ "<" + queryURI + "> rdf:type core:Department ; rdfs:label ?DepartmentLabel ; core:organizationForPosition ?Position ."
+		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
+		+ "	?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Resource core:linkedInformationResource ?Document ."
+		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
+		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ "}";
+		
 		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
-		return sparqlQuery;
-
-	}
-
-	private String getSparqlQueryForOrganization(String queryURI) {
-
-		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-				+ "SELECT (str(?organizationLabel) as ?organizationLabelLit) "
-				+ "	 	(str(?subOrganization) as ?subOrganizationLit) "
-				+ "		(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
-				+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
-				+ ">) as ?" + QueryFieldLabels.ORGANIZATION_URL + ") "
-				+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
-				+ " rdfs:label ?organizationLabel ;"
-				+ " core:hasSubOrganization ?subOrganization ."
-				+ " ?subOrganization rdfs:label ?subOrganizationLabel ;"
-				+ " core:organizationForPosition ?Position .  "
-				+ "	?Position rdf:type core:Position ;"
-				+ " core:positionForPerson ?Person .  "
-				+ "	?Person  core:authorInAuthorship ?Resource ;  "
-				+ " rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition .  "
-				+ " ?Resource core:linkedInformationResource ?Document ."
-				+ "	?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
-				+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
-				+ " ORDER BY ?DocumentLabel";
-		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+		
 		return sparqlQuery;
 
 	}

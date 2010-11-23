@@ -21,11 +21,6 @@
 		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
 	<bean id="coprincipalinvestigator"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
-	<bean id="freemarker"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.FreemarkerRequestHandler" />
-		
-		
-
 
 	<bean id="visualizationInjector"
 		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationInjector">
@@ -48,9 +43,6 @@
 				</entry>
 				<entry key="coprincipalinvestigator">
 					<ref bean="coprincipalinvestigator"></ref>
-				</entry>
-				<entry key="freemarker">
-					<ref bean="freemarker"></ref>
 				</entry>
 			</map>
 		</property>

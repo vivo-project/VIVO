@@ -95,20 +95,20 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	private ResultSet executeQuery(String queryText, DataSource dataSource) {
 
 		QueryExecution queryExecution = null;
-		try {
+//		try {
 			Query query = QueryFactory.create(queryText, SYNTAX);
 
 			queryExecution = QueryExecutionFactory.create(query, dataSource);
-
-			if (query.isSelectType()) {
+			System.out.println("\n\nquery.isSelectType() is "+ query.isSelectType()+ " \n\n");
+//			if (query.isSelectType()) {
 				return queryExecution.execSelect();
-			}
-		} finally {
-			if (queryExecution != null) {
-				queryExecution.close();
-			}
-		}
-		return null;
+//			}
+//		} finally {
+//			if (queryExecution != null) {
+//				queryExecution.close();
+//			}
+//		}
+//		return null;
 	}
 	
 	public CoPIData getQueryResult()
@@ -132,6 +132,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 	ResultSet resultSet	= executeQuery(generateEgoCoPIquery(this.egoURI),
 									   this.dataSource);
+	System.out.println("ResultSet ");
 	return createQueryResult(resultSet);
 	}
 	
@@ -190,11 +191,14 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 					nodes.add(egoNode);
 					nodeURLToVO.put(egoPIURLNode.toString(), egoNode);
 					
+					
 					RDFNode authorLabelNode = solution.get(QueryFieldLabels.PI_LABEL);
 					if (authorLabelNode != null) {
 						egoNode.setNodeName(authorLabelNode.toString());
 					}
 				}
+				System.out.println("\n----------------------------------");
+				System.out.println("PI: "+ egoNode.getIndividualLabel());
 				
 				RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
 				Grant grant;
@@ -207,6 +211,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 				}
 				
 				egoNode.addGrant(grant);
+				System.out.println("Adding grant: "+ grant.getIndividualLabel());
 				
 				/*
 				 * After some discussion we concluded that for the purpose of this visualization
@@ -237,6 +242,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 					}
 				}
 				
+				System.out.println("Adding CO-PI: "+ coPINode.getIndividualLabel());
 				coPINode.addGrant(grant);
 				
 				Set<CoPINode> coPIsForCurrentGrant;
@@ -251,9 +257,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 				}
 				
 				coPIsForCurrentGrant.add(coPINode);
+				System.out.println("Co-PI for current grant : "+ coPINode.getIndividualLabel());
 				
 				CoPIEdge egoCoPIEdge = getExistingEdge(egoNode, coPINode, edgeUniqueIdentifierToVO);
-				
+				System.out.println("\n----------------------------------");
 				/*
 				 * If "egoCoPIEdge" is null it means that no edge exists in between the egoNode 
 				 * & current coPINode. Else create a new edge, add it to the edges set & add 
