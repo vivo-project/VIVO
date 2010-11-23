@@ -301,7 +301,7 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
 		flotOptions.xaxis.tickSize = 1;
 	} else if (yearRange > 15 && yearRange < 70) {
 		flotOptions.series.lines.lineWidth = 2;
-		flotOptions.xaxis.tickSize = 4;
+		flotOptions.xaxis.tickSize = 5;
 	} else {
 		flotOptions.series.lines.lineWidth = 1;
 		flotOptions.xaxis.tickSize = 10;
@@ -314,16 +314,18 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
  */
 function setTickSizeOfYAxis(maxValue, flotOptions){
 	
+	var tickSize = 0;
+	
 	if (maxValue > 0 && maxValue <= 5) {
 		flotOptions.yaxis.tickSize = 1;
 	} else if (maxValue > 5 && maxValue <= 10) {
 		flotOptions.yaxis.tickSize = 2;
 	} else 	if (maxValue > 10 && maxValue <= 15) {
-		flotOptions.yaxis.tickSize = 3;
+		flotOptions.yaxis.tickSize = 5;
 	} else if (maxValue > 15 && maxValue <= 70) {
-		flotOptions.yaxis.tickSize = maxValue/5;
+		flotOptions.yaxis.tickSize  = 5;
 	} else {
-		flotOptions.yaxis.tickSize = maxValue/7;
+		flotOptions.yaxis.tickSize = 10;
 	}
 }
 /**
@@ -706,7 +708,7 @@ function prepareTableForDataTablePagination(jsonData){
 	publicationCountTH.html('Publication Count');
 
 	var entityTypeTH = $('<th>');
-	entityTypeTH.html('Entity Type');
+	entityTypeTH.html('* Entity Type');
 
 	tr.append(checkboxTH);
 	tr.append(entityLabelTH);
@@ -752,6 +754,7 @@ function prepareTableForDataTablePagination(jsonData){
 	
 	$('#datatable').dataTable({
 		"sDom": '<"searchbar"f><"paginatedtabs"p><"datatablewrapper"t><"showentries"l>',
+		"aaSorting" : [[2, "desc"]],
 		"iDisplayLength": 10,
 		"sPaginationType": "full_numbers",
 		"aLengthMenu" : [5,10,15],
@@ -814,13 +817,17 @@ function removeStopWords(val){
 }
 
 function setEntityLevel(){
-	$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' level').css('font-style', 'italic');
+	$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase() + 's ').css('font-style', 'italic');
 }
 
 function getEntityVisMode(jsonData){
 	$.each(jsonData, function(index, val){
-		entityLevel = val.visMode;
+		if (val.visMode == "SCHOOL" || val.visMode == "UNIVERSITY" || val.visMode == "DEPARTMENT"){
+			entityLevel = "Institution";
+		}else {
+			entityLevel = "Person";
+		}
 		return;
 	});
 }

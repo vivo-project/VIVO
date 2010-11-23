@@ -17,7 +17,7 @@
 			<li><a href="#">Networks</a></li>
 		</ul>
 	</div>
-		<h1>Temporal Graph Visualization<span id="entitylevelheading"><i> School level</i></span></h1>
+		<h1>Temporal Graph Visualization<span id="entitylevelheading"><i> School Level</i></span></h1>
 	<div id="leftblock">
 		<div id="leftUpper">
 			<h2 style="background-color:#3D454E; color: white; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">How do you want to compare?</h2>
@@ -51,7 +51,7 @@
 			</div>
 		</div>		
 		<div id="bottomButtons">
-			<button id="clear" class = "metallic" type ="button">Clear</button>
+			<button id="clear" class = "metallic" type ="button">Remove All</button>
 			<button id="csv" class = "metallic" type ="button">Save as CSV</button>
 			<button id="image" class= "metallic" type="button" onClick="window.print()"> Save as Image</button>				
 		</div>
