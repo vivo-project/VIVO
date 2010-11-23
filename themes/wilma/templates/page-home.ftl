@@ -35,20 +35,21 @@
 
             <nav role="navigation">
                 <ul id="header-nav">
-                        
-                <#if loginName??>
-                    <li><span class="pictos-arrow-10">U</span> ${loginName}</li>
-                    <li><a href="${urls.logout}">Log out</a></li>
-                    <li><a href="${urls.siteAdmin}">Site Admin</a></li>
-                <#else>
-                     <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
-                </#if>
-                <#-- List of links that appear in submenus, like the header and footer. -->
+                    <#if user.loggedIn>
+                        <li><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
+                        <li><a href="${urls.logout}">Log out</a></li>
+                        <#if user.hasSiteAdminAccess>
+                            <li><a href="${urls.siteAdmin}">Site Admin</a></li>
+                        </#if>
+                    <#else>
+                        <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
+                    </#if>
+                    <#-- List of links that appear in submenus, like the header and footer. -->
 
                     <li><a href="${urls.about}">About</a></li>
-                <#if urls.contact??>
-                    <li><a href="${urls.contact}">Contact Us</a></li>
-                </#if> 
+                    <#if urls.contact??>
+                        <li><a href="${urls.contact}">Contact Us</a></li>
+                    </#if> 
                     <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 </ul>
             </nav>
@@ -58,9 +59,9 @@
                     <legend>Search form</legend>
 
                     <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
-                       <#if showFlag1SearchField??>
+                       <#if user.showFlag1SearchField>
                            <select id="search-form-modifier" name="flag1" class="form-item" >
-                               <option value="nofiltering" selected="selected">entire database (${loginName})</option>
+                               <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
                                <option value="${portalId}">${siteTagline!}</option>
                            </select>
                        <#else>
@@ -225,7 +226,7 @@
                     ${copyright.text}
                 </#if> 
                     All Rights Reserved | <a class="terms" href="${urls.termsOfUse}">Terms of Use</a></small> | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a> 
-                    <#if loginName??>
+                    <#if user.hasRevisionInfoAccess>
                         | Version <a href="${version.moreInfoUrl}">${version.label}</a>
                     </#if>
                 </p>

@@ -13,10 +13,12 @@
 
     <nav role="navigation">
         <ul id="header-nav">    
-            <#if loginName??>
-                <li><span class="pictos-arrow-10">U</span> ${loginName}</li>
+            <#if user.loggedIn>
+                <li><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
                 <li><a href="${urls.logout}">Log out</a></li>
-                <li><a href="${urls.siteAdmin}">Site Admin</a></li>
+                <#if user.hasSiteAdminAccess>
+                    <li><a href="${urls.siteAdmin}">Site Admin</a></li>
+                </#if>
             <#else>
                 <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>
@@ -37,9 +39,10 @@
             <legend>Search form</legend>
 
             <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
-                <#if showFlag1SearchField??>
+            
+                <#if user.showFlag1SearchField>
                     <select id="search-form-modifier" name="flag1" class="form-item" >
-                        <option value="nofiltering" selected="selected">entire database (${loginName})</option>
+                        <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
                         <option value="${portalId}">${siteTagline!}</option>
                     </select>
                 <#else>

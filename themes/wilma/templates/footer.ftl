@@ -11,7 +11,7 @@
             ${copyright.text}
         </#if> 
             All Rights Reserved | <a class="terms" href="${urls.termsOfUse}">Terms of Use</a></small> | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a> 
-            <#if loginName??>
+            <#if user.hasRevisionInfoAccess>
                 | Version <a href="${version.moreInfoUrl}">${version.label}</a>
             </#if>
         </p>
