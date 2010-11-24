@@ -38,7 +38,7 @@
         <fieldset>
             <legend>Search form</legend>
 
-            <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
+            <form id="search-form" action="${urls.search}" name="search" role="search"> 
             
                 <#if user.showFlag1SearchField>
                     <select id="search-form-modifier" name="flag1" class="form-item" >
@@ -52,7 +52,7 @@
                 <div id="search-field">
                     <input type="text" name="querytext" class="search-vivo" value="${querytext!}"  />
                
-                    <a class ="submit" href="javascript:document.searchForm.submit();">Search</a>
+                    <a class ="submit" href="javascript:document.search.submit();">Search</a>
                 </div>
             
                 <!-- <input class ="submit" name="submit" type="submit"  value="Search" /> -->

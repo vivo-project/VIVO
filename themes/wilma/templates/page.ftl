@@ -60,7 +60,7 @@
                 <fieldset>
                     <legend>Search form</legend>
                     
-                    <form id="search-form" action="${urls.search}" name="search-form" role="search"> 
+                    <form id="search-form" action="${urls.search}" name="search" role="search"> 
                         <#if user.showFlag1SearchField>
                             <select id="search-form-modifier" name="flag1" class="form-item" >
                                 <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
@@ -73,7 +73,7 @@
                         
                         <div id="search-field">
                             <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
-                            <a class ="submit" href="javascript:document.search-form.submit();">Search</a>
+                            <a class ="submit" href="javascript:document.search.submit();">Search</a>
                         </div>
                     </form>
                 </fieldset>
