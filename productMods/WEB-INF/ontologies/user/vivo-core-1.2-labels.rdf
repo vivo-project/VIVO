@@ -1707,7 +1707,6 @@
     <rdfs:label xml:lang="en-US">work fax</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTime">
-    <rdfs:label xml:lang="en-US">date and time</rdfs:label>
     <rdfs:label xml:lang="en-US">date/time</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/gtin14">
