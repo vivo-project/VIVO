@@ -25,14 +25,14 @@ ${stylesheets.addFromTheme("/css/screen.css")}
 
         <hr class="hidden" />
 
-        <div id="contentwrap"> 
+        <div id="contentwrap">
             <#if flash?has_content>
-                <div id="flash-message">
+                <section id="flash-message" role="alert">
                     ${flash}
-                </div>
-            </#if>
+                </section>
+            </#if> 
             
-            <div id="content">                      
+            <div id="content"> 
                 ${body}
             </div> <!-- content -->
         </div> <!-- contentwrap -->

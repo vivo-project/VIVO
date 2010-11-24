@@ -118,6 +118,7 @@ ul#header-nav  a:active {
     height:38px;
     top:40px;
     right:10px;
+    padding-top:5px;
 }
 #search-field {
     width:396px;
@@ -190,6 +191,7 @@ ul#main-nav {
     background: #fff;
     min-height: 450px;
     padding: 20px;
+    overflow:hidden;
 }
 /* INTRO ------>  */
 #intro {
@@ -216,12 +218,9 @@ ul#main-nav {
     font-size: 14px;
     color: #b2d15a;
 }
-/* LOG IN------>  */
-/* Login container on home page */
-#login-container {
+/* LOG IN------>  */          
+#login {
     float: right;
-}            
-#log-in-form {
     width:314px;
     border:1px solid #e8ece9;
     margin-right:25px;
@@ -229,41 +228,40 @@ ul#main-nav {
     margin-bottom:30px;
     overflow:hidden;
 }
-#log-in-form h2 {
+#login h2 {
     font-size: 22px;
     color: #2485ae;
     padding-left:15px;
     padding-top:18px;
     border-bottom:none;
 }
-#errorAlert {
-    padding:12px 10px 10px 10px;
-    width:294px;
-    border-top:1px dotted #a12424;
-    border-left:1px dotted #a12424;
-    border-right:1px dotted #a12424;
+#error-alert {
+    margin:0 12px;
+    padding:12px;
+    padding-bottom:25px;
+    border:1px dotted #a12424;
 }
-#errorAlert img {
+#error-alert img {
     float:left;
     margin:0;
     padding:0;
     vertical-align:middle;
 }
-#errorAlert p {
+#error-alert p {
     padding-left:40px;
     font-size:0.9em;
     line-height: 1.3em;
     color:#a12424;
     padding-top:5px;
 }
-#log-in-form label {
+#login-form label {
     display:block;
     color: #5e6363;
     padding-top:20px;
     padding-left:38px;
     font-size:14px;
 }
-#log-in-form input.text-field {
+#login-form input.text-field {
     border:0;
     font-size:14px;
     padding:5px;
@@ -277,22 +275,22 @@ ul#main-nav {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;     
 }
-#log-in-form input.text-field:focus {
+#login-form input.text-field:focus {
 border:1px solid rgba(57, 138, 172, 0.5);  
 background-color: rgba(57, 138, 172, 0.1);   
 }
-#log-in-form p.submit {
+#login-form p.submit {
     width:100px;
     height:40px;
     margin-top:20px;
     margin-left:38px;
 }
-#log-in-form p.submit-password{
+#login-form p.submit-password{
     height:40px;
     margin-top:20px;
     margin-left:38px;
 }
-#log-in-form input.checkbox-remember-me {
+#login-form input.checkbox-remember-me {
     float:left;
     height:14px;
     width:14px;
@@ -301,7 +299,7 @@ background-color: rgba(57, 138, 172, 0.1);
     margin-top:33px;
     margin-left:20px;
 }
-#log-in-form label.label-remember-me {
+#login-form label.label-remember-me {
     display:block;
     float:right;
     color: #5e6363;
@@ -343,6 +341,7 @@ p.passwordNote{
     border:1px dotted #E2C822;
     background-color:#FFF9D7;
     padding:0.8em;  
+    margin-bottom:20px;
 }
 /* HOME SEARCH ------>  */
 #search-home {
@@ -401,7 +400,7 @@ input.search-home-vivo {
     font-size: 20px;
 }
 /* BROWSE CLASS GROUPS ------>  */
-ul#browse-classGroups {
+ul#browse-classgroups {
     float: left;
     width: 200px;
     border: 1px solid #dde4e3;
@@ -412,7 +411,7 @@ ul#browse-classGroups {
     margin-top: 10px;
     padding-top: 10px;
 }
-ul#browse-classGroups li {
+ul#browse-classgroups li {
     display: block;
     border-bottom: 1px solid #dde4e3;
     font-size: 18px;
@@ -420,10 +419,10 @@ ul#browse-classGroups li {
     height: 35px;
     line-height: 35px;
 }
-ul#browse-classGroups li:last-child {
+ul#browse-classgroups li:last-child {
     border-bottom: none
 }
-ul#browse-classGroups a {
+ul#browse-classgroups a {
     display: block;
     padding-left: 15px;
     width: 200px;
@@ -431,15 +430,15 @@ ul#browse-classGroups a {
     color: #5e6363;
     text-decoration: none;
 }
-ul#browse-classGroups a:hover {
+ul#browse-classgroups a:hover {
     background: url(../images/arrow.gif) 0 12px no-repeat;
     color: #2ea0cf;
 }
-ul#browse-classGroups a.selected {
+ul#browse-classgroups a.selected {
     color: #2ea0cf;
     background: url(../images/arrow.gif) 0 12px no-repeat;
 }
-ul#browse-classGroups .count-classes {
+ul#browse-classgroups .count-classes {
     font-size: 14px
 }
 /* BROWSE CLASSES IN CLASS GROUP ------>  */
@@ -511,7 +510,7 @@ ul#class-group-list .count-individuals {
     height: 400px;
     border: 1px solid #dfe6e6;
     background: #f7f9f9;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 }
 #highlights h4 {
     width: 13%;
@@ -621,7 +620,7 @@ p.summary time {
     font-weight: normal;
 }
 /* LATEST PUBLICATIONS ------>  */
-article.latest-publications-item {
+#latest-publications article {
     width: 232px;
     height: 35px;
     background: url(../images/icon-pub.png) 0 0 no-repeat;

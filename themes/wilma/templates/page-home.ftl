@@ -10,6 +10,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         
         <title>${title}</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
 
         ${stylesheets.addFromTheme("/css/screen.css")}
         <#include "stylesheets.ftl">
@@ -34,23 +36,23 @@
             </#if>-->
 
             <nav role="navigation">
-                <ul id="header-nav">
+                <ul id="header-nav" role="list">
                     <#if user.loggedIn>
-                        <li><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
-                        <li><a href="${urls.logout}">Log out</a></li>
+                        <li role="listitem"><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
+                        <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                         <#if user.hasSiteAdminAccess>
-                            <li><a href="${urls.siteAdmin}">Site Admin</a></li>
+                            <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
                         </#if>
                     <#else>
-                        <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
+                        <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
                     </#if>
                     <#-- List of links that appear in submenus, like the header and footer. -->
 
-                    <li><a href="${urls.about}">About</a></li>
+                    <li role="listitem"><a href="${urls.about}">About</a></li>
                     <#if urls.contact??>
-                        <li><a href="${urls.contact}">Contact Us</a></li>
+                        <li role="listitem"><a href="${urls.contact}">Contact Us</a></li>
                     </#if> 
-                    <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
+                    <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 </ul>
             </nav>
                 
@@ -58,7 +60,7 @@
                 <fieldset>
                     <legend>Search form</legend>
 
-                    <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
+                    <form id="search-form" action="${urls.search}" name="search-form" role="search"> 
                        <#if user.showFlag1SearchField>
                            <select id="search-form-modifier" name="flag1" class="form-item" >
                                <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
@@ -69,8 +71,7 @@
                        </#if> 
                        <div id="search-field">
                            <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
-                           <a class ="submit" href="javascript:document.searchForm.submit();">Search</a>
-                           <!-- <input class ="submit" name="submit" type="submit"  value="Search" /> -->
+                           <a class ="submit" href="javascript:document.search-form.submit();" role="button">Search</a>
                        </div>
                     </form>
                  </fieldset>
@@ -78,14 +79,14 @@
         </header>
             
         <nav role="navigation">
-            <ul id="main-nav">
+            <ul id="main-nav" role="list">
                 <#list tabMenu.items as item>
-                    <li><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>          
+                    <li role="listitem"><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>          
                 </#list>
             </ul>
         </nav>
        
-        <div id="wrapper-content">
+        <div id="wrapper-content" role="main">
             <#if flash?has_content>
                 <section id="flash-message" role="alert">
                     ${flash}
@@ -111,36 +112,34 @@
                 </section> <!-- #search-home -->
             </section> <!-- #intro -->
           
-            <section id="login-container" role="region">
-                <@widget name="login" />
-            </section>
-            
+            <@widget name="login" />
+
             <section id="browse" role="region">
                 <h4>Browse</h4>
                 
-                <ul id="browse-classGroups">
-                    <li><a  class="selected" href="#">People<span class="count-classes"> (1,280)</span></a></li>
-                    <li><a href="#">Courses<span class="count-classes"> (1,300)</span></a></li>
-                    <li><a href="#">Activities<span class="count-classes"> (980)</span></a></li>
-                    <li><a href="#">Topics<span class="count-classes"> (345)</span></a></li>
-                    <li><a href="#">Events<span class="count-classes"> (670)</span></a></li>
-                    <li><a href="#">Organizations<span class="count-classes"> (440)</span></a></li>
-                    <li><a href="#">Publications<span class="count-classes"> (670)</span></a></li>
-                    <li><a href="#">Locations<span class="count-classes"> (903)</span></a></li>
+                <ul id="browse-classgroups" role="list">
+                    <li role="listitem"><a  class="selected" href="#">People<span class="count-classes"> (1,280)</span></a></li>
+                    <li role="listitem"><a href="#">Courses<span class="count-classes"> (1,300)</span></a></li>
+                    <li role="listitem"><a href="#">Activities<span class="count-classes"> (980)</span></a></li>
+                    <li role="listitem"><a href="#">Topics<span class="count-classes"> (345)</span></a></li>
+                    <li role="listitem"><a href="#">Events<span class="count-classes"> (670)</span></a></li>
+                    <li role="listitem"><a href="#">Organizations<span class="count-classes"> (440)</span></a></li>
+                    <li role="listitem"><a href="#">Publications<span class="count-classes"> (670)</span></a></li>
+                    <li role="listitem"><a href="#">Locations<span class="count-classes"> (903)</span></a></li>
                 </ul>
                 
                 <section id="browse-classes" role="navigation">
                     <nav>
-                        <ul id="class-group-list">
-                            <li><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
-                            <li><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
-                            <li><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>
-                            <li><a href="#">Non-Academic <span class="count-individuals"> (280)</span></a></li>
-                            <li><a href="#">Non-Faculty Academic <span class="count-individuals"> (2,380)</span></a></li>
-                            <li><a href="#">Person<span class="count-individuals"> (2,480)</span></a></li>
-                            <li><a href="#">Postdoc <span class="count-individuals"> (1,380)</span></a></li>
-                            <li><a href="#">Professor Emeritus<span class="count-individuals"> (680)</span></a></li>
-                            <li><a href="#">Undergraduate Student<span class="count-individuals"> (880)</span></a></li>
+                        <ul id="class-group-list" role="list">
+                            <li role="listitem"><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
+                            <li role="listitem"><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
+                            <li role="listitem"><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>
+                            <li role="listitem"><a href="#">Non-Academic <span class="count-individuals"> (280)</span></a></li>
+                            <li role="listitem"><a href="#">Non-Faculty Academic <span class="count-individuals"> (2,380)</span></a></li>
+                            <li role="listitem"><a href="#">Person<span class="count-individuals"> (2,480)</span></a></li>
+                            <li role="listitem"><a href="#">Postdoc <span class="count-individuals"> (1,380)</span></a></li>
+                            <li role="listitem"><a href="#">Professor Emeritus<span class="count-individuals"> (680)</span></a></li>
+                            <li role="listitem"><a href="#">Undergraduate Student<span class="count-individuals"> (880)</span></a></li>
                         </ul>
                     </nav>
                     
@@ -197,19 +196,19 @@
                 <section id="latest-publications" class="global-highlights" role="region">
                     <h5>LATEST PUBLICATIONS</h5>
                     
-                    <article class="latest-publications-item" role="article">
+                    <article role="article">
                         <p class="publication-content">Solar masses<span><em>Journal</em> <time datetime="2010-02-13T20:00Z"> | December 2010</time></p>
                     </article>
                     
-                    <article class="latest-publications-item" role="article">
+                    <article role="article">
                         <p class="publication-content">Link data and the Web<span><em>Article</em> <time datetime="2010-02-13T20:00Z"> | December 2010</time></p>
                     </article>
                     
-                    <article class="latest-publications-item" role="article">
+                    <article role="article">
                         <p class="publication-content">Building a community<span><em>Book</em> <time datetime="2010-02-13T20:00Z"> | November 2010</time></p>
                     </article>
                     
-                    <article class="latest-publications-item" role="article">
+                    <article role="article">
                         <p class="publication-content">Biology 101<span><em>Series</em> <time datetime="2010-02-13T20:00Z"> | November 2010</time></p>
                     </article>
                     
@@ -232,12 +231,12 @@
                 </p>
             </#if>
             <nav role="navigation">
-                <ul id="footer-nav">
-                    <li><a href="${urls.about}">About</a></li>
+                <ul id="footer-nav" role="list">
+                    <li role="listitem"><a href="${urls.about}">About</a></li>
                 <#if urls.contact??>
-                    <li><a href="${urls.contact}">Contact Us</a></li>
+                    <li role="listitem"><a href="${urls.contact}">Contact Us</a></li>
                 </#if> 
-                    <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
+                    <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 </ul>
             </nav>
         </footer>

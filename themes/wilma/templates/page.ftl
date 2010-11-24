@@ -10,8 +10,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         
         <title>${title}</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
         
         ${stylesheets.addFromTheme("/css/screen.css")}
+        
         <#include "stylesheets.ftl">
         <#include "headScripts.ftl">
         
@@ -22,7 +25,7 @@
         <!--[if IE 7]>
         <link rel="stylesheet" href="css/ie7.css" />
         <![endif]-->
-
+ 
     </head>
     
     <body>
@@ -34,22 +37,22 @@
             </#if>-->
 
             <nav role="navigation">
-                <ul id="header-nav">
+                <ul id="header-nav" role="list">
                     <#if user.loggedIn>
-                        <li><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
-                        <li><a href="${urls.logout}">Log out</a></li>
+                        <li role="listitem"><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
+                        <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                         <#if user.hasSiteAdminAccess>
-                            <li><a href="${urls.siteAdmin}">Site Admin</a></li>
+                            <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
                         </#if>
                     <#else>
-                        <li><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
+                        <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
                     </#if>
                     <#-- List of links that appear in submenus, like the header and footer. -->
-                        <li><a href="${urls.about}">About</a></li>
+                        <li role="listitem"><a href="${urls.about}">About</a></li>
                     <#if urls.contact??>
-                        <li><a href="${urls.contact}">Contact Us</a></li>
+                        <li role="listitem"><a href="${urls.contact}">Contact Us</a></li>
                     </#if>
-                        <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
+                        <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 </ul>
             </nav>
             
@@ -57,7 +60,7 @@
                 <fieldset>
                     <legend>Search form</legend>
                     
-                    <form id="searchForm" action="${urls.search}" name="searchForm" role="search"> 
+                    <form id="search-form" action="${urls.search}" name="search-form" role="search"> 
                         <#if user.showFlag1SearchField>
                             <select id="search-form-modifier" name="flag1" class="form-item" >
                                 <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
@@ -70,35 +73,28 @@
                         
                         <div id="search-field">
                             <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
-                            <a class ="submit" href="javascript:document.searchForm.submit();">Search</a>
+                            <a class ="submit" href="javascript:document.search-form.submit();">Search</a>
                         </div>
-                        <!-- <input class ="submit" name="submit" type="submit"  value="Search" /> -->
                     </form>
                 </fieldset>
             </section>
         </header>
         
         <nav role="navigation">
-            <ul id="main-nav">
+            <ul id="main-nav" role="list">
                 <#list tabMenu.items as item>
-                    <li><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
+                    <li role="listitem"><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
                 </#list>
             </ul>
         </nav>
  
-        <div id="wrapper-content">        
+        <div id="wrapper-content" role="main">        
             <#if flash?has_content>
                 <section id="flash-message" role="alert">
                     ${flash}
                 </section>
             </#if>
-   
-            <#-- mb863: using for now until we have controllers page.ftl to render the templates commented below-->
-            <#--<#include "menupage/menupage.ftl">-->
-            <#--<#include "menupage/menupage--classgroup-people.ftl">-->
-            <#--<#include "individual/individual--generic-class.ftl">-->
-            <#--<#include "individual/individual--foaf-person.ftl">-->
-            
+
             ${body}
         </div> <!-- #wrapper-content -->
         
@@ -117,12 +113,12 @@
             </#if>
                
             <nav role="navigation">
-                <ul id="footer-nav">
-                    <li><a href="${urls.about}">About</a></li>
+                <ul id="footer-nav" role="list">
+                    <li role="listitem"><a href="${urls.about}">About</a></li>
                     <#if urls.contact??>
-                        <li><a href="${urls.contact}">Contact Us</a></li>
+                        <li role="listitem"><a href="${urls.contact}">Contact Us</a></li>
                     </#if> 
-                    <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
+                    <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 </ul>
             </nav>
         </footer>

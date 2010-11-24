@@ -783,7 +783,7 @@ padding-top:36px;
 
 /* styles for error alerts */
 
-#errorAlert{
+#error-alert{
 	color:#900;
 	padding:0px;
 	margin-bottom:5px;
@@ -792,7 +792,7 @@ padding-top:36px;
 }
 
 
-#errorAlert img{
+#error-alert img{
 	float:left;
 	margin:0;
 	padding:0;
@@ -801,7 +801,7 @@ padding-top:36px;
 	
 }
 
-#errorAlert  p{
+#error-alert  p{
 padding-left:30px;
 font-size:0.9em;
 

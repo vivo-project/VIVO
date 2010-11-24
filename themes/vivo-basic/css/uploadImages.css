@@ -99,7 +99,7 @@
 	
 }
 /* styles for error alerts */
-#errorAlert{
+#error-alert{
 	color:#900;
 	padding:0px;
 	margin-bottom:5px;
@@ -108,14 +108,14 @@
 }
 
 
-#errorAlert img{
+#error-alert img{
 	float:left;
 	margin:0;
 	padding:0;
 	vertical-align:middle;	
 }
 
-#errorAlert  p{
+#error-alert  p{
 padding-left:35px;
 font-size:0.9em;
 line-height:30px;
