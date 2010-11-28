@@ -1151,6 +1151,18 @@
     <url-pattern>/unrecognizedUser</url-pattern>
   </servlet-mapping>
 
+<!-- 
+  <servlet>
+    <servlet-name>FakeExternalAuthController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
+    <load-on-startup />
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FakeExternalAuthController</servlet-name>
+    <url-pattern>/admin/fakeExternalAuth</url-pattern>
+  </servlet-mapping>
+ -->
+ 
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.BrowseController</servlet-class>
