@@ -41,7 +41,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		try{
 			CoPIData PINodesAndEdges = queryManager.getQueryResult();
 			
-			PINodesAndEdges.print();
+//			PINodesAndEdges.print();
 			
 			if (VisualizationFrameworkConstants.DATA_RENDER_MODE
 					.equalsIgnoreCase(renderMode)) {

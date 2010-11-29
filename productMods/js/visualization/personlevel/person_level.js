@@ -257,8 +257,8 @@ function createTable(tableID, tableContainer, tableData) {
 }
 
 //renderStatsOnNodeClicked, CoRelations, noOfCoRelations
-function nodeClickedJS(json){
-
+//function nodeClickedJS(json){
+function renderStatsOnNodeClicked(json){
 	var obj = jQuery.parseJSON(json);
 
 	$("#dataPanel").attr("style","visibility:visible");
@@ -370,7 +370,8 @@ function renderCoAuthorshipVisualization() {
 		AC_FL_RunContent(
 				"src", swfLink,
 //				"flashVars", 'coAuthorUrl='+ encodeURL(egoCoAuthorshipDataFeederURL) + '&coPIUrl=' + encodeURL(egoCoPIDataFeederURL) ,			
-				"flashVars", 'coAuthorUrl='+ getEncodedCoAuthorURL() + '&coPIUrl=' + getEncodedCoPIURL() ,
+//				"flashVars", 'coAuthorUrl='+ getEncodedCoAuthorURL() + '&coPIUrl=' + getEncodedCoPIURL() ,
+				"flashVars", 'graphmlUrl=' + getEncodedCoAuthorURL() + '&labelField=label&visType=CoAuthor',
 				"width", "800",
 				"height", "850",
 				"align", "top",
