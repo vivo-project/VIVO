@@ -141,7 +141,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>If your organization is not listed, please add a new organization.</td>
+	<td>Organization Type</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,58 +166,18 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Elect to add a new organization</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=add a new organization</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Add only organization name, which results in error</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>newOrgName</td>
-	<td>Carroll College</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Must select a type for the new organization.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add only organization name and type, which results in error</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>newOrgName</td>
-	<td>Carroll College</td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>newOrgType</td>
+	<td>typeSelector</td>
 	<td>label=College</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Carroll College</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -241,17 +201,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>newOrgName</td>
-	<td>Carroll College</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>newOrgType</td>
-	<td>label=College</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>title</td>
+	<td>positionTitle</td>
 	<td>Lecturer</td>
 </tr>
 <tr>
@@ -275,24 +225,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>newOrgName</td>
-	<td>Carroll College</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>newOrgType</td>
-	<td>label=College</td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>positionType</td>
 	<td>label=Faculty Administrative Position</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>title</td>
-	<td>Lecturer</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -336,12 +271,22 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>organizationUri</td>
-	<td>label=Carroll College</td>
+	<td>typeSelector</td>
+	<td>label=College</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>title</td>
+	<td>relatedIndLabel</td>
+	<td>Carro</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>positionTitle</td>
 	<td>Assistant Professor</td>
 </tr>
 <tr>
@@ -400,23 +345,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=add a new organization</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>newOrgName</td>
-	<td>Cornell University</td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>newOrgType</td>
+	<td>typeSelector</td>
 	<td>label=University</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>title</td>
+	<td>relatedIndLabel</td>
+	<td>Cornell University</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>positionTitle</td>
 	<td>Assistant Professor</td>
 </tr>
 <tr>
