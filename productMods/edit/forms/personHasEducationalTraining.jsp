@@ -354,7 +354,22 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 %> 
 
     <c:set var="subjectName" value="<%= subjectName %>" />
-
+<%
+    if (objectUri != null) { // editing existing entry
+%>
+        <c:set var="editMode" value="edit" />
+        <c:set var="titleVerb" value="Edit" />
+        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
+        <c:set var="submitButtonText" value="Edit Educational Training" />
+        <c:set var="disabledVal" value="disabled" />
+<% 
+    } else { // adding new entry
+%>
+        <c:set var="editMode" value="add" />
+        <c:set var="titleVerb" value="Create" />
+        <c:set var="submitButtonText" value="Educational Training" />
+        <c:set var="disabledVal" value="" />
+<%  } 
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
@@ -369,14 +384,16 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     request.setAttribute("customCss", customCss); 
 %>
 
-<jsp:forward page="/N3EditForm"/>
+<%-- 
+This goes to an experimental FM based form: 
+<jsp:forward page="/N3EditForm"/> 
+--%>
 
- <%-- 
-<jsp:include page="${postForm}"/>
+ 
+
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-
-
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
 
@@ -426,4 +443,4 @@ var customFormData  = {
 };
 </script>
 
---%>
+<jsp:include page="${postForm}"/>
