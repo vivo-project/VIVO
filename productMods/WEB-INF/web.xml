@@ -410,6 +410,10 @@
     <servlet-name>EmptyController</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmptyController</servlet-name>
+    <url-pattern>/insufficientAuthorization</url-pattern>
+  </servlet-mapping>
       
   <servlet>
     <servlet-name>RevisionInfoController</servlet-name>
