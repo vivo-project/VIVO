@@ -102,7 +102,7 @@
                     
                     <fieldset>
                         <legend>Search form</legend>
-                        <form id="search-home-vivo" action="${urls.search}" method="post" name="searchHome" role="search">
+                        <form id="search-home-vivo" action="${urls.search}" method="post" name="search-home" role="search">
                             <#if user.showFlag1SearchField>
                                 <select id="search-form-modifier" name="flag1" class="form-item" >
                                     <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
@@ -138,7 +138,7 @@
                 
                 <section id="browse-classes" role="navigation">
                     <nav>
-                        <ul id="class-group-list" role="list">
+                        <ul id="classgroup-list" role="list">
                             <li role="listitem"><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
                             <li role="listitem"><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
                             <li role="listitem"><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>

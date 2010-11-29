@@ -330,7 +330,7 @@ p.request-account {
 p.request-account a{
     color:#fff;
 }
-p.passwordNote{
+p.password-note{
     font-size: 12px;
     color: #949696;
     padding-left:38px;   
@@ -446,7 +446,7 @@ ul#browse-classgroups .count-classes {
     background: #fff;
     margin-top: -20px;
 }
-ul#class-group-list {
+ul#classgroup-list {
     float: left;
     width: 268px;
     padding: 0 10px 15px 22px;
@@ -454,7 +454,7 @@ ul#class-group-list {
     margin-bottom: 10px;
     border-right: 1px solid #dde5e4;
 }
-ul#class-group-list li {
+ul#classgroup-list li {
     display: block;
     float: left;
     width: 268px;
@@ -463,10 +463,10 @@ ul#class-group-list li {
     height: 35px;
     line-height: 35px;
 }
-ul#class-group-list li:last-child {
+ul#classgroup-list li:last-child {
     border-bottom: none
 }
-ul#class-group-list a {
+ul#classgroup-list a {
     display: block;
     padding-left: 15px;
     width: 200px;
@@ -474,15 +474,15 @@ ul#class-group-list a {
     color: #5e6363;
     text-decoration: none;
 }
-ul#class-group-list a:hover {
+ul#classgroup-list a:hover {
     background: url(../images/arrow.gif) 0 12px no-repeat;
     color: #2ea0cf;
 }
-ul#class-group-list a.selected {
+ul#classgroup-list a.selected {
     color: #2ea0cf;
     background: url(../images/arrow.gif) 0 12px no-repeat;
 }
-ul#class-group-list .count-individuals {
+ul#classgroup-list .count-individuals {
     font-size: 12px
 }
 /* VISUALIZATION  ------>  */
@@ -576,8 +576,9 @@ a.view-all-style {
 }
 .pictos-arrow-10 {
     font-family: 'Pictos';
-    font-size: 1.0em;
-    line-height: 1.0em;
+    font-size: 1.8em;
+    line-height: 0.2em;
+    color:#fff;
 }
 /* UPCOMING EVENTS------>  */
 #upcoming-events {
