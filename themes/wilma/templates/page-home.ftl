@@ -71,7 +71,7 @@
                        </#if> 
                        <div id="search-field">
                            <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
-                           <a class ="submit" href="javascript:document.search.submit();">Search</a>
+                           <input type="submit" value="Search" class="submit">
                        </div>
                     </form>
                  </fieldset>
@@ -104,16 +104,16 @@
                         <legend>Search form</legend>
                         <form id="search-home-vivo" action="${urls.search}" method="post" name="searchHome" role="search">
                             <#if user.showFlag1SearchField>
-                                <select id="search-form-modifier2" name="flag1" class="form-item" >
+                                <select id="search-form-modifier" name="flag1" class="form-item" >
                                     <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
                                     <option value="${portalId}">${siteTagline!}</option>
                                 </select>
                             <#else>
-                                <input type="hidden" name="flag1" value="${portalId}" />
+                                <input type="hidden" name="flag1" value="${portalId}" />  
                            </#if> 
                             <div id="search-home-field">
-                                <input name="search-home-vivo" class="search-home-vivo" id="search-home-vivo"  type="text" />
-                                <a class ="submit" href="javascript:document.searchHome.submit();">Search</a>
+                                <input type="text" name="querytext" class="search-home-vivo" value="${querytext!}" />
+                                <input type="submit" value="Search" class="submit">
                             </div>
                         </form>
                     </fieldset>

@@ -73,7 +73,7 @@
                         
                         <div id="search-field">
                             <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
-                            <a class ="submit" href="javascript:document.search.submit();">Search</a>
+                            <input type="submit" value="Search" class="submit">
                         </div>
                     </form>
                 </fieldset>
