@@ -61,7 +61,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -223,56 +223,6 @@
 	<td>type</td>
 	<td>tinymce</td>
 	<td>The Primate College of America is a privately-funded college for the study of primates.</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='fundingAgentFor']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Process for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Process (core)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Edit &quot;funds&quot; entry for Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Privately Funded</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -471,8 +421,23 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Award or Honor for Primate College of America</td>
+	<td>Select an existing Award or Honor Receipt for Primate College of America</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate College of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Best Primate College</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -691,38 +656,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>newIndLabel</td>
-	<td>Funding source</td>
+	<td>roleLabel</td>
+	<td>Founder</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>startYear</td>
 	<td>2010</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate College of America</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='affiliatedOrganization']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Research Laboratory</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -761,7 +701,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>newIndLabel</td>
+	<td>roleLabel</td>
 	<td>Member</td>
 </tr>
 <tr>
@@ -836,7 +776,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>newIndLabel</td>
+	<td>roleLabel</td>
 	<td>Founder</td>
 </tr>
 <tr>
@@ -886,7 +826,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>newIndLabel</td>
+	<td>roleLabel</td>
 	<td>Organizer</td>
 </tr>
 <tr>
@@ -936,7 +876,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>newIndLabel</td>
+	<td>roleLabel</td>
 	<td>Sponsor</td>
 </tr>
 <tr>
@@ -996,7 +936,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='workEmail']/a</td>
+	<td>//div[@id='email']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -1191,11 +1131,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Privately Funded | Process</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>B.S. Bachelor of Science | Academic Degree</td>
 	<td></td>
 </tr>
@@ -1226,7 +1161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Student of the Year | Award or Honor</td>
+	<td>Best Primate College | Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
@@ -1251,12 +1186,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Dr., 1999 - </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primates-r-us Funding source 2010 -</td>
+	<td>Faculty, Jane Dr.</td>
 	<td></td>
 </tr>
 <tr>
@@ -1266,7 +1196,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Colleges of the World Member 2009 -</td>
+	<td>Primate Colleges of the World Member</td>
 	<td></td>
 </tr>
 <tr>
@@ -1276,17 +1206,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Heart Health Clinic Founder 2010 -</td>
+	<td>Primate Heart Health Clinic Founder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health and Fitness Organizer 2008</td>
+	<td>Primate Health and Fitness Organizer</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health Check Sponsor 2008 - 2010</td>
+	<td>Primate Health Check Sponsor</td>
 	<td></td>
 </tr>
 <tr>
@@ -1331,6 +1261,11 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Log out</td>
 	<td></td>
 </tr>
@@ -1339,7 +1274,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
