@@ -1340,11 +1340,6 @@
     <url-pattern>/loginExternalAuthReturn</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <!-- for backward-compatibility -->
-    <servlet-name>login</servlet-name>
-    <url-pattern>/login_process.jsp</url-pattern> 
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>logout</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
