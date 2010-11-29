@@ -66,7 +66,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,7 +246,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Chapter Title</td>
+	<td>Title</td>
 	<td></td>
 </tr>
 <tr>
@@ -291,7 +291,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Chapter Title</td>
+	<td>Title</td>
 	<td></td>
 </tr>
 <tr>
@@ -372,7 +372,7 @@
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\AddPublications\nintendo-logo.jpg</td>
+	<td>C:\VIVO\vivo\utilities\acceptance-tests\suites\AddPublications\<br />intendo-logo.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -397,7 +397,7 @@
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\VIVO\vivo-code\vivo\utilities\acceptance-tests\suites\AddPublications\nintendo-logo.jpg</td>
+	<td>C:\VIVO\vivo\utilities\acceptance-tests\suites\AddPublications\nintendo-logo.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -432,7 +432,7 @@
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\VIVO\vivo-code\vivo\utilities\acceptance-tests\suites\AddPublications\nintendo-logo.jpg</td>
+	<td>C:\VIVO\vivo\utilities\acceptance-tests\suites\AddPublications\nintendo-logo.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1781,7 +1781,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='domesticGeographicFocus']/a</td>
+	<td>//div[@id='geographicFocus']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -1811,7 +1811,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='domesticGeographicFocus']/a</td>
+	<td>//div[@id='geographicFocus']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -1823,71 +1823,6 @@
 	<td>select</td>
 	<td>objectVar</td>
 	<td>label=the United States of America</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add International Geo Focus, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='internationalGeographicFocus']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Geographic Region for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This relates something to a specific international geographic region as its focus.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>If you don't find the appropriate entry on the selection list:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='internationalGeographicFocus']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Canada</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2028,6 +1963,61 @@
 	<td>type</td>
 	<td>tinymce</td>
 	<td>2009-03</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add OCLCNUM validating field first</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='oclcnum']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: oclcnum</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='oclcnum']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>1234-5678-90</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -2556,7 +2546,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>published | document status</td>
+	<td>published | Document Status</td>
 	<td></td>
 </tr>
 <tr>
@@ -2585,11 +2575,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Canada</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>2009</td>
 	<td></td>
@@ -2602,6 +2587,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>123456789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234-5678-90</td>
 	<td></td>
 </tr>
 <tr>
@@ -2771,12 +2761,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo O.K. for Kids Chapter</td>
+	<td>Nintendo O.K. for Kids | Chapter</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -2789,7 +2784,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
