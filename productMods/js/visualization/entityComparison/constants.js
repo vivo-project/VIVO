@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 //Hard coded color constants
 var	TURQUOISE = "#8DD3C7";

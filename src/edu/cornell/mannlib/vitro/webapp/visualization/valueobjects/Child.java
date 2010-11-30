@@ -1,8 +1,13 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import java.util.Set;
 import java.util.HashSet;
-
+/**
+ * @author bkoniden
+ * Deepak Konidena
+ *
+ */
 public class Child extends Individual {
 
 	Set<BiboDocument> documents = new HashSet<BiboDocument>();

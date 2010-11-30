@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison;
 
 import java.util.HashMap;
@@ -27,6 +28,10 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * @author bkoniden
+ * Deepak Konidena
+ */
 public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<String, Set<String>>> {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;

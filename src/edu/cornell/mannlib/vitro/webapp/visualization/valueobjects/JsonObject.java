@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
  * JsonObject is used for creating data in JSON format, 
  * by just using the fields that are required to be included.
  * @author bkoniden
- *
+ * Deepak Konidena
  */
 public class JsonObject {
 	

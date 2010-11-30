@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import java.util.Collections;
@@ -13,7 +14,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 /**
  * This stores edge information for Co-PI vis.
  * @author bkoniden
- *
+ * Deepak Konidena
  */
 public class CoPIEdge {
 	

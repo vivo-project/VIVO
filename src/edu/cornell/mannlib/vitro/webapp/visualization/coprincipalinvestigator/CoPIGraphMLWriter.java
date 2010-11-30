@@ -1,3 +1,5 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
 
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
@@ -13,7 +15,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
-
+/**
+ * @author bkoniden
+ * Deepak Konidena
+ */
 public class CoPIGraphMLWriter {
 	
 	private StringBuilder coPIGraphMLContent;

@@ -1,4 +1,7 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /**
+
  * init sets some initial options for the default graph. i.e for when the page
  * is initially loaded or when its refreshed or when all the checkboxes on the
  * page are unchecked.

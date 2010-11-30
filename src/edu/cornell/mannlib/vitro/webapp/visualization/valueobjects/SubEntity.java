@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
 
 import java.util.HashMap;
@@ -5,6 +6,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * @author bkoniden
+ * Deepak Konidena
+ */
 public class SubEntity extends Individual {
 
 	Set<BiboDocument> publications = new HashSet<BiboDocument>();

@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
 
 import java.io.IOException;
@@ -27,7 +28,10 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPINode;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
-
+/**
+ * @author bkoniden
+ * Deepak Konidena
+ */
 public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler{
 	
 	public void generateVisualization(VitroRequest vitroRequest, HttpServletRequest request, HttpServletResponse response, Log log, DataSource dataSource){
