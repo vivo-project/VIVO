@@ -53,8 +53,6 @@
                     <input type="text" name="querytext" class="search-vivo" value="${querytext!}"  />
                     <input type="submit" value="Search" class="submit">
                 </div>
-            
-                <!-- <input class ="submit" name="submit" type="submit"  value="Search" /> -->
             </form>
         </fieldset>
     </section>

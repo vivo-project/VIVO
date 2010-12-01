@@ -13,7 +13,7 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
 
-        ${stylesheets.addFromTheme("/css/screen.css")}
+        <#-- ${stylesheets.addFromTheme("/css/screen.css")} -->
         <#include "stylesheets.ftl">
         <#include "headScripts.ftl">
 

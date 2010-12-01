@@ -12,9 +12,9 @@
         <title>${title}</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
-        
-        ${stylesheets.addFromTheme("/css/screen.css")}
-        
+        <#-- mb863 moved css/screen.css to stylesheets.ftl, so the file is at end -->
+        <#-- ${stylesheets.addFromTheme("/css/screen.css")} -->
+         
         <#include "stylesheets.ftl">
         <#include "headScripts.ftl">
         

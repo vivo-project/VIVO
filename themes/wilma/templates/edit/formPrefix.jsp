@@ -37,10 +37,14 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
 <head> <!-- formPrefix.jsp -->
     <meta charset="utf-8" />
     <title>Edit</title>
-    <link rel="stylesheet" href="<%=themeDir%>/css/screen.css" />
-
+    
+    <link rel="stylesheet" href="../css/edit.css" />
+    <link rel="stylesheet" href="<%=themeDir%>css/screen.css" />
+    
     <!-- script for enabling new HTML5 semantic markup in IE browsers-->
     <%-- ${headScripts.add("/js/html5.js")} --%>
+    <script language="javascript" type="text/javascript" src="../js/html5.js"></script>
+    
     <c:if test="${!empty scripts}"><jsp:include page="${scripts}"/></c:if>
     <%
         String useTinyMCE = (useTinyMCE=request.getParameter("useTinyMCE")) != null && !(useTinyMCE.equals("")) ? useTinyMCE : "false";
