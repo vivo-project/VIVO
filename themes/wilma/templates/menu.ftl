@@ -14,7 +14,7 @@
     <nav role="navigation">
         <ul id="header-nav">    
             <#if user.loggedIn>
-                <li><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
+                <li><span class="loginIcon">U</span> ${user.loginName}</li>
                 <li><a href="${urls.logout}">Log out</a></li>
                 <#if user.hasSiteAdminAccess>
                     <li><a href="${urls.siteAdmin}">Site Admin</a></li>

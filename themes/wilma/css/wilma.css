@@ -111,6 +111,12 @@ ul#header-nav  a:active {
     text-decoration: none;
     color: #999;
 }
+.loginIcon {
+    font-family: 'Pictos';
+    font-size: 1.8em;
+    line-height: 0.2em;
+    color: #fff;
+}
 /* SEARCH ------>  */
 #search {
     position: absolute;
@@ -144,6 +150,7 @@ input.search-vivo {
     color: #5e6363;
     margin-left: 10px;
     margin-top: 5px;
+    padding:0;
 }
 #search-form-modifier{
     display: none;
@@ -578,9 +585,6 @@ a.view-all-style {
 }
 .pictos-arrow-10 {
     font-family: 'Pictos';
-    font-size: 1.8em;
-    line-height: 0.2em;
-    color: #fff;
 }
 /* UPCOMING EVENTS------>  */
 #upcoming-events {
