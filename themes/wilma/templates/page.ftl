@@ -12,8 +12,6 @@
         <title>${title}</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
-        <#-- mb863 moved css/screen.css to stylesheets.ftl, so the file is at end -->
-        <#-- ${stylesheets.addFromTheme("/css/screen.css")} -->
          
         <#include "stylesheets.ftl">
         <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
@@ -27,7 +25,7 @@
         <!--[if IE 7]>
         <link rel="stylesheet" href="css/ie7.css" />
         <![endif]-->
- 
+        
     </head>
     
     <body>
@@ -41,7 +39,7 @@
             <nav role="navigation">
                 <ul id="header-nav" role="list">
                     <#if user.loggedIn>
-                        <li role="listitem"><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
+                        <li role="listitem"><span class="loginIcon">U</span> ${user.loginName}</li>
                         <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                         <#if user.hasSiteAdminAccess>
                             <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>

@@ -12,13 +12,12 @@
         <title>${title}</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
-
-        <#-- ${stylesheets.addFromTheme("/css/screen.css")} -->
+        
         <#include "stylesheets.ftl">
         <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
         
         <#include "headScripts.ftl">
-
+        
         <!--[if lt IE 7]>
         <link rel="stylesheet" href="css/ie6.css" />
         <![endif]-->
@@ -26,7 +25,7 @@
         <!--[if IE 7]>
         <link rel="stylesheet" href="css/ie7.css" />
         <![endif]-->
-
+        
     </head>
     
     <body>
@@ -40,7 +39,7 @@
             <nav role="navigation">
                 <ul id="header-nav" role="list">
                     <#if user.loggedIn>
-                        <li role="listitem"><span class="pictos-arrow-10">U</span> ${user.loginName}</li>
+                        <li role="listitem"><span class="loginIcon">U</span> ${user.loginName}</li>
                         <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                         <#if user.hasSiteAdminAccess>
                             <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
@@ -255,7 +254,7 @@
         
         <!--[if lt IE 7]>
         <script type="text/javascript" src="${urls.base}/js/jquery_plugins/supersleight.js"></script>
-        <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
+        <script type="text/javascript" src="${urls.base}/js/utils.js"></script>
         <![endif]-->
 
         <!--[if (gte IE 6)&(lte IE 8)]>
