@@ -36,8 +36,7 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
     
     ${ftl_footer}
     
-    <script type="text/javascript" src="<c:url value="/js/extensions/String.js"/>"></script></script>
-    <script type="text/javascript" src="<c:url value="/js/jquery.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/extensions/String.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery_plugins/jquery.bgiframe.pack.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery_plugins/thickbox/thickbox-compressed.js"/>"></script>
     <!-- <script type="text/javascript" src="<c:url value="/js/jquery_plugins/ui.datepicker.js"/>"></script> -->
