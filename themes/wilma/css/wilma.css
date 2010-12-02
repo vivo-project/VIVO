@@ -365,13 +365,13 @@ p.password-note{
     height: 44px;
     background: url(../images/search-field-and-button.png) 0 0 no-repeat;
 }
-#search-home-field  .submit {
+#search-home-field  input.submit {
     text-decoration: none;
     background-color: transparent;
     color: #fff;
     font-size: 18px;
     border: none;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-top: 8px;
     cursor: pointer;
 }

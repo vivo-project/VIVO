@@ -3,12 +3,66 @@
 
 /******************* mb863: willma styles ********************************/
 
-label{
-    display: block; 
-    margin-top: .5em; 
-}
 input{
-    padding:0;
+    border: 0;
+    font-size: 14px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #e0dfdf;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px; 
 }
 
+input#submit{
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 7px 22px 8px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    margin:0;
+    margin-top:1.2em;
+    background-color: #749a02;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1;
+}
 
+/* STYLED BUTTONS ------>  
+p input#submit,
+p input#submit:visited {
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 7px 22px 8px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    margin:0;
+    height: 24px;
+    background-color: #749a02;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1; 
+}
+p input#submit:hover {
+    background-color: #111;
+    color: #fff;
+    background-color: #b2d15a;
+}
+p input#submit:active {
+    top: 1px;
+}
+*/
