@@ -15,6 +15,8 @@
 
         <#-- ${stylesheets.addFromTheme("/css/screen.css")} -->
         <#include "stylesheets.ftl">
+        <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
+        
         <#include "headScripts.ftl">
 
         <!--[if lt IE 7]>
@@ -249,7 +251,6 @@
             </nav>
         </footer>
 
-        ${scripts.add("/js/jquery.js")}
         ${scripts.tags}
         
         <!--[if lt IE 7]>
