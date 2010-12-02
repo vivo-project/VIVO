@@ -270,6 +270,16 @@
         <url-pattern>/*</url-pattern>
   </filter-mapping-->
 
+   <filter>
+    <filter-name>PageRoutingFilter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.PageRoutingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PageRoutingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>request</dispatcher>
+  </filter-mapping>
+  
   <!--  Spring setup ****************************************************  -->
 <!--
   <context-param>
@@ -1285,7 +1295,18 @@
     <servlet-name>primitiveDelete</servlet-name>
     <url-pattern>/edit/primitiveDelete</url-pattern>    
   </servlet-mapping>
-   
+ 
+  <servlet>
+    <servlet-name>PageController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.PageController</servlet-class>    
+  </servlet>
+  <!--  PageController lacks a servlet-mapping since it gets called by getNamedDispatcher 
+  <servlet-mapping>
+    <servlet-name>PageController</servlet-name>
+    <url-pattern>NONE</url-pattern>    
+  </servlet-mapping>
+  -->
+    
   <!-- ============================== servlet-mappings ======================== -->
   <servlet-mapping>
     <servlet-name>fetch</servlet-name>
