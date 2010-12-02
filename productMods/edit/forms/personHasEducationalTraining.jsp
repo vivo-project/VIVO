@@ -80,7 +80,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="infoPred" value="${vivoCore}supplementalInformation" />
 <c:set var="degreeEarned" value="${vivoCore}degreeEarned" />
 <c:set var="degreeOutcomeOf" value="${vivoCore}degreeOutcomeOf" />
-<c:set var="orgGrantingDegree" value="${vivoCore}organizationGrantingDegree" />
+<c:set var="trainingAtOrg" value="${vivoCore}trainingAtOrganization" />
 
 <c:set var="hasDateTimeValue" value="${vivoCore}hasDateTimeValue"/>
 <c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
@@ -147,31 +147,31 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     
     ?edTraining  a core:EducationalTraining ;
                  core:educationalTrainingOf ?person ;
-                 <${orgGrantingDegree}> ?org .
+                 <${trainingAtOrg}> ?org .
 </v:jsonset>
 
 <%-- This property has no inverse --%>
 <v:jsonset var="n3ForEdTrainingToOrg" >      
-    ?edTraining <${orgGrantingDegree}> ?org .
+    ?edTraining <${trainingAtOrg}> ?org .
 </v:jsonset>
 
 <%-- Queries for editing an existing educational training entry --%>
 
 <v:jsonset var="orgQuery" >      
     SELECT ?existingOrg WHERE {
-        ?edTraining <${orgGrantingDegree}> ?existingOrg . }
+        ?edTraining <${trainingAtOrg}> ?existingOrg . }
 </v:jsonset>
 
 <v:jsonset var="orgLabelQuery" >      
     SELECT ?existingOrgLabel WHERE {
-        ?edTraining <${orgGrantingDegree}> ?existingOrg .
+        ?edTraining <${trainingAtOrg}> ?existingOrg .
         ?existingOrg <${label}> ?existingOrgLabel .
     }
 </v:jsonset>
 
 <v:jsonset var="orgTypeQuery" >      
     SELECT ?existingOrgType WHERE {
-        ?edTraining <${orgGrantingDegree}> ?existingOrg .
+        ?edTraining <${trainingAtOrg}> ?existingOrg .
         ?existingOrg a ?existingOrgType .
     }
 </v:jsonset>
