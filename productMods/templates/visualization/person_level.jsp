@@ -34,6 +34,12 @@
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
+<c:url var="coprincipalinvestigator" value="/visualization">
+	<c:param name="vis" value="coprincipalinvestigator"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="uri" value="${requestScope.egoURIParam}"/>
+</c:url>
+
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function(){
 		
@@ -166,7 +172,9 @@ $(document).ready(function(){
 </div>
 
 </c:if>
-
+<div style="text-align:center; clear: left;">
+<a href='<c:out value="${coprincipalinvestigator}"/>'> View all grants and corresponding co-pi network for this author</a>
+</div>
 <c:if test='${numOfAuthors > 0}'>
 
 	<div class="vis_stats">

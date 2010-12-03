@@ -23,6 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
 
 
+
 @SuppressWarnings("serial")
 public class PersonPublicationCountVisCodeGenerator {
 
@@ -549,8 +550,11 @@ public class PersonPublicationCountVisCodeGenerator {
 							 + "&" + VisualizationFrameworkConstants.RENDER_MODE_KEY 
 							 + "=" + URLEncoder.encode(VisualizationFrameworkConstants
 									 						.DATA_RENDER_MODE, 
-					 				 				   VisualizationController.URL_ENCODING_SCHEME)
-			 				 				   .toString();
+							 VisualizationController.URL_ENCODING_SCHEME).toString()
+						    + "&"
+							    + VisualizationFrameworkConstants.VIS_MODE_KEY
+							+ "=" + URLEncoder.encode("coauthorship", 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 			return downloadURL;
 		} else {
 			return null;
@@ -585,6 +589,10 @@ public class PersonPublicationCountVisCodeGenerator {
 		 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
 							+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
 															.STANDALONE_RENDER_MODE, 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+						    + "&"
+							    + VisualizationFrameworkConstants.VIS_MODE_KEY
+							+ "=" + URLEncoder.encode("coauthorship", 
 					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 			
 			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO " 
