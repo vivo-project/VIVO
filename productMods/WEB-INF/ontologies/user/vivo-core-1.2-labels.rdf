@@ -686,6 +686,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasServiceProviderRole">
     <rdfs:label xml:lang="en-US">service to the profession</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#faxNumber">
+    <rdfs:label xml:lang="en-US">fax</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#providesFundingThrough">
     <rdfs:label xml:lang="en-US">provides funding through</rdfs:label>
   </rdf:Description>
@@ -1037,6 +1040,9 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#description">
     <rdfs:label xml:lang="en-US">description</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#primaryPhoneNumber">
+    <rdfs:label xml:lang="en-US">primary phone</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#InformationResource">
     <rdfs:label xml:lang="en-US">Information Resource</rdfs:label>
   </rdf:Description>
@@ -1159,6 +1165,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nationalityIT">
     <rdfs:label xml:lang="en-US">nationalityIT</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#phoneNumber">
+    <rdfs:label xml:lang="en-US">phone</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix">
     <rdfs:label xml:lang="en-US">preferredNamespacePrefix</rdfs:label>
@@ -1526,9 +1535,6 @@
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#hasMinLatitude">
     <rdfs:label xml:lang="en-US">hasMinLatitude</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#workPhone">
-    <rdfs:label xml:lang="en-US">work phone</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#County">
     <rdfs:label xml:lang="en-US">County</rdfs:label>
   </rdf:Description>
@@ -1711,9 +1717,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#FacultyPosition">
     <rdfs:label xml:lang="en-US">Faculty Position</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#workFax">
-    <rdfs:label xml:lang="en-US">work fax</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTime">
     <rdfs:label xml:lang="en-US">date/time</rdfs:label>
