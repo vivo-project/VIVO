@@ -37,7 +37,7 @@
 
 
 &lt;p&gt;See more information on the &lt;a href="http://vivoweb.org"&gt;VIVO Project&lt;/a&gt;.&lt;/p&gt;</j.0:aboutText>
-         <j.0:themeDir rdf:datatype="http://www.w3.org/2001/XMLSchema#string">themes/vivo-basic/</j.0:themeDir>
+         <j.0:themeDir rdf:datatype="http://www.w3.org/2001/XMLSchema#string">themes/wilma/</j.0:themeDir>
     </j.0:inPortal>
   </rdf:Description>
 </rdf:RDF>
