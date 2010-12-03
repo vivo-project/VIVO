@@ -28,7 +28,6 @@
     </nav>
 </footer>
 
-${scripts.add("/js/jquery.js")}
 ${scripts.tags}
 
 <#include "googleAnalytics.ftl">
