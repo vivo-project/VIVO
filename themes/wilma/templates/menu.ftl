@@ -28,7 +28,7 @@
                 <li><a href="${urls.contact}">Contact Us</a></li>
             </#if> 
                 <li><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
-                <li role="listitem"><a href="${urls.index}" target="blank">Index</a></li>
+                <li role="listitem"><a href="${urls.index}">Index</a></li>
         </ul>
     </nav>
 
