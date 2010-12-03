@@ -30,7 +30,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
@@ -39,7 +38,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
-
 /**
  * 
  * This request handler is used to serve the content related to an individual's
@@ -79,30 +77,30 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         									VisualizationFrameworkConstants
         											.VIS_CONTAINER_KEY);
 
-        QueryRunner<Set<BiboDocument>> queryManager =
+        QueryRunner<Set<Grant>> queryManager =
         	new PersonGrantCountQueryRunner(personURI, dataSource, log);
 
-		try {
-			Set<Grant> authorDocuments = queryManager.getQueryResult();
+//		try {
+//			Set<Grant> authorDocuments = queryManager.getQueryResult();
 
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
-	    	Map<String, Integer> yearToPublicationCount = 
-	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
-	    	
-	    	Individual author = ((PersonGrantCountQueryRunner) queryManager).getAuthor();
-
-	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE
-	    				.equalsIgnoreCase(renderMode)) {
-	    		
-				prepareDataResponse(author,
-													  authorDocuments,
-													  yearToPublicationCount,
-													  response);
-				return;
-			}
+//	    	Map<String, Integer> yearToPublicationCount = 
+//	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
+//	    	
+//	    	Individual author = ((PersonGrantCountQueryRunner) queryManager).getAuthor();
+//
+//	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE
+//	    				.equalsIgnoreCase(renderMode)) {
+//	    		
+//				prepareDataResponse(author,
+//													  authorDocuments,
+//													  yearToPublicationCount,
+//													  response);
+//				return;
+//			}
 	    	
 	    	
 	    	/*
@@ -123,66 +121,66 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	    	/*
 	    	 * Computations required to generate HTML for the sparkline & related context.
 	    	 * */
-	    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator = 
-	    		new PersonGrantCountVisCodeGenerator(vitroRequest.getContextPath(),
-	    									   personURI,
-	    									   visMode,
-	    									   visContainer,
-	    									   authorDocuments,
-	    									   yearToPublicationCount, 
-	    									   log);
-	    	
-	    	SparklineData sparklineData = visualizationCodeGenerator
-												.getValueObjectContainer();
-	    	
-	    	/*
-	    	 * This is side-effecting because the response of this method is just to redirect to
-	    	 * a page with visualization on it.
-	    	 * */
-			RequestDispatcher requestDispatcher = null;
-			
-			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE
-						.equalsIgnoreCase(renderMode)) {
-
-				prepareDynamicResponse(request, 
-									   response, 
-									   vitroRequest, 
-									   sparklineData, 
-									   yearToPublicationCount);
-		    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
-
-			} else {
-		    	prepareStandaloneResponse(request, 
-		    							  response, 
-		    							  vitroRequest,
-		    							  sparklineData);
-		    	requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
-			}
-
-	    	try {
-	            requestDispatcher.forward(request, response);
-	        } catch (Exception e) {
-	            log.error("EntityEditController could not forward to view.");
-	            log.error(e.getMessage());
-	            log.error(e.getStackTrace());
-	        }
-
-		} catch (MalformedQueryParametersException e) {
-			try {
-				UtilityFunctions.handleMalformedParameters(
-						e.getMessage(), 
-						"Visualization Query Error - Individual Publication Count", 
-						vitroRequest, 
-						request, 
-						response, 
-						log);
-			} catch (ServletException e1) {
-				log.error(e1.getStackTrace());
-			} catch (IOException e1) {
-				log.error(e1.getStackTrace());
-			}
-			return;
-		}
+//	    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator = 
+//	    		new PersonGrantCountVisCodeGenerator(vitroRequest.getContextPath(),
+//	    									   personURI,
+//	    									   visMode,
+//	    									   visContainer,
+//	    									   authorDocuments,
+//	    									   yearToPublicationCount, 
+//	    									   log);
+//	    	
+//	    	SparklineData sparklineData = visualizationCodeGenerator
+//												.getValueObjectContainer();
+//	    	
+//	    	/*
+//	    	 * This is side-effecting because the response of this method is just to redirect to
+//	    	 * a page with visualization on it.
+//	    	 * */
+//			RequestDispatcher requestDispatcher = null;
+//			
+//			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE
+//						.equalsIgnoreCase(renderMode)) {
+//
+//				prepareDynamicResponse(request, 
+//									   response, 
+//									   vitroRequest, 
+//									   sparklineData, 
+//									   yearToPublicationCount);
+//		    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
+//
+//			} else {
+//		    	prepareStandaloneResponse(request, 
+//		    							  response, 
+//		    							  vitroRequest,
+//		    							  sparklineData);
+//		    	requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
+//			}
+//
+//	    	try {
+//	            requestDispatcher.forward(request, response);
+//	        } catch (Exception e) {
+//	            log.error("EntityEditController could not forward to view.");
+//	            log.error(e.getMessage());
+//	            log.error(e.getStackTrace());
+//	        }
+//
+//		} catch (MalformedQueryParametersException e) {
+//			try {
+//				UtilityFunctions.handleMalformedParameters(
+//						e.getMessage(), 
+//						"Visualization Query Error - Individual Publication Count", 
+//						vitroRequest, 
+//						request, 
+//						response, 
+//						log);
+//			} catch (ServletException e1) {
+//				log.error(e1.getStackTrace());
+//			} catch (IOException e1) {
+//				log.error(e1.getStackTrace());
+//			}
+//			return;
+//		}
 	}
 	
 	private void writePublicationsOverTimeCSV(
@@ -216,7 +214,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 */
 	private void prepareDataResponse(
 						Individual author,
-						Set<BiboDocument> authorDocuments,
+						Set<Grant> authorDocuments,
 						Map<String, Integer> yearToPublicationCount, 
 						HttpServletResponse response) {
 
@@ -313,7 +311,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	}
 	
 	private void preparePDFResponse(Individual author,
-			Set<BiboDocument> authorDocuments,
+			Set<Grant> authorDocuments,
 			Map<String, Integer> yearToPublicationCount,
 			HttpServletResponse response) {
 
