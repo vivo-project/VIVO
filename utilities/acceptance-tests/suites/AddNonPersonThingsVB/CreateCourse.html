@@ -196,36 +196,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='eventWithin']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add an entry to: event within</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Health and Fitness</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//div[@id='description']/a</td>
 	<td></td>
 </tr>
@@ -267,6 +237,26 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Add an entry to: taught by</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='organizer']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,6 +631,76 @@
 </tr>
 <tr>
 	<td>comment</td>
+	<td class="comment">Test related documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='presents']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>typeOfNew</td>
+	<td>label=Webpage (bibo)</td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Document for Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>There are no entries in the system to select from.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please create a new entry.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Edit &quot;related documents&quot; entry for Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Primate</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>http://primatehealthintro.cornell.edu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
 	<td class="comment">Test other entry</td>
 	<td></td>
 </tr>
@@ -736,6 +796,11 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Faculty, Jane | Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Introduction to Primate Health | Semester Class</td>
 	<td></td>
 </tr>
@@ -787,6 +852,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Fall 2010 | Academic Term</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>http://primatehealthintro.cornell.edu | Webpage</td>
 	<td></td>
 </tr>
 <tr>
