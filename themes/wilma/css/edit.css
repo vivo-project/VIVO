@@ -1,8 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-
-/******************* mb863: willma styles ********************************/
-
 input{
     border: 0;
     font-size: 14px;
@@ -11,13 +8,25 @@ input{
     border: 1px solid #e0dfdf;
     border-radius: 5px;
     -moz-border-radius: 5px;
-    -webkit-border-radius: 5px; 
+    -webkit-border-radius: 5px;
 }
-
-input#submit, .form-button, .add-action-button, #verbosePropertyForm input{
+label{
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+input#submit, 
+input#submit:visited, 
+.form-button, 
+.form-button:visited, 
+.add-action-button, 
+.add-action-button:visited, 
+#verbosePropertyForm input,
+#verbosePropertyForm input:visited,
+input.yellowbutton,
+input.yellowbutton:visited{
     background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
-    padding: 7px 22px 8px;
+    padding: 5px 18px 7px;
     color: #fff;
     text-decoration: none;
     border-radius: 4px; 
@@ -26,43 +35,152 @@ input#submit, .form-button, .add-action-button, #verbosePropertyForm input{
     position: relative;
     cursor: pointer;
     border: 0;
-    margin:0;
-    margin-top:1.2em;
+    margin: 0;
+    margin-top: 1.2em;
     background-color: #749a02;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     line-height: 1;
+    margin-right: .6rm;
 }
-
-/* STYLED BUTTONS ------>  
-p input#submit,
-p input#submit:visited {
-    background: #222 url(../images/alert-overlay.png) repeat-x;
-    display: inline-block;
-    padding: 7px 22px 8px;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px; 
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    position: relative;
-    cursor: pointer;
-    border: 0;
-    margin:0;
-    height: 24px;
-    background-color: #749a02;
-    color: #fff;
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 1; 
-}
-p input#submit:hover {
+input#submit:hover, 
+.form-button:hover, 
+.add-action-button:hover, 
+#verbosePropertyForm input:hover,
+input.yellowbutton:hover {
     background-color: #111;
     color: #fff;
     background-color: #b2d15a;
 }
-p input#submit:active {
+input#submit:active, 
+.form-button:active, 
+.add-action-button:active, 
+#verbosePropertyForm input:active,
+input.yellowbutton:active{
     top: 1px;
 }
-*/
+form textarea {
+    border: 1px solid #e0dfdf; 
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px; 
+}
+form a:link.cancel, form a:visited.cancel {
+    text-decoration: underline;
+    color: #f70;
+    border-color: none;
+}
+form a:hover.cancel, form a:active.cancel {
+    text-decoration: none;
+    color: #f70;
+    background: none;
+}
+.validationError {
+    font-weight: normal;
+    color: #cc0000;
+}
+p.submit {
+  margin-top: .7em;
+}
+.editingForm table {
+    border-color: #dfe6e6;
+}
+.editingForm td{
+    padding: 3px;
+}
+.editingForm .entryFormHead {
+    background-color: #f1f2ee;
+    border-color: #dfe6e6;
+}
+.editingForm .entryFormHead h2{
+    color: #5F6464;
+}
+.editingForm .form-button {
+    background-color: #749a02;
+    color: #fff;
+    font-size: 1em;
+}
+.form-item {
+    margin-top:.3em;
+    background-color: #fff;
+    border-color: #595B5B;
+    font-size: .8em;
+    border-width: 1px;
+    color: #595B5B;
+    padding: .3em;
+}
+.navlinkblock {
+    color: #5F6464;
+}
+.header {
+    color: #5F6464;
+}
+.database_header {
+    background-color: #f1f2ee;
+    color: #2485ae;
+    font-size: 1em;
+}
+.database_upperleftcorner {
+    color: #5F6464;
+    font-size: 1em;
+}
+.database_upperleftcenter {
+    background-color: #B0C4DE;
+    color: #5F6464;
+    font-size: 1em;
+}
+.rownumheader {
+    background-color: #F1F2EE;
+    color: #5F6464;
+    font-size: 1em;
+}
+.headercenter {
+    color:  #5F6464;
+    font-size: 10pt;
+    font-style: normal;
+    text-align: center;
+}
+.postheader {
+    background-color: #E6E6FA;
+    color: #777;
+    font-size: 1em;
+}
+.database_postheader {
+    background-color: #f7f9f9;
+    font-size: 1em;
+}
+.postheadercenter {
+    font-size: 1em;
+}
+.postheaderright {
+    font-size: 1em;
+}
+.verticalfieldlabel {
+    color: #5F6464;
+    font-size: .8em;
+}
+.row, .rowvert {
+    background-color: #f7f9f9;
+    color: #5F6464;
+    font-size: 10pt;
+    font-style: normal;
+    text-align: left;
+    line-height: 2em;
+}
+.rowalternate {
+    background-color: #fff;
+    color: #5F6464;
+    font-size: 1em;
+    line-height: 2em;
+}
+.rowbold {
+    background-color: #FFFAFA;
+    color: #5F6464;
+    font-size: 1em;
+}
+.rownum {
+    background-color: #F1F2EE;
+    color: #5F6464;
+    font-size: 1em;
+}
