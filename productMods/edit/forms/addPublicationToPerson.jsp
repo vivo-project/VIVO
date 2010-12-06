@@ -207,7 +207,8 @@ SPARQL queries for existing values. --%>
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
-  	editConfig.setEntityToReturnTo("?pubUri");
+    // Return to person, not publication. See NIHVIVO-1464.
+  	// editConfig.setEntityToReturnTo("?pubUri"); 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/js/browserUtils.js",
