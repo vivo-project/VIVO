@@ -42,7 +42,8 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
     <link rel="stylesheet" href="<%=themeDir%>css/screen.css" />
     
     <!-- script for enabling new HTML5 semantic markup in IE browsers-->
-    <script language="javascript" type="text/javascript" src="../js/html5.js"></script>
+    <script type="text/javascript" src="../js/html5.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
     
     <c:if test="${!empty scripts}"><jsp:include page="${scripts}"/></c:if>
     

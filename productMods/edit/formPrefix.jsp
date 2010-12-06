@@ -40,6 +40,7 @@ FreemarkerHttpServlet.getFreemarkerComponentsForJsp(request);
             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
         <head>  <!-- formPrefix.jsp -->
+            <script type="text/javascript" src="<c:url value="/js/jquery.js"/>"></script>
         <%
             String useTinyMCE = (useTinyMCE=request.getParameter("useTinyMCE")) != null && !(useTinyMCE.equals("")) ? useTinyMCE : "false";
             if (useTinyMCE.equalsIgnoreCase("true")) {
