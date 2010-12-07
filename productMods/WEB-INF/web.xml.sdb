@@ -50,9 +50,6 @@
   </listener>
 
   <!-- experimental ModelMaker for ingest workflows - BJL 2008-06-01 -->
-  <listener>
-    <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.VitroJenaModelMakerSetup</listener-class>
-  </listener>
 
   <!-- Comment out this listener to run Vitro without a database -->
   <!-- If used, this listener must be run before JenaDataSourceSetup -->
