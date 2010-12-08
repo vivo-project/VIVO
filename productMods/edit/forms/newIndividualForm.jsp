@@ -175,7 +175,7 @@ parameter set up by editRequestDispatch.
 
 <h2>Create a new ${typeName}</h2>
 
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<c:if test="${! isPersonType}">
 		<v:input type="text" label="Name ${requiredHint}" id="label" size="30" />
 	</c:if>

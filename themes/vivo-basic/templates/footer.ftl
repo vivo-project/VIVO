@@ -2,25 +2,29 @@
 
 <#import "lib-list.ftl" as l>
 
-<div id="footer">
+        </div> <!-- content -->
+    </div> <!-- contentwrap -->
 
-    <#if urls.bannerImage??>
-        <img class="footerLogo" src="${urls.bannerImage}" alt="${siteTagline!}" />
-    </#if>
+    <div id="footer">
+        <#if urls.bannerImage??>
+            <img class="footerLogo" src="${urls.bannerImage}" alt="${siteTagline!}" />
+        </#if>
     
-    <div class="footerLinks">
-        <ul class="otherNav">  
-            <@l.firstLastList> 
-                <#include "subMenuLinks.ftl">
-            </@l.firstLastList>
-        </ul>
-    </div>
+        <div class="footerLinks">
+            <ul class="otherNav">  
+                <@l.firstLastList> 
+                    <#include "subMenuLinks.ftl">
+                </@l.firstLastList>
+            </ul>
+        </div>
   
-    <#include "copyright.ftl">
+        <#include "copyright.ftl">
 
-    All Rights Reserved. <a href="${urls.termsOfUse}">Terms of Use</a>
+        All Rights Reserved. <a href="${urls.termsOfUse}">Terms of Use</a>
 
-    <#include "version.ftl">
-    
-</div>
+        <#include "version.ftl">
+    </div>
 
+</div> <!-- wrap --> 
+
+<#include "scripts.ftl">

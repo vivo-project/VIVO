@@ -316,7 +316,7 @@
 
 <h2>${titleVerb}&nbsp;position entry for <%= subjectName %></h2>
 
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
     
     <p class="inline"><v:input type="select" label="Organization Type ${requiredHint}" name="orgType" disabled="${disabledVal}" id="typeSelector" /></p>
   

@@ -284,7 +284,7 @@ PREFIX core: <${vivoCore}>
 <%@ include file="unsupportedBrowserMessage.jsp" %>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addGrantRoleToPerson" class="noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addGrantRoleToPerson" class="customForm noIE67" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
         
     <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" disabled="${disabledVal}" /></p>
 

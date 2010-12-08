@@ -40,7 +40,7 @@ var customForm = {
     // NB These must be assigned after the elements have been loaded onto the page.
     initObjects: function(){
 
-        this.form = $('#content form');
+        this.form = $('form.customForm');
         this.fullViewOnly = $('.fullViewOnly');
         this.button = $('#submit');
         this.requiredLegend = $('#requiredLegend');

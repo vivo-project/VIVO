@@ -393,7 +393,7 @@ SPARQL queries for existing values. --%>
 </div> 
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addAuthorForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addAuthorForm" class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <h3>Add an Author</h3>
 

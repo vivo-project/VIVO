@@ -184,7 +184,7 @@
 <jsp:include page="${preForm}"/>
 
 <h2>${title}</h2>
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="title" id="title" size="30"/>
 	<v:input type="select" label="person" id="personUri"  />
     <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>

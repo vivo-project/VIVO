@@ -399,7 +399,7 @@ This goes to an experimental FM based form:
 
 <h2>${titleVerb}&nbsp;educational training entry for <%= subjectName %></h2>
 
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <v:input type="select" label="Degree" id="degree"  />  
     

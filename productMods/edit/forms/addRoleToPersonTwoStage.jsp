@@ -398,7 +398,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	<h2>${titleVerb}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 	
-	<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+	<form id="addRoleForm" class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	
 	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
 	    
