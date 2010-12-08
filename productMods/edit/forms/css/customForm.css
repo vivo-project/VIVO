@@ -1,14 +1,14 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#content form div {
+form.customForm div {
     clear: left;
 }
 
-#content form h6 {
+form.customForm h6 {
     font-size: 110%;
 }
 
-#content form div.addNewLink {
+form.customForm div.addNewLink {
     float: left;
     clear: none;
     margin-left: 5em;
@@ -19,12 +19,12 @@
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
 
-#content form .existing span.requiredHint, 
-#content form .new span.requiredHint {
+form.customForm .existing span.requiredHint, 
+form.customForm .new span.requiredHint {
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
 
-#content form .existing {
+form.customForm .existing {
     float: left;
     clear: none;
 }
@@ -41,19 +41,19 @@
 }
 
 
-/* #content form p.inline span,*/
-#content form p.inline input,
-#content form p.inline label {
+
+form.customForm p.inline input,
+form.customForm p.inline label {
     float: left;
     clear: left;
 }
 
-#content form p.inline.year input {
+form.customForm p.inline.year input {
     margin-top: -1.75em;
 }
 
 /*
-#content form p.inline.year span.hint {
+#form.customForm p.inline.year span.hint {
     margin-right: 38.5em;
     margin-top: -2.4em;
 }
@@ -61,7 +61,7 @@
 
 input,
 select, 
-#content form p {
+form.customForm p {
     margin-bottom: 1em;
 }
 
@@ -69,38 +69,38 @@ option {
     padding: 0 2px;
 }
 
-#content form .hint {
+form.customForm .hint {
     color: #9c9c9c;
     font-weight: normal;
 }
 
-#content form .requiredHint {
+form.customForm .requiredHint {
     color: #f00;
     font-weight: normal;
 }
 
-#content form #requiredLegend {
+form.customForm #requiredLegend {
     font-style: italic;
 }
 
-#content form p.validationError {
+form.customForm p.validationError {
     clear: both;
     margin-bottom: 1.25em;
 }
 
-#content form a.close {
+form.customForm a.close {
     float: right;
     margin-right: 1em;
     font-size: 90%;    
 }
 
-#content form a.close:link, 
-#content form a.close:visited {
+form.customForm a.close:link, 
+form.customForm a.close:visited {
     border-color: #FF7700;
     color: #FF7700;
 }
 
-#content form textarea {
+form.customForm textarea {
     width: 30%;
 }
 
