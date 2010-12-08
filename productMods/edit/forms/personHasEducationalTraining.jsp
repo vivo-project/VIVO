@@ -210,7 +210,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edTraining", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewEdTraining}",  "${majorFieldAssertion}", "${orgLabelAssertion}", "${orgTypeAssertion}", "${dateTimeAssertions}" ],
+    "n3required"    : [ "${n3ForNewEdTraining}", "${orgLabelAssertion}", "${orgTypeAssertion}", "${dateTimeAssertions}" ],
     
     "n3optional"    : [ "${n3ForEdTrainingToOrg}",                                            
                         "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}" ],
@@ -251,7 +251,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
       },   
       "majorField" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -403,7 +403,7 @@ This goes to an experimental FM based form:
 
     <v:input type="select" label="Degree" id="degree"  />  
     
-    <v:input type="text" label="Major Field of Degree ${requiredHint}" id="majorField" size="30" />   
+    <v:input type="text" label="Major Field of Degree" id="majorField" size="30" />   
        
     <v:input id="dateTime" />  
     
