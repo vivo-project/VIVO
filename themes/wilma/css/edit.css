@@ -44,20 +44,46 @@ input.yellowbutton:visited{
     line-height: 1;
     margin-right: .6rm;
 }
+input.plainbutton,
+input.plainbutton:visited{
+    background: #222 url(../images/alert-overlay.png) repeat-x;
+    display: inline-block;
+    padding: 5px 18px 7px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px; 
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    margin: 0;
+    margin-top: 1.2em;
+    background-color: #398aac;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    margin-right: .6rm;
+}
 input#submit:hover, 
 .form-button:hover, 
 .add-action-button:hover, 
 #verbosePropertyForm input:hover,
-input.yellowbutton:hover {
-    background-color: #111;
+input.yellowbutton:hover{
     color: #fff;
     background-color: #b2d15a;
+}
+input.plainbutton:hover {
+    color: #fff;
+    background-color: #93c3d4;
 }
 input#submit:active, 
 .form-button:active, 
 .add-action-button:active, 
 #verbosePropertyForm input:active,
-input.yellowbutton:active{
+input.yellowbutton:active,
+input.plainbutton{
     top: 1px;
 }
 form textarea {

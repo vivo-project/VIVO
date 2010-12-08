@@ -77,6 +77,7 @@ form.customForm .hint {
 form.customForm .requiredHint {
     color: #f00;
     font-weight: normal;
+    font-size: small;
 }
 
 form.customForm #requiredLegend {
@@ -104,10 +105,10 @@ form.customForm textarea {
     width: 30%;
 }
 
-/* fix bad alignment in IE 6 and 7 */
+/* fix bad alignment in IE 6 and 7 
 .or, .cancel{
 vertical-align:top;
-}
+}*/
 
 /* Message displayed for an unsupported browser. Hide on page load; JavaScript
  * shows if needed.
