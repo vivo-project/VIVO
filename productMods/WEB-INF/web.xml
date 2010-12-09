@@ -1145,6 +1145,15 @@
   </servlet>
 
   <servlet>
+    <servlet-name>programLogin</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.ProgramLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>programLogin</servlet-name>
+    <url-pattern>/programLogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
