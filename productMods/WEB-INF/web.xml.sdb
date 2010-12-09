@@ -50,6 +50,7 @@
   </listener>
 
   <!-- experimental ModelMaker for ingest workflows - BJL 2008-06-01 -->
+ 
 
   <!-- Comment out this listener to run Vitro without a database -->
   <!-- If used, this listener must be run before JenaDataSourceSetup -->
@@ -111,7 +112,7 @@
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup</listener-class>
   </listener>
-
+  
   <!-- The followng listener records all edit changes, in reified form, to another database model -->
   <!-- still at an experimental stage -->
   <!-- if used, this listener should be run after all other Jena-related listeners, to avoid logging unnecessary data and slowing the context startup process -->
@@ -135,6 +136,10 @@
   
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup</listener-class>
+  </listener> 
+    
+  <listener>
+    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.InformationResourceEditingPolicySetup</listener-class>
   </listener> 
     
     <listener>
@@ -270,6 +275,16 @@
         <url-pattern>/*</url-pattern>
   </filter-mapping-->
 
+   <filter>
+    <filter-name>PageRoutingFilter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.PageRoutingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PageRoutingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>request</dispatcher>
+  </filter-mapping>
+  
   <!--  Spring setup ****************************************************  -->
 <!--
   <context-param>
@@ -1133,6 +1148,15 @@
   </servlet>
 
   <servlet>
+    <servlet-name>programLogin</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.ProgramLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>programLogin</servlet-name>
+    <url-pattern>/programLogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
@@ -1146,6 +1170,18 @@
     <url-pattern>/unrecognizedUser</url-pattern>
   </servlet-mapping>
 
+<!-- 
+  <servlet>
+    <servlet-name>FakeExternalAuthController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
+    <load-on-startup />
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FakeExternalAuthController</servlet-name>
+    <url-pattern>/admin/fakeExternalAuth</url-pattern>
+  </servlet-mapping>
+ -->
+ 
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.BrowseController</servlet-class>
@@ -1216,7 +1252,6 @@
     <url-pattern>/admin/sparqlquery</url-pattern>
   </servlet-mapping>
   
-  <!-- 
   <servlet>
     <servlet-name>DummyVisClient</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.DummyVisClientController</servlet-class>
@@ -1226,7 +1261,8 @@
     <servlet-name>DummyVisClient</servlet-name>
     <url-pattern>/admin/dummyVisClient</url-pattern>
   </servlet-mapping>
-   -->
+
+
    
    <servlet>
     <servlet-name>VisualizationController</servlet-name>
@@ -1264,7 +1300,18 @@
     <servlet-name>primitiveDelete</servlet-name>
     <url-pattern>/edit/primitiveDelete</url-pattern>    
   </servlet-mapping>
-   
+ 
+  <servlet>
+    <servlet-name>PageController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.PageController</servlet-class>    
+  </servlet>
+  <!--  PageController lacks a servlet-mapping since it gets called by getNamedDispatcher 
+  <servlet-mapping>
+    <servlet-name>PageController</servlet-name>
+    <url-pattern>NONE</url-pattern>    
+  </servlet-mapping>
+  -->
+    
   <!-- ============================== servlet-mappings ======================== -->
   <servlet-mapping>
     <servlet-name>fetch</servlet-name>
