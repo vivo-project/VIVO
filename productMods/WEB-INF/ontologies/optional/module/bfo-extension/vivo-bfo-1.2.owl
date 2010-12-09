@@ -27,8 +27,7 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:core="http://vivoweb.org/ontology/core#"
      xmlns:span="http://www.ifomis.org/bfo/1.1/span#">
-    <owl:Ontology rdf:about="http://vivoweb.org/ontology/bfo#">
-          <owl:imports rdf:resource="http://www.ifomis.org/bfo/1.1"/>
+    <owl:Ontology rdf:about="http://vivoweb.org/ontology/core/bfo-extension">
     </owl:Ontology>
     
 
@@ -42,23 +41,18 @@
      -->
 
     
-
-
     <!-- http://purl.org/NET/c4dm/event.owl#Event -->
 
     <owl:Class rdf:about="&event;Event">
         <rdfs:subClassOf rdf:resource="&span;Process"/>
     </owl:Class>
     
-
-
     <!-- http://purl.org/ontology/bibo/DocumentStatus -->
 
     <owl:Class rdf:about="&bibo;DocumentStatus">
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#AcademicDegree -->
 
@@ -67,14 +61,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#Address -->
 
     <owl:Class rdf:about="&core;Address">
         <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#Agreement -->
 
@@ -83,14 +75,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#AwardOrHonor -->
 
     <owl:Class rdf:about="&core;AwardOrHonor">
         <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#AwardOrHonorReceipt -->
 
@@ -99,14 +89,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#DateTimeInterval -->
 
     <owl:Class rdf:about="&core;DateTimeInterval">
         <rdfs:subClassOf rdf:resource="&span;TemporalInterval"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#DateTimeValue -->
 
@@ -115,14 +103,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#DateTimeValuePrecision -->
 
     <owl:Class rdf:about="&core;DateTimeValuePrecision">
         <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#EducationalTraining -->
 
@@ -131,14 +117,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#Equipment -->
 
     <owl:Class rdf:about="&core;Equipment">
         <rdfs:subClassOf rdf:resource="&snap;Object"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#EventSeries -->
 
@@ -147,22 +131,18 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#InformationResource -->
 
     <owl:Class rdf:about="&core;InformationResource">
         <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
     </owl:Class>
     
-
-
     <!-- http://vivoweb.org/ontology/core#Location -->
 
     <owl:Class rdf:about="&core;Location">
         <rdfs:subClassOf rdf:resource="&snap;ThreeDimensionalRegion"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#Position -->
 
@@ -171,14 +151,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#Process -->
 
     <owl:Class rdf:about="&core;Process">
         <rdfs:subClassOf rdf:resource="&span;Process"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#Relationship -->
 
@@ -187,14 +165,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#Role -->
 
     <owl:Class rdf:about="&core;Role">
         <rdfs:subClassOf rdf:resource="&snap;Role"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#Service -->
 
@@ -203,14 +179,12 @@
     </owl:Class>
     
 
-
     <!-- http://vivoweb.org/ontology/core#SubjectArea -->
 
     <owl:Class rdf:about="&core;SubjectArea">
         <rdfs:subClassOf rdf:resource="&snap;IndependentContinuant"/>
     </owl:Class>
     
-
 
     <!-- http://vivoweb.org/ontology/core#URLLink -->
 
@@ -219,72 +193,10 @@
     </owl:Class>
     
 
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#GenericallyDependentContinuant -->
-
-    <owl:Class rdf:about="&snap;GenericallyDependentContinuant"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#IndependentContinuant -->
-
-    <owl:Class rdf:about="&snap;IndependentContinuant"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#MaterialEntity -->
-
-    <owl:Class rdf:about="&snap;MaterialEntity"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#Object -->
-
-    <owl:Class rdf:about="&snap;Object"/>
-    
-
-
     <!-- http://www.ifomis.org/bfo/1.1/snap#Quality -->
 
     <owl:Class rdf:about="&snap;Quality"/>
     
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#Role -->
-
-    <owl:Class rdf:about="&snap;Role"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#SpecificallyDependentContinuant -->
-
-    <owl:Class rdf:about="&snap;SpecificallyDependentContinuant"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/snap#ThreeDimensionalRegion -->
-
-    <owl:Class rdf:about="&snap;ThreeDimensionalRegion"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/span#Process -->
-
-    <owl:Class rdf:about="&span;Process"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/span#TemporalInstant -->
-
-    <owl:Class rdf:about="&span;TemporalInstant"/>
-    
-
-
-    <!-- http://www.ifomis.org/bfo/1.1/span#TemporalInterval -->
-
-    <owl:Class rdf:about="&span;TemporalInterval"/>
-    
-
 
     <!-- http://xmlns.com/foaf/0.1/Agent -->
 

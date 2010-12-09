@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY bibo "http://purl.org/ontology/bibo/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY obo "http://purl.obolibrary.org/obo/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY core "http://vivoweb.org/ontology/core#" >
+    <!ENTITY snap "http://www.ifomis.org/bfo/1.1/snap#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY research "http://purl.org/net/OCRe/research.owl#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY scirr "http://vivoweb.org/ontology/scientific-research-resource#" >
+]>
+
+
+<rdf:RDF 
+     xmlns:obo="http://purl.obolibrary.org/obo/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:bibo="http://purl.org/ontology/bibo/"
+     xmlns:snap="http://www.ifomis.org/bfo/1.1/snap#"
+     xmlns:scirr="http://vivoweb.org/ontology/scientific-research-resource#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:core="http://vivoweb.org/ontology/core#"
+     xmlns:research="http://purl.org/net/OCRe/research.owl#">
+    <owl:Ontology rdf:about="http://vivoweb.org/ontology/scientific-research-resource/mapping/ero">
+    </owl:Ontology>
+    
+    <!-- http://purl.obolibrary.org/obo/ERO_0000031 -->
+
+    <owl:ObjectProperty rdf:about="&obo;ERO_0000031">
+        <owl:equivalentProperty rdf:resource="&scirr;usesProtocolOrSoftware"/>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000033 -->
+
+    <owl:ObjectProperty rdf:about="&obo;ERO_0000033">
+        <owl:equivalentProperty rdf:resource="&scirr;knowsTechnique"/>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000034 -->
+
+    <owl:ObjectProperty rdf:about="&obo;ERO_0000034">
+        <owl:equivalentProperty rdf:resource="&scirr;hasManufacturer"/>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000234 -->
+
+    <owl:ObjectProperty rdf:about="&obo;ERO_0000234">
+        <owl:equivalentProperty rdf:resource="&scirr;hasOrganismProcessOrDiseaseFocus"/>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000397 -->
+
+    <owl:ObjectProperty rdf:about="&obo;ERO_0000397">
+        <owl:equivalentProperty rdf:resource="&scirr;performsTechniqueOrService"/>
+    </owl:ObjectProperty>
+    
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000306 -->
+
+    <owl:ObjectProperty rdf:about="&obo;OBI_0000306">
+        <owl:equivalentProperty rdf:resource="&scirr;hasFunction"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000001 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000001">
+        <owl:equivalentClass rdf:resource="&core;Laboratory"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000002 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000002">
+        <owl:equivalentClass rdf:resource="&core;CoreLaboratory"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000004 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000004">
+        <owl:equivalentClass rdf:resource="&scirr;Instrument"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000006 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000006">
+        <owl:equivalentClass rdf:resource="&scirr;Reagent"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000007 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000007">
+        <owl:equivalentClass rdf:resource="&scirr;Technique"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000014 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000014">
+        <owl:equivalentClass rdf:resource="&scirr;ResearchProject"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000015 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000015">
+        <owl:equivalentClass rdf:resource="&scirr;HumanStudy"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000016 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000016">
+        <owl:equivalentClass rdf:resource="&scirr;ClinicalTrial"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000020 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000020">
+        <owl:equivalentClass rdf:resource="&scirr;BiologicalSpecimen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000071 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000071">
+        <owl:equivalentClass rdf:resource="&core;Software"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000391 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000391">
+        <owl:equivalentClass rdf:resource="&scirr;AccessService"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000392 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000392">
+        <owl:equivalentClass rdf:resource="&scirr;StorageService"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000393 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000393">
+        <owl:equivalentClass rdf:resource="&scirr;TrainingService"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/ERO_0000394 -->
+
+    <owl:Class rdf:about="&obo;ERO_0000394">
+        <owl:equivalentClass rdf:resource="&scirr;ProductionService"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000011 -->
+
+    <owl:Class rdf:about="&obo;OBI_0000011">
+        <owl:equivalentClass rdf:resource="&core;Process"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0000272 -->
+
+    <owl:Class rdf:about="&obo;OBI_0000272">
+        <owl:equivalentClass rdf:resource="&scirr;Protocol"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.obolibrary.org/obo/OBI_0100026 -->
+
+    <owl:Class rdf:about="&obo;OBI_0100026">
+        <owl:equivalentClass rdf:resource="&scirr;Organism"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.org/net/OCRe/research.owl#Interventional_study -->
+
+    <owl:Class rdf:about="&research;Interventional_study">
+        <owl:equivalentClass rdf:resource="&scirr;InterventionalStudy"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.org/net/OCRe/research.owl#Observational_study -->
+
+    <owl:Class rdf:about="&research;Observational_study">
+        <owl:equivalentClass rdf:resource="&scirr;ObservationalStudy"/>
+    </owl:Class>
+    
+
+    <!-- http://purl.org/net/OCRe/research.owl#Quantitative_human_study -->
+
+    <owl:Class rdf:about="&research;Quantitative_human_study">
+        <owl:equivalentClass rdf:resource="&scirr;QuantitativeHumanStudy"/>
+    </owl:Class>
+    
+
+
+<!-- Generated by the OWL API (version 3.1.0.1602) http://owlapi.sourceforge.net -->
+
