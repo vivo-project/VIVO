@@ -210,3 +210,6 @@ p.submit {
     color: #5F6464;
     font-size: 1em;
 }
+.form-background {
+    background-color: #fff;
+}
