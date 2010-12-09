@@ -28,3 +28,6 @@ themes/vivo-basic/templates/googleAnalytics.ftl
 # Stylesheet for Pictos fonts by pictos.drewwilson.com
 themes/wilma/css/pictos.css
 
+# Raphael plugin for JQuery.
+themes/wilma/js/jquery_plugins/raphael/pie.js
+themes/wilma/js/jquery_plugins/raphael/raphael.js
