@@ -501,13 +501,22 @@ ul#classgroup-list .count-individuals {
     float: right;
     width: 270px;
     height: 270px;
+    position: relative;
 }
 #visual-graph h4 {
     padding: 20px 0 12px 12px;
+    width: auto;
     font-size: 18px;
     color: #2485ae;
     font-weight: normal;
     background: url(../images/bullet-visual-graph.png) 120px 25px no-repeat;
+}
+#pieViz {
+    position: absolute;
+    top: 0;
+    left: -85px;
+    width: 400px;
+    height: 400px;
 }
 /* HIGHLIGHTS  ------>  */
 #highlights {

@@ -6,6 +6,8 @@
 <html lang="en">
     <head>
         <#include "head.ftl">
+        <script type="text/javascript" src="${themeDir}/js/jquery_plugins/raphael/raphael.js"></script>
+        <script type="text/javascript" src="${themeDir}/js/jquery_plugins/raphael/pie.js"></script>
     </head>
     
     <body>
@@ -73,7 +75,44 @@
                     
                     <section id="visual-graph" role="region">
                         <h4>Visual Graph</h4>
-                        <img src="${urls.theme}/images/visual-graph.jpg" alt=""/>
+                        
+                        <table>
+                            <tr>
+                                <th>Faculty Member</th>
+                                <td>19%</td>
+                            </tr>
+                            <tr>
+                                  <th>Graduate Student</th>
+                                  <td>10%</td>
+                              </tr>
+                              <tr>
+                                  <th>Librarian</th>
+                                  <td>2%</td>
+                              </tr>
+                              <tr>
+                                  <th>Non-Academic</th>
+                                  <td>3%</td>
+                              </tr>
+                              <tr>
+                                  <th>Non-Faculty Academic</th>
+                                  <td>9%</td>
+                              </tr>
+
+                              <tr>
+                                  <th>Postdoc</th>
+                                  <td>4%</td>
+                              </tr>
+                              <tr>
+                                  <th>Professor Emeritus</th>
+                                  <td>2%</td>
+                              </tr>
+                              <tr>
+                                  <th>Undergraduate Student</th>
+                                  <td>51%</td>
+                              </tr>
+                          </table>
+                          
+                          <section id="pieViz" role="region"></section>
                     </section>
                 </section> <!-- #browse-classes -->
             </section> <!-- #browse -->
