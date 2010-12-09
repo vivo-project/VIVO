@@ -16,7 +16,7 @@ display:DefaultMenu
     display:hasElement display:HomeMenuItem ;
     display:hasElement display:OrganizationsMenuItem ;
     display:hasElement display:PeopleMenuItem ;
-    display:hasElement display:PublicationsMenuItem .
+    display:hasElement display:ResearchMenuItem .
 
 #### Menu Items for Default Menu ####
 
@@ -32,11 +32,11 @@ display:PeopleMenuItem
     display:linkText "People";
     display:toPage display:People .
 
-display:PublicationsMenuItem     
+display:ResearchMenuItem     
     a display:NavigationElement ;
     display:menuPosition 3;
-    display:linkText "Publications";
-    display:toPage display:Publications .
+    display:linkText "Research";
+    display:toPage display:Research .
 
 display:EventsMenuItem 
     a display:NavigationElement ;
@@ -56,6 +56,7 @@ display:Home
     a display:HomePage ;    
     a display:Page ;
     display:title "Home" ;
+    display:urlMapping "/" ;
     display:urlMapping "/home" .
 
 display:Events 
@@ -74,7 +75,7 @@ display:People
     display:title "People" ;
     display:urlMapping "/people" .
 
-display:Publications 
+display:Research 
     a display:Page ;    
-    display:title "Publications" ;
-    display:urlMapping "/publications" .
+    display:title "Research" ;
+    display:urlMapping "/research" .
