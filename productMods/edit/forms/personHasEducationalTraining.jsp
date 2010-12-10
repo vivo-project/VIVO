@@ -212,7 +212,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     
     "n3required"    : [ "${n3ForNewEdTraining}", "${orgLabelAssertion}", "${orgTypeAssertion}", "${dateTimeAssertions}" ],
     
-    "n3optional"    : [ "${n3ForEdTrainingToOrg}",                                            
+    "n3optional"    : [ "${n3ForEdTrainingToOrg}", "${majorFieldAssertion}",                                          
                         "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}" ],
                         
     "newResources"  : { "edTraining" : "${defaultNamespace}",

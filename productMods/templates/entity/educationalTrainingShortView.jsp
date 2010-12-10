@@ -25,6 +25,7 @@
                     <c:set var="degreeLabel" value="${!empty degreeAbbr ? degreeAbbr : degreeType.name }" />               
                 </c:if>
 
+                <%-- RY 12/10/10 majorField is no longer required, so make sure we display something reasonable if there is no major field. --%>
                 <c:set var="degreeMajor" value="${individual.dataPropertyMap['http://vivoweb.org/ontology/core#majorField'].dataPropertyStatements[0].data}"/>
 
                 <c:choose>
