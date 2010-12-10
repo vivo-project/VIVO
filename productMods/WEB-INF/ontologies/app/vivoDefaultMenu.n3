@@ -32,23 +32,23 @@ display:PeopleMenuItem
     display:linkText "People";
     display:toPage display:People .
 
-display:ResearchMenuItem     
+display:OrganizationsMenuItem 
     a display:NavigationElement ;
     display:menuPosition 3;
+    display:linkText "Organizations";
+    display:toPage display:Organizations .
+
+display:ResearchMenuItem     
+    a display:NavigationElement ;
+    display:menuPosition 4;
     display:linkText "Research";
     display:toPage display:Research .
 
 display:EventsMenuItem 
     a display:NavigationElement ;
-    display:menuPosition 4;
+    display:menuPosition 5;
     display:linkText "Events";
     display:toPage display:Events .
-
-display:OrganizationsMenuItem 
-    a display:NavigationElement ;
-    display:menuPosition 5;
-    display:linkText "Organizations";
-    display:toPage display:Organizations .    
 
 ########## Pages ############
 
