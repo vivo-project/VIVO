@@ -55,8 +55,7 @@ display:OrganizationsMenuItem
 display:Home 
     a display:HomePage ;    
     a display:Page ;
-    display:title "Home" ;
-    display:urlMapping "/" ;
+    display:title "Home" ;    
     display:urlMapping "/home" .
 
 display:Events 
