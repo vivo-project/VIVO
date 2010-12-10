@@ -263,7 +263,7 @@ ul#main-nav {
 #login-form label {
     display: block;
     color: #5e6363;
-    padding-top: 20px;
+    padding-top: 0;
     padding-left: 38px;
     font-size: 14px;
 }
@@ -480,7 +480,6 @@ ul#classgroup-list li:last-child {
 ul#classgroup-list a {
     display: block;
     padding-left: 15px;
-    width: 200px;
     height: 35px;
     color: #5e6363;
     text-decoration: none;

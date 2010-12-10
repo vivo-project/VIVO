@@ -1,14 +1,15 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-
-input{
+input[type="text"], 
+input[type="password"]{
     border: 0;
     font-size: 14px;
-    padding: 10px;
+    padding: .5em;
     background: #fff;
     border: 1px solid #e0dfdf;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    margin-bottom: 1em;
 }
 label{
     margin-top: .5em;
@@ -16,8 +17,6 @@ label{
 }
 input#submit, 
 input#submit:visited, 
-.form-button, 
-.form-button:visited, 
 .add-action-button, 
 .add-action-button:visited, 
 #verbosePropertyForm input,
@@ -33,17 +32,18 @@ input.yellowbutton:visited{
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     position: relative;
-    cursor: pointer;
     border: 0;
     margin: 0;
-    margin-top: 1.2em;
     background-color: #749a02;
     color: #fff;
     font-size: 14px;
     font-weight: normal;
     line-height: 1;
-    margin-right: .6rm;
+    margin-right: .6em;
+    margin-top: 1em;
 }
+input#delete,
+input#delete:visited,
 input.plainbutton,
 input.plainbutton:visited{
     background: #222 url(../images/alert-overlay.png) repeat-x;
@@ -58,28 +58,27 @@ input.plainbutton:visited{
     cursor: pointer;
     border: 0;
     margin: 0;
-    margin-top: 1.2em;
     background-color: #398aac;
     color: #fff;
     font-size: 14px;
     font-weight: normal;
     line-height: 1;
-    margin-right: .6rm;
+    margin-right: .6em;
 }
-input#submit:hover, 
-.form-button:hover, 
+input#submit:hover,
 .add-action-button:hover, 
 #verbosePropertyForm input:hover,
 input.yellowbutton:hover{
     color: #fff;
     background-color: #b2d15a;
 }
+input#delete:hover,
 input.plainbutton:hover {
     color: #fff;
     background-color: #93c3d4;
 }
-input#submit:active, 
-.form-button:active, 
+input#delete:active,
+input#submit:active,
 .add-action-button:active, 
 #verbosePropertyForm input:active,
 input.yellowbutton:active,
@@ -105,9 +104,11 @@ form a:hover.cancel, form a:active.cancel {
 .validationError {
     font-weight: normal;
     color: #cc0000;
+    margin-bottom: .3em;
 }
 p.submit {
-  margin-top: .7em;
+  margin-top: 0;
+  padding-top: 0;
 }
 .editingForm table {
     border-color: #dfe6e6;
@@ -122,15 +123,10 @@ p.submit {
 .editingForm .entryFormHead h2{
     color: #5F6464;
 }
-.editingForm .form-button {
-    background-color: #749a02;
-    color: #fff;
-    font-size: 1em;
-}
 .form-item {
     margin-top:.3em;
     background-color: #fff;
-    border-color: #595B5B;
+    border-color: #e0dfdf;
     font-size: .8em;
     border-width: 1px;
     color: #595B5B;
@@ -212,4 +208,36 @@ p.submit {
 }
 .form-background {
     background-color: #fff;
+}
+.formsEdit p{
+    padding-top: 1em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 1em;
+}
+form.deleteForm{
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px dotted #e3e9e9;
+}
+form h3.delete-entry{
+    padding-right: .8em;
+    display: inline;
+}
+form h2{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+form select{
+   border: 0;
+   font-size: 14px;
+   padding: .5em;
+   background: #fff;
+   border: 1px solid #e0dfdf;
+   border-radius: 5px;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   margin-bottom: 0;
+   margin-top: .7em;
+   margin-right: .5em;
 }
