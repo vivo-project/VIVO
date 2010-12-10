@@ -61,15 +61,14 @@
                 <section id="browse-classes" role="navigation">
                     <nav>
                         <ul id="classgroup-list" role="list">
-                            <li role="listitem"><a href="#">Faculty Member<span class="count-individuals"> (18,080)</span></a></li>
-                            <li role="listitem"><a class="selected"  href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
-                            <li role="listitem"><a href="#">Librarian <span class="count-individuals"> (1,280)</span></a></li>
-                            <li role="listitem"><a href="#">Non-Academic <span class="count-individuals"> (280)</span></a></li>
+                            <li role="listitem"><a href="#">Faculty Member<span class="count-individuals"> (4,611)</span></a></li>
+                            <li role="listitem"><a href="#">Graduate Student<span class="count-individuals"> (2,550)</span></a></li>
+                            <li role="listitem"><a href="#">Librarian <span class="count-individuals"> (425)</span></a></li>
+                            <li role="listitem"><a href="#">Non-Academic <span class="count-individuals"> (580)</span></a></li>
                             <li role="listitem"><a href="#">Non-Faculty Academic <span class="count-individuals"> (2,380)</span></a></li>
-                            <li role="listitem"><a href="#">Person<span class="count-individuals"> (2,480)</span></a></li>
-                            <li role="listitem"><a href="#">Postdoc <span class="count-individuals"> (1,380)</span></a></li>
-                            <li role="listitem"><a href="#">Professor Emeritus<span class="count-individuals"> (680)</span></a></li>
-                            <li role="listitem"><a href="#">Undergraduate Student<span class="count-individuals"> (880)</span></a></li>
+                            <li role="listitem"><a href="#">Postdoc <span class="count-individuals"> (923)</span></a></li>
+                            <li role="listitem"><a href="#">Professor Emeritus<span class="count-individuals"> (430)</span></a></li>
+                            <li role="listitem"><a class="selected" href="#">Undergraduate Student<span class="count-individuals"> (12,356)</span></a></li>
                         </ul>
                     </nav>
                     
