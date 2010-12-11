@@ -15,10 +15,12 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#pmcid">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#nihmsid">
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/NET/c4dm/event.owl#produced_in">
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
@@ -83,9 +85,9 @@
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/section">
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A section number</vitro:publicDescriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#SeminarSeries">
@@ -201,18 +203,18 @@
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/sici">
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Serial Item and Contribution Identifier (SICI) is a code (ANSI/NISO standard Z39.56) used to uniquely identify specific volumes, articles or other identifiable parts of a periodical.</vitro:publicDescriptionAnnot>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#placeOfPublication">
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
+    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">City in which the publication was done.</vitro:publicDescriptionAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">55</vitro:displayRankAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">City in which the publication was done.</vitro:publicDescriptionAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasCollaborator">
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
@@ -503,7 +505,6 @@
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has part</vitro:fullPropertyNameAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupaffiliation"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#NonFacultyAcademic">
     <vitro:inClassGroup rdf:resource="http://vivoweb.org/ontology#vitroClassGrouppeople"/>
@@ -626,7 +627,7 @@
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Universal Product Code (UPC) is a barcode symbology (i.e., a specific type of barcode), that is widely used in Canada and the United States for tracking trade items in stores.</vitro:publicDescriptionAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">webpage</vitro:fullPropertyNameAnnot>
@@ -673,6 +674,7 @@
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
     <vitro:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:selectFromExistingAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">60</vitro:displayRankAnnot>
   </rdf:Description>
@@ -855,8 +857,8 @@
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/lccn">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Library of Congress Control Number or LCCN is a serially based system of numbering cataloging records in the Library of Congress in the United States.</vitro:publicDescriptionAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Authorship">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
@@ -1311,10 +1313,10 @@
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">translator</vitro:fullPropertyNameAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This relates an information resource to the translator of the written document from one language to another.</vitro:publicDescriptionAnnot>
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
     <vitro:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:selectFromExistingAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#AwardOrHonor">
@@ -1701,10 +1703,10 @@
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/transcriptOf">
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
     <vitro:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:selectFromExistingAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibliographiconline"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transcriptOf</vitro:fullPropertyNameAnnot>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a document to some transcribed original.</vitro:publicDescriptionAnnot>
@@ -1796,18 +1798,19 @@
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/isbn10">
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</vitro:displayRankAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster. The 10-digit ISBN format was developed by the International Organization for Standardization and was published in 1970 as international standard ISO 2108.</vitro:publicDescriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/oclcnum">
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An oclcnum is a sequential accession number assigned by OCLC as bibliographic records are entered into OCLC WorldCat (the OCLC Online Union Catalog).</vitro:publicDescriptionAnnot>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayRankAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/Hearing">
@@ -1840,6 +1843,7 @@
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT">
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
@@ -1859,9 +1863,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/asin">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Amazon Standard Identification Number (ASIN) is a unique identification number assigned by Amazon.com and its partners for product identification within the Amazon.com organization.</vitro:publicDescriptionAnnot>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/suffixName">
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If applicable, please enter the preferred name suffix.  Only one may be entered.</vitro:publicDescriptionAnnot>
@@ -1958,6 +1962,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/isbn13">
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">11</vitro:displayRankAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster.Since 1 January 2007, ISBNs have contained 13 digits, a format that is compatible with Bookland EAN-13s.</vitro:publicDescriptionAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
@@ -2075,7 +2080,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/eanucc13">
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EAN International-Uniform Code Council (EAN-UCC) was a supply chain standards family name, formally the EAN.UCC System, that included product barcodes which are printed on the great majority of products available in stores worldwide and electronic commerce standards.</vitro:publicDescriptionAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
@@ -2133,9 +2138,9 @@
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/volume">
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A volume number.</vitro:publicDescriptionAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">20</vitro:displayRankAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/abstract">
@@ -2238,7 +2243,7 @@
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">30</vitro:displayRankAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A generic item or document number. Not to be confused with issue number. A barcode, perhaps?</vitro:publicDescriptionAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Location">
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
@@ -3647,9 +3652,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#publisher">
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">51</vitro:displayRankAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates published materials to an entity that is engaged in publishing.</vitro:publicDescriptionAnnot>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">publisher</vitro:fullPropertyNameAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
@@ -3775,14 +3780,15 @@
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/numPages">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/editor">
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:selectFromExistingAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication.</vitro:publicDescriptionAnnot>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">20</vitro:displayRankAnnot>
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">editor</vitro:fullPropertyNameAnnot>
@@ -4015,9 +4021,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/gtin14">
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">80</vitro:displayRankAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Global Trade Item Number (GTIN) is an identifier for trade items developed by GS1 (comprising the former EAN International and Uniform Code Council). GTIN is an "umbrella" term used to describe the entire family of GS1 data structures for trade items (products and services) identification. GTINs may be 8, 12, 13 or 14 digits long.</vitro:publicDescriptionAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
@@ -4033,10 +4039,10 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/status">
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</vitro:displayLimitAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupoverview"/>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">250</vitro:displayRankAnnot>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupbibobscure"/>
     <vitro:selectFromExistingAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:selectFromExistingAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Catalog">
