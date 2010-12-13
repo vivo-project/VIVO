@@ -1,0 +1,197 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+@CHARSET "UTF-8";
+
+head,#body {
+	font: 0.9em Helvetica;
+}
+
+#body {
+	background-color: #fff;
+	min-height: 800px;
+	width: 100%;
+	min-width: 900px;
+	margin: auto;
+}
+
+h1 {
+	padding-top: 10px;
+	font-size: 1.5em;
+	margin-left: 5%;
+}
+
+h2 {
+	font-size: 1.1em;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+h3 {
+	font-size: 1.01em;
+}
+
+button{
+	margin-top: 10px;
+	float:right;
+}
+
+form{
+	margin-top:70px;
+	margin-bottom: -50px;	
+}
+#yaxislabel{
+	font-size: 12px;
+	float:right;
+	background-color: white;
+	color:black;
+	display: block;
+	height: 150px;
+	text-align: center;
+	padding-top: 50px;
+}
+
+#xaxislabel{
+	font-size: 12px;
+	margin-top: -5px;
+	text-align: center;
+}
+
+#functions{
+	margin-top: 20px;
+	margin-bottom: -40px;	
+}
+#bar {
+	height: 20px;
+	float: left;
+	background-color: #fff;
+	width: 250px;
+	margin-left: 10px;
+}
+#checkbox{
+	float:left;	
+}
+#label {
+	float: left;
+	font-size: 12px;
+	width: 160px;
+	text-align: right;
+}
+
+#searchresult {
+	margin-top: 50px;
+}
+
+#bottom,#graphContainer {
+	float: right;
+}
+
+#graphContainer {
+	margin-bottom: 15px;
+}
+
+#leftblock {
+	float: left;
+	margin-left: 5%;
+	width: 36%;
+}
+
+#text {
+	margin-left: 5px;
+}
+#searchresult a {
+	text-decoration: none;
+	color: black;
+	font-family: Helvetica;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+#label a,#text {
+	text-decoration: none;
+	color: black;
+	font-family: Helvetica;
+	font-size: 1em;
+}
+
+#rightblock {
+	float:right;
+	margin-right:5%;
+	width:54%;
+}
+
+#counter,#total {
+	color: red;
+}
+
+#heading {
+	margin-top: 10px;
+}
+
+li{
+	padding: 5px;
+	list-style: none;
+}
+
+#paginatedTable{
+	margin-top: 10px;
+}
+
+.sDomSearchBar{
+	margin-bottom: 10px;
+	margin-left: 41%;
+}
+
+.datatablerowhighlight {
+	background-color: #ECFFB3 !important;
+}
+
+.metallic{
+	background-color: #212D34;
+	color: white;
+	margin-left: 20px;
+}
+
+#leftUpper{
+	border: 1px #3D454E solid;
+	border-top: 10px #3D454E solid;
+	background-color: #D9D9D9;
+}
+
+#leftLower{
+	border: 1px #3D454E solid;
+	border-top: 10px #3D454E solid;
+}
+
+#navcontainer{
+	background: none repeat scroll 0 0 #3D454E;
+	height: 1%;
+	padding: 8px 22em 8px 20px;
+	position: relative;
+}
+
+#navlist li
+{
+	display: inline;
+	list-style-type: none;
+	padding: 20px;
+	
+}
+
+#navlist li a{
+	color: white;
+	text-decoration: none;
+}
+		
+#bottomButtons{
+	width: 50%;
+	float:right;
+	margin-right: 5%;
+}
+
+#stopwordsdiv{
+	margin-top: 10px;
+}
+
+p.displayCounter{
+	padding-bottom: 4px;
+	border-bottom: 1px solid gray;
+}

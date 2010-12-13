@@ -1,0 +1,46 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+.spacer{
+	font-size:0; line-height:0; clear:both;}
+
+
+/* ----------------- body start --------------------------- */
+#body{
+	max-width:900px;
+	min-width:800px; 
+	margin:0 auto; 
+	position:relative;
+	background: white;
+}
+#bodyPannel{
+	background: #FFFFFF;	
+/*	width:765px;
+	float:left;*/
+	/*padding-top: 0;
+	padding-right: 28px;
+	padding-bottom: 0;*/
+	padding-left: 16px;
+	height: 840px;
+}
+#dataPanel div {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000;
+}
+#dataPanel .italicize {
+	font-style: italic;
+}
+#dataPanel .bold {
+	font-weight: bold;
+	color:#13968c;
+	font-size: 14px;
+}
+#dataPanel .author_stats .numbers {
+	text-align: right;
+	width: 40px;
+	float:left;
+}
+
+/* container override from liquid.css */
+.container {
+ width: inherit; 
+}
