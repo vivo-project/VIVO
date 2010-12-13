@@ -26,5 +26,6 @@ var visualization = {
 };
 
 $(document).ready(function() {
+	visualizationUrl = visualizationUrl.replace("/visualization", "/visualizationfm");
     visualization.render(visualizationUrl);
 });

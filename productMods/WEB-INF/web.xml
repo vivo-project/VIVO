@@ -1251,7 +1251,7 @@
   
   <servlet>
     <servlet-name>DummyVisClient</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.DummyVisClientController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DummyVisClientController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -1270,6 +1270,17 @@
     <servlet-name>VisualizationController</servlet-name>
     <url-pattern>/visualization</url-pattern>
   </servlet-mapping>
+
+   <servlet>
+    <servlet-name>VisualizationControllerFM</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>VisualizationControllerFM</servlet-name>
+    <url-pattern>/visualizationfm</url-pattern>
+  </servlet-mapping>
+
 
   <servlet>
     <servlet-name>authtest</servlet-name>

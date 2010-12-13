@@ -11,6 +11,14 @@ public class VisualizationFrameworkConstants {
 	 */
 	public static final String RELATIVE_LOCATION_OF_VISUALIZATIONS_BEAN = 
 		"/WEB-INF/visualization/visualizations-beans-injection.xml";
+	
+	/*
+	 * Freemarker Version
+	 * */
+	public static final String RELATIVE_LOCATION_OF_FM_VISUALIZATIONS_BEAN = 
+		"/WEB-INF/visualization/visualizations-beans-injection-fm.xml";
+	
+	public static final String ERROR_TEMPLATE = "/visualization/visualizationError.ftl";
 
 	/*
 	 * Vis URL prefix that is seen by all the users
