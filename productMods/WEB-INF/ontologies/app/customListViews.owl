@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY display "http://vitro.mannlib.cornell.edu/ontologies/display/1.1#">
+<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY vitro "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#">
+]>
+
+<rdf:RDF xml:base="http://vitro.mannlib.cornell.edu/ontologies/display/1.1/"
+    xmlns:display="&display;"
+    xmlns:owl="&owl;"
+    xmlns:rdf="&rdf;"
+    xmlns:rdfs="&rdfs;"
+    xmlns:vitro="&vitro;">
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#educationalTraining">
+        <vitro:propertyListDisplayConfiguration rdf:datatype="http://www.w3.org/2001/XMLSchema#string">objectPropertyList-educationalTraining.xml</vitro:propertyListDisplayConfiguration>
+    </rdf:Description>
+</rdf:RDF>
+
