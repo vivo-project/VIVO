@@ -142,8 +142,6 @@ public class PersonPublicationCountRequestHandler implements VisualizationReques
 									   		  sparklineData, 
 									   		  yearToPublicationCount);
 				
-//		    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
-
 			} else {
 		    	return prepareStandaloneResponse(vitroRequest, 
 		    							  sparklineData);

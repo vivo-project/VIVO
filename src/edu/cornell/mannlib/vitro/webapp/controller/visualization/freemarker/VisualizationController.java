@@ -60,14 +60,11 @@ public class VisualizationController extends FreemarkerHttpServlet {
     
 	    if (StringUtils.equalsIgnoreCase(renderMode, VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE)) {
 	    	
-	    	System.out.println("inside doing ajax request that is dynamic response");
-	    	
 	    	Configuration config = getConfig(vreq);
 	    	TemplateResponseValues trv = (TemplateResponseValues) processRequest(vreq);
 	    	writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
 	    	
 	    } else {
-	    	System.out.println("inside doing super.doGet that is normal response");
 	    	super.doGet(request, response);
 	    }
     
