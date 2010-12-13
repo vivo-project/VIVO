@@ -14,9 +14,15 @@
     <#include "headScripts.ftl">
     
     <!--[if lt IE 7]>
-    <link rel="stylesheet" href="css/ie6.css" />
+    <link rel="stylesheet" href="${urls.theme}/css/ie6.css" />
+    <script type="text/javascript" src="${urls.base}/js/jquery_plugins/supersleight.js"></script>
+    <script type="text/javascript" src="${urls.theme}/js/utils.js"></script>
     <![endif]-->
 
     <!--[if IE 7]>
-    <link rel="stylesheet" href="css/ie7.css" />
+    <link rel="stylesheet" href="${urls.theme}/css/ie7.css" />
+    <![endif]-->
+    
+    <!--[if (gte IE 6)&(lte IE 8)]>
+    <script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
     <![endif]-->

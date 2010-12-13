@@ -27,13 +27,4 @@
     </nav>
 </footer>
 
-<!--[if lt IE 7]>
-<script type="text/javascript" src="${urls.base}/js/jquery_plugins/supersleight.js"></script>
-<script type="text/javascript" src="${urls.base}/js/utils.js"></script>
-<![endif]-->
-
-<!--[if (gte IE 6)&(lte IE 8)]>
-<script type="text/javascript" src="${urls.base}/js/selectivizr.js"></script>
-<![endif]-->
-
 <#include "scripts.ftl">
