@@ -293,9 +293,6 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
     <rdfs:label xml:lang="en-US">webpage</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#displayOrder">
-    <rdfs:label xml:lang="en-US">display order</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#FacultyMember">
     <rdfs:label xml:lang="en-US">Faculty Member</rdfs:label>
   </rdf:Description>
