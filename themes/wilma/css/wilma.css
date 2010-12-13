@@ -36,6 +36,15 @@ h2{
     font-size: 22px;
     color: #2485ae; 
 }
+h2 a{
+    color: #2485ae; 
+}
+h2 a:link, h2 a:visited{
+    text-decoration: underline; 
+}
+h2 a:hover, h2 a:active{
+    text-decoration: none; 
+}
 h3{
     padding: 10px 0 12px 0;
     margin: 0;
@@ -777,4 +786,9 @@ p{
 }
 a {
     text-decoration: underline
+}
+/* INDIVIDUAL------>  */
+.individualList ul.individualData li {
+    padding-bottom: 0;
+}
 }

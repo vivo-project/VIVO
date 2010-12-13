@@ -16,13 +16,7 @@ label{
     margin-bottom: .5em;
 }
 input#submit, 
-input#submit:visited, 
-.add-action-button, 
-.add-action-button:visited, 
-#verbosePropertyForm input,
-#verbosePropertyForm input:visited,
-input.yellowbutton,
-input.yellowbutton:visited{
+input#submit:visited{
     background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
     padding: 5px 18px 7px;
@@ -43,9 +37,7 @@ input.yellowbutton:visited{
     margin-top: 1em;
 }
 input#delete,
-input#delete:visited,
-input.plainbutton,
-input.plainbutton:visited{
+input#delete:visited{
     background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
     padding: 5px 18px 7px;
@@ -65,24 +57,16 @@ input.plainbutton:visited{
     line-height: 1;
     margin-right: .6em;
 }
-input#submit:hover,
-.add-action-button:hover, 
-#verbosePropertyForm input:hover,
-input.yellowbutton:hover{
+input#submit:hover{
     color: #fff;
     background-color: #b2d15a;
 }
-input#delete:hover,
-input.plainbutton:hover {
+input#delete:hover{
     color: #fff;
     background-color: #93c3d4;
 }
 input#delete:active,
-input#submit:active,
-.add-action-button:active, 
-#verbosePropertyForm input:active,
-input.yellowbutton:active,
-input.plainbutton{
+input#submit:active{
     top: 1px;
 }
 form textarea {
@@ -240,4 +224,8 @@ form select{
    margin-bottom: 0;
    margin-top: .7em;
    margin-right: .5em;
+}
+.notice{ 
+    margin-top: 1em; 
+    border: 1px dotted #FFD324;
 }
