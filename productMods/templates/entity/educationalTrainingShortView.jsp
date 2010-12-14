@@ -44,7 +44,7 @@
                 </c:choose>
 
                 <%-- Organization granting degree --%>
-                <c:set var="selectedOrganization" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#organizationGrantingDegree'].objectPropertyStatements[0].object}"/>              
+                <c:set var="selectedOrganization" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#trainingAtOrganization'].objectPropertyStatements[0].object}"/>              
                 <c:if test="${ ! empty selectedOrganization }">                        
                     <c:url var="selectedOrganizationURL" value="/individual">
                         <c:param name="uri" value="${selectedOrganization.URI}"/>
