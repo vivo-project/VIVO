@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<view-config>
+    <query>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        
+        SELECT DISTINCT ?edTraining ?organization ?degree ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime WHERE {
+            ?subject ?property ?edTraining .
+            ?edTraining core:trainingAtOrganization ?organization .
+            OPTIONAL { ?edTraining core:degreeEarned ?degree . }
+            OPTIONAL { ?degree rdfs:label ?degreeName . }
+            OPTIONAL { ?degree core:abbreviation ?degreeAbbr . }
+            OPTIONAL { ?degree core:majorField ?majorField . }
+            OPTIONAL { ?degree core:departmentOrSchool ?deptOrSchool . }
+            OPTIONAL { ?degree core:supplementalInformation ?info . }
+            OPTIONAL { ?edTraining core:dateTimeInterval ?interval . }
+            OPTIONAL { ?interval core:hasDateTimeValue ?dateTime . }          
+        }  ORDER BY DESC(?dateTime)    
+    </query>
+    
+    <template>objectPropertyList-educationalTraining.ftl</template>
+</view-config>
