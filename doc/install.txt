@@ -33,7 +33,8 @@ are slightly different. Please consult developers.txt in this directory.
     * IX. Set the Contact Email Address (if using "Contact Us" form)
     * X. Setup Apache Tomcat Connector
     * XI. Configure Pellet Reasoner
-    * XII. Was the installation successful?
+    * XII. Using an External Authentication System with VIVO
+    * XIII. Was the installation successful?
 
 -------------------------------------------------------------------------------
  
@@ -155,6 +156,17 @@ example value:  password
                 You will be prompted to create a new password on first login.
 property name:  initialAdminUser 	
 example value:  defaultAdmin
+
+                The name of a property that can be used to associate an Individual
+                with a user account. When a user logs in with a name that matches
+                the value of this property, the user will be authorized to edit
+                that Individual.
+property name:  selfEditing.idMatchingProperty 	
+example value:  http://vivo.mydomain.edu/ns#networkId
+
+NOTE: If you want to use an external authentication system like Shibboleth or
+CUWebAuth, you will need to set two additional properties in this file. See 
+the section below entitled "Using an External Authentication System with VIVO".
 
 -------------------------------------------------------------------------------
  
@@ -334,7 +346,83 @@ property entailments are not needed.
 
 -------------------------------------------------------------------------------
 
-XII. Was the installation successful?
+XII. Using an External Authentication System with VIVO
+
+VIVO can be configured to work with an external authentication system like 
+Shibboleth or CUWebAuth.
+
+VIVO must be accessible only through an Apache HTTP server. The Apache server 
+will be configured to invoke the external authentication system. When the user 
+completes the authentication, the Apache server will pass a network ID to VIVO, 
+to identify the user.
+
+If VIVO has an account for that user, the user will be logged in with the 
+privileges of that account. In the absence of an account, VIVO will try to find 
+a page associated with the user. If such a page is found, the user can log in 
+to edit his own profile information.
+
+---- Configuring the Apache server:
+
+Your institution will provide you with instructions for setting up the external 
+authentication system. The Apache server must be configured to secure a page in 
+VIVO. When a user reaches this secured page, the Apache server will invoke the 
+external authentication system.
+
+For VIVO, this secured page is named:
+    /loginExternalAuthReturn 
+When your instructions call for the location of the secured page, this is the 
+value you should use.
+
+---- Configuring VIVO:
+
+To enable external authentication, VIVO requires three values in the 
+deploy.properties file.
+
+* The name of the HTTP header that will hold the external user’s network ID
+
+    When a user completes the authentication process, the Apache server will 
+    put the user’s network ID into one of the headers of the HTTP request. 
+    The instructions from your institution should tell you which header is 
+    used for this purpose. 
+
+    You need to tell VIVO the name of that HTTP header. Insert a line like 
+    this in the deploy.properties file:
+          externalAuth.netIdHeaderName = [the header name]
+    For example:
+          externalAuth.netIdHeaderName = remote_userID 
+
+* The text for the Login button
+
+    To start the authentication process, the user will click on a button in 
+    the VIVO login form. You need to tell VIVO what text should appear in that 
+    button.
+
+    Put a line like this in the deploy.properties file:
+          externalAuth.buttonText = [the text for your login button]
+    For example:
+          externalAuth.buttonText = Log in using BearCat Shibboleth
+          
+    The VIVO login form will display a button labelled “Log in using BearCat 
+    Shibboleth”.
+    
+* Associating a User with a profile page
+
+    If VIVO has an account for the user, the user will be given the privileges 
+    assigned to that account.
+     
+    In addition, VIVO will try to associate the user with a profile page, so 
+    the user may edit his own profile data. VIVO will search the data model 
+    for a person with a property that matches the User’s network ID.
+    
+    You need to tell VIVO what property should be used for matching. Insert 
+    a line like this in the deploy.properties file:
+          selfEditing.idMatchingProperty = [the URI of the property]
+    For example:
+          selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId
+
+-------------------------------------------------------------------------------
+
+XIII. Was the installation successful?
 
 If you have completed the previous steps, you have good indications that the 
 installation was successful. 
