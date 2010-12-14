@@ -311,7 +311,7 @@ PREFIX core: <${vivoCore}>
 
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
-<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+<c:url var="sparqlQueryUrl" value="/ajax/sparqlQuery" />
 
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">

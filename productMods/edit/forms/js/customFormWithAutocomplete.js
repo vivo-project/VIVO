@@ -282,14 +282,12 @@ var customForm = {
         this.acFilter = [];
         $.ajax({
             url: customForm.sparqlQueryUrl,
+            dataType: "json",
             data: {
-                resultFormat: 'RS_JSON',
                 query: customForm.sparqlForAcFilter
             },
             success: function(data, status, xhr) {
-                // Not sure why, but we need an explicit json parse here. jQuery
-                // should parse the response text and return a json object.
-                customForm.setAcFilter($.parseJSON(data));
+                customForm.setAcFilter(data);
             }
         });
     },
