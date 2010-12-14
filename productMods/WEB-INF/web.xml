@@ -351,6 +351,16 @@
     <url-pattern>/N3EditForm</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>MenuN3EditController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuN3EditController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuN3EditController</servlet-name>
+    <url-pattern>/MenuN3EditController</url-pattern>
+  </servlet-mapping>
+
+
 <!-- This is the new navigation controller.  It is not ready for the 1.1 release
      see http://issues.library.cornell.edu/browse/NIHVIVO-597  
   <servlet>
