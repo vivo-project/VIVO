@@ -172,7 +172,11 @@
       org.apache.commons.fileupload.servlet.FileCleanerCleanup
     </listener-class>
   </listener>
-  
+
+ <listener>
+    <listener-class>edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache</listener-class>
+ </listener>  
+ 
   <!--
     <listener>
         <listener-class>
@@ -189,7 +193,7 @@
     </listener>
 -->
 
-  <!--  vivo specific -->
+  <!--  vivo specific -->  
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.VivoMergedListFilteringSetup</listener-class>
   </listener>  
