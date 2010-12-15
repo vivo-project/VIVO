@@ -172,11 +172,7 @@
       org.apache.commons.fileupload.servlet.FileCleanerCleanup
     </listener-class>
   </listener>
-
- <listener>
-    <listener-class>edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache</listener-class>
- </listener>  
- 
+  
   <!--
     <listener>
         <listener-class>
@@ -193,7 +189,7 @@
     </listener>
 -->
 
-  <!--  vivo specific -->  
+  <!--  vivo specific -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.VivoMergedListFilteringSetup</listener-class>
   </listener>  
@@ -351,16 +347,6 @@
     <url-pattern>/N3EditForm</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>MenuN3EditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuN3EditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MenuN3EditController</servlet-name>
-    <url-pattern>/MenuN3EditController</url-pattern>
-  </servlet-mapping>
-
-
 <!-- This is the new navigation controller.  It is not ready for the 1.1 release
      see http://issues.library.cornell.edu/browse/NIHVIVO-597  
   <servlet>
@@ -509,7 +495,6 @@
     <url-pattern>/csv2rdf</url-pattern>
   </servlet-mapping>
   
-
   <servlet>
     <servlet-name>JenaExportController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.jena.JenaExportController</servlet-class>
@@ -1264,16 +1249,24 @@
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>DummyVisClient</servlet-name>
+    <servlet-name>DummyVisClientFM</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DummyVisClientController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DummyVisClientFM</servlet-name>
+    <url-pattern>/admin/dummyVisClientfm</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DummyVisClient</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.DummyVisClientController</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>DummyVisClient</servlet-name>
     <url-pattern>/admin/dummyVisClient</url-pattern>
   </servlet-mapping>
-
-
    
    <servlet>
     <servlet-name>VisualizationController</servlet-name>
@@ -1334,15 +1327,6 @@
   </servlet-mapping>
   -->
     
-  <servlet>
-    <servlet-name>ajaxSparqlQuery</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ajax.SparqlQueryAjaxController</servlet-class>    
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ajaxSparqlQuery</servlet-name>
-    <url-pattern>/ajax/sparqlQuery</url-pattern>    
-  </servlet-mapping>
-   
   <!-- ============================== servlet-mappings ======================== -->
   <servlet-mapping>
     <servlet-name>fetch</servlet-name>

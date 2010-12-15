@@ -28,10 +28,16 @@ import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipG
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountQueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountVisCodeGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountQueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPIData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
@@ -53,6 +59,10 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
     private static final String EGO_PUB_SPARKLINE_VIS_CONTAINER_ID = "ego_pub_sparkline";
     private static final String UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID = 
     									"unique_coauthors_sparkline";
+    private static final String EGO_GRANT_SPARKLINE_VIS_CONTAINER_ID = "ego_grant_sparkline";
+    private static final String UNIQUE_COPIS_SPARKLINE_VIS_CONTAINER_ID = 
+    									"unique_copis_sparkline";
+    
     
 	public void generateVisualization(VitroRequest vitroRequest,
 			   HttpServletRequest request, 
@@ -75,10 +85,18 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         QueryRunner<Set<BiboDocument>> publicationQueryManager =
 	        	new PersonPublicationCountQueryRunner(egoURI, dataSource, log);
         
+		QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
+        
+        
+        QueryRunner<Set<Grant>> grantQueryManager =
+        	new PersonGrantCountQueryRunner(egoURI, dataSource, log);
+        
 		try {
 			
 			CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
-
+			
+			CoPIData coPIData = coPIQueryManager.getQueryResult();
+			
 			if (VisualizationFrameworkConstants.DATA_RENDER_MODE
 	    				.equalsIgnoreCase(renderMode)) { 
 			
@@ -154,18 +172,63 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    	SparklineData uniqueCoauthorsSparklineVO = uniqueCoauthorsVisCodeGenerator
 	    															.getValueObjectContainer();
 			
+	    	/*
+	    	 * grants over time sparkline
+	    	 */
 			
+			Set<Grant> piGrants = grantQueryManager.getQueryResult();
+			
+	    	/*
+	    	 * Create a map from the year to number of grants. Use the Grant's
+	    	 * parsedGrantYear to populate the data.
+	    	 * */
+	    	Map<String, Integer> yearToGrantCount = 
+	    			UtilityFunctions.getYearToGrantCount(piGrants);	    	
+	    	
+	    	PersonGrantCountVisCodeGenerator personGrantCountVisCodeGenerator = 
+	    		new PersonGrantCountVisCodeGenerator(
+	    			vitroRequest.getRequestURI(),
+	    			egoURI,
+	    			VisualizationFrameworkConstants.FULL_SPARKLINE_VIS_MODE,
+	    			EGO_PUB_SPARKLINE_VIS_CONTAINER_ID,
+	    			piGrants,
+	    			yearToGrantCount,
+	    			log);
+	    	
+	    	SparklineData grantSparklineVO = personGrantCountVisCodeGenerator
+			.getValueObjectContainer();
+	    	
+	    	
+	    	/*
+	    	 * Co-PI's over time sparkline
+	    	 */
+	    	CoPIVisCodeGenerator uniqueCopisVisCodeGenerator = 
+	    		new CoPIVisCodeGenerator(
+	    			vitroRequest.getRequestURI(),
+	    			egoURI,
+	    			VisualizationFrameworkConstants.FULL_SPARKLINE_VIS_MODE,
+	    			UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID,
+	    			UtilityFunctions.getGrantYearToCoPI(coPIData),
+	    			log);
+	    	
+	    	SparklineData uniqueCopisSparklineVO = uniqueCopisVisCodeGenerator
+			.getValueObjectContainer();	    	
+	    	
+	    	
 			RequestDispatcher requestDispatcher = null;
 
 			prepareStandaloneResponse(
 					egoURI, 
 	    			publicationSparklineVO,
 	    			uniqueCoauthorsSparklineVO,
+	    			grantSparklineVO,
+	    			uniqueCopisSparklineVO,
 	    			coAuthorshipData,
+	    			coPIData,
 	    			EGO_PUB_SPARKLINE_VIS_CONTAINER_ID,
 	    			UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID,
 	    			vitroRequest,
-	    			request);
+	    			request, visMode);
 
 			requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
 
@@ -319,21 +382,25 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	 * @param egoURI
 	 * @param egoPubSparklineVO
 	 * @param uniqueCoauthorsSparklineVO
+	 * @param uniqueCopisSparklineVO 
+	 * @param grantSparklineVO 
 	 * @param coAuthorshipVO
+	 * @param coPIVO 
 	 * @param egoPubSparklineVisContainer
 	 * @param uniqueCoauthorsSparklineVisContainer
 	 * @param vitroRequest
 	 * @param request
+	 * @param visMode 
 	 */
 	private void prepareStandaloneResponse (
 					String egoURI, 
 					SparklineData egoPubSparklineVO, 
 					SparklineData uniqueCoauthorsSparklineVO, 
-					CoAuthorshipData coAuthorshipVO, 
-					String egoPubSparklineVisContainer, 
+					SparklineData egoGrantSparklineVO, SparklineData uniqueCopisSparklineVO, CoAuthorshipData coAuthorshipVO, 
+					CoPIData coPIVO, String egoPubSparklineVisContainer, 
 					String uniqueCoauthorsSparklineVisContainer, 
 					VitroRequest vitroRequest, 
-					HttpServletRequest request) {
+					HttpServletRequest request, String visMode) {
 		
 		String completeURL = "";
         Portal portal = vitroRequest.getPortal();
@@ -350,16 +417,28 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			request.setAttribute("numOfCoAuthorShips", coAuthorshipVO.getEdges().size());
 		}
 		
-        
+        if (coPIVO.getNodes() != null && coPIVO.getNodes().size() > 0) {
+        	request.setAttribute("numOfInvestigators", coPIVO.getNodes().size());
+        	//title = coPIVO.getEgoNode().getNodeName() + " - ";
+		}
+		
+		if (coPIVO.getEdges() != null && coPIVO.getEdges().size() > 0) {
+			request.setAttribute("numOfCoPIs", coPIVO.getEdges().size());
+		}
+		
+		
 		try {
 			completeURL = getCompleteURL(request);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("visMode", visMode);
         request.setAttribute("completeURL", completeURL);
 		request.setAttribute("egoPubSparklineVO", egoPubSparklineVO);
+		request.setAttribute("egoGrantSparklineVO", egoGrantSparklineVO);
         request.setAttribute("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
+        request.setAttribute("uniqueCopisSparklineVO", uniqueCopisSparklineVO);
         
         request.setAttribute("egoPubSparklineContainerID", egoPubSparklineVisContainer);
         request.setAttribute("uniqueCoauthorsSparklineVisContainerID", 

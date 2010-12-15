@@ -80,27 +80,27 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         QueryRunner<Set<Grant>> queryManager =
         	new PersonGrantCountQueryRunner(personURI, dataSource, log);
 
-//		try {
-//			Set<Grant> authorDocuments = queryManager.getQueryResult();
+		try {
+			Set<Grant> PIGrants = queryManager.getQueryResult();
 
 	    	/*
-	    	 * Create a map from the year to number of publications. Use the BiboDocument's
+	    	 * Create a map from the year to number of grants. Use the Grant's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
-//	    	Map<String, Integer> yearToPublicationCount = 
-//	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
-//	    	
-//	    	Individual author = ((PersonGrantCountQueryRunner) queryManager).getAuthor();
-//
-//	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE
-//	    				.equalsIgnoreCase(renderMode)) {
-//	    		
-//				prepareDataResponse(author,
-//													  authorDocuments,
-//													  yearToPublicationCount,
-//													  response);
-//				return;
-//			}
+	    	Map<String, Integer> yearToGrantCount = 
+	    			UtilityFunctions.getYearToGrantCount(PIGrants);
+	    	
+	    	Individual investigator = ((PersonGrantCountQueryRunner) queryManager).getPrincipalInvestigator();
+
+	    	if (VisualizationFrameworkConstants.DATA_RENDER_MODE
+	    				.equalsIgnoreCase(renderMode)) {
+	    		
+				prepareDataResponse(investigator,
+													  PIGrants,
+													  yearToGrantCount,
+													  response);
+				return;
+			}
 	    	
 	    	
 	    	/*
@@ -121,77 +121,77 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	    	/*
 	    	 * Computations required to generate HTML for the sparkline & related context.
 	    	 * */
-//	    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator = 
-//	    		new PersonGrantCountVisCodeGenerator(vitroRequest.getContextPath(),
-//	    									   personURI,
-//	    									   visMode,
-//	    									   visContainer,
-//	    									   authorDocuments,
-//	    									   yearToPublicationCount, 
-//	    									   log);
-//	    	
-//	    	SparklineData sparklineData = visualizationCodeGenerator
-//												.getValueObjectContainer();
-//	    	
-//	    	/*
-//	    	 * This is side-effecting because the response of this method is just to redirect to
-//	    	 * a page with visualization on it.
-//	    	 * */
-//			RequestDispatcher requestDispatcher = null;
-//			
-//			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE
-//						.equalsIgnoreCase(renderMode)) {
-//
-//				prepareDynamicResponse(request, 
-//									   response, 
-//									   vitroRequest, 
-//									   sparklineData, 
-//									   yearToPublicationCount);
-//		    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
-//
-//			} else {
-//		    	prepareStandaloneResponse(request, 
-//		    							  response, 
-//		    							  vitroRequest,
-//		    							  sparklineData);
-//		    	requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
-//			}
-//
-//	    	try {
-//	            requestDispatcher.forward(request, response);
-//	        } catch (Exception e) {
-//	            log.error("EntityEditController could not forward to view.");
-//	            log.error(e.getMessage());
-//	            log.error(e.getStackTrace());
-//	        }
-//
-//		} catch (MalformedQueryParametersException e) {
-//			try {
-//				UtilityFunctions.handleMalformedParameters(
-//						e.getMessage(), 
-//						"Visualization Query Error - Individual Publication Count", 
-//						vitroRequest, 
-//						request, 
-//						response, 
-//						log);
-//			} catch (ServletException e1) {
-//				log.error(e1.getStackTrace());
-//			} catch (IOException e1) {
-//				log.error(e1.getStackTrace());
-//			}
-//			return;
-//		}
+	    	PersonGrantCountVisCodeGenerator visualizationCodeGenerator = 
+	    		new PersonGrantCountVisCodeGenerator(vitroRequest.getContextPath(),
+	    									   personURI,
+	    									   visMode,
+	    									   visContainer,
+	    									   PIGrants,
+	    									   yearToGrantCount, 
+	    									   log);
+	    	
+	    	SparklineData sparklineData = visualizationCodeGenerator
+												.getValueObjectContainer();
+	    	
+	    	/*
+	    	 * This is side-effecting because the response of this method is just to redirect to
+	    	 * a page with visualization on it.
+	    	 * */
+			RequestDispatcher requestDispatcher = null;
+			
+			if (VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE
+						.equalsIgnoreCase(renderMode)) {
+
+				prepareDynamicResponse(request, 
+									   response, 
+									   vitroRequest, 
+									   sparklineData, 
+									   yearToGrantCount);
+		    	requestDispatcher = request.getRequestDispatcher("/templates/page/blankPage.jsp");
+
+			} else {
+		    	prepareStandaloneResponse(request, 
+		    							  response, 
+		    							  vitroRequest,
+		    							  sparklineData);
+		    	requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
+			}
+
+	    	try {
+	            requestDispatcher.forward(request, response);
+	        } catch (Exception e) {
+	            log.error("EntityEditController could not forward to view.");
+	            log.error(e.getMessage());
+	            log.error(e.getStackTrace());
+	        }
+
+		} catch (MalformedQueryParametersException e) {
+			try {
+				UtilityFunctions.handleMalformedParameters(
+						e.getMessage(), 
+						"Visualization Query Error - Individual Publication Count", 
+						vitroRequest, 
+						request, 
+						response, 
+						log);
+			} catch (ServletException e1) {
+				log.error(e1.getStackTrace());
+			} catch (IOException e1) {
+				log.error(e1.getStackTrace());
+			}
+			return;
+		}
 	}
 	
-	private void writePublicationsOverTimeCSV(
-			Map<String, Integer> yearToPublicationCount,
+	private void writeGrantsOverTimeCSV(
+			Map<String, Integer> yearToGrantCount,
 			PrintWriter responseWriter) {
 
 		CSVWriter csvWriter = new SimpleWriter(responseWriter);
 
 		try {
-			csvWriter.append(new String[] { "Year", "Publications" });
-			for (Entry<String, Integer> currentEntry : yearToPublicationCount
+			csvWriter.append(new String[] { "Year", "Grants" });
+			for (Entry<String, Integer> currentEntry : yearToGrantCount
 					.entrySet()) {
 				csvWriter.append(new Object[] { currentEntry.getKey(),
 						currentEntry.getValue() });
@@ -205,38 +205,38 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	}
 	
 	/**
-	 * Provides response when csv file containing the publication count over the years
+	 * Provides response when csv file containing the grant count over the years
 	 * is requested.
-	 * @param author
-	 * @param authorDocuments
-	 * @param yearToPublicationCount
+	 * @param investigator
+	 * @param piGrants
+	 * @param yearToGrantCount
 	 * @param response
 	 */
 	private void prepareDataResponse(
-						Individual author,
-						Set<Grant> authorDocuments,
-						Map<String, Integer> yearToPublicationCount, 
+						Individual investigator,
+						Set<Grant> piGrants,
+						Map<String, Integer> yearToGrantCount, 
 						HttpServletResponse response) {
 
-		String authorName = null; 
+		String investigatorName = null; 
 		
 		/*
-		* To protect against cases where there are no author documents associated with the
+		* To protect against cases where there are no grants associated with the
 		* individual. 
 		* */
-		if (authorDocuments.size() > 0) {
-		authorName = author.getIndividualLabel();
+		if (piGrants.size() > 0) {
+		investigatorName = investigator.getIndividualLabel();
 		}
 		
 		/*
-		* To make sure that null/empty records for author names do not cause any mischief.
+		* To make sure that null/empty records for investigator names do not cause any mischief.
 		* */
-		if (StringUtils.isBlank(authorName)) {
-		authorName = "no-author";
+		if (StringUtils.isBlank(investigatorName)) {
+		investigatorName = "no-investigator";
 		}
 		
-		String outputFileName = UtilityFunctions.slugify(authorName) 
-										+ "_publications-per-year" + ".csv";
+		String outputFileName = UtilityFunctions.slugify(investigatorName) 
+										+ "_grants-per-year" + ".csv";
 		
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=" + outputFileName);
@@ -249,7 +249,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		 * We are side-effecting responseWriter since we are directly manipulating the response 
 		 * object of the servlet.
 		 * */
-		writePublicationsOverTimeCSV(yearToPublicationCount, responseWriter);
+		writeGrantsOverTimeCSV(yearToGrantCount, responseWriter);
 
 		responseWriter.close();		
 		
@@ -273,34 +273,34 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
         request.setAttribute("sparklineVO", valueObjectContainer);
 
-        request.setAttribute("bodyJsp", "/templates/visualization/publication_count.jsp");
+        request.setAttribute("bodyJsp", "/templates/visualization/grant_count.jsp");
         request.setAttribute("portalBean", portal);
-        request.setAttribute("title", "Individual Publication Count visualization");
+        request.setAttribute("title", "Individual Grant Count visualization");
         request.setAttribute("scripts", "/templates/visualization/visualization_scripts.jsp");
 
 	}
 	
 	/**
-	 * Provides response when the publication sparkline has to be rendered in already existing 
+	 * Provides response when the grant sparkline has to be rendered in already existing 
 	 * page, e.g. profile page.
 	 * @param request
 	 * @param response
 	 * @param vreq
 	 * @param valueObjectContainer
-	 * @param yearToPublicationCount
+	 * @param yearToGrantCount
 	 */
 	private void prepareDynamicResponse(
 			HttpServletRequest request,
 			HttpServletResponse response, 
 			VitroRequest vreq, 
 			SparklineData valueObjectContainer, 
-			Map<String, Integer> yearToPublicationCount) {
+			Map<String, Integer> yearToGrantCount) {
 
         Portal portal = vreq.getPortal();
 
         request.setAttribute("sparklineVO", valueObjectContainer);
 
-        if (yearToPublicationCount.size() > 0) {
+        if (yearToGrantCount.size() > 0) {
         	request.setAttribute("shouldVIVOrenderVis", true);
         } else {
         	request.setAttribute("shouldVIVOrenderVis", false);
@@ -310,30 +310,30 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         request.setAttribute("bodyJsp", "/templates/visualization/ajax_vis_content.jsp");
 	}
 	
-	private void preparePDFResponse(Individual author,
-			Set<Grant> authorDocuments,
-			Map<String, Integer> yearToPublicationCount,
+	private void preparePDFResponse(Individual investigator,
+			Set<Grant> piGrants,
+			Map<String, Integer> yearToGrantCount,
 			HttpServletResponse response) {
 
-		String authorName = null;
+		String investigatorName = null;
 
 		/*
-		 * To protect against cases where there are no author documents
+		 * To protect against cases where there are no PI Grants
 		 * associated with the individual.
 		 */
-		if (authorDocuments.size() > 0) {
-			authorName = author.getIndividualLabel();
+		if (piGrants.size() > 0) {
+			investigatorName = investigator.getIndividualLabel();
 		}
 
 		/*
-		 * To make sure that null/empty records for author names do not cause
+		 * To make sure that null/empty records for PI names do not cause
 		 * any mischief.
 		 */
-		if (StringUtils.isBlank(authorName)) {
-			authorName = "no-author";
+		if (StringUtils.isBlank(investigatorName)) {
+			investigatorName = "no-investigator";
 		}
 
-		String outputFileName = UtilityFunctions.slugify(authorName)
+		String outputFileName = UtilityFunctions.slugify(investigatorName)
 				+ "_report" + ".pdf";
 
 		response.setContentType("application/pdf");
@@ -349,8 +349,8 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 			PdfWriter pdfWriter = PdfWriter.getInstance(document, baos);
 			document.open();
 
-			PDFDocument pdfDocument = new PDFDocument(authorName,
-					yearToPublicationCount, document, pdfWriter);
+			PDFDocument pdfDocument = new PDFDocument(investigatorName,
+					yearToGrantCount, document, pdfWriter);
 
 			document.close();
 

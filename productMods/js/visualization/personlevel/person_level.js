@@ -29,7 +29,21 @@ function getWellFormedURLs(given_uri, type) {
 		return finalURL;
 
 
-	} else if (type == "profile") {
+	} else 	if (type == "copi") {
+
+		finalURL = $.ajax({
+			url: contextPath + "/visualization",
+			data: ({vis: "utilities", vis_mode: "COPI_URL", uri: given_uri}),
+			dataType: "text",
+			async: false,
+			success:function(data){
+		}
+		}).responseText;
+
+		return finalURL;
+
+
+	}else if (type == "profile") {
 
 		finalURL = $.ajax({
 			url: contextPath + "/visualization",
@@ -213,40 +227,70 @@ function processProfileInformation(nameContainerID,
 function visLoaded(nodes){
 
 	var jsonedNodes = jQuery.parseJSON(nodes);
-
+	var tableID = "";
+	var tableContainer = "";
+	
+	if(visMode == "coauthorship"){
+		tableID = "coauthorships_table";
+		tableContainer = "coauth_table_container";
+	} else{
+		tableID = "copis_table";
+		tableContainer = "copi_table_container";
+	}
+	
 	$(document).ready(function() { 
-		 createTable("coauthorships_table", "coauth_table_container", jsonedNodes.slice(1));
+		 createTable("coauthorships_table" , "coauth_table_container" , jsonedNodes.slice(1));
 	});
 
 }
 
 function createTable(tableID, tableContainer, tableData) {
 	
+	var number_of_works = "";
+	var tableCaption = "";
+	var tableColumnTitle1 = "";
+	var tableColumnTitle2 = "";
+	
+	if(visMode == "coauthorship"){
+		tableCaption = "Co-authors ";
+		tableColumnTitle1 = "Author";
+		tableColumnTitle2 = "Publications with <br />";
+	}else{
+		tableCaption = "Co-pis ";
+		tableColumnTitle1 = "Principal Investigator";
+		tableColumnTitle2 = "Grants with <br />";	
+	}
+		
 	var table = $('<table>');
 	table.attr('id', tableID);
 	
-	table.append($('<caption>').html("Co-authors <a href=\"" + egoCoAuthorsListDataFileURL + "\">(.CSV File)</a>"));  
+	table.append($('<caption>').html(tableCaption + "<a href=\"" + egoCoAuthorsListDataFileURL + "\">(.CSV File)</a>"));  
 	
 	var header = $('<thead>');
 	
 	var row = $('<tr>'); 
 
 	var authorTH = $('<th>');
-	authorTH.html("Author");
+	authorTH.html(tableColumnTitle1);
 	row.append(authorTH);
 	
-	row.append($('<th>').html("Publications with <br />" + $('#ego_label').text()));  
+	row.append($('<th>').html(tableColumnTitle2 + "" + $('#ego_label').text()));  
 
 	header.append(row);
 	
 	table.append(header);
 
 	$.each(tableData, function(i, item){ 
-
+		
+		if(visMode == "coauthorship"){
+			number_of_works = item.number_of_authored_works;
+		}else{
+			number_of_works = item.number_of_investigated_grants;
+		}
 		var row = $('<tr>'); 
 
 		row.append($('<td>').html(item.label));
-		row.append($('<td>').html(item.number_of_authored_works));
+		row.append($('<td>').html(number_of_works));
 
 		table.append(row);
 
@@ -259,10 +303,38 @@ function createTable(tableID, tableContainer, tableData) {
 //renderStatsOnNodeClicked, CoRelations, noOfCoRelations
 //function nodeClickedJS(json){
 function renderStatsOnNodeClicked(json){
+	
+	//console.log(json);
 	var obj = jQuery.parseJSON(json);
+	
+	var works = "";
+	var persons = "";
+	var relation = "";
+	var earliest_work = "";
+	var latest_work = "";
+	var number_of_works = "";
+	
+	if(visMode == "coauthorship"){
+		works = "Publication(s)";
+		persons = "Co-author(s)";
+		relation = "coauthorship"
+		earliest_work = obj.earliest_publication;
+		latest_work = obj.latest_publication;
+		number_of_works = obj.number_of_authored_works;
+	}else{
+		works = "Grant(s)";
+		persons = "Co-PI(s)";
+		relation = "copi";
+		earliest_work = obj.earliest_grant;
+		latest_work = obj.latest_grant;
+		number_of_works = obj.number_of_investigated_grants;
+	}
+	
+	
+
 
 	$("#dataPanel").attr("style","visibility:visible");
-	$("#works").empty().append(obj.number_of_authored_works);
+	$("#works").empty().append(number_of_works);
 
 	/*
 	 * Here obj.url points to the uri of that individual
@@ -272,19 +344,19 @@ function renderStatsOnNodeClicked(json){
 		if (obj.url == egoURI) {
 			
 			$("#authorName").addClass('author_name').removeClass('neutral_author_name');
-			$('#num_works > .author_stats_text').text('Publication(s)');
-			$('#num_authors > .author_stats_text').text('Co-author(s)');
+			$('#num_works > .author_stats_text').text(works);
+			$('#num_authors > .author_stats_text').text(persons);
 			
 		} else {
 
 			$("#authorName").addClass('neutral_author_name').removeClass('author_name');
-			$('#num_works > .author_stats_text').text('Joint Publication(s)');
-			$('#num_authors > .author_stats_text').text('Joint Co-author(s)');
+			$('#num_works > .author_stats_text').text('Joint ' + works);
+			$('#num_authors > .author_stats_text').text('Joint ' + persons);
 			
 		}
 		
 		$("#profileUrl").attr("href", getWellFormedURLs(obj.url, "profile"));
-		$("#coAuthorshipVisUrl").attr("href", getWellFormedURLs(obj.url, "coauthorship"));
+		$("#coAuthorshipVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
 		processProfileInformation("authorName", 
 				"profileMoniker",
 				"profileImage",
@@ -299,12 +371,12 @@ function renderStatsOnNodeClicked(json){
 		$("#coAuthorshipVisUrl").attr("href","#");
 	}
 
-	$("#coAuthors").empty().append(obj.num_coauthors);	
+	$("#coAuthors").empty().append(obj.noOfCorelations);	
 	
-	$("#firstPublication").empty().append(obj.earliest_publication);
-	(obj.earliest_publication)?$("#fPub").attr("style","visibility:visible"):$("#fPub").attr("style","visibility:hidden");
-	$("#lastPublication").empty().append(obj.latest_publication);
-	(obj.latest_publication)?$("#lPub").attr("style","visibility:visible"):$("#lPub").attr("style","visibility:hidden");
+	$("#firstPublication").empty().append(earliest_work);
+	(earliest_work)?$("#fPub").attr("style","visibility:visible"):$("#fPub").attr("style","visibility:hidden");
+	$("#lastPublication").empty().append(latest_work);
+	(latest_work)?$("#lPub").attr("style","visibility:visible"):$("#lPub").attr("style","visibility:hidden");
 
 	// obj.url:the url parameter for node
 
@@ -332,7 +404,19 @@ function getEncodedCoPIURL(){
 }
 
 function renderCoAuthorshipVisualization() {
-
+	
+	var visualization = "";
+	var encodedURL = "";
+	
+	if(visMode == "coauthorship"){
+		visualization = "CoAuthor";
+		encodedURL = getEncodedCoAuthorURL();
+	} else {
+		visualization = "CoPI";
+		encodedURL = getEncodedCoPIURL();		
+	}
+	
+//	console.log('visualization is ' + visualization + ' and encodedURL is '+ encodedURL);
 	// Version check for the Flash Player that has the ability to start Player
 	// Product Install (6.0r65)
 	var hasProductInstall = DetectFlashVer(6, 0, 65);
@@ -371,7 +455,8 @@ function renderCoAuthorshipVisualization() {
 				"src", swfLink,
 //				"flashVars", 'coAuthorUrl='+ encodeURL(egoCoAuthorshipDataFeederURL) + '&coPIUrl=' + encodeURL(egoCoPIDataFeederURL) ,			
 //				"flashVars", 'coAuthorUrl='+ getEncodedCoAuthorURL() + '&coPIUrl=' + getEncodedCoPIURL() ,
-				"flashVars", 'graphmlUrl=' + getEncodedCoAuthorURL() + '&labelField=label&visType=CoAuthor',
+//				"flashVars", 'graphmlUrl=' + getEncodedCoAuthorURL() + '&labelField=label&visType=CoAuthor',
+				"flashVars", 'graphmlUrl=' + encodedURL + '&labelField=label&visType='+visualization,
 				"width", "800",
 				"height", "850",
 				"align", "top",

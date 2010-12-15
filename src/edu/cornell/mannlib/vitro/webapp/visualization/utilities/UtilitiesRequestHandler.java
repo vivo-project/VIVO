@@ -213,7 +213,36 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
 								+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
 																.STANDALONE_RENDER_MODE, 
-						 				 VisualizationController.URL_ENCODING_SCHEME).toString();
+						 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+						    + "&"
+							    + VisualizationFrameworkConstants.VIS_MODE_KEY
+							+ "=" + URLEncoder.encode("coauthorship", 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
+				
+				prepareUtilitiesResponse(preparedURL, response);
+				return;
+			} else if (VisualizationFrameworkConstants.COPI_UTILS_VIS_MODE
+							.equalsIgnoreCase(visMode)) {
+				
+				preparedURL += request.getContextPath()
+								+ VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX
+								+ "?" 
+								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+								+ "=" + URLEncoder.encode(individualURI, 
+						 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+						 	    + "&"
+			 				    + VisualizationFrameworkConstants.VIS_TYPE_KEY 
+								+ "=" + URLEncoder.encode("person_level", 
+						 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+			 				    + "&"
+			 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
+								+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
+																.STANDALONE_RENDER_MODE, 
+						 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+						    + "&"
+							    + VisualizationFrameworkConstants.VIS_MODE_KEY
+							+ "=" + URLEncoder.encode("copi", 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 				
 				prepareUtilitiesResponse(preparedURL, response);
 				return;

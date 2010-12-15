@@ -10,13 +10,20 @@
 <c:url var="loadingImageLink" value="/${themeDir}site_icons/visualization/ajax-loader.gif"></c:url>
 
 <c:set var='egoPubSparkline' value='${requestScope.egoPubSparklineVO}' />
+<c:set var='egoGrantSparkline' value='${requestScope.egoGrantSparklineVO}' />
 <c:set var='uniqueCoauthorsSparkline' value='${requestScope.uniqueCoauthorsSparklineVO}' />
+<c:set var='uniqueCopisSparkline' value='${requestScope.uniqueCopisSparklineVO}' />
+
 
 <c:set var='egoPubSparklineContainerID' value='${requestScope.egoPubSparklineContainerID}' />
 <c:set var='uniqueCoauthorsSparklineVisContainerID' value='${requestScope.uniqueCoauthorsSparklineVisContainerID}' />
 
 <c:set var='numOfAuthors' value='${requestScope.numOfAuthors}' />
 <c:set var='numOfCoAuthorShips' value='${requestScope.numOfCoAuthorShips}' />
+
+<c:set var='numOfInvestigators' value='${requestScope.numOfInvestigators}' />
+<c:set var='numOfCoPIs' value='${requestScope.numOfCoPIs}' />
+
 
 <c:url var="egoVivoProfileURL" value="/individual">
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
@@ -34,10 +41,18 @@
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
-<c:url var="coprincipalinvestigator" value="/visualization">
-	<c:param name="vis" value="coprincipalinvestigator"/>
+<c:url var="coprincipalinvestigatorURL" value="/visualization">
+	<c:param name="vis" value="person_level"/>
 	<c:param name="render_mode" value="standalone"/>
 	<c:param name="uri" value="${requestScope.egoURIParam}"/>
+	<c:param name = "vis_mode" value = "copi"/>
+</c:url>
+
+<c:url var="coauthorshipURL" value="/visualization">
+	<c:param name="vis" value="person_level"/>
+	<c:param name="render_mode" value="standalone"/>
+	<c:param name="uri" value="${requestScope.egoURIParam}"/>
+	<c:param name = "vis_mode" value = "coauthorship"/>
 </c:url>
 
 <script language="JavaScript" type="text/javascript">
@@ -103,22 +118,41 @@ $(document).ready(function(){
 
 	<%-- Sparkline --%>
 		<h2 class="sub_headings">General Statistics</h2>
-			<div id="${egoPubSparklineContainerID}">
-				${egoPubSparkline.sparklineContent}
-			</div>
+		<c:choose>
+			<c:when test='${visMode == "coauthorship"}'>
+				<div id="${egoPubSparklineContainerID}">
+					${egoPubSparkline.sparklineContent}
+				</div>
+				
+				<div id="${uniqueCoauthorsSparklineVisContainerID}">
+					${uniqueCoauthorsSparkline.sparklineContent}
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div id="${egoPubSparklineContainerID}">
+					${egoGrantSparkline.sparklineContent}
+				</div>			
+				
+				<div id="${uniqueCoauthorsSparklineVisContainerID}">
+					${uniqueCopisSparkline.sparklineContent}
+				</div>	
+			</c:otherwise>		
+		</c:choose>
+		
 			
-			<div id="${uniqueCoauthorsSparklineVisContainerID}">
-				${uniqueCoauthorsSparkline.sparklineContent}
-			</div>
-			
-		<h2 class="sub_headings">Co-Author Network 
+		<c:choose>
+			<c:when test='${visMode == "coauthorship"}'>
+				<h2 class="sub_headings">Co-Author Network </h2>
+			</c:when>
+			<c:otherwise>
+				<h2 class="sub_headings">Co-PI Network </h2>
+			</c:otherwise>
+		</c:choose>
 		<c:choose>
 		    <c:when test="${numOfCoAuthorShips > 0 || numOfAuthors > 0}">
-		       <a href="${coAuthorshipDownloadFile}">(GraphML File)</a></h2>
+		       <a href="${coAuthorshipDownloadFile}">(GraphML File)</a>
 		    </c:when>
 		    <c:otherwise>
-		        </h2>
-		        
 		        <c:if test='${numOfAuthors > 0}'>
 		        	<c:set var='authorsText' value='multi-author' />
 		        </c:if>
@@ -149,55 +183,118 @@ $(document).ready(function(){
 			//-->
 		</script>
 	</div>
-	
-	<div id="dataPanel">
-		
-		<br />
-		<br />
-		<div id="profileImage" class="thumbnail"></div>
-		
-		<div class="bold"><strong><span id="authorName" class="neutral_author_name">&nbsp;</span></strong></div>
-		
-		<div class="italicize"><span id="profileMoniker" class="author_moniker"></span></div>
-		<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
-		<br />
-		<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;<span class="author_stats_text">Publication(s)</span></div>
-		<div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>&nbsp;&nbsp;<span class="author_stats_text">Co-author(s)</span></div>
-		
-		<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
-		<div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>&nbsp;&nbsp;<span>Last Publication</span></div>
-		
-	</div>
-
-</div>
-
-</c:if>
-<div style="text-align:center; clear: left;">
-<a href='<c:out value="${coprincipalinvestigator}"/>'> View all grants and corresponding co-pi network for this author</a>
-</div>
-<c:if test='${numOfAuthors > 0}'>
-
-	<div class="vis_stats">
-	
-	<h2 class="sub_headings">Tables</h2>
-	
-		<div class="vis-tables">
-			<p id="publications_table_container" class="datatable">
-				${egoPubSparkline.table} 
-			</p>
+<c:choose>	
+	<c:when test='${visMode == "coauthorship"}'> 
+		<div id="dataPanel">
+			
+			<br />
+			<br />
+			<div id="profileImage" class="thumbnail"></div>
+			
+			<div class="bold"><strong><span id="authorName" class="neutral_author_name">&nbsp;</span></strong></div>
+			
+			<div class="italicize"><span id="profileMoniker" class="author_moniker"></span></div>
+			<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
+			<br />
+			<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;<span class="author_stats_text">Publication(s)</span></div>
+			<div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>&nbsp;&nbsp;<span class="author_stats_text">Co-author(s)</span></div>
+			
+			<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
+			<div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>&nbsp;&nbsp;<span>Last Publication</span></div>
+			
 		</div>
-		
-		<c:if test='${numOfCoAuthorShips > 0}'>
-	
-			<div class="vis-tables">
-				<p id="coauth_table_container" class="datatable"></p>
-			</div>
-		
-		</c:if>
-		
-		<div style="clear:both;"></div>
-	
-	</div>
+	</c:when>
+	<c:otherwise>
+		<div id="dataPanel">
+			
+			<br />
+			<br />
+			<div id="profileImage" class="thumbnail"></div>
+			
+			<div class="bold"><strong><span id="authorName" class="neutral_author_name">&nbsp;</span></strong></div>
+			
+			<div class="italicize"><span id="profileMoniker" class="author_moniker"></span></div>
+			<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-PI network</a></div> 
+			<br />
+			<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;<span class="author_stats_text">Grant(s)</span></div>
+			<div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>&nbsp;&nbsp;<span class="author_stats_text">Co-PI(s)</span></div>
+			
+			<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Grant</span></div>
+			<div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>&nbsp;&nbsp;<span>Last Grant</span></div>
+			
+		</div>	
+	</c:otherwise>
+</c:choose>
+</div>
+
 </c:if>
 
+<c:choose>
+	<c:when test='${visMode == "coauthorship"}'> 
+		<div style="text-align:center; clear: left;">
+			<a href='<c:out value="${coprincipalinvestigatorURL}"/>'> View all grants and corresponding co-pi network for this person</a>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div style="text-align:center; clear: left;">
+			<a href='<c:out value="${coauthorshipURL}"/>'> View all publications and corresponding co-author network for this person</a>
+		</div>
+	</c:otherwise>
+</c:choose>
+
+<c:choose>
+	<c:when test='${visMode == "coauthorship"}'> 
+		<c:if test='${numOfAuthors > 0}'>
+		
+			<div class="vis_stats">
+			
+			<h2 class="sub_headings">Tables</h2>
+			
+				<div class="vis-tables">
+					<p id="publications_table_container" class="datatable">
+						${egoPubSparkline.table} 
+					</p>
+				</div>
+				
+				<c:if test='${numOfCoAuthorShips > 0}'>
+			
+					<div class="vis-tables">
+						<p id="coauth_table_container" class="datatable"></p>
+					</div>
+				
+				</c:if>
+				
+				<div style="clear:both;"></div>
+			
+			</div>
+		</c:if>
+	</c:when>
+	<c:otherwise>
+		<c:if test='${numOfInvestigators > 0}'>
+		
+			<div class="vis_stats">
+			
+			<h2 class="sub_headings">Tables</h2>
+			
+				<div class="vis-tables">
+					<p id="publications_table_container" class="datatable">
+						${egoGrantSparkline.table} 
+					</p>
+				</div>
+				
+				<c:if test='${numOfCoPIs > 0}'>
+			
+					<div class="vis-tables">
+						<p id="coauth_table_container" class="datatable"></p>
+					</div>
+				
+				</c:if>
+				
+				<div style="clear:both;"></div>
+			
+			</div>
+		</c:if>	
+	
+	</c:otherwise>
+</c:choose>
 </div>

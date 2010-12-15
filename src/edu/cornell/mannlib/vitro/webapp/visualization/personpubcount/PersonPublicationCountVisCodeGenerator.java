@@ -567,7 +567,7 @@ public class PersonPublicationCountVisCodeGenerator {
 		
 		try {
 		
-		String fullTimelineLink;
+		String fullTimelineLink, fullTimelineCoPILink;
 		if (yearToPublicationCount.size() > 0) {
 			
 			String secondaryContextPath = "";
@@ -600,11 +600,39 @@ public class PersonPublicationCountVisCodeGenerator {
 			
 			sparklineData.setFullTimelineNetworkLink(fullTimelineNetworkURL);
 			
+			String fullTimelineCoPINetworkURL = contextPath
+			+ secondaryContextPath
+			+ "?" 
+			+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+			+ "=" + URLEncoder.encode(individualURI, 
+	 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+	 	    + "&"
+			    + VisualizationFrameworkConstants.VIS_TYPE_KEY 
+			+ "=" + URLEncoder.encode("person_level", 
+	 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+			    + "&"
+			    + VisualizationFrameworkConstants.RENDER_MODE_KEY
+			+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
+											.STANDALONE_RENDER_MODE, 
+	 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+		    + "&"
+			    + VisualizationFrameworkConstants.VIS_MODE_KEY
+			+ "=" + URLEncoder.encode("copi", 
+	 				 VisualizationController.URL_ENCODING_SCHEME).toString();
+			
+			fullTimelineCoPILink = "<a href='" + fullTimelineCoPINetworkURL + "'>View all " 
+			+ "grants and corresponding co-pi network.</a>";
+			
+			sparklineData.setFullTimelineCoPINetworkLink(fullTimelineCoPINetworkURL);
+			
 		} else {
 			fullTimelineLink = "No data available to render full timeline.<br />";
+			fullTimelineCoPILink = "No data available to render full timeline.<br />";
+			
 		}
 		
 		divContextCode.append("<span class=\"vis_link\">" + fullTimelineLink + "</span>");
+		divContextCode.append("<br/><br/><span class=\"vis_link_copi\">" + fullTimelineCoPILink + "</span>");
 		
 		} catch (UnsupportedEncodingException e) {
 			log.error(e);

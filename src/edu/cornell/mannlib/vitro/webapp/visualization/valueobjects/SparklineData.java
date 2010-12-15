@@ -15,11 +15,17 @@ public class SparklineData {
 	private Integer earliestRenderedPublicationYear;
 	private Integer latestRenderedPublicationYear;
 	
+	private Integer earliestRenderedGrantYear;
+	private Integer latestRenderedGrantYear;
+	
 	private String table = "";
 	
 	private String downloadDataLink = "";
 	private String fullTimelineNetworkLink = "";
 	
+	private String downloadCoPIDataLink = "";
+	private String fullTimelineCoPINetworkLink  = "";
+		
 	private String sparklineContent;
 	private String sparklineContext;
 	
@@ -97,4 +103,38 @@ public class SparklineData {
 	public void setSparklineContext(String shortSparklineContext) {
 		this.sparklineContext = shortSparklineContext;
 	}
+	
+	public String getDownloadCoPIDataLink() {
+		return downloadCoPIDataLink;
+	}
+
+	public void setDownloadCoPIDataLink(String downloadCoPIDataLink) {
+		this.downloadCoPIDataLink = downloadCoPIDataLink;
+	}
+
+	public String getFullTimelineCoPINetworkLink() {
+		return fullTimelineCoPINetworkLink;
+	}
+
+	public void setFullTimelineCoPINetworkLink(String fullTimelineCoPINetworkLink) {
+		this.fullTimelineCoPINetworkLink = fullTimelineCoPINetworkLink;
+	}
+
+	public Integer getEarliestRenderedGrantYear() {
+		return earliestRenderedGrantYear;
+	}
+
+	public void setEarliestRenderedGrantYear(Integer earliestRenderedGrantYear) {
+		this.earliestRenderedGrantYear = earliestRenderedGrantYear;
+	}
+
+	public Integer getLatestRenderedGrantYear() {
+		return latestRenderedGrantYear;
+	}
+
+	public void setLatestRenderedGrantYear(Integer latestRenderedGrantYear) {
+		this.latestRenderedGrantYear = latestRenderedGrantYear;
+	}
+	
+	
 }

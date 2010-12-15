@@ -59,6 +59,7 @@ var egoCoAuthorsListDataFileURL = "${egoCoAuthorsListDataFileURL}";
 var egoCoPIDataFeederURL = "${egoCoPIDataFeederURL}";
 var contextPath = "${contextPath}";
 var domainParam = "${requestScope.completeURL}";
+var visMode = "${requestScope.visMode}";
 
 // -->
 </script>

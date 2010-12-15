@@ -455,7 +455,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			+ "} " 
 			+ "ORDER BY ?document ?coAuthorPerson";
 
-//		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
+		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}

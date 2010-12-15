@@ -49,7 +49,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	private Log log;
 	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
-						+ "SELECT (str(?PILabel)) as ?PILabelLit) "
+						+ "SELECT (str(?PILabel) as ?PILabelLit) "
 						+ "(str(?Grant) as ?grantLit)"
 						+ "(str(?GrantLabel) as ?grantLabelLit)"
 						+ "(str(?GrantStartDate) as ?grantStartDateLit)"
@@ -120,7 +120,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 		
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
-							+ "(str(<" + queryURI + ">) as ?PILit "
+							+ "(str(<" + queryURI + ">) as ?PILit) "
 							+ "WHERE {"
 							+ "<" + queryURI + "> rdfs:label ?PILabel;"
 							+ "core:hasCo-PrincipalInvestigatorRole ?Role ."
