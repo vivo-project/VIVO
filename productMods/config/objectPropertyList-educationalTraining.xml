@@ -19,5 +19,7 @@
         }  ORDER BY DESC(?dateTime)    
     </query>
     
-    <template>objectPropertyList-educationalTraining.ftl</template>
+    <link-target>org</link-target>
+    
+    <template>shortView-educationalTraining.ftl</template>
 </view-config>
