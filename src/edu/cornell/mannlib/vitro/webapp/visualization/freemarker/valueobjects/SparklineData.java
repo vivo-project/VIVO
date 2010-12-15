@@ -18,9 +18,13 @@ public class SparklineData {
 	private Integer earliestYearConsidered;
 	private Integer earliestRenderedPublicationYear;
 	private Integer latestRenderedPublicationYear;
+	private Integer earliestRenderedGrantYear;
+	private Integer latestRenderedGrantYear;
 	
 	private Integer renderedSparks;
 	private Integer unknownYearPublications;
+	private Integer unknownYearGrants;
+	
 	
 	private Map<String, Integer> yearToActivityCount;
 	
@@ -36,6 +40,7 @@ public class SparklineData {
 	private boolean isShortVisMode = true;
 	
 	private List<YearPublicationCountDataElement> yearToPublicationCountDataTable;
+	private List<YearGrantCountDataElement> yearToGrantCountDataTable;	
 	
 	private int numOfYearsToBeRendered;
 	
@@ -56,6 +61,39 @@ public class SparklineData {
 		this.sparklinePublicationRangeText = sparklinePublicationRangeText;
 	}
 	
+	public Integer getEarliestRenderedGrantYear() {
+		return earliestRenderedGrantYear;
+	}
+
+	public void setEarliestRenderedGrantYear(Integer earliestRenderedGrantYear) {
+		this.earliestRenderedGrantYear = earliestRenderedGrantYear;
+	}
+
+	public Integer getLatestRenderedGrantYear() {
+		return latestRenderedGrantYear;
+	}
+
+	public void setLatestRenderedGrantYear(Integer latestRenderedGrantYear) {
+		this.latestRenderedGrantYear = latestRenderedGrantYear;
+	}
+
+	public Integer getUnknownYearGrants() {
+		return unknownYearGrants;
+	}
+
+	public void setUnknownYearGrants(Integer unknownYearGrants) {
+		this.unknownYearGrants = unknownYearGrants;
+	}
+
+	public List<YearGrantCountDataElement> getYearToGrantCountDataTable() {
+		return yearToGrantCountDataTable;
+	}
+
+	public void setYearToGrantCountDataTable(
+			List<YearGrantCountDataElement> yearToGrantCountDataTable) {
+		this.yearToGrantCountDataTable = yearToGrantCountDataTable;
+	}
+
 	public void setNumOfYearsToBeRendered(int numOfYearsToBeRendered) {
 		this.numOfYearsToBeRendered = numOfYearsToBeRendered;
 	}
