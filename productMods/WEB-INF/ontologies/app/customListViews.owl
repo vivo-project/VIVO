@@ -16,7 +16,7 @@
     xmlns:vitro="&vitro;">
 
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#educationalTraining">
-        <vitro:propertyListDisplayConfiguration rdf:datatype="http://www.w3.org/2001/XMLSchema#string">objectPropertyList-educationalTraining.xml</vitro:propertyListDisplayConfiguration>
+        <display:customListViewConfigurationFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">objectPropertyList-educationalTraining.xml</display:customListViewConfigurationFile>
     </rdf:Description>
 </rdf:RDF>
 
