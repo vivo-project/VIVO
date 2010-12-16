@@ -86,6 +86,16 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
@@ -102,11 +112,11 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Semester Class (core)</td>
+	<td>label=Course (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,7 +126,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new Semester Class</td>
+	<td>Create a new Course</td>
 	<td></td>
 </tr>
 <tr>
@@ -137,11 +147,11 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Semester Class (core)</td>
+	<td>label=Course (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,7 +161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Create a new Semester Class</td>
+	<td>Create a new Course</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +236,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='taughtBy']/a</td>
+	<td>//div[@id='courseOfferedBy']/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +246,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add an entry to: taught by</td>
+	<td>Add an entry to: offered by</td>
 	<td></td>
 </tr>
 <tr>
@@ -631,7 +641,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test related documents</td>
+	<td class="comment">Test additional document info</td>
 	<td></td>
 </tr>
 <tr>
