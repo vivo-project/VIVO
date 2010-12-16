@@ -5,15 +5,15 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         
-        SELECT DISTINCT ?edTraining ?org ?orgName ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime WHERE {
+        SELECT DISTINCT ?edTraining ?org ?orgName ?degree ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime WHERE {
             ?edTraining core:trainingAtOrganization ?org .
             ?org rdfs:label ?orgName
             OPTIONAL { ?edTraining core:degreeEarned ?degree . }
             OPTIONAL { ?degree rdfs:label ?degreeName . }
             OPTIONAL { ?degree core:abbreviation ?degreeAbbr . }
-            OPTIONAL { ?degree core:majorField ?majorField . }
-            OPTIONAL { ?degree core:departmentOrSchool ?deptOrSchool . }
-            OPTIONAL { ?degree core:supplementalInformation ?info . }
+            OPTIONAL { ?edTraining core:majorField ?majorField . }
+            OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool . }
+            OPTIONAL { ?edTraining core:supplementalInformation ?info . }
             OPTIONAL { ?edTraining core:dateTimeInterval ?interval . }
             OPTIONAL { ?interval core:hasDateTimeValue ?dateTime . }        
         }  ORDER BY DESC(?dateTime)    

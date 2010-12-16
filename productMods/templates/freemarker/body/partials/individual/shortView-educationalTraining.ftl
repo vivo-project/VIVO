@@ -2,4 +2,16 @@
 
 <#-- Custom object property statement short view for http://vivoweb.org/ontology/core#educationalTraining -->
 
-<a href="${statement.orgUrl}">${statement.orgName}</a> ${statement.degreeName} 
+<#import "lib-sequence.ftl" as s>
+
+<#compress>
+<#assign degree>
+    <#if statement.degree??>
+        <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " />
+    </#if>
+</#assign>
+
+<#assign org><a href="${statement.orgUrl}">${statement.orgName}</a></#assign>
+
+<@s.join [ degree, org, statement.deptOrSchool!, statement.info!, statement.datetime! ] />
+</#compress>
