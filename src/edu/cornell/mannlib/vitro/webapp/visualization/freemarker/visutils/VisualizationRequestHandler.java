@@ -1,12 +1,15 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils;
 
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
+import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 
 /**
  * This interface is being implemented by all the visualization request handlers like
@@ -20,8 +23,16 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
  */
 public interface VisualizationRequestHandler{
 
-	ResponseValues generateVisualization(VitroRequest vitroRequest,
+	ResponseValues generateStandardVisualization(VitroRequest vitroRequest,
 							   Log log, 
-							   DataSource dataSource);
+							   DataSource dataSource) throws MalformedQueryParametersException;
+	
+	Object generateAjaxVisualization(VitroRequest vitroRequest,
+								     Log log, 
+								     DataSource dataSource) throws MalformedQueryParametersException;
+	
+	Map<String, String> generateDataVisualization(VitroRequest vitroRequest,
+								   	 Log log, 
+								   	 DataSource dataSource) throws MalformedQueryParametersException;
 	
 }

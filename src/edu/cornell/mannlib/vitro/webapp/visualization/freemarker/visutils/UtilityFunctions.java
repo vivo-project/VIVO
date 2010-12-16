@@ -2,15 +2,23 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
+import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -127,7 +135,9 @@ public class UtilityFunctions {
 	}
 	
 	
-    public static ResponseValues handleMalformedParameters(String errorPageTitle, String errorMessage, VitroRequest vitroRequest) {
+    public static ResponseValues handleMalformedParameters(String errorPageTitle, 
+    													   String errorMessage, 
+    													   VitroRequest vitroRequest) {
 
         Portal portal = vitroRequest.getPortal();
 
@@ -139,23 +149,23 @@ public class UtilityFunctions {
         return new TemplateResponseValues(VisualizationFrameworkConstants.ERROR_TEMPLATE, body);
     }
     
-/*	public static void handleMalformedParameters(String errorMessage,
-												 String errorPageTitle,
+    public static void handleMalformedParameters(String errorPageTitle,
+    											 String errorMessage,
 												 VitroRequest vitroRequest,
 												 HttpServletRequest request,
 												 HttpServletResponse response,
 												 Log log)
-			throws ServletException, IOException {
-
+		throws ServletException, IOException {
+		
 		Portal portal = vitroRequest.getPortal();
-
+		
 		request.setAttribute("error", errorMessage);
-
+		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
 		request.setAttribute("bodyJsp", "/templates/visualization/visualization_error.jsp");
 		request.setAttribute("portalBean", portal);
 		request.setAttribute("title", errorPageTitle);
-
+		
 		try {
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
@@ -163,8 +173,8 @@ public class UtilityFunctions {
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());
 		}
-	}*/
-
+	}
+    
 	public static Map<String, Set<CoPINode>> getGrantYearToCoPI(
 			CoPIData pINodesAndEdges) {
 		

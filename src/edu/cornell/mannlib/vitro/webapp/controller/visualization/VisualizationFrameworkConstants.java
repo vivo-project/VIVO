@@ -25,6 +25,8 @@ public class VisualizationFrameworkConstants {
 	 */
 	public static final String VISUALIZATION_URL_PREFIX = "/visualization";
 	public static final String FREEMARKERIZED_VISUALIZATION_URL_PREFIX = "/visualizationfm";
+	public static final String AJAX_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationAjax";
+	public static final String DATA_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationData";
 	
 	public static final String INDIVIDUAL_URL_PREFIX = "/individual";
 
@@ -84,7 +86,6 @@ public class VisualizationFrameworkConstants {
 	public static final String UTILITIES_VIS = "utilities";
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
-	
 	
 
 }

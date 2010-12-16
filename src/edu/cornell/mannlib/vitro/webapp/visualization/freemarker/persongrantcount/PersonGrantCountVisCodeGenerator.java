@@ -17,7 +17,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
@@ -547,18 +547,18 @@ public class PersonGrantCountVisCodeGenerator {
 							 + secondaryContextPath
 							 + "?" + VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
 							 + "=" + URLEncoder.encode(individualURI, 
-									 				   VisualizationController.URL_ENCODING_SCHEME)
+									 				   StandardVisualizationController.URL_ENCODING_SCHEME)
 									 				   .toString() 
 							 + "&" + VisualizationFrameworkConstants.VIS_TYPE_KEY 
 							 + "=" + URLEncoder.encode(
 										 			VisualizationFrameworkConstants
 										 				.PERSON_GRANT_COUNT_VIS,
-									 				VisualizationController.URL_ENCODING_SCHEME)
+										 				StandardVisualizationController.URL_ENCODING_SCHEME)
 								 				.toString() 
 							 + "&" + VisualizationFrameworkConstants.RENDER_MODE_KEY 
 							 + "=" + URLEncoder.encode(VisualizationFrameworkConstants
 									 						.DATA_RENDER_MODE, 
-					 				 				   VisualizationController.URL_ENCODING_SCHEME)
+									 						StandardVisualizationController.URL_ENCODING_SCHEME)
 			 				 				   .toString();
 			return downloadURL;
 		} else {
@@ -586,16 +586,16 @@ public class PersonGrantCountVisCodeGenerator {
 							+ "?" 
 							+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
 							+ "=" + URLEncoder.encode(individualURI, 
-					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+									StandardVisualizationController.URL_ENCODING_SCHEME).toString()
 					 	    + "&"
 		 				    + VisualizationFrameworkConstants.VIS_TYPE_KEY 
 							+ "=" + URLEncoder.encode("person_level", 
-					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+									StandardVisualizationController.URL_ENCODING_SCHEME).toString()
 		 				    + "&"
 		 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
 							+ "=" + URLEncoder.encode(VisualizationFrameworkConstants
 															.STANDALONE_RENDER_MODE, 
-					 				 VisualizationController.URL_ENCODING_SCHEME).toString();
+															StandardVisualizationController.URL_ENCODING_SCHEME).toString();
 			
 			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO " 
 									+ "grants and corresponding co-pi network.</a>";

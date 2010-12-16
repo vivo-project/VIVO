@@ -69,8 +69,6 @@
         
         <#if sparklineVO.shortVisMode>
          
-        console.log("Yay! Short Vis Mode!");
-         
         <#-- For the short view we only want the last 10 year's view of publication count, hence we filter 
         	the data we actually want to use for render. -->
          
@@ -84,8 +82,6 @@
          
          
         <#else>
-         
-        console.log("Yay! Full Vis Mode!");
          
         </#if>
          
@@ -175,8 +171,6 @@
             
             row.append(sparklineImgTD);
             
-            console.log(sparklineImgTD);
-            
             var sparklineNumberTD = $('<td>');
             sparklineNumberTD.attr('width', '30');
             sparklineNumberTD.attr('align', 'right');
@@ -190,8 +184,6 @@
             table.prependTo('#${sparklineContainerID}');
             
         }
-            
-        console.log(sparklineImgTD);
             
         drawPubCountVisualization(sparklineImgTD);
     });

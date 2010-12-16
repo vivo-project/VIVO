@@ -12,13 +12,15 @@
 	<bean id="person_pub_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount.PersonPublicationCountRequestHandler" />
 	
+	<bean id="utilities"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.utilities.UtilitiesRequestHandler" />
+	
 	<!-- 
 	<bean id="coauthorship"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler" />
 	<bean id="person_level"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler" />
-	<bean id="utilities"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler" />
+	
 	<bean id="entity_comparison"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
 	<bean id="coprincipalinvestigator"
@@ -33,15 +35,15 @@
 					<ref bean="person_pub_count"></ref>
 				</entry>
 				
+				<entry key="utilities">
+					<ref bean="utilities"></ref>
+				</entry>
 				<!-- 
 				<entry key="coauthorship">
 					<ref bean="coauthorship"></ref>
 				</entry>
 				<entry key="person_level">
 					<ref bean="person_level"></ref>
-				</entry>
-				<entry key="utilities">
-					<ref bean="utilities"></ref>
 				</entry>
 				<entry key="entity_comparison">
 					<ref bean="entity_comparison"></ref>

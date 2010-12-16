@@ -24,20 +24,17 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.FileResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
-
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
-import edu.cornell.mannlib.vitro.webapp.web.ContentType;
 
 
 /**
@@ -89,9 +86,12 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
     	if (VisualizationFrameworkConstants.DATA_RENDER_MODE
     				.equalsIgnoreCase(renderMode)) {
     		
+    		
+    		/*
 			return prepareDataResponse(investigator,
 					piGrants,
 					yearToGrantCount);
+					*/
 		}
     	
     	/*
@@ -173,7 +173,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 * @param yearToGrantCount
 	 * @return 
 	 */
-	private FileResponseValues prepareDataResponse(
+	private Map<String, String> prepareDataResponse(
 						Individual investigator,
 						Set<Grant> piGrants,
 						Map<String, Integer> yearToGrantCount) {
@@ -203,7 +203,9 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         Map<String, Object> fileContents = new HashMap<String, Object>();
         fileContents.put("fileContent", getGrantsOverTimeCSVContent(yearToGrantCount));
 		
-		return new FileResponseValues(new ContentType(), outputFileName, fileContents);
+//		return new FileResponseValues(new ContentType(), outputFileName, fileContents);
+		
+		return new HashMap<String, String>();
 	}
 	
 	/**
@@ -329,47 +331,27 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
+			DataSource dataSource) throws MalformedQueryParametersException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, String> generateDataVisualization(
+			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			throws MalformedQueryParametersException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseValues generateStandardVisualization(
+			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			throws MalformedQueryParametersException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

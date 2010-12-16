@@ -9,12 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.DatasetFactory;
@@ -28,6 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 import freemarker.template.Configuration;
@@ -39,75 +36,34 @@ import freemarker.template.Configuration;
  * @author cdtank
  */
 @SuppressWarnings("serial")
-public class VisualizationController extends FreemarkerHttpServlet {
-
-	private Map<String, VisualizationRequestHandler> visualizationIDsToClass;
+public class AjaxVisualizationController extends FreemarkerHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
 
-	private static final Log log = LogFactory.getLog(VisualizationController.class.getName());
+	private static final Log log = LogFactory.getLog(AjaxVisualizationController.class.getName());
 	
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
    
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws IOException, ServletException {
+    		throws IOException, ServletException {
     
 		VitroRequest vreq = new VitroRequest(request);
-	    	
-	    String renderMode = vreq.getParameter(VisualizationFrameworkConstants
-													.RENDER_MODE_KEY);
-    
-	    if (StringUtils.equalsIgnoreCase(renderMode, VisualizationFrameworkConstants.DYNAMIC_RENDER_MODE)) {
-	    	
-	    	Configuration config = getConfig(vreq);
-	    	TemplateResponseValues trv = (TemplateResponseValues) processRequest(vreq);
-	    	writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
-	    	
-	    } else {
-	    	super.doGet(request, response);
-	    }
-    
-    
-	}
-
-
-    
-    /* This method is overridden to inject vis dependencies i.e. the vis algorithms that are 
-     * being implemented into the vis controller. Modified Dependency Injection pattern is 
-     * used here. XML file containing the location of all the vis is saved in accessible folder. 
-     * @see javax.servlet.GenericServlet#init()
-     */
-    @Override
-    public void init() throws ServletException {
-    	super.init();
-    	try {
+		
+		Object ajaxResponse = processAjaxRequest(vreq);
+		
+		if (ajaxResponse instanceof TemplateResponseValues) {
 			
-			String resourcePath = 
-				getServletContext()
-					.getRealPath(VisualizationFrameworkConstants
-							.RELATIVE_LOCATION_OF_FM_VISUALIZATIONS_BEAN);
+			Configuration config = getConfig(vreq);
+			TemplateResponseValues trv = (TemplateResponseValues) ajaxResponse;
+			writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
 			
-			ApplicationContext context = new ClassPathXmlApplicationContext(
-												"file:" + resourcePath);
-
-			BeanFactory factory = context;
-			
-			VisualizationInjector visualizationInjector = 
-					(VisualizationInjector) factory.getBean("visualizationInjector");
-			
-			visualizationIDsToClass = visualizationInjector.getVisualizationIDToClass();
-
-		} catch (Exception e) {
-			log.error(e);
+		} else {
+			response.getWriter().write(ajaxResponse.toString());
 		}
-    }
+	}
     
-
-
-    @Override
-    protected ResponseValues processRequest(VitroRequest vreq) {
-        
+    private Object processAjaxRequest(VitroRequest vreq) {
     	/*
     	 * Based on the query parameters passed via URI get the appropriate visualization 
     	 * request handler.
@@ -131,12 +87,10 @@ public class VisualizationController extends FreemarkerHttpServlet {
     														  vreq);
     		
     	}
-    	
-        
     }
 
 
-	private ResponseValues renderVisualization(VitroRequest vitroRequest,
+	private Object renderVisualization(VitroRequest vitroRequest,
 									 VisualizationRequestHandler visRequestHandler) {
 		
 		Model model = vitroRequest.getJenaOntModel(); // getModel()
@@ -158,9 +112,17 @@ public class VisualizationController extends FreemarkerHttpServlet {
         
 		if (dataSource != null && visRequestHandler != null) {
         	
-        	return visRequestHandler.generateVisualization(vitroRequest, 
-        											log, 
-        											dataSource);
+        	try {
+				return visRequestHandler.generateAjaxVisualization(vitroRequest, 
+														log, 
+														dataSource);
+			} catch (MalformedQueryParametersException e) {
+				return UtilityFunctions.handleMalformedParameters(
+						"Ajax Visualization Query Error - Individual Publication Count", 
+						e.getMessage(), 
+						vitroRequest);
+				
+			}
         	
         } else {
         	
@@ -184,10 +146,10 @@ public class VisualizationController extends FreemarkerHttpServlet {
 																	.VIS_TYPE_KEY);
     	VisualizationRequestHandler visRequestHandler = null;
     	
-    	System.out.println(visType + " -->  " + visualizationIDsToClass);
-    	
     	try {
-    		visRequestHandler = visualizationIDsToClass.get(visType);
+    		visRequestHandler = VisualizationsDependencyInjector
+										.getVisualizationIDsToClassMap(getServletContext()).get(visType);
+    		
     	} catch (NullPointerException nullKeyException) {
 
     		return null;

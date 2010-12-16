@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UniqueIDGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 
 /**

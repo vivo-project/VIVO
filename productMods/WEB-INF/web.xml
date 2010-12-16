@@ -495,6 +495,7 @@
     <url-pattern>/csv2rdf</url-pattern>
   </servlet-mapping>
   
+
   <servlet>
     <servlet-name>JenaExportController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.jena.JenaExportController</servlet-class>
@@ -1249,16 +1250,6 @@
   </servlet-mapping>
   
   <servlet>
-    <servlet-name>DummyVisClientFM</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DummyVisClientController</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>DummyVisClientFM</servlet-name>
-    <url-pattern>/admin/dummyVisClientfm</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>DummyVisClient</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.DummyVisClientController</servlet-class>
   </servlet>
@@ -1266,6 +1257,16 @@
   <servlet-mapping>
     <servlet-name>DummyVisClient</servlet-name>
     <url-pattern>/admin/dummyVisClient</url-pattern>
+  </servlet-mapping>
+    
+  <servlet>
+    <servlet-name>DummyVisClientFM</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DummyVisClientController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DummyVisClientFM</servlet-name>
+    <url-pattern>/admin/dummyVisClientfm</url-pattern>
   </servlet-mapping>
    
    <servlet>
@@ -1279,15 +1280,34 @@
   </servlet-mapping>
 
    <servlet>
-    <servlet-name>VisualizationControllerFM</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationController</servlet-class>
+    <servlet-name>StandardVisualizationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>VisualizationControllerFM</servlet-name>
+    <servlet-name>StandardVisualizationController</servlet-name>
     <url-pattern>/visualizationfm</url-pattern>
   </servlet-mapping>
 
+   <servlet>
+    <servlet-name>AjaxVisualizationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.AjaxVisualizationController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AjaxVisualizationController</servlet-name>
+    <url-pattern>/visualizationAjax</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DataVisualizationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DataVisualizationController</servlet-name>
+    <url-pattern>/visualizationData</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>authtest</servlet-name>

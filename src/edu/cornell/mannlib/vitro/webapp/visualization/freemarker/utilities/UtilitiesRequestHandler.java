@@ -2,16 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.utilities;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 
@@ -21,23 +13,19 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.filestorage.FileServingHelper;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.AllPropertiesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 
 /**
  * This request handler is used when you need helpful information to add more context
@@ -51,19 +39,16 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
  */
 public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	
-	public ResponseValues generateVisualization(VitroRequest vitroRequest,
-											    Log log, 
-											    DataSource dataSource) {
+	public Object generateAjaxVisualization(VitroRequest vitroRequest,
+											Log log, 
+											DataSource dataSource) 
+			throws MalformedQueryParametersException {
 
         String individualURI = vitroRequest.getParameter(
         									VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
         String visMode = vitroRequest.getParameter(
         									VisualizationFrameworkConstants.VIS_MODE_KEY);
-        
-        String preparedURL = "";
-        
-        UrlBuilder urlBuilder = new UrlBuilder(vitroRequest.getPortal());
         
         /*
 		 * If the info being requested is about a profile which includes the name, moniker
@@ -83,28 +68,14 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 												  dataSource,
 												  log);
 			
-			try {
-				
-				GenericQueryMap profilePropertiesToValues = 
-							profileQueryHandler.getQueryResult();
-				
-				profilePropertiesToValues.addEntry("imageContextPath", 
-												   urlBuilder.getBaseUrl());
-				
-				Gson profileInformation = new Gson();
-				
-				return prepareUtilitiesResponse(
-						profileInformation.toJson(profilePropertiesToValues),
-						vitroRequest);
+			GenericQueryMap profilePropertiesToValues = 
+						profileQueryHandler.getQueryResult();
+			
+			Gson profileInformation = new Gson();
+			
+			return profileInformation.toJson(profilePropertiesToValues);
 				
 				
-				
-			} catch (MalformedQueryParametersException e) {
-					return UtilityFunctions.handleMalformedParameters(
-							"Visualization Query Error - Utilities Profile Info",
-							e.getMessage(),
-							vitroRequest);
-			}
 		} else if (VisualizationFrameworkConstants.IMAGE_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			/*
@@ -131,21 +102,9 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											dataSource,
 											log);
 			
-			try {
-				
-				String thumbnailAccessURL = 
-						getThumbnailInformation(
-								imageQueryHandler.getQueryResult(),
-								fieldLabelToOutputFieldLabel);
-				
-				return prepareUtilitiesResponse(thumbnailAccessURL, vitroRequest);
-				
-			} catch (MalformedQueryParametersException e) {
-					return UtilityFunctions.handleMalformedParameters(
-							"Visualization Query Error - Utilities Image Info",
-							e.getMessage(),
-							vitroRequest);
-			}
+			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
+											   fieldLabelToOutputFieldLabel);
+
 		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			
@@ -160,11 +119,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 															 VisualizationFrameworkConstants.RENDER_MODE_KEY,
 															 VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
 			
-			preparedURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 							  coAuthorProfileURLParams);
-			
-
-			return prepareUtilitiesResponse(preparedURL, vitroRequest);
 			
 		} else if (VisualizationFrameworkConstants.PERSON_LEVEL_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -179,19 +135,16 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 														 VisualizationFrameworkConstants.RENDER_MODE_KEY,
 														 VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
 			
-			preparedURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-											personLevelURLParams);
+			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+									 personLevelURLParams);
 			
-			return prepareUtilitiesResponse(preparedURL, vitroRequest);
 		} else {
 			
 			ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 														 individualURI);
 			
-			preparedURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
+			return UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
 											individualProfileURLParams);
-			
-			return prepareUtilitiesResponse(preparedURL, vitroRequest);
 		}
 
 	}
@@ -219,6 +172,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		}
 		return finalThumbNailLocation;
 	}
+	/*
 	
 	private TemplateResponseValues prepareUtilitiesResponse(String preparedContent, VitroRequest vreq) {
 		
@@ -231,6 +185,20 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 		return new TemplateResponseValues(utilitiesTemplate, body);
 		
+	}*/
+
+	@Override
+	public Map<String, String> generateDataVisualization(
+			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Utilities does not provide Data Response.");
+	}
+
+	@Override
+	public ResponseValues generateStandardVisualization(
+			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Utilities does not provide Standard Response.");
 	}
 }
 
