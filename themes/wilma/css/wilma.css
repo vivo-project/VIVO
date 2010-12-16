@@ -8,14 +8,14 @@ section,
 nav,
 article,
 aside,
-footer {
+footer{
     display: block;
 }
-time {
+time{
     font-weight: normal;
 }
 html,
-body {
+body{
     margin: 0;
     padding: 0;
     height: 100%; /* needed for container min-height */
@@ -97,7 +97,7 @@ ul#header-nav li {
     display: block;
     padding-left: 10px;
     padding-right: 10px;
-    border-right: 1px solid grey;
+    border-right: 1px solid #fff;
     font-size: 0.7em;
     color: #fff;
 }
@@ -123,7 +123,7 @@ ul#header-nav  a:active {
 .loginIcon {
     font-family: 'Pictos';
     font-size: 1.8em;
-    line-height: 0.2em;
+    line-height: .2em;
     color: #fff;
 }
 /* SEARCH ------>  */
@@ -207,7 +207,7 @@ ul#main-nav {
     min-height: 450px;
     padding: 20px;
 }
-/* INTRO ------>  */
+/* INTRO-BLURB ------>  */
 #intro {
     float: left;
     width: 570px;
@@ -380,7 +380,7 @@ p.password-note{
     color: #fff;
     font-size: 18px;
     border: none;
-    padding-left: 20px;
+    padding-left: 23px;
     padding-top: 8px;
     cursor: pointer;
 }
@@ -648,6 +648,7 @@ p.summary time {
     height: 35px;
     background: url(../images/icon-pub.png) 0 0 no-repeat;
     padding-bottom: 10px;
+    float: left;
 }
 p.publication-content {
     padding-left: 40px;

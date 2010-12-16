@@ -1,6 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-/* fix for homepage */
-#log-in input {
-    width: 200px;
-    margin-left: -24px;
+/* Fix for homepage */
+#search-field .submit {
+    padding-left: 14px;
+}
+#search-home-field  input.submit {
+    padding-left: 14px;
 }

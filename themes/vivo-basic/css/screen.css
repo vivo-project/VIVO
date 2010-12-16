@@ -15,6 +15,15 @@
 @import url("institution.css");
 @import url("individual.css");
 
+header,
+hgroup,
+section,
+nav,
+article,
+aside,
+footer {
+    display: block;
+}
 body {
   position: relative;
   background: #596673;

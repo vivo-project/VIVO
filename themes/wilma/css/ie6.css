@@ -5,37 +5,40 @@ body {
     background-position: center, 0;
     background-repeat: no-repeat;
 }
-#intro h3 { 
+#wrapper-content{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#intro h2 { 
     margin-left: 24px; 
-    }
+}
 #intro p { 
     margin-left: 24px; 
-    }
-#log-in { 
-    margin-right: 20px; 
-    }
+}
 #search-home h3 { 
     margin-left: 0; 
-    }
-#log-in input {
-    width: 200px;
-    margin-left: -28px;
 }
-ul#browse-classGroups { 
+#search-field .submit {
+    padding-left: 14px;
+}
+#search-home-field  input.submit {
+    padding-left: 14px;
+}
+ul#browse-classgroups { 
     margin-left: 20px; 
-    }
+}
 #browse-classes { 
     width: 600px; 
-    }
+}
 .global-highlights {
     width: 220px;
     padding: 18px;
 }
-ul#browse-classGroups a.selected {
+ul#browse-classgroups a.selected {
     background-position-x: 0;
     background-position-y: 12px;
 }
-/* fix for menupages */
+/* Fix for menupages */
 ul#foaf-person-childClasses {
     float: left;
     width: 265px;
@@ -49,7 +52,7 @@ ul#browse-childClasses {
 }
 #individuals-in-childClass { 
     width: 450px; 
-    }
+}
 #individuals-in-childClass h3 {
     padding: 10px 0 10px 30px;
     margin: 0;
@@ -63,4 +66,3 @@ article.individual-foaf-person {
 #profile-photo-display { 
     width: 620px;
 }
-
