@@ -2,6 +2,7 @@
 
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix vitroDisplay: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix vitroPublic: <http://vitro.mannlib.cornell.edu/ns/vitro/public#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
 @prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#> .
@@ -20,4 +21,6 @@
 	vitroDisplay:excludeClass core:Position ; 
 	vitroDisplay:excludeClass core:ResearchActivity ;
 	vitroDisplay:excludeClass core:EducationalTraining ;	
+        vitroDisplay:excludeClass vitroPublic:File ;
+        vitroDisplay:excludeClass vitroPublic:FileByteStream .
 	vitroDisplay:excludeClass bibo:DocumentStatus .	
