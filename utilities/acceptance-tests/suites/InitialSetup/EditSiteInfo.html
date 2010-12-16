@@ -86,7 +86,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -95,8 +95,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Site Configuration</td>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,33 +126,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>ContactMail</td>
-	<td>hlm7@cornell.edu</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>RootTabId</td>
-	<td>label=Home</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>CopyrightAnchor</td>
 	<td>VIVO Project 2010</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>CopyrightURL</td>
-	<td>http://vivoweb.org</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>AboutText</td>
-	<td>&lt;p&gt;This is a test system for VIVO!<br /><br />&lt;p&gt;The VIVO National Network enables the discovery of researchers across institutions. Participants in the network include institutions with local installations of VIVO or those with research discovery and profiling applications that can provide semantic web-compliant data. The information accessible through VIVO's search and browse capability will therefore reside and be controlled locally, within institutional VIVOs or other semantic web-compliant applications.&lt;/p&gt;<br /><br /><br /><br />&lt;p&gt;VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with content at an institution, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually or brought into the database in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases.&lt;/p&gt;<br /><br /><br /><br />&lt;p&gt;See more information on the &lt;a href=&quot;http://vivoweb.org&quot;&gt;VIVO Project&lt;/a&gt;.&lt;/p&gt;</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>AcknowledgeText</td>
-	<td>Holly Mistlebauer set this up!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -170,43 +150,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Verify that changes were made (cannot test site name)</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
 	<td>VIVO Test Site</td>
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Verify that changes were made (cannot test site name)</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>VIVO Project 2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=About</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>About VIVO Test Site</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This is a test system for VIVO!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO Project</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Holly Mistlebauer set this up!</td>
 	<td></td>
 </tr>
 <tr>
@@ -241,28 +196,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>ContactMail</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>CopyrightAnchor</td>
 	<td>VIVO Project</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>CopyrightURL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>AboutText</td>
-	<td>&lt;p&gt;The VIVO National Network enables the discovery of researchers across institutions. Participants in the network include institutions with local installations of VIVO or those with research discovery and profiling applications that can provide semantic web-compliant data. The information accessible through VIVO's search and browse capability will therefore reside and be controlled locally, within institutional VIVOs or other semantic web-compliant applications.&lt;/p&gt;<br /><br /><br /><br />&lt;p&gt;VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with content at an institution, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually or brought into the database in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases.&lt;/p&gt;<br /><br /><br /><br />&lt;p&gt;See more information on the &lt;a href=&quot;http://vivoweb.org&quot;&gt;VIVO Project&lt;/a&gt;.&lt;/p&gt;</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>AcknowledgeText</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -285,43 +220,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>VIVO Project 2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=About</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>About VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>This is a test system for VIVO!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=VIVO Project</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Holly Mistlebauer set this up!</td>
+	<td>VIVO Project</td>
 	<td></td>
 </tr>
 <tr>
@@ -342,6 +242,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Log in</td>
 	<td></td>
 </tr>
 </tbody></table>
