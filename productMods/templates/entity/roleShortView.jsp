@@ -64,7 +64,7 @@ Optional vars:
  				            <c:otherwise>
  				            <%-- This Role is not linked to anything yet; use name as a placeholder and 
  				                 add link to the Role so user can add more information. --%> 				                 				                     				                    
-								<c:set var="name" value="unknown"/>
+						     <%--		<c:set var="name" value="unknown"/> --%>
  				                <c:set var="errorMsg" value="&nbsp;(unidentified activity - please edit)"/>
  				                <c:set var="label" value="${ ! empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabeled role' }"/>
                                 <c:set var="uri" value=""/>
@@ -96,7 +96,7 @@ Optional vars:
                                     <c:otherwise><c:set var="name" value="unlabeled ${param.roleActivityLabel} to person relation"/></c:otherwise>
                                </c:choose>
                                <c:set var="name" value="unknown person"/>
-                               <c:set var="label" value="${ ! empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabled param.roleActivityLabel to person relation' }"/>                   
+                               <c:set var="label" value="${ ! empty individual.rdfsLabel ? individual.rdfsLabel : 'unlabeled param.roleActivityLabel to person relation' }"/>                   
                                <c:set var="errorMsg" value="&nbsp;(unidentified person - please edit)"/>
                                <c:set var="uri" value=""/>
 					        </c:otherwise>

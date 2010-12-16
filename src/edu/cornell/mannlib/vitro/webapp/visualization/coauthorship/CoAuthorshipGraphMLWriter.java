@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoAuthorshipVOContainer;
@@ -18,6 +21,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
 
 public class CoAuthorshipGraphMLWriter {
 	
+    private static final Log log = LogFactory.getLog(CoAuthorshipGraphMLWriter.class);
+    
 	private StringBuilder coAuthorshipGraphMLContent;
 
 	private final String GRAPHML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" 
@@ -109,9 +114,9 @@ public class CoAuthorshipGraphMLWriter {
 	private void getEdgeContent(StringBuilder graphMLContent, Edge currentEdge) {
 		
 		/*
-		System.out.print("EDGE_ID:" + currentEdge.getEdgeID() + "|");
-		System.out.print("EDGE_SOURCE:" + currentEdge.getSourceNode().getNodeURL() + "|");
-		System.out.println("EDGE_TARGET:" + currentEdge.getTargetNode().getNodeURL());
+		log.debug("EDGE_ID:" + currentEdge.getEdgeID() + "|");
+		log.debug("EDGE_SOURCE:" + currentEdge.getSourceNode().getNodeURL() + "|");
+		log.debug("EDGE_TARGET:" + currentEdge.getTargetNode().getNodeURL());
 		*/
 		graphMLContent.append("<edge " 
 									+ "id=\"" + currentEdge.getEdgeID() + "\" " 
@@ -230,15 +235,15 @@ public class CoAuthorshipGraphMLWriter {
 														  VisualizationController
 														  		.URL_ENCODING_SCHEME).toString();
 		} catch (UnsupportedEncodingException e) {
-			System.err.println("URL Encoding ERRor. Move this to use log.error ASAP");
+			log.warn(e,e);
 		}
 		
 		
-//		System.out.print("NODE_ID:" + node.getNodeID() + "|");
+//		log.debug("NODE_ID:" + node.getNodeID() + "|");
 		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
 		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURL() + "</data>\n");
 //		graphMLContent.append("\t<data key=\"name\">" + node.getNodeName() + "</data>\n");
-//		System.out.println("NODE_NAME:" + node.getNodeURL());
+//		log.debug("NODE_NAME:" + node.getNodeURL());
 		graphMLContent.append("\t<data key=\"label\">" + node.getNodeName() + "</data>\n");
 		
 		if (profileURL != null) {

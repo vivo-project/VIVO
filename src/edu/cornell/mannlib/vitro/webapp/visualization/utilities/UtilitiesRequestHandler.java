@@ -36,18 +36,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.visutils.GenericQueryHandl
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
-public class UtilitiesRequestHandler extends VisualizationRequestHandler {
+public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	
-	public UtilitiesRequestHandler(VitroRequest vitroRequest,
-			HttpServletRequest request, HttpServletResponse response, Log log) {
+	public void generateVisualization(VitroRequest vitroRequest,
+									  HttpServletRequest request, 
+									  HttpServletResponse response, 
+									  Log log, 
+									  DataSource dataSource) {
 
-		super(vitroRequest, request, response, log);
-
-	}
-
-	public void generateVisualization(DataSource dataSource) {
-
-		VitroRequest vitroRequest = super.getVitroRequest();
         String individualURIParam = vitroRequest.getParameter(
         									VisualizationFrameworkConstants
         											.INDIVIDUAL_URI_URL_HANDLE);
@@ -57,8 +53,6 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
         
         String preparedURL = "";
 
-        Log log = super.getLog();
-        HttpServletRequest request = super.getRequest();
         try {
         
             /*
@@ -89,15 +83,20 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
     				
     				Gson profileInformation = new Gson();
     				
-    				prepareVisualizationQueryResponse(profileInformation
-    														.toJson(profilePropertiesToValues));
+    				prepareVisualizationQueryResponse(
+    						profileInformation.toJson(profilePropertiesToValues),
+    						response);
     				
     				return;
     				
     				
     			} catch (MalformedQueryParametersException e) {
     				try {
-    					handleMalformedParameters(e.getMessage());
+    					handleMalformedParameters(e.getMessage(), 
+    											  vitroRequest, 
+    											  request, 
+    											  response, 
+    											  log);
     				} catch (ServletException e1) {
     					log.error(e1.getStackTrace());
     				} catch (IOException e1) {
@@ -140,13 +139,17 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
     								imageQueryHandler.getVisualizationJavaValueObjects(),
     								fieldLabelToOutputFieldLabel);
     				
-    				prepareVisualizationQueryResponse(thumbnailAccessURL);
+    				prepareVisualizationQueryResponse(thumbnailAccessURL, response);
     				return;
     				
     				
     			} catch (MalformedQueryParametersException e) {
     				try {
-    					handleMalformedParameters(e.getMessage());
+    					handleMalformedParameters(e.getMessage(), 
+    											  vitroRequest, 
+    											  request, 
+    											  response, 
+    											  log);
     				} catch (ServletException e1) {
     					log.error(e1.getStackTrace());
     				} catch (IOException e1) {
@@ -164,7 +167,7 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
     	    	 * */
 				
 				preparedURL += request.getContextPath()
-								+ "/admin/visQuery"
+								+ VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX
 								+ "?" 
 								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
 								+ "=" + URLEncoder.encode(individualURIParam, 
@@ -181,7 +184,7 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 												  .toString();
 				
 
-				prepareVisualizationQueryResponse(preparedURL);
+				prepareVisualizationQueryResponse(preparedURL, response);
 				return;
 
 			} else if (VisualizationFrameworkConstants.PERSON_LEVEL_UTILS_VIS_MODE
@@ -192,7 +195,7 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
     	    	 * */
 				
 				preparedURL += request.getContextPath()
-								+ "/admin/visQuery"
+								+ VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX
 								+ "?" 
 								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_URL_HANDLE 
 								+ "=" + URLEncoder.encode(individualURIParam, 
@@ -207,7 +210,7 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 																.STANDALONE_RENDER_MODE_URL_VALUE, 
 						 				 VisualizationController.URL_ENCODING_SCHEME).toString();
 				
-				prepareVisualizationQueryResponse(preparedURL);
+				prepareVisualizationQueryResponse(preparedURL, response);
 				return;
 
 			} else {
@@ -219,7 +222,7 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 								+ "=" + URLEncoder.encode(individualURIParam, 
 										 VisualizationController.URL_ENCODING_SCHEME).toString();
 				
-				prepareVisualizationQueryResponse(preparedURL);
+				prepareVisualizationQueryResponse(preparedURL, response);
 				return;
 	
 			}
@@ -256,13 +259,14 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 		return finalThumbNailLocation;
 	}
 	
-	private void prepareVisualizationQueryResponse(String preparedURL) {
+	private void prepareVisualizationQueryResponse(String preparedURL, 
+												   HttpServletResponse response) {
 
-		super.getResponse().setContentType("text/plain");
+		response.setContentType("text/plain");
 		
 		try {
 		
-		PrintWriter responseWriter = super.getResponse().getWriter();
+		PrintWriter responseWriter = response.getWriter();
 		
 		responseWriter.append(preparedURL);
 		
@@ -273,12 +277,15 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 		}
 	}
 	
-	private void handleMalformedParameters(String errorMessage)
+	private void handleMalformedParameters(String errorMessage, 
+			VitroRequest vitroRequest, 
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Log log)
 		throws ServletException, IOException {
 	
-		Portal portal = super.getVitroRequest().getPortal();
+		Portal portal = vitroRequest.getPortal();
 		
-		HttpServletRequest request = super.getRequest();
 		request.setAttribute("error", errorMessage);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(Controllers.BASIC_JSP);
@@ -287,9 +294,8 @@ public class UtilitiesRequestHandler extends VisualizationRequestHandler {
 		request.setAttribute("title", "Visualization Query Error - Individual Publication Count");
 		
 		try {
-			requestDispatcher.forward(request, super.getResponse());
+			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-			Log log = super.getLog();
 			log.error("EntityEditController could not forward to view.");
 			log.error(e.getMessage());
 			log.error(e.getStackTrace());

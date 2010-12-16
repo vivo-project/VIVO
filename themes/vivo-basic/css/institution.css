@@ -9,7 +9,7 @@
 
 /**********************************************************************************
  Add styles for institutional identity here.
- Be sure to place all of your content in <div id="institution"> found in themes/vivo-basic/jsp/identity.jsp on line 77.
+ Be sure to place all of your content in <div id="institution"> found in themes/vivo-basic/templates/identity.ftl on line 5.
  
  See our online documentation for more info:
  http://vivoweb.org/support/user-guide/theme-modifications

@@ -63,7 +63,6 @@ public class PersonPublicationCountQueryHandler implements QueryHandler<List<Bib
 			+ "		(str(?documentDescription) as ?documentDescriptionLit) ";
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
-			+ "?document rdf:type bibo:Document ." 
 			+ "?document rdfs:label ?documentLabel ." 
 			+ "OPTIONAL {  ?document core:year ?publicationYear } ." 
 			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } ." 

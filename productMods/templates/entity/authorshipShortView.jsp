@@ -11,10 +11,10 @@
 					    <c:choose>
                             <c:when test="${!empty individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedInformationResource']}"><%-- this Authorship is linked to an InformationResource --%>
 					            <c:set var="infoResource" value="${individual.objectPropertyMap['http://vivoweb.org/ontology/core#linkedInformationResource'].objectPropertyStatements[0].object}" />
-					            <c:set var="name"  value="${infoResource.name}"/>
-					            <%-- <c:set var="label" value="${infoResource.moniker}" /> --%>
+					            <c:set var="name"  value="${infoResource.name}"/>	   
                                 <c:set var="label" value="${infoResource.VClass.name}"/>
                                 <c:set var="uri" value="${infoResource.URI}"/>
+                                <c:set var="year" value="${infoResource.dataPropertyMap['http://vivoweb.org/ontology/core#year'].dataPropertyStatements[0].data}" />
                             </c:when>
  				            <c:otherwise><%-- this Position is not linked to a Publication yet; use Authorship name as a placeholder and add link to the Authorship so user can add more information --%>
  				                <c:choose>
@@ -60,10 +60,10 @@
 			    <c:choose>
 			    	<c:when test="${!empty uri}">
 			            <c:url var="olink" value="/entity"><c:param name="uri" value="${uri}"/></c:url>
-		                <a href="<c:out value="${olink}"/>">${name}</a> ${label}
+		                <a href="<c:out value="${olink}"/>">${name}</a> ${label}&nbsp;${year}
 		            </c:when>
 		            <c:otherwise>
-		                <strong>${name}</strong> ${label}
+		                <strong>${name}</strong> ${label}&nbsp;${year}
 		            </c:otherwise>
 		        </c:choose>
 			</c:when>

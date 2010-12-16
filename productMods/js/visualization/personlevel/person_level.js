@@ -1,6 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 function getWellFormedURLs(given_uri, type) {
+	
+	if (!given_uri || given_uri == "") {
+		return;
+	}
 
 	// general best practice is to put javascript code inside document.ready
 	// but in this case when i do that the function does not get called
@@ -14,7 +18,7 @@ function getWellFormedURLs(given_uri, type) {
 	if (type == "coauthorship") {
 
 		finalURL = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "PERSON_LEVEL_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
@@ -28,7 +32,7 @@ function getWellFormedURLs(given_uri, type) {
 	} else if (type == "profile") {
 
 		finalURL = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "PROFILE_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
@@ -41,7 +45,7 @@ function getWellFormedURLs(given_uri, type) {
 	} else if (type == "image") {
 
 		finalURL = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "IMAGE_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
@@ -54,7 +58,7 @@ function getWellFormedURLs(given_uri, type) {
 	} else if (type == "profile_info") {
 
 		var profileInfoJSON = $.ajax({
-			url: contextPath + "/admin/visQuery",
+			url: contextPath + "/visualization",
 			data: ({vis: "utilities", vis_mode: "PROFILE_INFO", uri: given_uri}),
 			dataType: "json",
 			async: false,
@@ -86,8 +90,9 @@ function setProfileImage(imageContainerID, mainImageURL, contextPath) {
 		return;
 	}
 	
-	if (!mainImageURL) {
+	if (!mainImageURL || mainImageURL == "") {
 		$("#" + imageContainerID).empty();
+		return;
 	}
 	
 	var rawPath = getWellFormedURLs(mainImageURL, "image");
@@ -172,6 +177,10 @@ function processProfileInformation(nameContainerID,
 		doNameEllipsis) {
 
 	var name, mainImageURL, imageContextPath, moniker;
+	
+	if (jQuery.isEmptyObject(profileInfoJSON)) {
+		return;
+	}
 
 	$.each(profileInfoJSON, function(key, set){
 

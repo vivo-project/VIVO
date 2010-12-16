@@ -6,14 +6,14 @@
 <c:set var="themeDir"><c:out value="${portalBean.themeDir}" /></c:set>
 <c:set var="contextPath"><c:out value="${pageContext.request.contextPath}" /></c:set>
 
-<c:url var="egoCoAuthorshipDataFeederURL" value="/admin/visQuery">
+<c:url var="egoCoAuthorshipDataFeederURL" value="/visualization">
 	<c:param name="vis" value="coauthorship" />
 	<c:param name="render_mode" value="data" />
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 	<c:param name="labelField" value="label" />
 </c:url>
 
-<c:url var="egoCoAuthorsListDataFileURL" value="/admin/visQuery">
+<c:url var="egoCoAuthorsListDataFileURL" value="/visualization">
 	<c:param name="vis" value="person_level" />
 	<c:param name="render_mode" value="data" />
 	<c:param name="vis_mode" value="coauthors" />

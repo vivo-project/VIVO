@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,6 +41,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.DatasetFactory;
@@ -52,11 +56,8 @@ import edu.cornell.mannlib.vedit.controller.BaseEditController;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.CollegePublicationCountRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
 /**
  * Services a visualization request. This will return a simple error message and a 501 if
@@ -65,6 +66,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequest
  * @author cdtank
  */
 public class VisualizationController extends BaseEditController {
+
+	private Map<String, VisualizationRequestHandler> visualizationIDsToClass;
 
 	private static final String VIS_TYPE_URL_HANDLE = "vis";
 	
@@ -95,7 +98,30 @@ public class VisualizationController extends BaseEditController {
     public static final String UTILITIES_URL_VALUE
 									= "utilities";
 
+    @Override
+    public void init() throws ServletException {
+    	super.init();
+    	try {
+			
+			String resourcePath = 
+				getServletContext()
+					.getRealPath("/WEB-INF/visualization/visualizations-beans-injection.xml");
+			
+			ApplicationContext context = new ClassPathXmlApplicationContext(
+												"file:" + resourcePath);
 
+			BeanFactory factory = context;
+			
+			VisualizationInjector visualizationInjector = 
+					(VisualizationInjector) factory.getBean("visualizationInjector");
+			
+			visualizationIDsToClass = visualizationInjector.getVisualizationIDToClass();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -103,7 +129,6 @@ public class VisualizationController extends BaseEditController {
         this.doGet(request, response);
     }
     
-    //TODO: Set it up so visualizations register themselves with this object. Don't tie this class to each visualization.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -113,143 +138,44 @@ public class VisualizationController extends BaseEditController {
 
     	String visTypeURLHandle = vreq.getParameter(VIS_TYPE_URL_HANDLE);
     	
-		if (PERSON_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
-
-    		PersonPublicationCountRequestHandler visRequestHandler =
-    			new PersonPublicationCountRequestHandler(vreq, request, response, log);
-
-            String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-            DataSource dataSource = setupJENADataSource(request,
-            											response,
-            											vreq,
-            											rdfResultFormatParam);
-
-            if (dataSource != null) {
-            	
-            	/*
-            	 * This is side-effecting because the visualization content is added
-            	 * to the request object.
-            	 * */
-            	visRequestHandler.generateVisualization(dataSource);
-
-            } else {
-            	
-            	log.error("ERROR! Data Model Empty");
-            }
-
-    	} else if (COLLEGE_PUBLICATION_COUNT_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
-    		
-    		CollegePublicationCountRequestHandler visRequestHandler =
-    			new CollegePublicationCountRequestHandler(vreq, request, response, log);
-
-            String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-            DataSource dataSource = setupJENADataSource(request,
-            											response,
-            											vreq,
-            											rdfResultFormatParam);
-            
-            if (dataSource != null) {
-
-            	/*
-            	 * This is side-effecting because the visualization content is added
-            	 * to the request object.
-            	 * */
-            	visRequestHandler.generateVisualization(dataSource);
-
-            } else {
-            	log.error("ERROR! data model empoty");
-            }
- 
-    	} else if (COAUTHORSHIP_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
-    		
-    		CoAuthorshipRequestHandler visRequestHandler =
-    			new CoAuthorshipRequestHandler(vreq, request, response, log);
-
-            String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-            DataSource dataSource = setupJENADataSource(request,
-            											response,
-            											vreq,
-            											rdfResultFormatParam);
-
-            if (dataSource != null) {
-
-            	/*
-            	 * This is side-effecting because the visualization content is added
-            	 * to the request object.
-            	 * */
-            	visRequestHandler.generateVisualization(dataSource);
-
-            } else {
-            	log.error("ERROR! data model empoty");
-            }
- 
-    	} else if (PERSON_LEVEL_VIS_URL_VALUE.equalsIgnoreCase(visTypeURLHandle)) {
-    		
-    		PersonLevelRequestHandler visRequestHandler =
-    			new PersonLevelRequestHandler(vreq, request, response, log);
-
-            String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-            DataSource dataSource = setupJENADataSource(request,
-            											response,
-            											vreq,
-            											rdfResultFormatParam);
-
-            if (dataSource != null) {
-
-            	/*
-            	 * This is side-effecting because the visualization content is added
-            	 * to the request object.
-            	 * */
-            	visRequestHandler.generateVisualization(dataSource);
-
-            } else {
-            	log.error("ERROR! data model empoty");
-            }
- 
-    	} else if (UTILITIES_URL_VALUE
-    			.equalsIgnoreCase(visTypeURLHandle)) {
-    		
-    		UtilitiesRequestHandler visRequestHandler =
-    			new UtilitiesRequestHandler(vreq, request, response, log);
-
-            String rdfResultFormatParam = "RDF/XML-ABBREV";
-
-            DataSource dataSource = setupJENADataSource(request,
-            											response,
-            											vreq,
-            											rdfResultFormatParam);
-
-            if (dataSource != null) {
-
-            	/*
-            	 * This is side-effecting because the visualization content is added
-            	 * to the request object.
-            	 * */
-            	visRequestHandler.generateVisualization(dataSource);
-
-            } else {
-            	log.error("ERROR! data model empoty");
-            }
- 
-    	} else {
-    		
-    		log.debug("vis uqery parameter value -> " + vreq.getParameter("vis"));
-    		log.debug("uri uqery parameter value -> " + vreq.getParameter("uri"));
-    		log.debug("render_mode query parameter value -> " + vreq.getParameter("render_mode"));
+    	VisualizationRequestHandler visRequestHandler = null;
+    	try {
+    		visRequestHandler = visualizationIDsToClass.get(visTypeURLHandle);
+    	} catch (NullPointerException nullKey) {
 
     		/*
-    		 * This is side-effecting because the error content is directly
+    		 * This is side-effecting because the error content is directly 
     		 * added to the request object. From where it is redirected to
     		 * the error page.
     		 * */
     		handleMalformedParameters("Inappropriate query parameters were submitted. ", 
-    								  request, 
-    								  response);
-    	}
+					  request, 
+					  response);
+		}
+    	
+        DataSource dataSource = setupJENADataSource(request,
+        											response,
+        											vreq);
+
+        if (dataSource != null && visRequestHandler != null) {
+        	
+        	/*
+        	 * This is side-effecting because the visualization content is added
+        	 * to the request object.
+        	 * */
+        	visRequestHandler.generateVisualization(vreq, request, response, log, dataSource);
+        	
+        } else {
+        	
+    		String errorMessage = "Data Model Empty &/or Inappropriate " 
+    									+ "query parameters were submitted. ";
+    		
+			handleMalformedParameters(errorMessage, 
+					  request, 
+					  response);
+    		
+			log.error(errorMessage);
+        }
 
         return;
     }
@@ -283,8 +209,8 @@ public class VisualizationController extends BaseEditController {
 		            HttpSession session = request.getSession(true);
 
 		            session.setAttribute("postLoginRequest",
-		                    vreq.getRequestURI()+( vreq.getQueryString()!=null?('?' + vreq.getQueryString()):"" ));
-		            String redirectURL = request.getContextPath() + Controllers.SITE_ADMIN + "?login=block";
+            vreq.getRequestURI()+( vreq.getQueryString()!=null?('?' + vreq.getQueryString()):"" ));
+            String redirectURL = request.getContextPath() + Controllers.SITE_ADMIN + "?login=block";
 		            response.sendRedirect(redirectURL);
 		            return null;
 		        }
@@ -293,8 +219,7 @@ public class VisualizationController extends BaseEditController {
 	}
 
 	private DataSource setupJENADataSource(HttpServletRequest request,
-			HttpServletResponse response, VitroRequest vreq,
-			String rdfResultFormatParam) {
+			HttpServletResponse response, VitroRequest vreq) {
 
 		Model model = vreq.getJenaOntModel(); // getModel()
         if (model == null) {
@@ -302,7 +227,7 @@ public class VisualizationController extends BaseEditController {
             return null;
         }
 
-        log.debug("rdfResultFormat was: " + rdfResultFormatParam);
+        log.debug("rdfResultFormat was: " + VisConstants.RDF_RESULT_FORMAT_PARAM);
 
         DataSource dataSource = DatasetFactory.create();
         ModelMaker maker = (ModelMaker) getServletContext().getAttribute("vitroJenaModelMaker");

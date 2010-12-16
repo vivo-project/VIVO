@@ -47,7 +47,7 @@ the desired machine:
     * Apache Ant 1.7 or higher [http://ant.apache.org]
     * MySQL 5.1 or higher [http://www.mysql.com]
 
-Be sure to setup the environment variables for “JAVA_HOME” and “ANT_HOME” and 
+Be sure to setup the environment variables for "JAVA_HOME" and "ANT_HOME" and 
 add the executables to your path per your operating system and installation 
 directions from the software support web sites.
 
@@ -74,7 +74,7 @@ Keep track of the database name, username, and password for Step IV.
  
 III. Download the VIVO Application Source
 
-Download the VIVO application source as either rel-1.1.zip or rel-1.1.gz file 
+Download the VIVO application source as either rel-1.1.1.zip or rel-1.1.1.gz file 
 and unpack it on your web server:
       
       http://vivoweb.org/download
@@ -88,8 +88,8 @@ example.deploy.properties to a file named simply deploy.properties. This file
 sets several properties used in compilation and deployment.
 
 NOTE: For those installing on Windows operating system, include the windows 
-directory and use the forward slash “/” and not the back slash “\” in the 
-directory locations, e.g. “c:/tomcat”.
+drive and use the forward slash "/" and not the back slash "\" in the 
+directory locations, e.g. "c:/tomcat".
 
                 Default namespace: VIVO installations make their RDF resources available for harvest 
                 using linked data. Requests for RDF resource URIs redirect to HTML 

@@ -283,7 +283,6 @@ public class CollegePublicationCountQueryHandler implements QueryHandler<Set<Viv
 		String sparqlQuery = " {?department " + ontologyHandle + " ?" + employeeHandle + " . " 
 							+ "?" + employeeHandle + " rdf:type foaf:Person; rdfs:label ?authorLabel. " 
 							+ "OPTIONAL { ?" + employeeHandle + " vivo:authorOf ?document ." +
-										" ?document rdf:type bibo:Document ." +
 										" ?document rdfs:label ?documentLabel ." +
 										" OPTIONAL { ?document vitro:moniker ?documentMoniker } ." +
 										" OPTIONAL { ?document vitro:blurb ?documentBlurb } ." +

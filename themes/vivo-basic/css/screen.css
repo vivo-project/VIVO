@@ -150,10 +150,9 @@ select#search-form-modifier,
 #searchForm label { display: none; }
 
 div#searchBlock {
-  width: 19em;
   height: 100%;
   text-align: right;
-  padding: 0 20px 0 10px !important; /* fix for IE6 */
+  padding: 0 20px 0 20px !important; /* fix for IE6 */
   padding: 10px 20px;
   position: absolute;
   top: 0;
