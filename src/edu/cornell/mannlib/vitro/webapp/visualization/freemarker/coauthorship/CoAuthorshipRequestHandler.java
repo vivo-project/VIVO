@@ -91,7 +91,11 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 											    DataSource dataSource) 
 		throws MalformedQueryParametersException {
 
-		String egoURI = vitroRequest.getParameter(
+		/*
+		 * Support for this has ceased to exist. Standalone mode was created only for demo 
+		 * purposes for VIVO Conf.
+		 * */
+/*		String egoURI = vitroRequest.getParameter(
         										VisualizationFrameworkConstants
         												.INDIVIDUAL_URI_KEY);
 
@@ -104,10 +108,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	    	
 		return prepareStandaloneResponse(egoURI,
 										 authorNodesAndEdges,
-										 vitroRequest);
-
-			
+										 vitroRequest);*/
+		
+		throw new UnsupportedOperationException("CoAuthorship does not provide Standalone Response.");
+		
 	}
+	
+	
 
 	private String getCoauthorsPerYearCSVContent(Map<String, Set<Node>> yearToCoauthors) {
 		
