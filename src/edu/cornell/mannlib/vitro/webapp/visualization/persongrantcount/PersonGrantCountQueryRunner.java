@@ -128,7 +128,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+ "?Grant rdfs:label ?GrantLabel ; core:startDate ?GrantStartDate ; core:endDate ?GrantEndDate ."
 							+ "}";
 		
-		System.out.println("SPARQL query for person grant count -> \n"+ sparqlQuery);
+		log.debug("SPARQL query for person grant count -> \n"+ sparqlQuery);
 		return sparqlQuery;
 	}
 	

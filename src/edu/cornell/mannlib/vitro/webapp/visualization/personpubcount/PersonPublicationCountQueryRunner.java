@@ -186,7 +186,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
 							+ "}";
 
-		System.out.println("SPARQL query for person pub count -> \n" + sparqlQuery);
+		log.debug("SPARQL query for person pub count -> \n" + sparqlQuery);
 		return sparqlQuery;
 	}
 

@@ -2,15 +2,14 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Edge;
@@ -29,13 +28,7 @@ public class CoAuthorshipGraphMLWriter {
 	private final String GRAPHML_FOOTER = "</graphml>";
 	
 	public CoAuthorshipGraphMLWriter(CoAuthorshipData visVOContainer) {
-		
 		coAuthorshipGraphMLContent = createCoAuthorshipGraphMLContent(visVOContainer);
-		
-	}
-
-	public StringBuilder getCoAuthorshipGraphMLContent() {
-		return coAuthorshipGraphMLContent;
 	}
 
 	private StringBuilder createCoAuthorshipGraphMLContent(
@@ -62,6 +55,10 @@ public class CoAuthorshipGraphMLWriter {
 		
 		return graphMLContent;
 	}
+	
+	public StringBuilder getCoAuthorshipGraphMLContent() {
+		return coAuthorshipGraphMLContent;
+	}
 
 	private void generateGraphContent(CoAuthorshipData coAuthorshipData,
 			StringBuilder graphMLContent) {
@@ -77,10 +74,6 @@ public class CoAuthorshipGraphMLWriter {
 		}
 		
 		graphMLContent.append("</graph>\n");
-		  
-		
-		
-		
 	}
 
 	private void generateEdgeSectionContent(CoAuthorshipData coAuthorshipData,
@@ -101,9 +94,7 @@ public class CoAuthorshipGraphMLWriter {
 			 * is being side-effected. 
 			 * */
 			getEdgeContent(graphMLContent, currentEdge);
-			
 		}
-		
 	}
 
 	private void getEdgeContent(StringBuilder graphMLContent, Edge currentEdge) {
@@ -211,17 +202,12 @@ public class CoAuthorshipGraphMLWriter {
 	}
 
 	private void getNodeContent(StringBuilder graphMLContent, Node node) {
-		
-		String profileURL = null;
-		try {
-			profileURL = VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX + "?" 
-								+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
-								+ "=" + URLEncoder.encode(node.getNodeURI(),
-														  StandardVisualizationController
-														  		.URL_ENCODING_SCHEME).toString();
-		} catch (UnsupportedEncodingException e) {
-			System.err.println("URL Encoding ERRor. Move this to use log.error ASAP");
-		}
+
+		ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+														   node.getNodeURI());
+
+		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
+			individualProfileURLParams);
 		
 		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
 		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURI() + "</data>\n");

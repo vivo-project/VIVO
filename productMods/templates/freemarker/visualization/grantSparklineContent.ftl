@@ -69,8 +69,6 @@
         
         <#if sparklineVO.shortVisMode>
          
-        console.log("Yay! Short Vis Mode!");
-         
         <#-- For the short view we only want the last 10 year's view of grant count, hence we filter 
         	the data we actually want to use for render. -->
          
@@ -78,13 +76,9 @@
                 column: 0,
                 minValue: '${sparklineVO.earliestRenderedGrantYear?c}',
                 maxValue: '${sparklineVO.latestRenderedGrantYear?c}'
-                /*minValue: '2001',
-                maxValue: '2011'*/
         }]));
          
         <#else>
-         
-        console.log("Yay! Full Vis Mode!");
          
         </#if>         
         
@@ -130,6 +124,7 @@
 		 
 		 $('#${sparklineContainerID} td.sparkline_text').html(sparksText);        
         
+        }
         
 	/*
 	 * This will activate the visualization. It takes care of creating 

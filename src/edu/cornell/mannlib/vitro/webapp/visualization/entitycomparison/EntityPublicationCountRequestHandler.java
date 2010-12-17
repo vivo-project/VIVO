@@ -5,10 +5,10 @@ package edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,17 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
-import com.google.gson.Gson;
 
+import com.google.gson.Gson;
 import com.hp.hpl.jena.query.DataSource;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
@@ -45,7 +44,6 @@ public class EntityPublicationCountRequestHandler implements
 	public static String SUB_ENTITY_VIS_MODE;
 
 
-	@SuppressWarnings("null")
 	public void generateVisualization(VitroRequest vitroRequest,
 			HttpServletRequest request, HttpServletResponse response, Log log,
 			DataSource dataSource) {
@@ -91,13 +89,13 @@ public class EntityPublicationCountRequestHandler implements
 			if (VisualizationFrameworkConstants.DATA_RENDER_MODE
 					.equalsIgnoreCase(renderMode)) {
 
-				prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult, response);
+				prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult, response, log);
 
 			} else if (VisualizationFrameworkConstants.STANDALONE_RENDER_MODE
 					.equalsIgnoreCase(renderMode)) {
 
 				prepareStandaloneResponse(request, response, vitroRequest,
-						entity, subOrganizationTypesResult);
+						entity, subOrganizationTypesResult, log);
 				requestDispatcher = request
 						.getRequestDispatcher(Controllers.BASIC_JSP);
 			}
@@ -135,9 +133,10 @@ public class EntityPublicationCountRequestHandler implements
 	 * @param subOrganizationTypesResult 
 	 * @param yearToPublicationCount
 	 * @param response
+	 * @param log 
 	 */
 	private void prepareDataResponse(Entity entity, Set<SubEntity> subentities,
-			Map<String, Set<String>> subOrganizationTypesResult, HttpServletResponse response) {
+			Map<String, Set<String>> subOrganizationTypesResult, HttpServletResponse response, Log log) {
 
 		String entityLabel = entity.getEntityLabel();
 
@@ -156,7 +155,7 @@ public class EntityPublicationCountRequestHandler implements
 			 * We are side-effecting responseWriter since we are directly
 			 * manipulating the response object of the servlet.
 			 */
-			responseWriter.append(writePublicationsOverTimeJSON(subentities, subOrganizationTypesResult));
+			responseWriter.append(writePublicationsOverTimeJSON(subentities, subOrganizationTypesResult, log));
 
 			responseWriter.flush();
 			responseWriter.close();
@@ -175,9 +174,10 @@ public class EntityPublicationCountRequestHandler implements
 	 * @param vreq
 	 * @param entity
 	 * @param subOrganizationTypesResult 
+	 * @param log 
 	 */
 	private void prepareStandaloneResponse(HttpServletRequest request,
-			HttpServletResponse response, VitroRequest vreq, Entity entity, Map<String, Set<String>> subOrganizationTypesResult) {
+			HttpServletResponse response, VitroRequest vreq, Entity entity, Map<String, Set<String>> subOrganizationTypesResult, Log log) {
 
 		Portal portal = vreq.getPortal();
 		String jsonContent = "";
@@ -185,7 +185,7 @@ public class EntityPublicationCountRequestHandler implements
 		 * We are side-effecting responseWriter since we are directly
 		 * manipulating the response object of the servlet.
 		 */
-		jsonContent = writePublicationsOverTimeJSON(entity.getSubEntities(), subOrganizationTypesResult);
+		jsonContent = writePublicationsOverTimeJSON(entity.getSubEntities(), subOrganizationTypesResult, log);
 
 		request.setAttribute("JsonContent", jsonContent);
 
@@ -201,15 +201,16 @@ public class EntityPublicationCountRequestHandler implements
 	/**
 	 * function to generate a json file for year <-> publication count mapping
 	 * @param subOrganizationTypesResult 
+	 * @param log 
 	 * 
 	 * @param yearToPublicationCount
 	 * @param responseWriter
 	 * @param visMode
 	 */
-	private String writePublicationsOverTimeJSON(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String writePublicationsOverTimeJSON(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult, Log log) {
 //		System.out.println("\nsub entity vis mode ------>"
 //				+ SUB_ENTITY_VIS_MODE + "\n");
-		System.out.println("Creating JSONObject \n-----------------------");
+		log.debug("Creating JSONObject \n-----------------------");
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
 
@@ -239,7 +240,7 @@ public class EntityPublicationCountRequestHandler implements
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			setEntityVisMode(entityJson);
 			//entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
-			System.out.println("Adding object with uri: "
+			log.debug("Adding object with uri: "
 					+ entityJson.getEntityURI() + " vismode: "
 					+ entityJson.getVisMode() + " label: "
 					+ entityJson.getLabel() + " type: "

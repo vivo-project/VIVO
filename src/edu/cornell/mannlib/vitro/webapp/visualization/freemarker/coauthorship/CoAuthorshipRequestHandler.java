@@ -190,10 +190,6 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	 */
 	private Map<String, String> prepareNetworkDataResponse(CoAuthorshipData authorNodesAndEdges) {
 	
-		/*
-		 * We are side-effecting responseWriter since we are directly manipulating the response 
-		 * object of the servlet.
-		 * */
 		CoAuthorshipGraphMLWriter coAuthorshipGraphMLWriter = 
 				new CoAuthorshipGraphMLWriter(authorNodesAndEdges);
 		

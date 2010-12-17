@@ -1,106 +1,108 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount;
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator;
 
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearGrantCountDataElement;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
 
-
+/**
+ * This class contains code for rendering sparklines and displaying tables for 
+ * Co-PI visualization.
+ * @author bkoniden
+ * Deepak Konidena
+ */
 @SuppressWarnings("serial")
-public class PersonGrantCountVisCodeGenerator {
-	
+public class CoPIVisCodeGenerator {
+
 	/*
 	 * There are 2 modes of sparkline that are available via this visualization.
 	 * 		1. Short Sparkline - This sparkline will render all the data points (or sparks),
-	 * 			which in this case are the grants over the years, from the last 10 years.
+	 * 			which in this case are the copi(s) over the years, from the last 10 years.
 	 * 
 	 * 		2. Full Sparkline - This sparkline will render all the data points (or sparks) 
 	 * 			spanning the career of the person & last 10 years at the minimum, in case if
-	 * 			the person started his career in the last 10 yeras.
+	 * 			the person started his career in the last 10 years.
 	 * */
-	
 	private static final Map<String, String> VIS_DIV_NAMES = new HashMap<String, String>() { {
 
-		put("SHORT_SPARK", "grant_count_short_sparkline_vis");
-		put("FULL_SPARK", "grant_count_full_sparkline_vis");
+		put("SHORT_SPARK", "unique_copis_short_sparkline_vis");
+		put("FULL_SPARK", "unique_copis_full_sparkline_vis");
 
 	} };
 	
 	private static final String VISUALIZATION_STYLE_CLASS = "sparkline_style";
 	
-	private static final String DEFAULT_VIS_CONTAINER_DIV_ID = "grant_count_vis_container";
+	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_copis_vis_container";
 	
-	private Map<String, Integer> yearToGrantCount;
+	private Map<String, Set<CoPINode>> yearToUniqueCoPIs;
 
 	private Log log;
 
 	private SparklineData sparklineData;
 
+	private String contextPath;
+
 	private String individualURI;
-	
-	public PersonGrantCountVisCodeGenerator(String individualURIParam,
-			String visMode, String visContainer, Set<Grant> piGrants,
-			Map<String, Integer> yearToGrantCount,
-			Log log) {
 
-		this.individualURI = individualURIParam;
-
-		this.yearToGrantCount = yearToGrantCount;
+	public CoPIVisCodeGenerator(String contextPath, 
+			  String individualURI, 
+			  String visMode, 
+			  String visContainer, 
+			  Map<String, Set<CoPINode>> yearToUniqueCoPIs, 
+			  Log log){
+		
+		this.contextPath = contextPath;
+		this.individualURI = individualURI;
+		
+		this.yearToUniqueCoPIs = yearToUniqueCoPIs;
 		this.sparklineData = new SparklineData();
-
-		sparklineData.setYearToActivityCount(yearToGrantCount);
-
+		
 		this.log = log;
-
-		generateVisualizationCode(visMode, visContainer, piGrants);
+		
+		generateVisualizationCode(visMode, visContainer);		
+		
 	}
-	
+
 	/**
-	 * This method is used to generate the visualization code (HMTL, CSS & JavaScript).
-	 * There 2 parts to it - 1. Actual Content Code & 2. Context Code.
-	 * 		1. Actual Content code in this case is the sparkline image, text related to 
-	 * data and the wrapping tables. This is generated via call to google vis API through
-	 * JavaScript.
-	 * 		2. Context code is generally optional but contains code pertaining to tabulated
-	 * data & links to download files etc.
+	 * This method is used to generate the visualization code (HMTL, CSS &
+	 * JavaScript). There 2 parts to it - 1. Actual Content Code & 2. Context
+	 * Code. 1. Actual Content code in this case is the sparkline image, text
+	 * related to data and the wrapping tables. This is generated via call to
+	 * google vis API through JavaScript. 2. Context code is generally optional
+	 * but contains code pertaining to tabulated data & links to download files
+	 * etc.
+	 * 
 	 * @param visMode
 	 * @param visContainer
-	 * @param piGrants
 	 */
-	private void generateVisualizationCode(String visMode,
-										   String visContainer, 
-										   Set<Grant> piGrants) {
-		
-    	sparklineData.setSparklineContent(getMainVisualizationCode(piGrants, 
-																   visMode, 
-																   visContainer));
-    	
-    	
-    	sparklineData.setSparklineContext(getVisualizationContextCode(visMode));
-    	
+	private void generateVisualizationCode(String visMode, String visContainer) {
+
+		sparklineData.setSparklineContent(getMainVisualizationCode(visMode,
+				visContainer));
+
+		sparklineData.setSparklineContext(getVisualizationContextCode(visMode));
+
 	}
-	
-	private String getMainVisualizationCode(Set<Grant> piGrants,
-			String visMode, String providedVisContainerID) {
+
+	private String getMainVisualizationCode(String visMode,
+			String providedVisContainerID) {
 
 		int numOfYearsToBeRendered = 0;
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -112,14 +114,14 @@ public class PersonGrantCountVisCodeGenerator {
 		 * the vis was rendered we dont want to be influenced by the
 		 * "DEFAULT_GRANT_YEAR".
 		 */
-		Set<String> grantYears = new HashSet<String>(yearToGrantCount
+		Set<String> investigatedYears = new HashSet<String>(yearToUniqueCoPIs
 				.keySet());
-		grantYears.remove(VOConstants.DEFAULT_GRANT_YEAR);
+		investigatedYears.remove(VOConstants.DEFAULT_GRANT_YEAR);
 
 		/*
 		 * We are setting the default value of minGrantYear to be 10 years
 		 * before the current year (which is suitably represented by the
-		 * shortSparkMinYear), this in case we run into invalid set of grant
+		 * shortSparkMinYear), this in case we run into invalid set of investigated
 		 * years.
 		 */
 		int minGrantYear = shortSparkMinYear;
@@ -128,23 +130,23 @@ public class PersonGrantCountVisCodeGenerator {
 
 		StringBuilder visualizationCode = new StringBuilder();
 
-		if (yearToGrantCount.size() > 0) {
+		if (yearToUniqueCoPIs.size() > 0) {
 			try {
 				minGrantYear = Integer.parseInt(Collections
-						.min(grantYears));
+						.min(investigatedYears));
 			} catch (NoSuchElementException e1) {
 				log.debug("vis: " + e1.getMessage() + " error occurred for "
-						+ yearToGrantCount.toString());
+						+ yearToUniqueCoPIs.toString());
 			} catch (NumberFormatException e2) {
 				log.debug("vis: " + e2.getMessage() + " error occurred for "
-						+ yearToGrantCount.toString());
+						+ yearToUniqueCoPIs.toString());
 			}
 		}
 
 		int minGrantYearConsidered = 0;
 
 		/*
-		 * There might be a case that the author investigated his first grant
+		 * There might be a case that the person investigated his first grant
 		 * within the last 10 years but we want to make sure that the sparkline
 		 * is representative of at least the last 10 years, so we will set the
 		 * minGrantYearConsidered to "currentYear - 10" which is also given by
@@ -158,29 +160,50 @@ public class PersonGrantCountVisCodeGenerator {
 
 		numOfYearsToBeRendered = currentYear - minGrantYearConsidered + 1;
 
-		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
-
 		visualizationCode.append("<style type='text/css'>" + "."
 				+ VISUALIZATION_STYLE_CLASS + " table{" + "		margin: 0;"
 				+ "  		padding: 0;" + "  		width: auto;"
 				+ "  		border-collapse: collapse;" + "    	border-spacing: 0;"
 				+ "    	vertical-align: inherit;" + "}"
-				+ "table.sparkline_wrapper_table td, th {"
-				+ "	vertical-align: bottom;" + "}" + ".vis_link a{"
-				+ "	padding-top: 5px;" + "}"
+				+ ".incomplete-data-holder {" + "" + "}"
 				+ "td.sparkline_number { text-align:right; "
 				+ "padding-right:5px; }"
-				+ "td.sparkline_text   {text-align:left;}"
-				+ ".incomplete-data-holder {" + "" + "}" + "</style>\n");
+				+ "td.sparkline_text   {text-align:left;}" + "</style>\n");
 
-		visualizationCode.append("<script type=\"text/javascript\">\n"
-				+ "function drawGrantCountVisualization(providedSparklineImgTD) "
-				+ "{\n" + "var data = new google.visualization.DataTable();\n"
-				+ "data.addColumn('string', 'Year');\n"
-				+ "data.addColumn('number', 'Publications');\n"
-				+ "data.addRows(" + numOfYearsToBeRendered + ");\n");
+		visualizationCode
+				.append("<script type=\"text/javascript\">\n"
+						+ "function drawUniqueCoPICountVisualization(providedSparklineImgTD) {\n"
+						+ "var data = new google.visualization.DataTable();\n"
+						+ "data.addColumn('string', 'Year');\n"
+						+ "data.addColumn('number', 'Unique Co-PI(s)');\n"
+						+ "data.addRows(" + numOfYearsToBeRendered + ");\n");
 
-		int grantCounter = 0;
+		int uniqueCoPICounter = 0;
+		int renderedFullSparks = 0;
+		Set<CoPINode> allCoPIsWithKnownGrantShipYears = new HashSet<CoPINode>();
+
+		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
+
+			String grantYearAsString = String.valueOf(grantYear);
+			Set<CoPINode> currentCoPIs = yearToUniqueCoPIs
+					.get(grantYearAsString);
+
+			Integer currentUniqueCoPIs = null;
+
+			if (currentCoPIs != null) {
+				currentUniqueCoPIs = currentCoPIs.size();
+				allCoPIsWithKnownGrantShipYears.addAll(currentCoPIs);
+			} else {
+				currentUniqueCoPIs = 0;
+			}
+
+			visualizationCode.append("data.setValue(" + uniqueCoPICounter
+					+ ", 0, '" + grantYearAsString + "');\n");
+
+			visualizationCode.append("data.setValue(" + uniqueCoPICounter
+					+ ", 1, " + currentUniqueCoPIs + ");\n");
+			uniqueCoPICounter++;
+		}
 
 		/*
 		 * For the purpose of this visualization I have come up with a term
@@ -188,55 +211,17 @@ public class PersonGrantCountVisCodeGenerator {
 		 * rendered in full mode will always be the one's which have any year
 		 * associated with it. Hence.
 		 */
-		int renderedFullSparks = 0;
-
-		List<YearGrantCountDataElement> yearToGrantCountDataTable = new ArrayList<YearGrantCountDataElement>();
-
-		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
-
-			String stringInvestigatedYear = String.valueOf(grantYear);
-			Integer currentGrants = yearToGrantCount.get(stringInvestigatedYear);
-
-			if (currentGrants == null) {
-				currentGrants = 0;
-			}
-
-			visualizationCode.append("data.setValue(" + grantCounter
-					+ ", 0, '" + stringInvestigatedYear + "');\n");
-
-			visualizationCode.append("data.setValue(" + grantCounter
-					+ ", 1, " + currentGrants + ");\n");
-
-			yearToGrantCountDataTable
-					.add(new YearGrantCountDataElement(
-							grantCounter, stringInvestigatedYear,
-							currentGrants));
-
-			/*
-			 * Sparks that will be rendered will always be the one's which has
-			 * any year associated with it. Hence.
-			 */
-			renderedFullSparks += currentGrants;
-			grantCounter++;
-
-		}
-
-		sparklineData
-				.setYearToGrantCountDataTable(yearToGrantCountDataTable);
-
-		sparklineData.setRenderedSparks(renderedFullSparks);
+		renderedFullSparks = allCoPIsWithKnownGrantShipYears.size();
 
 		/*
 		 * Total grants will also consider publications that have no year
-		 * associated with it. Hence.
+		 * associated with them. Hence.
 		 */
-		Integer unknownYearGrants = 0;
-		if (yearToGrantCount.get(VOConstants.DEFAULT_GRANT_YEAR) != null) {
-			unknownYearGrants = yearToGrantCount
-					.get(VOConstants.DEFAULT_GRANT_YEAR);
+		Integer unknownYearCoPIs = 0;
+		if (yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR) != null) {
+			unknownYearCoPIs = yearToUniqueCoPIs.get(
+					VOConstants.DEFAULT_GRANT_YEAR).size();
 		}
-
-		sparklineData.setUnknownYearGrants(unknownYearGrants);
 
 		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, "
 				+ "showValueLabels: false, labelPosition: 'none'}";
@@ -244,54 +229,49 @@ public class PersonGrantCountVisCodeGenerator {
 		if (providedVisContainerID != null) {
 			visContainerID = providedVisContainerID;
 		} else {
-			visContainerID = DEFAULT_VIS_CONTAINER_DIV_ID;
+			visContainerID = DEFAULT_VISCONTAINER_DIV_ID;
 		}
-
-		sparklineData.setVisContainerDivID(visContainerID);
 
 		/*
 		 * By default these represents the range of the rendered sparks. Only in
 		 * case of "short" sparkline mode we will set the Earliest
 		 * RenderedGrant year to "currentYear - 10".
 		 */
-		sparklineData.setEarliestYearConsidered(minGrantYearConsidered);
 		sparklineData.setEarliestRenderedGrantYear(minGrantYear);
 		sparklineData.setLatestRenderedGrantYear(currentYear);
 
 		/*
 		 * The Full Sparkline will be rendered by default. Only if the url has
-		 * specific mention of SHORT_SPARKLINE_MODE_URL_HANDLE then we render
-		 * the short sparkline and not otherwise.
+		 * specific mention of SHORT_SPARKLINE_MODE_KEY then we render the short
+		 * sparkline and not otherwise.
 		 */
 
 		/*
 		 * Since building StringBuilder objects (which is being used to store
 		 * the vis code) is essentially a side-effecting process, we have both
-		 * the activators method as side- effecting. They both side-effect
+		 * the activators method as side-effecting. They both side-effect
 		 * "visualizationCode"
 		 */
 		if (VisualizationFrameworkConstants.SHORT_SPARKLINE_VIS_MODE
 				.equalsIgnoreCase(visMode)) {
 
 			sparklineData.setEarliestRenderedGrantYear(shortSparkMinYear);
-
-			sparklineData.setShortVisMode(true);
-
+			
 			generateShortSparklineVisualizationContent(currentYear,
 					shortSparkMinYear, visContainerID, visualizationCode,
-					unknownYearGrants, sparklineDisplayOptions);
+					unknownYearCoPIs, sparklineDisplayOptions);
 		} else {
-
-			sparklineData.setShortVisMode(false);
 			generateFullSparklineVisualizationContent(currentYear,
 					minGrantYearConsidered, visContainerID, visualizationCode,
-					unknownYearGrants, renderedFullSparks,
+					unknownYearCoPIs, renderedFullSparks,
 					sparklineDisplayOptions);
 		}
+
 		log.debug(visualizationCode);
+
 		return visualizationCode.toString();
 	}
-	
+
 	private void generateShortSparklineVisualizationContent(int currentYear,
 			int shortSparkMinYear, String visContainerID,
 			StringBuilder visualizationCode, int unknownYearGrants,
@@ -363,7 +343,7 @@ public class PersonGrantCountVisCodeGenerator {
 		/*
 		 * Generate the code that will activate the visualization. It takes care
 		 * of creating div elements to hold the actual sparkline image and then
-		 * calling the drawGrantCountVisualization function.
+		 * calling the drawUniqueCoPICountVisualization function.
 		 */
 		visualizationCode.append(generateVisualizationActivator(VIS_DIV_NAMES
 				.get("SHORT_SPARK"), visContainerID));
@@ -381,12 +361,17 @@ public class PersonGrantCountVisCodeGenerator {
 		
 		String csvDownloadURLHref = ""; 
 		
-		if (getCSVDownloadURL() != null) {
-			
-			csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() 
-										+ "\" class=\"inline_href\">(.CSV File)</a>";
-			
-		} else {
+		try {
+			if (getCSVDownloadURL() != null) {
+				
+				csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() 
+											+ "\" class=\"inline_href\">(.CSV File)</a>";
+				
+			} else {
+				csvDownloadURLHref = "";
+			}
+
+		} catch (UnsupportedEncodingException e) {
 			csvDownloadURLHref = "";
 		}
 		
@@ -406,7 +391,7 @@ public class PersonGrantCountVisCodeGenerator {
 									+ unknownYearGrants) + "');");
 		
 		visualizationCode.append("var allSparksText = ''" 
-									+ "+ ' grant(s) '" 
+									+ "+ ' Co-Principal Investigator(s) '" 
 									+ "+ ' from " 
 									+ "<span class=\"sparkline_range\">" 
 									+ "" + minGrantYearConsidered + " to " + currentYear + "" 
@@ -421,7 +406,6 @@ public class PersonGrantCountVisCodeGenerator {
 																visContainerID));
 		
 	}
-	
 	
 	private String generateVisualizationActivator(String sparklineID, String visContainerID) {
 		
@@ -468,12 +452,11 @@ public class PersonGrantCountVisCodeGenerator {
 				+ "}).prependTo('#" + visContainerID + "');" 
 				+ sparklineTableWrapper 
 				+ "}" 
-				+ "drawPubCountVisualization(sparklineImgTD);" 
+				+ "drawUniqueCoPICountVisualization(sparklineImgTD);" 
 				+ "});" 
 				+ "</script>\n";
 	}
 	
-
 	private String getVisualizationContextCode(String visMode) {
 
 		String visualizationContextCode = "";
@@ -494,17 +477,23 @@ public class PersonGrantCountVisCodeGenerator {
 		
 		String csvDownloadURLHref = ""; 
 		
-		if (yearToGrantCount.size() > 0) {
+		if (yearToUniqueCoPIs.size() > 0) {
 			
-			if (getCSVDownloadURL() != null) {
-				
-				csvDownloadURLHref = "Download data as <a href='" 
-										+ getCSVDownloadURL() + "'>.csv</a> file.<br />";
-				sparklineData.setDownloadDataLink(getCSVDownloadURL());
-				
-			} else {
+			try {
+				if (getCSVDownloadURL() != null) {
+					
+					csvDownloadURLHref = "Download data as <a href='" 
+											+ getCSVDownloadURL() + "'>.csv</a> file.<br />";
+					sparklineData.setDownloadDataLink(getCSVDownloadURL());
+					
+				} else {
+					csvDownloadURLHref = "";
+				}
+
+			} catch (UnsupportedEncodingException e) {
 				csvDownloadURLHref = "";
 			}
+			
 		} else {
 			csvDownloadURLHref = "No data available to export.<br />";
 		}
@@ -518,82 +507,108 @@ public class PersonGrantCountVisCodeGenerator {
 		return divContextCode.toString();
 	}
 	
-
-	private String getCSVDownloadURL() {
+	private String getCSVDownloadURL() throws UnsupportedEncodingException {
 		
-		if (yearToGrantCount.size() > 0) {
+		if (yearToUniqueCoPIs.size() > 0) {
 			
-			ParamMap CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-										 individualURI,
-										 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-										 VisualizationFrameworkConstants.PERSON_GRANT_COUNT_VIS);
-
-			return UrlBuilder.getUrl(VisualizationFrameworkConstants.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
-					 CSVDownloadURLParams);
-
+		String secondaryContextPath = "";
+		if (!contextPath.contains(VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX)) {
+			secondaryContextPath = VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX;
+		}
+			
+			
+		String downloadURL = contextPath
+			 + secondaryContextPath
+			 + "?" + VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+			 + "=" + URLEncoder.encode(individualURI, 
+					 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
+			 + "&" + VisualizationFrameworkConstants.VIS_TYPE_KEY 
+			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants
+					 						.CO_PI_VIS, 
+					 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
+			 + "&" + VisualizationFrameworkConstants.VIS_MODE_KEY
+			 + "=" + URLEncoder.encode("sparkline", 
+					 				   VisualizationController.URL_ENCODING_SCHEME).toString()
+			 + "&" + VisualizationFrameworkConstants.RENDER_MODE_KEY 
+			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants.DATA_RENDER_MODE, 
+	 				 				   VisualizationController.URL_ENCODING_SCHEME).toString();
+		
+			return downloadURL;
 		} else {
 			return null;
 		}
 	}
-	
-	
 	private String generateShortVisContext() {
 
 		StringBuilder divContextCode = new StringBuilder();
 		
+		try {
+		
 		String fullTimelineLink;
-		if (yearToGrantCount.size() > 0) {
+		if (yearToUniqueCoPIs.size() > 0) {
 			
-			ParamMap fullTimelineNetworkURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-					 individualURI,
-					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-					 VisualizationFrameworkConstants.PERSON_LEVEL_VIS);
-
-			String fullTimelineNetworkURL = UrlBuilder.getUrl(
-											VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-											fullTimelineNetworkURLParams);
-
-			fullTimelineLink = "<a href='" + fullTimelineNetworkURL + "'>View all VIVO " 
-									+ "grants and corresponding co-pi network.</a>";
+			String secondaryContextPath = "";
+			if (!contextPath.contains(VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX)) {
+				secondaryContextPath = VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX;
+			}
+			
+			String fullTimelineNetworkURL = contextPath
+							+ secondaryContextPath
+							+ "?" 
+							+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
+							+ "=" + URLEncoder.encode(individualURI, 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+					 	    + "&"
+		 				    + VisualizationFrameworkConstants.VIS_TYPE_KEY 
+							+ "=" + URLEncoder.encode("person_level", 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+					 	    + "&"
+		 				    + VisualizationFrameworkConstants.VIS_CONTAINER_KEY 
+							+ "=" + URLEncoder.encode("ego_sparkline", 
+					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
+		 				    + "&"
+		 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
+							+ "=" + URLEncoder.encode(
+											VisualizationFrameworkConstants
+													.STANDALONE_RENDER_MODE,
+											VisualizationController.URL_ENCODING_SCHEME).toString();
+			
+			fullTimelineLink = "<a href='" + fullTimelineNetworkURL 
+									+ "'>View full timeline and co-pi network.</a>";
 			
 			sparklineData.setFullTimelineNetworkLink(fullTimelineNetworkURL);
-			
-			
 			
 		} else {
 			fullTimelineLink = "No data available to render full timeline.<br />";
 		}
 		
-		divContextCode.append("<span class=\"vis_link\">" + fullTimelineLink + "</span>");
+		divContextCode.append("<p>" + fullTimelineLink + "</p>");
+		
+		} catch (UnsupportedEncodingException e) {
+			log.error(e);
+		}
+		
 		return divContextCode.toString();
 	}
 	
 	private String generateDataTable() {
 		
-		String csvDownloadURLHref = ""; 
-		
-		if (getCSVDownloadURL() != null) {
-			csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() + "\">(.CSV File)</a>";
-		} else {
-			csvDownloadURLHref = "";
-		}
-		
 		StringBuilder dataTable = new StringBuilder();
 		
 		dataTable.append("<table id='sparkline_data_table'>" 
-							+ "<caption>Grants per year " + csvDownloadURLHref + "</caption>" 
+							+ "<caption>Unique Co-PIs per year</caption>" 
 							+ "<thead>" 
 							+ "<tr>" 
 							+ "<th>Year</th>" 
-							+ "<th>Grants</th>" 
+							+ "<th>Count</th>" 
 							+ "</tr>" 
 							+ "</thead>" 
 							+ "<tbody>");
 		
-		for (Entry<String, Integer> currentEntry : yearToGrantCount.entrySet()) {
+		for (Entry<String, Set<CoPINode>> currentEntry : yearToUniqueCoPIs.entrySet()) {
 			dataTable.append("<tr>" 
 								+ "<td>" + currentEntry.getKey() + "</td>" 
-								+ "<td>" + currentEntry.getValue() + "</td>" 
+								+ "<td>" + currentEntry.getValue().size() + "</td>" 
 								+ "</tr>");
 		}
 										

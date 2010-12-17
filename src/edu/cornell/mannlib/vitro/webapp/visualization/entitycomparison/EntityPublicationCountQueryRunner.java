@@ -166,22 +166,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
 
 		QueryExecution queryExecution = null;
-//		try {
-			Query query = QueryFactory.create(
-					getSparqlQuery(queryURI, this.visMode), SYNTAX);
-			queryExecution = QueryExecutionFactory.create(query, dataSource);
-			System.out.println("\n\nquery.isSelectType() is "+ query.isSelectType()+ " \n\n");
-			return queryExecution.execSelect();
-//			if (query.isSelectType()) {
-//				return queryExecution.execSelect();
-//			}
-//		} finally {
-//			if (queryExecution != null) {
-//				queryExecution.close();
-//			}
-//		}
-//		return null;
-	}
+		Query query = QueryFactory.create(
+				getSparqlQuery(queryURI, this.visMode), SYNTAX);
+		queryExecution = QueryExecutionFactory.create(query, dataSource);
+		return queryExecution.execSelect();
+}
 
 	private String getSparqlQuery(String queryURI, String visMode) {
 		String result = "";
@@ -281,7 +270,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "}";
 		
-		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+		log.debug("\nThe sparql query is :\n" + sparqlQuery);
 		
 		return sparqlQuery;
 

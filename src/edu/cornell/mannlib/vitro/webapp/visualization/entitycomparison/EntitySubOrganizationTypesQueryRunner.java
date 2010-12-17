@@ -74,20 +74,10 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
 
 		QueryExecution queryExecution = null;
-//		try {
-			Query query = QueryFactory.create(
-					getSparqlQuery(queryURI), SYNTAX);
-			queryExecution = QueryExecutionFactory.create(query, dataSource);
-			System.out.println("\n\nquery.isSelectType() is "+ query.isSelectType()+ " \n\n");
-//			if (query.isSelectType()) {
-				return queryExecution.execSelect();
-//			}
-//		} finally {
-//			if (queryExecution != null) {
-//				queryExecution.close();
-//			}
-//		}
-//		return null;
+		Query query = QueryFactory.create(
+				getSparqlQuery(queryURI), SYNTAX);
+		queryExecution = QueryExecutionFactory.create(query, dataSource);
+			return queryExecution.execSelect();
 	}
 	
 	private String getSparqlQuery(String queryURI) {
@@ -133,7 +123,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 							+ " ?personType rdfs:label ?personTypeLabel ."
 							+ "}";;
 		}
-		System.out.println("\nThe sparql query is :\n" + sparqlQuery);
+		log.debug("\nThe sparql query is :\n" + sparqlQuery);
 		return sparqlQuery;
 
 	}

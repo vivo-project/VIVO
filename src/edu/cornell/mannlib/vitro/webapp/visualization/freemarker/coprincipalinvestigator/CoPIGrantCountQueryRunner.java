@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator;
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,12 +29,12 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPIEdge;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Grant;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPINode;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UniqueIDGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIEdge;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UniqueIDGenerator;
 /**
  * @author bkoniden
  * Deepak Konidena

@@ -399,23 +399,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
- //       try {
-            Query query = QueryFactory.create(queryText, SYNTAX);
+        Query query = QueryFactory.create(queryText, SYNTAX);
 
-//            QuerySolutionMap qs = new QuerySolutionMap();
-//            qs.add("authPerson", queryParam); // bind resource to s
-            
-            queryExecution = QueryExecutionFactory.create(query, dataSource);
-			System.out.println("\n\nquery.isSelectType() is "+ query.isSelectType()+ " \n\n");
-//            if (query.isSelectType()) {
-                return queryExecution.execSelect();
-//            }
-//        } finally {
-//            if (queryExecution != null) {
-//            	queryExecution.close();
-//            }
-//        }
-//		return null;
+        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        return queryExecution.execSelect();
     }
 
 	private String generateEgoCoAuthorshipSparqlQuery(String queryURI) {
@@ -455,7 +442,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			+ "} " 
 			+ "ORDER BY ?document ?coAuthorPerson";
 
-		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
+		log.debug("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
 		return sparqlQuery;
 	}
