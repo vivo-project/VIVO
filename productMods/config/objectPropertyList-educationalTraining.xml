@@ -6,8 +6,9 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         
         SELECT DISTINCT ?edTraining ?org ?orgName ?degree ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime WHERE {
+            ?subject ?property ?edTraining .
             ?edTraining core:trainingAtOrganization ?org .
-            ?org rdfs:label ?orgName
+            ?org rdfs:label ?orgName .
             OPTIONAL { ?edTraining core:degreeEarned ?degree . }
             OPTIONAL { ?degree rdfs:label ?degreeName . }
             OPTIONAL { ?degree core:abbreviation ?degreeAbbr . }
@@ -15,11 +16,9 @@
             OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool . }
             OPTIONAL { ?edTraining core:supplementalInformation ?info . }
             OPTIONAL { ?edTraining core:dateTimeInterval ?interval . }
-            OPTIONAL { ?interval core:hasDateTimeValue ?dateTime . }        
+            OPTIONAL { ?interval core:hasDateTimeValue ?dateTime . }       
         }  ORDER BY DESC(?dateTime)    
     </query>
-    
-    <link-target>org</link-target>
     
     <template>shortView-educationalTraining.ftl</template>
 </view-config>

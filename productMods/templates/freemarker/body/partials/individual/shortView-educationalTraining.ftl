@@ -11,7 +11,7 @@
     </#if>
 </#assign>
 
-<#assign org><a href="${statement.orgUrl}">${statement.orgName}</a></#assign>
+<#assign org><a href="${url(statement.org)}">${statement.orgName}</a></#assign>
 
 <@s.join [ degree, org, statement.deptOrSchool!, statement.info!, statement.datetime! ] />
 </#compress>
