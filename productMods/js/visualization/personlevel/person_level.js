@@ -457,7 +457,7 @@ function renderCoAuthorshipVisualization() {
 //				"flashVars", 'coAuthorUrl='+ getEncodedCoAuthorURL() + '&coPIUrl=' + getEncodedCoPIURL() ,
 //				"flashVars", 'graphmlUrl=' + getEncodedCoAuthorURL() + '&labelField=label&visType=CoAuthor',
 				"flashVars", 'graphmlUrl=' + encodedURL + '&labelField=label&visType='+visualization,
-				"width", "800",
+				"width", "600",
 				"height", "850",
 				"align", "top",
 				"id", "EgoCentric",

@@ -21,10 +21,17 @@
 	padding-left: 16px;
 	height: 840px;
 }
+
+#dataPanel {
+	margin-top: 50px;
+	width: 25%;	
+	background-color: #f7f9f9;
+	height: 80%;
+}
+
 #dataPanel div {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
-	color: #000;
 }
 #dataPanel .italicize {
 	font-style: italic;
@@ -43,4 +50,16 @@
 /* container override from liquid.css */
 .container {
  width: inherit; 
+}
+
+#incomplete-data{
+	width: 75%;
+	margin : auto;
+	line-height: 150%;
+	color: #595b5b;
+}
+
+.fileDownloadPlaceHolder{
+	
+	margin-left: 20px;
 }

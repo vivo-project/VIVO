@@ -95,6 +95,14 @@ p.datatable {
 	color: #121b3c;
 	padding-top: 10px;
 	margin-bottom: 0.3em;
+	float:left;
+}
+
+.toggle_visualization{
+	padding-top: 10px;
+	margin-bottom: 0.3em;
+	float:right;
+	width: 150px;	
 }
 
 .sub_headings a {

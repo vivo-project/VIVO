@@ -102,20 +102,28 @@ $(document).ready(function(){
 			<div id="ego_profile_image" class="thumbnail"></div>
 			
 	<%-- Label --%>
-			<h1><a href="${egoVivoProfileURL}"><span id="ego_label" class="author_name"></span></a></h1>
+			<h2><a href="${egoVivoProfileURL}"><span id="ego_label" class="author_name"></span></a></h2>
 	
 	<%-- Moniker--%>
 			<span id="ego_moniker" class="author_moniker"></span>
 
+	<c:choose>
+		<c:when test='${visMode == "coauthorship"}'> 
+			<h2 class = "toggle_visualization" style="text-align:center; clear: left;">Co-Investigator Network</h2>
+			<a href='<c:out value="${coprincipalinvestigatorURL}"/>'>view</a>
+		</c:when>
+		<c:otherwise>
+			<h2 class = "toggle_visualization" style="text-align:center; clear: left;">
+				<a href='<c:out value="${coauthorshipURL}"/>'> Co-Author Network</a>
+			</h2>
+		</c:otherwise>
+	</c:choose>
 
 	<div style="clear:both;"></div>
 	
 	<c:choose>
 	<c:when test='${numOfAuthors > 0}'>
 	
-	<div id="incomplete-data">This information is based solely on publications which have been loaded into the VIVO system. 
-	This may only be a small sample of the person's total work. </div>
-
 	<%-- Sparkline --%>
 		<h2 class="sub_headings">General Statistics</h2>
 		<c:choose>
@@ -150,7 +158,7 @@ $(document).ready(function(){
 		</c:choose>
 		<c:choose>
 		    <c:when test="${numOfCoAuthorShips > 0 || numOfAuthors > 0}">
-		       <a href="${coAuthorshipDownloadFile}">(GraphML File)</a>
+		       <a class = "fileDownloadPlaceHolder" href="${coAuthorshipDownloadFile}">(GraphML File)</a>
 		    </c:when>
 		    <c:otherwise>
 		        <c:if test='${numOfAuthors > 0}'>
@@ -176,7 +184,7 @@ $(document).ready(function(){
 <div id="bodyPannel">
 	
 	
-	<div id="visPanel" style="float: left; width: 600px;">
+	<div id="visPanel" style="float: right; width: 600px;">
 		<script language="JavaScript" type="text/javascript">
 			<!--
 			renderCoAuthorshipVisualization();
@@ -201,7 +209,8 @@ $(document).ready(function(){
 			
 			<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
 			<div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>&nbsp;&nbsp;<span>Last Publication</span></div>
-			
+			<div id="incomplete-data">Note: This information is based solely on publications which have been loaded into the VIVO system. 
+				This may only be a small sample of the person's total work. </div>
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -221,7 +230,8 @@ $(document).ready(function(){
 			
 			<div class="author_stats" id="fPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Grant</span></div>
 			<div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>&nbsp;&nbsp;<span>Last Grant</span></div>
-			
+			<div id="incomplete-data">Note: This information is based solely on publications which have been loaded into the VIVO system. 
+				This may only be a small sample of the person's total work. </div>
 		</div>	
 	</c:otherwise>
 </c:choose>
@@ -231,24 +241,11 @@ $(document).ready(function(){
 
 <c:choose>
 	<c:when test='${visMode == "coauthorship"}'> 
-		<div style="text-align:center; clear: left;">
-			<a href='<c:out value="${coprincipalinvestigatorURL}"/>'> View all grants and corresponding co-pi network for this person</a>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div style="text-align:center; clear: left;">
-			<a href='<c:out value="${coauthorshipURL}"/>'> View all publications and corresponding co-author network for this person</a>
-		</div>
-	</c:otherwise>
-</c:choose>
-
-<c:choose>
-	<c:when test='${visMode == "coauthorship"}'> 
 		<c:if test='${numOfAuthors > 0}'>
 		
 			<div class="vis_stats">
 			
-			<h2 class="sub_headings">Tables</h2>
+			<h3 class="sub_headings">Tables</h3>
 			
 				<div class="vis-tables">
 					<p id="publications_table_container" class="datatable">
