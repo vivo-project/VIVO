@@ -16,6 +16,12 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#Instrument">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
+    <rdfs:subClassOf rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#Protocol">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -30,9 +36,8 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#providesAccessTo">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Service"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#accessProvidedBy"/>
+    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Service"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#ResearchProject">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -45,29 +50,18 @@
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#documentationFor"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#manufactures">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasManufacturer"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#protocolRealizedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Service"/>
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#Protocol"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#realizesProtocol"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#hasManufacturer">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#manufactures"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#documentationFor">
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#AccessService">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -75,15 +69,13 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#accessProvidedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Service"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#providesAccessTo"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Service"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#realizesProtocol">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Service"/>
     <rdfs:range rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#Protocol"/>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#protocolRealizedBy"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#ProductionService">
