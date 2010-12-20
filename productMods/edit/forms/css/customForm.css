@@ -94,6 +94,7 @@ form.customForm p.validationError {
     margin-bottom: 1.8em;
     margin-top: 0;
     padding-top: 0;
+    padding-left: 0.4em;
     font-size: .8em;
 }
 
