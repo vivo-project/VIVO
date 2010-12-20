@@ -33,7 +33,7 @@ input#submit:visited{
     font-weight: normal;
     line-height: 1;
     margin-right: .6em;
-    margin-top: 1em;
+    margin-top: .5em;
 }
 input#delete,
 input#delete:visited{
@@ -194,9 +194,15 @@ p.submit {
 }
 .formsEdit p{
     /*padding-top: 1em;*/
-    margin-bottom: 0;
+    margin-bottom: 1.8em;
     padding-bottom: 0;
-    margin-top: .7em;
+    margin-top: 0;
+}
+.formsEdit p.validationError{
+    margin-bottom: 1.8em;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: .8em;
 }
 form.deleteForm{
     margin-top: 2em;

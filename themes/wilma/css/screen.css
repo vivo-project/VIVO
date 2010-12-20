@@ -24,8 +24,6 @@ VIVO wilma theme: screen styles
 @import url("transition/holdover-vivobasic/screen.css");
 
 @import url("reset.css");
-@import url("edit.css");
 @import url("pictos.css");
-/*@import url("formedit.css");  mb863 move the content of formedit.css to edit.css in vitro */
 @import url("edit.css");
 @import url("wilma.css");
