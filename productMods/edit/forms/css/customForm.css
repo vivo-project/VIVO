@@ -89,9 +89,10 @@ form.customForm #requiredLegend {
 
 form.customForm p.validationError {
     clear: both;
-    /*margin-bottom: 1.25em;*/
-    margin-top: .3em;
+    margin-bottom: 1.8em;
+    margin-top: 0;
     padding-top: 0;
+    font-size: .8em;
 }
 
 form.customForm a.close {
