@@ -15,8 +15,7 @@
             OPTIONAL { ?edTraining core:majorField ?majorField . }
             OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool . }
             OPTIONAL { ?edTraining core:supplementalInformation ?info . }
-            OPTIONAL { ?edTraining core:dateTimeInterval ?interval . 
-                       ?interval core:start ?dateTimeValue . 
+            OPTIONAL { ?edTraining core:hasDateTimeValue ?dateTimeValue . 
                        ?dateTimeValue core:dateTime ?dateTime . }        
         }  ORDER BY DESC(?dateTime)    
     </query>
