@@ -21,5 +21,7 @@
         }  ORDER BY DESC(?dateTime)    
     </query>
     
+    <edit-object>edTraining</edit-object>
+    
     <template>propStatement-educationalTraining.ftl</template>
 </list-view-config>
