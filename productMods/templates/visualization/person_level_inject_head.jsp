@@ -28,7 +28,7 @@
 	<c:param name="uri" value="${requestScope.egoURIParam}" />
 </c:url>
 
-<c:url var="swfLink" value="/${themeDir}site_icons/visualization/coauthorship/EgoCentric.swf" />
+<c:url var="swfLink" value="/images/visualization/coauthorship/EgoCentric.swf" />
 
 <c:url var="jquery" value="/js/jquery.js"/>
 <c:url var="adobeFlashDetector" value="/js/visualization/coauthorship/AC_OETags.js" />
