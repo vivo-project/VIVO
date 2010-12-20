@@ -5,11 +5,17 @@
 <#import "lib-sequence.ftl" as s>
 
 <#assign degree>
-    <#if statement.degree??>
+    <#if statement.degreeName??>
         <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " />
     </#if>
 </#assign>
 
 <#assign org><a href="${url(statement.org)}">${statement.orgName}</a></#assign>
 
-<@s.join [ degree, org, statement.deptOrSchool!, statement.info!, statement.datetime! ] />
+<#-- 
+<#if statement.dateTime??>
+    <#assign dateTime = statement.dateTime?string("yyyy")>
+</#if>
+-->
+
+<@s.join [ degree, org, statement.deptOrSchool!, statement.info!, dateTime! ] />
