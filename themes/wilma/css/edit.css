@@ -9,11 +9,10 @@ input[type="password"]{
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    /*margin-bottom: 1em;*/
+    margin-bottom: 0.8em;
 }
 label{
     margin-top: .5em;
-    margin-bottom: .5em;
 }
 input#submit, 
 input#submit:visited{
