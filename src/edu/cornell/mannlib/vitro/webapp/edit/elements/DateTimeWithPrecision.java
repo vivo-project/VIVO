@@ -41,7 +41,7 @@ public class DateTimeWithPrecision extends BaseEditElement {
 
 
     private static final Log log = LogFactory.getLog(DateTimeWithPrecision.class);
-    protected String TEMPATE_NAME = "DateTimeWithPrecision.ftl";
+    protected String TEMPATE_NAME = "dateTimeWithPrecision.ftl";
     protected static final String vivoCore = "http://vivoweb.org/ontology/core#";
     protected  static final String[] PRECISIONS = {
             vivoCore+"NoPrecision",

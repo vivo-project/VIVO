@@ -1,10 +1,5 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- 
-This is the placeholder template for the dateTime with precision input element.
-The UI team should replace any or all of the text in this file.
--->
-
 <#--
 year: <input name="${fieldName}.year" type="text" value="${year}"/> <br/>
 month: <input name="${fieldName}.month" type="text" value="${month}"/> <br/>
