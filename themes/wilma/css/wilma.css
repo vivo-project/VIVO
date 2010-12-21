@@ -19,7 +19,7 @@ body{
     margin: 0;
     padding: 0;
     height: 100%; /* needed for container min-height */
-    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    font-family: 'Arimo', "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
     /*font-size: 62.5%;*/
     height: auto !important; /* real browsers */
     height: 100%; /* IE6: treaded as min-height*/;
@@ -204,7 +204,7 @@ ul#main-nav {
     width: 930px;
     margin: 0 auto;
     background: #fff;
-    min-height: 450px;
+    min-height: 550px;
     padding: 20px;
 }
 /* INTRO-BLURB ------>  */
@@ -291,8 +291,8 @@ ul#main-nav {
     -webkit-border-radius: 5px;     
 }
 #login-form input.text-field:focus {
-border: 1px solid rgba(57, 138, 172, 0.5);  
-background-color: rgba(57, 138, 172, 0.1);   
+    border: 1px solid rgba(57, 138, 172, 0.5);  
+    background-color: rgba(57, 138, 172, 0.1);   
 }
 #login-form p.submit {
     width: 100px;

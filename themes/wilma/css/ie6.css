@@ -34,6 +34,9 @@ ul#browse-classgroups {
     width: 220px;
     padding: 18px;
 }
+#login-form p.submit {
+    margin-left: 15px;
+}
 ul#browse-classgroups a.selected {
     background-position-x: 0;
     background-position-y: 12px;

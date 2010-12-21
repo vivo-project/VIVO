@@ -7,6 +7,8 @@
     <title>${title}</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    
+   <link href='http://fonts.googleapis.com/css?family=Arimo:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
      
     <#include "stylesheets.ftl">
     <link rel="stylesheet" href="${urls.theme}/css/screen.css" />

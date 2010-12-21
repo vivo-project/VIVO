@@ -6,3 +6,6 @@
 #search-home-field  input.submit {
     padding-left: 14px;
 }
+#login-form p.submit {
+    margin-left: 20px;
+}
