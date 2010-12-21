@@ -252,6 +252,7 @@ ul#main-nav {
 }
 #error-alert {
     margin: 0 12px;
+    margin-bottom: 12px;
     padding: 12px;
     padding-bottom: 12px;
     border: 1px dotted #a12424;
