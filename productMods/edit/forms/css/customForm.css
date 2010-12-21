@@ -125,3 +125,14 @@ vertical-align:top;
 #ie67DisableWrapper {
     display: none;
 }
+
+/**********
+dateTime
+**********/
+fieldset#dateTime {
+    margin-top: 0.5em;
+}
+
+fieldset#dateTime label {
+    display: inline;
+}
