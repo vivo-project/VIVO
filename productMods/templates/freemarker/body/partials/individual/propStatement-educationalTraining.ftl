@@ -18,3 +18,4 @@
 </#if>
 
 <@s.join [ degree, org, statement.deptOrSchool!, statement.info!, dateTime! ] />
+c
