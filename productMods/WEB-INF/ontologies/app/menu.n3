@@ -4,7 +4,7 @@
 @prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix core: <http://vivoweb.org/ontology/core#> .
-
+@prefix vivoweb: <http://vivoweb.org/ontology#> .
 
 ### This file defines the default menu for vivo. ###
 
@@ -60,21 +60,29 @@ display:Home
 
 display:Events 
     a display:Page ;    
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGroupevents ;
     display:title "Events" ;
     display:urlMapping "/events" .
 
 display:Organizations 
     a display:Page ;
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouporganizations ;
     display:title "Organizations" ;
     display:urlMapping "/organizations" .
 
 display:People 
     a display:Page ;    
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouppeople ;
     display:requiresBodyTemplate "menupage--classgroup-people.ftl" ;
     display:title "People" ;
     display:urlMapping "/people" .
 
 display:Research 
-    a display:Page ;    
+    a display:Page ;        
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGroupresearch ;
     display:title "Research" ;
     display:urlMapping "/research" .
