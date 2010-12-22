@@ -240,7 +240,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
         Portal portal = vreq.getPortal();
         
-        String standaloneTemplate = "/visualization/grantCount.ftl";
+        String standaloneTemplate = "personGrantCountStandaloneActivator.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
@@ -267,7 +267,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
         Portal portal = vreq.getPortal();
 
 
-        String dynamicTemplate = "/visualization/sparklineAjaxVisContent.ftl";
+        String dynamicTemplate = "personGrantCountDynamicActivator.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
