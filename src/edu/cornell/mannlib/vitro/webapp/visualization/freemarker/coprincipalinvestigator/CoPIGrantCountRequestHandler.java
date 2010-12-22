@@ -97,17 +97,17 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 
         if (pINodesAndEdges.getNodes() != null
 				&& pINodesAndEdges.getNodes().size() > 0) {
-        	body.put("numOfAuthors", pINodesAndEdges.getNodes().size());
+        	body.put("numOfInvestigators", pINodesAndEdges.getNodes().size());
 			
 			title = pINodesAndEdges.getEgoNode().getNodeName() + " - ";
 		}
 
 		if (pINodesAndEdges.getEdges() != null
 				&& pINodesAndEdges.getEdges().size() > 0) {
-			body.put("numOfCoPIs", pINodesAndEdges.getEdges().size());
+			body.put("numOfCoInvestigations", pINodesAndEdges.getEdges().size());
 		}
 
-		String standaloneTemplate = "/visualization/coauthorship/coAuthorship.ftl";
+		String standaloneTemplate = "/visualization/copi/coInvestigation.ftl";
 		
         body.put("portalBean", portal);
         body.put("egoURIParam", egoURI);
