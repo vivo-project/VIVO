@@ -16,7 +16,7 @@
         <a href="${url(statement.org)}">${statement.orgName}</a>
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${url(statement.edTraining)}">(no linked organization) ${statement.edTrainingName}</a>
+        <a href="${url(statement.edTraining)}">${statement.edTrainingName}</a> (no linked organization)
     </#if>
 </#assign>
 

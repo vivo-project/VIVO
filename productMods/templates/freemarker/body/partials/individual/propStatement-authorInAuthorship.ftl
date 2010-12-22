@@ -10,7 +10,7 @@
         <a href="${url(statement.infoResource)}">${statement.infoResourceName}</a>
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${url(statement.authorship)}">(no linked publication) ${statement.authorshipName}</a>
+        <a href="${url(statement.authorship)}">${statement.authorshipName}</a> (no linked information resource)
     </#if>
 </#assign>
 

@@ -28,7 +28,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?subClass ?authorship (afn:localname(?authorship) AS ?authorshipName) 
+        SELECT DISTINCT ?subclass ?authorship (afn:localname(?authorship) AS ?authorshipName) 
                         ?infoResource ?infoResourceName ?dateTime WHERE {
             GRAPH ?g1 { ?subject ?property ?authorship } 
             GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
@@ -36,8 +36,8 @@
             OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
                        GRAPH ?g5 { ?infoResource a ?subclass } }
             OPTIONAL { GRAPH ?g6 { ?infoResource core:hasDateTimeValue ?dateTimeValue . 
-                                   ?dateTimeValue core:dateTime ?dateTime . } }       
-        } ORDER BY ?subClass DESC(?dateTime) ?infoResourceName   
+                                   ?dateTimeValue core:dateTime ?dateTime . } }      
+        } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
     </query>
     
     <template>propStatement-authorInAuthorship.ftl</template>
