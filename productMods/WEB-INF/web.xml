@@ -348,7 +348,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MenuN3EditController</servlet-name>
-    <url-pattern>/MenuN3EditController</url-pattern>
+    <url-pattern>/menuN3Editor</url-pattern>
   </servlet-mapping>
 
   <servlet>
