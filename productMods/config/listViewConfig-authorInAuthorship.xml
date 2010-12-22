@@ -27,12 +27,12 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         
         SELECT DISTINCT ?subClass ?authorship ?infoResource ?infoResourceName ?dateTime WHERE {
-            ?subject ?property ?authorship .
-            ?authorship core:linkedInformationResource ?infoResource .                       
-            ?infoResource rdfs:label ?infoResourceName .
-            ?subClass rdfs:subClassOf core:InformationResource .
-            OPTIONAL { ?infoResource core:hasDateTimeValue ?dateTimeValue . 
-                       ?dateTimeValue core:dateTime ?dateTime . }       
+            GRAPH ?g1 { ?subject ?property ?authorship } 
+            GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
+            GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
+            GRAPH ?g4 { ?subClass rdfs:subClassOf core:InformationResource }
+            OPTIONAL { GRAPH ?g5 { ?infoResource core:hasDateTimeValue ?dateTimeValue . 
+                       ?dateTimeValue core:dateTime ?dateTime . } }       
         } ORDER BY ?subClass DESC(?dateTime) ?infoResourceName   
     </query>
     -->
