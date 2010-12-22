@@ -211,6 +211,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		Map<String, Object> body = new HashMap<String, Object>();
 		
         Portal portal = vitroRequest.getPortal();
+        String	standaloneTemplate = "coAuthorPersonLevel.ftl";
         
         body.put("egoURIParam", egoURI);
         
@@ -225,8 +226,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			body.put("numOfCoAuthorShips", coAuthorshipVO.getEdges().size());
 		}
 		
-        String	standaloneTemplate = "coAuthorPersonLevel.ftl";
-        	
+		body.put("egoPubSparklineVO", egoPubSparklineVO);
+		body.put("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
 
 		body.put("portalBean", portal);
 		body.put("title",  title + "Person Level Visualization");
@@ -260,7 +261,9 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		}
 		
         String	standaloneTemplate = "coPIPersonLevel.ftl";
-        	
+		
+		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
+		body.put("uniqueCopisSparklineVO", uniqueCopisSparklineVO);        	
 
 		body.put("portalBean", portal);
 		body.put("title",  title + "Person Level Visualization");
