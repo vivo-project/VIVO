@@ -18,7 +18,9 @@
         - If the linked individual may be missing, the query should select the object's localname using
           the ARQ localname function, so that the template can display the local name in the absence of
           the linked individual. An alternative is to use the localName() method provided to the template
-          instead.         
+          instead.  
+        - Each assertion or set of optional assertions must reference a different graph variable, so that
+          we do not impose a requirement about which assertions are in the same graph.       
 -->
     
 <list-view-config>
@@ -30,9 +32,10 @@
         SELECT DISTINCT ?edTraining (afn:localname(?edTraining) AS ?edTrainingName) ?org ?orgName 
                         ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime 
             WHERE {
+
                 GRAPH ?g1 { ?subject ?property ?edTraining }
                 OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org .                                   
-                           ?org rdfs:label ?orgName . } }
+                                       ?org rdfs:label ?orgName . } }
                 OPTIONAL { GRAPH ?g3 { ?edTraining core:degreeEarned ?degree } }
                 OPTIONAL { GRAPH ?g4 { ?degree rdfs:label ?degreeName } }
                 OPTIONAL { GRAPH ?g5 { ?degree core:abbreviation ?degreeAbbr } }
@@ -40,7 +43,8 @@
                 OPTIONAL { GRAPH ?g7 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
                 OPTIONAL { GRAPH ?g8 { ?edTraining core:supplementalInformation ?info } }
                 OPTIONAL { GRAPH ?g9 { ?edTraining core:hasDateTimeValue ?dateTimeValue . 
-                           ?dateTimeValue core:dateTime ?dateTime } }        
+                                       ?dateTimeValue core:dateTime ?dateTime } }    
+                              
             }  ORDER BY DESC(?dateTime)  
     </query>
     

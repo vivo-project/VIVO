@@ -16,12 +16,12 @@
         <a href="${url(statement.org)}">${statement.orgName}</a>
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${url(statement.edTraining)}">educational training ${statement.edTrainingName}</a>
+        <a href="${url(statement.edTraining)}">(no linked organization) ${statement.edTrainingName}</a>
     </#if>
 </#assign>
 
 <#if statement.dateTime??>
-    <#assign dateTime = dt.xsdDateTimeToYear(statement.dateTime)>
+    <#assign year = dt.xsdDateTimeToYear(statement.dateTime)>
 </#if>
 
-<@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info!, dateTime! ] />
+<@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info!, year! ] />
