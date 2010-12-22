@@ -259,8 +259,7 @@ VisualizationRequestHandler {
 
 		Portal portal = vreq.getPortal();
 
-//		String standaloneTemplate = "/visualization/publication/personPublicationCountStandaloneActivator.ftl";
-		String standaloneTemplate = "/visualization/personPublicationCountStandaloneActivator.ftl";
+		String standaloneTemplate = "personPublicationCountStandaloneActivator.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put("portalBean", portal);
@@ -286,7 +285,7 @@ VisualizationRequestHandler {
 		Portal portal = vreq.getPortal();
 
 //		String dynamicTemplate = "/visualization/publication/personPublicationCountDynamicActivator.ftl";
-		String dynamicTemplate = "/visualization/personPublicationCountDynamicActivator.ftl";
+		String dynamicTemplate = "personPublicationCountDynamicActivator.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put("portalBean", portal);
