@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
@@ -526,7 +526,7 @@ public class CoAuthorshipVisCodeGenerator {
 					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
 					 VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
 					 VisualizationFrameworkConstants.VIS_MODE_KEY,
-					 VisualizationFrameworkConstants.SPARKLINE_VIS_MODE);
+					 VisualizationFrameworkConstants.COAUTHORS_COUNT_PER_YEAR_VIS_MODE);
 
 			return UrlBuilder.getUrl(VisualizationFrameworkConstants.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
 						CSVDownloadURLParams);
@@ -548,8 +548,8 @@ public class CoAuthorshipVisCodeGenerator {
 					individualURI,
 					VisualizationFrameworkConstants.VIS_TYPE_KEY,
 					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-					VisualizationFrameworkConstants.VIS_CONTAINER_KEY,
-					"ego_sparkline");
+					VisualizationFrameworkConstants.VIS_MODE_KEY,
+					VisualizationFrameworkConstants.COAUTHOR_VIS_MODE);
 
 			String fullTimelineNetworkURL = UrlBuilder.getUrl(
 											VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,

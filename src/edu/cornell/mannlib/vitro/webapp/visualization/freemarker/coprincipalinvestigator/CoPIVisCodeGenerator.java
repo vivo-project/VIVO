@@ -2,25 +2,27 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationController;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.CoPINode;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 
 /**
  * This class contains code for rendering sparklines and displaying tables for 
@@ -57,18 +59,14 @@ public class CoPIVisCodeGenerator {
 
 	private SparklineData sparklineData;
 
-	private String contextPath;
-
 	private String individualURI;
 
-	public CoPIVisCodeGenerator(String contextPath, 
-			  String individualURI, 
+	public CoPIVisCodeGenerator(String individualURI, 
 			  String visMode, 
 			  String visContainer, 
 			  Map<String, Set<CoPINode>> yearToUniqueCoPIs, 
 			  Log log){
 		
-		this.contextPath = contextPath;
 		this.individualURI = individualURI;
 		
 		this.yearToUniqueCoPIs = yearToUniqueCoPIs;
@@ -181,6 +179,7 @@ public class CoPIVisCodeGenerator {
 		int uniqueCoPICounter = 0;
 		int renderedFullSparks = 0;
 		Set<CoPINode> allCoPIsWithKnownGrantShipYears = new HashSet<CoPINode>();
+		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
 
@@ -202,6 +201,10 @@ public class CoPIVisCodeGenerator {
 
 			visualizationCode.append("data.setValue(" + uniqueCoPICounter
 					+ ", 1, " + currentUniqueCoPIs + ");\n");
+			
+			yearToUniqueInvestigatorsCountDataTable.add(new YearToEntityCountDataElement(uniqueCoPICounter, 
+					grantYearAsString, 
+					currentUniqueCoPIs));
 			uniqueCoPICounter++;
 		}
 
@@ -212,6 +215,10 @@ public class CoPIVisCodeGenerator {
 		 * associated with it. Hence.
 		 */
 		renderedFullSparks = allCoPIsWithKnownGrantShipYears.size();
+		
+		sparklineData.setRenderedSparks(renderedFullSparks);
+		
+		sparklineData.setYearToEntityCountDataTable(yearToUniqueInvestigatorsCountDataTable);
 
 		/*
 		 * Total grants will also consider publications that have no year
@@ -222,6 +229,8 @@ public class CoPIVisCodeGenerator {
 			unknownYearCoPIs = yearToUniqueCoPIs.get(
 					VOConstants.DEFAULT_GRANT_YEAR).size();
 		}
+		
+		sparklineData.setUnknownYearPublications(unknownYearCoPIs);
 
 		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, "
 				+ "showValueLabels: false, labelPosition: 'none'}";
@@ -232,11 +241,14 @@ public class CoPIVisCodeGenerator {
 			visContainerID = DEFAULT_VISCONTAINER_DIV_ID;
 		}
 
+		sparklineData.setVisContainerDivID(visContainerID);
+		
 		/*
 		 * By default these represents the range of the rendered sparks. Only in
 		 * case of "short" sparkline mode we will set the Earliest
 		 * RenderedGrant year to "currentYear - 10".
 		 */
+		sparklineData.setEarliestYearConsidered(minGrantYearConsidered);
 		sparklineData.setEarliestRenderedGrantYear(minGrantYear);
 		sparklineData.setLatestRenderedGrantYear(currentYear);
 
@@ -257,10 +269,15 @@ public class CoPIVisCodeGenerator {
 
 			sparklineData.setEarliestRenderedGrantYear(shortSparkMinYear);
 			
+			sparklineData.setShortVisMode(true);
+			
 			generateShortSparklineVisualizationContent(currentYear,
 					shortSparkMinYear, visContainerID, visualizationCode,
 					unknownYearCoPIs, sparklineDisplayOptions);
 		} else {
+			
+			sparklineData.setShortVisMode(false);
+			
 			generateFullSparklineVisualizationContent(currentYear,
 					minGrantYearConsidered, visContainerID, visualizationCode,
 					unknownYearCoPIs, renderedFullSparks,
@@ -361,17 +378,12 @@ public class CoPIVisCodeGenerator {
 		
 		String csvDownloadURLHref = ""; 
 		
-		try {
-			if (getCSVDownloadURL() != null) {
-				
-				csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() 
-											+ "\" class=\"inline_href\">(.CSV File)</a>";
-				
-			} else {
-				csvDownloadURLHref = "";
-			}
-
-		} catch (UnsupportedEncodingException e) {
+		if (getCSVDownloadURL() != null) {
+			
+			csvDownloadURLHref = "<a href=\"" + getCSVDownloadURL() 
+										+ "\" class=\"inline_href\">(.CSV File)</a>";
+			
+		} else {
 			csvDownloadURLHref = "";
 		}
 		
@@ -479,18 +491,13 @@ public class CoPIVisCodeGenerator {
 		
 		if (yearToUniqueCoPIs.size() > 0) {
 			
-			try {
-				if (getCSVDownloadURL() != null) {
-					
-					csvDownloadURLHref = "Download data as <a href='" 
-											+ getCSVDownloadURL() + "'>.csv</a> file.<br />";
-					sparklineData.setDownloadDataLink(getCSVDownloadURL());
-					
-				} else {
-					csvDownloadURLHref = "";
-				}
-
-			} catch (UnsupportedEncodingException e) {
+			if (getCSVDownloadURL() != null) {
+				
+				csvDownloadURLHref = "Download data as <a href='" 
+										+ getCSVDownloadURL() + "'>.csv</a> file.<br />";
+				sparklineData.setDownloadDataLink(getCSVDownloadURL());
+				
+			} else {
 				csvDownloadURLHref = "";
 			}
 			
@@ -507,33 +514,20 @@ public class CoPIVisCodeGenerator {
 		return divContextCode.toString();
 	}
 	
-	private String getCSVDownloadURL() throws UnsupportedEncodingException {
+	private String getCSVDownloadURL() {
 		
 		if (yearToUniqueCoPIs.size() > 0) {
 			
-		String secondaryContextPath = "";
-		if (!contextPath.contains(VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX)) {
-			secondaryContextPath = VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX;
-		}
+			ParamMap CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					 individualURI,
+					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					 VisualizationFrameworkConstants.CO_PI_VIS,
+					 VisualizationFrameworkConstants.VIS_MODE_KEY,
+					 VisualizationFrameworkConstants.COPIS_COUNT_PER_YEAR_VIS_MODE);
+
+			return UrlBuilder.getUrl(VisualizationFrameworkConstants.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
+						CSVDownloadURLParams);
 			
-			
-		String downloadURL = contextPath
-			 + secondaryContextPath
-			 + "?" + VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
-			 + "=" + URLEncoder.encode(individualURI, 
-					 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
-			 + "&" + VisualizationFrameworkConstants.VIS_TYPE_KEY 
-			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants
-					 						.CO_PI_VIS, 
-					 				   VisualizationController.URL_ENCODING_SCHEME).toString() 
-			 + "&" + VisualizationFrameworkConstants.VIS_MODE_KEY
-			 + "=" + URLEncoder.encode("sparkline", 
-					 				   VisualizationController.URL_ENCODING_SCHEME).toString()
-			 + "&" + VisualizationFrameworkConstants.RENDER_MODE_KEY 
-			 + "=" + URLEncoder.encode(VisualizationFrameworkConstants.DATA_RENDER_MODE, 
-	 				 				   VisualizationController.URL_ENCODING_SCHEME).toString();
-		
-			return downloadURL;
 		} else {
 			return null;
 		}
@@ -542,36 +536,20 @@ public class CoPIVisCodeGenerator {
 
 		StringBuilder divContextCode = new StringBuilder();
 		
-		try {
-		
 		String fullTimelineLink;
 		if (yearToUniqueCoPIs.size() > 0) {
 			
-			String secondaryContextPath = "";
-			if (!contextPath.contains(VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX)) {
-				secondaryContextPath = VisualizationFrameworkConstants.VISUALIZATION_URL_PREFIX;
-			}
-			
-			String fullTimelineNetworkURL = contextPath
-							+ secondaryContextPath
-							+ "?" 
-							+ VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY 
-							+ "=" + URLEncoder.encode(individualURI, 
-					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
-					 	    + "&"
-		 				    + VisualizationFrameworkConstants.VIS_TYPE_KEY 
-							+ "=" + URLEncoder.encode("person_level", 
-					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
-					 	    + "&"
-		 				    + VisualizationFrameworkConstants.VIS_CONTAINER_KEY 
-							+ "=" + URLEncoder.encode("ego_sparkline", 
-					 				 VisualizationController.URL_ENCODING_SCHEME).toString()
-		 				    + "&"
-		 				    + VisualizationFrameworkConstants.RENDER_MODE_KEY
-							+ "=" + URLEncoder.encode(
-											VisualizationFrameworkConstants
-													.STANDALONE_RENDER_MODE,
-											VisualizationController.URL_ENCODING_SCHEME).toString();
+			ParamMap fullTimelineNetworkURLParams = new ParamMap(
+					VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					individualURI,
+					VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+					VisualizationFrameworkConstants.VIS_MODE_KEY,
+					VisualizationFrameworkConstants.COPI_VIS_MODE);
+
+			String fullTimelineNetworkURL = UrlBuilder.getUrl(
+											VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+											fullTimelineNetworkURLParams);
 			
 			fullTimelineLink = "<a href='" + fullTimelineNetworkURL 
 									+ "'>View full timeline and co-pi network.</a>";
@@ -583,10 +561,6 @@ public class CoPIVisCodeGenerator {
 		}
 		
 		divContextCode.append("<p>" + fullTimelineLink + "</p>");
-		
-		} catch (UnsupportedEncodingException e) {
-			log.error(e);
-		}
 		
 		return divContextCode.toString();
 	}

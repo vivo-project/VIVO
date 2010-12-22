@@ -7,9 +7,9 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,11 +27,11 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFr
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipGraphMLWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipVisCodeGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountQueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountVisCodeGenerator;
-import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountQueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.BiboDocument;

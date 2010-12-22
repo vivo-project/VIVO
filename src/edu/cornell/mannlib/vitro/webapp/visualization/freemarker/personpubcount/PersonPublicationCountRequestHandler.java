@@ -25,7 +25,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
@@ -34,7 +34,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Sp
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
 /**
  * 

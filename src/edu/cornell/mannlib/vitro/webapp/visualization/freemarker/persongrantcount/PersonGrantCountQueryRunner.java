@@ -26,7 +26,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
 
 /**
