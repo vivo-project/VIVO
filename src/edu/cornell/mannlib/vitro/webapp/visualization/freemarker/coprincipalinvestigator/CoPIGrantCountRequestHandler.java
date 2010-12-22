@@ -3,6 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinv
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -48,28 +49,55 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
 		
 		CoPIData PINodesAndEdges = queryManager.getQueryResult();
-		
-			if (VisualizationFrameworkConstants.COPI_VIS_MODE
-					.equalsIgnoreCase(visMode)) { 
-
-					return prepareCoPIDataResponse(PINodesAndEdges);
-	    		
-			} else {
-	    			/*
-	    			 * When the graphML file is required - based on which copi network 
-	    			 * visualization will be rendered.
-	    			 * */
-	    			return prepareNetworkDataResponse(PINodesAndEdges);
-					
-			}
+				
+    	/* 
+    	 * We will be using the same visualization package for both sparkline & co-pi
+    	 * flash vis. We will use "VIS_MODE_KEY" as a modifier to differentiate 
+    	 * between these two. The default will be to render the co-pi network vis.
+    	 * */ 
+		if (VisualizationFrameworkConstants.COPIS_COUNT_PER_YEAR_VIS_MODE
+				.equalsIgnoreCase(visMode)) { 
+			/*
+			 * When the csv file is required - based on which sparkline visualization will 
+			 * be rendered.
+			 * */
+				return prepareCoPIsCountPerYearDataResponse(PINodesAndEdges);
+				
+		} else if (VisualizationFrameworkConstants.COPIS_LIST_VIS_MODE
+				.equalsIgnoreCase(visMode)) { 
+			/*
+			 * When the csv file is required - based on which sparkline visualization will 
+			 * be rendered.
+			 * */
+				return prepareCoPIsListDataResponse(PINodesAndEdges);
+				
+		} else if (VisualizationFrameworkConstants.COPI_NETWORK_DOWNLOAD_VIS_MODE
+				.equalsIgnoreCase(visMode)) { 
+			/*
+			 * When the csv file is required - based on which sparkline visualization will 
+			 * be rendered.
+			 * */
+				return prepareNetworkDownloadDataResponse(PINodesAndEdges);
+				
+		} else {
+    			/*
+    			 * When the graphML file is required - based on which co-pi network 
+    			 * visualization will be rendered.
+    			 * */
+    			return prepareNetworkStreamDataResponse(PINodesAndEdges);
+		}
+			
 	}
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, DataSource dataSource)
 			throws MalformedQueryParametersException {
-		
-		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
+		/*
+		 * Support for this has ceased to exist. Standalone mode was created only for demo 
+		 * purposes for VIVO Conf.
+		 * */		
+/*		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
 		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
 		
@@ -77,7 +105,9 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		
 		return prepareStandaloneResponse(egoURI,
 				 						  PINodesAndEdges,
-				 						  vitroRequest);
+				 						  vitroRequest); */
+		throw new UnsupportedOperationException("CoPI does not provide Standalone Response.");				 						  
+				 						  
 	}
 	
 	/**
@@ -87,7 +117,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	 * @param coPIVO
 	 */
 	private TemplateResponseValues prepareStandaloneResponse(String egoURI,
-			CoPIData pINodesAndEdges, VitroRequest vitroRequest) {
+			CoPIData coPIVO, VitroRequest vitroRequest) {
 		
         Portal portal = vitroRequest.getPortal();
         
@@ -95,16 +125,17 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
         Map<String, Object> body = new HashMap<String, Object>();
 
 
-        if (pINodesAndEdges.getNodes() != null
-				&& pINodesAndEdges.getNodes().size() > 0) {
-        	body.put("numOfInvestigators", pINodesAndEdges.getNodes().size());
+        if (coPIVO.getNodes() != null
+				&& coPIVO.getNodes().size() > 0) {
+        	title = coPIVO.getEgoNode().getNodeName() + " - ";
+        	body.put("numOfInvestigators", coPIVO.getNodes().size());
 			
-			title = pINodesAndEdges.getEgoNode().getNodeName() + " - ";
+			title = coPIVO.getEgoNode().getNodeName() + " - ";
 		}
 
-		if (pINodesAndEdges.getEdges() != null
-				&& pINodesAndEdges.getEdges().size() > 0) {
-			body.put("numOfCoInvestigations", pINodesAndEdges.getEdges().size());
+		if (coPIVO.getEdges() != null
+				&& coPIVO.getEdges().size() > 0) {
+			body.put("numOfCoInvestigations", coPIVO.getEdges().size());
 		}
 
 		String standaloneTemplate = "/visualization/copi/coInvestigation.ftl";
@@ -116,59 +147,24 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
         return new TemplateResponseValues(standaloneTemplate, body);
 	}
 
-	/**
-	 * Provides a response when graphml formatted co-pi network is requested, typically by 
-	 * the flash vis.
-	 * @param pINodesAndEdges
-	 */
-	private Map<String, String> prepareNetworkDataResponse(CoPIData pINodesAndEdges) {
+
+	private String getCoPIsListCSVContent(Map<String, Integer> coPIsToCount) {
 		
-		CoPIGraphMLWriter coPIGraphMLWriter = 
-				new CoPIGraphMLWriter(pINodesAndEdges);
+		StringBuilder csvFileContent = new StringBuilder();
 		
-	    Map<String, String> fileData = new HashMap<String, String>();
-		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
-					 "text/xml");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					 coPIGraphMLWriter.getCoPIGraphMLContent().toString());
-	
-		return fileData;
-	}
-	
-	/**
-	 * Provides response when a csv file containing number & names of unique co-pis per 
-	 * year is requested. 
-	 * @param pINodesAndEdges
-	 */
-	private Map<String, String> prepareCoPIDataResponse(CoPIData pINodesAndEdges) {
+		csvFileContent.append("Year, Count\n");
 		
-		String outputFileName;
-		Map<String, Set<CoPINode>> yearToCoPI = new TreeMap<String, Set<CoPINode>>();
-		
-		if (pINodesAndEdges.getNodes() != null && pINodesAndEdges.getNodes().size() > 0) {
-			
-			outputFileName = UtilityFunctions.slugify(pINodesAndEdges
-									.getEgoNode().getNodeName())
-			+ "_copis-per-year" + ".csv";
-			
-			yearToCoPI = UtilityFunctions.getGrantYearToCoPI(pINodesAndEdges);
-			
-		} else {
-			
-			outputFileName = "no_copis-per-year" + ".csv";			
+		for (Entry<String, Integer> currentEntry : coPIsToCount.entrySet()) {
+			csvFileContent.append(StringEscapeUtils.escapeCsv(currentEntry.getKey()));
+			csvFileContent.append(",");
+			csvFileContent.append(currentEntry.getValue());
+			csvFileContent.append("\n");
 		}
 		
-		
-        Map<String, String> fileData = new HashMap<String, String>();
-		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
-					 outputFileName);
-		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
-					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					 getCoPIsPerYearCSVContent(yearToCoPI));
-
-		return fileData;
-	}
+		return csvFileContent.toString();
+			
+	}	
+	
 
 	private String getCoPIsPerYearCSVContent(Map<String, Set<CoPINode>> yearToCoPI) {
 
@@ -200,5 +196,144 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		
 		return StringUtils.removeEnd(coPIsMerged.toString(), coPISeparator);
 	}
+	
+	
+	/**
+	 * Provides response when a csv file containing number & names of unique co-pis per 
+	 * year is requested. 
+	 * @param piNodesAndEdges
+	 * @param response
+	 */
+	private Map<String, String> prepareCoPIsCountPerYearDataResponse(CoPIData piNodesAndEdges) {
+		
+		String outputFileName;
+		Map<String, Set<CoPINode>> yearToCoPIs = new TreeMap<String, Set<CoPINode>>();
+		
+		if (piNodesAndEdges.getNodes() != null && piNodesAndEdges.getNodes().size() > 0) {
+			
+			outputFileName = UtilityFunctions.slugify(piNodesAndEdges
+									.getEgoNode().getNodeName())
+			+ "_coinvestigators-per-year" + ".csv";
+			
+			yearToCoPIs = UtilityFunctions.getGrantYearToCoPI(piNodesAndEdges);
+			
+		} else {
+			
+			outputFileName = "no_coinvestigators-per-year" + ".csv";			
+		}
+		
+        Map<String, String> fileData = new HashMap<String, String>();
+		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
+					 outputFileName);
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "application/octet-stream");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					 getCoPIsPerYearCSVContent(yearToCoPIs));
 
+		return fileData;
+	}
+
+	/**
+	 * Provides response when a csv file containing number & names of unique co-pis per 
+	 * year is requested. 
+	 * @param coPIData
+	 * @param response
+	 */
+	private Map<String, String> prepareCoPIsListDataResponse(CoPIData coPIData) {
+		
+		String outputFileName = "";
+		Map<String, Integer> coPIsToCount = new TreeMap<String, Integer>();
+		
+		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
+			
+			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
+									+ "_coinvestigators" + ".csv";
+	
+			coPIsToCount = getCoPIsList(coPIData);
+			
+		} else {
+			outputFileName = "no_coinvestigators" + ".csv";
+		}
+		
+        Map<String, String> fileData = new HashMap<String, String>();
+		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
+					 outputFileName);
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "application/octet-stream");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					 getCoPIsListCSVContent(coPIsToCount));
+
+		return fileData;
+	}
+
+	private Map<String, Integer> getCoPIsList(CoPIData coPIVO) {
+		
+		Map<String, Integer> coPIsToCount = new TreeMap<String, Integer>();
+		
+		for (CoPINode currNode : coPIVO.getNodes()) {
+			
+			/*
+			 * We have already printed the Ego Node info.
+			 * */
+			if (currNode != coPIVO.getEgoNode()) {
+				
+				coPIsToCount.put(currNode.getNodeName(), currNode.getNumberOfInvestigatedGrants());
+				
+			}
+		}
+		return coPIsToCount;
+	}
+	
+	/**
+	 * Provides a response when graphml formatted co-pi network is requested, typically by 
+	 * the flash vis.
+	 * @param coPIData
+	 * @param response
+	 */
+	private Map<String, String> prepareNetworkStreamDataResponse(CoPIData coPIData) {
+	
+		CoPIGraphMLWriter coPIGraphMLWriter = 
+				new CoPIGraphMLWriter(coPIData);
+		
+        Map<String, String> fileData = new HashMap<String, String>();
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "text/xml");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					 coPIGraphMLWriter.getCoPIGraphMLContent().toString());
+
+		return fileData;
+	
+	}
+	
+	private Map<String, String> prepareNetworkDownloadDataResponse(CoPIData coPIData) {
+		
+		String outputFileName = "";
+		
+		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
+			
+			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
+									+ "_copi-network.graphml" + ".xml";
+			
+		} else {
+			outputFileName = "no_copi-network.graphml" + ".xml";			
+		}
+		
+		CoPIGraphMLWriter coPIGraphMLWriter = 
+				new CoPIGraphMLWriter(coPIData);
+		
+        Map<String, String> fileData = new HashMap<String, String>();
+        fileData.put(DataVisualizationController.FILE_NAME_KEY, 
+				 outputFileName);
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "text/xml");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					 coPIGraphMLWriter.getCoPIGraphMLContent().toString());
+
+		return fileData;
+	
+	}
+	
+	
+	
+	
 }
