@@ -58,9 +58,9 @@
         data.addColumn('number', 'Grants');
         data.addRows(${sparklineVO.numOfYearsToBeRendered});
         
-        <#list sparklineVO.yearToGrantCountDataTable as yearToGrantCountDataElement>                        
-			data.setValue(${yearToGrantCountDataElement.grantCounter}, 0, '${yearToGrantCountDataElement.investigatedYear}');
-            data.setValue(${yearToGrantCountDataElement.grantCounter}, 1, ${yearToGrantCountDataElement.currentGrants});
+        <#list sparklineVO.yearToEntityCountDataTable as yearToGrantCountDataElement>                        
+			data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 0, '${yearToGrantCountDataElement.year}');
+            data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 1, ${yearToGrantCountDataElement.currentEntitiesCount});
         </#list>
         
         <#-- Create a view of the data containing only the column pertaining to grant count. -->

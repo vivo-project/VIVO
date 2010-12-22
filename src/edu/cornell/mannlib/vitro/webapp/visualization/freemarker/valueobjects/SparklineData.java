@@ -39,8 +39,7 @@ public class SparklineData {
 	
 	private boolean isShortVisMode = true;
 	
-	private List<YearPublicationCountDataElement> yearToPublicationCountDataTable;
-	private List<YearGrantCountDataElement> yearToGrantCountDataTable;	
+	private List<YearToEntityCountDataElement> yearToEntityCountDataTable;
 	
 	private int numOfYearsToBeRendered;
 	
@@ -85,15 +84,6 @@ public class SparklineData {
 		this.unknownYearGrants = unknownYearGrants;
 	}
 
-	public List<YearGrantCountDataElement> getYearToGrantCountDataTable() {
-		return yearToGrantCountDataTable;
-	}
-
-	public void setYearToGrantCountDataTable(
-			List<YearGrantCountDataElement> yearToGrantCountDataTable) {
-		this.yearToGrantCountDataTable = yearToGrantCountDataTable;
-	}
-
 	public void setNumOfYearsToBeRendered(int numOfYearsToBeRendered) {
 		this.numOfYearsToBeRendered = numOfYearsToBeRendered;
 	}
@@ -102,13 +92,13 @@ public class SparklineData {
 		return numOfYearsToBeRendered;
 	}
 
-	public void setYearToPublicationCountDataTable(
-			List<YearPublicationCountDataElement> yearToPublicationCountDataTable) {
-		this.yearToPublicationCountDataTable = yearToPublicationCountDataTable;
+	public void setYearToEntityCountDataTable(
+			List<YearToEntityCountDataElement> yearToEntityCountDataTable) {
+		this.yearToEntityCountDataTable = yearToEntityCountDataTable;
 	}
 
-	public List<YearPublicationCountDataElement> getYearToPublicationCountDataTable() {
-		return yearToPublicationCountDataTable;
+	public List<YearToEntityCountDataElement> getYearToEntityCountDataTable() {
+		return yearToEntityCountDataTable;
 	}
 
 	public void setYearToActivityCount(Map<String, Integer> yearToActivityCount) {

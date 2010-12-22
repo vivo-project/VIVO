@@ -2,10 +2,12 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -18,8 +20,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMa
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Node;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 
 
 @SuppressWarnings("serial")
@@ -172,6 +175,7 @@ public class CoAuthorshipVisCodeGenerator {
 		int uniqueCoAuthorCounter = 0;
 		int renderedFullSparks = 0;
 		Set<Node> allCoAuthorsWithKnownAuthorshipYears = new HashSet<Node>();
+		List<YearToEntityCountDataElement> yearToUniqueCoauthorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 		
 		for (int publicationYear = minPubYearConsidered; 
 					publicationYear <= currentYear; 
@@ -200,6 +204,11 @@ public class CoAuthorshipVisCodeGenerator {
 												+ ", 1, "
 												+ currentUniqueCoAuthors
 												+ ");\n");
+				
+				yearToUniqueCoauthorsCountDataTable.add(new YearToEntityCountDataElement(uniqueCoAuthorCounter, 
+																						 publicationYearAsString, 
+																						 currentUniqueCoAuthors));
+				
 				uniqueCoAuthorCounter++;
 		}
 
@@ -210,6 +219,10 @@ public class CoAuthorshipVisCodeGenerator {
 		 * associated with it. Hence.
 		 * */
 		renderedFullSparks = allCoAuthorsWithKnownAuthorshipYears.size();
+		
+		sparklineData.setRenderedSparks(renderedFullSparks);
+		
+		sparklineData.setYearToEntityCountDataTable(yearToUniqueCoauthorsCountDataTable);
 
 		/*
 		 * Total publications will also consider publications that have no year associated with
@@ -221,6 +234,7 @@ public class CoAuthorshipVisCodeGenerator {
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR).size();
 		}
 		
+		sparklineData.setUnknownYearPublications(unknownYearCoauthors);
 		
 		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, " 
 											+ "showValueLabels: false, labelPosition: 'none'}";
@@ -230,12 +244,15 @@ public class CoAuthorshipVisCodeGenerator {
 		} else {
 			visContainerID = DEFAULT_VISCONTAINER_DIV_ID;
 		}
+
+		sparklineData.setVisContainerDivID(visContainerID);
 		
 		/*
 		 * By default these represents the range of the rendered sparks. Only in case of
 		 * "short" sparkline mode we will set the Earliest RenderedPublication year to
 		 * "currentYear - 10". 
 		 * */
+		sparklineData.setEarliestYearConsidered(minPubYearConsidered);
 		sparklineData.setEarliestRenderedPublicationYear(minPublishedYear);
 		sparklineData.setLatestRenderedPublicationYear(currentYear);
 		
@@ -253,6 +270,9 @@ public class CoAuthorshipVisCodeGenerator {
 		if (VisualizationFrameworkConstants.SHORT_SPARKLINE_VIS_MODE.equalsIgnoreCase(visMode)) {
 			
 			sparklineData.setEarliestRenderedPublicationYear(shortSparkMinYear);
+			
+			sparklineData.setShortVisMode(true);
+			
 			generateShortSparklineVisualizationContent(currentYear,
 													   shortSparkMinYear, 
 													   visContainerID, 
@@ -260,6 +280,8 @@ public class CoAuthorshipVisCodeGenerator {
 													   unknownYearCoauthors,
 													   sparklineDisplayOptions);	
 		} else {
+			sparklineData.setShortVisMode(false);
+			
 			generateFullSparklineVisualizationContent(currentYear,
 					   								  minPubYearConsidered,
 					   								  visContainerID,

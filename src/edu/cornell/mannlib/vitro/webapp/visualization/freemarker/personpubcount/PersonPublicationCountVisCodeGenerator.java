@@ -22,7 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearPublicationCountDataElement;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 
 
 @SuppressWarnings("serial")
@@ -200,7 +200,7 @@ public class PersonPublicationCountVisCodeGenerator {
 		 * */
 		int renderedFullSparks = 0;
 
-		List<YearPublicationCountDataElement> yearToPublicationCountDataTable = new ArrayList<YearPublicationCountDataElement>();
+		List<YearToEntityCountDataElement> yearToPublicationCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 		
 		for (int publicationYear = minPubYearConsidered; 
 					publicationYear <= currentYear; 
@@ -225,7 +225,7 @@ public class PersonPublicationCountVisCodeGenerator {
 												+ currentPublications
 												+ ");\n");
 
-				yearToPublicationCountDataTable.add(new YearPublicationCountDataElement(publicationCounter, stringPublishedYear, currentPublications));
+				yearToPublicationCountDataTable.add(new YearToEntityCountDataElement(publicationCounter, stringPublishedYear, currentPublications));
 				
 				/*
 				 * Sparks that will be rendered will always be the one's which has 
@@ -236,7 +236,7 @@ public class PersonPublicationCountVisCodeGenerator {
 				
 		}
 		
-		sparklineData.setYearToPublicationCountDataTable(yearToPublicationCountDataTable);
+		sparklineData.setYearToEntityCountDataTable(yearToPublicationCountDataTable);
 		
 		
 		sparklineData.setRenderedSparks(renderedFullSparks);

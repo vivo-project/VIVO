@@ -22,7 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearGrantCountDataElement;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 
 
 @SuppressWarnings("serial")
@@ -190,7 +190,7 @@ public class PersonGrantCountVisCodeGenerator {
 		 */
 		int renderedFullSparks = 0;
 
-		List<YearGrantCountDataElement> yearToGrantCountDataTable = new ArrayList<YearGrantCountDataElement>();
+		List<YearToEntityCountDataElement> yearToGrantCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
 
@@ -208,7 +208,7 @@ public class PersonGrantCountVisCodeGenerator {
 					+ ", 1, " + currentGrants + ");\n");
 
 			yearToGrantCountDataTable
-					.add(new YearGrantCountDataElement(
+					.add(new YearToEntityCountDataElement(
 							grantCounter, stringInvestigatedYear,
 							currentGrants));
 
@@ -222,7 +222,7 @@ public class PersonGrantCountVisCodeGenerator {
 		}
 
 		sparklineData
-				.setYearToGrantCountDataTable(yearToGrantCountDataTable);
+				.setYearToEntityCountDataTable(yearToGrantCountDataTable);
 
 		sparklineData.setRenderedSparks(renderedFullSparks);
 

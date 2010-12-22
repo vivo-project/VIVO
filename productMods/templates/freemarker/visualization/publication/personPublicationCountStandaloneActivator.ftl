@@ -4,4 +4,4 @@
 
 ${headScripts.add(googleJSAPI)}
 
-<#include "/visualization/publicationSparklineContent.ftl">
+<#include "/visualization/publication/personPublicationSparklineContent.ftl">

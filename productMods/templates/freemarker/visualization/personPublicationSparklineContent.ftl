@@ -23,9 +23,9 @@
                 data.addColumn('number', 'Publications');
                 data.addRows(${sparklineVO.numOfYearsToBeRendered});
         
-                <#list sparklineVO.yearToPublicationCountDataTable as yearToPublicationCountDataElement>                        
-                    data.setValue(${yearToPublicationCountDataElement.publicationCounter}, 0, '${yearToPublicationCountDataElement.publishedYear}');
-                    data.setValue(${yearToPublicationCountDataElement.publicationCounter}, 1, ${yearToPublicationCountDataElement.currentPublications});
+                <#list sparklineVO.yearToEntityCountDataTable as yearToPublicationCountDataElement>                        
+                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
+                    data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 1, ${yearToPublicationCountDataElement.currentEntitiesCount});
                 </#list>
         
                 <#-- Create a view of the data containing only the column pertaining to publication count. -->

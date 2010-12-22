@@ -34,8 +34,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
 			DataSource dataSource) throws MalformedQueryParametersException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Co-PI Grant Count does not provide Ajax Response.");
 	}
 
 	@Override
