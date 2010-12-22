@@ -14,15 +14,18 @@ a.no_href_styles {
 	padding-left:10px;
 	padding-top:10px;
 	background: #fff;
+	margin-left: 35%;
+	clear: right;
 }
 
 .vis-tables {
-	width: 33%;
-	padding: 5px;
-	margin: 5px;
+/*	width: 33%; */
+	padding: 10px;
+	margin: 10px;
 	background-color: #FFF;
 	border: 1px solid #ddebf1;
-	float: left;
+	float:left;
+	font-size: 0.8em;
 }
 
 p.datatable {
@@ -95,6 +98,21 @@ p.datatable {
 	color: #121b3c;
 	padding-top: 10px;
 	margin-bottom: 0.3em;
+	float:left;
+}
+
+.toggle_visualization{
+
+/*		
+	margin-bottom: 0.3em;
+	clear:left;
+	float:right;
+	width: 150px;	
+*/	
+	text-align: left;
+	margin-left: 78%;
+	margin-top: -8%;
+	max-width: 250px;
 }
 
 .sub_headings a {

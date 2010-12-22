@@ -240,7 +240,7 @@ public class PersonPublicationCountVisCodeGenerator {
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
 		}
 
-		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, " 
+		String sparklineDisplayOptions = "{width: 150, height: 30, showAxisLines: false, " 
 												+ "showValueLabels: false, labelPosition: 'none'}";
 		
 		if (providedVisContainerID != null) {
@@ -410,7 +410,7 @@ public class PersonPublicationCountVisCodeGenerator {
 									+ unknownYearPublications) + "');");
 		
 		visualizationCode.append("var allSparksText = ''" 
-									+ "+ ' publication(s) '" 
+									+ "+ ' <h3>publication(s)</h3> '" 
 									+ "+ ' from " 
 									+ "<span class=\"sparkline_range\">" 
 									+ "" + minPubYearConsidered + " to " + currentYear + "" 

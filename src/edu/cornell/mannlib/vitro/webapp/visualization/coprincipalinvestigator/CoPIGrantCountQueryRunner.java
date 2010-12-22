@@ -80,19 +80,99 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+ "		(str(?GrantEndDate) as ?" + QueryFieldLabels.GRANT_END_DATE + ") "
 			+ "		(str(?CoPI) as ?" + QueryFieldLabels.CO_PI_URL + ") "
 			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
-			+ "WHERE { "
-			+ "<" + queryURI + "> rdfs:label ?PILabel ;" 
-								+ " core:hasCo-PrincipalInvestigatorRole ?Role . " 
-			+ "?Role core:roleIn ?Grant . " 
-			+ "?Grant rdfs:label ?GrantLabel ; " 
-			+ "core:startDate ?GrantStartDate ; " 
-			+ "core:endDate ?GrantEndDate ;" 
-			+ "core:relatedRole ?RelatedRole . "
-			+ "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
-			+ "?CoPI rdfs:label ?CoPILabel . " 
-			+ " }";
+			+ "WHERE "
+			+ "{ "  	
+			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
+			+  		"{ "
+			        	
+			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+
+			+			"?Role core:roleIn ?Grant . "
+
+			+			"?Grant rdfs:label ?GrantLabel ; "
+
+			+			"core:relatedRole ?RelatedRole . "
+
+			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+							
+			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
+						
+			+		"} "
+				
+			+		"UNION "
+					
+			+		"{ "
+			        	
+			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+
+			+			"?Role core:roleIn ?Grant . "
+
+			+			"?Grant rdfs:label ?GrantLabel ; "		
+					
+			+			"core:relatedRole ?RelatedRole . "
+
+			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+							
+			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
+					
+			+		"} "	
+
+			+		"UNION "
+
+			+  		"{ "
+			        	
+			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+
+			+			"?Role core:roleIn ?Grant . "
+
+			+			"?Grant rdfs:label ?GrantLabel ; "
+
+			+			"core:relatedRole ?RelatedRole . "
+
+			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+							
+			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
+
+			+		"} "
+				
+			+		"UNION "
+					
+			+		"{ "
+			        	
+			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+
+			+			"?Role core:roleIn ?Grant . "
+
+			+			"?Grant rdfs:label ?GrantLabel ; "		
+					
+			+			"core:relatedRole ?RelatedRole . "
+
+			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+							
+			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "		
+			+		"} "	
+
+			+ "} ";
 
 		log.debug("COPI QUERY - " + sparqlQuery);
+		
+		//System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
 		
 		return sparqlQuery;
 	}

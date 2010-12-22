@@ -223,7 +223,7 @@ public class CoPIVisCodeGenerator {
 					VOConstants.DEFAULT_GRANT_YEAR).size();
 		}
 
-		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, "
+		String sparklineDisplayOptions = "{width: 150, height: 30, showAxisLines: false, "
 				+ "showValueLabels: false, labelPosition: 'none'}";
 
 		if (providedVisContainerID != null) {
@@ -391,7 +391,7 @@ public class CoPIVisCodeGenerator {
 									+ unknownYearGrants) + "');");
 		
 		visualizationCode.append("var allSparksText = ''" 
-									+ "+ ' Co-Principal Investigator(s) '" 
+									+ "+ ' <h3>Co-Principal Investigator(s)</h3> '" 
 									+ "+ ' from " 
 									+ "<span class=\"sparkline_range\">" 
 									+ "" + minGrantYearConsidered + " to " + currentYear + "" 

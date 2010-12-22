@@ -120,16 +120,49 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	private String getSparqlQuery(String queryURI){
 		
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+							
 							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
+							
 							+ "(str(<" + queryURI + ">) as ?PILit) "
-							+ "WHERE {"
-							+ "<" + queryURI + "> rdfs:label ?PILabel;"
-							+ "core:hasCo-PrincipalInvestigatorRole ?Role ."
-							+ "?Role core:roleIn ?Grant ."
-							+ "?Grant rdfs:label ?GrantLabel ; core:startDate ?GrantStartDate ; core:endDate ?GrantEndDate ."
-							+ "}";
+							
+							+ "WHERE "
+							+ "{ "  	
+							+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
+							+  		"{ "
+							        	
+							+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+
+							+			"?Role core:roleIn ?Grant . "
+
+							+			"?Grant rdfs:label ?GrantLabel . "
+
+							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+											
+							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
+							+		"} "
+								
+							+		"UNION "
+									
+							+		"{ "
+							        	
+							+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+
+							+			"?Role core:roleIn ?Grant . "
+
+							+			"?Grant rdfs:label ?GrantLabel . "	
+
+							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+											
+							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "	
+									
+									
+							+		"} "	
+
+
+							+ "} ";
 		
 		log.debug("SPARQL query for person grant count -> \n"+ sparqlQuery);
+		
 		return sparqlQuery;
 	}
 	
