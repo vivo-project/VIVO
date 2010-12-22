@@ -75,7 +75,7 @@ public class DummyVisClientController extends FreemarkerHttpServlet {
     }
     
     @Override
-    protected String getTitle(String siteName) {
+    protected String getTitle(String siteName, VitroRequest vreq) {
     	return "Dummy Visualization Controller";
     }
     
