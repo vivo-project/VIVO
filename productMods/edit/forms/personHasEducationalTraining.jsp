@@ -43,6 +43,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
@@ -51,6 +52,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -82,7 +85,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="degreeOutcomeOf" value="${vivoCore}degreeOutcomeOf" />
 <c:set var="trainingAtOrg" value="${vivoCore}trainingAtOrganization" />
 
-<c:set var="hasDateTimeValue" value="${vivoCore}hasDateTimeValue"/>
+<c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
 <c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
 <c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
 <c:set var="edToDateTime" value="${vivoCore}dateTimeInterval"/>
@@ -92,19 +95,23 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="hasDateTimeValue" value="${vivoCore}dateTimeValue" />
 <c:set var="precisionValue" value="${vivoCore}YearPrecision" />
 <c:set var="hasPrecision" value="${vivoCore}dateTimePrecision" />
+--%>
 
 <v:jsonset var="existingYearQuery" >  
     SELECT ?existingYear WHERE {
-          ?edTraining <${hasDateTimeValue}> ?existingYear . }
+          ?edTraining <${edToDateTime}> ?dateTimeNode .
+          ?dateTimeNode <${dateTimeValue}> ?existingYear . }
 </v:jsonset>
-<v:jsonset var="yearAssertion" > 
-    @prefix core: <${vivoCore}> .   
-    ?dateTime a core:DateTimeValue ;
-              core:dateTime ?year ;
-              core:dateTimeValuePrecision core:YearPrecision .
-    ?edTraining core:dateTimeValue ?dateTime .
+
+<v:jsonset var="existingYearPrecision" >  
+    SELECT ?existingPrecision WHERE {
+          ?edTraining <${edToDateTime}> ?dateTimeNode .
+          ?dateTimeNode <${dateTimePrecision}> ?existingPrecision . }
 </v:jsonset>
---%>
+
+<v:jsonset var="existingDateTimeQuery" >  
+    SELECT ?dateTime WHERE {  ?edTraining <${edToDateTime}> ?dateTime .  }
+</v:jsonset>
 
 <%-- Assertions for adding a new educational training entry --%>
 
@@ -128,7 +135,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <v:jsonset var="dateTimeAssertions">
     ?edTraining    <${edToDateTime}> ?dateTimeNode .
     ?dateTimeNode  <${type}> <${dateTimeValueType}> .
-    ?dateTimeNode  <${hasDateTimeValue}> ?dateTime.value .
+    ?dateTimeNode  <${dateTimeValue}> ?dateTime.value .
     ?dateTimeNode  <${dateTimePrecision}> ?dateTime.precision . 
 </v:jsonset>
 
@@ -230,12 +237,15 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         "orgLabel"           : "${orgLabelQuery}",
         "majorField"         : "${majorFieldQuery}",
         "dept"               : "${deptQuery}",
-        "info"               : "${infoQuery}"
+        "info"               : "${infoQuery}",        
+        "dateTime.value"     :  "${existingYearQuery}"        
     },
     "sparqlForExistingUris" : {
         "org"            : "${orgQuery}",
         "orgType"        : "${orgTypeQuery}",
-        "degree"         : "${degreeQuery}"
+        "degree"         : "${degreeQuery}",
+        "dateTimeNode"       : "${existingDateTimeQuery}",
+        "dateTime.precision" : "${existingYearPrecision}"
     },
     "fields" : {
       "degree" : {
@@ -261,7 +271,6 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
          "assertions"       : [ "${majorFieldAssertion}" ]
       },       
       "dateTime" : {
-            "editElement"       : "edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision",
             "newResource"       : "true",
             "validators"        : [  ],
             "optionsType"       : "UNDEFINED",
@@ -335,7 +344,12 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     if (editConfig == null) {
-        editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
+        editConfig = new EditConfiguration((String) request.getAttribute("editjson"));  
+        
+        //setup date time edit element
+        Field dateTime = editConfig.getField("dateTime");
+        dateTime.setEditElement( new DateTimeWithPrecision(dateTime, VitroVocabulary.Precision.YEAR));
+        
         EditConfiguration.putConfigInSession(editConfig,session);
     }
         
