@@ -1,0 +1,276 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+@charset "UTF-8";
+/* CSS Document */
+
+/* VISUAL GRAPH FOAF:PERSON------>  */
+#intro-menupage{
+    width: 920px;
+    background: #fff;
+
+}
+#intro-menupage  h3{
+    font-size: 1.5em;
+    color: #002b44;
+    font-weight: normal;
+    border-bottom: 1px solid #f3f3f4;
+}
+#content-foaf-person{
+    width: 620px;
+    border-right: 1px solid #e8ece9;
+}
+#content-foaf-person h4{
+    font-size: 1.25em;
+    color: #2485ae;
+    font-weight: normal;
+    background: url(../images/arrow-down.gif) 117px 27px no-repeat;
+}
+ul#foaf-person-childClasses li{
+    border-bottom: 1px solid #dde4e3;
+    font-size: 1em;
+}
+ul#foaf-person-childClasses a{
+    color: #5e6363;
+    text-decoration: none;
+}
+ul#foaf-person-childClasses a:hover{
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+    color: #2ea0cf;
+}
+ul#foaf-person-childClasses a.selected{
+    color: #2ea0cf;
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+}
+ul#foaf-person-childClasses .count-classes{    
+    font-size: .75em;
+}
+/* VISUAL GRAPH CLASS:GENERIC (ORGANIZATION, RESEARCH, EVENT) ------>  */
+#content-generic-class{
+    width: 900px;
+}
+#content-generic-class h3{
+    font-size: 1.5em;
+    color: #002b44;
+    font-weight: normal;
+    border-bottom: 1px solid #f3f3f4;
+}
+#content-generic-class h4{
+    font-size: 1.25em;
+    color: #2485ae;
+    font-weight: normal;
+    background: url(../images/arrow-down.gif) 117px 27px no-repeat;
+}
+ul#class-generic-childClasses{
+    float: left;
+    width: 265px;
+    margin-left: 35px;
+}
+ul#class-generic-childClasses li{
+    border-bottom: 1px solid #dde4e3;
+    font-size: 1em;
+}
+ul#class-generic-childClasses a{
+    color: #5e6363;
+    text-decoration: none;
+}
+ul#class-generic-childClasses a:hover{
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+    color: #2ea0cf;
+}
+ul#class-generic-childClasses a.selected{
+    color: #2ea0cf;
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+}
+ul#class-generic-childClasses .count-classes{    
+    font-size: .75em; 
+}
+#generic-class-graph{
+    border: 1px dotted #ccc;
+}
+/* FIND BY ------>  */
+#find-by{
+    border: 1 solid #749A02;
+}
+#find-by h3{
+    font-size: 1.125em;
+    color: #2485ae;
+    font-weight: normal;
+    background: url(../images/arrow-down.gif) 85px 7px no-repeat;
+}
+ul#find-filters li{
+    border-bottom: 1px solid #dde4e3;
+    font-size: 1em;
+}
+ul#find-filters a{
+    color: #5e6363;
+    text-decoration: none;
+}
+ul#find-filters a:hover{
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+    color: #2ea0cf;
+}
+ul#find-filters a.selected{
+    color: #2ea0cf;
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+}
+/* NETWORK STATS ------>  */
+#network-stats{
+    width: 920px;
+    background: #f7f9f9;
+    border: 1px solid #d7e6e6;
+}
+#network-stats h3{
+    font-size: 1.25em;
+    color: #2485ae;
+    font-weight: normal;
+    background: url(../images/arrow.gif) 140px 27px no-repeat;
+}
+#network-stats p{
+    padding: 15px 15px 15px 175px;
+    font-size: .875em;
+    line-height: 1.5em;
+    color: #5e6363;
+}
+/* RESEARCHERS ------>  */
+#researchers{
+    width: 920px;
+    background: #f7f9f9;
+    border: 1px solid #d7e6e6;
+}
+#researchers h3{
+    font-size: 1.25em;
+    color: #2485ae;
+    font-weight: normal;
+    background: url(../images/arrow.gif) 140px 27px no-repeat;
+}
+#researchers p{
+    font-size: 1.125em;
+    color: #5e6363;
+}
+#researchers-slider{
+    border: 1px solid #e8e8e8;
+    background: #fff;
+}
+#alpha-display{
+    font-size: 4.375em;
+    text-align: center;
+    float: left;
+    color: #2485ae;
+    border-right: 1px dotted #dde4e3;
+    font-weight: bold;
+}
+#profile-photo-display{
+    width: 600px;
+}
+#profile-photo-display img{    
+    border: 1px solid #dde4e3;
+}
+#nav-display p{
+    font-size: 26px;
+    color: #2485ae;
+}
+#nav-display img{
+    border-left: 1px solid #e8e8e8;
+}
+/* BROWSE BY ------>  */
+#browse-by{
+    width: 920px;
+    border: 1px solid #dfe6e6;
+    background: #f7f9f9;
+}
+#browse-by h2{
+    background: #5e6363;
+    font-size: 1.375em;
+    color: #fff;
+}
+/* BROWSE CLASSES ------>  */
+ul#browse-childClasses{
+    border: 1px solid #dde4e3;
+    border-right: 0;
+    background-color: #f1f2ee;
+}
+ul#browse-childClasses li{
+    border-bottom: 1px solid #dde4e3;
+    font-size: 1em;
+}
+ul#browse-childClasses a{
+    color: #5e6363;
+    text-decoration: none;
+}
+ul#browse-childClasses a:hover{
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+    color: #2ea0cf;
+}
+ul#browse-childClasses a.selected{
+    color: #2ea0cf;
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+}
+ul#browse-childClasses .count-classes{    
+    font-size: 12px; 
+}
+/* ALPHA BROWSE------>  */
+#alpha-browse-childClass{
+    border: 1px solid #dde4e3;
+    border-right: 0;
+}
+ul#alpha-browse-childClass{
+    background-color: #fff;
+    border-left: 1px solid #dde4e3;
+}
+ul#alpha-browse-childClass li{
+    font-size: 1.125em;
+}
+ul#alpha-browse-childClass a{
+    color: #5e6363;
+    text-decoration: none;
+    border-bottom: 1px solid #dde4e3;
+}
+ul#alpha-browse-childClass a:hover{
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+    color: #2ea0cf;
+}
+ul#alpha-browse-childClass a.selected{
+    color: #2ea0cf;
+    background: url(../images/arrow.gif) 0 12px no-repeat;
+}
+ul#alpha-browse-childClass .count-classes{    
+    font-size: .75em;
+}
+.alphaIndex{    
+    font-size: 0.8em;
+}
+/* BROWSE INDIVIDUALS------>  */
+#individuals-in-childClass{
+    width: 500px;
+    border: 1px solid #dde4e3;
+    background-color: #fff;
+}
+#individuals-in-childClass h3{
+    font-size: 1.68em;
+    color: #2485ae;
+}
+article.individual-foaf-person{
+    width: 440px;
+    border-bottom: 1px solid #dde4e3;
+}
+article.individual-foaf-person img{
+    border: 2px solid #dde4e3;
+}
+article.individual-foaf-person h1{
+    color: #5e6363;;
+    font-size: 1em;
+    font-weight: normal;
+}
+article.individual{
+    border-bottom: 1px solid #dde4e3;
+}
+article.individual h1{
+    margin: 0;
+    paddin: 0;
+    color: #5e6363;
+    line-height: 1.2em;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 1em;
+    font-weight: normal;
+}
