@@ -74,6 +74,10 @@ form textarea {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px; 
 }
+.maxWidth{
+    margin-top: 20px;
+    width: 100%;
+}
 form a:link.cancel, form a:visited.cancel {
     text-decoration: underline;
     color: #f70;
@@ -233,4 +237,12 @@ form select{
 .notice{ 
     margin-top: 1em; 
     border: 1px dotted #FFD324;
+}
+a.ingestMenu:link, a.ingestMenu:visited{
+    text-decoration: none;
+    color: #5E6363;
+}
+a.ingestMenu:hover, a.ingestMenu:active{
+    text-decoration: none;
+    color: #2485AE;
 }
