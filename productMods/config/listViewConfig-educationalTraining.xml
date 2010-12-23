@@ -69,7 +69,7 @@
                 OPTIONAL { GRAPH ?g6 { ?edTraining core:majorField ?majorField } }
                 OPTIONAL { GRAPH ?g7 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
                 OPTIONAL { GRAPH ?g8 { ?edTraining core:supplementalInformation ?info } }
-                OPTIONAL { GRAPH ?g9 { ?edTraining core:hasDateTimeValue ?dateTimeValue . 
+                OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeValue ?dateTimeValue . 
                                        ?dateTimeValue core:dateTime ?dateTime } }    
                               
             }  ORDER BY DESC(?dateTime)  
