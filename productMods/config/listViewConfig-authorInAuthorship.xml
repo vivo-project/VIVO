@@ -2,6 +2,9 @@
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <!--
+    List view configuration guidelines
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
     Required elements: 
         - query: the sparql query used to retrieve the data
         - template: the name of the template used to display a single property statement
@@ -11,15 +14,39 @@
                        sending it to the template
     
     Query requirements:
-        - WHERE clause must contain a statement ?subject ?property ?object, with the variables
+        - Use a SELECT DISTINCT clause rather than a simple SELECT. There can still be cases where 
+          the same individual is retrieved more than once, if there are multiple solutions to the
+          other assertions. DISTINCT provides a start at uniqueness.
+          
+        - The WHERE clause must contain a statement ?subject ?property ?object, with the variables
           ?subject and ?property named as such. The object can be given any name, but it must be 
           included in the SELECT terms retrieved by the query. This is the statement that will be edited 
           from the edit links.
+          
         - If the linked individual may be missing, the query should select the object's localname using
           the ARQ localname function, so that the template can display the local name in the absence of
-          the linked individual.  
+          the linked individual. Alternatively, this can be retrieved from the template using the
+          localname(uri) method. 
+          
         - Each assertion or set of optional assertions must reference a different graph variable, so that
-          we do not impose a requirement about which assertions are in the same graph.          
+          no requirement about which assertions are in the same graph is imposed (unless this is desired
+          in a specific case).
+          
+        - For collated properties: 
+            - Include a ?subclass variable, named as such, in the SELECT claus. If the ?subclass variable
+              is missing, the property will be displayed without collation.
+            - ?subclass must be the first term in the ORDER BY clause
+            - Include the following in the WHERE clause, substituting in the relevant variables for
+              ?infoResource and core:InformationResource:
+                OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
+                    GRAPH ?g5 { ?infoResource a ?subclass } 
+                    FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                            ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+                }  
+              The filter blocks the retrieval of inferred type statements, so that, for example, we get
+              subclass bibo:Book but not bibo:Document, assuming the latter is inferred. If both have been
+              asserted, we will get both.
+                     
 -->
 
 <list-view-config>
@@ -34,9 +61,12 @@
             GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
             GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
             OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
-                       GRAPH ?g5 { ?infoResource a ?subclass } }
+                       GRAPH ?g5 { ?infoResource a ?subclass } 
+                       FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                               ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+                     }                                            
             OPTIONAL { GRAPH ?g6 { ?infoResource core:hasDateTimeValue ?dateTimeValue . 
-                                   ?dateTimeValue core:dateTime ?dateTime . } }      
+                                   ?dateTimeValue core:dateTime ?dateTime . } }                
         } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
     </query>
     
