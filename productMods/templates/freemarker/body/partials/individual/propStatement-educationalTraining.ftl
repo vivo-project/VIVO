@@ -5,23 +5,31 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<#assign degree>
-    <#if statement.degreeName??>
-        <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " />
+<@showEducationalTraining statement />
+
+<#-- Use a macro to keep variable assignments local; otherwise the values get passed to the next
+     statement -->
+<#macro showEducationalTraining statement>
+
+    <#local degree>
+        <#if statement.degreeName??>
+            <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " />
+        </#if>
+    </#local>
+    
+    <#local linkedIndividual>
+        <#if statement.org??>
+            <a href="${url(statement.org)}">${statement.orgName}</a>
+        <#else>
+            <#-- This shouldn't happen, but we must provide for it -->
+            <a href="${url(statement.edTraining)}">${statement.edTrainingName}</a> (no linked organization)
+        </#if>
+    </#local>
+    
+    <#if statement.dateTime??>
+        <#local year = dt.xsdDateTimeToYear(statement.dateTime)>
     </#if>
-</#assign>
+    
+    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info!, year! ] />
 
-<#assign linkedIndividual>
-    <#if statement.org??>
-        <a href="${url(statement.org)}">${statement.orgName}</a>
-    <#else>
-        <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${url(statement.edTraining)}">${statement.edTrainingName}</a> (no linked organization)
-    </#if>
-</#assign>
-
-<#if statement.dateTime??>
-    <#assign year = dt.xsdDateTimeToYear(statement.dateTime)>
-</#if>
-
-<@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info!, year! ] />
+</#macro>
