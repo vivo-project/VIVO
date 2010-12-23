@@ -41,8 +41,6 @@
                         column: 0,
                         minValue: '${sparklineVO.earliestRenderedPublicationYear?c}',
                         maxValue: '${sparklineVO.latestRenderedPublicationYear?c}'
-                        /*minValue: '2001',
-                        maxValue: '2011'*/
                 }]));
          
          

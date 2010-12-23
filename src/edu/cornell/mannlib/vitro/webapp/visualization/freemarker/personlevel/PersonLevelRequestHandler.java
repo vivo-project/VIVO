@@ -78,9 +78,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         String egoURI = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
-        String renderMode = vitroRequest.getParameter(
-        							VisualizationFrameworkConstants.RENDER_MODE_KEY);
-        
         String visMode = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         

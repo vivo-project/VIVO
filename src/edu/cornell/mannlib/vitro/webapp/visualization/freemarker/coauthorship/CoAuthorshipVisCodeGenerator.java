@@ -514,6 +514,14 @@ public class CoAuthorshipVisCodeGenerator {
 		
 		sparklineData.setTable(tableCode);
 		
+		
+		Map<String, Integer> yearToUniqueCoauthorsCount = new HashMap<String, Integer>();
+		for (Map.Entry<String, Set<Node>> currentYear : yearToUniqueCoauthors.entrySet()) {
+			yearToUniqueCoauthorsCount.put(currentYear.getKey(), currentYear.getValue().size());
+		}
+		
+		sparklineData.setYearToActivityCount(yearToUniqueCoauthorsCount);
+		
 		return divContextCode.toString();
 	}
 

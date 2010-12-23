@@ -23,15 +23,15 @@
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount.PersonGrantCountRequestHandler" />
 	
 	<bean id="person_level"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personlevel.PersonLevelRequestHandler" />
 
 	<bean id="coprincipalinvestigator"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
 
 	<!-- 
 	
 	<bean id="entity_comparison"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityPublicationCountRequestHandler" />
 	
  	-->
 	<bean id="visualizationInjector"
@@ -53,7 +53,6 @@
 				<entry key="person_grant_count">
 					<ref bean="person_grant_count"></ref>
 				</entry>
-				
 				
 				<entry key="person_level">
 					<ref bean="person_level"></ref>

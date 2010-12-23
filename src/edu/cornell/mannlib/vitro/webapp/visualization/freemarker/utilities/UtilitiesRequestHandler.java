@@ -172,20 +172,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		}
 		return finalThumbNailLocation;
 	}
-	/*
-	
-	private TemplateResponseValues prepareUtilitiesResponse(String preparedContent, VitroRequest vreq) {
-		
-//		response.setContentType("text/plain");
-		
-		String utilitiesTemplate = "/visualization/utilities.ftl";
-		
-		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("utilityResopnse", preparedContent);
-
-		return new TemplateResponseValues(utilitiesTemplate, body);
-		
-	}*/
 
 	@Override
 	public Map<String, String> generateDataVisualization(
