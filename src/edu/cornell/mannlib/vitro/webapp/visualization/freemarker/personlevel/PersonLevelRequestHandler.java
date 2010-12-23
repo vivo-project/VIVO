@@ -82,7 +82,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         
         
-        if (VisualizationFrameworkConstants.CO_PI_VIS.equalsIgnoreCase(visMode)) { 
+        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
         	
         	QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
             

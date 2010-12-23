@@ -221,7 +221,7 @@ function processProfileInformation(nameContainerID,
 }
 
 function visLoaded(nodes){
-
+	
 	var jsonedNodes = jQuery.parseJSON(nodes);
 	var tableID = "";
 	var tableContainer = "";
@@ -294,6 +294,7 @@ function createTable(tableID, tableContainer, tableData) {
 
 	table.prependTo('#' + tableContainer);
 	$('#' + tableContainer + " #loadingData").remove();
+	
 }
 
 //renderStatsOnNodeClicked, CoRelations, noOfCoRelations

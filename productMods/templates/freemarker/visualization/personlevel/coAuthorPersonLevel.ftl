@@ -5,12 +5,12 @@
 <#assign dataVisualizationURLRoot ="/visualizationData">
 
 <#assign egoURI ="${egoURIParam?url}">
-<#assign egoCoAuthorshipDataFeederURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&visMode=coauthor_network_stream&labelField=label'>
+<#assign egoCoAuthorshipDataFeederURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthor_network_stream&labelField=label'>
 
-<#assign coprincipalinvestigatorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${egoURI}&visMode=copi'>
+<#assign coprincipalinvestigatorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${egoURI}&vis_mode=copi'>
 
-<#assign egoCoAuthorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&visMode=coauthors'>
-<#assign egoCoAuthorshipNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&visMode=coauthor_network_download'>
+<#assign egoCoAuthorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthors'>
+<#assign egoCoAuthorshipNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthor_network_download'>
 
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
 <#assign adobeFlashDetector = '${urls.base}/js/visualization/coauthorship/AC_OETags.js'>
@@ -63,16 +63,15 @@ var domainParam = "http://vivo-vis-test.slis.indiana.edu/vivo1/visualizationData
 <script language="JavaScript" type="text/javascript">
 
 $(document).ready(function(){
-		
+
 	<#if (numOfCoAuthorShips > 0) >
 		$("#coauth_table_container").empty().html('<img id="loadingData" width="auto" src="${loadingImageLink}" />');
 	</#if>
 		    	
-	    
 	processProfileInformation("ego_label", 
 							  "ego_moniker",
 							  "ego_profile_image",
-							  jQuery.parseJSON(getWellFormedURLs("${egoURI}", "profile_info")));
+							  jQuery.parseJSON(getWellFormedURLs("${egoURIParam}", "profile_info")));
 	
 	<#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) >  
 			if ($('#ego_label').text().length > 0) {
@@ -96,7 +95,7 @@ $(document).ready(function(){
 		
 		<div class = "toggle_visualization">
 			<h2>Co-Investigator Network</h2>
-			<a style = "margin-top:0px;" class="view-all-style" href='<c:out value="${coprincipalinvestigatorURL}"/>'>View</a>
+			<a style = "margin-top:0px;" class="view-all-style" href='${coprincipalinvestigatorURL}'>View</a>
 			<span class="pictos-arrow-10">4</span>
 		</div>
 	
@@ -106,7 +105,7 @@ $(document).ready(function(){
 			
 				<h2 class="sub_headings">Co-Author Network </h2>
 				
-				<#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) > 
+				<#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
 					   	<a class = "fileDownloadPlaceHolder" href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a>
 				<#else>
 
@@ -130,8 +129,8 @@ $(document).ready(function(){
 			</#if>
 			
 	</div>		
-
-	<#if (numOfCoAuthorShips?? && numOfCoAuthorShips <= 0) || (numOfAuthors?? && numOfAuthors <= 0) >
+	
+	<#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) >
 	
 		<div id="bodyPannel">
 			<div id="visPanel" style="float: right; width: 600px;">
@@ -167,6 +166,9 @@ $(document).ready(function(){
 	
 	<#-- Sparkline -->
 	<div style="width: 60%; height: 100px; float:right;">
+		
+		<#assign displayTable = false />
+		
 		<#assign sparklineVO = egoPubSparklineVO />
 		<#include "personPublicationSparklineContent.ftl">
 
@@ -181,9 +183,19 @@ $(document).ready(function(){
 		<h3 class="sub_headings" id="table_heading">Tables</h3>
 		
 			<div class="vis-tables">
+				
 				<p id="publications_table_container" class="datatable">
-					TABLE 
+
+				<#assign tableID = "publication_data_table" />
+				<#assign tableCaption = "Publications per year " />
+				<#assign tableActivityColumnName = "Publications" />
+				<#assign tableContent = egoPubSparklineVO.yearToActivityCount />
+				<#assign fileDownloadLink = egoPubSparklineVO.downloadDataLink />
+				
+				<#include "yearToActivityCountTable.ftl">
+
 				</p>
+				
 			</div>
 			
 			<#if (numOfCoAuthorShips > 0) >

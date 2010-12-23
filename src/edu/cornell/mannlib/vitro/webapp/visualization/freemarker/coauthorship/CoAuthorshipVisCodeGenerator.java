@@ -148,6 +148,8 @@ public class CoAuthorshipVisCodeGenerator {
 		
 		numOfYearsToBeRendered = currentYear - minPubYearConsidered + 1;
 		
+		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
+		
 		visualizationCode.append("<style type='text/css'>" 
 									+ "." + VISUALIZATION_STYLE_CLASS + " table{" 
 									+ "		margin: 0;" 

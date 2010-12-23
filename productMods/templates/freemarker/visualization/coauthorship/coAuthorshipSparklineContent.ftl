@@ -15,19 +15,19 @@
 <div class="staticPageBackground">
     <div id="${visContainerID}">
         <script type="text/javascript">
-    
+        
             function drawCoauthorsSparklineVisualization(providedSparklineImgTD) {
     
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
                 data.addColumn('number', 'Unique co-authors');
-                data.addRows(${sparklineVO.numOfYearsToBeRendered});
-        
+                data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
+                
                 <#list sparklineVO.yearToEntityCountDataTable as yearToUniqueCoauthorsDataElement>                        
                     data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoauthorsDataElement.year}');
                     data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 1, ${yearToUniqueCoauthorsDataElement.currentEntitiesCount});
                 </#list>
-        
+                
                 <#-- Create a view of the data containing only the column pertaining to coauthors count. -->
                 var sparklineDataView = new google.visualization.DataView(data);
                 sparklineDataView.setColumns([1]);
@@ -43,9 +43,8 @@
                         maxValue: '${sparklineVO.latestRenderedPublicationYear?c}'
                 }]));
          
-         
                 <#else>
-         
+
                 </#if>
          
          
@@ -87,6 +86,7 @@
                     var sparksText = ' co-author(s) from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
                                         + ' <a href="${sparklineVO.downloadDataLink}" class="inline_href">(.CSV File)</a> ';
+                                        
                  </#if>
          
                  $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
@@ -152,7 +152,9 @@
             });
         </script>
          
-    </div><!-- Sparkline Viz -->
+    </div>
+    
+    <!-- Sparkline Viz -->
 
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
@@ -161,37 +163,23 @@
     <#else>
         <!-- For Full Sparkline - Print the Table of Couauthor Counts per Year -->
         <p>
-            <table id='sparkline_data_table'>
-                <caption>
-                    Unique Co-Authors per year <a href="${sparklineVO.downloadDataLink}">(.CSV File)</a>
-                </caption>
-                <thead>
-                    <tr>
-                        <th>
-                            Year
-                        </th>
-                        <th>
-                            Count
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
+            <#if displayTable?? && displayTable>
         
-                <#list sparklineVO.yearToActivityCount?keys as year>
-                    <tr>
-                        <td>
-                            ${year}
-                        </td>
-                        <td>
-                            ${sparklineVO.yearToActivityCount[year]}
-                        </td>
-                    </tr>
-                </#list>
-            
-                </tbody>
-            </table>
-            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
-            <br />
+		        <p>	
+					<#assign tableID = "sparkline_data_table" />
+					<#assign tableCaption = "Unique Co-Authors per year " />
+					<#assign tableActivityColumnName = "Count" />
+					<#assign tableContent = sparklineVO.yearToActivityCount />
+					<#assign fileDownloadLink = sparklineVO.downloadDataLink />
+					
+					<#include "yearToActivityCountTable.ftl">
+		
+		            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+		            <br />
+		        </p>
+        
+	        </#if>
+        
         </p>
     </#if>
 </div>

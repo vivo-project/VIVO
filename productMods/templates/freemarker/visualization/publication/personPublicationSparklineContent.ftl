@@ -21,7 +21,7 @@
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
                 data.addColumn('number', 'Publications');
-                data.addRows(${sparklineVO.numOfYearsToBeRendered});
+                data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
         
                 <#list sparklineVO.yearToEntityCountDataTable as yearToPublicationCountDataElement>                        
                     data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
@@ -160,38 +160,25 @@
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Publication Counts per Year -->
-        <p>
-            <table id='sparkline_data_table'>
-                <caption>
-                    Publications per year <a href="${sparklineVO.downloadDataLink}">(.CSV File)</a>
-                </caption>
-                <thead>
-                    <tr>
-                        <th>
-                            Year
-                        </th>
-                        <th>
-                            Publications
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
         
-                <#list sparklineVO.yearToActivityCount?keys as year>
-                    <tr>
-                        <td>
-                            ${year}
-                        </td>
-                        <td>
-                            ${sparklineVO.yearToActivityCount[year]}
-                        </td>
-                    </tr>
-                </#list>
-            
-                </tbody>
-            </table>
-            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
-            <br />
-        </p>
+        <#if displayTable?? && displayTable>
+        
+	        <p>	
+				<#assign tableID = "sparkline_data_table" />
+				<#assign tableCaption = "Publications per year " />
+				<#assign tableActivityColumnName = "Publications" />
+				<#assign tableContent = sparklineVO.yearToActivityCount />
+				<#assign fileDownloadLink = sparklineVO.downloadDataLink />
+				
+				<#include "yearToActivityCountTable.ftl">
+	
+	            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+	            <br />
+	        </p>
+        
+        
+        </#if>
+        
+
     </#if>
 </div>
