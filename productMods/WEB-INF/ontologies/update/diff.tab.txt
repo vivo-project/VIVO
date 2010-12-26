@@ -1,1 +1,2 @@
-http://vivoweb.org/ontology/core#organizationGrantingDegree	http://vivoweb.org/ontology/core#trainingAtOrganization	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#workFax	http://vivoweb.org/ontology/core#faxNumber	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#workEmail	http://vivoweb.org/ontology/core#email	Yes	Map	Directly-changed
