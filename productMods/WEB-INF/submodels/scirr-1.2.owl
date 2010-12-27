@@ -17,13 +17,8 @@
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <rdfs:subClassOf rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#Protocol">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -131,6 +126,11 @@
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ClinicalTrials.gov is an ICMJE-acceptable public registry, offering up-to-date information for locating clinical trials for a wide range of diseases and conditions. The U.S. National Institutes of Health (NIH), through its National Library of Medicine (NLM), developed this site in collaboration with the Food and Drug Administration (FDA), as a result of the FDA Modernization Act, which was passed into law in November 1997.</vitro:descriptionAnnot>
     <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCT00000419</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#ProductionService">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
