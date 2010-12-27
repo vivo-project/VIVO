@@ -19,11 +19,12 @@ Construct {
      _:sdtv core:dateTimePrecision core:yearPrecision .
      _:edtv a core:DateTimeValue .
      _:edtv core:dateTime ?theEndYear .
-     _:edtv core:dateTimePrecision core:yearPrecision .
-     ?thing core:dateTimeInterval _:dti .
+     _:edtv core:dateTimePrecision core:yearPrecision .   
      _:dti a core:DateTimeInterval .
      _:dti core:start _:sdtv .
      _:dti core:end _:edtv .
+     ?thing core:dateTimeInterval _:dti .
+     _:dti core:dateTimeIntervalFor ?thing .
 } where {
      ?thing core:startYear ?theStartYear .
      ?thing core:endYear ?theEndYear .

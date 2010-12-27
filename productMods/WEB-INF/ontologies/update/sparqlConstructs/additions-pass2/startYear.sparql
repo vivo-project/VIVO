@@ -17,9 +17,10 @@ Construct {
      _:sdtv a core:DateTimeValue .
      _:sdtv core:dateTime ?theStartYear .
      _:sdtv core:dateTimePrecision core:yearPrecision .
-     ?thing core:dateTimeInterval _:dti .
      _:dti a core:DateTimeInterval .
      _:dti core:start _:sdtv .
+     ?thing core:dateTimeInterval _:dti .
+     _:dti core:dateTimeIntervalFor ?thing .
 } where {
      ?thing core:startYear ?theStartYear .
 }

@@ -20,6 +20,7 @@ Construct {
      ?thing core:dateTimeInterval _:dti .
      _:dti a core:DateTimeInterval .
      _:dti core:end _:edtv .
+     _:dti core:dateTimeIntervalFor ?thing .
 } where {
      ?thing core:endYear ?theEndYear .
 }

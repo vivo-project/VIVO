@@ -24,6 +24,7 @@ Construct {
      _:dti core:start _:sdtv .
      _:dti core:end _:edtv .
      ?thing core:dateTimeInterval _:dti .
+     _:dti core:dateTimeIntervalFor ?thing .
 } where {
      ?thing core:startDate ?theStartDate .
      ?thing core:endDate ?theEndDate .
