@@ -4,7 +4,7 @@ http://vivoweb.org/ontology/core#workPhone	http://vivoweb.org/ontology/core#phon
 http://vivoweb.org/ontology/core#programOf	http://vivoweb.org/ontology/core#subOrganizationWithin	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#hasProgram	http://vivoweb.org/ontology/core#hasSubOrganization	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#organizationGrantingDegree	http://vivoweb.org/ontology/core#trainingAtOrganization	Yes	Map	Directly-changed
-	vivo:organizationForTraining	No	Add	not set
+	http://vivoweb.org/ontology/core#organizationForTraining	No	Add	not set
 http://vivoweb.org/ontology/core#offeredBy	http://vivoweb.org/ontology/core#degreeOfferedBy	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#SemesterClass	http://vivoweb.org/ontology/core#Course	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#taughtInSemester	http://vivoweb.org/ontology/core#dateTimeInterval	Yes	Map	Directly-changed
@@ -54,7 +54,7 @@ http://vivoweb.org/ontology/core#startDate		No	Delete	not set
 http://vivoweb.org/ontology/core#startYearMonth		No	Delete	not set
 http://vivoweb.org/ontology/core#startTime		No	Delete	not set
 http://vivoweb.org/ontology/core#endYear		No	Delete	not set
-http://vivoweb.org/ontology/core#endDateTime	No	Delete	not set
+http://vivoweb.org/ontology/core#endDateTime		No	Delete	not set
 http://vivoweb.org/ontology/core#endDate		No	Delete	not set
 http://vivoweb.org/ontology/core#endYearMonth		No	Delete	not set
 http://vivoweb.org/ontology/core#endTime		No	Delete	not set
