@@ -5,6 +5,7 @@ Apache License 2.0
 ------------------
 licenses/apache.LICENSE.txt
 
+ant-jmeter
 commons-beanutils-core
 commons-betwixt
 commons-cli
