@@ -66,6 +66,11 @@ report   - Just summarize output from previously run tests.
 
 		<fail unless="jmeter.home.dir"
 		      message="${properties.file} must contain a value for jmeter.home.dir" />
+		<fail unless="jmeter.serializer.jar"
+		      message="${properties.file} must contain a value for jmeter.serializer.jar" />
+		<fail unless="jmeter.xalan.jar"
+		      message="${properties.file} must contain a value for jmeter.xalan.jar" />
+
 		<fail unless="webapp.host"
 		      message="${properties.file} must contain a value for webapp.host" />
 		<fail unless="webapp.port"
@@ -74,6 +79,11 @@ report   - Just summarize output from previously run tests.
 		      message="${properties.file} must contain a value for webapp.name" />
 
 		<property name="webapp.url" value="http://${webapp.host}:${webapp.port}/${webapp.name}" />
+
+		<path id="xslt.classpath">
+			<pathelement location="${jmeter.serializer.jar}" />
+			<pathelement location="${jmeter.xalan.jar}" />
+		</path>
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
@@ -123,6 +133,8 @@ report   - Just summarize output from previously run tests.
 	<target name="report" depends="prepare" description="--> Just summarize the output.">
 		<xslt in="${results.dir}/${test.name}.jtl"
 		      out="${results.dir}/${test.name}.html"
-		      style="jmeter-results-report.xsl" />
+		      style="jmeter-results-report.xsl"
+		      classpathref="xslt.classpath" />
+
 	</target>
 </project>
