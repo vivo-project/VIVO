@@ -58,7 +58,7 @@ ul#foaf-person-childClasses .count-classes {
     font-size: 1.25em;
     color: #2485ae;
     font-weight: normal;
-    background: url(../images/arrow-down.gif) 117px 27px no-repeat;
+    background: url(../images/arrow-down.gif) 121px 27px no-repeat;
 }
 ul#vgraph-childClasses {
     float: left;
@@ -209,7 +209,7 @@ ul#browse-childClasses .count-classes {
     font-size: 12px; 
 }
 /* ALPHA BROWSE------>  */
-#alpha-browse-childClass {
+ul#alpha-browse-childClass {
     border: 1px solid #dde4e3;
     border-right: 0;
 }
