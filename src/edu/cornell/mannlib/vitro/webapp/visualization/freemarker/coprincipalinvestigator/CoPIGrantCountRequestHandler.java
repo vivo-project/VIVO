@@ -138,7 +138,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			body.put("numOfCoInvestigations", coPIVO.getEdges().size());
 		}
 
-		String standaloneTemplate = "/visualization/copi/coInvestigation.ftl";
+		String standaloneTemplate = "coInvestigation.ftl";
 		
         body.put("portalBean", portal);
         body.put("egoURIParam", egoURI);

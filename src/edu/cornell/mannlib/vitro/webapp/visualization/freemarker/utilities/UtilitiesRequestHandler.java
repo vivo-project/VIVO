@@ -122,6 +122,23 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 							  coAuthorProfileURLParams);
 			
+		} else if (VisualizationFrameworkConstants.COPI_UTILS_VIS_MODE
+						.equalsIgnoreCase(visMode)) {
+			
+	    	/*
+	    	 * By default we will be generating profile url else some specific url like 
+	    	 * coPI vis url for that individual.
+	    	 * */
+			ParamMap coInvestigatorProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+															 individualURI,
+															 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+															 VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+															 VisualizationFrameworkConstants.VIS_MODE_KEY,
+															 VisualizationFrameworkConstants.COPI_VIS_MODE);
+			
+			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+							  coInvestigatorProfileURLParams);
+			
 		} else if (VisualizationFrameworkConstants.PERSON_LEVEL_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 	    	/*

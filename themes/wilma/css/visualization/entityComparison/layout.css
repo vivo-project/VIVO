@@ -117,6 +117,7 @@ form{
 	float:right;
 	margin-right:5%;
 	width:54%;
+	margin-top: -43px;
 }
 
 #counter,#total {
@@ -145,54 +146,52 @@ li{
 	background-color: #ECFFB3 !important;
 }
 
+/*
 .metallic{
 	background-color: #212D34;
 	color: white;
-	margin-left: 20px;
 }
+*/
 
 #leftUpper{
+/*
 	border: 1px #3D454E solid;
 	border-top: 10px #3D454E solid;
 	background-color: #D9D9D9;
+*/	
+	padding-left: 10px;
 }
 
 #leftLower{
+/*	
 	border: 1px #3D454E solid;
 	border-top: 10px #3D454E solid;
-}
-
-#navcontainer{
-	background: none repeat scroll 0 0 #3D454E;
-	height: 1%;
-	padding: 8px 22em 8px 20px;
-	position: relative;
-}
-
-#navlist li
-{
-	display: inline;
-	list-style-type: none;
-	padding: 20px;
-	
-}
-
-#navlist li a{
-	color: white;
-	text-decoration: none;
+*/
+	padding-left: 10px;
 }
 		
 #bottomButtons{
-	width: 50%;
+	width: 100%;
 	float:right;
-	margin-right: 5%;
+	margin: 20px 0 20px 0;
+}
+
+button.green-button{
+	width: 31%;
+	margin: 0 1% 0 1%;
+	
 }
 
 #stopwordsdiv{
 	margin-top: 10px;
+	margin-left: 10px;
 }
 
 p.displayCounter{
 	padding-bottom: 4px;
 	border-bottom: 1px solid gray;
+}
+
+#comparisonHeader, #entityHeader, #entitylevelheading, #comparisonParameter{
+	color: #2485ae;
 }

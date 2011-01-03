@@ -1,5 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-.spacer{
+
+spacer{
 	font-size:0; line-height:0; clear:both;}
 
 
@@ -43,7 +44,7 @@
 	color:#13968c;
 	font-size: 14px;
 }
-#dataPanel .author_stats .numbers {
+#dataPanel .investigator_stats .numbers {
 	text-align: right;
 	width: 40px;
 	float:left;
@@ -59,7 +60,7 @@
 	margin : auto;
 	line-height: 150%;
 	color: #595b5b;
-	margin-left: 0px;
+	margin-left: 0px;	
 }
 
 .fileDownloadPlaceHolder{
@@ -81,4 +82,22 @@
 #table_heading{
 /*	margin-bottom:20px; */
 	width: 80%;	
+}
+
+.investigator_name {
+	color: #13968c;
+	font-weight: bold;
+}
+
+.neutral_investigator_name {
+	color: black;
+	font-weight: bold;
+}
+
+.investigator_moniker {
+	color: #9C9C9C;
+}
+
+#coinvestigations_table th {
+	vertical-align: top;
 }

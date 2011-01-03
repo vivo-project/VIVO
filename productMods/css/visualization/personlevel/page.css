@@ -8,22 +8,51 @@ a.no_href_styles {
 	border: 0;
 }
 
-.vis_stats {
+/*.vis_stats {*/
 	/*width: 760px;*/
-	margin: 0;
+/*	margin: 0;
 	padding-left:10px;
 	padding-top:10px;
 	background: #fff;
+	margin-left: 35%;
+	clear: right;
+}
+*/
+/*.vis-tables {*/
+/*	width: 33%; */
+/*	padding: 10px;
+	margin: 10px;
+	background-color: #FFF;
+	border: 1px solid #ddebf1;
+	float:left;
+	font-size: 0.8em;
+}
+*/
+
+.vis_stats {
+	/*width: 760px;*/
+/*	margin: 0;
+	margin-left: 35%; 
+	padding-left:10px;*/
+	padding-top:10px;
+	background: #fff;
+	clear: right;
+	width:67%;
+	margin-left:33%;
 }
 
 .vis-tables {
-	width: 33%;
-	padding: 5px;
-	margin: 5px;
+/*	width: 33%; */
+	padding: 10px;
+	margin: 10px;
 	background-color: #FFF;
 	border: 1px solid #ddebf1;
-	float: left;
+	float:left;
+	font-size: 0.8em;
+	width: 44%;
+	margin-left: 0px;
 }
+
 
 p.datatable {
 	font-size: 12px;
@@ -83,7 +112,7 @@ p.datatable {
 }
 
 .neutral_author_name {
-	color: black;
+	color: #13968c;
 	font-weight: bold;
 }
 
@@ -96,13 +125,23 @@ p.datatable {
 	padding-top: 10px;
 	margin-bottom: 0.3em;
 	float:left;
+	margin-right: 10px;
 }
 
 .toggle_visualization{
-	padding-top: 10px;
+
+/*		
 	margin-bottom: 0.3em;
+	clear:left;
 	float:right;
 	width: 150px;	
+*/	
+	text-align: left;
+	margin-left: 84%;
+	margin-top: -8%;
+	max-width: 250px;
+	width: 22%;
+	height: 50px;
 }
 
 .sub_headings a {
@@ -144,4 +183,51 @@ table.sparkline_wrapper_table td, th {
 
 #coauthorships_table th {
 	vertical-align: top;
+}
+
+.sparkline_range{
+	font-size: 0.9em;
+	font-weight: bold;
+}
+
+.vis-tables table td{
+	padding-right: 10px;
+	width: 50%;
+}
+
+.vis-tables table caption{
+	width: 100%;
+	padding-bottom: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	text-align: left;
+}
+
+.vis-tables table{
+	width: 100%;
+}
+
+.vis-tables table thead{
+	text-align: left;
+}
+
+.vis-tables table thead tr th { 
+	background-color:#eaeaea; 
+	font-size:14px; 
+	padding:5px; 
+	vertical-align:top; 
+	text-align:left;  
+}
+
+.vis-tables table tbody { 
+	font-size:12px;  
+}
+
+.vis-tables table tbody td { 
+	text-align:left; 
+	padding:5px;  
+}
+
+moniker{
+	margin-top: 0px;
 }

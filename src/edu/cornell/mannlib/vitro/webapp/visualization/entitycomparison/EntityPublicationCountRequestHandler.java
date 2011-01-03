@@ -66,11 +66,11 @@ public class EntityPublicationCountRequestHandler implements
 		try {
 			Entity entity = queryManager.getQueryResult();
 
-			if (ENTITY_VIS_MODE.equals("DEPARTMENT")) {
+			if (ENTITY_VIS_MODE.equalsIgnoreCase("DEPARTMENT")) {
 				
 				SUB_ENTITY_VIS_MODE = "PERSON";
 
-			}else if (ENTITY_VIS_MODE.equals("SCHOOL")) {
+			}else if (ENTITY_VIS_MODE.equalsIgnoreCase("SCHOOL")) {
 				
 				SUB_ENTITY_VIS_MODE = "DEPARTMENT";
 
@@ -95,7 +95,7 @@ public class EntityPublicationCountRequestHandler implements
 					.equalsIgnoreCase(renderMode)) {
 
 				prepareStandaloneResponse(request, response, vitroRequest,
-						entity, subOrganizationTypesResult, log);
+						entity,entityURI, subOrganizationTypesResult, log);
 				requestDispatcher = request
 						.getRequestDispatcher(Controllers.BASIC_JSP);
 			}
@@ -173,11 +173,12 @@ public class EntityPublicationCountRequestHandler implements
 	 * @param response
 	 * @param vreq
 	 * @param entity
+	 * @param entityURI 
 	 * @param subOrganizationTypesResult 
 	 * @param log 
 	 */
 	private void prepareStandaloneResponse(HttpServletRequest request,
-			HttpServletResponse response, VitroRequest vreq, Entity entity, Map<String, Set<String>> subOrganizationTypesResult, Log log) {
+			HttpServletResponse response, VitroRequest vreq, Entity entity, String entityURI, Map<String, Set<String>> subOrganizationTypesResult, Log log) {
 
 		Portal portal = vreq.getPortal();
 		String jsonContent = "";
@@ -186,7 +187,8 @@ public class EntityPublicationCountRequestHandler implements
 		 * manipulating the response object of the servlet.
 		 */
 		jsonContent = writePublicationsOverTimeJSON(entity.getSubEntities(), subOrganizationTypesResult, log);
-
+		
+		request.setAttribute("OrganizationURI", entityURI);
 		request.setAttribute("JsonContent", jsonContent);
 
 		request.setAttribute("bodyJsp",

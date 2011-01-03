@@ -51,7 +51,7 @@ public class CoPIVisCodeGenerator {
 	
 	private static final String VISUALIZATION_STYLE_CLASS = "sparkline_style";
 	
-	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_copis_vis_container";
+	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_coinvestigators_vis_container";
 	
 	private Map<String, Set<CoPINode>> yearToUniqueCoPIs;
 
@@ -157,7 +157,9 @@ public class CoPIVisCodeGenerator {
 		}
 
 		numOfYearsToBeRendered = currentYear - minGrantYearConsidered + 1;
-
+		
+		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
+		
 		visualizationCode.append("<style type='text/css'>" + "."
 				+ VISUALIZATION_STYLE_CLASS + " table{" + "		margin: 0;"
 				+ "  		padding: 0;" + "  		width: auto;"
@@ -221,16 +223,16 @@ public class CoPIVisCodeGenerator {
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueInvestigatorsCountDataTable);
 
 		/*
-		 * Total grants will also consider publications that have no year
+		 * Total grants will also consider grants that have no year
 		 * associated with them. Hence.
 		 */
-		Integer unknownYearCoPIs = 0;
+		Integer unknownYearGrants = 0;
 		if (yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR) != null) {
-			unknownYearCoPIs = yearToUniqueCoPIs.get(
+			unknownYearGrants = yearToUniqueCoPIs.get(
 					VOConstants.DEFAULT_GRANT_YEAR).size();
 		}
 		
-		sparklineData.setUnknownYearPublications(unknownYearCoPIs);
+		sparklineData.setUnknownYearGrants(unknownYearGrants);
 
 		String sparklineDisplayOptions = "{width: 65, height: 30, showAxisLines: false, "
 				+ "showValueLabels: false, labelPosition: 'none'}";
@@ -273,14 +275,14 @@ public class CoPIVisCodeGenerator {
 			
 			generateShortSparklineVisualizationContent(currentYear,
 					shortSparkMinYear, visContainerID, visualizationCode,
-					unknownYearCoPIs, sparklineDisplayOptions);
+					unknownYearGrants, sparklineDisplayOptions);
 		} else {
 			
 			sparklineData.setShortVisMode(false);
 			
 			generateFullSparklineVisualizationContent(currentYear,
 					minGrantYearConsidered, visContainerID, visualizationCode,
-					unknownYearCoPIs, renderedFullSparks,
+					unknownYearGrants, renderedFullSparks,
 					sparklineDisplayOptions);
 		}
 
@@ -510,6 +512,13 @@ public class CoPIVisCodeGenerator {
 		divContextCode.append("<p>" + tableCode + csvDownloadURLHref + "</p>");
 		
 		sparklineData.setTable(tableCode);
+		
+		Map<String, Integer> yearToUniqueCoPIsCount = new HashMap<String, Integer>();
+		for (Map.Entry<String, Set<CoPINode>> currentYear : yearToUniqueCoPIs.entrySet()) {
+			yearToUniqueCoPIsCount.put(currentYear.getKey(), currentYear.getValue().size());
+		}
+		
+		sparklineData.setYearToActivityCount(yearToUniqueCoPIsCount);
 		
 		return divContextCode.toString();
 	}

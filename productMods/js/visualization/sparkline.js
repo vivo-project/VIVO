@@ -3,9 +3,10 @@
 /* Javascript for sparkline visualization on person profile page */
 
 var visualization = {
-	render: function(url) {
-		var containerId = 'vis_container',
-		    container = $('#' + containerId);
+	renderCoAuthor: function(url) {
+	
+		var containerIdCoAuthor = 'vis_container_coauthor',
+		containerCoAuthor = $('#' + containerIdCoAuthor);
 			
         //container.empty().html('<img src="${loadingImageLink}" />');
        
@@ -15,17 +16,21 @@ var visualization = {
 				'render_mode': 'dynamic',
 				'vis': 'person_pub_count',
 				'vis_mode': 'short',
-				'container': containerId
+				'container': containerIdCoAuthor
 			},
             dataType: 'html',
             success:function(data){
-                container.html(data);
+				containerCoAuthor.html(data);
+				containerCoAuthor.children("#pub_count_short_sparkline_vis").append(coAuthorIcon);
+				/*	containerCoAuthor.find("<img>").css("float", "left"); */
             }
         });		
 	}
 };
 
 $(document).ready(function() {
+	
 	visualizationUrl = visualizationUrl.replace("/visualization", "/visualizationAjax");
-    visualization.render(visualizationUrl);
+	
+    visualization.renderCoAuthor(visualizationUrl);
 });

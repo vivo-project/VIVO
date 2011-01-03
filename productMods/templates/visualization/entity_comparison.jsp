@@ -8,56 +8,70 @@
 	<c:out value="${portalBean.themeDir}" />
 </c:set>
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
+
+<c:url var="TemporalGraphDownloadFile" value="/visualization">
+	<c:param name="vis" value="entity_comparison" />
+	<c:param name="render_mode" value="data" />
+	<c:param name="uri" value="${requestScope.OrganizationURI}" />
+</c:url>
+
+
 <div id="body">
-	<div id="navcontainer">
-		<ul id="navlist">
-			<li><a href="#">Temporal</a></li>
-			<li><a href="#">Geospatial</a></li>
-			<li><a href="#">Scimap</a></li>
-			<li><a href="#">Networks</a></li>
-		</ul>
-	</div>
-		<h1>Temporal Graph Visualization<span id="entitylevelheading"><i> School Level</i></span></h1>
-	<div id="leftblock">
-		<div id="leftUpper">
-			<h2 style="background-color:#3D454E; padding-left: 3px; color: white; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">How do you want to compare?</h2>
-			<div style="text-align: center;">
-			<p style="margin-right: 10px; margin-top: 6px; font-size: 1.2em;">Select </p>
-			<select class="comparisonValues" style="margin-bottom: 20px;">
-				<option value="Publications" selected="selected">Publications</option>
-				<option value="Grants">Grants</option>
-				<option value="People" disabled="disabled">People</option>
-				<option value="Item4" disabled="disabled">Item4</option>
-				<option value="Item5" disabled="disabled">Item5</option>
-			</select>
+		<h2 style="width: 36%; padding-left:50px;">Temporal Graph Visualization<span id="entitylevelheading"><i> School Level</i></span></h2>
+		<div id="leftblock">
+			<div id="leftUpper">
+				<h3>How do you want to compare?</h3>
+				
+				<div style="text-align: left;">
+				
+				<select class="comparisonValues" style="margin-bottom: 20px;">
+					<option value="Publications" selected="selected">by Publications</option>
+					<option value="Grants">by Grants</option>
+					<option value="People" disabled="disabled">by People</option>
+					<option value="Item4" disabled="disabled">by Item4</option>
+					<option value="Item5" disabled="disabled">by Item5</option>
+				</select>
+				
+				</div>
 			</div>
-		</div>
-		<br/>	
-		<div id="leftLower">
-			<h2 style="background-color:#3D454E; color: white; padding-left: 3px; margin-top: 0px; margin-bottom: 20px; padding-bottom:5px;">Choose</h2>
-			<div id="paginatedTable">
+			
+			<br/>	
+			
+			<div id="leftLower">
+				<h3>Who do you want to compare?</h3>
+				<div id="paginatedTable">
+				</div>
 			</div>
+			<div id = "stopwordsdiv">
+				* The entity types core:Person, foaf:Organization have been excluded as they are too general.
+			</div>	
 		</div>
-		<div id = "stopwordsdiv">
-			* The entity types core:Person, foaf:Organization have been excluded as they are too general.
-		</div>	
-	</div>
 		<div id="rightblock">
+		
+			<h4 style="padding-left:50px;">Comparing <span id="comparisonHeader">Publications</span> of <span id="entityHeader">Institutions</span></h4>
 			<div id="graphContainer" style="width: 450px; height: 250px;"></div>
 			<div id="yaxislabel"></div>
+			
 			<div id="bottom" style="width: 450px; height: 350px;">
 				<div id="xaxislabel">Year</div>
-				<h3><span id="comparisonParameter"></span></h3>
+		
+				<div id="bottomButtons">
+					<button id="clear" class="green-button" type ="button">Remove All</button>
+					<button id="csv" class="green-button" class="green-button" type ="button">Save as CSV</button>
+					<button id="image" class="green-button" type="button" onClick="window.print()"> Save as Image</button>				
+				</div><br/>
+		
+				<h4><span id="comparisonParameter"></span></h4>
+		
 			<p class="displayCounter">You have selected <span id="counter">0</span> of a maximum <span
 			id="total">10</span> <span id="entityleveltext"> schools</span> to compare.</p>
+		
 			</div>
+		
 		</div>		
-		<div id="bottomButtons">
-			<button id="clear" class = "metallic" type ="button">Remove All</button>
-			<button id="csv" class = "metallic" type ="button">Save as CSV</button>
-			<button id="image" class= "metallic" type="button" onClick="window.print()"> Save as Image</button>				
-		</div>
 </div>
+
+
 <script type="text/javascript">
 	
 	$(document).ready(function() {
@@ -83,6 +97,7 @@
             var selectedValue = $("select.comparisonValues option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
 			$('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
+			$('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
         });
 
 		//click event handler for clear button
@@ -90,6 +105,10 @@
 			clearRenderedObjects();
 		});
 
+		//click event handler for download file
+		$("button#csv").click(function(){
+			  alert("${TemporalGraphDownloadFile}");
+		});		
 		
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
 			

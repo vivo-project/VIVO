@@ -254,13 +254,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		}
 		
 		if (coPIVO.getEdges() != null && coPIVO.getEdges().size() > 0) {
-			body.put("numOfCoPIs", coPIVO.getEdges().size());
+			body.put("numOfCoInvestigations", coPIVO.getEdges().size());
 		}
 		
         String	standaloneTemplate = "coPIPersonLevel.ftl";
 		
 		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
-		body.put("uniqueCopisSparklineVO", uniqueCopisSparklineVO);        	
+		body.put("uniqueCoInvestigatorsSparklineVO", uniqueCopisSparklineVO);        	
 
 		body.put("portalBean", portal);
 		body.put("title",  title + "Person Level Visualization");

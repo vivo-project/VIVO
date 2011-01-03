@@ -388,13 +388,13 @@ public class CoPIVisCodeGenerator {
 		
 		visualizationCode.append("$('#" + VIS_DIV_NAMES.get("FULL_SPARK") 
 									+ " td.sparkline_number').text('" + (renderedFullSparks 
-									+ unknownYearGrants) + "');");
+									+ unknownYearGrants) + "').css('font-weight', 'bold');");
 		
 		visualizationCode.append("var allSparksText = ''" 
 									+ "+ ' <h3>Co-Principal Investigator(s)</h3> '" 
-									+ "+ ' from " 
+									+ "+ '" 
 									+ "<span class=\"sparkline_range\">" 
-									+ "" + minGrantYearConsidered + " to " + currentYear + "" 
+									+ " from  " + minGrantYearConsidered + " to " + currentYear + "" 
 									+ "</span> '" 
 									+ "+ ' " + csvDownloadURLHref + " ';" 
 									+ "$('#" + VIS_DIV_NAMES.get("FULL_SPARK") 
@@ -416,19 +416,24 @@ public class CoPIVisCodeGenerator {
 				+ "sparklineImgTD = $('<td>');" 
 				+ "sparklineImgTD.attr('id', '" + sparklineID + "_img');" 
 				+ "sparklineImgTD.attr('width', '65');" 
-				+ "sparklineImgTD.attr('align', 'right');" 
+//				+ "sparklineImgTD.attr('align', 'right');" 
 				+ "sparklineImgTD.attr('class', '" + VISUALIZATION_STYLE_CLASS + "');" 
 				+ "row.append(sparklineImgTD);" 
+				+  "var row2 = $('<tr>');"
 				+ "var sparklineNumberTD = $('<td>');" 
-				+ "sparklineNumberTD.attr('width', '30');" 
-				+ "sparklineNumberTD.attr('align', 'right');" 
-				+ "sparklineNumberTD.attr('class', 'sparkline_number');" 
-				+ "row.append(sparklineNumberTD);" 
+//				+ "sparklineNumberTD.attr('width', '30');" 
+//				+ "sparklineNumberTD.attr('align', 'right');" 
+				+ "sparklineNumberTD.attr('class', 'sparkline_number');"
+				+ "sparklineNumberTD.css('text-align', 'center');"
+				+ "row2.append(sparklineNumberTD);"
+				+ "var row3 = $('<tr>');"
 				+ "var sparklineTextTD = $('<td>');" 
-				+ "sparklineTextTD.attr('width', '450');" 
+//				+ "sparklineTextTD.attr('width', '450');" 
 				+ "sparklineTextTD.attr('class', 'sparkline_text');" 
-				+ "row.append(sparklineTextTD);" 
+				+ "row3.append(sparklineTextTD);" 
 				+ "table.append(row);" 
+				+ "table.append(row2);"
+				+ "table.append(row3);"				
 				+ "table.prependTo('#" + sparklineID + "');\n";
 		
 		return "$(document).ready(function() {" 

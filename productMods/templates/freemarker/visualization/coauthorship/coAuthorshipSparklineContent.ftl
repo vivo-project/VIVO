@@ -12,7 +12,7 @@
     <#assign sparklineContainerID = visContainerID + "_spark"> 
 </#if>
 
-<div class="staticPageBackground">
+<div class="staticPageBackground" style="width: 50%; float: right;">
     <div id="${visContainerID}">
         <script type="text/javascript">
         
@@ -51,8 +51,8 @@
                 <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
                 var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
                 sparkline.draw(sparklineDataView, {
-                        width: 65,
-                        height: 30,
+                        width: 150,
+                        height: 60,
                         showAxisLines: false,
                         showValueLabels: false,
                         labelPosition: 'none'
@@ -68,11 +68,9 @@
                         renderedShortSparks += data.getValue(value, 1);
                     });
          
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications}));
+                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> co-author(s) <br/></span>");
             
-                    var sparksText = ' co-author(s) within the last 10 years <span class="incomplete-data-holder" title="This information'
-                                    + ' is based solely on publications which have been loaded into the VIVO system. This may only be a small' 
-                                    + ' sample of the person\'s total work.">incomplete list</span>';
+                    var sparksText = '  within the last 10 years';
             
                  <#else>
             
@@ -81,9 +79,9 @@
                      * any year associated with it. Hence.
                      * */
                     var renderedSparks = ${sparklineVO.renderedSparks};      
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications}));
+                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> co-author(s) <br/></span>");
             
-                    var sparksText = ' co-author(s) from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
+                    var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
                                         + ' <a href="${sparklineVO.downloadDataLink}" class="inline_href">(.CSV File)</a> ';
                                         
@@ -128,24 +126,26 @@
                     var row = $('<tr>');
                     sparklineImgTD = $('<td>');
                     sparklineImgTD.attr('id', '${sparklineContainerID}_img');
-                    sparklineImgTD.attr('width', '65');
-                    sparklineImgTD.attr('align', 'right');
+                    sparklineImgTD.attr('width', '150');
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);
-            
+            		var row2 = $('<tr>');
                     var sparklineNumberTD = $('<td>');
-                    sparklineNumberTD.attr('width', '30');
-                    sparklineNumberTD.attr('align', 'right');
                     sparklineNumberTD.attr('class', 'sparkline_number');
-                    row.append(sparklineNumberTD);
+					sparklineNumberTD.css('text-align', 'left');
+                    row2.append(sparklineNumberTD);
+                    var row3 = $('<tr>');
+                    
                     var sparklineTextTD = $('<td>');
-                    sparklineTextTD.attr('width', '450');
                     sparklineTextTD.attr('class', 'sparkline_text');
-                    row.append(sparklineTextTD);
+					sparklineTextTD.css('text-align', 'left');
+                    row3.append(sparklineTextTD);
                     table.append(row);
+                    table.append(row2);
+                    table.append(row3);
                     table.prependTo('#${sparklineContainerID}');
-            
+         
                 }
             
                 drawCoauthorsSparklineVisualization(sparklineImgTD);

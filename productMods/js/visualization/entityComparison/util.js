@@ -15,6 +15,8 @@ function init(graphContainer) {
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
+	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
+	
 	
 	var defaultFlotOptions = {
 			xaxis : {
@@ -27,7 +29,11 @@ function init(graphContainer) {
 				tickDecimals : 0,
 				min : 0,
 				max: 5
+			},
+			grid: {
+				borderColor : "#D9D9D9"
 			}
+			
 	};
 
 	/*
@@ -538,7 +544,8 @@ function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
 	//append a div and modify its css
     divBar.css("background-color", colorToAssign);
     divBar.css("width", normalizedWidth);
-    divLabel.children("a#entityURL").html(checkboxValue + "    ");
+    divLabel.children("a#entityURL").html(checkboxValue + "    ").css("color", "#333");
+//    divLabel.children("a#entityURL").css("color", "#333").css("text-decoration", none);
     divLabel.children("a#entityURL").autoEllipsis();
     createVIVOProfileImage(divLabel.children("a#vivoURL"));
     divLabel.children("a").css("font-size", "0.8em");
@@ -551,8 +558,8 @@ function createVIVOProfileImage(url){
 	
 	var vivoImage = $(url);
 	
-	vivoImage.html("VIVO");
-	vivoImage.css("background-color","#212D34" );
+	vivoImage.html("profile");
+	vivoImage.css("background-color","#727272" );
 	vivoImage.css("color", "white");
 	vivoImage.css("padding", "2px");
 }
@@ -695,6 +702,7 @@ function prepareTableForDataTablePagination(jsonData){
 	table.attr('cellspacing', '0');
 	table.attr('border', '0');
 	table.attr('id', 'datatable');
+	table.css('font-size', '0.9em');
 	
 	var thead = $('<thead>');
 	var tr = $('<tr>');
@@ -730,7 +738,9 @@ function prepareTableForDataTablePagination(jsonData){
 		checkboxTD.html('<input type="checkbox" class="if_clicked_on_school" value="' + index + '"'+'/>');
 		
 		var labelTD =  $('<td>');
+		labelTD.css("width", "100px");
 		labelTD.html(index);
+//		labelTD.autoEllipsis();
 		
 		var publicationCountTD =  $('<td>');
 		publicationCountTD.html(calcSumOfComparisonParameter(val));
@@ -754,11 +764,11 @@ function prepareTableForDataTablePagination(jsonData){
 	tableDiv.append(table);
 	
 	$('#datatable').dataTable({
-		"sDom": '<"searchbar"f><"paginatedtabs"p><"datatablewrapper"t><"showentries"l>',
+		"sDom": '<"searchbar"f><"paginatedtabs"p><"datatablewrapper"t>',
 		"aaSorting" : [[2, "desc"]],
 		"iDisplayLength": 10,
 		"sPaginationType": "full_numbers",
-		"aLengthMenu" : [5,10,15],
+	//	"aLengthMenu" : [5,10,15],
 		"fnDrawCallback": function() {
 	    $('tr>td:nth-child(1)>input').bind('click', function () { $(this).parent().parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
 	    $('tr>td:nth-child(1)>input').bind('click', function () { if(!$(this).is(':checked')) { $(this).parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});} });
@@ -776,7 +786,7 @@ function prepareTableForDataTablePagination(jsonData){
 function bindPaginatedTabsToEvents(){
 
 	$('#datatable_paginate>span').bind('click', function(){
-		console.log($(this));
+		//console.log($(this));
 		checkIfColorLimitIsReached();
 //		bindInnerPaginatedTabsToEvents();
 //		$.each($('#datatable_paginate>span>span'), function(index, val){
@@ -820,6 +830,7 @@ function removeStopWords(val){
 function setEntityLevel(){
 	$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase() + 's ').css('font-style', 'italic');
+	$('#entityHeader').text(toCamelCase(entityLevel)).css('font-weight', 'bold');
 }
 
 function getEntityVisMode(jsonData){
@@ -899,142 +910,3 @@ function setTickSizeOfAxes(){
     setLineWidthAndTickSize(yearRange, FlotOptions);     
 	setTickSizeOfYAxis(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), FlotOptions);
 }
-//function sortByEntityLabelDesc(value1, value2){
-//
-//var result;
-//
-//if(value1 > value2){
-//	result = -1;
-//}else if(value1 < value2){
-//	result = 1;
-// }else {
-//	 result = 0;
-// }
-//return result;
-//}
-//
-//function sortByEntityLabelAsc(value1, value2){
-//
-//var result;
-//
-//if (value1 > value2) {
-//	result = 1;
-//} else if(value1 < value2) {
-//	result = -1;
-// } else {
-//	 result = 0;
-// }
-//return result;
-//}
-
-//function renderPaginatedDiv(){
-//
-////$("#entityTitleSortBy").trigger('click', "azdesc");          
-//paginationDiv.pagination(setOfLabels.length, paginationOptions);
-//}
-
-//
-//jQuery.fn.liveUpdate = function(list){
-//
-//  list = jQuery(list);
-//
-//  if ( list.length ) {
-//    var rows = list.children('li');	    
-//    var cache = rows.map(function(){
-//    	//  console.log($(this).children('a').text().toLowerCase());
-//        return $(this).children('a').text().toLowerCase();
-//      });
-//    
-//    //console.log("rows: ", rows , " cache: ", cache);
-//     
-//    this.keyup(filter).keyup().parents('form').submit(function(){
-//        return false;
-//      });
-//  }
-//   
-//  return this;
-//   
-//  function filter(){
-//	  
-//    var term = jQuery.trim( jQuery(this).val().toLowerCase() ), scores = [];
-//    //console.log("this: ",this, " term: " +term);
-//    
-//    if ( !term ) {
-//      rows.show();
-//    } else {
-//      rows.hide();
-//      cache.each(function(i){
-//    	 var score = this.score(term);
-//    	 if (score > 0) { 
-//        	scores.push([score, i]); 
-//         }
-//      });
-//
-//      jQuery.each(scores.sort(function(a, b){return b[0] - a[0];}), function(){
-//        jQuery(rows[ this[1] ]).show();
-//	      //console.log("showing : ", ($(rows[this[1]]).children('a').text()));
-//      });
-//    }
-//  }
-//};
-//function sortByParameterDesc(value1, value2){
-//var entity1 = labelToEntityRecord[value1];
-//var entity2 = labelToEntityRecord[value2];
-//
-//var sum1 = calcSumOfComparisonParameter(entity1);
-//var sum2 = calcSumOfComparisonParameter(entity2);
-//
-//return (sum2 - sum1);
-//}
-//
-//function sortByParameterAsc(value1, value2){
-//var entity1 = labelToEntityRecord[value1];
-//var entity2 = labelToEntityRecord[value2];
-//
-//var sum1 = calcSumOfComparisonParameter(entity1);
-//var sum2 = calcSumOfComparisonParameter(entity2);
-//
-//return (sum1 - sum2);
-//}
-//
-//function createCheckBoxesInsidePaginatedDiv(pageIndex){
-//
-//var highestIndexInPage = Math.min((pageIndex + 1) * paginationOptions.items_per_page, setOfLabels.length);                
-//var newContent = ' ';
-//
-///*
-// * Iterate through the list of school setOfLabels and build an HTML string
-// * Also check if some of the checkboxes are previously checked? If they are checked,
-// * then they should be on this time too!
-// */
-//for (var i = pageIndex * paginationOptions.items_per_page; i < highestIndexInPage; i++) {
-//    var checkedFlag = ' ', j = 0, fontWeight = ' ';
-//    $.each(renderedObjects, function(){
-//        if (renderedObjects[j].label == setOfLabels[i]) {
-//            checkedFlag = "checked";
-//        	fontWeight = " style='font-weight:bold;' ";
-//        }
-//        j++;                        
-//    });
-//    newContent += '<li><input type = "checkbox" class="if_clicked_on_school" value="' + setOfLabels[i] + '"' + checkedFlag + ' ' + '><a href="" ' + fontWeight + ' >' + setOfLabels[i] + '<\/a><\/li>';        
-//}
-//               
-//// replace old content with new content
-//$('#searchresult').html(newContent);
-//populateMapOfCheckedEntities();
-//
-//}
-//function populateMapOfCheckedEntities(){
-////console.log('populating checked entities');
-//
-////var checkedEntities = $("input[type=checkbox].if_clicked_on_school");
-////$.each(checkedEntities, function(index, val){
-////	labelToCheckedEntities[$(val).attr("value")] = val;
-////	console.log('checked ', $(val).attr("value"));
-////});
-//
-//$.each(labelToCheckedEntities, function(index, val){
-////	labelToCheckedEntities[$(val).attr("value")] = val;
-//	//console.log('checked ', $(val).attr("value"));
-//});
-//}

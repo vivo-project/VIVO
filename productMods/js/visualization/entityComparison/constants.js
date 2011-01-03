@@ -69,6 +69,9 @@ var FlotOptions = {
 			tickSize : 1,
 			tickDecimals : 0,
 			min : 0
+		},
+		grid : {
+			borderColor : "#D9D9D9"
 		}
 };
 

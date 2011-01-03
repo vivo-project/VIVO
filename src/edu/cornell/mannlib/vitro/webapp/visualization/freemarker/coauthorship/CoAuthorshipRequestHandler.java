@@ -346,7 +346,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
         
         //request.setAttribute("scripts", "/templates/visualization/person_level_inject_head.jsp");
         
-        String standaloneTemplate = "/visualization/coauthorship/coAuthorship.ftl";
+        String standaloneTemplate = "coAuthorship.ftl";
 
         
         body.put("portalBean", portal);

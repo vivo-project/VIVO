@@ -195,12 +195,12 @@ $(document).ready(function(){
 			</c:if>
 			
 			<%-- Sparkline --%>
-			<div style="width: 60%; height: 100px; float:right;">
-				<div id="${egoPubSparklineContainerID}" style="float: left; width: 40%">
+			<div style="margin-left: 33%; width:67%;">
+				<div id="${egoPubSparklineContainerID}" style="float:left; margin-right:200px;">
 					${egoPubSparkline.sparklineContent}
 				</div>
 		
-				<div id="${uniqueCoauthorsSparklineVisContainerID}" style="float: right;width: 40%">
+				<div id="${uniqueCoauthorsSparklineVisContainerID}">
 					${uniqueCoauthorsSparkline.sparklineContent}
 				</div>
 			</div>	
@@ -250,7 +250,7 @@ $(document).ready(function(){
 					
 				<div class = "toggle_visualization" style="text-align:center; clear: left;">
 					<h2>Co-Author Network</h2>
-					<a class="view-all-style" href='<c:out value="${coprincipalinvestigatorURL}"/>'>View</a>
+					<a class="view-all-style" href='<c:out value="${coauthorshipURL}"/>'>View</a>
 					<span class="pictos-arrow-10">4</span>
 				</div>
 				
@@ -313,13 +313,13 @@ $(document).ready(function(){
 			</c:if>	
 			
 			<%-- Sparkline --%>
-			<div style="width: 60%; height: 100px; float:right;">
+			<div style="margin-left: 33%; width:67%;">
 			
-				<div id="${egoPubSparklineContainerID}" style="float: left;width: 40%">
+				<div id="${egoPubSparklineContainerID}" style="float:left; margin-right:200px;">
 					${egoGrantSparkline.sparklineContent}
 				</div>			
 				
-				<div id="${uniqueCoauthorsSparklineVisContainerID}" style="float: right;width: 40%">
+				<div id="${uniqueCoauthorsSparklineVisContainerID}">
 					${uniqueCopisSparkline.sparklineContent}
 				</div>	
 			

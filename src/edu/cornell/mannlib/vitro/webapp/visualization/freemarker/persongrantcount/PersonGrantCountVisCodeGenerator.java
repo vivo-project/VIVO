@@ -177,7 +177,7 @@ public class PersonGrantCountVisCodeGenerator {
 				+ "function drawGrantCountVisualization(providedSparklineImgTD) "
 				+ "{\n" + "var data = new google.visualization.DataTable();\n"
 				+ "data.addColumn('string', 'Year');\n"
-				+ "data.addColumn('number', 'Publications');\n"
+				+ "data.addColumn('number', 'Grants');\n"
 				+ "data.addRows(" + numOfYearsToBeRendered + ");\n");
 
 		int grantCounter = 0;
@@ -227,7 +227,7 @@ public class PersonGrantCountVisCodeGenerator {
 		sparklineData.setRenderedSparks(renderedFullSparks);
 
 		/*
-		 * Total grants will also consider publications that have no year
+		 * Total grants will also consider grants that have no year
 		 * associated with it. Hence.
 		 */
 		Integer unknownYearGrants = 0;
@@ -544,6 +544,7 @@ public class PersonGrantCountVisCodeGenerator {
 		String fullTimelineLink;
 		if (yearToGrantCount.size() > 0) {
 			
+			// add another parameter for vis_mode
 			ParamMap fullTimelineNetworkURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 					 individualURI,
 					 VisualizationFrameworkConstants.VIS_TYPE_KEY,

@@ -407,13 +407,13 @@ public class PersonPublicationCountVisCodeGenerator {
 		
 		visualizationCode.append("$('#" + VIS_DIV_NAMES.get("FULL_SPARK") 
 									+ " td.sparkline_number').text('" + (renderedFullSparks 
-									+ unknownYearPublications) + "');");
+									+ unknownYearPublications) + "').css('font-weight', 'bold');");
 		
 		visualizationCode.append("var allSparksText = ''" 
 									+ "+ ' <h3>publication(s)</h3> '" 
-									+ "+ ' from " 
+									+ "+ ' " 
 									+ "<span class=\"sparkline_range\">" 
-									+ "" + minPubYearConsidered + " to " + currentYear + "" 
+									+ "from " + minPubYearConsidered + " to " + currentYear + "" 
 									+ "</span> '" 
 									+ "+ ' " + csvDownloadURLHref + " ';" 
 									+ "$('#" + VIS_DIV_NAMES.get("FULL_SPARK") 
@@ -429,26 +429,31 @@ public class PersonPublicationCountVisCodeGenerator {
 	private String generateVisualizationActivator(String sparklineID, String visContainerID) {
 		
 		String sparklineTableWrapper = "\n" 
-				+ "var table = $('<table>');" 
-				+ "table.attr('class', 'sparkline_wrapper_table');" 
-				+ "var row = $('<tr>');" 
-				+ "sparklineImgTD = $('<td>');" 
-				+ "sparklineImgTD.attr('id', '" + sparklineID + "_img');" 
-				+ "sparklineImgTD.attr('width', '65');" 
-				+ "sparklineImgTD.attr('align', 'right');" 
-				+ "sparklineImgTD.attr('class', '" + VISUALIZATION_STYLE_CLASS + "');" 
-				+ "row.append(sparklineImgTD);" 
-				+ "var sparklineNumberTD = $('<td>');" 
-				+ "sparklineNumberTD.attr('width', '30');" 
-				+ "sparklineNumberTD.attr('align', 'right');" 
-				+ "sparklineNumberTD.attr('class', 'sparkline_number');" 
-				+ "row.append(sparklineNumberTD);" 
-				+ "var sparklineTextTD = $('<td>');" 
-				+ "sparklineTextTD.attr('width', '450');" 
-				+ "sparklineTextTD.attr('class', 'sparkline_text');" 
-				+ "row.append(sparklineTextTD);" 
-				+ "table.append(row);" 
-				+ "table.prependTo('#" + sparklineID + "');\n";
+			+ "var table = $('<table>');" 
+			+ "table.attr('class', 'sparkline_wrapper_table');" 
+			+ "var row = $('<tr>');" 
+			+ "sparklineImgTD = $('<td>');" 
+			+ "sparklineImgTD.attr('id', '" + sparklineID + "_img');" 
+			+ "sparklineImgTD.attr('width', '65');" 
+//			+ "sparklineImgTD.attr('align', 'right');" 
+			+ "sparklineImgTD.attr('class', '" + VISUALIZATION_STYLE_CLASS + "');" 
+			+ "row.append(sparklineImgTD);" 
+			+  "var row2 = $('<tr>');"
+			+ "var sparklineNumberTD = $('<td>');" 
+//			+ "sparklineNumberTD.attr('width', '30');" 
+//			+ "sparklineNumberTD.attr('align', 'right');" 
+			+ "sparklineNumberTD.attr('class', 'sparkline_number');" 
+			+ "sparklineNumberTD.css('text-align', 'center');"
+			+ "row2.append(sparklineNumberTD);"
+			+  "var row3 = $('<tr>');"
+			+ "var sparklineTextTD = $('<td>');" 
+//			+ "sparklineTextTD.attr('width', '450');" 
+			+ "sparklineTextTD.attr('class', 'sparkline_text');"
+			+ "row3.append(sparklineTextTD);" 
+			+ "table.append(row);"
+			+ "table.append(row2);"
+			+ "table.append(row3);"				
+			+ "table.prependTo('#" + sparklineID + "');\n";
 		
 		return "$(document).ready(function() {" 
 				+ "var sparklineImgTD; " 
