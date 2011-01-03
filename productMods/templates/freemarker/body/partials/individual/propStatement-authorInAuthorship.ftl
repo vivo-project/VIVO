@@ -1,14 +1,14 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#educationalTraining -->
+<#-- Custom object property statement view for http://vivoweb.org/ontology/core#authorInAuthorship -->
 
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
 <@showAuthorship statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values get passed to the next
-     statement -->
+<#-- Use a macro to keep variable assignments local; otherwise the values are in effect for the
+     next statement -->
 <#macro showAuthorship statement>
 
     <#local linkedIndividual>

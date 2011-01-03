@@ -23,10 +23,12 @@
           included in the SELECT terms retrieved by the query. This is the statement that will be edited 
           from the edit links.
           
-        - If the linked individual may be missing, the query should select the object's localname using
-          the ARQ localname function, so that the template can display the local name in the absence of
-          the linked individual. Alternatively, this can be retrieved from the template using the
-          localname(uri) method. 
+        - It is generally necessary to provide for a missing linked individual, due to incomplete data.
+          Make sure the query does the following:
+            - Enclose the clause for the linked individual in an OPTIONAL block. 
+            - Select the object's localname using the ARQ localname function, so that the template can 
+              display the local name in the absence of the linked individual. Alternatively, this can be 
+              retrieved in the template using the localname(uri) method. 
           
         - Each assertion or set of optional assertions must reference a different graph variable, so that
           no requirement about which assertions are in the same graph is imposed (unless this is desired
@@ -58,8 +60,9 @@
         SELECT DISTINCT ?subclass ?authorship (afn:localname(?authorship) AS ?authorshipName) 
                         ?infoResource ?infoResourceName ?dateTime WHERE {
             GRAPH ?g1 { ?subject ?property ?authorship } 
-            GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
-            GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
+            OPTIONAL { GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
+                       GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
+                     }
             OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
                        GRAPH ?g5 { ?infoResource a ?subclass } 
                        FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
