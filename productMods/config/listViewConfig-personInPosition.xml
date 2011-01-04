@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName)
+                        ?positionTitle ?org ?orgName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?position } 
+            OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
+                       GRAPH ?g3 { ?org rdfs:label ?orgName }
+                     }
+            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
+            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval . 
+                                   ?dateTimeInterval core:start ?dateTimeStartValue .
+                                   ?dateTimeStartValue core:dateTime ?dateTimeStart } }
+            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval . 
+                                   ?dateTimeInterval core:end ?dateTimeEndValue .
+                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd } }
+        } ORDER BY DESC(?dateTimeStart) DESC(?dateTimeEnd) ?orgName
+    </query>
+    
+    <template>propStatement-personInPosition.ftl</template>
+</list-view-config>
