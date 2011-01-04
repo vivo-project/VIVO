@@ -13,10 +13,10 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${url(statement.org)}">${statement.orgName}</a>
+            <a href="${profileUrl(statement.org)}">${statement.orgName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${url(statement.position)}">${statement.positionName}</a> (no linked organization)
+            <a href="${profileUrl(statement.position)}">${statement.positionName}</a> (no linked organization)
         </#if>
     </#local>
     
