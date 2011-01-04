@@ -797,14 +797,21 @@ a {
 .admin h3{
   color: #fff;
   background: #2485AE;
+} 
+/* INDIVIDUAL INTRO FOR PERSON ------>  */
+.foaf-person{
+    padding-top: 60px;
 }
 /* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
+#individual-intro{
+    width: 700px;
+}
 #individual-intro h1{
     font-size: 1.375em; 
     color: #2485ae; 
 }
 #individual-intro span.preferred-title{
-    font-size: 1.125em;
+    font-size: .825em;
     color: #5e6363;
     border-left: 1px solid #5e6363;
 }
@@ -906,15 +913,9 @@ ul#individual-areas li a{
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
 #publications-visualization{
-    margin-top: 35px;
-    float: right;
-    width: 226px;
+    border-left: 1px solid #edf0ed;
 }
 /* SPARKLINES ------>  */
-#sparklines-publications{
-    width: 184px;
-    padding: 0 20px 45px 20px;
-}
 #sparklines-publications h3{
     font-size: 1.25em;
     color: #2485ae;
