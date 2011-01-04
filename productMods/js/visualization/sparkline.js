@@ -8,8 +8,6 @@ var visualization = {
 		var containerIdCoAuthor = 'vis_container_coauthor',
 		containerCoAuthor = $('#' + containerIdCoAuthor);
 			
-        //container.empty().html('<img src="${loadingImageLink}" />');
-       
         $.ajax({
             url: url,
 			data: {
@@ -20,17 +18,20 @@ var visualization = {
 			},
             dataType: 'html',
             success:function(data){
-				containerCoAuthor.html(data);
-				containerCoAuthor.children("#pub_count_short_sparkline_vis").append(coAuthorIcon);
-				/*	containerCoAuthor.find("<img>").css("float", "left"); */
+            	if ($.trim(data) != "") {
+            		containerCoAuthor.html(data);
+    				containerCoAuthor.children("#pub_count_short_sparkline_vis");
+    				
+    				/* Since there are publications there are chances that there will be co-authors as well, so show the 
+    				 * co-author network icon.*/
+    				$("#coauthorship_link_container").show();
+            	} 
+				
             }
         });		
 	}
 };
 
 $(document).ready(function() {
-	
-	visualizationUrl = visualizationUrl.replace("/visualization", "/visualizationAjax");
-	
     visualization.renderCoAuthor(visualizationUrl);
 });

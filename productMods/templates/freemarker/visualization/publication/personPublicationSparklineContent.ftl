@@ -68,16 +68,8 @@
                     $.each(shortSparkRows, function(index, value) {
                         renderedShortSparks += data.getValue(value, 1);
                     });
-                    
-                    var totalPubs = parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications});
-                    
-                    if ( totalPubs > 1 ) {
-                        var pubDisplay = "publications";
-                    } else {
-                        var pubDisplay = "publication";
-                    }
-                    
-                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
+         
+                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> publication(s) <br/></span>");
             
                     var sparksText = '  within the last 10 years';
             
@@ -87,23 +79,15 @@
                      * Sparks that will be rendered will always be the one's which has 
                      * any year associated with it. Hence.
                      * */
-                    var renderedSparks = ${sparklineVO.renderedSparks};   
-                    var totalPubs = parseInt(renderedSparks) + parseInt(${sparklineVO.unkownYearPublications});
-                    
-                    if ( totalPubs > 1 ) {
-                        var pubDisplay = "publications";
-                    } else {
-                        var pubDisplay = "publication";
-                    }
-                    
-                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
+                    var renderedSparks = ${sparklineVO.renderedSparks};      
+                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> publication(s) <br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
                                         + ' <a href="${sparklineVO.downloadDataLink}" class="inline_href">(.CSV File)</a> ';
                  </#if>
          
-                 $('#${sparklineContainerID} td.sparkline_text').html(sparksText).css("font-weight", "bold");
+                 $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
          
             }
     
@@ -155,7 +139,6 @@
                     
                     var sparklineTextTD = $('<td>');
                     sparklineTextTD.attr('class', 'sparkline_text');
-					sparklineTextTD.css('text-align', 'left');
                     row3.append(sparklineTextTD);
                     table.append(row);
                     table.append(row2);
@@ -171,10 +154,9 @@
     </div><!-- Sparkline Viz -->
 
     <#if sparklineVO.shortVisMode>
-        <#--<span class="vis_link">-->
-        	<h3>Co-Author Network
-            <a class="view-all-style" href="${sparklineVO.fullTimelineNetworkLink}">View <span class= "pictos-arrow-10">4</span></a> </h3>
-        <#--</span>-->
+    
+    <#-- Shifted the link to co-author to the individual-sparkline.ftl instead. --> 
+    
     <#else>
         <!-- For Full Sparkline - Print the Table of Publication Counts per Year -->
         

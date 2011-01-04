@@ -27,3 +27,33 @@ span.incomplete-data-holder,
     position:absolute;
     width:380px;*/
 }
+
+.collaboratorship-icon {
+	float: left;
+	padding-right: 5px;
+}
+
+.collaboratorship-link a {
+	font-size: 0.9em;
+}
+
+.collaboratorship-link h3 {
+	line-height: 1em;
+	font-size: 1em !important;
+	margin-bottom: 0px !important;
+	padding-top: 0px !important;
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+	padding-bottom: 0px !important;
+}
+
+#coauthorship_link_container,
+#coinvestigator_link_container {
+	margin-top: 10px;
+}
+
+.sparkline_text {
+	font-size: 0.8em;
+    font-weight: bold;
+    text-align: left;
+}
