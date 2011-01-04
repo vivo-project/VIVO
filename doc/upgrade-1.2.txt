@@ -143,8 +143,7 @@ the following types of changes:
     updated to the new name.
   
   Class or Property deletion
-    All individuals in a deleted class will be changed to
-    belong to the nearest available superclass (which may be owl:Thing).
+    All individuals in a deleted class will be removed.
    
     All statements using a deleted property will be changed
     to use the nearest available superproperty. If there is no available
@@ -152,16 +151,10 @@ the following types of changes:
     knowledge base. Note that all removed and added data
     is recorded in the files in the changedData directory.
     
-  Class or Property addition
-    If a newly added class has a superclass and there are
-    individuals in that superclass, then a note will be
-    added to the log file suggesting review of those individuals to
-    see if they should be reasserted in the newly added class.
-  
-    If a newly added property has a superproperty and there are
-    statements using the superproperty, then a note will be added to
-    the log file suggesting review of those statements to see if they
-    should be reasserted using the newly added property.
+  Property addition
+    If a newly added property is the inverse of a previously
+    existing property, the inverse of any statements using the
+    pre-existing property will be asserted.
 
   Annotation property default values
     If a site has modified the value of a vitro annotation (such as
