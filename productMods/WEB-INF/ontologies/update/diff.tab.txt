@@ -48,16 +48,16 @@ http://vivoweb.org/ontology/core#year		No	Delete	not set
 http://vivoweb.org/ontology/core#date		No	Delete	not set
 http://vivoweb.org/ontology/core#issueDate		No	Delete	not set
 http://vivoweb.org/ontology/core#filingDate		No	Delete	not set
-http://vivoweb.org/ontology/core#startYear		No	Delete	not set
-http://vivoweb.org/ontology/core#startDateTime		No	Delete	not set
-http://vivoweb.org/ontology/core#startDate		No	Delete	not set
-http://vivoweb.org/ontology/core#startYearMonth		No	Delete	not set
-http://vivoweb.org/ontology/core#startTime		No	Delete	not set
-http://vivoweb.org/ontology/core#endYear		No	Delete	not set
-http://vivoweb.org/ontology/core#endDateTime		No	Delete	not set
-http://vivoweb.org/ontology/core#endDate		No	Delete	not set
-http://vivoweb.org/ontology/core#endYearMonth		No	Delete	not set
-http://vivoweb.org/ontology/core#endTime		No	Delete	not set
+http://vivoweb.org/ontology/core#startYear		No	Delete	Delete
+http://vivoweb.org/ontology/core#startDateTime		No	Delete	Delete
+http://vivoweb.org/ontology/core#startDate		No	Delete	Delete
+http://vivoweb.org/ontology/core#startYearMonth		No	Delete	Delete
+http://vivoweb.org/ontology/core#startTime		No	Delete	Delete
+http://vivoweb.org/ontology/core#endYear		No	Delete	Delete
+http://vivoweb.org/ontology/core#endDateTime		No	Delete	Delete
+http://vivoweb.org/ontology/core#endDate		No	Delete	Delete
+http://vivoweb.org/ontology/core#endYearMonth		No	Delete	Delete
+http://vivoweb.org/ontology/core#endTime		No	Delete	Delete
 http://vivoweb.org/ontology/core#TimeInterval		No	Delete	not set
 http://vivoweb.org/ontology/core#timeIntervalFor		No	Delete	not set
 http://vivoweb.org/ontology/core#hasTimeInterval		No	Delete	not set
