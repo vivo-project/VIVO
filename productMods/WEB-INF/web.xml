@@ -1404,10 +1404,18 @@
     <servlet-name>individual</servlet-name>
     <url-pattern>/entityfm/*</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>individual</servlet-name>
+    <url-pattern>/individual</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>individual</servlet-name>
     <url-pattern>/individualfm/*</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>individual</servlet-name>
+    <url-pattern>/displayfm</url-pattern>
+  </servlet-mapping> 
   <servlet-mapping>
     <servlet-name>individual</servlet-name>
     <url-pattern>/displayfm/*</url-pattern>
