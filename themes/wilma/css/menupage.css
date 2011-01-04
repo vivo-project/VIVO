@@ -23,7 +23,7 @@
     font-size: 1.25em;
     color: #2485ae;
     font-weight: normal;
-    background: url(../images/arrow-down.gif) 117px 27px no-repeat;
+    background: url(../images/arrow-down.gif) 121px 27px no-repeat;
 }
 ul#foaf-person-childClasses li {
     border-bottom: 1px solid #dde4e3;
@@ -96,6 +96,7 @@ ul#vgraph-childClasses .count-classes {
     color: #2485ae;
     font-weight: normal;
     background: url(../images/arrow-down.gif) 85px 7px no-repeat;
+    border-bottom-color: #fff;
 }
 ul#find-filters li {
     border-bottom: 1px solid #dde4e3;
