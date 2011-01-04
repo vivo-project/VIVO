@@ -36,7 +36,10 @@
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
 %>
 
-<c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
+
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%><c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
+<c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="positionClass" value="${vivoCore}Position" />
@@ -48,6 +51,16 @@
 <c:set var="endYearPred" value="${vivoCore}endYear" />
 <c:set var="positionInOrgPred" value="${vivoCore}positionInOrganization" />
 <c:set var="orgForPositionPred" value="${vivoCore}organizationForPosition" />
+
+<c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
+<c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
+<c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
+<c:set var="edToDateTime" value="${vivoCore}dateTimeInterval"/>
+
+<c:set var="positionToInterval" value="${vivoCore}dateTimeInterval"/>
+<c:set var="intervalType" value="${vivoCore}DateTimeInterval"/>
+<c:set var="intervalToStart" value="${vivoCore}start"/>
+<c:set var="intervalToEnd" value="${vivoCore}end"/>
 
 <%-- Assertions for adding a new role --%>
 
@@ -93,6 +106,23 @@
     ?org <${orgForPositionPred}> ?position .
 </v:jsonset>
 
+<v:jsonset var="n3ForStart">
+    ?position      <${positionToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToStart}> ?startNode .    
+    ?startNode  <${type}> <${dateTimeValueType}> .
+    ?startNode  <${dateTimeValue}> ?startField.value .
+    ?startNode  <${dateTimePrecision}> ?startField.precision .
+</v:jsonset>
+
+<v:jsonset var="n3ForEnd">
+    ?position      <${positionToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToEnd}> ?endNode .
+    ?endNode  <${type}> <${dateTimeValueType}> .
+    ?endNode  <${dateTimeValue}> ?endField.value .
+    ?endNode  <${dateTimePrecision}> ?endField.precision .
+</v:jsonset>
 
 <%-- Queries for editing an existing role --%>
 
@@ -125,14 +155,64 @@
         ?position a ?existingPositionType . }
 </v:jsonset>
 
-<v:jsonset var="startYearQuery" >      
-    SELECT ?existingStartYear WHERE {  
-        ?position <${startYearPred}> ?existingStartYear . }
+
+ <v:jsonset var="existingIntervalNodeQuery" >  
+    SELECT ?existingIntervalNode WHERE {
+          ?position <${positionToInterval}> ?existingIntervalNode .
+          ?existingIntervalNode <${type}> <${intervalType}> . }
+</v:jsonset>
+ 
+ <v:jsonset var="existingStartNodeQuery" >  
+    SELECT ?existingStartNode WHERE {
+      ?position <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?existingStartNode . 
+      ?existingStartNode <${type}> <${dateTimeValueType}> .}              
 </v:jsonset>
 
-<v:jsonset var="endYearQuery" >      
-    SELECT ?existingEndYear WHERE {  
-        ?position <${endYearPred}> ?existingEndYear . }
+<v:jsonset var="existingStartDateQuery" >  
+    SELECT ?existingDateStart WHERE {
+     ?position <${positionToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToStart}> ?startNode .
+     ?startNode <${type}> <${dateTimeValueType}> .
+     ?startNode <${dateTimeValue}> ?existingDateStart . }
+</v:jsonset>
+
+<v:jsonset var="existingStartPrecisionQuery" >  
+    SELECT ?existingStartPrecision WHERE {
+      ?position <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?startNode .
+      ?startNode <${type}> <${dateTimeValueType}> .          
+      ?startNode <${dateTimePrecision}> ?existingStartPrecision . }
+</v:jsonset>
+
+
+ <v:jsonset var="existingEndNodeQuery" >  
+    SELECT ?existingEndNode WHERE {
+      ?position <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?existingEndNode . 
+      ?existingEndNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingEndDateQuery" >  
+    SELECT ?existingEndDate WHERE {
+     ?position <${positionToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToEnd}> ?endNode .
+     ?endNode <${type}> <${dateTimeValueType}> .
+     ?endNode <${dateTimeValue}> ?existingEndDate . }
+</v:jsonset>
+
+<v:jsonset var="existingEndPrecisionQuery" >  
+    SELECT ?existingEndPrecision WHERE {
+      ?position <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?endNode .
+      ?endNode <${type}> <${dateTimeValueType}> .          
+      ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
 </v:jsonset>
 
 <v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
@@ -173,28 +253,36 @@
     "n3required"    : [ "${n3ForNewPosition}", "${positionTitleAssertion}", "${positionTypeAssertion}", 
     					"${orgLabelAssertion}", "${orgTypeAssertion}" ],
     
-    "n3optional"    : [ "${startYearAssertion}", "${endYearAssertion}" ],                        
+    "n3optional"    : [ "${n3ForStart}", "${n3ForEnd}" ],                        
                                                                      
     "newResources"  : { "position" : "${defaultNamespace}",
-                        "org" : "${defaultNamespace}" },
+                        "org" : "${defaultNamespace}",
+                        "intervalNode" : "${defaultNamespace}",
+                        "startNode" : "${defaultNamespace}",
+                        "endNode" : "${defaultNamespace}"  },
 
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "org", "orgType", "positionType" ],
-    "literalsOnForm" :  [ "positionTitle", "orgLabel", "startYear", "endYear" ],                          
+    "literalsOnForm" :  [ "positionTitle", "orgLabel"  ],                          
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "orgLabel"           : "${orgLabelQuery}",
         "positionTitle"      : "${positionTitleQuery}",
-        "startYear"          : "${startYearQuery}",
-        "endYear"            : "${endYearQuery}"
+        "startField.value"   : "${existingStartDateQuery}",
+        "endField.value"     : "${existingEndDateQuery}"
     },
     "sparqlForExistingUris" : {
         "org"               : "${orgQuery}",
         "orgType"           : "${orgTypeQuery}",
-        "positionType"      : "${positionTypeQuery}"
+        "positionType"      : "${positionTypeQuery}" ,
+        "intervalNode"      : "${existingIntervalNodeQuery}", 
+        "startNode"         : "${existingStartNodeQuery}",
+        "endNode"           : "${existingEndNodeQuery}",
+        "startField.precision": "${existingStartPrecisionQuery}",
+        "endField.precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "positionTitle" : {
@@ -252,27 +340,27 @@
          "rangeLang"        : "",
          "assertions"       : [ "${orgTypeAssertion}" ]
       },      
-      "startYear" : {
+      "startField" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [  ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : ["${n3ForStart}"]
       },
-      "endYear" : {
+      "endField" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
+         "assertions"       : ["${n3ForEnd}"]
       }
   }
 }
@@ -285,6 +373,12 @@
     if (editConfig == null) {
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
+        
+        //setup date time edit elements
+        Field startField = editConfig.getField("startField");
+        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR));        
+        Field endField = editConfig.getField("endField");
+        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR));
     }
     
     editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
@@ -341,8 +435,8 @@
         <v:input type="text" label="Position Title ${requiredHint}" id="positionTitle" size="30" />
         <v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 
-        <v:input type="text" label="Start Year <span class='hint'>(YYYY)</span>" id="startYear" size="4" />   
-        <v:input type="text" label="End Year <span class='hint'>(YYYY)</span>" id="endYear" size="4" />
+        <v:input id="startField"  label="Start Year <span class='hint'>(YYYY)</span>" />
+        <v:input id="endField" label="End Year <span class='hint'>(YYYY)</span>" />                
     
     </div>
        
