@@ -15,7 +15,8 @@
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
 <#assign adobeFlashDetector = '${urls.base}/js/visualization/coauthorship/AC_OETags.js'>
 <#assign googleVisualizationAPI = 'http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
-<#assign coAuthorPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person_level-fm.js'>
+<#assign coAuthorPersonLevelJavaScript = '${urls.base}/js/visualization/coauthorship/coauthorship-personlevel.js'>
+<#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
 
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
 
@@ -42,12 +43,13 @@ var egoCoAuthorshipDataFeederURL = "${egoCoAuthorshipDataFeederURL}";
 var egoCoAuthorsListDataFileURL = "${egoCoAuthorsListDataFileURL}";
 var contextPath = "${urls.base}";
 
-var domainParam = "http://vivo-vis-bkoniden.slis.indiana.edu/vivo1/visualizationData";
+var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
 </script>
 
 <script type="text/javascript" src="${coAuthorPersonLevelJavaScript}"></script>
+<script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
 
 
 <#assign coAuthorStyle = "${urls.base}/css/visualization/personlevel/coauthor_style.css" />
@@ -60,7 +62,7 @@ var domainParam = "http://vivo-vis-bkoniden.slis.indiana.edu/vivo1/visualization
 
 <#assign loadingImageLink = "${urls.images}/visualization/ajax-loader.gif">
 
-<#assign egoVivoProfileURL = "/individual?uri=${egoURI}" />
+<#assign egoVivoProfileURL = "${urls.base}/individual?uri=${egoURI}" />
 
 <script language="JavaScript" type="text/javascript">
 
@@ -88,7 +90,7 @@ $(document).ready(function(){
 
 <div id="body">
 	<div id="ego_profile">
-			
+	
 		<#-- Label -->
 			<h2 style="width:20%"><span id="ego_label" class="author_name"></span></h2>
 	
@@ -139,7 +141,7 @@ $(document).ready(function(){
 			<div id="visPanel" style="float: right; width: 600px;">
 				<script language="JavaScript" type="text/javascript">
 					<!--
-					renderCoAuthorshipVisualization();
+					renderCollaborationshipVisualization();
 					//-->
 				</script>
 			</div>

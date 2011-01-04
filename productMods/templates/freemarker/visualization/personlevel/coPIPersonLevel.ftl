@@ -17,7 +17,8 @@
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
 <#assign adobeFlashDetector = '${urls.base}/js/visualization/coauthorship/AC_OETags.js'>
 <#assign googleVisualizationAPI = 'http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
-<#assign coInvestigatorPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person_level-fm-copi.js'>
+<#assign coInvestigatorPersonLevelJavaScript = '${urls.base}/js/visualization/coPIship/coPIship-person-level.js'>
+<#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
 
 <script type="text/javascript" src="${adobeFlashDetector}"></script>
 <script type="text/javascript" src="${googleVisualizationAPI}"></script>
@@ -38,14 +39,16 @@ var swfLink = "${swfLink}";
 var egoURI = "${egoURI}";
 var egoCoInvestigationDataFeederURL = "${egoCoInvestigationDataFeederURL}";
 var egoCoInvestigatorsListDataFileURL = "${egoCoInvestigatorsListDataFileURL}";
+
 var contextPath = "${urls.base}";
 
-var domainParam = "http://vivo-vis-bkoniden.slis.indiana.edu/vivo1/visualizationData";
+var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 // -->
 </script>
 
 <script type="text/javascript" src="${coInvestigatorPersonLevelJavaScript}"></script>
+<script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
 
 <#assign coInvestigatorStyle = "${urls.base}/css/visualization/personlevel/coinvestigator_style.css" />
 <#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />
@@ -57,7 +60,7 @@ var domainParam = "http://vivo-vis-bkoniden.slis.indiana.edu/vivo1/visualization
 
 <#assign loadingImageLink = "${urls.images}/visualization/ajax-loader.gif">
 
-<#assign egoVivoProfileURL = "/individual?uri=${egoURI}" />
+<#assign egoVivoProfileURL = "${urls.base}/individual?uri=${egoURI}" />
 
 <script language="JavaScript" type="text/javascript">
 

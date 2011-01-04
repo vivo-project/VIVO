@@ -16,6 +16,7 @@ function getWellFormedURLs(given_uri, type) {
 	var finalURL;
 
 	if (type == "coauthorship") {
+
 		finalURL = $.ajax({
 			url: contextPath + "/visualizationAjax",
 			data: ({vis: "utilities", vis_mode: "PERSON_LEVEL_URL", uri: given_uri}),
@@ -26,7 +27,7 @@ function getWellFormedURLs(given_uri, type) {
 		}).responseText;
 
 		return finalURL;
-		
+
 	} else 	if (type == "coinvestigation") {
 
 		finalURL = $.ajax({
@@ -38,9 +39,9 @@ function getWellFormedURLs(given_uri, type) {
 		}
 		}).responseText;
 
-		return finalURL;		
-		
-	}else if (type == "profile") {
+		return finalURL;
+
+	} else if (type == "profile") {
 
 		finalURL = $.ajax({
 			url: contextPath + "/visualizationAjax",
@@ -78,9 +79,7 @@ function getWellFormedURLs(given_uri, type) {
 		}).responseText;
 
 		return profileInfoJSON;
-
-	}		
-
+	}
 }
 
 $.fn.image = function(src, successFunc, failureFunc){
@@ -92,8 +91,7 @@ $.fn.image = function(src, successFunc, failureFunc){
 
 		return profileImage;
 	});
-};	
-	
+};
 
 function setProfileImage(imageContainerID, mainImageURL) {
 	
@@ -151,7 +149,6 @@ function setProfileMoniker(monikerContainerID, moniker, doEllipsis) {
 	$("#" + monikerContainerID).attr('title', moniker);
 
 }
-
 
 function setProfileName(nameContainerID, name, doNameEllipsis) {
 	
@@ -218,49 +215,33 @@ function processProfileInformation(nameContainerID,
 
 }
 
-
 function visLoaded(nodes){
 	
 	var jsonedNodes = jQuery.parseJSON(nodes);
-	var tableID = "";
-	var tableContainer = "";
-	
-	tableID = "coinvestigations_table";
-	tableContainer = "coinve_table_container";
 	
 	$(document).ready(function() { 
-		 createTable("coinvestigations_table" , "coinve_table_container" , jsonedNodes.slice(1));
+		 createTable(collaboratorTableMetadata.tableID, collaboratorTableMetadata.tableContainer, jsonedNodes.slice(1));
 	});
 
 }
 
-
 function createTable(tableID, tableContainer, tableData) {
 	
 	var number_of_works = "";
-	var tableCaption = "";
-	var tableColumnTitle1 = "";
-	var tableColumnTitle2 = "";
 	
-
-	tableCaption = "Co-investigators ";
-	tableColumnTitle1 = "Investigator";
-	tableColumnTitle2 = "Grants with <br />";	
-		
 	var table = $('<table>');
 	table.attr('id', tableID);
 	
-	table.append($('<caption>').html(tableCaption + "<a href=\"" + egoCoInvestigatorsListDataFileURL + "\">(.CSV File)</a>"));  
-	
+	table.append($('<caption>').html(collaboratorTableMetadata.tableCaption 
+										+ "<a href=\"" + collaboratorTableMetadata.tableCSVFileLink 
+										+ "\">(.CSV File)</a>"));  
+
 	var header = $('<thead>');
 	
 	var row = $('<tr>'); 
 
-	var investigatorTH = $('<th>');
-	investigatorTH.html(tableColumnTitle1);
-	row.append(investigatorTH);
-	
-	row.append($('<th>').html(tableColumnTitle2 + "" + $('#ego_label').text()));  
+	row.append($('<th>').html(collaboratorTableMetadata.tableColumnTitle1)); 
+	row.append($('<th>').html(collaboratorTableMetadata.tableColumnTitle2 + "" + $('#ego_label').text()));  
 
 	header.append(row);
 	
@@ -268,8 +249,8 @@ function createTable(tableID, tableContainer, tableData) {
 
 	$.each(tableData, function(i, item){ 
 		
-		number_of_works = item.number_of_investigated_grants;
-
+		number_of_works = item[collaboratorTableMetadata.jsonNumberWorksProperty];
+		
 		var row = $('<tr>'); 
 
 		row.append($('<td>').html(item.label));
@@ -284,108 +265,18 @@ function createTable(tableID, tableContainer, tableData) {
 	
 }
 
-//renderStatsOnNodeClicked, CoRelations, noOfCoRelations
-//function nodeClickedJS(json){
-function renderStatsOnNodeClicked(json){
-	
-	//console.log(json);
-	var obj = jQuery.parseJSON(json);
-	
-	var works = "";
-	var persons = "";
-	var relation = "";
-	var earliest_work = "";
-	var latest_work = "";
-	var number_of_works = "";
-	
-	works = "Grant(s)";
-	persons = "Co-investigator(s)";
-	relation = "coinvestigation";
-	earliest_work = obj.earliest_grant;
-	latest_work = obj.latest_grant;
-	number_of_works = obj.number_of_investigated_grants;
-	
-	
-
-
-	$("#dataPanel").attr("style","visibility:visible");
-	$("#works").empty().append(number_of_works);
-
-	/*
-	 * Here obj.url points to the uri of that individual
-	 */
-	if(obj.url){
-		
-		if (obj.url == egoURI) {
-			
-			$("#investigatorName").addClass('investigator_name').removeClass('neutral_investigator_name');
-			$('#num_works > .investigator_stats_text').text(works);
-			$('#num_investigators > .investigator_stats_text').text(persons);
-			
-		} else {
-
-			$("#investigatorName").addClass('neutral_investigator_name').removeClass('investigator_name');
-			$('#num_works > .investigator_stats_text').text('Joint ' + works);
-			$('#num_investigators > .investigator_stats_text').text('Joint ' + persons);
-			
-		}
-		
-		$("#profileUrl").attr("href", getWellFormedURLs(obj.url, "profile"));
-		$("#coInvestigationVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
-		processProfileInformation("investigatorName", 
-				"profileMoniker",
-				"profileImage",
-				jQuery.parseJSON(getWellFormedURLs(obj.url, "profile_info")),
-				true,
-				true);
-		
-		
-
-	} else{
-		$("#profileUrl").attr("href","#");
-		$("#coInvestigationVisUrl").attr("href","#");
-	}
-
-	$("#coInvestigators").empty().append(obj.noOfCorelations);	
-	
-	$("#firstGrant").empty().append(earliest_work);
-	(earliest_work)?$("#fGrant").attr("style","visibility:visible"):$("#fGrant").attr("style","visibility:hidden");
-	$("#lastGrant").empty().append(latest_work);
-	(latest_work)?$("#lGrant").attr("style","visibility:visible"):$("#lGrant").attr("style","visibility:hidden");
-
-	// obj.url:the url parameter for node
-
-}
-
 /*
-* Inside both of these functions, '&' are replaced with '%26' because we are externally
-* passing two parameters to the flash code using flashvars (see renderCoInvestigationVisualization())
-* and they are delimited using '&' too.
-*/
-
-function getEncodedCoAuthorURL(){
-	
-	var queryString = "uri="+ egoURI + "&vis=coauthorship";
-//	console.log('domainParam is '+ domainParam);
-//	console.log('CoAuthorURL is ' + domainParam + '?' + queryString.replace(/&/g, '%26'));
-	return domainParam + '?' + queryString.replace(/&/g, '%26');	
+ * Inside both of these functions, '&' are replaced with '%26' because we are externally
+ * passing two parameters to the flash code using flashvars (see renderCoAuthorshipVisualization())
+ * and they are delimited using '&' too.
+ */
+function getEncodedURLFor(visType){
+	var queryString = "uri="+ egoURI + "&vis=" + visType;
+	return location.protocol + "//" + location.host + contextPath + visualizationDataRoot + '?' + queryString.replace(/&/g, '%26');
 }
 
-function getEncodedCoPIURL(){
-	
-	var queryString = "uri="+ egoURI+ "&vis=coprincipalinvestigator";
-//	console.log('CoPIURL is ' + domainParam + '?' + queryString.replace(/&/g, '%26') );	
-	return domainParam + '?' + queryString.replace(/&/g, '%26');
-}
+function renderCollaborationshipVisualization() {
 
-function renderCoInvestigationVisualization() {
-	
-	var visualization = "";
-	var encodedURL = "";
-	
-	visualization = "CoPI";
-	encodedURL = getEncodedCoPIURL();		
-	
 //	console.log('visualization is ' + visualization + ' and encodedURL is '+ encodedURL);
 	// Version check for the Flash Player that has the ability to start Player
 	// Product Install (6.0r65)
@@ -426,7 +317,7 @@ function renderCoInvestigationVisualization() {
 //				"flashVars", 'coAuthorUrl='+ encodeURL(egoCoAuthorshipDataFeederURL) + '&coPIUrl=' + encodeURL(egoCoPIDataFeederURL) ,			
 //				"flashVars", 'coAuthorUrl='+ getEncodedCoAuthorURL() + '&coPIUrl=' + getEncodedCoPIURL() ,
 //				"flashVars", 'graphmlUrl=' + getEncodedCoAuthorURL() + '&labelField=label&visType=CoAuthor',
-				"flashVars", 'graphmlUrl=' + encodedURL + '&labelField=label&visType='+visualization,
+				"flashVars", 'graphmlUrl=' + getEncodedURLFor(visType) + '&labelField=label&visType='+visKeyForFlash,
 				"width", "600",
 				"height", "850",
 				"align", "top",
