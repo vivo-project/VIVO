@@ -66,10 +66,6 @@ report   - Just summarize output from previously run tests.
 
 		<fail unless="jmeter.home.dir"
 		      message="${properties.file} must contain a value for jmeter.home.dir" />
-		<fail unless="jmeter.serializer.jar"
-		      message="${properties.file} must contain a value for jmeter.serializer.jar" />
-		<fail unless="jmeter.xalan.jar"
-		      message="${properties.file} must contain a value for jmeter.xalan.jar" />
 
 		<fail unless="webapp.host"
 		      message="${properties.file} must contain a value for webapp.host" />
@@ -81,8 +77,9 @@ report   - Just summarize output from previously run tests.
 		<property name="webapp.url" value="http://${webapp.host}:${webapp.port}/${webapp.name}" />
 
 		<path id="xslt.classpath">
-			<pathelement location="${jmeter.serializer.jar}" />
-			<pathelement location="${jmeter.xalan.jar}" />
+			<pathelement location="${jmeter.home.dir}/lib/xalan-2.7.1.jar" />
+			<pathelement location="${jmeter.home.dir}/lib/serializer-2.7.1.jar" />
+			<pathelement location="${jmeter.home.dir}/lib/xercesImpl-2.9.1.jar" />
 		</path>
 	</target>
 
@@ -131,10 +128,18 @@ report   - Just summarize output from previously run tests.
           target: report              
          ================================= -->
 	<target name="report" depends="prepare" description="--> Just summarize the output.">
-		<xslt in="${results.dir}/${test.name}.jtl"
-		      out="${results.dir}/${test.name}.html"
-		      style="jmeter-results-report.xsl"
-		      classpathref="xslt.classpath" />
+		<!-- Can't use xslt task because it screws up on the xsl:sort tag -->
+		<property name="report.in" location="${results.dir}/${test.name}.jtl" />
+		<property name="report.out" location="${results.dir}/${test.name}.html" />
+		<property name="report.style" location="${basedir}/jmeter-results-report.xsl" />
 
+		<java classname="org.apache.xalan.xslt.Process" classpathref="xslt.classpath">
+			<arg value="-in" />
+			<arg value="${report.in}" />
+			<arg value="-out" />
+			<arg value="${report.out}" />
+			<arg value="-xsl" />
+			<arg value="${report.style}" />
+		</java>
 	</target>
 </project>
