@@ -16,18 +16,14 @@ head,#body {
 
 h1 {
 	padding-top: 10px;
-	font-size: 1.5em;
+/*	font-size: 1.5em; */
 	margin-left: 5%;
 }
 
 h2 {
-	font-size: 1.1em;
+/*	font-size: 1.1em; */
 	margin-top: 10px;
 	margin-bottom: 5px;
-}
-
-h3 {
-	font-size: 1.01em;
 }
 
 button{
@@ -107,7 +103,7 @@ form{
 }
 
 #label a,#text {
-	text-decoration: none;
+/*	text-decoration: none; */
 	color: black;
 	font-family: Helvetica;
 	font-size: 1em;
@@ -134,11 +130,11 @@ li{
 }
 
 #paginatedTable{
-	margin-top: 10px;
+	margin-top:0px;
 }
 
 .sDomSearchBar{
-	margin-bottom: 10px;
+	margin-bottom: -10px;
 	margin-left: 41%;
 }
 
@@ -158,16 +154,18 @@ li{
 	border: 1px #3D454E solid;
 	border-top: 10px #3D454E solid;
 	background-color: #D9D9D9;
-*/	
+	
 	padding-left: 10px;
+*/	
 }
 
 #leftLower{
 /*	
 	border: 1px #3D454E solid;
 	border-top: 10px #3D454E solid;
-*/
+
 	padding-left: 10px;
+	*/
 }
 		
 #bottomButtons{
@@ -192,6 +190,6 @@ p.displayCounter{
 	border-bottom: 1px solid gray;
 }
 
-#comparisonHeader, #entityHeader, #entitylevelheading, #comparisonParameter{
+#comparisonHeader, #entityHeader, #entitylevelheading, #comparisonParameter, #headerText{
 	color: #2485ae;
 }
