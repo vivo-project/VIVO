@@ -46,7 +46,6 @@
 <c:set var="orgClass" value="http://xmlns.com/foaf/0.1/Organization" />
 
 <%-- Define predicates used in n3 assertions and sparql queries --%>
-<c:set var="titlePred" value="${vivoCore}titleOrRole" />
 <c:set var="startYearPred" value="${vivoCore}startYear" />
 <c:set var="endYearPred" value="${vivoCore}endYear" />
 <c:set var="positionInOrgPred" value="${vivoCore}positionInOrganization" />
@@ -73,8 +72,7 @@
 </v:jsonset>
 
 <v:jsonset var="positionTitleAssertion" >      
-    ?position <${titlePred}> ?positionTitle ;
-              <${label}> ?positionTitle . 
+    ?position <${label}> ?positionTitle . 
 </v:jsonset>
 
 <v:jsonset var="positionTypeAssertion">
@@ -147,7 +145,7 @@
 
 <v:jsonset var="positionTitleQuery" >  
     SELECT ?existingPositionTitle WHERE {
-          ?position <${titlePred}> ?existingPositionTitle . }
+          ?position <${label}> ?existingPositionTitle . }
 </v:jsonset>
 
 <v:jsonset var="positionTypeQuery">
