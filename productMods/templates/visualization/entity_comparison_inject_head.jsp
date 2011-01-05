@@ -30,6 +30,9 @@
 <c:url var="entityComparisonStyle" value="/${themeDir}css/visualization/entityComparison/layout.css" />
 <c:url var="vizStyle" value="/${themeDir}css/visualization/visualization.css" />
 
+<c:url var="temporalGraphIcon" value="/images/visualization/temporal_vis_small_icon.jpg" />
+
+
 <!-- Including jquery, entity comparison related javascript files -->
 
 <script type="text/javascript" src="${jquery}"></script>
@@ -54,9 +57,8 @@
 <link rel="stylesheet" type="text/css" href="${vizStyle}" />
 
 <script language="JavaScript" type="text/javascript">
-<!--
 
 var contextPath = "${contextPath}";
+var temporalGraphSmallIcon = "${temporalGraphIcon}";
 
-// -->
 </script>

@@ -8,6 +8,7 @@
 	<c:out value="${portalBean.themeDir}" />
 </c:set>
 <c:set var='jsonContent' value='${requestScope.JsonContent}' />
+<c:set var='organizationLabel' value='${requestScope.OrganizationLabel}' />
 
 <c:url var="TemporalGraphDownloadFile" value="/visualization">
 	<c:param name="vis" value="entity_comparison" />
@@ -15,9 +16,13 @@
 	<c:param name="uri" value="${requestScope.OrganizationURI}" />
 </c:url>
 
+<c:url var="organizationVivoProfileURL" value="/individual">
+	<c:param name="uri" value="${requestScope.OrganizationURI}" />
+</c:url>
+
 
 <div id="body">
-		<h2 style="width: 36%; padding-left:50px;">Temporal Graph Visualization<span id="entitylevelheading"><i> School Level</i></span></h2>
+		<h2 style="width: 36%; padding-left:45px;"><a href="" id = "organizationMoniker"></a></h2>
 		<div id="leftblock">
 			<div id="leftUpper">
 				<h3>How do you want to compare?</h3>
@@ -27,16 +32,16 @@
 				<select class="comparisonValues" style="margin-bottom: 20px;">
 					<option value="Publications" selected="selected">by Publications</option>
 					<option value="Grants">by Grants</option>
+<!--
 					<option value="People" disabled="disabled">by People</option>
 					<option value="Item4" disabled="disabled">by Item4</option>
 					<option value="Item5" disabled="disabled">by Item5</option>
+-->
 				</select>
 				
 				</div>
 			</div>
-			
-			<br/>	
-			
+						
 			<div id="leftLower">
 				<h3>Who do you want to compare?</h3>
 				<div id="paginatedTable">
@@ -48,7 +53,7 @@
 		</div>
 		<div id="rightblock">
 		
-			<h4 style="padding-left:50px;">Comparing <span id="comparisonHeader">Publications</span> of <span id="entityHeader">Institutions</span></h4>
+			<h4 id="headerText" style="padding-left:60px;">Comparing <span id="comparisonHeader">Publications</span> of <span id="entityHeader">Institutions</span> in <span id="organizationLabel"></span></h4>
 			<div id="graphContainer" style="width: 450px; height: 250px;"></div>
 			<div id="yaxislabel"></div>
 			
@@ -73,10 +78,17 @@
 
 
 <script type="text/javascript">
-	
+
+//	$("#body").append("<img src = '"+temporalGraphSmallIcon+"'></img>");
 	$(document).ready(function() {
 
 		var jsonString = '${jsonContent}';
+		var organizationLabel = '${organizationLabel}';
+
+		$("#organizationLabel").text(organizationLabel).css("color", "#2485ae");
+		$("#organizationMoniker").text(organizationLabel);
+		$("#organizationMoniker").attr("href", "${organizationVivoProfileURL}");
+		
 		var jsonObject = {
 				prepare : function(arg1){
 					loadData(arg1);
