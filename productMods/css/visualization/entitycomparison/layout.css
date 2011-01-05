@@ -31,6 +31,12 @@ button{
 	float:right;
 }
 
+#reset-search {
+	color: #2485AE;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
 form{
 	margin-top:70px;
 	margin-bottom: -50px;	

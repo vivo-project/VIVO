@@ -765,8 +765,10 @@ function prepareTableForDataTablePagination(jsonData){
 	table.append(tbody);
 	tableDiv.append(table);
 	
-	$('#datatable').dataTable({
-		"sDom": '<"searchbar"f><"paginatedtabs"p><"datatablewrapper"t>',
+	var searchBarParentContainerDIVClass = "searchbar";
+	
+	var entityListTable = $('#datatable').dataTable({
+		"sDom": '<"' + searchBarParentContainerDIVClass + '"f><"paginatedtabs"p><"datatablewrapper"t>',
 		"aaSorting" : [[2, "desc"]],
 		"iDisplayLength": 10,
 		"sPaginationType": "full_numbers",
@@ -775,11 +777,18 @@ function prepareTableForDataTablePagination(jsonData){
 	    $('tr>td:nth-child(1)>input').bind('click', function () { $(this).parent().parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
 	    $('tr>td:nth-child(1)>input').bind('click', function () { if(!$(this).is(':checked')) { $(this).parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});} });
 	}
-
+	
 //		"bLengthChange": false,
 //		"bAutoWidth": false
 	});
 	
+	var searchInputBox = $("." + searchBarParentContainerDIVClass).find("input[type=text]");
+	
+	searchInputBox.after("<span id='reset-search' title='Clear Search query'>X</span>");
+	
+	$("#reset-search").live('click', function() {
+		entityListTable.fnFilter("");
+	});
 
 	bindPaginatedTabsToEvents();
 	
@@ -837,18 +846,22 @@ function setEntityLevel(){
 }
 
 function getEntityVisMode(jsonData){
-	$.each(jsonData, function(index, val){
+	
+	$.each(jsonData, function(index, val) {
 		if (val.visMode == "SCHOOL" || val.visMode == "UNIVERSITY" || val.visMode == "DEPARTMENT"){
 			entityLevel = "Organizations";
-		}else {
+		} else {
 			entityLevel = "People";
 		}
 		return;
 	});
+	
+	/* To provide graceful degradation set entity level to a default error message.*/
+	entityElevel = "ENTITY LEVEL UNDEFINED ERROR";
 }
 
 function toCamelCase(string){
-	return (string.substr(0,1).toUpperCase() + string.substr(1, string.length-1).toLowerCase());
+	return string ? (string.substr(0,1).toUpperCase() + string.substr(1, string.length-1).toLowerCase()) : "";
 }
 
 function getSize(map){
