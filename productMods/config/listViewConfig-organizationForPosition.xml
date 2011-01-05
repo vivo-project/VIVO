@@ -9,22 +9,27 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName)
+        SELECT DISTINCT ?subclass ?position (afn:localname(?position) AS ?positionName)
                         ?positionTitle ?person ?personName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?position } 
             OPTIONAL { GRAPH ?g2 { ?position core:positionForPerson ?person }
-                       GRAPH ?g3 { ?person rdfs:label ?personName }
-            }
-            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
-            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                       GRAPH ?g3 { ?person rdfs:label ?personName }  
+            }                 
+            OPTIONAL { GRAPH ?g4 { ?position a ?subclass }
+                      GRAPH ?g5 { ?subclass rdfs:subClassOf core:Position }
+                      FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                              ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+            }         
+            OPTIONAL { GRAPH ?g6 { ?position rdfs:label ?positionTitle } }
+            OPTIONAL { GRAPH ?g7 { ?position core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
                                               ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g7 { ?dateTimeInterval core:end ?dateTimeEndValue .   
+                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:end ?dateTimeEndValue .   
                                               ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                        }
             }
-        } ORDER BY DESC(?dateTimeStart) DESC(?dateTimeEnd) ?personName
+        } ORDER BY ?subclass ?personName
     </query>
     
     <template>propStatement-organizationForPosition.ftl</template>
