@@ -14,14 +14,15 @@
             GRAPH ?g1 { ?subject ?property ?authorship } 
             OPTIONAL { GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
                        GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
-                     }
-            OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
-                       GRAPH ?g5 { ?infoResource a ?subclass } 
-                       FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                               ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
-                     }                                            
-            OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue . 
-                                   ?dateTimeValue core:dateTime ?dateTime . } }                
+                       OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
+                                  GRAPH ?g5 { ?infoResource a ?subclass } 
+                                  FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                                          ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+                       }                                            
+                       OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue . 
+                                   ?dateTimeValue core:dateTime ?dateTime . } 
+                       } 
+            }                                                           
         } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
     </query>
     

@@ -14,14 +14,16 @@
             GRAPH ?g1 { ?subject ?property ?position } 
             OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
                        GRAPH ?g3 { ?org rdfs:label ?orgName }
-                     }
+            }
             OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
-            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval . 
-                                   ?dateTimeInterval core:start ?dateTimeStartValue .
-                                   ?dateTimeStartValue core:dateTime ?dateTimeStart } }
-            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval . 
-                                   ?dateTimeInterval core:end ?dateTimeEndValue .
-                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd } }
+            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g7 { ?dateTimeInterval core:end ?dateTimeEndValue .   
+                                              ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                       }
+            }
         } ORDER BY DESC(?dateTimeStart) DESC(?dateTimeEnd) ?orgName
     </query>
     

@@ -12,20 +12,21 @@
         SELECT DISTINCT ?edTraining (afn:localname(?edTraining) AS ?edTrainingName) ?org ?orgName 
                         ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime 
             WHERE {
-
                 GRAPH ?g1 { ?subject ?property ?edTraining }
                 OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org .                                   
-                                       ?org rdfs:label ?orgName . } }
-                OPTIONAL { GRAPH ?g3 { ?edTraining core:degreeEarned ?degree } }
-                OPTIONAL { GRAPH ?g4 { ?degree rdfs:label ?degreeName } }
-                OPTIONAL { GRAPH ?g5 { ?degree core:abbreviation ?degreeAbbr } }
+                                       ?org rdfs:label ?orgName . } 
+                }
+                OPTIONAL { GRAPH ?g3 { ?edTraining core:degreeEarned ?degree } 
+                           OPTIONAL { GRAPH ?g4 { ?degree rdfs:label ?degreeName } }
+                           OPTIONAL { GRAPH ?g5 { ?degree core:abbreviation ?degreeAbbr } }
+                }
                 OPTIONAL { GRAPH ?g6 { ?edTraining core:majorField ?majorField } }
                 OPTIONAL { GRAPH ?g7 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
                 OPTIONAL { GRAPH ?g8 { ?edTraining core:supplementalInformation ?info } }
                 OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeValue ?dateTimeValue . 
-                                       ?dateTimeValue core:dateTime ?dateTime } }    
-                              
-            }  ORDER BY DESC(?dateTime)  
+                                       ?dateTimeValue core:dateTime ?dateTime } 
+                }                                  
+         }  ORDER BY DESC(?dateTime)  
     </query>
     
     <template>propStatement-educationalTraining.ftl</template>

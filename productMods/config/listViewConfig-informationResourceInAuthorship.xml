@@ -15,7 +15,7 @@
             OPTIONAL { GRAPH ?g2 { ?authorship core:authorRank ?rank } } 
             OPTIONAL { GRAPH ?g3 { ?authorship core:linkedAuthor ?person }                      
                        GRAPH ?g4 { ?person rdfs:label ?personName }  
-                     }                             
+            }                             
         } ORDER BY ?rank ?personName   
     </query>
     
