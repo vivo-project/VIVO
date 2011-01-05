@@ -32,7 +32,7 @@
 
 <c:url var="jquery" value="/js/jquery.js"/>
 <c:url var="adobeFlashDetector" value="/js/visualization/coauthorship/AC_OETags.js" />
-<c:url var="googleVisualizationAPI" value="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D"/>
+<c:url var="googleVisualizationAPI" value="https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D"/>
 <c:url var="coAuthorShipJavaScript" value="/js/visualization/personlevel/person_level.js" />
 
 <script type="text/javascript" src="${adobeFlashDetector}"></script>
