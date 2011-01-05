@@ -18,7 +18,7 @@ http://vivoweb.org/ontology/core#AwardOrHonor	http://vivoweb.org/ontology/core#A
 http://vivoweb.org/ontology/core#conferringOrganization	http://vivoweb.org/ontology/core#awardConferredBy	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#awardSponsoredBy		No	Delete	not set
 http://vivoweb.org/ontology/core#sponsorsAward		No	Delete	not set
-http://vivoweb.org/ontology/core#AbstractInformation		No	Delete	not set
+http://vivoweb.org/ontology/core#AbstractInformation		No	Delete	Delete
 http://vivoweb.org/ontology/core#reviewedDocumentTitle		No	Delete	not set
 http://vivoweb.org/ontology/core#count		No	Delete	not set
 http://vivoweb.org/ontology/core#displayOrder		No	Delete	not set
@@ -58,6 +58,6 @@ http://vivoweb.org/ontology/core#endDateTime		No	Delete	Delete
 http://vivoweb.org/ontology/core#endDate		No	Delete	Delete
 http://vivoweb.org/ontology/core#endYearMonth		No	Delete	Delete
 http://vivoweb.org/ontology/core#endTime		No	Delete	Delete
-http://vivoweb.org/ontology/core#TimeInterval		No	Delete	not set
+http://vivoweb.org/ontology/core#TimeInterval		No	Delete	Delete
 http://vivoweb.org/ontology/core#timeIntervalFor		No	Delete	not set
 http://vivoweb.org/ontology/core#hasTimeInterval		No	Delete	not set

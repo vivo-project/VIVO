@@ -23,4 +23,10 @@ Construct {
      _:dti core:dateTimeIntervalFor ?thing .
 } where {
      ?thing core:startDate ?theStartDate .
+     
+     Optional {
+       ?thing core:endDate ?theEndDate 
+     }
+     
+     FILTER (!bound(?theEndDate))
 }

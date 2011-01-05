@@ -14,9 +14,19 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     ?thing core:startYear ?theStartYear .
-     ?thing core:endYear ?theEndYear .
+     _:edtv a core:DateTimeValue .
+     _:edtv core:dateTime ?theEndDate .
+     _:edtv core:dateTimePrecision core:yearMonthDayPrecision .
+     _:dti a core:DateTimeInterval .
+     _:dti core:end _:edtv .
+     ?thing core:dateTimeInterval _:dti .
+      _:dti core:dateTimeIntervalFor ?thing .
 } where {
-     ?thing core:startYear ?theStartYear .
-     ?thing core:endYear ?theEndYear .
+     ?thing core:endDate ?theEndDate .
+     
+     Optional {
+       ?thing core:startDate ?theStartDate 
+     }
+     
+     FILTER (!bound(?theStartDate))
 }
