@@ -9,6 +9,8 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
 <%@page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -19,6 +21,26 @@
 	WebappDaoFactory wdf = vreq.getWebappDaoFactory();
 	vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior	  
 %>
+
+<%-- Define predicates used in n3 assertions and sparql queries --%>
+
+<c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
+<c:set var="startYearPred" value="${vivoCore}startYear" />
+
+<c:set var="endYearPred" value="${vivoCore}endYear" />
+<c:set var="positionInOrgPred" value="${vivoCore}positionInOrganization" />
+<c:set var="orgForPositionPred" value="${vivoCore}organizationForPosition" />
+
+<c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
+<c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
+<c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
+<c:set var="edToDateTime" value="${vivoCore}dateTimeInterval"/>
+
+<c:set var="positionToInterval" value="${vivoCore}dateTimeInterval"/>
+<c:set var="intervalType" value="${vivoCore}DateTimeInterval"/>
+<c:set var="intervalToStart" value="${vivoCore}start"/>
+<c:set var="intervalToEnd" value="${vivoCore}end"/>
+
 
 <v:jsonset var="personClassUri">http://xmlns.com/foaf/0.1/Person</v:jsonset>
 
@@ -39,21 +61,6 @@
 	?positionUri <http://www.w3.org/2000/01/rdf-schema#label> ?title. 
 </v:jsonset>
 
-<v:jsonset var="startYearExisting" >      
-      SELECT ?startYearExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYearExisting }
-</v:jsonset>
-<v:jsonset var="startYearAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#startYear> ?startYear .
-</v:jsonset>
-
-<v:jsonset var="endYearExisting" >      
-      SELECT ?endYearExisting WHERE {  
-      	?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYearExisting }
-</v:jsonset>
-<v:jsonset var="endYearAssertion" >
-      ?positionUri <http://vivoweb.org/ontology/core#endYear> ?endYear .
-</v:jsonset>
 
 <%--  Note there is really no difference in how things are set up for an object property except
       below in the n3ForEdit section, in whether the ..Existing variable goes in SparqlForExistingLiterals
@@ -62,6 +69,7 @@
 	SELECT ?existingPersonUri WHERE {
 		?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?existingPersonUri }
 </v:jsonset>
+
 <v:jsonset var="personUriAssertion" >      
 	?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?personUri .
 	?personUri   <http://vivoweb.org/ontology/core#personInPosition>  ?positionUri .
@@ -75,6 +83,82 @@
     ?positionUri rdf:type               core:Position .    
 </v:jsonset>
 
+<v:jsonset var="n3ForStart">
+    ?positionUri      <${positionToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToStart}> ?startNode .    
+    ?startNode  <${type}> <${dateTimeValueType}> .
+    ?startNode  <${dateTimeValue}> ?startField.value .
+    ?startNode  <${dateTimePrecision}> ?startField.precision .
+</v:jsonset>
+
+<v:jsonset var="n3ForEnd">
+    ?positionUri      <${positionToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToEnd}> ?endNode .
+    ?endNode  <${type}> <${dateTimeValueType}> .
+    ?endNode  <${dateTimeValue}> ?endField.value .
+    ?endNode  <${dateTimePrecision}> ?endField.precision .
+</v:jsonset>
+
+ <v:jsonset var="existingIntervalNodeQuery" >  
+    SELECT ?existingIntervalNode WHERE {
+          ?positionUri <${positionToInterval}> ?existingIntervalNode .
+          ?existingIntervalNode <${type}> <${intervalType}> . }
+</v:jsonset>
+ 
+ <v:jsonset var="existingStartNodeQuery" >  
+    SELECT ?existingStartNode WHERE {
+      ?positionUri <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?existingStartNode . 
+      ?existingStartNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingStartDateQuery" >  
+    SELECT ?existingDateStart WHERE {
+     ?positionUri <${positionToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToStart}> ?startNode .
+     ?startNode <${type}> <${dateTimeValueType}> .
+     ?startNode <${dateTimeValue}> ?existingDateStart . }
+</v:jsonset>
+
+<v:jsonset var="existingStartPrecisionQuery" >  
+    SELECT ?existingStartPrecision WHERE {
+      ?positionUri <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?startNode .
+      ?startNode <${type}> <${dateTimeValueType}> .          
+      ?startNode <${dateTimePrecision}> ?existingStartPrecision . }
+</v:jsonset>
+
+ <v:jsonset var="existingEndNodeQuery" >  
+    SELECT ?existingEndNode WHERE {
+      ?positionUri <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?existingEndNode . 
+      ?existingEndNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingEndDateQuery" >  
+    SELECT ?existingEndDate WHERE {
+     ?positionUri <${positionToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToEnd}> ?endNode .
+     ?endNode <${type}> <${dateTimeValueType}> .
+     ?endNode <${dateTimeValue}> ?existingEndDate . }
+</v:jsonset>
+
+<v:jsonset var="existingEndPrecisionQuery" >  
+    SELECT ?existingEndPrecision WHERE {
+      ?positionUris <${positionToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?endNode .
+      ?endNode <${type}> <${dateTimeValueType}> .          
+      ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
+</v:jsonset>
+
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
@@ -85,9 +169,12 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}", "${startYearAssertion}" ],
-    "n3optional"    : [ "${endYearAssertion}" ],
-    "newResources"  : { "positionUri" : "${defaultNamespace}" },
+    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}"],
+    "n3optional"    : [ "${n3ForStart}" , "${n3ForEnd}" ],
+    "newResources"  : { "positionUri" : "${defaultNamespace}",
+                        "intervalNode" : "${defaultNamespace}",
+                        "startNode" : "${defaultNamespace}",
+                        "endNode" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "personUri" ],
@@ -97,11 +184,16 @@
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "title"              : "${titleExisting}",
-        "startYear"          : "${startYearExisting}",
-        "endYear"            : "${endYearExisting}",
+        "startField.value"   : "${existingStartDateQuery}",
+        "endField.value"     : "${existingEndDateQuery}"
     },
     "sparqlForExistingUris" : {
-        "personUri"   : "${personUriExisting}"
+        "personUri"   : "${personUriExisting}",
+        "intervalNode"      : "${existingIntervalNodeQuery}", 
+        "startNode"         : "${existingStartNodeQuery}",
+        "endNode"           : "${existingEndNodeQuery}",
+        "startField.precision": "${existingStartPrecisionQuery}",
+        "endField.precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "title" : {
@@ -126,27 +218,27 @@
          "rangeLang"        : "",
          "assertions"       : [ "${personUriAssertion}" ]
       },
-      "startYear" : {
+      "startField" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:http://www.w3.org/2001/XMLSchema#gYear"],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYear",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : ["${n3ForStart}"]
       },
-      "endYear" : {
+      "endField" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:http://www.w3.org/2001/XMLSchema#gYear" ],
+         "validators"       : [],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "http://www.w3.org/2001/XMLSchema#gYear",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
+         "assertions"       : ["${n3ForEnd}"]
       }
   }
 }
@@ -157,8 +249,14 @@
 	if (editConfig == null) {
 		editConfig = new EditConfiguration(
 				(String) request
-				.getAttribute("editjson"));
+				.getAttribute("editjson"));		
 		EditConfiguration.putConfigInSession(editConfig,session);
+		
+		//setup date time edit elements
+        Field startField = editConfig.getField("startField");
+        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.YEAR.uri()));        
+        Field endField = editConfig.getField("endField");
+        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.YEAR.uri()));
 	}
 	
 	Model model = (Model) application.getAttribute("jenaOntModel");
@@ -187,8 +285,8 @@
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="title" id="title" size="30"/>
 	<v:input type="select" label="person" id="personUri"  />
-    <v:input type="text" label="start year (YYYY)" id="startYear" size="4"/>
-    <v:input type="text" label="end year (YYYY)" id="endYear" size="4"/>
+	<v:input id="startField"  label="Start Year <span class='hint'>(YYYY)</span>" />
+    <v:input id="endField" label="End Year <span class='hint'>(YYYY)</span>" />    
     <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="true"/></p>
 </form>
 
