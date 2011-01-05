@@ -47,7 +47,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
-<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 
 <%!
 public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addRoleToPersonTwoStage.jsp");
@@ -144,8 +146,20 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
+<c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
+
+<c:set var="startYearPred" value="${vivoCore}startYear" />
+<c:set var="endYearPred" value="${vivoCore}endYear" />
+<c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
+<c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
+<c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
+
+<c:set var="roleToInterval" value="${vivoCore}dateTimeInterval"/>
+<c:set var="intervalType" value="${vivoCore}DateTimeInterval"/>
+<c:set var="intervalToStart" value="${vivoCore}start"/>
+<c:set var="intervalToEnd" value="${vivoCore}end"/>
 
 <%-- label and type required if we are doing an add or a repair, but not an edit --%> 
 <c:set var="labelRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
@@ -207,6 +221,24 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	?role  ?inverseRolePredicate ?person.
 </v:jsonset>
 
+<v:jsonset var="n3ForStart">
+    ?role      <${roleToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToStart}> ?startNode .    
+    ?startNode  <${type}> <${dateTimeValueType}> .
+    ?startNode  <${dateTimeValue}> ?startField.value .
+    ?startNode  <${dateTimePrecision}> ?startField.precision .
+</v:jsonset>
+
+<v:jsonset var="n3ForEnd">
+    ?role      <${roleToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToEnd}> ?endNode .
+    ?endNode  <${type}> <${dateTimeValueType}> .
+    ?endNode  <${dateTimeValue}> ?endField.value .
+    ?endNode  <${dateTimePrecision}> ?endField.precision .
+</v:jsonset>
+
 <v:jsonset var="activityLabelQuery">
   PREFIX core: <${vivoCore}>
   PREFIX rdfs: <${rdfs}> 
@@ -240,6 +272,64 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   }
 </v:jsonset>
 
+ <v:jsonset var="existingIntervalNodeQuery" >  
+    SELECT ?existingIntervalNode WHERE {
+          ?role <${roleToInterval}> ?existingIntervalNode .
+          ?existingIntervalNode <${type}> <${intervalType}> . }
+</v:jsonset>
+ 
+ <v:jsonset var="existingStartNodeQuery" >  
+    SELECT ?existingStartNode WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?existingStartNode . 
+      ?existingStartNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingStartDateQuery" >  
+    SELECT ?existingDateStart WHERE {
+     ?role <${roleToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToStart}> ?startNode .
+     ?startNode <${type}> <${dateTimeValueType}> .
+     ?startNode <${dateTimeValue}> ?existingDateStart . }
+</v:jsonset>
+
+<v:jsonset var="existingStartPrecisionQuery" >  
+    SELECT ?existingStartPrecision WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?startNode .
+      ?startNode <${type}> <${dateTimeValueType}> .          
+      ?startNode <${dateTimePrecision}> ?existingStartPrecision . }
+</v:jsonset>
+
+ <v:jsonset var="existingEndNodeQuery" >  
+    SELECT ?existingEndNode WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?existingEndNode . 
+      ?existingEndNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingEndDateQuery" >  
+    SELECT ?existingEndDate WHERE {
+     ?role <${roleToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToEnd}> ?endNode .
+     ?endNode <${type}> <${dateTimeValueType}> .
+     ?endNode <${dateTimeValue}> ?existingEndDate . }
+</v:jsonset>
+
+<v:jsonset var="existingEndPrecisionQuery" >  
+    SELECT ?existingEndPrecision WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?endNode .
+      ?endNode <${type}> <${dateTimeValueType}> .          
+      ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
+</v:jsonset>
+
 <c:set var="editjson" scope="request">
 {
     "formUrl" : "${formUrl}",
@@ -250,11 +340,14 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${n3ForStart}", "${roleLabelAssertion}" ],        
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForEnd}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
-                        "roleActivity" : "${defaultNamespace}" },
+                        "roleActivity" : "${defaultNamespace}",
+                        "intervalNode" : "${defaultNamespace}",
+                        "startNode" : "${defaultNamespace}",
+                        "endNode" : "${defaultNamespace}" },
 
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
@@ -263,8 +356,21 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYear":"${startYearQuery}", "endYear":"${endYearQuery}" },
-    "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" , "roleActivityType":"${activityTypeQuery}" },
+    "sparqlForExistingLiterals" : { 
+        "activityLabel":"${activityLabelQuery}",
+        "roleLabel":"${roleLabelQuery}",
+        "startField.value"   : "${existingStartDateQuery}",
+        "endField.value"     : "${existingEndDateQuery}" 
+    },               
+    "sparqlForExistingUris" : { 
+        "roleActivity":"${activityQuery}" , 
+        "roleActivityType":"${activityTypeQuery}" ,
+        "intervalNode"      : "${existingIntervalNodeQuery}", 
+        "startNode"         : "${existingStartNodeQuery}",
+        "endNode"           : "${existingEndNodeQuery}",
+        "startField.precision": "${existingStartPrecisionQuery}",
+        "endField.precision"  : "${existingEndPrecisionQuery}"
+    },
     "fields" : {
       "activityLabel" : {
          "newResource"      : "false",
@@ -310,27 +416,27 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
          "rangeLang"        : "",
          "assertions"       : ["${roleLabelAssertion}" ]
       },
-      "startYear" : {
+      "startField" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : [ "${n3ForStart}" ]
       },
-      "endYear" : {
+      "endField" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
+         "assertions"       : ["${n3ForEnd}" ]
       }
   }
 }
@@ -341,9 +447,21 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     if (editConfig == null) {
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
+        
+      //setup date time edit elements
+        Field startField = editConfig.getField("startField");
+        startField.setEditElement(
+                new DateTimeWithPrecision(startField, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.MONTH.uri()));        
+        Field endField = editConfig.getField("endField");
+        endField.setEditElement(
+                new DateTimeWithPrecision(endField, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.YEAR.uri()));
     }
     
-    editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
+    editConfig.addValidator(new StartYearBeforeEndYear("startField.value","endYear.value") ); 
 
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -423,12 +541,12 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
-	                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
+	                <v:input id="startField" label="Year ${requiredHint} ${yearHint}" size="7"/>            
 	            </c:when>
 	            <c:otherwise>
 	                <h4 class="label">Years of Participation in ###</h4>    
-	                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
-	                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
+	                <v:input id="startField" label="Start Year ${requiredHint} ${yearHint}" size="7"/>   
+	                <v:input id="endField" label="End Year ${yearHint}" size="7"/>             
 	            </c:otherwise>
 	        </c:choose>
 	 
