@@ -31,3 +31,6 @@ themes/wilma/css/pictos.css
 # Raphael plugin for JQuery.
 themes/wilma/js/jquery_plugins/raphael/pie.js
 themes/wilma/js/jquery_plugins/raphael/raphael.js
+
+# 3rd-party transform from JMeter distribution
+utilities/load-testing/jmeter-results-report.xsl
