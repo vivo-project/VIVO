@@ -6,7 +6,7 @@
 
 span.incomplete-data-holder,
 #incomplete-data {
-  padding: 3px;
+  padding: 5px;
   font-size: 0.8em;
   color: #444;
   border: dotted 1px #eee;
@@ -46,6 +46,14 @@ span.incomplete-data-holder,
 	padding-left: 0px !important;
 	padding-bottom: 0px !important;
 }
+
+.collaboratorship-link h3 a {
+    color: #2485AE;
+    font-size: 1em !important;
+    text-decoration: none;
+	
+}
+
 
 #coauthorship_link_container,
 #coinvestigator_link_container {

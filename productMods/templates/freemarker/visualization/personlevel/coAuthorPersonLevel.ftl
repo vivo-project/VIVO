@@ -52,11 +52,9 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 <script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
 
 
-<#assign coAuthorStyle = "${urls.base}/css/visualization/personlevel/coauthor_style.css" />
 <#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />
 <#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
 
-<link href="${coAuthorStyle}" rel="stylesheet" type="text/css" />
 <link href="${pageStyle}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${vizStyle}" />
 
@@ -92,53 +90,57 @@ $(document).ready(function(){
 	<div id="ego_profile">
 	
 		<#-- Label -->
-			<h2 style="width:20%"><span id="ego_label" class="author_name"></span></h2>
+		<h2><span id="ego_label" class="author_name"></span></h2>
 	
 		<#-- Moniker-->
-			<em id="ego_moniker" class="moniker"></em>
+		<em id="ego_moniker" class="moniker"></em>
 
-		<div class = "toggle_visualization">
-			<div style="float:left;margin-top: 5%;margin-right: 10px; height:100%;"><img src="${coInvestigatorIcon}"/></div>
-    		<div><h3>Co-Investigator Network <br/><a class="view-all-style" href="${coprincipalinvestigatorURL}">View <span class= "pictos-arrow-10">4</span></a></h3></div>
-		</div>		
+		<span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}">Back to Profile</a>	
+	
+	</div>
+	
+	<div class = "toggle_visualization">
+	    <div id="coinvestigator_link_container">
+	    	<div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}"><img src="${coInvestigatorIcon}" /></a></div>
+	    	<div class="collaboratorship-link">
+	    		<h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3><a class="view-all-style" href="${coprincipalinvestigatorURL}">View <span class= "pictos-arrow-10">4</span></a>
+			</div>
+		</div>
+	</div>
+	
+	<div style="clear:both;"></div>
+	
+	<#if (numOfAuthors?? && numOfAuthors > 0) >
+	
+		<div  class="sub_headings"><h3>Co-Author Network </h3></div>
 		
-		<div style=" width: 20%; margin-top:25px;"><span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}" style="color:#171717;text-decoration:none;">Back to Profile</a></div>	
-	
-		<div style="clear:both;"></div>
-	
-			<#if (numOfAuthors?? && numOfAuthors > 0) >
-			
-				<div  class="sub_headings"><h2>Co-Author Network </h2></div>
-				
-				<#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
-					   	<div class = "fileDownloadPlaceHolder"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a></div>
-				<#else>
+		<#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
+			   	<div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a></div>
+		<#else>
 
-				        <#if numOfAuthors?? && numOfAuthors <= 0 >
-				        	<#assign authorsText = "multi-author" />
-				        </#if>
-				        
-			        	<span id="no_coauthorships">Currently there are no ${authorsText!} papers for 
-					    	<a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> 
-					    	in the VIVO database.
-				    	</span>				        
-				</#if>
-			
-			<#else>
-			
-				<span id="no_coauthorships">Currently there are no papers for 
-					<a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the 
-					VIVO database.
-				</span>
-			
-			</#if>
-			
-	</div>		
+		        <#if numOfAuthors?? && numOfAuthors <= 0 >
+		        	<#assign authorsText = "multi-author" />
+		        </#if>
+		        
+	        	<div id="no_coauthorships">Currently there are no ${authorsText!} papers for 
+			    	<a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> 
+			    	in the VIVO database.
+		    	</div>				        
+		</#if>
 	
+	<#else>
+	
+		<span id="no_coauthorships">Currently there are no papers for 
+			<a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the 
+			VIVO database.
+		</span>
+	
+	</#if>
+			
 	<#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) >
 	
 		<div id="bodyPannel">
-			<div id="visPanel" style="float: right; width: 600px;">
+			<div id="visPanel">
 				<script language="JavaScript" type="text/javascript">
 					<!--
 					renderCollaborationshipVisualization();
@@ -146,14 +148,16 @@ $(document).ready(function(){
 				</script>
 			</div>
 			<div id="dataPanel">
-				<h4 id ="profileTitle"> <b>Profile</b></h4>	
+				<h4 id ="profileTitle">Profile</h4>	
+				
+				<div id="data-panel-content">
 				<div id="profileImage" class="thumbnail"></div>
 			
-				<div><h2><span id="authorName" class="neutral_author_name">&nbsp;</span></h2></div>
+				<h4><span id="authorName" class="neutral_author_name">&nbsp;</span></h4>
 				
-				<div class="italicize"><span id="profileMoniker" class="author_moniker"></span></div>
+				<em id="profileMoniker" class="moniker"></em>
 				<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
-				<br />
+
 				<div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
 				<span class="author_stats_text">Publication(s)</span></div>
 				<div class="author_stats" id="num_authors"><span class="numbers" style="width: 40px;" id="coAuthors"></span>
@@ -165,20 +169,21 @@ $(document).ready(function(){
 				&nbsp;&nbsp;<span>Last Publication</span></div>
 				<div id="incomplete-data">Note: This information is based solely on publications which have been loaded into the VIVO system. 
 				This may only be a small sample of the person's total work. </div>
+				</div>
 			</div>
 		</div>
 	</#if>
 	
 	<#-- Sparkline -->
-	<div style="width: 67%; height: 175px; margin-left: 33%;">
+	<div id="sparkline-container">
 		
 		<#assign displayTable = false />
 		
 		<#assign sparklineVO = egoPubSparklineVO />
-		<#include "personPublicationSparklineContent.ftl">
+		<div id="publication-count-sparkline-include"><#include "personPublicationSparklineContent.ftl"></div>
 
 		<#assign sparklineVO = uniqueCoauthorsSparklineVO />
-		<#include "coAuthorshipSparklineContent.ftl">
+		<div id="coauthor-count-sparkline-include"><#include "coAuthorshipSparklineContent.ftl"></div>
 	</div>	
 	
 	<#if (numOfAuthors?? && numOfAuthors > 0) >

@@ -50,11 +50,9 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 <script type="text/javascript" src="${coInvestigatorPersonLevelJavaScript}"></script>
 <script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
 
-<#assign coInvestigatorStyle = "${urls.base}/css/visualization/personlevel/coinvestigator_style.css" />
 <#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />
 <#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
 
-<link href="${coInvestigatorStyle}" rel="stylesheet" type="text/css" />
 <link href="${pageStyle}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${vizStyle}" />
 
@@ -90,71 +88,75 @@ $(document).ready(function(){
 	<div id="ego_profile">
 			
 		<#-- Label -->
-			<h2 style="width:20%"><span id="ego_label" class="investigator_name"></span></h2>
+			<h2><span id="ego_label" class="investigator_name"></span></h2>
 	
 		<#-- Moniker-->
 			<em id="ego_moniker" class="moniker"></em>
+			
+		<span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}">Back to Profile</a>
 		
-		<div class = "toggle_visualization">
-			<div style="float:left;margin-top: 5%;margin-right: 10px; height:100%;"><img src="${coAuthorIcon}"/></div>
-    		<div><h3>Co-Author Network <br/><a class="view-all-style" href="${coauthorshipURL}">View <span class= "pictos-arrow-10">4</span></a></h3></div>
-		</div>
-		
-		<div style=" width: 20%; margin-top:25px;"><span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}" style="color:#171717;text-decoration:none;">Back to Profile</a></div>	
-		
+	</div>
 	
-		<div style="clear:both;"></div>
+	<div class = "toggle_visualization">
+		<div id="coauthorship_link_container">
+	    	<div class="collaboratorship-icon"><a href="${coauthorshipURL}"><img src="${coAuthorIcon}" /></a></div>
+	    	<div class="collaboratorship-link">
+	    		<h3><a href="${coauthorshipURL}">Co-Author Network</a></h3><a class="view-all-style" href="${coauthorshipURL}">View <span class= "pictos-arrow-10">4</span></a>
+			</div>
+	    </div>
+	</div>
+		
+	<div style="clear:both;"></div>
 	
-			<#if (numOfInvestigators?? && numOfInvestigators > 0) >
-			
-				<div class="sub_headings"><h2 >Co-Investigator Network </h2></div>
-				
-				<#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
-					   	<div class = "fileDownloadPlaceHolder"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a></div>
-				<#else>
+	<#if (numOfInvestigators?? && numOfInvestigators > 0) >
+	
+		<div class="sub_headings"><h3 >Co-Investigator Network </h3></div>
+		
+		<#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
+			   	<div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a></div>
+		<#else>
 
-				        <#if numOfInvestigators?? && numOfInvestigators <= 0 >
-				        	<#assign investigatorsText = "multi-investigator" />
-				        </#if>
-				        
-			        	<span id="no_coinvestigations">Currently there are no ${investigatorsText!} grants for 
-					    	<a href="${egoVivoProfileURL}"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> 
-					    	in the VIVO database.
-				    	</span>				        
-				</#if>
+	        <#if numOfInvestigators?? && numOfInvestigators <= 0 >
+	        	<#assign investigatorsText = "multi-investigator" />
+	        </#if>
+	        
+        	<span id="no_coinvestigations">Currently there are no ${investigatorsText!} grants for 
+		    	<a href="${egoVivoProfileURL}"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> 
+		    	in the VIVO database.
+	    	</span>				        
+		</#if>
+	
+	<#else>
+	
+		<span id="no_coinvestigations">Currently there are no grants for 
+			<a href="${egoVivoProfileURL}"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> in the 
+			VIVO database.
+		</span>
+	
+	</#if>
 			
-			<#else>
-			
-				<span id="no_coinvestigations">Currently there are no grants for 
-					<a href="${egoVivoProfileURL}"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> in the 
-					VIVO database.
-				</span>
-			
-			</#if>
-			
-	</div>		
-
-
-
 	<#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) >
 	
 		<div id="bodyPannel">
-			<div id="visPanel" style="float: right; width: 600px;">
+			<div id="visPanel">
 				<script language="JavaScript" type="text/javascript">
 					<!--
-					renderCoInvestigationVisualization();
+					renderCollaborationshipVisualization();
 					//-->
 				</script>
 			</div>
 			<div id="dataPanel">
-				<h4 id ="profileTitle"> <b>Profile</b></h4>	
+				<h4 id ="profileTitle">Profile</h4>
+					
+				<div id="data-panel-content">
 				<div id="profileImage" class="thumbnail"></div>
 			
-				<div><h2><span id="investigatorName" class="neutral_investigator_name">&nbsp;</span></h2></div>
+				<h4><span id="investigatorName" class="neutral_investigator_name">&nbsp;</span></h4>
 				
-				<div class="italicize"><span id="profileMoniker" class="investigator_moniker"></span></div>
+				<em id="profileMoniker" class="moniker"></em>
+				
 				<div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coInvestigationVisUrl">Co-investigator network</a></div> 
-				<br />
+
 				<div class="investigator_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
 				<span class="investigator_stats_text">Grant(s)</span></div>
 				<div class="investigator_stats" id="num_investigators"><span class="numbers" style="width: 40px;" id="coInvestigators"></span>
@@ -166,18 +168,21 @@ $(document).ready(function(){
 				&nbsp;&nbsp;<span>Last Grant</span></div>
 				<div id="incomplete-data">Note: This information is based solely on grants which have been loaded into the VIVO system. 
 				This may only be a small sample of the person's total work. </div>
+				</div>
 			</div>
 		</div>
 	</#if>
 
-
 	<#-- Sparkline -->
-	<div style="width: 67%; height: 175px; margin-left: 33%;">
+	<div id="sparkline-container">
+		
+		<#assign displayTable = false />
+		
 		<#assign sparklineVO = egoGrantSparklineVO />
-		<#include "personGrantSparklineContent.ftl">
+		<div id="grant-count-sparkline-include"><#include "personGrantSparklineContent.ftl"></div>
 
 		<#assign sparklineVO = uniqueCoInvestigatorsSparklineVO />
-		<#include "coInvestigationSparklineContent.ftl">
+		<div id="coinvestigator-count-sparkline-include"><#include "coInvestigationSparklineContent.ftl"></div>
 	</div>	
 	
 	<#if (numOfInvestigators?? && numOfInvestigators > 0) >

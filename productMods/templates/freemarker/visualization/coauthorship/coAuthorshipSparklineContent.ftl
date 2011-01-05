@@ -12,7 +12,7 @@
     <#assign sparklineContainerID = visContainerID + "_spark"> 
 </#if>
 
-<div class="staticPageBackground" style="width: 50%; float: right;">
+<div class="staticPageBackground">
     <div id="${visContainerID}">
         <script type="text/javascript">
         
@@ -83,7 +83,7 @@
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
-                                        + ' <a href="${sparklineVO.downloadDataLink}" class="inline_href">(.CSV File)</a> ';
+                                        + ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
                                         
                  </#if>
          
@@ -162,11 +162,11 @@
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Couauthor Counts per Year -->
-        <p>
+
             <#if displayTable?? && displayTable>
         
 		        <p>	
-					<#assign tableID = "sparkline_data_table" />
+					<#assign tableID = "coauthors_sparkline_data_table" />
 					<#assign tableCaption = "Unique Co-Authors per year " />
 					<#assign tableActivityColumnName = "Count" />
 					<#assign tableContent = sparklineVO.yearToActivityCount />
@@ -179,7 +179,6 @@
 		        </p>
         
 	        </#if>
-        
-        </p>
+
     </#if>
 </div>

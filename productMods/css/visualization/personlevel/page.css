@@ -8,33 +8,7 @@ a.no_href_styles {
 	border: 0;
 }
 
-/*.vis_stats {*/
-	/*width: 760px;*/
-/*	margin: 0;
-	padding-left:10px;
-	padding-top:10px;
-	background: #fff;
-	margin-left: 35%;
-	clear: right;
-}
-*/
-/*.vis-tables {*/
-/*	width: 33%; */
-/*	padding: 10px;
-	margin: 10px;
-	background-color: #FFF;
-	border: 1px solid #ddebf1;
-	float:left;
-	font-size: 0.8em;
-}
-*/
-
 .vis_stats {
-	/*width: 760px;*/
-/*	margin: 0;
-	margin-left: 35%; 
-	padding-left:10px;*/
-	padding-top:10px;
 	background: #fff;
 	clear: right;
 	width:67%;
@@ -42,15 +16,13 @@ a.no_href_styles {
 }
 
 .vis-tables {
-/*	width: 33%; */
 	padding: 10px;
-	margin: 10px;
 	background-color: #FFF;
 	border: 1px solid #ddebf1;
 	float:left;
 	font-size: 0.8em;
 	width: 44%;
-	margin-left: 0px;
+	margin: 0 10px 10px 0;
 }
 
 
@@ -70,23 +42,10 @@ p.datatable {
 	cursor: pointer;
 }
 
-/*
-
-.datatable table thead th {
-	color: #4C4C4C;
-	background-color: white;
+#sparkline-container {
+	margin-left: 33%;
+    width: 67%;
 }
-
-.datatable table caption {
-	color: #16234c;
-	margin: 0;
-	padding: 0;
-	font-size: 14px;
-	background-color: white;
-}
-
-*/
-
 
 #profileImage img{
 	width: 90px;
@@ -106,16 +65,19 @@ p.datatable {
 	vertical-align: bottom;
 }
 
+.investigator_name,
 .author_name {
 	color: #13968c;
 	font-weight: bold;
 }
 
+.neutral_investigator_name,
 .neutral_author_name {
 	color: #13968c;
 	font-weight: bold;
 }
 
+.investigator_moniker,
 .author_moniker {
 	color: #9C9C9C;
 }
@@ -123,25 +85,25 @@ p.datatable {
 .sub_headings {
 	color: #121b3c;
 	padding-top: 10px;
-	margin-bottom: 0.3em;
 	float:left;
 	margin-right: 10px;
 }
 
-.toggle_visualization{
-
-/*		
-	margin-bottom: 0.3em;
-	clear:left;
+.toggle_visualization { 
+	max-width: 180px;
 	float:right;
-	width: 150px;	
-*/	
-	text-align: left;
-	margin-left: 84%;
-	margin-top: -8%;
-	max-width: 250px;
-	width: 22%;
-	height: 50px;
+}
+
+#grant-count-sparkline-include,
+#publication-count-sparkline-include {
+	float: left;
+    width: 50%;
+}
+
+#coinvestigator-count-sparkline-include,
+#coauthor-count-sparkline-include {
+	float: right;
+    width: 50%;
 }
 
 .sub_headings a {
@@ -156,9 +118,9 @@ table.sparkline_wrapper_table td, th {
 #ego_profile {
   height: 1%; /* this was the key to killing the IE6 bug (no upper photo and sparklines jump on hover). Solution? Give the parent layout */
   background: #fff;
-  padding-left:10px;
-  padding-top:10px;
   min-height: 100px;
+  float: left;
+  max-width: 50%;
 }
 
 #ego_label {
@@ -193,6 +155,11 @@ table.sparkline_wrapper_table td, th {
 .vis-tables table td{
 	padding-right: 10px;
 	width: 50%;
+}
+
+#visPanel {
+	float: right; 
+	width: 600px;
 }
 
 .vis-tables table caption{
@@ -230,4 +197,104 @@ table.sparkline_wrapper_table td, th {
 
 moniker{
 	margin-top: 0px;
+}
+
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+.spacer{
+	font-size:0; line-height:0; clear:both;}
+
+
+/* ----------------- body start --------------------------- */
+#body{
+	max-width:900px;
+	min-width:800px; 
+	margin:0 auto; 
+	position:relative;
+	background: white;
+}
+#bodyPannel{
+	background: #FFFFFF;	
+/*	width:765px;
+	float:left;*/
+	/*padding-top: 0;
+	padding-right: 28px;
+	padding-bottom: 0;
+	padding-left: 16px;*/
+	height: 840px;
+}
+
+#dataPanel {
+/*	margin-top: 50px;
+	width: 25%;	
+	background-color: #f7f9f9;
+	height: 80%; 
+	padding-left: 10px;
+	padding-bottom: 30px;*/
+	
+	border-color: #DFE6E6; 
+	border: 1px solid;
+	background: #F7F9F9;
+	width:250px; 
+	height:615px;
+    margin-top: 15px;
+}
+
+#dataPanel div {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+#dataPanel .italicize {
+	font-style: italic;
+}
+#dataPanel .bold {
+	font-weight: bold;
+	color:#13968c;
+	font-size: 14px;
+}
+
+#dataPanel .investigator_stats .numbers,
+#dataPanel .author_stats .numbers {
+	text-align: right;
+	width: 40px;
+	float:left;
+}
+
+
+#data-panel-content h4 {
+	padding-bottom: 0;
+}
+
+#data-panel-content {
+    margin-left: 15px;
+    margin-top: 15px;
+}
+    
+/* container override from liquid.css */
+.container {
+ 	width: inherit; 
+}
+
+#incomplete-data {
+	line-height: 150%;
+	margin-right: 15px;
+}
+
+.graphml-file-link {
+	padding-top: 20px;
+	height: 20px;
+	font-size: 0.9em;
+}
+
+#profileTitle {
+    background-color: #2A2A2A;
+    color: white;
+    font-weight: bold;
+    line-height: 1em !important;
+    padding: 10px;
+    width: 54px;
+}
+
+#table_heading{
+/*	margin-bottom:20px; */
+	width: 80%;	
 }

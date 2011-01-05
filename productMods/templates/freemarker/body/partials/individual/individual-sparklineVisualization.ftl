@@ -14,16 +14,18 @@
     <div id="vis_container_coauthor">&nbsp;</div>
     
 	<div id="coauthorship_link_container" style="display: none;">
-    	<div class="collaboratorship-icon"><img src="${coAuthorIcon}" /></div>
-    	<div class="collaboratorship-link"><h3>Co-Author Network </h3><a class="view-all-style" href="${coAuthorURL}">View <span class= "pictos-arrow-10">4</span></a>
+    	<div class="collaboratorship-icon"><a href="${coAuthorURL}"><img src="${coAuthorIcon}" /></a></div>
+    	<div class="collaboratorship-link">
+    		<h3><a href="${coAuthorURL}">Co-Author Network</a></h3><a class="view-all-style" href="${coAuthorURL}">View <span class= "pictos-arrow-10">4</span></a>
 		</div>
     </div>
 
     <div id="coinvestigator_link_container">
-    	<div class="collaboratorship-icon"><img src="${coInvestigatorIcon}" /></div>
-    	<div class="collaboratorship-link"><h3>Co-Investigator Network </h3><a class="view-all-style" href="${coInvestigatorURL}">View</a>
+    	<div class="collaboratorship-icon"><a href="${coInvestigatorURL}"><img src="${coInvestigatorIcon}" /></a></div>
+    	<div class="collaboratorship-link">
+    		<h3><a href="${coInvestigatorURL}">Co-Investigator Network</a></h3><a class="view-all-style" href="${coInvestigatorURL}">View <span class= "pictos-arrow-10">4</span></a>
 		</div>
-    </div>
+	</div>
 
     ${stylesheets.add("css/visualization/visualization.css")}
 	${scripts.add(googleJSAPI)}
