@@ -1,3 +1,5 @@
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
 <table id='${tableID}'>
     <caption>
         ${tableCaption} <a href="${fileDownloadLink}">(.CSV File)</a>
