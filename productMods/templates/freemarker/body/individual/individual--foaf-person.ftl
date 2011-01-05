@@ -30,7 +30,7 @@
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
                 <li role="listitem"><a class="picto-font picto-uri" href="#">j</a></li>
-                <li role="listitem"><a class="picto-font picto-pdf" href="#">F</a></li>
+                <#--<li role="listitem"><a class="picto-font picto-pdf" href="#">F</a></li>-->
                 <li role="listitem"><a class="picto-font picto-share" href="#">R</a></li>
                 <li role="listitem"><a class="icon-rdf" href="#">RDF</a></li>
             </ul>
@@ -39,9 +39,9 @@
         <#-- Email -->    
         <#assign email = propertyGroups.getPropertyAndRemoveFromList("${core}email")!>
         <#if email?has_content>
-            <ul>
+            <ul id="individual-email" role="list">
                 <#list email.statements as statement>
-                    <li><a class="email" href="#"><span class ="picto-font  picto-email">M</span> ${statement.value}</a></li>
+                    <li role="listitem"><a class="email" href="#"><span class ="picto-font  picto-email">M</span> ${statement.value}</a></li>
                 </#list>
             </ul>
         </#if>
@@ -49,9 +49,9 @@
         <#-- Phone --> 
         <#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
         <#if phone?has_content>
-            <ul>
+            <ul id="individual-phone" role="list">
                 <#list phone.statements as statement>
-                    <li><a class="tel" href="#"><img class ="icon-phone" src="${urls.images}/individual/phone-icon.gif" alt="phone icon" />${statement.value}</a></li>
+                    <li role="listitem"><a class="tel" href="#"><img class ="icon-phone" src="${urls.images}/individual/phone-icon.gif" alt="phone icon" />${statement.value}</a></li>
                 </#list>
             </ul>
         </#if>      

@@ -861,6 +861,14 @@ ul#individual-tools li a{
 ul#individual-urls{
     list-style: url(../../../images/individual/arrow-grey.gif);
 }
+ul#individual-email, 
+ul#individual-phone{
+    list-style-type: none;
+}
+ul#individual-email li, 
+ul#individual-phone li{
+    line-height: 1em;
+}
 ul#individual-urls li{
     font-size: .875em;
     line-height: 1.2em;
@@ -938,6 +946,12 @@ ul#individual-areas li a{
 a.all-vivo-publications{
     font-size: .875em;
     color: #5e6363;
+}
+/* <------ TEMPORAL GRAPH  */
+#temporal-graph h3 a{
+    color: #2485AE;
+    font-size: .8em !important;
+    text-decoration: underline;
 }
 /* COAUTHORS ------>  */
 img.co-author{
