@@ -189,6 +189,7 @@ public class EntityPublicationCountRequestHandler implements
 		jsonContent = writePublicationsOverTimeJSON(entity.getSubEntities(), subOrganizationTypesResult, log);
 		
 		request.setAttribute("OrganizationURI", entityURI);
+		request.setAttribute("OrganizationLabel", entity.getEntityLabel());
 		request.setAttribute("JsonContent", jsonContent);
 
 		request.setAttribute("bodyJsp",
