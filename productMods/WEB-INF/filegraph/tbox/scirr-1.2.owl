@@ -15,8 +15,8 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#Instrument">
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:nodeID="A0"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
   </rdf:Description>
@@ -82,6 +82,11 @@
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 4 Clinical Trial</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#protocolRealizedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:range rdf:resource="http://vivoweb.org/ontology/core#Service"/>
@@ -114,12 +119,6 @@
     <rdfs:range rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#AccessService"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#providesAccessTo"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#realizesProtocol">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Service"/>
-    <rdfs:range rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#Protocol"/>
-    <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#protocolRealizedBy"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#nctId">
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#ClinicalTrial"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
@@ -127,10 +126,11 @@
     <rdfs:subPropertyOf rdf:resource="http://vivoweb.org/ontology/core#identifier"/>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCT00000419</vitro:exampleAnnot>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#hasDocumentation"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#realizesProtocol">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Service"/>
+    <rdfs:range rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#Protocol"/>
+    <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research-resource#protocolRealizedBy"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research-resource#ProductionService">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
