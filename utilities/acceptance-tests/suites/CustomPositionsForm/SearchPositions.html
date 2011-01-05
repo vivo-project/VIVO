@@ -71,7 +71,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Search Results for 'lecturer'</td>
+	<td>Search results for 'lecturer'</td>
 	<td></td>
 </tr>
 <tr>
@@ -111,7 +111,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>... positions Professor positions Lecturer positions Assistant Professor ...</td>
+	<td>... positions Lecturer positions Associate Professor positions Professor ...</td>
 	<td></td>
 </tr>
 <tr>
@@ -136,7 +136,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Search Results for 'professor'</td>
+	<td>Search results for 'professor' </td>
 	<td></td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>... positions Professor positions Lecturer positions Assistant Professor ...</td>
+	<td>... positions Lecturer positions Associate Professor positions Professor ...</td>
 	<td></td>
 </tr>
 <tr>
@@ -176,7 +176,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>... people Professor people Assistant Professor ...</td>
+	<td>... people Associate Professor ...</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cornell University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>... people Professor ...</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,7 +211,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Search Results for 'carroll'</td>
+	<td>Search results for 'carroll' </td>
 	<td></td>
 </tr>
 <tr>
@@ -231,7 +241,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Link to Carroll College to verify Jane Faculty is no longer listed</td>
+	<td class="comment">Link to Carroll College to verify Jane Faculty is listed</td>
 	<td></td>
 </tr>
 <tr>
@@ -245,48 +255,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>querytext</td>
-	<td>carroll</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Search']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>carroll - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Link to Carroll University to verify Jane Faculty is listed</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Carroll University</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Carroll University</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty Position</td>
+	<td>Faculty Administrative Position</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Professor, 1986 -</td>
+	<td>Faculty, Jane Lecturer, 1977 - 1981</td>
 	<td></td>
 </tr>
 <tr>
@@ -311,7 +291,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Search Results for 'university'</td>
+	<td>Search results for 'university'</td>
 	<td></td>
 </tr>
 <tr>
@@ -341,7 +321,42 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Make sure Jane Faculty is no longer associated with Cornell</td>
+	<td class="comment">Make sure Jane Faculty is associated with Carroll and Cornell</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Carroll University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Associate Professor, , 1981 - 1985</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>querytext</td>
+	<td>university</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
 	<td></td>
 </tr>
 <tr>
@@ -355,8 +370,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty Position</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Associate Professor, 1986</td>
 	<td></td>
 </tr>
 <tr>
