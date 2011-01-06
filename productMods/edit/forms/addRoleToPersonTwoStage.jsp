@@ -453,12 +453,12 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
         startField.setEditElement(
                 new DateTimeWithPrecision(startField, 
                         VitroVocabulary.Precision.YEAR.uri(),
-                        VitroVocabulary.Precision.MONTH.uri()));        
+                        VitroVocabulary.Precision.NONE.uri()));        
         Field endField = editConfig.getField("endField");
         endField.setEditElement(
                 new DateTimeWithPrecision(endField, 
                         VitroVocabulary.Precision.YEAR.uri(),
-                        VitroVocabulary.Precision.YEAR.uri()));
+                        VitroVocabulary.Precision.NONE.uri()));
     }
     
     editConfig.addValidator(new StartYearBeforeEndYear("startField.value","endYear.value") ); 
@@ -541,11 +541,11 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
-	                <v:input id="startField" label="Year ${requiredHint} ${yearHint}" size="7"/>            
+	                <v:input id="startField" label="Year ${yearHint}" size="7"/>            
 	            </c:when>
 	            <c:otherwise>
 	                <h4 class="label">Years of Participation in ###</h4>    
-	                <v:input id="startField" label="Start Year ${requiredHint} ${yearHint}" size="7"/>   
+	                <v:input id="startField" label="Start Year ${yearHint}" size="7"/>   
 	                <v:input id="endField" label="End Year ${yearHint}" size="7"/>             
 	            </c:otherwise>
 	        </c:choose>

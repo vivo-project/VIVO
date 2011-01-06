@@ -14,11 +14,11 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -369,9 +369,10 @@
         
         //setup date time edit elements
         Field startField = editConfig.getField("startField");
-        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.YEAR.uri()));        
+        // arguments for DateTimeWithPrecision are (fieldName, minimumPrecision, [requiredLevel])
+        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));        
         Field endField = editConfig.getField("endField");
-        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.YEAR.uri()));
+        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));
     }
     
     editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
