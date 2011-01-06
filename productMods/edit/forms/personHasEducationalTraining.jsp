@@ -348,7 +348,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         
         //setup date time edit element
         Field dateTime = editConfig.getField("dateTime");
-        dateTime.setEditElement( new DateTimeWithPrecision(dateTime, VitroVocabulary.Precision.YEAR));
+        dateTime.setEditElement( new DateTimeWithPrecision(dateTime, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));
         
         EditConfiguration.putConfigInSession(editConfig,session);
     }
@@ -374,14 +374,14 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         <c:set var="editMode" value="edit" />
         <c:set var="titleVerb" value="Edit" />
         <c:set var="title" value="Edit educational background entry for ${subjectName}" />
-        <c:set var="submitButtonText" value="Edit Educational Training" />
+        <c:set var="submitButtonText" value="Edit Education and Training" />
         <c:set var="disabledVal" value="disabled" />
 <% 
     } else { // adding new entry
 %>
         <c:set var="editMode" value="add" />
         <c:set var="titleVerb" value="Create" />
-        <c:set var="submitButtonText" value="Educational Training" />
+        <c:set var="submitButtonText" value="Education and Training" />
         <c:set var="disabledVal" value="" />
 <%  } 
 
@@ -411,7 +411,7 @@ This goes to an experimental FM based form:
 
 <jsp:include page="${preForm}" />
 
-<h2>${titleVerb}&nbsp;educational training entry for <%= subjectName %></h2>
+<h2>${titleVerb} education and training entry for <%= subjectName %></h2>
 
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
