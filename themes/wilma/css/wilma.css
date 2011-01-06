@@ -28,6 +28,9 @@ body{
 body{
    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
 }
+a:hover{
+    text-decoration: none;
+}
 /* h1,h2,h3,h4,h5,h6 ------>  */
 h2{
     padding: 10px 0 12px 0;
@@ -788,8 +791,38 @@ a {
     text-decoration: underline
 }
 /* ------------------------------------------------->  */
+/* IMAGE UPLOAD------ ------------------------------>  */
+/* ------------------------------------------------->  */
+/* <------ UPLOAD PICTURE*/
+#photoUploadDefaultImage img{
+    border: 4px solid #DDE4E3;
+}
+#photoUploadForm{
+    border-left: 1px dotted #DDE4E3;
+}
+/* <------ CROP PICTURE*/
+#photoCropping img{
+    border: 1px solid #DDE4E3;
+}
+#photoCropping{
+    margin-left: 20px;
+    padding-left: 40px;
+    background: url(../images/pointToCropPreview.jpg) 0 30px no-repeat;
+}
+#photoCroppingPreview{
+    width: 210px;
+}
+.photoCroppedPreview{
+    border: 4px solid #DDE4E3;
+}
+/* <------ DELETE PICTURE*/
+#photoDeletingContainer{
+    border: 1px solid #bdbcbc;
+}
+/* ------------------------------------------------->  */
 /* INDIVIDUAL DISPLAY ------------------------------>  */
 /* ------------------------------------------------->  */
+
 /* INDIVIDUAL LIST ------>  */
 .individualList ul.individualData li {
     padding-bottom: 0;

@@ -82,6 +82,7 @@ form a:link.cancel, form a:visited.cancel {
     text-decoration: underline;
     color: #f70;
     border-color: none;
+    padding-left: 3px;
 }
 form a:hover.cancel, form a:active.cancel {
     text-decoration: none;
