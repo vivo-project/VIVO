@@ -1,16 +1,23 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Arrays" %>
+
 <%@ page import="com.hp.hpl.jena.rdf.model.Literal"%>
 <%@ page import="com.hp.hpl.jena.rdf.model.Model"%>
+<%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
+
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -254,9 +261,9 @@
 		
 		//setup date time edit elements
         Field startField = editConfig.getField("startField");
-        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.YEAR.uri()));        
+        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.NONE.uri()));        
         Field endField = editConfig.getField("endField");
-        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.YEAR.uri()));
+        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.NONE.uri()));
 	}
 	
 	Model model = (Model) application.getAttribute("jenaOntModel");
@@ -266,6 +273,10 @@
 	} else {
 		editConfig.prepareForNonUpdate(model);
 	}
+	
+	List<String> customCss = new ArrayList<String>(Arrays.asList(Css.CUSTOM_FORM.path()
+                                                                ));
+    request.setAttribute("customCss", customCss);
 	
 	/* prepare the <title> and text for the submit button */
 	Individual subject = (Individual) request.getAttribute("subject");	
