@@ -812,12 +812,9 @@ a {
 } 
 /* INDIVIDUAL INTRO FOR PERSON ------>  */
 .foaf-person{
-    padding-top: 60px;
+    padding-top: 2.75em;
 }
 /* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
-#individual-intro{
-    width: 700px;
-}
 #individual-intro h1{
     font-size: 1.375em; 
     color: #2485ae; 
@@ -829,7 +826,6 @@ a {
 }
 /* INDIVIDUAL INTRO FOR PERSON ------>  */
 #individual-intro-person{
-    width: 700px;
     border-right: 1px solid #edf0ed;
 }
 /* INDIVIDUAL INTRO LEFT CONTENT ------>  */
@@ -884,7 +880,6 @@ ul#individual-urls-people li a{
 }
 /* INDIVIDUAL RIGHT CONTENT ------>  */
 #individual-info{
-    width: 425px;
     color: #5e6363;
 }
 #individual-info h1.fn{
@@ -965,24 +960,24 @@ p.view-all-coauthors{
     font-size: .875em;
 }
 /* PROPERTY GROUP MENU ------>  */
-#property-group-menus{
+#property-group-menu{
     width: 920px;
     background: #f1f2ee;
 }
-#property-group-menus ul{
+#property-group-menu ul{
     color: #5e6363;
     font-size: 1em;
 }
-#property-group-menus li{
+#property-group-menu li{
     background: url(../../../images/individual/separator-property-group-nav.jpg) right 10px no-repeat;
 }
-#property-group-menus a{
+#property-group-menu a{
     color: #5e6363;
 }
-#property-group-menus a:hover{
+#property-group-menu a:hover{
     color: #002b44;
 }
-#property-group-menus li:last-child{
+#property-group-menu li:last-child{
     background: none;
 }
 /* PROPERTY GROUP ------>  */
