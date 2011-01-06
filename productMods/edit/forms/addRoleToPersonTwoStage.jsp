@@ -340,7 +340,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${n3ForStart}", "${roleLabelAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${roleLabelAssertion}" ],        
     "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForEnd}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
