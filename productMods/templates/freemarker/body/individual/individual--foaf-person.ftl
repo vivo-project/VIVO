@@ -18,7 +18,7 @@
     
 <section id="individual-intro-person" class="vcard" role="region">
 
-    <section id="left-side" role="region"> 
+    <section id="share-contact" role="region"> 
         
         <#-- Thumbnail -->
         <#if individual.thumbUrl??>

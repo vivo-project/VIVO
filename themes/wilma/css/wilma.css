@@ -829,7 +829,7 @@ a {
     border-right: 1px solid #edf0ed;
 }
 /* INDIVIDUAL INTRO LEFT CONTENT ------>  */
-#left-side img.individual-photo2{
+#share-contact img.individual-photo2{
     border: 7px solid #ebebeb;
 }
 ul#individual-tools-people{
@@ -848,10 +848,10 @@ ul#individual-tools li a{
 .picto-email{
     color: #aeb1b1;
 }
-#left-side a.email{
+#share-contact a.email{
     color: #5f6464;
 }
-#left-side a.tel{
+#share-contact a.tel{
     color: #5f6464;
 }
 ul#individual-urls{
