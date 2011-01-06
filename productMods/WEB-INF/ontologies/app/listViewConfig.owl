@@ -99,4 +99,8 @@
      end roles (from person) config
      ****************************************************************** 
     -->
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#relatedRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-relatedRole.xml</display:listViewConfigFile>
+    </rdf:Description>
 </rdf:RDF>
