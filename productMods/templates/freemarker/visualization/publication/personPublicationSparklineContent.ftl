@@ -71,15 +71,15 @@
          
                     var totalPubs = parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications});
                     
-                    if ( totalPubs > 1 ) {
-                        var pubDisplay = "publications";
-                    } else {
+                    if ( totalPubs == 1 ) {
                         var pubDisplay = "publication";
+                    } else {
+                        var pubDisplay = "publications";
                     }
                     
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
             
-                    var sparksText = '  within the last 10 years';
+                    var sparksText = ' within the last 10 years';
             
                  <#else>
             
@@ -90,10 +90,10 @@
                     var renderedSparks = ${sparklineVO.renderedSparks};      
                     var totalPubs = parseInt(renderedSparks) + parseInt(${sparklineVO.unkownYearPublications});
                     
-                    if ( totalPubs > 1 ) {
-                        var pubDisplay = "publications";
-                    } else {
+                    if ( totalPubs == 1 ) {
                         var pubDisplay = "publication";
+                    } else {
+                        var pubDisplay = "publications";
                     }
                     
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
