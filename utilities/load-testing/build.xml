@@ -74,9 +74,12 @@ report   - Just summarize output from previously run tests.
 		<fail unless="webapp.name"
 		      message="${properties.file} must contain a value for webapp.name" />
 
-		<fail unless="file.uri.list"
-		      message="${properties.file} must contain a value for file.uri.list" />
+		<fail unless="data.dir"
+		      message="${properties.file} must contain a value for data.dir" />
 
+		<!-- If no value was provided, run everything 10 times -->
+		<property name="iterations" value="10" />
+		
 		<property name="webapp.url" value="http://${webapp.host}:${webapp.port}/${webapp.name}" />
 
 		<path id="xslt.classpath">
@@ -105,8 +108,23 @@ report   - Just summarize output from previously run tests.
 		</condition>
 		<fail unless="webapp.is.available" message="Webapp is not available at ${webapp.url}" />
 
-		<!-- Need to convert abstract paths to system-specific paths, or JMeter will call them relative paths -->
-		<property name="file.uri.list.location" location="${file.uri.list}" />
+		<property name="file.person.uris" location="${data.dir}/personUris.csv" />
+		<fail message="File &quot;${file.person.uris}&quot; does not exist.">
+			<condition>
+				<not>
+					<available file="${file.person.uris}" />
+				</not>
+			</condition>
+		</fail>
+		
+		<property name="file.infoResource.uris" location="${data.dir}/infoResourceUris.csv" />
+		<fail message="File &quot;${file.infoResource.uris}&quot; does not exist.">
+			<condition>
+				<not>
+					<available file="${file.infoResource.uris}" />
+				</not>
+			</condition>
+		</fail>
 
 		<jmeter jmeterhome="${jmeter.home.dir}"
 		        testplan="${tests.dir}/${test.name}.jmx"
@@ -115,7 +133,9 @@ report   - Just summarize output from previously run tests.
 			<property name="webapp.host" value="${webapp.host}" />
 			<property name="webapp.port" value="${webapp.port}" />
 			<property name="webapp.name" value="${webapp.name}" />
-			<property name="file.uri.list" value="${file.uri.list.location}" />
+			<property name="iterations" value="${iterations}" />
+			<property name="file.person.uris" value="${file.person.uris}" />
+			<property name="file.infoResource.uris" value="${file.infoResource.uris}" />
 
 			<!-- Set parameters for the output -->
 			<property name="jmeter.save.saveservice.output_format" value="xml" />
