@@ -25,7 +25,7 @@
                        OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
                                               ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:end ?dateTimeEndValue .   
+                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:end ?dateTimeEndValue .
                                               ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                        }
             }
