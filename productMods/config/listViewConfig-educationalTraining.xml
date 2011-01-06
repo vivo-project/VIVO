@@ -10,7 +10,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?edTraining (afn:localname(?edTraining) AS ?edTrainingName) ?org ?orgName 
-                        ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTime 
+                        ?degreeName ?degreeAbbr ?majorField ?deptOrSchool ?info ?dateTimeStart ?dateTimeEnd 
             WHERE {
                 GRAPH ?g1 { ?subject ?property ?edTraining }
                 OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org .                                   
@@ -23,10 +23,15 @@
                 OPTIONAL { GRAPH ?g6 { ?edTraining core:majorField ?majorField } }
                 OPTIONAL { GRAPH ?g7 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
                 OPTIONAL { GRAPH ?g8 { ?edTraining core:supplementalInformation ?info } }
-                OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeInterval ?dateTimeInterval . 
-                                       ?dateTimeInterval core:dateTime ?dateTime } 
+                OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
+                           OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                                                   ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                           }
+                           OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:end ?dateTimeEndValue .   
+                                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                           }                                       
                 }                                  
-         }  ORDER BY DESC(?dateTime)  
+         }  ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart)
     </query>
     
     <template>propStatement-educationalTraining.ftl</template>

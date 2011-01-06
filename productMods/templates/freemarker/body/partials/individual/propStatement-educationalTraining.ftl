@@ -26,10 +26,28 @@
         </#if>
     </#local>
     
-    <#if statement.dateTime??>
-        <#local year = dt.xsdDateTimeToYear(statement.dateTime)>
-    </#if>
+    <#local dateTimeInterval>
+        <#if statement.dateTimeStart??>
+            <#local startYear = dt.xsdDateTimeToYear(statement.dateTimeStart)>
+        </#if>
+        <#if statement.dateTimeEnd??>
+            <#local endYear = dt.xsdDateTimeToYear(statement.dateTimeEnd)>
+        </#if>
+        <#if startYear?? && endYear??>
+            ${startYear} - ${endYear}
+        <#elseif startYear??>
+            ${startYear} -
+        <#elseif endYear ??>
+            ${endYear} <#-- no hyphen, so doesn't display as a range with missing start date -->
+        </#if>
+    </#local>
     
-    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info!, year! ] />
+    <#local date>
+        <#if dateTimeInterval?has_content>
+            <span class="listDateTime">${dateTimeInterval}</span>
+        </#if>
+    </#local>
+    
+    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info! ] /> ${date}
 
 </#macro>
