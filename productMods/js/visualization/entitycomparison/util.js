@@ -664,8 +664,8 @@ function updateCounter(){
 	//notification about the max items that can be clicked
 	$("#counter").text(renderedObjects.length);
 	if (freeColors.length == 0) {
-        $.jGrowl("Colors left: " + freeColors.length, {
-            life: 50
+        $.jGrowl("You can not select more than 10 entities at one time.", {
+            life: 3000
         });
     } 
 }
@@ -768,15 +768,34 @@ function prepareTableForDataTablePagination(jsonData){
 	var searchBarParentContainerDIVClass = "searchbar";
 	
 	var entityListTable = $('#datatable').dataTable({
-		"sDom": '<"' + searchBarParentContainerDIVClass + '"f><"paginatedtabs"p><"datatablewrapper"t>',
-		"aaSorting" : [[2, "desc"]],
-		"iDisplayLength": 10,
-		"sPaginationType": "full_numbers",
-	//	"aLengthMenu" : [5,10,15],
-		"fnDrawCallback": function() {
-	    $('tr>td:nth-child(1)>input').bind('click', function () { $(this).parent().parent().children().each(function(){$(this).addClass('datatablerowhighlight');}); });
-	    $('tr>td:nth-child(1)>input').bind('click', function () { if(!$(this).is(':checked')) { $(this).parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});} });
-	}
+	    "sDom": '<"' + searchBarParentContainerDIVClass + '"f><"paginatedtabs"p><"datatablewrapper"t>',
+	    "aaSorting": [
+	        [2, "desc"]
+	    ],
+	    "asStripClasses": [],
+	    "iDisplayLength": 10,
+	    "sPaginationType": "full_numbers",
+	    	    //	"aLengthMenu" : [5,10,15],
+	    "fnDrawCallback": function () {
+	    	
+	    	/*
+	    	 * To highlight the rows belonging to selected entities. 
+	    	 * */
+	        $('input.if_clicked_on_school').bind('click', function () {
+	        	if ($(this).is(':checked')) {
+	        		$(this).closest("tr").addClass('datatablerowhighlight')
+	        	} else {
+	        		$(this).closest("tr").removeClass('datatablerowhighlight')
+	        	}
+	        });
+	        
+	        /* We check whether max number of allowed comparisions (currently 10) is reached
+	         * here as well becasue the only function that is guaranteed to be called during 
+	         * page navigation is this. No need to bind it to the nav-buttons becuase 1. It is over-ridden
+	         * by built-in navigation events & this is much cleaner.
+	         * */
+	        checkIfColorLimitIsReached();
+	    }
 	
 //		"bLengthChange": false,
 //		"bAutoWidth": false
@@ -789,32 +808,11 @@ function prepareTableForDataTablePagination(jsonData){
 	$("#reset-search").live('click', function() {
 		entityListTable.fnFilter("");
 	});
-
-	bindPaginatedTabsToEvents();
 	
 }
 
-function bindPaginatedTabsToEvents(){
-
-	$('#datatable_paginate>span').bind('click', function(){
-		//console.log($(this));
-		checkIfColorLimitIsReached();
-//		bindInnerPaginatedTabsToEvents();
-//		$.each($('#datatable_paginate>span>span'), function(index, val){
-//			console.log('child: ', $(this));
-//		});
-	});
-	
-}
-
-//function bindInnerPaginatedTabsToEvents(){
-//	$('#datatable_paginate>span>span').live('click', function(){
-//		console.log($(this), 'is clicked');
-//	});
-//}
-
-function updateRowHighlighter(linkedCheckBox){	
-	 linkedCheckBox.parent().parent().children().each(function(){$(this).removeClass('datatablerowhighlight');});	
+function updateRowHighlighter(linkedCheckBox){
+	linkedCheckBox.closest("tr").removeClass('datatablerowhighlight');
 }
 
 
@@ -875,38 +873,34 @@ function getSize(map){
 }
 
 function disableUncheckedEntities(){
-	//console.log('Inside disableUncheckedEntities');
-	
-	var unCheckedBoxes = $("input[type=checkbox].if_clicked_on_school").filter(function(){
-								if(!$(this).is(':checked')){
-									//console.log($(this).attr("value"));
-									return $(this);
-								}
-						});
-	
-	$.each(unCheckedBoxes, function(index, val){
+
+	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
 		$(val).attr('disabled', true);
 	});
+	
+	//console.log($("input[type=checkbox].if_clicked_on_school:not(:checked)"));
+	
+	$("#datatable").data("isEntitySelectionAllowed", false);
 }
 
 function enableUncheckedEntities(){
-	var disabledCheckedBoxes = $("input[type=checkbox].if_clicked_on_school").filter(function(){
-		if($(this).attr('disabled', true)){
-			//console.log($(this).attr("value"));
-			return $(this);
-		}
-	});
 	
-	$.each(disabledCheckedBoxes, function(index, val){
+	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
 		$(val).attr('disabled', false);
 	});
+	
+	
+	
+	$("#datatable").data("isEntitySelectionAllowed", true);
 }
 
 function checkIfColorLimitIsReached(){
 	
+//	console.log(getSize(labelToCheckedEntities));
+	
 	if(getSize(labelToCheckedEntities) >= 10){
 		disableUncheckedEntities();
-	}else{
+	} else {
 		enableUncheckedEntities();
 	}
 }

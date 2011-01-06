@@ -29,7 +29,9 @@
 
 <script type="text/javascript" src="${flot}"></script>
 <script type="text/javascript" src="${fliptext}"></script>
+
 <script type="text/javascript" src="${jgrowl}"></script>
+
 <script type="text/javascript" src="${datatable}"></script>
 <script type="text/javascript" src="${autoellipsis}"></script>
 <script type="text/javascript" src="${entityComparisonUtils}"></script>
@@ -64,8 +66,13 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 	$(document).ready(function() {
 
 		var jsonString = '${jsonContent}';
-		var organizationLabel = '${organizationLabel}';   
-
+		var organizationLabel = '${organizationLabel}';
+		
+		/* This is used to cache the current state whether the user is allowed to select more entities from 
+		the datatable or not. Once Max number of entity selection is reached the user can no longer select 
+		more & this variable will be set to false. */
+		$("#datatable").data("isEntitySelectionAllowed", true);
+		
 		$("#organizationLabel").text(organizationLabel).css("color", "#2485ae");
 		$("#organizationMoniker").text(organizationLabel);
 		$("#organizationMoniker").attr("href", "${organizationVivoProfileURL}");
@@ -104,7 +111,7 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 		});		
 		
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
-			
+		
 			var checkbox = $(this);
 			var checkboxValue = $(this).attr("value");
 			var linkedCheckbox = labelToCheckedEntities[checkboxValue];
@@ -176,7 +183,7 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 					generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement) ; 
 					renderLineGraph(renderedObjects, entity);
 					labelToCheckedEntities[checkboxValue] = checkbox;
-					                     
+					
 		        } else if (!checkbox.is(':checked')) {
 		
 					removeUsedColor(entity);
