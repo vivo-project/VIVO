@@ -19,29 +19,7 @@
             <a href="${profileUrl(statement.role)}">${statement.roleName}</a> (no linked activity)
         </#if>
     </#local>
-    
-    <#local dateTimeInterval>
-        <#if statement.dateTimeStart??>
-            <#local startYear = dt.xsdDateTimeToYear(statement.dateTimeStart)>
-        </#if>
-        <#if statement.dateTimeEnd??>
-            <#local endYear = dt.xsdDateTimeToYear(statement.dateTimeEnd)>
-        </#if>
-        <#if startYear?? && endYear??>
-            ${startYear} - ${endYear}
-        <#elseif startYear??>
-            ${startYear} -
-        <#elseif endYear ??>
-            - ${endYear}
-        </#if>
-    </#local>
-    
-    <#local dateInRole>
-        <#if dateTimeInterval?has_content>
-            <span class="listDateTime">${dateTimeInterval}</span>
-        </#if>
-    </#local>
-    
-    ${linkedIndividual} ${statement.specificRole} ${dateInRole!}
+
+    ${linkedIndividual} ${statement.specificRole} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>

@@ -20,28 +20,6 @@
         </#if>
     </#local>
     
-    <#local dateTimeInterval>
-        <#if statement.dateTimeStart??>
-            <#local startYear = dt.xsdDateTimeToYear(statement.dateTimeStart)>
-        </#if>
-        <#if statement.dateTimeEnd??>
-            <#local endYear = dt.xsdDateTimeToYear(statement.dateTimeEnd)>
-        </#if>
-        <#if startYear?? && endYear??>
-            ${startYear} - ${endYear}
-        <#elseif startYear??>
-            ${startYear} -
-        <#elseif endYear ??>
-            - ${endYear}
-        </#if>
-    </#local>
-    
-    <#local dateInPosition>
-        <#if dateTimeInterval?has_content>
-            <span class="listDateTime">${dateTimeInterval}</span>
-        </#if>
-    </#local>
-    
-    <@s.join [ linkedIndividual, statement.positionTitle! ] /> ${dateInPosition!}
+    <@s.join [ linkedIndividual, statement.positionTitle! ] /> <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>
