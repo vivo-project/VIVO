@@ -10,26 +10,29 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?subclass ?role (afn:localname(?role) AS ?roleName)
-                        ?specificRole ?person ?personName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+                        ?specificRole ?indivInRole ?indivName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
-            OPTIONAL { GRAPH ?g2 { ?role core:memberRoleOf ?person }
-                       GRAPH ?g3 { ?person rdfs:label ?personName }
+            OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
+                       GRAPH ?g3 { ?role ?roleProp ?indivInRole }
+                       FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                               ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
+                       GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
             }
-            OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:Role }
-                       GRAPH ?g5 { ?role a ?subclass } 
-                       FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                               ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+            OPTIONAL { GRAPH ?g5 { ?subclass rdfs:subClassOf core:Role }
+                       GRAPH ?g6 { ?role a ?subclass } 
+                       FILTER (?g6 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                               ?g6 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
             }
-            OPTIONAL { GRAPH ?g6 { ?role rdfs:label ?specificRole } }
-            OPTIONAL { GRAPH ?g7 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+            OPTIONAL { GRAPH ?g7 { ?role rdfs:label ?specificRole } }
+            OPTIONAL { GRAPH ?g8 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
                                               ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:end ?dateTimeEndValue .
+                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue .
                                               ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
-        } ORDER BY ?subclass DESC(?dateTimeStart) DESC(?dateTimeEnd) ?personName
+        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?indivName
     </query>
     
     <template>propStatement-relatedRole.ftl</template>

@@ -12,11 +12,11 @@
 <#macro showRole statement>
     
     <#local linkedIndividual>
-        <#if statement.person??>
-            <a href="${profileUrl(statement.person)}">${statement.personName}</a>
+        <#if statement.indivInRole??>
+            <a href="${profileUrl(statement.indivInRole)}">${statement.indivName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}">${statement.roleName}</a> (no linked person)
+            <a href="${profileUrl(statement.role)}">${statement.roleName}</a> (no linked individual in this role)
         </#if>
     </#local>
     
