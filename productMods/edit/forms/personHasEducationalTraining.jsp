@@ -88,33 +88,13 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
 <c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
 <c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
-<c:set var="edToDateTime" value="${vivoCore}dateTimeInterval"/>
 
-<%-- For new datetime handling in ontology - v1.2
-<c:set var="dateTimeValue" value="${vivoCore}DateTimeValue" />
-<c:set var="hasDateTimeValue" value="${vivoCore}dateTimeValue" />
-<c:set var="precisionValue" value="${vivoCore}YearPrecision" />
-<c:set var="hasPrecision" value="${vivoCore}dateTimePrecision" />
---%>
-
-<v:jsonset var="existingYearQuery" >  
-    SELECT ?existingYear WHERE {
-          ?edTraining <${edToDateTime}> ?dateTimeNode .
-          ?dateTimeNode <${dateTimeValue}> ?existingYear . }
-</v:jsonset>
-
-<v:jsonset var="existingYearPrecision" >  
-    SELECT ?existingPrecision WHERE {
-          ?edTraining <${edToDateTime}> ?dateTimeNode .
-          ?dateTimeNode <${dateTimePrecision}> ?existingPrecision . }
-</v:jsonset>
-
-<v:jsonset var="existingDateTimeQuery" >  
-    SELECT ?dateTime WHERE {  ?edTraining <${edToDateTime}> ?dateTime .  }
-</v:jsonset>
+<c:set var="ToInterval" value="${vivoCore}dateTimeInterval"/>
+<c:set var="intervalType" value="${vivoCore}DateTimeInterval"/>
+<c:set var="intervalToStart" value="${vivoCore}start"/>
+<c:set var="intervalToEnd" value="${vivoCore}end"/>
 
 <%-- Assertions for adding a new educational training entry --%>
-
 <v:jsonset var="orgTypeAssertion">
     ?org a ?orgType .
 </v:jsonset>
@@ -132,11 +112,22 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?edTraining <${majorFieldPred}> ?majorField .
 </v:jsonset>
 
-<v:jsonset var="dateTimeAssertions">
-    ?edTraining    <${edToDateTime}> ?dateTimeNode .
-    ?dateTimeNode  <${type}> <${dateTimeValueType}> .
-    ?dateTimeNode  <${dateTimeValue}> ?dateTime.value .
-    ?dateTimeNode  <${dateTimePrecision}> ?dateTime.precision . 
+<v:jsonset var="n3ForStart">
+    ?edTraining      <${ToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToStart}> ?startNode .    
+    ?startNode  <${type}> <${dateTimeValueType}> .
+    ?startNode  <${dateTimeValue}> ?startField.value .
+    ?startNode  <${dateTimePrecision}> ?startField.precision .
+</v:jsonset>
+
+<v:jsonset var="n3ForEnd">
+    ?edTraining      <${ToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToEnd}> ?endNode .
+    ?endNode  <${type}> <${dateTimeValueType}> .
+    ?endNode  <${dateTimeValue}> ?endField.value .
+    ?endNode  <${dateTimePrecision}> ?endField.precision .
 </v:jsonset>
 
 <v:jsonset var="deptAssertion" >      
@@ -204,6 +195,65 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 </v:jsonset>
 
 
+ <v:jsonset var="existingIntervalNodeQuery" >  
+    SELECT ?existingIntervalNode WHERE {
+          ?edTraining <${ToInterval}> ?existingIntervalNode .
+          ?existingIntervalNode <${type}> <${intervalType}> . }
+</v:jsonset>
+ 
+ <v:jsonset var="existingStartNodeQuery" >  
+    SELECT ?existingStartNode WHERE {
+      ?edTraining <${ToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?existingStartNode . 
+      ?existingStartNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingStartDateQuery" >  
+    SELECT ?existingDateStart WHERE {
+     ?edTraining <${ToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToStart}> ?startNode .
+     ?startNode <${type}> <${dateTimeValueType}> .
+     ?startNode <${dateTimeValue}> ?existingDateStart . }
+</v:jsonset>
+
+<v:jsonset var="existingStartPrecisionQuery" >  
+    SELECT ?existingStartPrecision WHERE {
+      ?edTraining <${ToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?startNode .
+      ?startNode <${type}> <${dateTimeValueType}> .          
+      ?startNode <${dateTimePrecision}> ?existingStartPrecision . }
+</v:jsonset>
+
+
+ <v:jsonset var="existingEndNodeQuery" >  
+    SELECT ?existingEndNode WHERE {
+      ?edTraining <${ToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?existingEndNode . 
+      ?existingEndNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingEndDateQuery" >  
+    SELECT ?existingEndDate WHERE {
+     ?edTraining <${ToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToEnd}> ?endNode .
+     ?endNode <${type}> <${dateTimeValueType}> .
+     ?endNode <${dateTimeValue}> ?existingEndDate . }
+</v:jsonset>
+
+<v:jsonset var="existingEndPrecisionQuery" >  
+    SELECT ?existingEndPrecision WHERE {
+      ?edTraining <${ToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?endNode .
+      ?endNode <${type}> <${dateTimeValueType}> .          
+      ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
+</v:jsonset>
+
 <v:jsonset var="orgClassUriJson">${orgClass}</v:jsonset>
 <v:jsonset var="degreeClassUriJson">${degreeClass}</v:jsonset>
 
@@ -217,14 +267,16 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["edTraining", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewEdTraining}", "${orgLabelAssertion}", "${orgTypeAssertion}", "${dateTimeAssertions}" ],
+    "n3required"    : [ "${n3ForNewEdTraining}", "${orgLabelAssertion}", "${orgTypeAssertion}" ],
     
     "n3optional"    : [ "${n3ForEdTrainingToOrg}", "${majorFieldAssertion}",                                          
-                        "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}" ],
+                        "${degreeAssertion}", "${deptAssertion}", "${infoAssertion}" , "${n3ForStart}", "${n3ForEnd}"],
                         
     "newResources"  : { "edTraining" : "${defaultNamespace}",
                         "org" : "${defaultNamespace}" ,
-                        "dateTimeNode" : "${defaultNamespace}" },
+                        "intervalNode" : "${defaultNamespace}",
+                        "startNode" : "${defaultNamespace}",
+                        "endNode" : "${defaultNamespace}"  },
 
     "urisInScope"    : { },
     "literalsInScope": { },
@@ -237,15 +289,19 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         "orgLabel"           : "${orgLabelQuery}",
         "majorField"         : "${majorFieldQuery}",
         "dept"               : "${deptQuery}",
-        "info"               : "${infoQuery}",        
-        "dateTime.value"     :  "${existingYearQuery}"        
+        "info"               : "${infoQuery}",                
+        "startField.value"   : "${existingStartDateQuery}",
+        "endField.value"     : "${existingEndDateQuery}"               
     },
     "sparqlForExistingUris" : {
         "org"            : "${orgQuery}",
         "orgType"        : "${orgTypeQuery}",
-        "degree"         : "${degreeQuery}",
-        "dateTimeNode"       : "${existingDateTimeQuery}",
-        "dateTime.precision" : "${existingYearPrecision}"
+        "degree"         : "${degreeQuery}",        
+        "intervalNode"      : "${existingIntervalNodeQuery}", 
+        "startNode"         : "${existingStartNodeQuery}",
+        "endNode"           : "${existingEndNodeQuery}",
+        "startField.precision": "${existingStartPrecisionQuery}",
+        "endField.precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "degree" : {
@@ -270,8 +326,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
          "rangeLang"        : "",
          "assertions"       : [ "${majorFieldAssertion}" ]
       },       
-      "dateTime" : {
-            "newResource"       : "true",
+      "startField" : {
+            "newResource"       : "false",
             "validators"        : [  ],
             "optionsType"       : "UNDEFINED",
             "literalOptions"    : [ ],
@@ -279,7 +335,18 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
             "objectClassUri"    : "",
             "rangeDatatypeUri"  : "",
             "rangeLang"         : "",
-            "assertions"        : [ "${dateTimeAssertions}" ]
+            "assertions"        : [ "${n3ForStart}" ]
+        },
+      "endField" : {
+            "newResource"       : "false",
+            "validators"        : [  ],
+            "optionsType"       : "UNDEFINED",
+            "literalOptions"    : [ ],
+            "predicateUri"      : "",
+            "objectClassUri"    : "",
+            "rangeDatatypeUri"  : "",
+            "rangeLang"         : "",
+            "assertions"        : [ "${n3ForEnd}" ]
         },
      "org" : {
          "newResource"      : "false",
@@ -345,10 +412,13 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     if (editConfig == null) {
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));  
-        
-        //setup date time edit element
-        Field dateTime = editConfig.getField("dateTime");
-        dateTime.setEditElement( new DateTimeWithPrecision(dateTime, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));
+                
+        //setup date time edit elements
+        Field startField = editConfig.getField("startField");
+        // arguments for DateTimeWithPrecision are (fieldName, minimumPrecision, [requiredLevel])
+        startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));        
+        Field endField = editConfig.getField("endField");
+        endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));
         
         EditConfiguration.putConfigInSession(editConfig,session);
     }
@@ -403,9 +473,6 @@ This goes to an experimental FM based form:
 <jsp:forward page="/N3EditForm"/> 
 --%>
 
- 
-
-
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
@@ -418,8 +485,9 @@ This goes to an experimental FM based form:
     <v:input type="select" label="Degree" id="degree"  />  
     
     <v:input type="text" label="Major Field of Degree" id="majorField" size="30" />   
-       
-    <v:input id="dateTime" />  
+              
+    <v:input id="startField"  label="Start Year <span class='hint'>(YYYY)</span>" />
+    <v:input id="endField" label="End Year <span class='hint'>(YYYY)</span>" />                             
     
     <p class="inline"><v:input type="select" label="Organization Type ${requiredHint}" name="orgType" disabled="${disabledVal}" id="typeSelector" /></p>
            
