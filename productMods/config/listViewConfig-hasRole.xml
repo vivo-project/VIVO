@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)
+                        ?specificRole ?activity ?activityName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?role } 
+            OPTIONAL { GRAPH ?g2 { ?role core:roleIn ?activity }
+                       GRAPH ?g3 { ?activity rdfs:label ?activityName }
+            }
+            OPTIONAL { GRAPH ?g4 { ?role rdfs:label ?specificRole } }
+            OPTIONAL { GRAPH ?g5 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue .
+                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g7 { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                              ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       }
+            }
+        } ORDER BY DESC(?dateTimeStart) DESC(?dateTimeEnd) ?personName
+    </query>
+    
+    <template>propStatement-hasRole.ftl</template>
+</list-view-config>

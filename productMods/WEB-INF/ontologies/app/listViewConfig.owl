@@ -34,5 +34,69 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#organizationForPosition">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-organizationForPosition.xml</display:listViewConfigFile>
     </rdf:Description>
+    
+    <!--
+     ******************************************************************
+     all roles use same config...is there a better way to specify this?
+     ** core:hasClinicalRole
+     ** core:hasLeaderRole
+     ** core:hasMemberRole
+     ** core:hasOutreachProviderRole
+     ** core:hasServiceProviderRole
+     ** core:hasResearcherRole
+     ** core:hasInvestigatorRole
+     ** core:hasCo-PrincipalInvestigatorRole
+     ** core:hasPrincipalInvestigatorRole
+     ** core:hasTeacherRole
+     ** core:hasPresenterRole
+     ******************************************************************
+    -->
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasClinicalRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasLeaderRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasMemberRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasOutreachProviderRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasServiceProviderRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasResearcherRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasInvestigatorRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasCo-PrincipalInvestigatorRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasTeacherRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasPresenterRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <!--
+     ******************************************************************
+     end roles (from person) config
+     ****************************************************************** 
+    -->
 </rdf:RDF>
-
