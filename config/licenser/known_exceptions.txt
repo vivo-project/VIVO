@@ -33,5 +33,7 @@ themes/wilma/css/pictos.css
 utilities/load-testing/jmeter-results-report.xsl
 
 # Plugins for JQuery.
+productMods/css/jquery_plugins/*
+productMods/js/jquery_plugins/*
 productMods/js/visualization/entitycomparison/jquery_plugins/*
 themes/wilma/js/jquery_plugins/raphael/*
