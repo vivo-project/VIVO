@@ -58,6 +58,17 @@ form{
 	text-align: center;
 }
 
+#notification-container {
+position: inherit;
+}
+
+.disabled-checkbox-event-receiver {
+    height: 21px;
+    position: absolute;
+    width: 21px;
+    display:none;
+}
+
 #functions{
 	margin-top: 20px;
 	margin-bottom: -40px;	

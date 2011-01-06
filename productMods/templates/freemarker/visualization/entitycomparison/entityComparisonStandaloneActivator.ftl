@@ -20,7 +20,10 @@
 
 <#assign flot = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/jquery.flot.js'>
 <#assign fliptext = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
-<#assign jgrowl = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/jgrowl/jquery.jgrowl.js'>
+
+<#assign jqueryNotify = '${urls.base}/js/jquery_plugins/jquery.notify.min.js'>
+<#assign jqueryUI = '${urls.base}/js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
+
 <#assign datatable = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/jquery.dataTables.js'>
 <#assign autoellipsis = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/jquery.AutoEllipsis.js'>
 
@@ -30,26 +33,37 @@
 <script type="text/javascript" src="${flot}"></script>
 <script type="text/javascript" src="${fliptext}"></script>
 
-<script type="text/javascript" src="${jgrowl}"></script>
+<!--
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+-->
+
+<script type="text/javascript" src="${jqueryUI}"></script>
+
+
+
 
 <script type="text/javascript" src="${datatable}"></script>
 <script type="text/javascript" src="${autoellipsis}"></script>
 <script type="text/javascript" src="${entityComparisonUtils}"></script>
 <script type="text/javascript" src="${entityComparisonConstants}"></script>
+<script type="text/javascript" src="${jqueryNotify}"></script>
 
 <#-- CSS files -->
 
 
-<#assign jgrowlStyle = "${urls.base}/js/visualization/entitycomparison/jquery_plugins/jgrowl/jquery.jgrowl.css" />
 <#assign demoTable = "${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />
+
+<#assign jqueryUIStyle = "${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.4.custom.css" />
+<#assign jqueryNotifyStyle = "${urls.base}/css/jquery_plugins/ui.notify.css" />
 
 <#assign entityComparisonStyle = "${urls.base}/css/visualization/entitycomparison/layout.css" />
 <#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
 
-<link href="${jgrowlStyle}" rel="stylesheet" type="text/css" />
+<link href="${jqueryUIStyle}" rel="stylesheet" type="text/css" />
 <link href="${demoTable}" rel="stylesheet" type="text/css" />
 <link href="${entityComparisonStyle}" rel="stylesheet" type="text/css" />
 <link href="${vizStyle}" rel="stylesheet" type="text/css" />
+<link href="${jqueryNotifyStyle}" rel="stylesheet" type="text/css" />
 
 
 <#-- variables passed from server-side code -->
@@ -76,6 +90,8 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 		$("#organizationLabel").text(organizationLabel).css("color", "#2485ae");
 		$("#organizationMoniker").text(organizationLabel);
 		$("#organizationMoniker").attr("href", "${organizationVivoProfileURL}");
+		
+		$notificationContainer = $("#notification-container").notify();
 		
 		var jsonObject = {
 				prepare : function(arg1){
@@ -157,11 +173,30 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 
            // setLineWidthAndTickSize(yearRange, FlotOptions);     
 			//setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
+            
+            
+            $(".disabled-checkbox-event-receiver").live("click", function() {
+            	
+            	if ($(this).next().is(':disabled')) {
+            		
+            	createNotification("error-notification", { title:'Error', 
+					text:'A Maximum 10 entities can be compared. Please remove some & try again.' },{
+					custom: true,
+					expires: 3500
+					});	
+		
+            	}
+            	
+            
+            });
+            
             /*
              * When the elements in the paginated div
              * are clicked this event handler is called
              */
             $("input.if_clicked_on_school").live('click', function(){
+            
+            
             
                 var checkbox = $(this);
                 var checkboxValue = $(this).attr("value");
@@ -208,6 +243,7 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 </script>
 
 <div id="body">
+
 		<h2 style="width: 36%; padding-left:45px;"><a href="" id = "organizationMoniker"></a></h2>
 		<div id="leftblock">
 			<div id="leftUpper">
@@ -229,6 +265,25 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 			</div>
 						
 			<div id="leftLower">
+				<div id="notification-container" style="display:none">
+		
+					<div id="error-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
+						<a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
+						<span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
+						<h1>&#035;{title}</h1>
+						<p>&#035;{text}</p>
+						<p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
+					</div>
+					
+					<div id="warning-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
+						<a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
+						<span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
+						<h1>&#035;{title}</h1>
+						<p>&#035;{text}</p>
+						<p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
+					</div>
+				
+				</div>
 				<h3>Who do you want to compare?</h3>
 				<div id="paginatedTable">
 				</div>
@@ -259,5 +314,6 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 		
 			</div>
 		
-		</div>		
+		</div>
+		
 </div>

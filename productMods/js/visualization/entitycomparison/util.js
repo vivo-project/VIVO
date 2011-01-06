@@ -660,14 +660,13 @@ function clearRenderedObjects(){
 
 }
 
+function createNotification( template, vars, opts ){
+	return $notificationContainer.notify("create", template, vars, opts);
+}
+
 function updateCounter(){
 	//notification about the max items that can be clicked
 	$("#counter").text(renderedObjects.length);
-	if (freeColors.length == 0) {
-        $.jGrowl("You can not select more than 10 entities at one time.", {
-            life: 3000
-        });
-    } 
 }
 
 function displayLineGraphs(){
@@ -737,7 +736,7 @@ function prepareTableForDataTablePagination(jsonData){
 		var row = $('<tr>'); 
 		
 		var checkboxTD = $('<td>');
-		checkboxTD.html('<input type="checkbox" class="if_clicked_on_school" value="' + index + '"'+'/>');
+		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="if_clicked_on_school" value="' + index + '"'+'/>');
 		
 		var labelTD =  $('<td>');
 		labelTD.css("width", "100px");
@@ -876,6 +875,7 @@ function disableUncheckedEntities(){
 
 	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
 		$(val).attr('disabled', true);
+		$(val).prev().show();
 	});
 	
 	//console.log($("input[type=checkbox].if_clicked_on_school:not(:checked)"));
@@ -887,6 +887,7 @@ function enableUncheckedEntities(){
 	
 	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
 		$(val).attr('disabled', false);
+		$(val).prev().hide();
 	});
 	
 	
