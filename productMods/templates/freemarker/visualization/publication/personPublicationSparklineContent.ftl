@@ -69,7 +69,15 @@
                         renderedShortSparks += data.getValue(value, 1);
                     });
          
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> publication(s) <br/></span>");
+                    var totalPubs = parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications});
+                    
+                    if ( totalPubs > 1 ) {
+                        var pubDisplay = "publications";
+                    } else {
+                        var pubDisplay = "publication";
+                    }
+                    
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
             
                     var sparksText = '  within the last 10 years';
             
@@ -80,7 +88,15 @@
                      * any year associated with it. Hence.
                      * */
                     var renderedSparks = ${sparklineVO.renderedSparks};      
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> publication(s) <br/></span>");
+                    var totalPubs = parseInt(renderedSparks) + parseInt(${sparklineVO.unkownYearPublications});
+                    
+                    if ( totalPubs > 1 ) {
+                        var pubDisplay = "publications";
+                    } else {
+                        var pubDisplay = "publication";
+                    }
+                    
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
                                         + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
