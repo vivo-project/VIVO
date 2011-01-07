@@ -231,8 +231,9 @@ ul#main-nav {
 }
 .pictos-arrow-14 {
     font-family: 'Pictos';
-    font-size: 14px;
+    font-size: .875em;
     color: #b2d15a;
+    line-height: .1em;
 }
 /* LOG IN------>  */          
 #login {
@@ -1041,22 +1042,22 @@ ul#alpha-browse-childClass .count-classes {
     font-size: 1.68em;
     color: #2485ae;
 }
-article.individual-foaf-person {
+#individuals-in-childClass li.individual-foaf-person {
     width: 440px;
     border-bottom: 1px solid #dde4e3;
+    padding-bottom: 0;
 }
-article.individual-foaf-person img {
+#individuals-in-childClass li.individual-foaf-person img {
     border: 2px solid #dde4e3;
 }
-article.individual-foaf-person h1 {
-    color: #5e6363;;
+#individuals-in-childClass li.individual-foaf-person h1 {
+    color: #5e6363;
     font-size: 1em;
-    font-weight: normal;
 }
-article.individual {
+#individuals-in-childClass li.individual {
     border-bottom: 1px solid #dde4e3;
 }
-article.individual h1 {
+#individuals-in-childClass li.individual h1 {
     margin: 0;
     paddin: 0;
     color: #5e6363;
