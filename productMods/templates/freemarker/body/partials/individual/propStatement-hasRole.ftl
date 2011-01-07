@@ -20,6 +20,6 @@
         </#if>
     </#local>
 
-    ${linkedIndividual} ${statement.specificRole!} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    ${linkedIndividual} ${statement.roleLabel!} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>

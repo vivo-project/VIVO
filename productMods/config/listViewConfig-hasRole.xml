@@ -10,12 +10,12 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)
-                        ?specificRole ?activity ?activityName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+                        ?roleLabel ?activity ?activityName ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
             OPTIONAL { GRAPH ?g2 { ?role core:roleIn ?activity }
                        GRAPH ?g3 { ?activity rdfs:label ?activityName }
             }
-            OPTIONAL { GRAPH ?g4 { ?role rdfs:label ?specificRole } }
+            OPTIONAL { GRAPH ?g4 { ?role rdfs:label ?roleLabel } }
             OPTIONAL { GRAPH ?g5 { ?role core:dateTimeInterval ?dateTimeInterval }
                        OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue .
                                               ?dateTimeStartValue core:dateTime ?dateTimeStart }

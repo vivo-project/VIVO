@@ -10,7 +10,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName)
-                        ?positionTitle ?org ?orgName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+                        ?positionTitle ?org ?orgName ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?position } 
             OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
                        GRAPH ?g3 { ?org rdfs:label ?orgName }

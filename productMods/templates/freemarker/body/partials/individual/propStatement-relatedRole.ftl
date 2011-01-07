@@ -20,6 +20,8 @@
         </#if>
     </#local>
 
-    ${linkedIndividual} ${statement.specificRole!} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    <#-- Generally roles are assigned a label when entered through a custom form. Investigator and its subclasses do not,
+    so use the type label instead. -->
+    ${linkedIndividual} ${statement.roleLabel!statement.roleTypeLabel!} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>

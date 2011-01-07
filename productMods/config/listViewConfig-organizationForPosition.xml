@@ -10,7 +10,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?subclass ?position (afn:localname(?position) AS ?positionName)
-                        ?positionTitle ?person ?personName ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+                        ?positionTitle ?person ?personName ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?position } 
             OPTIONAL { GRAPH ?g2 { ?position core:positionForPerson ?person }
                        GRAPH ?g3 { ?person rdfs:label ?personName }  
