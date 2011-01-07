@@ -29,7 +29,7 @@
                                               ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
                        OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                              ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                                               ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
         } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?indivName

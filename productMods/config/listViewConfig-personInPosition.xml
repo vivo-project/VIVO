@@ -24,7 +24,7 @@
                                               ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                        }
             }
-        } ORDER BY DESC(?dateTimeStart) DESC(?dateTimeEnd) ?orgName
+        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
     </query>
     
     <template>propStatement-personInPosition.ftl</template>
