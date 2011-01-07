@@ -341,15 +341,6 @@
   </servlet-mapping>
 
    <servlet>
-     <servlet-name>SimpleReasonerRecomputeController</servlet-name>
-     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SimpleReasonerRecomputeController</servlet-class>
-   </servlet>
-   <servlet-mapping>
-     <servlet-name>SimpleReasonerRecomputeController</servlet-name>
-     <url-pattern>/InferenceRecompute</url-pattern>
-   </servlet-mapping>
-  
-   <servlet>
     <servlet-name>MenuN3EditController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuN3EditController</servlet-class>
   </servlet>
