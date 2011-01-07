@@ -339,6 +339,15 @@
     <servlet-name>IndexController</servlet-name>
     <url-pattern>/SearchIndex</url-pattern>
   </servlet-mapping>
+
+   <servlet>
+     <servlet-name>SimpleReasonerRecomputeController</servlet-name>
+     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SimpleReasonerRecomputeController</servlet-class>
+   </servlet>
+   <servlet-mapping>
+     <servlet-name>SimpleReasonerRecomputeController</servlet-name>
+     <url-pattern>/InferenceRecompute</url-pattern>
+   </servlet-mapping>
   
    <servlet>
     <servlet-name>MenuN3EditController</servlet-name>
