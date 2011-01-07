@@ -1379,28 +1379,28 @@
   
   <servlet-mapping>
     <servlet-name>entity</servlet-name>
-    <url-pattern>/entity</url-pattern>
+    <url-pattern>/entityold</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>entity</servlet-name>
-    <url-pattern>/entity/*</url-pattern>
+    <url-pattern>/entityold/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>entity</servlet-name>
-    <url-pattern>/individual/*</url-pattern>
+    <url-pattern>/individualold/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>entity</servlet-name>
-    <url-pattern>/display/*</url-pattern>
+    <url-pattern>/displayold/*</url-pattern>
   </servlet-mapping>
     
   <servlet-mapping>
     <servlet-name>individual</servlet-name>
-    <url-pattern>/entityfm</url-pattern>
+    <url-pattern>/entity</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>individual</servlet-name>
-    <url-pattern>/entityfm/*</url-pattern>
+    <url-pattern>/entity/*</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
     <servlet-name>individual</servlet-name>
@@ -1408,15 +1408,15 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>individual</servlet-name>
-    <url-pattern>/individualfm/*</url-pattern>
+    <url-pattern>/individual/*</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
     <servlet-name>individual</servlet-name>
-    <url-pattern>/displayfm</url-pattern>
+    <url-pattern>/display</url-pattern>
   </servlet-mapping> 
   <servlet-mapping>
     <servlet-name>individual</servlet-name>
-    <url-pattern>/displayfm/*</url-pattern>
+    <url-pattern>/display/*</url-pattern>
   </servlet-mapping>    
 
   <servlet-mapping>
