@@ -26,9 +26,17 @@ h2 {
 	margin-bottom: 5px;
 }
 
-button{
+a.temporalGraphLinks {
 	margin-top: 10px;
 	float:right;
+	height: 20px;
+	text-decoration: none;
+	width: 30%;
+	margin: 0 1% 0 1%;	
+	background-color: #EAEAEA;
+	text-align: center;
+	padding: 3px;
+	padding-top: 4px;
 }
 
 #reset-search {
@@ -189,12 +197,6 @@ li{
 	width: 100%;
 	float:right;
 	margin: 20px 0 20px 0;
-}
-
-button.green-button{
-	width: 31%;
-	margin: 0 1% 0 1%;
-	
 }
 
 #stopwordsdiv{

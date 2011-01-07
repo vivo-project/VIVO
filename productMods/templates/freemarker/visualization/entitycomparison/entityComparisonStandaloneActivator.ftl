@@ -8,17 +8,25 @@
 <#assign jsonContent ="${jsonContent}">
 <#assign organizationLabel = "${organizationLabel}">
 <#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
+<#assign subOrganizationTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison">
+<#assign subOrganizationVivoProfileURL = "${urls.base}/individual?">
+
 
 
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>
 
 
-<#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entitycomparison&uri=${organizationURI}&labelField=label'>
+<#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&labelField=label&vis_mode=UNIVERSITY'>
 
 
 <#-- Javascript files -->
 
 <#assign flot = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/jquery.flot.js'>
+<#assign excanvas = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/excanvas.js'>
+
+
+<!--[if IE]><script type="text/javascript" src="${excanvas}"></script><![endif]-->
+
 <#assign fliptext = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
 
 <#assign jqueryNotify = '${urls.base}/js/jquery_plugins/jquery.notify.min.js'>
@@ -72,6 +80,8 @@
 var contextPath = "${urls.base}";
 var temporalGraphDownloadFile = "${TemporalGraphDownloadFile}"
 var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
+var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
+var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 
 </script>
 
@@ -113,21 +123,17 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
             var selectedValue = $("select.comparisonValues option:selected").val();
 			$("#comparisonParameter").text("Total Number of " + selectedValue);
 			$('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
+			$('#yaxislabel').css("color", "#595B5B");
 			$('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
         });
 
 		//click event handler for clear button
-		$("button#clear").click(function(){
+		$("a#clear").click(function(){
 			clearRenderedObjects();
-		});
-
-		//click event handler for download file
-		$("button#csv").click(function(){
-			  alert("${TemporalGraphDownloadFile}");
-		});		
+		});	
 		
 		$("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
-		
+			
 			var checkbox = $(this);
 			var checkboxValue = $(this).attr("value");
 			var linkedCheckbox = labelToCheckedEntities[checkboxValue];
@@ -196,8 +202,6 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
              */
             $("input.if_clicked_on_school").live('click', function(){
             
-            
-            
                 var checkbox = $(this);
                 var checkboxValue = $(this).attr("value");
                 var entity = labelToEntityRecord[checkboxValue];
@@ -218,7 +222,7 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 					generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement) ; 
 					renderLineGraph(renderedObjects, entity);
 					labelToCheckedEntities[checkboxValue] = checkbox;
-					
+					                     
 		        } else if (!checkbox.is(':checked')) {
 		
 					removeUsedColor(entity);
@@ -288,9 +292,11 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 				<div id="paginatedTable">
 				</div>
 			</div>
+<#--		
 			<div id = "stopwordsdiv">
 				* The entity types core:Person, foaf:Organization have been excluded as they are too general.
 			</div>	
+-->			
 		</div>
 		<div id="rightblock">
 		
@@ -302,10 +308,10 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 				<div id="xaxislabel">Year</div>
 		
 				<div id="bottomButtons">
-					<button id="clear" class="green-button" type ="button">Remove All</button>
-					<button id="csv" class="green-button" class="green-button" type ="button">Save as CSV</button>
-					<button id="image" class="green-button" type="button" onClick="window.print()"> Save as Image</button>				
-				</div><br/>
+					<a id="clear" style="cursor:pointer;" class="temporalGraphLinks" >Remove All</a>
+					<a id="csv" href="${TemporalGraphDownloadFile}" class="temporalGraphLinks" >Save as CSV</a>
+<#--					<a id="image" href = "" class="temporalGraphLinks" onClick="window.print()"> Save as Image</a>				
+-->				</div><br/>
 		
 				<h4><span id="comparisonParameter"></span></h4>
 		
@@ -314,6 +320,5 @@ var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 		
 			</div>
 		
-		</div>
-		
+		</div>		
 </div>

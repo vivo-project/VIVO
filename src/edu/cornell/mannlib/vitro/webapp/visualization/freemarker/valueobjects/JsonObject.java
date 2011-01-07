@@ -59,18 +59,21 @@ public class JsonObject {
 		this.label = label;
 	}
 
-	public List<List<Integer>> getYearToPublicationCount() {
+	public List<List<Integer>> getYearToActivityCount() {
 		return data;
 	}
 
-
-	
 	public JsonObject(String label){
 		this.label = label;
 	}
 	
-	public void setYearToPublicationCount(List<List<Integer>> yearToPublicationCount){
+	public void setYearToActivityCount(List<List<Integer>> yearToPublicationCount){
 		this.data = yearToPublicationCount;
+	}
+
+	public void setYearToGrantCount(List<List<Integer>> yearGrantCount) {
+		
+		
 	}
 	
 }

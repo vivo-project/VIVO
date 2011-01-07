@@ -33,6 +33,10 @@ public class Grant extends Individual {
 	public String getGrantLabel(){
 		return this.getIndividualLabel();
 	}
+	
+	public void setGrantLabel(String grantLabel) {
+		this.setIndividualLabel(grantLabel);
+	}
 	/**
 	 * This method will be called when there is no usable core:year value found
 	 * for the bibo:Document. It will first check & parse core:yearMonth failing

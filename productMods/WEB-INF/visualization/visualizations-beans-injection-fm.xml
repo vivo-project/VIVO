@@ -15,7 +15,6 @@
 	<bean id="utilities"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.utilities.UtilitiesRequestHandler" />
 	
-	
 	<bean id="coauthorship"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipRequestHandler" />
 		
@@ -30,6 +29,10 @@
 
 	<bean id="entity_comparison"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityPublicationCountRequestHandler" />
+
+	<bean id="entity_grant_count"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitygrantcount.EntityGrantCountRequestHandler" />
+	
 	
 	<bean id="visualizationInjector"
 		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationInjector">
@@ -63,6 +66,9 @@
 					<ref bean="coprincipalinvestigator"></ref>
 				</entry>
 				
+				<entry key="entity_grant_count">
+					<ref bean="entity_grant_count"></ref>
+				</entry>				
 				 
 			</map>
 		</property>

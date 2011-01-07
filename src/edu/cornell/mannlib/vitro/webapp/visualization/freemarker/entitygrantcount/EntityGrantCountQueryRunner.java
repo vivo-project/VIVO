@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison;
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitygrantcount;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,21 +24,21 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
-
 /**
  * This query runner is used to execute a sparql query that will fetch all the
- * publications defined by bibo:Document property for a particular
+ * grants defined by core:Grant property for a particular
  * department/school/university.
  * 
- * Deepak Konidena.
+ * Deepak Konidena
+ * 
  * @author bkoniden
  */
-public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
+public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
@@ -46,47 +46,48 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private DataSource dataSource;
 	private Log log;
 
-	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
-			+ "		(str(?Person) as ?personLit) "
-			+ "		(str(?PersonLabel) as ?personLabelLit) "
-			+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
-			+ "		(str(?Document) as ?documentLit) "
-			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
-			+ "		(str(?publicationYear) as ?publicationYearLit) "
-			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) "
-			+ "		(str(?publicationDate) as ?publicationDateLit) "
-			+ "		(str(?StartYear) as ?StartYearLit)";
+	
+	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "SELECT "
+		+ "		(str(?organizationLabel) as ?organizationLabelLit) "
+		+ "		(str(?subOrganization) as ?subOrganizationLit) "
+		+ "		(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
+		+ "		(str(?Person) as ?personLit) "
+		+ "		(str(?PersonLabel) as ?personLabelLit) "
+		+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
+		+ "		(str(?Grant) as ?grantLit) "
+		+ "		(str(?GrantLabel) as ?grantLabelLit) "
+		+ " 	(str(?GrantStartDate) as ?grantStartDateLit) "
+		+ "		(str(?GrantEndDate) as ?grantEndDateLit)  ";
+	
+	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE =  " "
+		+ "		?SecondaryPosition rdfs:label ?SecondaryPositionLabel . "
+		+ "		?Role core:roleIn ?Grant . "
+		+ "		?Grant rdfs:label ?GrantLabel . "
+		+ "		OPTIONAL { ?Grant core:startDate ?GrantStartDate } . "
+		+ "		OPTIONAL { ?Grant core:endDate ?GrantEndDate } .";
+	
+	
+	private static String ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
+	private static String ENTITY_URL = QueryFieldLabels.ORGANIZATION_URL;
+	private static String SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL ;
+	private static String SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
 
-
-	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
-			+ "?Document rdf:type bibo:Document ;"
-			+ " rdfs:label ?DocumentLabel ."
-			+ "OPTIONAL {  ?Document core:year ?publicationYear } ."
-			+ "OPTIONAL {  ?Document core:yearMonth ?publicationYearMonth } ."
-			+ "OPTIONAL {  ?Document core:date ?publicationDate } ."
-			+ "OPTIONAL {  ?SecondaryPosition core:startYear ?StartYear } .";
-
-	private static String ENTITY_LABEL;
-	private static String ENTITY_URL;
-	private static String SUBENTITY_LABEL;
-	private static String SUBENTITY_URL;
-
-	public EntityPublicationCountQueryRunner(String entityURI,
+	
+	public EntityGrantCountQueryRunner(String entityURI,
 			DataSource dataSource, Log log) {
 
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
 		this.log = log;
 
-	}
-
+	}	
+	
 	private Entity createJavaValueObjects(ResultSet resultSet) {
 
 		Entity entity = null;
-		Map<String, BiboDocument> biboDocumentURLToVO = new HashMap<String, BiboDocument>();
+		Map<String, Grant> grantURIToVO = new HashMap<String, Grant>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
-
 
 		while (resultSet.hasNext()) {
 
@@ -97,43 +98,31 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 						solution.get(ENTITY_LABEL).toString());
 			}
 
-			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
-			BiboDocument biboDocument;
+			RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
+			Grant grant;
 
-			if (biboDocumentURLToVO.containsKey(documentNode.toString())) {
-				biboDocument = biboDocumentURLToVO.get(documentNode.toString());
+			if (grantURIToVO.containsKey(grantNode.toString())) {
+				grant = grantURIToVO.get(grantNode.toString());
 
 			} else {
 
-				biboDocument = new BiboDocument(documentNode.toString());
-				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
+				grant = new Grant(grantNode.toString());
+				grantURIToVO.put(grantNode.toString(), grant);
 
-				RDFNode documentLabelNode = solution
-						.get(QueryFieldLabels.DOCUMENT_LABEL);
-				if (documentLabelNode != null) {
-					biboDocument.setDocumentLabel(documentLabelNode.toString());
+				RDFNode grantLabelNode = solution
+						.get(QueryFieldLabels.GRANT_LABEL);
+				if (grantLabelNode != null) {
+					grant.setGrantLabel(grantLabelNode.toString());
 				}
 
-				RDFNode publicationYearNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-				if (publicationYearNode != null) {
-					biboDocument.setPublicationYear(publicationYearNode
-							.toString());
+				RDFNode grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
+				if(grantStartDateNode != null){
+					grant.setGrantStartDate(grantStartDateNode.toString());
 				}
-
-				RDFNode publicationYearMonthNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
-				if (publicationYearMonthNode != null) {
-					biboDocument
-							.setPublicationYearMonth(publicationYearMonthNode
-									.toString());
-				}
-
-				RDFNode publicationDateNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-				if (publicationDateNode != null) {
-					biboDocument.setPublicationDate(publicationDateNode
-							.toString());
+				
+				RDFNode grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
+				if(grantEndDateNode != null){
+					grant.setGrantEndDate(grantEndDateNode.toString());
 				}
 
 			}
@@ -156,8 +145,9 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
 				entity.addSubEntity(subEntity);
-				subEntity.addPublications(biboDocument);
+				subEntity.addGrants(grant);
 			}
+			
 			
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
 			
@@ -176,11 +166,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				}
 				
 //				entity.addSubEntity(person);
-				person.addPublications(biboDocument);				
+				person.addGrants(grant);				
 
-			}			
-
-			entity.addPublications(biboDocument);
+			}
+			
+			entity.addGrants(grant);
 		}
 		
 		if(subentityURLToVO.size() == 0){
@@ -188,10 +178,10 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				entity.addSubEntity(person);
 			}
 		}
-		//TODO: return non-null value
+
 		return entity;
 	}
-		
+
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
 
 		QueryExecution queryExecution = null;
@@ -199,57 +189,49 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				getSparqlQuery(queryURI), SYNTAX);
 		queryExecution = QueryExecutionFactory.create(query, dataSource);
 		return queryExecution.execSelect();
-	}
-
-	private String getSparqlQuery(String queryURI) {
-		
-		String result = "";
-			
-		ENTITY_URL = QueryFieldLabels.ORGANIZATION_URL;
-		ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
-		SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
-		SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
-
-		result = getSparqlQueryForOrganization(queryURI);
-
-		return result;
-	}
-
+	}	
 	
-	private String getSparqlQueryForOrganization(String queryURI){
+	private String getSparqlQuery(String queryURI){
 		
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-		+ "SELECT 	(str(?organizationLabel) as ?organizationLabelLit) "
-		+ "	 		(str(?subOrganization) as ?subOrganizationLit) "
-		+ "			(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
 		+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
 		+ ">) as ?" + ENTITY_URL + ") "
 		+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
 		+ " rdfs:label ?organizationLabel ."
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
-		+ "?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
+		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ " ?Resource core:linkedInformationResource ?Document .  "
-		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
+		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "UNION "
 		+ "{ "
-		+ "<" + queryURI + "> core:organizationForPosition ?Position ."
+		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
+		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ "	?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ " ?Resource core:linkedInformationResource ?Document ."
-		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
+		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
-		+ "}";
+		+ "UNION "
+		+ "{ "
+		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
+		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
+		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ "UNION "
+		+ "{ "
+		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
+		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
+		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ " } ";
 		
-		//System.out.println("\n\nEntity Pub Count query is: "+ sparqlQuery);
+		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
+		
 		log.debug("\nThe sparql query is :\n" + sparqlQuery);
 		
 		return sparqlQuery;
 
-	}
+	}	
 	
 	public Entity getQueryResult() throws MalformedQueryParametersException {
 
@@ -263,7 +245,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			if (iri.hasViolation(false)) {
 				String errorMsg = ((Violation) iri.violations(false).next())
 						.getShortMessage();
-				log.error("Entity Pub Count Query Query " + errorMsg);
+				log.error("Entity Grant Count Query " + errorMsg);
 				throw new MalformedQueryParametersException(
 						"URI provided for an entity is malformed.");
 			}
@@ -276,9 +258,5 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
 
 		return createJavaValueObjects(resultSet);
-	}
-
+	}	
 }
-
-
-

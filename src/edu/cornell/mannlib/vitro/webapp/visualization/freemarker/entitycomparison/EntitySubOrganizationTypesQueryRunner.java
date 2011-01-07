@@ -40,36 +40,23 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	private String entityURI;
 	private DataSource dataSource;
 	private Log log;
-	private String visMode;
-	static String SUBORGANISATION_LABEL;
-	static String SUBORGANISATION_TYPE_LABEL;
-//	public static Map<String, Integer> subOrganizationTypesToCount = new HashMap<String, Integer>();
-//	public static Set<String> stopWords = new HashSet<String>();
-//	public static Set<String> subOrganizations = new HashSet<String>();
-//	public static Set<String> STOP_WORDS = new HashSet<String>() {
-//		{
-//			add("Person");
-//			add("Organization");
-//		}
-//	};
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
 		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
 		+ "		(str(?subOrganizationLabel) as ?"+QueryFieldLabels.SUBORGANIZATION_LABEL+") "
 		+ "		(str(?subOrganizationType) as ?"+QueryFieldLabels.SUBORGANIZATION_TYPE +")"
-		+ "		(str(?subOrganizationTypeLabel) as ?"+QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL+") ";
+		+ "		(str(?subOrganizationTypeLabel) as ?"+QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL+") "
+		+ " 	(str(?Person) as ?personLit) "            
+		+ "		(str(?PersonLabel) as ?personLabelLit) "                      
+		+ "		(str(?PersonTypeLabel) as ?personTypeLabelLit) ";
 
 	
 	public EntitySubOrganizationTypesQueryRunner(String entityURI,
-			DataSource dataSource, Log log, String visMode){
+			DataSource dataSource, Log log){
 		
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
 		this.log = log;
-		this.visMode = visMode;
-//		stopWords.clear();
-//		subOrganizations.clear();
-//		subOrganizationTypesToCount.clear();
 	}
 	
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
@@ -82,49 +69,35 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	}
 	
 	private String getSparqlQuery(String queryURI) {
+
 		String sparqlQuery = "";
+
+		sparqlQuery = QueryConstants.getSparqlPrefixQuery()
+				+ "SELECT "
+				+ SPARQL_QUERY_SELECT_CLAUSE
+				+ " WHERE { "
+				+ "<"
+				+ queryURI
+				+ "> rdf:type foaf:Organization ;"
+				+ " rdfs:label ?organizationLabel . "
+				+ "{ "
+				+ "<"+ queryURI + "> core:hasSubOrganization ?subOrganization .  "
+				+ "?subOrganization rdfs:label ?subOrganizationLabel ; rdf:type ?subOrganizationType . "
+				+ "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
+				+ "}"
+				+ "UNION "
+				+ "{ "
+				+ "<"+ queryURI + "> core:organizationForPosition ?Position . "
+				+ "?Position rdf:type core:Position ; core:positionForPerson ?Person . "
+				+ "?Person  rdfs:label ?PersonLabel ; rdf:type ?PersonType . "
+				+ "?PersonType rdfs:label ??PersonTypeLabel . "
+				+ "}"
+				+ "}";
+
 		
-		if (!this.visMode.equals("DEPARTMENT")) {
-			
-			SUBORGANISATION_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
-			SUBORGANISATION_TYPE_LABEL = QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL;
-			sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-					+ "SELECT "
-					+ SPARQL_QUERY_SELECT_CLAUSE
-					+ " WHERE { "
-					+ "<"
-					+ queryURI
-					+ "> rdf:type foaf:Organization ;"
-					+ " rdfs:label ?organizationLabel ;"
-					+ " core:hasSubOrganization ?subOrganization .  "
-					+ "	?subOrganization rdfs:label ?subOrganizationLabel ;"
-					+ " rdf:type ?subOrganizationType .  "
-					+ " ?subOrganizationType rdfs:label ?subOrganizationTypeLabel ."
-					+ "}";
-			
-		} else{
-			
-			SUBORGANISATION_LABEL = QueryFieldLabels.PERSON_LABEL;
-			SUBORGANISATION_TYPE_LABEL = QueryFieldLabels.PERSON_TYPE_LABEL;
-			sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-						  + "SELECT "
-							+ "		(str(?departmentLabel) as ?"+QueryFieldLabels.DEPARTMENT_LABEL+") "
-							+ "		(str(?personLabel) as ?"+QueryFieldLabels.PERSON_LABEL+") "
-							+ "		(str(?personType) as ?"+QueryFieldLabels.PERSON_TYPE +")"
-							+ "		(str(?personTypeLabel) as ?"+QueryFieldLabels.PERSON_TYPE_LABEL+") "
-							+ " WHERE { "
-							+ "<"
-							+ queryURI
-							+ "> rdf:type core:Department ;"
-							+ " rdfs:label ?departmentLabel ;"
-							+ " core:organizationForPosition ?position .  "
-							+ " ?position rdf:type core:Position ; core:positionForPerson ?person . "
-							+ "	?person rdfs:label ?personLabel ;"
-							+ " rdf:type ?personType .  "
-							+ " ?personType rdfs:label ?personTypeLabel ."
-							+ "}";;
-		}
+		//System.out.println("\n\nEntity SubOrganizationTypes query is: "+ sparqlQuery);
 		log.debug("\nThe sparql query is :\n" + sparqlQuery);
+
 		return sparqlQuery;
 
 	}
@@ -132,56 +105,52 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	private Map<String, Set<String>> createJavaValueObjects(ResultSet resultSet) {
 
 		Map<String, Set<String>> subOrganizationLabelToTypes = new HashMap<String, Set<String>>();
+		Map<String, Set<String>> personLabelToTypes = new HashMap<String, Set<String>>();
 		
 		while(resultSet.hasNext()){
 			
 			QuerySolution solution = resultSet.nextSolution();
 			
-			RDFNode subOrganizationLabel = solution.get(SUBORGANISATION_LABEL);
+			RDFNode subOrganizationLabel = solution.get(QueryFieldLabels.SUBORGANIZATION_LABEL);
 			
-			if(subOrganizationLabelToTypes.containsKey(subOrganizationLabel.toString())){
-				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
-				if(subOrganizationType != null){
-					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
-//					updateSubOrganizationTypesToCount(subOrganizationType.toString());
-//					subOrganizations.add(subOrganizationLabel.toString());
-				}
-			}else{
-				RDFNode subOrganizationType = solution.get(SUBORGANISATION_TYPE_LABEL);
-				if(subOrganizationType != null){
-					subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
-					subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
-//					updateSubOrganizationTypesToCount(subOrganizationType.toString());
-//					subOrganizations.add(subOrganizationLabel.toString());
+			if(subOrganizationLabel != null){
+				if(subOrganizationLabelToTypes.containsKey(subOrganizationLabel.toString())){
+					RDFNode subOrganizationType = solution.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
+					if(subOrganizationType != null){
+						subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
+					}
+				}else{
+					RDFNode subOrganizationType = solution.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
+					if(subOrganizationType != null){
+						subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
+						subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
+					}
 				}
 			}
-		}
-		
-//		collectStopWords();
-		
-		return subOrganizationLabelToTypes;
-	}
 
-	
-//	private void collectStopWords() {
-//		System.out.println("Inside collectStopWords \n-----------------------------\n");
-//		for(Map.Entry<String, Integer> typesCount : subOrganizationTypesToCount.entrySet()){
-//			System.out.println(typesCount.getKey() + ": "+ typesCount.getValue());
-//			if(typesCount.getValue() >= subOrganizations.size()){
-//				stopWords.add(typesCount.getKey());
-//			}
-//		}
-//	}
-//
-//	private void updateSubOrganizationTypesToCount(String typeLabel) {
-//		int count = 0;
-//		if(subOrganizationTypesToCount.containsKey(typeLabel)){
-//			count = subOrganizationTypesToCount.get(typeLabel);
-//			subOrganizationTypesToCount.put(typeLabel, ++count);
-//		}else{
-//			subOrganizationTypesToCount.put(typeLabel, 1);
-//		}
-//	}
+			RDFNode personLabel = solution.get(QueryFieldLabels.PERSON_LABEL);
+			
+			if(personLabel != null){
+				if(personLabelToTypes.containsKey(personLabel.toString())){
+					RDFNode personType = solution.get(QueryFieldLabels.PERSON_TYPE_LABEL);
+					if(personType != null && ! personType.toString().startsWith("http")){
+						personLabelToTypes.get(personLabel.toString()).add(personType.toString());
+					}
+				}else{
+					RDFNode personType = solution.get(QueryFieldLabels.PERSON_TYPE_LABEL);
+					if(personType != null && ! personType.toString().startsWith("http")){
+						personLabelToTypes.put(personLabel.toString(), new HashSet<String>());
+						personLabelToTypes.get(personLabel.toString()).add(personType.toString());
+					}
+				}
+			}			
+		}		
+		
+		//System.out.println("\n\nSub Organization Label Types Size --> " + subOrganizationLabelToTypes.size());
+		//System.out.println("\n\nPeople Label Types Size --> " + personLabelToTypes.size());
+		
+		return (subOrganizationLabelToTypes.size() != 0 )? subOrganizationLabelToTypes : personLabelToTypes ;
+	}
 
 	public Map<String, Set<String>> getQueryResult() throws MalformedQueryParametersException {
 

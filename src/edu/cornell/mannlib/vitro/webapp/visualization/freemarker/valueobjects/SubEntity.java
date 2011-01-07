@@ -14,11 +14,12 @@ public class SubEntity extends Individual {
 
 	Set<BiboDocument> publications = new HashSet<BiboDocument>();
 	Map<String, Map<String, String>> personToPositionAndStartYear = new HashMap<String, Map<String, String>>(); 
+	Set<Grant> grants = new HashSet<Grant>();
+	
 	
 	public SubEntity(String individualURI) {
 		super(individualURI);
 	}
-	
 	
 	public Map<String, Map<String, String>> getPersonToPositionAndStartYear() {
 		return personToPositionAndStartYear;
@@ -33,6 +34,10 @@ public class SubEntity extends Individual {
 		return publications;
 	}
 
+	public Set<Grant> getGrants() {
+		return grants;
+	}
+	
 	public SubEntity(String individualURI, String individualLabel) {
 		super(individualURI, individualLabel);
 	}
@@ -55,5 +60,10 @@ public class SubEntity extends Individual {
 
 	public void addPublications(BiboDocument biboDocument) {
 		this.publications.add(biboDocument);
+	}
+
+
+	public void addGrants(Grant grant) {
+		this.grants.add(grant);
 	}
 }

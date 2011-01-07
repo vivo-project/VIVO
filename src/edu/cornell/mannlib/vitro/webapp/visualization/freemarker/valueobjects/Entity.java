@@ -14,6 +14,7 @@ public class Entity extends Individual{
 	
 	Set<BiboDocument> publications = new HashSet<BiboDocument>();
 	Set<SubEntity> children = new LinkedHashSet<SubEntity>();
+	Set<Grant> grants = new HashSet<Grant>();
 	
 	public Entity(String departmentURI, String departmentLabel){
 		super(departmentURI, departmentLabel);
@@ -46,6 +47,10 @@ public class Entity extends Individual{
 	public void addSubEntity(SubEntity subEntity) {
 		this.children.add(subEntity);
 		
+	}
+
+	public void addGrants(Grant grant) {
+		this.grants.add(grant);
 	}
 
 }

@@ -11,6 +11,7 @@
  */
 function init(graphContainer) {
 	
+	$('#yaxislabel').css("color", "#595B5B");
 	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
@@ -382,7 +383,7 @@ function createGraphic(entity, bottomDiv) {
 
 }
 
-function getVIVOURL(entity){
+/*function getVIVOURL(entity){
 	
 	var result  = "/vivo1/individual?uri="+entity.entityURI+"&home=1";
 	return result;
@@ -398,12 +399,36 @@ function getEntityURL(entity) {
 		var home = "&home=1";
 		result = (path + uri + home);
 	}else{
-		path = "/vivo1/visualization?";
+		path = "/vivo1/visualizationfm?";
 		var visAndRenderMode = "vis=entity_comparison&render_mode=standalone&";
 		var visMode = "vis_mode=" + entity.visMode + "&";
 		uri = "uri=" + entity.entityURI;
 		result = (path + visAndRenderMode + visMode + uri);
 	}
+	return result;
+}*/
+
+function getVIVOURL(entity){
+	
+	var result  = subOrganizationVivoProfileURL + "uri="+entity.entityURI;
+	
+	return result;
+}
+
+function getEntityURL(entity) {
+	
+	var result = '';
+	
+	if(entity.visMode == "PERSON"){
+
+		result = subOrganizationVivoProfileURL + "uri="+ entity.entityURI;
+
+	}else{
+		
+		result = subOrganizationTemporalGraphURL+ "&vis_mode=" + entity.visMode + "&" +  
+				 "uri=" + entity.entityURI ;
+	}
+	
 	return result;
 }
 
@@ -547,10 +572,11 @@ function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
     divBar.css("width", normalizedWidth);
     divLabel.children("a#entityURL").html(checkboxValue + "    ").css("color", "#333");
 //    divLabel.children("a#entityURL").css("color", "#333").css("text-decoration", none);
-    divLabel.children("a#entityURL").autoEllipsis();
+//    divLabel.children("a#entityURL").autoEllipsis();
+    divLabel.children("a#entityURL");
     createVIVOProfileImage(divLabel.children("a#`"));
     divLabel.children("a").css("font-size", "0.8em");
-    spanElement.text(sum);
+    spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
     checkbox.next('a').css("font-weight", "bold");
 
 }
@@ -718,7 +744,7 @@ function prepareTableForDataTablePagination(jsonData){
 	publicationCountTH.html('Publication Count');
 
 	var entityTypeTH = $('<th>');
-	entityTypeTH.html('Entity Type*');
+	entityTypeTH.html('Entity Type');
 
 	tr.append(checkboxTH);
 	tr.append(entityLabelTH);
