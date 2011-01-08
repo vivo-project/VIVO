@@ -20,7 +20,7 @@
                                           ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
                        }                                            
                        OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue . 
-                                   ?dateTimeValue core:dateTime ?dateTime . } 
+                                              ?dateTimeValue core:dateTime ?dateTime . } 
                        } 
             }                                                           
         } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
