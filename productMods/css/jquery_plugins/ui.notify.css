@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 .ui-notify { width:350px; position:fixed; top:10px; right:10px; }
 .ui-notify-message { padding:10px; margin-bottom:15px; -moz-border-radius:8px; -webkit-border-radius:8px; border-radius:8px }
 .ui-notify-message h1 { font-size:14px; margin:0; padding:0 }
