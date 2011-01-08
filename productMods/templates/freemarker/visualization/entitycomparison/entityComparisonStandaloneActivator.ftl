@@ -65,13 +65,18 @@
 <#assign jqueryNotifyStyle = "${urls.base}/css/jquery_plugins/ui.notify.css" />
 
 <#assign entityComparisonStyle = "${urls.base}/css/visualization/entitycomparison/layout.css" />
+<#assign entityComparisonStyleIEHack = "${urls.base}/css/visualization/entitycomparison/layout-ie.css" />
+
 <#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
+
+
 
 <link href="${jqueryUIStyle}" rel="stylesheet" type="text/css" />
 <link href="${demoTable}" rel="stylesheet" type="text/css" />
 <link href="${entityComparisonStyle}" rel="stylesheet" type="text/css" />
 <link href="${vizStyle}" rel="stylesheet" type="text/css" />
 <link href="${jqueryNotifyStyle}" rel="stylesheet" type="text/css" />
+<!--[if IE]><link href="${entityComparisonStyleIEHack}" rel="stylesheet" type="text/css" /><![endif]-->
 
 
 <#-- variables passed from server-side code -->
@@ -88,7 +93,7 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 <script type="text/javascript">
 
 	$(document).ready(function() {
-
+	
 		var jsonString = '${jsonContent}';
 		var organizationLabel = '${organizationLabel}';
 		
@@ -279,12 +284,10 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 						<p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
 					</div>
 					
-					<div id="warning-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
-						<a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
-						<span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
+					<div id="warning-notification">
+					<a class="ui-notify-close ui-notify-cross" href="#">x</a>
 						<h1>&#035;{title}</h1>
 						<p>&#035;{text}</p>
-						<p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
 					</div>
 				
 				</div>

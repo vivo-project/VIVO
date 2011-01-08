@@ -904,7 +904,25 @@ function disableUncheckedEntities(){
 		$(val).prev().show();
 	});
 	
-	//console.log($("input[type=checkbox].if_clicked_on_school:not(:checked)"));
+	/*
+	 * This indicates the first time this function is called presumably after the 10th checkbox is selected.
+	 * We want to display a warning message only in Internet Explorer because in IE the div that handles
+	 * disabled-checkbox-clicks is colored white & we cant see the actual checkbox.
+	 * 
+	 * Note that the usual Error message will still display if the user tries to click on the white box 
+	 * (or a disabled checkbox in case of non-IE browsers).   
+	 * */
+	
+	if ($("#datatable").data("isEntitySelectionAllowed")) {
+		if ($.browser.msie) {
+			createNotification("warning-notification", { title:'Information', 
+				text:'A Maximum of 10 entities can be compared.' },{
+				custom: false,
+				expires: 4000
+				});	
+		}
+	} 
+		
 	
 	$("#datatable").data("isEntitySelectionAllowed", false);
 }
