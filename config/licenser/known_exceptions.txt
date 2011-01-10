@@ -31,6 +31,7 @@ themes/wilma/css/pictos.css
 
 # 3rd-party transform from JMeter distribution
 utilities/load-testing/jmeter-results-report.xsl
+utilities/load-testing/jmeter-results-detail-report.xsl
 
 # Plugins for JQuery.
 productMods/css/jquery_plugins/*
