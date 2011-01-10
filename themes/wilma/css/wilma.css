@@ -837,6 +837,11 @@ ul#foaf-person-childClasses .count-classes {
     font-size: .75em;
 }
 /* VISUAL GRAPH CLASS:GENERIC (ORGANIZATION, RESEARCH, EVENT) ------>  */
+#temporal-graph-link-container {
+	display: none;
+	float: right;
+  	width: 128px;
+}
 #content-generic-class {
     width: 900px;
 }

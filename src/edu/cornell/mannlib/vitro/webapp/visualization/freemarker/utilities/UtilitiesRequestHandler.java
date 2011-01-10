@@ -96,11 +96,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			
 			QueryRunner<ResultSet> imageQueryHandler = 
-					new GenericQueryRunner(individualURI,
-											fieldLabelToOutputFieldLabel,
+					new GenericQueryRunner(fieldLabelToOutputFieldLabel,
+											"",
 											whereClause,
-											dataSource,
-											log);
+											"",
+											dataSource, log);
 			
 			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
 											   fieldLabelToOutputFieldLabel);
@@ -155,6 +155,48 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 									 personLevelURLParams);
 			
+		} else if (VisualizationFrameworkConstants.HIGHEST_LEVEL_ORGANIZATION_VIS_MODE
+						.equalsIgnoreCase(visMode)) {
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			fieldLabelToOutputFieldLabel.put("organization", 
+											  QueryFieldLabels.ORGANIZATION_URL);
+			fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
+			
+			String aggregationRules = "(count(?organization) AS ?numOfChildren)";
+			
+			String whereClause = "?organization rdf:type foaf:Organization ; rdfs:label ?organizationLabel . \n"  
+									+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
+									+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
+									+ "FILTER ( !bound(?parent) ). \n";
+			
+			String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n" 
+										+ "ORDER BY DESC(?numOfChildren)\n" 
+										+ "LIMIT 1\n";
+			
+			QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = 
+					new GenericQueryRunner(fieldLabelToOutputFieldLabel,
+											aggregationRules,
+											whereClause,
+											groupOrderClause,
+											dataSource, log);
+			
+			return getHighestLevelOrganizationTemporalGraphVisURL(
+							highestLevelOrganizationQueryHandler.getQueryResult(),
+							fieldLabelToOutputFieldLabel);
+			
+			/*
+			
+			GenericQueryMap highestLevelOrganizationToValues = getHighestLevelOrganizationInformation(
+						highestLevelOrganizationQueryHandler.getQueryResult(),
+						fieldLabelToOutputFieldLabel);
+	
+			Gson highestLevelOrganizationInformation = new Gson();
+			
+			return highestLevelOrganizationInformation.toJson(highestLevelOrganizationToValues);
+			
+			*/
+			
 		} else {
 			
 			ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
@@ -166,6 +208,58 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 	}
 
+	private String getHighestLevelOrganizationTemporalGraphVisURL(ResultSet resultSet,
+			   Map<String, String> fieldLabelToOutputFieldLabel) {
+
+		GenericQueryMap queryResult = new GenericQueryMap();
+		
+		
+		while (resultSet.hasNext())  {
+			QuerySolution solution = resultSet.nextSolution();
+			
+			
+			RDFNode organizationNode = solution.get(
+									fieldLabelToOutputFieldLabel
+											.get("organization"));
+			
+			if (organizationNode != null) {
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
+				
+				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+						 organizationNode.toString(),
+						 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+						 VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS,
+						 
+						 /* Remove this hard-coded vis_mode once Deepak fixes the Temporal Graph Vis 
+						  * front-end to work without vis_modes. */
+						 VisualizationFrameworkConstants.VIS_MODE_KEY,
+						 "University");
+
+				return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+					 highestLevelOrganizationTemporalGraphVisURLParams);
+				
+				
+			}
+			
+			RDFNode organizationLabelNode = solution.get(
+									fieldLabelToOutputFieldLabel
+											.get("organizationLabel"));
+			
+			if (organizationLabelNode != null) {
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
+			}
+			
+			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
+			
+			if (numberOfChildrenNode != null) {
+				queryResult.addEntry("numOfChildren", String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
+			}
+		}
+		
+//		return queryResult;
+		return "";
+	}
+	
 	private String getThumbnailInformation(ResultSet resultSet,
 										   Map<String, String> fieldLabelToOutputFieldLabel) {
 		

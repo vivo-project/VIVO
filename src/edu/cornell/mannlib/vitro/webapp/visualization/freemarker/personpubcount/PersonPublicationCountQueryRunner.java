@@ -151,28 +151,12 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
             DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-//        try {
-            Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
-
-//            QuerySolutionMap qs = new QuerySolutionMap();
-//            qs.add("authPerson", queryParam); // bind resource to s
-            
-            queryExecution = QueryExecutionFactory.create(query, dataSource);
-            
-
-//            if (query.isSelectType()) {
-                return queryExecution.execSelect();
-//            }
-//        } finally {
-//            if (queryExecution != null) {
-//            	queryExecution.close();
-//            }
-//        }
-//		return null;
+        Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
+        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        return queryExecution.execSelect();
     }
 
 	private String getSparqlQuery(String queryURI) {
-//		Resource uri1 = ResourceFactory.createResource(queryURI);
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
@@ -186,7 +170,6 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
 							+ "}";
 
-//		System.out.println("SPARQL query for person pub count -> \n" + sparqlQuery);
 		return sparqlQuery;
 	}
 

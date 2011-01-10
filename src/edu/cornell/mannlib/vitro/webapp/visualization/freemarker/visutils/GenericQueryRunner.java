@@ -4,12 +4,8 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils;
 
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.iri.IRI;
-import com.hp.hpl.jena.iri.IRIFactory;
-import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -33,22 +29,27 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
-	private String whereClause, individualURLParam;
+	private String whereClause;
 	private DataSource dataSource;
 
 	private Log log;
 
 	private Map<String, String> fieldLabelToOutputFieldLabel;
 
-	public GenericQueryRunner(String individualURLParam,
-							   Map<String, String> fieldLabelToOutputFieldLabel, 
-							   String whereClause,
-							   DataSource dataSource, 
-							   Log log) {
+	private String groupOrderClause;
 
-		this.individualURLParam = individualURLParam;
+	private String aggregationRules;
+
+	public GenericQueryRunner(Map<String, String> fieldLabelToOutputFieldLabel,
+							   String aggregationRules, 
+							   String whereClause,
+							   String groupOrderClause, 
+							   DataSource dataSource, Log log) {
+
 		this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
+		this.aggregationRules = aggregationRules;
 		this.whereClause = whereClause;
+		this.groupOrderClause = groupOrderClause;
 		this.dataSource = dataSource;
 		this.log = log;
 		
@@ -58,30 +59,12 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-//        try {
-            Query query = QueryFactory.create(queryText, SYNTAX);
-
-//            QuerySolutionMap qs = new QuerySolutionMap();
-//            qs.add("authPerson", queryParam); // bind resource to s
-            
-            queryExecution = QueryExecutionFactory.create(query, dataSource);
-            
-
-            //remocve this if loop after knowing what is describe & construct sparql stuff.
-//            if (query.isSelectType()) {
-                return queryExecution.execSelect();
-//            }
-//        } finally {
-//            if (queryExecution != null) {
-//            	queryExecution.close();
-//            }
-//
-//        }
-//		return null;
+        Query query = QueryFactory.create(queryText, SYNTAX);
+        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        return queryExecution.execSelect();
     }
 
 	private String generateGenericSparqlQuery() {
-//		Resource uri1 = ResourceFactory.createResource(queryURI);
 
 		StringBuilder sparqlQuery = new StringBuilder();
 		sparqlQuery.append(QueryConstants.getSparqlPrefixQuery());
@@ -96,32 +79,21 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 			
 		}
 		
+		sparqlQuery.append("\n" + this.aggregationRules + "\n");
+		
 		sparqlQuery.append("WHERE {\n");
 		
 		sparqlQuery.append(this.whereClause);
 		
 		sparqlQuery.append("}\n");
 		
+		sparqlQuery.append(this.groupOrderClause);
+		
 		return sparqlQuery.toString();
 	}
 	
 	public ResultSet getQueryResult()
 			throws MalformedQueryParametersException {
-		if (StringUtils.isNotBlank(this.individualURLParam)) {
-        	/*
-        	 * To test for the validity of the URI submitted.
-        	 * */
-        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-    		IRI iri = iRIFactory.create(this.individualURLParam);
-            if (iri.hasViolation(false)) {
-                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
-                log.error("Generic Query " + errorMsg);
-                throw new MalformedQueryParametersException(
-                		"URI provided for an individual is malformed.");
-            }        	
-        } else {
-            throw new MalformedQueryParametersException("URI parameter is either null or empty.");
-        }
 
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(),
 										   this.dataSource);

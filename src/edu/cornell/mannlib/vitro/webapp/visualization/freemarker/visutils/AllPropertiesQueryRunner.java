@@ -77,24 +77,10 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 								   DataSource dataSource) {
 
         QueryExecution queryExecution = null;
-//        try {
-            Query query = QueryFactory.create(queryText, SYNTAX);
+        Query query = QueryFactory.create(queryText, SYNTAX);
 
-//            QuerySolutionMap qs = new QuerySolutionMap();
-//            qs.add("authPerson", queryParam); // bind resource to s
-            
-            queryExecution = QueryExecutionFactory.create(query, dataSource);
-            
-           // if (query.isSelectType()) {
-                return queryExecution.execSelect();
-//            }
-//        } finally {
-//            if (queryExecution != null) {
-//            	queryExecution.close();
-//            }
-//
-//        }
-//		return null;
+        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        return queryExecution.execSelect();
     }
 
 	private String generateGenericSparqlQuery(String queryURI, String filterRule) {

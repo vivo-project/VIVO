@@ -87,6 +87,7 @@ public class VisualizationFrameworkConstants {
 	public static final String UNIVERSITY_COMPARISON_VIS_MODE = "UNIVERSITY";
 	public static final String SCHOOL_COMPARISON_VIS_MODE = "SCHOOL";
 	public static final String DEPARTMENT_COMPARISON_VIS_MODE = "DEPARTMENT";
+	public static final String HIGHEST_LEVEL_ORGANIZATION_VIS_MODE = "HIGHEST_LEVEL_ORGANIZATION";
 	
 
 	/*
