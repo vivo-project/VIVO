@@ -1138,7 +1138,12 @@
     <servlet-name>entity</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityController</servlet-class>
   </servlet>
-
+  
+  <servlet>
+  <servlet-name>ontology</servlet-name>
+  <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.OntologyController</servlet-class>
+  </servlet>
+  
   <servlet>
     <servlet-name>individual</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.IndividualController</servlet-class>
@@ -1392,6 +1397,10 @@
   <servlet-mapping>
     <servlet-name>entity</servlet-name>
     <url-pattern>/displayold/*</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>ontology</servlet-name>
+    <url-pattern>/ontology/*</url-pattern>
   </servlet-mapping>
     
   <servlet-mapping>
