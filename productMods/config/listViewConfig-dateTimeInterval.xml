@@ -9,17 +9,16 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?dateTimeStart ?precisionStart ?dateTimeEnd ?precisionEnd WHERE {
+        SELECT DISTINCT ?dateTimeStart (afn:localname(?dateTimePrecisionStart) AS ?precisionStart) 
+                        ?dateTimeEnd (afn:localname(?dateTimePrecisionEnd) AS ?precisionEnd) WHERE {
             GRAPH ?g1 { ?subject ?property ?dateTimeInterval } 
             OPTIONAL { GRAPH ?g2 { ?dateTimeInterval core:start ?dateTimeStartValue .
                                    ?dateTimeStartValue core:dateTime ?dateTimeStart ;
-                                                       core:dateTimePrecision ?dateTimePrecisionStart . } 
-                       GRAPH ?g3 { ?dateTimePrecisionStart rdfs:label ?precisionStart }                    
+                                                       core:dateTimePrecision ?dateTimePrecisionStart . }                    
             }
-            OPTIONAL { GRAPH ?g4 { ?dateTimeInterval core:end ?dateTimeEndValue .
+            OPTIONAL { GRAPH ?g3 { ?dateTimeInterval core:end ?dateTimeEndValue .
                                    ?dateTimeEndValue core:dateTime ?dateTimeEnd ;
-                                                     core:dateTimePrecision ?dateTimePrecisionEnd . } 
-                       GRAPH ?g5 { ?dateTimePrecisionEnd rdfs:label ?precisionEnd }                    
+                                                     core:dateTimePrecision ?dateTimePrecisionEnd . }                   
             }
         }  
     </query>

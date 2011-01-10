@@ -2,10 +2,7 @@
 
 <#-- Custom object property statement view for http://vivoweb.org/ontology/core#dateTimeInterval -->
 
-<#if statement.dateTimeStart??>
-    ${dateTimeStart} ${precisionStart}
-</#if>
- -
-<#if statement.dateTimeEnd??>
-    ${dateTimeEnd} ${precisionEnd}
-</#if>
+<#import "lib-datetime.ftl" as dt>
+
+<@dt.dateTimeIntervalLong "${statement.dateTimeStart!}" "${statement.precisionStart!}" 
+                          "${statement.dateTimeEnd!}" "${statement.precisionEnd!}" />

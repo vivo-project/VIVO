@@ -111,4 +111,10 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#dateTimeValue">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
     </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#start">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#end">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
+    </rdf:Description>
 </rdf:RDF>
