@@ -147,7 +147,7 @@ report   - Just summarize output from previously run tests.
 			<property name="summariser.name" value="summary" />
 			<property name="summariser.out" value="true" />
 			<property name="summariser.log" value="true" />
-			<property name="summariser.interval" value="5" />
+			<property name="summariser.interval" value="10" />
 		</jmeter>
 	</target>
 
@@ -167,6 +167,18 @@ report   - Just summarize output from previously run tests.
 			<arg value="${report.out}" />
 			<arg value="-xsl" />
 			<arg value="${report.style}" />
+		</java>
+
+		<property name="report2.out" location="${results.dir}/${test.name}-detail.html" />
+		<property name="report2.style" location="${basedir}/jmeter-results-detail-report.xsl" />
+
+		<java classname="org.apache.xalan.xslt.Process" classpathref="xslt.classpath">
+			<arg value="-in" />
+			<arg value="${report.in}" />
+			<arg value="-out" />
+			<arg value="${report2.out}" />
+			<arg value="-xsl" />
+			<arg value="${report2.style}" />
 		</java>
 	</target>
 </project>
