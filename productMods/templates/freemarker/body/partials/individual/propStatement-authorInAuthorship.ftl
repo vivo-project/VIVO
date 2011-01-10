@@ -7,7 +7,7 @@
 
 <@showAuthorship statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values are in effect for the
+<#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showAuthorship statement>
 
@@ -19,11 +19,7 @@
             <a href="${profileUrl(statement.authorship)}">${statement.authorshipName}</a> (no linked information resource)
         </#if>
     </#local>
-    
-    <#if statement.dateTime??>
-        <#local year = dt.xsdDateTimeToYear(statement.dateTime)>
-    </#if>
-    
-    <@s.join [ linkedIndividual, year! ] />
+
+    ${linkedIndividual} <@dt.yearSpan "${statement.dateTime!}" />
 
 </#macro>

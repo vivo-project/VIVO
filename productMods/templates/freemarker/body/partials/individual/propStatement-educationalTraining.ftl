@@ -7,8 +7,8 @@
 
 <@showEducationalTraining statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values get passed to the next
-     statement -->
+<#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
+     next statement -->
 <#macro showEducationalTraining statement>
 
     <#local degree>
@@ -26,6 +26,6 @@
         </#if>
     </#local>
 
-    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info! ] /> <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
+    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
 
 </#macro>

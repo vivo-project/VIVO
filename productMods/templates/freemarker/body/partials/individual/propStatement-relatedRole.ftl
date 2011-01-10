@@ -7,8 +7,8 @@
 
 <@showRole statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values get passed to the next
-     statement -->
+<#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
+     next statement -->
 <#macro showRole statement>
     
     <#local linkedIndividual>
@@ -22,6 +22,6 @@
 
     <#-- Generally roles are assigned a label when entered through a custom form. Investigator and its subclasses do not,
     so use the type label instead. -->
-    ${linkedIndividual} ${statement.roleLabel!statement.roleTypeLabel!} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    ${linkedIndividual} ${statement.roleLabel!statement.roleTypeLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>

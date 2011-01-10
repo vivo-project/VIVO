@@ -7,8 +7,8 @@
 
 <@showRole statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values get passed to the next
-     statement -->
+<#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
+     next statement -->
 <#macro showRole statement>
     
     <#local linkedIndividual>
@@ -20,6 +20,6 @@
         </#if>
     </#local>
 
-    ${linkedIndividual} ${statement.roleLabel!} <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    ${linkedIndividual} ${statement.roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>

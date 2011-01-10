@@ -6,7 +6,7 @@
 
 <@showAuthorship statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values are in effect for the
+<#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showAuthorship statement>
 

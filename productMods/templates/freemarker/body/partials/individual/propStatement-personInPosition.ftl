@@ -7,8 +7,8 @@
 
 <@showPosition statement />
 
-<#-- Use a macro to keep variable assignments local; otherwise the values get passed to the next
-     statement -->
+<#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
+     next statement -->
 <#macro showPosition statement>
     
     <#local linkedIndividual>
@@ -20,6 +20,6 @@
         </#if>
     </#local>
     
-    <@s.join [ linkedIndividual, statement.positionTitle! ] /> <@dt.yearInterval "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    <@s.join [ linkedIndividual, statement.positionTitle! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>

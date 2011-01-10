@@ -4,5 +4,5 @@
 
 <#import "lib-datetime.ftl" as dt>
 
-<@dt.dateTimeIntervalLong "${statement.dateTimeStart!}" "${statement.precisionStart!}" 
-                          "${statement.dateTimeEnd!}" "${statement.precisionEnd!}" />
+${dt.dateTimeIntervalLong("${statement.dateTimeStart!}", "${statement.precisionStart!}", 
+                          "${statement.dateTimeEnd!}", "${statement.precisionEnd!}")}
