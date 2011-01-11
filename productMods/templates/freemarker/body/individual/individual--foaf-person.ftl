@@ -24,7 +24,10 @@
                 <li role="listitem"><a class="picto-font picto-uri" href="#">j</a></li>
                 <#--<li role="listitem"><a class="picto-font picto-pdf" href="#">F</a></li>-->
                 <li role="listitem"><a class="picto-font picto-share" href="#">R</a></li>
-                <li role="listitem"><a class="icon-rdf" href="#">RDF</a></li>
+                <#assign rdfUrl = individual.rdfUrl>
+                <#if rdfUrl??>
+                    <li role="listitem"><a class="icon-rdf" href="${rdfUrl}">RDF</a></li>
+                </#if>
             </ul>
         </nav>
             
