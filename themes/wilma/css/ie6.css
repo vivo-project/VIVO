@@ -69,3 +69,11 @@ article.individual-foaf-person {
 #profile-photo-display { 
     width: 620px;
 }
+/* Fix for site admin */
+/* the wonders of the IE float model...fix to maintain sanity in rendering sections of site admin */
+/* targets IE7 and below */
+#adminDashboard .pageBodyGroup {
+  *float: none !important;
+  *display: inline !important;
+  *vertical-align: top !important;
+}
