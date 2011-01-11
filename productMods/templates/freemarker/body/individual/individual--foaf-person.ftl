@@ -7,7 +7,7 @@
 <#assign core = "http://vivoweb.org/ontology/core#">
 
 <#assign editingClass>
-    <#if editStatus.showEditLinks>editing<#else></#if>
+    <#if editStatus.showEditingLinks>editing<#else></#if>
 </#assign>
 
 <#if editStatus.showAdminPanel>
