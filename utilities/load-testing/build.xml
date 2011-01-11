@@ -48,7 +48,6 @@ report   - Just summarize output from previously run tests.
           target: properties                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="properties">
-		<property name="test.name" value="firstTest" />
 		<property name="tests.dir" value="tests" />
 		<property name="results.dir" value=".results" />
 
@@ -63,6 +62,9 @@ report   - Just summarize output from previously run tests.
 		</fail>
 
 		<property file="${properties.file}" />
+
+		<fail unless="test.name"
+		      message="${properties.file} must contain a value for test.name" />
 
 		<fail unless="jmeter.home.dir"
 		      message="${properties.file} must contain a value for jmeter.home.dir" />
