@@ -28,9 +28,8 @@
 
 <http://aims.fao.org/aos/geopolitical.owl#disputed>
       rdf:type owl:Class ;
-      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#territory> ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#other> , <http://aims.fao.org/aos/geopolitical.owl#non_self_governing> , <http://aims.fao.org/aos/geopolitical.owl#self_governing> .
-
+      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#territory> .
+  
 <http://aims.fao.org/aos/geopolitical.owl#area>
       rdf:type owl:Class ;
       rdfs:subClassOf owl:Thing ;
@@ -294,8 +293,7 @@
 
 <http://aims.fao.org/aos/geopolitical.owl#economic_region>
       rdf:type owl:Class ;
-      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#geographical_region> , <http://aims.fao.org/aos/geopolitical.owl#special_group> , <http://aims.fao.org/aos/geopolitical.owl#organization> .
+      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> .
 
 <http://aims.fao.org/aos/geopolitical.owl#codeUNDP>
       rdf:type owl:DatatypeProperty ;
@@ -322,9 +320,8 @@
       <http://aims.fao.org/aos/geopolitical.owl#sourceCreator>
               "UN Cartographic Section " ;
       <http://purl.org/dc/elements/1.1/source>
-              "UN Cartographic Section      "^^xsd:string ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#other> , <http://aims.fao.org/aos/geopolitical.owl#self_governing> , <http://aims.fao.org/aos/geopolitical.owl#disputed> .
-
+              "UN Cartographic Section      "^^xsd:string .
+   
 <http://aims.fao.org/aos/geopolitical.owl#nameShortES>
       rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf <http://aims.fao.org/aos/geopolitical.owl#hasShortName> ;
@@ -372,8 +369,7 @@
 
 <http://aims.fao.org/aos/geopolitical.owl#other>
       rdf:type owl:Class ;
-      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#territory> ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#non_self_governing> , <http://aims.fao.org/aos/geopolitical.owl#self_governing> , <http://aims.fao.org/aos/geopolitical.owl#disputed> .
+      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#territory> .
 
 <http://aims.fao.org/aos/geopolitical.owl#hasCurrency>
       rdf:type owl:DatatypeProperty ;
@@ -559,8 +555,7 @@
 
 <http://aims.fao.org/aos/geopolitical.owl#organization>
       rdf:type owl:Class ;
-      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#geographical_region> , <http://aims.fao.org/aos/geopolitical.owl#special_group> , <http://aims.fao.org/aos/geopolitical.owl#economic_region> .
+      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> .
 
 <http://aims.fao.org/aos/geopolitical.owl#countryAreaYear>
       rdf:type owl:DatatypeProperty ;
@@ -1116,9 +1111,8 @@
 
 <http://aims.fao.org/aos/geopolitical.owl#special_group>
       rdf:type owl:Class ;
-      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#geographical_region> , <http://aims.fao.org/aos/geopolitical.owl#economic_region> , <http://aims.fao.org/aos/geopolitical.owl#organization> .
-
+      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> .
+  
 <http://aims.fao.org/aos/geopolitical.owl#countryAreaUnit>
       rdf:type owl:DatatypeProperty ;
       rdfs:range xsd:string ;
@@ -1274,9 +1268,8 @@
 
 <http://aims.fao.org/aos/geopolitical.owl#geographical_region>
       rdf:type owl:Class ;
-      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#special_group> , <http://aims.fao.org/aos/geopolitical.owl#economic_region> , <http://aims.fao.org/aos/geopolitical.owl#organization> .
-
+      rdfs:subClassOf <http://aims.fao.org/aos/geopolitical.owl#group> .
+ 
 <http://aims.fao.org/aos/geopolitical.owl#codeISO2>
       rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf <http://aims.fao.org/aos/geopolitical.owl#hasCode> ;
@@ -1317,8 +1310,7 @@
       <http://aims.fao.org/aos/geopolitical.owl#sourceCreator>
               "UN Cartographic Section  " ;
       <http://purl.org/dc/elements/1.1/source>
-              " UN Cartographic Section      "^^xsd:string ;
-      owl:disjointWith <http://aims.fao.org/aos/geopolitical.owl#other> , <http://aims.fao.org/aos/geopolitical.owl#non_self_governing> , <http://aims.fao.org/aos/geopolitical.owl#disputed> .
+              " UN Cartographic Section      "^^xsd:string .
 
 <http://aims.fao.org/aos/geopolitical.owl#codeUN>
       rdf:type owl:DatatypeProperty ;

@@ -13,14 +13,9 @@
     xmlns:j.5="http://purl.org/dc/terms/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:nodeID="A0">
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#StorageService">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Service"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#ResearchProject">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -28,12 +23,12 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research#ClinicalTrial"/>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Instrument">
-    <rdfs:subClassOf rdf:nodeID="A0"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
+    <rdfs:subClassOf rdf:nodeID="A0"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -44,6 +39,11 @@
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#realizesProtocol">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/core#Service"/>
@@ -51,9 +51,9 @@
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#protocolRealizedBy"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
     <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase4ClinicalTrial">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 4 Clinical Trial</vitro:shortDef>
@@ -62,17 +62,17 @@
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/scientific-research#ClinicalTrial"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#accessProvidedBy">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="http://vivoweb.org/ontology/scientific-research#AccessService"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#providesAccessTo"/>
+    <rdfs:range rdf:resource="http://vivoweb.org/ontology/scientific-research#AccessService"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#providesAccessTo">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research#AccessService"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#accessProvidedBy"/>
+    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research#AccessService"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase2ClinicalTrial">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 2 Clinical Trial</vitro:shortDef>
@@ -81,9 +81,9 @@
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 2 trials, an experimental study drug or treatment is given to a larger group of people (100-300) to see if it is effective and to further evaluate its safety.</vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Organism">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organism is a material entity that is an individual living system, such as animal, plant, bacteria or virus, that is capable of replicating or reproducing, growth and maintenance in the right environment.</vitro:shortDef>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OBI: An organism is material entity that is an individual living system, such as animal, plant, bacteria or virus, that is capable of replicating or reproducing, growth and maintenance in the right environment. An organism may be unicellular or made up, like humans, of many billions of cells divided into specialized tissues and organs.
 NOTE that we are not addressing for now the issue of whether a foaf:Person is a subclass of obi:Organism</vitro:descriptionAnnot>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organism is a material entity that is an individual living system, such as animal, plant, bacteria or virus, that is capable of replicating or reproducing, growth and maintenance in the right environment.</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#ProductionService">
@@ -100,8 +100,8 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#AccessService">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Service"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase1ClinicalTrial">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -140,9 +140,9 @@ NOTE: For now we are not addressing whether this is a subclass of foaf:Agent</vi
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#ClinicalTrial">
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A clinical trial is a research study using human volunteers to answer questions about treatments for diseases and conditions. Clinical trials are conducted in phases. The trials at each phase have a different purpose and help scientists answer different questions.</vitro:descriptionAnnot>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/scientific-research#HumanStudy"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A clinical trial is a research study using human volunteers to answer questions about treatments for diseases and conditions. Clinical trials are conducted in phases. The trials at each phase have a different purpose and help scientists answer different questions.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A research study using human volunteers to answer specifc health-related questions. </vitro:shortDef>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial">
@@ -152,9 +152,9 @@ NOTE: For now we are not addressing whether this is a subclass of foaf:Agent</vi
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 0 Clinical Trial</vitro:shortDef>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#hasDocumentation">
-    <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#documentationFor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#protocolRealizedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
