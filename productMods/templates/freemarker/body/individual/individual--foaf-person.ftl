@@ -31,12 +31,12 @@
         <#-- Email -->    
         <#assign email = propertyGroups.getPropertyAndRemoveFromList("${core}email")!>
         <#if email?has_content>
-        	<#-- Show property label if we can add one
+        <#-- Show property label if we can add one
             <#assign addUrl = email.addUrl>
             <#if addUrl??>
                 <h3>email.name</h3> <@addLink >
-            </#if>
-            -->
+            </#if>-->
+            
             <ul id="individual-email" role="list">
                 <#list email.statements as statement>
                     <li role="listitem">
