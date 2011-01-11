@@ -91,11 +91,23 @@ position: inherit;
 #checkbox{
 	float:left;	
 }
-#label {
+
+.easy-deselect-label {
 	float: left;
 	font-size: 12px;
 	width: 160px;
 	text-align: right;
+}
+
+.easy-deselect-label a, #text {
+	text-decoration: none;
+	color: black;
+	font-family: Helvetica;
+	font-size: 1em;
+}
+
+.easy-deselect-label .entity-label {
+	color:red;
 }
 
 #searchresult {
@@ -125,13 +137,6 @@ position: inherit;
 	font-family: Helvetica;
 	font-size: 13px;
 	font-weight: normal;
-}
-
-#label a,#text {
-/*	text-decoration: none; */
-	color: black;
-	font-family: Helvetica;
-	font-size: 1em;
 }
 
 #rightblock {

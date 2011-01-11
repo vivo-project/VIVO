@@ -94,6 +94,8 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 
 	$(document).ready(function() {
 	
+	//$(".ellipsis").ellipsis();
+	
 		var jsonString = '${jsonContent}';
 		var organizationLabel = '${organizationLabel}';
 		
@@ -150,7 +152,7 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 				updateRowHighlighter(linkedCheckbox);
 				removeUsedColor(entityToBeRemoved);
 				removeEntityUnChecked(renderedObjects, entityToBeRemoved);                          
-             	removeGraphic(linkedCheckbox);
+             	removeLegendRow(linkedCheckbox);
              	removeCheckBoxFromGlobalSet(linkedCheckbox);
              	$(linkedCheckbox).attr('checked', false);
              	checkIfColorLimitIsReached();
@@ -211,20 +213,13 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
                 var checkboxValue = $(this).attr("value");
                 var entity = labelToEntityRecord[checkboxValue];
                 
-				//Dynamically generate the bar, checkbox and label.
-
-                var bottomDiv = $("#bottom");
-                var hiddenLabel = createGraphic(entity, bottomDiv);
-
-                
-                var divBar = hiddenLabel.next();
-                var divLabel = hiddenLabel.prev();
-                var spanElement = divBar.next('span');
-
                 if (checkbox.is(':checked')) {
                 	
 					getNextFreeColor(entity);
-					generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement) ; 
+					
+					//Dynamically generate the bar, checkbox and label.
+	                createLegendRow(entity, $("#bottom"));
+	                
 					renderLineGraph(renderedObjects, entity);
 					labelToCheckedEntities[checkboxValue] = checkbox;
 					                     
@@ -232,7 +227,7 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 		
 					removeUsedColor(entity);
 					removeEntityUnChecked(renderedObjects, entity);                          
-		            removeGraphic(checkbox);
+		            removeLegendRow(checkbox);
 		            removeCheckBoxFromGlobalSet(checkbox);
 		                     
 		        	}
@@ -250,6 +245,25 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 	});
 	
 </script>
+
+<style>
+
+.ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+}
+
+.entity-label-url {
+	width: 125px; 
+	margin-right: 10px; 
+	display:inline-block;
+}
+
+.ellipsis.multiline {
+        white-space: normal;
+}
+
+</style>
 
 <div id="body">
 
@@ -324,4 +338,7 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 			</div>
 		
 		</div>		
+		
+		
+		
 </div>

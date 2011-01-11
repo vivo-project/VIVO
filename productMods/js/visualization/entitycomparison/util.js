@@ -1,4 +1,41 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+(function ($) {
+    $.fn.ellipsis = function () {
+        return this.each(function () {
+            var el = $(this);
+
+            if (el.css("overflow") == "hidden") {
+
+                var text = el.html();
+
+                var multiline = el.hasClass('multiline');
+                var t = $(this.cloneNode(true)).hide().css('position', 'absolute').css('overflow', 'visible').width(multiline ? el.width() : 'auto').height(multiline ? 'auto' : el.height());
+
+                el.after(t);
+
+                function height() {
+                    return t.height() > el.height();
+                };
+
+                function width() {
+                    return t.width() > el.width();
+                };
+
+                var func = multiline ? height : width;
+
+
+                while (text.length > 0 && func()) {
+                    text = text.substr(0, text.length - 1);
+                    t.html(text + "...");
+                }
+
+                el.html(t.html());
+                t.remove();
+            }
+        });
+    };
+})(jQuery);
+
 
 /**
 
@@ -336,6 +373,7 @@ function setTickSizeOfYAxis(maxValue, flotOptions){
 		flotOptions.yaxis.tickSize = 10;
 	}
 }
+
 /**
  * Create a div that represents the rectangular bar A hidden input class that is
  * used to pass the value and a label beside the checkbox.
@@ -343,70 +381,68 @@ function setTickSizeOfYAxis(maxValue, flotOptions){
  * @param {Object}
  *            entityLabel
  */
-function createGraphic(entity, bottomDiv) {
 
-	var parentP = $('<p>');
-	parentP.attr('id', slugify(entity.label));
+function createLegendRow(entity, bottomDiv) {
 
-	var labelDiv = $('<div>')
-	labelDiv.attr('id', 'label');
-	labelDiv.html('<a id="entityURL" href="' + getVIVOURL(entity) + '"></a>');
-//	labelDiv.children('a').after('<a id="vivoURL" href="' + getVIVOURL(entity) + '"></a>');
-	labelDiv.children('a').after('<a id="vivoURL" href="' + getEntityURL(entity) + '"><img src = "'+ temporalGraphSmallIcon +'"/></a>');
-	
-	var checkbox = $('<input>');
-	checkbox.attr('type','checkbox');
-	checkbox.attr('checked', true);
-	checkbox.attr('id','checkbox');
-	checkbox.attr('class', 'easyDeselectCheckbox');
-	checkbox.attr('value', entity.label);
-	
-	var hiddenLabel = $('<label>');
-	hiddenLabel.attr('type', 'hidden');
-	hiddenLabel.attr('value', entity.label);
+    var parentP = $('<p>');
+    parentP.attr('id', slugify(entity.label));
 
-	var barDiv = $('<div>');
-	barDiv.attr('id', 'bar');
+    console.log("entity label in create", entity.label);
 
-	var numAttributeText = $('<span>');
-	numAttributeText.attr('id', 'text');
+    var labelDiv = $('<div>')
+    labelDiv.attr('class', 'easy-deselect-label');
+    labelDiv.html('<div class="entity-label-url ellipsis"></div>');
+    labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');
 
-	parentP.append(checkbox);
-	parentP.append(labelDiv);
-	parentP.append(hiddenLabel);
-	parentP.append(barDiv);
-	parentP.append(numAttributeText);
+    var checkbox = $('<input>');
+    checkbox.attr('type', 'checkbox');
+    checkbox.attr('checked', true);
+    checkbox.attr('id', 'checkbox');
+    checkbox.attr('class', 'easyDeselectCheckbox');
+    checkbox.attr('value', entity.label);
 
-	bottomDiv.children('p.displayCounter').after(parentP);
+    var hiddenLabel = $('<label>');
+    hiddenLabel.attr('type', 'hidden');
+    hiddenLabel.attr('value', entity.label);
 
-	return hiddenLabel;
+    var barDiv = $('<div>');
+    barDiv.attr('id', 'bar');
 
+    var numAttributeText = $('<span>');
+    numAttributeText.attr('id', 'text');
+
+    parentP.append(checkbox);
+    parentP.append(labelDiv);
+    parentP.append(hiddenLabel);
+    parentP.append(barDiv);
+    parentP.append(numAttributeText);
+
+    bottomDiv.children('p.displayCounter').after(parentP);
+
+    renderBarAndLabel(entity, barDiv, labelDiv, numAttributeText);
 }
 
-/*function getVIVOURL(entity){
-	
-	var result  = "/vivo1/individual?uri="+entity.entityURI+"&home=1";
-	return result;
-}
+/**
+ * generate the corresponding bar (representing area under the linegraph)
+ * and label of the entity clicked
+ */
 
-function getEntityURL(entity) {
-	
-	var result = '', path = '', uri = '';
-	
-	if(entity.visMode == "PERSON"){
-		path = "/vivo1/individual?";
-		uri = "uri=" + entity.entityURI;
-		var home = "&home=1";
-		result = (path + uri + home);
-	}else{
-		path = "/vivo1/visualizationfm?";
-		var visAndRenderMode = "vis=entity_comparison&render_mode=standalone&";
-		var visMode = "vis_mode=" + entity.visMode + "&";
-		uri = "uri=" + entity.entityURI;
-		result = (path + visAndRenderMode + visMode + uri);
-	}
-	return result;
-}*/
+function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
+
+    var sum = calcSumOfComparisonParameter(entity);
+    var normalizedWidth = getNormalizedWidth(entity, sum);
+
+    divBar.css("background-color", colorToAssign);
+    divBar.css("width", normalizedWidth);
+
+    var entityLabelForLegend = divLabel.find(".entity-label-url");
+    entityLabelForLegend.html(entity.label);
+    entityLabelForLegend.ellipsis();
+    entityLabelForLegend.wrap("<a class='entity-url' href='" + getVIVOURL(entity) + "'></a>");
+
+    spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
+
+}
 
 function getVIVOURL(entity){
 	
@@ -415,7 +451,7 @@ function getVIVOURL(entity){
 	return result;
 }
 
-function getEntityURL(entity) {
+function getTemporalVisURL(entity) {
 	
 	var result = '';
 	
@@ -423,7 +459,7 @@ function getEntityURL(entity) {
 
 		result = subOrganizationVivoProfileURL + "uri="+ entity.entityURI;
 
-	}else{
+	} else{
 		
 		result = subOrganizationTemporalGraphURL+ "&vis_mode=" + entity.visMode + "&" +  
 				 "uri=" + entity.entityURI ;
@@ -435,7 +471,7 @@ function getEntityURL(entity) {
 function getVIVOProfileURL(given_uri) {
 	
 	finalURL = $.ajax({
-		url: contextPath + "/visualization",
+		url: contextPath + "/visualizationfm",
 		data: ({vis: "utilities", vis_mode: "PROFILE_URL", uri: given_uri}),
 		dataType: "text",
 		async: false,
@@ -463,9 +499,9 @@ function slugify(textToBeSlugified) {
  * @param {Object}
  *            span
  */
-function removeGraphic(checkbox) {
+function removeLegendRow(checkbox) {
 	
-	//console.log("removeGraphic is called for "+$(checkbox).attr("value"));
+	//console.log("removeLegendRow is called for "+$(checkbox).attr("value"));
 	var pToBeRemovedIdentifier = $(checkbox).attr("value");
 	$('p#' + slugify(pToBeRemovedIdentifier)).remove();
 	
@@ -551,34 +587,6 @@ function getNextFreeColor(entity){
      */
     entity.color = colorToAssign;
     colors[entity.label] = colorToAssign;
-}
-
-/**
- * generate the corresponding bar (representing area under the linegraph)
- * and label of the entity clicked
- * @param entity
- * @param divBar
- * @param divLabel
- * @return
- */
-function generateBarAndLabel(entity, divBar, divLabel,checkbox, spanElement){
-	
-	var sum = calcSumOfComparisonParameter(entity);
-	var normalizedWidth = getNormalizedWidth(entity, sum);
-	var checkboxValue = $(checkbox).attr("value");
-	
-	//append a div and modify its css
-    divBar.css("background-color", colorToAssign);
-    divBar.css("width", normalizedWidth);
-    divLabel.children("a#entityURL").html(checkboxValue + "    ").css("color", "#333");
-//    divLabel.children("a#entityURL").css("color", "#333").css("text-decoration", none);
-//    divLabel.children("a#entityURL").autoEllipsis();
-    divLabel.children("a#entityURL");
-    createVIVOProfileImage(divLabel.children("a#`"));
-    divLabel.children("a").css("font-size", "0.8em");
-    spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
-    checkbox.next('a').css("font-weight", "bold");
-
 }
 
 function createVIVOProfileImage(url){
@@ -674,7 +682,7 @@ function clearRenderedObjects(){
 			updateRowHighlighter(val);
 			removeUsedColor(labelToEntityRecord[$(val).attr("value")]);
 			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
-			removeGraphic(val);
+			removeLegendRow(val);
 			displayLineGraphs();
 			//console.log(index);
 		}
