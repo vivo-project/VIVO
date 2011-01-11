@@ -2,19 +2,11 @@
 
 <#-- Template for profile page for individuals of type foaf:Person -->
 
-<#import "lib-list.ftl" as l>
-<#import "lib-properties.ftl" as p>
-<#assign core = "http://vivoweb.org/ontology/core#">
+<#include "individual-setup.ftl">
 
-<#assign editingClass>
-    <#if editStatus.showEditingLinks>editing<#else></#if>
-</#assign>
-
-<#if editStatus.showAdminPanel>
+<#if individual.showAdminPanel>
     <#include "individual-adminPanel.ftl">
 </#if>
-
-<#assign propertyGroups = individual.propertyList>
     
 <section id="individual-intro-person" class="vcard" role="region">
 
@@ -23,7 +15,7 @@
         <#-- Thumbnail -->
         <#if individual.thumbUrl??>
             <a href="${individual.imageUrl}"><img class="individual-photo2" src="${individual.thumbUrl}" title="click to view larger image" alt="${individual.name}" width="115" /></a>
-        <#elseif individual.person>
+        <#else>
             <img class="individual-photo2" src="${urls.images}/placeholders/person.thumbnail.jpg" title = "no image" alt="placeholder image" width="115" />                                                        
         </#if>
         
@@ -41,7 +33,10 @@
         <#if email?has_content>
             <ul id="individual-email" role="list">
                 <#list email.statements as statement>
-                    <li role="listitem"><a class="email" href="#"><span class ="picto-font  picto-email">M</span> ${statement.value}</a></li>
+                    <li role="listitem">
+                        <@p.editingLinks statement showEditingLinks />
+                        <a class="email" href="#"><span class ="picto-font  picto-email">M</span> ${statement.value}</a>
+                    </li>
                 </#list>
             </ul>
         </#if>
@@ -51,7 +46,10 @@
         <#if phone?has_content>
             <ul id="individual-phone" role="list">
                 <#list phone.statements as statement>
-                    <li role="listitem"><a class="tel" href="#"><img class ="icon-phone" src="${urls.images}/individual/phone-icon.gif" alt="phone icon" />${statement.value}</a></li>
+                    <li role="listitem">
+                        <@p.editingLinks statement showEditingLinks />
+                        <a class="tel" href="#"><img class ="icon-phone" src="${urls.images}/individual/phone-icon.gif" alt="phone icon" />${statement.value}</a>
+                    </li>
                 </#list>
             </ul>
         </#if>      
@@ -88,7 +86,7 @@
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                 <h2>Positions</h2>
                 <ul id ="individual-positions" role="list">
-                    <@p.objectPropertyList positions.statements positions.template />
+                    <@p.objectPropertyList positions.statements positions.template showEditingLinks />
                 </ul>
             </#if>
         </header>
@@ -97,7 +95,10 @@
         <#assign overview = propertyGroups.getPropertyAndRemoveFromList("${core}overview")!> 
         <#if overview?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <#list overview.statements as statement>
-                <p class="individual-overview">${statement.value}</p>
+                <p class="individual-overview">
+                    <@p.editingLinks statement showEditingLinks />
+                    ${statement.value}
+                </p>
             </#list>
         </#if>
         
@@ -106,7 +107,7 @@
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <h2>Research Areas</h2>                   
             <ul id="individual-areas" role="list">
-                <@p.simpleObjectPropertyList researchAreas />
+                <@p.simpleObjectPropertyList researchAreas showEditingLinks/>
             </ul>
         </#if>
                 
@@ -136,8 +137,9 @@
     </section>
 </section>
 
+<#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
+
 <#-- Property group menu -->
-<#assign nameForOtherGroup = "other">
 <#include "individual-propertyGroupMenu.ftl">
 
 <#-- Ontology properties -->
