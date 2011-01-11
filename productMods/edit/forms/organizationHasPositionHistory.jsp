@@ -18,6 +18,7 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -30,13 +31,15 @@
 %>
 
 <%-- Define predicates used in n3 assertions and sparql queries --%>
-
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
-<c:set var="startYearPred" value="${vivoCore}startYear" />
+<c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
+<c:set var="label" value="<%= VitroVocabulary.LABEL %>" />
 
-<c:set var="endYearPred" value="${vivoCore}endYear" />
 <c:set var="positionInOrgPred" value="${vivoCore}positionInOrganization" />
 <c:set var="orgForPositionPred" value="${vivoCore}organizationForPosition" />
+<c:set var="positionType" value="${vivoCore}Position" />
+<c:set var="positionForPerson" value="${vivoCore}positionForPerson" />
+<c:set var="personInPosition" value="${vivoCore}personInPosition" />
 
 <c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
 <c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
@@ -57,15 +60,14 @@
       and in the literalsOnForm --%>
 <v:jsonset var="titleExisting" >      
 	SELECT ?titleExisting WHERE {
-	  	?positionUri <http://vivoweb.org/ontology/core#titleOrRole> ?titleExisting }
+	  	?positionUri <${label}> ?titleExisting }
 </v:jsonset>
 
 <%--  Pair the "existing" query with the skeleton of what will be asserted for a new statement involving this field.
       The actual assertion inserted in the model will be created via string substitution into the ? variables.
       NOTE the pattern of punctuation (a period after the prefix URI and after the ?field) --%> 
 <v:jsonset var="titleAssertion" >      
-	?positionUri <http://vivoweb.org/ontology/core#titleOrRole> ?title .
-	?positionUri <http://www.w3.org/2000/01/rdf-schema#label> ?title. 
+	?positionUri <${label}> ?title. 
 </v:jsonset>
 
 
@@ -74,25 +76,23 @@
       or in the SparqlForExistingUris, as well as perhaps in how the options are prepared --%>
 <v:jsonset var="personUriExisting" >      
 	SELECT ?existingPersonUri WHERE {
-		?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?existingPersonUri }
+		?positionUri <${positionForPerson}> ?existingPersonUri }
 </v:jsonset>
 
 <v:jsonset var="personUriAssertion" >      
-	?positionUri <http://vivoweb.org/ontology/core#positionForPerson> ?personUri .
-	?personUri   <http://vivoweb.org/ontology/core#personInPosition>  ?positionUri .
+	?positionUri <${positionForPerson}> ?personUri .
+	?personUri   <${personInPosition}>  ?positionUri .
 </v:jsonset>
 
 <v:jsonset var="n3ForStmtToOrg"  >
-    @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.    
-    @prefix core: <http://vivoweb.org/ontology/core#>.    
-	?organizationUri core:organizationForPosition  ?positionUri .
-	?positionUri     core:positionInOrganization   ?organizationUri .	
-    ?positionUri rdf:type               core:Position .    
+	?organizationUri <${orgForPositionPred}> ?positionUri .
+	?positionUri     <${positionInOrgPred}> ?organizationUri .	
+    ?positionUri     <${type}>  <${positionType}> .    
 </v:jsonset>
 
 <v:jsonset var="n3ForStart">
-    ?positionUri      <${positionToInterval}> ?intervalNode .    
-    ?intervalNode  <${type}> <${intervalType}> .
+    ?positionUri <${positionToInterval}> ?intervalNode .    
+    ?intervalNode <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
     ?startNode  <${dateTimeValue}> ?startField.value .
@@ -100,8 +100,8 @@
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
-    ?positionUri      <${positionToInterval}> ?intervalNode .    
-    ?intervalNode  <${type}> <${intervalType}> .
+    ?positionUri <${positionToInterval}> ?intervalNode .    
+    ?intervalNode <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
     ?endNode  <${dateTimeValue}> ?endField.value .
@@ -159,7 +159,7 @@
 
 <v:jsonset var="existingEndPrecisionQuery" >  
     SELECT ?existingEndPrecision WHERE {
-      ?positionUris <${positionToInterval}> ?intervalNode .
+      ?positionUri <${positionToInterval}> ?intervalNode .
       ?intervalNode <${type}> <${intervalType}> .
       ?intervalNode <${intervalToEnd}> ?endNode .
       ?endNode <${type}> <${dateTimeValueType}> .          
@@ -264,7 +264,9 @@
         startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.NONE.uri()));        
         Field endField = editConfig.getField("endField");
         endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(),VitroVocabulary.Precision.NONE.uri()));
-	}
+        
+        editConfig.addValidator(new DateTimeIntervalValidation("startField","endField") );
+	}		
 	
 	Model model = (Model) application.getAttribute("jenaOntModel");
 	String objectUri = (String) request.getAttribute("objectUri");
