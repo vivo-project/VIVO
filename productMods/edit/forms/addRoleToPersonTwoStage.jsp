@@ -49,7 +49,9 @@
 
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%>
 <%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartDateBeforeEndDate"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 
 <%!
 public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addRoleToPersonTwoStage.jsp");
@@ -341,7 +343,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
     "n3required"    : [ "${n3ForNewRole}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForEnd}" ],        
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForStart}", "${n3ForEnd}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}",
@@ -461,7 +463,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
                         VitroVocabulary.Precision.NONE.uri()));
     }
     
-    editConfig.addValidator(new StartYearBeforeEndYear("startField.value","endYear.value") ); 
+    editConfig.addValidator(new DateTimeIntervalValidation("startField","endField") ); 
 
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
