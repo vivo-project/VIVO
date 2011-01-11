@@ -94,8 +94,6 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 
 	$(document).ready(function() {
 	
-	//$(".ellipsis").ellipsis();
-	
 		var jsonString = '${jsonContent}';
 		var organizationLabel = '${organizationLabel}';
 		
@@ -163,107 +161,134 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 							
 		//parse the json object and pass it to loadData
         jsonObject.prepare(jQuery.parseJSON(jsonString));
+        
+        function performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox) {
+		    
+		    removeUsedColor(entity);
+            removeEntityUnChecked(renderedObjects, entity);
+            removeLegendRow(checkbox);
+            removeCheckBoxFromGlobalSet(checkbox);
+            
+            checkbox.closest("tr").removeClass('datatablerowhighlight');
+        
+        }
+        
+        function performEntityCheckboxSelectedActions(entity, checkboxValue, checkbox) {
+		        	
+    		getNextFreeColor(entity);
 
+            //Generate the bar, checkbox and label for the legend.
+            createLegendRow(entity, $("#bottom"));
+
+            renderLineGraph(renderedObjects, entity);
+            labelToCheckedEntities[checkboxValue] = checkbox;
+            
+        	/*
+			 * To highlight the rows belonging to selected entities. 
+			 * */
+            checkbox.closest("tr").addClass('datatablerowhighlight');
+		        	
+    	}
+    	
+    	function performEntityCheckboxClickedRedrawActions() {
+    	
+	        setTickSizeOfAxes();
+	        checkIfColorLimitIsReached();
+	        displayLineGraphs();
+	        updateCounter();
+    	
+    	}
+    	
         /* 
          *  function to populate the labelToEntityRecord object with the
          *  values from the json file and
          *  dynamically generate checkboxes
          */
-        function loadData(jsonData){
-            
-           // var yearRange;
-
-            $.each(jsonData, function(index, val){
-                setOfLabels.push(val.label);
-                labelToEntityRecord[val.label] = val;
-            });
-
-			getEntityVisMode(jsonData);
-			prepareTableForDataTablePagination(jsonData);
-			setEntityLevel();
-           // calcMinandMaxYears(labelToEntityRecord, year);
-			//yearRange = (year.max - year.min);
-
-           // setLineWidthAndTickSize(yearRange, FlotOptions);     
-			//setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
-            
-            
-            $(".disabled-checkbox-event-receiver").live("click", function() {
-            	
-            	if ($(this).next().is(':disabled')) {
-            		
-            	createNotification("error-notification", { title:'Error', 
-					text:'A Maximum 10 entities can be compared. Please remove some & try again.' },{
-					custom: true,
-					expires: 3500
-					});	
+		function loadData(jsonData) {
 		
-            	}
-            	
-            
-            });
-            
-            /*
-             * When the elements in the paginated div
-             * are clicked this event handler is called
-             */
-            $("input.if_clicked_on_school").live('click', function(){
-            
-                var checkbox = $(this);
-                var checkboxValue = $(this).attr("value");
-                var entity = labelToEntityRecord[checkboxValue];
-                
-                if (checkbox.is(':checked')) {
-                	
-					getNextFreeColor(entity);
-					
-					//Dynamically generate the bar, checkbox and label.
-	                createLegendRow(entity, $("#bottom"));
-	                
-					renderLineGraph(renderedObjects, entity);
-					labelToCheckedEntities[checkboxValue] = checkbox;
-					                     
-		        } else if (!checkbox.is(':checked')) {
+		    // var yearRange;
+		    $.each(jsonData, function (index, val) {
+		        setOfLabels.push(val.label);
+		        labelToEntityRecord[val.label] = val;
+		    });
 		
-					removeUsedColor(entity);
-					removeEntityUnChecked(renderedObjects, entity);                          
-		            removeLegendRow(checkbox);
-		            removeCheckBoxFromGlobalSet(checkbox);
-		                     
-		        	}
-				//console.log('Number of checked entities: ' + getSize(labelToCheckedEntities));
-				//disableUncheckedEntities();
-				setTickSizeOfAxes();
-				checkIfColorLimitIsReached();
-		    	//populateMapOfCheckedEntities();                    
-		        displayLineGraphs();
-				updateCounter(); 
+		    getEntityVisMode(jsonData);
+		    prepareTableForDataTablePagination(jsonData);
+		    setEntityLevel();
+		
+					/*
+		           		calcMinandMaxYears(labelToEntityRecord, year);
+						yearRange = (year.max - year.min);
+		
+		           		setLineWidthAndTickSize(yearRange, FlotOptions);     
+						setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
+		            */
+		
+		    $(".disabled-checkbox-event-receiver").live("click", function () {
+		
+		        if ($(this).next().is(':disabled')) {
+		
+		            createNotification("error-notification", {
+		                title: 'Error',
+		                text: 'A Maximum 10 entities can be compared. Please remove some & try again.'
+		            }, {
+		                custom: true,
+		                expires: 3500
+		            });
+		
+		        }
 		
 		    });
-        }
+		    
+					/*
+		             * When the elements in the paginated div
+		             * are clicked this event handler is called
+		             */
+		    $("input.if_clicked_on_school").live('click', function () {
+		
+		        var checkbox = $(this);
+		        var checkboxValue = $(this).attr("value");
+		        var entity = labelToEntityRecord[checkboxValue];
+		        
+		        if (checkbox.is(':checked')) {
+		        
+		        	performEntityCheckboxSelectedActions(entity, checkboxValue, checkbox);
+		        
+		        } else {
+				
+					performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox);        
+		
+		        }
+		        
+		        performEntityCheckboxClickedRedrawActions();
+		
+		    });
+		}
+
+		/*
+		This will make sure that top 3 entites are selected by default when the page loads.
+		
+		*/		
+		$.each($("input.if_clicked_on_school"), function(index, checkbox) {
+		    	
+			    	if (index > 2) {
+			    		return false;
+			    	}
+		    	
+		    		$(this).attr('checked', true);
+			    	
+			        var checkboxValue = $(this).attr("value");
+			        var entity = labelToEntityRecord[checkboxValue];
+			        
+			        performEntityCheckboxSelectedActions(entity, checkboxValue, $(this));
+			        
+			        performEntityCheckboxClickedRedrawActions();
+			        
+			    });
 
 	});
 	
 </script>
-
-<style>
-
-.ellipsis {
-        white-space: nowrap;
-        overflow: hidden;
-}
-
-.entity-label-url {
-	width: 125px; 
-	margin-right: 10px; 
-	display:inline-block;
-}
-
-.ellipsis.multiline {
-        white-space: normal;
-}
-
-</style>
 
 <div id="body">
 
@@ -336,9 +361,5 @@ var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 			id="total">10</span> <span id="entityleveltext"> schools</span> to compare.</p>
 		
 			</div>
-		
 		</div>		
-		
-		
-		
 </div>

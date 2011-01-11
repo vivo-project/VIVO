@@ -110,6 +110,21 @@ position: inherit;
 	color:red;
 }
 
+.ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+}
+
+.entity-label-url {
+	width: 125px; 
+	margin-right: 10px; 
+	display:inline-block;
+}
+
+.ellipsis.multiline {
+        white-space: normal;
+}
+
 #searchresult {
 	margin-top: 50px;
 }

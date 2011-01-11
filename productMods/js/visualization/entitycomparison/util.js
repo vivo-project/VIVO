@@ -212,10 +212,13 @@ function calcZeroLessMinAndMax(jsonObject, year) {
 			}
 
 		}
-		if (globalMinYear > minYear)
+		if (globalMinYear > minYear) {
 			globalMinYear = minYear;
-		if (globalMaxYear < maxYear)
+		}
+			
+		if (globalMaxYear < maxYear) {
 			globalMaxYear = maxYear;
+		}
 
 	});
 
@@ -327,8 +330,10 @@ function calcSumOfComparisonParameter(jsonObject) {
 function contains(objectArray, object) {
 	var i = 0, flag = 0;
 	for (i = 0; i < objectArray.length; i++) {
-		if (objectArray[i] == object)
+		if (objectArray[i] == object) {
 			flag = i;
+		}
+			
 	}
 	return flag;
 }
@@ -387,9 +392,7 @@ function createLegendRow(entity, bottomDiv) {
     var parentP = $('<p>');
     parentP.attr('id', slugify(entity.label));
 
-    console.log("entity label in create", entity.label);
-
-    var labelDiv = $('<div>')
+    var labelDiv = $('<div>');
     labelDiv.attr('class', 'easy-deselect-label');
     labelDiv.html('<div class="entity-label-url ellipsis"></div>');
     labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');
@@ -438,7 +441,7 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     var entityLabelForLegend = divLabel.find(".entity-label-url");
     entityLabelForLegend.html(entity.label);
     entityLabelForLegend.ellipsis();
-    entityLabelForLegend.wrap("<a class='entity-url' href='" + getVIVOURL(entity) + "'></a>");
+    entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity) + "'></a>");
 
     spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
 
@@ -587,17 +590,6 @@ function getNextFreeColor(entity){
      */
     entity.color = colorToAssign;
     colors[entity.label] = colorToAssign;
-}
-
-function createVIVOProfileImage(url){
-	
-	var vivoImage = $(url);
-	
-/*	vivoImage.html("profile");
-	vivoImage.css("background-color","#727272" );
-	vivoImage.css("color", "white");
-*/	
-	vivoImage.css("padding", "2px");
 }
 
 function getNormalizedWidth(entity, sum){
@@ -775,13 +767,11 @@ function prepareTableForDataTablePagination(jsonData){
 		var labelTD =  $('<td>');
 		labelTD.css("width", "100px");
 		labelTD.html(index);
-//		labelTD.autoEllipsis();
 		
 		var publicationCountTD =  $('<td>');
 		publicationCountTD.html(calcSumOfComparisonParameter(val));
 		
 		var entityTypeTD =  $('<td>');
-		//entityTypeTD.html(val.organizationType.join(", "));
 		entityTypeTD.html(entityTypesWithoutStopWords);
 		
 		row.append(checkboxTD);
@@ -792,8 +782,6 @@ function prepareTableForDataTablePagination(jsonData){
 		tbody.append(row);
 		checkboxCount++;
 	});
-	
-//	console.log('creating '+ checkboxCount + ' checkboxes inside the data table');
 	
 	table.append(tbody);
 	tableDiv.append(table);
@@ -811,17 +799,6 @@ function prepareTableForDataTablePagination(jsonData){
 	    	    //	"aLengthMenu" : [5,10,15],
 	    "fnDrawCallback": function () {
 	    	
-	    	/*
-	    	 * To highlight the rows belonging to selected entities. 
-	    	 * */
-	        $('input.if_clicked_on_school').bind('click', function () {
-	        	if ($(this).is(':checked')) {
-	        		$(this).closest("tr").addClass('datatablerowhighlight')
-	        	} else {
-	        		$(this).closest("tr").removeClass('datatablerowhighlight')
-	        	}
-	        });
-	        
 	        /* We check whether max number of allowed comparisions (currently 10) is reached
 	         * here as well becasue the only function that is guaranteed to be called during 
 	         * page navigation is this. No need to bind it to the nav-buttons becuase 1. It is over-ridden
@@ -833,6 +810,7 @@ function prepareTableForDataTablePagination(jsonData){
 //		"bLengthChange": false,
 //		"bAutoWidth": false
 	});
+	
 	
 	var searchInputBox = $("." + searchBarParentContainerDIVClass).find("input[type=text]");
 	
@@ -920,7 +898,6 @@ function disableUncheckedEntities(){
 	 * Note that the usual Error message will still display if the user tries to click on the white box 
 	 * (or a disabled checkbox in case of non-IE browsers).   
 	 * */
-	
 	if ($("#datatable").data("isEntitySelectionAllowed")) {
 		if ($.browser.msie) {
 			createNotification("warning-notification", { title:'Information', 
