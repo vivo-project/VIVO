@@ -1,9 +1,11 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 /* Fix for homepage in IE6 browsers */
-html,
-body {
+body{
     background-position: center, 0;
     background-repeat: no-repeat;
+    background-image: none;
+    background-color: #f3f3f0;
+    background-image: url(../images/header-background.jpg); 
 }
 #wrapper-content{
     padding-left: 10px;
