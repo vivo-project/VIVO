@@ -24,7 +24,7 @@ public class VisualizationFrameworkConstants {
 	 * Vis URL prefix that is seen by all the users
 	 */
 	public static final String VISUALIZATION_URL_PREFIX = "/visualization";
-	public static final String FREEMARKERIZED_VISUALIZATION_URL_PREFIX = "/visualizationfm";
+	public static final String FREEMARKERIZED_VISUALIZATION_URL_PREFIX = "/visualization";
 	public static final String AJAX_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationAjax";
 	public static final String DATA_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationData";
 	

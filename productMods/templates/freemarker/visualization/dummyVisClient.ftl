@@ -12,7 +12,7 @@ ${urls.base}
 <#assign loadingImageLink = '/${themeDir}site_icons/visualization/ajax-loader.gif'>
 
 <#assign uri="http://vivo-trunk.indiana.edu/individual/n6079">
-<#assign testURL = '${urls.base}/visualizationfm?vis=person_pub_count&container=ajax_recipient&render_mode=dynamic&vis_mode=wth&uri=${uri?url}'>
+<#assign testURL = '${urls.base}/visualization?vis=person_pub_count&container=ajax_recipient&render_mode=dynamic&vis_mode=wth&uri=${uri?url}'>
 
 <style type="text/css">
 	.get_vis {

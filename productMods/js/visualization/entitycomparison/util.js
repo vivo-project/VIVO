@@ -474,7 +474,7 @@ function getTemporalVisURL(entity) {
 function getVIVOProfileURL(given_uri) {
 	
 	finalURL = $.ajax({
-		url: contextPath + "/visualizationfm",
+		url: contextPath + "/visualization",
 		data: ({vis: "utilities", vis_mode: "PROFILE_URL", uri: given_uri}),
 		dataType: "text",
 		async: false,

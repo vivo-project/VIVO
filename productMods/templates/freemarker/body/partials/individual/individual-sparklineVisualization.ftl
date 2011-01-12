@@ -6,7 +6,7 @@
 
 <#assign coAuthorIcon = '${urls.images}/visualization/co_author_icon.png'>
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
-<#assign standardVisualizationURLRoot ="/visualizationfm">
+<#assign standardVisualizationURLRoot ="/visualization">
 <#assign googleJSAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coAuthorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=coauthor'>
 <#assign coInvestigatorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=copi'>
