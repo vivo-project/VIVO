@@ -15,7 +15,7 @@
     ${stylesheets.add("css/visualization/visualization.css")}
     
     <script type="text/javascript">
-        var contextPath = '${contextPath}';
+        var contextPath = '${urls.base}';
         
         $.ajax({
 			url: contextPath + "/visualizationAjax",
