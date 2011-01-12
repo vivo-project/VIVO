@@ -34,10 +34,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 public class EntityPublicationCountRequestHandler implements
 		VisualizationRequestHandler {
 	
-	public static String ENTITY_VIS_MODE;
-	public static String SUB_ENTITY_VIS_MODE;
-	
-
 	@Override
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, DataSource dataSource)
@@ -45,28 +41,31 @@ public class EntityPublicationCountRequestHandler implements
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-
-		ENTITY_VIS_MODE = vitroRequest
-				.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
 		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
 				entityURI, dataSource, log);
+		
 		Entity entity = queryManager.getQueryResult();
  
-		setVisModes();
+		if(entity.getEntityLabel().equals("no-label")){
 
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				entityURI, dataSource, log);
-
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-				.getQueryResult();
-
-		return prepareStandaloneResponse(vitroRequest, entity, entityURI,
-				subOrganizationTypesResult);
-
+			return prepareStandaloneErrorResponse(vitroRequest,entityURI);
+		
+		} else{
+	
+			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+					entityURI, dataSource, log);
+	
+			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+					.getQueryResult();
+	
+			return prepareStandaloneResponse(vitroRequest, entity, entityURI,
+					subOrganizationTypesResult);
+		}
+	
 	}
 	
-	
+
 	@Override
 	public Map<String, String> generateDataVisualization(
 			VitroRequest vitroRequest, Log log, DataSource dataSource)
@@ -74,15 +73,12 @@ public class EntityPublicationCountRequestHandler implements
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-		
-		ENTITY_VIS_MODE = vitroRequest
-		.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
-		
+				
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
 				entityURI, dataSource, log);	
 		
 		Entity entity = queryManager.getQueryResult();
-		setVisModes();
+
 		
 		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
 				entityURI, dataSource, log);
@@ -148,7 +144,7 @@ public class EntityPublicationCountRequestHandler implements
         String standaloneTemplate = "entityComparisonStandaloneActivator.ftl";
 		
         String jsonContent = "";
-		jsonContent = writePublicationsOverTimeJSON(entity.getSubEntities(), subOrganizationTypesResult);
+		jsonContent = writePublicationsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);
 
 		
 
@@ -161,37 +157,32 @@ public class EntityPublicationCountRequestHandler implements
         
         return new TemplateResponseValues(standaloneTemplate, body);
         
-	}	
-	
-	
-	private void setVisModes() {
-		
-		if (ENTITY_VIS_MODE.equalsIgnoreCase("DEPARTMENT")) {
-			SUB_ENTITY_VIS_MODE = "PERSON";
-		}else if (ENTITY_VIS_MODE.equalsIgnoreCase("SCHOOL")) {
-			SUB_ENTITY_VIS_MODE = "DEPARTMENT";
-		}else {
-			SUB_ENTITY_VIS_MODE = "SCHOOL";
-		}		
 	}
+	
+	
+	private ResponseValues prepareStandaloneErrorResponse(
+			VitroRequest vitroRequest, String entityURI) {
+		
+        Portal portal = vitroRequest.getPortal();
+        String standaloneTemplate = "entityComparisonErrorActivator.ftl";
+        
+        Map<String, Object> body = new HashMap<String, Object>();
+        body.put("portalBean", portal);
+        body.put("title", "Temporal Graph Visualization");
+        body.put("organizationURI", entityURI);
+        
+        return new TemplateResponseValues(standaloneTemplate, body);
 
-	private void setEntityVisMode(JsonObject entityJson) {
-		if(entityJson.getOrganizationType().contains("Department")){
-			entityJson.setVisMode("DEPARTMENT");
-		}else if(entityJson.getOrganizationType().contains("School")){
-			entityJson.setVisMode("SCHOOL");
-		}else{
-			entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
-		}
-		
 	}
+	
 	
 	/**
 	 * function to generate a json file for year <-> publication count mapping
+	 * @param vreq 
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
 	 */
-	private String writePublicationsOverTimeJSON(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String writePublicationsOverTimeJSON(VitroRequest vreq, Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
 
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
@@ -220,7 +211,15 @@ public class EntityPublicationCountRequestHandler implements
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
-			setEntityVisMode(entityJson);
+			
+			boolean isPerson = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
+			
+			if(isPerson){
+				entityJson.setVisMode("PERSON");
+			} else{
+				entityJson.setVisMode("ORGANIZATION");
+			}
+		//	setEntityVisMode(entityJson);
 			subEntitiesJson.add(entityJson);
 		}
 		

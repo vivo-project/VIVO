@@ -16,7 +16,7 @@
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>
 
 
-<#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&labelField=label&vis_mode=UNIVERSITY'>
+<#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&labelField=label'>
 
 
 <#-- Javascript files -->

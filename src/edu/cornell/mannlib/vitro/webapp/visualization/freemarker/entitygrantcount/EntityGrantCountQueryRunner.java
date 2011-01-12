@@ -173,10 +173,12 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 			entity.addGrants(grant);
 		}
 		
-		if(subentityURLToVO.size() == 0){
+		if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
 			for(SubEntity person : personURLToVO.values()){
 				entity.addSubEntity(person);
 			}
+		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0){
+			entity = new Entity(this.entityURI, "no-label");
 		}
 
 		return entity;

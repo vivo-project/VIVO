@@ -35,10 +35,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 
 public class EntityGrantCountRequestHandler implements
 		VisualizationRequestHandler {
-
-	public static String ENTITY_VIS_MODE;
-	public static String SUB_ENTITY_VIS_MODE;	
-
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
@@ -47,33 +43,27 @@ public class EntityGrantCountRequestHandler implements
 		
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
 				entityURI, dataSource, log);	
-		Entity entity = queryManager.getQueryResult();	
-		
-		ENTITY_VIS_MODE = vitroRequest
-		.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
-		setVisModes();
-		
-//		for(SubEntity se : entity.getSubEntities()){
-//			System.out.println("se key -->" + se.getIndividualLabel());
-//		}
 
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				entityURI, dataSource, log);
+		Entity entity = queryManager.getQueryResult();
+		 
+		if(entity.getEntityLabel().equals("no-label")){
+
+			return prepareStandaloneErrorResponse(vitroRequest,entityURI);
 		
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
-		
-//		for(Map.Entry soTR : subOrganizationTypesResult.entrySet()){
-//			System.out.println("soTR key -->" + soTR.getKey());
-//		}
-//		
-//		System.out.println();
-		
-		return prepareStandaloneResponse(vitroRequest,
-				entity,entityURI, subOrganizationTypesResult);
+		} else{
+			
+			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+					entityURI, dataSource, log);
+	
+			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+					.getQueryResult();
+	
+			return prepareStandaloneResponse(vitroRequest, entity, entityURI,
+					subOrganizationTypesResult);
+		}
 		
 	}
 	
@@ -84,11 +74,7 @@ public class EntityGrantCountRequestHandler implements
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-		
-		ENTITY_VIS_MODE = vitroRequest
-		.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
-		setVisModes();
-		
+
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
 				entityURI, dataSource, log);	
 		
@@ -158,7 +144,7 @@ public class EntityGrantCountRequestHandler implements
         String standaloneTemplate = "entityComparisonStandaloneActivator.ftl";
 		
         String jsonContent = "";
-		jsonContent = writeGrantsOverTimeJSON(entity.getSubEntities(), subOrganizationTypesResult);
+		jsonContent = writeGrantsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);
 
 		
 
@@ -173,24 +159,29 @@ public class EntityGrantCountRequestHandler implements
         
 	}
 	
-	private void setVisModes() {
+	private ResponseValues prepareStandaloneErrorResponse(
+			VitroRequest vitroRequest, String entityURI) {
 		
-		if (ENTITY_VIS_MODE.equalsIgnoreCase("DEPARTMENT")) {
-			SUB_ENTITY_VIS_MODE = "PERSON";
-		}else if (ENTITY_VIS_MODE.equalsIgnoreCase("SCHOOL")) {
-			SUB_ENTITY_VIS_MODE = "DEPARTMENT";
-		}else {
-			SUB_ENTITY_VIS_MODE = "SCHOOL";
-		}		
-	}
+        Portal portal = vitroRequest.getPortal();
+        String standaloneTemplate = "entityComparisonErrorActivator.ftl";
+        
+        Map<String, Object> body = new HashMap<String, Object>();
+        body.put("portalBean", portal);
+        body.put("title", "Temporal Graph Visualization");
+        body.put("organizationURI", entityURI);
+        
+        return new TemplateResponseValues(standaloneTemplate, body);
+
+	}	
 	
 	
 	/**
 	 * function to generate a json file for year <-> grant count mapping
+	 * @param vreq 
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
 	 */
-	private String writeGrantsOverTimeJSON(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String writeGrantsOverTimeJSON(VitroRequest vreq, Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
 
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
@@ -219,7 +210,16 @@ public class EntityGrantCountRequestHandler implements
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
-			setEntityVisMode(entityJson);
+			
+			boolean isPerson = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
+			
+			if(isPerson){
+				entityJson.setVisMode("PERSON");
+			} else{
+				entityJson.setVisMode("ORGANIZATION");
+			}			
+			
+//			setEntityVisMode(entityJson);
 			subEntitiesJson.add(entityJson);
 		}
 		
@@ -228,17 +228,6 @@ public class EntityGrantCountRequestHandler implements
 
 	}
 	
-	private void setEntityVisMode(JsonObject entityJson) {
-		
-		if(entityJson.getOrganizationType().contains("Department")){
-			entityJson.setVisMode("DEPARTMENT");
-		}else if(entityJson.getOrganizationType().contains("School")){
-			entityJson.setVisMode("SCHOOL");
-		}else{
-			entityJson.setVisMode(SUB_ENTITY_VIS_MODE);
-		}
-		
-	}
 	
 	private String getEntityGrantsPerYearCSVContent(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
 

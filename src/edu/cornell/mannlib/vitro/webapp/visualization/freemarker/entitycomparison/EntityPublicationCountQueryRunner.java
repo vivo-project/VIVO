@@ -183,11 +183,14 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			entity.addPublications(biboDocument);
 		}
 		
-		if(subentityURLToVO.size() == 0){
+		if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
 			for(SubEntity person : personURLToVO.values()){
 				entity.addSubEntity(person);
 			}
+		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0){
+			entity = new Entity(this.entityURI, "no-label");
 		}
+		
 		//TODO: return non-null value
 		return entity;
 	}
