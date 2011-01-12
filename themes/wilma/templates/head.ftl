@@ -8,13 +8,11 @@
 
 <#include "stylesheets.ftl">
 <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
-<link href="http://fonts.googleapis.com/css?family=Arimo:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
 <#include "headScripts.ftl">
 
 <!--[if lt IE 7]>
 <link rel="stylesheet" href="${urls.theme}/css/ie6.css" />
-<script type="text/javascript" src="${urls.base}/js/jquery_plugins/supersleight.js"></script>
 <![endif]-->
 
 <!--[if IE 7]>
