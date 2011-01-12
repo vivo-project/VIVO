@@ -33,7 +33,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.In
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.PDFDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
 /**

@@ -92,7 +92,7 @@ $(document).ready(function(){
 	
 		<#-- Moniker-->
 			<em id="ego_moniker" class="moniker"></em>
-			
+		<br />	
 		<span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}">Back to Profile</a>
 		
 	</div>
