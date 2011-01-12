@@ -48,8 +48,7 @@
         <c:url var="loadingImageLink" value="/${themeDir}site_icons/visualization/ajax-loader.gif"></c:url>
 
         <!-- START Visualization Code -->            
-        <c:url var="visualizationURL" value="/visualization">
-            <c:param name="render_mode" value="dynamic"/>
+        <c:url var="visualizationURL" value="/visualizationAjax">
             <c:param name="container" value="vis_container"/>
             <c:param name="vis" value="person_pub_count"/>
             <c:param name="vis_mode" value="short"/>
@@ -80,6 +79,8 @@
                 /*width:380px;*/
             }
         </style>
+        
+        <script type="text/javascript" src="https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D"></script>
 	
         <script type="text/javascript">
         <!--
