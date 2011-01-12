@@ -4,6 +4,7 @@
 
 <#import "lib-list.ftl" as l>
 <#import "lib-properties.ftl" as p>
+
 <#assign core = "http://vivoweb.org/ontology/core#">
 
 <#assign editing = individual.showEditingLinks>
