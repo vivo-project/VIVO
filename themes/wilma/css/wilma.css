@@ -122,12 +122,6 @@ ul#header-nav  a:active {
     text-decoration: none;
     color: #999;
 }
-.loginIcon {
-    font-family: 'Pictos';
-    font-size: 1.8em;
-    line-height: .2em;
-    color: #fff;
-}
 /* SEARCH ------>  */
 #search {
     position: absolute;
@@ -1160,9 +1154,6 @@ ul#individual-tools{
 ul#individual-tools li a{
     color: #b2d15a; 
 }
-.picto-email{
-    color: #aeb1b1;
-}
 #share-contact a.email{
     color: #5f6464;
 }
@@ -1178,14 +1169,14 @@ ul#individual-phone{
 }
 ul#individual-email li, 
 ul#individual-phone li{
-    line-height: 1em;
+    line-height: 1.6em;
 }
 ul#individual-email li:last-child{
     margin-bottom: 15px;
 }
 ul#individual-urls li{
     font-size: .875em;
-    line-height: 1.2em;
+    line-height: 1.6em;
 }
 ul#individual-urls li a{
     color: #2485ae;
@@ -1218,7 +1209,7 @@ ul#individual-positions{
     list-style: url(../../../images/individual/arrow-green.gif);
 }
 ul#individual-positions li{
-    line-height: 1.2em;
+    line-height: 1.4em;
 }
 ul#individual-positions li a{
     color: #2485ae;
@@ -1343,4 +1334,7 @@ article.property ul.property-list li a{
 }
 .green{
     color: #b2d15a;
+}
+.middle{
+    vertical-align: middle;
 }

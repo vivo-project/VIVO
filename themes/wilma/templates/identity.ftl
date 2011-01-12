@@ -10,7 +10,7 @@
     <nav role="navigation">
         <ul id="header-nav" role="list">
             <#if user.loggedIn>
-                <li role="listitem"><span class="loginIcon">U</span> ${user.loginName}</li>
+                <li role="listitem"><img class ="middle" src="${urls.images}/userIcon.png" alt="user icon" />${user.loginName}</li>
                 <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                 <#if user.hasSiteAdminAccess>
                     <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
