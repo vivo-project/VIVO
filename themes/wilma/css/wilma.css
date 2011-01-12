@@ -1180,6 +1180,9 @@ ul#individual-email li,
 ul#individual-phone li{
     line-height: 1em;
 }
+ul#individual-email li:last-child{
+    margin-bottom: 15px;
+}
 ul#individual-urls li{
     font-size: .875em;
     line-height: 1.2em;

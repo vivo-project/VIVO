@@ -25,10 +25,6 @@ themes/vivo-basic/css/blueprint/liquid.css
 # Sample code from Google.
 themes/vivo-basic/templates/googleAnalytics.ftl
 
-# Stylesheet for Pictos fonts by pictos.drewwilson.com
-themes/wilma/css/pictos.css
-
-
 # 3rd-party transform from JMeter distribution
 utilities/load-testing/jmeter-results-report.xsl
 utilities/load-testing/jmeter-results-detail-report.xsl
