@@ -1,7 +1,8 @@
 <rdf:RDF
-    xmlns:j.0="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:geo="http://aims.fao.org/aos/geopolitical.owl#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
     xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:pvs="http://vivoweb.org/ontology/provenance-support#"
     xmlns:dcelem="http://purl.org/dc/elements/1.1/"
     xmlns:core="http://vivoweb.org/ontology/core#"
     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
@@ -11,6 +12,7 @@
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:scires="http://vivoweb.org/ontology/scientific-research#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
@@ -451,6 +453,10 @@
     <rdfs:label xml:lang="en-US">B.N. Bachelor of Nursing</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree118">
+    <rdfs:label xml:lang="en-US">ADN Associate Degree Nursing</rdfs:label>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree50">
     <core:abbreviation>D.P.H.</core:abbreviation>
     <rdfs:label xml:lang="en-US">D.P.H. Doctor of Public Health</rdfs:label>
@@ -547,16 +553,16 @@
     <core:abbreviation>B.Lit.</core:abbreviation>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree8">
+    <rdfs:label xml:lang="en-US">B.A.E. Agricultural Engineering</rdfs:label>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+    <core:abbreviation>B.A.E.</core:abbreviation>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree111">
     <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abbreviation commonly used by Canadian and British universities.</core:description>
     <rdfs:label xml:lang="en-US">M.Phil. Master of Philosophy </rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
     <core:abbreviation rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">M.Phil.</core:abbreviation>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree8">
-    <rdfs:label xml:lang="en-US">B.A.E. Agricultural Engineering</rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
-    <core:abbreviation>B.A.E.</core:abbreviation>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree109">
     <rdfs:label xml:lang="en-US">Th.M. Master of Theology</rdfs:label>
