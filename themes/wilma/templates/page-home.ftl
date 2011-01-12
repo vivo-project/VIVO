@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<@widget name="login" include="assets" /> 
+<@widget name="login" include="assets" />
                        
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +43,8 @@
             </section> <!-- #intro -->
           
             <@widget name="login" />
+            
+            <@widget name="browse" />
 
             <section id="browse" role="region">
                 <h4>Browse</h4>
