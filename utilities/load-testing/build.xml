@@ -63,8 +63,7 @@ report   - Just summarize output from previously run tests.
 
 		<property file="${properties.file}" />
 
-		<fail unless="test.name"
-		      message="${properties.file} must contain a value for test.name" />
+		<fail unless="test.name" message="${properties.file} must contain a value for test.name" />
 
 		<fail unless="jmeter.home.dir"
 		      message="${properties.file} must contain a value for jmeter.home.dir" />
@@ -76,12 +75,14 @@ report   - Just summarize output from previously run tests.
 		<fail unless="webapp.name"
 		      message="${properties.file} must contain a value for webapp.name" />
 
-		<fail unless="data.dir"
-		      message="${properties.file} must contain a value for data.dir" />
+		<fail unless="data.dir" message="${properties.file} must contain a value for data.dir" />
 
 		<!-- If no value was provided, run everything 10 times -->
 		<property name="iterations" value="10" />
-		
+
+		<!-- If no value was provided, use this as the default namespace -->
+		<property name="default.namespace" value="http://vivo.cornell.edu/individual/" />
+
 		<property name="webapp.url" value="http://${webapp.host}:${webapp.port}/${webapp.name}" />
 
 		<path id="xslt.classpath">
@@ -118,7 +119,7 @@ report   - Just summarize output from previously run tests.
 				</not>
 			</condition>
 		</fail>
-		
+
 		<property name="file.infoResource.uris" location="${data.dir}/infoResourceUris.csv" />
 		<fail message="File &quot;${file.infoResource.uris}&quot; does not exist.">
 			<condition>
@@ -183,4 +184,12 @@ report   - Just summarize output from previously run tests.
 			<arg value="${report2.style}" />
 		</java>
 	</target>
+
+	<!-- ================================= 
+          target: merge              
+         ================================= -->
+	<target name="merge" depends="prepare" description="--> Merge summaries together">
+
+	</target>
+
 </project>

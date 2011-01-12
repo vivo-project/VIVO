@@ -9,32 +9,37 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="WEBAPP_HOST" elementType="Argument">
             <stringProp name="Argument.name">WEBAPP_HOST</stringProp>
-            <stringProp name="Argument.value">${__property(webapp.host, localhost)}</stringProp>
+            <stringProp name="Argument.value">${__property(webapp.host, , localhost)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="WEBAPP_PORT" elementType="Argument">
             <stringProp name="Argument.name">WEBAPP_PORT</stringProp>
-            <stringProp name="Argument.value">${__property(webapp.port, 8080)}</stringProp>
+            <stringProp name="Argument.value">${__property(webapp.port, , 8080)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="WEBAPP_NAME" elementType="Argument">
             <stringProp name="Argument.name">WEBAPP_NAME</stringProp>
-            <stringProp name="Argument.value">${__property(webapp.name, vivo)}</stringProp>
+            <stringProp name="Argument.value">${__property(webapp.name, , vivo)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="PERSON_URI_FILE" elementType="Argument">
             <stringProp name="Argument.name">PERSON_URI_FILE</stringProp>
-            <stringProp name="Argument.value">${__property(file.person.uris, PersonUris.csv)}</stringProp>
+            <stringProp name="Argument.value">${__property(file.person.uris, , PersonUris.csv)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="INFO_RESOURCE_URI_FILE" elementType="Argument">
             <stringProp name="Argument.name">INFO_RESOURCE_URI_FILE</stringProp>
-            <stringProp name="Argument.value">${__property(file.infoResource.uris, InfoResourceUris.csv)}</stringProp>
+            <stringProp name="Argument.value">${__property(file.infoResource.uris, , InfoResourceUris.csv)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ITERATIONS" elementType="Argument">
             <stringProp name="Argument.name">ITERATIONS</stringProp>
-            <stringProp name="Argument.value">${__property(iterations, 10)}</stringProp>
+            <stringProp name="Argument.value">${__property(iterations, , 10)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DEFAULT_NAMESPACE" elementType="Argument">
+            <stringProp name="Argument.name">DEFAULT_NAMESPACE</stringProp>
+            <stringProp name="Argument.value">${__property(default.namespace, , http://vivo.mydomain.edu/individual/)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -305,6 +310,104 @@
               <boolProp name="stopThread">false</boolProp>
               <stringProp name="shareMode">All threads</stringProp>
             </CSVDataSet>
+            <hashTree/>
+          </hashTree>
+          <HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="DBA: Auto-complete authorship" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="query" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt; SELECT ?pubUri WHERE {&lt;${DEFAULT_NAMESPACE}${PERSON_URI}&gt; core:authorInAuthorship ?authorshipUri . ?authorshipUri core:linkedInformationResource ?pubUri .}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">query</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${WEBAPP_NAME}/ajax/sparqlQuery</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSampler>
+          <hashTree>
+            <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Person URIs from CSV" enabled="true">
+              <stringProp name="delimiter">,</stringProp>
+              <stringProp name="fileEncoding">utf8</stringProp>
+              <stringProp name="filename">${PERSON_URI_FILE}</stringProp>
+              <boolProp name="quotedData">false</boolProp>
+              <boolProp name="recycle">true</boolProp>
+              <stringProp name="shareMode">All threads</stringProp>
+              <boolProp name="stopThread">false</boolProp>
+              <stringProp name="variableNames">PERSON_URI</stringProp>
+            </CSVDataSet>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="-977445585">pubUri</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="DBA: Auto-complete grant role" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="query" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt; SELECT ?grantUri WHERE {&lt;${DEFAULT_NAMESPACE}${PERSON_URI}&gt; &lt;http://vivoweb.org/ontology/core#hasPrincipalInvestigatorRole&gt; ?grantRole . ?grantRole core:roleIn ?grantUri .} </stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">query</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${WEBAPP_NAME}/ajax/sparqlQuery</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSampler>
+          <hashTree>
+            <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Person URIs from CSV" enabled="true">
+              <stringProp name="delimiter">,</stringProp>
+              <stringProp name="fileEncoding">utf8</stringProp>
+              <stringProp name="filename">${PERSON_URI_FILE}</stringProp>
+              <boolProp name="quotedData">false</boolProp>
+              <boolProp name="recycle">true</boolProp>
+              <stringProp name="shareMode">All threads</stringProp>
+              <boolProp name="stopThread">false</boolProp>
+              <stringProp name="variableNames">PERSON_URI</stringProp>
+            </CSVDataSet>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="99198640">grantUri</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
             <hashTree/>
           </hashTree>
           <HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="DBA: logout" enabled="true">
