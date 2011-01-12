@@ -25,7 +25,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.AllPro
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
 
 /**
  * This request handler is used when you need helpful information to add more context

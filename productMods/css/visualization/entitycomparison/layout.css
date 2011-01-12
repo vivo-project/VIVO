@@ -187,6 +187,10 @@ li{
 	background-color: #ECFFB3 !important;
 }
 
+.datatablerowhighlight td {
+	font-weight: bold !important;
+}
+
 /*
 .metallic{
 	background-color: #212D34;

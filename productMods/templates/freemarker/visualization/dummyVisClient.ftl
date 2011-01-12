@@ -12,7 +12,7 @@ ${urls.base}
 <#assign loadingImageLink = '/${themeDir}site_icons/visualization/ajax-loader.gif'>
 
 <#assign uri="http://vivo-trunk.indiana.edu/individual/n6079">
-<#assign testURL = '${urls.base}/visualization?vis=person_pub_count&container=ajax_recipient&render_mode=dynamic&vis_mode=wth&uri=${uri?url}'>
+<#assign testURL = '${urls.base}/visualizationfm?vis=person_pub_count&container=ajax_recipient&render_mode=dynamic&vis_mode=wth&uri=${uri?url}'>
 
 <style type="text/css">
 	.get_vis {
@@ -87,13 +87,6 @@ $(document).ready(function() {
 
 
 <h2 id="ajax_activator">Hello World!</h2>
-
-<c:url var="staticHref" value="/visualization">
-	<c:param name="vis" value="person_pub_count"/>
-	<c:param name="render_mode" value="standalone"/>
-	<c:param name="vis_mode" value="wth"/>
-	<c:param name="uri" value="http://vivo.library.cornell.edu/ns/0.1#individual5156"/>
-</c:url>
 
 <a href="${testURL}">vis query for person -> "Crane, Brian"</a>
 
