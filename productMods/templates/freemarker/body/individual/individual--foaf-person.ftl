@@ -81,7 +81,9 @@
             <#else>                
                 <h1 class="fn foaf-person">
                     <#-- Label -->
-                    ${individual.name}
+                    <#assign label = individual.nameStatement>
+                    ${label.value}
+                    <@p.editingLinks label editing />
                         
                     <#-- Moniker -->
                     <#if individual.moniker?has_content>
