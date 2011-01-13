@@ -1,0 +1,40 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+table.testData {
+}
+
+table.testData td,th {
+	border: thin solid black;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+table.testData td.left {
+	text-align: left;
+}
+
+table.testData td.open {
+	border-right: none;
+}
+
+table.testData td.middle {
+	border-left: none;
+	border-right: none;
+}
+
+table.testData td.close {
+	border-left: none;
+}
+
+table.oneResult td {
+	border: none;
+}
+
+table.oneResult {
+	border: thin solid black;
+	width: 100%;
+}
+
+table.oneResult td.minmax {
+	font-size: smaller;
+}

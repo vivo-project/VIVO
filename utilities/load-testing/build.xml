@@ -48,6 +48,8 @@ report   - Just summarize output from previously run tests.
           target: properties                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="properties">
+		<property name="source.dir" value="src" />
+		<property name="build.dir" value=".build" />
 		<property name="tests.dir" value="tests" />
 		<property name="results.dir" value=".results" />
 
@@ -96,6 +98,7 @@ report   - Just summarize output from previously run tests.
           target: prepare                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="prepare" depends="properties">
+		<mkdir dir="${build.dir}" />
 		<mkdir dir="${results.dir}" />
 	</target>
 
@@ -189,7 +192,32 @@ report   - Just summarize output from previously run tests.
           target: merge              
          ================================= -->
 	<target name="merge" depends="prepare" description="--> Merge summaries together">
+		<javac srcdir="${source.dir}"
+		       destdir="${build.dir}"
+		       debug="true"
+		       deprecation="true"
+		       optimize="true"
+		       source="1.6">
+		</javac>
 
+		<property name="merge.output.dir"
+		          location="/Development/JIRA issues/NIHVIVO-1129_Load_testing/mergerFiles/" />
+		<property name="merge.input.dir"
+		          location="/Development/JIRA issues/NIHVIVO-1129_Load_testing/mergerFiles/results" />
+		<property name="merge.input.filenames"
+		          value="ver_release1.1.1/SecondTests-rel-1-1-1.html, ver_trunkRdb/SecondTests-rel-1-2.html, ver_trunkSdb/SecondTests-rel-1-2.html" />
+		
+		<java classname="edu.cornell.mannlib.vitro.utilities.loadtesting.ReportsMerger"
+		      fork="yes"
+		      failonerror="true">
+			<classpath location="${build.dir}" />
+			<arg value="${merge.output.dir}" />
+			<arg value="${merge.input.dir}" />
+			<arg value="${merge.input.filenames}" />
+		</java>
+
+		<copy file="mergedResults.css"
+		      todir="${merge.output.dir}" />
 	</target>
 
 </project>
