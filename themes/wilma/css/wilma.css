@@ -223,12 +223,6 @@ ul#main-nav {
 #intro a {
     color: #2485ae
 }
-.pictos-arrow-14 {
-    font-family: 'Pictos';
-    font-size: .875em;
-    color: #b2d15a;
-    line-height: .1em;
-}
 /* LOG IN------>  */          
 #login {
     float: right;
@@ -598,9 +592,6 @@ p.view-all {
 }
 a.view-all-style {
     color: #303e4e
-}
-.pictos-arrow-10 {
-    font-family: 'Pictos';
 }
 /* UPCOMING EVENTS------>  */
 #upcoming-events {
