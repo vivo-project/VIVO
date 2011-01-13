@@ -1,0 +1,185 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+@charset "UTF-8";
+/* CSS Document */
+/* Tell the browser to render HTML 5 elements as block */
+header,
+toc,
+hgroup,
+section,
+nav,
+article,
+aside,
+footer{
+    display: block;
+}
+time{
+    font-weight: normal;
+}
+html,
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%; /* needed for container min-height */
+    font-family: 'Arimo', "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    /*font-size: 62.5%;*/
+    height: auto !important; /* real browsers */
+    height: 100%; /* IE6: treaded as min-height*/;
+    min-height: 100%; /* real browsers */
+    margin: 0 auto;
+}
+body{
+   background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
+}
+/* h1,h2,h3,h4,h5,h6 ------>  */
+h2{
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 22px;
+    color: #2485ae; 
+}
+h2 a{
+    color: #2485ae; 
+}
+h2 a:link, h2 a:visited{
+    text-decoration: underline; 
+}
+h2 a:hover, h2 a:active{
+    text-decoration: none; 
+}
+h3{
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 18px;
+    color: #2485ae; 
+}
+h4{
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 16px;
+    color: #2485ae; 
+}
+h5{
+    padding: 10px 0 12px 0;
+    margin: 0;
+    font-size: 14px;
+    color: #2485ae; 
+}
+/* HEADER ------>  */
+#branding {
+    position: relative;
+    width: 970px;
+    height: 114px;
+    margin: 0 auto;
+}
+/* BRANDING ------>  */
+h1.vivo-logo {
+    position: absolute;
+    width: 386px;
+    height: 59px;
+    top: 28px;
+    left: 0;
+    background: url(../images/VIVO-logo.png) 0 0 no-repeat;
+}
+
+h1.vivo-logo a {
+    display: block;
+    width: 386px;
+    height: 59px;
+}
+
+/* WRAPPER CONTENT------>  */
+#wrapper-content {
+    clear: both;
+    width: 930px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 550px;
+    padding: 20px;
+}
+
+/* TOC -------> */
+
+
+/* FOOTER------>  */
+footer {
+    clear: both;
+    width: 970px;
+    height: 88px;
+    margin: 0 auto;
+    font-size: 0.7em;
+    color: #4e5051;
+    background-color: #fff;
+}
+footer p.copyright {
+    float: left;
+    padding-top: 55px;
+    padding-left: 30px;
+    width: 500px;
+}
+ul#footer-nav {
+    float: right;
+    list-style: none;
+    width: 200px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    padding-top: 50px;
+    padding-right: 20px;
+}
+ul#footer-nav li {
+    float: left;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #c9c8c8;
+}
+ul#footer-nav li:last-child {
+    border-right: none
+}
+#footer-nav a {
+    color: #4e5051
+}
+#footer-nav a:hover {
+    color: #09C;
+    text-decoration: none;
+}
+a.terms {
+    color: #09C;
+    text-decoration: none;
+}
+a.terms:hover {
+    color: #4e5051;
+    text-decoration: none;
+}
+a.powered-by-vivo {
+    color: #09C;
+    text-decoration: none;
+}
+a.powered-by-vivo:hover {
+    color: #4e5051;
+    text-decoration: none;
+}
+
+/* GENERAL STYLE------>  */
+p{
+    margin-bottom: 1.3em;
+}
+
+/* MISCELLANEOUS ------>  */
+.blue{
+    color: #2485ae; 
+}
+.grey{
+    color: #5e6363;
+}
+.green{
+    color: #b2d15a;
+}
+
+.displace {
+    position: absolute;
+    left: -9999px;
+}
+a {
+    text-decoration: underline
+}
