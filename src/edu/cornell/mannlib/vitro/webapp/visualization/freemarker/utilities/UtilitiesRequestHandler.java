@@ -5,14 +5,19 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.utilities;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
+import com.hp.hpl.jena.iri.IRI;
+import com.hp.hpl.jena.iri.IRIFactory;
+import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
+import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
@@ -158,6 +163,38 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		} else if (VisualizationFrameworkConstants.HIGHEST_LEVEL_ORGANIZATION_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			
+			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
+			
+			/*
+			 * First checking if the staff has provided highest level organization in deploy.properties
+			 * if so use to temporal graph vis.
+			 * */
+			if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
+				
+				/*
+	        	 * To test for the validity of the URI submitted.
+	        	 * */
+	        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+	    		IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
+	            
+	    		if (iri.hasViolation(false)) {
+	            	
+	                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
+	                log.error("Highest Level Organization URI provided is invalid " + errorMsg);
+	                
+	            } else {
+
+					ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+							staffProvidedHighestLevelOrganization,
+							VisualizationFrameworkConstants.VIS_TYPE_KEY,
+							VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
+
+					return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+						 highestLevelOrganizationTemporalGraphVisURLParams);
+					
+	            }
+			}
+			
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			fieldLabelToOutputFieldLabel.put("organization", 
 											  QueryFieldLabels.ORGANIZATION_URL);
@@ -228,12 +265,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 						 organizationNode.toString(),
 						 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-						 VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS,
-						 
-						 /* Remove this hard-coded vis_mode once Deepak fixes the Temporal Graph Vis 
-						  * front-end to work without vis_modes. */
-						 VisualizationFrameworkConstants.VIS_MODE_KEY,
-						 "University");
+						 VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
 
 				return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 					 highestLevelOrganizationTemporalGraphVisURLParams);
