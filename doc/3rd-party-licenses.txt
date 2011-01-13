@@ -20,6 +20,7 @@ commons-io
 commons-lang
 commons-logging
 commons-pool
+contenttype
 csv
 dwr
 gson
@@ -31,12 +32,14 @@ log4j
 lucene-analyzers
 lucene-core
 lucene-highlighter
+soapmonitorapplet
 solr
 spring
 stax-api
 taglibs-mailer
 taglibs-random
 taglibs-string
+taglibs-standard
 xalan
 xbean
 xbean-spring
