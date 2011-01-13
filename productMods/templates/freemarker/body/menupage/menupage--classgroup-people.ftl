@@ -17,10 +17,13 @@
             <h3>Find By</h3>
             
             <ul id="find-filters">
-                <li><a href="#">Research Area</a></li>
-                <li><a href="#">Authorship</a></li>
-                <li><a href="#">Department</a></li>
-                <li><a href="#">Courses</a></li>
+                <#assign subjectAreaUri = "http://vivoweb.org/ontology/core#SubjectArea" />
+                <#assign departmentUri = "http://vivoweb.org/ontology/core#Department" />
+                <#assign courseUri = "http://vivoweb.org/ontology/core#Course" />
+                
+                <li><a href="${urls.base}/individuallist?vclassId=${subjectAreaUri?url}">Subject Area</a></li>
+                <li><a href="${urls.base}/individuallist?vclassId=${departmentUri?url}">Department</a></li>
+                <li><a href="${urls.base}/individuallist?vclassId=${courseUri?url}">Courses</a></li>
             </ul>
         </nav>
     
@@ -38,3 +41,4 @@
 ${stylesheets.add("/css/menupage/menupage.css")}
 
 <#include "menupage-scripts.ftl">
+<@dumpAll />
