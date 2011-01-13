@@ -84,6 +84,6 @@ display:People
 display:Research 
     a display:Page ;        
     a display:ClassGroupPage;
-    display:forClassGroup vivoweb:vitroClassGrouppeople ;
+    display:forClassGroup vivoweb:vitroClassGrouppublications ;
     display:title "Research" ;
     display:urlMapping "/research" .
