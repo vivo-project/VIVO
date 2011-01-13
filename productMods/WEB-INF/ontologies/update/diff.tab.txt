@@ -16,6 +16,8 @@ http://vivoweb.org/ontology/core#teaches		No	Delete	not set
 http://vivoweb.org/ontology/core#taughtBy		No	Delete	not set
 http://vivoweb.org/ontology/core#AwardOrHonor	http://vivoweb.org/ontology/core#AwardReceipt	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#conferringOrganization	http://vivoweb.org/ontology/core#awardConferredBy	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#awardOrDistinction	http://vivoweb.org/ontology/core#awardOrHonor	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#awardOrDistinctionFor	http://vivoweb.org/ontology/core#awardOrHonorFor	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#awardSponsoredBy		No	Delete	not set
 http://vivoweb.org/ontology/core#sponsorsAward		No	Delete	not set
 http://vivoweb.org/ontology/core#AbstractInformation		No	Delete	Delete
