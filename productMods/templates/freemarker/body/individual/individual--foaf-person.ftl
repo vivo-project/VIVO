@@ -100,16 +100,7 @@
         </header>
          
         <#-- Overview -->
-        <#assign overview = propertyGroups.getPropertyAndRemoveFromList("${core}overview")!> 
-        <#if overview?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <@p.addLinkWithLabel overview editing />
-            <#list overview.statements as statement>
-                <p class="individual-overview">       
-                    ${statement.value}
-                    <@p.editingLinks statement editing />
-                </p>
-            </#list>
-        </#if>
+        <#include "individual-overview.ftl">
         
         <#-- Research Areas -->
         <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
