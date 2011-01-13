@@ -1,85 +1,85 @@
 @CHARSET "UTF-8";
 
 thead th, tr.even td{
-	background-color: white;
+    background-color: white;
 }
 
 .paginatedtabs{
-/*	border-top: 1px #3D454E solid; */
-	text-align: center;
-	margin-bottom: 10px;
-	padding-top: 10px;
-	font-size: 1.2em;
+/*  border-top: 1px #3D454E solid; */
+    text-align: center;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    font-size: 1.2em;
 }
 
 .paginatedtabs span{
-	padding-right: 5px;	
-	cursor: pointer;
+    padding-right: 5px; 
+    cursor: pointer;
 }
 
 .datatablewrapper td, th{
-	border-bottom: 1px #F1F2EE solid;
-	border-right: 1px #F1F2EE solid;
-	border-left: 1px #F1F2EE solid;
-	text-align: left;
-	padding: 5px;
-	font-size: 10px;
+    border-bottom: 1px #F1F2EE solid;
+    border-right: 1px #F1F2EE solid;
+    border-left: 1px #F1F2EE solid;
+    text-align: left;
+    padding: 5px;
+    font-size: 12px;
 }
 
 .showentries {
-	text-align: center;
-	margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .searchbar{
-	margin-bottom: -10px;
-	text-align: left;
+    margin-bottom: -10px;
+    text-align: left;
 }
 
 .datatablewrapper th{
-	border-top: 1px #3D454E solid;	
-	background:#F1F2ee; 
-	font-weight:bold; 
-	font-size:12px;
+    border-top: 1px #3D454E solid;  
+    background:#F1F2ee; 
+    font-weight:bold; 
+    font-size:12px;
 }
 
 /*
 .datatablewrapper th{
-	border-top: 1px #3D454E solid;
-	border-bottom: 1px #3D454E solid;
-	border-right: 1px #3D454E solid;
-	padding: 5px;
+    border-top: 1px #3D454E solid;
+    border-bottom: 1px #3D454E solid;
+    border-right: 1px #3D454E solid;
+    padding: 5px;
 }
 */
 
 
 
 .sorting_asc {
-	background: url('sort_asc.png') no-repeat center right;
+    background: url('sort_asc.png') no-repeat center right;
 }
 
 .sorting_desc {
-	background: url('sort_desc.png') no-repeat center right;
+    background: url('sort_desc.png') no-repeat center right;
 }
 
 .sorting {
-	background: url('sort_both.png') no-repeat center right;
+    background: url('sort_both.png') no-repeat center right;
 }
 
 .sorting_asc_disabled {
-	background: url('sort_asc_disabled.png') no-repeat center right;
+    background: url('sort_asc_disabled.png') no-repeat center right;
 }
 
 .sorting_desc_disabled {
-	background: url('sort_desc_disabled.png') no-repeat center right;
+    background: url('sort_desc_disabled.png') no-repeat center right;
 }
 
 /*
 tr.odd {
-	background-color: #E2E4FF;
+    background-color: #E2E4FF;
 }
 
 tr.even {
-	background-color: white;
+    background-color: white;
 }
 */

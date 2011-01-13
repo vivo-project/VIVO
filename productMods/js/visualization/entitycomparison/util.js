@@ -48,7 +48,6 @@
  */
 function init(graphContainer) {
 	
-	$('#yaxislabel').css("color", "#595B5B");
 	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
 	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
@@ -395,7 +394,15 @@ function createLegendRow(entity, bottomDiv) {
     var labelDiv = $('<div>');
     labelDiv.attr('class', 'easy-deselect-label');
     labelDiv.html('<div class="entity-label-url ellipsis"></div>');
-    labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');
+    
+    /*
+     * We should display a further drill-down option only when available. In case of people
+     * there is no drill-down possible, so don't diaply the temporal graph icon.
+     * */
+    if (entity.visMode !== "PERSON") {
+    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');	
+    }
+    
 
     var checkbox = $('<input>');
     checkbox.attr('type', 'checkbox');
@@ -456,19 +463,7 @@ function getVIVOURL(entity){
 
 function getTemporalVisURL(entity) {
 	
-	var result = '';
-	
-	if(entity.visMode == "PERSON"){
-
-		result = subOrganizationVivoProfileURL + "uri="+ entity.entityURI;
-
-	} else{
-		
-		result = subOrganizationTemporalGraphURL + "&" +  
-				 "uri=" + entity.entityURI ;
-	}
-	
-	return result;
+	return subOrganizationTemporalGraphURL + "&uri=" + entity.entityURI ;
 }
 
 function getVIVOProfileURL(given_uri) {

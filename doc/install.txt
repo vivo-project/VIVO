@@ -168,6 +168,23 @@ NOTE: If you want to use an external authentication system like Shibboleth or
 CUWebAuth, you will need to set two additional properties in this file. See 
 the section below entitled "Using an External Authentication System with VIVO".
 
+                Temporal Graph Visualization is used to compare different 
+                organizations/people within an organization on different parameters 
+                like number of publications, grants. This parameter will be used 
+                as a default in case a URI is not provided. It will be also used 
+                whenever this visualization is to be rendered for top level organization.
+                In absence of this parameter a SPARQL query will be fired which will 
+                attempt to provide a top level organization.The name of a property 
+                that can be used to associate an Individual with a user account. 
+                When a user logs in with a name that matches the value of this property,
+                the user will be authorized to edit that Individual.
+property name:  visualization.topLevelOrg
+example value:  http://vivo-trunk.indiana.edu/individual/topLevelOrgURI
+
+NOTE: If you want to use an external authentication system like Shibboleth or
+CUWebAuth, you will need to set two additional properties in this file. See 
+the section below entitled "Using an External Authentication System with VIVO".
+
 -------------------------------------------------------------------------------
  
 V. Compile and deploy
