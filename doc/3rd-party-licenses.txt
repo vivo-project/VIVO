@@ -119,7 +119,9 @@ GNU LGPL 2.1
 ------------
 licenses/lgpl2.LICENSE.txt
 
+betterdateinput
 jcalendar
+tinymce
 wstx-asl
 
 
@@ -141,6 +143,7 @@ jai_core
 
 MIT
 ---
+blueprintcss (licenses/blueprintcss.LICENSE.txt)
 icu4j (licenses/icu.LICENSE.txt)
 slf4j-api (licenses/mit.LICENSE.txt)
 slf4j-log4j12 (licenses/mit.LICENSE.txt)
