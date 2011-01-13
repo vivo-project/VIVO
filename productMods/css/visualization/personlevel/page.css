@@ -73,7 +73,7 @@ p.datatable {
 
 .neutral_investigator_name,
 .neutral_author_name {
-	color: #13968c;
+	color: #2485AE;
 	font-weight: bold;
 }
 
@@ -248,7 +248,7 @@ moniker{
 }
 #dataPanel .bold {
 	font-weight: bold;
-	color:#13968c;
+	color: #2485AE;
 	font-size: 14px;
 }
 
