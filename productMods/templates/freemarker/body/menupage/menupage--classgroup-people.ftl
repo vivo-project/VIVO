@@ -41,4 +41,3 @@
 ${stylesheets.add("/css/menupage/menupage.css")}
 
 <#include "menupage-scripts.ftl">
-<@dumpAll />
