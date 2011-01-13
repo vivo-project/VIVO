@@ -63,9 +63,8 @@
             </#if>
         </#if>      
                 
-        <#-- Links -->
-        <#assign linkListClass = "individual-urls-people">
-        <#include "individual-links.ftl">       
+        <#-- Links -->  
+        <@p.vitroLinks propertyGroups editing "individual-urls-people" />
     </section>
     
     <section id="individual-info" role="region">
