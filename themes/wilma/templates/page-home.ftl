@@ -18,7 +18,7 @@
             <section id="intro" role="region">
                 <h2>What is VIVO?</h2>
                 
-                <p>VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with researcher interests, activities, and accomplishments, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually,  brought into VIVO in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases, or from database providers such as publication aggregators and funding agencies. <a href="#">More<span class="pictos-arrow-14"> 4</span></a></p>
+                <p>VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with researcher interests, activities, and accomplishments, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually,  brought into VIVO in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases, or from database providers such as publication aggregators and funding agencies. <a href="#">More <img class="" src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
                 <section id="search-home" role="region">
                     <h3>Search VIVO</h3>
                     
@@ -158,7 +158,7 @@
                         <p class="summary">Proton-Coupled Electron Transfer II <time>5:30 PM</time></p>
                     </article>
                     
-                    <p class="view-all"><a class="view-all-style" href="#">View All <span class="pictos-arrow-10">4</span></a></p>
+                    <p class="view-all"><a class="view-all-style" href="#">View All <img class="" src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
                 </section> <!-- #upcoming-events -->
                 
                 <section id="latest-publications" class="global-highlights" role="region">
@@ -180,7 +180,7 @@
                         <p class="publication-content">Biology 101<span><em>Series</em> <time datetime="2010-02-13T20:00Z"> | November 2010</time></p>
                     </article>
                     
-                    <p class="view-all"><a class="view-all-style" href="#">View All <span class="pictos-arrow-10">4</span></a></p>
+                    <p class="view-all"><a class="view-all-style" href="#">View All <img class="" src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
                 </section> <!-- #latest-publications -->
             </section> <!-- $highlights -->
         

@@ -93,7 +93,7 @@ $(document).ready(function(){
 		<#-- Moniker-->
 			<em id="ego_moniker" class="moniker"></em>
 		<br />	
-		<span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}">Back to Profile</a>
+		<img class="" src="${urls.images}/arrowBackIcon.gif" alt="arrow icon" /><a href="${egoVivoProfileURL}">Back to Profile</a>
 		
 	</div>
 	
@@ -101,7 +101,7 @@ $(document).ready(function(){
 		<div id="coauthorship_link_container">
 	    	<div class="collaboratorship-icon"><a href="${coauthorshipURL}"><img src="${coAuthorIcon}" /></a></div>
 	    	<div class="collaboratorship-link">
-	    		<h3><a href="${coauthorshipURL}">Co-Author Network</a></h3><a class="view-all-style" href="${coauthorshipURL}">View <span class= "pictos-arrow-10">4</span></a>
+	    		<h3><a href="${coauthorshipURL}">Co-Author Network</a></h3>
 			</div>
 	    </div>
 	</div>

@@ -96,7 +96,7 @@ $(document).ready(function(){
 		<em id="ego_moniker" class="moniker"></em>
 
 		<br />
-		<span class="pictos-arrow-14">4</span><a href="${egoVivoProfileURL}">Back to Profile</a>	
+		<img class="" src="${urls.images}/arrowBackIcon.gif" alt="arrow icon" /><a href="${egoVivoProfileURL}">Back to Profile</a>	
 	
 	</div>
 	
@@ -104,7 +104,7 @@ $(document).ready(function(){
 	    <div id="coinvestigator_link_container">
 	    	<div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}"><img src="${coInvestigatorIcon}" /></a></div>
 	    	<div class="collaboratorship-link">
-	    		<h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3><a class="view-all-style" href="${coprincipalinvestigatorURL}">View <span class= "pictos-arrow-10">4</span></a>
+	    		<h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3>
 			</div>
 		</div>
 	</div>

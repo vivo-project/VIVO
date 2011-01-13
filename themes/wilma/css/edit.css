@@ -221,7 +221,7 @@ form h3.delete-entry{
 }
 form h2{
     margin-bottom: 0;
-    padding-bottom: 0;
+    padding-bottom: 10px;
 }
 form select{
    border: 0;

@@ -144,7 +144,7 @@
             <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Welles.jpg" /></a></li>
         </ul>
         
-        <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <span class="pictos-arrow-10">4</span></a></p>
+        <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img class="" src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
     </section>
 </section>
 
