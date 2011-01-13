@@ -1146,7 +1146,7 @@ ul#individual-tools li a{
 #share-contact a.tel{
     color: #5f6464;
 }
-ul#individual-urls{
+ul.individual-urls{
     list-style: url(../../../images/individual/arrow-grey.gif);
 }
 ul#individual-email, 
@@ -1160,17 +1160,17 @@ ul#individual-phone li{
 ul#individual-email li:last-child{
     margin-bottom: 15px;
 }
-ul#individual-urls li{
+ul.individual-urls li{
     font-size: .875em;
     line-height: 1.6em;
 }
-ul#individual-urls li a{
+ul.individual-urls li a{
     color: #2485ae;
 }
-ul#individual-urls-people{
+ul.individual-urls-people{
     list-style: url(../../../images/individual/arrow-grey.gif);
 }
-ul#individual-urls-people li a{
+ul.individual-urls-people li a{
     color: #2485ae;
 }
 /* INDIVIDUAL RIGHT CONTENT ------>  */

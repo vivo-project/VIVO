@@ -117,4 +117,12 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#end">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-dateTimeValue.xml</display:listViewConfigFile>
     </rdf:Description>
+    
+    <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#primaryLink">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-vitroLink.xml</display:listViewConfigFile>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-vitroLink.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
 </rdf:RDF>

@@ -64,6 +64,7 @@
         </#if>      
                 
         <#-- Links -->
+        <#assign linkListClass = "individual-urls-people">
         <#include "individual-links.ftl">       
     </section>
     
