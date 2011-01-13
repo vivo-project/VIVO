@@ -949,6 +949,15 @@
     <url-pattern>/individuallist</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>EntityURLController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityURLController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EntityURLController</servlet-name>
+    <url-pattern>/entityurl/*</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>SearchController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.FreemarkerPagedSearchController</servlet-class>
