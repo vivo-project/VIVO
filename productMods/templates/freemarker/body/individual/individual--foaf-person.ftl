@@ -64,13 +64,7 @@
         </#if>      
                 
         <#-- Links -->
-        <nav role="navigation">
-            <ul id ="individual-urls-people" role="list">
-                <#list individual.links as link>                               
-                    <li role="listitem"><a href="${link.url}">${link.anchor}</a></li>                                 
-                </#list>         
-            </ul>
-        </nav>
+        <#include "individual-links.ftl">       
     </section>
     
     <section id="individual-info" role="region">
