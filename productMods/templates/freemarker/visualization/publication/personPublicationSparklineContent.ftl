@@ -88,7 +88,7 @@
                      * any year associated with it. Hence.
                      * */
                     var renderedSparks = ${sparklineVO.renderedSparks};      
-                    var totalPubs = parseInt(renderedSparks) + parseInt(${sparklineVO.unkownYearPublications});
+                    var totalPubs = parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications});
                     
                     if ( totalPubs == 1 ) {
                         var pubDisplay = "publication";
