@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Template for profile page for individuals of type foaf:Person -->
+<#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
 
