@@ -5,37 +5,33 @@
 **************************************************/
 
 span.incomplete-data-holder,
-#incomplete-data{
-  padding: 5px;
-  font-size: 0.8em;
-  color: #444;
-  border: dotted 1px #eee;
-  background-color: #ffb;
+#incomplete-data {
+    padding: 5px;
+    font-size: 0.8em;
+    color: #444;
+    border: dotted 1px #eee;
+    background-color: #ffb;
 }
-#incomplete-data{
-  margin-top: 1.6em;
-  font-size: 1.0em;
+
+#incomplete-data {
+    margin-top: 1.6em;
+    font-size: 1.0em;
 }
-/* RY Removed cursor:pointer: makes the whole div look clickable when it isn't. */
-#vis_container{
-    /*cursor:pointer; */
-    /*height:36px;
-    margin-left:24%;
-    margin-top:-2%;
-    position:absolute;
-    width:380px;*/
-}
-.collaboratorship-icon{
+
+.collaboratorship-icon {
     float: left;
     padding-right: 5px;
 }
-.collaboratorship-link{
+
+.collaboratorship-link {
     padding-top: 3px;
 }
-.collaboratorship-link a{
+
+.collaboratorship-link a {
     font-size: 0.9em;
 }
-.collaboratorship-link h3{
+
+.collaboratorship-link h3 {
     line-height: 1em;
     font-size: 1em !important;
     margin-bottom: 0px !important;
@@ -44,31 +40,48 @@ span.incomplete-data-holder,
     padding-left: 0px !important;
     padding-bottom: 0px !important;
 }
-.collaboratorship-link h3 a{
+
+.collaboratorship-link h3 a {
     color: #2485AE;
     font-size: .9em !important;
     text-decoration: underline;
 }
-#coauthorship_link_container{
+
+#coauthorship_link_container {
     display: none;
 }
+
 #coauthorship_link_container,
-#coinvestigator_link_container{
+#coinvestigator_link_container {
     margin-top: 20px;
 }
-.sparkline_text{
+
+.sparkline_text {
     font-size: .8em;
     font-weight: bold;
     text-align: left;
     padding-bottom: 20px;
     border-bottom: 1px dotted #A6B1B0;
 }
-.google-visualization-sparkline-default{
+
+.google-visualization-sparkline-default {
     margin-bottom: 5px;
 }
-.google-visualization-sparkline-image{
+
+.google-visualization-sparkline-image {
     border: 1px solid #cfe4ed; 
 }
-.google-visualization-sparkline-selected{
+
+.google-visualization-sparkline-selected {
     background-color: blue;
+}
+
+.visualization-menupage-link {
+    float: right;
+    margin-top: 0.8em;
+    padding-left: 1.6em;
+}
+
+.temporal-graph {
+    background: url(../../images/visualization/temporal_vis_small_icon.jpg) top left no-repeat;
 }
