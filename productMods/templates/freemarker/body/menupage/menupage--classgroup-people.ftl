@@ -33,33 +33,6 @@
     <p>(n) Persons | (n) with authorship | (n) researchers | (n) are principal investigators | (n) with awards | (n) are teaching | (n) have positions in organization</p>
 </section>
 
-<section id="researchers" role="region">
-    <h3>Researchers</h3>
-    
-    <p>A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | All</p>
-    
-    <section id="researchers-slider" role="region">
-        <div id="alpha-display">A</div>
-    
-        <nav id="profile-photo-display" role = "navigation">
-            <ul>
-                <li><img src="${urls.images}/placeholders/person.thumbnail.jpg" width="90" height="90" alt="foaf:lastName, foaf:firstName" /></li>
-                <li><img src="${urls.images}/placeholders/person.thumbnail.jpg" width="90" height="90" alt="foaf:lastName, foaf:firstName" /></li>
-                <li><img src="${urls.images}/placeholders/person.thumbnail.jpg" width="90" height="90" alt="foaf:lastName, foaf:firstName" /></li>
-                <li><img src="${urls.images}/placeholders/person.thumbnail.jpg" width="90" height="90" alt="foaf:lastName, foaf:firstName" /></li>
-                <li><img src="${urls.images}/placeholders/person.thumbnail.jpg" width="90" height="90" alt="foaf:lastName, foaf:firstName" /></li>
-                <li><img src="${urls.images}/placeholders/person.thumbnail.jpg" width="90" height="90" alt="foaf:lastName, foaf:firstName" /></li>
-            </ul>
-        </nav>
-        
-        <div id="nav-display">
-            <p>All</p>
-            
-            <a href="#"><img src="${urls.images}/menupage/arrow-carousel-people.jpg" alt="" width="44" height="58" /></a> 
-        </div>
-    </section>
-</section>
-
 <#include "menupage-browse.ftl">
 
 ${stylesheets.add("/css/menupage/menupage.css")}
