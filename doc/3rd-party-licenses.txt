@@ -26,6 +26,7 @@ dwr
 gson
 jakarta-jstl
 jakarta-oro
+jmeter
 joda-time
 json-taglib
 log4j
@@ -40,6 +41,7 @@ taglibs-mailer
 taglibs-random
 taglibs-string
 taglibs-standard
+toggle
 xalan
 xbean
 xbean-spring
@@ -148,7 +150,12 @@ jai_core
 MIT
 ---
 blueprintcss (licenses/blueprintcss.LICENSE.txt)
+html5js (licenses/mit.LICENSE.txt)
 icu4j (licenses/icu.LICENSE.txt)
+jquery (licenses/mit.LICENSE.txt)
+jquery-plugins (licenses/mit.LICENSE.txt)
+prototype (licenses/mit.LICENSE.txt)
+selectivizr (licenses/mit.LICENSE.txt)
 slf4j-api (licenses/mit.LICENSE.txt)
 slf4j-log4j12 (licenses/mit.LICENSE.txt)
 
@@ -171,9 +178,12 @@ servlet-api (licenses/sun_binary.LICENSE.txt)
 Others
 ------
 cos (licenses/cos.LICENSE.txt)
+googleanalytics (license/googleanalytics.LICENSE.txt)
 jdom (licenses/jdom.LICENSE.txt)
+json (licenses/json.LICENSE.txt)
 jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
+pictos (licenses/pictos.LICENSE.txt)
 
 
 Unknown

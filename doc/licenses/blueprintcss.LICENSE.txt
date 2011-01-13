@@ -1,4 +1,4 @@
-BLUEPRINT CSS
+BLUEPRINT CSS LICENSE
 
 Copyright (c) 2007 - 2010 blueprintcss.org
 

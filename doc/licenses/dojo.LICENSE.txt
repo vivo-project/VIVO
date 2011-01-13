@@ -1,4 +1,4 @@
-DOJO TOOLKIT
+DOJO TOOLKIT LICENSE
 
 Copyright (c) 2005-2010, The Dojo Foundation
 All rights reserved.
