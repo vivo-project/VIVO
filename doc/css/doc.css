@@ -64,6 +64,16 @@ h5{
     font-size: 14px;
     color: #2485ae; 
 }
+
+a {
+    text-decoration: underline
+}
+
+code {
+	padding: 0 0 0 20px;
+	margin: 10px;	
+}
+
 /* HEADER ------>  */
 #branding {
     position: relative;
@@ -98,7 +108,42 @@ h1.vivo-logo a {
 }
 
 /* TOC -------> */
+ol {
+	list-style-type: upper-roman;
+	margin: 0 0 10px 10px;
+}
 
+/* TABLE --------> */
+table {
+	margin: 10px auto;
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: collapse;
+}
+
+th {
+	border-width: 1px;
+	padding: 4px;
+	border-style: inset;
+	border-color: white;
+	background: #2485ae;
+	color: #FFFFFF;
+}
+
+td {
+	border-width: 1px;
+	padding: 4px 4px 4px 6px;
+	border-style: inset;
+	border-color: white;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+
+.odd_row {
+	background: #EEEEEE;
+	border-bottom: 1px solid grey;
+}
 
 /* FOOTER------>  */
 footer {
@@ -179,7 +224,4 @@ p{
 .displace {
     position: absolute;
     left: -9999px;
-}
-a {
-    text-decoration: underline
 }
