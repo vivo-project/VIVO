@@ -1,9 +1,5 @@
 @CHARSET "UTF-8";
 
-thead th, tr.even td{
-    background-color: white;
-}
-
 .filterInfo {
     /*font-size: 0.9em;*/
     display: inline-block;

@@ -1089,7 +1089,7 @@ function disableUncheckedEntities(){
 			createNotification("warning-notification", { title:'Information', 
 				text:'A Maximum of 10 entities can be compared.' },{
 				custom: false,
-				expires: 4000
+				expires: false
 				});	
 		}
 	} 

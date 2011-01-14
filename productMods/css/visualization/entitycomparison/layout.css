@@ -2,28 +2,14 @@
 
 @CHARSET "UTF-8";
 
-head,#body {
-    font: 0.9em Helvetica;
-}
-
 #body {
+    font: 0.9em Helvetica;
     background-color: #fff;
     min-height: 800px;
     width: 100%;
-    min-width: 900px;
+    /*min-width: 900px;*/
     margin: auto;
-}
-
-h1 {
-    padding-top: 10px;
-/*  font-size: 1.5em; */
-    margin-left: 5%;
-}
-
-h2 {
-/*  font-size: 1.1em; */
-    margin-top: 10px;
-    margin-bottom: 5px;
+    overflow: hidden;
 }
 
 a.temporalGraphLinks {
@@ -46,10 +32,6 @@ a.temporalGraphLinks {
     margin-left: 10px;
 }
 
-form{
-    margin-top:70px;
-    margin-bottom: -50px;   
-}
 #yaxislabel {
     font-size: 12px;
     float:right;
@@ -69,7 +51,7 @@ form{
 }
 
 #notification-container {
-position: inherit;
+    position: inherit;
 }
 
 .disabled-checkbox-event-receiver {
@@ -83,6 +65,7 @@ position: inherit;
     margin-top: 20px;
     margin-bottom: -40px;   
 }
+
 #bar {
     height: 20px;
     float: left;
@@ -148,10 +131,6 @@ position: inherit;
     margin-top: 50px;
 }
 
-#bottom,#graphContainer {
-    /*float: right;*/
-}
-
 #graphContainer {
     margin-bottom: 15px;
     width: 450px; 
@@ -180,7 +159,6 @@ position: inherit;
     float:right;
     margin-right:3%;
     width:54%;
-    margin-top: -43px;
 }
 
 #counter,#total {
@@ -191,16 +169,11 @@ position: inherit;
     margin-top: 10px;
 }
 
-li{
-    padding: 5px;
-    list-style: none;
-}
-
-#paginatedTable{
+#paginatedTable {
     margin-top:0px;
 }
 
-.sDomSearchBar{
+.sDomSearchBar {
     margin-bottom: -10px;
     margin-left: 41%;
 }
@@ -213,32 +186,6 @@ li{
     font-weight: bold !important;
 }
 
-/*
-.metallic{
-    background-color: #212D34;
-    color: white;
-}
-*/
-
-#leftUpper{
-/*
-    border: 1px #3D454E solid;
-    border-top: 10px #3D454E solid;
-    background-color: #D9D9D9;
-    
-    padding-left: 10px;
-*/  
-}
-
-#leftLower{
-/*  
-    border: 1px #3D454E solid;
-    border-top: 10px #3D454E solid;
-
-    padding-left: 10px;
-    */
-}
-        
 #bottomButtons{
     width: 100%;
     float:right;
@@ -255,6 +202,6 @@ p.displayCounter{
     border-bottom: 1px solid gray;
 }
 
-#comparisonHeader, #entityHeader, #entitylevelheading, #comparisonParameter, #headerText{
+#comparisonHeader, #entityHeader, #entitylevelheading, #comparisonParameter, #headerText {
     color: #2485ae;
 }

@@ -2,28 +2,33 @@
 
 //Hard coded color constants
 var	TURQUOISE = "#8DD3C7";
+var	DARK_TURQUOISE = "#009999";
 var	LIGHT_YELLOW = "#FFFFB3";
 var	LIGHT_VIOLET = "#BEBADA";
+var	RED = "#CC0000";
 var	LIGHT_RED = "#FB8072";
+var	DARK_RED = "#520000";
 var	SKY_BLUE = "#80B1D3";
+var	DARK_BLUE = "#80B1D3";
+var	LIGHT_BLUE = "#3399FF";
 var	ORANGE = "#FDB462";
+var DARK_ORANGE = "#FF9900";
 var	LIGHT_GREEN = "#B3DE69";
+var	DARK_GREEN = "#006600";
+var	VIBRANT_GREEN = "#99CC00";
 var	LIGHT_PINK = "#FCCDE5";
 var	LIGHT_GREY = "#D9D9D9";
-var	PURPLE = "#BC80BD";                     
+var	PURPLE = "#BC80BD";
+var	DARK_PURPLE = "#6600CC";
+var	PINK_PURPLE = "#CC00CC";
 
-var colorConstantQueue = 
-	[
-       TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
-       SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
-       PURPLE
-    ];
+var colorConstantQueue = [ DARK_BLUE, DARK_TURQUOISE, 
+                           LIGHT_BLUE, DARK_GREEN,
+                           VIBRANT_GREEN, DARK_PURPLE, 
+                           PINK_PURPLE, DARK_ORANGE,
+                           DARK_RED, RED ];
 
-var freeColors = [
-                   TURQUOISE, LIGHT_YELLOW, LIGHT_VIOLET, LIGHT_RED, 
-                   SKY_BLUE, ORANGE, LIGHT_GREEN, LIGHT_PINK, LIGHT_GREY,
-                   PURPLE
-                ];
+var freeColors = colorConstantQueue.slice();
 
 var year = {
 		min: 1998,
@@ -76,4 +81,3 @@ var FlotOptions = {
 };
 
 FlotOptions.colors = colorConstantQueue;
-

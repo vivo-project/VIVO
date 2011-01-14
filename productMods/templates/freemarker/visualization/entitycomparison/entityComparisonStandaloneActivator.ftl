@@ -12,69 +12,45 @@
 <#assign subOrganizationTemporalGraphGrantURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_grant_count">
 <#assign subOrganizationVivoProfileURL = "${urls.base}/individual?">
 
-
-
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>
-
 
 <#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&labelField=label'>
 
 
 <#-- Javascript files -->
 
-<#assign flot = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/jquery.flot.js'>
 <#assign excanvas = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/excanvas.js'>
-
+<#assign flot = 'js/visualization/entitycomparison/jquery_plugins/flot/jquery.flot.js'>
+<#assign fliptext = 'js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
+<#assign jqueryNotify = 'js/jquery_plugins/jquery.notify.min.js'>
+<#assign jqueryUI = 'js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
+<#assign datatable = 'js/jquery_plugins/jquery.dataTables.min.js'>
+<#assign entityComparisonUtils = 'js/visualization/entitycomparison/util.js'>
+<#assign entityComparisonConstants = 'js/visualization/entitycomparison/constants.js'>
 
 <!--[if IE]><script type="text/javascript" src="${excanvas}"></script><![endif]-->
-
-<#assign fliptext = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
-
-<#assign jqueryNotify = '${urls.base}/js/jquery_plugins/jquery.notify.min.js'>
-<#assign jqueryUI = '${urls.base}/js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
-
-<#assign datatable = '${urls.base}/js/jquery_plugins/jquery.dataTables.min.js'>
-
-<#assign entityComparisonUtils = '${urls.base}/js/visualization/entitycomparison/util.js'>
-<#assign entityComparisonConstants = '${urls.base}/js/visualization/entitycomparison/constants.js'>
-
-<script type="text/javascript" src="${flot}"></script>
-<script type="text/javascript" src="${fliptext}"></script>
-
-<!--
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
--->
-
-<script type="text/javascript" src="${jqueryUI}"></script>
-
-
-
-
-<script type="text/javascript" src="${datatable}"></script>
-<script type="text/javascript" src="${entityComparisonUtils}"></script>
-<script type="text/javascript" src="${entityComparisonConstants}"></script>
-<script type="text/javascript" src="${jqueryNotify}"></script>
+${scripts.add(flot)}
+${scripts.add(fliptext)}
+${scripts.add(jqueryUI)}
+${scripts.add(datatable)}
+${scripts.add(entityComparisonUtils)}
+${scripts.add(entityComparisonConstants)}
+${scripts.add(jqueryNotify)}
 
 <#-- CSS files -->
 
-
-<#assign demoTable = "${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />
-
-<#assign jqueryUIStyle = "${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.4.custom.css" />
-<#assign jqueryNotifyStyle = "${urls.base}/css/jquery_plugins/ui.notify.css" />
-
-<#assign entityComparisonStyle = "${urls.base}/css/visualization/entitycomparison/layout.css" />
+<#assign demoTable = "js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />
+<#assign jqueryUIStyle = "js/jquery-ui/css/smoothness/jquery-ui-1.8.4.custom.css" />
+<#assign jqueryNotifyStyle = "css/jquery_plugins/ui.notify.css" />
+<#assign entityComparisonStyle = "css/visualization/entitycomparison/layout.css" />
 <#assign entityComparisonStyleIEHack = "${urls.base}/css/visualization/entitycomparison/layout-ie.css" />
+<#assign vizStyle = "css/visualization/visualization.css" />
 
-<#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
-
-
-
-<link href="${jqueryUIStyle}" rel="stylesheet" type="text/css" />
-<link href="${demoTable}" rel="stylesheet" type="text/css" />
-<link href="${entityComparisonStyle}" rel="stylesheet" type="text/css" />
-<link href="${vizStyle}" rel="stylesheet" type="text/css" />
-<link href="${jqueryNotifyStyle}" rel="stylesheet" type="text/css" />
+${stylesheets.add(jqueryUIStyle)}
+${stylesheets.add(demoTable)}
+${stylesheets.add(entityComparisonStyle)}
+${stylesheets.add(vizStyle)}
+${stylesheets.add(jqueryNotifyStyle)}
 <!--[if IE]><link href="${entityComparisonStyleIEHack}" rel="stylesheet" type="text/css" /><![endif]-->
 
 
@@ -88,15 +64,15 @@ var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
 var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
 var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantURL}";
 
+var jsonString = '${jsonContent}';
+var organizationLabel = '${organizationLabel}';
+
 </script>
 
 <script type="text/javascript">
 
     $(document).ready(function() {
     
-        var jsonString = '${jsonContent}';
-        var organizationLabel = '${organizationLabel}';
-        
         /* This is used to cache the current state whether the user is allowed to select more entities from 
         the datatable or not. Once Max number of entity selection is reached the user can no longer select 
         more & this variable will be set to false. */
@@ -120,8 +96,6 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
         // initial display of the grid when the page loads
         init(graphContainer);
         
-
-
         //click event handler for clear button
         $("a#clear").click(function(){
             clearRenderedObjects();
@@ -133,12 +107,12 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
          */         
         
         $("select.comparisonValues").change(function(){
-        	
-        	if($("select.comparisonValues option:selected").text() === "by Grants"){
-        		window.location = subOrganizationTemporalGraphGrantURL + "&uri=" + "${organizationURI}";
-        	}
+            
+            if($("select.comparisonValues option:selected").text() === "by Grants"){
+                window.location = subOrganizationTemporalGraphGrantURL + "&uri=" + "${organizationURI}";
+            }
 
-			var selectedValue = $("select.comparisonValues option:selected").val();
+            var selectedValue = $("select.comparisonValues option:selected").val();
             $("#comparisonParameter").text("Total Number of " + selectedValue);
             $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
             $('#yaxislabel').css("color", "#595B5B");
@@ -348,7 +322,7 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
         
         <div id="rightblock">
         
-            <h4 id="headerText">Comparing <span id="comparisonHeader">Publications</span> of <span id="entityHeader">Institutions</span> in <span id="organizationLabel"></span></h4>
+            <h3 id="headerText">Comparing <span id="comparisonHeader">Publications</span> of <span id="entityHeader">Institutions</span> in <span id="organizationLabel"></span></h3>
             
             <div id="temporal-graph">
                 <div id="yaxislabel"></div>
@@ -357,7 +331,7 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
             </div>
         
             <div id="bottom">
-                <h4><span id="comparisonParameter"></span></h4>
+                <h3><span id="comparisonParameter"></span></h3>
             <p class="displayCounter">You have selected <span id="counter">0</span> of a maximum 
             <span id="total">10</span> <span id="entityleveltext"> schools</span> to compare. 
             <a id="clear" class="temporalGraphLinks">Clear</a></p>
