@@ -20,9 +20,6 @@ VIVO wilma theme: screen styles
 *****************************************
 *****************************************/
 
-/* This is our holdover vivo-basic theme file used for transition to wilma theme. This is temporary and it will be removed.*/
-@import url("transition/holdover-vivobasic/screen.css");
-
 @import url("reset.css");
 @import url("edit.css");
 @import url("wilma.css");
