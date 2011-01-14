@@ -16,9 +16,11 @@
         <#include "menu.ftl">
         
             <section id="intro" role="region">
-                <h2>What is VIVO?</h2>
-                
-                <p>VIVO is an open source semantic web application originally developed and implemented at Cornell. When installed and populated with researcher interests, activities, and accomplishments, it enables the discovery of research and scholarship across disciplines at that institution. VIVO supports browsing and a search function which returns faceted results for rapid retrieval of desired information. Content in any local VIVO installation may be maintained manually,  brought into VIVO in automated ways from local systems of record, such as HR, grants, course, and faculty activity databases, or from database providers such as publication aggregators and funding agencies. <a href="#">More <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
+            <h2>Welcome to VIVO</h2>
+            
+            <p>VIVO is a research-focused discovery tool that enables collaboration among scientists across all disciplines.
+			<br /><br />Browse or search information on people, departments, courses, grants, and publications.</p>
+
                 <section id="search-home" role="region">
                     <h3>Search VIVO</h3>
                     
