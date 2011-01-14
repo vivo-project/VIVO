@@ -32,7 +32,7 @@ report   - Just summarize output from previously run tests.
           target: all              
          ================================= -->
 	<target name="all"
-	        depends="clean, run, report"
+	        depends="run, report"
 	        description="--> Run the tests and summarize the output." />
 
 	<!-- ================================= 
@@ -51,8 +51,6 @@ report   - Just summarize output from previously run tests.
 		<property name="source.dir" value="src" />
 		<property name="build.dir" value=".build" />
 		<property name="tests.dir" value="tests" />
-		<property name="results.dir" value=".results" />
-
 		<property name="properties.file" location="loadtesting.properties" />
 
 		<fail message="You must create a &quot;${properties.file}&quot; file.">
@@ -78,6 +76,9 @@ report   - Just summarize output from previously run tests.
 		      message="${properties.file} must contain a value for webapp.name" />
 
 		<fail unless="data.dir" message="${properties.file} must contain a value for data.dir" />
+
+		<!-- If no value was provided, store the results here. -->
+		<property name="results.dir" value=".results" />
 
 		<!-- If no value was provided, run a single thread -->
 		<property name="threads" value="1" />
