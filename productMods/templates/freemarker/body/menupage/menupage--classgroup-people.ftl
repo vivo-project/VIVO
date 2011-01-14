@@ -41,3 +41,5 @@
 ${stylesheets.add("/css/menupage/menupage.css")}
 
 <#include "menupage-scripts.ftl">
+
+${scripts.add("/js/menupage/browseByVClassPeople.js")}

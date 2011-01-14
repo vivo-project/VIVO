@@ -1026,7 +1026,7 @@ ul#alpha-browse-childClass .count-classes {
     color: #2485ae;
 }
 #individuals-in-childClass li.individual-foaf-person {
-    width: 440px;
+    width: 90%;
     border-bottom: 1px solid #dde4e3;
     padding-bottom: 0;
 }
