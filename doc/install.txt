@@ -150,7 +150,49 @@ example value:  username
                 Change the password to match the password you created in MySQL 	
 property name:  VitroConnection.DataSource.password
 example value:  password
-	  	 
+	  
+                Specify the Jena triple store technology to use.  SDB is Jena's
+                SPARQL database; this setting allows RDF data to scale beyond the
+                limits of the JVM heap.  Set to RDB to use the older Jena RDB
+                store with in-memory caching.
+property name:  VitroConnection.DataSource.tripleStoreType
+example value:  SDB
+
+                Specify the maximum number of active connections in the database
+                connection pool to support the anticipated number of concurrent
+                page requests.  It is not necessary to adjust this value when
+                using the RDB configuration.
+property name:  VitroConnection.DataSource.pool.maxActive
+example value:  40
+
+                Specify the maximum number of database connections that will be
+                allowed to remain idle in the connection pool.  Default is
+                25% of the maximum number of active connections.
+property name:  VitroConnection.DataSource.pool.maxIdle
+example value:  10
+	
+                Change the dbtype setting to use a database other than MySQL.
+                Otherwise, leave this value unchanged. 
+                Possible values are DB2, derby, HSQLDB, H2, MySQL, Oracle, 
+                PostgreSQL, and SQLServer.  
+                Refer to http://openjena.org/wiki/SDB/Databases_Supported 
+                for additional information.
+property name:  VitroConnection.DataSource.dbtype
+example value:  MySQL
+                
+                Specify a driver class name to use a database other than MySQL.
+                Otherwise, leave this value unchanged.
+                This JAR file for this driver must be added to the the 
+                webapp/lib directory within the vitro.core.dir specified above.
+property name:  VitroConnection.DataSource.driver
+example value:  com.mysql.jdbc.Driver
+
+                Change the validation query used to test database connections
+                only if necessary to use a database other than MySQL.
+                Otherwise, leave this value unchanged.
+property name:  VitroConnection.DataSource.validationQuery
+example value:  SELECT 1
+
                 Specify the name of your first admin user for the VIVO application. 
                 This user will have an initial temporary password of 'defaultAdmin'. 
                 You will be prompted to create a new password on first login.
