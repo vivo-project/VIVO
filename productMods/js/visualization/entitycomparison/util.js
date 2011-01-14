@@ -736,7 +736,11 @@ function prepareTableForDataTablePagination(jsonData){
 	entityLabelTH.html('Entity Label');
 	
 	var publicationCountTH = $('<th>');
-	publicationCountTH.html('Publication Count');
+	if($("select.comparisonValues option:selected").text() === "by Publications"){
+		publicationCountTH.html('Publication Count');
+	}else{
+		publicationCountTH.html('Grant Count');		
+	}
 
 	var entityTypeTH = $('<th>');
 	entityTypeTH.html('Entity Type');

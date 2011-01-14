@@ -141,7 +141,7 @@ public class EntityGrantCountRequestHandler implements
 			Entity entity, String entityURI, Map<String, Set<String>> subOrganizationTypesResult) {
 
         Portal portal = vreq.getPortal();
-        String standaloneTemplate = "entityComparisonStandaloneActivator.ftl";
+        String standaloneTemplate = "entityComparisonGrantsStandaloneActivator.ftl";
 		
         String jsonContent = "";
 		jsonContent = writeGrantsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);

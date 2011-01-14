@@ -11,5 +11,5 @@ var contextPath = "${urls.base}";
 </script>
 
 <div id="body">
-	<p>This Organization has neither Sub-Organizations nor People. Please visit this Organization's <a href="${organizationVivoProfileURL}">profile page.</a></p>
+	<p>This Organization has neither Sub-Organizations nor People. Please visit the Organization's <a href="${organizationVivoProfileURL}">profile page.</a></p>
 </div>

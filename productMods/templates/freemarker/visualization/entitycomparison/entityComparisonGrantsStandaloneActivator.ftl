@@ -8,8 +8,8 @@
 <#assign jsonContent ="${jsonContent}">
 <#assign organizationLabel = "${organizationLabel}">
 <#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
-<#assign subOrganizationTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison">
-<#assign subOrganizationTemporalGraphGrantURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_grant_count">
+<#assign subOrganizationTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_grant_count">
+<#assign subOrganizationTemporalGraphPubURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison">
 <#assign subOrganizationVivoProfileURL = "${urls.base}/individual?">
 
 
@@ -17,7 +17,7 @@
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>
 
 
-<#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&labelField=label'>
+<#assign TemporalGraphDownloadFile = '${urls.base}${dataVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}&labelField=label'>
 
 
 <#-- Javascript files -->
@@ -88,7 +88,7 @@ var temporalGraphDownloadFile = "${TemporalGraphDownloadFile}"
 var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
 var subOrganizationTemporalGraphURL = "${subOrganizationTemporalGraphURL}";
-var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantURL}";
+var subOrganizationTemporalGraphPubURL = "${subOrganizationTemporalGraphPubURL}";
 
 </script>
 
@@ -140,9 +140,10 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
         }); 
         
         $("select.comparisonValues").change(function(){
-        	console.log($("select.comparisonValues option:selected").text());
-        	if($("select.comparisonValues option:selected").text() === "by Grants"){
-        		window.location = subOrganizationTemporalGraphGrantURL + "&uri=" + "${organizationURI}";
+        console.log($("select.comparisonValues option:selected").text());
+        
+       		if($("select.comparisonValues option:selected").text() === "by Publications"){
+        		window.location = subOrganizationTemporalGraphPubURL + "&uri=" + "${organizationURI}";
         	}
         });
         
@@ -310,8 +311,8 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
                 <div style="text-align: left;">
                 
                 <select class="comparisonValues" style="margin-bottom: 20px;">
-                    <option value="Publications" selected="selected">by Publications</option>
-                    <option value="Grants">by Grants</option>
+                    <option value="Grants" selected="selected">by Grants</option>
+                    <option value="Publications">by Publications</option>					
                 </select>
                 
                 </div>
@@ -349,7 +350,7 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
         
         <div id="rightblock">
         
-            <h4 id="headerText">Comparing <span id="comparisonHeader">Publications</span> of <span id="entityHeader">Institutions</span> in <span id="organizationLabel"></span></h4>
+            <h4 id="headerText">Comparing <span id="comparisonHeader">Grants</span> of <span id="entityHeader">Institutions</span> in <span id="organizationLabel"></span></h4>
             
             <div id="temporal-graph">
                 <div id="yaxislabel"></div>
