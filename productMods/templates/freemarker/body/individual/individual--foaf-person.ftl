@@ -117,6 +117,8 @@
          <#include "individual-sparklineVisualization.ftl">
     </section>
     
+    <#-- Disable for now until controller sends data -->
+    <#--
     <section id="co-authors" role="region">
         <header>
             <h3><span class="grey">10 </span>Co-Authors</h3>
@@ -133,6 +135,7 @@
         
         <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
     </section>
+    -->
 </section>
 
 <#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
