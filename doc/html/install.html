@@ -12,6 +12,20 @@
         <!-- Start of content -->
         <div id="wrapper-content" role="main">
             <h1>VIVO Release 1  V1.2 Installation Guide</h1>
+            <div style="background: #EEEEEE">
+                <b>Missing pieces and fixes</b>
+                <ul>
+                    <li>
+                        SDB info, config changes any checks? (BL/SM)
+                    </li>
+                    <li>
+                        Theme changes, file locations, branding issues (NC/MB)
+                    </li>
+					<li>
+                        Fix styles on file, dir, parameters name styles
+                    </li>
+                </ul>
+            </div>
             <toc>
                 <ul>
                     <li>
@@ -440,13 +454,13 @@
                     prompted to select a new password and verify it a second time.
                 </p>
                 <p>
-                    After verifying your new password, you will be presented with a menu of
-                    editing options. Here you can create OWL classes, object properties,
+                    After verifying your new password, you will be presented with a menu of 
+                    editing options. Here you can create OWL classes, object properties,  
                     data properties, and configure the display of data. Currently, 
-                    any classes you wish to make visible on your website must be part of a 
-                    class group, and there a number of visibility and display options  
-                    available for each ontology entity. VIVO comes with a core VIVO 
-                    ontology, but you may also upload other ontologies from an RDF  
+                    any classes you wish to make visible on your website must be part of a  
+                    class group, and there a number of visibility and display options 
+                    available for each ontology entity. VIVO comes with a core VIVO  
+                    ontology, but you may also upload other ontologies from an RDF 
                     file. 
                 </p>
                 <p>
@@ -522,147 +536,222 @@
                 Locate the &lt;Host name="localhost"...&gt; directive and update as
                 follows:
             </p>
-            <!-- ELLY IS WORKING HERE. -->
-			<pre>
-    &lt;Host name="localhost" appBase="webapps"
-        DeployOnStartup="false"
-        unpackWARs="true" autoDeploy="false"
-        xmlValidation="false" xmlNamespaceAware="false"&gt;
-
-	&lt;Alias&gt;example.com&lt;/Alias&gt;
-	&lt;Context path=""
-		docBase="/usr/local/tomcat/webapps/vivo"
-		reloadable="true"
-		cookies="true" &gt;
-		&lt;Manager pathname="" /&gt;
-		&lt;Environment type="java.lang.String" override="false" 
-			name="path.configuration" 
-			value="deploy.properties"
-		/&gt;
-	&lt;/Context&gt;
-	...
+            <!-- ELLY IS WORKING HERE. --><pre>
+	    &lt;Host name="localhost" appBase="webapps"
+	        DeployOnStartup="false"
+	        unpackWARs="true" autoDeploy="false"
+	        xmlValidation="false" xmlNamespaceAware="false"&gt;
+	
+		&lt;Alias&gt;example.com&lt;/Alias&gt;
+		&lt;Context path=""
+			docBase="/usr/local/tomcat/webapps/vivo"
+			reloadable="true"
+			cookies="true" &gt;
+			&lt;Manager pathname="" /&gt;
+			&lt;Environment type="java.lang.String" override="false" 
+				name="path.configuration" 
+				value="deploy.properties"
+			/&gt;
+		&lt;/Context&gt;
+		...
 			</pre>
             <h3 id="pellet">XI. Configure Pellet Reasoner </h3>
-            <p><em>Do we need this section still? - elly</em></p>
-                <p>VIVO uses the Pellet engine to perform reasoning, which runs in the
+            <p>
+                <em>Do we need this section still? - elly</em>
+            </p>
+            <p>
+                VIVO uses the Pellet engine to perform reasoning, which runs in the
                 background at startup and also when the knowledge base is edited. VIVO
                 continues serving pages while the reasoner continues working; when the
                 reasoner finishes, the new inferences appear. Inferred statements are
                 cached in a database graph so that they are available immediately when
-                VIVO is restarted.</p> 
-				<p>By default, Pellet is fed only an incomplete view of
-                your ontology and only certain inferences are materialized. These
-                include rdf:type,&nbsp; rdfs:subClassOf,owl:equivalentClass, and
-                owl:disjointWith. This mode is typically suitable for ontologies with a
-                lot of instance data.&nbsp; If you would like to keep the default mode,
-                skip to the next step. </p>
-                <p>
-                    To enable "complete" OWL inference (materialize
-                    all significant entailed statements), open
-                    "vitro-core/webapp/config/web.xml" and search for PelletReasonerSetup.
-                </p>
-				<p>Then change the name of the listener class to
-                PelletReasonerSetupComplete. Because "complete" reasoning can be very
-                resource intensive, there is also an&nbsp; option to materialize nearly
-                all inferences except owl:sameAs and owl:differentFrom. </p>
-				<p>This is enabled
-                by specifying PelletReasonerSetupPseudocomplete. For ontologies with
-                large numbers of individuals, this mode can offer enormous performance
-                improvements over the "complete" mode. </p>
-				<p>Finally, a class called
+                VIVO is restarted.
+            </p>
+            <p>
+                By default, Pellet is fed only an incomplete view of 
+                your ontology and only certain inferences are materialized. These  
+                include rdf:type,&nbsp; rdfs:subClassOf,owl:equivalentClass, and 
+                owl:disjointWith. This mode is typically suitable for ontologies with a  
+                lot of instance data.&nbsp; If you would like to keep the default mode, 
+                skip to the next step. 
+            </p>
+            <p>
+                To enable "complete" OWL inference (materialize
+                all significant entailed statements), open
+                "vitro-core/webapp/config/web.xml" and search for PelletReasonerSetup.
+            </p>
+            <p>
+                Then change the name of the listener class to 
+                PelletReasonerSetupComplete. Because "complete" reasoning can be very  
+                resource intensive, there is also an&nbsp; option to materialize nearly 
+                all inferences except owl:sameAs and owl:differentFrom. 
+            </p>
+            <p>
+                This is enabled 
+                by specifying PelletReasonerSetupPseudocomplete. For ontologies with  
+                large numbers of individuals, this mode can offer enormous performance 
+                improvements over the "complete" mode. 
+            </p>
+            <p>
+                Finally, a class called
                 PelletReasonerSetupPseudocompleteIgnoreDataproperties is provided to
                 improve performance on ontologies with large literals where data
-                property entailments are not needed.</p>
+                property entailments are not needed.
+            </p>
             </p>
             <h3 id="external_auth">XII. Using an External Authentication System with VIVO </h3>
             <p>
-                VIVO can be configured to work with an external authentication
-                system
-                like Shibboleth or CUWebAuth. VIVO must be accessible only through an
-                Apache HTTP server. The Apache server will be configured to invoke the
-                external authentication system. When the user&nbsp; completes the
-                authentication, the Apache server will pass a network ID to VIVO, to
-                identify the user. If VIVO has an account for that user, the user will
-                be logged in with the privileges of that account. In the absence of an
-                account, VIVO will try to find&nbsp; a page associated with the user.
-                If such a page is found, the user can log in to edit his own profile
-                information.---- Configuring the Apache server: Your institution will
-                provide you with instructions for setting up the external
-                authentication system. The Apache server must be configured to secure a
-                page in&nbsp; VIVO. When a user reaches this secured page, the Apache
-                server will invoke the external authentication system.For VIVO, this
-                secured page is named: /loginExternalAuthReturn When your instructions
-                call for the location of the secured page, this is the value you should
-                use.---- Configuring VIVO: To enable external authentication, VIVO
-                requires three values in the deploy.properties file.* The name of the
-                HTTP header that will hold the external user‚√&Ntilde;√&yen;s network
-                ID When a user completes the authentication process, the Apache server
-                will put the user‚√&Ntilde;√&yen;s network ID into one of the headers
-                of the HTTP request.&nbsp; The instructions from your institution
-                should tell you which header is used for this purpose.&nbsp; You need
-                to tell VIVO the name of that HTTP header. Insert a line like this in
-                the deploy.properties file:externalAuth.netIdHeaderName = [the header
-                name]For example: externalAuth.netIdHeaderName = remote_userID * The
-                text for the Login button To start the authentication process, the user
-                will click on a button in the VIVO login form. You need to tell VIVO
-                what text should appear in that button.Put a line like this in the
-                deploy.properties file:externalAuth.buttonText = [the text for your
-                login button]For example:externalAuth.buttonText = Log in using BearCat
-                ShibbolethThe VIVO login form will display a button labelled
-                ‚√&Ntilde;√∫Log in using BearCat Shibboleth‚√&Ntilde;√π.* Associating a
-                User with a profile page If VIVO has an account for the user, the user
-                will be given the privileges assigned to that account.In addition, VIVO
-                will try to associate the user with a profile page, so&nbsp; the user
-                may edit his own profile data. VIVO will search the data model for a
-                person with a property that matches the User‚√&Ntilde;√&yen;s network
-                ID.You need to tell VIVO what property should be used for matching.
-                Insert a line like this in the deploy.properties
-                file:selfEditing.idMatchingProperty = [the URI of the property]For
-                example:selfEditing.idMatchingProperty =
-                http://vivo.mydomain.edu/ns#networkId
+                <p>
+                    VIVO can be configured to work with an external authentication system like 
+                    Shibboleth or CUWebAuth.
+                </p>
+                <p>
+                    VIVO must be accessible only through an Apache HTTP server. The Apache server 
+                    will be configured to invoke the external authentication system. When the user  
+                    completes the authentication, the Apache server will pass a network ID to VIVO, 
+                    to identify the user. 
+                </p>
+                <p>
+                    If VIVO has an account for that user, the user will be logged in with the 
+                    privileges of that account. In the absence of an account, VIVO will try to find  
+                    a page associated with the user. If such a page is found, the user can log in 
+                    to edit his own profile information.
+                </p>
+                <h4>Configuring the Apache server</h4>
+                <p>
+                    Your institution will provide you with instructions for setting up the external 
+                    authentication system. The Apache server must be configured to secure a page in  
+                    VIVO. When a user reaches this secured page, the Apache server will invoke the 
+                    external authentication system.
+                </p>
+                <p>
+                    For VIVO, this secured page is named: 
+                    <code>
+                        /loginExternalAuthReturn
+                    </code>
+                </p>
+                <p>
+                    When your instructions call for the location of the secured page, this is the 
+                    value you should use.
+                </p>
+                <h4>Configuring VIVO</h4>
+                <p>
+                    To enable external authentication, VIVO requires three values in the 
+                    deploy.properties file.
+                </p>
+                <ul>
+                    <li>
+                        The name of the HTTP header that will hold the external user‚Äôs network ID 
+                        When a user completes the authentication process, the Apache server will  
+                        put the user‚Äôs network ID into one of the headers of the HTTP request. 
+                        The instructions from your institution should tell you which header is  
+                        used for this purpose. 
+                        You need to tell VIVO the name of that HTTP header. Insert a line like  
+                        this in the deploy.properties file: <pre>externalAuth.netIdHeaderName = [the header name]</pre>
+                        For example: <pre>externalAuth.netIdHeaderName = remote_userID</pre>
+                    </li>
+                    <li>
+                        The text for the Login button 
+                        To start the authentication process, the user will click on a button in  
+                        the VIVO login form. You need to tell VIVO what text should appear in that 
+                        button.  
+                        Put a line like this in the deploy.properties file: 
+                        externalAuth.buttonText = [the text for your login button]  
+                        For example: <pre>externalAuth.buttonText = Log in using BearCat Shibboleth</pre>
+                        The VIVO login form will display a button labelled ‚ÄúLog in using BearCat 
+                        Shibboleth‚Äù.
+                    </li>
+                    <li>
+                        Associating a User with a profile page 
+                        If VIVO has an account for the user, the user will be given the privileges  
+                        assigned to that account. 
+                        In addition, VIVO will try to associate the user with a profile page, so  
+                        the user may edit his own profile data. VIVO will search the data model 
+                        for a person with a property that matches the User‚Äôs network ID.  
+                        You need to tell VIVO what property should be used for matching. Insert 
+                        a line like this in the deploy.properties file:<pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
+                        For example:<pre>selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId</pre>
+                    </li>
+                </ul>
             </p>
             <h3 id="installation_check">XIII. Was the installation successful? </h3>
             <p>
-                If you have completed the previous steps, you have good indications
-                that the installation was successful.&nbsp; * Step VII showed that
-                Tomcat recognized the webapp, and that the webapp was able to present
-                the initial page.* Step VIII verified that you can log in to the
-                administrator account.Here is a simple test to see whether the ontology
-                files were loaded:* Click on the "Index" link on the upper left, below
-                the logo. You should seea "locations" section, with links for "Country"
-                and "Geographic Location."The index is built in a background thread, so
-                on your first login, you may see an empty index instead. Refresh the
-                page periodically to see whether the index will be populated. This may
-                take some time: with VIVO installed on a modest laptop computer,
-                loading the ontology files and building the index took more than 5
-                minutes from the time that Tomcat was started. * Click on the "Country"
-                link. You should see an alphabetical list of the countries of the
-                world.Here is a test to see whether your system is configured to serve
-                linked data: * Point your browser to the home page of your website, and
-                click the "Log in" link near the upper right corner. Log in with the
-                initialAdminUser username you set up in Step IV. If this is your first
-                time logging in, you will be prompted to change the password. * After
-                you have successfully logged in, click "site admin" in the upper right
-                corner.&nbsp; In the drop down under "Data Input" select "Faculty
-                Member(core)"and click the "Add individual of this class" button.*
-                Enter the name "test individual" under the field "Individual Name,"
-                scroll tothe bottom, and click "Create New Record." You will be taken
-                to the "Individual Control Panel." Make note of the value of the field
-                "URI" it will be used in the next step. * Open a new web browser or
-                browser tab to the page http://marbles.sourceforge.net/.In the pink box
-                on that page enter the URI of the individual you created in theprevious
-                step and click "open." * In the resulting page search for the URI of
-                the "test individual." You should find it towards the bottom of the
-                page next to a red dot followed by "redirect (303)." This indicates
-                that you are successfully serving linked RDF data. If the URI of the
-                "test individual" is followed by "failed (400)" you are not
-                successfully serving linked data.Finally, test the search index. * The
-                search box is on the right side, directly opposite the "Index" link.
-                Type the word "Australia" into the box, and click on the "Search"
-                button.You should see a page of results, with links to countries that
-                border Australia, individuals that include Australia, and to Australia
-                itself.
+                If you have completed the previous steps, you have good indications that the 
+                installation was successful.
             </p>
+            <ul>
+                <li>
+                    Step VII showed that Tomcat recognized the webapp, and that the webapp was 
+                    able to present the initial page.
+                </li>
+                <li>
+                    Step VIII verified that you can log in to the administrator account.
+                </li>
+            </ul>
+            <p>
+                Here is a simple test to see whether the ontology files were loaded:
+            </p>
+            <ul>
+                <li>
+                    Click on the "Index" link on the upper left, below the logo. You should see 
+                    a "locations" section, with links for "Country" and "Geographic Location."  
+                    The index is built in a background thread, so on your first login, you may 
+                    see an empty index instead. Refresh the page periodically to see whether  
+                    the index will be populated. This may take some time: with VIVO installed 
+                    on a modest laptop computer, loading the ontology files and building the 
+                    index took more than 5 minutes from the time that Tomcat was started.
+                </li>
+                <li>
+                    Click on the "Country" link. You should see an alphabetical list of the 
+                    countries of the world.
+                </li>
+            </ul>
+            <p>
+                Here is a test to see whether your system is configured to serve linked data:
+            </p>
+            <ul>
+                <li>
+                    Point your browser to the home page of your website, and click the "Log in" link 
+                    near the upper right corner. Log in with the initialAdminUser username you  
+                    set up in Step IV. If this is your first time logging in, you will be 
+                    prompted to change the password.
+                </li>
+                <li>
+                    After you have successfully logged in, click "site admin" in the upper right 
+                    corner.  In the drop down under "Data Input" select "Faculty Member(core)"
+                    and click the "Add individual of this class" button.
+                </li>
+                <li>
+                    Enter the name "test individual" under the field "Individual Name," scroll to 
+                    the bottom, and click "Create New Record." You will be taken to the "Individual  
+                    Control Panel." Make note of the value of the field "URI" it will be used in 
+                    the next step. 
+                </li>
+                <li>
+                    Open a new web browser or browser tab to the page http://marbles.sourceforge.net/.
+                    In the pink box on that page enter the URI of the individual you created in the
+                    previous step and click "open."
+                </li>
+                <li>
+                    In the resulting page search for the URI of the "test individual." You should 
+                    find it towards the bottom of the page next to a red dot followed by "redirect  
+                    (303)." This indicates that you are successfully serving linked RDF data. 
+                    If the URI of the "test individual" is followed by "failed (400)" you are not 
+                    successfully serving linked data.
+                </li>
+            </ul>
+            <p>
+                Finally, test the search index. 
+            </p>
+            <ul>
+                <li>
+                    The search box is on the right side, directly opposite the "Index" link. 
+                    Type the word "Australia" into the box, and click on the "Search"  
+                    button.You should see a page of results, with links to countries that 
+                    border Australia, individuals that include Australia, and to 
+                    Australia itself.
+                </li>
+            </ul>
         </div>
         <!-- #wrapper-content -->
         <footer role="contentinfo">
