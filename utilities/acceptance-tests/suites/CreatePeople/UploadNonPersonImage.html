@@ -116,6 +116,16 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Country</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Germany</td>
 	<td></td>
 </tr>
@@ -126,7 +136,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>image</td>
+	<td>Photo</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,7 +161,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>//img[@alt='add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,7 +206,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>//img[@alt='add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +266,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>//img[@alt='add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,7 +316,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -326,12 +336,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Delete photo</td>
+	<td>//img[@alt='Individual photo']</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,7 +376,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,7 +426,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -476,27 +481,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete your photo?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>//img[@alt='delete']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Germany</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>image</td>
 	<td></td>
 </tr>
 <tr>
