@@ -77,10 +77,6 @@
 <#-- Ontology properties -->
 <#include "individual-properties.ftl">
 
-<#-- Keywords -->
-<#if individual.keywords?has_content>
-    <p id="keywords">Keywords: ${individual.keywordString}</p>
-</#if>
 
 ${stylesheets.add("/css/individual/individual.css")}
                            
