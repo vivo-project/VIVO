@@ -66,12 +66,13 @@ h5{
 }
 
 a {
-    text-decoration: underline
+    text-decoration: underline;
+	color: #2485ae;
 }
 
-code {
-	padding: 0 0 0 20px;
-	margin: 10px;	
+a:visited {
+	text-decoration: underline;
+	color: #5e6363;
 }
 
 /* HEADER ------>  */

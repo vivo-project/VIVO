@@ -127,16 +127,16 @@
                 your values for "dbname", "username", and "password". Most of the time,
                 the "hostname" will equal "localhost".
             </p>
-            <code>
+            <pre>
                 CREATE DATABASE dbname CHARACTER SET utf8;
-            </code>
+            </pre>
             <p>
                 Grant access to a database user. 
                 For example:
             </p>
-            <code>
+            <pre>
                 GRANT ALL ON dbname.* TO 'username'@'hostname' IDENTIFIED BY 'password';
-            </code>
+            </pre>
             <p>
                 Keep track of the database name, username, and password for Step IV.
             </p>
@@ -351,15 +351,33 @@
                         http://vivo.mydomain.edu/ns#networkId
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        Temporal Graph Visualization is used to compare different organizations/people within 
+                        an organization on different parameters like number of publications, grants. This parameter will be  
+                        used as a default in case a URI is not provided. It will be also used whenever this visualization is to be rendered for top level organization. 
+                        In absence of this parameter a SPARQL query will be fired which will attempt to provide a top level organization.The name of a property 
+                        that can be used to associate an Individual with a user account. When a user logs in with a name that matches the value of this property,
+                        the user will be authorized to edit that Individual.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        visualization.topLevelOrg
+                    </td>
+                    <td>
+                        http://vivo-trunk.indiana.edu/individual/topLevelOrgURI
+                    </td>
+                </tr>
             </table>
             <h3 id="deploy">V. Compile and deploy</h3>
             <p>
                 At the command line, from the top level of the unpacked distribution
                 directory, type:
             </p>
-            <code>
+            <pre>
                 ant all
-            </code>
+            </pre>
             <p>
                 to build VIVO and deploy to Tomcat's webapps
                 directory.
@@ -367,7 +385,7 @@
             <h3 id="tomcat_settings">VI. Set Tomcat JVM parameters and security limits</h3>
             <p>
                 Currently, VIVO copies the contents of your RDF database into memory 
-                in order to serve Web requests quickly (the in-memory copy and the 
+                in order to serve Web requests quickly (the in-memory copy and the  
                 underlying databaseare kept in synch as edits are performed). 
                 <p>
                     VIVO will 
@@ -377,9 +395,9 @@
                     <br/>
                     For example: 
                 </p>
-                <code>
+                <pre>
                     export CATALINA_OPTS="-Xms2048m -Xmx1024m -XX:MaxPermSize=128m"
-                </code>
+                </pre>
                 <p>
                     This sets Tomcat to allocate an initial heap of 2048 megabytes, a
                     maximum heap of 1024 megabytes, and a PermGen space of 128 megs. 1024
@@ -400,13 +418,10 @@
                     that your installation can support the required number of threads 
                     by making the following edits to "/etc/security/limits.conf":
                 </p>
-                <code>
-                    apache		hard	nproc	400 
-                </code>
-                <br>
-                <code>
-                    tomcat6		hard	nproc	1500 
-                </code>
+                <pre>
+                    apache	hard	nproc	400
+                    tomcat6	hard	nproc	1500 
+                </pre>
                 <h3 id="start_tomcat">VII. Start Tomcat </h3>
                 <p>
                     Most Tomcat installations can be started by running "startup.sh" or 
@@ -427,11 +442,11 @@
                 <p>
                     After verifying your new password, you will be presented with a menu of
                     editing options. Here you can create OWL classes, object properties,
-                    data properties, and configure the display of data. Currently,
-                    any classes you wish to make visible on your website must be part of a
-                    class group, and there a number of visibility and display options
+                    data properties, and configure the display of data. Currently, 
+                    any classes you wish to make visible on your website must be part of a 
+                    class group, and there a number of visibility and display options  
                     available for each ontology entity. VIVO comes with a core VIVO 
-                    ontology, but you may also upload other ontologies from an RDF 
+                    ontology, but you may also upload other ontologies from an RDF  
                     file. 
                 </p>
                 <p>
@@ -442,8 +457,10 @@
                     machine. Ensure that the "add RDF" radio button is selected. You
                     will also likely want to check "create classgroups automatically."
                 </p>
-                Clicking the "Index" tab in the navigation bar at the top left of 
-                the page will show a simple index of the knowledge base. 
+                <p>
+                    Clicking the "Index" tab in the navigation bar at the top left of 
+                    the page will show a simple index of the knowledge base. 
+                </p>
                 <p>
                     See more 
                     documentation for configuring VIVO, ingesting data, and manually adding  
@@ -483,9 +500,9 @@
             </p>
             <p>
                 Using the mod_jk connector allows for communication between Tomcat 
-				and the primary web server. The 
-				<a href="http://tomcat.apache.org/connectors-doc/generic_howto/quick.html">Quick
-                Start HowTo</a> on the Apache site describes the minimum server configurations 
+                and the primary web server. The <a href="http://tomcat.apache.org/connectors-doc/generic_howto/quick.html">Quick
+                    Start HowTo</a>
+                on the Apache site describes the minimum server configurations 
                 for several popular web servers. 
             </p>
             <p>
@@ -494,9 +511,9 @@
                 requests from Apache via the connector. Look for the
                 &lt;connector&gt; directive and add the following properties:
             </p>
-            <code>
+            <pre>
                 connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp; 
-            </code>
+            </pre>
             <p>
                 Note: the value for maxThreads (320) is equal to the value for MaxClients 
                 in the apache's "httpd.conf" file. 
@@ -505,51 +522,57 @@
                 Locate the &lt;Host name="localhost"...&gt; directive and update as
                 follows:
             </p>
-			
-<!-- ELLY IS WORKING HERE. -->
-			
+            <!-- ELLY IS WORKING HERE. -->
 			<pre>
-<Host name="localhost" appBase="webapps"
-	DeployOnStartup="false"
-	unpackWARs="true" autoDeploy="false"
-	xmlValidation="false" xmlNamespaceAware="false">
-	<Alias>example.com</Alias>
-	<Context path=""
+    &lt;Host name="localhost" appBase="webapps"
+        DeployOnStartup="false"
+        unpackWARs="true" autoDeploy="false"
+        xmlValidation="false" xmlNamespaceAware="false"&gt;
+
+	&lt;Alias&gt;example.com&lt;/Alias&gt;
+	&lt;Context path=""
 		docBase="/usr/local/tomcat/webapps/vivo"
 		reloadable="true"
-		cookies="true" >
-		<Manager pathname="" />
-		<Environment type="java.lang.String" override="false" 
+		cookies="true" &gt;
+		&lt;Manager pathname="" /&gt;
+		&lt;Environment type="java.lang.String" override="false" 
 			name="path.configuration" 
 			value="deploy.properties"
-		/>
-	</Context>
-            </pre>
+		/&gt;
+	&lt;/Context&gt;
+	...
+			</pre>
             <h3 id="pellet">XI. Configure Pellet Reasoner </h3>
-            <p>
-                VIVO uses the Pellet engine to perform reasoning, which runs in the
+            <p><em>Do we need this section still? - elly</em></p>
+                <p>VIVO uses the Pellet engine to perform reasoning, which runs in the
                 background at startup and also when the knowledge base is edited. VIVO
                 continues serving pages while the reasoner continues working; when the
                 reasoner finishes, the new inferences appear. Inferred statements are
                 cached in a database graph so that they are available immediately when
-                VIVO is restarted. By default, Pellet is fed only an incomplete view of
+                VIVO is restarted.</p> 
+				<p>By default, Pellet is fed only an incomplete view of
                 your ontology and only certain inferences are materialized. These
                 include rdf:type,&nbsp; rdfs:subClassOf,owl:equivalentClass, and
                 owl:disjointWith. This mode is typically suitable for ontologies with a
                 lot of instance data.&nbsp; If you would like to keep the default mode,
-                skip to the next step. To enable "complete" OWL inference (materialize
-                all significant entailed statements), open
-                "vitro-core/webapp/config/web.xml" and search for PelletReasonerSetup.
-                Then change the name of the listener class to
+                skip to the next step. </p>
+                <p>
+                    To enable "complete" OWL inference (materialize
+                    all significant entailed statements), open
+                    "vitro-core/webapp/config/web.xml" and search for PelletReasonerSetup.
+                </p>
+				<p>Then change the name of the listener class to
                 PelletReasonerSetupComplete. Because "complete" reasoning can be very
                 resource intensive, there is also an&nbsp; option to materialize nearly
-                all inferences except owl:sameAs and owl:differentFrom. This is enabled
+                all inferences except owl:sameAs and owl:differentFrom. </p>
+				<p>This is enabled
                 by specifying PelletReasonerSetupPseudocomplete. For ontologies with
                 large numbers of individuals, this mode can offer enormous performance
-                improvements over the "complete" mode. Finally, a class called
+                improvements over the "complete" mode. </p>
+				<p>Finally, a class called
                 PelletReasonerSetupPseudocompleteIgnoreDataproperties is provided to
                 improve performance on ontologies with large literals where data
-                property entailments are not needed.
+                property entailments are not needed.</p>
             </p>
             <h3 id="external_auth">XII. Using an External Authentication System with VIVO </h3>
             <p>
