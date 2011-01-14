@@ -9,32 +9,37 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="WEBAPP_HOST" elementType="Argument">
             <stringProp name="Argument.name">WEBAPP_HOST</stringProp>
-            <stringProp name="Argument.value">${__property(webapp.host, localhost)}</stringProp>
+            <stringProp name="Argument.value">${__property(webapp.host, , localhost)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="WEBAPP_PORT" elementType="Argument">
             <stringProp name="Argument.name">WEBAPP_PORT</stringProp>
-            <stringProp name="Argument.value">${__property(webapp.port, 8080)}</stringProp>
+            <stringProp name="Argument.value">${__property(webapp.port, , 8080)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="WEBAPP_NAME" elementType="Argument">
             <stringProp name="Argument.name">WEBAPP_NAME</stringProp>
-            <stringProp name="Argument.value">${__property(webapp.name, vivo)}</stringProp>
+            <stringProp name="Argument.value">${__property(webapp.name, , vivo)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="PERSON_URI_FILE" elementType="Argument">
             <stringProp name="Argument.name">PERSON_URI_FILE</stringProp>
-            <stringProp name="Argument.value">${__property(file.person.uris, PersonUris.csv)}</stringProp>
+            <stringProp name="Argument.value">${__property(file.person.uris, , PersonUris.csv)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="INFO_RESOURCE_URI_FILE" elementType="Argument">
             <stringProp name="Argument.name">INFO_RESOURCE_URI_FILE</stringProp>
-            <stringProp name="Argument.value">${__property(file.infoResource.uris, InfoResourceUris.csv)}</stringProp>
+            <stringProp name="Argument.value">${__property(file.infoResource.uris, , InfoResourceUris.csv)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ITERATIONS" elementType="Argument">
             <stringProp name="Argument.name">ITERATIONS</stringProp>
-            <stringProp name="Argument.value">${__property(iterations, 10)}</stringProp>
+            <stringProp name="Argument.value">${__property(iterations, , 10)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="THREADS" elementType="Argument">
+            <stringProp name="Argument.name">THREADS</stringProp>
+            <stringProp name="Argument.value">${__property(threads, , 1)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -48,7 +53,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">${ITERATIONS}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${THREADS}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1294759350000</longProp>
         <longProp name="ThreadGroup.end_time">1294759350000</longProp>
