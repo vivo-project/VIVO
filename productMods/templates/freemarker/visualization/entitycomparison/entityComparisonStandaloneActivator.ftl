@@ -33,8 +33,7 @@
 <#assign jqueryNotify = '${urls.base}/js/jquery_plugins/jquery.notify.min.js'>
 <#assign jqueryUI = '${urls.base}/js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
 
-<#assign datatable = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/jquery.dataTables.js'>
-<#assign autoellipsis = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/jquery.AutoEllipsis.js'>
+<#assign datatable = '${urls.base}/js/jquery_plugins/jquery.dataTables.min.js'>
 
 <#assign entityComparisonUtils = '${urls.base}/js/visualization/entitycomparison/util.js'>
 <#assign entityComparisonConstants = '${urls.base}/js/visualization/entitycomparison/constants.js'>
@@ -52,7 +51,6 @@
 
 
 <script type="text/javascript" src="${datatable}"></script>
-<script type="text/javascript" src="${autoellipsis}"></script>
 <script type="text/javascript" src="${entityComparisonUtils}"></script>
 <script type="text/javascript" src="${entityComparisonConstants}"></script>
 <script type="text/javascript" src="${jqueryNotify}"></script>
@@ -249,10 +247,10 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
         
             });
             
-                    /*
-                     * When the elements in the paginated div
-                     * are clicked this event handler is called
-                     */
+            /*
+             * When the elements in the paginated div
+             * are clicked this event handler is called
+             */
             $("input.if_clicked_on_school").live('click', function () {
         
                 var checkbox = $(this);
@@ -276,7 +274,6 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
 
         /*
         This will make sure that top 3 entites are selected by default when the page loads.
-        
         */      
         $.each($("input.if_clicked_on_school"), function(index, checkbox) {
                 
@@ -357,7 +354,7 @@ var subOrganizationTemporalGraphGrantURL = "${subOrganizationTemporalGraphGrantU
                 <div id="xaxislabel">Year</div>
             </div>
         
-            <div id="bottom" style="width: 450px; height: 350px;">
+            <div id="bottom">
                 <h4><span id="comparisonParameter"></span></h4>
             <p class="displayCounter">You have selected <span id="counter">0</span> of a maximum 
             <span id="total">10</span> <span id="entityleveltext"> schools</span> to compare. 

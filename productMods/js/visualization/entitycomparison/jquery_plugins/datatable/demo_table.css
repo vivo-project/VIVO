@@ -4,20 +4,29 @@ thead th, tr.even td{
     background-color: white;
 }
 
-.paginatedtabs{
-/*  border-top: 1px #3D454E solid; */
-    text-align: center;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    font-size: 1.2em;
+.filterInfo {
+    /*font-size: 0.9em;*/
+    display: inline-block;
 }
 
-.paginatedtabs span{
+.paginate_button {
+    text-decoration: underline;
+}
+
+.paginatedtabs {
+/*  border-top: 1px #3D454E solid; 
+    text-align: center;*/
+    margin-bottom: 10px;
+    padding-top: 10px;
+    font-size: 0.9em;
+}
+
+.paginatedtabs span {
     padding-right: 5px; 
     cursor: pointer;
 }
 
-.datatablewrapper td, th{
+.datatablewrapper td, th {
     border-bottom: 1px #F1F2EE solid;
     border-right: 1px #F1F2EE solid;
     border-left: 1px #F1F2EE solid;
@@ -31,16 +40,21 @@ thead th, tr.even td{
     margin-bottom: 10px;
 }
 
-.searchbar{
+.searchbar {
     margin-bottom: -10px;
     text-align: left;
 }
 
-.datatablewrapper th{
+.datatablewrapper th {
     border-top: 1px #3D454E solid;  
     background:#F1F2ee; 
     font-weight:bold; 
     font-size:12px;
+}
+
+#infoContainer {
+    padding-right: 5px;
+    display: inline-block;
 }
 
 /*

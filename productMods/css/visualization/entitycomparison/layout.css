@@ -112,6 +112,11 @@ position: inherit;
     color:red;
 }
 
+.small-arrows {
+    font-size: 0.9em;
+    padding: 0 !important;
+}
+
 #header-entity-label {
 
     font-size: 1.1em;
