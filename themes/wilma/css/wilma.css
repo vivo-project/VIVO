@@ -826,7 +826,6 @@ a {
     font-size: 1.25em;
     color: #2485ae;
     font-weight: normal;
-    background: url(../images/arrow-down.gif) 127px 27px no-repeat;
 }
 ul#foaf-person-childClasses li {
     border-bottom: 1px solid #dde4e3;
@@ -861,7 +860,6 @@ ul#foaf-person-childClasses .count-classes {
     font-size: 1.25em;
     color: #2485ae;
     font-weight: normal;
-    background: url(../images/arrow-down.gif) 127px 27px no-repeat;
 }
 ul#vgraph-childClasses {
     float: left;
@@ -898,7 +896,6 @@ ul#vgraph-childClasses .count-classes {
     font-size: 1.125em;
     color: #2485ae;
     font-weight: normal;
-    background: url(../images/arrow-down.gif) 82px 7px no-repeat;
     border-bottom-color: #fff;
 }
 ul#find-filters li {
@@ -927,7 +924,6 @@ ul#find-filters a.selected {
     font-size: 1.25em;
     color: #2485ae;
     font-weight: normal;
-    background: url(../images/arrow.gif) 148px 27px no-repeat;
 }
 #network-stats p {
     padding: 15px 15px 15px 175px;
