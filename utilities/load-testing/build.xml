@@ -79,7 +79,10 @@ report   - Just summarize output from previously run tests.
 
 		<fail unless="data.dir" message="${properties.file} must contain a value for data.dir" />
 
-		<!-- If no value was provided, run everything 10 times -->
+		<!-- If no value was provided, run a single thread -->
+		<property name="threads" value="1" />
+
+		<!-- If no value was provided, run everything 10 times per thread -->
 		<property name="iterations" value="10" />
 
 		<!-- If no value was provided, use this as the default namespace -->
@@ -140,6 +143,7 @@ report   - Just summarize output from previously run tests.
 			<property name="webapp.port" value="${webapp.port}" />
 			<property name="webapp.name" value="${webapp.name}" />
 			<property name="iterations" value="${iterations}" />
+			<property name="threads" value="${threads}" />
 			<property name="file.person.uris" value="${file.person.uris}" />
 			<property name="file.infoResource.uris" value="${file.infoResource.uris}" />
 
