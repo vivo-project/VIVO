@@ -27,8 +27,8 @@
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Instrument">
-    <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
     <rdfs:subClassOf rdf:nodeID="A0"/>
+    <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
@@ -38,11 +38,6 @@
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A protocol is a plan specification which has sufficient level of detail and quantitative information to communicate it between domain experts, so that different domain experts will reliably be able to independently reproduce the process.</vitro:descriptionAnnot>
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#realizesProtocol">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
@@ -150,6 +145,11 @@ NOTE: For now we are not addressing whether this is a subclass of foaf:Agent</vi
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/scientific-research#ClinicalTrial"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 0 is a recent designation for exploratory, first-in-human trials  conducted in accordance with the United States Food and Drug Administration's (FDA) 2006 Guidance on Exploratory Investigational New Drug (IND) Studies.  Phase 0 trials are also known as human microdosing  studies and are designed to speed up the development of promising drugs or imaging agents by establishing very early on whether the drug or agent behaves in human subjects as was expected from preclinical studies.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 0 Clinical Trial</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#hasDocumentation">
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#documentationFor"/>
