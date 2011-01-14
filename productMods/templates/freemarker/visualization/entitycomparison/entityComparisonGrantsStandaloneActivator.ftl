@@ -122,29 +122,29 @@ var subOrganizationTemporalGraphPubURL = "${subOrganizationTemporalGraphPubURL}"
         // initial display of the grid when the page loads
         init(graphContainer);
         
-        /*
-         * When the intra-entity parameters are clicked,
-         * update the status accordingly.   
-         */         
-        $("select.comparisonValues").click(function(){
-            var selectedValue = $("select.comparisonValues option:selected").val();
-            $("#comparisonParameter").text("Total Number of " + selectedValue);
-            $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
-            $('#yaxislabel').css("color", "#595B5B");
-            $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
-        });
 
         //click event handler for clear button
         $("a#clear").click(function(){
             clearRenderedObjects();
         }); 
+
+        /*
+         * When the intra-entity parameters are clicked,
+         * update the status accordingly.   
+         */         
         
         $("select.comparisonValues").change(function(){
-        console.log($("select.comparisonValues option:selected").text());
         
        		if($("select.comparisonValues option:selected").text() === "by Publications"){
         		window.location = subOrganizationTemporalGraphPubURL + "&uri=" + "${organizationURI}";
         	}
+        	
+            var selectedValue = $("select.comparisonValues option:selected").val();
+            $("#comparisonParameter").text("Total Number of " + selectedValue);
+            $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
+            $('#yaxislabel').css("color", "#595B5B");
+            $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');		
+        
         });
         
         $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
@@ -152,7 +152,6 @@ var subOrganizationTemporalGraphPubURL = "${subOrganizationTemporalGraphPubURL}"
             var checkbox = $(this);
             var checkboxValue = $(this).attr("value");
             var linkedCheckbox = labelToCheckedEntities[checkboxValue];
-            //console.log('checkbox value is '+ checkboxValue);
             var entityToBeRemoved = labelToEntityRecord[checkboxValue];
 
             if(!checkbox.is(':checked')){
