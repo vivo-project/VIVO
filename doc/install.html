@@ -16,7 +16,7 @@
                 <b>Missing pieces and fixes</b>
                 <ul>
                     <li>
-                        SDB info, config changes any checks? (BL/SM)
+                        SDB - any checks? (BL/SM)
                     </li>
                     <li>
                         Theme changes, file locations, branding issues (NC/MB)
@@ -337,6 +337,102 @@
                 </tr>
                 <tr>
                     <td colspan="2">
+                        Specify the Jena triple store technology to use.  SDB is Jena's
+                        SPARQL database; this setting allows RDF data to scale beyond the
+                        limits of the JVM heap.  Set to RDB to use the older Jena RDB
+                        store with in-memory caching.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        VitroConnection.DataSource.tripleStoreType
+                    </td>
+                    <td>
+                        SDB
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Specify the maximum number of active connections in the database
+                        connection pool to support the anticipated number of concurrent
+                        page requests.  It is not necessary to adjust this value when
+                        using the RDB configuration.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        VitroConnection.DataSource.pool.maxActive
+                    </td>
+                    <td>
+                        40
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Specify the maximum number of database connections that will be
+                        allowed to remain idle in the connection pool.  Default is
+                        25% of the maximum number of active connections.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        VitroConnection.DataSource.pool.maxIdle
+                    </td>
+                    <td>
+                        10
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Change the dbtype setting to use a database other than MySQL. 
+                        Otherwise, leave this value unchanged. 
+                        Possible values are DB2, derby, HSQLDB, H2, MySQL, Oracle,  
+                        PostgreSQL, and SQLServer. 
+                        Refer to http://openjena.org/wiki/SDB/Databases_Supported 
+                        for additional information.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        VitroConnection.DataSource.dbtype
+                    </td>
+                    <td>
+                        MySQL
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Specify a driver class name to use a database other than MySQL.
+                        Otherwise, leave this value unchanged. 
+                        This JAR file for this driver must be added to the the 
+                        webapp/lib directory within the vitro.core.dir specified above.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        VitroConnection.DataSource.driver
+                    </td>
+                    <td>
+                        com.mysql.jdbc.Driver
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Change the validation query used to test database connections
+                        only if necessary to use a database other than MySQL.
+                        Otherwise, leave this value unchanged.
+                    </td>
+                </tr>
+                <tr class="odd_row">
+                    <td>
+                        VitroConnection.DataSource.validationQuery
+                    </td>
+                    <td>
+                        SELECT 1
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
                         Specify the name of your first admin user for the VIVO application.  This user 
                         will have an initial temporary password of 'defaultAdmin'. You will be prompted to  
                         create a new password on first login. 
@@ -352,7 +448,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        The name of a property that can be used to associate an Individualwith a user 
+                        The name of a property that can be used to associate an Individual with a user 
                         account. When a user logs in with a name that matches the value of this property,  
                         the user will be authorized to editthat Individual. 
                     </td>
