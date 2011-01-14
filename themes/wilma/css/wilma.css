@@ -776,6 +776,32 @@ p{
 a {
     text-decoration: underline
 }
+
+/* ------------------------------------------------->  */
+/* INDIVIDUAL LIST --------------------------------->  */
+/* ------------------------------------------------->  */
+.pagination li.selectedNavPage{
+    color: #91b039;
+}
+.rdfLink {
+    border-left: 1px solid #a6b1b0;
+}
+.rdfLink a {
+    color: #84a655;
+}
+.individualList ul.individualData li {
+    border-right: solid 1px #a0a0a0;
+}
+.individualList ul { 
+    margin-left: 0; 
+}
+.individualList li { 
+  color: #9c9c9c;
+ }
+.individualList li a { 
+    font-weight: normal; 
+}
+
 /* ------------------------------------------------->  */
 /* MENU PAGES -------------------------------------->  */
 /* ------------------------------------------------->  */
