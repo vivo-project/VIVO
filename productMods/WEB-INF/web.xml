@@ -1142,14 +1142,32 @@
      <load-on-startup>5</load-on-startup>
   </servlet>
 
+  <!--
   <servlet>
     <servlet-name>entity</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityController</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>entity</servlet-name>
+    <url-pattern>/entityold</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>entity</servlet-name>
+    <url-pattern>/entityold/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>entity</servlet-name>
+    <url-pattern>/individualold/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>entity</servlet-name>
+    <url-pattern>/displayold/*</url-pattern>
+  </servlet-mapping>
+  -->
   
   <servlet>
-  <servlet-name>ontology</servlet-name>
-  <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.OntologyController</servlet-class>
+    <servlet-name>ontology</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.OntologyController</servlet-class>
   </servlet>
   
   <servlet>
@@ -1416,22 +1434,6 @@
     <url-pattern>/mailusers</url-pattern>
   </servlet-mapping>
   
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/entityold</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/entityold/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/individualold/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/displayold/*</url-pattern>
-  </servlet-mapping>
    <servlet-mapping>
     <servlet-name>ontology</servlet-name>
     <url-pattern>/ontology/*</url-pattern>
