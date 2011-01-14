@@ -211,12 +211,12 @@ var organizationLabel = '${organizationLabel}';
         
                 if ($(this).next().is(':disabled')) {
         
-                    createNotification("error-notification", {
+                    createNotification("warning-notification", {
                         title: 'Error',
                         text: 'A Maximum 10 entities can be compared. Please remove some & try again.'
                     }, {
                         custom: true,
-                        expires: 3500
+                        expires: false
                     });
         
                 }
@@ -301,8 +301,9 @@ var organizationLabel = '${organizationLabel}';
                         <p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
                     </div>
                     
-                    <div id="warning-notification">
+                    <div id="warning-notification" class="ui-state-highlight ui-corner-all" >
                     <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+                    <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
                         <h1>&#035;{title}</h1>
                         <p>&#035;{text}</p>
                     </div>
