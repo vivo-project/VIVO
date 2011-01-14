@@ -15,21 +15,21 @@
 # came from, or why they don't require a license statement.
 #
 
-# PROBLEM: It appears that these files require a LICENSE file to accompany them.
+# See /doc/3rd-party-licenses.txt for LICENSE file
 themes/vivo-basic/css/blueprint/grid.css
 themes/vivo-basic/css/blueprint/ie.css
 
-# PROBLEM: This is from www.involutionstudios.com, not blueprint. What are the license restrictions? 
+# PROBLEM: Can't find any info on licensing.
 themes/vivo-basic/css/blueprint/liquid.css
 
-# Sample code from Google.
+# See /doc/3rd-party-licenses.txt for LICENSE file
 themes/vivo-basic/templates/googleAnalytics.ftl
 
-# 3rd-party transform from JMeter distribution
+# See /doc/3rd-party-licenses.txt for LICENSE file
 utilities/load-testing/jmeter-results-report.xsl
 utilities/load-testing/jmeter-results-detail-report.xsl
 
-# Plugins for JQuery.
+# See /doc/3rd-party-licenses.txt for LICENSE file
 productMods/css/jquery_plugins/*
 productMods/js/jquery_plugins/*
 productMods/js/visualization/entitycomparison/jquery_plugins/*
