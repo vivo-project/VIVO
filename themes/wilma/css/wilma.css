@@ -1083,21 +1083,6 @@ ul#alpha-browse-childClass .count-classes {
 /* INDIVIDUAL DISPLAY ------------------------------>  */
 /* ------------------------------------------------->  */
 
-/* INDIVIDUAL LIST ------>  */
-.individualList ul.individualData li {
-    padding-bottom: 0;
-}
-.pagination  {
-	display:inline-block;
-}
-.pagination li {
-	display:inline-block;
-	padding-right:2px;
-}
-.pagination li.selectedNavPage {
-	color:#91b039;
-	font-size:1em;
-}
 /* ADMIN PANEL ------>  */
 .admin h3{
   color: #fff;
