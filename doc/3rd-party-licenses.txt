@@ -135,6 +135,7 @@ GNU LGPL 3
 ----------
 licenses/lgpl3.LICENSE.txt
 
+Alfresco - JSONtoFmModel
 fedora-client
 jga
 
