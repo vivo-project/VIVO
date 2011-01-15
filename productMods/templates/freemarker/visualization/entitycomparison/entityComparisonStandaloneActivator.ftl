@@ -108,7 +108,7 @@ var organizationLabel = '${organizationLabel}';
         
         $("select.comparisonValues").change(function(){
             
-            if($("select.comparisonValues option:selected").text() === "by Grants"){
+            if ($("select.comparisonValues option:selected").text() === "by Grants") {
                 window.location = subOrganizationTemporalGraphGrantURL + "&uri=" + "${organizationURI}";
             }
 
@@ -125,7 +125,6 @@ var organizationLabel = '${organizationLabel}';
             var checkbox = $(this);
             var checkboxValue = $(this).attr("value");
             var linkedCheckbox = labelToCheckedEntities[checkboxValue];
-            //console.log('checkbox value is '+ checkboxValue);
             var entityToBeRemoved = labelToEntityRecord[checkboxValue];
 
             if(!checkbox.is(':checked')){
