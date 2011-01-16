@@ -18,8 +18,8 @@
             <section id="intro" role="region">
             <h2>Welcome to VIVO</h2>
             
-            <p>VIVO is a research-focused discovery tool that enables collaboration among scientists across all disciplines.
-			<br /><br />Browse or search information on people, departments, courses, grants, and publications.</p>
+            <p>VIVO is a research-focused discovery tool that enables collaboration among scientists across all disciplines.</p>
+            <p>Browse or search information on people, departments, courses, grants, and publications.</p>
 
                 <section id="search-home" role="region">
                     <h3>Search VIVO</h3>
