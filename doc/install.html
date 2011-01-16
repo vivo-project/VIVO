@@ -12,17 +12,17 @@
         <!-- Start of content -->
         <div id="wrapper-content" role="main">
             <h1>VIVO Release 1  V1.2 Installation Guide</h1>
+            <small>
+                January 28, 2011
+            </small>
             <div style="background: #EEEEEE">
                 <b>Missing pieces and fixes</b>
                 <ul>
                     <li>
-                        SDB - any checks? (BL/SM)
+                        Add release announcemnet
                     </li>
                     <li>
-                        Theme changes, file locations, branding issues (NC/MB)
-                    </li>
-                    <li>
-                        Fix styles on file, dir, parameters name styles
+                        Link to upgrade pdf online at SF
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
             <!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.2</h2>
             <p>
                 This document is a summary of the VIVO installation process. This and other 
-                documentation can be found on the <a href="http://vivoweb.org/support">spport page</a>
+                documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
                 at <a href="http://vivoweb.org">VIVOweb.org</a>
             </p>
             <ul>
@@ -64,7 +64,7 @@
             </p>
             <toc>
                 <h3>Steps to Installation</h3>
-                <ol>
+                <ol class="roman1">
                     <li>
                         <a href="#required_software">Install required software</a>
                     </li>
@@ -127,19 +127,20 @@
                 </li>
             </ul>
             <p>
-                Be sure to setup the environment variables for "JAVA_HOME" and "ANT_HOME"
+                Be sure to setup the environment variables for <code JAVA_HOME</code>
+                and <code>ANT_HOME</code>
                 and add the executables to your path per your operating system and
                 installation directions from the software support web sites.
             </p>
             <h3 id="create_database">II. Create an empty MySQL database </h3>
             <p>
-                Decide on a database name, username, and password. Log into your
-                MySQL server and create a new database in MySQL that uses UTF-8
-                encoding. You will need&nbsp; these values for step IV when you
-                configure the deployment properties. At the MySQL command line you can
-                create the database and user with these commands&nbsp; substituting
-                your values for "dbname", "username", and "password". Most of the time,
-                the "hostname" will equal "localhost".
+                Decide on a database name, username, and password. Log into your 
+                MySQL server and create a new database in MySQL that uses <code>UTF-8
+                    encoding</code>. You will need these values for Step IV when you
+                configure the deployment properties. At the MySQL command line you can 
+                create the database and user with these commands substituting 
+                your values for <code>dbname</code>, <code>username</code>, and <code>password</code>. Most of the time, 
+                the hostname will equal <code>localhost</code>.
             </p>
             <pre>
                 CREATE DATABASE dbname CHARACTER SET utf8;
@@ -158,29 +159,29 @@
                 <br>
             </h3>
             <p>
-                Download the VIVO application source as either rel-1.1.1.zip or
-                rel-1.1.1.gz file and unpack it on your web
-                server:
+                Download the VIVO application source as either <code>rel-1.2.zip</code>
+                or <code>rel-1.2.gz</code>
+                file and unpack it on your web server:
                 <br/>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
             </p>
             <h3 id="deploy_properties">IV. Specify deployment properties </h3>
             <p>
-                At the top level of the unpacked distribution, copy the file
-                "example.deploy.properties" to a file named simply "deploy.properties".
+                At the top level of the unpacked distribution, copy the file <code>example.deploy.properties</code>
+                to a file named simply <code>deploy.properties</code>.
                 This file sets several properties used in compilation and deployment.
             </p>
             <p>
                 <em>Windows:</em>
-                For those installing on Windows operating system, include the
-                windows drive and use the forward slash "/" and not the back slash "\"
-                in the directory locations, e.g. "c:/tomcat".
+                For those installing on Windows operating system, include the 
+                windows drive and use the forward slash "/" and not the back slash "\" 
+                in the directory locations, e.g. <code>c:/tomcat</code>.
             </p>
             <p>
                 <em>External authentication:</em>
                 If you want to use an external authentication system like Shibboleth or 
-                CUWebAuth, you will need to set two additional properties in this file. 
-                See the section below entitled "Using an External Authentication System with VIVO".
+                CUWebAuth, you will need to set two additional properties in this file.  
+                See the section below entitled <a href="#external_auth">Using an External Authentication System with VIVO</a>.
             </p>
             <table>
                 <tr>
@@ -196,14 +197,12 @@
                         Default namespace: VIVO installations make their RDF resources available 
                         for harvest using linked data. Requests for RDF resource URIs redirect to HTML  
                         or RDF representations as specified by the client. To make this possible, 
-                        VIVO's default namespace must have certain structure and  begin with the public  
+                        VIVO's default namespace must have certain structure and begin with the public  
                         web address of the VIVO installation. For example, if the web address of a VIVO 
                         installation is "http://vivo.example.edu/" the default namespace must be set to  
                         "http://vivo.example.edu/individual/" in order to support linked data. Similarly, 
                         if VIVO is installed at "http://www.example.edu/vivo" the default namespace must be  
-                        set to "http://www.example.edu/vivo/individual/" 
-                        <br/>
-                        <strong>* The namespace must end with "individual/" (including the trailing slash).</strong>
+                        set to "http://www.example.edu/vivo/individual/" <h5>* The namespace must end with "individual/" (including the trailing slash).</h5>
                     </td>
                 </tr>
                 <tr class="odd_row">
@@ -385,9 +384,9 @@
                 <tr>
                     <td colspan="2">
                         Change the dbtype setting to use a database other than MySQL. 
-                        Otherwise, leave this value unchanged. 
-                        Possible values are DB2, derby, HSQLDB, H2, MySQL, Oracle,  
-                        PostgreSQL, and SQLServer. 
+                        Otherwise, leave this value unchanged.  
+                        Possible values are DB2, derby, HSQLDB, H2, MySQL, Oracle, 
+                        PostgreSQL, and SQLServer.  
                         Refer to http://openjena.org/wiki/SDB/Databases_Supported 
                         for additional information.
                     </td>
@@ -402,8 +401,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        Specify a driver class name to use a database other than MySQL.
-                        Otherwise, leave this value unchanged. 
+                        Specify a driver class name to use a database other than MySQL. 
+                        Otherwise, leave this value unchanged.  
                         This JAR file for this driver must be added to the the 
                         webapp/lib directory within the vitro.core.dir specified above.
                     </td>
@@ -498,8 +497,7 @@
                 in order to serve Web requests quickly (the in-memory copy and the  
                 underlying databaseare kept in synch as edits are performed). 
                 <p>
-                    VIVO will 
-                    require more memory than that allocated to Tomcat by default. With most  
+                    VIVO will require more memory than that allocated to Tomcat by default. With most 
                     installations of Tomcat, the "setenv.sh" or "setenv.bat" file in Tomcat's 
                     bin directory is a convenient place to set the memory parameters.
                     <br/>
@@ -517,16 +515,14 @@
                     data, 256m to 512m should be sufficient.
                 </p>
                 <p>
-                    If an OutOfMemoryError is 
-                    encountered during VIVO execution, it can be remedied by increasing the  
-                    heap parameters and restarting Tomcat. 
+                    If an OutOfMemoryError is encountered during VIVO execution, it can 
+                    be remedied by increasing the heap parameters and restarting Tomcat. 
                 </p>
                 <p>
-                    Security limits: VIVO is a 
-                    multithreaded web application that may require more threads than are  
-                    permitted under your Linux installation's default configuration. Ensure 
-                    that your installation can support the required number of threads 
-                    by making the following edits to "/etc/security/limits.conf":
+                    Security limits: VIVO is a multithreaded web application that may 
+                    require more threads than are permitted under your Linux installation's  
+                    default configuration. Ensure that your installation can support the 
+                    required number of threads by making the following edits to <code>/etc/security/limits.conf</code>:
                 </p>
                 <pre>
                     apache	hard	nproc	400
@@ -534,18 +530,19 @@
                 </pre>
                 <h3 id="start_tomcat">VII. Start Tomcat </h3>
                 <p>
-                    Most Tomcat installations can be started by running "startup.sh" or 
-                    "startup.bat" in Tomcat's bin directory. Point your browser to  
-                    "http://localhost:8080/vivo/" to test the application. If Tomcat does not 
-                    start up, or the VIVO application is not visible, check the  
-                    catalina.out file in Tomcat's logs directory. 
+                    Most Tomcat installations can be started by running <code>startup.sh</code>
+                    or <code>startup.bat</code>
+                    in Tomcat's bin directory. Point your browser to 
+                    "http://localhost:8080/vivo/" to test the application. If Tomcat does not  
+                    start up, or the VIVO application is not visible, check the <code>catalina.out</code>
+                    file in Tomcat's logs directory. 
                 </p>
                 <h3 id="add_rdf">VIII. Log in and add RDF data </h3>
                 <p>
                     If the startup was successful, you will see a welcome message 
                     informing you that you have successfully installed VIVO. Click the "Log in" link  
-                    near the upper right corner.  Log in with the <em>initialAdminUser</em>
-                    username you set up in Step IV. The initial password for the <em>initialAdminUser</em>
+                    near the upper right corner.  Log in with the <code>initialAdminUser</code>
+                    username you set up in Step IV. The initial password for the <code>initialAdminUser</code>
                     account is "defaultAdmin" (without the quotes). On first login, you will be
                     prompted to select a new password and verify it a second time.
                 </p>
@@ -580,7 +577,7 @@
             <h3 id="contact_email">IX. Set the Contact Email Address (if using "Contact Us" form)</h3>
             <p>
                 If you have configured your application to use the "Contact Us"
-                feature in Step IV (<em>Vitro.smtpHost</em>), you will also need to add an email address
+                feature in Step IV (<code>Vitro.smtpHost</code>), you will also need to add an email address
                 to the VIVO application.&nbsp; This is the email that the contact form
                 submits to. It can be a list server or an individual's
                 email address.
@@ -588,12 +585,12 @@
             <p>
                 Log in as a system administrator. Navigate to the
                 "Site Admin" table of contents (link in the right side of the header).
-                Go to "Site Information" (under "Site Configuration").&nbsp; In the
+                Go to "Site Information" (under "Site Configuration"). In the
                 "Site Information Editing Form," enter a functional email address in
                 the field "Contact Email Address." and submit the change.
             </p>
             <p>
-                If you set the<em>Vitro.smtpHost</em>
+                If you set the<code>Vitro.smtpHost</code>
                 in Step IV and do NOT provide an email addressin this
                 step, your users will receive a java error in the interface.
             </p>
@@ -610,14 +607,13 @@
             </p>
             <p>
                 Using the mod_jk connector allows for communication between Tomcat 
-                and the primary web server. The <a href="http://tomcat.apache.org/connectors-doc/generic_howto/quick.html">Quick
-                    Start HowTo</a>
+                and the primary web server. The <a href="http://tomcat.apache.org/connectors-doc/generic_howto/quick.html">Quick Start HowTo</a>
                 on the Apache site describes the minimum server configurations 
                 for several popular web servers. 
             </p>
             <p>
-                After setting up the mod_jk connector above, you will need to
-                modify the Tomcat's server.xml ([tomcat root]/conf/) to respond to
+                After setting up the mod_jk connector above, you will need to 
+                modify the Tomcat's server.xml (located in <code>[tomcat root]/conf/</code>) to respond to
                 requests from Apache via the connector. Look for the
                 &lt;connector&gt; directive and add the following properties:
             </p>
@@ -626,13 +622,15 @@
             </pre>
             <p>
                 Note: the value for maxThreads (320) is equal to the value for MaxClients 
-                in the apache's "httpd.conf" file. 
+                in the apache's <code>httpd.conf</code>
+                file. 
             </p>
             <p>
-                Locate the &lt;Host name="localhost"...&gt; directive and update as
+                Locate the <code>&lt;Host name="localhost"...&gt;</code>
+                directive and update as
                 follows:
             </p>
-            <!-- ELLY IS WORKING HERE. --><pre>
+            <pre>
 	    &lt;Host name="localhost" appBase="webapps"
 	        DeployOnStartup="false"
 	        unpackWARs="true" autoDeploy="false"
@@ -666,9 +664,9 @@
             <p>
                 By default, Pellet is fed only an incomplete view of 
                 your ontology and only certain inferences are materialized. These  
-                include rdf:type,&nbsp; rdfs:subClassOf,owl:equivalentClass, and 
+                include rdf:type, rdfs:subClassOf, owl:equivalentClass, and 
                 owl:disjointWith. This mode is typically suitable for ontologies with a  
-                lot of instance data.&nbsp; If you would like to keep the default mode, 
+                lot of instance data. If you would like to keep the default mode, 
                 skip to the next step. 
             </p>
             <p>
@@ -679,19 +677,17 @@
             <p>
                 Then change the name of the listener class to 
                 PelletReasonerSetupComplete. Because "complete" reasoning can be very  
-                resource intensive, there is also an&nbsp; option to materialize nearly 
+                resource intensive, there is also an option to materialize nearly 
                 all inferences except owl:sameAs and owl:differentFrom. 
             </p>
             <p>
-                This is enabled 
-                by specifying PelletReasonerSetupPseudocomplete. For ontologies with  
-                large numbers of individuals, this mode can offer enormous performance 
+                This is enabled by specifying PelletReasonerSetupPseudocomplete. For ontologies 
+                with large numbers of individuals, this mode can offer enormous performance  
                 improvements over the "complete" mode. 
             </p>
             <p>
-                Finally, a class called
-                PelletReasonerSetupPseudocompleteIgnoreDataproperties is provided to
-                improve performance on ontologies with large literals where data
+                Finally, a class called PelletReasonerSetupPseudocompleteIgnoreDataproperties 
+                is provided to improve performance on ontologies with large literals where data
                 property entailments are not needed.
             </p>
             </p>
@@ -721,10 +717,7 @@
                     external authentication system.
                 </p>
                 <p>
-                    For VIVO, this secured page is named: 
-                    <code>
-                        /loginExternalAuthReturn
-                    </code>
+                    For VIVO, this secured page is named: <code>/loginExternalAuthReturn</code>
                 </p>
                 <p>
                     When your instructions call for the location of the secured page, this is the 
@@ -732,40 +725,49 @@
                 </p>
                 <h4>Configuring VIVO</h4>
                 <p>
-                    To enable external authentication, VIVO requires three values in the 
-                    deploy.properties file.
+                    To enable external authentication, VIVO requires three values in the <code>deploy.properties</code>
+                    file.
                 </p>
                 <ul>
                     <li>
-                        The name of the HTTP header that will hold the external user’s network ID 
-                        When a user completes the authentication process, the Apache server will  
-                        put the user’s network ID into one of the headers of the HTTP request. 
-                        The instructions from your institution should tell you which header is  
+                        <h5>The name of the HTTP header that will hold the external user's network ID.</h5>
+                        When a user completes the authentication process, the Apache server will 
+                        put the user's network ID into one of the headers of the HTTP request.  
+                        The instructions from your institution should tell you which header is 
                         used for this purpose. 
-                        You need to tell VIVO the name of that HTTP header. Insert a line like  
-                        this in the deploy.properties file: <pre>externalAuth.netIdHeaderName = [the header name]</pre>
-                        For example: <pre>externalAuth.netIdHeaderName = remote_userID</pre>
+                        <p>
+                            You need to tell VIVO the name of that HTTP header. Insert a line like 
+                            this in the deploy.properties file: <pre>externalAuth.netIdHeaderName = [the header name]</pre>
+                            For example: 
+                        </p>
+                        <pre>externalAuth.netIdHeaderName = remote_userID</pre>
                     </li>
                     <li>
-                        The text for the Login button 
-                        To start the authentication process, the user will click on a button in  
-                        the VIVO login form. You need to tell VIVO what text should appear in that 
-                        button.  
-                        Put a line like this in the deploy.properties file: 
-                        externalAuth.buttonText = [the text for your login button]  
-                        For example: <pre>externalAuth.buttonText = Log in using BearCat Shibboleth</pre>
-                        The VIVO login form will display a button labelled “Log in using BearCat 
-                        Shibboleth”.
+                        <h5>The text for the Login button.</h5>
+                        To start the authentication process, the user will click on a button in 
+                        the VIVO login form. You need to tell VIVO what text should appear in that  
+                        button. 
+                        <p>
+                            Put a line like this in the deploy.properties file: 
+                            externalAuth.buttonText = [the text for your login button]  
+                            For example: 
+                        </p>
+                        <pre>externalAuth.buttonText = Log in using BearCat Shibboleth</pre>
+                        The VIVO login form will display a button labelled "Log in using BearCat 
+                        Shibboleth".
                     </li>
                     <li>
-                        Associating a User with a profile page 
-                        If VIVO has an account for the user, the user will be given the privileges  
+                        <h5>Associating a User with a profile page</h5>
+                        If VIVO has an account for the user, the user will be given the privileges 
                         assigned to that account. 
-                        In addition, VIVO will try to associate the user with a profile page, so  
-                        the user may edit his own profile data. VIVO will search the data model 
-                        for a person with a property that matches the User’s network ID.  
-                        You need to tell VIVO what property should be used for matching. Insert 
-                        a line like this in the deploy.properties file:<pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
+                        <p>
+                            In addition, VIVO will try to associate the user with a profile page, so 
+                            the user may edit his own profile data. VIVO will search the data model  
+                            for a person with a property that matches the User’s network ID. 
+                            You need to tell VIVO what property should be used for matching. Insert 
+                            a line like this in the deploy.properties file:
+                        </p>
+                        <pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
                         For example:<pre>selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId</pre>
                     </li>
                 </ul>
@@ -808,7 +810,8 @@
             <ul>
                 <li>
                     Point your browser to the home page of your website, and click the "Log in" link 
-                    near the upper right corner. Log in with the initialAdminUser username you  
+                    near the upper right corner. Log in with the <code>initialAdminUser</code>
+                    username you 
                     set up in Step IV. If this is your first time logging in, you will be 
                     prompted to change the password.
                 </li>
@@ -824,7 +827,7 @@
                     the next step. 
                 </li>
                 <li>
-                    Open a new web browser or browser tab to the page http://marbles.sourceforge.net/.
+                    Open a new web browser or browser tab to the page <a href="http://marbles.sourceforge.net/">http://marbles.sourceforge.net/</a>.
                     In the pink box on that page enter the URI of the individual you created in the
                     previous step and click "open."
                 </li>
@@ -841,11 +844,11 @@
             </p>
             <ul>
                 <li>
-                    The search box is on the right side, directly opposite the "Index" link. 
-                    Type the word "Australia" into the box, and click on the "Search"  
+                    Type the word "Australia" into the search box, and click on the Search 
                     button.You should see a page of results, with links to countries that 
-                    border Australia, individuals that include Australia, and to 
-                    Australia itself.
+                    border Australia, individuals that include Australia, and to  
+                    Australia itself.  To trigger the search index, you can log in as a site 
+                    administrator and go to "http://your-vivo-url/SearchIndex".
                 </li>
             </ul>
         </div>

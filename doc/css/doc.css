@@ -21,7 +21,7 @@ body{
     padding: 0;
     height: 100%; /* needed for container min-height */
     font-family: 'Arimo', "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
-    /*font-size: 62.5%;*/
+    font-size: 1em;
     height: auto !important; /* real browsers */
     height: 100%; /* IE6: treaded as min-height*/;
     min-height: 100%; /* real browsers */
@@ -31,10 +31,15 @@ body{
    background: #f3f3f0 url(../images/header-background.png) center 0 no-repeat; 
 }
 /* h1,h2,h3,h4,h5,h6 ------>  */
-h2{
-    padding: 10px 0 12px 0;
+h1 {
+    padding: 8px 0 6px 0;
     margin: 0;
-    font-size: 22px;
+    font-size: 1.5em;	
+}
+h2 {
+    padding: 8px 0 6px 0;
+    margin: 0;
+    font-size: 1.4em;
     color: #2485ae; 
 }
 h2 a{
@@ -47,21 +52,21 @@ h2 a:hover, h2 a:active{
     text-decoration: none; 
 }
 h3{
-    padding: 10px 0 12px 0;
+    padding: 8px 0 6px 0;
     margin: 0;
-    font-size: 18px;
+    font-size: 1.2m;
     color: #2485ae; 
 }
 h4{
-    padding: 10px 0 12px 0;
+    padding: 4px 0 4px 0;
     margin: 0;
-    font-size: 16px;
-    color: #2485ae; 
+    font-size: 1.1em;
+    color: #000000; 
 }
 h5{
-    padding: 10px 0 12px 0;
+    padding: 3px 0 2px 0;
     margin: 0;
-    font-size: 14px;
+    font-size: 1em;
     color: #2485ae; 
 }
 
@@ -73,6 +78,16 @@ a {
 a:visited {
 	text-decoration: underline;
 	color: #5e6363;
+}
+
+code, pre {
+	font-size: 1.1em;
+}
+
+blockquote {
+	padding: 5px;
+	font-size: .9em;
+	background-color: #EEEEEE;
 }
 
 /* HEADER ------>  */
@@ -110,7 +125,6 @@ h1.vivo-logo a {
 
 /* TOC -------> */
 ol {
-	list-style-type: upper-roman;
 	margin: 0 0 10px 10px;
 }
 
@@ -225,4 +239,12 @@ p{
 .displace {
     position: absolute;
     left: -9999px;
+}
+
+ol.roman1 {
+	list-style-type: upper-roman;
+}
+
+ol.roman2 {
+	list-style-type: lower-roman;
 }
