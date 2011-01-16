@@ -34,12 +34,12 @@ body{
 h1 {
     padding: 8px 0 6px 0;
     margin: 0;
-    font-size: 1.4em;	
+    font-size: 1.5em;	
 }
 h2 {
     padding: 8px 0 6px 0;
     margin: 0;
-    font-size: 1.3em;
+    font-size: 1.4em;
     color: #2485ae; 
 }
 h2 a{
@@ -58,13 +58,13 @@ h3{
     color: #2485ae; 
 }
 h4{
-    padding: 8px 0 6px 0;
+    padding: 4px 0 4px 0;
     margin: 0;
     font-size: 1.1em;
-    color: #2485ae; 
+    color: #000000; 
 }
 h5{
-    padding: 8px 0 6px 0;
+    padding: 3px 0 2px 0;
     margin: 0;
     font-size: 1em;
     color: #2485ae; 
@@ -81,7 +81,13 @@ a:visited {
 }
 
 code, pre {
-	font-size: 1em;
+	font-size: 1.1em;
+}
+
+blockquote {
+	padding: 5px;
+	font-size: .9em;
+	background-color: #EEEEEE;
 }
 
 /* HEADER ------>  */
@@ -119,7 +125,6 @@ h1.vivo-logo a {
 
 /* TOC -------> */
 ol {
-	list-style-type: upper-roman;
 	margin: 0 0 10px 10px;
 }
 
@@ -236,6 +241,10 @@ p{
     left: -9999px;
 }
 
-ol.alpha {
-	list-style-type:decimal;
+ol.roman1 {
+	list-style-type: upper-roman;
+}
+
+ol.roman2 {
+	list-style-type: lower-roman;
 }
