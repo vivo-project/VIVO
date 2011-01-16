@@ -218,7 +218,7 @@ ul#main-nav {
     font-size: 16px;
     color: #5f6464;
     line-height: 1.3em;
-    padding: 0 24px 30px 24px;
+    padding: 0 24px 0 24px;
 }
 #intro a {
     color: #2485ae
@@ -353,7 +353,7 @@ p.password-note{
 #search-home {
     float: left;
     width: 533px;
-    margin-left: 24px;
+    margin: 30px 0 0 24px;
 }
 #search-home h3 {
     padding: 0;
