@@ -10,7 +10,13 @@
 
 <div id="wrapper-content" role="main">        
     <#if flash?has_content>
-        <section id="flash-message" role="alert">
-            ${flash}
-        </section>
+        <#if flash?starts_with("Welcome") >
+            <section id="welcome-message" role="alert">
+                ${flash}
+            </section>
+        <#else>
+            <section id="flash-message" role="alert">
+                ${flash}
+            </section>
+        </#if>
     </#if>

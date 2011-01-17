@@ -349,6 +349,14 @@ p.password-note{
     padding: 0.5em;  
     margin-bottom: 10px;
 }
+#welcome-message{
+    position:absolute;
+    width:930px;
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: 0.25em;
+    margin-top:-8px;  
+}
 /* HOME SEARCH ------>  */
 #search-home {
     float: left;
