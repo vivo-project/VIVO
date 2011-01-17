@@ -206,7 +206,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='administeredBy']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +236,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='grantAwardedBy']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,7 +266,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='abstract']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[4]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -296,7 +296,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='grantSubcontractedThrough']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[5]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -321,7 +321,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='totalAwardAmount']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[6]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -351,7 +351,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='grantDirectCosts']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[7]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -376,7 +376,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='sponsorAwardId']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[8]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -406,7 +406,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='geographicFocus']/a</td>
+	<td>//div[@id='wrapper-content']/section[3]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -436,7 +436,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='startDate']/a</td>
+	<td>//div[@id='wrapper-content']/section[4]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -445,38 +445,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: start date</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yearstartDateEdited</td>
-	<td>2010</td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>monthstartDateEdited</td>
-	<td>label=September</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>daystartDateEdited</td>
-	<td>label=1</td>
+	<td>typeOfNew</td>
+	<td>label=Date/Time Interval (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Elderly Care</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='endDate']/a</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
 	<td></td>
 </tr>
 <tr>
@@ -485,24 +460,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: end date</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>yearendDateEdited</td>
-	<td>2012</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>monthendDateEdited</td>
-	<td>label=August</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>dayendDateEdited</td>
-	<td>label=31</td>
+	<td>name</td>
+	<td>2010-09-01 to 2012-08-31</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -521,7 +481,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='localAwardId']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -556,7 +516,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='fundingVehicleFor']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,7 +546,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -636,12 +596,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Colleges of the World | Consortium</td>
+	<td>Primate Colleges of the World Consortium</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Research Laboratory | Laboratory</td>
+	<td>Primate Research Laboratory Laboratory</td>
 	<td></td>
 </tr>
 <tr>
@@ -651,7 +611,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Colleges of the World | Consortium</td>
+	<td>Primate Colleges of the World Consortium</td>
 	<td></td>
 </tr>
 <tr>
@@ -671,12 +631,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010-09-01</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2012-08-31</td>
+	<td>2010-09-01 to 2012-08-31</td>
 	<td></td>
 </tr>
 <tr>
@@ -686,12 +641,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Student of the Year | Award or Honor</td>
+	<td>Primate Student of the Year Award or Honor</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Elderly Care | Subject Area</td>
+	<td>Elderly Care Subject Area</td>
 	<td></td>
 </tr>
 <tr>
