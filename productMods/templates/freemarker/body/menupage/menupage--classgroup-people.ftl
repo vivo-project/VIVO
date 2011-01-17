@@ -2,7 +2,7 @@
 
 <#include "menupage-checkForData.ftl">
 
-<#if (!noData)>
+<#if !noData>
     <section id="intro-menupage" role="region">
          <h3>${page.title}</h3>
     
