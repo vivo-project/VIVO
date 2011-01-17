@@ -560,11 +560,6 @@ article.featured-people {
     width: 245px;
     height: 100px;
 }
-img.individual-photo {
-    width: 80px;
-    border: 1px solid #999;
-    float: left;
-}
 article.vcard p.fn {
     float: left;
     width: 130px;
@@ -1129,7 +1124,7 @@ ul#alpha-browse-childClass .count-classes {
     border-right: 1px solid #edf0ed;
 }
 /* INDIVIDUAL INTRO LEFT CONTENT ------>  */
-#share-contact img.individual-photo2{
+#share-contact img.individual-photo{
     border: 7px solid #ebebeb;
 }
 ul#individual-tools-people{
