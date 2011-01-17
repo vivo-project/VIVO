@@ -1119,6 +1119,12 @@ ul#alpha-browse-childClass .count-classes {
     color: #5e6363;
     border-left: 1px solid #A6B1B0;
 }
+#individual-intro ul#individual-tools{
+    color: #8AA149;
+}
+#individual-intro ul.individual-urls li a{
+    color: #2485ae;
+}
 /* INDIVIDUAL INTRO FOR PERSON ------>  */
 #individual-intro-person{
     border-right: 1px solid #edf0ed;
@@ -1189,6 +1195,10 @@ h1.fn .preferred-title {
 #individual-info h2{
     font-size: 1.125em;
     font-weight: normal;
+}
+#individual-info h3{
+    font-size: 1.125em;
+    line-height: 1.2em;
 }
 ul#individual-positions{
     font-size: 1em;
