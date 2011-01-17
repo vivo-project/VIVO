@@ -131,7 +131,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='educationalTraining']/a</td>
+	<td>//div[@id='wrapper-content']/section[8]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -156,7 +156,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='educationalTraining']/a</td>
+	<td>//div[@id='wrapper-content']/section[8]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +256,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>dateTime.year</td>
+	<td>startField.year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
 	<td>1980</td>
 </tr>
 <tr>
@@ -278,6 +283,16 @@
 	<td>comment</td>
 	<td class="comment">Enter in new organization name</td>
 	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startField.year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
+	<td>1980</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -331,12 +346,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>B.S. Bachelor of Science in Business Administration, Carroll College, 1980</td>
+	<td>B.S.in Business Administration, Carroll College 1980 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='educationalTraining']/a</td>
+	<td>//div[@id='wrapper-content']/section[8]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -386,18 +406,23 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>dateTime.year</td>
+	<td>startField.year</td>
+	<td>1998</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
 	<td>2000</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
-	<td>label=College</td>
+	<td>label=University</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>relatedIndLabel</td>
-	<td>Carroll College</td>
+	<td>Carroll University</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -421,12 +446,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>B.S. Bachelor of Science in Business Administration, Carroll College, 1980</td>
+	<td>B.S.in Business Administration, Carroll College 1980 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>M.B.A. Master of Business Administration in Business Administration, Carroll College, Business Department, 2000</td>
+	<td>M.B.A.in Business Administration, Carroll University, Business Department 1998 - 2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll University</td>
 	<td></td>
 </tr>
 <tr>
@@ -436,7 +471,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='educationalTraining']/a</td>
+	<td>//div[@id='wrapper-content']/section[8]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -456,8 +491,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>dateTime.year</td>
-	<td>2005</td>
+	<td>startField.year</td>
+	<td>2002</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -516,17 +556,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>M.Ed. Master of Education in Business Education, University of Wisconsin, 2005, Graduate School Fellowship</td>
+	<td>B.S.in Business Administration, Carroll College 1980 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>B.S. Bachelor of Science in Business Administration, Carroll College, 1980</td>
+	<td>M.B.A.in Business Administration, Carroll University, Business Department 1998 - 2000 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll University</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>M.B.A. Master of Business Administration in Business Administration, Carroll College, Business Department, 2000</td>
+	<td>M.Ed.in Business Education, University of Wisconsin, Graduate School Fellowship 2002 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=University of Wisconsin</td>
 	<td></td>
 </tr>
 <tr>

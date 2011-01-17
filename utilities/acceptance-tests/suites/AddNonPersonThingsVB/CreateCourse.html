@@ -206,7 +206,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='description']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[3]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +236,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='courseOfferedBy']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -261,7 +261,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='organizer']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[4]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -281,7 +281,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='prerequisiteFor']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[5]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -305,78 +305,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Test research entry</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='geographicFocus']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Africa</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test location entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasGeographicLocation']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Geographic Location for Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Liberia</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test contact entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='contactInformation']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[6]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -406,12 +336,77 @@
 </tr>
 <tr>
 	<td>comment</td>
+	<td class="comment">Test research entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/section[3]/article/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Africa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Test location entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/section[4]/article/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Geographic Location for Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Liberia</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
 	<td class="comment">Test time entry</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='startDate']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,107 +416,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add new entry for: start date</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yearstartDateEdited</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>monthstartDateEdited</td>
-	<td>label=September</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>daystartDateEdited</td>
-	<td>label=6</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
+	<td>Select an existing Date/Time Interval for Introduction to Primate Health</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='startYear']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: start year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='endDate']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: end date</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yearendDateEdited</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>monthendDateEdited</td>
-	<td>label=December</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>dayendDateEdited</td>
-	<td>label=7</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='endYear']/a</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
 	<td></td>
 </tr>
 <tr>
@@ -531,33 +431,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>tinymce</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasTimeInterval']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Time Interval for Introduction to Primate Health</td>
-	<td></td>
+	<td>name</td>
+	<td>Fall Semester 2007</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -576,7 +451,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='presents']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -595,18 +470,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>There are no entries in the system to select from.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please create a new entry.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,17 +506,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='includesEvent']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[3]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Event for Introduction to Primate Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -671,7 +531,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -710,13 +570,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[4]/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Verify everything entered is displaying properly</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate College of America | College</td>
+	<td>Primate College of America College</td>
 	<td></td>
 </tr>
 <tr>
@@ -726,27 +611,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane | Assistant Professor</td>
+	<td>Faculty, Jane Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Introduction to Primate Health | Course</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Fall 2010 | Academic Term</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Africa | geographical_region</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Liberia</td>
+	<td>Introduction to Primate Health Course</td>
 	<td></td>
 </tr>
 <tr>
@@ -756,47 +626,42 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010-09-06</td>
+	<td>Africa geographical_regio</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010</td>
+	<td>Liberia</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010-12-07</td>
+	<td>Fall Semester 2007</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010</td>
+	<td>http://primatehealthintro.cornell.edu Webpage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Fall 2010 | Academic Term</td>
+	<td>Introduction to Primate Health Course</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>http://primatehealthintro.cornell.edu | Webpage</td>
+	<td>Primate Health Check Event</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Introduction to Primate Health | Course</td>
+	<td>Animal Health Subject Area</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health Check | Event</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Animal Health | Subject Area</td>
+	<td>9</td>
 	<td></td>
 </tr>
 <tr>

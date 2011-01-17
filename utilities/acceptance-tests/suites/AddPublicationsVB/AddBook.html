@@ -151,7 +151,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='authorInAuthorship']/a</td>
+	<td>//div[@id='wrapper-content']/section[4]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,17 +196,37 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>book</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify author info is there</td>
+	<td class="comment">Go back to the book</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Furter, Frank</td>
+	<td>clickAndWait</td>
+	<td>link=Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,7 +236,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='publisher']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article[7]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +276,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='placeOfPublication']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article[8]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -281,7 +301,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='status']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article[11]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,7 +326,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='year']/a</td>
+	<td>//div[@id='wrapper-content']/section[4]/article/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,8 +346,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>tinymce</td>
-	<td>2010</td>
+	<td>name</td>
+	<td>2009</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -331,32 +361,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='numPages']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>258</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -391,7 +396,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -416,7 +421,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -440,98 +445,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field LCCN</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='lccn']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: lccn</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The Library of Congress Control Number or LCCN is a serially based system of numbering cataloging records in the Library of Congress in the United States.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='lccn']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field ISBN-10</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='isbn10']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: isbn-10</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster. The 10-digit ISBN format was developed by the International Organization for Standardization and was published in 1970 as international standard ISO 2108.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='isbn10']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article[3]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -555,43 +470,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field ISBN-13</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='isbn13']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: isbn-13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The International Standard Book Number (ISBN) is a unique[1][2] numeric commercial book identifier based upon the 9-digit Standard Book Numbering (SBN) code created by Gordon Foster.Since 1 January 2007, ISBNs have contained 13 digits, a format that is compatible with Bookland EAN-13s.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='isbn13']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article[5]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -686,7 +566,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>publications</td>
+	<td>research</td>
 	<td></td>
 </tr>
 <tr>
@@ -731,12 +611,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Book</td>
+	<td>book</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo: Good or Bad for Kids? | Book</td>
+	<td>Nintendo: Good or Bad for Kids?</td>
 	<td></td>
 </tr>
 <tr>
@@ -766,7 +646,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Putnam | Publisher</td>
+	<td>Putnam Publisher</td>
 	<td></td>
 </tr>
 <tr>
@@ -781,7 +661,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>in press | Document Status</td>
+	<td>in press Document Status</td>
 	<td></td>
 </tr>
 <tr>
@@ -801,7 +681,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Child Development | Subject Area</td>
+	<td>Child Development Subject Area</td>
 	<td></td>
 </tr>
 <tr>

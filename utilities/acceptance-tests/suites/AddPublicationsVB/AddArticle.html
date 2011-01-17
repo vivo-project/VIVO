@@ -156,7 +156,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='authorInAuthorship']/a</td>
+	<td>//div[@id='wrapper-content']/section[4]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,17 +201,37 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Too Much Nintendo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>academic article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Too Much Nintendo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify author info is there</td>
+	<td class="comment">Go back to article</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Furter, Frank</td>
+	<td>clickAndWait</td>
+	<td>link=Too Much Nintendo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Too Much Nintendo</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,7 +241,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='volume']/a</td>
+	<td>//div[@id='wrapper-content']/section[6]/article[4]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,7 +266,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='pageStart']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[4]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -271,7 +291,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='pageEnd']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[5]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -296,7 +316,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='year']/a</td>
+	<td>//div[@id='wrapper-content']/section[4]/article/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,8 +336,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>tinymce</td>
-	<td>2010</td>
+	<td>name</td>
+	<td>2010-10-27</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -321,7 +351,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='pmid']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article[6]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -346,7 +376,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -366,7 +396,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -391,7 +421,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -415,38 +445,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field ISSUE</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='issue']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: issue</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='issue']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -470,183 +470,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field DATE</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='date']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: date</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Use when a date doesn't signify a start date or end date, as with an award; can also be used when multiple independent dates are relevant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>day</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='date']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='date']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yeardateEdited</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a valid month. Please enter a valid day.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yeardateEdited</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>monthdateEdited</td>
-	<td>label=October</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a valid day.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yeardateEdited</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>monthdateEdited</td>
-	<td>label=October</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>daydateEdited</td>
-	<td>label=27</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field DOI</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='doi']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: doi</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The Digital Object Identifier (DOI) System provides for persistent identification of content objects in the digital environment. &quot;DOI names are assigned to any entity for use on digital networks. They are used to provide current information, including where they (or information about them) can be found on the Internet. Information about a digital object may change over time, including where to find it, but its DOI name will not change.&quot;</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='doi']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article[4]/h3/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -658,176 +483,6 @@
 	<td>type</td>
 	<td>tinymce</td>
 	<td>987654321.1234567890</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field EAN/UCC-13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='eanucc13']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: ean/ucc-13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>EAN International-Uniform Code Council (EAN-UCC) was a supply chain standards family name, formally the EAN.UCC System, that included product barcodes which are printed on the great majority of products available in stores worldwide and electronic commerce standards.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='eanucc13']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>DEF12121212</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field NIH SUB ID</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='nihmsid']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: NIH Manuscript Submission System ID</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='nihmsid']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>NIH9898989898</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate unique field PUBMED ID</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='pmcid']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: PubMed Central ID</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='pmcid']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>PMID767676</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -911,7 +566,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>publications</td>
+	<td>research</td>
 	<td></td>
 </tr>
 <tr>
@@ -966,7 +621,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Academic Article</td>
+	<td>academic article</td>
 	<td></td>
 </tr>
 <tr>
@@ -1011,11 +666,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>2010-10-27</td>
 	<td></td>
 </tr>
@@ -1051,7 +701,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Child Development | Subject Area</td>
+	<td>Child Development Subject Area</td>
 	<td></td>
 </tr>
 <tr>

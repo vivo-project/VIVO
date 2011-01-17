@@ -206,7 +206,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='description']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +236,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasProceedings']/a</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[3]/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>PHC Proceedings</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,13 +295,68 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[4]/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Librarian, Lily</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[5]/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add new entry for: contact information</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>info@primateconf.org</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Test research entry</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='geographicFocus']/a</td>
+	<td>//div[@id='wrapper-content']/section[3]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -311,7 +391,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasGeographicLocation']/a</td>
+	<td>//div[@id='wrapper-content']/section[4]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -327,42 +407,7 @@
 <tr>
 	<td>select</td>
 	<td>objectVar</td>
-	<td>label=Congo_the</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Health Conference</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test contact entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='contactInformation']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: contact information</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>info@primateconf.org</td>
+	<td>label=the Congo</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -381,7 +426,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='startDate']/a</td>
+	<td>//div[@id='wrapper-content']/section[5]/article/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -390,84 +435,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: start date</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yearstartDateEdited</td>
-	<td>2011</td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>monthstartDateEdited</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>daystartDateEdited</td>
-	<td>label=5</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Health Conference</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='endDate']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: end date</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>yearendDateEdited</td>
-	<td>2011</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>monthendDateEdited</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>dayendDateEdited</td>
-	<td>label=9</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Health Conference</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasTimeInterval']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
+	<td>typeOfNew</td>
+	<td>label=Date/Time Interval (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -480,14 +450,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Edit &quot;time interval&quot; entry for Primate Health Conference</td>
+	<td>type</td>
+	<td>name</td>
+	<td>2011-01-05 to 2011-01-09</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Winter 2011</td>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Test related documents entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/section[6]/article/h3/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -506,7 +496,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='includesEvent']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[2]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -536,7 +526,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[1]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -561,7 +551,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='abbreviation']/a</td>
+	<td>//div[@id='wrapper-content']/section[7]/article[3]/h3/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -591,7 +581,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health and Fitness | Invited Talk</td>
+	<td>Primate Health Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,22 +591,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>self_governing</td>
+	<td>PHC Proceedings Proceedings</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Kenya</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Chad</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Congo_the</td>
+	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -626,27 +606,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2011-01-05</td>
+	<td>Kenya</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2011-01-09</td>
+	<td>the Congo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Winter 2011 | Academic Term</td>
+	<td>2011-01-05 to 2011-01-09</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Health Check | Event</td>
+	<td>http://primatehealthintro.cornell.edu Webpage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Animal Health | Subject Area</td>
+	<td>Primate Health Check Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Animal Health Subject Area</td>
 	<td></td>
 </tr>
 <tr>
