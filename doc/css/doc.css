@@ -158,6 +158,7 @@ td {
 .odd_row {
 	background: #EEEEEE;
 	border-bottom: 1px solid grey;
+	font-weight: bold;
 }
 
 /* FOOTER------>  */
