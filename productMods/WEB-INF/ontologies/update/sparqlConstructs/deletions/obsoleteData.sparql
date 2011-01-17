@@ -1,0 +1,13 @@
+
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+construct {
+      <http://vivoweb.org/ontology/florida#StatewideGoalAndFocusArea> <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#inClassGroup> <http://vivoweb.org/ontology#vitroClassGrouptopics> .
+
+      <http://vivoweb.org/ontology/florida#divisionOfSponsoredResearchNumber> <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#inPropertyGroup> <http://vivoweb.org/ontology#vitroPropertyGroupidentifiers> .
+
+      <http://vivoweb.org/ontology/florida#statewideGoalAndFocusArea> <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#inPropertyGroup> <http://vivoweb.org/ontology#vitroPropertyGroupoutreach>
+} where {
+        
+    <http://vivoweb.org/ontology/florida#StatewideGoalAndFocusArea> <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#inClassGroup> <http://vivoweb.org/ontology#vitroClassGrouptopics> 
+}
