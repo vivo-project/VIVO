@@ -405,7 +405,7 @@ input.search-home-vivo {
     padding-bottom: 30px;
 }
 #browse h4 {
-    width: 10%;
+    width: 13%;
     height: 30px;
     margin-bottom: 27px;
     padding-left: 15px;
@@ -463,20 +463,19 @@ ul#browse-classgroups .count-classes {
     width: 610px;
     border: 1px solid #dde6e5;
     background: #fff;
-    margin-top: -20px;
+    min-height: 230px;
 }
 ul#classgroup-list {
     float: left;
-    width: 268px;
+    width: 90%;
     padding: 0 10px 15px 22px;
     margin-top: 20px;
     margin-bottom: 10px;
-    border-right: 1px solid #dde5e4;
 }
 ul#classgroup-list li {
     display: block;
     float: left;
-    width: 268px;
+    width: 100%;
     border-bottom: 1px solid #dde4e3;
     font-size: 14px;
     height: 35px;
@@ -675,7 +674,7 @@ ul#footer-nav {
     height: 20px;
     margin: 0;
     padding: 0;
-    padding-top: 50px;
+    padding-top: 55px;
     padding-right: 20px;
 }
 ul#footer-nav li {

@@ -6,8 +6,6 @@
 <html lang="en">
     <head>
         <#include "head.ftl">
-        <script type="text/javascript" src="${themeDir}/js/jquery_plugins/raphael/raphael.js"></script>
-        <script type="text/javascript" src="${themeDir}/js/jquery_plugins/raphael/pie.js"></script>
     </head>
     
     <body>
