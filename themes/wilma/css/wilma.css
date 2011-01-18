@@ -1032,6 +1032,7 @@ ul#alpha-browse-childClass a.selected {
     color: #2ea0cf;
     background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
     margin-right: 3px;
+    margin-left: 5px;
 }
 ul#alpha-browse-childClass .count-classes {
     font-size: .75em;
