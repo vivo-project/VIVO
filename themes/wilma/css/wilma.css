@@ -1034,7 +1034,7 @@ ul#alpha-browse-childClass a.selected {
     background: url(../images/arrowSmall.gif) -3px 7px no-repeat;
     margin-right: 3px;
 }
-ul#alpha-browse-childClass .count-classes {    
+ul#alpha-browse-childClass .count-classes {
     font-size: .75em;
 }
 .alphaIndex {    
@@ -1050,18 +1050,13 @@ ul#alpha-browse-childClass .count-classes {
     font-size: 1.68em;
     color: #2485ae;
 }
-#individuals-in-childClass li.individual-foaf-person,
-#individuals-in-childClass li.individual {
-    width: 90%;
+#individuals-in-childClass li {
     border-bottom: 1px solid #dde4e3;
-    padding-bottom: 0;
 }
-#individuals-in-childClass li.individual-foaf-person img,
-#individuals-in-childClass li.individual img {
+#individuals-in-childClass li img {
     border: 2px solid #dde4e3;
 }
-#individuals-in-childClass li.individual-foaf-person h1,
-#individuals-in-childClass li.individual h1 {
+#individuals-in-childClass li h1 {
     color: #5e6363;
     font-size: 1em;
 }
