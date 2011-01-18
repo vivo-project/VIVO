@@ -9,21 +9,33 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?dateTimeInterval (afn:localname(?dateTimeInterval) AS ?intervalName)
-                        ?valueStart (afn:localname(?valueStart) AS ?valueStartName) 
+        SELECT DISTINCT ?dateTimeInterval ?intervalName
+                        ?valueStart ?valueStartName
                         ?dateTimeStart 
-                        (afn:localname(?dateTimePrecisionStart) AS ?precisionStart) 
-                        ?valueEnd (afn:localname(?valueEnd) AS ?valueEndName) 
+                        ?precisionStart
+                        ?valueEnd ?valueEndName 
                         ?dateTimeEnd 
-                        (afn:localname(?dateTimePrecisionEnd) AS ?precisionEnd) WHERE {
-            GRAPH ?g1 { ?subject ?property ?dateTimeInterval } 
-            OPTIONAL { GRAPH ?g2 { ?dateTimeInterval core:start ?valueStart } 
+                        ?precisionEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?dateTimeInterval
+                        LET(?intervalName := afn:localname(?dateTimeInterval))
+            } 
+            OPTIONAL { GRAPH ?g2 { ?dateTimeInterval core:start ?valueStart
+                                   LET(?valueStartName := afn:localname(?valueStart))
+                       } 
                        OPTIONAL { GRAPH ?g3 { ?valueStart core:dateTime ?dateTimeStart } }
-                       OPTIONAL { GRAPH ?g4 { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart } }
+                       OPTIONAL { GRAPH ?g4 { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
+                                              LET(?precisionStart := afn:localname(?dateTimePrecisionStart)) 
+                                  } 
+                       }
             }                      
-            OPTIONAL { GRAPH ?g5 { ?dateTimeInterval core:end ?valueEnd } 
+            OPTIONAL { GRAPH ?g5 { ?dateTimeInterval core:end ?valueEnd
+                                   LET(?valueEndName := afn:localname(?valueEnd)) 
+                       } 
                        OPTIONAL { GRAPH ?g6 { ?valueEnd core:dateTime ?dateTimeEnd } }
-                       OPTIONAL { GRAPH ?g7 { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd } }
+                       OPTIONAL { GRAPH ?g7 { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
+                                              LET(?precisionEnd := afn:localname(?dateTimePrecisionEnd)) 
+                                  } 
+                       }
             }
         }  
     </query>
