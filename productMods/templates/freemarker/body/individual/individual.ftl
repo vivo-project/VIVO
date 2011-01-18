@@ -11,7 +11,7 @@
 <section id="individual-intro" class="vcard" role="region">
     <section id="share-contact" role="region"> 
         <#-- Image -->
-        <@p.imageLinks individual propertyGroups editing />
+        <@p.imageLinks individual propertyGroups editable />
     </section>
 
     <section id="individual-info" role="region">
@@ -24,7 +24,7 @@
                     <#-- Label -->
                     <#assign label = individual.nameStatement>
                     ${label.value}
-                    <@p.editingLinks label editing />
+                    <@p.editingLinks label label editable />
                         
                     <#-- Moniker -->
                     <#if individual.moniker?has_content>
@@ -50,7 +50,7 @@
         </nav>
                 
         <#-- Links -->
-        <@p.vitroLinks propertyGroups editing  />
+        <@p.vitroLinks propertyGroups editable  />
     </section>
 </section>
 

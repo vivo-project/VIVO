@@ -13,7 +13,7 @@
     <section id="share-contact" role="region"> 
         
         <#-- Image -->
-        <@p.imageLinks individual propertyGroups editing "${urls.images}/placeholders/person.thumbnail.jpg" />
+        <@p.imageLinks individual propertyGroups editable "${urls.images}/placeholders/person.thumbnail.jpg" />
 
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
@@ -30,13 +30,13 @@
         <#-- Email -->    
         <#assign email = propertyGroups.getPropertyAndRemoveFromList("${core}email")!>      
         <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <@p.addLinkWithLabel email editing />
+            <@p.addLinkWithLabel email editable />
             <#if email.statements?has_content> <#-- if there are any statements -->
                 <ul id="individual-email" role="list">
                     <#list email.statements as statement>
                         <li role="listitem">
                             <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon" /><a class="email" href="mailto:${statement.value}">${statement.value}</a>
-                            <@p.editingLinks statement editing />
+                            <@p.editingLinks email statement editable />
                         </li>
                     </#list>
                 </ul>
@@ -46,13 +46,13 @@
         <#-- Phone --> 
         <#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
         <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <@p.addLinkWithLabel phone editing />
+            <@p.addLinkWithLabel phone editable />
             <#if phone.statements?has_content> <#-- if there are any statements -->
                 <ul id="individual-phone" role="list">
                     <#list phone.statements as statement>
                         <li role="listitem">                           
                            <img class ="icon-phone  middle" src="${urls.images}/individual/phoneIcon.gif" alt="phone icon" />${statement.value}
-                            <@p.editingLinks statement editing />
+                            <@p.editingLinks phone statement editable />
                         </li>
                     </#list>
                 </ul>
@@ -60,7 +60,7 @@
         </#if>      
                 
         <#-- Links -->  
-        <@p.vitroLinks propertyGroups editing "individual-urls-people" />
+        <@p.vitroLinks propertyGroups editable "individual-urls-people" />
     </section>
     
     <section id="individual-info" role="region">
@@ -73,7 +73,7 @@
                     <#-- Label -->
                     <#assign label = individual.nameStatement>
                     ${label.value}
-                    <@p.editingLinks label editing />
+                    <@p.editingLinks label label editable />
                         
                     <#-- Moniker -->
                     <#if individual.moniker?has_content>
@@ -85,10 +85,10 @@
             <#-- Positions -->
             <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-                <h2>Positions <@p.addLink positions editing /></h2>
+                <h2>Positions <@p.addLink positions editable /></h2>
                 <#if positions.statements?has_content> <#-- if there are any statements -->
                     <ul id ="individual-positions" role="list">
-                        <@p.objectPropertyList positions.statements positions.template editing />
+                        <@p.objectPropertyList positions positions.statements positions.template editable />
                     </ul>
                 </#if>
             </#if>
@@ -101,10 +101,10 @@
         <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <#--<h2>Research Areas <@p.addLink researchAreas editing /></h2>  --> 
-            <@p.addLinkWithLabel researchAreas editing />
+            <@p.addLinkWithLabel researchAreas editable />
             <#if researchAreas.statements?has_content> <#-- if there are any statements -->                
                 <ul id="individual-areas" role="list">
-                    <@p.simpleObjectPropertyList researchAreas editing/>
+                    <@p.simpleObjectPropertyList researchAreas editable/>
                 </ul>
             </#if>
         </#if>

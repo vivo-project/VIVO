@@ -5,11 +5,7 @@
 <#import "lib-list.ftl" as l>
 <#import "lib-properties.ftl" as p>
 
-<#assign editing = individual.showEditingLinks>
-
-<#assign editingClass>
-    <#if editing>editing</#if>
-</#assign>
+<#assign editable = individual.editable>
 
 <#assign propertyGroups = individual.propertyList>
 
