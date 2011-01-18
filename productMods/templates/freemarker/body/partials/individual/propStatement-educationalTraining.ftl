@@ -13,7 +13,12 @@
 
     <#local degree>
         <#if statement.degreeName??>
-            <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " />
+            <#-- RY Giving up on join here. Freemarker insists on removing the space before "in"
+                 and leaving no space between the degree and major field, even though compress
+                 should only delete consecutive spaces. Even &nbsp; doesn't help.
+            <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " /> -->
+            ${statement.degreeAbbr!statement.degreeName} 
+            <#if statement.majorField??> in ${statement.majorField}</#if>
         </#if>
     </#local>
     

@@ -9,16 +9,10 @@
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showAuthorship statement>
-
-    <#local linkedIndividual>
-        <#if statement.person??>
-            <a href="${profileUrl(statement.person)}">${statement.personName}</a>
-        <#else>
-            <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.authorship)}">${statement.authorshipName}</a> (no linked author)
-        </#if>
-    </#local>
-    
-    <@s.join [ linkedIndividual ] />
-
+    <#if statement.person??>
+        <a href="${profileUrl(statement.person)}">${statement.personName}</a>
+    <#else>
+        <#-- This shouldn't happen, but we must provide for it -->
+        <a href="${profileUrl(statement.authorship)}">${statement.authorshipName}</a> (no linked author)
+    </#if>
 </#macro>
