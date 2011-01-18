@@ -41,7 +41,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Book</td>
+	<td class="comment">Add publications</td>
 	<td></td>
 </tr>
 <tr>
@@ -391,21 +391,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='issue']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Why Games Are Important to Child Growth</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//h3[@id='startPage']/a/img</td>
 	<td></td>
 </tr>
@@ -656,21 +641,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='publishedIn']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Game Wars</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//h3[@id='date/timeValue']/a/img</td>
 	<td></td>
 </tr>
@@ -896,16 +866,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>4 publications<br />within the last 10 years</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td><br />Co-Author Network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Co-Investigator Network</td>
 	<td></td>
 </tr>
@@ -941,11 +901,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>4 publications<br />from 2002 to 2011 </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Publications per year</td>
 	<td></td>
 </tr>
@@ -967,6 +922,26 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>2009 	1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify there are no co-investigators</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Co-Investigator Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person Level Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Currently there are no grants for this investigator in the VIVO database. </td>
 	<td></td>
 </tr>
 <tr>

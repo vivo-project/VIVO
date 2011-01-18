@@ -90,28 +90,53 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Do not add co-investigators to Games and Kids grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Do not add co-investigators to Child Development grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add 1 co-investigator to Future of Children grant</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>Index to VIVO Contents</td>
 	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Data Input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Librarian (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='co-principalInvestigatorOn']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -120,19 +145,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Add Lily Librarian</td>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Future</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ui-active-menuitem</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>firstName</td>
-	<td>Lily</td>
+	<td>startYear</td>
+	<td>2007</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>lastName</td>
-	<td>Librarian</td>
+	<td>endYear</td>
+	<td>2008</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -140,63 +170,333 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
-	<td class="comment">Edit Lily Librarian to add title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Librarian, Lily</td>
+	<td class="comment">Add 2 co-investigators to Nix Nintendo grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='co-principalInvestigatorOn']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>MonikerSelectAlt</td>
-	<td>Associate Librarian</td>
+	<td>relatedIndLabel</td>
+	<td>Nix</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2010</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Johnson, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Johnson, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='co-principalInvestigatorOn']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>relatedIndLabel</td>
+	<td>Nix</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>startYear</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Johnson, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that account was created</td>
+	<td class="comment">Verify co-investigator network is correct</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Co-Investigator Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Person Level Visualization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Librarian, Lily</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Associate Librarian</td>
+	<td>Associate Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO profile | Co-investigator network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3&nbsp;&nbsp;&nbsp;Joint Grant(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2&nbsp;&nbsp;&nbsp;Joint Co-investigator(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 grant(s)<br />from 2002 to 2011 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2 co-investigator(s)<br />from 2002 to 2011 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Grants per year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Co-investigator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Johnson, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify co-auther network still o.k.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Co-Author Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Person Level Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4&nbsp;&nbsp;&nbsp;Joint Publication(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3&nbsp;&nbsp;&nbsp;Joint Co-author(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4 publications<br />from 2002 to 2011 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3 co-author(s)<br />from 2002 to 2011 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Johnson, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Smith, Sally</td>
 	<td></td>
 </tr>
 <tr>

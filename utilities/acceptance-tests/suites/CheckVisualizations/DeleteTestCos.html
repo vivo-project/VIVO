@@ -41,7 +41,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Delete test faculty members</td>
+	<td class="comment">Delete test co-authors/co-investigators</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,7 +96,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to index</td>
+	<td class="comment">Verify people are there to be deleted</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,11 +107,6 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify both people to be deleted are there</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,87 +116,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Navigate to first faculty member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete first faculty member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this entity? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to second faculty member</td>
+	<td class="comment">Delete first person</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,22 +136,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty Member</td>
+	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sunny Sony</td>
+	<td>link=Johnson, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Sunny Sony</td>
+	<td>Johnson, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -252,11 +172,6 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete second faculty member</td>
 	<td></td>
 </tr>
 <tr>
@@ -281,7 +196,157 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify both faculty members are gone</td>
+	<td class="comment">Delete second person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Smith, Sally</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Smith, Sally</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this entity? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Delete third person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this entity? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify people are all gone</td>
 	<td></td>
 </tr>
 <tr>
@@ -402,11 +467,6 @@
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>people</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>

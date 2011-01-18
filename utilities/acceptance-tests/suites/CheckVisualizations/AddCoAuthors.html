@@ -100,18 +100,68 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Data Input</td>
+	<td>comment</td>
+	<td class="comment">Add 1 co-author for book</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Librarian (core)</td>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>link=Book</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Book</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>exact:Nintendo: Good or Bad for Kids?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='authors']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Smith</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Sally</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,18 +171,58 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Lily Librarian</td>
+	<td class="comment">Add 2 co-authors  for article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Academic Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Academic Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Why Games Are Important to Child Growth</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Why Games Are Important to Child Growth</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='authors']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>showAddFormButton</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>firstName</td>
-	<td>Lily</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>lastName</td>
-	<td>Librarian</td>
+	<td>Johnson</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -140,63 +230,218 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Edit Lily Librarian to add title</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
-	<td>Librarian, Lily</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>MonikerSelectAlt</td>
-	<td>Associate Librarian</td>
+	<td>firstName</td>
+	<td>Jane</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Zink</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Zoe</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that account was created</td>
+	<td class="comment">Add no co-author(s) for chapter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add no co-author(s) for conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify co-authors reflected properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Co-Author Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Co-Investigator Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Co-Author Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Person Level Visualization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Librarian, Lily</td>
+	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Associate Librarian</td>
+	<td>Associate Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO profile | Co-author network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4&nbsp;&nbsp;&nbsp;Joint Publication(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>3&nbsp;&nbsp;&nbsp;Joint Co-author(s)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publications per year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2001 	1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2003 	1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2005 	1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2009 	1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Co-authors</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Smith, Sally</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Johnson, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Zink, Zoe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify that there are no co-investigators yet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Co-Investigator Network</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person Level Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>no_coinvestigations</td>
 	<td></td>
 </tr>
 <tr>
