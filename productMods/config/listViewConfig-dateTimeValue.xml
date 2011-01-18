@@ -9,10 +9,11 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?dateTime (afn:localname(?dateTimePrecision) AS ?precision) WHERE {
+        SELECT DISTINCT ?dateTimeValue (afn:localname(?dateTimeValue) AS ?dateTimeValueName) 
+                        (afn:localname(?dateTimePrecision) AS ?precision) ?dateTime  WHERE {
             GRAPH ?g1 { ?subject ?property ?dateTimeValue } 
-            GRAPH ?g2 { ?dateTimeValue core:dateTime ?dateTime ;
-                                       core:dateTimePrecision ?dateTimePrecision . }
+            OPTIONAL { GRAPH ?g2 { ?dateTimeValue core:dateTime ?dateTime } }
+            OPTIONAL { GRAPH ?g3 { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision } }
         }  
     </query>
     

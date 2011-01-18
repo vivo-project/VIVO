@@ -4,4 +4,9 @@
 
 <#import "lib-datetime.ftl" as dt>
 
-${dt.formatXsdDateTimeLong(statement.dateTime, statement.precision)}
+<#-- No core:dateTime data property assigned. Display a link to the core:DateTimeValue object -->
+<#if ! statement.dateTime??>
+    <a href="${profileUrl(statement.dateTimeValue)}">${localName(statement.dateTimeValue)}</a> (incomplete data)
+<#else>
+    ${dt.formatXsdDateTimeLong(statement.dateTime, statement.precision!)}
+</#if>
