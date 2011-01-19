@@ -163,12 +163,14 @@ public class EntityGrantCountRequestHandler implements
 			VitroRequest vitroRequest, String entityURI) {
 		
         Portal portal = vitroRequest.getPortal();
+        String visualization = "ENTITY_GRANT_COUNT";
         String standaloneTemplate = "entityComparisonErrorActivator.ftl";
         
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
         body.put("title", "Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
+        body.put("visualization", visualization);
         
         return new TemplateResponseValues(standaloneTemplate, body);
 
