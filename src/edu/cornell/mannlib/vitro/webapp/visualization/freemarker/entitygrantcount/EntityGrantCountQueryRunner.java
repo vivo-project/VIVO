@@ -215,6 +215,13 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "UNION "
 		+ "{ "
+		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
+		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
+		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
+		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ "UNION "
+		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
@@ -225,6 +232,12 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ "UNION "
+		+ "{ "
+		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
+		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
+		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"		
 		+ " } ";
 		
 		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);

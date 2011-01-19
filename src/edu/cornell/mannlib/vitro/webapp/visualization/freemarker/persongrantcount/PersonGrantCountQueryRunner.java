@@ -157,7 +157,23 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 									
 									
 							+		"} "	
+							
+							+		"UNION "
+							
+							+		"{ "
+							        	
+							+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
 
+							+			"?Role core:roleIn ?Grant . "
+
+							+			"?Grant rdfs:label ?GrantLabel . "	
+
+							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
+											
+							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "	
+									
+									
+							+		"} "	
 
 							+ "} ";
 		
