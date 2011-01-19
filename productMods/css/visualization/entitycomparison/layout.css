@@ -13,17 +13,25 @@
 }
 
 a.temporalGraphLinks {
-    margin-top: 10px;
     /*float:right;*/
-    height: 20px;
-    text-decoration: none;
-    width: 30%;
-    /*margin: 0 1% 0 1%;*/  
-    background-color: #EAEAEA;
-    text-align: center;
-    padding: 3px;
-    padding-top: 4px;
+    background-color: #2485AE;
+    color: white;
     cursor: pointer;
+    font-weight: bold;
+    height: 20px;
+    margin-top: 10px;
+    padding: 4px 3px 3px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#paginated-table-footer {
+    margin-top: 10px;
+    text-align: right;
+}
+
+#legend-row-header a {
+    background-color: #878787;
 }
 
 #reset-search {
@@ -98,6 +106,8 @@ a.temporalGraphLinks {
 .small-arrows {
     font-size: 0.9em;
     padding: 0 !important;
+    text-decoration: none;
+    vertical-align: top;
 }
 
 #header-entity-label {

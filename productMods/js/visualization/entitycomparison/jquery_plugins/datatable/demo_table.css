@@ -1,25 +1,36 @@
 @CHARSET "UTF-8";
 
 .filterInfo {
-    /*font-size: 0.9em;*/
-    display: inline-block;
+    float:left;
+    margin-top: 15px;
+}
+
+.filterInfo div {
+    font-weight: bold;
 }
 
 .paginate_button {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 .paginatedtabs {
 /*  border-top: 1px #3D454E solid; 
     text-align: center;*/
     margin-bottom: 10px;
-    padding-top: 10px;
     font-size: 0.9em;
+    /*display: inline-block;*/
+    float:right;
+    margin-top: 15px;
 }
 
 .paginatedtabs span {
     padding-right: 5px; 
     cursor: pointer;
+    color: #2485AE;
+}
+
+.paginate-nav-text {
+    text-decoration: underline;
 }
 
 .datatablewrapper td, th {
@@ -39,6 +50,10 @@
 .searchbar {
     margin-bottom: -10px;
     text-align: left;
+}
+
+.table-separator {
+    clear: both;
 }
 
 .datatablewrapper th {
