@@ -19,15 +19,15 @@
                                ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
                        GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
             }
-            OPTIONAL { GRAPH ?g7 { ?role rdfs:label ?roleLabel } }
-            OPTIONAL { GRAPH ?g8 { ?role a ?roleType } 
-                       GRAPH ?g9 { ?roleType rdfs:label ?roleTypeLabel }
+            OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g6 { ?role a ?roleType } 
+                       GRAPH ?g7 { ?roleType rdfs:label ?roleTypeLabel }
             }
-            OPTIONAL { GRAPH ?g9 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                                               ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { GRAPH ?g8 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:end ?dateTimeEndValue .
+                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue .
                                                ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
