@@ -4,33 +4,61 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>    
+        <query-base>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?subclass ?position (afn:localname(?position) AS ?positionName)
-                        ?positionTitle ?person ?personName ?dateTimeStart ?dateTimeEnd WHERE {
+        SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName)                        
+                        ?positionTitle 
+                        ?person ?personName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?position } 
+            OPTIONAL { GRAPH ?g2 { ?position core:positionForPerson ?person }
+                       GRAPH ?g3 { ?person rdfs:label ?personName }  
+            }                        
+            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
+            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                       }
+            }
+        } ORDER BY ?personName
+    </query-base>
+    
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?position (afn:localname(?position) AS ?positionName)
+                        ?positionTitle 
+                        ?person ?personName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?position } 
             OPTIONAL { GRAPH ?g2 { ?position core:positionForPerson ?person }
                        GRAPH ?g3 { ?person rdfs:label ?personName }  
             }                 
             OPTIONAL { GRAPH ?g4 { ?position a ?subclass }
-                      GRAPH ?g5 { ?subclass rdfs:subClassOf core:Position }
-                      FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                              ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+                       GRAPH ?g5 { ?subclass rdfs:subClassOf core:Position }
+                       FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                               ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
             }         
             OPTIONAL { GRAPH ?g6 { ?position rdfs:label ?positionTitle } }
             OPTIONAL { GRAPH ?g7 { ?position core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g9 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                              ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g11 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                        }
             }
         } ORDER BY ?subclass ?personName
-    </query>
+    </query-collated>
     
     <template>propStatement-organizationForPosition.ftl</template>
 </list-view-config>

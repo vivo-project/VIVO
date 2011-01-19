@@ -4,28 +4,61 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>    
+    <query-base>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName)
-                        ?positionTitle ?org ?orgName ?dateTimeStart ?dateTimeEnd WHERE {
+        SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName) 
+                        ?positionTitle
+                        ?org ?orgName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?position } 
             OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
                        GRAPH ?g3 { ?org rdfs:label ?orgName }
             }
             OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
             OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g7 { ?dateTimeInterval core:end ?dateTimeEndValue .   
-                                              ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }   
+                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                        }
             }
         } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
-    </query>
-    
+    </query-base>
+ 
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?position (afn:localname(?position) AS ?positionName) 
+                        ?positionTitle                       
+                        ?org ?orgName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?position } 
+            OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
+                       GRAPH ?g3 { ?org rdfs:label ?orgName }
+            }
+            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
+            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }   
+                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                       }
+            }
+            OPTIONAL { GRAPH ?g8 { ?position a ?subclass }
+                       GRAPH ?g9 { ?subclass rdfs:subClassOf core:Position }
+                       FILTER (?g9 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                               ?g9 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+            } 
+        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
+    </query-collated>
+       
     <template>propStatement-personInPosition.ftl</template>
 </list-view-config>

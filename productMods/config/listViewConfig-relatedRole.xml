@@ -4,13 +4,14 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>    
+    <query-base>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)
-                        ?roleLabel ?roleTypeLabel ?indivInRole ?indivName 
+                        ?roleLabel ?roleTypeLabel 
+                        ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
             OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
@@ -24,15 +25,52 @@
                        GRAPH ?g7 { ?roleType rdfs:label ?roleTypeLabel }
             }
             OPTIONAL { GRAPH ?g8 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g9 { ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       OPTIONAL { GRAPH ?g9  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g10 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                               ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g12 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
         } ORDER BY ?indivName ?roleLabel ?roleTypeLabel
-    </query>
-    
+    </query-base>
+
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?role (afn:localname(?role) AS ?roleName)
+                        ?roleLabel ?roleTypeLabel 
+                        ?indivInRole ?indivName 
+                        ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?role } 
+            OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
+                       GRAPH ?g3 { ?role ?roleProp ?indivInRole }
+                       FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                               ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
+                       GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
+            }
+            OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g6 { ?role a ?roleType } 
+                       GRAPH ?g7 { ?roleType rdfs:label ?roleTypeLabel }
+            }
+            OPTIONAL { GRAPH ?g8 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g9  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g10 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g12 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       }
+            }
+            OPTIONAL { GRAPH ?g13 { ?role a ?subclass }
+                      GRAPH ?g14 { ?subclass rdfs:subClassOf core:Role }
+                      FILTER (?g14 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                              ?g14 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+            }            
+        } ORDER BY ?subclass ?indivName ?roleLabel ?roleTypeLabel
+    </query-collated>
+        
     <template>propStatement-relatedRole.ftl</template>
 </list-view-config>

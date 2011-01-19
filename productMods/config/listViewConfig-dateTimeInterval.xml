@@ -4,7 +4,7 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>     
+    <query-base>     
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
@@ -17,28 +17,28 @@
                         ?dateTimeEnd 
                         ?precisionEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?dateTimeInterval
-                        LET(?intervalName := afn:localname(?dateTimeInterval))
+                        LET (?intervalName := afn:localname(?dateTimeInterval))
             } 
             OPTIONAL { GRAPH ?g2 { ?dateTimeInterval core:start ?valueStart
-                                   LET(?valueStartName := afn:localname(?valueStart))
+                                   LET (?valueStartName := afn:localname(?valueStart))
                        } 
                        OPTIONAL { GRAPH ?g3 { ?valueStart core:dateTime ?dateTimeStart } }
                        OPTIONAL { GRAPH ?g4 { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
-                                              LET(?precisionStart := afn:localname(?dateTimePrecisionStart)) 
+                                              LET (?precisionStart := afn:localname(?dateTimePrecisionStart)) 
                                   } 
                        }
             }                      
             OPTIONAL { GRAPH ?g5 { ?dateTimeInterval core:end ?valueEnd
-                                   LET(?valueEndName := afn:localname(?valueEnd)) 
+                                   LET (?valueEndName := afn:localname(?valueEnd)) 
                        } 
                        OPTIONAL { GRAPH ?g6 { ?valueEnd core:dateTime ?dateTimeEnd } }
                        OPTIONAL { GRAPH ?g7 { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
-                                              LET(?precisionEnd := afn:localname(?dateTimePrecisionEnd)) 
+                                              LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd)) 
                                   } 
                        }
             }
         }  
-    </query>
+    </query-base>
     
     <template>propStatement-dateTimeInterval.ftl</template>
 </list-view-config>

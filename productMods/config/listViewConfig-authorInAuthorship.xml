@@ -4,13 +4,33 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>    
+        <query-base>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?subclass ?authorship (afn:localname(?authorship) AS ?authorshipName) 
-                        ?infoResource ?infoResourceName ?dateTime WHERE {
+        SELECT DISTINCT ?authorship (afn:localname(?authorship) AS ?authorshipName)                        
+                        ?infoResource ?infoResourceName 
+                        ?dateTime WHERE {
+            GRAPH ?g1 { ?subject ?property ?authorship } 
+            OPTIONAL { GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
+                       GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }                                          
+                       OPTIONAL { GRAPH ?g4 { ?infoResource core:dateTimeValue ?dateTimeValue } 
+                                  GRAPH ?g5 { ?dateTimeValue core:dateTime ?dateTime } 
+                       } 
+            }                                                           
+        } ORDER BY DESC(?dateTime) ?infoResourceName   
+    </query-base>
+    
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?authorship (afn:localname(?authorship) AS ?authorshipName) 
+                        ?infoResource ?infoResourceName 
+                        ?dateTime WHERE {
             GRAPH ?g1 { ?subject ?property ?authorship } 
             OPTIONAL { GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
                        GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
@@ -19,12 +39,12 @@
                                   FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
                                           ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
                        }                                            
-                       OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue . 
-                                              ?dateTimeValue core:dateTime ?dateTime . } 
+                       OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue } 
+                                  GRAPH ?g7 { ?dateTimeValue core:dateTime ?dateTime } 
                        } 
             }                                                           
         } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
-    </query>
+    </query-collated>
     
     <template>propStatement-authorInAuthorship.ftl</template>
 </list-view-config>

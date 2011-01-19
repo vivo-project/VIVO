@@ -4,18 +4,20 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>     
+    <query-base>     
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?dateTimeValue (afn:localname(?dateTimeValue) AS ?dateTimeValueName) 
-                        (afn:localname(?dateTimePrecision) AS ?precision) ?dateTime  WHERE {
+        SELECT DISTINCT ?dateTimeValue 
+                        (afn:localname(?dateTimeValue) AS ?dateTimeValueName) 
+                        (afn:localname(?dateTimePrecision) AS ?precision) 
+                        ?dateTime  WHERE {
             GRAPH ?g1 { ?subject ?property ?dateTimeValue } 
             OPTIONAL { GRAPH ?g2 { ?dateTimeValue core:dateTime ?dateTime } }
             OPTIONAL { GRAPH ?g3 { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision } }
         }  
-    </query>
+    </query-base>
     
     <template>propStatement-dateTimeValue.ftl</template>
 </list-view-config>
