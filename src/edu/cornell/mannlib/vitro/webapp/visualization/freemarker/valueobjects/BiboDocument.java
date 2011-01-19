@@ -5,6 +5,10 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 
 /**
@@ -17,7 +21,6 @@ public class BiboDocument extends Individual {
 	private String documentBlurb;
 	private String documentDescription;
 	private String publicationYear;
-	private String publicationYearMonth;
 	private String publicationDate;
 	private String parsedPublicationYear = VOConstants.DEFAULT_PUBLICATION_YEAR;
 
@@ -98,47 +101,43 @@ public class BiboDocument extends Individual {
 	}
 
 	/**
-	 * This method will be called when there is no usable core:year value found
-	 * for the bibo:Document. It will first check & parse core:yearMonth failing
-	 * which it will try core:date
+	 * This method will be called to get the final/inferred year for the publication. 
+	 * The 3 choices, in order, are,
+	 * 		1. parsed year from xs:DateTime object saved in core:dateTimeValue 
+	 * 		2. core:year which was property used in vivo 1.1 ontology
+	 * 		3. Default Publication Year 
 	 * @return
 	 */
 	public String getParsedPublicationYear() {
 		
-		/*
-		 * We are assuming that core:yearMonth has "YYYY-MM" format. This is based 
-		 * off of http://www.w3.org/TR/xmlschema-2/#gYearMonth , which is what
-		 * core:yearMonth points to internally.
-		 * */
-		if (publicationYearMonth != null 
-				&& publicationYearMonth.length() >= VOConstants.NUM_CHARS_IN_YEAR_FORMAT
-				&& isValidPublicationYear(publicationYearMonth.substring(
-													0,
-													VOConstants.NUM_CHARS_IN_YEAR_FORMAT))) {
+		if (publicationDate != null) { 
 			
-			return publicationYearMonth.substring(0, VOConstants.NUM_CHARS_IN_YEAR_FORMAT); 
+			DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateHourMinuteSecond();
 			
+			try {
+				DateTime dateTime = dateTimeFormat.parseDateTime(publicationDate);
+				return String.valueOf(dateTime.getYear());
+			} catch (Exception e) {
+				return publicationYear != null ? publicationYear : VOConstants.DEFAULT_PUBLICATION_YEAR;
+			}
+			
+		} else {
+
+			/*
+			 * If all else fails return default unknown year identifier if publicationYear is
+			 * not mentioned.
+			 * */
+			return publicationYear != null ? publicationYear : VOConstants.DEFAULT_PUBLICATION_YEAR;
 		} 
-		
-		if (publicationDate != null 
-				&& publicationDate.length() >= VOConstants.NUM_CHARS_IN_YEAR_FORMAT
-				&& isValidPublicationYear(publicationDate
-												.substring(0,
-														   VOConstants.NUM_CHARS_IN_YEAR_FORMAT))) {
-			
-			return publicationDate.substring(0, VOConstants.NUM_CHARS_IN_YEAR_FORMAT); 
-		}
-		
-		/*
-		 * If all else fails return default unknown year identifier
-		 * */
-		return VOConstants.DEFAULT_PUBLICATION_YEAR;
 	}
 
 	/*
 	 * This publicationYear value is directly from the data supported by the ontology. 
 	 * If this is empty only then use the parsedPublicationYear.
+	 * 
+	 * @Deprecated Use getParsedPublicationYear() instead.
 	 * */
+	@Deprecated
 	public String getPublicationYear() {
 		if (publicationYear != null && isValidPublicationYear(publicationYear)) {
 			return publicationYear;
@@ -150,14 +149,6 @@ public class BiboDocument extends Individual {
 
 	public void setPublicationYear(String publicationYear) {
 		this.publicationYear = publicationYear;
-	}
-
-	public String getPublicationYearMonth() {
-		return publicationYearMonth;
-	}
-
-	public void setPublicationYearMonth(String publicationYearMonth) {
-		this.publicationYearMonth = publicationYearMonth;
 	}
 
 	public String getPublicationDate() {

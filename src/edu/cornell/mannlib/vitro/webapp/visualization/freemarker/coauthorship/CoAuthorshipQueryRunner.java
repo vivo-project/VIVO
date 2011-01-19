@@ -376,20 +376,17 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				biboDocument.setDocumentMoniker(documentMonikerNode.toString());
 			}
 
-			RDFNode publicationYearNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-			if (publicationYearNode != null) {
-				biboDocument.setPublicationYear(publicationYearNode.toString());
-			}
-			
-			RDFNode publicationYearMonthNode = solution.get(QueryFieldLabels
-																.DOCUMENT_PUBLICATION_YEAR_MONTH);
-			if (publicationYearMonthNode != null) {
-				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
-			}
-			
 			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 			if (publicationDateNode != null) {
 				biboDocument.setPublicationDate(publicationDateNode.toString());
+			}
+
+			/*
+			 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
+			 * */
+			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+			if (publicationYearUsing_1_1_PropertyNode != null) {
+				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
 			}
 			
 			return biboDocument;
@@ -418,11 +415,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") "
 			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") "
 			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") "
-			+ "		(str(?publicationYear) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR + ") "
-			+ "		(str(?publicationYearMonth) as ?" 
-						+ QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH + ") " 
-			+ "		(str(?publicationDate) as ?" 
-						+ QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") " 
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") "
 			+ "WHERE { "
 			+ "<" + queryURI + "> rdf:type foaf:Person ;" 
 								+ " rdfs:label ?authorLabel ;" 
@@ -433,9 +427,9 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . " 
 			+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . " 
 			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . "
-			+ "OPTIONAL {  ?document core:year ?publicationYear } . " 
-			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } . " 
-			+ "OPTIONAL {  ?document core:date ?publicationDate } . "  
+			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . " 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
+			+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } ." 
 			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . " 
 			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . " 
 			+ "OPTIONAL {  ?document vitro:description ?documentDescription } " 

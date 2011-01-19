@@ -52,21 +52,20 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 	private Log log;
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
-			+ "SELECT (str(?authorLabel) as ?authorLabelLit) " 
-			+ "		(str(?document) as ?documentLit) " 
-			+ "		(str(?documentMoniker) as ?documentMonikerLit) " 
-			+ "		(str(?documentLabel) as ?documentLabelLit) " 
-			+ "		(str(?documentBlurb) as ?documentBlurbLit) " 
-			+ "		(str(?publicationYear) as ?publicationYearLit) " 
-			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) " 
-			+ "		(str(?publicationDate) as ?publicationDateLit) " 
-			+ "		(str(?documentDescription) as ?documentDescriptionLit) ";
+			+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") " 
+			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") " 
+			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") " 
+			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") " 
+			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") " 
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") "
+			+ "		(str(?documentDescription) as ?" + QueryFieldLabels.DOCUMENT_DESCRIPTION + ") ";
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
 			+ "?document rdfs:label ?documentLabel ." 
-			+ "OPTIONAL {  ?document core:year ?publicationYear } ." 
-			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } ." 
-			+ "OPTIONAL {  ?document core:date ?publicationDate } ." 
+			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . " 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
+			+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } ." 
 			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } ." 
 			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." 
 			+ "OPTIONAL {  ?document vitro:description ?documentDescription }";
@@ -111,21 +110,17 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 				biboDocument.setDocumentDescription(documentDescriptionNode.toString());
 			}
 
-			RDFNode publicationYearNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-			if (publicationYearNode != null) {
-				biboDocument.setPublicationYear(publicationYearNode.toString());
-			}
-			
-			RDFNode publicationYearMonthNode = solution.get(
-													QueryFieldLabels
-															.DOCUMENT_PUBLICATION_YEAR_MONTH);
-			if (publicationYearMonthNode != null) {
-				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
-			}
-			
 			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 			if (publicationDateNode != null) {
 				biboDocument.setPublicationDate(publicationDateNode.toString());
+			}
+
+			/*
+			 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
+			 * */
+			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+			if (publicationYearUsing_1_1_PropertyNode != null) {
+				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
 			}
 			
 			/*
@@ -170,6 +165,8 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
 							+ "}";
 
+//		System.out.println(sparqlQuery);
+		
 		return sparqlQuery;
 	}
 

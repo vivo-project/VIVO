@@ -140,9 +140,13 @@ var organizationLabel = '${organizationLabel}';
                 updateCounter();                
             }
         });
+        
+        //console.log("parse jaon", jQuery.parseJSON(jsonString));
                             
         //parse the json object and pass it to loadData
         jsonObject.prepare(jQuery.parseJSON(jsonString));
+        
+        //console.log(jsonObject);
         
         function performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox) {
             
@@ -198,14 +202,6 @@ var organizationLabel = '${organizationLabel}';
             prepareTableForDataTablePagination(jsonData);
             setEntityLevel();
         
-                    /*
-                        calcMinandMaxYears(labelToEntityRecord, year);
-                        yearRange = (year.max - year.min);
-        
-                        setLineWidthAndTickSize(yearRange, FlotOptions);     
-                        setTickSizeOfYAxis(calcMaxOfComparisonParameter(labelToEntityRecord), FlotOptions);
-                    */
-        
             $(".disabled-checkbox-event-receiver").live("click", function () {
         
                 if ($(this).next().is(':disabled')) {
@@ -252,7 +248,7 @@ var organizationLabel = '${organizationLabel}';
         */      
         $.each($("input.if_clicked_on_school"), function(index, checkbox) {
                 
-                    if (index > 2) {
+                    if (index > 0) {
                         return false;
                     }
                 

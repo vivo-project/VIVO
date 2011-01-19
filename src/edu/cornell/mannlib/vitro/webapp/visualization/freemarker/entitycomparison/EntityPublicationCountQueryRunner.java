@@ -52,18 +52,17 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
 			+ "		(str(?Document) as ?documentLit) "
 			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
-			+ "		(str(?publicationYear) as ?publicationYearLit) "
-			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) "
-			+ "		(str(?publicationDate) as ?publicationDateLit) "
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") "
 			+ "		(str(?StartYear) as ?StartYearLit)";
 
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
 			+ "?Document rdf:type bibo:Document ;"
 			+ " rdfs:label ?DocumentLabel ."
-			+ "OPTIONAL {  ?Document core:year ?publicationYear } ."
-			+ "OPTIONAL {  ?Document core:yearMonth ?publicationYearMonth } ."
-			+ "OPTIONAL {  ?Document core:date ?publicationDate } ."
+			+ "OPTIONAL {  ?Document core:dateTimeValue ?dateTimeValue . " 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
+			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." 
 			+ "OPTIONAL {  ?SecondaryPosition core:startYear ?StartYear } .";
 
 	private static String ENTITY_LABEL;
@@ -114,26 +113,17 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					biboDocument.setDocumentLabel(documentLabelNode.toString());
 				}
 
-				RDFNode publicationYearNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-				if (publicationYearNode != null) {
-					biboDocument.setPublicationYear(publicationYearNode
-							.toString());
-				}
-
-				RDFNode publicationYearMonthNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
-				if (publicationYearMonthNode != null) {
-					biboDocument
-							.setPublicationYearMonth(publicationYearMonthNode
-									.toString());
-				}
-
-				RDFNode publicationDateNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+				RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {
-					biboDocument.setPublicationDate(publicationDateNode
-							.toString());
+					biboDocument.setPublicationDate(publicationDateNode.toString());
+				}
+
+				/*
+				 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
+				 * */
+				RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+				if (publicationYearUsing_1_1_PropertyNode != null) {
+					biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
 				}
 
 			}

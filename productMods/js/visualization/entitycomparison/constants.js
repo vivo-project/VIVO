@@ -30,11 +30,13 @@ var colorConstantQueue = [ DARK_BLUE, DARK_TURQUOISE,
 
 var freeColors = colorConstantQueue.slice();
 
+var globalDateObject = new Date();
+
 var year = {
-		min: 1998,
-		max: 2018,
-		globalMin: 1995,
-		globalMax: 2025
+		min: globalDateObject.getFullYear() - 10,
+		max: globalDateObject.getFullYear(),
+		globalMin: globalDateObject.getFullYear() - 10,
+		globalMax: globalDateObject.getFullYear()
 };
 
 var colors = {};

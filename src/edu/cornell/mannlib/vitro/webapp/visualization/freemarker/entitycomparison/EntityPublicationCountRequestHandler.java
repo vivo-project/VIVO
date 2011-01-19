@@ -198,11 +198,12 @@ public class EntityPublicationCountRequestHandler implements
 					.entrySet()) {
 
 				List<Integer> currentPubYear = new ArrayList<Integer>();
-				if (pubEntry.getKey().equals(
-						VOConstants.DEFAULT_PUBLICATION_YEAR))
+				if (pubEntry.getKey().equals(VOConstants.DEFAULT_PUBLICATION_YEAR)) {
 					currentPubYear.add(-1);
-				else
+				} else {
 					currentPubYear.add(Integer.parseInt(pubEntry.getKey()));
+				}
+					
 				currentPubYear.add(pubEntry.getValue());
 				yearPubCount.add(currentPubYear);
 			}

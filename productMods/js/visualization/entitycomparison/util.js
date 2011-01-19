@@ -284,9 +284,7 @@ function unStuffZerosFromLineGraphs(jsonObject, year) {
 	calcZeroLessMinAndMax(jsonObject, year);
 	var currentMinYear = year.globalMin, currentMaxYear = year.globalMax;
 
-	$
-	.each(
-			jsonObject,
+	$.each(jsonObject,
 			function(key, val) {
 				var i = 0;
 				for (i = 0; i < val.data.length; i++) {
@@ -335,19 +333,21 @@ function unStuffZerosFromLineGraph(jsonObject) {
  * @returns jsonObject with stuffed data points.
  */
 function stuffZerosIntoLineGraphs(jsonObject, year) {
-
+	
 	calcZeroLessMinAndMax(jsonObject, year);
 
 	var arrayOfMinAndMaxYears = [ year.globalMin, year.globalMax ];
 
-	$
-	.each(
-			jsonObject,
+	$.each(jsonObject,
 			function(key, val) {
 				var position = arrayOfMinAndMaxYears[0], i = 0;
+				
+				//console.log(key, val, position, (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1);
 
 				for (i = 0; i < (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1; i++) {
 
+					//console.log("val.data[i]", val.data[i]);
+					
 					if (val.data[i]) {
 
 						if (val.data[i][0] != position
@@ -362,6 +362,8 @@ function stuffZerosIntoLineGraphs(jsonObject, year) {
 					position++;
 				}
 			});
+	
+	//console.log("after stuffing", jsonObject);
 }
 /**
  * During runtime, when the user checks/unchecks a checkbox, the zeroes have to
@@ -375,36 +377,27 @@ function stuffZerosIntoLineGraphs(jsonObject, year) {
  */
 function calcZeroLessMinAndMax(jsonObject, year) {
 
-	var globalMinYear = 5000, globalMaxYear = 0, minYear, maxYear, i = 0;
+	var validYearsInData = new Array();
 
 	$.each(jsonObject, function(key, val) {
 
 		for (i = 0; i < val.data.length; i++) {
-			if (val.data[i][1] != 0) {
-				minYear = val.data[i][0];
-				break;
-			}
-		}
-
-		for (i = val.data.length - 1; i >= 0; i--) {
-			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
-				maxYear = val.data[i][0];
-				break;
-			}
-
-		}
-		if (globalMinYear > minYear) {
-			globalMinYear = minYear;
-		}
 			
-		if (globalMaxYear < maxYear) {
-			globalMaxYear = maxYear;
+			/*
+			 * TO make sure that,
+			 * 		1. Not to consider years that dont have any counts attached to it.
+			 * 		2. Not to consider unknown years indicated by "-1". 
+			 * */
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				validYearsInData.push(val.data[i][0]);
+			}
 		}
-
+		
 	});
 
-	year.globalMin = globalMinYear;
-	year.globalMax = globalMaxYear;
+	year.globalMin = Math.min.apply(Math, validYearsInData);
+	year.globalMax = Math.max.apply(Math, validYearsInData);
+	
 }
 
 /**
@@ -416,86 +409,85 @@ function calcZeroLessMinAndMax(jsonObject, year) {
  * @returns [minYear, maxYear]
  */
 function calcMinandMaxYears(jsonObject, year) {
-	var minYear = 5000, maxYear = 0;
+	
+	var validYearsInData = new Array();
+
 	$.each(jsonObject, function(key, val) {
-		if (minYear > val.data[0][0]) {
-			minYear = val.data[0][0];
-		}
-		if (maxYear < val.data[val.data.length - 1][0]
-		        && val.data[val.data.length - 1][0] != -1){
-			maxYear = val.data[val.data.length - 1][0];
-		}else {
-			if(val.data.length != 1){
-				maxYear = val.data[val.data.length - 2][0];
+
+		for (i = 0; i < val.data.length; i++) {
+			
+			/*
+			 * TO make sure that,
+			 * 		1. Not to consider years that dont have any counts attached to it.
+			 * 		2. Not to consider unknown years indicated by "-1". 
+			 * */
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				validYearsInData.push(val.data[i][0]);
 			}
 		}
+		
 	});
-
-	year.min = minYear;
-	year.max = maxYear;
+	
+	
+	year.min = Math.min.apply(Math, validYearsInData);
+	year.max = Math.max.apply(Math, validYearsInData);
+	
 }
 
 /**
- * y is an an object with two properties label and data. data is of the form
- * [year,value] This function returns the max of all values.
- * 
- * @param {Object}
- *            jsonObject
+ * This function returns the max from the counts of all the entities. Mainly used to 
+ * normalize the width of bar below the line graph, also known as legend row.
+
  * @returns maxCount
  */
-function calcMaxOfComparisonParameter(jsonObject) {
-	var sum = 0, i = 0, maxCount = 0;
+function calcMaxOfComparisonParameter(allEntities) {
 	
-		$.each(jsonObject, function(key, val) {
-			for (i = 0; i < val.data.length; i++)
-				sum += val.data[i][1];
+	var validCountsInData = new Array();
+	
+	$.each(allEntities, function(key, currentEntity) {
+		validCountsInData.push(calcSumOfComparisonParameter(currentEntity));
+	});
 
-			if (maxCount < sum)
-				maxCount = sum;
-
-			sum = 0;
-		});
-
-//	console.log('returning max value' + maxCount);
-	return maxCount;
+	return Math.max.apply(Math, validCountsInData);
 }
 
 function calcMaxWithinComparisonParameter(jsonObject){
 	
-	var value = 0, i = 0, maxCount = 0;
-	
+	var validCountsInData = new Array();
+
 	$.each(jsonObject, function(key, val) {
-		for (i = 0; i < val.data.length; i++){
-			value = val.data[i][1];
-		//	console.log(val.data[i][1]);
-		
-			if (maxCount < value){
-				maxCount = value;
+
+		for (i = 0; i < val.data.length; i++) {
+			
+			/*
+			 * TO make sure that,
+			 * 		1. Not to consider years that dont have any counts attached to it.
+			 * 		2. Not to consider unknown years indicated by "-1". 
+			 * */
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				validCountsInData.push(val.data[i][1]);
 			}
 		}
+		
 	});
 	
-	//console.log('max value: ' + maxCount);
-	return maxCount;
+	return Math.max.apply(Math, validCountsInData);
 }
 
 /**
- * x is an object and it has two properties label and data. data is a two
- * dimensional array of the form [year, value] This function returns the sum of
- * all the values.
- * 
- * @param {Object}
- *            jsonObject
+ * This is used to find out the sum of all the counts of a particular entity. This is
+ * especially useful to render the bars below the line graph where it doesnt matter if
+ * a count has any associated year to it or not.
  * @returns sum{values}.
  */
-function calcSumOfComparisonParameter(jsonObject) {
+function calcSumOfComparisonParameter(entity) {
 
-	var sum = 0, i = 0;
-	for (i = 0; i < jsonObject.data.length; i++) {
-		sum += jsonObject.data[i][1];
-	}
+	var sum = 0;
 
-	// sum += jsonObject.publicationCount;
+	$.each(entity.data, function(index, data){
+		sum += this[1];
+	});
+
 	return sum;
 }
 
@@ -715,7 +707,9 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries,
  * 
  * @jsonRecords the set of entities from which the unknowns have to be removed.
  */
+
 function removeUnknowns(jsonRecords) {
+	
 	var i = 0, j = 0;
 
 	while (j < jsonRecords.length) {
@@ -731,9 +725,11 @@ function removeUnknowns(jsonRecords) {
 		}
 		j++;
 	}
+	
 }
 
 function insertBackUnknowns(jsonRecords) {
+	
 	var i = 0, j = 0;
 
 	while (j < jsonRecords.length) {
@@ -853,7 +849,6 @@ function clearRenderedObjects(){
 			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
 			removeLegendRow(val);
 			displayLineGraphs();
-			//console.log(index);
 		}
 	});
 	
@@ -907,6 +902,7 @@ function prepareTableForDataTablePagination(jsonData){
 	table.attr('border', '0');
 	table.attr('id', 'datatable');
 	table.css('font-size', '0.9em');
+	table.css('width', '100%');
 	
 	var thead = $('<thead>');
 	var tr = $('<tr>');
@@ -1114,7 +1110,7 @@ function checkIfColorLimitIsReached(){
 	
 //	console.log(getSize(labelToCheckedEntities));
 	
-	if(getSize(labelToCheckedEntities) >= 10){
+	if (getSize(labelToCheckedEntities) >= 10) {
 		disableUncheckedEntities();
 	} else {
 		enableUncheckedEntities();
@@ -1130,8 +1126,9 @@ function setTickSizeOfAxes(){
 		checkedLabelToEntityRecord[index] = labelToEntityRecord[index];
 	});
 	
-    calcMinandMaxYears(checkedLabelToEntityRecord, year);
-	yearRange = (year.max - year.min);
+    //calcMinandMaxYears(checkedLabelToEntityRecord, year);
+	//yearRange = (year.max - year.min);
+	yearRange = (year.globalMax - year.globalMin);
 	
     setLineWidthAndTickSize(yearRange, FlotOptions);     
 	setTickSizeOfYAxis(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), FlotOptions);

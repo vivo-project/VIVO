@@ -24,6 +24,7 @@ public class QueryFieldLabels {
 	public static final String DOCUMENT_BLURB = "documentBlurbLit";
 	public static final String DOCUMENT_DESCRIPTION = "documentDescriptionLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR = "publicationYearLit";
+	public static final String DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY = "publicationYearOldLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR_MONTH = "publicationYearMonthLit";
 	public static final String DOCUMENT_PUBLICATION_DATE = "publicationDateLit";
 	
