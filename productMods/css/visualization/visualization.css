@@ -47,13 +47,9 @@ span.incomplete-data-holder,
     text-decoration: underline;
 }
 
-#coauthorship_link_container {
-    display: none;
-}
-
-#coauthorship_link_container,
-#coinvestigator_link_container {
+.collaboratorship-link-container {
     margin-top: 20px;
+    display: none;
 }
 
 .sparkline_text {

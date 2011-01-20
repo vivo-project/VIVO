@@ -13,7 +13,7 @@
 
     <div id="vis_container_coauthor">&nbsp;</div>
     
-    <div id="coauthorship_link_container">
+    <div id="coauthorship_link_container" class="collaboratorship-link-container">
         <div class="collaboratorship-icon">
             <a href="${coAuthorURL}"><img src="${coAuthorIcon}" alt="Co-author Network icon" width="22px" height="23px" /></a>
         </div>
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div id="coinvestigator_link_container">
+    <div id="coinvestigator_link_container" class="collaboratorship-link-container">
         <div class="collaboratorship-icon">
             <a href="${coInvestigatorURL}"><img src="${coInvestigatorIcon}" alt="Co-investigator Network icon" width="22px" height="23px" /></a>
         </div>
@@ -37,6 +37,17 @@
     
     <script type="text/javascript">
         var visualizationUrl = '${individual.visualizationUrl}';
+        
+        $(document).ready(function(){
+        
+            /*
+            Collaboratorship links do not show up by default. They should show up only if there any data to
+            show on that page. 
+            */
+            $("#coinvestigator_link_container").show();
+                            
+        });
+        
     </script>
   
 </#if>

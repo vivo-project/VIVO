@@ -80,6 +80,13 @@ $(document).ready(function(){
                 setProfileName('no_coauthorships_person', $('#ego_label').text());
             }
     </#if>
+    
+    
+    /*
+    Collaboratorship links do not show up by default. They should show up only if there any data to
+    show on that page. 
+    */
+    $("#coinvestigator_link_container").show();
                     
 });
 </script>
@@ -98,10 +105,10 @@ $(document).ready(function(){
     </div>
     
     <div class = "toggle_visualization">
-        <div id="coinvestigator_link_container">
+        <div id="coinvestigator_link_container" class="collaboratorship-link-container">
             <div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}"><img src="${coInvestigatorIcon}" /></a></div>
             <div class="collaboratorship-link">
-	    		<h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3>
+                <h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3>
             </div>
         </div>
     </div>
