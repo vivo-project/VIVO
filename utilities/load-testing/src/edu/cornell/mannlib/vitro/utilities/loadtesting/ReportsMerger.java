@@ -51,7 +51,7 @@ public class ReportsMerger {
 
 	private void produceOutput() {
 		PrintWriter writer = parms.getOutputWriter();
-		new OutputMarshaller(reportData, writer).marshall();
+		new OutputMarshaller2(reportData, writer).marshall();
 		writer.flush();
 		writer.close();
 	}
