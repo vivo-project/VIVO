@@ -150,11 +150,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-						
-			+		"} "
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
 				
 			+		"UNION "
 			
