@@ -48,7 +48,7 @@ a.temporalGraphLinks {
     display: block;
     height: 150px;
     text-align: center;
-    padding-top: 50px;
+    margin-top: 50px;
     position: absolute !important;
 }
 

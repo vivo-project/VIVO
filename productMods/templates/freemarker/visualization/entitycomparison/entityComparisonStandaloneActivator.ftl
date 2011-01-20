@@ -141,13 +141,9 @@ var organizationLabel = '${organizationLabel}';
             }
         });
         
-        //console.log("parse jaon", jQuery.parseJSON(jsonString));
-                            
-        //parse the json object and pass it to loadData
+		//parse the json object and pass it to loadData
         jsonObject.prepare(jQuery.parseJSON(jsonString));
-        
-        //console.log(jsonObject);
-        
+           
         function performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox) {
             
             removeUsedColor(entity);
