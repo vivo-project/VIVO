@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.utilities.loadtesting;
+package edu.cornell.mannlib.vitro.utilities.loadtesting.reportmerger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * A base implementation of ReportsMergerParameters

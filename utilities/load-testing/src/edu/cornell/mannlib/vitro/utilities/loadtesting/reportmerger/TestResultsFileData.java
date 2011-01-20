@@ -1,11 +1,12 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.utilities.loadtesting;
+package edu.cornell.mannlib.vitro.utilities.loadtesting.reportmerger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 
 /**
  * Holds the data that was parsed from a single results file.

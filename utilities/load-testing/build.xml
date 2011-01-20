@@ -215,7 +215,7 @@ report   - Just summarize output from previously run tests.
 		<property name="merge.input.filenames"
 		          value="ver_release1.1.1/SecondTests-rel-1-1-1.html, ver_trunkRdb/SecondTests-rel-1-2.html, ver_trunkSdb/SecondTests-rel-1-2.html" />
 		
-		<java classname="edu.cornell.mannlib.vitro.utilities.loadtesting.ReportsMerger"
+		<java classname="edu.cornell.mannlib.vitro.utilities.loadtesting.reportmerger.ReportsMerger"
 		      fork="yes"
 		      failonerror="true">
 			<classpath location="${build.dir}" />
