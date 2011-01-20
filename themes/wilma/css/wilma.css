@@ -747,6 +747,12 @@ p{
 .button:active {
     top: 1px;
 }
+.blue{
+    color: #2485ae; 
+}
+.green{
+    color: #b2d15a;
+}
 .small.button,
 .small.button:visited {
     font-size: 11px
@@ -772,15 +778,6 @@ p{
 }
 .blue.button:hover {
     background-color: #58a2c1;
-}
-
-/* MISCELLANEOUS ------>  */
-.displace {
-    position: absolute;
-    left: -9999px;
-}
-a {
-    text-decoration: underline
 }
 
 /* ------------------------------------------------->  */
@@ -1105,7 +1102,7 @@ ul#alpha-browse-childClass .count-classes {
 } 
 /* INDIVIDUAL INTRO FOR PERSON ------>  */
 .foaf-person{
-    padding-top: 2.75em;
+    padding-top: .2em;
 }
 /* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
 #individual-intro h1{
@@ -1117,7 +1114,7 @@ ul#alpha-browse-childClass .count-classes {
     color: #5e6363;
     border-left: 1px solid #A6B1B0;
 }
-#individual-intro ul#individual-tools{
+ul#individual-tools{
     color: #8AA149;
 }
 #individual-intro ul.individual-urls li a{
@@ -1127,7 +1124,7 @@ ul#alpha-browse-childClass .count-classes {
 #individual-intro-person{
     border-right: 1px solid #edf0ed;
 }
-/* INDIVIDUAL INTRO LEFT CONTENT ------>  */
+/* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
 #share-contact img.individual-photo{
     border: 7px solid #ebebeb;
 }
@@ -1218,14 +1215,8 @@ ul#individual-areas{
 ul#individual-areas li{
     border-right: 1px solid #A6B1B0;
 }
-ul#individual-areas li:first-child{
-    padding-left: 0;
-}
 ul#individual-areas li:last-child{
     border-right: none;
-}
-ul#individual-areas li{
-    border-right: 1px solid #A6B1B0;
 }
 ul#individual-areas li a{
     color: #2485ae;
@@ -1306,7 +1297,6 @@ article.property h3{
 article.property ul.property-list li.subclass h3 {
     font-size: 1.063em;
     color: #5E6363;
-    background: none;
 }
 article.property .data-property-statement{
     background: #fff;
@@ -1321,15 +1311,16 @@ article.property ul.property-list li a{
     color: #2485ae;
 }
 /* MISCELLANEOUS ------>  */
-.blue{
-    color: #2485ae; 
-}
 .grey{
     color: #5e6363;
 }
-.green{
-    color: #b2d15a;
+.displace {
+    position: absolute;
+    left: -9999px;
 }
-.middle{
+a {
+    text-decoration: underline
+}
+.middle {
     vertical-align: middle;
 }

@@ -11,6 +11,9 @@ input[type="password"]{
     -webkit-border-radius: 5px;
     margin-bottom: 0.8em;
 }
+input.block{
+    margin-bottom: 20px;
+}
 label{
     margin-top: .5em;
 }

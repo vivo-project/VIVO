@@ -7,10 +7,6 @@ body{
     background-color: #f3f3f0;
     background-image: url(../images/header-background.jpg); 
 }
-#wrapper-content{
-    padding-left: 10px;
-    padding-right: 10px;
-}
 #intro h2 { 
     margin-left: 24px; 
 }
@@ -78,4 +74,41 @@ article.individual-foaf-person {
   *float: none !important;
   *display: inline !important;
   *vertical-align: top !important;
+}
+/* Fix for individual pages */
+.thumb-edit-links{
+    margin-top: 147px;
+    margin-right: 10px;
+    z-index: 9999;
+}
+#individual-intro-person{
+    width: 73%;
+}
+#individual-intro{
+    width: 65%;
+}
+#individual-info{
+    width: 90%;  
+}
+#share-contact {
+    width: auto;
+}
+/* Fix for menupages */
+ul#alpha-browse-childClass {
+    width: 545px;
+}
+ul#alpha-browse-childClass a {
+    height: 30px;
+    margin-left: 0;
+    padding-left: 6px;
+    width: 8px;
+}
+#individuals-in-childClass{
+    width: 550px;
+}
+/* Fix for photo upload */
+input#submit, 
+input#submit:visited{
+    padding: 5px 5px 7px;
+    margin-left: -17px;
 }
