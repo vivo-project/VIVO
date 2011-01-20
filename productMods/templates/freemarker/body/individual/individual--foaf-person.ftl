@@ -150,7 +150,7 @@
 ${stylesheets.add("/css/individual/individual.css")}
                            
 <#-- RY Figure out which of these scripts really need to go into the head, and which are needed at all (e.g., tinyMCE??) -->
-${headScripts.add("/js/jquery_plugins/getUrlParam.js",                  
+${headScripts.add("/js/jquery_plugins/getURLParam.js",                  
                   "/js/jquery_plugins/colorAnimations.js",
                   "/js/jquery_plugins/jquery.form.js",
                   "/js/tiny_mce/tiny_mce.js", 
