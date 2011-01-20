@@ -53,8 +53,19 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 						+ "SELECT (str(?PILabel) as ?PILabelLit) "
 						+ "(str(?Grant) as ?grantLit)"
 						+ "(str(?GrantLabel) as ?grantLabelLit)"
-						+ "(str(?GrantStartDate) as ?grantStartDateLit)"
-						+ "(str(?GrantEndDate) as ?grantEndDateLit)" ;
+						+ " (str(?startDateTimeValue) as ?grantStartDateLit) "
+						+ "	(str(?endDateTimeValue) as ?grantEndDateLit)  ";
+	
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK = ""
+		+ 		"OPTIONAL {"	
+		+			"?Grant core:dateTimeInterval ?dateTimeIntervalValue . "		
+		+			"?dateTimeIntervalValue core:start ?startDate . "		
+		+			"?startDate core:dateTime ?startDateTimeValue . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValue core:end ?endDate . "	
+		+				"?endDate core:dateTime ?endDateTimeValue . " 			
+		+			"}"
+		+ 		"}"	;	
 	
 	public PersonGrantCountQueryRunner(String personURI, DataSource dataSource, Log log){
 		
@@ -135,11 +146,10 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+			"?Role core:roleIn ?Grant . "
 
 							+			"?Grant rdfs:label ?GrantLabel . "
-
-							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-											
-							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-							+		"} "
+					
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+							
+							+ 		"} "
 								
 							+		"UNION "
 									
@@ -150,13 +160,10 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+			"?Role core:roleIn ?Grant . "
 
 							+			"?Grant rdfs:label ?GrantLabel . "	
-
-							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-											
-							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "	
-									
-									
-							+		"} "	
+	
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+							
+							+ 		"} "
 							
 							+		"UNION "
 							
@@ -167,17 +174,15 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+			"?Role core:roleIn ?Grant . "
 
 							+			"?Grant rdfs:label ?GrantLabel . "	
-
-							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-											
-							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "	
-									
-									
-							+		"} "	
+							
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+							
+							+ 		"} "
 
 							+ "} ";
 		
 		log.debug("SPARQL query for person grant count -> \n"+ sparqlQuery);
+		System.out.println("SPARQL query for person grant count -> \n"+ sparqlQuery);
 		
 		return sparqlQuery;
 	}

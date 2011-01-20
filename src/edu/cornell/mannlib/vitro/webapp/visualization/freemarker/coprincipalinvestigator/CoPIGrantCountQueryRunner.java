@@ -55,6 +55,17 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 	private UniqueIDGenerator edgeIDGenerator;
 	
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK = ""
+		+ 		"OPTIONAL {"	
+		+			"?Grant core:dateTimeInterval ?dateTimeIntervalValue . "		
+		+			"?dateTimeIntervalValue core:start ?startDate . "		
+		+			"?startDate core:dateTime ?startDateTimeValue . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValue core:end ?endDate . "	
+		+				"?endDate core:dateTime ?endDateTimeValue . " 			
+		+			"}"
+		+ 		"}"	;		
+	
 	public CoPIGrantCountQueryRunner(String egoURI,
 			DataSource dataSource, Log log) {
 
@@ -76,8 +87,8 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+ "		(str(?PILabel) as ?" + QueryFieldLabels.PI_LABEL + ") " 
 			+ "		(str(?Grant) as ?"	+ QueryFieldLabels.GRANT_URL + ") "	
 			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") " 
-			+ "		(str(?GrantStartDate) as ?" + QueryFieldLabels.GRANT_START_DATE + ") "
-			+ "		(str(?GrantEndDate) as ?" + QueryFieldLabels.GRANT_END_DATE + ") "
+			+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
+			+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
 			+ "		(str(?CoPI) as ?" + QueryFieldLabels.CO_PI_URL + ") "
 			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
 			+ "WHERE "
@@ -97,58 +108,34 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-						
-			+		"} "
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
 				
 			+		"UNION "
-					
-			+		"{ "
+
+//			+ "{ "  	
+//			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
+			+  		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant rdfs:label ?GrantLabel ; "
 
-			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
-
-			+			"?CoPI rdfs:label ?CoPILabel .	"
-
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-					
-			+		"} "	
-
-			+		"UNION "
-			
-			+		"{ "
-			        	
-			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
-
-			+			"?Role core:roleIn ?Grant . "
-
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
 			+			"core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-					
-			+		"} "	
-
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
+			
 			+		"UNION "
-
+					
 			+  		"{ "
 			        	
 			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
@@ -166,8 +153,49 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
 							
 			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-
+						
 			+		"} "
+				
+			+		"UNION "
+			
+			
+			+		"{ "
+			        	
+			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+
+			+			"?Role core:roleIn ?Grant . "
+
+			+			"?Grant rdfs:label ?GrantLabel ; "		
+					
+			+			"core:relatedRole ?RelatedRole . "
+
+			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
+
+			+		"UNION "
+			
+			+		"{ "
+			        	
+			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+
+			+			"?Role core:roleIn ?Grant . "
+
+			+			"?Grant rdfs:label ?GrantLabel ; "		
+					
+			+			"core:relatedRole ?RelatedRole . "
+
+			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
+
+			+			"?CoPI rdfs:label ?CoPILabel .	"
+
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
 				
 			+		"UNION "
 					
@@ -185,16 +213,15 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "		
-			+		"} "
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
 			
 			+		"UNION "
 					
 			+		"{ "
 			        	
-			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
 
 			+			"?Role core:roleIn ?Grant . "
 
@@ -206,10 +233,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "		
-			+		"} "			
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
+			
 			+		"UNION "
 			
 			+		"{ "
@@ -226,10 +253,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "		
-			+		"} "
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "
 			
 			+		"UNION "
 			
@@ -247,15 +273,14 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-							
-			+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "		
-			+		"} "			
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			
+			+ 		"} "			
 			+ "} ";
 
 		log.debug("COPI QUERY - " + sparqlQuery);
 		
-		//System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
+		System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
 		
 		return sparqlQuery;
 	}
