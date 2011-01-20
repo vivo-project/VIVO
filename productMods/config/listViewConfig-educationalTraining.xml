@@ -16,7 +16,7 @@
                         ?dateTimeStart ?dateTimeEnd 
             WHERE {
                 GRAPH ?g1 { ?subject ?property ?edTraining 
-                            LET (?edTrainingName := afn:localName(?edTraining)) 
+                            LET (?edTrainingName := afn:localname(?edTraining)) 
                 }
                 OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org }                                   
                            GRAPH ?g3 { ?org rdfs:label ?orgName } 
@@ -52,7 +52,7 @@
                         ?dateTimeStart ?dateTimeEnd 
             WHERE {
                 GRAPH ?g1 { ?subject ?property ?edTraining 
-                            LET (?edTrainingName := afn:localName(?edTraining)) 
+                            LET (?edTrainingName := afn:localname(?edTraining)) 
                 }
                 OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org }                                 
                            GRAPH ?g3 { ?org rdfs:label ?orgName } 
