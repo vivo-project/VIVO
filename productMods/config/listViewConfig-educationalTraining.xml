@@ -18,22 +18,22 @@
                 GRAPH ?g1 { ?subject ?property ?edTraining 
                             LET (?edTrainingName := afn:localName(?edTraining)) 
                 }
-                OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org .                                   
-                                       ?org rdfs:label ?orgName . } 
+                OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org }                                   
+                           GRAPH ?g3 { ?org rdfs:label ?orgName } 
                 }
-                OPTIONAL { GRAPH ?g3 { ?edTraining core:degreeEarned ?degree } 
-                           OPTIONAL { GRAPH ?g4 { ?degree rdfs:label ?degreeName } }
-                           OPTIONAL { GRAPH ?g5 { ?degree core:abbreviation ?degreeAbbr } }
+                OPTIONAL { GRAPH ?g4 { ?edTraining core:degreeEarned ?degree } 
+                           OPTIONAL { GRAPH ?g5 { ?degree rdfs:label ?degreeName } }
+                           OPTIONAL { GRAPH ?g6 { ?degree core:abbreviation ?degreeAbbr } }
                 }
-                OPTIONAL { GRAPH ?g6 { ?edTraining core:majorField ?majorField } }
-                OPTIONAL { GRAPH ?g7 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
-                OPTIONAL { GRAPH ?g8 { ?edTraining core:supplementalInformation ?info } }
-                OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
-                           OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:start ?dateTimeStartValue }                    
-                                      GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                OPTIONAL { GRAPH ?g7  { ?edTraining core:majorField ?majorField } }
+                OPTIONAL { GRAPH ?g8  { ?edTraining core:departmentOrSchool ?deptOrSchool } }
+                OPTIONAL { GRAPH ?g9  { ?edTraining core:supplementalInformation ?info } }
+                OPTIONAL { GRAPH ?g10 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
+                           OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:start ?dateTimeStartValue }                    
+                                      GRAPH ?g12 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                            }
-                           OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }   
-                                      GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                           OPTIONAL { GRAPH ?g13 { ?dateTimeInterval core:end ?dateTimeEndValue }   
+                                      GRAPH ?g14 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                            }                                       
                 }                                  
          }  ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart)
@@ -54,31 +54,31 @@
                 GRAPH ?g1 { ?subject ?property ?edTraining 
                             LET (?edTrainingName := afn:localName(?edTraining)) 
                 }
-                OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org .                                   
-                                       ?org rdfs:label ?orgName } 
-                           OPTIONAL { GRAPH ?g3 { ?subclass rdfs:subClassOf core:Organization }
-                                      GRAPH ?g4 { ?org a ?subclass } 
-                                      FILTER (?g4 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                                              ?g4 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
+                OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org }                                 
+                           GRAPH ?g3 { ?org rdfs:label ?orgName } 
+                           OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:Organization }
+                                      GRAPH ?g5 { ?org a ?subclass } 
+                                      FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                                              ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
                            }                                           
                 }
-                OPTIONAL { GRAPH ?g5 { ?edTraining core:degreeEarned ?degree } 
-                           OPTIONAL { GRAPH ?g6 { ?degree rdfs:label ?degreeName } }
-                           OPTIONAL { GRAPH ?g7 { ?degree core:abbreviation ?degreeAbbr } }
+                OPTIONAL { GRAPH ?g6 { ?edTraining core:degreeEarned ?degree } 
+                           OPTIONAL { GRAPH ?g7 { ?degree rdfs:label ?degreeName } }
+                           OPTIONAL { GRAPH ?g8 { ?degree core:abbreviation ?degreeAbbr } }
                 }
-                OPTIONAL { GRAPH ?g8 { ?edTraining core:majorField ?majorField } }
-                OPTIONAL { GRAPH ?g9 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
-                OPTIONAL { GRAPH ?g10 { ?edTraining core:supplementalInformation ?info } }
-                OPTIONAL { GRAPH ?g11 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
-                           OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:start ?dateTimeStartValue }                    
-                                      GRAPH ?g13 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                OPTIONAL { GRAPH ?g9  { ?edTraining core:majorField ?majorField } }
+                OPTIONAL { GRAPH ?g10 { ?edTraining core:departmentOrSchool ?deptOrSchool } }
+                OPTIONAL { GRAPH ?g11 { ?edTraining core:supplementalInformation ?info } }
+                OPTIONAL { GRAPH ?g12 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
+                           OPTIONAL { GRAPH ?g13 { ?dateTimeInterval core:start ?dateTimeStartValue }                    
+                                      GRAPH ?g14 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                            }
-                           OPTIONAL { GRAPH ?g14 { ?dateTimeInterval core:end ?dateTimeEndValue }   
-                                      GRAPH ?g15 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                           OPTIONAL { GRAPH ?g15 { ?dateTimeInterval core:end ?dateTimeEndValue }   
+                                      GRAPH ?g16 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                            }                                      
                 }                              
          }  ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart)
     </query-collated>
-       
+    
     <template>propStatement-educationalTraining.ftl</template>
 </list-view-config>
