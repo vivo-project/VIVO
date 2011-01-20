@@ -280,7 +280,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 		log.debug("COPI QUERY - " + sparqlQuery);
 		
-		System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
+		//System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
 		
 		return sparqlQuery;
 	}

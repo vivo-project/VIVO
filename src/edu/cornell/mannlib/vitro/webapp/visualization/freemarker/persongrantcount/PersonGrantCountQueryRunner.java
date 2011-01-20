@@ -182,7 +182,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+ "} ";
 		
 		log.debug("SPARQL query for person grant count -> \n"+ sparqlQuery);
-		System.out.println("SPARQL query for person grant count -> \n"+ sparqlQuery);
+		//System.out.println("SPARQL query for person grant count -> \n"+ sparqlQuery);
 		
 		return sparqlQuery;
 	}

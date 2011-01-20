@@ -247,7 +247,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"		
 		+ " } ";
 		
-		System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
+		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
 		
 		log.debug("\nThe sparql query is :\n" + sparqlQuery);
 		
