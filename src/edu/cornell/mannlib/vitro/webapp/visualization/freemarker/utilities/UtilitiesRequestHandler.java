@@ -110,6 +110,58 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
 											   fieldLabelToOutputFieldLabel);
 
+		} else if (VisualizationFrameworkConstants.ARE_PUBLICATIONS_AVAILABLE_UTILS_VIS_MODE
+						.equalsIgnoreCase(visMode)) {
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			
+			String aggregationRules = "(count(DISTINCT ?document) AS ?numOfPublications)";
+			
+			String whereClause = "<" + individualURI + "> rdf:type foaf:Person ; core:authorInAuthorship ?authorshipNode . \n"
+									+ "?authorshipNode rdf:type core:Authorship ; core:linkedInformationResource ?document .";
+
+			String groupOrderClause = "GROUP BY ?" + QueryFieldLabels.AUTHOR_URL + " \n"; 
+			
+			QueryRunner<ResultSet> numberOfPublicationsQueryHandler = 
+			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
+									aggregationRules,
+									whereClause,
+									groupOrderClause,
+									dataSource, log);
+			
+			Gson publicationsInformation = new Gson();
+			
+			return publicationsInformation.toJson(getNumberOfPublicationsForIndividual(
+					numberOfPublicationsQueryHandler.getQueryResult()));
+				
+		} else if (VisualizationFrameworkConstants.ARE_GRANTS_AVAILABLE_UTILS_VIS_MODE
+						.equalsIgnoreCase(visMode)) {
+
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			
+			String aggregationRules = "(count(DISTINCT ?Grant) AS ?numOfGrants)";
+			
+			String whereClause = "{ <" + individualURI + "> rdf:type foaf:Person ; core:hasCo-PrincipalInvestigatorRole ?Role . \n"
+									+ "?Role core:roleIn ?Grant . }"
+									+ "UNION \n"
+									+ "{ <" + individualURI + "> rdf:type foaf:Person ; core:hasPrincipalInvestigatorRole ?Role . \n"
+									+ "?Role core:roleIn ?Grant . }"
+									+ "UNION \n"
+									+ "{ <" + individualURI + "> rdf:type foaf:Person ; core:hasInvestigatorRole ?Role . \n"
+									+ "?Role core:roleIn ?Grant . }";
+
+			QueryRunner<ResultSet> numberOfGrantsQueryHandler = 
+			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
+									aggregationRules,
+									whereClause,
+									"",
+									dataSource, log);
+			
+			Gson grantsInformation = new Gson();
+			
+			return grantsInformation.toJson(getNumberOfGrantsForIndividual(
+					numberOfGrantsQueryHandler.getQueryResult()));
+				
 		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			
@@ -222,18 +274,6 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 							highestLevelOrganizationQueryHandler.getQueryResult(),
 							fieldLabelToOutputFieldLabel);
 			
-			/*
-			
-			GenericQueryMap highestLevelOrganizationToValues = getHighestLevelOrganizationInformation(
-						highestLevelOrganizationQueryHandler.getQueryResult(),
-						fieldLabelToOutputFieldLabel);
-	
-			Gson highestLevelOrganizationInformation = new Gson();
-			
-			return highestLevelOrganizationInformation.toJson(highestLevelOrganizationToValues);
-			
-			*/
-			
 		} else {
 			
 			ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
@@ -288,9 +328,46 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			}
 		}
 		
-//		return queryResult;
 		return "";
 	}
+	
+	private GenericQueryMap getNumberOfGrantsForIndividual (ResultSet resultSet) {
+
+		GenericQueryMap queryResult = new GenericQueryMap();
+		
+		
+		while (resultSet.hasNext())  {
+			QuerySolution solution = resultSet.nextSolution();
+			
+			RDFNode numberOfGrantsNode = solution.getLiteral("numOfGrants");
+			
+			if (numberOfGrantsNode != null) {
+				queryResult.addEntry("numOfGrants", String.valueOf(numberOfGrantsNode.asLiteral().getInt()));
+			}
+		}
+		
+		return queryResult;
+	}
+	
+	
+	private GenericQueryMap getNumberOfPublicationsForIndividual (ResultSet resultSet) {
+
+		GenericQueryMap queryResult = new GenericQueryMap();
+		
+		
+		while (resultSet.hasNext())  {
+			QuerySolution solution = resultSet.nextSolution();
+			
+			RDFNode numberOfPublicationsNode = solution.getLiteral("numOfPublications");
+			
+				if (numberOfPublicationsNode != null) {
+					queryResult.addEntry("numOfPublications", String.valueOf(numberOfPublicationsNode.asLiteral().getInt()));
+				}
+		}
+		
+		return queryResult;
+	}
+
 	
 	private String getThumbnailInformation(ResultSet resultSet,
 										   Map<String, String> fieldLabelToOutputFieldLabel) {

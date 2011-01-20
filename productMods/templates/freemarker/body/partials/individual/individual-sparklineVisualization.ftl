@@ -40,11 +40,23 @@
         
         $(document).ready(function(){
         
-            /*
-            Collaboratorship links do not show up by default. They should show up only if there any data to
-            show on that page. 
-            */
-            $("#coinvestigator_link_container").show();
+            $.ajax({
+                url: "${urls.base}/visualizationAjax",
+                data: ({vis: "utilities", vis_mode: "SHOW_GRANTS_LINK", uri: '${individual.uri}'}),
+                dataType: "json",
+                success:function(data){
+                
+                    /*
+                    Collaboratorship links do not show up by default. They should show up only if there any data to
+                    show on that page. 
+                    */
+                    if (data.numOfGrants !== undefined && data.numOfGrants > 0) {
+                           $("#coinvestigator_link_container").show();                    
+                    }
+                
+                }
+            });
+
                             
         });
         

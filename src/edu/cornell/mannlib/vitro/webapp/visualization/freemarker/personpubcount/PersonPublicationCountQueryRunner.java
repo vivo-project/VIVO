@@ -52,23 +52,23 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 	private Log log;
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
-			+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") " 
-			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") " 
-			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") " 
-			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") " 
-			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") " 
-			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
-			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") "
-			+ "		(str(?documentDescription) as ?" + QueryFieldLabels.DOCUMENT_DESCRIPTION + ") ";
+			+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
+			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n" 
+			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") \n" 
+			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") \n" 
+			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") \n" 
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") \n"
+			+ "		(str(?documentDescription) as ?" + QueryFieldLabels.DOCUMENT_DESCRIPTION + ") \n";
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
-			+ "?document rdfs:label ?documentLabel ." 
-			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . " 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
-			+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } ." 
-			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } ." 
-			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } ." 
-			+ "OPTIONAL {  ?document vitro:description ?documentDescription }";
+			+ "?document rdfs:label ?documentLabel .\n" 
+			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" 
+			+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } .\n" 
+			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } .\n" 
+			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } .\n" 
+			+ "OPTIONAL {  ?document vitro:description ?documentDescription }\n";
 	
 	public PersonPublicationCountQueryRunner(String personURI,
 			DataSource dataSource, Log log) {
@@ -155,15 +155,15 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 							+ SPARQL_QUERY_COMMON_SELECT_CLAUSE
-							+ "(str(<" + queryURI + ">) as ?authPersonLit) "
-							+ "WHERE { "
-							+ "<" + queryURI + "> rdf:type foaf:Person ;" 
-							+ 					" rdfs:label ?authorLabel ;" 
-							+ 					" core:authorInAuthorship ?authorshipNode .  " 
+							+ "(str(<" + queryURI + ">) as ?authPersonLit)\n "
+							+ "WHERE { \n"
+							+ "<" + queryURI + "> rdf:type foaf:Person ;\n" 
+							+ 					" rdfs:label ?authorLabel \n;" 
+							+ 					" core:authorInAuthorship ?authorshipNode .  \n" 
 							+ "	?authorshipNode rdf:type core:Authorship ;" 
-							+ 					" core:linkedInformationResource ?document . "
+							+ 					" core:linkedInformationResource ?document . \n"
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
-							+ "}";
+							+ "}\n";
 
 //		System.out.println(sparqlQuery);
 		

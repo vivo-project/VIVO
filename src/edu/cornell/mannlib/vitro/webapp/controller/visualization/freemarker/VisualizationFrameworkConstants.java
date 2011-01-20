@@ -84,6 +84,8 @@ public class VisualizationFrameworkConstants {
 	public static final String PERSON_LEVEL_UTILS_VIS_MODE = "PERSON_LEVEL_URL";
 	public static final String COPI_UTILS_VIS_MODE = "COPI_URL";
 	public static final String IMAGE_UTILS_VIS_MODE = "IMAGE_URL";
+	public static final String ARE_PUBLICATIONS_AVAILABLE_UTILS_VIS_MODE = "SHOW_AUTHORSHIP_LINK";
+	public static final String ARE_GRANTS_AVAILABLE_UTILS_VIS_MODE = "SHOW_GRANTS_LINK";
 	public static final String UNIVERSITY_COMPARISON_VIS_MODE = "UNIVERSITY";
 	public static final String SCHOOL_COMPARISON_VIS_MODE = "SCHOOL";
 	public static final String DEPARTMENT_COMPARISON_VIS_MODE = "DEPARTMENT";
