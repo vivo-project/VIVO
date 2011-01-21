@@ -7,17 +7,13 @@
 <section id="individual-intro-person" class="vcard" role="region">
 
     <section id="share-contact" role="region"> 
-        
         <#-- Image -->
-        <@p.imageLinks individual propertyGroups editable "${urls.images}/placeholders/person.thumbnail.jpg" />
-
+        <@p.imageLinks individual propertyGroups namespaces editable "${urls.images}/placeholders/person.thumbnail.jpg" />
+    
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
-                <#assign uriUrl = individual.uri>
-                <#if uriUrl??>
-                    <li role="listitem"><a title="Individual uri" href="${uriUrl}"><img class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" /></a></li>
-                </#if>
-                
+                <li role="listitem"><a title="Individual URI" href="${individual.uri}"><img class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" /></a></li>
+    
                 <#assign rdfUrl = individual.rdfUrl>
                 <#if rdfUrl??>
                     <li role="listitem"><a title="View this individual in RDF format" class="icon-rdf" href="${rdfUrl}">RDF</a></li>
@@ -58,9 +54,9 @@
         </#if>      
                 
         <#-- Links -->  
-        <@p.vitroLinks propertyGroups editable "individual-urls-people" />
+        <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
     </section>
-    
+
     <section id="individual-info" role="region">
         <#if individual.showAdminPanel>
             <#include "individual-adminPanel.ftl">
@@ -73,9 +69,7 @@
             <#else>                
                 <h1 class="fn foaf-person">
                     <#-- Label -->
-                    <#assign label = individual.nameStatement>
-                    ${label.value}
-                    <#-- <@p.editingLinks label label editable /> -->
+                    <@p.label individual editable />
                         
                     <#-- Moniker -->
                     <#if individual.moniker?has_content>
@@ -87,7 +81,7 @@
             <#-- Positions -->
             <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-                <h2>Positions <@p.addLink positions editable /></h2>
+                <h2 id="${positions.localName}">${positions.name?capitalize} <@p.addLink positions editable /></h2>
                 <#if positions.statements?has_content> <#-- if there are any statements -->
                     <ul id ="individual-positions" role="list">
                         <@p.objectPropertyList positions positions.statements positions.template editable />
@@ -102,9 +96,7 @@
         <#-- Research Areas -->
         <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <h2>Research Areas <@p.addLink researchAreas editable /></h2>
-            
-            <#--<@p.addLinkWithLabel researchAreas editable />-->
+            <h2 id="${researchAreas.localName}">${researchAreas.name?capitalize} <@p.addLink researchAreas editable /></h2>
             <#if researchAreas.statements?has_content> <#-- if there are any statements -->                
                 <ul id="individual-areas" role="list">
                     <@p.simpleObjectPropertyList researchAreas editable/>

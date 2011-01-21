@@ -1,6 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- Default VIVO individual profile page template (extends individual.ftl in vitro) -->
+
 <#include "individual-setup.ftl">
 
 <#assign individualProductExtension>
