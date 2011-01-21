@@ -43,6 +43,7 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         
         SELECT DISTINCT ?subclass
                         ?edTraining ?edTrainingName
@@ -56,7 +57,7 @@
                 }
                 OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org }                                 
                            GRAPH ?g3 { ?org rdfs:label ?orgName } 
-                           OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:Organization }
+                           OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf foaf:Organization }
                                       GRAPH ?g5 { ?org a ?subclass } 
                                       FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
                                               ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
