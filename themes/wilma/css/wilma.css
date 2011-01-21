@@ -1125,8 +1125,10 @@ ul#individual-tools{
     border-right: 1px solid #edf0ed;
 }
 /* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
-#share-contact img.individual-photo{
+img.individual-photo{
     border: 7px solid #ebebeb;
+    float: left;
+    margin-right: 20px;
 }
 ul#individual-tools-people{
     border-bottom: 1px solid #e8ece9;
@@ -1208,6 +1210,7 @@ ul#individual-positions li a{
 .individual-overview{
     font-size: 1em;
     padding-right: 10px;
+    padding-top: 10px;
 }
 ul#individual-areas{
     padding-bottom: 24px;
@@ -1222,7 +1225,7 @@ ul#individual-areas li a{
     color: #2485ae;
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
-#publications-visualization{
+#visualization{
     /*border-left: 1px solid #edf0ed;*/
 }
 /* SPARKLINES ------>  */
