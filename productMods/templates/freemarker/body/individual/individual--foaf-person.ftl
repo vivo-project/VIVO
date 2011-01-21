@@ -3,10 +3,6 @@
 <#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
-
-<#if individual.showAdminPanel>
-    <#include "individual-adminPanel.ftl">
-</#if>
     
 <section id="individual-intro-person" class="vcard" role="region">
 
@@ -17,12 +13,14 @@
 
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
-                <#--<li role="listitem"><a class="picto-font picto-uri" href="#">j</a></li>
-                <li role="listitem"><a class="picto-font picto-pdf" href="#">F</a></li>
-                <li role="listitem"><a class="picto-font picto-share" href="#">R</a></li>-->
+                <#assign uriUrl = individual.uri>
+                <#if uriUrl??>
+                    <li role="listitem"><a title="Individual uri" href="${uriUrl}"><img class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" /></a></li>
+                </#if>
+                
                 <#assign rdfUrl = individual.rdfUrl>
                 <#if rdfUrl??>
-                    <li role="listitem"><a class="icon-rdf-people" href="${rdfUrl}">RDF</a></li>
+                    <li role="listitem"><a title="View this individual in RDF format" class="icon-rdf" href="${rdfUrl}">RDF</a></li>
                 </#if>
             </ul>
         </nav>
@@ -64,6 +62,10 @@
     </section>
     
     <section id="individual-info" role="region">
+        <#if individual.showAdminPanel>
+            <#include "individual-adminPanel.ftl">
+        </#if>
+        
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
@@ -73,7 +75,7 @@
                     <#-- Label -->
                     <#assign label = individual.nameStatement>
                     ${label.value}
-                    <@p.editingLinks label label editable />
+                    <#-- <@p.editingLinks label label editable /> -->
                         
                     <#-- Moniker -->
                     <#if individual.moniker?has_content>
@@ -100,8 +102,9 @@
         <#-- Research Areas -->
         <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <#--<h2>Research Areas <@p.addLink researchAreas editing /></h2>  --> 
-            <@p.addLinkWithLabel researchAreas editable />
+            <h2>Research Areas <@p.addLink researchAreas editable /></h2>
+            
+            <#--<@p.addLinkWithLabel researchAreas editable />-->
             <#if researchAreas.statements?has_content> <#-- if there are any statements -->                
                 <ul id="individual-areas" role="list">
                     <@p.simpleObjectPropertyList researchAreas editable/>
@@ -112,7 +115,7 @@
     </section>
 </section>
 
-<section id="publications-visualization" role="region">
+<section id="visualization" role="region">
     <section id="sparklines-publications" role="region">
          <#include "individual-sparklineVisualization.ftl">
     </section>
