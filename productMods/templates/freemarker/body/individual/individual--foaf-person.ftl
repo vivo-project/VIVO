@@ -30,7 +30,7 @@
                     <#list email.statements as statement>
                         <li role="listitem">
                             <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon" /><a class="email" href="mailto:${statement.value}">${statement.value}</a>
-                            <@p.editingLinks email statement editable />
+                            <@p.editingLinks "${email.localName}" statement editable />
                         </li>
                     </#list>
                 </ul>
@@ -46,7 +46,7 @@
                     <#list phone.statements as statement>
                         <li role="listitem">                           
                            <img class ="icon-phone  middle" src="${urls.images}/individual/phoneIcon.gif" alt="phone icon" />${statement.value}
-                            <@p.editingLinks phone statement editable />
+                            <@p.editingLinks "${phone.localName}" statement editable />
                         </li>
                     </#list>
                 </ul>

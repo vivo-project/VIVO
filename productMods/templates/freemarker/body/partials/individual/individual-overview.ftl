@@ -8,7 +8,7 @@
     <#list overview.statements as statement>
         <p class="individual-overview">                   
             ${statement.value}
-            <@p.editingLinks overview statement editable />
+            <@p.editingLinks "${overview.localName}" statement editable />
         </p>
     </#list>
 </#if>
