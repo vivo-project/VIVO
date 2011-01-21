@@ -129,10 +129,10 @@ vertical-align:top;
 /**********
 dateTime
 **********/
-fieldset#dateTime {
-    margin-top: 0.5em;
+fieldset.dateTime label {
+    display: inline;
 }
 
-fieldset#dateTime label {
-    display: inline;
+fieldset.dateTime select {
+    margin-top: 0;
 }
