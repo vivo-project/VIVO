@@ -82,11 +82,9 @@
             <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                 <h2 id="${positions.localName}">${positions.name?capitalize} <@p.addLink positions editable /></h2>
-                <#if positions.statements?has_content> <#-- if there are any statements -->
-                    <ul id ="individual-positions" role="list">
-                        <@p.objectPropertyList positions positions.statements positions.template editable />
-                    </ul>
-                </#if>
+                <ul class="individual-positions" role="list">
+                    <@p.objectProperty positions editable />
+                </ul>
             </#if>
         </header>
          
@@ -96,12 +94,10 @@
         <#-- Research Areas -->
         <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <h2 id="${researchAreas.localName}">${researchAreas.name?capitalize} <@p.addLink researchAreas editable /></h2>
-            <#if researchAreas.statements?has_content> <#-- if there are any statements -->                
-                <ul id="individual-areas" role="list">
-                    <@p.simpleObjectPropertyList researchAreas editable/>
-                </ul>
-            </#if>
+            <h2 id="${researchAreas.localName}">${researchAreas.name?capitalize} <@p.addLink researchAreas editable /></h2>                
+            <ul id="individual-areas" role="list">
+                <@p.objectProperty researchAreas editable "propStatement-simple.ftl" />
+            </ul>
         </#if>
                 
     </section>
@@ -120,12 +116,8 @@
         </header>
         
         <ul role="list">
-            <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Bacall.jpg" /></a></li>
-            <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Bogart.jpg" /></a></li>
-            <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Gable.jpg" /></a></li>
-            <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Grant.jpg" /></a></li>
-            <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Leigh.jpg" /></a></li>
-            <li role="listitem"><a href="#"><img class="co-author" src="${urls.images}/individual/Welles.jpg" /></a></li>
+            <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
+            <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
         </ul>
         
         <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
