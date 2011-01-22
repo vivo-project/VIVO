@@ -65,11 +65,16 @@ span.incomplete-data-holder,
 }
 
 .google-visualization-sparkline-image {
-    border: 1px solid #cfe4ed; 
+    border: 1px solid #cfe4ed;
+    display: block; 
 }
 
 .google-visualization-sparkline-selected {
     background-color: blue;
+    border-spacing: 0;
+    color: gray;
+    font-size: small;
+    padding: 1px;
 }
 
 .visualization-menupage-link {

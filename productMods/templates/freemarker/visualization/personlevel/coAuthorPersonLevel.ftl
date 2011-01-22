@@ -17,6 +17,7 @@
 <#assign googleVisualizationAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coAuthorPersonLevelJavaScript = '${urls.base}/js/visualization/coauthorship/coauthorship-personlevel.js'>
 <#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
+<#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
 
@@ -50,6 +51,8 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 <script type="text/javascript" src="${coAuthorPersonLevelJavaScript}"></script>
 <script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
+
+${scripts.add(visualizationHelperJavaScript)}
 
 
 <#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />

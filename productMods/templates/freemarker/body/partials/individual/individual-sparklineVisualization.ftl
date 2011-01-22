@@ -10,6 +10,7 @@
 <#assign googleJSAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coAuthorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=coauthor'>
 <#assign coInvestigatorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=copi'>
+<#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
     <div id="vis_container_coauthor">&nbsp;</div>
     
@@ -33,7 +34,9 @@
 
     ${stylesheets.add("css/visualization/visualization.css")}
     ${scripts.add(googleJSAPI)}
+    ${scripts.add(visualizationHelperJavaScript)}
     ${scripts.add("/js/visualization/sparkline.js")}
+    ${scripts.add(visualizationHelperJavaScript)}
     
     <script type="text/javascript">
         var visualizationUrl = '${individual.visualizationUrl}';

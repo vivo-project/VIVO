@@ -82,17 +82,6 @@ function getWellFormedURLs(given_uri, type) {
 	}
 }
 
-$.fn.image = function(src, successFunc, failureFunc){
-	return this.each(function(){ 
-		var profileImage = new Image();
-		profileImage.onerror = failureFunc;
-		profileImage.onload = successFunc;
-		profileImage.src = src;
-
-		return profileImage;
-	});
-};
-
 function setProfileImage(imageContainerID, mainImageURL) {
 	
 	if (imageContainerID == "") {

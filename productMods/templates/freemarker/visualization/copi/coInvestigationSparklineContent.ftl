@@ -46,16 +46,67 @@
                 <#else>
          
                 </#if>    
+
+                var visualizationOptions = {
+                    width: 150,
+                    height: 60,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                }
+
+                /* 
+                Test if we want to go for the approach when serving visualizations from a secure site..
+                If "https:" is not found in location.protocol then we do everything normally.
+                */
+                if (location.protocol.indexOf("https") == -1) {
+                    /*
+                    This condition will make sure that the location protocol (http, https, etc) does not have 
+                    for word https in it.
+                    */
                 
-                <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
-                var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
-                sparkline.draw(sparklineDataView, {
-                        width: 150,
-                        height: 60,
-                        showAxisLines: false,
-                        showValueLabels: false,
-                        labelPosition: 'none'
-                });              
+                    <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
+                    var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
+                    sparkline.draw(sparklineDataView, {
+                            width: visualizationOptions.width,
+                            height: visualizationOptions.height,
+                            showAxisLines: false,
+                            showValueLabels: false,
+                            labelPosition: 'none'
+                    });    
+                    
+                } else {
+                
+                    <#-- Prepare data for generating google chart URL. -->
+                    
+                    <#-- If we need to serve data for https:, we have to create an array of values to be plotted. -->
+                    var chartValuesForEncoding = new Array();
+                    
+                    $.each(sparklineDataView.getViewRows(), function(index, value) {
+                        chartValuesForEncoding.push(data.getValue(value, 1));
+                    });
+                    
+                    var chartImageURL = constructVisualizationURLForSparkline(
+                                extendedEncodeDataForChartURL(chartValuesForEncoding, 
+                                                              sparklineDataView.getColumnRange(0).max), 
+                                visualizationOptions);
+
+                    var imageContainer = $(providedSparklineImgTD[0]);
+                    
+                    imageContainer.image(chartImageURL, 
+                            function(){
+                                imageContainer.empty().append(this); 
+                                $(this).addClass("google-visualization-sparkline-image");
+                            },
+                            function(){
+                                // For performing any action on failure to
+                                // find the image.
+                                imageContainer.empty();
+                            }
+                    );
+                
+                }
+                              
                 
                 <#if sparklineVO.shortVisMode>
                 
