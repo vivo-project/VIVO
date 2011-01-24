@@ -99,15 +99,9 @@
                 <@p.objectProperty researchAreas editable "propStatement-simple.ftl" />
             </ul>
         </#if>
-                
     </section>
-</section>
 
-<section id="visualization" role="region">
-    <section id="sparklines-publications" role="region">
-         <#include "individual-sparklineVisualization.ftl">
-    </section>
-    
+    <#include "individual-sparklineVisualization.ftl">    
     <#-- Disable for now until controller sends data -->
     <#--
     <section id="co-authors" role="region">
@@ -123,8 +117,8 @@
         <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
     </section>
     -->
+    
 </section>
-
 <#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
 
 <#-- Property group menu -->
