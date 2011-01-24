@@ -136,6 +136,8 @@ ${headScripts.add("/js/jquery_plugins/getURLParam.js",
                   "/js/jquery_plugins/jquery.form.js",
                   "/js/tiny_mce/tiny_mce.js", 
                   "/js/controls.js",
-                  "/js/toggle.js")}
+                  "/js/toggle.js",
+                  "/js/jquery_plugins/jquery.truncator.js")}
                   
 ${scripts.add("/js/imageUpload/imageUploadUtils.js")}
+${scripts.add("/js/individual/individualUtils.js")}
