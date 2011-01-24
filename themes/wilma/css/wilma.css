@@ -1212,6 +1212,7 @@ ul#individual-positions li a{
     font-size: 1em;
     padding-right: 10px;
     padding-top: 10px;
+    width: 75%;
 }
 ul#individual-areas{
     padding-bottom: 24px;

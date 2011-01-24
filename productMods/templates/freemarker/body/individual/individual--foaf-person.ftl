@@ -58,6 +58,23 @@
     </section>
 
     <section id="individual-info" role="region">
+        <#include "individual-sparklineVisualization.ftl">    
+        <#-- Disable for now until controller sends data -->
+        <#--
+        <section id="co-authors" role="region">
+            <header>
+                <h3><span class="grey">10 </span>Co-Authors</h3>
+            </header>
+
+            <ul role="list">
+                <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
+                <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
+            </ul>
+
+            <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
+        </section>
+        -->
+        
         <#if individual.showAdminPanel>
             <#include "individual-adminPanel.ftl">
         </#if>
@@ -100,23 +117,6 @@
             </ul>
         </#if>
     </section>
-
-    <#include "individual-sparklineVisualization.ftl">    
-    <#-- Disable for now until controller sends data -->
-    <#--
-    <section id="co-authors" role="region">
-        <header>
-            <h3><span class="grey">10 </span>Co-Authors</h3>
-        </header>
-        
-        <ul role="list">
-            <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
-            <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
-        </ul>
-        
-        <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
-    </section>
-    -->
     
 </section>
 <#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
