@@ -14,11 +14,10 @@
                         ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
+            # Works because we don't do inferencing on subclasses, so the only ?roleProp
+            # returned will be the asserted one.
             OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
                        GRAPH ?g3 { ?role ?roleProp ?indivInRole }
-                       # TO DO: Implement this filtering in Java postprocessing
-                       # FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                       #        ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
                        GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
             }
             OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
@@ -41,17 +40,16 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?subclass 
+        SELECT DISTINCT ?subclass
                         ?role (afn:localname(?role) AS ?roleName)
                         ?roleLabel ?roleTypeLabel 
                         ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
+            # Works because we don't do inferencing on subclasses, so the only ?roleProp
+            # returned will be the asserted one.
             OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
                        GRAPH ?g3 { ?role ?roleProp ?indivInRole }
-                       # TO DO: Implement this filtering in Java postprocessing
-                       # FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                       #        ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
                        GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
             }
             OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
@@ -71,6 +69,10 @@
             }            
         } ORDER BY ?subclass ?indivName ?roleLabel ?roleTypeLabel
     </query-collated>
-        
+    
+    <!--
+    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.RelatedRoleDataPostProcessor</postprocessor>
+    -->
+    
     <template>propStatement-relatedRole.ftl</template>
 </list-view-config>
