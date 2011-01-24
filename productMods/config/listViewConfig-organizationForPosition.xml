@@ -24,8 +24,11 @@
                        }
                        OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }
                                   GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+
                        }
-            }
+            # Current positions only: end date is either null or not in the past
+            } FILTER ( !bound(?dateTimeEnd) ||                        
+                       afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
         } ORDER BY ?personName
     </query-base>
     
@@ -56,7 +59,9 @@
                        OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue }
                                   GRAPH ?g11 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
                        }
-            }
+            # Current positions only: end date is either null or not in the past
+            } FILTER ( !bound(?dateTimeEnd) ||                        
+                       afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
         } ORDER BY ?subclass ?personName
     </query-collated>
     
