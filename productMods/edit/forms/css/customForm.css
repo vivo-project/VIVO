@@ -113,6 +113,9 @@ form.customForm a.close:visited {
 form.customForm textarea {
     width: 30%;
 }
+div.acSelection{
+    margin-bottom: 15px;
+}
 
 /* fix bad alignment in IE 6 and 7 
 .or, .cancel{
