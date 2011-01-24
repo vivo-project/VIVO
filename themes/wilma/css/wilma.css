@@ -399,57 +399,6 @@ input.search-home-vivo {
     margin-top: 2px;
 }
 /* BROWSE ------>  */
-#browse {
-    clear: both;
-    width: 920px;
-    margin: 0 auto;
-    border: 1px solid #dfe6e6;
-    background: #f7f9f9;
-    overflow: hidden;
-    padding-bottom: 30px;
-}
-#browse h4 {
-    width: 13%;
-    height: 30px;
-    margin-bottom: 27px;
-    padding-left: 15px;
-    font-weight: normal;
-    line-height: 38px;
-    color: #fff;
-    background: #5e6363;
-    font-size: 20px;
-}
-/* BROWSE CLASS GROUPS ------>  */
-ul#browse-classgroups {
-    float: left;
-    width: 200px;
-    border: 1px solid #dde4e3;
-    border-right: none;
-    background: #f1f2ee;
-    margin-left: 34px;
-    padding: 0 20px 23px 20px;
-    margin-top: 10px;
-    padding-top: 10px;
-}
-ul#browse-classgroups li {
-    display: block;
-    border-bottom: 1px solid #dde4e3;
-    font-size: 18px;
-    width: 200px;
-    height: 35px;
-    line-height: 35px;
-}
-ul#browse-classgroups li:last-child {
-    border-bottom: none
-}
-ul#browse-classgroups a {
-    display: block;
-    padding-left: 15px;
-    width: 200px;
-    height: 35px;
-    color: #5e6363;
-    text-decoration: none;
-}
 ul#browse-classgroups a:hover {
     background: url(../images/arrow.gif) 0 12px no-repeat;
     color: #2ea0cf;
@@ -457,43 +406,6 @@ ul#browse-classgroups a:hover {
 ul#browse-classgroups a.selected {
     color: #2ea0cf;
     background: url(../images/arrow.gif) 0 12px no-repeat;
-}
-ul#browse-classgroups .count-classes {
-    font-size: 14px
-}
-/* BROWSE CLASSES IN CLASS GROUP ------>  */
-#browse-classes {
-    float: left;
-    width: 610px;
-    border: 1px solid #dde6e5;
-    background: #fff;
-    min-height: 230px;
-}
-ul#classgroup-list {
-    float: left;
-    width: 90%;
-    padding: 0 10px 15px 22px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-ul#classgroup-list li {
-    display: block;
-    float: left;
-    width: 100%;
-    border-bottom: 1px solid #dde4e3;
-    font-size: 14px;
-    height: 35px;
-    line-height: 35px;
-}
-ul#classgroup-list li:last-child {
-    border-bottom: none
-}
-ul#classgroup-list a {
-    display: block;
-    padding-left: 15px;
-    height: 35px;
-    color: #5e6363;
-    text-decoration: none;
 }
 ul#classgroup-list a:hover {
     background: url(../images/arrow.gif) 0 12px no-repeat;
@@ -503,30 +415,11 @@ ul#classgroup-list a.selected {
     color: #2ea0cf;
     background: url(../images/arrow.gif) 0 12px no-repeat;
 }
-ul#classgroup-list .count-individuals {
-    font-size: 12px;
-}
-/* VISUALIZATION  ------>  */
-#visual-graph {
-    float: right;
-    width: 270px;
-    height: 270px;
-    position: relative;
-}
-#visual-graph h4 {
-    padding: 20px 0 12px 12px;
-    width: auto;
-    font-size: 18px;
+#visual-graph h5 {
     color: #2485ae;
-    font-weight: normal;
-    background: url(../images/bullet-visual-graph.png) 120px 25px no-repeat;
 }
-#pieViz {
-    position: absolute;
-    top: 0;
-    left: -85px;
-    width: 400px;
-    height: 400px;
+svg text:hover {
+    color: #2EA0CF;
 }
 /* HIGHLIGHTS  ------>  */
 #highlights {

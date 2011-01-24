@@ -1,7 +1,8 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <@widget name="login" include="assets" />
-                       
+<#include "browse-classgroups.ftl">
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,7 +45,7 @@
             
             <@widget name="login" />
             
-            <#include "browse-classgroups.ftl">
+            <@allClassGroups vClassGroups />
         
         <#include "footer.ftl">
     </body>
