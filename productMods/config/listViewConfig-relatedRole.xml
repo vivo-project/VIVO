@@ -9,29 +9,34 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)
+        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)                     
                         ?roleLabel ?roleTypeLabel 
                         ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
-            # Works because we don't do inferencing on subclasses, so the only ?roleProp
+            GRAPH ?g2 { ?role a ?subclass }
+            GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role }
+            # Works because we don't do inferencing on subproperties, so the only ?roleProp
             # returned will be the asserted one.
-            OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
-                       GRAPH ?g3 { ?role ?roleProp ?indivInRole }
-                       GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
-            }
-            OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
-            OPTIONAL { GRAPH ?g6 { ?role a ?roleType } 
-                       GRAPH ?g7 { ?roleType rdfs:label ?roleTypeLabel }
-            }
-            OPTIONAL { GRAPH ?g8 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g9  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g10 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { GRAPH ?g4 { ?roleProp rdfs:subPropertyOf core:roleOf }
+                       GRAPH ?g5 { ?role ?roleProp ?indivInRole }
+                       GRAPH ?g6 { ?indivInRole rdfs:label ?indivName }
+            } 
+            OPTIONAL { GRAPH ?g7 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g8 { ?subclass rdfs:label ?roleTypeLabel } } 
+            OPTIONAL { GRAPH ?g9 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g10  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:end ?dateTimeEndValue }
-                                  GRAPH ?g12 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
-            }
+            }  
+            FILTER (
+               ( ?roleProp != core:investigatorRoleOf || ?subclass = core:InvestigatorRole ) &amp;&amp;
+               ( ?roleProp != core:principalInvestigatorRoleOf || ?subclass = core:PrincipalInvestigatorRole ) &amp;&amp;
+               ( ?roleProp != core:co-PrincipalInvestigatorRoleOf || ?subclass = core:CoPrincipalInvestigatorRole )              
+            )       
         } ORDER BY ?indivName ?roleLabel ?roleTypeLabel
     </query-base>
 
@@ -46,27 +51,29 @@
                         ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
-            # Works because we don't do inferencing on subclasses, so the only ?roleProp
+            GRAPH ?g2 { ?role a ?subclass }
+            GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role }
+            # Works because we don't do inferencing on subproperties, so the only ?roleProp
             # returned will be the asserted one.
-            OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
-                       GRAPH ?g3 { ?role ?roleProp ?indivInRole }
-                       GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
-            }
-            OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
-            OPTIONAL { GRAPH ?g6 { ?role a ?roleType } 
-                       GRAPH ?g7 { ?roleType rdfs:label ?roleTypeLabel }
-            }
-            OPTIONAL { GRAPH ?g8 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g9  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g10 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { GRAPH ?g4 { ?roleProp rdfs:subPropertyOf core:roleOf }
+                       GRAPH ?g5 { ?role ?roleProp ?indivInRole }
+                       GRAPH ?g6 { ?indivInRole rdfs:label ?indivName }
+            } 
+            OPTIONAL { GRAPH ?g7 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g8 { ?subclass rdfs:label ?roleTypeLabel } } 
+            OPTIONAL { GRAPH ?g9 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g10  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:end ?dateTimeEndValue }
-                                  GRAPH ?g12 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
-            OPTIONAL { GRAPH ?g13 { ?role a ?subclass }
-                      GRAPH ?g14 { ?subclass rdfs:subClassOf core:Role }
-            }            
+            FILTER (
+               ( ?roleProp != core:investigatorRoleOf || ?subclass = core:InvestigatorRole ) &amp;&amp;
+               ( ?roleProp != core:principalInvestigatorRoleOf || ?subclass = core:PrincipalInvestigatorRole ) &amp;&amp;
+               ( ?roleProp != core:co-PrincipalInvestigatorRoleOf || ?subclass = core:CoPrincipalInvestigatorRole )              
+            )       
         } ORDER BY ?subclass ?indivName ?roleLabel ?roleTypeLabel
     </query-collated>
     
