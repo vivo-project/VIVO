@@ -16,8 +16,9 @@
             GRAPH ?g1 { ?subject ?property ?role } 
             OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
                        GRAPH ?g3 { ?role ?roleProp ?indivInRole }
-                       FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                               ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
+                       # TO DO: Implement this filtering in Java postprocessing
+                       # FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                       #        ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
                        GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
             }
             OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
@@ -48,8 +49,9 @@
             GRAPH ?g1 { ?subject ?property ?role } 
             OPTIONAL { GRAPH ?g2 { ?roleProp rdfs:subPropertyOf core:roleOf }
                        GRAPH ?g3 { ?role ?roleProp ?indivInRole }
-                       FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                               ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
+                       # TO DO: Implement this filtering in Java postprocessing
+                       # FILTER (?g3 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
+                       #        ?g3 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; )
                        GRAPH ?g4 { ?indivInRole rdfs:label ?indivName }
             }
             OPTIONAL { GRAPH ?g5 { ?role rdfs:label ?roleLabel } }
@@ -66,8 +68,6 @@
             }
             OPTIONAL { GRAPH ?g13 { ?role a ?subclass }
                       GRAPH ?g14 { ?subclass rdfs:subClassOf core:Role }
-                      FILTER (?g14 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                              ?g14 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
             }            
         } ORDER BY ?subclass ?indivName ?roleLabel ?roleTypeLabel
     </query-collated>

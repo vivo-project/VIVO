@@ -34,8 +34,6 @@
                        GRAPH ?g4 { ?person rdfs:label ?personName } 
                        OPTIONAL { GRAPH ?g5 { ?person a ?subclass }
                                   GRAPH ?g6 { ?subclass rdfs:subClassOf foaf:Person }
-                                  FILTER (?g6 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                                          ?g6 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
                        }   
             }                             
         } ORDER BY ?subclass ?rank ?personName   

@@ -59,8 +59,6 @@
                            GRAPH ?g3 { ?org rdfs:label ?orgName } 
                            OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf foaf:Organization }
                                       GRAPH ?g5 { ?org a ?subclass } 
-                                      FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                                              ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
                            }                                           
                 }
                 OPTIONAL { GRAPH ?g6 { ?edTraining core:degreeEarned ?degree } 

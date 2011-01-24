@@ -36,8 +36,6 @@
                        GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
                        OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
                                   GRAPH ?g5 { ?infoResource a ?subclass } 
-                                  FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                                          ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
                        }                                            
                        OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue } 
                                   GRAPH ?g7 { ?dateTimeValue core:dateTime ?dateTime } 

@@ -54,8 +54,6 @@
             }
             OPTIONAL { GRAPH ?g8 { ?position a ?subclass }
                        GRAPH ?g9 { ?subclass rdfs:subClassOf core:Position }
-                       FILTER (?g9 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                               ?g9 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
             } 
         } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
     </query-collated>

@@ -45,8 +45,6 @@
             }
             OPTIONAL { GRAPH ?g4 { ?role a ?subclass }
                        GRAPH ?g5 { ?subclass rdfs:subClassOf core:Role }
-                       FILTER (?g5 != &lt;http://vitro.mannlib.cornell.edu/default/inferred-tbox&gt; &amp;&amp; 
-                               ?g5 != &lt;http://vitro.mannlib.cornell.edu/default/vitro-kb-inf&gt; ) 
             }   
             OPTIONAL { GRAPH ?g6 { ?role rdfs:label ?roleLabel } }
             OPTIONAL { GRAPH ?g7 { ?role core:dateTimeInterval ?dateTimeInterval }
