@@ -1122,13 +1122,14 @@ ul#individual-tools{
 }
 /* INDIVIDUAL INTRO FOR PERSON ------>  */
 #individual-intro-person{
-    border-right: 1px solid #edf0ed;
+    /*border-right: 1px solid #edf0ed;*/
 }
 /* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
 img.individual-photo{
     border: 7px solid #ebebeb;
     float: left;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 ul#individual-tools-people{
     border-bottom: 1px solid #e8ece9;

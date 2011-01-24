@@ -3,6 +3,7 @@
 <#-- Template for sparkline visualization on individual profile page -->
 
 <#if individual.visualizationUrl??>
+<section id="sparklines-publications" role="region">
 
 <#assign coAuthorIcon = '${urls.images}/visualization/co_author_icon.png'>
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
@@ -64,5 +65,6 @@
         });
         
     </script>
+</section>
   
 </#if>

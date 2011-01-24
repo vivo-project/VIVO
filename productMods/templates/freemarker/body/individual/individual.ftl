@@ -6,9 +6,10 @@
 
 <#assign individualProductExtension>
     <#include "individual-overview.ftl">
-    </section> <!-- #individual-info -->
-</section> <!-- #individual-intro -->
+
     <#include "individual-visualization.ftl">
+        </section> <!-- #individual-info -->
+    </section> <!-- #individual-intro -->
 </#assign>
 
 <#include "individual-vitro.ftl">
