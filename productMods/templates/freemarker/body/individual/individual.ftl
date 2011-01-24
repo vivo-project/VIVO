@@ -13,3 +13,7 @@
 </#assign>
 
 <#include "individual-vitro.ftl">
+
+${headScripts.add("/js/jquery_plugins/jquery.truncator.js")}
+
+${scripts.add("/js/individual/individualUtils.js")}
