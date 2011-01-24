@@ -25,6 +25,10 @@ a.temporalGraphLinks {
     text-decoration: none;
 }
 
+a.clear-selected-entities {
+    background-color: #878787;
+}
+
 #paginated-table-footer {
     margin-top: 10px;
     text-align: right;

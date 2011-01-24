@@ -99,10 +99,10 @@ var organizationLabel = '${organizationLabel}';
         
 
         //click event handler for clear button
-        $("a#clear").click(function(){
+        $("a.clear-selected-entities").click(function(){
             clearRenderedObjects();
         }); 
-
+        
         /*
          * When the intra-entity parameters are clicked,
          * update the status accordingly.   
@@ -307,6 +307,7 @@ var organizationLabel = '${organizationLabel}';
                 <div id="paginatedTable"></div>
                 <div id="paginated-table-footer">
                 <a id="csv" href="${TemporalGraphDownloadFile}" class="temporalGraphLinks">Save as CSV</a>
+                <a class="clear-selected-entities temporalGraphLinks">Clear</a>
                 </div>
             </div>
 <#--        
@@ -331,7 +332,7 @@ var organizationLabel = '${organizationLabel}';
             <p class="displayCounter">You have selected <span id="counter">0</span> of a maximum 
             <span id="total">10</span> <span id="entityleveltext"> schools</span> to compare. 
             <span id="legend-row-header"> 
-            <a id="clear" class="temporalGraphLinks">Clear</a>
+            <a class="clear-selected-entities temporalGraphLinks">Clear</a>
             </span>
             </p>
         

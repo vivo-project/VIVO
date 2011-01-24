@@ -97,7 +97,7 @@ var organizationLabel = '${organizationLabel}';
         init(graphContainer);
         
         //click event handler for clear button
-        $("a#clear").click(function(){
+        $("a.clear-selected-entities").click(function(){
             clearRenderedObjects();
         }); 
 
@@ -141,7 +141,7 @@ var organizationLabel = '${organizationLabel}';
             }
         });
         
-		//parse the json object and pass it to loadData
+        //parse the json object and pass it to loadData
         jsonObject.prepare(jQuery.parseJSON(jsonString));
            
         function performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox) {
@@ -304,6 +304,7 @@ var organizationLabel = '${organizationLabel}';
                 <div id="paginatedTable"></div>
                 <div id="paginated-table-footer">
                 <a id="csv" href="${TemporalGraphDownloadFile}" class="temporalGraphLinks">Save as CSV</a>
+                <a class="clear-selected-entities temporalGraphLinks">Clear</a>
                 </div>
             </div>
 <#--        
@@ -328,7 +329,7 @@ var organizationLabel = '${organizationLabel}';
             <p class="displayCounter">You have selected <span id="counter">0</span> of a maximum 
             <span id="total">10</span> <span id="entityleveltext"> schools</span> to compare.
             <span id="legend-row-header"> 
-            <a id="clear" class="temporalGraphLinks">Clear</a>
+            <a class="clear-selected-entities temporalGraphLinks">Clear</a>
             </span>
             </p>
         
