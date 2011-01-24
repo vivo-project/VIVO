@@ -99,7 +99,7 @@
             <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                 <h2 id="${positions.localName}">${positions.name?capitalize} <@p.addLink positions editable /></h2>
-                <ul class="individual-positions" role="list">
+                <ul id="individual-positions" role="list">
                     <@p.objectProperty positions editable />
                 </ul>
             </#if>

@@ -1200,7 +1200,7 @@ h1.fn .preferred-title {
 }
 ul#individual-positions{
     font-size: 1em;
-    list-style: url(../../../images/individual/arrow-green.gif);
+    list-style: url("../../../images/individual/arrow-green.gif");
 }
 ul#individual-positions li{
     line-height: 1.4em;
