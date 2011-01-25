@@ -82,6 +82,8 @@ var jsonString = '${jsonContent}';
 var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 
+var loadingImageLink = contextPath + "/images/visualization/ajax-loader.gif";
+
 /*
 This has to be declared before making a call to GUI event manager JS.
 */
