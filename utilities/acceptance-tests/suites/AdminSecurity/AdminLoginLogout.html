@@ -60,8 +60,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter your email address.</td>
+	<td>verifyTextNotPresent</td>
+	<td>testAdmin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -87,6 +92,21 @@
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>testAdmin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,7 +136,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>You have logged out. </td>
+	<td>You have logged out.</td>
 	<td></td>
 </tr>
 <tr>
@@ -176,7 +196,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>You have logged out. </td>
+	<td>You have logged out.</td>
 	<td></td>
 </tr>
 <tr>
@@ -217,6 +237,41 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index to VIVO Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You have logged out. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please log in to manage content.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 </tbody></table>
