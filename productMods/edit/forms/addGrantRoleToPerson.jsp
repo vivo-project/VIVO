@@ -26,6 +26,8 @@ This is intended to create a set of statements like:
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -50,6 +52,31 @@ This is intended to create a set of statements like:
     }else{
     	%> <c:set var="inversePredicate"></c:set> <%
     }
+    
+    /* 
+    There are 4 modes that this form can be in: 
+     1.  Add, there is a subject and a predicate but no role and nothing else. 
+           
+     2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
+        the other end of the object's core:roleIn stmt. 
+     
+     3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
+        other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
+        
+     4. Really bad node. multiple roleIn statements.
+   */
+
+    EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#roleIn");
+
+    if( mode == EditMode.ADD ) {
+       %> <c:set var="editMode" value="add"/><%
+    } else if(mode == EditMode.EDIT){
+        %> <c:set var="editMode" value="edit"/><%
+    } else if(mode == EditMode.REPAIR){
+        %> <c:set var="editMode" value="repair"/><%
+    }
+   %>
+   
 %>
 
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
@@ -73,20 +100,19 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
  	<c:set var="submitButtonLabel">Investigator</c:set>
  	<c:set var="formHeading">investigator entry for <%= subjectName %></c:set>
  <% } %>
- 
+
+<%-- Configure add vs. edit --%> 
 <c:choose>
-    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
-        <c:set var="formHeading" value="Edit ${formHeading}" />
-        <c:set var="editMode" value="edit" />
-        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
-        <c:set var="labelRequired" value="" />
-        <c:set var="disabledVal" value="disabled" />
-    </c:when>
-    <c:otherwise>
+    <c:when test='${editMode == "add"}'>
         <c:set var="formHeading" value="Create ${formHeading}" />
-        <c:set var="editMode" value="add" />
         <c:set var="labelRequired" value="\"nonempty\"," />
         <c:set var="disabledVal" value="" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="formHeading" value="Edit ${formHeading}" />
+        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
+        <c:set var="labelRequired" value="" />
+        <c:set var="disabledVal">${editMode == "repair" ? "" : "" }</c:set>    
     </c:otherwise>
 </c:choose>
 
@@ -279,6 +305,11 @@ PREFIX core: <${vivoCore}>
 
 <jsp:include page="${preForm}" />
 
+<% if( mode == EditMode.ERROR ){ %>
+ <div>This form is unable to handle the editing of this position because it is associated with 
+      multiple Position individuals.</div>      
+<% }else{ %>
+
 <h2>${formHeading}</h2>
 
 <%@ include file="unsupportedBrowserMessage.jsp" %>
@@ -329,5 +360,7 @@ var customFormData  = {
     typeName: 'Grant'         
 };
 </script>
+
+<% } %>
 
 <jsp:include page="${postForm}"/>

@@ -52,8 +52,10 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -68,6 +70,29 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
+    
+    /*
+    There are 4 modes that this form can be in: 
+     1.  Add, there is a subject and a predicate but no position and nothing else. 
+           
+     2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
+        the other end of the object's core:trainingAtOrganization stmt. 
+     
+     3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
+        other end of the object's core:trainingAtOrganization stmt.  This should be similar to an add but the form should be expanded.
+        
+     4. Really bad node. multiple core:trainingAtOrganization statements.   
+   */
+
+    EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#trainingAtOrganization");
+
+    if( mode == EditMode.ADD ) {
+       %> <c:set var="editMode" value="add"/><%
+    } else if(mode == EditMode.EDIT){
+        %> <c:set var="editMode" value="edit"/><%
+    } else if(mode == EditMode.REPAIR){
+        %> <c:set var="editMode" value="repair"/><%
+    }
 %>
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
@@ -435,25 +460,6 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     editConfig.setSubmitToUrl("/edit/processRdfForm2.jsp");
         
     String subjectName = ((Individual) request.getAttribute("subject")).getName();
-%> 
-
-    <c:set var="subjectName" value="<%= subjectName %>" />
-<%
-    if (objectUri != null) { // editing existing entry
-%>
-        <c:set var="editMode" value="edit" />
-        <c:set var="titleVerb" value="Edit" />
-        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
-        <c:set var="submitButtonText" value="Edit Education and Training" />
-        <c:set var="disabledVal" value="disabled" />
-<% 
-    } else { // adding new entry
-%>
-        <c:set var="editMode" value="add" />
-        <c:set var="titleVerb" value="Create" />
-        <c:set var="submitButtonText" value="Education and Training" />
-        <c:set var="disabledVal" value="" />
-<%  } 
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
@@ -468,6 +474,25 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     request.setAttribute("customCss", customCss); 
 %>
 
+<c:set var="subjectName" value="<%= subjectName %>" />
+    
+<%-- Configure add vs. edit --%> 
+<c:choose>
+    <c:when test='${editMode == "add"}'>
+        <c:set var="editMode" value="add" />
+        <c:set var="titleVerb" value="Create" />
+        <c:set var="submitButtonText" value="Education and Training" />
+        <c:set var="disabledVal" value="" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="editMode" value="edit" />
+        <c:set var="titleVerb" value="Edit" />
+        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
+        <c:set var="submitButtonText" value="Edit Education and Training" />
+        <c:set var="disabledVal">${editMode == "repair" ? "" : "" }</c:set>    
+    </c:otherwise>
+</c:choose>
+
 <%-- 
 This goes to an experimental FM based form: 
 <jsp:forward page="/N3EditForm"/> 
@@ -477,6 +502,11 @@ This goes to an experimental FM based form:
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
+
+<% if( mode == EditMode.ERROR ){ %>
+ <div>This form is unable to handle the editing of this position because it is associated with 
+      multiple Position individuals.</div>      
+<% }else{ %>
 
 <h2>${titleVerb} education and training entry for <%= subjectName %></h2>
 
@@ -524,5 +554,7 @@ var customFormData  = {
     defaultTypeName: 'organization'
 };
 </script>
+
+<% } %>
 
 <jsp:include page="${postForm}"/>

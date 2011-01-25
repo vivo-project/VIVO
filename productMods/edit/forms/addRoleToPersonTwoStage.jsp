@@ -40,8 +40,8 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.TitleCase" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -49,11 +49,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
-<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartDateBeforeEndDate"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartDateBeforeEndDate"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 
 <%!
 public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addRoleToPersonTwoStage.jsp");
