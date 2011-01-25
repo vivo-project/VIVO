@@ -40,6 +40,15 @@ a.clear-selected-entities {
     height: 25px;
 }
 
+#loading-comparisons {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#loading-comparisons img {
+    vertical-align: sub;
+} 
+
 #legend-row-header a {
     background-color: #878787;
 }
