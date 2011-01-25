@@ -51,15 +51,22 @@ $(document).ready(function() {
             	
             });
             
+            $("#body").empty().html("Loading " + selectedValue + " ...");
+            
             /*
              * This piece of code is not executed at all because the redirect happens before there is a chance 
              * to render the below contents.
              * */
             
+            /*
+            
             $("#comparisonParameter").text("Total Number of " + selectedValue);
             $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
             $('#yaxislabel').css("color", "#595B5B");
-            $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');      
+            $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
+            
+            
+            */
         
         });
         
