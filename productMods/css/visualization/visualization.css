@@ -24,7 +24,7 @@ span.incomplete-data-holder,
 }
 
 .collaboratorship-link {
-    padding-top: 3px;
+    /*padding-top: 3px;*/
 }
 
 .collaboratorship-link a {
@@ -32,7 +32,7 @@ span.incomplete-data-holder,
 }
 
 .collaboratorship-link h3 {
-    line-height: 1em;
+    line-height: 1em !important;
     font-size: 1em !important;
     margin-bottom: 0px !important;
     padding-top: 0px !important;

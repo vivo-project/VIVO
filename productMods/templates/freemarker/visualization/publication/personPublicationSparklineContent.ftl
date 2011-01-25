@@ -18,20 +18,27 @@
     
             function drawPubCountVisualization(providedSparklineImgTD) {
     
+                var unknownYearPublicationCounts = ${sparklineVO.unknownYearPublications};
+                var onlyUnknownYearPublications = false;
+                
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
                 data.addColumn('number', 'Publications');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
+                
+                var knownYearPublicationCounts = 0;
         
                 <#list sparklineVO.yearToEntityCountDataTable as yearToPublicationCountDataElement>                        
                     data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 0, '${yearToPublicationCountDataElement.year}');
                     data.setValue(${yearToPublicationCountDataElement.yearToEntityCounter}, 1, ${yearToPublicationCountDataElement.currentEntitiesCount});
+                    knownYearPublicationCounts += ${yearToPublicationCountDataElement.currentEntitiesCount};
                 </#list>
         
                 <#-- Create a view of the data containing only the column pertaining to publication count. -->
                 var sparklineDataView = new google.visualization.DataView(data);
                 sparklineDataView.setColumns([1]);
-        
+                
+
                 <#if sparklineVO.shortVisMode>
          
                 <#-- For the short view we only want the last 10 year's view of publication count, hence we filter 
@@ -55,6 +62,16 @@
                     chartType: 'ls',
                     chartLabel: 'r'
                 }
+    
+                /*
+                This means that all the publications have unknown years & we do not need to display
+                the sparkline.
+                */            
+                if (unknownYearPublicationCounts > 0 && knownYearPublicationCounts < 1) {
+                    
+                    onlyUnknownYearPublications = true;
+                    
+                } else {
 
                 /* 
                 Test if we want to go for the approach when serving visualizations from a secure site..
@@ -107,8 +124,11 @@
                     );
                 
                 }
+                
+                }
          
-         
+                var totalPublicationCount = knownYearPublicationCounts + unknownYearPublicationCounts;
+                
                 <#if sparklineVO.shortVisMode>
          
                     <#-- We want to display how many publication counts were considered, so this is used to calculate this. -->
@@ -119,9 +139,14 @@
                         renderedShortSparks += data.getValue(value, 1);
                     });
          
-                    var totalPubs = parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications});
+                    /*
+                    In case that there are only unknown publications we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedShortSparks only hold counts
+                    of publications which have any date associated with it.
+                    */
+                    var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedShortSparks;
                     
-                    if ( totalPubs == 1 ) {
+                    if (totalPubs === 1) {
                         var pubDisplay = "publication";
                     } else {
                         var pubDisplay = "publications";
@@ -130,16 +155,26 @@
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
             
                     var sparksText = ' within the last 10 years';
-            
+                    
+                    if (totalPubs !== totalPublicationCount) {
+                        sparksText += ' (' + totalPublicationCount + ' total)';
+                    }
+             
                  <#else>
             
                     /*
                      * Sparks that will be rendered will always be the one's which has 
                      * any year associated with it. Hence.
                      * */
-                    var renderedSparks = ${sparklineVO.renderedSparks};      
-                    var totalPubs = parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications});
+                    var renderedSparks = ${sparklineVO.renderedSparks};
                     
+                    /*
+                    In case that there are only unknown publications we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedSparks only hold counts
+                    of publications which have any date associated with it.
+                    */
+                    var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
+                          
                     if ( totalPubs == 1 ) {
                         var pubDisplay = "publication";
                     } else {
@@ -149,11 +184,18 @@
                     $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
-                                        + ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
+                                        + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span>';
+
+                    if (totalPubs !== totalPublicationCount) {
+                        sparksText += ' (' + totalPublicationCount + ' total)';
+                    }
+                                                            
+                    sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
                  </#if>
          
-                 $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
+                 if (!onlyUnknownYearPublications) {
+                    $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
+                 }
          
             }
     
@@ -196,10 +238,10 @@
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);
-            		var row2 = $('<tr>');
+                    var row2 = $('<tr>');
                     var sparklineNumberTD = $('<td>');
                     sparklineNumberTD.attr('class', 'sparkline_number');
-					sparklineNumberTD.css('text-align', 'left');
+                    sparklineNumberTD.css('text-align', 'left');
                     row2.append(sparklineNumberTD);
                     var row3 = $('<tr>');
                     
@@ -228,18 +270,18 @@
         
         <#if displayTable?? && displayTable>
         
-	        <p>	
-				<#assign tableID = "publications_sparkline_data_table" />
-				<#assign tableCaption = "Publications per year " />
-				<#assign tableActivityColumnName = "Publications" />
-				<#assign tableContent = sparklineVO.yearToActivityCount />
-				<#assign fileDownloadLink = sparklineVO.downloadDataLink />
-				
-				<#include "yearToActivityCountTable.ftl">
-	
-	            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
-	            <br />
-	        </p>
+            <p> 
+                <#assign tableID = "publications_sparkline_data_table" />
+                <#assign tableCaption = "Publications per year " />
+                <#assign tableActivityColumnName = "Publications" />
+                <#assign tableContent = sparklineVO.yearToActivityCount />
+                <#assign fileDownloadLink = sparklineVO.downloadDataLink />
+                
+                <#include "yearToActivityCountTable.ftl">
+    
+                Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                <br />
+            </p>
         
         
         </#if>
