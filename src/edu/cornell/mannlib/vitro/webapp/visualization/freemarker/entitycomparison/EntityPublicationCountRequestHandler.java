@@ -51,7 +51,7 @@ public class EntityPublicationCountRequestHandler implements
 
 			return prepareStandaloneErrorResponse(vitroRequest,entityURI);
 		
-		} else{
+		} else {
 	
 			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
 					entityURI, dataSource, log);
@@ -141,7 +141,7 @@ public class EntityPublicationCountRequestHandler implements
 			Entity entity, String entityURI, Map<String, Set<String>> subOrganizationTypesResult) {
 
         Portal portal = vreq.getPortal();
-        String standaloneTemplate = "entityComparisonStandaloneActivator.ftl";
+        String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
 		
         String jsonContent = "";
 		jsonContent = writePublicationsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);

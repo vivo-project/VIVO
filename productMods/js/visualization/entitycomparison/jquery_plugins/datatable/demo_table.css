@@ -61,6 +61,8 @@
     background:#F1F2ee; 
     font-weight:bold; 
     font-size:12px;
+    padding-bottom: 3px;
+    padding-top: 3px;
 }
 
 #infoContainer {
