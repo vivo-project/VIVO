@@ -12,6 +12,10 @@
     overflow: hidden;
 }
 
+.easy-deselect-label a.temporal-vis-url {
+    float: right;
+}
+
 a.temporalGraphLinks {
     /*float:right;*/
     background-color: #2485AE;
