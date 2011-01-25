@@ -18,14 +18,20 @@
         
             function drawCoInvestigatorsSparklineVisualization(providedSparklineImgTD) {
     
+                var unknownYearGrantCounts = ${sparklineVO.unknownYearGrants};
+                var onlyUnknownYearGrants = false;
+                
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
                 data.addColumn('number', 'Unique co-investigators');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
+                
+                var knownYearGrantCounts = 0;
         
                 <#list sparklineVO.yearToEntityCountDataTable as yearToUniqueCoinvestigatorsDataElement>                        
                     data.setValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoinvestigatorsDataElement.year}');
                     data.setValue(${yearToUniqueCoinvestigatorsDataElement.yearToEntityCounter}, 1, ${yearToUniqueCoinvestigatorsDataElement.currentEntitiesCount});
+                    knownYearGrantCounts += ${yearToUniqueCoinvestigatorsDataElement.currentEntitiesCount};
                 </#list>
         
                 <#-- Create a view of the data containing only the column pertaining to coinvestigators count. -->
@@ -54,6 +60,16 @@
                     chartType: 'ls',
                     chartLabel: 'r'
                 }
+                
+                /*
+                This means that all the publications have unknown years & we do not need to display
+                the sparkline.
+                */            
+                if (unknownYearGrantCounts > 0 && knownYearGrantCounts < 1) {
+                    
+                    onlyUnknownYearGrants = true;
+                    
+                } else {
 
                 /* 
                 Test if we want to go for the approach when serving visualizations from a secure site..
@@ -106,21 +122,42 @@
                     );
                 
                 }
-                              
+                
+                }
+                 
+                var totalGrantCount = knownYearGrantCounts + unknownYearGrantCounts;              
                 
                 <#if sparklineVO.shortVisMode>
                 
-                	<#-- We want to display how many coinvestigators were considered, so this is used to calculate this. -->
-                	
+                    <#-- We want to display how many coinvestigators were considered, so this is used to calculate this. -->
+                    
                     var shortSparkRows = sparklineDataView.getViewRows();
                     var renderedShortSparks = 0;
                     $.each(shortSparkRows, function(index, value) {
                         renderedShortSparks += data.getValue(value, 1);
                     });      
                     
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearGrants})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> co-investigator(s) <br/></span>");
+                    /*
+                    In case that there are only unknown grants we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedShortSparks only hold counts
+                    of grants which have any date associated with it.
+                    */
+                    var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedShortSparks;
+                    
+                                        
+                    if (totalGrants === 1) {
+                        var grantDisplay = "co-investigator";
+                    } else {
+                        var grantDisplay = "co-investigators";
+                    }
+                    
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
                     var sparksText = '  within the last 10 years';
+                    
+                    if (totalGrants !== totalGrantCount) {
+                        sparksText += ' (' + totalGrantCount + ' total)';
+                    }
             
                  <#else>
                        
@@ -128,15 +165,36 @@
                      * Sparks that will be rendered will always be the one's which has 
                      * any year associated with it. Hence.
                      * */
-                    var renderedSparks = ${sparklineVO.renderedSparks};      
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearGrants})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> co-investigator(s) <br/></span>");
+                    var renderedSparks = ${sparklineVO.renderedSparks};     
+                    
+                    /*
+                    In case that there are only unknown grants we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedSparks only hold counts
+                    of grants which have any date associated with it.
+                    */
+                    var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedSparks;
+                    
+                    if (totalGrants === 1) {
+                        var grantDisplay = "co-investigator";
+                    } else {
+                        var grantDisplay = "co-investigators";
+                    }
+                     
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedGrantYear?c}</span> ' 
-                                        + '<br /> <a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
+                                        + ' to ${sparklineVO.latestRenderedGrantYear?c}</span>';
+                                        
+                    if (totalGrants !== totalGrantCount) {
+                        sparksText += ' (' + totalGrantCount + ' total)';
+                    }
+                    
+                    sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
                  </#if>
 
-                 $('#${sparklineContainerID} td.sparkline_text').html(sparksText).css("font-weight", "bold");    
+                 if (!onlyUnknownYearGrants) {
+                    $('#${sparklineContainerID} td.sparkline_text').html(sparksText).css("font-weight", "bold");
+                 } 
                  
            }
     
@@ -180,16 +238,16 @@
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);
-            		var row2 = $('<tr>');
+                    var row2 = $('<tr>');
                     var sparklineNumberTD = $('<td>');
                     sparklineNumberTD.attr('class', 'sparkline_number');
-					sparklineNumberTD.css('text-align', 'left');
+                    sparklineNumberTD.css('text-align', 'left');
                     row2.append(sparklineNumberTD);
                     var row3 = $('<tr>');
                     
                     var sparklineTextTD = $('<td>');
                     sparklineTextTD.attr('class', 'sparkline_text');
-					sparklineTextTD.css('text-align', 'left');
+                    sparklineTextTD.css('text-align', 'left');
                     row3.append(sparklineTextTD);
                     table.append(row);
                     table.append(row2);
@@ -214,19 +272,19 @@
         <!-- For Full Sparkline - Print the Table of CoInvestigator Counts per Year -->
             <#if displayTable?? && displayTable>
         
-		        <p>	
-					<#assign tableID = "coinve_sparkline_data_table" />
-					<#assign tableCaption = "Unique Co-Investigators per year " />
-					<#assign tableActivityColumnName = "Count" />
-					<#assign tableContent = sparklineVO.yearToActivityCount />
-					<#assign fileDownloadLink = sparklineVO.downloadDataLink />
-					
-					<#include "yearToActivityCountTable.ftl">
-		
-		            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
-		            <br />
-		        </p>
+                <p> 
+                    <#assign tableID = "coinve_sparkline_data_table" />
+                    <#assign tableCaption = "Unique Co-Investigators per year " />
+                    <#assign tableActivityColumnName = "Count" />
+                    <#assign tableContent = sparklineVO.yearToActivityCount />
+                    <#assign fileDownloadLink = sparklineVO.downloadDataLink />
+                    
+                    <#include "yearToActivityCountTable.ftl">
         
-	        </#if>	
+                    Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                    <br />
+                </p>
+        
+            </#if>  
     </#if>
 </div>
