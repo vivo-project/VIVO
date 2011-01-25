@@ -46,7 +46,7 @@ $(document).ready(function() {
             	
                 if (parameter.value === selectedValue) {
                 	selectedParameter = parameter;
-                    //window.location = parameter.viewLink;
+                    window.location = parameter.viewLink;
                 }
             	
             });
