@@ -65,15 +65,26 @@
                 </li>
                 <li>
                     <a href="#ontology">Ontology Upgrade</a>
+                    <ol class="roman2">
+                        <li>
+                            <a href="#verify_ontology_upgrade">Verify Ontology upgrade process</a>
+                        </li>
+                        <li>
+                            <a href="#ontology_knowledge_base">Ontology knowledge base manual review</a>
+                        </li>
+                    </ol>
                 </li>
-                <ol class="roman2">
-                    <li>
-                        <a href="#verify_ontology_upgrade">Verify Ontology upgrade process</a>
-                    </li>
-                    <li>
-                        <a href="#ontology_knowledge_base">Ontology knowledge base manual review</a>
-                    </li>
-                </ol>
+                <li>
+                    <a href="#fileSystem">File Storage System Upgrade</a>
+                    <ol class="roman2">
+                        <li>
+                            <a href="#verify_ontology_upgrade">Changes to the File Storage System</a>
+                        </li>
+                        <li>
+                            <a href="#verify_ontology_upgrade">Verify File Storage System upgrade process</a>
+                        </li>
+                    </ol>
+                </li>
                 <li>
                     <a href="#theme">Theme Modifications</a>
                 </li>
@@ -590,7 +601,49 @@
                 new default value will be propagated to the knowledge base.
             </dd>
         </dl>
-        <h3>IV. Theme Changes</h3>
+
+        <h3 id="fileSystem">IV. File Storage System Upgrade</h3>
+        <h4>A. Changes to the File Storage System</h4>
+        <p>
+            Each uploaded file exists as an individual entity in VIVO. When the
+            browser requests an upload file from VIVO, the data model is queried to
+            find out where the file is actually stored, so it can be downloaded to 
+            the browser.
+        </p>
+        <p>
+            In VIVO release 1.2 this storage location, 
+            known as the "Alias URL" for the uploaded file,
+            is stored in the file entity. 
+            That way, pages that contain many files can be displayed much more quickly.  
+        </p>
+        <p>
+            When Apache Tomcat starts up after the upgrade, 
+            it will initiate a process to calculate the "Alias URL" 
+            for each existing file and store it in the data model for fast access.
+        </p> 
+        <h4>B. Verify File Storage System upgrade process</h4>
+        <p>
+            The File Storage upgrade process will create a log file in the 
+            VIVO upload directory. You should review this file to ensure that
+            this upgrade worked properly.
+        </p>
+        <dl>
+            <dt>
+                <code>upgrade/FileStorageAliasAdder-log.2011-00-00T00-00-00.txt</code>
+            </dt>
+            <dd>
+                A log of the upgrade process. The actual filename includes a timestamp 
+                that tells when the upgrade executed. 
+                This file should end with
+                <code>Finished adding alias URLs to FileByteStreams.</code>
+                
+                If this file contains any warnings they should be reviewed with
+                your implementation team representative to see whether any  
+                corrective action needs to be taken.
+            </dd>
+        </dl>
+
+        <h3>V. Theme Changes</h3>
         <p>
             VIVO 1.2 comes with a new theme called "wilma" that uses the FreeMarker template 
             engine for generating web pages.  The theme is located in /vivo/themes/wilma and 
