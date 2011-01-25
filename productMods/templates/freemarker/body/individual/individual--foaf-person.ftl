@@ -8,7 +8,12 @@
 
     <section id="share-contact" role="region"> 
         <#-- Image -->
-        <@p.imageLinks individual propertyGroups namespaces editable "${urls.images}/placeholders/person.thumbnail.jpg" />
+        <@p.imageLinks individual=individual 
+                       propertyGroups=propertyGroups 
+                       namespaces=namespaces 
+                       editable=editable 
+                       showPlaceholder="always" 
+                       placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
     
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
