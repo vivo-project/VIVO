@@ -14,22 +14,29 @@
                         ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
-            GRAPH ?g2 { ?role a ?subclass }
-            GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role }
+            
+            # ?role is either a core:Role or one of its subclasses
+            { 
+                { GRAPH ?g2 { ?role a ?subclass } }
+                { GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role } } 
+            UNION
+                { GRAPH ?g4 { ?role a core:Role } } 
+            } 
+            
             # Works because we don't do inferencing on subproperties, so the only ?roleProp
             # returned will be the asserted one.
-            OPTIONAL { GRAPH ?g4 { ?roleProp rdfs:subPropertyOf core:roleOf }
-                       GRAPH ?g5 { ?role ?roleProp ?indivInRole }
-                       GRAPH ?g6 { ?indivInRole rdfs:label ?indivName }
+            OPTIONAL { GRAPH ?g5 { ?roleProp rdfs:subPropertyOf core:roleOf }
+                       GRAPH ?g6 { ?role ?roleProp ?indivInRole }
+                       GRAPH ?g7 { ?indivInRole rdfs:label ?indivName }
             } 
-            OPTIONAL { GRAPH ?g7 { ?role rdfs:label ?roleLabel } }
-            OPTIONAL { GRAPH ?g8 { ?subclass rdfs:label ?roleTypeLabel } } 
-            OPTIONAL { GRAPH ?g9 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g10  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { GRAPH ?g8  { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g9  { ?subclass rdfs:label ?roleTypeLabel } } 
+            OPTIONAL { GRAPH ?g10 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g11  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g12 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }
-                                  GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { GRAPH ?g13 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g14 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }  
             FILTER (
@@ -50,23 +57,30 @@
                         ?roleLabel ?roleTypeLabel 
                         ?indivInRole ?indivName 
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
-            GRAPH ?g1 { ?subject ?property ?role } 
-            GRAPH ?g2 { ?role a ?subclass }
-            GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role }
+            GRAPH ?g1 { ?subject ?property ?role }
+            
+            # ?role is either a core:Role or one of its subclasses
+            { 
+                { GRAPH ?g2 { ?role a ?subclass } }
+                { GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role } } 
+            UNION
+                { GRAPH ?g4 { ?role a core:Role } } 
+            }
+                 
             # Works because we don't do inferencing on subproperties, so the only ?roleProp
             # returned will be the asserted one.
-            OPTIONAL { GRAPH ?g4 { ?roleProp rdfs:subPropertyOf core:roleOf }
-                       GRAPH ?g5 { ?role ?roleProp ?indivInRole }
-                       GRAPH ?g6 { ?indivInRole rdfs:label ?indivName }
+            OPTIONAL { GRAPH ?g5 { ?roleProp rdfs:subPropertyOf core:roleOf }
+                       GRAPH ?g6 { ?role ?roleProp ?indivInRole }
+                       GRAPH ?g7 { ?indivInRole rdfs:label ?indivName }
             } 
-            OPTIONAL { GRAPH ?g7 { ?role rdfs:label ?roleLabel } }
-            OPTIONAL { GRAPH ?g8 { ?subclass rdfs:label ?roleTypeLabel } } 
-            OPTIONAL { GRAPH ?g9 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g10  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { GRAPH ?g8  { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g9  { ?subclass rdfs:label ?roleTypeLabel } } 
+            OPTIONAL { GRAPH ?g10 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g11  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g12 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
                        }
-                       OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }
-                                  GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { GRAPH ?g13 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g14 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
             FILTER (
