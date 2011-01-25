@@ -31,6 +31,9 @@ body{
 a:hover{
     text-decoration: none;
 }
+a{
+    color: #2485AE;
+}
 /* h1,h2,h3,h4,h5,h6 ------>  */
 h2{
     padding: 10px 0 12px 0;
@@ -696,6 +699,7 @@ p{
  }
 .individualList li a { 
     font-weight: normal; 
+    color: #2485AE;
 }
 
 /* ------------------------------------------------->  */
@@ -1102,7 +1106,7 @@ ul#individual-positions li a{
     font-size: 1em;
     padding-right: 10px;
     padding-top: 10px;
-    width: 75%;
+    width: 100%;
 }
 ul#individual-areas{
     padding-bottom: 24px;

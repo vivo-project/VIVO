@@ -3,7 +3,7 @@
 <#-- Template for sparkline visualization on individual profile page -->
 
 <#if individual.visualizationUrl??>
-<section id="sparklines-publications" role="region">
+
 
 <#assign coAuthorIcon = '${urls.images}/visualization/co_author_icon.png'>
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
@@ -13,6 +13,7 @@
 <#assign coInvestigatorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=copi'>
 <#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
+<section id="sparklines-publications" role="region">
     <div id="vis_container_coauthor">&nbsp;</div>
     
     <div id="coauthorship_link_container" class="collaboratorship-link-container">
