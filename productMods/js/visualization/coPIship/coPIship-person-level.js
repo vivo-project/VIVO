@@ -40,7 +40,7 @@ function renderStatsOnNodeClicked(json){
 	 */
 	if(obj.url){
 		
-		if (obj.url == egoURI) {
+		if (obj.url === unEncodedEgoURI) {
 			
 			$("#investigatorName").addClass('investigator_name').removeClass('neutral_investigator_name');
 			$('#num_works > .investigator_stats_text').text(works);

@@ -38,6 +38,7 @@ var requiredRevision = 0;
 
 var swfLink = "${swfLink}";
 var egoURI = "${egoURI}";
+var unEncodedEgoURI = "${egoURIParam}";
 var egoCoInvestigationDataFeederURL = "${egoCoInvestigationDataFeederURL}";
 var egoCoInvestigatorsListDataFileURL = "${egoCoInvestigatorsListDataFileURL}";
 
