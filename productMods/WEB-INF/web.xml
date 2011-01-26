@@ -347,6 +347,15 @@
      <servlet-name>SimpleReasonerRecomputeController</servlet-name>
      <url-pattern>/RecomputeInferences</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+     <servlet-name>SDBSetupController</servlet-name>
+     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SDBSetupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>SDBSetupController</servlet-name>
+     <url-pattern>/sdbsetup</url-pattern>
+  </servlet-mapping>
 
    <servlet>
     <servlet-name>MenuN3EditController</servlet-name>
@@ -1227,7 +1236,7 @@
     <url-pattern>/unrecognizedUser</url-pattern>
   </servlet-mapping>
 
-<!-- 
+ 
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
@@ -1237,7 +1246,7 @@
     <servlet-name>FakeExternalAuthController</servlet-name>
     <url-pattern>/admin/fakeExternalAuth</url-pattern>
   </servlet-mapping>
- -->
+
  
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
