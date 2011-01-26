@@ -151,31 +151,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="labelRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"," : "" %></c:set>
 <c:set var="typeRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"" : "" %></c:set>
 
-<%-- 
-<c:choose>
-    <c:when test="${numDateFields == 1}">
-        <c:set var="startYearPredicate" value="${vivoCore}year" />
-    </c:when>
-    <c:otherwise>
-        <c:set var="startYearPredicate" value="${vivoCore}startYear" />    
-    </c:otherwise>
-</c:choose>
---%>
-<c:set var="startYearPredicate">
-    <c:choose>
-        <c:when test="${numDateFields == 1}">${vivoCore}year</c:when>
-        <c:otherwise>${vivoCore}startYear</c:otherwise>
-    </c:choose>
-</c:set>
-<v:jsonset var="startYearAssertion" >
-    ?role <${startYearPredicate}> ?startYear .
-</v:jsonset>
-
-<c:set var="endYearPredicate" value="${vivoCore}endYear" /> 
-<v:jsonset var="endYearAssertion" >
-    ?role <${endYearPredicate}> ?endYear .
-</v:jsonset>
-
 <v:jsonset var="roleLabelAssertion" >
     ?role <${label}> ?roleLabel .
 </v:jsonset>
@@ -231,14 +206,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   SELECT ?existingTitle WHERE {
         ?role  core:roleIn ?existingActivity .
         ?existingActivity rdfs:label ?existingTitle . }
-</v:jsonset>
-
-<v:jsonset var="startYearQuery">
-  SELECT ?existingStartYear WHERE { ?role  <${startYearPredicate}> ?existingStartYear .}       
-</v:jsonset>
-
-<v:jsonset var="endYearQuery">
-  SELECT ?existingStartYear WHERE { ?role  <${endYearPredicate}> ?existingStartYear .}
 </v:jsonset>
 
 <v:jsonset var="activityQuery">
