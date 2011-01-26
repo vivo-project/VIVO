@@ -862,7 +862,7 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 	
 	var checkbox = $('<input>');
 	checkbox.attr('type','checkbox');
-	checkbox.attr('class','if_clicked_on_school');
+	checkbox.attr('class', entityCheckboxSelectorDOMClass);
 	checkbox.attr('value', label);
 	if(checkedFlag == 1){
 		checkbox.attr('checked');
@@ -988,7 +988,7 @@ function prepareTableForDataTablePagination(jsonData){
 		var row = $('<tr>'); 
 		
 		var checkboxTD = $('<td>');
-		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="if_clicked_on_school" value="' + index + '"'+'/>');
+		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' + entityCheckboxSelectorDOMClass + '" value="' + index + '"'+'/>');
 		
 		var labelTD =  $('<td>');
 		labelTD.css("width", "100px");
@@ -1118,7 +1118,7 @@ function getSize(map){
 
 function disableUncheckedEntities(){
 
-	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
+	$.each($("input[type=checkbox]." + entityCheckboxSelectorDOMClass + ":not(:checked)"), function(index, val){
 		$(val).attr('disabled', true);
 		$(val).prev().show();
 	});
@@ -1147,7 +1147,7 @@ function disableUncheckedEntities(){
 
 function enableUncheckedEntities(){
 	
-	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
+	$.each($("input[type=checkbox]." + entityCheckboxSelectorDOMClass + ":not(:checked)"), function(index, val){
 		$(val).attr('disabled', false);
 		$(val).prev().hide();
 	});

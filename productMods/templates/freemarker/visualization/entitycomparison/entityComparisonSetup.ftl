@@ -32,6 +32,8 @@
                               "value": "Grants" }>
                               
 <#assign parameterOptions = [publicationParameter, grantParameter]>
+
+<#assign entityCheckboxSelectorDOMClass = "entity-selector-checkbox">
                                     
 <#-- Javascript files -->
 
@@ -83,6 +85,8 @@ var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader.gif";
+
+var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass}";
 
 /*
 This has to be declared before making a call to GUI event manager JS.

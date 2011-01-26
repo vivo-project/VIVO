@@ -13,18 +13,8 @@ $(document).ready(function() {
         
         $notificationContainer = $("#notification-container").notify();
         
-        var jsonObject = {
-                prepare : function(arg1){
-                    loadData(arg1);
-                }
-            };
-        
         graphContainer = $("#graphContainer");
         tableDiv = $('#paginatedTable');
-
-        // initial display of the grid when the page loads
-        init(graphContainer);
-        
 
         //click event handler for clear button
         $("a.clear-selected-entities").click(function(){
@@ -90,9 +80,6 @@ $(document).ready(function() {
                 updateCounter();                
             }
         });
-                            
-        //parse the json object and pass it to loadData
-        jsonObject.prepare(jQuery.parseJSON(jsonString));
         
         function performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox) {
             
@@ -114,6 +101,9 @@ $(document).ready(function() {
 
             renderLineGraph(renderedObjects, entity);
             labelToCheckedEntities[checkboxValue] = checkbox;
+            labelToCheckedEntities[checkboxValue].entity = entity;
+            
+//            console.log(labelToCheckedEntities[checkboxValue], entity);
             
             /*
              * To highlight the rows belonging to selected entities. 
@@ -164,11 +154,11 @@ $(document).ready(function() {
         
             });
             
-                    /*
-                     * When the elements in the paginated div
-                     * are clicked this event handler is called
-                     */
-            $("input.if_clicked_on_school").live('click', function () {
+            /*
+             * When the elements in the paginated div
+             * are clicked this event handler is called
+             */
+            $("input." + entityCheckboxSelectorDOMClass).live('click', function () {
         
                 var checkbox = $(this);
                 var checkboxValue = $(this).attr("value");
@@ -188,26 +178,40 @@ $(document).ready(function() {
         
             });
         }
-
-        /*
-        This will make sure that top 3 entites are selected by default when the page loads.
         
-        */      
-        $.each($("input.if_clicked_on_school"), function(index, checkbox) {
-                
-                    if (index > 2) {
-                        return false;
-                    }
-                
-                    $(this).attr('checked', true);
+        function initiateTemporalGraphRenderProcess(givenGraphContainer, jsonData) {
+        	
+            /*
+             * initial display of the grid when the page loads 
+             * */ 
+            init(givenGraphContainer);
+            
+            /*
+             * render the temporal graph per the sent content. 
+             * */
+            loadData(jQuery.parseJSON(jsonData));
+            
+            /*
+             * This will make sure that top 3 entities are selected by default when the page loads.
+            */      
+            $.each($("input." + entityCheckboxSelectorDOMClass), function(index, checkbox) {
                     
-                    var checkboxValue = $(this).attr("value");
-                    var entity = labelToEntityRecord[checkboxValue];
+                        if (index > 2) {
+                            return false;
+                        }
                     
-                    performEntityCheckboxSelectedActions(entity, checkboxValue, $(this));
-                    
-                    performEntityCheckboxClickedRedrawActions();
-                    
-                });
+                        $(this).attr('checked', true);
+                        
+                        var checkboxValue = $(this).attr("value");
+                        var entity = labelToEntityRecord[checkboxValue];
+                        
+                        performEntityCheckboxSelectedActions(entity, checkboxValue, $(this));
+                        
+                        performEntityCheckboxClickedRedrawActions();
+                        
+                    });
+        	
+        }
 
+        initiateTemporalGraphRenderProcess(graphContainer, jsonString);
 });
