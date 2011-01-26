@@ -489,7 +489,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
         <c:set var="titleVerb" value="Edit" />
         <c:set var="title" value="Edit educational background entry for ${subjectName}" />
         <c:set var="submitButtonText" value="Edit Education and Training" />
-        <c:set var="disabledVal">${editMode == "repair" ? "" : "" }</c:set>    
+        <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>    
     </c:otherwise>
 </c:choose>
 

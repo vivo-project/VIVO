@@ -245,7 +245,7 @@
     <c:otherwise>
         <c:set var="titleVerb" value="Edit" />
         <c:set var="submitButtonText" value="Edit Position" />
-        <c:set var="disabledVal">${editMode == "repair" ? "" : "" }</c:set>    
+        <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>    
     </c:otherwise>
 </c:choose>
 
