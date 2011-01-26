@@ -4,16 +4,25 @@
 
 <#include "individual-setup.ftl">
     
-<section id="individual-intro-person" class="vcard" role="region">
+<section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
-        <#-- Image -->
-        <@p.imageLinks individual=individual 
-                       propertyGroups=propertyGroups 
-                       namespaces=namespaces 
-                       editable=editable 
-                       showPlaceholder="always" 
-                       placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
+        <#-- Image -->           
+       <#assign individualImage>
+           <@p.imageLinks individual=individual 
+                          propertyGroups=propertyGroups 
+                          namespaces=namespaces 
+                          editable=editable 
+                          showPlaceholder="always" 
+                          placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
+       </#assign>
+
+       <#-- <#if ( individualImage?matches('<img class="individual-photo"')?size > 0 )> -->
+       <#if ( individualImage?contains('<img class="individual-photo"') )>
+           <#assign infoClass = 'class="withThumb"'/>
+       </#if>
+
+       <div id="photo-wrapper">${individualImage}</div>
     
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
@@ -62,7 +71,7 @@
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
     </section>
 
-    <section id="individual-info" role="region">
+    <section id="individual-info" ${infoClass!} role="region">
         <#include "individual-sparklineVisualization.ftl">    
         <#-- Disable for now until controller sends data -->
         <#--
@@ -134,6 +143,7 @@
 
 
 ${stylesheets.add("/css/individual/individual.css")}
+${stylesheets.add("/css/individual/individual-vivo.css")}
                            
 <#-- RY Figure out which of these scripts really need to go into the head, and which are needed at all (e.g., tinyMCE??) -->
 ${headScripts.add("/js/jquery_plugins/getURLParam.js",                  

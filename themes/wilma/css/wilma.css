@@ -1,6 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 @charset "UTF-8";
 /* CSS Document */
+
 /* Tell the browser to render HTML 5 elements as block */
 header,
 hgroup,
@@ -965,15 +967,23 @@ nav.pagination.menupage li a:hover{
 /* ------------------------------------------------->  */
 
 /* ADMIN PANEL ------>  */
-.admin h3{
-  color: #fff;
-  background: #2485AE;
-} 
-/* INDIVIDUAL INTRO FOR PERSON ------>  */
+#admin{
+    background-color: #f2f9fb;
+}
+#admin h3{
+    background: #2485AE;
+    color: #fff;
+}
+#admin .uri-link {
+    color: #888c8c;
+}
+#admin a{
+    color: #2a98bc;
+}
+/* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
 .preferred{
     padding-top: .2em;
 }
-/* INDIVIDUAL INTRO FOR ANY CLASS ------>  */
 #individual-intro h1{
     font-size: 1.375em; 
     color: #2485ae; 
@@ -989,9 +999,8 @@ ul#individual-tools{
 #individual-intro ul.individual-urls li a{
     color: #2485ae;
 }
-/* INDIVIDUAL INTRO FOR PERSON ------>  */
-#individual-intro-person{
-    /*border-right: 1px solid #edf0ed;*/
+h2#mainImage, #share-contact h2{
+    color: #5E6363;
 }
 /* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
 img.individual-photo{
@@ -1050,6 +1059,7 @@ ul.individual-urls-people li a{
 #individual-info h1.fn{
     font-size: 1.375em;
     color: #2485ae;
+    line-height: 1.3em;
 }
 h1.fn .preferred-title {
     font-size: 0.825em;
@@ -1057,8 +1067,9 @@ h1.fn .preferred-title {
     border-left: 1px solid #a6b1b0;
 }
 #individual-info h2{
-    font-size: 1.125em;
-    font-weight: normal;
+    color: #5E6363;
+    font-size: 1em;
+    font-weight: bold;
 }
 #individual-info h3{
     font-size: 1.125em;
@@ -1192,6 +1203,10 @@ article.property ul.property-list li a{
 a {
     text-decoration: underline
 }
-.middle {
+.middle{
     vertical-align: middle;
+}
+/* EDITING DISPLAY------>  */
+.edit-individual{
+    border-left: 1px dotted #B2D15A;
 }

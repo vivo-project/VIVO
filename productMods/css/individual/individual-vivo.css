@@ -1,0 +1,38 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+@charset "UTF-8";
+/* CSS Document */
+
+/* <------ INDIVIDUAL CORE:OVERVIEW */
+#overview{
+    clear: left;
+}
+.overview-value{
+    display: inline;
+}
+div.overview-value :last-child{
+    margin-bottom: .2em;
+}
+.individual-overview{
+    font-size: 1em;
+    padding-bottom: 0;
+    line-height: 1.3em;
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 100%;
+}
+/* <------ INDIVIDUAL TEMPORAL GRAPH */
+#temporal-graph{
+    float: right;
+    padding: 0 3px 20px 0;
+    background-color: #fff;
+    margin-top: -20px;
+}
+#temporal-graph h3{
+    margin: 0;
+    padding: 0;
+}
+#temporal-graph h3 img{
+    padding-right: 10px;
+    vertical-align: text-top;
+}
