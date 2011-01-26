@@ -3,6 +3,6 @@
 $(document).ready(function(){
     
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
-    $('.individual-overview').truncate({max_length: 500});
+    $('.overview-value').truncate({max_length: 500});
     
 });
