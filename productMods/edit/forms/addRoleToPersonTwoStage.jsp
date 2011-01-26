@@ -115,7 +115,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
      other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
      
-  4. Really bad node. multiple roleIn statements.
+  4. Really bad node. multiple core:roleIn statements.
 */
 
  EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#roleIn");

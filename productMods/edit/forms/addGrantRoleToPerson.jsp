@@ -63,7 +63,7 @@ This is intended to create a set of statements like:
      3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
         other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
         
-     4. Really bad node. multiple roleIn statements.
+     4. Really bad node. multiple core:roleIn statements.
    */
 
     EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#roleIn");
@@ -111,8 +111,16 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     <c:otherwise>
         <c:set var="formHeading" value="Edit ${formHeading}" />
         <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
-        <c:set var="labelRequired" value="" />
-        <c:set var="disabledVal">${editMode == "repair" ? "" : "" }</c:set>    
+        <c:choose>
+            <c:when test='{editMode == "edit"}'>
+                <c:set var="labelRequired" value="" />
+                <c:set var="disabledVal" value="disabled" />
+            </c:when>
+            <c:otherwise> <%-- editMode == "repair" --%>
+                <c:set var="labelRequired" value="\"nonempty\"," />
+                <c:set var="disabledVal" value="" />
+            </c:otherwise>            
+        </c:choose>   
     </c:otherwise>
 </c:choose>
 
@@ -130,20 +138,18 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     @prefix core: <${vivoCore}> .
     @prefix rdf: <${rdf}> .
        
-	?person ?rolePredicate ?role.	
-	?role   rdf:type ?roleType .		  
-    ?role   core:roleIn ?grant .
-    ?grant  core:relatedRole ?role .
+	?person ?rolePredicate ?role.
+		
+	?role  a ?roleType ;		  
+           core:roleIn ?grant .
+           
+    ?grant a core:Grant ;
+           core:relatedRole ?role .
 </v:jsonset>
+
 
 <v:jsonset var="n3ForInverse"> 
 	?role   ?inverseRolePredicate ?person.
-</v:jsonset>
-
-<v:jsonset var="n3ForGrantType">
-    @prefix core: <${vivoCore}> .
-    @prefix rdf: <${rdf}> .    	
-    ?grant rdf:type core:Grant .              
 </v:jsonset>
 
 <v:jsonset var="n3ForGrantLabel">
@@ -187,7 +193,7 @@ PREFIX core: <${vivoCore}>
     
     "n3required"    : [ "${n3ForGrantRole}", "${startYearAssertion}" ],
     
-    "n3optional"    : [ "${n3ForGrantType}", "${n3ForGrantLabel}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3optional"    : [ "${n3ForGrantLabel}", "${n3ForInverse}", "${endYearAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "grant" : "${defaultNamespace}" },
@@ -212,7 +218,7 @@ PREFIX core: <${vivoCore}>
          "objectClassUri"   : "${grantTypeUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [  ]
+         "assertions"       : [  "${n3ForGrantRole}" ]
       },               
       "grantLabel" : {
          "newResource"      : "false",
@@ -223,7 +229,7 @@ PREFIX core: <${vivoCore}>
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : ["${n3ForGrantLabel}"]
+         "assertions"       : ["${n3ForGrantLabel}", "${n3ForGrantRole}" ]
       },
       "existingGrantLabel" : { /* Needed iff we return from an invalid submission */
          "newResource"      : "false",
@@ -263,6 +269,7 @@ PREFIX core: <${vivoCore}>
 </c:set>
    
 <%
+
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     
     if (editConfig == null) {
@@ -319,7 +326,7 @@ PREFIX core: <${vivoCore}>
         
     <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" disabled="${disabledVal}" /></p>
 
-    <%-- Store this value in a hidden field, because the displayed field is disabled and don't submit. This ensures that when
+    <%-- Store this value in a hidden field, because the displayed field is disabled and doesn't submit. This ensures that when
     returning from a validation error, we retain the value. --%>
     <c:if test="${editMode == 'edit'}">
        <v:input type="hidden" id="grantLabel" />

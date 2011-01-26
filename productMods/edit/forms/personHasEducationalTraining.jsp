@@ -523,6 +523,8 @@ This goes to an experimental FM based form:
            
     <p><v:input type="text" id="relatedIndLabel" name="orgLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 
+    <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
+    returning from a validation error, we retain the values. --%>
     <c:if test="${editMode == 'edit'}">
        <v:input type="hidden" id="orgType" />
        <v:input type="hidden" id="orgLabel" />
