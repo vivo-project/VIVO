@@ -50,14 +50,16 @@ span.incomplete-data-holder,
 .collaboratorship-link-container {
     margin-top: 20px;
     display: none;
+    border-top: 1px dotted #A6B1B0;
+    padding-top: 20px;
+    width: 180px;
 }
 
 .sparkline_text {
     font-size: .8em;
     font-weight: bold;
     text-align: left;
-    padding-bottom: 20px;
-    border-bottom: 1px dotted #A6B1B0;
+    line-height: 1.5em;
 }
 
 .google-visualization-sparkline-default {

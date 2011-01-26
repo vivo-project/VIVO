@@ -20,18 +20,14 @@
         <div class="collaboratorship-icon">
             <a href="${coAuthorURL}"><img src="${coAuthorIcon}" alt="Co-author Network icon" width="30px" height="30px" /></a>
         </div>
-        <div class="collaboratorship-link">
-            <h3><a href="${coAuthorURL}">Co-Author Network</a></h3>
-        </div>
+        <div class="collaboratorship-link"><a href="${coAuthorURL}">Co-Author Network</a></div>
     </div>
 
     <div id="coinvestigator_link_container" class="collaboratorship-link-container">
         <div class="collaboratorship-icon">
             <a href="${coInvestigatorURL}"><img src="${coInvestigatorIcon}" alt="Co-investigator Network icon" width="30px" height="30px" /></a>
         </div>
-        <div class="collaboratorship-link">
-            <h3><a href="${coInvestigatorURL}">Co-Investigator Network</a></h3>
-        </div>
+        <div class="collaboratorship-link"><a href="${coInvestigatorURL}">Co-Investigator Network</a></div>
     </div>
 
     ${stylesheets.add("css/visualization/visualization.css")}
