@@ -40,26 +40,23 @@ ul#browse-classgroups a.selected {
     background-position-y: 12px;
 }
 /* Fix for menupages */
-ul#foaf-person-childClasses {
+ul#vgraph-classes {
     float: left;
     width: 265px;
     margin-left: 15px;
 }
-ul#browse-childClasses {
+ul#browse-classes {
     width: 284px;
     margin-left: 0;
     padding-left: 10px;
     margin-left: 15px;
 }
-#individuals-in-childClass { 
+#individuals-in-class { 
     width: 450px; 
 }
-#individuals-in-childClass h3 {
-    padding: 10px 0 10px 30px;
-    margin: 0;
-}
-article.individual-foaf-person {
-    width: 400px margin-left:10px;
+article.foaf-person {
+    width: 400px;
+    margin-left:10px;
     margin-right: 10px;
     padding: 0;
     margin-bottom: 10px;
@@ -94,16 +91,16 @@ article.individual-foaf-person {
     width: auto;
 }
 /* Fix for menupages */
-ul#alpha-browse-childClass {
+ul#alpha-browse-individuals {
     width: 545px;
 }
-ul#alpha-browse-childClass a {
+ul#alpha-browse-individuals a {
     height: 30px;
     margin-left: 0;
     padding-left: 6px;
     width: 8px;
 }
-#individuals-in-childClass{
+#individuals-in-class{
     width: 550px;
 }
 /* Fix for photo upload */
