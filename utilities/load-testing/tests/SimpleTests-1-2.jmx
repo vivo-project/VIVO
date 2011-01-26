@@ -47,11 +47,6 @@
             <stringProp name="Argument.value">${__property(threads, , 1)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="SELF_EDITOR_NAME" elementType="Argument">
-            <stringProp name="Argument.name">SELF_EDITOR_NAME</stringProp>
-            <stringProp name="Argument.value">${__property(self.editor.name)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -448,7 +443,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="username" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${SELF_EDITOR_NAME}</stringProp>
+                  <stringProp name="Argument.value">selfEditor</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">username</stringProp>

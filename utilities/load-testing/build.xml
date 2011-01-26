@@ -74,8 +74,6 @@ report   - Just summarize output from previously run tests.
 		      message="${properties.file} must contain a value for webapp.port" />
 		<fail unless="webapp.name"
 		      message="${properties.file} must contain a value for webapp.name" />
-		<fail unless="self.editor.name"
-		      message="${properties.file} must contain a value for self.editor.name" />
 
 		<fail unless="data.dir" message="${properties.file} must contain a value for data.dir" />
 
@@ -147,7 +145,6 @@ report   - Just summarize output from previously run tests.
 			<property name="webapp.name" value="${webapp.name}" />
 			<property name="iterations" value="${iterations}" />
 			<property name="threads" value="${threads}" />
-			<property name="self.editor.name" value="${self.editor.name}" />
 			<property name="file.person.uris" value="${file.person.uris}" />
 			<property name="file.infoResource.uris" value="${file.infoResource.uris}" />
 
