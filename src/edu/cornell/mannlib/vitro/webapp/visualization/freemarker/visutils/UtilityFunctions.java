@@ -238,12 +238,7 @@ public class UtilityFunctions {
     		 * changes all throughout the codebase.
     		 * 	3. We are asking for a grant year & we should get a proper one or NOT at all.
     		 * */
-    		String grantYear;
-    		if (curr.getGrantStartYear() != null) { 
-    			grantYear = curr.getGrantStartYear();
-    		} else {
-    			grantYear = curr.getParsedGrantStartYear();
-    		}
+    		String grantYear = curr.getParsedGrantStartYear();
     		
 			if (yearToGrantCount.containsKey(grantYear)) {
     			yearToGrantCount.put(grantYear,
