@@ -152,11 +152,15 @@
     }
 </v:jsonset>
 
-<v:jsonset var="orgTypeQuery" >      
+<%-- Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
+type is returned and we don't get a match to the select element options. --%>
+<v:jsonset var="orgTypeQuery" > 
+    PREFIX rdfs: <${rdfs}>   
     SELECT ?existingOrgType WHERE {
         ?position <${positionInOrgPred}> ?existingOrg .
         ?existingOrg a ?existingOrgType .
-    }
+        # ?existingOrgType rdfs:subClassOf <${orgClass}> .
+    } 
 </v:jsonset>
 
 <v:jsonset var="positionTitleQuery" >  

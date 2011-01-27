@@ -192,10 +192,14 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     }
 </v:jsonset>
 
+<%-- Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
+type is returned and we don't get a match to the select element options. --%>
 <v:jsonset var="orgTypeQuery" >      
+    PREFIX rdfs: <${rdfs}>   
     SELECT ?existingOrgType WHERE {
         ?edTraining <${trainingAtOrg}> ?existingOrg .
         ?existingOrg a ?existingOrgType .
+        ?existingOrgType rdfs:subClassOf <${orgClass}> .
     }
 </v:jsonset>
 
