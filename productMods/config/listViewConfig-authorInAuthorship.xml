@@ -39,14 +39,14 @@
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE { GRAPH &lt;urn:x-arq:UnionGraph&gt; {
                {
-                ?subject ?property ?authorship  
+                ?subject ?property ?authorship .
                 ?authorship core:linkedInformationResource ?infoResource .
                 ?infoResource rdfs:label ?infoResourceName .
                 ?infoResource a ?subclass .
                 ?subclass rdfs:subClassOf core:InformationResource .
                } 
                UNION { 
-                   ?subject ?property ?authorship  
+                   ?subject ?property ?authorship .  
                    ?authorship core:linkedInformationResource ?infoResource .
                    ?infoResource rdfs:label ?infoResourceName .
                    ?infoResource a ?subclass .
