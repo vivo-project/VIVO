@@ -14,11 +14,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Utilit
 
 public class Grant extends Individual {
 	
-	private String grantStartYear;
-	private String grantStartYearMonth;
 	private String grantStartDate;
-	private String grantEndYear;
-	private String grantEndYearMonth;
 	private String grantEndDate;
 	
 	public Grant(String grantURL, String grantLabel){
@@ -68,21 +64,6 @@ public class Grant extends Individual {
 
 	}
 	
-	public String getGrantStartYear() {
-		return grantStartYear;
-	}
-
-	public void setGrantStartYear(String grantStartYear) {
-		this.grantStartYear = grantStartYear;
-	}
-
-	public String getGrantStartYearMonth() {
-		return grantStartYearMonth;
-	}
-
-	public void setGrantStartYearMonth(String grantStartYearMonth) {
-		this.grantStartYearMonth = grantStartYearMonth;
-	}
 
 	public String getGrantStartDate() {
 		return grantStartDate;
@@ -92,21 +73,6 @@ public class Grant extends Individual {
 		this.grantStartDate = grantStartDate;
 	}
 
-	public String getGrantEndYear() {
-		return grantEndYear;
-	}
-
-	public void setGrantEndYear(String grantEndYear) {
-		this.grantEndYear = grantEndYear;
-	}
-
-	public String getGrantEndYearMonth() {
-		return grantEndYearMonth;
-	}
-
-	public void setGrantEndYearMonth(String grantEndYearMonth) {
-		this.grantEndYearMonth = grantEndYearMonth;
-	}
 
 	public String getGrantEndDate() {
 		return grantEndDate;
