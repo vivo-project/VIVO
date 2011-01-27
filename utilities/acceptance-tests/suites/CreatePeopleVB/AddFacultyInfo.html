@@ -141,7 +141,42 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//section[@id='share-contact']/nav[2]/h3[1]/a/img</td>
+	<td>//h2[@id='hasResearchArea']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Primatia</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h2[@id='primaryLink']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -171,7 +206,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//section[@id='individual-info']/h3[1]/a/img</td>
+	<td>//h2[@id='overview']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -241,7 +276,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='researchOverview']/a</td>
+	<td>//h3[@id='researchOverview']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +501,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//section[@id='share-contact']/h3[3]/a/img</td>
+	<td>//h2[@id='phoneNumber']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -516,7 +551,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//section[@id='share-contact']/h3[2]/a/img</td>
+	<td>//h2[@id='email']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -646,7 +681,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='scopusId']/a/img</td>
+	<td>//h3[@id='researcherId']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -657,7 +692,7 @@
 <tr>
 	<td>type</td>
 	<td>tinymce</td>
-	<td>5678</td>
+	<td>123456789</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -671,7 +706,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='researcherId']/a/img</td>
+	<td>//h3[@id='scopusId']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -682,7 +717,7 @@
 <tr>
 	<td>type</td>
 	<td>tinymce</td>
-	<td>123456789</td>
+	<td>5678</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -722,6 +757,11 @@
 <tr>
 	<td>comment</td>
 	<td class="comment">Verify all fields added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primatia</td>
 	<td></td>
 </tr>
 <tr>
