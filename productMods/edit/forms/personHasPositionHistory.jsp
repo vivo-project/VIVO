@@ -159,7 +159,7 @@ type is returned and we don't get a match to the select element options. --%>
     SELECT ?existingOrgType WHERE {
         ?position <${positionInOrgPred}> ?existingOrg .
         ?existingOrg a ?existingOrgType .
-        # ?existingOrgType rdfs:subClassOf <${orgClass}> .
+        ?existingOrgType rdfs:subClassOf <${orgClass}> .
     } 
 </v:jsonset>
 
