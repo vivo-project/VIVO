@@ -26,7 +26,6 @@ div.overview-value :last-child{
     float: right;
     padding: 0 3px 20px 0;
     background-color: #fff;
-    margin-top: -20px;
 }
 #temporal-graph h3{
     margin: 0;
