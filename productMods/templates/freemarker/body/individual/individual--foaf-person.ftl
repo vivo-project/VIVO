@@ -111,7 +111,9 @@
                
             <#-- Positions -->
             <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
-            <@p.objectPropertyListing positions editable />
+            <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
+                <@p.objectPropertyListing positions editable />
+            </#if> 
         </header>
          
         <#-- Overview -->
@@ -119,7 +121,9 @@
         
         <#-- Research Areas -->
         <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
-        <@p.objectPropertyListing researchAreas editable />
+        <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
+            <@p.objectPropertyListing researchAreas editable />
+        </#if>   
     </section>
     
 </section>
