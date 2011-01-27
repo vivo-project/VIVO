@@ -16,7 +16,7 @@
 
 <section id="sparklines-publications" role="region">
   <span style="padding-right:30px;">
-    <img src="${informationIcon}" alt="information icon." title="The publication and grant information may be incomplete." width="25px" height="25px"/>
+    <img id="info-icon" src="${informationIcon}" alt="information icon." title="The publication and grant information may be incomplete." width="25px" height="25px"/>
   </span>
     <div id="vis_container_coauthor">&nbsp;</div>
     
