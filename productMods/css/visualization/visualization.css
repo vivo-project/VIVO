@@ -88,3 +88,7 @@ span.incomplete-data-holder,
 .temporal-graph {
     background: url(../../images/visualization/temporal_vis_small_icon.jpg) top left no-repeat;
 }
+
+.infoIcon {
+    padding-right:30px;
+}
