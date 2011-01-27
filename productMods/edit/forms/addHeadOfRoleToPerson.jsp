@@ -33,9 +33,9 @@
            [ "http://vivoweb.org/ontology/core#Project", "Project" ],
            [ "http://vivoweb.org/ontology/core#Publisher", "Publisher" ],
            [ "http://vivoweb.org/ontology/core#ResearchOrganization", "Research Organization" ],
-           [ "http://vivoweb.org/ontology/core#Team", "Team" ],
            [ "http://vivoweb.org/ontology/core#School", "School" ],
            [ "http://vivoweb.org/ontology/core#Service","Service"],
+           [ "http://vivoweb.org/ontology/core#Team", "Team" ],
            [ "http://vivoweb.org/ontology/core#Student Organization", "Student Organization" ],
            [ "http://vivoweb.org/ontology/core#University", "University" ]' />  
 </jsp:include>

@@ -43,6 +43,7 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 
@@ -217,13 +218,40 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   SELECT ?existingRoleLabel WHERE { ?role  <${label}> ?existingRoleLabel . }
 </v:jsonset>
 
+<%     
+String objectClassUri = vreq.getParameter("roleActivityType_objectClassUri");
+if (StringUtils.isNotBlank(objectClassUri)) { %>
+<c:set var="objectClassUri" value="<%= objectClassUri %>" />
 <v:jsonset var="activityTypeQuery">
-  PREFIX core: <${vivoCore}>
-  SELECT ?existingActivityType WHERE { 
-      ?role core:roleIn ?existingActivity .
-      ?existingActivity a ?existingActivityType . 
-  }
+     PREFIX core: <${vivoCore}>
+     PREFIX rdfs: <${rdfs}>
+     SELECT ?existingActivityType WHERE { 
+         ?role core:roleIn ?existingActivity .
+         ?existingActivity a ?existingActivityType . 
+         ?existingActivityType rdfs:subClassOf <${objectClassUri}> .
+     }
 </v:jsonset>
+<%   
+/*
+} else {    
+    // Need to get the hardcoded literals and filter for them
+    String optionsType = vreq.getParameter("roleActivityType_optionsType");
+    if ("HARCODED_LITERALS".equals(optionsType)) {
+	    String typeLiteralOptions = vreq.getParameter("roleActivityType_literalOptions");
+	    if (StringUtils.isNotBlank(typeLiteralOptions)) {
+	        List<String> types = new ArrayList<String>();
+	    }
+*/	    
+} else { 
+%>
+<v:jsonset var="activityTypeQuery">
+    PREFIX core: <${vivoCore}>
+    SELECT ?existingActivityType WHERE { 
+        ?role core:roleIn ?existingActivity .
+        ?existingActivity a ?existingActivityType . 
+    }
+</v:jsonset>  
+<% } %>
 
  <v:jsonset var="existingIntervalNodeQuery" >  
     SELECT ?existingIntervalNode WHERE {
