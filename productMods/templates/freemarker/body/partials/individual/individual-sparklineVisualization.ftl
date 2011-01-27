@@ -7,6 +7,7 @@
 
 <#assign coAuthorIcon = '${urls.images}/visualization/co_author_icon.png'>
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
+<#assign informationIcon = '${urls.images}/individual/info-icon.png'>
 <#assign standardVisualizationURLRoot ="/visualization">
 <#assign googleJSAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coAuthorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=coauthor'>
@@ -14,6 +15,9 @@
 <#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
 <section id="sparklines-publications" role="region">
+  <span style="padding-right:30px;">
+    <img src="${informationIcon}" alt="information icon." title="The publication and grant information may be incomplete." width="25px" height="25px"/>
+  </span>
     <div id="vis_container_coauthor">&nbsp;</div>
     
     <div id="coauthorship_link_container" class="collaboratorship-link-container">
