@@ -40,8 +40,9 @@ a{
 h2{
     padding: 10px 0 12px 0;
     margin: 0;
-    font-size: 22px;
-    color: #2485ae; 
+    font-size: 1.375em;
+    /*color: #2485ae; //Original color*/
+    color: #064d68;
 }
 h2 a{
     color: #2485ae; 
@@ -55,20 +56,20 @@ h2 a:hover, h2 a:active{
 h3{
     padding: 10px 0 12px 0;
     margin: 0;
-    font-size: 18px;
-    color: #2485ae; 
+    font-size: 1.125em;
+    color: #064d68; 
 }
 h4{
     padding: 10px 0 12px 0;
     margin: 0;
-    font-size: 16px;
-    color: #2485ae; 
+    font-size: 1em;
+    color: #064d68; 
 }
 h5{
     padding: 10px 0 12px 0;
     margin: 0;
-    font-size: 14px;
-    color: #2485ae; 
+    font-size: .875em;
+    color: #064d68; 
 }
 /* HEADER ------>  */
 #branding {
@@ -218,6 +219,7 @@ ul#main-nav {
 #intro h2 {
     padding: 35px 0 12px 24px;
     border-bottom: none;
+    color: #2485AE;
 }
 #intro p{
     font-size: 16px;
@@ -376,6 +378,7 @@ p.password-note{
     padding: 0;
     font-size: 22px;
     margin-bottom: 15px;
+    color: #2485AE;
 }
 #search-home-field {
     width: 483px;
@@ -405,20 +408,20 @@ input.search-home-vivo {
 }
 /* BROWSE ------>  */
 ul#browse-classgroups a:hover {
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
     color: #2ea0cf;
 }
 ul#browse-classgroups a.selected {
     color: #2ea0cf;
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
 }
 ul#classgroup-list a:hover {
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
     color: #2ea0cf;
 }
 ul#classgroup-list a.selected {
     color: #2ea0cf;
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
 }
 #visual-graph h5 {
     color: #2485ae;
@@ -714,7 +717,7 @@ p{
 }
 #menupage-intro  h3 {
     font-size: 1.5em;
-    color: #002b44;
+    color: #064d68;
     font-weight: normal;
     border-bottom: 1px solid #f3f3f4;
 }
@@ -744,12 +747,12 @@ ul#vgraph-classes a {
     text-decoration: none;
 }
 ul#vgraph-classes a:hover {
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
     color: #2ea0cf;
 }
 ul#vgraph-classes a.selected {
     color: #2ea0cf;
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 10px no-repeat;
 }
 ul#vgraph-classes .count-classes {    
     font-size: .75em; 
@@ -864,12 +867,12 @@ ul#browse-classes a {
     text-decoration: none;
 }
 ul#browse-classes a:hover {
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 4px 10px no-repeat;
     color: #2ea0cf;
 }
 ul#browse-classes a.selected {
     color: #2ea0cf;
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 4px 10px no-repeat;
 }
 ul#browse-classes .count-classes {    
     font-size: 12px; 
