@@ -15,27 +15,72 @@
                         ?majorField ?deptOrSchool ?info 
                         ?dateTimeStart ?dateTimeEnd 
             WHERE {
-                GRAPH ?g1 { ?subject ?property ?edTraining 
-                            LET (?edTrainingName := afn:localname(?edTraining)) 
-                }
-                OPTIONAL { GRAPH ?g2 { ?edTraining core:trainingAtOrganization ?org }                                   
-                           GRAPH ?g3 { ?org rdfs:label ?orgName } 
-                }
-                OPTIONAL { GRAPH ?g4 { ?edTraining core:degreeEarned ?degree } 
-                           OPTIONAL { GRAPH ?g5 { ?degree rdfs:label ?degreeName } }
-                           OPTIONAL { GRAPH ?g6 { ?degree core:abbreviation ?degreeAbbr } }
-                }
-                OPTIONAL { GRAPH ?g7  { ?edTraining core:majorField ?majorField } }
-                OPTIONAL { GRAPH ?g8  { ?edTraining core:departmentOrSchool ?deptOrSchool } }
-                OPTIONAL { GRAPH ?g9  { ?edTraining core:supplementalInformation ?info } }
-                OPTIONAL { GRAPH ?g10 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
-                           OPTIONAL { GRAPH ?g11 { ?dateTimeInterval core:start ?dateTimeStartValue }                    
-                                      GRAPH ?g12 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
-                           }
-                           OPTIONAL { GRAPH ?g13 { ?dateTimeInterval core:end ?dateTimeEndValue }   
-                                      GRAPH ?g14 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
-                           }                                       
-                }                                  
+               {
+                   ?subject ?property ?edTraining 
+                   OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                   
+                              ?org rdfs:label ?orgName .
+                   }
+                   OPTIONAL { ?edTraining core:degreeEarned ?degree . 
+                              ?degree rdfs:label ?degreeName . 
+                              OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                   }
+                   OPTIONAL { ?edTraining core:majorField ?majorField }
+                   OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
+                   OPTIONAL { ?edTraining core:supplementalInformation ?info }
+               }
+               UNION {
+                   ?subject ?property ?edTraining .
+                   ?edTraining core:dateTimeInterval ?dateTimeInterval .
+                   ?dateTimeInterval core:start ?dateTimeStartValue .                   
+                   ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                   OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                   
+                             ?org rdfs:label ?orgName .
+                   }
+                   OPTIONAL { ?edTraining core:degreeEarned ?degree . 
+                          ?degree rdfs:label ?degreeName . 
+                          OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                   }   
+                   OPTIONAL { ?edTraining core:majorField ?majorField }
+                   OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
+                   OPTIONAL { ?edTraining core:supplementalInformation ?info }
+               }
+               UNION {
+                   ?subject ?property ?edTraining .
+                   ?edTraining core:dateTimeInterval ?dateTimeInterval .
+                   ?dateTimeInterval core:end ?dateTimeEndValue .   
+                   ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                   OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                   
+                             ?org rdfs:label ?orgName .
+                   }
+                   OPTIONAL { ?edTraining core:degreeEarned ?degree . 
+                          ?degree rdfs:label ?degreeName . 
+                          OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                   }   
+                   OPTIONAL { ?edTraining core:majorField ?majorField }
+                   OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
+                   OPTIONAL { ?edTraining core:supplementalInformation ?info }
+               }
+               UNION {
+                   ?subject ?property ?edTraining .
+                   ?edTraining core:dateTimeInterval ?dateTimeInterval .
+                   ?dateTimeInterval core:start ?dateTimeStartValue .                   
+                   ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                   ?dateTimeInterval core:end ?dateTimeEndValue .   
+                   ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                   OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                   
+                             ?org rdfs:label ?orgName .
+                   }
+                   OPTIONAL { ?edTraining core:degreeEarned ?degree . 
+                          ?degree rdfs:label ?degreeName . 
+                          OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                   }   
+                   OPTIONAL { ?edTraining core:majorField ?majorField }
+                   OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
+                   OPTIONAL { ?edTraining core:supplementalInformation ?info }
+               }
+
+               LET (?edTrainingName := afn:localname(?edTraining)) 
+                         
          }  ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart)
     </query-base>
 

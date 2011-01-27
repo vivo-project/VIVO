@@ -12,21 +12,145 @@
         SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName) 
                         ?positionTitle
                         ?org ?orgName 
-                        ?dateTimeStart ?dateTimeEnd WHERE {
-            GRAPH ?g1 { ?subject ?property ?position } 
-            OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
-                       GRAPH ?g3 { ?org rdfs:label ?orgName }
+                        ?dateTimeStart ?dateTimeEnd WHERE { GRAPH &lt;urn:x-arq:UnionGraph&gt; {
+           {
+            {
+                ?subject ?property ?position .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
             }
-            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
-            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
-                       }
-                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }   
-                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
-                       }
+            UNION { 
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
             }
-        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+           }
+        } } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
     </query-base>
  
     <query-collated>    
@@ -38,24 +162,184 @@
                         ?position (afn:localname(?position) AS ?positionName) 
                         ?positionTitle                       
                         ?org ?orgName 
-                        ?dateTimeStart ?dateTimeEnd WHERE {
-            GRAPH ?g1 { ?subject ?property ?position } 
-            OPTIONAL { GRAPH ?g2 { ?position core:positionInOrganization ?org }
-                       GRAPH ?g3 { ?org rdfs:label ?orgName }
-            }
-            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
-            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
-                       }
-                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }   
-                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
-                       }
-            }
-            OPTIONAL { GRAPH ?g8 { ?position a ?subclass }
-                       GRAPH ?g9 { ?subclass rdfs:subClassOf core:Position }
+                        ?dateTimeStart ?dateTimeEnd WHERE { GRAPH &lt;urn:x-arq:UnionGraph&gt; {
+
+           {
+            {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
             } 
-        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+            UNION { 
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+            }
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                ?position rdfs:label ?positionTitle .
+            } 
+            UNION {
+                ?subject ?property ?position .
+                ?position a ?subclass .
+                ?subclass rdfs:subClassOf core:Position .
+                ?position core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                ?dateTimeStartValue core:dateTime ?dateTimeStart .
+                ?dateTimeInterval core:end ?dateTimeEndValue .  
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
+                ?position rdfs:label ?positionTitle .
+                ?position core:positionInOrganization ?org .
+                ?org rdfs:label ?orgName .
+            }
+           }
+        } } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
     </query-collated>
        
     <template>propStatement-personInPosition.ftl</template>
