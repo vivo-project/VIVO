@@ -131,7 +131,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasMemberRole']/a</td>
+	<td>//h3[@id='hasMemberRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -156,12 +156,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>1999</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endYear</td>
+	<td>endField.year</td>
 	<td>2009</td>
 </tr>
 <tr>
@@ -236,7 +236,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
+	<td>link=Edit this individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -272,6 +272,16 @@
 <tr>
 	<td>click</td>
 	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the property Member at Large related role?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,7 +371,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>unknown Member at Large (unidentified activity - please edit)</td>
+	<td>(no linked activity) Member at Large 1999 - 2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,7 +381,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasMemberRole']/ul/li[2]/span/span/a[1]</td>
+	<td>//div[@id='wrapper-content']/section[2]/article[3]/ul/li[2]/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -387,11 +397,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Membership Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Activity Name</td>
 	<td></td>
 </tr>
 <tr>
