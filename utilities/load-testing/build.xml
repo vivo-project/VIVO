@@ -16,6 +16,10 @@
 	         classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask"
 	         classpath="lib/ant-jmeter-1.0.9.jar" />
 
+	<tstamp>
+		<format property="TIMESTAMP" pattern="MMMM dd, yyyy hh:mm a" />
+	</tstamp>
+
 	<!-- ================================= 
           target: describe              
          ================================= -->
@@ -160,6 +164,7 @@ report   - Just summarize output from previously run tests.
 			<property name="summariser.log" value="true" />
 			<property name="summariser.interval" value="10" />
 		</jmeter>
+
 	</target>
 
 	<!-- ================================= 
@@ -180,17 +185,9 @@ report   - Just summarize output from previously run tests.
 			<arg value="${report.style}" />
 		</java>
 
-		<property name="report2.out" location="${results.dir}/${test.name}-detail.html" />
-		<property name="report2.style" location="${basedir}/jmeter-results-detail-report.xsl" />
-
-		<java classname="org.apache.xalan.xslt.Process" classpathref="xslt.classpath">
-			<arg value="-in" />
-			<arg value="${report.in}" />
-			<arg value="-out" />
-			<arg value="${report2.out}" />
-			<arg value="-xsl" />
-			<arg value="${report2.style}" />
-		</java>
+		<echo append="true" file="${report.out}">
+			<![CDATA[<p>${TIMESTAMP}</p>]]>
+		</echo>
 	</target>
 
 	<!-- ================================= 
@@ -211,7 +208,7 @@ report   - Just summarize output from previously run tests.
 		          location="/Development/JIRA issues/NIHVIVO-1129_Load_testing/mergerFiles/results" />
 		<property name="merge.input.filenames"
 		          value="ver_release1.1.1/SecondTests-rel-1-1-1.html, ver_trunkRdb/SecondTests-rel-1-2.html, ver_trunkSdb/SecondTests-rel-1-2.html" />
-		
+
 		<java classname="edu.cornell.mannlib.vitro.utilities.loadtesting.reportmerger.ReportsMerger"
 		      fork="yes"
 		      failonerror="true">
@@ -221,8 +218,7 @@ report   - Just summarize output from previously run tests.
 			<arg value="${merge.input.filenames}" />
 		</java>
 
-		<copy file="mergedResults.css"
-		      todir="${merge.output.dir}" />
+		<copy file="mergedResults.css" todir="${merge.output.dir}" />
 	</target>
 
 </project>
