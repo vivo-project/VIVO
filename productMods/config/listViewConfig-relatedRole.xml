@@ -432,6 +432,9 @@
     </query-base>
 
     <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         SELECT DISTINCT ?subclass
                         ?role (afn:localname(?role) AS ?roleName)
                         ?roleLabel ?roleTypeLabel 
