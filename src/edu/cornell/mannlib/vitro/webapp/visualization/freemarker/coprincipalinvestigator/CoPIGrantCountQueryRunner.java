@@ -114,8 +114,6 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 				
 			+		"UNION "
 
-//			+ "{ "  	
-//			+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
 			+  		"{ "
 			        	
 			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "

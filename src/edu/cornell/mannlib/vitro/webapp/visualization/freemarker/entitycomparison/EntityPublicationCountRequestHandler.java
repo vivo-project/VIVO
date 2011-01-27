@@ -14,19 +14,29 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
+import com.hp.hpl.jena.iri.IRI;
+import com.hp.hpl.jena.iri.IRIFactory;
+import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 
+import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -42,25 +52,109 @@ public class EntityPublicationCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-				entityURI, dataSource, log);
+		if(StringUtils.isNotBlank(entityURI)){
 		
-		Entity entity = queryManager.getQueryResult();
- 
-		if(entity.getEntityLabel().equals("no-label")){
-
-			return prepareStandaloneErrorResponse(vitroRequest,entityURI);
-		
-		} else {
-	
-			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
 					entityURI, dataSource, log);
+			
+			Entity entity = queryManager.getQueryResult();
+	 
+			if(entity.getEntityLabel().equals("no-label")){
 	
-			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+				return prepareStandaloneErrorResponse(vitroRequest,entityURI);
+			
+			} else {
+		
+				QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+						entityURI, dataSource, log);
+		
+				Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+						.getQueryResult();
+		
+				return prepareStandaloneResponse(vitroRequest, entity, entityURI,
+						subOrganizationTypesResult);
+			}
+		} else {
+			
+			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
+			
+			/*
+			 * First checking if the staff has provided highest level organization in deploy.properties
+			 * if so use to temporal graph vis.
+			 */
+			if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
+				
+				/*
+	        	 * To test for the validity of the URI submitted.
+	        	 */
+	        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+	    		IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
+	            
+	    		if (iri.hasViolation(false)) {
+	            	
+	                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
+	                log.error("Highest Level Organization URI provided is invalid " + errorMsg);
+	                
+	            } else {
+	            	
+	    			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
+	    					staffProvidedHighestLevelOrganization, dataSource, log);
+	    			
+	    			Entity entity = queryManager.getQueryResult();
+	    			
+					QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+							staffProvidedHighestLevelOrganization, dataSource, log);
+					
+					Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
 					.getQueryResult();
-	
-			return prepareStandaloneResponse(vitroRequest, entity, entityURI,
-					subOrganizationTypesResult);
+					
+					return prepareStandaloneResponse(vitroRequest, entity, staffProvidedHighestLevelOrganization,
+							subOrganizationTypesResult);
+					
+	            }
+			}
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			fieldLabelToOutputFieldLabel.put("organization", 
+											  QueryFieldLabels.ORGANIZATION_URL);
+			fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
+			
+			String aggregationRules = "(count(?organization) AS ?numOfChildren)";
+			
+			String whereClause = "?organization rdf:type foaf:Organization ; rdfs:label ?organizationLabel . \n"  
+									+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
+									+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
+									+ "FILTER ( !bound(?parent) ). \n";
+			
+			String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n" 
+										+ "ORDER BY DESC(?numOfChildren)\n" 
+										+ "LIMIT 1\n";
+			
+			QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = 
+					new GenericQueryRunner(fieldLabelToOutputFieldLabel,
+											aggregationRules,
+											whereClause,
+											groupOrderClause,
+											dataSource, log);
+			
+			
+			String highestLevelOrgURI = getHighestLevelOrganizationURI(
+					highestLevelOrganizationQueryHandler.getQueryResult(),
+					fieldLabelToOutputFieldLabel);
+			
+			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
+					highestLevelOrgURI, dataSource, log);
+			
+			Entity entity = queryManager.getQueryResult();
+			
+			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+					highestLevelOrgURI, dataSource, log);
+			
+			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+			.getQueryResult();
+			
+			return prepareStandaloneResponse(vitroRequest, entity, highestLevelOrgURI,
+					subOrganizationTypesResult);		
 		}
 	
 	}
@@ -257,5 +351,45 @@ public class EntityPublicationCountRequestHandler implements
 		return csvFileContent.toString();
 
 	}
+
+	private String getHighestLevelOrganizationURI(ResultSet resultSet,
+			   Map<String, String> fieldLabelToOutputFieldLabel) {
+
+		GenericQueryMap queryResult = new GenericQueryMap();
+		
+		
+		while (resultSet.hasNext())  {
+			QuerySolution solution = resultSet.nextSolution();
+			
+			
+			RDFNode organizationNode = solution.get(
+									fieldLabelToOutputFieldLabel
+											.get("organization"));
+			
+			if (organizationNode != null) {
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
+
+				return organizationNode.toString();
+							
+			}
+			
+			RDFNode organizationLabelNode = solution.get(
+									fieldLabelToOutputFieldLabel
+											.get("organizationLabel"));
+			
+			if (organizationLabelNode != null) {
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
+			}
+			
+			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
+			
+			if (numberOfChildrenNode != null) {
+				queryResult.addEntry("numOfChildren", String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
+			}
+		}
+		
+		return "";
+	}
+	
 	
 }	

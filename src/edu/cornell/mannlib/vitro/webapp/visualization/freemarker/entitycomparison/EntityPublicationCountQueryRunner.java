@@ -256,7 +256,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			if (iri.hasViolation(false)) {
 				String errorMsg = ((Violation) iri.violations(false).next())
 						.getShortMessage();
-				log.error("Entity Pub Count Query Query " + errorMsg);
+				log.error("Entity Pub Count Query " + errorMsg);
 				throw new MalformedQueryParametersException(
 						"URI provided for an entity is malformed.");
 			}
