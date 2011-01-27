@@ -10,6 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 
 /**
  * @author cdtank
@@ -112,12 +113,11 @@ public class BiboDocument extends Individual {
 		
 		if (publicationDate != null) { 
 			
-			DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateHourMinuteSecond();
+			DateTime validParsedDateTimeObject = UtilityFunctions.getValidParsedDateTimeObject(publicationDate);
 			
-			try {
-				DateTime dateTime = dateTimeFormat.parseDateTime(publicationDate);
-				return String.valueOf(dateTime.getYear());
-			} catch (Exception e) {
+			if (validParsedDateTimeObject != null) {
+				return String.valueOf(validParsedDateTimeObject.getYear());
+			} else {
 				return publicationYear != null ? publicationYear : VOConstants.DEFAULT_PUBLICATION_YEAR;
 			}
 			
