@@ -5,7 +5,7 @@
 <#include "individual-setup.ftl">
 
 <#assign individualProductExtension>
-    <#-- Remove invlude below when individual--foaf-organization.ftl is created -->
+    <#-- Remove include below when individual--foaf-organization.ftl is created -->
     <#include "individual-visualization.ftl">
     
     <#include "individual-overview.ftl">

@@ -8,21 +8,20 @@
 
     <section id="share-contact" role="region"> 
         <#-- Image -->           
-       <#assign individualImage>
-           <@p.imageLinks individual=individual 
-                          propertyGroups=propertyGroups 
-                          namespaces=namespaces 
-                          editable=editable 
-                          showPlaceholder="always" 
-                          placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
-       </#assign>
+        <#assign individualImage>
+            <@p.imageLinks individual=individual 
+                           propertyGroups=propertyGroups 
+                           namespaces=namespaces 
+                           editable=editable 
+                           showPlaceholder="always" 
+                           placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
+        </#assign>
 
-       <#-- <#if ( individualImage?matches('<img class="individual-photo"')?size > 0 )> -->
-       <#if ( individualImage?contains('<img class="individual-photo"') )>
-           <#assign infoClass = 'class="withThumb"'/>
-       </#if>
+        <#if ( individualImage?contains('<img class="individual-photo"') )>
+            <#assign infoClass = 'class="withThumb"'/>
+        </#if>
 
-       <div id="photo-wrapper">${individualImage}</div>
+        <div id="photo-wrapper">${individualImage}</div>
     
         <nav role="navigation">
             <ul id ="individual-tools-people" role="list">
