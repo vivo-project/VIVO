@@ -9,12 +9,12 @@
     <section id="share-contact" role="region"> 
         <#-- Image -->           
         <#assign individualImage>
-            <@p.imageLinks individual=individual 
-                           propertyGroups=propertyGroups 
-                           namespaces=namespaces 
-                           editable=editable 
-                           showPlaceholder="always" 
-                           placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
+            <@p.image individual=individual 
+                      propertyGroups=propertyGroups 
+                      namespaces=namespaces 
+                      editable=editable 
+                      showPlaceholder="always" 
+                      placeholder="${urls.images}/placeholders/person.thumbnail.jpg" />
         </#assign>
 
         <#if ( individualImage?contains('<img class="individual-photo"') )>
