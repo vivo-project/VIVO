@@ -38,7 +38,6 @@
     ${scripts.add(googleJSAPI)}
     ${scripts.add(visualizationHelperJavaScript)}
     ${scripts.add("/js/visualization/sparkline.js")}
-    ${scripts.add(visualizationHelperJavaScript)}
     
     <script type="text/javascript">
         var visualizationUrl = '${individual.visualizationUrl}';
