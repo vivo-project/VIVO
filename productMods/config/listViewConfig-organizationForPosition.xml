@@ -13,116 +13,21 @@
                         ?positionTitle 
                         ?person ?personName 
                         ?dateTimeStart ?dateTimeEnd WHERE {
-            {
-                ?subject ?property ?position .
-            }
-            UNION {
-                ?subject ?property ?position .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName   
+            GRAPH ?g1 { ?subject ?property ?position } 
+            OPTIONAL { GRAPH ?g2 { ?position core:positionForPerson ?person }
+                       GRAPH ?g3 { ?person rdfs:label ?personName }  
             }                        
-            UNION { 
-                ?subject ?property ?position .
-                ?position rdfs:label ?positionTitle 
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            } 
-            UNION { 
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-            }    
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?subject ?property ?position .
-                ?position rdfs:label ?positionTitle 
-            }
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            }
-            UNION { 
-                 ?subject ?property ?position .
-                 ?position core:dateTimeInterval ?dateTimeInterval .
-                 ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                 ?dateTimeStartValue core:dateTime ?dateTimeStart 
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName   
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?position rdfs:label ?positionTitle 
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            }
-            UNION { 
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd . 
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName   
-            }
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?position rdfs:label ?positionTitle 
-            } UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            }
+            OPTIONAL { GRAPH ?g4 { ?position rdfs:label ?positionTitle } }
+            OPTIONAL { GRAPH ?g5 { ?position core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+
+                       }
             # Current positions only: end date is either null or not in the past
-            FILTER ( !bound(?dateTimeEnd) ||                        
+            } FILTER ( !bound(?dateTimeEnd) ||                        
                        afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
         } ORDER BY ?personName
     </query-base>
@@ -137,123 +42,25 @@
                         ?positionTitle 
                         ?person ?personName 
                         ?dateTimeStart ?dateTimeEnd WHERE {
-         GRAPH &lt;urn:x-arq:UnionGraph&gt; {
-           ?subject ?property ?position .
-           ?position a ?subclass .
-           ?subclass rdfs:subClassOf core:Position .
-           {
-            {
-                ?subject ?property ?position .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName   
-            }                        
-            UNION { 
-                ?subject ?property ?position .
-                ?position rdfs:label ?positionTitle 
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            } 
-            UNION { 
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-            }    
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?subject ?property ?position .
-                ?position rdfs:label ?positionTitle 
-            }
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            }
-            UNION { 
-                 ?subject ?property ?position .
-                 ?position core:dateTimeInterval ?dateTimeInterval .
-                 ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                 ?dateTimeStartValue core:dateTime ?dateTimeStart 
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName   
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?position rdfs:label ?positionTitle 
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            }
-            UNION { 
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-            } 
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd . 
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName   
-            }
-            UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?position rdfs:label ?positionTitle 
-            } UNION {
-                ?subject ?property ?position .
-                ?position core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?position core:positionForPerson ?person .
-                ?person rdfs:label ?personName .
-                ?position rdfs:label ?positionTitle
-            }
-           }
-
+            GRAPH ?g1 { ?subject ?property ?position } 
+            OPTIONAL { GRAPH ?g2 { ?position core:positionForPerson ?person }
+                       GRAPH ?g3 { ?person rdfs:label ?personName }  
+            }                 
+            OPTIONAL { GRAPH ?g4 { ?position a ?subclass }
+                       GRAPH ?g5 { ?subclass rdfs:subClassOf core:Position }
+            }         
+            OPTIONAL { GRAPH ?g6 { ?position rdfs:label ?positionTitle } }
+            OPTIONAL { GRAPH ?g7 { ?position core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
+                                  GRAPH ?g9 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g11 { ?dateTimeEndValue core:dateTime ?dateTimeEnd } 
+                       }
             # Current positions only: end date is either null or not in the past
-            FILTER ( !bound(?dateTimeEnd) ||                        
+            } FILTER ( !bound(?dateTimeEnd) ||                        
                        afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
- 
-        } } ORDER BY ?subclass ?personName
+        } ORDER BY ?subclass ?personName
     </query-collated>
     
     <template>propStatement-organizationForPosition.ftl</template>

@@ -12,145 +12,21 @@
         SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)
                         ?roleLabel 
                         ?activity ?activityName 
-                        ?dateTimeStart ?dateTimeEnd WHERE { GRAPH &lt;urn:x-arq:UnionGraph&gt; {
-           {
-            { 
-                ?subject ?property ?role .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?role } 
+            OPTIONAL { GRAPH ?g2 { ?role core:roleIn ?activity }
+                       GRAPH ?g3 { ?activity rdfs:label ?activityName }
             }
-            UNION {
-                ?subject ?property ?role .
-                ?role rdfs:label ?roleLabel 
+            OPTIONAL { GRAPH ?g4 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g5 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue }
+                                  GRAPH ?g7 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g9 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       }
             }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-            } 
-            UNION { 
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            } 
-            UNION { 
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-           }
-        } } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
+        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
     </query-base>
     
     <query-collated>    
@@ -162,183 +38,24 @@
                         ?role (afn:localname(?role) AS ?roleName)
                         ?roleLabel 
                         ?activity ?activityName 
-                        ?dateTimeStart ?dateTimeEnd WHERE { GRAPH &lt;urn:x-arq:UnionGraph&gt; {
-           {
-            { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            GRAPH ?g1 { ?subject ?property ?role } 
+            OPTIONAL { GRAPH ?g2 { ?role core:roleIn ?activity }
+                       GRAPH ?g3 { ?activity rdfs:label ?activityName }
             }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role rdfs:label ?roleLabel 
+            OPTIONAL { GRAPH ?g4 { ?role a ?subclass }
+                       GRAPH ?g5 { ?subclass rdfs:subClassOf core:Role }
+            }   
+            OPTIONAL { GRAPH ?g6 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { GRAPH ?g7 { ?role core:dateTimeInterval ?dateTimeInterval }
+                       OPTIONAL { GRAPH ?g8 { ?dateTimeInterval core:start ?dateTimeStartValue }
+                                  GRAPH ?g9 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+                       }
+                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:end ?dateTimeEndValue }
+                                  GRAPH ?g11 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       }
             }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-            } 
-            UNION { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-            } 
-            UNION { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-            }
-            UNION { 
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?role rdfs:label ?roleLabel 
-            }
-            UNION {
-                ?subject ?property ?role .
-                ?role a ?subclass .
-                ?subclass rdfs:subClassOf core:Role .
-                ?role core:dateTimeInterval ?dateTimeInterval .
-                ?dateTimeInterval core:start ?dateTimeStartValue .
-                ?dateTimeStartValue core:dateTime ?dateTimeStart .
-                ?dateTimeInterval core:end ?dateTimeEndValue .
-                ?dateTimeEndValue core:dateTime ?dateTimeEnd .
-                ?role core:roleIn ?activity .
-                ?activity rdfs:label ?activityName .
-                ?role rdfs:label ?roleLabel 
-            }
-           }
-         } } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
+        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
     </query-collated>
     
     <template>propStatement-hasRole.ftl</template>

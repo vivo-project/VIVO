@@ -11,23 +11,11 @@
         
         SELECT DISTINCT ?authorship (afn:localname(?authorship) AS ?authorshipName) 
                         ?person ?personName WHERE {
-           {
-            {
-                ?subject ?property ?authorship .
-                ?authorship core:authorRank ?rank 
-            }
-            UNION {
-                ?subject ?property ?authorship .
-                ?authorship core:linkedAuthor ?person .
-                ?person rdfs:label ?personName .
-            }
-            UNION {
-                ?subject ?property ?authorship .
-                ?authorship core:linkedAuthor ?person .
-                ?person rdfs:label ?personName .
-                ?authorship core:authorRank ?rank . 
-            }
-           }
+            GRAPH ?g1 { ?subject ?property ?authorship } 
+            OPTIONAL { GRAPH ?g2 { ?authorship core:authorRank ?rank } } 
+            OPTIONAL { GRAPH ?g3 { ?authorship core:linkedAuthor ?person }                      
+                       GRAPH ?g4 { ?person rdfs:label ?personName }  
+            }                             
         } ORDER BY ?rank ?personName   
     </query-base>
 
@@ -40,21 +28,14 @@
         SELECT DISTINCT ?subclass
                         ?authorship (afn:localname(?authorship) AS ?authorshipName) 
                         ?person ?personName WHERE {
-            {
-                ?subject ?property ?authorship .
-                ?authorship core:linkedAuthor ?person .
-                ?person rdfs:label ?personName .
-                ?person a ?subclass .
-                ?subclass rdfs:subClassOf foaf:Person .   
-            }
-            UNION {
-                ?subject ?property ?authorship .
-                ?authorship core:linkedAuthor ?person .
-                ?person rdfs:label ?personName .
-                ?person a ?subclass .
-                ?subclass rdfs:subClassOf foaf:Person .   
-                ?authorship core:authorRank ?rank 
-            } 
+            GRAPH ?g1 { ?subject ?property ?authorship } 
+            OPTIONAL { GRAPH ?g2 { ?authorship core:authorRank ?rank } } 
+            OPTIONAL { GRAPH ?g3 { ?authorship core:linkedAuthor ?person }                      
+                       GRAPH ?g4 { ?person rdfs:label ?personName } 
+                       OPTIONAL { GRAPH ?g5 { ?person a ?subclass }
+                                  GRAPH ?g6 { ?subclass rdfs:subClassOf foaf:Person }
+                       }   
+            }                             
         } ORDER BY ?subclass ?rank ?personName   
     </query-collated>
         

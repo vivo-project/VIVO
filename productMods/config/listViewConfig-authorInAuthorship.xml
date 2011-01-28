@@ -12,20 +12,13 @@
         SELECT DISTINCT ?authorship (afn:localname(?authorship) AS ?authorshipName)                        
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE {
-           {
-            { 
-                ?subject ?property ?authorship .
-                ?authorship core:linkedInformationResource ?infoResource .                     
-                ?infoResource rdfs:label ?infoResourceName .                                          
-            }
-            UNION {
-                ?subject ?property ?authorship .
-                ?authorship core:linkedInformationResource ?infoResource .                     
-                ?infoResource core:dateTimeValue ?dateTimeValue . 
-                ?dateTimeValue core:dateTime ?dateTime .              
-                ?infoResource rdfs:label ?infoResourceName .                                          
-            }
-           }                                                          
+            GRAPH ?g1 { ?subject ?property ?authorship } 
+            OPTIONAL { GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
+                       GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }                                          
+                       OPTIONAL { GRAPH ?g4 { ?infoResource core:dateTimeValue ?dateTimeValue } 
+                                  GRAPH ?g5 { ?dateTimeValue core:dateTime ?dateTime } 
+                       } 
+            }                                                           
         } ORDER BY DESC(?dateTime) ?infoResourceName   
     </query-base>
     
@@ -37,24 +30,18 @@
         SELECT DISTINCT ?subclass 
                         ?authorship (afn:localname(?authorship) AS ?authorshipName) 
                         ?infoResource ?infoResourceName 
-                        ?dateTime WHERE { GRAPH &lt;urn:x-arq:UnionGraph&gt; {
-               {
-                ?subject ?property ?authorship .
-                ?authorship core:linkedInformationResource ?infoResource .
-                ?infoResource rdfs:label ?infoResourceName .
-                ?infoResource a ?subclass .
-                ?subclass rdfs:subClassOf core:InformationResource .
-               } 
-               UNION { 
-                   ?subject ?property ?authorship .  
-                   ?authorship core:linkedInformationResource ?infoResource .
-                   ?infoResource rdfs:label ?infoResourceName .
-                   ?infoResource a ?subclass .
-                   ?subclass rdfs:subClassOf core:InformationResource .
-                   ?infoResource core:dateTimeValue ?dateTimeValue . 
-                   ?dateTimeValue core:dateTime ?dateTime .  
-               } 
-        } } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
+                        ?dateTime WHERE {
+            GRAPH ?g1 { ?subject ?property ?authorship } 
+            OPTIONAL { GRAPH ?g2 { ?authorship core:linkedInformationResource ?infoResource }                      
+                       GRAPH ?g3 { ?infoResource rdfs:label ?infoResourceName }
+                       OPTIONAL { GRAPH ?g4 { ?subclass rdfs:subClassOf core:InformationResource }
+                                  GRAPH ?g5 { ?infoResource a ?subclass } 
+                       }                                            
+                       OPTIONAL { GRAPH ?g6 { ?infoResource core:dateTimeValue ?dateTimeValue } 
+                                  GRAPH ?g7 { ?dateTimeValue core:dateTime ?dateTime } 
+                       } 
+            }                                                           
+        } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
     </query-collated>
     
     <template>propStatement-authorInAuthorship.ftl</template>
