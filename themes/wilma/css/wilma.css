@@ -453,8 +453,6 @@ ul#main-nav {
 }
 #main-nav li a:hover {
     color: #002b44;
-    /*background: url(../images/selected-main-nav.jpg) left -3px no-repeat;
-    margin-left: 21px;*/
 }
 #main-nav li a.selected {
     color: #002b44;
@@ -1311,7 +1309,6 @@ section.property-group h2 {
     font-size: 1.25em;
     color: #2485ae;
     font-weight: normal;
-    /*background:url(../../../images/individual/arrow-down.gif) 120px 24px no-repeat;*/
 }
 article.property {
     width: 852px;
