@@ -12,7 +12,7 @@
             <#include "menupage-vClassesInClassgroup.ftl">
             
             <section id="menupage-graph" class="people" role="region">
-                <img src="${urls.images}/menupage/visual-graph.jpg" alt="" />
+                <#-- Graph will be dynamically rendered via RaphaelJS library -->
             </section>
         </section>
         
@@ -45,7 +45,7 @@
     
     <#include "menupage-scripts.ftl">
     
-    ${scripts.add("/js/menupage/browseByVClassPeople.js")}
+    ${scripts.add("/js/menupage/browseByVClassPeople.js", "/js/menupage/browseClassGroupsPiePeople.js")}
 <#else>
     ${noDataNotification}
 </#if>
