@@ -64,7 +64,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ "		?Role core:roleIn ?Grant . "
 		+ "		?Grant rdfs:label ?GrantLabel . "
 		+ 		"OPTIONAL {"	
-		+			"?Grant core:dateTimeInterval ?dateTimeIntervalValue . "		
+		+			"?Role core:dateTimeInterval ?dateTimeIntervalValue . "		
 		+			"?dateTimeIntervalValue core:start ?startDate . "		
 		+			"?startDate core:dateTime ?startDateTimeValue . " 	
 		+			"OPTIONAL {"	
