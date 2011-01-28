@@ -58,7 +58,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK = ""
 		+ 		"OPTIONAL {"	
-		+			"?Grant core:dateTimeInterval ?dateTimeIntervalValue . "		
+		+			"?Role core:dateTimeInterval ?dateTimeIntervalValue . "		
 		+			"?dateTimeIntervalValue core:start ?startDate . "		
 		+			"?startDate core:dateTime ?startDateTimeValue . " 	
 		+			"OPTIONAL {"	
