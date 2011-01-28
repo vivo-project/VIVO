@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 /* Fix for homepage in IE6 browsers */
-body{
+body {
     background-position: center, 0;
     background-repeat: no-repeat;
     background-image: none;
@@ -22,15 +22,14 @@ body{
 #search-home-field  input.submit {
     padding-left: 14px;
 }
+#login {
+    margin-right: 0;
+}
 ul#browse-classgroups { 
     margin-left: 20px; 
 }
 #browse-classes { 
     width: 600px; 
-}
-.global-highlights {
-    width: 220px;
-    padding: 18px;
 }
 #login-form p.submit {
     margin-left: 15px;
@@ -44,6 +43,9 @@ ul#vgraph-classes {
     float: left;
     width: 265px;
     margin-left: 15px;
+}
+#browse-by{
+    padding-bottom: 20px;
 }
 ul#browse-classes {
     width: 284px;
@@ -64,6 +66,17 @@ article.foaf-person {
 #profile-photo-display { 
     width: 620px;
 }
+#individuals-in-class .pagination li a {
+    border: 1px solid red;
+    float: left;
+    display: block;
+}
+#browse-classes {
+    width: 590px;
+}
+ul#classgroup-list.vis {
+    width: 38%;
+}
 /* Fix for site admin */
 /* the wonders of the IE float model...fix to maintain sanity in rendering sections of site admin */
 /* targets IE7 and below */
@@ -73,22 +86,15 @@ article.foaf-person {
   *vertical-align: top !important;
 }
 /* Fix for individual pages */
-.thumb-edit-links{
-    margin-top: 147px;
-    margin-right: 10px;
-    z-index: 9999;
+#individual-intro.person {
+    width: 100%;
 }
-#individual-intro-person{
-    width: 73%;
+.sparkline_text, 
+.collaboratorship-link-container {
+    width: 148px;
 }
-#individual-intro{
-    width: 65%;
-}
-#individual-info{
-    width: 90%;  
-}
-#share-contact {
-    width: auto;
+#individual-intro.person #individual-info {
+    width: 72%;
 }
 /* Fix for menupages */
 ul#alpha-browse-individuals {
@@ -100,12 +106,22 @@ ul#alpha-browse-individuals a {
     padding-left: 6px;
     width: 8px;
 }
-#individuals-in-class{
+#individuals-in-class {
     width: 550px;
+}
+#individual-intro.person .individual-overview {
+    clear: left;
 }
 /* Fix for photo upload */
 input#submit, 
-input#submit:visited{
+input#submit:visited {
     padding: 5px 5px 7px;
     margin-left: -17px;
+}
+/*  */
+input#submit, input#submit:visited {
+    display: block;
+    float: left;
+    clear: both;
+    margin-left: 0;
 }
