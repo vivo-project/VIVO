@@ -33,12 +33,6 @@
         </section>
     </section>
     
-    <section id="network-stats" role="region">
-        <h3>Network stats</h3>
-        
-        <p>(n) Persons | (n) with authorship | (n) researchers | (n) are principal investigators | (n) with awards | (n) are teaching | (n) have positions in organization</p>
-    </section>
-    
     <#include "menupage-browse.ftl">
     
     ${stylesheets.add("/css/menupage/menupage.css")}

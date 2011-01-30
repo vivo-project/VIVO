@@ -923,23 +923,6 @@ ul#find-filters a.selected {
     color: #2ea0cf;
     background: url(../images/arrow.gif) 0 12px no-repeat;
 }
-/* NETWORK STATS ------>  */
-#network-stats {
-    width: 920px;
-    background: #f7f9f9;
-    border: 1px solid #d7e6e6;
-}
-#network-stats h3 {
-    font-size: 1.25em;
-    color: #2485ae;
-    font-weight: normal;
-}
-#network-stats p {
-    padding: 15px 15px 15px 175px;
-    font-size: .875em;
-    line-height: 1.5em;
-    color: #5e6363;
-}
 /* RESEARCHERS ------>  */
 #researchers {
     width: 920px;
