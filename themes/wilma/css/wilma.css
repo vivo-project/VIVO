@@ -1333,6 +1333,7 @@ article.property ul.property-list {
 }
 article.property ul.property-list li a {
     color: #2485ae;
+    line-height: 1.6em;
 }
 /* MISCELLANEOUS ------>  */
 .grey {
