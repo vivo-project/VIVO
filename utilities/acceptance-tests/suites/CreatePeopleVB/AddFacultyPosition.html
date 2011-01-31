@@ -106,12 +106,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Faculty Member (1)</td>
+	<td>link=Faculty</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>People</td>
+	<td>Faculty</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,7 +131,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='personInPosition']/a</td>
+	<td>//h2[@id='personInPosition']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -190,8 +190,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Testing Department</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Testing Department Full Professor, 1998 -</td>
+	<td>Testing Department, Full Professor 1998 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +231,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Testing Department Full Professor, 1998 -</td>
+	<td>Testing Department, Full Professor 1998 -</td>
 	<td></td>
 </tr>
 <tr>
