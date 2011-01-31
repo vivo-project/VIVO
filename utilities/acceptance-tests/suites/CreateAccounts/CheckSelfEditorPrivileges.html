@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>ConfirmEditedNobodyInfo</title>
+<title>CheckNobodyPrivileges</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">ConfirmEditedNobodyInfo</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CheckNobodyPrivileges</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Confirm Changes to User Information</td>
+	<td class="comment">Check Unprivileged User Rights</td>
 	<td></td>
 </tr>
 <tr>
@@ -61,77 +61,47 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Try to log in with original username</td>
+	<td class="comment">Login as Richard Rookie</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>username</td>
+	<td>loginName</td>
 	<td>Rick Rookie</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>password</td>
-	<td>resetPasswd</td>
+	<td>loginPassword</td>
+	<td>newPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>loginForm</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>(unknown username)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Unknown username</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Now log in with new username (and new password)</td>
+	<td class="comment">Check privileges: should not see Data Input, Ontology Editor, Site Configuration, Advanced Data Tools.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>username</td>
-	<td>Richard Rookie</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password</td>
-	<td>resetPasswd</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>verifyTextNotPresent</td>
+	<td>Site Admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Logged in as</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Richard Rookie</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -141,7 +111,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginSubmitMode</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,7 +124,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
