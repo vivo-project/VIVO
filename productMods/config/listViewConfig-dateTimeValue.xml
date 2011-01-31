@@ -13,11 +13,26 @@
                         (afn:localname(?dateTimeValue) AS ?dateTimeValueName) 
                         (afn:localname(?dateTimePrecision) AS ?precision) 
                         ?dateTime  WHERE {
-            GRAPH ?g1 { ?subject ?property ?dateTimeValue } 
-            OPTIONAL { GRAPH ?g2 { ?dateTimeValue core:dateTime ?dateTime } }
-            OPTIONAL { GRAPH ?g3 { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision } }
+            ?subject ?property ?dateTimeValue 
+            OPTIONAL { ?dateTimeValue core:dateTime ?dateTime }
+            OPTIONAL { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision }
         }  
     </query-base>
+
+    <query-construct>
+        CONSTRUCT {
+            ?subject ?property ?dateTimeValue .
+            ?dateTimeValue ?p ?o .
+        } WHERE {
+            {
+                ?subject ?property ?dateTimeValue  
+            } 
+            UNION {
+                ?subject ?property ?dateTimeValue .
+                ?dateTimeValue ?p ?o .
+            }
+        } 
+    </query-construct>
     
     <template>propStatement-dateTimeValue.ftl</template>
 </list-view-config>

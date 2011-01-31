@@ -16,29 +16,70 @@
                         ?valueEnd ?valueEndName 
                         ?dateTimeEnd 
                         ?precisionEnd WHERE {
-            GRAPH ?g1 { ?subject ?property ?dateTimeInterval
-                        LET (?intervalName := afn:localname(?dateTimeInterval))
-            } 
-            OPTIONAL { GRAPH ?g2 { ?dateTimeInterval core:start ?valueStart
-                                   LET (?valueStartName := afn:localname(?valueStart))
-                       } 
-                       OPTIONAL { GRAPH ?g3 { ?valueStart core:dateTime ?dateTimeStart } }
-                       OPTIONAL { GRAPH ?g4 { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
-                                              LET (?precisionStart := afn:localname(?dateTimePrecisionStart)) 
-                                  } 
+            ?subject ?property ?dateTimeInterval
+                        LET (?intervalName := afn:localname(?dateTimeInterval)) 
+            OPTIONAL { ?dateTimeInterval core:start ?valueStart
+                                   LET (?valueStartName := afn:localname(?valueStart)) 
+                       OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
+                       OPTIONAL { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
+                                              LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
                        }
             }                      
-            OPTIONAL { GRAPH ?g5 { ?dateTimeInterval core:end ?valueEnd
-                                   LET (?valueEndName := afn:localname(?valueEnd)) 
-                       } 
-                       OPTIONAL { GRAPH ?g6 { ?valueEnd core:dateTime ?dateTimeEnd } }
-                       OPTIONAL { GRAPH ?g7 { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
-                                              LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd)) 
-                                  } 
+            OPTIONAL { ?dateTimeInterval core:end ?valueEnd
+                                   LET (?valueEndName := afn:localname(?valueEnd))  
+                       OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
+                       OPTIONAL { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
+                                              LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
                        }
             }
         }  
     </query-base>
-    
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+            ?subject ?property ?dateTimeInterval .
+            ?dateTimeInterval core:start ?valueStart .
+            ?dateTimeInterval core:end ?valueEnd
+        } WHERE {
+            {
+                ?subject ?property ?dateTimeInterval
+            } 
+            UNION {
+                ?subject ?property ?dateTimeInterval .
+                ?dateTimeInterval core:start ?valueStart
+            }
+            UNION {
+                ?subject ?property ?dateTimeInterval .
+                ?dateTimeInterval core:end ?valueEnd
+            }
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+       
+        CONSTRUCT { 
+            ?valueStart ?p ?o
+        } WHERE {
+            ?subject ?property ?dateTimeInterval .
+            ?dateTimeInterval core:start ?valueStart .
+            ?valueStart ?p ?o
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+       
+        CONSTRUCT { 
+            ?valueEnd ?p ?o
+        } WHERE {
+            ?subject ?property ?dateTimeInterval .
+            ?dateTimeInterval core:end ?valueEnd .
+            ?valueEnd ?p ?o
+        }
+    </query-construct>
+
     <template>propStatement-dateTimeInterval.ftl</template>
 </list-view-config>

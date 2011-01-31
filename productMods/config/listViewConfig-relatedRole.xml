@@ -15,28 +15,28 @@
                         ?roleLabel ?roleTypeLabel        
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
                         
-            GRAPH ?g1 { ?subject ?property ?role }
+            ?subject ?property ?role 
             
             # We need ?subclass in query-base to get the roleTypeLabel for roles that 
             # have no label (e.g., InvestigatorRole and its subclasses)
-            OPTIONAL { GRAPH ?g2 { ?role a ?subclass } 
-                       GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role } 
-                       OPTIONAL { GRAPH ?g4 { ?subclass rdfs:label ?roleTypeLabel } } 
+            OPTIONAL {  ?role a ?subclass .
+                        ?subclass rdfs:subClassOf core:Role  
+                        OPTIONAL { ?subclass rdfs:label ?roleTypeLabel } 
             }
 
-            OPTIONAL { GRAPH ?g5 { ?roleProp rdfs:subPropertyOf core:roleOf }
-                       GRAPH ?g6 { ?role ?roleProp ?indivInRole }
-                       OPTIONAL { GRAPH ?g7 { ?indivInRole rdfs:label ?indivLabel } } 
+            OPTIONAL { ?roleProp rdfs:subPropertyOf core:roleOf .
+                       ?role ?roleProp ?indivInRole 
+                       OPTIONAL { ?indivInRole rdfs:label ?indivLabel } 
             }
             
-            OPTIONAL { GRAPH ?g8 { ?role rdfs:label ?roleLabel } }
+            OPTIONAL { ?role rdfs:label ?roleLabel }
 
-            OPTIONAL { GRAPH ?g9 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g10 { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
+                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
+                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
                        }
-                       OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }
-                                  GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd
                       }
             }
             # Make sure we get the role that goes with the role property
@@ -60,26 +60,26 @@
                         ?roleLabel ?roleTypeLabel        
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
                         
-            GRAPH ?g1 { ?subject ?property ?role }
+            ?subject ?property ?role 
             
-            OPTIONAL { GRAPH ?g2 { ?role a ?subclass } 
-                       GRAPH ?g3 { ?subclass rdfs:subClassOf core:Role } 
-                       OPTIONAL { GRAPH ?g4  { ?subclass rdfs:label ?roleTypeLabel } } 
+            OPTIONAL { ?role a ?subclass . 
+                       ?subclass rdfs:subClassOf core:Role 
+                       OPTIONAL { ?subclass rdfs:label ?roleTypeLabel } 
             }
 
-            OPTIONAL { GRAPH ?g5 { ?roleProp rdfs:subPropertyOf core:roleOf }
-                       GRAPH ?g6 { ?role ?roleProp ?indivInRole }
-                       OPTIONAL { GRAPH ?g7 { ?indivInRole rdfs:label ?indivLabel } } 
+            OPTIONAL { ?roleProp rdfs:subPropertyOf core:roleOf .
+                       ?role ?roleProp ?indivInRole 
+                       OPTIONAL { ?indivInRole rdfs:label ?indivLabel } 
             }
             
-            OPTIONAL { GRAPH ?g8  { ?role rdfs:label ?roleLabel } }           
+            OPTIONAL { ?role rdfs:label ?roleLabel }           
 
-            OPTIONAL { GRAPH ?9 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g10  { ?dateTimeInterval core:start ?dateTimeStartValue }                     
-                                  GRAPH ?g11 { ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval
+                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
+                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
                        }
-                       OPTIONAL { GRAPH ?g12 { ?dateTimeInterval core:end ?dateTimeEndValue }
-                                  GRAPH ?g13 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                       }
             }
             # Make sure we get the role that goes with the role property
@@ -91,6 +91,84 @@
         } ORDER BY ?subclass ?indivName ?indivLabel ?roleLabel ?roleTypeLabel
     </query-collated>
     
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:Role 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:Role 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?roleProp rdfs:subPropertyOf core:roleOf 
+        } WHERE {
+            ?roleProp rdfs:subPropertyOf core:roleOf 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role ?roleProperty ?roleValue .
+            ?subclass rdfs:label ?roleTypeLabel .
+            ?indivInRole rdfs:label ?indivLabel
+        } WHERE {
+            {
+               ?subject ?property ?role 
+            } UNION {
+               ?subject ?property ?role .
+               ?role ?roleProperty ?roleValue . 
+            } UNION {
+               ?subject ?property ?role .
+               ?role a ?subclass . 
+            } UNION {
+               ?subject ?property ?role .
+               ?role a ?subclass . 
+               ?subclass rdfs:label ?roleTypeLabel
+            } UNION {
+               ?subject ?property ?role .
+               ?role ?roleProp ?indivInRole .
+               ?indivInRole rdfs:label ?indivLabel
+            }
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>
     <!--
     <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.RelatedRoleDataPostProcessor</postprocessor>
     -->
