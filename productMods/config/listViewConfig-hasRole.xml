@@ -39,11 +39,12 @@
                         ?role (afn:localname(?role) AS ?roleName)
                         ?roleLabel 
                         ?activity ?activityName 
+                        ?activityLabel
                         ?dateTimeStart ?dateTimeEnd WHERE {
             GRAPH ?g1 { ?subject ?property ?role } 
             OPTIONAL { GRAPH ?g2 { ?role core:roleIn ?activity }
-                       GRAPH ?g3 { ?activity rdfs:label ?activityName }
-            }
+                       OPTIONAL { GRAPH ?g3 { ?activity rdfs:label ?activityLabel } }
+            }            
             OPTIONAL { GRAPH ?g4 { ?role a ?subclass }
                        GRAPH ?g5 { ?subclass rdfs:subClassOf core:Role }
             }   
@@ -56,7 +57,7 @@
                                   GRAPH ?g11 { ?dateTimeEndValue core:dateTime ?dateTimeEnd }
                        }
             }
-        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
+        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-collated>
     
     <template>propStatement-hasRole.ftl</template>
