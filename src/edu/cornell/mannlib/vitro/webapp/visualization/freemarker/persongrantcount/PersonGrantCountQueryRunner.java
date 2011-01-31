@@ -103,21 +103,21 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 				grant.setIndividualLabel(grantLabelNode.toString());
 			}
 			
-			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
+			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.ROLE_START_DATE);
 			if(grantStartDateNode != null){
 				grant.setGrantStartDate(grantStartDateNode.toString());
 			}else {
-				grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE_FOR_GRANT);
+				grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
 				if(grantStartDateNode != null){
 					grant.setGrantStartDate(grantStartDateNode.toString());
 				}
 			}
 			
-			RDFNode grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
+			RDFNode grantEndDateNode = solution.get(QueryFieldLabels.ROLE_END_DATE);
 			if(grantEndDateNode != null){
 				grant.setGrantEndDate(grantEndDateNode.toString());
 			}else {
-				grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE_FOR_GRANT);
+				grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
 				if(grantEndDateNode != null){
 					grant.setGrantEndDate(grantEndDateNode.toString());
 				}				

@@ -646,21 +646,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 		}
 
 
-		RDFNode grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE);
+		RDFNode grantStartYear = solution.get(QueryFieldLabels.ROLE_START_DATE);
 		if (grantStartYear != null) {
 			grant.setGrantStartDate(grantStartYear.toString());
 		}else{
-			grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE_FOR_GRANT);
+			grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE);
 			if(grantStartYear != null){
 				grant.setGrantStartDate(grantStartYear.toString());
 			}			
 		}
 		
-		RDFNode grantEndDate = solution.get(QueryFieldLabels.GRANT_END_DATE);
+		RDFNode grantEndDate = solution.get(QueryFieldLabels.ROLE_END_DATE);
 		if (grantEndDate != null) {
 			grant.setGrantEndDate(grantEndDate.toString());
 		}else{
-			grantEndDate = solution.get(QueryFieldLabels.GRANT_END_DATE_FOR_GRANT);
+			grantEndDate = solution.get(QueryFieldLabels.GRANT_END_DATE);
 			if(grantEndDate != null){
 				grant.setGrantEndDate(grantEndDate.toString());
 			}			
