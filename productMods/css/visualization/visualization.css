@@ -48,11 +48,13 @@ span.incomplete-data-holder,
 }
 
 .collaboratorship-link-container {
+    width: 180px;
+}
+
+.collaboratorship-link-separator {
     margin-top: 20px;
-    display: none;
     border-top: 1px dotted #A6B1B0;
     padding-top: 20px;
-    width: 180px;
 }
 
 .sparkline_text {

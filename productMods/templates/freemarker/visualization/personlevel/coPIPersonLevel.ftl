@@ -96,7 +96,7 @@ $(document).ready(function(){
                     show on that page. 
                     */
                     if (data.numOfPublications !== undefined && data.numOfPublications > 0) {
-                           $("#coauthorship_link_container").show();                    
+                           $(".toggle_visualization").show();                    
                     }
                 
                 }

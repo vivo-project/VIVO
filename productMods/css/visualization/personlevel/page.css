@@ -1,59 +1,59 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 a.no_href_styles {
-	border: 0;
+    border: 0;
 }
 
 .no_href_styles a:ACTIVE,.no_href_styles a:BEFORE,.no_href_styles a:FOCUS,.no_href_styles a:HOVER,.no_href_styles a:VISITED,.no_href_styles a:LINK
-	{ /*color: white;*/
-	border: 0;
+    { /*color: white;*/
+    border: 0;
 }
 
 .vis_stats {
-	background: #fff;
-	clear: right;
-	width:67%;
-	margin-left:33%;
+    background: #fff;
+    clear: right;
+    width:67%;
+    margin-left:33%;
 }
 
 .vis-tables {
-	padding: 10px;
-	background-color: #FFF;
-	border: 1px solid #ddebf1;
-	float:left;
-	font-size: 0.8em;
-	width: 44%;
-	margin: 0 10px 10px 0;
+    padding: 10px;
+    background-color: #FFF;
+    border: 1px solid #ddebf1;
+    float:left;
+    font-size: 0.8em;
+    width: 44%;
+    margin: 0 10px 10px 0;
 }
 
 
 p.datatable {
-	font-size: 12px;
-	display: block;
-	margin: 2px;
-	padding: 0
+    font-size: 12px;
+    display: block;
+    margin: 2px;
+    padding: 0
 }
 
 .datatable table {
-	text-align: left;
+    text-align: left;
 }
 
 .datatable img {
-	float: left;
-	cursor: pointer;
+    float: left;
+    cursor: pointer;
 }
 
 #sparkline-container {
-	margin-left: 33%;
+    margin-left: 33%;
     width: 67%;
 }
 
 #profileImage img{
-	width: 90px;
-	height: auto;
+    width: 90px;
+    height: auto;
 }
 
 #body h1 {
-	margin:0.0em;
+    margin:0.0em;
 } 
 
 #ego_profile h1 a {
@@ -61,58 +61,59 @@ p.datatable {
 }
 
 .sparkline_wrapper_table {
-	display: inline;
-	vertical-align: bottom;
+    display: inline;
+    vertical-align: bottom;
 }
 
 .investigator_name,
 .author_name {
-	color: #2485AE;
-	font-weight: bold;
+    color: #2485AE;
+    font-weight: bold;
 }
 
 .neutral_investigator_name,
 .neutral_author_name {
-	color: #2485AE;
-	font-weight: bold;
+    color: #2485AE;
+    font-weight: bold;
 }
 
 .investigator_moniker,
 .author_moniker {
-	color: #9C9C9C;
+    color: #9C9C9C;
 }
 
 .sub_headings {
-	color: #121b3c;
-	padding-top: 10px;
-	float:left;
-	margin-right: 10px;
+    color: #121b3c;
+    padding-top: 10px;
+    float:left;
+    margin-right: 10px;
 }
 
 .toggle_visualization { 
-	max-width: 180px;
-	float:right;
+    max-width: 180px;
+    float:right;
+    display:none;
 }
 
 #grant-count-sparkline-include,
 #publication-count-sparkline-include {
-	float: left;
+    float: left;
     width: 50%;
 }
 
 #coinvestigator-count-sparkline-include,
 #coauthor-count-sparkline-include {
-	float: right;
+    float: right;
     width: 50%;
 }
 
 .sub_headings a {
-	font-size:0.7em;
-	font-weight:normal;
+    font-size:0.7em;
+    font-weight:normal;
 }
 
 table.sparkline_wrapper_table td, th {
-	vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 #ego_profile {
@@ -124,7 +125,7 @@ table.sparkline_wrapper_table td, th {
 }
 
 #ego_label {
-	font-size:1.1em;
+    font-size:1.1em;
 }
 
 #ego_profile_image {
@@ -138,130 +139,130 @@ table.sparkline_wrapper_table td, th {
 }
 
 #ego_sparkline {
-	cursor:pointer;
-	height:36px;
-	width:471px;
+    cursor:pointer;
+    height:36px;
+    width:471px;
 }
 
 #coauthorships_table th {
-	vertical-align: top;
+    vertical-align: top;
 }
 
 .sparkline_range{
-	font-size: 0.9em;
-	font-weight: bold;
+    font-size: 0.9em;
+    font-weight: bold;
 }
 
 .vis-tables table td{
-	padding-right: 10px;
-	width: 50%;
+    padding-right: 10px;
+    width: 50%;
 }
 
 #visPanel {
-	float: right; 
-	width: 600px;
+    float: right; 
+    width: 600px;
 }
 
 .vis-tables table caption{
-	width: 100%;
-	padding-bottom: 10px;
-	font-weight: bold;
-	font-size: 16px;
-	text-align: left;
+    width: 100%;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
 }
 
 .vis-tables table{
-	width: 100%;
+    width: 100%;
 }
 
 .vis-tables table thead{
-	text-align: left;
+    text-align: left;
 }
 
 .vis-tables table thead tr th { 
-	background-color:#eaeaea; 
-	font-size:14px; 
-	padding:5px; 
-	vertical-align:top; 
-	text-align:left;  
+    background-color:#eaeaea; 
+    font-size:14px; 
+    padding:5px; 
+    vertical-align:top; 
+    text-align:left;  
 }
 
 .vis-tables table tbody { 
-	font-size:12px;  
+    font-size:12px;  
 }
 
 .vis-tables table tbody td { 
-	text-align:left; 
-	padding:5px;  
+    text-align:left; 
+    padding:5px;  
 }
 
 moniker{
-	margin-top: 0px;
+    margin-top: 0px;
 }
 
 
 .spacer{
-	font-size:0; line-height:0; clear:both;}
+    font-size:0; line-height:0; clear:both;}
 
 
 /* ----------------- body start --------------------------- */
 #body{
-	max-width:900px;
-	min-width:800px; 
-	margin:0 auto; 
-	position:relative;
-	background: white;
+    max-width:900px;
+    min-width:800px; 
+    margin:0 auto; 
+    position:relative;
+    background: white;
 }
 #bodyPannel{
-	background: #FFFFFF;	
-/*	width:765px;
-	float:left;*/
-	/*padding-top: 0;
-	padding-right: 28px;
-	padding-bottom: 0;
-	padding-left: 16px;*/
-	height: 840px;
+    background: #FFFFFF;    
+/*  width:765px;
+    float:left;*/
+    /*padding-top: 0;
+    padding-right: 28px;
+    padding-bottom: 0;
+    padding-left: 16px;*/
+    height: 840px;
 }
 
 #dataPanel {
-/*	margin-top: 50px;
-	width: 25%;	
-	background-color: #f7f9f9;
-	height: 80%; 
-	padding-left: 10px;
-	padding-bottom: 30px;*/
-	
-	border-color: #DFE6E6; 
-	border: 1px solid;
-	background: #F7F9F9;
-	width:250px; 
-	height:615px;
+/*  margin-top: 50px;
+    width: 25%; 
+    background-color: #f7f9f9;
+    height: 80%; 
+    padding-left: 10px;
+    padding-bottom: 30px;*/
+    
+    border-color: #DFE6E6; 
+    border: 1px solid;
+    background: #F7F9F9;
+    width:250px; 
+    height:615px;
     margin-top: 15px;
 }
 
 #dataPanel div {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
 }
 #dataPanel .italicize {
-	font-style: italic;
+    font-style: italic;
 }
 #dataPanel .bold {
-	font-weight: bold;
-	color: #2485AE;
-	font-size: 14px;
+    font-weight: bold;
+    color: #2485AE;
+    font-size: 14px;
 }
 
 #dataPanel .investigator_stats .numbers,
 #dataPanel .author_stats .numbers {
-	text-align: right;
-	width: 40px;
-	float:left;
+    text-align: right;
+    width: 40px;
+    float:left;
 }
 
 
 #data-panel-content h4 {
-	padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 #data-panel-content {
@@ -271,18 +272,18 @@ moniker{
     
 /* container override from liquid.css */
 .container {
- 	width: inherit; 
+    width: inherit; 
 }
 
 #incomplete-data {
-	line-height: 150%;
-	margin-right: 15px;
+    line-height: 150%;
+    margin-right: 15px;
 }
 
 .graphml-file-link {
-	padding-top: 20px;
-	height: 20px;
-	font-size: 0.9em;
+    padding-top: 20px;
+    height: 20px;
+    font-size: 0.9em;
 }
 
 #profileTitle {
@@ -295,6 +296,6 @@ moniker{
 }
 
 #table_heading{
-/*	margin-bottom:20px; */
-	width: 80%;	
+/*  margin-bottom:20px; */
+    width: 80%; 
 }

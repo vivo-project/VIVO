@@ -97,7 +97,7 @@ $(document).ready(function(){
                     show on that page. 
                     */
                     if (data.numOfGrants !== undefined && data.numOfGrants > 0) {
-                           $("#coinvestigator_link_container").show();                    
+                           $(".toggle_visualization").show();                    
                     }
                 
                 }
