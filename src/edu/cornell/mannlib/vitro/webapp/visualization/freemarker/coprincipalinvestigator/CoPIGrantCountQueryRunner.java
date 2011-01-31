@@ -55,16 +55,28 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 	private UniqueIDGenerator edgeIDGenerator;
 	
-	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK = ""
-		+ 		"OPTIONAL {"	
-		+			"?Role core:dateTimeInterval ?dateTimeIntervalValue . "		
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME = ""
+		+ 		"OPTIONAL {"		
+		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 		+			"?dateTimeIntervalValue core:start ?startDate . "		
 		+			"?startDate core:dateTime ?startDateTimeValue . " 	
 		+			"OPTIONAL {"	
 		+				"?dateTimeIntervalValue core:end ?endDate . "	
 		+				"?endDate core:dateTime ?endDateTimeValue . " 			
 		+			"}"
-		+ 		"}"	;		
+		+ 		"} . "	;	
+	
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
+		+ 		"OPTIONAL {"	
+		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
+		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
+		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
+		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+		+			"}"
+		+ 		"}"	;	
+	
 	
 	public CoPIGrantCountQueryRunner(String egoURI,
 			DataSource dataSource, Log log) {
@@ -89,6 +101,8 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") " 
 			+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
 			+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
+			+ " 	(str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
+			+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "			
 			+ "		(str(?CoPI) as ?" + QueryFieldLabels.CO_PI_URL + ") "
 			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
 			+ "WHERE "
@@ -108,7 +122,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
 			
 			+ 		"} "
 				
@@ -128,7 +144,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "
 			
@@ -148,7 +167,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "
 				
@@ -169,7 +191,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+
 			
 			+ 		"} "
 
@@ -189,7 +214,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "
 				
@@ -209,7 +237,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "
 			
@@ -229,7 +260,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "
 			
@@ -249,7 +283,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "
 			
@@ -269,7 +306,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 			+			"?CoPI rdfs:label ?CoPILabel .	"
 
-			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+			+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+			
+			+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+			
 			
 			+ 		"} "			
 			+ "} ";
@@ -609,12 +649,21 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 		RDFNode grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE);
 		if (grantStartYear != null) {
 			grant.setGrantStartDate(grantStartYear.toString());
+		}else{
+			grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE_FOR_GRANT);
+			if(grantStartYear != null){
+				grant.setGrantStartDate(grantStartYear.toString());
+			}			
 		}
 		
-		RDFNode grantEndDate = solution.get(QueryFieldLabels
-															.GRANT_END_DATE);
+		RDFNode grantEndDate = solution.get(QueryFieldLabels.GRANT_END_DATE);
 		if (grantEndDate != null) {
 			grant.setGrantEndDate(grantEndDate.toString());
+		}else{
+			grantEndDate = solution.get(QueryFieldLabels.GRANT_END_DATE_FOR_GRANT);
+			if(grantEndDate != null){
+				grant.setGrantEndDate(grantEndDate.toString());
+			}			
 		}
 		
 		return grant;

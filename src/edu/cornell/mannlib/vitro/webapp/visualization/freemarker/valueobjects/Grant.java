@@ -63,7 +63,22 @@ public class Grant extends Individual {
 		}
 
 	}
+
+	@Override
+	public boolean equals(Object other){
+		boolean result = false;
+		if (other instanceof Grant){
+			Grant grant = (Grant) other;
+			result = (this.getIndividualLabel().equals(grant.getIndividualLabel())
+						&& this.getIndividualURI().equals(grant.getIndividualURI()));
+		}
+		return result;
+	}
 	
+	@Override 
+	public int hashCode(){
+		return(41*(getIndividualLabel().hashCode() + 41*(getIndividualURI().hashCode())));
+	}	
 
 	public String getGrantStartDate() {
 		return grantStartDate;

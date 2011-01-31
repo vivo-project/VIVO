@@ -117,5 +117,8 @@ public class QueryFieldLabels {
 	public static final String GRANT_LABEL = "grantLabelLit";
 	public static final String GRANT_START_DATE = "grantStartDateLit";
 	public static final String GRANT_END_DATE = "grantEndDateLit";
+	public static final String GRANT_START_DATE_FOR_GRANT = "grantStartDateForGrantLit";
+	public static final String GRANT_END_DATE_FOR_GRANT = "grantEndDateForGrantLit";
+	
 	
 }

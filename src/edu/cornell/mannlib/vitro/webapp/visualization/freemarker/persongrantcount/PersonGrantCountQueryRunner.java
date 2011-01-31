@@ -50,22 +50,38 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	private Log log;
 	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
-						+ "SELECT (str(?PILabel) as ?PILabelLit) "
-						+ "(str(?Grant) as ?grantLit)"
-						+ "(str(?GrantLabel) as ?grantLabelLit)"
+						+ " SELECT (str(?PILabel) as ?PILabelLit) "
+						+ " (str(?Grant) as ?grantLit)"
+						+ " (str(?GrantLabel) as ?grantLabelLit)"
 						+ " (str(?startDateTimeValue) as ?grantStartDateLit) "
-						+ "	(str(?endDateTimeValue) as ?grantEndDateLit)  ";
+						+ "	(str(?endDateTimeValue) as ?grantEndDateLit)  "
+						+ " (str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
+						+ "	(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  ";
 	
-	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK = ""
-		+ 		"OPTIONAL {"	
-		+			"?Role core:dateTimeInterval ?dateTimeIntervalValue . "		
+
+
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME = ""
+		+ 		"OPTIONAL {"		
+		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 		+			"?dateTimeIntervalValue core:start ?startDate . "		
 		+			"?startDate core:dateTime ?startDateTimeValue . " 	
 		+			"OPTIONAL {"	
 		+				"?dateTimeIntervalValue core:end ?endDate . "	
 		+				"?endDate core:dateTime ?endDateTimeValue . " 			
 		+			"}"
+		+ 		"} . "	;	
+	
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
+		+ 		"OPTIONAL {"	
+		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
+		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
+		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
+		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+		+			"}"
 		+ 		"}"	;	
+	
 	
 	public PersonGrantCountQueryRunner(String personURI, DataSource dataSource, Log log){
 		
@@ -90,11 +106,21 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
 			if(grantStartDateNode != null){
 				grant.setGrantStartDate(grantStartDateNode.toString());
+			}else {
+				grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE_FOR_GRANT);
+				if(grantStartDateNode != null){
+					grant.setGrantStartDate(grantStartDateNode.toString());
+				}
 			}
 			
 			RDFNode grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
 			if(grantEndDateNode != null){
 				grant.setGrantEndDate(grantEndDateNode.toString());
+			}else {
+				grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE_FOR_GRANT);
+				if(grantEndDateNode != null){
+					grant.setGrantEndDate(grantEndDateNode.toString());
+				}				
 			}
 			
 			/*
@@ -147,7 +173,9 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 
 							+			"?Grant rdfs:label ?GrantLabel . "
 					
-							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+							
+							+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
 							
 							+ 		"} "
 								
@@ -161,7 +189,10 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 
 							+			"?Grant rdfs:label ?GrantLabel . "	
 	
-							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+							
+							+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+							
 							
 							+ 		"} "
 							
@@ -175,7 +206,10 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 
 							+			"?Grant rdfs:label ?GrantLabel . "	
 							
-							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+							
+							+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+							
 							
 							+ 		"} "
 

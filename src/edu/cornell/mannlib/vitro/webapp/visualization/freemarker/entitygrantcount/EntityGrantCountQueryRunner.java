@@ -57,21 +57,37 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ "		(str(?Grant) as ?grantLit) "
 		+ "		(str(?GrantLabel) as ?grantLabelLit) "
 		+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
-		+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  ";
+		+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
+		+ " 	(str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
+		+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "	;
 	
-	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE =  " "
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME =  " "
 		+ "		?SecondaryPosition rdfs:label ?SecondaryPositionLabel . "
 		+ "		?Role core:roleIn ?Grant . "
 		+ "		?Grant rdfs:label ?GrantLabel . "
 		+ 		"OPTIONAL {"	
-		+			"?Role core:dateTimeInterval ?dateTimeIntervalValue . "		
+		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 		+			"?dateTimeIntervalValue core:start ?startDate . "		
 		+			"?startDate core:dateTime ?startDateTimeValue . " 	
 		+			"OPTIONAL {"	
 		+				"?dateTimeIntervalValue core:end ?endDate . "	
 		+				"?endDate core:dateTime ?endDateTimeValue . " 			
 		+			"}"
-		+ 		"}"	;		
+		+ 		"}"	;
+
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME =  " "
+		+ "		?SecondaryPosition rdfs:label ?SecondaryPositionLabel . "
+		+ "		?Role core:roleIn ?Grant . "
+		+ "		?Grant rdfs:label ?GrantLabel . "
+		+ 		"OPTIONAL {"	
+		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
+		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
+		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
+		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+		+			"}"
+		+ 		"}"	;	
 	
 	
 	private static String ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
@@ -125,11 +141,21 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 				RDFNode grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
 				if(grantStartDateNode != null){
 					grant.setGrantStartDate(grantStartDateNode.toString());
+				}else {
+					grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE_FOR_GRANT);
+					if(grantStartDateNode != null){
+						grant.setGrantStartDate(grantStartDateNode.toString());
+					}
 				}
 				
 				RDFNode grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
 				if(grantEndDateNode != null){
 					grant.setGrantEndDate(grantEndDateNode.toString());
+				}else {
+					grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE_FOR_GRANT);
+					if(grantEndDateNode != null){
+						grant.setGrantEndDate(grantEndDateNode.toString());
+					}				
 				}
 
 			}
@@ -212,39 +238,45 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
 		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"		
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"		
 		+ " } ";
 		
 		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
