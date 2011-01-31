@@ -3,16 +3,16 @@
 <#-- Template for sparkline visualization on individual profile page -->
 
 <#-- Determine whether this person is an author -->
-<#assign authorship = propertyGroups.getProperty("${core}authorInAuthorship")!>
+<#assign authorship = propertyGroups.getProperty("${core}authorInAuthorship")!false>
 <#assign isAuthor = p.hasStatements(authorship)!false />
 <#-- Uncomment the following line for a quick confirmation on Publications logic -->
 <#-- <h1>Publications? <#if isAuthor>Ding Ding Ding!<#else>Wah Wuh!</#if></h1> -->
 
 <#-- Determine whether this person is involved in any grants -->
-<#assign investigatorRole = propertyGroups.getProperty("${core}hasInvestigatorRole")!>
-<#assign piRole = propertyGroups.getProperty("${core}hasPrincipalInvestigatorRole")!>
-<#assign coPiRole = propertyGroups.getProperty("${core}hasCo-PrincipalInvestigatorRole")!>
-<#if ( p.hasStatements(investigatorRole)?? || p.hasStatements(piRole)?? || p.hasStatements(coPiRole)?? )>
+<#assign investigatorRole = propertyGroups.getProperty("${core}hasInvestigatorRole")!false>
+<#assign piRole = propertyGroups.getProperty("${core}hasPrincipalInvestigatorRole")!false>
+<#assign coPiRole = propertyGroups.getProperty("${core}hasCo-PrincipalInvestigatorRole")!false>
+<#if ( p.hasStatements(investigatorRole) || p.hasStatements(piRole) || p.hasStatements(coPiRole) )>
     <#assign isInvestigator = true />
 <#else>
     <#assign isInvestigator = false />
