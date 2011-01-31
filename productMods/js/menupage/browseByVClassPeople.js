@@ -6,7 +6,7 @@
 var getPersonIndividuals = browseByVClass.getIndividuals;
 
 // Assigning the proxy function
-browseByVClass.getIndividuals = function(vclassUri, alpha, page) {
+browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
     url = this.dataServiceUrl + encodeURIComponent(vclassUri);
     if ( alpha && alpha != "all") {
         url = url + '&alpha=' + alpha;
@@ -15,6 +15,9 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page) {
         url += '&page=' + page;
     } else {
         page = 1;
+    }
+    if ( typeof scroll === "undefined" ) {
+        scroll = true;
     }
     
     // First wipe currently displayed individuals and existing pagination
@@ -25,35 +28,7 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page) {
         // Check to see if we're dealing with pagination
         if ( results.pages.length ) {
             pages = results.pages;
-            
-            pagination = '<nav class="pagination menupage">';
-            pagination += '<h3>page</h3>';
-            pagination += '<ul>';
-            $.each(pages, function(i, item) {
-                anchorOpen = '<a class="page'+ pages[i].text +' round" href="#" title="View page '+ pages[i].text +' of the results">';
-                anchorClose = '</a>';
-                
-                pagination += '<li class="page'+ pages[i].text;
-                pagination += ' round';
-                // Test for active page
-                if ( pages[i].text == page) {
-                    pagination += ' selected';
-                    anchorOpen = "";
-                    anchorClose = "";
-                }
-                pagination += '" role="listitem">';
-                pagination += anchorOpen;
-                pagination += pages[i].text;
-                pagination += anchorClose;
-                pagination += '</li>';
-            })
-            pagination += '</ul>';
-            // browseByVClass.paginationNav.remove();
-            
-            // Add the pagination above the list of individuals and call the listener
-            browseByVClass.individualsContainer.prepend(pagination);
-            browseByVClass.paginationListener();
-            
+            browseByVClass.pagination(pages, page);
         }
         
         $.each(results.individuals, function(i, item) {
@@ -97,13 +72,13 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page) {
             browseByVClass.individualsInVClass.append(listItem);
         })
         
-        // Add the pagination below the list as well
-        if ( results.pages.length ) {
-            browseByVClass.individualsContainer.append(pagination);
-        }
-        
         // set selected class, alpha and page
         browseByVClass.selectedVClass(results.vclass.URI);
         browseByVClass.selectedAlpha(alpha);
+        
+        // Scroll to the top of the browse section unless told otherwise
+        if ( scroll != false ) {
+            $.scrollTo('#browse-by', 500);
+        }
     });
 };
