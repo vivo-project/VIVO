@@ -11,7 +11,7 @@ graphClasses.piechart = function(values, labels, uris) {
     $('#menupage-graph').empty();
     
     // Create the canvas
-    var r = Raphael("menupage-graph", 300, 300);
+    var r = Raphael("menupage-graph", 360, 360);
     
     // Setup the colors for the slices
     // colors = ['#192933', '#26404E', '#294656', '#194c68', '#487A96', '#63A8CE', '#67AED6','#758A96', '#9DB9C9' ];
@@ -20,7 +20,7 @@ graphClasses.piechart = function(values, labels, uris) {
     // colors = colors.reverse();
     
     // Now draw the pie chart
-    var pie = r.g.piechart(100, 80, 70, values, {legend: labels, legendmark: "square", legendpos: "south", colors: colors});
+    var pie = r.g.piechart(110, 120, 100, values, {legend: labels, legendmark: "square", legendpos: "south", colors: colors});
     pie.hover(function () {
         this.sector.stop();
         this.sector.scale(1.1, 1.1, this.cx, this.cy);
