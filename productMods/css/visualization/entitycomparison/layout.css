@@ -136,10 +136,6 @@ a.clear-selected-entities {
 
 }
 
-#header-entity-label a {
-    color: #13968C;
-}
-
 .ellipsis {
         white-space: nowrap;
         overflow: hidden;
