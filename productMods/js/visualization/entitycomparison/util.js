@@ -812,8 +812,13 @@ function getNormalizedWidth(entity, sum){
 	 var normalizedWidth = 0;
 	 
 	 normalizedWidth = Math.floor(225 * (sum / maxValueOfComparisonParameter));
-	 
-	 return normalizedWidth;
+
+	 /*
+	  * This will make sure that the entites that have very low <parameter> count have at least
+	  * 1 pixel width bar. This happens when the highest count organization has a very high count
+	  * compared to the lowest count organization.
+	  * */
+	 return normalizedWidth === 0 ? 1 : normalizedWidth;
 }
 
 function renderLineGraph(renderedObjects, entity){
