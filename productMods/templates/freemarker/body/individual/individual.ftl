@@ -5,8 +5,8 @@
 <#include "individual-setup.ftl">
 
 <#assign individualProductExtension>
-    <#-- Remove include below when individual--foaf-organization.ftl is created -->
-    <#include "individual-visualization.ftl">
+    <#-- Include for any class specific template additions -->
+    ${classSpecificExtension!}
     
     <#include "individual-overview.ftl">
         </section> <!-- #individual-info -->
