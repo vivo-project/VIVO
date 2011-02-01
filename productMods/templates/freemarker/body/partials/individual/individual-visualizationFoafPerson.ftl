@@ -15,7 +15,7 @@
     ${stylesheets.add("css/visualization/visualization.css")} 
     <#assign standardVisualizationURLRoot ="/visualization">
     
-    <section id="visualization-container" role="region">
+    <section id="visualization" role="region">
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/co_author_icon.png">
             <#assign coAuthorURL = "${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=coauthor">

@@ -1230,11 +1230,7 @@ ul#individual-hasResearchArea li a {
     color: #2485ae;
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
-#visualization {
-    /*border-left: 1px solid #edf0ed;*/
-}
-/* SPARKLINES ------>  */
-#sparklines-publications h3 {
+#visualization h3 {
     font-size: 1.25em;
     color: #2485ae;
 }
