@@ -2,6 +2,8 @@
 
 <#import "lib-list.ftl" as l>
 
+<#include "vivo-basic-deprecation.ftl">
+
 <div id="wrap" class="container">
     <div id="header">
 
