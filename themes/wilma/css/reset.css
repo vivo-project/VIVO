@@ -97,10 +97,10 @@ table {
 /* New ones added to the default list */
 a {    
     text-decoration: none; 
-    }
+}
 fieldset {    
     border-style: none; 
-    }
+}
 legend {    
     display: none; 
-    }
+}
