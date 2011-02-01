@@ -20,11 +20,6 @@ var visualizationLink = {
         this.visLink = $('.visualization-menupage-link');
     },
     
-    // Temporarily hide the link while we determine the href value via AJAX
-    hideLink: function() {
-        this.visLink.addClass('hidden');
-    },
-    
     // Determine the URL parameters for temporal graph of top level org
     getURL: function() {
         $.ajax({
@@ -43,6 +38,5 @@ var visualizationLink = {
 
 $(document).ready(function() {
     visualizationLink.onLoad();
-    visualizationLink.hideLink();
     visualizationLink.getURL();
 });
