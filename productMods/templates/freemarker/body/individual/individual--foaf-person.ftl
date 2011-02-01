@@ -71,7 +71,7 @@
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
-        <#include "individual-sparklineVisualization.ftl">    
+        <#include "individual-visualizationFoafPerson.ftl">    
         <#-- Disable for now until controller sends data -->
         <#--
         <section id="co-authors" role="region">
