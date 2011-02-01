@@ -830,20 +830,22 @@ margin-bottom:250px;
 
 /* styles for vivo-basic deprecated alert */
 #deprecated {
+    margin-bottom: 1em;
+    padding: 0.6em 1.2em;
+    min-width: 662px;
     border: 3px solid #edc113;
     background-color: #F8F8C8;
     color: #000;
-    margin-bottom: 1em;
     text-align: left;
     font-size: 1.1em;
-    padding: 20px 20px 0 20px;
-    width: 86%;
-
 }
 #deprecated p {
-    margin-top: 1.1em;
+    margin: 1.1em 0 0 0;
     text-align: left;
 }
 #deprecated h1 {
     font-size: 1.4em;
+}
+#deprecated ul {
+    margin-bottom: 0;
 }
