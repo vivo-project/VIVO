@@ -102,15 +102,21 @@ public class EntityPublicationCountRequestHandler implements
 	    			
 	    			Entity entity = queryManager.getQueryResult();
 	    			
-					QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-							staffProvidedHighestLevelOrganization, dataSource, log);
-					
-					Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-					.getQueryResult();
-					
-					return prepareStandaloneResponse(vitroRequest, entity, staffProvidedHighestLevelOrganization,
-							subOrganizationTypesResult);
-					
+	    			if(entity.getEntityLabel().equals("no-label")){
+	    				
+	    				return prepareStandaloneErrorResponse(vitroRequest,staffProvidedHighestLevelOrganization);
+	    				
+	    			} else {	
+	    			
+						QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+								staffProvidedHighestLevelOrganization, dataSource, log);
+						
+						Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+						.getQueryResult();
+						
+						return prepareStandaloneResponse(vitroRequest, entity, staffProvidedHighestLevelOrganization,
+								subOrganizationTypesResult);
+	    			}
 	            }
 			}
 			
@@ -147,14 +153,21 @@ public class EntityPublicationCountRequestHandler implements
 			
 			Entity entity = queryManager.getQueryResult();
 			
-			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-					highestLevelOrgURI, dataSource, log);
+			if(entity.getEntityLabel().equals("no-label")){
+				
+				return prepareStandaloneErrorResponse(vitroRequest,highestLevelOrgURI);
+				
+			} else {	
 			
-			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-			.getQueryResult();
-			
-			return prepareStandaloneResponse(vitroRequest, entity, highestLevelOrgURI,
-					subOrganizationTypesResult);		
+				QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+						highestLevelOrgURI, dataSource, log);
+				
+				Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+				.getQueryResult();
+				
+				return prepareStandaloneResponse(vitroRequest, entity, highestLevelOrgURI,
+						subOrganizationTypesResult);	
+			}
 		}
 	
 	}
