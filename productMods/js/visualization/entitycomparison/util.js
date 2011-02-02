@@ -965,7 +965,7 @@ function prepareTableForDataTablePagination(jsonData){
 	checkboxTH.html(' ');
 	
 	var entityLabelTH = $('<th>');
-	entityLabelTH.html('Entity Label');
+	entityLabelTH.html('Entity Name');
 	
 	var publicationCountTH = $('<th>');
 	if($("select.comparisonValues option:selected").text() === "by Publications"){
@@ -1022,7 +1022,7 @@ function prepareTableForDataTablePagination(jsonData){
 	var entityListTable = $('#datatable').dataTable({
 	    "sDom": '<"' + searchBarParentContainerDIVClass + '"f><"filterInfo"i><"paginatedtabs"p><"table-separator"><"datatablewrapper"t>',
 	    "aaSorting": [
-	        [2, "desc"]
+	        [2, "desc"], [1,'asc']
 	    ],
 	    "asStripClasses": [],
 	    "iDisplayLength": 10,

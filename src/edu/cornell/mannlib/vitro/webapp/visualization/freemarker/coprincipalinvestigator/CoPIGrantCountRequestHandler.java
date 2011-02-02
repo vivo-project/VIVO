@@ -213,13 +213,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			
 			outputFileName = UtilityFunctions.slugify(piNodesAndEdges
 									.getEgoNode().getNodeName())
-			+ "_coinvestigators-per-year" + ".csv";
+			+ "_co-investigators-per-year" + ".csv";
 			
 			yearToCoPIs = UtilityFunctions.getGrantYearToCoPI(piNodesAndEdges);
 			
 		} else {
 			
-			outputFileName = "no_coinvestigators-per-year" + ".csv";			
+			outputFileName = "no_co-investigators-per-year" + ".csv";			
 		}
 		
         Map<String, String> fileData = new HashMap<String, String>();
@@ -247,12 +247,12 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
-									+ "_coinvestigators" + ".csv";
+									+ "_co-investigators" + ".csv";
 	
 			coPIsToCount = getCoPIsList(coPIData);
 			
 		} else {
-			outputFileName = "no_coinvestigators" + ".csv";
+			outputFileName = "no_co-investigators" + ".csv";
 		}
 		
         Map<String, String> fileData = new HashMap<String, String>();
@@ -312,10 +312,10 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
-									+ "_copi-network.graphml" + ".xml";
+									+ "_co-investigator-network.graphml" + ".xml";
 			
 		} else {
-			outputFileName = "no_copi-network.graphml" + ".xml";			
+			outputFileName = "no_co-investigator-network.graphml" + ".xml";			
 		}
 		
 		CoPIGraphMLWriter coPIGraphMLWriter = 

@@ -120,6 +120,7 @@ a.clear-selected-entities {
     margin-left: 10px; 
     display: inline-block;
     text-decoration: underline;
+    color: #2485AE;
 }
 .ellipsis.multiline {
     white-space: normal;

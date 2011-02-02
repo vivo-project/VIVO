@@ -52,7 +52,7 @@
                 <h3>Who do you want to compare?</h3>
                 <div id="paginatedTable"></div>
                 <div id="paginated-table-footer">
-                <a id="csv" href="${temporalGraphDownloadFileLink}" class="temporalGraphLinks">Save as CSV</a>
+                <a id="csv" href="${temporalGraphDownloadFileLink}" class="temporalGraphLinks">Save All as CSV</a>
                 <a class="clear-selected-entities temporalGraphLinks" title="Clear all selected entities.">Clear</a>
                 </div>
             </div>

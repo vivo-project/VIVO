@@ -30,58 +30,75 @@ var colorConstantQueue = [ LIGHT_BLUE, DARK_ORANGE, VIBRANT_GREEN,
                            DARK_TURQUOISE, MEHENDI_GREEN, HOT_PINK, 
                            DARK_RED ];
 
-var freeColors = colorConstantQueue.slice();
+var freeColors;
 
-var globalDateObject = new Date();
+var globalDateObject;
 
-var year = {
-		min: globalDateObject.getFullYear() - 9,
-		max: globalDateObject.getFullYear(),
-		globalMin: globalDateObject.getFullYear() - 9,
-		globalMax: globalDateObject.getFullYear()
-};
+var year;
 
-var colors = {};
-var prevColor = {};
-var colorToAssign, colorToRemove;
-var renderedObjects = [];
-var labelToEntityRecord = {};
-var setOfLabels = [];
-var labelToCheckedEntities = {};
-var stopWordsToCount = {};
+var colors, prevColor, colorToAssign, 
+	colorToRemove, renderedObjects, labelToEntityRecord,
+	setOfLabels, labelToCheckedEntities, stopWordsToCount;
 
 var graphContainer;
 var tableDiv;
 var entityLevel;
 
 //options for Flot
-var FlotOptions = {
-		legend : {
-			show : false
-		},
-		lines : {
-			show : true
-		},
-		points : {
-			show : false
-		},
-		xaxis : {
-			tickDecimals : 0,
-			tickSize : 10
-		},
-		series : {
-			lines : {
-				lineWidth : 7
-			}
-		},
-		yaxis : {
-			tickSize : 1,
-			tickDecimals : 0,
-			min : 0
-		},
-		grid : {
-			borderColor : "#D9D9D9"
-		}
-};
+var FlotOptions;
 
-FlotOptions.colors = colorConstantQueue;
+function initConstants() {
+	
+	freeColors = colorConstantQueue.slice();
+	
+	globalDateObject = new Date();
+	
+	year = {
+			min: globalDateObject.getFullYear() - 9,
+			max: globalDateObject.getFullYear(),
+			globalMin: globalDateObject.getFullYear() - 9,
+			globalMax: globalDateObject.getFullYear()
+	};
+	
+	colors = {};
+	prevColor = {};
+	colorToAssign, colorToRemove;
+	renderedObjects = [];
+	labelToEntityRecord = {};
+	setOfLabels = [];
+	labelToCheckedEntities = {};
+	stopWordsToCount = {};
+	
+	//options for Flot
+	FlotOptions = {
+			legend : {
+				show : false
+			},
+			lines : {
+				show : true
+			},
+			points : {
+				show : false
+			},
+			xaxis : {
+				tickDecimals : 0,
+				tickSize : 10
+			},
+			series : {
+				lines : {
+					lineWidth : 7
+				}
+			},
+			yaxis : {
+				tickSize : 1,
+				tickDecimals : 0,
+				min : 0
+			},
+			grid : {
+				borderColor : "#D9D9D9"
+			}
+	};
+
+	FlotOptions.colors = colorConstantQueue;
+	
+}

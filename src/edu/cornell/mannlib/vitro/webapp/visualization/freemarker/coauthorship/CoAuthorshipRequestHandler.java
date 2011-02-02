@@ -196,13 +196,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 			
 			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges
 									.getEgoNode().getNodeName())
-			+ "_coauthors-per-year" + ".csv";
+			+ "_co-authors-per-year" + ".csv";
 			
 			yearToCoauthors = UtilityFunctions.getPublicationYearToCoAuthors(authorNodesAndEdges);
 			
 		} else {
 			
-			outputFileName = "no_coauthors-per-year" + ".csv";			
+			outputFileName = "no_co-authors-per-year" + ".csv";			
 		}
 		
         Map<String, String> fileData = new HashMap<String, String>();
@@ -230,12 +230,12 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		if (coAuthorshipData.getNodes() != null && coAuthorshipData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coAuthorshipData.getEgoNode().getNodeName()) 
-									+ "_coauthors" + ".csv";
+									+ "_co-authors" + ".csv";
 	
 			coAuthorsToCount = getCoAuthorsList(coAuthorshipData);
 			
 		} else {
-			outputFileName = "no_coauthors" + ".csv";
+			outputFileName = "no_co-authors" + ".csv";
 		}
 		
         Map<String, String> fileData = new HashMap<String, String>();
@@ -295,10 +295,10 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		if (authorNodesAndEdges.getNodes() != null && authorNodesAndEdges.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges.getEgoNode().getNodeName()) 
-									+ "_coauthor-network.graphml" + ".xml";
+									+ "_co-author-network.graphml" + ".xml";
 			
 		} else {
-			outputFileName = "no_coauthor-network.graphml" + ".xml";			
+			outputFileName = "no_co-author-network.graphml" + ".xml";			
 		}
 		
 		CoAuthorshipGraphMLWriter coAuthorshipGraphMLWriter = 

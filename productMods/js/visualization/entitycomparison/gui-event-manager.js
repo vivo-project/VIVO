@@ -2,6 +2,11 @@
 
 $(document).ready(function() {
         
+		/*
+		 * This will set intitial values of the constants present in constants.js
+		 * */
+		initConstants();
+	
         /* This is used to cache the current state whether the user is allowed to select more entities from 
         the datatable or not. Once Max number of entity selection is reached the user can no longer select 
         more & this variable will be set to false. */
@@ -41,7 +46,7 @@ $(document).ready(function() {
             	
             });
             
-            $("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
+            //$("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
             
             /*
              * This piece of code is not executed at all because the redirect happens before there is a chance 
@@ -128,7 +133,6 @@ $(document).ready(function() {
          */
         function loadData(jsonData) {
         
-            // var yearRange;
             $.each(jsonData, function (index, val) {
                 setOfLabels.push(val.label);
                 labelToEntityRecord[val.label] = val;
