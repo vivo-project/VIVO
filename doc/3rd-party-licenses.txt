@@ -115,6 +115,7 @@ GNU GPL 2
 licenses/gpl2.LICENSE.txt
 
 jaxrpc
+jsontofmmodel
 mysql-connector-java
 rowset
 rsslib4j
