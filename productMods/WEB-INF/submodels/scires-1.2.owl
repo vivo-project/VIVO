@@ -21,16 +21,21 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Project"/>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
     <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research#ClinicalTrial"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Instrument">
-    <rdfs:subClassOf rdf:nodeID="A0"/>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
+    <rdfs:subClassOf rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Protocol">
@@ -63,11 +68,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#providesAccessTo">
     <owl:inverseOf rdf:resource="http://vivoweb.org/ontology/scientific-research#accessProvidedBy"/>
@@ -115,16 +115,16 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eagle-i: Research project that uses or collects measurements or assessments about humans.</vitro:descriptionAnnot>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#irbNumber">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research#ClinicalTrial"/>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Every clinical trial in the United States must be approved and monitored by an Institutional Review Board (IRB). An IRB is an independent committee of physicians, statisticians, community advocates and others whose objective is to ensure that a clinical trial is ethical and the rights of study participants are protected. </vitro:descriptionAnnot>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#BiologicalSpecimen">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A portion or quantity of a biological material for use in testing, examination, or study.</vitro:shortDef>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eagle-i: Material entity that is a portion or quantity of a biological material for use in testing, examination, or study.  A biological specimen can be an individual animal, part of or derived an animal, plant, part of a plant, or microorganism. When a taxon is described, it is typically based on a single specimen and is referred to as the holotype.</vitro:descriptionAnnot>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An individual animal, part of or derived an animal, plant, part of a plant, or microorganism.</vitro:exampleAnnot>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#irbNumber">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://vivoweb.org/ontology/scientific-research#ClinicalTrial"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Every clinical trial in the United States must be approved and monitored by an Institutional Review Board (IRB). An IRB is an independent committee of physicians, statisticians, community advocates and others whose objective is to ensure that a clinical trial is ethical and the rights of study participants are protected. </vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase3ClinicalTrial">
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 3 trials, an experimental study drug or treatment is given to large groups of people (1,000-3,000) to confirm its effectiveness, monitor side effects, compare it to commonly used treatments, and collect information that will allow the experimental drug or treatment to be used safely.
