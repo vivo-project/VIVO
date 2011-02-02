@@ -4,7 +4,6 @@
 body {
     background-position: center, 0;
     background-repeat: no-repeat;
-    background-image: none;
     background-color: #f3f3f0;
     background-image: url(../images/header-background.jpg); 
 }
@@ -17,10 +16,10 @@ body {
 #search-home h3 { 
     margin-left: 0; 
 }
-#search-field .submit {
+#search-field input.search {
     padding-left: 14px;
 }
-#search-home-field  input.submit {
+#search-home-field  input.search {
     padding-left: 14px;
 }
 #login {

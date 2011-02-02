@@ -1,10 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 /* Fix for homepage */
-#search-field .submit {
+#search-field input.search {
     padding-left: 14px;
 }
-#search-home-field  input.submit {
+#search-home-field  input.search {
     padding-left: 14px;
 }
 #login-form p.submit {
