@@ -16,17 +16,6 @@
                 January 28, 2011 - Upgrading from Release 1 v1.1 to Release 1 
                 v1.2 
             </small>
-            <blockquote>
-                <b>Missing pieces and fixes</b>
-                <ul>
-                    <li>
-                        Link to install pdf online at SF 
-                    </li>
-                    <li>
-                        <br>
-                    </li>
-                </ul>
-            </blockquote>
             <toc>
                 <ul>
                     <li>
@@ -166,11 +155,11 @@
                         <a href="#fileSystem">File Storage System Upgrade</a>
                         <ol class="roman2">
                             <li>
-                                <a href="#verify_ontology_upgrade">Changes to the File
+                                <a href="#changes_to_storage">Changes to the File
                                     Storage System</a>
                             </li>
                             <li>
-                                <a href="#verify_ontology_upgrade">Verify File Storage
+                                <a href="#verify_file_upgrade">Verify File Storage
                                     System upgrade process</a>
                             </li>
                         </ol>
@@ -220,7 +209,7 @@
                     below for more information. 
                 </li>
             </ul>
-            <h3 id="upgrade_process">The Upgrade Process</h3>
+            <h3 id="upgrade_process">II. The Upgrade Process</h3>
             <p>
                 1. Download the new distribution file and unpack it into a new 
                 source directory. 
@@ -611,7 +600,7 @@
             6. Start Apache Tomcat and log in to VIVO.
         </p>
         <h3 id="ontology">III. Ontology Changes</h3>
-        <h4>A. Verify Ontology upgrade process</h4>
+        <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
         <p>
             After Apache Tomcat is started, these files should be reviewed to 
             verify that the automated upgrade process was executed  
@@ -659,7 +648,7 @@
                 knowledge base.
             </dd>
         </dl>
-        <h4>B. Ontology knowledge base manual review</h4>
+        <h4 id="ontology_knowledge_base">ii. Ontology knowledge base manual review</h4>
         <p>
             Changes to the VIVO core ontology may require corresponding
             modifications of the knowledge base instance data and local ontology
@@ -723,7 +712,7 @@
         </dl>
 
         <h3 id="fileSystem">IV. File Storage System Upgrade</h3>
-        <h4>A. Changes to the File Storage System</h4>
+        <h4 id="changes_to_storage">i. Changes to the File Storage System</h4>
         <p>
             Each uploaded file exists as an individual entity in VIVO. When the
             browser requests an upload file from VIVO, the data model is queried to
@@ -741,7 +730,7 @@
             it will initiate a process to calculate the "Alias URL" 
             for each existing file and store it in the data model for fast access.
         </p> 
-        <h4>B. Verify File Storage System upgrade process</h4>
+        <h4 id="verify_file_upgrade">ii. Verify File Storage System upgrade process</h4>
         <p>
             The File Storage upgrade process will create a log file in the 
             VIVO upload directory. You should review this file to ensure that
@@ -763,8 +752,9 @@
             </dd>
         </dl>
 
-        <h3>V. Theme Changes</h3>
-        <p>
+        <h3 id="theme">V. Theme Changes</h3>
+        <h4 style="color:red">Need Nick to help with this section</h4>
+		<p>
             VIVO 1.2 comes with a new theme called "wilma" that uses the FreeMarker template 
             engine for generating web pages.  The theme is located in /vivo/themes/wilma and 
             the FreeMarker files have an ftl (for FreeMarker Template Language) extension.
@@ -777,8 +767,7 @@
             the vivo-basic theme in its original directory, you need not take any 
             action in order to convert your site to the VIVO 1.1 theme.
         </p>
-        <h1>I THINK THIS SECTION NEEDS MAJOR CHANGING AND I NEED HELP WITH IT, Por Favor</h1>
-        <p>
+		<p>
             B. If you created your own theme directory in VIVO 1.1, follow the steps below 
             under sections "Templates," "Stylesheets,"  and "Site Icons" to upgrade your  
             theme to VIVO 1.2. 
