@@ -1,4 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /* Fix for homepage in IE6 browsers */
 body {
     background-position: center, 0;
@@ -44,7 +45,7 @@ ul#vgraph-classes {
     width: 265px;
     margin-left: 15px;
 }
-#browse-by{
+#browse-by {
     padding-bottom: 20px;
 }
 ul#browse-classes {
@@ -77,9 +78,8 @@ article.foaf-person {
 ul#classgroup-list.vis {
     width: 38%;
 }
-/* Fix for site admin */
-/* the wonders of the IE float model...fix to maintain sanity in rendering sections of site admin */
-/* targets IE7 and below */
+/* Fix for site admin: the wonders of the IE float model...
+fix to maintain sanity in rendering sections of site admin targets IE7 and below */
 #adminDashboard .pageBodyGroup {
   *float: none !important;
   *display: inline !important;

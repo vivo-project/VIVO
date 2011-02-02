@@ -20,8 +20,7 @@ html,
 body {
     padding: 0;
     height: 100%; /* needed for container min-height */
-    font-family: 'Arimo', "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
-    /*font-size: 62.5%;*/
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
     height: auto !important; /* real browsers */
     height: 100%; /* IE6: treaded as min-height*/;
     min-height: 100%; /* real browsers */
@@ -41,17 +40,18 @@ h2 {
     padding: 10px 0 12px 0;
     margin: 0;
     font-size: 1.375em;
-    /*color: #2485ae; //Original color*/
     color: #064d68;
     line-height: 1.5em;
 }
 h2 a {
     color: #2485ae; 
 }
-h2 a:link, h2 a:visited {
+h2 a:link, 
+h2 a:visited {
     text-decoration: underline; 
 }
-h2 a:hover, h2 a:active {
+h2 a:hover, 
+h2 a:active {
     text-decoration: none; 
 }
 h3 {
@@ -85,7 +85,7 @@ input[type="password"] {
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    margin-bottom: 0.8em;
+    margin-bottom: .8em;
 }
 input.block {
     margin-bottom: 20px;
@@ -93,7 +93,6 @@ input.block {
 label {
     margin-top: .5em;
 }
-/* mb: id selector for submit will be replaced for a class selector. Markup needs to be changed*/
 input#submit, 
 input#submit:visited {
     background: #222 url(../images/alert-overlay.png) repeat-x;
@@ -158,13 +157,15 @@ form textarea {
     margin-top: 20px;
     width: 100%;
 }
-form a:link.cancel, form a:visited.cancel {
+form a:link.cancel, 
+form a:visited.cancel {
     text-decoration: underline;
     color: #f70;
     border-color: none;
     padding-left: 3px;
 }
-form a:hover.cancel, form a:active.cancel {
+form a:hover.cancel, 
+form a:active.cancel {
     text-decoration: none;
     color: #f70;
     background: none;
@@ -311,7 +312,7 @@ form select {
    border-radius: 5px;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
-   margin-bottom: 0.8em;
+   margin-bottom: .8em;
    margin-top: .7em;
    margin-right: .5em;
 }
@@ -319,11 +320,13 @@ form select {
     margin-top: 1em; 
     border: 1px dotted #FFD324;
 }
-a.ingestMenu:link, a.ingestMenu:visited {
+a.ingestMenu:link, 
+a.ingestMenu:visited {
     text-decoration: none;
     color: #5E6363;
 }
-a.ingestMenu:hover, a.ingestMenu:active {
+a.ingestMenu:hover, 
+a.ingestMenu:active {
     text-decoration: none;
     color: #2485AE;
 }
@@ -367,7 +370,7 @@ ul#header-nav li {
     padding-left: 10px;
     padding-right: 10px;
     border-right: 1px solid #7c7d7f;
-    font-size: 0.7em;
+    font-size: .7em;
     color: #fff;
 }
 ul#header-nav li.last {
@@ -522,9 +525,10 @@ ul#main-nav {
 }
 #error-alert p {
     padding-left: 40px;
-    font-size: 0.8em;
+    font-size: .8em;
     line-height: 1.3em;
     color: #a12424;
+    padding-top: 5px;
 }
 #login-form label {
     display: block;
@@ -547,8 +551,8 @@ ul#main-nav {
     -webkit-border-radius: 5px;     
 }
 #login-form input.text-field:focus {
-    border: 1px solid rgba(57, 138, 172, 0.5);  
-    background-color: rgba(57, 138, 172, 0.1);   
+    border: 1px solid rgba(57, 138, 172, .5);  
+    background-color: rgba(57, 138, 172, .1);   
 }
 #login-form p.submit {
     width: 100px;
@@ -611,13 +615,13 @@ p.password-note {
 #flash-message {
     border: 1px dotted #E2C822;
     background-color: #FFF9D7;
-    padding: 0.5em;  
+    padding: .5em;  
     margin-bottom: 10px;
 }
 #welcome-message {
     border: 1px dotted #E2C822;
     background-color: #FFF9D7;
-    padding: 0.25em;
+    padding: .25em;
     margin-bottom: 8px;
 }
 #welcome-msg-container {
@@ -643,7 +647,7 @@ p.password-note {
     height: 44px;
     background: url(../images/search-field-and-button.png) 0 0 no-repeat;
 }
-#search-home-field  input.submit {
+#search-home-field input.submit {
     text-decoration: none;
     background-color: transparent;
     color: #fff;
@@ -703,7 +707,7 @@ footer {
     width: 970px;
     height: 88px;
     margin: 0 auto;
-    font-size: 0.7em;
+    font-size: .7em;
     color: #4e5051;
     background-color: #fff;
 }
@@ -796,7 +800,7 @@ p{
 .button:visited {
     font-size: 16px;
     font-weight: normal;
-    line-height: 1;
+    line-height: 1; 
 }
 .green.button,
 .green.button:visited {
@@ -1022,7 +1026,7 @@ ul#alpha-browse-individuals .count-classes {
     font-size: .75em;
 }
 .alphaIndex {    
-    font-size: 0.8em;
+    font-size: .8em;
 }
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
@@ -1041,7 +1045,7 @@ ul#alpha-browse-individuals .count-classes {
     font-size: 1em;
 }
 nav.pagination.menupage {
-    font-size: 0.8em;
+    font-size: .8em;
 }
 nav.pagination.menupage li.selected {
     color: #5e6363;
@@ -1182,7 +1186,7 @@ ul.individual-urls-people li a {
     line-height: 1.3em;
 }
 h1.fn .preferred-title {
-    font-size: 0.825em;
+    font-size: .825em;
     color: #5e6363;
     border-left: 1px solid #a6b1b0;
 }
@@ -1347,6 +1351,6 @@ a {
 #adminDashboard .pageBodyGroup h4 {
   color: #5E6363;
   font-size: 1em;
-  margin-left: 0.6em;
+  margin-left: .6em;
   font-weight: bold;
 }

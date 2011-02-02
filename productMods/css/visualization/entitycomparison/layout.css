@@ -1,23 +1,17 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-@CHARSET "UTF-8";
-
 #body {
     font: 0.9em Helvetica;
     background-color: #fff;
     min-height: 800px;
     width: 100%;
-    /*min-width: 900px;*/
     margin: auto;
     overflow: hidden;
 }
-
 .easy-deselect-label a.temporal-vis-url {
     float: right;
 }
-
 a.temporalGraphLinks {
-    /*float:right;*/
     background-color: #2485AE;
     color: white;
     cursor: pointer;
@@ -29,36 +23,29 @@ a.temporalGraphLinks {
     text-decoration: none;
     padding-bottom: 3px;
 }
-
 a.clear-selected-entities {
     background-color: #878787;
 }
-
 #paginated-table-footer {
     margin-top: 10px;
     text-align: left;
     height: 25px;
 }
-
 #loading-comparisons {
     font-size: 1.2em;
     font-weight: bold;
 }
-
 #loading-comparisons img {
     vertical-align: sub;
 } 
-
 #legend-row-header a {
     background-color: #878787;
 }
-
 #reset-search {
     color: #2485AE;
     cursor: pointer;
     margin-left: 10px;
 }
-
 #yaxislabel {
     font-size: 12px;
     float:right;
@@ -70,29 +57,24 @@ a.clear-selected-entities {
     margin-top: 50px;
     position: absolute !important;
 }
-
 #xaxislabel{
     font-size: 12px;
     margin-top: -5px;
     text-align: center;
 }
-
 #notification-container {
     position: inherit;
 }
-
 .disabled-checkbox-event-receiver {
     height: 21px;
     position: absolute;
     width: 21px;
     display:none;
 }
-
 #functions{
     margin-top: 20px;
     margin-bottom: -40px;   
 }
-
 #bar {
     height: 20px;
     float: left;
@@ -103,72 +85,58 @@ a.clear-selected-entities {
 #checkbox{
     float:left; 
 }
-
 .easy-deselect-label {
     float: left;
     font-size: 12px;
     width: 160px;
     text-align: left;
 }
-
-.easy-deselect-label a, #text {
+.easy-deselect-label a, 
+#text {
     text-decoration: none;
     color: black;
     font-family: Helvetica;
     font-size: 1em;
 }
-
 .easy-deselect-label .entity-label {
-    color:red;
+    color: #f00;
 }
-
 .small-arrows {
     font-size: 0.9em;
     padding: 0 !important;
     text-decoration: none;
     vertical-align: top;
 }
-
 #header-entity-label {
-
     font-size: 1.1em;
     font-weight: bold;
-
 }
-
 .ellipsis {
-        white-space: nowrap;
-        overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
 }
-
 .entity-label-url {
     width: 125px; 
     margin-left: 10px; 
-    display:inline-block;
+    display: inline-block;
     text-decoration: underline;
 }
-
 .ellipsis.multiline {
-        white-space: normal;
+    white-space: normal;
 }
-
 #searchresult {
     margin-top: 50px;
 }
-
 #graphContainer {
     margin-bottom: 15px;
     width: 450px; 
     height: 250px;
     margin-left: 23px;
 }
-
 #leftblock {
     float: left;
-    /*margin-left: 5%;*/
     width: 39%;
 }
-
 #text {
     margin-left: 5px;
 }
@@ -179,54 +147,48 @@ a.clear-selected-entities {
     font-size: 13px;
     font-weight: normal;
 }
-
 #rightblock {
     float:right;
     margin-right:3%;
     width:54%;
 }
-
-#counter,#total {
-    color: red;
+#counter,
+#total {
+    color: #f00;
 }
-
 #heading {
     margin-top: 10px;
 }
-
 #paginatedTable {
-    margin-top:0px;
+    margin-top: 0;
 }
-
 .sDomSearchBar {
     margin-bottom: -10px;
     margin-left: 41%;
 }
-
 .datatablerowhighlight {
     background-color: #ECFFB3 !important;
 }
-
 .datatablerowhighlight td {
     font-weight: bold !important;
 }
-
 #bottomButtons{
     width: 100%;
     float:right;
     margin: 20px 0 20px 0;
 }
-
 #stopwordsdiv{
     margin-top: 10px;
     margin-left: 10px;
 }
-
 p.displayCounter{
     padding-bottom: 4px;
     border-bottom: 1px solid gray;
 }
-
-#comparisonHeader, #entityHeader, #entitylevelheading, #comparisonParameter, #headerText {
+#comparisonHeader,
+#entityHeader, 
+#entitylevelheading, 
+#comparisonParameter, 
+#headerText {
     color: #2485ae;
 }
