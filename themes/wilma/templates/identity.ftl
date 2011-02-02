@@ -45,7 +45,7 @@
                 
                 <div id="search-field">
                     <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
-                    <input type="submit" value="Search" class="submit">
+                    <input type="submit" value="Search" class="search">
                 </div>
             </form>
         </fieldset>

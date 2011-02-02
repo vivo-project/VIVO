@@ -36,7 +36,7 @@
                            </#if> 
                             <div id="search-home-field">
                                 <input type="text" name="querytext" class="search-home-vivo" value="${querytext!}" />
-                                <input type="submit" value="Search" class="submit">
+                                <input type="submit" value="Search" class="search">
                             </div>
                         </form>
                     </fieldset>

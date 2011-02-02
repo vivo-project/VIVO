@@ -93,6 +93,11 @@ input.block {
 label {
     margin-top: .5em;
 }
+input.submit, 
+input.submit:visited,
+/* the id selectors are used temporarily due to the custom jsp tags (<v:input>) 
+for editing forms which require an id and do not allow a class. This will be 
+removed once we refactor the editing forms to Freemarker */
 input#submit, 
 input#submit:visited {
     background: #222 url(../images/alert-overlay.png) repeat-x;
@@ -114,6 +119,8 @@ input#submit:visited {
     margin-right: .6em;
     margin-top: .5em;
 }
+input.delete,
+input.delete:visited,
 input#delete,
 input#delete:visited {
     background: #222 url(../images/alert-overlay.png) repeat-x;
@@ -135,15 +142,19 @@ input#delete:visited {
     line-height: 1;
     margin-right: .6em;
 }
+input.submit:hover,
 input#submit:hover {
     color: #fff;
     background-color: #b2d15a;
 }
+input.delete:hover,
 input#delete:hover {
     color: #fff;
     background-color: #93c3d4;
 }
+input.delete:active,
 input#delete:active,
+input.submit:active,
 input#submit:active {
     top: 1px;
 }
@@ -406,7 +417,7 @@ ul#header-nav  a:active {
     height: 38px;
     background: url(../images/search-interior-pages.png) 0 0 no-repeat;
 }
-#search-field .submit {
+#search-field input.search {
     text-decoration: none;
     background-color: transparent;
     color: #fff;
@@ -647,7 +658,7 @@ p.password-note {
     height: 44px;
     background: url(../images/search-field-and-button.png) 0 0 no-repeat;
 }
-#search-home-field input.submit {
+#search-home-field input.search {
     text-decoration: none;
     background-color: transparent;
     color: #fff;
