@@ -10,7 +10,7 @@
     <nav role="navigation">
         <ul id="header-nav" role="list">
             <#if user.loggedIn>
-                <li role="listitem"><img class ="middle" src="${urls.images}/userIcon.png" alt="user icon" />${user.loginName}</li>
+                <li role="listitem"><img class="middle" src="${urls.images}/userIcon.png" alt="user icon" />${user.loginName}</li>
                 <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                 <#if user.hasSiteAdminAccess>
                     <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
@@ -38,7 +38,6 @@
                         <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
                         <option value="${portalId}">${siteTagline!}</option>
                     </select>
-                
                 <#else>
                     <input type="hidden" name="flag1" value="${portalId}" /> 
                 </#if> 
