@@ -20,7 +20,7 @@
 <![endif]-->
 
 <!--[if (gte IE 6)&(lte IE 8)]>
-<script type="text/javascript" src="${urls.home}/js/selectivizr.js"></script>
+<script type="text/javascript" src="${urls.base}/js/selectivizr.js"></script>
 <![endif]-->
 
 <#-- Inject head content specified in the controller. Currently this is used only to generate an rdf link on 
