@@ -74,10 +74,8 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
             individualList += listItem;
         })
         
-        // First wipe currently displayed class heading, individuals, and existing pagination
-        $('h3.selected-class').remove();
-        browseByVClass.individualsInVClass.empty();
-        $('nav.pagination').remove();
+        // Remove existing content
+        browseByVClass.wipeSlate();
         
         // And then add the new content
         browseByVClass.individualsInVClass.append(individualList);
