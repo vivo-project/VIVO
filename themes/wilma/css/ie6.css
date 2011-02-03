@@ -120,6 +120,9 @@ ul#alpha-browse-individuals a {
 #individual-intro.person .individual-overview {
     clear: left;
 }
+#find-by {
+    width: 445px;
+}
 /* Fix for photo upload */
 #photoUploadForm {
     width: 320px;

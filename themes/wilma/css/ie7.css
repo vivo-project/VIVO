@@ -66,3 +66,7 @@ input#submit, input#submit:visited {
     display: block;
     float: left;
 }
+/* Fix for menu pages */
+#find-by {
+    width: 445px;
+}
