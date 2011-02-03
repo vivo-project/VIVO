@@ -3,28 +3,18 @@
 <#include "menupage-checkForData.ftl">
 
 <#if !noData>
-    <section id="menupage-intro" role="region">
+    <section id="menupage-intro" class="people" role="region">
         <h3>${page.title}</h3>
-        
-        <section id="menupage-content" class="people" role="region">
-            <h4>Visual Graph</h4>
-            
-            <#include "menupage-vClassesInClassgroup.ftl">
-            
-            <section id="menupage-graph" class="people" role="region">
-                <#-- Graph will be dynamically rendered via RaphaelJS library -->
-            </section>
-        </section>
         
         <section id="find-by" role="region">
             <nav role="navigation">
                 <h3>Find By</h3>
                 
+                <#assign subjectAreaUri = "http://vivoweb.org/ontology/core#SubjectArea" />
+                <#assign departmentUri = "http://vivoweb.org/ontology/core#Department" />
+                <#assign courseUri = "http://vivoweb.org/ontology/core#Course" />
+                
                 <ul id="find-filters">
-                    <#assign subjectAreaUri = "http://vivoweb.org/ontology/core#SubjectArea" />
-                    <#assign departmentUri = "http://vivoweb.org/ontology/core#Department" />
-                    <#assign courseUri = "http://vivoweb.org/ontology/core#Course" />
-                    
                     <li><a href="${urls.base}/individuallist?vclassId=${subjectAreaUri?url}">Subject Area</a></li>
                     <li><a href="${urls.base}/individuallist?vclassId=${departmentUri?url}">Department</a></li>
                     <li><a href="${urls.base}/individuallist?vclassId=${courseUri?url}">Courses</a></li>
@@ -39,7 +29,7 @@
     
     <#include "menupage-scripts.ftl">
     
-    ${scripts.add("/js/menupage/browseByVClassPeople.js", "/js/menupage/browseClassGroupsPiePeople.js")}
+    ${scripts.add("/js/menupage/browseByVClassPeople.js")}
 <#else>
     ${noDataNotification}
 </#if>

@@ -20,7 +20,8 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
         scroll = true;
     }
     
-    // First wipe currently displayed individuals and existing pagination
+    // First wipe currently displayed class heading, individuals, and existing pagination
+    $('h3.selected-class').remove();
     this.individualsInVClass.empty();
     $('nav.pagination').remove();
     
@@ -30,6 +31,9 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
             pages = results.pages;
             browseByVClass.pagination(pages, page);
         }
+        
+        selectedClassHeading = '<h3 class="selected-class">'+ results.vclass.name +'</h3>';
+        browseByVClass.individualsContainer.prepend(selectedClassHeading);
         
         $.each(results.individuals, function(i, item) {
             label = results.individuals[i].label;
@@ -52,7 +56,6 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
             } else {
                preferredTitle = results.individuals[i].preferredTitle;
             }
-            // preferredTitle = results.individuals[i].preferredTitle;
             uri = results.individuals[i].URI;
             profileUrl = results.individuals[i].profileUrl;
             if ( !results.individuals[i].thumbUrl ) {
@@ -76,9 +79,9 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
         browseByVClass.selectedVClass(results.vclass.URI);
         browseByVClass.selectedAlpha(alpha);
         
-        // Scroll to the top of the browse section unless told otherwise
+        // Scroll to #menupage-intro unless told otherwise
         if ( scroll != false ) {
-            $.scrollTo('#browse-by', 500);
+            $.scrollTo('#menupage-intro', 500);
         }
     });
 };

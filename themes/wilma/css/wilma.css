@@ -862,13 +862,15 @@ p{
 #menupage-intro {
     width: 920px;
     background: #fff;
-
 }
 #menupage-intro  h3 {
     font-size: 1.5em;
     color: #064d68;
     font-weight: normal;
-    border-bottom: 1px solid #f3f3f4;
+}
+#menupage-intro.people h3 {
+    float:left;
+    width: 200px;
 }
 #menupage-content.people {
     border-right: 1px solid #e8ece9;
@@ -907,30 +909,26 @@ ul#vgraph-classes .count-classes {
     font-size: .75em; 
 }
 /* FIND BY ------>  */
-#find-by {
-    border: 1 solid #749A02;
-}
 #find-by h3 {
     font-size: 1.125em;
     color: #2485ae;
     font-weight: normal;
     border-bottom-color: #fff;
 }
-ul#find-filters li {
-    border-bottom: 1px solid #dde4e3;
-    font-size: 1em;
+#menupage-intro.people #find-by h3 {
+    float: none;
 }
 ul#find-filters a {
     color: #5e6363;
     text-decoration: none;
 }
 ul#find-filters a:hover {
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 6px no-repeat;
     color: #2ea0cf;
 }
 ul#find-filters a.selected {
     color: #2ea0cf;
-    background: url(../images/arrow.gif) 0 12px no-repeat;
+    background: url(../images/arrow.gif) 0 6px no-repeat;
 }
 /* RESEARCHERS ------>  */
 #researchers {
@@ -976,8 +974,6 @@ ul#find-filters a.selected {
 /* BROWSE BY ------>  */
 #browse-by {
     width: 920px;
-    border: 1px solid #dfe6e6;
-    background: #f7f9f9;
 }
 #browse-by h2 {
     background: #5e6363;
