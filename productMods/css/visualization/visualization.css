@@ -50,6 +50,7 @@ span.incomplete-data-holder,
     font-weight: bold;
     text-align: left;
     line-height: 1.5em;
+    width: 180px;
 }
 .google-visualization-sparkline-default {
     margin-bottom: 5px;
