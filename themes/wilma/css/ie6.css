@@ -29,7 +29,10 @@ ul#browse-classgroups {
     margin-left: 20px; 
 }
 #browse-classes { 
-    width: 600px; 
+    width: 620px;
+}
+ul#classes-in-classgroup.vis {
+    width: 40%;
 }
 #login-form p.submit {
     margin-left: 15px;
