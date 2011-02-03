@@ -93,6 +93,8 @@ input.block {
 label {
     margin-top: .5em;
 }
+#showAddFormButton,
+#showAddFormButton:visited,
 input.submit, 
 input.submit:visited,
 /* the id selectors are used temporarily due to the custom jsp tags (<v:input>) 
@@ -142,6 +144,7 @@ input#delete:visited {
     line-height: 1;
     margin-right: .6em;
 }
+#showAddFormButton:hover,
 input.submit:hover,
 input#submit:hover {
     color: #fff;
@@ -152,6 +155,7 @@ input#delete:hover {
     color: #fff;
     background-color: #93c3d4;
 }
+#showAddFormButton:active,
 input.delete:active,
 input#delete:active,
 input.submit:active,
@@ -168,6 +172,8 @@ form textarea {
     margin-top: 20px;
     width: 100%;
 }
+#authorships a.remove:link,
+#showAddForm a.cancel:link,
 form a:link.cancel, 
 form a:visited.cancel {
     text-decoration: underline;
@@ -175,6 +181,10 @@ form a:visited.cancel {
     border-color: none;
     padding-left: 3px;
 }
+#authorships a.remove:hover,
+#authorships a.remove:active,
+#showAddForm a.cancel:hover,
+#showAddForm a.cancel:active,
 form a:hover.cancel, 
 form a:active.cancel {
     text-decoration: none;
