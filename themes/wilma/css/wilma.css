@@ -1371,3 +1371,25 @@ a {
   margin-left: .6em;
   font-weight: bold;
 }
+
+/* ------------------------------------------------->  */
+/* REVISION INFO ----------------------------------->  */
+/* ------------------------------------------------->  */
+
+#revision-build-date {
+    border-left: 1px solid #DFE6E6;
+}
+#revision-build-date h3{
+color: #2485AE;
+}
+#revision-levels caption {
+    font-size: 18px;
+    color: #2485ae;
+}
+#revision-levels th {
+    font-weight: bold;
+    border: 1px solid #DFE6E6;
+}
+#revision-levels td {
+    border: 1px solid #DFE6E6;
+}
