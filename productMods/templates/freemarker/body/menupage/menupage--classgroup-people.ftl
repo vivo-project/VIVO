@@ -8,7 +8,7 @@
         
         <section id="find-by" role="region">
             <nav role="navigation">
-                <h3>Find By</h3>
+                <h3>Find By: </h3>
                 
                 <#assign subjectAreaUri = "http://vivoweb.org/ontology/core#SubjectArea" />
                 <#assign departmentUri = "http://vivoweb.org/ontology/core#Department" />

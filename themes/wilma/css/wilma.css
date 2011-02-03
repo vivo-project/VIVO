@@ -873,14 +873,13 @@ p{
     width: 920px;
     background: #fff;
 }
-#menupage-intro  h3 {
+#menupage-intro h3 {
     font-size: 1.5em;
     color: #064d68;
     font-weight: normal;
 }
 #menupage-intro.people h3 {
-    float:left;
-    width: 200px;
+    float: left;
 }
 #menupage-content.people {
     border-right: 1px solid #e8ece9;
@@ -919,14 +918,13 @@ ul#vgraph-classes .count-classes {
     font-size: .75em; 
 }
 /* FIND BY ------>  */
+#find-by {
+    border: 1px solid #e4eae9;
+}
 #find-by h3 {
     font-size: 1.125em;
     color: #2485ae;
     font-weight: normal;
-    border-bottom-color: #fff;
-}
-#menupage-intro.people #find-by h3 {
-    float: none;
 }
 ul#find-filters a {
     color: #5e6363;
