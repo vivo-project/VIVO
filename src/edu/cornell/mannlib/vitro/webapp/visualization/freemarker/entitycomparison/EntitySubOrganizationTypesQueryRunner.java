@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -39,7 +40,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 
 	private String entityURI;
 	private DataSource dataSource;
-	private Log log;
+	private Log log = LogFactory.getLog(EntitySubOrganizationTypesQueryRunner.class.getName());
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
 		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
@@ -56,7 +57,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 		
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
-		this.log = log;
+	//	this.log = log;
 	}
 	
 	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
@@ -82,8 +83,9 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				+ " rdfs:label ?organizationLabel . "
 				+ "{ "
 				+ "<"+ queryURI + "> core:hasSubOrganization ?subOrganization .  "
-				+ "?subOrganization rdfs:label ?subOrganizationLabel ; rdf:type ?subOrganizationType . "
+				+ "?subOrganization rdfs:label ?subOrganizationLabel ; rdf:type ?subOrganizationType ; core:organizationForPosition ?Position . "
 				+ "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
+				+ "?Position rdf:type core:Position ; core:positionForPerson ?Person ."
 				+ "}"
 				+ "UNION "
 				+ "{ "
@@ -148,6 +150,9 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 		
 //		System.out.println("\n\nSub Organization Label Types Size --> " + subOrganizationLabelToTypes.size());
 //		System.out.println("\n\nPeople Label Types Size --> " + personLabelToTypes.size());
+		
+		log.info("Sub Organization Label Types Size : " + subOrganizationLabelToTypes.size());
+		log.info("People Label Types Size : " + personLabelToTypes.size());
 		
 		return (subOrganizationLabelToTypes.size() != 0 )? subOrganizationLabelToTypes : personLabelToTypes ;
 	}

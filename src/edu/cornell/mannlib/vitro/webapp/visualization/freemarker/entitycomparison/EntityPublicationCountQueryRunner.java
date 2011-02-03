@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -44,7 +45,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 	private String entityURI;
 	private DataSource dataSource;
-	private Log log;
+	private Log log = LogFactory.getLog(EntityPublicationCountQueryRunner.class.getName());
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
 			+ "		(str(?Person) as ?personLit) "
@@ -75,7 +76,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
-		this.log = log;
+//		this.log = log;
 
 	}
 
@@ -145,7 +146,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				if (subEntityLabelNode != null) {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
-				entity.addSubEntity(subEntity);
+			//	entity.addSubEntity(subEntity);
 				subEntity.addPublications(biboDocument);
 			}
 			
@@ -173,7 +174,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			entity.addPublications(biboDocument);
 		}
 		
-		if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
+		if(subentityURLToVO.size() != 0){
+			for(SubEntity subEntity : subentityURLToVO.values()){
+				entity.addSubEntity(subEntity);
+			}			
+		} else if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
 			for(SubEntity person : personURLToVO.values()){
 				entity.addSubEntity(person);
 			}
@@ -182,6 +187,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		}
 		
 		//TODO: return non-null value
+		log.info("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
 		return entity;
 	}
 		

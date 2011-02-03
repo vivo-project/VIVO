@@ -57,7 +57,12 @@ public class SubEntity extends Individual {
 	public int hashCode(){
 		return(41*(getIndividualLabel().hashCode() + 41*(getIndividualURI().hashCode())));
 	}
-
+	
+	@Override
+	public String toString(){
+		return this.getIndividualLabel();
+	}
+	
 	public void addPublications(BiboDocument biboDocument) {
 		this.publications.add(biboDocument);
 	}

@@ -12,6 +12,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
@@ -44,6 +45,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 public class EntityPublicationCountRequestHandler implements
 		VisualizationRequestHandler {
 	
+	private Log log = LogFactory.getLog(EntityPublicationCountRequestHandler.class.getName());
+
 	@Override
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, DataSource dataSource)
@@ -316,10 +319,12 @@ public class EntityPublicationCountRequestHandler implements
 				currentPubYear.add(pubEntry.getValue());
 				yearPubCount.add(currentPubYear);
 			}
+			
+			log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
 
 			entityJson.setYearToActivityCount(yearPubCount);
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
-
+			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
 			boolean isPerson = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
