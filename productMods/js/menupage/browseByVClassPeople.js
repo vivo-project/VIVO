@@ -20,20 +20,18 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
         scroll = true;
     }
     
-    // First wipe currently displayed class heading, individuals, and existing pagination
-    $('h3.selected-class').remove();
-    this.individualsInVClass.empty();
-    $('nav.pagination').remove();
+    // Scroll to #menupage-intro page unless told otherwise
+    if ( scroll != false ) {
+        // only scroll back up if we're past the top of the #browse-by section
+        scrollPosition = browseByVClass.getPageScroll();
+        browseByOffset = $('#browse-by').offset();
+        if ( scrollPosition[1] > browseByOffset.top) {
+            $.scrollTo('#menupage-intro', 500);
+        }
+    }
     
     $.getJSON(url, function(results) {
-        // Check to see if we're dealing with pagination
-        if ( results.pages.length ) {
-            pages = results.pages;
-            browseByVClass.pagination(pages, page);
-        }
-        
-        selectedClassHeading = '<h3 class="selected-class">'+ results.vclass.name +'</h3>';
-        browseByVClass.individualsContainer.prepend(selectedClassHeading);
+        individualList = "";
         
         $.each(results.individuals, function(i, item) {
             label = results.individuals[i].label;
@@ -72,16 +70,29 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
                 listItem += '<span class="title">'+ preferredTitle +'</span>';
             }
             listItem += '</li>';
-            browseByVClass.individualsInVClass.append(listItem);
+            // browseByVClass.individualsInVClass.append(listItem);
+            individualList += listItem;
         })
+        
+        // First wipe currently displayed class heading, individuals, and existing pagination
+        $('h3.selected-class').remove();
+        browseByVClass.individualsInVClass.empty();
+        $('nav.pagination').remove();
+        
+        // And then add the new content
+        browseByVClass.individualsInVClass.append(individualList);
+        
+        // Check to see if we're dealing with pagination
+        if ( results.pages.length ) {
+            pages = results.pages;
+            browseByVClass.pagination(pages, page);
+        }
+        
+        selectedClassHeading = '<h3 class="selected-class">'+ results.vclass.name +'</h3>';
+        browseByVClass.individualsContainer.prepend(selectedClassHeading);
         
         // set selected class, alpha and page
         browseByVClass.selectedVClass(results.vclass.URI);
         browseByVClass.selectedAlpha(alpha);
-        
-        // Scroll to #menupage-intro unless told otherwise
-        if ( scroll != false ) {
-            $.scrollTo('#menupage-intro', 500);
-        }
     });
 };

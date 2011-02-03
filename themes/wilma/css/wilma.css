@@ -1051,16 +1051,16 @@ ul#alpha-browse-individuals .count-classes {
     color: #5e6363;
     font-size: 1em;
 }
-nav.pagination.menupage {
+.pagination.menupage {
     font-size: .8em;
 }
-nav.pagination.menupage li.selected {
+.pagination.menupage li.selected {
     color: #5e6363;
 }
-nav.pagination.menupage li a {
+.pagination.menupage li a {
     text-decoration: none;
 }
-nav.pagination.menupage li a:hover {
+.pagination.menupage li a:hover {
     background: #5e6363;
 }
 
