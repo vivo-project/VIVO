@@ -11,6 +11,7 @@
         
         SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName) 
                         ?positionTitle
+                        ?hrJobTitle
                         ?org ?orgName 
                         ?dateTimeStart ?dateTimeEnd WHERE {
             ?subject ?property ?position  
@@ -18,6 +19,7 @@
                        ?org rdfs:label ?orgName 
             }
             OPTIONAL { ?position rdfs:label ?positionTitle  }
+            OPTIONAL { ?position core:hrJobTitle ?hrJobTitle }
             OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
                                   ?dateTimeStartValue core:dateTime ?dateTimeStart 
@@ -36,7 +38,8 @@
         
         SELECT DISTINCT ?subclass 
                         ?position (afn:localname(?position) AS ?positionName) 
-                        ?positionTitle                       
+                        ?positionTitle    
+                        ?hrJobTitle                    
                         ?org ?orgName 
                         ?dateTimeStart ?dateTimeEnd WHERE {
             ?subject ?property ?position 
@@ -44,6 +47,7 @@
                        ?org rdfs:label ?orgName 
             }
             OPTIONAL { ?position rdfs:label ?positionTitle } 
+            OPTIONAL { ?position core:hrJobTitle ?hrJobTitle }
             OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
                                   ?dateTimeStartValue core:dateTime ?dateTimeStart 
