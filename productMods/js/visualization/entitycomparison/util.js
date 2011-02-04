@@ -1030,7 +1030,7 @@ function prepareTableForDataTablePagination(jsonData){
 	    "oLanguage": {
 			"sInfo": "Records _START_ - _END_ of _TOTAL_",
 			"sInfoEmpty": "No matching entities found",
-			"sInfoFiltered": "",
+			"sInfoFiltered": ""
 		},
 	    "sPaginationType": "gmail_style",
 	    "fnDrawCallback": function () {

@@ -37,8 +37,16 @@
                                     
 <#-- Javascript files -->
 
-<#assign excanvas = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/excanvas.js'>
-<#assign flot = 'js/visualization/entitycomparison/jquery_plugins/flot/jquery.flot.js'>
+<#-- Currently we are using the developer build version for both flot & excanvas libraries,
+this is because IE 9 complains about certain properties. After testing it seems that dev 
+build version is stable enough. If in next couple of days we feel that there are some issues
+we will default to using the stable version unless the request comes from IE 9 in which case
+we will use rev 293 (dev build version) of the flot & excanvas files.
+-->
+<#assign excanvas = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/excanvas.min.js'>
+<#assign flot = 'js/visualization/entitycomparison/jquery_plugins/flot/r293/jquery.flot.min.js'>
+
+
 <#assign fliptext = 'js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
 <#assign jqueryNotify = 'js/jquery_plugins/jquery.notify.min.js'>
 <#assign jqueryUI = 'js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
@@ -64,6 +72,7 @@ ${scripts.add(jqueryNotify)}
 <#assign jqueryNotifyStyle = "css/jquery_plugins/ui.notify.css" />
 <#assign entityComparisonStyle = "css/visualization/entitycomparison/layout.css" />
 <#assign entityComparisonStyleIEHack = "${urls.base}/css/visualization/entitycomparison/layout-ie.css" />
+<#assign entityComparisonStyleIE_6_7_Hack = "${urls.base}/css/visualization/entitycomparison/layout-ie-67.css" />
 <#assign vizStyle = "css/visualization/visualization.css" />
 
 ${stylesheets.add(jqueryUIStyle)}
@@ -72,6 +81,7 @@ ${stylesheets.add(entityComparisonStyle)}
 ${stylesheets.add(vizStyle)}
 ${stylesheets.add(jqueryNotifyStyle)}
 <!--[if IE]><link href="${entityComparisonStyleIEHack}" rel="stylesheet" type="text/css" /><![endif]-->
+<!--[if lt IE 8]><link href="${entityComparisonStyleIE_6_7_Hack}" rel="stylesheet" type="text/css" /><![endif]-->
 
 <#-- variables passed from server-side code -->
 <script language="JavaScript" type="text/javascript">
