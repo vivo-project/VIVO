@@ -97,7 +97,6 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				+ "}";
 
 		
-		System.out.println("\n\nEntity SubOrganizationTypes query is:\n "+ sparqlQuery);
 		log.debug("\nThe sparql query is :\n" + sparqlQuery);
 
 		return sparqlQuery;
