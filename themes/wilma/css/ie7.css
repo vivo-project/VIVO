@@ -77,6 +77,9 @@ input#submit, input#submit:visited {
     margin-left: 0;
     width: 100%;
 }
+.easy-deselect-label a.temporal-vis-url {
+    margin-top: -15px;
+}
 #grant-count-sparkline-include {
     width: 48%;
 }
