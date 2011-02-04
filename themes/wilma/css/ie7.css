@@ -70,3 +70,24 @@ input#submit, input#submit:visited {
 #find-by {
     width: 445px;
 }
+/* Fix for Visualization: Co-author and Co-investigator network pages */
+#sparkline-container {
+    clear: both;
+    float: none;
+    margin-left: 0;
+    width: 100%;
+}
+#grant-count-sparkline-include {
+    width: 48%;
+}
+#coinvestigator-count-sparkline-include {
+    width: 48%;
+    clear: left;
+}
+#publication-count-sparkline-include {
+    width: 48%;
+}
+#coauthor-count-sparkline-include {
+    width: 48%;
+    clear: left;
+}

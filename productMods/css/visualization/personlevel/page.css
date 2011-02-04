@@ -41,8 +41,10 @@ p.datatable {
     cursor: pointer;
 }
 #sparkline-container {
+    clear: both;
     margin-left: 33%;
     width: 67%;
+    float: right;
 }
 #profileImage img{
     width: 90px;
@@ -83,13 +85,19 @@ p.datatable {
     float: right;
     display: none;
 }
-#grant-count-sparkline-include,
 #publication-count-sparkline-include {
     float: left;
     width: 50%;
 }
-#coinvestigator-count-sparkline-include,
 #coauthor-count-sparkline-include {
+    float: right;
+    width: 50%;
+}
+#grant-count-sparkline-include {
+    float: left;
+    width: 50%;
+}
+#coinvestigator-count-sparkline-include {
     float: right;
     width: 50%;
 }
@@ -126,7 +134,7 @@ table.sparkline_wrapper_table td, th {
 #coauthorships_table th {
     vertical-align: top;
 }
-.sparkline_range{
+.sparkline_range {
     font-size: .9em;
     font-weight: bold;
 }
@@ -138,17 +146,17 @@ table.sparkline_wrapper_table td, th {
     float: right; 
     width: 600px;
 }
-.vis-tables table caption{
+.vis-tables table caption {
     width: 100%;
     padding-bottom: 10px;
     font-weight: bold;
     font-size: 16px;
     text-align: left;
 }
-.vis-tables table{
+.vis-tables table {
     width: 100%;
 }
-.vis-tables table thead{
+.vis-tables table thead {
     text-align: left;
 }
 .vis-tables table thead tr th { 
@@ -165,25 +173,27 @@ table.sparkline_wrapper_table td, th {
     text-align: left; 
     padding: 5px;  
 }
-.moniker{
+.moniker {
     margin-top: 0;
 }
-.spacer{
+.spacer {
     font-size: 0; 
     line-height: 0; 
     clear: both;
 }
 /* <------ BODY START*/
-#body{
+#body {
     max-width: 900px;
     min-width: 800px; 
     margin: 0 auto; 
     position: relative;
     background: white;
 }
-#bodyPannel{
+#bodyPannel {
     background: #FFFFFF;    
     height: 840px;
+    width: 100%;
+    clear: both;
 }
 #dataPanel { 
     border: 1px solid #e9e9e9;
@@ -191,6 +201,7 @@ table.sparkline_wrapper_table td, th {
     width: 250px; 
     height: 615px;
     margin-top: 15px;
+    float: left;
 }
 #dataPanel div {
     font-family: Arial, Helvetica, sans-serif;
@@ -238,6 +249,6 @@ table.sparkline_wrapper_table td, th {
     padding: 10px;
     width: 54px;
 }
-#table_heading{
+#table_heading {
     width: 80%; 
 }
