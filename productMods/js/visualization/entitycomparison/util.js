@@ -1085,26 +1085,41 @@ function removeStopWords(val){
 	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
 }
 
-function setEntityLevel(){
-	$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
+function setEntityLevel(entityLevel){
+	//$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase()).css('font-style', 'italic');
-	$('#entityHeader').text(toCamelCase(entityLevel)).css('font-weight', 'bold');
+	$('#entityHeader').text(entityLevel).css('font-weight', 'bold');
 	$('#headerText').css("color", "#2485ae");
 }
 
 function getEntityVisMode(jsonData){
 	
+	var entityLevels = new Array();
+	
 	$.each(jsonData, function(index, val) {
 		if (val.visMode ==  "PERSON"){
-			entityLevel = "People";
+			entityLevels.push("People");
 		} else {
-			entityLevel = "Organizations";
+			entityLevels.push("Organizations");
 		}
-		return;
 	});
 	
-	/* To provide graceful degradation set entity level to a default error message.*/
-	entitylevel = "ENTITY LEVEL UNDEFINED ERROR";
+	var uniqueEntityLevels = $.unique(entityLevels);
+
+	/*
+	 * This case is when organizations & people are mixed because both are directly attached
+	 * to the parent organization. 
+	 * */
+	if (uniqueEntityLevels.length > 1) {
+		entityLevel = "Organizations & People";
+	} else if (uniqueEntityLevels.length === 1) {
+		entityLevel = uniqueEntityLevels[0]; 
+	} else {
+		/* To provide graceful degradation set entity level to a default error message.*/
+		entitylevel = "ENTITY LEVEL UNDEFINED ERROR";
+	}
+	
+	return entityLevel;
 }
 
 function toCamelCase(string){

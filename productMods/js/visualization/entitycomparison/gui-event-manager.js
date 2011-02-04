@@ -138,9 +138,8 @@ $(document).ready(function() {
                 labelToEntityRecord[val.label] = val;
             });
         
-            getEntityVisMode(jsonData);
             prepareTableForDataTablePagination(jsonData);
-            setEntityLevel();
+            setEntityLevel(getEntityVisMode(jsonData));
         
             $(".disabled-checkbox-event-receiver").live("click", function () {
         

@@ -76,7 +76,7 @@
             <div id="bottom">
                 <h3><span id="comparisonParameter"></span></h3>
             <p class="displayCounter">You have selected <span id="counter">0</span> of a maximum 
-            <span id="total">10</span> <span id="entityleveltext"> schools</span> to compare. 
+            <span id="total">10</span> <span id="entityleveltext"> schools</span>. 
             <span id="legend-row-header"> 
             <a class="clear-selected-entities temporalGraphLinks" title="Clear all selected entities.">Clear</a>
             </span>

@@ -97,7 +97,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				+ "}";
 
 		
-//		System.out.println("\n\nEntity SubOrganizationTypes query is: "+ sparqlQuery);
+		System.out.println("\n\nEntity SubOrganizationTypes query is:\n "+ sparqlQuery);
 		log.debug("\nThe sparql query is :\n" + sparqlQuery);
 
 		return sparqlQuery;
@@ -106,8 +106,9 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	
 	private Map<String, Set<String>> createJavaValueObjects(ResultSet resultSet) {
 
-		Map<String, Set<String>> subOrganizationLabelToTypes = new HashMap<String, Set<String>>();
-		Map<String, Set<String>> personLabelToTypes = new HashMap<String, Set<String>>();
+		/*Map<String, Set<String>> subOrganizationLabelToTypes = new HashMap<String, Set<String>>();
+		Map<String, Set<String>> personLabelToTypes = new HashMap<String, Set<String>>();*/
+		Map<String, Set<String>> subEntityLabelToTypes = new HashMap<String, Set<String>>();
 		
 		while(resultSet.hasNext()){
 			
@@ -115,34 +116,50 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 			
 			RDFNode subOrganizationLabel = solution.get(QueryFieldLabels.SUBORGANIZATION_LABEL);
 			
-			if(subOrganizationLabel != null){
-				if(subOrganizationLabelToTypes.containsKey(subOrganizationLabel.toString())){
-					RDFNode subOrganizationType = solution.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
-					if(subOrganizationType != null){
-						subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
+			if (subOrganizationLabel != null) {
+				
+				if (subEntityLabelToTypes.containsKey(subOrganizationLabel.toString())) {
+					RDFNode subOrganizationType = solution
+							.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
+					if (subOrganizationType != null) {
+						subEntityLabelToTypes.get(
+								subOrganizationLabel.toString()).add(
+								subOrganizationType.toString());
 					}
-				}else{
-					RDFNode subOrganizationType = solution.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
-					if(subOrganizationType != null){
-						subOrganizationLabelToTypes.put(subOrganizationLabel.toString(), new HashSet<String>());
-						subOrganizationLabelToTypes.get(subOrganizationLabel.toString()).add(subOrganizationType.toString());
+				} else {
+					RDFNode subOrganizationType = solution
+							.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
+					if (subOrganizationType != null) {
+						subEntityLabelToTypes.put(
+								subOrganizationLabel.toString(),
+								new HashSet<String>());
+						subEntityLabelToTypes.get(
+								subOrganizationLabel.toString()).add(
+								subOrganizationType.toString());
 					}
 				}
 			}
 
 			RDFNode personLabel = solution.get(QueryFieldLabels.PERSON_LABEL);
-			
-			if(personLabel != null){
-				if(personLabelToTypes.containsKey(personLabel.toString())){
-					RDFNode personType = solution.get(QueryFieldLabels.PERSON_TYPE_LABEL);
-					if(personType != null && ! personType.toString().startsWith("http")){
-						personLabelToTypes.get(personLabel.toString()).add(personType.toString());
+
+			if (personLabel != null) {
+				if (subEntityLabelToTypes.containsKey(personLabel.toString())) {
+					RDFNode personType = solution
+							.get(QueryFieldLabels.PERSON_TYPE_LABEL);
+					if (personType != null
+							&& !personType.toString().startsWith("http")) {
+						subEntityLabelToTypes.get(personLabel.toString()).add(
+								personType.toString());
 					}
-				}else{
-					RDFNode personType = solution.get(QueryFieldLabels.PERSON_TYPE_LABEL);
-					if(personType != null && ! personType.toString().startsWith("http")){
-						personLabelToTypes.put(personLabel.toString(), new HashSet<String>());
-						personLabelToTypes.get(personLabel.toString()).add(personType.toString());
+				} else {
+					RDFNode personType = solution
+							.get(QueryFieldLabels.PERSON_TYPE_LABEL);
+					if (personType != null
+							&& !personType.toString().startsWith("http")) {
+						subEntityLabelToTypes.put(personLabel.toString(),
+								new HashSet<String>());
+						subEntityLabelToTypes.get(personLabel.toString()).add(
+								personType.toString());
 					}
 				}
 			}			
@@ -151,10 +168,10 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 //		System.out.println("\n\nSub Organization Label Types Size --> " + subOrganizationLabelToTypes.size());
 //		System.out.println("\n\nPeople Label Types Size --> " + personLabelToTypes.size());
 		
-		log.info("Sub Organization Label Types Size : " + subOrganizationLabelToTypes.size());
-		log.info("People Label Types Size : " + personLabelToTypes.size());
+		log.info("Sub Organization Label Types Size : " + subEntityLabelToTypes.size());
 		
-		return (subOrganizationLabelToTypes.size() != 0 )? subOrganizationLabelToTypes : personLabelToTypes ;
+		return subEntityLabelToTypes;
+		//return (subOrganizationLabelToTypes.size() != 0 )? subOrganizationLabelToTypes : personLabelToTypes ;
 	}
 
 	public Map<String, Set<String>> getQueryResult() throws MalformedQueryParametersException {

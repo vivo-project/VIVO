@@ -146,15 +146,18 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				if (subEntityLabelNode != null) {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
-			//	entity.addSubEntity(subEntity);
+				
+				entity.addSubEntity(subEntity);
+				
 				subEntity.addPublications(biboDocument);
 			}
 			
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
 			
-			if(personURLNode != null){
-				SubEntity person ;
-				if(personURLToVO.containsKey(personURLNode.toString())) {
+			if (personURLNode != null) {
+				SubEntity person;
+				
+				if (personURLToVO.containsKey(personURLNode.toString())) {
 					person = personURLToVO.get(personURLNode.toString());
 				} else {
 					person = new SubEntity(personURLNode.toString());
@@ -166,7 +169,19 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					person.setIndividualLabel(personLabelNode.toString());
 				}
 				
-//				entity.addSubEntity(person);
+				/*
+				 * This makes sure that either,
+				 * 		1. the parent organization is a department-like organization with no organizations 
+				 * beneath it, or 
+				 * 		2. the parent organizations has both sub-organizations and people directly 
+				 * attached to that organizations e.g. president of a university.
+				 * */
+				if (subEntityURLNode == null) {
+
+					entity.addSubEntity(person);
+					
+				}
+				
 				person.addPublications(biboDocument);				
 
 			}			
@@ -174,16 +189,19 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			entity.addPublications(biboDocument);
 		}
 		
-		if(subentityURLToVO.size() != 0){
-			for(SubEntity subEntity : subentityURLToVO.values()){
-				entity.addSubEntity(subEntity);
-			}			
-		} else if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
-			for(SubEntity person : personURLToVO.values()){
-				entity.addSubEntity(person);
-			}
-		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0){
+		/*
+		if (subentityURLToVO.size() != 0) {
+			
+			entity.addSubEntitities(subentityURLToVO.values());
+			
+		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() != 0) {
+			
+			entity.addSubEntitities(personURLToVO.values());
+			
+		} else*/ if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
+			
 			entity = new Entity(this.entityURI, "no-label");
+			
 		}
 		
 		//TODO: return non-null value

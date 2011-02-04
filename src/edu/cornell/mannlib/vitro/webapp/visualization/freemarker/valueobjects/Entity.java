@@ -1,6 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedHashSet;
@@ -46,6 +47,11 @@ public class Entity extends Individual{
 
 	public void addSubEntity(SubEntity subEntity) {
 		this.children.add(subEntity);
+		
+	}
+	
+	public void addSubEntitities(Collection<SubEntity> subEntities) {
+		this.children.addAll(subEntities);
 		
 	}
 
