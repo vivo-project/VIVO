@@ -69,7 +69,6 @@ display:Organizations
     a display:Page ;
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouporganizations ;
-    display:requiresBodyTemplate "menupage--classgroup-organizations.ftl" ;
     display:title "Organizations" ;
     display:urlMapping "/organizations" .
 
