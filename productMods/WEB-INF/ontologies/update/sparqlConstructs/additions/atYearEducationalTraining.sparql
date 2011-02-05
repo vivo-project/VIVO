@@ -14,17 +14,14 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     _:dtv a core:DateTimeValue .
-     _:dtv core:dateTime ?theDate .
-     _:dtv core:dateTimePrecision core:yearPrecision .
-     ?thing core:dateTimeValue _:dtv .
+     _:edtv a core:DateTimeValue .
+     _:edtv core:dateTime ?theYear .
+     _:edtv core:dateTimePrecision core:yearPrecision .
+     ?thing core:dateTimeInterval _:dti .
+     _:dti a core:DateTimeInterval .
+     _:dti core:end _:edtv .
+     _:dti core:dateTimeIntervalFor ?thing .
 } where {
-     ?thing core:year ?theDate .
-     
-     Optional {
-       ?thing a ?type .
-       ?thing a core:EducationalTraining
-     }     
-     
-     FILTER (!bound(?type)) 
+     ?thing core:year ?theYear .
+     ?thing a core:EducationalTraining .
 }
