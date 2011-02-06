@@ -95,15 +95,24 @@
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
-                <p><a href="${relatedSubject.url}">&larr; return to ${relatedSubject.name}</a></p>                
+                <p><a href="${relatedSubject.url}">&larr; return to ${relatedSubject.name}</a></p>
             <#else>                
                 <h1 class="fn foaf-person">
                     <#-- Label -->
                     <@p.label individual editable />
                         
-                    <#-- Moniker -->
-                    <#if individual.moniker?has_content>
-                        <span class="preferred-title">${individual.moniker}</span>                  
+                    <#-- Moniker / Preferred Title -->
+                    <#-- Use Preferred Title over Moniker if it is populated -->
+                    <#assign hasPreferredTitle = p.hasStatements(propertyGroups, "${core}preferredTitle") />
+                    <#if hasPreferredTitle || individual.moniker?has_content>
+                        <span class="preferred-title">
+                            <#if hasPreferredTitle>
+                                <#assign preferredTitle = propertyGroups.getProperty("${core}preferredTitle")! />
+                                ${preferredTitle.statements[0].value}
+                            <#else>
+                                ${individual.moniker}
+                            </#if>
+                        </span>
                     </#if>
                 </h1>
             </#if>
