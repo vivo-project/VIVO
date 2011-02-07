@@ -103,16 +103,12 @@
                         
                     <#-- Moniker / Preferred Title -->
                     <#-- Use Preferred Title over Moniker if it is populated -->
-                    <#assign preferredTitle = (propertyGroups.getProperty("${core}preferredTitle").firstValue)! />
-                    <#assign moniker = individual.moniker>
-                    <#if preferredTitle?has_content || moniker?has_content>
-                        <span class="preferred-title">
-                            <#if preferredTitle?has_content>
-                                ${preferredTitle}
-                            <#else>
-                                ${moniker}
-                            </#if>
-                        </span>
+                    <#assign title = (propertyGroups.getProperty("${core}preferredTitle").firstValue)! />
+                    <#if ! title?has_content>
+                        <#assign title = individual.moniker>
+                    </#if>
+                    <#if title?has_content>
+                        <span class="preferred-title">${title}</span>
                     </#if>
                 </h1>
             </#if>
