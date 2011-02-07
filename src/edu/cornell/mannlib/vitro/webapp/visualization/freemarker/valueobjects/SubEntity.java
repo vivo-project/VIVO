@@ -63,12 +63,12 @@ public class SubEntity extends Individual {
 		return this.getIndividualLabel();
 	}
 	
-	public void addPublications(BiboDocument biboDocument) {
+	public void addPublication(BiboDocument biboDocument) {
 		this.publications.add(biboDocument);
 	}
 
 
-	public void addGrants(Grant grant) {
+	public void addGrant(Grant grant) {
 		this.grants.add(grant);
 	}
 }

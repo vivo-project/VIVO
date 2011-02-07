@@ -14,21 +14,26 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
+import com.hp.hpl.jena.iri.IRI;
+import com.hp.hpl.jena.iri.IRIFactory;
+import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
 
+import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntitySubOrganizationTypesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntitySubOrganizationTypesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
@@ -44,29 +49,50 @@ public class EntityGrantCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
-				entityURI, dataSource, log);	
-
-		Entity entity = queryManager.getQueryResult();
-		 
-		if(entity.getEntityLabel().equals("no-label")){
-
-			return prepareStandaloneErrorResponse(vitroRequest,entityURI);
-		
-		} else{
+		if (StringUtils.isNotBlank(entityURI)){
 			
-			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-					entityURI, dataSource, log);
-	
-			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-					.getQueryResult();
-	
-			return prepareStandaloneResponse(vitroRequest, entity, entityURI,
-					subOrganizationTypesResult);
+			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
+					dataSource, entityURI);
+			
+		} else {
+			
+			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
+			
+			/*
+			 * First checking if the staff has provided highest level organization in deploy.properties
+			 * if so use to temporal graph vis.
+			 */
+			if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
+				
+				/*
+	        	 * To test for the validity of the URI submitted.
+	        	 */
+	        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+	    		IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
+	            
+	    		if (iri.hasViolation(false)) {
+	            	
+	                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
+	                log.error("Highest Level Organization URI provided is invalid " + errorMsg);
+	                
+	            } else {
+	            	
+	    			return getSubjectEntityAndGenerateResponse(vitroRequest,
+							log, dataSource,
+							staffProvidedHighestLevelOrganization);
+	            }
+			}
+			
+			String highestLevelOrgURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log,
+					dataSource);
+			
+			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
+					dataSource, highestLevelOrgURI);
 		}
 		
+		
 	}
-	
+
 	@Override
 	public Map<String, String> generateDataVisualization(
 			VitroRequest vitroRequest, Log log, DataSource dataSource)
@@ -95,6 +121,44 @@ public class EntityGrantCountRequestHandler implements
 			DataSource dataSource) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Entity Grant Count does not provide Ajax Response.");
 	}
+	
+	private ResponseValues getSubjectEntityAndGenerateResponse(
+			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			String subjectEntityURI)
+			throws MalformedQueryParametersException {
+		
+		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
+				subjectEntityURI, dataSource, log);	
+
+		Entity entity = queryManager.getQueryResult();
+		
+		if (entity.getEntityLabel().equals("no-label")) {
+			
+			return prepareStandaloneErrorResponse(vitroRequest, subjectEntityURI);
+			
+		} else {	
+		
+			return getSubEntityTypesAndRenderStandaloneResponse(
+					vitroRequest, log, dataSource,
+					subjectEntityURI, entity);
+		}
+	}
+
+	private ResponseValues getSubEntityTypesAndRenderStandaloneResponse(
+			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			String subjectOrganization, Entity entity)
+			throws MalformedQueryParametersException {
+		
+		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+				subjectOrganization, dataSource, log);
+		
+		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+		.getQueryResult();
+		
+		return prepareStandaloneResponse(vitroRequest, entity, subjectOrganization,
+				subOrganizationTypesResult);
+	}
+	
 	
 	/**
 	 * Provides response when json file containing the grant count over the
@@ -146,11 +210,16 @@ public class EntityGrantCountRequestHandler implements
         String jsonContent = "";
 		jsonContent = writeGrantsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);
 
+		String title = "";
 		
+		if (StringUtils.isNotBlank(entity.getEntityLabel())) {
+			title = entity.getEntityLabel() + " - ";
+		}
+
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
-        body.put("title", "Temporal Graph Visualization");
+        body.put("title", title + "Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
         body.put("organizationLabel", entity.getEntityLabel());
         body.put("jsonContent", jsonContent);
@@ -197,10 +266,12 @@ public class EntityGrantCountRequestHandler implements
 
 				List<Integer> currentGrantYear = new ArrayList<Integer>();
 				if (grantEntry.getKey().equals(
-						VOConstants.DEFAULT_GRANT_YEAR))
+						VOConstants.DEFAULT_GRANT_YEAR)) {
 					currentGrantYear.add(-1);
-				else
+				} else {
 					currentGrantYear.add(Integer.parseInt(grantEntry.getKey()));
+				}
+					
 				currentGrantYear.add(grantEntry.getValue());
 				yearGrantCount.add(currentGrantYear);
 			}

@@ -87,7 +87,6 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
 
-
 		while (resultSet.hasNext()) {
 
 			QuerySolution solution = resultSet.nextSolution();
@@ -149,7 +148,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				
 				entity.addSubEntity(subEntity);
 				
-				subEntity.addPublications(biboDocument);
+				subEntity.addPublication(biboDocument);
 			}
 			
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
@@ -182,11 +181,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					
 				}
 				
-				person.addPublications(biboDocument);				
+				person.addPublication(biboDocument);				
 
 			}			
 
-			entity.addPublications(biboDocument);
+			entity.addPublication(biboDocument);
 		}
 		
 		/*

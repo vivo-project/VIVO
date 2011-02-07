@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -24,8 +25,8 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
@@ -44,7 +45,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 
 	private String entityURI;
 	private DataSource dataSource;
-	private Log log;
+	private Log log = LogFactory.getLog(EntityGrantCountQueryRunner.class.getName());
 
 	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "SELECT "
@@ -101,7 +102,6 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
-		this.log = log;
 
 	}	
 	
@@ -138,24 +138,28 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					grant.setGrantLabel(grantLabelNode.toString());
 				}
 
-				RDFNode grantStartDateNode = solution.get(QueryFieldLabels.ROLE_START_DATE);
-				if(grantStartDateNode != null){
+				RDFNode grantStartDateNode = solution
+						.get(QueryFieldLabels.ROLE_START_DATE);
+				if (grantStartDateNode != null) {
 					grant.setGrantStartDate(grantStartDateNode.toString());
-				}else {
-					grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
-					if(grantStartDateNode != null){
+				} else {
+					grantStartDateNode = solution
+							.get(QueryFieldLabels.GRANT_START_DATE);
+					if (grantStartDateNode != null) {
 						grant.setGrantStartDate(grantStartDateNode.toString());
 					}
 				}
-				
-				RDFNode grantEndDateNode = solution.get(QueryFieldLabels.ROLE_END_DATE);
-				if(grantEndDateNode != null){
+
+				RDFNode grantEndDateNode = solution
+						.get(QueryFieldLabels.ROLE_END_DATE);
+				if (grantEndDateNode != null) {
 					grant.setGrantEndDate(grantEndDateNode.toString());
-				}else {
-					grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
-					if(grantEndDateNode != null){
+				} else {
+					grantEndDateNode = solution
+							.get(QueryFieldLabels.GRANT_END_DATE);
+					if (grantEndDateNode != null) {
 						grant.setGrantEndDate(grantEndDateNode.toString());
-					}				
+					}
 				}
 
 			}
@@ -178,39 +182,53 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
 				entity.addSubEntity(subEntity);
-				subEntity.addGrants(grant);
+				subEntity.addGrant(grant);
 			}
-			
-			
+
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
-			
-			if(personURLNode != null){
-				SubEntity person ;
-				if(personURLToVO.containsKey(personURLNode.toString())) {
+
+			if (personURLNode != null) {
+				SubEntity person;
+				
+				if (personURLToVO.containsKey(personURLNode.toString())) {
 					person = personURLToVO.get(personURLNode.toString());
 				} else {
 					person = new SubEntity(personURLNode.toString());
 					personURLToVO.put(personURLNode.toString(), person);
 				}
+
+				RDFNode personLabelNode = solution
+						.get(QueryFieldLabels.PERSON_LABEL);
 				
-				RDFNode personLabelNode = solution.get(QueryFieldLabels.PERSON_LABEL);
 				if (personLabelNode != null) {
 					person.setIndividualLabel(personLabelNode.toString());
 				}
+
+				/*
+				 * This makes sure that either,
+				 * 		1. the parent organization is a department-like organization with no organizations 
+				 * beneath it, or 
+				 * 		2. the parent organizations has both sub-organizations and people directly 
+				 * attached to that organizations e.g. president of a university.
+				 * */
+				if (subEntityURLNode == null) {
+
+					entity.addSubEntity(person);
+					
+				}
 				
-//				entity.addSubEntity(person);
-				person.addGrants(grant);				
+				person.addGrant(grant);
 
 			}
-			
-			entity.addGrants(grant);
+
+			entity.addGrant(grant);
 		}
-		
-		if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
-			for(SubEntity person : personURLToVO.values()){
+
+		/*if (subentityURLToVO.size() == 0 && personURLToVO.size() != 0) {
+			for (SubEntity person : personURLToVO.values()) {
 				entity.addSubEntity(person);
 			}
-		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0){
+		} else */if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
 			entity = new Entity(this.entityURI, "no-label");
 		}
 

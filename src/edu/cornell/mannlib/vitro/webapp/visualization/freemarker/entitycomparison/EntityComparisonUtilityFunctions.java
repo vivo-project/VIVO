@@ -1,0 +1,91 @@
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+
+import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
+import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
+
+public class EntityComparisonUtilityFunctions {
+
+	public static String getHighestLevelOrganizationURI(ResultSet resultSet,
+			Map<String, String> fieldLabelToOutputFieldLabel) {
+
+		GenericQueryMap queryResult = new GenericQueryMap();
+
+		while (resultSet.hasNext()) {
+			QuerySolution solution = resultSet.nextSolution();
+
+			RDFNode organizationNode = solution
+					.get(fieldLabelToOutputFieldLabel.get("organization"));
+
+			if (organizationNode != null) {
+				queryResult.addEntry(
+						fieldLabelToOutputFieldLabel.get("organization"),
+						organizationNode.toString());
+
+				return organizationNode.toString();
+
+			}
+
+			RDFNode organizationLabelNode = solution
+					.get(fieldLabelToOutputFieldLabel.get("organizationLabel"));
+
+			if (organizationLabelNode != null) {
+				queryResult.addEntry(
+						fieldLabelToOutputFieldLabel.get("organizationLabel"),
+						organizationLabelNode.toString());
+			}
+
+			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
+
+			if (numberOfChildrenNode != null) {
+				queryResult.addEntry("numOfChildren", String
+						.valueOf(numberOfChildrenNode.asLiteral().getInt()));
+			}
+		}
+
+		return "";
+	}
+
+	public static String getHighestLevelOrganizationURI(Log log, DataSource dataSource)
+			throws MalformedQueryParametersException {
+		
+		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+		fieldLabelToOutputFieldLabel.put("organization",
+				QueryFieldLabels.ORGANIZATION_URL);
+		fieldLabelToOutputFieldLabel.put("organizationLabel",
+				QueryFieldLabels.ORGANIZATION_LABEL);
+
+		String aggregationRules = "(count(?organization) AS ?numOfChildren)";
+
+		String whereClause = "?organization rdf:type foaf:Organization ; rdfs:label ?organizationLabel . \n"
+				+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
+				+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
+				+ "FILTER ( !bound(?parent) ). \n";
+
+		String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n"
+				+ "ORDER BY DESC(?numOfChildren)\n" + "LIMIT 1\n";
+
+		QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = new GenericQueryRunner(
+				fieldLabelToOutputFieldLabel, aggregationRules, whereClause,
+				groupOrderClause, dataSource, log);
+
+		String highestLevelOrgURI = EntityComparisonUtilityFunctions
+				.getHighestLevelOrganizationURI(
+						highestLevelOrganizationQueryHandler.getQueryResult(),
+						fieldLabelToOutputFieldLabel);
+		return highestLevelOrgURI;
+	}
+
+}

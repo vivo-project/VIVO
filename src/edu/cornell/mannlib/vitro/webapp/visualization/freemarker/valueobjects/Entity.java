@@ -41,7 +41,7 @@ public class Entity extends Individual{
 		return children;
 	}
 
-	public void addPublications(BiboDocument biboDocument) {
+	public void addPublication(BiboDocument biboDocument) {
 		this.publications.add(biboDocument);
 	}
 
@@ -55,7 +55,7 @@ public class Entity extends Individual{
 		
 	}
 
-	public void addGrants(Grant grant) {
+	public void addGrant(Grant grant) {
 		this.grants.add(grant);
 	}
 

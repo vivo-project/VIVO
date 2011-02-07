@@ -19,25 +19,19 @@ import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -55,28 +49,10 @@ public class EntityPublicationCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		if(StringUtils.isNotBlank(entityURI)){
+		if (StringUtils.isNotBlank(entityURI)){
 		
-			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-					entityURI, dataSource, log);
-			
-			Entity entity = queryManager.getQueryResult();
-	 
-			if(entity.getEntityLabel().equals("no-label")){
-	
-				return prepareStandaloneErrorResponse(vitroRequest,entityURI);
-			
-			} else {
-		
-				QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-						entityURI, dataSource, log);
-		
-				Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-						.getQueryResult();
-		
-				return prepareStandaloneResponse(vitroRequest, entity, entityURI,
-						subOrganizationTypesResult);
-			}
+			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
+					dataSource, entityURI);
 		} else {
 			
 			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
@@ -100,79 +76,58 @@ public class EntityPublicationCountRequestHandler implements
 	                
 	            } else {
 	            	
-	    			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-	    					staffProvidedHighestLevelOrganization, dataSource, log);
-	    			
-	    			Entity entity = queryManager.getQueryResult();
-	    			
-	    			if(entity.getEntityLabel().equals("no-label")){
-	    				
-	    				return prepareStandaloneErrorResponse(vitroRequest,staffProvidedHighestLevelOrganization);
-	    				
-	    			} else {	
-	    			
-						QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-								staffProvidedHighestLevelOrganization, dataSource, log);
-						
-						Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-						.getQueryResult();
-						
-						return prepareStandaloneResponse(vitroRequest, entity, staffProvidedHighestLevelOrganization,
-								subOrganizationTypesResult);
-	    			}
+	    			return getSubjectEntityAndGenerateResponse(vitroRequest,
+							log, dataSource,
+							staffProvidedHighestLevelOrganization);
 	            }
 			}
 			
-			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-			fieldLabelToOutputFieldLabel.put("organization", 
-											  QueryFieldLabels.ORGANIZATION_URL);
-			fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
+			String highestLevelOrgURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log,
+					dataSource);
 			
-			String aggregationRules = "(count(?organization) AS ?numOfChildren)";
-			
-			String whereClause = "?organization rdf:type foaf:Organization ; rdfs:label ?organizationLabel . \n"  
-									+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
-									+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
-									+ "FILTER ( !bound(?parent) ). \n";
-			
-			String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n" 
-										+ "ORDER BY DESC(?numOfChildren)\n" 
-										+ "LIMIT 1\n";
-			
-			QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = 
-					new GenericQueryRunner(fieldLabelToOutputFieldLabel,
-											aggregationRules,
-											whereClause,
-											groupOrderClause,
-											dataSource, log);
-			
-			
-			String highestLevelOrgURI = getHighestLevelOrganizationURI(
-					highestLevelOrganizationQueryHandler.getQueryResult(),
-					fieldLabelToOutputFieldLabel);
-			
-			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-					highestLevelOrgURI, dataSource, log);
-			
-			Entity entity = queryManager.getQueryResult();
-			
-			if(entity.getEntityLabel().equals("no-label")){
-				
-				return prepareStandaloneErrorResponse(vitroRequest,highestLevelOrgURI);
-				
-			} else {	
-			
-				QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-						highestLevelOrgURI, dataSource, log);
-				
-				Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-				.getQueryResult();
-				
-				return prepareStandaloneResponse(vitroRequest, entity, highestLevelOrgURI,
-						subOrganizationTypesResult);	
-			}
+			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
+					dataSource, highestLevelOrgURI);
 		}
 	
+	}
+
+
+	private ResponseValues getSubjectEntityAndGenerateResponse(
+			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			String subjectEntityURI)
+			throws MalformedQueryParametersException {
+		
+		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
+				subjectEntityURI, dataSource, log);
+		
+		Entity entity = queryManager.getQueryResult();
+		
+		if (entity.getEntityLabel().equals("no-label")) {
+			
+			return prepareStandaloneErrorResponse(vitroRequest, subjectEntityURI);
+			
+		} else {	
+		
+			return getSubEntityTypesAndRenderStandaloneResponse(
+					vitroRequest, log, dataSource,
+					subjectEntityURI, entity);
+		}
+	}
+
+
+	private ResponseValues getSubEntityTypesAndRenderStandaloneResponse(
+			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			String subjectEntityURI, Entity entity)
+			throws MalformedQueryParametersException {
+		
+		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+				subjectEntityURI, dataSource, log);
+		
+		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+		.getQueryResult();
+		
+		return prepareStandaloneResponse(vitroRequest, entity, subjectEntityURI,
+				subOrganizationTypesResult);
 	}
 	
 
@@ -256,11 +211,15 @@ public class EntityPublicationCountRequestHandler implements
         String jsonContent = "";
 		jsonContent = writePublicationsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);
 
+		String title = "";
 		
+		if (StringUtils.isNotBlank(entity.getEntityLabel())) {
+			title = entity.getEntityLabel() + " - ";
+		}
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
-        body.put("title", "Temporal Graph Visualization");
+        body.put("title", title + "Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
         body.put("organizationLabel", entity.getEntityLabel());
         body.put("jsonContent", jsonContent);
@@ -292,7 +251,10 @@ public class EntityPublicationCountRequestHandler implements
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
 	 */
-	private String writePublicationsOverTimeJSON(VitroRequest vreq, Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String writePublicationsOverTimeJSON(VitroRequest vreq, 
+												 Set<SubEntity> subentities, 
+												 Map<String, Set<String>> 
+												 subOrganizationTypesResult) {
 
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
@@ -368,44 +330,4 @@ public class EntityPublicationCountRequestHandler implements
 
 	}
 
-	private String getHighestLevelOrganizationURI(ResultSet resultSet,
-			   Map<String, String> fieldLabelToOutputFieldLabel) {
-
-		GenericQueryMap queryResult = new GenericQueryMap();
-		
-		
-		while (resultSet.hasNext())  {
-			QuerySolution solution = resultSet.nextSolution();
-			
-			
-			RDFNode organizationNode = solution.get(
-									fieldLabelToOutputFieldLabel
-											.get("organization"));
-			
-			if (organizationNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
-
-				return organizationNode.toString();
-							
-			}
-			
-			RDFNode organizationLabelNode = solution.get(
-									fieldLabelToOutputFieldLabel
-											.get("organizationLabel"));
-			
-			if (organizationLabelNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
-			}
-			
-			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
-			
-			if (numberOfChildrenNode != null) {
-				queryResult.addEntry("numOfChildren", String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
-			}
-		}
-		
-		return "";
-	}
-	
-	
 }	
