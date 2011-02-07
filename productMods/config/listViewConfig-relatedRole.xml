@@ -9,27 +9,26 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)                       
+        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)  
+                        ?roleLabel ?roleTypeLabel                          
                         ?indivInRole (afn:localname(?indivInRole) AS ?indivName)
                         ?indivLabel
-                        ?roleLabel ?roleTypeLabel        
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
                         
             ?subject ?property ?role 
-            
+
+            OPTIONAL { ?role rdfs:label ?roleLabel }
+                       
             # We need ?subclass in query-base to get the roleTypeLabel for roles that 
             # have no label (e.g., InvestigatorRole and its subclasses)
-            OPTIONAL {  ?role a ?subclass .
-                        ?subclass rdfs:subClassOf core:Role  
-                        OPTIONAL { ?subclass rdfs:label ?roleTypeLabel } 
-            }
-
-            OPTIONAL { ?roleProp rdfs:subPropertyOf core:roleOf .
+            OPTIONAL { ?role a ?subclass . 
+                       ?subclass rdfs:subClassOf core:Role 
+                       OPTIONAL { ?subclass rdfs:label ?roleTypeLabel }
+                       ?roleProp rdfs:subPropertyOf core:roleOf ;
+                                 rdfs:domain ?subclass . 
                        ?role ?roleProp ?indivInRole 
                        OPTIONAL { ?indivInRole rdfs:label ?indivLabel } 
             }
-            
-            OPTIONAL { ?role rdfs:label ?roleLabel }
 
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
@@ -39,12 +38,7 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd
                       }
             }
-            # Make sure we get the role that goes with the role property
-            FILTER (
-               ( ?roleProp != core:investigatorRoleOf || ?subclass = core:InvestigatorRole ) &amp;&amp;
-               ( ?roleProp != core:principalInvestigatorRoleOf || ?subclass = core:PrincipalInvestigatorRole ) &amp;&amp;
-               ( ?roleProp != core:co-PrincipalInvestigatorRoleOf || ?subclass = core:CoPrincipalInvestigatorRole )              
-            )       
+                  
         } ORDER BY ?indivName ?indivLabel ?roleLabel ?roleTypeLabel
     </query-base>
 
@@ -55,24 +49,23 @@
         
         SELECT DISTINCT ?subclass
                         ?role (afn:localname(?role) AS ?roleName)
+                        ?roleLabel ?roleTypeLabel   
                         ?indivInRole (afn:localname(?indivInRole) AS ?indivName)
-                        ?indivLabel
-                        ?roleLabel ?roleTypeLabel        
+                        ?indivLabel                            
                         ?dateTimeInterval ?dateTimeStart ?dateTimeEnd WHERE {
                         
             ?subject ?property ?role 
-            
+
+            OPTIONAL { ?role rdfs:label ?roleLabel }  
+                        
             OPTIONAL { ?role a ?subclass . 
                        ?subclass rdfs:subClassOf core:Role 
-                       OPTIONAL { ?subclass rdfs:label ?roleTypeLabel } 
-            }
-
-            OPTIONAL { ?roleProp rdfs:subPropertyOf core:roleOf .
+                       OPTIONAL { ?subclass rdfs:label ?roleTypeLabel }
+                       ?roleProp rdfs:subPropertyOf core:roleOf ;
+                                 rdfs:domain ?subclass . 
                        ?role ?roleProp ?indivInRole 
                        OPTIONAL { ?indivInRole rdfs:label ?indivLabel } 
             }
-            
-            OPTIONAL { ?role rdfs:label ?roleLabel }           
 
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
@@ -82,32 +75,21 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                       }
             }
-            # Make sure we get the role that goes with the role property
-            FILTER (
-               ( ?roleProp != core:investigatorRoleOf || ?subclass = core:InvestigatorRole ) &amp;&amp;
-               ( ?roleProp != core:principalInvestigatorRoleOf || ?subclass = core:PrincipalInvestigatorRole ) &amp;&amp;
-               ( ?roleProp != core:co-PrincipalInvestigatorRoleOf || ?subclass = core:CoPrincipalInvestigatorRole )              
-            )       
+         
         } ORDER BY ?subclass ?indivName ?indivLabel ?roleLabel ?roleTypeLabel
     </query-collated>
-    
+
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
         CONSTRUCT {
-            ?subclass rdfs:subClassOf core:Role 
+            ?subclass rdfs:subClassOf core:Role .
+            ?roleProp rdfs:subPropertyOf core:roleOf . 
+            ?roleProp rdfs:domain ?subclass
         } WHERE {
-            ?subclass rdfs:subClassOf core:Role 
-        }
-    </query-construct>
-    
-    <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
-        CONSTRUCT {
-            ?roleProp rdfs:subPropertyOf core:roleOf 
-        } WHERE {
-            ?roleProp rdfs:subPropertyOf core:roleOf 
+            ?subclass rdfs:subClassOf core:Role .
+            ?roleProp rdfs:subPropertyOf core:roleOf ;
+                      rdfs:domain ?subclass
         }
     </query-construct>
     
@@ -169,9 +151,6 @@
             ?dateTimeEndValue core:dateTime ?dateTimeEnd 
         } 
     </query-construct>
-    <!--
-    <postprocessor>edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual.RelatedRoleDataPostProcessor</postprocessor>
-    -->
-    
+
     <template>propStatement-relatedRole.ftl</template>
 </list-view-config>
