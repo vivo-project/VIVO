@@ -6,7 +6,7 @@
     <div class="pageBodyGroup">
         
         <h3>Site Configuration</h3>
-        
+
         <ul>
             <#if siteConfig.urls.portals??>
                 <li><a href="${siteConfig.urls.siteInfo}">Current portal information</a></li>
@@ -14,20 +14,17 @@
             <#else>
                 <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
             </#if>
-            
-            <#if themeDir?substring(themeDir?last_index_of("/") + 1,themeDir?length) == "wilma">
-                <#if siteConfig.urls.menuN3Editor??>
-                    <li><a href="${siteConfig.urls.menuN3Editor}">Menu management</a></li>  
+
+            <#if siteConfig.urls.menuN3Editor??>
+                <#if currentTheme != "vivo-basic"> <#-- vivo-basic doesn't support menu pages -->
+                    <li><a href="${siteConfig.urls.menuN3Editor}">Menu management</a></li> 
                 </#if>
-            <#elseif themeDir?substring(themeDir?last_index_of("/") + 1,themeDir?length) == "vivo-basic">
+            </#if>
+            
+            <#if currentTheme != "wilma"> <#-- wilma doesn't support tabs -->
                 <li><a href="${siteConfig.urls.tabs}">Tab management</a></li>
-            <#else>
-                <#if siteConfig.urls.menuN3Editor??>
-                    <li><a href="${siteConfig.urls.menuN3Editor}">Menu management</a></li>  
-                </#if>
-                <li><a href="${siteConfig.urls.tabs}">Tab management</a></li>                
-            </#if>                
-            
+            </#if>
+   
             <#if siteConfig.urls.users??>
                 <li><a href="${siteConfig.urls.users}">User accounts</a></li>  
             </#if>
