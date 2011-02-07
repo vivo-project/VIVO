@@ -103,14 +103,14 @@
                         
                     <#-- Moniker / Preferred Title -->
                     <#-- Use Preferred Title over Moniker if it is populated -->
-                    <#assign hasPreferredTitle = p.hasStatements(propertyGroups, "${core}preferredTitle") />
-                    <#if hasPreferredTitle || individual.moniker?has_content>
+                    <#assign preferredTitle = (propertyGroups.getProperty("${core}preferredTitle").firstValue)! />
+                    <#assign moniker = individual.moniker>
+                    <#if preferredTitle?has_content || moniker?has_content>
                         <span class="preferred-title">
-                            <#if hasPreferredTitle>
-                                <#assign preferredTitle = propertyGroups.getProperty("${core}preferredTitle")! />
-                                ${preferredTitle.statements[0].value}
+                            <#if preferredTitle?has_content>
+                                ${preferredTitle}
                             <#else>
-                                ${individual.moniker}
+                                ${moniker}
                             </#if>
                         </span>
                     </#if>
