@@ -1003,12 +1003,12 @@ ul#browse-classes a {
     text-decoration: none;
 }
 ul#browse-classes a:hover {
-    background: url(../images/arrow.gif) 4px 10px no-repeat;
+    background: url(../images/arrow.gif) 4px 5px no-repeat;
     color: #2ea0cf;
 }
 ul#browse-classes a.selected {
     color: #2ea0cf;
-    background: url(../images/arrow.gif) 4px 10px no-repeat;
+    background: url(../images/arrow.gif) 4px 5px no-repeat;
 }
 ul#browse-classes .count-classes {    
     font-size: 12px; 
