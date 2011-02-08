@@ -146,7 +146,7 @@ public class CoAuthorshipVisCodeGenerator {
 				yearToUniqueCoauthorsCountDataTable.add(new YearToEntityCountDataElement(uniqueCoAuthorCounter, 
 																						 publicationYearAsString, 
 																						 currentUniqueCoAuthors));
-				
+				renderedFullSparks += currentUniqueCoAuthors;
 				uniqueCoAuthorCounter++;
 		}
 
@@ -156,8 +156,6 @@ public class CoAuthorshipVisCodeGenerator {
 		 * Sparks that will be rendered in full mode will always be the one's which have any year
 		 * associated with it. Hence.
 		 * */
-		renderedFullSparks = allCoAuthorsWithKnownAuthorshipYears.size();
-		
 		sparklineData.setRenderedSparks(renderedFullSparks);
 		
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueCoauthorsCountDataTable);

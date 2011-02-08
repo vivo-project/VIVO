@@ -155,6 +155,8 @@ public class CoPIVisCodeGenerator {
 			yearToUniqueInvestigatorsCountDataTable.add(new YearToEntityCountDataElement(uniqueCoPICounter, 
 					grantYearAsString, 
 					currentUniqueCoPIs));
+			
+			renderedFullSparks += currentUniqueCoPIs;
 			uniqueCoPICounter++;
 		}
 
@@ -164,8 +166,6 @@ public class CoPIVisCodeGenerator {
 		 * rendered in full mode will always be the one's which have any year
 		 * associated with it. Hence.
 		 */
-		renderedFullSparks = allCoPIsWithKnownGrantShipYears.size();
-		
 		sparklineData.setRenderedSparks(renderedFullSparks);
 		
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueInvestigatorsCountDataTable);
