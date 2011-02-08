@@ -12,12 +12,14 @@ import java.util.Set;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
@@ -39,6 +41,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 
 public class EntityGrantCountRequestHandler implements
 		VisualizationRequestHandler {
+	
+	private Log log = LogFactory.getLog(EntityGrantCountRequestHandler.class.getName());
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
@@ -100,8 +104,11 @@ public class EntityGrantCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
+		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, dataSource, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
-				entityURI, dataSource, log);	
+				entityURI, constructedModel, log);	
 		
 		Entity entity = queryManager.getQueryResult();
 		
@@ -124,8 +131,11 @@ public class EntityGrantCountRequestHandler implements
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
+		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(subjectEntityURI, dataSource, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
-				subjectEntityURI, dataSource, log);	
+				subjectEntityURI, constructedModel, log);	
 
 		Entity entity = queryManager.getQueryResult();
 		
@@ -269,6 +279,8 @@ public class EntityGrantCountRequestHandler implements
 				yearGrantCount.add(currentGrantYear);
 			}
 
+			log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
+			
 			entityJson.setYearToActivityCount(yearGrantCount);
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
 

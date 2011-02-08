@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -46,7 +47,10 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
 		
-		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
+		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, dataSource, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
+		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
 		
 		CoPIData PINodesAndEdges = queryManager.getQueryResult();
 				

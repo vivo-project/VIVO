@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
@@ -93,11 +94,16 @@ public class EntityComparisonUtilityFunctions {
 	public static Map<String, Set<String>> getSubEntityTypes(Log log,
 			DataSource dataSource, String subjectOrganization)
 			throws MalformedQueryParametersException {
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				subjectOrganization, dataSource, log);
 		
+		EntitySubOrganizationTypesConstructQueryRunner constructQueryRunnerForSubOrganizationTypes = new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, dataSource, log) ;
+		Model constructedModelForSubOrganizationTypes = constructQueryRunnerForSubOrganizationTypes.getConstructedModel();
+		
+		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+				subjectOrganization, constructedModelForSubOrganizationTypes, log);
+
 		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-		.getQueryResult();
+				.getQueryResult();
+		
 		return subOrganizationTypesResult;
 	}
 

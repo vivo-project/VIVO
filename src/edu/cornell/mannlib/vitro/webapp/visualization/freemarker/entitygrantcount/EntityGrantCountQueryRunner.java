@@ -20,13 +20,14 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
@@ -44,7 +45,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String entityURI;
-	private DataSource dataSource;
+	private Model dataSource;
 	private Log log = LogFactory.getLog(EntityGrantCountQueryRunner.class.getName());
 
 	
@@ -54,7 +55,6 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ "		(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
 		+ "		(str(?Person) as ?personLit) "
 		+ "		(str(?PersonLabel) as ?personLabelLit) "
-		+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
 		+ "		(str(?Grant) as ?grantLit) "
 		+ "		(str(?GrantLabel) as ?grantLabelLit) "
 		+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
@@ -63,7 +63,6 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "	;
 	
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME =  " "
-		+ "		?SecondaryPosition rdfs:label ?SecondaryPositionLabel . "
 		+ "		?Role core:roleIn ?Grant . "
 		+ "		?Grant rdfs:label ?GrantLabel . "
 		+ 		"OPTIONAL {"	
@@ -77,7 +76,6 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ 		"}"	;
 
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME =  " "
-		+ "		?SecondaryPosition rdfs:label ?SecondaryPositionLabel . "
 		+ "		?Role core:roleIn ?Grant . "
 		+ "		?Grant rdfs:label ?GrantLabel . "
 		+ 		"OPTIONAL {"	
@@ -98,22 +96,22 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 
 	
 	public EntityGrantCountQueryRunner(String entityURI,
-			DataSource dataSource, Log log) {
+			Model constructedModel, Log log) {
 
 		this.entityURI = entityURI;
-		this.dataSource = dataSource;
+		this.dataSource = constructedModel;
 
 	}	
 	
 	private Entity createJavaValueObjects(ResultSet resultSet) {
-
+		
 		Entity entity = null;
 		Map<String, Grant> grantURIToVO = new HashMap<String, Grant>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
 
 		while (resultSet.hasNext()) {
-
+		//	log.info("Checking whether EntityGrantCount produced any resultset against the Constructed Model");
 			QuerySolution solution = resultSet.nextSolution();
 
 			if (entity == null) {
@@ -196,10 +194,8 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					person = new SubEntity(personURLNode.toString());
 					personURLToVO.put(personURLNode.toString(), person);
 				}
-
-				RDFNode personLabelNode = solution
-						.get(QueryFieldLabels.PERSON_LABEL);
 				
+				RDFNode personLabelNode = solution.get(QueryFieldLabels.PERSON_LABEL);
 				if (personLabelNode != null) {
 					person.setIndividualLabel(personLabelNode.toString());
 				}
@@ -235,12 +231,12 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		return entity;
 	}
 
-	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
+	private ResultSet executeQuery(String queryURI, Model dataSource2) {
 
 		QueryExecution queryExecution = null;
 		Query query = QueryFactory.create(
 				getSparqlQuery(queryURI), SYNTAX);
-		queryExecution = QueryExecutionFactory.create(query, dataSource);
+		queryExecution = QueryExecutionFactory.create(query, dataSource2);
 		return queryExecution.execSelect();
 	}	
 	
@@ -249,57 +245,56 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 		+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
 		+ ">) as ?" + ENTITY_URL + ") "
-		+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
-		+ " rdfs:label ?organizationLabel ."
+		+ "WHERE { " + "<" + queryURI + "> rdfs:label ?organizationLabel ."
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ."
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position  core:positionForPerson ?Person ."
+		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position  core:positionForPerson ?Person ."
+		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"		
 		+ " } ";
 		
 		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
 		
-		log.debug("\nThe sparql query is :\n" + sparqlQuery);
+	//	log.info("\nThe sparql query is :\n" + sparqlQuery);
 		
 		return sparqlQuery;
 

@@ -19,6 +19,8 @@ import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.rdf.model.Model;
+
 
 import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
@@ -90,17 +92,21 @@ public class EntityPublicationCountRequestHandler implements
 		}
 	
 	}
-
-
+	
 	private ResponseValues getSubjectEntityAndGenerateResponse(
 			VitroRequest vitroRequest, Log log, DataSource dataSource,
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
+		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, dataSource, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-				subjectEntityURI, dataSource, log);
+				subjectEntityURI, constructedModel, log);
+
 		
 		Entity entity = queryManager.getQueryResult();
+
 		
 		if (entity.getEntityLabel().equals("no-label")) {
 			
@@ -136,8 +142,11 @@ public class EntityPublicationCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 				
+		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, dataSource, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-				entityURI, dataSource, log);	
+				entityURI, constructedModel, log);	
 		
 		Entity entity = queryManager.getQueryResult();
 

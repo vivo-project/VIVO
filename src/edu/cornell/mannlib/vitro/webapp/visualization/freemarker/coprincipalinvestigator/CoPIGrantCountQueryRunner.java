@@ -24,6 +24,7 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
@@ -47,7 +48,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	
 	private String egoURI;
 	
-	private DataSource dataSource;
+	private Model dataSource;
 
 	private Log log;
 
@@ -79,7 +80,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	
 	
 	public CoPIGrantCountQueryRunner(String egoURI,
-			DataSource dataSource, Log log) {
+			Model dataSource, Log log) {
 
 		this.egoURI = egoURI;
 		this.dataSource = dataSource;
@@ -322,7 +323,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	}
 
 	
-	private ResultSet executeQuery(String queryText, DataSource dataSource) {
+	private ResultSet executeQuery(String queryText, Model dataSource) {
 
 		QueryExecution queryExecution = null;
 		Query query = QueryFactory.create(queryText, SYNTAX);

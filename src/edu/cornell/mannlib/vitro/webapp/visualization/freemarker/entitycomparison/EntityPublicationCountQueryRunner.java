@@ -12,7 +12,6 @@ import org.apache.commons.logging.LogFactory;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -21,6 +20,8 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Model;
+
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
@@ -44,18 +45,16 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String entityURI;
-	private DataSource dataSource;
+	private Model dataSource;
 	private Log log = LogFactory.getLog(EntityPublicationCountQueryRunner.class.getName());
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
 			+ "		(str(?Person) as ?personLit) "
 			+ "		(str(?PersonLabel) as ?personLabelLit) "
-			+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
 			+ "		(str(?Document) as ?documentLit) "
 			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
 			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
-			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") "
-			+ "		(str(?StartYear) as ?StartYearLit)";
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") ";
 
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
@@ -63,8 +62,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			+ " rdfs:label ?DocumentLabel ."
 			+ "OPTIONAL {  ?Document core:dateTimeValue ?dateTimeValue . " 
 			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
-			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." 
-			+ "OPTIONAL {  ?SecondaryPosition core:startYear ?StartYear } .";
+			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." ;
 
 	private static String ENTITY_LABEL;
 	private static String ENTITY_URL;
@@ -72,7 +70,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private static String SUBENTITY_URL;
 
 	public EntityPublicationCountQueryRunner(String entityURI,
-			DataSource dataSource, Log log) {
+			Model dataSource, Log log) {
 
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
@@ -208,7 +206,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		return entity;
 	}
 		
-	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
+	private ResultSet executeQuery(String queryURI, Model dataSource) {
 
 		QueryExecution queryExecution = null;
 		Query query = QueryFactory.create(
@@ -240,23 +238,20 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		+ "			(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
 		+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
 		+ ">) as ?" + ENTITY_URL + ") "
-		+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
-		+ " rdfs:label ?organizationLabel ."
+		+ "WHERE { " + "<" + queryURI + "> rdfs:label ?organizationLabel ."
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
 		+ "?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel . "
 		+ " ?Resource core:linkedInformationResource ?Document .  "
-		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:organizationForPosition ?Position ."
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ "	?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ "	?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel . "
 		+ " ?Resource core:linkedInformationResource ?Document ."
-		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "}";
 		

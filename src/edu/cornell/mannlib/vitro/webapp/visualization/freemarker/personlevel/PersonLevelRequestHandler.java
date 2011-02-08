@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -22,6 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.Visu
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipVisCodeGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountConstructQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount.PersonGrantCountQueryRunner;
@@ -82,10 +84,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         
         
-        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
+        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)){ 
         	
-        	QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
-            
+    		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, dataSource, log);
+    		Model constructedModel = constructQueryRunner.getConstructedModel();
+    		
+    		QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+           
             QueryRunner<Set<Grant>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, dataSource, log);
             
             CoPIData coPIData = coPIQueryManager.getQueryResult();
