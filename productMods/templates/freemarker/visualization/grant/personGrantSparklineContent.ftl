@@ -188,10 +188,11 @@
                     if (totalGrants !== totalGrantCount) {
                         sparksText += ' (' + totalGrantCount + ' total)';
                     }                                        
-                                        
+                               
+                    if (totalGrantCount) {
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" >(.CSV File)</a> ';                    
+                    }                                                
                                          
-                    sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" >(.CSV File)</a> ';
-
                  </#if>
          
                  if (!onlyUnknownYearGrants) {

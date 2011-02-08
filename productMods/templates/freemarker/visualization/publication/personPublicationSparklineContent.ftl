@@ -189,8 +189,11 @@
                     if (totalPubs !== totalPublicationCount) {
                         sparksText += ' (' + totalPublicationCount + ' total)';
                     }
-                                                            
-                    sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
+
+                    if (totalPublicationCount) {
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';                    
+                    }
+                                                                                
                  </#if>
          
                  if (!onlyUnknownYearPublications) {

@@ -3,10 +3,8 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -20,11 +18,12 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
@@ -33,8 +32,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
 
 public class UtilityFunctions {
@@ -275,6 +274,51 @@ public class UtilityFunctions {
 		 * This means that none of the date time formatters worked. 
 		 * */
 		return null;
+	}
+	
+	public static String getCSVDownloadURL(String individualURI, String visType, String visMode) {
+		
+		ParamMap CSVDownloadURLParams = null;
+		
+		if (StringUtils.isBlank(visMode)) {
+			
+			CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					 individualURI,
+					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					 visType);
+			
+		} else {
+			
+			CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					 individualURI,
+					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					 visType,
+					 VisualizationFrameworkConstants.VIS_MODE_KEY,
+					 visMode);
+
+		}
+		
+		String csvDownloadLink = UrlBuilder.getUrl(VisualizationFrameworkConstants.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
+								 CSVDownloadURLParams);
+		
+		return csvDownloadLink != null ? csvDownloadLink : "" ;
+
+	}
+	
+	public static String getCollaboratorshipNetworkLink(String individualURI, String visType, String visMode) {
+		
+		ParamMap collaboratorshipNetworkURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+				 individualURI,
+				 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+				 visType,
+				 VisualizationFrameworkConstants.VIS_MODE_KEY,
+				 visMode);
+
+		String collaboratorshipNetworkURL = UrlBuilder.getUrl(
+										VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+										collaboratorshipNetworkURLParams);
+		
+		return collaboratorshipNetworkURL != null ? collaboratorshipNetworkURL : "" ;
 	}
 
 }
