@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?authorship (afn:localname(?authorship) AS ?authorshipName) 
+        SELECT DISTINCT ?authorship
                         ?person ?personName WHERE {
             ?subject ?property ?authorship 
             OPTIONAL { ?authorship core:authorRank ?rank } 
@@ -26,7 +26,7 @@
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
                 
         SELECT DISTINCT ?subclass
-                        ?authorship (afn:localname(?authorship) AS ?authorshipName) 
+                        ?authorship
                         ?person ?personName WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:authorRank ?rank } 

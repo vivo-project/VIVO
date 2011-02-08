@@ -16,7 +16,7 @@
             <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.authorship)}">${statement.authorshipName}</a> (no linked information resource)
+            <a href="${profileUrl(statement.authorship)}">missing information resource</a>
         </#if>
     </#local>
 

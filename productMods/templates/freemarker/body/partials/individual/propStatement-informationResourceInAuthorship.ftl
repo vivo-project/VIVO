@@ -13,6 +13,6 @@
         <a href="${profileUrl(statement.person)}">${statement.personName}</a>
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${profileUrl(statement.authorship)}">${statement.authorshipName}</a> (no linked author)
+        <a href="${profileUrl(statement.authorship)}">missing author</a>
     </#if>
 </#macro>

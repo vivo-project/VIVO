@@ -16,7 +16,7 @@
             <a href="${profileUrl(statement.indivInRole)}">${statement.indivLabel!statement.indivName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}">${statement.roleName}</a> (no linked individual in this role)
+            <a href="${profileUrl(statement.role)}">missing person in this role</a>
         </#if>
     </#local>
 

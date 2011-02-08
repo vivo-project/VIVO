@@ -27,7 +27,7 @@
             <a href="${profileUrl(statement.org)}">${statement.orgName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.edTraining)}">${statement.edTrainingName}</a> (no linked organization)
+            <a href="${profileUrl(statement.edTraining)}">missing organization</a>
         </#if>
     </#local>
 

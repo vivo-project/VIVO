@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?dateTimeInterval ?intervalName
+        SELECT DISTINCT ?dateTimeInterval
                         ?valueStart ?valueStartName
                         ?dateTimeStart 
                         ?precisionStart
@@ -17,7 +17,7 @@
                         ?dateTimeEnd 
                         ?precisionEnd WHERE {
             ?subject ?property ?dateTimeInterval
-                        LET (?intervalName := afn:localname(?dateTimeInterval)) 
+                      
             OPTIONAL { ?dateTimeInterval core:start ?valueStart
                                    LET (?valueStartName := afn:localname(?valueStart)) 
                        OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }

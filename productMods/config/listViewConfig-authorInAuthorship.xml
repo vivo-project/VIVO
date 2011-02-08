@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?authorship (afn:localname(?authorship) AS ?authorshipName)                        
+        SELECT DISTINCT ?authorship             
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE {
             ?subject ?property ?authorship  
@@ -28,7 +28,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?subclass 
-                        ?authorship (afn:localname(?authorship) AS ?authorshipName) 
+                        ?authorship
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE {
             ?subject ?property ?authorship  

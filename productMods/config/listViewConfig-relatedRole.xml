@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)  
+        SELECT DISTINCT ?role   
                         ?roleLabel ?roleTypeLabel                          
                         ?indivInRole (afn:localname(?indivInRole) AS ?indivName)
                         ?indivLabel
@@ -48,7 +48,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?subclass
-                        ?role (afn:localname(?role) AS ?roleName)
+                        ?role 
                         ?roleLabel ?roleTypeLabel   
                         ?indivInRole (afn:localname(?indivInRole) AS ?indivName)
                         ?indivLabel                            

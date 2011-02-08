@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?position (afn:localname(?position) AS ?positionName)                        
+        SELECT DISTINCT ?position                 
                         ?positionTitle 
                         ?person ?personName 
                         ?dateTimeStart ?dateTimeEnd WHERE {
@@ -38,7 +38,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?subclass 
-                        ?position (afn:localname(?position) AS ?positionName)
+                        ?position
                         ?positionTitle 
                         ?person ?personName 
                         ?dateTimeStart ?dateTimeEnd WHERE {

@@ -5,7 +5,7 @@
 <#import "lib-datetime.ftl" as dt>
 
 <#if ! statement.valueStart?? && ! statement.valueEnd??>
-    <a href="${profileUrl(statement.dateTimeInterval)}">${statement.intervalName}</a> (incomplete date/time interval data)
+    <a href="${profileUrl(statement.dateTimeInterval)}">incomplete date/time interval</a>
 <#else>
     ${dt.dateTimeIntervalLong("${statement.dateTimeStart!}", "${statement.precisionStart!}", "${statement.dateTimeEnd!}", "${statement.precisionEnd!}")}
 </#if>

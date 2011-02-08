@@ -10,7 +10,6 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?dateTimeValue 
-                        (afn:localname(?dateTimeValue) AS ?dateTimeValueName) 
                         (afn:localname(?dateTimePrecision) AS ?precision) 
                         ?dateTime  WHERE {
             ?subject ?property ?dateTimeValue 
