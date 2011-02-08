@@ -161,7 +161,7 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	
 	Model model	= executeQuery(constructQueries,
 									   this.dataSource);
-	model.write(System.out);
+	//model.write(System.out);
 	return model;
 		
 	}
