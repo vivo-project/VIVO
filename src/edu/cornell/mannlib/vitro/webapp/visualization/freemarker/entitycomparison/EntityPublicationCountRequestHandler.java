@@ -120,11 +120,8 @@ public class EntityPublicationCountRequestHandler implements
 			String subjectEntityURI, Entity entity)
 			throws MalformedQueryParametersException {
 		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				subjectEntityURI, dataSource, log);
-		
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-		.getQueryResult();
+		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
+				log, dataSource, subjectEntityURI);
 		
 		return prepareStandaloneResponse(vitroRequest, entity, subjectEntityURI,
 				subOrganizationTypesResult);
@@ -144,11 +141,8 @@ public class EntityPublicationCountRequestHandler implements
 		
 		Entity entity = queryManager.getQueryResult();
 
-		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				entityURI, dataSource, log);
-		
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
+		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
+				log, dataSource, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
 

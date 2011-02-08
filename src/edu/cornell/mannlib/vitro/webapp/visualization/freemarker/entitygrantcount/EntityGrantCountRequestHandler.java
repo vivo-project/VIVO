@@ -107,10 +107,8 @@ public class EntityGrantCountRequestHandler implements
 		Entity entity = queryManager.getQueryResult();
 		
 		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				entityURI, dataSource, log);
-		
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
+		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
+				log, dataSource, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
 
@@ -149,17 +147,13 @@ public class EntityGrantCountRequestHandler implements
 			String subjectOrganization, Entity entity)
 			throws MalformedQueryParametersException {
 		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				subjectOrganization, dataSource, log);
-		
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-		.getQueryResult();
+		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
+				log, dataSource, subjectOrganization);
 		
 		return prepareStandaloneResponse(vitroRequest, entity, subjectOrganization,
 				subOrganizationTypesResult);
 	}
-	
-	
+
 	/**
 	 * Provides response when json file containing the grant count over the
 	 * years is requested.

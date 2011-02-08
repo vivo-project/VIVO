@@ -2,6 +2,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparis
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
@@ -86,6 +87,17 @@ public class EntityComparisonUtilityFunctions {
 						highestLevelOrganizationQueryHandler.getQueryResult(),
 						fieldLabelToOutputFieldLabel);
 		return highestLevelOrgURI;
+	}
+	
+	public static Map<String, Set<String>> getSubEntityTypes(Log log,
+			DataSource dataSource, String subjectOrganization)
+			throws MalformedQueryParametersException {
+		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
+				subjectOrganization, dataSource, log);
+		
+		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
+		.getQueryResult();
+		return subOrganizationTypesResult;
 	}
 
 }
