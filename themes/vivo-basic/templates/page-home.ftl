@@ -8,7 +8,7 @@
         <#include "head.ftl">
     </head>
     
-    <body>
+    <body class="${bodyClasses!}">
         <#include "identity.ftl">
         
         <#include "menu.ftl">
