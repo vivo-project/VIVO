@@ -498,7 +498,9 @@ ul#main-nav {
     width: 570px;
     padding-bottom: 40px;
 }
-
+body.loggedIn #intro {
+    width: 98%;
+}
 #intro h2 {
     padding: 35px 0 12px 24px;
     border-bottom: none;
@@ -523,6 +525,9 @@ ul#main-nav {
     margin-bottom: 30px;
     overflow: hidden;
     margin-top: 20px;
+}
+body.login #login {
+    float: none;
 }
 #login h2 {
     font-size: 22px;
