@@ -4,7 +4,7 @@
 
 <#if !noData>
     <section id="menupage-intro" class="people" role="region">
-        <h3>${page.title}</h3>
+        <h2>${page.title}</h2>
         
         <section id="find-by" role="region">
             <nav role="navigation">

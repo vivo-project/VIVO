@@ -879,12 +879,12 @@ p{
     width: 920px;
     background: #fff;
 }
-#menupage-intro h3 {
+#menupage-intro h2 {
     font-size: 1.375em;
     color: #064d68;
     font-weight: normal;
 }
-#menupage-intro.people h3 {
+#menupage-intro.people h2 {
     float: left;
 }
 #menupage-content.people {
