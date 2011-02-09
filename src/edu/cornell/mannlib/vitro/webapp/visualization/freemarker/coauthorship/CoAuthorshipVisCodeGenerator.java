@@ -159,6 +159,14 @@ public class CoAuthorshipVisCodeGenerator {
 		sparklineData.setRenderedSparks(renderedFullSparks);
 		
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueCoauthorsCountDataTable);
+		
+		/*
+		 * This is required only for the sparklines which convey collaborationships like coinvestigatorships
+		 * and coauthorship. There are edge cases where a collaborator can be present for in a collaboration
+		 * with known & unknown year. We do not want to repeat the count for this collaborator when we present 
+		 * it in the front-end. 
+		 * */
+		Set<Node> totalUniqueCoInvestigators = new HashSet<Node>(allCoAuthorsWithKnownAuthorshipYears);
 
 		/*
 		 * Total publications will also consider publications that have no year associated with
@@ -168,9 +176,13 @@ public class CoAuthorshipVisCodeGenerator {
 		if (yearToUniqueCoauthors.get(VOConstants.DEFAULT_PUBLICATION_YEAR) != null) {
 			unknownYearCoauthors = yearToUniqueCoauthors
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR).size();
+			
+			totalUniqueCoInvestigators.addAll(yearToUniqueCoauthors.get(VOConstants.DEFAULT_GRANT_YEAR));
 		}
 		
 		sparklineData.setUnknownYearPublications(unknownYearCoauthors);
+		
+		sparklineData.setTotalCollaborationshipCount(totalUniqueCoInvestigators.size());
 		
 		if (providedVisContainerID != null) {
 			visContainerID = providedVisContainerID;

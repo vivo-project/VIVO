@@ -159,17 +159,25 @@ public class CoPIVisCodeGenerator {
 			renderedFullSparks += currentUniqueCoPIs;
 			uniqueCoPICounter++;
 		}
-
+		
 		/*
 		 * For the purpose of this visualization I have come up with a term
 		 * "Sparks" which essentially means data points. Sparks that will be
 		 * rendered in full mode will always be the one's which have any year
 		 * associated with it. Hence.
 		 */
-		sparklineData.setRenderedSparks(renderedFullSparks);
+		sparklineData.setRenderedSparks(allCoPIsWithKnownGrantShipYears.size());
 		
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueInvestigatorsCountDataTable);
 
+		/*
+		 * This is required only for the sparklines which convey collaborationships like coinvestigatorships
+		 * and coauthorship. There are edge cases where a collaborator can be present for in a collaboration
+		 * with known & unknown year. We do not want to repeat the count for this collaborator when we present 
+		 * it in the front-end. 
+		 * */
+		Set<CoPINode> totalUniqueCoInvestigators = new HashSet<CoPINode>(allCoPIsWithKnownGrantShipYears);
+		
 		/*
 		 * Total grants will also consider grants that have no year
 		 * associated with them. Hence.
@@ -178,7 +186,12 @@ public class CoPIVisCodeGenerator {
 		if (yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR) != null) {
 			unknownYearGrants = yearToUniqueCoPIs.get(
 					VOConstants.DEFAULT_GRANT_YEAR).size();
+			
+			totalUniqueCoInvestigators.addAll(yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR));
+			
 		}
+		
+		sparklineData.setTotalCollaborationshipCount(totalUniqueCoInvestigators.size());
 		
 		sparklineData.setUnknownYearGrants(unknownYearGrants);
 

@@ -124,8 +124,14 @@
                 }
                 
                 }
+                
+                if (${sparklineVO.totalCollaborationshipCount?c}) {
+                    var totalGrantCount = ${sparklineVO.totalCollaborationshipCount?c};
+                } else {
+                    var totalGrantCount = knownYearGrantCounts + unknownYearGrantCounts; 
+                }
                  
-                var totalGrantCount = knownYearGrantCounts + unknownYearGrantCounts;              
+                             
                 
                 <#if sparklineVO.shortVisMode>
                 

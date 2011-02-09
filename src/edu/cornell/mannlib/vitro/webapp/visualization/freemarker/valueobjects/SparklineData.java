@@ -17,6 +17,8 @@ public class SparklineData {
 	private Integer unknownYearPublications;
 	private Integer unknownYearGrants;
 	
+	private Integer totalCollaborationshipCount;
+	
 	private Map<String, Integer> yearToActivityCount;
 	
 	private String downloadDataLink = "";
@@ -29,7 +31,16 @@ public class SparklineData {
 	private List<YearToEntityCountDataElement> yearToEntityCountDataTable;
 	
 	private int numOfYearsToBeRendered;
-	
+
+	public void setTotalCollaborationshipCount(
+			Integer totalCollaborationshipCount) {
+		this.totalCollaborationshipCount = totalCollaborationshipCount;
+	}
+
+	public Integer getTotalCollaborationshipCount() {
+		return totalCollaborationshipCount;
+	}
+
 	public Integer getEarliestRenderedGrantYear() {
 		return earliestRenderedGrantYear;
 	}

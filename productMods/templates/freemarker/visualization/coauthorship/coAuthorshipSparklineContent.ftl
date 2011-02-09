@@ -125,7 +125,11 @@
                 
                 }
                 
-                var totalPublicationCount = knownYearPublicationCounts + unknownYearPublicationCounts;
+                if (${sparklineVO.totalCollaborationshipCount?c}) {
+                    var totalPublicationCount = ${sparklineVO.totalCollaborationshipCount?c};
+                } else {
+                    var totalPublicationCount = knownYearPublicationCounts + unknownYearPublicationCounts; 
+                }
          
                 <#if sparklineVO.shortVisMode>
          
