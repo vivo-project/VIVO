@@ -22,18 +22,23 @@
 #photoUploadForm input.submit, 
 #photoUploadForm input.submit:visited,
 #cropImage input.submit,
-#cropImage input.submit:visited{
+#cropImage input.submit:visited {
     padding: 5px 5px 7px;
-    margin-left: -17px;
+    margin-left: -8px;
+}
+#photoUploadForm span.or,
+#cropImage span.or {
+    display: block;
+    float: left;
+    padding-top: 10px;
 }
 /* Fix position for input type submit buttons */
 input.submit, 
-input.submit:visited
+input.submit:visited,
 input#submit, 
 input#submit:visited {
     display: block;
     float: left;
-    clear: both;
     margin-left: 0;
 }
 /* Fix for individual pages */
