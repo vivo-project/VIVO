@@ -133,7 +133,6 @@ public class CoPIVisCodeGenerator {
 		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
 		
 		int uniqueCoPICounter = 0;
-		int renderedFullSparks = 0;
 		Set<CoPINode> allCoPIsWithKnownGrantShipYears = new HashSet<CoPINode>();
 		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 
@@ -156,7 +155,6 @@ public class CoPIVisCodeGenerator {
 					grantYearAsString, 
 					currentUniqueCoPIs));
 			
-			renderedFullSparks += currentUniqueCoPIs;
 			uniqueCoPICounter++;
 		}
 		
