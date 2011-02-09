@@ -26,7 +26,8 @@ class, in case we want to re-enable DD without a page reload. */
     margin-left: 2em;
 }
 form h3 {
-    margin-bottom: .5em;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 form a:link.cancel, 
 form a:visited.cancel,

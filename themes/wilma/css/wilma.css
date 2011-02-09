@@ -120,6 +120,7 @@ input#submit:visited {
     line-height: 1;
     margin-right: .6em;
     margin-top: .5em;
+    margin-bottom: .5em;
 }
 input.delete,
 input.delete:visited,
@@ -301,9 +302,9 @@ p.submit {
 }
 .formsEdit p {
     /*padding-top: 1em;*/
-    margin-bottom: 1.8em;
+    margin-bottom: 1em;
     padding-bottom: 0;
-    margin-top: 1.2em;
+    margin-top: 0;
 }
 .formsEdit p.validationError {
     margin-bottom: 1.8em;
