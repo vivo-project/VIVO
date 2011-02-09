@@ -12,7 +12,7 @@
         <#include "identity.ftl">
         
         <#include "menu.ftl">
- 
+        
         ${body}
         
         <#include "footer.ftl">
