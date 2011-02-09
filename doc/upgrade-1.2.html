@@ -26,7 +26,7 @@
                     </li>
                 </ul>
             </toc>
-            <p>
+           <p>
                 This document provides a short description of the steps involved in 
                 upgrading your installation of VIVO from Release 1, Version 1.1 to  
                 Version 1.2. This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
@@ -41,95 +41,69 @@
             </p>
             <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.2</h2>
             <p>
-                The VIVO 1.2 release incorporates major changes to the entire
-                application - theming and navigation changes that will be immediately
-                evident to any user, and underlying changes to the system architecture
-                that are less visible but address important questions of scalability
-                and extensibility.
+                The VIVO 1.2 release incorporates major changes throughout the
+                application - notably a new templating system to support more flexible
+                display and navigation, plus improvements to address scalability. The
+                release also features two new visualization options: temporal graphing
+                for organizations, and personal visualizations extended to cover grants
+                as well as publications. The VIVO Harvester library has also been
+                significantly improved and expanded in scope for its 1.0 release
+                through the VIVO SourceForge project at<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
-            <h3>Theming and Navigation</h3>
+            <h4>Templating system for page generation, navigation, and theming</h4>
             <p>
-                A new installation of VIVO 1.2 will look strikingly different - the
-                User Interface team has designed a new visual theme that incorporates a
-                new navigation and browse structure as well as a much more modular
-                approach to page design. This theme is not only cosmetically different
-                but leverages entirely new page templates developed with the Freemarker
-                system, an open-source library for Java development that enables much
-                cleaner separation of application logic from the actual page design.
-                These changes extend the available configuration options controlling
-                VIVO's appearance and navigation options while also simplifying the
-                process of local customization and branding.
+                A new installation of VIVO 1.2 looks strikingly different, with a
+                new navigation and browse interface as well as a more modular page
+                design that is easier to customize and brand for your local
+                institution. Page displays now support inline navigation to streamline
+                viewing of expanded personal and organizational profiles, as well as
+                improved graphic layout and organization. New browsing controls on the
+                home page and each menu page include interactive visual controls to
+                provide an immediate overview of the size and range of content and
+                quick access down to the individual person, organization, research
+                feature, or event. VIVO's navigation has also been completely
+                overhauled.
             </p>
+            <h4>Storage model</h4>
             <p>
-                For existing installations of VIVO, the upgrade will not immediately
-                transition to the new theme, navigation, or page templates. The current
-                default theme and "tabs" (top-level and secondary navigation controls)
-                will be left intact on upgrade and will still function as they do in
-                version 1.1.1, with the caveat that local modifications to the default
-                theme may conflict with internal application changes. We highly
-                recommend that current VIVO installations use the time between release
-                1.2 and the upcoming release of version 1.3 (targeted for June or July
-                2011) to migrate local theme branding and navigation to the new VIVO
-                template. Many legacy features such as the "tab" infrastructure have
-                been deprecated with version 1.2 and will no longer be supported as of
-                version 1.3.
-            </p>
-            <h3>Browsing</h3>
-            <p>
-                In addition to changes in the top-level navigation, VIVO 1.2
-                introduces a number of new browsing controls that will be made more
-                configurable and extensible in version 1.3 but which already offer
-                extensive functionality.
+                While server memory capacity has increased significantly in recent 
+                years, VIVO's reliance on in-memory caching of RDF data had put limits 
+                on the ultimate scalability of VIVO instances and potentially increased  
+                the cost of servers required to support VIVO.&nbsp; 
+                <br>
             </p>
             <p>
-                A fresh installation of VIVO 1.2 will feature the new theme and 
-                additional browsing options on other top-level navigation pages (Home,  
-                People, Research, Organizations, and Events). Primary among the new 
-                browsing options will be browsing by <b>type</b>, organized 
-                hierarchically with the same upper-level <b>class groups</b>
-                currently
-                visible in search results - people, courses, activities, topics,
-                events, organizations, and publications. Class groups combine the
-                similar types such as people or organizations into groups for browsing
-                and searching, and are locally configurable using the VIVO ontology
-                editor.
+                With version 1.2, VIVO has been converted to optionally use Jena's
+                SPARQL database (SDB) subsystem. SDB significantly reduces the baseline
+                memory footprint, allowing VIVO installations to scale well beyond what
+                has previously been possible.
             </p>
+            <h4>New visualizations</h4>
             <p>
-                Once a group has been selected, browsing can continue to the very
-                specific, at the level of individual people, organizations, events, or
-                publications via A ... Z listing featuring thumbnail pictures where
-                available. Sites will be able to configure which groups and which types
-                within a group are exposed in search results and for browsing.
+                VIVO continues to expand visualization options including all-new
+                user-configurable temporal comparisons of publications and grants,
+                grouped by organization or by affiliated person. Visualizations of
+                networks of co-authors are now complemented by visualizations of
+                co-investigators on grants, with a similar interactivity and options
+                for export as images or data.
             </p>
-            <h3>Data Storage</h3>
+            <h4>Ontology</h4>
             <p>
-                Before this release, VIVO has used the Jena 
-                (<a href="http://jena.sourceforge.net/" rel="nofollow">http://jena.sourceforge.net</a>) 
-                relational database (RDB) 
-                subsystem for the storage of RDF data. The performance of this persistence layer 
-                has never been fast enough for an interactivity at any significant scale, so  
-                VIVO has also maintained a complete copy of data in memory. While server memory capacity 
-                has increased significantly in recent years, this requirement has put
-                limits on the ultimate scalability of VIVO instances and also increased
-                the cost of servers required to support VIVO.
+                VIVO 1.2 includes a new ontology module representing research
+                resources including biological specimens, human studies, instruments,
+                organisms, protocols, reagents, and research opportunities. This module
+                is aligned with the top-level ontology classes and properties from the 
+                NIH-funded <a href="https://www.eagle-i.org/home/">eagle-i Project</a>.
             </p>
+            <h3>Associated VIVO releases</h3>
+            <h4>VIVO Harvester</h4>
             <p>
-                With version 1.2 VIVO uses the SPARQL database (SDB) subsystem of
-                Jena, specifically designed to support scalable storage and query of
-                RDF datasets while still using standard relational database technology.
-                This transition will significantly reduce the initial memory footprint
-                of a VIVO application, and while the application will still require
-                adequate processor and memory resources to generate pages from so many
-                individual RDF statements, the scalability of VIVO installations is
-                greatly improved.
+                The Harvester development team is releasing version 1.0 of the VIVO
+                Harvester library, an extensible data ingest and updating framework
+                with sample configurations for loading PubMed publication, grants, and
+                human resources data. The Harvester is available at<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
-            <p>
-                The transition to retrieving all data via SPARQL queries also
-                enables additional features important for tracking data provenance and
-                access to data outside the immediate local VIVO instance. These
-                features will be more fully explored and developed for version 1.3.
-            </p>
-            <!-- Upgrade process for V1.2 --><h2 id="upgrade">Upgrade process for V1.2</h2>
+            <hr><!-- Page break --><!-- Upgrade process for V1.2 --><h2 id="upgrade">Upgrade process for V1.2</h2>
             <toc>
                 <ol class="roman1">
                     <li>
@@ -432,9 +406,9 @@
                     <tr>
                         <td colspan="2">
                             Change the dbtype setting to use a database 
-                            other than MySQL. Otherwise, leave this value unchanged. Possible 
-                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and  
-                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported 
+                            other than MySQL. Otherwise, leave this value unchanged. Possible  
+                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and 
+                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported  
                             for additional information. 
                         </td>
                     </tr>
@@ -566,11 +540,11 @@
                         in
                         the theme:<pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
                         A sample <code>googleAnalytics.ftl</code>
-                        is included in the built-in
+                        is included in the built-in 
                         theme. This file serves only as an example, and you must replace the 
-                        tracking code shown with your institution's own tracking code. For 
-                        additional information about the GATC for the NIH-funded VIVO  
-                        implementation sites and a copy your institution's tracking code, see 
+                        tracking code shown with your institution's own tracking code. For  
+                        additional information about the GATC for the NIH-funded VIVO 
+                        implementation sites and a copy your institution's tracking code, see  
                         the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO
                             Google
                             Analytics
@@ -587,299 +561,294 @@
                     </li>
                 </ul>
             </blockquote>
-        </p>
-        <p>
-            4. If you had modified <code>web.xml</code>
-            to configure the Pellet Reasoner (as described
-            in the installation instructions), repeat that modification.
-        </p>
-        <p>
-            5. Stop Apache Tomcat and run ant by typing: <code>ant all</code>
-        </p>
-        <p>
-            6. Start Apache Tomcat and log in to VIVO.
-        </p>
-        <h3 id="ontology">III. Ontology Changes</h3>
-        <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
-        <p>
-            After Apache Tomcat is started, these files should be reviewed to 
-            verify that the automated upgrade process was executed  
-            successfully.&nbsp; The ontology alignment process will create the 
-            following files in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
-        </p>
-        <dl>
-            <dt>
-                <code>ontologies/update/logs/knowledgeBaseUpdate.log</code>
-            </dt>
-            <dd>
-                A log of a summary of updates that were made to the knowledge base and
-                notes about some recommended manual reviews. This file should end with
-                "Finished knowledge base migration".
-                
-                If this file contains any warnings they should be reviewed with
-                your implementation team representative to see whether any  
-                corrective action needs to be taken.
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <code>ontologies/update/logs/knowledgeBaseUpdate.error.log</code>
-            </dt>
-            <dd>
-                A log of errors that were encountered during the upgrade process. This
-                file should be empty if the upgrade was successful.
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <code>ontologies/update/changedData/removedData.n3</code>
-            </dt>
-            <dd>
-                An N3 file containing all the statements that were removed from the
-                knowledge base.
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <code>ontologies/update/changedData/addedData.n3</code>
-            </dt>
-            <dd>
-                An N3 file containing all the statements that were added to the
-                knowledge base.
-            </dd>
-        </dl>
-        <h4 id="ontology_knowledge_base">ii. Ontology knowledge base manual review</h4>
-        <p>
-            Changes to the VIVO core ontology may require corresponding
-            modifications of the knowledge base instance data and local ontology
-            extensions.
-        </p>
-        <p>
-            When Apache Tomcat starts up following the upgrade, it will initiate a
-            process to examine the knowledge base and apply necessary changes. Not
-            all of the modifications that may be required can be automated, so
-            manual review of the knowledge base is recommended after the automated
-            upgrade process. The automated process will make only the following
-            types of changes:
-        </p>
-        <dl>
-            <dt>
-                Class or Property renaming
-            </dt>
-            <dd>
-                All references to the class (in the subject or object position) will be
-                updated to the new name. References to the property will be updated to
-                the new name.
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                Class or Property deletion
-            </dt>
-            <dd>
-                All individuals in a deleted class will be removed.
-                <br>
-                All statements using a deleted property will be changed to use the
-                nearest available superproperty. If there is no available superproperty
-                then the statement will be deleted from the knowledge base. Note that
-                all removed and added data is recorded in the files in the changedData
-                directory.
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                Property addition
-            </dt>
-            <dd>
-                If a newly added property is the inverse of a previously existing
-                property, the inverse of any statements using the pre-existing property
-                will be asserted.
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                Annotation property default values
-            </dt>
-            <dd>
-                If a site has modified the value of a vitro annotation (such as
-                displayRankAnnot or displayLimitAnnot) so that it is no longer using
-                the default, then that setting will be left unchanged.
-                <br>
-                If a site is using the default value of a vitro annotation, and the
-                default has been changed in the new version of the ontology, then the
-                new default value will be propagated to the knowledge base.
-            </dd>
-        </dl>
-
-        <h3 id="fileSystem">IV. File Storage System Upgrade</h3>
-        <h4 id="changes_to_storage">i. Changes to the File Storage System</h4>
-        <p>
-            Each uploaded file exists as an individual entity in VIVO. When the
-            browser requests an upload file from VIVO, the data model is queried to
-            find out where the file is actually stored, so it can be downloaded to 
-            the browser.
-        </p>
-        <p>
-            In VIVO release 1.2 this storage location, 
-            known as the "Alias URL" for the uploaded file,
-            is stored in the file entity. 
-            That way, pages that contain many files can be displayed much more quickly.  
-        </p>
-        <p>
-            When Apache Tomcat starts up after the upgrade, 
-            it will initiate a process to calculate the "Alias URL" 
-            for each existing file and store it in the data model for fast access.
-        </p> 
-        <h4 id="verify_file_upgrade">ii. Verify File Storage System upgrade process</h4>
-        <p>
-            The File Storage upgrade process will create a log file in the 
-            VIVO upload directory. You should review this file to ensure that
-            this upgrade worked properly.
-        </p>
-        <dl>
-            <dt>
-                <code>upgrade/FileStorageAliasAdder-log.2011-00-00T00-00-00.txt</code>
-            </dt>
-            <dd>
-                A log of the upgrade process. The actual filename includes a timestamp 
-                that tells when the upgrade executed. 
-                This file should end with
-                <code>Finished adding alias URLs to FileByteStreams.</code>
-                
-                If this file contains any warnings they should be reviewed with
-                your implementation team representative to see whether any  
-                corrective action needs to be taken.
-            </dd>
-        </dl>
-
-        <h3 id="theme">V. Theme Changes</h3>
-        <h4 style="color:red">Need Nick to help with this section</h4>
-		<p>
-            VIVO 1.2 comes with a new theme called "wilma" that uses the FreeMarker template 
-            engine for generating web pages.  The theme is located in /vivo/themes/wilma and 
-            the FreeMarker files have an ftl (for FreeMarker Template Language) extension.
-        </p>
-        <p>
-            Follow step A or B below, whichever is applicable to your site:
-        </p>
-        <p>
-            A. If you did not create a customized theme for your site in V1.0 or V1.1, but used 
-            the vivo-basic theme in its original directory, you need not take any 
-            action in order to convert your site to the VIVO 1.1 theme.
-        </p>
-		<p>
-            B. If you created your own theme directory in VIVO 1.1, follow the steps below 
-            under sections "Templates," "Stylesheets,"  and "Site Icons" to upgrade your  
-            theme to VIVO 1.2. 
-        </p>
-        <dl>
-            <dt>
-                1. Templates
-            </dt>
-            <dd>
-                <dl>
-                    <dt>
-                        a. Copy the directory <code>/vivo/themes/vivo-basic/templates</code>
-                        into your theme directory <code>/vivo/themes/[your-theme-name]</code>.
-                    </dt>
-                    <dd>
-                    </dd>
-                    <dt>
-                        b. Follow step i or ii below, whichever is applicable to your theme.
-                    </dt>
-                    <dd>
-                        <ol class="roman2">
-                            <li>
-                                If you did not apply any customizations to the JSPs in your VIVO 
-                                1.0 theme, then you do not need to apply any additional changes 
-                                to the VIVO 1.1 theme templates during the upgrade process.
-                            </li>
-                            <li>
-                                <p>
-                                    If you did apply customizations to the JSPs in your VIVO 1.0 
-                                    theme,you will need to hand-replicate those modifications in the 
-                                    new theme template files.
-                                </p>
-                                <p>
-                                    The theme template content that was previously contained in 
-                                    three JSP files is now contained in five FTL files. The  
-                                    correspondence between the 1.0 JSPs and the 1.1 FTLs is as 
-                                    follows:
-                                </p>
-                                <pre>
+            </p>
+            <p>
+                4. If you had modified <code>web.xml</code>
+                to configure the Pellet Reasoner (as described
+                in the installation instructions), repeat that modification.
+            </p>
+            <p>
+                5. Stop Apache Tomcat and run ant by typing: <code>ant all</code>
+            </p>
+            <p>
+                6. Start Apache Tomcat and log in to VIVO.
+            </p>
+            <h3 id="ontology">III. Ontology Changes</h3>
+            <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
+            <p>
+                After Apache Tomcat is started, these files should be reviewed to 
+                verify that the automated upgrade process was executed  
+                successfully.&nbsp; The ontology alignment process will create the 
+                following files in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
+            </p>
+            <dl>
+                <dt>
+                    <code>ontologies/update/logs/knowledgeBaseUpdate.log</code>
+                </dt>
+                <dd>
+                    A log of a summary of updates that were made to the knowledge base and
+                    notes about some recommended manual reviews. This file should end with
+                    "Finished knowledge base migration".
+                    If this file contains any warnings they should be reviewed with 
+                    your implementation team representative to see whether any 
+                    corrective action needs to be taken.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <code>ontologies/update/logs/knowledgeBaseUpdate.error.log</code>
+                </dt>
+                <dd>
+                    A log of errors that were encountered during the upgrade process. This
+                    file should be empty if the upgrade was successful.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <code>ontologies/update/changedData/removedData.n3</code>
+                </dt>
+                <dd>
+                    An N3 file containing all the statements that were removed from the
+                    knowledge base.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <code>ontologies/update/changedData/addedData.n3</code>
+                </dt>
+                <dd>
+                    An N3 file containing all the statements that were added to the
+                    knowledge base.
+                </dd>
+            </dl>
+            <h4 id="ontology_knowledge_base">ii. Ontology knowledge base manual review</h4>
+            <p>
+                Changes to the VIVO core ontology may require corresponding
+                modifications of the knowledge base instance data and local ontology
+                extensions.
+            </p>
+            <p>
+                When Apache Tomcat starts up following the upgrade, it will initiate a
+                process to examine the knowledge base and apply necessary changes. Not
+                all of the modifications that may be required can be automated, so
+                manual review of the knowledge base is recommended after the automated
+                upgrade process. The automated process will make only the following
+                types of changes:
+            </p>
+            <dl>
+                <dt>
+                    Class or Property renaming
+                </dt>
+                <dd>
+                    All references to the class (in the subject or object position) will be
+                    updated to the new name. References to the property will be updated to
+                    the new name.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Class or Property deletion
+                </dt>
+                <dd>
+                    All individuals in a deleted class will be removed.
+                    <br>
+                    All statements using a deleted property will be changed to use the
+                    nearest available superproperty. If there is no available superproperty
+                    then the statement will be deleted from the knowledge base. Note that
+                    all removed and added data is recorded in the files in the changedData
+                    directory.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Property addition
+                </dt>
+                <dd>
+                    If a newly added property is the inverse of a previously existing
+                    property, the inverse of any statements using the pre-existing property
+                    will be asserted.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Annotation property default values
+                </dt>
+                <dd>
+                    If a site has modified the value of a vitro annotation (such as
+                    displayRankAnnot or displayLimitAnnot) so that it is no longer using
+                    the default, then that setting will be left unchanged.
+                    <br>
+                    If a site is using the default value of a vitro annotation, and the
+                    default has been changed in the new version of the ontology, then the
+                    new default value will be propagated to the knowledge base.
+                </dd>
+            </dl>
+            <h3 id="fileSystem">IV. File Storage System Upgrade</h3>
+            <h4 id="changes_to_storage">i. Changes to the File Storage System</h4>
+            <p>
+                Each uploaded file exists as an individual entity in VIVO. When the
+                browser requests an upload file from VIVO, the data model is queried to 
+                find out where the file is actually stored, so it can be downloaded to 
+                the browser.
+            </p>
+            <p>
+                In VIVO release 1.2 this storage location, 
+                known as the "Alias URL" for the uploaded file, 
+                is stored in the file entity. 
+                That way, pages that contain many files can be displayed much more quickly. 
+            </p>
+            <p>
+                When Apache Tomcat starts up after the upgrade, 
+                it will initiate a process to calculate the "Alias URL" 
+                for each existing file and store it in the data model for fast access.
+            </p>
+            <h4 id="verify_file_upgrade">ii. Verify File Storage System upgrade process</h4>
+            <p>
+                The File Storage upgrade process will create a log file in the 
+                VIVO upload directory. You should review this file to ensure that
+                this upgrade worked properly.
+            </p>
+            <dl>
+                <dt>
+                    <code>upgrade/FileStorageAliasAdder-log.2011-00-00T00-00-00.txt</code>
+                </dt>
+                <dd>
+                    A log of the upgrade process. The actual filename includes a timestamp 
+                    that tells when the upgrade executed. 
+                    This file should end with<code>Finished adding alias URLs to FileByteStreams.</code>
+                    If this file contains any warnings they should be reviewed with 
+                    your implementation team representative to see whether any 
+                    corrective action needs to be taken.
+                </dd>
+            </dl>
+            <h3 id="theme">V. Theme Changes</h3>
+            <h4 style="color:red">Need Nick to help with this section</h4>
+            <p>
+                VIVO 1.2 comes with a new theme called "wilma" that uses the FreeMarker template 
+                engine for generating web pages.  The theme is located in /vivo/themes/wilma and 
+                the FreeMarker files have an ftl (for FreeMarker Template Language) extension.
+            </p>
+            <p>
+                Follow step A or B below, whichever is applicable to your site:
+            </p>
+            <p>
+                A. If you did not create a customized theme for your site in V1.0 or V1.1, but used 
+                the vivo-basic theme in its original directory, you need not take any 
+                action in order to convert your site to the VIVO 1.1 theme.
+            </p>
+            <p>
+                B. If you created your own theme directory in VIVO 1.1, follow the steps below 
+                under sections "Templates," "Stylesheets,"  and "Site Icons" to upgrade your  
+                theme to VIVO 1.2. 
+            </p>
+            <dl>
+                <dt>
+                    1. Templates
+                </dt>
+                <dd>
+                    <dl>
+                        <dt>
+                            a. Copy the directory <code>/vivo/themes/wilma/templates</code>
+                            into your theme directory <code>/vivo/themes/[your-theme-name]</code>.
+                        </dt>
+                        <dd>
+                        </dd>
+                        <dt>
+                            b. Follow step i or ii below, whichever is applicable to your theme.
+                        </dt>
+                        <dd>
+                            <ol class="roman2">
+                                <li>
+                                    If you did not apply any customizations to the JSPs in your VIVO 
+                                    1.0 theme, then you do not need to apply any additional changes 
+                                    to the VIVO 1.1 theme templates during the upgrade process.
+                                </li>
+                                <li>
+                                    <p>
+                                        If you did apply customizations to the JSPs in your VIVO 1.0 
+                                        theme,you will need to hand-replicate those modifications in the 
+                                        new theme template files.
+                                    </p>
+                                    <p>
+                                        The theme template content that was previously contained in 
+                                        three JSP files is now contained in five FTL files. The  
+                                        correspondence between the 1.0 JSPs and the 1.1 FTLs is as 
+                                        follows:
+                                    </p>
+                                    <pre>
             identity.jsp => identity.ftl
             menu.jsp => menu.ftl and search.ftl
             footer.jsp => footer.ftl and googleAnalytics.ftl
 								    </pre>
-                                <p>
-                                    <code>googleAnalytics.ftl</code>
-                                    is the file to which you add your site's Google Analytics Tracking 
-                                    Code (see section II).
-                                </p>
-                                <p>
-                                    Because the FreeMarker Template Language uses many syntactic 
-                                    conventions that will be familiar to template authors from JSP  
-                                    or other common templating systems, the translation of your JSP 
-                                    changes into the new FTLs should be relatively straightforward. 
-                                </p>
-                                <p>
-                                    Consult the FreeMarker Template Author's Guide at <a href="http://freemarker.org/docs/dgui.html">http://freemarker.org/docs/dgui.html</a>
-                                    and the Reference at <a href="http://freemarker.org/docs/ref.html">http://freemarker.org/docs/ref.html</a>
-                                    for complete documentation of the syntax and available built-in constructs. Template 
-                                    authors need not be concerned with the Programmer's Guide or Java API documentation.
-                                </p>
-                            </li>
-                        </ol>
-                    </dd>
-                    <dt>
-                        c. Remove the jsp directory from your themes directory.
-                    </dt>
-                    <dd>
-                    </dd>
-                </dl>
-            </dd>
-            <dt>
-                2. Stylesheets
-            </dt>
-            <dd>
-                VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
-                styles in your VIVO 1.0 theme, you will not be able to simply copy the  
-                1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
-                style upgrades that your theme should pick up.  Instead, you should 
-                use the vivo-basic 1.1 stylesheets as a starting point, and manually
-                merge your 1.0 style modifications in as needed.
-            </dd>
-            <dt>
-                3. Site Icons
-            </dt>
-            <dd>
-                Copy the site icons from your 1.1 theme into the site_icons folder in
-                your 1.2 theme.
-            </dd>
-        </dl>
-    </div>
-    <!-- end of content -->
-    <div role="contentinfo">
-        <p class="copyright">
-            <small>
-                &copy;2011 
-                All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
-            </small>
-            | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
-        </p>
-        <nav role="navigation">
-            <ul id="footer-nav" role="list">
-                <li role="listitem">
-                    <a href="http://vivoweb.org/about">About</a>
-                </li>
-                <li role="listitem">
-                    <a href="http://vivoweb.org/contact">Contact Us</a>
-                </li>
-                <li role="listitem">
-                    <a href="http://www.vivoweb.org/support" target="blank">Support</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+                                    <p>
+                                        <code>googleAnalytics.ftl</code>
+                                        is the file to which you add your site's Google Analytics Tracking 
+                                        Code (see section II).
+                                    </p>
+                                    <p>
+                                        Because the FreeMarker Template Language uses many syntactic 
+                                        conventions that will be familiar to template authors from JSP  
+                                        or other common templating systems, the translation of your JSP 
+                                        changes into the new FTLs should be relatively straightforward. 
+                                    </p>
+                                    <p>
+                                        Consult the FreeMarker Template Author's Guide at <a href="http://freemarker.org/docs/dgui.html">http://freemarker.org/docs/dgui.html</a>
+                                        and the Reference at <a href="http://freemarker.org/docs/ref.html">http://freemarker.org/docs/ref.html</a>
+                                        for complete documentation of the syntax and available built-in constructs. Template 
+                                        authors need not be concerned with the Programmer's Guide or Java API documentation.
+                                    </p>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dt>
+                            c. Remove the jsp directory from your themes directory.
+                        </dt>
+                        <dd>
+                        </dd>
+                    </dl>
+                </dd>
+                <dt>
+                    2. Stylesheets
+                </dt>
+                <dd>
+                    VIVO 1.1 includes changes to vivo-basic stylesheets. If you modified 
+                    styles in your VIVO 1.0 theme, you will not be able to simply copy the  
+                    1.0 stylesheets into your 1.1 theme, because you will then lose 1.1 
+                    style upgrades that your theme should pick up.  Instead, you should 
+                    use the vivo-basic 1.1 stylesheets as a starting point, and manually
+                    merge your 1.0 style modifications in as needed.
+                </dd>
+                <dt>
+                    3. Site Icons
+                </dt>
+                <dd>
+                    Copy the site icons from your 1.1 theme into the site_icons folder in
+                    your 1.2 theme.
+                </dd>
+            </dl>
+        </div>
+        <!-- end of content -->
+        <div role="contentinfo">
+            <p class="copyright">
+                <small>
+                    &copy;2011 
+                    All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
+                </small>
+                | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+            </p>
+            <nav role="navigation">
+                <ul id="footer-nav" role="list">
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/about">About</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/contact">Contact Us</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </body>
 </html>
