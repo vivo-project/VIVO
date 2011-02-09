@@ -580,7 +580,7 @@ private String getActivityTypeQuery(VitroRequest vreq) {
 	                    JSONArray option = values.getJSONArray(i);
 	                    String uri = option.getString(0);
 	                    if (StringUtils.isNotBlank(uri)) {
-	                        typeUris.add("(?existingTypeActivity = \"" + uri + "\")");
+	                        typeUris.add("(?existingActivityType = <" + uri + ">)");
 	                    }	                    
 	                }
 	                String typeFilters = "FILTER (" + StringUtils.join(typeUris, "||") + ")";
