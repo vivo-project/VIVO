@@ -47,6 +47,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 	private String entityURI;
 	private Model dataSource;
 	private Log log = LogFactory.getLog(EntityGrantCountQueryRunner.class.getName());
+	private long before, after;
 
 	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "SELECT "
@@ -109,7 +110,9 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		Map<String, Grant> grantURIToVO = new HashMap<String, Grant>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
-
+		
+		before = System.currentTimeMillis();
+		
 		while (resultSet.hasNext()) {
 		//	log.info("Checking whether EntityGrantCount produced any resultset against the Constructed Model");
 			QuerySolution solution = resultSet.nextSolution();
@@ -227,7 +230,9 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		} else */if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
 			entity = new Entity(this.entityURI, "no-label");
 		}
-
+		
+		after = System.currentTimeMillis();
+		log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 		return entity;
 	}
 
@@ -321,9 +326,15 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 			throw new MalformedQueryParametersException(
 					"URL parameter is either null or empty.");
 		}
-
+		
+		before = System.currentTimeMillis();
+		
 		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
-
+		
+		after = System.currentTimeMillis();
+		
+		log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		
 		return createJavaValueObjects(resultSet);
 	}	
 }

@@ -31,6 +31,8 @@ public class EntityGrantCountConstructQueryRunner {
 	private String egoURI;
 	
 	private DataSource dataSource;
+	
+	private long before, after;
 
 	private Log log = LogFactory.getLog(EntityGrantCountConstructQueryRunner.class.getName());
 	
@@ -266,7 +268,9 @@ public class EntityGrantCountConstructQueryRunner {
 	private Model executeQuery(Set<String> constructQueries, DataSource dataSource) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
-
+        
+        before = System.currentTimeMillis();
+        
         for (String queryString : constructQueries) {
             
         	log.debug("CONSTRUCT query string : " + queryString);
@@ -290,9 +294,13 @@ public class EntityGrantCountConstructQueryRunner {
                 qe.close();
             }
         	
-        }	
-        log.debug("Statements for constructed model of EntityGrantCount : "+ constructedModel.listStatements().toString());
-       // constructedModel.write(System.out);
+        }
+        
+        after = System.currentTimeMillis();
+        
+   //     log.debug("Statements for constructed model of EntityGrantCount : "+ constructedModel.listStatements().toString());
+        log.info("Time taken to execute the CONSTRUCT queries is in milliseconds: " + (after - before) );
+        // constructedModel.write(System.out);
         return constructedModel;
 	}	
 	

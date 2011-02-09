@@ -283,7 +283,7 @@ public class EntityPublicationCountRequestHandler implements
 				yearPubCount.add(currentPubYear);
 			}
 			
-			log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
+			//log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
 
 			entityJson.setYearToActivityCount(yearPubCount);
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));

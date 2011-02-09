@@ -1,5 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator;
+
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,31 +24,22 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 
+public class PersonGrantCountConstructQueryRunner {
 
-public class CoPIGrantCountConstructQueryRunner {
-	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	private String egoURI;
 	
 	private DataSource dataSource;
 	
-	private long before, after;
-
-	private Log log = LogFactory.getLog(CoPIGrantCountConstructQueryRunner.class.getName());
-
+	private Log log = LogFactory.getLog(PersonGrantCountConstructQueryRunner.class.getName());
 	
-	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = 
-        		  "?Role core:roleIn ?Grant . "
-                + "?Grant rdfs:label ?GrantLabel . "
-                + "?Grant core:relatedRole ?RelatedRole . ";
-	
-	public CoPIGrantCountConstructQueryRunner(String egoURI, DataSource dataSource, Log log){
+	public PersonGrantCountConstructQueryRunner(String egoURI, DataSource dataSource, Log log){
 		this.egoURI = egoURI;
 		this.dataSource = dataSource;
 		//this.log = log;
 	}
-
+	
 	private String generateConstructQueryForInvestigatorLabel(String queryURI) {
 		
 		String sparqlQuery = 
@@ -60,63 +52,24 @@ public class CoPIGrantCountConstructQueryRunner {
 				
 		return sparqlQuery;
 	}
-	
-	private String generateConstructQueryForInvestigatorRoleOfProperty(String queryURI){
+
+	private String generateConstructQueryForInvestigatorGrants(String queryURI){
 		
-		String sparqlQuery = 
-			 "CONSTRUCT { "
+		String sparqlQuery = ""
+			+ "CONSTRUCT { " 
 			+	"<"+queryURI+ "> ?preboundProperty ?Role . "
-			+ 	SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-			+   "?RelatedRole core:investigatorRoleOf ?coInvestigator ."
-			+	"?coInvestigator rdfs:label ?coInvestigatorLabel . "
-			+ "}"
+			+	"?Role core:roleIn ?Grant ."
+			+	"?Grant rdfs:label ?GrantLabel "
+			+ "} "
 			+ "WHERE { "
 			+	"<"+queryURI+ "> ?preboundProperty ?Role . "
-			+ 	SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-			+   "?RelatedRole core:investigatorRoleOf ?coInvestigator ."
-			+	"?coInvestigator rdfs:label ?coInvestigatorLabel . "
-			+ "}";
+			+	"?Role core:roleIn ?Grant ."
+			+	"?Grant rdfs:label ?GrantLabel "
+			+ "} ";
 		
 		return sparqlQuery;
+
 	}
-	
-	private String generateConstructQueryForPrincipalInvestigatorRoleOfProperty(String queryURI){
-		
-		String sparqlQuery = 
-			 "CONSTRUCT { "
-			+	"<"+queryURI+ "> ?preboundProperty ?Role . "
-			+ 	SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-			+   "?RelatedRole core:principalInvestigatorRoleOf ?coInvestigator ."
-			+	"?coInvestigator rdfs:label ?coInvestigatorLabel . "
-			+ "}"
-			+ "WHERE { "
-			+	"<"+queryURI+ "> ?preboundProperty ?Role . "
-			+ 	SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-			+   "?RelatedRole core:principalInvestigatorRoleOf ?coInvestigator ."
-			+	"?coInvestigator rdfs:label ?coInvestigatorLabel . "
-			+ "}";
-		
-		return sparqlQuery;
-	}	
-	
-	private String generateConstructQueryForCoPrincipalInvestigatorRoleOfProperty(String queryURI){
-		
-		String sparqlQuery = 
-			 "CONSTRUCT { "
-			+	"<"+queryURI+ "> ?preboundProperty ?Role . "
-			+ 	SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-			+   "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?coInvestigator ."
-			+	"?coInvestigator rdfs:label ?coInvestigatorLabel . "
-			+ "}"
-			+ "WHERE { "
-			+	"<"+queryURI+ "> ?preboundProperty ?Role . "
-			+ 	SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING
-			+   "?RelatedRole core:co-PrincipalInvestigatorRoleOf ?coInvestigator ."
-			+	"?coInvestigator rdfs:label ?coInvestigatorLabel . "
-			+ "}";
-		
-		return sparqlQuery;
-	}	
 	
 	private String generateConstructQueryForDateTimeValueofRole(String queryURI){
 		
@@ -145,7 +98,7 @@ public class CoPIGrantCountConstructQueryRunner {
 			+ "}";
 		
 		return sparqlQuery;
-	}		
+	}	
 	
 	private String generateConstructQueryForDateTimeValueofGrant(String queryURI){
 		
@@ -177,13 +130,11 @@ public class CoPIGrantCountConstructQueryRunner {
 			+ "}";
 		
 		return sparqlQuery;
-	}		
+	}	
 	
 	private Model executeQuery(Set<String> constructQueries, DataSource dataSource) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
-
-        before = System.currentTimeMillis();
 
         for (String queryString : constructQueries) {
             
@@ -208,8 +159,6 @@ public class CoPIGrantCountConstructQueryRunner {
             }
         	
         }	
-        after = System.currentTimeMillis();
-        log.info("Time taken to execute the CONSTRUCT queries is in milliseconds: " + (after - before) );
 
 		return constructedModel;
 	}	
@@ -225,7 +174,7 @@ public class CoPIGrantCountConstructQueryRunner {
 		IRI iri = iRIFactory.create(this.egoURI);
         if (iri.hasViolation(false)) {
             String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
-            log.error("Ego Co-PI Vis Query " + errorMsg);
+            log.error("Person Grant Count Construct Query " + errorMsg);
             throw new MalformedQueryParametersException(
             		"URI provided for an individual is malformed.");
         }
@@ -247,12 +196,11 @@ public class CoPIGrantCountConstructQueryRunner {
 	private void populateConstructQueries(Set<String> constructQueries) {
 		
 		constructQueries.add(generateConstructQueryForInvestigatorLabel(this.egoURI));
-		constructQueries.add(generateConstructQueryForInvestigatorRoleOfProperty(this.egoURI));
-		constructQueries.add(generateConstructQueryForCoPrincipalInvestigatorRoleOfProperty(this.egoURI));
-		constructQueries.add(generateConstructQueryForPrincipalInvestigatorRoleOfProperty(this.egoURI));
+		constructQueries.add(generateConstructQueryForInvestigatorGrants(this.egoURI));
 		constructQueries.add(generateConstructQueryForDateTimeValueofRole(this.egoURI));
 		constructQueries.add(generateConstructQueryForDateTimeValueofGrant(this.egoURI));
 		
 		
 	}	
+	
 }

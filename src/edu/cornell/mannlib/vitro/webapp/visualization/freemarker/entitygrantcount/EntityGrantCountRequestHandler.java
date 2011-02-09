@@ -279,7 +279,7 @@ public class EntityGrantCountRequestHandler implements
 				yearGrantCount.add(currentGrantYear);
 			}
 
-			log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
+		//	log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
 			
 			entityJson.setYearToActivityCount(yearGrantCount);
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));

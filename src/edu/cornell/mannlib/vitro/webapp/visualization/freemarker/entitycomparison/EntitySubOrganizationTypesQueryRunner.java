@@ -99,7 +99,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				+ "}";
 
 		
-		log.info("\n SubOrganizationTypesQuery :" + sparqlQuery);
+	//	log.info("\n SubOrganizationTypesQuery :" + sparqlQuery);
 
 		return sparqlQuery;
 
@@ -169,7 +169,7 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 //		System.out.println("\n\nSub Organization Label Types Size --> " + subOrganizationLabelToTypes.size());
 //		System.out.println("\n\nPeople Label Types Size --> " + personLabelToTypes.size());
 		
-		log.info("Sub Organization Label Types Size : " + subEntityLabelToTypes.size());
+//		log.info("Sub Organization Label Types Size : " + subEntityLabelToTypes.size());
 		
 		return subEntityLabelToTypes;
 		//return (subOrganizationLabelToTypes.size() != 0 )? subOrganizationLabelToTypes : personLabelToTypes ;

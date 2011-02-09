@@ -33,6 +33,8 @@ public class EntityPublicationCountConstructQueryRunner {
 	
 	private Log log = LogFactory.getLog(EntityPublicationCountConstructQueryRunner.class.getName());
 	
+	private long before, after;
+	
 	public EntityPublicationCountConstructQueryRunner(String egoURI, DataSource dataSource, Log log){
 		this.egoURI = egoURI;
 		this.dataSource = dataSource;
@@ -187,6 +189,8 @@ public class EntityPublicationCountConstructQueryRunner {
 	private Model executeQuery(Set<String> constructQueries, DataSource dataSource) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
+        
+        before = System.currentTimeMillis();
 
         for (String queryString : constructQueries) {
             
@@ -212,6 +216,9 @@ public class EntityPublicationCountConstructQueryRunner {
             }
         	
         }	
+
+        after = System.currentTimeMillis();
+        log.info("Time taken to execute the CONSTRUCT queries is in milliseconds: " + (after - before) );        
        // constructedModel.write(System.out);
         return constructedModel;
 	}	

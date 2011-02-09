@@ -47,6 +47,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private String entityURI;
 	private Model dataSource;
 	private Log log = LogFactory.getLog(EntityPublicationCountQueryRunner.class.getName());
+	private long before, after;
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
 			+ "		(str(?Person) as ?personLit) "
@@ -84,6 +85,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		Map<String, BiboDocument> biboDocumentURLToVO = new HashMap<String, BiboDocument>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
+
+		before = System.currentTimeMillis();
 
 		while (resultSet.hasNext()) {
 
@@ -202,7 +205,10 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		}
 		
 		//TODO: return non-null value
-		log.info("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
+	//	log.info("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
+		after = System.currentTimeMillis();
+		log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+
 		return entity;
 	}
 		
@@ -284,8 +290,14 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					"URL parameter is either null or empty.");
 		}
 
+		before = System.currentTimeMillis();
+		
 		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
-
+		
+		after = System.currentTimeMillis();
+		
+		log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		
 		return createJavaValueObjects(resultSet);
 	}
 

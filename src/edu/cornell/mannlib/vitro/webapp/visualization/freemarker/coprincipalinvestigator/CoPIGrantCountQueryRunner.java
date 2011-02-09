@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -50,11 +51,13 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	
 	private Model dataSource;
 
-	private Log log;
+	private Log log = LogFactory.getLog(CoPIGrantCountQueryRunner.class.getName());
 
 	private UniqueIDGenerator nodeIDGenerator;
 
 	private UniqueIDGenerator edgeIDGenerator;
+	
+	private long before, after;
 	
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME = ""
 		+ 		"OPTIONAL {"		
@@ -84,7 +87,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 		this.egoURI = egoURI;
 		this.dataSource = dataSource;
-		this.log = log;
+	//	this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
 		this.edgeIDGenerator = new UniqueIDGenerator();
@@ -315,8 +318,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			+ 		"} "			
 			+ "} ";
 
-		log.debug("COPI QUERY - " + sparqlQuery);
-		
+		//	log.debug("COPI QUERY - " + sparqlQuery);
 		//System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
 		
 		return sparqlQuery;
@@ -351,8 +353,14 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
         throw new MalformedQueryParametersException("URI parameter is either null or empty.");
     }
 
-	ResultSet resultSet	= executeQuery(generateEgoCoPIquery(this.egoURI),
-									   this.dataSource);
+	before = System.currentTimeMillis();
+	
+	ResultSet resultSet = executeQuery(generateEgoCoPIquery(this.egoURI), this.dataSource);
+	
+	after = System.currentTimeMillis();
+	
+	log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+	
 	return createQueryResult(resultSet);
 	}
 	
@@ -393,7 +401,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 		CoPINode egoNode = null;
 
 		Set<CoPIEdge> edges = new HashSet<CoPIEdge>();
-
+		
+		before = System.currentTimeMillis();
+		
 			while (resultSet.hasNext()) {
 				QuerySolution solution = resultSet.nextSolution();
 				
@@ -528,6 +538,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 								edges,
 								edgeUniqueIdentifierToVO);
 			
+			
+			after = System.currentTimeMillis();
+			log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 			
 			return new CoPIData(egoNode, nodes, edges);
 	}
