@@ -23,9 +23,9 @@
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A portion or quantity of a biological material for use in testing, examination, or study.</vitro:shortDef>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
     <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0000272">
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
@@ -129,8 +129,8 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 3 Clinical Trial</vitro:shortDef>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000004">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
