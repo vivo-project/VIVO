@@ -13,8 +13,8 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/">
-    <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">obo</vitro:ontologyPrefixAnnot>
-    <rdfs:label xml:lang="en-US">Open Biological and Biomedical Ontologies</rdfs:label>
+    <vitro:ontologyPrefixAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ero</vitro:ontologyPrefixAnnot>
+    <rdfs:label xml:lang="en-US">Research Resources (eagle-i)</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000020">
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>

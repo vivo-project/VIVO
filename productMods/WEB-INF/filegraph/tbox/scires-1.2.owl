@@ -98,11 +98,6 @@ NOTE: For now we are not addressing whether this is a subclass of foaf:Agent</vi
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Material entity that is used in a chemical reaction or other experimental process to detect, measure, examine, or produce other  substances.</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase1ClinicalTrial">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase I trials, researchers test an experimental drug or treatment in a small group of people (20-80) for the first time to evaluate its safety, determine a safe dosage range, and identify side effects</vitro:descriptionAnnot>
@@ -139,6 +134,11 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <owl:onProperty rdf:resource="http://vivoweb.org/ontology/scientific-research#hasDocumentation"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase0ClinicalTrial">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
