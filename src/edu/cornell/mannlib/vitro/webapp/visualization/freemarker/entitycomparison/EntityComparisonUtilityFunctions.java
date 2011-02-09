@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -61,7 +61,7 @@ public class EntityComparisonUtilityFunctions {
 		return "";
 	}
 
-	public static String getHighestLevelOrganizationURI(Log log, DataSource dataSource)
+	public static String getHighestLevelOrganizationURI(Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		
 		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
@@ -82,7 +82,7 @@ public class EntityComparisonUtilityFunctions {
 
 		QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = new GenericQueryRunner(
 				fieldLabelToOutputFieldLabel, aggregationRules, whereClause,
-				groupOrderClause, dataSource, log);
+				groupOrderClause, Dataset, log);
 
 		String highestLevelOrgURI = EntityComparisonUtilityFunctions
 				.getHighestLevelOrganizationURI(
@@ -92,10 +92,10 @@ public class EntityComparisonUtilityFunctions {
 	}
 	
 	public static Map<String, Set<String>> getSubEntityTypes(Log log,
-			DataSource dataSource, String subjectOrganization)
+			Dataset Dataset, String subjectOrganization)
 			throws MalformedQueryParametersException {
 		
-		EntitySubOrganizationTypesConstructQueryRunner constructQueryRunnerForSubOrganizationTypes = new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, dataSource, log) ;
+		EntitySubOrganizationTypesConstructQueryRunner constructQueryRunnerForSubOrganizationTypes = new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, Dataset, log) ;
 		Model constructedModelForSubOrganizationTypes = constructQueryRunnerForSubOrganizationTypes.getConstructedModel();
 		
 		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(

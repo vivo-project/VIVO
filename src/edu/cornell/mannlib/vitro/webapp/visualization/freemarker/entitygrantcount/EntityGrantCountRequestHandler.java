@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
@@ -46,7 +46,7 @@ public class EntityGrantCountRequestHandler implements
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		
 		String entityURI = vitroRequest
@@ -55,7 +55,7 @@ public class EntityGrantCountRequestHandler implements
 		if (StringUtils.isNotBlank(entityURI)){
 			
 			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
-					dataSource, entityURI);
+					Dataset, entityURI);
 			
 		} else {
 			
@@ -81,16 +81,16 @@ public class EntityGrantCountRequestHandler implements
 	            } else {
 	            	
 	    			return getSubjectEntityAndGenerateResponse(vitroRequest,
-							log, dataSource,
+							log, Dataset,
 							staffProvidedHighestLevelOrganization);
 	            }
 			}
 			
 			String highestLevelOrgURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log,
-					dataSource);
+					Dataset);
 			
 			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
-					dataSource, highestLevelOrgURI);
+					Dataset, highestLevelOrgURI);
 		}
 		
 		
@@ -98,13 +98,13 @@ public class EntityGrantCountRequestHandler implements
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
-		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, dataSource, log);
+		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
@@ -114,7 +114,7 @@ public class EntityGrantCountRequestHandler implements
 		
 		
 		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, dataSource, entityURI);
+				log, Dataset, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
 
@@ -122,16 +122,16 @@ public class EntityGrantCountRequestHandler implements
 	
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Entity Grant Count does not provide Ajax Response.");
 	}
 	
 	private ResponseValues getSubjectEntityAndGenerateResponse(
-			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			VitroRequest vitroRequest, Log log, Dataset Dataset,
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
-		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(subjectEntityURI, dataSource, log);
+		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(subjectEntityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
@@ -146,18 +146,18 @@ public class EntityGrantCountRequestHandler implements
 		} else {	
 		
 			return getSubEntityTypesAndRenderStandaloneResponse(
-					vitroRequest, log, dataSource,
+					vitroRequest, log, Dataset,
 					subjectEntityURI, entity);
 		}
 	}
 
 	private ResponseValues getSubEntityTypesAndRenderStandaloneResponse(
-			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			VitroRequest vitroRequest, Log log, Dataset Dataset,
 			String subjectOrganization, Entity entity)
 			throws MalformedQueryParametersException {
 		
 		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, dataSource, subjectOrganization);
+				log, Dataset, subjectOrganization);
 		
 		return prepareStandaloneResponse(vitroRequest, entity, subjectOrganization,
 				subOrganizationTypesResult);

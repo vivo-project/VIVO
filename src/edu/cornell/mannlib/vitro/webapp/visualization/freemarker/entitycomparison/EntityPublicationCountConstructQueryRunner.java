@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -29,15 +29,15 @@ public class EntityPublicationCountConstructQueryRunner {
 	
 	private String egoURI;
 	
-	private DataSource dataSource;
+	private Dataset Dataset;
 	
 	private Log log = LogFactory.getLog(EntityPublicationCountConstructQueryRunner.class.getName());
 	
 	private long before, after;
 	
-	public EntityPublicationCountConstructQueryRunner(String egoURI, DataSource dataSource, Log log){
+	public EntityPublicationCountConstructQueryRunner(String egoURI, Dataset Dataset, Log log){
 		this.egoURI = egoURI;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		//this.log = log;		
 	}
 	
@@ -186,7 +186,7 @@ public class EntityPublicationCountConstructQueryRunner {
 	
 	}		
 	
-	private Model executeQuery(Set<String> constructQueries, DataSource dataSource) {
+	private Model executeQuery(Set<String> constructQueries, Dataset Dataset) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
         
@@ -208,7 +208,7 @@ public class EntityPublicationCountConstructQueryRunner {
         	}
         	
             QueryExecution qe = QueryExecutionFactory.create(
-                    query, dataSource);
+                    query, Dataset);
             try {
                 qe.execConstruct(constructedModel);
             } finally {
@@ -247,7 +247,7 @@ public class EntityPublicationCountConstructQueryRunner {
 	populateConstructQueries(constructQueries);
 	
 	Model model	= executeQuery(constructQueries,
-									   this.dataSource);
+									   this.Dataset);
 	
 	return model;
 		

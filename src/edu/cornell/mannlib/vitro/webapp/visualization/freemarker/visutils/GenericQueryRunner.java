@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -30,7 +30,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String whereClause;
-	private DataSource dataSource;
+	private Dataset Dataset;
 
 	private Log log;
 
@@ -44,23 +44,23 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 							   String aggregationRules, 
 							   String whereClause,
 							   String groupOrderClause, 
-							   DataSource dataSource, Log log) {
+							   Dataset Dataset, Log log) {
 
 		this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
 		this.aggregationRules = aggregationRules;
 		this.whereClause = whereClause;
 		this.groupOrderClause = groupOrderClause;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		this.log = log;
 		
 	}
 
 	private ResultSet executeQuery(String queryText,
-								   DataSource dataSource) {
+								   Dataset Dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
-        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        queryExecution = QueryExecutionFactory.create(query, Dataset);
         return queryExecution.execSelect();
     }
 
@@ -96,7 +96,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 			throws MalformedQueryParametersException {
 
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(),
-										   this.dataSource);
+										   this.Dataset);
 
 		return resultSet;
 	}

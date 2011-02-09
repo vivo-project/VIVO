@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -30,13 +30,13 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	
 	private String egoURI;
 	
-	private DataSource dataSource;
+	private Dataset Dataset;
 
 	private Log log = LogFactory.getLog(EntitySubOrganizationTypesConstructQueryRunner.class.getName());
 	
-	public EntitySubOrganizationTypesConstructQueryRunner(String egoURI, DataSource dataSource, Log log){
+	public EntitySubOrganizationTypesConstructQueryRunner(String egoURI, Dataset Dataset, Log log){
 		this.egoURI = egoURI;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		//this.log = log;
 	}	
 	
@@ -105,7 +105,7 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	
 	}	
 	
-	private Model executeQuery(Set<String> constructQueries, DataSource dataSource) {
+	private Model executeQuery(Set<String> constructQueries, Dataset Dataset) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
 
@@ -124,7 +124,7 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
         	}
         	
             QueryExecution qe = QueryExecutionFactory.create(
-                    query, dataSource);
+                    query, Dataset);
             try {
                 qe.execConstruct(constructedModel);
             } finally {
@@ -160,7 +160,7 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	populateConstructQueries(constructQueries);
 	
 	Model model	= executeQuery(constructQueries,
-									   this.dataSource);
+									   this.Dataset);
 	//model.write(System.out);
 	return model;
 		

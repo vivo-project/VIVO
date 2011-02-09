@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -25,14 +26,14 @@ public interface VisualizationRequestHandler{
 
 	ResponseValues generateStandardVisualization(VitroRequest vitroRequest,
 							   Log log, 
-							   DataSource dataSource) throws MalformedQueryParametersException;
+							   Dataset dataSource) throws MalformedQueryParametersException;
 	
 	Object generateAjaxVisualization(VitroRequest vitroRequest,
 								     Log log, 
-								     DataSource dataSource) throws MalformedQueryParametersException;
+								     Dataset dataSource) throws MalformedQueryParametersException;
 	
 	Map<String, String> generateDataVisualization(VitroRequest vitroRequest,
 								   	 Log log, 
-								   	 DataSource dataSource) throws MalformedQueryParametersException;
+								   	 Dataset dataSource) throws MalformedQueryParametersException;
 	
 }

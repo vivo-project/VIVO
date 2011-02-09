@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -40,13 +40,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("CoAuthorship does not provide Ajax Response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 	
@@ -59,7 +59,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 								.VIS_MODE_KEY);
 		
 		QueryRunner<CoAuthorshipData> queryManager =
-		new CoAuthorshipQueryRunner(egoURI, dataSource, log);
+		new CoAuthorshipQueryRunner(egoURI, Dataset, log);
 		
 		CoAuthorshipData authorNodesAndEdges = 
 		queryManager.getQueryResult();
@@ -105,7 +105,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 	public ResponseValues generateStandardVisualization(VitroRequest vitroRequest,
 											  	Log log, 
-											    DataSource dataSource) 
+											    Dataset Dataset) 
 		throws MalformedQueryParametersException {
 
 		/*
@@ -117,7 +117,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
         												.INDIVIDUAL_URI_KEY);
 
 		QueryRunner<CoAuthorshipData> queryManager =
-        	new CoAuthorshipQueryRunner(egoURI, dataSource, log);
+        	new CoAuthorshipQueryRunner(egoURI, Dataset, log);
 	
 			CoAuthorshipData authorNodesAndEdges = 
 					queryManager.getQueryResult();

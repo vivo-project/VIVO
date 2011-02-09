@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -40,7 +40,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	private String personURI;
-	private DataSource dataSource;
+	private Dataset Dataset;
 	private Individual principalInvestigator;
 	
 	public Individual getPrincipalInvestigator(){
@@ -83,10 +83,10 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 		+ 		"}"	;	
 	
 	
-	public PersonGrantCountQueryRunner(String personURI, DataSource dataSource, Log log){
+	public PersonGrantCountQueryRunner(String personURI, Dataset Dataset, Log log){
 		
 		this.personURI = personURI;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		this.log = log;
 	}
 	
@@ -142,12 +142,12 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 		return PIGrant;
 	}
 	
-	private ResultSet executeQuery(String queryURI, DataSource dataSource){
+	private ResultSet executeQuery(String queryURI, Dataset Dataset){
 		
 		QueryExecution queryExecution = null;
 		
 		Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
-		queryExecution = QueryExecutionFactory.create(query,dataSource);
+		queryExecution = QueryExecutionFactory.create(query,Dataset);
 		
 		return queryExecution.execSelect();
 	}
@@ -241,7 +241,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 			throw new MalformedQueryParametersException("URL parameter is either null or empty.");
 		}
 		
-		ResultSet resultSet = executeQuery(this.personURI, this.dataSource);
+		ResultSet resultSet = executeQuery(this.personURI, this.Dataset);
 		
 		return createJavaValueObjects(resultSet);
 	}

@@ -11,7 +11,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
@@ -35,19 +36,19 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Co-PI Grant Count does not provide Ajax Response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		
 		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
 		
-		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, dataSource, log);
+		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
@@ -95,7 +96,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		/*
 		 * Support for this has ceased to exist. Standalone mode was created only for demo 
@@ -103,7 +104,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		 * */		
 /*		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
+		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, Dataset, log);
 		
 		CoPIData PINodesAndEdges = queryManager.getQueryResult();
 		

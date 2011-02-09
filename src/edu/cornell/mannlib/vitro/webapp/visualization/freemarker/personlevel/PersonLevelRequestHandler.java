@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
@@ -60,13 +60,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Person Level does not provide Ajax Response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Person Level does not provide Data Response.");
 	}
@@ -74,7 +74,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
         String egoURI = vitroRequest.getParameter(
@@ -86,12 +86,12 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)){ 
         	
-    		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, dataSource, log);
+    		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
     		
     		QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
            
-            QueryRunner<Set<Grant>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, dataSource, log);
+            QueryRunner<Set<Grant>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, Dataset, log);
             
             CoPIData coPIData = coPIQueryManager.getQueryResult();
             
@@ -146,9 +146,9 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         	
         } else {
         	
-        	QueryRunner<CoAuthorshipData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, dataSource, log);
+        	QueryRunner<CoAuthorshipData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, Dataset, log);
         
-        	QueryRunner<Set<BiboDocument>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, dataSource, log);
+        	QueryRunner<Set<BiboDocument>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, Dataset, log);
         	
         	CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
         	

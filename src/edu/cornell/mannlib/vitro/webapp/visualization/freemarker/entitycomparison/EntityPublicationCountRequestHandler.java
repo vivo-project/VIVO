@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
 
@@ -45,7 +45,7 @@ public class EntityPublicationCountRequestHandler implements
 
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
@@ -54,7 +54,7 @@ public class EntityPublicationCountRequestHandler implements
 		if (StringUtils.isNotBlank(entityURI)){
 		
 			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
-					dataSource, entityURI);
+					Dataset, entityURI);
 		} else {
 			
 			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
@@ -79,26 +79,26 @@ public class EntityPublicationCountRequestHandler implements
 	            } else {
 	            	
 	    			return getSubjectEntityAndGenerateResponse(vitroRequest,
-							log, dataSource,
+							log, Dataset,
 							staffProvidedHighestLevelOrganization);
 	            }
 			}
 			
 			String highestLevelOrgURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log,
-					dataSource);
+					Dataset);
 			
 			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
-					dataSource, highestLevelOrgURI);
+					Dataset, highestLevelOrgURI);
 		}
 	
 	}
 	
 	private ResponseValues getSubjectEntityAndGenerateResponse(
-			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			VitroRequest vitroRequest, Log log, Dataset Dataset,
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
-		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, dataSource, log);
+		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
@@ -115,19 +115,19 @@ public class EntityPublicationCountRequestHandler implements
 		} else {	
 		
 			return getSubEntityTypesAndRenderStandaloneResponse(
-					vitroRequest, log, dataSource,
+					vitroRequest, log, Dataset,
 					subjectEntityURI, entity);
 		}
 	}
 
 
 	private ResponseValues getSubEntityTypesAndRenderStandaloneResponse(
-			VitroRequest vitroRequest, Log log, DataSource dataSource,
+			VitroRequest vitroRequest, Log log, Dataset Dataset,
 			String subjectEntityURI, Entity entity)
 			throws MalformedQueryParametersException {
 		
 		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, dataSource, subjectEntityURI);
+				log, Dataset, subjectEntityURI);
 		
 		return prepareStandaloneResponse(vitroRequest, entity, subjectEntityURI,
 				subOrganizationTypesResult);
@@ -136,13 +136,13 @@ public class EntityPublicationCountRequestHandler implements
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 				
-		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, dataSource, log);
+		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
@@ -151,7 +151,7 @@ public class EntityPublicationCountRequestHandler implements
 		Entity entity = queryManager.getQueryResult();
 
 		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, dataSource, entityURI);
+				log, Dataset, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
 
@@ -160,7 +160,7 @@ public class EntityPublicationCountRequestHandler implements
 	
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Entity Pub Count does not provide Ajax Response.");
 	}
 

@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -46,7 +46,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	
 	public Object generateAjaxVisualization(VitroRequest vitroRequest,
 											Log log, 
-											DataSource dataSource) 
+											Dataset Dataset) 
 			throws MalformedQueryParametersException {
 
         String individualURI = vitroRequest.getParameter(
@@ -70,7 +70,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			QueryRunner<GenericQueryMap> profileQueryHandler = 
 					new AllPropertiesQueryRunner(individualURI, 
 												  filterRule,
-												  dataSource,
+												  Dataset,
 												  log);
 			
 			GenericQueryMap profilePropertiesToValues = 
@@ -105,7 +105,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											"",
 											whereClause,
 											"",
-											dataSource, log);
+											Dataset, log);
 			
 			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
 											   fieldLabelToOutputFieldLabel);
@@ -127,7 +127,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									aggregationRules,
 									whereClause,
 									groupOrderClause,
-									dataSource, log);
+									Dataset, log);
 			
 			Gson publicationsInformation = new Gson();
 			
@@ -155,7 +155,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									aggregationRules,
 									whereClause,
 									"",
-									dataSource, log);
+									Dataset, log);
 			
 			Gson grantsInformation = new Gson();
 			
@@ -268,7 +268,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											aggregationRules,
 											whereClause,
 											groupOrderClause,
-											dataSource, log);
+											Dataset, log);
 			
 			return getHighestLevelOrganizationTemporalGraphVisURL(
 							highestLevelOrganizationQueryHandler.getQueryResult(),
@@ -395,14 +395,14 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities does not provide Data Response.");
 	}
 
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities does not provide Standard Response.");
 	}

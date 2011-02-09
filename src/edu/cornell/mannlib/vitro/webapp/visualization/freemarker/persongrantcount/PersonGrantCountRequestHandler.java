@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -47,14 +47,14 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 
 		String personURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, dataSource, log );
+		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
 		
 		Set<Grant> piGrants = queryManager.getQueryResult();
 		
@@ -77,7 +77,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
@@ -88,7 +88,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 		
-		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, dataSource, log );
+		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
 		
 		Set<Grant> piGrants = queryManager.getQueryResult();
 		
@@ -127,7 +127,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		
 		String personURI = vitroRequest
@@ -139,7 +139,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, dataSource, log );
+		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
 	
 		Set<Grant> piGrants = queryManager.getQueryResult();
 		

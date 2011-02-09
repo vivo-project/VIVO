@@ -16,7 +16,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -51,7 +51,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	private String egoURI;
 	
-	private DataSource dataSource;
+	private Dataset Dataset;
 
 	private Log log;
 
@@ -60,10 +60,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	private UniqueIDGenerator edgeIDGenerator;
 
 	public CoAuthorshipQueryRunner(String egoURI,
-			DataSource dataSource, Log log) {
+			Dataset Dataset, Log log) {
 
 		this.egoURI = egoURI;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
@@ -393,12 +393,12 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	}
 	
 	private ResultSet executeQuery(String queryText,
-								   DataSource dataSource) {
+								   Dataset Dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
 
-        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        queryExecution = QueryExecutionFactory.create(query, Dataset);
         return queryExecution.execSelect();
     }
 
@@ -462,7 +462,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
         }
 
 		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI),
-										   this.dataSource);
+										   this.Dataset);
 		return createQueryResult(resultSet);
 	}
 
