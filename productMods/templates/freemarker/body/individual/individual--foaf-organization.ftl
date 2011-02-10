@@ -3,7 +3,9 @@
 <#-- Individual profile page template for foaf:Organization individuals (extends individual.ftl in vivo)-->
 
 <#assign classSpecificExtension>
-    <#include "individual-visualizationTemporalGraph.ftl">
+    <#if temporalVisualizationEnabled??>
+        <#include "individual-visualizationTemporalGraph.ftl">
+    </#if>
 </#assign>
 
 <#include "individual.ftl">
