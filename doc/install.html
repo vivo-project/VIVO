@@ -185,11 +185,11 @@
                 </li>
             </ul>
             <p>
-                Be sure to setup the environment variables for <code java_home=""></code>
+                Be sure to set up the environment variables for <code java_home="">JAVA_HOME</code>
                 and <code>ANT_HOME</code>
                 and add the executables to your path per 
                 your operating system and installation directions from the software  
-                support web sites. 
+                support websites. 
             </p>
             <p>
                 * Note that VIVO 1.2 will not run on older versions of MySQL that may have worked 
@@ -231,7 +231,7 @@
             <h3 id="triple_store">IV. Choose Triple Store</h3>
             <p>
                 VIVO 1.2 offers a choice of two triple store technologies: in-memory models backed by 
-                Jena's legacy relational database store (RDB) and Jena's SPARQL database (SDB).   RDB was  
+                Jena's legacy relational database store (RDB), and Jena's SPARQL database (SDB).   RDB was  
                 used by VIVO 1.1.1 and earlier.   This mode offers fast response, but only by caching the 
                 entire RDF model in the server's main memory.   The memory available to VIVO limits the 
                 number of RDF statements that may be stored.
@@ -289,7 +289,7 @@
                             RDF resources available for harvest using linked data. Requests for RDF
                             resource URIs redirect to HTML or RDF representations as specified by
                             the client. To make this possible, VIVO's default namespace must have
-                            certain structure and begin with the public web address of the VIVO
+                            a certain structure and begin with the public web address of the VIVO
                             installation. For example, if the web address of a VIVO installation is
                             "http://vivo.example.edu/" the default namespace must be set to
                             "http://vivo.example.edu/individual/" in order to support linked data.
@@ -351,7 +351,7 @@
                     <tr>
                         <td colspan="2">
                             Directory where uploaded files will be stored. 
-                            Be sure this directory exists and is writable by the user that  
+                            Be sure this directory exists and is writable by the user who  
                             the Tomcat service is running as. 
                         </td>
                     </tr>
@@ -366,7 +366,7 @@
                     <tr>
                         <td colspan="2">
                             Directory where the Lucene search index will be 
-                            built. Be sure this directory exists and is writable by the user that  
+                            built. Be sure this directory exists and is writable by the user who  
                             the Tomcat service is running as. 
                         </td>
                     </tr>
@@ -396,7 +396,7 @@
                     <tr>
                         <td colspan="2">
                             Specify the JDBC URL of your database. Change 
-                            the end of theURL to reflect your database name (if it is not "vivo"). 
+                            the end of the URL to reflect your database name (if it is not "vivo"). 
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -627,7 +627,7 @@
             <p>
                 Currently, VIVO copies the contents of your RDF database into 
                 memory in order to serve Web requests quickly (the in-memory copy and  
-                the underlying databaseare kept in synch as edits are performed). 
+                the underlying database are kept in synch as edits are performed). 
             </p>
             <p>
                 VIVO will require more memory than that allocated to Tomcat by 
@@ -681,7 +681,7 @@
                 menu of editing options. Here you can create OWL classes, object  
                 properties, data properties, and configure the display of data. 
                 Currently, any classes you wish to make visible on your website must be  
-                part of a class group, and there a number of visibility and display 
+                part of a class group, and there are a number of visibility and display 
                 options available for each ontology entity. VIVO comes with a core VIVO  
                 ontology, but you may also upload other ontologies from an RDF file. 
             </p>
@@ -689,7 +689,7 @@
                 Under the "Advanced Data Tools" click "Add/Remove RDF Data." Note 
                 that Vitro currently works best with OWL-DL ontologies and has only  
                 limited support for pure RDF data. You can enter a URL pointing to the 
-                RDF data you wish to load or upload a file on your local machine.  
+                RDF data you wish to load or upload from a file on your local machine.  
                 Ensure that the "add RDF" radio button is selected. You will also 
                 likely want to check "create classgroups automatically." 
             </p>
@@ -707,7 +707,7 @@
                 If you have configured your application to use the "Contact Us"
                 feature in Step IV (<code>Vitro.smtpHost</code>), you will also need to 
                 add an email address to the VIVO application.&nbsp; This is the email  
-                that the contact form submits to. It can be a list server or an 
+                to which the contact form will submit. It can be a list server or an 
                 individual's email address. 
             </p>
             <p>
@@ -715,12 +715,12 @@
                 table of contents (link in the right side of the header). Go to "Site  
                 Information" (under "Site Configuration"). In the "Site Information 
                 Editing Form," enter a functional email address in the field "Contact  
-                Email Address." and submit the change. 
+                Email Address" and submit the change. 
             </p>
             <p>
-                If you set the<code>Vitro.smtpHost</code>
+                If you set the <code>Vitro.smtpHost</code>
                 in Step IV and do NOT 
-                provide an email addressin this step, your users will receive a java  
+                provide an email address in this step, your users will receive a java  
                 error in the interface. 
             </p>
             <h3 id="tomcat_connector">XI. Set up Apache Tomcat Connector </h3>
@@ -872,7 +872,8 @@
                         line like this in the deploy.properties file: 
                     </p>
                     <pre>externalAuth.netIdHeaderName = [the header name]</pre>
-                    For example:<pre>externalAuth.netIdHeaderName = remote_userID</pre>
+                    <p>For example:</p>
+					<pre>externalAuth.netIdHeaderName = remote_userID</pre>
                 </li>
                 <li>
                     <h5>The text for the Login button.</h5>
