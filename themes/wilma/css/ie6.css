@@ -16,6 +16,11 @@ body {
 #search-home h3 { 
     margin-left: 0; 
 }
+#search-field {
+    background-image: url("../images/search-interior-pages.gif");
+    height: 35px;
+    width: 392px;
+}
 #search-field input.search {
     padding-left: 14px;
 }
