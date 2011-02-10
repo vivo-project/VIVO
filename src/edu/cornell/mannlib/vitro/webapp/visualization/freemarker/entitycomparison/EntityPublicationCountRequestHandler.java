@@ -23,12 +23,14 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 
 import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
@@ -237,10 +239,20 @@ public class EntityPublicationCountRequestHandler implements
 		
         Portal portal = vitroRequest.getPortal();
         String standaloneTemplate = "entityPublicationComparisonError.ftl";
-        
         Map<String, Object> body = new HashMap<String, Object>();
+        
+        IndividualDao iDao = vitroRequest.getWebappDaoFactory().getIndividualDao();
+        Individual ind = iDao.getIndividualByURI(entityURI);
+        
+        String organizationLabel = "Unknown Organization"; 
+        
+        if (ind != null) {
+        	organizationLabel = ind.getName();
+        }
+        
+        body.put("organizationLabel", organizationLabel);
         body.put("portalBean", portal);
-        body.put("title", "Temporal Graph Visualization");
+        body.put("title", organizationLabel + " - Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
 
         return new TemplateResponseValues(standaloneTemplate, body);
