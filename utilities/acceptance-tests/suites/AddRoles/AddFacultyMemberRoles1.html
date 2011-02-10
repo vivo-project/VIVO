@@ -85,11 +85,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Navigate to Jane Faculty</td>
 	<td></td>
@@ -97,11 +92,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,7 +121,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
+	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -176,70 +166,15 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Enter invalid Co-principal Investigator role</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create co-principal investigator entry for Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Grant Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Years of Participation in Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Start Year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>End Year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>relatedIndLabel</td>
-	<td>NIH VIVO</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Add good Co-principal Investigator role</td>
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Create co-principal investigator entry for Faculty, Jane</td>
 	<td></td>
@@ -271,12 +206,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2009</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endYear</td>
+	<td>endField.year</td>
 	<td>2010</td>
 </tr>
 <tr>
@@ -297,11 +232,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -336,12 +266,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2009 - 2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li/span</td>
+	<td>NIH VIVO 2009 - 2010</td>
 	<td></td>
 </tr>
 <tr>
@@ -351,7 +276,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/a</td>
+	<td>//h3[@id='hasCo-PrincipalInvestigatorRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -391,12 +316,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2007</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endYear</td>
+	<td>endField.year</td>
 	<td>2009</td>
 </tr>
 <tr>
@@ -417,11 +342,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -450,18 +370,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2007 - 2009</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li[1]/span</td>
+	<td>link=VIVO Cornell Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO Cornell Grant 2007 - 2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -471,12 +386,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2009 - 2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li[2]/span</td>
+	<td>NIH VIVO 2009 - 2010</td>
 	<td></td>
 </tr>
 <tr>
@@ -486,7 +396,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasInvestigatorRole']/a</td>
+	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -531,12 +441,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Enter invalid Investigator role</td>
+	<td class="comment">Enter good Investigator role</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasInvestigatorRole']/a</td>
+	<td>//h3[@id='hasInvestigatorRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -575,63 +485,13 @@
 	<td>VIVO Cornell Grant Too</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add good Investigator role</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create investigator entry for Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Grant Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Years of Participation in Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Start Year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>End Year</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
-	<td>VIVO Cornell Grant Too</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2009</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endYear</td>
+	<td>endField.year</td>
 	<td>2009</td>
 </tr>
 <tr>
@@ -652,11 +512,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -685,18 +540,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2009</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasInvestigatorRole']/ul/li/span/a</td>
+	<td>link=VIVO Cornell Grant Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -706,7 +556,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasPrincipalInvestigatorRole']/a</td>
+	<td>//h3[@id='hasPrincipalInvestigatorRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -746,8 +596,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2010</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -767,11 +622,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -800,18 +650,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>NIH VIVO Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2010</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasPrincipalInvestigatorRole']/ul/li/span</td>
+	<td>link=NIH VIVO Too</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>NIH VIVO Too 2010 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -820,63 +665,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>NIH VIVO</td>
+	<td>verifyElementPresent</td>
+	<td>link=NIH VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2009 - 2010</td>
+	<td>NIH VIVO 2009 - 2010</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li/span</td>
+	<td>link=VIVO Cornell Grant</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2007 - 2009</td>
+	<td>VIVO Cornell Grant 2007 - 2009</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasCo-PrincipalInvestigatorRole']/ul/li[2]/span</td>
+	<td>link=VIVO Cornell Grant Too</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>VIVO Cornell Grant Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2009</td>
+	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasInvestigatorRole']/ul/li/span</td>
+	<td>link=NIH VIVO Too</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>NIH VIVO Too</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasPrincipalInvestigatorRole']/ul/li/span</td>
+	<td>NIH VIVO Too 2010 -</td>
 	<td></td>
 </tr>
 <tr>

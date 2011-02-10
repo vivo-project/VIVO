@@ -16,7 +16,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -51,7 +51,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	private String egoURI;
 	
-	private DataSource dataSource;
+	private Dataset Dataset;
 
 	private Log log;
 
@@ -60,10 +60,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	private UniqueIDGenerator edgeIDGenerator;
 
 	public CoAuthorshipQueryRunner(String egoURI,
-			DataSource dataSource, Log log) {
+			Dataset Dataset, Log log) {
 
 		this.egoURI = egoURI;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
@@ -376,32 +376,29 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				biboDocument.setDocumentMoniker(documentMonikerNode.toString());
 			}
 
-			RDFNode publicationYearNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-			if (publicationYearNode != null) {
-				biboDocument.setPublicationYear(publicationYearNode.toString());
-			}
-			
-			RDFNode publicationYearMonthNode = solution.get(QueryFieldLabels
-																.DOCUMENT_PUBLICATION_YEAR_MONTH);
-			if (publicationYearMonthNode != null) {
-				biboDocument.setPublicationYearMonth(publicationYearMonthNode.toString());
-			}
-			
 			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 			if (publicationDateNode != null) {
 				biboDocument.setPublicationDate(publicationDateNode.toString());
+			}
+
+			/*
+			 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
+			 * */
+			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+			if (publicationYearUsing_1_1_PropertyNode != null) {
+				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
 			}
 			
 			return biboDocument;
 	}
 	
 	private ResultSet executeQuery(String queryText,
-								   DataSource dataSource) {
+								   Dataset Dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
 
-        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        queryExecution = QueryExecutionFactory.create(query, Dataset);
         return queryExecution.execSelect();
     }
 
@@ -409,38 +406,35 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 //		Resource uri1 = ResourceFactory.createResource(queryURI);
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
-			+ "SELECT "
-			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") " 
-			+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") " 
-			+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") " 
-			+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") "
-			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") "
-			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") "
-			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") "
-			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") "
-			+ "		(str(?publicationYear) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR + ") "
-			+ "		(str(?publicationYearMonth) as ?" 
-						+ QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH + ") " 
-			+ "		(str(?publicationDate) as ?" 
-						+ QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") " 
-			+ "WHERE { "
+			+ "SELECT \n"
+			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.AUTHOR_URL + ") \n" 
+			+ "		(str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
+			+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") \n" 
+			+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") \n"
+			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
+			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") \n"
+			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") \n"
+			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") \n"
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") \n"
+			+ "WHERE { \n"
 			+ "<" + queryURI + "> rdf:type foaf:Person ;" 
 								+ " rdfs:label ?authorLabel ;" 
-								+ " core:authorInAuthorship ?authorshipNode . "
+								+ " core:authorInAuthorship ?authorshipNode . \n"
 			+ "?authorshipNode rdf:type core:Authorship ;" 
-								+ " core:linkedInformationResource ?document . "
-			+ "?document rdfs:label ?documentLabel . " 
-			+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . " 
-			+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . " 
-			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . "
-			+ "OPTIONAL {  ?document core:year ?publicationYear } . " 
-			+ "OPTIONAL {  ?document core:yearMonth ?publicationYearMonth } . " 
-			+ "OPTIONAL {  ?document core:date ?publicationDate } . "  
-			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . " 
-			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . " 
-			+ "OPTIONAL {  ?document vitro:description ?documentDescription } " 
-			+ "} " 
-			+ "ORDER BY ?document ?coAuthorPerson";
+								+ " core:linkedInformationResource ?document . \n"
+			+ "?document rdfs:label ?documentLabel . \n" 
+			+ "?document core:informationResourceInAuthorship ?coAuthorshipNode . \n" 
+			+ "?coAuthorshipNode core:linkedAuthor ?coAuthorPerson . \n" 
+			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . \n"
+			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" 
+			+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } .\n" 
+			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } . \n" 
+			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } . \n" 
+			+ "OPTIONAL {  ?document vitro:description ?documentDescription } \n" 
+			+ "} \n" 
+			+ "ORDER BY ?document ?coAuthorPerson\n";
 
 //		System.out.println("COAUTHORSHIP QUERY - " + sparqlQuery);
 		
@@ -468,7 +462,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
         }
 
 		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI),
-										   this.dataSource);
+										   this.Dataset);
 		return createQueryResult(resultSet);
 	}
 

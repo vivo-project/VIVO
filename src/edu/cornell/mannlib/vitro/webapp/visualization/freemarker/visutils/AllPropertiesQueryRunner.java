@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -36,18 +36,18 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String filterRule, individualURI;
-	private DataSource dataSource;
+	private Dataset Dataset;
 
 	private Log log;
 
 	public AllPropertiesQueryRunner(String individualURI,
 							   String filterRule,
-							   DataSource dataSource, 
+							   Dataset Dataset, 
 							   Log log) {
 
 		this.individualURI = individualURI;
 		this.filterRule = filterRule;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		this.log = log;
 		
 	}
@@ -74,12 +74,12 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 	}
 
 	private ResultSet executeQuery(String queryText,
-								   DataSource dataSource) {
+								   Dataset Dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
 
-        queryExecution = QueryExecutionFactory.create(query, dataSource);
+        queryExecution = QueryExecutionFactory.create(query, Dataset);
         return queryExecution.execSelect();
     }
 
@@ -127,7 +127,7 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(
 												this.individualURI, 
 												this.filterRule),
-										   this.dataSource);
+										   this.Dataset);
 
 		return createJavaValueObjects(resultSet);
 	}

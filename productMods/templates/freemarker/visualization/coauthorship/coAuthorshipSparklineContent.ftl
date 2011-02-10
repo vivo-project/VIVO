@@ -17,15 +17,21 @@
         <script type="text/javascript">
         
             function drawCoauthorsSparklineVisualization(providedSparklineImgTD) {
+            
+                var unknownYearPublicationCounts = ${sparklineVO.unknownYearPublications};
+                var onlyUnknownYearPublications = false;
     
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
                 data.addColumn('number', 'Unique co-authors');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
                 
+                var knownYearPublicationCounts = 0;
+                
                 <#list sparklineVO.yearToEntityCountDataTable as yearToUniqueCoauthorsDataElement>                        
                     data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 0, '${yearToUniqueCoauthorsDataElement.year}');
                     data.setValue(${yearToUniqueCoauthorsDataElement.yearToEntityCounter}, 1, ${yearToUniqueCoauthorsDataElement.currentEntitiesCount});
+                    knownYearPublicationCounts += ${yearToUniqueCoauthorsDataElement.currentEntitiesCount};
                 </#list>
                 
                 <#-- Create a view of the data containing only the column pertaining to coauthors count. -->
@@ -47,17 +53,84 @@
 
                 </#if>
          
+                var visualizationOptions = {
+                    width: 150,
+                    height: 60,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                }
+                
+                /*
+                This means that all the publications have unknown years & we do not need to display
+                the sparkline.
+                */            
+                if (unknownYearPublicationCounts > 0 && knownYearPublicationCounts < 1) {
+                    
+                    onlyUnknownYearPublications = true;
+                    
+                } else {
+
+                /* 
+                Test if we want to go for the approach when serving visualizations from a secure site..
+                If "https:" is not found in location.protocol then we do everything normally.
+                */
+                if (location.protocol.indexOf("https") == -1) {
+                    /*
+                    This condition will make sure that the location protocol (http, https, etc) does not have 
+                    for word https in it.
+                    */
+                             
+                    <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
+                    var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
+                    sparkline.draw(sparklineDataView, {
+                            width: visualizationOptions.width,
+                            height: visualizationOptions.height,
+                            showAxisLines: false,
+                            showValueLabels: false,
+                            labelPosition: 'none'
+                    });
+
+                } else {
+                
+                    <#-- Prepare data for generating google chart URL. -->
+                    
+                    <#-- If we need to serve data for https:, we have to create an array of values to be plotted. -->
+                    var chartValuesForEncoding = new Array();
+                    
+                    $.each(sparklineDataView.getViewRows(), function(index, value) {
+                        chartValuesForEncoding.push(data.getValue(value, 1));
+                    });
+                    
+                    var chartImageURL = constructVisualizationURLForSparkline(
+                                extendedEncodeDataForChartURL(chartValuesForEncoding, 
+                                                              sparklineDataView.getColumnRange(0).max), 
+                                visualizationOptions);
+
+                    var imageContainer = $(providedSparklineImgTD[0]);
+                    
+                    imageContainer.image(chartImageURL, 
+                            function(){
+                                imageContainer.empty().append(this); 
+                                $(this).addClass("google-visualization-sparkline-image");
+                            },
+                            function(){
+                                // For performing any action on failure to
+                                // find the image.
+                                imageContainer.empty();
+                            }
+                    );
+                
+                }
+                
+                }
+                
+                if (${sparklineVO.totalCollaborationshipCount?c}) {
+                    var totalPublicationCount = ${sparklineVO.totalCollaborationshipCount?c};
+                } else {
+                    var totalPublicationCount = knownYearPublicationCounts + unknownYearPublicationCounts; 
+                }
          
-                <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
-                var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
-                sparkline.draw(sparklineDataView, {
-                        width: 150,
-                        height: 60,
-                        showAxisLines: false,
-                        showValueLabels: false,
-                        labelPosition: 'none'
-                });
-            
                 <#if sparklineVO.shortVisMode>
          
                     <#-- We want to display how many coauthors were considered, so this is used to calculate this. -->
@@ -67,10 +140,27 @@
                     $.each(shortSparkRows, function(index, value) {
                         renderedShortSparks += data.getValue(value, 1);
                     });
+                    
+                     /*
+                    In case that there are only unknown publications we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedShortSparks only hold counts
+                    of publications which have any date associated with it.
+                    */
+                    var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedShortSparks;
+                    
+                    if (totalPubs === 1) {
+                        var pubDisplay = "co-author";
+                    } else {
+                        var pubDisplay = "co-authors";
+                    }
          
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> co-author(s) <br/></span>");
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
             
                     var sparksText = '  within the last 10 years';
+                                        
+                    if (totalPubs !== totalPublicationCount) {
+                        sparksText += ' (' + totalPublicationCount + ' total)';
+                    }
             
                  <#else>
             
@@ -78,16 +168,39 @@
                      * Sparks that will be rendered will always be the one's which has 
                      * any year associated with it. Hence.
                      * */
-                    var renderedSparks = ${sparklineVO.renderedSparks};      
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearPublications})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> co-author(s) <br/></span>");
+                    var renderedSparks = ${sparklineVO.renderedSparks};
+                    
+                    /*
+                    In case that there are only unknown publications we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedSparks only hold counts
+                    of publications which have any date associated with it.
+                    */
+                    var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedSparks;
+                          
+                    if ( totalPubs == 1 ) {
+                        var pubDisplay = "co-author";
+                    } else {
+                        var pubDisplay = "co-authors";
+                    }
+                          
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + pubDisplay + " <br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span> ' 
-                                        + ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
+                                        + ' to ${sparklineVO.latestRenderedPublicationYear?c}</span>';
                                         
+                    if (totalPubs !== totalPublicationCount) {
+                        sparksText += ' (' + totalPublicationCount + ' total)';
+                    }
+                    
+                    if (totalPublicationCount) {
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
+                    }
+                                         
                  </#if>
          
-                 $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
+                 if (!onlyUnknownYearPublications) {
+                    $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
+                 }
          
             }
     
@@ -130,16 +243,16 @@
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);
-            		var row2 = $('<tr>');
+                    var row2 = $('<tr>');
                     var sparklineNumberTD = $('<td>');
                     sparklineNumberTD.attr('class', 'sparkline_number');
-					sparklineNumberTD.css('text-align', 'left');
+                    sparklineNumberTD.css('text-align', 'left');
                     row2.append(sparklineNumberTD);
                     var row3 = $('<tr>');
                     
                     var sparklineTextTD = $('<td>');
                     sparklineTextTD.attr('class', 'sparkline_text');
-					sparklineTextTD.css('text-align', 'left');
+                    sparklineTextTD.css('text-align', 'left');
                     row3.append(sparklineTextTD);
                     table.append(row);
                     table.append(row2);
@@ -165,20 +278,20 @@
 
             <#if displayTable?? && displayTable>
         
-		        <p>	
-					<#assign tableID = "coauthors_sparkline_data_table" />
-					<#assign tableCaption = "Unique Co-Authors per year " />
-					<#assign tableActivityColumnName = "Count" />
-					<#assign tableContent = sparklineVO.yearToActivityCount />
-					<#assign fileDownloadLink = sparklineVO.downloadDataLink />
-					
-					<#include "yearToActivityCountTable.ftl">
-		
-		            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
-		            <br />
-		        </p>
+                <p> 
+                    <#assign tableID = "coauthors_sparkline_data_table" />
+                    <#assign tableCaption = "Unique Co-Authors per year " />
+                    <#assign tableActivityColumnName = "Count" />
+                    <#assign tableContent = sparklineVO.yearToActivityCount />
+                    <#assign fileDownloadLink = sparklineVO.downloadDataLink />
+                    
+                    <#include "yearToActivityCountTable.ftl">
         
-	        </#if>
+                    Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                    <br />
+                </p>
+        
+            </#if>
 
     </#if>
 </div>

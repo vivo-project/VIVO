@@ -4,20 +4,77 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>    
+    <query-base>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?authorship (afn:localname(?authorship) AS ?authorshipName) 
+        SELECT DISTINCT ?authorship
                         ?person ?personName WHERE {
-            GRAPH ?g1 { ?subject ?property ?authorship } 
-            OPTIONAL { GRAPH ?g2 { ?authorship core:authorRank ?rank } } 
-            OPTIONAL { GRAPH ?g3 { ?authorship core:linkedAuthor ?person }                      
-                       GRAPH ?g4 { ?person rdfs:label ?personName }  
+            ?subject ?property ?authorship 
+            OPTIONAL { ?authorship core:authorRank ?rank } 
+            OPTIONAL { ?authorship core:linkedAuthor ?person .                     
+                       ?person rdfs:label ?personName  
             }                             
         } ORDER BY ?rank ?personName   
-    </query>
+    </query-base>
+
+    <query-collated>    
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+                
+        SELECT DISTINCT ?subclass
+                        ?authorship
+                        ?person ?personName WHERE {
+            ?subject ?property ?authorship  
+            OPTIONAL { ?authorship core:authorRank ?rank } 
+            OPTIONAL { ?authorship core:linkedAuthor ?person .                      
+                       ?person rdfs:label ?personName  
+                       OPTIONAL { ?person a ?subclass .
+                                  ?subclass rdfs:subClassOf foaf:Person 
+                       }   
+            }                             
+        } ORDER BY ?subclass ?rank ?personName   
+    </query-collated>
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt; 
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf foaf:Person 
+        } WHERE {
+            ?subclass rdfs:subClassOf foaf:Person
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?authorship .
+            ?authorship ?authorshipProperty ?authorshipValue .
+            ?person rdfs:label ?personName .
+            ?person a ?subclass           
+        } WHERE {
+            {
+                ?subject ?property ?authorship 
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship ?authorshipProperty ?authorshipValue 
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship core:linkedAuthor ?person .                      
+                ?person rdfs:label ?personName  
+            } UNION {
+                ?subject ?property ?authorship .
+                ?authorship core:linkedAuthor ?person .                      
+                ?person rdfs:label ?personName . 
+                ?person a ?subclass 
+            }
+        } 
+    </query-construct>
     
     <template>propStatement-informationResourceInAuthorship.ftl</template>
 </list-view-config>

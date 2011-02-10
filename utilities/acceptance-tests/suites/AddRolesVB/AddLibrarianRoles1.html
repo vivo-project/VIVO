@@ -85,11 +85,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Navigate to Jane Faculty</td>
 	<td></td>
@@ -97,11 +92,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,7 +121,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasPresenterRole']/a</td>
+	<td>//h3[@id='hasPresenterRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,7 +156,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasPresenterRole']/a</td>
+	<td>//h3[@id='hasPresenterRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,61 +306,6 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Start to add presentation again, but enter only first 2 required fields</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create presentation entry for Librarian, Lily</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Presentation Type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Presentation Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Role in Presentation</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Year</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>relatedIndLabel</td>
-	<td>Researching Primates</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>roleLabel</td>
-	<td>Presenter</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Add presentation correctly</td>
 	<td></td>
 </tr>
@@ -411,7 +346,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2009</td>
 </tr>
 <tr>
@@ -432,11 +367,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +396,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasPresenterRole']/a</td>
+	<td>//h3[@id='hasPresenterRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -526,7 +456,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2003</td>
 </tr>
 <tr>
@@ -547,11 +477,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,12 +511,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Member of panel 2003</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasPresenterRole']/ul/li[1]/span</td>
+	<td>Animal Librarianship Member of panel 2003 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,12 +521,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Presenter 2009</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasPresenterRole']/ul/li/span</td>
+	<td>Researching Primates Presenter 2009 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -616,7 +531,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasServiceProviderRole']/a</td>
+	<td>//h3[@id='hasServiceProviderRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -676,8 +591,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2010</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -697,11 +617,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -731,7 +646,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasServiceProviderRole']/a</td>
+	<td>//h3[@id='hasServiceProviderRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -791,12 +706,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2001</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endYear</td>
+	<td>endField.year</td>
 	<td>2003</td>
 </tr>
 <tr>
@@ -817,11 +732,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -850,33 +760,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primates of the World</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primates of the World</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Board 2001 - 2003</td>
+	<td>Primates of the World Board 2001 - 2003</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasServiceProviderRole']/ul/li[1]/span</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Carroll College</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Consultant 2010 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasServiceProviderRole']/ul/li[2]/span</td>
+	<td>Carroll College Consultant 2010 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -886,7 +786,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasOutreachProviderRole']/a</td>
+	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -946,8 +846,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2009</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -967,11 +872,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -1001,7 +901,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasOutreachProviderRole']/a</td>
+	<td>//h3[@id='hasOutreachProviderRole']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -1061,12 +961,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>2001</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endYear</td>
+	<td>endField.year</td>
 	<td>2001</td>
 </tr>
 <tr>
@@ -1087,11 +987,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -1120,18 +1015,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Show Me the Primates!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Booth 2001</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='hasOutreachProviderRole']/ul/li[1]/span</td>
+	<td>link=Show Me the Primates!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Show Me the Primates! Booth 2001</td>
 	<td></td>
 </tr>
 <tr>
@@ -1141,12 +1031,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Chair 2009 -</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='hasOutreachProviderRole']/ul/li[2]/span</td>
+	<td>Librarians for the Better Treatment of Primates Chair 2009 -</td>
 	<td></td>
 </tr>
 <tr>

@@ -85,11 +85,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Navigate to Jane Faculty's record</td>
 	<td></td>
@@ -121,7 +116,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>50000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -131,7 +126,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='personInPosition']/a</td>
+	<td>//h2[@id='personInPosition']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -145,23 +140,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=add a new organization</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>newOrgName</td>
-	<td>Testing Department</td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>newOrgType</td>
+	<td>typeSelector</td>
 	<td>label=Academic Department</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>title</td>
+	<td>relatedIndLabel</td>
+	<td>Testing Department</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>positionTitle</td>
 	<td>Full Professor</td>
 </tr>
 <tr>
@@ -171,8 +161,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startYear</td>
+	<td>startField.year</td>
 	<td>1998</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>endField.year</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -190,18 +185,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Testing Department</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Testing Department Full Professor, 1998 -</td>
+	<td>Testing Department, Full Professor 1998 -</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +221,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Testing Department Full Professor, 1998 -</td>
+	<td>Testing Department, Full Professor 1998 -</td>
 	<td></td>
 </tr>
 <tr>

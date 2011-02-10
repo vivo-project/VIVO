@@ -653,3 +653,10 @@ Dark Green (links): #118855
     border-color: #f0ede4;
     border-top: 0;
 }
+img.individual-photo {
+    border: 7px solid #ededed;
+}
+.edit-mainImage,
+.delete-mainImage {
+    top: 150px;
+}

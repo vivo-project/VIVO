@@ -1,15 +1,14 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-
 (function ($) {
 
 $.fn.dataTableExt.oPagination.gmail_style = { 
 
 		"fnInit": function ( oSettings, nPaging, fnCallbackDraw )
 		{
+			//var nInfo = document.createElement( 'div' );
 			var nFirst = document.createElement( 'span' );
 			var nPrevious = document.createElement( 'span' );
-			var nInfo = document.createElement( 'div' );
 			var nNext = document.createElement( 'span' );
 			var nLast = document.createElement( 'span' );
 			
@@ -20,10 +19,10 @@ $.fn.dataTableExt.oPagination.gmail_style = {
 			nLast.innerHTML = oSettings.oLanguage.oPaginate.sLast;
 			*/
 			
-			nFirst.innerHTML = "<span class='small-arrows'><<</span> First";
-			nPrevious.innerHTML = "<span class='small-arrows'><</span> Prev";
-			nNext.innerHTML = "Next <span class='small-arrows'>></span>";
-			nLast.innerHTML = "Last <span class='small-arrows'>>></span>";
+			nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>First</span>";
+			nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>Prev</span>";
+			nNext.innerHTML = "<span class='paginate-nav-text'>Next</span><span class='small-arrows'>&rsaquo;</span>";
+			nLast.innerHTML = "<span class='paginate-nav-text'>Last</span><span class='small-arrows'>&raquo;</span>";
 			
 			var oClasses = oSettings.oClasses;
 			nFirst.className = oClasses.sPageButton+" "+oClasses.sPageFirst;
@@ -31,9 +30,9 @@ $.fn.dataTableExt.oPagination.gmail_style = {
 			nNext.className= oClasses.sPageButton+" "+oClasses.sPageNext;
 			nLast.className = oClasses.sPageButton+" "+oClasses.sPageLast;
 			
+			//nPaging.appendChild( nInfo );
 			nPaging.appendChild( nFirst );
 			nPaging.appendChild( nPrevious );
-			nPaging.appendChild( nInfo );
 			nPaging.appendChild( nNext );
 			nPaging.appendChild( nLast );
 			
@@ -76,7 +75,7 @@ $.fn.dataTableExt.oPagination.gmail_style = {
 				nPaging.setAttribute( 'id', oSettings.sTableId+'_paginate' );
 				nFirst.setAttribute( 'id', oSettings.sTableId+'_first' );
 				nPrevious.setAttribute( 'id', oSettings.sTableId+'_previous' );
-				nInfo.setAttribute( 'id', 'infoContainer' );
+				//nInfo.setAttribute( 'id', 'infoContainer' );
 				nNext.setAttribute( 'id', oSettings.sTableId+'_next' );
 				nLast.setAttribute( 'id', oSettings.sTableId+'_last' );
 			}
@@ -239,8 +238,8 @@ function init(graphContainer) {
 	
 	var defaultFlotOptions = {
 			xaxis : {
-				min : 1996,
-				max : 2008,
+				min : globalDateObject.getFullYear() - 9,
+				max : globalDateObject.getFullYear(),
 				tickDecimals : 0,
 				tickSize : 2
 			},
@@ -283,14 +282,14 @@ function unStuffZerosFromLineGraphs(jsonObject, year) {
 
 	calcZeroLessMinAndMax(jsonObject, year);
 	var currentMinYear = year.globalMin, currentMaxYear = year.globalMax;
+	
+	var normalizedYearRange = getNormalizedYearRange();
 
-	$
-	.each(
-			jsonObject,
+	$.each(jsonObject,
 			function(key, val) {
 				var i = 0;
 				for (i = 0; i < val.data.length; i++) {
-					if (((val.data[i][0] < currentMinYear) || (val.data[i][0] > currentMaxYear))
+					if (((val.data[i][0] < normalizedYearRange.normalizedMinYear) || (val.data[i][0] > normalizedYearRange.normalizedMaxYear))
 							&& val.data[i][1] == 0) {
 
 						val.data.splice(i, 1);
@@ -320,6 +319,43 @@ function unStuffZerosFromLineGraph(jsonObject) {
 	}
 }
 
+
+/**
+ * This is used to normalize the year range for the currently selected entities to always 
+ * display the last 10 years worth of data points. 
+ * 
+ */
+function getNormalizedYearRange() {
+	
+	/*
+	 * This is done to make sure that at least last 10 years worth of data points 
+	 * can be displayed.
+	 * */
+	if (globalDateObject.getFullYear() < year.globalMax) {
+		
+		inferredMaxYear = year.globalMax;
+		
+	} else {
+		
+		inferredMaxYear = globalDateObject.getFullYear();
+	}
+	
+	if (globalDateObject.getFullYear() - 9 > year.globalMin) {
+		
+		inferredMinYear = year.globalMin;
+		
+	} else {
+		
+		inferredMinYear = globalDateObject.getFullYear() - 9;
+	}
+	
+	return {
+		normalizedMinYear: inferredMinYear,
+		normalizedMaxYear: inferredMaxYear,
+		normalizedRange: inferredMaxYear - inferredMinYear 
+	};
+}
+
 /**
  * stuffZerosIntoLineGraphs is used to fill discontinuities in data points. For
  * example, if a linegraph has the following data points [1990,
@@ -335,23 +371,25 @@ function unStuffZerosFromLineGraph(jsonObject) {
  * @returns jsonObject with stuffed data points.
  */
 function stuffZerosIntoLineGraphs(jsonObject, year) {
-
+	
 	calcZeroLessMinAndMax(jsonObject, year);
 
-	var arrayOfMinAndMaxYears = [ year.globalMin, year.globalMax ];
-
-	$
-	.each(
-			jsonObject,
+	var normalizedYearRange = getNormalizedYearRange();
+	
+	$.each(jsonObject,
 			function(key, val) {
-				var position = arrayOfMinAndMaxYears[0], i = 0;
+				var position = normalizedYearRange.normalizedMinYear, i = 0;
+				
+				//console.log(key, val, position, (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1);
 
-				for (i = 0; i < (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1; i++) {
+				for (i = 0; i < normalizedYearRange.normalizedRange + 1; i++) {
 
+					//console.log("val.data[i]", val.data[i]);
+					
 					if (val.data[i]) {
 
 						if (val.data[i][0] != position
-								&& position <= arrayOfMinAndMaxYears[1]) {
+								&& position <= normalizedYearRange.normalizedMaxYear) {
 							val.data.splice(i, 0, [ position, 0 ]);
 						}
 					}
@@ -362,6 +400,8 @@ function stuffZerosIntoLineGraphs(jsonObject, year) {
 					position++;
 				}
 			});
+	
+	//console.log("after stuffing", jsonObject);
 }
 /**
  * During runtime, when the user checks/unchecks a checkbox, the zeroes have to
@@ -375,36 +415,27 @@ function stuffZerosIntoLineGraphs(jsonObject, year) {
  */
 function calcZeroLessMinAndMax(jsonObject, year) {
 
-	var globalMinYear = 5000, globalMaxYear = 0, minYear, maxYear, i = 0;
+	var validYearsInData = new Array();
 
 	$.each(jsonObject, function(key, val) {
 
 		for (i = 0; i < val.data.length; i++) {
-			if (val.data[i][1] != 0) {
-				minYear = val.data[i][0];
-				break;
-			}
-		}
-
-		for (i = val.data.length - 1; i >= 0; i--) {
-			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
-				maxYear = val.data[i][0];
-				break;
-			}
-
-		}
-		if (globalMinYear > minYear) {
-			globalMinYear = minYear;
-		}
 			
-		if (globalMaxYear < maxYear) {
-			globalMaxYear = maxYear;
+			/*
+			 * TO make sure that,
+			 * 		1. Not to consider years that dont have any counts attached to it.
+			 * 		2. Not to consider unknown years indicated by "-1". 
+			 * */
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				validYearsInData.push(val.data[i][0]);
+			}
 		}
-
+		
 	});
 
-	year.globalMin = globalMinYear;
-	year.globalMax = globalMaxYear;
+	year.globalMin = Math.min.apply(Math, validYearsInData);
+	year.globalMax = Math.max.apply(Math, validYearsInData);
+	
 }
 
 /**
@@ -416,86 +447,85 @@ function calcZeroLessMinAndMax(jsonObject, year) {
  * @returns [minYear, maxYear]
  */
 function calcMinandMaxYears(jsonObject, year) {
-	var minYear = 5000, maxYear = 0;
+	
+	var validYearsInData = new Array();
+
 	$.each(jsonObject, function(key, val) {
-		if (minYear > val.data[0][0]) {
-			minYear = val.data[0][0];
-		}
-		if (maxYear < val.data[val.data.length - 1][0]
-		        && val.data[val.data.length - 1][0] != -1){
-			maxYear = val.data[val.data.length - 1][0];
-		}else {
-			if(val.data.length != 1){
-				maxYear = val.data[val.data.length - 2][0];
+
+		for (i = 0; i < val.data.length; i++) {
+			
+			/*
+			 * TO make sure that,
+			 * 		1. Not to consider years that dont have any counts attached to it.
+			 * 		2. Not to consider unknown years indicated by "-1". 
+			 * */
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				validYearsInData.push(val.data[i][0]);
 			}
 		}
+		
 	});
-
-	year.min = minYear;
-	year.max = maxYear;
+	
+	
+	year.min = Math.min.apply(Math, validYearsInData);
+	year.max = Math.max.apply(Math, validYearsInData);
+	
 }
 
 /**
- * y is an an object with two properties label and data. data is of the form
- * [year,value] This function returns the max of all values.
- * 
- * @param {Object}
- *            jsonObject
+ * This function returns the max from the counts of all the entities. Mainly used to 
+ * normalize the width of bar below the line graph, also known as legend row.
+
  * @returns maxCount
  */
-function calcMaxOfComparisonParameter(jsonObject) {
-	var sum = 0, i = 0, maxCount = 0;
+function calcMaxOfComparisonParameter(allEntities) {
 	
-		$.each(jsonObject, function(key, val) {
-			for (i = 0; i < val.data.length; i++)
-				sum += val.data[i][1];
+	var validCountsInData = new Array();
+	
+	$.each(allEntities, function(key, currentEntity) {
+		validCountsInData.push(calcSumOfComparisonParameter(currentEntity));
+	});
 
-			if (maxCount < sum)
-				maxCount = sum;
-
-			sum = 0;
-		});
-
-//	console.log('returning max value' + maxCount);
-	return maxCount;
+	return Math.max.apply(Math, validCountsInData);
 }
 
 function calcMaxWithinComparisonParameter(jsonObject){
 	
-	var value = 0, i = 0, maxCount = 0;
-	
+	var validCountsInData = new Array();
+
 	$.each(jsonObject, function(key, val) {
-		for (i = 0; i < val.data.length; i++){
-			value = val.data[i][1];
-		//	console.log(val.data[i][1]);
-		
-			if (maxCount < value){
-				maxCount = value;
+
+		for (i = 0; i < val.data.length; i++) {
+			
+			/*
+			 * TO make sure that,
+			 * 		1. Not to consider years that dont have any counts attached to it.
+			 * 		2. Not to consider unknown years indicated by "-1". 
+			 * */
+			if (val.data[i][1] != 0 && val.data[i][0] != -1) {
+				validCountsInData.push(val.data[i][1]);
 			}
 		}
+		
 	});
 	
-	//console.log('max value: ' + maxCount);
-	return maxCount;
+	return Math.max.apply(Math, validCountsInData);
 }
 
 /**
- * x is an object and it has two properties label and data. data is a two
- * dimensional array of the form [year, value] This function returns the sum of
- * all the values.
- * 
- * @param {Object}
- *            jsonObject
+ * This is used to find out the sum of all the counts of a particular entity. This is
+ * especially useful to render the bars below the line graph where it doesnt matter if
+ * a count has any associated year to it or not.
  * @returns sum{values}.
  */
-function calcSumOfComparisonParameter(jsonObject) {
+function calcSumOfComparisonParameter(entity) {
 
-	var sum = 0, i = 0;
-	for (i = 0; i < jsonObject.data.length; i++) {
-		sum += jsonObject.data[i][1];
-	}
+	var sum = 0;
 
-	// sum += jsonObject.publicationCount;
+	$.each(entity.data, function(index, data){
+		sum += this[1];
+	});
+
 	return sum;
 }
 
@@ -533,6 +563,9 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
 	} else if (yearRange > 15 && yearRange < 70) {
 		flotOptions.series.lines.lineWidth = 2;
 		flotOptions.xaxis.tickSize = 5;
+	} else if (yearRange == 0 ) {
+		flotOptions.series.lines.lineWidth = 3;
+		flotOptions.xaxis.tickSize = 1;
 	} else {
 		flotOptions.series.lines.lineWidth = 1;
 		flotOptions.xaxis.tickSize = 10;
@@ -715,7 +748,9 @@ function setOptionsForPagination(object, itemsPerPage, numberOfDisplayEntries,
  * 
  * @jsonRecords the set of entities from which the unknowns have to be removed.
  */
+
 function removeUnknowns(jsonRecords) {
+	
 	var i = 0, j = 0;
 
 	while (j < jsonRecords.length) {
@@ -731,9 +766,11 @@ function removeUnknowns(jsonRecords) {
 		}
 		j++;
 	}
+	
 }
 
 function insertBackUnknowns(jsonRecords) {
+	
 	var i = 0, j = 0;
 
 	while (j < jsonRecords.length) {
@@ -775,8 +812,13 @@ function getNormalizedWidth(entity, sum){
 	 var normalizedWidth = 0;
 	 
 	 normalizedWidth = Math.floor(225 * (sum / maxValueOfComparisonParameter));
-	 
-	 return normalizedWidth;
+
+	 /*
+	  * This will make sure that the entites that have very low <parameter> count have at least
+	  * 1 pixel width bar. This happens when the highest count organization has a very high count
+	  * compared to the lowest count organization.
+	  * */
+	 return normalizedWidth === 0 ? 1 : normalizedWidth;
 }
 
 function renderLineGraph(renderedObjects, entity){
@@ -804,12 +846,13 @@ function removeEntityUnChecked(renderedObjects, entity){
 	//remove the entity that is unchecked
     var ii = 0;
     while (ii < renderedObjects.length) {
+    	
         if (renderedObjects[ii].label == entity.label) {
             unStuffZerosFromLineGraph(renderedObjects[ii]);
             renderedObjects.splice(ii, 1);
         } else {
         	ii++;
-            }             
+        }             
     }
     unStuffZerosFromLineGraphs(renderedObjects, year);
     
@@ -824,7 +867,7 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 	
 	var checkbox = $('<input>');
 	checkbox.attr('type','checkbox');
-	checkbox.attr('class','if_clicked_on_school');
+	checkbox.attr('class', entityCheckboxSelectorDOMClass);
 	checkbox.attr('value', label);
 	if(checkedFlag == 1){
 		checkbox.attr('checked');
@@ -853,7 +896,6 @@ function clearRenderedObjects(){
 			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
 			removeLegendRow(val);
 			displayLineGraphs();
-			//console.log(index);
 		}
 	});
 	
@@ -873,15 +915,22 @@ function updateCounter(){
 }
 
 function displayLineGraphs(){
+	
 	//plot all we got
     if (renderedObjects.length == 0) {
+    	
     	init(graphContainer);
+    	
     } else {
+    	
     	removeUnknowns(renderedObjects);
         $.plot(graphContainer, renderedObjects, FlotOptions);
         insertBackUnknowns(renderedObjects);
+
     }
 }
+
+
 
 function removeCheckBoxFromGlobalSet(checkbox){
     //remove checkbox object from the globals
@@ -907,6 +956,7 @@ function prepareTableForDataTablePagination(jsonData){
 	table.attr('border', '0');
 	table.attr('id', 'datatable');
 	table.css('font-size', '0.9em');
+	table.css('width', '100%');
 	
 	var thead = $('<thead>');
 	var tr = $('<tr>');
@@ -915,7 +965,7 @@ function prepareTableForDataTablePagination(jsonData){
 	checkboxTH.html(' ');
 	
 	var entityLabelTH = $('<th>');
-	entityLabelTH.html('Entity Label');
+	entityLabelTH.html('Entity Name');
 	
 	var publicationCountTH = $('<th>');
 	if($("select.comparisonValues option:selected").text() === "by Publications"){
@@ -943,7 +993,7 @@ function prepareTableForDataTablePagination(jsonData){
 		var row = $('<tr>'); 
 		
 		var checkboxTD = $('<td>');
-		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="if_clicked_on_school" value="' + index + '"'+'/>');
+		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' + entityCheckboxSelectorDOMClass + '" value="' + index + '"'+'/>');
 		
 		var labelTD =  $('<td>');
 		labelTD.css("width", "100px");
@@ -970,17 +1020,17 @@ function prepareTableForDataTablePagination(jsonData){
 	var searchBarParentContainerDIVClass = "searchbar";
 	
 	var entityListTable = $('#datatable').dataTable({
-	    "sDom": '<"' + searchBarParentContainerDIVClass + '"f><"filterInfo"i><"paginatedtabs"p><"datatablewrapper"t>',
+	    "sDom": '<"' + searchBarParentContainerDIVClass + '"f><"filterInfo"i><"paginatedtabs"p><"table-separator"><"datatablewrapper"t>',
 	    "aaSorting": [
-	        [2, "desc"]
+	        [2, "desc"], [1,'asc']
 	    ],
 	    "asStripClasses": [],
 	    "iDisplayLength": 10,
 	    "bInfo": true,
 	    "oLanguage": {
-			"sInfo": "_START_ - _END_ of _TOTAL_",
+			"sInfo": "Records _START_ - _END_ of _TOTAL_",
 			"sInfoEmpty": "No matching entities found",
-			"sInfoFiltered": "",
+			"sInfoFiltered": ""
 		},
 	    "sPaginationType": "gmail_style",
 	    "fnDrawCallback": function () {
@@ -1003,8 +1053,10 @@ function prepareTableForDataTablePagination(jsonData){
 		entityListTable.fnFilter("");
 	});
 	
+	/*
 	var filterInfo = $(".filterInfo").detach();
 	$("#infoContainer").append(filterInfo);
+	*/
 	
 }
 
@@ -1033,26 +1085,41 @@ function removeStopWords(val){
 	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
 }
 
-function setEntityLevel(){
-	$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
+function setEntityLevel(entityLevel){
+	//$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase()).css('font-style', 'italic');
-	$('#entityHeader').text(toCamelCase(entityLevel)).css('font-weight', 'bold');
+	$('#entityHeader').text(entityLevel).css('font-weight', 'bold');
 	$('#headerText').css("color", "#2485ae");
 }
 
 function getEntityVisMode(jsonData){
 	
+	var entityLevels = new Array();
+	
 	$.each(jsonData, function(index, val) {
 		if (val.visMode ==  "PERSON"){
-			entityLevel = "People";
+			entityLevels.push("People");
 		} else {
-			entityLevel = "Organizations";
+			entityLevels.push("Organizations");
 		}
-		return;
 	});
 	
-	/* To provide graceful degradation set entity level to a default error message.*/
-	entitylevel = "ENTITY LEVEL UNDEFINED ERROR";
+	var uniqueEntityLevels = $.unique(entityLevels);
+
+	/*
+	 * This case is when organizations & people are mixed because both are directly attached
+	 * to the parent organization. 
+	 * */
+	if (uniqueEntityLevels.length > 1) {
+		entityLevel = "Organizations & People";
+	} else if (uniqueEntityLevels.length === 1) {
+		entityLevel = uniqueEntityLevels[0]; 
+	} else {
+		/* To provide graceful degradation set entity level to a default error message.*/
+		entitylevel = "ENTITY LEVEL UNDEFINED ERROR";
+	}
+	
+	return entityLevel;
 }
 
 function toCamelCase(string){
@@ -1071,7 +1138,7 @@ function getSize(map){
 
 function disableUncheckedEntities(){
 
-	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
+	$.each($("input[type=checkbox]." + entityCheckboxSelectorDOMClass + ":not(:checked)"), function(index, val){
 		$(val).attr('disabled', true);
 		$(val).prev().show();
 	});
@@ -1100,7 +1167,7 @@ function disableUncheckedEntities(){
 
 function enableUncheckedEntities(){
 	
-	$.each($("input[type=checkbox].if_clicked_on_school:not(:checked)"), function(index, val){
+	$.each($("input[type=checkbox]." + entityCheckboxSelectorDOMClass + ":not(:checked)"), function(index, val){
 		$(val).attr('disabled', false);
 		$(val).prev().hide();
 	});
@@ -1112,9 +1179,7 @@ function enableUncheckedEntities(){
 
 function checkIfColorLimitIsReached(){
 	
-//	console.log(getSize(labelToCheckedEntities));
-	
-	if(getSize(labelToCheckedEntities) >= 10){
+	if (getSize(labelToCheckedEntities) >= 10) {
 		disableUncheckedEntities();
 	} else {
 		enableUncheckedEntities();
@@ -1130,9 +1195,8 @@ function setTickSizeOfAxes(){
 		checkedLabelToEntityRecord[index] = labelToEntityRecord[index];
 	});
 	
-    calcMinandMaxYears(checkedLabelToEntityRecord, year);
-	yearRange = (year.max - year.min);
+	var normalizedYearRange = getNormalizedYearRange();
 	
-    setLineWidthAndTickSize(yearRange, FlotOptions);     
+    setLineWidthAndTickSize(normalizedYearRange.normalizedRange, FlotOptions);     
 	setTickSizeOfYAxis(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), FlotOptions);
 }

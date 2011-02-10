@@ -16,19 +16,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
 
 public class UtilityFunctions {
@@ -53,14 +58,11 @@ public class UtilityFunctions {
     		 * 	1. We will be using getPub... multiple times & this will save us duplication of code
     		 * 	2. If we change the logic of validity of a pub year we would not have to make 
     		 * changes all throughout the codebase.
-    		 * 	3. We are asking for a publication year & we should get a proper one or NOT at all.
+    		 * 	3. We are asking for a publicationDate which is captured using the vivo 1.2 ontology 
+    		 * & if not saved then we are being nice & checking if date is saved using core:year if so 
+    		 * we use that else we return UNKOWN_YEAR.
     		 * */
-    		String publicationYear;
-    		if (curr.getPublicationYear() != null) { 
-    			publicationYear = curr.getPublicationYear();
-    		} else {
-    			publicationYear = curr.getParsedPublicationYear();
-    		}
+    		String publicationYear = curr.getParsedPublicationYear();
     		
 			if (yearToPublicationCount.containsKey(publicationYear)) {
     			yearToPublicationCount.put(publicationYear,
@@ -235,12 +237,7 @@ public class UtilityFunctions {
     		 * changes all throughout the codebase.
     		 * 	3. We are asking for a grant year & we should get a proper one or NOT at all.
     		 * */
-    		String grantYear;
-    		if (curr.getGrantStartYear() != null) { 
-    			grantYear = curr.getGrantStartYear();
-    		} else {
-    			grantYear = curr.getParsedGrantStartYear();
-    		}
+    		String grantYear = curr.getParsedGrantStartYear();
     		
 			if (yearToGrantCount.containsKey(grantYear)) {
     			yearToGrantCount.put(grantYear,
@@ -255,6 +252,73 @@ public class UtilityFunctions {
 
 		return yearToGrantCount;
 		
+	}
+	
+	public static DateTime getValidParsedDateTimeObject(String unparsedDateTime) {
+		
+		for (DateTimeFormatter currentFormatter : VOConstants.POSSIBLE_DATE_TIME_FORMATTERS) {
+			
+			try {
+				
+				DateTime dateTime = currentFormatter.parseDateTime(unparsedDateTime);
+				return dateTime;
+				
+			} catch (Exception e2) {
+				/*
+				 * The current date-time formatter did not pass the muster. 
+				 * */
+			}
+		}
+		
+		/*
+		 * This means that none of the date time formatters worked. 
+		 * */
+		return null;
+	}
+	
+	public static String getCSVDownloadURL(String individualURI, String visType, String visMode) {
+		
+		ParamMap CSVDownloadURLParams = null;
+		
+		if (StringUtils.isBlank(visMode)) {
+			
+			CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					 individualURI,
+					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					 visType);
+			
+		} else {
+			
+			CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					 individualURI,
+					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					 visType,
+					 VisualizationFrameworkConstants.VIS_MODE_KEY,
+					 visMode);
+
+		}
+		
+		String csvDownloadLink = UrlBuilder.getUrl(VisualizationFrameworkConstants.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
+								 CSVDownloadURLParams);
+		
+		return csvDownloadLink != null ? csvDownloadLink : "" ;
+
+	}
+	
+	public static String getCollaboratorshipNetworkLink(String individualURI, String visType, String visMode) {
+		
+		ParamMap collaboratorshipNetworkURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+				 individualURI,
+				 VisualizationFrameworkConstants.VIS_TYPE_KEY,
+				 visType,
+				 VisualizationFrameworkConstants.VIS_MODE_KEY,
+				 visMode);
+
+		String collaboratorshipNetworkURL = UrlBuilder.getUrl(
+										VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+										collaboratorshipNetworkURLParams);
+		
+		return collaboratorshipNetworkURL != null ? collaboratorshipNetworkURL : "" ;
 	}
 
 }

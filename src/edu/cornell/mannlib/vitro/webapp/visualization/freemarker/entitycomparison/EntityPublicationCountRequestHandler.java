@@ -12,16 +12,25 @@ import java.util.Set;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.iri.IRI;
+import com.hp.hpl.jena.iri.IRIFactory;
+import com.hp.hpl.jena.iri.Violation;
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.rdf.model.Model;
 
+
+import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
@@ -34,56 +43,117 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 public class EntityPublicationCountRequestHandler implements
 		VisualizationRequestHandler {
 	
+	private Log log = LogFactory.getLog(EntityPublicationCountRequestHandler.class.getName());
+
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-				entityURI, dataSource, log);
+		if (StringUtils.isNotBlank(entityURI)){
 		
-		Entity entity = queryManager.getQueryResult();
- 
-		if(entity.getEntityLabel().equals("no-label")){
-
-			return prepareStandaloneErrorResponse(vitroRequest,entityURI);
-		
-		} else{
-	
-			QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-					entityURI, dataSource, log);
-	
-			Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-					.getQueryResult();
-	
-			return prepareStandaloneResponse(vitroRequest, entity, entityURI,
-					subOrganizationTypesResult);
+			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
+					Dataset, entityURI);
+		} else {
+			
+			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
+			
+			/*
+			 * First checking if the staff has provided highest level organization in deploy.properties
+			 * if so use to temporal graph vis.
+			 */
+			if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
+				
+				/*
+	        	 * To test for the validity of the URI submitted.
+	        	 */
+	        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+	    		IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
+	            
+	    		if (iri.hasViolation(false)) {
+	            	
+	                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
+	                log.error("Highest Level Organization URI provided is invalid " + errorMsg);
+	                
+	            } else {
+	            	
+	    			return getSubjectEntityAndGenerateResponse(vitroRequest,
+							log, Dataset,
+							staffProvidedHighestLevelOrganization);
+	            }
+			}
+			
+			String highestLevelOrgURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log,
+					Dataset);
+			
+			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
+					Dataset, highestLevelOrgURI);
 		}
 	
+	}
+	
+	private ResponseValues getSubjectEntityAndGenerateResponse(
+			VitroRequest vitroRequest, Log log, Dataset Dataset,
+			String subjectEntityURI)
+			throws MalformedQueryParametersException {
+		
+		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, Dataset, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
+		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
+				subjectEntityURI, constructedModel, log);
+
+		
+		Entity entity = queryManager.getQueryResult();
+
+		
+		if (entity.getEntityLabel().equals("no-label")) {
+			
+			return prepareStandaloneErrorResponse(vitroRequest, subjectEntityURI);
+			
+		} else {	
+		
+			return getSubEntityTypesAndRenderStandaloneResponse(
+					vitroRequest, log, Dataset,
+					subjectEntityURI, entity);
+		}
+	}
+
+
+	private ResponseValues getSubEntityTypesAndRenderStandaloneResponse(
+			VitroRequest vitroRequest, Log log, Dataset Dataset,
+			String subjectEntityURI, Entity entity)
+			throws MalformedQueryParametersException {
+		
+		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
+				log, Dataset, subjectEntityURI);
+		
+		return prepareStandaloneResponse(vitroRequest, entity, subjectEntityURI,
+				subOrganizationTypesResult);
 	}
 	
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 				
+		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, Dataset, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
-				entityURI, dataSource, log);	
+				entityURI, constructedModel, log);	
 		
 		Entity entity = queryManager.getQueryResult();
 
-		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				entityURI, dataSource, log);
-		
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes.getQueryResult();
+		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
+				log, Dataset, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
 
@@ -92,7 +162,7 @@ public class EntityPublicationCountRequestHandler implements
 	
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Entity Pub Count does not provide Ajax Response.");
 	}
 
@@ -141,16 +211,20 @@ public class EntityPublicationCountRequestHandler implements
 			Entity entity, String entityURI, Map<String, Set<String>> subOrganizationTypesResult) {
 
         Portal portal = vreq.getPortal();
-        String standaloneTemplate = "entityComparisonStandaloneActivator.ftl";
+        String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
 		
         String jsonContent = "";
 		jsonContent = writePublicationsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);
 
+		String title = "";
 		
+		if (StringUtils.isNotBlank(entity.getEntityLabel())) {
+			title = entity.getEntityLabel() + " - ";
+		}
 
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
-        body.put("title", "Temporal Graph Visualization");
+        body.put("title", title + "Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
         body.put("organizationLabel", entity.getEntityLabel());
         body.put("jsonContent", jsonContent);
@@ -164,13 +238,23 @@ public class EntityPublicationCountRequestHandler implements
 			VitroRequest vitroRequest, String entityURI) {
 		
         Portal portal = vitroRequest.getPortal();
-        String standaloneTemplate = "entityComparisonErrorActivator.ftl";
-        
+        String standaloneTemplate = "entityPublicationComparisonError.ftl";
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("portalBean", portal);
-        body.put("title", "Temporal Graph Visualization");
-        body.put("organizationURI", entityURI);
         
+        IndividualDao iDao = vitroRequest.getWebappDaoFactory().getIndividualDao();
+        Individual ind = iDao.getIndividualByURI(entityURI);
+        
+        String organizationLabel = "Unknown Organization"; 
+        
+        if (ind != null) {
+        	organizationLabel = ind.getName();
+        }
+        
+        body.put("organizationLabel", organizationLabel);
+        body.put("portalBean", portal);
+        body.put("title", organizationLabel + " - Temporal Graph Visualization");
+        body.put("organizationURI", entityURI);
+
         return new TemplateResponseValues(standaloneTemplate, body);
 
 	}
@@ -182,7 +266,10 @@ public class EntityPublicationCountRequestHandler implements
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
 	 */
-	private String writePublicationsOverTimeJSON(VitroRequest vreq, Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String writePublicationsOverTimeJSON(VitroRequest vreq, 
+												 Set<SubEntity> subentities, 
+												 Map<String, Set<String>> 
+												 subOrganizationTypesResult) {
 
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
@@ -198,18 +285,21 @@ public class EntityPublicationCountRequestHandler implements
 					.entrySet()) {
 
 				List<Integer> currentPubYear = new ArrayList<Integer>();
-				if (pubEntry.getKey().equals(
-						VOConstants.DEFAULT_PUBLICATION_YEAR))
+				if (pubEntry.getKey().equals(VOConstants.DEFAULT_PUBLICATION_YEAR)) {
 					currentPubYear.add(-1);
-				else
+				} else {
 					currentPubYear.add(Integer.parseInt(pubEntry.getKey()));
+				}
+					
 				currentPubYear.add(pubEntry.getValue());
 				yearPubCount.add(currentPubYear);
 			}
+			
+			//log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
 
 			entityJson.setYearToActivityCount(yearPubCount);
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
-
+			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
 			boolean isPerson = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
@@ -254,5 +344,5 @@ public class EntityPublicationCountRequestHandler implements
 		return csvFileContent.toString();
 
 	}
-	
+
 }	

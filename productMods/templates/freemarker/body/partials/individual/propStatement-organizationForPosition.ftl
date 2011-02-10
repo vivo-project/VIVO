@@ -16,7 +16,7 @@
             <a href="${profileUrl(statement.person)}">${statement.personName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.position)}">${statement.positionName}</a> (no linked person)
+            <a href="${profileUrl(statement.position)}">missing person in this position</a>
         </#if>
     </#local>
 

@@ -85,11 +85,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Navigate to non-person</td>
 	<td></td>
@@ -100,13 +95,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Country</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
+	<td>Country</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Country</td>
+	<td>link=3</td>
 	<td></td>
 </tr>
 <tr>
@@ -126,17 +126,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>image</td>
+	<td>Photo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Make sure no image exists</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>//img[@title='no image']</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,7 +146,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>//img[@alt='add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,7 +191,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>//img[@alt='add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +251,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=add</td>
+	<td>//img[@alt='add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,7 +301,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -326,12 +321,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Delete photo</td>
+	<td>//img[@alt='Individual photo']</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,7 +361,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,7 +411,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-image']/div/div/div/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -476,27 +466,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete your photo?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>//img[@alt='delete']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Germany</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>image</td>
 	<td></td>
 </tr>
 <tr>
@@ -507,6 +482,11 @@
 <tr>
 	<td>verifyElementNotPresent</td>
 	<td>//img[@title='click to view larger image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>

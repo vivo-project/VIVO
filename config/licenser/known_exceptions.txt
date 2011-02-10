@@ -33,4 +33,6 @@ utilities/load-testing/jmeter-results-detail-report.xsl
 productMods/css/jquery_plugins/*
 productMods/js/jquery_plugins/*
 productMods/js/visualization/entitycomparison/jquery_plugins/*
-themes/wilma/js/jquery_plugins/raphael/*
+
+# PROBLEM: Can't find any info on licensing.
+productMods/js/jquery_plugins/jquery.truncator.js

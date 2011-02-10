@@ -54,7 +54,7 @@ h2 a:hover, h2 a:active{
 h3{
     padding: 8px 0 6px 0;
     margin: 0;
-    font-size: 1.2m;
+    font-size: 1.2em;
     color: #2485ae; 
 }
 h4{
@@ -162,7 +162,7 @@ td {
 }
 
 /* FOOTER------>  */
-footer {
+div#footer {
     clear: both;
     width: 970px;
     height: 88px;
@@ -171,16 +171,16 @@ footer {
     color: #4e5051;
     background-color: #fff;
 }
-footer p.copyright {
+div#footer p.copyright {
     float: left;
-    padding-top: 55px;
+    padding-top: 50px;
     padding-left: 30px;
     width: 500px;
 }
 ul#footer-nav {
     float: right;
     list-style: none;
-    width: 200px;
+    width: 300px;
     height: 20px;
     margin: 0;
     padding: 0;

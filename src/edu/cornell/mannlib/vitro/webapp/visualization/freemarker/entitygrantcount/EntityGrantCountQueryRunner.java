@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
@@ -19,6 +20,7 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
@@ -43,8 +45,9 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String entityURI;
-	private DataSource dataSource;
-	private Log log;
+	private Model dataSource;
+	private Log log = LogFactory.getLog(EntityGrantCountQueryRunner.class.getName());
+	private long before, after;
 
 	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "SELECT "
@@ -53,18 +56,38 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ "		(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
 		+ "		(str(?Person) as ?personLit) "
 		+ "		(str(?PersonLabel) as ?personLabelLit) "
-		+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
 		+ "		(str(?Grant) as ?grantLit) "
 		+ "		(str(?GrantLabel) as ?grantLabelLit) "
-		+ " 	(str(?GrantStartDate) as ?grantStartDateLit) "
-		+ "		(str(?GrantEndDate) as ?grantEndDateLit)  ";
+		+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
+		+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
+		+ " 	(str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
+		+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "	;
 	
-	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE =  " "
-		+ "		?SecondaryPosition rdfs:label ?SecondaryPositionLabel . "
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME =  " "
 		+ "		?Role core:roleIn ?Grant . "
 		+ "		?Grant rdfs:label ?GrantLabel . "
-		+ "		OPTIONAL { ?Grant core:startDate ?GrantStartDate } . "
-		+ "		OPTIONAL { ?Grant core:endDate ?GrantEndDate } .";
+		+ 		"OPTIONAL {"	
+		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
+		+			"?dateTimeIntervalValue core:start ?startDate . "		
+		+			"?startDate core:dateTime ?startDateTimeValue . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValue core:end ?endDate . "	
+		+				"?endDate core:dateTime ?endDateTimeValue . " 			
+		+			"}"
+		+ 		"}"	;
+
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME =  " "
+		+ "		?Role core:roleIn ?Grant . "
+		+ "		?Grant rdfs:label ?GrantLabel . "
+		+ 		"OPTIONAL {"	
+		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
+		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
+		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
+		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+		+			"}"
+		+ 		"}"	;	
 	
 	
 	private static String ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
@@ -74,23 +97,24 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 
 	
 	public EntityGrantCountQueryRunner(String entityURI,
-			DataSource dataSource, Log log) {
+			Model constructedModel, Log log) {
 
 		this.entityURI = entityURI;
-		this.dataSource = dataSource;
-		this.log = log;
+		this.dataSource = constructedModel;
 
 	}	
 	
 	private Entity createJavaValueObjects(ResultSet resultSet) {
-
+		
 		Entity entity = null;
 		Map<String, Grant> grantURIToVO = new HashMap<String, Grant>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
-
+		
+		before = System.currentTimeMillis();
+		
 		while (resultSet.hasNext()) {
-
+		//	log.info("Checking whether EntityGrantCount produced any resultset against the Constructed Model");
 			QuerySolution solution = resultSet.nextSolution();
 
 			if (entity == null) {
@@ -115,14 +139,28 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					grant.setGrantLabel(grantLabelNode.toString());
 				}
 
-				RDFNode grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
-				if(grantStartDateNode != null){
+				RDFNode grantStartDateNode = solution
+						.get(QueryFieldLabels.ROLE_START_DATE);
+				if (grantStartDateNode != null) {
 					grant.setGrantStartDate(grantStartDateNode.toString());
+				} else {
+					grantStartDateNode = solution
+							.get(QueryFieldLabels.GRANT_START_DATE);
+					if (grantStartDateNode != null) {
+						grant.setGrantStartDate(grantStartDateNode.toString());
+					}
 				}
-				
-				RDFNode grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
-				if(grantEndDateNode != null){
+
+				RDFNode grantEndDateNode = solution
+						.get(QueryFieldLabels.ROLE_END_DATE);
+				if (grantEndDateNode != null) {
 					grant.setGrantEndDate(grantEndDateNode.toString());
+				} else {
+					grantEndDateNode = solution
+							.get(QueryFieldLabels.GRANT_END_DATE);
+					if (grantEndDateNode != null) {
+						grant.setGrantEndDate(grantEndDateNode.toString());
+					}
 				}
 
 			}
@@ -145,15 +183,15 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
 				entity.addSubEntity(subEntity);
-				subEntity.addGrants(grant);
+				subEntity.addGrant(grant);
 			}
-			
-			
+
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
-			
-			if(personURLNode != null){
-				SubEntity person ;
-				if(personURLToVO.containsKey(personURLNode.toString())) {
+
+			if (personURLNode != null) {
+				SubEntity person;
+				
+				if (personURLToVO.containsKey(personURLNode.toString())) {
 					person = personURLToVO.get(personURLNode.toString());
 				} else {
 					person = new SubEntity(personURLNode.toString());
@@ -164,32 +202,46 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 				if (personLabelNode != null) {
 					person.setIndividualLabel(personLabelNode.toString());
 				}
+
+				/*
+				 * This makes sure that either,
+				 * 		1. the parent organization is a department-like organization with no organizations 
+				 * beneath it, or 
+				 * 		2. the parent organizations has both sub-organizations and people directly 
+				 * attached to that organizations e.g. president of a university.
+				 * */
+				if (subEntityURLNode == null) {
+
+					entity.addSubEntity(person);
+					
+				}
 				
-//				entity.addSubEntity(person);
-				person.addGrants(grant);				
+				person.addGrant(grant);
 
 			}
-			
-			entity.addGrants(grant);
+
+			entity.addGrant(grant);
 		}
-		
-		if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
-			for(SubEntity person : personURLToVO.values()){
+
+		/*if (subentityURLToVO.size() == 0 && personURLToVO.size() != 0) {
+			for (SubEntity person : personURLToVO.values()) {
 				entity.addSubEntity(person);
 			}
-		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0){
+		} else */if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
 			entity = new Entity(this.entityURI, "no-label");
 		}
-
+		
+		after = System.currentTimeMillis();
+		log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 		return entity;
 	}
 
-	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
+	private ResultSet executeQuery(String queryURI, Model dataSource2) {
 
 		QueryExecution queryExecution = null;
 		Query query = QueryFactory.create(
 				getSparqlQuery(queryURI), SYNTAX);
-		queryExecution = QueryExecutionFactory.create(query, dataSource);
+		queryExecution = QueryExecutionFactory.create(query, dataSource2);
 		return queryExecution.execSelect();
 	}	
 	
@@ -198,38 +250,56 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 		+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
 		+ ">) as ?" + ENTITY_URL + ") "
-		+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
-		+ " rdfs:label ?organizationLabel ."
+		+ "WHERE { " + "<" + queryURI + "> rdfs:label ?organizationLabel ."
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ."
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
+		+ "UNION "
+		+ "{ "
+		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
+		+ " ?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
+		+ " ?Position  core:positionForPerson ?Person ."
+		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ " ?Position  core:positionForPerson ?Person ."
+		+ " ?Person  core:hasCo-PrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
-		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasPrincipalInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"
+		+ "UNION "
+		+ "{ "
+		+ "<" + queryURI + ">  core:organizationForPosition ?Position . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:hasInvestigatorRole ?Role ;   rdfs:label ?PersonLabel . "
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME  
+		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"		
 		+ " } ";
 		
 		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
 		
-		log.debug("\nThe sparql query is :\n" + sparqlQuery);
+	//	log.info("\nThe sparql query is :\n" + sparqlQuery);
 		
 		return sparqlQuery;
 
@@ -256,9 +326,15 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 			throw new MalformedQueryParametersException(
 					"URL parameter is either null or empty.");
 		}
-
+		
+		before = System.currentTimeMillis();
+		
 		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
-
+		
+		after = System.currentTimeMillis();
+		
+		log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		
 		return createJavaValueObjects(resultSet);
 	}	
 }

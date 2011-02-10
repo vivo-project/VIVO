@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -54,7 +54,7 @@ VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 								.getParameter(
@@ -70,7 +70,7 @@ VisualizationRequestHandler {
 
 		QueryRunner<Set<BiboDocument>> queryManager = new PersonPublicationCountQueryRunner(
 															personURI, 
-															dataSource, 
+															Dataset, 
 															log);
 
 		Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
@@ -108,14 +108,14 @@ VisualizationRequestHandler {
 
 	@Override
 	public Map<String, String> generateDataVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
 		QueryRunner<Set<BiboDocument>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI, 
-																dataSource, 
+																Dataset, 
 																log);
 
 		Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
@@ -137,7 +137,7 @@ VisualizationRequestHandler {
 
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 		throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest.getParameter(
@@ -151,7 +151,7 @@ VisualizationRequestHandler {
 
 		QueryRunner<Set<BiboDocument>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI, 
-																dataSource, 
+																Dataset, 
 																log);
 
 		Set<BiboDocument> authorDocuments = queryManager.getQueryResult();

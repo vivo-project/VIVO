@@ -1,0 +1,5 @@
+PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> 
+
+ASK {
+    <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology ?u .
+}

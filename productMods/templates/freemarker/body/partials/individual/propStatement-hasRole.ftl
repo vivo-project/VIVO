@@ -13,10 +13,10 @@
     
     <#local linkedIndividual>
         <#if statement.activity??>
-            <a href="${profileUrl(statement.activity)}">${statement.activityName}</a>
+            <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}">${statement.roleName}</a> (no linked activity)
+            <a href="${profileUrl(statement.role)}">missing activity</a>
         </#if>
     </#local>
 

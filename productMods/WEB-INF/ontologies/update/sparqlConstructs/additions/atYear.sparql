@@ -20,4 +20,17 @@ Construct {
      ?thing core:dateTimeValue _:dtv .
 } where {
      ?thing core:year ?theDate .
+     
+     Optional {
+       ?thing a ?ettype .
+       ?thing a core:EducationalTraining
+     }     
+     
+     Optional {
+       ?thing a ?prtype .
+       ?thing a core:PresenterRole
+     }     
+     
+     FILTER (!bound(?ettype))
+     FILTER (!bound(?prtype)) 
 }

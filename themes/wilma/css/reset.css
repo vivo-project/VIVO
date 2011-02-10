@@ -1,5 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-@charset "UTF-8";
+
 /* CSS Document 
 CSS reste by Eric Meyer:
 The goal of a reset stylesheet is to reduce browser inconsistencies in things like default line heights, margins and font sizes of headings, and so on...  http://meyerweb.com/eric/tools/css/reset/
@@ -97,10 +97,10 @@ table {
 /* New ones added to the default list */
 a {    
     text-decoration: none; 
-    }
+}
 fieldset {    
     border-style: none; 
-    }
+}
 legend {    
     display: none; 
-    }
+}

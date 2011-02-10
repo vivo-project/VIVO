@@ -11,7 +11,9 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -34,19 +36,22 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Co-PI Grant Count does not provide Ajax Response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		
 		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
 		
-		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
+		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
+		Model constructedModel = constructQueryRunner.getConstructedModel();
+		
+		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
 		
 		CoPIData PINodesAndEdges = queryManager.getQueryResult();
 				
@@ -91,7 +96,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		/*
 		 * Support for this has ceased to exist. Standalone mode was created only for demo 
@@ -99,7 +104,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		 * */		
 /*		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
+		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, Dataset, log);
 		
 		CoPIData PINodesAndEdges = queryManager.getQueryResult();
 		
@@ -213,13 +218,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			
 			outputFileName = UtilityFunctions.slugify(piNodesAndEdges
 									.getEgoNode().getNodeName())
-			+ "_coinvestigators-per-year" + ".csv";
+			+ "_co-investigators-per-year" + ".csv";
 			
 			yearToCoPIs = UtilityFunctions.getGrantYearToCoPI(piNodesAndEdges);
 			
 		} else {
 			
-			outputFileName = "no_coinvestigators-per-year" + ".csv";			
+			outputFileName = "no_co-investigators-per-year" + ".csv";			
 		}
 		
         Map<String, String> fileData = new HashMap<String, String>();
@@ -247,12 +252,12 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
-									+ "_coinvestigators" + ".csv";
+									+ "_co-investigators" + ".csv";
 	
 			coPIsToCount = getCoPIsList(coPIData);
 			
 		} else {
-			outputFileName = "no_coinvestigators" + ".csv";
+			outputFileName = "no_co-investigators" + ".csv";
 		}
 		
         Map<String, String> fileData = new HashMap<String, String>();
@@ -312,10 +317,10 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
-									+ "_copi-network.graphml" + ".xml";
+									+ "_co-investigator-network.graphml" + ".xml";
 			
 		} else {
-			outputFileName = "no_copi-network.graphml" + ".xml";			
+			outputFileName = "no_co-investigator-network.graphml" + ".xml";			
 		}
 		
 		CoPIGraphMLWriter coPIGraphMLWriter = 

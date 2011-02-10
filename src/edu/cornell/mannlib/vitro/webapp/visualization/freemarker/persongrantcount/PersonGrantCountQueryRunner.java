@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -40,7 +40,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	private String personURI;
-	private DataSource dataSource;
+	private Dataset Dataset;
 	private Individual principalInvestigator;
 	
 	public Individual getPrincipalInvestigator(){
@@ -50,16 +50,43 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 	private Log log;
 	
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
-						+ "SELECT (str(?PILabel) as ?PILabelLit) "
-						+ "(str(?Grant) as ?grantLit)"
-						+ "(str(?GrantLabel) as ?grantLabelLit)"
-						+ "(str(?GrantStartDate) as ?grantStartDateLit)"
-						+ "(str(?GrantEndDate) as ?grantEndDateLit)" ;
+						+ " SELECT (str(?PILabel) as ?PILabelLit) "
+						+ " (str(?Grant) as ?grantLit)"
+						+ " (str(?GrantLabel) as ?grantLabelLit)"
+						+ " (str(?startDateTimeValue) as ?grantStartDateLit) "
+						+ "	(str(?endDateTimeValue) as ?grantEndDateLit)  "
+						+ " (str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
+						+ "	(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  ";
 	
-	public PersonGrantCountQueryRunner(String personURI, DataSource dataSource, Log log){
+
+
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME = ""
+		+ 		"OPTIONAL {"		
+		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
+		+			"?dateTimeIntervalValue core:start ?startDate . "		
+		+			"?startDate core:dateTime ?startDateTimeValue . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValue core:end ?endDate . "	
+		+				"?endDate core:dateTime ?endDateTimeValue . " 			
+		+			"}"
+		+ 		"} . "	;	
+	
+	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
+		+ 		"OPTIONAL {"	
+		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
+		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
+		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
+		+			"OPTIONAL {"	
+		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
+		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+		+			"}"
+		+ 		"}"	;	
+	
+	
+	public PersonGrantCountQueryRunner(String personURI, Dataset Dataset, Log log){
 		
 		this.personURI = personURI;
-		this.dataSource = dataSource;
+		this.Dataset = Dataset;
 		this.log = log;
 	}
 	
@@ -76,14 +103,24 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 				grant.setIndividualLabel(grantLabelNode.toString());
 			}
 			
-			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
+			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.ROLE_START_DATE);
 			if(grantStartDateNode != null){
 				grant.setGrantStartDate(grantStartDateNode.toString());
+			}else {
+				grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
+				if(grantStartDateNode != null){
+					grant.setGrantStartDate(grantStartDateNode.toString());
+				}
 			}
 			
-			RDFNode grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
+			RDFNode grantEndDateNode = solution.get(QueryFieldLabels.ROLE_END_DATE);
 			if(grantEndDateNode != null){
 				grant.setGrantEndDate(grantEndDateNode.toString());
+			}else {
+				grantEndDateNode = solution.get(QueryFieldLabels.GRANT_END_DATE);
+				if(grantEndDateNode != null){
+					grant.setGrantEndDate(grantEndDateNode.toString());
+				}				
 			}
 			
 			/*
@@ -105,12 +142,12 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 		return PIGrant;
 	}
 	
-	private ResultSet executeQuery(String queryURI, DataSource dataSource){
+	private ResultSet executeQuery(String queryURI, Dataset Dataset){
 		
 		QueryExecution queryExecution = null;
 		
 		Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
-		queryExecution = QueryExecutionFactory.create(query,dataSource);
+		queryExecution = QueryExecutionFactory.create(query,Dataset);
 		
 		return queryExecution.execSelect();
 	}
@@ -135,11 +172,12 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+			"?Role core:roleIn ?Grant . "
 
 							+			"?Grant rdfs:label ?GrantLabel . "
-
-							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-											
-							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "
-							+		"} "
+					
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+							
+							+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+							
+							+ 		"} "
 								
 							+		"UNION "
 									
@@ -150,18 +188,35 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 							+			"?Role core:roleIn ?Grant . "
 
 							+			"?Grant rdfs:label ?GrantLabel . "	
+	
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+							
+							+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+							
+							
+							+ 		"} "
+							
+							+		"UNION "
+							
+							+		"{ "
+							        	
+							+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
 
-							+			"OPTIONAL {	?Grant core:startDate ?GrantStartDate }	. "
-											
-							+			"OPTIONAL {	?Grant core:endDate ?GrantEndDate  } . "	
-									
-									
-							+		"} "	
+							+			"?Role core:roleIn ?Grant . "
 
+							+			"?Grant rdfs:label ?GrantLabel . "	
+							
+							+ 			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_ROLE_DATE_TIME
+							
+							+			SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME
+							
+							
+							+ 		"} "
 
 							+ "} ";
 		
 		log.debug("SPARQL query for person grant count -> \n"+ sparqlQuery);
+		//System.out.println("SPARQL query for person grant count -> \n"+ sparqlQuery);
 		
 		return sparqlQuery;
 	}
@@ -186,7 +241,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 			throw new MalformedQueryParametersException("URL parameter is either null or empty.");
 		}
 		
-		ResultSet resultSet = executeQuery(this.personURI, this.dataSource);
+		ResultSet resultSet = executeQuery(this.personURI, this.Dataset);
 		
 		return createJavaValueObjects(resultSet);
 	}

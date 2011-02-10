@@ -20,4 +20,7 @@
 	vitroDisplay:excludeClass core:Position ; 
 	vitroDisplay:excludeClass core:ResearchActivity ;
 	vitroDisplay:excludeClass core:EducationalTraining ;	
-	vitroDisplay:excludeClass bibo:DocumentStatus .	
+	vitroDisplay:excludeClass bibo:DocumentStatus ;
+	vitroDisplay:excludeClass core:DateTimeValue ;
+	vitroDisplay:excludeClass core:DateTimeInterval .
+	

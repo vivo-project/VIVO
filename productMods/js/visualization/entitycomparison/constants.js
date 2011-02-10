@@ -10,6 +10,7 @@ var	LIGHT_RED = "#FB8072";
 var	DARK_RED = "#520000";
 var	SKY_BLUE = "#80B1D3";
 var	DARK_BLUE = "#80B1D3";
+var	NAVY_BLUE = "#003366";
 var	LIGHT_BLUE = "#3399FF";
 var	ORANGE = "#FDB462";
 var DARK_ORANGE = "#FF9900";
@@ -21,63 +22,83 @@ var	LIGHT_GREY = "#D9D9D9";
 var	PURPLE = "#BC80BD";
 var	DARK_PURPLE = "#6600CC";
 var	PINK_PURPLE = "#CC00CC";
+var	HOT_PINK = "#FF00B4";
+var MEHENDI_GREEN = "#7A7900";
 
-var colorConstantQueue = [ DARK_BLUE, DARK_TURQUOISE, 
-                           LIGHT_BLUE, DARK_GREEN,
-                           VIBRANT_GREEN, DARK_PURPLE, 
-                           PINK_PURPLE, DARK_ORANGE,
-                           DARK_RED, RED ];
+var colorConstantQueue = [ LIGHT_BLUE, DARK_ORANGE, VIBRANT_GREEN, 
+                           NAVY_BLUE, RED, PINK_PURPLE, 
+                           DARK_TURQUOISE, MEHENDI_GREEN, HOT_PINK, 
+                           DARK_RED ];
 
-var freeColors = colorConstantQueue.slice();
+var freeColors;
 
-var year = {
-		min: 1998,
-		max: 2018,
-		globalMin: 1995,
-		globalMax: 2025
-};
+var globalDateObject;
 
-var colors = {};
-var prevColor = {};
-var colorToAssign, colorToRemove;
-var renderedObjects = [];
-var labelToEntityRecord = {};
-var setOfLabels = [];
-var labelToCheckedEntities = {};
-var stopWordsToCount = {};
+var year;
+
+var colors, prevColor, colorToAssign, 
+	colorToRemove, renderedObjects, labelToEntityRecord,
+	setOfLabels, labelToCheckedEntities, stopWordsToCount;
 
 var graphContainer;
 var tableDiv;
 var entityLevel;
 
 //options for Flot
-var FlotOptions = {
-		legend : {
-			show : false
-		},
-		lines : {
-			show : true
-		},
-		points : {
-			show : false
-		},
-		xaxis : {
-			tickDecimals : 0,
-			tickSize : 10
-		},
-		series : {
-			lines : {
-				lineWidth : 7
-			}
-		},
-		yaxis : {
-			tickSize : 1,
-			tickDecimals : 0,
-			min : 0
-		},
-		grid : {
-			borderColor : "#D9D9D9"
-		}
-};
+var FlotOptions;
 
-FlotOptions.colors = colorConstantQueue;
+function initConstants() {
+	
+	freeColors = colorConstantQueue.slice();
+	
+	globalDateObject = new Date();
+	
+	year = {
+			min: globalDateObject.getFullYear() - 9,
+			max: globalDateObject.getFullYear(),
+			globalMin: globalDateObject.getFullYear() - 9,
+			globalMax: globalDateObject.getFullYear()
+	};
+	
+	colors = {};
+	prevColor = {};
+	colorToAssign, colorToRemove;
+	renderedObjects = [];
+	labelToEntityRecord = {};
+	setOfLabels = [];
+	labelToCheckedEntities = {};
+	stopWordsToCount = {};
+	
+	//options for Flot
+	FlotOptions = {
+			legend : {
+				show : false
+			},
+			lines : {
+				show : true
+			},
+			points : {
+				show : false
+			},
+			xaxis : {
+				tickDecimals : 0,
+				tickSize : 10
+			},
+			series : {
+				lines : {
+					lineWidth : 7
+				}
+			},
+			yaxis : {
+				tickSize : 1,
+				tickDecimals : 0,
+				min : 0
+			},
+			grid : {
+				borderColor : "#D9D9D9"
+			}
+	};
+
+	FlotOptions.colors = colorConstantQueue;
+	
+}

@@ -19,10 +19,12 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -37,6 +39,29 @@
     
     request.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
     request.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
+
+/*
+ There are 4 modes that this form can be in: 
+  1.  Add, there is a subject and a predicate but no position and nothing else. 
+        
+  2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
+     the other end of the object's core:personInOrganization stmt. 
+  
+  3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
+     other end of the object's core:personInOrganization stmt.  This should be similar to an add but the form should be expanded.
+     
+  4. Really bad node. multiple core:personInOrganization statements.   
+*/
+
+ EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#positionInOrganization");
+
+ if( mode == EditMode.ADD ) {
+    %> <c:set var="editMode" value="add"/><%
+ } else if(mode == EditMode.EDIT){
+     %> <c:set var="editMode" value="edit"/><%
+ } else if(mode == EditMode.REPAIR){
+     %> <c:set var="editMode" value="repair"/><%
+ }
 %>
 
 <c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
@@ -127,11 +152,15 @@
     }
 </v:jsonset>
 
-<v:jsonset var="orgTypeQuery" >      
+<%-- Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
+type is returned and we don't get a match to the select element options. --%>
+<v:jsonset var="orgTypeQuery" > 
+    PREFIX rdfs: <${rdfs}>   
     SELECT ?existingOrgType WHERE {
         ?position <${positionInOrgPred}> ?existingOrg .
         ?existingOrg a ?existingOrgType .
-    }
+        ?existingOrgType rdfs:subClassOf <${orgClass}> .
+    } 
 </v:jsonset>
 
 <v:jsonset var="positionTitleQuery" >  
@@ -210,24 +239,19 @@
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
-<%-- Configure add vs. edit --%>
-<%
-
-    String objectUri = (String) request.getAttribute("objectUri");
-    if (objectUri != null) { // editing existing entry
-%>
-        <c:set var="editMode" value="edit" />
-        <c:set var="titleVerb" value="Edit" />
-        <c:set var="submitButtonText" value="Edit Position" />
-        <c:set var="disabledVal" value="disabled" />
-<% 
-    } else { // adding new entry
-%>
-        <c:set var="editMode" value="add" />
+<%-- Configure add vs. edit --%> 
+<c:choose>
+    <c:when test='${editMode == "add"}'>
         <c:set var="titleVerb" value="Create" />
         <c:set var="submitButtonText" value="Position" />
         <c:set var="disabledVal" value="" />
-<%  } %> 
+    </c:when>
+    <c:otherwise>
+        <c:set var="titleVerb" value="Edit" />
+        <c:set var="submitButtonText" value="Edit Position" />
+        <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>    
+    </c:otherwise>
+</c:choose>
 
 <c:set var="editjson" scope="request">
   {
@@ -356,7 +380,7 @@
 </c:set>
 
 <%
-    log.debug(request.getAttribute("editjson"));
+    //log.debug(request.getAttribute("editjson"));
 
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     if (editConfig == null) {
@@ -375,6 +399,7 @@
             
     Model model = (Model) application.getAttribute("jenaOntModel");
     
+    String objectUri = (String) request.getAttribute("objectUri");
     if (objectUri != null) { // editing existing
         editConfig.prepareForObjPropUpdate(model);
     } else { // adding new
@@ -397,6 +422,11 @@
 %>
 
 <jsp:include page="${preForm}" />
+
+<% if( mode == EditMode.ERROR ){ %>
+ <div>This form is unable to handle the editing of this position because it is associated with 
+      multiple Position individuals.</div>      
+<% }else{ %>
 
 <h2>${titleVerb}&nbsp;position entry for <%= subjectName %></h2>
 
@@ -441,8 +471,10 @@
 var customFormData  = {
     acUrl: '${acUrl}',
     editMode: '${editMode}',
-    submitButtonTextType: 'compound' 
+    submitButtonTextType: 'compound',
+    defaultTypeName: 'organization' // used in repair mode, to generate button text and org name field label
 };
 </script>
+<% } %>
     
 <jsp:include page="${postForm}"/>

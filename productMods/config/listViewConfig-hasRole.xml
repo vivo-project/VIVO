@@ -4,28 +4,120 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query>    
+    <query-base>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?role (afn:localname(?role) AS ?roleName)
-                        ?roleLabel ?activity ?activityName ?dateTimeStart ?dateTimeEnd WHERE {
-            GRAPH ?g1 { ?subject ?property ?role } 
-            OPTIONAL { GRAPH ?g2 { ?role core:roleIn ?activity }
-                       GRAPH ?g3 { ?activity rdfs:label ?activityName }
+        SELECT DISTINCT ?role
+                        ?roleLabel 
+                        ?activity ?activityName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            ?subject ?property ?role 
+            OPTIONAL {  ?role core:roleIn ?activity .
+                        ?activity rdfs:label ?activityName 
             }
-            OPTIONAL { GRAPH ?g4 { ?role rdfs:label ?roleLabel } }
-            OPTIONAL { GRAPH ?g5 { ?role core:dateTimeInterval ?dateTimeInterval }
-                       OPTIONAL { GRAPH ?g6 { ?dateTimeInterval core:start ?dateTimeStartValue .
-                                              ?dateTimeStartValue core:dateTime ?dateTimeStart }
+            OPTIONAL { ?role rdfs:label ?roleLabel }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
+                       OPTIONAL {  ?dateTimeInterval core:start ?dateTimeStartValue . 
+                                   ?dateTimeStartValue core:dateTime ?dateTimeStart 
                        }
-                       OPTIONAL { GRAPH ?g7 { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                              ?dateTimeEndValue core:dateTime ?dateTimeEnd }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
             }
         } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
-    </query>
+    </query-base>
     
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass
+                        ?role 
+                        ?roleLabel 
+                        ?activity ?activityName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            ?subject ?property ?role  
+            OPTIONAL { ?role core:roleIn ?activity . 
+                       ?activity rdfs:label ?activityName 
+            }
+            OPTIONAL { ?role a ?subclass .
+                       ?subclass rdfs:subClassOf core:Role 
+            }   
+            OPTIONAL { ?role rdfs:label ?roleLabel }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
+                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
+                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                       }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+                       }
+            }
+        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
+    </query-collated>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:Role 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:Role 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role ?roleProperty ?roleValue . 
+            ?activity rdfs:label ?activityName 
+        } WHERE {
+            {
+               ?subject ?property ?role 
+            } UNION {
+               ?subject ?property ?role .
+               ?role ?roleProperty ?roleValue 
+            } UNION {
+               ?subject ?property ?role .
+               ?role core:roleIn ?activity . 
+               ?activity rdfs:label ?activityName 
+            }
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>
+
     <template>propStatement-hasRole.ftl</template>
 </list-view-config>

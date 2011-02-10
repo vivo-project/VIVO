@@ -24,6 +24,7 @@ public class QueryFieldLabels {
 	public static final String DOCUMENT_BLURB = "documentBlurbLit";
 	public static final String DOCUMENT_DESCRIPTION = "documentDescriptionLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR = "publicationYearLit";
+	public static final String DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY = "publicationYearOldLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR_MONTH = "publicationYearMonthLit";
 	public static final String DOCUMENT_PUBLICATION_DATE = "publicationDateLit";
 	
@@ -114,7 +115,16 @@ public class QueryFieldLabels {
 	public static final String CO_PI_LABEL = "coPILabelLit";
 	public static final String GRANT_URL = "grantLit";
 	public static final String GRANT_LABEL = "grantLabelLit";
-	public static final String GRANT_START_DATE = "grantStartDateLit";
-	public static final String GRANT_END_DATE = "grantEndDateLit";
+	
+	/*
+	 * Role Start/End Date is chosen as the default Start Date for all the queries,
+	 * in whose absence Grant Start/End Date is chosen.
+	 */
+	
+	public static final String ROLE_START_DATE = "grantStartDateLit";
+	public static final String ROLE_END_DATE = "grantEndDateLit";
+	public static final String GRANT_START_DATE = "grantStartDateForGrantLit";
+	public static final String GRANT_END_DATE = "grantEndDateForGrantLit";
+	
 	
 }

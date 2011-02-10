@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 
-import com.hp.hpl.jena.query.DataSource;
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -22,6 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.Visu
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipVisCodeGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountConstructQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount.PersonGrantCountQueryRunner;
@@ -58,13 +60,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			DataSource dataSource) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Person Level does not provide Ajax Response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Person Level does not provide Data Response.");
 	}
@@ -72,7 +74,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, DataSource dataSource)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
         String egoURI = vitroRequest.getParameter(
@@ -82,11 +84,14 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         
         
-        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
+        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)){ 
         	
-        	QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, dataSource, log);
-            
-            QueryRunner<Set<Grant>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, dataSource, log);
+    		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
+    		Model constructedModel = constructQueryRunner.getConstructedModel();
+    		
+    		QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+           
+            QueryRunner<Set<Grant>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, Dataset, log);
             
             CoPIData coPIData = coPIQueryManager.getQueryResult();
             
@@ -141,9 +146,9 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         	
         } else {
         	
-        	QueryRunner<CoAuthorshipData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, dataSource, log);
+        	QueryRunner<CoAuthorshipData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, Dataset, log);
         
-        	QueryRunner<Set<BiboDocument>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, dataSource, log);
+        	QueryRunner<Set<BiboDocument>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, Dataset, log);
         	
         	CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
         	

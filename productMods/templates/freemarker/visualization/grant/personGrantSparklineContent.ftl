@@ -17,15 +17,21 @@
         <script type="text/javascript">
     
             function drawGrantCountVisualization(providedSparklineImgTD) {
+            
+                var unknownYearGrantCounts = ${sparklineVO.unknownYearGrants};
+                var onlyUnknownYearGrants = false;
     
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
                 data.addColumn('number', 'Grants');
                 data.addRows(${sparklineVO.yearToEntityCountDataTable?size});
         
+                var knownYearGrantCounts = 0;
+                
                 <#list sparklineVO.yearToEntityCountDataTable as yearToGrantCountDataElement>                        
                     data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 0, '${yearToGrantCountDataElement.year}');
                     data.setValue(${yearToGrantCountDataElement.yearToEntityCounter}, 1, ${yearToGrantCountDataElement.currentEntitiesCount});
+                    knownYearGrantCounts += ${yearToGrantCountDataElement.currentEntitiesCount};
                 </#list>
         
                 <#-- Create a view of the data containing only the column pertaining to grant count. -->
@@ -45,17 +51,82 @@
 
                 <#else>
          
-                </#if>       
+                </#if>    
+                
+                 var visualizationOptions = {
+                    width: 150,
+                    height: 60,
+                    color: '3399CC',
+                    chartType: 'ls',
+                    chartLabel: 'r'
+                }
+                
+                /*
+                This means that all the publications have unknown years & we do not need to display
+                the sparkline.
+                */            
+                if (unknownYearGrantCounts > 0 && knownYearGrantCounts < 1) {
+                    
+                    onlyUnknownYearGrants = true;
+                    
+                } else {
+
+                /* 
+                Test if we want to go for the approach when serving visualizations from a secure site..
+                If "https:" is not found in location.protocol then we do everything normally.
+                */
+                if (location.protocol.indexOf("https") == -1) {
+                    /*
+                    This condition will make sure that the location protocol (http, https, etc) does not have 
+                    for word https in it.
+                    */
                 
                 <#-- Create the vis object and draw it in the div pertaining to sparkline. -->
                 var sparkline = new google.visualization.ImageSparkLine(providedSparklineImgTD[0]);
                 sparkline.draw(sparklineDataView, {
-                        width: 150,
-                        height: 60,
+                        width: visualizationOptions.width,
+                        height: visualizationOptions.height,
                         showAxisLines: false,
                         showValueLabels: false,
                         labelPosition: 'none'
-                });      
+                });  
+                
+                
+                } else {
+                
+                    <#-- Prepare data for generating google chart URL. -->
+                    
+                    <#-- If we need to serve data for https:, we have to create an array of values to be plotted. -->
+                    var chartValuesForEncoding = new Array();
+                    
+                    $.each(sparklineDataView.getViewRows(), function(index, value) {
+                        chartValuesForEncoding.push(data.getValue(value, 1));
+                    });
+                    
+                    var chartImageURL = constructVisualizationURLForSparkline(
+                                extendedEncodeDataForChartURL(chartValuesForEncoding, 
+                                                              sparklineDataView.getColumnRange(0).max), 
+                                visualizationOptions);
+
+                    var imageContainer = $(providedSparklineImgTD[0]);
+                    
+                    imageContainer.image(chartImageURL, 
+                            function(){
+                                imageContainer.empty().append(this); 
+                                $(this).addClass("google-visualization-sparkline-image");
+                            },
+                            function(){
+                                // For performing any action on failure to
+                                // find the image.
+                                imageContainer.empty();
+                            }
+                    );
+                
+                }
+                
+                }   
+                
+                var totalGrantCount = knownYearGrantCounts + unknownYearGrantCounts; 
                 
                 <#if sparklineVO.shortVisMode>
          
@@ -67,9 +138,26 @@
                         renderedShortSparks += data.getValue(value, 1);
                     });
                     
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedShortSparks) + parseInt(${sparklineVO.unknownYearGrants})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> grant(s) <br/></span>");
+                    /*
+                    In case that there are only unknown grants we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedShortSparks only hold counts
+                    of grants which have any date associated with it.
+                    */
+                    var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedShortSparks;
+                    
+                    if (totalGrants === 1) {
+                        var grantDisplay = "grant";
+                    } else {
+                        var grantDisplay = "grants";
+                    }
+                    
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
                     var sparksText = '  within the last 10 years';
+                    
+                    if (totalGrants !== totalGrantCount) {
+                        sparksText += ' (' + totalGrantCount + ' total)';
+                    }
             
                  <#else>
                  
@@ -77,16 +165,39 @@
                      * Sparks that will be rendered will always be the one's which has 
                      * any year associated with it. Hence.
                      * */
-                    var renderedSparks = ${sparklineVO.renderedSparks};      
-                    $('#${sparklineContainerID} td.sparkline_number').text(parseInt(renderedSparks) + parseInt(${sparklineVO.unknownYearGrants})).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> grant(s) <br/></span>");
+                    var renderedSparks = ${sparklineVO.renderedSparks};  
+                    
+                    /*
+                    In case that there are only unknown grants we want the text to mention these counts,
+                    which would not be mentioned in the other case because the renderedSparks only hold counts
+                    of grants which have any date associated with it.
+                    */
+                    var totalGrants = onlyUnknownYearGrants ? unknownYearGrantCounts : renderedSparks;
+                    
+                    if (totalGrants === 1) {
+                        var grantDisplay = "grant";
+                    } else {
+                        var grantDisplay = "grants";
+                    }
+                        
+                    $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedGrantYear?c}</span> ' 
-                                        + '<br /> <a href="${sparklineVO.downloadDataLink}" >(.CSV File)</a> ';
-
+                                        + ' to ${sparklineVO.latestRenderedGrantYear?c}</span>';
+                                        
+                    if (totalGrants !== totalGrantCount) {
+                        sparksText += ' (' + totalGrantCount + ' total)';
+                    }                                        
+                               
+                    if (totalGrantCount) {
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" >(.CSV File)</a> ';                    
+                    }                                                
+                                         
                  </#if>
          
-                 $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
+                 if (!onlyUnknownYearGrants) {
+                    $('#${sparklineContainerID} td.sparkline_text').html(sparksText);
+                 }
          
             }
                  
@@ -129,16 +240,16 @@
                     sparklineImgTD.attr('class', 'sparkline_style');
             
                     row.append(sparklineImgTD);
-            		var row2 = $('<tr>');
+                    var row2 = $('<tr>');
                     var sparklineNumberTD = $('<td>');
                     sparklineNumberTD.attr('class', 'sparkline_number');
-					sparklineNumberTD.css('text-align', 'left');
+                    sparklineNumberTD.css('text-align', 'left');
                     row2.append(sparklineNumberTD);
                     var row3 = $('<tr>');
                     
                     var sparklineTextTD = $('<td>');
                     sparklineTextTD.attr('class', 'sparkline_text');
-					sparklineTextTD.css('text-align', 'left');
+                    sparklineTextTD.css('text-align', 'left');
                     row3.append(sparklineTextTD);
                     table.append(row);
                     table.append(row2);
@@ -160,18 +271,18 @@
         <!-- For Full Sparkline - Print the Table of Grant Counts per Year -->
         <#if displayTable?? && displayTable>
         
-	        <p>	
-				<#assign tableID = "grant_sparkline_data_table" />
-				<#assign tableCaption = "Grants per year " />
-				<#assign tableActivityColumnName = "Grants" />
-				<#assign tableContent = sparklineVO.yearToActivityCount />
-				<#assign fileDownloadLink = sparklineVO.downloadDataLink />
-				
-				<#include "yearToActivityCountTable.ftl">
-	
-	            Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
-	            <br />
-	        </p>
+            <p> 
+                <#assign tableID = "grant_sparkline_data_table" />
+                <#assign tableCaption = "Grants per year " />
+                <#assign tableActivityColumnName = "Grants" />
+                <#assign tableContent = sparklineVO.yearToActivityCount />
+                <#assign fileDownloadLink = sparklineVO.downloadDataLink />
+                
+                <#include "yearToActivityCountTable.ftl">
+    
+                Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                <br />
+            </p>
         
         
         </#if>

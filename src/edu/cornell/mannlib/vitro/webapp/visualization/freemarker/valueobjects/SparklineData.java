@@ -7,14 +7,6 @@ import java.util.Map;
 
 public class SparklineData {
 	
-	/*
-	 * For now sparklineNumPublicationsText & sparklinePublicationRangeText is left 
-	 * as empty but later on we would want to leverage the granularity that this 
-	 * provides.
-	 * */
-	private String sparklineNumPublicationsText = "";
-	private String sparklinePublicationRangeText = "";
-	
 	private Integer earliestYearConsidered;
 	private Integer earliestRenderedPublicationYear;
 	private Integer latestRenderedPublicationYear;
@@ -25,41 +17,30 @@ public class SparklineData {
 	private Integer unknownYearPublications;
 	private Integer unknownYearGrants;
 	
+	private Integer totalCollaborationshipCount;
 	
 	private Map<String, Integer> yearToActivityCount;
-	
-	private String table = "";
 	
 	private String downloadDataLink = "";
 	private String fullTimelineNetworkLink = "";
 	
 	private String visContainerDivID = "pub_count_vis_container";
-	private String sparklineContent;
-	private String sparklineContext;
 	
 	private boolean isShortVisMode = true;
 	
 	private List<YearToEntityCountDataElement> yearToEntityCountDataTable;
 	
 	private int numOfYearsToBeRendered;
-	
-	public String getSparklineNumPublicationsText() {
-		return sparklineNumPublicationsText;
+
+	public void setTotalCollaborationshipCount(
+			Integer totalCollaborationshipCount) {
+		this.totalCollaborationshipCount = totalCollaborationshipCount;
 	}
-	
-	public void setSparklineNumPublicationsText(String sparklineNumPublicationsText) {
-		this.sparklineNumPublicationsText = sparklineNumPublicationsText;
+
+	public Integer getTotalCollaborationshipCount() {
+		return totalCollaborationshipCount;
 	}
-	
-	public String getSparklinePublicationRangeText() {
-		return sparklinePublicationRangeText;
-	}
-	
-	public void setSparklinePublicationRangeText(
-			String sparklinePublicationRangeText) {
-		this.sparklinePublicationRangeText = sparklinePublicationRangeText;
-	}
-	
+
 	public Integer getEarliestRenderedGrantYear() {
 		return earliestRenderedGrantYear;
 	}
@@ -151,14 +132,6 @@ public class SparklineData {
 		return renderedSparks;
 	}
 
-	public String getTable() {
-		return table;
-	}
-	
-	public void setTable(String table) {
-		this.table = table;
-	}
-	
 	public String getDownloadDataLink() {
 		return downloadDataLink;
 	}
@@ -183,14 +156,6 @@ public class SparklineData {
 		return visContainerDivID;
 	}
 
-	public String getSparklineContent() {
-		return sparklineContent;
-	}
-	
-	public void setSparklineContent(String shortSparklineContent) {
-		this.sparklineContent = shortSparklineContent;
-	}
-
 	public void setShortVisMode(boolean isShortVisMode) {
 		this.isShortVisMode = isShortVisMode;
 	}
@@ -199,11 +164,4 @@ public class SparklineData {
 		return isShortVisMode;
 	}
 
-	public String getSparklineContext() {
-		return sparklineContext;
-	}
-	
-	public void setSparklineContext(String shortSparklineContext) {
-		this.sparklineContext = shortSparklineContext;
-	}
 }

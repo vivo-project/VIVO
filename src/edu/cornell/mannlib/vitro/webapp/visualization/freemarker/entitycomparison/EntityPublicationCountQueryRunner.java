@@ -7,11 +7,11 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -20,6 +20,8 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Model;
+
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
@@ -43,28 +45,25 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String entityURI;
-	private DataSource dataSource;
-	private Log log;
+	private Model dataSource;
+	private Log log = LogFactory.getLog(EntityPublicationCountQueryRunner.class.getName());
+	private long before, after;
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = ""
 			+ "		(str(?Person) as ?personLit) "
 			+ "		(str(?PersonLabel) as ?personLabelLit) "
-			+ "		(str(?SecondaryPositionLabel) as ?SecondaryPositionLabelLit)"
 			+ "		(str(?Document) as ?documentLit) "
 			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
-			+ "		(str(?publicationYear) as ?publicationYearLit) "
-			+ "		(str(?publicationYearMonth) as ?publicationYearMonthLit) "
-			+ "		(str(?publicationDate) as ?publicationDateLit) "
-			+ "		(str(?StartYear) as ?StartYearLit)";
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
+			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") ";
 
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
 			+ "?Document rdf:type bibo:Document ;"
 			+ " rdfs:label ?DocumentLabel ."
-			+ "OPTIONAL {  ?Document core:year ?publicationYear } ."
-			+ "OPTIONAL {  ?Document core:yearMonth ?publicationYearMonth } ."
-			+ "OPTIONAL {  ?Document core:date ?publicationDate } ."
-			+ "OPTIONAL {  ?SecondaryPosition core:startYear ?StartYear } .";
+			+ "OPTIONAL {  ?Document core:dateTimeValue ?dateTimeValue . " 
+			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
+			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." ;
 
 	private static String ENTITY_LABEL;
 	private static String ENTITY_URL;
@@ -72,11 +71,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private static String SUBENTITY_URL;
 
 	public EntityPublicationCountQueryRunner(String entityURI,
-			DataSource dataSource, Log log) {
+			Model dataSource, Log log) {
 
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
-		this.log = log;
+//		this.log = log;
 
 	}
 
@@ -87,6 +86,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
 
+		before = System.currentTimeMillis();
 
 		while (resultSet.hasNext()) {
 
@@ -114,26 +114,17 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					biboDocument.setDocumentLabel(documentLabelNode.toString());
 				}
 
-				RDFNode publicationYearNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR);
-				if (publicationYearNode != null) {
-					biboDocument.setPublicationYear(publicationYearNode
-							.toString());
-				}
-
-				RDFNode publicationYearMonthNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_MONTH);
-				if (publicationYearMonthNode != null) {
-					biboDocument
-							.setPublicationYearMonth(publicationYearMonthNode
-									.toString());
-				}
-
-				RDFNode publicationDateNode = solution
-						.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+				RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {
-					biboDocument.setPublicationDate(publicationDateNode
-							.toString());
+					biboDocument.setPublicationDate(publicationDateNode.toString());
+				}
+
+				/*
+				 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
+				 * */
+				RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+				if (publicationYearUsing_1_1_PropertyNode != null) {
+					biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
 				}
 
 			}
@@ -155,15 +146,18 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				if (subEntityLabelNode != null) {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
+				
 				entity.addSubEntity(subEntity);
-				subEntity.addPublications(biboDocument);
+				
+				subEntity.addPublication(biboDocument);
 			}
 			
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
 			
-			if(personURLNode != null){
-				SubEntity person ;
-				if(personURLToVO.containsKey(personURLNode.toString())) {
+			if (personURLNode != null) {
+				SubEntity person;
+				
+				if (personURLToVO.containsKey(personURLNode.toString())) {
 					person = personURLToVO.get(personURLNode.toString());
 				} else {
 					person = new SubEntity(personURLNode.toString());
@@ -175,27 +169,50 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					person.setIndividualLabel(personLabelNode.toString());
 				}
 				
-//				entity.addSubEntity(person);
-				person.addPublications(biboDocument);				
+				/*
+				 * This makes sure that either,
+				 * 		1. the parent organization is a department-like organization with no organizations 
+				 * beneath it, or 
+				 * 		2. the parent organizations has both sub-organizations and people directly 
+				 * attached to that organizations e.g. president of a university.
+				 * */
+				if (subEntityURLNode == null) {
+
+					entity.addSubEntity(person);
+					
+				}
+				
+				person.addPublication(biboDocument);				
 
 			}			
 
-			entity.addPublications(biboDocument);
+			entity.addPublication(biboDocument);
 		}
 		
-		if(subentityURLToVO.size() == 0 && personURLToVO.size() != 0){
-			for(SubEntity person : personURLToVO.values()){
-				entity.addSubEntity(person);
-			}
-		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0){
+		/*
+		if (subentityURLToVO.size() != 0) {
+			
+			entity.addSubEntitities(subentityURLToVO.values());
+			
+		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() != 0) {
+			
+			entity.addSubEntitities(personURLToVO.values());
+			
+		} else*/ if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
+			
 			entity = new Entity(this.entityURI, "no-label");
+			
 		}
 		
 		//TODO: return non-null value
+	//	log.info("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
+		after = System.currentTimeMillis();
+		log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+
 		return entity;
 	}
 		
-	private ResultSet executeQuery(String queryURI, DataSource dataSource) {
+	private ResultSet executeQuery(String queryURI, Model dataSource) {
 
 		QueryExecution queryExecution = null;
 		Query query = QueryFactory.create(
@@ -227,23 +244,20 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		+ "			(str(?subOrganizationLabel) as ?subOrganizationLabelLit) "
 		+ SPARQL_QUERY_COMMON_SELECT_CLAUSE + "		(str(<" + queryURI
 		+ ">) as ?" + ENTITY_URL + ") "
-		+ "WHERE { " + "<" + queryURI + "> rdf:type foaf:Organization ;"
-		+ " rdfs:label ?organizationLabel ."
+		+ "WHERE { " + "<" + queryURI + "> rdfs:label ?organizationLabel ."
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
 		+ "?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel . "
 		+ " ?Resource core:linkedInformationResource ?Document .  "
-		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "UNION "
 		+ "{ "
 		+ "<" + queryURI + "> core:organizationForPosition ?Position ."
-		+ " ?Position rdf:type core:Position ; core:positionForPerson ?Person ."
-		+ "	?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel ; core:personInPosition ?SecondaryPosition . "
+		+ " ?Position core:positionForPerson ?Person ."
+		+ "	?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel . "
 		+ " ?Resource core:linkedInformationResource ?Document ."
-		+ " ?SecondaryPosition rdfs:label ?SecondaryPositionLabel ."
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "}";
 		
@@ -266,7 +280,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			if (iri.hasViolation(false)) {
 				String errorMsg = ((Violation) iri.violations(false).next())
 						.getShortMessage();
-				log.error("Entity Pub Count Query Query " + errorMsg);
+				log.error("Entity Pub Count Query " + errorMsg);
 				throw new MalformedQueryParametersException(
 						"URI provided for an entity is malformed.");
 			}
@@ -276,8 +290,14 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					"URL parameter is either null or empty.");
 		}
 
+		before = System.currentTimeMillis();
+		
 		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
-
+		
+		after = System.currentTimeMillis();
+		
+		log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		
 		return createJavaValueObjects(resultSet);
 	}
 

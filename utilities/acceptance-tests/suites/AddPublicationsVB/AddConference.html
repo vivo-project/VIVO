@@ -90,11 +90,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Navigate to Index</td>
 	<td></td>
@@ -102,11 +97,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -156,7 +146,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='authorInAuthorship']/a</td>
+	<td>//h3[@id='authorInAuthorship']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,17 +191,37 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Nintendo Case Studies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>conference paper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Nintendo Case Studies</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify author info is there</td>
+	<td class="comment">Go back to conference</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Furter, Frank</td>
+	<td>clickAndWait</td>
+	<td>link=Nintendo Case Studies</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo Case Studies</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,7 +231,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='presentedAt']/a</td>
+	<td>//h3[@id='presentedAt']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +266,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='date']/a</td>
+	<td>//h3[@id='dateTimeValue']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,17 +276,17 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>yeardateEdited</td>
+	<td>dateTimeField.year</td>
 	<td>2010</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>monthdateEdited</td>
-	<td>label=April</td>
+	<td>dateTimeField.month</td>
+	<td>label=4</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>daydateEdited</td>
+	<td>dateTimeField.day</td>
 	<td>label=1</td>
 </tr>
 <tr>
@@ -291,7 +301,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasSubjectArea']/a</td>
+	<td>//h3[@id='hasSubjectArea']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -311,7 +321,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/a</td>
+	<td>//h3[@id='freetextKeyword']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -336,7 +346,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/a</td>
+	<td>//h3[@id='freetextKeyword']/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -367,11 +377,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -446,7 +451,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>publications</td>
+	<td>research</td>
 	<td></td>
 </tr>
 <tr>
@@ -461,7 +466,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify Book shows up for Frank Furter</td>
+	<td class="comment">Verify Conference Paper shows up for Frank Furter</td>
 	<td></td>
 </tr>
 <tr>
@@ -486,27 +491,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=View all VIVO publications and corresponding co-author network</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>View all VIVO publications and corresponding co-author network.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Nintendo Case Studies</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Conference Paper</td>
+	<td>conference paper</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo Case Studies | Conference Paper</td>
+	<td>Nintendo Case Studies</td>
 	<td></td>
 </tr>
 <tr>

@@ -250,6 +250,8 @@
   }
 }
 </c:set>
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 <%
 
 	EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
@@ -285,10 +287,10 @@
 	String submitLabel = ""; 	
 	if (objectUri != null) {
 		request.setAttribute("title","Edit position history entry for "+ subject.getName());
-		submitLabel = "Save changes";
+		submitLabel = "Save Changes";
 	} else {
 		request.setAttribute("title","Create position history entry for " + subject.getName());
-		submitLabel = "Create position history entry";
+		submitLabel = "Create Position History";
 	}
 %>
 
@@ -296,10 +298,10 @@
 
 <h2>${title}</h2>
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-	<v:input type="text" label="title" id="title" size="30"/>
-	<v:input type="select" label="person" id="personUri"  />
-	<v:input id="startField"  label="Start Year <span class='hint'>(YYYY)</span>" />
-    <v:input id="endField" label="End Year <span class='hint'>(YYYY)</span>" />    
+	<v:input type="text" label="Position Title ${requiredHint}" id="title" size="30"/>
+	<v:input type="select" label="Person" id="personUri"  />
+	<v:input id="startField"  label="Start Year ${yearHint}" />
+    <v:input id="endField" label="End Year ${yearHint}" />    
     <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="true"/></p>
 </form>
 

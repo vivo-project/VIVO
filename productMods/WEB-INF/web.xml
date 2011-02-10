@@ -171,7 +171,7 @@
   </listener>
   
   <listener>
-    <listener-class>edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache</listener-class>
+    <listener-class>edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup</listener-class>
    </listener>
    
   <!--
@@ -346,6 +346,15 @@
   <servlet-mapping>
      <servlet-name>SimpleReasonerRecomputeController</servlet-name>
      <url-pattern>/RecomputeInferences</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+     <servlet-name>SDBSetupController</servlet-name>
+     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SDBSetupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>SDBSetupController</servlet-name>
+     <url-pattern>/sdbsetup</url-pattern>
   </servlet-mapping>
 
    <servlet>
@@ -1227,7 +1236,7 @@
     <url-pattern>/unrecognizedUser</url-pattern>
   </servlet-mapping>
 
-<!-- 
+ <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
@@ -1237,7 +1246,7 @@
     <servlet-name>FakeExternalAuthController</servlet-name>
     <url-pattern>/admin/fakeExternalAuth</url-pattern>
   </servlet-mapping>
- -->
+-->
  
   <servlet>
     <servlet-name>browsecontroller</servlet-name>

@@ -26,6 +26,8 @@ This is intended to create a set of statements like:
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -46,17 +48,58 @@ This is intended to create a set of statements like:
     String predicateUri = (String)request.getAttribute("predicateUri");
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
-		%> <c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
+		%> 
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
     }else{
     	%> <c:set var="inversePredicate"></c:set> <%
     }
+    
+    /* 
+    There are 4 modes that this form can be in: 
+     1.  Add, there is a subject and a predicate but no role and nothing else. 
+           
+     2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
+        the other end of the object's core:roleIn stmt. 
+     
+     3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
+        other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
+        
+     4. Really bad node. multiple core:roleIn statements.
+   */
+
+    EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#roleIn");
+
+    if( mode == EditMode.ADD ) {
+       %> <c:set var="editMode" value="add"/><%
+    } else if(mode == EditMode.EDIT){
+        %> <c:set var="editMode" value="edit"/><%
+    } else if(mode == EditMode.REPAIR){
+        %> <c:set var="editMode" value="repair"/><%
+    }
+   %>
+   
 %>
 
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
+<c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
 <c:set var="rdf" value="<%= VitroVocabulary.RDF %>" />
 <c:set var="label" value="${rdfs}label" />
+
+<c:set var="startYearPred" value="${vivoCore}startYear" />
+<c:set var="endYearPred" value="${vivoCore}endYear" />
+<c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
+<c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
+<c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
+
+<c:set var="roleToInterval" value="${vivoCore}dateTimeInterval"/>
+<c:set var="intervalType" value="${vivoCore}DateTimeInterval"/>
+<c:set var="intervalToStart" value="${vivoCore}start"/>
+<c:set var="intervalToEnd" value="${vivoCore}end"/>
+
 
 <%  // set role type based on predicate
 String subjectName = ((Individual) request.getAttribute("subject")).getName();
@@ -73,51 +116,64 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
  	<c:set var="submitButtonLabel">Investigator</c:set>
  	<c:set var="formHeading">investigator entry for <%= subjectName %></c:set>
  <% } %>
- 
+
+<%-- Configure add vs. edit --%> 
 <c:choose>
-    <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">
-        <c:set var="formHeading" value="Edit ${formHeading}" />
-        <c:set var="editMode" value="edit" />
-        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
-        <c:set var="labelRequired" value="" />
-        <c:set var="disabledVal" value="disabled" />
-    </c:when>
-    <c:otherwise>
+    <c:when test='${editMode == "add"}'>
         <c:set var="formHeading" value="Create ${formHeading}" />
-        <c:set var="editMode" value="add" />
         <c:set var="labelRequired" value="\"nonempty\"," />
         <c:set var="disabledVal" value="" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="formHeading" value="Edit ${formHeading}" />
+        <c:set var="submitButtonLabel" value="Edit ${submitButtonLabel}" />
+        <c:choose>
+            <c:when test='{editMode == "edit"}'>
+                <c:set var="labelRequired" value="" />
+                <c:set var="disabledVal" value="disabled" />
+            </c:when>
+            <c:otherwise> <%-- editMode == "repair" --%>
+                <c:set var="labelRequired" value="\"nonempty\"," />
+                <c:set var="disabledVal" value="" />
+            </c:otherwise>            
+        </c:choose>   
     </c:otherwise>
 </c:choose>
-
-<c:set var="startYearUri" value="${vivoCore}startYear" />
-<v:jsonset var="startYearAssertion" >
-      ?role <${startYearUri}> ?startYear .
-</v:jsonset>
-
-<c:set var="endYearUri" value="${vivoCore}endYear" /> 
-<v:jsonset var="endYearAssertion" >
-      ?role <${endYearUri}> ?endYear .
-</v:jsonset>
 
 <v:jsonset var="n3ForGrantRole">
     @prefix core: <${vivoCore}> .
     @prefix rdf: <${rdf}> .
        
-	?person ?rolePredicate ?role.	
-	?role   rdf:type ?roleType .		  
-    ?role   core:roleIn ?grant .
-    ?grant  core:relatedRole ?role .
+	?person ?rolePredicate ?role.
+		
+	?role  a ?roleType ;		  
+           core:roleIn ?grant .
+           
+    ?grant a core:Grant ;
+           core:relatedRole ?role .
 </v:jsonset>
+
 
 <v:jsonset var="n3ForInverse"> 
 	?role   ?inverseRolePredicate ?person.
 </v:jsonset>
 
-<v:jsonset var="n3ForGrantType">
-    @prefix core: <${vivoCore}> .
-    @prefix rdf: <${rdf}> .    	
-    ?grant rdf:type core:Grant .              
+<v:jsonset var="n3ForStart">
+    ?role      <${roleToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToStart}> ?startNode .    
+    ?startNode  <${type}> <${dateTimeValueType}> .
+    ?startNode  <${dateTimeValue}> ?startField.value .
+    ?startNode  <${dateTimePrecision}> ?startField.precision .
+</v:jsonset>
+
+<v:jsonset var="n3ForEnd">
+    ?role      <${roleToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToEnd}> ?endNode .
+    ?endNode  <${type}> <${dateTimeValueType}> .
+    ?endNode  <${dateTimeValue}> ?endField.value .
+    ?endNode  <${dateTimePrecision}> ?endField.precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForGrantLabel">
@@ -133,22 +189,72 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
         ?existingGrant rdfs:label ?existingGrantLabel . }
 </v:jsonset>
 
-<v:jsonset var="startYearQuery">
-  PREFIX core: <${vivoCore}>  
-  SELECT ?existingStartYear WHERE { ?role  core:startYear ?existingStartYear .}       
-</v:jsonset>
-
-<v:jsonset var="endYearQuery">
-PREFIX core: <${vivoCore}>  
-  SELECT ?existingStartYear WHERE { ?role  core:endYear ?existingStartYear .}
-</v:jsonset>
-
 <v:jsonset var="grantQuery">
   PREFIX core: <${vivoCore}>  
   SELECT ?existingGrant WHERE { ?role  core:roleIn ?existingGrant . }
 </v:jsonset>
 
 <v:jsonset var="grantTypeUriJson">${vivoOnt}#Grant</v:jsonset>
+
+<v:jsonset var="existingIntervalNodeQuery" >  
+    SELECT ?existingIntervalNode WHERE {
+          ?role <${roleToInterval}> ?existingIntervalNode .
+          ?existingIntervalNode <${type}> <${intervalType}> . }
+</v:jsonset>
+ 
+<v:jsonset var="existingStartNodeQuery" >  
+    SELECT ?existingStartNode WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?existingStartNode . 
+      ?existingStartNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingStartDateQuery" >  
+    SELECT ?existingDateStart WHERE {
+     ?role <${roleToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToStart}> ?startNode .
+     ?startNode <${type}> <${dateTimeValueType}> .
+     ?startNode <${dateTimeValue}> ?existingDateStart . }
+</v:jsonset>
+
+<v:jsonset var="existingStartPrecisionQuery" >  
+    SELECT ?existingStartPrecision WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?startNode .
+      ?startNode <${type}> <${dateTimeValueType}> .          
+      ?startNode <${dateTimePrecision}> ?existingStartPrecision . }
+</v:jsonset>
+
+<v:jsonset var="existingEndNodeQuery" >  
+    SELECT ?existingEndNode WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?existingEndNode . 
+      ?existingEndNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingEndDateQuery" >  
+    SELECT ?existingEndDate WHERE {
+     ?role <${roleToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToEnd}> ?endNode .
+     ?endNode <${type}> <${dateTimeValueType}> .
+     ?endNode <${dateTimeValue}> ?existingEndDate . }
+</v:jsonset>
+
+<v:jsonset var="existingEndPrecisionQuery" >  
+    SELECT ?existingEndPrecision WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?endNode .
+      ?endNode <${type}> <${dateTimeValueType}> .          
+      ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
+</v:jsonset>
+
+
 <c:set var="editjson" scope="request">
 {
     "formUrl" : "${formUrl}",
@@ -159,23 +265,36 @@ PREFIX core: <${vivoCore}>
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForGrantRole}", "${startYearAssertion}" ],
+    "n3required"    : [ "${n3ForGrantRole}" ],
     
-    "n3optional"    : [ "${n3ForGrantType}", "${n3ForGrantLabel}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3optional"    : [ "${n3ForGrantLabel}", "${n3ForInverse}", "${n3ForStart}", "${n3ForEnd}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
-                        "grant" : "${defaultNamespace}" },
-
+                        "grant" : "${defaultNamespace}",
+                        "intervalNode" : "${defaultNamespace}",
+                        "startNode" : "${defaultNamespace}",
+                        "endNode" : "${defaultNamespace}"  },
     "urisInScope"    : { "roleType" : "${roleType}",
     					 "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "grant" ],
-    "literalsOnForm" : [ "grantLabel", "startYear", "endYear", "existingGrantLabel" ],
+    "literalsOnForm" : [ "grantLabel", "existingGrantLabel" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : {  },
     "sparqlForUris" : {   },
-    "sparqlForExistingLiterals" : { "grantLabel":"${grantLabelQuery}" , "startYear":"${startYearQuery}", "endYear":"${endYearQuery}" },
-    "sparqlForExistingUris" : { "grant":"${grantQuery}" },
+    "sparqlForExistingLiterals" : { 
+        "grantLabel":"${grantLabelQuery}" , 
+        "startField.value"   : "${existingStartDateQuery}",
+        "endField.value"     : "${existingEndDateQuery}"  
+    },
+    "sparqlForExistingUris" : { 
+        "grant":"${grantQuery}",
+        "intervalNode"      : "${existingIntervalNodeQuery}",
+        "startNode"         : "${existingStartNodeQuery}",
+        "endNode"           : "${existingEndNodeQuery}",
+        "startField.precision": "${existingStartPrecisionQuery}",
+        "endField.precision"  : "${existingEndPrecisionQuery}" 
+    },
     "fields" : {  
       "grant" : {
          "newResource"      : "false",
@@ -186,7 +305,7 @@ PREFIX core: <${vivoCore}>
          "objectClassUri"   : "${grantTypeUriJson}",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
-         "assertions"       : [  ]
+         "assertions"       : [  "${n3ForGrantRole}" ]
       },               
       "grantLabel" : {
          "newResource"      : "false",
@@ -197,7 +316,7 @@ PREFIX core: <${vivoCore}>
          "objectClassUri"   : "",
          "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",         
-         "assertions"       : ["${n3ForGrantLabel}"]
+         "assertions"       : ["${n3ForGrantLabel}", "${n3ForGrantRole}" ]
       },
       "existingGrantLabel" : { /* Needed iff we return from an invalid submission */
          "newResource"      : "false",
@@ -210,41 +329,52 @@ PREFIX core: <${vivoCore}>
          "rangeLang"        : "",         
          "assertions"       : [ ]
       },
-      "startYear" : {
+      "startField" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : [ "${n3ForStart}" ]
       },
-      "endYear" : {
+      "endField" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
+         "assertions"       : ["${n3ForEnd}" ]
       }
   }
 }
 </c:set>
    
 <%
+
     EditConfiguration editConfig = EditConfiguration.getConfigFromSession(session,request);
     
     if (editConfig == null) {
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
-    }   
-        
-    editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") );
+        //setup date time edit elements
+        Field startField = editConfig.getField("startField");
+        startField.setEditElement(
+                new DateTimeWithPrecision(startField, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.NONE.uri()));        
+        Field endField = editConfig.getField("endField");
+        endField.setEditElement(
+                new DateTimeWithPrecision(endField, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.NONE.uri()));
+        editConfig.addValidator(new DateTimeIntervalValidation("startField","endField") );
+    }               
         
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -279,6 +409,11 @@ PREFIX core: <${vivoCore}>
 
 <jsp:include page="${preForm}" />
 
+<% if( mode == EditMode.ERROR ){ %>
+ <div>This form is unable to handle the editing of this position because it is associated with 
+      multiple Position individuals.</div>      
+<% }else{ %>
+
 <h2>${formHeading}</h2>
 
 <%@ include file="unsupportedBrowserMessage.jsp" %>
@@ -288,7 +423,7 @@ PREFIX core: <${vivoCore}>
         
     <p><v:input type="text" id="relatedIndLabel" name="grantLabel" label="Grant Name ${requiredHint}" cssClass="acSelector" size="50" disabled="${disabledVal}" /></p>
 
-    <%-- Store this value in a hidden field, because the displayed field is disabled and don't submit. This ensures that when
+    <%-- Store this value in a hidden field, because the displayed field is disabled and doesn't submit. This ensures that when
     returning from a validation error, we retain the value. --%>
     <c:if test="${editMode == 'edit'}">
        <v:input type="hidden" id="grantLabel" />
@@ -301,8 +436,8 @@ PREFIX core: <${vivoCore}>
     </div>
 
     <h4>Years of Participation in Grant</h4>
-    <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
-    <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/> 
+    <v:input id="startField" label="Start Year ${yearHint}" />   
+    <v:input id="endField" label="End Year ${yearHint}" />        
                    
     <p class="submit"><v:input type="submit" id="submit" value="${submitButtonLabel}" cancel="true" /></p>
     
@@ -329,5 +464,7 @@ var customFormData  = {
     typeName: 'Grant'         
 };
 </script>
+
+<% } %>
 
 <jsp:include page="${postForm}"/>

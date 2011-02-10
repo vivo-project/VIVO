@@ -17,6 +17,7 @@
 <#assign googleVisualizationAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coAuthorPersonLevelJavaScript = '${urls.base}/js/visualization/coauthorship/coauthorship-personlevel.js'>
 <#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
+<#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
 
@@ -39,6 +40,7 @@ var requiredRevision = 0;
 
 var swfLink = "${swfLink}";
 var egoURI = "${egoURI}";
+var unEncodedEgoURI = "${egoURIParam}";
 var egoCoAuthorshipDataFeederURL = "${egoCoAuthorshipDataFeederURL}";
 var egoCoAuthorsListDataFileURL = "${egoCoAuthorsListDataFileURL}";
 var contextPath = "${urls.base}";
@@ -50,6 +52,8 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 
 <script type="text/javascript" src="${coAuthorPersonLevelJavaScript}"></script>
 <script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
+
+${scripts.add(visualizationHelperJavaScript)}
 
 
 <#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />
@@ -80,6 +84,24 @@ $(document).ready(function(){
                 setProfileName('no_coauthorships_person', $('#ego_label').text());
             }
     </#if>
+    
+    
+        $.ajax({
+                url: "${urls.base}/visualizationAjax",
+                data: ({vis: "utilities", vis_mode: "SHOW_GRANTS_LINK", uri: '${egoURIParam}'}),
+                dataType: "json",
+                success:function(data){
+                
+                    /*
+                    Collaboratorship links do not show up by default. They should show up only if there any data to
+                    show on that page. 
+                    */
+                    if (data.numOfGrants !== undefined && data.numOfGrants > 0) {
+                           $(".toggle_visualization").show();                    
+                    }
+                
+                }
+            });
                     
 });
 </script>
@@ -98,10 +120,10 @@ $(document).ready(function(){
     </div>
     
     <div class = "toggle_visualization">
-        <div id="coinvestigator_link_container">
+        <div id="coinvestigator_link_container" class="collaboratorship-link-container">
             <div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}"><img src="${coInvestigatorIcon}" /></a></div>
             <div class="collaboratorship-link">
-	    		<h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3>
+                <h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3>
             </div>
         </div>
     </div>

@@ -35,6 +35,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>200000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Edit all available fields that aren't tested elsewhere</td>
 	<td></td>
@@ -85,11 +90,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Find Jane Faculty via Index</td>
 	<td></td>
@@ -97,11 +97,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -136,7 +131,42 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='dprop-vitro-links']/ul/li/span/span/a[1]</td>
+	<td>//ul[@id='individual-hasResearchArea']/li/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Primatia Africana</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//ul[@id='links-primary']/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -147,7 +177,7 @@
 <tr>
 	<td>type</td>
 	<td>url</td>
-	<td>http://library,cornell.edu</td>
+	<td>http://library.cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -166,7 +196,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='overview']/div/div/span/span/a[1]</td>
+	<td>//section[@id='individual-info']/div/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,13 +221,18 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='hasCollaborator']/ul/li/span/span/a[1]</td>
+	<td>//div[@id='content']/section[2]/article[4]/ul/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>objectVar</td>
+	<td>label=Faculty, Jane</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -211,7 +246,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='preferredTitle']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[2]/article[1]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +271,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='researchOverview']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[4]/article[1]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -261,7 +296,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='geographicFocus']/ul/li/span/span/a[1]</td>
+	<td>//div[@id='content']/section[4]/article[6]/ul/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -273,31 +308,6 @@
 	<td>select</td>
 	<td>typeOfNew</td>
 	<td>label=Country (core)</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Mozambique</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='hasResearchArea']/ul/li/span/span/a[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -312,7 +322,7 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Apes</td>
+	<td>Mozambique</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -326,7 +336,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='advisorIn']/ul/li/span/span/a[1]</td>
+	<td>//div[@id='content']/section[5]/article[3]/ul/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -361,42 +371,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='teaches']/ul/li/span/span/a[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Intermediate Primates 201</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='teachingOverview']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[5]/article[1]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,7 +396,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='outreachOverview']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[6]/article[1]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -446,7 +421,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='adviseeIn']/ul/li/span/span/a[1]</td>
+	<td>//div[@id='content']/section[7]/article[3]/ul/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -481,7 +456,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='awardOrHonor']/ul/li/span/span/a[1]</td>
+	<td>//div[@id='content']/section[7]/article[2]/ul/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -516,32 +491,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='firstName']/div/div/span/span/a[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>Janette</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='middleName']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[8]/article[2]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -566,32 +516,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='lastName']/div/div/span/span/a[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>Facultee</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='phoneNumber']/div/div/span/span/a[1]</td>
+	<td>//ul[@id='individual-phone']/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -616,7 +541,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='faxNumber']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[8]/article[6]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,7 +566,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='email']/div/div/span/span/a[1]</td>
+	<td>//img[@alt='edit']</td>
 	<td></td>
 </tr>
 <tr>
@@ -666,7 +591,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='mailingAddress']/ul/li/span/span/a[1]</td>
+	<td>//div[@id='content']/section[8]/article[7]/ul/li/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -701,7 +626,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='prefixName']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[8]/article[4]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -726,7 +651,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='suffixName']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[8]/article[5]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -751,7 +676,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='orcidId']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[9]/article[1]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -776,7 +701,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='scopusId']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[9]/article[2]/ul/li/a[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -801,7 +726,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='researcherId']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[9]/article[3]/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -826,7 +751,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='freetextKeyword']/div/div/span/span/a[1]</td>
+	<td>//div[@id='content']/section[10]/article/ul/li/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -856,12 +781,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=CUL Homepage</td>
+	<td>link=Primatia Africana</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>(primary link)</td>
+	<td>verifyElementPresent</td>
+	<td>link=CUL Homepage</td>
 	<td></td>
 </tr>
 <tr>
@@ -896,32 +821,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Subject Area</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Primate Foundation of Africa</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Advising Relationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Intermediate Primates 201</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Semester Class</td>
 	<td></td>
 </tr>
 <tr>
@@ -940,23 +840,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Advising Relationship</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Ape Trainer of the Decade</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Award or Honor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Janette</td>
+	<td>Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -966,7 +856,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Facultee</td>
+	<td>Faculty</td>
 	<td></td>
 </tr>
 <tr>
@@ -987,11 +877,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Jungle 1234, Africa, 1234-56789</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Address</td>
 	<td></td>
 </tr>
 <tr>

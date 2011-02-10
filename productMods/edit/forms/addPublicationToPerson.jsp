@@ -63,7 +63,7 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     Individual subject = (Individual) request.getAttribute("subject");
 	Individual obj = (Individual) request.getAttribute("object");
 	
-	//check to see if this is an edit of existing, if yes redirect to pub 
+	// Check to see if this is an edit of existing, if yes redirect to pub 
 	if( obj != null ){     	
     	List<ObjectPropertyStatement> stmts =  obj.getObjectPropertyStatements( nodeToPubProp );
     	if( stmts != null && stmts.size() > 0 ){    		
@@ -77,6 +77,20 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
             	<%	
     		} 
     	}
+	}
+	
+	/* This form is not prepared to deal with editing an existing relationship, so redirect
+	 * to authorship page if no publication was found. This is not ideal, because you can't add
+	 * a linked information resource from that page, but you can at least continue to the back end.
+	 * May want to modify form in a future version to support repair mode.
+	 */
+	if (obj != null) {
+	    String objectUri = obj.getURI();
+        %>  
+        <jsp:forward page="/individual">
+            <jsp:param value="<%= objectUri %>" name="uri"/>
+        </jsp:forward>  
+        <%  	    
 	}
 %>
 
