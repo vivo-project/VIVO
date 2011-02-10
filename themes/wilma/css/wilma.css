@@ -1404,3 +1404,16 @@ color: #2485AE;
 #terms h3 {
     color: #2485ae;
 }
+
+/* -------------------------------------------------------------->  */
+/* SPECIAL STYLE FOR THE entityComparisonErrorCommonBody.ftl FILE   */
+/* WE SHOULD MOVE THIS TO A VISUALIZATION CSS FOR 1.3. CURRENTLY,   */
+/* THE VIS CSS FILES DO NOT GET LOADED WITH THIS FTL FILE.  tlw72   */
+/* -------------------------------------------------------------->  */
+#noPubsOrGrants-header {
+    font-size: 1.375em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
