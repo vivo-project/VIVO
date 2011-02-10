@@ -33,7 +33,7 @@
                 display and navigation, plus improvements to address scalability. The
                 release also features two new visualization options: temporal graphing
                 for organizations, and personal visualizations extended to cover grants
-                as well as publications. The VIVO Harvester library has also been
+                as well as publications. The VIVO Harvester library has also been 
                 significantly improved and expanded in scope for its 1.0 release 
                 through the VIVO SourceForge project at <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
@@ -77,16 +77,16 @@
             <h4>Ontology</h4>
             <p>
                 VIVO 1.2 includes a new ontology module representing research 
-                resources including biological specimens, human studies, instruments, 
-                organisms, protocols, reagents, and research opportunities. This module  
-                is aligned with the top-level ontology classes and properties from the 
+                resources including biological specimens, human studies, instruments,  
+                organisms, protocols, reagents, and research opportunities. This module 
+                is aligned with the top-level ontology classes and properties from the  
                 NIH-funded <a href="https://www.eagle-i.org/home/">eagle-i Project</a>.
             </p>
             <h3>Associated VIVO releases</h3>
             <h4>VIVO Harvester</h4>
             <p>
                 The Harvester development team is releasing version 1.0 of the VIVO
-                Harvester library, an extensible data ingest and updating framework
+                Harvester library, an extensible data ingest and updating framework 
                 with sample configurations for loading PubMed publication, grants, and 
                 human resources data. The Harvester is available at <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
@@ -567,13 +567,19 @@
                             The temporal graph visualization can require extensive machine resources.
                             This can have a particularly noticable impact on memory usage if
                             <ul>
-                            <li> VIVO is configured to use Jena SDB, </li>
-                            <li> The organization tree is deep, </li>
-                            <li> The number of grants and publications is large. </li>
+                                <li>
+                                    VIVO is configured to use Jena SDB, 
+                                </li>
+                                <li>
+                                    The organization tree is deep, 
+                                </li>
+                                <li>
+                                    The number of grants and publications is large. 
+                                </li>
                             </ul>
-                            The VIVO developers are working to make this visualization more efficient.
+                            The VIVO developers are working to make this visualization more efficient. 
                             In the meantime, VIVO release 1.2 guards against this impact by disabling 
-                            temporal graph visualization unless the "visualization.temporal" flag is 
+                            temporal graph visualization unless the "visualization.temporal" flag is  
                             set to "enabled". 
                         </td>
                     </tr>
@@ -782,12 +788,13 @@
             <h3 id="pellet">XII. Configure Pellet Reasoner </h3>
             <p>
                 This optional configuration step is only applicable to VIVO installations 
-				running in RDB mode (See section <a href="triple_store">Choose Triple Store</a> for details). 
-				VIVO uses the Pellet engine to perform reasoning, which runs in the 
-                background at startup and also when the knowledge base is edited. VIVO  
-                continues serving pages while the reasoner continues working; when the 
-                reasoner finishes, the new inferences appear. Inferred statements are  
-                cached in a database graph so that they are available immediately when 
+                running in RDB mode (See section <a href="triple_store">Choose Triple Store</a>
+                for details). 
+                VIVO uses the Pellet engine to perform reasoning, which runs in the  
+                background at startup and also when the knowledge base is edited. VIVO 
+                continues serving pages while the reasoner continues working; when the  
+                reasoner finishes, the new inferences appear. Inferred statements are 
+                cached in a database graph so that they are available immediately when  
                 VIVO is restarted. 
             </p>
             <p>
@@ -863,17 +870,21 @@
                 <li>
                     <h5>The name of the HTTP header that will hold the external user's
                         network ID.</h5>
-                    When a user completes the authentication process, the Apache server
-                    will put the user's network ID into one of the headers of the HTTP
-                    request. The instructions from your institution should tell you which
-                    header is used for this purpose.
+                    <p>
+                        When a user completes the authentication process, the Apache server
+                        will put the user's network ID into one of the headers of the HTTP
+                        request. The instructions from your institution should tell you which
+                        header is used for this purpose.
+                    </p>
                     <p>
                         You need to tell VIVO the name of that HTTP header. Insert a 
-                        line like this in the deploy.properties file: 
+                        line like this in the deploy.properties file:
                     </p>
                     <pre>externalAuth.netIdHeaderName = [the header name]</pre>
-                    <p>For example:</p>
-					<pre>externalAuth.netIdHeaderName = remote_userID</pre>
+                    <p>
+                        For example:
+                    </p>
+                    <pre>externalAuth.netIdHeaderName = remote_userID</pre>
                 </li>
                 <li>
                     <h5>The text for the Login button.</h5>
@@ -885,13 +896,17 @@
                         externalAuth.buttonText = [the text for your login button] For example:
                     </p>
                     <pre>externalAuth.buttonText = Log in using BearCat Shibboleth</pre>
-                    The VIVO login form will display a button labelled "Log in using 
-                    BearCat Shibboleth". 
+                    <p>
+                        The VIVO login form will display a button labelled "Log in using 
+                        BearCat Shibboleth". 
+                    </p>
                 </li>
                 <li>
-                    <h5>Associating a User with a profile page</h5>
-                    If VIVO has an account for the user, the user will be given the
-                    privileges assigned to that account.
+                    <h5>Associating a User with a profile page.</h5>
+                    <p>
+                        If VIVO has an account for the user, the user will be given the
+                        privileges assigned to that account.
+                    </p>
                     <p>
                         In addition, VIVO will try to associate the user with a profile 
                         page, so the user may edit his own profile data. VIVO will search the  
@@ -900,7 +915,10 @@
                         Insert a line like this in the deploy.properties file: 
                     </p>
                     <pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
-                    For example:<pre>selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId</pre>
+                    <p>
+                        For example:
+                    </p>
+                    <pre>selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId</pre>
                 </li>
             </ul>
             <h3 id="installation_check">XIV. Was the installation successful? </h3>
@@ -958,7 +976,7 @@
                     Enter the name "test individual" under the field "Individual 
                     Name," scroll to the bottom, and click "Create New Record." You will be  
                     taken to the "Individual Control Panel." Make note of the value of the 
-                    field "URI" it will be used in the next step. 
+                    field "URI" - it will be used in the next step. 
                 </li>
                 <li>
                     Open a new web browser or browser tab to the page <a href="http://marbles.sourceforge.net/">http://marbles.sourceforge.net/</a>. 
