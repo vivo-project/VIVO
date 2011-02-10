@@ -54,6 +54,9 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	
 	private String generateConstructQueryForSubOrganizationTypes(String queryURI){
 		
+	    //bdc34: this query was lacking the personLabel, personType, and personTypeLabel in the WHERE clause
+	    //it seems like they are needed since they are referenced in the CONSTRUCT clause.	    
+	    
 		String sparqlQuery = 			 
 		
 			"CONSTRUCT { "
@@ -71,9 +74,13 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 			+	"<"+queryURI+ "> core:hasSubOrganization ?subOrganization . "
 			+	"?subOrganization rdfs:label ?subOrganizationLabel . "
 			+	"?subOrganization rdf:type ?subOrganizationType . "
-			+ 	"?subOrganization core:organizationForPosition ?Position . "
-			+   "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
-			+	"?Position core:positionForPerson ?Person	"
+		    +   "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
+			+ 	"?subOrganization core:organizationForPosition ?Position . "	
+			+	"?Position core:positionForPerson ?Person .	"
+			+   "?Person rdfs:label ?PersonLabel ."
+			+   "?Person rdf:type ?PersonType . "
+			+   "?PersonType rdfs:label ?PersonTypeLabel  "         
+
 			+ "}" ;
 					
 		
@@ -108,10 +115,12 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	private Model executeQuery(Set<String> constructQueries, Dataset Dataset) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
-
+        long before = 0;
+        
         for (String queryString : constructQueries) {
             
-        //	log.info("CONSTRUCT query string : " + queryString);
+            before = System.currentTimeMillis();            
+           log.debug("CONSTRUCT query string : " + queryString);
             
         	Query query = null;
         	
@@ -131,6 +140,7 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
                 qe.close();
             }
         	
+            log.debug("Time to run " + (before - System.currentTimeMillis()) );
         }	
 
 		return constructedModel;
