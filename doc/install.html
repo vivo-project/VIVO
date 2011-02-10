@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>VIVO</title>
+        <title>VIVO Release 1 V1.2 Installation Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen" />
-		<link rel="stylesheet" href="./css/print.css" media="print" />
+        <link rel="stylesheet" href="./css/print.css" media="print" />
     </head>
     <body>
         <div id="branding" role="banner">
@@ -34,9 +34,8 @@
                 release also features two new visualization options: temporal graphing
                 for organizations, and personal visualizations extended to cover grants
                 as well as publications. The VIVO Harvester library has also been
-                significantly improved and expanded in scope for its 1.0 release
-                through the VIVO SourceForge project at
-                <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
+                significantly improved and expanded in scope for its 1.0 release 
+                through the VIVO SourceForge project at <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
             <h4>Templating system for page generation, navigation, and theming</h4>
             <p>
@@ -54,8 +53,8 @@
             </p>
             <h4>Storage model</h4>
             <p>
-                While server memory capacity has increased significantly in recent
-                years, VIVO's reliance on in-memory caching of RDF data had put limits 
+                While server memory capacity has increased significantly in recent 
+                years, VIVO's reliance on in-memory caching of RDF data had put limits  
                 on the ultimate scalability of VIVO instances and potentially increased 
                 the cost of servers required to support VIVO.&nbsp; 
                 <br>
@@ -77,10 +76,10 @@
             </p>
             <h4>Ontology</h4>
             <p>
-                VIVO 1.2 includes a new ontology module representing research
-                resources including biological specimens, human studies, instruments,
-                organisms, protocols, reagents, and research opportunities. This module
-                is aligned with the top-level ontology classes and properties from the
+                VIVO 1.2 includes a new ontology module representing research 
+                resources including biological specimens, human studies, instruments, 
+                organisms, protocols, reagents, and research opportunities. This module  
+                is aligned with the top-level ontology classes and properties from the 
                 NIH-funded <a href="https://www.eagle-i.org/home/">eagle-i Project</a>.
             </p>
             <h3>Associated VIVO releases</h3>
@@ -88,9 +87,8 @@
             <p>
                 The Harvester development team is releasing version 1.0 of the VIVO
                 Harvester library, an extensible data ingest and updating framework
-                with sample configurations for loading PubMed publication, grants, and
-                human resources data. The Harvester is available at
-                <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
+                with sample configurations for loading PubMed publication, grants, and 
+                human resources data. The Harvester is available at <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
             <hr><!-- Page break --><!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.2</h2>
             <p>
@@ -101,9 +99,9 @@
             <ul>
                 <li>
                     These instructions assume that you are performing a clean 
-                    install, including emptying an existing database and removing a 
-                    previous installation from the Tomcat webapps directory. Product  
-                    functionality may not be as expected if you install over an existing 
+                    install, including emptying an existing database and removing a  
+                    previous installation from the Tomcat webapps directory. Product 
+                    functionality may not be as expected if you install over an existing  
                     installation of an earlier version. 
                 </li>
                 <li>
@@ -129,7 +127,7 @@
                         <a href="#download_code">Download the VIVO Application Source</a>
                     </li>
                     <li>
-                        <a href="#data_storage">SDB vs RDB</a>
+                        <a href="#triple_store">Choose Triple Store</a>
                     </li>
                     <li>
                         <a href="#deploy_properties">Specify deployment properties</a>
@@ -211,11 +209,11 @@
                 of 
                 the time, the hostname will equal <code>localhost</code>. 
             </p>
-            <pre>                CREATE DATABASE dbname CHARACTER SET utf8;<br>            </pre>
+            <pre>                CREATE DATABASE dbname CHARACTER SET utf8;<br></pre>
             <p>
                 Grant access to a database user. For example: 
             </p>
-            <pre>                GRANT ALL ON dbname.* TO 'username'@'hostname' IDENTIFIED BY 'password';<br>            </pre>
+            <pre>                GRANT ALL ON dbname.* TO 'username'@'hostname' IDENTIFIED BY 'password';<br></pre>
             <p>
                 Keep track of the database name, username, and password for Step 
                 IV. 
@@ -230,9 +228,30 @@
                 <br>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
             </p>
-            <h3 id="data_storage">IV. SDB vs RDB (title)</h3>
+            <h3 id="triple_store">IV. Choose Triple Store</h3>
             <p>
-                Content from Brian Lowe coming.
+                VIVO 1.2 offers a choice of two triple store technologies: in-memory models backed by 
+                Jena's legacy relational database store (RDB) and Jena's SPARQL database (SDB).   RDB was  
+                used by VIVO 1.1.1 and earlier.   This mode offers fast response, but only by caching the 
+                entire RDF model in the server's main memory.   The memory available to VIVO limits the 
+                number of RDF statements that may be stored.
+            </p>
+            <p>
+                SDB mode caches only a fraction of the RDF data in memory.  Most queries are issued directly 
+                against the underlying database.  This allows VIVO installations to display data from large  
+                RDF models while requiring only a small amount of server memory to run the application. 
+                There is a tradeoff in response time:  pages make take slightly longer to load in SDB mode,  
+                and performance will depend on the configuration parameters of the database server. 
+                Additionally, advanced OWL reasoning (not enabled by default in either mode) is not possible  
+                in SDB mode.  With SDB, only the default set of inferences (inferred rdf:type statements) are 
+                generated, though they are generated as soon as data is edited rather than in a background process.
+            </p>
+            <p>
+                Though a VIVO installation may be switched back and forth between RDB and SDB mode by changing 
+                a configuration property and redeploying the application, it is important to note that data  
+                added in one mode will not typically appear in the other.  The exception is when a system is 
+                first switched from RDB mode to SDB mode.  In this case, the data from the RDB store will be  
+                automatically migrated to SDB. 
             </p>
             <h3 id="deploy_properties">V. Specify deployment properties </h3>
             <p>
@@ -276,8 +295,8 @@
                             "http://vivo.example.edu/individual/" in order to support linked data.
                             Similarly, if VIVO is installed at "http://www.example.edu/vivo" the
                             default namespace must be set to
-                            "http://www.example.edu/vivo/individual/"<h5>* The namespace must end with "individual/" (including the
-                                trailing slash).</h5>
+                            "http://www.example.edu/vivo/individual/"<h5>* The namespace must end with 
+                                "individual/" (including the trailing slash).</h5>
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -466,9 +485,9 @@
                     <tr>
                         <td colspan="2">
                             Change the dbtype setting to use a database 
-                            other than MySQL. Otherwise, leave this value unchanged. Possible 
-                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and  
-                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported 
+                            other than MySQL. Otherwise, leave this value unchanged. Possible  
+                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and 
+                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported  
                             for additional information. 
                         </td>
                     </tr>
@@ -597,8 +616,8 @@
             </p>
             <pre>                    export CATALINA_OPTS="-Xms2048m -Xmx1024m -XX:MaxPermSize=128m"<br>                </pre>
             <p>
-                This sets Tomcat to allocate an initial heap of 2048 megabytes, a
-                maximum heap of 1024 megabytes, and a PermGen space of 128 megs. 1024 
+                This sets Tomcat to allocate an initial heap of 2048 megabytes, a 
+                maximum heap of 1024 megabytes, and a PermGen space of 128 megs. 1024  
                 megabytes is a minimum practical heap size for production installations 
                 storing data for large academic institutions, and additional heap space  
                 is preferable. For testing with small sets of data, 256m to 512m should 
@@ -635,17 +654,17 @@
                 will be prompted to select a new password and verify it a second time. 
             </p>
             <p>
-                After verifying your new password, you will be presented with a
-                menu of editing options. Here you can create OWL classes, object
+                After verifying your new password, you will be presented with a 
+                menu of editing options. Here you can create OWL classes, object  
                 properties, data properties, and configure the display of data. 
-                Currently, any classes you wish to make visible on your website must be 
-                part of a class group, and there a number of visibility and display  
-                options available for each ontology entity. VIVO comes with a core VIVO 
+                Currently, any classes you wish to make visible on your website must be  
+                part of a class group, and there a number of visibility and display 
+                options available for each ontology entity. VIVO comes with a core VIVO  
                 ontology, but you may also upload other ontologies from an RDF file. 
             </p>
             <p>
-                Under the "Advanced Data Tools" click "Add/Remove RDF Data." Note
-                that Vitro currently works best with OWL-DL ontologies and has only 
+                Under the "Advanced Data Tools" click "Add/Remove RDF Data." Note 
+                that Vitro currently works best with OWL-DL ontologies and has only  
                 limited support for pure RDF data. You can enter a URL pointing to the 
                 RDF data you wish to load or upload a file on your local machine.  
                 Ensure that the "add RDF" radio button is selected. You will also 
@@ -670,9 +689,9 @@
             </p>
             <p>
                 Log in as a system administrator. Navigate to the "Site Admin" 
-                table of contents (link in the right side of the header). Go to "Site 
-                Information" (under "Site Configuration"). In the "Site Information  
-                Editing Form," enter a functional email address in the field "Contact 
+                table of contents (link in the right side of the header). Go to "Site  
+                Information" (under "Site Configuration"). In the "Site Information 
+                Editing Form," enter a functional email address in the field "Contact  
                 Email Address." and submit the change. 
             </p>
             <p>
@@ -703,9 +722,9 @@
             <p>
                 After setting up the mod_jk connector above, you will need to 
                 modify the Tomcat's server.xml (located in <code>[tomcat root]/conf/</code>) 
-                to 
-                respond  
-                to requests from Apache via the connector. Look for the 
+                to  
+                respond 
+                to requests from Apache via the connector. Look for the  
                 &lt;connector&gt; directive and add the following properties: 
             </p>
             <pre>                connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp; <br>            </pre>
@@ -719,14 +738,30 @@
                 directive 
                 and update as follows: 
             </p>
-            <pre>	    &lt;Host name="localhost" appBase="webapps"<br>	        DeployOnStartup="false"<br>	        unpackWARs="true" autoDeploy="false"<br>	        xmlValidation="false" xmlNamespaceAware="false"&gt;<br>	<br>		&lt;Alias&gt;example.com&lt;/Alias&gt;<br>		&lt;Context path=""<br>			docBase="/usr/local/tomcat/webapps/vivo"<br>			reloadable="true"<br>			cookies="true" &gt;<br>			&lt;Manager pathname="" /&gt;<br>			&lt;Environment type="java.lang.String" override="false" <br>				name="path.configuration" <br>				value="deploy.properties"<br>			/&gt;<br>		&lt;/Context&gt;<br>		...<br>			</pre>
+            <pre>	    
+			&lt;Host name="localhost" appBase="webapps"<br>	        
+				DeployOnStartup="false"<br>	        
+				unpackWARs="true" autoDeploy="false"<br>	        
+				xmlValidation="false" xmlNamespaceAware="false"&gt;<br>	<br>		
+				&lt;Alias&gt;example.com&lt;/Alias&gt;<br>		
+				&lt;Context path=""<br>			
+					docBase="/usr/local/tomcat/webapps/vivo"<br>			
+					reloadable="true"<br>			
+					cookies="true" &gt;<br>			
+					&lt;Manager pathname="" /&gt;<br>			
+					&lt;Environment type="java.lang.String" override="false" <br>				
+						name="path.configuration" <br>				
+						value="deploy.properties"<br>			
+					/&gt;<br>		
+				&lt;/Context&gt;<br>		
+				...
+			</pre>
             <h3 id="pellet">XII. Configure Pellet Reasoner </h3>
             <p>
-                <em>Do we need this section still? - elly</em>
-            </p>
-            <p>
-                VIVO uses the Pellet engine to perform reasoning, which runs in the
-                background at startup and also when the knowledge base is edited. VIVO 
+                This optional configuration step is only applicable to VIVO installations 
+				running in RDB mode (See section <a href="triple_store">Choose Triple Store</a> for details). 
+				VIVO uses the Pellet engine to perform reasoning, which runs in the 
+                background at startup and also when the knowledge base is edited. VIVO  
                 continues serving pages while the reasoner continues working; when the 
                 reasoner finishes, the new inferences appear. Inferred statements are  
                 cached in a database graph so that they are available immediately when 
@@ -734,9 +769,9 @@
             </p>
             <p>
                 By default, Pellet is fed only an incomplete view of your ontology 
-                and only certain inferences are materialized. These include rdf:type, 
-                rdfs:subClassOf, owl:equivalentClass, and owl:disjointWith. This mode  
-                is typically suitable for ontologies with a lot of instance data. If 
+                and only certain inferences are materialized. These include rdf:type,  
+                rdfs:subClassOf, owl:equivalentClass, and owl:disjointWith. This mode 
+                is typically suitable for ontologies with a lot of instance data. If  
                 you would like to keep the default mode, skip to the next step. 
             </p>
             <p>
@@ -835,9 +870,9 @@
                     privileges assigned to that account.
                     <p>
                         In addition, VIVO will try to associate the user with a profile 
-                        page, so the user may edit his own profile data. VIVO will search the 
-                        data model for a person with a property that matches the User’s network  
-                        ID. You need to tell VIVO what property should be used for matching. 
+                        page, so the user may edit his own profile data. VIVO will search the  
+                        data model for a person with a property that matches the User’s network 
+                        ID. You need to tell VIVO what property should be used for matching.  
                         Insert a line like this in the deploy.properties file: 
                     </p>
                     <pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
@@ -865,10 +900,10 @@
             </p>
             <ul>
                 <li>
-                    Click on the "Index" link on the upper right, below the logo.
-                    You should see a "locations" section, with links for "Country" and
-                    "Geographic Location." The index is built in a background thread, so on
-                    your first login, you may see an empty index instead. Refresh the page 
+                    Click on the "Index" link on the upper right, below the logo. 
+                    You should see a "locations" section, with links for "Country" and  
+                    "Geographic Location." The index is built in a background thread, so on 
+                    your first login, you may see an empty index instead. Refresh the page  
                     periodically to see whether the index will be populated. This may take 
                     some time: with VIVO installed on a modest laptop computer, loading the  
                     ontology files and building the index took more than 5 minutes from the 
@@ -903,14 +938,14 @@
                 </li>
                 <li>
                     Open a new web browser or browser tab to the page <a href="http://marbles.sourceforge.net/">http://marbles.sourceforge.net/</a>. 
-                    In 
-                    the  
-                    pink box on that page enter the URI of the individual you 
+                    In  
+                    the 
+                    pink box on that page enter the URI of the individual you  
                     created in the previous step and click "open." 
                 </li>
                 <li>
-                    In the resulting page search for the URI of the "test
-                    individual." You should find it towards the bottom of the page next to 
+                    In the resulting page search for the URI of the "test 
+                    individual." You should find it towards the bottom of the page next to  
                     a red dot followed by "redirect (303)." This indicates that you are 
                     successfully serving linked RDF data. If the URI of the "test  
                     individual" is followed by "failed (400)" you are not successfully 
@@ -923,36 +958,36 @@
             <ul>
                 <li>
                     Type the word "Australia" into the search box, and click on the 
-                    Search button.You should see a page of results, with links to countries 
-                    that border Australia, individuals that include Australia, and to  
-                    Australia itself. To trigger the search index, you can log in as a site 
+                    Search button.You should see a page of results, with links to countries  
+                    that border Australia, individuals that include Australia, and to 
+                    Australia itself. To trigger the search index, you can log in as a site  
                     administrator and go to "http://your-vivo-url/SearchIndex". 
                 </li>
             </ul>
         </div>
         <!-- #wrapper-content -->
         <div id="footer" role="contentinfo">
-            <p class="copyright">
-                <small>
-                    &copy;2011 
-                    All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
-                </small>
-                | Powered 
-                by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
-            </p>
-            <div id="nav" role="navigation">
-                <ul id="footer-nav" role="list">
-                    <li role="listitem">
-                        <a href="http://vivoweb.org/about">About</a>
-                    </li>
-                    <li role="listitem">
-                        <a href="http://vivoweb.org/contact">Contact Us</a>
-                    </li>
-                    <li role="listitem">
-                        <a href="http://www.vivoweb.org/support" target="blank">Support</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <p class="copyright">
+            <small>
+                &copy;2011 
+                All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
+            </small>
+            | Powered 
+            by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+        </p>
+        <div id="nav" role="navigation">
+        <ul id="footer-nav" role="list">
+            <li role="listitem">
+                <a href="http://vivoweb.org/about">About</a>
+            </li>
+            <li role="listitem">
+                <a href="http://vivoweb.org/contact">Contact Us</a>
+            </li>
+            <li role="listitem">
+                <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+            </li>
+        </ul>
+        </nav>
+    </div>
     </body>
 </html>

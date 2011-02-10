@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>VIVO</title>
+        <title>VIVO Release 1 V1.2 Upgrade Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen" />
         <link rel="stylesheet" href="./css/print.css" media="print" />
     </head>
@@ -90,8 +90,8 @@
             </p>
             <h4>Ontology</h4>
             <p>
-                VIVO 1.2 includes a new ontology module representing research
-                resources including biological specimens, human studies, instruments, 
+                VIVO 1.2 includes a new ontology module representing research 
+                resources including biological specimens, human studies, instruments,  
                 organisms, protocols, reagents, and research opportunities. This module 
                 is aligned with the top-level ontology classes and properties from the  
                 NIH-funded <a href="https://www.eagle-i.org/home/">eagle-i Project</a>.
@@ -109,6 +109,9 @@
                 <ol class="roman1">
                     <li>
                         <a href="#preparation">Before Performing the Upgrade</a>
+                    </li>
+					<li>
+                        <a href="#triple_store">Chose Triple Store</a>
                     </li>
                     <li>
                         <a href="#upgrade_process">The Upgrade Process</a>
@@ -141,6 +144,9 @@
                     </li>
                     <li>
                         <a href="#theme">Theme Modifications</a>
+                    </li>
+					<li>
+                        <a href="#setup_sdb">Set Up SDB Store in the Background (Optional)</a>
                     </li>
                 </ol>
             </toc>
@@ -188,7 +194,46 @@
                     below for more information. 
                 </li>
             </ul>
-            <h3 id="upgrade_process">II. The Upgrade Process</h3>
+            <h3 id="triple_store">II. Choose Triple Store</h3>
+            <p>
+                VIVO 1.2 offers a choice of two triple store technologies: in-memory models backed by 
+                Jena's legacy relational database store (RDB) and Jena's SPARQL database (SDB).   RDB was  
+                used by VIVO 1.1.1 and earlier.   This mode offers fast response, but only by caching the 
+                entire RDF model in the server's main memory.   The memory available to VIVO limits the 
+                number of RDF statements that may be stored.
+            </p>
+            <p>
+                SDB mode caches only a fraction of the RDF data in memory.  Most queries are issued directly 
+                against the underlying database.  This allows VIVO installations to display data from large  
+                RDF models while requiring only a small amount of server memory to run the application. 
+                There is a tradeoff in response time:  pages make take slightly longer to load in SDB mode,  
+                and performance will depend on the configuration parameters of the database server. 
+                Additionally, advanced OWL reasoning (not enabled by default in either mode) is not possible  
+                in SDB mode.  With SDB, only the default set of inferences (inferred rdf:type statements) are 
+                generated, though they are generated as soon as data is edited rather than in a background process.
+            </p>
+            <p>
+                Though a VIVO installation may be switched back and forth between RDB and SDB mode by changing 
+                a configuration property and redeploying the application, it is important to note that data  
+                added in one mode will not typically appear in the other.  The exception is when a system is 
+                first switched from RDB mode to SDB mode.  In this case, the data from the RDB store will be  
+                automatically migrated to SDB. 
+            </p>
+            <p>
+                A VIVO 1.2 system that is upgraded from VIVO 1.1.1 must initially be run in RDB mode in order 
+                receive required ontology updates.  Attempting to run an upgraded system initially in SDB will  
+                result in a logged error message, and the application will not start.  After the system starts 
+                up successfully the first time in RDB mode, it may then be switched to SDB, redeployed, and restarted. 
+                Upon restart, the data in the RDB store will be copied to the SDB store.
+            </p>
+            <p>
+                This copying process can take a number of hours to complete if the installation contains a large 
+                amount of RDF data (roughly a million triples or more).  See section 
+				<a href="#setup_sdb">Set Up SDB Store in the Background (Optional)</a> for instructions on how 
+				to run this lengthy conversion process in the background while an RDB system is operating. 
+				Doing this will reduce the time necessary to start VIVO the first time it is run in SDB mode.
+            </p>
+            <h3 id="upgrade_process">III. The Upgrade Process</h3>
             <p>
                 1. Download the new distribution file and unpack it into a new 
                 source directory. 
@@ -578,7 +623,7 @@
             <p>
                 6. Start Apache Tomcat and log in to VIVO.
             </p>
-            <h3 id="ontology">III. Ontology Changes</h3>
+            <h3 id="ontology">IV. Ontology Changes</h3>
             <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
             <p>
                 After Apache Tomcat is started, these files should be reviewed to 
@@ -591,8 +636,8 @@
                     <code>ontologies/update/logs/knowledgeBaseUpdate.log</code>
                 </dt>
                 <dd>
-                    A log of a summary of updates that were made to the knowledge base and
-                    notes about some recommended manual reviews. This file should end with 
+                    A log of a summary of updates that were made to the knowledge base and 
+                    notes about some recommended manual reviews. This file should end with  
                     "Finished knowledge base migration". 
                     If this file contains any warnings they should be reviewed with  
                     your implementation team representative to see whether any 
@@ -688,7 +733,7 @@
                     new default value will be propagated to the knowledge base.
                 </dd>
             </dl>
-            <h3 id="fileSystem">IV. File Storage System Upgrade</h3>
+            <h3 id="fileSystem">V. File Storage System Upgrade</h3>
             <h4 id="changes_to_storage">i. Changes to the File Storage System</h4>
             <p>
                 Each uploaded file exists as an individual entity in VIVO. When the 
@@ -726,7 +771,7 @@
                     corrective action needs to be taken.
                 </dd>
             </dl>
-            <h3 id="theme">V. Theme Changes</h3>
+            <h3 id="theme">VI. Theme Changes</h3>
             <h4 style="color:red">Need Nick to help with this section</h4>
             <p>
                 VIVO 1.2 comes with a new theme called "wilma" that uses the FreeMarker template 
@@ -831,6 +876,32 @@
                     your 1.2 theme.
                 </dd>
             </dl>
+            <h3 id="setup_sdb">VII. Set Up SDB Store in the Background (Optional)</h3>
+            <p>
+                If your VIVO installation is running in RDB mode, and you'd like to convert 
+				to SDB, you can start the conversion process in the background while the RDB 
+				system is running.  This will reduce the delay in initial startup after the 
+				application is redeployed with deploy.properties set for SDB.  Note that it 
+				is important not to edit any data anywhere in the application while this 
+				background conversion is running.
+            </p>
+            <p>
+                To start the SDB conversion, log in as a system
+                administrator and request /sdbsetup.  (For example, if your VIVO is installed 
+				at http://vivo.myuniversity.edu/ you would type 
+				http://vivo.myuniversity.edu/sdbsetup into your browser.)
+            </p>
+            <p>
+                Click the button that appears on this page.
+            </p>
+            <p>
+                During the course of the SDB setup, which may take several hours on a
+                large database, subsequent requests to /sdbsetup will display a
+                message that the operation is still in progress.   When a request for this 
+				page shows a message that the SDB setup has completed successfully, shut down 
+				Tomcat, set deploy.properties to SDB mode, redeploy, and restart Tomcat.  
+				VIVO will now be running from the SDB store.
+            </p>
         </div>
         <!-- end of content -->
         <div id="footer" role="contentinfo">
