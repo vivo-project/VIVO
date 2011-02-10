@@ -26,3 +26,5 @@
 <#-- Inject head content specified in the controller. Currently this is used only to generate an rdf link on 
 an individual profile page. -->
 ${headContent!}
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
