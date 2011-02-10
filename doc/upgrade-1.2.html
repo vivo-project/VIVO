@@ -34,8 +34,8 @@
                 at <a href="http://vivoweb.org">VIVOweb.org</a>
             </p>
             <p>
-                If you need to do a fresh install, please consult <a href="VIVO_Release-1-v1.2_Installation_Guide.pdf">VIVO Release 1 v1.2
-                    Installation Guide</a>
+                If you need to do a fresh install, please consult the VIVO Release 1 v1.2 
+				Installation Guide found on <a href="http://vivoweb.org/support">vivoweb.org</a>
                 or the install.html file located in the <code>doc</code>
                 directory of the VIVO source code distribution. The installation 
                 document also has a list of the required software and versions. 
@@ -810,133 +810,22 @@
                 within a theme.
             </p>
             <p>
+                If you did not create a custom theme for your site previously, but used 
+                the vivo-basic theme in its original directory, you need not take any 
+                action in order to remain using the vivo-basic theme in 1.2.
+            </p>
+			<p>If you did make changes to the vivo-basic theme, you will need to reapply those changes. 
+			 We recommend you apply these changes to the wilma theme.</p>
+            <blockquote>
+                <strong>Please note:</strong> The vivo-basic theme has been deprecated and is 
+                <a href="#vivoBasicDeprecated">not recommended for production instances</a>.
+            </blockquote>
+			<p>
                 For details on the new structure of themes in 1.2 and further information 
                 regarding the development of your own custom theme, please review the 
                 <a href="http://www.vivoweb.org/support/user-guide/administration" title="Download VIVO documentation" target="_blank">
                 Site Administrator's Guide</a>. This document will focus on updating an existing 
                 pre 1.2 theme.
-            </p>
-            <h4 id="updateTheme">Updating an Existing Theme</h4>
-            <p>
-                If you already have an existing pre 1.2 instance running, follow step A or B below, 
-                whichever is applicable to your site:
-            </p>
-            <p>
-                A. If you did not create a custom theme for your site previously, but used 
-                the vivo-basic theme in its original directory, you need not take any 
-                action in order to remain using the vivo-basic theme in 1.2.
-            </p>
-            <blockquote>
-                <strong>Please note:</strong> The vivo-basic theme has been deprecated and is 
-                <a href="#vivoBasicDeprecated">not recommended for production instances</a>.
-            </blockquote>
-            <p>
-                B. If you created your own theme in VIVO 1.1, follow the steps below under sections 
-                "Templates," "Stylesheets,"  and "Site Icons" to upgrade your theme to VIVO 1.2.
-            </p>
-            <p style="color:#f00">
-                NC: Everything below up to Section VII still needs some work and is not ready for 
-                prime time.
-            </p>
-            <dl>
-                <dt>
-                    1. Templates
-                </dt>
-                <dd>
-                    <dl>
-                        <dt>
-                            a. Copy the directory <code>/vivo/themes/vivo-basic/templates</code>
-                            into your theme directory <code>/vivo/themes/[your-theme-name]</code>.
-                        </dt>
-                        <dd>
-                        </dd>
-                        <dt>
-                            b. Follow step i or ii below, whichever is applicable to your theme.
-                        </dt>
-                        <dd>
-                            <ol class="roman2">
-                                <li>
-                                    If you did not make any customizations to the templates in your 
-                                    VIVO 1.1 theme, then you do not need to apply any additional changes 
-                                    to the new 1.2 theme templates during the upgrade process.
-                                </li>
-                                <li>
-                                    <p>
-                                        If you did make customizations to the templates in your VIVO 1.1 
-                                        theme, you will need to hand-replicate those modifications in the 
-                                        new theme templates.
-                                    </p>
-                                    <p>
-                                        The theme template content that was previously contained in 
-                                        three JSP files is now contained in five FTL files. The  
-                                        correspondence between the 1.0 JSPs and the 1.1 FTLs is as 
-                                        follows:
-                                    </p>
-                                    <pre>
-                identity.jsp => identity.ftl
-                menu.jsp => menu.ftl and search.ftl
-                footer.jsp => footer.ftl and googleAnalytics.ftl
-                                        </pre>
-                                    <p>
-                                        <code>googleAnalytics.ftl</code>
-                                        is the file to which you add your site's Google Analytics Tracking 
-                                        Code (see section II).
-                                    </p>
-                                    <p>
-                                        Consult the FreeMarker Template Author's Guide at <a href="http://freemarker.org/docs/dgui.html">http://freemarker.org/docs/dgui.html</a>
-                                        and the Reference at <a href="http://freemarker.org/docs/ref.html">http://freemarker.org/docs/ref.html</a>
-                                        for complete documentation of the syntax and available built-in constructs. Template 
-                                        authors need not be concerned with the Programmer's Guide or Java API documentation.
-                                    </p>
-                                </li>
-                            </ol>
-                        </dd>
-                    </dl>
-                </dd>
-                <dt>
-                    2. Stylesheets
-                </dt>
-                <dd>
-                    VIVO 1.2 includes changes to vivo-basic stylesheets. If you modified 
-                    styles in your VIVO 1.1 theme, you will not be able to simply copy the  
-                    1.1 stylesheets into your 1.2 theme, because you will then lose 1.2 
-                    style upgrades that your theme should pick up.  Instead, you should 
-                    use the vivo-basic 1.2 stylesheets as a starting point, and manually
-                    merge your 1.1 style modifications in as needed.
-                </dd>
-                <dt>
-                    3. Site Icons
-                </dt>
-                <dd>
-                    Copy the site icons from your 1.1 theme into the site_icons folder in
-                    your 1.2 theme.
-                </dd>
-            </dl>
-            <h3 id="setup_sdb">VII. Set Up SDB Store in the Background (Optional)</h3>
-            <p>
-                If your VIVO installation is running in RDB mode, and you'd like to convert 
-                to SDB, you can start the conversion process in the background while the RDB 
-                system is running.  This will reduce the delay in initial startup after the 
-                application is redeployed with deploy.properties set for SDB.  Note that it 
-                is important not to edit any data anywhere in the application while this 
-                background conversion is running.
-            </p>
-            <p>
-                To start the SDB conversion, log in as a system
-                administrator and request /sdbsetup.  (For example, if your VIVO is installed 
-                at http://vivo.myuniversity.edu/ you would type 
-                http://vivo.myuniversity.edu/sdbsetup into your browser.)
-            </p>
-            <p>
-                Click the button that appears on this page.
-            </p>
-            <p>
-                During the course of the SDB setup, which may take several hours on a
-                large database, subsequent requests to /sdbsetup will display a
-                message that the operation is still in progress.   When a request for this 
-                page shows a message that the SDB setup has completed successfully, shut down 
-                Tomcat, set deploy.properties to SDB mode, redeploy, and restart Tomcat.  
-                VIVO will now be running from the SDB store.
             </p>
         </div>
         <!-- end of content -->
