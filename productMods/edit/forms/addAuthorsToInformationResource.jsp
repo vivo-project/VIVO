@@ -378,7 +378,6 @@ SPARQL queries for existing values. --%>
     // This value is now inserted by JavaScript, but leave it here as a safety net in case page
     // load reordering returns an error. 
     request.setAttribute("newRank", maxRank + 1);
-    System.out.println("request rank: " + request.getAttribute("newRank"));
     request.setAttribute("rankPredicate", rankPredicateUri);
 %>
     
