@@ -7,8 +7,8 @@
 
 <h1 id="noPubsOrGrants-header">${organizationLabel}</h1>
 
-    <h3>${textForCurrentEntityComparisonType?capitalize} Temporal Graph
-        <span class="rdfLink">|&nbsp;<a href="${temporalGraphURL}">${textForOtherEntityComparisonType?capitalize} Temporal Graph</a></span>
+    <h3>${textForCurrentEntityComparisonType?capitalize} Temporal Graph 
+        <span id="noPubsOrGrants-span">|&nbsp;<a  href="${temporalGraphURL}">view ${textForOtherEntityComparisonType} temporal graph</a></span>
     </h3>
     <div id="error-body">
 	    <p>This organization has neither sub-organizations nor people with ${textForCurrentEntityComparisonType} in the system. Please visit the full ${organizationLabel} <a href="${organizationVivoProfileURL}">profile page</a> for a more complete overview.</p>
