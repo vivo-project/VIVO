@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <title>VIVO</title>
-        <link rel="stylesheet" href="./css/doc.css" />
+        <link rel="stylesheet" href="./css/doc.css" media="screen" />
+        <link rel="stylesheet" href="./css/print.css" media="print" />
     </head>
     <body>
         <div id="branding" role="banner">
@@ -26,7 +27,7 @@
                     </li>
                 </ul>
             </toc>
-           <p>
+            <p>
                 This document provides a short description of the steps involved in 
                 upgrading your installation of VIVO from Release 1, Version 1.1 to  
                 Version 1.2. This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
@@ -67,8 +68,8 @@
             <h4>Storage model</h4>
             <p>
                 While server memory capacity has increased significantly in recent 
-                years, VIVO's reliance on in-memory caching of RDF data had put limits 
-                on the ultimate scalability of VIVO instances and potentially increased  
+                years, VIVO's reliance on in-memory caching of RDF data had put limits  
+                on the ultimate scalability of VIVO instances and potentially increased 
                 the cost of servers required to support VIVO.&nbsp; 
                 <br>
             </p>
@@ -90,9 +91,9 @@
             <h4>Ontology</h4>
             <p>
                 VIVO 1.2 includes a new ontology module representing research
-                resources including biological specimens, human studies, instruments,
-                organisms, protocols, reagents, and research opportunities. This module
-                is aligned with the top-level ontology classes and properties from the 
+                resources including biological specimens, human studies, instruments, 
+                organisms, protocols, reagents, and research opportunities. This module 
+                is aligned with the top-level ontology classes and properties from the  
                 NIH-funded <a href="https://www.eagle-i.org/home/">eagle-i Project</a>.
             </p>
             <h3>Associated VIVO releases</h3>
@@ -165,7 +166,11 @@
             <ul>
                 <li>
                     DO NOT reinstall MySQL or recreate the MySQL database. Please 
-                    ensure that you back-up the MySQL database. 
+                    ensure that you back-up the MySQL database. Also note that VIVO 1.2 will  
+                    not run on older versions of MySQL that may have worked with 1.1.1. 
+                    Be sure to run VIVO 1.2 with MySQL 5.1 or higher.  Using unsupported  
+                    versions may result in strange error messages related to table formatting or 
+                    other unexpected problems.
                 </li>
                 <li>
                     It is not necessary to add RDF data. 
@@ -541,10 +546,10 @@
                         the theme:<pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
                         A sample <code>googleAnalytics.ftl</code>
                         is included in the built-in 
-                        theme. This file serves only as an example, and you must replace the 
-                        tracking code shown with your institution's own tracking code. For  
-                        additional information about the GATC for the NIH-funded VIVO 
-                        implementation sites and a copy your institution's tracking code, see  
+                        theme. This file serves only as an example, and you must replace the  
+                        tracking code shown with your institution's own tracking code. For 
+                        additional information about the GATC for the NIH-funded VIVO  
+                        implementation sites and a copy your institution's tracking code, see 
                         the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO
                             Google
                             Analytics
@@ -587,9 +592,9 @@
                 </dt>
                 <dd>
                     A log of a summary of updates that were made to the knowledge base and
-                    notes about some recommended manual reviews. This file should end with
-                    "Finished knowledge base migration".
-                    If this file contains any warnings they should be reviewed with 
+                    notes about some recommended manual reviews. This file should end with 
+                    "Finished knowledge base migration". 
+                    If this file contains any warnings they should be reviewed with  
                     your implementation team representative to see whether any 
                     corrective action needs to be taken.
                 </dd>
@@ -686,14 +691,14 @@
             <h3 id="fileSystem">IV. File Storage System Upgrade</h3>
             <h4 id="changes_to_storage">i. Changes to the File Storage System</h4>
             <p>
-                Each uploaded file exists as an individual entity in VIVO. When the
-                browser requests an upload file from VIVO, the data model is queried to 
+                Each uploaded file exists as an individual entity in VIVO. When the 
+                browser requests an upload file from VIVO, the data model is queried to  
                 find out where the file is actually stored, so it can be downloaded to 
                 the browser.
             </p>
             <p>
                 In VIVO release 1.2 this storage location, 
-                known as the "Alias URL" for the uploaded file, 
+                known as the "Alias URL" for the uploaded file,  
                 is stored in the file entity. 
                 That way, pages that contain many files can be displayed much more quickly. 
             </p>
@@ -828,7 +833,7 @@
             </dl>
         </div>
         <!-- end of content -->
-        <div role="contentinfo">
+        <div id="footer" role="contentinfo">
             <p class="copyright">
                 <small>
                     &copy;2011 
@@ -836,7 +841,7 @@
                 </small>
                 | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
             </p>
-            <nav role="navigation">
+            <div id="nav" role="navigation">
                 <ul id="footer-nav" role="list">
                     <li role="listitem">
                         <a href="http://vivoweb.org/about">About</a>
@@ -848,7 +853,7 @@
                         <a href="http://www.vivoweb.org/support" target="blank">Support</a>
                     </li>
                 </ul>
-            </nav>
+            </div>
         </div>
     </body>
 </html>
