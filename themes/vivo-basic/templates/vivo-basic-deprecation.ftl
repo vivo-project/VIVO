@@ -13,7 +13,7 @@
        <li>menu pages with class group and individual browse</li>
    </ul>
 
-   <p>The new default theme shipped with the application is called <strong>wilma</strong> and fully supports all 1.2 features. For details on how to copy the wilma theme and customize it to your liking, please review the <a href="http://www.vivoweb.org/support/user-guide/administration" title="Download VIVO documentation" target=""_blank>Site Administrator's Guide</a>. You can select your active theme on the site information page, located at <em>Site Admin > Site Information</em>.</p>
+   <p>The new default theme shipped with the application is called <strong>wilma</strong> and fully supports all 1.2 features. For details on how to create a custom theme using wilma as a starting point, please review the <a href="http://www.vivoweb.org/support/user-guide/administration" title="Download VIVO documentation" target="_blank">Site Administrator's Guide</a>. You can select your active theme on the site information page, located at <em>Site Admin > Site Information</em>.</p>
 
    <p><strong>To remove this notification, simply comment out the include for vivo-basic-deprecation.ftl at the top of themes/vivo-basic/templates/identity.ftl.</strong></p>
 </div>
