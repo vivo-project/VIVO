@@ -2,8 +2,8 @@
 
 <#-- Individual profile page template for foaf:Organization individuals (extends individual.ftl in vivo)-->
 
-<#-- Do not show the link for temporal visualization unless deploy.properties specifies "visualization.temporal = enabled" -->
-<#if temporalVisualizationEnabled??>
+<#-- Do not show the link for temporal visualization unless it's enabled -->
+<#if temporalVisualizationEnabled>
     <#assign classSpecificExtension>
         <#include "individual-visualizationTemporalGraph.ftl">
     </#assign>
