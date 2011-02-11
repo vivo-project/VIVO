@@ -18,51 +18,50 @@ $(document).ready(function() {
     
     //temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, jsonString);
     
+    /*
+     * When the intra-entity parameters are clicked,
+     * update the status accordingly.   
+     */         
+    $("select.comparisonValues").change(function(){
+
+        var selectedValue = $("select.comparisonValues option:selected").val();
+        
+        var selectedParameter;
+        
+        $.each(COMPARISON_PARAMETERS_INFO, function(index, parameter) {
+        	
+            if (parameter.value === selectedValue) {
+            	selectedParameter = parameter;
+                window.location = parameter.viewLink;
+            }
+        	
+        });
+        
+        //$("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
+        
+        /*
+         * This piece of code is not executed at all because the redirect happens before there is a chance 
+         * to render the below contents.
+         * */
+        
+        /*
+        
+        $("#comparisonParameter").text("Total Number of " + selectedValue);
+        $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
+        $('#yaxislabel').css("color", "#595B5B");
+        $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
+        
+        
+        */
+
+    });
+    
 });
         
 //click event handler for clear button
 $("a.clear-selected-entities").live('click', function(){
     clearRenderedObjects();
 }); 
-
-/*
- * When the intra-entity parameters are clicked,
- * update the status accordingly.   
- */         
-
-$("select.comparisonValues").live('change', function(){
-
-    var selectedValue = $("select.comparisonValues option:selected").val();
-    
-    var selectedParameter;
-    
-    $.each(COMPARISON_PARAMETERS_INFO, function(index, parameter) {
-    	
-        if (parameter.value === selectedValue) {
-        	selectedParameter = parameter;
-            window.location = parameter.viewLink;
-        }
-    	
-    });
-    
-    //$("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
-    
-    /*
-     * This piece of code is not executed at all because the redirect happens before there is a chance 
-     * to render the below contents.
-     * */
-    
-    /*
-    
-    $("#comparisonParameter").text("Total Number of " + selectedValue);
-    $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
-    $('#yaxislabel').css("color", "#595B5B");
-    $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
-    
-    
-    */
-
-});
 
 $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
     
