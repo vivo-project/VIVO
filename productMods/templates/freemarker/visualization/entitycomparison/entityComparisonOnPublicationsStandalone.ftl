@@ -45,15 +45,13 @@ $(document).ready(function () {
                 $("div#temporal-graph-response").unblock();
                 
             } else {
-                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
+                $("#body").show();
                 $("#error-container").remove();
+                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
                 $("div#temporal-graph-response").unblock();
             }
         }
     });
-
-    // unblock when ajax activity stops    
-    //$(document).ajaxStop($("div#temporal-graph-response").unblock());
 
 });
 

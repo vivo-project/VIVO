@@ -29,7 +29,6 @@ $(document).ready(function () {
     $.blockUI.defaults.css.width = '500px';
     $.blockUI.defaults.css.border = '0px';
     $.blockUI.defaults.css.top = '15%';
-     
     
     $("div#temporal-graph-response").block({
         message: '<h3><img src="' + loadingImageLink + '" />&nbsp;Loading data for <i>${organizationLabel}</i></h3>'
@@ -46,15 +45,13 @@ $(document).ready(function () {
                 $("div#temporal-graph-response").unblock();
                 
             } else {
-                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
+                $("#body").show();
                 $("#error-container").remove();
+                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
                 $("div#temporal-graph-response").unblock();
             }
         }
     });
-    
-
-    // unblock when ajax activity stops    
 
 });
 

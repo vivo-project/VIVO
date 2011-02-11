@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+#body {
+    display: none;
+}
+
 #error-container {
     display: none;
 }
