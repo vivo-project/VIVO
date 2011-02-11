@@ -53,15 +53,15 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			+ "		(str(?Person) as ?personLit) "
 			+ "		(str(?PersonLabel) as ?personLabelLit) "
 			+ "		(str(?Document) as ?documentLit) "
-			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
-			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") ";
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") ";
+//			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") ";
 
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
 			+ "?Document rdf:type bibo:Document . "
 			+ "OPTIONAL {  ?Document core:dateTimeValue ?dateTimeValue . " 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
-			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." ;
+			+ "				?dateTimeValue core:dateTime ?publicationDate } .";
+//			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." ;
 
 	private static String ENTITY_LABEL;
 	private static String ENTITY_URL;
@@ -114,10 +114,10 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				/*
 				 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
 				 * */
-				RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
-				if (publicationYearUsing_1_1_PropertyNode != null) {
-					biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
-				}
+//				RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+//				if (publicationYearUsing_1_1_PropertyNode != null) {
+//					biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
+//				}
 
 			}
 

@@ -53,9 +53,6 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	}
 	
 	private String generateConstructQueryForSubOrganizationTypes(String queryURI){
-		
-	    //bdc34: this query was lacking the personLabel, personType, and personTypeLabel in the WHERE clause
-	    //it seems like they are needed since they are referenced in the CONSTRUCT clause.	    
 	    
 		String sparqlQuery = 			 
 		
@@ -65,21 +62,21 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 			+	"?subOrganization rdf:type ?subOrganizationType . "
 			+ 	"?subOrganization core:organizationForPosition ?Position . "
 			+   "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
-//			+   "?Position core:positionForPerson ?Person ."
-//			+ 	"?Person rdfs:label ?PersonLabel ."
-//			+	"?Person rdf:type ?PersonType . "
-//			+ 	"?PersonType rdfs:label ?PersonTypeLabel  "
+			+   "?Position core:positionForPerson ?Person ."
+			+ 	"?Person rdfs:label ?PersonLabel ."
+			+	"?Person rdf:type ?PersonType . "
+			+ 	"?PersonType rdfs:label ?PersonTypeLabel  "
 			+"}"
 			+ "WHERE { "
 			+	"<"+queryURI+ "> core:hasSubOrganization ?subOrganization . "
 			+	"?subOrganization rdfs:label ?subOrganizationLabel . "
 			+	"?subOrganization rdf:type ?subOrganizationType . "
 		    +   "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
-//			+ 	"?subOrganization core:organizationForPosition ?Position . "	
-//			+	"?Position core:positionForPerson ?Person .	"
-//			+   "?Person rdfs:label ?PersonLabel ."
-//			+   "?Person rdf:type ?PersonType . "
-//			+   "?PersonType rdfs:label ?PersonTypeLabel  "         
+			+ 	"?subOrganization core:organizationForPosition ?Position . "	
+			+	"?Position core:positionForPerson ?Person .	"
+			+   "?Person rdfs:label ?PersonLabel ."
+			+   "?Person rdf:type ?PersonType . "
+			+   "?PersonType rdfs:label ?PersonTypeLabel  "         
 
 			+ "}" ;
 					
