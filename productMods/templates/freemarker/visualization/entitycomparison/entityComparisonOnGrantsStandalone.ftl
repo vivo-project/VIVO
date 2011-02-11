@@ -28,8 +28,10 @@ $(document).ready(function () {
     
     $.blockUI.defaults.css.width = '500px';
     $.blockUI.defaults.css.border = '0px';
+    $.blockUI.defaults.css.top = '15%';
      
-    $("div#body").block({
+    
+    $("div#temporal-graph-response").block({
         message: '<h3><img src="' + loadingImageLink + '" />&nbsp;Loading data for <i>${organizationLabel}</i></h3>'
     });
 
@@ -39,17 +41,20 @@ $(document).ready(function () {
         success: function (data) {
 
             if (data.error) {
-                $("#error-container").show();
                 $("#body").remove();
+                $("#error-container").show();
+                $("div#temporal-graph-response").unblock();
+                
             } else {
                 temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
                 $("#error-container").remove();
+                $("div#temporal-graph-response").unblock();
             }
         }
     });
+    
 
     // unblock when ajax activity stops    
-    $(document).ajaxStop($("div#body").unblock());
 
 });
 
@@ -57,6 +62,8 @@ $(document).ready(function () {
 </script>
 
 <#assign currentParameterObject = grantParameter>
+
+<div id="temporal-graph-response">
 
 <#include "entityComparisonBody.ftl">
 
@@ -66,3 +73,5 @@ the CSS of the #error-container is display:none; so it will be hidden unless exp
 via JavaScript.
 -->
 <#include "entityGrantComparisonError.ftl">
+
+</div>
