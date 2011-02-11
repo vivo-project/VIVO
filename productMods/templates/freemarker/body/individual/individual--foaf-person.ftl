@@ -131,6 +131,7 @@
     </section>
     
 </section>
+
 <#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
 
 <#-- Property group menu -->
@@ -138,7 +139,6 @@
 
 <#-- Ontology properties -->
 <#include "individual-properties.ftl">
-
 
 ${stylesheets.add("/css/individual/individual.css")}
 ${stylesheets.add("/css/individual/individual-vivo.css")}

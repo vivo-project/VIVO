@@ -18,7 +18,7 @@
     <section id="visualization" role="region">
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/co_author_icon.png">
-            <#assign coAuthorURL = "${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=coauthor">
+            <#assign coAuthorVisUrl = individual.coAuthorVisUrl>
             <#assign googleJSAPI = "https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D">
             
             <img class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="The publication information may be incomplete" />
@@ -29,9 +29,9 @@
             
             <div id="coauthorship_link_container" class="collaboratorship-link-container">
                 <div class="collaboratorship-icon">
-                    <a href="${coAuthorURL}"><img src="${coAuthorIcon}" alt="Co-author Network icon" width="30px" height="30px" /></a>
+                    <a href="${coAuthorVisUrl}"><img src="${coAuthorIcon}" alt="Co-author network icon" width="30px" height="30px" /></a>
                 </div>
-                <div class="collaboratorship-link"><a href="${coAuthorURL}">Co-Author Network</a></div>
+                <div class="collaboratorship-link"><a href="${coAuthorVisUrl}">Co-Author Network</a></div>
             </div>
             
             ${scripts.add(googleJSAPI)}
@@ -48,14 +48,14 @@
         </#if>
         
         <#if isInvestigator>
-            <#assign coInvestigatorURL = "${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${individual.uri}&vis_mode=copi">
+            <#assign coInvestigatorVisUrl = individual.coInvestigatorVisUrl>
             <#assign coInvestigatorIcon = "${urls.images}/visualization/co_investigator_icon.png">
             
             <div id="coinvestigator_link_container" class="collaboratorship-link-container">
                 <div class="collaboratorship-icon">
-                    <a href="${coInvestigatorURL}"><img src="${coInvestigatorIcon}" alt="Co-investigator Network icon" width="30px" height="30px" /></a>
+                    <a href="${coInvestigatorVisUrl}"><img src="${coInvestigatorIcon}" alt="Co-investigator network icon" width="30px" height="30px" /></a>
                 </div>
-                <div class="collaboratorship-link"><a href="${coInvestigatorURL}">Co-Investigator Network</a></div>
+                <div class="collaboratorship-link"><a href="${coInvestigatorVisUrl}">Co-Investigator Network</a></div>
             </div>
         </#if>
     </section>
