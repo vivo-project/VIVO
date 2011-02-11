@@ -8,6 +8,11 @@
     margin: auto;
     overflow: hidden;
 }
+
+#error-container {
+    display: none;
+}
+
 .easy-deselect-label a.temporal-vis-url {
     float: right;
 }

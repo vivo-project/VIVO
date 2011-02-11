@@ -5,8 +5,6 @@
 <#assign dataVisualizationURLRoot ="/visualizationData">
 
 <#assign organizationURI ="${organizationURI?url}">
-<#assign jsonContent ="${jsonContent}">
-<#assign organizationLabel = "${organizationLabel}">
 <#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
 
 <#assign subOrganizationVivoProfileURL = "${urls.base}/individual?">
@@ -49,6 +47,7 @@ we will use rev 293 (dev build version) of the flot & excanvas files.
 
 <#assign fliptext = 'js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
 <#assign jqueryNotify = 'js/jquery_plugins/jquery.notify.min.js'>
+<#assign jqueryBlockUI = 'js/jquery_plugins/jquery.blockUI.min.js'>
 <#assign jqueryUI = 'js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
 <#assign datatable = 'js/jquery_plugins/jquery.dataTables.min.js'>
 <#assign entityComparisonUtils = 'js/visualization/entitycomparison/util.js'>
@@ -56,9 +55,11 @@ we will use rev 293 (dev build version) of the flot & excanvas files.
 <#assign guiEventManager = 'js/visualization/entitycomparison/gui-event-manager.js'>
 
 
+
 <!--[if IE]><script type="text/javascript" src="${excanvas}"></script><![endif]-->
 ${scripts.add(flot)}
 ${scripts.add(fliptext)}
+${scripts.add(jqueryBlockUI)}
 ${scripts.add(jqueryUI)}
 ${scripts.add(datatable)}
 ${scripts.add(entityComparisonUtils)}
@@ -90,13 +91,15 @@ var contextPath = "${urls.base}";
 var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
 
-var jsonString = '${jsonContent}';
+var jsonString = '${jsonContent!}';
 var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 
-var loadingImageLink = contextPath + "/images/visualization/ajax-loader.gif";
+var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 
 var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass}";
+
+var temporalGraphProcessor;
 
 /*
 This has to be declared before making a call to GUI event manager JS.
@@ -119,4 +122,4 @@ var COMPARISON_PARAMETERS_INFO = {
 
 </script>
 
-${scripts.add(guiEventManager)}
+${headScripts.add(guiEventManager)}

@@ -35,6 +35,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Co
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 
 public class UtilityFunctions {
 	
@@ -319,6 +320,10 @@ public class UtilityFunctions {
 										collaboratorshipNetworkURLParams);
 		
 		return collaboratorshipNetworkURL != null ? collaboratorshipNetworkURL : "" ;
+	}
+	
+	public static boolean isEntityAPerson(VitroRequest vreq, SubEntity subentity) {
+		return vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
 	}
 
 }

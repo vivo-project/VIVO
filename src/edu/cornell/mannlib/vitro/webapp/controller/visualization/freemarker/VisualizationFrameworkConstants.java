@@ -90,7 +90,6 @@ public class VisualizationFrameworkConstants {
 	public static final String SCHOOL_COMPARISON_VIS_MODE = "SCHOOL";
 	public static final String DEPARTMENT_COMPARISON_VIS_MODE = "DEPARTMENT";
 	public static final String HIGHEST_LEVEL_ORGANIZATION_VIS_MODE = "HIGHEST_LEVEL_ORGANIZATION";
-	
 
 	/*
 	 * These values represent possible visualizations provided as values to the "vis" url key.
@@ -105,5 +104,9 @@ public class VisualizationFrameworkConstants {
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
 	
-
+	
+	/*
+	 * These values represent possible vis-modes for temporal graph vis 
+	 * */
+	public static final String TEMPORAL_GRAPH_JSON_DATA_VIS_MODE = "json";
 }
