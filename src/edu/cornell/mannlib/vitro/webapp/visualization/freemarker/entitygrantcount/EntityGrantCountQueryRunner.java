@@ -114,7 +114,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		before = System.currentTimeMillis();
 		
 		while (resultSet.hasNext()) {
-		//	log.info("Checking whether EntityGrantCount produced any resultset against the Constructed Model");
+		//	log.debug("Checking whether EntityGrantCount produced any resultset against the Constructed Model");
 			QuerySolution solution = resultSet.nextSolution();
 
 			if (entity == null) {
@@ -232,7 +232,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		}
 		
 		after = System.currentTimeMillis();
-		log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+		log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 		return entity;
 	}
 
@@ -299,7 +299,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		
 		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
 		
-	//	log.info("\nThe sparql query is :\n" + sparqlQuery);
+	//	log.debug("\nThe sparql query is :\n" + sparqlQuery);
 		
 		return sparqlQuery;
 
@@ -333,7 +333,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		
 		after = System.currentTimeMillis();
 		
-		log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
 		
 		return createJavaValueObjects(resultSet);
 	}	

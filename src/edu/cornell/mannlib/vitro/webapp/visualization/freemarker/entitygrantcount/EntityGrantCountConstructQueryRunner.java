@@ -279,7 +279,7 @@ public class EntityGrantCountConstructQueryRunner {
         	
         	try{
         		query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() + queryString, SYNTAX);
-        	//	log.info("query: "+ queryString);
+        	//	log.debug("query: "+ queryString);
         	}catch(Throwable th){
                 log.error("Could not create CONSTRUCT SPARQL query for query " +
                         "string. " + th.getMessage());
@@ -299,7 +299,7 @@ public class EntityGrantCountConstructQueryRunner {
         after = System.currentTimeMillis();
         
    //     log.debug("Statements for constructed model of EntityGrantCount : "+ constructedModel.listStatements().toString());
-        log.info("Time taken to execute the CONSTRUCT queries is in milliseconds: " + (after - before) );
+        log.debug("Time taken to execute the CONSTRUCT queries is in milliseconds: " + (after - before) );
         // constructedModel.write(System.out);
         return constructedModel;
 	}	

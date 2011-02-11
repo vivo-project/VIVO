@@ -188,7 +188,7 @@ public class CoPIGrantCountConstructQueryRunner {
             
             before = System.currentTimeMillis();
 
-        	log.info("CONSTRUCT query string : " + queryString);
+        	log.debug("CONSTRUCT query string : " + queryString);
             
         	Query query = null;
         	
@@ -209,7 +209,7 @@ public class CoPIGrantCountConstructQueryRunner {
             }
         	
             after = System.currentTimeMillis();
-            log.info("Time taken to execute the CONSTRUCT query is in milliseconds: " + (after - before) );
+            log.debug("Time taken to execute the CONSTRUCT query is in milliseconds: " + (after - before) );
 
         }	
 
