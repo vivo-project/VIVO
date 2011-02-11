@@ -21,37 +21,12 @@ var subOrganizationTemporalGraphURL = "${subOrganizationGrantTemporalGraphCommon
 
 $(document).ready(function () {
 
-    $.blockUI.defaults.overlayCSS = { 
-        backgroundColor: '#fff', 
-        opacity:         1.0 
-    };
-    
-    $.blockUI.defaults.css.width = '500px';
-    $.blockUI.defaults.css.border = '0px';
-    $.blockUI.defaults.css.top = '15%';
-    
-    $("div#temporal-graph-response").block({
-        message: '<h3><img src="' + loadingImageLink + '" />&nbsp;Loading data for <i>${organizationLabel}</i></h3>'
-    });
+    setupLoadingScreen($("div#temporal-graph-response"));
 
-    $.ajax({
-        url: '${temporalGraphDataURL}',
-        dataType: "json",
-        success: function (data) {
-
-            if (data.error) {
-                $("#body").remove();
-                $("#error-container").show();
-                $("div#temporal-graph-response").unblock();
-                
-            } else {
-                $("#body").show();
-                $("#error-container").remove();
-                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
-                $("div#temporal-graph-response").unblock();
-            }
-        }
-    });
+    getTemporalGraphData('${temporalGraphDataURL}',
+                         $("#body"),
+                         $("#error-container"),
+                         $("div#temporal-graph-response"));
 
 });
 

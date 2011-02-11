@@ -18,51 +18,51 @@ $(document).ready(function() {
     
     //temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, jsonString);
     
+    /*
+     * When the intra-entity parameters are clicked,
+     * update the status accordingly.   
+     */         
+
+    $("select.comparisonValues").change(function(){
+
+        var selectedValue = $("select.comparisonValues option:selected").val();
+        
+        var selectedParameter;
+        
+        $.each(COMPARISON_PARAMETERS_INFO, function(index, parameter) {
+        	
+            if (parameter.value === selectedValue) {
+            	selectedParameter = parameter;
+                window.location = parameter.viewLink;
+            }
+        	
+        });
+        
+        //$("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
+        
+        /*
+         * This piece of code is not executed at all because the redirect happens before there is a chance 
+         * to render the below contents.
+         * */
+        
+        /*
+        
+        $("#comparisonParameter").text("Total Number of " + selectedValue);
+        $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
+        $('#yaxislabel').css("color", "#595B5B");
+        $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
+        
+        
+        */
+
+    });
+    
 });
         
 //click event handler for clear button
 $("a.clear-selected-entities").live('click', function(){
     clearRenderedObjects();
 }); 
-
-/*
- * When the intra-entity parameters are clicked,
- * update the status accordingly.   
- */         
-
-$("select.comparisonValues").live('change', function(){
-
-    var selectedValue = $("select.comparisonValues option:selected").val();
-    
-    var selectedParameter;
-    
-    $.each(COMPARISON_PARAMETERS_INFO, function(index, parameter) {
-    	
-        if (parameter.value === selectedValue) {
-        	selectedParameter = parameter;
-            window.location = parameter.viewLink;
-        }
-    	
-    });
-    
-    //$("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
-    
-    /*
-     * This piece of code is not executed at all because the redirect happens before there is a chance 
-     * to render the below contents.
-     * */
-    
-    /*
-    
-    $("#comparisonParameter").text("Total Number of " + selectedValue);
-    $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
-    $('#yaxislabel').css("color", "#595B5B");
-    $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
-    
-    
-    */
-
-});
 
 $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
     
@@ -189,9 +189,57 @@ function entityCheckboxOperatedOnEventListener() {
 	
 }
 
-function getTemporalGraphDataFromServer() {
+/*
+ * This method will setup the options for loading screen & then activate the 
+ * loading screen.
+ * */
+function setupLoadingScreen(visContainerDIV) {
 	
+    $.blockUI.defaults.overlayCSS = { 
+            backgroundColor: '#fff', 
+            opacity:         1.0 
+        };
+        
+    $.blockUI.defaults.css.width = '500px';
+    $.blockUI.defaults.css.border = '0px';
+    $.blockUI.defaults.css.top = '15%';
 	
+    visContainerDIV.block({
+        message: '<h3><img src="' + loadingImageLink 
+        			+ '" />&nbsp;Loading data for <i>' 
+        			+ organizationLabel
+        			+ '</i></h3>'
+    });
+	
+}
+
+/*
+ * This function gets json data for temporal graph & after rendering removes the
+ * loading message. It will also display the error container in case of any error.
+ * */
+function getTemporalGraphData(temporalGraphDataURL, 
+										graphBodyDIV, 
+										errorBodyDIV, 
+										visContainerDIV) {
+	
+	$.ajax({
+        url: temporalGraphDataURL,
+        dataType: "json",
+        success: function (data) {
+
+            if (data.error) {
+            	graphBodyDIV.remove();
+            	errorBodyDIV.show();
+            	visContainerDIV.unblock();
+                
+            } else {
+            	graphBodyDIV.show();
+            	errorBodyDIV.remove();
+                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
+                visContainerDIV.unblock();
+            }
+        }
+    });
 	
 }
 
