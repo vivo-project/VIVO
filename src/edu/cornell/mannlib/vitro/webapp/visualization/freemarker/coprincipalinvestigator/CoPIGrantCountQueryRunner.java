@@ -359,7 +359,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	
 	after = System.currentTimeMillis();
 	
-	log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+	log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
 	
 	return createQueryResult(resultSet);
 	}
@@ -540,7 +540,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			
 			
 			after = System.currentTimeMillis();
-			log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+			log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 			
 			return new CoPIData(egoNode, nodes, edges);
 	}

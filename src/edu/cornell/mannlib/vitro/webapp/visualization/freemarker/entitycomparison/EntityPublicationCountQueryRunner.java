@@ -205,9 +205,9 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		}
 		
 		//TODO: return non-null value
-	//	log.info("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
+	//	log.debug("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
 		after = System.currentTimeMillis();
-		log.info("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+		log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 
 		return entity;
 	}
@@ -296,7 +296,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		
 		after = System.currentTimeMillis();
 		
-		log.info("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
 		
 		return createJavaValueObjects(resultSet);
 	}
