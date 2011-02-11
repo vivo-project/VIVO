@@ -153,21 +153,30 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	}
 
 
-	private String getCoPIsListCSVContent(Map<String, Integer> coPIsToCount) {
+	private String getCoPIsListCSVContent(CoPIData coPIData) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
-		csvFileContent.append("Year, Count\n");
+		csvFileContent.append("Co-investigator, Count\n");
 		
-		for (Entry<String, Integer> currentEntry : coPIsToCount.entrySet()) {
-			csvFileContent.append(StringEscapeUtils.escapeCsv(currentEntry.getKey()));
+//		for (Entry<String, Integer> currentEntry : coPIData.entrySet()) {
+		for (CoPINode currNode : coPIData.getNodes()) {
+			
+			/*
+			 * We have already printed the Ego Node info.
+			 * */
+			if (currNode != coPIData.getEgoNode()) {
+			
+			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getNodeName()));
 			csvFileContent.append(",");
-			csvFileContent.append(currentEntry.getValue());
+			csvFileContent.append(currNode.getNumberOfInvestigatedGrants());
 			csvFileContent.append("\n");
+			
+			}
+			
 		}
 		
 		return csvFileContent.toString();
-			
 	}	
 	
 
@@ -175,7 +184,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 
 		StringBuilder csvFileContent = new StringBuilder();
 		
-		csvFileContent.append("Year, Count, Co-PI(s)\n");
+		csvFileContent.append("Year, Count, Co-investigator(s)\n");
 
 		for (Map.Entry<String, Set<CoPINode>> currentEntry : yearToCoPI.entrySet()) {
 			
@@ -247,15 +256,12 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	private Map<String, String> prepareCoPIsListDataResponse(CoPIData coPIData) {
 		
 		String outputFileName = "";
-		Map<String, Integer> coPIsToCount = new TreeMap<String, Integer>();
 		
 		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
 									+ "_co-investigators" + ".csv";
 	
-			coPIsToCount = getCoPIsList(coPIData);
-			
 		} else {
 			outputFileName = "no_co-investigators" + ".csv";
 		}
@@ -266,7 +272,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					 getCoPIsListCSVContent(coPIsToCount));
+					 getCoPIsListCSVContent(coPIData));
 
 		return fileData;
 	}
@@ -337,8 +343,5 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		return fileData;
 	
 	}
-	
-	
-	
 	
 }

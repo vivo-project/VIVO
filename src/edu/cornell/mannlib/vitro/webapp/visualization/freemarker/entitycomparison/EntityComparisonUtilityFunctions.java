@@ -5,14 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
+import com.hp.hpl.jena.iri.IRI;
+import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
+import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
@@ -107,4 +114,47 @@ public class EntityComparisonUtilityFunctions {
 		return subOrganizationTypesResult;
 	}
 
+	public static String getEntityLabelFromDAO(VitroRequest vitroRequest,
+			String entityURI) {
+		
+		IndividualDao iDao = vitroRequest.getWebappDaoFactory().getIndividualDao();
+        Individual ind = iDao.getIndividualByURI(entityURI);
+        
+        String organizationLabel = "Unknown Organization"; 
+        
+        if (ind != null) {
+        	organizationLabel = ind.getName();
+        }
+		return organizationLabel;
+	}
+	
+	public static String getStaffProvidedOrComputedHighestLevelOrganization(Log log,
+			Dataset Dataset)
+			throws MalformedQueryParametersException {
+		
+		String finalHighestLevelOrganizationURI = "";
+		
+		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
+		
+		/*
+		 * First checking if the staff has provided highest level organization in deploy.properties
+		 * if so use to temporal graph vis.
+		 */
+		if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
+			
+			/*
+			 * To test for the validity of the URI submitted.
+			 */
+			IRIFactory iRIFactory = IRIFactory.jenaImplementation();
+			IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
+		    
+			if (iri.hasViolation(false)) {
+				finalHighestLevelOrganizationURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log, Dataset);
+		    } else {
+		    	finalHighestLevelOrganizationURI = staffProvidedHighestLevelOrganization;
+		    }
+		}
+		return finalHighestLevelOrganizationURI;
+	}
+	
 }

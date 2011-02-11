@@ -2,7 +2,7 @@
 
 <div id="body">
 
-        <h2><span id="header-entity-label"><a id="organizationMoniker" href="#"></a></span></h2>
+        <h2><span id="header-entity-label"><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a></span></h2>
         
         <div id="leftblock">
             <div id="leftUpper">
@@ -65,7 +65,7 @@
         
         <div id="rightblock">
         
-            <h3 id="headerText">Comparing <span id="comparisonHeader">${currentParameterObject.value}</span> of <span id="entityHeader">Institutions</span> in <span id="organizationLabel"></span></h3>
+            <h3 id="headerText">Comparing <span id="comparisonHeader">${currentParameterObject.value}</span> of <span id="entityHeader">Institutions</span> in ${organizationLabel}</h3>
             
             <div id="temporal-graph">
                 <div id="yaxislabel"></div>

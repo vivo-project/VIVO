@@ -15,21 +15,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
-import com.hp.hpl.jena.iri.IRI;
-import com.hp.hpl.jena.iri.IRIFactory;
-import com.hp.hpl.jena.iri.Violation;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
@@ -54,48 +48,13 @@ public class EntityGrantCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		if (StringUtils.isNotBlank(entityURI)){
+		if (StringUtils.isBlank(entityURI)){
 			
-			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
-					Dataset, entityURI);
+			entityURI = EntityComparisonUtilityFunctions
+								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset);
 			
-		} else {
-			
-			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
-			
-			/*
-			 * First checking if the staff has provided highest level organization in deploy.properties
-			 * if so use to temporal graph vis.
-			 */
-			if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
-				
-				/*
-	        	 * To test for the validity of the URI submitted.
-	        	 */
-	        	IRIFactory iRIFactory = IRIFactory.jenaImplementation();
-	    		IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
-	            
-	    		if (iri.hasViolation(false)) {
-	            	
-	                String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
-	                log.error("Highest Level Organization URI provided is invalid " + errorMsg);
-	                
-	            } else {
-	            	
-	    			return getSubjectEntityAndGenerateResponse(vitroRequest,
-							log, Dataset,
-							staffProvidedHighestLevelOrganization);
-	            }
-			}
-			
-			String highestLevelOrgURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log,
-					Dataset);
-			
-			return getSubjectEntityAndGenerateResponse(vitroRequest, log,
-					Dataset, highestLevelOrgURI);
 		}
-		
-		
+		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
 	@Override
@@ -105,6 +64,36 @@ public class EntityGrantCountRequestHandler implements
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
+		
+		/*
+		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
+		 * */
+		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
+					.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
+			
+			if (StringUtils.isNotBlank(entityURI)){
+				
+				return getSubjectEntityAndGenerateDataResponse(
+								vitroRequest, 
+								log,
+								Dataset, 
+								entityURI);
+			} else {
+				
+				return getSubjectEntityAndGenerateDataResponse(
+								vitroRequest, 
+								log,
+								Dataset,
+								EntityComparisonUtilityFunctions
+										.getStaffProvidedOrComputedHighestLevelOrganization(
+												log,
+												Dataset));
+			}
+			
+		} else {
+			/*
+			 * This provides csv download files for the content in the tables.
+			 * */		
 
 		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
@@ -119,6 +108,8 @@ public class EntityGrantCountRequestHandler implements
 				log, Dataset, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
+		
+		}
 
 	}
 	
@@ -128,7 +119,7 @@ public class EntityGrantCountRequestHandler implements
 		throw new UnsupportedOperationException("Entity Grant Count does not provide Ajax Response.");
 	}
 	
-	private ResponseValues getSubjectEntityAndGenerateResponse(
+	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset Dataset,
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
@@ -142,18 +133,16 @@ public class EntityGrantCountRequestHandler implements
 		Entity entity = queryManager.getQueryResult();
 		
 		if (entity.getEntityLabel().equals("no-label")) {
-			
-			return prepareStandaloneErrorResponse(vitroRequest, subjectEntityURI);
-			
+			return prepareStandaloneDataErrorResponse(vitroRequest, subjectEntityURI);
 		} else {	
 		
-			return getSubEntityTypesAndRenderStandaloneResponse(
+			return getSubEntityTypesAndComputeDataResponse(
 					vitroRequest, log, Dataset,
 					subjectEntityURI, entity);
 		}
 	}
 
-	private ResponseValues getSubEntityTypesAndRenderStandaloneResponse(
+	private Map<String, String> getSubEntityTypesAndComputeDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset Dataset,
 			String subjectOrganization, Entity entity)
 			throws MalformedQueryParametersException {
@@ -161,8 +150,34 @@ public class EntityGrantCountRequestHandler implements
 		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
 				log, Dataset, subjectOrganization);
 		
-		return prepareStandaloneResponse(vitroRequest, entity, subjectOrganization,
-				subOrganizationTypesResult);
+		return prepareStandaloneDataResponse(vitroRequest, entity, subOrganizationTypesResult);
+	}
+	
+	
+	private Map<String, String> prepareStandaloneDataErrorResponse(
+			VitroRequest vitroRequest, String subjectEntityURI) {
+
+		Map<String, String> fileData = new HashMap<String, String>();
+		
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "application/octet-stream");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, "{\"error\" : \"No Grants for this Organization found in VIVO.\"}");
+		return fileData;
+	}
+	
+	
+	private Map<String, String> prepareStandaloneDataResponse(
+										VitroRequest vitroRequest, 
+										Entity entity,
+										Map<String, Set<String>> subOrganizationTypesResult) {
+
+		Map<String, String> fileData = new HashMap<String, String>();
+		
+		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "application/octet-stream");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+				writeGrantsOverTimeJSON(vitroRequest, entity.getSubEntities(), subOrganizationTypesResult));
+		return fileData;
 	}
 
 	/**
@@ -200,39 +215,30 @@ public class EntityGrantCountRequestHandler implements
 		return fileData;
 	}
 	
-	/**
-	 * 
-	 * @param vreq
-	 * @param valueObjectContainer
-	 * @return
-	 */
-	private TemplateResponseValues prepareStandaloneResponse(VitroRequest vreq,
-			Entity entity, String entityURI, Map<String, Set<String>> subOrganizationTypesResult) {
 
-        Portal portal = vreq.getPortal();
-        String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
+	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq,
+			   String entityURI) {
+
+		Portal portal = vreq.getPortal();
+		String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
 		
-        String jsonContent = "";
-		jsonContent = writeGrantsOverTimeJSON(vreq, entity.getSubEntities(), subOrganizationTypesResult);
-
-		String title = "";
+		String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vreq,
+											  entityURI);
 		
-		if (StringUtils.isNotBlank(entity.getEntityLabel())) {
-			title = entity.getEntityLabel() + " - ";
-		}
-
-
-        Map<String, Object> body = new HashMap<String, Object>();
-        body.put("portalBean", portal);
-        body.put("title", title + "Temporal Graph Visualization");
-        body.put("organizationURI", entityURI);
-        body.put("organizationLabel", entity.getEntityLabel());
-        body.put("jsonContent", jsonContent);
-        
-        return new TemplateResponseValues(standaloneTemplate, body);
-        
+		Map<String, Object> body = new HashMap<String, Object>();
+		body.put("portalBean", portal);
+		body.put("title", organizationLabel + " - Temporal Graph Visualization");
+		body.put("organizationURI", entityURI);
+		body.put("organizationLabel", organizationLabel);
+		
+		return new TemplateResponseValues(standaloneTemplate, body);
 	}
 	
+	/**
+	 * @deprecated This method should not be called anymore although the templates being 
+	 * called by this method are still in use, so we should not get rid of it.
+	 * @return
+	 */
 	private ResponseValues prepareStandaloneErrorResponse(
 			VitroRequest vitroRequest, String entityURI) {
 		
@@ -240,14 +246,8 @@ public class EntityGrantCountRequestHandler implements
         String standaloneTemplate = "entityGrantComparisonError.ftl";
         Map<String, Object> body = new HashMap<String, Object>();
         
-        IndividualDao iDao = vitroRequest.getWebappDaoFactory().getIndividualDao();
-        Individual ind = iDao.getIndividualByURI(entityURI);
-        
-        String organizationLabel = "Unknown Organization"; 
-        
-        if (ind != null) {
-        	organizationLabel = ind.getName();
-        }
+        String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vitroRequest,
+				entityURI);
         
         body.put("organizationLabel", organizationLabel);
         
@@ -300,7 +300,7 @@ public class EntityGrantCountRequestHandler implements
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
-			boolean isPerson = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
+			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
 			
 			if(isPerson){
 				entityJson.setVisMode("PERSON");
@@ -343,6 +343,4 @@ public class EntityGrantCountRequestHandler implements
 
 		return csvFileContent.toString();
 	}	
-	
-	
 }

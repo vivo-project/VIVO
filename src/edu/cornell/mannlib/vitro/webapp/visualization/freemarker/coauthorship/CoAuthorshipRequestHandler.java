@@ -18,8 +18,8 @@ import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
@@ -133,28 +133,40 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	
 	
 
-	private String getCoauthorsListCSVContent(Map<String, Integer> coAuthorsToCount) {
+	private String getCoauthorsListCSVContent(CoAuthorshipData coAuthorshipData) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
-		csvFileContent.append("Year, Count\n");
+		csvFileContent.append("Co-author, Count\n");
 		
-		for (Entry<String, Integer> currentEntry : coAuthorsToCount.entrySet()) {
-			csvFileContent.append(StringEscapeUtils.escapeCsv(currentEntry.getKey()));
+		//for (Entry<String, Integer> currentEntry : coAuthorsToCount.entrySet()) {
+		for (Node currNode : coAuthorshipData.getNodes()) {			
+			
+			/*
+			 * We have already printed the Ego Node info.
+			 * */
+			if (currNode != coAuthorshipData.getEgoNode()) {
+				
+			
+			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getNodeName()));
 			csvFileContent.append(",");
-			csvFileContent.append(currentEntry.getValue());
+			csvFileContent.append(currNode.getNumOfAuthoredWorks());
 			csvFileContent.append("\n");
+			
+			}
+			
+			
 		}
 		
 		return csvFileContent.toString();
-			
+		
 	}
 
 	private String getCoauthorsPerYearCSVContent(Map<String, Set<Node>> yearToCoauthors) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
-		csvFileContent.append("Year, Count, Co-Author(s)\n");
+		csvFileContent.append("Year, Count, Co-author(s)\n");
 		
 		for (Entry<String, Set<Node>> currentEntry : yearToCoauthors.entrySet()) {
 			csvFileContent.append(StringEscapeUtils.escapeCsv(currentEntry.getKey()));
@@ -225,15 +237,11 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	private Map<String, String> prepareCoauthorsListDataResponse(CoAuthorshipData coAuthorshipData) {
 		
 		String outputFileName = "";
-		Map<String, Integer> coAuthorsToCount = new TreeMap<String, Integer>();
-		
+
 		if (coAuthorshipData.getNodes() != null && coAuthorshipData.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(coAuthorshipData.getEgoNode().getNodeName()) 
 									+ "_co-authors" + ".csv";
-	
-			coAuthorsToCount = getCoAuthorsList(coAuthorshipData);
-			
 		} else {
 			outputFileName = "no_co-authors" + ".csv";
 		}
@@ -244,27 +252,9 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					 getCoauthorsListCSVContent(coAuthorsToCount));
+					 getCoauthorsListCSVContent(coAuthorshipData));
 
 		return fileData;
-	}
-	
-	private Map<String, Integer> getCoAuthorsList(CoAuthorshipData coAuthorsipVO) {
-		
-		Map<String, Integer> coAuthorsToCount = new TreeMap<String, Integer>();
-		
-		for (Node currNode : coAuthorsipVO.getNodes()) {
-			
-			/*
-			 * We have already printed the Ego Node info.
-			 * */
-			if (currNode != coAuthorsipVO.getEgoNode()) {
-				
-				coAuthorsToCount.put(currNode.getNodeName(), currNode.getNumOfAuthoredWorks());
-				
-			}
-		}
-		return coAuthorsToCount;
 	}
 	
 	/**
