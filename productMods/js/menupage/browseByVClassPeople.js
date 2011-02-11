@@ -68,7 +68,7 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
                 }
                 // Build the content of each list item, piecing together each component
                 listItem = '<li class="vcard individual foaf-person" role="listitem" role="navigation">';
-                listItem += '<img src="'+ image +'" width="90" height="90" alt="'+ fullName +'" />';
+                listItem += '<img src="'+ image +'" width="90" alt="'+ fullName +'" />';
                 listItem += '<h1 class="fn thumb"><a href="'+ profileUrl +'" title="View the profile page for '+ fullName +'">'+ fullName +'</a></h1>';
                 // Include the calculated preferred title (see above) only if it's not empty
                 if ( preferredTitle != "" ) {
