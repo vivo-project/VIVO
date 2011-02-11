@@ -108,11 +108,11 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				biboDocument = new BiboDocument(documentNode.toString());
 				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
 
-				RDFNode documentLabelNode = solution
-						.get(QueryFieldLabels.DOCUMENT_LABEL);
-				if (documentLabelNode != null) {
-					biboDocument.setDocumentLabel(documentLabelNode.toString());
-				}
+//				RDFNode documentLabelNode = solution
+//						.get(QueryFieldLabels.DOCUMENT_LABEL);
+//				if (documentLabelNode != null) {
+//					biboDocument.setDocumentLabel(documentLabelNode.toString());
+//				}
 
 				RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {

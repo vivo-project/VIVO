@@ -6,8 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -18,9 +16,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Utilit
  */
 public class BiboDocument extends Individual {
 
-	private String documentMoniker;
-	private String documentBlurb;
-	private String documentDescription;
 	private String publicationYear;
 	private String publicationDate;
 	private String parsedPublicationYear = VOConstants.DEFAULT_PUBLICATION_YEAR;
@@ -31,35 +26,7 @@ public class BiboDocument extends Individual {
 	
 	public String getDocumentURL() {
 		return this.getIndividualURI();
-	}
-	
-	public String getDocumentMoniker() {
-		return documentMoniker;
-	}
-	
-	public void setDocumentMoniker(String documentMoniker) {
-		this.documentMoniker = documentMoniker;
-	}
-	
-	public String getDocumentLabel() {
-		return this.getIndividualLabel();
-	}
-	
-	public void setDocumentLabel(String documentLabel) {
-		this.setIndividualLabel(documentLabel);
-	}
-	
-	public String getDocumentBlurb() {
-		return documentBlurb;
-	}
-	
-	public void setDocumentBlurb(String documentBlurb) {
-		this.documentBlurb = documentBlurb;
-
-//		if (documentBlurb != null) {
-//			this.setParsedPublicationYear(parsePublicationYear(documentBlurb));
-//		}
-	}
+	}	
 	
 	private String parsePublicationYear(String documentBlurb) {
 
@@ -92,13 +59,6 @@ public class BiboDocument extends Individual {
 		}
 
 		return publishedYear;
-	}
-
-	public String getDocumentDescription() {
-		return documentDescription;
-	}
-	public void setDocumentDescription(String documentDescription) {
-		this.documentDescription = documentDescription;
 	}
 
 	/**

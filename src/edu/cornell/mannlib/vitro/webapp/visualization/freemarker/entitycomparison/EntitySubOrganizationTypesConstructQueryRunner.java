@@ -53,9 +53,6 @@ public class EntitySubOrganizationTypesConstructQueryRunner {
 	}
 	
 	private String generateConstructQueryForSubOrganizationTypes(String queryURI){
-		
-	    //bdc34: this query was lacking the personLabel, personType, and personTypeLabel in the WHERE clause
-	    //it seems like they are needed since they are referenced in the CONSTRUCT clause.	    
 	    
 		String sparqlQuery = 			 
 		

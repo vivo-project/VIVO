@@ -53,22 +53,15 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
 			+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
-			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n" 
-			+ "		(str(?documentMoniker) as ?" + QueryFieldLabels.DOCUMENT_MONIKER + ") \n" 
-			+ "		(str(?documentLabel) as ?" + QueryFieldLabels.DOCUMENT_LABEL + ") \n" 
-			+ "		(str(?documentBlurb) as ?" + QueryFieldLabels.DOCUMENT_BLURB + ") \n" 
-			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
-			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") \n"
-			+ "		(str(?documentDescription) as ?" + QueryFieldLabels.DOCUMENT_DESCRIPTION + ") \n";
+			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n" 			 			 			 
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n";
+		//	+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") \n";			
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
 			+ "?document rdfs:label ?documentLabel .\n" 
 			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" 
-			+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } .\n" 
-			+ "OPTIONAL {  ?document vitro:moniker ?documentMoniker } .\n" 
-			+ "OPTIONAL {  ?document vitro:blurb ?documentBlurb } .\n" 
-			+ "OPTIONAL {  ?document vitro:description ?documentDescription }\n";
+			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" ;
+			//+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } ." ;
 	
 	public PersonPublicationCountQueryRunner(String personURI,
 			Dataset Dataset, Log log) {
@@ -89,27 +82,6 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 											solution.get(QueryFieldLabels.DOCUMENT_URL)
 												.toString());
 
-			RDFNode documentLabelNode = solution.get(QueryFieldLabels.DOCUMENT_LABEL);
-			if (documentLabelNode != null) {
-				biboDocument.setDocumentLabel(documentLabelNode.toString());
-			}
-
-
-			RDFNode documentBlurbNode = solution.get(QueryFieldLabels.DOCUMENT_BLURB);
-			if (documentBlurbNode != null) {
-				biboDocument.setDocumentBlurb(documentBlurbNode.toString());
-			}
-
-			RDFNode documentmonikerNode = solution.get(QueryFieldLabels.DOCUMENT_MONIKER);
-			if (documentmonikerNode != null) {
-				biboDocument.setDocumentMoniker(documentmonikerNode.toString());
-			}
-
-			RDFNode documentDescriptionNode = solution.get(QueryFieldLabels.DOCUMENT_DESCRIPTION);
-			if (documentDescriptionNode != null) {
-				biboDocument.setDocumentDescription(documentDescriptionNode.toString());
-			}
-
 			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 			if (publicationDateNode != null) {
 				biboDocument.setPublicationDate(publicationDateNode.toString());
@@ -118,10 +90,10 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 			/*
 			 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
 			 * */
-			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
-			if (publicationYearUsing_1_1_PropertyNode != null) {
-				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
-			}
+//			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
+//			if (publicationYearUsing_1_1_PropertyNode != null) {
+//				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
+//			}
 			
 			/*
 			 * Since we are getting publication count for just one author at a time we need
@@ -165,7 +137,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 							+  SPARQL_QUERY_COMMON_WHERE_CLAUSE
 							+ "}\n";
 
-//		System.out.println(sparqlQuery);
+		log.debug(sparqlQuery);
 		
 		return sparqlQuery;
 	}
