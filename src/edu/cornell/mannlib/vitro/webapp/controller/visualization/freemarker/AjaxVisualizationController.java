@@ -19,6 +19,7 @@ import com.hp.hpl.jena.rdf.model.ModelMaker;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.TemplateProcessingHelper.TemplateProcessingException;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
@@ -53,7 +54,11 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 			
 			Configuration config = getConfig(vreq);
 			TemplateResponseValues trv = (TemplateResponseValues) ajaxResponse;
-			writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
+			try {
+                writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
+            } catch (TemplateProcessingException e) {
+                log.error(e.getMessage(), e);
+            }
 			
 		} else {
 			response.getWriter().write(ajaxResponse.toString());
