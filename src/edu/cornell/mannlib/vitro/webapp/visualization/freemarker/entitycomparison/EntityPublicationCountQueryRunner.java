@@ -53,14 +53,12 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			+ "		(str(?Person) as ?personLit) "
 			+ "		(str(?PersonLabel) as ?personLabelLit) "
 			+ "		(str(?Document) as ?documentLit) "
-			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
 			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
 			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") ";
 
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
-			+ "?Document rdf:type bibo:Document ;"
-			+ " rdfs:label ?DocumentLabel ."
+			+ "?Document rdf:type bibo:Document . "
 			+ "OPTIONAL {  ?Document core:dateTimeValue ?dateTimeValue . " 
 			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
 			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." ;
@@ -107,12 +105,6 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 				biboDocument = new BiboDocument(documentNode.toString());
 				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
-
-				RDFNode documentLabelNode = solution
-						.get(QueryFieldLabels.DOCUMENT_LABEL);
-				if (documentLabelNode != null) {
-					biboDocument.setDocumentLabel(documentLabelNode.toString());
-				}
 
 				RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {
