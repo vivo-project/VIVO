@@ -14,7 +14,7 @@
         <#include "menu.ftl">
  
         <#-- vivo-basic continues to display home tab content on the home page -->
-        ${homeTabContent}
+        ${homeTabContent!}
         
         <#include "footer.ftl">
     </body>
