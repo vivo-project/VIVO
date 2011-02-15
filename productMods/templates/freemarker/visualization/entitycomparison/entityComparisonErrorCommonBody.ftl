@@ -2,7 +2,7 @@
 
 <#assign standardVisualizationURLRoot ="/visualization">
 
-<#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI?url}">
+<#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
 <#assign temporalGraphURL = '${urls.base}${standardVisualizationURLRoot}?vis=${otherVisType}&uri=${organizationURI}&labelField=label'>
 
 <div id="error-container">
