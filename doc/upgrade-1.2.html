@@ -4,7 +4,6 @@
         <meta charset="utf-8" />
         <title>VIVO Release 1 V1.2 Upgrade Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen" />
-        <link rel="stylesheet" href="./css/print.css" media="print" />
     </head>
     <body>
         <div id="branding" role="banner">
@@ -14,7 +13,7 @@
         <div id="wrapper-content" role="main">
             <h1>VIVO Release 1 v1.2 Upgrade Guide</h1>
             <small>
-                January 28, 2011 - Upgrading from Release 1 v1.1 to Release 1 
+                February 16, 2011 - Upgrading from Release 1 v1.1 to Release 1 
                 v1.2 
             </small>
             <toc>
@@ -42,51 +41,40 @@
             </p>
             <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.2</h2>
             <p>
-                The VIVO 1.2 release incorporates major changes throughout the
-                application - notably a new templating system to support more flexible
-                display and navigation, plus improvements to address scalability. The
-                release also features two new visualization options: temporal graphing
-                for organizations, and personal visualizations extended to cover grants
-                as well as publications. The VIVO Harvester library has also been
-                significantly improved and expanded in scope for its 1.0 release 
-                through the VIVO SourceForge project at <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
+                The VIVO 1.2 release incorporates major changes throughout the application - 
+				notably a new templating system to support more versatile page rendering, plus 
+				improvements to address scalability. The release also features a new personal 
+				visualization option covering grants as well as publications. The VIVO Harvester 
+				library has also been significantly improved and expanded in scope for its 1.0 
+				release through the VIVO SourceForge project at 
+				<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
             <h4>Templating system for page generation, navigation, and theming</h4>
             <p>
-                A new installation of VIVO 1.2 looks strikingly different, with a
-                new navigation and browse interface as well as a more modular page
-                design that is easier to customize and brand for your local
-                institution. Page displays now support inline navigation to streamline
-                viewing of expanded personal and organizational profiles, as well as
-                improved graphic layout and organization. New browsing controls on the
-                home page and each menu page include interactive visual controls to
-                provide an immediate overview of the size and range of content and
-                quick access down to the individual person, organization, research
-                feature, or event. VIVO's navigation has also been completely
-                overhauled.
+                A fresh installation of VIVO 1.2 looks strikingly different, with the introduction 
+				of a new default theme which takes advantage of the navigation and browse features 
+				delivered by the templating system. Individual pages now offer inline navigation to 
+				streamline viewing of expanded personal and organizational profiles, as well as 
+				improved content layout and organization. New browse controls on the home page and 
+				menu pages help to provide an immediate overview of the size and range of content 
+				and quick access down to the individual person, organization, research feature, or 
+				event.
             </p>
             <h4>Storage model</h4>
             <p>
-                While server memory capacity has increased significantly in recent 
-                years, VIVO's reliance on in-memory caching of RDF data had put limits  
-                on the ultimate scalability of VIVO instances and potentially increased 
-                the cost of servers required to support VIVO.&nbsp; 
-                <br>
+                While server memory capacity has increased significantly in recent years, VIVO's reliance 
+				on in-memory caching of RDF data had put limits on the ultimate scalability of VIVO instances 
+				and potentially increased the cost of servers required to support VIVO.
             </p>
             <p>
-                With version 1.2, VIVO has been converted to optionally use Jena's
-                SPARQL database (SDB) subsystem. SDB significantly reduces the baseline
-                memory footprint, allowing VIVO installations to scale well beyond what
-                has previously been possible.
+                With version 1.2, VIVO has been converted to optionally use Jena's SPARQL database (SDB) 
+				subsystem. SDB significantly reduces the baseline memory footprint, allowing VIVO installations 
+				to scale well beyond what has previously been possible.
             </p>
             <h4>New visualizations</h4>
             <p>
-                VIVO continues to expand visualization options including all-new
-                user-configurable temporal comparisons of publications and grants,
-                grouped by organization or by affiliated person. Visualizations of
-                networks of co-authors are now complemented by visualizations of
-                co-investigators on grants, with a similar interactivity and options
-                for export as images or data.
+                Visualizations of networks of co-authors are now complemented by visualizations of co-investigators 
+				on grants, with similar interactivity and options for export as images or data.
             </p>
             <h4>Ontology</h4>
             <p>
@@ -99,10 +87,11 @@
             <h3>Associated VIVO releases</h3>
             <h4>VIVO Harvester</h4>
             <p>
-                The Harvester development team is releasing version 1.0 of the VIVO
-                Harvester library, an extensible data ingest and updating framework
-                with sample configurations for loading PubMed publication, grants, and 
-                human resources data. The Harvester is available at <a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
+                The Harvester development team is releasing version 1.0 of the VIVO Harvester library shortly 
+				following the release of VIVO 1.2. The Harvester is an extensible data ingest and updating 
+				framework with sample configurations for loading PubMed publication, grants, and human resources 
+				data. Pre-release versions of the Harvester are available at 
+				<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
             <hr><!-- Page break --><!-- Upgrade process for V1.2 --><h2 id="upgrade">Upgrade process for V1.2</h2>
             <toc>
