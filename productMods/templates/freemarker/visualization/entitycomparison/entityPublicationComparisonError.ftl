@@ -1,0 +1,7 @@
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<#assign otherVisType = "entity_grant_count">
+<#assign textForOtherEntityComparisonType = "grants">
+<#assign textForCurrentEntityComparisonType = "publications">
+
+<#include "entityComparisonErrorCommonBody.ftl">

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- ====================================================================== 
+
+     vivoLoadTesting    
+     Run JMeter tests and summarize the results.
+
+     ====================================================================== -->
+<project name="vivoLoadTesting" default="describe">
+	<description>
+            Run JMeter tests and summarize the results.
+    </description>
+
+	<taskdef name="jmeter"
+	         classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask"
+	         classpath="lib/ant-jmeter-1.0.9.jar" />
+
+	<tstamp>
+		<format property="TIMESTAMP" pattern="MMMM dd, yyyy hh:mm a" />
+	</tstamp>
+
+	<!-- ================================= 
+          target: describe              
+         ================================= -->
+	<target name="describe" description="--> Describe the targets (this is the default).">
+		<echo>
+all      - Run the tests and summarize the output.
+clean    - Remove any existing output and summaries.
+run      - Just run the tests.
+report   - Just summarize output from previously run tests.
+	    </echo>
+	</target>
+
+	<!-- ================================= 
+          target: all              
+         ================================= -->
+	<target name="all"
+	        depends="run, report"
+	        description="--> Run the tests and summarize the output." />
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean"
+	        depends="properties"
+	        description="--> Remove any existing output and summaries.">
+		<delete dir="${results.dir}" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: properties                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="properties">
+		<property name="source.dir" value="src" />
+		<property name="build.dir" value=".build" />
+		<property name="tests.dir" value="tests" />
+		<property name="properties.file" location="loadtesting.properties" />
+
+		<fail message="You must create a &quot;${properties.file}&quot; file.">
+			<condition>
+				<not>
+					<available file="${properties.file}" />
+				</not>
+			</condition>
+		</fail>
+
+		<property file="${properties.file}" />
+
+		<fail unless="test.name" message="${properties.file} must contain a value for test.name" />
+
+		<fail unless="jmeter.home.dir"
+		      message="${properties.file} must contain a value for jmeter.home.dir" />
+
+		<fail unless="webapp.host"
+		      message="${properties.file} must contain a value for webapp.host" />
+		<fail unless="webapp.port"
+		      message="${properties.file} must contain a value for webapp.port" />
+		<fail unless="webapp.name"
+		      message="${properties.file} must contain a value for webapp.name" />
+
+		<fail unless="data.dir" message="${properties.file} must contain a value for data.dir" />
+
+		<!-- If no value was provided, store the results here. -->
+		<property name="results.dir" value=".results" />
+
+		<!-- If no value was provided, run a single thread -->
+		<property name="threads" value="1" />
+
+		<!-- If no value was provided, run everything 10 times per thread -->
+		<property name="iterations" value="10" />
+
+		<!-- If no value was provided, use this as the default namespace -->
+		<property name="default.namespace" value="http://vivo.cornell.edu/individual/" />
+
+		<property name="webapp.url" value="http://${webapp.host}:${webapp.port}/${webapp.name}" />
+
+		<path id="xslt.classpath">
+			<pathelement location="${jmeter.home.dir}/lib/xalan-2.7.1.jar" />
+			<pathelement location="${jmeter.home.dir}/lib/serializer-2.7.1.jar" />
+			<pathelement location="${jmeter.home.dir}/lib/xercesImpl-2.9.1.jar" />
+		</path>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: prepare                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="prepare" depends="properties">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${results.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: run              
+         ================================= -->
+	<target name="run" depends="prepare" description="--> Just run the tests.">
+		<delete file="${results.dir}/${test.name}.jtl" />
+		<delete file="${results.dir}/${test.name}.html" />
+
+		<condition property="webapp.is.available">
+			<http url="${webapp.url}" />
+		</condition>
+		<fail unless="webapp.is.available" message="Webapp is not available at ${webapp.url}" />
+
+		<property name="file.person.uris" location="${data.dir}/personUris.csv" />
+		<fail message="File &quot;${file.person.uris}&quot; does not exist.">
+			<condition>
+				<not>
+					<available file="${file.person.uris}" />
+				</not>
+			</condition>
+		</fail>
+
+		<property name="file.infoResource.uris" location="${data.dir}/infoResourceUris.csv" />
+		<fail message="File &quot;${file.infoResource.uris}&quot; does not exist.">
+			<condition>
+				<not>
+					<available file="${file.infoResource.uris}" />
+				</not>
+			</condition>
+		</fail>
+
+		<property name="file.author.uris" location="${data.dir}/authorUris.csv" />
+		<fail message="File &quot;${file.author.uris}&quot; does not exist.">
+			<condition>
+				<not>
+					<available file="${file.author.uris}" />
+				</not>
+			</condition>
+		</fail>
+
+		<jmeter jmeterhome="${jmeter.home.dir}"
+		        testplan="${tests.dir}/${test.name}.jmx"
+		        resultlogdir="${results.dir}">
+			<!-- Set parameters for the tests -->
+			<property name="webapp.host" value="${webapp.host}" />
+			<property name="webapp.port" value="${webapp.port}" />
+			<property name="webapp.name" value="${webapp.name}" />
+			<property name="iterations" value="${iterations}" />
+			<property name="threads" value="${threads}" />
+			<property name="file.person.uris" value="${file.person.uris}" />
+			<property name="file.infoResource.uris" value="${file.infoResource.uris}" />
+			<property name="file.author.uris" value="${file.author.uris}" />
+			<property name="default.namespace" value="${default.namespace}" />
+
+			<!-- Set parameters for the output -->
+			<property name="jmeter.save.saveservice.output_format" value="xml" />
+			<property name="jmeter.save.saveservice.response_data.on_error" value="true" />
+			<property name="jmeter.save.saveservice.url" value="true" />
+			<property name="jmeter.save.saveservice.bytes" value="true" />
+
+			<!-- Show a summary line periodically, so we know its running. -->
+			<property name="summariser.name" value="summary" />
+			<property name="summariser.out" value="true" />
+			<property name="summariser.log" value="true" />
+			<property name="summariser.interval" value="10" />
+		</jmeter>
+
+	</target>
+
+	<!-- ================================= 
+          target: report              
+         ================================= -->
+	<target name="report" depends="prepare" description="--> Just summarize the output.">
+		<!-- Can't use xslt task because it screws up on the xsl:sort tag -->
+		<property name="report.in" location="${results.dir}/${test.name}.jtl" />
+		<property name="report.out" location="${results.dir}/${test.name}.html" />
+		<property name="report.style" location="${basedir}/jmeter-results-report.xsl" />
+
+		<java classname="org.apache.xalan.xslt.Process" classpathref="xslt.classpath">
+			<arg value="-in" />
+			<arg value="${report.in}" />
+			<arg value="-out" />
+			<arg value="${report.out}" />
+			<arg value="-xsl" />
+			<arg value="${report.style}" />
+		</java>
+
+		<echo append="true" file="${report.out}">
+			<![CDATA[<p>${TIMESTAMP}</p>]]>
+		</echo>
+	</target>
+
+	<!-- ================================= 
+          target: merge              
+         ================================= -->
+	<target name="merge" depends="prepare" description="--> Merge summaries together">
+		<javac srcdir="${source.dir}"
+		       destdir="${build.dir}"
+		       debug="true"
+		       deprecation="true"
+		       optimize="true"
+		       source="1.6">
+		</javac>
+
+		<property name="merge.output.dir"
+		          location="/Development/JIRA issues/NIHVIVO-1129_Load_testing/mergerFiles/" />
+		<property name="merge.input.dir"
+		          location="/Development/JIRA issues/NIHVIVO-1129_Load_testing/mergerFiles/results" />
+		<property name="merge.input.filenames"
+		          value="ver_release1.1.1/SecondTests-rel-1-1-1.html, ver_trunkRdb/SecondTests-rel-1-2.html, ver_trunkSdb/SecondTests-rel-1-2.html" />
+
+		<java classname="edu.cornell.mannlib.vitro.utilities.loadtesting.reportmerger.ReportsMerger"
+		      fork="yes"
+		      failonerror="true">
+			<classpath location="${build.dir}" />
+			<arg value="${merge.output.dir}" />
+			<arg value="${merge.input.dir}" />
+			<arg value="${merge.input.filenames}" />
+		</java>
+
+		<copy file="mergedResults.css" todir="${merge.output.dir}" />
+	</target>
+
+</project>

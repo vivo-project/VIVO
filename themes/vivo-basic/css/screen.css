@@ -15,6 +15,15 @@
 @import url("institution.css");
 @import url("individual.css");
 
+header,
+hgroup,
+section,
+nav,
+article,
+aside,
+footer {
+    display: block;
+}
 body {
   position: relative;
   background: #596673;
@@ -726,8 +735,9 @@ h3.associate {
 Upload Images
 ************************/
 
-div.thumbnail img { 
-border:3px solid #d5d5d5;
+div.thumbnail img,
+div#thumbnail img { 
+    border:3px solid #d5d5d5;
 }
 
 /************************
@@ -782,7 +792,7 @@ padding-top:36px;
 
 /* styles for error alerts */
 
-#errorAlert{
+#error-alert{
 	color:#900;
 	padding:0px;
 	margin-bottom:5px;
@@ -791,7 +801,7 @@ padding-top:36px;
 }
 
 
-#errorAlert img{
+#error-alert img{
 	float:left;
 	margin:0;
 	padding:0;
@@ -800,8 +810,8 @@ padding-top:36px;
 	
 }
 
-#errorAlert  p{
-padding-left:40px;
+#error-alert  p{
+padding-left:30px;
 font-size:0.9em;
 
 
@@ -812,4 +822,30 @@ font-size:0.9em;
 .contactUsReturnHome{
 margin-top:30px;
 margin-bottom:250px;
+}
+/* This css rules will override the one in individual.css */
+.green {
+    color:#000 !important;
+}
+
+/* styles for vivo-basic deprecated alert */
+#deprecated {
+    margin-bottom: 1em;
+    padding: 0.6em 1.2em;
+    min-width: 662px;
+    border: 3px solid #edc113;
+    background-color: #F8F8C8;
+    color: #000;
+    text-align: left;
+    font-size: 1.1em;
+}
+#deprecated p {
+    margin: 1.1em 0 0 0;
+    text-align: left;
+}
+#deprecated h1 {
+    font-size: 1.4em;
+}
+#deprecated ul {
+    margin-bottom: 0;
 }

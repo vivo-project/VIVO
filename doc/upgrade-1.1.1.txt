@@ -68,7 +68,8 @@ II. The Upgrade Process
        have changed. It will be necessary to inspect the new source files and 
        add any changes to them at that time.
 
-    At a minimum it will be necessary to apply the Google Analytics Tracking 
+    For NIH-funded institutions:
+       At a minimum it will be necessary to apply the Google Analytics Tracking 
        Code (GATC) to googleAnalytics.ftl in the theme:
       
       [new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl
@@ -93,7 +94,15 @@ II. The Upgrade Process
 	your tomcat/conf/server.xml file, there are no changes in this upgrade. 
 	For upgrades from V1.0 to V1.1.1, please see the upgrade-1.1.txt file.  
 	
-8. Start "Apache Tomcat" and log in to VIVO.
+8.  VIVO is a multithreaded web application that may require more threads than 
+    are permitted under your Linux installation's default configuration. Ensure 
+    that your installation can support the required number of threads by making 
+    the following edits to /etc/security/limits.conf:
+
+    apache    hard    nproc   400
+    tomcat6   hard    nproc   1500 
+
+9. Start "Apache Tomcat" and log in to VIVO.
 
 -------------------------------------------------------------------------------
 

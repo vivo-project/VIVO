@@ -226,16 +226,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>TestController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.TestController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestController</servlet-name>
-    <url-pattern>/test</url-pattern>
-  </servlet-mapping>
-
-
-  <servlet>
     <servlet-name>fetch</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.QueryServlet</servlet-class>
     <!--load-on-startup>2</load-on-startup-->

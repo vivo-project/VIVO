@@ -155,7 +155,7 @@
                       <select id="VClassURI" name="VClassURI" class="form-item span-23">
                           <form:option name="VClassId"/>
                       </select>
-                      <input type="submit" class="add-action-button" value="Add Individual of This Type"/>
+                      <input type="submit" id="submit" value="Add Individual of This Type"/>
                       <input type="hidden" name="home" value="<%=portal.getPortalId()%>" />
                       <input type="hidden" name="controller" value="Entity"/>
                   </form>

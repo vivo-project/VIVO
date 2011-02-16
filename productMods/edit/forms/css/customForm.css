@@ -1,117 +1,101 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#content form div {
+form.customForm div {
     clear: left;
 }
-
-#content form h6 {
+form.customForm h6 {
     font-size: 110%;
 }
-
-#content form div.addNewLink {
+form.customForm div.addNewLink {
     float: left;
     clear: none;
     margin-left: 5em;
     margin-top: .9em;
     width: 200px;
-    padding: 0.8em;
+    padding: .8em;
     border: 1px solid #9c9c9c;
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
-
-#content form .existing span.requiredHint, 
-#content form .new span.requiredHint {
+form.customForm .existing span.requiredHint, 
+form.customForm .new span.requiredHint {
     display: none; /* Hide if Javascript disabled. Javascript will show. */
 }
-
-#content form .existing {
+form.customForm .existing {
     float: left;
     clear: none;
 }
-
 .existingOrNew {
     font-style: italic;
     margin-left: 1em;
 }
-
 .new {
     padding: .6em 0 .6em 1.5em;
     border: 1px solid #9c9c9c;
     width: 300px;
 }
-
-
-/* #content form p.inline span,*/
-#content form p.inline input,
-#content form p.inline label {
+form.customForm p.inline input,
+form.customForm p.inline label {
     float: left;
     clear: left;
 }
-
-#content form p.inline.year input {
+form.customForm p.inline.year input {
     margin-top: -1.75em;
 }
-
-/*
-#content form p.inline.year span.hint {
-    margin-right: 38.5em;
-    margin-top: -2.4em;
-}
-*/
-
 input,
 select, 
-#content form p {
-    margin-bottom: 1em;
+form.customForm p {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
-
 option {
     padding: 0 2px;
 }
-
-#content form .hint {
+form.customForm .hint {
     color: #9c9c9c;
     font-weight: normal;
 }
-
-#content form .requiredHint {
-    color: #f00;
+form.customForm .requiredHint {
+    color: #c00;
     font-weight: normal;
+    font-size: small;
 }
-
-#content form #requiredLegend {
+form.customForm #requiredLegend {
     font-style: italic;
+    margin-top: .5em;
 }
-
-#content form p.validationError {
+form.customForm p.validationError {
     clear: both;
-    margin-bottom: 1.25em;
+    margin-bottom: 1.8em;
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: .4em;
+    font-size: .8em;
 }
-
-#content form a.close {
+form.customForm a.close {
     float: right;
     margin-right: 1em;
     font-size: 90%;    
 }
-
-#content form a.close:link, 
-#content form a.close:visited {
-    border-color: #FF7700;
-    color: #FF7700;
+form.customForm a.close:link, 
+form.customForm a.close:visited {
+    border-color: #ff7700;
+    color: #ff7700;
 }
-
-#content form textarea {
+form.customForm textarea {
     width: 30%;
 }
-
-/* fix bad alignment in IE 6 and 7 */
-.or, .cancel{
-vertical-align:top;
+div.acSelection {
+    margin-bottom: 15px;
 }
-
-/* Message displayed for an unsupported browser. Hide on page load; JavaScript
- * shows if needed.
- */
 #ie67DisableWrapper {
     display: none;
+}
+/* <------ DATE TIME*/
+fieldset.dateTime label {
+    display: inline;
+}
+fieldset.dateTime select {
+    margin-top: 0;
 }

@@ -1,4 +1,4 @@
-SPARQLTAG LICENSE
+SPARQLTAG.HTML LICENSE
 
 (c) Copyright 2006 David Powell
 All rights reserved.

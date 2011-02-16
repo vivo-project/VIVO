@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-base>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?authorship             
+                        ?infoResource ?infoResourceName 
+                        ?dateTime WHERE {
+            ?subject ?property ?authorship  
+            OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
+                       ?infoResource rdfs:label ?infoResourceName                                         
+                       OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
+                                  ?dateTimeValue core:dateTime ?dateTime  
+                       } 
+            }                                                           
+        } ORDER BY DESC(?dateTime) ?infoResourceName   
+    </query-base>
+    
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?authorship
+                        ?infoResource ?infoResourceName 
+                        ?dateTime WHERE {
+            ?subject ?property ?authorship  
+            OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
+                       ?infoResource rdfs:label ?infoResourceName 
+                       OPTIONAL { ?subclass rdfs:subClassOf core:InformationResource .
+                                  ?infoResource a ?subclass  
+                       }                                            
+                       OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
+                                  ?dateTimeValue core:dateTime ?dateTime  
+                       } 
+            }                                                           
+        } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
+    </query-collated>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:InformationResource 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:InformationResource 
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?authorship .  
+            ?authorship ?authorshipProperty ?authorshipValue .
+            ?authorship core:linkedInformationResource ?infoResource .
+            ?infoResource rdfs:label ?infoResourceName 
+        } WHERE {
+            {
+               ?subject ?property ?authorship 
+            }
+            UNION {
+               ?subject ?property ?authorship .
+               ?authorship ?authorshipProperty ?authorshipValue .
+            } UNION {
+               ?subject ?property ?authorship .
+               ?authorship core:linkedInformationResource ?infoResource .
+               ?infoResource rdfs:label ?infoResourceName 
+            }
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?authorship .  
+            ?authorship core:linkedInformationResource ?infoResource .
+            ?infoResource a ?subclass  
+        } WHERE {
+            ?subject ?property ?authorship .
+            ?authorship core:linkedInformationResource ?infoResource .
+            ?subclass rdfs:subClassOf core:InformationResource .
+            ?infoResource a ?subclass  
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?authorship .  
+            ?authorship core:linkedInformationResource ?infoResource .
+            ?infoResource core:dateTimeValue ?dateTimeValue .
+            ?dateTimeValue core:dateTime ?dateTime  
+        } WHERE {
+            ?subject ?property ?authorship .
+            ?authorship core:linkedInformationResource ?infoResource .
+            ?infoResource core:dateTimeValue ?dateTimeValue .
+            ?dateTimeValue core:dateTime ?dateTime  
+        } 
+    </query-construct>
+    
+    <template>propStatement-authorInAuthorship.ftl</template>
+</list-view-config>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+        <query-base>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?position                 
+                        ?positionTitle 
+                        ?person ?personName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            ?subject ?property ?position  
+            OPTIONAL { ?position core:positionForPerson ?person .
+                       ?person rdfs:label ?personName   
+            }                        
+            OPTIONAL { ?position rdfs:label ?positionTitle }
+            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
+                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                       }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+
+                       }
+            # Current positions only: end date is either null or not in the past
+            } FILTER ( !bound(?dateTimeEnd) ||                        
+                       afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
+        } ORDER BY ?personName
+    </query-base>
+    
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?position
+                        ?positionTitle 
+                        ?person ?personName 
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+            ?subject ?property ?position  
+            OPTIONAL { ?position core:positionForPerson ?person .
+                       ?person rdfs:label ?personName   
+            }                 
+            OPTIONAL { ?position a ?subclass .
+                       ?subclass rdfs:subClassOf core:Position 
+            }         
+            OPTIONAL { ?position rdfs:label ?positionTitle }
+            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
+                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                       }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+                       }
+            # Current positions only: end date is either null or not in the past
+            } FILTER ( !bound(?dateTimeEnd) ||                        
+                       afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
+        } ORDER BY ?subclass ?personName
+    </query-collated>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:Position 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:Position 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?position .
+            ?position ?positionProperty ?positionValue .
+            ?person rdfs:label ?personName  
+        } WHERE {
+            {
+               ?subject ?property ?position 
+            } UNION {
+               ?subject ?property ?position .
+               ?position ?positionProperty ?positionValue 
+            } UNION {
+               ?subject ?property ?position .
+               ?position core:positionForPerson ?person .
+               ?person rdfs:label ?personName   
+            }
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?position .  
+            ?position core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } WHERE {
+            ?subject ?property ?position .  
+            ?position core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?position .  
+            ?position core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?position .  
+            ?position core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>
+    
+    <template>propStatement-organizationForPosition.ftl</template>
+</list-view-config>

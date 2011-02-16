@@ -1,0 +1,253 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+a.no_href_styles {
+    border: 0;
+}
+.no_href_styles a:ACTIVE,
+.no_href_styles a:BEFORE,
+.no_href_styles a:FOCUS,
+.no_href_styles a:HOVER,
+.no_href_styles a:VISITED,
+.no_href_styles a:LINK
+    { /*color: white;*/
+    border: 0;
+}
+.vis_stats {
+    background: #fff;
+    clear: right;
+    width: 67%;
+    margin-left: 33%;
+}
+.vis-tables {
+    padding: 10px;
+    background-color: #FFF;
+    border: 1px solid #ddebf1;
+    float: left;
+    font-size: 0.8em;
+    width: 44%;
+    margin: 0 10px 10px 0;
+}
+p.datatable {
+    font-size: 12px;
+    display: block;
+    margin: 2px;
+    padding: 0
+}
+.datatable table {
+    text-align: left;
+}
+.datatable img {
+    float: left;
+    cursor: pointer;
+}
+#sparkline-container {
+    clear: both;
+    margin-left: 33%;
+    width: 67%;
+    float: right;
+}
+#profileImage img{
+    width: 90px;
+    height: auto;
+}
+#body h1 {
+    margin: 0;
+} 
+#ego_profile h1 a {
+  text-decoration: none;
+}
+.sparkline_wrapper_table {
+    display: inline;
+    vertical-align: bottom;
+}
+.investigator_name,
+.author_name {
+    color: #2485AE;
+    font-weight: bold;
+}
+.neutral_investigator_name,
+.neutral_author_name {
+    color: #2485AE;
+    font-weight: bold;
+}
+.investigator_moniker,
+.author_moniker {
+    color: #9C9C9C;
+}
+.sub_headings {
+    color: #121b3c;
+    padding-top: 10px;
+    float: left;
+    margin-right: 10px;
+}
+.toggle_visualization { 
+    max-width: 180px;
+    float: right;
+    display: none;
+}
+#publication-count-sparkline-include {
+    float: left;
+    width: 50%;
+}
+#coauthor-count-sparkline-include {
+    float: right;
+    width: 50%;
+}
+#grant-count-sparkline-include {
+    float: left;
+    width: 50%;
+}
+#coinvestigator-count-sparkline-include {
+    float: right;
+    width: 50%;
+}
+.sub_headings a {
+    font-size: .7em;
+    font-weight:normal;
+}
+table.sparkline_wrapper_table td, th {
+    vertical-align: bottom;
+}
+#ego_profile {
+  height: 1%; /* this was the key to killing the IE6 bug (no upper photo and sparklines jump on hover). Solution? Give the parent layout */
+  background: #fff;
+  min-height: 100px;
+  float: left;
+  max-width: 50%;
+}
+#ego_label {
+    font-size: 1.1em;
+}
+#ego_profile_image {
+  float: left;
+  padding-right: 5px;
+}
+#ego_profile_image img {
+  width: 90px;
+  height: auto;
+}
+#ego_sparkline {
+    cursor: pointer;
+    height: 36px;
+    width: 471px;
+}
+#coauthorships_table th {
+    vertical-align: top;
+}
+.sparkline_range {
+    font-size: .9em;
+    font-weight: bold;
+}
+.vis-tables table td{
+    padding-right: 10px;
+    width: 50%;
+}
+#visPanel {
+    float: right; 
+    width: 600px;
+}
+.vis-tables table caption {
+    width: 100%;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+}
+.vis-tables table {
+    width: 100%;
+}
+.vis-tables table thead {
+    text-align: left;
+}
+.vis-tables table thead tr th { 
+    background-color: #eaeaea; 
+    font-size: 14px; 
+    padding: 5px; 
+    vertical-align: top; 
+    text-align: left;  
+}
+.vis-tables table tbody { 
+    font-size: 12px;  
+}
+.vis-tables table tbody td { 
+    text-align: left; 
+    padding: 5px;  
+}
+.moniker {
+    margin-top: 0;
+}
+.spacer {
+    font-size: 0; 
+    line-height: 0; 
+    clear: both;
+}
+/* <------ BODY START*/
+#body {
+    max-width: 900px;
+    min-width: 800px; 
+    margin: 0 auto; 
+    position: relative;
+    background: white;
+}
+#bodyPannel {
+    background: #FFFFFF;    
+    height: 840px;
+    width: 100%;
+    clear: both;
+}
+#dataPanel { 
+    border: 1px solid #e9e9e9;
+    background: #F7F9F9;
+    width: 250px; 
+    height: 615px;
+    float: left;
+}
+#dataPanel div {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+#dataPanel .italicize {
+    font-style: italic;
+}
+#dataPanel .bold {
+    font-weight: bold;
+    color: #2485AE;
+    font-size: 14px;
+}
+#dataPanel .investigator_stats .numbers,
+#dataPanel .author_stats .numbers {
+    text-align: right;
+    width: 40px;
+    float:left;
+}
+#data-panel-content h4 {
+    padding-bottom: 0;
+}
+#data-panel-content {
+    margin-left: 15px;
+    margin-top: 15px;
+}
+/* <------ CONTAINER OVERRIDE FROM LIQUID.CSS*/
+.container {
+    width: inherit; 
+}
+#incomplete-data {
+    line-height: 150%;
+    margin-right: 15px;
+}
+.graphml-file-link {
+    padding-top: 20px;
+    height: 20px;
+    font-size: .9em;
+}
+#profileTitle {
+    background-color: #2485AE;
+    color: white;
+    font-weight: bold;
+    line-height: 1em !important;
+    padding: 10px;
+    width: 54px;
+}
+#table_heading {
+    width: 80%; 
+}

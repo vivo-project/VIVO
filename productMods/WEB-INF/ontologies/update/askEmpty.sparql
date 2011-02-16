@@ -1,0 +1,5 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+ASK {
+    core:atTime ?p ?o . 
+}

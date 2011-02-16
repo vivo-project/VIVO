@@ -4,6 +4,6 @@
 <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology [
     a owl:Thing ;
     vitro:updatedOntology <http://vivoweb.org/ontology/core> ;
-    vitro:fromOntologyVersion "1.0" ;
-    vitro:toOntologyVersion "1.1" ;
+    vitro:fromOntologyVersion "1.1" ;
+    vitro:toOntologyVersion "1.2" ;
 ] .

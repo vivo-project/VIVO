@@ -5,6 +5,7 @@ Apache License 2.0
 ------------------
 licenses/apache.LICENSE.txt
 
+ant-jmeter
 commons-beanutils-core
 commons-betwixt
 commons-cli
@@ -19,23 +20,28 @@ commons-io
 commons-lang
 commons-logging
 commons-pool
+contenttype
 csv
 dwr
 gson
 jakarta-jstl
 jakarta-oro
+jmeter
 joda-time
 json-taglib
 log4j
 lucene-analyzers
 lucene-core
 lucene-highlighter
+soapmonitorapplet
 solr
 spring
 stax-api
 taglibs-mailer
 taglibs-random
 taglibs-string
+taglibs-standard
+toggle
 xalan
 xbean
 xbean-spring
@@ -52,6 +58,7 @@ aduna-commons (licenses/aduna.LICENSE.txt)
 antlr (licenses/antlr.LICENSE.txt)
 arq-extra (licenses/jena.LICENSE.txt)
 arq (licenses/jena.LICENSE.txt)
+dojo (licenses/dojo.LICENSE.txt)
 dom4j (licenses/dom4j.LICENSE.txt)
 freemarker (licenses/freemarker.LICENSE.txt)
 iri (licenses/jena.LICENSE.txt)
@@ -108,6 +115,7 @@ GNU GPL 2
 licenses/gpl2.LICENSE.txt
 
 jaxrpc
+jsontofmmodel
 mysql-connector-java
 rowset
 rsslib4j
@@ -118,7 +126,9 @@ GNU LGPL 2.1
 ------------
 licenses/lgpl2.LICENSE.txt
 
+betterdateinput
 jcalendar
+tinymce
 wstx-asl
 
 
@@ -126,6 +136,7 @@ GNU LGPL 3
 ----------
 licenses/lgpl3.LICENSE.txt
 
+Alfresco - JSONtoFmModel
 fedora-client
 jga
 
@@ -140,7 +151,14 @@ jai_core
 
 MIT
 ---
+blueprintcss (licenses/blueprintcss.LICENSE.txt)
+html5js (licenses/mit.LICENSE.txt)
 icu4j (licenses/icu.LICENSE.txt)
+jquery (licenses/mit.LICENSE.txt)
+jquery-plugins (licenses/mit.LICENSE.txt)
+prototype (licenses/mit.LICENSE.txt)
+raphael (licenses/mit.LICENSE.txt)
+selectivizr (licenses/mit.LICENSE.txt)
 slf4j-api (licenses/mit.LICENSE.txt)
 slf4j-log4j12 (licenses/mit.LICENSE.txt)
 
@@ -163,7 +181,9 @@ servlet-api (licenses/sun_binary.LICENSE.txt)
 Others
 ------
 cos (licenses/cos.LICENSE.txt)
+googleanalytics (license/googleanalytics.LICENSE.txt)
 jdom (licenses/jdom.LICENSE.txt)
+json (licenses/json.LICENSE.txt)
 jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
 

@@ -25,9 +25,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Iterator" %>
 
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
+
+<%@ page import="org.json.JSONObject" %>
+<%@ page import="org.json.JSONException" %>
+<%@ page import="org.json.JSONArray" %>
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
@@ -40,14 +47,20 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.TitleCase" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 
-<%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartDateBeforeEndDate"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 
 <%!
 public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addRoleToPersonTwoStage.jsp");
@@ -99,9 +112,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     }else{
     	%> <c:set var="inversePredicate"></c:set> <%
     }
-%>
-
-<%-- There are 4 modes that this form can be in: 
+    
+/* 
+ There are 4 modes that this form can be in: 
   1.  Add, there is a subject and a predicate but no role and nothing else. 
         
   2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
@@ -110,71 +123,41 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
      other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
      
-  4. Really bad node. multiple roleIn statements.
-   
---%>
-<%
- /* check to see if this is mode 3 */
- int mode = 1;
- Individual obj = (Individual)request.getAttribute("object");
- if( obj != null){
-	 List<ObjectPropertyStatement> stmts = obj.getObjectPropertyStatements("http://vivoweb.org/ontology/core#roleIn");
-	 if( stmts != null){
-		 if( stmts.size() > 1 ){
-			 mode = 4; // Multiple roleIn statements, yuck.
-		 }else if( stmts.size() == 0 ){
-			 mode = 3; // need to repair the role node
-		 }else if(stmts.size() == 1 ){
-			 mode = 2;
-		 }
-	 }		 	 
+  4. Really bad node. multiple core:roleIn statements.
+*/
+
+ EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#roleIn");
+
+ if( mode == EditMode.ADD ) {
+    %> <c:set var="editMode" value="add"/><%
+ } else if(mode == EditMode.EDIT){
+     %> <c:set var="editMode" value="edit"/><%
+ } else if(mode == EditMode.REPAIR){
+     %> <c:set var="editMode" value="repair"/><%
  }
- if( mode == 1 )
-	 log.debug("This form will be for an add. Setting mode to " + mode);
- else if(mode == 2){
-	 log.debug("This form will be for a normal edit. Setting mode to " + mode);
-	 %> <c:set var="editMode" value="edit"/><%
- } else if(mode == 3){
-	 log.debug("This form will be for the repair of a bad role node. Setting mode to " + mode);
-	 %> <c:set var="editMode" value="repair"/><%
- }else if(mode == 4)
-	 log.debug("No form will be shown, since there are multiple core:roleIn statements. Setting mode to " + mode);
 %>
 
 <c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
+<c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
+<c:set var="startYearPred" value="${vivoCore}startYear" />
+<c:set var="endYearPred" value="${vivoCore}endYear" />
+<c:set var="dateTimeValueType" value="${vivoCore}DateTimeValue"/>
+<c:set var="dateTimePrecision" value="${vivoCore}dateTimePrecision"/>
+<c:set var="dateTimeValue" value="${vivoCore}dateTime"/>
+
+<c:set var="roleToInterval" value="${vivoCore}dateTimeInterval"/>
+<c:set var="intervalType" value="${vivoCore}DateTimeInterval"/>
+<c:set var="intervalToStart" value="${vivoCore}start"/>
+<c:set var="intervalToEnd" value="${vivoCore}end"/>
+
 <%-- label and type required if we are doing an add or a repair, but not an edit --%> 
-<c:set var="labelRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"," : "" %></c:set>
-<c:set var="typeRequired" ><%= (mode == 1 || mode == 3) ?"\"nonempty\"" : "" %></c:set>
-
-<%-- 
-<c:choose>
-    <c:when test="${numDateFields == 1}">
-        <c:set var="startYearPredicate" value="${vivoCore}year" />
-    </c:when>
-    <c:otherwise>
-        <c:set var="startYearPredicate" value="${vivoCore}startYear" />    
-    </c:otherwise>
-</c:choose>
---%>
-<c:set var="startYearPredicate">
-    <c:choose>
-        <c:when test="${numDateFields == 1}">${vivoCore}year</c:when>
-        <c:otherwise>${vivoCore}startYear</c:otherwise>
-    </c:choose>
-</c:set>
-<v:jsonset var="startYearAssertion" >
-      ?role <${startYearPredicate}> ?startYear .
-</v:jsonset>
-
-<c:set var="endYearPredicate" value="${vivoCore}endYear" /> 
-<v:jsonset var="endYearAssertion" >
-      ?role <${endYearPredicate}> ?endYear .
-</v:jsonset>
+<c:set var="labelRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"," : "" %></c:set>
+<c:set var="typeRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"" : "" %></c:set>
 
 <v:jsonset var="roleLabelAssertion" >
     ?role <${label}> ?roleLabel .
@@ -207,20 +190,30 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	?role  ?inverseRolePredicate ?person.
 </v:jsonset>
 
+<v:jsonset var="n3ForStart">
+    ?role      <${roleToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToStart}> ?startNode .    
+    ?startNode  <${type}> <${dateTimeValueType}> .
+    ?startNode  <${dateTimeValue}> ?startField.value .
+    ?startNode  <${dateTimePrecision}> ?startField.precision .
+</v:jsonset>
+
+<v:jsonset var="n3ForEnd">
+    ?role      <${roleToInterval}> ?intervalNode .    
+    ?intervalNode  <${type}> <${intervalType}> .
+    ?intervalNode <${intervalToEnd}> ?endNode .
+    ?endNode  <${type}> <${dateTimeValueType}> .
+    ?endNode  <${dateTimeValue}> ?endField.value .
+    ?endNode  <${dateTimePrecision}> ?endField.precision .
+</v:jsonset>
+
 <v:jsonset var="activityLabelQuery">
   PREFIX core: <${vivoCore}>
   PREFIX rdfs: <${rdfs}> 
   SELECT ?existingTitle WHERE {
         ?role  core:roleIn ?existingActivity .
         ?existingActivity rdfs:label ?existingTitle . }
-</v:jsonset>
-
-<v:jsonset var="startYearQuery">
-  SELECT ?existingStartYear WHERE { ?role  <${startYearPredicate}> ?existingStartYear .}       
-</v:jsonset>
-
-<v:jsonset var="endYearQuery">
-  SELECT ?existingStartYear WHERE { ?role  <${endYearPredicate}> ?existingStartYear .}
 </v:jsonset>
 
 <v:jsonset var="activityQuery">
@@ -232,12 +225,76 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   SELECT ?existingRoleLabel WHERE { ?role  <${label}> ?existingRoleLabel . }
 </v:jsonset>
 
+<%-- 
 <v:jsonset var="activityTypeQuery">
-  PREFIX core: <${vivoCore}>
-  SELECT ?existingActivityType WHERE { 
-      ?role core:roleIn ?existingActivity .
-      ?existingActivity a ?existingActivityType . 
-  }
+        PREFIX core: <${vivoCore}>
+        SELECT ?existingActivityType WHERE {
+            ?role core:roleIn ?existingActivity . 
+            ?existingActivity a ?existingActivityType . 
+        }    
+</v:jsonset>
+--%>
+<% 
+request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
+%>
+<v:jsonset var="activityTypeQuery">${typeQuery}</v:jsonset>
+
+ <v:jsonset var="existingIntervalNodeQuery" >  
+    SELECT ?existingIntervalNode WHERE {
+          ?role <${roleToInterval}> ?existingIntervalNode .
+          ?existingIntervalNode <${type}> <${intervalType}> . }
+</v:jsonset>
+ 
+ <v:jsonset var="existingStartNodeQuery" >  
+    SELECT ?existingStartNode WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?existingStartNode . 
+      ?existingStartNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingStartDateQuery" >  
+    SELECT ?existingDateStart WHERE {
+     ?role <${roleToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToStart}> ?startNode .
+     ?startNode <${type}> <${dateTimeValueType}> .
+     ?startNode <${dateTimeValue}> ?existingDateStart . }
+</v:jsonset>
+
+<v:jsonset var="existingStartPrecisionQuery" >  
+    SELECT ?existingStartPrecision WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToStart}> ?startNode .
+      ?startNode <${type}> <${dateTimeValueType}> .          
+      ?startNode <${dateTimePrecision}> ?existingStartPrecision . }
+</v:jsonset>
+
+ <v:jsonset var="existingEndNodeQuery" >  
+    SELECT ?existingEndNode WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?existingEndNode . 
+      ?existingEndNode <${type}> <${dateTimeValueType}> .}              
+</v:jsonset>
+
+<v:jsonset var="existingEndDateQuery" >  
+    SELECT ?existingEndDate WHERE {
+     ?role <${roleToInterval}> ?intervalNode .
+     ?intervalNode <${type}> <${intervalType}> .
+     ?intervalNode <${intervalToEnd}> ?endNode .
+     ?endNode <${type}> <${dateTimeValueType}> .
+     ?endNode <${dateTimeValue}> ?existingEndDate . }
+</v:jsonset>
+
+<v:jsonset var="existingEndPrecisionQuery" >  
+    SELECT ?existingEndPrecision WHERE {
+      ?role <${roleToInterval}> ?intervalNode .
+      ?intervalNode <${type}> <${intervalType}> .
+      ?intervalNode <${intervalToEnd}> ?endNode .
+      ?endNode <${type}> <${dateTimeValueType}> .          
+      ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
 </v:jsonset>
 
 <c:set var="editjson" scope="request">
@@ -250,11 +307,14 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${startYearAssertion}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${endYearAssertion}" ],        
+    "n3required"    : [ "${n3ForNewRole}", "${roleLabelAssertion}" ],        
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForStart}", "${n3ForEnd}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
-                        "roleActivity" : "${defaultNamespace}" },
+                        "roleActivity" : "${defaultNamespace}",
+                        "intervalNode" : "${defaultNamespace}",
+                        "startNode" : "${defaultNamespace}",
+                        "endNode" : "${defaultNamespace}" },
 
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
@@ -263,8 +323,21 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
-    "sparqlForExistingLiterals" : { "activityLabel":"${activityLabelQuery}", "roleLabel":"${roleLabelQuery}", "startYear":"${startYearQuery}", "endYear":"${endYearQuery}" },
-    "sparqlForExistingUris" : { "roleActivity":"${activityQuery}" , "roleActivityType":"${activityTypeQuery}" },
+    "sparqlForExistingLiterals" : { 
+        "activityLabel":"${activityLabelQuery}",
+        "roleLabel":"${roleLabelQuery}",
+        "startField.value"   : "${existingStartDateQuery}",
+        "endField.value"     : "${existingEndDateQuery}" 
+    },               
+    "sparqlForExistingUris" : { 
+        "roleActivity":"${activityQuery}" , 
+        "roleActivityType":"${activityTypeQuery}" ,
+        "intervalNode"      : "${existingIntervalNodeQuery}", 
+        "startNode"         : "${existingStartNodeQuery}",
+        "endNode"           : "${existingEndNodeQuery}",
+        "startField.precision": "${existingStartPrecisionQuery}",
+        "endField.precision"  : "${existingEndPrecisionQuery}"
+    },
     "fields" : {
       "activityLabel" : {
          "newResource"      : "false",
@@ -310,27 +383,27 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
          "rangeLang"        : "",
          "assertions"       : ["${roleLabelAssertion}" ]
       },
-      "startYear" : {
+      "startField" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${startYearAssertion}"]
+         "assertions"       : [ "${n3ForStart}" ]
       },
-      "endYear" : {
+      "endField" : {
          "newResource"      : "false",
-         "validators"       : [ "datatype:${gYearDatatypeUriJson}" ],
+         "validators"       : [ ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${gYearDatatypeUriJson}",
+         "rangeDatatypeUri" : "",
          "rangeLang"        : "",         
-         "assertions"       : ["${endYearAssertion}"]
+         "assertions"       : ["${n3ForEnd}" ]
       }
   }
 }
@@ -341,9 +414,21 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     if (editConfig == null) {
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
+        
+      //setup date time edit elements
+        Field startField = editConfig.getField("startField");
+        startField.setEditElement(
+                new DateTimeWithPrecision(startField, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.NONE.uri()));        
+        Field endField = editConfig.getField("endField");
+        endField.setEditElement(
+                new DateTimeWithPrecision(endField, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.NONE.uri()));
     }
     
-    editConfig.addValidator(new StartYearBeforeEndYear("startYear","endYear") ); 
+    editConfig.addValidator(new DateTimeIntervalValidation("startField","endField") ); 
 
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -359,30 +444,29 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
-                                                                "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
+                                                                "/edit/forms/js/customFormWithAutocomplete.js"                                                    
                                                                ));            
     request.setAttribute("customJs", customJs);
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
-                                                                 "/edit/forms/css/customFormWithAdvanceTypeSelection.css"
+                                                                 "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
 %>
 
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-<c:set var="yearMonthHint" value="<span class='hint'>(YYYY-MM)</span>" />
+<c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <c:choose>
     <%-- Includes edit AND repair mode --%>
     <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">     	
-        <c:set var="titleText" value="Edit" />        
+        <c:set var="titleVerb" value="Edit" />        
         <c:set var="submitButtonText" value="Edit ${buttonLabel}" />
         <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>
     </c:when>
     <c:otherwise>
-        <c:set var="titleText" value="Create" />
+        <c:set var="titleVerb" value="Create" />
         <c:set var="editMode" value="add" />
         <c:set var="submitButtonText" value="${buttonLabel}" />
         <c:set var="disabledVal" value="" />
@@ -391,20 +475,21 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
 <jsp:include page="${preForm}" />
 
-<% if( mode == 4 ){ %>
+<% if( mode == EditMode.ERROR ){ %>
  <div>This form is unable to handle the editing of this role because it is associated with 
       multiple ${param.roleActivityTypeLabel} individuals.</div>      
 <% }else{ %>
 	
-	<h2>${titleText}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
+	<h2>${titleVerb}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
 	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-	<form id="addRoleForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+	
+	<form id="addRoleForm" class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	
 	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
 	    
 	    <div class="fullViewOnly">
 	        
-		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
+		    <p><v:input type="text" id="relatedIndLabel" name="activityLabel" label="### Name ${requiredHint}" cssClass="acSelector" disabled="${disabledVal}" size="50"  /></p>
 	
 	        <%-- Store these values in hidden fields, because the displayed fields are disabled and don't submit. This ensures that when
 	        returning from a validation error, we retain the values. --%>
@@ -416,19 +501,19 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 		    <div class="acSelection">
 		        <%-- RY maybe make this a label and input field. See what looks best. --%>
 		        <p class="inline"><label></label><span class="acSelectionInfo"></span> <a href="<c:url value="/individual?uri=" />" class="verifyMatch">(Verify this match)</a></p>
-		        <v:input type="hidden" id="roleActivityURI" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
+		        <v:input type="hidden" id="roleActivityUri" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
 		    </div>
 	
-	        <p><v:input type="text" id="newIndLabel" name="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
+	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
-	                <v:input type="text" label="Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>            
+	                <v:input id="startField" label="Year ${yearHint}" size="7"/>            
 	            </c:when>
 	            <c:otherwise>
-	                <h4 id="dateHeader">Years of Participation in </h4>    
-	                <v:input type="text" label="Start Year ${requiredHint} ${yearHint}" id="startYear" size="7"/>   
-	                <v:input type="text" label="End Year ${yearHint}" id="endYear" size="7"/>             
+	                <h4 class="label">Years of Participation in ###</h4>    
+	                <v:input id="startField" label="Start Year ${yearHint}" size="7"/>   
+	                <v:input id="endField" label="End Year ${yearHint}" size="7"/>             
 	            </c:otherwise>
 	        </c:choose>
 	 
@@ -440,16 +525,75 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 	</form>
 	
 	<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
-	<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
 	
 	<script type="text/javascript">
 	var customFormData  = {
-	    sparqlQueryUrl: '${sparqlQueryUrl}',
 	    acUrl: '${acUrl}',
 	    editMode: '${editMode}',
-	    submitButtonTextType: 'compound' 
+	    submitButtonTextType: 'compound',
+	    defaultTypeName: 'activity' // used in repair mode, to generate button text and org name field label
 	};
 	</script>
 <% } %>
 
 <jsp:include page="${postForm}"/>
+
+<%!
+
+private static final String VIVO_CORE = "http://vivoweb.org/ontology/core#";
+private static final String  DEFAULT_ACTIVITY_TYPE_QUERY = 
+    "PREFIX core: <" + VIVO_CORE + ">\n" +
+    "SELECT ?existingActivityType WHERE { \n" +
+        "?role core:roleIn ?existingActivity . \n" +
+        "?existingActivity a ?existingActivityType . \n" +
+    "}"; 
+// The activity type query results must be limited to the values in the activity type select element. 
+// Sometimes the query returns a superclass such as owl:Thing instead. 
+private String getActivityTypeQuery(VitroRequest vreq) {
+
+    String activityTypeQuery = null;
+
+	// Select options are subclasses of a specified class
+	String objectClassUri = vreq.getParameter("roleActivityType_objectClassUri");
+	if (StringUtils.isNotBlank(objectClassUri)) { 
+	    log.debug("objectClassUri = " + objectClassUri);
+	    activityTypeQuery = 
+	    "PREFIX core: <" + VIVO_CORE + ">\n" +
+	    "PREFIX rdfs: <" + VitroVocabulary.RDFS + ">\n" +
+	    "SELECT ?existingActivityType WHERE {\n" +
+	        "?role core:roleIn ?existingActivity . \n" +
+	        "?existingActivity a ?existingActivityType . \n" +
+	        "?existingActivityType rdfs:subClassOf <" + objectClassUri + "> . \n" +
+	    "}";
+	} else {  
+	    String optionsType = vreq.getParameter("roleActivityType_optionsType");
+	    // Select options are hardcoded
+	    if ("HARDCODED_LITERALS".equals(optionsType)) {
+	        String typeLiteralOptions = vreq.getParameter("roleActivityType_literalOptions");
+	        if (StringUtils.isNotBlank(typeLiteralOptions)) {           
+	            try {
+	                JSONObject json = new JSONObject("{values: [" + typeLiteralOptions + "]}");
+	                Set<String> typeUris = new HashSet<String>();
+	                JSONArray values = json.getJSONArray("values");
+	                int valueCount = values.length();
+	                for (int i = 0; i < valueCount; i++) {
+	                    JSONArray option = values.getJSONArray(i);
+	                    String uri = option.getString(0);
+	                    if (StringUtils.isNotBlank(uri)) {
+	                        typeUris.add("(?existingActivityType = <" + uri + ">)");
+	                    }	                    
+	                }
+	                String typeFilters = "FILTER (" + StringUtils.join(typeUris, "||") + ")";
+	                activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY.replace("}", "") + typeFilters + "}";
+	            } catch (JSONException e) {
+	                activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;
+	            }
+	        }
+	    } else { 
+	        activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;	    
+	    } 
+	}
+	log.debug("Activity type query: " + activityTypeQuery);
+    return activityTypeQuery;
+}
+%>

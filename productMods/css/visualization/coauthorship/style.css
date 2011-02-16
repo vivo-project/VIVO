@@ -1,0 +1,647 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* CSS Document */
+body {
+    background: url(../../../site_icons/visualization/coauthorship/bg.gif) repeat-x 0 0 #FDF9EE; 
+    color: #4E4628;
+    font: normal 14px/19px Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+div, 
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+form, 
+label, 
+input, 
+span, 
+ul, 
+li, 
+p, 
+a {
+    margin: 0; 
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+.spacer {
+    font-size:0 ; 
+    line-height: 0; 
+    clear: both;
+}
+/* top navigation */
+#topNav {
+    width: 1000px; 
+    position: relative;
+    margin: 0 auto; 
+    padding: 8px 0 0 50px;
+}
+#topNav h1 {
+    color: #786E4E;
+    font: normal 28px/42px Georgia, "Times New Roman", Times, serif;
+}
+#topNav h1 span {
+    color: #0B0B0B;
+    font:normal 28px/42px Georgia, "Times New Roman", Times, serif;
+}
+#topNav ul {
+    background: url(../../../site_icons/visualization/coauthorship/top_ul_bg.gif) no-repeat 0 8px;
+    width: 503px; 
+    height: 23px; 
+    padding: 8px 0 0 8px; 
+    margin: 0 0 0 217px; 
+}
+#topNav ul li {
+    background-color: #E1DBC7; 
+    color: #0B0B0B; float:left;
+    font: bold 11px/23px "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+#topNav ul li a {
+    background-color: #E1DBC7; 
+    color: #0B0B0B;
+    font: bold 11px/23px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-transform: uppercase; 
+    text-align: center; 
+    text-decoration: none;
+    width: 65px; 
+    height :23px; 
+    display: block;
+}
+#topNav ul li a.hover {
+    background: url(../../../site_icons/visualization/coauthorship/top_btn_h.gif) no-repeat 0 0 #E1DBC7; 
+    color: #FFFFFF;
+    font: bold 11px/23px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-transform: uppercase; 
+    text-align: center; 
+    text-decoration: none;
+    width: 65px; 
+    height: 23px; 
+    display: block;
+}
+#topNav ul li a:hover {
+    background: url(../../../site_icons/visualization/coauthorship/top_btn_h.gif) no-repeat 0 0 #E1DBC7; 
+    color: #FFFFFF;
+    font: bold 11px/23px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-transform: uppercase; 
+    text-align: center; 
+    text-decoration: none;
+    width: 65px; 
+    height: 23px; 
+    display: block;
+}
+/* shadow */
+#topShadow {
+    background: url(../../../site_icons/visualization/coauthorship/top_shadow.gif) no-repeat 0 0 #FDF9EE;
+    color: #4E4628;
+    width: 822px;
+    height: 34px;
+    float: left;
+    margin-top: 9px;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+#bottomShadow {
+    background: url(../../../site_icons/visualization/coauthorship/bottom_shadow.gif) no-repeat 0 0 #FDF9EE; 
+    color: #4E4628;
+    width: 1000px; 
+    height: 24px; 
+    float: left;
+}
+/* body start */
+#body {
+    width: 1000px; 
+    margin: 0 auto; 
+    position: relative;
+}
+#bodyPannel {
+    background: url(../../../site_icons/visualization/coauthorship/midle_bg.gif) repeat-y 0 0 #FDF9EE;
+    color: #4E4628;
+    width: 765px;
+    float: left;
+    padding-top: 0;
+    padding-right: 28px;
+    padding-bottom: 0;
+    padding-left: 28px;
+}
+#bodyPannel form.search {
+    background-color: #FFFFFF; 
+    color: #000000; 
+    border: #ECE8DB 1px solid;
+    width: 248px; 
+    padding: 7px 17px 27px 17px; 
+    float: left;
+}
+#bodyPannel form.search h2 {
+    background: url(../../../site_icons/visualization/coauthorship/search_h2_bg.gif) no-repeat 0 0 #FFFFFF; 
+    color: #786E4E;
+    width: 197px; padding:0 0 10px 50px; 
+    float: left;
+    font: normal 24px/42px Georgia, "Times New Roman", Times, serif;
+}
+#bodyPannel form.search h2 span {
+    background-color: #FFFFFF; 
+    color: #0B0B0B;
+    font: normal 24px/42px Georgia, "Times New Roman", Times, serif;
+}
+#bodyPannel form.search label {
+    background-color: #FFFFFF; 
+    color: #0B0B0B; 
+    margin: 0 0 8px 0; 
+    float: left;
+    font: bold 10px/28px Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+#bodyPannel form.search input {
+    background-color: #EFEBDE; 
+    color: #0B0B0B; 
+    border: #C3BCA4 1px solid;
+    width: 158px; 
+    height: 22px; 
+    padding: 2px; 
+    margin: 0 0 8px 0; float: right;
+    font: normal 14px/20px Arial, Helvetica, sans-serif;
+}
+#bodyPannel form.search p {
+    background-color: #FFFFFF; 
+    color: #CC0000; float:left; 
+    margin: 6px 0 0 0;
+    font: normal 13px/15px Arial, Helvetica, sans-serif;
+}
+#bodyPannel form.search input.check {
+    background-color: #EFEBDE; 
+    color: #0B0B0B; 
+    border: #C3BCA4 1px solid;
+    width: 15px; 
+    height: 15px; 
+    float: left; 
+    margin: 6px 0 0 9px;
+}
+#bodyPannel form.search input.submit {
+    background:url(../../../site_icons/visualization/coauthorship/submit_bg.gif) no-repeat 37px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    border: none;
+    width: 53px; height:13px; 
+    float:right; margin:7px 0 0 0; 
+    padding: 0 23px 0 0; 
+    cursor: pointer;
+    font:normal 10px/13px Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+#eventLink {
+    width: 345px; 
+    padding: 0 0 0 70px;  
+    float: left;
+}
+#eventLink h2 {
+    background: url(../../../site_icons/visualization/coauthorship/event_link_bg.gif) no-repeat 0 7px #FFFFFF; 
+    color: #786E4E;
+    padding: 6px 0 10px 48px;
+    font: normal 28px/42px Georgia, "Times New Roman", Times, serif;
+}
+#eventLink h2 span {
+    background-color: #FFFFFF; 
+    color: #0B0B0B;
+    font: normal 28px/42px Georgia, "Times New Roman", Times, serif;
+}
+#eventLink ul {
+    float: left; 
+    padding: 0 0 0 5px;
+}
+#eventLink ul li {
+    font: normal 13px/19px Arial, Helvetica, sans-serif; 
+    background: url(../../../site_icons/visualization/coauthorship/red_arrow.gif) no-repeat 0 7px #FFFFFF; 
+    color: #4E4628;
+    padding: 0 0 0 6px;
+}
+#eventLink ul li a {
+    font: normal 13px/19px Arial, Helvetica, sans-serif; text-decoration:none; 
+    background-color: #FFFFFF; 
+    color: #4E4628;
+    padding: 0 4px; 
+    display: block;
+}
+#eventLink ul li a:hover {
+    font: normal 13px/19px Arial, Helvetica, sans-serif; 
+    text-decoration: none; 
+    background-color: #F4EFDF; 
+    color: #4E4628;
+    padding: 0 4px; 
+    display: block;
+}
+#eventLink a.more {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg.gif) no-repeat 66px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    float: right;
+    font: bold 10px/13px Arial, Helvetica, sans-serif; text-decoration: none; 
+    text-transform: uppercase;
+    padding: 0 20px 0 0; 
+    margin: 5px 10px 0 0;
+}
+#eventLink a.more:hover {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg_h.gif) no-repeat 66px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    float: right;
+    font: bold 10px/13px Arial, Helvetica, sans-serif; 
+    text-decoration: none; 
+    text-transform: uppercase;
+    padding: 0 20px 0 0; 
+    margin:5px 10px 0 0;
+}
+#midle {
+    background: url(../../../site_icons/visualization/coauthorship/picture.gif) no-repeat 0 0 #FFFFFF; 
+    color: #4E4628;
+    padding: 270px 0 0 0;
+}
+#midle h2 {
+    background-color: #FFFFFF; 
+    color: #0B0B0B;
+    font: normal 28px/46px Georgia, "Times New Roman", Times, serif;
+}
+#midle h2 span {
+    background-color: #FFFFFF; 
+    color: #A60101;
+    font: normal 28px/46px Georgia, "Times New Roman", Times, serif;
+}
+#midle p {
+    font: normal 14px/19px Arial, Helvetica, sans-serif; 
+    background-color: #FFFFFF; 
+    color: #4E4628;
+}
+#midle a.more {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg.gif) no-repeat 66px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    float:right;
+    font: bold 10px/13px Arial, Helvetica, sans-serif; 
+    text-decoration: none; 
+    text-transform: uppercase;
+    padding: 0 20px 0 0; 
+    margin: 5px 35px 0 0;
+}
+#midle a.more: hover {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg_h.gif) no-repeat 66px 0 #FFFFFF; 
+    color: #0B0B0B; float:right;
+    font: bold 10px/13px Arial, Helvetica, sans-serif; 
+    text-decoration: none; 
+    text-transform: uppercase;
+    padding: 0 20px 0 0; 
+    margin: 5px 35px 0 0;
+}
+#colorBg {
+    background-color: #FCFAF3; 
+    float: left; 
+    color: #0B0B0B;
+    margin: 18px 0 0 0; 
+    padding: 18px 40px 18px 38px; 
+    width: 642px;
+}
+#futurePlans {
+    width: 298px; 
+    float: left;
+}
+#futurePlans h2.text1 {
+    background-color: #FCFAF3; 
+    color: #0B0B0B;
+    font: normal 28px/40px Georgia, "Times New Roman", Times, serif;
+}
+#futurePlans h2.text1 span {
+    background-color: #FCFAF3; 
+    color: #A60101;
+    font: normal 28px/40px Georgia, "Times New Roman", Times, serif;
+}
+#futurePlans ul { 
+    float: left;
+}
+#futurePlans ul li {
+    font: normal 13px/19px Arial, Helvetica, sans-serif; 
+    color: #4E4628;
+    background: url(../../../site_icons/visualization/coauthorship/red_bullet.gif) no-repeat 0 6px #FCFAF3; 
+    padding: 0 0 0 10px;
+}
+#futurePlans ul li a {
+    font: bold 13px/19px Arial, Helvetica, sans-serif; text-decoration:none;
+    background-color: #FCFAF3; 
+    color: #4E4628; 
+    display: block;
+}
+#futurePlans ul li a:hover {
+    font: bold 13px/19px Arial, Helvetica, sans-serif; 
+    text-decoration: none;
+    background-color: #EAE6D9; 
+    color: #4E4628; 
+    display: block;
+}
+#futurePlans p {
+    background: url(../../../site_icons/visualization/coauthorship/boeder.gif) repeat-x 0 14px #FCFAF3; 
+    color: #0B0B0B;
+    height: 13px; 
+    line-height: 13px; 
+    padding: 14px 0 19px 0;
+}
+#futurePlans p a.more {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg.gif) no-repeat 76px 0 #FCFAF3; 
+    color: #0B0B0B; 
+    float: right;
+    font: bold 10px/13px Arial, Helvetica, sans-serif; 
+    text-decoration: none; 
+    text-transform: uppercase;
+    padding: 0 20px 0 10px; 
+    margin: 0;
+}
+#futurePlans p a.more:hover {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg_h.gif) no-repeat 76px 0 #FCFAF3; 
+    color: #0B0B0B; 
+    float: right;
+    font: bold 10px/13px Arial, Helvetica, sans-serif; text-decoration:none; 
+    text-transform: uppercase;
+    padding: 0 20px 0 10px; 
+    margin: 0;
+}
+#newsLetter {
+    margin: 0 auto;
+}
+#newsLetter span.nltop {
+    background: url(../../../site_icons/visualization/coauthorship/newsletter_top.gif) no-repeat 0 0 #FFFFFF; 
+    color: #000000;
+    line-height: 0; 
+    font-size: 0; 
+    height: 15px;
+    display: block;
+}
+#newsLetter span.nlbottom {
+    background: url(../../../site_icons/visualization/coauthorship/newsletter_bottom.gif) no-repeat 0 0 #FFFFFF; 
+    color: #000000;
+    line-height: 0; 
+    font-size: 0; 
+    height: 14px; 
+    display: block;
+}
+#newsLetter .middle {
+    background: url(../../../site_icons/visualization/coauthorship/newsletter_midle.gif) repeat-y 0 0 #FFFFFF;
+    color: #000000;
+    width: 140px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#newsLetter form.newsLetter h2.text2 {
+    background:u rl(../../../site_icons/visualization/coauthorship/newsletter_h2_bg.gif) no-repeat 0 0; 
+    color: #786E4E;
+    padding: 0 0 10px 65px; 
+    float: left; 
+    width: 228px; 
+    height: 37px;
+    font: normal 24px/30px Georgia, "Times New Roman", Times, serif;
+}
+#newsLetter form.newsLetter h2.text2 span {
+    background-color: #FFFFFF; 
+    color: #0B0B0B;
+    font: normal 24px/30px Georgia, "Times New Roman", Times, serif;
+}
+#newsLetter form.newsLetter label {
+    background-color: #FFFFFF; 
+    color: #0B0B0B; 
+    margin:  0 0 8px 0; 
+    float: left;
+    font: bold 10px/28px Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+#newsLetter form.newsLetter input {
+    background-color: #EFEBDE; 
+    color: #0B0B0B; 
+    border: #C3BCA4 1px solid;
+    width: 168px; 
+    height: 22px; 
+    padding: 2px; 
+    margin: 0 0 8px 15px; 
+    float: left;
+    font: normal 14px/20px Arial, Helvetica, sans-serif;
+}
+#newsLetter form.newsLetter input.submit {
+    background: url(../../../site_icons/visualization/coauthorship/submit_bg.gif) no-repeat 45px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    border: none;
+    width: 60px; 
+    height: 13px; 
+    float: right; 
+    margin: 7px 34px 0 0; 
+    padding: 0 30px 0 0; 
+    cursor: pointer;
+    font: normal 10px/13px Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+#contact {
+    width: 312px; 
+    float: right;
+}
+#contact span.ctop {
+    background: url(../../../site_icons/visualization/coauthorship/contact_top.gif) no-repeat 0 0 #FCFAF3; 
+    color: #000000;
+    line-height: 0; 
+    font-size: 0; 
+    height: 14px; 
+    display: block;
+}
+#contact span.cbottom {
+    background: url(../../../site_icons/visualization/coauthorship/contact_bottom.gif) no-repeat 0 0 #FCFAF3; 
+    color: #000000;
+    line-height: 0; 
+    font-size: 0; 
+    height: 25px; 
+    display: block;
+}
+#contact form.contact {
+    background: url(../../../site_icons/visualization/coauthorship/contact_midle.gif) repeat-y 0 0 #FCFAF3; 
+    color: #000;
+    width: 272px; 
+    padding: 0 20px; 
+    float: left;
+}
+#contact form.contact h2.text3 {
+    background: url(../../../site_icons/visualization/coauthorship/contact_h2_bg.gif) no-repeat 0 0 #FFFFFF; 
+    color: #0B0B0B;
+    padding: 0 0 10px 55px; 
+    float: left; width:228px; 
+    height: 37px;
+    font: normal 24px/30px Georgia, "Times New Roman", Times, serif;
+}
+#contact form.contact h2.text3 span {
+    background-color: #FFFFFF; 
+    color: #A60101;
+    font: normal 24px/30px Georgia, "Times New Roman", Times, serif;
+}
+#contact form.contact label {
+    background-color: #FFFFFF; 
+    color: #0B0B0B; 
+    margin: 0 0 8px 0; 
+    float: left;
+    font: bold 10px/28px Arial, Helvetica, sans-serif; text-transform:uppercase;
+}
+#contact form.contact input {
+    background-color: #EFEBDE; 
+    color: #0B0B0B; 
+    border: #C3BCA4 1px solid;
+    width: 168px; 
+    height: 22px; 
+    padding: 2px; 
+    margin: 0 0 8px 15px; 
+    float: right;
+    font: normal 14px/20px Arial, Helvetica, sans-serif;
+}
+#contact form.contact textarea {
+    background-color: #EFEBDE; 
+    color: #0B0B0B; 
+    border: #C3BCA4 1px solid;
+    width: 168px; 
+    height: 66px; 
+    padding: 2px; 
+    margin: 0 0 13px 15px; 
+    float: right;
+    font: normal 14px/20px Arial, Helvetica, sans-serif;
+}
+#contact form.contact input.submit {
+    background: url(../../../site_icons/visualization/coauthorship/submit_bg.gif) no-repeat 45px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    border: none;
+    width: 60px; 
+    height: 13px; 
+    float: right; 
+    margin: 0 0 0 10px; 
+    padding: 0 20px 0 0; 
+    cursor: pointer;
+    font: normal 10px/13px Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+#contact form.contact input.reset {
+    background: url(../../../site_icons/visualization/coauthorship/more_bg.gif) no-repeat 45px 0 #FFFFFF; 
+    color: #0B0B0B; 
+    border: none;
+    width: 60px; height:13px; 
+    float: right; 
+    margin: 0; 
+    padding: 0 15px 0 0; 
+    cursor: pointer;
+    font: normal 10px/13px Arial, Helvetica, sans-serif; 
+    text-transform: uppercase;
+}
+/* footer */
+#footer {
+    position: relative; 
+    margin: 0 auto; 
+    width: 678px; 
+    padding: 12px 0 50px;
+}
+#footer a.xhtml {
+    background-color: #CC0000; 
+    color: #FFFFFF; 
+    width: 49px; 
+    height: 16px; 
+    margin: 0 6px 0 0;
+    font: bold 13px/16px "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    display: block; 
+    text-align: center; 
+    text-decoration: none; 
+    float: left;
+}
+#footer a.xhtml:hover {
+    background-color: #0B0B0B; 
+    color: #FFFFFF; 
+    width: 49px; 
+    height: 16px; 
+    margin: 0 6px 0 0;
+    font: bold 13px/16px "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    display: block; 
+    text-align: center; 
+    text-decoration: none; 
+    float: left;
+}
+#footer a.css {
+    background-color: #0B0B0B; 
+    color: #FFFFFF; 
+    width: 38px; 
+    height: 16px;
+    font: bold 13px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    display: block; 
+    text-align: center; 
+    text-decoration: none; 
+    float: left;
+}
+#footer a.css:hover {
+    background-color: #CC0000; 
+    color: #FFFFFF; 
+    width: 38px; 
+    height: 16px;
+    font: bold 13px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    display: block; text-align:center;
+    text-decoration: none; 
+    float: left;
+}
+#footer ul {
+    float: right;
+}
+#footer ul li {
+    float: left; color:#0B0B0B; 
+    background-color: #FDF9EE;
+    font: normal 12px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#footer ul li a {
+    color: #0B0B0B; 
+    background-color: #FDF9EE; 
+    padding: 0 8px; 
+    text-decoration: none;
+    font: normal 12px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#footer ul li a:hover {
+    color: #0B0B0B; 
+    background-color: #EFEBDE; 
+    padding: 0 8px; 
+    text-decoration: none;
+    font: normal 12px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#footer p {
+    color: #A90000; 
+    background-color: #FDF9EE; 
+    padding: 0 8px; 
+    float: right;
+    font: normal 12px/22px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#footer p.tworld {
+    color: #0B0B0B; 
+    background-color: #FDF9EE; 
+    padding: 0 8px; 
+    float: right;
+    font: normal 12px/19px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#footer p.tworld a {
+    color: #0B0B0B; 
+    background-color: #FDF9EE; 
+    text-decoration: none;
+    font: normal 12px/19px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#footer p.tworld a:hover {
+    color: #0B0B0B; 
+    background-color: #EFEBDE; 
+    text-decoration: none;
+    font: normal 12px/19px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#nodeData div {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+#nodeData .italicize {
+    font-style: italic;
+}
+#nodeData .bold {
+    font-weight: bold;
+}
+#nodeData .works .numbers {
+    text-align: right;
+    width: 40px;
+    float: left;
+}

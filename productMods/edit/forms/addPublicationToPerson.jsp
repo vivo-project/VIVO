@@ -63,7 +63,7 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     Individual subject = (Individual) request.getAttribute("subject");
 	Individual obj = (Individual) request.getAttribute("object");
 	
-	//check to see if this is an edit of existing, if yes redirect to pub 
+	// Check to see if this is an edit of existing, if yes redirect to pub 
 	if( obj != null ){     	
     	List<ObjectPropertyStatement> stmts =  obj.getObjectPropertyStatements( nodeToPubProp );
     	if( stmts != null && stmts.size() > 0 ){    		
@@ -77,6 +77,20 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
             	<%	
     		} 
     	}
+	}
+	
+	/* This form is not prepared to deal with editing an existing relationship, so redirect
+	 * to authorship page if no publication was found. This is not ideal, because you can't add
+	 * a linked information resource from that page, but you can at least continue to the back end.
+	 * May want to modify form in a future version to support repair mode.
+	 */
+	if (obj != null) {
+	    String objectUri = obj.getURI();
+        %>  
+        <jsp:forward page="/individual">
+            <jsp:param value="<%= objectUri %>" name="uri"/>
+        </jsp:forward>  
+        <%  	    
 	}
 %>
 
@@ -207,18 +221,18 @@ SPARQL queries for existing values. --%>
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
     editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
-  	editConfig.setEntityToReturnTo("?pubUri");
+    // Return to person, not publication. See NIHVIVO-1464.
+  	// editConfig.setEntityToReturnTo("?pubUri"); 
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/js/browserUtils.js",
-                                                                "/edit/forms/js/customFormWithAdvanceTypeSelection.js"                                                    
+                                                                "/edit/forms/js/customFormWithAutocomplete.js"                                                    
                                                                ));            
     request.setAttribute("customJs", customJs);
     
     List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
                                                                  Css.CUSTOM_FORM.path(),
-                                                                 "/edit/forms/css/autocomplete.css",
-                                                                 "/edit/forms/css/customFormWithAdvanceTypeSelection.css"
+                                                                 "/edit/forms/css/customFormWithAutocomplete.css"
                                                                 ));                                                                                                                                   
     request.setAttribute("customCss", customCss); 
 %>
@@ -232,7 +246,7 @@ SPARQL queries for existing values. --%>
 <%@ include file="unsupportedBrowserMessage.jsp" %>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
-<form id="addPublicationForm" class="noIE67"  action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+<form id="addPublicationForm" class="customForm noIE67"  action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
     <p class="inline"><v:input type="select" label="Publication Type ${requiredHint}" name="pubType" id="typeSelector" /></p>
     
@@ -253,7 +267,7 @@ SPARQL queries for existing values. --%>
 </form>
 
 <c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
-<c:url var="sparqlQueryUrl" value="/admin/sparqlquery" />
+<c:url var="sparqlQueryUrl" value="/ajax/sparqlQuery" />
 
 <%-- Must be all one line for JavaScript. --%>
 <c:set var="sparqlForAcFilter">

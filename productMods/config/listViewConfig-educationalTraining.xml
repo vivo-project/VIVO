@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-base>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?edTraining
+                        ?org ?orgName 
+                        ?degreeName ?degreeAbbr 
+                        ?majorField ?deptOrSchool ?info 
+                        ?dateTimeStart ?dateTimeEnd 
+            WHERE {
+                ?subject ?property ?edTraining 
+                OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                  
+                           ?org rdfs:label ?orgName  
+                }
+                OPTIONAL { ?edTraining core:degreeEarned ?degree  
+                           OPTIONAL { ?degree rdfs:label ?degreeName }
+                           OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                }
+                OPTIONAL { ?edTraining core:majorField ?majorField }
+                OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
+                OPTIONAL { ?edTraining core:supplementalInformation ?info }
+                OPTIONAL { ?edTraining core:dateTimeInterval ?dateTimeInterval 
+                           OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
+                                      ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                           }
+                           OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .   
+                                      ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+                           }                                       
+                }                                  
+         }  ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart)
+    </query-base>
+
+    <query-collated>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        
+        SELECT DISTINCT ?subclass
+                        ?edTraining 
+                        ?org ?orgName 
+                        ?degreeName ?degreeAbbr 
+                        ?majorField ?deptOrSchool ?info 
+                        ?dateTimeStart ?dateTimeEnd 
+            WHERE {
+                ?subject ?property ?edTraining 
+                OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                 
+                           ?org rdfs:label ?orgName  
+                           OPTIONAL { ?subclass rdfs:subClassOf foaf:Organization .
+                                      ?org a ?subclass 
+                           }                                           
+                }
+                OPTIONAL { ?edTraining core:degreeEarned ?degree  
+                           OPTIONAL { ?degree rdfs:label ?degreeName }
+                           OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                }
+                OPTIONAL { ?edTraining core:majorField ?majorField }
+                OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
+                OPTIONAL { ?edTraining core:supplementalInformation ?info }
+                OPTIONAL { ?edTraining core:dateTimeInterval ?dateTimeInterval
+                           OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
+                                      ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                           }
+                           OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue . 
+                                      ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+                           }                                      
+                }                              
+         }  ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart)
+    </query-collated>
+
+    <query-construct> 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf foaf:Organization .
+        } WHERE {
+            ?subclass rdfs:subClassOf foaf:Organization .
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+            ?subject ?property ?edTraining .
+            ?edTraining ?edTrainingProp ?edTrainingValue .
+            ?edTraining core:trainingAtOrganization ?org .
+            ?org rdfs:label ?orgName .
+            ?edTraining core:degreeEarned ?degree .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval
+        } WHERE {
+            {
+                ?subject ?property ?edTraining .
+            }
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining ?edTrainingProp ?edTrainingValue 
+            }
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining core:trainingAtOrganization ?org .
+                ?org rdfs:label ?orgName  
+            } 
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining core:degreeEarned ?degree .
+            } 
+            UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining core:dateTimeInterval ?dateTimeInterval
+            }
+        }
+    </query-construct> 
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+            ?org a ?subclass
+        } WHERE {
+            ?subject ?property ?edTraining .
+            ?edTraining core:trainingAtOrganization ?org .
+            ?org a ?subclass
+        }
+    </query-construct>
+
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+                ?degree rdfs:label ?degreeName .
+                ?degree core:abbreviation ?degreeAbbr 
+        } WHERE {
+            { 
+                ?subject ?property ?edTraining .
+                ?edTraining core:degreeEarned ?degree .
+                ?degree rdfs:label ?degreeName 
+            } UNION {
+                ?subject ?property ?edTraining .
+                ?edTraining core:degreeEarned ?degree .
+                ?degree core:abbreviation ?degreeAbbr 
+            }
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+            ?dateTimeInterval core:start ?dateTimeStartValue .                    
+            ?dateTimeStartValue core:dateTime ?dateTimeStart .
+        } WHERE {
+            ?subject ?property ?edTraining .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .                    
+            ?dateTimeStartValue core:dateTime ?dateTimeStart .
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+            ?dateTimeInterval core:end ?dateTimeEndValue . 
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+        } WHERE {
+            ?subject ?property ?edTraining .
+            ?edTraining core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue . 
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd  
+        } 
+    </query-construct>
+    
+    <template>propStatement-educationalTraining.ftl</template>
+</list-view-config>

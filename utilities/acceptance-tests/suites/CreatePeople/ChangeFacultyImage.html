@@ -35,6 +35,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Change the uploaded picture for Jane Faculty in the backend</td>
 	<td></td>
@@ -61,7 +66,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
+	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,11 +90,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Navigate to Jane Faculty</td>
 	<td></td>
@@ -97,11 +97,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,12 +111,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
+	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Jane Faculty</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -135,13 +130,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='content']/div[1]/h3</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
+	<td>link=Edit this individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,7 +141,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Jane Faculty</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,7 +156,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Replace image for Jane Faculty</td>
+	<td>Replace image for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,13 +171,13 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td>//img[@alt='Individual photo']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
+	<td>C:\VIVO\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -196,7 +186,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Jane Faculty</td>
+	<td>Crop Photo for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -211,7 +201,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Jane Faculty</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -222,11 +212,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Upload Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Replace image for Jane Faculty</td>
 	<td></td>
 </tr>
 <tr>
@@ -241,13 +226,18 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@id='photoUploadDefaultImageContainer']/img</td>
+	<td>//img[@alt='Individual photo']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Replace image for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>datafile</td>
-	<td>C:\vivo-code\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
+	<td>C:\VIVO\vivo\utilities\acceptance-tests\suites\CreatePeople\Jane2.jpg</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -256,7 +246,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Jane Faculty</td>
+	<td>Crop Photo for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,7 +256,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Current Photo</td>
+	<td>Photo Upload</td>
 	<td></td>
 </tr>
 <tr>
@@ -300,11 +290,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Index to VIVO Contents</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Faculty Member</td>
 	<td></td>
@@ -316,12 +301,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Jane Faculty</td>
+	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Jane Faculty</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -336,6 +321,11 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Log out</td>
 	<td></td>
 </tr>
@@ -344,7 +334,6 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

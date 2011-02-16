@@ -1,0 +1,58 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* <------ INDIVIDUAL CORE:OVERVIEW */
+#overview {
+    clear: left;
+}
+.overview-value {
+    display: inline;
+}
+div.overview-value :last-child {
+    margin-bottom: .2em;
+}
+.individual-overview {
+    font-size: 1em;
+    padding-bottom: 0;
+    line-height: 1.3em;
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 100%;
+}
+/* <------ INDIVIDUAL TEMPORAL GRAPH */
+#temporal-graph {
+    float: right;
+    padding: 0 3px 20px 0;
+    background-color: #fff;
+}
+#temporal-graph h3 {
+    margin: 0;
+    padding: 0;
+}
+#temporal-graph h3 img {
+    padding-right: 10px;
+    vertical-align: text-top;
+}
+/* <------ POSITIONS */
+ul#individual-personInPosition {
+    list-style-type: circle;
+    padding-left: 20px;
+}
+ul#individual-personInPosition li {
+    line-height: 1em;
+}
+ul#individual-personInPosition li:last-child {
+    padding-bottom: 15px;
+}
+/* <------ RESEARCH AREA */
+ul#individual-hasResearchArea {
+    padding-bottom: 24px;
+}
+ul#individual-hasResearchArea li {
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right: 1px solid #5e6363;
+}
+ul#individual-hasResearchArea li:first-child {
+    padding-left: 0;
+}

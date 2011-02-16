@@ -5,6 +5,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.constants;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("serial")
 public class QueryConstants {
 	
 	public static final Map<String, String> PREFIX_TO_NAMESPACE = new HashMap<String, String>() { {
@@ -47,17 +48,12 @@ public class QueryConstants {
 		
 		StringBuilder prefixSection = new StringBuilder(); 
 		
-		for (Map.Entry prefixEntry : PREFIX_TO_NAMESPACE.entrySet()) {
+		for (Map.Entry<String, String> prefixEntry : PREFIX_TO_NAMESPACE.entrySet()) {
 			prefixSection.append("PREFIX " + prefixEntry.getKey() 
 									+ ": <" + prefixEntry.getValue() + ">\n");
 		}
-		
-		
 		return prefixSection.toString();
-		
 	}
-	
-	
 }
 
 

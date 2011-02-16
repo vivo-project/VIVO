@@ -5,7 +5,10 @@
 # Each line contains the suite name, the test name, and an optional comment.
 # Like this:
 #     <suite name>, <test name> # Comment text
+#
+# If the test name is "*", then entire suite is ignored.
 
-user-management, Bookmark Without Logging In # This test is known to fail, because not all pages come up properly if bookmarked. 
 CreatePeople,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
 CreatePeople,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.
+CreatePeopleVB,    UploadFacultyImage          # Don't know how to specify an upload file location that is system-independent. 
+CreatePeopleVB,    ChangeFacultyImage          # Don't know how to specify an upload file location that is system-independent.

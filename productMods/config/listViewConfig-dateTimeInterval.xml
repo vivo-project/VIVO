@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-base>     
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?dateTimeInterval
+                        ?valueStart ?valueStartName
+                        ?dateTimeStart 
+                        ?precisionStart
+                        ?valueEnd ?valueEndName 
+                        ?dateTimeEnd 
+                        ?precisionEnd WHERE {
+            ?subject ?property ?dateTimeInterval
+                      
+            OPTIONAL { ?dateTimeInterval core:start ?valueStart
+                                   LET (?valueStartName := afn:localname(?valueStart)) 
+                       OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
+                       OPTIONAL { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
+                                              LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
+                       }
+            }                      
+            OPTIONAL { ?dateTimeInterval core:end ?valueEnd
+                                   LET (?valueEndName := afn:localname(?valueEnd))  
+                       OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
+                       OPTIONAL { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
+                                              LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
+                       }
+            }
+        }  
+    </query-base>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        CONSTRUCT {
+            ?subject ?property ?dateTimeInterval .
+            ?dateTimeInterval core:start ?valueStart .
+            ?dateTimeInterval core:end ?valueEnd
+        } WHERE {
+            {
+                ?subject ?property ?dateTimeInterval
+            } 
+            UNION {
+                ?subject ?property ?dateTimeInterval .
+                ?dateTimeInterval core:start ?valueStart
+            }
+            UNION {
+                ?subject ?property ?dateTimeInterval .
+                ?dateTimeInterval core:end ?valueEnd
+            }
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+       
+        CONSTRUCT { 
+            ?valueStart ?p ?o
+        } WHERE {
+            ?subject ?property ?dateTimeInterval .
+            ?dateTimeInterval core:start ?valueStart .
+            ?valueStart ?p ?o
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+       
+        CONSTRUCT { 
+            ?valueEnd ?p ?o
+        } WHERE {
+            ?subject ?property ?dateTimeInterval .
+            ?dateTimeInterval core:end ?valueEnd .
+            ?valueEnd ?p ?o
+        }
+    </query-construct>
+
+    <template>propStatement-dateTimeInterval.ftl</template>
+</list-view-config>

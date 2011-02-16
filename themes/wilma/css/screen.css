@@ -1,0 +1,26 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/****************************************
+****************************************
+  __  __   __  __  __    ___   
+ /\ \/\ \\/\ \/\ \/\ \  / __`\ 
+ \ \ \_/ |\ \ \ \ \_/ |/\ \L\ \
+  \ \___/  \ \_\ \___/ \ \____/
+   \/__/    \/_/\/__/   \/___/
+ 
+               
+VIVO wilma theme: screen styles
+ 
+ Original version
+ 2010-09-04 UI team
+ 
+ Last updated
+ 2011-2-1
+ 
+*****************************************
+*****************************************/
+
+@charset "UTF-8";
+
+@import url("reset.css");
+@import url("wilma.css");

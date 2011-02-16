@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>VIVO Release 1 V1.2 Upgrade Guide</title>
+        <link rel="stylesheet" href="./css/doc.css" media="screen" />
+    </head>
+    <body>
+        <div id="branding" role="banner">
+            <h1 class="vivo-logo"><a href="/"><span class="displace">VIVO</span></a></h1>
+        </div>
+        <!-- Start of content -->
+        <div id="wrapper-content" role="main">
+            <h1>VIVO Release 1 v1.2 Upgrade Guide</h1>
+            <small>
+                February 16, 2011 - Upgrading from Release 1 v1.1 to Release 1 
+                v1.2 
+            </small>
+            <toc>
+                <ul>
+                    <li>
+                        <a href="#announcement">Release announcement for V1.2</a>
+                    </li>
+                    <li>
+                        <a href="#upgrade">Upgrade process for V1.2</a>
+                    </li>
+                </ul>
+            </toc>
+            <p>
+                This document provides a short description of the steps involved in 
+                upgrading your installation of VIVO from Release 1, Version 1.1 to  
+                Version 1.2. This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
+                at <a href="http://vivoweb.org">VIVOweb.org</a>
+            </p>
+            <p>
+                If you need to do a fresh install, please consult the VIVO Release 1 v1.2 
+                Installation Guide found on <a href="http://vivoweb.org/support">vivoweb.org</a>
+                or the install.html file located in the <code>doc</code>
+                directory of the VIVO source code distribution. The installation 
+                document also has a list of the required software and versions. 
+            </p>
+            <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.2</h2>
+            <p>
+                The VIVO 1.2 release incorporates major changes throughout the application - 
+				notably a new templating system to support more versatile page rendering, plus 
+				improvements to address scalability. The release also features a new personal 
+				visualization option covering grants as well as publications. The VIVO Harvester 
+				library has also been significantly improved and expanded in scope for its 1.0 
+				release through the VIVO SourceForge project at 
+				<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
+            </p>
+            <h4>Templating system for page generation, navigation, and theming</h4>
+            <p>
+                A fresh installation of VIVO 1.2 looks strikingly different, with the introduction 
+				of a new default theme which takes advantage of the navigation and browse features 
+				delivered by the templating system. Individual pages now offer inline navigation to 
+				streamline viewing of expanded personal and organizational profiles, as well as 
+				improved content layout and organization. New browse controls on the home page and 
+				menu pages help to provide an immediate overview of the size and range of content 
+				and quick access down to the individual person, organization, research feature, or 
+				event.
+            </p>
+            <h4>Storage model</h4>
+            <p>
+                While server memory capacity has increased significantly in recent years, VIVO's reliance 
+				on in-memory caching of RDF data had put limits on the ultimate scalability of VIVO instances 
+				and potentially increased the cost of servers required to support VIVO.
+            </p>
+            <p>
+                With version 1.2, VIVO has been converted to optionally use Jena's SPARQL database (SDB) 
+				subsystem. SDB significantly reduces the baseline memory footprint, allowing VIVO installations 
+				to scale well beyond what has previously been possible.
+            </p>
+            <h4>New visualizations</h4>
+            <p>
+                Visualizations of networks of co-authors are now complemented by visualizations of co-investigators 
+				on grants, with similar interactivity and options for export as images or data.
+            </p>
+            <h4>Ontology</h4>
+            <p>
+                VIVO 1.2 includes a new ontology module representing research 
+                resources including biological specimens, human studies, instruments,  
+                organisms, protocols, reagents, and research opportunities. This module 
+                is aligned with the top-level ontology classes and properties from the  
+                NIH-funded <a href="https://www.eagle-i.org/home/">eagle-i Project</a>.
+            </p>
+            <h3>Associated VIVO releases</h3>
+            <h4>VIVO Harvester</h4>
+            <p>
+                The Harvester development team is releasing version 1.0 of the VIVO Harvester library shortly 
+				following the release of VIVO 1.2. The Harvester is an extensible data ingest and updating 
+				framework with sample configurations for loading PubMed publication, grants, and human resources 
+				data. Pre-release versions of the Harvester are available at 
+				<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
+            </p>
+            <hr><!-- Page break --><!-- Upgrade process for V1.2 --><h2 id="upgrade">Upgrade process for V1.2</h2>
+            <toc>
+                <ol class="roman1">
+                    <li>
+                        <a href="#preparation">Before Performing the Upgrade</a>
+                    </li>
+                    <li>
+                        <a href="#triple_store">Chose Triple Store</a>
+                    </li>
+                    <li>
+                        <a href="#upgrade_process">The Upgrade Process</a>
+                    </li>
+                    <li>
+                        <a href="#ontology">Ontology Changes</a>
+                        <ol class="roman2">
+                            <li>
+                                <a href="#verify_ontology_upgrade">Verify Ontology upgrade
+                                    process</a>
+                            </li>
+                            <li>
+                                <a href="#ontology_knowledge_base">Ontology knowledge base
+                                    manual review</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#fileSystem">File Storage System Upgrade</a>
+                        <ol class="roman2">
+                            <li>
+                                <a href="#changes_to_storage">Changes to the File
+                                    Storage System</a>
+                            </li>
+                            <li>
+                                <a href="#verify_file_upgrade">Verify File Storage
+                                    System upgrade process</a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#theme">Theme Changes</a>
+                    </li>
+                    <li>
+                        <a href="#setup_sdb">Set Up SDB Store in the Background (Optional)</a>
+                    </li>
+                </ol>
+            </toc>
+            <h3 id="preparation">I. Before Performing the Upgrade</h3>
+            <p>
+                Please ensure that backups are created of the: 
+            </p>
+            <ul style="list-style-type: square;">
+                <li>
+                    Tomcat webapps directory 
+                </li>
+                <li>
+                    Original source directory 
+                </li>
+                <li>
+                    MySQL database (mysqldump) 
+                </li>
+            </ul>
+            <p>
+                The upgrade process is similar to the original install process with 
+                the following EXCEPTIONS: 
+            </p>
+            <ul>
+                <li>
+                    DO NOT reinstall MySQL or recreate the MySQL database. Please 
+                    ensure that you back-up the MySQL database. Also note that VIVO 1.2 will  
+                    not run on older versions of MySQL that may have worked with 1.1.1. 
+                    Be sure to run VIVO 1.2 with MySQL 5.1 or higher.  Using unsupported  
+                    versions may result in strange error messages related to table formatting or 
+                    other unexpected problems.
+                </li>
+                <li>
+                    It is not necessary to add RDF data. 
+                </li>
+                <li>
+                    First-time login of the administrator account after the upgrade 
+                    process is complete will use the password previously set, NOT the  
+                    default password used on the first login after the initial 
+                    installation. 
+                </li>
+                <li>
+                    The first time Apache Tomcat starts up after the upgrade, it 
+                    will initiate a process that modifies the knowledge base to align the  
+                    data with the revised ontology. See the section on the <a href="#ontology">Ontology Upgrade</a>
+                    below for more information. 
+                </li>
+            </ul>
+            <h3 id="triple_store">II. Choose Triple Store</h3>
+            <p>
+                VIVO 1.2 offers a choice of two triple store technologies: in-memory models backed by 
+                Jena's legacy relational database store (RDB), and Jena's SPARQL database (SDB).   RDB was  
+                used by VIVO 1.1.1 and earlier.   This mode offers fast response, but only by caching the 
+                entire RDF model in the server's main memory.   The memory available to VIVO limits the 
+                number of RDF statements that may be stored.
+            </p>
+            <p>
+                SDB mode caches only a fraction of the RDF data in memory.  Most queries are issued directly 
+                against the underlying database.  This allows VIVO installations to display data from large  
+                RDF models while requiring only a small amount of server memory to run the application. 
+                There is a tradeoff in response time:  pages make take slightly longer to load in SDB mode,  
+                and performance will depend on the configuration parameters of the database server. 
+                Additionally, advanced OWL reasoning (not enabled by default in either mode) is not possible  
+                in SDB mode.  With SDB, only the default set of inferences (inferred rdf:type statements) are 
+                generated, though they are generated as soon as data is edited rather than in a background process.
+            </p>
+            <p>
+                Though a VIVO installation may be switched back and forth between RDB and SDB mode by changing 
+                a configuration property and redeploying the application, it is important to note that data  
+                added in one mode will not typically appear in the other.  The exception is when a system is 
+                first switched from RDB mode to SDB mode.  In this case, the data from the RDB store will be  
+                automatically migrated to SDB. 
+            </p>
+            <p>
+                A VIVO 1.2 system that is upgraded from VIVO 1.1.1 must initially be run in RDB mode in order 
+                to receive required ontology updates.  Attempting to run an upgraded system initially in SDB will  
+                result in a logged error message, and the application will not start.  After the system starts 
+                up successfully the first time in RDB mode, it may then be switched to SDB, redeployed, and restarted. 
+                Upon restart, the data in the RDB store will be copied to the SDB store.
+            </p>
+            <p>
+                This copying process can take a number of hours to complete if the installation contains a large 
+                amount of RDF data (roughly a million triples or more).  See section <a href="#setup_sdb">Set Up SDB Store in the Background (Optional)</a>
+                for instructions on how 
+                to run this lengthy conversion process in the background while an RDB system is operating. 
+                Doing this will reduce the time necessary to start VIVO the first time it is run in SDB mode.
+            </p>
+            <h3 id="upgrade_process">III. The Upgrade Process</h3>
+            <p>
+                1. Download the new distribution file and unpack it into a new 
+                source directory. 
+            </p>
+            <p>
+                2. Create deploy.properties, using the same values as in your 
+                previous installation and set values for the new variables. The  
+                following table shows the default properties for deploy.properties with 
+                new V1.2 properties in <span class="blue">blue</span>.<!-- deploy.properties table from install.html -->
+            </p>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            Property Name 
+                        </th>
+                        <th>
+                            Example Value 
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Default namespace: VIVO installations make their
+                            RDF resources available for harvest using linked data. Requests for RDF
+                            resource URIs redirect to HTML or RDF representations as specified by
+                            the client. To make this possible, VIVO's default namespace must have
+                            a certain structure and begin with the public web address of the VIVO
+                            installation. For example, if the web address of a VIVO installation is
+                            "http://vivo.example.edu/" the default namespace must be set to
+                            "http://vivo.example.edu/individual/" in order to support linked data.
+                            Similarly, if VIVO is installed at "http://www.example.edu/vivo" the
+                            default namespace must be set to
+                            "http://www.example.edu/vivo/individual/"<h4>* The namespace must end with "individual/" (including the
+                                trailing slash).</h4>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            Vitro.defaultNamespace 
+                        </td>
+                        <td>
+                            http://vivo.mydomain.edu/individual/ 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where Vitro code is located. In most 
+                            deployments, this is set to ./vitro-core (It is not uncommon for this  
+                            setting to point elsewhere in development environments). 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.core.dir 
+                        </td>
+                        <td>
+                            ./vitro-core 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where tomcat is installed. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            tomcat.home 
+                        </td>
+                        <td>
+                            /usr/local/tomcat 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Name of your VIVO application. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            webapp.name 
+                        </td>
+                        <td>
+                            vivo 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where uploaded files will be stored. 
+                            Be sure this directory exists and is writable by the user who  
+                            the Tomcat service is running as. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            upload.directory 
+                        </td>
+                        <td>
+                            /usr/local/vivo/data/uploads 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where the Lucene search index will be 
+                            built. Be sure this directory exists and is writable by the user who  
+                            the Tomcat service is running as. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            LuceneSetup.indexDir 
+                        </td>
+                        <td>
+                            /usr/local/vivo/data/luceneIndex 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify an SMTP host that the form will use for 
+                            sending e-mail (Optional). If this is left blank, the contact form will  
+                            be hidden and disabled. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            Vitro.smtpHost 
+                        </td>
+                        <td>
+                            smtp.servername.edu 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the JDBC URL of your database. Change 
+                            the end of the URL to reflect your database name (if it is not "vivo"). 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.url 
+                        </td>
+                        <td>
+                            jdbc:mysql://localhost/vivo 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the username to match the authorized user 
+                            you created in MySQL. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.username 
+                        </td>
+                        <td>
+                            username 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the password to match the password you 
+                            created in MySQL. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.password 
+                        </td>
+                        <td>
+                            password 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the Jena triple store technology to use. 
+                            SDB is Jena's SPARQL database; this setting allows RDF data to scale  
+                            beyond the limits of the JVM heap. Set to RDB to use the older Jena RDB 
+                            store with in-memory caching. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            VitroConnection.DataSource.tripleStoreType 
+                        </td>
+                        <td>
+                            SDB 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the maximum number of active connections 
+                            in the database connection pool to support the anticipated number of  
+                            concurrent page requests. It is not necessary to adjust this value when 
+                            using the RDB configuration. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            VitroConnection.DataSource.pool.maxActive 
+                        </td>
+                        <td>
+                            40 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the maximum number of database 
+                            connections that will be allowed to remain idle in the connection pool.  
+                            Default is 25% of the maximum number of active connections. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            VitroConnection.DataSource.pool.maxIdle 
+                        </td>
+                        <td>
+                            10 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the dbtype setting to use a database 
+                            other than MySQL. Otherwise, leave this value unchanged. Possible  
+                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and 
+                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported  
+                            for additional information. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            VitroConnection.DataSource.dbtype 
+                        </td>
+                        <td>
+                            MySQL 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify a driver class name to use a database 
+                            other than MySQL. Otherwise, leave this value unchanged. This JAR file  
+                            for this driver must be added to the the <code>webapp/lib</code>
+                            directory within the vitro.core.dir specified above. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            VitroConnection.DataSource.driver 
+                        </td>
+                        <td>
+                            com.mysql.jdbc.Driver 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the validation query used to test 
+                            database connections only if necessary to use a database other than  
+                            MySQL. Otherwise, leave this value unchanged. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            VitroConnection.DataSource.validationQuery 
+                        </td>
+                        <td>
+                            SELECT 1 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the name of your first admin user for 
+                            the VIVO application. This user will have an initial temporary password  
+                            of 'defaultAdmin'. You will be prompted to create a new password on 
+                            first login. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            initialAdminUser 
+                        </td>
+                        <td>
+                            defaultAdmin 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The URI of a property that can be used to
+                            associate an Individual with a user account. When a user logs in with a
+                            name that matches the value of this property, the user will be
+                            authorized to edit that Individual.&nbsp; For example, to use the netID
+                            at Cornell University as the property:
+                            <br>
+                            <span style="font-style: italic;">seflEditing.idMatchingProperty
+                                =
+                                http://vivo.cornell.edu/ns/hr/0.9/hr.owl#netId</span>
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            selfEditing.idMatchingProperty 
+                        </td>
+                        <td>
+                            http://vivo.mydomain.edu/ns#networkId 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The temporal graph visualization can require extensive machine resources.
+                            This can have a particularly noticable impact on memory usage if
+                            <ul>
+                                <li>
+                                    VIVO is configured to use Jena SDB, 
+                                </li>
+                                <li>
+                                    The organization tree is deep, 
+                                </li>
+                                <li>
+                                    The number of grants and publications is large. 
+                                </li>
+                            </ul>
+                            The VIVO developers are working to make this visualization more efficient.
+                            In the meantime, VIVO release 1.2 guards against this impact by disabling 
+							the temporal graph visualization unless the "visualization.temporal" flag 
+							is set to "enabled". To enable it, uncomment the line for this setting.
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            visualization.temporal 
+                        </td>
+                        <td>
+                            enabled 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The temporal graph visualization is used to
+                            compare different
+                            organizations/people within an organization on parameters like number
+                            of publications or grants. By default, the app will attempt to make its
+                            best guess at the top level organization in your instance. If you're
+                            unhappy with this selection, uncomment out the property below and set
+                            it to the URI of the organization individual you want to identify as
+                            the top level organization. It will be used as the default whenever the
+                            temporal graph visualization is rendered without being passed an
+                            explicit org. For example, to use "Ponce School of Medicine" as the top
+                            organization:
+                            <br>
+                            <span style="font-style: italic;">visualization.topLevelOrg =
+                                http://vivo.psm.edu/individual/n2862</span>
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            visualization.topLevelOrg 
+                        </td>
+                        <td>
+                            http://vivo-trunk.indiana.edu/individual/topLevelOrgURI 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                3. Apply any previous changes you have made to the new source 
+                directory. 
+            </p>
+            <blockquote>
+                <strong>Special notes regarding source files</strong>
+                <ul>
+                    <li>
+                        This process assumes any changes made to the application were 
+                        made in the source directory and deployed, and were not made directly  
+                        within the Tomcat webapps directory. 
+                    </li>
+                    <li>
+                        In many cases, simply copying the modified files from your 
+                        original source directory will not work since the files on which they  
+                        are based have changed. It will be necessary to inspect the new source 
+                        files and add any changes to them at that time. 
+                    </li>
+                    <li>
+                        NIH-funded VIVO implementations will need to apply the Google 
+                        Analytics Tracking Code (GATC) to <code>googleAnalytics.ftl</code>
+                        in the theme: <pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
+                        A sample <code>googleAnalytics.ftl</code>
+                        is included in the built-in theme. This file serves only as an example, 
+                        and you must replace the tracking code shown with your institution's own  
+                        tracking code. For additional information about the GATC for the NIH-funded 
+                        VIVO implementation sites and a copy of your institution's tracking code, see  
+                        the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO Google Analytics wiki page</a>.
+                    </li>
+                    <li>
+                        If you had used the <code>vivo/contrib/FLShibboleth</code>
+                        code in your previous release, you should stop using it. Consult <code>install.html</code>
+                        or <a href="VIVO_Release-1-v1.2_Installation_Guide.pdf">VIVO Release 1
+                            v1.2 Installation Guide</a>
+                        on "Using an External Authentication System 
+                        with VIVO". 
+                    </li>
+                </ul>
+            </blockquote>
+            <p>
+                4. If you had modified <code>web.xml</code>
+                to configure the Pellet Reasoner (as described
+                in the installation instructions), repeat that modification.
+            </p>
+            <p>
+                5. Stop Apache Tomcat and run ant by typing: <code>ant all</code>
+            </p>
+            <p>
+                6. Start Apache Tomcat and log in to VIVO.
+            </p>
+            <h3 id="ontology">IV. Ontology Changes</h3>
+            <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
+            <p>
+                After Apache Tomcat is started, these files should be reviewed to 
+                verify that the automated upgrade process was executed  
+                successfully.&nbsp; The ontology alignment process will create the 
+                following files in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
+            </p>
+            <dl>
+                <dt>
+                    <code>ontologies/update/logs/knowledgeBaseUpdate.log</code>
+                </dt>
+                <dd>
+                    A log of a summary of updates that were made to the knowledge base and
+                    notes about some recommended manual reviews. This file should end with
+                    "Finished knowledge base migration". 
+                    If this file contains any warnings they should be reviewed with 
+                    your implementation team representative to see whether any 
+                    corrective action needs to be taken.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <code>ontologies/update/logs/knowledgeBaseUpdate.error.log</code>
+                </dt>
+                <dd>
+                    A log of errors that were encountered during the upgrade process. This
+                    file should be empty if the upgrade was successful.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <code>ontologies/update/changedData/removedData.n3</code>
+                </dt>
+                <dd>
+                    An N3 file containing all the statements that were removed from the
+                    knowledge base.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <code>ontologies/update/changedData/addedData.n3</code>
+                </dt>
+                <dd>
+                    An N3 file containing all the statements that were added to the
+                    knowledge base.
+                </dd>
+            </dl>
+            <h4 id="ontology_knowledge_base">ii. Ontology knowledge base manual review</h4>
+            <p>
+                Changes to the VIVO core ontology may require corresponding
+                modifications of the knowledge base instance data and local ontology
+                extensions.
+            </p>
+            <p>
+                When Apache Tomcat starts up following the upgrade, it will initiate a
+                process to examine the knowledge base and apply necessary changes. Not
+                all of the modifications that may be required can be automated, so
+                manual review of the knowledge base is recommended after the automated
+                upgrade process. The automated process will make only the following
+                types of changes:
+            </p>
+            <dl>
+                <dt>
+                    Class or Property renaming
+                </dt>
+                <dd>
+                    All references to the class (in the subject or object position) will be
+                    updated to the new name. References to the property will be updated to
+                    the new name.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Class or Property deletion
+                </dt>
+                <dd>
+                    All individuals in a deleted class will be removed.
+                    <br>
+                    All statements using a deleted property will be changed to use the
+                    nearest available superproperty. If there is no available superproperty
+                    then the statement will be deleted from the knowledge base. Note that
+                    all removed and added data is recorded in the files in the changedData
+                    directory.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Property addition
+                </dt>
+                <dd>
+                    If a newly added property is the inverse of a previously existing
+                    property, the inverse of any statements using the pre-existing property
+                    will be asserted.
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    Annotation property default values
+                </dt>
+                <dd>
+                    If a site has modified the value of a vitro annotation (such as
+                    displayRankAnnot or displayLimitAnnot) so that it is no longer using
+                    the default, then that setting will be left unchanged.
+                    <br>
+                    If a site is using the default value of a vitro annotation, and the
+                    default has been changed in the new version of the ontology, then the
+                    new default value will be propagated to the knowledge base.
+                </dd>
+            </dl>
+            <h3 id="fileSystem">V. File Storage System Upgrade</h3>
+            <h4 id="changes_to_storage">i. Changes to the File Storage System</h4>
+            <p>
+                Each uploaded file exists as an individual in VIVO. When the browser 
+                requests an uploaded file from VIVO, the data model is queried to find  
+                out where the file is actually stored, so it can be downloaded to the 
+                browser.
+            </p>
+            <p>
+                In VIVO 1.2 this storage location, known as the "Alias URL" for 
+                the uploaded file, is stored in the file individual. That way, pages that 
+                contain many files can be displayed much more quickly.
+            </p>
+            <p>
+                When Apache Tomcat starts up after the upgrade, 
+                it will initiate a process to calculate the "Alias URL" 
+                for each existing file and store it in the data model for fast access.
+            </p>
+            <h4 id="verify_file_upgrade">ii. Verify File Storage System upgrade process</h4>
+            <p>
+                The File Storage upgrade process will create a log file in the 
+                VIVO upload directory. You should review this file to ensure that
+                this upgrade worked properly.
+            </p>
+            <dl>
+                <dt>
+                    <code>upgrade/FileStorageAliasAdder-log.2011-00-00T00-00-00.txt</code>
+                </dt>
+                <dd>
+                    A log of the upgrade process. The actual filename includes a timestamp 
+                    that tells when the upgrade executed. 
+                    This file should end with<code>Finished adding alias URLs to FileByteStreams.</code>
+                    If this file contains any warnings they should be reviewed with 
+                    your implementation team representative to see whether any 
+                    corrective action needs to be taken.
+                </dd>
+            </dl>
+            <h3 id="theme">VI. Theme Changes</h3>
+            <h4 id="#newTheme">Introducing a New Default Theme</h4>
+            <p>
+                VIVO 1.2 includes a new default theme called <strong>wilma</strong>
+                (located in 
+                /vivo/themes/wilma) which fully supports all 1.2 features. For details on how to  
+                create your own theme using wilma as a starting point, please review the <a href="http://www.vivoweb.org/support/user-guide/administration" title="Download VIVO documentation" target="_blank">Site Administrator's Guide</a>.
+            </p>
+            <blockquote id="vivoBasicDeprecated">
+                <h4>The vivo-basic theme has been deprecated with the 1.2 release and is not 
+                    recommended for production instances.</h4>
+                <p>
+                    Since vivo-basic was the default theme for all previous releases, it is 
+                    included as part of VIVO 1.2 to help with the transition of upgrading  
+                    existing installations to the latest code, but all vivo-basic development 
+                    has ceased and it will not be distributed in future releases.
+                </p>
+                <p>
+                    Please note that vivo-basic does not support all of the new 1.2 features. 
+                    Most notably, in choosing to use vivo-basic you will be missing out on the 
+                    following:
+                </p>
+                <ul>
+                    <li>
+                        new primary menu for site navigation (replaces tabs)
+                    </li>
+                    <li>
+                        home page with class group browse and visual graph
+                    </li>
+                    <li>
+                        menu pages with class group and individual browse
+                    </li>
+                </ul>
+            </blockquote>
+            <h4 id="templateTransition">Templates</h4>
+            <p>
+                The 1.2 release continues the transition from JavaServer Pages (.jsp) to 
+                Freemarker templates (.ftl) for generating web pages. While there are still  
+                JSP files in action behind the scenes, as of 1.2 all theme templates 
+                are of the Freemarker variety and are located in the "templates" directory 
+                within a theme.
+            </p>
+            <p>
+                If you did not create a custom theme for your site previously, but used 
+                the vivo-basic theme in its original directory, you need not take any 
+                action in order to remain using the vivo-basic theme in 1.2.
+            </p>
+            <p>
+                If you did make changes to the vivo-basic theme, you will need to reapply those changes. 
+                We recommend you apply these changes to the wilma theme.
+            </p>
+            <blockquote>
+                <strong>Please note:</strong>
+                The vivo-basic theme has been deprecated and is <a href="#vivoBasicDeprecated">not recommended for production instances</a>.
+            </blockquote>
+            <p>
+                For details on the new structure of themes in 1.2 and further information 
+                regarding the development of your own custom theme, please review the <a href="http://www.vivoweb.org/support/user-guide/administration" title="Download VIVO documentation" target="_blank">Site Administrator's Guide</a>. This document will focus on updating an existing 
+                pre 1.2 theme.
+            </p>
+            <h3 id="setup_sdb">VII. Set Up SDB Store in the Background (Optional)</h3>
+            <p>
+                If your VIVO installation is running in RDB mode, and you'd like to convert 
+                to SDB, you can start the conversion process in the background while the RDB  
+                system is running.  This will reduce the delay in initial startup after the 
+                application is redeployed with deploy.properties set for SDB.  Note that it  
+                is important not to edit any data anywhere in the application while this 
+                background conversion is running.
+            </p>
+            <p>
+                To start the SDB conversion, log in as a system 
+                administrator and request /sdbsetup  (For example, if your VIVO is installed  
+                at http://vivo.myuniversity.edu/ you would type 
+                http://vivo.myuniversity.edu/sdbsetup into your browser).
+            </p>
+            <p>
+                Click the button that appears on this page.
+            </p>
+            <p>
+                During the course of the SDB setup, which may take several hours on a 
+                large database, subsequent requests to /sdbsetup will display a 
+                message that the operation is still in progress.   When a request for this  
+                page shows a message that the SDB setup has completed successfully, shut down 
+                Tomcat, set deploy.properties to SDB mode, redeploy, and restart Tomcat. 
+                VIVO will now be running from the SDB store.
+            </p>
+        </div>
+        <!-- end of content -->
+        <div id="footer" role="contentinfo">
+            <p class="copyright">
+                <small>
+                    &copy;2011 
+                    All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
+                </small>
+                | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+            </p>
+            <div id="nav" role="navigation">
+                <ul id="footer-nav" role="list">
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/about">About</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/contact">Contact Us</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,6 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -10,33 +9,50 @@
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 
-<bean id="person_pub_count" class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler" />
-<bean id="college_pub_count" class="edu.cornell.mannlib.vitro.webapp.visualization.collegepubcount.CollegePublicationCountRequestHandler" />
-<bean id="coauthorship" class="edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler" />
-<bean id="person_level" class="edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler" />
-<bean id="utilities" class="edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler" />
+	<bean id="person_pub_count"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler" />
+	<bean id="coauthorship"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler" />
+	<bean id="person_level"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler" />
+	<bean id="utilities"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler" />
+	<bean id="entity_comparison"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
+	<bean id="coprincipalinvestigator"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
+	<bean id="person_grant_count"
+		class="edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountRequestHandler" />
+		
 
-<bean id="visualizationInjector" class="edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationInjector">
-	<property name="visualizations">
-		<map>
-                <entry key="person_pub_count">
-                	<ref bean="person_pub_count"></ref>
-                </entry>
-                <entry key="college_pub_count">
-                	<ref bean="college_pub_count"></ref>
-                </entry>
-                <entry key="coauthorship">
-                	<ref bean="coauthorship"></ref>
-                </entry>
+	<bean id="visualizationInjector"
+		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationInjector">
+		<property name="visualizations">
+			<map>
+				<entry key="person_pub_count">
+					<ref bean="person_pub_count"></ref>
+				</entry>
+				<entry key="coauthorship">
+					<ref bean="coauthorship"></ref>
+				</entry>
 				<entry key="person_level">
-                	<ref bean="person_level"></ref>
-                </entry>
+					<ref bean="person_level"></ref>
+				</entry>
 				<entry key="utilities">
-                	<ref bean="utilities"></ref>
-                </entry>
-        </map>
-	</property>
-	
-</bean>
+					<ref bean="utilities"></ref>
+				</entry>
+				<entry key="entity_comparison">
+					<ref bean="entity_comparison"></ref>
+				</entry>
+				<entry key="coprincipalinvestigator">
+					<ref bean="coprincipalinvestigator"></ref>
+				</entry>
+				<entry key="person_grant_count">
+					<ref bean="person_grant_count"></ref>
+				</entry>
+			</map>
+		</property>
+
+	</bean>
 
 </beans>
