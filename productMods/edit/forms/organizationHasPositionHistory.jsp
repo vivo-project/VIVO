@@ -95,8 +95,8 @@
     ?intervalNode <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
-    ?startNode  <${dateTimeValue}> ?startField.value .
-    ?startNode  <${dateTimePrecision}> ?startField.precision .
+    ?startNode  <${dateTimeValue}> ?startField-value .
+    ?startNode  <${dateTimePrecision}> ?startField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
@@ -104,8 +104,8 @@
     ?intervalNode <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
-    ?endNode  <${dateTimeValue}> ?endField.value .
-    ?endNode  <${dateTimePrecision}> ?endField.precision .
+    ?endNode  <${dateTimeValue}> ?endField-value .
+    ?endNode  <${dateTimePrecision}> ?endField-precision .
 </v:jsonset>
 
  <v:jsonset var="existingIntervalNodeQuery" >  
@@ -191,16 +191,16 @@
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "title"              : "${titleExisting}",
-        "startField.value"   : "${existingStartDateQuery}",
-        "endField.value"     : "${existingEndDateQuery}"
+        "startField-value"   : "${existingStartDateQuery}",
+        "endField-value"     : "${existingEndDateQuery}"
     },
     "sparqlForExistingUris" : {
         "personUri"   : "${personUriExisting}",
         "intervalNode"      : "${existingIntervalNodeQuery}", 
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
-        "startField.precision": "${existingStartPrecisionQuery}",
-        "endField.precision"  : "${existingEndPrecisionQuery}"
+        "startField-precision": "${existingStartPrecisionQuery}",
+        "endField-precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "title" : {

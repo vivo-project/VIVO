@@ -163,8 +163,8 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
-    ?startNode  <${dateTimeValue}> ?startField.value .
-    ?startNode  <${dateTimePrecision}> ?startField.precision .
+    ?startNode  <${dateTimeValue}> ?startField-value .
+    ?startNode  <${dateTimePrecision}> ?startField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
@@ -172,8 +172,8 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
-    ?endNode  <${dateTimeValue}> ?endField.value .
-    ?endNode  <${dateTimePrecision}> ?endField.precision .
+    ?endNode  <${dateTimeValue}> ?endField-value .
+    ?endNode  <${dateTimePrecision}> ?endField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForGrantLabel">
@@ -284,16 +284,16 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     "sparqlForUris" : {   },
     "sparqlForExistingLiterals" : { 
         "grantLabel":"${grantLabelQuery}" , 
-        "startField.value"   : "${existingStartDateQuery}",
-        "endField.value"     : "${existingEndDateQuery}"  
+        "startField-value"   : "${existingStartDateQuery}",
+        "endField-value"     : "${existingEndDateQuery}"  
     },
     "sparqlForExistingUris" : { 
         "grant":"${grantQuery}",
         "intervalNode"      : "${existingIntervalNodeQuery}",
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
-        "startField.precision": "${existingStartPrecisionQuery}",
-        "endField.precision"  : "${existingEndPrecisionQuery}" 
+        "startField-precision": "${existingStartPrecisionQuery}",
+        "endField-precision"  : "${existingEndPrecisionQuery}" 
     },
     "fields" : {  
       "grant" : {

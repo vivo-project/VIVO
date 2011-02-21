@@ -48,7 +48,7 @@ we will use rev 293 (dev build version) of the flot & excanvas files.
 <#assign fliptext = 'js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
 <#assign jqueryNotify = 'js/jquery_plugins/jquery.notify.min.js'>
 <#assign jqueryBlockUI = 'js/jquery_plugins/jquery.blockUI.min.js'>
-<#assign jqueryUI = 'js/jquery-ui/js/jquery-ui-1.8.4.custom.min.js'>
+<#assign jqueryUI = 'js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js'>
 <#assign datatable = 'js/jquery_plugins/jquery.dataTables.min.js'>
 <#assign entityComparisonUtils = 'js/visualization/entitycomparison/util.js'>
 <#assign entityComparisonConstants = 'js/visualization/entitycomparison/constants.js'>
@@ -69,7 +69,7 @@ ${scripts.add(jqueryNotify)}
 <#-- CSS files -->
 
 <#assign demoTable = "js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />
-<#assign jqueryUIStyle = "js/jquery-ui/css/smoothness/jquery-ui-1.8.4.custom.css" />
+<#assign jqueryUIStyle = "js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />
 <#assign jqueryNotifyStyle = "css/jquery_plugins/ui.notify.css" />
 <#assign entityComparisonStyle = "css/visualization/entitycomparison/layout.css" />
 <#assign entityComparisonStyleIEHack = "${urls.base}/css/visualization/entitycomparison/layout-ie.css" />
