@@ -3,7 +3,7 @@
 <#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
-    
+
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
@@ -154,3 +154,5 @@ ${headScripts.add("/js/jquery_plugins/getURLParam.js",
                   
 ${scripts.add("/js/imageUpload/imageUploadUtils.js")}
 ${scripts.add("/js/individual/individualUtils.js")}
+
+<@dumpAll />
