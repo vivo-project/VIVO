@@ -110,7 +110,6 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	    		new PersonGrantCountVisCodeGenerator(personURI,
 	    									   visMode,
 	    									   visContainer,
-	    									   piGrants,
 	    									   yearToGrantCount,
 	    									   log);
 
@@ -157,7 +156,6 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
     		new PersonGrantCountVisCodeGenerator(personURI,
     									   visMode,
     									   visContainer,
-    									   piGrants,
     									   yearToGrantCount,
     									   log);
     	

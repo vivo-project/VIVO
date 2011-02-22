@@ -55,13 +55,11 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 			+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
 			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n" 			 			 			 
 			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n";
-		//	+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") \n";			
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
 			+ "?document rdfs:label ?documentLabel .\n" 
 			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
 			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" ;
-			//+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } ." ;
 	
 	public PersonPublicationCountQueryRunner(String personURI,
 			Dataset Dataset, Log log) {
@@ -87,14 +85,6 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 				biboDocument.setPublicationDate(publicationDateNode.toString());
 			}
 
-			/*
-			 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
-			 * */
-//			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
-//			if (publicationYearUsing_1_1_PropertyNode != null) {
-//				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
-//			}
-			
 			/*
 			 * Since we are getting publication count for just one author at a time we need
 			 * to create only one "Individual" instance. We test against the null for "author" to

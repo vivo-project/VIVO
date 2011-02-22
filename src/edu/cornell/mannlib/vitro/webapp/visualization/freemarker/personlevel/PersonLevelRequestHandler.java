@@ -113,7 +113,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			egoURI,
 	    			VisualizationFrameworkConstants.FULL_SPARKLINE_VIS_MODE,
 	    			EGO_GRANT_SPARKLINE_VIS_CONTAINER_ID,
-	    			piGrants,
 	    			yearToGrantCount,
 	    			log);
 	    	
@@ -174,7 +173,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			egoURI,
 	    			VisualizationFrameworkConstants.FULL_SPARKLINE_VIS_MODE,
 	    			EGO_PUB_SPARKLINE_VIS_CONTAINER_ID,
-	    			authorDocuments,
 	    			yearToPublicationCount,
 	    			log);	  
 	    	

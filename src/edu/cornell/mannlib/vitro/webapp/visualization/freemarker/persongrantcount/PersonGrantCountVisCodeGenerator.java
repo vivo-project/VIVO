@@ -16,7 +16,6 @@ import org.apache.commons.logging.Log;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -45,8 +44,7 @@ public class PersonGrantCountVisCodeGenerator {
 	private String individualURI;
 	
 	public PersonGrantCountVisCodeGenerator(String individualURIParam,
-			String visMode, String visContainer, Set<Grant> piGrants,
-			Map<String, Integer> yearToGrantCount,
+			String visMode, String visContainer, Map<String, Integer> yearToGrantCount,
 			Log log) {
 
 		this.individualURI = individualURIParam;
@@ -55,7 +53,7 @@ public class PersonGrantCountVisCodeGenerator {
 		
 		this.log = log;
 		
-		this.sparklineParameterVO = setupSparklineParameters(visMode, visContainer, piGrants);
+		this.sparklineParameterVO = setupSparklineParameters(visMode, visContainer);
 
 	}
 	
@@ -68,8 +66,7 @@ public class PersonGrantCountVisCodeGenerator {
 	 * @return 
 	 */
 	private SparklineData setupSparklineParameters(String visMode,
-			  							  String providedVisContainerID,
-										   Set<Grant> piGrants) {
+			  							  String providedVisContainerID) {
 		
 		SparklineData sparklineData = new SparklineData();
 		sparklineData.setYearToActivityCount(yearToGrantCount);

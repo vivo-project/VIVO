@@ -6,8 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -25,16 +25,16 @@ import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
 /**
  * 
@@ -94,12 +94,10 @@ VisualizationRequestHandler {
 						personURI, 
 						visMode, 
 						visContainer, 
-						authorDocuments,
-						yearToPublicationCount, 
+						yearToPublicationCount,
 						log);
 
-		SparklineData sparklineData = visualizationCodeGenerator
-		.getValueObjectContainer();
+		SparklineData sparklineData = visualizationCodeGenerator.getValueObjectContainer();
 
 		return prepareDynamicResponse(vitroRequest, sparklineData,
 				shouldVIVOrenderVis);
@@ -172,8 +170,7 @@ VisualizationRequestHandler {
 						personURI, 
 						visMode, 
 						visContainer, 
-						authorDocuments,
-						yearToPublicationCount, 
+						yearToPublicationCount,
 						log);
 
 		SparklineData sparklineData = 
