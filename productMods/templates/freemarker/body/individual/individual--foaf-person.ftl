@@ -154,5 +154,3 @@ ${headScripts.add("/js/jquery_plugins/getURLParam.js",
                   
 ${scripts.add("/js/imageUpload/imageUploadUtils.js")}
 ${scripts.add("/js/individual/individualUtils.js")}
-
-
