@@ -29,10 +29,12 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Edge;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaboratorComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaboration;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UniqueIDGenerator;
 
@@ -43,7 +45,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Unique
  * 
  * @author cdtank
  */
-public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
+public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 
 	private static final int MAX_AUTHORS_PER_PAPER_ALLOWED = 100;
 
@@ -71,18 +73,18 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 
 	}
 
-	private CoAuthorshipData createQueryResult(ResultSet resultSet) {
+	private CollaborationData createQueryResult(ResultSet resultSet) {
 		
-		Set<Node> nodes = new HashSet<Node>();
+		Set<Collaborator> nodes = new HashSet<Collaborator>();
 		
-		Map<String, BiboDocument> biboDocumentURLToVO = new HashMap<String, BiboDocument>();
-		Map<String, Set<Node>> biboDocumentURLToCoAuthors = new HashMap<String, Set<Node>>();
-		Map<String, Node> nodeURLToVO = new HashMap<String, Node>();
-		Map<String, Edge> edgeUniqueIdentifierToVO = new HashMap<String, Edge>();
+		Map<String, Activity> biboDocumentURLToVO = new HashMap<String, Activity>();
+		Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors = new HashMap<String, Set<Collaborator>>();
+		Map<String, Collaborator> nodeURLToVO = new HashMap<String, Collaborator>();
+		Map<String, Collaboration> edgeUniqueIdentifierToVO = new HashMap<String, Collaboration>();
 		
-		Node egoNode = null;
+		Collaborator egoNode = null;
 
-		Set<Edge> edges = new HashSet<Edge>();
+		Set<Collaboration> edges = new HashSet<Collaboration>();
 		
 		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
@@ -97,18 +99,18 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				
 			} else {
 				
-				egoNode = new Node(egoAuthorURLNode.toString(), nodeIDGenerator);
+				egoNode = new Collaborator(egoAuthorURLNode.toString(), nodeIDGenerator);
 				nodes.add(egoNode);
 				nodeURLToVO.put(egoAuthorURLNode.toString(), egoNode);
 				
 				RDFNode authorLabelNode = solution.get(QueryFieldLabels.AUTHOR_LABEL);
 				if (authorLabelNode != null) {
-					egoNode.setNodeName(authorLabelNode.toString());
+					egoNode.setCollaboratorName(authorLabelNode.toString());
 				}
 			}
 			
 			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
-			BiboDocument biboDocument;
+			Activity biboDocument;
 			
 			if (biboDocumentURLToVO.containsKey(documentNode.toString())) {
 				biboDocument = biboDocumentURLToVO.get(documentNode.toString());
@@ -117,11 +119,11 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);	
 			}
 			
-			egoNode.addAuthorDocument(biboDocument);
+			egoNode.addActivity(biboDocument);
 			
 			/*
 			 * After some discussion we concluded that for the purpose of this visualization
-			 * we do not want a co-author node or edge if the publication has only one
+			 * we do not want a co-author node or Collaboration if the publication has only one
 			 * author and that happens to be the ego.
 			 * */
 			if (solution.get(QueryFieldLabels.AUTHOR_URL).toString().equalsIgnoreCase(
@@ -129,7 +131,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				continue;
 			}
 			
-			Node coAuthorNode;
+			Collaborator coAuthorNode;
 			
 			RDFNode coAuthorURLNode = solution.get(QueryFieldLabels.CO_AUTHOR_URL);
 			if (nodeURLToVO.containsKey(coAuthorURLNode.toString())) {
@@ -138,46 +140,46 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 				
 			} else {
 				
-				coAuthorNode = new Node(coAuthorURLNode.toString(), nodeIDGenerator);
+				coAuthorNode = new Collaborator(coAuthorURLNode.toString(), nodeIDGenerator);
 				nodes.add(coAuthorNode);
 				nodeURLToVO.put(coAuthorURLNode.toString(), coAuthorNode);
 				
 				RDFNode coAuthorLabelNode = solution.get(QueryFieldLabels.CO_AUTHOR_LABEL);
 				if (coAuthorLabelNode != null) {
-					coAuthorNode.setNodeName(coAuthorLabelNode.toString());
+					coAuthorNode.setCollaboratorName(coAuthorLabelNode.toString());
 				}
 			}
 			
-			coAuthorNode.addAuthorDocument(biboDocument);
+			coAuthorNode.addActivity(biboDocument);
 			
-			Set<Node> coAuthorsForCurrentBiboDocument;
+			Set<Collaborator> coAuthorsForCurrentBiboDocument;
 			
-			if (biboDocumentURLToCoAuthors.containsKey(biboDocument.getDocumentURL())) {
+			if (biboDocumentURLToCoAuthors.containsKey(biboDocument.getActivityURI())) {
 				coAuthorsForCurrentBiboDocument = biboDocumentURLToCoAuthors
-														.get(biboDocument.getDocumentURL());
+														.get(biboDocument.getActivityURI());
 			} else {
-				coAuthorsForCurrentBiboDocument = new HashSet<Node>();
-				biboDocumentURLToCoAuthors.put(biboDocument.getDocumentURL(), 
+				coAuthorsForCurrentBiboDocument = new HashSet<Collaborator>();
+				biboDocumentURLToCoAuthors.put(biboDocument.getActivityURI(), 
 											   coAuthorsForCurrentBiboDocument);
 			}
 			
 			coAuthorsForCurrentBiboDocument.add(coAuthorNode);
 			
-			Edge egoCoAuthorEdge = getExistingEdge(egoNode, coAuthorNode, edgeUniqueIdentifierToVO);
+			Collaboration egoCoAuthorEdge = getExistingEdge(egoNode, coAuthorNode, edgeUniqueIdentifierToVO);
 			
 			/*
-			 * If "egoCoAuthorEdge" is null it means that no edge exists in between the egoNode 
-			 * & current coAuthorNode. Else create a new edge, add it to the edges set & add 
+			 * If "egoCoAuthorEdge" is null it means that no Collaboration exists in between the egoNode 
+			 * & current coAuthorNode. Else create a new Collaboration, add it to the edges set & add 
 			 * the collaborator document to it.
 			 * */
 			if (egoCoAuthorEdge != null) {
-				egoCoAuthorEdge.addCollaboratorDocument(biboDocument);
+				egoCoAuthorEdge.addActivity(biboDocument);
 			} else {
-				egoCoAuthorEdge = new Edge(egoNode, coAuthorNode, biboDocument, edgeIDGenerator);
+				egoCoAuthorEdge = new Collaboration(egoNode, coAuthorNode, biboDocument, edgeIDGenerator);
 				edges.add(egoCoAuthorEdge);
 				edgeUniqueIdentifierToVO.put(
-						getEdgeUniqueIdentifier(egoNode.getNodeID(),
-												coAuthorNode.getNodeID()), 
+						getEdgeUniqueIdentifier(egoNode.getCollaboratorID(),
+												coAuthorNode.getCollaboratorID()), 
 						egoCoAuthorEdge);
 			}
 			
@@ -210,7 +212,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 		 * edges en masse for all the co-authors on all the publications considered so far. The 
 		 * other reason being we dont want to compare against 2 sets of edges (edges created before 
 		 * & co-author edges created during the course of this method) when we are creating a new 
-		 * edge.
+		 * Collaboration.
 		 * */
 		createCoAuthorEdges(biboDocumentURLToVO, 
 							biboDocumentURLToCoAuthors,
@@ -221,25 +223,25 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 		return new CoAuthorshipData(egoNode, nodes, edges);
 	}
 
-	private void removeLowQualityNodesAndEdges(Set<Node> nodes,
-											   Map<String, BiboDocument> biboDocumentURLToVO,
-											   Map<String, Set<Node>> biboDocumentURLToCoAuthors, 
-											   Set<Edge> edges) {
+	private void removeLowQualityNodesAndEdges(Set<Collaborator> nodes,
+											   Map<String, Activity> biboDocumentURLToVO,
+											   Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors, 
+											   Set<Collaboration> edges) {
 		
-		Set<Node> nodesToBeRemoved = new HashSet<Node>();
-		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry 
+		Set<Collaborator> nodesToBeRemoved = new HashSet<Collaborator>();
+		for (Map.Entry<String, Set<Collaborator>> currentBiboDocumentEntry 
 					: biboDocumentURLToCoAuthors.entrySet()) {
 				
 				if (currentBiboDocumentEntry.getValue().size() > MAX_AUTHORS_PER_PAPER_ALLOWED) {
 					
-					BiboDocument currentBiboDocument = biboDocumentURLToVO
+					Activity currentBiboDocument = biboDocumentURLToVO
 															.get(currentBiboDocumentEntry.getKey());
 					
-					Set<Edge> edgesToBeRemoved = new HashSet<Edge>();
+					Set<Collaboration> edgesToBeRemoved = new HashSet<Collaboration>();
 					
-					for (Edge currentEdge : edges) {
-						Set<BiboDocument> currentCollaboratorDocuments = 
-									currentEdge.getCollaboratorDocuments();
+					for (Collaboration currentEdge : edges) {
+						Set<Activity> currentCollaboratorDocuments = 
+									currentEdge.getCollaborationActivities();
 						
 						if (currentCollaboratorDocuments.contains(currentBiboDocument)) {
 							currentCollaboratorDocuments.remove(currentBiboDocument);
@@ -251,9 +253,9 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 						
 					edges.removeAll(edgesToBeRemoved);
 
-					for (Node currentCoAuthor : currentBiboDocumentEntry.getValue()) {
-						currentCoAuthor.getAuthorDocuments().remove(currentBiboDocument);
-						if (currentCoAuthor.getAuthorDocuments().isEmpty()) {
+					for (Collaborator currentCoAuthor : currentBiboDocumentEntry.getValue()) {
+						currentCoAuthor.getCollaboratorActivities().remove(currentBiboDocument);
+						if (currentCoAuthor.getCollaboratorActivities().isEmpty()) {
 							nodesToBeRemoved.add(currentCoAuthor);
 						}
 					}
@@ -263,11 +265,11 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	}
 
 	private void createCoAuthorEdges(
-			Map<String, BiboDocument> biboDocumentURLToVO,
-			Map<String, Set<Node>> biboDocumentURLToCoAuthors, Set<Edge> edges, 
-			Map<String, Edge> edgeUniqueIdentifierToVO) {
+			Map<String, Activity> biboDocumentURLToVO,
+			Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors, Set<Collaboration> edges, 
+			Map<String, Collaboration> edgeUniqueIdentifierToVO) {
 		
-		for (Map.Entry<String, Set<Node>> currentBiboDocumentEntry 
+		for (Map.Entry<String, Set<Collaborator>> currentBiboDocumentEntry 
 					: biboDocumentURLToCoAuthors.entrySet()) {
 			
 			/*
@@ -283,42 +285,42 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 							<= MAX_AUTHORS_PER_PAPER_ALLOWED) {
 				
 				
-				Set<Edge> newlyAddedEdges = new HashSet<Edge>();
+				Set<Collaboration> newlyAddedEdges = new HashSet<Collaboration>();
 			
 				/*
 				 * In order to leverage the nested "for loop" for making edges between all the 
 				 * co-authors we need to create a list out of the set first. 
 				 * */
-				List<Node> coAuthorNodes = new ArrayList<Node>(currentBiboDocumentEntry.getValue());
-				Collections.sort(coAuthorNodes, new NodeComparator());
+				List<Collaborator> coAuthorNodes = new ArrayList<Collaborator>(currentBiboDocumentEntry.getValue());
+				Collections.sort(coAuthorNodes, new CollaboratorComparator());
 				
 				int numOfCoAuthors = coAuthorNodes.size();
 				
 				for (int ii = 0; ii < numOfCoAuthors - 1; ii++) {
 					for (int jj = ii + 1; jj < numOfCoAuthors; jj++) {
 						
-						Node coAuthor1 = coAuthorNodes.get(ii);
-						Node coAuthor2 = coAuthorNodes.get(jj);
+						Collaborator coAuthor1 = coAuthorNodes.get(ii);
+						Collaborator coAuthor2 = coAuthorNodes.get(jj);
 						
-						Edge coAuthor1_2Edge = getExistingEdge(coAuthor1, 
+						Collaboration coAuthor1_2Edge = getExistingEdge(coAuthor1, 
 															   coAuthor2, 
 															   edgeUniqueIdentifierToVO);
 						
-						BiboDocument currentBiboDocument = biboDocumentURLToVO
+						Activity currentBiboDocument = biboDocumentURLToVO
 																.get(currentBiboDocumentEntry
 																			.getKey());
 			
 						if (coAuthor1_2Edge != null) {
-							coAuthor1_2Edge.addCollaboratorDocument(currentBiboDocument);
+							coAuthor1_2Edge.addActivity(currentBiboDocument);
 						} else {
-							coAuthor1_2Edge = new Edge(coAuthor1, 
+							coAuthor1_2Edge = new Collaboration(coAuthor1, 
 													   coAuthor2, 
 													   currentBiboDocument, 
 													   edgeIDGenerator);
 							newlyAddedEdges.add(coAuthor1_2Edge);
 							edgeUniqueIdentifierToVO.put(
-									getEdgeUniqueIdentifier(coAuthor1.getNodeID(),
-															coAuthor2.getNodeID()), 
+									getEdgeUniqueIdentifier(coAuthor1.getCollaboratorID(),
+															coAuthor2.getCollaboratorID()), 
 									coAuthor1_2Edge);
 						}
 					}
@@ -329,13 +331,13 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 		}
 	}
 
-	private Edge getExistingEdge(
-					Node collaboratingNode1, 
-					Node collaboratingNode2, 
-					Map<String, Edge> edgeUniqueIdentifierToVO) {
+	private Collaboration getExistingEdge(
+					Collaborator collaboratingNode1, 
+					Collaborator collaboratingNode2, 
+					Map<String, Collaboration> edgeUniqueIdentifierToVO) {
 		
-		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getNodeID(), 
-															  collaboratingNode2.getNodeID());
+		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getCollaboratorID(), 
+															  collaboratingNode2.getCollaboratorID());
 		
 		return edgeUniqueIdentifierToVO.get(edgeUniqueIdentifier);
 		
@@ -353,27 +355,15 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 			
 	}
 
-//	public Map<String, VivoCollegeOrSchool> getCollegeURLToVO() {
-//		return collegeURLToVO;
-//	}
+	private Activity createDocumentVO(QuerySolution solution, String documentURL) {
 
-	private BiboDocument createDocumentVO(QuerySolution solution, String documentURL) {
-
-			BiboDocument biboDocument = new BiboDocument(documentURL);
+			Activity biboDocument = new Activity(documentURL);
 
 			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 			if (publicationDateNode != null) {
-				biboDocument.setPublicationDate(publicationDateNode.toString());
+				biboDocument.setActivityDate(publicationDateNode.toString());
 			}
 
-			/*
-			 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
-			 * */
-//			RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
-//			if (publicationYearUsing_1_1_PropertyNode != null) {
-//				biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
-//			}
-			
 			return biboDocument;
 	}
 	
@@ -420,7 +410,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CoAuthorshipData> {
 	}
 
 	
-	public CoAuthorshipData getQueryResult()
+	public CollaborationData getQueryResult()
 		throws MalformedQueryParametersException {
 
 		if (StringUtils.isNotBlank(this.egoURI)) {

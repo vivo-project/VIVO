@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -41,7 +41,7 @@ public class CoPIVisCodeGenerator {
 	 * */
 	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_coinvestigators_vis_container";
 	
-	private Map<String, Set<CoPINode>> yearToUniqueCoPIs;
+	private Map<String, Set<Collaborator>> yearToUniqueCoPIs;
 
 	private Log log;
 
@@ -52,7 +52,7 @@ public class CoPIVisCodeGenerator {
 	public CoPIVisCodeGenerator(String individualURI, 
 			  String visMode, 
 			  String visContainer, 
-			  Map<String, Set<CoPINode>> yearToUniqueCoPIs, 
+			  Map<String, Set<Collaborator>> yearToUniqueCoPIs, 
 			  Log log){
 		
 		this.individualURI = individualURI;
@@ -133,13 +133,13 @@ public class CoPIVisCodeGenerator {
 		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
 		
 		int uniqueCoPICounter = 0;
-		Set<CoPINode> allCoPIsWithKnownGrantShipYears = new HashSet<CoPINode>();
+		Set<Collaborator> allCoPIsWithKnownGrantShipYears = new HashSet<Collaborator>();
 		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
 
 			String grantYearAsString = String.valueOf(grantYear);
-			Set<CoPINode> currentCoPIs = yearToUniqueCoPIs
+			Set<Collaborator> currentCoPIs = yearToUniqueCoPIs
 					.get(grantYearAsString);
 
 			Integer currentUniqueCoPIs = null;
@@ -174,7 +174,7 @@ public class CoPIVisCodeGenerator {
 		 * with known & unknown year. We do not want to repeat the count for this collaborator when we present 
 		 * it in the front-end. 
 		 * */
-		Set<CoPINode> totalUniqueCoInvestigators = new HashSet<CoPINode>(allCoPIsWithKnownGrantShipYears);
+		Set<Collaborator> totalUniqueCoInvestigators = new HashSet<Collaborator>(allCoPIsWithKnownGrantShipYears);
 		
 		/*
 		 * Total grants will also consider grants that have no year
@@ -238,7 +238,7 @@ public class CoPIVisCodeGenerator {
 															VisualizationFrameworkConstants.COPIS_COUNT_PER_YEAR_VIS_MODE));
 			
 			Map<String, Integer> yearToUniqueCoPIsCount = new HashMap<String, Integer>();
-			for (Map.Entry<String, Set<CoPINode>> currentYearToUniqueCoPIsCount : yearToUniqueCoPIs.entrySet()) {
+			for (Map.Entry<String, Set<Collaborator>> currentYearToUniqueCoPIsCount : yearToUniqueCoPIs.entrySet()) {
 				yearToUniqueCoPIsCount.put(currentYearToUniqueCoPIsCount.getKey(), 
 											   currentYearToUniqueCoPIsCount.getValue().size());
 			}

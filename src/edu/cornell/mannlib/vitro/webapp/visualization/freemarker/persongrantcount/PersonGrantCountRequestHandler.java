@@ -20,7 +20,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -50,20 +50,19 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
-
 		String personURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
+		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
 		
-		Set<Grant> piGrants = queryManager.getQueryResult();
+		Set<Activity> piGrants = queryManager.getQueryResult();
 		
 		/*
     	 * Create a map from the year to number of grants. Use the Grant's
     	 * parsedGrantYear to populate the data.
     	 * */
     	Map<String, Integer> yearToGrantCount = 
-			UtilityFunctions.getYearToGrantCount(piGrants);
+			UtilityFunctions.getYearToActivityCount(piGrants);
 	
     	Individual investigator = ((PersonGrantCountQueryRunner) queryManager).getPrincipalInvestigator();
     	
@@ -88,16 +87,16 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 		
-		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
+		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
 		
-		Set<Grant> piGrants = queryManager.getQueryResult();
+		Set<Activity> piGrants = queryManager.getQueryResult();
 		
     	/*
     	 * Create a map from the year to number of grants. Use the Grant's
     	 * parsedGrantYear to populate the data.
     	 * */
     	Map<String, Integer> yearToGrantCount = 
-			UtilityFunctions.getYearToGrantCount(piGrants);
+			UtilityFunctions.getYearToActivityCount(piGrants);
     	
 
 		boolean shouldVIVOrenderVis = 
@@ -138,16 +137,16 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryRunner<Set<Grant>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
+		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
 	
-		Set<Grant> piGrants = queryManager.getQueryResult();
+		Set<Activity> piGrants = queryManager.getQueryResult();
 		
     	/*
     	 * Create a map from the year to number of grants. Use the Grant's
     	 * parsedGrantYear to populate the data.
     	 * */
     	Map<String, Integer> yearToGrantCount = 
-			UtilityFunctions.getYearToGrantCount(piGrants);
+			UtilityFunctions.getYearToActivityCount(piGrants);
 	
     	/*
     	 * Computations required to generate HTML for the sparkline & related context.
@@ -192,7 +191,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 */
 	private Map<String, String> prepareDataResponse(
 						Individual investigator,
-						Set<Grant> piGrants,
+						Set<Activity> piGrants,
 						Map<String, Integer> yearToGrantCount) {
 		
 		

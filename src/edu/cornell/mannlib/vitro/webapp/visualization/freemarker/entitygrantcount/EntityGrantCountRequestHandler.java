@@ -278,7 +278,7 @@ public class EntityGrantCountRequestHandler implements
 			List<List<Integer>> yearGrantCount = new ArrayList<List<Integer>>();
 
 			for (Map.Entry<String, Integer> grantEntry : UtilityFunctions
-					.getYearToGrantCount(subentity.getGrants())
+					.getYearToActivityCount(subentity.getActivities())
 					.entrySet()) {
 
 				List<Integer> currentGrantYear = new ArrayList<Integer>();
@@ -328,7 +328,7 @@ public class EntityGrantCountRequestHandler implements
 			
 			csvFileContent.append(StringEscapeUtils.escapeCsv(subEntity.getIndividualLabel()));
 			csvFileContent.append(", ");
-			csvFileContent.append(subEntity.getGrants().size());
+			csvFileContent.append(subEntity.getActivities().size());
 			csvFileContent.append(", ");
 			
 			StringBuilder joinedTypes = new StringBuilder();

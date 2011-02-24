@@ -13,9 +13,8 @@ import java.util.LinkedHashSet;
  */
 public class Entity extends Individual{
 	
-	Set<BiboDocument> publications = new HashSet<BiboDocument>();
+	Set<Activity> activities = new HashSet<Activity>();
 	Set<SubEntity> children = new LinkedHashSet<SubEntity>();
-	Set<Grant> grants = new HashSet<Grant>();
 	
 	public Entity(String departmentURI, String departmentLabel){
 		super(departmentURI, departmentLabel);
@@ -29,8 +28,8 @@ public class Entity extends Individual{
 		return this.getIndividualURI();
 	}
 	
-	public Set<BiboDocument> getPublications() {
-		return publications;
+	public Set<Activity> getActivities() {
+		return activities;
 	}
 
 	public String getEntityLabel(){
@@ -41,8 +40,8 @@ public class Entity extends Individual{
 		return children;
 	}
 
-	public void addPublication(BiboDocument biboDocument) {
-		this.publications.add(biboDocument);
+	public void addActivity(Activity activity) {
+		this.activities.add(activity);
 	}
 
 	public void addSubEntity(SubEntity subEntity) {
@@ -53,10 +52,6 @@ public class Entity extends Individual{
 	public void addSubEntitities(Collection<SubEntity> subEntities) {
 		this.children.addAll(subEntities);
 		
-	}
-
-	public void addGrant(Grant grant) {
-		this.grants.add(grant);
 	}
 
 }

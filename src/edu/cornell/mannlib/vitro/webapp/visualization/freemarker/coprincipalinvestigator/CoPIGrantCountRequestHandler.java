@@ -3,7 +3,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinv
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -12,18 +11,17 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -51,9 +49,9 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
-		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+		QueryRunner<CollaborationData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
 		
-		CoPIData PINodesAndEdges = queryManager.getQueryResult();
+		CollaborationData PINodesAndEdges = queryManager.getQueryResult();
 				
     	/* 
     	 * We will be using the same visualization package for both sparkline & co-pi
@@ -102,15 +100,6 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		 * Support for this has ceased to exist. Standalone mode was created only for demo 
 		 * purposes for VIVO Conf.
 		 * */		
-/*		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
-		
-		QueryRunner<CoPIData> queryManager = new CoPIGrantCountQueryRunner(egoURI, Dataset, log);
-		
-		CoPIData PINodesAndEdges = queryManager.getQueryResult();
-		
-		return prepareStandaloneResponse(egoURI,
-				 						  PINodesAndEdges,
-				 						  vitroRequest); */
 		throw new UnsupportedOperationException("CoPI does not provide Standalone Response.");				 						  
 				 						  
 	}
@@ -122,7 +111,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	 * @param coPIVO
 	 */
 	private TemplateResponseValues prepareStandaloneResponse(String egoURI,
-			CoPIData coPIVO, VitroRequest vitroRequest) {
+			CollaborationData coPIVO, VitroRequest vitroRequest) {
 		
         Portal portal = vitroRequest.getPortal();
         
@@ -130,17 +119,17 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
         Map<String, Object> body = new HashMap<String, Object>();
 
 
-        if (coPIVO.getNodes() != null
-				&& coPIVO.getNodes().size() > 0) {
-        	title = coPIVO.getEgoNode().getNodeName() + " - ";
-        	body.put("numOfInvestigators", coPIVO.getNodes().size());
+        if (coPIVO.getCollaborators() != null
+				&& coPIVO.getCollaborators().size() > 0) {
+        	title = coPIVO.getEgoCollaborator().getCollaboratorName() + " - ";
+        	body.put("numOfInvestigators", coPIVO.getCollaborators().size());
 			
-			title = coPIVO.getEgoNode().getNodeName() + " - ";
+			title = coPIVO.getEgoCollaborator().getCollaboratorName() + " - ";
 		}
 
-		if (coPIVO.getEdges() != null
-				&& coPIVO.getEdges().size() > 0) {
-			body.put("numOfCoInvestigations", coPIVO.getEdges().size());
+		if (coPIVO.getCollaborations() != null
+				&& coPIVO.getCollaborations().size() > 0) {
+			body.put("numOfCoInvestigations", coPIVO.getCollaborations().size());
 		}
 
 		String standaloneTemplate = "coInvestigation.ftl";
@@ -153,23 +142,23 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	}
 
 
-	private String getCoPIsListCSVContent(CoPIData coPIData) {
+	private String getCoPIsListCSVContent(CollaborationData coPIData) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Co-investigator, Count\n");
 		
 //		for (Entry<String, Integer> currentEntry : coPIData.entrySet()) {
-		for (CoPINode currNode : coPIData.getNodes()) {
+		for (Collaborator currNode : coPIData.getCollaborators()) {
 			
 			/*
 			 * We have already printed the Ego Node info.
 			 * */
-			if (currNode != coPIData.getEgoNode()) {
+			if (currNode != coPIData.getEgoCollaborator()) {
 			
-			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getNodeName()));
+			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getCollaboratorName()));
 			csvFileContent.append(",");
-			csvFileContent.append(currNode.getNumberOfInvestigatedGrants());
+			csvFileContent.append(currNode.getNumOfActivities());
 			csvFileContent.append("\n");
 			
 			}
@@ -180,13 +169,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	}	
 	
 
-	private String getCoPIsPerYearCSVContent(Map<String, Set<CoPINode>> yearToCoPI) {
+	private String getCoPIsPerYearCSVContent(Map<String, Set<Collaborator>> yearToCoPI) {
 
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Year, Count, Co-investigator(s)\n");
 
-		for (Map.Entry<String, Set<CoPINode>> currentEntry : yearToCoPI.entrySet()) {
+		for (Map.Entry<String, Set<Collaborator>> currentEntry : yearToCoPI.entrySet()) {
 			
 			csvFileContent.append(StringEscapeUtils.escapeCsv(currentEntry.getKey()));
 			csvFileContent.append(",");
@@ -199,13 +188,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		return csvFileContent.toString();
 	}
 
-	private String getCoPINamesAsString(Set<CoPINode> CoPIs) {
+	private String getCoPINamesAsString(Set<Collaborator> CoPIs) {
 		
 		StringBuilder coPIsMerged = new StringBuilder();
 		
 		String coPISeparator = ";";
-		for(CoPINode currentCoPI : CoPIs){
-			coPIsMerged.append(currentCoPI.getNodeName() + coPISeparator);
+		for(Collaborator currentCoPI : CoPIs){
+			coPIsMerged.append(currentCoPI.getCollaboratorName() + coPISeparator);
 		}
 		
 		return StringUtils.removeEnd(coPIsMerged.toString(), coPISeparator);
@@ -218,18 +207,18 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	 * @param piNodesAndEdges
 	 * @param response
 	 */
-	private Map<String, String> prepareCoPIsCountPerYearDataResponse(CoPIData piNodesAndEdges) {
+	private Map<String, String> prepareCoPIsCountPerYearDataResponse(CollaborationData piNodesAndEdges) {
 		
 		String outputFileName;
-		Map<String, Set<CoPINode>> yearToCoPIs = new TreeMap<String, Set<CoPINode>>();
+		Map<String, Set<Collaborator>> yearToCoPIs = new TreeMap<String, Set<Collaborator>>();
 		
-		if (piNodesAndEdges.getNodes() != null && piNodesAndEdges.getNodes().size() > 0) {
+		if (piNodesAndEdges.getCollaborators() != null && piNodesAndEdges.getCollaborators().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(piNodesAndEdges
-									.getEgoNode().getNodeName())
+									.getEgoCollaborator().getCollaboratorName())
 			+ "_co-investigators-per-year" + ".csv";
 			
-			yearToCoPIs = UtilityFunctions.getGrantYearToCoPI(piNodesAndEdges);
+			yearToCoPIs = UtilityFunctions.getActivityYearToCollaborators(piNodesAndEdges);
 			
 		} else {
 			
@@ -253,13 +242,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	 * @param coPIData
 	 * @param response
 	 */
-	private Map<String, String> prepareCoPIsListDataResponse(CoPIData coPIData) {
+	private Map<String, String> prepareCoPIsListDataResponse(CollaborationData coPIData) {
 		
 		String outputFileName = "";
 		
-		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
+		if (coPIData.getCollaborators() != null && coPIData.getCollaborators().size() > 0) {
 			
-			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
+			outputFileName = UtilityFunctions.slugify(coPIData.getEgoCollaborator().getCollaboratorName()) 
 									+ "_co-investigators" + ".csv";
 	
 		} else {
@@ -277,31 +266,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		return fileData;
 	}
 
-	private Map<String, Integer> getCoPIsList(CoPIData coPIVO) {
-		
-		Map<String, Integer> coPIsToCount = new TreeMap<String, Integer>();
-		
-		for (CoPINode currNode : coPIVO.getNodes()) {
-			
-			/*
-			 * We have already printed the Ego Node info.
-			 * */
-			if (currNode != coPIVO.getEgoNode()) {
-				
-				coPIsToCount.put(currNode.getNodeName(), currNode.getNumberOfInvestigatedGrants());
-				
-			}
-		}
-		return coPIsToCount;
-	}
-	
 	/**
 	 * Provides a response when graphml formatted co-pi network is requested, typically by 
 	 * the flash vis.
 	 * @param coPIData
 	 * @param response
 	 */
-	private Map<String, String> prepareNetworkStreamDataResponse(CoPIData coPIData) {
+	private Map<String, String> prepareNetworkStreamDataResponse(CollaborationData coPIData) {
 	
 		CoPIGraphMLWriter coPIGraphMLWriter = 
 				new CoPIGraphMLWriter(coPIData);
@@ -316,13 +287,13 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	
 	}
 	
-	private Map<String, String> prepareNetworkDownloadDataResponse(CoPIData coPIData) {
+	private Map<String, String> prepareNetworkDownloadDataResponse(CollaborationData coPIData) {
 		
 		String outputFileName = "";
 		
-		if (coPIData.getNodes() != null && coPIData.getNodes().size() > 0) {
+		if (coPIData.getCollaborators() != null && coPIData.getCollaborators().size() > 0) {
 			
-			outputFileName = UtilityFunctions.slugify(coPIData.getEgoNode().getNodeName()) 
+			outputFileName = UtilityFunctions.slugify(coPIData.getEgoCollaborator().getCollaboratorName()) 
 									+ "_co-investigator-network.graphml" + ".xml";
 			
 		} else {

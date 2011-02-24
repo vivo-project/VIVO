@@ -1,90 +1,26 @@
-/* $This file is distributed under the terms of the license in /doc/license.txt$ */
-
-package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class CoPIData {
-	
-	private Set<CoPINode> nodes;
-	private Set<CoPIEdge> edges;
-	private CoPINode egoNode;
-	private Set<Map<String, String>> NODE_SCHEMA;
-	private Set<Map<String, String>> EDGE_SCHEMA;
-		
-	public CoPIData(CoPINode egoNode, Set<CoPINode> nodes, Set<CoPIEdge> edges) {
-		this.egoNode = egoNode;
-		this.nodes = nodes;
-		this.edges = edges;
-	}
-	
-	public Set<CoPINode> getNodes() {
-		return nodes;
-	}
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaboration;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 
-	public Set<CoPIEdge> getEdges() {
-		return edges;
-	}	
-	
-	public CoPINode getEgoNode() {
-		return egoNode;
+public class CoInvestigationData extends CollaborationData {
+
+	public CoInvestigationData(Collaborator egoCollaborator,
+			Set<Collaborator> collaborators, Set<Collaboration> collaborations) {
+		super(egoCollaborator, collaborators, collaborations);
 	}
 	
-	/*
-	 * Node Schema for graphML
-	 * */
-	public Set<Map<String, String>> getNodeSchema() {
-		
-		if (NODE_SCHEMA == null) {
-			NODE_SCHEMA = initializeNodeSchema();			
-		}
-		
-		return NODE_SCHEMA;
-	}
-	
-	/*
-	 * Edge Schema for graphML
-	 * */
-	public Set<Map<String, String>> getEdgeSchema() {
-		
-		if (EDGE_SCHEMA == null) {
-			EDGE_SCHEMA = initializeEdgeSchema();			
-		}
-		
-		return EDGE_SCHEMA;
-	}
-	
-	public void print(){
-		
-		System.out.println("\n-----------------------------");
-		
-		System.out.println("Ego node is "+ this.getEgoNode().getNodeName());
-		
-		System.out.println("\nNodes are: ");
-		
-		for(CoPINode node : this.getNodes()){
-			System.out.println(node.getNodeName());
-		}
-		
-		System.out.println("\nEdges are: ");
-		
-		for(CoPIEdge edge : this.getEdges()){
-			System.out.println(edge.getSourceNode() + "-->" + edge.getTargetNode());
-		}
-		
-		System.out.println("\n-----------------------------");
-		
-	}
-	
-	private Set<Map<String, String>> initializeEdgeSchema() {
+	public Set<Map<String, String>> initializeEdgeSchema() {
 
 		Set<Map<String, String>> edgeSchema = new HashSet<Map<String, String>>();
 		
-			Map<String, String> schemaAttributes = new LinkedHashMap<String, String>();
-			
+		Map<String, String> schemaAttributes = new LinkedHashMap<String, String>();
+		
 			schemaAttributes.put("id", "collaborator1");
 			schemaAttributes.put("for", "edge");
 			schemaAttributes.put("attr.name", "collaborator1");
@@ -159,12 +95,12 @@ public class CoPIData {
 	}
 	
 
-	private Set<Map<String, String>> initializeNodeSchema() {
+	public Set<Map<String, String>> initializeNodeSchema() {
 		
 		Set<Map<String, String>> nodeSchema = new HashSet<Map<String, String>>();
 
-			Map<String, String> schemaAttributes = new LinkedHashMap<String, String>();   
-			
+		Map<String, String> schemaAttributes = new LinkedHashMap<String, String>();   
+		
 			schemaAttributes.put("id", "url");
 			schemaAttributes.put("for", "node");
 			schemaAttributes.put("attr.name", "url");
@@ -247,5 +183,5 @@ public class CoPIData {
 		
 		return nodeSchema;
 	}
-	
+
 }

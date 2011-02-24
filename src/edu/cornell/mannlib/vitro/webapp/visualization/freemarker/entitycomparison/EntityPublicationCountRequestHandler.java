@@ -280,7 +280,7 @@ public class EntityPublicationCountRequestHandler implements
 			List<List<Integer>> yearPubCount = new ArrayList<List<Integer>>();
 
 			for (Map.Entry<String, Integer> pubEntry : UtilityFunctions
-					.getYearToPublicationCount(subentity.getDocuments())
+					.getYearToActivityCount(subentity.getActivities())
 					.entrySet()) {
 
 				List<Integer> currentPubYear = new ArrayList<Integer>();
@@ -326,7 +326,7 @@ public class EntityPublicationCountRequestHandler implements
 			
 			csvFileContent.append(StringEscapeUtils.escapeCsv(subEntity.getIndividualLabel()));
 			csvFileContent.append(", ");
-			csvFileContent.append(subEntity.getDocuments().size());
+			csvFileContent.append(subEntity.getActivities().size());
 			csvFileContent.append(", ");
 			
 			StringBuilder joinedTypes = new StringBuilder();

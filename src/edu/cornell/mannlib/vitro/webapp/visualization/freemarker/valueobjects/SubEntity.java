@@ -12,10 +12,8 @@ import java.util.HashSet;
  */
 public class SubEntity extends Individual {
 
-	Set<BiboDocument> publications = new HashSet<BiboDocument>();
+	Set<Activity> activities = new HashSet<Activity>();
 	Map<String, Map<String, String>> personToPositionAndStartYear = new HashMap<String, Map<String, String>>(); 
-	Set<Grant> grants = new HashSet<Grant>();
-	
 	
 	public SubEntity(String individualURI) {
 		super(individualURI);
@@ -30,32 +28,12 @@ public class SubEntity extends Individual {
 		this.personToPositionAndStartYear = personToPositionAndStartYear;
 	}
 
-	public Set<BiboDocument> getDocuments() {
-		return publications;
+	public Set<Activity> getActivities() {
+		return activities;
 	}
 
-	public Set<Grant> getGrants() {
-		return grants;
-	}
-	
 	public SubEntity(String individualURI, String individualLabel) {
 		super(individualURI, individualLabel);
-	}
-	
-	@Override
-	public boolean equals(Object other){
-		boolean result = false;
-		if (other instanceof SubEntity){
-			SubEntity person = (SubEntity) other;
-			result = (this.getIndividualLabel().equals(person.getIndividualLabel())
-						&& this.getIndividualURI().equals(person.getIndividualURI()));
-		}
-		return result;
-	}
-	
-	@Override 
-	public int hashCode(){
-		return(41*(getIndividualLabel().hashCode() + 41*(getIndividualURI().hashCode())));
 	}
 	
 	@Override
@@ -63,12 +41,8 @@ public class SubEntity extends Individual {
 		return this.getIndividualLabel();
 	}
 	
-	public void addPublication(BiboDocument biboDocument) {
-		this.publications.add(biboDocument);
+	public void addActivity(Activity activity) {
+		this.activities.add(activity);
 	}
 
-
-	public void addGrant(Grant grant) {
-		this.grants.add(grant);
-	}
 }

@@ -29,97 +29,86 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 
 public class UtilityFunctions {
 	
-	public static Map<String, Integer> getYearToPublicationCount(
-			Set<BiboDocument> authorDocuments) {
+	public static Map<String, Integer> getYearToActivityCount(
+			Set<Activity> activities) {
 
     	/*
     	 * Create a map from the year to number of publications. Use the BiboDocument's
-    	 * parsedPublicationYear to populate the data.
+    	 * or Grant's parsedPublicationYear or parsedGrantYear to populate the data passed
+    	 * via Activity's getParsedActivityYear.
     	 * */
-    	Map<String, Integer> yearToPublicationCount = new TreeMap<String, Integer>();
+    	Map<String, Integer> yearToActivityCount = new TreeMap<String, Integer>();
 
-    	for (BiboDocument curr : authorDocuments) {
+    	for (Activity currentActivity : activities) {
 
     		/*
     		 * Increment the count because there is an entry already available for
     		 * that particular year.
-    		 * 
-    		 * I am pushing the logic to check for validity of year in "getPublicationYear" itself
-    		 * because,
-    		 * 	1. We will be using getPub... multiple times & this will save us duplication of code
-    		 * 	2. If we change the logic of validity of a pub year we would not have to make 
-    		 * changes all throughout the codebase.
-    		 * 	3. We are asking for a publicationDate which is captured using the vivo 1.2 ontology 
-    		 * & if not saved then we are being nice & checking if date is saved using core:year if so 
-    		 * we use that else we return UNKOWN_YEAR.
     		 * */
-    		String publicationYear = curr.getParsedPublicationYear();
+    		String activityYear = currentActivity.getParsedActivityYear();
     		
-			if (yearToPublicationCount.containsKey(publicationYear)) {
-    			yearToPublicationCount.put(publicationYear,
-    									   yearToPublicationCount
-    									   		.get(publicationYear) + 1);
+			if (yearToActivityCount.containsKey(activityYear)) {
+    			yearToActivityCount.put(activityYear,
+    									   yearToActivityCount
+    									   		.get(activityYear) + 1);
 
     		} else {
-    			yearToPublicationCount.put(publicationYear, 1);
+    			yearToActivityCount.put(activityYear, 1);
     		}
 
     	}
 
-		return yearToPublicationCount;
+		return yearToActivityCount;
 	}
 	
 	/**
-	 * This method is used to return a mapping between publication year & all the co-authors
+	 * This method is used to return a mapping between activity year & all the collaborators
 	 * that published with ego in that year. 
-	 * @param authorNodesAndEdges
+	 * @param collaborationData
 	 * @return
 	 */
-	public static Map<String, Set<Node>> getPublicationYearToCoAuthors(
-										CoAuthorshipData authorNodesAndEdges) {
+	public static Map<String, Set<Collaborator>> getActivityYearToCollaborators(
+										CollaborationData collaborationData) {
 
-		Map<String, Set<Node>> yearToCoAuthors = new TreeMap<String, Set<Node>>();
+		Map<String, Set<Collaborator>> yearToCollaborators = new TreeMap<String, Set<Collaborator>>();
 		
-		Node egoNode = authorNodesAndEdges.getEgoNode();
+		Collaborator egoCollaborator = collaborationData.getEgoCollaborator();
 		
-		for (Node currNode : authorNodesAndEdges.getNodes()) {
+		for (Collaborator currNode : collaborationData.getCollaborators()) {
 					
 				/*
 				 * We have already printed the Ego Node info.
 				 * */
-				if (currNode != egoNode) {
+				if (currNode != egoCollaborator) {
 					
-					for (String year : currNode.getYearToPublicationCount().keySet()) {
+					for (String year : currNode.getYearToActivityCount().keySet()) {
 						
-						Set<Node> coAuthorNodes;
+						Set<Collaborator> collaboratorNodes;
 						
-						if (yearToCoAuthors.containsKey(year)) {
+						if (yearToCollaborators.containsKey(year)) {
 							
-							coAuthorNodes = yearToCoAuthors.get(year);
-							coAuthorNodes.add(currNode);
+							collaboratorNodes = yearToCollaborators.get(year);
+							collaboratorNodes.add(currNode);
 							
 						} else {
 							
-							coAuthorNodes = new HashSet<Node>();
-							coAuthorNodes.add(currNode);
-							yearToCoAuthors.put(year, coAuthorNodes);
+							collaboratorNodes = new HashSet<Collaborator>();
+							collaboratorNodes.add(currNode);
+							yearToCollaborators.put(year, collaboratorNodes);
 						}
 						
 					}
 					
 				}
 		}
-		return yearToCoAuthors;
+		return yearToCollaborators;
 	}
 	
 	/**
@@ -178,83 +167,6 @@ public class UtilityFunctions {
 		}
 	}
     
-	public static Map<String, Set<CoPINode>> getGrantYearToCoPI(
-			CoPIData pINodesAndEdges) {
-		
-
-		Map<String, Set<CoPINode>> yearToCoPIs = new TreeMap<String, Set<CoPINode>>();
-		
-		CoPINode egoNode = pINodesAndEdges.getEgoNode();
-		
-		for (CoPINode currNode : pINodesAndEdges.getNodes()) {
-					
-				/*
-				 * We have already printed the Ego Node info.
-				 * */
-				if (currNode != egoNode) {
-					
-					for (String year : currNode.getYearToGrantCount().keySet()) {
-						
-						Set<CoPINode> coPINodes;
-						
-						if (yearToCoPIs.containsKey(year)) {
-							
-							coPINodes = yearToCoPIs.get(year);
-							coPINodes.add(currNode);
-							
-						} else {
-							
-							coPINodes = new HashSet<CoPINode>();
-							coPINodes.add(currNode);
-							yearToCoPIs.put(year, coPINodes);
-						}
-						
-					}
-					
-				}
-		}
-		return yearToCoPIs;
-
-	}
-
-	public static Map<String, Integer> getYearToGrantCount(Set<Grant> pIGrants) {
-		
-    	/*
-    	 * Create a map from the year to number of grants. Use the Grant's
-    	 * parsedGrantStartYear to populate the data.
-    	 * */
-    	Map<String, Integer> yearToGrantCount = new TreeMap<String, Integer>();
-
-    	for (Grant curr : pIGrants) {
-
-    		/*
-    		 * Increment the count because there is an entry already available for
-    		 * that particular year.
-    		 * 
-    		 * I am pushing the logic to check for validity of year in "getGrantYear" itself
-    		 * because,
-    		 * 	1. We will be using getGra... multiple times & this will save us duplication of code
-    		 * 	2. If we change the logic of validity of a grant year we would not have to make 
-    		 * changes all throughout the codebase.
-    		 * 	3. We are asking for a grant year & we should get a proper one or NOT at all.
-    		 * */
-    		String grantYear = curr.getParsedGrantStartYear();
-    		
-			if (yearToGrantCount.containsKey(grantYear)) {
-    			yearToGrantCount.put(grantYear,
-    									   yearToGrantCount
-    									   		.get(grantYear) + 1);
-
-    		} else {
-    			yearToGrantCount.put(grantYear, 1);
-    		}
-
-    	}
-
-		return yearToGrantCount;
-		
-	}
-	
 	public static DateTime getValidParsedDateTimeObject(String unparsedDateTime) {
 		
 		for (DateTimeFormatter currentFormatter : VOConstants.POSSIBLE_DATE_TIME_FORMATTERS) {
@@ -275,6 +187,33 @@ public class UtilityFunctions {
 		 * This means that none of the date time formatters worked. 
 		 * */
 		return null;
+	}
+	
+	/**
+	 * This method will be called to get the inferred end year for the entity. 
+	 * The 2 choices, in order, are,
+	 * 		1. parsed year from core:DateTime object saved in core:dateTimeValue 
+	 * 		2. Default Entity Year 
+	 * @return
+	 */
+	public static String getValidYearFromCoreDateTimeString(String inputDate,
+															String defaultYearInCaseOfError) {
+		/*
+		 * Always return default year identifier in case of an illegal parsed year.
+		 * */
+		String parsedGrantYear = defaultYearInCaseOfError;
+
+		if (inputDate != null) {
+
+			DateTime validParsedDateTimeObject = UtilityFunctions
+					.getValidParsedDateTimeObject(inputDate);
+
+			if (validParsedDateTimeObject != null) {
+				return String.valueOf(validParsedDateTimeObject.getYear());
+			} 
+		} 
+		
+		return parsedGrantYear;
 	}
 	
 	public static String getCSVDownloadURL(String individualURI, String visType, String visMode) {

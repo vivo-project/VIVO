@@ -2,24 +2,16 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -28,10 +20,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.PDFDocument;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -68,19 +59,19 @@ VisualizationRequestHandler {
 								.getParameter(
 										VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryRunner<Set<BiboDocument>> queryManager = new PersonPublicationCountQueryRunner(
+		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 															personURI, 
 															Dataset, 
 															log);
 
-		Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
+		Set<Activity> authorDocuments = queryManager.getQueryResult();
 
 		/*
 		 * Create a map from the year to number of publications. Use the
 		 * BiboDocument's parsedPublicationYear to populate the data.
 		 */
 		Map<String, Integer> yearToPublicationCount = 
-				UtilityFunctions.getYearToPublicationCount(authorDocuments);
+				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
 		boolean shouldVIVOrenderVis = 
 				yearToPublicationCount.size() > 0 ? true : false;
@@ -111,19 +102,19 @@ VisualizationRequestHandler {
 		String personURI = vitroRequest
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
-		QueryRunner<Set<BiboDocument>> queryManager = new PersonPublicationCountQueryRunner(
+		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI, 
 																Dataset, 
 																log);
 
-		Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
+		Set<Activity> authorDocuments = queryManager.getQueryResult();
 
 		/*
 		 * Create a map from the year to number of publications. Use the
 		 * BiboDocument's parsedPublicationYear to populate the data.
 		 */
 		Map<String, Integer> yearToPublicationCount = 
-				UtilityFunctions.getYearToPublicationCount(authorDocuments);
+				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
 		Individual author = ((PersonPublicationCountQueryRunner) queryManager).getAuthor();
 
@@ -147,19 +138,19 @@ VisualizationRequestHandler {
 		String visContainer = vitroRequest.getParameter(
 									VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryRunner<Set<BiboDocument>> queryManager = new PersonPublicationCountQueryRunner(
+		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI, 
 																Dataset, 
 																log);
 
-		Set<BiboDocument> authorDocuments = queryManager.getQueryResult();
+		Set<Activity> authorDocuments = queryManager.getQueryResult();
 
 		/*
 		 * Create a map from the year to number of publications. Use the
 		 * BiboDocument's parsedPublicationYear to populate the data.
 		 */
 		Map<String, Integer> yearToPublicationCount = 
-				UtilityFunctions.getYearToPublicationCount(authorDocuments);
+				UtilityFunctions.getYearToActivityCount(authorDocuments);
 
 		/*
 		 * Computations required to generate HTML for the sparkline & related
@@ -208,7 +199,7 @@ VisualizationRequestHandler {
 	 * @return
 	 */
 	private Map<String, String> prepareDataResponse(Individual author,
-			Set<BiboDocument> authorDocuments,
+			Set<Activity> authorDocuments,
 			Map<String, Integer> yearToPublicationCount) {
 
 		String authorName = null;
@@ -281,7 +272,6 @@ VisualizationRequestHandler {
 
 		Portal portal = vreq.getPortal();
 
-//		String dynamicTemplate = "/visualization/publication/personPublicationCountDynamicActivator.ftl";
 		String dynamicTemplate = "personPublicationCountDynamicActivator.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
@@ -292,64 +282,4 @@ VisualizationRequestHandler {
 		return new TemplateResponseValues(dynamicTemplate, body);
 
 	}
-
-	private void preparePDFResponse(Individual author,
-			Set<BiboDocument> authorDocuments,
-			Map<String, Integer> yearToPublicationCount,
-			HttpServletResponse response) {
-
-		String authorName = null;
-
-		// To protect against cases where there are no author documents
-		// associated with the
-		// / individual.
-		if (authorDocuments.size() > 0) {
-			authorName = author.getIndividualLabel();
-		}
-
-		// To make sure that null/empty records for author names do not cause
-		// any mischief.
-		if (StringUtils.isBlank(authorName)) {
-			authorName = "no-author";
-		}
-
-		String outputFileName = UtilityFunctions.slugify(authorName)
-		+ "_report" + ".pdf";
-
-		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition", "attachment;filename="
-				+ outputFileName);
-
-		ServletOutputStream responseOutputStream;
-		try {
-			responseOutputStream = response.getOutputStream();
-
-			Document document = new Document();
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			PdfWriter pdfWriter = PdfWriter.getInstance(document, baos);
-			document.open();
-
-			PDFDocument pdfDocument = new PDFDocument(authorName,
-					yearToPublicationCount, document, pdfWriter);
-
-			document.close();
-
-			// setting some response headers & content type
-			response.setHeader("Expires", "0");
-			response.setHeader("Cache-Control",
-			"must-revalidate, post-check=0, pre-check=0");
-			response.setHeader("Pragma", "public");
-			response.setContentLength(baos.size());
-			// write ByteArrayOutputStream to the ServletOutputStream
-			baos.writeTo(responseOutputStream);
-			responseOutputStream.flush();
-			responseOutputStream.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

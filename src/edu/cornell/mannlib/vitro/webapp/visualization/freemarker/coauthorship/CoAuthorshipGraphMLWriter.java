@@ -11,9 +11,11 @@ import java.util.Set;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Edge;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaboratorComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaboration;
 
 public class CoAuthorshipGraphMLWriter {
 	
@@ -27,12 +29,12 @@ public class CoAuthorshipGraphMLWriter {
 
 	private final String GRAPHML_FOOTER = "</graphml>";
 	
-	public CoAuthorshipGraphMLWriter(CoAuthorshipData visVOContainer) {
+	public CoAuthorshipGraphMLWriter(CollaborationData visVOContainer) {
 		coAuthorshipGraphMLContent = createCoAuthorshipGraphMLContent(visVOContainer);
 	}
 
 	private StringBuilder createCoAuthorshipGraphMLContent(
-			CoAuthorshipData coAuthorshipData) {
+			CollaborationData coAuthorshipData) {
 		
 		StringBuilder graphMLContent = new StringBuilder();
 		
@@ -60,61 +62,61 @@ public class CoAuthorshipGraphMLWriter {
 		return coAuthorshipGraphMLContent;
 	}
 
-	private void generateGraphContent(CoAuthorshipData coAuthorshipData,
+	private void generateGraphContent(CollaborationData coAuthorshipData,
 			StringBuilder graphMLContent) {
 
 		graphMLContent.append("\n<graph edgedefault=\"undirected\">\n");
 		
-		if (coAuthorshipData.getNodes() != null & coAuthorshipData.getNodes().size() > 0) {
+		if (coAuthorshipData.getCollaborators() != null & coAuthorshipData.getCollaborators().size() > 0) {
 			generateNodeSectionContent(coAuthorshipData, graphMLContent);
 		}
 		
-		if (coAuthorshipData.getEdges() != null & coAuthorshipData.getEdges().size() > 0) {
+		if (coAuthorshipData.getCollaborations() != null & coAuthorshipData.getCollaborations().size() > 0) {
 			generateEdgeSectionContent(coAuthorshipData, graphMLContent);
 		}
 		
 		graphMLContent.append("</graph>\n");
 	}
 
-	private void generateEdgeSectionContent(CoAuthorshipData coAuthorshipData,
+	private void generateEdgeSectionContent(CollaborationData coAuthorshipData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- edges -->\n");
 		
-		Set<Edge> edges = coAuthorshipData.getEdges();
+		Set<Collaboration> edges = coAuthorshipData.getCollaborations();
 		
-		List<Edge> orderedEdges = new ArrayList<Edge>(edges);
+		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
 		
-		Collections.sort(orderedEdges, new EdgeComparator());
+		Collections.sort(orderedEdges, new CollaborationComparator());
 
-		for (Edge currentEdge : orderedEdges) {
+		for (Collaboration currentEdge : orderedEdges) {
 			
 			/*
-			 * This method actually creates the XML code for a single edge. "graphMLContent"
+			 * This method actually creates the XML code for a single Collaboration. "graphMLContent"
 			 * is being side-effected. 
 			 * */
 			getEdgeContent(graphMLContent, currentEdge);
 		}
 	}
 
-	private void getEdgeContent(StringBuilder graphMLContent, Edge currentEdge) {
+	private void getEdgeContent(StringBuilder graphMLContent, Collaboration currentEdge) {
 		
 		graphMLContent.append("<edge " 
-									+ "id=\"" + currentEdge.getEdgeID() + "\" " 
-									+ "source=\"" + currentEdge.getSourceNode().getNodeID() + "\" "
-									+ "target=\"" + currentEdge.getTargetNode().getNodeID() + "\" "
+									+ "id=\"" + currentEdge.getCollaborationID() + "\" " 
+									+ "source=\"" + currentEdge.getSourceCollaborator().getCollaboratorID() + "\" "
+									+ "target=\"" + currentEdge.getTargetCollaborator().getCollaboratorID() + "\" "
 									+ ">\n");
 		
 		graphMLContent.append("\t<data key=\"collaborator1\">" 
-								+ currentEdge.getSourceNode().getNodeName() 
+								+ currentEdge.getSourceCollaborator().getCollaboratorName() 
 								+ "</data>\n");
 		
 		graphMLContent.append("\t<data key=\"collaborator2\">" 
-								+ currentEdge.getTargetNode().getNodeName() 
+								+ currentEdge.getTargetCollaborator().getCollaboratorName() 
 								+ "</data>\n");
 		
 		graphMLContent.append("\t<data key=\"number_of_coauthored_works\">" 
-								+ currentEdge.getNumOfCoAuthoredWorks()
+								+ currentEdge.getNumOfCollaborations()
 							+ "</data>\n");
 		
 		if (currentEdge.getEarliestCollaborationYearCount() != null) {
@@ -164,32 +166,32 @@ public class CoAuthorshipGraphMLWriter {
 		graphMLContent.append("</edge>\n");
 	}
 
-	private void generateNodeSectionContent(CoAuthorshipData coAuthorshipData,
+	private void generateNodeSectionContent(CollaborationData coAuthorshipData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- nodes -->\n");
 		
-		Node egoNode = coAuthorshipData.getEgoNode();
-		Set<Node> authorNodes = coAuthorshipData.getNodes();
+		Collaborator egoNode = coAuthorshipData.getEgoCollaborator();
+		Set<Collaborator> authorNodes = coAuthorshipData.getCollaborators();
 		
 		/*
-		 * This method actually creates the XML code for a single node. "graphMLContent"
+		 * This method actually creates the XML code for a single Collaborator. "graphMLContent"
 		 * is being side-effected. The egoNode is added first because this is the "requirement"
 		 * of the co-author vis. Ego should always come first.
 		 * 
 		 * */
 		getNodeContent(graphMLContent, egoNode);
 		
-		List<Node> orderedAuthorNodes = new ArrayList<Node>(authorNodes);
+		List<Collaborator> orderedAuthorNodes = new ArrayList<Collaborator>(authorNodes);
 		orderedAuthorNodes.remove(egoNode);
 		
-		Collections.sort(orderedAuthorNodes, new NodeComparator());
+		Collections.sort(orderedAuthorNodes, new CollaboratorComparator());
 		
 		
-		for (Node currNode : orderedAuthorNodes) {
+		for (Collaborator currNode : orderedAuthorNodes) {
 			
 			/*
-			 * We have already printed the Ego Node info.
+			 * We have already printed the Ego Collaborator info.
 			 * */
 			if (currNode != egoNode) {
 				
@@ -201,17 +203,17 @@ public class CoAuthorshipGraphMLWriter {
 		
 	}
 
-	private void getNodeContent(StringBuilder graphMLContent, Node node) {
+	private void getNodeContent(StringBuilder graphMLContent, Collaborator node) {
 
 		ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-														   node.getNodeURI());
+														   node.getCollaboratorURI());
 
 		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
 			individualProfileURLParams);
 		
-		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
-		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURI() + "</data>\n");
-		graphMLContent.append("\t<data key=\"label\">" + node.getNodeName() + "</data>\n");
+		graphMLContent.append("<node id=\"" + node.getCollaboratorID() + "\">\n");
+		graphMLContent.append("\t<data key=\"url\">" + node.getCollaboratorURI() + "</data>\n");
+		graphMLContent.append("\t<data key=\"label\">" + node.getCollaboratorName() + "</data>\n");
 		
 		if (profileURL != null) {
 			graphMLContent.append("\t<data key=\"profile_url\">" + profileURL + "</data>\n");
@@ -219,10 +221,10 @@ public class CoAuthorshipGraphMLWriter {
 		
 		
 		graphMLContent.append("\t<data key=\"number_of_authored_works\">" 
-								+ node.getNumOfAuthoredWorks() 
+								+ node.getNumOfActivities()
 							+ "</data>\n");
 		
-		if (node.getEarliestPublicationYearCount() != null) {
+		if (node.getEarliestActivityYearCount() != null) {
 			
 			/*
 			 * There is no clean way of getting the map contents in java even though
@@ -230,7 +232,7 @@ public class CoAuthorshipGraphMLWriter {
 			 * I am feeling dirty just about now. 
 			 * */
 			for (Map.Entry<String, Integer> publicationInfo 
-						: node.getEarliestPublicationYearCount().entrySet()) {
+						: node.getEarliestActivityYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"earliest_publication\">" 
 											+ publicationInfo.getKey() 
@@ -243,10 +245,10 @@ public class CoAuthorshipGraphMLWriter {
 			
 		}
 		
-		if (node.getLatestPublicationYearCount() != null) {
+		if (node.getLatestActivityYearCount() != null) {
 			
 			for (Map.Entry<String, Integer> publicationInfo 
-						: node.getLatestPublicationYearCount().entrySet()) {
+						: node.getLatestActivityYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"latest_publication\">" 
 											+ publicationInfo.getKey() 
@@ -259,10 +261,10 @@ public class CoAuthorshipGraphMLWriter {
 			
 		}
 		
-		if (node.getUnknownPublicationYearCount() != null) {
+		if (node.getUnknownActivityYearCount() != null) {
 			
 				graphMLContent.append("\t<data key=\"num_unknown_publication\">" 
-											+ node.getUnknownPublicationYearCount() 
+											+ node.getUnknownActivityYearCount() 
 										+ "</data>\n");
 				
 		}
@@ -270,7 +272,7 @@ public class CoAuthorshipGraphMLWriter {
 		graphMLContent.append("</node>\n");
 	}
 
-	private void generateKeyDefinitionContent(CoAuthorshipData visVOContainer, 
+	private void generateKeyDefinitionContent(CollaborationData visVOContainer, 
 											  StringBuilder graphMLContent) {
 		
 		/*

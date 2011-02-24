@@ -26,7 +26,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
@@ -82,7 +82,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	private Entity createJavaValueObjects(ResultSet resultSet) {
 
 		Entity entity = null;
-		Map<String, BiboDocument> biboDocumentURLToVO = new HashMap<String, BiboDocument>();
+		Map<String, Activity> biboDocumentURLToVO = new HashMap<String, Activity>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
 
@@ -98,14 +98,14 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			}
 
 			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
-			BiboDocument biboDocument;
+			Activity biboDocument;
 
 			if (biboDocumentURLToVO.containsKey(documentNode.toString())) {
 				biboDocument = biboDocumentURLToVO.get(documentNode.toString());
 
 			} else {
 
-				biboDocument = new BiboDocument(documentNode.toString());
+				biboDocument = new Activity(documentNode.toString());
 				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
 
 //				RDFNode documentLabelNode = solution
@@ -116,15 +116,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 				RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {
-					biboDocument.setPublicationDate(publicationDateNode.toString());
-				}
-
-				/*
-				 * This is being used so that date in the data from pre-1.2 ontology can be captured. 
-				 * */
-				RDFNode publicationYearUsing_1_1_PropertyNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY);
-				if (publicationYearUsing_1_1_PropertyNode != null) {
-					biboDocument.setPublicationYear(publicationYearUsing_1_1_PropertyNode.toString());
+					biboDocument.setActivityDate(publicationDateNode.toString());
 				}
 
 			}
@@ -149,7 +141,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				
 				entity.addSubEntity(subEntity);
 				
-				subEntity.addPublication(biboDocument);
+				subEntity.addActivity(biboDocument);
 			}
 			
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
@@ -182,29 +174,19 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 					
 				}
 				
-				person.addPublication(biboDocument);				
+				person.addActivity(biboDocument);				
 
 			}			
 
-			entity.addPublication(biboDocument);
+			entity.addActivity(biboDocument);
 		}
 		
-		/*
-		if (subentityURLToVO.size() != 0) {
-			
-			entity.addSubEntitities(subentityURLToVO.values());
-			
-		} else if (subentityURLToVO.size() == 0 && personURLToVO.size() != 0) {
-			
-			entity.addSubEntitities(personURLToVO.values());
-			
-		} else*/ if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
+		if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {
 			
 			entity = new Entity(this.entityURI, "no-label");
 			
 		}
 		
-		//TODO: return non-null value
 	//	log.debug("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
 		after = System.currentTimeMillis();
 		log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );

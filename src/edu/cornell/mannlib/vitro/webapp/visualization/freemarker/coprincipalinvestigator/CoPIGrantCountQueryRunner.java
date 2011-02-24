@@ -17,7 +17,6 @@ import org.apache.commons.logging.LogFactory;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -31,17 +30,19 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIEdge;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CoInvestigationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaboratorComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaboration;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UniqueIDGenerator;
 /**
  * @author bkoniden
  * Deepak Konidena
  */
-public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
+public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData> {
 	
 	private static final int MAX_PI_PER_GRANT_ALLOWED = 100;
 	
@@ -334,7 +335,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 		return queryExecution.execSelect();
 	}
 	
-	public CoPIData getQueryResult()
+	public CollaborationData getQueryResult()
 	throws MalformedQueryParametersException {
 
 	if (StringUtils.isNotBlank(this.egoURI)) {
@@ -365,13 +366,13 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 	}
 	
 	
-	private CoPIEdge getExistingEdge(
-			CoPINode collaboratingNode1, 
-			CoPINode collaboratingNode2, 
-			Map<String, CoPIEdge> edgeUniqueIdentifierToVO) {
+	private Collaboration getExistingEdge(
+			Collaborator collaboratingNode1, 
+			Collaborator collaboratingNode2, 
+			Map<String, Collaboration> edgeUniqueIdentifierToVO) {
 
-		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getNodeID(), 
-				collaboratingNode2.getNodeID());
+		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getCollaboratorID(), 
+				collaboratingNode2.getCollaboratorID());
 
 		return edgeUniqueIdentifierToVO.get(edgeUniqueIdentifier);
 
@@ -389,18 +390,18 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 	}
 	
-	private CoPIData createQueryResult(ResultSet resultSet) {
+	private CollaborationData createQueryResult(ResultSet resultSet) {
 		
-		Set<CoPINode> nodes = new HashSet<CoPINode>();
+		Set<Collaborator> nodes = new HashSet<Collaborator>();
 		
-		Map<String, Grant> grantURLToVO = new HashMap<String, Grant>();
-		Map<String, Set<CoPINode>> grantURLToCoPIs = new HashMap<String, Set<CoPINode>>();
-		Map<String, CoPINode> nodeURLToVO = new HashMap<String, CoPINode>();
-		Map<String, CoPIEdge> edgeUniqueIdentifierToVO = new HashMap<String, CoPIEdge>();
+		Map<String, Activity> grantURLToVO = new HashMap<String, Activity>();
+		Map<String, Set<Collaborator>> grantURLToCoPIs = new HashMap<String, Set<Collaborator>>();
+		Map<String, Collaborator> nodeURLToVO = new HashMap<String, Collaborator>();
+		Map<String, Collaboration> edgeUniqueIdentifierToVO = new HashMap<String, Collaboration>();
 		
-		CoPINode egoNode = null;
+		Collaborator egoNode = null;
 
-		Set<CoPIEdge> edges = new HashSet<CoPIEdge>();
+		Set<Collaboration> edges = new HashSet<Collaboration>();
 		
 		before = System.currentTimeMillis();
 		
@@ -417,20 +418,20 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 					
 				} else {
 					
-					egoNode = new CoPINode(egoPIURLNode.toString(), nodeIDGenerator);
+					egoNode = new Collaborator(egoPIURLNode.toString(), nodeIDGenerator);
 					nodes.add(egoNode);
 					nodeURLToVO.put(egoPIURLNode.toString(), egoNode);
 					
 					
 					RDFNode authorLabelNode = solution.get(QueryFieldLabels.PI_LABEL);
 					if (authorLabelNode != null) {
-						egoNode.setNodeName(authorLabelNode.toString());
+						egoNode.setCollaboratorName(authorLabelNode.toString());
 					}
 				}
 				log.debug("PI: "+ egoNode.getIndividualLabel());
 				
 				RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
-				Grant grant;
+				Activity grant;
 				
 				if (grantURLToVO.containsKey(grantNode.toString())) {
 					grant = grantURLToVO.get(grantNode.toString());
@@ -439,7 +440,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 					grantURLToVO.put(grantNode.toString(), grant);	
 				}
 				
-				egoNode.addGrant(grant);
+				egoNode.addActivity(grant);
 				log.debug("Adding grant: "+ grant.getIndividualLabel());
 				
 				/*
@@ -452,7 +453,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 					continue;
 				}
 				
-				CoPINode coPINode;
+				Collaborator coPINode;
 				
 				RDFNode coPIURLNode = solution.get(QueryFieldLabels.CO_PI_URL);
 				if (nodeURLToVO.containsKey(coPIURLNode.toString())) {
@@ -461,47 +462,46 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 					
 				} else {
 					
-					coPINode = new CoPINode(coPIURLNode.toString(), nodeIDGenerator);
+					coPINode = new Collaborator(coPIURLNode.toString(), nodeIDGenerator);
 					nodes.add(coPINode);
 					nodeURLToVO.put(coPIURLNode.toString(), coPINode);
 					
 					RDFNode coPILabelNode = solution.get(QueryFieldLabels.CO_PI_LABEL);
 					if (coPILabelNode != null) {
-						coPINode.setNodeName(coPILabelNode.toString());
+						coPINode.setCollaboratorName(coPILabelNode.toString());
 					}
 				}
 				
 				log.debug("Adding CO-PI: "+ coPINode.getIndividualLabel());
-				coPINode.addGrant(grant);
+				coPINode.addActivity(grant);
 				
-				Set<CoPINode> coPIsForCurrentGrant;
+				Set<Collaborator> coPIsForCurrentGrant;
 				
-				if (grantURLToCoPIs.containsKey(grant.getGrantURL())) {
-					coPIsForCurrentGrant = grantURLToCoPIs
-															.get(grant.getGrantURL());
+				if (grantURLToCoPIs.containsKey(grant.getActivityURI())) {
+					coPIsForCurrentGrant = grantURLToCoPIs.get(grant.getActivityURI());
 				} else {
-					coPIsForCurrentGrant = new HashSet<CoPINode>();
-					grantURLToCoPIs.put(grant.getGrantURL(), 
+					coPIsForCurrentGrant = new HashSet<Collaborator>();
+					grantURLToCoPIs.put(grant.getActivityURI(), 
 												   coPIsForCurrentGrant);
 				}
 				
 				coPIsForCurrentGrant.add(coPINode);
 				log.debug("Co-PI for current grant : "+ coPINode.getIndividualLabel());
 				
-				CoPIEdge egoCoPIEdge = getExistingEdge(egoNode, coPINode, edgeUniqueIdentifierToVO);
+				Collaboration egoCoPIEdge = getExistingEdge(egoNode, coPINode, edgeUniqueIdentifierToVO);
 				/*
 				 * If "egoCoPIEdge" is null it means that no edge exists in between the egoNode 
 				 * & current coPINode. Else create a new edge, add it to the edges set & add 
 				 * the collaborator grant to it.
 				 * */
 				if (egoCoPIEdge != null) {
-					egoCoPIEdge.addCollaboratorGrant(grant);
+					egoCoPIEdge.addActivity(grant);
 				} else {
-					egoCoPIEdge = new CoPIEdge(egoNode, coPINode, grant, edgeIDGenerator);
+					egoCoPIEdge = new Collaboration(egoNode, coPINode, grant, edgeIDGenerator);
 					edges.add(egoCoPIEdge);
 					edgeUniqueIdentifierToVO.put(
-							getEdgeUniqueIdentifier(egoNode.getNodeID(),
-													coPINode.getNodeID()), 
+							getEdgeUniqueIdentifier(egoNode.getCollaboratorID(),
+													coPINode.getCollaboratorID()), 
 							egoCoPIEdge);
 				}
 				
@@ -542,14 +542,14 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 			after = System.currentTimeMillis();
 			log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
 			
-			return new CoPIData(egoNode, nodes, edges);
+			return new CoInvestigationData(egoNode, nodes, edges);
 	}
 
-	private void createCoPIEdges(Map<String, Grant> grantURLToVO,
-			Map<String, Set<CoPINode>> grantURLToCoPIs, Set<CoPIEdge> edges,
-			Map<String, CoPIEdge> edgeUniqueIdentifierToVO) {
+	private void createCoPIEdges(Map<String, Activity> grantURLToVO,
+			Map<String, Set<Collaborator>> grantURLToCoPIs, Set<Collaboration> edges,
+			Map<String, Collaboration> edgeUniqueIdentifierToVO) {
 		
-		for (Map.Entry<String, Set<CoPINode>> currentGrantEntry 
+		for (Map.Entry<String, Set<Collaborator>> currentGrantEntry 
 				: grantURLToCoPIs.entrySet()) {
 		
 		/*
@@ -565,40 +565,40 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 						<= MAX_PI_PER_GRANT_ALLOWED) {
 			
 			
-			Set<CoPIEdge> newlyAddedEdges = new HashSet<CoPIEdge>();
+			Set<Collaboration> newlyAddedEdges = new HashSet<Collaboration>();
 		
 			/*
 			 * In order to leverage the nested "for loop" for making edges between all the 
 			 * co-PIs we need to create a list out of the set first. 
 			 * */
-			List<CoPINode> coPINodes = new ArrayList<CoPINode>(currentGrantEntry.getValue());
-			Collections.sort(coPINodes, new CoPINodeComparator());
+			List<Collaborator> coPINodes = new ArrayList<Collaborator>(currentGrantEntry.getValue());
+			Collections.sort(coPINodes, new CollaboratorComparator());
 			
 			int numOfCoPIs = coPINodes.size();
 			
 			for (int ii = 0; ii < numOfCoPIs - 1; ii++) {
 				for (int jj = ii + 1; jj < numOfCoPIs; jj++) {
 					
-					CoPINode coPI1 = coPINodes.get(ii);
-					CoPINode coPI2 = coPINodes.get(jj);
+					Collaborator coPI1 = coPINodes.get(ii);
+					Collaborator coPI2 = coPINodes.get(jj);
 					
-					CoPIEdge coPI1_2Edge = getExistingEdge(coPI1, 
+					Collaboration coPI1_2Edge = getExistingEdge(coPI1, 
 														   coPI2, 
 														   edgeUniqueIdentifierToVO);
 					
-					Grant currentGrant = grantURLToVO.get(currentGrantEntry.getKey());
+					Activity currentGrant = grantURLToVO.get(currentGrantEntry.getKey());
 		
 					if (coPI1_2Edge != null) {
-						coPI1_2Edge.addCollaboratorGrant(currentGrant);
+						coPI1_2Edge.addActivity(currentGrant);
 					} else {
-						coPI1_2Edge = new CoPIEdge(coPI1, 
+						coPI1_2Edge = new Collaboration(coPI1, 
 												   coPI2, 
 												   currentGrant, 
 												   edgeIDGenerator);
 						newlyAddedEdges.add(coPI1_2Edge);
 						edgeUniqueIdentifierToVO.put(
-								getEdgeUniqueIdentifier(coPI1.getNodeID(),
-														coPI2.getNodeID()), 
+								getEdgeUniqueIdentifier(coPI1.getCollaboratorID(),
+														coPI2.getCollaboratorID()), 
 								coPI1_2Edge);
 					}
 				}
@@ -610,23 +610,23 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 		
 	}
 
-	private void removeLowQualityNodesAndEdges(Set<CoPINode> nodes,
-			Map<String, Grant> grantURLToVO,
-			Map<String, Set<CoPINode>> grantURLToCoPIs, Set<CoPIEdge> edges) {
+	private void removeLowQualityNodesAndEdges(Set<Collaborator> nodes,
+			Map<String, Activity> grantURLToVO,
+			Map<String, Set<Collaborator>> grantURLToCoPIs, Set<Collaboration> edges) {
 		
-		Set<CoPINode> nodesToBeRemoved = new HashSet<CoPINode>();
-		for (Map.Entry<String, Set<CoPINode>> currentGrantEntry 
+		Set<Collaborator> nodesToBeRemoved = new HashSet<Collaborator>();
+		for (Map.Entry<String, Set<Collaborator>> currentGrantEntry 
 					: grantURLToCoPIs.entrySet()) {
 				
 				if (currentGrantEntry.getValue().size() > MAX_PI_PER_GRANT_ALLOWED) {
 					
-					Grant currentGrant = grantURLToVO.get(currentGrantEntry.getKey());
+					Activity currentGrant = grantURLToVO.get(currentGrantEntry.getKey());
 					
-					Set<CoPIEdge> edgesToBeRemoved = new HashSet<CoPIEdge>();
+					Set<Collaboration> edgesToBeRemoved = new HashSet<Collaboration>();
 					
-					for (CoPIEdge currentEdge : edges) {
-						Set<Grant> currentCollaboratorGrants = 
-									currentEdge.getCollaboratorGrants();
+					for (Collaboration currentEdge : edges) {
+						Set<Activity> currentCollaboratorGrants = 
+									currentEdge.getCollaborationActivities();
 						
 						if (currentCollaboratorGrants.contains(currentGrant)) {
 							currentCollaboratorGrants.remove(currentGrant);
@@ -638,9 +638,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 						
 					edges.removeAll(edgesToBeRemoved);
 
-					for (CoPINode currentCoPI : currentGrantEntry.getValue()) {
-						currentCoPI.getInvestigatedGrants().remove(currentGrant);
-						if (currentCoPI.getInvestigatedGrants().isEmpty()) {
+					for (Collaborator currentCoPI : currentGrantEntry.getValue()) {
+						currentCoPI.getCollaboratorActivities().remove(currentGrant);
+						if (currentCoPI.getCollaboratorActivities().isEmpty()) {
 							nodesToBeRemoved.add(currentCoPI);
 						}
 					}
@@ -650,9 +650,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 		
 	}
 
-	private Grant createGrantVO(QuerySolution solution, String grantURL) {
+	private Activity createGrantVO(QuerySolution solution, String grantURL) {
 		
-		Grant grant = new Grant(grantURL);
+		Activity grant = new Activity(grantURL);
 
 		RDFNode grantLabelNode = solution.get(QueryFieldLabels.GRANT_LABEL);
 		if (grantLabelNode != null) {
@@ -662,14 +662,16 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 
 		RDFNode grantStartYear = solution.get(QueryFieldLabels.ROLE_START_DATE);
 		if (grantStartYear != null) {
-			grant.setGrantStartDate(grantStartYear.toString());
+			grant.setActivityDate(grantStartYear.toString());
 		}else{
 			grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE);
 			if(grantStartYear != null){
-				grant.setGrantStartDate(grantStartYear.toString());
+				grant.setActivityDate(grantStartYear.toString());
 			}			
 		}
 		
+		//TODO: Verify that grant end date is not required.
+		/*
 		RDFNode grantEndDate = solution.get(QueryFieldLabels.ROLE_END_DATE);
 		if (grantEndDate != null) {
 			grant.setGrantEndDate(grantEndDate.toString());
@@ -679,6 +681,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CoPIData> {
 				grant.setGrantEndDate(grantEndDate.toString());
 			}			
 		}
+		*/
 		
 		return grant;
 	}

@@ -11,9 +11,11 @@ import java.util.Set;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIEdge;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPINode;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaboratorComparator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaboration;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 /**
  * @author bkoniden
  * Deepak Konidena
@@ -30,11 +32,11 @@ public class CoPIGraphMLWriter {
 	
 	private final String GRAPHML_FOOTER = "</graphml>";
 	
-	public CoPIGraphMLWriter(CoPIData coPIData){
+	public CoPIGraphMLWriter(CollaborationData coPIData){
 		coPIGraphMLContent = createCoPIGraphMLContent(coPIData);
 	}
 
-	private StringBuilder createCoPIGraphMLContent(CoPIData coPIData) {
+	private StringBuilder createCoPIGraphMLContent(CollaborationData coPIData) {
 		
 		StringBuilder graphMLContent = new StringBuilder();
 		
@@ -62,34 +64,34 @@ public class CoPIGraphMLWriter {
 		return coPIGraphMLContent;
 	}
 
-	private void generateGraphContent(CoPIData coPIData,
+	private void generateGraphContent(CollaborationData coPIData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("\n<graph edgedefault=\"undirected\">\n");
 		
-		if (coPIData.getNodes() != null & coPIData.getNodes().size() > 0) {
+		if (coPIData.getCollaborators() != null & coPIData.getCollaborators().size() > 0) {
 			generateNodeSectionContent(coPIData, graphMLContent);
 		}
 		
-		if (coPIData.getEdges() != null & coPIData.getEdges().size() > 0) {
+		if (coPIData.getCollaborations() != null & coPIData.getCollaborations().size() > 0) {
 			generateEdgeSectionContent(coPIData, graphMLContent);
 		}
 		
 		graphMLContent.append("</graph>\n");
 	}
 
-	private void generateEdgeSectionContent(CoPIData coPIData,
+	private void generateEdgeSectionContent(CollaborationData coPIData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- edges -->\n");
 		
-		Set<CoPIEdge> edges = coPIData.getEdges();
+		Set<Collaboration> edges = coPIData.getCollaborations();
 		
-		List<CoPIEdge> orderedEdges = new ArrayList<CoPIEdge>(edges);
+		List<Collaboration> orderedEdges = new ArrayList<Collaboration>(edges);
 		
-		Collections.sort(orderedEdges, new CoPIEdgeComparator());
+		Collections.sort(orderedEdges, new CollaborationComparator());
 
-		for (CoPIEdge currentEdge : orderedEdges) {
+		for (Collaboration currentEdge : orderedEdges) {
 			
 			/*
 			 * This method actually creates the XML code for a single edge. "graphMLContent"
@@ -99,24 +101,24 @@ public class CoPIGraphMLWriter {
 		}
 	}
 	
-	private void getEdgeContent(StringBuilder graphMLContent, CoPIEdge currentEdge) {
+	private void getEdgeContent(StringBuilder graphMLContent, Collaboration currentEdge) {
 		
 		graphMLContent.append("<edge " 
-									+ "id=\"" + currentEdge.getEdgeID() + "\" " 
-									+ "source=\"" + currentEdge.getSourceNode().getNodeID() + "\" "
-									+ "target=\"" + currentEdge.getTargetNode().getNodeID() + "\" "
+									+ "id=\"" + currentEdge.getCollaborationID() + "\" " 
+									+ "source=\"" + currentEdge.getSourceCollaborator().getCollaboratorID() + "\" "
+									+ "target=\"" + currentEdge.getTargetCollaborator().getCollaboratorID() + "\" "
 									+ ">\n");
 		
 		graphMLContent.append("\t<data key=\"collaborator1\">" 
-								+ currentEdge.getSourceNode().getNodeName() 
+								+ currentEdge.getSourceCollaborator().getCollaboratorName() 
 								+ "</data>\n");
 		
 		graphMLContent.append("\t<data key=\"collaborator2\">" 
-								+ currentEdge.getTargetNode().getNodeName() 
+								+ currentEdge.getTargetCollaborator().getCollaboratorName() 
 								+ "</data>\n");
 		
 		graphMLContent.append("\t<data key=\"number_of_coinvestigated_grants\">" 
-								+ currentEdge.getNumberOfCoInvestigatedGrants()
+								+ currentEdge.getNumOfCollaborations()
 							+ "</data>\n");
 		
 		if (currentEdge.getEarliestCollaborationYearCount() != null) {
@@ -167,13 +169,13 @@ public class CoPIGraphMLWriter {
 	}
 
 	
-	private void generateNodeSectionContent(CoPIData coPIData,
+	private void generateNodeSectionContent(CollaborationData coPIData,
 			StringBuilder graphMLContent) {
 		
 		graphMLContent.append("<!-- nodes -->\n");
 		
-		CoPINode egoNode = coPIData.getEgoNode();
-		Set<CoPINode> piNodes = coPIData.getNodes();
+		Collaborator egoNode = coPIData.getEgoCollaborator();
+		Set<Collaborator> piNodes = coPIData.getCollaborators();
 		
 		/*
 		 * This method actually creates the XML code for a single node. "graphMLContent"
@@ -183,13 +185,13 @@ public class CoPIGraphMLWriter {
 		 * */
 		getNodeContent(graphMLContent, egoNode);
 		
-		List<CoPINode> orderedPINodes = new ArrayList<CoPINode>(piNodes);
+		List<Collaborator> orderedPINodes = new ArrayList<Collaborator>(piNodes);
 		orderedPINodes.remove(egoNode);
 		
-		Collections.sort(orderedPINodes, new CoPINodeComparator());
+		Collections.sort(orderedPINodes, new CollaboratorComparator());
 		
 		
-		for (CoPINode currNode : orderedPINodes) {
+		for (Collaborator currNode : orderedPINodes) {
 			
 			/*
 			 * We have already printed the Ego Node info.
@@ -204,17 +206,17 @@ public class CoPIGraphMLWriter {
 		
 	}
 
-	private void getNodeContent(StringBuilder graphMLContent, CoPINode node) {
+	private void getNodeContent(StringBuilder graphMLContent, Collaborator node) {
 		
 		ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-				   node.getNodeURI());
+				   node.getCollaboratorURI());
 
 		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
 		individualProfileURLParams);
 		
-		graphMLContent.append("<node id=\"" + node.getNodeID() + "\">\n");
-		graphMLContent.append("\t<data key=\"url\">" + node.getNodeURI() + "</data>\n");
-		graphMLContent.append("\t<data key=\"label\">" + node.getNodeName() + "</data>\n");
+		graphMLContent.append("<node id=\"" + node.getCollaboratorID() + "\">\n");
+		graphMLContent.append("\t<data key=\"url\">" + node.getCollaboratorURI() + "</data>\n");
+		graphMLContent.append("\t<data key=\"label\">" + node.getCollaboratorName() + "</data>\n");
 		
 		if (profileURL != null) {
 			graphMLContent.append("\t<data key=\"profile_url\">" + profileURL + "</data>\n");
@@ -222,10 +224,10 @@ public class CoPIGraphMLWriter {
 		
 		
 		graphMLContent.append("\t<data key=\"number_of_investigated_grants\">" 
-								+ node.getNumberOfInvestigatedGrants() 
+								+ node.getNumOfActivities() 
 							+ "</data>\n");
 		
-		if (node.getEarliestGrantYearCount() != null) {
+		if (node.getEarliestActivityYearCount() != null) {
 			
 			/*
 			 * There is no clean way of getting the map contents in java even though
@@ -233,7 +235,7 @@ public class CoPIGraphMLWriter {
 			 * I am feeling dirty just about now. 
 			 * */
 			for (Map.Entry<String, Integer> publicationInfo 
-						: node.getEarliestGrantYearCount().entrySet()) {
+						: node.getEarliestActivityYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"earliest_grant\">" 
 											+ publicationInfo.getKey() 
@@ -246,10 +248,10 @@ public class CoPIGraphMLWriter {
 			
 		}
 		
-		if (node.getLatestGrantYearCount() != null) {
+		if (node.getLatestActivityYearCount() != null) {
 			
 			for (Map.Entry<String, Integer> publicationInfo 
-						: node.getLatestGrantYearCount().entrySet()) {
+						: node.getLatestActivityYearCount().entrySet()) {
 				
 				graphMLContent.append("\t<data key=\"latest_grant\">" 
 											+ publicationInfo.getKey() 
@@ -262,10 +264,10 @@ public class CoPIGraphMLWriter {
 			
 		}
 		
-		if (node.getUnknownGrantYearCount() != null) {
+		if (node.getUnknownActivityYearCount() != null) {
 			
 				graphMLContent.append("\t<data key=\"num_unknown_grant\">" 
-											+ node.getUnknownGrantYearCount() 
+											+ node.getUnknownActivityYearCount() 
 										+ "</data>\n");
 				
 		}
@@ -273,7 +275,7 @@ public class CoPIGraphMLWriter {
 		graphMLContent.append("</node>\n");
 	}
 
-	private void generateKeyDefinitionContent(CoPIData coPIData,
+	private void generateKeyDefinitionContent(CollaborationData coPIData,
 			StringBuilder graphMLContent) {
 		/*
 		 * Generate the key definition content for node. 

@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.YearToEntityCountDataElement;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -36,7 +36,7 @@ public class CoAuthorshipVisCodeGenerator {
 	 * */
 	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_coauthors_vis_container";
 	
-	private Map<String, Set<Node>> yearToUniqueCoauthors;
+	private Map<String, Set<Collaborator>> yearToUniqueCoauthors;
 
 	private Log log;
 
@@ -47,7 +47,7 @@ public class CoAuthorshipVisCodeGenerator {
 	public CoAuthorshipVisCodeGenerator(String individualURI, 
 									  String visMode, 
 									  String visContainer, 
-									  Map<String, Set<Node>> yearToUniqueCoauthors, 
+									  Map<String, Set<Collaborator>> yearToUniqueCoauthors, 
 									  Log log) {
 		
 		this.individualURI = individualURI;
@@ -123,7 +123,7 @@ public class CoAuthorshipVisCodeGenerator {
 		sparklineData.setNumOfYearsToBeRendered(numOfYearsToBeRendered);
 		
 		int uniqueCoAuthorCounter = 0;
-		Set<Node> allCoAuthorsWithKnownAuthorshipYears = new HashSet<Node>();
+		Set<Collaborator> allCoAuthorsWithKnownAuthorshipYears = new HashSet<Collaborator>();
 		List<YearToEntityCountDataElement> yearToUniqueCoauthorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
 		
 		for (int publicationYear = minPubYearConsidered; 
@@ -131,7 +131,7 @@ public class CoAuthorshipVisCodeGenerator {
 					publicationYear++) {
 
 				String publicationYearAsString = String.valueOf(publicationYear);
-				Set<Node> currentCoAuthors = yearToUniqueCoauthors.get(publicationYearAsString);
+				Set<Collaborator> currentCoAuthors = yearToUniqueCoauthors.get(publicationYearAsString);
 				
 				Integer currentUniqueCoAuthors = null;
 				
@@ -164,7 +164,7 @@ public class CoAuthorshipVisCodeGenerator {
 		 * with known & unknown year. We do not want to repeat the count for this collaborator when we present 
 		 * it in the front-end. 
 		 * */
-		Set<Node> totalUniqueCoInvestigators = new HashSet<Node>(allCoAuthorsWithKnownAuthorshipYears);
+		Set<Collaborator> totalUniqueCoInvestigators = new HashSet<Collaborator>(allCoAuthorsWithKnownAuthorshipYears);
 
 		/*
 		 * Total publications will also consider publications that have no year associated with
@@ -226,7 +226,7 @@ public class CoAuthorshipVisCodeGenerator {
 			
 			Map<String, Integer> yearToUniqueCoauthorsCount = new HashMap<String, Integer>();
 			
-			for (Map.Entry<String, Set<Node>> currentYearToCoAuthors : yearToUniqueCoauthors.entrySet()) {
+			for (Map.Entry<String, Set<Collaborator>> currentYearToCoAuthors : yearToUniqueCoauthors.entrySet()) {
 				yearToUniqueCoauthorsCount.put(currentYearToCoAuthors.getKey(), 
 											   currentYearToCoAuthors.getValue().size());
 			}

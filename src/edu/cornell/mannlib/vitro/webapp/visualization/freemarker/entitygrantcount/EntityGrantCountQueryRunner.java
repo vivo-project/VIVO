@@ -12,7 +12,6 @@ import org.apache.commons.logging.LogFactory;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -26,7 +25,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
@@ -107,7 +106,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 	private Entity createJavaValueObjects(ResultSet resultSet) {
 		
 		Entity entity = null;
-		Map<String, Grant> grantURIToVO = new HashMap<String, Grant>();
+		Map<String, Activity> grantURIToVO = new HashMap<String, Activity>();
 		Map<String, SubEntity> subentityURLToVO = new HashMap<String, SubEntity>();
 		Map<String, SubEntity> personURLToVO = new HashMap<String, SubEntity>();
 		
@@ -123,34 +122,36 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 			}
 
 			RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
-			Grant grant;
+			Activity grant;
 
 			if (grantURIToVO.containsKey(grantNode.toString())) {
 				grant = grantURIToVO.get(grantNode.toString());
 
 			} else {
 
-				grant = new Grant(grantNode.toString());
+				grant = new Activity(grantNode.toString());
 				grantURIToVO.put(grantNode.toString(), grant);
 
 				RDFNode grantLabelNode = solution
 						.get(QueryFieldLabels.GRANT_LABEL);
 				if (grantLabelNode != null) {
-					grant.setGrantLabel(grantLabelNode.toString());
+					grant.setActivityLabel(grantLabelNode.toString());
 				}
 
 				RDFNode grantStartDateNode = solution
 						.get(QueryFieldLabels.ROLE_START_DATE);
 				if (grantStartDateNode != null) {
-					grant.setGrantStartDate(grantStartDateNode.toString());
+					grant.setActivityDate(grantStartDateNode.toString());
 				} else {
 					grantStartDateNode = solution
 							.get(QueryFieldLabels.GRANT_START_DATE);
 					if (grantStartDateNode != null) {
-						grant.setGrantStartDate(grantStartDateNode.toString());
+						grant.setActivityDate(grantStartDateNode.toString());
 					}
 				}
 
+				//TODO: Verify grant end date not needed.
+				/*
 				RDFNode grantEndDateNode = solution
 						.get(QueryFieldLabels.ROLE_END_DATE);
 				if (grantEndDateNode != null) {
@@ -162,6 +163,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 						grant.setGrantEndDate(grantEndDateNode.toString());
 					}
 				}
+				*/
 
 			}
 
@@ -183,7 +185,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					subEntity.setIndividualLabel(subEntityLabelNode.toString());
 				}
 				entity.addSubEntity(subEntity);
-				subEntity.addGrant(grant);
+				subEntity.addActivity(grant);
 			}
 
 			RDFNode personURLNode = solution.get(QueryFieldLabels.PERSON_URL);
@@ -216,11 +218,11 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 					
 				}
 				
-				person.addGrant(grant);
+				person.addActivity(grant);
 
 			}
 
-			entity.addGrant(grant);
+			entity.addActivity(grant);
 		}
 
 		/*if (subentityURLToVO.size() == 0 && personURLToVO.size() != 0) {
@@ -297,7 +299,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 		+ SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME + "}"		
 		+ " } ";
 		
-		//System.out.println("\n\nEntity Grant Count query is: "+ sparqlQuery);
+		//System.out.println("\n\nEntity Activity Count query is: "+ sparqlQuery);
 		
 	//	log.debug("\nThe sparql query is :\n" + sparqlQuery);
 		

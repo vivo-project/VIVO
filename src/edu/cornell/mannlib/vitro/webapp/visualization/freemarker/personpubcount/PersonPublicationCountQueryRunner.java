@@ -24,7 +24,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryR
  * 
  * @author cdtank
  */
-public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDocument>> {
+public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activity>> {
 
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
@@ -70,19 +70,19 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 
 	}
 
-	private Set<BiboDocument> createJavaValueObjects(ResultSet resultSet) {
-		Set<BiboDocument> authorDocuments = new HashSet<BiboDocument>();
+	private Set<Activity> createJavaValueObjects(ResultSet resultSet) {
+		Set<Activity> authorDocuments = new HashSet<Activity>();
 		
 		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
 
-			BiboDocument biboDocument = new BiboDocument(
+			Activity biboDocument = new Activity(
 											solution.get(QueryFieldLabels.DOCUMENT_URL)
 												.toString());
 
 			RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
 			if (publicationDateNode != null) {
-				biboDocument.setPublicationDate(publicationDateNode.toString());
+				biboDocument.setActivityDate(publicationDateNode.toString());
 			}
 
 			/*
@@ -132,7 +132,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<BiboDo
 		return sparqlQuery;
 	}
 
-	public Set<BiboDocument> getQueryResult()
+	public Set<Activity> getQueryResult()
 		throws MalformedQueryParametersException {
 
         if (StringUtils.isNotBlank(this.personURI)) {

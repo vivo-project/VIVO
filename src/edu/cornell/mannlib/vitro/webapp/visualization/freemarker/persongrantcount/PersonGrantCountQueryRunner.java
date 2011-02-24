@@ -24,7 +24,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
@@ -35,7 +35,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryR
  * Deepak Konidena
  *
  */
-public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
+public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
@@ -90,13 +90,13 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 		this.log = log;
 	}
 	
-	private Set<Grant> createJavaValueObjects(ResultSet resultSet){
-		Set<Grant> PIGrant = new HashSet<Grant>();
+	private Set<Activity> createJavaValueObjects(ResultSet resultSet){
+		Set<Activity> PIGrant = new HashSet<Activity>();
 		
 		while(resultSet.hasNext()){
 			QuerySolution solution = resultSet.nextSolution();
 			
-			Grant grant = new Grant(solution.get(QueryFieldLabels.GRANT_URL).toString());
+			Activity grant = new Activity(solution.get(QueryFieldLabels.GRANT_URL).toString());
 			
 			RDFNode grantLabelNode = solution.get(QueryFieldLabels.GRANT_LABEL);
 			if(grantLabelNode != null){
@@ -105,14 +105,16 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 			
 			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.ROLE_START_DATE);
 			if(grantStartDateNode != null){
-				grant.setGrantStartDate(grantStartDateNode.toString());
+				grant.setActivityDate(grantStartDateNode.toString());
 			}else {
 				grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
 				if(grantStartDateNode != null){
-					grant.setGrantStartDate(grantStartDateNode.toString());
+					grant.setActivityDate(grantStartDateNode.toString());
 				}
 			}
 			
+			//TODO: verify grant end date is used or not.
+			/*
 			RDFNode grantEndDateNode = solution.get(QueryFieldLabels.ROLE_END_DATE);
 			if(grantEndDateNode != null){
 				grant.setGrantEndDate(grantEndDateNode.toString());
@@ -122,6 +124,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 					grant.setGrantEndDate(grantEndDateNode.toString());
 				}				
 			}
+			*/
 			
 			/*
 			 * Since we are getting grant count for just one PI at a time we need
@@ -221,7 +224,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Grant>>{
 		return sparqlQuery;
 	}
 	
-	public Set<Grant> getQueryResult() throws MalformedQueryParametersException{
+	public Set<Activity> getQueryResult() throws MalformedQueryParametersException{
 		
 		if(StringUtils.isNotBlank(this.personURI)){
 			

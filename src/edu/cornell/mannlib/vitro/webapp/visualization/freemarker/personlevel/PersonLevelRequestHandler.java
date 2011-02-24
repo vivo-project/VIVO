@@ -2,13 +2,9 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personlevel;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 
@@ -23,6 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.Visu
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipVisCodeGenerator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountConstructQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIVisCodeGenerator;
@@ -30,10 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcoun
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount.PersonGrantCountVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount.PersonPublicationCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount.PersonPublicationCountVisCodeGenerator;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.BiboDocument;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoPIData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Grant;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -89,24 +83,24 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
     		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
     		
-    		QueryRunner<CoPIData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+    		QueryRunner<CollaborationData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
            
-            QueryRunner<Set<Grant>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, Dataset, log);
+            QueryRunner<Set<Activity>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, Dataset, log);
             
-            CoPIData coPIData = coPIQueryManager.getQueryResult();
+            CollaborationData coPIData = coPIQueryManager.getQueryResult();
             
 	    	/*
 	    	 * grants over time sparkline
 	    	 */
 			
-			Set<Grant> piGrants = grantQueryManager.getQueryResult();
+			Set<Activity> piGrants = grantQueryManager.getQueryResult();
 			
 	    	/*
 	    	 * Create a map from the year to number of grants. Use the Grant's
 	    	 * parsedGrantYear to populate the data.
 	    	 * */
 	    	Map<String, Integer> yearToGrantCount = 
-	    			UtilityFunctions.getYearToGrantCount(piGrants);	    	
+	    			UtilityFunctions.getYearToActivityCount(piGrants);	    	
 	    	
 	    	PersonGrantCountVisCodeGenerator personGrantCountVisCodeGenerator = 
 	    		new PersonGrantCountVisCodeGenerator(
@@ -128,7 +122,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			egoURI,
 	    			VisualizationFrameworkConstants.FULL_SPARKLINE_VIS_MODE,
 	    			UNIQUE_COPIS_SPARKLINE_VIS_CONTAINER_ID,
-	    			UtilityFunctions.getGrantYearToCoPI(coPIData),
+	    			UtilityFunctions.getActivityYearToCollaborators(coPIData),
 	    			log);
 	    	
 	    	SparklineData uniqueCopisSparklineVO = uniqueCopisVisCodeGenerator
@@ -145,25 +139,25 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         	
         } else {
         	
-        	QueryRunner<CoAuthorshipData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, Dataset, log);
+        	QueryRunner<CollaborationData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, Dataset, log);
         
-        	QueryRunner<Set<BiboDocument>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, Dataset, log);
+        	QueryRunner<Set<Activity>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, Dataset, log);
         	
-        	CoAuthorshipData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
+        	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
         	
         	/*
 			 * When the front-end for the person level vis has to be displayed we render couple of 
 			 * sparklines. This will prepare all the data for the sparklines & other requested 
 			 * files.
 			 * */
-			Set<BiboDocument> authorDocuments = publicationQueryManager.getQueryResult();
+			Set<Activity> authorDocuments = publicationQueryManager.getQueryResult();
 			
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
 	    	Map<String, Integer> yearToPublicationCount = 
-	    			UtilityFunctions.getYearToPublicationCount(authorDocuments);
+	    			UtilityFunctions.getYearToActivityCount(authorDocuments);
 	    														
 	    	/*
 	    	 * Computations required to generate HTML for the sparklines & related context.
@@ -184,7 +178,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			egoURI,
 	    			VisualizationFrameworkConstants.FULL_SPARKLINE_VIS_MODE,
 	    			UNIQUE_COAUTHORS_SPARKLINE_VIS_CONTAINER_ID,
-	    			UtilityFunctions.getPublicationYearToCoAuthors(coAuthorshipData),
+	    			UtilityFunctions.getActivityYearToCollaborators(coAuthorshipData),
 	    			log);
 	    	
 	    	SparklineData uniqueCoauthorsSparklineVO = uniqueCoauthorsVisCodeGenerator
@@ -205,7 +199,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 					String egoURI, 
 					SparklineData egoPubSparklineVO, 
 					SparklineData uniqueCoauthorsSparklineVO, 
-					CoAuthorshipData coAuthorshipVO, 
+					CollaborationData coAuthorshipVO, 
 					VitroRequest vitroRequest) {
 		
 		Map<String, Object> body = new HashMap<String, Object>();
@@ -217,13 +211,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         String title = "";
         
-        if (coAuthorshipVO.getNodes() != null && coAuthorshipVO.getNodes().size() > 0) {
-        	body.put("numOfAuthors", coAuthorshipVO.getNodes().size());
-        	title = coAuthorshipVO.getEgoNode().getNodeName() + " - ";
+        if (coAuthorshipVO.getCollaborators() != null && coAuthorshipVO.getCollaborators().size() > 0) {
+        	body.put("numOfAuthors", coAuthorshipVO.getCollaborators().size());
+        	title = coAuthorshipVO.getEgoCollaborator().getCollaboratorName() + " - ";
 		}
 		
-		if (coAuthorshipVO.getEdges() != null && coAuthorshipVO.getEdges().size() > 0) {
-			body.put("numOfCoAuthorShips", coAuthorshipVO.getEdges().size());
+		if (coAuthorshipVO.getCollaborations() != null && coAuthorshipVO.getCollaborations().size() > 0) {
+			body.put("numOfCoAuthorShips", coAuthorshipVO.getCollaborations().size());
 		}
 		
 		body.put("egoPubSparklineVO", egoPubSparklineVO);
@@ -240,7 +234,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 					String egoURI, 
 					SparklineData egoGrantSparklineVO, 
 					SparklineData uniqueCopisSparklineVO, 
-					CoPIData coPIVO, 
+					CollaborationData coPIVO, 
 					VitroRequest vitroRequest) {
 		
 		Map<String, Object> body = new HashMap<String, Object>();
@@ -251,13 +245,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         String title = "";
         
-        if (coPIVO.getNodes() != null && coPIVO.getNodes().size() > 0) {
-        	body.put("numOfInvestigators", coPIVO.getNodes().size());
-        	title = coPIVO.getEgoNode().getNodeName() + " - ";
+        if (coPIVO.getCollaborators() != null && coPIVO.getCollaborators().size() > 0) {
+        	body.put("numOfInvestigators", coPIVO.getCollaborators().size());
+        	title = coPIVO.getEgoCollaborator().getCollaboratorName() + " - ";
 		}
 		
-		if (coPIVO.getEdges() != null && coPIVO.getEdges().size() > 0) {
-			body.put("numOfCoInvestigations", coPIVO.getEdges().size());
+		if (coPIVO.getCollaborations() != null && coPIVO.getCollaborations().size() > 0) {
+			body.put("numOfCoInvestigations", coPIVO.getCollaborations().size());
 		}
 		
         String	standaloneTemplate = "coPIPersonLevel.ftl";
@@ -271,19 +265,5 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		return new TemplateResponseValues(standaloneTemplate, body);
 		
 	}
-
-	private String getCompleteURL(HttpServletRequest request) throws MalformedURLException {
-		
-		String file = request.getRequestURI();
-//		System.out.println("\ngetRequestURI() -->  "+ file + "\ngetQueryString() -->  "+request.getQueryString()+ "\ngetScheme() -->  "+ request.getScheme());
-//		System.out.println("\ngetServerName() -->  "+ request.getServerName() + "\ngetServerPort() -->  "+request.getServerPort());
-
-		URL reconstructedURL = new URL(request.getScheme(), request.getServerName(), request.getServerPort(), file);
-		
-//		System.out.println("\nReconstructed URL is -->  " + reconstructedURL);
-		
-		return reconstructedURL.toString();
-	}
-
 	
 }
