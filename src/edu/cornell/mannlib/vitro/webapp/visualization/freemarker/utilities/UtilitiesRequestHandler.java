@@ -108,7 +108,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											Dataset, log);
 			
 			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
-											   fieldLabelToOutputFieldLabel);
+											   fieldLabelToOutputFieldLabel, vitroRequest);
 
 		} else if (VisualizationFrameworkConstants.ARE_PUBLICATIONS_AVAILABLE_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -370,7 +370,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 	
 	private String getThumbnailInformation(ResultSet resultSet,
-										   Map<String, String> fieldLabelToOutputFieldLabel) {
+										   Map<String, String> fieldLabelToOutputFieldLabel,
+										   VitroRequest vitroRequest) {
 		
 		String finalThumbNailLocation = "";
 		
@@ -387,7 +388,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 				finalThumbNailLocation = 
 						FileServingHelper
 								.getBytestreamAliasUrl(downloadLocationNode.toString(),
-										fileNameNode.toString());
+										fileNameNode.toString(), 
+										vitroRequest.getSession().getServletContext());
 			}
 		}
 		return finalThumbNailLocation;
