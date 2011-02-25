@@ -39,6 +39,11 @@
 
   <!-- Listeners ****************************************************** -->
 
+  <!-- Reads deploy.properties. Needs to run before almost all other listeners. -->
+  <listener>
+    <listener-class>edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup</listener-class>
+  </listener>
+
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup</listener-class>
   </listener>
