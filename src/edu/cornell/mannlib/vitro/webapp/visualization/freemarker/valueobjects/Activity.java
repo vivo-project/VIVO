@@ -11,7 +11,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Utilit
  * published (or started). 
  * @author cdtank
  */
-public class Activity extends Individual{
+public class Activity extends Individual {
 	
 	private String activityDate;
 

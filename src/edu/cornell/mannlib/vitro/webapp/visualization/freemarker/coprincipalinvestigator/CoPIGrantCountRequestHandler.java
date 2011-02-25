@@ -28,29 +28,33 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
  * @author bkoniden
  * Deepak Konidena
  */
-public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler{
+public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler {
 	
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Co-PI Grant Count does not provide Ajax Response.");
+			Dataset dataset) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Co-PI Grant Count" 
+				+ " does not provide Ajax response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		
-		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
+		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants
+														.INDIVIDUAL_URI_KEY);
 		String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
 		
-		ModelConstructor constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
+		ModelConstructor constructQueryRunner = 
+				new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
-		QueryRunner<CollaborationData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+		QueryRunner<CollaborationData> queryManager = 
+				new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
 		
-		CollaborationData PINodesAndEdges = queryManager.getQueryResult();
+		CollaborationData investigatorNodesAndEdges = queryManager.getQueryResult();
 				
     	/* 
     	 * We will be using the same visualization package for both sparkline & co-pi
@@ -63,7 +67,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareCoPIsCountPerYearDataResponse(PINodesAndEdges);
+				return prepareCoPIsCountPerYearDataResponse(investigatorNodesAndEdges);
 				
 		} else if (VisualizationFrameworkConstants.COPIS_LIST_VIS_MODE
 				.equalsIgnoreCase(visMode)) { 
@@ -71,7 +75,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareCoPIsListDataResponse(PINodesAndEdges);
+				return prepareCoPIsListDataResponse(investigatorNodesAndEdges);
 				
 		} else if (VisualizationFrameworkConstants.COPI_NETWORK_DOWNLOAD_VIS_MODE
 				.equalsIgnoreCase(visMode)) { 
@@ -79,28 +83,27 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareNetworkDownloadDataResponse(PINodesAndEdges);
+				return prepareNetworkDownloadDataResponse(investigatorNodesAndEdges);
 				
 		} else {
     			/*
     			 * When the graphML file is required - based on which co-pi network 
     			 * visualization will be rendered.
     			 * */
-    			return prepareNetworkStreamDataResponse(PINodesAndEdges);
+    			return prepareNetworkStreamDataResponse(investigatorNodesAndEdges);
 		}
 			
 	}
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		/*
 		 * Support for this has ceased to exist. Standalone mode was created only for demo 
 		 * purposes for VIVO Conf.
 		 * */		
-		throw new UnsupportedOperationException("CoPI does not provide Standalone Response.");				 						  
-				 						  
+		throw new UnsupportedOperationException("CoPI does not provide Standalone Response.");
 	}
 	
 	private String getCoPIsListCSVContent(CollaborationData coPIData) {
@@ -141,19 +144,20 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			csvFileContent.append(",");
 			csvFileContent.append(currentEntry.getValue().size());
 			csvFileContent.append(",");
-			csvFileContent.append(StringEscapeUtils.escapeCsv(getCoPINamesAsString(currentEntry.getValue())));
+			csvFileContent.append(StringEscapeUtils.escapeCsv(
+										getCoPINamesAsString(currentEntry.getValue())));
 			csvFileContent.append("\n");
 		}
 		
 		return csvFileContent.toString();
 	}
 
-	private String getCoPINamesAsString(Set<Collaborator> CoPIs) {
+	private String getCoPINamesAsString(Set<Collaborator> coInvestigators) {
 		
 		StringBuilder coPIsMerged = new StringBuilder();
 		
 		String coPISeparator = ";";
-		for(Collaborator currentCoPI : CoPIs){
+		for (Collaborator currentCoPI : coInvestigators) {
 			coPIsMerged.append(currentCoPI.getCollaboratorName() + coPISeparator);
 		}
 		
@@ -167,12 +171,14 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	 * @param piNodesAndEdges
 	 * @param response
 	 */
-	private Map<String, String> prepareCoPIsCountPerYearDataResponse(CollaborationData piNodesAndEdges) {
+	private Map<String, String> prepareCoPIsCountPerYearDataResponse(
+					CollaborationData piNodesAndEdges) {
 		
 		String outputFileName;
 		Map<String, Set<Collaborator>> yearToCoPIs = new TreeMap<String, Set<Collaborator>>();
 		
-		if (piNodesAndEdges.getCollaborators() != null && piNodesAndEdges.getCollaborators().size() > 0) {
+		if (piNodesAndEdges.getCollaborators() != null 
+				&& piNodesAndEdges.getCollaborators().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(piNodesAndEdges
 									.getEgoCollaborator().getCollaboratorName())
@@ -208,7 +214,8 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		
 		if (coPIData.getCollaborators() != null && coPIData.getCollaborators().size() > 0) {
 			
-			outputFileName = UtilityFunctions.slugify(coPIData.getEgoCollaborator().getCollaboratorName()) 
+			outputFileName = UtilityFunctions.slugify(coPIData.getEgoCollaborator()
+															.getCollaboratorName()) 
 									+ "_co-investigators" + ".csv";
 	
 		} else {
@@ -253,7 +260,8 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		
 		if (coPIData.getCollaborators() != null && coPIData.getCollaborators().size() > 0) {
 			
-			outputFileName = UtilityFunctions.slugify(coPIData.getEgoCollaborator().getCollaboratorName()) 
+			outputFileName = UtilityFunctions.slugify(coPIData.getEgoCollaborator()
+															.getCollaboratorName()) 
 									+ "_co-investigator-network.graphml" + ".xml";
 			
 		} else {
@@ -274,8 +282,4 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		return fileData;
 	
 	}
-	
-	
-	
-	
 }

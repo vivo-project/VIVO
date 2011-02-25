@@ -126,7 +126,7 @@ VisualizationRequestHandler {
 
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 		throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest.getParameter(
@@ -140,7 +140,7 @@ VisualizationRequestHandler {
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI, 
-																Dataset, 
+																dataset, 
 																log);
 
 		Set<Activity> authorDocuments = queryManager.getQueryResult();

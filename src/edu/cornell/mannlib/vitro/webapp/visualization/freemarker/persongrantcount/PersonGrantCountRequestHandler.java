@@ -47,13 +47,14 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
+		QueryRunner<Set<Activity>> queryManager = 
+				new PersonGrantCountQueryRunner(personURI, dataset, log);
 		
 		Set<Activity> piGrants = queryManager.getQueryResult();
 		
@@ -64,7 +65,8 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
     	Map<String, Integer> yearToGrantCount = 
 			UtilityFunctions.getYearToActivityCount(piGrants);
 	
-    	Individual investigator = ((PersonGrantCountQueryRunner) queryManager).getPrincipalInvestigator();
+    	Individual investigator = ((PersonGrantCountQueryRunner) queryManager)
+    									.getPrincipalInvestigator();
     	
     	return prepareDataResponse(investigator,
 				piGrants,
@@ -76,7 +78,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
+			Dataset dataset) throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
@@ -87,7 +89,8 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 		
-		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
+		QueryRunner<Set<Activity>> queryManager = 
+				new PersonGrantCountQueryRunner(personURI, dataset, log);
 		
 		Set<Activity> piGrants = queryManager.getQueryResult();
 		
@@ -99,8 +102,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 			UtilityFunctions.getYearToActivityCount(piGrants);
     	
 
-		boolean shouldVIVOrenderVis = 
-			yearToGrantCount.size() > 0 ? true : false;
+		boolean shouldVIVOrenderVis = yearToGrantCount.size() > 0 ? true : false;
 			
 			/*
 	    	 * Computations required to generate HTML for the sparkline & related context.
@@ -125,7 +127,7 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		
 		String personURI = vitroRequest
@@ -137,7 +139,8 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
-		QueryRunner<Set<Activity>> queryManager = new PersonGrantCountQueryRunner(personURI, Dataset, log );
+		QueryRunner<Set<Activity>> queryManager = 
+				new PersonGrantCountQueryRunner(personURI, dataset, log);
 	
 		Set<Activity> piGrants = queryManager.getQueryResult();
 		

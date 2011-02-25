@@ -77,7 +77,8 @@ public class UtilityFunctions {
 	public static Map<String, Set<Collaborator>> getActivityYearToCollaborators(
 										CollaborationData collaborationData) {
 
-		Map<String, Set<Collaborator>> yearToCollaborators = new TreeMap<String, Set<Collaborator>>();
+		Map<String, Set<Collaborator>> yearToCollaborators = new TreeMap<String, 
+																		 Set<Collaborator>>();
 		
 		Collaborator egoCollaborator = collaborationData.getEgoCollaborator();
 		
@@ -218,18 +219,18 @@ public class UtilityFunctions {
 	
 	public static String getCSVDownloadURL(String individualURI, String visType, String visMode) {
 		
-		ParamMap CSVDownloadURLParams = null;
+		ParamMap csvDownloadURLParams = null;
 		
 		if (StringUtils.isBlank(visMode)) {
 			
-			CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+			csvDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 					 individualURI,
 					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
 					 visType);
 			
 		} else {
 			
-			CSVDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+			csvDownloadURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 					 individualURI,
 					 VisualizationFrameworkConstants.VIS_TYPE_KEY,
 					 visType,
@@ -238,31 +239,39 @@ public class UtilityFunctions {
 
 		}
 		
-		String csvDownloadLink = UrlBuilder.getUrl(VisualizationFrameworkConstants.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
-								 CSVDownloadURLParams);
+		String csvDownloadLink = UrlBuilder.getUrl(
+										VisualizationFrameworkConstants
+												.DATA_VISUALIZATION_SERVICE_URL_PREFIX,
+										csvDownloadURLParams);
 		
 		return csvDownloadLink != null ? csvDownloadLink : "" ;
 
 	}
 	
-	public static String getCollaboratorshipNetworkLink(String individualURI, String visType, String visMode) {
+	public static String getCollaboratorshipNetworkLink(String individualURI, 
+														String visType, 
+														String visMode) {
 		
-		ParamMap collaboratorshipNetworkURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-				 individualURI,
-				 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-				 visType,
-				 VisualizationFrameworkConstants.VIS_MODE_KEY,
-				 visMode);
+		ParamMap collaboratorshipNetworkURLParams = new ParamMap(
+					VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					individualURI,
+					VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					visType,
+					VisualizationFrameworkConstants.VIS_MODE_KEY,
+					visMode);
 
 		String collaboratorshipNetworkURL = UrlBuilder.getUrl(
-										VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-										collaboratorshipNetworkURLParams);
+					VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+					collaboratorshipNetworkURLParams);
 		
 		return collaboratorshipNetworkURL != null ? collaboratorshipNetworkURL : "" ;
 	}
 	
 	public static boolean isEntityAPerson(VitroRequest vreq, SubEntity subentity) {
-		return vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subentity.getIndividualURI()).isVClass("http://xmlns.com/foaf/0.1/Person");
+		return vreq.getWebappDaoFactory()
+					.getIndividualDao()
+					.getIndividualByURI(subentity.getIndividualURI())
+					.isVClass("http://xmlns.com/foaf/0.1/Person");
 	}
 
 }

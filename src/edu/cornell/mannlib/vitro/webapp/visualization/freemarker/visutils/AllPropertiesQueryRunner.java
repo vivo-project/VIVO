@@ -36,18 +36,18 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String filterRule, individualURI;
-	private Dataset Dataset;
+	private Dataset dataset;
 
 	private Log log;
 
 	public AllPropertiesQueryRunner(String individualURI,
 							   String filterRule,
-							   Dataset Dataset, 
+							   Dataset dataset, 
 							   Log log) {
 
 		this.individualURI = individualURI;
 		this.filterRule = filterRule;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		this.log = log;
 		
 	}
@@ -74,12 +74,12 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 	}
 
 	private ResultSet executeQuery(String queryText,
-								   Dataset Dataset) {
+								   Dataset dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
 
-        queryExecution = QueryExecutionFactory.create(query, Dataset);
+        queryExecution = QueryExecutionFactory.create(query, dataset);
         return queryExecution.execSelect();
     }
 
@@ -127,7 +127,7 @@ public class AllPropertiesQueryRunner implements QueryRunner<GenericQueryMap> {
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(
 												this.individualURI, 
 												this.filterRule),
-										   this.Dataset);
+										   this.dataset);
 
 		return createJavaValueObjects(resultSet);
 	}

@@ -39,7 +39,8 @@ public class CoPIVisCodeGenerator {
 	 * 			spanning the career of the person & last 10 years at the minimum, in case if
 	 * 			the person started his career in the last 10 years.
 	 * */
-	private static final String DEFAULT_VISCONTAINER_DIV_ID = "unique_coinvestigators_vis_container";
+	private static final String DEFAULT_VISCONTAINER_DIV_ID = 
+								"unique_coinvestigators_vis_container";
 	
 	private Map<String, Set<Collaborator>> yearToUniqueCoPIs;
 
@@ -134,7 +135,8 @@ public class CoPIVisCodeGenerator {
 		
 		int uniqueCoPICounter = 0;
 		Set<Collaborator> allCoPIsWithKnownGrantShipYears = new HashSet<Collaborator>();
-		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
+		List<YearToEntityCountDataElement> yearToUniqueInvestigatorsCountDataTable = 
+					new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
 
@@ -151,7 +153,8 @@ public class CoPIVisCodeGenerator {
 				currentUniqueCoPIs = 0;
 			}
 
-			yearToUniqueInvestigatorsCountDataTable.add(new YearToEntityCountDataElement(uniqueCoPICounter, 
+			yearToUniqueInvestigatorsCountDataTable.add(new YearToEntityCountDataElement(
+					uniqueCoPICounter, 
 					grantYearAsString, 
 					currentUniqueCoPIs));
 			
@@ -169,12 +172,13 @@ public class CoPIVisCodeGenerator {
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueInvestigatorsCountDataTable);
 
 		/*
-		 * This is required only for the sparklines which convey collaborationships like coinvestigatorships
-		 * and coauthorship. There are edge cases where a collaborator can be present for in a collaboration
-		 * with known & unknown year. We do not want to repeat the count for this collaborator when we present 
-		 * it in the front-end. 
+		 * This is required only for the sparklines which convey collaborationships like 
+		 * coinvestigatorships and coauthorship. There are edge cases where a collaborator can be 
+		 * present for in a collaboration with known & unknown year. We do not want to repeat the 
+		 * count for this collaborator when we present it in the front-end. 
 		 * */
-		Set<Collaborator> totalUniqueCoInvestigators = new HashSet<Collaborator>(allCoPIsWithKnownGrantShipYears);
+		Set<Collaborator> totalUniqueCoInvestigators = 
+					new HashSet<Collaborator>(allCoPIsWithKnownGrantShipYears);
 		
 		/*
 		 * Total grants will also consider grants that have no year
@@ -184,9 +188,8 @@ public class CoPIVisCodeGenerator {
 		if (yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR) != null) {
 			unknownYearGrants = yearToUniqueCoPIs.get(
 					VOConstants.DEFAULT_GRANT_YEAR).size();
-			
-			totalUniqueCoInvestigators.addAll(yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR));
-			
+			totalUniqueCoInvestigators.addAll(
+					yearToUniqueCoPIs.get(VOConstants.DEFAULT_GRANT_YEAR));
 		}
 		
 		sparklineData.setTotalCollaborationshipCount(totalUniqueCoInvestigators.size());
@@ -227,18 +230,22 @@ public class CoPIVisCodeGenerator {
 		
 		if (yearToUniqueCoPIs.size() > 0) {
 			
-			sparklineData.setFullTimelineNetworkLink(UtilityFunctions.getCollaboratorshipNetworkLink(individualURI,
-					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-					VisualizationFrameworkConstants.COPI_VIS_MODE));
+			sparklineData.setFullTimelineNetworkLink(
+					UtilityFunctions.getCollaboratorshipNetworkLink(
+							individualURI,
+							VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+							VisualizationFrameworkConstants.COPI_VIS_MODE));
 			
-			sparklineData.setDownloadDataLink(UtilityFunctions
-													.getCSVDownloadURL(
-															individualURI, 
-															VisualizationFrameworkConstants.CO_PI_VIS,
-															VisualizationFrameworkConstants.COPIS_COUNT_PER_YEAR_VIS_MODE));
+			sparklineData.setDownloadDataLink(
+					UtilityFunctions.getCSVDownloadURL(
+							individualURI,
+							VisualizationFrameworkConstants.CO_PI_VIS,
+							VisualizationFrameworkConstants.COPIS_COUNT_PER_YEAR_VIS_MODE));
 			
 			Map<String, Integer> yearToUniqueCoPIsCount = new HashMap<String, Integer>();
-			for (Map.Entry<String, Set<Collaborator>> currentYearToUniqueCoPIsCount : yearToUniqueCoPIs.entrySet()) {
+			for (Map.Entry<String, Set<Collaborator>> currentYearToUniqueCoPIsCount 
+					: yearToUniqueCoPIs.entrySet()) {
+				
 				yearToUniqueCoPIsCount.put(currentYearToUniqueCoPIsCount.getKey(), 
 											   currentYearToUniqueCoPIsCount.getValue().size());
 			}

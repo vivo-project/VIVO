@@ -135,7 +135,8 @@ public class PersonPublicationCountVisCodeGenerator {
 		 * */
 		int renderedFullSparks = 0;
 
-		List<YearToEntityCountDataElement> yearToPublicationCountDataTable = new ArrayList<YearToEntityCountDataElement>();
+		List<YearToEntityCountDataElement> yearToPublicationCountDataTable = 
+				new ArrayList<YearToEntityCountDataElement>();
 		
 		for (int publicationYear = minPubYearConsidered; 
 					publicationYear <= currentYear; 
@@ -159,12 +160,10 @@ public class PersonPublicationCountVisCodeGenerator {
 				 * */
 				renderedFullSparks += currentPublications;
 				publicationCounter++;
-				
 		}
 		
 		sparklineData.setYearToEntityCountDataTable(yearToPublicationCountDataTable);
 		sparklineData.setRenderedSparks(renderedFullSparks);
-		
 
 		/*
 		 * Total publications will also consider publications that have no year associated with
@@ -175,7 +174,6 @@ public class PersonPublicationCountVisCodeGenerator {
 			unknownYearPublications = yearToPublicationCount
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR);
 		}
-		
 		
 		sparklineData.setUnknownYearPublications(unknownYearPublications);
 
@@ -196,19 +194,19 @@ public class PersonPublicationCountVisCodeGenerator {
 		sparklineData.setEarliestRenderedPublicationYear(minPublishedYear);
 		sparklineData.setLatestRenderedPublicationYear(currentYear);
 		
-		
 		if (yearToPublicationCount.size() > 0) {
 			
-			sparklineData.setFullTimelineNetworkLink(UtilityFunctions.getCollaboratorshipNetworkLink(individualURI,
-					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-					VisualizationFrameworkConstants.COAUTHOR_VIS_MODE));
+			sparklineData.setFullTimelineNetworkLink(
+					UtilityFunctions.getCollaboratorshipNetworkLink(
+						individualURI,
+						VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+						VisualizationFrameworkConstants.COAUTHOR_VIS_MODE));
 			
-			sparklineData.setDownloadDataLink(UtilityFunctions
-													.getCSVDownloadURL(
-															individualURI, 
-															VisualizationFrameworkConstants.PERSON_PUBLICATION_COUNT_VIS,
-															""));
-			
+			sparklineData.setDownloadDataLink(
+					UtilityFunctions.getCSVDownloadURL(
+									individualURI, 
+									VisualizationFrameworkConstants.PERSON_PUBLICATION_COUNT_VIS,
+									""));
 		} 
 		
 		/*
@@ -223,7 +221,6 @@ public class PersonPublicationCountVisCodeGenerator {
 		} else {
 			sparklineData.setShortVisMode(false);
 		}
-		
 		
 		return sparklineData; 
 	}

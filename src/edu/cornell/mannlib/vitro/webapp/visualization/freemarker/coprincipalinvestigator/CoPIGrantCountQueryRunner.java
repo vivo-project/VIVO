@@ -69,7 +69,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		+				"?dateTimeIntervalValue core:end ?endDate . "	
 		+				"?endDate core:dateTime ?endDateTimeValue . " 			
 		+			"}"
-		+ 		"} . "	;	
+		+ 		"} . ";	
 	
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
 		+ 		"OPTIONAL {"	
@@ -80,7 +80,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
 		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
 		+			"}"
-		+ 		"}"	;	
+		+ 		"}";	
 	
 	
 	public CoPIGrantCountQueryRunner(String egoURI,
@@ -92,11 +92,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
 		this.edgeIDGenerator = new UniqueIDGenerator();
-
 	}
 	
 	private String generateEgoCoPIquery(String queryURI) {
-
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 			+ "SELECT "
@@ -319,13 +317,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			+ 		"} "			
 			+ "} ";
 
-		//	log.debug("COPI QUERY - " + sparqlQuery);
 		//System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
-		
 		return sparqlQuery;
 	}
 
-	
 	private ResultSet executeQuery(String queryText, Model dataSource) {
 
 		QueryExecution queryExecution = null;
@@ -336,7 +331,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	}
 	
 	public CollaborationData getQueryResult()
-	throws MalformedQueryParametersException {
+		throws MalformedQueryParametersException {
 
 	if (StringUtils.isNotBlank(this.egoURI)) {
 		/*
@@ -360,7 +355,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 	
 	after = System.currentTimeMillis();
 	
-	log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+	log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before));
 	
 	return createQueryResult(resultSet);
 	}
@@ -371,7 +366,8 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			Collaborator collaboratingNode2, 
 			Map<String, Collaboration> edgeUniqueIdentifierToVO) {
 
-		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getCollaboratorID(), 
+		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(
+				collaboratingNode1.getCollaboratorID(), 
 				collaboratingNode2.getCollaboratorID());
 
 		return edgeUniqueIdentifierToVO.get(edgeUniqueIdentifier);
@@ -428,7 +424,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 						egoNode.setCollaboratorName(authorLabelNode.toString());
 					}
 				}
-				log.debug("PI: "+ egoNode.getIndividualLabel());
+				log.debug("PI: " + egoNode.getIndividualLabel());
 				
 				RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
 				Activity grant;
@@ -441,7 +437,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 				}
 				
 				egoNode.addActivity(grant);
-				log.debug("Adding grant: "+ grant.getIndividualLabel());
+				log.debug("Adding grant: " + grant.getIndividualLabel());
 				
 				/*
 				 * After some discussion we concluded that for the purpose of this visualization
@@ -486,9 +482,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 				}
 				
 				coPIsForCurrentGrant.add(coPINode);
-				log.debug("Co-PI for current grant : "+ coPINode.getIndividualLabel());
+				log.debug("Co-PI for current grant : " + coPINode.getIndividualLabel());
 				
-				Collaboration egoCoPIEdge = getExistingEdge(egoNode, coPINode, edgeUniqueIdentifierToVO);
+				Collaboration egoCoPIEdge = 
+						getExistingEdge(egoNode, coPINode, edgeUniqueIdentifierToVO);
 				/*
 				 * If "egoCoPIEdge" is null it means that no edge exists in between the egoNode 
 				 * & current coPINode. Else create a new edge, add it to the edges set & add 
@@ -506,13 +503,11 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 				}
 				
 		}
-		
 			
 			/*
 			 * This method takes out all the PIs & edges between PIs that belong to grants 
 			 * that have more than 100 PIs. We conjecture that these grants do not provide much 
 			 * insight. However, we have left the grants be.
-			 * 
 			 * This method side-effects "nodes" & "edges".  
 			 * */
 			removeLowQualityNodesAndEdges(nodes, 
@@ -527,20 +522,20 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			 * The below sub-routine will take care of,
 			 * 		A - B 
 			 * 
-			 * We are side-effecting "edges" here. The only reason to do this is because we are adding 
-			 * edges en masse for all the co-PIs on all the grants considered so far. The 
-			 * other reason being we dont want to compare against 2 sets of edges (edges created before 
-			 * & co-PI edges created during the course of this method) when we are creating a new 
-			 * edge.
+			 * We are side-effecting "edges" here. The only reason to do this is because we are 
+			 * adding edges en masse for all the co-PIs on all the grants considered so far. The 
+			 * other reason being we dont want to compare against 2 sets of edges (edges created 
+			 * before & co-PI edges created during the course of this method) when we are creating 
+			 * a new edge.
 			 * */
 			createCoPIEdges(grantURLToVO, 
 								grantURLToCoPIs,
 								edges,
 								edgeUniqueIdentifierToVO);
 			
-			
 			after = System.currentTimeMillis();
-			log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+			log.debug("Time taken to iterate through the ResultSet of SELECT queries is in ms: " 
+					+ (after - before));
 			
 			return new CoInvestigationData(egoNode, nodes, edges);
 	}
@@ -564,14 +559,14 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 				&& currentGrantEntry.getValue().size() 
 						<= MAX_PI_PER_GRANT_ALLOWED) {
 			
-			
 			Set<Collaboration> newlyAddedEdges = new HashSet<Collaboration>();
 		
 			/*
 			 * In order to leverage the nested "for loop" for making edges between all the 
 			 * co-PIs we need to create a list out of the set first. 
 			 * */
-			List<Collaborator> coPINodes = new ArrayList<Collaborator>(currentGrantEntry.getValue());
+			List<Collaborator> coPINodes = 
+					new ArrayList<Collaborator>(currentGrantEntry.getValue());
 			Collections.sort(coPINodes, new CollaboratorComparator());
 			
 			int numOfCoPIs = coPINodes.size();
@@ -605,9 +600,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			}
 			edges.addAll(newlyAddedEdges);
 		}
-		
 	}
-		
 	}
 
 	private void removeLowQualityNodesAndEdges(Set<Collaborator> nodes,
@@ -663,9 +656,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		RDFNode grantStartYear = solution.get(QueryFieldLabels.ROLE_START_DATE);
 		if (grantStartYear != null) {
 			grant.setActivityDate(grantStartYear.toString());
-		}else{
+		} else {
 			grantStartYear = solution.get(QueryFieldLabels.GRANT_START_DATE);
-			if(grantStartYear != null){
+			if (grantStartYear != null) {
 				grant.setActivityDate(grantStartYear.toString());
 			}			
 		}

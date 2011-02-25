@@ -67,11 +67,13 @@ public class CoAuthorshipGraphMLWriter {
 
 		graphMLContent.append("\n<graph edgedefault=\"undirected\">\n");
 		
-		if (coAuthorshipData.getCollaborators() != null & coAuthorshipData.getCollaborators().size() > 0) {
+		if (coAuthorshipData.getCollaborators() != null 
+					&& coAuthorshipData.getCollaborators().size() > 0) {
 			generateNodeSectionContent(coAuthorshipData, graphMLContent);
 		}
 		
-		if (coAuthorshipData.getCollaborations() != null & coAuthorshipData.getCollaborations().size() > 0) {
+		if (coAuthorshipData.getCollaborations() != null 
+					&& coAuthorshipData.getCollaborations().size() > 0) {
 			generateEdgeSectionContent(coAuthorshipData, graphMLContent);
 		}
 		
@@ -92,8 +94,8 @@ public class CoAuthorshipGraphMLWriter {
 		for (Collaboration currentEdge : orderedEdges) {
 			
 			/*
-			 * This method actually creates the XML code for a single Collaboration. "graphMLContent"
-			 * is being side-effected. 
+			 * This method actually creates the XML code for a single Collaboration. 
+			 * "graphMLContent" is being side-effected. 
 			 * */
 			getEdgeContent(graphMLContent, currentEdge);
 		}
@@ -103,8 +105,10 @@ public class CoAuthorshipGraphMLWriter {
 		
 		graphMLContent.append("<edge " 
 									+ "id=\"" + currentEdge.getCollaborationID() + "\" " 
-									+ "source=\"" + currentEdge.getSourceCollaborator().getCollaboratorID() + "\" "
-									+ "target=\"" + currentEdge.getTargetCollaborator().getCollaboratorID() + "\" "
+									+ "source=\"" + currentEdge.getSourceCollaborator()
+																	.getCollaboratorID() + "\" "
+									+ "target=\"" + currentEdge.getTargetCollaborator()
+																	.getCollaboratorID() + "\" "
 									+ ">\n");
 		
 		graphMLContent.append("\t<data key=\"collaborator1\">" 
@@ -205,8 +209,9 @@ public class CoAuthorshipGraphMLWriter {
 
 	private void getNodeContent(StringBuilder graphMLContent, Collaborator node) {
 
-		ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-														   node.getCollaboratorURI());
+		ParamMap individualProfileURLParams = 
+					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+								 node.getCollaboratorURI());
 
 		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
 			individualProfileURLParams);

@@ -38,26 +38,31 @@ public class EntityPublicationCountRequestHandler implements
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		if (StringUtils.isBlank(entityURI)){
+		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
-								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset, vitroRequest);
+								.getStaffProvidedOrComputedHighestLevelOrganization(
+											log, 
+											dataset, 
+											vitroRequest);
 		}
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
-			VitroRequest vitroRequest, Log log, Dataset Dataset,
+			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
-		ModelConstructor constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, Dataset, log);
+		ModelConstructor constructQueryRunner = 
+				new EntityPublicationCountConstructQueryRunner(subjectEntityURI, dataset, log);
+		
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
@@ -72,7 +77,7 @@ public class EntityPublicationCountRequestHandler implements
 		} else {	
 		
 			return getSubEntityTypesAndComputeDataResponse(
-					vitroRequest, log, Dataset,
+					vitroRequest, log, dataset,
 					subjectEntityURI, entity);
 		}
 	}
@@ -84,17 +89,19 @@ public class EntityPublicationCountRequestHandler implements
 		
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, "{\"error\" : \"No Publications for this Organization found in VIVO.\"}");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					 "{\"error\" : \"No Publications for this Organization found in VIVO.\"}");
 		return fileData;
 	}
 
 	private Map<String, String> getSubEntityTypesAndComputeDataResponse(
-			VitroRequest vitroRequest, Log log, Dataset Dataset,
+			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI, Entity entity)
 			throws MalformedQueryParametersException {
 		
-		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, Dataset, subjectEntityURI);
+		Map<String, Set<String>> subOrganizationTypesResult = 
+				EntityComparisonUtilityFunctions.getSubEntityTypes(
+						log, dataset, subjectEntityURI);
 		
 		return prepareStandaloneDataResponse(vitroRequest, entity, entity.getSubEntities(),
 				subOrganizationTypesResult);
@@ -102,7 +109,7 @@ public class EntityPublicationCountRequestHandler implements
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
@@ -112,25 +119,26 @@ public class EntityPublicationCountRequestHandler implements
 		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
 		 * */
 		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
-					.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
+					.equalsIgnoreCase(vitroRequest.getParameter(
+							VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
-			if (StringUtils.isNotBlank(entityURI)){
+			if (StringUtils.isNotBlank(entityURI)) {
 				
 				return getSubjectEntityAndGenerateDataResponse(
 								vitroRequest, 
 								log,
-								Dataset, 
+								dataset, 
 								entityURI);
 			} else {
 				
 				return getSubjectEntityAndGenerateDataResponse(
 								vitroRequest, 
 								log,
-								Dataset,
+								dataset,
 								EntityComparisonUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
-												Dataset, 
+												dataset, 
 												vitroRequest));
 			}
 			
@@ -139,7 +147,9 @@ public class EntityPublicationCountRequestHandler implements
 			 * This provides csv download files for the content in the tables.
 			 * */
 			
-			ModelConstructor constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, Dataset, log);
+			ModelConstructor constructQueryRunner = 
+					new EntityPublicationCountConstructQueryRunner(entityURI, dataset, log);
+			
 			Model constructedModel = constructQueryRunner.getConstructedModel();
 			
 			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
@@ -147,10 +157,11 @@ public class EntityPublicationCountRequestHandler implements
 			
 			Entity entity = queryManager.getQueryResult();
 
-			Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-					log, Dataset, entityURI);
+			Map<String, Set<String>> subOrganizationTypesResult = 
+					EntityComparisonUtilityFunctions.getSubEntityTypes(
+							log, dataset, entityURI);
 
-			return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
+			return prepareDataResponse(entity, entity.getSubEntities(), subOrganizationTypesResult);
 			
 		}
 		
@@ -159,7 +170,7 @@ public class EntityPublicationCountRequestHandler implements
 	
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
+			Dataset dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Entity Pub Count does not provide Ajax Response.");
 	}
 
@@ -208,8 +219,10 @@ public class EntityPublicationCountRequestHandler implements
 		
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-				writePublicationsOverTimeJSON(vitroRequest, entity.getSubEntities(), subOrganizationTypesResult));
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
+					 writePublicationsOverTimeJSON(vitroRequest, 
+							 					   entity.getSubEntities(), 
+							 					   subOrganizationTypesResult));
 		return fileData;
 	}
 	
@@ -219,8 +232,9 @@ public class EntityPublicationCountRequestHandler implements
         Portal portal = vreq.getPortal();
         String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
 		
-        String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vreq,
-																						  entityURI);
+        String organizationLabel = EntityComparisonUtilityFunctions
+        									.getEntityLabelFromDAO(vreq,
+        														   entityURI);
         
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("portalBean", portal);
@@ -232,7 +246,7 @@ public class EntityPublicationCountRequestHandler implements
 	}
 
 	/**
-	 * function to generate a json file for year <-> publication count mapping
+	 * Function to generate a json file for year <-> publication count mapping.
 	 * @param vreq 
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
@@ -266,35 +280,33 @@ public class EntityPublicationCountRequestHandler implements
 				yearPubCount.add(currentPubYear);
 			}
 			
-			//log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
-
 			entityJson.setYearToActivityCount(yearPubCount);
-			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
+			entityJson.getOrganizationType().addAll(
+					subOrganizationTypesResult.get(entityJson.getLabel()));
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
 			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
 			
-			if(isPerson){
+			if (isPerson) {
 				entityJson.setVisMode("PERSON");
-			} else{
+			} else {
 				entityJson.setVisMode("ORGANIZATION");
 			}
-		//	setEntityVisMode(entityJson);
 			subEntitiesJson.add(entityJson);
 		}
-		
 		return json.toJson(subEntitiesJson);
-
 	}
 
-	private String getEntityPublicationsPerYearCSVContent(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String getEntityPublicationsPerYearCSVContent(
+							Set<SubEntity> subentities,
+							Map<String, Set<String>> subOrganizationTypesResult) {
 
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Entity Name, Publication Count, Entity Type\n");
 		
-		for(SubEntity subEntity : subentities){
+		for (SubEntity subEntity : subentities) {
 			
 			csvFileContent.append(StringEscapeUtils.escapeCsv(subEntity.getIndividualLabel()));
 			csvFileContent.append(", ");
@@ -303,17 +315,14 @@ public class EntityPublicationCountRequestHandler implements
 			
 			StringBuilder joinedTypes = new StringBuilder();
 			
-			for(String subOrganizationType : subOrganizationTypesResult.get(subEntity.getIndividualLabel())){
+			for (String subOrganizationType : subOrganizationTypesResult
+													.get(subEntity.getIndividualLabel())) {
 				joinedTypes.append(subOrganizationType + "; ");
 			}
 			
 			csvFileContent.append(StringEscapeUtils.escapeCsv(joinedTypes.toString()));
 			csvFileContent.append("\n");
-
 		}
-
 		return csvFileContent.toString();
-
 	}
-
 }	

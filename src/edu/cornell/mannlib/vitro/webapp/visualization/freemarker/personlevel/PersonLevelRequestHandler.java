@@ -55,13 +55,13 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
+			Dataset dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Person Level does not provide Ajax Response.");
 	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Person Level does not provide Data Response.");
 	}
@@ -69,7 +69,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 
         String egoURI = vitroRequest.getParameter(
@@ -79,14 +79,17 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         
         
-        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)){ 
+        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
         	
-        	ModelConstructor constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
+        	ModelConstructor constructQueryRunner = 
+        			new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
     		
-    		QueryRunner<CollaborationData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
+    		QueryRunner<CollaborationData> coPIQueryManager = 
+    				new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
            
-            QueryRunner<Set<Activity>> grantQueryManager = new PersonGrantCountQueryRunner(egoURI, Dataset, log);
+            QueryRunner<Set<Activity>> grantQueryManager = 
+            		new PersonGrantCountQueryRunner(egoURI, dataset, log);
             
             CollaborationData coPIData = coPIQueryManager.getQueryResult();
             
@@ -140,9 +143,11 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         	
         } else {
         	
-        	QueryRunner<CollaborationData> coAuthorshipQueryManager = new CoAuthorshipQueryRunner(egoURI, Dataset, log);
+        	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
+        			new CoAuthorshipQueryRunner(egoURI, dataset, log);
         
-        	QueryRunner<Set<Activity>> publicationQueryManager = new PersonPublicationCountQueryRunner(egoURI, Dataset, log);
+        	QueryRunner<Set<Activity>> publicationQueryManager = 
+        			new PersonPublicationCountQueryRunner(egoURI, dataset, log);
         	
         	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
         	
@@ -196,7 +201,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
 	}
 	
-	private TemplateResponseValues prepareCoAuthorStandaloneResponse (
+	private TemplateResponseValues prepareCoAuthorStandaloneResponse(
 					String egoURI, 
 					SparklineData egoPubSparklineVO, 
 					SparklineData uniqueCoauthorsSparklineVO, 
@@ -212,12 +217,14 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         String title = "";
         
-        if (coAuthorshipVO.getCollaborators() != null && coAuthorshipVO.getCollaborators().size() > 0) {
+        if (coAuthorshipVO.getCollaborators() != null 
+        			&& coAuthorshipVO.getCollaborators().size() > 0) {
         	body.put("numOfAuthors", coAuthorshipVO.getCollaborators().size());
         	title = coAuthorshipVO.getEgoCollaborator().getCollaboratorName() + " - ";
 		}
 		
-		if (coAuthorshipVO.getCollaborations() != null && coAuthorshipVO.getCollaborations().size() > 0) {
+		if (coAuthorshipVO.getCollaborations() != null 
+					&& coAuthorshipVO.getCollaborations().size() > 0) {
 			body.put("numOfCoAuthorShips", coAuthorshipVO.getCollaborations().size());
 		}
 		
@@ -231,7 +238,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		
 	}
 	
-	private TemplateResponseValues prepareCoPIStandaloneResponse (
+	private TemplateResponseValues prepareCoPIStandaloneResponse(
 					String egoURI, 
 					SparklineData egoGrantSparklineVO, 
 					SparklineData uniqueCopisSparklineVO, 

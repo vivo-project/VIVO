@@ -11,20 +11,20 @@ import java.util.LinkedHashSet;
  * Deepak Konidena
  *
  */
-public class Entity extends Individual{
+public class Entity extends Individual {
 	
-	Set<Activity> activities = new HashSet<Activity>();
-	Set<SubEntity> children = new LinkedHashSet<SubEntity>();
+	private Set<Activity> activities = new HashSet<Activity>();
+	private Set<SubEntity> children = new LinkedHashSet<SubEntity>();
 	
-	public Entity(String departmentURI, String departmentLabel){
+	public Entity(String departmentURI, String departmentLabel) {
 		super(departmentURI, departmentLabel);
 	}
 	
-	public void setDepartmentLabel(String departmentURI){
+	public void setDepartmentLabel(String departmentURI) {
 		this.setIndividualLabel(departmentURI);
 	}
 	
-	public String getEntityURI(){
+	public String getEntityURI() {
 		return this.getIndividualURI();
 	}
 	
@@ -32,7 +32,7 @@ public class Entity extends Individual{
 		return activities;
 	}
 
-	public String getEntityLabel(){
+	public String getEntityLabel() {
 		return this.getIndividualLabel();
 	}
 

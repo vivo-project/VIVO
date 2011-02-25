@@ -12,8 +12,9 @@ import java.util.HashSet;
  */
 public class SubEntity extends Individual {
 
-	Set<Activity> activities = new HashSet<Activity>();
-	Map<String, Map<String, String>> personToPositionAndStartYear = new HashMap<String, Map<String, String>>(); 
+	private Set<Activity> activities = new HashSet<Activity>();
+	private Map<String, Map<String, String>> personToPositionAndStartYear = 
+			new HashMap<String, Map<String, String>>(); 
 	
 	public SubEntity(String individualURI) {
 		super(individualURI);
@@ -37,7 +38,7 @@ public class SubEntity extends Individual {
 	}
 	
 	@Override
-	public String toString(){
+	public String toString() {
 		return this.getIndividualLabel();
 	}
 	

@@ -54,8 +54,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			+ "		(str(?PersonLabel) as ?personLabelLit) "
 			+ "		(str(?Document) as ?documentLit) "
 			+ "		(str(?DocumentLabel) as ?documentLabelLit) "
-			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") "
-			+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") ";
+			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ")";
 
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = ""
@@ -63,13 +62,13 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			+ " rdfs:label ?DocumentLabel ."
 			+ "OPTIONAL {  ?Document core:dateTimeValue ?dateTimeValue . " 
 			+ "				?dateTimeValue core:dateTime ?publicationDate } ." 
-			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } ." ;
+			+ "OPTIONAL {  ?Document core:year ?publicationYearUsing_1_1_property } .";
 
-	private static String ENTITY_LABEL;
-	private static String ENTITY_URL;
-	private static String SUBENTITY_LABEL;
-	private static String SUBENTITY_URL;
-
+	private static final String ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
+	private static final String ENTITY_URL = QueryFieldLabels.ORGANIZATION_URL;
+	private static final String SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
+	private static final String SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
+	
 	public EntityPublicationCountQueryRunner(String entityURI,
 			Model dataSource, Log log) {
 
@@ -108,13 +107,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				biboDocument = new Activity(documentNode.toString());
 				biboDocumentURLToVO.put(documentNode.toString(), biboDocument);
 
-//				RDFNode documentLabelNode = solution
-//						.get(QueryFieldLabels.DOCUMENT_LABEL);
-//				if (documentLabelNode != null) {
-//					biboDocument.setDocumentLabel(documentLabelNode.toString());
-//				}
-
-				RDFNode publicationDateNode = solution.get(QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+				RDFNode publicationDateNode = solution.get(QueryFieldLabels
+																.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {
 					biboDocument.setActivityDate(publicationDateNode.toString());
 				}
@@ -163,8 +157,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 				
 				/*
 				 * This makes sure that either,
-				 * 		1. the parent organization is a department-like organization with no organizations 
-				 * beneath it, or 
+				 * 		1. the parent organization is a department-like organization with no 
+				 * organizations beneath it, or 
 				 * 		2. the parent organizations has both sub-organizations and people directly 
 				 * attached to that organizations e.g. president of a university.
 				 * */
@@ -187,9 +181,9 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 			
 		}
 		
-	//	log.debug("Returning entity that contains the following set of subentities: "+entity.getSubEntities().toString());
 		after = System.currentTimeMillis();
-		log.debug("Time taken to iterate through the ResultSet of SELECT queries is in milliseconds: " + (after - before) );
+		log.debug("Time taken to iterate through the ResultSet of SELECT queries is in ms: " 
+				+ (after - before));
 
 		return entity;
 	}
@@ -198,27 +192,12 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 		QueryExecution queryExecution = null;
 		Query query = QueryFactory.create(
-				getSparqlQuery(queryURI), SYNTAX);
+				getSparqlQueryForOrganization(queryURI), SYNTAX);
 		queryExecution = QueryExecutionFactory.create(query, dataSource);
 		return queryExecution.execSelect();
 	}
 
-	private String getSparqlQuery(String queryURI) {
-		
-		String result = "";
-			
-		ENTITY_URL = QueryFieldLabels.ORGANIZATION_URL;
-		ENTITY_LABEL = QueryFieldLabels.ORGANIZATION_LABEL;
-		SUBENTITY_URL = QueryFieldLabels.SUBORGANIZATION_URL;
-		SUBENTITY_LABEL = QueryFieldLabels.SUBORGANIZATION_LABEL;
-
-		result = getSparqlQueryForOrganization(queryURI);
-
-		return result;
-	}
-
-	
-	private String getSparqlQueryForOrganization(String queryURI){
+	private String getSparqlQueryForOrganization(String queryURI) {
 		
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 		+ "SELECT 	(str(?organizationLabel) as ?organizationLabelLit) "
@@ -229,7 +208,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		+ "WHERE { " + "<" + queryURI + "> rdfs:label ?organizationLabel ."
 		+ "{ "
 		+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization ."
-		+ "?subOrganization rdfs:label ?subOrganizationLabel ; core:organizationForPosition ?Position . "
+		+ "?subOrganization rdfs:label ?subOrganizationLabel ;" 
+			+ " core:organizationForPosition ?Position . "
 		+ " ?Position core:positionForPerson ?Person ."
 		+ " ?Person  core:authorInAuthorship ?Resource ;   rdfs:label ?PersonLabel . "
 		+ " ?Resource core:linkedInformationResource ?Document .  "
@@ -242,10 +222,8 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		+ " ?Resource core:linkedInformationResource ?Document ."
 		+ SPARQL_QUERY_COMMON_WHERE_CLAUSE + "}"
 		+ "}";
-		
-		//System.out.println("\n\nEntity Pub Count query is: "+ sparqlQuery);
+
 		log.debug("\nThe sparql query is :\n" + sparqlQuery);
-		
 		return sparqlQuery;
 
 	}
@@ -253,7 +231,6 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 	public Entity getQueryResult() throws MalformedQueryParametersException {
 
 		if (StringUtils.isNotBlank(this.entityURI)) {
-
 			/*
 			 * To test for the validity of the URI submitted.
 			 */
@@ -278,12 +255,9 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 		
 		after = System.currentTimeMillis();
 		
-		log.debug("Time taken to execute the SELECT queries is in milliseconds: " + (after - before) );
+		log.debug("Time taken to execute the SELECT queries is in milliseconds: " 
+						+ (after - before));
 		
 		return createJavaValueObjects(resultSet);
 	}
-
 }
-
-
-

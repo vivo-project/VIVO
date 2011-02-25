@@ -40,16 +40,19 @@ public class EntityGrantCountRequestHandler implements
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		if (StringUtils.isBlank(entityURI)){
+		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
-								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset, vitroRequest);
+								.getStaffProvidedOrComputedHighestLevelOrganization(
+										log,
+										dataset, 
+										vitroRequest);
 			
 		}
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
@@ -57,7 +60,7 @@ public class EntityGrantCountRequestHandler implements
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 
 		String entityURI = vitroRequest
@@ -67,25 +70,26 @@ public class EntityGrantCountRequestHandler implements
 		 * This will provide the data in json format mainly used for standalone temporal vis. 
 		 * */
 		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
-					.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
+					.equalsIgnoreCase(vitroRequest
+							.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
-			if (StringUtils.isNotBlank(entityURI)){
+			if (StringUtils.isNotBlank(entityURI)) {
 				
 				return getSubjectEntityAndGenerateDataResponse(
 								vitroRequest, 
 								log,
-								Dataset, 
+								dataset, 
 								entityURI);
 			} else {
 				
 				return getSubjectEntityAndGenerateDataResponse(
 								vitroRequest, 
 								log,
-								Dataset,
+								dataset,
 								EntityComparisonUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
-												Dataset, 
+												dataset, 
 												vitroRequest));
 			}
 			
@@ -93,8 +97,9 @@ public class EntityGrantCountRequestHandler implements
 			/*
 			 * This provides csv download files for the content in the tables.
 			 * */		
+		ModelConstructor constructQueryRunner = 
+				new EntityGrantCountConstructQueryRunner(entityURI, dataset, log);
 
-		ModelConstructor constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
@@ -103,10 +108,11 @@ public class EntityGrantCountRequestHandler implements
 		Entity entity = queryManager.getQueryResult();
 		
 		
-		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, Dataset, entityURI);
+		Map<String, Set<String>> subOrganizationTypesResult = 
+				EntityComparisonUtilityFunctions.getSubEntityTypes(
+						log, dataset, entityURI);
 
-		return prepareDataResponse(entity, entity.getSubEntities(),subOrganizationTypesResult);
+		return prepareDataResponse(entity, entity.getSubEntities(), subOrganizationTypesResult);
 		
 		}
 
@@ -114,16 +120,20 @@ public class EntityGrantCountRequestHandler implements
 	
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Entity Grant Count does not provide Ajax Response.");
+			Dataset dataset) throws MalformedQueryParametersException {
+		
+		throw new UnsupportedOperationException("Entity Grant Count " 
+				+ "does not provide Ajax response.");
 	}
 	
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
-			VitroRequest vitroRequest, Log log, Dataset Dataset,
+			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
-		ModelConstructor constructQueryRunner = new EntityGrantCountConstructQueryRunner(subjectEntityURI, Dataset, log);
+		ModelConstructor constructQueryRunner = 
+				new EntityGrantCountConstructQueryRunner(subjectEntityURI, dataset, log);
+		
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
@@ -136,18 +146,19 @@ public class EntityGrantCountRequestHandler implements
 		} else {	
 		
 			return getSubEntityTypesAndComputeDataResponse(
-					vitroRequest, log, Dataset,
+					vitroRequest, log, dataset,
 					subjectEntityURI, entity);
 		}
 	}
 
 	private Map<String, String> getSubEntityTypesAndComputeDataResponse(
-			VitroRequest vitroRequest, Log log, Dataset Dataset,
+			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectOrganization, Entity entity)
 			throws MalformedQueryParametersException {
 		
-		Map<String, Set<String>> subOrganizationTypesResult = EntityComparisonUtilityFunctions.getSubEntityTypes(
-				log, Dataset, subjectOrganization);
+		Map<String, Set<String>> subOrganizationTypesResult = 
+				EntityComparisonUtilityFunctions.getSubEntityTypes(
+						log, dataset, subjectOrganization);
 		
 		return prepareStandaloneDataResponse(vitroRequest, entity, subOrganizationTypesResult);
 	}
@@ -160,7 +171,8 @@ public class EntityGrantCountRequestHandler implements
 		
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, "{\"error\" : \"No Grants for this Organization found in VIVO.\"}");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					 "{\"error\" : \"No Grants for this Organization found in VIVO.\"}");
 		return fileData;
 	}
 	
@@ -175,7 +187,9 @@ public class EntityGrantCountRequestHandler implements
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-				writeGrantsOverTimeJSON(vitroRequest, entity.getSubEntities(), subOrganizationTypesResult));
+					 writeGrantsOverTimeJSON(vitroRequest, 
+							 				 entity.getSubEntities(), 
+							 				 subOrganizationTypesResult));
 		return fileData;
 	}
 
@@ -234,12 +248,14 @@ public class EntityGrantCountRequestHandler implements
 	}
 	
 	/**
-	 * function to generate a json file for year <-> grant count mapping
+	 * Function to generate a json file for year <-> grant count mapping.
 	 * @param vreq 
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
 	 */
-	private String writeGrantsOverTimeJSON(VitroRequest vreq, Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+	private String writeGrantsOverTimeJSON(VitroRequest vreq, 
+										   Set<SubEntity> subentities, 
+										   Map<String, Set<String>> subOrganizationTypesResult) {
 
 		Gson json = new Gson();
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
@@ -267,15 +283,14 @@ public class EntityGrantCountRequestHandler implements
 			}
 
 			entityJson.setYearToActivityCount(yearGrantCount);
-			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
+			entityJson.getOrganizationType().addAll(
+					subOrganizationTypesResult.get(entityJson.getLabel()));
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
-			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
-			
-			if(isPerson){
+			if (UtilityFunctions.isEntityAPerson(vreq, subentity)) {
 				entityJson.setVisMode("PERSON");
-			} else{
+			} else {
 				entityJson.setVisMode("ORGANIZATION");
 			}			
 			
@@ -285,15 +300,16 @@ public class EntityGrantCountRequestHandler implements
 		return json.toJson(subEntitiesJson);
 
 	}
-	
-	
-	private String getEntityGrantsPerYearCSVContent(Set<SubEntity> subentities, Map<String, Set<String>> subOrganizationTypesResult) {
+
+	private String getEntityGrantsPerYearCSVContent(
+					Set<SubEntity> subentities, 
+					Map<String, Set<String>> subOrganizationTypesResult) {
 
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Entity Name, Grant Count, Entity Type\n");
 		
-		for(SubEntity subEntity : subentities){
+		for (SubEntity subEntity : subentities) {
 			
 			csvFileContent.append(StringEscapeUtils.escapeCsv(subEntity.getIndividualLabel()));
 			csvFileContent.append(", ");
@@ -302,7 +318,8 @@ public class EntityGrantCountRequestHandler implements
 			
 			StringBuilder joinedTypes = new StringBuilder();
 			
-			for(String subOrganizationType : subOrganizationTypesResult.get(subEntity.getIndividualLabel())){
+			for (String subOrganizationType : subOrganizationTypesResult
+													.get(subEntity.getIndividualLabel())) {
 				joinedTypes.append(subOrganizationType + "; ");
 			}
 			
@@ -312,6 +329,4 @@ public class EntityGrantCountRequestHandler implements
 
 		return csvFileContent.toString();
 	}	
-	
-	
 }

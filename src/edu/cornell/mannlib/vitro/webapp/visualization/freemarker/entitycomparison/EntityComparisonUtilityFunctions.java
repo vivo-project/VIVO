@@ -69,7 +69,7 @@ public class EntityComparisonUtilityFunctions {
 		return "";
 	}
 
-	public static String getHighestLevelOrganizationURI(Log log, Dataset Dataset)
+	public static String getHighestLevelOrganizationURI(Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		
 		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
@@ -80,7 +80,8 @@ public class EntityComparisonUtilityFunctions {
 
 		String aggregationRules = "(count(?organization) AS ?numOfChildren)";
 
-		String whereClause = "?organization rdf:type foaf:Organization ; rdfs:label ?organizationLabel . \n"
+		String whereClause = "?organization rdf:type foaf:Organization ;" 
+						+ " rdfs:label ?organizationLabel . \n"
 				+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
 				+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
 				+ "FILTER ( !bound(?parent) ). \n";
@@ -90,7 +91,7 @@ public class EntityComparisonUtilityFunctions {
 
 		QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = new GenericQueryRunner(
 				fieldLabelToOutputFieldLabel, aggregationRules, whereClause,
-				groupOrderClause, Dataset, log);
+				groupOrderClause, dataset, log);
 
 		String highestLevelOrgURI = EntityComparisonUtilityFunctions
 				.getHighestLevelOrganizationURI(
@@ -100,14 +101,20 @@ public class EntityComparisonUtilityFunctions {
 	}
 	
 	public static Map<String, Set<String>> getSubEntityTypes(Log log,
-			Dataset Dataset, String subjectOrganization)
+			Dataset dataset, String subjectOrganization)
 			throws MalformedQueryParametersException {
 		
-		ModelConstructor constructQueryRunnerForSubOrganizationTypes = new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, Dataset, log) ;
-		Model constructedModelForSubOrganizationTypes = constructQueryRunnerForSubOrganizationTypes.getConstructedModel();
+		ModelConstructor constructQueryRunnerForSubOrganizationTypes = 
+				new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, 
+																   dataset, 
+																   log);
 		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(
-				subjectOrganization, constructedModelForSubOrganizationTypes, log);
+		Model constructedModelForSubOrganizationTypes = constructQueryRunnerForSubOrganizationTypes
+															.getConstructedModel();
+		
+		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = 
+				new EntitySubOrganizationTypesQueryRunner(
+						subjectOrganization, constructedModelForSubOrganizationTypes, log);
 
 		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
 				.getQueryResult();
@@ -130,12 +137,13 @@ public class EntityComparisonUtilityFunctions {
 	}
 	
 	public static String getStaffProvidedOrComputedHighestLevelOrganization(Log log,
-			Dataset Dataset, VitroRequest vitroRequest)
+			Dataset dataset, VitroRequest vitroRequest)
 			throws MalformedQueryParametersException {
 		
 		String finalHighestLevelOrganizationURI = "";
 		
-		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.topLevelOrg");
+		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getBean(vitroRequest)
+					.getProperty("visualization.topLevelOrg");
 		
 		/*
 		 * First checking if the staff has provided highest level organization in deploy.properties
@@ -150,12 +158,12 @@ public class EntityComparisonUtilityFunctions {
 			IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
 		    
 			if (iri.hasViolation(false)) {
-				finalHighestLevelOrganizationURI = EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log, Dataset);
+				finalHighestLevelOrganizationURI = EntityComparisonUtilityFunctions
+					.getHighestLevelOrganizationURI(log, dataset);
 		    } else {
 		    	finalHighestLevelOrganizationURI = staffProvidedHighestLevelOrganization;
 		    }
 		}
 		return finalHighestLevelOrganizationURI;
 	}
-	
 }

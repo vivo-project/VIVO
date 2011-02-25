@@ -24,21 +24,21 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 
-public class EntityPublicationCountConstructQueryRunner implements ModelConstructor{
+public class EntityPublicationCountConstructQueryRunner implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	private String egoURI;
 	
-	private Dataset Dataset;
+	private Dataset dataset;
 	
 	private Log log = LogFactory.getLog(EntityPublicationCountConstructQueryRunner.class.getName());
 	
 	private long before, after;
 	
-	public EntityPublicationCountConstructQueryRunner(String egoURI, Dataset Dataset, Log log){
+	public EntityPublicationCountConstructQueryRunner(String egoURI, Dataset dataset, Log log) {
 		this.egoURI = egoURI;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		//this.log = log;		
 	}
 	
@@ -46,21 +46,21 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 		
 		String sparqlQuery = 
 			 "CONSTRUCT { " 
-			+	"<"+queryURI+ ">  rdfs:label ?organizationLabel ."
+			+	"<" + queryURI + ">  rdfs:label ?organizationLabel ."
 			+ "}"	
 			+ "WHERE {"
-			+	"<"+queryURI+ ">  rdfs:label ?organizationLabel "
+			+	"<" + queryURI + ">  rdfs:label ?organizationLabel "
 			+ "}";
 				
 		return sparqlQuery;
 	}
 	
-	private String generateConstructQueryForSubOrganizations(String queryURI){
+	private String generateConstructQueryForSubOrganizations(String queryURI) {
 		
 		String sparqlQuery = 			 
 		
 			"CONSTRUCT { "
-			+	"<"+queryURI+ "> core:hasSubOrganization ?subOrganization . "
+			+	"<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 			+	"?subOrganization rdfs:label ?subOrganizationLabel . "
 			+ 	"?subOrganization core:organizationForPosition ?Position . "
 			+   "?Position core:positionForPerson ?Person . "
@@ -71,18 +71,16 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 			+	"?Document rdfs:label ?DocumentLabel . "
 			+   "?Document core:dateTimeValue ?dateTimeValue . "
 			+   "?dateTimeValue core:dateTime ?publicationDate . "
-//			+   "?Document core:year ?publicationYearUsing_1_1_property "
-			+"}"
+			+ "}"
 			+ "WHERE { "
 			+	"{"
-				+	"<"+queryURI+ "> core:hasSubOrganization ?subOrganization . "
+				+	"<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 				+	"?subOrganization rdfs:label ?subOrganizationLabel . "
 				+ 	"?subOrganization core:organizationForPosition ?Position . "
 				+   "?Position core:positionForPerson ?Person . "
 				+	"?Person  core:authorInAuthorship ?Resource . "
 				+	"?Person rdfs:label ?PersonLabel . "
 				+	"?Resource core:linkedInformationResource ?Document . " 
-	//			+	"?Document rdf:type bibo:Document . "
 				+	"?Document rdfs:label ?DocumentLabel "
 			+	"}"
 			+  	"UNION "
@@ -90,24 +88,17 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
             +   "?Document core:dateTimeValue ?dateTimeValue . "
             +   "?dateTimeValue core:dateTime ?publicationDate "
             +   "}"
-//            +   "UNION "
-//            +   "{"
-//            +   "?Document core:year ?publicationYearUsing_1_1_property "
-//            +   "}"
-            
-			+ "}" ;
-					
-		
+			+ "}";
+
 		return sparqlQuery;
-	
 	}
 
-	private String generateConstructQueryForPersons(String queryURI){
+	private String generateConstructQueryForPersons(String queryURI) {
 		
 		String sparqlQuery = 			 
 		
 			"CONSTRUCT { "
-			+	"<"+queryURI+ "> core:organizationForPosition ?Position . "
+			+	"<" + queryURI + "> core:organizationForPosition ?Position . "
 			+   "?Position core:positionForPerson ?Person . "
 			+	"?Person  core:authorInAuthorship ?Resource . "
 			+	"?Person rdfs:label ?PersonLabel . "
@@ -116,16 +107,14 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 			+	"?Document rdfs:label ?DocumentLabel . "
             +   "?Document core:dateTimeValue ?dateTimeValue . "
             +   "?dateTimeValue core:dateTime ?publicationDate . "
-//            +   "?Document core:year ?publicationYearUsing_1_1_property ."
-			+"}"
+			+ "}"
 			+ "WHERE { "
 			+	"{"
-				+	"<"+queryURI+ "> core:organizationForPosition ?Position . "
+				+	"<" + queryURI + "> core:organizationForPosition ?Position . "
 				+   "?Position core:positionForPerson ?Person . "
 				+	"?Person  core:authorInAuthorship ?Resource . "
 				+	"?Person rdfs:label ?PersonLabel . "
 				+	"?Resource core:linkedInformationResource ?Document . " 
-	//			+	"?Document rdf:type bibo:Document . "
 				+	"?Document rdfs:label ?DocumentLabel "
 			+	"}"
 			+ 	"UNION"
@@ -133,16 +122,9 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 			+   "?Document core:dateTimeValue ?dateTimeValue . "
 			+   "?dateTimeValue core:dateTime ?publicationDate "
 			+   "}"
-//			+   "UNION "
-//			+   "{"
-//			+   "?Document core:year ?publicationYearUsing_1_1_property "
-//			+   "}"
-
-			+ "}" ;
-					
+			+ "}";
 		
 		return sparqlQuery;
-	
 	}
 	
 //	private String generateConstructQueryForDocumentDateTimeValueOneLevelDeep(String queryURI){
@@ -217,7 +199,7 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 //	
 //	}		
 	
-	private Model executeQuery(Set<String> constructQueries, Dataset Dataset) {
+	private Model executeQuery(Set<String> constructQueries, Dataset dataset) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
 
@@ -227,16 +209,17 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
             
         	Query query = null;
         	
-        	try{
-        		query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() + queryString, SYNTAX);        		
-        	}catch(Throwable th){
-                log.error("Could not create CONSTRUCT SPARQL query for query " +
-                        "string. " + th.getMessage());
+        	try {
+        		query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() 
+        					+ queryString, SYNTAX);        		
+        	} catch (Throwable th) {
+                log.error("Could not create CONSTRUCT SPARQL query for query " 
+                			+ "string. " + th.getMessage());
                 log.error(queryString);
         	}
         	
             QueryExecution qe = QueryExecutionFactory.create(
-                    query, Dataset);
+                    query, dataset);
             
             try {
                 qe.execConstruct(constructedModel);
@@ -245,9 +228,9 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
             }
         
             after = System.currentTimeMillis();
-            log.debug("Time taken to execute the CONSTRUCT queries is in milliseconds: " + (after - before) );
+            log.debug("Time taken to execute the CONSTRUCT queries is in milliseconds: " 
+            				+ (after - before));
         }	
-       // constructedModel.write(System.out);
         return constructedModel;
 	}	
 	
@@ -275,7 +258,7 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 	populateConstructQueries(constructQueries);
 	
 	Model model	= executeQuery(constructQueries,
-									   this.Dataset);
+									   this.dataset);
 	
 	return model;
 		
@@ -286,8 +269,7 @@ public class EntityPublicationCountConstructQueryRunner implements ModelConstruc
 		constructQueries.add(generateConstructQueryForOrganizationLabel(this.egoURI));
 		constructQueries.add(generateConstructQueryForSubOrganizations(this.egoURI));
 		constructQueries.add(generateConstructQueryForPersons(this.egoURI));
-//		constructQueries.add(generateConstructQueryForDocumentDateTimeValueOneLevelDeep(this.egoURI));
-//		constructQueries.add(generateConstructQueryForDocumentDateTimeValue(this.egoURI));
-		
+//	constructQueries.add(generateConstructQueryForDocumentDateTimeValueOneLevelDeep(this.egoURI));
+//	constructQueries.add(generateConstructQueryForDocumentDateTimeValue(this.egoURI));
 	}	
 }

@@ -2,7 +2,9 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -11,7 +13,6 @@ import org.apache.commons.logging.LogFactory;
 import com.hp.hpl.jena.iri.IRI;
 import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.iri.Violation;
-import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -19,24 +20,21 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.Syntax;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Model;
-
+import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
-import java.util.Set;
-import java.util.HashSet;
-
 
 /**
  * @author bkoniden
  * Deepak Konidena
  */
-public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<String, Set<String>>> {
+public class EntitySubOrganizationTypesQueryRunner 
+				implements QueryRunner<Map<String, Set<String>>> {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
@@ -45,17 +43,18 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 	private Log log = LogFactory.getLog(EntitySubOrganizationTypesQueryRunner.class.getName());
 	
 	private static final String SPARQL_QUERY_SELECT_CLAUSE = ""
-		+ "		(str(?organizationLabel) as ?"+QueryFieldLabels.ORGANIZATION_LABEL+") "
-		+ "		(str(?subOrganizationLabel) as ?"+QueryFieldLabels.SUBORGANIZATION_LABEL+") "
-		+ "		(str(?subOrganizationType) as ?"+QueryFieldLabels.SUBORGANIZATION_TYPE +")"
-		+ "		(str(?subOrganizationTypeLabel) as ?"+QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL+") "
+		+ "		(str(?organizationLabel) as ?" + QueryFieldLabels.ORGANIZATION_LABEL + ") "
+		+ "		(str(?subOrganizationLabel) as ?" + QueryFieldLabels.SUBORGANIZATION_LABEL + ") "
+		+ "		(str(?subOrganizationType) as ?" + QueryFieldLabels.SUBORGANIZATION_TYPE + ")"
+		+ "		(str(?subOrganizationTypeLabel) as ?" 
+						+ QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL + ") "
 		+ " 	(str(?Person) as ?personLit) "            
 		+ "		(str(?PersonLabel) as ?personLabelLit) "                      
 		+ "		(str(?PersonTypeLabel) as ?personTypeLabelLit) ";
 
 	
 	public EntitySubOrganizationTypesQueryRunner(String entityURI,
-			Model dataSource, Log log){
+			Model dataSource, Log log) {
 		
 		this.entityURI = entityURI;
 		this.dataSource = dataSource;
@@ -83,35 +82,29 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				+ queryURI
 				+ "> rdfs:label ?organizationLabel . "
 				+ "{ "
-				+ "<"+ queryURI + "> core:hasSubOrganization ?subOrganization .  "
-				+ "?subOrganization rdfs:label ?subOrganizationLabel ; rdf:type ?subOrganizationType ;" 
+				+ "<" + queryURI + "> core:hasSubOrganization ?subOrganization .  "
+				+ "?subOrganization rdfs:label ?subOrganizationLabel ;" 
+					+ " rdf:type ?subOrganizationType ;" 
 				+ " core:organizationForPosition ?Position . "
 				+ "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
 				+ "?Position core:positionForPerson ?Person ."
 				+ "}"
 				+ "UNION "
 				+ "{ "
-				+ "<"+ queryURI + "> core:organizationForPosition ?Position . "
+				+ "<" + queryURI + "> core:organizationForPosition ?Position . "
 				+ "?Position core:positionForPerson ?Person . "
 				+ "?Person  rdfs:label ?PersonLabel ; rdf:type ?PersonType . "
 				+ "?PersonType rdfs:label ?PersonTypeLabel . "
 				+ "}"
 				+ "}";
-
-		
-	//	log.debug("\n SubOrganizationTypesQuery :" + sparqlQuery);
-
 		return sparqlQuery;
-
 	}
 	
 	private Map<String, Set<String>> createJavaValueObjects(ResultSet resultSet) {
 
-	//	Map<String, Set<String>> subOrganizationLabelToTypes = new HashMap<String, Set<String>>();
-	//	Map<String, Set<String>> personLabelToTypes = new HashMap<String, Set<String>>();
 		Map<String, Set<String>> subEntityLabelToTypes = new HashMap<String, Set<String>>();
 		
-		while(resultSet.hasNext()){
+		while (resultSet.hasNext()) {
 			
 			QuerySolution solution = resultSet.nextSolution();
 			
@@ -165,20 +158,13 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				}
 			}			
 		}		
-		
-//		System.out.println("\n\nSub Organization Label Types Size --> " + subOrganizationLabelToTypes.size());
-//		System.out.println("\n\nPeople Label Types Size --> " + personLabelToTypes.size());
-		
-//		log.debug("Sub Organization Label Types Size : " + subEntityLabelToTypes.size());
-		
+
 		return subEntityLabelToTypes;
-		//return (subOrganizationLabelToTypes.size() != 0 )? subOrganizationLabelToTypes : personLabelToTypes ;
 	}
 
 	public Map<String, Set<String>> getQueryResult() throws MalformedQueryParametersException {
 
 		if (StringUtils.isNotBlank(this.entityURI)) {
-
 			/*
 			 * To test for the validity of the URI submitted.
 			 */
@@ -191,16 +177,13 @@ public class EntitySubOrganizationTypesQueryRunner implements QueryRunner<Map<St
 				throw new MalformedQueryParametersException(
 						"URI provided for an entity is malformed.");
 			}
-
 		} else {
 			throw new MalformedQueryParametersException(
 					"URL parameter is either null or empty.");
 		}
 
 		ResultSet resultSet = executeQuery(this.entityURI, this.dataSource);
-
 		return createJavaValueObjects(resultSet);
 	}
-
 }
 

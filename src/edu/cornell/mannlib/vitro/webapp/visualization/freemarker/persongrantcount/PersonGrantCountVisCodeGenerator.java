@@ -136,7 +136,8 @@ public class PersonGrantCountVisCodeGenerator {
 		 */
 		int renderedFullSparks = 0;
 
-		List<YearToEntityCountDataElement> yearToGrantCountDataTable = new ArrayList<YearToEntityCountDataElement>();
+		List<YearToEntityCountDataElement> yearToGrantCountDataTable = 
+					new ArrayList<YearToEntityCountDataElement>();
 
 		for (int grantYear = minGrantYearConsidered; grantYear <= currentYear; grantYear++) {
 
@@ -205,24 +206,22 @@ public class PersonGrantCountVisCodeGenerator {
 			sparklineData.setShortVisMode(true);
 
 		} else {
-
 			sparklineData.setShortVisMode(false);
 		}
 
 		if (yearToGrantCount.size() > 0) {
 			
-			sparklineData.setFullTimelineNetworkLink(UtilityFunctions.getCollaboratorshipNetworkLink(individualURI,
-					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-					VisualizationFrameworkConstants.COPI_VIS_MODE));
+			sparklineData.setFullTimelineNetworkLink(
+					UtilityFunctions.getCollaboratorshipNetworkLink(individualURI,
+						VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+						VisualizationFrameworkConstants.COPI_VIS_MODE));
 			
-			sparklineData.setDownloadDataLink(UtilityFunctions
-													.getCSVDownloadURL(
-															individualURI, 
-															VisualizationFrameworkConstants.PERSON_GRANT_COUNT_VIS,
-															""));
-			
+			sparklineData.setDownloadDataLink(
+					UtilityFunctions.getCSVDownloadURL(
+							individualURI,
+							VisualizationFrameworkConstants.PERSON_GRANT_COUNT_VIS,
+							""));
 		}
-		
 		return sparklineData;
 	}
 	

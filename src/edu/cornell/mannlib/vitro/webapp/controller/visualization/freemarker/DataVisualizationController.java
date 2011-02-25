@@ -58,7 +58,7 @@ public class DataVisualizationController extends VitroHttpServlet {
     	if (visRequestHandler != null) {
     	
     		/*
-        	 * Pass the query to the selected visualization request handler & render the visualization.
+        	 * Pass the query to the selected visualization request handler & render the vis.
         	 * Since the visualization content is directly added to the response object we are side-
         	 * effecting this method.
         	 * */
@@ -92,12 +92,13 @@ public class DataVisualizationController extends VitroHttpServlet {
             
     	} else {
     		
-    		UtilityFunctions.handleMalformedParameters("Visualization Query Error",
-    												   "Inappropriate query parameters were submitted.",
-    												   vreq,
-    												   request,
-    												   response,
-    												   log);
+    		UtilityFunctions.handleMalformedParameters(
+    								"Visualization Query Error",
+    								"Inappropriate query parameters were submitted.",
+    								vreq,
+    								request,
+    								response,
+    								log);
     		
     	}
     	

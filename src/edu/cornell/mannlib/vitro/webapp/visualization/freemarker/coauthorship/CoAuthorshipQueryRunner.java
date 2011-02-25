@@ -53,7 +53,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 
 	private String egoURI;
 	
-	private Dataset Dataset;
+	private Dataset dataset;
 
 	private Log log;
 
@@ -62,10 +62,10 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 	private UniqueIDGenerator edgeIDGenerator;
 
 	public CoAuthorshipQueryRunner(String egoURI,
-			Dataset Dataset, Log log) {
+			Dataset dataset, Log log) {
 
 		this.egoURI = egoURI;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		this.log = log;
 		
 		this.nodeIDGenerator = new UniqueIDGenerator();
@@ -78,7 +78,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		Set<Collaborator> nodes = new HashSet<Collaborator>();
 		
 		Map<String, Activity> biboDocumentURLToVO = new HashMap<String, Activity>();
-		Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors = new HashMap<String, Set<Collaborator>>();
+		Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors = 
+					new HashMap<String, Set<Collaborator>>();
 		Map<String, Collaborator> nodeURLToVO = new HashMap<String, Collaborator>();
 		Map<String, Collaboration> edgeUniqueIdentifierToVO = new HashMap<String, Collaboration>();
 		
@@ -165,17 +166,19 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			
 			coAuthorsForCurrentBiboDocument.add(coAuthorNode);
 			
-			Collaboration egoCoAuthorEdge = getExistingEdge(egoNode, coAuthorNode, edgeUniqueIdentifierToVO);
+			Collaboration egoCoAuthorEdge = 
+					getExistingEdge(egoNode, coAuthorNode, edgeUniqueIdentifierToVO);
 			
 			/*
-			 * If "egoCoAuthorEdge" is null it means that no Collaboration exists in between the egoNode 
-			 * & current coAuthorNode. Else create a new Collaboration, add it to the edges set & add 
-			 * the collaborator document to it.
+			 * If "egoCoAuthorEdge" is null it means that no Collaboration exists in between the 
+			 * egoNode & current coAuthorNode. Else create a new Collaboration, add it to the edges 
+			 * set & add the collaborator document to it.
 			 * */
 			if (egoCoAuthorEdge != null) {
 				egoCoAuthorEdge.addActivity(biboDocument);
 			} else {
-				egoCoAuthorEdge = new Collaboration(egoNode, coAuthorNode, biboDocument, edgeIDGenerator);
+				egoCoAuthorEdge = 
+						new Collaboration(egoNode, coAuthorNode, biboDocument, edgeIDGenerator);
 				edges.add(egoCoAuthorEdge);
 				edgeUniqueIdentifierToVO.put(
 						getEdgeUniqueIdentifier(egoNode.getCollaboratorID(),
@@ -223,10 +226,11 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 		return new CoAuthorshipData(egoNode, nodes, edges);
 	}
 
-	private void removeLowQualityNodesAndEdges(Set<Collaborator> nodes,
-											   Map<String, Activity> biboDocumentURLToVO,
-											   Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors, 
-											   Set<Collaboration> edges) {
+	private void removeLowQualityNodesAndEdges(
+							Set<Collaborator> nodes,
+							Map<String, Activity> biboDocumentURLToVO,
+							Map<String, Set<Collaborator>> biboDocumentURLToCoAuthors, 
+							Set<Collaboration> edges) {
 		
 		Set<Collaborator> nodesToBeRemoved = new HashSet<Collaborator>();
 		for (Map.Entry<String, Set<Collaborator>> currentBiboDocumentEntry 
@@ -291,7 +295,9 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 				 * In order to leverage the nested "for loop" for making edges between all the 
 				 * co-authors we need to create a list out of the set first. 
 				 * */
-				List<Collaborator> coAuthorNodes = new ArrayList<Collaborator>(currentBiboDocumentEntry.getValue());
+				List<Collaborator> coAuthorNodes = 
+							new ArrayList<Collaborator>(currentBiboDocumentEntry.getValue());
+				
 				Collections.sort(coAuthorNodes, new CollaboratorComparator());
 				
 				int numOfCoAuthors = coAuthorNodes.size();
@@ -336,8 +342,9 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 					Collaborator collaboratingNode2, 
 					Map<String, Collaboration> edgeUniqueIdentifierToVO) {
 		
-		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(collaboratingNode1.getCollaboratorID(), 
-															  collaboratingNode2.getCollaboratorID());
+		String edgeUniqueIdentifier = getEdgeUniqueIdentifier(
+												collaboratingNode1.getCollaboratorID(),
+												collaboratingNode2.getCollaboratorID());
 		
 		return edgeUniqueIdentifierToVO.get(edgeUniqueIdentifier);
 		
@@ -368,17 +375,16 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 	}
 	
 	private ResultSet executeQuery(String queryText,
-								   Dataset Dataset) {
+								   Dataset dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
 
-        queryExecution = QueryExecutionFactory.create(query, Dataset);
+        queryExecution = QueryExecutionFactory.create(query, dataset);
         return queryExecution.execSelect();
     }
 
 	private String generateEgoCoAuthorshipSparqlQuery(String queryURI) {
-//		Resource uri1 = ResourceFactory.createResource(queryURI);
 
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 			+ "SELECT \n"
@@ -387,8 +393,8 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			+ "		(str(?coAuthorPerson) as ?" + QueryFieldLabels.CO_AUTHOR_URL + ") \n" 
 			+ "		(str(?coAuthorPersonLabel) as ?" + QueryFieldLabels.CO_AUTHOR_LABEL + ") \n"
 			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
-			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
-		//	+ "		(str(?publicationYearUsing_1_1_property) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY + ") \n"
+			+ "		(str(?publicationDate) as ?" 
+							+ QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n"
 			+ "WHERE { \n"
 			+ "<" + queryURI + "> rdf:type foaf:Person ;" 
 								+ " rdfs:label ?authorLabel ;" 
@@ -400,7 +406,6 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
 			+ "?coAuthorPerson rdfs:label ?coAuthorPersonLabel . \n"
 			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
 			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" 
-		//	+ "OPTIONAL {  ?document core:year ?publicationYearUsing_1_1_property } .\n" 
 			+ "} \n" 
 			+ "ORDER BY ?document ?coAuthorPerson\n";
 
@@ -430,7 +435,7 @@ public class CoAuthorshipQueryRunner implements QueryRunner<CollaborationData> {
         }
 
 		ResultSet resultSet	= executeQuery(generateEgoCoAuthorshipSparqlQuery(this.egoURI),
-										   this.Dataset);
+										   this.dataset);
 		return createQueryResult(resultSet);
 	}
 

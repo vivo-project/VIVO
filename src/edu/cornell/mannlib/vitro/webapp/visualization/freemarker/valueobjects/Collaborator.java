@@ -79,7 +79,8 @@ public class Collaborator extends Individual {
 		 * We do not want to consider the default activity year when we are checking 
 		 * for the min or max activity year. 
 		 * */
-		Set<String> yearsToBeConsidered = new HashSet<String>(this.getYearToActivityCount().keySet());
+		Set<String> yearsToBeConsidered = new HashSet<String>(this.getYearToActivityCount()
+																	.keySet());
 		yearsToBeConsidered.remove(VOConstants.DEFAULT_ACTIVITY_YEAR);
 		
 		/*
@@ -91,7 +92,8 @@ public class Collaborator extends Individual {
 		 * */
 		if (yearsToBeConsidered.size() > 0) {
 			final String earliestYear = Collections.min(yearsToBeConsidered);
-			final Integer earliestYearActivityCount = this.getYearToActivityCount().get(earliestYear);
+			final Integer earliestYearActivityCount = this.getYearToActivityCount()
+															.get(earliestYear);
 			
 			return new HashMap<String, Integer>() { {
 				put(earliestYear, earliestYearActivityCount);
@@ -108,7 +110,8 @@ public class Collaborator extends Individual {
 		 * We do not want to consider the default Activity year when we are checking 
 		 * for the min or max Activity year. 
 		 * */
-		Set<String> yearsToBeConsidered = new HashSet<String>(this.getYearToActivityCount().keySet());
+		Set<String> yearsToBeConsidered = new HashSet<String>(this.getYearToActivityCount()
+																	.keySet());
 		yearsToBeConsidered.remove(VOConstants.DEFAULT_ACTIVITY_YEAR);
 		
 		/*

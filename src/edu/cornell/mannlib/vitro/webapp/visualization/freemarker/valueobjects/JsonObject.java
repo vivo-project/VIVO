@@ -63,11 +63,11 @@ public class JsonObject {
 		return data;
 	}
 
-	public JsonObject(String label){
+	public JsonObject(String label) {
 		this.label = label;
 	}
 	
-	public void setYearToActivityCount(List<List<Integer>> yearToPublicationCount){
+	public void setYearToActivityCount(List<List<Integer>> yearToPublicationCount) {
 		this.data = yearToPublicationCount;
 	}
 

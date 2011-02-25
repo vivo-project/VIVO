@@ -30,9 +30,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String whereClause;
-	private Dataset Dataset;
-
-	private Log log;
+	private Dataset dataset;
 
 	private Map<String, String> fieldLabelToOutputFieldLabel;
 
@@ -44,23 +42,21 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 							   String aggregationRules, 
 							   String whereClause,
 							   String groupOrderClause, 
-							   Dataset Dataset, Log log) {
+							   Dataset dataset, Log log) {
 
 		this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
 		this.aggregationRules = aggregationRules;
 		this.whereClause = whereClause;
 		this.groupOrderClause = groupOrderClause;
-		this.Dataset = Dataset;
-		this.log = log;
-		
+		this.dataset = dataset;
 	}
 
 	private ResultSet executeQuery(String queryText,
-								   Dataset Dataset) {
+								   Dataset dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(queryText, SYNTAX);
-        queryExecution = QueryExecutionFactory.create(query, Dataset);
+        queryExecution = QueryExecutionFactory.create(query, dataset);
         return queryExecution.execSelect();
     }
 
@@ -96,7 +92,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 			throws MalformedQueryParametersException {
 
 		ResultSet resultSet	= executeQuery(generateGenericSparqlQuery(),
-										   this.Dataset);
+										   this.dataset);
 
 		return resultSet;
 	}

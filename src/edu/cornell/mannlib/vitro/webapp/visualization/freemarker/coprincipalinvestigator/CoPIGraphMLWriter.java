@@ -32,7 +32,7 @@ public class CoPIGraphMLWriter {
 	
 	private final String GRAPHML_FOOTER = "</graphml>";
 	
-	public CoPIGraphMLWriter(CollaborationData coPIData){
+	public CoPIGraphMLWriter(CollaborationData coPIData) {
 		coPIGraphMLContent = createCoPIGraphMLContent(coPIData);
 	}
 
@@ -105,8 +105,10 @@ public class CoPIGraphMLWriter {
 		
 		graphMLContent.append("<edge " 
 									+ "id=\"" + currentEdge.getCollaborationID() + "\" " 
-									+ "source=\"" + currentEdge.getSourceCollaborator().getCollaboratorID() + "\" "
-									+ "target=\"" + currentEdge.getTargetCollaborator().getCollaboratorID() + "\" "
+									+ "source=\"" + currentEdge.getSourceCollaborator()
+														.getCollaboratorID() + "\" "
+									+ "target=\"" + currentEdge.getTargetCollaborator()
+														.getCollaboratorID() + "\" "
 									+ ">\n");
 		
 		graphMLContent.append("\t<data key=\"collaborator1\">" 
@@ -208,8 +210,9 @@ public class CoPIGraphMLWriter {
 
 	private void getNodeContent(StringBuilder graphMLContent, Collaborator node) {
 		
-		ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-				   node.getCollaboratorURI());
+		ParamMap individualProfileURLParams = new ParamMap(
+					VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					node.getCollaboratorURI());
 
 		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
 		individualProfileURLParams);

@@ -18,8 +18,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Utilit
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
 /**
- * Services a standard visualization request, which involves templates. This will return a simple error message and a 501 if
- * there is no jena Model.
+ * Services a standard visualization request, which involves templates. This will return a simple 
+ * error message and a 501 if there is no jena Model.
  *
  * @author cdtank
  */
@@ -45,16 +45,17 @@ public class StandardVisualizationController extends FreemarkerHttpServlet {
     	if (visRequestHandler != null) {
     	
     		/*
-        	 * Pass the query to the selected visualization request handler & render the visualization.
+        	 * Pass the query to the selected visualization request handler & render the vis.
         	 * Since the visualization content is directly added to the response object we are side-
         	 * effecting this method.
         	 * */
             return renderVisualization(vreq, visRequestHandler);
             
     	} else {
-    		return UtilityFunctions.handleMalformedParameters("Visualization Query Error", 
-    														  "Inappropriate query parameters were submitted.", 
-    														  vreq);
+    		return UtilityFunctions.handleMalformedParameters(
+    									"Visualization Query Error", 
+    									"Inappropriate query parameters were submitted.", 
+    									vreq);
     	}
     	
         

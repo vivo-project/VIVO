@@ -124,14 +124,16 @@ public class CoAuthorshipVisCodeGenerator {
 		
 		int uniqueCoAuthorCounter = 0;
 		Set<Collaborator> allCoAuthorsWithKnownAuthorshipYears = new HashSet<Collaborator>();
-		List<YearToEntityCountDataElement> yearToUniqueCoauthorsCountDataTable = new ArrayList<YearToEntityCountDataElement>();
+		List<YearToEntityCountDataElement> yearToUniqueCoauthorsCountDataTable = 
+					new ArrayList<YearToEntityCountDataElement>();
 		
 		for (int publicationYear = minPubYearConsidered; 
 					publicationYear <= currentYear; 
 					publicationYear++) {
 
 				String publicationYearAsString = String.valueOf(publicationYear);
-				Set<Collaborator> currentCoAuthors = yearToUniqueCoauthors.get(publicationYearAsString);
+				Set<Collaborator> currentCoAuthors = yearToUniqueCoauthors
+															.get(publicationYearAsString);
 				
 				Integer currentUniqueCoAuthors = null;
 				
@@ -142,9 +144,10 @@ public class CoAuthorshipVisCodeGenerator {
 					currentUniqueCoAuthors = 0;
 				}
 				
-				yearToUniqueCoauthorsCountDataTable.add(new YearToEntityCountDataElement(uniqueCoAuthorCounter, 
-																						 publicationYearAsString, 
-																						 currentUniqueCoAuthors));
+				yearToUniqueCoauthorsCountDataTable.add(
+						new YearToEntityCountDataElement(uniqueCoAuthorCounter, 
+														 publicationYearAsString, 
+														 currentUniqueCoAuthors));
 				uniqueCoAuthorCounter++;
 		}
 
@@ -159,12 +162,13 @@ public class CoAuthorshipVisCodeGenerator {
 		sparklineData.setYearToEntityCountDataTable(yearToUniqueCoauthorsCountDataTable);
 		
 		/*
-		 * This is required only for the sparklines which convey collaborationships like coinvestigatorships
-		 * and coauthorship. There are edge cases where a collaborator can be present for in a collaboration
-		 * with known & unknown year. We do not want to repeat the count for this collaborator when we present 
-		 * it in the front-end. 
+		 * This is required only for the sparklines which convey collaborationships like 
+		 * coinvestigatorships and coauthorship. There are edge cases where a collaborator can be 
+		 * present for in a collaboration with known & unknown year. We do not want to repeat the 
+		 * count for this collaborator when we present it in the front-end. 
 		 * */
-		Set<Collaborator> totalUniqueCoInvestigators = new HashSet<Collaborator>(allCoAuthorsWithKnownAuthorshipYears);
+		Set<Collaborator> totalUniqueCoInvestigators = 
+							new HashSet<Collaborator>(allCoAuthorsWithKnownAuthorshipYears);
 
 		/*
 		 * Total publications will also consider publications that have no year associated with
@@ -175,7 +179,8 @@ public class CoAuthorshipVisCodeGenerator {
 			unknownYearCoauthors = yearToUniqueCoauthors
 											.get(VOConstants.DEFAULT_PUBLICATION_YEAR).size();
 			
-			totalUniqueCoInvestigators.addAll(yearToUniqueCoauthors.get(VOConstants.DEFAULT_GRANT_YEAR));
+			totalUniqueCoInvestigators.addAll(
+					yearToUniqueCoauthors.get(VOConstants.DEFAULT_GRANT_YEAR));
 		}
 		
 		sparklineData.setUnknownYearPublications(unknownYearCoauthors);
@@ -214,19 +219,22 @@ public class CoAuthorshipVisCodeGenerator {
 		
 		if (yearToUniqueCoauthors.size() > 0) {
 			
-			sparklineData.setFullTimelineNetworkLink(UtilityFunctions.getCollaboratorshipNetworkLink(individualURI,
-					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-					VisualizationFrameworkConstants.COAUTHOR_VIS_MODE));
+			sparklineData.setFullTimelineNetworkLink(
+					UtilityFunctions.getCollaboratorshipNetworkLink(
+							individualURI,
+							VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+							VisualizationFrameworkConstants.COAUTHOR_VIS_MODE));
 			
-			sparklineData.setDownloadDataLink(UtilityFunctions
-													.getCSVDownloadURL(
-															individualURI, 
-															VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
-															VisualizationFrameworkConstants.COAUTHORS_COUNT_PER_YEAR_VIS_MODE));
+			sparklineData.setDownloadDataLink(
+					UtilityFunctions.getCSVDownloadURL(
+							individualURI,
+							VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
+							VisualizationFrameworkConstants.COAUTHORS_COUNT_PER_YEAR_VIS_MODE));
 			
 			Map<String, Integer> yearToUniqueCoauthorsCount = new HashMap<String, Integer>();
 			
-			for (Map.Entry<String, Set<Collaborator>> currentYearToCoAuthors : yearToUniqueCoauthors.entrySet()) {
+			for (Map.Entry<String, Set<Collaborator>> currentYearToCoAuthors 
+							: yearToUniqueCoauthors.entrySet()) {
 				yearToUniqueCoauthorsCount.put(currentYearToCoAuthors.getKey(), 
 											   currentYearToCoAuthors.getValue().size());
 			}

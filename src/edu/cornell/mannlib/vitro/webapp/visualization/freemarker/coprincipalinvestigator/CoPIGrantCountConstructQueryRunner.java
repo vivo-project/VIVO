@@ -30,21 +30,22 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 
 	private String egoURI;
 
-	private Dataset Dataset;
+	private Dataset dataset;
 
 	private long before, after;
 
 	private Log log = LogFactory
 			.getLog(CoPIGrantCountConstructQueryRunner.class.getName());
 
-	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = "?Role core:roleIn ?Grant . "
+	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = 
+			"?Role core:roleIn ?Grant . "
 			+ "?Grant rdfs:label ?GrantLabel . "
 			+ "?Grant core:relatedRole ?RelatedRole . ";
 
-	public CoPIGrantCountConstructQueryRunner(String egoURI, Dataset Dataset,
+	public CoPIGrantCountConstructQueryRunner(String egoURI, Dataset dataset,
 			Log log) {
 		this.egoURI = egoURI;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		// this.log = log;
 	}
 
@@ -191,7 +192,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 		return sparqlQuery;
 	}
 
-	private Model executeQuery(Set<String> constructQueries, Dataset Dataset) {
+	private Model executeQuery(Set<String> constructQueries, Dataset dataset) {
 
 		Model constructedModel = ModelFactory.createDefaultModel();
 
@@ -213,7 +214,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				log.error(queryString);
 			}
 
-			QueryExecution qe = QueryExecutionFactory.create(query, Dataset);
+			QueryExecution qe = QueryExecutionFactory.create(query, dataset);
 			try {
 				qe.execConstruct(constructedModel);
 			} finally {
@@ -253,7 +254,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 
 		populateConstructQueries(constructQueries);
 
-		Model model = executeQuery(constructQueries, this.Dataset);
+		Model model = executeQuery(constructQueries, this.dataset);
 
 		return model;
 

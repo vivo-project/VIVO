@@ -46,7 +46,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	
 	public Object generateAjaxVisualization(VitroRequest vitroRequest,
 											Log log, 
-											Dataset Dataset) 
+											Dataset dataset) 
 			throws MalformedQueryParametersException {
 
         String individualURI = vitroRequest.getParameter(
@@ -70,7 +70,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			QueryRunner<GenericQueryMap> profileQueryHandler = 
 					new AllPropertiesQueryRunner(individualURI, 
 												  filterRule,
-												  Dataset,
+												  dataset,
 												  log);
 			
 			GenericQueryMap profilePropertiesToValues = 
@@ -105,7 +105,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											"",
 											whereClause,
 											"",
-											Dataset, log);
+											dataset, log);
 			
 			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
 											   fieldLabelToOutputFieldLabel, vitroRequest);
@@ -117,8 +117,11 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			String aggregationRules = "(count(DISTINCT ?document) AS ?numOfPublications)";
 			
-			String whereClause = "<" + individualURI + "> rdf:type foaf:Person ; core:authorInAuthorship ?authorshipNode . \n"
-									+ "?authorshipNode rdf:type core:Authorship ; core:linkedInformationResource ?document .";
+			String whereClause = 
+				"<" + individualURI + "> rdf:type foaf:Person ;" 
+					+ " core:authorInAuthorship ?authorshipNode . \n"
+				+ "?authorshipNode rdf:type core:Authorship ;" 
+					+ " core:linkedInformationResource ?document .";
 
 			String groupOrderClause = "GROUP BY ?" + QueryFieldLabels.AUTHOR_URL + " \n"; 
 			
@@ -127,7 +130,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									aggregationRules,
 									whereClause,
 									groupOrderClause,
-									Dataset, log);
+									dataset, log);
 			
 			Gson publicationsInformation = new Gson();
 			
@@ -141,13 +144,16 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			String aggregationRules = "(count(DISTINCT ?Grant) AS ?numOfGrants)";
 			
-			String whereClause = "{ <" + individualURI + "> rdf:type foaf:Person ; core:hasCo-PrincipalInvestigatorRole ?Role . \n"
+			String whereClause = "{ <" + individualURI + "> rdf:type foaf:Person ;" 
+										+ " core:hasCo-PrincipalInvestigatorRole ?Role . \n"
 									+ "?Role core:roleIn ?Grant . }"
 									+ "UNION \n"
-									+ "{ <" + individualURI + "> rdf:type foaf:Person ; core:hasPrincipalInvestigatorRole ?Role . \n"
+									+ "{ <" + individualURI + "> rdf:type foaf:Person ;" 
+										+ " core:hasPrincipalInvestigatorRole ?Role . \n"
 									+ "?Role core:roleIn ?Grant . }"
 									+ "UNION \n"
-									+ "{ <" + individualURI + "> rdf:type foaf:Person ; core:hasInvestigatorRole ?Role . \n"
+									+ "{ <" + individualURI + "> rdf:type foaf:Person ;" 
+										+ " core:hasInvestigatorRole ?Role . \n"
 									+ "?Role core:roleIn ?Grant . }";
 
 			QueryRunner<ResultSet> numberOfGrantsQueryHandler = 
@@ -155,7 +161,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									aggregationRules,
 									whereClause,
 									"",
-									Dataset, log);
+									dataset, log);
 			
 			Gson grantsInformation = new Gson();
 			
@@ -169,15 +175,17 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	    	 * By default we will be generating profile url else some specific url like 
 	    	 * coAuthorShip vis url for that individual.
 	    	 * */
-			ParamMap coAuthorProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-															 individualURI,
-															 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-															 VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
-															 VisualizationFrameworkConstants.RENDER_MODE_KEY,
-															 VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
+			ParamMap coAuthorProfileURLParams = new ParamMap(
+								VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+								individualURI,
+								VisualizationFrameworkConstants.VIS_TYPE_KEY,
+								VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
+								VisualizationFrameworkConstants.RENDER_MODE_KEY,
+								VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
 			
-			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-							  coAuthorProfileURLParams);
+			return UrlBuilder.getUrl(
+						VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+						coAuthorProfileURLParams);
 			
 		} else if (VisualizationFrameworkConstants.COPI_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -186,15 +194,17 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	    	 * By default we will be generating profile url else some specific url like 
 	    	 * coPI vis url for that individual.
 	    	 * */
-			ParamMap coInvestigatorProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-															 individualURI,
-															 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-															 VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-															 VisualizationFrameworkConstants.VIS_MODE_KEY,
-															 VisualizationFrameworkConstants.COPI_VIS_MODE);
+			ParamMap coInvestigatorProfileURLParams = new ParamMap(
+								VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+								individualURI,
+								VisualizationFrameworkConstants.VIS_TYPE_KEY,
+								VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+								VisualizationFrameworkConstants.VIS_MODE_KEY,
+								VisualizationFrameworkConstants.COPI_VIS_MODE);
 			
-			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-							  coInvestigatorProfileURLParams);
+			return UrlBuilder.getUrl(
+							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+							coInvestigatorProfileURLParams);
 			
 		} else if (VisualizationFrameworkConstants.PERSON_LEVEL_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
@@ -202,24 +212,27 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	    	 * By default we will be generating profile url else some specific url like 
 	    	 * coAuthorShip vis url for that individual.
 	    	 * */
-			ParamMap personLevelURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-														 individualURI,
-														 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-														 VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
-														 VisualizationFrameworkConstants.RENDER_MODE_KEY,
-														 VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
+			ParamMap personLevelURLParams = new ParamMap(
+							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+							individualURI,
+							VisualizationFrameworkConstants.VIS_TYPE_KEY,
+							VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+							VisualizationFrameworkConstants.RENDER_MODE_KEY,
+							VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
 			
-			return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-									 personLevelURLParams);
+			return UrlBuilder.getUrl(
+							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+							personLevelURLParams);
 			
 		} else if (VisualizationFrameworkConstants.HIGHEST_LEVEL_ORGANIZATION_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			
-			String staffProvidedHighestLevelOrganization = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.topLevelOrg");
+			String staffProvidedHighestLevelOrganization = ConfigurationProperties
+						.getBean(vitroRequest).getProperty("visualization.topLevelOrg");
 			
 			/*
-			 * First checking if the staff has provided highest level organization in deploy.properties
-			 * if so use to temporal graph vis.
+			 * First checking if the staff has provided highest level organization in 
+			 * deploy.properties if so use to temporal graph vis.
 			 * */
 			if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {
 				
@@ -236,13 +249,15 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	                
 	            } else {
 
-					ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(
+							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 							staffProvidedHighestLevelOrganization,
 							VisualizationFrameworkConstants.VIS_TYPE_KEY,
 							VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
 
-					return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-						 highestLevelOrganizationTemporalGraphVisURLParams);
+					return UrlBuilder.getUrl(
+							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+							highestLevelOrganizationTemporalGraphVisURLParams);
 					
 	            }
 			}
@@ -250,14 +265,16 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			fieldLabelToOutputFieldLabel.put("organization", 
 											  QueryFieldLabels.ORGANIZATION_URL);
-			fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
+			fieldLabelToOutputFieldLabel.put("organizationLabel", 
+											 QueryFieldLabels.ORGANIZATION_LABEL);
 			
 			String aggregationRules = "(count(?organization) AS ?numOfChildren)";
 			
-			String whereClause = "?organization rdf:type foaf:Organization ; rdfs:label ?organizationLabel . \n"  
-									+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
-									+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
-									+ "FILTER ( !bound(?parent) ). \n";
+			String whereClause = "?organization rdf:type foaf:Organization ;" 
+								+ " rdfs:label ?organizationLabel . \n"  
+							+ "OPTIONAL { ?organization core:hasSubOrganization ?subOrg } . \n"
+							+ "OPTIONAL { ?organization core:subOrganizationWithin ?parent } . \n"
+							+ "FILTER ( !bound(?parent) ). \n";
 			
 			String groupOrderClause = "GROUP BY ?organization ?organizationLabel \n" 
 										+ "ORDER BY DESC(?numOfChildren)\n" 
@@ -268,7 +285,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											aggregationRules,
 											whereClause,
 											groupOrderClause,
-											Dataset, log);
+											dataset, log);
 			
 			return getHighestLevelOrganizationTemporalGraphVisURL(
 							highestLevelOrganizationQueryHandler.getQueryResult(),
@@ -276,8 +293,9 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 		} else {
 			
-			ParamMap individualProfileURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-														 individualURI);
+			ParamMap individualProfileURLParams = new ParamMap(
+							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+							individualURI);
 			
 			return UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
 											individualProfileURLParams);
@@ -300,15 +318,18 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											.get("organization"));
 			
 			if (organizationNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), organizationNode.toString());
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), 
+									 organizationNode.toString());
 				
-				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-						 organizationNode.toString(),
-						 VisualizationFrameworkConstants.VIS_TYPE_KEY,
-						 VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
+				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(
+						VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+						organizationNode.toString(),
+						VisualizationFrameworkConstants.VIS_TYPE_KEY,
+						VisualizationFrameworkConstants.ENTITY_COMPARISON_VIS);
 
-				return UrlBuilder.getUrl(VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
-					 highestLevelOrganizationTemporalGraphVisURLParams);
+				return UrlBuilder.getUrl(
+							VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
+							highestLevelOrganizationTemporalGraphVisURLParams);
 				
 				
 			}
@@ -318,20 +339,22 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											.get("organizationLabel"));
 			
 			if (organizationLabelNode != null) {
-				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), organizationLabelNode.toString());
+				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organizationLabel"), 
+									 organizationLabelNode.toString());
 			}
 			
 			RDFNode numberOfChildrenNode = solution.getLiteral("numOfChildren");
 			
 			if (numberOfChildrenNode != null) {
-				queryResult.addEntry("numOfChildren", String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
+				queryResult.addEntry("numOfChildren", 
+									 String.valueOf(numberOfChildrenNode.asLiteral().getInt()));
 			}
 		}
 		
 		return "";
 	}
 	
-	private GenericQueryMap getNumberOfGrantsForIndividual (ResultSet resultSet) {
+	private GenericQueryMap getNumberOfGrantsForIndividual(ResultSet resultSet) {
 
 		GenericQueryMap queryResult = new GenericQueryMap();
 		
@@ -342,7 +365,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			RDFNode numberOfGrantsNode = solution.getLiteral("numOfGrants");
 			
 			if (numberOfGrantsNode != null) {
-				queryResult.addEntry("numOfGrants", String.valueOf(numberOfGrantsNode.asLiteral().getInt()));
+				queryResult.addEntry("numOfGrants", 
+									 String.valueOf(numberOfGrantsNode.asLiteral().getInt()));
 			}
 		}
 		
@@ -350,7 +374,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	}
 	
 	
-	private GenericQueryMap getNumberOfPublicationsForIndividual (ResultSet resultSet) {
+	private GenericQueryMap getNumberOfPublicationsForIndividual(ResultSet resultSet) {
 
 		GenericQueryMap queryResult = new GenericQueryMap();
 		
@@ -361,7 +385,9 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			RDFNode numberOfPublicationsNode = solution.getLiteral("numOfPublications");
 			
 				if (numberOfPublicationsNode != null) {
-					queryResult.addEntry("numOfPublications", String.valueOf(numberOfPublicationsNode.asLiteral().getInt()));
+					queryResult.addEntry(
+							"numOfPublications", 
+							String.valueOf(numberOfPublicationsNode.asLiteral().getInt()));
 				}
 		}
 		
@@ -397,14 +423,14 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities does not provide Data Response.");
 	}
 
 	@Override
 	public ResponseValues generateStandardVisualization(
-			VitroRequest vitroRequest, Log log, Dataset Dataset)
+			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities does not provide Standard Response.");
 	}

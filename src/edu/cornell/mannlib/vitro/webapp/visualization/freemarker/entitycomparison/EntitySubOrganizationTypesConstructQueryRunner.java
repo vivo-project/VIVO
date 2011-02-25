@@ -30,13 +30,14 @@ public class EntitySubOrganizationTypesConstructQueryRunner implements ModelCons
 	
 	private String egoURI;
 	
-	private Dataset Dataset;
+	private Dataset dataset;
 
-	private Log log = LogFactory.getLog(EntitySubOrganizationTypesConstructQueryRunner.class.getName());
+	private Log log = LogFactory.getLog(EntitySubOrganizationTypesConstructQueryRunner
+											.class.getName());
 	
-	public EntitySubOrganizationTypesConstructQueryRunner(String egoURI, Dataset Dataset, Log log){
+	public EntitySubOrganizationTypesConstructQueryRunner(String egoURI, Dataset dataset, Log log) {
 		this.egoURI = egoURI;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		//this.log = log;
 	}	
 	
@@ -44,20 +45,20 @@ public class EntitySubOrganizationTypesConstructQueryRunner implements ModelCons
 		
 		String sparqlQuery = 
 			 "CONSTRUCT { " 
-			+	"<"+queryURI+ ">  rdfs:label ?organizationLabel ."
+			+	"<" + queryURI + ">  rdfs:label ?organizationLabel ."
 			+ "}"	
 			+ "WHERE {"
-			+	"<"+queryURI+ ">  rdfs:label ?organizationLabel "
+			+	"<" + queryURI + ">  rdfs:label ?organizationLabel "
 			+ "}";
 		return sparqlQuery;
 	}
 	
-	private String generateConstructQueryForSubOrganizationTypes(String queryURI){
+	private String generateConstructQueryForSubOrganizationTypes(String queryURI) {
 	    
 		String sparqlQuery = 			 
 		
 			"CONSTRUCT { "
-			+	"<"+queryURI+ "> core:hasSubOrganization ?subOrganization . "
+			+	"<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 			+	"?subOrganization rdfs:label ?subOrganizationLabel . "
 			+	"?subOrganization rdf:type ?subOrganizationType . "
 			+ 	"?subOrganization core:organizationForPosition ?Position . "
@@ -66,9 +67,9 @@ public class EntitySubOrganizationTypesConstructQueryRunner implements ModelCons
 			+ 	"?Person rdfs:label ?PersonLabel ."
 			+	"?Person rdf:type ?PersonType . "
 			+ 	"?PersonType rdfs:label ?PersonTypeLabel  "
-			+"}"
+			+ "}"
 			+ "WHERE { "
-			+	"<"+queryURI+ "> core:hasSubOrganization ?subOrganization . "
+			+	"<" + queryURI + "> core:hasSubOrganization ?subOrganization . "
 			+	"?subOrganization rdfs:label ?subOrganizationLabel . "
 			+	"?subOrganization rdf:type ?subOrganizationType . "
 		    +   "?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
@@ -77,39 +78,34 @@ public class EntitySubOrganizationTypesConstructQueryRunner implements ModelCons
 			+   "?Person rdfs:label ?PersonLabel ."
 			+   "?Person rdf:type ?PersonType . "
 			+   "?PersonType rdfs:label ?PersonTypeLabel  "         
-
-			+ "}" ;
+			+ "}";
 					
-		
 		return sparqlQuery;
-	
 	}
 	
-	private String generateConstructQueryForPersonTypes(String queryURI){
+	private String generateConstructQueryForPersonTypes(String queryURI) {
 		
 		String sparqlQuery = 			 
 		
 			"CONSTRUCT { "
-			+	"<"+queryURI+ "> core:organizationForPosition ?Position . "
+			+	"<" + queryURI + "> core:organizationForPosition ?Position . "
 			+   "?Position core:positionForPerson ?Person ."
 			+ 	"?Person rdfs:label ?PersonLabel ."
 			+	"?Person rdf:type ?PersonType . "
 			+ 	"?PersonType rdfs:label ?PersonTypeLabel  "
-			+"}"
+			+ "}"
 			+ "WHERE { "
-			+	"<"+queryURI+ "> core:organizationForPosition ?Position . "
+			+	"<" + queryURI + "> core:organizationForPosition ?Position . "
 			+	"?Position core:positionForPerson ?Person ."
 			+ 	"?Person rdfs:label ?PersonLabel ."
 			+	"?Person rdf:type ?PersonType . "
 			+ 	"?PersonType rdfs:label ?PersonTypeLabel  "			
-			+ "}" ;
-					
+			+ "}";
 		
 		return sparqlQuery;
-	
 	}	
 	
-	private Model executeQuery(Set<String> constructQueries, Dataset Dataset) {
+	private Model executeQuery(Set<String> constructQueries, Dataset dataset) {
 		
         Model constructedModel = ModelFactory.createDefaultModel();
         long before = 0;
@@ -121,30 +117,31 @@ public class EntitySubOrganizationTypesConstructQueryRunner implements ModelCons
             
         	Query query = null;
         	
-        	try{
-        		query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() + queryString, SYNTAX);
-        	}catch(Throwable th){
-                log.error("Could not create CONSTRUCT SPARQL query for query " +
-                        "string. " + th.getMessage());
+        	try {
+        		query = QueryFactory.create(QueryConstants.getSparqlPrefixQuery() 
+        									+ queryString, SYNTAX);
+        	} catch (Throwable th) {
+                log.error("Could not create CONSTRUCT SPARQL query for query " 
+                			+ "string. " + th.getMessage());
                 log.error(queryString);
         	}
         	
             QueryExecution qe = QueryExecutionFactory.create(
-                    query, Dataset);
+                    query, dataset);
             try {
                 qe.execConstruct(constructedModel);
             } finally {
                 qe.close();
             }
         	
-            log.debug("Time to run " + (before - System.currentTimeMillis()) );
+            log.debug("Time to run " + (before - System.currentTimeMillis()));
         }	
 
 		return constructedModel;
 	}	
 	
 	public Model getConstructedModel()
-	throws MalformedQueryParametersException {
+		throws MalformedQueryParametersException {
 
 	if (StringUtils.isNotBlank(this.egoURI)) {
 		/*
@@ -167,19 +164,14 @@ public class EntitySubOrganizationTypesConstructQueryRunner implements ModelCons
 	populateConstructQueries(constructQueries);
 	
 	Model model	= executeQuery(constructQueries,
-									   this.Dataset);
+									   this.dataset);
 	//model.write(System.out);
 	return model;
-		
 	}
 
 	private void populateConstructQueries(Set<String> constructQueries) {
-		
 		constructQueries.add(generateConstructQueryForOrganizationLabel(this.egoURI));
 		constructQueries.add(generateConstructQueryForSubOrganizationTypes(this.egoURI));
 		constructQueries.add(generateConstructQueryForPersonTypes(this.egoURI));
-		
-		
 	}	
-
 }

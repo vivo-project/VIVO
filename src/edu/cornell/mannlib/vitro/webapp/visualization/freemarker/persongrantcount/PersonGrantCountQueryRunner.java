@@ -30,20 +30,21 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryR
 
 
 /**
- * This query runner is used to execute Sparql query that will fetch all the grants for an individual
+ * This query runner is used to execute Sparql query that will fetch all the grants for an 
+ * individual.
  * @author bkoniden
  * Deepak Konidena
  *
  */
-public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
+public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>> {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	private String personURI;
-	private Dataset Dataset;
+	private Dataset dataset;
 	private Individual principalInvestigator;
 	
-	public Individual getPrincipalInvestigator(){
+	public Individual getPrincipalInvestigator() {
 		return principalInvestigator;
 	}
 	
@@ -69,7 +70,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 		+				"?dateTimeIntervalValue core:end ?endDate . "	
 		+				"?endDate core:dateTime ?endDateTimeValue . " 			
 		+			"}"
-		+ 		"} . "	;	
+		+ 		"} . ";	
 	
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
 		+ 		"OPTIONAL {"	
@@ -80,35 +81,35 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
 		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
 		+			"}"
-		+ 		"}"	;	
+		+ 		"}";	
 	
 	
-	public PersonGrantCountQueryRunner(String personURI, Dataset Dataset, Log log){
+	public PersonGrantCountQueryRunner(String personURI, Dataset dataset, Log log) {
 		
 		this.personURI = personURI;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		this.log = log;
 	}
 	
-	private Set<Activity> createJavaValueObjects(ResultSet resultSet){
-		Set<Activity> PIGrant = new HashSet<Activity>();
+	private Set<Activity> createJavaValueObjects(ResultSet resultSet) {
+		Set<Activity> grants = new HashSet<Activity>();
 		
-		while(resultSet.hasNext()){
+		while (resultSet.hasNext()) {
 			QuerySolution solution = resultSet.nextSolution();
 			
 			Activity grant = new Activity(solution.get(QueryFieldLabels.GRANT_URL).toString());
 			
 			RDFNode grantLabelNode = solution.get(QueryFieldLabels.GRANT_LABEL);
-			if(grantLabelNode != null){
+			if (grantLabelNode != null) {
 				grant.setIndividualLabel(grantLabelNode.toString());
 			}
 			
 			RDFNode grantStartDateNode = solution.get(QueryFieldLabels.ROLE_START_DATE);
-			if(grantStartDateNode != null){
+			if (grantStartDateNode != null) {
 				grant.setActivityDate(grantStartDateNode.toString());
-			}else {
+			} else {
 				grantStartDateNode = solution.get(QueryFieldLabels.GRANT_START_DATE);
-				if(grantStartDateNode != null){
+				if (grantStartDateNode != null) {
 					grant.setActivityDate(grantStartDateNode.toString());
 				}
 			}
@@ -131,33 +132,33 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 			 * to create only one "Individual" instance. We test against the null for "PI" to
 			 * make sure that it has not already been instantiated. 
 			 * */
-			RDFNode PIURLNode = solution.get(QueryFieldLabels.PI_URL);
-			if (PIURLNode != null && principalInvestigator == null) {
-				principalInvestigator = new Individual(PIURLNode.toString());
-				RDFNode PILabelNode = solution.get(QueryFieldLabels.PI_LABEL);
-				if (PILabelNode != null) {
-					principalInvestigator.setIndividualLabel(PILabelNode.toString());
+			RDFNode investigatorURINode = solution.get(QueryFieldLabels.PI_URL);
+			if (investigatorURINode != null && principalInvestigator == null) {
+				principalInvestigator = new Individual(investigatorURINode.toString());
+				RDFNode investigatorLabelNode = solution.get(QueryFieldLabels.PI_LABEL);
+				if (investigatorLabelNode != null) {
+					principalInvestigator.setIndividualLabel(investigatorLabelNode.toString());
 				}
 			}
 			
-			PIGrant.add(grant);
+			grants.add(grant);
 		}
-		return PIGrant;
+		return grants;
 	}
 	
-	private ResultSet executeQuery(String queryURI, Dataset Dataset){
+	private ResultSet executeQuery(String queryURI, Dataset dataset) {
 		
 		QueryExecution queryExecution = null;
 		
 		Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
-		queryExecution = QueryExecutionFactory.create(query,Dataset);
+		queryExecution = QueryExecutionFactory.create(query, dataset);
 		
 		return queryExecution.execSelect();
 	}
 	
 
 
-	private String getSparqlQuery(String queryURI){
+	private String getSparqlQuery(String queryURI) {
 		
 		String sparqlQuery = QueryConstants.getSparqlPrefixQuery()
 							
@@ -170,7 +171,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 							+ 		"<" + queryURI + "> rdfs:label ?PILabel . "  	
 							+  		"{ "
 							        	
-							+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
+							+	"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
 
 							+			"?Role core:roleIn ?Grant . "
 
@@ -186,7 +187,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 									
 							+		"{ "
 							        	
-							+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
+							+	"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
 
 							+			"?Role core:roleIn ?Grant . "
 
@@ -218,15 +219,15 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 
 							+ "} ";
 		
-		log.debug("SPARQL query for person grant count -> \n"+ sparqlQuery);
+		log.debug("SPARQL query for person grant count -> \n" + sparqlQuery);
 		//System.out.println("SPARQL query for person grant count -> \n"+ sparqlQuery);
 		
 		return sparqlQuery;
 	}
 	
-	public Set<Activity> getQueryResult() throws MalformedQueryParametersException{
+	public Set<Activity> getQueryResult() throws MalformedQueryParametersException {
 		
-		if(StringUtils.isNotBlank(this.personURI)){
+		if (StringUtils.isNotBlank(this.personURI)) {
 			
 			/*
 			 * To test the validity of the URI submitted
@@ -234,7 +235,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 			IRIFactory iriFactory = IRIFactory.jenaImplementation();
 			IRI iri = iriFactory.create(this.personURI);
 			
-			if(iri.hasViolation(false)){
+			if (iri.hasViolation(false)) {
 				String errorMsg = ((Violation) iri.violations(false).next()).getShortMessage();
                 log.error("Grant Count vis Query " + errorMsg);
                 throw new MalformedQueryParametersException(
@@ -244,7 +245,7 @@ public class PersonGrantCountQueryRunner implements QueryRunner<Set<Activity>>{
 			throw new MalformedQueryParametersException("URL parameter is either null or empty.");
 		}
 		
-		ResultSet resultSet = executeQuery(this.personURI, this.Dataset);
+		ResultSet resultSet = executeQuery(this.personURI, this.dataset);
 		
 		return createJavaValueObjects(resultSet);
 	}

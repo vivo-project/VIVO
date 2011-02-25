@@ -41,7 +41,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 
 	private String personURI;
-	private Dataset Dataset;
+	private Dataset dataset;
 
 	private Individual author; 
 
@@ -52,20 +52,20 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 	private Log log;
 
 	private static final String SPARQL_QUERY_COMMON_SELECT_CLAUSE = "" 
-			+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
-			+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n" 			 			 			 
-			+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ") \n";
+		+ "SELECT (str(?authorLabel) as ?" + QueryFieldLabels.AUTHOR_LABEL + ") \n" 
+		+ "		(str(?document) as ?" + QueryFieldLabels.DOCUMENT_URL + ") \n"
+		+ "		(str(?publicationDate) as ?" + QueryFieldLabels.DOCUMENT_PUBLICATION_DATE + ")\n";
 
 	private static final String SPARQL_QUERY_COMMON_WHERE_CLAUSE = "" 
 			+ "?document rdfs:label ?documentLabel .\n" 
 			+ "OPTIONAL {  ?document core:dateTimeValue ?dateTimeValue . \n" 
-			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n" ;
+			+ "				?dateTimeValue core:dateTime ?publicationDate } .\n";
 	
 	public PersonPublicationCountQueryRunner(String personURI,
-			Dataset Dataset, Log log) {
+			Dataset dataset, Log log) {
 
 		this.personURI = personURI;
-		this.Dataset = Dataset;
+		this.dataset = dataset;
 		this.log = log;
 
 	}
@@ -105,11 +105,11 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 	}
 
 	private ResultSet executeQuery(String queryURI,
-            Dataset Dataset) {
+            Dataset dataset) {
 
         QueryExecution queryExecution = null;
         Query query = QueryFactory.create(getSparqlQuery(queryURI), SYNTAX);
-        queryExecution = QueryExecutionFactory.create(query, Dataset);
+        queryExecution = QueryExecutionFactory.create(query, dataset);
         return queryExecution.execSelect();
     }
 
@@ -154,7 +154,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
         }
 
 		ResultSet resultSet	= executeQuery(this.personURI,
-										   this.Dataset);
+										   this.dataset);
 
 		return createJavaValueObjects(resultSet);
 	}

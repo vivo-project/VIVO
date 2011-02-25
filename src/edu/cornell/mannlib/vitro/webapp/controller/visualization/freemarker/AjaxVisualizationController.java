@@ -73,18 +73,18 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
     	if (visRequestHandler != null) {
     	
     		/*
-        	 * Pass the query to the selected visualization request handler & render the visualization.
-        	 * Since the visualization content is directly added to the response object we are side-
-        	 * effecting this method.
+        	 * Pass the query to the selected visualization request handler & render the 
+        	 * visualization. Since the visualization content is directly added to the response 
+        	 * object we are side-effecting this method.
         	 * */
             return renderVisualization(vreq, visRequestHandler);
             
     	} else {
     		
-    		return UtilityFunctions.handleMalformedParameters("Visualization Query Error", 
-    														  "Inappropriate query parameters were submitted.", 
-    														  vreq);
-    		
+    		return UtilityFunctions.handleMalformedParameters(
+    									"Visualization Query Error",
+    									"Inappropriate query parameters were submitted.",
+    									vreq);
     	}
     }
 
@@ -147,7 +147,8 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
     	
     	try {
     		visRequestHandler = VisualizationsDependencyInjector
-										.getVisualizationIDsToClassMap(getServletContext()).get(visType);
+										.getVisualizationIDsToClassMap(
+												getServletContext()).get(visType);
     		
     	} catch (NullPointerException nullKeyException) {
 
