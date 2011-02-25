@@ -5,12 +5,9 @@ package edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.DataSource;
 import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.DatasetFactory;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelMaker;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
@@ -134,11 +131,6 @@ public class StandardVisualizationController extends FreemarkerHttpServlet {
 	private Dataset setupJENADataSource(VitroRequest vreq) {
 
         log.debug("rdfResultFormat was: " + VisConstants.RDF_RESULT_FORMAT_PARAM);
-
-//        DataSource dataSource = DatasetFactory.create();
-//        ModelMaker maker = (ModelMaker) getServletContext().getAttribute("vitroJenaModelMaker");
-//
-//    	dataSource.setDefaultModel(model);
 
         return vreq.getDataset();
 	}

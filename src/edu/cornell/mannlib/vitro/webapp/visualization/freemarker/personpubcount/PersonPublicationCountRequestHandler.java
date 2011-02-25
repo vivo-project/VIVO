@@ -45,7 +45,7 @@ VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
+			Dataset dataset) throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 								.getParameter(
@@ -61,7 +61,7 @@ VisualizationRequestHandler {
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 															personURI, 
-															Dataset, 
+															dataset, 
 															log);
 
 		Set<Activity> authorDocuments = queryManager.getQueryResult();
@@ -97,14 +97,14 @@ VisualizationRequestHandler {
 
 	@Override
 	public Map<String, String> generateDataVisualization(VitroRequest vitroRequest, Log log,
-			Dataset Dataset) throws MalformedQueryParametersException {
+			Dataset dataset) throws MalformedQueryParametersException {
 
 		String personURI = vitroRequest
 		.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 																personURI, 
-																Dataset, 
+																dataset, 
 																log);
 
 		Set<Activity> authorDocuments = queryManager.getQueryResult();

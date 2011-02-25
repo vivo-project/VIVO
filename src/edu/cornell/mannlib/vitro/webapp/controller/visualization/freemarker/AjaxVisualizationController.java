@@ -11,17 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.DataSource;
-import com.hp.hpl.jena.query.DatasetFactory;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelMaker;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.TemplateProcessingHelper.TemplateProcessingException;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -110,14 +107,14 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 			
         }
 		
-		DataSource dataSource = setupJENADataSource(model, vitroRequest);
+		Dataset dataset = setupJENADataSource(vitroRequest);
         
-		if (dataSource != null && visRequestHandler != null) {
+		if (dataset != null && visRequestHandler != null) {
         	
         	try {
 				return visRequestHandler.generateAjaxVisualization(vitroRequest, 
 														log, 
-														dataSource);
+														dataset);
 			} catch (MalformedQueryParametersException e) {
 				return UtilityFunctions.handleMalformedParameters(
 						"Ajax Visualization Query Error - Individual Publication Count", 
@@ -160,16 +157,8 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 		return visRequestHandler;
 	}
 
-	private DataSource setupJENADataSource(Model model, VitroRequest vreq) {
-
-        log.debug("rdfResultFormat was: " + VisConstants.RDF_RESULT_FORMAT_PARAM);
-
-        DataSource dataSource = DatasetFactory.create();
-        ModelMaker maker = (ModelMaker) getServletContext().getAttribute("vitroJenaModelMaker");
-
-    	dataSource.setDefaultModel(model);
-
-        return dataSource;
+	private Dataset setupJENADataSource(VitroRequest vreq) {
+        return vreq.getDataset();
 	}
 
 }

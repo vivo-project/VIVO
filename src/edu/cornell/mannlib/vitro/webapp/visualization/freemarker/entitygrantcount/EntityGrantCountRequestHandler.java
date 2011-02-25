@@ -12,7 +12,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
@@ -30,6 +29,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycompariso
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -37,8 +37,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 
 public class EntityGrantCountRequestHandler implements
 		VisualizationRequestHandler {
-	
-	private Log log = LogFactory.getLog(EntityGrantCountRequestHandler.class.getName());
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
@@ -66,7 +64,7 @@ public class EntityGrantCountRequestHandler implements
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
 		/*
-		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
+		 * This will provide the data in json format mainly used for standalone temporal vis. 
 		 * */
 		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
 					.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
@@ -95,7 +93,7 @@ public class EntityGrantCountRequestHandler implements
 			 * This provides csv download files for the content in the tables.
 			 * */		
 
-		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, Dataset, log);
+		ModelConstructor constructQueryRunner = new EntityGrantCountConstructQueryRunner(entityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
@@ -124,7 +122,7 @@ public class EntityGrantCountRequestHandler implements
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
-		EntityGrantCountConstructQueryRunner constructQueryRunner = new EntityGrantCountConstructQueryRunner(subjectEntityURI, Dataset, log);
+		ModelConstructor constructQueryRunner = new EntityGrantCountConstructQueryRunner(subjectEntityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityGrantCountQueryRunner(
@@ -235,32 +233,6 @@ public class EntityGrantCountRequestHandler implements
 	}
 	
 	/**
-	 * @deprecated This method should not be called anymore although the templates being 
-	 * called by this method are still in use, so we should not get rid of it.
-	 * @return
-	 */
-	private ResponseValues prepareStandaloneErrorResponse(
-			VitroRequest vitroRequest, String entityURI) {
-		
-        Portal portal = vitroRequest.getPortal();
-        String standaloneTemplate = "entityGrantComparisonError.ftl";
-        Map<String, Object> body = new HashMap<String, Object>();
-        
-        String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vitroRequest,
-				entityURI);
-        
-        body.put("organizationLabel", organizationLabel);
-        
-        
-        body.put("portalBean", portal);
-        body.put("title", organizationLabel + " - Temporal Graph Visualization");
-        body.put("organizationURI", entityURI);
-        
-        return new TemplateResponseValues(standaloneTemplate, body);
-	}	
-	
-	
-	/**
 	 * function to generate a json file for year <-> grant count mapping
 	 * @param vreq 
 	 * @param subentities
@@ -293,8 +265,6 @@ public class EntityGrantCountRequestHandler implements
 				yearGrantCount.add(currentGrantYear);
 			}
 
-		//	log.info("entityJson.getLabel() : " + entityJson.getLabel() + " subOrganizationTypesResult " + subOrganizationTypesResult.toString());
-			
 			entityJson.setYearToActivityCount(yearGrantCount);
 			entityJson.getOrganizationType().addAll(subOrganizationTypesResult.get(entityJson.getLabel()));
 
@@ -308,11 +278,9 @@ public class EntityGrantCountRequestHandler implements
 				entityJson.setVisMode("ORGANIZATION");
 			}			
 			
-//			setEntityVisMode(entityJson);
 			subEntitiesJson.add(entityJson);
 		}
 		
-	//	System.out.println("\nStopWords are "+ EntitySubOrganizationTypesQueryRunner.stopWords.toString() + "\n");
 		return json.toJson(subEntitiesJson);
 
 	}

@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hp.hpl.jena.query.DataSource;
-import com.hp.hpl.jena.query.DatasetFactory;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelMaker;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -124,12 +122,12 @@ public class DataVisualizationController extends VitroHttpServlet {
             throw new MalformedQueryParametersException(errorMessage);
         }
 		
-		DataSource dataSource = setupJENADataSource(model, vitroRequest);
+		Dataset dataset = setupJENADataSource(vitroRequest);
         
-		if (dataSource != null && visRequestHandler != null) {
+		if (dataset != null && visRequestHandler != null) {
 				return visRequestHandler.generateDataVisualization(vitroRequest, 
 														log, 
-														dataSource);
+														dataset);
         	
         } else {
         	
@@ -148,29 +146,24 @@ public class DataVisualizationController extends VitroHttpServlet {
 																	.VIS_TYPE_KEY);
     	VisualizationRequestHandler visRequestHandler = null;
     	
-    	
     	try {
+    		
     		visRequestHandler = VisualizationsDependencyInjector
 									.getVisualizationIDsToClassMap(getServletContext())
 											.get(visType);
+    		
     	} catch (NullPointerException nullKeyException) {
-
     		return null;
 		}
     	
 		return visRequestHandler;
 	}
 
-	private DataSource setupJENADataSource(Model model, VitroRequest vreq) {
+	private Dataset setupJENADataSource(VitroRequest vreq) {
 
         log.debug("rdfResultFormat was: " + VisConstants.RDF_RESULT_FORMAT_PARAM);
 
-        DataSource dataSource = DatasetFactory.create();
-        ModelMaker maker = (ModelMaker) getServletContext().getAttribute("vitroJenaModelMaker");
-
-    	dataSource.setDefaultModel(model);
-
-        return dataSource;
+        return vreq.getDataset();
 	}
 
 }

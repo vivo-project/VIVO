@@ -12,7 +12,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
@@ -29,6 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -36,8 +36,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
 public class EntityPublicationCountRequestHandler implements
 		VisualizationRequestHandler {
 	
-	private Log log = LogFactory.getLog(EntityPublicationCountRequestHandler.class.getName());
-
 	@Override
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, Dataset Dataset)
@@ -59,7 +57,7 @@ public class EntityPublicationCountRequestHandler implements
 			String subjectEntityURI)
 			throws MalformedQueryParametersException {
 		
-		EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, Dataset, log);
+		ModelConstructor constructQueryRunner = new EntityPublicationCountConstructQueryRunner(subjectEntityURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
@@ -140,7 +138,7 @@ public class EntityPublicationCountRequestHandler implements
 			 * This provides csv download files for the content in the tables.
 			 * */
 			
-			EntityPublicationCountConstructQueryRunner constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, Dataset, log);
+			ModelConstructor constructQueryRunner = new EntityPublicationCountConstructQueryRunner(entityURI, Dataset, log);
 			Model constructedModel = constructQueryRunner.getConstructedModel();
 			
 			QueryRunner<Entity> queryManager = new EntityPublicationCountQueryRunner(
@@ -230,33 +228,6 @@ public class EntityPublicationCountRequestHandler implements
         body.put("organizationLabel", organizationLabel);
         
         return new TemplateResponseValues(standaloneTemplate, body);
-	}
-
-	
-	/**
-	 * @deprecated This method should not be called anymore although the templates being 
-	 * called by this method are still in use, so we should not get rid of it.
-	 * @param vitroRequest
-	 * @param entityURI
-	 * @return
-	 */
-	private ResponseValues prepareStandaloneErrorResponse(
-			VitroRequest vitroRequest, String entityURI) {
-		
-        Portal portal = vitroRequest.getPortal();
-        String standaloneTemplate = "entityPublicationComparisonError.ftl";
-        Map<String, Object> body = new HashMap<String, Object>();
-        
-        String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vitroRequest,
-				entityURI);
-        
-        body.put("organizationLabel", organizationLabel);
-        body.put("portalBean", portal);
-        body.put("title", organizationLabel + " - Temporal Graph Visualization");
-        body.put("organizationURI", entityURI);
-
-        return new TemplateResponseValues(standaloneTemplate, body);
-
 	}
 
 	/**

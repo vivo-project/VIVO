@@ -13,15 +13,14 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -46,7 +45,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		String egoURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		String visMode = vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY);
 		
-		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
+		ModelConstructor constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
 		Model constructedModel = constructQueryRunner.getConstructedModel();
 		
 		QueryRunner<CollaborationData> queryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
@@ -104,51 +103,12 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 				 						  
 	}
 	
-	/**
-	 * When the page for person level visualization is requested.
-	 * @param egoURI
-	 * @param vitroRequest
-	 * @param coPIVO
-	 */
-	private TemplateResponseValues prepareStandaloneResponse(String egoURI,
-			CollaborationData coPIVO, VitroRequest vitroRequest) {
-		
-        Portal portal = vitroRequest.getPortal();
-        
-        String title = "";
-        Map<String, Object> body = new HashMap<String, Object>();
-
-
-        if (coPIVO.getCollaborators() != null
-				&& coPIVO.getCollaborators().size() > 0) {
-        	title = coPIVO.getEgoCollaborator().getCollaboratorName() + " - ";
-        	body.put("numOfInvestigators", coPIVO.getCollaborators().size());
-			
-			title = coPIVO.getEgoCollaborator().getCollaboratorName() + " - ";
-		}
-
-		if (coPIVO.getCollaborations() != null
-				&& coPIVO.getCollaborations().size() > 0) {
-			body.put("numOfCoInvestigations", coPIVO.getCollaborations().size());
-		}
-
-		String standaloneTemplate = "coInvestigation.ftl";
-		
-        body.put("portalBean", portal);
-        body.put("egoURIParam", egoURI);
-        body.put("title", title + "Co-PI Visualization");
-        
-        return new TemplateResponseValues(standaloneTemplate, body);
-	}
-
-
 	private String getCoPIsListCSVContent(CollaborationData coPIData) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Co-investigator, Count\n");
 		
-//		for (Entry<String, Integer> currentEntry : coPIData.entrySet()) {
 		for (Collaborator currNode : coPIData.getCollaborators()) {
 			
 			/*

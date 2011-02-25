@@ -1,7 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -23,8 +22,9 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 
-public class EntitySubOrganizationTypesConstructQueryRunner {
+public class EntitySubOrganizationTypesConstructQueryRunner implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	

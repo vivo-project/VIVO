@@ -24,6 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
 public class EntityComparisonUtilityFunctions {
@@ -102,7 +103,7 @@ public class EntityComparisonUtilityFunctions {
 			Dataset Dataset, String subjectOrganization)
 			throws MalformedQueryParametersException {
 		
-		EntitySubOrganizationTypesConstructQueryRunner constructQueryRunnerForSubOrganizationTypes = new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, Dataset, log) ;
+		ModelConstructor constructQueryRunnerForSubOrganizationTypes = new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, Dataset, log) ;
 		Model constructedModelForSubOrganizationTypes = constructQueryRunnerForSubOrganizationTypes.getConstructedModel();
 		
 		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = new EntitySubOrganizationTypesQueryRunner(

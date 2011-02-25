@@ -29,6 +29,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount.
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount.PersonPublicationCountVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -80,7 +81,7 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)){ 
         	
-    		CoPIGrantCountConstructQueryRunner constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
+        	ModelConstructor constructQueryRunner = new CoPIGrantCountConstructQueryRunner(egoURI, Dataset, log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
     		
     		QueryRunner<CollaborationData> coPIQueryManager = new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);

@@ -22,8 +22,9 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 
-public class EntityPublicationCountConstructQueryRunner {
+public class EntityPublicationCountConstructQueryRunner implements ModelConstructor{
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
