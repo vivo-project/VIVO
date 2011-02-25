@@ -49,7 +49,7 @@ public class EntityGrantCountRequestHandler implements
 		if (StringUtils.isBlank(entityURI)){
 			
 			entityURI = EntityComparisonUtilityFunctions
-								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset);
+								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset, vitroRequest);
 			
 		}
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
@@ -85,7 +85,8 @@ public class EntityGrantCountRequestHandler implements
 								EntityComparisonUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
-												Dataset));
+												Dataset, 
+												vitroRequest));
 			}
 			
 		} else {

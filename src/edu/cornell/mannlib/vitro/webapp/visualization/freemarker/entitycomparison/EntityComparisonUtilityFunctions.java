@@ -16,8 +16,8 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import edu.cornell.mannlib.vitro.webapp.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
@@ -130,12 +130,12 @@ public class EntityComparisonUtilityFunctions {
 	}
 	
 	public static String getStaffProvidedOrComputedHighestLevelOrganization(Log log,
-			Dataset Dataset)
+			Dataset Dataset, VitroRequest vitroRequest)
 			throws MalformedQueryParametersException {
 		
 		String finalHighestLevelOrganizationURI = "";
 		
-		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getProperty("visualization.topLevelOrg");
+		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getBean(vitroRequest).getProperty("visualization.topLevelOrg");
 		
 		/*
 		 * First checking if the staff has provided highest level organization in deploy.properties

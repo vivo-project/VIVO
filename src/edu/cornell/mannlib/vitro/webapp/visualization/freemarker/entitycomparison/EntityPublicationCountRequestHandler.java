@@ -47,7 +47,7 @@ public class EntityPublicationCountRequestHandler implements
 		if (StringUtils.isBlank(entityURI)){
 			
 			entityURI = EntityComparisonUtilityFunctions
-								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset);
+								.getStaffProvidedOrComputedHighestLevelOrganization(log, Dataset, vitroRequest);
 		}
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
@@ -130,7 +130,8 @@ public class EntityPublicationCountRequestHandler implements
 								EntityComparisonUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
-												Dataset));
+												Dataset, 
+												vitroRequest));
 			}
 			
 		} else {
