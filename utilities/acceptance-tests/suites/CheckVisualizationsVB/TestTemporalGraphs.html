@@ -281,17 +281,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Department</td>
+	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Department</td>
+	<td>Organizations</td>
 	<td></td>
 </tr>
 <tr>
@@ -332,6 +327,16 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Who do you want to compare?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +471,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>You have selected 3 of a maximum 10 people.</td>
+	<td>You have selected 4 of a maximum 10 people.</td>
 	<td></td>
 </tr>
 <tr>
@@ -551,7 +556,7 @@
 </tr>
 <tr>
 	<td>selectAndWait</td>
-	<td>LOCATOR_DETECTION_FAILED</td>
+	<td>//div[@id='leftUpper']/div/select</td>
 	<td>label=by Grants</td>
 </tr>
 <tr>
@@ -735,13 +740,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>comment</td>
+	<td class="comment">Make dept sub-org of a college</td>
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Make dept sub-org of a college</td>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -751,7 +756,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -826,17 +831,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=College</td>
+	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>College</td>
+	<td>Organizations</td>
 	<td></td>
 </tr>
 <tr>
@@ -991,7 +991,7 @@
 </tr>
 <tr>
 	<td>selectAndWait</td>
-	<td>LOCATOR_DETECTION_FAILED</td>
+	<td>//div[@id='leftUpper']/div/select</td>
 	<td>label=by Grants</td>
 </tr>
 <tr>
@@ -1126,7 +1126,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
