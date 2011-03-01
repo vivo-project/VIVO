@@ -2,7 +2,7 @@
 
 <div id="body">
 
-        <h2><span id="header-entity-label"><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a></span></h2>
+        <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a></span></h2>
         
         <div id="leftblock">
             <div id="leftUpper">

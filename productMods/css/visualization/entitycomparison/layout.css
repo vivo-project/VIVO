@@ -117,9 +117,15 @@ a.clear-selected-entities {
     vertical-align: top;
 }
 #header-entity-label {
-    font-size: 1.1em;
-    font-weight: bold;
+font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica,
+sans-serif;
+    font-size: 1.5275em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
 }
+
 .ellipsis {
     white-space: nowrap;
     overflow: hidden;
@@ -201,4 +207,21 @@ p.displayCounter{
 #comparisonParameter, 
 #headerText {
     color: #2485ae;
+}
+/* -------------------------------------------------------------->  */
+/* SPECIAL STYLES FOR THE entityComparisonErrorCommonBody.ftl FILE  */
+/* -------------------------------------------------------------->  */
+#noPubsOrGrants-header {
+    font-size: 1.375em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
+#noPubsOrGrants-span  {
+    font-size:22px;
+}
+#noPubsOrGrants-span a {
+    color: #84a655;
+    font-size:16px;
 }
