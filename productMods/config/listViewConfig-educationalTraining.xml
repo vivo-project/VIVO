@@ -4,46 +4,13 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query-base>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
-        SELECT DISTINCT ?edTraining
-                        ?org ?orgName 
-                        ?degreeName ?degreeAbbr 
-                        ?majorField ?deptOrSchool ?info 
-                        ?dateTimeStart ?dateTimeEnd 
-            WHERE {
-                ?subject ?property ?edTraining 
-                OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                  
-                           ?org rdfs:label ?orgName  
-                }
-                OPTIONAL { ?edTraining core:degreeEarned ?degree  
-                           OPTIONAL { ?degree rdfs:label ?degreeName }
-                           OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
-                }
-                OPTIONAL { ?edTraining core:majorField ?majorField }
-                OPTIONAL { ?edTraining core:departmentOrSchool ?deptOrSchool }
-                OPTIONAL { ?edTraining core:supplementalInformation ?info }
-                OPTIONAL { ?edTraining core:dateTimeInterval ?dateTimeInterval 
-                           OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
-                                      ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                           }
-                           OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .   
-                                      ?dateTimeEndValue core:dateTime ?dateTimeEnd 
-                           }                                       
-                }                                  
-         }  ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart)
-    </query-base>
-
-    <query-collated>    
+    <query-select>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         
-        SELECT DISTINCT ?subclass
+        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
                         ?edTraining 
                         ?org ?orgName 
                         ?degreeName ?degreeAbbr 
@@ -53,10 +20,12 @@
                 ?subject ?property ?edTraining 
                 OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                 
                            ?org rdfs:label ?orgName  
+                           <collation-fragment>
                            OPTIONAL { ?subclass rdfs:subClassOf foaf:Organization .
                                       ?org a ?subclass 
-                           }                                           
-                }
+                           }  
+                           </collation-fragment>                         
+                }        
                 OPTIONAL { ?edTraining core:degreeEarned ?degree  
                            OPTIONAL { ?degree rdfs:label ?degreeName }
                            OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
@@ -73,7 +42,7 @@
                            }                                      
                 }                              
          }  ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart)
-    </query-collated>
+    </query-select>
 
     <query-construct> 
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   

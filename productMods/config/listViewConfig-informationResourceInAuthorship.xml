@@ -4,40 +4,26 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query-base>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
-        SELECT DISTINCT ?authorship
-                        ?person ?personName WHERE {
-            ?subject ?property ?authorship 
-            OPTIONAL { ?authorship core:authorRank ?rank } 
-            OPTIONAL { ?authorship core:linkedAuthor ?person .                     
-                       ?person rdfs:label ?personName  
-            }                             
-        } ORDER BY ?rank ?personName   
-    </query-base>
-
-    <query-collated>    
+    <query-select>    
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
                 
-        SELECT DISTINCT ?subclass
+                SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
                         ?authorship
                         ?person ?personName WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:authorRank ?rank } 
             OPTIONAL { ?authorship core:linkedAuthor ?person .                      
-                       ?person rdfs:label ?personName  
+                       ?person rdfs:label ?personName 
+                       <collation-fragment> 
                        OPTIONAL { ?person a ?subclass .
                                   ?subclass rdfs:subClassOf foaf:Person 
-                       }   
-            }                             
-        } ORDER BY ?subclass ?rank ?personName   
-    </query-collated>
+                       } 
+                       </collation-fragment>                            
+            } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?rank ?personName   
+    </query-select>
 
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  

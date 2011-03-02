@@ -4,40 +4,12 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-        <query-base>    
+    <query-select>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?position                 
-                        ?positionTitle 
-                        ?person ?personName 
-                        ?dateTimeStart ?dateTimeEnd WHERE {
-            ?subject ?property ?position  
-            OPTIONAL { ?position core:positionForPerson ?person .
-                       ?person rdfs:label ?personName   
-            }                        
-            OPTIONAL { ?position rdfs:label ?positionTitle }
-            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
-                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
-                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                       }
-                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd  
-
-                       }
-            # Current positions only: end date is either null or not in the past
-            } FILTER ( !bound(?dateTimeEnd) ||                        
-                       afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
-        } ORDER BY ?personName
-    </query-base>
-    
-    <query-collated>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
-        SELECT DISTINCT ?subclass 
+        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
                         ?position
                         ?positionTitle 
                         ?person ?personName 
@@ -45,10 +17,12 @@
             ?subject ?property ?position  
             OPTIONAL { ?position core:positionForPerson ?person .
                        ?person rdfs:label ?personName   
-            }                 
+            }     
+            <collation-fragment>           
             OPTIONAL { ?position a ?subclass .
                        ?subclass rdfs:subClassOf core:Position 
-            }         
+            }   
+            </collation-fragment>
             OPTIONAL { ?position rdfs:label ?positionTitle }
             OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
@@ -60,8 +34,8 @@
             # Current positions only: end date is either null or not in the past
             } FILTER ( !bound(?dateTimeEnd) ||                        
                        afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
-        } ORDER BY ?subclass ?personName
-    </query-collated>
+        } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?personName
+    </query-select>
     
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  

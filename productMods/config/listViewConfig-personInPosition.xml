@@ -4,39 +4,12 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query-base>    
+    <query-select>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?position 
-                        ?positionTitle
-                        ?hrJobTitle
-                        ?org ?orgName 
-                        ?dateTimeStart ?dateTimeEnd WHERE {
-            ?subject ?property ?position  
-            OPTIONAL { ?position core:positionInOrganization ?org . 
-                       ?org rdfs:label ?orgName 
-            }
-            OPTIONAL { ?position rdfs:label ?positionTitle  }
-            OPTIONAL { ?position core:hrJobTitle ?hrJobTitle }
-            OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
-                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                    
-                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
-                       }
-                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .  
-                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd  
-                       }
-            }
-        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
-    </query-base>
- 
-    <query-collated>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
-        SELECT DISTINCT ?subclass 
+        SELECT DISTINCT <collation-fragment>?subclass</collation-fragment> 
                         ?position
                         ?positionTitle    
                         ?hrJobTitle                    
@@ -56,11 +29,13 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd  
                        }
             }
+            <collation-fragment>
             OPTIONAL { ?position a ?subclass .
                        ?subclass rdfs:subClassOf core:Position 
             } 
-        } ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
-    </query-collated>
+            </collation-fragment>
+        } ORDER BY <collation-fragment>?subclass</collation-fragment> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
+    </query-select>
        
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
