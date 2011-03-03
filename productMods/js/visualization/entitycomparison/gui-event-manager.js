@@ -147,14 +147,14 @@ function performEntityCheckboxClickedRedrawActions() {
  *  values from the json file and
  *  dynamically generate checkboxes
  */
-function loadData(jsonData) {
+function loadData(jsonData, dataTableParams) {
 
     $.each(jsonData, function (index, val) {
         setOfLabels.push(val.label);
         labelToEntityRecord[val.label] = val;
     });
-
-    prepareTableForDataTablePagination(jsonData);
+    
+    prepareTableForDataTablePagination(jsonData, dataTableParams);
     setEntityLevel(getEntityVisMode(jsonData));
     
     entityCheckboxOperatedOnEventListener();
@@ -247,15 +247,21 @@ temporalGraphProcessor = {
 		
 	initiateTemporalGraphRenderProcess: function(givenGraphContainer, jsonData) {
 		
+		this.dataTableParams = {
+			searchBarParentContainerDIVClass : "searchbar",
+			paginationContainerDIVClass : "paginatedtabs"
+		};
+		
+		
 		/*
          * initial display of the grid when the page loads 
          * */ 
         init(givenGraphContainer);
-        
+
         /*
          * render the temporal graph per the sent content. 
          * */
-        loadData(jsonData);
+        loadData(jsonData, this.dataTableParams);
         
         /*
          * This will make sure that top 3 entities are selected by default when the page loads.
