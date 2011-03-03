@@ -10,7 +10,7 @@
         PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
                 
-                SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
+        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
                         ?authorship
                         ?person ?personName WHERE {
             ?subject ?property ?authorship  
@@ -21,8 +21,9 @@
                        OPTIONAL { ?person a ?subclass .
                                   ?subclass rdfs:subClassOf foaf:Person 
                        } 
-                       </collation-fragment>                            
-            } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?rank ?personName   
+                       </collation-fragment>
+            }
+        } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?rank ?personName   
     </query-select>
 
     <query-construct>
