@@ -198,9 +198,7 @@
 -->
 
   <!--  vivo specific -->
-  <listener>
-    <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.VivoMergedListFilteringSetup</listener-class>
-  </listener>  
+
   
   <!-- Filters ********************************************************** -->
   <!-- in 2.4 spec, filter chain order is first by filter-mapping <url-pattern> order in web.xml,
@@ -1166,29 +1164,6 @@
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.MailUsersServlet</servlet-class>
      <load-on-startup>5</load-on-startup>
   </servlet>
-
-  <!--
-  <servlet>
-    <servlet-name>entity</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/entityold</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/entityold/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/individualold/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>entity</servlet-name>
-    <url-pattern>/displayold/*</url-pattern>
-  </servlet-mapping>
-  -->
   
   <servlet>
     <servlet-name>ontology</servlet-name>
