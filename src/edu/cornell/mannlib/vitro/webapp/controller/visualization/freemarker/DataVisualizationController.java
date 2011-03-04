@@ -79,13 +79,9 @@ public class DataVisualizationController extends VitroHttpServlet {
 				
 			} catch (MalformedQueryParametersException e) {
 
-	    		UtilityFunctions.handleMalformedParameters("Visualization Query Error",
-						   e.getMessage(),
-						   vreq,
-						   request,
+	    		UtilityFunctions.handleMalformedParameters(e.getMessage(),
 						   response,
 						   log);
-				
 			}
 			
             return;
@@ -93,10 +89,7 @@ public class DataVisualizationController extends VitroHttpServlet {
     	} else {
     		
     		UtilityFunctions.handleMalformedParameters(
-    								"Visualization Query Error",
     								"Inappropriate query parameters were submitted.",
-    								vreq,
-    								request,
     								response,
     								log);
     		

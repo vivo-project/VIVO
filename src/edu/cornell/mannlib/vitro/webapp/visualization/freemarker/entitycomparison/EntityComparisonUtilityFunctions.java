@@ -140,8 +140,6 @@ public class EntityComparisonUtilityFunctions {
 			Dataset dataset, VitroRequest vitroRequest)
 			throws MalformedQueryParametersException {
 		
-		String finalHighestLevelOrganizationURI = "";
-		
 		String staffProvidedHighestLevelOrganization = ConfigurationProperties.getBean(vitroRequest)
 					.getProperty("visualization.topLevelOrg");
 		
@@ -157,13 +155,15 @@ public class EntityComparisonUtilityFunctions {
 			IRIFactory iRIFactory = IRIFactory.jenaImplementation();
 			IRI iri = iRIFactory.create(staffProvidedHighestLevelOrganization);
 		    
-			if (iri.hasViolation(false)) {
-				finalHighestLevelOrganizationURI = EntityComparisonUtilityFunctions
-					.getHighestLevelOrganizationURI(log, dataset);
-		    } else {
-		    	finalHighestLevelOrganizationURI = staffProvidedHighestLevelOrganization;
+			
+			if (!iri.hasViolation(false)) {
+		    	return staffProvidedHighestLevelOrganization;
 		    }
-		}
-		return finalHighestLevelOrganizationURI;
+		} 
+		
+		/*
+		 * If the provided value was not proper compute it yourself.
+		 * */
+		return EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log, dataset);
 	}
 }

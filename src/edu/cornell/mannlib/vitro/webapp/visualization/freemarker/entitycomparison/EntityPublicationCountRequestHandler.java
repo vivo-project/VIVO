@@ -51,6 +51,7 @@ public class EntityPublicationCountRequestHandler implements
 											log, 
 											dataset, 
 											vitroRequest);
+			
 		}
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
