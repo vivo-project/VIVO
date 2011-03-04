@@ -1063,6 +1063,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>JSON Reconcile Service</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONReconcileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JSON Reconcile Service</servlet-name>
+    <url-pattern>/reconcile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>TabEntitiesController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.TabEntitiesController</servlet-class>
   </servlet>
