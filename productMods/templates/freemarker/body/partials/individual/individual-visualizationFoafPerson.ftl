@@ -11,8 +11,8 @@
                             p.hasStatements(propertyGroups, "${core}hasCo-PrincipalInvestigatorRole") ) >
 
 <#if (isAuthor || isInvestigator)>
-
-    ${stylesheets.add("css/visualization/visualization.css")} 
+ 
+    ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/visualization/visualization.css" />')}
     <#assign standardVisualizationURLRoot ="/visualization">
     
     <section id="visualization" role="region">
@@ -34,9 +34,9 @@
                 <div class="collaboratorship-link"><a href="${coAuthorVisUrl}">Co-Author Network</a></div>
             </div>
             
-            ${scripts.add(googleJSAPI)}
-            ${scripts.add("js/visualization/visualization-helper-functions.js")}
-            ${scripts.add("/js/visualization/sparkline.js")}
+            ${scripts.add('<script type="text/javascript" src="${googleJSAPI}"></script>',
+                          '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
+                          '<script type="text/javascript" src="${urls.base}/js/visualization/sparkline.js"></script>')}           
             
             <script type="text/javascript">
                 var visualizationUrl = '${urls.base}/visualizationAjax?uri=${individual.uri?url}';

@@ -25,11 +25,12 @@
     
     <#include "menupage-browse.ftl">
     
-    ${stylesheets.add("/css/menupage/menupage.css")}
+    ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/menupage/menupage.css" />')}
     
     <#include "menupage-scripts.ftl">
     
-    ${scripts.add("/js/menupage/browseByVClassPeople.js")}
+    ${scripts.add('<script type="text/javascript" src="${urls.base}/js/menupage/browseByVClassPeople.js"></script>')}
+
 <#else>
     ${noDataNotification}
 </#if>

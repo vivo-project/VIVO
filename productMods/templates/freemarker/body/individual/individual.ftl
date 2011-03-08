@@ -15,8 +15,7 @@
 
 <#include "individual-vitro.ftl">
 
-${stylesheets.add("/css/individual/individual-vivo.css")}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 
-${headScripts.add("/js/jquery_plugins/jquery.truncator.js")}
-
-${scripts.add("/js/individual/individualUtils.js")}
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}

@@ -41,48 +41,26 @@ build version is stable enough. If in next couple of days we feel that there are
 we will default to using the stable version unless the request comes from IE 9 in which case
 we will use rev 293 (dev build version) of the flot & excanvas files.
 -->
-<#assign excanvas = '${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/excanvas.min.js'>
-<#assign flot = 'js/visualization/entitycomparison/jquery_plugins/flot/r293/jquery.flot.min.js'>
 
-
-<#assign fliptext = 'js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js'>
-<#assign jqueryNotify = 'js/jquery_plugins/jquery.notify.min.js'>
-<#assign jqueryBlockUI = 'js/jquery_plugins/jquery.blockUI.min.js'>
-<#assign jqueryUI = 'js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js'>
-<#assign datatable = 'js/jquery_plugins/jquery.dataTables.min.js'>
-<#assign entityComparisonUtils = 'js/visualization/entitycomparison/util.js'>
-<#assign entityComparisonConstants = 'js/visualization/entitycomparison/constants.js'>
-<#assign guiEventManager = 'js/visualization/entitycomparison/gui-event-manager.js'>
-
-
-
-<!--[if IE]><script type="text/javascript" src="${excanvas}"></script><![endif]-->
-${scripts.add(flot)}
-${scripts.add(fliptext)}
-${scripts.add(jqueryBlockUI)}
-${scripts.add(jqueryUI)}
-${scripts.add(datatable)}
-${scripts.add(entityComparisonUtils)}
-${scripts.add(entityComparisonConstants)}
-${scripts.add(jqueryNotify)}
+<!--[if IE]><script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/excanvas.min.js"></script><![endif]-->
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/jquery.flot.min.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.min.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.dataTables.min.js"></script>', 
+              '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/util.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/constants.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.notify.min.js"></script>')}              
 
 <#-- CSS files -->
 
-<#assign demoTable = "js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />
-<#assign jqueryUIStyle = "js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />
-<#assign jqueryNotifyStyle = "css/jquery_plugins/ui.notify.css" />
-<#assign entityComparisonStyle = "css/visualization/entitycomparison/layout.css" />
-<#assign entityComparisonStyleIEHack = "${urls.base}/css/visualization/entitycomparison/layout-ie.css" />
-<#assign entityComparisonStyleIE_6_7_Hack = "${urls.base}/css/visualization/entitycomparison/layout-ie-67.css" />
-<#assign vizStyle = "css/visualization/visualization.css" />
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/css/visualization/entitycomparison/layout.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/css/visualization/visualization.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/css/jquery_plugins/ui.notify.css" />')}
 
-${stylesheets.add(jqueryUIStyle)}
-${stylesheets.add(demoTable)}
-${stylesheets.add(entityComparisonStyle)}
-${stylesheets.add(vizStyle)}
-${stylesheets.add(jqueryNotifyStyle)}
-<!--[if IE]><link href="${entityComparisonStyleIEHack}" rel="stylesheet" type="text/css" /><![endif]-->
-<!--[if lt IE 8]><link href="${entityComparisonStyleIE_6_7_Hack}" rel="stylesheet" type="text/css" /><![endif]-->
+<!--[if IE]><link href="${urls.base}/css/visualization/entitycomparison/layout-ie.css" rel="stylesheet" type="text/css" /><![endif]-->
+<!--[if lt IE 8]><link href="${urls.base}/css/visualization/entitycomparison/layout-ie-67.css" rel="stylesheet" type="text/css" /><![endif]-->
 
 <#-- variables passed from server-side code -->
 <script language="JavaScript" type="text/javascript">
@@ -122,4 +100,4 @@ var COMPARISON_PARAMETERS_INFO = {
 
 </script>
 
-${headScripts.add(guiEventManager)}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/gui-event-manager.js"></script>')}
