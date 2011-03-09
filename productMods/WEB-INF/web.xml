@@ -269,15 +269,6 @@
     <dispatcher>forward</dispatcher>
   </filter-mapping>
 
-  <!--filter>
-        <filter-name>AuthSetupForRequest</filter-name>
-        <filter-class>edu.cornell.mannlib.vitro.webapp.auth.filters.AuthSetupForRequest</filter-class>
-  </filter>
-  <filter-mapping>
-        <filter-name>AuthSetupForRequest</filter-name>
-        <url-pattern>/*</url-pattern>
-  </filter-mapping-->
-
    <filter>
     <filter-name>PageRoutingFilter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.PageRoutingFilter</filter-class>
