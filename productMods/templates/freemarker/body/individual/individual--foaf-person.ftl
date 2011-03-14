@@ -88,9 +88,7 @@
         </section>
         -->
         
-        <#if individual.showAdminPanel>
-            <#include "individual-adminPanel.ftl">
-        </#if>
+        <#include "individual-adminPanel.ftl">
         
         <header>
             <#if relatedSubject??>
