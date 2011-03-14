@@ -122,6 +122,18 @@ input#submit:visited {
     margin-top: .5em;
     margin-bottom: .5em;
 }
+#verbosePropertyForm span {
+    color: #888C8C;
+}
+#verbosePropertyForm b {
+    color: #595B5B;
+}
+#verbosePropertyForm .small {
+    font-size: 12px;
+}
+#verbosePropertyForm .verbose-off{
+    background: #706a66;
+}
 input.delete,
 input.delete:visited,
 input#delete,
