@@ -1424,3 +1424,15 @@ color: #2485AE;
     color: #f00;
     font-weight: bold;
 }
+
+/* ------------------------------------------------->  */
+/* VERBOSE DISPLAY  -------------------------------->  */
+/* ------------------------------------------------->  */
+section.verbosePropertyListing {
+    font-size: 12px;
+    font-weight: normal;
+    color: #5E6363;
+}
+section.verbosePropertyListing span {
+    color: #9bae5a;
+}
