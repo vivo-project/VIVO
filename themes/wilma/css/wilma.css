@@ -1436,3 +1436,15 @@ section.verbosePropertyListing {
 section.verbosePropertyListing span {
     color: #9bae5a;
 }
+h2#email .verbosePropertyListing,
+h2#phoneNumber .verbosePropertyListing {
+    margin-top: 10px;
+    line-height: 1.4em;
+}
+article.property h3 {
+    padding: 10px 0 10px 20px;
+    margin: 0;
+}
+article.property .verbosePropertyListing {
+    margin-left: 15px;
+}
