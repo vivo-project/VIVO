@@ -1448,3 +1448,6 @@ article.property h3 {
 article.property .verbosePropertyListing {
     margin-left: 15px;
 }
+h2#personInPosition .verbosePropertyListing {
+    display: block;
+}
