@@ -2,7 +2,10 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * JsonObject is used for creating data in JSON format, 
@@ -27,12 +30,18 @@ public class JsonObject {
 		this.stopWords = stopWords;
 	}
 
-	public List<String> getOrganizationType() {
+	public List<String> getOrganizationTypes() {
 		return organizationType;
 	}
 
-	public void setOrganizationType(List<String> organizationType) {
+	public void setOrganizationTypes(List<String> organizationType) {
 		this.organizationType = organizationType;
+	}
+	
+	public void setOrganizationTypes(Set<String> givenOrganizationType) {
+		for (String type : givenOrganizationType) {
+			this.organizationType.add(type);
+		}
 	}
 
 	public String getEntityURI() {

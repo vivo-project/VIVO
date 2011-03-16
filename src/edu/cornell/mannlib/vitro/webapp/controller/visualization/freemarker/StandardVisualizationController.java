@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker;
 
+import javax.servlet.ServletContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,6 +33,8 @@ public class StandardVisualizationController extends FreemarkerHttpServlet {
 	private static final Log log = LogFactory.getLog(StandardVisualizationController.class.getName());
 	
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
+    
+    public static ServletContext servletContext;
    
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
@@ -41,6 +45,8 @@ public class StandardVisualizationController extends FreemarkerHttpServlet {
     	 * */
     	VisualizationRequestHandler visRequestHandler = 
     			getVisualizationRequestHandler(vreq);
+    	
+    	servletContext = getServletContext();
     	
     	if (visRequestHandler != null) {
     	
@@ -58,7 +64,6 @@ public class StandardVisualizationController extends FreemarkerHttpServlet {
     									vreq);
     	}
     	
-        
     }
 
 

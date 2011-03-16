@@ -172,7 +172,7 @@ public class EntityPublicationCountQueryRunner implements QueryRunner<Entity> {
 
 			}			
 
-			entity.addActivity(biboDocument);
+//			entity.addActivity(biboDocument);
 		}
 		
 		if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {

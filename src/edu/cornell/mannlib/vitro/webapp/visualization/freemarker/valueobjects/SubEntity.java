@@ -1,10 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author bkoniden
@@ -13,26 +12,12 @@ import java.util.HashSet;
 public class SubEntity extends Individual {
 
 	private Set<Activity> activities = new HashSet<Activity>();
-	private Map<String, Map<String, String>> personToPositionAndStartYear = 
-			new HashMap<String, Map<String, String>>(); 
+	private Set<String> entityTypes = new HashSet<String>();
 	
 	public SubEntity(String individualURI) {
 		super(individualURI);
 	}
 	
-	public Map<String, Map<String, String>> getPersonToPositionAndStartYear() {
-		return personToPositionAndStartYear;
-	}
-
-	public void setPersonToPositionAndStartYear(
-			Map<String, Map<String, String>> personToPositionAndStartYear) {
-		this.personToPositionAndStartYear = personToPositionAndStartYear;
-	}
-
-	public Set<Activity> getActivities() {
-		return activities;
-	}
-
 	public SubEntity(String individualURI, String individualLabel) {
 		super(individualURI, individualLabel);
 	}
@@ -44,6 +29,22 @@ public class SubEntity extends Individual {
 	
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
+	}
+	
+	public void addActivities(Collection<Activity> activities) {
+		this.activities.addAll(activities);
+	}
+	
+	public Set<Activity> getActivities() {
+		return activities;
+	}
+	
+	public void addEntityTypeLabel(String typeLabel) {
+		this.entityTypes.add(typeLabel);
+	}
+	
+	public Set<String> getEntityTypeLabels() {
+		return entityTypes;
 	}
 
 }

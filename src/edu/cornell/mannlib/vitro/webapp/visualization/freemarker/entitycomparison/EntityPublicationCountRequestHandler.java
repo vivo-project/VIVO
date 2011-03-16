@@ -53,6 +53,7 @@ public class EntityPublicationCountRequestHandler implements
 											vitroRequest);
 			
 		}
+		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
@@ -282,7 +283,7 @@ public class EntityPublicationCountRequestHandler implements
 			}
 			
 			entityJson.setYearToActivityCount(yearPubCount);
-			entityJson.getOrganizationType().addAll(
+			entityJson.getOrganizationTypes().addAll(
 					subOrganizationTypesResult.get(entityJson.getLabel()));
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());

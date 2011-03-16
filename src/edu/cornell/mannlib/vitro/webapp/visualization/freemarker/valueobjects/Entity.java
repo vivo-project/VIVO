@@ -2,36 +2,29 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
- * @author bkoniden
- * Deepak Konidena
- *
+ * original @author bkoniden (Deepak Konidena)
+ * modified by @author cdtank (Chintan Tank) 
  */
 public class Entity extends Individual {
 	
-	private Set<Activity> activities = new HashSet<Activity>();
 	private Set<SubEntity> children = new LinkedHashSet<SubEntity>();
 	
-	public Entity(String departmentURI, String departmentLabel) {
-		super(departmentURI, departmentLabel);
+	public Entity(String entityURI, String entityLabel) {
+		super(entityURI, entityLabel);
 	}
 	
-	public void setDepartmentLabel(String departmentURI) {
-		this.setIndividualLabel(departmentURI);
+	public Entity(String entityURI) {
+		super(entityURI);
 	}
 	
 	public String getEntityURI() {
 		return this.getIndividualURI();
 	}
 	
-	public Set<Activity> getActivities() {
-		return activities;
-	}
-
 	public String getEntityLabel() {
 		return this.getIndividualLabel();
 	}
@@ -40,18 +33,12 @@ public class Entity extends Individual {
 		return children;
 	}
 
-	public void addActivity(Activity activity) {
-		this.activities.add(activity);
-	}
-
 	public void addSubEntity(SubEntity subEntity) {
 		this.children.add(subEntity);
-		
 	}
 	
 	public void addSubEntitities(Collection<SubEntity> subEntities) {
 		this.children.addAll(subEntities);
-		
 	}
 
 }

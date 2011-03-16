@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,8 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 	private static final Log log = LogFactory.getLog(AjaxVisualizationController.class.getName());
 	
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
+    
+    public static ServletContext servletContext;
    
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)

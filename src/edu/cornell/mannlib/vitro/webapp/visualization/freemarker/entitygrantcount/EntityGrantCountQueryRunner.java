@@ -219,7 +219,7 @@ public class EntityGrantCountQueryRunner implements QueryRunner<Entity>  {
 
 			}
 
-			entity.addActivity(grant);
+//			entity.addActivity(grant);
 		}
 
 		if (subentityURLToVO.size() == 0 && personURLToVO.size() == 0) {

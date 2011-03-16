@@ -31,6 +31,9 @@
 	<bean id="entity_comparison"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityPublicationCountRequestHandler" />
 
+    <bean id="pub_temporal"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached.EntityPublicationRequestHandler" />		
+
 	<bean id="entity_grant_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitygrantcount.EntityGrantCountRequestHandler" />
 	
@@ -58,10 +61,21 @@
 				<entry key="person_level">
 					<ref bean="person_level"></ref>
 				</entry>
-				
-				<entry key="entity_comparison">
-					<ref bean="entity_comparison"></ref>
-				</entry>
+                
+                
+                <entry key="entity_comparison">
+                    <ref bean="entity_comparison"></ref>
+                </entry>
+                
+                <!-- 
+                <entry key="entity_comparison">
+                    <ref bean="pub_temporal"></ref>
+                </entry>
+                -->
+                                
+                <entry key="pub_temporal">
+                    <ref bean="pub_temporal"></ref>
+                </entry>
 
 				<entry key="coprincipalinvestigator">
 					<ref bean="coprincipalinvestigator"></ref>

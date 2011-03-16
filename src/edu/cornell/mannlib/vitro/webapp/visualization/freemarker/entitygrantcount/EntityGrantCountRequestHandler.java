@@ -283,7 +283,7 @@ public class EntityGrantCountRequestHandler implements
 			}
 
 			entityJson.setYearToActivityCount(yearGrantCount);
-			entityJson.getOrganizationType().addAll(
+			entityJson.getOrganizationTypes().addAll(
 					subOrganizationTypesResult.get(entityJson.getLabel()));
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
