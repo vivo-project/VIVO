@@ -22,8 +22,8 @@ public class VOConstants {
 	/*
 	 * Employee related constants 
 	 * */
-	public static enum EmployeeType {
-		ACADEMIC_FACULTY_EMPLOYEE, ACADEMIC_STAFF_EMPLOYEE
+	public static enum EntityClassType {
+		ORGANIZATION, PERSON, UNKNOWN
 	} 
 	
 	public static final int NUM_CHARS_IN_YEAR_FORMAT = 4;

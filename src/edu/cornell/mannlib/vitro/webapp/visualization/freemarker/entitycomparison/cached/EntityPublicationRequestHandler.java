@@ -3,7 +3,6 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -16,10 +15,7 @@ import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -27,22 +23,15 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.ModelConstructorUtilities;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationAssociatedPeopleModelWithTypesConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationModelWithTypesConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PersonToPublicationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.ConstructedModelTracker;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunnerOnModel;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
@@ -90,8 +79,8 @@ public class EntityPublicationRequestHandler implements
 			throws MalformedQueryParametersException {
 		
 
-		Entity organizationEntity = getSubjectOrganizationHierarchy(dataset,
-				subjectEntityURI);
+		Entity organizationEntity = SelectOnModelUtilities
+				.getSubjectOrganizationHierarchy(dataset, subjectEntityURI);
 		
 		if (organizationEntity.getSubEntities() ==  null) {
 			
@@ -106,14 +95,20 @@ public class EntityPublicationRequestHandler implements
 		Map<String, Activity> documentURIForAssociatedPeopleTOVO = new HashMap<String, Activity>();
 		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
 		
-		allDocumentURIToVOs = getPublicationsForAllSubOrganizations(dataset, organizationEntity);
+		allDocumentURIToVOs = SelectOnModelUtilities.getPublicationsForAllSubOrganizations(dataset, organizationEntity);
 		
-		Collection<SubEntity> associatedPeople = getSubjectOrganizationAssociatedPeople(dataset, subjectEntityURI);
+		Entity organizationWithAssociatedPeople = SelectOnModelUtilities
+				.getSubjectOrganizationAssociatedPeople(dataset, subjectEntityURI);
+
 		
-		if (!associatedPeople.isEmpty()) {
+		if (organizationWithAssociatedPeople.getSubEntities() !=  null) {
 			
-			documentURIForAssociatedPeopleTOVO = getPublicationsForAssociatedPeople(dataset, associatedPeople);
-			organizationEntity.addSubEntitities(associatedPeople);
+			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
+						.getPublicationsForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
+			
+			organizationEntity = EntityComparisonUtilityFunctions.mergeEntityIfShareSameURI(
+										organizationEntity,
+										organizationWithAssociatedPeople);
 		}
 		
 		if (allDocumentURIToVOs.isEmpty() && documentURIForAssociatedPeopleTOVO.isEmpty()) {
@@ -180,275 +175,6 @@ public class EntityPublicationRequestHandler implements
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, "");
 		return fileData;
-	}
-
-
-	private Map<String, Activity> getPublicationsForAllSubOrganizations(
-			Dataset dataset, Entity organizationEntity)
-			throws MalformedQueryParametersException {
-		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
-		
-		for (SubEntity subOrganization : organizationEntity.getSubEntities()) {
-			
-			Model subOrganizationPublicationsModel = ModelConstructorUtilities
-															.getOrConstructModel(
-																	subOrganization.getIndividualURI(),
-																	OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE,
-																	dataset);
-			
-			System.out.println("getting publications for " + subOrganization.getIndividualLabel());
-			
-			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
-			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
-			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			
-			String whereClause = ""
-				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPersonWithPublication ?document . "
-				+ " ?document rdfs:label ?documentLabel . "
-				+ " OPTIONAL { "
-				+ " 	?document core:dateTimeValue ?dateTimeValue . "
-				+ "     ?dateTimeValue core:dateTime ?documentPublicationDate } . ";
-			
-			QueryRunner<ResultSet> subOrganizationPublicationsQuery = 
-				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
-										"",
-										whereClause,
-										"",
-										subOrganizationPublicationsModel);
-			
-			subOrganization.addActivities(getPublicationForEntity(
-												subOrganizationPublicationsQuery.getQueryResult(),
-												allDocumentURIToVOs));
-			
-		}
-		return allDocumentURIToVOs;
-	}
-
-
-	private Map<String, Activity> getPublicationsForAssociatedPeople(
-			Dataset dataset, Collection<SubEntity> people)
-			throws MalformedQueryParametersException {
-		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
-		
-		for (SubEntity person : people) {
-			
-			Model personPublicationsModel = ModelConstructorUtilities
-															.getOrConstructModel(
-																	person.getIndividualURI(),
-																	PersonToPublicationsModelConstructor.MODEL_TYPE,
-																	dataset);
-			
-			System.out.println("getting publications for " + person.getIndividualLabel());
-			
-			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
-			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
-			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			
-			String whereClause = ""
-				+ " <" + person.getIndividualURI() + "> vivosocnet:hasPublication ?document . "
-				+ " ?document rdfs:label ?documentLabel . "
-				+ " OPTIONAL { "
-				+ " 	?document core:dateTimeValue ?dateTimeValue . "
-				+ "     ?dateTimeValue core:dateTime ?documentPublicationDate } . ";
-			
-			QueryRunner<ResultSet> personPublicationsQuery = 
-				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
-										"",
-										whereClause,
-										"",
-										personPublicationsModel);
-			
-			person.addActivities(getPublicationForEntity(
-												personPublicationsQuery.getQueryResult(),
-												allDocumentURIToVOs));
-			
-		}
-		return allDocumentURIToVOs;
-	}
-	
-	private Entity getSubjectOrganizationHierarchy(Dataset dataset,
-			String subjectEntityURI) throws MalformedQueryParametersException {
-		Model organizationModel = ModelConstructorUtilities
-										.getOrConstructModel(
-												null, 
-												OrganizationModelWithTypesConstructor.MODEL_TYPE, 
-												dataset);
-		
-		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-		fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
-		fieldLabelToOutputFieldLabel.put("subOrganization", QueryFieldLabels.SUBORGANIZATION_URL);
-		fieldLabelToOutputFieldLabel.put("subOrganizationLabel", QueryFieldLabels.SUBORGANIZATION_LABEL);
-		fieldLabelToOutputFieldLabel.put("subOrganizationTypeLabel", QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
-		
-		String whereClause = ""
-			+ " <" + subjectEntityURI + "> rdfs:label ?organizationLabel . "
-			+ " <" + subjectEntityURI + "> core:hasSubOrganization ?subOrganization . "
-			+ " ?subOrganization rdfs:label ?subOrganizationLabel . "
-			+ " ?subOrganization rdf:type ?subOrgType . "
-			+ " ?subOrgType rdfs:label ?subOrganizationTypeLabel . ";
-		
-		QueryRunner<ResultSet> subOrganizationsWithTypesQuery = 
-			new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
-									"",
-									whereClause,
-									"",
-									organizationModel);
-		
-		Entity organizationEntity = generateEntity(subjectEntityURI, 
-												   subOrganizationsWithTypesQuery.getQueryResult());
-		return organizationEntity;
-	}
-
-	private Collection<SubEntity> getSubjectOrganizationAssociatedPeople(Dataset dataset,
-			String subjectEntityURI) throws MalformedQueryParametersException {
-		Model associatedPeopleModel = ModelConstructorUtilities
-										.getOrConstructModel(
-												subjectEntityURI, 
-												OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, 
-												dataset);
-		
-		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-		fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
-		fieldLabelToOutputFieldLabel.put("person", QueryFieldLabels.PERSON_URL);
-		fieldLabelToOutputFieldLabel.put("personLabel", QueryFieldLabels.PERSON_LABEL);
-		fieldLabelToOutputFieldLabel.put("personTypeLabel", QueryFieldLabels.PERSON_TYPE_LABEL);
-		
-		String whereClause = ""
-			+ " <" + subjectEntityURI + "> rdfs:label ?organizationLabel . "
-			+ " <" + subjectEntityURI + "> vivosocnet:hasPersonWithActivity ?person . "
-			+ " ?person rdfs:label ?personLabel . "
-			+ " ?person rdf:type ?personType . "
-			+ " ?personType rdfs:label ?personTypeLabel . ";
-		
-		QueryRunner<ResultSet> associatedPeopleWithTypesQuery = 
-			new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
-									"",
-									whereClause,
-									"",
-									associatedPeopleModel);
-		
-		return getAssociatedPeopleSubEntitities(associatedPeopleWithTypesQuery.getQueryResult());
-	}
-	
-	private Collection<SubEntity> getAssociatedPeopleSubEntitities(
-			ResultSet queryResult) {
-
-		Map<String, SubEntity> associatedPeopleURIToVO = new HashMap<String, SubEntity>();
-		
-		while (queryResult.hasNext()) {
-			
-			QuerySolution solution = queryResult.nextSolution();
-			
-			RDFNode personNode = solution.get(QueryFieldLabels.PERSON_URL);
-			
-			SubEntity subEntity;
-			
-			if (associatedPeopleURIToVO.containsKey(personNode.toString())) {
-				
-				subEntity = associatedPeopleURIToVO.get(personNode.toString());
-				
-			} else {
-				
-				subEntity = new SubEntity(personNode.toString());
-				associatedPeopleURIToVO.put(personNode.toString(), subEntity);
-				
-				RDFNode personLabelNode = solution.get(QueryFieldLabels.PERSON_LABEL);
-				if (personLabelNode != null) {
-					subEntity.setIndividualLabel(personLabelNode.toString());
-				}
-			}
-
-			RDFNode personTypeLabelNode = solution.get(QueryFieldLabels.PERSON_TYPE_LABEL);
-			if (personTypeLabelNode != null) {
-				subEntity.addEntityTypeLabel(personTypeLabelNode.toString());
-			}
-		}
-		
-		return associatedPeopleURIToVO.values();
-	}
-
-	private Collection<Activity> getPublicationForEntity(
-			ResultSet queryResult,
-			Map<String, Activity> allDocumentURIToVOs) {
-		
-		Set<Activity> currentEntityPublications = new HashSet<Activity>();
-
-		while (queryResult.hasNext()) {
-			
-			QuerySolution solution = queryResult.nextSolution();
-			
-			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
-			Activity biboDocument;
-			
-			if (allDocumentURIToVOs.containsKey(documentNode.toString())) {
-				biboDocument = allDocumentURIToVOs.get(documentNode.toString());
-
-			} else {
-
-				biboDocument = new Activity(documentNode.toString());
-				allDocumentURIToVOs.put(documentNode.toString(), biboDocument);
-
-				RDFNode publicationDateNode = solution.get(QueryFieldLabels
-																.DOCUMENT_PUBLICATION_DATE);
-				if (publicationDateNode != null) {
-					biboDocument.setActivityDate(publicationDateNode.toString());
-				}
-			}
-			
-			currentEntityPublications.add(biboDocument);
-			
-		}
-		
-		return currentEntityPublications;
-	}
-
-	private Entity generateEntity(String subjectEntityURI, ResultSet queryResult) {
-
-		Entity entity = new Entity(subjectEntityURI);
-		Map<String, SubEntity> subOrganizationURIToVO = new HashMap<String, SubEntity>();
-		
-		while (queryResult.hasNext()) {
-			
-			QuerySolution solution = queryResult.nextSolution();
-			
-			if (StringUtils.isEmpty(entity.getEntityLabel())) {
-				
-				RDFNode organizationLabelNode = solution.get(QueryFieldLabels.ORGANIZATION_LABEL);
-				if (organizationLabelNode != null) {
-					entity.setIndividualLabel(organizationLabelNode.toString());
-				}
-			}
-			
-			RDFNode subOrganizationNode = solution.get(QueryFieldLabels.SUBORGANIZATION_URL);
-			
-			SubEntity subEntity;
-			
-			if (subOrganizationURIToVO.containsKey(subOrganizationNode.toString())) {
-				
-				subEntity = subOrganizationURIToVO.get(subOrganizationNode.toString());
-				
-			} else {
-				
-				subEntity = new SubEntity(subOrganizationNode.toString());
-				subOrganizationURIToVO.put(subOrganizationNode.toString(), subEntity);
-				
-				RDFNode subOrganizationLabelNode = solution.get(QueryFieldLabels.SUBORGANIZATION_LABEL);
-				if (subOrganizationLabelNode != null) {
-					subEntity.setIndividualLabel(subOrganizationLabelNode.toString());
-				}
-			}
-
-			RDFNode subOrganizationTypeLabelNode = solution.get(QueryFieldLabels.SUBORGANIZATION_TYPE_LABEL);
-			if (subOrganizationTypeLabelNode != null) {
-				subEntity.addEntityTypeLabel(subOrganizationTypeLabelNode.toString());
-			}
-		}
-		
-		entity.addSubEntitities(subOrganizationURIToVO.values());
-		
-		return entity;
 	}
 
 	private Map<String, String> prepareStandaloneDataErrorResponse() {
@@ -598,13 +324,14 @@ public class EntityPublicationRequestHandler implements
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
-			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
+//			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
 			
-			if (isPerson) {
+			if (subentity.getEntityClass().equals(VOConstants.EntityClassType.PERSON)) {
 				entityJson.setVisMode("PERSON");
-			} else {
+			} else if (subentity.getEntityClass().equals(VOConstants.EntityClassType.ORGANIZATION)) {
 				entityJson.setVisMode("ORGANIZATION");
 			}
+			
 			subEntitiesJson.add(entityJson);
 		}
 		return json.toJson(subEntitiesJson);

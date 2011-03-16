@@ -22,6 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryFieldLabels;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
@@ -166,4 +167,22 @@ public class EntityComparisonUtilityFunctions {
 		 * */
 		return EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log, dataset);
 	}
+	
+	public static Entity mergeEntityIfShareSameURI(Entity entityA, Entity entityB) {
+		
+		if (StringUtils.equalsIgnoreCase(entityA.getEntityURI(), entityB.getEntityURI())) {
+			
+			Entity mergedEntity = new Entity(entityA.getEntityURI(), entityA.getEntityLabel());
+			
+			mergedEntity.addSubEntitities(entityA.getSubEntities());
+			mergedEntity.addSubEntitities(entityB.getSubEntities());
+			
+			return mergedEntity;
+			
+		} else {
+			return null;
+		}
+		
+	}
+	
 }

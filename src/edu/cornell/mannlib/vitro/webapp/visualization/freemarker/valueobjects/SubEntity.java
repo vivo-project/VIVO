@@ -5,14 +5,18 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
+
 /**
- * @author bkoniden
- * Deepak Konidena
+ * @author bkoniden (Deepak Konidena)
+ * modified by @author cdtank (Chintan Tank)
+ * last modified at Mar 16, 2011 2:57:20 PM 
  */
 public class SubEntity extends Individual {
 
 	private Set<Activity> activities = new HashSet<Activity>();
 	private Set<String> entityTypes = new HashSet<String>();
+	private VOConstants.EntityClassType entityClass;
 	
 	public SubEntity(String individualURI) {
 		super(individualURI);
@@ -42,9 +46,17 @@ public class SubEntity extends Individual {
 	public void addEntityTypeLabel(String typeLabel) {
 		this.entityTypes.add(typeLabel);
 	}
-	
+
 	public Set<String> getEntityTypeLabels() {
 		return entityTypes;
+	}
+	
+	public void setEntityClass(VOConstants.EntityClassType entityClass) {
+		this.entityClass = entityClass;
+	}
+
+	public VOConstants.EntityClassType getEntityClass() {
+		return entityClass;
 	}
 
 }
