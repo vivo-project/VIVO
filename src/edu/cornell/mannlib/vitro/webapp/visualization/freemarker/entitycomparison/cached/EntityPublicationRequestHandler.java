@@ -324,8 +324,6 @@ public class EntityPublicationRequestHandler implements
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
-//			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
-			
 			if (subentity.getEntityClass().equals(VOConstants.EntityClassType.PERSON)) {
 				entityJson.setVisMode("PERSON");
 			} else if (subentity.getEntityClass().equals(VOConstants.EntityClassType.ORGANIZATION)) {
