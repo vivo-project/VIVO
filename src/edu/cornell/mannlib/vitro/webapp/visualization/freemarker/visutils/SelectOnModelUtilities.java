@@ -21,6 +21,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.ModelConstructorUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationAssociatedPeopleModelWithTypesConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationModelWithTypesConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToGrantsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PersonToPublicationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
@@ -265,6 +266,89 @@ public class SelectOnModelUtilities {
 		}
 		
 		return currentEntityPublications;
+	}
+	
+	
+	private static Collection<Activity> getGrantForEntity(
+			ResultSet queryResult,
+			Map<String, Activity> allGrantURIToVO) {
+		
+		Set<Activity> currentEntityGrants = new HashSet<Activity>();
+
+		while (queryResult.hasNext()) {
+			
+			QuerySolution solution = queryResult.nextSolution();
+			
+			RDFNode grantNode = solution.get(QueryFieldLabels.GRANT_URL);
+			Activity coreGrant;
+			
+			if (allGrantURIToVO.containsKey(grantNode.toString())) {
+				coreGrant = allGrantURIToVO.get(grantNode.toString());
+
+			} else {
+
+				coreGrant = new Activity(grantNode.toString());
+				allGrantURIToVO.put(grantNode.toString(), coreGrant);
+
+				RDFNode grantStartDateNode = solution.get(QueryFieldLabels.ROLE_START_DATE);
+				
+				if (grantStartDateNode != null) {
+					coreGrant.setActivityDate(grantStartDateNode.toString());
+				} else {
+					grantStartDateNode = solution
+							.get(QueryFieldLabels.GRANT_START_DATE);
+					if (grantStartDateNode != null) {
+						coreGrant.setActivityDate(grantStartDateNode.toString());
+					}
+				}
+			}
+			currentEntityGrants.add(coreGrant);
+		}
+		return currentEntityGrants;
+	}
+	
+	public static Map<String, Activity> getGrantsForAllSubOrganizations(
+			Dataset dataset, Entity organizationEntity)
+			throws MalformedQueryParametersException {
+		Map<String, Activity> allGrantURIToVO = new HashMap<String, Activity>();
+		
+		for (SubEntity subOrganization : organizationEntity.getSubEntities()) {
+			
+			Model subOrganizationGrantsModel = ModelConstructorUtilities
+															.getOrConstructModel(
+																	subOrganization.getIndividualURI(),
+																	OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE,
+																	dataset);
+			
+			System.out.println("getting grants for " + subOrganization.getIndividualLabel());
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
+			fieldLabelToOutputFieldLabel.put("grantLabel", QueryFieldLabels.GRANT_LABEL);
+			fieldLabelToOutputFieldLabel.put("grantStartDate", QueryFieldLabels.GRANT_START_DATE);
+			fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
+			
+			String whereClause = ""
+				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPersonWithGrant ?grant . "
+				+ " ?grant rdfs:label ?grantLabel . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . ";
+			
+			QueryRunner<ResultSet> subOrganizationGrantsQuery = 
+				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+										"",
+										whereClause,
+										"",
+										subOrganizationGrantsModel);
+			
+			subOrganization.addActivities(getGrantForEntity(
+												subOrganizationGrantsQuery.getQueryResult(),
+												allGrantURIToVO));
+			
+		}
+		return allGrantURIToVO;
 	}
 	
 	public static Map<String, Activity> getPublicationsForAssociatedPeople(

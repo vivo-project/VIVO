@@ -11,6 +11,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.ModelFactoryInterface;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationAssociatedPeopleModelWithTypesFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationModelWithTypesFactory;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationToGrantsForSubOrganizationsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationToPublicationsForSubOrganizationsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PersonToPublicationsFactory;
 
@@ -20,6 +21,7 @@ public class ModelConstructorUtilities {
 	private static final Map<String, ModelFactoryInterface> modelTypeIdentifierToFactory = new HashMap<String, ModelFactoryInterface>() {{
 		put(PersonToPublicationsModelConstructor.MODEL_TYPE, new PersonToPublicationsFactory());
 		put(OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToPublicationsForSubOrganizationsFactory());
+		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToGrantsForSubOrganizationsFactory());
 		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, new OrganizationAssociatedPeopleModelWithTypesFactory());
 		put(OrganizationModelWithTypesConstructor.MODEL_TYPE, new OrganizationModelWithTypesFactory());
 	}};

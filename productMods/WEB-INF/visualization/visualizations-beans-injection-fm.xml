@@ -32,11 +32,13 @@
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityPublicationCountRequestHandler" />
 
     <bean id="pub_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached.EntityPublicationRequestHandler" />		
+        class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached.TemporalPublicationVisualizationRequestHandler" />		
 
 	<bean id="entity_grant_count"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitygrantcount.EntityGrantCountRequestHandler" />
-	
+
+    <bean id="grant_temporal"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached.TemporalGrantVisualizationRequestHandler" />	
 	
 	<bean id="visualizationInjector"
 		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationInjector">
@@ -62,16 +64,16 @@
 					<ref bean="person_level"></ref>
 				</entry>
                 
+                <!-- 
+                <entry key="entity_comparison">
+                    <ref bean="entity_comparison"></ref>
+                </entry>
+                -->
                 
                 <entry key="entity_comparison">
                     <ref bean="entity_comparison"></ref>
                 </entry>
                 
-                <!-- 
-                <entry key="entity_comparison">
-                    <ref bean="pub_temporal"></ref>
-                </entry>
-                -->
                                 
                 <entry key="pub_temporal">
                     <ref bean="pub_temporal"></ref>
@@ -83,7 +85,11 @@
 				
 				<entry key="entity_grant_count">
 					<ref bean="entity_grant_count"></ref>
-				</entry>				
+				</entry>	
+				                                
+                <entry key="grant_temporal">
+                    <ref bean="grant_temporal"></ref>
+                </entry>			
 				 
 			</map>
 		</property>

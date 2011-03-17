@@ -35,12 +35,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Select
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
-public class EntityPublicationRequestHandler implements
+public class TemporalPublicationVisualizationRequestHandler implements
 		VisualizationRequestHandler {
-	
-	public enum DataVisMode {
-		CSV, JSON
-	};
 	
 	@Override
 	public ResponseValues generateStandardVisualization(
@@ -67,15 +63,12 @@ public class EntityPublicationRequestHandler implements
 			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
 		}
 		
-
-		
-		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
-			String subjectEntityURI, DataVisMode visMode)
+			String subjectEntityURI, EntityComparisonConstants.DataVisMode visMode)
 			throws MalformedQueryParametersException {
 		
 
@@ -84,7 +77,7 @@ public class EntityPublicationRequestHandler implements
 		
 		if (organizationEntity.getSubEntities() ==  null) {
 			
-			if (DataVisMode.JSON.equals(visMode)) {
+			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataErrorResponse();
 			} else {
 				return prepareDataErrorResponse();
@@ -113,7 +106,7 @@ public class EntityPublicationRequestHandler implements
 		
 		if (allDocumentURIToVOs.isEmpty() && documentURIForAssociatedPeopleTOVO.isEmpty()) {
 			
-			if (DataVisMode.JSON.equals(visMode)) {
+			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataErrorResponse();
 			} else {
 				return prepareDataErrorResponse();
@@ -121,7 +114,7 @@ public class EntityPublicationRequestHandler implements
 			
 		} else {	
 			
-			if (DataVisMode.JSON.equals(visMode)) {
+			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataResponse(vitroRequest, organizationEntity);
 			} else {
 				return prepareDataResponse(organizationEntity);
@@ -210,7 +203,7 @@ public class EntityPublicationRequestHandler implements
 								log,
 								dataset, 
 								entityURI,
-								DataVisMode.JSON);
+								EntityComparisonConstants.DataVisMode.JSON);
 			} else {
 				
 				return getSubjectEntityAndGenerateDataResponse(
@@ -222,7 +215,7 @@ public class EntityPublicationRequestHandler implements
 												log,
 												dataset, 
 												vitroRequest),
-								DataVisMode.JSON);
+								EntityComparisonConstants.DataVisMode.JSON);
 			}
 			
 		} else {
@@ -235,7 +228,7 @@ public class EntityPublicationRequestHandler implements
 						log,
 						dataset,
 						entityURI,
-						DataVisMode.CSV);
+						EntityComparisonConstants.DataVisMode.CSV);
 			
 		}
 		
@@ -320,7 +313,6 @@ public class EntityPublicationRequestHandler implements
 			entityJson.setYearToActivityCount(yearPubCount);
 			
 			entityJson.setOrganizationTypes(subentity.getEntityTypeLabels());
-			
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
