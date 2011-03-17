@@ -90,7 +90,7 @@ div#identity { position: relative; }
   width: 361px;
   height: 55px;
   text-indent: -9999px;
-  background: url(../site_icons/vivo-logo.jpg) bottom left no-repeat;
+  background: url(../images/vivo-logo.jpg) bottom left no-repeat;
 
 }
 
@@ -592,7 +592,7 @@ IE6 does not support :hover so it will see everything
 span.entityMoreSpan {
   display: block;
   font-style: italic;
-  background: url(../site_icons/plus.gif) left center no-repeat;
+  background: url(../images/plus.gif) left center no-repeat;
   padding-left: 14px;
   margin: .5em 0;
   line-height: 1em;  
@@ -607,7 +607,7 @@ span.entityMoreSpan:hover {
 
 div.navlinkblock:hover span.entityMoreSpan,
 div.navlinkblock-expanded span.entityMoreSpan {
-  background: url(../site_icons/minus.gif) left center no-repeat;
+  background: url(../images/minus.gif) left center no-repeat;
 }
 
 
@@ -635,13 +635,13 @@ a.add {
   width: 1em;
   height: 1em;
   padding: 4px;
-  background: #ebebeb url(../site_icons/plus_transparent.gif) center center no-repeat;
+  background: #ebebeb url(../images/plus_transparent.gif) center center no-repeat;
   text-indent: -9999px;
   overflow: hidden;
 }
 
 a.add:hover {
-  background-image: url(../site_icons/plus_transparent_hover.gif);
+  background-image: url(../images/plus_transparent_hover.gif);
   background-color: #576772; 
 }
 
