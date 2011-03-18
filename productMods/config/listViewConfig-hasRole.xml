@@ -32,7 +32,7 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
             }
-            } ORDER BY <collation-fragment>?subclass</collation-fragment> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?personName
+            } ORDER BY <collation-fragment>?subclass</collation-fragment> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
     </query-select>
     
     <query-construct>
