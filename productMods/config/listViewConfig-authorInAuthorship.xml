@@ -13,18 +13,23 @@
                         ?authorship
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE {
-            ?subject ?property ?authorship  
-            OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
-                       ?infoResource rdfs:label ?infoResourceName 
-                       <collation-fragment> 
-                       OPTIONAL { ?subclass rdfs:subClassOf core:InformationResource .
-                                  ?infoResource a ?subclass  
-                       }     
-                       </collation-fragment>                       
-                       OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
-                                  ?dateTimeValue core:dateTime ?dateTime  
-                       }                                                      
+            ?subject ?property ?authorship . 
+            <linked-individual-optional> 
+            OPTIONAL { 
+            </linked-individual-optional>
+                ?authorship core:linkedInformationResource ?infoResource .                      
+                ?infoResource rdfs:label ?infoResourceName 
+                    <collation-fragment> 
+                    OPTIONAL { ?subclass rdfs:subClassOf core:InformationResource .
+                               ?infoResource a ?subclass  
+                    }     
+                    </collation-fragment>                       
+                    OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
+                               ?dateTimeValue core:dateTime ?dateTime  
+                    }  
+            <linked-individual-optional>        
             } 
+            </linked-individual-optional>
         } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?infoResourceName   
     </query-select>
 
