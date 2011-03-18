@@ -90,7 +90,7 @@ public class PersonToPublicationsModelConstructor implements ModelConstructor {
 		}
 
 		after = System.currentTimeMillis();
-		log.debug("Time taken to execute the CONSTRUCT queries is in milliseconds: "
+		log.debug("Try to see Time taken to execute the CONSTRUCT queries is in milliseconds: "
 				+ (after - before));
 
 		return constructedModel;
