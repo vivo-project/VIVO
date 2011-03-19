@@ -82,7 +82,6 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			} else {
 				return prepareDataErrorResponse();
 			}
-			
 		}
 		
 		Map<String, Activity> documentURIForAssociatedPeopleTOVO = new HashMap<String, Activity>();
@@ -287,8 +286,6 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
 
 		for (SubEntity subentity : subentities) {
-			
-			System.out.println("in write json current sub entity " + subentity.getIndividualLabel());
 			
 			JsonObject entityJson = new JsonObject(
 					subentity.getIndividualLabel());

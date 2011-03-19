@@ -23,6 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructo
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationModelWithTypesConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToGrantsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PersonToGrantsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PersonToPublicationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
@@ -314,13 +315,13 @@ public class SelectOnModelUtilities {
 		
 		for (SubEntity subOrganization : organizationEntity.getSubEntities()) {
 			
+			System.out.println("constructing grants for " + subOrganization.getIndividualLabel() + " :: " + subOrganization.getIndividualURI());
+			
 			Model subOrganizationGrantsModel = ModelConstructorUtilities
 															.getOrConstructModel(
 																	subOrganization.getIndividualURI(),
 																	OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE,
 																	dataset);
-			
-			System.out.println("getting grants for " + subOrganization.getIndividualLabel());
 			
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
@@ -329,12 +330,32 @@ public class SelectOnModelUtilities {
 			fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
 			
 			String whereClause = ""
-				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPersonWithGrant ?grant . "
+				+ "{"
+				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasInvestigatorWithGrant ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
 				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
 				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . ";
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+				+ "}"
+				+ "UNION"
+				+ "{"
+				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPIWithGrant ?grant . "
+				+ " ?grant rdfs:label ?grantLabel . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+				+ "}"
+				+ "UNION"
+				+ "{"
+				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hascoPIWithGrant ?grant . "
+				+ " ?grant rdfs:label ?grantLabel . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+				+ "}";
 			
 			QueryRunner<ResultSet> subOrganizationGrantsQuery = 
 				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
@@ -349,6 +370,70 @@ public class SelectOnModelUtilities {
 			
 		}
 		return allGrantURIToVO;
+	}
+	
+	public static Map<String, Activity> getGrantForAssociatedPeople(
+			Dataset dataset, Collection<SubEntity> people)
+			throws MalformedQueryParametersException {
+		Map<String, Activity> allGrantURIToVOs = new HashMap<String, Activity>();
+		
+		for (SubEntity person : people) {
+			
+			System.out.println("constructing grants for " + person.getIndividualLabel() + " :: " + person.getIndividualURI());
+			
+			Model personGrantsModel = ModelConstructorUtilities
+															.getOrConstructModel(
+																	person.getIndividualURI(),
+																	PersonToGrantsModelConstructor.MODEL_TYPE,
+																	dataset);
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
+			fieldLabelToOutputFieldLabel.put("grantLabel", QueryFieldLabels.GRANT_LABEL);
+			fieldLabelToOutputFieldLabel.put("grantStartDate", QueryFieldLabels.GRANT_START_DATE);
+			fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
+			
+			String whereClause = ""
+				+ "{"
+				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsAnInvestigator ?grant . "
+				+ " ?grant rdfs:label ?grantLabel . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+				+ "}"
+				+ "UNION"
+				+ "{"
+				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsPI ?grant . "
+				+ " ?grant rdfs:label ?grantLabel . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+				+ "}"
+				+ "UNION"
+				+ "{"
+				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsCoPI ?grant . "
+				+ " ?grant rdfs:label ?grantLabel . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+				+ " OPTIONAL { "
+				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+				+ "}";
+			
+			QueryRunner<ResultSet> personGrantsQuery = 
+				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+										"",
+										whereClause,
+										"",
+										personGrantsModel);
+			
+			person.addActivities(getGrantForEntity(
+												personGrantsQuery.getQueryResult(),
+												allGrantURIToVOs));
+			
+		}
+		return allGrantURIToVOs;
 	}
 	
 	public static Map<String, Activity> getPublicationsForAssociatedPeople(

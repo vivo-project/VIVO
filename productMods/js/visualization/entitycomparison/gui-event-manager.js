@@ -225,6 +225,7 @@ function getTemporalGraphData(temporalGraphDataURL,
 	$.ajax({
         url: temporalGraphDataURL,
         dataType: "json",
+        timeout: 5 * 60 * 1000,
         success: function (data) {
 
             if (data.error) {

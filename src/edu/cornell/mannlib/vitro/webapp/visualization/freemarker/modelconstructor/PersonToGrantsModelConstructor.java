@@ -20,44 +20,39 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 
-public class OrganizationToGrantsForSubOrganizationsModelConstructor implements ModelConstructor {
+public class PersonToGrantsModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	private Dataset dataset;
 	
-	public static final String MODEL_TYPE = "ORGANIZATION_TO_GRANTS_FOR_SUBORGANIZATIONS"; 
+	public static final String MODEL_TYPE = "PERSON_TO_GRANTS"; 
 	
-	private String organizationURI;
+	private String personURI;
 	
-	private Log log = LogFactory.getLog(OrganizationToGrantsForSubOrganizationsModelConstructor.class.getName());
+	private Log log = LogFactory.getLog(PersonToGrantsModelConstructor.class.getName());
 	
 	private long before, after;
 	
-	public OrganizationToGrantsForSubOrganizationsModelConstructor(String organizationURI, Dataset dataset) {
-		this.organizationURI = organizationURI;
+	public PersonToGrantsModelConstructor(String personURI, Dataset dataset) {
+		this.personURI = personURI;
 		this.dataset = dataset;
 	}
 	
-	private Set<String> constructOrganizationGrantsQueryTemplate(String constructProperty, String roleTypeProperty) {
+private Set<String> constructPersonGrantsQueryTemplate(String constructProperty, String roleTypeProperty) {
 		
 		Set<String> differentPerspectiveQueries = new HashSet<String>();
 		
 		String justGrantsQuery = ""
 		+ " CONSTRUCT {  "
-		+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-		+ "     <" + organizationURI + "> vivosocnet:lastCachedAt ?now . "
-		+ "     <" + organizationURI + "> vivosocnet:" + constructProperty + " ?Grant . "
+		+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
+		+ "     <" + personURI + "> vivosocnet:" + constructProperty + " ?Grant . "
 		+ "      "
 		+ "     ?Grant rdf:type core:Grant . "
 		+ "     ?Grant rdfs:label ?grantLabel . "
 		+ "      "
 		+ " } "
 		+ " WHERE { "
-		+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-		+ "     <" + organizationURI + "> core:hasSubOrganization* ?subOrganization . "
-		+ "     ?subOrganization core:organizationForPosition ?Position .  "
-		+ "     ?Position core:positionForPerson ?Person .        "
 		+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
 		+ "     ?Role core:roleIn ?Grant . "
 		+ "     ?Grant rdfs:label ?grantLabel . "
@@ -67,18 +62,12 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 
 		String justDateTimeOnGrantsQuery = ""
 			+ " CONSTRUCT {  "
-			+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-			+ "     <" + organizationURI + "> vivosocnet:lastCachedAt ?now . "
-			+ "      "
+			+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
 			+ "     ?Grant vivosocnet:startDateTimeOnGrant ?startDateTimeValueForGrant . "
 //			+ "     ?Grant vivosocnet:endDateTimeOnGrant ?endDateTimeValueForGrant . "
 			+ "      "
 			+ " } "
 			+ " WHERE { "
-			+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-			+ "     <" + organizationURI + "> core:hasSubOrganization* ?subOrganization . "
-			+ "     ?subOrganization core:organizationForPosition ?Position .  "
-			+ "     ?Position core:positionForPerson ?Person .        "
 			+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
 			+ "     ?Role core:roleIn ?Grant . "
 			+ "      "
@@ -97,17 +86,11 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 		
 		String justDateTimeOnRolesQuery = ""
 			+ " CONSTRUCT {  "
-			+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-			+ "     <" + organizationURI + "> vivosocnet:lastCachedAt ?now . "
-			+ "      "
+			+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
 			+ "     ?Grant vivosocnet:startDateTimeOnRole ?startDateTimeValue . "
 //			+ "     ?Grant vivosocnet:endDateTimeOnRole ?endDateTimeValue . "
 			+ " } "
 			+ " WHERE { "
-			+ "     <" + organizationURI + "> rdfs:label ?organizationLabel . "
-			+ "     <" + organizationURI + "> core:hasSubOrganization* ?subOrganization . "
-			+ "     ?subOrganization core:organizationForPosition ?Position .  "
-			+ "     ?Position core:positionForPerson ?Person .        "
 			+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
 			+ "     ?Role core:roleIn ?Grant . "
 			+ "      "
@@ -132,13 +115,13 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 		return differentPerspectiveQueries;
 	}
 	
-	private Set<String> constructOrganizationToGrantsQuery() {
+	private Set<String> constructPersonToGrantsQuery() {
 
 		Set<String> differentInvestigatorTypeQueries = new HashSet<String>();
 		
-		Set<String> investigatorRoleQuery = constructOrganizationGrantsQueryTemplate("hasInvestigatorWithGrant", "hasInvestigatorRole");
-		Set<String> piRoleQuery = constructOrganizationGrantsQueryTemplate("hasPIWithGrant", "hasPrincipalInvestigatorRole");
-		Set<String> coPIRoleQuery = constructOrganizationGrantsQueryTemplate("hascoPIWithGrant", "hasCo-PrincipalInvestigatorRole");
+		Set<String> investigatorRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsAnInvestigator", "hasInvestigatorRole");
+		Set<String> piRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsPI", "hasPrincipalInvestigatorRole");
+		Set<String> coPIRoleQuery = constructPersonGrantsQueryTemplate("hasGrantAsCoPI", "hasCo-PrincipalInvestigatorRole");
 
 		differentInvestigatorTypeQueries.addAll(investigatorRoleQuery);
 		differentInvestigatorTypeQueries.addAll(piRoleQuery);
@@ -183,6 +166,6 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 	}	
 	
 	public Model getConstructedModel() throws MalformedQueryParametersException {
-		return executeQuery(constructOrganizationToGrantsQuery());
+		return executeQuery(constructPersonToGrantsQuery());
 	}
 }

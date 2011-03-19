@@ -156,8 +156,30 @@ public class TemporalGrantVisualizationRequestHandler implements
 		
 		Map<String, Activity> grantURIForAssociatedPeopleToVO = new HashMap<String, Activity>();
 		Map<String, Activity> allGrantURIToVO = new HashMap<String, Activity>();
-
+		
+/**
+ * TODO: Change this to use DataSet when an optimum solution is reached. Currently grant constructs are causing
+ * endless wait times on a large dataset like UFl. When I tried to add all the datasets manually to the Datasource
+ * it responded in an order of magnitude higher than with just the defaultOntModel.
+ * Brian Lowe is looking into this weird behavior see http://issues.library.cornell.edu/browse/NIHVIVO-2275 
+ */ 
+//		DataSource dataSource = DatasetFactory.create();
+//		dataSource.setDefaultModel(vitroRequest.getJenaOntModel());
+		
 		allGrantURIToVO = SelectOnModelUtilities.getGrantsForAllSubOrganizations(dataset, organizationEntity);
+		
+		Entity organizationWithAssociatedPeople = SelectOnModelUtilities
+					.getSubjectOrganizationAssociatedPeople(dataset, subjectEntityURI);
+		
+		if (organizationWithAssociatedPeople.getSubEntities() !=  null) {
+			
+			grantURIForAssociatedPeopleToVO = SelectOnModelUtilities
+						.getPublicationsForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
+			
+			organizationEntity = EntityComparisonUtilityFunctions.mergeEntityIfShareSameURI(
+										organizationEntity,
+										organizationWithAssociatedPeople);
+		}
 		
 		if (allGrantURIToVO.isEmpty() && grantURIForAssociatedPeopleToVO.isEmpty()) {
 			
