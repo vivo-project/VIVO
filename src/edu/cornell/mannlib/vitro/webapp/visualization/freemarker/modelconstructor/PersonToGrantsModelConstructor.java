@@ -44,21 +44,21 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 		Set<String> differentPerspectiveQueries = new HashSet<String>();
 		
 		String justGrantsQuery = ""
-		+ " CONSTRUCT {  "
-		+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
-		+ "     <" + personURI + "> vivosocnet:" + constructProperty + " ?Grant . "
-		+ "      "
-		+ "     ?Grant rdf:type core:Grant . "
-		+ "     ?Grant rdfs:label ?grantLabel . "
-		+ "      "
-		+ " } "
-		+ " WHERE { "
-		+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
-		+ "     ?Role core:roleIn ?Grant . "
-		+ "     ?Grant rdfs:label ?grantLabel . "
-		+ "      "
-		+ "     LET(?now := afn:now()) "
-		+ " } ";
+			+ " CONSTRUCT {  "
+			+ "     <" + personURI + "> vivosocnet:lastCachedAt ?now . "
+			+ "     <" + personURI + "> vivosocnet:" + constructProperty + " ?Grant . "
+			+ "      "
+			+ "     ?Grant rdf:type core:Grant . "
+			+ "     ?Grant rdfs:label ?grantLabel . "
+			+ "      "
+			+ " } "
+			+ " WHERE { "
+			+ "     <" + personURI + "> core:" + roleTypeProperty + " ?Role .  "
+			+ "     ?Role core:roleIn ?Grant . "
+			+ "     ?Grant rdfs:label ?grantLabel . "
+			+ "      "
+			+ "     LET(?now := afn:now()) "
+			+ " } ";
 
 		String justDateTimeOnGrantsQuery = ""
 			+ " CONSTRUCT {  "
@@ -68,7 +68,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 			+ "      "
 			+ " } "
 			+ " WHERE { "
-			+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
+			+ "     <" + personURI + "> core:" + roleTypeProperty + " ?Role .  "
 			+ "     ?Role core:roleIn ?Grant . "
 			+ "      "
 			+ "         ?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant .          "
@@ -91,7 +91,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 //			+ "     ?Grant vivosocnet:endDateTimeOnRole ?endDateTimeValue . "
 			+ " } "
 			+ " WHERE { "
-			+ "     ?Person core:" + roleTypeProperty + " ?Role .  "
+			+ "     <" + personURI + "> core:" + roleTypeProperty + " ?Role .  "
 			+ "     ?Role core:roleIn ?Grant . "
 			+ "      "
 			+ "         ?Role core:dateTimeInterval ?dateTimeIntervalValue . "
@@ -139,6 +139,7 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 		
 		for (String currentQuery : constructQueries) {
 
+			
 			Query query = null;
 
 			try {
@@ -148,7 +149,8 @@ private Set<String> constructPersonGrantsQueryTemplate(String constructProperty,
 						+ "string. " + th.getMessage());
 				log.error(currentQuery);
 			}
-
+			
+			
 			QueryExecution qe = QueryExecutionFactory.create(query, dataset);
 			
 			try {

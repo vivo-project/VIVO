@@ -488,7 +488,9 @@ public class SelectOnModelUtilities {
 			person.addActivities(getPublicationForEntity(
 												personPublicationsQuery.getQueryResult(),
 												allDocumentURIToVOs));
+			
 		}
 		return allDocumentURIToVOs;
 	}
+
 }

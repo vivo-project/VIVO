@@ -174,7 +174,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 		if (organizationWithAssociatedPeople.getSubEntities() !=  null) {
 			
 			grantURIForAssociatedPeopleToVO = SelectOnModelUtilities
-						.getPublicationsForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
+						.getGrantsForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
 			
 			organizationEntity = EntityComparisonUtilityFunctions.mergeEntityIfShareSameURI(
 										organizationEntity,
