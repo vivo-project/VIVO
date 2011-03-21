@@ -17,60 +17,50 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 
-public class OrganizationModelWithTypesConstructor implements ModelConstructor {
+public class PeopleToPublicationsModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	public static final String MODEL_TYPE = "ORGANIZATION_MODEL_WITH_TYPES"; 
-	
 	private Dataset dataset;
 	
-	private Model constructedModel;
+	public static final String MODEL_TYPE = "PEOPLE_TO_PUBLICATIONS"; 
 	
-	private Log log = LogFactory.getLog(OrganizationModelWithTypesConstructor.class.getName());
+	private Log log = LogFactory.getLog(PeopleToPublicationsModelConstructor.class.getName());
 	
 	private long before, after;
 	
-	public OrganizationModelWithTypesConstructor(Dataset dataset) {
+	public PeopleToPublicationsModelConstructor(Dataset dataset) {
 		this.dataset = dataset;
 	}
 	
-	/**
-	 * This constructor is present so that we can abstract out the model construction process.
-	 * @param uri
-	 * @param dataset
-	 */
-	public OrganizationModelWithTypesConstructor(String uri, Dataset dataset) {
-		this.dataset = dataset;
-	}
-	
-	private String constructAllSubOrganizationsWithTypesQuery() {
+	private String constructPeopleToPublicationsQuery() {
+		
 		return ""
 		+ " CONSTRUCT { "
-		+ "     ?organization rdf:type foaf:Organization . "
-		+ "     ?organization rdfs:label ?organizationLabel . "
-		+ "     ?organization core:hasSubOrganization ?subOrganization . "
-		+ "     ?subOrganization rdfs:label ?subOrganizationLabel .     "
-		+ "     ?subOrganization rdf:type ?subOrganizationType . "
-		+ "     ?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
-		+ " }  "
-		+ " WHERE { "
-		+ "     ?organization rdf:type foaf:Organization . "
-		+ "     ?organization rdfs:label ?organizationLabel . "
-		+ "      "
-		+ "     OPTIONAL { "
-		+ "         ?organization core:hasSubOrganization ?subOrganization . "
-		+ "         ?subOrganization rdfs:label ?subOrganizationLabel . "
-		+ "         ?subOrganization rdf:type ?subOrganizationType . "
-		+ "         ?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
-		+ "     }     "
+		+ "     ?person vivosocnet:lastCachedAt ?now . "
+		+ "     ?person vivosocnet:hasPublication ?Document . "
+		+ "     ?Document rdf:type bibo:Document .  "
+		+ "     ?Document rdfs:label ?DocumentLabel .  "
+		+ "     ?Document core:dateTimeValue ?dateTimeValue .  "
+		+ "     ?dateTimeValue core:dateTime ?publicationDate .  "
+		+ " } "
+		+ " WHERE {  "
+		+ "         ?person core:authorInAuthorship ?Resource .  "
+		+ "         ?Resource core:linkedInformationResource ?Document .  "
+		+ "         ?Document rdfs:label ?DocumentLabel . "
+		+ "          "
+		+ "         OPTIONAL { "
+		+ "             ?Document core:dateTimeValue ?dateTimeValue .  "
+		+ "             ?dateTimeValue core:dateTime ?publicationDate . "
+		+ "         }  "
+		+ "          "
+		+ "         LET(?now := afn:now()) "
 		+ " } ";
-		
 	}
 	
 	private Model executeQuery(String constructQuery) {
 		
-		System.out.println("in constructed model fior organization");
+		System.out.println("in constructed model for ALL people publications ");
 		
 		Model constructedModel = ModelFactory.createDefaultModel();
 
@@ -97,21 +87,13 @@ public class OrganizationModelWithTypesConstructor implements ModelConstructor {
 		}
 
 		after = System.currentTimeMillis();
-		log.debug("Time taken to execute the CONSTRUCT queries is in milliseconds: "
+		log.debug("Try to see Time taken to execute the CONSTRUCT queries is in milliseconds: "
 				+ (after - before));
 
 		return constructedModel;
 	}	
 	
 	public Model getConstructedModel() throws MalformedQueryParametersException {
-	
-		if (constructedModel != null && !constructedModel.isEmpty()) {
-			return constructedModel;
-		} else {
-			constructedModel = executeQuery(constructAllSubOrganizationsWithTypesQuery());
-			return constructedModel;
-		}
-		
+		return executeQuery(constructPeopleToPublicationsQuery());
 	}
-
 }

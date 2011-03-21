@@ -23,8 +23,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructo
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationModelWithTypesConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToGrantsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PersonToGrantsModelConstructor;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PersonToPublicationsModelConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PeopleToGrantsModelConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PeopleToPublicationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
@@ -383,20 +383,20 @@ public class SelectOnModelUtilities {
 		for (SubEntity person : people) {
 		System.out.println(person.getIndividualURI() + " -- " + person.getIndividualLabel());	
 		}
+
+		long before = System.currentTimeMillis();
+		
+		Model peopleGrantsModel = ModelConstructorUtilities
+										.getOrConstructModel(
+												null,
+												PeopleToGrantsModelConstructor.MODEL_TYPE,
+												dataset);
+
+		System.out.print("\t construct took " + (System.currentTimeMillis() - before));
 		
 		for (SubEntity person : people) {
 		
 			System.out.println("constructing grants for " + person.getIndividualLabel() + " :: " + person.getIndividualURI());
-			
-			long before = System.currentTimeMillis();
-			
-			Model personGrantsModel = ModelConstructorUtilities
-															.getOrConstructModel(
-																	person.getIndividualURI(),
-																	PersonToGrantsModelConstructor.MODEL_TYPE,
-																	dataset);
-			
-			System.out.print("\t construct took " + (System.currentTimeMillis() - before));
 			
 			before = System.currentTimeMillis();
 			
@@ -439,7 +439,7 @@ public class SelectOnModelUtilities {
 										"",
 										whereClause,
 										"",
-										personGrantsModel);
+										peopleGrantsModel);
 			
 			person.addActivities(getGrantForEntity(
 												personGrantsQuery.getQueryResult(),
@@ -456,13 +456,13 @@ public class SelectOnModelUtilities {
 			throws MalformedQueryParametersException {
 		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
 		
+		Model peoplePublicationsModel = ModelConstructorUtilities
+											.getOrConstructModel(
+													null,
+													PeopleToPublicationsModelConstructor.MODEL_TYPE,
+													dataset);
+		
 		for (SubEntity person : people) {
-			
-			Model personPublicationsModel = ModelConstructorUtilities
-															.getOrConstructModel(
-																	person.getIndividualURI(),
-																	PersonToPublicationsModelConstructor.MODEL_TYPE,
-																	dataset);
 			
 			System.out.println("getting publications for " + person.getIndividualLabel());
 			
@@ -483,7 +483,7 @@ public class SelectOnModelUtilities {
 										"",
 										whereClause,
 										"",
-										personPublicationsModel);
+										peoplePublicationsModel);
 			
 			person.addActivities(getPublicationForEntity(
 												personPublicationsQuery.getQueryResult(),

@@ -13,6 +13,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructo
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationModelWithTypesFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationToGrantsForSubOrganizationsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.OrganizationToPublicationsForSubOrganizationsFactory;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PeopleToGrantsFactory;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PeopleToPublicationsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PersonToGrantsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PersonToPublicationsFactory;
 
@@ -21,7 +23,9 @@ public class ModelConstructorUtilities {
 	@SuppressWarnings("serial")
 	private static final Map<String, ModelFactoryInterface> modelTypeIdentifierToFactory = new HashMap<String, ModelFactoryInterface>() {{
 		put(PersonToPublicationsModelConstructor.MODEL_TYPE, new PersonToPublicationsFactory());
+		put(PeopleToPublicationsModelConstructor.MODEL_TYPE, new PeopleToPublicationsFactory());
 		put(PersonToGrantsModelConstructor.MODEL_TYPE, new PersonToGrantsFactory());
+		put(PeopleToGrantsModelConstructor.MODEL_TYPE, new PeopleToGrantsFactory());
 		put(OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToPublicationsForSubOrganizationsFactory());
 		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToGrantsForSubOrganizationsFactory());
 		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, new OrganizationAssociatedPeopleModelWithTypesFactory());
