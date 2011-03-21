@@ -44,6 +44,8 @@ var graphContainer;
 var tableDiv;
 var entityLevel;
 
+var lastCachedAtDateTimes;
+
 //options for Flot
 var FlotOptions;
 
@@ -68,7 +70,7 @@ function initConstants() {
 	setOfLabels = [];
 	labelToCheckedEntities = {};
 	stopWordsToCount = {};
-	
+	lastCachedAtDateTimes = [];
 	//options for Flot
 	FlotOptions = {
 			legend : {

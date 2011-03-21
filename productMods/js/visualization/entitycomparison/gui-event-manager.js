@@ -152,6 +152,9 @@ function loadData(jsonData, dataTableParams) {
     $.each(jsonData, function (index, val) {
         setOfLabels.push(val.label);
         labelToEntityRecord[val.label] = val;
+        if (val.lastCachedAtDateTime) {
+        	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
+        }
     });
     
     prepareTableForDataTablePagination(jsonData, dataTableParams);
@@ -244,6 +247,15 @@ function getTemporalGraphData(temporalGraphDataURL,
 	
 }
 
+function parseXSDateTime(rawDateTimeString) {
+	
+	var dateTime = rawDateTimeString.split("T", 2);
+	var date = dateTime[0].split("-");
+	var time = dateTime[1].split(":");
+	
+	return new Date(date[0], date[1], date[2], time[0], time[1], 0);
+}
+
 temporalGraphProcessor = {
 		
 	initiateTemporalGraphRenderProcess: function(givenGraphContainer, jsonData) {
@@ -264,6 +276,12 @@ temporalGraphProcessor = {
          * */
         loadData(jsonData, this.dataTableParams);
         
+        lastCachedAtDateTimes.sort(function(a, b) {
+        	 var dateA = parseXSDateTime(a); 
+        	 var dateB = parseXSDateTime(b);
+        	 return dateA-dateB; //sort by date ascending
+        });
+        
         /*
          * This will make sure that top 3 entities are selected by default when the page loads.
         */      
@@ -282,7 +300,13 @@ temporalGraphProcessor = {
                     
                     performEntityCheckboxClickedRedrawActions();
                     
-                });
+        });
+        
+        if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
+        	$("#incomplete-data-disclaimer").attr(
+        			"title", 
+        			$("#incomplete-data-disclaimer").attr("title") + " as of " + parseXSDateTime(lastCachedAtDateTimes[0])); 
+        }
 		
 	}	
 		

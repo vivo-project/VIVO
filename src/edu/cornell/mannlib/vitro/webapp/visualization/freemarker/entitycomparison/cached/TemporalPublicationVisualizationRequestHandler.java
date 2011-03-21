@@ -313,6 +313,8 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
+			entityJson.setLastCachedAtDateTime(subentity.getLastCachedAtDateTime());
+			
 			if (subentity.getEntityClass().equals(VOConstants.EntityClassType.PERSON)) {
 				entityJson.setVisMode("PERSON");
 			} else if (subentity.getEntityClass().equals(VOConstants.EntityClassType.ORGANIZATION)) {

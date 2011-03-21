@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,13 +19,11 @@ import org.joda.time.format.DateTimeFormatter;
 import com.google.gson.Gson;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
-import edu.cornell.mannlib.vitro.webapp.controller.Controllers;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
@@ -193,7 +189,7 @@ public class UtilityFunctions {
 		/*
 		 * Always return default year identifier in case of an illegal parsed year.
 		 * */
-		String parsedGrantYear = defaultYearInCaseOfError;
+		String parsedInputYear = defaultYearInCaseOfError;
 
 		if (inputDate != null) {
 
@@ -205,7 +201,7 @@ public class UtilityFunctions {
 			} 
 		} 
 		
-		return parsedGrantYear;
+		return parsedInputYear;
 	}
 	
 	public static String getCSVDownloadURL(String individualURI, String visType, String visMode) {

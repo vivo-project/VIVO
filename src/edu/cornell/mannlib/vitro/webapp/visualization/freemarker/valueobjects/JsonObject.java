@@ -16,6 +16,7 @@ import java.util.Set;
 public class JsonObject {
 	
 	private String label;
+	private String lastCachedAtDateTime;
 	private List<List<Integer>> data = new ArrayList<List<Integer>>();
 	private String entityURI;
 	private String visMode;
@@ -80,9 +81,11 @@ public class JsonObject {
 		this.data = yearToPublicationCount;
 	}
 
-	public void setYearToGrantCount(List<List<Integer>> yearGrantCount) {
-		
-		
+	public void setLastCachedAtDateTime(String lastCachedAtDateTime) {
+		this.lastCachedAtDateTime = lastCachedAtDateTime;
 	}
-	
+
+	public String getLastCachedAtDateTime() {
+		return lastCachedAtDateTime;
+	}
 }
