@@ -127,4 +127,6 @@ public class QueryFieldLabels {
 	public static final String GRANT_END_DATE = "grantEndDateForGrantLit";
 	
 	
+	public static final String LAST_CACHED_AT_DATETIME = "lastCachedDateTimeLit";
+	
 }
