@@ -57,11 +57,11 @@ public class TemporalGrantVisualizationRequestHandler implements
 			
 		}
 		
-		System.out.println("current models in the system are");
-		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
-			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
-		}
-		
+//		System.out.println("current models in the system are");
+//		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
+//			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
+//		}
+//		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
