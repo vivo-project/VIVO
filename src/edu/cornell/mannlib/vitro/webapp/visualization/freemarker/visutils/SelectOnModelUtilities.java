@@ -211,9 +211,11 @@ public class SelectOnModelUtilities {
 			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
 			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
 			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+			fieldLabelToOutputFieldLabel.put("lastCachedDateTime", QueryFieldLabels.LAST_CACHED_AT_DATETIME);
 			
 			String whereClause = ""
 				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPersonWithPublication ?document . "
+				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedDateTime . "
 				+ " ?document rdfs:label ?documentLabel . "
 				+ " OPTIONAL { "
 				+ " 	?document core:dateTimeValue ?dateTimeValue . "
@@ -372,20 +374,31 @@ public class SelectOnModelUtilities {
 		return allGrantURIToVO;
 	}
 	
-	public static Map<String, Activity> getGrantForAssociatedPeople(
+	public static Map<String, Activity> getGrantsForAssociatedPeople(
 			Dataset dataset, Collection<SubEntity> people)
 			throws MalformedQueryParametersException {
 		Map<String, Activity> allGrantURIToVOs = new HashMap<String, Activity>();
 		
+		System.out.println("peopel for grants under consideration are ");
 		for (SubEntity person : people) {
-			
+		System.out.println(person.getIndividualURI() + " -- " + person.getIndividualLabel());	
+		}
+		
+		for (SubEntity person : people) {
+		
 			System.out.println("constructing grants for " + person.getIndividualLabel() + " :: " + person.getIndividualURI());
+			
+			long before = System.currentTimeMillis();
 			
 			Model personGrantsModel = ModelConstructorUtilities
 															.getOrConstructModel(
 																	person.getIndividualURI(),
 																	PersonToGrantsModelConstructor.MODEL_TYPE,
 																	dataset);
+			
+			System.out.print("\t construct took " + (System.currentTimeMillis() - before));
+			
+			before = System.currentTimeMillis();
 			
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
@@ -432,6 +445,8 @@ public class SelectOnModelUtilities {
 												personGrantsQuery.getQueryResult(),
 												allGrantURIToVOs));
 			
+			System.out.println("\t || select took " + (System.currentTimeMillis() - before));
+			
 		}
 		return allGrantURIToVOs;
 	}
@@ -473,9 +488,7 @@ public class SelectOnModelUtilities {
 			person.addActivities(getPublicationForEntity(
 												personPublicationsQuery.getQueryResult(),
 												allDocumentURIToVOs));
-			
 		}
 		return allDocumentURIToVOs;
 	}
-
 }
