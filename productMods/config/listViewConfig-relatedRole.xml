@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT <collation-fragment>?subclass</collation-fragment>
+        SELECT DISTINCT <collated>?subclass</collated>
                         ?role   
                         ?roleLabel ?roleTypeLabel                          
                         ?indivInRole (afn:localname(?indivInRole) AS ?indivName)
@@ -39,8 +39,10 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd
                       }
             }
-                  
-        } ORDER BY <collation-fragment>?subclass</collation-fragment>?indivName ?indivLabel ?roleLabel ?roleTypeLabel
+            <linked-individual-required>
+            FILTER ( bound(?indivInRole) )
+            </linked-individual-required>     
+        } ORDER BY <collated>?subclass</collated> ?indivLabel ?roleLabel ?roleTypeLabel ?indivName
     </query-select>
 
     <query-construct>

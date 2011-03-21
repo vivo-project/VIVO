@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT <collation-fragment>?subclass</collation-fragment>
+        SELECT DISTINCT <collated>?subclass</collated>
                         ?role 
                         ?roleLabel 
                         ?activity ?activityName 
@@ -18,11 +18,11 @@
             OPTIONAL { ?role core:roleIn ?activity . 
                        ?activity rdfs:label ?activityName 
             }
-            <collation-fragment>
+            <collated>
             OPTIONAL { ?role a ?subclass .
                        ?subclass rdfs:subClassOf core:Role 
             }   
-            </collation-fragment>
+            </collated>
             OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
@@ -31,8 +31,11 @@
                        OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
-            }
-            } ORDER BY <collation-fragment>?subclass</collation-fragment> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
+            }  
+            <linked-individual-required>
+            FILTER ( bound(?activity) )
+            </linked-individual-required>
+        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
     </query-select>
     
     <query-construct>

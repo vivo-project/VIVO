@@ -9,28 +9,26 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment> 
+        SELECT DISTINCT <collated> ?subclass </collated> 
                         ?authorship
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE {
-            ?subject ?property ?authorship . 
-            <linked-individual-optional> 
-            OPTIONAL { 
-            </linked-individual-optional>
-                ?authorship core:linkedInformationResource ?infoResource .                      
-                ?infoResource rdfs:label ?infoResourceName 
-                    <collation-fragment> 
-                    OPTIONAL { ?subclass rdfs:subClassOf core:InformationResource .
-                               ?infoResource a ?subclass  
-                    }     
-                    </collation-fragment>                       
-                    OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
-                               ?dateTimeValue core:dateTime ?dateTime  
-                    }  
-            <linked-individual-optional>        
+            ?subject ?property ?authorship  
+            OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
+                       ?infoResource rdfs:label ?infoResourceName 
+                       <collated> 
+                       OPTIONAL { ?subclass rdfs:subClassOf core:InformationResource .
+                                  ?infoResource a ?subclass  
+                       }     
+                       </collated>                       
+                       OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
+                                  ?dateTimeValue core:dateTime ?dateTime  
+                       }                                                      
             } 
-            </linked-individual-optional>
-        } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?infoResourceName   
+            <linked-individual-required>
+            FILTER ( bound(?infoResource) )
+            </linked-individual-required>
+        } ORDER BY <collated> ?subclass </collated> ?infoResourceName   
     </query-select>
 
     <query-construct>

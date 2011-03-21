@@ -10,20 +10,23 @@
         PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
                 
-        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
+        SELECT DISTINCT <collated> ?subclass </collated>
                         ?authorship
                         ?person ?personName WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:authorRank ?rank } 
             OPTIONAL { ?authorship core:linkedAuthor ?person .                      
                        ?person rdfs:label ?personName 
-                       <collation-fragment> 
+                       <collated> 
                        OPTIONAL { ?person a ?subclass .
                                   ?subclass rdfs:subClassOf foaf:Person 
                        } 
-                       </collation-fragment>
+                       </collated>
             }
-        } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?rank ?personName   
+            <linked-individual-required>
+            FILTER ( bound(?person) )
+            </linked-individual-required>
+        } ORDER BY <collated> ?subclass </collated> ?rank ?personName   
     </query-select>
 
     <query-construct>

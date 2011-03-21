@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
+        SELECT DISTINCT <collated> ?subclass </collated>
                         ?position
                         ?positionTitle 
                         ?person ?personName 
@@ -18,11 +18,11 @@
             OPTIONAL { ?position core:positionForPerson ?person .
                        ?person rdfs:label ?personName   
             }     
-            <collation-fragment>           
+            <collated>           
             OPTIONAL { ?position a ?subclass .
                        ?subclass rdfs:subClassOf core:Position 
             }   
-            </collation-fragment>
+            </collated>
             OPTIONAL { ?position rdfs:label ?positionTitle }
             OPTIONAL { ?position core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
@@ -31,10 +31,13 @@
                        OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd  
                        }
-            # Current positions only: end date is either null or not in the past
+            # Get current positions only: end date is either null or not in the past
             } FILTER ( !bound(?dateTimeEnd) ||                        
                        afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
-        } ORDER BY <collation-fragment> ?subclass </collation-fragment> ?personName
+              <linked-individual-required>
+              FILTER ( bound(?person) )
+              </linked-individual-required>
+        } ORDER BY <collated> ?subclass </collated> ?personName
     </query-select>
     
     <query-construct>

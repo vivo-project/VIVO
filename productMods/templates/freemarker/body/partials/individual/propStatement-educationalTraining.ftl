@@ -5,11 +5,11 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showEducationalTraining statement />
+<@showEducationalTraining statement individual />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showEducationalTraining statement>
+<#macro showEducationalTraining statement individual>
 
     <#local degree>
         <#if statement.degreeName??>
@@ -25,12 +25,12 @@
     <#local linkedIndividual>
         <#if statement.org??>
             <a href="${profileUrl(statement.org)}">${statement.orgName}</a>
-        <#else>
-            <#-- This shouldn't happen, but we must provide for it -->
+        <#elseif individual.editable>
+            <#-- Show the link to the context node only if the user is editing the page. -->
             <a href="${profileUrl(statement.edTraining)}">missing organization</a>
         </#if>
     </#local>
 
-    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
+    <@s.join [ degree, linkedIndividual!, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
 
 </#macro>

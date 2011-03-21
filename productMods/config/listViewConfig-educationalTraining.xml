@@ -10,7 +10,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
         
-        SELECT DISTINCT <collation-fragment> ?subclass </collation-fragment>
+        SELECT DISTINCT <collated> ?subclass </collated>
                         ?edTraining 
                         ?org ?orgName 
                         ?degreeName ?degreeAbbr 
@@ -20,11 +20,11 @@
                 ?subject ?property ?edTraining 
                 OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                 
                            ?org rdfs:label ?orgName  
-                           <collation-fragment>
+                           <collated>
                            OPTIONAL { ?subclass rdfs:subClassOf foaf:Organization .
                                       ?org a ?subclass 
                            }  
-                           </collation-fragment>                         
+                           </collated>                         
                 }        
                 OPTIONAL { ?edTraining core:degreeEarned ?degree  
                            OPTIONAL { ?degree rdfs:label ?degreeName }
@@ -40,7 +40,7 @@
                            OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue . 
                                       ?dateTimeEndValue core:dateTime ?dateTimeEnd  
                            }                                      
-                }                              
+                }  
          }  ORDER BY ?subclass DESC(?dateTimeEnd) DESC(?dateTimeStart)
     </query-select>
 
