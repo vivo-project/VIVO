@@ -35,6 +35,9 @@ a:hover {
 a {
     color: #2485AE;
 }
+em {
+    font-style: italic;
+}
 /* h1,h2,h3,h4,h5,h6 ------>  */
 h2 {
     padding: 10px 0 12px 0;
