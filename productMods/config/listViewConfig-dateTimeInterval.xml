@@ -19,19 +19,22 @@
             ?subject ?property ?dateTimeInterval
                       
             OPTIONAL { ?dateTimeInterval core:start ?valueStart
-                                   LET (?valueStartName := afn:localname(?valueStart)) 
+                           LET (?valueStartName := afn:localname(?valueStart)) 
                        OPTIONAL { ?valueStart core:dateTime ?dateTimeStart }
                        OPTIONAL { ?valueStart core:dateTimePrecision ?dateTimePrecisionStart
-                                              LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
+                                      LET (?precisionStart := afn:localname(?dateTimePrecisionStart))  
                        }
             }                      
             OPTIONAL { ?dateTimeInterval core:end ?valueEnd
-                                   LET (?valueEndName := afn:localname(?valueEnd))  
+                           LET (?valueEndName := afn:localname(?valueEnd))  
                        OPTIONAL { ?valueEnd core:dateTime ?dateTimeEnd }
                        OPTIONAL { ?valueEnd core:dateTimePrecision ?dateTimePrecisionEnd
-                                              LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
+                                      LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
                        }
             }
+            <linked-individual-required>
+            FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) ) 
+            </linked-individual-required>
         }  
     </query-select>
 
