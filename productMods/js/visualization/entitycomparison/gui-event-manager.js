@@ -192,6 +192,17 @@ function entityCheckboxOperatedOnEventListener() {
 	
 }
 
+function renderTemporalGraphVisualization(parameters) {
+	
+    setupLoadingScreen(parameters.responseContainer);
+
+    getTemporalGraphData(parameters.dataURL,
+    					 parameters.bodyContainer,
+                         parameters.errorContainer,
+                         parameters.responseContainer);
+	
+}
+
 /*
  * This method will setup the options for loading screen & then activate the 
  * loading screen.
@@ -208,13 +219,37 @@ function setupLoadingScreen(visContainerDIV) {
     $.blockUI.defaults.css.top = '15%';
 	
     visContainerDIV.block({
-        message: '<h3><img src="' + loadingImageLink 
+        message: '<div id="loading-data-container"><h3><img id="data-loading-icon" src="' + loadingImageLink 
         			+ '" />&nbsp;Loading data for <i>' 
         			+ organizationLabel
-        			+ '</i></h3>'
+        			+ '</i></h3></div>'
     });
+    
+    setTimeout(function() {
+    	$("#loading-data-container")
+    		.html('<h3><img id="refresh-page-icon" src="' 
+    				+ refreshPageImageLink 
+	    			+ '" />&nbsp;Data for <i>' + organizationLabel
+	    			+ '</i> is now being refreshed. The visualization will load as soon as we are done computing, ' 
+	    			+ 'or you can come back in a few minutes.</h3>')
+	    	.css({'cursor': 'pointer'});
+    	
+    }, 10 * 1000);
 	
 }
+
+$("#reload-data").live('click', function() {
+	
+	options = {
+			responseContainer: $("div#temporal-graph-response"),
+			bodyContainer: $("#body"),
+			errorContainer: $("#error-container"),
+			dataURL: temporalGraphDataURL	
+		};
+		
+	renderTemporalGraphVisualization(options);
+	
+});
 
 /*
  * This function gets json data for temporal graph & after rendering removes the
@@ -225,25 +260,34 @@ function getTemporalGraphData(temporalGraphDataURL,
 										errorBodyDIV, 
 										visContainerDIV) {
 	
-	$.ajax({
-        url: temporalGraphDataURL,
-        dataType: "json",
-        timeout: 5 * 60 * 1000,
-        success: function (data) {
-
-            if (data.error) {
-            	graphBodyDIV.remove();
-            	errorBodyDIV.show();
-            	visContainerDIV.unblock();
-                
-            } else {
-            	graphBodyDIV.show();
-            	errorBodyDIV.remove();
-                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
-                visContainerDIV.unblock();
-            }
-        }
-    });
+	if (!isDataRequestSentViaAJAX) {
+		
+		isDataRequestSentViaAJAX = true;
+	
+		$.ajax({
+	        url: temporalGraphDataURL,
+	        dataType: "json",
+	        timeout: 5 * 60 * 1000,
+	        success: function (data) {
+	
+	            if (data.error) {
+	            	graphBodyDIV.remove();
+	            	errorBodyDIV.show();
+	            	visContainerDIV.unblock();
+	                
+	            } else {
+	            	graphBodyDIV.show();
+	            	errorBodyDIV.remove();
+	                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
+	                visContainerDIV.unblock();
+	            }
+	        },
+	       complete: function() {
+	        	isDataRequestSentViaAJAX = false;
+	        }
+	    });
+	
+	}
 	
 }
 

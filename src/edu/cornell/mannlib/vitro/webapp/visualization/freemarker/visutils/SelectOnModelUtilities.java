@@ -211,11 +211,9 @@ public class SelectOnModelUtilities {
 			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
 			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
 			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			fieldLabelToOutputFieldLabel.put("lastCachedDateTime", QueryFieldLabels.LAST_CACHED_AT_DATETIME);
 			
 			String whereClause = ""
 				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPersonWithPublication ?document . "
-				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedDateTime . "
 				+ " ?document rdfs:label ?documentLabel . "
 				+ " OPTIONAL { "
 				+ " 	?document core:dateTimeValue ?dateTimeValue . "
@@ -231,6 +229,12 @@ public class SelectOnModelUtilities {
 			getPublicationForEntity(subOrganizationPublicationsQuery.getQueryResult(),
 									subOrganization,
 									allDocumentURIToVOs);
+			
+			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+					subOrganization, 
+					subOrganizationPublicationsModel);
+
+			subOrganization.setLastCachedAtDateTime(lastCachedAtForEntity);
 			
 		}
 		return allDocumentURIToVOs;
@@ -276,6 +280,22 @@ public class SelectOnModelUtilities {
 		subEntity.addActivities(currentEntityPublications);
 	}
 	
+	public static String getLastCachedAtForEntity(ResultSet queryResult) {
+		
+		String lastCachedAtDateTime = null;
+		
+		while (queryResult.hasNext()) {
+			
+			QuerySolution solution = queryResult.nextSolution();
+				
+			RDFNode lastCachedAtNode = solution.get(QueryFieldLabels.LAST_CACHED_AT_DATETIME);
+			if (lastCachedAtNode != null) {
+				lastCachedAtDateTime = lastCachedAtNode.toString();
+			}
+		}
+		
+		return lastCachedAtDateTime;
+	}
 	
 	private static void getGrantForEntity(
 			ResultSet queryResult,
@@ -334,22 +354,26 @@ public class SelectOnModelUtilities {
 			
 			System.out.println("constructing grants for " + subOrganization.getIndividualLabel() + " :: " + subOrganization.getIndividualURI());
 			
+			long before = System.currentTimeMillis();
+			
 			Model subOrganizationGrantsModel = ModelConstructorUtilities
 															.getOrConstructModel(
 																	subOrganization.getIndividualURI(),
 																	OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE,
 																	dataset);
 			
+			System.out.println("\t construct -> " + (System.currentTimeMillis() - before));
+			
+			before = System.currentTimeMillis();
+			
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
 			fieldLabelToOutputFieldLabel.put("grantLabel", QueryFieldLabels.GRANT_LABEL);
 			fieldLabelToOutputFieldLabel.put("grantStartDate", QueryFieldLabels.GRANT_START_DATE);
 			fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
-			fieldLabelToOutputFieldLabel.put("lastCachedAtDateTime", QueryFieldLabels.LAST_CACHED_AT_DATETIME);
 			
 			String whereClause = ""
 				+ "{"
-				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasInvestigatorWithGrant ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
@@ -359,7 +383,6 @@ public class SelectOnModelUtilities {
 				+ "}"
 				+ "UNION"
 				+ "{"
-				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPIWithGrant ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
@@ -369,7 +392,6 @@ public class SelectOnModelUtilities {
 				+ "}"
 				+ "UNION"
 				+ "{"
-				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hascoPIWithGrant ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
@@ -385,18 +407,44 @@ public class SelectOnModelUtilities {
 										"",
 										subOrganizationGrantsModel);
 			
-//			subOrganization.addActivities(getGrantForEntity(
-//												subOrganizationGrantsQuery.getQueryResult(),
-//												allGrantURIToVO));
-			
 			/*
 			 * This method side-affects the subOrganization entity & the map containing all the grants for 
 			 * the subject organization.
 			 * */
 			getGrantForEntity(subOrganizationGrantsQuery.getQueryResult(), subOrganization, allGrantURIToVO);
 			
+			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+													subOrganization, 
+													subOrganizationGrantsModel);
+			
+			subOrganization.setLastCachedAtDateTime(lastCachedAtForEntity);
+			
+			System.out.println("\t select -> " + (System.currentTimeMillis() - before));
 		}
 		return allGrantURIToVO;
+	}
+
+	private static String getLastCachedAtDateTimeForEntityInModel(
+			SubEntity entity, Model subOrganizationGrantsModel)
+			throws MalformedQueryParametersException {
+
+		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+		fieldLabelToOutputFieldLabel.put("lastCachedAtDateTime", QueryFieldLabels.LAST_CACHED_AT_DATETIME);
+		
+		String whereClause = ""
+			+ "{"
+			+ " <" + entity.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
+			+ "}";
+		
+		QueryRunner<ResultSet> entityLastCachedAtQuery = 
+			new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+									"",
+									whereClause,
+									"",
+									subOrganizationGrantsModel);
+		
+		String lastCachedAtForEntity = getLastCachedAtForEntity(entityLastCachedAtQuery.getQueryResult());
+		return lastCachedAtForEntity;
 	}
 	
 	public static Map<String, Activity> getGrantsForAssociatedPeople(
@@ -417,11 +465,9 @@ public class SelectOnModelUtilities {
 			fieldLabelToOutputFieldLabel.put("grantLabel", QueryFieldLabels.GRANT_LABEL);
 			fieldLabelToOutputFieldLabel.put("grantStartDate", QueryFieldLabels.GRANT_START_DATE);
 			fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
-			fieldLabelToOutputFieldLabel.put("lastCachedAtDateTime", QueryFieldLabels.LAST_CACHED_AT_DATETIME);
 			
 			String whereClause = ""
 				+ "{"
-				+ " <" + person.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsAnInvestigator ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
@@ -431,7 +477,6 @@ public class SelectOnModelUtilities {
 				+ "}"
 				+ "UNION"
 				+ "{"
-				+ " <" + person.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsPI ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
@@ -441,7 +486,6 @@ public class SelectOnModelUtilities {
 				+ "}"
 				+ "UNION"
 				+ "{"
-				+ " <" + person.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsCoPI ?grant . "
 				+ " ?grant rdfs:label ?grantLabel . "
 				+ " OPTIONAL { "
@@ -458,6 +502,14 @@ public class SelectOnModelUtilities {
 										peopleGrantsModel);
 			
 			getGrantForEntity(personGrantsQuery.getQueryResult(), person, allGrantURIToVOs);
+			
+			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+					person, 
+					peopleGrantsModel);
+
+			person.setLastCachedAtDateTime(lastCachedAtForEntity);
+			
+			
 		}
 		return allGrantURIToVOs;
 	}
@@ -481,10 +533,8 @@ public class SelectOnModelUtilities {
 			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
 			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
 			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			fieldLabelToOutputFieldLabel.put("lastCachedAtDateTime", QueryFieldLabels.LAST_CACHED_AT_DATETIME);
 			
 			String whereClause = ""
-				+ " <" + person.getIndividualURI() + "> vivosocnet:lastCachedAt ?lastCachedAtDateTime . "
 				+ " <" + person.getIndividualURI() + "> vivosocnet:hasPublication ?document . "
 				+ " ?document rdfs:label ?documentLabel . "
 				+ " OPTIONAL { "
@@ -501,6 +551,12 @@ public class SelectOnModelUtilities {
 			getPublicationForEntity(personPublicationsQuery.getQueryResult(),
 									person,
 									allDocumentURIToVOs);
+			
+			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+					person, 
+					peoplePublicationsModel);
+
+			person.setLastCachedAtDateTime(lastCachedAtForEntity);
 			
 		}
 		return allDocumentURIToVOs;

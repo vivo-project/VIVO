@@ -19,14 +19,18 @@ This is used in util.js to print grant temporal graph links for all sub-organiza
 */    
 var subOrganizationTemporalGraphURL = "${subOrganizationPublicationTemporalGraphCommonURL}";
 
+var temporalGraphDataURL = '${temporalGraphDataURL}';
+
 $(document).ready(function () {
 
-    setupLoadingScreen($("div#temporal-graph-response"));
-
-    getTemporalGraphData('${temporalGraphDataURL}',
-                         $("#body"),
-                         $("#error-container"),
-                         $("div#temporal-graph-response"));
+	options = {
+		responseContainer: $("div#temporal-graph-response"),
+		bodyContainer: $("#body"),
+		errorContainer: $("#error-container"),
+		dataURL: temporalGraphDataURL	
+	};
+	
+	renderTemporalGraphVisualization(options);
 
 });
 

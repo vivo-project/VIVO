@@ -74,8 +74,11 @@ var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
+var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
 
 var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass}";
+
+var isDataRequestSentViaAJAX = false;
 
 var temporalGraphProcessor;
 
