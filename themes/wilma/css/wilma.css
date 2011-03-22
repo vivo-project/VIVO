@@ -93,6 +93,8 @@ input.block {
 label {
     margin-top: .5em;
 }
+.verbose-toggle,
+.verbose-toggle:visited,
 #showAddFormButton,
 #showAddFormButton:visited,
 input.submit, 
@@ -122,16 +124,17 @@ input#submit:visited {
     margin-top: .5em;
     margin-bottom: .5em;
 }
-#verbosePropertyForm span {
+#verbose-mode .small {
+    font-size: 12px;
+    color: #fff;
+}
+#verbose-mode span {
     color: #888C8C;
 }
-#verbosePropertyForm b {
+#verbose-mode b {
     color: #595B5B;
 }
-#verbosePropertyForm .small {
-    font-size: 12px;
-}
-#verbosePropertyForm .verbose-off{
+#verbose-mode .verbose-off{
     background: #706a66;
 }
 input.delete,
@@ -157,6 +160,7 @@ input#delete:visited {
     line-height: 1;
     margin-right: .6em;
 }
+.verbose-toggle:hover,
 #showAddFormButton:hover,
 input.submit:hover,
 input#submit:hover {
@@ -168,6 +172,8 @@ input#delete:hover {
     color: #fff;
     background-color: #93c3d4;
 }
+.verbose-toggle,
+.verbose-toggle:active,
 #showAddFormButton:active,
 input.delete:active,
 input#delete:active,
@@ -1445,9 +1451,7 @@ article.property h3 {
     padding: 10px 0 10px 20px;
     margin: 0;
 }
-article.property .verbosePropertyListing {
-    margin-left: 15px;
-}
-h2#personInPosition .verbosePropertyListing {
+h2#personInPosition .verbosePropertyListing,
+h2#hasResearchArea .verbosePropertyListing {
     display: block;
 }
