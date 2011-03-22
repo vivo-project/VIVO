@@ -15,9 +15,9 @@
             ?subject ?property ?dateTimeValue 
             OPTIONAL { ?dateTimeValue core:dateTime ?dateTime }
             OPTIONAL { ?dateTimeValue core:dateTimePrecision ?dateTimePrecision }
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?dateTime) )
-            </linked-individual-required>
+            </critical-data-required>
         }  
     </query-select>
 

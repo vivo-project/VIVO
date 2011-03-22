@@ -23,9 +23,9 @@
                        } 
                        </collated>
             }
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?person) )
-            </linked-individual-required>
+            </critical-data-required>
         } ORDER BY <collated> ?subclass </collated> ?rank ?personName   
     </query-select>
 

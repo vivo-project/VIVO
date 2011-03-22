@@ -34,9 +34,9 @@
             # Get current positions only: end date is either null or not in the past
             } FILTER ( !bound(?dateTimeEnd) ||                        
                        afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
-              <linked-individual-required>
+              <critical-data-required>
               FILTER ( bound(?person) )
-              </linked-individual-required>
+              </critical-data-required>
         } ORDER BY <collated> ?subclass </collated> ?personName
     </query-select>
     

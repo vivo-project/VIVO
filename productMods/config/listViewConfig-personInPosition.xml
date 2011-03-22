@@ -34,9 +34,9 @@
                        ?subclass rdfs:subClassOf core:Position 
             } 
             </collated>
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?org) )
-            </linked-individual-required>
+            </critical-data-required>
         } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?orgName
     </query-select>
        

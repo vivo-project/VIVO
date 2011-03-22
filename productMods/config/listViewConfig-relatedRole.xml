@@ -39,9 +39,9 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd
                       }
             }
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?indivInRole) )
-            </linked-individual-required>     
+            </critical-data-required>     
         } ORDER BY <collated>?subclass</collated> ?indivLabel ?roleLabel ?roleTypeLabel ?indivName
     </query-select>
 

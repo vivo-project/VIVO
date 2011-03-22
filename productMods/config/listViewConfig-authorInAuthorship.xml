@@ -25,9 +25,9 @@
                                   ?dateTimeValue core:dateTime ?dateTime  
                        }                                                      
             } 
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?infoResource) )
-            </linked-individual-required>
+            </critical-data-required>
         } ORDER BY <collated> ?subclass </collated> ?infoResourceName   
     </query-select>
 

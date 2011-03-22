@@ -32,9 +32,9 @@
                                       LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
                        }
             }
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) ) 
-            </linked-individual-required>
+            </critical-data-required>
         }  
     </query-select>
 

@@ -32,9 +32,9 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
             }  
-            <linked-individual-required>
+            <critical-data-required>
             FILTER ( bound(?activity) )
-            </linked-individual-required>
+            </critical-data-required>
         } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
     </query-select>
     
