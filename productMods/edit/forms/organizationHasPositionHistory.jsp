@@ -87,7 +87,7 @@
 <v:jsonset var="n3ForStmtToOrg"  >
 	?organizationUri <${orgForPositionPred}> ?positionUri .
 	?positionUri     <${positionInOrgPred}> ?organizationUri .	
-    ?positionUri     <${type}>  <${positionType}> .    
+    ?positionUri     a  ?positionType .    
 </v:jsonset>
 
 <v:jsonset var="n3ForStart">
@@ -166,6 +166,18 @@
       ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
 </v:jsonset>
 
+<v:jsonset var="positionTypeAssertion">
+    ?positionUri a ?positionType .
+</v:jsonset>
+
+<v:jsonset var="positionTypeQuery">
+    SELECT ?existingPositionType WHERE {
+        ?positionUri a ?existingPositionType . }
+</v:jsonset>
+
+<c:set var="positionClass" value="${vivoCore}Position" />
+<v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
+
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
@@ -176,7 +188,7 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}"],
+    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}", "${positionTypeAssertion}"],
     "n3optional"    : [ "${n3ForStart}" , "${n3ForEnd}" ],
     "newResources"  : { "positionUri" : "${defaultNamespace}",
                         "intervalNode" : "${defaultNamespace}",
@@ -184,7 +196,7 @@
                         "endNode" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "personUri" ],
+    "urisOnForm"     : [ "personUri", "positionType" ],
     "literalsOnForm" :  [ "title", "startYear", "endYear" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
@@ -196,6 +208,7 @@
     },
     "sparqlForExistingUris" : {
         "personUri"   : "${personUriExisting}",
+        "positionType"      : "${positionTypeQuery}" ,
         "intervalNode"      : "${existingIntervalNodeQuery}", 
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
@@ -225,6 +238,17 @@
          "rangeLang"        : "",
          "assertions"       : [ "${personUriAssertion}" ]
       },
+     "positionType" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty" ],
+         "optionsType"      : "CHILD_VCLASSES_WITH_PARENT",
+         "literalOptions"   : [ "Select one" ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "${positionClassUriJson}",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",
+         "assertions"       : [ "${positionTypeAssertion}" ]
+      },             
       "startField" : {
          "newResource"      : "false",
          "validators"       : [ ],
@@ -299,6 +323,7 @@
 <h2>${title}</h2>
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="Position Title ${requiredHint}" id="title" size="30"/>
+	<v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 	<v:input type="select" label="Person" id="personUri"  />
 	<v:input id="startField"  label="Start Year ${yearHint}" />
     <v:input id="endField" label="End Year ${yearHint}" />    
