@@ -297,7 +297,15 @@ function parseXSDateTime(rawDateTimeString) {
 	var date = dateTime[0].split("-");
 	var time = dateTime[1].split(":");
 	
-	return new Date(date[0], date[1], date[2], time[0], time[1], 0);
+	return new Date(date[0], parseInt(date[1], 10) -1, date[2], time[0], time[1], 0);
+}
+
+function getReadableDateForLastCachedAtDate(dateObject) {
+	
+	var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+	var month = ['January','February','March','April','May','June','July','August','September','October','November']
+	
+	return day[dateObject.getDay()] + ", " + month[dateObject.getMonth()] + " " + dateObject.getDate();
 }
 
 temporalGraphProcessor = {
@@ -345,13 +353,11 @@ temporalGraphProcessor = {
                     performEntityCheckboxClickedRedrawActions();
                     
         });
-        
+
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
         	$("#incomplete-data-disclaimer").attr(
         			"title", 
-        			$("#incomplete-data-disclaimer").attr("title") + " as of " + parseXSDateTime(lastCachedAtDateTimes[0])); 
+        			$("#incomplete-data-disclaimer").attr("title") + " as of " + getReadableDateForLastCachedAtDate(parseXSDateTime(lastCachedAtDateTimes[0]))); 
         }
-		
 	}	
-		
 }

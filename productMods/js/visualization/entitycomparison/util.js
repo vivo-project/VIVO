@@ -563,25 +563,53 @@ function setLineWidthAndTickSize(yearRange, flotOptions) {
 
 }
 
-/**
- * Dynamically change the ticksize of y-axis.
- */
-function setTickSizeOfYAxis(maxValue, flotOptions){
+var TickSize = {
+		
+	maxValue: 0.0,	
 	
-	var tickSize = 0;
+	maxTicks: {
+		yAxis: 12.0 
+	},
 	
-	if (maxValue > 0 && maxValue <= 5) {
-		flotOptions.yaxis.tickSize = 1;
-	} else if (maxValue > 5 && maxValue <= 10) {
-		flotOptions.yaxis.tickSize = 2;
-	} else 	if (maxValue > 10 && maxValue <= 15) {
-		flotOptions.yaxis.tickSize = 5;
-	} else if (maxValue > 15 && maxValue <= 70) {
-		flotOptions.yaxis.tickSize  = 5;
-	} else {
-		flotOptions.yaxis.tickSize = 10;
-	}
-}
+	tickSizeUnits: {
+		yAxis: [1.0, 2.5, 5.0]
+	},
+	
+	getApproximateTickSize: function(allowedMaxTicks) {
+		return Math.max(Math.ceil(parseFloat(this.maxValue) / allowedMaxTicks), 1.0);
+	},
+	
+	getFinalTickSizeForYaxis: function(unitTickSizeGenerator) {
+		tickSizeMultiplier = 1.0;
+		finalTickSize = 1.0;
+		approximateTickSize = this.getApproximateTickSize(this.maxTicks.yAxis);
+		
+		while (true) {
+			if (approximateTickSize <= (unitTickSizeGenerator[0] * tickSizeMultiplier)) {
+				finalTickSize = unitTickSizeGenerator[0] * tickSizeMultiplier;
+				break;
+			}
+			if (approximateTickSize <= (unitTickSizeGenerator[1] * tickSizeMultiplier)) {
+				finalTickSize = unitTickSizeGenerator[1] * tickSizeMultiplier;
+				break;
+			}
+			if (approximateTickSize <= (unitTickSizeGenerator[2] * tickSizeMultiplier)) {
+				finalTickSize = unitTickSizeGenerator[2] * tickSizeMultiplier;
+				break;
+			}
+			tickSizeMultiplier *= 10.0;
+		}
+		
+		return finalTickSize;
+	},
+	
+	getTickSize: function(value, onAxis) {
+		this.maxValue = value;
+		if (onAxis.trim().toLowerCase() === 'y') {
+			return this.getFinalTickSizeForYaxis(this.tickSizeUnits.yAxis);
+		}
+	} 
+};
 
 /**
  * Create a div that represents the rectangular bar A hidden input class that is
@@ -1186,5 +1214,8 @@ function setTickSizeOfAxes(){
 	var normalizedYearRange = getNormalizedYearRange();
 	
     setLineWidthAndTickSize(normalizedYearRange.normalizedRange, FlotOptions);     
-	setTickSizeOfYAxis(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), FlotOptions);
+	
+	FlotOptions.yaxis.tickSize = 
+			TickSize.getTickSize(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), 'y');
+	
 }
