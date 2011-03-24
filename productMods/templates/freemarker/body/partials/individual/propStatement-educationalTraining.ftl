@@ -5,11 +5,12 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showEducationalTraining statement individual />
+<#-- Coming from propDelete, individual is not defined, but we are editing. -->
+<@showEducationalTraining statement=statement editable=(!individual?? || individual.editable) />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showEducationalTraining statement individual>
+<#macro showEducationalTraining statement editable>
 
     <#local degree>
         <#if statement.degreeName??>
@@ -25,7 +26,7 @@
     <#local linkedIndividual>
         <#if statement.org??>
             <a href="${profileUrl(statement.org)}">${statement.orgName}</a>
-        <#elseif individual.editable>
+        <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
             <a href="${profileUrl(statement.edTraining)}">missing organization</a>
         </#if>
