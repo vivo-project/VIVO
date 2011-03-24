@@ -1,0 +1,26 @@
+# The UploadImagesServlet will upload the images to a directory
+# that is under tomcat and serve them from there.
+# This causes a problem when the tomcat/webapps dir is deleted
+# or deployed because you will lose all the images that the
+# curators have uploaded. We deal with this by copying
+# the files to another directory, one that is under version control.
+
+# This property indicates which non-tomcat directory to save the images in.
+# ${uploadDir} is defined in the main build.xml via the following statements:
+#
+# <!-- defined in globalbuild.properties -->
+# <property name="source.dir" value="{source.home}"/>
+# <property name="uploadDir" value="{source.dir}/webapp/web" />
+#
+# But, this value will be replaced by the Vitro/clones/build.xml
+# to point to the clones/{clone}/modifications directory based on the following
+# <property file="./config/globalbuild.properties"/>
+# <property name="source.dir" value="{source.home}"/>
+# <property name="uploadDir" value="${source.dir}/clones/${clone}/modifications"/>
+#
+# The UploadImagesServlet.getSourceDirName() method then looks at this parameter
+# in the upload.properties file, which file is stuck by the clones/build.xml file
+# into the clone's modifications/WEB-INF/classes directory:
+UploadImagesServlet.sourceDirName=${deploy.upload.directory}
+
+

@@ -1,0 +1,80 @@
+################################################################################
+# DataSource properties file
+################################################################################
+
+######################### DataSource Properties ################################
+
+VitroConnection.DataSource.url=${deploy.VitroConnection.DataSource.url}
+VitroConnection.DataSource.username=${deploy.VitroConnection.DataSource.username}
+VitroConnection.DataSource.password=${deploy.VitroConnection.DataSource.password}
+
+####################### Other Important Properties #############################
+
+# CHANGE the following property unless you're using Cornell's VIVO ontology
+Vitro.defaultNamespace=${deploy.Vitro.defaultNamespace}
+
+# Uncomment this next line and specify an SMTP host to activate the Contact Us form
+#Vitro.smtpHost=
+
+################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+# maximum number of connections to the db server
+# This must not be greater than the mysql max_connection parameter.
+# defaults to 40
+#VitroConnection.DataSource.MaxActive=40
+
+# maximum number of connections to the db server to keep
+# around when nothing is happening.
+# defaults to 10
+#VitroConnection.DataSource.MaxIdle=10
+
+# Time to wait in msec for a result from the sql server
+# defaults to 10000 
+#VitroConnection.DataSource.MaxWait=10000
+
+# query to use to test to see if a connection to the db server is live.
+# defaults to SELECT 1
+#VitroConnection.DataSource.ValidationQuery=SELECT 1
+
+# should the connection pool test the connections it gets from the pool?
+#defaults to true
+#VitroConnection.DataSource.TestOnBorrow=true
+
+# should the connection pool test connections it puts back in pool?
+#defaults to true
+#VitroConnection.DataSource.TestOnReturn=true
+
+# Nnumber of milliseconds to sleep between runs of the idle object
+# evictor thread. When non-positive, no idle object evictor thread will
+# be run. defaults to 30min
+#VitroConnection.DataSource.TimeBetweenEvictions=
+
+# The number of objects to examine during each
+# run of the idle object evictor thread (if any).
+# defaults to 3
+#VitroConnection.DataSource.TestsPerEviction=3
+
+# The minimum amount of time
+# an object may sit idle in the pool before it is eligable for eviction
+# by the idle object evictor (if any).
+# defaults to 30min
+#VitroConnection.DataSource.MinEvictionIdleTime=
+
+################################################ # other notes:
+# The file checked into source control is example.connection.properties so
+# that if you have a connection.properties on your machine it will not be
+# under source control.  This is useful so that your customizations for your
+# database setup are less likely to be checked into source control and then
+# overwrite other folks' customizations.

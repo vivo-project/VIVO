@@ -1,0 +1,49 @@
+# these are ant build properties that all of the vitro and build.xml files might need.
+# 
+# All of these paths must be absolute or relative to the vitro directory.  Relative
+# is preferred.  
+
+# Notice that the use of relative paths is facilitated by the basedir attribute of the
+# ant project elements.  All projects should use the same base directory so that the
+# relative paths will point to the correct files.
+# See the ant documentation for project element basedir attribute.
+
+############## basic configuration ###############
+java_api=/usr/local/java/java_home
+
+############ tomcat stuff ####################
+tomcat.home=${deploy.tomcat.home}
+
+############# source directory #########################################
+##### This parameter is used for referencing a "permanent" home  #######
+##### in the source directory of the project for uploaded files  #######
+##### so that if the Tomcat webapp context is wiped out, any     #######
+##### uploaded files (usually images) are not lost.              #######
+########################################################################
+source.home=/usr/local/src/Vitro
+
+########################################################################
+##### Everything under this is used by the Vitro build.xml files #######
+##### You should not need to customize it for you local install  #######
+########################################################################
+
+########### ant contrib tasks ###############
+ant.lib=./config/ant/lib
+ant.contrib.jar=${ant.lib}/ant-contrib-1.0b2.jar
+
+#### locations of files in the build #####
+webapp.dir=./webapp
+webapp.lib=${webapp.dir}/lib
+webapp.build=${webapp.dir}/.build
+webapp.dir.jar=${webapp.build}/vitro-webapp.jar
+webapp.name=${deploy.webapp.name}
+webapp.deploy.home=${tomcat.home}/webapps/${webapp.name}
+
+ingest.dir=./ingestTool
+ingest.lib=${ingest.dir}/lib
+ingest.build=${ingest.dir}/build
+
+ws.dir=./services
+ws.lib=${ws.dir}/lib
+ws.build=${webapp.dir}/build
+ws.wsdd.dir=${ws.dir}/wsdd
