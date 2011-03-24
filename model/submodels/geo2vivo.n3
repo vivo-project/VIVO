@@ -1,0 +1,25 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+
+<http://aims.fao.org/aos/geopolitical.owl#self_governing>
+    owl:equivalentClass
+        <http://vivoweb.org/ontology/core#Country> .
+
+<http://aims.fao.org/aos/geopolitical.owl#geographical_region>
+    rdfs:subClassOf
+        <http://vivoweb.org/ontology/core#TransnationalRegion> .
+
+<http://aims.fao.org/aos/geopolitical.owl#economic_region>
+    rdfs:subClassOf
+        <http://vivoweb.org/ontology/core#TransnationalRegion> .
+
+<http://aims.fao.org/aos/geopolitical.owl#territory>
+    rdfs:subClassOf
+        <http://vivoweb.org/ontology/core#GeopoliticalEntity> .
+
+<http://aims.fao.org/aos/geopolitical.owl#area>
+    rdfs:subClassOf
+        <http://vivoweb.org/ontology/core#GeographicRegion> .
+
