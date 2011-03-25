@@ -483,13 +483,11 @@ type is returned and we don't get a match to the select element options. --%>
 <%-- Configure add vs. edit --%> 
 <c:choose>
     <c:when test='${editMode == "add"}'>
-        <c:set var="editMode" value="add" />
         <c:set var="titleVerb" value="Create" />
         <c:set var="submitButtonText" value="Education and Training" />
         <c:set var="disabledVal" value="" />
     </c:when>
     <c:otherwise>
-        <c:set var="editMode" value="edit" />
         <c:set var="titleVerb" value="Edit" />
         <c:set var="title" value="Edit educational background entry for ${subjectName}" />
         <c:set var="submitButtonText" value="Edit Education and Training" />
