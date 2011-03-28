@@ -471,6 +471,10 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
     </c:otherwise>
 </c:choose>
 
+<c:if test="${ ! empty param.roleExamples}">
+    <c:set var="roleExamples" value="(e.g., ${param.roleExamples})" />
+</c:if>
+
 <jsp:include page="${preForm}" />
 
 <% if( mode == EditMode.ERROR ){ %>
@@ -502,7 +506,7 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 		        <v:input type="hidden" id="roleActivityUri" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
 		    </div>
 	
-	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint}" size="50" /></p>
+	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint} ${roleExamples}" size="50" /></p>
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">
