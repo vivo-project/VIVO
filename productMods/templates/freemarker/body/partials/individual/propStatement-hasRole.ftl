@@ -10,7 +10,6 @@
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showRole statement>
-    
     <#local linkedIndividual>
         <#if statement.activity??>
             <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
@@ -19,7 +18,15 @@
             <a href="${profileUrl(statement.role)}">missing activity</a>
         </#if>
     </#local>
+    
+    <#local dateTime>
+        <#if statement.startDateOnly == "true">
+            <@dt.yearSpan statement.dateTimeStart! />
+        <#else>
+            <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+        </#if>
+    </#local>
 
-    ${linkedIndividual} ${statement.roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    ${linkedIndividual} ${statement.roleLabel!} ${dateTime!}
 
 </#macro>

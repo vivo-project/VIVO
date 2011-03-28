@@ -11,10 +11,15 @@
         
         SELECT DISTINCT <collated>?subclass</collated>
                         ?role 
+                        ?startDateOnly
                         ?roleLabel 
                         ?activity ?activityName 
                         ?dateTimeStart ?dateTimeEnd WHERE {
+                        
             ?subject ?property ?role  
+            
+            LET (?startDateOnly := (?property = core:hasPresenterRole) )
+            
             OPTIONAL { ?role core:roleIn ?activity . 
                        ?activity rdfs:label ?activityName 
             }
