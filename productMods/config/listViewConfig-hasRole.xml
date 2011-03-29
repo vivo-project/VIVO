@@ -10,6 +10,8 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT <collated>?subclass</collated>
+                        # send the property to the template, since this view supports multiple role properties
+                        ?property
                         ?role 
                         ?startDateOnly
                         ?roleLabel 
@@ -17,8 +19,6 @@
                         ?dateTimeStart ?dateTimeEnd WHERE {
                         
             ?subject ?property ?role  
-            
-            LET (?startDateOnly := (?property = core:hasPresenterRole) )
             
             OPTIONAL { ?role core:roleIn ?activity . 
                        ?activity rdfs:label ?activityName 
