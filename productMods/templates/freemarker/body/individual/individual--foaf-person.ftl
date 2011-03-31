@@ -35,7 +35,7 @@
         </nav>
             
         <#-- Email -->    
-        <#assign email = propertyGroups.getPropertyAndRemoveFromList("${core}email")!>      
+        <#assign email = propertyGroups.pullProperty("${core}email")!>      
         <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.addLinkWithLabel email editable />
             <#if email.statements?has_content> <#-- if there are any statements -->
@@ -51,7 +51,7 @@
         </#if>
           
         <#-- Phone --> 
-        <#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
+        <#assign phone = propertyGroups.pullProperty("${core}phoneNumber")!>
         <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.addLinkWithLabel phone editable />
             <#if phone.statements?has_content> <#-- if there are any statements -->
@@ -112,7 +112,7 @@
             </#if>
                
             <#-- Positions -->
-            <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
+            <#assign positions = propertyGroups.pullProperty("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                 <@p.objectPropertyListing positions editable />
             </#if> 
@@ -122,7 +122,7 @@
         <#include "individual-overview.ftl">
         
         <#-- Research Areas -->
-        <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
+        <#assign researchAreas = propertyGroups.pullProperty("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.objectPropertyListing researchAreas editable />
         </#if>   
