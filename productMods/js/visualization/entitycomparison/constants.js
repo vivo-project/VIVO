@@ -37,8 +37,8 @@ var globalDateObject;
 var year;
 
 var colors, prevColor, colorToAssign, 
-	colorToRemove, renderedObjects, labelToEntityRecord,
-	setOfLabels, labelToCheckedEntities, stopWordsToCount;
+	colorToRemove, renderedObjects, URIToEntityRecord,
+	setOfLabels, URIToCheckedEntities, stopWordsToCount;
 
 var graphContainer;
 var tableDiv;
@@ -66,9 +66,9 @@ function initConstants() {
 	prevColor = {};
 	colorToAssign, colorToRemove;
 	renderedObjects = [];
-	labelToEntityRecord = {};
+	URIToEntityRecord = {};
 	setOfLabels = [];
-	labelToCheckedEntities = {};
+	URIToCheckedEntities = {};
 	stopWordsToCount = {};
 	lastCachedAtDateTimes = [];
 	//options for Flot
@@ -100,7 +100,5 @@ function initConstants() {
 				borderColor : "#D9D9D9"
 			}
 	};
-
 	FlotOptions.colors = colorConstantQueue;
-	
 }

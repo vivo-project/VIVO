@@ -15,7 +15,6 @@ import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -27,7 +26,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.ConstructedModelTracker;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
@@ -58,11 +56,11 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		}
 		
 		
-		System.out.println("current models in the system are");
-		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
-			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
-		}
-		
+//		System.out.println("current models in the system are");
+//		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
+//			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
+//		}
+//		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
@@ -71,7 +69,6 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			String subjectEntityURI, EntityComparisonConstants.DataVisMode visMode)
 			throws MalformedQueryParametersException {
 		
-
 		Entity organizationEntity = SelectOnModelUtilities
 				.getSubjectOrganizationHierarchy(dataset, subjectEntityURI);
 		

@@ -13,10 +13,13 @@
                 
                 <select class="comparisonValues" style="margin-bottom: 20px;">
                 
+                <#assign currentViewLink = "no view link">
+                
                 <#list parameterOptions as parameter>
                     <#if currentParameter = parameter.name>
                     
                         <#assign selectedText = "selected='selected'">
+                        <#assign currentViewLink = parameter.viewLink>
 
                     <#else>
                     
@@ -27,6 +30,9 @@
                 </#list>
 
                 </select>
+                
+                <img id="copy-vis-viewlink-icon" title="Link to visualization" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" />
+                <span id="copy-vis-viewlink"><input type="text" size="21" value="${currentViewLink}" /></span>
                 
                 </div>
             </div>
@@ -84,5 +90,9 @@
             </p>
         
             </div>
+            
+            <p class="displayCounter">Legend</p>
+            <span style="background-color: #B7B7B7; width: 25px;" class="known-bar legend-bar">&nbsp;</span> <span id="legend-known-bar-text">Known ${currentParameterObject.name} year</span><br />
+            <span class="legend-bar unknown-legend-bar"><span style="width: 25px;" class="unknown-inner-bar">&nbsp;</span></span> <span id="legend-unknown-bar-text">Unknown ${currentParameterObject.name} year</span>
         </div>      
 </div>

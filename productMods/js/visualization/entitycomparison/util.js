@@ -221,9 +221,11 @@ function init(graphContainer) {
 	
 	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
-	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
+	$("#comparisonParameter").text("Total Number of " + optionSelected);
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
+	$('#legend-known-bar-text').text("Known " + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year");
+	$('#legend-unknown-bar-text').text("Unknown " + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year");
 	
 	
 	var defaultFlotOptions = {
@@ -455,11 +457,8 @@ function calcMinandMaxYears(jsonObject, year) {
 		}
 		
 	});
-	
-	
 	year.min = Math.min.apply(Math, validYearsInData);
 	year.max = Math.max.apply(Math, validYearsInData);
-	
 }
 
 /**
@@ -473,7 +472,8 @@ function calcMaxOfComparisonParameter(allEntities) {
 	var validCountsInData = new Array();
 	
 	$.each(allEntities, function(key, currentEntity) {
-		validCountsInData.push(calcSumOfComparisonParameter(currentEntity));
+		combinedCount = calcSumOfComparisonParameter(currentEntity);
+		validCountsInData.push(combinedCount.knownYearCount + combinedCount.unknownYearCount);
 	});
 
 	return Math.max.apply(Math, validCountsInData);
@@ -510,12 +510,26 @@ function calcMaxWithinComparisonParameter(jsonObject){
  */
 function calcSumOfComparisonParameter(entity) {
 
-	var sum = 0;
+	var known = 0;
+	var unknown = 0;
 
 	$.each(entity.data, function(index, data){
-		sum += this[1];
+		
+		if (this[0] === -1) {
+			unknown += this[1];
+		} else {
+			known += this[1];
+		}
+		
+		
+		
 	});
 
+	sum = {
+		knownYearCount: known,
+		unknownYearCount: unknown
+	};
+	
 	return sum;
 }
 
@@ -539,47 +553,39 @@ function contains(objectArray, object) {
 	return flag;
 }
 
-/**
- * Dynamically change the linewidth and ticksize based on input year range.
- * 
- * @param {Object}
- *            yearRange
- */
-function setLineWidthAndTickSize(yearRange, flotOptions) {
+var LineWidth = {
 
-	if (yearRange > 0 && yearRange < 15) {
-		flotOptions.series.lines.lineWidth = 3;
-		flotOptions.xaxis.tickSize = 1;
-	} else if (yearRange > 15 && yearRange < 70) {
-		flotOptions.series.lines.lineWidth = 2;
-		flotOptions.xaxis.tickSize = 5;
-	} else if (yearRange == 0 ) {
-		flotOptions.series.lines.lineWidth = 3;
-		flotOptions.xaxis.tickSize = 1;
-	} else {
-		flotOptions.series.lines.lineWidth = 1;
-		flotOptions.xaxis.tickSize = 10;
+	getLineWidth: function(tickSize) {
+		if (tickSize >= 0 && tickSize < 10) {
+			return 3;
+		} else if (tickSize >= 10 && tickSize < 50) {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
-
-}
+		
+};
 
 var TickSize = {
 		
 	maxValue: 0.0,	
 	
 	maxTicks: {
-		yAxis: 12.0 
+		yAxis: 12.0,
+		xAxis: 12.0
 	},
 	
 	tickSizeUnits: {
-		yAxis: [1.0, 2.5, 5.0]
+		yAxis: [1.0, 2.5, 5.0],
+		xAxis: [1.0, 2, 5.0]
 	},
 	
 	getApproximateTickSize: function(allowedMaxTicks) {
 		return Math.max(Math.ceil(parseFloat(this.maxValue) / allowedMaxTicks), 1.0);
 	},
 	
-	getFinalTickSizeForYaxis: function(unitTickSizeGenerator) {
+	getFinalTickSize: function(unitTickSizeGenerator) {
 		tickSizeMultiplier = 1.0;
 		finalTickSize = 1.0;
 		approximateTickSize = this.getApproximateTickSize(this.maxTicks.yAxis);
@@ -599,14 +605,15 @@ var TickSize = {
 			}
 			tickSizeMultiplier *= 10.0;
 		}
-		
 		return finalTickSize;
 	},
 	
 	getTickSize: function(value, onAxis) {
 		this.maxValue = value;
 		if (onAxis.trim().toLowerCase() === 'y') {
-			return this.getFinalTickSizeForYaxis(this.tickSizeUnits.yAxis);
+			return this.getFinalTickSize(this.tickSizeUnits.yAxis);
+		} else if (onAxis.trim().toLowerCase() === 'x') {
+			return this.getFinalTickSize(this.tickSizeUnits.xAxis);
 		}
 	} 
 };
@@ -622,7 +629,7 @@ var TickSize = {
 function createLegendRow(entity, bottomDiv) {
 
     var parentP = $('<p>');
-    parentP.attr('id', slugify(entity.label));
+    parentP.attr('id', slugify(entity.entityURI));
 
     var labelDiv = $('<div>');
     labelDiv.attr('class', 'easy-deselect-label');
@@ -650,17 +657,38 @@ function createLegendRow(entity, bottomDiv) {
 
     var barDiv = $('<div>');
     barDiv.attr('id', 'bar');
+    
+    var knownBar = $('<span>');
+    knownBar.attr('class', 'known-bar');
 
+    var unknownBar = $('<span>');
+    unknownBar.attr('class', 'unknown-bar');
+    
+    var unknownBarInnerSpan = $('<span>');
+    unknownBarInnerSpan.attr('class', 'unknown-inner-bar');
+    unknownBarInnerSpan.html('&nbsp;');
+    
+    unknownBar.append(unknownBarInnerSpan);
+    
+    barDiv.append(knownBar);
+    barDiv.append(unknownBar);
+    
     var numAttributeText = $('<span>');
-    numAttributeText.attr('id', 'text');
+    numAttributeText.attr('class', 'bar-count-text');
 
     parentP.append(checkbox);
     parentP.append(labelDiv);
     parentP.append(hiddenLabel);
     parentP.append(barDiv);
     parentP.append(numAttributeText);
-
-    bottomDiv.children('p.displayCounter').after(parentP);
+    
+    if (bottomDiv.children('p.displayCounter').nextAll().last().length > 0) {
+    	bottomDiv.children('p.displayCounter').nextAll().last().after(parentP);
+    } else {
+    	bottomDiv.children('p.displayCounter').after(parentP);
+    }
+    
+    
 
     renderBarAndLabel(entity, barDiv, labelDiv, numAttributeText);
 }
@@ -672,19 +700,35 @@ function createLegendRow(entity, bottomDiv) {
 
 function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
 
-    var sum = calcSumOfComparisonParameter(entity);
+	var combinedCount = calcSumOfComparisonParameter(entity);
+	
+	var sum = combinedCount.knownYearCount + combinedCount.unknownYearCount;
+    
     var normalizedWidth = getNormalizedWidth(entity, sum);
-
-    divBar.css("background-color", colorToAssign);
-    divBar.css("width", normalizedWidth);
+    var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount);
+    
+    if (combinedCount.unknownYearCount) {
+    	var unknownNormalizedWidth = getNormalizedWidth(entity, combinedCount.unknownYearCount);
+    } else {
+    	var unknownNormalizedWidth = 0;
+    }
+    
+    divBar.css("width", normalizedWidth + 5);
+    divBar.children(".known-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", knownNormalizedWidth);
+    divBar.children(".unknown-bar").children(".unknown-inner-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", unknownNormalizedWidth);
 
     var entityLabelForLegend = divLabel.find(".entity-label-url");
     entityLabelForLegend.html(entity.label);
     entityLabelForLegend.ellipsis();
     entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity) + "'></a>");
 
+    var countExplanation = 'VIVO knows the ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + ' year for ' 
+    							+ combinedCount.knownYearCount + ' out of ' 
+    							+ sum + ' of these ' + COMPARISON_PARAMETERS_INFO[currentParameter].pluralName;
+    
+    divBar.attr("title", countExplanation);
+    
     spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
-
 }
 
 function getVIVOURL(entity){
@@ -826,7 +870,7 @@ function getNextFreeColor(entity){
 
 function getNormalizedWidth(entity, sum){
 	
-	 var maxValueOfComparisonParameter = calcMaxOfComparisonParameter(labelToEntityRecord);
+	 var maxValueOfComparisonParameter = calcMaxOfComparisonParameter(URIToEntityRecord);
 	 var normalizedWidth = 0;
 	 
 	 normalizedWidth = Math.floor(225 * (sum / maxValueOfComparisonParameter));
@@ -906,18 +950,19 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 
 function clearRenderedObjects(){
 	
-	$.each(labelToCheckedEntities, function(index, val){
+	$.each(URIToCheckedEntities, function(index, val){
 		if($(val).is(':checked')){
 			$(val).attr("checked", false);
 			updateRowHighlighter(val);
-			removeUsedColor(labelToEntityRecord[$(val).attr("value")]);
-			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
+			removeUsedColor(URIToEntityRecord[$(val).attr("value")]);
+			removeEntityUnChecked(renderedObjects, URIToEntityRecord[$(val).attr("value")]);
 			removeLegendRow(val);
 			displayLineGraphs();
 		}
 	});
 	
-	labelToCheckedEntities = {};
+	URIToCheckedEntities = {};
+	
 	checkIfColorLimitIsReached();
 	updateCounter();
 
@@ -948,16 +993,18 @@ function displayLineGraphs(){
     }
 }
 
-
-
 function removeCheckBoxFromGlobalSet(checkbox){
     //remove checkbox object from the globals
 	var value = $(checkbox).attr("value");
-	if(labelToCheckedEntities[value]){
+	/*if (labelToCheckedEntities[value]) {
 		delete labelToCheckedEntities[value];
+	}*/
+	
+	if (URIToCheckedEntities[value]) {
+		delete URIToCheckedEntities[value];
 	}
+	
 }
-
 
 /*
  * function to create a table to be 
@@ -967,7 +1014,7 @@ function removeCheckBoxFromGlobalSet(checkbox){
 function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
 	resetStopWordCount();
-	var checkboxCount = 0;
+	
 	var table = $('<table>');
 	table.attr('cellpadding', '0');
 	table.attr('cellspacing', '0');
@@ -985,19 +1032,20 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	var entityLabelTH = $('<th>');
 	entityLabelTH.html('Entity Name');
 	
-	var publicationCountTH = $('<th>');
+	var activityCountTH = $('<th>');
 	if ($("select.comparisonValues option:selected").text() === "by Publications") {
-		publicationCountTH.html('Publication Count');
+		activityCountTH.html('Publication Count');
 	} else {
-		publicationCountTH.html('Grant Count');		
+		activityCountTH.html('Grant Count');		
 	}
+	activityCountTH.attr("id", "activity-count-column");
 
 	var entityTypeTH = $('<th>');
 	entityTypeTH.html('Entity Type');
 
 	tr.append(checkboxTH);
 	tr.append(entityLabelTH);
-	tr.append(publicationCountTH);
+	tr.append(activityCountTH);
 	tr.append(entityTypeTH);
 	
 	thead.append(tr);
@@ -1005,20 +1053,26 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	table.append(thead);
 	
 	var tbody = $('<tbody>');
+	var checkboxCount = 0;
 	
-	$.each(labelToEntityRecord, function(index, val){
+	$.each(URIToEntityRecord, function(index, val) {
 		var entityTypesWithoutStopWords = removeStopWords(val);
 		var row = $('<tr>'); 
 		
 		var checkboxTD = $('<td>');
-		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' + entityCheckboxSelectorDOMClass + '" value="' + index + '"'+'/>');
+		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' 
+								+ entityCheckboxSelectorDOMClass + '" value="' 
+								+ val.entityURI + '"'+'/>');
 		
 		var labelTD =  $('<td>');
 		labelTD.css("width", "100px");
-		labelTD.html(index);
+		labelTD.html(val.label);
 		
 		var publicationCountTD =  $('<td>');
-		publicationCountTD.html(calcSumOfComparisonParameter(val));
+		
+		var combinedCount = calcSumOfComparisonParameter(val);
+		
+		publicationCountTD.html(combinedCount.knownYearCount + combinedCount.unknownYearCount);
 		
 		var entityTypeTD =  $('<td>');
 		entityTypeTD.html(entityTypesWithoutStopWords);
@@ -1076,6 +1130,91 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
 }
 
+
+/*
+ * function to create a table to be 
+ * used by jquery.dataTables. The JsonObject 
+ * returned is used to populate the pagination table.
+ */	
+function reloadDataTablePagination(preselectedEntityURIs, jsonData){
+
+	resetStopWordCount();
+	
+	/*
+	 * In case no entities are selected, we want that redraw should happen so that top entities are 
+	 * pre-selected.
+	 * */
+	var shouldRedraw = preselectedEntityURIs.length ? false : true;
+	
+	var currentDataTable = $('#datatable').dataTable();
+	
+	currentDataTable.fnClearTable();
+	
+	if ($("select.comparisonValues option:selected").text() === "by Publications") {
+		$("#activity-count-column").html('Publication Count');
+	} else {
+		$("#activity-count-column").html('Grant Count');		
+	}
+	
+	function addNewRowAfterReload(entity) {
+		
+		var checkboxTD = '<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' 
+			+ entityCheckboxSelectorDOMClass 
+			+ '" value="' 
+			+ entity.entityURI + '"' +'/>';
+
+		var labelTD =  entity.label;
+		
+		var combinedCount = calcSumOfComparisonParameter(entity);
+		var publicationCountTD = combinedCount.knownYearCount + combinedCount.unknownYearCount;
+		
+		var entityTypeTD =  removeStopWords(entity);
+		
+		var newRow = [checkboxTD,
+		  labelTD,
+		  publicationCountTD,
+		  entityTypeTD];
+		
+		/*
+		 * Dont redraw the table, so no sorting, no filtering.
+		 * */
+		currentDataTable.fnAddData(newRow, shouldRedraw);
+		
+		/*
+		 * Dont redraw the table, so no sorting, no filtering.
+		 * */
+		currentDataTable.fnDraw(shouldRedraw);
+
+	}
+	
+	/*
+	 * This will ensure that currently selected entities are added first in the table,
+	 * to make sure that they are "visible" in the DOM. This so that our manual trigger
+	 * for selecting this checkboxes on page load, actually works.  
+	 * */
+	$.each(preselectedEntityURIs, function(index, uri) {
+		if (URIToEntityRecord[uri]) {
+			addNewRowAfterReload(URIToEntityRecord[uri]);
+		}
+	});
+	
+	
+	$.each(URIToEntityRecord, function(index, val) {
+		
+		/*
+		 * Don't consider already added pre-selected entities. 
+		 * */
+		if ($.inArray(index, preselectedEntityURIs) < 0) {
+			addNewRowAfterReload(val);
+		}
+	});
+	
+	/*
+	 * We should change to the first page so that checkboxes are selectable.
+	 * */
+	currentDataTable.fnPageChange('first');
+}
+
 function updateRowHighlighter(linkedCheckBox){
 	linkedCheckBox.closest("tr").removeClass('datatablerowhighlight');
 }
@@ -1097,12 +1236,10 @@ function removeStopWords(val){
 			typeStringWithoutStopWords += ', '+ value; 
 		}
 	});
-	//console.log(stopWordsToCount["Person"],stopWordsToCount["Organization"]);
 	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
 }
 
 function setEntityLevel(entityLevel){
-	//$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase()).css('font-style', 'italic');
 	$('#entityHeader').text(entityLevel).css('font-weight', 'bold');
 	$('#headerText').css("color", "#2485ae");
@@ -1195,7 +1332,7 @@ function enableUncheckedEntities(){
 
 function checkIfColorLimitIsReached(){
 	
-	if (getSize(labelToCheckedEntities) >= 10) {
+	if (getSize(URIToCheckedEntities) >= 10) {
 		disableUncheckedEntities();
 	} else {
 		enableUncheckedEntities();
@@ -1207,15 +1344,17 @@ function setTickSizeOfAxes(){
 	var checkedLabelToEntityRecord = {};
 	var yearRange;
 	
-	$.each(labelToCheckedEntities, function(index, val){
-		checkedLabelToEntityRecord[index] = labelToEntityRecord[index];
+	$.each(URIToCheckedEntities, function(index, val){
+		checkedLabelToEntityRecord[index] = URIToEntityRecord[index];
 	});
 	
 	var normalizedYearRange = getNormalizedYearRange();
 	
-    setLineWidthAndTickSize(normalizedYearRange.normalizedRange, FlotOptions);     
-	
+    FlotOptions.xaxis.tickSize = 
+		TickSize.getTickSize(normalizedYearRange.normalizedRange, 'x');
+
+    FlotOptions.series.lines.lineWidth = LineWidth.getLineWidth(FlotOptions.xaxis.tickSize);
+    
 	FlotOptions.yaxis.tickSize = 
 			TickSize.getTickSize(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), 'y');
-	
 }

@@ -20,6 +20,55 @@
 .easy-deselect-label a.temporal-vis-url {
     float: right;
 }
+
+.known-bar {
+	display: inline-block;
+	cursor: help;
+}
+
+.unknown-inner-bar {
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+	display: inline-block;
+}
+
+.bar-count-text {
+    padding-right: 3px;
+    vertical-align: super;
+}
+
+img.bar-count-icon {
+	vertical-align: super;
+	cursor: help;
+}
+
+.unknown-bar {
+	background: url("../../../images/visualization/diagonal.png") repeat scroll 50% 50% #666666;
+	cursor: help;
+}
+
+.legend-bar {
+	margin-bottom: 3px;
+}
+
+.unknown-legend-bar {
+	background: url("../../../images/visualization/legend-unknown-bar-dark.png") repeat #B7B7B7;
+}
+
+
+#legend-known-bar-text,
+#legend-unknown-bar-text {
+	font-size: 0.75em;
+}
+
+span#copy-vis-viewlink {
+	display: none;
+}
+
+img#copy-vis-viewlink-icon {
+	cursor: pointer;
+}
+
 a.temporalGraphLinks {
     background-color: #2485AE;
     color: white;

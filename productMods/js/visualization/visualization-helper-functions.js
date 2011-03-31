@@ -95,3 +95,12 @@ function constructVisualizationURLForSparkline(dataString, visualizationOptions)
     			+ chartColor + parameterDifferentiator 
     			+ "chd=" + dataString
 }
+
+/*
+ * In IE trim() is not supported.
+ * */
+if (typeof String.prototype.trim !== 'function') {
+	String.prototype.trim = function() {
+		return this.replace(/^\s+|\s+$/g, '');
+	}
+}

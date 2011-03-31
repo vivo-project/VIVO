@@ -3,9 +3,10 @@
 $(document).ready(function() {
 
 	/*
-	 * This will set intitial values of the constants present in constants.js
+	 * This will set initial values of the constants present in constants.js
 	 * */
 	initConstants();
+	
 	/* This is used to cache the current state whether the user is allowed to select more entities from 
     the datatable or not. Once Max number of entity selection is reached the user can no longer select 
     more & this variable will be set to false. */
@@ -27,34 +28,45 @@ $(document).ready(function() {
 
         var selectedValue = $("select.comparisonValues option:selected").val();
         
-        var selectedParameter;
+        var selectedDataURL;
         
         $.each(COMPARISON_PARAMETERS_INFO, function(index, parameter) {
         	
             if (parameter.value === selectedValue) {
-            	selectedParameter = parameter;
-                window.location = parameter.viewLink;
+            	
+            	currentParameter = parameter.name;
+            	selectedDataURL = parameter.dataLink;
             }
         	
         });
         
-        //$("#body").empty().html("<div id='loading-comparisons'>Loading " + selectedValue + "&nbsp;&nbsp;<img src='" + loadingImageLink + "' /></div>");
-        
-        /*
-         * This piece of code is not executed at all because the redirect happens before there is a chance 
-         * to render the below contents.
-         * */
-        
-        /*
-        
-        $("#comparisonParameter").text("Total Number of " + selectedValue);
-        $('#yaxislabel').html("Number of " + selectedValue).mbFlipText(false);
-        $('#yaxislabel').css("color", "#595B5B");
-        $('#comparisonHeader').html(selectedValue).css('font-weight', 'bold');
-        
-        
-        */
-
+        options = {
+    			responseContainer: $("div#temporal-graph-response"),
+    			bodyContainer: $("#body"),
+    			errorContainer: $("#error-container"),
+    			dataURL: selectedDataURL	
+    		};
+    	
+    	setupLoadingScreen(options.responseContainer);
+    		
+    	$.ajax({
+            url: options.dataURL,
+            dataType: "json",
+            timeout: 5 * 60 * 1000,
+            success: function (data) {
+    		
+                if (data.error) {
+                	options.bodyContainer.remove();
+                	options.errorContainer.show();
+                	options.responseContainer.unblock();
+                } else {
+                	options.bodyContainer.show();
+                	options.errorContainer.remove();
+                    temporalGraphProcessor.redoTemporalGraphRenderProcess(graphContainer, data);
+                    options.responseContainer.unblock();
+                }
+            }
+        });
     });
     
 });
@@ -68,8 +80,9 @@ $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
     
     var checkbox = $(this);
     var checkboxValue = $(this).attr("value");
-    var linkedCheckbox = labelToCheckedEntities[checkboxValue];
-    var entityToBeRemoved = labelToEntityRecord[checkboxValue];
+    var linkedCheckbox = URIToCheckedEntities[checkboxValue];
+    
+    var entityToBeRemoved = URIToEntityRecord[checkboxValue];
 
     if(!checkbox.is(':checked')){
         //console.log("Easy deselect checkbox is unclicked!");
@@ -85,7 +98,6 @@ $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
     }
 });
 
-
 $(".disabled-checkbox-event-receiver").live("click", function () {
     
     if ($(this).next().is(':disabled')) {
@@ -97,10 +109,31 @@ $(".disabled-checkbox-event-receiver").live("click", function () {
             custom: true,
             expires: false
         });
-
     }
-
 });
+
+$("#copy-vis-viewlink-icon").live('click', function() {
+	
+	if ($("#copy-vis-viewlink").is(':visible')) {
+		
+		$("#copy-vis-viewlink").hide();
+		
+	} else {
+		
+		$("#copy-vis-viewlink").show();
+		
+		var linkTextBox = $("#copy-vis-viewlink input[type='text']");
+		
+		linkTextBox.val(getCurrentParameterVisViewLink());
+		
+		linkTextBox.select();
+	}
+	
+});
+
+function getCurrentParameterVisViewLink() {
+	return location.protocol + "//" + location.host + COMPARISON_PARAMETERS_INFO[currentParameter].viewLink;
+}
 
 function performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox) {
     
@@ -121,10 +154,10 @@ function performEntityCheckboxSelectedActions(entity, checkboxValue, checkbox) {
     createLegendRow(entity, $("#bottom"));
 
     renderLineGraph(renderedObjects, entity);
-    labelToCheckedEntities[checkboxValue] = checkbox;
-    labelToCheckedEntities[checkboxValue].entity = entity;
     
-//            console.log(labelToCheckedEntities[checkboxValue], entity);
+    URIToCheckedEntities[checkboxValue] = checkbox;
+    URIToCheckedEntities[checkboxValue].entity = entity;
+    
     
     /*
      * To highlight the rows belonging to selected entities. 
@@ -151,7 +184,7 @@ function loadData(jsonData, dataTableParams) {
 
     $.each(jsonData, function (index, val) {
         setOfLabels.push(val.label);
-        labelToEntityRecord[val.label] = val;
+        URIToEntityRecord[val.entityURI] = val;
         if (val.lastCachedAtDateTime) {
         	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
         }
@@ -164,6 +197,26 @@ function loadData(jsonData, dataTableParams) {
     
 }
 
+/* 
+ *  function to populate the labelToEntityRecord object with the
+ *  values from the json file and
+ *  dynamically generate checkboxes
+ */
+function reloadData(preselectedEntityURIs, jsonData) {
+
+    $.each(jsonData, function (index, val) {
+        setOfLabels.push(val.label);
+        URIToEntityRecord[val.entityURI] = val;
+        if (val.lastCachedAtDateTime) {
+        	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
+        }
+    });
+    
+    reloadDataTablePagination(preselectedEntityURIs, jsonData);
+    setEntityLevel(getEntityVisMode(jsonData));
+}
+
+
 function entityCheckboxOperatedOnEventListener() {
 	
     /*
@@ -174,7 +227,7 @@ function entityCheckboxOperatedOnEventListener() {
 
         var checkbox = $(this);
         var checkboxValue = $(this).attr("value");
-        var entity = labelToEntityRecord[checkboxValue];
+        var entity = URIToEntityRecord[checkboxValue];
         
         if (checkbox.is(':checked')) {
         
@@ -183,13 +236,10 @@ function entityCheckboxOperatedOnEventListener() {
         } else {
         
             performEntityCheckboxUnselectedActions(entity, checkboxValue, checkbox);        
-
         }
         
         performEntityCheckboxClickedRedrawActions();
-
     });
-	
 }
 
 function renderTemporalGraphVisualization(parameters) {
@@ -200,7 +250,6 @@ function renderTemporalGraphVisualization(parameters) {
     					 parameters.bodyContainer,
                          parameters.errorContainer,
                          parameters.responseContainer);
-	
 }
 
 /*
@@ -216,7 +265,7 @@ function setupLoadingScreen(visContainerDIV) {
         
     $.blockUI.defaults.css.width = '500px';
     $.blockUI.defaults.css.border = '0px';
-    $.blockUI.defaults.css.top = '15%';
+    $.blockUI.defaults.css.top = '1%';
 	
     visContainerDIV.block({
         message: '<div id="loading-data-container"><h3><img id="data-loading-icon" src="' + loadingImageLink 
@@ -225,7 +274,9 @@ function setupLoadingScreen(visContainerDIV) {
         			+ '</i></h3></div>'
     });
     
-    setTimeout(function() {
+    clearTimeout(temporalGraphProcessor.loadingScreenTimeout);
+    
+    temporalGraphProcessor.loadingScreenTimeout = setTimeout(function() {
     	$("#loading-data-container")
     		.html('<h3><img id="refresh-page-icon" src="' 
     				+ refreshPageImageLink 
@@ -235,21 +286,7 @@ function setupLoadingScreen(visContainerDIV) {
 	    	.css({'cursor': 'pointer'});
     	
     }, 10 * 1000);
-	
 }
-
-$("#reload-data").live('click', function() {
-	
-	options = {
-			responseContainer: $("div#temporal-graph-response"),
-			bodyContainer: $("#body"),
-			errorContainer: $("#error-container"),
-			dataURL: temporalGraphDataURL	
-		};
-		
-	renderTemporalGraphVisualization(options);
-	
-});
 
 /*
  * This function gets json data for temporal graph & after rendering removes the
@@ -263,7 +300,7 @@ function getTemporalGraphData(temporalGraphDataURL,
 	if (!isDataRequestSentViaAJAX) {
 		
 		isDataRequestSentViaAJAX = true;
-	
+		
 		$.ajax({
 	        url: temporalGraphDataURL,
 	        dataType: "json",
@@ -274,7 +311,6 @@ function getTemporalGraphData(temporalGraphDataURL,
 	            	graphBodyDIV.remove();
 	            	errorBodyDIV.show();
 	            	visContainerDIV.unblock();
-	                
 	            } else {
 	            	graphBodyDIV.show();
 	            	errorBodyDIV.remove();
@@ -291,24 +327,56 @@ function getTemporalGraphData(temporalGraphDataURL,
 	
 }
 
-function parseXSDateTime(rawDateTimeString) {
+var lastCachedAtDateTimeParser = {
+		
+	getDateObjectFromRawXSDateTimeString: function(rawDateTimeString) {
 	
-	var dateTime = rawDateTimeString.split("T", 2);
-	var date = dateTime[0].split("-");
-	var time = dateTime[1].split(":");
+		var dateTime = rawDateTimeString.split("T", 2);
+		var date = dateTime[0].split("-");
+		var time = dateTime[1].split(":");
+		
+		return new Date(date[0], parseInt(date[1], 10) -1, date[2], time[0], time[1], 0);
+	},
 	
-	return new Date(date[0], parseInt(date[1], 10) -1, date[2], time[0], time[1], 0);
-}
+	getReadableDateString: function(dateObject) {
+		
+		if (typeof dateObject === "string") {
+			dateObject = this.getDateObjectFromRawXSDateTimeString(dateObject);
+		}
+		
+		var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		var month = ['January','February','March','April','May','June','July','August','September','October','November'];
+		
+		return day[dateObject.getDay()] + ", " + month[dateObject.getMonth()] + " " + dateObject.getDate();
+	},
+	
+	ascendingDateSorter: function(rawDateStringA, rawDateStringB) {
+		
+		var dateA = lastCachedAtDateTimeParser.getDateObjectFromRawXSDateTimeString(rawDateStringA); 
+		var dateB = lastCachedAtDateTimeParser.getDateObjectFromRawXSDateTimeString(rawDateStringB);
+		return dateA-dateB; //sort by date ascending
+   }
+		
+};
 
-function getReadableDateForLastCachedAtDate(dateObject) {
+var entitySelector = {
+		
+	manuallyTriggerSelectOnDataTableCheckbox: function(checkbox) {
 	
-	var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-	var month = ['January','February','March','April','May','June','July','August','September','October','November']
+		checkbox.attr('checked', true);
+	    
+	    var checkboxValue = checkbox.attr("value");
+	    var entity = URIToEntityRecord[checkboxValue];
+	    
+	    performEntityCheckboxSelectedActions(entity, checkboxValue, checkbox);
+	    performEntityCheckboxClickedRedrawActions();
 	
-	return day[dateObject.getDay()] + ", " + month[dateObject.getMonth()] + " " + dateObject.getDate();
+	}
 }
 
 temporalGraphProcessor = {
+		
+	loadingScreenTimeout: '',
 		
 	initiateTemporalGraphRenderProcess: function(givenGraphContainer, jsonData) {
 		
@@ -328,36 +396,86 @@ temporalGraphProcessor = {
          * */
         loadData(jsonData, this.dataTableParams);
         
-        lastCachedAtDateTimes.sort(function(a, b) {
-        	 var dateA = parseXSDateTime(a); 
-        	 var dateB = parseXSDateTime(b);
-        	 return dateA-dateB; //sort by date ascending
-        });
+        lastCachedAtDateTimes.sort(lastCachedAtDateTimeParser.ascendingDateSorter);
         
         /*
          * This will make sure that top 3 entities are selected by default when the page loads.
         */      
         $.each($("input." + entityCheckboxSelectorDOMClass), function(index, checkbox) {
                 
-                    if (index > 2) {
-                        return false;
-                    }
-                
-                    $(this).attr('checked', true);
-                    
-                    var checkboxValue = $(this).attr("value");
-                    var entity = labelToEntityRecord[checkboxValue];
-                    
-                    performEntityCheckboxSelectedActions(entity, checkboxValue, $(this));
-                    
-                    performEntityCheckboxClickedRedrawActions();
+            if (index > 2) {
+                return false;
+            }
+        
+            entitySelector.manuallyTriggerSelectOnDataTableCheckbox($(this));
                     
         });
 
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
         	$("#incomplete-data-disclaimer").attr(
         			"title", 
-        			$("#incomplete-data-disclaimer").attr("title") + " as of " + getReadableDateForLastCachedAtDate(parseXSDateTime(lastCachedAtDateTimes[0]))); 
+        			$("#incomplete-data-disclaimer").attr("title") + " as of " 
+        			+ lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0])); 
         }
+	},
+	
+	redoTemporalGraphRenderProcess: function(givenGraphContainer, jsonData) {
+		
+		var currentSelectedEntityURIs = [];
+		
+		$.each(URIToCheckedEntities, function(index, entity){
+			currentSelectedEntityURIs.push(index);
+		});
+		
+		clearRenderedObjects();
+		initConstants();
+		
+		/*
+         * initial display of the grid when the page loads 
+         * */ 
+        init(givenGraphContainer);
+
+        /*
+         * render the temporal graph per the sent content. 
+         * */
+        reloadData(currentSelectedEntityURIs, jsonData);
+        
+        lastCachedAtDateTimes.sort(lastCachedAtDateTimeParser.ascendingDateSorter);
+
+        if (currentSelectedEntityURIs.length > 0) {
+
+        	$.each(currentSelectedEntityURIs, function(index, uri) {
+
+        		var targetPrevSelectedCheckbox = $('input.' + entityCheckboxSelectorDOMClass + '[value="' + uri + '"]');
+        		
+        		if (targetPrevSelectedCheckbox.length > 0) {
+
+        			entitySelector.manuallyTriggerSelectOnDataTableCheckbox(targetPrevSelectedCheckbox);
+        		}
+        	});
+        } else {
+	        /*
+	         * This will make sure that top 3 entities are selected by default when the page loads.
+	        */      
+	        $.each($("input." + entityCheckboxSelectorDOMClass), function(index, checkbox) {
+	                
+                if (index > 2) {
+                    return false;
+                }
+                entitySelector.manuallyTriggerSelectOnDataTableCheckbox($(this));
+	        });
+        }
+        
+        if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
+        	
+        	var disclaimerText = "This information is based solely on " 
+        							+ COMPARISON_PARAMETERS_INFO[currentParameter].value
+        							+ " which have been loaded into the VIVO system"
+        							+ " as of " + lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0]);
+        	
+        	$("#incomplete-data-disclaimer").attr(
+        			"title", disclaimerText); 
+        }
+        $("#copy-vis-viewlink input[type='text']").val(getCurrentParameterVisViewLink());
 	}	
 }

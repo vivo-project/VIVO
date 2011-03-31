@@ -13,20 +13,27 @@
 <#assign subOrganizationPublicationTemporalGraphCommonURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison">
 
 <#assign organizationPublicationTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}">
+<#assign organizationPublicationTemporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&vis_mode=json">
+
 <#assign organizationGrantTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}">
+<#assign organizationGrantTemporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}&vis_mode=json">
 
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>
 
 <#assign temporalGraphDownloadCSVCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&labelField=label'>
 
 <#assign publicationParameter = {   "name": "publication",
+									"pluralName": "publications",
                                     "dropDownText": "by Publications", 
-                                    "viewLink": "${organizationPublicationTemporalGraphURL}", 
+                                    "viewLink": "${organizationPublicationTemporalGraphURL}",
+                                    "dataLink": "${organizationPublicationTemporalGraphDataURL}", 
                                     "value": "Publications" }>
-
+                                    
 <#assign grantParameter = {   "name": "grant",
+							  "pluralName": "grants",
                               "dropDownText": "by Grants", 
                               "viewLink": "${organizationGrantTemporalGraphURL}", 
+                              "dataLink": "${organizationGrantTemporalGraphDataURL}",
                               "value": "Grants" }>
                               
 <#assign parameterOptions = [publicationParameter, grantParameter]>
@@ -42,6 +49,15 @@ we will default to using the stable version unless the request comes from IE 9 i
 we will use rev 293 (dev build version) of the flot & excanvas files.
 -->
 
+<script language="JavaScript" type="text/javascript">
+
+var activitiesLabel = {
+    	singular: 'activity',
+    	plural: 'activities'
+    };
+    
+</script>
+
 ${scripts.add('<!--[if IE]><script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/excanvas.min.js"></script><![endif]-->',
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/flot/r293/jquery.flot.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/jquery_plugins/fliptext/jquery.mb.flipText.js"></script>',
@@ -50,6 +66,7 @@ ${scripts.add('<!--[if IE]><script type="text/javascript" src="${urls.base}/js/v
               '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.dataTables.min.js"></script>', 
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/util.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/visualization/entitycomparison/constants.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.notify.min.js"></script>')}              
 
 <#-- CSS files -->

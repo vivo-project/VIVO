@@ -5,6 +5,12 @@ corresponding changes in the included Templates. -->
 
 <#assign currentParameter = "grant">
 
+<script language="JavaScript" type="text/javascript">
+
+var currentParameter = "${currentParameter}";
+
+</script>
+
 <#include "entityComparisonSetup.ftl">
 
 <#assign temporalGraphDownloadFileLink = '${temporalGraphDownloadCSVCommonURL}&vis=entity_grant_count'>

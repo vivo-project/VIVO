@@ -205,7 +205,7 @@ public class SelectOnModelUtilities {
 																	OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE,
 																	dataset);
 			
-			System.out.println("getting publications for " + subOrganization.getIndividualLabel());
+//			System.out.println("getting publications for " + subOrganization.getIndividualLabel());
 			
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
@@ -352,7 +352,7 @@ public class SelectOnModelUtilities {
 		
 		for (SubEntity subOrganization : organizationEntity.getSubEntities()) {
 			
-			System.out.println("constructing grants for " + subOrganization.getIndividualLabel() + " :: " + subOrganization.getIndividualURI());
+//			System.out.println("constructing grants for " + subOrganization.getIndividualLabel() + " :: " + subOrganization.getIndividualURI());
 			
 			long before = System.currentTimeMillis();
 			
@@ -362,7 +362,7 @@ public class SelectOnModelUtilities {
 																	OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE,
 																	dataset);
 			
-			System.out.println("\t construct -> " + (System.currentTimeMillis() - before));
+//			System.out.println("\t construct -> " + (System.currentTimeMillis() - before));
 			
 			before = System.currentTimeMillis();
 			
@@ -419,7 +419,7 @@ public class SelectOnModelUtilities {
 			
 			subOrganization.setLastCachedAtDateTime(lastCachedAtForEntity);
 			
-			System.out.println("\t select -> " + (System.currentTimeMillis() - before));
+//			System.out.println("\t select -> " + (System.currentTimeMillis() - before));
 		}
 		return allGrantURIToVO;
 	}
