@@ -25,7 +25,6 @@ END:VCARD
 	<#local foaf = "http://xmlns.com/foaf/0.1/">
 	<#local rdfs = "http://www.w3.org/2000/01/rdf-schema#">
 
-	<#local label = individual.nameStatement.value >
 	<#local firstName = (allProperties.getProperty("${foaf}firstName").firstValue)! >
 	<#local lastName = (allProperties.getProperty("${foaf}lastName").firstValue)! >
 	<#local org = "temp" >
