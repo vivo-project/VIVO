@@ -1583,11 +1583,6 @@
     </taglib>
 
     <taglib>
-      <taglib-uri>http://vitro.mannlib.cornell.edu/vitro/tags/PropertyEditLink</taglib-uri>
-      <taglib-location>/WEB-INF/tlds/PropertyEditLink.tld</taglib-location>
-    </taglib>
-
-    <taglib>
       <taglib-uri>http://mannlib.cornell.edu/vitro/ListSparqlTag/0.1/</taglib-uri>
       <taglib-location>/WEB-INF/tlds/ListSparqlTag.tld</taglib-location>
     </taglib>
