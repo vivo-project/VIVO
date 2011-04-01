@@ -27,30 +27,56 @@ END:VCARD
 
 	<#local firstName = (allProperties.getProperty("${foaf}firstName").firstValue)! >
 	<#local lastName = (allProperties.getProperty("${foaf}lastName").firstValue)! >
-	<#local org = "temp" >
-	<#local title = "temp" >
+	<#local org = "" >
+	<#local title = (allProperties.getProperty("${core}preferredTitle").firstValue)! >
 	<#local phoneNumber = (allProperties.getProperty("${core}phoneNumber").firstValue)! >
 	<#local email = (allProperties.getProperty("${core}email").firstValue)! >
-	<#local url = "temp" >
-	<#local photo = "temp" >
+	<#local url = urls.currentPage! >
+	<#local photo = individual.thumbUrl! >
 	<#local rev = "temp" >
 
-	<#assign vCard><#t>
-		BEGIN:VCARD<#lt>
-		VERSION:3.0<#lt>
-		N:${lastName};${firstName}<#lt>
-		FN:${firstName} ${lastName}<#lt>
-		ORG:${org}<#lt>
-		TITLE:${title}<#lt>
-		TEL;TYPE=WORK,VOICE:${phoneNumber}<#lt>
-		EMAIL;TYPE=PREF,INTERNET:${email}<#lt>
-		URL:${url}<#lt>
-		PHOTO;VALUE=URL;TYPE=JPG:${photo}<#lt>
-		REV:${rev}<#lt>
-		END:VCARD<#t>
-	</#assign><#t>
+	<#if firstName != "" && lastName != "">
+		<#local vCard><#t>
+			BEGIN:VCARD<#lt>
+			VERSION:3.0<#lt>
+			N:${lastName};${firstName}<#lt>
+			FN:${firstName} ${lastName}<#lt>
+			<#if org != ""> ORG:${org}</#if><#lt>
+			<#if title != "">TITLE:${title}</#if><#lt>
+			<#if phoneNumber != "">TEL;TYPE=WORK,VOICE:${phoneNumber}</#if><#lt>
+			<#if email != "">EMAIL;TYPE=PREF,INTERNET:${email}</#if><#lt>
+			<#if url != "">URL:${url}</#if><#lt>
+			<#if photo != "">PHOTO;VALUE=URL;TYPE=JPG:${photo}</#if><#lt>
+			<#if rev != "">REV:${rev}</#if><#lt>
+			END:VCARD<#t>
+		</#local><#t>
+		
+		<#local vCard = (removeBlankLines(vCard))?url>
+
+		<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${vCard}&amp;choe=UTF-8" >
 	
-	<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${vCard}&amp;choe=UTF-8" >
-	
-	<img src="${qrCodeUrl}" />
+		<img src="${qrCodeUrl}" />
+	</#if>
 </#macro>
+
+<#function removeBlankLines input>
+
+	<#local test = "\n\n">
+	<#local replacement = "\n">
+
+	<#local output = input>
+	
+	<#local maxLoop = 50>
+	<#list 1..maxLoop as i>
+		<#if output?contains(test)>
+			<#local output = output?replace(test, replacement)>
+		<#else>
+			<#break>
+		</#if>
+	</#list>
+
+	<#return output>
+
+</#function>
+
+
