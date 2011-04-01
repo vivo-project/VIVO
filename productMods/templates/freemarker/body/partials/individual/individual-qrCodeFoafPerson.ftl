@@ -33,7 +33,7 @@ END:VCARD
 	<#local email = (allProperties.getProperty("${core}email").firstValue)! >
 	<#local url = urls.currentPage! >
 	<#local photo = individual.thumbUrl! >
-	<#local rev = "temp" >
+	<#local rev = "" >
 
 	<#if firstName != "" && lastName != "">
 		<#local vCard><#t>
