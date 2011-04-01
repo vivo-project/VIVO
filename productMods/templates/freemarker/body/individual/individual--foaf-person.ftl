@@ -3,6 +3,7 @@
 <#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
+<#include "individual-qrCodeFoafPerson.ftl">
 
 <section id="individual-intro" class="vcard person" role="region">
 
@@ -68,6 +69,8 @@
                 
         <#-- Links -->  
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
+        
+        <#-- <@qrCodeVCard qrCodeWidth="150" /> -->
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
