@@ -324,9 +324,18 @@
       <param-value>true</param-value>
     </init-param>
     <load-on-startup>3</load-on-startup>
-  </servlet>
+  </servlet><!--
 
   <servlet>
+  	<servlet-name>ProcessRdfForm</servlet-name>
+  	<servlet-class>edu.cornell.mannlib.vitro.webapp.edit.forms.ProcessRdfForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProcessRdfForm</servlet-name>
+  	<url-pattern>/ProcessRdfForm</url-pattern>
+  </servlet-mapping>
+
+  --><servlet>
     <servlet-name>IndexController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.IndexController</servlet-class>
   </servlet>
@@ -1199,7 +1208,7 @@
     <url-pattern>/unrecognizedUser</url-pattern>
   </servlet-mapping>
 
- <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION
+ <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION 
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
