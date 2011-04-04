@@ -2,11 +2,75 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>VIVO Release 1 V1.2 Upgrade Guide</title>
+        <title>VIVO Release 1 V1.3 Upgrade Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen" />
     </head>
     <body>
-        <h3>upload.directory and LuceneSetup.indexDir are merged into vitro.home.directory.</h3>
+        <div id="branding" role="banner">
+            <h1 class="vivo-logo"><a href="/"><span class="displace">VIVO</span></a></h1>
+        </div>
+        <!-- Start of content -->
+        <div id="wrapper-content" role="main">
+            
+            <h1>VIVO Release 1 v1.3 Upgrade Guide</h1>
+            <small>
+                xxxxxx xx, 2011 - Upgrading from Release 1 v1.2 to Release 1 
+                v1.3 
+            </small>
+            <toc>
+                <ul>    
+                    <li>
+                        <a href="#announcement">Release announcement for V1.3</a>
+                    </li>
+                    <li>
+                        <a href="#upgrade">Upgrade process for V1.3</a>
+                    </li>               
+                </ul>
+            </toc>
+            
+            <h3>upload.directory and LuceneSetup.indexDir are merged into vitro.home.directory.</h3>
+        
+            <h3>Template changes</h3>
+            <ul>
+                <li>
+                    <p>${stylesheets}, ${scripts}, and ${headScripts} add() methods now take the full tag as an argument. 
+                    This will require a change to all calls to this method in the templates. This change allows for specification of the
+                    media and other attributes. Example:</p>
+                    <ul>
+                        <li>1.2: ${stylesheets.add("/css/individual/individual.css")}</li>                
+                        <li>1.3: ${stylesheets.add('&lt;link rel="stylesheet" href="${urls.base}/css/individual/individual.css" /&gt;')}</li>
+                    </ul>
+                </li>
+                
+                <li>The addFromTheme() methods of the ${stylesheets}, ${scripts}, and ${headScripts} objects has been deleted.</li>
+                
+                <li>propertyGroups.getPropertyAndRemoveFromList() has been deprecated. The replacement method is propertyGroups.pullProperty(). 
+                No change in functionality.</li>
+            </ul>
+        </div> <!-- #wrapper-content -->
+        
+        <div id="footer" role="contentinfo">
+            <p class="copyright">
+                <small>
+                    &copy;2011 
+                    All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
+                </small>
+                | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+            </p>
+            <div id="nav" role="navigation">
+                <ul id="footer-nav" role="list">
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/about">About</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/contact">Contact Us</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- #footer -->
     </body>
 </html>
     
