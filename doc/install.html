@@ -339,32 +339,18 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Directory where uploaded files will be stored. 
+                            Directory where the VIVO application will store the data that it creates.
+                            This includes uploaded files (usually imageS) and the Lucene search index. 
                             Be sure this directory exists and is writable by the user who  
                             the Tomcat service is running as. 
                         </td>
                     </tr>
                     <tr class="odd_row">
                         <td>
-                            upload.directory 
+                            vitro.home.directory 
                         </td>
                         <td>
-                            /usr/local/vivo/data/uploads 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Directory where the Lucene search index will be 
-                            built. Be sure this directory exists and is writable by the user who  
-                            the Tomcat service is running as. 
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                            LuceneSetup.indexDir 
-                        </td>
-                        <td>
-                            /usr/local/vivo/data/luceneIndex 
+                            /usr/local/vivo/data 
                         </td>
                     </tr>
                     <tr>
