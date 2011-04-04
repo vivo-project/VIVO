@@ -1450,10 +1450,6 @@
   </servlet-mapping>    
 
   <servlet-mapping>
-    <servlet-name>updateEntityFlags</servlet-name>
-    <url-pattern>/updateEntityFlags</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>authenticate</servlet-name>
     <url-pattern>/authenticate</url-pattern>
   </servlet-mapping>
