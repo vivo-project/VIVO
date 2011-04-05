@@ -32,7 +32,7 @@ END:VCARD
 	<#local title = qrData.preferredTitle! >
 	<#local phoneNumber = qrData.phoneNumber! >
 	<#local email = qrData.email! >
-	<#local url = urls.requestedUrl! >
+	<#local url = qrData.externalUrl! >
 	<#local photo = individual.thumbUrl! >
 	<#local rev = "" >
 
@@ -64,7 +64,9 @@ END:VCARD
 
 <#macro qrCodeLink qrCodeWidth>
 
-	<#local url = urls.requestedUrl! >
+	<#local qrData = individual.qrData >
+
+	<#local url = qrData.externalUrl! >
 	<#local qrCodeContent = url?url> 
 	
 	<#if url != "">

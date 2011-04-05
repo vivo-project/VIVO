@@ -73,6 +73,7 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         return getVisUrl("vis", "entity_comparison");
     }
 
+
     public Map<String, String> getQrData() {
         String core = "http://vivoweb.org/ontology/core#";
         String foaf = "http://xmlns.com/foaf/0.1/";
@@ -95,6 +96,13 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
             qrData.put("phoneNumber", phoneNumbers.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
         if(emails.size() > 0)
             qrData.put("email", emails.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+
+        String tempUrl = vreq.getRequestURL().toString();
+        String prefix = "http://";
+        tempUrl = tempUrl.substring(0, tempUrl.replace(prefix, "").indexOf("/") + prefix.length());
+        String profileUrl = getProfileUrl();
+        String externalUrl = tempUrl + profileUrl;
+        qrData.put("externalUrl", externalUrl);
 
         return qrData;
     }
