@@ -33,6 +33,8 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -45,13 +47,52 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     public static String nodeToPubProp = "http://vivoweb.org/ontology/core#linkedInformationResource";
 %>
 <%
+
     VitroRequest vreq = new VitroRequest(request);
+
+    String subjectUri = vreq.getParameter("subjectUri");
+    String predicateUri = vreq.getParameter("predicateUri");
+    String objectUri = vreq.getParameter("objectUri");
+
+	Individual obj = (Individual) request.getAttribute("object");
+
+    EditMode mode = FrontEndEditingUtils.getEditMode(request, nodeToPubProp);
+
+    /*
+    There are 3 modes that this form can be in: 
+     1.  Add. There is a subject and a predicate but no position and nothing else. 
+     
+     2. Repair a bad role node.  There is a subject, predicate and object but there is no individual on the 
+        other end of the object's core:linkedInformationResource stmt.  This should be similar to an add but the form should be expanded.
+        
+     3. Really bad node. Multiple core:authorInAuthorship statements.   
+     
+     This form does not currently support normal edit mode where there is a subject, an object, and an individual on
+     the other end of the object's core:linkedInformationResource statement. We redirect to the publication profile
+     to edit the publication.
+    */
+    
+    if( mode == EditMode.ADD ) {
+       %> <c:set var="editMode" value="add"/><%
+    } else if(mode == EditMode.EDIT){
+        // Because it's edit mode, we already know there's one and only one statement
+        ObjectPropertyStatement ops = obj.getObjectPropertyStatements(nodeToPubProp).get(0);
+        String pubUri = ops.getObjectURI();
+        String forwardToIndividual = pubUri != null ? pubUri : objectUri;         
+        %>  
+        <jsp:forward page="/individual">
+            <jsp:param value="<%= forwardToIndividual %>" name="uri"/>
+        </jsp:forward>  
+        <%              
+    } else if(mode == EditMode.REPAIR){
+        %> <c:set var="editMode" value="repair"/><%
+    }
+    
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
     
-    String subjectUri = vreq.getParameter("subjectUri");
-    String predicateUri = vreq.getParameter("predicateUri");    
-    String subjectName = ((Individual) request.getAttribute("subject")).getName();
+    Individual subject = (Individual) request.getAttribute("subject");
+    String subjectName = subject.getName();
     vreq.setAttribute("subjectUriJson", MiscWebUtils.escape(subjectUri));
     
     vreq.setAttribute("stringDatatypeUriJson", MiscWebUtils.escape(XSD.xstring.toString()));
@@ -59,39 +100,7 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
     String intDatatypeUri = XSD.xint.toString();    
     vreq.setAttribute("intDatatypeUri", intDatatypeUri);
     vreq.setAttribute("intDatatypeUriJson", MiscWebUtils.escape(intDatatypeUri));
-                   
-    Individual subject = (Individual) request.getAttribute("subject");
-	Individual obj = (Individual) request.getAttribute("object");
-	
-	// Check to see if this is an edit of existing, if yes redirect to pub 
-	if( obj != null ){     	
-    	List<ObjectPropertyStatement> stmts =  obj.getObjectPropertyStatements( nodeToPubProp );
-    	if( stmts != null && stmts.size() > 0 ){    		
-    		ObjectPropertyStatement ops = stmts.get(0);
-    		String pubUri = ops.getObjectURI();
-    		if( pubUri != null ){
-    			%>  
-            	<jsp:forward page="/individual">
-            		<jsp:param value="<%= pubUri %>" name="uri"/>
-            	</jsp:forward>  
-            	<%	
-    		} 
-    	}
-	}
-	
-	/* This form is not prepared to deal with editing an existing relationship, so redirect
-	 * to authorship page if no publication was found. This is not ideal, because you can't add
-	 * a linked information resource from that page, but you can at least continue to the back end.
-	 * May want to modify form in a future version to support repair mode.
-	 */
-	if (obj != null) {
-	    String objectUri = obj.getURI();
-        %>  
-        <jsp:forward page="/individual">
-            <jsp:param value="<%= objectUri %>" name="uri"/>
-        </jsp:forward>  
-        <%  	    
-	}
+
 %>
 
 <c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
@@ -219,10 +228,16 @@ SPARQL queries for existing values. --%>
     editConfig.addValidator(new PersonHasPublicationValidator());
     
     Model model = (Model) application.getAttribute("jenaOntModel");
-    String objectUri = (String) request.getAttribute("objectUri");
-    editConfig.prepareForNonUpdate(model); // we're only adding new, not editing existing
+    
+    if (objectUri != null) { // editing existing (in this case, only repair is currently provided by the form)
+        editConfig.prepareForObjPropUpdate(model);
+    } else { // adding new
+        editConfig.prepareForNonUpdate(model);
+    }
+    
     // Return to person, not publication. See NIHVIVO-1464.
   	// editConfig.setEntityToReturnTo("?pubUri"); 
+    
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
                                                                 JavaScript.CUSTOM_FORM_UTILS.path(),
                                                                 "/js/browserUtils.js",
@@ -237,11 +252,28 @@ SPARQL queries for existing values. --%>
     request.setAttribute("customCss", customCss); 
 %>
 
+<%-- Configure add vs. edit --%> 
+<c:choose>
+    <c:when test='${editMode == "add"}'>
+        <c:set var="titleVerb" value="Create" />
+        <c:set var="submitButtonText" value="Publication" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="titleVerb" value="Edit" />  
+        <c:set var="submitButtonText" value="Edit Publication" />
+    </c:otherwise>
+</c:choose>
+
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
 <jsp:include page="${preForm}" />
 
-<h2>Create publication entry for <%= subjectName %></h2>
+<% if( mode == EditMode.ERROR ){ %>
+ <div>This form is unable to handle the editing of this position because it is associated with 
+      multiple Position individuals.</div>      
+<% }else{ %>
+
+<h2>${titleVerb} publication entry for <%= subjectName %></h2>
 
 <%@ include file="unsupportedBrowserMessage.jsp" %>
 
@@ -261,7 +293,7 @@ SPARQL queries for existing values. --%>
 	    </div>
     </div>   
      
-    <p class="submit"><v:input type="submit" id="submit" value="Publication" cancel="true" /></p>
+    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true" /></p>
     
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
@@ -279,7 +311,12 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acUrl: '${acUrl}',
-    submitButtonTextType: 'simple'
+    submitButtonTextType: 'simple',
+    editMode: '${editMode}',
+    defaultTypeName: 'publication' // used in repair mode to generate button text
 };
 </script>
+
+<% } %>
+
 <jsp:include page="${postForm}"/>

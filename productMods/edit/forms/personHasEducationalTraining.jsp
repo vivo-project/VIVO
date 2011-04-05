@@ -492,7 +492,6 @@ type is returned and we don't get a match to the select element options. --%>
     </c:when>
     <c:otherwise>
         <c:set var="titleVerb" value="Edit" />
-        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
         <c:set var="submitButtonText" value="Edit Education and Training" />
         <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>    
     </c:otherwise>
@@ -513,7 +512,7 @@ This goes to an experimental FM based form:
       multiple Position individuals.</div>      
 <% }else{ %>
 
-<h2>${titleVerb} education and training entry for <%= subjectName %></h2>
+<h2>${titleVerb} education and training entry for ${subjectName}</h2>
 
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
