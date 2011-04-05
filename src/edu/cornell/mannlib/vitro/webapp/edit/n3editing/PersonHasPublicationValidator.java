@@ -5,10 +5,9 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hp.hpl.jena.rdf.model.Literal;
+import org.apache.commons.lang.StringUtils;
 
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.N3Validator;
-import edu.cornell.mannlib.vitro.webapp.utils.StringUtils;
+import com.hp.hpl.jena.rdf.model.Literal;
 
 public class PersonHasPublicationValidator implements N3Validator {
 

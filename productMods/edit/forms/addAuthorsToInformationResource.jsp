@@ -37,7 +37,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.StringUtils" %>
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
