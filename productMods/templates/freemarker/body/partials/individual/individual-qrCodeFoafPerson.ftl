@@ -32,7 +32,7 @@ END:VCARD
 	<#local title = qrData.preferredTitle! >
 	<#local phoneNumber = qrData.phoneNumber! >
 	<#local email = qrData.email! >
-	<#local url = urls.currentPage! >
+	<#local url = urls.requestedUrl! >
 	<#local photo = individual.thumbUrl! >
 	<#local rev = "" >
 
@@ -55,10 +55,27 @@ END:VCARD
 		<#local vCard = (removeBlankLines(vCard))?url>
 
 		<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${vCard}&amp;choe=UTF-8" >
+
+		<img src="${qrCodeUrl}" />
+	</#if>
+</#macro>
+
+
+
+<#macro qrCodeLink qrCodeWidth>
+
+	<#local url = urls.requestedUrl! >
+	<#local qrCodeContent = url?url> 
+	
+	<#if url != "">
+		<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
 	
 		<img src="${qrCodeUrl}" />
 	</#if>
 </#macro>
+
+
+
 
 <#function removeBlankLines input>
 
