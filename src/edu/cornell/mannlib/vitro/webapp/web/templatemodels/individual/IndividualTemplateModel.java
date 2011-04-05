@@ -2,14 +2,20 @@
 
 package edu.cornell.mannlib.vitro.webapp.web.templatemodels.individual;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
+import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
@@ -59,11 +65,37 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     public String getCoInvestigatorVisUrl() {
         return getPersonVisUrl(new ParamMap("vis_mode", "copi"));
     }
-    
+
     public String getTemporalGraphUrl() {
         if (!isOrganization()) {
             return null;
         }
         return getVisUrl("vis", "entity_comparison");
+    }
+
+    public Map<String, String> getQrData() {
+        String core = "http://vivoweb.org/ontology/core#";
+        String foaf = "http://xmlns.com/foaf/0.1/";
+
+        Map<String,String> qrData = new HashMap<String,String>();
+        WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
+        Collection<DataPropertyStatement> firstNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, foaf + "firstName");
+        Collection<DataPropertyStatement> lastNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, foaf + "lastName");
+        Collection<DataPropertyStatement> preferredTitles = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "preferredTitle");
+        Collection<DataPropertyStatement> phoneNumbers = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "phoneNumber");
+        Collection<DataPropertyStatement> emails = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "email");
+
+        if(firstNames.size() > 0)
+            qrData.put("firstName", firstNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+        if(lastNames.size() > 0)
+            qrData.put("lastName", lastNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+        if(preferredTitles.size() > 0)
+            qrData.put("preferredTitle", preferredTitles.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+        if(phoneNumbers.size() > 0)
+            qrData.put("phoneNumber", phoneNumbers.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+        if(emails.size() > 0)
+            qrData.put("email", emails.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
+
+        return qrData;
     }
 }

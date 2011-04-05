@@ -20,17 +20,18 @@ PHOTO;VALUE=URL;TYPE=JPG:https://vivo.ufl.edu/file/n34850/_main_image_491-NUCATS
 REV:20080424T195243Z
 END:VCARD
 -->
+	<#local qrData = individual.qrData >
 
 	<#local core = "http://vivoweb.org/ontology/core#">
 	<#local foaf = "http://xmlns.com/foaf/0.1/">
 	<#local rdfs = "http://www.w3.org/2000/01/rdf-schema#">
 
-	<#local firstName = (allProperties.getProperty("${foaf}firstName").firstValue)! >
-	<#local lastName = (allProperties.getProperty("${foaf}lastName").firstValue)! >
+	<#local firstName = qrData.firstName! >
+	<#local lastName = qrData.lastName! >
 	<#local org = "" >
-	<#local title = (allProperties.getProperty("${core}preferredTitle").firstValue)! >
-	<#local phoneNumber = (allProperties.getProperty("${core}phoneNumber").firstValue)! >
-	<#local email = (allProperties.getProperty("${core}email").firstValue)! >
+	<#local title = qrData.preferredTitle! >
+	<#local phoneNumber = qrData.phoneNumber! >
+	<#local email = qrData.email! >
 	<#local url = urls.currentPage! >
 	<#local photo = individual.thumbUrl! >
 	<#local rev = "" >

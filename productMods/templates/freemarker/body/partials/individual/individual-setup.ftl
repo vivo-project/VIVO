@@ -8,6 +8,5 @@
 <#assign editable = individual.editable>
 
 <#assign propertyGroups = individual.propertyList>
-<#assign allProperties = individual.fullPropertyList>
 
 <#assign core = "http://vivoweb.org/ontology/core#">
