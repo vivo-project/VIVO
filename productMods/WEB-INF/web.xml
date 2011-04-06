@@ -1413,6 +1413,16 @@
     <url-pattern>NONE</url-pattern>    
   </servlet-mapping>
   -->
+
+  <servlet>
+    <servlet-name>ExportQrCodeController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ExportQrCodeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExportQrCodeController</servlet-name>
+    <url-pattern>/qrcode</url-pattern>
+  </servlet-mapping>
+
     
   <!-- ============================== servlet-mappings ======================== -->
   <servlet-mapping>

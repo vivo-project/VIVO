@@ -20,6 +20,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
     private static final Log log = LogFactory.getLog(IndividualTemplateModel.class);
+    private Map<String, String> qrData = null;
     
     public IndividualTemplateModel(Individual individual, VitroRequest vreq) {
         super(individual, vreq);
@@ -75,6 +76,12 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
 
     public Map<String, String> getQrData() {
+        if(qrData == null)
+            qrData = generateQrData();
+        return qrData;
+    }
+
+    private Map<String, String> generateQrData() {
         String core = "http://vivoweb.org/ontology/core#";
         String foaf = "http://xmlns.com/foaf/0.1/";
 
@@ -104,6 +111,10 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         String externalUrl = tempUrl + profileUrl;
         qrData.put("externalUrl", externalUrl);
 
+        String individualUri = individual.getURI();
+        String contextPath = vreq.getContextPath();
+        qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
+        
         return qrData;
     }
 }
