@@ -115,6 +115,8 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         String contextPath = vreq.getContextPath();
         qrData.put("exportQrCodeUrl", contextPath + "/qrcode?uri=" + UrlBuilder.urlEncode(individualUri));
         
+        qrData.put("aboutQrCodesUrl", contextPath + "/qrcode/about");
+        
         return qrData;
     }
 }
