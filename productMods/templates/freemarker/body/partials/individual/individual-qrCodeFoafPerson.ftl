@@ -4,22 +4,26 @@
 
 <#macro qrCodeVCard qrCodeWidth>
 
-<#--
-Example:
+	<#local qrCodeUrl = getQrCodeUrlForVCard(qrCodeWidth)>
+	
+	<#if qrCodeUrl != "">
+		<img src="${qrCodeUrl}" />
+	</#if>
+</#macro>
 
-BEGIN:VCARD
-VERSION:3.0
-N:Conlon;Michael
-FN:Michael Conlon
-ORG:University of Florida
-TITLE:Associate Director and Chief Operating Officer
-TEL;TYPE=WORK,VOICE:(352) 273-8872
-EMAIL;TYPE=PREF,INTERNET:mconlon@ufl.edu
-URL:https://vivo.ufl.edu/display/n25562
-PHOTO;VALUE=URL;TYPE=JPG:https://vivo.ufl.edu/file/n34850/_main_image_491-NUCATS-STS-042310.jpg
-REV:20080424T195243Z
-END:VCARD
--->
+<#macro qrCodeLink qrCodeWidth>
+
+	<#local qrCodeUrl = getQrCodeUrlForLink(qrCodeWidth)>
+	
+	<#if qrCodeUrl != "">
+		<img src="${qrCodeUrl}" />
+	</#if>
+</#macro>
+
+
+
+<#function getQrCodeUrlForVCard qrCodeWidth>
+
 	<#local qrData = individual.qrData >
 
 	<#local core = "http://vivoweb.org/ontology/core#">
@@ -36,6 +40,7 @@ END:VCARD
 	<#local photo = individual.thumbUrl! >
 	<#local rev = "" >
 
+	<#local qrCodeUrl = "">	
 	<#if firstName != "" && lastName != "">
 		<#local vCard><#t>
 			BEGIN:VCARD<#lt>
@@ -55,27 +60,27 @@ END:VCARD
 		<#local vCard = (removeBlankLines(vCard))?url>
 
 		<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${vCard}&amp;choe=UTF-8" >
-
-		<img src="${qrCodeUrl}" />
 	</#if>
-</#macro>
+	
+	<#return qrCodeUrl>
+</#function>
 
 
 
-<#macro qrCodeLink qrCodeWidth>
+<#function getQrCodeUrlForLink qrCodeWidth>
 
 	<#local qrData = individual.qrData >
 
 	<#local url = qrData.externalUrl! >
-	<#local qrCodeContent = url?url> 
-	
-	<#if url != "">
-		<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
-	
-		<img src="${qrCodeUrl}" />
-	</#if>
-</#macro>
 
+	<#local qrCodeUrl = "">	
+	<#if url != "">
+		<#local qrCodeContent = url?url> 
+		<#local qrCodeUrl = "https://chart.googleapis.com/chart?cht=qr&amp;chs=${qrCodeWidth}x${qrCodeWidth}&amp;chl=${qrCodeContent}&amp;choe=UTF-8" >
+	</#if>
+	
+	<#return qrCodeUrl>
+</#function>
 
 
 
@@ -96,7 +101,6 @@ END:VCARD
 	</#list>
 
 	<#return output>
-
 </#function>
 
 
