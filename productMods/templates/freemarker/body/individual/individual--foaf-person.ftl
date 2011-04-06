@@ -69,8 +69,8 @@
                 
         <#-- Links -->  
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
-        
-        <#-- <@qrCodeVCard qrCodeWidth="150" /> -->
+
+        <#-- <a href="${individual.qrData.exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth="150" /></a> -->
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
