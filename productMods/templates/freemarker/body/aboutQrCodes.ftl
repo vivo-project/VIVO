@@ -1,3 +1,7 @@
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<#-- Page providing details on how QR codes work -->
+
 <h2>About QR Codes</h2>
 
 <h3>What is QR?</h3>
