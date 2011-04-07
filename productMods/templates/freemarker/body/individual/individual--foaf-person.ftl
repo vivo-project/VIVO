@@ -71,12 +71,14 @@
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
 
         <#--
-        <div style="border:1px solid #cccccc">
-            <span style="padding-left:5px">vCard QR <a style="font-size:smaller" href="${individual.qrData.aboutQrCodesUrl}">What is this?</a></span>
-            <a title="Export QR codes" href="${individual.qrData.exportQrCodeUrl}">
-                <@qrCodeVCard qrCodeWidth="150" />
-            </a>
-        </div>
+        <#if hasValidVCard()>
+            <div style="border:1px solid #cccccc">
+                <span style="padding-left:5px">vCard QR <a style="font-size:smaller" href="${individual.qrData.aboutQrCodesUrl}">What is this?</a></span>
+                <a title="Export QR codes" href="${individual.qrData.exportQrCodeUrl}">
+                    <@qrCodeVCard qrCodeWidth="150" />
+                </a>
+            </div>
+        </#if>
         -->
     </section>
 
