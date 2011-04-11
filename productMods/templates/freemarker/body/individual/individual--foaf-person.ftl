@@ -3,7 +3,6 @@
 <#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
-<#include "individual-qrCodeFoafPerson.ftl">
 
 <section id="individual-intro" class="vcard person" role="region">
 
@@ -25,8 +24,9 @@
         <div id="photo-wrapper">${individualImage}</div>
     
         <nav role="navigation">
+        
             <ul id ="individual-tools-people" role="list">
-                <li role="listitem"><img title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" /></li>
+                <li role="listitem"><img id="uriIcon" title="${individual.uri}" onmouseover="javascript:this.style.cursor='pointer'" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/></li>
     
                 <#assign rdfUrl = individual.rdfUrl>
                 <#if rdfUrl??>
@@ -36,7 +36,7 @@
         </nav>
             
         <#-- Email -->    
-        <#assign email = propertyGroups.pullProperty("${core}email")!>      
+        <#assign email = propertyGroups.getPropertyAndRemoveFromList("${core}email")!>      
         <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.addLinkWithLabel email editable />
             <#if email.statements?has_content> <#-- if there are any statements -->
@@ -52,7 +52,7 @@
         </#if>
           
         <#-- Phone --> 
-        <#assign phone = propertyGroups.pullProperty("${core}phoneNumber")!>
+        <#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
         <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.addLinkWithLabel phone editable />
             <#if phone.statements?has_content> <#-- if there are any statements -->
@@ -69,17 +69,6 @@
                 
         <#-- Links -->  
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
-
-        <#--
-        <#if hasValidVCard()>
-            <div style="border:1px solid #cccccc">
-                <span style="padding-left:5px">vCard QR <a style="font-size:smaller" href="${individual.qrData.aboutQrCodesUrl}">What is this?</a></span>
-                <a title="Export QR codes" href="${individual.qrData.exportQrCodeUrl}">
-                    <@qrCodeVCard qrCodeWidth="150" />
-                </a>
-            </div>
-        </#if>
-        -->
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
@@ -124,7 +113,7 @@
             </#if>
                
             <#-- Positions -->
-            <#assign positions = propertyGroups.pullProperty("${core}personInPosition")!>
+            <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                 <@p.objectPropertyListing positions editable />
             </#if> 
@@ -134,7 +123,7 @@
         <#include "individual-overview.ftl">
         
         <#-- Research Areas -->
-        <#assign researchAreas = propertyGroups.pullProperty("${core}hasResearchArea")!> 
+        <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.objectPropertyListing researchAreas editable />
         </#if>   
@@ -151,6 +140,7 @@
 <#include "individual-properties.ftl">
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/getURLParam.js"></script>',
@@ -158,6 +148,7 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_pl
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.form.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/controls.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/toggle.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
