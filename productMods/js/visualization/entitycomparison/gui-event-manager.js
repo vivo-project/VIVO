@@ -24,7 +24,7 @@ $(document).ready(function() {
      * update the status accordingly.   
      */         
 
-    $("select.comparisonValues").change(function(){
+    $("select.comparisonValues").change(function() {
 
         var selectedValue = $("select.comparisonValues option:selected").val();
         
@@ -36,6 +36,8 @@ $(document).ready(function() {
             	
             	currentParameter = parameter.name;
             	selectedDataURL = parameter.dataLink;
+            	temporalGraphCommonURL = parameter.viewBaseLink;
+            	csvDownloadURL = parameter.csvLink;
             }
         	
         });
@@ -175,47 +177,79 @@ function performEntityCheckboxClickedRedrawActions() {
 
 }
 
-/* 
- *  function to populate the labelToEntityRecord object with the
- *  values from the json file and
- *  dynamically generate checkboxes
- */
-function loadData(jsonData, dataTableParams) {
-
-    $.each(jsonData, function (index, val) {
-        setOfLabels.push(val.label);
-        URIToEntityRecord[val.entityURI] = val;
-        if (val.lastCachedAtDateTime) {
-        	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
-        }
-    });
-    
-    prepareTableForDataTablePagination(jsonData, dataTableParams);
-    setEntityLevel(getEntityVisMode(jsonData));
-    
-    entityCheckboxOperatedOnEventListener();
-    
-}
-
-/* 
- *  function to populate the labelToEntityRecord object with the
- *  values from the json file and
- *  dynamically generate checkboxes
- */
-function reloadData(preselectedEntityURIs, jsonData) {
-
-    $.each(jsonData, function (index, val) {
-        setOfLabels.push(val.label);
-        URIToEntityRecord[val.entityURI] = val;
-        if (val.lastCachedAtDateTime) {
-        	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
-        }
-    });
-    
-    reloadDataTablePagination(preselectedEntityURIs, jsonData);
-    setEntityLevel(getEntityVisMode(jsonData));
-}
-
+var processJSONData = {
+		
+	isParentEntityAvailable: false,	
+		
+	setupGlobals: function(jsonContent) {
+		$.each(jsonContent, function (index, val) {
+	        
+	    	/*
+	    	 * We are checking if the "label" attribute is present, because that pertains to 
+	    	 * data used for linegraph visualization.
+	    	 * */
+	    	if (val.label) {
+	    		
+		    	setOfLabels.push(val.label);
+		        URIToEntityRecord[val.entityURI] = val;
+		        if (val.lastCachedAtDateTime) {
+		        	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
+		        }
+	    	} else if (val.subjectEntityLabel) {
+	
+	    		/*
+	    		 * This is to set the drill-up visualization URLs.
+	    		 * */
+	    		$.each(val.parentURIToLabel, function(index, value) {
+	    			
+	    			$("a#subject-parent-entity-temporal-url").attr("href", getTemporalVisURL(index));
+	    			
+	    			$("a#subject-parent-entity-profile-url").attr("href", getVIVOURL(index));
+	    			$("a#subject-parent-entity-profile-url").text(value);
+	    			
+	    			processJSONData.isParentEntityAvailable = true;
+	    		});
+	    	}
+	    });
+		
+		if (processJSONData.isParentEntityAvailable) {
+			$("#subject-parent-entity").show();
+		} else {
+			$("#subject-parent-entity").hide();
+		}
+	},	
+	
+	/* 
+	 *  function to populate the labelToEntityRecord object with the
+	 *  values from the json file and
+	 *  dynamically generate checkboxes
+	 */
+	loadData: function(jsonData, dataTableParams) {
+	    
+		processJSONData.setupGlobals(jsonData);
+		
+	    prepareTableForDataTablePagination(jsonData, dataTableParams);
+	    setEntityLevel(getEntityVisMode(jsonData));
+	    
+	    entityCheckboxOperatedOnEventListener();
+	},
+	
+	/* 
+	 *  function to populate the labelToEntityRecord object with the
+	 *  values from the json file and
+	 *  dynamically generate checkboxes
+	 */
+	reloadData: function(preselectedEntityURIs, jsonData) {
+	    
+		processJSONData.setupGlobals(jsonData);
+		
+	    reloadDataTablePagination(preselectedEntityURIs, jsonData);
+	    setEntityLevel(getEntityVisMode(jsonData));
+	    
+	    $("a#csv").attr("href", csvDownloadURL);
+	}
+		
+};
 
 function entityCheckboxOperatedOnEventListener() {
 	
@@ -394,7 +428,7 @@ temporalGraphProcessor = {
         /*
          * render the temporal graph per the sent content. 
          * */
-        loadData(jsonData, this.dataTableParams);
+        processJSONData.loadData(jsonData, this.dataTableParams);
         
         lastCachedAtDateTimes.sort(lastCachedAtDateTimeParser.ascendingDateSorter);
         
@@ -438,7 +472,7 @@ temporalGraphProcessor = {
         /*
          * render the temporal graph per the sent content. 
          * */
-        reloadData(currentSelectedEntityURIs, jsonData);
+        processJSONData.reloadData(currentSelectedEntityURIs, jsonData);
         
         lastCachedAtDateTimes.sort(lastCachedAtDateTimeParser.ascendingDateSorter);
 

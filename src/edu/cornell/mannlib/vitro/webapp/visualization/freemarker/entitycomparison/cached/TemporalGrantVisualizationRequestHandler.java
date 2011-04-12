@@ -31,6 +31,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Co
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubjectEntityJSON;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -221,7 +222,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
 					 writeGrantsOverTimeJSON(vitroRequest, 
-							 				 entity.getSubEntities()));
+							 				 entity));
 		return fileData;
 	}
 
@@ -285,12 +286,12 @@ public class TemporalGrantVisualizationRequestHandler implements
 	 * @param subOrganizationTypesResult  
 	 */
 	private String writeGrantsOverTimeJSON(VitroRequest vreq, 
-										   Set<SubEntity> subentities) {
+										   Entity subjectEntity) {
 
 		Gson json = new Gson();
-		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
+		Set jsonifiedResponse = new HashSet();
 
-		for (SubEntity subentity : subentities) {
+		for (SubEntity subentity : subjectEntity.getSubEntities()) {
 			JsonObject entityJson = new JsonObject(
 					subentity.getIndividualLabel());
 
@@ -326,10 +327,17 @@ public class TemporalGrantVisualizationRequestHandler implements
 				entityJson.setVisMode("ORGANIZATION");
 			}		
 			
-			subEntitiesJson.add(entityJson);
+			jsonifiedResponse.add(entityJson);
 		}
 		
-		return json.toJson(subEntitiesJson);
+		
+		SubjectEntityJSON subjectEntityJSON = new SubjectEntityJSON(subjectEntity.getEntityLabel(),
+																	subjectEntity.getEntityURI(),
+																	subjectEntity.getParents());
+		
+		jsonifiedResponse.add(subjectEntityJSON);
+		
+		return json.toJson(jsonifiedResponse);
 	}
 
 	private String getEntityGrantsPerYearCSVContent(Entity entity) {

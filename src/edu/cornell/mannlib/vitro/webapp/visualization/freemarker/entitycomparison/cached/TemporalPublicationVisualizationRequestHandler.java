@@ -29,6 +29,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Ac
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubjectEntityJSON;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -88,7 +89,6 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		
 		Entity organizationWithAssociatedPeople = SelectOnModelUtilities
 				.getSubjectOrganizationAssociatedPeople(dataset, subjectEntityURI);
-
 		
 		if (organizationWithAssociatedPeople.getSubEntities() !=  null) {
 			
@@ -247,7 +247,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
 					 writePublicationsOverTimeJSON(vitroRequest, 
-							 					   entity.getSubEntities()));
+							 					   entity));
 		return fileData;
 	}
 	
@@ -277,12 +277,12 @@ public class TemporalPublicationVisualizationRequestHandler implements
 	 * @param subOrganizationTypesResult  
 	 */
 	private String writePublicationsOverTimeJSON(VitroRequest vreq, 
-												 Set<SubEntity> subentities) {
+												 Entity subjectEntity) {
 
 		Gson json = new Gson();
-		Set<JsonObject> subEntitiesJson = new HashSet<JsonObject>();
+		Set subEntitiesJson = new HashSet();
 
-		for (SubEntity subentity : subentities) {
+		for (SubEntity subentity : subjectEntity.getSubEntities()) {
 			
 			JsonObject entityJson = new JsonObject(
 					subentity.getIndividualLabel());
@@ -320,6 +320,13 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			
 			subEntitiesJson.add(entityJson);
 		}
+		
+		SubjectEntityJSON subjectEntityJSON = new SubjectEntityJSON(subjectEntity.getEntityLabel(),
+																	subjectEntity.getEntityURI(),
+																	subjectEntity.getParents());
+		
+		subEntitiesJson.add(subjectEntityJSON);
+		
 		return json.toJson(subEntitiesJson);
 	}
 

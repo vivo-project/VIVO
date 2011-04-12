@@ -26,14 +26,18 @@
 									"pluralName": "publications",
                                     "dropDownText": "by Publications", 
                                     "viewLink": "${organizationPublicationTemporalGraphURL}",
-                                    "dataLink": "${organizationPublicationTemporalGraphDataURL}", 
+                                    "viewBaseLink": "${subOrganizationPublicationTemporalGraphCommonURL}",
+                                    "dataLink": "${organizationPublicationTemporalGraphDataURL}",
+                                    "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison", 
                                     "value": "Publications" }>
                                     
 <#assign grantParameter = {   "name": "grant",
 							  "pluralName": "grants",
                               "dropDownText": "by Grants", 
-                              "viewLink": "${organizationGrantTemporalGraphURL}", 
+                              "viewLink": "${organizationGrantTemporalGraphURL}",
+                              "viewBaseLink": "${subOrganizationGrantTemporalGraphCommonURL}", 
                               "dataLink": "${organizationGrantTemporalGraphDataURL}",
+                              "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_grant_count",
                               "value": "Grants" }>
                               
 <#assign parameterOptions = [publicationParameter, grantParameter]>
@@ -86,6 +90,9 @@ var contextPath = "${urls.base}";
 var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
 var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
 
+var subOrganizationGrantTemporalGraphCommonURL = "${subOrganizationGrantTemporalGraphCommonURL}";
+var subOrganizationPublicationTemporalGraphCommonURL = "${subOrganizationPublicationTemporalGraphCommonURL}";
+
 var jsonString = '${jsonContent!}';
 var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
@@ -97,7 +104,7 @@ var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass}";
 
 var isDataRequestSentViaAJAX = false;
 
-var temporalGraphProcessor;
+var csvDownloadURL, temporalGraphProcessor;
 
 /*
 This has to be declared before making a call to GUI event manager JS.

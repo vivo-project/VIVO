@@ -172,10 +172,22 @@ public class EntityComparisonUtilityFunctions {
 		
 		if (StringUtils.equalsIgnoreCase(entityA.getEntityURI(), entityB.getEntityURI())) {
 			
-			Entity mergedEntity = new Entity(entityA.getEntityURI(), entityA.getEntityLabel());
+			Entity mergedEntity = new Entity(entityA.getEntityURI());
+			
+			if (StringUtils.isNotBlank(entityA.getEntityLabel())) {
+				
+				mergedEntity.setEntityLabel(entityA.getEntityLabel());
+				
+			} else if (StringUtils.isNotBlank(entityB.getEntityLabel())) {
+				
+				mergedEntity.setEntityLabel(entityB.getEntityLabel());
+			}
 			
 			mergedEntity.addSubEntitities(entityA.getSubEntities());
 			mergedEntity.addSubEntitities(entityB.getSubEntities());
+			
+			mergedEntity.addParents(entityA.getParents());
+			mergedEntity.addParents(entityB.getParents());
 			
 			return mergedEntity;
 			

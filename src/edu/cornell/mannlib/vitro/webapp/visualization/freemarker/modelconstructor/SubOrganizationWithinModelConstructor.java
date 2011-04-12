@@ -17,21 +17,21 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 
-public class OrganizationModelWithTypesConstructor implements ModelConstructor {
+public class SubOrganizationWithinModelConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	public static final String MODEL_TYPE = "ORGANIZATION_MODEL_WITH_TYPES"; 
+	public static final String MODEL_TYPE = "SUBORGANIZATION_WITHIN_HIERARCHY_MODEL"; 
 	
 	private Dataset dataset;
 	
 	private Model constructedModel;
 	
-	private Log log = LogFactory.getLog(OrganizationModelWithTypesConstructor.class.getName());
+	private Log log = LogFactory.getLog(SubOrganizationWithinModelConstructor.class.getName());
 	
 	private long before, after;
 	
-	public OrganizationModelWithTypesConstructor(Dataset dataset) {
+	public SubOrganizationWithinModelConstructor(Dataset dataset) {
 		this.dataset = dataset;
 	}
 	
@@ -40,29 +40,25 @@ public class OrganizationModelWithTypesConstructor implements ModelConstructor {
 	 * @param uri
 	 * @param dataset
 	 */
-	public OrganizationModelWithTypesConstructor(String uri, Dataset dataset) {
+	public SubOrganizationWithinModelConstructor(String uri, Dataset dataset) {
 		this.dataset = dataset;
 	}
 	
-	private String constructAllSubOrganizationsWithTypesQuery() {
+	private String constructAllSubOrganizationsWithinQuery() {
 		return ""
 		+ " CONSTRUCT { "
 		+ "     ?organization rdf:type foaf:Organization . "
 		+ "     ?organization rdfs:label ?organizationLabel . "
-		+ "     ?organization core:hasSubOrganization ?subOrganization . "
-		+ "     ?subOrganization rdfs:label ?subOrganizationLabel .     "
-		+ "     ?subOrganization rdf:type ?subOrganizationType . "
-		+ "     ?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
+		+ "     ?organization core:subOrganizationWithin ?parentOrganization . "
+		+ "     ?parentOrganization rdfs:label ?parentOrganizationLabel .     "
 		+ " }  "
 		+ " WHERE { "
 		+ "     ?organization rdf:type foaf:Organization . "
 		+ "     ?organization rdfs:label ?organizationLabel . "
 		+ "      "
 		+ "     OPTIONAL { "
-		+ "         ?organization core:hasSubOrganization ?subOrganization . "
-		+ "         ?subOrganization rdfs:label ?subOrganizationLabel . "
-		+ "         ?subOrganization rdf:type ?subOrganizationType . "
-		+ "         ?subOrganizationType rdfs:label ?subOrganizationTypeLabel . "
+		+ "         ?organization core:subOrganizationWithin ?parentOrganization . "
+		+ "         ?parentOrganization rdfs:label ?parentOrganizationLabel . "
 		+ "     }     "
 		+ " } ";
 		
@@ -106,7 +102,7 @@ public class OrganizationModelWithTypesConstructor implements ModelConstructor {
 		if (constructedModel != null && !constructedModel.isEmpty()) {
 			return constructedModel;
 		} else {
-			constructedModel = executeQuery(constructAllSubOrganizationsWithTypesQuery());
+			constructedModel = executeQuery(constructAllSubOrganizationsWithinQuery());
 			return constructedModel;
 		}
 		

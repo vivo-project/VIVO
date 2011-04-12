@@ -640,7 +640,7 @@ function createLegendRow(entity, bottomDiv) {
      * there is no drill-down possible, so don't diaply the temporal graph icon.
      * */
     if (entity.visMode !== "PERSON") {
-    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');	
+    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity.entityURI) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');	
     }
     
 
@@ -649,7 +649,7 @@ function createLegendRow(entity, bottomDiv) {
     checkbox.attr('checked', true);
     checkbox.attr('id', 'checkbox');
     checkbox.attr('class', 'easyDeselectCheckbox');
-    checkbox.attr('value', entity.label);
+    checkbox.attr('value', entity.entityURI);
 
     var hiddenLabel = $('<label>');
     hiddenLabel.attr('type', 'hidden');
@@ -720,7 +720,7 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     var entityLabelForLegend = divLabel.find(".entity-label-url");
     entityLabelForLegend.html(entity.label);
     entityLabelForLegend.ellipsis();
-    entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity) + "'></a>");
+    entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity.entityURI) + "'></a>");
 
     var countExplanation = 'VIVO knows the ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + ' year for ' 
     							+ combinedCount.knownYearCount + ' out of ' 
@@ -731,16 +731,15 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
 }
 
-function getVIVOURL(entity){
+function getVIVOURL(entityURI){
 	
-	var result  = subOrganizationVivoProfileURL + "uri="+entity.entityURI;
+	return subOrganizationVivoProfileURL + "uri=" + entityURI;
 	
-	return result;
 }
 
-function getTemporalVisURL(entity) {
+function getTemporalVisURL(entityURI) {
 	
-	return subOrganizationTemporalGraphURL + "&uri=" + entity.entityURI ;
+	return temporalGraphCommonURL + "&uri=" + entityURI ;
 }
 
 function getVIVOProfileURL(given_uri) {

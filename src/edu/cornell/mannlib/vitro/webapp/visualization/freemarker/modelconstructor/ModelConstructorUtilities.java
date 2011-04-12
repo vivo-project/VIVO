@@ -17,6 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructo
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PeopleToPublicationsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PersonToGrantsFactory;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.PersonToPublicationsFactory;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.factory.SubOrganizationWithinModelFactory;
 
 public class ModelConstructorUtilities {
 	
@@ -30,6 +31,7 @@ public class ModelConstructorUtilities {
 		put(OrganizationToGrantsForSubOrganizationsModelConstructor.MODEL_TYPE, new OrganizationToGrantsForSubOrganizationsFactory());
 		put(OrganizationAssociatedPeopleModelWithTypesConstructor.MODEL_TYPE, new OrganizationAssociatedPeopleModelWithTypesFactory());
 		put(OrganizationModelWithTypesConstructor.MODEL_TYPE, new OrganizationModelWithTypesFactory());
+		put(SubOrganizationWithinModelConstructor.MODEL_TYPE, new SubOrganizationWithinModelFactory());
 	}};
 	
 	public static Model getOrConstructModel(String uri, String modelType, Dataset dataset) 

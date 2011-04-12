@@ -25,8 +25,10 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructo
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PeopleToGrantsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.PeopleToPublicationsModelConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.modelconstructor.SubOrganizationWithinModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
 
 public class SelectOnModelUtilities {
@@ -59,8 +61,82 @@ public class SelectOnModelUtilities {
 									"",
 									organizationModel);
 		
-		return getEntityWithSubOrganizations(subjectEntityURI, 
+		Entity entityWithSubOrganizations = getEntityWithSubOrganizations(subjectEntityURI, 
 												   subOrganizationsWithTypesQuery.getQueryResult());
+		
+		Entity entityWithParentOrganizations = getAllParentOrganizations(dataset, subjectEntityURI);
+		
+		entityWithSubOrganizations.addParents(entityWithParentOrganizations.getParents());
+		
+		return entityWithSubOrganizations;
+	}
+	
+	public static Entity getAllParentOrganizations(Dataset dataset,
+			String subjectEntityURI) throws MalformedQueryParametersException {
+		Model organizationModel = ModelConstructorUtilities
+										.getOrConstructModel(
+												null, 
+												SubOrganizationWithinModelConstructor.MODEL_TYPE, 
+												dataset);
+		
+		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+		fieldLabelToOutputFieldLabel.put("organizationLabel", QueryFieldLabels.ORGANIZATION_LABEL);
+		fieldLabelToOutputFieldLabel.put("parentOrganization", QueryFieldLabels.PARENT_ORGANIZATION_URL);
+		fieldLabelToOutputFieldLabel.put("parentOrganizationLabel", QueryFieldLabels.PARENT_ORGANIZATION_LABEL);
+		
+		String whereClause = ""
+			+ " <" + subjectEntityURI + "> rdfs:label ?organizationLabel . "
+			+ " <" + subjectEntityURI + "> core:subOrganizationWithin ?parentOrganization . "
+			+ " ?parentOrganization rdfs:label ?parentOrganizationLabel . ";
+		
+		QueryRunner<ResultSet> parentOrganizationsQuery = 
+			new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+									"",
+									whereClause,
+									"",
+									organizationModel);
+		
+		return getEntityWithParentOrganizations(subjectEntityURI, 
+												   parentOrganizationsQuery.getQueryResult());
+	}
+	
+	private static Entity getEntityWithParentOrganizations(String subjectEntityURI, ResultSet queryResult) {
+
+		Entity entity = new Entity(subjectEntityURI);
+		Map<String, Individual> parentOrganizationURIToVO = new HashMap<String, Individual>();
+		
+		while (queryResult.hasNext()) {
+			
+			QuerySolution solution = queryResult.nextSolution();
+			
+			if (StringUtils.isEmpty(entity.getEntityLabel())) {
+				
+				RDFNode organizationLabelNode = solution.get(QueryFieldLabels.ORGANIZATION_LABEL);
+				if (organizationLabelNode != null) {
+					entity.setIndividualLabel(organizationLabelNode.toString());
+				}
+			}
+			
+			RDFNode parentOrganizationNode = solution.get(QueryFieldLabels.PARENT_ORGANIZATION_URL);
+			
+			Individual parent;
+			
+			if (!parentOrganizationURIToVO.containsKey(parentOrganizationNode.toString())) {
+				
+				parent = new Individual(parentOrganizationNode.toString());
+				
+				parentOrganizationURIToVO.put(parentOrganizationNode.toString(), parent);
+				
+				RDFNode parentOrganizationLabelNode = solution.get(QueryFieldLabels.PARENT_ORGANIZATION_LABEL);
+				if (parentOrganizationLabelNode != null) {
+					parent.setIndividualLabel(parentOrganizationLabelNode.toString());
+				}
+			}
+		}
+		
+		entity.addParents(parentOrganizationURIToVO.values());
+		
+		return entity;
 	}
 	
 	private static Entity getEntityWithSubOrganizations(String subjectEntityURI, ResultSet queryResult) {
@@ -76,7 +152,8 @@ public class SelectOnModelUtilities {
 				
 				RDFNode organizationLabelNode = solution.get(QueryFieldLabels.ORGANIZATION_LABEL);
 				if (organizationLabelNode != null) {
-					entity.setIndividualLabel(organizationLabelNode.toString());
+					
+					entity.setEntityLabel(organizationLabelNode.toString());
 				}
 			}
 			

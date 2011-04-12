@@ -94,6 +94,12 @@ public class QueryFieldLabels {
 	public static final String SUBORGANIZATION_LABEL = "subOrganizationLabelLit";
 	
 	/*
+	 * Parent Organization related field labels
+	 */
+	public static final String PARENT_ORGANIZATION_URL = "parentOrganizationLit";
+	public static final String PARENT_ORGANIZATION_LABEL = "parentOrganizationLabelLit";
+	
+	/*
 	 * Sub Organization related field labels
 	 */
 	public static final String SUBORGANIZATION_TYPE = "subOrganizationTypeLit";

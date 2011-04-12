@@ -23,7 +23,7 @@ var currentParameter = "${currentParameter}";
 /*
 This is used in util.js to print grant temporal graph links for all sub-organizations.
 */    
-var subOrganizationTemporalGraphURL = "${subOrganizationGrantTemporalGraphCommonURL}";
+var temporalGraphCommonURL = subOrganizationGrantTemporalGraphCommonURL;
 
 var temporalGraphDataURL = '${temporalGraphDataURL}';
 
@@ -50,7 +50,7 @@ $(document).ready(function () {
 <#include "entityComparisonBody.ftl">
 
 <#-- 
-Right now we include the error message by default becuae currently I could not devise any more smarted solution. By default
+Right now we include the error message by default because currently I could not devise any more smarted solution. By default
 the CSS of the #error-container is display:none; so it will be hidden unless explicitly commanded to be shown which we do in 
 via JavaScript.
 -->

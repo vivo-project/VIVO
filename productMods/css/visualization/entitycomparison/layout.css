@@ -13,6 +13,10 @@
     display: none;
 }
 
+#subject-parent-entity {
+	display: none;
+}
+
 #error-container {
     display: none;
 }
@@ -49,6 +53,7 @@ img.bar-count-icon {
 
 .legend-bar {
 	margin-bottom: 3px;
+	cursor:default;
 }
 
 .unknown-legend-bar {
