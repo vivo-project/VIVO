@@ -182,8 +182,14 @@ $(document).ready(function(){
                     <span class="numbers" style="width:40px;" id="firstGrant"></span>&nbsp;&nbsp;<span>First Grant</span></div>
                 <div class="investigator_stats" id="lGrant" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastGrant"></span>
                 &nbsp;&nbsp;<span>Last Grant</span></div>
-                <div id="incomplete-data">Note: This information is based solely on grants which have been loaded into the VIVO system. 
-                This may only be a small sample of the person's total work. </div>
+                <div id="incomplete-data">Note: This information is based solely on grants that have been loaded into the VIVO system. 
+                This may only be a small sample of the person's total work.<p></p><p></p>
+                <#if user.loggedIn > 
+                    Go to your profile page to enter additional details about your grants.
+                <#else> 
+                    Log in to enter additional details about your grants on your profile page.
+                </#if>
+                </div>
                 </div>
             </div>
         </div>

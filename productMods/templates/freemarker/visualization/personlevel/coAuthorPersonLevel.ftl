@@ -182,8 +182,14 @@ $(document).ready(function(){
                     <span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
                 <div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>
                 &nbsp;&nbsp;<span>Last Publication</span></div>
-                <div id="incomplete-data">Note: This information is based solely on publications which have been loaded into the VIVO system. 
-                This may only be a small sample of the person's total work. </div>
+                <div id="incomplete-data">Note: This information is based solely on publications that have been loaded into the VIVO system. 
+                This may only be a small sample of the person's total work.<p></p><p></p>
+                <#if user.loggedIn > 
+                    Go to your profile page to enter additional details about your publications.
+                <#else> 
+                    Log in to enter additional details about your publications on your profile page.
+                </#if>
+                </div>
                 </div>
             </div>
         </div>
