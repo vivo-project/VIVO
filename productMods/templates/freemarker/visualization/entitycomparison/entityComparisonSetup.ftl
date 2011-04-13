@@ -23,7 +23,8 @@
 <#assign temporalGraphDownloadCSVCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&labelField=label'>
 
 <#assign publicationParameter = {   "name": "publication",
-									"pluralName": "publications",
+                                    "pluralName": "publications",
+                                    "verbName": "published",
                                     "dropDownText": "by Publications", 
                                     "viewLink": "${organizationPublicationTemporalGraphURL}",
                                     "viewBaseLink": "${subOrganizationPublicationTemporalGraphCommonURL}",
@@ -32,7 +33,8 @@
                                     "value": "Publications" }>
                                     
 <#assign grantParameter = {   "name": "grant",
-							  "pluralName": "grants",
+                              "pluralName": "grants",
+                              "verbName": "granted",
                               "dropDownText": "by Grants", 
                               "viewLink": "${organizationGrantTemporalGraphURL}",
                               "viewBaseLink": "${subOrganizationGrantTemporalGraphCommonURL}", 
@@ -56,8 +58,8 @@ we will use rev 293 (dev build version) of the flot & excanvas files.
 <script language="JavaScript" type="text/javascript">
 
 var activitiesLabel = {
-    	singular: 'activity',
-    	plural: 'activities'
+        singular: 'activity',
+        plural: 'activities'
     };
     
 </script>

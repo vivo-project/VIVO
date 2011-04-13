@@ -678,9 +678,10 @@ function createLegendRow(entity, bottomDiv) {
     
     unknownBar.append(unknownBarInnerSpan);
     
+    barDiv.append(unknownBar);
     barDiv.append(knownBar);
     barDiv.append(currentYearBar);
-    barDiv.append(unknownBar);
+    
     
     var numAttributeText = $('<span>');
     numAttributeText.attr('class', 'bar-count-text');
@@ -712,18 +713,20 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
 	var combinedCount = calcSumOfComparisonParameter(entity);
 	
 	var sum = combinedCount.knownYearCount + combinedCount.unknownYearCount;
-    
+	
     var normalizedWidth = getNormalizedWidth(entity, sum);
     var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount - combinedCount.currentYearCount);
     
     if (combinedCount.unknownYearCount) {
     	var unknownNormalizedWidth = getNormalizedWidth(entity, combinedCount.unknownYearCount);
+    	
     } else {
     	var unknownNormalizedWidth = 0;
     }
     
     if (combinedCount.currentYearCount) {
     	var currentNormalizedWidth = getNormalizedWidth(entity, combinedCount.currentYearCount);
+    	
     } else {
     	var currentNormalizedWidth = 0;
     }
@@ -733,17 +736,26 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     divBar.children(".current-year-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", currentNormalizedWidth);
     divBar.children(".unknown-bar").children(".unknown-inner-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", unknownNormalizedWidth);
 
+    var countExplanation = (combinedCount.knownYearCount - combinedCount.currentYearCount) + ' of ' 
+	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + " in a completed year";
+
+    divBar.children(".known-bar").attr("title", countExplanation);
+    
+    countExplanation = combinedCount.currentYearCount + ' of ' 
+	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + ' in the current incomplete year (not charted above)';
+    
+    divBar.children(".current-year-bar").attr("title", countExplanation);
+    
+    countExplanation = combinedCount.unknownYearCount + ' of ' 
+    + sum + ' have an unknown ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year (not charted above)";
+    
+    divBar.children(".unknown-bar").attr("title", countExplanation);
+
     var entityLabelForLegend = divLabel.find(".entity-label-url");
     entityLabelForLegend.html(entity.label);
     entityLabelForLegend.ellipsis();
     entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity.entityURI) + "'></a>");
 
-    var countExplanation = 'VIVO knows the ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + ' year for ' 
-    							+ combinedCount.knownYearCount + ' out of ' 
-    							+ sum + ' of these ' + COMPARISON_PARAMETERS_INFO[currentParameter].pluralName;
-    
-    divBar.attr("title", countExplanation);
-    
     spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
 }
 
