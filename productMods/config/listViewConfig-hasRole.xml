@@ -16,13 +16,15 @@
                         ?startDateOnly
                         ?roleLabel 
                         ?activity ?activityName 
+                        ?activityLabel
                         ?dateTimeStart ?dateTimeEnd WHERE {
                         
             ?subject ?property ?role  
             
-            OPTIONAL { ?role core:roleIn ?activity . 
-                       ?activity rdfs:label ?activityName 
-            }
+            OPTIONAL {  ?role core:roleIn ?activity 
+                        LET (?activityName := afn:localname(?activity)) 
+                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+            }           
             <collated>
             OPTIONAL { ?role a ?subclass .
                        ?subclass rdfs:subClassOf core:Role 
