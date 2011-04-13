@@ -83,6 +83,11 @@ function initConstants() {
 				show : false
 			},
 			xaxis : {
+				/*
+				 * This is done to guarantee no-downward-trend on account of no content added for the 
+				 * current year.
+				 * */  
+				max : globalDateObject.getFullYear() - 1,
 				tickDecimals : 0,
 				tickSize : 10
 			},

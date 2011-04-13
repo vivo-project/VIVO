@@ -230,8 +230,8 @@ function init(graphContainer) {
 	
 	var defaultFlotOptions = {
 			xaxis : {
-				min : globalDateObject.getFullYear() - 9,
-				max : globalDateObject.getFullYear(),
+				min : globalDateObject.getFullYear() - 10,
+				max : globalDateObject.getFullYear() - 1,
 				tickDecimals : 0,
 				tickSize : 2
 			},
