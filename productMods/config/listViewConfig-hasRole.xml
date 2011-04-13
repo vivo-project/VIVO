@@ -11,11 +11,13 @@
         
         SELECT DISTINCT ?role
                         ?roleLabel 
-                        ?activity ?activityName 
+                        ?activity ?activityName
+                        ?activityLabel                        
                         ?dateTimeStart ?dateTimeEnd WHERE {
             ?subject ?property ?role 
-            OPTIONAL {  ?role core:roleIn ?activity .
-                        ?activity rdfs:label ?activityName 
+            OPTIONAL {  ?role core:roleIn ?activity 
+                        LET (?activityName := afn:localname(?activity)) 
+                        OPTIONAL { ?activity rdfs:label ?activityLabel }
             }
             OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
@@ -38,10 +40,12 @@
                         ?role 
                         ?roleLabel 
                         ?activity ?activityName 
+                        ?activityLabel
                         ?dateTimeStart ?dateTimeEnd WHERE {
             ?subject ?property ?role  
-            OPTIONAL { ?role core:roleIn ?activity . 
-                       ?activity rdfs:label ?activityName 
+            OPTIONAL {  ?role core:roleIn ?activity 
+                        LET (?activityName := afn:localname(?activity)) 
+                        OPTIONAL { ?activity rdfs:label ?activityLabel }
             }
             OPTIONAL { ?role a ?subclass .
                        ?subclass rdfs:subClassOf core:Role 
