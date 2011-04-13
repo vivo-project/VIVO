@@ -30,6 +30,8 @@ $(document).ready(function() {
         
         var selectedDataURL;
         
+        var oldParameter = currentParameter;
+        
         $.each(COMPARISON_PARAMETERS_INFO, function(index, parameter) {
         	
             if (parameter.value === selectedValue) {
@@ -58,12 +60,30 @@ $(document).ready(function() {
             success: function (data) {
     		
                 if (data.error) {
-                	options.bodyContainer.remove();
+                	options.bodyContainer.hide();
+                	
+                	/*
+                	 * When we reload data we would be reusing the already generated "error container" div. 
+                	 * So below is used to replace text taht is specific to the errors that would have caused
+                	 * due to the original parameters.
+                	 * */
+                	var alternateVisInfo = COMPARISON_PARAMETERS_INFO[currentParameter].value 
+                							+ " Temporal Graph&nbsp;"
+                							+ '<span id="noPubsOrGrants-span">|&nbsp;'
+                							+ '<a  href="' + COMPARISON_PARAMETERS_INFO[oldParameter].viewLink + '">'
+                							+ 'view ' + COMPARISON_PARAMETERS_INFO[oldParameter].pluralName + ' temporal graph</a></span>'
+                	
+                	options.errorContainer.find("#alternative-vis-info").html(alternateVisInfo);
+
+                	options.errorContainer
+                			.find("#comparison-parameter-unavailable-label")
+                			.text(COMPARISON_PARAMETERS_INFO[currentParameter].pluralName);
+                	
                 	options.errorContainer.show();
                 	options.responseContainer.unblock();
                 } else {
                 	options.bodyContainer.show();
-                	options.errorContainer.remove();
+                	options.errorContainer.hide();
                     temporalGraphProcessor.redoTemporalGraphRenderProcess(graphContainer, data);
                     options.responseContainer.unblock();
                 }
@@ -342,12 +362,12 @@ function getTemporalGraphData(temporalGraphDataURL,
 	        success: function (data) {
 	
 	            if (data.error) {
-	            	graphBodyDIV.remove();
+	            	graphBodyDIV.hide();
 	            	errorBodyDIV.show();
 	            	visContainerDIV.unblock();
 	            } else {
 	            	graphBodyDIV.show();
-	            	errorBodyDIV.remove();
+	            	errorBodyDIV.hide();
 	                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
 	                visContainerDIV.unblock();
 	            }

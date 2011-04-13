@@ -71,7 +71,7 @@
                 -->
                 
                 <entry key="entity_comparison">
-                    <ref bean="entity_comparison"></ref>
+                    <ref bean="pub_temporal"></ref>
                 </entry>
                 
                                 
@@ -84,7 +84,7 @@
 				</entry>
 				
 				<entry key="entity_grant_count">
-					<ref bean="entity_grant_count"></ref>
+					<ref bean="grant_temporal"></ref>
 				</entry>	
 				                                
                 <entry key="grant_temporal">
