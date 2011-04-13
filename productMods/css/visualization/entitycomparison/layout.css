@@ -14,7 +14,7 @@
 }
 
 #subject-parent-entity {
-	display: none;
+    display: none;
 }
 
 #error-container {
@@ -25,15 +25,21 @@
     float: right;
 }
 
+.current-year-bar,
 .known-bar {
-	display: inline-block;
-	cursor: help;
+    display: inline-block;
+    cursor: help;
+}
+
+.current-year-bar {
+    opacity: 0.5;
+    filter:alpha(opacity=50);
 }
 
 .unknown-inner-bar {
-	opacity: 0.5;
-	filter:alpha(opacity=50);
-	display: inline-block;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+    display: inline-block;
 }
 
 .bar-count-text {
@@ -42,36 +48,41 @@
 }
 
 img.bar-count-icon {
-	vertical-align: super;
-	cursor: help;
+    vertical-align: super;
+    cursor: help;
 }
 
 .unknown-bar {
-	background: url("../../../images/visualization/diagonal.png") repeat scroll 50% 50% #666666;
-	cursor: help;
+    background: url("../../../images/visualization/diagonal.png") repeat scroll 50% 50% #666666;
+    cursor: help;
 }
 
 .legend-bar {
-	margin-bottom: 3px;
-	cursor:default;
+    margin-bottom: 3px;
+    cursor:default;
+}
+
+.current-year-legend-bar {
+    display: inline-block;
 }
 
 .unknown-legend-bar {
-	background: url("../../../images/visualization/legend-unknown-bar-dark.png") repeat #B7B7B7;
+    background: url("../../../images/visualization/legend-unknown-bar-dark.png") repeat #B7B7B7;
 }
 
 
+#legend-current-year-bar-text,
 #legend-known-bar-text,
 #legend-unknown-bar-text {
-	font-size: 0.75em;
+    font-size: 0.75em;
 }
 
 span#copy-vis-viewlink {
-	display: none;
+    display: none;
 }
 
 img#copy-vis-viewlink-icon {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 a.temporalGraphLinks {

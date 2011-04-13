@@ -224,8 +224,9 @@ function init(graphContainer) {
 	$("#comparisonParameter").text("Total Number of " + optionSelected);
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
-	$('#legend-known-bar-text').text("Known " + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year");
-	$('#legend-unknown-bar-text').text("Unknown " + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year");
+	$('#legend-known-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with known year");
+	$('#legend-current-year-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " from current incomplete year");
+	$('#legend-unknown-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + "with unknown year");
 	
 	
 	var defaultFlotOptions = {
@@ -512,6 +513,7 @@ function calcSumOfComparisonParameter(entity) {
 
 	var known = 0;
 	var unknown = 0;
+	var currentYear = 0;
 
 	$.each(entity.data, function(index, data){
 		
@@ -519,15 +521,18 @@ function calcSumOfComparisonParameter(entity) {
 			unknown += this[1];
 		} else {
 			known += this[1];
+			
+			if (this[0] === globalDateObject.getFullYear()) {
+				currentYear += this[1];
+			}
 		}
-		
-		
 		
 	});
 
 	sum = {
 		knownYearCount: known,
-		unknownYearCount: unknown
+		unknownYearCount: unknown,
+		currentYearCount: currentYear
 	};
 	
 	return sum;
@@ -660,6 +665,9 @@ function createLegendRow(entity, bottomDiv) {
     
     var knownBar = $('<span>');
     knownBar.attr('class', 'known-bar');
+    
+    var currentYearBar = $('<span>');
+    currentYearBar.attr('class', 'current-year-bar');
 
     var unknownBar = $('<span>');
     unknownBar.attr('class', 'unknown-bar');
@@ -671,6 +679,7 @@ function createLegendRow(entity, bottomDiv) {
     unknownBar.append(unknownBarInnerSpan);
     
     barDiv.append(knownBar);
+    barDiv.append(currentYearBar);
     barDiv.append(unknownBar);
     
     var numAttributeText = $('<span>');
@@ -705,7 +714,7 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
 	var sum = combinedCount.knownYearCount + combinedCount.unknownYearCount;
     
     var normalizedWidth = getNormalizedWidth(entity, sum);
-    var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount);
+    var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount - combinedCount.currentYearCount);
     
     if (combinedCount.unknownYearCount) {
     	var unknownNormalizedWidth = getNormalizedWidth(entity, combinedCount.unknownYearCount);
@@ -713,8 +722,15 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
     	var unknownNormalizedWidth = 0;
     }
     
+    if (combinedCount.currentYearCount) {
+    	var currentNormalizedWidth = getNormalizedWidth(entity, combinedCount.currentYearCount);
+    } else {
+    	var currentNormalizedWidth = 0;
+    }
+    
     divBar.css("width", normalizedWidth + 5);
     divBar.children(".known-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", knownNormalizedWidth);
+    divBar.children(".current-year-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", currentNormalizedWidth);
     divBar.children(".unknown-bar").children(".unknown-inner-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", unknownNormalizedWidth);
 
     var entityLabelForLegend = divLabel.find(".entity-label-url");

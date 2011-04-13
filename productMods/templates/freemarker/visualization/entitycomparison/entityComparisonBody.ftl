@@ -2,11 +2,11 @@
 
 <div id="body">
 
-		<div id="subject-parent-entity">
-			<a id="subject-parent-entity-profile-url" href="#"></a>&nbsp;
-			<a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphSmallIcon}" width="15px" height="15px"/></a>
-		</div>
-		
+        <div id="subject-parent-entity">
+            <a id="subject-parent-entity-profile-url" href="#"></a>&nbsp;
+            <a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphSmallIcon}" width="15px" height="15px"/></a>
+        </div>
+        
         <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a>&nbsp;
         <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system" /></span></h2>
         
@@ -97,7 +97,8 @@
             </div>
             
             <p class="displayCounter">Legend</p>
-            <span style="background-color: #B7B7B7; width: 25px;" class="known-bar legend-bar">&nbsp;</span> <span id="legend-known-bar-text">Known ${currentParameterObject.name} year</span><br />
-            <span class="legend-bar unknown-legend-bar"><span style="width: 25px;" class="unknown-inner-bar">&nbsp;</span></span> <span id="legend-unknown-bar-text">Unknown ${currentParameterObject.name} year</span>
+            <span style="background-color: #A8A8A8; width: 25px;" class="known-bar legend-bar">&nbsp;</span> <span id="legend-known-bar-text">${currentParameterObject.name} with known year</span><br />
+            <span style="background-color: #CDCDCD; width: 25px;" class="current-year-legend-bar legend-bar">&nbsp;</span> <span id="legend-current-year-bar-text">${currentParameterObject.name} from current incomplete year</span><br />
+            <span class="legend-bar unknown-legend-bar"><span style="width: 25px;" class="unknown-inner-bar">&nbsp;</span></span> <span id="legend-unknown-bar-text">${currentParameterObject.name} with unknown year</span>
         </div>      
 </div>
