@@ -171,7 +171,7 @@ $(document).ready(function(){
                 <h4><span id="authorName" class="neutral_author_name">&nbsp;</span></h4>
                 
                 <em id="profileMoniker" class="moniker"></em>
-                <div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
+                <div id="profile-links"><a href="#" id="profileUrl">VIVO profile</a></div>
 
                 <div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
                 <span class="author_stats_text">Publication(s)</span></div>

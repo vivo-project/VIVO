@@ -171,7 +171,7 @@ $(document).ready(function(){
                 
                 <em id="profileMoniker" class="moniker"></em>
                 
-                <div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coInvestigationVisUrl">Co-investigator network</a></div> 
+                <div id="profile-links"><a href="#" id="profileUrl">VIVO profile</a></div> 
 
                 <div class="investigator_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
                 <span class="investigator_stats_text">Grant(s)</span></div>

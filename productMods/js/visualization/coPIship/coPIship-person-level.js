@@ -46,16 +46,33 @@ function renderStatsOnNodeClicked(json){
 			$('#num_works > .investigator_stats_text').text(works);
 			$('#num_investigators > .investigator_stats_text').text(persons);
 			
+			var vivoProfileURL = $("a#profileUrl").detach();
+			
+			$("#profile-links").empty().append(vivoProfileURL);
+			
 		} else {
 
 			$("#investigatorName").addClass('neutral_investigator_name').removeClass('investigator_name');
 			$('#num_works > .investigator_stats_text').text('Joint ' + works);
 			$('#num_investigators > .investigator_stats_text').text('Joint ' + persons);
 			
+
+			if ($("#coInvestigationVisUrl").length > 0) {
+				
+				$("#coInvestigationVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
+				
+			} else {
+				
+				$("#profile-links")
+				.append(" | ")
+				.append('<a href="' + getWellFormedURLs(obj.url, relation) 
+							+ '" id="coInvestigationVisUrl">Co-investigator network</a>');	
+			} 
+			
 		}
 		
 		$("#profileUrl").attr("href", getWellFormedURLs(obj.url, "profile"));
-		$("#coInvestigationVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
+
 		processProfileInformation("investigatorName", 
 				"profileMoniker",
 				"profileImage",

@@ -44,16 +44,31 @@ function renderStatsOnNodeClicked(json){
 			$('#num_works > .author_stats_text').text(works);
 			$('#num_authors > .author_stats_text').text(persons);
 			
+			var vivoProfileURL = $("a#profileUrl").detach();
+			
+			$("#profile-links").empty().append(vivoProfileURL);
+			
 		} else {
 
 			$("#authorName").addClass('neutral_author_name').removeClass('author_name');
 			$('#num_works > .author_stats_text').text('Joint ' + works);
 			$('#num_authors > .author_stats_text').text('Joint ' + persons);
-			
+
+			if ($("#coAuthorshipVisUrl").length > 0) {
+				
+				$("#coAuthorshipVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
+				
+			} else {
+				
+				$("#profile-links")
+				.append(" | ")
+				.append('<a href="' + getWellFormedURLs(obj.url, relation) 
+							+ '" id="coAuthorshipVisUrl">Co-author network</a>');	
+			} 
 		}
 		
 		$("#profileUrl").attr("href", getWellFormedURLs(obj.url, "profile"));
-		$("#coAuthorshipVisUrl").attr("href", getWellFormedURLs(obj.url, relation));
+		
 		processProfileInformation("authorName", 
 				"profileMoniker",
 				"profileImage",
@@ -63,7 +78,7 @@ function renderStatsOnNodeClicked(json){
 		
 		
 
-	} else{
+	} else {
 		$("#profileUrl").attr("href","#");
 		$("#coAuthorshipVisUrl").attr("href","#");
 	}
