@@ -19,16 +19,7 @@ public class JsonObject {
 	private String entityURI;
 	private String visMode;
 	private List<String> organizationType = new ArrayList<String>();
-	private List<String> stopWords = new ArrayList<String>();
 	
-	public List<String> getStopWords() {
-		return stopWords;
-	}
-
-	public void setStopWords(List<String> stopWords) {
-		this.stopWords = stopWords;
-	}
-
 	public List<String> getOrganizationTypes() {
 		return organizationType;
 	}

@@ -1040,8 +1040,6 @@ function removeCheckBoxFromGlobalSet(checkbox){
  */	
 function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
-	resetStopWordCount();
-	
 	var table = $('<table>');
 	table.attr('cellpadding', '0');
 	table.attr('cellspacing', '0');
@@ -1165,8 +1163,6 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
  */	
 function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 
-	resetStopWordCount();
-	
 	/*
 	 * In case no entities are selected, we want that redraw should happen so that top entities are 
 	 * pre-selected.
@@ -1246,24 +1242,14 @@ function updateRowHighlighter(linkedCheckBox){
 	linkedCheckBox.closest("tr").removeClass('datatablerowhighlight');
 }
 
+function removeStopWords(val) {
+	
+	return $.map(val.organizationType, function(type, i){
 
-function resetStopWordCount(){
-	stopWordsToCount["Person"] = 0;
-	stopWordsToCount["Organization"] = 0;
-}
-
-function removeStopWords(val){
-	var typeStringWithoutStopWords = "";
-	$.each(val.organizationType, function(index, value){
-		if(value == "Person"){
-			stopWordsToCount["Person"]++;
-		}else if(value == "Organization"){
-			stopWordsToCount["Organization"]++;
-		}else{
-			typeStringWithoutStopWords += ', '+ value; 
+		if ($.inArray(type, STOP_WORDS_FOR_TABLE) < 0) {
+			return (type);
 		}
-	});
-	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
+	}).join(", ");
 }
 
 function setEntityLevel(entityLevel){

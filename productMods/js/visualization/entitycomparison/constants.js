@@ -38,7 +38,7 @@ var year;
 
 var colors, prevColor, colorToAssign, 
 	colorToRemove, renderedObjects, URIToEntityRecord,
-	setOfLabels, URIToCheckedEntities, stopWordsToCount;
+	setOfLabels, URIToCheckedEntities, STOP_WORDS_FOR_TABLE;
 
 var graphContainer;
 var tableDiv;
@@ -69,8 +69,11 @@ function initConstants() {
 	URIToEntityRecord = {};
 	setOfLabels = [];
 	URIToCheckedEntities = {};
-	stopWordsToCount = {};
+	
+	STOP_WORDS_FOR_TABLE = ["Person", "Organization", "Agent"];
+	
 	lastCachedAtDateTimes = [];
+	
 	//options for Flot
 	FlotOptions = {
 			legend : {
