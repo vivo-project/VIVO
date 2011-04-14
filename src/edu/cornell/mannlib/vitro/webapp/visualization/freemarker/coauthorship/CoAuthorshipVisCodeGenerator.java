@@ -71,7 +71,13 @@ public class CoAuthorshipVisCodeGenerator {
 		SparklineData sparklineData = new SparklineData();
 
 		int numOfYearsToBeRendered = 0;
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		
+		/*
+		 * It was decided that to prevent downward curve that happens if there are no publications 
+		 * in the current year seems a bit harsh, so we consider only publications from the last 10
+		 * complete years. 
+		 * */
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR) - 1;
 		int shortSparkMinYear = currentYear 
 									- VisConstants.MINIMUM_YEARS_CONSIDERED_FOR_SPARKLINE 
 									+ 1;
