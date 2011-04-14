@@ -226,7 +226,7 @@ function init(graphContainer) {
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
 	$('#legend-known-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with known year");
 	$('#legend-current-year-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " from current incomplete year");
-	$('#legend-unknown-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + "with unknown year");
+	$('#legend-unknown-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with unknown year");
 	
 	
 	var defaultFlotOptions = {
