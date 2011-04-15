@@ -21,8 +21,33 @@
     display: none;
 }
 
+/*
+This is for the overlay that happens when you change the parameter. Somehow the top
+for the message is getting set to 50%, hence we need to override it here.
+*/
+.blockElement {
+	top: 10px !important;	
+}
+
 .easy-deselect-label a.temporal-vis-url {
     float: right;
+}
+
+#people-organizations-filter {
+	margin-bottom: 9px;
+	display: none;
+}
+
+.filter-option {
+	color: #2485AE;
+	cursor: pointer;
+	/*padding-right: 5px;*/
+	text-decoration: underline;
+}
+
+.active-filter {
+	color: #595B5B;
+	text-decoration: none;
 }
 
 .current-year-bar,

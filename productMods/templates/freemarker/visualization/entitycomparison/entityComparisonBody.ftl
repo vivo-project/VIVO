@@ -61,7 +61,12 @@
                     </div>
                 
                 </div>
-                <h3>Who do you want to compare?</h3>
+                <h3>What do you want to compare?</h3>
+                <div id="people-organizations-filter">
+                	<span id="organizations-filter" class="filter-option active-filter">Organizations</span>
+                	<span id="people-filter" class="filter-option">People</span>
+                </div>
+                
                 <div id="paginatedTable"></div>
                 <div id="paginated-table-footer">
                 <a id="csv" href="${temporalGraphDownloadFileLink}" class="temporalGraphLinks">Save All as CSV</a>
@@ -97,8 +102,8 @@
             </div>
             
             <p class="displayCounter">Legend</p>
+            <span class="legend-bar unknown-legend-bar"><span style="width: 25px; margin-bottom:3px;" class="unknown-inner-bar">&nbsp;</span></span> <span id="legend-unknown-bar-text">${currentParameterObject.name} with unknown year</span><br />
             <span style="background-color: #A8A8A8; width: 25px;" class="known-bar legend-bar">&nbsp;</span> <span id="legend-known-bar-text">${currentParameterObject.name} with known year</span><br />
-            <span style="background-color: #CDCDCD; width: 25px;" class="current-year-legend-bar legend-bar">&nbsp;</span> <span id="legend-current-year-bar-text">${currentParameterObject.name} from current incomplete year</span><br />
-            <span class="legend-bar unknown-legend-bar"><span style="width: 25px;" class="unknown-inner-bar">&nbsp;</span></span> <span id="legend-unknown-bar-text">${currentParameterObject.name} with unknown year</span>
+            <span style="background-color: #CDCDCD; width: 25px;" class="current-year-legend-bar legend-bar">&nbsp;</span> <span id="legend-current-year-bar-text">${currentParameterObject.name} from current incomplete year</span>
         </div>      
 </div>

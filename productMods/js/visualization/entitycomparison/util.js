@@ -170,7 +170,7 @@
             }
         }
     };
-
+    
     $.fn.ellipsis = function () {
         return this.each(function () {
             var el = $(this);
@@ -208,6 +208,35 @@
 })(jQuery);
 
 
+var DatatableCustomFilters = {
+	
+	peopleOrOrganizations: function(oSettings, aData, iDataIndex) {
+
+		/*
+		 * We know for a fact that the unique identifier for each row is the value for the checkbox, 
+		 * that is found in the first column for each row.
+		 * */
+		var row_data = aData[0];
+		var entityURI = $(row_data).filter("input[type=checkbox]").val();
+		
+		var currentEntityVisMode = URIToEntityRecord[entityURI].visMode;
+
+		if (currentEntityVisMode === "ORGANIZATION" 
+				&& temporalGraphProcessor.currentSelectedFilter === "ORGANIZATIONS") {
+			return true;
+		} else if (currentEntityVisMode === "PERSON" 
+			&& temporalGraphProcessor.currentSelectedFilter === "PEOPLE") {
+			return true;
+		} else {
+//			console.log(entityURI);
+			return false;
+		}
+		
+		return true;
+	}	
+		
+};
+
 /**
 
  * init sets some initial options for the default graph. i.e for when the page
@@ -224,10 +253,9 @@ function init(graphContainer) {
 	$("#comparisonParameter").text("Total Number of " + optionSelected);
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
+	$('#legend-unknown-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with unknown year");
 	$('#legend-known-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with known year");
 	$('#legend-current-year-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " from current incomplete year");
-	$('#legend-unknown-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with unknown year");
-	
 	
 	var defaultFlotOptions = {
 			xaxis : {
@@ -371,30 +399,23 @@ function stuffZerosIntoLineGraphs(jsonObject, year) {
 	
 	$.each(jsonObject,
 			function(key, val) {
-				var position = normalizedYearRange.normalizedMinYear, i = 0;
-				
-				//console.log(key, val, position, (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1);
+		var position = normalizedYearRange.normalizedMinYear, i = 0;
 
-				for (i = 0; i < normalizedYearRange.normalizedRange + 1; i++) {
+		for (i = 0; i < normalizedYearRange.normalizedRange + 1; i++) {
 
-					//console.log("val.data[i]", val.data[i]);
-					
-					if (val.data[i]) {
+			if (val.data[i]) {
 
-						if (val.data[i][0] != position
-								&& position <= normalizedYearRange.normalizedMaxYear) {
-							val.data.splice(i, 0, [ position, 0 ]);
-						}
-					}
-
-					else {
-						val.data.push( [ position, 0 ]);
-					}
-					position++;
+				if (val.data[i][0] != position
+						&& position <= normalizedYearRange.normalizedMaxYear) {
+					val.data.splice(i, 0, [ position, 0 ]);
 				}
-			});
-	
-	//console.log("after stuffing", jsonObject);
+			}
+			else {
+				val.data.push( [ position, 0 ]);
+			}
+			position++;
+		}
+	});
 }
 /**
  * During runtime, when the user checks/unchecks a checkbox, the zeroes have to
@@ -473,7 +494,9 @@ function calcMaxOfComparisonParameter(allEntities) {
 	var validCountsInData = new Array();
 	
 	$.each(allEntities, function(key, currentEntity) {
-		combinedCount = calcSumOfComparisonParameter(currentEntity);
+		
+		combinedCount = currentEntity.activityCount;
+		
 		validCountsInData.push(combinedCount.knownYearCount + combinedCount.unknownYearCount);
 	});
 
@@ -501,41 +524,6 @@ function calcMaxWithinComparisonParameter(jsonObject){
 	});
 	
 	return Math.max.apply(Math, validCountsInData);
-}
-
-/**
- * This is used to find out the sum of all the counts of a particular entity. This is
- * especially useful to render the bars below the line graph where it doesnt matter if
- * a count has any associated year to it or not.
- * @returns sum{values}.
- */
-function calcSumOfComparisonParameter(entity) {
-
-	var known = 0;
-	var unknown = 0;
-	var currentYear = 0;
-
-	$.each(entity.data, function(index, data){
-		
-		if (this[0] === -1) {
-			unknown += this[1];
-		} else {
-			known += this[1];
-			
-			if (this[0] === globalDateObject.getFullYear()) {
-				currentYear += this[1];
-			}
-		}
-		
-	});
-
-	sum = {
-		knownYearCount: known,
-		unknownYearCount: unknown,
-		currentYearCount: currentYear
-	};
-	
-	return sum;
 }
 
 /**
@@ -710,7 +698,7 @@ function createLegendRow(entity, bottomDiv) {
 
 function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
 
-	var combinedCount = calcSumOfComparisonParameter(entity);
+	var combinedCount = entity.activityCount;
 	
 	var sum = combinedCount.knownYearCount + combinedCount.unknownYearCount;
 	
@@ -1040,6 +1028,13 @@ function removeCheckBoxFromGlobalSet(checkbox){
  */	
 function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
+//	console.log(processJSONData.currentEntityLevel);
+	
+	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS & PEOPLE") {
+		$.fn.dataTableExt.afnFiltering.push(DatatableCustomFilters.peopleOrOrganizations);
+	}
+		
+	
 	var table = $('<table>');
 	table.attr('cellpadding', '0');
 	table.attr('cellspacing', '0');
@@ -1095,7 +1090,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 		
 		var publicationCountTD =  $('<td>');
 		
-		var combinedCount = calcSumOfComparisonParameter(val);
+		var combinedCount = val.activityCount;
 		
 		publicationCountTD.html(combinedCount.knownYearCount + combinedCount.unknownYearCount);
 		
@@ -1148,11 +1143,7 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
 		entityListTable.fnFilter("");
 	});
 	
-	/*
-	var filterInfo = $(".filterInfo").detach();
-	$("#infoContainer").append(filterInfo);
-	*/
-	
+	return entityListTable;
 }
 
 
@@ -1162,12 +1153,23 @@ function prepareTableForDataTablePagination(jsonData, dataTableParams){
  * returned is used to populate the pagination table.
  */	
 function reloadDataTablePagination(preselectedEntityURIs, jsonData){
-
-	/*
-	 * In case no entities are selected, we want that redraw should happen so that top entities are 
-	 * pre-selected.
-	 * */
-	var shouldRedraw = preselectedEntityURIs.length ? false : true;
+	
+	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS & PEOPLE") {
+		
+		/*
+		 * This will make sure that duplicate filters are not added.
+		 * */
+		if($.inArray(DatatableCustomFilters.peopleOrOrganizations, $.fn.dataTableExt.afnFiltering) < 0) {
+			$.fn.dataTableExt.afnFiltering.push(DatatableCustomFilters.peopleOrOrganizations);
+		}
+	} else {
+		
+		var indexOfPeopleOrOrganizationFilter = $.inArray(DatatableCustomFilters.peopleOrOrganizations, $.fn.dataTableExt.afnFiltering);
+		
+		if (indexOfPeopleOrOrganizationFilter >= 0) {
+			$.fn.dataTableExt.afnFiltering.splice(indexOfPeopleOrOrganizationFilter, 1);
+		}
+	}
 	
 	var currentDataTable = $('#datatable').dataTable();
 	
@@ -1188,7 +1190,8 @@ function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 
 		var labelTD =  entity.label;
 		
-		var combinedCount = calcSumOfComparisonParameter(entity);
+		var combinedCount = entity.activityCount;
+		
 		var publicationCountTD = combinedCount.knownYearCount + combinedCount.unknownYearCount;
 		
 		var entityTypeTD =  removeStopWords(entity);
@@ -1201,13 +1204,7 @@ function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 		/*
 		 * Dont redraw the table, so no sorting, no filtering.
 		 * */
-		currentDataTable.fnAddData(newRow, shouldRedraw);
-		
-		/*
-		 * Dont redraw the table, so no sorting, no filtering.
-		 * */
-		currentDataTable.fnDraw(shouldRedraw);
-
+		currentDataTable.fnAddData(newRow, false);
 	}
 	
 	/*
@@ -1236,6 +1233,9 @@ function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 	 * We should change to the first page so that checkboxes are selectable.
 	 * */
 	currentDataTable.fnPageChange('first');
+	
+	
+	return currentDataTable;
 }
 
 function updateRowHighlighter(linkedCheckBox){
@@ -1256,36 +1256,6 @@ function setEntityLevel(entityLevel){
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase()).css('font-style', 'italic');
 	$('#entityHeader').text(entityLevel).css('font-weight', 'bold');
 	$('#headerText').css("color", "#2485ae");
-}
-
-function getEntityVisMode(jsonData){
-	
-	var entityLevels = new Array();
-	
-	$.each(jsonData, function(index, val) {
-		if (val.visMode ==  "PERSON"){
-			entityLevels.push("People");
-		} else {
-			entityLevels.push("Organizations");
-		}
-	});
-	
-	var uniqueEntityLevels = $.unique(entityLevels);
-
-	/*
-	 * This case is when organizations & people are mixed because both are directly attached
-	 * to the parent organization. 
-	 * */
-	if (uniqueEntityLevels.length > 1) {
-		entityLevel = "Organizations & People";
-	} else if (uniqueEntityLevels.length === 1) {
-		entityLevel = uniqueEntityLevels[0]; 
-	} else {
-		/* To provide graceful degradation set entity level to a default error message.*/
-		entitylevel = "ENTITY LEVEL UNDEFINED ERROR";
-	}
-	
-	return entityLevel;
 }
 
 function toCamelCase(string){

@@ -17,8 +17,6 @@ $(document).ready(function() {
     graphContainer = $("#graphContainer");
     tableDiv = $('#paginatedTable');
     
-    //temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, jsonString);
-    
     /*
      * When the intra-entity parameters are clicked,
      * update the status accordingly.   
@@ -52,7 +50,7 @@ $(document).ready(function() {
     		};
     	
     	setupLoadingScreen(options.responseContainer);
-    		
+    	
     	$.ajax({
             url: options.dataURL,
             dataType: "json",
@@ -82,13 +80,16 @@ $(document).ready(function() {
                 	options.errorContainer.show();
                 	options.responseContainer.unblock();
                 } else {
+                	
                 	options.bodyContainer.show();
                 	options.errorContainer.hide();
                     temporalGraphProcessor.redoTemporalGraphRenderProcess(graphContainer, data);
                     options.responseContainer.unblock();
+                    
                 }
             }
         });
+    	
     });
     
 });
@@ -153,6 +154,27 @@ $("#copy-vis-viewlink-icon").live('click', function() {
 	
 });
 
+$(".filter-option").live('click', function() {
+	
+	if (!$(this).hasClass('active-filter')) {
+		
+		if ($(this).attr('id') === 'people-filter') {
+			
+			$("#organizations-filter").removeClass('active-filter');
+			temporalGraphProcessor.currentSelectedFilter = "PEOPLE";
+			
+		} else if ($(this).attr('id') === 'organizations-filter') {
+			
+			$("#people-filter").removeClass('active-filter');
+			temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
+		} 
+		
+		$(this).addClass('active-filter');
+		
+		temporalGraphProcessor.dataTable.fnDraw();
+	}
+});
+
 function getCurrentParameterVisViewLink() {
 	return location.protocol + "//" + location.host + COMPARISON_PARAMETERS_INFO[currentParameter].viewLink;
 }
@@ -200,8 +222,53 @@ function performEntityCheckboxClickedRedrawActions() {
 var processJSONData = {
 		
 	isParentEntityAvailable: false,	
+	
+	currentEntityLevel: "Organizations",
+	
+
+	/**
+	 * This is used to find out the sum of all the counts of a particular entity. This is
+	 * especially useful to render the bars below the line graph where it doesnt matter if
+	 * a count has any associated year to it or not.
+	 * @returns sum{values}.
+	 */
+	aggregateActivityCounts: function(allActivities) {
+
+		var known = 0;
+		var unknown = 0;
+		var currentYear = 0;
+
+		$.each(allActivities, function(index, data){
+			
+			if (this[0] === -1) {
+				unknown += this[1];
+			} else {
+				known += this[1];
+				
+				if (this[0] === globalDateObject.getFullYear()) {
+					currentYear += this[1];
+				}
+			}
+			
+		});
+
+		sum = {
+			knownYearCount: known,
+			unknownYearCount: unknown,
+			currentYearCount: currentYear
+		};
 		
+		return sum;
+	},
+	
 	setupGlobals: function(jsonContent) {
+		
+		var entityLevels = new Array();
+		var entityActivityCount = {
+			PERSON: 0,
+			ORGANIZATION: 0
+		};
+		
 		$.each(jsonContent, function (index, val) {
 	        
 	    	/*
@@ -215,6 +282,29 @@ var processJSONData = {
 		        if (val.lastCachedAtDateTime) {
 		        	lastCachedAtDateTimes[lastCachedAtDateTimes.length] = val.lastCachedAtDateTime;
 		        }
+		        
+		        /*
+		         * Setup value to be used to determine whether to show people or organizations filter,
+		         * by default.
+		         * */
+		        var activityCountInfoForEntity = processJSONData.aggregateActivityCounts(val.data);
+		        
+		        URIToEntityRecord[val.entityURI].activityCount = activityCountInfoForEntity;
+		    	
+		    	entityActivityCount[val.visMode] += 
+		    		activityCountInfoForEntity.knownYearCount 
+	    				+ activityCountInfoForEntity.unknownYearCount;
+		    	
+		    	/*
+		    	 * Setup the entity level
+		    	 * */
+		    	if (val.visMode ===  "PERSON"){
+					entityLevels.push("People");
+				} else if (val.visMode ===  "ORGANIZATION"){
+					entityLevels.push("Organizations");
+				}
+		    	
+		        
 	    	} else if (val.subjectEntityLabel) {
 	
 	    		/*
@@ -230,12 +320,47 @@ var processJSONData = {
 	    			processJSONData.isParentEntityAvailable = true;
 	    		});
 	    	}
+	    	
 	    });
 		
+		if (entityActivityCount.ORGANIZATION >= entityActivityCount.PERSON) {
+			
+			temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
+			
+			$("#organizations-filter").addClass("active-filter");
+			$("#people-filter").removeClass("active-filter");
+			
+			
+		} else {
+			
+			temporalGraphProcessor.currentSelectedFilter = "PEOPLE";
+			
+			$("#people-filter").addClass("active-filter");
+			$("#organizations-filter").removeClass("active-filter");
+			
+		}
+
 		if (processJSONData.isParentEntityAvailable) {
 			$("#subject-parent-entity").show();
 		} else {
 			$("#subject-parent-entity").hide();
+		}
+		
+		var uniqueEntityLevels = $.unique(entityLevels);
+		
+		/*
+		 * This case is when organizations & people are mixed because both are directly attached
+		 * to the parent organization. 
+		 * */
+		if (uniqueEntityLevels.length > 1) {
+			processJSONData.currentEntityLevel = "Organizations & People";
+			$("#people-organizations-filter").show();
+		} else if (uniqueEntityLevels.length === 1) {
+			processJSONData.currentEntityLevel = uniqueEntityLevels[0];
+			$("#people-organizations-filter").hide();
+		} else {
+			/* To provide graceful degradation set entity level to a default error message.*/
+			processJSONData.currentEntityLevel = "ENTITY LEVEL UNDEFINED ERROR";
 		}
 	},	
 	
@@ -248,8 +373,9 @@ var processJSONData = {
 	    
 		processJSONData.setupGlobals(jsonData);
 		
-	    prepareTableForDataTablePagination(jsonData, dataTableParams);
-	    setEntityLevel(getEntityVisMode(jsonData));
+		temporalGraphProcessor.dataTable = prepareTableForDataTablePagination(jsonData, dataTableParams);
+	    
+	    setEntityLevel(processJSONData.currentEntityLevel);
 	    
 	    entityCheckboxOperatedOnEventListener();
 	},
@@ -263,8 +389,9 @@ var processJSONData = {
 	    
 		processJSONData.setupGlobals(jsonData);
 		
-	    reloadDataTablePagination(preselectedEntityURIs, jsonData);
-	    setEntityLevel(getEntityVisMode(jsonData));
+		temporalGraphProcessor.dataTable = reloadDataTablePagination(preselectedEntityURIs, jsonData);
+	    
+	    setEntityLevel(processJSONData.currentEntityLevel);
 	    
 	    $("a#csv").attr("href", csvDownloadURL);
 	}
@@ -299,6 +426,8 @@ function entityCheckboxOperatedOnEventListener() {
 function renderTemporalGraphVisualization(parameters) {
 	
     setupLoadingScreen(parameters.responseContainer);
+    
+    //return;
 
     getTemporalGraphData(parameters.dataURL,
     					 parameters.bodyContainer,
@@ -319,8 +448,8 @@ function setupLoadingScreen(visContainerDIV) {
         
     $.blockUI.defaults.css.width = '500px';
     $.blockUI.defaults.css.border = '0px';
-    $.blockUI.defaults.css.top = '1%';
-	
+    $.blockUI.defaults.css.top = '10px';
+    
     visContainerDIV.block({
         message: '<div id="loading-data-container"><h3><img id="data-loading-icon" src="' + loadingImageLink 
         			+ '" />&nbsp;Loading data for <i>' 
@@ -366,10 +495,12 @@ function getTemporalGraphData(temporalGraphDataURL,
 	            	errorBodyDIV.show();
 	            	visContainerDIV.unblock();
 	            } else {
+	            	
 	            	graphBodyDIV.show();
 	            	errorBodyDIV.hide();
 	                temporalGraphProcessor.initiateTemporalGraphRenderProcess(graphContainer, data);
 	                visContainerDIV.unblock();
+	                
 	            }
 	        },
 	       complete: function() {
@@ -431,6 +562,10 @@ var entitySelector = {
 temporalGraphProcessor = {
 		
 	loadingScreenTimeout: '',
+	
+	currentSelectedFilter: 'ORGANIZATIONS',
+	
+	dataTable: '',
 		
 	initiateTemporalGraphRenderProcess: function(givenGraphContainer, jsonData) {
 		
@@ -519,6 +654,12 @@ temporalGraphProcessor = {
                 entitySelector.manuallyTriggerSelectOnDataTableCheckbox($(this));
 	        });
         }
+        
+        /*
+         * Table has to be redrawn now & not later to avoid checkboxes not being selected, which is
+         * caused if they are not visible at that point of time. 
+         * */
+        temporalGraphProcessor.dataTable.fnDraw();
         
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
         	
