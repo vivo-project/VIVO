@@ -703,42 +703,56 @@ function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
 	var sum = combinedCount.knownYearCount + combinedCount.unknownYearCount;
 	
     var normalizedWidth = getNormalizedWidth(entity, sum);
-    var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount - combinedCount.currentYearCount);
+    
+    divBar.css("width", normalizedWidth + 5);
+    
+    if (combinedCount.knownYearCount - combinedCount.currentYearCount) {
+    
+    	var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount - combinedCount.currentYearCount);
+        
+        var countExplanation = (combinedCount.knownYearCount - combinedCount.currentYearCount) + ' of ' 
+    	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + " in a completed year";
+
+        divBar.children(".known-bar").attr("title", countExplanation);
+        
+        divBar.children(".known-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", knownNormalizedWidth);
+    
+    } else {
+    
+    	divBar.children(".known-bar").hide();
+    }
+    
     
     if (combinedCount.unknownYearCount) {
     	var unknownNormalizedWidth = getNormalizedWidth(entity, combinedCount.unknownYearCount);
     	
+        var countExplanation = combinedCount.unknownYearCount + ' of ' 
+        + sum + ' have an unknown ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year (not charted above)";
+        
+        divBar.children(".unknown-bar").attr("title", countExplanation);
+        
+        divBar.children(".unknown-bar").children(".unknown-inner-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", unknownNormalizedWidth);
+        
     } else {
-    	var unknownNormalizedWidth = 0;
+    	
+    	divBar.children(".unknown-bar").hide();
     }
     
     if (combinedCount.currentYearCount) {
     	var currentNormalizedWidth = getNormalizedWidth(entity, combinedCount.currentYearCount);
     	
+        var countExplanation = combinedCount.currentYearCount + ' of ' 
+    	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + ' in the current incomplete year (not charted above)';
+        
+        divBar.children(".current-year-bar").attr("title", countExplanation);
+        
+        divBar.children(".current-year-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", currentNormalizedWidth);
+    	
     } else {
-    	var currentNormalizedWidth = 0;
+    	
+    	divBar.children(".current-year-bar").hide();
     }
     
-    divBar.css("width", normalizedWidth + 5);
-    divBar.children(".known-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", knownNormalizedWidth);
-    divBar.children(".current-year-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", currentNormalizedWidth);
-    divBar.children(".unknown-bar").children(".unknown-inner-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", unknownNormalizedWidth);
-
-    var countExplanation = (combinedCount.knownYearCount - combinedCount.currentYearCount) + ' of ' 
-	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + " in a completed year";
-
-    divBar.children(".known-bar").attr("title", countExplanation);
-    
-    countExplanation = combinedCount.currentYearCount + ' of ' 
-	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + ' in the current incomplete year (not charted above)';
-    
-    divBar.children(".current-year-bar").attr("title", countExplanation);
-    
-    countExplanation = combinedCount.unknownYearCount + ' of ' 
-    + sum + ' have an unknown ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year (not charted above)";
-    
-    divBar.children(".unknown-bar").attr("title", countExplanation);
-
     var entityLabelForLegend = divLabel.find(".entity-label-url");
     entityLabelForLegend.html(entity.label);
     entityLabelForLegend.ellipsis();
