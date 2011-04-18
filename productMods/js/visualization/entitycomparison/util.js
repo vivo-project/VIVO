@@ -253,9 +253,9 @@ function init(graphContainer) {
 	$("#comparisonParameter").text("Total Number of " + optionSelected);
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
-	$('#legend-unknown-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with unknown year");
-	$('#legend-known-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " with known year");
-	$('#legend-current-year-bar-text').text(COMPARISON_PARAMETERS_INFO[currentParameter].name + " from current incomplete year");
+	$('#legend-unknown-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " with unknown year");
+	$('#legend-known-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " with known year");
+	$('#legend-current-year-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " from current incomplete year");
 	
 	var defaultFlotOptions = {
 			xaxis : {
@@ -1247,7 +1247,6 @@ function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 	 * We should change to the first page so that checkboxes are selectable.
 	 * */
 	currentDataTable.fnPageChange('first');
-	
 	
 	return currentDataTable;
 }

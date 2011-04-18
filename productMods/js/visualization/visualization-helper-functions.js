@@ -104,3 +104,9 @@ if (typeof String.prototype.trim !== 'function') {
 		return this.replace(/^\s+|\s+$/g, '');
 	}
 }
+
+function toTitleCase(str) {
+	return str.replace(/\w\S*/g, function(txt) {
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	});
+}

@@ -169,6 +169,8 @@ $(".filter-option").live('click', function() {
 			temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
 		} 
 		
+//		clearRenderedObjects();
+		
 		$(this).addClass('active-filter');
 		
 		temporalGraphProcessor.dataTable.fnDraw();
@@ -532,7 +534,7 @@ var lastCachedAtDateTimeParser = {
 		var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 		var month = ['January','February','March','April','May','June','July','August','September','October','November'];
 		
-		return day[dateObject.getDay()] + ", " + month[dateObject.getMonth()] + " " + dateObject.getDate();
+		return month[dateObject.getMonth()] + " " + dateObject.getDate() + ", " + dateObject.getFullYear() + ".";
 	},
 	
 	ascendingDateSorter: function(rawDateStringA, rawDateStringB) {
@@ -601,10 +603,15 @@ temporalGraphProcessor = {
         });
 
         if ($("#incomplete-data-disclaimer").length > 0 && lastCachedAtDateTimes.length > 0) {
+        	
+        	var disclaimerText = "This information is based solely on " 
+				+ COMPARISON_PARAMETERS_INFO[currentParameter].value
+				+ " which have been loaded into the VIVO system"
+				+ " as of " + lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0]);
+        	
         	$("#incomplete-data-disclaimer").attr(
         			"title", 
-        			$("#incomplete-data-disclaimer").attr("title") + " as of " 
-        			+ lastCachedAtDateTimeParser.getReadableDateString(lastCachedAtDateTimes[0])); 
+        			disclaimerText); 
         }
 	},
 	

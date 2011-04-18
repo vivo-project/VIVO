@@ -8,7 +8,7 @@
         </div>
         
         <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a>&nbsp;
-        <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system" /></span></h2>
+        <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system." /></span></h2>
         
         <div id="leftblock">
             <div id="leftUpper">
@@ -36,7 +36,7 @@
 
                 </select>
                 
-                <img id="copy-vis-viewlink-icon" title="Link to visualization" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" />
+                <img id="copy-vis-viewlink-icon" title="Persistent link to current visualization" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" />
                 <span id="copy-vis-viewlink"><input type="text" size="21" value="${currentViewLink}" /></span>
                 
                 </div>
@@ -63,7 +63,7 @@
                 </div>
                 <h3>What do you want to compare?</h3>
                 <div id="people-organizations-filter">
-                	<span id="organizations-filter" class="filter-option active-filter">Organizations</span>
+                	<span id="organizations-filter" class="filter-option active-filter">Organizations</span> | 
                 	<span id="people-filter" class="filter-option">People</span>
                 </div>
                 
