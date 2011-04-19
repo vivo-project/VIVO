@@ -97,12 +97,6 @@
             var iStartButton, iEndButton, i, iLen;
             var oClasses = oSettings.oClasses;
             
-//            console.log(iPageCount,
-//            			iPageCountHalf,
-//            			iPages,
-//            			iCurrentPage,
-//            			oClasses);
-            
             /* Pages calculation */
             if (iPages < iPageCount) {
                 iStartButton = 1;

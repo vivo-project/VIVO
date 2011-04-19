@@ -8,7 +8,7 @@
         </div>
         
         <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a>&nbsp;
-        <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system." /></span></h2>
+        <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system" /></span></h2>
         
         <div id="leftblock">
             <div id="leftUpper">
@@ -65,6 +65,9 @@
                 <div id="people-organizations-filter">
                 	<span id="organizations-filter" class="filter-option active-filter">Organizations</span> | 
                 	<span id="people-filter" class="filter-option">People</span>
+                	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+                		 alt="information icon" 
+                		 title="Note: the organizations or people listed below are only those which are directly beneath ${organizationLabel} in the organization hierarchy. You may 'drill down' to see the organizations or people below a given sub-organization by selecting the chart icon next to a selected sub-organization's name below the graph on the right." />
                 </div>
                 
                 <div id="paginatedTable"></div>

@@ -263,7 +263,7 @@ var processJSONData = {
 		return sum;
 	},
 	
-	setupGlobals: function(jsonContent) {
+	setupGlobals: function(jsonContent, resetFilter) {
 		
 		var entityLevels = new Array();
 		var entityActivityCount = {
@@ -325,23 +325,30 @@ var processJSONData = {
 	    	
 	    });
 		
-		if (entityActivityCount.ORGANIZATION >= entityActivityCount.PERSON) {
-			
-			temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
-			
-			$("#organizations-filter").addClass("active-filter");
-			$("#people-filter").removeClass("active-filter");
-			
-			
-		} else {
-			
-			temporalGraphProcessor.currentSelectedFilter = "PEOPLE";
-			
-			$("#people-filter").addClass("active-filter");
-			$("#organizations-filter").removeClass("active-filter");
-			
+		/*
+		 * We do not want to change the current filter setting if the user has changed the parameter
+		 * from the dropdown box. Only when the temporal vis is loaded directly we want to make sure 
+		 * that the group of entites that has the most activity is shown.
+		 * */
+		if (resetFilter) {
+			if (entityActivityCount.ORGANIZATION >= entityActivityCount.PERSON) {
+				
+				temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
+				
+				$("#organizations-filter").addClass("active-filter");
+				$("#people-filter").removeClass("active-filter");
+				
+				
+			} else {
+				
+				temporalGraphProcessor.currentSelectedFilter = "PEOPLE";
+				
+				$("#people-filter").addClass("active-filter");
+				$("#organizations-filter").removeClass("active-filter");
+				
+			}
 		}
-
+		
 		if (processJSONData.isParentEntityAvailable) {
 			$("#subject-parent-entity").show();
 		} else {
@@ -373,7 +380,7 @@ var processJSONData = {
 	 */
 	loadData: function(jsonData, dataTableParams) {
 	    
-		processJSONData.setupGlobals(jsonData);
+		processJSONData.setupGlobals(jsonData, true);
 		
 		temporalGraphProcessor.dataTable = prepareTableForDataTablePagination(jsonData, dataTableParams);
 	    
@@ -619,11 +626,15 @@ temporalGraphProcessor = {
 		
 		var currentSelectedEntityURIs = [];
 		
+		console.log(URIToCheckedEntities);
+		
 		$.each(URIToCheckedEntities, function(index, entity){
 			currentSelectedEntityURIs.push(index);
 		});
 		
 		clearRenderedObjects();
+		
+		console.log(URIToCheckedEntities);
 		initConstants();
 		
 		/*
