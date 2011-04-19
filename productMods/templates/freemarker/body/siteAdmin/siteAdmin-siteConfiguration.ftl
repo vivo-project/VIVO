@@ -2,7 +2,7 @@
 
 <#-- Template for Site Administration site configuration panel -->
 
-<#if siteConfig??>
+<#if siteConfig?has_content>
     <div class="pageBodyGroup">
         
         <h3>Site Configuration</h3>
