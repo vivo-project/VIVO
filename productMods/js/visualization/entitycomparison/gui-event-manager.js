@@ -626,15 +626,12 @@ temporalGraphProcessor = {
 		
 		var currentSelectedEntityURIs = [];
 		
-		console.log(URIToCheckedEntities);
-		
 		$.each(URIToCheckedEntities, function(index, entity){
 			currentSelectedEntityURIs.push(index);
 		});
 		
 		clearRenderedObjects();
 		
-		console.log(URIToCheckedEntities);
 		initConstants();
 		
 		/*
