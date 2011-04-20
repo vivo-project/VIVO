@@ -9,10 +9,14 @@
 
         <ul>
             <#if siteConfig.urls.portals??>
-                <li><a href="${siteConfig.urls.siteInfo}">Current portal information</a></li>
+                <#if siteConfig.urls.siteInfo??>
+                    <li><a href="${siteConfig.urls.siteInfo}">Current portal information</a></li>
+                </#if>
                 <li><a href="${siteConfig.urls.portals}">List all portals</a></li>
             <#else>
-                <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
+                <#if siteConfig.urls.siteInfo??>
+                    <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
+                </#if>
             </#if>
 
             <#if siteConfig.urls.menuN3Editor??>
