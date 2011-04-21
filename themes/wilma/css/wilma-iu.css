@@ -1,0 +1,12 @@
+#intro {
+	width: auto;
+}
+
+#intro h2 {
+	padding: 0;
+}
+
+#intro ul {
+	list-style-position:inside;
+	list-style-type:circle;
+}
