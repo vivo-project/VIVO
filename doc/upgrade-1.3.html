@@ -30,7 +30,7 @@
             
             <h3>upload.directory and LuceneSetup.indexDir are merged into vitro.home.directory.</h3>
         
-            <h3>Template changes</h3>
+            <h3>Template changes [see RY for further details]</h3>
             <ul>
                 <li>
                     <p>${stylesheets}, ${scripts}, and ${headScripts} add() methods now take the full tag as an argument. 
@@ -46,6 +46,15 @@
                 
                 <li>propertyGroups.getPropertyAndRemoveFromList() has been deprecated. The replacement method is propertyGroups.pullProperty(). 
                 No change in functionality.</li>
+            </ul>
+            
+            <h3>List view changes [see RY for further details]</h3>
+            <ul>
+                <li>&lt;query-base&gt; and &lt;query-collated&gt; have been replaced with a single query &lt;query-select&gt;
+                    that contains tags for fragments to be used only in the collated version of the query.
+                </li>
+                <li>This and other changes are documented in vitro/doc/list_view_configuration_guidelines.txt.</li>
+                
             </ul>
         </div> <!-- #wrapper-content -->
         
