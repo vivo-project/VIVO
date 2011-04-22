@@ -50,6 +50,33 @@
 		toggleCollapsibleDiv("csvHelp-collapsible");
 	}
 
+	function fileResponse()
+	{
+		var response = frames["uploadTarget"].document.getElementsByTagName("body")[0].innerHTML;
+		var json = eval("(" + response + ")");
+		
+		var fileListing = document.getElementById("fileListing")
+		var newLi = document.createElement("li");
+		
+		if(json.success)
+			newLi.innerHTML = json.fileName + " <span style=\"color:green\">" + json.errorMessage + "</span>";
+		else
+			newLi.innerHTML = json.fileName + " <span style=\"color:red\">" + json.errorMessage + "</span>";
+		fileListing.appendChild(newLi);
+		
+		//document.getElementById("responseArea").innerHTML = response;
+	}
+
+
+	function init()
+	{
+		document.getElementById("fileUploadForm").onsubmit = function()
+		{
+			document.getElementById("fileUploadForm").target = "uploadTarget";
+			document.getElementById("uploadTarget").onload = fileResponse;
+		}
+	}
+	window.onload = init;
 </script>
 
 
@@ -75,6 +102,10 @@
 </style>
 
 
+<div id="responseArea">
+	<ul id="fileListing">
+	</ul>
+</div>
 
 <div id="step1" class="testfile-step">
 	<h3 class="testfile-step-header">Step 1</h3>
@@ -105,8 +136,11 @@
 	<div id="step3-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">Upload file(s)</h4>
 		<p>Upload your filled-in template(s).</p>
-		<input type="file" />
-		<input type="button" value="Upload" />
+		<form id="fileUploadForm" method="post" enctype="multipart/form-data" action="/vivo/harvester/testfile">
+			<input type="file" name="csvFile" />
+			<input type="submit" name="submit" value="Upload" />
+			<iframe id="uploadTarget" name="uploadTarget" src="" style="width:0;height:0;border:0px solid #fff;">${testvalue!}</iframe>
+		</form>
 		<h5>Uploaded files</h5>
 		<ul>
 			<li>file1.csv <span style="color:green">success</span></li>
@@ -407,4 +441,5 @@ echo $HARVESTER_TASK ' completed successfully'
 	</div>
 	<div class="clearBothDiv" />
 </div>
+
 
