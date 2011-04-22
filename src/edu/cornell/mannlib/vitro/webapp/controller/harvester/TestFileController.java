@@ -64,7 +64,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
         JSONObject json = new JSONObject();
 
-        String path = "/home/mbarbieri/tempfileupload/"; //todo: complete
+        String path = ""; //todo: complete
         if(fileStreams.get("csvFile") != null && fileStreams.get("csvFile").size() > 0) {
             FileItem csvStream = fileStreams.get("csvFile").get(0);
             String name = csvStream.getName();

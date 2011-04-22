@@ -102,11 +102,6 @@
 </style>
 
 
-<div id="responseArea">
-	<ul id="fileListing">
-	</ul>
-</div>
-
 <div id="step1" class="testfile-step">
 	<h3 class="testfile-step-header">Step 1</h3>
 	<div id="step1-inner" class="testfile-step-body">
@@ -142,10 +137,7 @@
 			<iframe id="uploadTarget" name="uploadTarget" src="" style="width:0;height:0;border:0px solid #fff;">${testvalue!}</iframe>
 		</form>
 		<h5>Uploaded files</h5>
-		<ul>
-			<li>file1.csv <span style="color:green">success</span></li>
-			<li>file2.csv <span style="color:green">success</span></li>
-			<li>file3.csv <span style="color:red">upload failed: error parsing CSV file</span></li>
+		<ul id="fileListing">
 		</ul>
 	</div>
 	<div class="clearBothDiv" />
