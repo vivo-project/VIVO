@@ -1,3 +1,14 @@
+<?xml version="1.0"?>
+
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- ====================================================================== 
+	 Compile the JSPs to check for compile errors.
+	 
+	 As this stands, you need to be sure that the "war" or "deploy" step in the 
+	 main build has already happened. There is no check here to ensure that the 
+	 ".build/war" directory is current.
+	     ====================================================================== -->
 <project name="Check JSPs for compile errors" default="all" basedir="../..">
 	<!-- Get tomcat.home and webapp.name from the deploy.properties file. -->
 	<property name="deploy.properties.file" location="deploy.properties" />
