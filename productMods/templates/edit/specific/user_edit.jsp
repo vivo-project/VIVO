@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:edLnk="http://vitro.mannlib.cornell.edu/vitro/tags/PropertyEditLink" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 
 <jsp:directive.page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"/>
 <jsp:directive.page import="edu.cornell.mannlib.vitro.webapp.beans.User"/>
