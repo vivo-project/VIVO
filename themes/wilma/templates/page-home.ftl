@@ -84,9 +84,19 @@
             <#--
             
             <@widget name="login" />
-            -->
             
-            <@allClassGroups vClassGroups />
+            -->
+
+			<#assign acceptedClassGroupURIs =[
+					"http://vivoweb.org/ontology#vitroClassGrouppeople",
+					"http://vivoweb.org/ontology#vitroClassGroupcourses",
+					"http://vivoweb.org/ontology#vitroClassGroupevents",
+					"http://vivoweb.org/ontology#vitroClassGrouporganizations",
+					"http://vivoweb.org/ontology#vitroClassGrouppublications",
+					"http://vivoweb.org/ontology#vitroClassGrouppublications"
+					]>
+            
+            <@allClassGroups vClassGroups acceptedClassGroupURIs/>
         
         <#include "footer.ftl">
     </body>
