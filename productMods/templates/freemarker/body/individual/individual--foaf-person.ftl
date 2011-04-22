@@ -4,6 +4,9 @@
 
 <#include "individual-setup.ftl">
 
+<#-- QR code stuff.  Will be uncommented when QR codes are rolled out. -->
+<#-- <#include "individual-qrCodeFoafPerson.ftl"> --> 
+
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
@@ -69,6 +72,17 @@
                 
         <#-- Links -->  
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
+        
+        <#-- QR code stuff.  Will be uncommented when QR codes are rolled out.
+        <#if hasValidVCard()>
+            <div style="border:1px solid #cccccc">
+                <span style="padding-left:5px">vCard QR <a style="font-size:smaller" href="${individual.qrData.aboutQrCodesUrl}">What is this?</a></span>
+                <a title="Export QR codes" href="${individual.qrData.exportQrCodeUrl}">
+                    <@qrCodeVCard qrCodeWidth="150" />
+                </a>
+            </div>
+        </#if>
+        -->
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
