@@ -197,7 +197,7 @@
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "personUri", "positionType" ],
-    "literalsOnForm" :  [ "title", "startYear", "endYear" ],
+    "literalsOnForm" :  [ "title" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
