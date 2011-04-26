@@ -195,14 +195,6 @@
    
   <!--
     <listener>
-        <listener-class>
-            edu.cornell.mannlib.vitro.webapp.auth.identifier.SetupFakeSelfEditingIdentifierFactory
-        </listener-class>
-    </listener>
--->
-
-  <!--
-    <listener>
          <listener-class>
              edu.cornell.mannlib.vitro.webapp.auth.policy.setup.AlwaysAuthorizePolicySetup
         </listener-class>
@@ -446,15 +438,6 @@
     <url-pattern>/freemarkersamples</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-    <servlet-name>FakeSelfEditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.FakeSelfEditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FakeSelfEditController</servlet-name>
-    <url-pattern>/admin/fakeselfedit</url-pattern>
-  </servlet-mapping>
-
   <servlet>
     <servlet-name>SiteAdminController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SiteAdminController</servlet-class>
