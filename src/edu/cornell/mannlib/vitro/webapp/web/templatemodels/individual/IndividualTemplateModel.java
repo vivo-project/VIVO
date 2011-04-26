@@ -6,11 +6,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
@@ -74,7 +76,22 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         return getVisUrl("vis", "entity_comparison");
     }
 
-
+    public String getSelfEditingId() {
+        String id = null;
+        String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");
+        if (! StringUtils.isBlank(idMatchingProperty)) {
+            // Use assertions model to side-step filtering. We need to get the value regardless of whether the property
+            // is visible to the current user.
+            WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
+            Collection<DataPropertyStatement> ids = 
+                wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, idMatchingProperty);
+            if (ids.size() > 0) {
+                id = ids.iterator().next().getData();
+            }
+        }
+        return id;
+    }
+    
     public Map<String, String> getQrData() {
         if(qrData == null)
             qrData = generateQrData();
