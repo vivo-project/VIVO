@@ -33,12 +33,16 @@ public class TestFileController extends FreemarkerHttpServlet {
     private static final Log log = LogFactory.getLog(TestFileController.class);
     private static final String TEMPLATE_DEFAULT = "testfile.ftl";
 
+    private static final String PARAMETER_FIRST_UPLOAD = "firstUpload";
+    private static final String PARAMETER_UPLOADED_FILE = "uploadedFile";
+
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
             Map<String, Object> body = new HashMap<String, Object>();
             //body.put("uploadPostback", "false");
-            body.put("processRequestTest", "hi.");
+            body.put("paramFirstUpload", PARAMETER_FIRST_UPLOAD);
+            body.put("paramUploadedFile", PARAMETER_UPLOADED_FILE);
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {
             log.error(e, e);
@@ -68,6 +72,12 @@ public class TestFileController extends FreemarkerHttpServlet {
         return pathBase;
     }
 
+    private FileHarvestJob getJob(HttpServletRequest request)
+    {
+        //todo: complete
+        return new CsvHarvestJob("persontemplate.csv");
+    }
+
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -75,11 +85,11 @@ public class TestFileController extends FreemarkerHttpServlet {
 
         JSONObject json = new JSONObject();
         try {
-    
+
             String path = getUploadPathBase(request) + getSessionId(request) + "/";
             File directory = new File(path);
-    
-            
+
+
             int maxFileSize = 1024 * 1024;
             FileUploadServletRequest req = FileUploadServletRequest.parseRequest(request, maxFileSize);
             if(req.hasFileUploadException()) {
@@ -87,7 +97,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                 new ExceptionVisibleToUser(e);
             }
 
-            String firstUpload = req.getParameter("firstUpload"); //clear directory on first upload
+            String firstUpload = req.getParameter(PARAMETER_FIRST_UPLOAD); //clear directory on first upload
             if(firstUpload.toLowerCase().equals("true")) {
                 if(directory.exists()) {
                     File[] children = directory.listFiles();
@@ -99,12 +109,12 @@ public class TestFileController extends FreemarkerHttpServlet {
 
             if(!directory.exists())
                 directory.mkdirs();
-            
-            File csvTemplateFile = getCsvTemplateFile();
-    
+
+            FileHarvestJob job = getJob(req);
+
             Map<String, List<FileItem>> fileStreams = req.getFiles();
-            if(fileStreams.get("csvFile") != null && fileStreams.get("csvFile").size() > 0) {
-                FileItem csvStream = fileStreams.get("csvFile").get(0);
+            if(fileStreams.get(PARAMETER_UPLOADED_FILE) != null && fileStreams.get(PARAMETER_UPLOADED_FILE).size() > 0) {
+                FileItem csvStream = fileStreams.get(PARAMETER_UPLOADED_FILE).get(0);
                 String name = csvStream.getName();
                 name = handleNameCollision(path, name, directory);
                 File file = new File(path + name);
@@ -113,8 +123,8 @@ public class TestFileController extends FreemarkerHttpServlet {
                 } finally {           
                     csvStream.delete();
                 }
-    
-                String errorMessage = validateCsvFile(csvTemplateFile, file);
+
+                String errorMessage = job.validateUpload(file);
                 boolean success;
                 if(errorMessage != null) {
                     success = false;
@@ -123,8 +133,8 @@ public class TestFileController extends FreemarkerHttpServlet {
                     success = true;
                     errorMessage = "success";
                 }
-    
-    
+
+
                 try {
                     json.put("success", success);
                     json.put("fileName", name);
@@ -134,7 +144,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                     log.error(e, e);
                     return;
                 }
-    
+
             } else {
                 try {
                     json.put("success", false);
@@ -144,7 +154,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                     log.error(e, e);
                     return;
                 }
-    
+
             }
         } catch(ExceptionVisibleToUser e) {
             log.error(e, e);
@@ -164,13 +174,6 @@ public class TestFileController extends FreemarkerHttpServlet {
         response.getWriter().write(json.toString());
     }
 
-    private File getCsvTemplateFile()
-    {
-        //todo: complete
-        String templateBasePath = getHarvesterPath() + "files/";
-        String templateFileName = "";
-        return new File(templateBasePath + templateFileName);
-    }
 
     private String handleNameCollision(String path, String filename, File directory) {
         String base = filename;
@@ -195,12 +198,70 @@ public class TestFileController extends FreemarkerHttpServlet {
     }
 
 
+
+
+
+
+    @SuppressWarnings("unused")
+    private void doHarvest()
+    {
+        /*
+        Harvest will entail:
+        
+        D2RMapFetch
+        Transfer to local temp model
+        Diffs
+        Transfers
+        
+        If this is being done with a script, then we should probably use a templating system.
+        run-csv.sh 
+        
+         */
+    }
+
+
+
+
+
+
+
+
+
+
+
+    private class ExceptionVisibleToUser extends Exception {
+        private static final long serialVersionUID = 1L;
+        public ExceptionVisibleToUser(Throwable cause) {
+            super(cause);
+        }
+    }
+}
+
+
+class CsvHarvestJob implements FileHarvestJob {
+
+    private static final Log log = LogFactory.getLog(CsvHarvestJob.class);
+    
+    private File templateFile;
+    
+    public CsvHarvestJob(String templateFileName) {
+        templateFile = new File(getTemplateFileDirectory() + templateFileName);
+    }
+
+    private String getTemplateFileDirectory() {
+        String harvesterPath = "/usr/share/vivo/harvester/"; //todo: hack
+        String pathToTemplateFiles = harvesterPath + "files/";
+        return pathToTemplateFiles;
+    }
+
+
+    @Override
     @SuppressWarnings("rawtypes")
-    private String validateCsvFile(File templateFile, File file) {
+    public String validateUpload(File file) {
         try {
             SimpleReader reader = new SimpleReader();
             
-            List templateCsv = reader.parse(templateFile);
+            List templateCsv = reader.parse(this.templateFile);
             String[] templateFirstLine = (String[])templateCsv.get(0);
 
             List csv = reader.parse(file);
@@ -241,40 +302,7 @@ public class TestFileController extends FreemarkerHttpServlet {
         }
         return null;
     }
-
     
-    
-    @SuppressWarnings("unused")
-    private void doHarvest()
-    {
-        /*
-        Harvest will entail:
-        
-        D2RMapFetch
-        Transfer to local temp model
-        Diffs
-        Transfers
-        
-        If this is being done with a script, then we should probably use a templating system.
-        run-csv.sh 
-        
-         */
-    }
-
-
-
-
-
-
-
-
-
-
-
-    private class ExceptionVisibleToUser extends Exception {
-        private static final long serialVersionUID = 1L;
-        public ExceptionVisibleToUser(Throwable cause) {
-            super(cause);
-        }
-    }
 }
+
+

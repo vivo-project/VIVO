@@ -64,7 +64,7 @@
 			newLi.innerHTML = json.fileName + " <span style=\"color:red\">upload failed: " + json.errorMessage + "</span>";
 		fileListing.appendChild(newLi);
 		
-		document.getElementById("firstUpload").value = "false";
+		document.getElementById("${paramFirstUpload}").value = "false";
 		
 		//document.getElementById("responseArea").innerHTML = response;
 	}
@@ -134,10 +134,10 @@
 		<h4 class="testfile-step-subheader">Upload file(s)</h4>
 		<p>Upload your filled-in template(s).</p>
 		<form id="fileUploadForm" method="post" enctype="multipart/form-data" action="/vivo/harvester/testfile">
-			<input type="hidden" id="firstUpload" name="firstUpload" value="true" />
-			<input type="file" name="csvFile" />
+			<input type="hidden" id="${paramFirstUpload}" name="${paramFirstUpload}" value="true" />
+			<input type="file" name="${paramUploadedFile}" />
 			<input type="submit" name="submit" value="Upload" />
-			<iframe id="uploadTarget" name="uploadTarget" src="" style="width:0;height:0;border:0px solid #fff;">${testvalue!}</iframe>
+			<iframe id="uploadTarget" name="uploadTarget" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>
 		</form>
 		<h5>Uploaded files</h5>
 		<ul id="fileListing">
