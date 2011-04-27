@@ -31,7 +31,15 @@
             <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
         </#if>
     </#local>
+    
+     <#if statement.property == "${core}hasInvestigatorRole" ||
+         statement.property == "${core}hasPrincipalInvestigatorRole" ||
+	 statement.property == "${core}hasCo-PrincipalInvestigatorRole">
+         <#local roleLabel = "">
+    <#else>
+         <#local roleLabel = statement.roleLabel!>
+    </#if>
 
-    ${linkedIndividual} ${statement.roleLabel!} ${dateTime!}
+	${linkedIndividual} ${roleLabel} ${dateTime!}
 
 </#macro>

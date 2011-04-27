@@ -1,6 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
+import org.apache.commons.lang.WordUtils;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +26,7 @@ public class SubEntity extends Individual {
 	}
 	
 	public SubEntity(String individualURI, String individualLabel) {
-		super(individualURI, individualLabel);
+		super(individualURI, WordUtils.capitalizeFully(individualLabel));
 	}
 	
 	@Override

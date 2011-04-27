@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.WordUtils;
+
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UniqueIDGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
@@ -45,7 +47,7 @@ public class Collaborator extends Individual {
 	}
 	
 	public void setCollaboratorName(String collaboratorName) {
-		this.setIndividualLabel(collaboratorName);
+		this.setIndividualLabel(WordUtils.capitalizeFully(collaboratorName));
 	}
 	
 	public Set<Activity> getCollaboratorActivities() {

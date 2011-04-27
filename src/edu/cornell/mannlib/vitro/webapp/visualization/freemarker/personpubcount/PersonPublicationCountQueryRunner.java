@@ -84,7 +84,7 @@ public class PersonPublicationCountQueryRunner implements QueryRunner<Set<Activi
 			if (publicationDateNode != null) {
 				biboDocument.setActivityDate(publicationDateNode.toString());
 			}
-
+			
 			/*
 			 * Since we are getting publication count for just one author at a time we need
 			 * to create only one "Individual" instance. We test against the null for "author" to

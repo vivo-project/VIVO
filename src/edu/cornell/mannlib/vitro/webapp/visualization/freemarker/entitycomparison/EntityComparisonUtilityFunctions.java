@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
@@ -134,7 +135,7 @@ public class EntityComparisonUtilityFunctions {
         if (ind != null) {
         	organizationLabel = ind.getName();
         }
-		return organizationLabel;
+		return WordUtils.capitalizeFully(organizationLabel);
 	}
 	
 	public static String getStaffProvidedOrComputedHighestLevelOrganization(Log log,

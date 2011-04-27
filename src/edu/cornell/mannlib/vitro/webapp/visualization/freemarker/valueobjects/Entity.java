@@ -1,6 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
+import org.apache.commons.lang.WordUtils;
+
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,7 +17,7 @@ public class Entity extends Individual {
 	private Set<SubEntity> children = new LinkedHashSet<SubEntity>();
 	
 	public Entity(String entityURI, String entityLabel) {
-		super(entityURI, entityLabel);
+		super(entityURI, WordUtils.capitalizeFully(entityLabel));
 	}
 	
 	public Entity(String entityURI) {
@@ -31,7 +33,7 @@ public class Entity extends Individual {
 	}
 	
 	public void setEntityLabel(String label) {
-		this.setIndividualLabel(label);
+		this.setIndividualLabel(WordUtils.capitalizeFully(label));
 	}
 
 	public Set<SubEntity> getSubEntities() {
