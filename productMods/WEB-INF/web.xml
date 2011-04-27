@@ -145,7 +145,14 @@
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.search.lucene.LuceneSetup </listener-class>
   </listener>
-
+  <!--
+  <listener>
+    <listener-class>
+      edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
+    </listener-class>
+  </listener>
+  -->
+  
   <!--  vivo specific, must appear before other policies -->
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
@@ -980,6 +987,12 @@
     <servlet-name>SearchController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.PagedSearchController</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>SearchController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrPagedSearchController</servlet-class>
+  </servlet>
+  -->
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/search</url-pattern>
