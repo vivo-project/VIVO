@@ -51,98 +51,127 @@ public class TestFileController extends FreemarkerHttpServlet {
         return "VIVO Harvester Test";
     }
 
+    private String getHarvesterPath()
+    {
+        //todo: complete
+        return "";
+    }
+
+    private String getUploadPathBase(HttpServletRequest request) throws Exception
+    {
+        String vitroHomeDirectoryName = ConfigurationProperties.getBean(request.getSession().getServletContext()).getProperty(FileStorageSetup.PROPERTY_VITRO_HOME_DIR);
+        if (vitroHomeDirectoryName == null) {
+            throw new Exception("Vitro home directory name could not be found.");
+        }
+
+        String pathBase = vitroHomeDirectoryName + "/" + FileStorageSetup.FILE_STORAGE_SUBDIRECTORY + "/harvester/";
+        return pathBase;
+    }
+
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        int maxFileSize = 1024 * 1024;
+        JSONObject json = new JSONObject();
+        try {
+    
+            String path = getUploadPathBase(request) + getSessionId(request) + "/";
+            File directory = new File(path);
+    
+            
+            int maxFileSize = 1024 * 1024;
+            FileUploadServletRequest req = FileUploadServletRequest.parseRequest(request, maxFileSize);
+            if(req.hasFileUploadException()) {
+                Exception e = req.getFileUploadException();
+                new ExceptionVisibleToUser(e);
+            }
 
-        FileUploadServletRequest req = FileUploadServletRequest.parseRequest(request, maxFileSize);
-        if(req.hasFileUploadException()) {
-            Exception e = req.getFileUploadException();
+            String firstUpload = req.getParameter("firstUpload"); //clear directory on first upload
+            if(firstUpload.toLowerCase().equals("true")) {
+                if(directory.exists()) {
+                    File[] children = directory.listFiles();
+                    for(File child : children) {
+                        child.delete();
+                    }
+                }
+            }
+
+            if(!directory.exists())
+                directory.mkdirs();
+            
+            File csvTemplateFile = getCsvTemplateFile();
+    
+            Map<String, List<FileItem>> fileStreams = req.getFiles();
+            if(fileStreams.get("csvFile") != null && fileStreams.get("csvFile").size() > 0) {
+                FileItem csvStream = fileStreams.get("csvFile").get(0);
+                String name = csvStream.getName();
+                name = handleNameCollision(path, name, directory);
+                File file = new File(path + name);
+                try {
+                    csvStream.write(file);
+                } finally {           
+                    csvStream.delete();
+                }
+    
+                String errorMessage = validateCsvFile(csvTemplateFile, file);
+                boolean success;
+                if(errorMessage != null) {
+                    success = false;
+                    file.delete();
+                } else {
+                    success = true;
+                    errorMessage = "success";
+                }
+    
+    
+                try {
+                    json.put("success", success);
+                    json.put("fileName", name);
+                    json.put("errorMessage", errorMessage);
+                }
+                catch(JSONException e) {
+                    log.error(e, e);
+                    return;
+                }
+    
+            } else {
+                try {
+                    json.put("success", false);
+                    json.put("fileName", "(none)");
+                    json.put("errorMessage", "No file uploaded");
+                } catch(JSONException e) {
+                    log.error(e, e);
+                    return;
+                }
+    
+            }
+        } catch(ExceptionVisibleToUser e) {
+            log.error(e, e);
+            try {
+                json.put("success", false);
+                json.put("filename", "(none)");
+                json.put("errorMessage", e.getMessage());
+            } catch(JSONException f) {
+                log.error(f, f);
+                return;
+            }
+        } catch(Exception e) {
             log.error(e, e);
             return;
         }
 
-        Map<String, List<FileItem>> fileStreams = req.getFiles();
-
-        JSONObject json = new JSONObject();
-
-        String vitroHomeDirectoryName = ConfigurationProperties.getBean(request.getSession().getServletContext()).getProperty(FileStorageSetup.PROPERTY_VITRO_HOME_DIR);
-        if (vitroHomeDirectoryName == null) {
-            log.error("Vitro home directory name could not be found.");
-            return;
-        }
-
-        String pathBase = vitroHomeDirectoryName + "/" + FileStorageSetup.FILE_STORAGE_SUBDIRECTORY + "/harvester/";
-
-        String path = pathBase + getSessionId(request) + "/";
-        File directory = new File(path);
-
-        String firstUpload = req.getParameter("firstUpload"); //clear directory on first upload
-        if(firstUpload.toLowerCase().equals("true")) {
-            if(directory.exists()) {
-                File[] children = directory.listFiles();
-                for(File child : children) {
-                    child.delete();
-                }
-            }
-        }
-
-        if(!directory.exists())
-            directory.mkdirs();
-
-        if(fileStreams.get("csvFile") != null && fileStreams.get("csvFile").size() > 0) {
-            FileItem csvStream = fileStreams.get("csvFile").get(0);
-            String name = csvStream.getName();
-            name = handleNameCollision(path, name, directory);
-            File file = new File(path + name);
-            try {
-                csvStream.write(file);
-            } catch (Exception e) {                               
-                log.error(e, e);
-                return;
-            } finally {           
-                csvStream.delete();
-            }
-
-            String errorMessage = validateCsvFile(file);
-            boolean success;
-            if(errorMessage != null) {
-                success = false;
-                file.delete();
-            } else {
-                success = true;
-                errorMessage = "success";
-            }
-
-
-            try {
-                json.put("success", success);
-                json.put("fileName", name);
-                json.put("errorMessage", errorMessage);
-            }
-            catch(JSONException e) {
-                log.error(e, e);
-                return;
-            }
-
-        } else {
-            try {
-                json.put("success", false);
-                json.put("fileName", "(none)");
-                json.put("errorMessage", "No file uploaded");
-            } catch(JSONException e) {
-                log.error(e, e);
-                return;
-            }
-
-        }
-
         response.getWriter().write(json.toString());
     }
-    
+
+    private File getCsvTemplateFile()
+    {
+        //todo: complete
+        String templateBasePath = getHarvesterPath() + "files/";
+        String templateFileName = "";
+        return new File(templateBasePath + templateFileName);
+    }
+
     private String handleNameCollision(String path, String filename, File directory) {
         String base = filename;
         String extension = "";
@@ -150,13 +179,13 @@ public class TestFileController extends FreemarkerHttpServlet {
             base = filename.substring(0, filename.lastIndexOf("."));
             extension = filename.substring(filename.indexOf("."));
         }
-        
+
         String renamed = filename;
-        
+
         for(int i = 1; new File(path + renamed).exists(); i++) {
             renamed = base + " (" + String.valueOf(i) + ")" + extension;
         }
-        
+
         return renamed;
     }
 
@@ -166,24 +195,30 @@ public class TestFileController extends FreemarkerHttpServlet {
     }
 
 
-    private String validateCsvFile(File file) {
+    @SuppressWarnings("rawtypes")
+    private String validateCsvFile(File templateFile, File file) {
         try {
             SimpleReader reader = new SimpleReader();
-            List csv = reader.parse(file);
-            int length = csv.size();
             
+            List templateCsv = reader.parse(templateFile);
+            String[] templateFirstLine = (String[])templateCsv.get(0);
+
+            List csv = reader.parse(file);
+            
+            int length = csv.size();
+
             if(length == 0)
                 return "No data in file";
             
             for(int i = 0; i < length; i++) {
                 String[] line = (String[])csv.get(i);
                 if(i == 0) {
-                    String errorMessage = validateCsvFirstLine(line);
+                    String errorMessage = validateCsvFirstLine(templateFirstLine, line);
                     if(errorMessage != null)
                         return errorMessage;
                 }
                 else if(line.length != 0) {
-                    if(line.length != 2)
+                    if(line.length != templateFirstLine.length)
                         return "Mismatch in number of entries in row " + i;
                 }
             }
@@ -194,16 +229,52 @@ public class TestFileController extends FreemarkerHttpServlet {
         }
         return null;
     }
-    
-    private String validateCsvFirstLine(String[] line) {
+
+    private String validateCsvFirstLine(String[] templateFirstLine, String[] line) {
         String errorMessage = "File header does not match specification";
-        if(line.length != 2)
+        if(line.length != templateFirstLine.length)
             return errorMessage;
-        if(!line[0].equals("firstName"))
-            return errorMessage;
-        if(!line[1].equals("lastName"))
-            return errorMessage;
+        for(int i = 0; i < line.length; i++)
+        {
+            if(!line[i].equals(templateFirstLine[i]))
+                    return errorMessage;
+        }
         return null;
     }
 
+    
+    
+    @SuppressWarnings("unused")
+    private void doHarvest()
+    {
+        /*
+        Harvest will entail:
+        
+        D2RMapFetch
+        Transfer to local temp model
+        Diffs
+        Transfers
+        
+        If this is being done with a script, then we should probably use a templating system.
+        run-csv.sh 
+        
+         */
+    }
+
+
+
+
+
+
+
+
+
+
+
+    private class ExceptionVisibleToUser extends Exception {
+        private static final long serialVersionUID = 1L;
+        public ExceptionVisibleToUser(Throwable cause) {
+            super(cause);
+        }
+    }
 }
