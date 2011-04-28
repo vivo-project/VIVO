@@ -203,7 +203,6 @@ public class TestFileController extends FreemarkerHttpServlet {
      *         the file name prior to the final "." symbol (if one exists).
      */
     private String handleNameCollision(String filename, File directory) {
-        String path = directory.getPath();
         String base = filename;
         String extension = "";
         if(filename.contains(".")) {
@@ -213,7 +212,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
         String renamed = filename;
 
-        for(int i = 1; new File(path + renamed).exists(); i++) {
+        for(int i = 1; new File(directory, renamed).exists(); i++) {
             renamed = base + " (" + String.valueOf(i) + ")" + extension;
         }
 
