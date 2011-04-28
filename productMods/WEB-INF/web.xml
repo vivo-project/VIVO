@@ -1310,7 +1310,12 @@
    <servlet>
     <servlet-name>StandardVisualizationController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController</servlet-class>
-  </servlet>
+   </servlet>
+   
+  <servlet>
+    <servlet-name>ShortURLVisualizationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.ShortURLVisualizationController</servlet-class>
+  </servlet>   
 
   <servlet-mapping>
     <servlet-name>StandardVisualizationController</servlet-name>
@@ -1320,6 +1325,14 @@
   <servlet-mapping>
     <servlet-name>StandardVisualizationController</servlet-name>
     <url-pattern>/visualization</url-pattern>
+  </servlet-mapping>
+  
+  <!--
+	This mapping is done to facilitate shorter vis urls.  
+  -->
+  <servlet-mapping>
+    <servlet-name>ShortURLVisualizationController</servlet-name>
+    <url-pattern>/vis/*</url-pattern>
   </servlet-mapping>
 
    <servlet>

@@ -9,6 +9,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
 
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -17,6 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
@@ -29,28 +32,9 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     private String getBaseVisUrl() {
-        return getUrl(Route.VISUALIZATION.path(), "uri", getUri());
+        return getUrl(Route.VISUALIZATION_SHORT.path());
     }
     
-    private String getVisUrl(ParamMap params) {
-        String baseVisUrl = getBaseVisUrl();
-        return UrlBuilder.addParams(baseVisUrl, params);
-    }
-    
-    private String getVisUrl(String...params) {
-        return getVisUrl(new ParamMap(params));
-    }
-    
-    private String getPersonVisUrl(ParamMap params) {
-        if (!isPerson()) {
-            return null;
-        }
-        ParamMap paramMap = new ParamMap("vis", "person_level");
-        paramMap.put(params);
-        return getVisUrl(paramMap);
-    }
-    
-      
     /* Access methods for templates */
 
     public boolean isPerson() {
@@ -62,18 +46,61 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     public String getCoAuthorVisUrl() {
-        return getPersonVisUrl(new ParamMap("vis_mode", "coauthor"));
+    	
+        String coauthorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(coauthorVisURL);
+    	
     }
+
+	/**
+	 * TODO: Remove this method once Rebecca creates one. Right now it is the exact copy of the method found in 
+	 * BaseIndividualTemplateModel.getRdfUrl 
+	 * @return
+	 */
+	private boolean isIndividualURIBasedOnDefaultNamespace() {
+		URI uri = new URIImpl(getUri());
+        String namespace = uri.getNamespace();
+        
+        // Individuals in the default namespace
+        // e.g., http://vivo.cornell.edu/individual/n2345/n2345.rdf
+        // where default namespace = http://vivo.cornell.edu/individual/ 
+        // Other individuals: http://some.other.namespace/n2345?format=rdfxml
+        String defaultNamespace = vreq.getWebappDaoFactory().getDefaultNamespace();
+        return (defaultNamespace.equals(namespace)) ? true : false;
+	}
     
     public String getCoInvestigatorVisUrl() {
-        return getPersonVisUrl(new ParamMap("vis_mode", "copi"));
+    	
+    	String coinvestigatorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(coinvestigatorVisURL);
     }
+
+	private String getVisUrl(String coinvestigatorVisURL) {
+		boolean isUsingDefaultNameSpace = isIndividualURIBasedOnDefaultNamespace();
+        
+        if (isUsingDefaultNameSpace) {
+        	
+        	return coinvestigatorVisURL + getLocalName();
+        	
+        } else {
+        	
+        	return UrlBuilder.addParams(
+        			coinvestigatorVisURL, 
+        			new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, getUri())); 
+        }
+	}
 
     public String getTemporalGraphUrl() {
         if (!isOrganization()) {
             return null;
         }
-        return getVisUrl("vis", "entity_comparison");
+        
+        String temporalVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(temporalVisURL);
+        
     }
 
     public String getSelfEditingId() {

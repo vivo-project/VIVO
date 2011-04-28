@@ -94,6 +94,14 @@ VisualizationRequestHandler {
 				shouldVIVOrenderVis);
 
 	}
+	
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Person Publication Count Visualization does not provide " 
+					+ "Short URL Response.");
+	}
 
 	@Override
 	public Map<String, String> generateDataVisualization(VitroRequest vitroRequest, Log log,

@@ -15,7 +15,6 @@ import org.apache.commons.logging.Log;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -27,7 +26,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.ConstructedModelTracker;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
@@ -48,6 +46,14 @@ public class TemporalGrantVisualizationRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		return generateStandardVisualizationForGrantTemporalVis(vitroRequest,
+				log, dataset, entityURI);
+	}
+
+
+	private ResponseValues generateStandardVisualizationForGrantTemporalVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String entityURI) throws MalformedQueryParametersException {
 		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
@@ -58,12 +64,24 @@ public class TemporalGrantVisualizationRequestHandler implements
 			
 		}
 		
-		System.out.println("current models in the system are");
+/*		System.out.println("current models in the system are");
 		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
 			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
 		}
-//		
+*/		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
+	}
+	
+	
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataset) throws MalformedQueryParametersException {
+
+		
+		return generateStandardVisualizationForGrantTemporalVis(
+				vitroRequest, log, dataset, parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
+		
 	}
 
 	@Override

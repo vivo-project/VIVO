@@ -57,6 +57,14 @@ public class EntityPublicationCountRequestHandler implements
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Uncached implementation for Publication Temporal " 
+				+ "Visualization does not provide Short URL Response.");
+	}
+
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI)
@@ -327,4 +335,5 @@ public class EntityPublicationCountRequestHandler implements
 		}
 		return csvFileContent.toString();
 	}
+
 }	

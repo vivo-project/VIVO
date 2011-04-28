@@ -24,10 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelC
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
-/**
- * @author bkoniden
- * Deepak Konidena
- */
+
 public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler {
 	
 
@@ -36,6 +33,14 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			Dataset dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Co-PI Grant Count" 
 				+ " does not provide Ajax response.");
+	}
+
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Co-PI Grant Count" 
+				+ " does not provide Short URL response.");
 	}
 
 	@Override
@@ -282,4 +287,5 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 		return fileData;
 	
 	}
+
 }

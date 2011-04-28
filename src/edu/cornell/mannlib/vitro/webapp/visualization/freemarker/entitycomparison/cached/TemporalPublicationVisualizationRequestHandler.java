@@ -46,6 +46,25 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		return generateStandardVisualizationForPublicationTemporalVis(
+				vitroRequest, log, dataset, entityURI);
+	}
+	
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataset) throws MalformedQueryParametersException {
+
+		
+		return generateStandardVisualizationForPublicationTemporalVis(
+				vitroRequest, log, dataset, parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
+		
+	}
+
+	private ResponseValues generateStandardVisualizationForPublicationTemporalVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String entityURI) throws MalformedQueryParametersException {
+		
 		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
@@ -350,4 +369,5 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		}
 		return csvFileContent.toString();
 	}
+
 }	

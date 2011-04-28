@@ -434,5 +434,13 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities does not provide Standard Response.");
 	}
+	
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Utilities Visualization does not provide " 
+					+ "Short URL Response.");
+	}
 }
 

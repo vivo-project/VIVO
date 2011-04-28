@@ -1,13 +1,14 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#assign standardVisualizationURLRoot ="/visualization">
+<#assign shortVisualizationURLRoot ="/vis">
 <#assign ajaxVisualizationURLRoot ="/visualizationAjax">
 <#assign dataVisualizationURLRoot ="/visualizationData">
 
 <#assign egoURI ="${egoURIParam?url}">
 <#assign egoCoInvestigationDataFeederURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_stream&labelField=label'>
 
-<#assign coauthorshipURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${egoURI}&vis_mode=coauthor'>
+<#assign coauthorshipURL = '${urls.base}${shortVisualizationURLRoot}/author-network/?uri=${egoURI}'>
 
 <#assign egoCoInvestigatorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copis'>
 <#assign egoCoInvestigationNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_download'>

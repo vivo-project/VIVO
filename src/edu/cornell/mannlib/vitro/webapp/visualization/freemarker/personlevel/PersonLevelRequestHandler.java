@@ -71,15 +71,36 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-
+		
         String egoURI = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
         String visMode = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         
+        return generateStandardVisualizationForPersonLevelVis(vitroRequest,
+				log, dataset, egoURI, visMode);
         
-        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
+	}
+
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataset) throws MalformedQueryParametersException {
+        
+        return generateStandardVisualizationForPersonLevelVis(
+        				vitroRequest,
+        				log, 
+        				dataset, 
+        				parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY), 
+        				parameters.get(VisualizationFrameworkConstants.VIS_MODE_KEY));
+	}
+
+	private ResponseValues generateStandardVisualizationForPersonLevelVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset, String egoURI,
+			String visMode) throws MalformedQueryParametersException {
+		
+		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
         	
         	ModelConstructor constructQueryRunner = 
         			new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
@@ -140,7 +161,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 					coPIData,
 	    			vitroRequest);
 	    	
-        	
         } else {
         	
         	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
@@ -198,7 +218,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			vitroRequest);
 
         }
-        
 	}
 	
 	private TemplateResponseValues prepareCoAuthorStandaloneResponse(
@@ -273,5 +292,4 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		return new TemplateResponseValues(standaloneTemplate, body);
 		
 	}
-	
 }

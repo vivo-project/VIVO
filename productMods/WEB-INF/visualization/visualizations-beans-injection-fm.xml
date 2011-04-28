@@ -63,6 +63,14 @@
 				<entry key="person_level">
 					<ref bean="person_level"></ref>
 				</entry>
+				
+				<entry key="author-network">
+					<ref bean="person_level"></ref>
+				</entry>
+				
+				<entry key="investigator-network">
+					<ref bean="person_level"></ref>
+				</entry>
                 
                 <!-- 
                 <entry key="entity_comparison">
@@ -73,10 +81,13 @@
                 <entry key="entity_comparison">
                     <ref bean="entity_comparison"></ref>
                 </entry>
-                
                                 
                 <entry key="pub_temporal">
                     <ref bean="pub_temporal"></ref>
+                </entry>
+                
+                <entry key="publication-graph">
+                    <ref bean="entity_comparison"></ref>
                 </entry>
 
 				<entry key="coprincipalinvestigator">
@@ -89,7 +100,11 @@
 				                                
                 <entry key="grant_temporal">
                     <ref bean="grant_temporal"></ref>
-                </entry>			
+                </entry>
+                
+                <entry key="grant-graph">
+                    <ref bean="entity_grant_count"></ref>
+                </entry>                			
 				 
 			</map>
 		</property>

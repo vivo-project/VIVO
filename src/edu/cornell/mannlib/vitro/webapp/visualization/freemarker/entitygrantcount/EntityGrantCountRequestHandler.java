@@ -59,6 +59,14 @@ public class EntityGrantCountRequestHandler implements
 	}
 
 	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Uncached implementation for Grant Temporal " 
+				+ "Visualization does not provide Short URL Response.");
+	}
+
+	@Override
 	public Map<String, String> generateDataVisualization(
 			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
@@ -328,5 +336,6 @@ public class EntityGrantCountRequestHandler implements
 		}	
 
 		return csvFileContent.toString();
-	}	
+	}
+	
 }
