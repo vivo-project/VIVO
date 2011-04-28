@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
@@ -17,6 +19,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -43,6 +46,24 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
  * @author cdtank
  */
 public class UtilitiesRequestHandler implements VisualizationRequestHandler {
+	
+	/**
+	 * TODO: Remove this method once Rebecca creates one. Right now it is the exact copy of the method found in 
+	 * BaseIndividualTemplateModel.getRdfUrl 
+	 * @return
+	 */
+	private boolean isIndividualURIBasedOnDefaultNamespace(String givenURI, VitroRequest vitroRequest) {
+		URI uri = new URIImpl(givenURI);
+        String namespace = uri.getNamespace();
+        
+        // Individuals in the default namespace
+        // e.g., http://vivo.cornell.edu/individual/n2345/n2345.rdf
+        // where default namespace = http://vivo.cornell.edu/individual/ 
+        // Other individuals: http://some.other.namespace/n2345?format=rdfxml
+        String defaultNamespace = vitroRequest.getWebappDaoFactory().getDefaultNamespace();
+        return (defaultNamespace.equals(namespace)) ? true : false;
+	}
+    
 	
 	public Object generateAjaxVisualization(VitroRequest vitroRequest,
 											Log log, 
@@ -171,24 +192,56 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			
-	    	/*
-	    	 * By default we will be generating profile url else some specific url like 
-	    	 * coAuthorShip vis url for that individual.
-	    	 * */
-			ParamMap coAuthorProfileURLParams = new ParamMap(
-								VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-								individualURI,
-								VisualizationFrameworkConstants.VIS_TYPE_KEY,
-								VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
-								VisualizationFrameworkConstants.RENDER_MODE_KEY,
-								VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
 			
+			if (isIndividualURIBasedOnDefaultNamespace(individualURI, vitroRequest)) {
+				
+				try {
+					
+					Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao().getIndividualByURI(individualURI);
+
+					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+					 			+ "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL 
+					 			+ "/" + individual.getLocalName();
+					
+				} catch(Exception e) {
+					/*
+					 * In case of exception dont do anything let it create long form urls. 
+					 * */
+				}
+			} 
+				
+			ParamMap coAuthorProfileURLParams = new ParamMap(
+					VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					individualURI,
+					VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+					VisualizationFrameworkConstants.VIS_MODE_KEY,
+					VisualizationFrameworkConstants.COAUTHOR_VIS_MODE);
+
 			return UrlBuilder.getUrl(
 						VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 						coAuthorProfileURLParams);
 			
 		} else if (VisualizationFrameworkConstants.COPI_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
+			
+			
+			if (isIndividualURIBasedOnDefaultNamespace(individualURI, vitroRequest)) {
+				
+				try {
+					
+					Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao().getIndividualByURI(individualURI);
+
+					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+					 			+ "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL
+					 			+ "/" + individual.getLocalName();
+					
+				} catch(Exception e) {
+					/*
+					 * In case of exception dont do anything let it create long form urls. 
+					 * */
+				}
+			} 
 			
 	    	/*
 	    	 * By default we will be generating profile url else some specific url like 
@@ -289,7 +342,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			return getHighestLevelOrganizationTemporalGraphVisURL(
 							highestLevelOrganizationQueryHandler.getQueryResult(),
-							fieldLabelToOutputFieldLabel);
+							fieldLabelToOutputFieldLabel,
+							vitroRequest);
 			
 		} else {
 			
@@ -304,7 +358,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	}
 
 	private String getHighestLevelOrganizationTemporalGraphVisURL(ResultSet resultSet,
-			   Map<String, String> fieldLabelToOutputFieldLabel) {
+			   Map<String, String> fieldLabelToOutputFieldLabel,
+			   VitroRequest vitroRequest) {
 
 		GenericQueryMap queryResult = new GenericQueryMap();
 		
@@ -320,6 +375,23 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			if (organizationNode != null) {
 				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), 
 									 organizationNode.toString());
+				
+				if (isIndividualURIBasedOnDefaultNamespace(organizationNode.toString(), vitroRequest)) {
+					
+					try {
+						
+						Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao().getIndividualByURI(organizationNode.toString());
+
+						return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+						 			+ "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL
+						 			+ "/" + individual.getLocalName();
+						
+					} catch(Exception e) {
+						/*
+						 * In case of exception dont do anything let it create long form urls. 
+						 * */
+					}
+				} 				
 				
 				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(
 						VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,

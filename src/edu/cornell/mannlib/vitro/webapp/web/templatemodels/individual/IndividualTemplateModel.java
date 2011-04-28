@@ -50,7 +50,6 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         String coauthorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";
     	
     	return getVisUrl(coauthorVisURL);
-    	
     }
 
 	/**
@@ -100,7 +99,6 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         String temporalVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";
     	
     	return getVisUrl(temporalVisURL);
-        
     }
 
     public String getSelfEditingId() {
