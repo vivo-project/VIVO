@@ -46,6 +46,13 @@ public class EntityGrantCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		return generateStandardVisualizationForGrantTemporalVis(vitroRequest,
+				log, dataset, entityURI);
+	}
+
+	private ResponseValues generateStandardVisualizationForGrantTemporalVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String entityURI) throws MalformedQueryParametersException {
 		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
@@ -62,8 +69,10 @@ public class EntityGrantCountRequestHandler implements
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataSource) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Uncached implementation for Grant Temporal " 
-				+ "Visualization does not provide Short URL Response.");
+
+		return generateStandardVisualizationForGrantTemporalVis(
+				vitroRequest, log, dataSource,  parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
+
 	}
 
 	@Override

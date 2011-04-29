@@ -44,6 +44,14 @@ public class EntityPublicationCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		return generateStandardVisualizationForPublicationTemporalVis(
+				vitroRequest, log, dataset, entityURI);
+	}
+
+	private ResponseValues generateStandardVisualizationForPublicationTemporalVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String entityURI) throws MalformedQueryParametersException {
+		
 		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
@@ -55,14 +63,17 @@ public class EntityPublicationCountRequestHandler implements
 		}
 		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
+		
 	}
 
 	@Override
 	public ResponseValues generateVisualizationForShortURLRequests(
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataSource) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Uncached implementation for Publication Temporal " 
-				+ "Visualization does not provide Short URL Response.");
+
+		return generateStandardVisualizationForPublicationTemporalVis(
+				vitroRequest, log, dataSource,  parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
+		
 	}
 
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
