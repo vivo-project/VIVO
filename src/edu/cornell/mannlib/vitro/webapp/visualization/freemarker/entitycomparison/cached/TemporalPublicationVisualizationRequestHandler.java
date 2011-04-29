@@ -284,6 +284,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
         body.put("portalBean", portal);
         body.put("title", organizationLabel + " - Temporal Graph Visualization");
         body.put("organizationURI", entityURI);
+        body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("organizationLabel", organizationLabel);
         
         return new TemplateResponseValues(standaloneTemplate, body);

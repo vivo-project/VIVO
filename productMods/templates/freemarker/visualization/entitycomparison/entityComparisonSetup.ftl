@@ -3,19 +3,30 @@
 <#assign standardVisualizationURLRoot ="/visualization">
 <#assign ajaxVisualizationURLRoot ="/visualizationAjax">
 <#assign dataVisualizationURLRoot ="/visualizationData">
+<#assign shortVisualizationURLRoot ="/vis">
 
 <#assign organizationURI ="${organizationURI?url}">
 <#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
 
 <#assign subOrganizationVivoProfileURL = "${urls.base}/individual?">
 
-<#assign subOrganizationGrantTemporalGraphCommonURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_grant_count">
-<#assign subOrganizationPublicationTemporalGraphCommonURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison">
+<#assign subOrganizationGrantTemporalGraphCommonURL = "${urls.base}${shortVisualizationURLRoot}/grant-graph/">
+<#assign subOrganizationPublicationTemporalGraphCommonURL = "${urls.base}${shortVisualizationURLRoot}/publication-graph/">
 
-<#assign organizationPublicationTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}">
+
+<#if organizationLocalName?has_content >
+    
+    <#assign organizationPublicationTemporalGraphURL = '${urls.base}${shortVisualizationURLRoot}/publication-graph/${organizationLocalName}'>
+    <#assign organizationGrantTemporalGraphURL = "${urls.base}${shortVisualizationURLRoot}/grant-graph/${organizationLocalName}">
+    
+<#else>
+
+    <#assign organizationPublicationTemporalGraphURL = '${urls.base}${shortVisualizationURLRoot}/publication-graph/?uri=${organizationURI}'>
+    <#assign organizationGrantTemporalGraphURL = "${urls.base}${shortVisualizationURLRoot}/grant-graph/?uri=${organizationURI}">
+
+</#if>
+
 <#assign organizationPublicationTemporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&vis_mode=json">
-
-<#assign organizationGrantTemporalGraphURL = "${urls.base}${standardVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}">
 <#assign organizationGrantTemporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}&vis_mode=json">
 
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>

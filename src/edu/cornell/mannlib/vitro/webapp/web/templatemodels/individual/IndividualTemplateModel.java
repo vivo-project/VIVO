@@ -52,23 +52,6 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     	return getVisUrl(coauthorVisURL);
     }
 
-	/**
-	 * TODO: Remove this method once Rebecca creates one. Right now it is the exact copy of the method found in 
-	 * BaseIndividualTemplateModel.getRdfUrl 
-	 * @return
-	 */
-	private boolean isIndividualURIBasedOnDefaultNamespace() {
-		URI uri = new URIImpl(getUri());
-        String namespace = uri.getNamespace();
-        
-        // Individuals in the default namespace
-        // e.g., http://vivo.cornell.edu/individual/n2345/n2345.rdf
-        // where default namespace = http://vivo.cornell.edu/individual/ 
-        // Other individuals: http://some.other.namespace/n2345?format=rdfxml
-        String defaultNamespace = vreq.getWebappDaoFactory().getDefaultNamespace();
-        return (defaultNamespace.equals(namespace)) ? true : false;
-	}
-    
     public String getCoInvestigatorVisUrl() {
     	
     	String coinvestigatorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";
@@ -77,7 +60,9 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
 
 	private String getVisUrl(String coinvestigatorVisURL) {
-		boolean isUsingDefaultNameSpace = isIndividualURIBasedOnDefaultNamespace();
+		boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
+												getUri(),
+												vreq);
         
         if (isUsingDefaultNameSpace) {
         	

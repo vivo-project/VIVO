@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
@@ -19,7 +17,6 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -33,6 +30,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Ge
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.AllPropertiesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
 /**
@@ -46,24 +44,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Visual
  * @author cdtank
  */
 public class UtilitiesRequestHandler implements VisualizationRequestHandler {
-	
-	/**
-	 * TODO: Remove this method once Rebecca creates one. Right now it is the exact copy of the method found in 
-	 * BaseIndividualTemplateModel.getRdfUrl 
-	 * @return
-	 */
-	private boolean isIndividualURIBasedOnDefaultNamespace(String givenURI, VitroRequest vitroRequest) {
-		URI uri = new URIImpl(givenURI);
-        String namespace = uri.getNamespace();
-        
-        // Individuals in the default namespace
-        // e.g., http://vivo.cornell.edu/individual/n2345/n2345.rdf
-        // where default namespace = http://vivo.cornell.edu/individual/ 
-        // Other individuals: http://some.other.namespace/n2345?format=rdfxml
-        String defaultNamespace = vitroRequest.getWebappDaoFactory().getDefaultNamespace();
-        return (defaultNamespace.equals(namespace)) ? true : false;
-	}
-    
 	
 	public Object generateAjaxVisualization(VitroRequest vitroRequest,
 											Log log, 
@@ -193,23 +173,19 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 						.equalsIgnoreCase(visMode)) {
 			
 			
-			if (isIndividualURIBasedOnDefaultNamespace(individualURI, vitroRequest)) {
-				
-				try {
-					
-					Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao().getIndividualByURI(individualURI);
+			
+			String individualLocalName = UtilityFunctions.getIndividualLocalName(
+					individualURI,
+					vitroRequest);
 
-					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
-					 			+ "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL 
-					 			+ "/" + individual.getLocalName();
-					
-				} catch(Exception e) {
-					/*
-					 * In case of exception dont do anything let it create long form urls. 
-					 * */
-				}
-			} 
+			if (StringUtils.isNotBlank(individualLocalName)) {
+			
+				return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+				 			+ "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL 
+				 			+ "/" + individualLocalName;
 				
+			} 
+			
 			ParamMap coAuthorProfileURLParams = new ParamMap(
 					VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
 					individualURI,
@@ -226,21 +202,16 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 						.equalsIgnoreCase(visMode)) {
 			
 			
-			if (isIndividualURIBasedOnDefaultNamespace(individualURI, vitroRequest)) {
-				
-				try {
-					
-					Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao().getIndividualByURI(individualURI);
+			String individualLocalName = UtilityFunctions.getIndividualLocalName(
+					individualURI,
+					vitroRequest);
 
-					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
-					 			+ "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL
-					 			+ "/" + individual.getLocalName();
-					
-				} catch(Exception e) {
-					/*
-					 * In case of exception dont do anything let it create long form urls. 
-					 * */
-				}
+			if (StringUtils.isNotBlank(individualLocalName)) {
+			
+				return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+				 			+ "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL
+				 			+ "/" + individualLocalName;
+				
 			} 
 			
 	    	/*
@@ -376,21 +347,15 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), 
 									 organizationNode.toString());
 				
-				if (isIndividualURIBasedOnDefaultNamespace(organizationNode.toString(), vitroRequest)) {
+				String individualLocalName = UtilityFunctions.getIndividualLocalName(
+													organizationNode.toString(),
+													vitroRequest);
+				
+				if (StringUtils.isNotBlank(individualLocalName)) {
 					
-					try {
-						
-						Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao().getIndividualByURI(organizationNode.toString());
-
-						return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
-						 			+ "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL
-						 			+ "/" + individual.getLocalName();
-						
-					} catch(Exception e) {
-						/*
-						 * In case of exception dont do anything let it create long form urls. 
-						 * */
-					}
+					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+					 			+ "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL
+					 			+ "/" + individualLocalName;
 				} 				
 				
 				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(

@@ -13,6 +13,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
@@ -234,6 +235,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         body.put("egoURIParam", egoURI);
         
+        body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
+        
         String title = "";
         
         if (coAuthorshipVO.getCollaborators() != null 
@@ -269,6 +272,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		Portal portal = vitroRequest.getPortal();
         
         body.put("egoURIParam", egoURI);
+        
+        body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
         
         String title = "";
         

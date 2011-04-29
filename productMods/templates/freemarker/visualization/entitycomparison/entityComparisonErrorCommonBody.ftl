@@ -1,9 +1,15 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#assign standardVisualizationURLRoot ="/visualization">
+<#assign shortVisualizationURLRoot ="/vis">
 
 <#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
-<#assign temporalGraphURL = '${urls.base}${standardVisualizationURLRoot}?vis=${otherVisType}&uri=${organizationURI}&labelField=label'>
+
+<#if organizationLocalName?has_content >
+    <#assign temporalGraphURL = '${urls.base}${shortVisualizationURLRoot}/${otherVisType}/${organizationLocalName}'>
+<#else>
+    <#assign temporalGraphURL = '${urls.base}${shortVisualizationURLRoot}/${otherVisType}/?uri=${organizationURI}'>
+</#if>
 
 <div id="error-container">
 

@@ -763,7 +763,7 @@ function getVIVOURL(entityURI){
 
 function getTemporalVisURL(entityURI) {
 	
-	return temporalGraphCommonURL + "&uri=" + entityURI ;
+	return temporalGraphCommonURL + "?uri=" + entityURI ;
 }
 
 function getVIVOProfileURL(given_uri) {
