@@ -18,6 +18,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.google.gson.Gson;
 
+import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -260,5 +261,32 @@ public class UtilityFunctions {
 					.getIndividualByURI(subentity.getIndividualURI())
 					.isVClass("http://xmlns.com/foaf/0.1/Person");
 	}
+	
 
+	/**
+	 * 
+	 * This method will test whether the current uri is based off of default namespace. If so, 
+	 * go ahead & provide local name. 
+	 * @param givenURI
+	 * @param vitroRequest
+	 * @return
+	 */
+	public static String getIndividualLocalName(String givenURI, VitroRequest vitroRequest) {
+		
+		if (UrlBuilder.isUriInDefaultNamespace(givenURI, vitroRequest)) {
+			
+			try {
+				
+				Individual individual = vitroRequest.getWebappDaoFactory().getIndividualDao()
+												.getIndividualByURI(givenURI);
+				
+				return individual.getLocalName();
+				
+			} catch (Exception e) {
+				
+			}
+		}
+		
+		return "";
+	}
 }

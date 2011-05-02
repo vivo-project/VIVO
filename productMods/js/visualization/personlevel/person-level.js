@@ -19,7 +19,7 @@ function getWellFormedURLs(given_uri, type) {
 
 		finalURL = $.ajax({
 			url: contextPath + "/visualizationAjax",
-			data: ({vis: "utilities", vis_mode: "PERSON_LEVEL_URL", uri: given_uri}),
+			data: ({vis: "utilities", vis_mode: "COAUTHORSHIP_URL", uri: given_uri}),
 			dataType: "text",
 			async: false,
 			success:function(data){

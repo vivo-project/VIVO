@@ -33,15 +33,6 @@
             <legend>Search form</legend>
             
             <form id="search-form" action="${urls.search}" name="search" role="search"> 
-                <#if user.showFlag1SearchField>
-                    <select id="search-form-modifier" name="flag1" class="form-item" >
-                        <option value="nofiltering" selected="selected">entire database (${user.loginName})</option>
-                        <option value="${portalId}">${siteTagline!}</option>
-                    </select>
-                <#else>
-                    <input type="hidden" name="flag1" value="${portalId}" /> 
-                </#if> 
-                
                 <div id="search-field">
                     <input type="text" name="querytext" class="search-vivo" value="${querytext!}" />
                     <input type="submit" value="Search" class="search">

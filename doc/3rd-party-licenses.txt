@@ -33,7 +33,6 @@ log4j
 lucene-analyzers
 lucene-core
 lucene-highlighter
-soapmonitorapplet
 solr
 spring
 stax-api

@@ -75,6 +75,13 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	
 	}
 	
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Person Grant Count Visualization does not provide " 
+					+ "Short URL Response.");
+	}
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,

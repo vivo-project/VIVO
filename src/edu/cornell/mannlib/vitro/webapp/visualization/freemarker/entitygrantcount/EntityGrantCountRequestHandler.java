@@ -46,6 +46,13 @@ public class EntityGrantCountRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		return generateStandardVisualizationForGrantTemporalVis(vitroRequest,
+				log, dataset, entityURI);
+	}
+
+	private ResponseValues generateStandardVisualizationForGrantTemporalVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String entityURI) throws MalformedQueryParametersException {
 		if (StringUtils.isBlank(entityURI)) {
 			
 			entityURI = EntityComparisonUtilityFunctions
@@ -56,6 +63,16 @@ public class EntityGrantCountRequestHandler implements
 			
 		}
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
+	}
+
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+
+		return generateStandardVisualizationForGrantTemporalVis(
+				vitroRequest, log, dataSource,  parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
+
 	}
 
 	@Override
@@ -242,6 +259,7 @@ public class EntityGrantCountRequestHandler implements
 		body.put("portalBean", portal);
 		body.put("title", organizationLabel + " - Temporal Graph Visualization");
 		body.put("organizationURI", entityURI);
+		body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
 		body.put("organizationLabel", organizationLabel);
 		
 		return new TemplateResponseValues(standaloneTemplate, body);
@@ -328,5 +346,6 @@ public class EntityGrantCountRequestHandler implements
 		}	
 
 		return csvFileContent.toString();
-	}	
+	}
+	
 }

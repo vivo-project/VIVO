@@ -27,6 +27,12 @@ public interface VisualizationRequestHandler {
 							   Log log, 
 							   Dataset dataSource) throws MalformedQueryParametersException;
 	
+	ResponseValues generateVisualizationForShortURLRequests(
+						Map<String, String> parameters,
+						VitroRequest vitroRequest,
+						Log log,
+						Dataset dataSource) throws MalformedQueryParametersException;
+	
 	Object generateAjaxVisualization(VitroRequest vitroRequest,
 								     Log log, 
 								     Dataset dataSource) throws MalformedQueryParametersException;

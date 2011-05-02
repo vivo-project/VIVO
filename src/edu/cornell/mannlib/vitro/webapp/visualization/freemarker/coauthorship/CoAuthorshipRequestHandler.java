@@ -4,9 +4,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
@@ -14,10 +14,8 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
@@ -42,6 +40,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
 			Dataset dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("CoAuthorship does not provide Ajax Response.");
+	}
+
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("CoAuthorship does not provide Short URL Response.");
 	}
 
 	@Override
@@ -288,4 +293,5 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 		return fileData;
 	}
+
 }

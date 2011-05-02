@@ -145,7 +145,14 @@
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.search.lucene.LuceneSetup </listener-class>
   </listener>
-
+  <!--
+  <listener>
+    <listener-class>
+      edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
+    </listener-class>
+  </listener>
+  -->
+  
   <!--  vivo specific, must appear before other policies -->
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
@@ -193,14 +200,6 @@
     <listener-class>edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup</listener-class>
    </listener>
    
-  <!--
-    <listener>
-        <listener-class>
-            edu.cornell.mannlib.vitro.webapp.auth.identifier.SetupFakeSelfEditingIdentifierFactory
-        </listener-class>
-    </listener>
--->
-
   <!--
     <listener>
          <listener-class>
@@ -446,15 +445,6 @@
     <url-pattern>/freemarkersamples</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-    <servlet-name>FakeSelfEditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.FakeSelfEditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FakeSelfEditController</servlet-name>
-    <url-pattern>/admin/fakeselfedit</url-pattern>
-  </servlet-mapping>
-
   <servlet>
     <servlet-name>SiteAdminController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SiteAdminController</servlet-class>
@@ -997,6 +987,12 @@
     <servlet-name>SearchController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.PagedSearchController</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>SearchController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrPagedSearchController</servlet-class>
+  </servlet>
+  -->
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/search</url-pattern>
@@ -1314,7 +1310,12 @@
    <servlet>
     <servlet-name>StandardVisualizationController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController</servlet-class>
-  </servlet>
+   </servlet>
+   
+  <servlet>
+    <servlet-name>ShortURLVisualizationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.ShortURLVisualizationController</servlet-class>
+  </servlet>   
 
   <servlet-mapping>
     <servlet-name>StandardVisualizationController</servlet-name>
@@ -1324,6 +1325,14 @@
   <servlet-mapping>
     <servlet-name>StandardVisualizationController</servlet-name>
     <url-pattern>/visualization</url-pattern>
+  </servlet-mapping>
+  
+  <!--
+	This mapping is done to facilitate shorter vis urls.  
+  -->
+  <servlet-mapping>
+    <servlet-name>ShortURLVisualizationController</servlet-name>
+    <url-pattern>/vis/*</url-pattern>
   </servlet-mapping>
 
    <servlet>

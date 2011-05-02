@@ -30,6 +30,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Ge
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.AllPropertiesQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.GenericQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
 /**
@@ -171,24 +172,47 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 		} else if (VisualizationFrameworkConstants.COAUTHOR_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
 			
-	    	/*
-	    	 * By default we will be generating profile url else some specific url like 
-	    	 * coAuthorShip vis url for that individual.
-	    	 * */
-			ParamMap coAuthorProfileURLParams = new ParamMap(
-								VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-								individualURI,
-								VisualizationFrameworkConstants.VIS_TYPE_KEY,
-								VisualizationFrameworkConstants.COAUTHORSHIP_VIS,
-								VisualizationFrameworkConstants.RENDER_MODE_KEY,
-								VisualizationFrameworkConstants.STANDALONE_RENDER_MODE);
 			
+			
+			String individualLocalName = UtilityFunctions.getIndividualLocalName(
+					individualURI,
+					vitroRequest);
+
+			if (StringUtils.isNotBlank(individualLocalName)) {
+			
+				return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+				 			+ "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL 
+				 			+ "/" + individualLocalName;
+				
+			} 
+			
+			ParamMap coAuthorProfileURLParams = new ParamMap(
+					VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+					individualURI,
+					VisualizationFrameworkConstants.VIS_TYPE_KEY,
+					VisualizationFrameworkConstants.PERSON_LEVEL_VIS,
+					VisualizationFrameworkConstants.VIS_MODE_KEY,
+					VisualizationFrameworkConstants.COAUTHOR_VIS_MODE);
+
 			return UrlBuilder.getUrl(
 						VisualizationFrameworkConstants.FREEMARKERIZED_VISUALIZATION_URL_PREFIX,
 						coAuthorProfileURLParams);
 			
 		} else if (VisualizationFrameworkConstants.COPI_UTILS_VIS_MODE
 						.equalsIgnoreCase(visMode)) {
+			
+			
+			String individualLocalName = UtilityFunctions.getIndividualLocalName(
+					individualURI,
+					vitroRequest);
+
+			if (StringUtils.isNotBlank(individualLocalName)) {
+			
+				return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+				 			+ "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL
+				 			+ "/" + individualLocalName;
+				
+			} 
 			
 	    	/*
 	    	 * By default we will be generating profile url else some specific url like 
@@ -289,7 +313,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			
 			return getHighestLevelOrganizationTemporalGraphVisURL(
 							highestLevelOrganizationQueryHandler.getQueryResult(),
-							fieldLabelToOutputFieldLabel);
+							fieldLabelToOutputFieldLabel,
+							vitroRequest);
 			
 		} else {
 			
@@ -304,7 +329,8 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 	}
 
 	private String getHighestLevelOrganizationTemporalGraphVisURL(ResultSet resultSet,
-			   Map<String, String> fieldLabelToOutputFieldLabel) {
+			   Map<String, String> fieldLabelToOutputFieldLabel,
+			   VitroRequest vitroRequest) {
 
 		GenericQueryMap queryResult = new GenericQueryMap();
 		
@@ -320,6 +346,17 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			if (organizationNode != null) {
 				queryResult.addEntry(fieldLabelToOutputFieldLabel.get("organization"), 
 									 organizationNode.toString());
+				
+				String individualLocalName = UtilityFunctions.getIndividualLocalName(
+													organizationNode.toString(),
+													vitroRequest);
+				
+				if (StringUtils.isNotBlank(individualLocalName)) {
+					
+					return UrlBuilder.getUrl(VisualizationFrameworkConstants.SHORT_URL_VISUALIZATION_REQUEST_PREFIX)
+					 			+ "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL
+					 			+ "/" + individualLocalName;
+				} 				
 				
 				ParamMap highestLevelOrganizationTemporalGraphVisURLParams = new ParamMap(
 						VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
@@ -433,6 +470,14 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities does not provide Standard Response.");
+	}
+	
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataSource) throws MalformedQueryParametersException {
+		throw new UnsupportedOperationException("Utilities Visualization does not provide " 
+					+ "Short URL Response.");
 	}
 }
 

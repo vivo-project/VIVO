@@ -6,15 +6,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openrdf.model.URI;
+import org.openrdf.model.impl.URIImpl;
 
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
@@ -27,28 +32,9 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     private String getBaseVisUrl() {
-        return getUrl(Route.VISUALIZATION.path(), "uri", getUri());
+        return getUrl(Route.VISUALIZATION_SHORT.path());
     }
     
-    private String getVisUrl(ParamMap params) {
-        String baseVisUrl = getBaseVisUrl();
-        return UrlBuilder.addParams(baseVisUrl, params);
-    }
-    
-    private String getVisUrl(String...params) {
-        return getVisUrl(new ParamMap(params));
-    }
-    
-    private String getPersonVisUrl(ParamMap params) {
-        if (!isPerson()) {
-            return null;
-        }
-        ParamMap paramMap = new ParamMap("vis", "person_level");
-        paramMap.put(params);
-        return getVisUrl(paramMap);
-    }
-    
-      
     /* Access methods for templates */
 
     public boolean isPerson() {
@@ -60,21 +46,62 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     public String getCoAuthorVisUrl() {
-        return getPersonVisUrl(new ParamMap("vis_mode", "coauthor"));
+    	
+        String coauthorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(coauthorVisURL);
     }
-    
+
     public String getCoInvestigatorVisUrl() {
-        return getPersonVisUrl(new ParamMap("vis_mode", "copi"));
+    	
+    	String coinvestigatorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(coinvestigatorVisURL);
     }
+
+	private String getVisUrl(String coinvestigatorVisURL) {
+		boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
+												getUri(),
+												vreq);
+        
+        if (isUsingDefaultNameSpace) {
+        	
+        	return coinvestigatorVisURL + getLocalName();
+        	
+        } else {
+        	
+        	return UrlBuilder.addParams(
+        			coinvestigatorVisURL, 
+        			new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, getUri())); 
+        }
+	}
 
     public String getTemporalGraphUrl() {
         if (!isOrganization()) {
             return null;
         }
-        return getVisUrl("vis", "entity_comparison");
+        
+        String temporalVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(temporalVisURL);
     }
 
-
+    public String getSelfEditingId() {
+        String id = null;
+        String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");
+        if (! StringUtils.isBlank(idMatchingProperty)) {
+            // Use assertions model to side-step filtering. We need to get the value regardless of whether the property
+            // is visible to the current user.
+            WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
+            Collection<DataPropertyStatement> ids = 
+                wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, idMatchingProperty);
+            if (ids.size() > 0) {
+                id = ids.iterator().next().getData();
+            }
+        }
+        return id;
+    }
+    
     public Map<String, String> getQrData() {
         if(qrData == null)
             qrData = generateQrData();

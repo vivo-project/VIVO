@@ -69,7 +69,7 @@
 		         webXmlFragment="${build.jsp.dir}generated_web.xml"
 		         outputDir="${build.jsp.dir}/src"
 		         trimSpaces="true"
-		         failOnError="false" />
+		         failOnError="true" />
 	</target>
 
 	<target name="compile" depends="jspc">

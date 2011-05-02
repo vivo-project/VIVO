@@ -13,6 +13,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
@@ -71,15 +72,36 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	public ResponseValues generateStandardVisualization(
 			VitroRequest vitroRequest, Log log, Dataset dataset)
 			throws MalformedQueryParametersException {
-
+		
         String egoURI = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 
         String visMode = vitroRequest.getParameter(
         							VisualizationFrameworkConstants.VIS_MODE_KEY);
         
+        return generateStandardVisualizationForPersonLevelVis(vitroRequest,
+				log, dataset, egoURI, visMode);
         
-        if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
+	}
+
+	@Override
+	public ResponseValues generateVisualizationForShortURLRequests(
+			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
+			Dataset dataset) throws MalformedQueryParametersException {
+        
+        return generateStandardVisualizationForPersonLevelVis(
+        				vitroRequest,
+        				log, 
+        				dataset, 
+        				parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY), 
+        				parameters.get(VisualizationFrameworkConstants.VIS_MODE_KEY));
+	}
+
+	private ResponseValues generateStandardVisualizationForPersonLevelVis(
+			VitroRequest vitroRequest, Log log, Dataset dataset, String egoURI,
+			String visMode) throws MalformedQueryParametersException {
+		
+		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
         	
         	ModelConstructor constructQueryRunner = 
         			new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
@@ -140,7 +162,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 					coPIData,
 	    			vitroRequest);
 	    	
-        	
         } else {
         	
         	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
@@ -198,7 +219,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 	    			vitroRequest);
 
         }
-        
 	}
 	
 	private TemplateResponseValues prepareCoAuthorStandaloneResponse(
@@ -214,6 +234,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         String	standaloneTemplate = "coAuthorPersonLevel.ftl";
         
         body.put("egoURIParam", egoURI);
+        
+        body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
         
         String title = "";
         
@@ -251,6 +273,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         
         body.put("egoURIParam", egoURI);
         
+        body.put("egoLocalName", UtilityFunctions.getIndividualLocalName(egoURI, vitroRequest));
+        
         String title = "";
         
         if (coPIVO.getCollaborators() != null && coPIVO.getCollaborators().size() > 0) {
@@ -273,5 +297,4 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		return new TemplateResponseValues(standaloneTemplate, body);
 		
 	}
-	
 }
