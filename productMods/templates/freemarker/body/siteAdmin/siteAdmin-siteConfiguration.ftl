@@ -8,15 +8,8 @@
         <h3>Site Configuration</h3>
 
         <ul>
-            <#if siteConfig.urls.portals??>
-                <#if siteConfig.urls.siteInfo??>
-                    <li><a href="${siteConfig.urls.siteInfo}">Current portal information</a></li>
-                </#if>
-                <li><a href="${siteConfig.urls.portals}">List all portals</a></li>
-            <#else>
-                <#if siteConfig.urls.siteInfo??>
-                    <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
-                </#if>
+            <#if siteConfig.urls.siteInfo??>
+                <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
             </#if>
 
             <#if siteConfig.urls.menuN3Editor??>

@@ -13,19 +13,18 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
 
 /**
@@ -244,13 +243,10 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 */
 	private TemplateResponseValues prepareStandaloneResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer) {
-
-        Portal portal = vreq.getPortal();
         
         String standaloneTemplate = "personGrantCountStandaloneActivator.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("portalBean", portal);
         body.put("title", "Individual Grant Count visualization");
         body.put("sparklineVO", valueObjectContainer);
 
@@ -271,13 +267,9 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 			SparklineData valueObjectContainer, 
 			boolean shouldVIVOrenderVis) {
 
-        Portal portal = vreq.getPortal();
-
-
         String dynamicTemplate = "personGrantCountDynamicActivator.ftl";
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("portalBean", portal);
         body.put("sparklineVO", valueObjectContainer);
         body.put("shouldVIVOrenderVis", shouldVIVOrenderVis);
         

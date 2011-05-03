@@ -252,15 +252,6 @@
   </filter-mapping>
 
   <filter>
-    <filter-name>Portal Picker Filter</filter-name>
-    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.PortalPickerFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>Portal Picker Filter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-
-  <filter>
     <filter-name>WebappDaoFactorySDBPrep</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.WebappDaoFactorySDBPrep</filter-class>
   </filter>
@@ -845,15 +836,6 @@
   <servlet-mapping>
     <servlet-name>RestrictionOperationController</servlet-name>
     <url-pattern>/addRestriction</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>PortalsListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.PortalsListingController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PortalsListingController</servlet-name>
-    <url-pattern>/listPortals</url-pattern>
   </servlet-mapping>
 
   <servlet>

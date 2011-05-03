@@ -11,7 +11,6 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -230,7 +229,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		
 		Map<String, Object> body = new HashMap<String, Object>();
 		
-        Portal portal = vitroRequest.getPortal();
         String	standaloneTemplate = "coAuthorPersonLevel.ftl";
         
         body.put("egoURIParam", egoURI);
@@ -253,7 +251,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		body.put("egoPubSparklineVO", egoPubSparklineVO);
 		body.put("uniqueCoauthorsSparklineVO", uniqueCoauthorsSparklineVO);
 
-		body.put("portalBean", portal);
 		body.put("title",  title + "Person Level Visualization");
 
 		return new TemplateResponseValues(standaloneTemplate, body);
@@ -268,8 +265,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 					VitroRequest vitroRequest) {
 		
 		Map<String, Object> body = new HashMap<String, Object>();
-
-		Portal portal = vitroRequest.getPortal();
         
         body.put("egoURIParam", egoURI);
         
@@ -291,7 +286,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		body.put("egoGrantSparklineVO", egoGrantSparklineVO);
 		body.put("uniqueCoInvestigatorsSparklineVO", uniqueCopisSparklineVO);        	
 
-		body.put("portalBean", portal);
 		body.put("title",  title + "Person Level Visualization");
 
 		return new TemplateResponseValues(standaloneTemplate, body);
