@@ -18,12 +18,6 @@
             <#else>
                 <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>
-            <#-- List of links that appear in submenus, like the header and footer. -->
-                <li role="listitem"><a href="${urls.about}">About</a></li>
-            <#if urls.contact??>
-                <li role="listitem"><a href="${urls.contact}">Contact Us</a></li>
-            </#if>
-                <li role="listitem"><a href="http://www.vivoweb.org/support" target="blank">Support</a></li>
                 <li role="listitem"><a href="${urls.index}">Index</a></li>
         </ul>
     </nav>
