@@ -8,7 +8,7 @@
     <#list overview.statements as statement>
         <div class="individual-overview">
             <div class="overview-value">
-                ${statement.value}
+                <@p.dataPropertyStatement overview>${statement.value}</@p.dataPropertyStatement>
             </div>
             <@p.editingLinks "${overview.localName}" statement editable />
         </div>
