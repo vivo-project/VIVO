@@ -1318,6 +1318,15 @@
     <url-pattern>/admin/sparqlquery</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>PublicSparqlQuery</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.PublicSparqlServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PublicSparqlQuery</servlet-name>
+    <url-pattern>/sparqlendpoint</url-pattern>
+  </servlet-mapping>
 
 	<!--
 	  
