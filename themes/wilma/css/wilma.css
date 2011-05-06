@@ -1227,7 +1227,8 @@ ul#individual-personInPosition {
 ul#individual-personInPosition li {
     line-height: 1.8em;
 }
-ul#individual-personInPosition li a {
+ul#individual-personInPosition li a, 
+ul#individual-personInPosition li a span {
     color: #2485ae;
 }
 .individual-overview {
