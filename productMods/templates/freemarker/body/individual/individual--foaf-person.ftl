@@ -45,7 +45,11 @@
                     <ul id="individual-email" role="list">
                         <#list email.statements as statement>
                             <li role="listitem">
-                                <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon" /><a class="email" href="mailto:${statement.value}">${statement.value}</a>
+                                <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon" />
+                                <@p.rdfaDataContent email statement />
+                                <a class="email" href="mailto:${statement.value}" >
+                                    ${statement.value}
+                                </a>
                                 <@p.editingLinks "${email.localName}" statement editable />
                             </li>
                         </#list>
@@ -61,7 +65,8 @@
                     <ul id="individual-phone" role="list">
                         <#list phone.statements as statement>
                             <li role="listitem">                           
-                               <img class ="icon-phone  middle" src="${urls.images}/individual/phoneIcon.gif" alt="phone icon" />${statement.value}
+                                <img class ="icon-phone  middle" src="${urls.images}/individual/phoneIcon.gif" alt="phone icon" />
+                                <@p.rdfaDataValue phone>${statement.value}</@p.rdfaDataValue>
                                 <@p.editingLinks "${phone.localName}" statement editable />
                             </li>
                         </#list>
@@ -106,12 +111,14 @@
                             
                         <#-- Moniker / Preferred Title -->
                         <#-- Use Preferred Title over Moniker if it is populated -->
-                        <#assign title = (propertyGroups.getProperty("${core}preferredTitle").firstValue)! />
-                        <#if ! title?has_content>
-                            <#assign title = individual.moniker>
+                        <#assign title = propertyGroups.getProperty("${core}preferredTitle")>
+                        <#assign titleValue = title.firstValue!>
+                        <#if ! titleValue?has_content>
+                            <#assign title = "${namespaces.vitro.moniker}">
+                            <#assign titleValue = individual.moniker>
                         </#if>
-                        <#if title?has_content>
-                            <span class="preferred-title">${title}</span>
+                        <#if titleValue?has_content>
+                            <span class="preferred-title" property="${title.curie}">${titleValue}</span>
                         </#if>
                     </h1>
                 </#if>
