@@ -1245,7 +1245,8 @@ ul#individual-hasResearchArea li {
 ul#individual-hasResearchArea li:last-child {
     border-right: none;
 }
-ul#individual-hasResearchArea li a {
+ul#individual-hasResearchArea li a,
+ul#individual-hasResearchArea li a span {
     color: #2485ae;
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
@@ -1329,7 +1330,8 @@ article.property ul.property-list {
     font-size: 1em;
     color: #5e6363;
 }
-article.property ul.property-list li a {
+article.property ul.property-list li a,
+article.property ul.property-list li a span {
     color: #2485ae;
     line-height: 1.6em;
 }
