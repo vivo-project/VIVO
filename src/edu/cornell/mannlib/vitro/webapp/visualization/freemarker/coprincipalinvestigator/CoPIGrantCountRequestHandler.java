@@ -18,8 +18,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CollaborationDataCubeWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationDataCubeWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;

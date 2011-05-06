@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship;
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils;
 
 import java.io.Writer;
 import java.util.ArrayList;
@@ -20,8 +20,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaboratorComparator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 

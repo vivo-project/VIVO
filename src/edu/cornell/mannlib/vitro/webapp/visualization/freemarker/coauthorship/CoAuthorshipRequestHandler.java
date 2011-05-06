@@ -20,6 +20,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.Data
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationDataCubeWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
