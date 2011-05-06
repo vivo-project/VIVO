@@ -12,15 +12,15 @@
 <#macro showAuthorship statement property individual>
         
     <#if statement.infoResource??>     
-        <a href="${profileUrl(statement.infoResource)}"> 
+        <a href="${profileUrl(statement.infoResource)}">
             <span about="${individual.uri}" rel="core:authorInAuthorship">                     
                 <span about="${statement.authorship}" rel="core:linkedInformationResource">               
                     <span class="link" about="${statement.infoResource}" property="rdfs:label">
                         ${statement.infoResourceName}<#t>
-                    </span>
-                </span>
-            </span>
-         </a>             
+                    </span><#t>
+                </span><#t>
+            </span><#t>
+        </a><#t>       
         <#if statement.dateTimeValue?has_content>
             <span about="${statement.infoResource}" rel="core:dateTimeValue">
                 <#if statement.dateTime?has_content>
