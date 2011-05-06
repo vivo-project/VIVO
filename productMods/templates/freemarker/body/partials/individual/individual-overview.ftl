@@ -7,7 +7,7 @@
     <@p.addLinkWithLabel overview editable />
     <#list overview.statements as statement>
         <div class="individual-overview">
-            <div class="overview-value">
+            <div class="overview-value" property="${overview.curie}">
                 ${statement.value}
             </div>
             <@p.editingLinks "${overview.localName}" statement editable />

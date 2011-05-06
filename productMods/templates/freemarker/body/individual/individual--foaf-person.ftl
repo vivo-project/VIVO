@@ -7,7 +7,6 @@
 <div about="${individual.uri}"
     <#list rdfaNamespaces as ns>${ns}</#list>
 >
-
     <section id="individual-intro" class="vcard person" role="region">
     
         <section id="share-contact" role="region"> 
