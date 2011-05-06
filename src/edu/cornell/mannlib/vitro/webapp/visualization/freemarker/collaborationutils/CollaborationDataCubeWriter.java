@@ -26,7 +26,7 @@ public class CollaborationDataCubeWriter {
 	private String defaultNameSpace;
 	private String requestURL;
 
-	public CollaborationDataCubeWriter(CollaborationData visVOContainer, String requestURL, String defaultNameSpace) {
+	public CollaborationDataCubeWriter(CollaborationData visVOContainer, String defaultNameSpace, String requestURL) {
 		this.defaultNameSpace = defaultNameSpace;
 		this.requestURL = requestURL;
 		collaboratorDataCube = createCollaborationDataCubeContent(visVOContainer);
