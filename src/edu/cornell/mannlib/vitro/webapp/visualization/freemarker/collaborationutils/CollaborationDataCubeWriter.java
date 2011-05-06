@@ -69,7 +69,7 @@ public class CollaborationDataCubeWriter {
 		
 		Resource xciteDataset = collaboratorModel.createProperty(
 				collaboratorModel.getNsPrefixURI("xcite") 
-				+ "#dataset-" 
+				+ "dataset-" 
 				+ UUID.randomUUID());
 		
 		xciteDataset.addProperty(rdfType, qbDataset);
@@ -204,7 +204,7 @@ public class CollaborationDataCubeWriter {
 		
 		Resource observation = collaboratorModel.createResource(
 				xciteDataSet.getURI()
-				+ "--observation-"
+				+ "#observation-"
 				+ node.getCollaboratorID());
 		
 		observation.addProperty(

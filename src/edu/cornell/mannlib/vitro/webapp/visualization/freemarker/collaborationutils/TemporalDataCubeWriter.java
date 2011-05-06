@@ -54,7 +54,7 @@ public class TemporalDataCubeWriter {
 		Property qbDataSetProperty = temporalModel.createProperty(temporalModel.getNsPrefixURI("qb") + "dataSet");
 		
 		Resource xciteDataset = temporalModel.createProperty(temporalModel.getNsPrefixURI("xcite") 
-									+ "#dataset-" 
+									+ "dataset-" 
 									+ UUID.randomUUID());
 		
 		xciteDataset.addProperty(rdfType, qbDataset);
@@ -213,7 +213,7 @@ public class TemporalDataCubeWriter {
 		
 		Resource observation = collaboratorModel
 					.createResource(xciteDataset.getURI() 
-										+ "--observation-" + subEntityindex);
+										+ "#observation-" + subEntityindex);
 		
 		observation.addProperty(
 				rdfType, 
