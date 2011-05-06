@@ -18,6 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Res
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CollaborationDataCubeWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
@@ -82,6 +83,14 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			 * */
 				return prepareCoPIsListDataResponse(investigatorNodesAndEdges);
 				
+		} else if (VisualizationFrameworkConstants.DATA_CUBE_FORMAT
+				.equalsIgnoreCase(visMode)) { 
+			/*
+			 * When the csv file is required - based on which sparkline visualization will 
+			 * be rendered.
+			 * */
+				return prepareDataCubeResponse(investigatorNodesAndEdges);
+				
 		} else if (VisualizationFrameworkConstants.COPI_NETWORK_DOWNLOAD_VIS_MODE
 				.equalsIgnoreCase(visMode)) { 
 			/*
@@ -130,9 +139,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			csvFileContent.append("\n");
 			
 			}
-			
 		}
-		
 		return csvFileContent.toString();
 	}	
 	
@@ -286,6 +293,21 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 
 		return fileData;
 	
+	}
+	
+	private Map<String, String> prepareDataCubeResponse(
+									CollaborationData coPIData) {
+		
+		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(coPIData);
+		
+        Map<String, String> fileData = new HashMap<String, String>();
+
+        fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "application/rdf+xml");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+				dataCubeWriter.getCollaboratorDataCubeContent().toString());
+		
+		return fileData;
 	}
 
 }

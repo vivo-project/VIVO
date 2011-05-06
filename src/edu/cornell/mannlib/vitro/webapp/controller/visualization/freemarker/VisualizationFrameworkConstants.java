@@ -86,6 +86,8 @@ public class VisualizationFrameworkConstants {
 	public static final String COPI_NETWORK_STREAM_VIS_MODE = "copi_network_stream";
 	public static final String COPI_NETWORK_DOWNLOAD_VIS_MODE = "copi_network_download";
 	
+	public static final String DATA_CUBE_FORMAT = "data-cube";
+	
 	/*
 	 * These values represent possible utilities vis modes.
 	 * */

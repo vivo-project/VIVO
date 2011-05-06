@@ -98,6 +98,14 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 			 * */
 				return prepareNetworkDownloadDataResponse(authorNodesAndEdges);
 				
+		} else if (VisualizationFrameworkConstants.DATA_CUBE_FORMAT
+				.equalsIgnoreCase(visMode)) { 
+			/*
+			 * When the csv file is required - based on which sparkline visualization will 
+			 * be rendered.
+			 * */
+				return prepareDataCubeResponse(authorNodesAndEdges);
+				
 		} else {
     			/*
     			 * When the graphML file is required - based on which coauthorship network 
@@ -118,6 +126,30 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	}
 	
 	private String getCoauthorsListCSVContent(CollaborationData coAuthorshipData) {
+		
+		StringBuilder csvFileContent = new StringBuilder();
+		
+		csvFileContent.append("Co-author, Count\n");
+		
+		for (Collaborator currNode : coAuthorshipData.getCollaborators()) {			
+			/*
+			 * We have already printed the Ego Node info.
+			 * */
+			if (currNode != coAuthorshipData.getEgoCollaborator()) {
+				
+			
+			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getCollaboratorName()));
+			csvFileContent.append(",");
+			csvFileContent.append(currNode.getNumOfActivities());
+			csvFileContent.append("\n");
+			
+			}
+		}
+		
+		return csvFileContent.toString();
+	}
+	
+	private String getCoauthorsListDataCubeContent(CollaborationData coAuthorshipData) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
@@ -291,6 +323,21 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
 					 coAuthorshipGraphMLWriter.getCoAuthorshipGraphMLContent().toString());
 
+		return fileData;
+	}
+	
+	private Map<String, String> prepareDataCubeResponse(
+									CollaborationData authorNodesAndEdges) {
+		
+		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(authorNodesAndEdges);
+		
+        Map<String, String> fileData = new HashMap<String, String>();
+
+        fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+					 "application/rdf+xml");
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+				dataCubeWriter.getCollaboratorDataCubeContent().toString());
+		
 		return fileData;
 	}
 

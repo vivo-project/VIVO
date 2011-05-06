@@ -8,7 +8,7 @@ import java.util.Map;
 @SuppressWarnings("serial")
 public class QueryConstants {
 	
-	public static final Map<String, String> PREFIX_TO_NAMESPACE = new HashMap<String, String>() { {
+	private static final Map<String, String> PREFIX_TO_NAMESPACE = new HashMap<String, String>() { {
 		
 			put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 			put("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
@@ -55,6 +55,10 @@ public class QueryConstants {
 									+ ": <" + prefixEntry.getValue() + ">\n");
 		}
 		return prefixSection.toString();
+	}
+	
+	public static Map<String, String> getPrefixToNameSpace() {
+		return PREFIX_TO_NAMESPACE;
 	}
 }
 

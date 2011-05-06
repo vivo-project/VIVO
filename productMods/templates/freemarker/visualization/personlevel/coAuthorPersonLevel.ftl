@@ -21,6 +21,7 @@
 
 
 <#assign egoCoAuthorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthors'>
+<#assign egoCoAuthorsDataCubeURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=data-cube'>
 <#assign egoCoAuthorshipNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthor_network_download'>
 
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
@@ -141,7 +142,9 @@ $(document).ready(function(){
         <div  class="sub_headings"><h3>Co-Author Network </h3></div>
         
         <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a></div>
+                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a>
+                <a href="${egoCoAuthorsDataCubeURL}">(DataCube Link)</a>
+                </div>
         <#else>
 
                 <#if numOfAuthors?? && numOfAuthors <= 0 >

@@ -20,6 +20,8 @@
 
 </#if>
 
+
+<#assign egoCoInvestigatorDataCubeURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=data-cube'>
 <#assign egoCoInvestigatorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copis'>
 <#assign egoCoInvestigationNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_download'>
 
@@ -140,7 +142,9 @@ $(document).ready(function(){
         <div class="sub_headings"><h3 >Co-Investigator Network </h3></div>
         
         <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a></div>
+                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a>
+                <a href="${egoCoInvestigatorDataCubeURL}">(DataCube Link)</a>
+                </div>
         <#else>
 
             <#if numOfInvestigators?? && numOfInvestigators <= 0 >
