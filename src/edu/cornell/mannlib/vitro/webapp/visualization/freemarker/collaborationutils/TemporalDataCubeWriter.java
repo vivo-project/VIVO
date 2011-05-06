@@ -44,7 +44,7 @@ public class TemporalDataCubeWriter {
 		temporalModel.setNsPrefixes(QueryConstants.getPrefixToNameSpace());
 		temporalModel.setNsPrefix("qb", "http://purl.org/linked-data/cube#");
 		temporalModel.setNsPrefix("know", "http://xcite.hackerceo.org/vocab/histograms#");
-		temporalModel.setNsPrefix("xcite", defaultNameSpace + "#");
+		temporalModel.setNsPrefix("xcite", defaultNameSpace);
 
 		Property rdfsSeeAlso = temporalModel.createProperty(temporalModel.getNsPrefixURI("rdfs") + "seeAlso");
 		Property rdfType = temporalModel.createProperty(temporalModel.getNsPrefixURI("rdf") + "type");
@@ -54,7 +54,7 @@ public class TemporalDataCubeWriter {
 		Property qbDataSetProperty = temporalModel.createProperty(temporalModel.getNsPrefixURI("qb") + "dataSet");
 		
 		Resource xciteDataset = temporalModel.createProperty(temporalModel.getNsPrefixURI("xcite") 
-									+ "dataset" 
+									+ "#dataset-" 
 									+ UUID.randomUUID());
 		
 		xciteDataset.addProperty(rdfType, qbDataset);
@@ -212,8 +212,8 @@ public class TemporalDataCubeWriter {
 		Resource qbObservation = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("qb") + "Observation");
 		
 		Resource observation = collaboratorModel
-					.createResource(collaboratorModel.getNsPrefixURI("xcite") 
-										+ "observation" + subEntityindex);
+					.createResource(xciteDataset.getURI() 
+										+ "--observation-" + subEntityindex);
 		
 		observation.addProperty(
 				rdfType, 

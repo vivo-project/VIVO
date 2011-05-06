@@ -77,6 +77,11 @@ public class JenaResearch {
 				(Property) knowTally, 
 				"2");
 		
+		
+		System.out.println(" >>> " + observation.getLocalName());
+		System.out.println(observation.getNameSpace());
+		System.out.println(observation.getURI().substring("http://xcite.hackerceo.org/instance/".length()));
+		
 		Resource publication = collaboratorModel.createResource("http://vivo-trunk.indiana.edu/individual/PUB1");
 		
 		observation.addProperty(
@@ -93,7 +98,7 @@ public class JenaResearch {
 		
 		collaboratorModel.write(newWrite, "N-TRIPLE");
 		
-		System.out.println(" >>> " + newWrite.toString());
+//		System.out.println(" >>> " + newWrite.toString());
 		
 
 	}

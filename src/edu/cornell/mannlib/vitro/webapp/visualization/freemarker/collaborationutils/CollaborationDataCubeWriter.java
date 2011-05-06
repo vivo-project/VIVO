@@ -58,7 +58,7 @@ public class CollaborationDataCubeWriter {
 		collaboratorModel.setNsPrefixes(QueryConstants.getPrefixToNameSpace());
 		collaboratorModel.setNsPrefix("qb", "http://purl.org/linked-data/cube#");
 		collaboratorModel.setNsPrefix("know", "http://xcite.hackerceo.org/vocab/histograms#");
-		collaboratorModel.setNsPrefix("xcite", defaultNameSpace + "#");
+		collaboratorModel.setNsPrefix("xcite", defaultNameSpace);
 
 		Property rdfsSeeAlso = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdfs") + "seeAlso");
 		Property rdfType = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdf") + "type");
@@ -69,7 +69,7 @@ public class CollaborationDataCubeWriter {
 		
 		Resource xciteDataset = collaboratorModel.createProperty(
 				collaboratorModel.getNsPrefixURI("xcite") 
-				+ "dataset" 
+				+ "#dataset-" 
 				+ UUID.randomUUID());
 		
 		xciteDataset.addProperty(rdfType, qbDataset);
@@ -125,8 +125,6 @@ public class CollaborationDataCubeWriter {
 		Writer newWrite = new StringBuilderWriter();
 		
 		collaboratorModel.write(newWrite);
-		
-//		System.out.println(newWrite);
 		
 		dataCubeContent.append(newWrite.toString());
 	}
@@ -204,8 +202,9 @@ public class CollaborationDataCubeWriter {
 		
 		Resource qbObservation = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("qb") + "Observation");
 		
-		Resource observation = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("xcite") 
-				+ "observation"
+		Resource observation = collaboratorModel.createResource(
+				xciteDataSet.getURI()
+				+ "--observation-"
 				+ node.getCollaboratorID());
 		
 		observation.addProperty(
