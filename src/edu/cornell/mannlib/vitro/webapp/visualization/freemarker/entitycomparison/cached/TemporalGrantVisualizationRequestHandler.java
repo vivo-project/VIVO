@@ -17,12 +17,14 @@ import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.TemporalDataCubeWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
@@ -120,6 +122,17 @@ public class TemporalGrantVisualizationRequestHandler implements
 								EntityComparisonConstants.DataVisMode.JSON);
 			}
 			
+		} else if (VisualizationFrameworkConstants.DATA_CUBE_FORMAT
+				.equalsIgnoreCase(vitroRequest.getParameter(
+						VisualizationFrameworkConstants.VIS_MODE_KEY))) {
+			
+				return getSubjectEntityAndGenerateDataResponse(
+						vitroRequest, 
+						log,
+						dataset,
+						entityURI,
+						EntityComparisonConstants.DataVisMode.DATA_CUBE);
+			
 		} else {
 			/*
 			 * This provides csv download files for the content in the tables.
@@ -212,7 +225,9 @@ public class TemporalGrantVisualizationRequestHandler implements
 			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataResponse(vitroRequest, organizationEntity);
 			} else {
-				return prepareDataResponse(organizationEntity);
+				return prepareDataResponse(organizationEntity,
+										   visMode, 
+										   UrlBuilder.getCompleteRequestURL(vitroRequest));
 			}
 		}
 	}
@@ -251,9 +266,12 @@ public class TemporalGrantVisualizationRequestHandler implements
 	 * @param subentities
 	 * @param subOrganizationTypesResult
 	 */
-	private Map<String, String> prepareDataResponse(Entity entity) {
+	private Map<String, String> prepareDataResponse(Entity entity, 
+			EntityComparisonConstants.DataVisMode visMode, 
+			String requestURL) {
 
 		String entityLabel = entity.getEntityLabel();
+		Map<String, String> fileData = new HashMap<String, String>();
 
 		/*
 		* To make sure that null/empty records for entity names do not cause any mischief.
@@ -265,8 +283,8 @@ public class TemporalGrantVisualizationRequestHandler implements
 		String outputFileName = UtilityFunctions.slugify(entityLabel)
 				+ "_grants-per-year" + ".csv";
 		
-		
-		Map<String, String> fileData = new HashMap<String, String>();
+		if (visMode.equals(EntityComparisonConstants.DataVisMode.CSV)) {
+			
 		
 		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
 					 outputFileName);
@@ -274,6 +292,17 @@ public class TemporalGrantVisualizationRequestHandler implements
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
 				getEntityGrantsPerYearCSVContent(entity));
+		
+		} else {
+			
+			TemporalDataCubeWriter cubeWriter = new TemporalDataCubeWriter(requestURL, entity);
+			
+			fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
+			 "application/rdf+xml");
+			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+					cubeWriter.getDataCubeContent().toString());
+			
+		}
 		return fileData;
 	}
 	

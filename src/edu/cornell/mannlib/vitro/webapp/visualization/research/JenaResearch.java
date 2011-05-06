@@ -91,7 +91,7 @@ public class JenaResearch {
 		
 		Writer newWrite = new StringBuilderWriter();
 		
-		collaboratorModel.write(newWrite);
+		collaboratorModel.write(newWrite, "N-TRIPLE");
 		
 		System.out.println(" >>> " + newWrite.toString());
 		

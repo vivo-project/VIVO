@@ -15,6 +15,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.query.Dataset;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
@@ -105,7 +106,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareDataCubeResponse(authorNodesAndEdges);
+				return prepareDataCubeResponse(authorNodesAndEdges, UrlBuilder.getCompleteRequestURL(vitroRequest));
 				
 		} else {
     			/*
@@ -328,9 +329,9 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	}
 	
 	private Map<String, String> prepareDataCubeResponse(
-									CollaborationData authorNodesAndEdges) {
+									CollaborationData authorNodesAndEdges, String requestURL) {
 		
-		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(authorNodesAndEdges);
+		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(authorNodesAndEdges, requestURL);
 		
         Map<String, String> fileData = new HashMap<String, String>();
 

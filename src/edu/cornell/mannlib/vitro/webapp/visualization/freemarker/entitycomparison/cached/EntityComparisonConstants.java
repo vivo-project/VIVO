@@ -5,7 +5,7 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparis
 public class EntityComparisonConstants {
 	
 	public static enum DataVisMode {
-		CSV, JSON
+		CSV, JSON, DATA_CUBE
 	};
 
 }

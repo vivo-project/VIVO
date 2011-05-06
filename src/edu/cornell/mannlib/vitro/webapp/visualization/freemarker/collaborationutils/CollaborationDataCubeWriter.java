@@ -27,12 +27,12 @@ public class CollaborationDataCubeWriter {
 	
 	private StringBuilder collaboratorDataCube;
 
-	public CollaborationDataCubeWriter(CollaborationData visVOContainer) {
-		collaboratorDataCube = createCollaborationDataCubeContent(visVOContainer);
+	public CollaborationDataCubeWriter(CollaborationData visVOContainer, String requestURL) {
+		collaboratorDataCube = createCollaborationDataCubeContent(visVOContainer, requestURL);
 	}
 
 	private StringBuilder createCollaborationDataCubeContent(
-			CollaborationData collaboratorData) {
+			CollaborationData collaboratorData, String requestURL) {
 		
 		StringBuilder dataCubeContent = new StringBuilder();
 		
@@ -40,7 +40,7 @@ public class CollaborationDataCubeWriter {
 		 * Used to generate graph content. It will contain both the nodes & edge information.
 		 * We are side-effecting "graphMLContent".
 		 * */
-		generateGraphContent(collaboratorData, dataCubeContent);
+		generateGraphContent(collaboratorData, requestURL, dataCubeContent);
 		
 		return dataCubeContent;
 	}
@@ -50,7 +50,7 @@ public class CollaborationDataCubeWriter {
 	}
 
 	private void generateGraphContent(CollaborationData collaboratorData,
-			StringBuilder dataCubeContent) {
+			String requestURL, StringBuilder dataCubeContent) {
 		
 		Model collaboratorModel = ModelFactory.createDefaultModel();
 
@@ -60,9 +60,16 @@ public class CollaborationDataCubeWriter {
 		collaboratorModel.setNsPrefix("xcite", "http://xcite.hackerceo.org/instance/"
 												+ UUID.randomUUID().toString() + "#");
 
+		Property xciteRequestURL = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("xcite") + "requestURL");
 		Property rdfType = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdf") + "type");
 		Property rdfsLabel = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdfs") + "label");
 		Resource dimensionProperty = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("qb") + "DimensionProperty");
+		Resource qbDataset = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("qb") + "DataSet");
+		
+		Resource xciteDataset = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("know") + "dataset");
+		xciteDataset.addProperty(rdfType, qbDataset);
+		xciteDataset.addProperty(rdfsLabel, "Collaboration Vis DataCube for " + collaboratorData.getEgoCollaborator().getCollaboratorName());
+		xciteDataset.addProperty(xciteRequestURL, requestURL);
 		
 		Resource knowCollaborator = collaboratorModel
 										.createProperty(collaboratorModel.getNsPrefixURI("know") + "collaborator");
@@ -101,7 +108,9 @@ public class CollaborationDataCubeWriter {
 					knowCollaborator,
 					knowTally,
 					knowBehindTally,
-					knowInvariant
+					knowInvariant,
+					qbDataset,
+					xciteDataset
 					);
 		}
 		
@@ -122,7 +131,9 @@ public class CollaborationDataCubeWriter {
 						Resource knowCollaborator, 
 						Resource knowTally, 
 						Resource knowBehindTally, 
-						Resource knowInvariant) {
+						Resource knowInvariant, 
+						Resource qbDataSet, 
+						Resource xciteDataSet) {
 		
 		Collaborator egoNode = coAuthorshipData.getEgoCollaborator();
 		Set<Collaborator> authorNodes = coAuthorshipData.getCollaborators();
@@ -144,7 +155,9 @@ public class CollaborationDataCubeWriter {
 						knowCollaborator, 
 						knowTally,
 						knowBehindTally,
-						knowInvariant);
+						knowInvariant,
+						qbDataSet,
+						xciteDataSet);
 				
 		}
 		
@@ -158,7 +171,9 @@ public class CollaborationDataCubeWriter {
 								Resource knowCollaborator, 
 								Resource knowTally, 
 								Resource knowBehindTally, 
-								Resource knowInvariant) {
+								Resource knowInvariant, 
+								Resource qbDataSet, 
+								Resource xciteDataSet) {
 
 		ParamMap individualProfileURLParams = 
 					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
@@ -196,6 +211,10 @@ public class CollaborationDataCubeWriter {
 				(Property) knowTally, 
 				String.valueOf(node.getNumOfActivities()));
 		
+		observation.addProperty( 
+				(Property) qbDataSet, 
+				xciteDataSet);
+		
 		Resource egoCollaborator = collaboratorModel.createResource(egoNode.getCollaboratorURI());
 		
 		observation.addProperty( 
@@ -212,43 +231,6 @@ public class CollaborationDataCubeWriter {
 					publication);
 			
 		}
-		
-//		if (node.getEarliestActivityYearCount() != null) {
-//			
-//			/*
-//			 * There is no clean way of getting the map contents in java even though
-//			 * we are sure to have only one entry on the map. So using the for loop.
-//			 * I am feeling dirty just about now. 
-//			 * */
-//			for (Map.Entry<String, Integer> publicationInfo 
-//						: node.getEarliestActivityYearCount().entrySet()) {
-//				
-//				graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:earliestPublication " + publicationInfo.getKey() + " . \n");
-//
-//				graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:numberOfEarliestPublication " + publicationInfo.getValue() + " . \n");
-//				
-//			}
-//			
-//		}
-//		
-//		if (node.getLatestActivityYearCount() != null) {
-//			
-//			for (Map.Entry<String, Integer> publicationInfo 
-//						: node.getLatestActivityYearCount().entrySet()) {
-//				
-//				graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:latestPublication " + publicationInfo.getKey() + " . \n");
-//
-//				graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:numberOfLatestPublication " + publicationInfo.getValue() + " . \n");
-//				
-//			}
-//			
-//		}
-//		
-//		if (node.getUnknownActivityYearCount() != null) {
-//			
-//			graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:numberOfLatestPublication " + node.getUnknownActivityYearCount() + " . \n");
-//				
-//		}
 		
 	}
 }

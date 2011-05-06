@@ -14,6 +14,7 @@ import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
@@ -89,7 +90,7 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareDataCubeResponse(investigatorNodesAndEdges);
+				return prepareDataCubeResponse(investigatorNodesAndEdges, UrlBuilder.getCompleteRequestURL(vitroRequest));
 				
 		} else if (VisualizationFrameworkConstants.COPI_NETWORK_DOWNLOAD_VIS_MODE
 				.equalsIgnoreCase(visMode)) { 
@@ -296,9 +297,10 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	}
 	
 	private Map<String, String> prepareDataCubeResponse(
-									CollaborationData coPIData) {
+									CollaborationData coPIData,
+									String requestURL) {
 		
-		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(coPIData);
+		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(coPIData, requestURL);
 		
         Map<String, String> fileData = new HashMap<String, String>();
 

@@ -38,6 +38,7 @@ $(document).ready(function() {
             	selectedDataURL = parameter.dataLink;
             	temporalGraphCommonURL = parameter.viewBaseLink;
             	csvDownloadURL = parameter.csvLink;
+            	dataCubeURL = parameter.dataCubeLink;
             }
         	
         });
@@ -403,6 +404,7 @@ var processJSONData = {
 	    setEntityLevel(processJSONData.currentEntityLevel);
 	    
 	    $("a#csv").attr("href", csvDownloadURL);
+	    $("a#data-cube").attr("href", dataCubeURL);
 	}
 		
 };

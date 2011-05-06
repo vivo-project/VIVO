@@ -32,6 +32,7 @@
 <#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporal_vis_small_icon.jpg'>
 
 <#assign temporalGraphDownloadCSVCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&labelField=label'>
+<#assign temporalGraphDownloadDataCubeCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&vis_mode=data-cube'>
 
 <#assign publicationParameter = {   "name": "publication",
                                     "pluralName": "publications",
@@ -40,7 +41,8 @@
                                     "viewLink": "${organizationPublicationTemporalGraphURL}",
                                     "viewBaseLink": "${subOrganizationPublicationTemporalGraphCommonURL}",
                                     "dataLink": "${organizationPublicationTemporalGraphDataURL}",
-                                    "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison", 
+                                    "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison",
+                                    "dataCubeLink": "${temporalGraphDownloadDataCubeCommonURL}&vis=entity_comparison", 
                                     "value": "Publications" }>
                                     
 <#assign grantParameter = {   "name": "grant",
@@ -51,6 +53,7 @@
                               "viewBaseLink": "${subOrganizationGrantTemporalGraphCommonURL}", 
                               "dataLink": "${organizationGrantTemporalGraphDataURL}",
                               "csvLink": "${temporalGraphDownloadCSVCommonURL}&vis=entity_grant_count",
+                              "dataCubeLink": "${temporalGraphDownloadDataCubeCommonURL}&vis=entity_grant_count",
                               "value": "Grants" }>
                               
 <#assign parameterOptions = [publicationParameter, grantParameter]>
@@ -117,7 +120,7 @@ var entityCheckboxSelectorDOMClass = "${entityCheckboxSelectorDOMClass}";
 
 var isDataRequestSentViaAJAX = false;
 
-var csvDownloadURL, temporalGraphProcessor;
+var csvDownloadURL, dataCubeURL, temporalGraphProcessor;
 
 /*
 This has to be declared before making a call to GUI event manager JS.

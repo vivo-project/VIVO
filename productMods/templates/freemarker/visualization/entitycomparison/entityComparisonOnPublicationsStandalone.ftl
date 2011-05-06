@@ -14,6 +14,7 @@ var currentParameter = "${currentParameter}";
 <#include "entityComparisonSetup.ftl">
 
 <#assign temporalGraphDownloadFileLink = '${temporalGraphDownloadCSVCommonURL}&vis=entity_comparison'>
+<#assign temporalGraphDataCubeLink = '${temporalGraphDownloadDataCubeCommonURL}&vis=entity_comparison'>
 <#assign temporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&vis_mode=json">
 
 <#-- variables passed from server-side code -->

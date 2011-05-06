@@ -13,6 +13,7 @@ var currentParameter = "${currentParameter}";
 
 <#include "entityComparisonSetup.ftl">
 
+<#assign temporalGraphDataCubeLink = '${temporalGraphDownloadDataCubeCommonURL}&vis=entity_grant_count'>
 <#assign temporalGraphDownloadFileLink = '${temporalGraphDownloadCSVCommonURL}&vis=entity_grant_count'>
 <#assign temporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}&vis_mode=json">
 
