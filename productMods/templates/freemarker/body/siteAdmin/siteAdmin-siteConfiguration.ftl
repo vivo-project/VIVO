@@ -22,8 +22,13 @@
                 <li><a href="${siteConfig.urls.tabs}">Tab management</a></li>
             </#if>
    
+            <#-- TODO This goes away when the UserAccounts are fully implemented - jblake -->
             <#if siteConfig.urls.users??>
                 <li><a href="${siteConfig.urls.users}">User accounts</a></li>  
+            </#if>
+            
+            <#if siteConfig.urls.userList??>
+                <li><a href="${siteConfig.urls.userList}">Manage user accounts</a> (work in progress)</li>  
             </#if>
             
         </ul>
