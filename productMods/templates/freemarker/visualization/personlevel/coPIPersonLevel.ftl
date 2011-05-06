@@ -1,27 +1,14 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#assign standardVisualizationURLRoot ="/visualization">
-<#assign shortVisualizationURLRoot ="/vis">
 <#assign ajaxVisualizationURLRoot ="/visualizationAjax">
 <#assign dataVisualizationURLRoot ="/visualizationData">
 
 <#assign egoURI ="${egoURIParam?url}">
 <#assign egoCoInvestigationDataFeederURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_stream&labelField=label'>
 
-<#assign coauthorshipURL = '${urls.base}${shortVisualizationURLRoot}/author-network/?uri=${egoURI}'>
+<#assign coauthorshipURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${egoURI}&vis_mode=coauthor'>
 
-<#if egoLocalName?has_content >
-    
-    <#assign coauthorshipURL = '${urls.base}${shortVisualizationURLRoot}/author-network/${egoLocalName}'>
-    
-<#else>
-
-    <#assign coauthorshipURL = '${urls.base}${shortVisualizationURLRoot}/author-network/?uri=${egoURI}'>
-
-</#if>
-
-
-<#assign egoCoInvestigatorDataCubeURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=data-cube'>
 <#assign egoCoInvestigatorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copis'>
 <#assign egoCoInvestigationNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_download'>
 
@@ -32,6 +19,7 @@
 <#assign googleVisualizationAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coInvestigatorPersonLevelJavaScript = '${urls.base}/js/visualization/coPIship/coPIship-person-level.js'>
 <#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
+<#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
 <script type="text/javascript" src="${adobeFlashDetector}"></script>
 <script type="text/javascript" src="${googleVisualizationAPI}"></script>
@@ -64,10 +52,13 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 <script type="text/javascript" src="${coInvestigatorPersonLevelJavaScript}"></script>
 <script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>')}
+${scripts.add(visualizationHelperJavaScript)}
 
-${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/personlevel/page.css" />',
-                  '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />')}
+<#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />
+<#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
+
+<link href="${pageStyle}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${vizStyle}" />
 
 <#assign loadingImageLink = "${urls.images}/visualization/ajax-loader.gif">
 
@@ -142,9 +133,7 @@ $(document).ready(function(){
         <div class="sub_headings"><h3 >Co-Investigator Network </h3></div>
         
         <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a>
-                <a href="${egoCoInvestigatorDataCubeURL}">(DataCube Link)</a>
-                </div>
+                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a></div>
         <#else>
 
             <#if numOfInvestigators?? && numOfInvestigators <= 0 >
@@ -186,7 +175,7 @@ $(document).ready(function(){
                 
                 <em id="profileMoniker" class="moniker"></em>
                 
-                <div id="profile-links"><a href="#" id="profileUrl">VIVO profile</a></div> 
+                <div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coInvestigationVisUrl">Co-investigator network</a></div> 
 
                 <div class="investigator_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
                 <span class="investigator_stats_text">Grant(s)</span></div>
@@ -197,14 +186,8 @@ $(document).ready(function(){
                     <span class="numbers" style="width:40px;" id="firstGrant"></span>&nbsp;&nbsp;<span>First Grant</span></div>
                 <div class="investigator_stats" id="lGrant" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastGrant"></span>
                 &nbsp;&nbsp;<span>Last Grant</span></div>
-                <div id="incomplete-data">Note: This information is based solely on grants that have been loaded into the VIVO system. 
-                This may only be a small sample of the person's total work.<p></p><p></p>
-                <#if user.loggedIn > 
-                    Go to your profile page to enter additional details about your grants.
-                <#else> 
-                    Log in to enter additional details about your grants on your profile page.
-                </#if>
-                </div>
+                <div id="incomplete-data">Note: This information is based solely on grants which have been loaded into the VIVO system. 
+                This may only be a small sample of the person's total work. </div>
                 </div>
             </div>
         </div>

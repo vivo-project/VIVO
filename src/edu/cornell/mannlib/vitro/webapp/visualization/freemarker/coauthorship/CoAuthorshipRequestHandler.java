@@ -4,9 +4,9 @@ package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
@@ -14,13 +14,15 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
 
+import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.CollaborationData;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.CoAuthorshipData;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Node;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
@@ -38,20 +40,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
-			Dataset dataset) throws MalformedQueryParametersException {
+			Dataset Dataset) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("CoAuthorship does not provide Ajax Response.");
 	}
 
 	@Override
-	public ResponseValues generateVisualizationForShortURLRequests(
-			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
-			Dataset dataSource) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("CoAuthorship does not provide Short URL Response.");
-	}
-
-	@Override
 	public Map<String, String> generateDataVisualization(
-			VitroRequest vitroRequest, Log log, Dataset dataset)
+			VitroRequest vitroRequest, Log log, Dataset Dataset)
 			throws MalformedQueryParametersException {
 
 	
@@ -63,10 +58,10 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 						VisualizationFrameworkConstants
 								.VIS_MODE_KEY);
 		
-		QueryRunner<CollaborationData> queryManager =
-		new CoAuthorshipQueryRunner(egoURI, dataset, log);
+		QueryRunner<CoAuthorshipData> queryManager =
+		new CoAuthorshipQueryRunner(egoURI, Dataset, log);
 		
-		CollaborationData authorNodesAndEdges = 
+		CoAuthorshipData authorNodesAndEdges = 
 		queryManager.getQueryResult();
 	
     	/* 
@@ -98,14 +93,6 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 			 * */
 				return prepareNetworkDownloadDataResponse(authorNodesAndEdges);
 				
-		} else if (VisualizationFrameworkConstants.DATA_CUBE_FORMAT
-				.equalsIgnoreCase(visMode)) { 
-			/*
-			 * When the csv file is required - based on which sparkline visualization will 
-			 * be rendered.
-			 * */
-				return prepareDataCubeResponse(authorNodesAndEdges);
-				
 		} else {
     			/*
     			 * When the graphML file is required - based on which coauthorship network 
@@ -118,74 +105,75 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 
 	public ResponseValues generateStandardVisualization(VitroRequest vitroRequest,
 											  	Log log, 
-											    Dataset dataset) 
+											    Dataset Dataset) 
 		throws MalformedQueryParametersException {
 
-		throw new UnsupportedOperationException("CoAuthorship Visualization " 
-						+ "does not provide Standalone response.");
+		/*
+		 * Support for this has ceased to exist. Standalone mode was created only for demo 
+		 * purposes for VIVO Conf.
+		 * */
+/*		String egoURI = vitroRequest.getParameter(
+        										VisualizationFrameworkConstants
+        												.INDIVIDUAL_URI_KEY);
+
+		QueryRunner<CoAuthorshipData> queryManager =
+        	new CoAuthorshipQueryRunner(egoURI, Dataset, log);
+	
+			CoAuthorshipData authorNodesAndEdges = 
+					queryManager.getQueryResult();
+			
+	    	
+		return prepareStandaloneResponse(egoURI,
+										 authorNodesAndEdges,
+										 vitroRequest);*/
+		
+		throw new UnsupportedOperationException("CoAuthorship does not provide Standalone Response.");
+		
 	}
 	
-	private String getCoauthorsListCSVContent(CollaborationData coAuthorshipData) {
+	
+
+	private String getCoauthorsListCSVContent(CoAuthorshipData coAuthorshipData) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Co-author, Count\n");
 		
-		for (Collaborator currNode : coAuthorshipData.getCollaborators()) {			
+		//for (Entry<String, Integer> currentEntry : coAuthorsToCount.entrySet()) {
+		for (Node currNode : coAuthorshipData.getNodes()) {			
+			
 			/*
 			 * We have already printed the Ego Node info.
 			 * */
-			if (currNode != coAuthorshipData.getEgoCollaborator()) {
+			if (currNode != coAuthorshipData.getEgoNode()) {
 				
 			
-			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getCollaboratorName()));
+			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getNodeName()));
 			csvFileContent.append(",");
-			csvFileContent.append(currNode.getNumOfActivities());
+			csvFileContent.append(currNode.getNumOfAuthoredWorks());
 			csvFileContent.append("\n");
 			
 			}
+			
+			
 		}
 		
 		return csvFileContent.toString();
-	}
-	
-	private String getCoauthorsListDataCubeContent(CollaborationData coAuthorshipData) {
 		
-		StringBuilder csvFileContent = new StringBuilder();
-		
-		csvFileContent.append("Co-author, Count\n");
-		
-		for (Collaborator currNode : coAuthorshipData.getCollaborators()) {			
-			/*
-			 * We have already printed the Ego Node info.
-			 * */
-			if (currNode != coAuthorshipData.getEgoCollaborator()) {
-				
-			
-			csvFileContent.append(StringEscapeUtils.escapeCsv(currNode.getCollaboratorName()));
-			csvFileContent.append(",");
-			csvFileContent.append(currNode.getNumOfActivities());
-			csvFileContent.append("\n");
-			
-			}
-		}
-		
-		return csvFileContent.toString();
 	}
 
-	private String getCoauthorsPerYearCSVContent(Map<String, Set<Collaborator>> yearToCoauthors) {
+	private String getCoauthorsPerYearCSVContent(Map<String, Set<Node>> yearToCoauthors) {
 		
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Year, Count, Co-author(s)\n");
 		
-		for (Entry<String, Set<Collaborator>> currentEntry : yearToCoauthors.entrySet()) {
+		for (Entry<String, Set<Node>> currentEntry : yearToCoauthors.entrySet()) {
 			csvFileContent.append(StringEscapeUtils.escapeCsv(currentEntry.getKey()));
 			csvFileContent.append(",");
 			csvFileContent.append(currentEntry.getValue().size());
 			csvFileContent.append(",");
-			csvFileContent.append(StringEscapeUtils.escapeCsv(
-										getCoauthorNamesAsString(currentEntry.getValue())));
+			csvFileContent.append(StringEscapeUtils.escapeCsv(getCoauthorNamesAsString(currentEntry.getValue())));
 			csvFileContent.append("\n");
 		}
 		
@@ -193,13 +181,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 			
 	}
 	
-	private String getCoauthorNamesAsString(Set<Collaborator> coAuthors) {
+	private String getCoauthorNamesAsString(Set<Node> coAuthors) {
 		
 		StringBuilder coAuthorsMerged = new StringBuilder();
 		
 		String coAuthorSeparator = "; ";
-		for (Collaborator currCoAuthor : coAuthors) {
-			coAuthorsMerged.append(currCoAuthor.getCollaboratorName() + coAuthorSeparator);
+		for (Node currCoAuthor : coAuthors) {
+			coAuthorsMerged.append(currCoAuthor.getNodeName() + coAuthorSeparator);
 		}
 		
 		return StringUtils.removeEnd(coAuthorsMerged.toString(), coAuthorSeparator);
@@ -211,20 +199,18 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	 * @param authorNodesAndEdges
 	 * @param response
 	 */
-	private Map<String, String> prepareCoauthorsCountPerYearDataResponse(
-					CollaborationData authorNodesAndEdges) {
+	private Map<String, String> prepareCoauthorsCountPerYearDataResponse(CoAuthorshipData authorNodesAndEdges) {
 		
 		String outputFileName;
-		Map<String, Set<Collaborator>> yearToCoauthors = new TreeMap<String, Set<Collaborator>>();
+		Map<String, Set<Node>> yearToCoauthors = new TreeMap<String, Set<Node>>();
 		
-		if (authorNodesAndEdges.getCollaborators() != null 
-					&& authorNodesAndEdges.getCollaborators().size() > 0) {
+		if (authorNodesAndEdges.getNodes() != null && authorNodesAndEdges.getNodes().size() > 0) {
 			
 			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges
-									.getEgoCollaborator().getCollaboratorName())
+									.getEgoNode().getNodeName())
 			+ "_co-authors-per-year" + ".csv";
 			
-			yearToCoauthors = UtilityFunctions.getActivityYearToCollaborators(authorNodesAndEdges);
+			yearToCoauthors = UtilityFunctions.getPublicationYearToCoAuthors(authorNodesAndEdges);
 			
 		} else {
 			
@@ -248,16 +234,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	 * @param authorNodesAndEdges
 	 * @param response
 	 */
-	private Map<String, String> prepareCoauthorsListDataResponse(
-					CollaborationData coAuthorshipData) {
+	private Map<String, String> prepareCoauthorsListDataResponse(CoAuthorshipData coAuthorshipData) {
 		
 		String outputFileName = "";
 
-		if (coAuthorshipData.getCollaborators() != null 
-					&& coAuthorshipData.getCollaborators().size() > 0) {
+		if (coAuthorshipData.getNodes() != null && coAuthorshipData.getNodes().size() > 0) {
 			
-			outputFileName = UtilityFunctions.slugify(coAuthorshipData.getEgoCollaborator()
-															.getCollaboratorName()) 
+			outputFileName = UtilityFunctions.slugify(coAuthorshipData.getEgoNode().getNodeName()) 
 									+ "_co-authors" + ".csv";
 		} else {
 			outputFileName = "no_co-authors" + ".csv";
@@ -280,8 +263,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	 * @param authorNodesAndEdges
 	 * @param response
 	 */
-	private Map<String, String> prepareNetworkStreamDataResponse(
-									CollaborationData authorNodesAndEdges) {
+	private Map<String, String> prepareNetworkStreamDataResponse(CoAuthorshipData authorNodesAndEdges) {
 	
 		CoAuthorshipGraphMLWriter coAuthorshipGraphMLWriter = 
 				new CoAuthorshipGraphMLWriter(authorNodesAndEdges);
@@ -296,16 +278,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	
 	}
 	
-	private Map<String, String> prepareNetworkDownloadDataResponse(
-									CollaborationData authorNodesAndEdges) {
+	private Map<String, String> prepareNetworkDownloadDataResponse(CoAuthorshipData authorNodesAndEdges) {
 		
 		String outputFileName = "";
 		
-		if (authorNodesAndEdges.getCollaborators() != null 
-					&& authorNodesAndEdges.getCollaborators().size() > 0) {
+		if (authorNodesAndEdges.getNodes() != null && authorNodesAndEdges.getNodes().size() > 0) {
 			
-			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges
-									.getEgoCollaborator().getCollaboratorName()) 
+			outputFileName = UtilityFunctions.slugify(authorNodesAndEdges.getEgoNode().getNodeName()) 
 									+ "_co-author-network.graphml" + ".xml";
 			
 		} else {
@@ -324,20 +303,47 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 					 coAuthorshipGraphMLWriter.getCoAuthorshipGraphMLContent().toString());
 
 		return fileData;
+	
 	}
 	
-	private Map<String, String> prepareDataCubeResponse(
-									CollaborationData authorNodesAndEdges) {
-		
-		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(authorNodesAndEdges);
-		
-        Map<String, String> fileData = new HashMap<String, String>();
+	/**
+	 * When the page for person level visualization is requested.
+	 * @param egoURI
+	 * @param coAuthorshipVO
+	 * @param vitroRequest
+	 * @param request
+	 * @return 
+	 */
+	private TemplateResponseValues prepareStandaloneResponse(
+					String egoURI, 
+					CoAuthorshipData coAuthorshipVO, 
+					VitroRequest vitroRequest) {
 
-        fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
-					 "application/rdf+xml");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-				dataCubeWriter.getCollaboratorDataCubeContent().toString());
+        Portal portal = vitroRequest.getPortal();
+        
+        String title = "";
+        Map<String, Object> body = new HashMap<String, Object>();
+        
+        if (coAuthorshipVO.getNodes() != null && coAuthorshipVO.getNodes().size() > 0) {
+        	title = coAuthorshipVO.getEgoNode().getNodeName() + " - ";
+        	body.put("numOfAuthors", coAuthorshipVO.getNodes().size());
+		}
 		
-		return fileData;
+		if (coAuthorshipVO.getEdges() != null && coAuthorshipVO.getEdges().size() > 0) {
+			body.put("numOfCoAuthorShips", coAuthorshipVO.getEdges().size());
+		}
+		
+        
+        //request.setAttribute("scripts", "/templates/visualization/person_level_inject_head.jsp");
+        
+        String standaloneTemplate = "coAuthorship.ftl";
+
+        
+        body.put("portalBean", portal);
+        body.put("egoURIParam", egoURI);
+        body.put("title", title + "Co-Authorship Visualization");
+        
+        return new TemplateResponseValues(standaloneTemplate, body);
 	}
+	
 }
