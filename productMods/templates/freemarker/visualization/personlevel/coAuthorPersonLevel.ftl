@@ -1,15 +1,27 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#assign standardVisualizationURLRoot ="/visualization">
+<#assign shortVisualizationURLRoot ="/vis">
 <#assign ajaxVisualizationURLRoot ="/visualizationAjax">
 <#assign dataVisualizationURLRoot ="/visualizationData">
 
 <#assign egoURI ="${egoURIParam?url}">
 <#assign egoCoAuthorshipDataFeederURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthor_network_stream&labelField=label'>
 
-<#assign coprincipalinvestigatorURL = '${urls.base}${standardVisualizationURLRoot}?vis=person_level&uri=${egoURI}&vis_mode=copi'>
+<#if egoLocalName?has_content >
+    
+    <#assign coprincipalinvestigatorURL = '${urls.base}${shortVisualizationURLRoot}/investigator-network/${egoLocalName}'>
+    
+<#else>
+
+    <#assign coprincipalinvestigatorURL = '${urls.base}${shortVisualizationURLRoot}/investigator-network/?uri=${egoURI}'>
+
+</#if>
+
+
 
 <#assign egoCoAuthorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthors'>
+<#assign egoCoAuthorsDataCubeURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=data-cube'>
 <#assign egoCoAuthorshipNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coauthorship&uri=${egoURI}&vis_mode=coauthor_network_download'>
 
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
@@ -17,7 +29,6 @@
 <#assign googleVisualizationAPI = 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22areachart%22%2C%22imagesparkline%22%5D%7D%5D%7D'>
 <#assign coAuthorPersonLevelJavaScript = '${urls.base}/js/visualization/coauthorship/coauthorship-personlevel.js'>
 <#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
-<#assign visualizationHelperJavaScript = 'js/visualization/visualization-helper-functions.js'>
 
 <#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
 
@@ -53,14 +64,10 @@ var visualizationDataRoot = "${dataVisualizationURLRoot}";
 <script type="text/javascript" src="${coAuthorPersonLevelJavaScript}"></script>
 <script type="text/javascript" src="${commonPersonLevelJavaScript}"></script>
 
-${scripts.add(visualizationHelperJavaScript)}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>')}
 
-
-<#assign pageStyle = "${urls.base}/css/visualization/personlevel/page.css" />
-<#assign vizStyle = "${urls.base}/css/visualization/visualization.css" />
-
-<link href="${pageStyle}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="${vizStyle}" />
+${stylesheets.add('<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/personlevel/page.css" />',
+                  '<link rel="stylesheet" type="text/css" href="${urls.base}/css/visualization/visualization.css" />')}
 
 <#assign loadingImageLink = "${urls.images}/visualization/ajax-loader.gif">
 
@@ -135,7 +142,9 @@ $(document).ready(function(){
         <div  class="sub_headings"><h3>Co-Author Network </h3></div>
         
         <#if (numOfCoAuthorShips?? && numOfCoAuthorShips > 0) || (numOfAuthors?? && numOfAuthors > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a></div>
+                <div class = "graphml-file-link"><a href="${egoCoAuthorshipNetworkDataFileURL}">(GraphML File)</a>
+                <a href="${egoCoAuthorsDataCubeURL}">(DataCube Link)</a>
+                </div>
         <#else>
 
                 <#if numOfAuthors?? && numOfAuthors <= 0 >
@@ -176,7 +185,7 @@ $(document).ready(function(){
                 <h4><span id="authorName" class="neutral_author_name">&nbsp;</span></h4>
                 
                 <em id="profileMoniker" class="moniker"></em>
-                <div><a href="#" id="profileUrl">VIVO profile</a> | <a href="#" id="coAuthorshipVisUrl">Co-author network</a></div> 
+                <div id="profile-links"><a href="#" id="profileUrl">VIVO profile</a></div>
 
                 <div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
                 <span class="author_stats_text">Publication(s)</span></div>
@@ -187,8 +196,14 @@ $(document).ready(function(){
                     <span class="numbers" style="width:40px;" id="firstPublication"></span>&nbsp;&nbsp;<span>First Publication</span></div>
                 <div class="author_stats" id="lPub" style="visibility:hidden"><span class="numbers" style="width:40px;" id="lastPublication"></span>
                 &nbsp;&nbsp;<span>Last Publication</span></div>
-                <div id="incomplete-data">Note: This information is based solely on publications which have been loaded into the VIVO system. 
-                This may only be a small sample of the person's total work. </div>
+                <div id="incomplete-data">Note: This information is based solely on publications that have been loaded into the VIVO system. 
+                This may only be a small sample of the person's total work.<p></p><p></p>
+                <#if user.loggedIn > 
+                    Go to your profile page to enter additional details about your publications.
+                <#else> 
+                    Log in to enter additional details about your publications on your profile page.
+                </#if>
+                </div>
                 </div>
             </div>
         </div>

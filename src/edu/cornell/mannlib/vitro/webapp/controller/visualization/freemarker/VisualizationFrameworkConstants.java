@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker;
 
+import java.util.regex.Pattern;
+
 public class VisualizationFrameworkConstants {
 
 	/*
@@ -24,11 +26,20 @@ public class VisualizationFrameworkConstants {
 	 * Vis URL prefix that is seen by all the users
 	 */
 	public static final String VISUALIZATION_URL_PREFIX = "/visualization";
+	public static final String SHORT_URL_VISUALIZATION_REQUEST_PREFIX = "/vis";
+	
 	public static final String FREEMARKERIZED_VISUALIZATION_URL_PREFIX = "/visualization";
 	public static final String AJAX_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationAjax";
 	public static final String DATA_VISUALIZATION_SERVICE_URL_PREFIX = "/visualizationData";
 	
 	public static final String INDIVIDUAL_URL_PREFIX = "/individual";
+	
+	
+	public static final Pattern SHORT_URL_REQUEST_PATTERN = Pattern
+										.compile("^" 
+												 + SHORT_URL_VISUALIZATION_REQUEST_PREFIX 
+												 + "/([\\w-]+)/([^/]*)$");
+	
 
 	/*
 	 * These represent possible query keys in a URI for visualization purposes.
@@ -75,6 +86,8 @@ public class VisualizationFrameworkConstants {
 	public static final String COPI_NETWORK_STREAM_VIS_MODE = "copi_network_stream";
 	public static final String COPI_NETWORK_DOWNLOAD_VIS_MODE = "copi_network_download";
 	
+	public static final String DATA_CUBE_FORMAT = "data-cube";
+	
 	/*
 	 * These values represent possible utilities vis modes.
 	 * */
@@ -100,8 +113,12 @@ public class VisualizationFrameworkConstants {
 	public static final String COLLEGE_PUBLICATION_COUNT_VIS = "college_pub_count";
 	public static final String COAUTHORSHIP_VIS = "coauthorship";
 	public static final String PERSON_LEVEL_VIS = "person_level";
+	public static final String COAUTHORSHIP_VIS_SHORT_URL = "author-network";
+	public static final String COINVESTIGATOR_VIS_SHORT_URL = "investigator-network";
 	public static final String UTILITIES_VIS = "utilities";
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
+	public static final String PUBLICATION_TEMPORAL_VIS_SHORT_URL = "publication-graph";
+	public static final String GRANT_TEMPORAL_VIS_SHORT_URL = "grant-graph";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
 	
 	
