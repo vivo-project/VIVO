@@ -26,7 +26,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.collaborationutils.TemporalDataCubeWriter;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached.EntityComparisonConstants.DataVisMode;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
@@ -136,7 +135,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			} else {
 				return prepareDataResponse(organizationEntity, 
 										   visMode, 
-										   UrlBuilder.getCompleteRequestURL(vitroRequest));
+										   vitroRequest);
 			}
 		}
 	}
@@ -153,7 +152,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 	 */
 	private Map<String, String> prepareDataResponse(Entity entity, 
 													EntityComparisonConstants.DataVisMode visMode, 
-													String requestURL) {
+													VitroRequest vitroRequest) {
 
 		String entityLabel = entity.getEntityLabel();
 		Map<String, String> fileData = new HashMap<String, String>();
@@ -178,7 +177,10 @@ public class TemporalPublicationVisualizationRequestHandler implements
 					getEntityPublicationsPerYearCSVContent(entity));
 		} else {
 			
-			TemporalDataCubeWriter cubeWriter = new TemporalDataCubeWriter(requestURL, entity);
+			TemporalDataCubeWriter cubeWriter = new TemporalDataCubeWriter(
+					vitroRequest.getWebappDaoFactory().getDefaultNamespace(),
+					UrlBuilder.getCompleteRequestURL(vitroRequest),
+					entity);
 			
 			fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 			 "application/rdf+xml");

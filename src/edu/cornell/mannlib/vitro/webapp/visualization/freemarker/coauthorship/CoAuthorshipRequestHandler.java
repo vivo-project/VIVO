@@ -106,7 +106,7 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareDataCubeResponse(authorNodesAndEdges, UrlBuilder.getCompleteRequestURL(vitroRequest));
+				return prepareDataCubeResponse(authorNodesAndEdges, vitroRequest);
 				
 		} else {
     			/*
@@ -329,9 +329,13 @@ public class CoAuthorshipRequestHandler implements VisualizationRequestHandler {
 	}
 	
 	private Map<String, String> prepareDataCubeResponse(
-									CollaborationData authorNodesAndEdges, String requestURL) {
+									CollaborationData authorNodesAndEdges, 
+									VitroRequest vitroRequest) {
 		
-		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(authorNodesAndEdges, requestURL);
+		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(
+				authorNodesAndEdges, 
+				vitroRequest.getWebappDaoFactory().getDefaultNamespace(),
+				UrlBuilder.getCompleteRequestURL(vitroRequest));
 		
         Map<String, String> fileData = new HashMap<String, String>();
 

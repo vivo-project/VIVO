@@ -90,7 +90,8 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 			 * When the csv file is required - based on which sparkline visualization will 
 			 * be rendered.
 			 * */
-				return prepareDataCubeResponse(investigatorNodesAndEdges, UrlBuilder.getCompleteRequestURL(vitroRequest));
+				return prepareDataCubeResponse(investigatorNodesAndEdges, 
+						vitroRequest);
 				
 		} else if (VisualizationFrameworkConstants.COPI_NETWORK_DOWNLOAD_VIS_MODE
 				.equalsIgnoreCase(visMode)) { 
@@ -298,9 +299,12 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 	
 	private Map<String, String> prepareDataCubeResponse(
 									CollaborationData coPIData,
-									String requestURL) {
+									VitroRequest vitroRequest) {
 		
-		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(coPIData, requestURL);
+		CollaborationDataCubeWriter dataCubeWriter = new CollaborationDataCubeWriter(
+				coPIData, 
+				vitroRequest.getWebappDaoFactory().getDefaultNamespace(),
+				UrlBuilder.getCompleteRequestURL(vitroRequest));
 		
         Map<String, String> fileData = new HashMap<String, String>();
 

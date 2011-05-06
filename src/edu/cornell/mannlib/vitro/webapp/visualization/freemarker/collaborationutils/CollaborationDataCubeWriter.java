@@ -16,9 +16,6 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.QueryConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Collaborator;
@@ -26,13 +23,17 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Co
 public class CollaborationDataCubeWriter {
 	
 	private StringBuilder collaboratorDataCube;
+	private String defaultNameSpace;
+	private String requestURL;
 
-	public CollaborationDataCubeWriter(CollaborationData visVOContainer, String requestURL) {
-		collaboratorDataCube = createCollaborationDataCubeContent(visVOContainer, requestURL);
+	public CollaborationDataCubeWriter(CollaborationData visVOContainer, String requestURL, String defaultNameSpace) {
+		this.defaultNameSpace = defaultNameSpace;
+		this.requestURL = requestURL;
+		collaboratorDataCube = createCollaborationDataCubeContent(visVOContainer);
 	}
 
 	private StringBuilder createCollaborationDataCubeContent(
-			CollaborationData collaboratorData, String requestURL) {
+			CollaborationData collaboratorData) {
 		
 		StringBuilder dataCubeContent = new StringBuilder();
 		
@@ -40,7 +41,7 @@ public class CollaborationDataCubeWriter {
 		 * Used to generate graph content. It will contain both the nodes & edge information.
 		 * We are side-effecting "graphMLContent".
 		 * */
-		generateGraphContent(collaboratorData, requestURL, dataCubeContent);
+		generateGraphContent(collaboratorData, dataCubeContent);
 		
 		return dataCubeContent;
 	}
@@ -49,27 +50,34 @@ public class CollaborationDataCubeWriter {
 		return collaboratorDataCube;
 	}
 
-	private void generateGraphContent(CollaborationData collaboratorData,
-			String requestURL, StringBuilder dataCubeContent) {
+	private void generateGraphContent(CollaborationData collaboratorData, 
+			StringBuilder dataCubeContent) {
 		
 		Model collaboratorModel = ModelFactory.createDefaultModel();
 
 		collaboratorModel.setNsPrefixes(QueryConstants.getPrefixToNameSpace());
 		collaboratorModel.setNsPrefix("qb", "http://purl.org/linked-data/cube#");
 		collaboratorModel.setNsPrefix("know", "http://xcite.hackerceo.org/vocab/histograms#");
-		collaboratorModel.setNsPrefix("xcite", "http://xcite.hackerceo.org/instance/"
-												+ UUID.randomUUID().toString() + "#");
+		collaboratorModel.setNsPrefix("xcite", defaultNameSpace + "#");
 
-		Property xciteRequestURL = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("xcite") + "requestURL");
+		Property rdfsSeeAlso = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdfs") + "seeAlso");
 		Property rdfType = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdf") + "type");
 		Property rdfsLabel = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("rdfs") + "label");
 		Resource dimensionProperty = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("qb") + "DimensionProperty");
 		Resource qbDataset = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("qb") + "DataSet");
+		Property qbDataSetProperty = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("qb") + "dataSet");
 		
-		Resource xciteDataset = collaboratorModel.createProperty(collaboratorModel.getNsPrefixURI("know") + "dataset");
+		Resource xciteDataset = collaboratorModel.createProperty(
+				collaboratorModel.getNsPrefixURI("xcite") 
+				+ "dataset" 
+				+ UUID.randomUUID());
+		
 		xciteDataset.addProperty(rdfType, qbDataset);
 		xciteDataset.addProperty(rdfsLabel, "Collaboration Vis DataCube for " + collaboratorData.getEgoCollaborator().getCollaboratorName());
-		xciteDataset.addProperty(xciteRequestURL, requestURL);
+		
+		Resource requestURLResource = collaboratorModel.createResource(requestURL);
+		
+		xciteDataset.addProperty(rdfsSeeAlso, requestURLResource);
 		
 		Resource knowCollaborator = collaboratorModel
 										.createProperty(collaboratorModel.getNsPrefixURI("know") + "collaborator");
@@ -109,7 +117,7 @@ public class CollaborationDataCubeWriter {
 					knowTally,
 					knowBehindTally,
 					knowInvariant,
-					qbDataset,
+					qbDataSetProperty,
 					xciteDataset
 					);
 		}
@@ -132,7 +140,7 @@ public class CollaborationDataCubeWriter {
 						Resource knowTally, 
 						Resource knowBehindTally, 
 						Resource knowInvariant, 
-						Resource qbDataSet, 
+						Property qbDataSetProperty, 
 						Resource xciteDataSet) {
 		
 		Collaborator egoNode = coAuthorshipData.getEgoCollaborator();
@@ -156,7 +164,7 @@ public class CollaborationDataCubeWriter {
 						knowTally,
 						knowBehindTally,
 						knowInvariant,
-						qbDataSet,
+						qbDataSetProperty,
 						xciteDataSet);
 				
 		}
@@ -172,15 +180,18 @@ public class CollaborationDataCubeWriter {
 								Resource knowTally, 
 								Resource knowBehindTally, 
 								Resource knowInvariant, 
-								Resource qbDataSet, 
+								Property qbDataSetProperty, 
 								Resource xciteDataSet) {
 
-		ParamMap individualProfileURLParams = 
-					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
-								 node.getCollaboratorURI());
-
-		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
-			individualProfileURLParams);
+//		ParamMap individualProfileURLParams = 
+//					new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY,
+//								 node.getCollaboratorURI());
+//
+//		String profileURL = UrlBuilder.getUrl(VisualizationFrameworkConstants.INDIVIDUAL_URL_PREFIX,
+//			individualProfileURLParams);
+//		if (profileURL != null) {
+//		graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:profileUrl " + profileURL + " .\n");
+//	}
 		
 		Resource foafPerson = collaboratorModel
 										.createResource(
@@ -193,11 +204,9 @@ public class CollaborationDataCubeWriter {
 		
 		Resource qbObservation = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("qb") + "Observation");
 		
-		Resource observation = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("xcite") + node.getCollaboratorID());
-		
-//		if (profileURL != null) {
-//			graphMLContent.append("\t" + node.getCollaboratorURI() + " vivo:profileUrl " + profileURL + " .\n");
-//		}
+		Resource observation = collaboratorModel.createResource(collaboratorModel.getNsPrefixURI("xcite") 
+				+ "observation"
+				+ node.getCollaboratorID());
 		
 		observation.addProperty(
 				rdfType, 
@@ -212,7 +221,7 @@ public class CollaborationDataCubeWriter {
 				String.valueOf(node.getNumOfActivities()));
 		
 		observation.addProperty( 
-				(Property) qbDataSet, 
+				(Property) qbDataSetProperty, 
 				xciteDataSet);
 		
 		Resource egoCollaborator = collaboratorModel.createResource(egoNode.getCollaboratorURI());

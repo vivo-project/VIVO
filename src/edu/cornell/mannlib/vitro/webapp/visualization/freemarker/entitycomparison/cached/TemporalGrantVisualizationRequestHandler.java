@@ -227,7 +227,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 			} else {
 				return prepareDataResponse(organizationEntity,
 										   visMode, 
-										   UrlBuilder.getCompleteRequestURL(vitroRequest));
+										   vitroRequest);
 			}
 		}
 	}
@@ -268,7 +268,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 	 */
 	private Map<String, String> prepareDataResponse(Entity entity, 
 			EntityComparisonConstants.DataVisMode visMode, 
-			String requestURL) {
+			VitroRequest vitroRequest) {
 
 		String entityLabel = entity.getEntityLabel();
 		Map<String, String> fileData = new HashMap<String, String>();
@@ -295,7 +295,10 @@ public class TemporalGrantVisualizationRequestHandler implements
 		
 		} else {
 			
-			TemporalDataCubeWriter cubeWriter = new TemporalDataCubeWriter(requestURL, entity);
+			TemporalDataCubeWriter cubeWriter = new TemporalDataCubeWriter(
+					vitroRequest.getWebappDaoFactory().getDefaultNamespace(),
+					UrlBuilder.getCompleteRequestURL(vitroRequest), 
+					entity);
 			
 			fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 			 "application/rdf+xml");

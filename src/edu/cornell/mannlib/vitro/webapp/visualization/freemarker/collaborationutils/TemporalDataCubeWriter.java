@@ -21,9 +21,13 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Su
 public class TemporalDataCubeWriter {
 	
 	private StringBuilder collaboratorDataCube;
+	private String defaultNameSpace;
+	private String requestURL;
 
-	public TemporalDataCubeWriter(String requestURL, Entity entity) {
-		collaboratorDataCube = createTemporalDataCubeContent(requestURL, entity);
+	public TemporalDataCubeWriter(String defaultNameSpace, String requestURL, Entity entity) {
+		this.defaultNameSpace = defaultNameSpace;
+		this.requestURL = requestURL;
+		collaboratorDataCube = createTemporalDataCubeContent(entity);
 	}
 
 	public StringBuilder getDataCubeContent() {
@@ -31,7 +35,7 @@ public class TemporalDataCubeWriter {
 	}
 
 	private StringBuilder createTemporalDataCubeContent(
-			String requestURL, Entity subjectEntity) {
+			Entity subjectEntity) {
 		
 		StringBuilder dataCubeContent = new StringBuilder();
 		
@@ -40,20 +44,25 @@ public class TemporalDataCubeWriter {
 		temporalModel.setNsPrefixes(QueryConstants.getPrefixToNameSpace());
 		temporalModel.setNsPrefix("qb", "http://purl.org/linked-data/cube#");
 		temporalModel.setNsPrefix("know", "http://xcite.hackerceo.org/vocab/histograms#");
-		temporalModel.setNsPrefix("xcite", "http://xcite.hackerceo.org/instance/"
-												+ UUID.randomUUID().toString() + "#");
+		temporalModel.setNsPrefix("xcite", defaultNameSpace + "#");
 
-		Property xciteRequestURL = temporalModel.createProperty(temporalModel.getNsPrefixURI("xcite") + "requestURL");
+		Property rdfsSeeAlso = temporalModel.createProperty(temporalModel.getNsPrefixURI("rdfs") + "seeAlso");
 		Property rdfType = temporalModel.createProperty(temporalModel.getNsPrefixURI("rdf") + "type");
 		Property rdfsLabel = temporalModel.createProperty(temporalModel.getNsPrefixURI("rdfs") + "label");
 		Resource dimensionProperty = temporalModel.createResource(temporalModel.getNsPrefixURI("qb") + "DimensionProperty");
 		Resource qbDataset = temporalModel.createProperty(temporalModel.getNsPrefixURI("qb") + "DataSet");
+		Property qbDataSetProperty = temporalModel.createProperty(temporalModel.getNsPrefixURI("qb") + "dataSet");
 		
+		Resource xciteDataset = temporalModel.createProperty(temporalModel.getNsPrefixURI("xcite") 
+									+ "dataset" 
+									+ UUID.randomUUID());
 		
-		Resource xciteDataset = temporalModel.createProperty(temporalModel.getNsPrefixURI("know") + "dataset");
 		xciteDataset.addProperty(rdfType, qbDataset);
 		xciteDataset.addProperty(rdfsLabel, "Temporal Vis DataCube for " + subjectEntity.getEntityLabel());
-		xciteDataset.addProperty(xciteRequestURL, requestURL);
+		
+		Resource requestURLResource = temporalModel.createResource(requestURL);
+		
+		xciteDataset.addProperty(rdfsSeeAlso, requestURLResource);
 		
 		Resource knowCollaborator = temporalModel
 										.createProperty(temporalModel.getNsPrefixURI("know") + "collaborator");
@@ -94,7 +103,7 @@ public class TemporalDataCubeWriter {
 					knowTally,
 					knowBehindTally,
 					knowInvariant,
-					qbDataset,
+					qbDataSetProperty,
 					xciteDataset
 					);
 		}
@@ -120,7 +129,7 @@ public class TemporalDataCubeWriter {
 						Resource knowTally, 
 						Resource knowBehindTally, 
 						Resource knowInvariant,
-						Resource qbDataSet,
+						Property qbDataSetProperty,
 						Resource xciteDataset) {
 		
 		Resource subjectEntity = temporalModel.createResource(
@@ -163,7 +172,7 @@ public class TemporalDataCubeWriter {
 					knowTally,
 					knowBehindTally,
 					knowInvariant,
-					qbDataSet,
+					qbDataSetProperty,
 					xciteDataset);
 				
 			subEntityindex++;
@@ -182,7 +191,7 @@ public class TemporalDataCubeWriter {
 								Resource knowTally, 
 								Resource knowBehindTally, 
 								Resource knowInvariant,
-								Resource qbDataSet,
+								Property qbDataSetProperty,
 								Resource xciteDataset) {
 
 //		ParamMap individualProfileURLParams = 
@@ -204,7 +213,7 @@ public class TemporalDataCubeWriter {
 		
 		Resource observation = collaboratorModel
 					.createResource(collaboratorModel.getNsPrefixURI("xcite") 
-										+ subEntityindex);
+										+ "observation" + subEntityindex);
 		
 		observation.addProperty(
 				rdfType, 
@@ -219,7 +228,7 @@ public class TemporalDataCubeWriter {
 				egoNode);
 		
 		observation.addProperty( 
-				(Property) qbDataSet, 
+				qbDataSetProperty, 
 				xciteDataset);
 		
 		observation.addProperty(
