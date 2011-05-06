@@ -11,6 +11,7 @@
         
         SELECT DISTINCT ?authorship             
                         ?infoResource ?infoResourceName 
+                        ?dateTimeValue
                         ?dateTime WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
@@ -30,6 +31,7 @@
         SELECT DISTINCT ?subclass 
                         ?authorship
                         ?infoResource ?infoResourceName 
+                        ?dateTimeValue
                         ?dateTime WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      

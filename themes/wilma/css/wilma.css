@@ -1332,7 +1332,7 @@ article.property ul.property-list {
     color: #5e6363;
 }
 article.property ul.property-list li a,
-article.property ul.property-list li a span {
+article.property ul.property-list li a span.link {
     color: #2485ae;
     line-height: 1.6em;
 }

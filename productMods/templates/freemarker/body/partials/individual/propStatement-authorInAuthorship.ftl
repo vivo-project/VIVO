@@ -5,21 +5,37 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showAuthorship statement />
+<@showAuthorship statement property individual />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showAuthorship statement>
-
-    <#local linkedIndividual>
-        <#if statement.infoResource??>
-            <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceName}</a>
-        <#else>
-            <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.authorship)}">missing information resource</a>
-        </#if>
-    </#local>
-
-    ${linkedIndividual} <@dt.yearSpan "${statement.dateTime!}" />
+<#macro showAuthorship statement property individual>
+        
+    <#if statement.infoResource??>     
+        <a href="${profileUrl(statement.infoResource)}"> 
+            <span about="${individual.uri}" rel="core:authorInAuthorship">                     
+                <span about="${statement.authorship}" rel="core:linkedInformationResource">               
+                    <span class="link" about="${statement.infoResource}" property="rdfs:label">
+                        ${statement.infoResourceName}<#t>
+                    </span>
+                </span>
+            </span>
+         </a>             
+        <#if statement.dateTimeValue?has_content>
+            <span about="${statement.infoResource}" rel="core:dateTimeValue">
+                <#if statement.dateTime?has_content>
+                    <span about="${statement.dateTimeValue}" property="core:dateTime" content="${statement.dateTime}">
+                        <@dt.yearSpan statement.dateTime />
+                    </span>
+                </#if>
+             </span>
+        </#if>            
+    <#else>
+        <a href="${profileUrl(statement.authorship)}">
+            <span about="${individual.uri}" rel="core:authorInAuthorship">         
+                missing information resource                        
+            </span>
+        </a>
+    </#if>        
 
 </#macro>
