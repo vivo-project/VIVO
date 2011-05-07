@@ -10,6 +10,7 @@
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
         SELECT DISTINCT ?authorship
+                        ?rank
                         ?person ?personName WHERE {
             ?subject ?property ?authorship 
             OPTIONAL { ?authorship core:authorRank ?rank } 
@@ -27,6 +28,7 @@
                 
         SELECT DISTINCT ?subclass
                         ?authorship
+                        ?rank
                         ?person ?personName WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:authorRank ?rank } 

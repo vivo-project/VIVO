@@ -5,11 +5,11 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showAuthorship statement property individual />
+<@showAuthorship statement individual />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showAuthorship statement property individual>
+<#macro showAuthorship statement individual>
         
     <#if statement.infoResource??>     
         <a href="${profileUrl(statement.infoResource)}">
