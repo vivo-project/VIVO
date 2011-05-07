@@ -4,9 +4,22 @@
 
 <#import "lib-datetime.ftl" as dt>
 
-<#-- No core:dateTime data property assigned. Display a link to the core:DateTimeValue object -->
-<#if ! statement.dateTime??>
-    <a href="${profileUrl(statement.dateTimeValue)}">incomplete date/time</a>
+<#if statement.dateTime??>
+    <span rel="core:dateTimeValue">
+        <span about="${statement.dateTimeValue}">
+            <#if statement.precision??>
+                <span rel="core:dateTimePrecision" resource="${statement.precision}"></span>
+            </#if>
+            <span about="${statement.dateTimeValue}" property="core:dateTime" content="${statement.dateTime}">
+                ${dt.formatXsdDateTimeLong(statement.dateTime, statement.precision!)}
+            </span>
+        </span>
+    </span>
 <#else>
-    ${dt.formatXsdDateTimeLong(statement.dateTime, statement.precision!)}
+    <#-- No core:dateTime data property assigned. Display a link to the core:DateTimeValue object -->
+    <a href="${profileUrl(statement.dateTimeValue)}">
+        <span class="link" about="${individual.uri}" rel="core:dateTimeValue" resource="${statement.dateTimeValue}">
+            incomplete date/time<#t>
+        </span><#t>
+    </a><#t>    
 </#if>
