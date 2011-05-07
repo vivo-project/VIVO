@@ -1194,7 +1194,8 @@ ul.individual-urls li a {
 ul.individual-urls-people {
     list-style: url(../../../images/individual/arrow-grey.gif);
 }
-ul.individual-urls-people li a {
+ul.individual-urls-people li a,
+ul.individual-urls-people li a span.link {
     color: #2485ae;
 }
 /* INDIVIDUAL RIGHT CONTENT ------>  */
