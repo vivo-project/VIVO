@@ -32,10 +32,10 @@
         </#if>            
     <#else>
         <a href="${profileUrl(statement.authorship)}">
-            <span about="${individual.uri}" rel="core:authorInAuthorship">         
-                missing information resource                        
-            </span>
-        </a>
+            <span class="link" about="${individual.uri}" rel="core:authorInAuthorship" resource="${statement.authorship}">         
+                missing information resource<#t>                       
+            </span><#t>
+        </a><#t>
     </#if>        
 
 </#macro>
