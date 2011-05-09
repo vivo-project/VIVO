@@ -762,7 +762,21 @@ function getVIVOURL(entityURI){
 }
 
 function getTemporalVisURL(entityURI) {
+	if (vivoDefaultNamespace) {
+		
+		/*
+		 * This means that the URI of the entity is made up of default namespace so lets make the 
+		 * short url, shorter!
+		 * */
+		if (entityURI.search(vivoDefaultNamespace) === 0) {
+			return temporalGraphCommonURL + entityURI.substring(vivoDefaultNamespace.length);			
+		}
+	} 
 	
+	/*
+	 * Default short url template involves using long uri, this in case the entity is not based off 
+	 * of default namespace.
+	 * */
 	return temporalGraphCommonURL + "?uri=" + entityURI ;
 }
 
