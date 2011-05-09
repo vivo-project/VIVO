@@ -107,6 +107,7 @@ var subOrganizationGrantTemporalGraphCommonURL = "${subOrganizationGrantTemporal
 var subOrganizationPublicationTemporalGraphCommonURL = "${subOrganizationPublicationTemporalGraphCommonURL}";
 
 var jsonString = '${jsonContent!}';
+var vivoDefaultNamespace = '${vivoDefaultNamespace!}';
 var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 

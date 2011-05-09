@@ -290,6 +290,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 		body.put("title", organizationLabel + " - Temporal Graph Visualization");
 		body.put("organizationURI", entityURI);
 		body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
+		body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
 		body.put("organizationLabel", organizationLabel);
 		
 		return new TemplateResponseValues(standaloneTemplate, body);
