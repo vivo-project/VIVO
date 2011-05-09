@@ -19,7 +19,6 @@ import org.joda.time.format.DateTimeFormatter;
 import com.google.gson.Gson;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
@@ -132,10 +131,7 @@ public class UtilityFunctions {
     													   String errorMessage, 
     													   VitroRequest vitroRequest) {
 
-        Portal portal = vitroRequest.getPortal();
-
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("portalBean", portal);
         body.put("error", errorMessage);
         body.put("title", errorPageTitle);
         

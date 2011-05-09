@@ -13,7 +13,6 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -253,12 +252,9 @@ VisualizationRequestHandler {
 	private TemplateResponseValues prepareStandaloneResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer) {
 
-		Portal portal = vreq.getPortal();
-
 		String standaloneTemplate = "personPublicationCountStandaloneActivator.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("portalBean", portal);
 		body.put("title", "Individual Publication Count visualization");
 		body.put("sparklineVO", valueObjectContainer);
 
@@ -278,12 +274,9 @@ VisualizationRequestHandler {
 	private TemplateResponseValues prepareDynamicResponse(VitroRequest vreq,
 			SparklineData valueObjectContainer, boolean shouldVIVOrenderVis) {
 
-		Portal portal = vreq.getPortal();
-
 		String dynamicTemplate = "personPublicationCountDynamicActivator.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("portalBean", portal);
 		body.put("sparklineVO", valueObjectContainer);
 		body.put("shouldVIVOrenderVis", shouldVIVOrenderVis);
 

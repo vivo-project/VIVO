@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Portal;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -249,14 +248,12 @@ public class EntityGrantCountRequestHandler implements
 	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq,
 			   String entityURI) {
 
-		Portal portal = vreq.getPortal();
 		String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
 		
 		String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vreq,
 											  entityURI);
 		
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("portalBean", portal);
 		body.put("title", organizationLabel + " - Temporal Graph Visualization");
 		body.put("organizationURI", entityURI);
 		body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));

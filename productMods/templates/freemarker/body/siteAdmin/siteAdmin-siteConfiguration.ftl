@@ -8,15 +8,8 @@
         <h3>Site Configuration</h3>
 
         <ul>
-            <#if siteConfig.urls.portals??>
-                <#if siteConfig.urls.siteInfo??>
-                    <li><a href="${siteConfig.urls.siteInfo}">Current portal information</a></li>
-                </#if>
-                <li><a href="${siteConfig.urls.portals}">List all portals</a></li>
-            <#else>
-                <#if siteConfig.urls.siteInfo??>
-                    <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
-                </#if>
+            <#if siteConfig.urls.siteInfo??>
+                <li><a href="${siteConfig.urls.siteInfo}">Site information</a></li>
             </#if>
 
             <#if siteConfig.urls.menuN3Editor??>
@@ -29,8 +22,13 @@
                 <li><a href="${siteConfig.urls.tabs}">Tab management</a></li>
             </#if>
    
+            <#-- TODO This goes away when the UserAccounts are fully implemented - jblake -->
             <#if siteConfig.urls.users??>
                 <li><a href="${siteConfig.urls.users}">User accounts</a></li>  
+            </#if>
+            
+            <#if siteConfig.urls.userList??>
+                <li><a href="${siteConfig.urls.userList}">Manage user accounts</a> (work in progress)</li>  
             </#if>
             
         </ul>
