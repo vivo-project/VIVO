@@ -6,7 +6,7 @@ Instructions for VIVO developers
 -------------------------------------------------------------------------------
 
 If you are working from the VIVO distribution files, you should follow the 
-instructions in "install.txt", in this directory.
+instructions in "install.html", in this directory.
 
 -------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ Follow these steps:
      the Vitro working area (created in step 2). For example:
         vitro.core.dir = ../vitro
         
-  4) Follow the instructions in "install.txt" to complete the installation, 
+  4) Follow the instructions in "install.html" to complete the installation, 
      omitting step III.
  
 -------------------------------------------------------------------------------
