@@ -18,10 +18,6 @@
                 </#if>
             </#if>
             
-            <#if currentTheme != "wilma"> <#-- wilma doesn't support tabs -->
-                <li><a href="${siteConfig.urls.tabs}">Tab management</a></li>
-            </#if>
-   
             <#-- TODO This goes away when the UserAccounts are fully implemented - jblake -->
             <#if siteConfig.urls.users??>
                 <li><a href="${siteConfig.urls.users}">User accounts</a></li>  

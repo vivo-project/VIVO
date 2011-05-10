@@ -3,17 +3,8 @@
     <#-- Note to UI team: do not change this div without also making the corresponding change in menu.jsp -->
     <div id="navAndSearch" class="block">
         <div id="primaryAndOther">
-            <ul id="primary">
-                <#list tabMenu.items as item>
-                    <li>
-                        <a href="${item.url}" <#if item.active> class="activeTab" </#if>>
-                            ${item.linkText}
-                        </a>
-                    </li>
-                </#list>
-            </ul>
+            <ul id="primary"><li> &nbsp; <!-- tabs have been removed --> </li></ul>
         </div>
-
         <div id="searchBlock">
             <form id="searchForm" action="${urls.search}" >
                 <label for="search">Search </label>
