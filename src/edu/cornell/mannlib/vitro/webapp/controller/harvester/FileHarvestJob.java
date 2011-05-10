@@ -18,5 +18,17 @@ interface FileHarvestJob {
      * @return null if success, message to be returned to the user if failure
      */
     String validateUpload(File file);
+    
+    /**
+     * Gets the console script which can be used to run the harvest job. 
+     * @return the console script which can be used to run the harvest job
+     */
+    String getScript();
+    
+    /**
+     * Runs a harvest on the files in the specified directory.
+     * @param directory the directory containing files to harvest
+     */
+    void performHarvest(File directory);
 }
 
