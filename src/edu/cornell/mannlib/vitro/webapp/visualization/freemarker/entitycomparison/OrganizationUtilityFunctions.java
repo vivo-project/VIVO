@@ -28,7 +28,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Generi
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.QueryRunner;
 
-public class EntityComparisonUtilityFunctions {
+public class OrganizationUtilityFunctions {
 
 	public static String getHighestLevelOrganizationURI(ResultSet resultSet,
 			Map<String, String> fieldLabelToOutputFieldLabel) {
@@ -94,7 +94,7 @@ public class EntityComparisonUtilityFunctions {
 				fieldLabelToOutputFieldLabel, aggregationRules, whereClause,
 				groupOrderClause, dataset, log);
 
-		String highestLevelOrgURI = EntityComparisonUtilityFunctions
+		String highestLevelOrgURI = OrganizationUtilityFunctions
 				.getHighestLevelOrganizationURI(
 						highestLevelOrganizationQueryHandler.getQueryResult(),
 						fieldLabelToOutputFieldLabel);
@@ -165,7 +165,7 @@ public class EntityComparisonUtilityFunctions {
 		/*
 		 * If the provided value was not proper compute it yourself.
 		 * */
-		return EntityComparisonUtilityFunctions.getHighestLevelOrganizationURI(log, dataset);
+		return OrganizationUtilityFunctions.getHighestLevelOrganizationURI(log, dataset);
 	}
 	
 	public static Entity mergeEntityIfShareSameURI(Entity entityA, Entity entityB) {

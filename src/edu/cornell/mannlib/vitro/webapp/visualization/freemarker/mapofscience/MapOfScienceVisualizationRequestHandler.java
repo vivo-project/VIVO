@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.cached;
+package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.mapofscience;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.Select
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
 
-public class TemporalPublicationVisualizationRequestHandler implements
+public class MapOfScienceVisualizationRequestHandler implements
 		VisualizationRequestHandler {
 	
 	@Override
@@ -46,7 +46,7 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		return generateStandardVisualizationForPublicationTemporalVis(
+		return generateStandardVisualizationForScienceMapVis(
 				vitroRequest, log, dataset, entityURI);
 	}
 	
@@ -56,12 +56,12 @@ public class TemporalPublicationVisualizationRequestHandler implements
 			Dataset dataset) throws MalformedQueryParametersException {
 
 		
-		return generateStandardVisualizationForPublicationTemporalVis(
+		return generateStandardVisualizationForScienceMapVis(
 				vitroRequest, log, dataset, parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
 		
 	}
 
-	private ResponseValues generateStandardVisualizationForPublicationTemporalVis(
+	private ResponseValues generateStandardVisualizationForScienceMapVis(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String entityURI) throws MalformedQueryParametersException {
 		
@@ -273,14 +273,14 @@ public class TemporalPublicationVisualizationRequestHandler implements
 	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq,
 																   String entityURI) {
 
-        String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
+        String standaloneTemplate = "mapOfScienceStandalone.ftl";
 		
         String organizationLabel = OrganizationUtilityFunctions
         									.getEntityLabelFromDAO(vreq,
         														   entityURI);
         
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("title", organizationLabel + " - Temporal Graph Visualization");
+        body.put("title", organizationLabel + " - Map of Science Visualization");
         body.put("organizationURI", entityURI);
         body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());

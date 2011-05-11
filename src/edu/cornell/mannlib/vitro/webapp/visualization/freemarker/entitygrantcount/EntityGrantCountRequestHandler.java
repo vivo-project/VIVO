@@ -24,7 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.Data
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.OrganizationUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.SubEntity;
@@ -54,7 +54,7 @@ public class EntityGrantCountRequestHandler implements
 			String entityURI) throws MalformedQueryParametersException {
 		if (StringUtils.isBlank(entityURI)) {
 			
-			entityURI = EntityComparisonUtilityFunctions
+			entityURI = OrganizationUtilityFunctions
 								.getStaffProvidedOrComputedHighestLevelOrganization(
 										log,
 										dataset, 
@@ -102,7 +102,7 @@ public class EntityGrantCountRequestHandler implements
 								vitroRequest, 
 								log,
 								dataset,
-								EntityComparisonUtilityFunctions
+								OrganizationUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
 												dataset, 
@@ -125,7 +125,7 @@ public class EntityGrantCountRequestHandler implements
 		
 		
 		Map<String, Set<String>> subOrganizationTypesResult = 
-				EntityComparisonUtilityFunctions.getSubEntityTypes(
+				OrganizationUtilityFunctions.getSubEntityTypes(
 						log, dataset, entityURI);
 
 		return prepareDataResponse(entity, entity.getSubEntities(), subOrganizationTypesResult);
@@ -173,7 +173,7 @@ public class EntityGrantCountRequestHandler implements
 			throws MalformedQueryParametersException {
 		
 		Map<String, Set<String>> subOrganizationTypesResult = 
-				EntityComparisonUtilityFunctions.getSubEntityTypes(
+				OrganizationUtilityFunctions.getSubEntityTypes(
 						log, dataset, subjectOrganization);
 		
 		return prepareStandaloneDataResponse(vitroRequest, entity, subOrganizationTypesResult);
@@ -250,7 +250,7 @@ public class EntityGrantCountRequestHandler implements
 
 		String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
 		
-		String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vreq,
+		String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq,
 											  entityURI);
 		
 		Map<String, Object> body = new HashMap<String, Object>();

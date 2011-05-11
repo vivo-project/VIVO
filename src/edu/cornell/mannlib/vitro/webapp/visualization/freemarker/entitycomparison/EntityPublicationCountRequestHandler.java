@@ -53,7 +53,7 @@ public class EntityPublicationCountRequestHandler implements
 		
 		if (StringUtils.isBlank(entityURI)) {
 			
-			entityURI = EntityComparisonUtilityFunctions
+			entityURI = OrganizationUtilityFunctions
 								.getStaffProvidedOrComputedHighestLevelOrganization(
 											log, 
 											dataset, 
@@ -120,7 +120,7 @@ public class EntityPublicationCountRequestHandler implements
 			throws MalformedQueryParametersException {
 		
 		Map<String, Set<String>> subOrganizationTypesResult = 
-				EntityComparisonUtilityFunctions.getSubEntityTypes(
+				OrganizationUtilityFunctions.getSubEntityTypes(
 						log, dataset, subjectEntityURI);
 		
 		return prepareStandaloneDataResponse(vitroRequest, entity, entity.getSubEntities(),
@@ -155,7 +155,7 @@ public class EntityPublicationCountRequestHandler implements
 								vitroRequest, 
 								log,
 								dataset,
-								EntityComparisonUtilityFunctions
+								OrganizationUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
 												dataset, 
@@ -178,7 +178,7 @@ public class EntityPublicationCountRequestHandler implements
 			Entity entity = queryManager.getQueryResult();
 
 			Map<String, Set<String>> subOrganizationTypesResult = 
-					EntityComparisonUtilityFunctions.getSubEntityTypes(
+					OrganizationUtilityFunctions.getSubEntityTypes(
 							log, dataset, entityURI);
 
 			return prepareDataResponse(entity, entity.getSubEntities(), subOrganizationTypesResult);
@@ -251,7 +251,7 @@ public class EntityPublicationCountRequestHandler implements
 
         String standaloneTemplate = "entityComparisonOnPublicationsStandalone.ftl";
 		
-        String organizationLabel = EntityComparisonUtilityFunctions
+        String organizationLabel = OrganizationUtilityFunctions
         									.getEntityLabelFromDAO(vreq,
         														   entityURI);
         

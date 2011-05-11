@@ -22,8 +22,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityComparisonUtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.OrganizationUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects.JsonObject;
@@ -55,7 +56,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 			String entityURI) throws MalformedQueryParametersException {
 		if (StringUtils.isBlank(entityURI)) {
 			
-			entityURI = EntityComparisonUtilityFunctions
+			entityURI = OrganizationUtilityFunctions
 								.getStaffProvidedOrComputedHighestLevelOrganization(
 										log,
 										dataset, 
@@ -105,19 +106,19 @@ public class TemporalGrantVisualizationRequestHandler implements
 								log,
 								dataset, 
 								entityURI,
-								EntityComparisonConstants.DataVisMode.JSON);
+								VisConstants.DataVisMode.JSON);
 			} else {
 				
 				return getSubjectEntityAndGenerateDataResponse(
 								vitroRequest, 
 								log,
 								dataset,
-								EntityComparisonUtilityFunctions
+								OrganizationUtilityFunctions
 										.getStaffProvidedOrComputedHighestLevelOrganization(
 												log,
 												dataset, 
 												vitroRequest),
-								EntityComparisonConstants.DataVisMode.JSON);
+								VisConstants.DataVisMode.JSON);
 			}
 			
 		} else {
@@ -129,7 +130,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 					log,
 					dataset,
 					entityURI,
-					EntityComparisonConstants.DataVisMode.CSV);
+					VisConstants.DataVisMode.CSV);
 		}
 	}
 	
@@ -157,7 +158,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 	
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
-			String subjectEntityURI, EntityComparisonConstants.DataVisMode visMode)
+			String subjectEntityURI, VisConstants.DataVisMode visMode)
 			throws MalformedQueryParametersException {
 		
 		Entity organizationEntity = SelectOnModelUtilities
@@ -165,7 +166,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		if (organizationEntity.getSubEntities() ==  null) {
 			
-			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
+			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataErrorResponse();
 			} else {
 				return prepareDataErrorResponse();
@@ -194,14 +195,14 @@ public class TemporalGrantVisualizationRequestHandler implements
 			grantURIForAssociatedPeopleToVO = SelectOnModelUtilities
 						.getGrantsForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
 			
-			organizationEntity = EntityComparisonUtilityFunctions.mergeEntityIfShareSameURI(
+			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
 										organizationEntity,
 										organizationWithAssociatedPeople);
 		}
 		
 		if (allGrantURIToVO.isEmpty() && grantURIForAssociatedPeopleToVO.isEmpty()) {
 			
-			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
+			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataErrorResponse();
 			} else {
 				return prepareDataErrorResponse();
@@ -209,7 +210,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 			
 		} else {	
 			
-			if (EntityComparisonConstants.DataVisMode.JSON.equals(visMode)) {
+			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataResponse(vitroRequest, organizationEntity);
 			} else {
 				return prepareDataResponse(organizationEntity);
@@ -283,7 +284,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 
 		String standaloneTemplate = "entityComparisonOnGrantsStandalone.ftl";
 		
-		String organizationLabel = EntityComparisonUtilityFunctions.getEntityLabelFromDAO(vreq,
+		String organizationLabel = OrganizationUtilityFunctions.getEntityLabelFromDAO(vreq,
 											  entityURI);
 		
 		Map<String, Object> body = new HashMap<String, Object>();
