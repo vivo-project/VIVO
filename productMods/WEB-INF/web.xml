@@ -1115,6 +1115,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>adminLogin</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.AdminLoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminLogin</servlet-name>
+    <url-pattern>/admin/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
