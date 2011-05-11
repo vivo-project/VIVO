@@ -21,8 +21,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServ
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.TemplateProcessingHelper.TemplateProcessingException;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.UtilityFunctions;
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 import freemarker.template.Configuration;
 
 /**

@@ -3,7 +3,7 @@ package edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker;
 
 import java.util.Map;
 
-import edu.cornell.mannlib.vitro.webapp.visualization.freemarker.visutils.VisualizationRequestHandler;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
 public class VisualizationInjector {
 	private Map<String, VisualizationRequestHandler> visualizationIDToClass;
