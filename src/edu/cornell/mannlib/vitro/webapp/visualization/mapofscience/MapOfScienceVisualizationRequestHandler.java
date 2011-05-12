@@ -323,6 +323,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 			for (Activity activity : subentity.getActivities()) {
 				System.out.println(i);
 				System.out.println(activity.getActivityURI());
+				System.out.println(activity.getClass());
 				System.out.println("------");
 				
 				String journalName = ((MapOfScienceActivity) activity).getPublishedInJournal().trim();
