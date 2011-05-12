@@ -2,37 +2,31 @@
 
 <#-- Page providing options for disseminating QR codes -->
 
-<#include "individual-qrCodeFoafPerson.ftl">
+<#include "individual-qrCodeGenerator.ftl">
 
 <#assign qrCodeWidth = "150">
 
-<h2>Export QR Code</h2>
-<div>
-	<div style="float:left">
-		<#assign thumbUrl = individual.thumbUrl! "${urls.images}/placeholders/person.thumbnail.jpg" >
-		<img src="${thumbUrl}" />
-	</div>
-	<div style="float:left">
-		<h3>${individual.nameStatement.value}</h3>
-	</div>
-	<div style="clear:both" />
-</div>
+<h2>Export QR Code <em>(<a href="${individual.qrData.aboutQrCodesUrl}" title="More info on QR codes">What is this?</a>)</em></h2>
 
-<div style="border:1px solid #cccccc">
-	<h4 style="padding-left:5px">VCard</h4>
+<#assign thumbUrl = individual.thumbUrl! "${urls.images}/placeholders/person.thumbnail.jpg" >
+<img class="qrCode" src="${thumbUrl}" />
+
+<h3 class="qrCode"><a href="${individual.profileUrl}" title="View this person's profile">${individual.nameStatement.value}</a></h3>
+
+<section class="vcard">
+	<h4>VCard</h4>
 	<@qrCodeVCard qrCodeWidth="150" />
-	<textarea readonly="readonly" style="width:600px;height:120px">
+	<textarea name="qrCodeVCard" readonly>
 		&lt;img src="${getQrCodeUrlForVCard(qrCodeWidth)}" /&gt;<#t>
 	</textarea><#t>
-</div>
+</section>
 
-<div style="border:1px solid #cccccc">
-	<h4 style="padding-left:5px">Hyperlink</h4>
+<section>
+	<h4>Hyperlink</h4>
 	<@qrCodeLink qrCodeWidth="150" />
-	<textarea readonly="readonly" style="width:600px;height:120px">
+	<textarea name="qrCodeLink" readonly>
 		&lt;img src="${getQrCodeUrlForLink(qrCodeWidth)}" /&gt;<#t>
 	</textarea><#t>
-</div>
+</section>
 
-
-
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-qr.css" />')}
