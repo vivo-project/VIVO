@@ -106,7 +106,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 		Map<String, Activity> documentURIForAssociatedPeopleTOVO = new HashMap<String, Activity>();
 		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
 		
-		allDocumentURIToVOs = SelectOnModelUtilities.getPublicationsForAllSubOrganizations(dataset, organizationEntity);
+		allDocumentURIToVOs = SelectOnModelUtilities.getPublicationsWithJournalForAllSubOrganizations(dataset, organizationEntity);
 		
 		Entity organizationWithAssociatedPeople = SelectOnModelUtilities
 				.getSubjectOrganizationAssociatedPeople(dataset, subjectEntityURI);
@@ -114,7 +114,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 		if (organizationWithAssociatedPeople.getSubEntities() !=  null) {
 			
 			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
-						.getPublicationsForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
+						.getPublicationsWithJournalForAssociatedPeople(dataset, organizationWithAssociatedPeople.getSubEntities());
 			
 			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
 										organizationEntity,
