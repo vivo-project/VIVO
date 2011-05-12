@@ -1,13 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker;
-
-import java.io.IOException;
+package edu.cornell.mannlib.vitro.webapp.controller.visualization;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,54 +13,32 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.TemplateProcessingHelper.TemplateProcessingException;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
+import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
-import freemarker.template.Configuration;
 
 /**
- * Services a visualization request. This will return a simple error message and a 501 if
- * there is no jena Model.
+ * Services a standard visualization request, which involves templates. This will return a simple 
+ * error message and a 501 if there is no jena Model.
  *
  * @author cdtank
  */
 @SuppressWarnings("serial")
-public class AjaxVisualizationController extends FreemarkerHttpServlet {
+public class StandardVisualizationController extends FreemarkerHttpServlet {
 
 	public static final String URL_ENCODING_SCHEME = "UTF-8";
 
-	private static final Log log = LogFactory.getLog(AjaxVisualizationController.class.getName());
+	private static final Log log = LogFactory.getLog(StandardVisualizationController.class.getName());
 	
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
     
     public static ServletContext servletContext;
    
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-    		throws IOException, ServletException {
-    
-		VitroRequest vreq = new VitroRequest(request);
-		
-		Object ajaxResponse = processAjaxRequest(vreq);
-		
-		if (ajaxResponse instanceof TemplateResponseValues) {
-			
-			Configuration config = getConfig(vreq);
-			TemplateResponseValues trv = (TemplateResponseValues) ajaxResponse;
-			try {
-                writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
-            } catch (TemplateProcessingException e) {
-                log.error(e.getMessage(), e);
-            }
-			
-		} else {
-			response.getWriter().write(ajaxResponse.toString());
-		}
-	}
-    
-    private Object processAjaxRequest(VitroRequest vreq) {
+    protected ResponseValues processRequest(VitroRequest vreq) {
+        
     	/*
     	 * Based on the query parameters passed via URI get the appropriate visualization 
     	 * request handler.
@@ -73,26 +46,28 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
     	VisualizationRequestHandler visRequestHandler = 
     			getVisualizationRequestHandler(vreq);
     	
+    	servletContext = getServletContext();
+    	
     	if (visRequestHandler != null) {
     	
     		/*
-        	 * Pass the query to the selected visualization request handler & render the 
-        	 * visualization. Since the visualization content is directly added to the response 
-        	 * object we are side-effecting this method.
+        	 * Pass the query to the selected visualization request handler & render the vis.
+        	 * Since the visualization content is directly added to the response object we are side-
+        	 * effecting this method.
         	 * */
             return renderVisualization(vreq, visRequestHandler);
             
     	} else {
-    		
     		return UtilityFunctions.handleMalformedParameters(
-    									"Visualization Query Error",
-    									"Inappropriate query parameters were submitted.",
+    									"Visualization Query Error", 
+    									"Inappropriate query parameters were submitted.", 
     									vreq);
     	}
+    	
     }
 
 
-	private Object renderVisualization(VitroRequest vitroRequest,
+	private ResponseValues renderVisualization(VitroRequest vitroRequest,
 									 VisualizationRequestHandler visRequestHandler) {
 		
 		Model model = vitroRequest.getJenaOntModel(); // getModel()
@@ -115,15 +90,14 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 		if (dataset != null && visRequestHandler != null) {
         	
         	try {
-				return visRequestHandler.generateAjaxVisualization(vitroRequest, 
+				return visRequestHandler.generateStandardVisualization(vitroRequest, 
 														log, 
 														dataset);
 			} catch (MalformedQueryParametersException e) {
 				return UtilityFunctions.handleMalformedParameters(
-						"Ajax Visualization Query Error - Individual Publication Count", 
+						"Standard Visualization Query Error - Individual Publication Count", 
 						e.getMessage(), 
 						vitroRequest);
-				
 			}
         	
         } else {
@@ -150,9 +124,8 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
     	
     	try {
     		visRequestHandler = VisualizationsDependencyInjector
-										.getVisualizationIDsToClassMap(
-												getServletContext()).get(visType);
-    		
+    									.getVisualizationIDsToClassMap(getServletContext())
+    											.get(visType);
     	} catch (NullPointerException nullKeyException) {
 
     		return null;
@@ -162,6 +135,9 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 	}
 
 	private Dataset setupJENADataSource(VitroRequest vreq) {
+
+        log.debug("rdfResultFormat was: " + VisConstants.RDF_RESULT_FORMAT_PARAM);
+
         return vreq.getDataset();
 	}
 

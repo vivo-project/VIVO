@@ -19,17 +19,19 @@ import com.hp.hpl.jena.query.Dataset;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.OrganizationUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.JsonObject;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.MapOfScienceActivity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubjectEntityJSON;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.JsonObject;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.MapOfScience;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.SubjectEntityJSON;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
@@ -265,7 +267,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY,
-					 writePublicationsOverTimeJSON(vitroRequest, 
+					 writeMapOfScienceDataJSON(vitroRequest, 
 							 					   entity));
 		return fileData;
 	}
@@ -295,58 +297,53 @@ public class MapOfScienceVisualizationRequestHandler implements
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
 	 */
-	private String writePublicationsOverTimeJSON(VitroRequest vreq, 
-												 Entity subjectEntity) {
+	private String writeMapOfScienceDataJSON(VitroRequest vreq, 
+										     Entity subjectEntity) {
 
 		Gson json = new Gson();
-		Set subEntitiesJson = new HashSet();
+		Set jsonContent = new HashSet();
 
 		for (SubEntity subentity : subjectEntity.getSubEntities()) {
 			
-			JsonObject entityJson = new JsonObject(
-					subentity.getIndividualLabel());
-
-			List<List<Integer>> yearPubCount = new ArrayList<List<Integer>>();
-
-			for (Map.Entry<String, Integer> pubEntry : UtilityFunctions
-					.getYearToActivityCount(subentity.getActivities())
-					.entrySet()) {
-
-				List<Integer> currentPubYear = new ArrayList<Integer>();
-				if (pubEntry.getKey().equals(VOConstants.DEFAULT_PUBLICATION_YEAR)) {
-					currentPubYear.add(-1);
-				} else {
-					currentPubYear.add(Integer.parseInt(pubEntry.getKey()));
-				}
-					
-				currentPubYear.add(pubEntry.getValue());
-				yearPubCount.add(currentPubYear);
-			}
+			MapOfScience entityJson = new MapOfScience(subentity.getIndividualURI());
 			
-			entityJson.setYearToActivityCount(yearPubCount);
-			
-			entityJson.setOrganizationTypes(subentity.getEntityTypeLabels());
-			
-			entityJson.setEntityURI(subentity.getIndividualURI());
+			entityJson.setLabel(subentity.getIndividualLabel());
 			
 			entityJson.setLastCachedAtDateTime(subentity.getLastCachedAtDateTime());
 			
 			if (subentity.getEntityClass().equals(VOConstants.EntityClassType.PERSON)) {
-				entityJson.setVisMode("PERSON");
+				entityJson.setType("PERSON");
 			} else if (subentity.getEntityClass().equals(VOConstants.EntityClassType.ORGANIZATION)) {
-				entityJson.setVisMode("ORGANIZATION");
+				entityJson.setType("ORGANIZATION");
 			}
 			
-			subEntitiesJson.add(entityJson);
+
+			Map<String, Integer> journalToPublicationCount = new HashMap<String, Integer>();
+			int i = 0;
+			for (Activity activity : subentity.getActivities()) {
+				System.out.println(i);
+				System.out.println(activity.getActivityURI());
+				System.out.println("------");
+				
+				String journalName = ((MapOfScienceActivity) activity).getPublishedInJournal().trim();
+				
+				if (journalToPublicationCount.containsKey(journalName)) {
+					
+					journalToPublicationCount.put(journalName, 
+												  journalToPublicationCount.get(journalName) + 1);
+				} else {
+					
+					journalToPublicationCount.put(journalName, 1);
+				}
+				i++;
+			}
+			
+			entityJson.setSubdisciplineActivity(journalToPublicationCount);
+			
+			jsonContent.add(entityJson);
 		}
 		
-		SubjectEntityJSON subjectEntityJSON = new SubjectEntityJSON(subjectEntity.getEntityLabel(),
-																	subjectEntity.getEntityURI(),
-																	subjectEntity.getParents());
-		
-		subEntitiesJson.add(subjectEntityJSON);
-		
-		return json.toJson(subEntitiesJson);
+		return json.toJson(jsonContent);
 	}
 
 	private String getEntityPublicationsPerYearCSVContent(Entity entity) {

@@ -10,7 +10,7 @@ import java.util.Set;
 
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
-import edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationComparator;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaboratorComparator;

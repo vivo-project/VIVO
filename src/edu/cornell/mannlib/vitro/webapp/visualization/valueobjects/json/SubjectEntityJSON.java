@@ -1,9 +1,11 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects;
+package edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 
 public class SubjectEntityJSON {
 	

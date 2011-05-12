@@ -29,6 +29,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.SubOrgani
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.MapOfScienceActivity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 
 public class SelectOnModelUtilities {
@@ -317,6 +318,58 @@ public class SelectOnModelUtilities {
 		return allDocumentURIToVOs;
 	}
 	
+	public static Map<String, Activity> getPublicationsWithJournalForAllSubOrganizations(
+			Dataset dataset, Entity organizationEntity)
+			throws MalformedQueryParametersException {
+		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
+		
+		for (SubEntity subOrganization : organizationEntity.getSubEntities()) {
+			
+			Model subOrganizationPublicationsModel = ModelConstructorUtilities
+															.getOrConstructModel(
+																	subOrganization.getIndividualURI(),
+																	OrganizationToPublicationsForSubOrganizationsModelConstructor.MODEL_TYPE,
+																	dataset);
+			
+//			System.out.println("getting publications for " + subOrganization.getIndividualLabel());
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
+			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
+			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+			fieldLabelToOutputFieldLabel.put("journalLabel", QueryFieldLabels.DOCUMENT_JOURNAL_LABEL);
+			
+			String whereClause = ""
+				+ " <" + subOrganization.getIndividualURI() + "> vivosocnet:hasPersonWithPublication ?document . "
+				+ " ?document rdfs:label ?documentLabel . "
+				+ " OPTIONAL { "
+				+ " 	?document core:dateTimeValue ?dateTimeValue . "
+				+ "     ?dateTimeValue core:dateTime ?documentPublicationDate } . "
+				+ " OPTIONAL { "
+				+ " 	?document core:hasPublicationVenue ?journal . "
+				+ "     ?journal rdfs:label ?journalLabel . } ";
+			
+			QueryRunner<ResultSet> subOrganizationPublicationsQuery = 
+				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+										"",
+										whereClause,
+										"",
+										subOrganizationPublicationsModel);
+			
+			getPublicationWithJournalForEntity(subOrganizationPublicationsQuery.getQueryResult(),
+									subOrganization,
+									allDocumentURIToVOs);
+			
+			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+					subOrganization, 
+					subOrganizationPublicationsModel);
+
+			subOrganization.setLastCachedAtDateTime(lastCachedAtForEntity);
+			
+		}
+		return allDocumentURIToVOs;
+	}
+	
 	private static void getPublicationForEntity(
 			ResultSet queryResult,
 			SubEntity subEntity, Map<String, Activity> allDocumentURIToVOs) {
@@ -350,6 +403,54 @@ public class SelectOnModelUtilities {
 																.DOCUMENT_PUBLICATION_DATE);
 				if (publicationDateNode != null) {
 					biboDocument.setActivityDate(publicationDateNode.toString());
+				}
+			}
+			currentEntityPublications.add(biboDocument);
+		}
+		subEntity.addActivities(currentEntityPublications);
+	}
+	
+	private static void getPublicationWithJournalForEntity(
+			ResultSet queryResult,
+			SubEntity subEntity, 
+			Map<String, Activity> allDocumentURIToVOs) {
+		
+		Set<Activity> currentEntityPublications = new HashSet<Activity>();
+
+		while (queryResult.hasNext()) {
+			
+			QuerySolution solution = queryResult.nextSolution();
+			
+			if (StringUtils.isEmpty(subEntity.getLastCachedAtDateTime())) {
+				
+				RDFNode lastCachedAtNode = solution.get(QueryFieldLabels.LAST_CACHED_AT_DATETIME);
+				if (lastCachedAtNode != null) {
+					subEntity.setLastCachedAtDateTime(lastCachedAtNode.toString());
+				}
+			}
+			
+			RDFNode documentNode = solution.get(QueryFieldLabels.DOCUMENT_URL);
+			Activity biboDocument;
+			
+			if (allDocumentURIToVOs.containsKey(documentNode.toString())) {
+				biboDocument = allDocumentURIToVOs.get(documentNode.toString());
+
+			} else {
+
+				biboDocument = new MapOfScienceActivity(documentNode.toString());
+				allDocumentURIToVOs.put(documentNode.toString(), biboDocument);
+
+				RDFNode publicationDateNode = solution.get(QueryFieldLabels
+																.DOCUMENT_PUBLICATION_DATE);
+				if (publicationDateNode != null) {
+					biboDocument.setActivityDate(publicationDateNode.toString());
+				}
+				
+				RDFNode publicationJournalNode = solution.get(QueryFieldLabels
+						.DOCUMENT_JOURNAL_LABEL);
+				
+				if (publicationJournalNode != null) {
+					((MapOfScienceActivity) biboDocument).setPublishedInJournal(publicationJournalNode.toString());
 				}
 			}
 			currentEntityPublications.add(biboDocument);
@@ -626,6 +727,58 @@ public class SelectOnModelUtilities {
 										peoplePublicationsModel);
 			
 			getPublicationForEntity(personPublicationsQuery.getQueryResult(),
+									person,
+									allDocumentURIToVOs);
+			
+			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+					person, 
+					peoplePublicationsModel);
+
+			person.setLastCachedAtDateTime(lastCachedAtForEntity);
+			
+		}
+		return allDocumentURIToVOs;
+	}
+	
+	public static Map<String, Activity> getPublicationsWithJournalForAssociatedPeople(
+			Dataset dataset, Collection<SubEntity> people)
+			throws MalformedQueryParametersException {
+		Map<String, Activity> allDocumentURIToVOs = new HashMap<String, Activity>();
+		
+		Model peoplePublicationsModel = ModelConstructorUtilities
+											.getOrConstructModel(
+													null,
+													PeopleToPublicationsModelConstructor.MODEL_TYPE,
+													dataset);
+		
+		for (SubEntity person : people) {
+			
+//			System.out.println("getting publications for " + person.getIndividualLabel());
+			
+			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
+			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
+			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+			fieldLabelToOutputFieldLabel.put("journalLabel", QueryFieldLabels.DOCUMENT_JOURNAL_LABEL);
+			
+			String whereClause = ""
+				+ " <" + person.getIndividualURI() + "> vivosocnet:hasPublication ?document . "
+				+ " ?document rdfs:label ?documentLabel . "
+				+ " OPTIONAL { "
+				+ " 	?document core:dateTimeValue ?dateTimeValue . "
+				+ "     ?dateTimeValue core:dateTime ?documentPublicationDate } . "
+				+ " OPTIONAL { "
+				+ " 	?document core:hasPublicationVenue ?journal . "
+				+ "     ?journal rdfs:label ?journalLabel . } ";
+			
+			QueryRunner<ResultSet> personPublicationsQuery = 
+				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+										"",
+										whereClause,
+										"",
+										peoplePublicationsModel);
+			
+			getPublicationWithJournalForEntity(personPublicationsQuery.getQueryResult(),
 									person,
 									allDocumentURIToVOs);
 			

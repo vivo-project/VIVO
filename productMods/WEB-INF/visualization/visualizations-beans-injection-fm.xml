@@ -40,8 +40,11 @@
     <bean id="grant_temporal"
         class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.cached.TemporalGrantVisualizationRequestHandler" />	
 	
+    <bean id="map_of_science"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.mapofscience.MapOfScienceVisualizationRequestHandler" />
+	
 	<bean id="visualizationInjector"
-		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationInjector">
+		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationInjector">
 		<property name="visualizations">
 			<map>
 				<entry key="person_pub_count">
@@ -105,6 +108,10 @@
                 <entry key="grant-graph">
                     <ref bean="grant_temporal"></ref>
                 </entry>                			
+				 
+                <entry key="map-of-science">
+                    <ref bean="map_of_science"></ref>
+                </entry>    				 
 				 
 			</map>
 		</property>
