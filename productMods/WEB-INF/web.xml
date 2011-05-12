@@ -954,6 +954,12 @@
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.AutocompleteController</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>AutocompleteController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrAutocompleteController</servlet-class>
+  </servlet>
+  -->
   <servlet-mapping>
     <servlet-name>AutocompleteController</servlet-name>
     <url-pattern>/autocomplete</url-pattern>
@@ -1003,6 +1009,12 @@
     <servlet-name>JSON Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONServlet</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>JSON Service</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonServlet</servlet-class>
+  </servlet> 
+  -->
   <servlet-mapping>
     <servlet-name>JSON Service</servlet-name>
     <url-pattern>/dataservice</url-pattern>
