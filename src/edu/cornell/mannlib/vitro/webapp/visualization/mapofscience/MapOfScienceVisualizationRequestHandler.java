@@ -2,10 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.mapofscience;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,9 +27,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.MapOfScienceActivity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.JsonObject;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.MapOfScience;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.SubjectEntityJSON;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
@@ -319,26 +315,35 @@ public class MapOfScienceVisualizationRequestHandler implements
 			
 
 			Map<String, Integer> journalToPublicationCount = new HashMap<String, Integer>();
-			int i = 0;
+			
+			int mappedPublicationCount = 0;
+			int unMappedPublicationCount = 0;
+			
 			for (Activity activity : subentity.getActivities()) {
-				System.out.println(i);
-				System.out.println(activity.getActivityURI());
-				System.out.println(activity.getClass());
-				System.out.println("------");
 				
-				String journalName = ((MapOfScienceActivity) activity).getPublishedInJournal().trim();
-				
-				if (journalToPublicationCount.containsKey(journalName)) {
+				if (StringUtils.isNotBlank(((MapOfScienceActivity) activity).getPublishedInJournal())) {
 					
-					journalToPublicationCount.put(journalName, 
-												  journalToPublicationCount.get(journalName) + 1);
+					String journalName = ((MapOfScienceActivity) activity).getPublishedInJournal();
+					if (journalToPublicationCount.containsKey(journalName)) {
+						
+						journalToPublicationCount.put(journalName, 
+													  journalToPublicationCount.get(journalName) + 1);
+					} else {
+						
+						journalToPublicationCount.put(journalName, 1);
+					}
+					
+					mappedPublicationCount++;
+					
 				} else {
 					
-					journalToPublicationCount.put(journalName, 1);
+					unMappedPublicationCount++;
 				}
-				i++;
+				
 			}
 			
+			entityJson.setPubsMapped(mappedPublicationCount);
+			entityJson.setPubsUnmapped(unMappedPublicationCount);
 			entityJson.setSubdisciplineActivity(journalToPublicationCount);
 			
 			jsonContent.add(entityJson);

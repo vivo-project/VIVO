@@ -455,7 +455,6 @@ public class SelectOnModelUtilities {
 			}
 			currentEntityPublications.add(biboDocument);
 			
-			System.out.println(biboDocument.getClass() + " -- " + ((MapOfScienceActivity) biboDocument).getPublishedInJournal());
 		}
 		subEntity.addActivities(currentEntityPublications);
 	}
