@@ -7,6 +7,10 @@ import java.util.Map;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.N3Validator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.EditSubmission;
+
 public class PublicationHasAuthorValidator implements N3Validator {
 
     private static String MISSING_FIRST_NAME_ERROR = "Must specify the author's first name.";
