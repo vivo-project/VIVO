@@ -340,7 +340,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 					unMappedPublicationCount++;
 				}
 				
-			}
+			} 
 			
 			entityJson.setPubsMapped(mappedPublicationCount);
 			entityJson.setPubsUnmapped(unMappedPublicationCount);
