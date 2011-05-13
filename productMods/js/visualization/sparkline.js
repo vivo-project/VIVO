@@ -1,7 +1,7 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 /* Javascript for sparkline visualization on person profile page */
-
+ 
 var visualization = {
 	renderCoAuthor: function(url) {
 	
