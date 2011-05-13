@@ -19,7 +19,6 @@
             </#if>
             
             <#-- TODO This goes away when the UserAccounts are fully implemented - jblake -->
-            <#-- TODO This goes away when the UserAccounts are fully implemented - jblake -->
             <#if siteConfig.urls.users??>
                 <li><a href="${siteConfig.urls.users}">User accounts</a></li>  
             </#if>
