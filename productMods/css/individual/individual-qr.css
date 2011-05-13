@@ -1,0 +1,23 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+.qrCode {
+    float: left;
+}
+img.qrCode {
+    margin-bottom: 2em;
+}
+.vcard {
+    clear: left;
+}
+h2 em {
+    font-style: normal;
+    font-size: .7em;
+}
+section h4 {
+    margin-top: 2em;
+    padding-bottom: 0;
+}
+section textarea {
+    width: 600px;
+    height: 120px;
+}

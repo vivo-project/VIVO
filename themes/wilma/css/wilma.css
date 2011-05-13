@@ -1458,3 +1458,63 @@ h2#personInPosition .verbosePropertyListing,
 h2#hasResearchArea .verbosePropertyListing {
     display: block;
 }
+/* ------------------------------------------------->  */
+/* ACCOUNTS  ---------------------------------------->  */
+/* ------------------------------------------------->  */
+.account-feedback p {
+    padding: 10px;
+    background-color: #F0F0F0;
+    line-height: 1.5em;
+}
+table#account {
+    table-layout: auto;
+    width: 930px;
+    text-align: left;
+    margin: 0 auto; 
+    border-collapse: collapse;
+    empty-cells: show;
+    caption-side: top;
+    margin: 20px 0 20px 0;
+}
+table#account caption {
+    display: none;
+}
+table#account thead {
+}
+table#account td {
+    vertical-align: top;
+    padding: .5em;
+    background-color: rgba(200, 200, 180,.25);
+    border: 1px solid #F7F9F9; 
+    font-size: .9em;
+}
+#filter-roles {
+    float: left;
+    padding-bottom: 20px;
+}
+#search-accounts {
+    float: right;
+}
+.accounts {
+    clear: left;
+    overflow: hidden;
+    border-top: 1px solid #c1bfbf;
+    padding-top: 0;
+    border-bottom: 1px solid #c1bfbf;
+    padding-bottom: 0;
+    width: 100%;
+}
+.delete-account {
+    float: left;
+    border: 2px solid red;
+}
+.display-tools {
+    float: left;
+    font-size: .875em;
+}
+.hide {
+    display: none;
+}
+.accounts-per-page-form {
+    display: inline-block;
+}

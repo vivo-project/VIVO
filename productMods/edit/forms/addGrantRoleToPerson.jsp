@@ -19,7 +19,7 @@ This is intended to create a set of statements like:
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
@@ -48,9 +48,9 @@ This is intended to create a set of statements like:
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
 		%> 
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field"%>
 <%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%><c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
     }else{
     	%> <c:set var="inversePredicate"></c:set> <%
     }

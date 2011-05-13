@@ -23,11 +23,11 @@ parameter set up by editRequestDispatch.
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.VClass"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.FoafNameToRdfsLabelPreprocessor"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.FoafNameToRdfsLabelPreprocessor"%>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 

@@ -27,6 +27,8 @@ public class QueryFieldLabels {
 	public static final String DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY = "publicationYearOldLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR_MONTH = "publicationYearMonthLit";
 	public static final String DOCUMENT_PUBLICATION_DATE = "publicationDateLit";
+	public static final String DOCUMENT_JOURNAL_LABEL = "journalLabelLit";
+	
 	
 	/*
 	 * Image related field labels

@@ -9,6 +9,10 @@ import org.apache.commons.lang.StringUtils;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.N3Validator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.EditSubmission;
+
 public class PersonHasPublicationValidator implements N3Validator {
 
     private static String MISSING_PUB_TYPE_ERROR = "Must specify a publication type.";

@@ -162,12 +162,6 @@
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup</listener-class>
   </listener> 
     
-   <listener>
-        <listener-class>
-            edu.cornell.mannlib.vitro.webapp.auth.identifier.UserToIndIdentifierFactorySetup
-        </listener-class>
-    </listener>
-
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.EditorEditingPolicySetup
     </listener-class>
@@ -658,33 +652,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>Tabs2TypesOperationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Tabs2TypesOperationController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Tabs2TypesOperationController</servlet-name>
-    <url-pattern>/tabs2TypesOp</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>TabIndividualRelationOperationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.TabIndividualRelationOperationController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TabIndividualRelationOperationController</servlet-name>
-    <url-pattern>/tabIndividualRelationOp</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>TabHierarchyOperationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.TabHierarchyOperationController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TabHierarchyOperationController</servlet-name>
-    <url-pattern>/doTabHierarchyOperation</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>DatapropEditController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.DatapropEditController</servlet-class>
   </servlet>
@@ -701,15 +668,6 @@
   <servlet-mapping>
     <servlet-name>KeywordEditController</servlet-name>
     <url-pattern>/keywordEdit</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>TabEditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.TabEditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TabEditController</servlet-name>
-    <url-pattern>/tabEdit</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -740,15 +698,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>PortalEditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.PortalEditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PortalEditController</servlet-name>
-    <url-pattern>/portalEdit</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>EntityRetryController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.EntityRetryController</servlet-class>
   </servlet>
@@ -773,15 +722,6 @@
   <servlet-mapping>
     <servlet-name>DatatypeRetryController</servlet-name>
     <url-pattern>/datatype_retry</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AllTabsForPortalListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.AllTabsForPortalListingController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AllTabsForPortalListingController</servlet-name>
-    <url-pattern>/listTabs</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -1008,6 +948,12 @@
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.AutocompleteController</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>AutocompleteController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrAutocompleteController</servlet-class>
+  </servlet>
+  -->
   <servlet-mapping>
     <servlet-name>AutocompleteController</servlet-name>
     <url-pattern>/autocomplete</url-pattern>
@@ -1057,6 +1003,12 @@
     <servlet-name>JSON Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONServlet</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>JSON Service</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonServlet</servlet-class>
+  </servlet> 
+  -->
   <servlet-mapping>
     <servlet-name>JSON Service</servlet-name>
     <url-pattern>/dataservice</url-pattern>
@@ -1070,27 +1022,6 @@
     <servlet-name>JSON Reconcile Service</servlet-name>
     <url-pattern>/reconcile</url-pattern>
   </servlet-mapping>
-
-  <servlet>
-    <servlet-name>TabEntitiesController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.TabEntitiesController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TabEntitiesController</servlet-name>
-    <url-pattern>/TabEntitiesController</url-pattern>
-  </servlet-mapping>
-  
-  <!--  NOTICE: index.jsp is mapped to TabController so that we 
-      		can have the urls that use to be in the system still work even 
-              though we no longer use index.jsp           -->
-    <servlet>
-      <servlet-name>TabController</servlet-name>
-      <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.TabController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>TabController</servlet-name>
-      <url-pattern>/index.jsp</url-pattern>
-    </servlet-mapping>
 
     <servlet>
       <servlet-name>HomePageController</servlet-name>
@@ -1187,6 +1118,15 @@
   <servlet-mapping>
     <servlet-name>programLogin</servlet-name>
     <url-pattern>/programLogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>adminLogin</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.AdminLoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminLogin</servlet-name>
+    <url-pattern>/admin/login</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -1301,12 +1241,12 @@
 
    <servlet>
     <servlet-name>StandardVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.StandardVisualizationController</servlet-class>
    </servlet>
    
   <servlet>
     <servlet-name>ShortURLVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.ShortURLVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.ShortURLVisualizationController</servlet-class>
   </servlet>   
 
   <servlet-mapping>
@@ -1329,7 +1269,7 @@
 
    <servlet>
     <servlet-name>AjaxVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.AjaxVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.AjaxVisualizationController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -1339,7 +1279,7 @@
   
   <servlet>
     <servlet-name>DataVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController</servlet-class>
   </servlet>
 
   <servlet-mapping>

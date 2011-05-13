@@ -2,8 +2,11 @@
 
 package edu.cornell.mannlib.vitro.webapp.controller.harvester; 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -235,23 +238,24 @@ public class TestFileController extends FreemarkerHttpServlet {
 
 
     @SuppressWarnings("unused")
-    private void doHarvest()
-    {
+    private void doHarvest() {
         /*
         Harvest will entail:
-        
+
         D2RMapFetch
         Transfer to local temp model
         Diffs
         Transfers
-        
+
         If this is being done with a script, then we should probably use a templating system.
-        run-csv.sh 
+        run-csv.sh
         
-         */
+        */
     }
 
 
+
+    
 
 
 
@@ -361,6 +365,192 @@ class CsvHarvestJob implements FileHarvestJob {
         }
         return null;
     }
+
+    @Override
+    public String getScript()
+    {
+        String path = ""; //todo: complete
+        File scriptTemplate = new File(path);
+        
+        String scriptTemplateContents = readScriptTemplate(scriptTemplate);
+        String replacements = performScriptTemplateReplacements(scriptTemplateContents);
+        return replacements;
+    }
+
+
+    private String performScriptTemplateReplacements(String scriptTemplateContents) {
+        String replacements = scriptTemplateContents;
+        /*
+         * What needs to be replaced?
+         * 
+         * task directory name
+         */
+        //todo: complete
+        return replacements;
+    }
+
+
+    private String readScriptTemplate(File scriptTemplate) {
+        String scriptTemplateContents = null;
+        BufferedReader reader = null;
+        try {
+            int fileSize = (int)(scriptTemplate.length());
+            char[] buffer = new char[fileSize];
+            reader = new BufferedReader(new FileReader(scriptTemplate), fileSize);
+            reader.read(buffer);
+            scriptTemplateContents = new String(buffer);
+        } catch (IOException e) {
+            log.error(e, e);
+        } finally {
+            try {
+                if(reader != null)
+                    reader.close();
+            } catch(IOException e) {
+                log.error(e, e);
+            }
+        }
+        
+        return scriptTemplateContents;
+    }
+
+    
+    @Override
+    public void performHarvest(File directory) {
+
+        /* //COMMENTED OUT UNTIL HARVESTER INTEGRATION IS WORKING
+        String vivoconfig = "config/models/vivo.xml";
+        String scorebatchsize = "100";
+        String checkempty = "true";
+        String namespace = ""; //todo: get namespace
+        String h2model = "config/models/h2-sdb.xml";
+        String prevharvdburlbase = "jdbc:h2:harvested-data/prevHarvs/";
+        String tfrh = "config/recordhandlers/h2-jdbc.xml";
+        
+        String harvesterTask = "csv";
+        
+        String basedir = "harvested-data/" + harvesterTask;
+        
+        String rawrhdir = basedir + "/rh-raw";
+        String rdfrhdir = basedir + "/rh-rdf";
+        String modeldir = basedir + "/model";
+        String scoredatadir = basedir + "/score-data";
+        
+        String modeldburl = "jdbc:h2:" + modeldir + "/store";
+        String scoredatadburl = "jdbc:h2:" + scoredatadir + "/store";
+        
+        String modelname = "csvTempTransfer";
+        String scoredataname = "csvScoreData";
+
+        String tempcopydir = basedir + "/temp-copy";
+        
+        String[] scoreinput = Harvester.stringsToArray("-i", h2model, "-ImodelName=" + modelname, "-IdbUrl=" + modeldburl, "-IcheckEmpty=" + checkempty);
+        String[] scoredata = Harvester.stringsToArray("-s", h2model, "-SmodelName=" + scoredataname, "-SdbUrl=" + scoredatadburl, "-ScheckEmpty=" + checkempty);
+        String[] scoremodels = Harvester.stringsToArray(scoreinput, "-v", vivoconfig, "-VcheckEmpty=" + checkempty, scoredata, "-t", tempcopydir, "-b", scorebatchsize);
+        
+        String[] cnflags = Harvester.stringsToArray(scoreinput, "-v", vivoconfig, "-n", namespace);
+        
+        String eqtest = "org.vivoweb.harvester.score.algorithm.EqualityTest";
+        
+        String grantidnum = "http://vivoweb.org/ontology/score#grantID";
+        String rdfslabel = "http://www.w3.org/2000/01/rdf-schema#label";
+        String personidnum = "http://vivoweb.org/ontology/score#personID";
+        String deptidnum = "http://vivoweb.org/ontology/score#deptID";
+        String rolein = "http://vivoweb.org/ontology/core#roleIn";
+        String piroleof = "http://vivoweb.org/ontology/core#principalInvestigatorRoleOf";
+        String copiroleof = "http://vivoweb.org/ontology/core#co-PrincipalInvestigatorRoleOf";
+        String datetime = "http://vivoweb.org/ontology/core#dateTime";
+        String baseuri = "http://vivoweb.org/harvest/csvfile/";
+
+
+
+        //execute fetch
+        Harvester.runCSVtoRDF("-o", tfrh, "-O", "fileDir=" + rawrhdir, "-i", "filepath");
+        
+        //execute translate
+        Harvester.runXSLTranslator("-i", tfrh, "-IfileDir=" + rawrhdir, "-o", tfrh, "-OfileDir=" + rdfrhdir, "-x", "config/datamaps/csv-grant-to-vivo.xsl");
+
+        //execute transfer to import from record handler into local temp model
+        Harvester.runTransfer("-o", h2model, "-OmodelName=" + modelname, "-OdbUrl=" + modeldburl, "-h", tfrh, "-HfileDir=" + rdfrhdir, "-n", namespace);
+
+        //smushes in-place(-r) on the Grant id THEN on the person ID  then deptID
+        Harvester.runSmush(scoreinput, "-P", grantidnum, "-P", personidnum, "-P", deptidnum, "-P", datetime, "-n", baseuri, "-r");
+
+        //scoring of Grants on GrantNumber
+        Harvester.runScore(scoremodels, "-AGrantNumber=" + eqtest, "-WGrantNumber=1.0", "-FGrantNumber=" + grantidnum, "-PGrantNumber=" + grantidnum, "-n", baseuri + "grant/");
+
+        //scoring of people on PERSONIDNUM
+        Harvester.runScore(scoremodels, "-Aufid=" + eqtest, "-Wufid=1.0", "-Fufid=" + personidnum, "-Pufid=" + personidnum, "-n", baseuri + "person/");
+
+        Harvester.runSmush(scoreinput, "-P", deptidnum, "-n", baseuri + "org/", "-r");
+
+        //scoring of orgs on DeptID
+        Harvester.runScore(scoremodels, "-AdeptID=" + eqtest, "-WdeptID=1.0", "-FdeptID=" + deptidnum, "-PdeptID=" + deptidnum, "-n", baseuri + "org/");
+
+
+        Harvester.runSmush(scoreinput, "-P", rdfslabel, "-n", baseuri + "sponsor/", "-r");
+
+        //scoring sponsors by labels
+        Harvester.runScore(scoremodels, "-Alabel=" + eqtest, "-Wlabel=1.0", "-Flabel=" + rdfslabel, "-Plabel=" + rdfslabel, "-n", baseuri + "sponsor/");
+
+        //scoring of PI Roles
+        String[] piuri = Harvester.stringsToArray("-Aperson=" + eqtest, "-Wperson=0.5", "-Fperson=" + piroleof, "-Pperson=" + piroleof);
+        String[] granturi = Harvester.stringsToArray("-Agrant=" + eqtest, "-Wgrant=0.5", "-Fgrant=" + rolein, "-Pgrant=" + rolein);
+        Harvester.runScore(scoremodels, piuri, granturi, "-n", baseuri + "piRole/");
+
+        //scoring of coPI Roles
+        String[] copiuri = Harvester.stringsToArray("-Aperson=" + eqtest, "-Wperson=0.5", "-Fperson=" + copiroleof, "-Pperson=" + copiroleof);
+        Harvester.runScore(scoremodels, copiuri, granturi, "-n", baseuri + "coPiRole/");
+
+        //find matches using scores and rename nodes to matching uri
+        Harvester.runMatch(scoreinput, scoredata, "-b", scorebatchsize, "-t", "1.0", "-r");
+
+        //execute ChangeNamespace to get grants into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "grant/");
+
+        //execute ChangeNamespace to get orgs into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "org/");
+
+        //execute ChangeNamespace to get sponsors into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "sponsor/");
+
+        //execute ChangeNamespace to get people into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "person/");
+
+        //execute ChangeNamespace to get PI roles into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "piRole/");
+
+        //execute ChangeNamespace to get co-PI roles into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "coPiRole/");
+
+        //execute ChangeNamespace to get co-PI roles into current namespace
+        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "timeInterval");
+
+
+        //todo: we probably don't want to do prev harvest stuff for this
+        String prevharvestmodel = "http://vivoweb.org/ingest/dsr";
+        String addfile = basedir + "/additions.rdf.xml";
+        String subfile = basedir + "/subtractions.rdf.xml";
+        
+        //find Subtractions
+        Harvester.runDiff("-m", h2model, "-MdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-McheckEmpty=" + checkempty, "-MmodelName=" + prevharvestmodel, "-s", h2model, "-ScheckEmpty=" + checkempty, "-SdbUrl=" + modeldburl, "-SmodelName=" + modelname, "-d", subfile);
+        
+        //find Additions
+        Harvester.runDiff("-m", h2model, "-McheckEmpty=" + checkempty, "-MdbUrl=" + modeldburl, "-MmodelName=" + modelname, "-s", h2model, "-ScheckEmpty=" + checkempty, "-SdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-SmodelName=" + prevharvestmodel, "-d", addfile);
+        
+        //apply Subtractions to Previous model
+        Harvester.runTransfer("-o", h2model, "-OdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-OcheckEmpty=" + checkempty, "-OmodelName=" + prevharvestmodel, "-r", subfile, "-m");
+        
+        //apply Additions to Previous model
+        Harvester.runTransfer("-o", h2model, "-OdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-OcheckEmpty=" + checkempty, "-OmodelName=" + prevharvestmodel, "-r", addfile);
+        
+        //apply Subtractions to VIVO
+        Harvester.runTransfer("-o", vivoconfig, "-OcheckEmpty=" + checkempty, "-r", subfile, "-m");
+        
+        //apply Additions to VIVO
+        Harvester.runTransfer("-o", vivoconfig, "-OcheckEmpty=" + checkempty, "-r", addfile);
+        */
+    }
+
 }
 
 

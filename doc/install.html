@@ -88,20 +88,73 @@
             <ul>
                 <li>
                     These instructions assume that you are performing a clean 
-                    install, including emptying an existing database and removing a  
+                    install, including emptying an existing database, 
+                    emptying the VIVO home directory, and removing a  
                     previous installation from the Tomcat webapps directory. Product 
                     functionality may not be as expected if you install over an existing  
                     installation of an earlier version. 
                 </li>
                 <li>
                     If you are going to upgrade an existing service, please consult 
-                    the upgrade.txt in this directory. 
+                    the "upgrade" files in this directory. 
                 </li>
             </ul>
             <p>
                 VIVO Developers: If you are working on the VIVO source code from 
                 Subversion, the instructions are slightly different. Please consult  
                 developers.txt in this directory. 
+            </p>
+            <h3>Where does VIVO live on your computer?</h3>
+            <p>
+                Before beginning the installation, let's look at the four locations 
+                on your computer that will hold VIVO.
+            </p>
+            <h4>The VIVO distribution directory</h4>
+            <p>
+                This is created when you unpack the VIVO distribution file 
+                (see <a href="#download_code">Step III</a>, below). 
+                This is where you will create your deploy.properties file 
+                (see <a href="#deploy_properties">Step V</a>, below), 
+                and where you will make any modifications to the VIVO theme or code. 
+                You can create this wherever you choose.
+            </p>
+            <h4>VIVO inside Tomcat</h4>
+            <p>
+                When you run the build script to compile and deploy VIVO 
+                (see <a href="#deploy">Step VI</a>, below), 
+                the files will be deployed to a directory inside Tomcat. 
+                This is the actual executing code for VIVO, 
+                but you won’t need to look at it or change it. 
+                If you need to change VIVO, 
+                make the changes in the distribution directory, 
+                and run the build script again. 
+                Tell the build script where to find Tomcat by setting 
+                <code>tomcat.home</code> in the deploy.properties file 
+                (see <a href="#deploy_properties">Step V</a>, below).
+            </p>
+            <h4>The VIVO home directory</h4>
+            <p>
+                VIVO will use this area to store some of the data it uses. 
+                Uploaded image files are stored here, 
+                and the search index is stored here also. 
+                You can create this wherever you choose. 
+                Tell VIVO where to find the home directory by setting 
+                <code>vitro.home.directory</code> in the deploy.properties file 
+                (see <a href="#deploy_properties">Step V</a>, below).
+                You must create this directory before starting VIVO, 
+                and you must ensure that Tomcat has permission to read and write 
+                to this directory when it runs.
+            </p>
+            <h4>The MySQL database</h4>
+            <p>
+                Essentially all of the data that you store in VIVO will be 
+                given to MySQL for storage. 
+                The actual location of this data depends on what system you have, 
+                and on how you install MySQL 
+                (see <a href="#required_software">Step I</a>, below).
+                but you won’t need to know the location. 
+                You will access the data through VIVO, 
+                or occasionally through the MySQL client application.
             </p>
             <toc>
                 <h3>Steps to Installation</h3>
@@ -164,7 +217,7 @@
                     (Not OpenJDK) 
                 </li>
                 <li>
-                    Apache Tomcat 6.x or higher, <a href="http://tomcat.apache.org">http://tomcat.apache.org</a>
+                    Apache Tomcat 6.x, <a href="http://tomcat.apache.org">http://tomcat.apache.org</a>
                 </li>
                 <li>
                     Apache Ant 1.7 or higher, <a href="http://ant.apache.org">http://ant.apache.org</a>
@@ -185,6 +238,9 @@
                 with 1.1.1.  Be sure to run VIVO 1.2 with MySQL 5.1 or higher.  Using unsupported  
                 versions may result in strange error messages related to table formatting or other 
                 unexpected problems.
+            </p>
+            <p>
+                * Note that VIVO is not yet compatible with Tomcat 7. 
             </p>
             <h3 id="create_database">II. Create an empty MySQL database </h3>
             <p>
@@ -244,7 +300,8 @@
             </p>
             <h3 id="deploy_properties">V. Specify deployment properties </h3>
             <p>
-                At the top level of the unpacked distribution, copy the file <code>example.deploy.properties</code>
+                At the top level of the VIVO distribution directory, 
+                copy the file <code>example.deploy.properties</code>
                 to a file named simply <code>deploy.properties</code>. This file sets 
                 several properties used in compilation and deployment. 
             </p>
@@ -596,8 +653,8 @@
             </table>
             <h3 id="deploy">VI. Compile and deploy</h3>
             <p>
-                At the command line, from the top level of the unpacked 
-                distribution directory, type: 
+                At the command line, 
+                from the top level of the VIVO distribution directory, type: 
             </p>
             <pre>                ant all<br>            </pre>
             <p>
@@ -615,6 +672,8 @@
                 default. With most installations of Tomcat, the "setenv.sh" or  
                 "setenv.bat" file in Tomcat's bin directory is a convenient place to 
                 set the memory parameters. 
+                <em>If this file does not exist in Tomcat's bin directory, 
+                you can create it.</em>
                 <br>
                 For example: 
             </p>
@@ -645,8 +704,8 @@
                 in Tomcat's bin directory. Point your 
                 browser to "http://localhost:8080/vivo/" to test the application. If  
                 Tomcat does not start up, or the VIVO application is not visible, check 
-                the <code>catalina.out</code>
-                file in Tomcat's logs directory. 
+                the files in Tomcat's logs directory. Error messages are commonly
+                found in <code>catalina.out</code> or <code>localhost.log</code>
             </p>
             <h3 id="add_rdf">IX. Log in and add RDF data </h3>
             <p>

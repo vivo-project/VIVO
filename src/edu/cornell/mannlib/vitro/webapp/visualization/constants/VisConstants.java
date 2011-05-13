@@ -14,4 +14,8 @@ public class VisConstants {
 	public static final String RESULT_FORMAT_PARAM = "RS_TEXT";
 	public static final String RDF_RESULT_FORMAT_PARAM = "RDF/XML-ABBREV";
 	
+	public static enum DataVisMode {
+		CSV, JSON
+	};
+	
 }
