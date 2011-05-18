@@ -1502,12 +1502,19 @@ table#account td {
     padding-top: 0;
     border-bottom: 1px solid #c1bfbf;
     padding-bottom: 0;
+    width: 100%;
 }
 .delete-account {
     float: left;
-    margin-top: 16px;
-    margin-right: 18px;
+    border: 2px solid red;
 }
 .display-tools {
     float: left;
+    font-size: .875em;
+}
+.hide {
+    display: none;
+}
+.accounts-per-page-form {
+    display: inline-block;
 }

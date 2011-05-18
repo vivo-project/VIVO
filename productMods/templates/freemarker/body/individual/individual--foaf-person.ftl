@@ -4,8 +4,6 @@
 
 <#include "individual-setup.ftl">
 
-<#include "individual-qrCodeFoafPerson.ftl"> 
-
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
@@ -34,6 +32,8 @@
                 <#if rdfUrl??>
                     <li role="listitem"><a title="View this individual in RDF format" class="icon-rdf" href="${rdfUrl}">RDF</a></li>
                 </#if>
+                
+                <#include "individual-qrCodeFoafPerson.ftl">
             </ul>
         </nav>
             
@@ -41,16 +41,6 @@
                 
         <#-- Links -->  
         <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
-        
-        <#-- QR Codes -->
-        <#if hasValidVCard()>
-            <div style="border:1px solid #cccccc">
-                <span style="padding-left:5px">vCard QR <a style="font-size:smaller" href="${individual.qrData.aboutQrCodesUrl}">What is this?</a></span>
-                <a title="Export QR codes" href="${individual.qrData.exportQrCodeUrl}">
-                    <@qrCodeVCard qrCodeWidth="150" />
-                </a>
-            </div>
-        </#if>
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">

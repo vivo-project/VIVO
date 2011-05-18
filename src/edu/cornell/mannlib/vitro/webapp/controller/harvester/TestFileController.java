@@ -1,21 +1,24 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.controller.harvester; 
+package edu.cornell.mannlib.vitro.webapp.controller.harvester;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
@@ -39,6 +42,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
     private static final String PARAMETER_FIRST_UPLOAD = "firstUpload";
     private static final String PARAMETER_UPLOADED_FILE = "uploadedFile";
+    private static final String PARAMETER_IS_HARVEST_CLICK = "isHarvestClick";
 
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
@@ -47,6 +51,7 @@ public class TestFileController extends FreemarkerHttpServlet {
             //body.put("uploadPostback", "false");
             body.put("paramFirstUpload", PARAMETER_FIRST_UPLOAD);
             body.put("paramUploadedFile", PARAMETER_UPLOADED_FILE);
+            body.put("paramIsHarvestClick", PARAMETER_IS_HARVEST_CLICK);
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {
             log.error(e, e);
@@ -65,7 +70,8 @@ public class TestFileController extends FreemarkerHttpServlet {
      */
     public static String getHarvesterPath()
     {
-        String harvesterPath = "/usr/share/vivo/harvester/"; //todo: hack
+        //String harvesterPath = "/usr/share/vivo/harvester/"; //todo: hack
+        String harvesterPath = "/home/mbarbieri/workspace/HarvesterDevTomcat2/";
         return harvesterPath;
     }
 
@@ -75,7 +81,7 @@ public class TestFileController extends FreemarkerHttpServlet {
      * @return the base directory for file harvest uploads
      * @throws Exception if the Vitro home directory could not be found
      */
-    private String getUploadPathBase(ServletContext context) throws Exception
+    private static String getUploadPathBase(ServletContext context) throws Exception
     {
         String vitroHomeDirectoryName = ConfigurationProperties.getBean(context).getProperty(FileStorageSetup.PROPERTY_VITRO_HOME_DIR);
         if (vitroHomeDirectoryName == null) {
@@ -89,35 +95,66 @@ public class TestFileController extends FreemarkerHttpServlet {
     /**
      * Gets the FileHarvestJob implementation that is needed to handle the specified request.  This
      * will depend on the type of harvest being performed (CSV, RefWorks, etc.)
-     * @param request the request from the browser
+     * @param vreq the request from the browser
      * @return the FileHarvestJob that will provide harvest-type-specific services for this request
      */
-    private FileHarvestJob getJob(HttpServletRequest request)
+    private FileHarvestJob getJob(VitroRequest vreq)
     {
+        String namespace = vreq.getWebappDaoFactory().getDefaultNamespace();
+
         //todo: complete
-        return new CsvHarvestJob("persontemplate.csv");
+        return new CsvHarvestJob(vreq, "granttemplate.csv", namespace);
     }
 
+    public static String getUploadPath(VitroRequest vreq) {
+        try {
+            String path = getUploadPathBase(vreq.getSession().getServletContext()) + getSessionId(vreq) + "/";
+            return path;
+        } catch(Exception e) {
+            log.error(e, e);
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
+        log.error("this is a post.");
+        
+        try {
+            boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+            if(isMultipart)
+                doFileUploadPost(request, response);
+            else if(request.getParameter(PARAMETER_IS_HARVEST_CLICK).toLowerCase().equals("true"))
+                doHarvestPost(request, response);
+            else
+                doCheckHarvestStatusPost(request, response);
+        } catch(Exception e) {
+            log.error(e, e);
+        }
+    }
+
+    private void doFileUploadPost(HttpServletRequest request, HttpServletResponse response)
+        throws IOException, ServletException {
+
+        log.error("file upload post.");
         JSONObject json = new JSONObject();
         try {
-
-            String path = getUploadPathBase(request.getSession().getServletContext()) + getSessionId(request) + "/";
-            File directory = new File(path);
-
+            VitroRequest vreq = new VitroRequest(request);
 
             int maxFileSize = 1024 * 1024;
-            FileUploadServletRequest req = FileUploadServletRequest.parseRequest(request, maxFileSize);
+            FileUploadServletRequest req = FileUploadServletRequest.parseRequest(vreq, maxFileSize);
             if(req.hasFileUploadException()) {
                 Exception e = req.getFileUploadException();
                 new ExceptionVisibleToUser(e);
             }
+            
+            String path = getUploadPath(vreq);
+            File directory = new File(path);
 
             String firstUpload = req.getParameter(PARAMETER_FIRST_UPLOAD); //clear directory on first upload
+            log.error(firstUpload);
             if(firstUpload.toLowerCase().equals("true")) {
                 if(directory.exists()) {
                     File[] children = directory.listFiles();
@@ -130,7 +167,7 @@ public class TestFileController extends FreemarkerHttpServlet {
             if(!directory.exists())
                 directory.mkdirs();
 
-            FileHarvestJob job = getJob(req);
+            FileHarvestJob job = getJob(vreq);
 
             Map<String, List<FileItem>> fileStreams = req.getFiles();
             if(fileStreams.get(PARAMETER_UPLOADED_FILE) != null && fileStreams.get(PARAMETER_UPLOADED_FILE).size() > 0) {
@@ -140,7 +177,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                 File file = new File(path + name);
                 try {
                     csvStream.write(file);
-                } finally {           
+                } finally {
                     csvStream.delete();
                 }
 
@@ -194,6 +231,96 @@ public class TestFileController extends FreemarkerHttpServlet {
         response.getWriter().write(json.toString());
     }
 
+    private void doHarvestPost(HttpServletRequest request, HttpServletResponse response) {
+
+        log.error("harvest post.");
+        try {
+            VitroRequest vreq = new VitroRequest(request);
+            FileHarvestJob job = getJob(vreq);
+    
+            //String path = getUploadPath(vreq);
+
+            String script = job.getScript();
+            log.error("start harvest");
+            runScript(getSessionId(request), script);
+            log.error("end harvest");
+
+            JSONObject json = new JSONObject();
+            json.put("progressSinceLastCheck", "");
+            json.put("finished", false);
+
+            response.getWriter().write(json.toString());
+
+        } catch(Exception e) {
+            log.error(e, e);
+        }
+    }
+    
+    private void doCheckHarvestStatusPost(HttpServletRequest request, HttpServletResponse response) {
+
+        log.error("check harvest status post.");
+        
+        try {
+            String newline = "\n";
+            
+            String sessionId = getSessionId(request);
+            
+            ArrayList<String> unsentLogLinesList = sessionIdToUnsentLogLines.get(sessionId);
+            String[] unsentLogLines;
+            if(unsentLogLinesList != null) {
+                synchronized (unsentLogLinesList) {
+                    unsentLogLines = unsentLogLinesList.toArray(new String[unsentLogLinesList.size()]);
+                    unsentLogLinesList.clear();
+                }
+                
+                String progressSinceLastCheck = "";
+                for(int i = 0; i < unsentLogLines.length; i++) {
+                    progressSinceLastCheck += unsentLogLines[i] + newline;
+                }
+                
+                boolean finished = !sessionIdToHarvestThread.containsKey(sessionId);
+                
+                JSONObject json = new JSONObject();
+                json.put("progressSinceLastCheck", progressSinceLastCheck);
+                json.put("finished", finished);
+
+                response.getWriter().write(json.toString());
+            }
+        } catch(Exception e) {
+            log.error(e, e);
+        }
+    }
+    
+    
+
+    private File createScriptFile(String script) throws IOException {
+        File scriptDirectory = new File(getHarvesterPath() + "scripts/temp");
+        if(!scriptDirectory.exists()) {
+            scriptDirectory.mkdirs();
+        }
+
+        File tempFile = File.createTempFile("harv", ".sh", scriptDirectory);
+
+        FileWriter writer = new FileWriter(tempFile);
+        writer.write(script);
+        writer.close();
+
+        return tempFile;
+    }
+
+
+    private void runScript(String sessionId, String script) {
+        
+        if(!sessionIdToHarvestThread.containsKey(sessionId)) {
+            
+            ScriptRunner runner = new ScriptRunner(sessionId, script);
+            sessionIdToHarvestThread.put(sessionId, runner);
+            runner.start();
+        }
+    }
+
+
+
 
     /**
      * Handles a name conflict in a directory by providing a new name that does not conflict with the
@@ -228,7 +355,7 @@ public class TestFileController extends FreemarkerHttpServlet {
      * @param request the request coming in from the browser
      * @return the session ID
      */
-    private String getSessionId(HttpServletRequest request) {
+    private static String getSessionId(HttpServletRequest request) {
         return request.getSession().getId();
     }
 
@@ -237,25 +364,10 @@ public class TestFileController extends FreemarkerHttpServlet {
 
 
 
-    @SuppressWarnings("unused")
-    private void doHarvest() {
-        /*
-        Harvest will entail:
-
-        D2RMapFetch
-        Transfer to local temp model
-        Diffs
-        Transfers
-
-        If this is being done with a script, then we should probably use a templating system.
-        run-csv.sh
-        
-        */
-    }
 
 
 
-    
+
 
 
 
@@ -265,7 +377,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
 
     /**
-     * Provides a way of throwing an exception whose message it is OK to display unedited to the user. 
+     * Provides a way of throwing an exception whose message it is OK to display unedited to the user.
      */
     private class ExceptionVisibleToUser extends Exception {
         private static final long serialVersionUID = 1L;
@@ -273,11 +385,83 @@ public class TestFileController extends FreemarkerHttpServlet {
             super(cause);
         }
     }
+    
+    
+    private Map<String, ScriptRunner> sessionIdToHarvestThread = new Hashtable<String, ScriptRunner>(); //Hashtable is threadsafe, HashMap is not
+    private Map<String, ArrayList<String>> sessionIdToUnsentLogLines = new Hashtable<String, ArrayList<String>>(); //Hashtable is threadsafe, HashMap is not
+    private class ScriptRunner extends Thread {
+
+        private final String sessionId;
+        private final String script;
+
+        public ScriptRunner(String sessionId, String script) {
+            this.sessionId = sessionId;
+            this.script = script;
+        }
+
+        @Override
+        public void run() {
+            try {
+                ArrayList<String> unsentLogLines = sessionIdToUnsentLogLines.get(sessionId);
+                if(unsentLogLines == null) {
+                    unsentLogLines = new ArrayList<String>();
+                    sessionIdToUnsentLogLines.put(sessionId, unsentLogLines);
+                }
+                
+                File scriptFile = createScriptFile(script);
+
+                String command = "/bin/bash " + getHarvesterPath() + "scripts/temp/" + scriptFile.getName();
+
+                log.info("Running command: " + command);
+                Process pr = Runtime.getRuntime().exec(command);
+                
+                //try { Thread.sleep(15000); } catch(InterruptedException e) {log.error(e, e);}
+
+                BufferedReader processOutputReader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+                for(String line = processOutputReader.readLine(); line != null; line = processOutputReader.readLine()) {
+                    synchronized(unsentLogLines) {
+                        unsentLogLines.add(line);
+                    }
+                    log.info("Harvester output: " + line);
+                }
+
+                BufferedReader processErrorReader = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
+                for(String line = processErrorReader.readLine(); line != null; line = processErrorReader.readLine()) {
+                    log.info("Harvester error: " + line);
+                }
+
+                int exitVal;
+        
+                try {
+                    exitVal = pr.waitFor();
+                }
+                catch(InterruptedException e) {
+                    throw new IOException(e.getMessage(), e);
+                }
+                log.debug("Harvester script exited with error code " + exitVal);
+                log.info("Harvester script execution complete");
+            } catch (IOException e) {
+                log.error(e, e);
+            } finally {
+                if(sessionIdToHarvestThread.containsKey(sessionId)) {
+                    sessionIdToHarvestThread.remove(sessionId);
+                }
+            }
+        }
+
+    }
+
 }
 
 
+
+
+
+
+
+
 /**
- * An implementation of FileHarvestJob that can be used for any CSV file harvest. 
+ * An implementation of FileHarvestJob that can be used for any CSV file harvest.
  */
 class CsvHarvestJob implements FileHarvestJob {
 
@@ -285,18 +469,30 @@ class CsvHarvestJob implements FileHarvestJob {
      * Logger.
      */
     private static final Log log = LogFactory.getLog(CsvHarvestJob.class);
-    
+
+    /**
+     * The HTTP request.
+     */
+    private VitroRequest vreq;
+
     /**
      * The template file against which uploaded CSV files will be validated.
      */
     private File templateFile;
-    
+
+    /**
+     * The namespace to be used for the harvest.
+     */
+    private final String namespace;
+
     /**
      * Constructor.
      * @param templateFileName just the name of the template file.  The directory is assumed to be standard.
      */
-    public CsvHarvestJob(String templateFileName) {
-        templateFile = new File(getTemplateFileDirectory() + templateFileName);
+    public CsvHarvestJob(VitroRequest vreq, String templateFileName, String namespace) {
+        this.vreq = vreq;
+        this.templateFile = new File(getTemplateFileDirectory() + templateFileName);
+        this.namespace = namespace;
     }
 
     /**
@@ -315,17 +511,17 @@ class CsvHarvestJob implements FileHarvestJob {
     public String validateUpload(File file) {
         try {
             SimpleReader reader = new SimpleReader();
-            
+
             List templateCsv = reader.parse(this.templateFile);
             String[] templateFirstLine = (String[])templateCsv.get(0);
 
             List csv = reader.parse(file);
-            
+
             int length = csv.size();
 
             if(length == 0)
                 return "No data in file";
-            
+
             for(int i = 0; i < length; i++) {
                 String[] line = (String[])csv.get(i);
                 if(i == 0) {
@@ -334,8 +530,14 @@ class CsvHarvestJob implements FileHarvestJob {
                         return errorMessage;
                 }
                 else if(line.length != 0) {
-                    if(line.length != templateFirstLine.length)
-                        return "Mismatch in number of entries in row " + i;
+                    if(line.length != templateFirstLine.length) {
+                        String retval = "Mismatch in number of entries in row " + i + ": expected , " + templateFirstLine.length + ", found " + line.length + "  ";
+                        for(int j = 0; j < line.length; j++) {
+                            retval += "\"" + line[j] + "\", ";
+                        }
+                        //return retval;
+                        return "Mismatch in number of entries in row " + i + ": expected , " + templateFirstLine.length + ", found " + line.length;
+                    }
                 }
             }
 
@@ -369,9 +571,9 @@ class CsvHarvestJob implements FileHarvestJob {
     @Override
     public String getScript()
     {
-        String path = ""; //todo: complete
+        String path = TestFileController.getHarvesterPath() + "scripts/" + "testCSVtoRDFgrant.sh"; //todo: complete
         File scriptTemplate = new File(path);
-        
+
         String scriptTemplateContents = readScriptTemplate(scriptTemplate);
         String replacements = performScriptTemplateReplacements(scriptTemplateContents);
         return replacements;
@@ -380,9 +582,14 @@ class CsvHarvestJob implements FileHarvestJob {
 
     private String performScriptTemplateReplacements(String scriptTemplateContents) {
         String replacements = scriptTemplateContents;
+
+        String fileDirectory = TestFileController.getUploadPath(vreq);
+
+        replacements = replacements.replace("${UPLOADS_FOLDER}", fileDirectory);
+
         /*
          * What needs to be replaced?
-         * 
+         *
          * task directory name
          */
         //todo: complete
@@ -409,147 +616,17 @@ class CsvHarvestJob implements FileHarvestJob {
                 log.error(e, e);
             }
         }
-        
+
         return scriptTemplateContents;
     }
 
-    
+
     @Override
     public void performHarvest(File directory) {
-
-        /* //COMMENTED OUT UNTIL HARVESTER INTEGRATION IS WORKING
-        String vivoconfig = "config/models/vivo.xml";
-        String scorebatchsize = "100";
-        String checkempty = "true";
-        String namespace = ""; //todo: get namespace
-        String h2model = "config/models/h2-sdb.xml";
-        String prevharvdburlbase = "jdbc:h2:harvested-data/prevHarvs/";
-        String tfrh = "config/recordhandlers/h2-jdbc.xml";
         
-        String harvesterTask = "csv";
-        
-        String basedir = "harvested-data/" + harvesterTask;
-        
-        String rawrhdir = basedir + "/rh-raw";
-        String rdfrhdir = basedir + "/rh-rdf";
-        String modeldir = basedir + "/model";
-        String scoredatadir = basedir + "/score-data";
-        
-        String modeldburl = "jdbc:h2:" + modeldir + "/store";
-        String scoredatadburl = "jdbc:h2:" + scoredatadir + "/store";
-        
-        String modelname = "csvTempTransfer";
-        String scoredataname = "csvScoreData";
-
-        String tempcopydir = basedir + "/temp-copy";
-        
-        String[] scoreinput = Harvester.stringsToArray("-i", h2model, "-ImodelName=" + modelname, "-IdbUrl=" + modeldburl, "-IcheckEmpty=" + checkempty);
-        String[] scoredata = Harvester.stringsToArray("-s", h2model, "-SmodelName=" + scoredataname, "-SdbUrl=" + scoredatadburl, "-ScheckEmpty=" + checkempty);
-        String[] scoremodels = Harvester.stringsToArray(scoreinput, "-v", vivoconfig, "-VcheckEmpty=" + checkempty, scoredata, "-t", tempcopydir, "-b", scorebatchsize);
-        
-        String[] cnflags = Harvester.stringsToArray(scoreinput, "-v", vivoconfig, "-n", namespace);
-        
-        String eqtest = "org.vivoweb.harvester.score.algorithm.EqualityTest";
-        
-        String grantidnum = "http://vivoweb.org/ontology/score#grantID";
-        String rdfslabel = "http://www.w3.org/2000/01/rdf-schema#label";
-        String personidnum = "http://vivoweb.org/ontology/score#personID";
-        String deptidnum = "http://vivoweb.org/ontology/score#deptID";
-        String rolein = "http://vivoweb.org/ontology/core#roleIn";
-        String piroleof = "http://vivoweb.org/ontology/core#principalInvestigatorRoleOf";
-        String copiroleof = "http://vivoweb.org/ontology/core#co-PrincipalInvestigatorRoleOf";
-        String datetime = "http://vivoweb.org/ontology/core#dateTime";
-        String baseuri = "http://vivoweb.org/harvest/csvfile/";
-
-
-
-        //execute fetch
-        Harvester.runCSVtoRDF("-o", tfrh, "-O", "fileDir=" + rawrhdir, "-i", "filepath");
-        
-        //execute translate
-        Harvester.runXSLTranslator("-i", tfrh, "-IfileDir=" + rawrhdir, "-o", tfrh, "-OfileDir=" + rdfrhdir, "-x", "config/datamaps/csv-grant-to-vivo.xsl");
-
-        //execute transfer to import from record handler into local temp model
-        Harvester.runTransfer("-o", h2model, "-OmodelName=" + modelname, "-OdbUrl=" + modeldburl, "-h", tfrh, "-HfileDir=" + rdfrhdir, "-n", namespace);
-
-        //smushes in-place(-r) on the Grant id THEN on the person ID  then deptID
-        Harvester.runSmush(scoreinput, "-P", grantidnum, "-P", personidnum, "-P", deptidnum, "-P", datetime, "-n", baseuri, "-r");
-
-        //scoring of Grants on GrantNumber
-        Harvester.runScore(scoremodels, "-AGrantNumber=" + eqtest, "-WGrantNumber=1.0", "-FGrantNumber=" + grantidnum, "-PGrantNumber=" + grantidnum, "-n", baseuri + "grant/");
-
-        //scoring of people on PERSONIDNUM
-        Harvester.runScore(scoremodels, "-Aufid=" + eqtest, "-Wufid=1.0", "-Fufid=" + personidnum, "-Pufid=" + personidnum, "-n", baseuri + "person/");
-
-        Harvester.runSmush(scoreinput, "-P", deptidnum, "-n", baseuri + "org/", "-r");
-
-        //scoring of orgs on DeptID
-        Harvester.runScore(scoremodels, "-AdeptID=" + eqtest, "-WdeptID=1.0", "-FdeptID=" + deptidnum, "-PdeptID=" + deptidnum, "-n", baseuri + "org/");
-
-
-        Harvester.runSmush(scoreinput, "-P", rdfslabel, "-n", baseuri + "sponsor/", "-r");
-
-        //scoring sponsors by labels
-        Harvester.runScore(scoremodels, "-Alabel=" + eqtest, "-Wlabel=1.0", "-Flabel=" + rdfslabel, "-Plabel=" + rdfslabel, "-n", baseuri + "sponsor/");
-
-        //scoring of PI Roles
-        String[] piuri = Harvester.stringsToArray("-Aperson=" + eqtest, "-Wperson=0.5", "-Fperson=" + piroleof, "-Pperson=" + piroleof);
-        String[] granturi = Harvester.stringsToArray("-Agrant=" + eqtest, "-Wgrant=0.5", "-Fgrant=" + rolein, "-Pgrant=" + rolein);
-        Harvester.runScore(scoremodels, piuri, granturi, "-n", baseuri + "piRole/");
-
-        //scoring of coPI Roles
-        String[] copiuri = Harvester.stringsToArray("-Aperson=" + eqtest, "-Wperson=0.5", "-Fperson=" + copiroleof, "-Pperson=" + copiroleof);
-        Harvester.runScore(scoremodels, copiuri, granturi, "-n", baseuri + "coPiRole/");
-
-        //find matches using scores and rename nodes to matching uri
-        Harvester.runMatch(scoreinput, scoredata, "-b", scorebatchsize, "-t", "1.0", "-r");
-
-        //execute ChangeNamespace to get grants into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "grant/");
-
-        //execute ChangeNamespace to get orgs into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "org/");
-
-        //execute ChangeNamespace to get sponsors into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "sponsor/");
-
-        //execute ChangeNamespace to get people into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "person/");
-
-        //execute ChangeNamespace to get PI roles into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "piRole/");
-
-        //execute ChangeNamespace to get co-PI roles into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "coPiRole/");
-
-        //execute ChangeNamespace to get co-PI roles into current namespace
-        Harvester.runChangeNamespace(cnflags, "-u", baseuri + "timeInterval");
-
-
-        //todo: we probably don't want to do prev harvest stuff for this
-        String prevharvestmodel = "http://vivoweb.org/ingest/dsr";
-        String addfile = basedir + "/additions.rdf.xml";
-        String subfile = basedir + "/subtractions.rdf.xml";
-        
-        //find Subtractions
-        Harvester.runDiff("-m", h2model, "-MdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-McheckEmpty=" + checkempty, "-MmodelName=" + prevharvestmodel, "-s", h2model, "-ScheckEmpty=" + checkempty, "-SdbUrl=" + modeldburl, "-SmodelName=" + modelname, "-d", subfile);
-        
-        //find Additions
-        Harvester.runDiff("-m", h2model, "-McheckEmpty=" + checkempty, "-MdbUrl=" + modeldburl, "-MmodelName=" + modelname, "-s", h2model, "-ScheckEmpty=" + checkempty, "-SdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-SmodelName=" + prevharvestmodel, "-d", addfile);
-        
-        //apply Subtractions to Previous model
-        Harvester.runTransfer("-o", h2model, "-OdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-OcheckEmpty=" + checkempty, "-OmodelName=" + prevharvestmodel, "-r", subfile, "-m");
-        
-        //apply Additions to Previous model
-        Harvester.runTransfer("-o", h2model, "-OdbUrl=" + prevharvdburlbase + harvesterTask + "/store", "-OcheckEmpty=" + checkempty, "-OmodelName=" + prevharvestmodel, "-r", addfile);
-        
-        //apply Subtractions to VIVO
-        Harvester.runTransfer("-o", vivoconfig, "-OcheckEmpty=" + checkempty, "-r", subfile, "-m");
-        
-        //apply Additions to VIVO
-        Harvester.runTransfer("-o", vivoconfig, "-OcheckEmpty=" + checkempty, "-r", addfile);
-        */
     }
+    
+    
 
 }
 

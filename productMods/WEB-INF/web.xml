@@ -141,17 +141,17 @@
     </listener-class>
   </listener>
 
-  <!-- The Lucene index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up. -->
+  <!-- The Lucene index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up. 
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.search.lucene.LuceneSetup </listener-class>
-  </listener>
-  <!--
+  </listener> -->
+  <!-- -->
   <listener>
     <listener-class>
       edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
     </listener-class>
   </listener>
-  -->
+  
   
   <!--  vivo specific, must appear before other policies -->
   <listener>
@@ -162,12 +162,6 @@
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup</listener-class>
   </listener> 
     
-   <listener>
-        <listener-class>
-            edu.cornell.mannlib.vitro.webapp.auth.identifier.UserToIndIdentifierFactorySetup
-        </listener-class>
-    </listener>
-
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.EditorEditingPolicySetup
     </listener-class>
@@ -954,6 +948,12 @@
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.AutocompleteController</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>AutocompleteController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrAutocompleteController</servlet-class>
+  </servlet>
+  -->
   <servlet-mapping>
     <servlet-name>AutocompleteController</servlet-name>
     <url-pattern>/autocomplete</url-pattern>
@@ -1003,6 +1003,12 @@
     <servlet-name>JSON Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONServlet</servlet-class>
   </servlet>
+  <!--
+  <servlet>
+    <servlet-name>JSON Service</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonServlet</servlet-class>
+  </servlet> 
+  -->
   <servlet-mapping>
     <servlet-name>JSON Service</servlet-name>
     <url-pattern>/dataservice</url-pattern>
@@ -1137,7 +1143,7 @@
     <url-pattern>/unrecognizedUser</url-pattern>
   </servlet-mapping>
 
- <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION 
+ <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION -->
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
@@ -1147,7 +1153,7 @@
     <servlet-name>FakeExternalAuthController</servlet-name>
     <url-pattern>/admin/fakeExternalAuth</url-pattern>
   </servlet-mapping>
--->
+
  
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
@@ -1235,12 +1241,12 @@
 
    <servlet>
     <servlet-name>StandardVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.StandardVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.StandardVisualizationController</servlet-class>
    </servlet>
    
   <servlet>
     <servlet-name>ShortURLVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.ShortURLVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.ShortURLVisualizationController</servlet-class>
   </servlet>   
 
   <servlet-mapping>
@@ -1263,7 +1269,7 @@
 
    <servlet>
     <servlet-name>AjaxVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.AjaxVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.AjaxVisualizationController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -1273,7 +1279,7 @@
   
   <servlet>
     <servlet-name>DataVisualizationController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.DataVisualizationController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController</servlet-class>
   </servlet>
 
   <servlet-mapping>
