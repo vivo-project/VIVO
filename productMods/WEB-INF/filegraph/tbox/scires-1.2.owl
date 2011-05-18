@@ -27,16 +27,16 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
+    <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
+    <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0000272">
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A protocol is a plan specification which has sufficient level of detail and quantitative information to communicate it between domain experts, so that different domain experts will reliably be able to independently reproduce the process.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A plan specification that allows different domain experts to reliably and independently reproduce a process.</vitro:shortDef>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#documentationFor">
-    <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
-    <rdfs:domain rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#Phase4ClinicalTrial">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 4 Clinical Trial</vitro:shortDef>
@@ -87,11 +87,6 @@
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Service"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service that produces a physical object or data.</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000481">
     <rdfs:range rdf:resource="http://purl.obolibrary.org/obo/OBI_0000272"/>
@@ -170,5 +165,10 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service in which a service consumer receives the right to use a resource (instrument, database, software, etc) that is owned or managed by a service provider.  Ownership of the accessed resource remains with the service provider during and after provision of service.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service in which a service consumer receives the right to use a resource (instrument, database, software, etc) that is owned or managed by a service provider.  Ownership of the accessed resource remains with the service provider during and after provisi</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
 </rdf:RDF>
