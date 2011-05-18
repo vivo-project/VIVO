@@ -789,12 +789,12 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>UserAccountsList</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.UserAccountsListController</servlet-class>
+    <servlet-name>UserAccounts</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.UserAccountsController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserAccountsList</servlet-name>
-    <url-pattern>/listUserAccounts</url-pattern>
+    <servlet-name>UserAccounts</servlet-name>
+    <url-pattern>/userAccounts/*</url-pattern>
   </servlet-mapping>
 
   <servlet>
