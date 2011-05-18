@@ -52,6 +52,7 @@ public class VisualizationFrameworkConstants {
 	public static final String INDIVIDUAL_URI_KEY = "uri";
 	public static final String VIS_MODE_KEY = "vis_mode";
 	public static final String RENDER_MODE_KEY = "render_mode";
+	public static final String OUTPUT_FORMAT_KEY = "output";
 
 	/*
 	 * These values represent possible render modes.
@@ -121,7 +122,9 @@ public class VisualizationFrameworkConstants {
 	
 	
 	/*
-	 * These values represent possible vis-modes for temporal graph vis 
+	 * These values represent possible data serialization formats corresponding to 
+	 * output format key. 
 	 * */
-	public static final String TEMPORAL_GRAPH_JSON_DATA_VIS_MODE = "json";
+	public static final String JSON_OUTPUT_FORMAT = "json";
+	public static final String CSV_OUTPUT_FORMAT = "csv";
 }

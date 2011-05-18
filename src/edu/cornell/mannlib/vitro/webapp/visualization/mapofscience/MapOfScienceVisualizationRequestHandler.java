@@ -2,10 +2,14 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.mapofscience;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import mapping.ScienceMapping;
+import mapping.ScienceMappingResult;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
@@ -130,7 +134,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 			if (VisConstants.DataVisMode.JSON.equals(visMode)) {
 				return prepareStandaloneDataResponse(vitroRequest, organizationEntity);
 			} else {
-				return prepareDataResponse(organizationEntity);
+				return prepareDataResponse(vitroRequest, organizationEntity);
 			}
 		}
 	}
@@ -138,12 +142,13 @@ public class MapOfScienceVisualizationRequestHandler implements
 	/**
 	 * Provides response when json file containing the publication count over the
 	 * years is requested.
+	 * @param vitroRequest 
 	 * 
 	 * @param entity
 	 * @param subentities
 	 * @param subOrganizationTypesResult
 	 */
-	private Map<String, String> prepareDataResponse(Entity entity) {
+	private Map<String, String> prepareDataResponse(VitroRequest vitroRequest, Entity entity) {
 
 		String entityLabel = entity.getEntityLabel();
 
@@ -190,7 +195,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
 		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					 "{\"error\" : \"No Publications for this Organization found in VIVO.\"}");
+					 "{\"error\" : \"No Publications for this Entity found in VIVO.\"}");
 		return fileData;
 	}
 
@@ -202,48 +207,29 @@ public class MapOfScienceVisualizationRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		/*
-		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
-		 * */
-		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
-					.equalsIgnoreCase(vitroRequest.getParameter(
-							VisualizationFrameworkConstants.VIS_MODE_KEY))) {
-			
-			if (StringUtils.isNotBlank(entityURI)) {
-				
-				return getSubjectEntityAndGenerateDataResponse(
-								vitroRequest, 
-								log,
-								dataset, 
-								entityURI,
-								VisConstants.DataVisMode.JSON);
-			} else {
-				
-				return getSubjectEntityAndGenerateDataResponse(
-								vitroRequest, 
-								log,
-								dataset,
-								OrganizationUtilityFunctions
-										.getStaffProvidedOrComputedHighestLevelOrganization(
-												log,
-												dataset, 
-												vitroRequest),
-								VisConstants.DataVisMode.JSON);
-			}
-			
-		} else {
-			/*
-			 * This provides csv download files for the content in the tables.
-			 * */
-			
-				return getSubjectEntityAndGenerateDataResponse(
-						vitroRequest, 
-						log,
-						dataset,
-						entityURI,
-						VisConstants.DataVisMode.CSV);
-			
+		if (StringUtils.isBlank(entityURI)) {
+			entityURI = OrganizationUtilityFunctions
+							.getStaffProvidedOrComputedHighestLevelOrganization(
+									log,
+									dataset,
+									vitroRequest);
 		}
+		
+		VisConstants.DataVisMode currentDataVisMode = VisConstants.DataVisMode.CSV;
+		
+		if (VisualizationFrameworkConstants.JSON_OUTPUT_FORMAT
+				.equalsIgnoreCase(vitroRequest.getParameter(
+						VisualizationFrameworkConstants.OUTPUT_FORMAT_KEY))) {
+			currentDataVisMode = VisConstants.DataVisMode.JSON;
+		}
+		
+
+		return getSubjectEntityAndGenerateDataResponse(
+				vitroRequest, 
+				log,
+				dataset,
+				entityURI,
+				currentDataVisMode);
 		
 	}
 	
@@ -251,7 +237,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 	@Override
 	public Object generateAjaxVisualization(VitroRequest vitroRequest, Log log,
 			Dataset dataset) throws MalformedQueryParametersException {
-		throw new UnsupportedOperationException("Entity Pub Count does not provide Ajax Response.");
+		throw new UnsupportedOperationException("Map of Science Vis does not provide Ajax Response.");
 	}
 
 	private Map<String, String> prepareStandaloneDataResponse(
@@ -299,57 +285,117 @@ public class MapOfScienceVisualizationRequestHandler implements
 		Gson json = new Gson();
 		Set jsonContent = new HashSet();
 
-		for (SubEntity subentity : subjectEntity.getSubEntities()) {
-			
-			MapOfScience entityJson = new MapOfScience(subentity.getIndividualURI());
-			
-			entityJson.setLabel(subentity.getIndividualLabel());
-			
-			entityJson.setLastCachedAtDateTime(subentity.getLastCachedAtDateTime());
-			
-			if (subentity.getEntityClass().equals(VOConstants.EntityClassType.PERSON)) {
-				entityJson.setType("PERSON");
-			} else if (subentity.getEntityClass().equals(VOConstants.EntityClassType.ORGANIZATION)) {
-				entityJson.setType("ORGANIZATION");
-			}
-			
-
-			Map<String, Integer> journalToPublicationCount = new HashMap<String, Integer>();
-			
-			int mappedPublicationCount = 0;
-			int unMappedPublicationCount = 0;
-			
-			for (Activity activity : subentity.getActivities()) {
-				
-				if (StringUtils.isNotBlank(((MapOfScienceActivity) activity).getPublishedInJournal())) {
-					
-					String journalName = ((MapOfScienceActivity) activity).getPublishedInJournal();
-					if (journalToPublicationCount.containsKey(journalName)) {
-						
-						journalToPublicationCount.put(journalName, 
-													  journalToPublicationCount.get(journalName) + 1);
-					} else {
-						
-						journalToPublicationCount.put(journalName, 1);
-					}
-					
-					mappedPublicationCount++;
-					
-				} else {
-					
-					unMappedPublicationCount++;
-				}
-				
-			} 
-			
-			entityJson.setPubsMapped(mappedPublicationCount);
-			entityJson.setPubsUnmapped(unMappedPublicationCount);
-			entityJson.setSubdisciplineActivity(journalToPublicationCount);
-			
-			jsonContent.add(entityJson);
+		MapOfScience entityJson = new MapOfScience(subjectEntity.getIndividualURI());
+		entityJson.setLabel(subjectEntity.getIndividualLabel());
+		
+		if (UtilityFunctions.isEntityAPerson(vreq, subjectEntity.getEntityURI())) {
+			entityJson.setType("PERSON");
+		} else {
+			entityJson.setType("ORGANIZATION");
 		}
 		
+		Set<Activity> publicationsForEntity = new HashSet<Activity>();
+		
+		for (SubEntity subentity : subjectEntity.getSubEntities()) {
+			
+			Set<Activity> subEntityActivities = subentity.getActivities();
+			publicationsForEntity.addAll(subEntityActivities);
+			
+			
+			String subEntityType = "ORGANIZATION";
+			
+			if (subentity.getEntityClass().equals(VOConstants.EntityClassType.PERSON)) {
+				subEntityType = "PERSON";
+			} 
+			
+			entityJson.addSubEntity(subentity.getIndividualURI(), 
+									subentity.getIndividualLabel(), 
+									subEntityType, 
+									subEntityActivities.size());
+			
+		}
+		
+		PublicationJournalStats publicationStats = getPublicationJournalStats(publicationsForEntity);
+		
+		entityJson.setPubsWithNoJournals(publicationStats.noJournalCount);
+		
+		/*
+		 * This method side-effects entityJson by updating its counts for mapped publications, 
+		 * publications with no journal names & publications with invalid journal names & 
+		 * map of subdiscipline to activity.
+		 * */
+		updateEntityMapOfScienceInformation(entityJson,
+											publicationStats.journalToPublicationCount);
+		
+		jsonContent.add(entityJson);
+		
 		return json.toJson(jsonContent);
+	}
+
+	private PublicationJournalStats getPublicationJournalStats(
+			Set<Activity> subEntityActivities) {
+		
+		Map<String, Integer> journalToPublicationCount = new HashMap<String, Integer>();
+		int publicationsWithNoJournalCount = 0;
+		
+		for (Activity activity : subEntityActivities) {
+			
+			if (StringUtils.isNotBlank(((MapOfScienceActivity) activity).getPublishedInJournal())) {
+				
+				String journalName = ((MapOfScienceActivity) activity).getPublishedInJournal();
+				if (journalToPublicationCount.containsKey(journalName)) {
+					
+					journalToPublicationCount.put(journalName, 
+												  journalToPublicationCount.get(journalName) + 1);
+				} else {
+					
+					journalToPublicationCount.put(journalName, 1);
+				}
+				
+			} else {
+				
+				publicationsWithNoJournalCount++;
+			}
+			
+		} 
+		
+		return new PublicationJournalStats(publicationsWithNoJournalCount, journalToPublicationCount);
+	}
+
+	private void updateEntityMapOfScienceInformation(MapOfScience entityJson,
+			Map<String, Integer> journalToPublicationCount) {
+//		System.out.println("journalToPublicationCount " + journalToPublicationCount);
+		
+		int mappedPublicationCount = 0;
+		int publicationsWithInvalidJournalCount = 0;
+		
+		ScienceMappingResult result = null;
+		Map<Integer, Float> subdisciplineToActivity = new HashMap<Integer, Float>();
+		
+		try {
+			result = (new ScienceMapping()).generateScienceMappingResult(journalToPublicationCount);
+		} catch (NumberFormatException e) {
+			System.err.println("NumberFormatException coming from Map Of Science Vis");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("IOException coming from Map Of Science Vis");
+			e.printStackTrace();
+		} finally {
+			
+			if (result != null) {
+				subdisciplineToActivity = result.getMappedResult();
+				publicationsWithInvalidJournalCount = Math.round(result.getUnMappedPublications());
+				mappedPublicationCount = Math.round(result.getMappedPublications());
+			}
+			
+		}
+		
+//		System.out.println("subdisciplineToActivity " + subdisciplineToActivity);
+		
+		entityJson.setPubsMapped(mappedPublicationCount);
+		entityJson.setPubsWithInvalidJournals(publicationsWithInvalidJournalCount);
+		
+		entityJson.setSubdisciplineActivity(subdisciplineToActivity);
 	}
 
 	private String getEntityPublicationsPerYearCSVContent(Entity entity) {
@@ -372,5 +418,19 @@ public class MapOfScienceVisualizationRequestHandler implements
 		}
 		return csvFileContent.toString();
 	}
+	
+	private class PublicationJournalStats {
+		
+		int noJournalCount;
+		Map<String, Integer> journalToPublicationCount;
+		
+		public PublicationJournalStats(int noJournalCount,
+								Map<String, Integer> journalToPublicationCount) {
+
+			this.noJournalCount = noJournalCount;
+			this.journalToPublicationCount = journalToPublicationCount;
+		}
+		
+	} 
 
 }	
