@@ -1,0 +1,1060 @@
+[
+   {
+      "uri":"http://vivo.ufl.edu/individual/UniversityofFlorida",
+      "label":"University of Florida",
+      "type":"ORGANIZATION",
+      "pubsMapped":487,
+      "pubsWithNoJournals":2428,
+      "pubsWithInvalidJournals":431,
+      "subdisciplineActivity":{
+         "1":12.556484,
+         "551":2.051282,
+         "2":8.474287,
+         "548":0.051282022,
+         "3":0.16249998,
+         "4":13.077053,
+         "544":0.012500009,
+         "6":7.4033594,
+         "7":4.2650557,
+         "8":2.0587068,
+         "9":1.3111172,
+         "10":0.6561821,
+         "11":1.2087067,
+         "12":1.3576288,
+         "13":3.0025544,
+         "15":1.1106142,
+         "17":1.2312467,
+         "16":4.3291583,
+         "19":1.3576288,
+         "18":10.91324,
+         "21":3.382149,
+         "20":3.3839447,
+         "22":0.26505578,
+         "25":1.2986171,
+         "24":0.21854419,
+         "27":1.0,
+         "26":1.6653037,
+         "29":2.659705,
+         "28":0.16219509,
+         "31":3.478058,
+         "30":10.300424,
+         "34":0.031914905,
+         "35":2.6436822,
+         "32":7.0125,
+         "33":3.4035842,
+         "38":3.1351352,
+         "39":0.26505578,
+         "36":0.17955,
+         "515":0.17395088,
+         "37":0.49460918,
+         "524":0.23632193,
+         "42":0.3092675,
+         "40":2.5163572,
+         "46":8.199238,
+         "44":5.208707,
+         "45":0.122809306,
+         "51":1.2185442,
+         "533":2.3934855,
+         "50":0.21854419,
+         "532":0.0465116,
+         "49":0.05823069,
+         "48":3.613193,
+         "534":1.0930232,
+         "55":0.42357668,
+         "528":0.140625,
+         "54":5.917012,
+         "531":0.058706716,
+         "53":0.051282022,
+         "530":9.046512,
+         "59":0.012195115,
+         "542":0.0465116,
+         "63":1.4916586,
+         "62":0.012195115,
+         "61":0.096017495,
+         "538":0.1725399,
+         "68":0.058706716,
+         "69":2.676195,
+         "67":0.0465116,
+         "76":1.0587068,
+         "77":1.3111172,
+         "78":1.1153846,
+         "72":0.28792453,
+         "75":2.1614509,
+         "85":0.058706716,
+         "84":0.43660894,
+         "87":0.031914905,
+         "81":4.5849013,
+         "80":2.2650557,
+         "83":0.058706716,
+         "82":2.2185442,
+         "93":1.0465117,
+         "89":0.058706716,
+         "88":1.9634476,
+         "91":0.2775558,
+         "102":0.031914905,
+         "103":0.06410259,
+         "101":4.2650557,
+         "99":9.0125,
+         "96":0.012500009,
+         "97":0.031914905,
+         "110":0.012195115,
+         "108":0.012500009,
+         "109":11.223822,
+         "106":0.096017495,
+         "104":0.012195115,
+         "105":1.0,
+         "119":0.031914905,
+         "118":0.012500009,
+         "117":0.1988557,
+         "116":0.012195115,
+         "115":0.140625,
+         "114":1.0121951,
+         "113":8.236321,
+         "127":7.2864223,
+         "125":0.06410259,
+         "120":0.25013772,
+         "137":0.16249998,
+         "136":0.14999998,
+         "139":1.0121951,
+         "140":4.0,
+         "143":0.14999998,
+         "131":24.236643,
+         "130":0.21854419,
+         "133":0.031914905,
+         "135":0.6668198,
+         "154":1.0,
+         "157":0.096017495,
+         "158":0.2366425,
+         "144":0.43295166,
+         "146":1.0125,
+         "149":0.031914905,
+         "150":1.3563491,
+         "151":0.012195115,
+         "174":0.012195115,
+         "172":0.031914905,
+         "163":0.031914905,
+         "162":9.0,
+         "161":0.19923767,
+         "160":0.012500009,
+         "166":0.06410259,
+         "165":0.13513508,
+         "184":0.14999998,
+         "185":2.643682,
+         "190":0.012195115,
+         "189":0.1725399,
+         "178":0.012500009,
+         "179":1.2829517,
+         "176":0.06410259,
+         "180":0.30042455,
+         "205":0.21854419,
+         "204":1.0587068,
+         "206":2.095697,
+         "200":0.2366425,
+         "203":4.0,
+         "197":0.04411002,
+         "196":0.012500009,
+         "195":0.307675,
+         "217":4.223822,
+         "218":2.3974435,
+         "213":5.294825,
+         "215":4.15,
+         "208":1.0125,
+         "238":1.1387796,
+         "237":0.031914905,
+         "236":0.0465116,
+         "235":1.0465117,
+         "233":1.4549809,
+         "228":0.012500009,
+         "254":0.096017495,
+         "251":0.012195115,
+         "244":1.0465117,
+         "245":1.2238219,
+         "241":0.13513508,
+         "275":0.031914905,
+         "274":0.34618592,
+         "272":0.0465116,
+         "278":0.23104419,
+         "277":3.17254,
+         "282":2.0,
+         "287":0.1725399,
+         "285":0.012195115,
+         "258":0.012195115,
+         "262":3.4395473,
+         "264":0.12071262,
+         "270":2.0,
+         "269":0.16705,
+         "305":0.1725399,
+         "304":0.026315788,
+         "307":1.031915,
+         "311":0.09062162,
+         "310":0.6436821,
+         "313":12.0,
+         "312":0.0465116,
+         "315":0.10951272,
+         "316":0.031914905,
+         "318":0.0465116,
+         "292":1.0,
+         "293":0.06410259,
+         "300":0.99127144,
+         "302":2.0,
+         "303":0.058706716,
+         "343":0.22382192,
+         "342":0.031914905,
+         "341":7.0388155,
+         "340":0.21822281,
+         "339":0.1725399,
+         "338":0.096017495,
+         "336":0.0465116,
+         "350":6.0465117,
+         "349":0.012195115,
+         "347":1.0587068,
+         "345":0.50782293,
+         "326":10.17254,
+         "324":0.16219509,
+         "322":0.06410259,
+         "323":2.063782,
+         "320":1.2989221,
+         "321":3.0766027,
+         "335":0.140625,
+         "373":0.026315788,
+         "372":0.10291839,
+         "374":0.012500009,
+         "369":0.026315788,
+         "378":1.0,
+         "357":1.051282,
+         "358":0.08319692,
+         "352":0.012195115,
+         "353":0.06410259,
+         "354":0.0465116,
+         "355":0.0465116,
+         "365":0.13513508,
+         "366":0.5136948,
+         "367":0.0465116,
+         "361":0.1794408,
+         "362":0.031914905,
+         "411":1.0125,
+         "408":0.0465116,
+         "409":0.06410259,
+         "415":5.715034,
+         "412":0.50398415,
+         "413":0.031914905,
+         "402":2.9960349,
+         "401":2.1278846,
+         "404":2.8753595,
+         "405":1.3377763,
+         "394":2.5136948,
+         "397":0.058706716,
+         "387":0.058706716,
+         "384":0.54001063,
+         "389":2.1351352,
+         "441":5.4933767,
+         "443":1.5011876,
+         "445":2.5426157,
+         "434":0.031914905,
+         "425":3.012195,
+         "424":1.5587119,
+         "427":0.19830896,
+         "426":0.40303653,
+         "429":0.1725399,
+         "417":0.1725399,
+         "416":0.031914905,
+         "419":1.12888,
+         "418":0.14999998,
+         "423":0.4857372,
+         "422":8.16692,
+         "478":0.0465116,
+         "479":0.1395348,
+         "476":0.21884908,
+         "477":0.012500009,
+         "475":0.012195115,
+         "472":1.0,
+         "470":0.031914905,
+         "471":2.0,
+         "469":5.0465117,
+         "466":0.0465116,
+         "463":0.08910261,
+         "462":0.1395348,
+         "461":19.051281,
+         "460":1.0,
+         "457":6.0,
+         "456":3.140625,
+         "454":11.102918,
+         "452":0.35870665,
+         "451":2.1174135,
+         "450":0.28513506,
+         "449":3.1884599,
+         "448":0.40540576,
+         "508":3.3588479,
+         "509":0.1725399,
+         "510":0.28477556,
+         "504":1.0465117,
+         "506":0.07842651,
+         "507":0.031914905,
+         "500":0.1725399,
+         "503":1.0263158,
+         "493":0.095744714,
+         "492":0.0465116,
+         "490":0.25286067,
+         "485":0.26505578,
+         "487":2.376947
+      },
+      "subEntities":[
+         {
+            "uri":"http://vivo.ufl.edu/individual/n9148",
+            "label":"Ashton,Patricia T",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n15274",
+            "label":"Boyle,Marian",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofVeterinaryMedicine",
+            "label":"College of Veterinary Medicine",
+            "type":"ORGANIZATION",
+            "pubs":150
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n88394",
+            "label":"Telesco,Charles Michael",
+            "type":"PERSON",
+            "pubs":2
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n683681576",
+            "label":"Robbins,Deanna S",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n25136",
+            "label":"Smith,Stephen W",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n44461",
+            "label":"Alladi,Krishnaswami",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/FloridaCenterforLibraryAutomation",
+            "label":"Florida Center for Library Automation",
+            "type":"ORGANIZATION",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n11932",
+            "label":"Limacher,Marian",
+            "type":"PERSON",
+            "pubs":2
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n89951",
+            "label":"Bondy,Elizabeth",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n8831",
+            "label":"Collins,Mary E",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofDesignConstructionPlanning",
+            "label":"College of Design, Construction and Planning",
+            "type":"ORGANIZATION",
+            "pubs":2
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CenterforSmellandTaste",
+            "label":"Center for Smell and Taste",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n1601",
+            "label":"Ogram,Andrew V",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n13423",
+            "label":"Liz Screaton",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/WhitneyLaboratoryforMarineBioscience",
+            "label":"Whitney Laboratory for Marine Bioscience",
+            "type":"ORGANIZATION",
+            "pubs":25
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n5697",
+            "label":"Fang,Zhihui",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/OfficeofResearch",
+            "label":"Office of Research",
+            "type":"ORGANIZATION",
+            "pubs":3
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/LevinCollegeofLaw",
+            "label":"Levin College of Law",
+            "type":"ORGANIZATION",
+            "pubs":22
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n1177",
+            "label":"West-Olatunji, Cirecie",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/InformationTechnology",
+            "label":"Information Technology",
+            "type":"ORGANIZATION",
+            "pubs":11
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n116215",
+            "label":"Brownell,Mary T",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/InstituteofFoodandAgriculturalSciences",
+            "label":"Institute of Food and Agricultural Sciences (IFAS)",
+            "type":"ORGANIZATION",
+            "pubs":754
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n45154",
+            "label":"Sikivie,Pierre",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/EvelynFandWilliamLMcKnightBrainInstituteoftheUniversityofFlorida",
+            "label":"Evelyn F. and William L. McKnight Brain Institute of the University of Florida",
+            "type":"ORGANIZATION",
+            "pubs":12
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n121592",
+            "label":"Holland, Stephen",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/FloridaMuseumofNaturalHistory",
+            "label":"Florida Museum of Natural History",
+            "type":"ORGANIZATION",
+            "pubs":14
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n62467",
+            "label":"Turner,Alicia D",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofJournalismandCommunications",
+            "label":"College of Journalism and Communications",
+            "type":"ORGANIZATION",
+            "pubs":4
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofNursing",
+            "label":"College of Nursing",
+            "type":"ORGANIZATION",
+            "pubs":38
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n4042",
+            "label":"Corbett,Nancy Long",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n8471",
+            "label":"Pomeranz,Jamie L",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n10749",
+            "label":"Conroy,Maureen Almaz",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n14156",
+            "label":"Dr. Linda Behar-Horenstein",
+            "type":"PERSON",
+            "pubs":6
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n5019",
+            "label":"Cantrell,Amy Melissa",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n17833",
+            "label":"Waldron,Nancy L",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n30459",
+            "label":"Harper,Candace Ann",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n25602",
+            "label":"Hansen De Chapman,Gail Marie",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n41539",
+            "label":"Cheng,Hai Ping",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofMedicine",
+            "label":"College of Medicine",
+            "type":"ORGANIZATION",
+            "pubs":1684
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n1440895998",
+            "label":"Mueller, Guido",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n16276",
+            "label":"Kamman,Margaret L",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/InternationalCenter",
+            "label":"International Center",
+            "type":"ORGANIZATION",
+            "pubs":4
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n5638",
+            "label":"Korytov,Andrey",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n30509",
+            "label":"Whitaker,Vance M",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n14659",
+            "label":"Ge,Jian",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/InterdisciplinaryCenterforBiotechnologyResearch",
+            "label":"Interdisciplinary Center for Biotechnology Research",
+            "type":"ORGANIZATION",
+            "pubs":80
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n6184",
+            "label":"Kemple,Kristen Mary",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n1578",
+            "label":"Thomas,John E",
+            "type":"PERSON",
+            "pubs":2
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n12568",
+            "label":"Peris,Joanna",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n127519",
+            "label":"Ingersent,J Kevin",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n17362",
+            "label":"Griffiths,Scott K",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n15194",
+            "label":"Therriault,David James",
+            "type":"PERSON",
+            "pubs":2
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofDentistry",
+            "label":"College of Dentistry",
+            "type":"ORGANIZATION",
+            "pubs":220
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n47746",
+            "label":"Algina,James J",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n10688",
+            "label":"Lu,Xiaomin",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n13294",
+            "label":"Hamann,Frederick,III",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n16688",
+            "label":"Adams,Thomasenia L",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/WaterInstitute",
+            "label":"Water Institute",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n10539",
+            "label":"Gray,Dennis J",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n4883",
+            "label":"BRUMBACK,BABETTE",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/GeorgeASmathersLibraries",
+            "label":"George A. Smathers Libraries",
+            "type":"ORGANIZATION",
+            "pubs":6
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CenterforNutritionalSciences",
+            "label":"Center for Nutritional Sciences",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n23713",
+            "label":"Maupin,Julie A",
+            "type":"PERSON",
+            "pubs":4
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n24886",
+            "label":"Momol,Esengul A",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n4831",
+            "label":"Clark,David G",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n6911",
+            "label":"Landor,Blake",
+            "type":"PERSON",
+            "pubs":3
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n11405",
+            "label":"Bandyopadhyay,Reba M",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofPharmacy",
+            "label":"College of Pharmacy",
+            "type":"ORGANIZATION",
+            "pubs":329
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n466",
+            "label":"Campbell,Dale Franklin",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/OfficeofthePresident",
+            "label":"Office of the President",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofAgriculturalandLifeSciences",
+            "label":"College of Agricultural and Life Sciences",
+            "type":"ORGANIZATION",
+            "pubs":634
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n7175",
+            "label":"Leppla,Norman C",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n3933",
+            "label":"Barfield,Carl S",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n6548",
+            "label":"Reitze,David H",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n7537",
+            "label":"Griffin, Cynthia C.",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n14400",
+            "label":"Graff, Randy A",
+            "type":"PERSON",
+            "pubs":4
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n29445",
+            "label":"Aufmuth, Joe",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/StudentAffairs",
+            "label":"Student Affairs",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n27781",
+            "label":"Cox,Penny R",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n17479",
+            "label":"Hirschfeld,Peter J",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n1639",
+            "label":"Rockwell, Alex",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n18820",
+            "label":"Pearson,Brian J",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n37528",
+            "label":"Jin,Shouguang",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofEducation",
+            "label":"College of Education",
+            "type":"ORGANIZATION",
+            "pubs":8
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofFineArts",
+            "label":"College of Fine Arts",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/EnvironmentalHealthandSafety",
+            "label":"Environmental Health and Safety",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n81483",
+            "label":"Mccarty,Christopher",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n4682",
+            "label":"Lipowski,Earlene E",
+            "type":"PERSON",
+            "pubs":3
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/DivisionofContinuingEducation",
+            "label":"Continuing Education",
+            "type":"ORGANIZATION",
+            "pubs":254
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n104316",
+            "label":"Rey,Jorge",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n5643",
+            "label":"Brown,William S,JR",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n9452",
+            "label":"LENNON,JIM",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n10800",
+            "label":"Martin,Ellen Eckels",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n26806",
+            "label":"Torode, Tracy K",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n13438",
+            "label":"Amatea,Ellen S",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/EmergingPathogensInstitute",
+            "label":"Emerging Pathogens Institute (UF)",
+            "type":"ORGANIZATION",
+            "pubs":3
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n3178",
+            "label":"Castaneda,Magdalena",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n52601",
+            "label":"University of Florida Foundation",
+            "type":"ORGANIZATION",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n14424",
+            "label":"Lamb,Lori A",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n98362",
+            "label":"Muttalib,Khandker A",
+            "type":"PERSON",
+            "pubs":2
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n4454",
+            "label":"Maslov,Dmitrii",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n5908",
+            "label":"Clark,Mary Ann",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofLiberalArtsandSciences",
+            "label":"College of Liberal Arts and Sciences",
+            "type":"ORGANIZATION",
+            "pubs":522
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n6047",
+            "label":"Trenholm,Laurie E",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n31871",
+            "label":"Terzian,Sevan G",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofEngineering",
+            "label":"College of Engineering",
+            "type":"ORGANIZATION",
+            "pubs":128
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/WarringtonCollegeofBusinessAdministration",
+            "label":"Warrington College of Business Administration",
+            "type":"ORGANIZATION",
+            "pubs":58
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n52955",
+            "label":"Vernetson, Theresa",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n57262",
+            "label":"Leary,James Daniel",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n1598",
+            "label":"Mannion, Catharine",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n27116",
+            "label":"Fitzpatrick,George E",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/FloridaSeaGrant",
+            "label":"Florida Sea Grant",
+            "type":"ORGANIZATION",
+            "pubs":5
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/OfficeoftheProvostSeniorVicePresidentforAcademicAffairs",
+            "label":"Office of the Provost \u0026 Senior Vice President for Academic Affairs",
+            "type":"ORGANIZATION",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n13283",
+            "label":"Kamenov,George Dimitrov",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n3605",
+            "label":"Li,Ning",
+            "type":"PERSON",
+            "pubs":1
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n142359",
+            "label":"Perfit,Michael R",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofPublicHealthandHealthProfessions",
+            "label":"College of Public Health and Health Professions",
+            "type":"ORGANIZATION",
+            "pubs":299
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n58503",
+            "label":"Dailey,Amy Beth",
+            "type":"PERSON",
+            "pubs":4
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n54351",
+            "label":"Hodges,Amanda C",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n46033",
+            "label":"Duncan,Larry Wayne",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/HealthScienceCenter",
+            "label":"Health Science Center",
+            "type":"ORGANIZATION",
+            "pubs":2140
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n10796",
+            "label":"Sloan,Kenneth B",
+            "type":"PERSON",
+            "pubs":5
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n38368",
+            "label":"Daniels,Michael Joseph",
+            "type":"PERSON",
+            "pubs":3
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/n588100285",
+            "label":"Unel,Burcin",
+            "type":"PERSON",
+            "pubs":0
+         },
+         {
+            "uri":"http://vivo.ufl.edu/individual/CollegeofHealthandHumanPerformance",
+            "label":"College of Health and Human Performance",
+            "type":"ORGANIZATION",
+            "pubs":114
+         }
+      ]
+   }
+]
