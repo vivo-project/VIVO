@@ -42,7 +42,7 @@ function initVisModeController() {
 
 function initMarkers() {
 	downloader = new DownloadManager();
-	loadMarkers(ENTITY_VIS_MODE, "smallSampleData.json", false);
+	loadMarkers(ENTITY_VIS_MODE, scienceMapDataURL, false);
 }
 
 function initMap() {
@@ -60,8 +60,3 @@ function helper() {
 $(window).load(function() {
 	initMap();
 });
-
-
-
-
-

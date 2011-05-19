@@ -269,10 +269,11 @@ public class MapOfScienceVisualizationRequestHandler implements
         
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("title", organizationLabel + " - Map of Science Visualization");
-        body.put("organizationURI", entityURI);
-        body.put("organizationLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
+        body.put("entityURI", entityURI);
+        body.put("entityLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
+        body.put("entityLabel", organizationLabel);
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
-        body.put("organizationLabel", organizationLabel);
+        
         
         return new TemplateResponseValues(standaloneTemplate, body);
 	}
@@ -447,7 +448,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 			totalMappedPublications = result.getMappedPublications();
 		}
 		
-		DecimalFormat percentageActivityFormat = new DecimalFormat("#.###");
+		DecimalFormat percentageActivityFormat = new DecimalFormat("#.#");
 		
 		for (Map.Entry<Integer, Float> currentMappedDiscipline : disciplineToPublicationCount.entrySet()) {
 			

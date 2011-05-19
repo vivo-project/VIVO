@@ -7,10 +7,10 @@ function createScimapType(map, mapName) {
 		getTileUrl: function(coord, zoom) {
 			var normalizedCoord = getNormalizedCoord(coord, zoom);
 			if (!normalizedCoord) {
-				return "images/tiles/blank.png";
+				return mapOfScienceImageFolderPrefix + "tiles/blank.png";
 			}
 			var bound = Math.pow(2, zoom);
-			return "images/tiles/tiles" + zoom + "_" + normalizedCoord.x + "_" +
+			return mapOfScienceImageFolderPrefix + "tiles/tiles" + zoom + "_" + normalizedCoord.x + "_" +
 					normalizedCoord.y + ".png";
 		},
 		tileSize: new google.maps.Size(256, 256),
