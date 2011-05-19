@@ -106,6 +106,13 @@ public class TestFileController extends FreemarkerHttpServlet {
         return new CsvHarvestJob(vreq, "granttemplate.csv", namespace);
     }
 
+    /**
+     * Gets the location where we want to save uploaded files.  This location is in the VIVO uploads directory under
+     * "harvester", and then in a directory named by the user's session ID as retrieved from the request.  The path
+     * returned by this method will end in a slash (/).
+     * @param vreq the request from which to get the session ID
+     * @return the path to the location where uploaded files will be saved.  This path will end in a slash (/)
+     */
     public static String getUploadPath(VitroRequest vreq) {
         try {
             String path = getUploadPathBase(vreq.getSession().getServletContext()) + getSessionId(vreq) + "/";
@@ -135,6 +142,15 @@ public class TestFileController extends FreemarkerHttpServlet {
         }
     }
 
+    /**
+     * This is for when the user clicks the "Upload" button on the form, sending a file to the server.  An HTTP post is
+     * redirected here when it is determined that the request was multipart (as this will identify the post as a file
+     * upload click).
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @throws IOException if an IO error occurs
+     * @throws ServletException if a servlet error occurs
+     */
     private void doFileUploadPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
 
@@ -143,6 +159,7 @@ public class TestFileController extends FreemarkerHttpServlet {
         try {
             VitroRequest vreq = new VitroRequest(request);
 
+            //parse request for uploaded file
             int maxFileSize = 1024 * 1024;
             FileUploadServletRequest req = FileUploadServletRequest.parseRequest(vreq, maxFileSize);
             if(req.hasFileUploadException()) {
@@ -150,9 +167,14 @@ public class TestFileController extends FreemarkerHttpServlet {
                 new ExceptionVisibleToUser(e);
             }
             
+            //get the location where we want to save the files (it will end in a slash), then create a File object out of it 
             String path = getUploadPath(vreq);
             File directory = new File(path);
 
+            //if this is a page refresh, we do not want to save stale files that the user doesn't want anymore, but we
+            //  still have the same session ID and therefore the upload directory is unchanged.  Thus we must clear the
+            //  upload directory if it exists (a "first upload" parameter, initialized to "true" but which gets set to
+            //  "false" once the user starts uploading stuff is used for this).
             String firstUpload = req.getParameter(PARAMETER_FIRST_UPLOAD); //clear directory on first upload
             log.error(firstUpload);
             if(firstUpload.toLowerCase().equals("true")) {
@@ -164,16 +186,25 @@ public class TestFileController extends FreemarkerHttpServlet {
                 }
             }
 
+            //if the upload directory does not exist then create it
             if(!directory.exists())
                 directory.mkdirs();
 
+            //get the file harvest job for this request (this will determine what type of harvest is run)
             FileHarvestJob job = getJob(vreq);
 
+            //get the files out of the parsed request (there should only be one)
             Map<String, List<FileItem>> fileStreams = req.getFiles();
             if(fileStreams.get(PARAMETER_UPLOADED_FILE) != null && fileStreams.get(PARAMETER_UPLOADED_FILE).size() > 0) {
+                
+                //get the individual file data from the request
                 FileItem csvStream = fileStreams.get(PARAMETER_UPLOADED_FILE).get(0);
                 String name = csvStream.getName();
+                
+                //if another uploaded file exists with the same name, alter the name so that it is unique
                 name = handleNameCollision(name, directory);
+                
+                //write the file from the request to the upload directory
                 File file = new File(path + name);
                 try {
                     csvStream.write(file);
@@ -181,6 +212,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                     csvStream.delete();
                 }
 
+                //ask the file harvest job to validate that it's okay with what was uploaded; if not delete the file
                 String errorMessage = job.validateUpload(file);
                 boolean success;
                 if(errorMessage != null) {
@@ -191,7 +223,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                     errorMessage = "success";
                 }
 
-
+                //prepare the results which will be sent back to the browser for display
                 try {
                     json.put("success", success);
                     json.put("fileName", name);
@@ -203,6 +235,8 @@ public class TestFileController extends FreemarkerHttpServlet {
                 }
 
             } else {
+                
+                //if for some reason no file was included with the request, send an error back
                 try {
                     json.put("success", false);
                     json.put("fileName", "(none)");
@@ -215,6 +249,8 @@ public class TestFileController extends FreemarkerHttpServlet {
             }
         } catch(ExceptionVisibleToUser e) {
             log.error(e, e);
+            
+            //handle exceptions whose message is for the user
             try {
                 json.put("success", false);
                 json.put("filename", "(none)");
@@ -228,9 +264,16 @@ public class TestFileController extends FreemarkerHttpServlet {
             return;
         }
 
+        //write the prepared response
         response.getWriter().write(json.toString());
     }
 
+    /**
+     * This is for when the user clicks the "Harvest" button on the form, sending a file to the server.  An HTTP post is
+     * redirected here when an isHarvestClick parameter is contained in the post data and set to "true".
+     * @param request the HTTP request
+     * @param response the HTTP response
+     */
     private void doHarvestPost(HttpServletRequest request, HttpServletResponse response) {
 
         log.error("harvest post.");
@@ -256,6 +299,13 @@ public class TestFileController extends FreemarkerHttpServlet {
         }
     }
     
+    /**
+     * This is for posts automatically sent by the client during the harvest, to check on the status of the harvest and
+     * return updated log data and whether the harvest is complete or still running.  An HTTP post is redirected here
+     * when an isHarvestClick parameter is contained in the post data and set to "false".
+     * @param request the HTTP request
+     * @param response the HTTP response
+     */
     private void doCheckHarvestStatusPost(HttpServletRequest request, HttpServletResponse response) {
 
         log.error("check harvest status post.");
