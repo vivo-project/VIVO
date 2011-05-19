@@ -5,22 +5,34 @@
 <#assign dataVisualizationURLRoot ="/visualizationData">
 <#assign shortVisualizationURLRoot ="/vis">
 
-<#assign organizationURI ="${organizationURI?url}">
-<#assign organizationVivoProfileURL = "${urls.base}/individual?uri=${organizationURI}">
+<#assign entityURI ="${entityURI?url}">
+<#assign entityVivoProfileURL = "${urls.base}/individual?uri=${entityURI}">
 
-<#assign subOrganizationVivoProfileURL = "${urls.base}/individual?">
+<#assign mapOfScienceVisParam = "map-of-science">
 
-<#assign subOrganizationMapOfScienceCommonURL = "${urls.base}${shortVisualizationURLRoot}/map-of-science/">
+<#assign subEntityVivoProfileURL = "${urls.base}/individual?">
+
+<#assign subEntityMapOfScienceCommonURL = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/">
 
 
-<#if organizationLocalName?has_content >
+<#if entityLocalName?has_content >
     
-    <#assign organizationMapOfScienceURL = "${urls.base}${shortVisualizationURLRoot}/map-of-science/${organizationLocalName}">
+    <#assign entityMapOfScienceURL = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/${entityLocalName}">
     
 <#else>
 
-    <#assign organizationMapOfScienceURL = '${urls.base}${shortVisualizationURLRoot}/map-of-science/?uri=${organizationURI}'>
+    <#assign entityMapOfScienceURL = '${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/?uri=${entityURI}'>
 
 </#if>
 
-<#assign organizationMapOfScienceDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=map-of-science&uri=${organizationURI}&vis_mode=json">
+<#assign entityMapOfScienceDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=json">
+
+<script language="JavaScript" type="text/javascript">
+
+var scienceMapDataURL = "${entityMapOfScienceDataURL}";
+var imageFolderPrefix = "${urls.images}/visualization/";
+var mapOfScienceImageFolderPrefix = imageFolderPrefix 
+											+ "mapofscience/";
+
+</script>
+

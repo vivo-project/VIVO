@@ -251,10 +251,10 @@ public class UtilityFunctions {
 		return collaboratorshipNetworkURL != null ? collaboratorshipNetworkURL : "" ;
 	}
 	
-	public static boolean isEntityAPerson(VitroRequest vreq, SubEntity subentity) {
+	public static boolean isEntityAPerson(VitroRequest vreq, String individualURI) {
 		return vreq.getWebappDaoFactory()
 					.getIndividualDao()
-					.getIndividualByURI(subentity.getIndividualURI())
+					.getIndividualByURI(individualURI)
 					.isVClass("http://xmlns.com/foaf/0.1/Person");
 	}
 	
