@@ -84,9 +84,11 @@
   <!-- Invokes process to perform updates to align with ontology changes if needed -->
   <!-- Needs to run before submodels are attached and Pellet is set up -->
    
+  <!--  disabling knowledge base update during development of 1.3 migration. sjm 5/20/2011 
   <listener>
      <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase</listener-class>
   </listener>
+  -->
   
   <listener>
     <listener-class>

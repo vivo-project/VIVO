@@ -89,10 +89,7 @@ public class OutputMarshaller2 {
 		for (int i = 0; i < howManyToCompare; i++) {
 			switch (i) {
 			case 0:
-				w.println("    <th>vs 1.1.1</th>");
-				break;
-			case 1:
-				w.println("    <th>vs RDB</th>");
+				w.println("    <th>vs 1.2</th>");
 				break;
 			default:
 				w.println("    <th>&nbsp;</th>");
