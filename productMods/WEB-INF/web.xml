@@ -143,11 +143,13 @@
     </listener-class>
   </listener>
 
-  <!-- The Lucene index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up. 
-  <listener>
+  <!-- The Lucene index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up. -->
+ <!-- 
+ <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.search.lucene.LuceneSetup </listener-class>
-  </listener> -->
-  <!-- -->
+  </listener> 
+   -->
+  
   <listener>
     <listener-class>
       edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
