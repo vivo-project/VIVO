@@ -900,17 +900,17 @@
     <servlet-name>ObjectPropertyStatementListingController</servlet-name>
     <url-pattern>/listObjectPropertyStatements</url-pattern>
   </servlet-mapping>
-  
+  <!-- 
   <servlet>
     <servlet-name>IndividualListController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.IndividualListController</servlet-class>
   </servlet>
-  <!-- 
+   -->
     <servlet>
     <servlet-name>IndividualListController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SolrIndividualListController</servlet-class>
     </servlet>
-  -->
+ 
   <servlet-mapping>
     <servlet-name>IndividualListController</servlet-name>
     <url-pattern>/individuallist</url-pattern>
@@ -960,17 +960,17 @@
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/searchcontroller</url-pattern>
   </servlet-mapping>
-  
+  <!-- 
   <servlet>
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.AutocompleteController</servlet-class>
   </servlet>
-  <!--
+  -->
   <servlet>
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrAutocompleteController</servlet-class>
   </servlet>
-  -->
+ 
   <servlet-mapping>
     <servlet-name>AutocompleteController</servlet-name>
     <url-pattern>/autocomplete</url-pattern>
