@@ -24,7 +24,7 @@
 
 <#function getQrCodeUrlForVCard qrCodeWidth>
 
-    <#local qrData = individual.qrData >
+    <#local qrData = individual.doQrData() >
 
     <#local core = "http://vivoweb.org/ontology/core#">
     <#local foaf = "http://xmlns.com/foaf/0.1/">
@@ -69,7 +69,7 @@
 
 <#function getQrCodeUrlForLink qrCodeWidth>
 
-    <#local qrData = individual.qrData >
+    <#local qrData = individual.doQrData() >
 
     <#local url = qrData.externalUrl! >
 
@@ -105,7 +105,7 @@
 
 <#function hasValidVCard>
 
-    <#local qrData = individual.qrData >
+    <#local qrData = individual.doQrData() >
 
     <#local firstName = qrData.firstName! >
     <#local lastName = qrData.lastName! >

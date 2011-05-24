@@ -6,7 +6,7 @@
 
 <#assign qrCodeWidth = "150">
 
-<h2>Export QR Code <em>(<a href="${individual.qrData.aboutQrCodesUrl}" title="More info on QR codes">What is this?</a>)</em></h2>
+<h2>Export QR Code <em>(<a href="${individual.doQrData().aboutQrCodesUrl}" title="More info on QR codes">What is this?</a>)</em></h2>
 
 <#assign thumbUrl = individual.thumbUrl! "${urls.images}/placeholders/person.thumbnail.jpg" >
 <img class="qrCode" src="${thumbUrl}" />
