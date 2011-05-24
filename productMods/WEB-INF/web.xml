@@ -916,13 +916,19 @@
     <url-pattern>/individuallist</url-pattern>
   </servlet-mapping>
   
-   <servlet>
-    <servlet-name>EntityURLController</servlet-name>
+    <servlet>
+    <servlet-name>IndividualListRdf</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityURLController</servlet-class>
+    </servlet>
+  <!--
+  <servlet>
+    <servlet-name>IndividualListRdf</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.IndividualListRdfController</servlet-class>
   </servlet>
+  -->
   <servlet-mapping>
-    <servlet-name>EntityURLController</servlet-name>
-    <url-pattern>/entityurl/*</url-pattern>
+    <servlet-name>IndividualListRdf</servlet-name>
+    <url-pattern>/listrdf/*</url-pattern>
   </servlet-mapping>
   <!--  
   <servlet>
