@@ -148,17 +148,17 @@
   </listener>
 
   <!-- The Lucene index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up. -->
-
+  <!--
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.search.lucene.LuceneSetup </listener-class>
   </listener>
-  <!--
+  -->
   <listener>
     <listener-class>
       edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
     </listener-class>
   </listener>
-  -->
+
   
   <!--  vivo specific, must appear before other policies -->
   <listener>
@@ -904,47 +904,46 @@
     <url-pattern>/listObjectPropertyStatements</url-pattern>
   </servlet-mapping>
 
-
+  <!-- 
   <servlet>
     <servlet-name>IndividualListController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.IndividualListController</servlet-class>
   </servlet>
-  <!-- 
+  -->
   <servlet>
     <servlet-name>IndividualListController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SolrIndividualListController</servlet-class>
   </servlet>
-  -->
   <servlet-mapping>
     <servlet-name>IndividualListController</servlet-name>
     <url-pattern>/individuallist</url-pattern>
   </servlet-mapping>
 
+  <!--
   <servlet>
     <servlet-name>IndividualListRdf</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.EntityURLController</servlet-class>
   </servlet>
-  <!--
+  -->
   <servlet>
     <servlet-name>IndividualListRdf</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.IndividualListRdfController</servlet-class>
   </servlet>
-  -->
   <servlet-mapping>
     <servlet-name>IndividualListRdf</servlet-name>
     <url-pattern>/listrdf/*</url-pattern>
   </servlet-mapping>
 
+  <!--
   <servlet>
     <servlet-name>SearchController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.PagedSearchController</servlet-class>
   </servlet>
-  <!--
+  -->
   <servlet>
     <servlet-name>SearchController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrPagedSearchController</servlet-class>
   </servlet>
-  -->
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
     <url-pattern>/search</url-pattern>
@@ -964,16 +963,17 @@
     <url-pattern>/searchcontroller</url-pattern>
   </servlet-mapping>
 
+  <!--
   <servlet>
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.AutocompleteController</servlet-class>
   </servlet>
-  <!--
+  -->
   <servlet>
     <servlet-name>AutocompleteController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrAutocompleteController</servlet-class>
   </servlet>
-  -->
+
   <servlet-mapping>
     <servlet-name>AutocompleteController</servlet-name>
     <url-pattern>/autocomplete</url-pattern>
@@ -1019,45 +1019,44 @@
     <url-pattern>/contact</url-pattern>
   </servlet-mapping>
   
-
+  <!-- 
   <servlet>
     <servlet-name>JSON Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONServlet</servlet-class>
   </servlet>
-  <!-- 
+  -->
   <servlet>
     <servlet-name>JSON Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonServlet</servlet-class>
   </servlet>
-  -->
   <servlet-mapping>
     <servlet-name>JSON Service</servlet-name>
     <url-pattern>/dataservice</url-pattern>
   </servlet-mapping>
-
+  
+  <!-- 
   <servlet>
     <servlet-name>JSON Reconcile Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONReconcileServlet</servlet-class>
   </servlet>
-  <!-- 
+  -->
   <servlet>
     <servlet-name>JSON Reconcile Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonReconcileServlet</servlet-class>
   </servlet>
-  -->
   <servlet-mapping>
     <servlet-name>JSON Reconcile Service</servlet-name>
     <url-pattern>/reconcile</url-pattern>
   </servlet-mapping>
 
-    <servlet>
-      <servlet-name>HomePageController</servlet-name>
-      <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-      <servlet-name>HomePageController</servlet-name>
-      <url-pattern>/home</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>HomePageController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageController</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>DashboardPropertyListController</servlet-name>
