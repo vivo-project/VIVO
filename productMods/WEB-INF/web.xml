@@ -796,12 +796,21 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>UserAccounts</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.UserAccountsController</servlet-class>
+    <servlet-name>AccountsAdmin</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.admin.UserAccountsAdminController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserAccounts</servlet-name>
-    <url-pattern>/userAccounts/*</url-pattern>
+    <servlet-name>AccountsAdmin</servlet-name>
+    <url-pattern>/accountsAdmin/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AccountsUser</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.user.UserAccountsUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountsUser</servlet-name>
+    <url-pattern>/accounts/*</url-pattern>
   </servlet-mapping>
 
   <servlet>
