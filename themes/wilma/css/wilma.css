@@ -1459,7 +1459,7 @@ h2#hasResearchArea .verbosePropertyListing {
     display: block;
 }
 /* ------------------------------------------------->  */
-/* ACCOUNTS  ---------------------------------------->  */
+/* ACCOUNTS PAGE ----------------------------------->  */
 /* ------------------------------------------------->  */
 .account-feedback p {
     padding: 10px;
@@ -1517,4 +1517,21 @@ table#account td {
 }
 .accounts-per-page-form {
     display: inline-block;
+}
+/* ------------------------------------------------->  */
+/* ADD ACCOUNTS  ----------------------------------->  */
+/* ------------------------------------------------->  */
+#add-account p {
+    margin-top: 15px;
+}
+#reset-password {
+    background-color: green;
+}
+form.customForm #reset-password {
+    margin-top: 20px;
+}
+#add-account .note {
+     padding-bottom: 20px;
+     padding-top: 0;
+     margin-top: 5px;
 }
