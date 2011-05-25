@@ -1535,3 +1535,92 @@ form.customForm #reset-password {
      padding-top: 0;
      margin-top: 5px;
 }
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+@charset "UTF-8";
+/* CSS Document */
+/* ------------------------------------------------->  */
+/* DROP DOWN USER MENU  ---------------------------->  */
+/* ------------------------------------------------->  */
+
+/* LEVEL ONE */
+ul.dropdown { 
+    position: relative; 
+}
+ul.dropdown li {  
+    float: left; 
+    zoom: 1; 
+    padding: 0 !important;
+}
+ul.dropdown li a { 
+    display: block; 
+    font-size: 1.4em;
+}
+ul.dropdown li#user-menu { 
+    background: url(../images/arrow-down-over-account.gif) right 9px no-repeat;
+}
+ul.dropdown li#user-menu a { 
+    margin-right: 18px;
+}
+ul.dropdown li#user-menu.hover,
+ul.dropdown li#user-menu:hover { 
+    color: #000 !important; 
+    position: relative; 
+    background: #fff url(../images/arrow-down-account.gif) right 9px no-repeat;
+    padding-right: 10px;
+    border-bottom: 1px solid #cdcfcf;
+}
+ul.dropdown li.hover a,
+ul.dropdown li:hover a { 
+    color: #000 !important; 
+    padding: 0 10px;
+}
+/* LEVEL TWO */
+ul.dropdown ul.sub_menu {  
+    background-color: #fff;
+    font-size: 1.4em;
+    visibility: hidden; 
+    position: absolute; 
+    top: 100%; 
+    right: 0; 
+    z-index: 999;
+    color: #000;
+}
+ul.dropdown ul.sub_menu li { 
+    float: none; 
+    clear: both;
+    padding-left: 14px !important;
+    width: 88px;
+    border-right: none !important;
+    border-bottom: 1px solid #cdcfcf;
+    background: #fff url(../images/arrow-menu-account.gif) 7px 8px no-repeat;
+}
+ul.dropdown ul.sub_menu li:last-child { 
+}
+/* IE 6 & 7 Needs Inline Block */
+/* ADD IN IE6.css and IE7.css*/
+ul.dropdown ul.sub_menu li a { 
+    width: 90%; 
+    display: inline-block; 
+    color: #000 !important;
+    background-color: #fff;
+    padding: 0;
+    padding-left: 8px;
+    height: 24px;
+}
+ul.dropdown ul.sub_menu li.inactive { 
+    color: #aab0ae !important;
+    font-size: 1em !important;
+    padding-left: 22px !important;
+}
+ul.dropdown ul.sub_menu li a:hover,
+ul.dropdown ul.sub_menu li a.hover { 
+    color: #999 !important;
+}
+/*	LEVEL THREE */
+ul.dropdown ul ul { 
+    left: 100%; top: 0; 
+}
+ul.dropdown li:hover > ul { 
+    visibility: visible; 
+}
