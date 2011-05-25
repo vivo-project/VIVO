@@ -1,0 +1,9 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?org ?orgProp ?orgObj .
+} WHERE {
+     PERSON_URI core:personInPosition ?position . 
+     ?position core:positionInOrganization ?org .
+     ?org ?orgProp ?orgObj .
+}

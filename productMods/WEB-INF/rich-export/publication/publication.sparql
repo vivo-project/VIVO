@@ -1,0 +1,9 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?infoResource ?infoResourceProp ?infoResourceValue .
+} WHERE {
+     PERSON_URI core:authorInAuthorship ?authorship . 
+     ?authorship core:linkedInformationResource ?infoResource .
+     ?infoResource ?infoResourceProp ?infoResourceValue .
+}
