@@ -12,6 +12,13 @@ var MarkerManager = Class.extend({
 	addMarker: function(key, marker) {
 		this.keyToMarker[key] = marker;
 	},
+	length: function() {
+		var size = 0;
+		for (var key in this.keyToMarker) {
+			if (this.keyToMarker.hasOwnProperty(key)) size++;
+		}
+		return size;
+	},
 	getMarker: function(key) {
 		return this.keyToMarker[key];
 	},
@@ -29,6 +36,7 @@ var MarkerManager = Class.extend({
 		});
 	},
 	addMarkersToMap: function() {
+//		console.log(this.keyToMarker);
 		$.each(this.keyToMarker, function(i, marker) {
 			marker.addToMap();
 		});
@@ -79,6 +87,37 @@ ScimapMarkerManager = MarkerManager.extend({
 			marker.setSize(me.sizeCodingFunc(marker.getValue()));
 			marker.setColor(me.colorStrategy.getColor(key));
 		}
+	},
+	display: function(numberOfMarkers) {
+		$.each(this.keyToMarker, function(i, marker) {
+			if (i <=  numberOfMarkers) {
+				marker.show();
+			} else {
+				marker.hide();
+			}
+		});
+	},
+	mouseIn: function(key) {
+		var marker = this.getMarker(key);
+		if (marker) {
+			marker.focus();
+		}
+	},
+	mouseInAll: function() {
+		$.each(this.keyToMarker, function(i, marker) {
+			marker.focus();
+		});
+	},
+	mouseIn: function(key) {
+		var marker = this.getMarker(key);
+		if (marker) {
+			marker.unfocus();
+		}
+	},
+	mouseOutAll: function() {
+		$.each(this.keyToMarker, function(i, marker) {
+			marker.unfocus();
+		});
 	}
 });
 

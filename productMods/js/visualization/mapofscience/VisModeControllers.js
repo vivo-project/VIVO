@@ -2,88 +2,91 @@
 var ENTITY_VIS_MODE = "ENTITY";
 
 var EntityVisModeController = Class.extend({
-	init: function(map) {
-		this.keyToMarkerManagers = {};
-		this.activeManager = null;
+	init: function(map, sliderControl) {
 		this.visMode = ENTITY_VIS_MODE;
 		this.isUnloaded = true;
-		this.map = map;
-		this.initMarkerManagers(map);
+		this.initWidgets(map, sliderControl);
 	},
-	initMarkerManagers: function(map) {
-		var managers = this.keyToMarkerManagers;
+	initFilter: function() {
 		
-		// Create discipline Marker Manager
-		managers['discipline'] = new DisciplineMarkerManager(
-			map, 
-			new DisciplineColorStrategy(), 
-			null
-		);
+		var dom = {
+			disciplineFilterID: "discipline-filter",
+			subdisciplinesFilterID: "subdisciplines-filter",
+			filterOptionClass: "filter-option",
+			activeFilterClass: "active-filter"
+		},
 		
-		// Create subdiscipline Marker Manager
-		managers['subdiscipline'] = new SubdisciplineMarkerManager(
-			map,
-			new SubdisciplineColorStrategy(), 
-			null
-		);
+		$("." + dom.filterOptionClass).live('click', function() {
+			if (!$(this).hasClass(dom.activeFilterClass)) {
+				if ($(this).attr('id') === dom.subdisciplinesFilterID) {
+					$("#" + dom.disciplineFilterID).removeClass(dom.activeFilterClass);
+					$.each(this.widgets, function(i, widget) {
+						widget.changeFilter(SCIMAP_TYPE.SUBDISCIPLINE);
+					});
+					
+				} else if ($(this).attr('id') === dom.disciplineFilterID) {
+					$("#" + dom.subdisciplinesFilterID).removeClass(dom.activeFilterClass);
+					$.each(this.widgets, function(i, widget) {
+						widget.changeFilter(SCIMAP_TYPE.DISCIPLINE);
+					});
+				}
+					
+				$(this).addClass('active-filter');	
+			}
+		});
 	},
-	initView: function(){
-		this.show('subdiscipline');
+	initWidgets: function(map, sliderControl) {
+		var widgets = {};
+		widgets['scimap'] = new ScimapWidget(map, sliderControl);
+		widgets['sci_area_table'] = new DataTableWidget();
+		
+		this.widgets = widgets;
 	},
-	needLoaded: function(){
+	needLoaded: function() {
 		return this.isUnloaded;
 	},
-	loadJsonData: function(data) {
+	initView: function() {
+		$.each(this.widgets, function(i, widget) {
+			widget.initView();
+		});
+	},
+	loadData: function(url, sync) {
+		
+		// Download data from server and add to markerManager if not gotten already
 		var me = this;
-		me.uri = data.uri;
-		me.label = data.label;
-		me.pubsWithNoJournals = data.pubsWithNoJournals;
-		me.pubsWithInvalidJournals = data.pubsWithInvalidJournals;
-		me.pubsMapped = data.pubsMapped;
-		
-		$.each(this.keyToMarkerManagers, function(key, manager) {
-			// Need to create the AreaSizeCoding function
-			manager.setSizeCoder(new CircleSizeCoder({ 
-				scaler: new Scaler({ maxValue: me.pubsMapped }) 
-			}));
-			//markerManager.setSiseCodingFunction(new AreaSizeCoding(0, data.pubsMapped));
-			$.each(data.subdisciplineActivity, function(subdiscipline, density) {
-		
-				// Create marker and add it to manager
-				var marker = manager.createMarker(subdiscipline, density);
-				
-				if (isActiveVisMode(me.visMode) && manager == me.activeManager) {
-					marker.show();
-				}
-			}); // end each subdisciplineActivity
-		}); // end each markerManagers
-		
-		this.isUnloaded = false;
+		if (me.isUnloaded) {
+			if (sync) {
+				downloader.downloadAndWait(url, function(data) {
+						me.loadJsonData(me, data[0]);
+				});
+			} else {
+				downloader.download(url, function(data) {
+						me.loadJsonData(me, data[0]);
+				});
+			}
+		} // end if
 	},
-	getMarkerManager: function(key) {
-		return this.keyToMarkerManagers[key];
+	loadJsonData: function(me, data) {
+		$.each(me.widgets, function(i, widget) {
+			widget.loadJsonData(data);
+		});
+		me.isUnloaded = false;
+		$("#" + responseContainerID).unblock();
 	},
-	hasKey: function(key) {
-		return (this.keyToMarkerManagers.hasOwnProperty(key));
-	},
+	// key can be discippline or subdiscipline
 	show: function(key) {
-		var manager = this.getMarkerManager(key);
-		var activeManager = this.activeManager;
-		if (activeManager != manager) {
-			this.cleanUp();
-			manager.addMarkersToMap();
-		}
-		this.activeManager = manager;
+		$.each(this.widgets, function(i, widget) {
+			widget.show(key);
+		});
 	},
 	hide: function(key) {
-		var manager = this.getMarkerManager(key);
-		if (this.activeManager == manager) {
-			this.cleanup();
-		}
+		$.each(this.widgets, function(i, widget) {
+			widget.hide(key);
+		});
 	},
 	cleanUp: function() {
-		if (this.activeManager) {
-			this.activeManager.removeMarkersFromMap();
-		}
+		$.each(this.widgets, function(i, widget) {
+			widget.cleanUp(key);
+		});
 	}
 });

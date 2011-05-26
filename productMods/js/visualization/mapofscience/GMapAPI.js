@@ -48,8 +48,6 @@ function addClickListener(marker, actionFunction) {
 	return GEVENT.addListener(marker, 'click', actionFunction);
 }
 
-function removeListeners(handlers) {
-	$.each(handlers, function(){
-		GEVENT.removeListener(this);
-	});
+function removeListener(handler) {
+	GEVENT.removeListener(handler);
 }

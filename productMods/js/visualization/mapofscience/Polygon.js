@@ -1,3 +1,5 @@
+var INFO_WINDOW = createInfoWindow("", 300);
+
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 var Polygon = Class.extend({
 	init : function(options) {
@@ -21,8 +23,8 @@ var Polygon = Class.extend({
 		this.registerEvents();
 	},
 	removeFromMap : function() {
-		this.polygon.setMap(null);
 		this.unregisterEvents();
+		this.polygon.setMap(null);
 	},
 	show : function() {
 		this.polygon.setMap(this.options.map);
@@ -38,16 +40,28 @@ var Polygon = Class.extend({
 	setTitle : function(title) {
 		this.polygon.title = title;
 	},
+	setOptions: function(options) {
+		this.polygon.setOptions(options);
+	},
+	registerEvent : function(handler) {
+		var me = this;
+		if (me.handlers == null) {
+			me.handlers = new Array();
+		}
+		me.handlers.push(handler);
+	},
+	unregisterEvent : function(handler) {
+		if (this.handlers[handler]) {
+			removeListener(handler);
+			delete(this.handlers[handler]);
+		}
+	},
 	registerEvents : function() {
-		var handlers = new Array();
-		var polygon = this.polygon;
-		handlers.push(addClickListener(polygon, function() {
-			updateIFrame(this.url);
-		}));
-		this.handlers = handlers;
 	},
 	unregisterEvents : function() {
-		removeListeners(this.handlers);
+		$.each(this.handlers, function(){
+			removeListener(this);
+		});
 		this.handlers = null;
 	}
 });

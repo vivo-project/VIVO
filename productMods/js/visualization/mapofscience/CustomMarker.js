@@ -13,6 +13,30 @@ var ScinodePolygon = Polygon.extend({
 	setSize: function(size) {
 		this.polygon.setRadius(size);
 		this.setZIndex(-size);
+	},
+	focus: function() {
+		this.setOptions({strokeWeight: 2.0});
+	},
+	unfocus: function() {
+		this.setOptions({strokeWeight: 1.0});
+	},
+	registerEvents : function() {
+		var me = this;
+		var polygon = me.polygon;
+		this.registerEvent(addClickListener(polygon, function() {
+			INFO_WINDOW.setPosition(this.center);
+			var content = '<div style="font-size: 80%; padding: 5px; text-align: left;"><b>' + this.label +'</b><br />' + this.value + ' publications </div>';
+			INFO_WINDOW.setContent(content);
+			INFO_WINDOW.open(this.map);
+		}));
+		
+		this.registerEvent(addMouseOverListener(polygon, function() {
+			me.focus();
+		}));
+		
+		this.registerEvent(addMouseOutListener(polygon, function() {
+			me.unfocus();
+		}));
 	}
 });
 

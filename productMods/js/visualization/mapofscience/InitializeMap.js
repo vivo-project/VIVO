@@ -1,21 +1,17 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 var map;
-var markerManager;
-var universityModeMarkerManagers;
-var textControl;
-var legendControl;
 var downloader;
+var sliderControl;
 var currentVisMode;
 var currentController;
 var visModeControllers = {};
-var dataTableWidgets = {};
 var responseContainerID = "map-of-science-response";
 var loadingScreenTimeout;
 
 /*
  * This method will setup the options for loading screen & then activate the 
  * loading screen.
- * */
+ */
 function setupLoadingScreen() {
 	
     $.blockUI.defaults.overlayCSS = { 
@@ -44,11 +40,10 @@ function setupLoadingScreen() {
 	    			+ '</i> is now being refreshed. The visualization will load as soon as we are done computing, ' 
 	    			+ 'or you can come back in a few minutes.</h3>')
 	    	.css({'cursor': 'pointer'});
-    	
     }, 10 * 1000);
 }
 
-function loadMap() {
+function initMap() {
 	var gMap = google.maps;
 	var centerLatLng = new google.maps.LatLng(50, 0);
 	
@@ -66,36 +61,21 @@ function loadMap() {
 	var mapName = 'Scimap';
 	createScimapType(map, mapName);
 	map.setMapTypeId(mapName);
-}
 
-function initMapControls() {
-	//textControl = new TextControl({map: map, divClass: 'time_div'});
-	//textControl.setText("1991");
+	sliderControl = new SliderControlPanel({ 
+		map:map, 
+		controlPositions: google.maps.ControlPosition.RIGHT_BOTTOM
+	});
+	
+	downloader = new DownloadManager();
+	
 }
 
 function initVisModeController() {
-	var controller = new EntityVisModeController(map);
+	var controller = new EntityVisModeController(map, sliderControl);
 	visModeControllers[controller.visMode] = controller;
 	switchVisMode(controller.visMode);
-}
-
-function initDataTableWidget() {
-	var widget = new DataTableWidget();
-	dataTableWidgets[widget.widgetType] = widget;
-}
-
-function initMarkers() {
-	downloader = new DownloadManager();
-	loadMarkers(ENTITY_VIS_MODE, scienceMapDataURL, false);
-}
-
-function initMap() {
-	setupLoadingScreen();
-	loadMap();
-	initMapControls();
-	initVisModeController();
-	initDataTableWidget();
-	initMarkers();
+	currentController.loadData(scienceMapDataURL, false);
 }
 
 function helper() {
@@ -104,5 +84,7 @@ function helper() {
 
 /* Using .load instead of .ready due to issue with IE and Google Maps API */
 $(window).load(function() {
+	setupLoadingScreen();
 	initMap();
+	initVisModeController();
 });

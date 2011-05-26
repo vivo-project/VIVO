@@ -33,39 +33,3 @@ function switchVisMode(visMode) {
 	}
 	return 
 }
-
-function loadMarkers(visMode, url, sync) {
-	
-	// Download data from server and add to markerManager if not gotten already
-	var controller = getVisModeController(visMode);
-	if (controller.needLoaded()) {
-		if (sync) {
-			downloader.downloadAndWait(url, function(data) {
-					loadJSONToMarkerManager(data, visMode);
-					loadJSONToDataTableWidget(data);
-			});
-		} else {
-			downloader.download(url, function(data) {
-					loadJSONToMarkerManager(data, visMode);
-					loadJSONToDataTableWidget(data);
-			});
-		}
-	} // end if
-}
-
-function loadJSONToMarkerManager(data, visMode) {
-	if (data) {
-		var controller = getVisModeController(visMode);
-		controller.loadJsonData(data[0]);
-	}
-}
-
-function loadJSONToDataTableWidget(data) {
-	if (data) {
-		var widget = dataTableWidgets["MAIN_SCIENCE_AREAS"];
-		widget.loadJsonData(data[0]);
-		widget.initView();
-		
-		$("#" + responseContainerID).unblock();
-	}
-}
