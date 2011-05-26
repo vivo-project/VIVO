@@ -87,6 +87,14 @@ public class VisualizationFrameworkConstants {
 	public static final String COPI_NETWORK_STREAM_VIS_MODE = "copi_network_stream";
 	public static final String COPI_NETWORK_DOWNLOAD_VIS_MODE = "copi_network_download";
 	
+	
+	/*
+	 * Vis modes for Map of Science Handler
+	 * */
+	public static final String DISCIPLINE_TO_ACTIVTY_VIS_MODE = "discipline";
+	public static final String SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE = "subdiscipline";
+	
+	
 	/*
 	 * These values represent possible utilities vis modes.
 	 * */

@@ -29,7 +29,6 @@ var MarkerManager = Class.extend({
 		});
 	},
 	addMarkersToMap: function() {
-		console.log(this.keyToMarker);
 		$.each(this.keyToMarker, function(i, marker) {
 			marker.addToMap();
 		});

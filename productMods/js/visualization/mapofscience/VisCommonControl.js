@@ -42,10 +42,12 @@ function loadMarkers(visMode, url, sync) {
 		if (sync) {
 			downloader.downloadAndWait(url, function(data) {
 					loadJSONToMarkerManager(data, visMode);
+					loadJSONToDataTableWidget(data);
 			});
 		} else {
 			downloader.download(url, function(data) {
 					loadJSONToMarkerManager(data, visMode);
+					loadJSONToDataTableWidget(data);
 			});
 		}
 	} // end if
@@ -55,5 +57,15 @@ function loadJSONToMarkerManager(data, visMode) {
 	if (data) {
 		var controller = getVisModeController(visMode);
 		controller.loadJsonData(data[0]);
+	}
+}
+
+function loadJSONToDataTableWidget(data) {
+	if (data) {
+		var widget = dataTableWidgets["MAIN_SCIENCE_AREAS"];
+		widget.loadJsonData(data[0]);
+		widget.initView();
+		
+		$("#" + responseContainerID).unblock();
 	}
 }

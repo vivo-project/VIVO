@@ -8,6 +8,45 @@ var downloader;
 var currentVisMode;
 var currentController;
 var visModeControllers = {};
+var dataTableWidgets = {};
+var responseContainerID = "map-of-science-response";
+var loadingScreenTimeout;
+
+/*
+ * This method will setup the options for loading screen & then activate the 
+ * loading screen.
+ * */
+function setupLoadingScreen() {
+	
+    $.blockUI.defaults.overlayCSS = { 
+            backgroundColor: '#fff', 
+            opacity: 1.0
+        };
+        
+    $.blockUI.defaults.css.width = '500px';
+    $.blockUI.defaults.css.height = '100px';
+    $.blockUI.defaults.css.border = '0px';
+    
+    $("#" + responseContainerID).block({
+        message: '<div id="loading-data-container"><h3><img id="data-loading-icon" src="' + loadingImageLink 
+        			+ '" />&nbsp;Loading data for <i>' 
+        			+ entityLabel
+        			+ '</i></h3></div>'
+    });
+    
+    clearTimeout(loadingScreenTimeout);
+    
+    loadingScreenTimeout = setTimeout(function() {
+    	$("#loading-data-container")
+    		.html('<h3><img id="refresh-page-icon" src="' 
+    				+ refreshPageImageLink 
+	    			+ '" />&nbsp;Data for <i>' + entityLabel
+	    			+ '</i> is now being refreshed. The visualization will load as soon as we are done computing, ' 
+	    			+ 'or you can come back in a few minutes.</h3>')
+	    	.css({'cursor': 'pointer'});
+    	
+    }, 10 * 1000);
+}
 
 function loadMap() {
 	var gMap = google.maps;
@@ -40,15 +79,22 @@ function initVisModeController() {
 	switchVisMode(controller.visMode);
 }
 
+function initDataTableWidget() {
+	var widget = new DataTableWidget();
+	dataTableWidgets[widget.widgetType] = widget;
+}
+
 function initMarkers() {
 	downloader = new DownloadManager();
 	loadMarkers(ENTITY_VIS_MODE, scienceMapDataURL, false);
 }
 
 function initMap() {
+	setupLoadingScreen();
 	loadMap();
 	initMapControls();
 	initVisModeController();
+	initDataTableWidget();
 	initMarkers();
 }
 
