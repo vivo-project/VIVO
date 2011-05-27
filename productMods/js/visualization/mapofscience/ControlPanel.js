@@ -1,3 +1,4 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 var ControlPanel = Class.extend({
 	init: function(options) {
