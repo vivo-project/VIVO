@@ -133,6 +133,10 @@
 -->
 
   <listener>
+    <listener-class>edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsLoader</listener-class>
+  </listener>
+ 
+  <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper$Setup
     </listener-class>
   </listener>
