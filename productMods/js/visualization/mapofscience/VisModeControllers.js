@@ -6,27 +6,28 @@ var EntityVisModeController = Class.extend({
 		this.visMode = ENTITY_VIS_MODE;
 		this.isUnloaded = true;
 		this.initWidgets(map, sliderControl);
+		this.initFilter();
 	},
 	initFilter: function() {
-		
+		var widgets = this.widgets;
 		var dom = {
 			disciplineFilterID: "discipline-filter",
 			subdisciplinesFilterID: "subdisciplines-filter",
 			filterOptionClass: "filter-option",
 			activeFilterClass: "active-filter"
-		},
+		};
 		
 		$("." + dom.filterOptionClass).live('click', function() {
 			if (!$(this).hasClass(dom.activeFilterClass)) {
 				if ($(this).attr('id') === dom.subdisciplinesFilterID) {
 					$("#" + dom.disciplineFilterID).removeClass(dom.activeFilterClass);
-					$.each(this.widgets, function(i, widget) {
+					$.each(widgets, function(i, widget) {
 						widget.changeFilter(SCIMAP_TYPE.SUBDISCIPLINE);
 					});
 					
 				} else if ($(this).attr('id') === dom.disciplineFilterID) {
 					$("#" + dom.subdisciplinesFilterID).removeClass(dom.activeFilterClass);
-					$.each(this.widgets, function(i, widget) {
+					$.each(widgets, function(i, widget) {
 						widget.changeFilter(SCIMAP_TYPE.DISCIPLINE);
 					});
 				}

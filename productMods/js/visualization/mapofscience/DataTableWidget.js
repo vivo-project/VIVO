@@ -195,44 +195,9 @@ var DataTableWidget = Class.extend({
 			me.widget.fnFilter("");
 		});
 		
-/*		$("." + me.dom.filterOptionClass).live('click', function() {
-			
-			if (!$(this).hasClass(me.dom.activeFilterClass)) {
-				
-				if ($(this).attr('id') === me.dom.subdisciplinesFilterID) {
-					
-					$("#" + me.dom.disciplineFilterID).removeClass(me.dom.activeFilterClass);
-					
-					////
-					$("#science-areas-th").html("Sub-Disciplines");
-					me.widget.fnSettings()._iDisplayLength = 10;
-					me.currentSelectedFilter = SCIMAP_TYPE.SUBDISCIPLINE;
-					$("a#csv").attr("href", entityMapOfScienceSubDisciplineCSVURL);
-					////
-					
-				} else if ($(this).attr('id') === me.dom.disciplineFilterID) {
-					
-					$("#" + me.dom.subdisciplinesFilterID).removeClass(me.dom.activeFilterClass);
-					
-					////
-					$("#science-areas-th").html("Disciplines");
-					me.currentSelectedFilter = SCIMAP_TYPE.DISCIPLINE;
-					me.widget.fnSettings()._iDisplayLength = 13;
-					$("a#csv").attr("href", entityMapOfScienceDisciplineCSVURL);
-					////
-				} 
-				
-				$(this).addClass('active-filter');
-				
-				////
-				ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER = me.currentSelectedFilter;
-				me.widget.fnDraw();
-				////
-			}
-		});*/
 	},
-	
 	changeFilter: function(filterType) {
+		var me = this;
 		
 		if (filterType === SCIMAP_TYPE.SUBDISCIPLINE) {
 			
