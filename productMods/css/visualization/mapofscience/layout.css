@@ -9,6 +9,15 @@
     width: 100%;
 }
 
+#map-of-science-info {
+	margin-bottom: 6px;
+	margin-top: -6px;
+}
+
+.hide-dom-on-init {
+	display: none;
+}
+
 #left-column {
 	float: left;
 	width: 260px;
@@ -22,6 +31,12 @@
 #map_area {
 	width: 640px; 
 	height: 480px;
+}
+
+#percent-mapped-info {
+	float:right;
+	display: none;
+	margin-top: 5px;
 }
 
 #header-entity-label {
@@ -102,6 +117,10 @@ a.clear-selected-entities {
 
 /* table */
 
+.science-area-tab {
+
+}
+
 #main-science-areas-table-container table {
 	cellpadding: 0;
 	cellspacing: 0;
@@ -117,6 +136,10 @@ a.clear-selected-entities {
 .datatable-table {
 	font-size: 0.9em;
 	width: 100%;
+}
+
+table.datatable-table  tbody tr {
+	border-top: 3px solid;
 }
 
 #main-science-areas-table-footer {
@@ -136,4 +159,4 @@ a.clear-selected-entities {
 
 .paginatedtabs {
 	font-size: 0.81em;
-} 
+}

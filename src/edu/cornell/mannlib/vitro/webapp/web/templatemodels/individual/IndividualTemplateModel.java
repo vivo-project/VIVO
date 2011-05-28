@@ -86,6 +86,13 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     	return getVisUrl(temporalVisURL);
     }
 
+    public String getMapOfScienceUrl() {
+
+    	String mapOfScienceVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(mapOfScienceVisURL);
+    }
+    
     public String getSelfEditingId() {
         String id = null;
         String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");

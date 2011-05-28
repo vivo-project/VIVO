@@ -18,7 +18,10 @@
     <section id="visualization" role="region">
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/co_author_icon.png">
+            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/vivo_scimap_icon_v001.png">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl>
+            <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl>
+            
             <#assign googleJSAPI = "https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22imagesparkline%22%5D%7D%5D%7D">
             
             <img class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="The publication information may be incomplete" />
@@ -28,10 +31,19 @@
             <div class="collaboratorship-link-separator"></div>
             
             <div id="coauthorship_link_container" class="collaboratorship-link-container">
-                <div class="collaboratorship-icon">
+				<div class="collaboratorship-icon">
                     <a href="${coAuthorVisUrl}"><img src="${coAuthorIcon}" alt="Co-author network icon" width="30px" height="30px" /></a>
                 </div>
                 <div class="collaboratorship-link"><a href="${coAuthorVisUrl}">Co-Author Network</a></div>
+            </div>
+            
+            <div class="collaboratorship-link-separator"></div>
+            
+  	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
+            	<div class="collaboratorship-icon">	
+                    <a href="${mapOfScienceVisUrl}"><img src="${mapOfScienceIcon}" alt="Map Of Science icon" width="30px" height="30px" /></a>
+                </div>
+                <div class="collaboratorship-link"><a href="${mapOfScienceVisUrl}">Map Of Science</a></div>
             </div>
             
             ${scripts.add('<script type="text/javascript" src="${googleJSAPI}"></script>',

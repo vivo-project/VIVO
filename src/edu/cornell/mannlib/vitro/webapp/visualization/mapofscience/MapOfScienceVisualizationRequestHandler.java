@@ -121,7 +121,23 @@ public class MapOfScienceVisualizationRequestHandler implements
 			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
 										organizationEntity,
 										organizationWithAssociatedPeople);
-		}
+		} /*else {
+			
+			
+			 // This is for just people.
+			Set<SubEntity> test = new HashSet<SubEntity>();
+			
+			test.add(new SubEntity(subjectEntityURI));
+			
+			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
+					.getPublicationsWithJournalForAssociatedPeople(dataset, test);
+
+			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
+										organizationEntity,
+										organizationWithAssociatedPeople);
+			
+			
+		}*/
 		
 		if (allDocumentURIToVOs.isEmpty() && documentURIForAssociatedPeopleTOVO.isEmpty()) {
 			

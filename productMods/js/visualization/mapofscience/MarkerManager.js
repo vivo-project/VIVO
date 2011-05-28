@@ -108,7 +108,7 @@ ScimapMarkerManager = MarkerManager.extend({
 			marker.focus();
 		});
 	},
-	mouseIn: function(key) {
+	mouseOut: function(key) {
 		var marker = this.getMarker(key);
 		if (marker) {
 			marker.unfocus();

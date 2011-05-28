@@ -39,7 +39,7 @@ var EntityVisModeController = Class.extend({
 	initWidgets: function(map, sliderControl) {
 		var widgets = {};
 		widgets['scimap'] = new ScimapWidget(map, sliderControl);
-		widgets['sci_area_table'] = new DataTableWidget();
+		widgets['sci_area_table'] = new DataTableWidget(widgets['scimap']);
 		
 		this.widgets = widgets;
 	},

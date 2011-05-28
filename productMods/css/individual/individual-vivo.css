@@ -32,6 +32,24 @@ div.overview-value :last-child {
     padding-right: 10px;
     vertical-align: text-top;
 }
+
+/* <------ INDIVIDUAL MAP OF SCIENCE */
+#map-of-science {
+    float: right;
+    padding: 0 3px 20px 0;
+    background-color: #fff;
+}
+
+#map-of-science h3 {
+    margin: 0;
+    padding: 0;
+}
+#map-of-science h3 img {
+    padding-right: 10px;
+    vertical-align: text-top;
+}
+
+
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;

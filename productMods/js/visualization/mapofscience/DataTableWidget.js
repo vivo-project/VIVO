@@ -19,8 +19,8 @@ var DataTableWidget = Class.extend({
 	
 	widget: '',
 	
-	init: function(opts) {
-		this.opts = opts;
+	init: function(sciMapWidget) {
+		this.sciMapWidget = sciMapWidget;
 		
 		this.subdisciplineInfo = {};
 		this.disciplineInfo = {};
@@ -64,10 +64,10 @@ var DataTableWidget = Class.extend({
 				
 				me.disciplineInfo[currentSubdisciplinesDiscipline].publicationCount = 
 					me.disciplineInfo[currentSubdisciplinesDiscipline].publicationCount + density; 
-				
 			} 
-			
 		});
+		
+		$(".hide-dom-on-init").show();
 		me.setupView();
 	},
 	hasKey: function(key) {
@@ -80,6 +80,13 @@ var DataTableWidget = Class.extend({
 	cleanUp: function() {
 	},
 	initView: function() {
+	},
+	parseIDIntoScienceTypeAreaID: function(rawID) {
+		
+		var type = rawID.substring(0, rawID.indexOf("-"));
+		var area = rawID.substring(rawID.indexOf("-") + 1);
+		
+		return [type, area];
 	},
 	setupView: function() {
 		
@@ -125,7 +132,7 @@ var DataTableWidget = Class.extend({
 		var i = 0;
 		
 		$.each(me.disciplineInfo, function(index, item) {
-			rowsToInsert[i++] = '<tr><td>' + SCIMAP_TYPE.DISCIPLINE + '</td>';
+			rowsToInsert[i++] = '<tr id="' + SCIMAP_TYPE.DISCIPLINE + '-' + index + '" style="color:' + DISCIPLINES[index].color + ';"><td>' + SCIMAP_TYPE.DISCIPLINE + '</td>';
 			rowsToInsert[i++] = '<td>' + item.label + '</td>';
 			rowsToInsert[i++] = '<td>' + item.publicationCount.toFixed(1) + '</td>';
 			rowsToInsert[i++] = '<td>' + (100 * (item.publicationCount / me.pubsMapped)).toFixed(1) + '</td></tr>';
@@ -133,7 +140,7 @@ var DataTableWidget = Class.extend({
 		
 		
 		$.each(me.subdisciplineInfo, function(index, item) {
-			rowsToInsert[i++] = '<tr><td>' + SCIMAP_TYPE.SUBDISCIPLINE + '</td>';
+			rowsToInsert[i++] = '<tr id="' + SCIMAP_TYPE.SUBDISCIPLINE + '-' + index + '" style="color:' + DISCIPLINES[SUBDISCIPLINES[index].discipline].color + ';"><td>' + SCIMAP_TYPE.SUBDISCIPLINE + '</td>';
 			rowsToInsert[i++] = '<td>' + item.label + '</td>';
 			rowsToInsert[i++] = '<td>' + item.publicationCount.toFixed(1) + '</td>';
 			rowsToInsert[i++] = '<td>' + (100 * (item.publicationCount / me.pubsMapped)).toFixed(1) + '</td></tr>';
@@ -143,6 +150,18 @@ var DataTableWidget = Class.extend({
 
 		table.append(tbody);
 		$("#" + me.dom.containerID).append(table);
+		
+		table.children("tbody").children("tr").mouseenter(function() {
+			
+			var params = me.parseIDIntoScienceTypeAreaID($(this).attr("id"));
+			me.sciMapWidget.mouseIn(params[0], params[1]);
+		});
+		
+		table.children("tbody").children("tr").mouseleave(function() {
+
+			var params = me.parseIDIntoScienceTypeAreaID($(this).attr("id"));
+			me.sciMapWidget.mouseOut(params[0], params[1]);
+		});
 		
 		/*
 		 * GMAIL_STYLE_PAGINATION_CONTAINER_CLASS, ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER has to be declared 
@@ -195,7 +214,11 @@ var DataTableWidget = Class.extend({
 			me.widget.fnFilter("");
 		});
 		
+		$("#percent-mapped-info").show();
+		$("#percent-mapped").text((100 * me.pubsMapped / (me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped)).toFixed(2));
+		
 	},
+	
 	changeFilter: function(filterType) {
 		var me = this;
 		

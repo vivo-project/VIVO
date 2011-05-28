@@ -125,6 +125,7 @@ public class VisualizationFrameworkConstants {
 	public static final String UTILITIES_VIS = "utilities";
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
 	public static final String PUBLICATION_TEMPORAL_VIS_SHORT_URL = "publication-graph";
+	public static final String MAP_OF_SCIENCE_VIS_SHORT_URL = "map-of-science";
 	public static final String GRANT_TEMPORAL_VIS_SHORT_URL = "grant-graph";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
 	

@@ -7,7 +7,24 @@ corresponding changes in the included Templates. -->
 <#include "mapOfScienceSetup.ftl">
 
 <div id="map-of-science-response">
-<div id="left-column">
+
+<#--
+<div id="subject-parent-entity" class="hide-dom-on-init">
+	<a id="subject-parent-entity-profile-url" href="#"></a>&nbsp;
+    <a id="subject-parent-entity-temporal-url" href="#"><img src="${mapOfScienceIcon}" width="15px" height="15px"/></a>
+</div>
+-->
+        
+<h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a>&nbsp;
+<img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on Publications which have been loaded into the VIVO system" /></span></h2>
+
+<div id="map-of-science-info" class="hide-dom-on-init"> Explore publication activity across 554 scientific sub-disciplines 
+	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+    		 alt="information icon" 
+    		 title="Spiel on Discipline vs Sub-Discipline" /> 
+</div>
+
+<div id="left-column" class="hide-dom-on-init">
 	<div id="notification-container" style="display:none">
         <div id="error-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
             <a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
@@ -32,7 +49,7 @@ corresponding changes in the included Templates. -->
     	<span id="subdisciplines-filter" class="filter-option">554 Sub-Disciplines</span>
     	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
     		 alt="information icon" 
-    		 title="Spiel on Discuipline vs Sub-Discipline" />
+    		 title="Spiel on Discipline vs Sub-Discipline" />
     </div>
     
     <div id="main-science-areas-table-container"></div>
@@ -42,5 +59,12 @@ corresponding changes in the included Templates. -->
     </div>
 </div>		
 
-<div id="right-column"><div id="map_area"></div></div>
+<div id="right-column"><div id="map_area"></div>
+<div id="percent-mapped-info">
+mapped <span id="percent-mapped"></span>% of publications
+<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+    		 alt="information icon" 
+    		 title="Spiel on percent mapped" /></div>
+
+</div>
 </div>
