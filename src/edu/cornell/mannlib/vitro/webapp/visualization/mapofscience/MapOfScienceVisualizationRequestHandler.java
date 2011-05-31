@@ -87,11 +87,48 @@ public class MapOfScienceVisualizationRequestHandler implements
 //		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
+	
+	
+	private Map<String, String> getSubjectPersonEntityAndGenerateDataResponse(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String subjectEntityURI, VisConstants.DataVisMode dataOuputFormat)
+					throws MalformedQueryParametersException {
+		
+		Map<String, Activity> documentURIForAssociatedPeopleTOVO = new HashMap<String, Activity>();
+		
+		
+		Entity personEntity = SelectOnModelUtilities
+				.getSubjectPersonEntity(dataset, subjectEntityURI);
+		
+		if (personEntity.getSubEntities() !=  null) {
+			
+			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
+						.getPublicationsWithJournalForAssociatedPeople(dataset, personEntity.getSubEntities());
+			
+		}
+		
+		if (documentURIForAssociatedPeopleTOVO.isEmpty()) {
+			
+			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
+				return prepareStandaloneDataErrorResponse();
+			} else {
+				return prepareDataErrorResponse();
+			}
+			
+		} else {	
+			
+			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
+				return prepareStandaloneDataResponse(vitroRequest, personEntity);
+			} else {
+				return prepareDataResponse(vitroRequest, personEntity);
+			}
+		}
+	}
 
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI, VisConstants.DataVisMode dataOuputFormat)
-			throws MalformedQueryParametersException {
+					throws MalformedQueryParametersException {
 		
 		Entity organizationEntity = SelectOnModelUtilities
 				.getSubjectOrganizationHierarchy(dataset, subjectEntityURI);
@@ -187,15 +224,15 @@ public class MapOfScienceVisualizationRequestHandler implements
 		if (VisualizationFrameworkConstants.SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE
 				.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-				getSubDisciplineToPublicationsCSVContent(entity));
-		
-		outputFileName += "_subdiscipline-to-publications" + ".csv";
-		
+			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+						 getSubDisciplineToPublicationsCSVContent(entity));
+			
+			outputFileName += "_subdiscipline-to-publications" + ".csv";
+			
 		} else {
 			
 			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					getDisciplineToPublicationsCSVContent(entity));
+						 getDisciplineToPublicationsCSVContent(entity));
 			
 			outputFileName += "_discipline-to-publications" + ".csv";
 			
@@ -257,14 +294,26 @@ public class MapOfScienceVisualizationRequestHandler implements
 			currentDataVisMode = VisConstants.DataVisMode.JSON;
 		}
 		
+		if (UtilityFunctions.isEntityAPerson(vitroRequest, entityURI)) {
+			
+			return getSubjectPersonEntityAndGenerateDataResponse(
+					vitroRequest, 
+					log,
+					dataset,
+					entityURI,
+					currentDataVisMode);
+			
+		} else {
 
-		return getSubjectEntityAndGenerateDataResponse(
-				vitroRequest, 
-				log,
-				dataset,
-				entityURI,
-				currentDataVisMode);
+			return getSubjectEntityAndGenerateDataResponse(
+					vitroRequest, 
+					log,
+					dataset,
+					entityURI,
+					currentDataVisMode);
 		
+		}
+
 	}
 	
 	
@@ -303,7 +352,6 @@ public class MapOfScienceVisualizationRequestHandler implements
         body.put("entityLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("entityLabel", organizationLabel);
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
-        
         
         return new TemplateResponseValues(standaloneTemplate, body);
 	}

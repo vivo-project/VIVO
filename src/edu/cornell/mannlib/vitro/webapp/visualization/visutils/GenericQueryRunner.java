@@ -4,7 +4,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
@@ -42,7 +41,7 @@ public class GenericQueryRunner implements QueryRunner<ResultSet> {
 							   String aggregationRules, 
 							   String whereClause,
 							   String groupOrderClause, 
-							   Dataset dataset, Log log) {
+							   Dataset dataset) {
 
 		this.fieldLabelToOutputFieldLabel = fieldLabelToOutputFieldLabel;
 		this.aggregationRules = aggregationRules;
