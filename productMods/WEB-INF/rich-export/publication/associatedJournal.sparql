@@ -1,9 +1,10 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 CONSTRUCT {
-     ?publication ?property ?object .
+     ?publicationVenue ?property ?object .   
 } WHERE {
      PERSON_URI core:authorInAuthorship ?authorship . 
      ?authorship core:linkedInformationResource ?publication .
-     ?publication ?property ?object .
+     ?publication core:hasPublicationVenue ?publicationVenue .
+     ?publicationVenue ?property ?object .   
 }
