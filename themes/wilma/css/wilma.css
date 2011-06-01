@@ -411,7 +411,7 @@ ul#header-nav li {
     float: left;
     display: block;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 20px;
     border-right: 1px solid #7c7d7f;
     font-size: .7em;
     color: #fff;
@@ -1554,9 +1554,11 @@ ul.dropdown li a {
 }
 ul.dropdown li#user-menu { 
     background: url(../images/arrow-down-over-account.gif) right 9px no-repeat;
+
 }
 ul.dropdown li#user-menu a { 
-    margin-right: 18px;
+    margin-right: 28px;
+    margin-left:10px;
 }
 ul.dropdown li#user-menu.hover,
 ul.dropdown li#user-menu:hover { 
@@ -1569,7 +1571,8 @@ ul.dropdown li#user-menu:hover {
 ul.dropdown li.hover a,
 ul.dropdown li:hover a { 
     color: #000 !important; 
-    padding: 0 10px;
+    margin-left:10px;
+/*    padding: 0 10px;*/
 }
 /* LEVEL TWO */
 ul.dropdown ul.sub_menu {  
@@ -1592,6 +1595,8 @@ ul.dropdown ul.sub_menu li {
     background: #fff url(../images/arrow-menu-account.gif) 7px 8px no-repeat;
 }
 ul.dropdown ul.sub_menu li:last-child { 
+    width: 96px;
+
 }
 /* IE 6 & 7 Needs Inline Block */
 /* ADD IN IE6.css and IE7.css*/
@@ -1601,7 +1606,7 @@ ul.dropdown ul.sub_menu li a {
     color: #000 !important;
     background-color: #fff;
     padding: 0;
-    padding-left: 8px;
+    padding-left: 0px;
     height: 24px;
 }
 ul.dropdown ul.sub_menu li.inactive { 
