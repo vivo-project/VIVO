@@ -1572,11 +1572,10 @@ ul.dropdown li.hover a,
 ul.dropdown li:hover a { 
     color: #000 !important; 
     margin-left:10px;
-/*    padding: 0 10px;*/
 }
 /* LEVEL TWO */
 ul.dropdown ul.sub_menu {  
-    background-color: #fff;
+    background-color: yellow;
     font-size: 1.4em;
     visibility: hidden; 
     position: absolute; 
@@ -1589,7 +1588,7 @@ ul.dropdown ul.sub_menu li {
     float: none; 
     clear: both;
     padding-left: 14px !important;
-    width: 88px;
+    width: 96px;
     border-right: none !important;
     border-bottom: 1px solid #cdcfcf;
     background: #fff url(../images/arrow-menu-account.gif) 7px 8px no-repeat;
@@ -1612,7 +1611,8 @@ ul.dropdown ul.sub_menu li a {
 ul.dropdown ul.sub_menu li.inactive { 
     color: #aab0ae !important;
     font-size: 1em !important;
-    padding-left: 22px !important;
+    padding-left: 22px !important; 
+    width: 88px; 
 }
 ul.dropdown ul.sub_menu li a:hover,
 ul.dropdown ul.sub_menu li a.hover { 
