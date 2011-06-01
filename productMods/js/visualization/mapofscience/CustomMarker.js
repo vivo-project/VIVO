@@ -1,8 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-var ScinodePolygon = Polygon.extend({
+var ScinodePolygon = CirclePolygon.extend({
 	init: function(options) {
-		options.polygon = createGoogleCirclePolygon(options);
 		this._super(options);
+		this.hide();
 	},
 	setValue: function(value) {
 		this.options.value = value;
@@ -11,11 +11,11 @@ var ScinodePolygon = Polygon.extend({
 		return this.options.value;
 	},
 	setSize: function(size) {
-		this.polygon.setRadius(size);
+		this.setRadius(size);
 		this.setZIndex(-size);
 	},
 	focus: function() {
-		this.setOptions({strokeWeight: 2.0});
+		this.setOptions({strokeWeight: 3.0});
 	},
 	unfocus: function() {
 		this.setOptions({strokeWeight: 1.0});
@@ -23,6 +23,7 @@ var ScinodePolygon = Polygon.extend({
 	registerEvents : function() {
 		var me = this;
 		var polygon = me.polygon;
+		this._super();
 		this.registerEvent(addClickListener(polygon, function() {
 			INFO_WINDOW.setPosition(this.center);
 			var content = '<div style="font-size: 80%; padding: 5px; text-align: left;"><b>' + this.label +'</b><br />' + this.value + ' publications </div>';

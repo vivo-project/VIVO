@@ -25,6 +25,10 @@ function createGoogleCirclePolygon(options) {
 	return new GMAPS.Circle(options);
 }
 
+function createGooglePolygon(options) {
+	return new GMAPS.Polygon(options);
+}
+
 function createGoogleMarker(options) {
 	return new GMAPS.Marker(options);
 }
@@ -34,6 +38,10 @@ function createInfoWindow(content, maxWidth) {
 		content: content,
 		maxWidth: maxWidth
 		});
+}
+
+function addMapProjectionChangedListener(map, actionFunction) {
+	return GEVENT.addListener(map, 'projection_changed', actionFunction);
 }
 
 function addMouseOverListener(marker, actionFunction) {

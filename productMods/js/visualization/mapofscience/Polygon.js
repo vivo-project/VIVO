@@ -7,9 +7,8 @@ var Polygon = Class.extend({
 		if (options.polygon) {
 			this.polygon = options.polygon;
 		} else {
-			this.polygon = createGoogleCirclePolygon(options);
+			this.polygon = createGooglePolygon(options);
 		}
-		this.hide();
 		this.registerEvents();
 	},
 	options : {
@@ -63,5 +62,78 @@ var Polygon = Class.extend({
 			removeListener(this);
 		});
 		this.handlers = null;
+	}
+});
+
+var RADIAN_PER_DEGREE = Math.PI / 180;
+
+function degreeToRadians(degree) {
+	return degree * RADIAN_PER_DEGREE;
+}
+
+var CirclePolygon = Polygon.extend({
+	init : function(options) {
+		this.options = $.extend({}, this.options, options);
+		this._super(this.options);
+	},
+	options : {
+		radius: 0.0,
+		center: null
+	},
+	addToMap: function() {
+		if (!this.isPointsCreated()) {
+			this.initCirclePoints();
+		}
+		this._super();
+	},
+	show: function() {
+		if (!this.isPointsCreated()) {
+			this.initCirclePoints();
+		}
+		
+		console.log(this.polygon.getPaths().getLength());
+		this._super();
+	},
+	isPointsCreated: function() {
+		return (this.polygon.getPath().getLength() > 1);
+	},
+	initCirclePoints: function() {
+		this.clearCirclePoints();
+		this.createCirclePoints();
+	},
+	createCirclePoints: function() {
+		var me = this;
+		var map = me.options.map;
+		var latLngArray = new google.maps.MVCArray(); // Circle's LatLngs
+		//console.log(map.getProjection());
+		if (map && map.getProjection()) {
+			var projection = map.getProjection();
+			var centerPoint = projection.fromLatLngToPoint(me.options.center);
+			var radius = me.options.radius;
+	
+			// Create polygon points (extra point to close polygon)
+			for (var degree = 0; degree < 360; degree++) {
+				var radian = degreeToRadians(degree);
+				var x = centerPoint.x + (radius * Math.sin(radian));
+				var y = centerPoint.y + (radius * Math.cos(radian));
+				var point = new google.maps.Point(parseFloat(x), parseFloat(y));
+				latLngArray.push(projection.fromPointToLatLng(point));
+			}
+		}
+		me.polygon.setPath(latLngArray);
+	},
+	clearCirclePoints: function() {
+		this.polygon.getPath().clear();
+	},
+	setRadius: function(radius) {
+		this.polygon.radius = radius;
+		this.options.radius = radius;
+		this.initCirclePoints();
+	},
+	registerEvents: function() {
+		var me = this;
+		this.registerEvent(addMapProjectionChangedListener(me.options.map, function() {
+			me.initCirclePoints(); 
+		}));
 	}
 });
