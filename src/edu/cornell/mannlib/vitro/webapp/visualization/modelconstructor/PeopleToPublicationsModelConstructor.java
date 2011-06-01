@@ -67,7 +67,7 @@ public class PeopleToPublicationsModelConstructor implements ModelConstructor {
 	
 	private Model executeQuery(String constructQuery) {
 		
-		System.out.println("in constructed model for ALL people publications ");
+		log.debug("in constructed model for ALL people publications ");
 		
 		Model constructedModel = ModelFactory.createDefaultModel();
 
