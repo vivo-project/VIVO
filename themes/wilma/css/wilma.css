@@ -410,7 +410,7 @@ ul#header-nav {
 ul#header-nav li {
     float: left;
     display: block;
-    padding-left: 10px;
+    padding-left: 20px;
     padding-right: 20px;
     border-right: 1px solid #7c7d7f;
     font-size: .7em;
@@ -420,6 +420,7 @@ ul#header-nav li.last {
     border-right: none;
 }
 ul#header-nav li:last-child {
+    padding-left: 10px;
     padding-right: 0;
     border-right: none;
 }
