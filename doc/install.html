@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>VIVO Release 1 V1.2 Installation Guide</title>
+        <title>VIVO Release 1 V1.2+ Installation Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen" />
     </head>
     <body>
@@ -11,9 +11,10 @@
         </div>
         <!-- Start of content -->
         <div id="wrapper-content" role="main">
-            <h1>VIVO Release 1 V1.2 Installation Guide</h1>
+            <h1>VIVO Release 1 V1.2+ Installation Guide</h1>
             <small>
-                February 16, 2011 
+                V1.2 February 16, 2011 <br />
+				V1.2.1 June 1, 2011
             </small>
             <toc>
                 <ul>
@@ -21,11 +22,11 @@
                         <a href="#announcement">Release announcement for V1.2</a>
                     </li>
                     <li>
-                        <a href="#installation">Installation process for V1.2</a>
+                        <a href="#installation">Installation process for V1.2+</a>
                     </li>
                 </ul>
             </toc>
-            <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.2</h2>
+            <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.2  (February 16, 2011)</h2>
             <p>
                 The VIVO 1.2 release incorporates major changes throughout the application - 
 				notably a new templating system to support more versatile page rendering, plus 
@@ -79,7 +80,7 @@
 				data. Pre-release versions of the Harvester are available at 
 				<a href="http://sourceforge.net/projects/vivo">http://sourceforge.net/projects/vivo</a>.
             </p>
-            <hr><!-- Page break --><!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.2</h2>
+            <hr><!-- Page break --><!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.2+</h2>
             <p>
                 This document is a summary of the VIVO installation process. This 
                 and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
@@ -181,8 +182,8 @@
                 support websites. 
             </p>
             <p>
-                * Note that VIVO 1.2 will not run on older versions of MySQL that may have worked 
-                with 1.1.1.  Be sure to run VIVO 1.2 with MySQL 5.1 or higher.  Using unsupported  
+                * Note that VIVO 1.2+ will not run on older versions of MySQL that may have worked 
+                with 1.1.1.  Be sure to run VIVO 1.2+ with MySQL 5.1 or higher.  Using unsupported  
                 versions may result in strange error messages related to table formatting or other 
                 unexpected problems.
             </p>
@@ -211,15 +212,15 @@
                 <br>
             </h3>
             <p>
-                Download the VIVO application source as either <code>rel-1.2.zip</code>
-                or <code>rel-1.2.gz</code>
+                Download the VIVO application source as either <code>rel-1.2.1.zip</code>
+                or <code>rel-1.2.1.gz</code>
                 file and unpack it on your web server: 
                 <br>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
             </p>
             <h3 id="triple_store">IV. Choose Triple Store</h3>
             <p>
-                VIVO 1.2 offers a choice of two triple store technologies: in-memory models backed by 
+                VIVO 1.2+ offers a choice of two triple store technologies: in-memory models backed by 
                 Jena's legacy relational database store (RDB), and Jena's SPARQL database (SDB).   RDB was  
                 used by VIVO 1.1.1 and earlier.   This mode offers fast response, but only by caching the 
                 entire RDF model in the server's main memory.   The memory available to VIVO limits the 
@@ -567,7 +568,7 @@
                                 </li>
                             </ul>
                             The VIVO developers are working to make this visualization more efficient. 
-                            In the meantime, VIVO release 1.2 guards against this impact by disabling  
+                            In the meantime, VIVO release 1.2+ guards against this impact by disabling  
                             the temporal graph visualization unless the "visualization.temporal" flag 
                             is set to "enabled". To enable it, uncomment the line for this setting.
                         </td>
