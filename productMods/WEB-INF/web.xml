@@ -109,6 +109,13 @@
     </listener-class>
   </listener> 
  
+  <!--  Update to the new UserAccounts model (1.3). Needs to run after JenaDataSourceSetup. -->
+  <!-- <listener>
+    <listener-class>
+        edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateUserAccounts
+    </listener-class>
+  </listener> -->
+
 
 <!-- The following two listeners remain temporarily until SDB becomes the default triple store --> 
   <listener>
