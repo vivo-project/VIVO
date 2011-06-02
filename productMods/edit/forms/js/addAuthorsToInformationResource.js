@@ -528,10 +528,17 @@ var addAuthorForm = {
      
     removeAuthorship: function(link) {
         // RY Upgrade this to a modal window
-        var message = 'Are you sure you want to remove this author?';
+        var removeLast = false,
+            message = 'Are you sure you want to remove this author?';
+            
         if (!confirm(message)) {
             return false;
         }
+        
+        if ($(link)[0] === $('.remove:last')[0]) {
+            removeLast = true;
+        } 
+        
         $.ajax({
             url: $(link).attr('href'),
             type: 'POST', 
@@ -566,15 +573,16 @@ var addAuthorForm = {
                         
                         // Actions that depend on the author having been removed from the DOM:
                         numAuthors = $('.authorship').length; // retrieve the length after removing authorship from the DOM
-                        if (numAuthors > 0) {
-                            // Reorder to remove any gaps
+                        
+                        // If removed item not last, reorder to remove any gaps
+                        if (numAuthors > 0 && ! removeLast) {
                             addAuthorForm.reorderAuthors();
-                            
-                            // If less than two authors remaining, disable drag-drop
-                            if (numAuthors < 2) {
-                                addAuthorForm.disableAuthorDD();
-                            }                           
                         }
+                            
+                        // If fewer than two authors remaining, disable drag-drop
+                        if (numAuthors < 2) {
+                            addAuthorForm.disableAuthorDD();
+                        }                           
                     });
 
 //                  $(this).hide();

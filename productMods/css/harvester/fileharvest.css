@@ -1,0 +1,45 @@
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+h3.testfile-step-header {
+    float: left;
+    padding-right: 30px;
+}
+div.testfile-step-body {
+    overflow: hidden;
+}
+div.clearBothDiv {
+    clear: both;
+    padding-bottom: 20px;
+}
+a.help {
+    margin-left: 10px;
+    font-size: 0.8em;
+}
+#csvHelp-indented {
+    margin: 0 1.5em 1em;
+    padding: .5em;
+    font-size: 0.8em;
+    line-height: 1.2em;
+    background: #efefef;
+}
+#csvHelp-indented p:last-child {
+    margin-bottom: 0;
+}
+#uploadTarget {
+    width: 0;
+    height: 0;
+    border: 0px solid #fff;
+}
+#harvestButton {
+    margin-right: 10px;
+}
+#fileHarvestErrorHelp ol {
+    margin: 0 0 1.3em 2em;
+    list-style-type: decimal;
+    font-size: .9em;
+}
+#fileHarvestErrorHelp em {
+    font-family:"Courier New",Courier,mono;
+    font-style: normal;
+    color:#666;
+}

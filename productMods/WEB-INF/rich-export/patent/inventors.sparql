@@ -1,0 +1,13 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+
+CONSTRUCT {
+     ?person ?property ?object .   
+} WHERE {
+     PERSON_URI core:authorInAuthorship ?authorship .
+     ?authorship core:linkedInformationResource ?patent . 
+     ?patent rdf:type bibo:Patent .
+     ?authorship core:linkedAuthor ?person .
+     ?person ?property ?object .   
+}

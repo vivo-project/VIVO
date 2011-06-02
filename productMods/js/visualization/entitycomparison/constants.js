@@ -37,12 +37,14 @@ var globalDateObject;
 var year;
 
 var colors, prevColor, colorToAssign, 
-	colorToRemove, renderedObjects, labelToEntityRecord,
-	setOfLabels, labelToCheckedEntities, stopWordsToCount;
+	colorToRemove, renderedObjects, URIToEntityRecord,
+	setOfLabels, URIToCheckedEntities, STOP_WORDS_FOR_TABLE;
 
 var graphContainer;
 var tableDiv;
 var entityLevel;
+
+var lastCachedAtDateTimes;
 
 //options for Flot
 var FlotOptions;
@@ -64,10 +66,13 @@ function initConstants() {
 	prevColor = {};
 	colorToAssign, colorToRemove;
 	renderedObjects = [];
-	labelToEntityRecord = {};
+	URIToEntityRecord = {};
 	setOfLabels = [];
-	labelToCheckedEntities = {};
-	stopWordsToCount = {};
+	URIToCheckedEntities = {};
+	
+	STOP_WORDS_FOR_TABLE = ["Person", "Organization", "Agent"];
+	
+	lastCachedAtDateTimes = [];
 	
 	//options for Flot
 	FlotOptions = {
@@ -81,6 +86,11 @@ function initConstants() {
 				show : false
 			},
 			xaxis : {
+				/*
+				 * This is done to guarantee no-downward-trend on account of no content added for the 
+				 * current year.
+				 * */  
+				max : globalDateObject.getFullYear() - 1,
 				tickDecimals : 0,
 				tickSize : 10
 			},
@@ -98,7 +108,5 @@ function initConstants() {
 				borderColor : "#D9D9D9"
 			}
 	};
-
 	FlotOptions.colors = colorConstantQueue;
-	
 }

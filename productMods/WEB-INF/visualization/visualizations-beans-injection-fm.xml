@@ -1,3 +1,4 @@
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -10,32 +11,46 @@
 
 
 	<bean id="person_pub_count"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personpubcount.PersonPublicationCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountRequestHandler" />
 	
 	<bean id="utilities"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.utilities.UtilitiesRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.utilities.UtilitiesRequestHandler" />
 	
 	<bean id="coauthorship"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coauthorship.CoAuthorshipRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.coauthorship.CoAuthorshipRequestHandler" />
 		
 	<bean id="person_grant_count"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.persongrantcount.PersonGrantCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountRequestHandler" />
 	
 	<bean id="person_level"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.personlevel.PersonLevelRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.personlevel.PersonLevelRequestHandler" />
 
 	<bean id="coprincipalinvestigator"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
 
 	<bean id="entity_comparison"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitycomparison.EntityPublicationCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
+
+    <bean id="pub_temporal"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.cached.TemporalPublicationVisualizationRequestHandler" />		
 
 	<bean id="entity_grant_count"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.freemarker.entitygrantcount.EntityGrantCountRequestHandler" />
+		class="edu.cornell.mannlib.vitro.webapp.visualization.entitygrantcount.EntityGrantCountRequestHandler" />
+
+    <bean id="grant_temporal"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.cached.TemporalGrantVisualizationRequestHandler" />	
 	
+    <bean id="map_of_science"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.mapofscience.MapOfScienceVisualizationRequestHandler" />
 	
+	<bean id="regenerate_vis_models"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.ModelConstructorRequestHandler" />
+        
+	<bean id="tools"
+        class="edu.cornell.mannlib.vitro.webapp.visualization.tools.ToolsRequestHandler" />
+        
 	<bean id="visualizationInjector"
-		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.freemarker.VisualizationInjector">
+		class="edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationInjector">
 		<property name="visualizations">
 			<map>
 				<entry key="person_pub_count">
@@ -58,17 +73,59 @@
 					<ref bean="person_level"></ref>
 				</entry>
 				
-				<entry key="entity_comparison">
-					<ref bean="entity_comparison"></ref>
+				<entry key="author-network">
+					<ref bean="person_level"></ref>
 				</entry>
+				
+				<entry key="investigator-network">
+					<ref bean="person_level"></ref>
+				</entry>
+                
+                <!-- 
+                <entry key="entity_comparison">
+                    <ref bean="entity_comparison"></ref>
+                </entry>
+                -->
+                
+                <entry key="entity_comparison">
+                    <ref bean="pub_temporal"></ref>
+                </entry>
+                                
+                <entry key="pub_temporal">
+                    <ref bean="pub_temporal"></ref>
+                </entry>
+                
+                <entry key="publication-graph">
+                    <ref bean="pub_temporal"></ref>
+                </entry>
 
 				<entry key="coprincipalinvestigator">
 					<ref bean="coprincipalinvestigator"></ref>
 				</entry>
 				
 				<entry key="entity_grant_count">
-					<ref bean="entity_grant_count"></ref>
-				</entry>				
+					<ref bean="grant_temporal"></ref>
+				</entry>	
+				                                
+                <entry key="grant_temporal">
+                    <ref bean="grant_temporal"></ref>
+                </entry>
+                
+                <entry key="grant-graph">
+                    <ref bean="grant_temporal"></ref>
+                </entry>                			
+				 
+                <entry key="map-of-science">
+                    <ref bean="map_of_science"></ref>
+                </entry>    
+                
+				<entry key="refresh-cache">
+                    <ref bean="regenerate_vis_models"></ref>
+                </entry>
+                
+                <entry key="tools">
+                    <ref bean="tools"></ref>
+                </entry>    				 
 				 
 			</map>
 		</property>

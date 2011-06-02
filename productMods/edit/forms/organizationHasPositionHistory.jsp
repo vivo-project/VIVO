@@ -10,15 +10,15 @@
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -87,7 +87,7 @@
 <v:jsonset var="n3ForStmtToOrg"  >
 	?organizationUri <${orgForPositionPred}> ?positionUri .
 	?positionUri     <${positionInOrgPred}> ?organizationUri .	
-    ?positionUri     <${type}>  <${positionType}> .    
+    ?positionUri     a  ?positionType .    
 </v:jsonset>
 
 <v:jsonset var="n3ForStart">
@@ -95,8 +95,8 @@
     ?intervalNode <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
-    ?startNode  <${dateTimeValue}> ?startField.value .
-    ?startNode  <${dateTimePrecision}> ?startField.precision .
+    ?startNode  <${dateTimeValue}> ?startField-value .
+    ?startNode  <${dateTimePrecision}> ?startField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
@@ -104,8 +104,8 @@
     ?intervalNode <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
-    ?endNode  <${dateTimeValue}> ?endField.value .
-    ?endNode  <${dateTimePrecision}> ?endField.precision .
+    ?endNode  <${dateTimeValue}> ?endField-value .
+    ?endNode  <${dateTimePrecision}> ?endField-precision .
 </v:jsonset>
 
  <v:jsonset var="existingIntervalNodeQuery" >  
@@ -166,6 +166,18 @@
       ?endNode <${dateTimePrecision}> ?existingEndPrecision . }
 </v:jsonset>
 
+<v:jsonset var="positionTypeAssertion">
+    ?positionUri a ?positionType .
+</v:jsonset>
+
+<v:jsonset var="positionTypeQuery">
+    SELECT ?existingPositionType WHERE {
+        ?positionUri a ?existingPositionType . }
+</v:jsonset>
+
+<c:set var="positionClass" value="${vivoCore}Position" />
+<v:jsonset var="positionClassUriJson">${positionClass}</v:jsonset>
+
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
@@ -176,7 +188,7 @@
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["positionUri", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}"],
+    "n3required"    : [ "${n3ForStmtToOrg}", "${titleAssertion}" , "${personUriAssertion}", "${positionTypeAssertion}"],
     "n3optional"    : [ "${n3ForStart}" , "${n3ForEnd}" ],
     "newResources"  : { "positionUri" : "${defaultNamespace}",
                         "intervalNode" : "${defaultNamespace}",
@@ -184,23 +196,24 @@
                         "endNode" : "${defaultNamespace}" },
     "urisInScope"    : { },
     "literalsInScope": { },
-    "urisOnForm"     : [ "personUri" ],
-    "literalsOnForm" :  [ "title", "startYear", "endYear" ],
+    "urisOnForm"     : [ "personUri", "positionType" ],
+    "literalsOnForm" :  [ "title" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
     "sparqlForExistingLiterals" : {
         "title"              : "${titleExisting}",
-        "startField.value"   : "${existingStartDateQuery}",
-        "endField.value"     : "${existingEndDateQuery}"
+        "startField-value"   : "${existingStartDateQuery}",
+        "endField-value"     : "${existingEndDateQuery}"
     },
     "sparqlForExistingUris" : {
         "personUri"   : "${personUriExisting}",
+        "positionType"      : "${positionTypeQuery}" ,
         "intervalNode"      : "${existingIntervalNodeQuery}", 
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
-        "startField.precision": "${existingStartPrecisionQuery}",
-        "endField.precision"  : "${existingEndPrecisionQuery}"
+        "startField-precision": "${existingStartPrecisionQuery}",
+        "endField-precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "title" : {
@@ -225,6 +238,17 @@
          "rangeLang"        : "",
          "assertions"       : [ "${personUriAssertion}" ]
       },
+     "positionType" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty" ],
+         "optionsType"      : "CHILD_VCLASSES_WITH_PARENT",
+         "literalOptions"   : [ "Select one" ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "${positionClassUriJson}",
+         "rangeDatatypeUri" : "",
+         "rangeLang"        : "",
+         "assertions"       : [ "${positionTypeAssertion}" ]
+      },             
       "startField" : {
          "newResource"      : "false",
          "validators"       : [ ],
@@ -299,6 +323,7 @@
 <h2>${title}</h2>
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="Position Title ${requiredHint}" id="title" size="30"/>
+	<v:input type="select" label="Position Type ${requiredHint}" id="positionType" />
 	<v:input type="select" label="Person" id="personUri"  />
 	<v:input id="startField"  label="Start Year ${yearHint}" />
     <v:input id="endField" label="End Year ${yearHint}" />    

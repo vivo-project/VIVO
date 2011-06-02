@@ -32,15 +32,15 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.utils.StringUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -302,16 +302,12 @@ SPARQL queries for existing values. --%>
 <%
     String rankPredicateUri = vivoCore + "authorRank";
     
-    // RY We should use whatever is used on the individual profile page to list
-    // this property in rank order...
     DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
     Collections.sort(authorships, comp);
         
     int maxRank = 0;
     int authorshipCount = authorships.size();  
 
-    // for ( ObjectPropertyStatement stmt : authorshipStmts) {
-    //     Individual authorship = stmt.getObject();
 %>        
     <script type="text/javascript">
         var authorshipData = [];
@@ -414,7 +410,7 @@ SPARQL queries for existing values. --%>
 </form>
 </div>
 
-<c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
+<c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false" />
 <c:url var="reorderUrl" value="/edit/reorder" />
 
 <script type="text/javascript">

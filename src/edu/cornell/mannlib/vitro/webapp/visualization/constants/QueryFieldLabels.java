@@ -27,6 +27,8 @@ public class QueryFieldLabels {
 	public static final String DOCUMENT_PUBLICATION_YEAR_USING_1_1_PROPERTY = "publicationYearOldLit";
 	public static final String DOCUMENT_PUBLICATION_YEAR_MONTH = "publicationYearMonthLit";
 	public static final String DOCUMENT_PUBLICATION_DATE = "publicationDateLit";
+	public static final String DOCUMENT_JOURNAL_LABEL = "journalLabelLit";
+	
 	
 	/*
 	 * Image related field labels
@@ -94,6 +96,12 @@ public class QueryFieldLabels {
 	public static final String SUBORGANIZATION_LABEL = "subOrganizationLabelLit";
 	
 	/*
+	 * Parent Organization related field labels
+	 */
+	public static final String PARENT_ORGANIZATION_URL = "parentOrganizationLit";
+	public static final String PARENT_ORGANIZATION_LABEL = "parentOrganizationLabelLit";
+	
+	/*
 	 * Sub Organization related field labels
 	 */
 	public static final String SUBORGANIZATION_TYPE = "subOrganizationTypeLit";
@@ -126,5 +134,7 @@ public class QueryFieldLabels {
 	public static final String GRANT_START_DATE = "grantStartDateForGrantLit";
 	public static final String GRANT_END_DATE = "grantEndDateForGrantLit";
 	
+	
+	public static final String LAST_CACHED_AT_DATETIME = "lastCachedDateTimeLit";
 	
 }

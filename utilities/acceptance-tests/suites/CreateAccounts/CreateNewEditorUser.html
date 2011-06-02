@@ -35,6 +35,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Create New Editor User</td>
 	<td></td>
@@ -72,7 +77,7 @@
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>testAdmin</td>
+	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -106,82 +111,62 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Accounts</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User accounts</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add new user account']</td>
+	<td>css=input.submit.add-account</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Account Editing Form</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>Username</td>
-	<td>Eddie Editor</td>
+	<td>email-address</td>
+	<td>EddieEditor@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>FirstName</td>
+	<td>first-name</td>
 	<td>Eddie</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>LastName</td>
+	<td>last-name</td>
 	<td>Editor</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>RoleURI</td>
-	<td>label=editor</td>
+	<td>click</td>
+	<td>//input[@name='role' and @value='http://permissionSet-4']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>Md5password</td>
+	<td>initial-password</td>
 	<td>myPassword</td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Enter a mis-matched confirmation password</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>passwordConfirmation</td>
-	<td>somethingElse</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>primaryAction</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertAlert</td>
-	<td>The passwords do not match.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now enter a correct password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>passwordConfirmation</td>
+	<td>confirm-password</td>
 	<td>myPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>submitAdd</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Account Control Panel</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -190,9 +175,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>A new account for Eddie Editor was successfully created.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=EddieEditor@cornell.edu</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyText</td>
-	<td>//tr[1]/td[2]</td>
-	<td>Eddie Editor</td>
+	<td>//tr[2]/td[1]</td>
+	<td>EddieEditor@cornell.edu</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -201,18 +196,23 @@
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[3]/td[2]</td>
+	<td>//tr[2]/td[3]</td>
 	<td>Editor</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[4]/td[2]</td>
-	<td>0</td>
+	<td>//tr[2]/td[4]</td>
+	<td>ACTIVE</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[5]/td[2]</td>
-	<td>editor</td>
+	<td>//tr[2]/td[5]</td>
+	<td>Editor</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[2]/td[6]</td>
+	<td>0</td>
 </tr>
 <tr>
 	<td>comment</td>

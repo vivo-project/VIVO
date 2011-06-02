@@ -1,7 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#include "menupage-checkForData.ftl">
-
 <#if !noData>
     <section id="menupage-intro" class="people" role="region">
         <h2>${page.title}</h2>
@@ -25,11 +24,12 @@
     
     <#include "menupage-browse.ftl">
     
-    ${stylesheets.add("/css/menupage/menupage.css")}
+    ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/menupage/menupage.css" />')}
     
     <#include "menupage-scripts.ftl">
     
-    ${scripts.add("/js/menupage/browseByVClassPeople.js")}
+    ${scripts.add('<script type="text/javascript" src="${urls.base}/js/menupage/browseByVClassPeople.js"></script>')}
+
 <#else>
     ${noDataNotification}
 </#if>

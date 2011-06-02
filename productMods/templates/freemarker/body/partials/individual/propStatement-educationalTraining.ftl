@@ -1,15 +1,20 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#educationalTraining -->
+<#-- Custom object property statement view for http://vivoweb.org/ontology/core#educationalTraining. 
+    
+     This template must be self-contained and not rely on other variables set for the individual page, because it
+     is also used to generate the property statement during a deletion.  
+ -->
 
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showEducationalTraining statement />
+<#-- Coming from propDelete, individual is not defined, but we are editing. -->
+<@showEducationalTraining statement=statement editable=(!individual?? || individual.editable) />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showEducationalTraining statement>
+<#macro showEducationalTraining statement editable>
 
     <#local degree>
         <#if statement.degreeName??>
@@ -25,12 +30,12 @@
     <#local linkedIndividual>
         <#if statement.org??>
             <a href="${profileUrl(statement.org)}">${statement.orgName}</a>
-        <#else>
-            <#-- This shouldn't happen, but we must provide for it -->
+        <#elseif editable>
+            <#-- Show the link to the context node only if the user is editing the page. -->
             <a href="${profileUrl(statement.edTraining)}">missing organization</a>
         </#if>
     </#local>
 
-    <@s.join [ degree, linkedIndividual, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
+    <@s.join [ degree, linkedIndividual!, statement.deptOrSchool!, statement.info! ] /> <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" false/>
 
 </#macro>

@@ -151,13 +151,17 @@ td {
 	border-width: 1px;
 	padding: 4px 4px 4px 6px;
 	border-style: inset;
-	border-color: white;
+	border-color: #EEEEEE;
 	-moz-border-radius: 0px 0px 0px 0px;
 }
 
-.odd_row {
+tr {
 	background: #EEEEEE;
-	border-bottom: 1px solid grey;
+}
+
+tr.odd_row {
+	background: #FFFFFF;
+	border-bottom: 1px solid #999999;
 	font-weight: bold;
 }
 

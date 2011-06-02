@@ -234,7 +234,7 @@ var customForm = {
                         type: customForm.acType
                     },
                     complete: function(xhr, status) {
-                        // Not sure why, but we need an explicit json parse here. jQuery
+                        // Not sure why, but we need an explicit json parse here. 
                         var results = $.parseJSON(xhr.responseText), 
                             filteredResults = customForm.filterAcResults(results);
                         customForm.acCache[request.term] = filteredResults;
@@ -439,8 +439,9 @@ var customForm = {
                 // e.g., 'Create Grant & Principal Investigator'
                 buttonText = 'Create ' + typeText + ' & ' + baseButtonText;          
             } else {
-                // e.g., 'Create Publication'
-                buttonText = 'Create ' + baseButtonText;
+                // In repair mode, baseButtonText is "Edit X". Keep that for this case.
+                // In add mode, baseButtonText is "X", so we get, e.g., "Create Publication"
+                buttonText = this.editMode == 'repair' ? baseButtonText : 'Create ' + baseButtonText;
             }            
         }
         // Using existing related individual
@@ -455,7 +456,7 @@ var customForm = {
     getTypeNameForLabels: function() {
         // If this.acType is empty, we are either in a one-step form with no type yet selected,
         // or in repair mode in a two-step form with no type selected. Use the default type
-        // name specified in the form data (this.typeName is 'Select one').
+        // name specified in the form data.
         return this.acType ? this.typeName : this.capitalize(this.defaultTypeName);
     },
 

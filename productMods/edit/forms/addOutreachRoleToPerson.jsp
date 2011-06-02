@@ -1,13 +1,13 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
 <jsp:include page="addRoleToPersonTwoStage.jsp">    
-	<jsp:param name="roleActivityTypeLabel" value="outreach & community service" />
+	<jsp:param name="roleDescriptor" value="outreach & community service" />
+    <jsp:param name="typeSelectorLabel" value="outreach & community service in" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#OutreachProviderRole" />
-	
 	<jsp:param name="roleActivityType_optionsType" value="HARDCODED_LITERALS" />
 	<jsp:param name="roleActivityType_objectClassUri" value="" /> 
 	<jsp:param name="roleActivityType_literalOptions" 
-    value='["", "Select one"],
+    value='["", "Select type"],
            [ "http://vivoweb.org/ontology/core#Association", "Association" ],
            [ "http://vivoweb.org/ontology/core#Center", "Center" ],
            [ "http://vivoweb.org/ontology/core#ClinicalOrganization", "Clinical Organization" ],

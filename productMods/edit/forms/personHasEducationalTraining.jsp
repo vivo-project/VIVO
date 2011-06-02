@@ -44,7 +44,7 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
@@ -52,8 +52,9 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
 <%@ page import="org.apache.commons.logging.LogFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
@@ -142,8 +143,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
-    ?startNode  <${dateTimeValue}> ?startField.value .
-    ?startNode  <${dateTimePrecision}> ?startField.precision .
+    ?startNode  <${dateTimeValue}> ?startField-value .
+    ?startNode  <${dateTimePrecision}> ?startField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
@@ -151,8 +152,8 @@ core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
-    ?endNode  <${dateTimeValue}> ?endField.value .
-    ?endNode  <${dateTimePrecision}> ?endField.precision .
+    ?endNode  <${dateTimeValue}> ?endField-value .
+    ?endNode  <${dateTimePrecision}> ?endField-precision .
 </v:jsonset>
 
 <v:jsonset var="deptAssertion" >      
@@ -319,8 +320,8 @@ type is returned and we don't get a match to the select element options. --%>
         "majorField"         : "${majorFieldQuery}",
         "dept"               : "${deptQuery}",
         "info"               : "${infoQuery}",                
-        "startField.value"   : "${existingStartDateQuery}",
-        "endField.value"     : "${existingEndDateQuery}"               
+        "startField-value"   : "${existingStartDateQuery}",
+        "endField-value"     : "${existingEndDateQuery}"               
     },
     "sparqlForExistingUris" : {
         "org"            : "${orgQuery}",
@@ -329,8 +330,8 @@ type is returned and we don't get a match to the select element options. --%>
         "intervalNode"      : "${existingIntervalNodeQuery}", 
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
-        "startField.precision": "${existingStartPrecisionQuery}",
-        "endField.precision"  : "${existingEndPrecisionQuery}"
+        "startField-precision": "${existingStartPrecisionQuery}",
+        "endField-precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "degree" : {
@@ -448,6 +449,8 @@ type is returned and we don't get a match to the select element options. --%>
         startField.setEditElement(new DateTimeWithPrecision(startField, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));        
         Field endField = editConfig.getField("endField");
         endField.setEditElement(new DateTimeWithPrecision(endField, VitroVocabulary.Precision.YEAR.uri(), VitroVocabulary.Precision.NONE.uri()));
+
+        editConfig.addValidator(new DateTimeIntervalValidation("startField","endField") ); 
         
         EditConfiguration.putConfigInSession(editConfig,session);
     }
@@ -483,15 +486,12 @@ type is returned and we don't get a match to the select element options. --%>
 <%-- Configure add vs. edit --%> 
 <c:choose>
     <c:when test='${editMode == "add"}'>
-        <c:set var="editMode" value="add" />
         <c:set var="titleVerb" value="Create" />
         <c:set var="submitButtonText" value="Education and Training" />
         <c:set var="disabledVal" value="" />
     </c:when>
     <c:otherwise>
-        <c:set var="editMode" value="edit" />
         <c:set var="titleVerb" value="Edit" />
-        <c:set var="title" value="Edit educational background entry for ${subjectName}" />
         <c:set var="submitButtonText" value="Edit Education and Training" />
         <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>    
     </c:otherwise>
@@ -512,7 +512,7 @@ This goes to an experimental FM based form:
       multiple Position individuals.</div>      
 <% }else{ %>
 
-<h2>${titleVerb} education and training entry for <%= subjectName %></h2>
+<h2>${titleVerb} education and training entry for ${subjectName}</h2>
 
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 
@@ -550,7 +550,7 @@ This goes to an experimental FM based form:
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
-<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="acUrl" value="/autocomplete?tokenize=true" />
 
 <script type="text/javascript">
 var customFormData  = {

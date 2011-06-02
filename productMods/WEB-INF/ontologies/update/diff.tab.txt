@@ -1,65 +1,21 @@
-http://vivoweb.org/ontology/core#workFax	http://vivoweb.org/ontology/core#faxNumber	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#workEmail	http://vivoweb.org/ontology/core#email	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#workPhone	http://vivoweb.org/ontology/core#phoneNumber	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#programOf	http://vivoweb.org/ontology/core#subOrganizationWithin	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#hasProgram	http://vivoweb.org/ontology/core#hasSubOrganization	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#organizationGrantingDegree	http://vivoweb.org/ontology/core#trainingAtOrganization	Yes	Map	Directly-changed
-	http://vivoweb.org/ontology/core#organizationForTraining	No	Add	not set
-http://vivoweb.org/ontology/core#offeredBy	http://vivoweb.org/ontology/core#degreeOfferedBy	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#SemesterClass	http://vivoweb.org/ontology/core#Course	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#taughtInSemester	http://vivoweb.org/ontology/core#dateTimeInterval	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#sectionCredits	http://vivoweb.org/ontology/core#courseCredits	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#listsCourse	http://vivoweb.org/ontology/core#offersCourse	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#listedBy	http://vivoweb.org/ontology/core#courseOfferedBy	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#teaches		No	Delete	not set
-http://vivoweb.org/ontology/core#taughtBy		No	Delete	not set
-http://vivoweb.org/ontology/core#AwardOrHonor	http://vivoweb.org/ontology/core#AwardReceipt	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#conferringOrganization	http://vivoweb.org/ontology/core#awardConferredBy	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#awardOrDistinction	http://vivoweb.org/ontology/core#awardOrHonor	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#awardOrDistinctionFor	http://vivoweb.org/ontology/core#awardOrHonorFor	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#awardSponsoredBy		No	Delete	not set
-http://vivoweb.org/ontology/core#sponsorsAward		No	Delete	not set
-http://vivoweb.org/ontology/core#AbstractInformation		No	Delete	Delete
-http://vivoweb.org/ontology/core#reviewedDocumentTitle		No	Delete	not set
-http://vivoweb.org/ontology/core#count		No	Delete	not set
-http://vivoweb.org/ontology/core#displayOrder		No	Delete	not set
-http://purl.org/dc/terms/language		No	Delete	not set
-http://purl.org/dc/terms/format		No	Delete	not set
-http://purl.org/dc/terms/identifier		No	Delete	not set
-http://purl.org/dc/terms/rights		No	Delete	not set
-http://purl.org/dc/terms/subject		No	Delete	not set
-http://purl.org/dc/terms/abstract		No	Delete	not set
-http://purl.org/dc/terms/description		No	Delete	not set
-http://purl.org/dc/terms/title		No	Delete	not set
-http://purl.org/dc/elements/1.1/title		No	Delete	not set
-http://purl.org/dc/elements/1.1/creator		No	Delete	not set
-http://purl.org/NET/c4dm/event.owl#place		No	Delete	not set
-http://purl.org/NET/c4dm/event.owl#sub_event		No	Delete	not set
-http://xmlns.com/foaf/0.1/homepage		No	Delete	not set
-http://xmlns.com/foaf/0.1/depiction		No	Delete	not set
-http://purl.org/ontology/bibo/producer		No	Delete	not set
-http://purl.org/ontology/bibo/owner		No	Delete	not set
-http://vivoweb.org/ontology/core#titleOrRole		No	Delete	Prop
-http://vivoweb.org/ontology/core#fundedByAgent		No	Delete	not set
-http://vivoweb.org/ontology/core#fundingAgentFor		No	Delete	not set
-http://vivoweb.org/ontology/core#atTime		No	Delete	not set
-http://vivoweb.org/ontology/core#yearMonth		No	Delete	not set
-http://vivoweb.org/ontology/core#day		No	Delete	not set
-http://vivoweb.org/ontology/core#year		No	Delete	not set
-http://vivoweb.org/ontology/core#date		No	Delete	not set
-http://vivoweb.org/ontology/core#issueDate		No	Delete	not set
-http://vivoweb.org/ontology/core#filingDate		No	Delete	not set
-http://vivoweb.org/ontology/core#startYear		No	Delete	Delete
-http://vivoweb.org/ontology/core#startDateTime		No	Delete	Delete
-http://vivoweb.org/ontology/core#startDate		No	Delete	Delete
-http://vivoweb.org/ontology/core#startYearMonth		No	Delete	Delete
-http://vivoweb.org/ontology/core#startTime		No	Delete	Delete
-http://vivoweb.org/ontology/core#endYear		No	Delete	Delete
-http://vivoweb.org/ontology/core#endDateTime		No	Delete	Delete
-http://vivoweb.org/ontology/core#endDate		No	Delete	Delete
-http://vivoweb.org/ontology/core#endYearMonth		No	Delete	Delete
-http://vivoweb.org/ontology/core#endTime		No	Delete	Delete
-http://vivoweb.org/ontology/core#courseOffering		No	Delete	not set
-http://vivoweb.org/ontology/core#TimeInterval		No	Delete	Delete
-http://vivoweb.org/ontology/core#timeIntervalFor		No	Delete	not set
-http://vivoweb.org/ontology/core#hasTimeInterval		No	Delete	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1ValueThing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#DependentResource		No	Delete	Delete
+http://vivoweb.org/ontology/core#DependentResource		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Keyword		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#keyword		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#primaryLink		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkDisplayRank		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#sunrise		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#sunset		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#timekey		No	Delete	Delete
+http://vivoweb.org/ontology/core#organizerOf		No	Delete	Delete
+http://purl.org/ontology/bibo/organizer		No	Delete	Delete
+http://vivoweb.org/ontology/core#PrimaryURLLink	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Link	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkAnchor	http://vivoweb.org/ontology/core#linkAnchorText	Yes	Map	Directly-changed
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkURL	http://vivoweb.org/ontology/core#linkURI	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#uspc	http://vivoweb.org/ontology/core#cclCode	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#wipo-ipc	http://vivoweb.org/ontology/core#iclCode	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#email	http://vivoweb.org/ontology/core#primaryEmail	Yes	Map	Directly-changed

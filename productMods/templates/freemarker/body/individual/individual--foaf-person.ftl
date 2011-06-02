@@ -3,7 +3,9 @@
 <#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
-    
+<#import "individual-qrCodeGenerator.ftl" as qr>
+<#import "lib-vivo-properties.ftl" as vp>
+
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
@@ -24,50 +26,23 @@
         <div id="photo-wrapper">${individualImage}</div>
     
         <nav role="navigation">
+        
             <ul id ="individual-tools-people" role="list">
-                <li role="listitem"><img title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon" /></li>
+                <li role="listitem"><img id="uriIcon" title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/></li>
     
                 <#assign rdfUrl = individual.rdfUrl>
                 <#if rdfUrl??>
                     <li role="listitem"><a title="View this individual in RDF format" class="icon-rdf" href="${rdfUrl}">RDF</a></li>
                 </#if>
+                
+                <@qr.renderCode />
             </ul>
         </nav>
             
-        <#-- Email -->    
-        <#assign email = propertyGroups.getPropertyAndRemoveFromList("${core}email")!>      
-        <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <@p.addLinkWithLabel email editable />
-            <#if email.statements?has_content> <#-- if there are any statements -->
-                <ul id="individual-email" role="list">
-                    <#list email.statements as statement>
-                        <li role="listitem">
-                            <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon" /><a class="email" href="mailto:${statement.value}">${statement.value}</a>
-                            <@p.editingLinks "${email.localName}" statement editable />
-                        </li>
-                    </#list>
-                </ul>
-            </#if>
-        </#if>
-          
-        <#-- Phone --> 
-        <#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
-        <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
-            <@p.addLinkWithLabel phone editable />
-            <#if phone.statements?has_content> <#-- if there are any statements -->
-                <ul id="individual-phone" role="list">
-                    <#list phone.statements as statement>
-                        <li role="listitem">                           
-                           <img class ="icon-phone  middle" src="${urls.images}/individual/phoneIcon.gif" alt="phone icon" />${statement.value}
-                            <@p.editingLinks "${phone.localName}" statement editable />
-                        </li>
-                    </#list>
-                </ul>
-            </#if>
-        </#if>      
+            <#include "individual-contactInfo.ftl">  
                 
         <#-- Links -->  
-        <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
+        <@vp.webpages propertyGroups editable "individual-urls-people" />
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
@@ -88,9 +63,7 @@
         </section>
         -->
         
-        <#if individual.showAdminPanel>
-            <#include "individual-adminPanel.ftl">
-        </#if>
+        <#include "individual-adminPanel.ftl">
         
         <header>
             <#if relatedSubject??>
@@ -100,21 +73,25 @@
                 <h1 class="fn foaf-person">
                     <#-- Label -->
                     <@p.label individual editable />
-                        
-                    <#-- Moniker / Preferred Title -->
-                    <#-- Use Preferred Title over Moniker if it is populated -->
-                    <#assign title = (propertyGroups.getProperty("${core}preferredTitle").firstValue)! />
-                    <#if ! title?has_content>
-                        <#assign title = individual.moniker>
+
+                    <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
+                    <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
+                    <#if title?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
+                        <@p.addLinkWithLabel title editable />
+                        <#list title.statements as statement>
+                            <span class="display-title">${statement.value}</span>
+                            <@p.editingLinks "${title.name}" statement editable />
+                        </#list>
                     </#if>
-                    <#if title?has_content>
-                        <span class="preferred-title">${title}</span>
-                    </#if>
+                    <#-- If preferredTitle is unpopulated, display mostSpecificTypes -->
+                    <#if ! (title.statements)?has_content>
+                        <@p.mostSpecificTypes individual />
+                    </#if>                        
                 </h1>
             </#if>
                
             <#-- Positions -->
-            <#assign positions = propertyGroups.getPropertyAndRemoveFromList("${core}personInPosition")!>
+            <#assign positions = propertyGroups.pullProperty("${core}personInPosition")!>
             <#if positions?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
                 <@p.objectPropertyListing positions editable />
             </#if> 
@@ -124,13 +101,14 @@
         <#include "individual-overview.ftl">
         
         <#-- Research Areas -->
-        <#assign researchAreas = propertyGroups.getPropertyAndRemoveFromList("${core}hasResearchArea")!> 
+        <#assign researchAreas = propertyGroups.pullProperty("${core}hasResearchArea")!> 
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.objectPropertyListing researchAreas editable />
         </#if>   
     </section>
     
 </section>
+
 <#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
 
 <#-- Property group menu -->
@@ -139,18 +117,13 @@
 <#-- Ontology properties -->
 <#include "individual-properties.ftl">
 
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 
-${stylesheets.add("/css/individual/individual.css")}
-${stylesheets.add("/css/individual/individual-vivo.css")}
-                           
-<#-- RY Figure out which of these scripts really need to go into the head, and which are needed at all (e.g., tinyMCE??) -->
-${headScripts.add("/js/jquery_plugins/getURLParam.js",                  
-                  "/js/jquery_plugins/colorAnimations.js",
-                  "/js/jquery_plugins/jquery.form.js",
-                  "/js/tiny_mce/tiny_mce.js", 
-                  "/js/controls.js",
-                  "/js/toggle.js",
-                  "/js/jquery_plugins/jquery.truncator.js")}
-                  
-${scripts.add("/js/imageUpload/imageUploadUtils.js")}
-${scripts.add("/js/individual/individualUtils.js")}
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}

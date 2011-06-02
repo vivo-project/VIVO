@@ -77,7 +77,7 @@
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>testAdmin</td>
+	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -126,32 +126,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Select to edit Jane Faculty's profile</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Select to upload a new image but cancel out</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Upload Image']</td>
+	<td>css=img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -167,6 +147,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Replace Photo (JPEG, GIF or PNG)</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,11 +181,6 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
@@ -211,7 +191,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Upload Image']</td>
+	<td>css=img.edit-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Replace image for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -222,6 +207,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Current Photo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Replace Photo (JPEG, GIF or PNG)</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,12 +236,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Crop Photo for Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Photo Upload</td>
+	<td>Replace image for Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -276,7 +261,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>

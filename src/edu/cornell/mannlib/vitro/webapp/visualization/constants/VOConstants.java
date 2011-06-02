@@ -15,14 +15,15 @@ import org.joda.time.format.ISODateTimeFormat;
  */
 public class VOConstants {
 	
+	public static final String DEFAULT_ACTIVITY_YEAR = "Unknown";
 	public static final String DEFAULT_PUBLICATION_YEAR = "Unknown";
 	public static final String DEFAULT_GRANT_YEAR = "Unknown";
 	
 	/*
 	 * Employee related constants 
 	 * */
-	public static enum EmployeeType {
-		ACADEMIC_FACULTY_EMPLOYEE, ACADEMIC_STAFF_EMPLOYEE
+	public static enum EntityClassType {
+		ORGANIZATION, PERSON, UNKNOWN
 	} 
 	
 	public static final int NUM_CHARS_IN_YEAR_FORMAT = 4;

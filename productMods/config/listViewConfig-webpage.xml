@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- Custom list view config file for core:webpage
+    
+     See guidelines in vitro/doc/list_view_configuration_guidelines.txt --> 
+
+<list-view-config>
+    <query-select>            
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt; 
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+
+        SELECT ?link 
+               (afn:localname(?link) AS ?linkName) 
+               ?anchor 
+               ?url 
+               ?rank WHERE {
+            ?subject ?property ?link 
+            OPTIONAL { ?link core:linkAnchorText ?anchor }
+            OPTIONAL { ?link core:linkURI ?url }
+            OPTIONAL { ?link core:rank ?rank }
+        <critical-data-required>
+        FILTER ( bound(?url) )    
+        </critical-data-required>
+        } ORDER BY ?rank ?anchor
+    </query-select>
+
+    <query-construct>
+        CONSTRUCT {
+            ?subject ?property ?link .
+            ?link ?linkProp ?linkObj
+        } WHERE {
+            { 
+                ?subject ?property ?link 
+            } UNION {
+                ?subject ?property ?link .
+                ?link ?linkProp ?linkObj
+            } 
+        }
+    </query-construct>
+    
+    <template>propStatement-webpage.ftl</template>
+</list-view-config>

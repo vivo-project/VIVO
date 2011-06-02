@@ -9,13 +9,119 @@
     overflow: hidden;
 }
 
+#body {
+    display: none;
+}
+
+#subject-parent-entity {
+    display: none;
+    font-size:.7em;
+    color:#aaa;
+    margin-left:10px;
+}
+#subject-parent-entity-spacer {
+    color:#aaa;
+    margin-left:-18px;
+}
 #error-container {
     display: none;
+}
+
+/*
+This is for the overlay that happens when you change the parameter. Somehow the top
+for the message is getting set to 50%, hence we need to override it here.
+*/
+.blockElement {
+	top: 10px !important;	
 }
 
 .easy-deselect-label a.temporal-vis-url {
     float: right;
 }
+
+#people-organizations-filter {
+	margin-bottom: 9px;
+	display: none;
+}
+
+.filter-option {
+	color: #2485AE;
+	cursor: pointer;
+	/*padding-right: 5px;*/
+	text-decoration: underline;
+}
+
+.active-filter {
+	color: #595B5B;
+	text-decoration: none;
+}
+
+.filterInfoIcon {
+	vertical-align:top;
+	width:15px;
+	margin-left: 9px;
+}
+
+.current-year-bar,
+.known-bar {
+    display: inline-block;
+    cursor: help;
+}
+
+.current-year-bar {
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+
+.unknown-inner-bar {
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+    display: inline-block;
+}
+
+.bar-count-text {
+    padding-right: 3px;
+    vertical-align: super;
+}
+
+img.bar-count-icon {
+    vertical-align: super;
+    cursor: help;
+}
+
+.unknown-bar {
+    background: url("../../../images/visualization/diagonal.png") repeat scroll 50% 50% #666666;
+    cursor: help;
+}
+
+.legend-bar {
+    margin-bottom: 3px;
+    cursor:default;
+}
+
+.current-year-legend-bar {
+    display: inline-block;
+}
+
+.unknown-legend-bar {
+    background: url("../../../images/visualization/legend-unknown-bar-dark.png") repeat #B7B7B7;
+}
+
+
+#legend-current-year-bar-text,
+#legend-known-bar-text,
+#legend-unknown-bar-text {
+    font-size: 0.75em;
+}
+
+span#copy-vis-viewlink {
+    display: none;
+}
+
+img#copy-vis-viewlink-icon {
+    cursor: pointer;
+}
+
 a.temporalGraphLinks {
     background-color: #2485AE;
     color: white;
@@ -113,9 +219,15 @@ a.clear-selected-entities {
     vertical-align: top;
 }
 #header-entity-label {
-    font-size: 1.1em;
-    font-weight: bold;
+font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica,
+sans-serif;
+    font-size: 1.5275em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
 }
+
 .ellipsis {
     white-space: nowrap;
     overflow: hidden;
@@ -197,4 +309,21 @@ p.displayCounter{
 #comparisonParameter, 
 #headerText {
     color: #2485ae;
+}
+/* -------------------------------------------------------------->  */
+/* SPECIAL STYLES FOR THE entityComparisonErrorCommonBody.ftl FILE  */
+/* -------------------------------------------------------------->  */
+#noPubsOrGrants-header {
+    font-size: 1.375em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
+#noPubsOrGrants-span  {
+    font-size:22px;
+}
+#noPubsOrGrants-span a {
+    color: #84a655;
+    font-size:16px;
 }

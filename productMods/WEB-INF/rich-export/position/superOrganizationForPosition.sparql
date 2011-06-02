@@ -1,0 +1,10 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?superOrganization ?property ?object .
+} WHERE {
+     PERSON_URI core:personInPosition ?position . 
+     ?position core:positionInOrganization ?organization .
+     ?organization core:subOrganizationWithin ?superOrganization .
+     ?superOrganization ?property ?object .
+}

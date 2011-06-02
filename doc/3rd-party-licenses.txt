@@ -6,6 +6,7 @@ Apache License 2.0
 licenses/apache.LICENSE.txt
 
 ant-jmeter
+batik-css
 commons-beanutils-core
 commons-betwixt
 commons-cli
@@ -30,10 +31,7 @@ jmeter
 joda-time
 json-taglib
 log4j
-lucene-analyzers
-lucene-core
-lucene-highlighter
-soapmonitorapplet
+nekohtml
 solr
 spring
 stax-api
@@ -62,7 +60,6 @@ dojo (licenses/dojo.LICENSE.txt)
 dom4j (licenses/dom4j.LICENSE.txt)
 freemarker (licenses/freemarker.LICENSE.txt)
 iri (licenses/jena.LICENSE.txt)
-jaxen (licenses/jaxen.LICENSE.txt)
 jena (licenses/jena.LICENSE.txt)
 jenatest (licenses/jena.LICENSE.txt)
 ldap (licenses/ldap.LICENSE.txt)
@@ -81,6 +78,10 @@ sesame-sail (licenses/aduna.LICENSE.txt)
 sparqltag (licenses/sparqltag.LICENSE.txt)
 xpp3_min (licenses/extreme.LICENSE.txt)
 xstream (licenses/xstream.LICENSE.txt)
+
+BSD 3-clause
+---
+antisamy (licenses/antisamy.LICENSE.txt)
 
 
 CDDL 1.0
@@ -154,6 +155,7 @@ MIT
 blueprintcss (licenses/blueprintcss.LICENSE.txt)
 html5js (licenses/mit.LICENSE.txt)
 icu4j (licenses/icu.LICENSE.txt)
+jsoup (licenses/jsoup.LICENSE.txt)
 jquery (licenses/mit.LICENSE.txt)
 jquery-plugins (licenses/mit.LICENSE.txt)
 prototype (licenses/mit.LICENSE.txt)

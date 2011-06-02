@@ -1,0 +1,10 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?urllink ?property ?object .
+} WHERE {
+     PERSON_URI core:authorInAuthorship ?authorship . 
+     ?authorship core:linkedInformationResource ?publication .
+     ?publication core:webpage ?urllink .
+     ?urllink ?property ?object .
+}

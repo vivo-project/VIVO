@@ -1,0 +1,24 @@
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX swrl:  <http://www.w3.org/2003/11/swrl#>
+PREFIX swrlb: <http://www.w3.org/2003/11/swrlb#>
+PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+PREFIX vivo:  <http://vivo.library.cornell.edu/ns/0.1#>
+PREFIX bibo: <http://purl.org/ontology/bibo/>   
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+Construct {
+     _:role a core:OrganizerRole .
+     _:role core:roleIn ?something .
+     ?something core:relatedRole _:role .
+     ?person core:hasOrganizerRole _:role  .
+     _:role core:organizerRoleOf ?person .
+} where {
+     ?something bibo:organizer ?person .
+}

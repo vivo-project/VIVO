@@ -67,6 +67,7 @@ xmlns:vitro="&vitro;"
 <owl:DatatypeProperty rdf:about="&vitro;keywordSource"/>
 <owl:DatatypeProperty rdf:about="&vitro;keywordComments"/>
 <owl:DatatypeProperty rdf:about="&vitro;keywordOrigin"/>
+<owl:ObjectProperty rdf:about="&vitro;keyword"/>
 <owl:Class rdf:about="&vitro;KeywordRelation"/>
 <owl:ObjectProperty rdf:about="&vitro;involvesIndividual"/>
 <owl:ObjectProperty rdf:about="&vitro;involvesKeyword"/>
@@ -78,6 +79,7 @@ xmlns:vitro="&vitro;"
 <owl:ObjectProperty rdf:about="&vitro;additionalLink"/>
 <owl:Class rdf:about="&vitro;Link"/>
 <owl:DatatypeProperty rdf:about="&vitro;linkAnchor"/>
+<owl:DatatypeProperty rdf:about="&vitro;linkDisplayRank"/>
 <owl:DatatypeProperty rdf:about="&vitro;linkURL"/>
 
 <!-- other Individual-related -->
@@ -98,6 +100,7 @@ xmlns:vitro="&vitro;"
 
 <!-- portal flag classes -->
 
+<owl:Class rdf:about="&vitro;Flag1ValueThing"/>
 <owl:Class rdf:about="&vitro;Flag1Value0Thing"/>
 <owl:Class rdf:about="&vitro;Flag1Value1Thing"/>
 <owl:Class rdf:about="&vitro;Flag1Value2Thing"/>
@@ -276,6 +279,9 @@ xmlns:vitro="&vitro;"
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#selectFromExistingAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customDisplayViewAnnot">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
 

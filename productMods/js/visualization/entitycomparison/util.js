@@ -2,185 +2,169 @@
 
 (function ($) {
 
-$.fn.dataTableExt.oPagination.gmail_style = { 
+    $.fn.dataTableExt.oPagination.gmail_style = {
 
-		"fnInit": function ( oSettings, nPaging, fnCallbackDraw )
-		{
-			//var nInfo = document.createElement( 'div' );
-			var nFirst = document.createElement( 'span' );
-			var nPrevious = document.createElement( 'span' );
-			var nNext = document.createElement( 'span' );
-			var nLast = document.createElement( 'span' );
-			
-			/*
+    		
+        "fnInit": function (oSettings, nPaging, fnCallbackDraw) {
+            //var nInfo = document.createElement( 'div' );
+            var nFirst = document.createElement('span');
+            var nPrevious = document.createElement('span');
+            var nNext = document.createElement('span');
+            var nLast = document.createElement('span');
+
+/*
 			nFirst.innerHTML = oSettings.oLanguage.oPaginate.sFirst;
 			nPrevious.innerHTML = oSettings.oLanguage.oPaginate.sPrevious;
 			nNext.innerHTML = oSettings.oLanguage.oPaginate.sNext;
 			nLast.innerHTML = oSettings.oLanguage.oPaginate.sLast;
 			*/
-			
-			nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>First</span>";
-			nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>Prev</span>";
-			nNext.innerHTML = "<span class='paginate-nav-text'>Next</span><span class='small-arrows'>&rsaquo;</span>";
-			nLast.innerHTML = "<span class='paginate-nav-text'>Last</span><span class='small-arrows'>&raquo;</span>";
-			
-			var oClasses = oSettings.oClasses;
-			nFirst.className = oClasses.sPageButton+" "+oClasses.sPageFirst;
-			nPrevious.className = oClasses.sPageButton+" "+oClasses.sPagePrevious;
-			nNext.className= oClasses.sPageButton+" "+oClasses.sPageNext;
-			nLast.className = oClasses.sPageButton+" "+oClasses.sPageLast;
-			
-			//nPaging.appendChild( nInfo );
-			nPaging.appendChild( nFirst );
-			nPaging.appendChild( nPrevious );
-			nPaging.appendChild( nNext );
-			nPaging.appendChild( nLast );
-			
-			$(nFirst).click( function () {
-				if ( oSettings.oApi._fnPageChange( oSettings, "first" ) )
-				{
-					fnCallbackDraw( oSettings );
-				}
-			} );
-			
-			$(nPrevious).click( function() {
-				if ( oSettings.oApi._fnPageChange( oSettings, "previous" ) )
-				{
-					fnCallbackDraw( oSettings );
-				}
-			} );
-			
-			$(nNext).click( function() {
-				if ( oSettings.oApi._fnPageChange( oSettings, "next" ) )
-				{
-					fnCallbackDraw( oSettings );
-				}
-			} );
-			
-			$(nLast).click( function() {
-				if ( oSettings.oApi._fnPageChange( oSettings, "last" ) )
-				{
-					fnCallbackDraw( oSettings );
-				}
-			} );
-			
-			/* Take the brutal approach to cancelling text selection */
-			$('span', nPaging)
-				.bind( 'mousedown', function () { return false; } )
-				.bind( 'selectstart', function () { return false; } );
-			
-			/* ID the first elements only */
-			if ( oSettings.sTableId !== '' && typeof oSettings.aanFeatures.p == "undefined" )
-			{
-				nPaging.setAttribute( 'id', oSettings.sTableId+'_paginate' );
-				nFirst.setAttribute( 'id', oSettings.sTableId+'_first' );
-				nPrevious.setAttribute( 'id', oSettings.sTableId+'_previous' );
-				//nInfo.setAttribute( 'id', 'infoContainer' );
-				nNext.setAttribute( 'id', oSettings.sTableId+'_next' );
-				nLast.setAttribute( 'id', oSettings.sTableId+'_last' );
-			}
-		},
-		
-		/*
+
+            nFirst.innerHTML = "<span class='small-arrows'>&laquo;</span> <span class='paginate-nav-text'>First</span>";
+            nPrevious.innerHTML = "<span class='small-arrows'>&lsaquo;</span> <span class='paginate-nav-text'>Prev</span>";
+            nNext.innerHTML = "<span class='paginate-nav-text'>Next</span><span class='small-arrows'>&rsaquo;</span>";
+            nLast.innerHTML = "<span class='paginate-nav-text'>Last</span><span class='small-arrows'>&raquo;</span>";
+
+            var oClasses = oSettings.oClasses;
+            nFirst.className = oClasses.sPageButton + " " + oClasses.sPageFirst;
+            nPrevious.className = oClasses.sPageButton + " " + oClasses.sPagePrevious;
+            nNext.className = oClasses.sPageButton + " " + oClasses.sPageNext;
+            nLast.className = oClasses.sPageButton + " " + oClasses.sPageLast;
+
+            //nPaging.appendChild( nInfo );
+            nPaging.appendChild(nFirst);
+            nPaging.appendChild(nPrevious);
+            nPaging.appendChild(nNext);
+            nPaging.appendChild(nLast);
+
+            $(nFirst).click(function () {
+                if (oSettings.oApi._fnPageChange(oSettings, "first")) {
+                    fnCallbackDraw(oSettings);
+                }
+            });
+
+            $(nPrevious).click(function () {
+                if (oSettings.oApi._fnPageChange(oSettings, "previous")) {
+                    fnCallbackDraw(oSettings);
+                }
+            });
+
+            $(nNext).click(function () {
+                if (oSettings.oApi._fnPageChange(oSettings, "next")) {
+                    fnCallbackDraw(oSettings);
+                }
+            });
+
+            $(nLast).click(function () {
+                if (oSettings.oApi._fnPageChange(oSettings, "last")) {
+                    fnCallbackDraw(oSettings);
+                }
+            });
+
+            /* Take the brutal approach to cancelling text selection */
+            $('span', nPaging).bind('mousedown', function () {
+                return false;
+            }).bind('selectstart', function () {
+                return false;
+            });
+
+            /* ID the first elements only */
+            if (oSettings.sTableId !== '' && typeof oSettings.aanFeatures.p == "undefined") {
+                nPaging.setAttribute('id', oSettings.sTableId + '_paginate');
+                nFirst.setAttribute('id', oSettings.sTableId + '_first');
+                nPrevious.setAttribute('id', oSettings.sTableId + '_previous');
+                //nInfo.setAttribute( 'id', 'infoContainer' );
+                nNext.setAttribute('id', oSettings.sTableId + '_next');
+                nLast.setAttribute('id', oSettings.sTableId + '_last');
+            }
+        },
+
+/*
 		 * Function: oPagination.full_numbers.fnUpdate
 		 * Purpose:  Update the list of page buttons shows
 		 * Returns:  -
  		 * Inputs:   object:oSettings - dataTables settings object
 		 *           function:fnCallbackDraw - draw function to call on page change
 		 */
-		"fnUpdate": function ( oSettings, fnCallbackDraw )
-		{
-			if ( !oSettings.aanFeatures.p )
-			{
-				return;
-			}
-			
-			var iPageCount = 5;
-			var iPageCountHalf = Math.floor(iPageCount / 2);
-			var iPages = Math.ceil((oSettings.fnRecordsDisplay()) / oSettings._iDisplayLength);
-			var iCurrentPage = Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1;
-			var iStartButton, iEndButton, i, iLen;
-			var oClasses = oSettings.oClasses;
-			
-			/* Pages calculation */
-			if (iPages < iPageCount)
-			{
-				iStartButton = 1;
-				iEndButton = iPages;
-			}
-			else
-			{
-				if (iCurrentPage <= iPageCountHalf)
-				{
-					iStartButton = 1;
-					iEndButton = iPageCount;
-				}
-				else
-				{
-					if (iCurrentPage >= (iPages - iPageCountHalf))
-					{
-						iStartButton = iPages - iPageCount + 1;
-						iEndButton = iPages;
-					}
-					else
-					{
-						iStartButton = iCurrentPage - Math.ceil(iPageCount / 2) + 1;
-						iEndButton = iStartButton + iPageCount - 1;
-					}
-				}
-			}
-			
-			/* Loop over each instance of the pager */
-			var an = oSettings.aanFeatures.p;
-			var anButtons, anStatic, nPaginateList;
-			var fnClick = function() {
-				/* Use the information in the element to jump to the required page */
-				var iTarget = (this.innerHTML * 1) - 1;
-				oSettings._iDisplayStart = iTarget * oSettings._iDisplayLength;
-				fnCallbackDraw( oSettings );
-				return false;
-			};
-			var fnFalse = function () { return false; };
-			
-			for ( i=0, iLen=an.length ; i<iLen ; i++ )
-			{
-				if ( an[i].childNodes.length === 0 )
-				{
-					continue;
-				}
-				
-				/* Update the 'premanent botton's classes */
-				anButtons = an[i].getElementsByTagName('span');
-				anStatic = [
-					anButtons[0], anButtons[1], 
-					anButtons[anButtons.length-2], anButtons[anButtons.length-1]
-				];
-				$(anStatic).removeClass( oClasses.sPageButton+" "+oClasses.sPageButtonActive+" "+oClasses.sPageButtonStaticDisabled );
-				if ( iCurrentPage == 1 )
-				{
-					anStatic[0].className += " "+oClasses.sPageButtonStaticDisabled;
-					anStatic[1].className += " "+oClasses.sPageButtonStaticDisabled;
-				}
-				else
-				{
-					anStatic[0].className += " "+oClasses.sPageButton;
-					anStatic[1].className += " "+oClasses.sPageButton;
-				}
-				
-				if ( iPages === 0 || iCurrentPage == iPages || oSettings._iDisplayLength == -1 )
-				{
-					anStatic[2].className += " "+oClasses.sPageButtonStaticDisabled;
-					anStatic[3].className += " "+oClasses.sPageButtonStaticDisabled;
-				}
-				else
-				{
-					anStatic[2].className += " "+oClasses.sPageButton;
-					anStatic[3].className += " "+oClasses.sPageButton;
-				}
-			}
-		}		
-};
+        "fnUpdate": function (oSettings, fnCallbackDraw) {
+            if (!oSettings.aanFeatures.p) {
+                return;
+            }
 
+            var iPageCount = 5;
+            var iPageCountHalf = Math.floor(iPageCount / 2);
+            var iPages = Math.ceil((oSettings.fnRecordsDisplay()) / oSettings._iDisplayLength);
+            var iCurrentPage = Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength) + 1;
+            var iStartButton, iEndButton, i, iLen;
+            var oClasses = oSettings.oClasses;
+            
+            /* Pages calculation */
+            if (iPages < iPageCount) {
+                iStartButton = 1;
+                iEndButton = iPages;
+            } else {
+                if (iCurrentPage <= iPageCountHalf) {
+                    iStartButton = 1;
+                    iEndButton = iPageCount;
+                } else {
+                    if (iCurrentPage >= (iPages - iPageCountHalf)) {
+                        iStartButton = iPages - iPageCount + 1;
+                        iEndButton = iPages;
+                    } else {
+                        iStartButton = iCurrentPage - Math.ceil(iPageCount / 2) + 1;
+                        iEndButton = iStartButton + iPageCount - 1;
+                    }
+                }
+            }
+
+            /* Loop over each instance of the pager */
+            var an = oSettings.aanFeatures.p;
+            var anButtons, anStatic, nPaginateList;
+            var fnClick = function () { /* Use the information in the element to jump to the required page */
+                var iTarget = (this.innerHTML * 1) - 1;
+                oSettings._iDisplayStart = iTarget * oSettings._iDisplayLength;
+                fnCallbackDraw(oSettings);
+                return false;
+            };
+            var fnFalse = function () {
+                return false;
+            };
+
+            for (i = 0, iLen = an.length; i < iLen; i++) {
+                if (an[i].childNodes.length === 0) {
+                    continue;
+                }
+
+                /* Update the 'premanent botton's classes */
+                anButtons = an[i].getElementsByTagName('span');
+                anStatic = [
+                anButtons[0], anButtons[1], anButtons[anButtons.length - 2], anButtons[anButtons.length - 1]];
+                $(anStatic).removeClass(oClasses.sPageButton + " " + oClasses.sPageButtonActive + " " + oClasses.sPageButtonStaticDisabled);
+                if (iCurrentPage == 1) {
+                    anStatic[0].className += " " + oClasses.sPageButtonStaticDisabled;
+                    anStatic[1].className += " " + oClasses.sPageButtonStaticDisabled;
+                } else {
+                    anStatic[0].className += " " + oClasses.sPageButton;
+                    anStatic[1].className += " " + oClasses.sPageButton;
+                }
+
+                if (iPages === 0 || iCurrentPage == iPages || oSettings._iDisplayLength == -1) {
+                    anStatic[2].className += " " + oClasses.sPageButtonStaticDisabled;
+                    anStatic[3].className += " " + oClasses.sPageButtonStaticDisabled;
+                } else {
+                    anStatic[2].className += " " + oClasses.sPageButton;
+                    anStatic[3].className += " " + oClasses.sPageButton;
+                }
+            }
+            
+            
+            if (iPages <= 1) {
+            	$("." + temporalGraphProcessor.dataTableParams.paginationContainerDIVClass).hide();
+            } else {
+            	$("." + temporalGraphProcessor.dataTableParams.paginationContainerDIVClass).show();
+            }
+        }
+    };
+    
     $.fn.ellipsis = function () {
         return this.each(function () {
             var el = $(this);
@@ -218,6 +202,35 @@ $.fn.dataTableExt.oPagination.gmail_style = {
 })(jQuery);
 
 
+var DatatableCustomFilters = {
+	
+	peopleOrOrganizations: function(oSettings, aData, iDataIndex) {
+
+		/*
+		 * We know for a fact that the unique identifier for each row is the value for the checkbox, 
+		 * that is found in the first column for each row.
+		 * */
+		var row_data = aData[0];
+		var entityURI = $(row_data).filter("input[type=checkbox]").val();
+		
+		var currentEntityVisMode = URIToEntityRecord[entityURI].visMode;
+
+		if (currentEntityVisMode === "ORGANIZATION" 
+				&& temporalGraphProcessor.currentSelectedFilter === "ORGANIZATIONS") {
+			return true;
+		} else if (currentEntityVisMode === "PERSON" 
+			&& temporalGraphProcessor.currentSelectedFilter === "PEOPLE") {
+			return true;
+		} else {
+//			console.log(entityURI);
+			return false;
+		}
+		
+		return true;
+	}	
+		
+};
+
 /**
 
  * init sets some initial options for the default graph. i.e for when the page
@@ -231,15 +244,17 @@ function init(graphContainer) {
 	
 	var optionSelected = $("select.comparisonValues option:selected").val();
 	// TODO: make use of the id on the select field instead of a generic one.
-	$("#comparisonParameter").text("Total Number of " + $("select.comparisonValues option:selected").val());
+	$("#comparisonParameter").text("Total Number of " + optionSelected);
 	$('#yaxislabel').html("Number of " + optionSelected).mbFlipText(false);
 	$('#comparisonHeader').html(optionSelected).css('font-weight', 'bold');
-	
+	$('#legend-unknown-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " with unknown year");
+	$('#legend-known-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " with known year");
+	$('#legend-current-year-bar-text').text(toTitleCase(COMPARISON_PARAMETERS_INFO[currentParameter].name) + " from current incomplete year");
 	
 	var defaultFlotOptions = {
 			xaxis : {
-				min : globalDateObject.getFullYear() - 9,
-				max : globalDateObject.getFullYear(),
+				min : globalDateObject.getFullYear() - 10,
+				max : globalDateObject.getFullYear() - 1,
 				tickDecimals : 0,
 				tickSize : 2
 			},
@@ -378,30 +393,23 @@ function stuffZerosIntoLineGraphs(jsonObject, year) {
 	
 	$.each(jsonObject,
 			function(key, val) {
-				var position = normalizedYearRange.normalizedMinYear, i = 0;
-				
-				//console.log(key, val, position, (arrayOfMinAndMaxYears[1] - arrayOfMinAndMaxYears[0]) + 1);
+		var position = normalizedYearRange.normalizedMinYear, i = 0;
 
-				for (i = 0; i < normalizedYearRange.normalizedRange + 1; i++) {
+		for (i = 0; i < normalizedYearRange.normalizedRange + 1; i++) {
 
-					//console.log("val.data[i]", val.data[i]);
-					
-					if (val.data[i]) {
+			if (val.data[i]) {
 
-						if (val.data[i][0] != position
-								&& position <= normalizedYearRange.normalizedMaxYear) {
-							val.data.splice(i, 0, [ position, 0 ]);
-						}
-					}
-
-					else {
-						val.data.push( [ position, 0 ]);
-					}
-					position++;
+				if (val.data[i][0] != position
+						&& position <= normalizedYearRange.normalizedMaxYear) {
+					val.data.splice(i, 0, [ position, 0 ]);
 				}
-			});
-	
-	//console.log("after stuffing", jsonObject);
+			}
+			else {
+				val.data.push( [ position, 0 ]);
+			}
+			position++;
+		}
+	});
 }
 /**
  * During runtime, when the user checks/unchecks a checkbox, the zeroes have to
@@ -465,11 +473,8 @@ function calcMinandMaxYears(jsonObject, year) {
 		}
 		
 	});
-	
-	
 	year.min = Math.min.apply(Math, validYearsInData);
 	year.max = Math.max.apply(Math, validYearsInData);
-	
 }
 
 /**
@@ -483,7 +488,10 @@ function calcMaxOfComparisonParameter(allEntities) {
 	var validCountsInData = new Array();
 	
 	$.each(allEntities, function(key, currentEntity) {
-		validCountsInData.push(calcSumOfComparisonParameter(currentEntity));
+		
+		combinedCount = currentEntity.activityCount;
+		
+		validCountsInData.push(combinedCount.knownYearCount + combinedCount.unknownYearCount);
 	});
 
 	return Math.max.apply(Math, validCountsInData);
@@ -513,23 +521,6 @@ function calcMaxWithinComparisonParameter(jsonObject){
 }
 
 /**
- * This is used to find out the sum of all the counts of a particular entity. This is
- * especially useful to render the bars below the line graph where it doesnt matter if
- * a count has any associated year to it or not.
- * @returns sum{values}.
- */
-function calcSumOfComparisonParameter(entity) {
-
-	var sum = 0;
-
-	$.each(entity.data, function(index, data){
-		sum += this[1];
-	});
-
-	return sum;
-}
-
-/**
  * A simple function to see if the passed
  * 
  * @param {array}
@@ -549,49 +540,70 @@ function contains(objectArray, object) {
 	return flag;
 }
 
-/**
- * Dynamically change the linewidth and ticksize based on input year range.
- * 
- * @param {Object}
- *            yearRange
- */
-function setLineWidthAndTickSize(yearRange, flotOptions) {
+var LineWidth = {
 
-	if (yearRange > 0 && yearRange < 15) {
-		flotOptions.series.lines.lineWidth = 3;
-		flotOptions.xaxis.tickSize = 1;
-	} else if (yearRange > 15 && yearRange < 70) {
-		flotOptions.series.lines.lineWidth = 2;
-		flotOptions.xaxis.tickSize = 5;
-	} else if (yearRange == 0 ) {
-		flotOptions.series.lines.lineWidth = 3;
-		flotOptions.xaxis.tickSize = 1;
-	} else {
-		flotOptions.series.lines.lineWidth = 1;
-		flotOptions.xaxis.tickSize = 10;
+	getLineWidth: function(tickSize) {
+		if (tickSize >= 0 && tickSize < 10) {
+			return 3;
+		} else if (tickSize >= 10 && tickSize < 50) {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
+		
+};
 
-}
-
-/**
- * Dynamically change the ticksize of y-axis.
- */
-function setTickSizeOfYAxis(maxValue, flotOptions){
+var TickSize = {
+		
+	maxValue: 0.0,	
 	
-	var tickSize = 0;
+	maxTicks: {
+		yAxis: 12.0,
+		xAxis: 12.0
+	},
 	
-	if (maxValue > 0 && maxValue <= 5) {
-		flotOptions.yaxis.tickSize = 1;
-	} else if (maxValue > 5 && maxValue <= 10) {
-		flotOptions.yaxis.tickSize = 2;
-	} else 	if (maxValue > 10 && maxValue <= 15) {
-		flotOptions.yaxis.tickSize = 5;
-	} else if (maxValue > 15 && maxValue <= 70) {
-		flotOptions.yaxis.tickSize  = 5;
-	} else {
-		flotOptions.yaxis.tickSize = 10;
-	}
-}
+	tickSizeUnits: {
+		yAxis: [1.0, 2.5, 5.0],
+		xAxis: [1.0, 2, 5.0]
+	},
+	
+	getApproximateTickSize: function(allowedMaxTicks) {
+		return Math.max(Math.ceil(parseFloat(this.maxValue) / allowedMaxTicks), 1.0);
+	},
+	
+	getFinalTickSize: function(unitTickSizeGenerator) {
+		tickSizeMultiplier = 1.0;
+		finalTickSize = 1.0;
+		approximateTickSize = this.getApproximateTickSize(this.maxTicks.yAxis);
+		
+		while (true) {
+			if (approximateTickSize <= (unitTickSizeGenerator[0] * tickSizeMultiplier)) {
+				finalTickSize = unitTickSizeGenerator[0] * tickSizeMultiplier;
+				break;
+			}
+			if (approximateTickSize <= (unitTickSizeGenerator[1] * tickSizeMultiplier)) {
+				finalTickSize = unitTickSizeGenerator[1] * tickSizeMultiplier;
+				break;
+			}
+			if (approximateTickSize <= (unitTickSizeGenerator[2] * tickSizeMultiplier)) {
+				finalTickSize = unitTickSizeGenerator[2] * tickSizeMultiplier;
+				break;
+			}
+			tickSizeMultiplier *= 10.0;
+		}
+		return finalTickSize;
+	},
+	
+	getTickSize: function(value, onAxis) {
+		this.maxValue = value;
+		if (onAxis.trim().toLowerCase() === 'y') {
+			return this.getFinalTickSize(this.tickSizeUnits.yAxis);
+		} else if (onAxis.trim().toLowerCase() === 'x') {
+			return this.getFinalTickSize(this.tickSizeUnits.xAxis);
+		}
+	} 
+};
 
 /**
  * Create a div that represents the rectangular bar A hidden input class that is
@@ -604,7 +616,7 @@ function setTickSizeOfYAxis(maxValue, flotOptions){
 function createLegendRow(entity, bottomDiv) {
 
     var parentP = $('<p>');
-    parentP.attr('id', slugify(entity.label));
+    parentP.attr('id', slugify(entity.entityURI));
 
     var labelDiv = $('<div>');
     labelDiv.attr('class', 'easy-deselect-label');
@@ -615,7 +627,7 @@ function createLegendRow(entity, bottomDiv) {
      * there is no drill-down possible, so don't diaply the temporal graph icon.
      * */
     if (entity.visMode !== "PERSON") {
-    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');	
+    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity.entityURI) + '"><img src = "' + temporalGraphDrillDownIcon + '"/></a>');	
     }
     
 
@@ -624,7 +636,7 @@ function createLegendRow(entity, bottomDiv) {
     checkbox.attr('checked', true);
     checkbox.attr('id', 'checkbox');
     checkbox.attr('class', 'easyDeselectCheckbox');
-    checkbox.attr('value', entity.label);
+    checkbox.attr('value', entity.entityURI);
 
     var hiddenLabel = $('<label>');
     hiddenLabel.attr('type', 'hidden');
@@ -632,17 +644,43 @@ function createLegendRow(entity, bottomDiv) {
 
     var barDiv = $('<div>');
     barDiv.attr('id', 'bar');
+    
+    var knownBar = $('<span>');
+    knownBar.attr('class', 'known-bar');
+    
+    var currentYearBar = $('<span>');
+    currentYearBar.attr('class', 'current-year-bar');
 
+    var unknownBar = $('<span>');
+    unknownBar.attr('class', 'unknown-bar');
+    
+    var unknownBarInnerSpan = $('<span>');
+    unknownBarInnerSpan.attr('class', 'unknown-inner-bar');
+    unknownBarInnerSpan.html('&nbsp;');
+    
+    unknownBar.append(unknownBarInnerSpan);
+    
+    barDiv.append(unknownBar);
+    barDiv.append(knownBar);
+    barDiv.append(currentYearBar);
+    
+    
     var numAttributeText = $('<span>');
-    numAttributeText.attr('id', 'text');
+    numAttributeText.attr('class', 'bar-count-text');
 
     parentP.append(checkbox);
     parentP.append(labelDiv);
     parentP.append(hiddenLabel);
     parentP.append(barDiv);
     parentP.append(numAttributeText);
-
-    bottomDiv.children('p.displayCounter').after(parentP);
+    
+    if (bottomDiv.children('p.displayCounter').nextAll().last().length > 0) {
+    	bottomDiv.children('p.displayCounter').nextAll().last().after(parentP);
+    } else {
+    	bottomDiv.children('p.displayCounter').after(parentP);
+    }
+    
+    
 
     renderBarAndLabel(entity, barDiv, labelDiv, numAttributeText);
 }
@@ -654,31 +692,92 @@ function createLegendRow(entity, bottomDiv) {
 
 function renderBarAndLabel(entity, divBar, divLabel, spanElement) {
 
-    var sum = calcSumOfComparisonParameter(entity);
+	var combinedCount = entity.activityCount;
+	
+	var sum = combinedCount.knownYearCount + combinedCount.unknownYearCount;
+	
     var normalizedWidth = getNormalizedWidth(entity, sum);
+    
+    divBar.css("width", normalizedWidth + 5);
+    
+    if (combinedCount.knownYearCount - combinedCount.currentYearCount) {
+    
+    	var knownNormalizedWidth = getNormalizedWidth(entity, combinedCount.knownYearCount - combinedCount.currentYearCount);
+        
+        var countExplanation = (combinedCount.knownYearCount - combinedCount.currentYearCount) + ' of ' 
+    	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + " in a completed year";
 
-    divBar.css("background-color", colorToAssign);
-    divBar.css("width", normalizedWidth);
-
+        divBar.children(".known-bar").attr("title", countExplanation);
+        
+        divBar.children(".known-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", knownNormalizedWidth);
+    
+    } else {
+    
+    	divBar.children(".known-bar").hide();
+    }
+    
+    
+    if (combinedCount.unknownYearCount) {
+    	var unknownNormalizedWidth = getNormalizedWidth(entity, combinedCount.unknownYearCount);
+    	
+        var countExplanation = combinedCount.unknownYearCount + ' of ' 
+        + sum + ' have an unknown ' + COMPARISON_PARAMETERS_INFO[currentParameter].name + " year (not charted above)";
+        
+        divBar.children(".unknown-bar").attr("title", countExplanation);
+        
+        divBar.children(".unknown-bar").children(".unknown-inner-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", unknownNormalizedWidth);
+        
+    } else {
+    	
+    	divBar.children(".unknown-bar").hide();
+    }
+    
+    if (combinedCount.currentYearCount) {
+    	var currentNormalizedWidth = getNormalizedWidth(entity, combinedCount.currentYearCount);
+    	
+        var countExplanation = combinedCount.currentYearCount + ' of ' 
+    	+ sum + ' were ' + COMPARISON_PARAMETERS_INFO[currentParameter].verbName + ' in the current incomplete year (not charted above)';
+        
+        divBar.children(".current-year-bar").attr("title", countExplanation);
+        
+        divBar.children(".current-year-bar").html("&nbsp;").css("background-color", colorToAssign).css("width", currentNormalizedWidth);
+    	
+    } else {
+    	
+    	divBar.children(".current-year-bar").hide();
+    }
+    
     var entityLabelForLegend = divLabel.find(".entity-label-url");
     entityLabelForLegend.html(entity.label);
     entityLabelForLegend.ellipsis();
-    entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity) + "'></a>");
+    entityLabelForLegend.wrap("<a class='entity-url' title='" + entity.label + "' href='" + getVIVOURL(entity.entityURI) + "'></a>");
 
     spanElement.text(sum).css("font-size", "0.8em").css("color", "#595B5B");
-
 }
 
-function getVIVOURL(entity){
+function getVIVOURL(entityURI){
 	
-	var result  = subOrganizationVivoProfileURL + "uri="+entity.entityURI;
+	return subOrganizationVivoProfileURL + "uri=" + entityURI;
 	
-	return result;
 }
 
-function getTemporalVisURL(entity) {
+function getTemporalVisURL(entityURI) {
+	if (vivoDefaultNamespace) {
+		
+		/*
+		 * This means that the URI of the entity is made up of default namespace so lets make the 
+		 * short url, shorter!
+		 * */
+		if (entityURI.search(vivoDefaultNamespace) === 0) {
+			return temporalGraphCommonURL + entityURI.substring(vivoDefaultNamespace.length);			
+		}
+	} 
 	
-	return subOrganizationTemporalGraphURL + "&uri=" + entity.entityURI ;
+	/*
+	 * Default short url template involves using long uri, this in case the entity is not based off 
+	 * of default namespace.
+	 * */
+	return temporalGraphCommonURL + "?uri=" + entityURI ;
 }
 
 function getVIVOProfileURL(given_uri) {
@@ -808,7 +907,7 @@ function getNextFreeColor(entity){
 
 function getNormalizedWidth(entity, sum){
 	
-	 var maxValueOfComparisonParameter = calcMaxOfComparisonParameter(labelToEntityRecord);
+	 var maxValueOfComparisonParameter = calcMaxOfComparisonParameter(URIToEntityRecord);
 	 var normalizedWidth = 0;
 	 
 	 normalizedWidth = Math.floor(225 * (sum / maxValueOfComparisonParameter));
@@ -888,18 +987,19 @@ function generateCheckBoxes(label, checkedFlag, fontFlag){
 
 function clearRenderedObjects(){
 	
-	$.each(labelToCheckedEntities, function(index, val){
+	$.each(URIToCheckedEntities, function(index, val){
 		if($(val).is(':checked')){
 			$(val).attr("checked", false);
 			updateRowHighlighter(val);
-			removeUsedColor(labelToEntityRecord[$(val).attr("value")]);
-			removeEntityUnChecked(renderedObjects, labelToEntityRecord[$(val).attr("value")]);
+			removeUsedColor(URIToEntityRecord[$(val).attr("value")]);
+			removeEntityUnChecked(renderedObjects, URIToEntityRecord[$(val).attr("value")]);
 			removeLegendRow(val);
 			displayLineGraphs();
 		}
 	});
 	
-	labelToCheckedEntities = {};
+	URIToCheckedEntities = {};
+	
 	checkIfColorLimitIsReached();
 	updateCounter();
 
@@ -930,26 +1030,33 @@ function displayLineGraphs(){
     }
 }
 
-
-
 function removeCheckBoxFromGlobalSet(checkbox){
     //remove checkbox object from the globals
 	var value = $(checkbox).attr("value");
-	if(labelToCheckedEntities[value]){
+	/*if (labelToCheckedEntities[value]) {
 		delete labelToCheckedEntities[value];
+	}*/
+	
+	if (URIToCheckedEntities[value]) {
+		delete URIToCheckedEntities[value];
 	}
+	
 }
-
 
 /*
  * function to create a table to be 
  * used by jquery.dataTables. The JsonObject 
  * returned is used to populate the pagination table.
  */	
-function prepareTableForDataTablePagination(jsonData){
+function prepareTableForDataTablePagination(jsonData, dataTableParams){
 	
-	resetStopWordCount();
-	var checkboxCount = 0;
+//	console.log(processJSONData.currentEntityLevel);
+	
+	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS & PEOPLE") {
+		$.fn.dataTableExt.afnFiltering.push(DatatableCustomFilters.peopleOrOrganizations);
+	}
+		
+	
 	var table = $('<table>');
 	table.attr('cellpadding', '0');
 	table.attr('cellspacing', '0');
@@ -967,19 +1074,20 @@ function prepareTableForDataTablePagination(jsonData){
 	var entityLabelTH = $('<th>');
 	entityLabelTH.html('Entity Name');
 	
-	var publicationCountTH = $('<th>');
-	if($("select.comparisonValues option:selected").text() === "by Publications"){
-		publicationCountTH.html('Publication Count');
-	}else{
-		publicationCountTH.html('Grant Count');		
+	var activityCountTH = $('<th>');
+	if ($("select.comparisonValues option:selected").text() === "by Publications") {
+		activityCountTH.html('Publication Count');
+	} else {
+		activityCountTH.html('Grant Count');		
 	}
+	activityCountTH.attr("id", "activity-count-column");
 
 	var entityTypeTH = $('<th>');
 	entityTypeTH.html('Entity Type');
 
 	tr.append(checkboxTH);
 	tr.append(entityLabelTH);
-	tr.append(publicationCountTH);
+	tr.append(activityCountTH);
 	tr.append(entityTypeTH);
 	
 	thead.append(tr);
@@ -987,20 +1095,26 @@ function prepareTableForDataTablePagination(jsonData){
 	table.append(thead);
 	
 	var tbody = $('<tbody>');
+	var checkboxCount = 0;
 	
-	$.each(labelToEntityRecord, function(index, val){
+	$.each(URIToEntityRecord, function(index, val) {
 		var entityTypesWithoutStopWords = removeStopWords(val);
 		var row = $('<tr>'); 
 		
 		var checkboxTD = $('<td>');
-		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' + entityCheckboxSelectorDOMClass + '" value="' + index + '"'+'/>');
+		checkboxTD.html('<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' 
+								+ entityCheckboxSelectorDOMClass + '" value="' 
+								+ val.entityURI + '"'+'/>');
 		
 		var labelTD =  $('<td>');
 		labelTD.css("width", "100px");
-		labelTD.html(index);
+		labelTD.html(val.label);
 		
 		var publicationCountTD =  $('<td>');
-		publicationCountTD.html(calcSumOfComparisonParameter(val));
+		
+		var combinedCount = val.activityCount;
+		
+		publicationCountTD.html(combinedCount.knownYearCount + combinedCount.unknownYearCount);
 		
 		var entityTypeTD =  $('<td>');
 		entityTypeTD.html(entityTypesWithoutStopWords);
@@ -1017,10 +1131,8 @@ function prepareTableForDataTablePagination(jsonData){
 	table.append(tbody);
 	tableDiv.append(table);
 	
-	var searchBarParentContainerDIVClass = "searchbar";
-	
 	var entityListTable = $('#datatable').dataTable({
-	    "sDom": '<"' + searchBarParentContainerDIVClass + '"f><"filterInfo"i><"paginatedtabs"p><"table-separator"><"datatablewrapper"t>',
+	    "sDom": '<"' + dataTableParams.searchBarParentContainerDIVClass + '"f><"filterInfo"i><"' + dataTableParams.paginationContainerDIVClass + '"p><"table-separator"><"datatablewrapper"t>',
 	    "aaSorting": [
 	        [2, "desc"], [1,'asc']
 	    ],
@@ -1045,7 +1157,7 @@ function prepareTableForDataTablePagination(jsonData){
 	});
 	
 	
-	var searchInputBox = $("." + searchBarParentContainerDIVClass).find("input[type=text]");
+	var searchInputBox = $("." + dataTableParams.searchBarParentContainerDIVClass).find("input[type=text]");
 	
 	searchInputBox.after("<span id='reset-search' title='Clear Search query'>X</span>");
 	
@@ -1053,73 +1165,118 @@ function prepareTableForDataTablePagination(jsonData){
 		entityListTable.fnFilter("");
 	});
 	
-	/*
-	var filterInfo = $(".filterInfo").detach();
-	$("#infoContainer").append(filterInfo);
-	*/
+	return entityListTable;
+}
+
+
+/*
+ * function to create a table to be 
+ * used by jquery.dataTables. The JsonObject 
+ * returned is used to populate the pagination table.
+ */	
+function reloadDataTablePagination(preselectedEntityURIs, jsonData){
 	
+	if (processJSONData.currentEntityLevel.toUpperCase() === "ORGANIZATIONS & PEOPLE") {
+		
+		/*
+		 * This will make sure that duplicate filters are not added.
+		 * */
+		if($.inArray(DatatableCustomFilters.peopleOrOrganizations, $.fn.dataTableExt.afnFiltering) < 0) {
+			$.fn.dataTableExt.afnFiltering.push(DatatableCustomFilters.peopleOrOrganizations);
+		}
+	} else {
+		
+		var indexOfPeopleOrOrganizationFilter = $.inArray(DatatableCustomFilters.peopleOrOrganizations, $.fn.dataTableExt.afnFiltering);
+		
+		if (indexOfPeopleOrOrganizationFilter >= 0) {
+			$.fn.dataTableExt.afnFiltering.splice(indexOfPeopleOrOrganizationFilter, 1);
+		}
+	}
+	
+	var currentDataTable = $('#datatable').dataTable();
+	
+	currentDataTable.fnClearTable();
+	
+	if ($("select.comparisonValues option:selected").text() === "by Publications") {
+		$("#activity-count-column").html('Publication Count');
+	} else {
+		$("#activity-count-column").html('Grant Count');		
+	}
+	
+	function addNewRowAfterReload(entity) {
+		
+		var checkboxTD = '<div class="disabled-checkbox-event-receiver">&nbsp;</div><input type="checkbox" class="' 
+			+ entityCheckboxSelectorDOMClass 
+			+ '" value="' 
+			+ entity.entityURI + '"' +'/>';
+
+		var labelTD =  entity.label;
+		
+		var combinedCount = entity.activityCount;
+		
+		var publicationCountTD = combinedCount.knownYearCount + combinedCount.unknownYearCount;
+		
+		var entityTypeTD =  removeStopWords(entity);
+		
+		var newRow = [checkboxTD,
+		  labelTD,
+		  publicationCountTD,
+		  entityTypeTD];
+		
+		/*
+		 * Dont redraw the table, so no sorting, no filtering.
+		 * */
+		currentDataTable.fnAddData(newRow, false);
+	}
+	
+	/*
+	 * This will ensure that currently selected entities are added first in the table,
+	 * to make sure that they are "visible" in the DOM. This so that our manual trigger
+	 * for selecting this checkboxes on page load, actually works.  
+	 * */
+	$.each(preselectedEntityURIs, function(index, uri) {
+		if (URIToEntityRecord[uri]) {
+			addNewRowAfterReload(URIToEntityRecord[uri]);
+		}
+	});
+	
+	
+	$.each(URIToEntityRecord, function(index, val) {
+		
+		/*
+		 * Don't consider already added pre-selected entities. 
+		 * */
+		if ($.inArray(index, preselectedEntityURIs) < 0) {
+			addNewRowAfterReload(val);
+		}
+	});
+	
+	/*
+	 * We should change to the first page so that checkboxes are selectable.
+	 * */
+	currentDataTable.fnPageChange('first');
+	
+	return currentDataTable;
 }
 
 function updateRowHighlighter(linkedCheckBox){
 	linkedCheckBox.closest("tr").removeClass('datatablerowhighlight');
 }
 
+function removeStopWords(val) {
+	
+	return $.map(val.organizationType, function(type, i){
 
-function resetStopWordCount(){
-	stopWordsToCount["Person"] = 0;
-	stopWordsToCount["Organization"] = 0;
-}
-
-function removeStopWords(val){
-	var typeStringWithoutStopWords = "";
-	$.each(val.organizationType, function(index, value){
-		if(value == "Person"){
-			stopWordsToCount["Person"]++;
-		}else if(value == "Organization"){
-			stopWordsToCount["Organization"]++;
-		}else{
-			typeStringWithoutStopWords += ', '+ value; 
+		if ($.inArray(type, STOP_WORDS_FOR_TABLE) < 0) {
+			return (type);
 		}
-	});
-	//console.log(stopWordsToCount["Person"],stopWordsToCount["Organization"]);
-	return typeStringWithoutStopWords.substring(1, typeStringWithoutStopWords.length);
+	}).join(", ");
 }
 
 function setEntityLevel(entityLevel){
-	//$('#entitylevelheading').text(' - ' + toCamelCase(entityLevel) + ' Level').css('font-style', 'italic');
 	$('#entityleveltext').text('  ' + entityLevel.toLowerCase()).css('font-style', 'italic');
 	$('#entityHeader').text(entityLevel).css('font-weight', 'bold');
 	$('#headerText').css("color", "#2485ae");
-}
-
-function getEntityVisMode(jsonData){
-	
-	var entityLevels = new Array();
-	
-	$.each(jsonData, function(index, val) {
-		if (val.visMode ==  "PERSON"){
-			entityLevels.push("People");
-		} else {
-			entityLevels.push("Organizations");
-		}
-	});
-	
-	var uniqueEntityLevels = $.unique(entityLevels);
-
-	/*
-	 * This case is when organizations & people are mixed because both are directly attached
-	 * to the parent organization. 
-	 * */
-	if (uniqueEntityLevels.length > 1) {
-		entityLevel = "Organizations & People";
-	} else if (uniqueEntityLevels.length === 1) {
-		entityLevel = uniqueEntityLevels[0]; 
-	} else {
-		/* To provide graceful degradation set entity level to a default error message.*/
-		entitylevel = "ENTITY LEVEL UNDEFINED ERROR";
-	}
-	
-	return entityLevel;
 }
 
 function toCamelCase(string){
@@ -1179,7 +1336,7 @@ function enableUncheckedEntities(){
 
 function checkIfColorLimitIsReached(){
 	
-	if (getSize(labelToCheckedEntities) >= 10) {
+	if (getSize(URIToCheckedEntities) >= 10) {
 		disableUncheckedEntities();
 	} else {
 		enableUncheckedEntities();
@@ -1191,12 +1348,17 @@ function setTickSizeOfAxes(){
 	var checkedLabelToEntityRecord = {};
 	var yearRange;
 	
-	$.each(labelToCheckedEntities, function(index, val){
-		checkedLabelToEntityRecord[index] = labelToEntityRecord[index];
+	$.each(URIToCheckedEntities, function(index, val){
+		checkedLabelToEntityRecord[index] = URIToEntityRecord[index];
 	});
 	
 	var normalizedYearRange = getNormalizedYearRange();
 	
-    setLineWidthAndTickSize(normalizedYearRange.normalizedRange, FlotOptions);     
-	setTickSizeOfYAxis(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), FlotOptions);
+    FlotOptions.xaxis.tickSize = 
+		TickSize.getTickSize(normalizedYearRange.normalizedRange, 'x');
+
+    FlotOptions.series.lines.lineWidth = LineWidth.getLineWidth(FlotOptions.xaxis.tickSize);
+    
+	FlotOptions.yaxis.tickSize = 
+			TickSize.getTickSize(calcMaxWithinComparisonParameter(checkedLabelToEntityRecord), 'y');
 }

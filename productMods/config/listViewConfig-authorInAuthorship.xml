@@ -4,45 +4,32 @@
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
 <list-view-config>
-    <query-base>    
+    <query-select>    
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?authorship             
-                        ?infoResource ?infoResourceName 
-                        ?dateTime WHERE {
-            ?subject ?property ?authorship  
-            OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
-                       ?infoResource rdfs:label ?infoResourceName                                         
-                       OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
-                                  ?dateTimeValue core:dateTime ?dateTime  
-                       } 
-            }                                                           
-        } ORDER BY DESC(?dateTime) ?infoResourceName   
-    </query-base>
-    
-    <query-collated>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
-        
-        SELECT DISTINCT ?subclass 
+        SELECT DISTINCT <collated> ?subclass </collated> 
                         ?authorship
                         ?infoResource ?infoResourceName 
                         ?dateTime WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
                        ?infoResource rdfs:label ?infoResourceName 
+                       <collated> 
                        OPTIONAL { ?subclass rdfs:subClassOf core:InformationResource .
                                   ?infoResource a ?subclass  
-                       }                                            
+                       }     
+                       </collated>                       
                        OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
                                   ?dateTimeValue core:dateTime ?dateTime  
-                       } 
-            }                                                           
-        } ORDER BY ?subclass DESC(?dateTime) ?infoResourceName   
-    </query-collated>
+                       }                                                      
+            } 
+            <critical-data-required>
+            FILTER ( bound(?infoResource) )
+            </critical-data-required>
+        } ORDER BY <collated> ?subclass </collated> DESC(?dateTime) ?infoResourceName   
+    </query-select>
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;

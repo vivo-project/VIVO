@@ -1,5 +1,126 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+/* <------ INDIVIDUAL INTRO - LEFT SIDE CONTENT */
+ul#individual-tools {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 20px;
+    list-style-type: none;
+}
+ul#individual-tools li {
+    padding-right: 9px;
+    float: left;
+}
+.qtip-content h5 {
+    margin: 0;
+    padding: 0;
+}
+input#uriLink {
+    margin: 0;
+    width: 350px;
+    font-size: .8em;
+}
+a.close {
+    float: right;
+    margin-right: .3em;
+    font-size: .8em;
+}
+ul#individual-phone {
+    clear: both;
+    list-style-type: circle;
+}
+ul#individual-phone li {
+    font-size: .875em;
+}
+ul#individual-phone li:last-child {
+    margin-bottom: 10px;
+}
+ul#individual-phone li:first-child {
+    margin-top: 10px;
+}
+.icon-phone, .icon-email {
+    padding-right: 5px;
+}
+#individual-intro ul.individual-urls {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+#individual-intro ul.individual-urls li {
+    font-size: .875em;
+    line-height: 1.7em;
+}
+ul.individual-emails {
+    clear: both;
+    padding-left: 0;
+}
+#additional-emails li:last-child {
+    margin-bottom: 18px;
+}
+ul.individual-emails li {
+    font-size: .875em;
+    line-height: 1.3em;
+}
+ul#webpages{
+    margin-bottom: 5px;
+}
+ul#webpages li,
+ul#primary-email li,
+ul#additional-emails li {
+    word-wrap: break-word;
+}
+#phoneNumber {
+    margin-top: 10px;
+}
+/* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
+#individual-info.withThumb {
+    width: 78%;
+}
+#individual-intro .individual-overview {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    display: inline;
+    clear: both;
+    float: left;
+}
+/* <------ INDIVIDUAL INTRO FOR PERSON*/
+#individual-intro.person {
+    margin-bottom: 30px;
+    position: relative;
+    width: 100%;
+}
+#individual-intro.person #individual-info {
+    float: left;
+    width: 78%;
+    margin-bottom: 20px;
+}
+#individual-intro.person .individual-overview {
+    width: 100%;
+    float: none;
+}
+ul#individual-tools-people {
+    margin-top: 5px;
+    height: 20px;
+    padding-bottom: 20px;
+    list-style-type: none;
+    clear: both;
+    margin-bottom: 15px;
+}
+ul#individual-tools-people li {
+    position: relative;
+    display: block;
+    padding-right: 7px;
+    float: left;
+    margin-bottom: 20px;
+}
+ul.individual-urls-people {
+    clear: both;
+    list-style-type: circle;
+    padding-left: 24px;
+}
+ul.individual-urls-people li {
+    font-size: .875em;
+    line-height: 1.3em;
+}
 /* <------ INDIVIDUAL CORE:OVERVIEW */
 #overview {
     clear: left;
@@ -18,9 +139,43 @@ div.overview-value :last-child {
     padding-top: 10px;
     width: 100%;
 }
+/* <------ INDIVIDUAL VISUALIZATION */
+#visualization {
+    padding: 0 0 20px 20px;
+    padding-top: 0;
+    float: right;
+    background-color: #fff;
+}
+#visualization h3 {
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.publication-year-range {
+    display: block;
+    padding-top: 5px;
+}
+/* <------ COAUTHORS */
+#co-authors {
+    padding: 0 20px 30px 20px;
+}
+img.co-author {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+#co-authors h3 {
+    margin-bottom: 10px;
+}
+#co-authors ul li {
+    display: block;
+    float: left;
+}
+p.view-all-coauthors {
+    clear: both;
+    width:  200px;
+    text-align: left;
+}
 /* <------ INDIVIDUAL TEMPORAL GRAPH */
 #temporal-graph {
-    float: right;
     padding: 0 3px 20px 0;
     background-color: #fff;
 }
@@ -32,6 +187,21 @@ div.overview-value :last-child {
     padding-right: 10px;
     vertical-align: text-top;
 }
+
+/* <------ INDIVIDUAL MAP O' SCIENCE */
+#map-of-science {
+    padding: 0 3px 20px 0;
+    background-color: #fff;
+}
+#map-of-science h3 {
+    margin: 0;
+    padding: 0;
+}
+#map-of-science h3 img {
+    padding-right: 10px;
+    vertical-align: text-top;
+}
+
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;
@@ -43,6 +213,7 @@ ul#individual-personInPosition li {
 ul#individual-personInPosition li:last-child {
     padding-bottom: 15px;
 }
+
 /* <------ RESEARCH AREA */
 ul#individual-hasResearchArea {
     padding-bottom: 24px;
@@ -55,4 +226,31 @@ ul#individual-hasResearchArea li {
 }
 ul#individual-hasResearchArea li:first-child {
     padding-left: 0;
+}
+
+/* <------ QR Code */
+h5.qrCode {
+    margin-top: 1em;
+    padding: 0;
+}
+span#qrCodeImage {
+    position: absolute;
+    top: -9em;
+    left: 2em;
+    border: solid 1px #ccc;
+    background: white;
+}
+span#qrCodeImage img {
+    padding: 1.7em 1.7em 0 1.7em;
+}
+a.qrCloseLink {
+    float: right;
+    margin-right: .5em;
+    font-size: .8em;
+}
+/* MISCELLANEOUS------>  */
+.listDateTime {
+    padding: 0.2em 0.4em;
+    font-size: 0.8em;
+    background: #f4f4f4;
 }

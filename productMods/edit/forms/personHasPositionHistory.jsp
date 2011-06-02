@@ -10,21 +10,20 @@
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
@@ -125,8 +124,8 @@
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
-    ?startNode  <${dateTimeValue}> ?startField.value .
-    ?startNode  <${dateTimePrecision}> ?startField.precision .
+    ?startNode  <${dateTimeValue}> ?startField-value .
+    ?startNode  <${dateTimePrecision}> ?startField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
@@ -134,8 +133,8 @@
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
-    ?endNode  <${dateTimeValue}> ?endField.value .
-    ?endNode  <${dateTimePrecision}> ?endField.precision .
+    ?endNode  <${dateTimeValue}> ?endField-value .
+    ?endNode  <${dateTimePrecision}> ?endField-precision .
 </v:jsonset>
 
 <%-- Queries for editing an existing role --%>
@@ -284,8 +283,8 @@ type is returned and we don't get a match to the select element options. --%>
     "sparqlForExistingLiterals" : {
         "orgLabel"           : "${orgLabelQuery}",
         "positionTitle"      : "${positionTitleQuery}",
-        "startField.value"   : "${existingStartDateQuery}",
-        "endField.value"     : "${existingEndDateQuery}"
+        "startField-value"   : "${existingStartDateQuery}",
+        "endField-value"     : "${existingEndDateQuery}"
     },
     "sparqlForExistingUris" : {
         "org"               : "${orgQuery}",
@@ -294,8 +293,8 @@ type is returned and we don't get a match to the select element options. --%>
         "intervalNode"      : "${existingIntervalNodeQuery}", 
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
-        "startField.precision": "${existingStartPrecisionQuery}",
-        "endField.precision"  : "${existingEndPrecisionQuery}"
+        "startField-precision": "${existingStartPrecisionQuery}",
+        "endField-precision"  : "${existingEndPrecisionQuery}"
     },
     "fields" : {
       "positionTitle" : {
@@ -465,7 +464,7 @@ type is returned and we don't get a match to the select element options. --%>
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
-<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="acUrl" value="/autocomplete?tokenize=true" />
 
 <script type="text/javascript">
 var customFormData  = {

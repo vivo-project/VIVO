@@ -129,38 +129,34 @@
          
                 var totalPublicationCount = knownYearPublicationCounts + unknownYearPublicationCounts;
                 
-                <#if sparklineVO.shortVisMode>
-         
-                    <#-- We want to display how many publication counts were considered, so this is used to calculate this. -->
-         
-                    var shortSparkRows = sparklineDataView.getViewRows();
-                    var renderedShortSparks = 0;
-                    $.each(shortSparkRows, function(index, value) {
-                        renderedShortSparks += data.getValue(value, 1);
-                    });
-         
-                    /*
-                    In case that there are only unknown publications we want the text to mention these counts,
-                    which would not be mentioned in the other case because the renderedShortSparks only hold counts
-                    of publications which have any date associated with it.
-                    */
-                    var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedShortSparks;
-                    
-                    if (totalPubs === 1) {
-                        var pubDisplay = "publication";
-                    } else {
-                        var pubDisplay = "publications";
-                    }
-                    
-                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> "+ pubDisplay +"<br/></span>");
-            
-                    var sparksText = ' within the last 10 years';
-                    
-                    if (totalPubs !== totalPublicationCount) {
-                        sparksText += ' (' + totalPublicationCount + ' total)';
-                    }
-             
-                 <#else>
+                                <#if sparklineVO.shortVisMode>
+
+                                    <#-- We want to display how many publication counts were considered, so this is used to calculate this. -->
+
+                                    var shortSparkRows = sparklineDataView.getViewRows();
+                                    var renderedShortSparks = 0;
+                                    $.each(shortSparkRows, function(index, value) {
+                                        renderedShortSparks += data.getValue(value, 1);
+                                    });
+
+                                    /*
+                                    In case that there are only unknown publications we want the text to mention these counts,
+                                    which would not be mentioned in the other case because the renderedShortSparks only hold counts
+                                    of publications which have any date associated with it.
+                                    */
+                                    var totalPubs = onlyUnknownYearPublications ? unknownYearPublicationCounts : renderedShortSparks;
+
+                                    $('#${sparklineContainerID} td.sparkline_number').text(totalPubs + " in the last 10 full").css("font-weight", "bold").css("font-size",".85em").attr("class", "grey");
+
+                                    var sparksText = "years";
+
+                                    if (totalPubs !== totalPublicationCount) {
+                                        sparksText += ' (' + totalPublicationCount + ' total)' ; 
+                                    }
+                                    
+                                    sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application.' />" ;
+
+                                 <#else>
             
                     /*
                      * Sparks that will be rendered will always be the one's which has 

@@ -77,7 +77,7 @@
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>testAdmin</td>
+	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -155,8 +155,13 @@
 	<td>Dr.</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>positionType</td>
+	<td>label=Faculty Position</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>startField.year</td>
+	<td>startField-year</td>
 	<td>2010</td>
 </tr>
 <tr>
@@ -190,8 +195,13 @@
 	<td>Ms.</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>positionType</td>
+	<td>label=Faculty Position</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>startField.year</td>
+	<td>startField-year</td>
 	<td>2009</td>
 </tr>
 <tr>
@@ -225,8 +235,13 @@
 	<td>Dr.</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>positionType</td>
+	<td>label=Faculty Position</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>startField.year</td>
+	<td>startField-year</td>
 	<td>2008</td>
 </tr>
 <tr>
@@ -260,8 +275,13 @@
 	<td>Mrs.</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>positionType</td>
+	<td>label=Faculty Position</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>startField.year</td>
+	<td>startField-year</td>
 	<td>2007</td>
 </tr>
 <tr>
@@ -326,7 +346,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Who do you want to compare?</td>
+	<td>What do you want to compare?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -341,22 +371,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent, Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Zink, Zoe</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Agent</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,22 +391,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Johnson, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Agent</td>
 	<td></td>
 </tr>
 <tr>
@@ -446,11 +456,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2011</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Year</td>
 	<td></td>
 </tr>
@@ -460,66 +465,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 3 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//span[@id='legend-row-header']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Smith, Sally</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Zink, Zoe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Johnson, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='Furter, Frank']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='Smith, Sally']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='Zink, Zoe']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='Johnson, Jane']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 4 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Furter, Frank</td>
 	<td></td>
@@ -527,11 +472,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Smith, Sally</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Zink, Zoe</td>
 	<td></td>
 </tr>
 <tr>
@@ -541,12 +481,92 @@
 </tr>
 <tr>
 	<td>comment</td>
+	<td class="comment">Clear visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
 	<td class="comment">Check out temporal graphs for dept grants</td>
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Temporal Graph</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development - Temporal Graph Visualization</td>
+	<td></td>
+</tr>
+<tr>
 	<td>selectAndWait</td>
-	<td>LOCATOR_DETECTION_FAILED</td>
+	<td>//div[@id='leftUpper']/div/select</td>
 	<td>label=by Grants</td>
 </tr>
 <tr>
@@ -566,12 +586,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Who do you want to compare?</td>
+	<td>What do you want to compare?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Records 1 - 3 of 3</td>
+	<td>Records 1 - 4 of 4</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,7 +606,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent, Faculty Member</td>
+	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,11 +621,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Johnson, Jane</td>
 	<td></td>
 </tr>
@@ -616,7 +631,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent</td>
+	<td>Smith, Sally</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0</td>
 	<td></td>
 </tr>
 <tr>
@@ -671,11 +691,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2011</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Year</td>
 	<td></td>
 </tr>
@@ -701,32 +716,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Zink, Zoe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Clear</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Johnson, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Zink, Zoe</td>
+	<td>link=Smith, Sally</td>
 	<td></td>
 </tr>
 <tr>
@@ -816,6 +806,51 @@
 </tr>
 <tr>
 	<td>comment</td>
+	<td class="comment">Clear visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
 	<td class="comment">Check out temporal graphs for college pubs</td>
 	<td></td>
 </tr>
@@ -861,7 +896,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Who do you want to compare?</td>
+	<td>What do you want to compare?</td>
 	<td></td>
 </tr>
 <tr>
@@ -876,7 +911,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent, Department</td>
+	<td>Department</td>
 	<td></td>
 </tr>
 <tr>
@@ -936,11 +971,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2011</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Year</td>
 	<td></td>
 </tr>
@@ -960,18 +990,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//span[@id='legend-row-header']/a</td>
+	<td>comment</td>
+	<td class="comment">Clear visualization cache</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 organizations.</td>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Child Development</td>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -980,8 +1045,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Temporal Graph</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>College of Human Ecology - Temporal Graph Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
 	<td>selectAndWait</td>
-	<td>LOCATOR_DETECTION_FAILED</td>
+	<td>//div[@id='leftUpper']/div/select</td>
 	<td>label=by Grants</td>
 </tr>
 <tr>
@@ -1001,7 +1101,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Who do you want to compare?</td>
+	<td>What do you want to compare?</td>
 	<td></td>
 </tr>
 <tr>
@@ -1021,7 +1121,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Agent, Department</td>
+	<td>Department</td>
 	<td></td>
 </tr>
 <tr>
@@ -1076,11 +1176,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>2011</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Year</td>
 	<td></td>
 </tr>
@@ -1096,21 +1191,6 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Child Development</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Clear</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 organizations.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
 	<td>link=Child Development</td>
 	<td></td>
 </tr>

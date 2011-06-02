@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- ====================================================================== 
+	 Compile the JSPs to check for compile errors.
+	 
+	 As this stands, you need to be sure that the "war" or "deploy" step in the 
+	 main build has already happened. There is no check here to ensure that the 
+	 ".build/war" directory is current.
+	     ====================================================================== -->
+<project name="Check JSPs for compile errors" default="all" basedir="../..">
+	<!-- Get tomcat.home and webapp.name from the deploy.properties file. -->
+	<property name="deploy.properties.file" location="deploy.properties" />
+	<fail message="You must create a &quot;${deploy.properties.file}&quot; file.">
+		<condition>
+			<not>
+				<available file="${deploy.properties.file}" />
+			</not>
+		</condition>
+	</fail>
+	<property file="${deploy.properties.file}" />
+	<fail unless="tomcat.home"
+	      message="${deploy.properties.file} must contain a value for tomcat.home" />
+	<fail unless="webapp.name"
+	      message="${deploy.properties.file} must contain a value for webapp.name" />
+
+	<property name="build.jsp.dir" location=".build/jsp" />
+	<property name="build.war.dir" location=".build/war" />
+
+	<!-- Where are the Tomcat classes? -->
+	<path id="jasper.classpath">
+		<fileset dir="${tomcat.home}/bin">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${tomcat.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<!-- Add in the project classes -->
+	<path id="compile.classpath">
+		<path refid="jasper.classpath" />
+		<pathelement location="${build.war.dir}/WEB-INF/classes" />
+		<fileset dir="${build.war.dir}/WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Define the Jasper task -->
+	<taskdef classname="org.apache.jasper.JspC" name="jasper2">
+		<classpath refid="jasper.classpath" />
+	</taskdef>
+
+	<target name="clean"
+	        description="Delete all build artifacts, so the next build starts from a clean slate">
+		<delete dir="${build.jsp.dir}" />
+	</target>
+
+	<target name="prepare">
+		<mkdir dir="${build.jsp.dir}" />
+		<mkdir dir="${build.jsp.dir}/src" />
+		<mkdir dir="${build.jsp.dir}/classes" />
+	</target>
+
+	<target name="jspc" depends="prepare">
+		<jasper2 validateXml="false"
+		         uriroot="${build.war.dir}"
+		         webXmlFragment="${build.jsp.dir}generated_web.xml"
+		         outputDir="${build.jsp.dir}/src"
+		         trimSpaces="true"
+		         failOnError="true" />
+	</target>
+
+	<target name="compile" depends="jspc">
+		<javac destdir="${build.jsp.dir}/classes"
+		       optimize="off"
+		       debug="off"
+		       failonerror="true"
+			   includeantruntime="false"
+		       srcdir="${build.jsp.dir}/src"
+		       excludes="**/*.smap">
+			<classpath refid="compile.classpath" />
+			<include name="**" />
+			<exclude name="tags/**" />
+		</javac>
+	</target>
+
+	<target name="all"
+	        depends="clean, compile"
+	        description="Compile the JSPs to classfiles, just to check for compile errors." />
+</project>

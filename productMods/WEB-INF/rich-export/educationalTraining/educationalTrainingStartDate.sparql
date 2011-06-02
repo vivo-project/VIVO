@@ -1,0 +1,10 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?date ?property ?object .
+} WHERE {
+     PERSON_URI core:educationalTraining ?educationalTraining . 
+     ?educationalTraining core:dateTimeInterval ?dateTimeInterval .
+     ?dateTimeInterval core:start ?date .
+     ?date ?property ?object .
+}

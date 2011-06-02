@@ -19,13 +19,12 @@ This is intended to create a set of statements like:
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.EditConfiguration" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.StartYearBeforeEndYear"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
 
@@ -49,9 +48,9 @@ This is intended to create a set of statements like:
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
 		%> 
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.Field"%>
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field"%>
 <%@page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.DateTimeIntervalValidation"%><c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
+<%@page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%><c:set var="inversePredicate"><%=op.getURIInverse()%></c:set> <%
     }else{
     	%> <c:set var="inversePredicate"></c:set> <%
     }
@@ -163,8 +162,8 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToStart}> ?startNode .    
     ?startNode  <${type}> <${dateTimeValueType}> .
-    ?startNode  <${dateTimeValue}> ?startField.value .
-    ?startNode  <${dateTimePrecision}> ?startField.precision .
+    ?startNode  <${dateTimeValue}> ?startField-value .
+    ?startNode  <${dateTimePrecision}> ?startField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForEnd">
@@ -172,8 +171,8 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     ?intervalNode  <${type}> <${intervalType}> .
     ?intervalNode <${intervalToEnd}> ?endNode .
     ?endNode  <${type}> <${dateTimeValueType}> .
-    ?endNode  <${dateTimeValue}> ?endField.value .
-    ?endNode  <${dateTimePrecision}> ?endField.precision .
+    ?endNode  <${dateTimeValue}> ?endField-value .
+    ?endNode  <${dateTimePrecision}> ?endField-precision .
 </v:jsonset>
 
 <v:jsonset var="n3ForGrantLabel">
@@ -284,16 +283,16 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
     "sparqlForUris" : {   },
     "sparqlForExistingLiterals" : { 
         "grantLabel":"${grantLabelQuery}" , 
-        "startField.value"   : "${existingStartDateQuery}",
-        "endField.value"     : "${existingEndDateQuery}"  
+        "startField-value"   : "${existingStartDateQuery}",
+        "endField-value"     : "${existingEndDateQuery}"  
     },
     "sparqlForExistingUris" : { 
         "grant":"${grantQuery}",
         "intervalNode"      : "${existingIntervalNodeQuery}",
         "startNode"         : "${existingStartNodeQuery}",
         "endNode"           : "${existingEndNodeQuery}",
-        "startField.precision": "${existingStartPrecisionQuery}",
-        "endField.precision"  : "${existingEndPrecisionQuery}" 
+        "startField-precision": "${existingStartPrecisionQuery}",
+        "endField-precision"  : "${existingEndPrecisionQuery}" 
     },
     "fields" : {  
       "grant" : {
@@ -445,7 +444,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
 </form>
 
 
-<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="acUrl" value="/autocomplete?tokenize=true" />
 <c:url var="sparqlQueryUrl" value="/ajax/sparqlQuery" />
 
 <%-- Must be all one line for JavaScript. --%>
