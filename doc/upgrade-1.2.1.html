@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>VIVO Release 1 V1.2.1 Upgrade Guide</title>
+        <link rel="stylesheet" href="./css/doc.css" media="screen" />
+    </head>
+    <body>
+        <div id="branding" role="banner">
+            <h1 class="vivo-logo"><a href="/"><span class="displace">VIVO</span></a></h1>
+        </div>
+        <!-- Start of content -->
+        <div id="wrapper-content" role="main">
+            <h1>VIVO Release 1 V1.2.1 Upgrade Guide</h1>
+            <small>
+                June 1, 2011 
+            </small>
+            <hr><!-- Upgrade process for V1.2.1 -->
+			<h2 id="upgrade">Upgrade process for V1.2 to V1.2.1</h2>
+			<p><strong>NOTE:</strong> If you are upgrading from V1.1 or V.1.1.1, please see the <a href="http://sourceforge.net/projects/vivo/files/Project%20Documentation/VIVO%20Release%201%20V1.2%20Upgrade%20Guide.pdf/download">upgrade guide for V1.2</a>.</p>
+            <toc>
+                <ol class="roman1">
+                    <li>
+                        <a href="#preparation">Before Performing the Upgrade</a>
+                    </li>
+                    <li>
+                        <a href="#upgrade_process">The Upgrade Process</a>
+                    </li>
+            	</ol>
+            </toc>
+            <h3 id="preparation">I. Before Performing the Upgrade</h3>
+            <p>
+                Please ensure that backups are created of the: 
+            </p>
+            <ul style="list-style-type: square;">
+                <li>
+                    Tomcat webapps directory 
+                </li>
+                <li>
+                    Original source directory 
+                </li>
+                <li>
+                    MySQL database (mysqldump) 
+                </li>
+            </ul>
+            <p>
+                The upgrade process is similar to the original install process with 
+                the following EXCEPTIONS: 
+            </p>
+            <ul>
+                <li>
+                    DO NOT reinstall MySQL or recreate the MySQL database. Please 
+                    ensure that you back-up the MySQL database. Also note that VIVO V1.2.1 will  
+                    not run on older versions of MySQL that may have worked with V1.1.1. 
+                    Be sure to run VIVO V1.2.1 with MySQL 5.1 or higher.  Using unsupported  
+                    versions may result in strange error messages related to table formatting or 
+                    other unexpected problems.
+                </li>
+                <li>
+                    It is not necessary to re-add RDF data. 
+                </li>
+                <li>
+                    First-time login of the administrator account after the upgrade 
+                    process is complete will use the password previously set, NOT the  
+                    default password used on the first login after the initial 
+                    installation. 
+                </li>
+            </ul>
+            <h3 id="upgrade_process">II. The Upgrade Process</h3>
+            <p>
+                1. Download the new distribution file and unpack it into a new 
+                source directory. 
+            </p>
+            <p>
+                2. Create deploy.properties, using the same values as in your 
+                previous installation and set values for the new variables. 
+			</p>
+            <p>
+                3. Apply any previous changes you have made to the new source 
+                directory. 
+            </p>
+            <blockquote>
+                <strong>Special notes regarding source files</strong>
+                <ul>
+                    <li>
+                        This process assumes any changes made to the application were 
+                        made in the source directory and deployed, and were not made directly  
+                        within the Tomcat webapps directory. 
+                    </li>
+                    <li>
+                        In many cases, simply copying the modified files from your 
+                        original source directory will not work since the files on which they  
+                        are based have changed. It will be necessary to inspect the new source 
+                        files and add any changes to them at that time. 
+                    </li>
+                    <li>
+                        NIH-funded VIVO implementations will need to apply the Google 
+                        Analytics Tracking Code (GATC) to <code>googleAnalytics.ftl</code>
+                        in the theme: <pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
+                        A sample <code>googleAnalytics.ftl</code>
+                        is included in the built-in theme. This file serves only as an example, 
+                        and you must replace the tracking code shown with your institution's own  
+                        tracking code. For additional information about the GATC for the NIH-funded 
+                        VIVO implementation sites and a copy of your institution's tracking code, see  
+                        the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO Google Analytics wiki page</a>.
+                    </li>
+                 </ul>
+            </blockquote>
+            <p>
+                4. If you had modified <code>web.xml</code>
+                to configure the Pellet Reasoner (as described
+                in the installation instructions), repeat that modification.
+            </p>
+            <p>
+                5. Stop Apache Tomcat and run ant by typing: <code>ant all</code>
+            </p>
+            <p>
+                6. Start Apache Tomcat and log in to VIVO.
+            </p>
+         <!-- end of content -->
+        <div id="footer" role="contentinfo">
+            <p class="copyright">
+                <small>
+                    &copy;2011 
+                    All Rights Reserved 
+                </small>
+                | Powered by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+            </p>
+            <div id="nav" role="navigation">
+                <ul id="footer-nav" role="list">
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/about">About</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://vivoweb.org/contact">Contact Us</a>
+                    </li>
+                    <li role="listitem">
+                        <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

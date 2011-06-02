@@ -319,7 +319,7 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
     "urisInScope"    : { "inverseRolePredicate" : "${inversePredicate}" },
     "literalsInScope": { },
     "urisOnForm"     : [ "roleActivity", "roleActivityType" ],
-    "literalsOnForm" : [ "activityLabel", "roleLabel", "startYear", "endYear" ],
+    "literalsOnForm" : [ "activityLabel", "roleLabel" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
