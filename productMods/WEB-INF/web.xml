@@ -181,21 +181,6 @@
   </listener> 
     
   <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.EditorEditingPolicySetup
-    </listener-class>
-  </listener>
-
-  <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CuratorEditingPolicySetup
-    </listener-class>
-  </listener>
-
-  <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.DbAdminEditingPolicySetup
-    </listener-class>
-  </listener>
- 
-  <listener>
     <listener-class>
         edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
     </listener-class>
