@@ -28,12 +28,12 @@
 		var response = harvestProgressResponse;
 		var json = eval("(" + response + ")");
 
+		var logAppend = json.progressSinceLastCheck;
+		var progressTextArea = document.getElementById("progressTextArea");
+		progressTextArea.innerHTML = progressTextArea.innerHTML + logAppend;
+		progressTextArea.scrollTop = progressTextArea.scrollHeight;
+
 		if(!json.finished) {
-			var logAppend = json.progressSinceLastCheck;
-			var progressTextArea = document.getElementById("progressTextArea");
-			progressTextArea.innerHTML = progressTextArea.innerHTML + logAppend;
-			progressTextArea.scrollTop = progressTextArea.scrollHeight;
-			
 			var request = createRequest();
 			request.onreadystatechange=function() {
 				if(request.readyState == 4 && request.status == 200) {
@@ -44,6 +44,16 @@
 			request.open("POST", "/vivo/harvester/testfile", true);
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			request.send("${paramIsHarvestClick}=false");
+		} else {
+		
+			var importedGrants = document.getElementById("importedGrants")
+			
+			for(var i = 0; i < json.newlyAddedUrls.length; i++) {
+
+				var newLi = document.createElement("li");
+				newLi.innerHTML = "<a href=\"" + json.newlyAddedUrls[i] + "\">" + json.newlyAddedUrls[i] + "</a>";
+				importedGrants.appendChild(newLi);
+			}
 		}
 	}
 	
@@ -206,6 +216,11 @@
 		<h4 class="testfile-step-subheader">View results</h4>
 		<div id="progress">
 			<textarea cols="100" rows="50" readonly="readonly" id="progressTextArea"></textarea>		
+		</div>
+		<div id="summary">
+			<h5>Imported grants</h5>
+			<ul id="importedGrants">
+			</ul>
 		</div>
 	</div>
 	<div class="clearBothDiv" />
