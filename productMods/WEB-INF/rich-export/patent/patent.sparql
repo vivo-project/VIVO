@@ -3,7 +3,7 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX bibo: <http://purl.org/ontology/bibo/>
 
 CONSTRUCT {
-     ?publication ?property ?object .
+     ?patent ?property ?object .
 } WHERE {
      PERSON_URI core:authorInAuthorship ?authorship . 
      ?authorship core:linkedInformationResource ?patent .

@@ -5,6 +5,6 @@ CONSTRUCT {
 } WHERE {
      PERSON_URI core:personInPosition ?position . 
      ?position core:positionInOrganization ?organization .
-     ?organization ?hasSubOrganization ?subOrganization .
+     ?organization core:hasSubOrganization ?subOrganization .
      ?subOrganization ?property ?object .
 }
