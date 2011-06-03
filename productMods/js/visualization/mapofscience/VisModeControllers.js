@@ -35,6 +35,9 @@ var EntityVisModeController = Class.extend({
 				$(this).addClass('active-filter');	
 			}
 		});
+		
+		/* Init default filter */
+		$("#" + dom.subdisciplinesFilterID).trigger('click');
 	},
 	initWidgets: function(map, sliderControl) {
 		var widgets = {};

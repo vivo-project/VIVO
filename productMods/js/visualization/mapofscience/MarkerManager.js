@@ -4,10 +4,8 @@
  * markers by grouping the markers by keys. 
  */
 var MarkerManager = Class.extend({
-	init: function(colorStrategy, sizeCoder) {
+	init: function() {
 		this.keyToMarker = {};
-		this.colorStrategy = colorStrategy;
-		this.sizeCoder = sizeCoder;
 	},
 	addMarker: function(key, marker) {
 		this.keyToMarker[key] = marker;
@@ -21,6 +19,11 @@ var MarkerManager = Class.extend({
 	},
 	getMarker: function(key) {
 		return this.keyToMarker[key];
+	},
+	getMarkerArray: function() {
+		var array = [];
+		$.each(this.keyToMarker, function(i, e){ array.push(e); });
+		return array;
 	},
 	hasKey: function(key) {
 		return (this.keyToMarker.hasOwnProperty(key));
@@ -36,7 +39,6 @@ var MarkerManager = Class.extend({
 		});
 	},
 	addMarkersToMap: function() {
-//		console.log(this.keyToMarker);
 		$.each(this.keyToMarker, function(i, marker) {
 			marker.addToMap();
 		});
@@ -49,18 +51,46 @@ var MarkerManager = Class.extend({
 });
 
 /**
- * Customized MarkerManager for Science map purpose. It is be an abstract class 
+ * Customized Discipline labels MarkerManager for Science map purpose. It is an abstract class 
  */
-ScimapMarkerManager = MarkerManager.extend({
+var DisciplineLabelsMarkerManager = MarkerManager.extend({
+	init: function(map) {
+		this._super();
+		this.map = map;
+		this.initMarkers(map);
+	},
+	initMarkers: function(map) {
+		me = this;
+		$.each(DISCIPLINES, function(id, discipline) {
+			var opts = {
+					map: map,
+					position: createNoWrapLatLng(discipline.labelLatitude, discipline.labelLongitude),
+					icon: getDisciplineLabelImageURL(id),
+					clickable: false
+				};
+			me.addMarker(id, new Marker(opts));
+		});
+	},
+	showMarkers: function() {
+		this._super();
+	}
+});
+
+/**
+ * Customized MarkerManager for Science map purpose. It is an abstract class 
+ */
+var ScimapMarkerManager = MarkerManager.extend({
 	init: function(map, colorStrategy, sizeCoder) {
 		this._super();
 		this.colorStrategy = colorStrategy;
 		this.sizeCoder = sizeCoder;
 		this.map = map;
+		this.maxValue = 1;
 		this.layer = {};
 	},
 	setSizeCoder: function(sizeCoder) {
 		this.sizeCoder = sizeCoder;
+		this.maxValue = sizeCoder.getMaxValue();
 	},
 	createMarker: function(key, density) {
 		var me = this;
@@ -89,11 +119,17 @@ ScimapMarkerManager = MarkerManager.extend({
 		}
 	},
 	display: function(numberOfMarkers) {
-		$.each(this.keyToMarker, function(i, marker) {
-			if (i <=  numberOfMarkers) {
-				marker.show();
+		var markerArray = this.sortedMarkers;
+		if (!markerArray || !markerArray.length) {
+			markerArray = this.getMarkerArray();
+		}
+		
+		$.each(markerArray, function() {
+			if (numberOfMarkers >  0) {
+				this.show();
+				numberOfMarkers--;
 			} else {
-				marker.hide();
+				this.hide();
 			}
 		});
 	},
@@ -118,6 +154,12 @@ ScimapMarkerManager = MarkerManager.extend({
 		$.each(this.keyToMarker, function(i, marker) {
 			marker.unfocus();
 		});
+	},
+	sort: function() {
+		this.sortedMarkers = this.getMarkerArray();
+		this.sortedMarkers.sort(function(a, b) {
+			return b.getValue() -a.getValue();
+		});
 	}
 });
 
@@ -129,7 +171,16 @@ var DisciplineMarkerManager = ScimapMarkerManager.extend({
 	createMarker: function(subdisciplineKey, density) {
 		var me = this;
 		var key = SUBDISCIPLINES[subdisciplineKey].discipline;
-		return this._super(key, density);
+		var marker = this._super(key, density);
+		var poly = marker.polygon;
+		
+		marker.setContent( 
+				'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
+				+ poly.label +'</b><br />'
+				+ addCommasToNumber(poly.value.toFixed(2)) + ' of pubs.<br />'
+				+ (poly.value * 100 / this.maxValue).toFixed(2) + '% of activity</div>'
+		);
+		return marker;
 	}
 });
 
@@ -137,5 +188,20 @@ var SubdisciplineMarkerManager = ScimapMarkerManager.extend({
 	init: function(map, colorStrategy, sizeCoder) {
 		this._super(map, colorStrategy, sizeCoder);
 		this.layer = SUBDISCIPLINES;
+	},
+	createMarker: function(subdisciplineKey, density) {
+		var marker = this._super(subdisciplineKey, density);
+		var disciplineId = SUBDISCIPLINES[subdisciplineKey].discipline;
+		var disciplineLabel = DISCIPLINES[disciplineId].label;
+		var poly = marker.polygon;
+		/* Override the getContent for Subdiscipline */
+		marker.setContent(
+			'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
+			+ poly.label + '</b> in ' + disciplineLabel +'<br />' 
+			+ addCommasToNumber(poly.value.toFixed(2)) + ' of pubs.<br />'
+			+ (poly.value * 100 / this.maxValue).toFixed(2) + '% of activity</div>'
+		);
+		
+		return marker;
 	}
 });

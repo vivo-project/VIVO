@@ -214,18 +214,23 @@ var DataTableWidget = Class.extend({
 			me.widget.fnFilter("");
 		});
 		
+		
+		var totalPublications = me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped;
+		$("#mapped-publications").text(addCommasToNumber(me.pubsMapped));
 		$("#percent-mapped-info").show();
-		$("#percent-mapped").text((100 * me.pubsMapped / (me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped)).toFixed(2));
+		$("#percent-mapped").text((100 * me.pubsMapped / totalPublications).toFixed(2));
+		$("#total-publications").text(addCommasToNumber(totalPublications));
 		
 	},
-	
 	changeFilter: function(filterType) {
 		var me = this;
 		
 		if (filterType === SCIMAP_TYPE.SUBDISCIPLINE) {
 			
 			$("#science-areas-th").html("Sub-Disciplines");
-			me.widget.fnSettings()._iDisplayLength = 10;
+			if (me.widget) {
+				me.widget.fnSettings()._iDisplayLength = 10;
+			}
 			me.currentSelectedFilter = SCIMAP_TYPE.SUBDISCIPLINE;
 			$("a#csv").attr("href", entityMapOfScienceSubDisciplineCSVURL);
 			
@@ -233,12 +238,16 @@ var DataTableWidget = Class.extend({
 			
 			$("#science-areas-th").html("Disciplines");
 			me.currentSelectedFilter = SCIMAP_TYPE.DISCIPLINE;
-			me.widget.fnSettings()._iDisplayLength = 13;
+			if (me.widget) {
+				me.widget.fnSettings()._iDisplayLength = 13;
+			}
 			$("a#csv").attr("href", entityMapOfScienceDisciplineCSVURL);
 			
 		}
 		
 		ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER = me.currentSelectedFilter;
-		me.widget.fnDraw();
+		if (me.widget) {
+			me.widget.fnDraw();
+		}
 	}
 });

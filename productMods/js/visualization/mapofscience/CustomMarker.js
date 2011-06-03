@@ -5,10 +5,10 @@ var ScinodePolygon = CirclePolygon.extend({
 		this.hide();
 	},
 	setValue: function(value) {
-		this.options.value = value;
+		this.polygon.value = value;
 	},
 	getValue: function() {
-		return this.options.value;
+		return this.polygon.value;
 	},
 	setSize: function(size) {
 		this.setRadius(size);
@@ -20,13 +20,16 @@ var ScinodePolygon = CirclePolygon.extend({
 	unfocus: function() {
 		this.setOptions({strokeWeight: 1.0});
 	},
+	setContent: function(content) {
+		this.polygon.content = content;
+	},
 	registerEvents : function() {
 		var me = this;
 		var polygon = me.polygon;
 		this._super();
 		this.registerEvent(addClickListener(polygon, function() {
 			INFO_WINDOW.setPosition(this.center);
-			var content = '<div style="font-size: 80%; padding: 5px; text-align: left;"><b>' + this.label +'</b><br />' + this.value + ' publications </div>';
+			var content = this.content;
 			INFO_WINDOW.setContent(content);
 			INFO_WINDOW.open(this.map);
 		}));

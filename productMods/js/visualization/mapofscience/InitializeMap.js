@@ -45,7 +45,7 @@ function setupLoadingScreen() {
 
 function initMap() {
 	var gMap = google.maps;
-	var centerLatLng = new google.maps.LatLng(50, 0);
+	var centerLatLng = new google.maps.LatLng(55, -10);
 	
 	var mapOptions = {
 		center: centerLatLng,

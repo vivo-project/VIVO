@@ -57,7 +57,7 @@ var CircleSizeCoder = Class.extend({
 	},
 	options: {
 		minRadius: 0.8,
-		maxRadius: 100.0,//100.0,
+		maxRadius: 100.0,
 		scaler: new Scaler({})
 	},
 	getSize: function(value) {
@@ -71,6 +71,9 @@ var CircleSizeCoder = Class.extend({
 		}
 		
 		return radius;
+	},
+	getMaxValue: function() {
+		return this.options.scaler.options.maxValue;
 	}
 });
 

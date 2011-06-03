@@ -39,6 +39,7 @@ var scienceMapDataURL = "${entityMapOfScienceDataURL}";
 var imageFolderPrefix = "${urls.images}/visualization/";
 var mapOfScienceImageFolderPrefix  = imageFolderPrefix 
 											+ "mapofscience/";
+var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
 											
 var entityLabel = '${entityLabel}';
 
@@ -60,11 +61,14 @@ ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/a
 			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.notify.min.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ClassExtendUtils.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/DownloadManager.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/NumberUtils.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/Tooltip.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/GMapAPI.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ControlPanel.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ColorStrategy.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/SizeCoding.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/CustomScimaps.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/Marker.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/Polygon.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/CustomMarker.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/MarkerManager.js"></script>',

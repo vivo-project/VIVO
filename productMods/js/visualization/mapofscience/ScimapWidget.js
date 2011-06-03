@@ -1,22 +1,38 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-var DEFAULT_SLIDER_VALUE = 20;
-
 var ScimapWidget = Class.extend({
 	init: function(map, sliderControl) {
-		this.activeManager = null;
-		this.isUnloaded = true;
-		this.map = map;
-		this.sliderControl = sliderControl;
-		this.initView();
+		var me = this;
+		me.activeManager = null;
+		me.isUnloaded = true;
+		me.map = map;
+		me.sliderControl = sliderControl;
+		me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map);
+		me.disciplineLabelsControl = new CheckBoxPanel({ 
+			map: map,
+			checked: true,
+			text: "Show discipline labels",
+			click: function() {
+				if($(this).attr('checked')) {
+					me.labelsMarkerManager.showMarkers();
+				} else {
+					me.labelsMarkerManager.hideMarkers();
+				}
+			}
+		});
+		me.initView();
 	},
 	initView: function(){
 		var me = this;
+		/* Display labels if checked */
+		if (me.disciplineLabelsControl.isChecked()) {
+			me.labelsMarkerManager.showMarkers();
+		}
 		me.initMarkerManagers();
 		me.sliderControl.setChangeEventHandler(function(event, ui) {
 			me.updateDisplayedMarkers(ui.value);
 		});
-		me.show(SCIMAP_TYPE.DISCIPLINE);
+		me.show(SCIMAP_TYPE.SUBDISCIPLINE);
 	},
 	initMarkerManagers: function() {
 		if (this.keyToMarkerManagers == null) {
@@ -49,6 +65,7 @@ var ScimapWidget = Class.extend({
 		me.pubsWithInvalidJournals = data.pubsWithInvalidJournals;
 		me.pubsMapped = data.pubsMapped;
 		
+		this.isUnloaded = false;
 		$.each(this.keyToMarkerManagers, function(key, manager) {
 			// Need to create the AreaSizeCoding function
 			manager.setSizeCoder(new CircleSizeCoder({ 
@@ -61,9 +78,10 @@ var ScimapWidget = Class.extend({
 				var marker = manager.createMarker(subdiscipline, density);
 				
 			}); // end each subdisciplineActivity
+			
+			manager.sort();
 		}); // end each markerManagers
 		me.updateMap();
-		this.isUnloaded = false;
 	},
 	mouseIn: function(key, childKey) {
 		var manager = this.getMarkerManager(key);
@@ -118,6 +136,7 @@ var ScimapWidget = Class.extend({
 	cleanUp: function() {
 		if (this.activeManager) {
 			this.activeManager.removeMarkersFromMap();
+			INFO_WINDOW.close();
 		}
 	},
 	updateDisplayedMarkers: function(numberOfMarkers) {
@@ -130,7 +149,7 @@ var ScimapWidget = Class.extend({
 			var slider = this.sliderControl;
 			slider.setMin(Math.min(1, length));
 			slider.setMax(length);
-			slider.setValue(Math.min(DEFAULT_SLIDER_VALUE, length));
+			slider.setValue(length);
 		}
 	},
 	changeFilter: function(filterType) {

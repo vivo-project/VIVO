@@ -1,6 +1,6 @@
-var INFO_WINDOW = createInfoWindow("", 300);
-
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
+var INFO_WINDOW = createInfoWindow("", "300");
+
 var Polygon = Class.extend({
 	init : function(options) {
 		this.options = $.extend({}, this.options, options);
@@ -71,6 +71,8 @@ function degreeToRadians(degree) {
 	return degree * RADIAN_PER_DEGREE;
 }
 
+var TOOLTIP = new Tooltip({ attachedToMouse: true });
+
 var CirclePolygon = Polygon.extend({
 	init : function(options) {
 		this.options = $.extend({}, this.options, options);
@@ -91,7 +93,6 @@ var CirclePolygon = Polygon.extend({
 			this.initCirclePoints();
 		}
 		
-		console.log(this.polygon.getPaths().getLength());
 		this._super();
 	},
 	isPointsCreated: function() {
@@ -105,7 +106,6 @@ var CirclePolygon = Polygon.extend({
 		var me = this;
 		var map = me.options.map;
 		var latLngArray = new google.maps.MVCArray(); // Circle's LatLngs
-		//console.log(map.getProjection());
 		if (map && map.getProjection()) {
 			var projection = map.getProjection();
 			var centerPoint = projection.fromLatLngToPoint(me.options.center);
@@ -132,8 +132,19 @@ var CirclePolygon = Polygon.extend({
 	},
 	registerEvents: function() {
 		var me = this;
+		var polygon = me.polygon;
 		this.registerEvent(addMapProjectionChangedListener(me.options.map, function() {
 			me.initCirclePoints(); 
 		}));
+		
+		this.registerEvent(addMouseOverListener(polygon, function() {
+			TOOLTIP.setHtml("<b>" + this.label + "</b>");
+			TOOLTIP.show();
+		}));
+		
+		this.registerEvent(addMouseOutListener(polygon, function() {
+			TOOLTIP.hide();
+		}));
 	}
 });
+

@@ -76,6 +76,38 @@ a.clear-selected-entities {
     top: 10px !important;
 }
 
+/* tooltip */
+#tt {
+	font:11px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+	position:absolute; 
+	display:block; 
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_left.gif) top left no-repeat
+}
+
+#tttop {
+	display:block; 
+	height:5px; 
+	margin-left:5px; 
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_top.gif) top right no-repeat; 
+	overflow:hidden
+}
+
+#ttcont {
+	display:block; 
+	padding:2px 12px 3px 7px; 
+	margin-left:5px; 
+	background:#666; 
+	color:#FFF
+}
+
+#ttbot {
+	display:block; 
+	height:5px; 
+	margin-left:5px; 
+	background:url(../../../images/visualization/mapofscience/tooltip/tt_bottom.gif) top right no-repeat; 
+	overflow:hidden
+}
+
 /* DataTable related css */
 
 /* filter */

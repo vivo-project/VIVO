@@ -48,7 +48,7 @@ var SliderControlPanel = ControlPanel.extend({
 	},
 	initSlider: function() {
 		var me = this;
-		var label = $("<div />").width(20).css("font-size", "60%").css("float", "right").text("0");
+		var label = $("<div />").width(150).css("font-size", "75%").css("text-align", "center").text("");
 		var slider = $("<div />").width(150).css("font-size","60%");
 		slider.slider({
 			slide:  function(event, ui) {
@@ -61,8 +61,8 @@ var SliderControlPanel = ControlPanel.extend({
 		
 		var div = me.getDiv();
 		div.css("margin-right", "10px");
-		div.append(slider);
 		div.append(label);
+		div.append(slider);
 	},
 	getValue: function () {
 		return this.sliderDiv.slider( "option", "value" );
@@ -84,15 +84,52 @@ var SliderControlPanel = ControlPanel.extend({
 		this._setLabel(value);
 	},
 	_setLabel: function(value) {
-		if (value < 1) {
-			this.labelDiv.text("0");
-        } else {
-        	this.labelDiv.text(value);                        
-        }
+		var labelText = "Top " + value + " disciplines shown"
+        this.labelDiv.text(labelText);
 	},
 	setChangeEventHandler: function(handlerFunc) {
 		this.sliderDiv.slider({ 
 			change: handlerFunc
 		});
+	}
+});
+
+/**
+ * options
+ * map - Container map to be added
+ * click - Handler function for click event
+ * text - Description of the check Box
+ */
+var CheckBoxPanel = ControlPanel.extend({
+	init: function(options) {
+		this._super(options);
+		this.initCheckBox();
+	},
+	initCheckBox: function() {
+		var me = this;
+		var description
+		var text = me.options.text;
+		var checkBox = $('<input type="checkbox"><span style="font-size: 75%; vertical-align: text-top">'
+				+ text
+				+ '</span></input>'
+			);
+		me.checkBox = checkBox;
+		
+		var div = me.getDiv();
+		div.css("margin-right", "10px");
+		div.append(checkBox);
+		
+		me.checkBox.attr('checked', me.options.checked);
+		/* Init contents if it is given */
+		var click = me.options.click;
+		if (click) {
+			me.click(click);
+		}
+	},
+	click: function(handlerFunc) {
+		this.checkBox.click(handlerFunc);
+	},
+	isChecked: function() {
+		return this.checkBox.attr('checked');
 	}
 });
