@@ -148,6 +148,11 @@
     </listener-class>
   </listener>
  
+  <!--  vivo specific, must appear before other policies -->
+  <listener>
+    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
+  </listener>
+  
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
     </listener-class>
@@ -170,16 +175,6 @@
     </listener-class>
   </listener>
 
-  
-  <!--  vivo specific, must appear before other policies -->
-  <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
-  </listener>
-  
-  <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.SelfEditingPolicySetup</listener-class>
-  </listener> 
-    
   <listener>
     <listener-class>
         edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
