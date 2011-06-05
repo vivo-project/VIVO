@@ -805,6 +805,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ShowAuth</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowAuthController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowAuth</servlet-name>
+    <url-pattern>/admin/showAuth</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>StatementChangeListingController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.jena.StatementChangeListingController</servlet-class>
   </servlet>
