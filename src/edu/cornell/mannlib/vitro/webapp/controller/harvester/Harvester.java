@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.controller.harvester; 
 
+import java.util.ArrayList;
+
 /* //PLEASE SEE JAVADOC COMMENT FOR CLASS BELOW
 import org.vivoweb.harvester.diff.Diff;
 import org.vivoweb.harvester.fetch.CSVtoRDF;
@@ -52,99 +54,135 @@ import org.vivoweb.harvester.util.XPathTool;
 class Harvester {
 /*
     // diff
-    public static void runDiff(String ... args) {
-        Diff.main(args);
+    public static void runDiff(Object ... args) {
+        Diff.main(stringsToArray(args));
     }
 
     // fetch
-    public static void runCSVtoRDF(String ... args) {
-        CSVtoRDF.main(args);
+    public static void runCSVtoRDF(Object ... args) {
+        CSVtoRDF.main(stringsToArray(args));
     }
-    public static void runD2RMapFetch(String ... args) {
-        D2RMapFetch.main(args);
+    public static void runD2RMapFetch(Object ... args) {
+        D2RMapFetch.main(stringsToArray(args));
     }
-    public static void runJDBCFetch(String ... args) {
-        JDBCFetch.main(args);
+    public static void runJDBCFetch(Object ... args) {
+        JDBCFetch.main(stringsToArray(args));
     }
-    public static void runNLMJournalFetch(String ... args) {
-        NLMJournalFetch.main(args);
+    public static void runNLMJournalFetch(Object ... args) {
+        NLMJournalFetch.main(stringsToArray(args));
     }
-    public static void runOAIFetch(String ... args) {
-        OAIFetch.main(args);
+    public static void runOAIFetch(Object ... args) {
+        OAIFetch.main(stringsToArray(args));
     }
-    public static void runPubmedFetch(String ... args) {
-        PubmedFetch.main(args);
+    public static void runPubmedFetch(Object ... args) {
+        PubmedFetch.main(stringsToArray(args));
     }
-    public static void runPubmedHTTPFetch(String ... args) {
-        PubmedHTTPFetch.main(args);
+    public static void runPubmedHTTPFetch(Object ... args) {
+        PubmedHTTPFetch.main(stringsToArray(args));
     }
     
     // qualify
-    public static void runChangeNamespace(String ... args) {
-        ChangeNamespace.main(args);
+    public static void runChangeNamespace(Object ... args) {
+        ChangeNamespace.main(stringsToArray(args));
     }
-    public static void runQualify(String ... args) {
-        Qualify.main(args);
+    public static void runQualify(Object ... args) {
+        Qualify.main(stringsToArray(args));
     }
-    public static void runRenameBlankNodes(String ... args) {
-        RenameBlankNodes.main(args);
+    public static void runRenameBlankNodes(Object ... args) {
+        RenameBlankNodes.main(stringsToArray(args));
     }
-    public static void runRenameResources(String ... args) {
-        RenameResources.main(args);
+    public static void runRenameResources(Object ... args) {
+        RenameResources.main(stringsToArray(args));
     }
-    public static void runSmush(String ... args) {
-        Smush.main(args);
+    public static void runSmush(Object ... args) {
+        Smush.main(stringsToArray(args));
     }
-    public static void runSplitProperty(String ... args) {
-        SplitProperty.main(args);
+    public static void runSplitProperty(Object ... args) {
+        SplitProperty.main(stringsToArray(args));
     }
     
     // score
-    public static void runMatch(String ... args) {
-        Match.main(args);
+    public static void runMatch(Object ... args) {
+        Match.main(stringsToArray(args));
     }
-    public static void runPubmedScore(String ... args) {
-        PubmedScore.main(args);
+    public static void runPubmedScore(Object ... args) {
+        PubmedScore.main(stringsToArray(args));
     }
-    public static void runScore(String ... args) {
-        Score.main(args);
+    public static void runScore(Object ... args) {
+        Score.main(stringsToArray(args));
     }
     
     // transfer
-    public static void transfer(String ... args) {
-        Transfer.main(args);
+    public static void runTransfer(Object ... args) {
+        Transfer.main(stringsToArray(args));
     }
     
     // translate
-    public static void runGlozeTranslator(String ... args) {
-        GlozeTranslator.main(args);
+    public static void runGlozeTranslator(Object ... args) {
+        GlozeTranslator.main(stringsToArray(args));
     }
-    public static void runRunBibutils(String ... args) {
-        RunBibutils.main(args);
+    public static void runRunBibutils(Object ... args) {
+        RunBibutils.main(stringsToArray(args));
     }
-    public static void runSanitizeMODSXML(String ... args) {
-        SanitizeMODSXML.main(args);
+    public static void runSanitizeMODSXML(Object ... args) {
+        SanitizeMODSXML.main(stringsToArray(args));
     }
-    public static void runSPARQLTranslator(String ... args) {
-        SPARQLTranslator.main(args);
+    public static void runSPARQLTranslator(Object ... args) {
+        SPARQLTranslator.main(stringsToArray(args));
     }
-    public static void runXSLTranslator(String ... args) {
-        XSLTranslator.main(args);
+    public static void runXSLTranslator(Object ... args) {
+        XSLTranslator.main(stringsToArray(args));
     }
 
     // util
-    public static void runCSVtoJDBC(String ... args) {
-        CSVtoJDBC.main(args);
+    public static void runCSVtoJDBC(Object ... args) {
+        CSVtoJDBC.main(stringsToArray(args));
     }
-    public static void runDatabaseClone(String ... args) {
-        DatabaseClone.main(args);
+    public static void runDatabaseClone(Object ... args) {
+        DatabaseClone.main(stringsToArray(args));
     }
-    public static void runMerge(String ... args) {
-        Merge.main(args);
+    public static void runMerge(Object ... args) {
+        Merge.main(stringsToArray(args));
     }
-    public static void runXPathTool(String ... args) {
-        XPathTool.main(args);
+    public static void runXPathTool(Object ... args) {
+        XPathTool.main(stringsToArray(args));
     }
-*/
+    */
+
+    /**
+     * Convenience method to expand the ability to use Java's "..." arg list.  Harvester scripts frequently declare sub-macros,
+     * so for example you might have:
+     * 
+     * SCOREINPUT="-i $H2MODEL -ImodelName=$MODELNAME -IdbUrl=$MODELDBURL -IcheckEmpty=$CHECKEMPTY"
+     * SCOREDATA="-s $H2MODEL -SmodelName=$SCOREDATANAME -SdbUrl=$SCOREDATADBURL -ScheckEmpty=$CHECKEMPTY"
+     * SCOREMODELS="$SCOREINPUT -v $VIVOCONFIG -VcheckEmpty=$CHECKEMPTY $SCOREDATA -t $TEMPCOPYDIR -b $SCOREBATCHSIZE"
+     * $Score $SCOREMODELS -AGrantNumber=$EQTEST -WGrantNumber=1.0 -FGrantNumber=$GRANTIDNUM -PGrantNumber=$GRANTIDNUM -n ${BASEURI}grant/
+     * 
+     * In order to mimic this functionality for easy use in Java, this method has been created.  It takes a "..." arg list of Object
+     * objects, and returns an array of Strings.  For each object, if it's an array of Strings, each String is added to the output
+     * array.  Otherwise, its toString() method is called and that value is added to the output array.
+     * 
+     * It is intended to be used with a combination of String and String[] values, in any arbitrary order.  
+     * 
+     * All static Harvester methods in this class take an Object arg list rather than a String arg list, and automatically call
+     * this method.
+     * 
+     * @param args an array of objects, which ought to be a combination of String and String[] values, in any arbitrary order
+     * @return all the strings put together as one array
+     */
+    public static String[] stringsToArray(Object ... args) {
+        ArrayList<String> allData = new ArrayList<String>();
+        for(int i = 0; i < args.length; i++) {
+            if(args[i] instanceof String[]) {
+                String[] array = (String[])(args[i]);
+                for(int j = 0; j < array.length; j++) {
+                    allData.add(array[j]);
+                }
+            } else {
+                allData.add(args[i].toString());
+            }
+        }
+        return allData.toArray(new String[allData.size()]);
+    }
 }
 

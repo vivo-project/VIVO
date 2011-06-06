@@ -92,7 +92,7 @@ public class OrganizationUtilityFunctions {
 
 		QueryRunner<ResultSet> highestLevelOrganizationQueryHandler = new GenericQueryRunner(
 				fieldLabelToOutputFieldLabel, aggregationRules, whereClause,
-				groupOrderClause, dataset, log);
+				groupOrderClause, dataset);
 
 		String highestLevelOrgURI = OrganizationUtilityFunctions
 				.getHighestLevelOrganizationURI(

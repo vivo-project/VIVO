@@ -52,6 +52,7 @@ public class VisualizationFrameworkConstants {
 	public static final String INDIVIDUAL_URI_KEY = "uri";
 	public static final String VIS_MODE_KEY = "vis_mode";
 	public static final String RENDER_MODE_KEY = "render_mode";
+	public static final String OUTPUT_FORMAT_KEY = "output";
 
 	/*
 	 * These values represent possible render modes.
@@ -86,6 +87,14 @@ public class VisualizationFrameworkConstants {
 	public static final String COPI_NETWORK_STREAM_VIS_MODE = "copi_network_stream";
 	public static final String COPI_NETWORK_DOWNLOAD_VIS_MODE = "copi_network_download";
 	
+	
+	/*
+	 * Vis modes for Map of Science Handler
+	 * */
+	public static final String DISCIPLINE_TO_ACTIVTY_VIS_MODE = "discipline";
+	public static final String SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE = "subdiscipline";
+	
+	
 	/*
 	 * These values represent possible utilities vis modes.
 	 * */
@@ -116,12 +125,15 @@ public class VisualizationFrameworkConstants {
 	public static final String UTILITIES_VIS = "utilities";
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
 	public static final String PUBLICATION_TEMPORAL_VIS_SHORT_URL = "publication-graph";
+	public static final String MAP_OF_SCIENCE_VIS_SHORT_URL = "map-of-science";
 	public static final String GRANT_TEMPORAL_VIS_SHORT_URL = "grant-graph";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
 	
 	
 	/*
-	 * These values represent possible vis-modes for temporal graph vis 
+	 * These values represent possible data serialization formats corresponding to 
+	 * output format key. 
 	 * */
-	public static final String TEMPORAL_GRAPH_JSON_DATA_VIS_MODE = "json";
+	public static final String JSON_OUTPUT_FORMAT = "json";
+	public static final String CSV_OUTPUT_FORMAT = "csv";
 }

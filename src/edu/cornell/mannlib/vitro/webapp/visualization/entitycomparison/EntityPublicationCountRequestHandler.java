@@ -138,7 +138,7 @@ public class EntityPublicationCountRequestHandler implements
 		/*
 		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
 		 * */
-		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
+		if (VisualizationFrameworkConstants.JSON_OUTPUT_FORMAT
 					.equalsIgnoreCase(vitroRequest.getParameter(
 							VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
@@ -306,7 +306,7 @@ public class EntityPublicationCountRequestHandler implements
 			
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
-			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity);
+			boolean isPerson = UtilityFunctions.isEntityAPerson(vreq, subentity.getIndividualURI());
 			
 			if (isPerson) {
 				entityJson.setVisMode("PERSON");

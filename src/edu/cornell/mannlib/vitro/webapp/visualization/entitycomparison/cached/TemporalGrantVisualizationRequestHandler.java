@@ -95,7 +95,7 @@ public class TemporalGrantVisualizationRequestHandler implements
 		/*
 		 * This will provide the data in json format mainly used for standalone temporal vis. 
 		 * */
-		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
+		if (VisualizationFrameworkConstants.JSON_OUTPUT_FORMAT
 					.equalsIgnoreCase(vitroRequest
 							.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			

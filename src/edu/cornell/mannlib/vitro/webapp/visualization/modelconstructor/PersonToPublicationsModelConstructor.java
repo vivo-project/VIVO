@@ -70,7 +70,7 @@ public class PersonToPublicationsModelConstructor implements ModelConstructor {
 	
 	private Model executeQuery(String constructQuery) {
 		
-		System.out.println("in constructed model for person to publications " + personURI);
+		log.debug("in constructed model for person to publications " + personURI);
 		
 		Model constructedModel = ModelFactory.createDefaultModel();
 

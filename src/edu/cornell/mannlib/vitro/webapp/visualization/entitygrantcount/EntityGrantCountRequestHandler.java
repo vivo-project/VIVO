@@ -85,7 +85,7 @@ public class EntityGrantCountRequestHandler implements
 		/*
 		 * This will provide the data in json format mainly used for standalone temporal vis. 
 		 * */
-		if (VisualizationFrameworkConstants.TEMPORAL_GRAPH_JSON_DATA_VIS_MODE
+		if (VisualizationFrameworkConstants.JSON_OUTPUT_FORMAT
 					.equalsIgnoreCase(vitroRequest
 							.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
@@ -304,7 +304,7 @@ public class EntityGrantCountRequestHandler implements
 
 			entityJson.setEntityURI(subentity.getIndividualURI());
 			
-			if (UtilityFunctions.isEntityAPerson(vreq, subentity)) {
+			if (UtilityFunctions.isEntityAPerson(vreq, subentity.getIndividualURI())) {
 				entityJson.setVisMode("PERSON");
 			} else {
 				entityJson.setVisMode("ORGANIZATION");
