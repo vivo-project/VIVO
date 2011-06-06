@@ -17,8 +17,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
@@ -26,10 +24,6 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.skife.csv.SimpleReader;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -290,9 +284,8 @@ public class TestFileController extends FreemarkerHttpServlet {
             //String path = getUploadPath(vreq);
 
             String script = job.getScript();
-            String additionsFilePath = job.getAdditionsFilePath();
             log.error("start harvest");
-            runScript(getSessionId(request), script, additionsFilePath);
+            runScript(getSessionId(request), script);
             log.error("end harvest");
 
             JSONObject json = new JSONObject();
@@ -337,27 +330,9 @@ public class TestFileController extends FreemarkerHttpServlet {
                 
                 boolean finished = !sessionIdToHarvestThread.containsKey(sessionId);
                 
-                VitroRequest vreq = new VitroRequest(request);
-                ArrayList<String> newlyAddedUrls = new ArrayList<String>();
-                if(finished) {
-                    ArrayList<String> newlyAddedUris = sessionIdToNewlyAddedUris.get(sessionId);
-                    if(newlyAddedUris != null) {
-                        for(String uri : newlyAddedUris) {
-                            
-                            String namespaceRoot = vreq.getWebappDaoFactory().getDefaultNamespace();
-                            
-                            String suffix = uri.substring(namespaceRoot.length());
-                            String url = "display/" + suffix;
-                            
-                            newlyAddedUrls.add(uri);
-                        }
-                    }
-                }
-                
                 JSONObject json = new JSONObject();
                 json.put("progressSinceLastCheck", progressSinceLastCheck);
                 json.put("finished", finished);
-                json.put("newlyAddedUrls", newlyAddedUrls);
 
                 response.getWriter().write(json.toString());
             }
@@ -384,11 +359,11 @@ public class TestFileController extends FreemarkerHttpServlet {
     }
 
 
-    private void runScript(String sessionId, String script, String additionsFilePath) {
+    private void runScript(String sessionId, String script) {
         
         if(!sessionIdToHarvestThread.containsKey(sessionId)) {
             
-            ScriptRunner runner = new ScriptRunner(sessionId, script, additionsFilePath);
+            ScriptRunner runner = new ScriptRunner(sessionId, script);
             sessionIdToHarvestThread.put(sessionId, runner);
             runner.start();
         }
@@ -434,61 +409,7 @@ public class TestFileController extends FreemarkerHttpServlet {
         return request.getSession().getId();
     }
 
-    private ArrayList<String> extractNewlyAddedUris(File additionsFile) {
-        ArrayList<String> newlyAddedUris = new ArrayList<String>();
 
-        log.error(additionsFile.getAbsolutePath());
-        
-        try {
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(additionsFile);
-            NodeList descriptionNodes = document.getElementsByTagName("http://www.w3.org/1999/02/22-rdf-syntax-ns#Description");
-
-            int numNodes = descriptionNodes.getLength();
-            for(int i = 0; i < numNodes; i++) {
-                Node node = descriptionNodes.item(i);
-                
-                ArrayList<String> types = getRdfTypes(node);
-                if(types.contains("http://vivoweb.org/ontology/core#Grant")) { //todo: generalize
-                
-                    NamedNodeMap attributes = node.getAttributes();
-                    Node aboutAttribute = attributes.getNamedItem("http://www.w3.org/1999/02/22-rdf-syntax-ns#about");
-                    if(aboutAttribute != null) {
-                        String value = aboutAttribute.getNodeValue();
-                        newlyAddedUris.add(value);
-                    }
-                }
-            }
-            
-            
-
-        } catch(Exception e) {
-            log.error(e, e);
-        }
-
-        return newlyAddedUris;
-    }
-    
-    private ArrayList<String> getRdfTypes(Node descriptionNode) {
-        ArrayList<String> rdfTypesList = new ArrayList<String>();
-        
-        NodeList children = descriptionNode.getChildNodes();
-        int numChildren = children.getLength();
-        for(int i = 0; i < numChildren; i++) {
-            Node child = children.item(i);
-
-            String name = child.getNodeName();
-            if(name.equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
-                NamedNodeMap attributes = child.getAttributes();
-                Node resourceAttribute = attributes.getNamedItem("http://www.w3.org/1999/02/22-rdf-syntax-ns#resource");
-                if(resourceAttribute != null) {
-                    String value = resourceAttribute.getNodeValue();
-                    rdfTypesList.add(value);
-                }
-            }
-        }
-
-        return rdfTypesList;
-    }
 
 
 
@@ -514,21 +435,18 @@ public class TestFileController extends FreemarkerHttpServlet {
             super(cause);
         }
     }
-
-
+    
+    
     private Map<String, ScriptRunner> sessionIdToHarvestThread = new Hashtable<String, ScriptRunner>(); //Hashtable is threadsafe, HashMap is not
     private Map<String, ArrayList<String>> sessionIdToUnsentLogLines = new Hashtable<String, ArrayList<String>>(); //Hashtable is threadsafe, HashMap is not
-    private Map<String, ArrayList<String>> sessionIdToNewlyAddedUris = new Hashtable<String, ArrayList<String>>();
     private class ScriptRunner extends Thread {
 
         private final String sessionId;
         private final String script;
-        private final String additionsFilePath;
 
-        public ScriptRunner(String sessionId, String script, String additionsFilePath) {
+        public ScriptRunner(String sessionId, String script) {
             this.sessionId = sessionId;
             this.script = script;
-            this.additionsFilePath = additionsFilePath;
         }
 
         @Override
@@ -537,16 +455,16 @@ public class TestFileController extends FreemarkerHttpServlet {
                 ArrayList<String> unsentLogLines = sessionIdToUnsentLogLines.get(sessionId);
                 if(unsentLogLines == null) {
                     unsentLogLines = new ArrayList<String>();
-                    sessionIdToUnsentLogLines.put(this.sessionId, unsentLogLines);
+                    sessionIdToUnsentLogLines.put(sessionId, unsentLogLines);
                 }
                 
-                File scriptFile = createScriptFile(this.script);
+                File scriptFile = createScriptFile(script);
 
                 String command = "/bin/bash " + getHarvesterPath() + "scripts/temp/" + scriptFile.getName();
 
                 log.info("Running command: " + command);
                 Process pr = Runtime.getRuntime().exec(command);
-
+                
                 //try { Thread.sleep(15000); } catch(InterruptedException e) {log.error(e, e);}
 
                 BufferedReader processOutputReader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
@@ -563,19 +481,13 @@ public class TestFileController extends FreemarkerHttpServlet {
                 }
 
                 int exitVal;
-
+        
                 try {
                     exitVal = pr.waitFor();
                 }
                 catch(InterruptedException e) {
                     throw new IOException(e.getMessage(), e);
                 }
-                
-                File additionsFile = new File(this.additionsFilePath);
-                ArrayList<String> newlyAddedUris = extractNewlyAddedUris(additionsFile);
-                log.error("newly added URIs size: " + newlyAddedUris.size());
-                sessionIdToNewlyAddedUris.put(this.sessionId, newlyAddedUris);
-                
                 log.debug("Harvester script exited with error code " + exitVal);
                 log.info("Harvester script execution complete");
             } catch (IOException e) {
@@ -586,7 +498,9 @@ public class TestFileController extends FreemarkerHttpServlet {
                 }
             }
         }
+
     }
+
 }
 
 
@@ -628,7 +542,6 @@ class CsvHarvestJob implements FileHarvestJob {
     public CsvHarvestJob(VitroRequest vreq, String templateFileName, String namespace) {
         this.vreq = vreq;
         this.templateFile = new File(getTemplateFileDirectory() + templateFileName);
-        log.error(getTemplateFileDirectory() + templateFileName);
         this.namespace = namespace;
     }
 
@@ -694,24 +607,13 @@ class CsvHarvestJob implements FileHarvestJob {
      * @return an error message if the two lines don't match, or null if they do
      */
     private String validateCsvFirstLine(String[] templateFirstLine, String[] line) {
-        String errorMessage = "File header does not match template";
-        if(line.length != templateFirstLine.length) {
-            //return errorMessage + ": " + "file header columns = " + line.length + ", template columns = " + templateFirstLine.length;
-            String errorMsg = "";
-            errorMsg += "file header items: ";
-            for(int i = 0; i < line.length; i++) {
-                errorMsg += line[i] + ", ";
-            }
-            errorMsg += "template items: ";
-            for(int i = 0; i < templateFirstLine.length; i++) {
-                errorMsg += templateFirstLine[i] + ", ";
-            }
-            return errorMsg;
-        }
+        String errorMessage = "File header does not match specification";
+        if(line.length != templateFirstLine.length)
+            return errorMessage;
         for(int i = 0; i < line.length; i++)
         {
             if(!line[i].equals(templateFirstLine[i]))
-                return errorMessage + ": file header column " + (i + 1) + " = " + line[i] + ", template column " + (i + 1) + " = " + templateFirstLine[i];
+                    return errorMessage;
         }
         return null;
     }
@@ -772,12 +674,6 @@ class CsvHarvestJob implements FileHarvestJob {
     @Override
     public void performHarvest(File directory) {
         
-    }
-
-    @Override
-    public String getAdditionsFilePath() {
-
-        return TestFileController.getHarvesterPath() + "harvested-data/csv/additions.rdf.xml";
     }
     
     
