@@ -9,17 +9,30 @@
 
     <nav role="navigation">
         <ul id="header-nav" role="list">
+            <li role="listitem"><a href="${urls.index}">Index</a></li>
             <#if user.loggedIn>
-                <li role="listitem"><img class="middle" src="${urls.images}/userIcon.png" alt="user icon" />${user.loginName}</li>
-                <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                 <#if user.hasSiteAdminAccess>
                     <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
                 </#if>
+                    <li>
+                        <ul class="dropdown">
+                            <li id="user-menu"><a href="#">${user.loginName}</a>
+                                <ul class="sub_menu">
+                                     <li role="listitem" class="inactive">My profile</li>
+                                     <li role="listitem" class="inactive">My account</li>
+                                     <li role="listitem"><a href="${urls.logout}">Log out</a></li>
+                                </ul>
+                            </li>
+                         </ul>
+                     </li>
+                
+                ${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
+                
             <#else>
                 <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>
-                <li role="listitem"><a href="${urls.index}">Index</a></li>
         </ul>
+        
     </nav>
     
     <section id="search" role="region">

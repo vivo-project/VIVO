@@ -6,6 +6,8 @@
 <#if temporalVisualizationEnabled>
     <#assign classSpecificExtension>
         <#include "individual-visualizationTemporalGraph.ftl">
+        <div style="clear: both;"></div>
+        <#include "individual-visualizationMapOfScience.ftl">
     </#assign>
 </#if>
 

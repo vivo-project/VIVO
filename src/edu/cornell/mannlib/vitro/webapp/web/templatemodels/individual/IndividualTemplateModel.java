@@ -86,6 +86,13 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     	return getVisUrl(temporalVisURL);
     }
 
+    public String getMapOfScienceUrl() {
+
+    	String mapOfScienceVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";
+    	
+    	return getVisUrl(mapOfScienceVisURL);
+    }
+    
     public String getSelfEditingId() {
         String id = null;
         String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");
@@ -102,7 +109,7 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         return id;
     }
     
-    public Map<String, String> getQrData() {
+    public Map<String, String> doQrData() {
         if(qrData == null)
             qrData = generateQrData();
         return qrData;
@@ -120,15 +127,15 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         Collection<DataPropertyStatement> phoneNumbers = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "phoneNumber");
         Collection<DataPropertyStatement> emails = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "email");
 
-        if(firstNames.size() > 0)
+        if(firstNames != null && ! firstNames.isEmpty())
             qrData.put("firstName", firstNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(lastNames.size() > 0)
+        if(lastNames != null && ! lastNames.isEmpty())
             qrData.put("lastName", lastNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(preferredTitles.size() > 0)
+        if(preferredTitles != null && ! preferredTitles.isEmpty())
             qrData.put("preferredTitle", preferredTitles.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(phoneNumbers.size() > 0)
+        if(phoneNumbers != null && ! phoneNumbers.isEmpty())
             qrData.put("phoneNumber", phoneNumbers.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
-        if(emails.size() > 0)
+        if(emails != null && ! emails.isEmpty())
             qrData.put("email", emails.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
 
         String tempUrl = vreq.getRequestURL().toString();

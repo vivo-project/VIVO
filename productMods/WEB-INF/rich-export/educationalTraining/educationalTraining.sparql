@@ -1,0 +1,8 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?educationalTraining ?property ?object .
+} WHERE {
+     PERSON_URI core:educationalTraining ?educationalTraining . 
+     ?educationalTraining ?property ?object .
+}
