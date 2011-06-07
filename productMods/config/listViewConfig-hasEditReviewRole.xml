@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<!-- Discussion with Brian C: This file is a modification of listViewConfig-hasRole.xml -
+     it might be decided to merge the two. (sjm222 6/7/2011) -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT <collated>?subclass</collated>
+                        # send the property to the template, since this view supports multiple role properties
+                        ?property
+                        ?role 
+                        ?startDateOnly
+                        ?roleLabel 
+                        ?activity ?activityName 
+                        ?activityLabel
+                        ?infoResource ?infoResourceName
+                        ?infoResourceLabel
+                        ?dateTimeStart ?dateTimeEnd WHERE {
+                        
+            ?subject ?property ?role  
+            
+            OPTIONAL {  ?role core:roleIn ?activity 
+                        LET (?activityName := afn:localname(?activity)) 
+                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+            } 
+            
+            OPTIONAL {  ?role core:forInformationResource ?infoResource 
+                        LET (?infoResourceName := afn:localname(?infoResource)) 
+                        OPTIONAL { ?infoResource rdfs:label ?infoResourceLabel }
+            }                     
+            <collated>
+            OPTIONAL { ?role a ?subclass .
+                       ?subclass rdfs:subClassOf core:Role 
+            }   
+            </collated>
+            OPTIONAL { ?role rdfs:label ?roleLabel }
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
+                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
+                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                       }
+                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+                       }
+            }  
+            <critical-data-required>
+            FILTER ( bound(?infoResource) )
+            </critical-data-required>
+        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?infoResourceName
+    </query-select>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:Role 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:Role 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role ?roleProperty ?roleValue . 
+            ?activity rdfs:label ?activityName 
+        } WHERE {
+            {
+               ?subject ?property ?role 
+            } UNION {
+               ?subject ?property ?role .
+               ?role ?roleProperty ?roleValue 
+            } UNION {
+               ?subject ?property ?role .
+               ?role core:roleIn ?activity . 
+               ?activity rdfs:label ?activityName 
+            }
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:start ?dateTimeStartValue .
+            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval core:end ?dateTimeEndValue .
+            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role ?roleProperty ?roleValue . 
+            ?infoResource rdfs:label ?infoResourceLabel 
+        } WHERE {
+            {
+                ?subject ?property ?role 
+            } UNION {
+                ?subject ?property ?role .
+                ?role ?roleProperty ?roleValue .
+            } UNION {
+                ?subject ?property ?role .
+                ?role core:forInformationResource ?infoResource . 
+                ?infoResource rdfs:label ?infoResourceLabel .  
+            }
+        } 
+    </query-construct>
+
+    <template>propStatement-hasEditReviewRole.ftl</template>
+</list-view-config>

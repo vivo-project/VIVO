@@ -13,7 +13,7 @@
 
   ?person  core:hasResearchActivityRole ?newRole.
   ?newRole rdf:type core:ResearchActivityRole ;         
-           core:relatedRole ?someActivity .
+           roleToActivityPredicate ?someActivity .
   ?someActivity rdf:type core:ResearchActivity .
   ?someActivity rdfs:label "activity title" .
   
@@ -71,7 +71,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
    role type
    predicate inverse          
    role activity type label (should be singular)
-   super type of role types for roleActivityType select list generation 
+   super type of role types for roleActivityType select list generation
+   roleToActivityPredicate 
+   activityToRolePredicate
 --%>
 
 <c:set var="roleActivityTypeLabel">${param.roleActivityTypeLabel}</c:set>
@@ -81,6 +83,8 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="roleActivityType_objectClassUri" >${param.roleActivityType_objectClassUri}</c:set> 
 <c:set var="roleActivityType_literalOptions" >${param.roleActivityType_literalOptions}</c:set>
 <c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
+<c:set var="roleToActivityPredicate" scope="request">${param.roleToActivityPredicate}</c:set>
+<c:set var="activityToRolePredicate">${param.activityToRolePredicate}</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -116,15 +120,17 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   1.  Add, there is a subject and a predicate but no role and nothing else. 
         
   2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
-     the other end of the object's core:roleIn stmt. 
+     the other end of the object's roleToActivity stmt. 
   
-  3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
-     other end of the object's core:roleIn stmt.  This should be similar to an add but the form should be expanded.
+  3. Repair a bad role node.  There is a subject, predicate and object but there is no individual on the 
+     other end of the object's roleToActivity stmt.  This should be similar to an add but the form should be expanded.
      
-  4. Really bad node. multiple core:roleIn statements.
+  4. Really bad node. multiple roleToActivity statements.
 */
 
- EditMode mode = FrontEndEditingUtils.getEditMode(request, "http://vivoweb.org/ontology/core#roleIn");
+ String roleToActivityPredicate = (String) vreq.getAttribute("roleToActivityPredicate");
+ System.out.println("sjm: roleToActivityPredicate = " + roleToActivityPredicate);
+ EditMode mode = FrontEndEditingUtils.getEditMode(request, roleToActivityPredicate);
 
  if( mode == EditMode.ADD ) {
     %> <c:set var="editMode" value="add"/><%
@@ -166,8 +172,8 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
        
 	?person ?rolePredicate ?role.	
 	?role   a <${roleType}> .		  
-    ?role   core:roleIn ?roleActivity .    
-    ?roleActivity  core:relatedRole ?role .    
+    ?role   <${roleToActivityPredicate}> ?roleActivity .    
+    ?roleActivity  <${activityToRolePredicate}> ?role .    
 </v:jsonset>
 
 <v:jsonset var="n3ForActivityType">     
@@ -176,8 +182,8 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
 <v:jsonset var="n3ForRoleToActivity"> 
 	@prefix core: <${vivoCore}> .    
-    ?role core:roleIn ?roleActivity .
-    ?roleActivity  core:relatedRole ?role .   
+    ?role <${roleToActivityPredicate}> ?roleActivity .
+    ?roleActivity <${activityToRolePredicate}> ?role .   
 </v:jsonset>
 
 <v:jsonset var="n3ForActivityLabel">
@@ -210,13 +216,13 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   PREFIX core: <${vivoCore}>
   PREFIX rdfs: <${rdfs}> 
   SELECT ?existingTitle WHERE {
-        ?role  core:roleIn ?existingActivity .
+        ?role  <${roleToActivityPredicate}> ?existingActivity .
         ?existingActivity rdfs:label ?existingTitle . }
 </v:jsonset>
 
 <v:jsonset var="activityQuery">
   PREFIX core: <${vivoCore}>  
-  SELECT ?existingActivity WHERE { ?role  core:roleIn ?existingActivity . }
+  SELECT ?existingActivity WHERE { ?role  <${roleToActivityPredicate}> ?existingActivity . }
 </v:jsonset>
 
 <v:jsonset var="roleLabelQuery">
@@ -227,7 +233,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <v:jsonset var="activityTypeQuery">
         PREFIX core: <${vivoCore}>
         SELECT ?existingActivityType WHERE {
-            ?role core:roleIn ?existingActivity . 
+            ?role <${roleToActivityPredicate}> ?existingActivity . 
             ?existingActivity a ?existingActivityType . 
         }    
 </v:jsonset>
@@ -546,7 +552,7 @@ private static final String VIVO_CORE = "http://vivoweb.org/ontology/core#";
 private static final String  DEFAULT_ACTIVITY_TYPE_QUERY = 
     "PREFIX core: <" + VIVO_CORE + ">\n" +
     "SELECT ?existingActivityType WHERE { \n" +
-        "?role core:roleIn ?existingActivity . \n" +
+        "?role <${roleToActivityPredicate}> ?existingActivity . \n" +
         "?existingActivity a ?existingActivityType . \n" +
     "}"; 
 // The activity type query results must be limited to the values in the activity type select element. 
@@ -563,7 +569,7 @@ private String getActivityTypeQuery(VitroRequest vreq) {
 	    "PREFIX core: <" + VIVO_CORE + ">\n" +
 	    "PREFIX rdfs: <" + VitroVocabulary.RDFS + ">\n" +
 	    "SELECT ?existingActivityType WHERE {\n" +
-	        "?role core:roleIn ?existingActivity . \n" +
+	        "?role <${roleToActivityPredicate}> ?existingActivity . \n" +
 	        "?existingActivity a ?existingActivityType . \n" +
 	        "?existingActivityType rdfs:subClassOf <" + objectClassUri + "> . \n" +
 	    "}";

@@ -49,11 +49,6 @@
     <owl:inverseOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000029"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
@@ -116,6 +111,11 @@ NOTE: For now we are not addressing whether this is a subclass of foaf:Agent</vi
 NOTE that we are not addressing for now the issue of whether a foaf:Person is a subclass of obi:Organism</vitro:descriptionAnnot>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organism is a material entity that is an individual living system, such as animal, plant, bacteria or virus, that is capable of replicating or reproducing, growth and maintenance in the right environment.</vitro:shortDef>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000016">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>

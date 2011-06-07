@@ -35,9 +35,9 @@
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
       <rdfs:label xml:lang="en">Delaware</rdfs:label>
    </rdf:Description>
-   <rdf:Description rdf:about="http://dbpedia.org/resource/Floria">
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Florida">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">Floria</rdfs:label>
+      <rdfs:label xml:lang="en">Florida</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Georgia">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
