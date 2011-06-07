@@ -78,7 +78,8 @@ h5 {
 /* ------------------------------------------------->  */
 /* EDITING STYLES ---------------------------------->  */
 /* ------------------------------------------------->  */
-input[type="text"], 
+input[type="text"],
+select,  
 input[type="password"] {
     border: 0;
     font-size: 14px;
@@ -560,7 +561,7 @@ body.login #login {
     border-bottom: none;
 }
 #error-alert {
-    margin: 0 12px;
+    margin-left: 0;
     margin-bottom: 12px;
     padding: 12px;
     padding-bottom: 12px;
@@ -1463,9 +1464,11 @@ h2#hasResearchArea .verbosePropertyListing {
 /* ACCOUNTS PAGE ----------------------------------->  */
 /* ------------------------------------------------->  */
 .account-feedback p {
-    padding: 10px;
-    background-color: #F0F0F0;
     line-height: 1.5em;
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .5em;  
+    margin-bottom: 20px;
 }
 table#account {
     table-layout: auto;
@@ -1480,14 +1483,20 @@ table#account {
 table#account caption {
     display: none;
 }
-table#account thead {
+table#account th{
+    background-color: #fff;
 }
 table#account td {
     vertical-align: top;
     padding: .5em;
-    background-color: rgba(200, 200, 180,.25);
     border: 1px solid #F7F9F9; 
     font-size: .9em;
+}    
+table#account tr {
+    background-color: #fff;
+}
+table#account tr:nth-child(2n+1) {
+    background-color: rgba(200, 200, 180,.25);
 }
 #filter-roles {
     float: left;
@@ -1495,19 +1504,20 @@ table#account td {
 }
 #search-accounts {
     float: right;
+    height: 60px;
 }
 .accounts {
     clear: left;
     overflow: hidden;
-    border-top: 1px solid #c1bfbf;
+    border-top: 1px dotted #e1e5e7;
     padding-top: 0;
-    border-bottom: 1px solid #c1bfbf;
+    border-bottom: 1px dotted #e1e5e7;
     padding-bottom: 0;
     width: 100%;
 }
-.delete-account {
+section.accounts .delete-account{
     float: left;
-    border: 2px solid red;
+    margin-top: 13px;
 }
 .display-tools {
     float: left;
@@ -1619,7 +1629,7 @@ ul.dropdown ul.sub_menu li a:hover,
 ul.dropdown ul.sub_menu li a.hover { 
     color: #999 !important;
 }
-/*	LEVEL THREE */
+/*  LEVEL THREE */
 ul.dropdown ul ul { 
     left: 100%; top: 0; 
 }
