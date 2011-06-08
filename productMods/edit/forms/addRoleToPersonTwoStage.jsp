@@ -129,7 +129,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 */
 
  String roleToActivityPredicate = (String) vreq.getAttribute("roleToActivityPredicate");
- System.out.println("sjm: roleToActivityPredicate = " + roleToActivityPredicate);
+ log.debug("roleToActivityPredicate = " + roleToActivityPredicate);
  EditMode mode = FrontEndEditingUtils.getEditMode(request, roleToActivityPredicate);
 
  if( mode == EditMode.ADD ) {
