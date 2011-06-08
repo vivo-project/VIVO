@@ -1289,6 +1289,12 @@ a.all-vivo-publications {
     font-size: .8em !important;
     text-decoration: underline;
 }
+/* <------ MAP O' SCIENCE  */
+#map-of-science h3 a {
+    color: #2485AE;
+    font-size: .8em !important;
+    text-decoration: underline;
+}
 /* COAUTHORS ------>  */
 img.co-author {
     border: 2px solid #ebebeb;
@@ -1565,7 +1571,7 @@ ul.dropdown li a {
 }
 ul.dropdown li#user-menu { 
     background: url(../images/arrow-down-over-account.gif) right 9px no-repeat;
-
+    min-width:110px;
 }
 ul.dropdown li#user-menu a { 
     margin-right: 28px;
@@ -1586,7 +1592,7 @@ ul.dropdown li:hover a {
 }
 /* LEVEL TWO */
 ul.dropdown ul.sub_menu {  
-    background-color: yellow;
+    background-color: #fff;
     font-size: 1.4em;
     visibility: hidden; 
     position: absolute; 
