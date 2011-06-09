@@ -110,11 +110,11 @@
   </listener> 
  
   <!--  Update to the new UserAccounts model (1.3). Needs to run after JenaDataSourceSetup. -->
-  <!-- <listener>
+  <listener>
     <listener-class>
         edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateUserAccounts
     </listener-class>
-  </listener> -->
+  </listener>
 
 
 <!-- The following two listeners remain temporarily until SDB becomes the default triple store --> 
@@ -156,6 +156,10 @@
   <listener>
     <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
     </listener-class>
+  </listener>
+
+  <listener>
+    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.RootUserPolicy$Setup</listener-class>
   </listener>
 
   <listener>
@@ -669,15 +673,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>UserEditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.UserEditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserEditController</servlet-name>
-    <url-pattern>/userEdit</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>OntologyEditController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.OntologyEditController</servlet-class>
   </servlet>
@@ -774,16 +769,6 @@
   <servlet-mapping>
     <servlet-name>RestrictionOperationController</servlet-name>
     <url-pattern>/addRestriction</url-pattern>
-  </servlet-mapping>
-
-<!-- TODO This should go away as soon as the new UserAccounts are fully implemented. jblake -->
-  <servlet>
-    <servlet-name>UsersListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.UsersListingController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UsersListingController</servlet-name>
-    <url-pattern>/listUsers</url-pattern>
   </servlet-mapping>
 
   <servlet>

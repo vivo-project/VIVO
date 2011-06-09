@@ -19,8 +19,7 @@
                             <li id="user-menu"><a href="#">${user.loginName}</a>
                                 <ul class="sub_menu">
                                      <li role="listitem" class="inactive">My profile</li>
-                                     <li role="listitem" class="inactive">My account</li>
-                         <#--            <li role="listitem"><a href="${urls.myAccount}">My account</a></li> -->
+                                     <li role="listitem"><a href="${urls.myAccount}">My account</a></li>
                                      <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                                 </ul>
                             </li>
