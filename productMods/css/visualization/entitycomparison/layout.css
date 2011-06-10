@@ -15,8 +15,14 @@
 
 #subject-parent-entity {
     display: none;
+    font-size:.7em;
+    color:#aaa;
+    margin-left:10px;
 }
-
+#subject-parent-entity-spacer {
+    color:#aaa;
+    margin-left:-18px;
+}
 #error-container {
     display: none;
 }
