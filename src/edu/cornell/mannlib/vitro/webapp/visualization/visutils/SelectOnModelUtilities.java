@@ -72,6 +72,53 @@ public class SelectOnModelUtilities {
 		return entityWithSubOrganizations;
 	}
 	
+	public static Entity getSubjectPersonEntity(Dataset dataset,
+			String subjectEntityURI) throws MalformedQueryParametersException {
+		
+		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+		fieldLabelToOutputFieldLabel.put("authorLabel", QueryFieldLabels.AUTHOR_LABEL);
+		
+		String whereClause = ""
+			+ " <" + subjectEntityURI + "> rdfs:label ?authorLabel . ";
+		
+		QueryRunner<ResultSet> personQuery = 
+			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
+									"",
+									whereClause,
+									"",
+									dataset);
+		
+		Entity personEntity = new Entity(subjectEntityURI);
+		
+		ResultSet queryResult = personQuery.getQueryResult();
+		
+		while (queryResult.hasNext()) {
+			
+			QuerySolution solution = queryResult.nextSolution();
+				
+			RDFNode personLabelNode = solution.get(QueryFieldLabels.AUTHOR_LABEL);
+			if (personLabelNode != null) {
+				personEntity.setEntityLabel(personLabelNode.toString());
+			}
+			
+		}
+		
+		/*
+		 * We are adding A person as it's own subentity in order to make our code for geenrating csv, json 
+		 * & other data as streamlined as possible between entities of type Organization & Person. 
+		 * */
+		SubEntity subEntity = new SubEntity(subjectEntityURI, personEntity.getEntityLabel());
+		subEntity.setEntityClass(VOConstants.EntityClassType.PERSON);
+		
+		personEntity.addSubEntity(subEntity);
+		
+//		Entity entityWithParentOrganizations = getAllParentOrganizations(dataset, subjectEntityURI);
+//		
+//		personEntity.addParents(entityWithParentOrganizations.getParents());
+		
+		return personEntity;
+	}
+	
 	public static Entity getAllParentOrganizations(Dataset dataset,
 			String subjectEntityURI) throws MalformedQueryParametersException {
 		Model organizationModel = ModelConstructorUtilities

@@ -1,0 +1,9 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?geographicLocation ?property ?object .
+} WHERE {
+     PERSON_URI core:mailingAddress ?address . 
+     ?address core:hasGeographicLocation ?geographicLocation .
+     ?geographicLocation ?property ?object .
+}

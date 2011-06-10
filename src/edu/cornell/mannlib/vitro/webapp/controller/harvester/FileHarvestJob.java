@@ -30,5 +30,11 @@ interface FileHarvestJob {
      * @param directory the directory containing files to harvest
      */
     void performHarvest(File directory);
+    
+    /**
+     * The path to the file containing the RDF/XML triples that get added to VIVO.
+     * @return the path to the file containing the RDF/XML triples that get added to VIVO
+     */
+    String getAdditionsFilePath();
 }
 

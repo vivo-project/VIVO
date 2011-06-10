@@ -412,17 +412,34 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify an SMTP host that the form will use for 
+                            Specify an SMTP host that the application will use for 
                             sending e-mail (Optional). If this is left blank, the contact form will  
-                            be hidden and disabled. 
+                            be hidden and disabled, and users will not be notified of changes to their accounts.
                         </td>
                     </tr>
                     <tr class="odd_row">
                         <td>
-                            Vitro.smtpHost 
+                            email.smtpHost 
                         </td>
                         <td>
                             smtp.servername.edu 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify an email address which will appear as the sender in e-mail 
+                            notifications to users (Optional). 
+                            If a user replies to the notification, this address will receive the reply. 
+                            If a user's e-mail address is invalid, this address will receive the error notice.
+                            If this is left blank, users will not be notified of changes to their accounts.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            email.replyTo
+                        </td>
+                        <td>
+                            vivoAdmin@my.domain.edu 
                         </td>
                     </tr>
                     <tr>
@@ -564,18 +581,18 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify the name of your first admin user for 
+                            Specify the email address of the root user account for 
                             the VIVO application. This user will have an initial temporary password  
-                            of 'defaultAdmin'. You will be prompted to create a new password on 
+                            of 'rootPassword'. You will be prompted to create a new password on 
                             first login. 
                         </td>
                     </tr>
                     <tr class="odd_row">
                         <td>
-                            initialAdminUser 
+                            rootUser.emailAddress 
                         </td>
                         <td>
-                            defaultAdmin 
+                            vivoAdmin@my.domain.edu 
                         </td>
                     </tr>
                     <tr>
@@ -711,9 +728,9 @@
             <p>
                 If the startup was successful, you will see a welcome message 
                 informing you that you have successfully installed VIVO. Click the "Log  
-                in" link near the upper right corner. Log in with the <code>initialAdminUser</code>
-                username you set up in Step IV. The initial password for the <code>initialAdminUser</code>
-                account is "defaultAdmin" (without the quotes). On first login, you 
+                in" link near the upper right corner. Log in with the <code>rootUser.emailAddress</code>
+                you set up in Step IV. The initial password for the root 
+                account is "rootPassword" (without the quotes). On first login, you 
                 will be prompted to select a new password and verify it a second time. 
             </p>
             <p>
@@ -745,7 +762,7 @@
                 "Contact Us" form)</h3>
             <p>
                 If you have configured your application to use the "Contact Us"
-                feature in Step IV (<code>Vitro.smtpHost</code>), you will also need to 
+                feature in Step IV (<code>email.smtpHost</code>), you will also need to 
                 add an email address to the VIVO application.&nbsp; This is the email  
                 to which the contact form will submit. It can be a list server or an 
                 individual's email address. 
@@ -758,7 +775,7 @@
                 Email Address" and submit the change. 
             </p>
             <p>
-                If you set the <code>Vitro.smtpHost</code>
+                If you set the <code>email.smtpHost</code>
                 in Step IV and do NOT 
                 provide an email address in this step, your users will receive a java  
                 error in the interface. 
@@ -945,7 +962,9 @@
                         In addition, VIVO will try to associate the user with a profile 
                         page, so the user may edit his own profile data. VIVO will search the  
                         data model for a person with a property that matches the User’s network 
-                        ID. You need to tell VIVO what property should be used for matching.  
+                        ID 
+                        (the value of the property must be either a String literal or an untyped literal). 
+                        You need to tell VIVO what property should be used for matching.  
                         Insert a line like this in the deploy.properties file: 
                     </p>
                     <pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
@@ -997,8 +1016,8 @@
             <ul>
                 <li>
                     Point your browser to the home page of your website, and click 
-                    the "Log in" link near the upper right corner. Log in with the <code>initialAdminUser</code>
-                    username you set up in Step IV. If this is your first time logging in, 
+                    the "Log in" link near the upper right corner. Log in with the <code>rootUser.emailAddress</code>
+                    you set up in Step IV. If this is your first time logging in, 
                     you will be prompted to change the password. 
                 </li>
                 <li>

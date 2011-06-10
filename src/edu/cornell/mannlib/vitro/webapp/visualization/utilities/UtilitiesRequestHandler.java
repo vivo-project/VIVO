@@ -106,7 +106,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											"",
 											whereClause,
 											"",
-											dataset, log);
+											dataset);
 			
 			return getThumbnailInformation(imageQueryHandler.getQueryResult(),
 											   fieldLabelToOutputFieldLabel, vitroRequest);
@@ -131,7 +131,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									aggregationRules,
 									whereClause,
 									groupOrderClause,
-									dataset, log);
+									dataset);
 			
 			Gson publicationsInformation = new Gson();
 			
@@ -162,7 +162,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 									aggregationRules,
 									whereClause,
 									"",
-									dataset, log);
+									dataset);
 			
 			Gson grantsInformation = new Gson();
 			
@@ -309,7 +309,7 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 											aggregationRules,
 											whereClause,
 											groupOrderClause,
-											dataset, log);
+											dataset);
 			
 			return getHighestLevelOrganizationTemporalGraphVisURL(
 							highestLevelOrganizationQueryHandler.getQueryResult(),

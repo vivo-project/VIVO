@@ -33,27 +33,3 @@ function switchVisMode(visMode) {
 	}
 	return 
 }
-
-function loadMarkers(visMode, url, sync) {
-	
-	// Download data from server and add to markerManager if not gotten already
-	var controller = getVisModeController(visMode);
-	if (controller.needLoaded()) {
-		if (sync) {
-			downloader.downloadAndWait(url, function(data) {
-					loadJSONToMarkerManager(data, visMode);
-			});
-		} else {
-			downloader.download(url, function(data) {
-					loadJSONToMarkerManager(data, visMode);
-			});
-		}
-	} // end if
-}
-
-function loadJSONToMarkerManager(data, visMode) {
-	if (data) {
-		var controller = getVisModeController(visMode);
-		controller.loadJsonData(data[0]);
-	}
-}

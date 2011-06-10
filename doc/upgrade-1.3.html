@@ -28,7 +28,18 @@
                 </ul>
             </toc>
             
-            <h3>upload.directory and LuceneSetup.indexDir are merged into vitro.home.directory.</h3>
+            <h3>upload.directory and LuceneSetup.indexDir are merged into vitro.home.directory [see JB for further details]</h3>
+
+            <h3>Email parameters in deploy.properties have changed. [see JB for further details]</h3>
+            <ul>
+                <li>
+                    Vitro.smtpHost is replaced by email.smtpHost
+                </li>
+                <li>
+                    Added email.replyTo as the "from" and "reply-to" address 
+                    that appear in emails sent by the application.
+                </li>
+            </ul>
         
             <h3>Template changes [see RY for further details]</h3>
             <ul>
@@ -55,6 +66,12 @@
                 </li>
                 <li>This and other changes are documented in vitro/doc/list_view_configuration_guidelines.txt.</li>
                 
+            </ul>
+
+            <h3>Changes to Authorization [see JB for further details]</h3>
+            <ul>
+                <li>selfEditing.idMatchingProperty will now match String literals as well as untyped literals.</li>
+                <li>'initialAdminUser' property is replaced by 'rootUser.emailAddress' - initial password is 'rootPassword'
             </ul>
         </div> <!-- #wrapper-content -->
         

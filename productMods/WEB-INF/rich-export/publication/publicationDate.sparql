@@ -1,0 +1,13 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?date ?property ?object .
+     ?precision ?property2 ?object2 .
+} WHERE {
+     PERSON_URI core:authorInAuthorship ?authorship . 
+     ?authorship core:linkedInformationResource ?publication .
+     ?publication ?dateTimeValue ?date .
+     ?date ?property ?object .
+     ?date core:dateTimePrecision ?precision .
+     ?precision ?property2 ?object2 .
+}

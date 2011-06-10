@@ -7,10 +7,11 @@
 <#assign individualProductExtension>
     <#-- Include for any class specific template additions -->
     ${classSpecificExtension!}
-    
+    <!--PREINDIVIDUAL OVERVIEW.FTL-->
     <#include "individual-overview.ftl">
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
+    <!--postindiviudal overiew tfl-->
 </#assign>
 
 <#include "individual-vitro.ftl">

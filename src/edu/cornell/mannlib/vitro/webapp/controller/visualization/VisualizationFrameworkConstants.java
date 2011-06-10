@@ -87,6 +87,14 @@ public class VisualizationFrameworkConstants {
 	public static final String COPI_NETWORK_STREAM_VIS_MODE = "copi_network_stream";
 	public static final String COPI_NETWORK_DOWNLOAD_VIS_MODE = "copi_network_download";
 	
+	
+	/*
+	 * Vis modes for Map of Science Handler
+	 * */
+	public static final String DISCIPLINE_TO_ACTIVTY_VIS_MODE = "discipline";
+	public static final String SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE = "subdiscipline";
+	
+	
 	/*
 	 * These values represent possible utilities vis modes.
 	 * */
@@ -117,6 +125,7 @@ public class VisualizationFrameworkConstants {
 	public static final String UTILITIES_VIS = "utilities";
 	public static final String ENTITY_COMPARISON_VIS = "entity_comparison";
 	public static final String PUBLICATION_TEMPORAL_VIS_SHORT_URL = "publication-graph";
+	public static final String MAP_OF_SCIENCE_VIS_SHORT_URL = "map-of-science";
 	public static final String GRANT_TEMPORAL_VIS_SHORT_URL = "grant-graph";
 	public static final String CO_PI_VIS = "coprincipalinvestigator";
 	

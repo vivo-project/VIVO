@@ -14,9 +14,7 @@ import mapping.ScienceMappingResult;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
-import org.jgrapht.util.MathUtil;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.Dataset;
@@ -89,11 +87,48 @@ public class MapOfScienceVisualizationRequestHandler implements
 //		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
+	
+	
+	private Map<String, String> getSubjectPersonEntityAndGenerateDataResponse(
+			VitroRequest vitroRequest, Log log, Dataset dataset,
+			String subjectEntityURI, VisConstants.DataVisMode dataOuputFormat)
+					throws MalformedQueryParametersException {
+		
+		Map<String, Activity> documentURIForAssociatedPeopleTOVO = new HashMap<String, Activity>();
+		
+		
+		Entity personEntity = SelectOnModelUtilities
+				.getSubjectPersonEntity(dataset, subjectEntityURI);
+		
+		if (personEntity.getSubEntities() !=  null) {
+			
+			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
+						.getPublicationsWithJournalForAssociatedPeople(dataset, personEntity.getSubEntities());
+			
+		}
+		
+		if (documentURIForAssociatedPeopleTOVO.isEmpty()) {
+			
+			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
+				return prepareStandaloneDataErrorResponse();
+			} else {
+				return prepareDataErrorResponse();
+			}
+			
+		} else {	
+			
+			if (VisConstants.DataVisMode.JSON.equals(dataOuputFormat)) {
+				return prepareStandaloneDataResponse(vitroRequest, personEntity);
+			} else {
+				return prepareDataResponse(vitroRequest, personEntity);
+			}
+		}
+	}
 
 	private Map<String, String> getSubjectEntityAndGenerateDataResponse(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String subjectEntityURI, VisConstants.DataVisMode dataOuputFormat)
-			throws MalformedQueryParametersException {
+					throws MalformedQueryParametersException {
 		
 		Entity organizationEntity = SelectOnModelUtilities
 				.getSubjectOrganizationHierarchy(dataset, subjectEntityURI);
@@ -123,7 +158,23 @@ public class MapOfScienceVisualizationRequestHandler implements
 			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
 										organizationEntity,
 										organizationWithAssociatedPeople);
-		}
+		} /*else {
+			
+			
+			 // This is for just people.
+			Set<SubEntity> test = new HashSet<SubEntity>();
+			
+			test.add(new SubEntity(subjectEntityURI));
+			
+			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
+					.getPublicationsWithJournalForAssociatedPeople(dataset, test);
+
+			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
+										organizationEntity,
+										organizationWithAssociatedPeople);
+			
+			
+		}*/
 		
 		if (allDocumentURIToVOs.isEmpty() && documentURIForAssociatedPeopleTOVO.isEmpty()) {
 			
@@ -163,18 +214,34 @@ public class MapOfScienceVisualizationRequestHandler implements
 			entityLabel = "no-organization";
 		}
 		
-		String outputFileName = UtilityFunctions.slugify(entityLabel)
-				+ "_discipline-to-publications" + ".csv";
-		
+		String outputFileName = UtilityFunctions.slugify(entityLabel);
 		
 		Map<String, String> fileData = new HashMap<String, String>();
 		
-		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
-					 outputFileName);
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-				getDisciplineToPublicationsCSVContent(entity));
+		
+		if (VisualizationFrameworkConstants.SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE
+				.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
+			
+			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+						 getSubDisciplineToPublicationsCSVContent(entity));
+			
+			outputFileName += "_subdiscipline-to-publications" + ".csv";
+			
+		} else {
+			
+			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+						 getDisciplineToPublicationsCSVContent(entity));
+			
+			outputFileName += "_discipline-to-publications" + ".csv";
+			
+		}
+		
+		fileData.put(DataVisualizationController.FILE_NAME_KEY, 
+				 outputFileName);
+
+		
 		return fileData;
 	}
 	
@@ -227,14 +294,26 @@ public class MapOfScienceVisualizationRequestHandler implements
 			currentDataVisMode = VisConstants.DataVisMode.JSON;
 		}
 		
+		if (UtilityFunctions.isEntityAPerson(vitroRequest, entityURI)) {
+			
+			return getSubjectPersonEntityAndGenerateDataResponse(
+					vitroRequest, 
+					log,
+					dataset,
+					entityURI,
+					currentDataVisMode);
+			
+		} else {
 
-		return getSubjectEntityAndGenerateDataResponse(
-				vitroRequest, 
-				log,
-				dataset,
-				entityURI,
-				currentDataVisMode);
+			return getSubjectEntityAndGenerateDataResponse(
+					vitroRequest, 
+					log,
+					dataset,
+					entityURI,
+					currentDataVisMode);
 		
+		}
+
 	}
 	
 	
@@ -273,7 +352,6 @@ public class MapOfScienceVisualizationRequestHandler implements
         body.put("entityLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
         body.put("entityLabel", organizationLabel);
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
-        
         
         return new TemplateResponseValues(standaloneTemplate, body);
 	}
@@ -412,17 +490,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 		
 		csvFileContent.append("Discipline, Publication Count, % Activity\n");
 		
-		Set<Activity> publicationsForEntity = new HashSet<Activity>();
-		
-		for (SubEntity subEntity : subjectEntity.getSubEntities()) {
-			
-			publicationsForEntity.addAll(subEntity.getActivities());
-		}
-		
-		
-		PublicationJournalStats publicationStats = getPublicationJournalStats(publicationsForEntity);
-		
-		ScienceMappingResult result = getScienceMappingResult(publicationStats.journalToPublicationCount); 
+		ScienceMappingResult result = extractScienceMappingResultFromActivities(subjectEntity); 
 		
 		Map<Integer, Float> disciplineToPublicationCount = new HashMap<Integer, Float>();
 		
@@ -467,6 +535,59 @@ public class MapOfScienceVisualizationRequestHandler implements
 		}
 		
 		return csvFileContent.toString();
+	}
+	
+
+	private String getSubDisciplineToPublicationsCSVContent(Entity subjectEntity) {
+
+		StringBuilder csvFileContent = new StringBuilder();
+		
+		csvFileContent.append("Sub-Discipline, Publication Count, % Activity\n");
+		
+		ScienceMappingResult result = extractScienceMappingResultFromActivities(subjectEntity); 
+		
+		Float totalMappedPublications = new Float(0);
+		
+		if (result != null) {
+			
+			DecimalFormat percentageActivityFormat = new DecimalFormat("#.#");
+			
+			totalMappedPublications = result.getMappedPublications();
+		
+			for (Map.Entry<Integer, Float> currentMappedSubdiscipline : result.getMappedResult().entrySet()) {
+				
+				csvFileContent.append(StringEscapeUtils.escapeCsv(MapOfScienceConstants.SUB_DISCIPLINE_ID_TO_LABEL
+																	.get(currentMappedSubdiscipline.getKey())));
+				csvFileContent.append(", ");
+				csvFileContent.append(percentageActivityFormat.format(currentMappedSubdiscipline.getValue()));
+				csvFileContent.append(", ");
+				
+				if (totalMappedPublications > 0) {
+					csvFileContent.append(percentageActivityFormat.format(100 * currentMappedSubdiscipline.getValue() / totalMappedPublications));
+				} else {
+					csvFileContent.append("Not Available");
+				}
+				csvFileContent.append("\n");
+			}
+		}
+		
+		return csvFileContent.toString();
+	}
+
+	private ScienceMappingResult extractScienceMappingResultFromActivities(
+			Entity subjectEntity) {
+		Set<Activity> publicationsForEntity = new HashSet<Activity>();
+		
+		for (SubEntity subEntity : subjectEntity.getSubEntities()) {
+			
+			publicationsForEntity.addAll(subEntity.getActivities());
+		}
+		
+		
+		PublicationJournalStats publicationStats = getPublicationJournalStats(publicationsForEntity);
+		
+		ScienceMappingResult result = getScienceMappingResult(publicationStats.journalToPublicationCount);
+		return result;
 	}
 	
 	private class PublicationJournalStats {

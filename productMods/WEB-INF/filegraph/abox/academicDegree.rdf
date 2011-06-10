@@ -609,4 +609,9 @@
     <rdfs:label xml:lang="en-US">M.Mus. Master of Music</rdfs:label>
     <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
   </rdf:Description>
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/degree/academicDegree119">
+    <core:abbreviation>Psy.D.</core:abbreviation>
+    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
+    <rdfs:label xml:lang="en-US">Psy.D. Doctor of Psychology</rdfs:label>
+  </rdf:Description>
 </rdf:RDF>

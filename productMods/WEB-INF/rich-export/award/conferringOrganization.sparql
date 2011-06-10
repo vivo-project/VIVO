@@ -1,0 +1,9 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?organization ?property ?object .
+} WHERE {
+     PERSON_URI core:awardOrHonor ?awardReceipt .
+     ?awardReceipt core:awardConferredBy ?organization . 
+     ?organization ?property ?object .
+}

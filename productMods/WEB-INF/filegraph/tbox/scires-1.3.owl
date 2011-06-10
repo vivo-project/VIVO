@@ -64,11 +64,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 2 trials, an experimental study drug or treatment is given to a larger group of people (100-300) to see if it is effective and to further evaluate its safety.</vitro:descriptionAnnot>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000392">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service in which a service consumer provides some material or data as input which a service provider stores and returns as output.</vitro:descriptionAnnot>
@@ -117,6 +112,11 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An organism is a material entity that is an individual living system, such as animal, plant, bacteria or virus, that is capable of replicating or reproducing, growth and maintenance in the right environment.</vitro:shortDef>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000016">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/ERO_0000015"/>
@@ -136,8 +136,8 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
 </vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000004">
-    <rdfs:subClassOf rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:nodeID="A0"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An implement used to facilitate work, especially precision work.</vitro:shortDef>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Equipment"/>

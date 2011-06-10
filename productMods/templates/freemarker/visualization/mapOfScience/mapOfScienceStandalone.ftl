@@ -6,26 +6,79 @@ corresponding changes in the included Templates. -->
 
 <#include "mapOfScienceSetup.ftl">
 
-${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.blockUI.min.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.dataTables.min.js"></script>', 
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/visualization-helper-functions.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ClassExtendUtils.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/DownloadManager.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/GMapAPI.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ColorStrategy.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/SizeCoding.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/CustomScimaps.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/Polygon.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/CustomMarker.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/MarkerManager.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisModeControllers.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisCommonControl.js"></script>',
-			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/InitializeMap.js"></script>')}              
+<div id="map-of-science-response">
 
-<#-- CSS files -->
+<#--
+<div id="subject-parent-entity" class="hide-dom-on-init">
+	<a id="subject-parent-entity-profile-url" href="#"></a>&nbsp;
+    <a id="subject-parent-entity-temporal-url" href="#"><img src="${mapOfScienceIcon}" width="15px" height="15px"/></a>
+</div>
+-->
+        
+<h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a>&nbsp;
+<img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on Publications which have been loaded into the VIVO system" /></span></h2>
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />')}
+<div id="map-of-science-info" class="hide-dom-on-init"> Explore <span id="mapped-publications" style="font-weight: bold"></span> publications activity across 554 scientific sub-disciplines 
+	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+		alt="information icon" 
+    	title="VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.
 
-<div id="map_area" style="width: 640px; height: 480px;"></div> 
+You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science, based on publications that have been loaded into this VIVO instance.
+
+Overlaid circles are larger if ${entityLabel} has many publications in that sub-discipline, and are smaller if ${entityLabel} has fewer publications in that sub-discipline.
+
+Circles are overlaid on the Map of Science itself, which is made of 554 interconnected sub-disciplines, shown as grey dots here. A sub-discipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 sub-disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are interconnected, and will be closer to one another on the map.
+
+For more information on this and other maps of science, see http://mapofscience.com or http://scimaps.org" /> 
+</div>
+
+<div id="left-column" class="hide-dom-on-init">
+	<div id="notification-container" style="display:none">
+        <div id="error-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
+            <a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
+            <span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
+            <h1>&#035;{title}</h1>
+            <p>&#035;{text}</p>
+            <p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
+        </div>
+        
+        <div id="warning-notification" class="ui-state-highlight ui-corner-all" >
+        <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+        <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+            <h1>&#035;{title}</h1>
+            <p>&#035;{text}</p>
+        </div>
+    
+    </div>
+    
+    <!-- <h3>What do you want to compare?</h3> -->
+    <div id="science-areas-filter">
+    	<span id="discipline-filter" class="filter-option active-filter">13 Disciplines</span> | 
+    	<span id="subdisciplines-filter" class="filter-option">554 Sub-Disciplines</span>
+    	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+    		 alt="information icon" 
+    		 title="${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 sub-disciplines on the map of science.
+
+The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color.  Each of these disciplines contains multiple sub-disciplines. You can hover over a discipline in the table below to show which overlaid circles it corresponds to on the map.
+
+Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discipline is defined as a cluster of journals. We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. You can hover over a sub-discipline in the table below to show which overlaid circle it corresponds to on the map." />
+    </div>
+    
+    <div id="main-science-areas-table-container"></div>
+    <div id="main-science-areas-table-footer">
+    <a id="csv" href="${entityMapOfScienceDisciplineCSVURL}" class="map-of-science-links">Export Complete Table</a>
+    <#-- <a class="clear-selected-entities map-of-science-links" title="Clear all selected entities.">Clear</a> -->
+    </div>
+</div>		
+
+<div id="right-column"><div id="map_area"></div>
+<div id="percent-mapped-info">
+mapped <span id="percent-mapped"></span>% of <span id="total-publications"></span> publications
+	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+		alt="information icon" 
+		title="This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and therefore it may not be fully representative of the overall publication activity for ${entityLabel}.
+
+The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncracies may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a concern." /></div>
+
+</div>
+</div>

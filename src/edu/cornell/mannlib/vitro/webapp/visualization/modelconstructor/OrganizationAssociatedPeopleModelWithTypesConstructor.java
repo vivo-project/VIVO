@@ -64,7 +64,7 @@ public class OrganizationAssociatedPeopleModelWithTypesConstructor implements Mo
 	
 	private Model executeQuery(String constructQuery) {
 		
-		System.out.println("in constructed model for associated people for organization");
+		log.debug("in constructed model for associated people for organization");
 		
 		Model constructedModel = ModelFactory.createDefaultModel();
 
