@@ -1545,7 +1545,7 @@ section.accounts .delete-account{
     display: inline-block;
 }
 /* ADD ACCOUNTS ------>  */
-#add-account p {
+form.customForm p {
     margin-top: 8px;
 }
 form.customForm #reset-password {
@@ -1555,7 +1555,9 @@ form.customForm #reset-password {
 form.customForm p.note{
      padding-bottom: 20px;
      padding-top: 0;
-     margin-top: 25px;
+}
+#add-account p.note {
+    margin-top: 20px;
 }
 #add-account input[type="text"],
 #create-account input[type="text"],
@@ -1567,15 +1569,10 @@ form.customForm p.note{
 /* CREATE PASSWORD ------>  */
 #create-password p.note {
      margin-top: 0;
-     padding-bottom: 10px;
 }
 /* EDIT ACCOUNT ------>  */
 #edit-account p.note {
-     margin-top: 5px;
-     padding-bottom: 10px;
-}
-#edit-account p {
-    margin-top: 8px;
+     margin-top: 3px;
 }
 /* MY ACCOUNT ------>  */
 #my-account p.note {
@@ -1583,6 +1580,8 @@ form.customForm p.note{
      padding-top: 0;
      padding-bottom: 10px;
 }
+/* RESET PASSWORD ------>  */
+
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
 /* ------------------------------------------------->  */
