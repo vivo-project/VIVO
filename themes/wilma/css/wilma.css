@@ -1523,7 +1523,7 @@ table#account tr:nth-child(2n+1) {
 }
 .accounts {
     clear: left;
-    overflow: hidden;
+    height: 60px;
     border-top: 1px dotted #e1e5e7;
     padding-top: 0;
     border-bottom: 1px dotted #e1e5e7;
@@ -1557,7 +1557,11 @@ form.customForm p.note{
      padding-top: 0;
      margin-top: 25px;
 }
-#add-account input[type="text"] {
+#add-account input[type="text"],
+#create-account input[type="text"],
+#edit-account input[type="text"],
+#my-account input[type="text"],
+#my-account input[type="password"] {
     width: 20em;
 }
 /* CREATE PASSWORD ------>  */
@@ -1572,6 +1576,12 @@ form.customForm p.note{
 }
 #edit-account p {
     margin-top: 8px;
+}
+/* MY ACCOUNT ------>  */
+#my-account p.note {
+     margin-top: 0;
+     padding-top: 0;
+     padding-bottom: 10px;
 }
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
