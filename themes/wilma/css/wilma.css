@@ -1546,13 +1546,11 @@ section.accounts .delete-account{
 }
 /* ADD ACCOUNTS ------>  */
 #add-account p {
-    margin-top: 15px;
-}
-#reset-password {
-    background-color: green;
+    margin-top: 8px;
 }
 form.customForm #reset-password {
     margin-top: 20px;
+    margin-left: 0;
 }
 form.customForm p.note{
      padding-bottom: 20px;
@@ -1566,6 +1564,14 @@ form.customForm p.note{
 #create-password p.note {
      margin-top: 0;
      padding-bottom: 10px;
+}
+/* EDIT ACCOUNT ------>  */
+#edit-account p.note {
+     margin-top: 5px;
+     padding-bottom: 10px;
+}
+#edit-account p {
+    margin-top: 8px;
 }
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
