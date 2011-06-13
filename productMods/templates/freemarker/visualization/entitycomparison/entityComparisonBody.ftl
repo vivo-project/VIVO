@@ -2,13 +2,13 @@
 
 <div id="body">
 
-        <div id="subject-parent-entity">
-            <a id="subject-parent-entity-profile-url" href="#"></a>&nbsp;
-            <a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphSmallIcon}" width="15px" height="15px"/></a>
-        </div>
+
         
-        <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a>&nbsp;
-        <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system" /></span></h2>
+        <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a></span>
+        <span id="subject-parent-entity"><span>|&nbsp;&nbsp;</span>
+            <a id="subject-parent-entity-profile-url" href="#" title="Parent organization of ${organizationLabel}"></a>&nbsp;
+            <a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphSmallIcon}" width="15px" height="15px"/></a>
+        </span></h2><br>
         
         <div id="leftblock">
             <div id="leftUpper">
@@ -94,7 +94,8 @@
             </div>
         
             <div id="bottom">
-                <h3><span id="comparisonParameter"></span></h3>
+                <h3><span id="comparisonParameter"></span>&nbsp;
+                <img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on ${currentParameterObject.value} which have been loaded into the VIVO system"  width="15px" height="15px"/></h3>
             <p class="displayCounter">You have selected <span id="counter">0</span> of a maximum 
             <span id="total">10</span> <span id="entityleveltext"> schools</span>. 
             <span id="legend-row-header"> 
