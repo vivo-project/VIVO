@@ -1497,7 +1497,7 @@ table#account td {
     padding: .5em;
     border: 1px solid #F7F9F9; 
     font-size: .9em;
-}    
+}  
 table#account tr {
     background-color: #fff;
 }
@@ -1550,7 +1550,7 @@ form.customForm #reset-password {
 #add-account .note {
      padding-bottom: 20px;
      padding-top: 0;
-     margin-top: 5px;
+     margin-top: 25px;
 }
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
@@ -1612,7 +1612,6 @@ ul.dropdown ul.sub_menu li {
 }
 ul.dropdown ul.sub_menu li:last-child { 
     width: 96px;
-
 }
 /* IE 6 & 7 Needs Inline Block */
 /* ADD IN IE6.css and IE7.css*/
