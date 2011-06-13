@@ -1544,9 +1544,7 @@ section.accounts .delete-account{
 .accounts-per-page-form {
     display: inline-block;
 }
-/* ------------------------------------------------->  */
-/* ADD ACCOUNTS  ----------------------------------->  */
-/* ------------------------------------------------->  */
+/* ADD ACCOUNTS ------>  */
 #add-account p {
     margin-top: 15px;
 }
@@ -1556,13 +1554,18 @@ section.accounts .delete-account{
 form.customForm #reset-password {
     margin-top: 20px;
 }
-#add-account .note {
+form.customForm p.note{
      padding-bottom: 20px;
      padding-top: 0;
      margin-top: 25px;
 }
 #add-account input[type="text"] {
     width: 20em;
+}
+/* CREATE PASSWORD ------>  */
+#create-password p.note {
+     margin-top: 0;
+     padding-bottom: 10px;
 }
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
