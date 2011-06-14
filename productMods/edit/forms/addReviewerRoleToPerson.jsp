@@ -6,6 +6,6 @@
     <jsp:param name="roleToActivityPredicate" value="http://vivoweb.org/ontology/core#forInformationResource" />
     <jsp:param name="activityToRolePredicate" value="http://vivoweb.org/ontology/core#linkedRole" />	
 	<jsp:param name="roleActivityType_optionsType" value="CHILD_VCLASSES" />
-	<jsp:param name="roleActivityType_objectClassUri" value="http://purl.org/ontology/bibo/Collection" /> 
+	<jsp:param name="roleActivityType_objectClassUri" value="http://vivoweb.org/ontology/core#InformationResource" /> 
 	<jsp:param name="roleActivityType_literalOptions" value="[ 'Select one' ]" />
 </jsp:include>
