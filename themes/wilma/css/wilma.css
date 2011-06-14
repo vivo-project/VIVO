@@ -420,8 +420,8 @@ ul#header-nav {
 ul#header-nav li {
     float: left;
     display: block;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-right: 1px solid #7c7d7f;
     font-size: .7em;
     color: #fff;
@@ -430,7 +430,7 @@ ul#header-nav li.last {
     border-right: none;
 }
 ul#header-nav li:last-child {
-    padding-left: 10px;
+    padding-left: 1px;
     padding-right: 0;
     border-right: none;
 }
@@ -442,9 +442,12 @@ ul#header-nav a:visited {
     text-decoration: none
 }
 ul#header-nav a:hover,
-ul#header-nav  a:active {
+ul#header-nav a:active {
     text-decoration: none;
     color: #999;
+}
+ul#header-nav a.log-out {
+    padding-left: 10px;
 }
 /* SEARCH ------>  */
 #search {
@@ -1573,11 +1576,10 @@ form.customForm p.note{
 /* EDIT ACCOUNT ------>  */
 #edit-account p.note {
      margin-top: 3px;
+     width: 400px;
 }
 /* MY ACCOUNT ------>  */
 #my-account p.note {
-     margin-top: 0;
-     padding-top: 0;
      padding-bottom: 10px;
 }
 /* RESET PASSWORD ------>  */
@@ -1612,7 +1614,6 @@ ul.dropdown li#user-menu:hover {
     color: #000 !important; 
     position: relative; 
     background: #fff url(../images/arrow-down-account.gif) right 9px no-repeat;
-    padding-right: 10px;
     border-bottom: 1px solid #cdcfcf;
 }
 ul.dropdown li.hover a,

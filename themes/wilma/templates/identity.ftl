@@ -16,7 +16,7 @@
                 </#if>
                     <li>
                         <ul class="dropdown">
-                            <li id="user-menu"><a href="#">${user.loginName}</a>
+                            <li id="user-menu"><a href="#">${user.firstName}</a>
                                 <ul class="sub_menu">
                                      <li role="listitem" class="inactive">My profile</li>
                                      <li role="listitem"><a href="${urls.myAccount}">My account</a></li>
@@ -29,7 +29,7 @@
                 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
                 
             <#else>
-                <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
+                <li role="listitem"><a class="log-out" title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>
         </ul>
         
