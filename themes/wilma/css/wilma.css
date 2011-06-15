@@ -1561,6 +1561,7 @@ form.customForm p.note{
 }
 #add-account p.note {
     margin-top: 20px;
+    width: 400px;
 }
 #add-account input[type="text"],
 #create-account input[type="text"],
@@ -1581,6 +1582,11 @@ form.customForm p.note{
 /* MY ACCOUNT ------>  */
 #my-account p.note {
      padding-bottom: 10px;
+     width: 400px;
+}
+#my-account input#email-address,
+#my-account input#new-password {
+    margin-bottom: 0;
 }
 /* RESET PASSWORD ------>  */
 
