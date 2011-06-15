@@ -117,11 +117,14 @@
   </listener>
 
 
-<!-- The following two listeners remain temporarily until SDB becomes the default triple store --> 
+<!-- The following listener remains temporarily until SDB becomes the default triple store --> 
   <listener>
      <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels</listener-class>
   </listener>
 
+<!-- This listener sets up SimpleReasoner also in SDB mode. In SDB mode, Pellet is used for -->
+<!-- TBox reasoning and SimpleReasoner is used for ABox reasoning. In RDF mode, Pellet was -->
+<!-- used for both. -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.PelletReasonerSetup</listener-class>
   </listener>
