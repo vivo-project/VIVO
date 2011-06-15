@@ -1,5 +1,10 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<#if jobKnown == "false">
+<p>Error: No file harvest job was specified, or an unknown job was specified.</p>
+<p>The end user should not see this error under normal circumstances, so this is probably a bug and should be reported.</p>
+<#else>
+
 <script type="text/javascript">
 
 	var harvestProgressResponse;
@@ -17,8 +22,9 @@
 				window.setTimeout(continueHarvest, 1000);
 			}
 		}
-		request.open("POST", "/vivo/harvester/testfile", true);
+		request.open("POST", "${postTo}", true);
 		request.setRequestHeader("content-type","application/x-www-form-urlencoded");
+		//request.send("${paramIsHarvestClick}=true&${paramJob}=${job}");
 		request.send("${paramIsHarvestClick}=true");
 	}
 	
@@ -41,8 +47,9 @@
 					window.setTimeout(continueHarvest, 1000);
 				}
 			}
-			request.open("POST", "/vivo/harvester/testfile", true);
+			request.open("POST", "${postTo}", true);
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			//request.send("${paramIsHarvestClick}=false&${paramJob}=${job}");
 			request.send("${paramIsHarvestClick}=false");
 		} else {
 		
@@ -173,8 +180,9 @@
 	<div id="step3-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">Upload file(s)</h4>
 		<p>Upload your filled-in template(s).</p>
-		<form id="fileUploadForm" method="post" enctype="multipart/form-data" action="/vivo/harvester/testfile">
+		<form id="fileUploadForm" method="post" enctype="multipart/form-data" action=${postTo}>
 			<input type="hidden" id="${paramFirstUpload}" name="${paramFirstUpload}" value="true" />
+			<!--<input type="hidden" id="${paramJob}" name="${paramJob}" value="${job}" /> -->
 			<input type="file" name="${paramUploadedFile}" />
 			<input type="submit" name="submit" value="Upload" />
 			<iframe id="uploadTarget" name="uploadTarget" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>
@@ -225,5 +233,7 @@
 	</div>
 	<div class="clearBothDiv" />
 </div>
+
+</#if>
 
 
