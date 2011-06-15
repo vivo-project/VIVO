@@ -16,7 +16,7 @@
                 </#if>
                     <li>
                         <ul class="dropdown">
-                            <li id="user-menu"><a href="#">${user.firstName}</a>
+                            <li id="user-menu"><a href="#">${user.loginName}</a>
                                 <ul class="sub_menu">
                                      <li role="listitem" class="inactive">My profile</li>
                                      <li role="listitem"><a href="${urls.myAccount}">My account</a></li>
