@@ -692,6 +692,21 @@ p.password-note {
     margin-right:-10px;
     height:34px;
 }
+p.external-auth {
+    margin: 0 auto;
+}
+p.external-auth a.blue,
+p.external-auth a.blue:visited {
+     background-color: #398AAC;
+     width: 180px;
+     margin-bottom: 17px;
+     line-height: 1.3em;
+     padding-top: 10px;
+}
+p.external-auth a.blue:hover {
+    background-color: #58A2C1;
+    color: #fff;
+}
 /* HOME SEARCH ------>  */
 #search-home {
     float: left;
