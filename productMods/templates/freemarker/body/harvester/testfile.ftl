@@ -24,8 +24,8 @@
 		}
 		request.open("POST", "${postTo}", true);
 		request.setRequestHeader("content-type","application/x-www-form-urlencoded");
-		//request.send("${paramIsHarvestClick}=true&${paramJob}=${job}");
-		request.send("${paramIsHarvestClick}=true");
+		//request.send("${paramMode}=${modeHarvest}&${paramJob}=${job}");
+		request.send("${paramMode}=${modeHarvest}");
 	}
 	
 	
@@ -49,8 +49,8 @@
 			}
 			request.open("POST", "${postTo}", true);
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			//request.send("${paramIsHarvestClick}=false&${paramJob}=${job}");
-			request.send("${paramIsHarvestClick}=false");
+			//request.send("${paramMode}=${modeCheckStatus}&${paramJob}=${job}");
+			request.send("${paramMode}=${modeCheckStatus}");
 		} else {
 		
 			var importedGrants = document.getElementById("importedGrants")
@@ -124,6 +124,10 @@
 			document.getElementById("fileUploadForm").target = "uploadTarget";
 			document.getElementById("uploadTarget").onload = fileResponse;
 		}
+		document.getElementById("downloadTemplateForm").onsubmit = function()
+		{
+			document.getElementById("downloadTemplateForm").target = "uploadTarget";
+		}
 	}
 	window.onload = init;
 </script>
@@ -150,12 +154,15 @@
 	}
 </style>
 
-
+<h2>${jobSpecificHeader}</h2>
 <div id="step1" class="testfile-step">
 	<h3 class="testfile-step-header">Step 1</h3>
 	<div id="step1-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">Download template</h4>
-		<p><input type="button" value="Download" style="margin-right:10px" />We are providing a helpful template file for you to download.</p>
+		<form id="downloadTemplateForm" method="post" action=${postTo}>
+			<input type="hidden" id="${paramMode}" name="${paramMode}" value="${modeDownloadTemplate}" />
+			<p><input type="submit" name="submit" value="Download" style="margin-right:10px" />We are providing a helpful template file for you to download.</p>
+		</form>
 	</div>
 	<div class="clearBothDiv" />
 </div>

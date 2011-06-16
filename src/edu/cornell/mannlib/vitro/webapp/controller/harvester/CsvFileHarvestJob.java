@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -47,15 +48,21 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private final String namespace;
 
     /**
+     * A name for the type of data being imported.  For example "Grant" or "Person".
+     */
+    private final String friendlyName;
+
+    /**
      * Constructor.
      * @param templateFileName just the name of the template file.  The directory is assumed to be standard.
      */
-    public CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace) {
+    public CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName) {
         this.vreq = vreq;
         this.templateFile = new File(getTemplateFileDirectory() + templateFileName);
         this.scriptFile = new File(getScriptFileDirectory() + scriptFileName);
         log.error(getTemplateFileDirectory() + templateFileName);
         this.namespace = namespace;
+        this.friendlyName = friendlyName;
     }
 
     /**
@@ -79,6 +86,27 @@ class CsvFileHarvestJob implements FileHarvestJob {
     }
 
 
+    
+    private boolean[] getLinesEndingInComma(File file) throws IOException {
+        ArrayList<Boolean> linesEndingInCommaList = new ArrayList<Boolean>();
+        
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        
+        for(String line = reader.readLine(); line != null; line = reader.readLine()) {
+            boolean lineEndsInComma = line.endsWith(",");
+            linesEndingInCommaList.add(lineEndsInComma);
+        }
+        reader.close();
+        
+        boolean[] linesEndingInComma = new boolean[linesEndingInCommaList.size()];
+        for(int i = 0; i < linesEndingInComma.length; i++) {
+            linesEndingInComma[i] = linesEndingInCommaList.get(i);
+        }
+        return linesEndingInComma;
+    }
+    
+    
+    
     @Override
     @SuppressWarnings("rawtypes")
     public String validateUpload(File file) {
@@ -88,7 +116,9 @@ class CsvFileHarvestJob implements FileHarvestJob {
             List templateCsv = reader.parse(this.templateFile);
             String[] templateFirstLine = (String[])templateCsv.get(0);
 
+            //if a line ends in a comma (absolutely a comma, no whitespace), SimpleReader will not consider the part after the comma to be a blank section.
             List csv = reader.parse(file);
+            boolean[] linesEndingInComma = getLinesEndingInComma(file);
 
             int length = csv.size();
 
@@ -97,19 +127,16 @@ class CsvFileHarvestJob implements FileHarvestJob {
 
             for(int i = 0; i < length; i++) {
                 String[] line = (String[])csv.get(i);
+                boolean endsInComma = linesEndingInComma[i];
                 if(i == 0) {
                     String errorMessage = validateCsvFirstLine(templateFirstLine, line);
                     if(errorMessage != null)
                         return errorMessage;
                 }
                 else if(line.length != 0) {
-                    if(line.length != templateFirstLine.length) {
-                        String retval = "Mismatch in number of entries in row " + i + ": expected , " + templateFirstLine.length + ", found " + line.length + "  ";
-                        for(int j = 0; j < line.length; j++) {
-                            retval += "\"" + line[j] + "\", ";
-                        }
-                        //return retval;
-                        return "Mismatch in number of entries in row " + i + ": expected , " + templateFirstLine.length + ", found " + line.length;
+                    int actualLineLength = line.length + (endsInComma ? 1 : 0);
+                    if(actualLineLength != templateFirstLine.length) {
+                        return "Mismatch in number of entries in row " + i + ": expected " + templateFirstLine.length + ", found " + actualLineLength;
                     }
                 }
             }
@@ -209,7 +236,15 @@ class CsvFileHarvestJob implements FileHarvestJob {
         return TestFileController.getHarvesterPath() + TestFileController.PATH_TO_ADDITIONS_FILE;
     }
     
+    @Override
+    public String getPageHeader() {
+        return "Harvest " + this.friendlyName + " data from CSV file(s)";
+    }
     
+    @Override
+    public String getTemplateFilePath() {
+        return this.templateFile.getPath();
+    }
 
 }
 

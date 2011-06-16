@@ -3,7 +3,9 @@
 package edu.cornell.mannlib.vitro.webapp.controller.harvester;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -49,7 +52,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
     private static final String PARAMETER_FIRST_UPLOAD = "firstUpload";
     private static final String PARAMETER_UPLOADED_FILE = "uploadedFile";
-    private static final String PARAMETER_IS_HARVEST_CLICK = "isHarvestClick";
+    private static final String PARAMETER_MODE = "mode";
     private static final String PARAMETER_JOB = "job";
 
     private static final String POST_TO = "/vivo/harvester/harvest";
@@ -57,6 +60,11 @@ public class TestFileController extends FreemarkerHttpServlet {
     private static final String JOB_CSV_GRANT = "csvGrant";
     private static final String JOB_CSV_PERSON = "csvPerson";
     
+    private static final String MODE_HARVEST = "harvest";
+    private static final String MODE_CHECK_STATUS = "checkStatus";
+    private static final String MODE_DOWNLOAD_TEMPLATE = "template";
+
+
     private static final List<String> knownJobs = Arrays.asList(JOB_CSV_GRANT.toLowerCase(), JOB_CSV_PERSON.toLowerCase());
     
     
@@ -101,11 +109,15 @@ public class TestFileController extends FreemarkerHttpServlet {
             //body.put("uploadPostback", "false");
             body.put("paramFirstUpload", PARAMETER_FIRST_UPLOAD);
             body.put("paramUploadedFile", PARAMETER_UPLOADED_FILE);
-            body.put("paramIsHarvestClick", PARAMETER_IS_HARVEST_CLICK);
+            body.put("paramMode", PARAMETER_MODE);
             body.put("paramJob", PARAMETER_JOB);
+            body.put("modeHarvest", MODE_HARVEST);
+            body.put("modeCheckStatus", MODE_CHECK_STATUS);
+            body.put("modeDownloadTemplate", MODE_DOWNLOAD_TEMPLATE);
             body.put("job", job);
             body.put("jobKnown", jobKnown);
             body.put("postTo", POST_TO + "?" + PARAMETER_JOB + "=" + job);
+            body.put("jobSpecificHeader", getJob(vreq, job).getPageHeader());
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {
             log.error(e, e);
@@ -163,9 +175,9 @@ public class TestFileController extends FreemarkerHttpServlet {
         if(jobParameter == null)
             log.error("No job specified.");
         else if(jobParameter.equalsIgnoreCase(JOB_CSV_GRANT))
-            job = new CsvFileHarvestJob(vreq, "granttemplate.csv", "testCSVtoRDFgrant.sh", namespace);
+            job = new CsvFileHarvestJob(vreq, "granttemplate.csv", "testCSVtoRDFgrant.sh", namespace, "Grant");
         else if(jobParameter.equalsIgnoreCase(JOB_CSV_PERSON))
-            job = new CsvFileHarvestJob(vreq, "persontemplate.csv", "testCSVtoRDFperson.sh", namespace);
+            job = new CsvFileHarvestJob(vreq, "persontemplate.csv", "testCSVtoRDFperson.sh", namespace, "Person");
         else
             log.error("Invalid job: " + jobParameter);
         
@@ -197,12 +209,17 @@ public class TestFileController extends FreemarkerHttpServlet {
         
         try {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+            String mode = request.getParameter(PARAMETER_MODE);
             if(isMultipart)
                 doFileUploadPost(request, response);
-            else if(request.getParameter(PARAMETER_IS_HARVEST_CLICK).toLowerCase().equals("true"))
+            else if(mode.equals(MODE_HARVEST))
                 doHarvestPost(request, response);
-            else
+            else if(mode.equals(MODE_CHECK_STATUS))
                 doCheckHarvestStatusPost(request, response);
+            else if(mode.equals(MODE_DOWNLOAD_TEMPLATE))
+                doDownloadTemplatePost(request, response);
+            else
+                throw new Exception("Unrecognized post mode: " + mode);
         } catch(Exception e) {
             log.error(e, e);
         }
@@ -429,6 +446,32 @@ public class TestFileController extends FreemarkerHttpServlet {
         }
     }
     
+    private void doDownloadTemplatePost(HttpServletRequest request, HttpServletResponse response) {
+        
+        VitroRequest vreq = new VitroRequest(request);
+        FileHarvestJob job = getJob(vreq, vreq.getParameter(PARAMETER_JOB));
+        File fileToSend = new File(job.getTemplateFilePath());
+        
+        response.setContentType("application/octet-stream");
+        response.setContentLength((int)(fileToSend.length()));
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileToSend.getName() + "\"");
+
+        try {
+            byte[] byteBuffer = new byte[(int)(fileToSend.length())];
+            DataInputStream inStream = new DataInputStream(new FileInputStream(fileToSend));
+            
+            ServletOutputStream outputStream = response.getOutputStream();
+            for(int length = inStream.read(byteBuffer); length != -1; length = inStream.read(byteBuffer)) {
+                outputStream.write(byteBuffer, 0, length);
+            }
+            
+            inStream.close();
+            outputStream.flush();
+            outputStream.close();
+        } catch(IOException e) {
+            log.error(e, e);
+        }
+    }
     
 
     private File createScriptFile(String script) throws IOException {
