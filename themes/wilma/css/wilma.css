@@ -1071,10 +1071,7 @@ ul#browse-classes .count-classes {
 }
 /* ALPHA BROWSE------>  */
 ul#alpha-browse-individuals {
-    border: 1px solid #dde4e3;
     background-color: #fff;
-    border-left: 1px solid #dde4e3;
-    border-bottom: none;
 }
 ul#alpha-browse-individuals li {
     font-size: .8em;
@@ -1098,6 +1095,16 @@ ul#alpha-browse-individuals .count-classes {
 }
 .alphaIndex {    
     font-size: .8em;
+}
+nav#alpha-browse-container {
+    border: 1px solid #dde4e3;
+    background-color: #fff;
+    border-left: 1px solid #dde4e3;
+    border-bottom: none;
+    width: 619px;
+    float: left;
+    padding-left: 10px;
+    margin-left: 1px;
 }
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
