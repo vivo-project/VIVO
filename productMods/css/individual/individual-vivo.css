@@ -20,7 +20,6 @@ div.overview-value :last-child {
 }
 /* <------ INDIVIDUAL TEMPORAL GRAPH */
 #temporal-graph {
-    float: right;
     padding: 0 3px 20px 0;
     background-color: #fff;
 }
@@ -33,13 +32,11 @@ div.overview-value :last-child {
     vertical-align: text-top;
 }
 
-/* <------ INDIVIDUAL MAP OF SCIENCE */
+/* <------ INDIVIDUAL MAP O' SCIENCE */
 #map-of-science {
-    float: right;
     padding: 0 3px 20px 0;
     background-color: #fff;
 }
-
 #map-of-science h3 {
     margin: 0;
     padding: 0;

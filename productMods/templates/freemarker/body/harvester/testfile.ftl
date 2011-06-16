@@ -1,5 +1,10 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<#if jobKnown == "false">
+<p>Error: No file harvest job was specified, or an unknown job was specified.</p>
+<p>The end user should not see this error under normal circumstances, so this is probably a bug and should be reported.</p>
+<#else>
+
 <script type="text/javascript">
 
 	var harvestProgressResponse;
@@ -17,9 +22,10 @@
 				window.setTimeout(continueHarvest, 1000);
 			}
 		}
-		request.open("POST", "/vivo/harvester/testfile", true);
+		request.open("POST", "${postTo}", true);
 		request.setRequestHeader("content-type","application/x-www-form-urlencoded");
-		request.send("${paramIsHarvestClick}=true");
+		//request.send("${paramMode}=${modeHarvest}&${paramJob}=${job}");
+		request.send("${paramMode}=${modeHarvest}");
 	}
 	
 	
@@ -41,9 +47,10 @@
 					window.setTimeout(continueHarvest, 1000);
 				}
 			}
-			request.open("POST", "/vivo/harvester/testfile", true);
+			request.open("POST", "${postTo}", true);
 			request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			request.send("${paramIsHarvestClick}=false");
+			//request.send("${paramMode}=${modeCheckStatus}&${paramJob}=${job}");
+			request.send("${paramMode}=${modeCheckStatus}");
 		} else {
 		
 			var importedGrants = document.getElementById("importedGrants")
@@ -117,6 +124,10 @@
 			document.getElementById("fileUploadForm").target = "uploadTarget";
 			document.getElementById("uploadTarget").onload = fileResponse;
 		}
+		document.getElementById("downloadTemplateForm").onsubmit = function()
+		{
+			document.getElementById("downloadTemplateForm").target = "uploadTarget";
+		}
 	}
 	window.onload = init;
 </script>
@@ -143,12 +154,15 @@
 	}
 </style>
 
-
+<h2>${jobSpecificHeader}</h2>
 <div id="step1" class="testfile-step">
 	<h3 class="testfile-step-header">Step 1</h3>
 	<div id="step1-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">Download template</h4>
-		<p><input type="button" value="Download" style="margin-right:10px" />We are providing a helpful template file for you to download.</p>
+		<form id="downloadTemplateForm" method="post" action=${postTo}>
+			<input type="hidden" id="${paramMode}" name="${paramMode}" value="${modeDownloadTemplate}" />
+			<p><input type="submit" name="submit" value="Download" style="margin-right:10px" />We are providing a helpful template file for you to download.</p>
+		</form>
 	</div>
 	<div class="clearBothDiv" />
 </div>
@@ -173,8 +187,9 @@
 	<div id="step3-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">Upload file(s)</h4>
 		<p>Upload your filled-in template(s).</p>
-		<form id="fileUploadForm" method="post" enctype="multipart/form-data" action="/vivo/harvester/testfile">
+		<form id="fileUploadForm" method="post" enctype="multipart/form-data" action=${postTo}>
 			<input type="hidden" id="${paramFirstUpload}" name="${paramFirstUpload}" value="true" />
+			<!--<input type="hidden" id="${paramJob}" name="${paramJob}" value="${job}" /> -->
 			<input type="file" name="${paramUploadedFile}" />
 			<input type="submit" name="submit" value="Upload" />
 			<iframe id="uploadTarget" name="uploadTarget" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>
@@ -225,5 +240,7 @@
 	</div>
 	<div class="clearBothDiv" />
 </div>
+
+</#if>
 
 

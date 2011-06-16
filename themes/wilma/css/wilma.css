@@ -78,7 +78,8 @@ h5 {
 /* ------------------------------------------------->  */
 /* EDITING STYLES ---------------------------------->  */
 /* ------------------------------------------------->  */
-input[type="text"], 
+input[type="text"],
+select,  
 input[type="password"] {
     border: 0;
     font-size: 14px;
@@ -95,6 +96,11 @@ input.block {
 }
 label {
     margin-top: .5em;
+}
+label.inline {
+    display: inline;
+    font-weight: normal;
+    font-size: .9em;
 }
 .verbose-toggle,
 .verbose-toggle:visited,
@@ -364,14 +370,18 @@ form select {
     border: 1px dotted #FFD324;
 }
 a.ingestMenu:link, 
-a.ingestMenu:visited {
-    text-decoration: none;
-    color: #5E6363;
-}
-a.ingestMenu:hover, 
-a.ingestMenu:active {
+a.ingestMenu:visited,
+a.account-menu:link,
+a.account-menu:visited {
     text-decoration: none;
     color: #2485AE;
+}
+a.ingestMenu:hover, 
+a.ingestMenu:active,
+a.account-menu:hover,
+a.account-menu:active {
+    text-decoration: none;
+    color: #5E6363;
 }
 
 /* ------------------------------------------------->  */
@@ -410,8 +420,8 @@ ul#header-nav {
 ul#header-nav li {
     float: left;
     display: block;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-right: 1px solid #7c7d7f;
     font-size: .7em;
     color: #fff;
@@ -420,7 +430,7 @@ ul#header-nav li.last {
     border-right: none;
 }
 ul#header-nav li:last-child {
-    padding-left: 10px;
+    padding-left: 1px;
     padding-right: 0;
     border-right: none;
 }
@@ -432,9 +442,12 @@ ul#header-nav a:visited {
     text-decoration: none
 }
 ul#header-nav a:hover,
-ul#header-nav  a:active {
+ul#header-nav a:active {
     text-decoration: none;
     color: #999;
+}
+ul#header-nav a.log-out {
+    padding-left: 10px;
 }
 /* SEARCH ------>  */
 #search {
@@ -560,7 +573,7 @@ body.login #login {
     border-bottom: none;
 }
 #error-alert {
-    margin: 0 12px;
+    margin-left: 0;
     margin-bottom: 12px;
     padding: 12px;
     padding-bottom: 12px;
@@ -678,6 +691,21 @@ p.password-note {
     margin-top: -10px;
     margin-right:-10px;
     height:34px;
+}
+p.external-auth {
+    margin: 0 auto;
+}
+p.external-auth a.blue,
+p.external-auth a.blue:visited {
+     background-color: #398AAC;
+     width: 180px;
+     margin-bottom: 17px;
+     line-height: 1.3em;
+     padding-top: 10px;
+}
+p.external-auth a.blue:hover {
+    background-color: #58A2C1;
+    color: #fff;
 }
 /* HOME SEARCH ------>  */
 #search-home {
@@ -1043,10 +1071,7 @@ ul#browse-classes .count-classes {
 }
 /* ALPHA BROWSE------>  */
 ul#alpha-browse-individuals {
-    border: 1px solid #dde4e3;
     background-color: #fff;
-    border-left: 1px solid #dde4e3;
-    border-bottom: none;
 }
 ul#alpha-browse-individuals li {
     font-size: .8em;
@@ -1070,6 +1095,16 @@ ul#alpha-browse-individuals .count-classes {
 }
 .alphaIndex {    
     font-size: .8em;
+}
+nav#alpha-browse-container {
+    border: 1px solid #dde4e3;
+    background-color: #fff;
+    border-left: 1px solid #dde4e3;
+    border-bottom: none;
+    width: 619px;
+    float: left;
+    padding-left: 10px;
+    margin-left: 1px;
 }
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
@@ -1288,6 +1323,12 @@ a.all-vivo-publications {
     font-size: .8em !important;
     text-decoration: underline;
 }
+/* <------ MAP O' SCIENCE  */
+#map-of-science h3 a {
+    color: #2485AE;
+    font-size: .8em !important;
+    text-decoration: underline;
+}
 /* COAUTHORS ------>  */
 img.co-author {
     border: 2px solid #ebebeb;
@@ -1460,12 +1501,14 @@ h2#hasResearchArea .verbosePropertyListing {
     display: block;
 }
 /* ------------------------------------------------->  */
-/* ACCOUNTS PAGE ----------------------------------->  */
+/* ACCOUNT PAGE ------------------------------------>  */
 /* ------------------------------------------------->  */
 .account-feedback p {
-    padding: 10px;
-    background-color: #F0F0F0;
     line-height: 1.5em;
+    border: 1px dotted #E2C822;
+    background-color: #FFF9D7;
+    padding: .5em;  
+    margin-bottom: 20px;
 }
 table#account {
     table-layout: auto;
@@ -1480,14 +1523,20 @@ table#account {
 table#account caption {
     display: none;
 }
-table#account thead {
+table#account th{
+    background-color: #fff;
 }
 table#account td {
     vertical-align: top;
     padding: .5em;
-    background-color: rgba(200, 200, 180,.25);
     border: 1px solid #F7F9F9; 
     font-size: .9em;
+}  
+table#account tr {
+    background-color: #fff;
+}
+table#account tr:nth-child(2n+1) {
+    background-color: rgba(200, 200, 180,.25);
 }
 #filter-roles {
     float: left;
@@ -1495,19 +1544,20 @@ table#account td {
 }
 #search-accounts {
     float: right;
+    height: 60px;
 }
 .accounts {
     clear: left;
-    overflow: hidden;
-    border-top: 1px solid #c1bfbf;
+    height: 60px;
+    border-top: 1px dotted #e1e5e7;
     padding-top: 0;
-    border-bottom: 1px solid #c1bfbf;
+    border-bottom: 1px dotted #e1e5e7;
     padding-bottom: 0;
     width: 100%;
 }
-.delete-account {
+section.accounts .delete-account{
     float: left;
-    border: 2px solid red;
+    margin-top: 13px;
 }
 .display-tools {
     float: left;
@@ -1519,23 +1569,49 @@ table#account td {
 .accounts-per-page-form {
     display: inline-block;
 }
-/* ------------------------------------------------->  */
-/* ADD ACCOUNTS  ----------------------------------->  */
-/* ------------------------------------------------->  */
-#add-account p {
-    margin-top: 15px;
-}
-#reset-password {
-    background-color: green;
+/* ADD ACCOUNTS ------>  */
+form.customForm p {
+    margin-top: 8px;
 }
 form.customForm #reset-password {
     margin-top: 20px;
+    margin-left: 0;
 }
-#add-account .note {
+form.customForm p.note{
      padding-bottom: 20px;
      padding-top: 0;
-     margin-top: 5px;
 }
+#add-account p.note {
+    margin-top: 20px;
+    width: 400px;
+}
+#add-account input[type="text"],
+#create-account input[type="text"],
+#edit-account input[type="text"],
+#my-account input[type="text"],
+#my-account input[type="password"] {
+    width: 20em;
+}
+/* CREATE PASSWORD ------>  */
+#create-password p.note {
+     margin-top: 0;
+}
+/* EDIT ACCOUNT ------>  */
+#edit-account p.note {
+     margin-top: 3px;
+     width: 400px;
+}
+/* MY ACCOUNT ------>  */
+#my-account p.note {
+     padding-bottom: 10px;
+     width: 400px;
+}
+#my-account input#email-address,
+#my-account input#new-password {
+    margin-bottom: 0;
+}
+/* RESET PASSWORD ------>  */
+
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
 /* ------------------------------------------------->  */
@@ -1555,7 +1631,7 @@ ul.dropdown li a {
 }
 ul.dropdown li#user-menu { 
     background: url(../images/arrow-down-over-account.gif) right 9px no-repeat;
-
+    min-width:110px;
 }
 ul.dropdown li#user-menu a { 
     margin-right: 28px;
@@ -1566,7 +1642,6 @@ ul.dropdown li#user-menu:hover {
     color: #000 !important; 
     position: relative; 
     background: #fff url(../images/arrow-down-account.gif) right 9px no-repeat;
-    padding-right: 10px;
     border-bottom: 1px solid #cdcfcf;
 }
 ul.dropdown li.hover a,
@@ -1576,7 +1651,7 @@ ul.dropdown li:hover a {
 }
 /* LEVEL TWO */
 ul.dropdown ul.sub_menu {  
-    background-color: yellow;
+    background-color: #fff;
     font-size: 1.4em;
     visibility: hidden; 
     position: absolute; 
@@ -1596,7 +1671,6 @@ ul.dropdown ul.sub_menu li {
 }
 ul.dropdown ul.sub_menu li:last-child { 
     width: 96px;
-
 }
 /* IE 6 & 7 Needs Inline Block */
 /* ADD IN IE6.css and IE7.css*/
@@ -1619,7 +1693,7 @@ ul.dropdown ul.sub_menu li a:hover,
 ul.dropdown ul.sub_menu li a.hover { 
     color: #999 !important;
 }
-/*	LEVEL THREE */
+/*  LEVEL THREE */
 ul.dropdown ul ul { 
     left: 100%; top: 0; 
 }

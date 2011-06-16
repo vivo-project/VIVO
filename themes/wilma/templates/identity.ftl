@@ -19,7 +19,7 @@
                             <li id="user-menu"><a href="#">${user.loginName}</a>
                                 <ul class="sub_menu">
                                      <li role="listitem" class="inactive">My profile</li>
-                                     <li role="listitem" class="inactive">My account</li>
+                                     <li role="listitem"><a href="${urls.myAccount}">My account</a></li>
                                      <li role="listitem"><a href="${urls.logout}">Log out</a></li>
                                 </ul>
                             </li>
@@ -29,7 +29,7 @@
                 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
                 
             <#else>
-                <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
+                <li role="listitem"><a class="log-out" title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>
         </ul>
         

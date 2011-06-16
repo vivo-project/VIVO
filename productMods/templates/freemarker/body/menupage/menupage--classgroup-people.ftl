@@ -23,9 +23,6 @@
         </section>
     </section>
     
-    
-    <#assign excludedVClassURIs = ["http://xmlns.com/foaf/0.1/Person"]>
-    
     <#include "menupage-browse.ftl">
     
     ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/menupage/menupage.css" />')}

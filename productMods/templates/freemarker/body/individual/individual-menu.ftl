@@ -7,14 +7,13 @@
 <#assign individualProductExtension>
     <#-- Include for any class specific template additions -->
     ${classSpecificExtension!}
-    <!--PREINDIVIDUAL OVERVIEW.FTL-->
+    
     <#include "individual-overview.ftl">
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
-    <!--postindiviudal overiew tfl-->
 </#assign>
 
-<#include "individual-vitro.ftl">
+<#include "individual-menu-vitro.ftl">
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 

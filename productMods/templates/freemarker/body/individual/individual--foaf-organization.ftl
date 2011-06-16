@@ -5,9 +5,10 @@
 <#-- Do not show the link for temporal visualization unless it's enabled -->
 <#if temporalVisualizationEnabled>
     <#assign classSpecificExtension>
-        <#include "individual-visualizationTemporalGraph.ftl">
-        <div style="clear: both;"></div>
-        <#include "individual-visualizationMapOfScience.ftl">
+        <section id="visualization" role="region">
+            <#include "individual-visualizationTemporalGraph.ftl">
+            <#include "individual-visualizationMapOfScience.ftl">
+        </section> <!-- #visualization -->
     </#assign>
 </#if>
 
