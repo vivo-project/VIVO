@@ -91,8 +91,9 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
                 browseByVClass.pagination(pages, page);
             }
             
-            selectedClassHeading = '<h3 class="selected-class">'+ results.vclass.name +'</h3>';
-            browseByVClass.individualsContainer.prepend(selectedClassHeading);
+            //  selectedClassHeading = '<h3 class="selected-class">'+ results.vclass.name +'</h3>';   NIHVIVO-2483 tlw72
+            //  browseByVClass.individualsContainer.prepend(selectedClassHeading);
+            $('h4#selectedClassHeading').text(results.vclass.name);                              //  NIHVIVO-2483 tlw72
             
             // set selected class, alpha and page
             browseByVClass.selectedVClass(results.vclass.URI);
