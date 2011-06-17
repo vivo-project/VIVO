@@ -3,8 +3,6 @@
 <jsp:include page="addRoleToPersonTwoStage.jsp">    
 	<jsp:param name="roleActivityTypeLabel" value="organizer of" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#OrganizerRole" />	
-	<jsp:param name="roleToActivityPredicate" value="http://vivoweb.org/ontology/core#roleIn" />
-    <jsp:param name="activityToRolePredicate" value="http://vivoweb.org/ontology/core#relatedRole" />
 	<jsp:param name="roleActivityType_optionsType" value="HARDCODED_LITERALS" />
 	<jsp:param name="roleActivityType_objectClassUri" value="" /> 
 	<jsp:param name="roleActivityType_literalOptions" 

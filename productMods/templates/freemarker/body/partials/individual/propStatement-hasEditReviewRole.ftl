@@ -16,7 +16,11 @@
 <#macro showRole statement>
     <#local linkedIndividual>
         <#if statement.infoResource??>
-            <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceLabel!statement.infoResourceName}</a>
+            <#if statement.activity??>
+                <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceLabel!statement.infoResourceName}</a> <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
+            <#else>
+                <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceLabel!statement.infoResourceName}</a>
+            </#if>
         <#elseif statement.activity??>
             <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
         <#else>
