@@ -68,12 +68,14 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
 <%--
   These are the parameters that MUST be set of this form:
-   role type
-   predicate inverse          
-   role activity type label (should be singular)
-   super type of role types for roleActivityType select list generation
-   roleToActivityPredicate 
-   activityToRolePredicate
+     role type
+     predicate inverse          
+     role activity type label (should be singular)
+     super type of role types for roleActivityType select list generation
+     
+  These are optional parameters:
+     roleToActivityPredicate (default value is http://vivoweb.org/ontology/core#roleIn)
+     activityToRolePredicate (default value is http://vivoweb.org/ontology/core#relatedRole) 
 --%>
 
 <c:set var="roleActivityTypeLabel">${param.roleActivityTypeLabel}</c:set>
@@ -83,8 +85,8 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="roleActivityType_objectClassUri" >${param.roleActivityType_objectClassUri}</c:set> 
 <c:set var="roleActivityType_literalOptions" >${param.roleActivityType_literalOptions}</c:set>
 <c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
-<c:set var="roleToActivityPredicate" scope="request">${param.roleToActivityPredicate}</c:set>
-<c:set var="activityToRolePredicate">${param.activityToRolePredicate}</c:set>
+<c:set var="roleToActivityPredicate" scope="request">${! empty param.roleToActivityPredicate ? param.roleToActivityPredicate : "http://vivoweb.org/ontology/core#roleIn"}</c:set>
+<c:set var="activityToRolePredicate">${! empty param.activityToRolePredicate ? param.activityToRolePredicate : "http://vivoweb.org/ontology/core#relatedRole"}</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
