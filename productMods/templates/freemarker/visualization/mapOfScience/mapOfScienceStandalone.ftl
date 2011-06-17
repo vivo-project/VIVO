@@ -15,21 +15,12 @@ corresponding changes in the included Templates. -->
 </div>
 -->
         
-<h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a>&nbsp;
-<img id="incomplete-data-disclaimer" class="infoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="This information is based solely on Publications which have been loaded into the VIVO system" /></span></h2>
+<h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a></span></h2>
 
 <div id="map-of-science-info" class="hide-dom-on-init"> Explore <span id="mapped-publications" style="font-weight: bold"></span> publications activity across 554 scientific sub-disciplines 
-	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+	<img class="filterInfoIcon" id="imageIconOne"  src="${urls.images}/iconInfo.png" 
 		alt="information icon" 
-    	title="VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.
-
-You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science, based on publications that have been loaded into this VIVO instance.
-
-Overlaid circles are larger if ${entityLabel} has many publications in that sub-discipline, and are smaller if ${entityLabel} has fewer publications in that sub-discipline.
-
-Circles are overlaid on the Map of Science itself, which is made of 554 interconnected sub-disciplines, shown as grey dots here. A sub-discipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 sub-disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are interconnected, and will be closer to one another on the map.
-
-For more information on this and other maps of science, see http://mapofscience.com or http://scimaps.org" /> 
+    	title="" /> 
 </div>
 
 <div id="left-column" class="hide-dom-on-init">
@@ -55,13 +46,9 @@ For more information on this and other maps of science, see http://mapofscience.
     <div id="science-areas-filter">
     	<span id="discipline-filter" class="filter-option active-filter">13 Disciplines</span> | 
     	<span id="subdisciplines-filter" class="filter-option">554 Sub-Disciplines</span>
-    	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+    	<img class="filterInfoIcon" id="imageIconTwo" src="${urls.images}/iconInfo.png" 
     		 alt="information icon" 
-    		 title="${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 sub-disciplines on the map of science.
-
-The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color.  Each of these disciplines contains multiple sub-disciplines. You can hover over a discipline in the table below to show which overlaid circles it corresponds to on the map.
-
-Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discipline is defined as a cluster of journals. We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. You can hover over a sub-discipline in the table below to show which overlaid circle it corresponds to on the map." />
+    		 title="" />
     </div>
     
     <div id="main-science-areas-table-container"></div>
@@ -74,11 +61,32 @@ Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discip
 <div id="right-column"><div id="map_area"></div>
 <div id="percent-mapped-info">
 mapped <span id="percent-mapped"></span>% of <span id="total-publications"></span> publications
-	<img class="filterInfoIcon" src="${urls.images}/iconInfo.png" 
+	<img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo.png" 
 		alt="information icon" 
-		title="This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and therefore it may not be fully representative of the overall publication activity for ${entityLabel}.
-
-The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncracies may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a concern." /></div>
+		title="" /></div>
 
 </div>
 </div>
+<div id="toolTipOne" style="display:none;">
+VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.<br /> <br /> 
+
+You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science -- <em><b>based solely on publications that have been loaded into this VIVO instance.</b></em><br /><br />
+
+Overlaid circles are larger if ${entityLabel} has many publications in that sub-discipline, and are smaller if ${entityLabel} has fewer publications in that sub-discipline.<br /><br /> 
+
+Circles are overlaid on the Map of Science itself, which is made of 554 interconnected sub-disciplines, shown as grey dots here. A sub-discipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 sub-disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are interconnected, and will be closer to one another on the map.
+<br /><br /> 
+For more information on this and other maps of science, see <a href='http://mapofscience.com'>http://mapofscience.com</a> or <a href='http://scimaps.org'>http://scimaps.org</a></div>
+<div id="toolTipTwo" style="display:none;">
+${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 sub-disciplines on the map of science.
+<br /><br />
+The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color.  Each of these disciplines contains multiple sub-disciplines. You can hover over a discipline in the table below to show which overlaid circles it corresponds to on the map.
+<br /><br />
+Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discipline is defined as a cluster of journals. We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. You can hover over a sub-discipline in the table below to show which overlaid circle it corresponds to on the map.</div>
+<div id="toolTipThree" style="display:none;">
+This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and therefore it may not be fully representative of the overall publication activity for ${entityLabel}.<br /><br />
+
+The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncracies may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a concern.</div>
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/Utils.js"></script>')}

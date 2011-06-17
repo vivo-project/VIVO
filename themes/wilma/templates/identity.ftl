@@ -29,7 +29,7 @@
                 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
                 
             <#else>
-                <li role="listitem"><a title="log in to manage this site" href="${urls.login}">Log in</a></li>
+                <li role="listitem"><a class="log-out" title="log in to manage this site" href="${urls.login}">Log in</a></li>
             </#if>
         </ul>
         

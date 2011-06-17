@@ -117,11 +117,14 @@
   </listener>
 
 
-<!-- The following two listeners remain temporarily until SDB becomes the default triple store --> 
+<!-- The following listener remains temporarily until SDB becomes the default triple store --> 
   <listener>
      <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels</listener-class>
   </listener>
 
+<!-- This listener sets up SimpleReasoner also in SDB mode. In SDB mode, Pellet is used for -->
+<!-- TBox reasoning and SimpleReasoner is used for ABox reasoning. In RDF mode, Pellet was -->
+<!-- used for both. -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.PelletReasonerSetup</listener-class>
   </listener>
@@ -1077,18 +1080,6 @@
     <servlet-name>dwr-invoker</servlet-name>
     <url-pattern>/dwr/*</url-pattern>
   </servlet-mapping>
-
-  <!-- Deprecated servlet (still used in Datastar) - retain temporarily for testing and comparison. -->
-  <servlet>
-    <servlet-name>sendmail</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ContactMailServlet</servlet-class>
-    <load-on-startup>5</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>sendmail</servlet-name>
-    <url-pattern>/sendmail</url-pattern>
-  </servlet-mapping>
-  <!-- end deprecated servlet -->
   
   <servlet>
    <servlet-name>sendMail</servlet-name>

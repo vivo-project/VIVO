@@ -97,6 +97,11 @@ input.block {
 label {
     margin-top: .5em;
 }
+label.inline {
+    display: inline;
+    font-weight: normal;
+    font-size: .9em;
+}
 .verbose-toggle,
 .verbose-toggle:visited,
 #showAddFormButton,
@@ -365,14 +370,18 @@ form select {
     border: 1px dotted #FFD324;
 }
 a.ingestMenu:link, 
-a.ingestMenu:visited {
-    text-decoration: none;
-    color: #5E6363;
-}
-a.ingestMenu:hover, 
-a.ingestMenu:active {
+a.ingestMenu:visited,
+a.account-menu:link,
+a.account-menu:visited {
     text-decoration: none;
     color: #2485AE;
+}
+a.ingestMenu:hover, 
+a.ingestMenu:active,
+a.account-menu:hover,
+a.account-menu:active {
+    text-decoration: none;
+    color: #5E6363;
 }
 
 /* ------------------------------------------------->  */
@@ -411,8 +420,8 @@ ul#header-nav {
 ul#header-nav li {
     float: left;
     display: block;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-right: 1px solid #7c7d7f;
     font-size: .7em;
     color: #fff;
@@ -421,7 +430,7 @@ ul#header-nav li.last {
     border-right: none;
 }
 ul#header-nav li:last-child {
-    padding-left: 10px;
+    padding-left: 1px;
     padding-right: 0;
     border-right: none;
 }
@@ -433,9 +442,12 @@ ul#header-nav a:visited {
     text-decoration: none
 }
 ul#header-nav a:hover,
-ul#header-nav  a:active {
+ul#header-nav a:active {
     text-decoration: none;
     color: #999;
+}
+ul#header-nav a.log-out {
+    padding-left: 10px;
 }
 /* SEARCH ------>  */
 #search {
@@ -679,6 +691,21 @@ p.password-note {
     margin-top: -10px;
     margin-right:-10px;
     height:34px;
+}
+p.external-auth {
+    margin: 0 auto;
+}
+p.external-auth a.blue,
+p.external-auth a.blue:visited {
+     background-color: #398AAC;
+     width: 180px;
+     margin-bottom: 17px;
+     line-height: 1.3em;
+     padding-top: 10px;
+}
+p.external-auth a.blue:hover {
+    background-color: #58A2C1;
+    color: #fff;
 }
 /* HOME SEARCH ------>  */
 #search-home {
@@ -1044,10 +1071,7 @@ ul#browse-classes .count-classes {
 }
 /* ALPHA BROWSE------>  */
 ul#alpha-browse-individuals {
-    border: 1px solid #dde4e3;
     background-color: #fff;
-    border-left: 1px solid #dde4e3;
-    border-bottom: none;
 }
 ul#alpha-browse-individuals li {
     font-size: .8em;
@@ -1071,6 +1095,16 @@ ul#alpha-browse-individuals .count-classes {
 }
 .alphaIndex {    
     font-size: .8em;
+}
+nav#alpha-browse-container {
+    border: 1px solid #dde4e3;
+    background-color: #fff;
+    border-left: 1px solid #dde4e3;
+    border-bottom: none;
+    width: 619px;
+    float: left;
+    padding-left: 10px;
+    margin-left: 1px;
 }
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
@@ -1467,7 +1501,7 @@ h2#hasResearchArea .verbosePropertyListing {
     display: block;
 }
 /* ------------------------------------------------->  */
-/* ACCOUNTS PAGE ----------------------------------->  */
+/* ACCOUNT PAGE ------------------------------------>  */
 /* ------------------------------------------------->  */
 .account-feedback p {
     line-height: 1.5em;
@@ -1514,7 +1548,7 @@ table#account tr:nth-child(2n+1) {
 }
 .accounts {
     clear: left;
-    overflow: hidden;
+    height: 60px;
     border-top: 1px dotted #e1e5e7;
     padding-top: 0;
     border-bottom: 1px dotted #e1e5e7;
@@ -1535,23 +1569,49 @@ section.accounts .delete-account{
 .accounts-per-page-form {
     display: inline-block;
 }
-/* ------------------------------------------------->  */
-/* ADD ACCOUNTS  ----------------------------------->  */
-/* ------------------------------------------------->  */
-#add-account p {
-    margin-top: 15px;
-}
-#reset-password {
-    background-color: green;
+/* ADD ACCOUNTS ------>  */
+form.customForm p {
+    margin-top: 8px;
 }
 form.customForm #reset-password {
     margin-top: 20px;
+    margin-left: 0;
 }
-#add-account .note {
+form.customForm p.note{
      padding-bottom: 20px;
      padding-top: 0;
-     margin-top: 25px;
 }
+#add-account p.note {
+    margin-top: 20px;
+    width: 400px;
+}
+#add-account input[type="text"],
+#create-account input[type="text"],
+#edit-account input[type="text"],
+#my-account input[type="text"],
+#my-account input[type="password"] {
+    width: 20em;
+}
+/* CREATE PASSWORD ------>  */
+#create-password p.note {
+     margin-top: 0;
+}
+/* EDIT ACCOUNT ------>  */
+#edit-account p.note {
+     margin-top: 3px;
+     width: 400px;
+}
+/* MY ACCOUNT ------>  */
+#my-account p.note {
+     padding-bottom: 10px;
+     width: 400px;
+}
+#my-account input#email-address,
+#my-account input#new-password {
+    margin-bottom: 0;
+}
+/* RESET PASSWORD ------>  */
+
 /* ------------------------------------------------->  */
 /* DROP DOWN USER MENU  ---------------------------->  */
 /* ------------------------------------------------->  */
@@ -1582,7 +1642,6 @@ ul.dropdown li#user-menu:hover {
     color: #000 !important; 
     position: relative; 
     background: #fff url(../images/arrow-down-account.gif) right 9px no-repeat;
-    padding-right: 10px;
     border-bottom: 1px solid #cdcfcf;
 }
 ul.dropdown li.hover a,
