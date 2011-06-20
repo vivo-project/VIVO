@@ -24,13 +24,12 @@
             OPTIONAL {  ?role core:roleIn ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
+                        
+                        <collated>
+                        ?activity vitro:mostSpecificType ?subclass   
+                        </collated>
             }           
-            <collated>
-            OPTIONAL { 
-            	        # ?activity a ?subclass 
-						?activity vitro:mostSpecificType ?subclass
-            }   
-            </collated>
+
             OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
@@ -54,12 +53,10 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role core:roleIn ?activity .
-            # ?activity a ?subclass .
             ?activity vitro:mostSpecificType ?subclass .
         } WHERE {
             ?subject ?property ?role .
             ?role core:roleIn ?activity .
-            # ?activity a ?subclass .
             ?activity vitro:mostSpecificType ?subclass
         }
     </query-construct>

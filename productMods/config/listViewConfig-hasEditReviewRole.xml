@@ -35,14 +35,14 @@
             OPTIONAL {  ?role core:forInformationResource ?infoResource 
                         LET (?infoResourceName := afn:localname(?infoResource)) 
                         OPTIONAL { ?infoResource rdfs:label ?infoResourceLabel }
+                        
                         <collated>
                         # NB Currently we can only retrieve subclass for either the 
                         # infoResource or the activity, but not both. Later, we could have 
                         # the query retrieve both and write a custom preprocessor to merge
                         # the results into a single subclass column.
-                        OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass .
-                                   ?subclass rdfs:subClassOf bibo:Collection  
-                        }   
+                        ?infoResource vitro:mostSpecificType ?subclass .
+                        ?subclass rdfs:subClassOf bibo:Collection  
                         </collated>
             }                     
 
@@ -70,13 +70,11 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role core:forInformationResource ?infoResource .
-            # ?infoResource a ?subclass .
             ?infoResource vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf bibo:Collection 
         } WHERE {
             ?subject ?property ?role .
             ?role core:forInformationResource ?infoResource .
-            # ?infoResource a ?subclass .
             ?infoResource vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf bibo:Collection 
         }
