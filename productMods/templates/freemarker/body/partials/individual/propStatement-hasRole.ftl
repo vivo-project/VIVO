@@ -6,7 +6,6 @@
      is also used to generate the property statement during a deletion.  
  -->
 
-<#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
 <@showRole statement />

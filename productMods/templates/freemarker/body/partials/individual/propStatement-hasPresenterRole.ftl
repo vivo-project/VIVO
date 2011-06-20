@@ -15,18 +15,24 @@
      next statement -->
 <#macro showRole statement>
     <#local linkedIndividual>
-        <#if statement.activity??>
-            <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
+        <#if statement.presentation??>
+            <a href="${profileUrl(statement.presentation)}">${statement.presentationLabel!statement.presentationName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}">missing activity</a>
+            <a href="${profileUrl(statement.role)}">missing presentation</a>
         </#if>
     </#local>
     
     <#local dateTime>
-        <@dt.yearSpan statement.dateTimeStart! />
+        <@dt.yearSpan statement.dateTime! /> 
+    </#local>
+    
+    <#local conference>
+        <#if statement.conference?has_content && statement.conferenceLabel?has_content>
+            <a href="${profileUrl(statement.conference)}">${statement.conferenceLabel}</a>
+        </#if>
     </#local>
 
-    ${linkedIndividual} ${statement.roleLabel!} ${dateTime!}
+    <@s.join [ linkedIndividual, statement.roleLabel!, conference! ] /> ${dateTime!}
 
 </#macro>
