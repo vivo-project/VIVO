@@ -63,14 +63,12 @@
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
-
     <!-- http://vivoweb.org/ontology/core#AcademicDegree -->
 
     <owl:Class rdf:about="&core;AcademicDegree">
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
-
     <!-- http://vivoweb.org/ontology/core#Address -->
 
     <owl:Class rdf:about="&core;Address">
@@ -98,6 +96,17 @@
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
+    <!-- http://vivoweb.org/ontology/core#Credential -->
+
+    <owl:Class rdf:about="&core;Credential">
+        <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
+    </owl:Class>
+    
+    <!-- http://vivoweb.org/ontology/core#IssuedCredential -->
+
+    <owl:Class rdf:about="&core;IssuedCredential">
+        <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
+    </owl:Class>
 
     <!-- http://vivoweb.org/ontology/core#DateTimeInterval -->
 
