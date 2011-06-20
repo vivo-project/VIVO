@@ -1569,6 +1569,16 @@ section.accounts .delete-account{
 .accounts-per-page-form {
     display: inline-block;
 }
+nav.alpha-browse-account {
+    width: 20px;
+    border: 1px solid green;
+    width: 18px;
+    height: 12px;
+}
+nav.alpha-browse-account a {
+    margin: 0;
+    padding: 0;
+}
 /* ADD ACCOUNTS ------>  */
 form.customForm p {
     margin-top: 8px;
@@ -1611,92 +1621,40 @@ form.customForm p.note{
     margin-bottom: 0;
 }
 /* RESET PASSWORD ------>  */
+#reset-password p.note {
+     margin-top: 0;
+}
 
 /* ------------------------------------------------->  */
-/* DROP DOWN USER MENU  ---------------------------->  */
+/* MENU MANAGEMENT ------------------------------------>  */
 /* ------------------------------------------------->  */
-
-/* LEVEL ONE */
-ul.dropdown { 
-    position: relative; 
+/*table#menu-management {
+    table-layout: auto;
+    width: 450px;
+    text-align: left;
+    margin: 0 auto; 
+    border-collapse: collapse;
+    empty-cells: show;
+    caption-side: top;
+    margin: 20px 0 20px 0;
 }
-ul.dropdown li {  
-    float: left; 
-    zoom: 1; 
-    padding: 0 !important;
+table#menu-management caption {
+    display: none;
 }
-ul.dropdown li a { 
-    display: block; 
-    font-size: 1.4em;
-}
-ul.dropdown li#user-menu { 
-    background: url(../images/arrow-down-over-account.gif) right 9px no-repeat;
-    min-width:110px;
-}
-ul.dropdown li#user-menu a { 
-    margin-right: 28px;
-    margin-left:10px;
-}
-ul.dropdown li#user-menu.hover,
-ul.dropdown li#user-menu:hover { 
-    color: #000 !important; 
-    position: relative; 
-    background: #fff url(../images/arrow-down-account.gif) right 9px no-repeat;
-    border-bottom: 1px solid #cdcfcf;
-}
-ul.dropdown li.hover a,
-ul.dropdown li:hover a { 
-    color: #000 !important; 
-    margin-left:10px;
-}
-/* LEVEL TWO */
-ul.dropdown ul.sub_menu {  
+table#menu-management th{
     background-color: #fff;
-    font-size: 1.4em;
-    visibility: hidden; 
-    position: absolute; 
-    top: 100%; 
-    right: 0; 
-    z-index: 999;
-    color: #000;
+    display: none;
 }
-ul.dropdown ul.sub_menu li { 
-    float: none; 
-    clear: both;
-    padding-left: 14px !important;
-    width: 96px;
-    border-right: none !important;
-    border-bottom: 1px solid #cdcfcf;
-    background: #fff url(../images/arrow-menu-account.gif) 7px 8px no-repeat;
-}
-ul.dropdown ul.sub_menu li:last-child { 
-    width: 96px;
-}
-/* IE 6 & 7 Needs Inline Block */
-/* ADD IN IE6.css and IE7.css*/
-ul.dropdown ul.sub_menu li a { 
-    width: 90%; 
-    display: inline-block; 
-    color: #000 !important;
+table#menu-management td {
+    vertical-align: top;
+    padding: .5em;
+    border: 1px solid #F7F9F9; 
+    font-size: .9em;
+}  
+table#menu-management tr {
     background-color: #fff;
-    padding: 0;
-    padding-left: 0px;
-    height: 24px;
 }
-ul.dropdown ul.sub_menu li.inactive { 
-    color: #aab0ae !important;
-    font-size: 1em !important;
-    padding-left: 22px !important; 
-    width: 88px; 
+table#menu-management tr:nth-child(2n+1) {
+    background-color: rgba(200, 200, 180,.25);
 }
-ul.dropdown ul.sub_menu li a:hover,
-ul.dropdown ul.sub_menu li a.hover { 
-    color: #999 !important;
-}
-/*  LEVEL THREE */
-ul.dropdown ul ul { 
-    left: 100%; top: 0; 
-}
-ul.dropdown li:hover > ul { 
-    visibility: visible; 
-}
+*/
