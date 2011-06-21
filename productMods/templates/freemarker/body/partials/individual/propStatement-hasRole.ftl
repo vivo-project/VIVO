@@ -6,7 +6,6 @@
      is also used to generate the property statement during a deletion.  
  -->
 
-<#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
 <@showRole statement />
@@ -23,15 +22,10 @@
         </#if>
     </#local>
     
-    <#local core = "http://vivoweb.org/ontology/core#">
     <#local dateTime>
-        <#if statement.property == "${core}hasPresenterRole">
-            <@dt.yearSpan statement.dateTimeStart! />
-        <#else>
-            <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
-        </#if>
+        <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
     </#local>
-
+    
     ${linkedIndividual} ${statement.roleLabel!} ${dateTime!}
 
 </#macro>

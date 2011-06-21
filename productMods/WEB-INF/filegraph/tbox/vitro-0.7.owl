@@ -96,30 +96,6 @@ xmlns:vitro="&vitro;"
 <owl:DatatypeProperty rdf:about="&vitro;sunset"/>
 <owl:DatatypeProperty rdf:about="&vitro;timekey"/>
 
-<!-- portal flag classes -->
-
-<owl:Class rdf:about="&vitro;Flag1Value0Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value1Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value2Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value3Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value4Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value5Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value6Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value7Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value8Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value9Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value10Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value11Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value12Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value13Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value14Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value15Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value16Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value17Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value18Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value19Thing"/>
-<owl:Class rdf:about="&vitro;Flag1Value20Thing"/>
-
 <!-- Portal-related constructs -->
 
 <owl:Class rdf:about="&vitro;Portal"/>

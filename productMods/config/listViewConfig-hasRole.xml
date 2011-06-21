@@ -5,15 +5,15 @@
 
 <list-view-config>
     <query-select>    
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
         SELECT DISTINCT <collated>?subclass</collated>
                         # send the property to the template, since this view supports multiple role properties
                         ?property
                         ?role 
-                        ?startDateOnly
                         ?roleLabel 
                         ?activity ?activityName 
                         ?activityLabel
@@ -24,12 +24,12 @@
             OPTIONAL {  ?role core:roleIn ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
+                        
+                        <collated>
+                        ?activity vitro:mostSpecificType ?subclass   
+                        </collated>
             }           
-            <collated>
-            OPTIONAL { ?role a ?subclass .
-                       ?subclass rdfs:subClassOf core:Role 
-            }   
-            </collated>
+
             OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
@@ -42,16 +42,22 @@
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>
-        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityName
+        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
     
     <query-construct>
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;          
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        
         CONSTRUCT {
-            ?subclass rdfs:subClassOf core:Role 
+            ?subject ?property ?role .
+            ?role core:roleIn ?activity .
+            ?activity vitro:mostSpecificType ?subclass .
         } WHERE {
-            ?subclass rdfs:subClassOf core:Role 
+            ?subject ?property ?role .
+            ?role core:roleIn ?activity .
+            ?activity vitro:mostSpecificType ?subclass
         }
     </query-construct>
     
