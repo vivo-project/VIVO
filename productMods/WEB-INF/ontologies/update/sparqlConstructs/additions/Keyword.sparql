@@ -17,5 +17,6 @@ Construct {
      ?something core:freetextKeyword ?textKeyWord .
 } where {
      ?something vitro:keyword ?keywordIndividual .
+     ?keywordIndividual a vitro:Keyword .
      ?keywordIndividual rdfs:label ?textKeyWord .
 }
