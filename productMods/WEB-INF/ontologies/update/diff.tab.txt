@@ -1,9 +1,9 @@
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing		No	Delete	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#DependentResource		No	Delete	not set
+http://vivoweb.org/ontology/core#DependentResource		No	Delete	not set
+http://vivoweb.org/ontology/core#organizerOf		No	Delete	not set
+http://purl.org/ontology/bibo/organizer		No	Delete	not set
+http://vivoweb.org/ontology/core#PrimaryURLLink	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#uspc	http://vivoweb.org/ontology/core#cclCode	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#wipo-ipc	http://vivoweb.org/ontology/core#iclCode	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#email	http://vivoweb.org/ontology/core#primaryEmail	Yes	Map	Directly-changed
-	http://vivoweb.org/ontology/core#organizationForTraining	No	Add	not set
-http://vivoweb.org/ontology/core#teaches		No	Delete	not set
-http://vivoweb.org/ontology/core#taughtBy		No	Delete	not set
-http://vivoweb.org/ontology/core#AwardOrHonor	http://vivoweb.org/ontology/core#AwardReceipt	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#sponsorsAward		No	Delete	not set
-http://vivoweb.org/ontology/core#AbstractInformation		No	Delete	Delete
-http://vivoweb.org/ontology/core#titleOrRole		No	Delete	Prop
-http://vivoweb.org/ontology/core#startYear		No	Delete	Delete
