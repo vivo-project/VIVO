@@ -1620,6 +1620,9 @@ form.customForm p.note{
 #my-account input#new-password {
     margin-bottom: 0;
 }
+section.account-feedback img {
+padding-right: 5px;
+}
 /* RESET PASSWORD ------>  */
 #reset-password p.note {
      margin-top: 0;
