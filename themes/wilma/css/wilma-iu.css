@@ -1,0 +1,14 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+#intro {
+	width: auto;
+}
+
+#intro h2 {
+	padding: 0;
+}
+
+#intro ul {
+	list-style-position:inside;
+	list-style-type:circle;
+}
