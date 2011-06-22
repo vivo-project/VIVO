@@ -58,35 +58,42 @@
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.elements.DateTimeWithPrecision"%>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.DateTimeIntervalValidation"%>
 
 <%!
 public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addRoleToPersonTwoStage.jsp");
 %>
 
-<c:set var="vivoCore" value="${vivoOnt}/core#" />
 
-<%--
-  These are the parameters that MUST be set of this form:
-     role type
-     predicate inverse          
-     role activity type label (should be singular)
-     super type of role types for roleActivityType select list generation
-     
-  These are optional parameters:
-     roleToActivityPredicate (default value is http://vivoweb.org/ontology/core#roleIn)
-     activityToRolePredicate (default value is http://vivoweb.org/ontology/core#relatedRole) 
---%>
+<%-- REQUIRED PARAMETERS --%>
 
-<c:set var="roleActivityTypeLabel">${param.roleActivityTypeLabel}</c:set>
-<c:set var="buttonLabel" scope="request">${! empty param.buttonLabel ? param.buttonLabel : param.roleActivityTypeLabel}</c:set>
-<c:set var="roleType">${param.roleType}</c:set>
+<c:set var="roleDescriptor">${param.roleDescriptor}</c:set> <%-- Used in textual references to the role --%>
+<c:set var="roleType">${param.roleType}</c:set> <%-- uri of role individual type --%>
+
+<%-- For creating the role activity type select list: --%>
 <c:set var="roleActivityType_optionsType" >${param.roleActivityType_optionsType}</c:set>
 <c:set var="roleActivityType_objectClassUri" >${param.roleActivityType_objectClassUri}</c:set> 
 <c:set var="roleActivityType_literalOptions" >${param.roleActivityType_literalOptions}</c:set>
+
+
+<%-- OPTIONAL PARAMETERS --%>
+
+<c:set var="typeSelectorLabel" scope="request"> <%-- label for type selector field --%>
+    ${! empty param.typeSelectorLabel ? param.typeSelectorLabel : param.roleDescriptor}
+</c:set>
+<c:set var="buttonText" scope="request">
+    ${! empty param.buttonText ? param.buttonText : param.roleDescriptor}
+</c:set>
+<c:set var="roleToActivityPredicate" scope="request">
+    ${! empty param.roleToActivityPredicate ? param.roleToActivityPredicate : "http://vivoweb.org/ontology/core#roleIn"}
+</c:set>
+<c:set var="activityToRolePredicate">
+    ${! empty param.activityToRolePredicate ? param.activityToRolePredicate : "http://vivoweb.org/ontology/core#relatedRole"}
+</c:set>
 <c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
-<c:set var="roleToActivityPredicate" scope="request">${! empty param.roleToActivityPredicate ? param.roleToActivityPredicate : "http://vivoweb.org/ontology/core#roleIn"}</c:set>
-<c:set var="activityToRolePredicate">${! empty param.activityToRolePredicate ? param.activityToRolePredicate : "http://vivoweb.org/ontology/core#relatedRole"}</c:set>
+<c:set var="showRoleLabelField">
+    ${! empty param.showRoleLabelField ? param.showRoleLabelField : true }
+</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -106,9 +113,10 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
     vreq.setAttribute("gYearDatatypeUriJson", MiscWebUtils.escape(XSD.gYear.toString()));
     
-    vreq.setAttribute("roleActivityTitleCase", TitleCase.toTitleCase(vreq.getParameter("roleActivityTypeLabel")));
-    String buttonLabel = (String) vreq.getAttribute("buttonLabel");
-    vreq.setAttribute("buttonLabel", TitleCase.toTitleCase(buttonLabel));
+    vreq.setAttribute("typeSelectorLabelTitleCase", 
+            TitleCase.toTitleCase( (String)vreq.getAttribute("typeSelectorLabel"), false));
+    String buttonText = (String) vreq.getAttribute("buttonText");
+    vreq.setAttribute("buttonText", TitleCase.toTitleCase(buttonText));
     
     ObjectProperty op = wdf.getObjectPropertyDao().getObjectPropertyByURI( predicateUri ); 
     if( op != null &&  op.getURIInverse() != null ){
@@ -162,8 +170,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="intervalToEnd" value="${vivoCore}end"/>
 
 <%-- label and type required if we are doing an add or a repair, but not an edit --%> 
-<c:set var="labelRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"," : "" %></c:set>
-<c:set var="typeRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"" : "" %></c:set>
+<c:set var="labelRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ? "\"nonempty\"," : "" %></c:set>
+<c:set var="typeRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ? "\"nonempty\"" : "" %></c:set>
+<c:set var="roleLabelRequired">${showRoleLabelField ? "\"nonempty\"," : "" }</c:set>
 
 <v:jsonset var="roleLabelAssertion" >
     ?role <${label}> ?roleLabel .
@@ -231,15 +240,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   SELECT ?existingRoleLabel WHERE { ?role  <${label}> ?existingRoleLabel . }
 </v:jsonset>
 
-<%-- 
-<v:jsonset var="activityTypeQuery">
-        PREFIX core: <${vivoCore}>
-        SELECT ?existingActivityType WHERE {
-            ?role <${roleToActivityPredicate}> ?existingActivity . 
-            ?existingActivity a ?existingActivityType . 
-        }    
-</v:jsonset>
---%>
 <% 
 request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 %>
@@ -313,8 +313,9 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForStart}", "${n3ForEnd}" ],        
+    "n3required"    : [ "${n3ForNewRole}"  ],        
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}",
+                        "${n3ForStart}", "${n3ForEnd}", "${roleLabelAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}",
@@ -380,7 +381,7 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
       },
       "roleLabel" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty","datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ ${roleLabelRequired} "datatype:${stringDatatypeUriJson}"  ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -421,7 +422,7 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
         
-      //setup date time edit elements
+        //set up date time edit elements
         Field startField = editConfig.getField("startField");
         startField.setEditElement(
                 new DateTimeWithPrecision(startField, 
@@ -468,13 +469,13 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
     <%-- Includes edit AND repair mode --%>
     <c:when test="<%= request.getAttribute(\"objectUri\")!=null %>">     	
         <c:set var="titleVerb" value="Edit" />        
-        <c:set var="submitButtonText" value="Edit ${buttonLabel}" />
+        <c:set var="submitButtonText" value="Edit ${buttonText}" />
         <c:set var="disabledVal">${editMode == "repair" ? "" : "disabled" }</c:set>
     </c:when>
     <c:otherwise>
         <c:set var="titleVerb" value="Create" />
         <c:set var="editMode" value="add" />
-        <c:set var="submitButtonText" value="${buttonLabel}" />
+        <c:set var="submitButtonText" value="${buttonText}" />
         <c:set var="disabledVal" value="" />
     </c:otherwise>
 </c:choose>
@@ -487,15 +488,15 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 
 <% if( mode == EditMode.ERROR ){ %>
  <div>This form is unable to handle the editing of this role because it is associated with 
-      multiple ${param.roleActivityTypeLabel} individuals.</div>      
+      multiple ${param.roleDescriptor} individuals.</div>      
 <% }else{ %>
 	
-	<h2>${titleVerb}&nbsp;${roleActivityTypeLabel} entry for <%= subjectName %></h2>
+	<h2>${titleVerb}&nbsp;${roleDescriptor} entry for <%= subjectName %></h2>
 	<%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE IN THIS FORM WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 	
 	<form id="addRoleForm" class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	
-	    <p class="inline"><v:input type="select" label="${roleActivityTitleCase} Type ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
+	    <p class="inline"><v:input type="select" label="${typeSelectorLabelTitleCase} ${requiredHint}" name="roleActivityType" disabled="${disabledVal}" id="typeSelector" /></p>
 	    
 	    <div class="fullViewOnly">
 	        
@@ -514,7 +515,9 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 		        <v:input type="hidden" id="roleActivityUri" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
 		    </div>
 	
-	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint} ${roleExamples}" size="50" /></p>
+	        <c:if test="${showRoleLabelField}">
+	           <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint} ${roleExamples}" size="50" /></p>
+	        </c:if>
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">

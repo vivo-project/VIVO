@@ -456,7 +456,7 @@ var customForm = {
     getTypeNameForLabels: function() {
         // If this.acType is empty, we are either in a one-step form with no type yet selected,
         // or in repair mode in a two-step form with no type selected. Use the default type
-        // name specified in the form data (this.typeName is 'Select one').
+        // name specified in the form data.
         return this.acType ? this.typeName : this.capitalize(this.defaultTypeName);
     },
 
