@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedHashSet;
 
+import org.apache.commons.lang.WordUtils;
+
 /**
  * @author bkoniden
  * Deepak Konidena
@@ -18,7 +20,8 @@ public class Entity extends Individual{
 	Set<Grant> grants = new HashSet<Grant>();
 	
 	public Entity(String departmentURI, String departmentLabel){
-		super(departmentURI, departmentLabel);
+//		super(departmentURI, WordUtils.capitalizeFully(departmentLabel));
+		super(departmentURI, (departmentLabel));
 	}
 	
 	public void setDepartmentLabel(String departmentURI){

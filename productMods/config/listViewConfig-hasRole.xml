@@ -9,7 +9,9 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?role
+        SELECT DISTINCT # send the property to the template, since this view supports multiple role properties
+                        ?property
+                        ?role
                         ?roleLabel 
                         ?activity ?activityName
                         ?activityLabel                        

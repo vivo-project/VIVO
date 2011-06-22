@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vitro.webapp.visualization.freemarker.valueobjects;
 
+import org.apache.commons.lang.WordUtils;
+
 public class Individual {
 	
 	private String individualLabel;
@@ -9,7 +11,7 @@ public class Individual {
 	
 	public Individual(String individualURI, String individualLabel) {
 		this.individualURI = individualURI;
-		this.individualLabel = individualLabel;
+		this.individualLabel = WordUtils.capitalizeFully(individualLabel);
 	}
 	
 	public Individual(String individualURI) {
@@ -21,7 +23,7 @@ public class Individual {
 	}
 	
 	public void setIndividualLabel(String individualLabel) {
-		this.individualLabel = individualLabel;
+		this.individualLabel = WordUtils.capitalizeFully(individualLabel);
 	}
 
 	public String getIndividualURI() {

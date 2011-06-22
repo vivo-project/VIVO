@@ -20,6 +20,23 @@
         </#if>
     </#local>
 
-    ${linkedIndividual} ${statement.roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    <#local core = "http://vivoweb.org/ontology/core#">
+    <#local dateTime>
+        <#if statement.property == "${core}hasPresenterRole">
+            <@dt.yearSpan statement.dateTimeStart! />
+        <#else>
+            <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+        </#if>
+    </#local>
 
+	 <#if statement.property == "${core}hasInvestigatorRole" ||
+         statement.property == "${core}hasPrincipalInvestigatorRole" ||
+	 statement.property == "${core}hasCo-PrincipalInvestigatorRole">
+         <#local roleLabel = "">
+    <#else>
+         <#local roleLabel = statement.roleLabel!>
+    </#if>
+
+	${linkedIndividual} ${roleLabel} ${dateTime!}
+	
 </#macro>

@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
+import org.apache.commons.lang.WordUtils;
+
 /**
  * @author bkoniden
  * Deepak Konidena
@@ -39,7 +41,8 @@ public class SubEntity extends Individual {
 	}
 	
 	public SubEntity(String individualURI, String individualLabel) {
-		super(individualURI, individualLabel);
+//		super(individualURI, WordUtils.capitalizeFully(individualLabel));
+		super(individualURI, (individualLabel));
 	}
 	
 	@Override
