@@ -4,6 +4,7 @@
 	<jsp:param name="roleDescriptor" value="reviewer of" />
     <jsp:param name="typeSelectorLabel" value="reviewer of" />	
     <jsp:param name="buttonText" value="reviewer role" />
+    <jsp:param name="showRoleLabelField" value="false" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#ReviewerRole" />	
     <jsp:param name="roleToActivityPredicate" value="http://vivoweb.org/ontology/core#forInformationResource" />
     <jsp:param name="activityToRolePredicate" value="http://vivoweb.org/ontology/core#linkedRole" />	

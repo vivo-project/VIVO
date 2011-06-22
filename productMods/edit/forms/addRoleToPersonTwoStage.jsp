@@ -91,6 +91,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
     ${! empty param.activityToRolePredicate ? param.activityToRolePredicate : "http://vivoweb.org/ontology/core#relatedRole"}
 </c:set>
 <c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
+<c:set var="showRoleLabelField">
+    ${! empty param.showRoleLabelField ? param.showRoleLabelField : true }
+</c:set>
 
 <%
     VitroRequest vreq = new VitroRequest(request);
@@ -167,8 +170,9 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <c:set var="intervalToEnd" value="${vivoCore}end"/>
 
 <%-- label and type required if we are doing an add or a repair, but not an edit --%> 
-<c:set var="labelRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"," : "" %></c:set>
-<c:set var="typeRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ?"\"nonempty\"" : "" %></c:set>
+<c:set var="labelRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ? "\"nonempty\"," : "" %></c:set>
+<c:set var="typeRequired" ><%= (mode == EditMode.ADD || mode == EditMode.REPAIR) ? "\"nonempty\"" : "" %></c:set>
+<c:set var="roleLabelRequired">${showRoleLabelField ? "\"nonempty\"," : "" }</c:set>
 
 <v:jsonset var="roleLabelAssertion" >
     ?role <${label}> ?roleLabel .
@@ -236,15 +240,6 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
   SELECT ?existingRoleLabel WHERE { ?role  <${label}> ?existingRoleLabel . }
 </v:jsonset>
 
-<%-- 
-<v:jsonset var="activityTypeQuery">
-        PREFIX core: <${vivoCore}>
-        SELECT ?existingActivityType WHERE {
-            ?role <${roleToActivityPredicate}> ?existingActivity . 
-            ?existingActivity a ?existingActivityType . 
-        }    
-</v:jsonset>
---%>
 <% 
 request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 %>
@@ -318,8 +313,9 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
     "predicate" : ["rolePredicate", "${predicateUriJson}" ],
     "object"    : ["role", "${objectUriJson}", "URI" ],
     
-    "n3required"    : [ "${n3ForNewRole}", "${roleLabelAssertion}" ],        
-    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}", "${n3ForStart}", "${n3ForEnd}" ],        
+    "n3required"    : [ "${n3ForNewRole}"  ],        
+    "n3optional"    : [ "${n3ForActivityLabel}", "${n3ForActivityType}", "${n3ForInverse}",
+                        "${n3ForStart}", "${n3ForEnd}", "${roleLabelAssertion}" ],        
                                                                                         
     "newResources"  : { "role" : "${defaultNamespace}",
                         "roleActivity" : "${defaultNamespace}",
@@ -385,7 +381,7 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
       },
       "roleLabel" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty","datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ ${roleLabelRequired} "datatype:${stringDatatypeUriJson}"  ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -426,7 +422,7 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
         editConfig = new EditConfiguration((String) request.getAttribute("editjson"));     
         EditConfiguration.putConfigInSession(editConfig,session);
         
-      //setup date time edit elements
+        //set up date time edit elements
         Field startField = editConfig.getField("startField");
         startField.setEditElement(
                 new DateTimeWithPrecision(startField, 
@@ -519,7 +515,9 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 		        <v:input type="hidden" id="roleActivityUri" name="roleActivity" cssClass="acUriReceiver" /> <!-- Field value populated by JavaScript -->
 		    </div>
 	
-	        <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint} ${roleExamples}" size="50" /></p>
+	        <c:if test="${showRoleLabelField}">
+	           <p><v:input type="text" id="roleLabel" label="Role in ### ${requiredHint} ${roleExamples}" size="50" /></p>
+	        </c:if>
 	        
 	        <c:choose>
 	            <c:when test="${numDateFields == 1}">

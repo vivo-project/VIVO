@@ -3,6 +3,7 @@
 <jsp:include page="addRoleToPersonTwoStage.jsp">    
 	<jsp:param name="roleDescriptor" value="organizer of" />
 	<jsp:param name="typeSelectorLabel" value="organizer of" />
+	<jsp:param name="showRoleLabelField" value="false" />
 	<jsp:param name="buttonText" value="organizer role" />
 	<jsp:param name="roleType" value="http://vivoweb.org/ontology/core#OrganizerRole" />	
 	<jsp:param name="roleActivityType_optionsType" value="HARDCODED_LITERALS" />
