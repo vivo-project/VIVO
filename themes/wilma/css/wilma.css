@@ -1580,7 +1580,21 @@ table#account tr:nth-child(2n+1) {
 }
 section.accounts .delete-account{
     float: left;
-    margin-top: 13px;
+    margin-top: 10px;
+}
+section.accounts input.delete,
+section.accounts input.delete:visited {
+    background-color: #FFF;
+    color: #749A02;
+    border: 1px solid rgba(116, 154, 2,.25);
+}
+section.accounts input.delete:hover {
+    color: #fff;
+    background-color: #b2d15a;
+    border: 1px solid #b2d15a;
+}
+section.accounts input.delete:active{
+    top: 1px;
 }
 .display-tools {
     float: left;
