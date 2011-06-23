@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -53,16 +54,22 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private final String friendlyName;
 
     /**
+     * An array of rdf:type values which will be used for links.
+     */
+    private final String[] rdfTypesForLinks;
+
+    /**
      * Constructor.
      * @param templateFileName just the name of the template file.  The directory is assumed to be standard.
      */
-    public CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName) {
+    public CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName, String[] rdfTypesForLinks) {
         this.vreq = vreq;
         this.templateFile = new File(getTemplateFileDirectory() + templateFileName);
         this.scriptFile = new File(getScriptFileDirectory() + scriptFileName);
         log.error(getTemplateFileDirectory() + templateFileName);
         this.namespace = namespace;
         this.friendlyName = friendlyName;
+        this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
     }
 
     /**
@@ -193,8 +200,10 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private String performScriptTemplateReplacements(String scriptTemplateContents) {
         String replacements = scriptTemplateContents;
 
+        String workingDirectory = TestFileController.getHarvesterPath();
         String fileDirectory = TestFileController.getUploadPath(vreq);
 
+        replacements = replacements.replace("${WORKING_DIRECTORY}", workingDirectory);
         replacements = replacements.replace("${UPLOADS_FOLDER}", fileDirectory);
 
         /*
@@ -240,10 +249,27 @@ class CsvFileHarvestJob implements FileHarvestJob {
     public String getPageHeader() {
         return "Harvest " + this.friendlyName + " data from CSV file(s)";
     }
+
+    @Override
+    public String getLinkHeader() {
+        return "Imported " + pluralize(this.friendlyName);
+    }
     
+    private String pluralize(String input) {
+        String plural = input + "s";
+        if(input.endsWith("s") || input.endsWith("x"))
+            plural = input + "es";
+        return plural;
+    }
+
     @Override
     public String getTemplateFilePath() {
         return this.templateFile.getPath();
+    }
+
+    @Override
+    public String[] getRdfTypesForLinks() {
+        return Arrays.copyOf(this.rdfTypesForLinks, this.rdfTypesForLinks.length);
     }
 
 }

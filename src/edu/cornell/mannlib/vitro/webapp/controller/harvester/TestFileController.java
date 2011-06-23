@@ -38,6 +38,7 @@ import org.w3c.dom.NodeList;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ExceptionResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -105,6 +106,8 @@ public class TestFileController extends FreemarkerHttpServlet {
             if((job != null) && TestFileController.knownJobs.contains(job.toLowerCase()))
                 jobKnown = "true";
             
+            FileHarvestJob jobObject = getJob(vreq, job);
+            
             Map<String, Object> body = new HashMap<String, Object>();
             //body.put("uploadPostback", "false");
             body.put("paramFirstUpload", PARAMETER_FIRST_UPLOAD);
@@ -117,7 +120,8 @@ public class TestFileController extends FreemarkerHttpServlet {
             body.put("job", job);
             body.put("jobKnown", jobKnown);
             body.put("postTo", POST_TO + "?" + PARAMETER_JOB + "=" + job);
-            body.put("jobSpecificHeader", getJob(vreq, job).getPageHeader());
+            body.put("jobSpecificHeader", jobObject.getPageHeader());
+            body.put("jobSpecificLinkHeader", jobObject.getLinkHeader());
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {
             log.error(e, e);
@@ -175,9 +179,9 @@ public class TestFileController extends FreemarkerHttpServlet {
         if(jobParameter == null)
             log.error("No job specified.");
         else if(jobParameter.equalsIgnoreCase(JOB_CSV_GRANT))
-            job = new CsvFileHarvestJob(vreq, "granttemplate.csv", "testCSVtoRDFgrant.sh", namespace, "Grant");
+            job = new CsvFileHarvestJob(vreq, "granttemplate.csv", "testCSVtoRDFgrant.sh", namespace, "Grant", new String[] {"http://vivoweb.org/ontology/core#Grant"});
         else if(jobParameter.equalsIgnoreCase(JOB_CSV_PERSON))
-            job = new CsvFileHarvestJob(vreq, "persontemplate.csv", "testCSVtoRDFperson.sh", namespace, "Person");
+            job = new CsvFileHarvestJob(vreq, "persontemplate.csv", "testCSVtoRDFpeople.sh", namespace, "Person", new String[] {"http://xmlns.com/foaf/0.1/Person"});
         else
             log.error("Invalid job: " + jobParameter);
         
@@ -419,8 +423,9 @@ public class TestFileController extends FreemarkerHttpServlet {
                 
                 VitroRequest vreq = new VitroRequest(request);
                 ArrayList<String> newlyAddedUrls = new ArrayList<String>();
+                ArrayList<String> newlyAddedUris = new ArrayList<String>();
                 if(finished) {
-                    ArrayList<String> newlyAddedUris = sessionIdToNewlyAddedUris.get(sessionId);
+                    newlyAddedUris = sessionIdToNewlyAddedUris.get(sessionId);
                     if(newlyAddedUris != null) {
                         for(String uri : newlyAddedUris) {
                             
@@ -429,7 +434,9 @@ public class TestFileController extends FreemarkerHttpServlet {
                             String suffix = uri.substring(namespaceRoot.length());
                             String url = "display/" + suffix;
                             
-                            newlyAddedUrls.add(uri);
+                            //newlyAddedUrls.add(uri);
+                            //newlyAddedUrls.add(url);
+                            newlyAddedUrls.add(UrlBuilder.getIndividualProfileUrl(uri, vreq));
                         }
                     }
                 }
@@ -437,6 +444,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                 JSONObject json = new JSONObject();
                 json.put("progressSinceLastCheck", progressSinceLastCheck);
                 json.put("finished", finished);
+                json.put("newlyAddedUris", newlyAddedUris);
                 json.put("newlyAddedUrls", newlyAddedUrls);
 
                 response.getWriter().write(json.toString());
@@ -546,18 +554,22 @@ public class TestFileController extends FreemarkerHttpServlet {
         log.error(additionsFile.getAbsolutePath());
         
         try {
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(additionsFile);
-            NodeList descriptionNodes = document.getElementsByTagName("http://www.w3.org/1999/02/22-rdf-syntax-ns#Description");
-
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            Document document = factory.newDocumentBuilder().parse(additionsFile);
+            //Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(additionsFile);
+            NodeList descriptionNodes = document.getElementsByTagNameNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "Description");
+            log.error("Description nodes: " + descriptionNodes.getLength());
+            
             int numNodes = descriptionNodes.getLength();
             for(int i = 0; i < numNodes; i++) {
                 Node node = descriptionNodes.item(i);
                 
                 ArrayList<String> types = getRdfTypes(node);
                 if(types.contains("http://vivoweb.org/ontology/core#Grant")) { //todo: generalize
-                
+
                     NamedNodeMap attributes = node.getAttributes();
-                    Node aboutAttribute = attributes.getNamedItem("http://www.w3.org/1999/02/22-rdf-syntax-ns#about");
+                    Node aboutAttribute = attributes.getNamedItemNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "about");
                     if(aboutAttribute != null) {
                         String value = aboutAttribute.getNodeValue();
                         newlyAddedUris.add(value);
@@ -582,12 +594,16 @@ public class TestFileController extends FreemarkerHttpServlet {
         for(int i = 0; i < numChildren; i++) {
             Node child = children.item(i);
 
-            String name = child.getNodeName();
-            if(name.equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
+            String namespace = child.getNamespaceURI();
+            String name = child.getLocalName();
+            String fullName = namespace + name;
+            if(fullName.equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")) {
                 NamedNodeMap attributes = child.getAttributes();
-                Node resourceAttribute = attributes.getNamedItem("http://www.w3.org/1999/02/22-rdf-syntax-ns#resource");
+                Node resourceAttribute = attributes.getNamedItemNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "resource");
                 if(resourceAttribute != null) {
+                    //String attributeNamespace = resourceAttribute.getNamespaceURI();
                     String value = resourceAttribute.getNodeValue();
+                    //rdfTypesList.add(attributeNamespace + value);
                     rdfTypesList.add(value);
                 }
             }
@@ -676,6 +692,9 @@ public class TestFileController extends FreemarkerHttpServlet {
                 catch(InterruptedException e) {
                     throw new IOException(e.getMessage(), e);
                 }
+
+//                int exitVal = 0;
+//                unsentLogLines.add("Screw the harvest, let's get to the last part");
                 
                 File additionsFile = new File(this.additionsFilePath);
                 ArrayList<String> newlyAddedUris = extractNewlyAddedUris(additionsFile);

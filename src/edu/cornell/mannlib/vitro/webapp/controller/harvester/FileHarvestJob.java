@@ -24,23 +24,36 @@ interface FileHarvestJob {
      * @return the path on the server of the file which the user can download to serve as a guide for what to upload.
      */
     String getTemplateFilePath();
-    
+
     /**
      * Gets the console script which can be used to run the harvest job. 
      * @return the console script which can be used to run the harvest job
      */
     String getScript();
-    
+
     /**
      * The path to the file containing the RDF/XML triples that get added to VIVO.
      * @return the path to the file containing the RDF/XML triples that get added to VIVO
      */
     String getAdditionsFilePath();
-    
+
     /**
      * A heading to be shown at the top of the page.
      * @return a heading to be shown at the top of the page
      */
     String getPageHeader();
+
+    /**
+     * A heading to be shown above the area where links to profiles of newly-harvested entities are listed. 
+     * @return a heading to be shown above the area where links to profiles of newly-harvested entities are listed
+     */
+    String getLinkHeader();
+    
+    /**
+     * Get an array of fully-qualified rdf:type values.  When the harvest run is complete, any new entities which have an rdf:type represented
+     * in this array will have a link displayed on the page allowing the user to visit the new profile. 
+     * @return an array of types to be used in links
+     */
+    String[] getRdfTypesForLinks();
 }
 

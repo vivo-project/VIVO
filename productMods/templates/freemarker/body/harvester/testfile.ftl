@@ -58,7 +58,7 @@
 			for(var i = 0; i < json.newlyAddedUrls.length; i++) {
 
 				var newLi = document.createElement("li");
-				newLi.innerHTML = "<a href=\"" + json.newlyAddedUrls[i] + "\">" + json.newlyAddedUrls[i] + "</a>";
+				newLi.innerHTML = "<a href=\"" + json.newlyAddedUrls[i] + "\">" + json.newlyAddedUris[i] + "</a>";
 				importedGrants.appendChild(newLi);
 			}
 		}
@@ -233,7 +233,7 @@
 			<textarea cols="100" rows="50" readonly="readonly" id="progressTextArea"></textarea>		
 		</div>
 		<div id="summary">
-			<h5>Imported grants</h5>
+			<h5>${jobSpecificLinkHeader}</h5>
 			<ul id="importedGrants">
 			</ul>
 		</div>
