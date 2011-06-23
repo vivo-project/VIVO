@@ -48,6 +48,7 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode"%>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils"%>
 
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.apache.commons.logging.Log" %>
@@ -79,16 +80,16 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 <%-- OPTIONAL PARAMETERS --%>
 
 <c:set var="typeSelectorLabel" scope="request"> <%-- label for type selector field --%>
-    ${! empty param.typeSelectorLabel ? param.typeSelectorLabel : param.roleDescriptor}
+    ${! empty param.typeSelectorLabel ? param.typeSelectorLabel : param.roleDescriptor }
 </c:set>
 <c:set var="buttonText" scope="request">
-    ${! empty param.buttonText ? param.buttonText : param.roleDescriptor}
+    ${! empty param.buttonText ? param.buttonText : param.roleDescriptor }
 </c:set>
 <c:set var="roleToActivityPredicate" scope="request">
-    ${! empty param.roleToActivityPredicate ? param.roleToActivityPredicate : "http://vivoweb.org/ontology/core#roleIn"}
+    ${! empty param.roleToActivityPredicate ? param.roleToActivityPredicate : "http://vivoweb.org/ontology/core#roleIn" }
 </c:set>
 <c:set var="activityToRolePredicate">
-    ${! empty param.activityToRolePredicate ? param.activityToRolePredicate : "http://vivoweb.org/ontology/core#relatedRole"}
+    ${! empty param.activityToRolePredicate ? param.activityToRolePredicate : "http://vivoweb.org/ontology/core#relatedRole" }
 </c:set>
 <c:set var="numDateFields">${! empty param.numDateFields ? param.numDateFields : 2 }</c:set>
 <c:set var="showRoleLabelField">
@@ -96,6 +97,7 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 </c:set>
 
 <%
+
     VitroRequest vreq = new VitroRequest(request);
     WebappDaoFactory wdf = vreq.getWebappDaoFactory();    
     //vreq.setAttribute("defaultNamespace", ""); //empty string triggers default new URI behavior
@@ -151,10 +153,10 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
  }
 %>
 
-<c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
-<c:set var="vivoCore" value="${vivoOnt}/core#" />
+<c:set var="vivoCore" value="http://vivoweb.org/ontology/core#" />
 <c:set var="rdfs" value="<%= VitroVocabulary.RDFS %>" />
 <c:set var="type" value="<%= VitroVocabulary.RDF_TYPE %>" />
+<c:set var="vitro" value="<%= VitroVocabulary.vitroURI %>" />
 <c:set var="label" value="${rdfs}label" />
 <c:set var="defaultNamespace" value=""/> <%--blank triggers default URI generation behavior --%>
 
@@ -242,10 +244,22 @@ public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.
 
 <% 
 request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
+log.debug("TYPE QUERY: " + vreq.getAttribute("typeQuery"));
 %>
-<v:jsonset var="activityTypeQuery">${typeQuery}</v:jsonset>
+<v:jsonset var="activityTypeQuery">${typeQuery}</v:jsonset> 
 
- <v:jsonset var="existingIntervalNodeQuery" >  
+<%-- 
+<v:jsonset var="activityTypeQuery">
+    PREFIX core: <${vivoCore}>
+    PREFIX vitro: <${vitro}>
+    SELECT ?existingActivityType WHERE { 
+        ?role <${roleToActivityPredicate}> ?existingActivity . 
+        ?existingActivity vitro:mostSpecificType ?existingActivityType . 
+    } 
+</v:jsonset>
+--%>
+    
+<v:jsonset var="existingIntervalNodeQuery" >  
     SELECT ?existingIntervalNode WHERE {
           ?role <${roleToInterval}> ?existingIntervalNode .
           ?existingIntervalNode <${type}> <${intervalType}> . }
@@ -554,59 +568,104 @@ request.setAttribute("typeQuery", getActivityTypeQuery(vreq));
 <%!
 
 private static final String VIVO_CORE = "http://vivoweb.org/ontology/core#";
-private static final String  DEFAULT_ACTIVITY_TYPE_QUERY = 
+
+private static final String DEFAULT_ACTIVITY_TYPE_QUERY = 
     "PREFIX core: <" + VIVO_CORE + ">\n" +
+    "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
     "SELECT ?existingActivityType WHERE { \n" +
-        "?role <${roleToActivityPredicate}> ?existingActivity . \n" +
-        "?existingActivity a ?existingActivityType . \n" +
+    "    ?role ?predicate ?existingActivity . \n" +
+    "    ?existingActivity vitro:mostSpecificType ?existingActivityType . \n" +
     "}"; 
-// The activity type query results must be limited to the values in the activity type select element. 
-// Sometimes the query returns a superclass such as owl:Thing instead. 
+    
+private static final String SUBCLASS_ACTIVITY_TYPE_QUERY = 
+    "PREFIX core: <" + VIVO_CORE + ">\n" +
+    "PREFIX rdfs: <" + VitroVocabulary.RDFS + ">\n" +
+    "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+    "SELECT ?existingActivityType WHERE {\n" +
+    "    ?role ?predicate ?existingActivity . \n" +
+    "    ?existingActivity vitro:mostSpecificType ?existingActivityType . \n" +
+    "    ?existingActivityType rdfs:subClassOf ?objectClassUri . \n" +
+    "}";
+    
+private static final String  CLASSGROUP_ACTIVITY_TYPE_QUERY = 
+    "PREFIX core: <" + VIVO_CORE + ">\n" +
+    "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+    "SELECT ?existingActivityType WHERE { \n" +
+    "    ?role ?predicate ?existingActivity . \n" +
+    "    ?existingActivity vitro:mostSpecificType ?existingActivityType . \n" +
+    "    ?existingActivityType vitro:inClassGroup ?classgroup . \n" +
+    "}";
+    
+/*
+ * The activity type query results must be limited to the values in the activity type select element. 
+ * Sometimes the query returns a superclass such as owl:Thing instead.
+ * Make use of vitro:mostSpecificType so that, for example, an individual is both a 
+ * core:InvitedTalk and a core:Presentation, core:InvitedTalk is selected.
+ * vitro:mostSpecificType alone may not suffice, since it does not guarantee that the value returned
+ * is in the select list.
+ * We could still have problems if the value from the select list is not a vitro:mostSpecificType, 
+ * but that is unlikely.
+ */
 private String getActivityTypeQuery(VitroRequest vreq) {
 
     String activityTypeQuery = null;
 
-	// Select options are subclasses of a specified class
-	String objectClassUri = vreq.getParameter("roleActivityType_objectClassUri");
-	if (StringUtils.isNotBlank(objectClassUri)) { 
-	    log.debug("objectClassUri = " + objectClassUri);
-	    activityTypeQuery = 
-	    "PREFIX core: <" + VIVO_CORE + ">\n" +
-	    "PREFIX rdfs: <" + VitroVocabulary.RDFS + ">\n" +
-	    "SELECT ?existingActivityType WHERE {\n" +
-	        "?role <${roleToActivityPredicate}> ?existingActivity . \n" +
-	        "?existingActivity a ?existingActivityType . \n" +
-	        "?existingActivityType rdfs:subClassOf <" + objectClassUri + "> . \n" +
-	    "}";
-	} else {  
-	    String optionsType = vreq.getParameter("roleActivityType_optionsType");
-	    // Select options are hardcoded
-	    if ("HARDCODED_LITERALS".equals(optionsType)) {
-	        String typeLiteralOptions = vreq.getParameter("roleActivityType_literalOptions");
-	        if (StringUtils.isNotBlank(typeLiteralOptions)) {           
-	            try {
-	                JSONObject json = new JSONObject("{values: [" + typeLiteralOptions + "]}");
-	                Set<String> typeUris = new HashSet<String>();
-	                JSONArray values = json.getJSONArray("values");
-	                int valueCount = values.length();
-	                for (int i = 0; i < valueCount; i++) {
-	                    JSONArray option = values.getJSONArray(i);
-	                    String uri = option.getString(0);
-	                    if (StringUtils.isNotBlank(uri)) {
-	                        typeUris.add("(?existingActivityType = <" + uri + ">)");
-	                    }	                    
-	                }
-	                String typeFilters = "FILTER (" + StringUtils.join(typeUris, "||") + ")";
-	                activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY.replace("}", "") + typeFilters + "}";
-	            } catch (JSONException e) {
-	                activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;
-	            }
-	        }
+	String optionsType = vreq.getParameter("roleActivityType_optionsType");
+
+    // Note that this value is overloaded to specify either object class uri or classgroup uri
+    String objectClassUri = vreq.getParameter("roleActivityType_objectClassUri");
+    
+    if (StringUtils.isNotBlank(objectClassUri)) { 
+        log.debug("objectClassUri = " + objectClassUri);
+        
+		if ("VCLASSGROUP".equals(optionsType)) {
+		    activityTypeQuery = CLASSGROUP_ACTIVITY_TYPE_QUERY;
+		    activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "classgroup", objectClassUri);    	
+		    
+		} else if ("CHILD_VCLASSES".equals(optionsType)) { 
+		    activityTypeQuery = SUBCLASS_ACTIVITY_TYPE_QUERY;
+		    activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "objectClassUri", objectClassUri); 
+		    
+		} else {
+		    activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;  
+		}
+		
+	// Select options are hardcoded
+	} else if ("HARDCODED_LITERALS".equals(optionsType)) { 	    
+	  
+        String typeLiteralOptions = vreq.getParameter("roleActivityType_literalOptions");
+        if (StringUtils.isNotBlank(typeLiteralOptions)) {           
+            try {
+                JSONObject json = new JSONObject("{values: [" + typeLiteralOptions + "]}");
+                Set<String> typeUris = new HashSet<String>();
+                JSONArray values = json.getJSONArray("values");
+                int valueCount = values.length();
+                for (int i = 0; i < valueCount; i++) {
+                    JSONArray option = values.getJSONArray(i);
+                    String uri = option.getString(0);
+                    if (StringUtils.isNotBlank(uri)) {
+                        typeUris.add("(?existingActivityType = <" + uri + ">)");
+                    }	                    
+                }
+                String typeFilters = "FILTER (" + StringUtils.join(typeUris, "||") + ")";
+                activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY.replaceAll("}$", "") + typeFilters + "}";
+            } catch (JSONException e) {
+                activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;
+            }
+
 	    } else { 
 	        activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;	    
 	    } 
+
+	} else {
+	    activityTypeQuery = DEFAULT_ACTIVITY_TYPE_QUERY;   
 	}
+
+	String roleToActivityPredicate = (String) vreq.getAttribute("roleToActivityPredicate");
+	activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "predicate", roleToActivityPredicate);
+	
 	log.debug("Activity type query: " + activityTypeQuery);
+	
     return activityTypeQuery;
 }
 %>
