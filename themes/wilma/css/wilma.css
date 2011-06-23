@@ -1520,13 +1520,19 @@ table#account {
 table#account caption {
     display: none;
 }
-table#account th{
-    background-color: #fff;
+table#account th {
+    background-color: #F7F9F9;
+    height: 40px;
+    color: #064D68;
+    padding-top: 7px;
+    border: 1px solid #d9e4ea;
+    border-bottom: none;
+    padding-left: 6px;
 }
 table#account td {
     vertical-align: top;
     padding: .5em;
-    border: 1px solid #F7F9F9; 
+    border: 1px solid #d9e4ea; 
     font-size: .9em;
 }  
 table#account tr {
@@ -1542,6 +1548,26 @@ table#account tr:nth-child(2n+1) {
 #search-accounts {
     float: right;
     height: 60px;
+}
+.account-alpha-browse {
+    width: 10px; 
+    height: 22px;
+    float: right; 
+    padding-right: 10px; 
+}
+.sort-asc {
+     width: 9px;
+     height:10px;
+     padding-top: 4px; 
+     background: url(../images/sort-asc.gif) 0 4px no-repeat;
+     display: block;
+}
+.sort-desc {
+     width: 9px;
+     height:10px;
+     padding-bottom: 4px; 
+     background: url(../images/sort-desc.gif) 0 4px no-repeat;
+     display: block;
 }
 .accounts {
     clear: left;
