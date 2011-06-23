@@ -1230,17 +1230,14 @@ ul#individual-tools li a {
 ul.individual-urls {
     list-style: url(../../../images/individual/arrow-grey.gif);
 }
-ul#individual-email, 
+
 ul#individual-phone {
     list-style-type: none;
 }
-ul#individual-email li, 
 ul#individual-phone li {
     line-height: 1.6em;
 }
-ul#individual-email li:last-child {
-    margin-bottom: 15px;
-}
+
 ul.individual-urls li {
     font-size: .875em;
     line-height: 1.6em;
