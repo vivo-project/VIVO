@@ -71,16 +71,9 @@
                 <h1 class="fn foaf-person">
                     <#-- Label -->
                     <@p.label individual editable />
-                        
-                    <#-- Moniker / Preferred Title -->
-                    <#-- Use Preferred Title over Moniker if it is populated -->
-                    <#assign title = (propertyGroups.getProperty("${core}preferredTitle").firstValue)! />
-                    <#if ! title?has_content>
-                        <#assign title = individual.moniker>
-                    </#if>
-                    <#if title?has_content>
-                        <span class="preferred-title">${title}</span>
-                    </#if>
+
+                    <#--  Most-specific types -->
+                    <@p.mostSpecificTypes individual />
                 </h1>
             </#if>
                

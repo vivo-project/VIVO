@@ -9,8 +9,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openrdf.model.URI;
-import org.openrdf.model.impl.URIImpl;
 
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -25,6 +23,12 @@ import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
     private static final Log log = LogFactory.getLog(IndividualTemplateModel.class);
+    
+    private static final String FOAF = "http://xmlns.com/foaf/0.1/";
+    private static final String CORE = "http://vivoweb.org/ontology/core#";
+    private static final String PERSON_CLASS = FOAF + "Person";
+    private static final String ORGANIZATION_CLASS = FOAF + "Organization";
+    
     private Map<String, String> qrData = null;
     
     public IndividualTemplateModel(Individual individual, VitroRequest vreq) {
@@ -34,98 +38,16 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     private String getBaseVisUrl() {
         return getUrl(Route.VISUALIZATION_SHORT.path());
     }
-    
-    /* Access methods for templates */
-
-    public boolean isPerson() {
-        return isVClass("http://xmlns.com/foaf/0.1/Person");
-    }
-    
-    public boolean isOrganization() {
-        return isVClass("http://xmlns.com/foaf/0.1/Organization");        
-    }
-    
-    public String getCoAuthorVisUrl() {
-    	
-        String coauthorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";
-    	
-    	return getVisUrl(coauthorVisURL);
-    }
-
-    public String getCoInvestigatorVisUrl() {
-    	
-    	String coinvestigatorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";
-    	
-    	return getVisUrl(coinvestigatorVisURL);
-    }
-
-	private String getVisUrl(String coinvestigatorVisURL) {
-		boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
-												getUri(),
-												vreq);
-        
-        if (isUsingDefaultNameSpace) {
-        	
-        	return coinvestigatorVisURL + getLocalName();
-        	
-        } else {
-        	
-        	return UrlBuilder.addParams(
-        			coinvestigatorVisURL, 
-        			new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, getUri())); 
-        }
-	}
-
-    public String getTemporalGraphUrl() {
-        if (!isOrganization()) {
-            return null;
-        }
-        
-        String temporalVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";
-    	
-    	return getVisUrl(temporalVisURL);
-    }
-
-    public String getMapOfScienceUrl() {
-
-    	String mapOfScienceVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";
-    	
-    	return getVisUrl(mapOfScienceVisURL);
-    }
-    
-    public String getSelfEditingId() {
-        String id = null;
-        String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");
-        if (! StringUtils.isBlank(idMatchingProperty)) {
-            // Use assertions model to side-step filtering. We need to get the value regardless of whether the property
-            // is visible to the current user.
-            WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
-            Collection<DataPropertyStatement> ids = 
-                wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, idMatchingProperty);
-            if (ids.size() > 0) {
-                id = ids.iterator().next().getData();
-            }
-        }
-        return id;
-    }
-    
-    public Map<String, String> doQrData() {
-        if(qrData == null)
-            qrData = generateQrData();
-        return qrData;
-    }
-
+ 
     private Map<String, String> generateQrData() {
-        String core = "http://vivoweb.org/ontology/core#";
-        String foaf = "http://xmlns.com/foaf/0.1/";
 
         Map<String,String> qrData = new HashMap<String,String>();
         WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
-        Collection<DataPropertyStatement> firstNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, foaf + "firstName");
-        Collection<DataPropertyStatement> lastNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, foaf + "lastName");
-        Collection<DataPropertyStatement> preferredTitles = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "preferredTitle");
-        Collection<DataPropertyStatement> phoneNumbers = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "phoneNumber");
-        Collection<DataPropertyStatement> emails = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, core + "email");
+        Collection<DataPropertyStatement> firstNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "firstName");
+        Collection<DataPropertyStatement> lastNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "lastName");
+        Collection<DataPropertyStatement> preferredTitles = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "preferredTitle");
+        Collection<DataPropertyStatement> phoneNumbers = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "phoneNumber");
+        Collection<DataPropertyStatement> emails = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "email");
 
         if(firstNames != null && ! firstNames.isEmpty())
             qrData.put("firstName", firstNames.toArray(new DataPropertyStatement[firstNames.size()])[0].getData());
@@ -153,4 +75,76 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         
         return qrData;
     }
+    
+    
+    /* Access methods for templates */
+
+    public boolean isPerson() {
+        return isVClass(PERSON_CLASS);
+    }
+    
+    public boolean isOrganization() {
+        return isVClass(ORGANIZATION_CLASS);        
+    }
+    
+    public String getCoAuthorVisUrl() {   	
+        String coauthorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(coauthorVisURL);
+    }
+
+    public String getCoInvestigatorVisUrl() {    	
+    	String coinvestigatorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(coinvestigatorVisURL);
+    }
+
+	private String getVisUrl(String coinvestigatorVisURL) {
+		boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
+												getUri(),
+												vreq);
+        
+        if (isUsingDefaultNameSpace) {        	
+        	return coinvestigatorVisURL + getLocalName();        	
+        } else {        	
+        	return UrlBuilder.addParams(
+        			coinvestigatorVisURL, 
+        			new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, getUri())); 
+        }
+	}
+
+    public String getTemporalGraphUrl() {
+        if (!isOrganization()) {
+            return null;
+        }        
+        String temporalVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(temporalVisURL);
+    }
+
+    public String getMapOfScienceUrl() {
+    	String mapOfScienceVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(mapOfScienceVisURL);
+    }
+    
+    public String getSelfEditingId() {
+        String id = null;
+        String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");
+        if (! StringUtils.isBlank(idMatchingProperty)) {
+            // Use assertions model to side-step filtering. We need to get the value regardless of whether the property
+            // is visible to the current user.
+            WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
+            Collection<DataPropertyStatement> ids = 
+                wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, idMatchingProperty);
+            if (ids.size() > 0) {
+                id = ids.iterator().next().getData();
+            }
+        }
+        return id;
+    }
+    
+    public Map<String, String> doQrData() {
+        if(qrData == null)
+            qrData = generateQrData();
+        return qrData;
+    }
+
+
 }
