@@ -52,8 +52,6 @@ xmlns:vitro="&vitro;"
 <owl:AnnotationProperty rdf:about="&vitro;individualSortFieldAnnot"/>
 <owl:AnnotationProperty rdf:about="&vitro;individualSortDirectionAnnot"/>
 
-<!-- Tab-related constructs -->
-
 <!-- externalID-related constructs -->
 
 <owl:AnnotationProperty rdf:about="&vitro;isExternalId"/>
@@ -108,8 +106,6 @@ xmlns:vitro="&vitro;"
 <owl:DatatypeProperty rdf:about="&vitro;acknowledgeText"/>
 <owl:DatatypeProperty rdf:about="&vitro;bannerWidth"/>
 <owl:DatatypeProperty rdf:about="&vitro;bannerHeight"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag2Numeric"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag3Numeric"/>
 <owl:DatatypeProperty rdf:about="&vitro;copyrightURL"/>
 <owl:DatatypeProperty rdf:about="&vitro;copyrightAnchor"/>
 <owl:DatatypeProperty rdf:about="&vitro;rootBreadCrumbURL"/>
@@ -118,81 +114,13 @@ xmlns:vitro="&vitro;"
 <owl:DatatypeProperty rdf:about="&vitro;logotypeHeight"/>
 <owl:DatatypeProperty rdf:about="&vitro;logotypeWidth"/>
 <owl:DatatypeProperty rdf:about="&vitro;imageThumbWidth"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag1SearchFiltering"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag2SearchFiltering"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag3SearchFiltering"/>
 <owl:DatatypeProperty rdf:about="&vitro;urlPrefix"/>
-
-<!-- Tab-related constructs -->
-
-<owl:Class rdf:about="&vitro;Tab"/>
-<owl:Class rdf:about="&vitro;SubcollectionCategory">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;Subcollection">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;Collection">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;SecondaryTab">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;PrimaryTabContent">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;PrimaryTab">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;AutoLinkableTab">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;ManuallyLinkableTab">
-    <rdfs:subClassOf rdf:resource="&vitro;Tab"/>
-</owl:Class>
-<owl:Class rdf:about="&vitro;MixedTab">
-    <rdfs:subClassOf rdf:resource="&vitro;AutoLinkableTab"/>
-    <rdfs:subClassOf rdf:resource="&vitro;ManuallyLinkableTab"/>
-</owl:Class>
-<owl:DatatypeProperty rdf:about="&vitro;tabCreatorUserId"/>
-<owl:DatatypeProperty rdf:about="&vitro;statusId"/>
-<owl:DatatypeProperty rdf:about="&vitro;tabBody"/>
-<owl:DatatypeProperty rdf:about="&vitro;dayLimit"/>
-<owl:DatatypeProperty rdf:about="&vitro;galleryRows"/>
-<owl:DatatypeProperty rdf:about="&vitro;galleryCols"/>
-<owl:DatatypeProperty rdf:about="&vitro;moreTag"/>
-<owl:DatatypeProperty rdf:about="&vitro;imageWidth"/>
-<owl:DatatypeProperty rdf:about="&vitro;individualSortDirection"/>
-<owl:DatatypeProperty rdf:about="&vitro;individualSortField"/>
-<owl:ObjectProperty rdf:about="&vitro;inPortal"/>
-<owl:DatatypeProperty rdf:about="&vitro;individualSortField"/>
-<owl:DatatypeProperty rdf:about="&vitro;individualSortDirection"/>
-<owl:DatatypeProperty rdf:about="&vitro;rssUrl"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag2Set"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag3Set"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag2Mode"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag3Mode"/>
-<owl:ObjectProperty rdf:about="&vitro;subTabOf"/>
-<owl:AnnotationProperty rdf:about="&vitro;autoLinkedToTab"/>
-<owl:Class rdf:about="&vitro;TabIndividualRelation"/>
-<owl:ObjectProperty rdf:about="&vitro;involvesIndividual"/>
-<owl:ObjectProperty rdf:about="&vitro;involvesTab"/>
 
 <!-- Application-related constructs -->
 
 <owl:Class rdf:about="&vitro;Application"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag1Name"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag2Name"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag3Name"/>
-<owl:DatatypeProperty rdf:about="&vitro;minSharedPortalId"/>
-<owl:DatatypeProperty rdf:about="&vitro;maxSharedPortalId"/>
 <owl:DatatypeProperty rdf:about="&vitro;rootLogotypeImage"/>
 <owl:DatatypeProperty rdf:about="&vitro;keywordHeading"/>
-<owl:DatatypeProperty rdf:about="&vitro;onlyCurrent"/>
-<owl:DatatypeProperty rdf:about="&vitro;maxPortalId"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag2Values"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag1Values"/>
-<owl:DatatypeProperty rdf:about="&vitro;flag3Values"/>
 
 <!-- User-related constructs -->
 
@@ -214,9 +142,6 @@ xmlns:vitro="&vitro;"
 
   <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#hiddenFromDisplayBelowRoleLevelAnnot">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#flag1Filtering">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#forceStubDeletionAnnot">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
