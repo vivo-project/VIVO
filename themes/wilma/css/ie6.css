@@ -110,8 +110,11 @@ fix to maintain sanity in rendering sections of site admin targets IE7 and below
     width: 72%;
 }
 /* Fix for menupages */
+nav#alpha-browse-container {
+    width: 542px;
+}
 ul#alpha-browse-individuals {
-    width: 545px;
+    width: 540px;
 }
 ul#alpha-browse-individuals a {
     height: 30px;
@@ -120,7 +123,7 @@ ul#alpha-browse-individuals a {
     width: 8px;
 }
 #individuals-in-class {
-    width: 550px;
+    width: 545px;
 }
 #individual-intro.person .individual-overview {
     clear: left;
