@@ -1,12 +1,35 @@
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing		No	Delete	not set
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#DependentResource		No	Delete	not set
-http://vivoweb.org/ontology/core#DependentResource		No	Delete	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value2Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value3Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value4Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value5Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value6Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value7Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value8Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value9Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value10Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value11Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value12Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value13Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value14Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value15Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value16Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value17Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value18Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value19Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value20Thing		No	Delete	Delete
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#DependentResource		No	Delete	Delete
+http://vivoweb.org/ontology/core#DependentResource		No	Delete	Delete
 http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Keyword		No	Delete	Delete
 http://vitro.mannlib.cornell.edu/ns/vitro/0.7#keyword		No	Delete	not set
-http://vivoweb.org/ontology/core#v		No	Delete	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#primaryLink		No	Delete	not set
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink		No	Delete	not set
 http://vivoweb.org/ontology/core#organizerOf		No	Delete	not set
 http://purl.org/ontology/bibo/organizer		No	Delete	not set
 http://vivoweb.org/ontology/core#PrimaryURLLink	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Link	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkAnchor	http://vivoweb.org/ontology/core#linkAnchorText	Yes	Map	Directly-changed
+http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkURL	http://vivoweb.org/ontology/core#linkURI	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#uspc	http://vivoweb.org/ontology/core#cclCode	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#wipo-ipc	http://vivoweb.org/ontology/core#iclCode	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#email	http://vivoweb.org/ontology/core#primaryEmail	Yes	Map	Directly-changed
