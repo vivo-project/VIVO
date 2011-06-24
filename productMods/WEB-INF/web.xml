@@ -153,7 +153,7 @@
  
   <!--  vivo specific, must appear before other policies -->
   <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.setup.VivoPolicySetup</listener-class>
+    <listener-class> edu.cornell.mannlib.vivo.auth.policy.VivoPolicy$Setup</listener-class>
   </listener>
   
   <listener>
