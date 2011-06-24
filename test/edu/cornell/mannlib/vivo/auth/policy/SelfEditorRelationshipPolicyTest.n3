@@ -1,0 +1,147 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix bib: <http://purl.org/ontology/bibo/> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix mydomain: <http://vivo.mydomain.edu/individual/> .
+
+### This file is for the test InformationResourceEditingPolicyTest.java.
+
+#
+# Bozo
+#
+mydomain:bozo
+	a foaf:Agent ;
+	a foaf:Person ;
+	a owl:Thing ;
+	a core:EmeritusProfessor ;
+	rdfs:label "Person, Bozo" ;
+	foaf:firstName "Bozo" ;
+	foaf:lastName "Person" ;
+	core:editorOf mydomain:bozoEditedIt ;
+	core:authorInAuthorship mydomain:authorshipBozo ;
+	.
+
+#
+# Joe
+#
+mydomain:joe
+	a foaf:Agent ;
+	a foaf:Person ;
+	a owl:Thing ;
+	a core:EmeritusProfessor ;
+	rdfs:label "Person, Joe" ;
+	foaf:firstName "Joe" ;
+	foaf:lastName "Person" ;
+	core:editorOf mydomain:joeEditedIt ;
+	core:authorInAuthorship mydomain:authorshipJoe ;
+	.
+
+#
+# info resource with no author or editor
+#
+mydomain:nobodyWroteIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "No author or editor" ;
+	.
+
+#
+# info resource with Bozo as author
+#
+mydomain:bozoWroteIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "Bozo is author" ;
+	core:informationResourceInAuthorship mydomain:authorshipBozo ;
+	.
+
+mydomain:authorshipBozo
+	a core:Authorship ;
+	a core:Relationship ;
+	a owl:Thing ;
+	core:linkedInformationResource mydomain:bozoWroteIt ;
+	core:linkedAuthor mydomain:bozo ;
+	.
+
+#
+# info resource with Bozo as editor 
+#
+mydomain:bozoEditedIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "Bozo is editor" ;
+	bib:editor mydomain:bozo ;
+	.
+
+#
+# info resource with Bozo featured 
+#
+mydomain:bozoFeaturedInIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "Bozo is featured" ;
+	core:features mydomain:bozo ;
+	.
+
+#
+# info resource with Joe as author
+#
+mydomain:joeWroteIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "Joe is author" ;
+	core:informationResourceInAuthorship mydomain:authorshipJoe ;
+	.
+
+mydomain:authorshipJoe
+	a core:Authorship ;
+	a core:Relationship ;
+	a owl:Thing ;
+	core:linkedInformationResource mydomain:joeWroteIt ;
+	core:linkedAuthor mydomain:joe ;
+	.
+
+#
+# info resource with Joe as editor 
+#
+mydomain:joeEditedIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "Joe is editor" ;
+	bib:editor mydomain:joe ;
+	.
+
+#
+# info resource with Joe featured 
+#
+mydomain:joeFeaturedInIt
+	a core:BlogPosting ;
+	a core:InformationResource ;
+	a bib:Article ;
+	a bib:Document ;
+	a owl:Thing ;
+	rdfs:label "Joe is featured" ;
+	core:features mydomain:joe ;
+	.

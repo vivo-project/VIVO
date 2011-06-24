@@ -166,8 +166,7 @@
   </listener>
 
   <listener>
-    <listener-class> edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.SelfEditorRelationshipPolicy$Setup
-    </listener-class>
+    <listener-class> edu.cornell.mannlib.vivo.auth.policy.SelfEditorRelationshipPolicy$Setup</listener-class>
   </listener>
 
   <!-- The Lucene index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up. -->
