@@ -1,0 +1,96 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#MenuText>
+      <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasMenuText>
+              """# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core: <http://vivoweb.org/ontology/core#> .
+@prefix vivoweb: <http://vivoweb.org/ontology#> .
+
+### This file defines the default menu for vivo. ###
+
+#### Default Menu ####
+
+display:DefaultMenu 
+    a  display:MainMenu ;
+    display:hasElement display:EventsMenuItem ;
+    display:hasElement display:HomeMenuItem ;
+    display:hasElement display:OrganizationsMenuItem ;
+    display:hasElement display:PeopleMenuItem ;
+    display:hasElement display:ResearchMenuItem .
+
+#### Menu Items for Default Menu ####
+
+display:HomeMenuItem 
+    a display:NavigationElement ;
+    display:menuPosition 1;
+    display:linkText \"Home\";
+    display:toPage display:Home .
+
+display:PeopleMenuItem 
+    a display:NavigationElement ;
+    display:menuPosition 2;
+    display:linkText \"People\";
+    display:toPage display:People .
+
+display:OrganizationsMenuItem 
+    a display:NavigationElement ;
+    display:menuPosition 3;
+    display:linkText \"Organizations\";
+    display:toPage display:Organizations .
+
+display:ResearchMenuItem     
+    a display:NavigationElement ;
+    display:menuPosition 4;
+    display:linkText \"Research\";
+    display:toPage display:Research .
+
+display:EventsMenuItem 
+    a display:NavigationElement ;
+    display:menuPosition 5;
+    display:linkText \"Events\";
+    display:toPage display:Events .
+
+########## Pages ############
+
+display:Home 
+    a display:HomePage ;    
+    a display:Page ;
+    display:title \"Home\" ;    
+    display:urlMapping \"/\" .
+
+display:Events 
+    a display:Page ;    
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGroupevents ;
+    display:title \"Events\" ;
+    display:urlMapping \"/events\" .
+
+display:Organizations 
+    a display:Page ;
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouporganizations ;
+    display:title \"Organizations\" ;
+    display:urlMapping \"/organizations\" .
+
+display:People 
+    a display:Page ;    
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouppeople ;
+    display:requiresBodyTemplate \"menupage--classgroup-people.ftl\" ;
+    display:title \"People\" ;
+    display:urlMapping \"/people\" .
+
+display:Research 
+    a display:Page ;        
+    a display:ClassGroupPage;
+    display:forClassGroup vivoweb:vitroClassGrouppublications ;
+    display:title \"Research\" ;
+    display:urlMapping \"/research\" .
+""" .
