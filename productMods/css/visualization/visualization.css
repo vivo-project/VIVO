@@ -1,9 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-/*************************************************
- vivo-basic theme: visualization styles
-**************************************************/
-
+/*****************************
+ visualization styles       
+******************************/
+                            
 span.incomplete-data-holder,
 #incomplete-data {
     padding: 5px;

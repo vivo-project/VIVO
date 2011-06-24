@@ -13,9 +13,7 @@
             </#if>
 
             <#if siteConfig.urls.menuN3Editor??>
-                <#if currentTheme != "vivo-basic"> <#-- vivo-basic doesn't support menu pages -->
-                    <li><a href="${siteConfig.urls.menuN3Editor}">Menu management</a></li> 
-                </#if>
+                <li><a href="${siteConfig.urls.menuN3Editor}">Menu management</a></li> 
             </#if>
             
             <#if siteConfig.urls.userList??>
