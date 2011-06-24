@@ -3,7 +3,7 @@
 <#-- Individual profile page template for foaf:Person individuals -->
 
 <#include "individual-setup.ftl">
-<#include "individual-qrCodeFoafPerson.ftl">
+<#import "individual-qrCodeGenerator.ftl" as qr>
 
 <section id="individual-intro" class="vcard person" role="region">
 
@@ -34,7 +34,7 @@
                     <li role="listitem"><a title="View this individual in RDF format" class="icon-rdf" href="${rdfUrl}">RDF</a></li>
                 </#if>
                 
-                <@qrCode />
+                <@qr.renderCode />
             </ul>
         </nav>
             
