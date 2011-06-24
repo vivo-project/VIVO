@@ -46,7 +46,6 @@ div.overview-value :last-child {
     vertical-align: text-top;
 }
 
-
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;
@@ -58,6 +57,7 @@ ul#individual-personInPosition li {
 ul#individual-personInPosition li:last-child {
     padding-bottom: 15px;
 }
+
 /* <------ RESEARCH AREA */
 ul#individual-hasResearchArea {
     padding-bottom: 24px;
@@ -70,4 +70,25 @@ ul#individual-hasResearchArea li {
 }
 ul#individual-hasResearchArea li:first-child {
     padding-left: 0;
+}
+
+/* <------ QR Code */
+h5.qrCode {
+    margin-top: 1em;
+    padding: 0;
+}
+span#qrCodeImage {
+    position: absolute;
+    top: -9em;
+    left: 2em;
+    border: solid 1px #ccc;
+    background: white;
+}
+span#qrCodeImage img {
+    padding: 1.7em 1.7em 0 1.7em;
+}
+a.qrCloseLink {
+    float: right;
+    margin-right: .5em;
+    font-size: .8em;
 }

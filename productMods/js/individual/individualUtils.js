@@ -41,4 +41,10 @@ $(document).ready(function(){
        });
     });
     
+    // Reveal vCard QR code when QR icon is clicked
+    $('#qrIcon, .qrCloseLink').click(function() {
+        $('#qrCodeImage').toggleClass('hide');
+        // event.preventDefault();
+        return false;
+    });
 });
