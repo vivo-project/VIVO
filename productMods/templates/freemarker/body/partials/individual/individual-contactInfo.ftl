@@ -6,7 +6,7 @@
 <@emailLinks "${core}primaryEmail" />
 
 <#-- Additional Emails --> 
-<@emailLinks "${core}email"  />   
+<@emailLinks "${core}email" />   
   
 <#-- Phone --> 
 <#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
