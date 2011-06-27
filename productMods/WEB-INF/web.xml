@@ -121,10 +121,11 @@
   </listener>
 
   <!-- Invokes process to perform knowledge base updates to align with ontology changes if needed -->
-   
+  <!--  
   <listener>
      <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase</listener-class>
   </listener>
+  -->
   
   <!-- The followng listener records all edit changes, in reified form, to another database model -->
   <!-- still at an experimental stage -->
