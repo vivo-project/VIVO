@@ -1585,15 +1585,29 @@ section.accounts .delete-account{
 section.accounts input.delete,
 section.accounts input.delete:visited {
     background-color: #FFF;
-    color: #749A02;
-    border: 1px solid rgba(116, 154, 2,.25);
+    color: #2485AE;
+    border: 1px solid rgba(36, 133, 174,.25);
 }
 section.accounts input.delete:hover {
     color: #fff;
-    background-color: #b2d15a;
-    border: 1px solid #b2d15a;
+    background-color: #88acbb;
+    border: 1px solid #88acbb;
 }
-section.accounts input.delete:active{
+section.accounts input.delete:active {
+    top: 1px;
+}
+input.add-account,
+input.add-account:visited {
+    background: url(../../../images/addNewAccount.png) 0 0 no-repeat;
+    color: #fff;
+    padding-left: 35px;
+}
+input.add-account:hover {
+    color: #fff;
+    background-color: #88acbb;
+    background: url(../../../images/addNewAccountOver.png) 0 0 no-repeat;
+}
+input.add-account:active {
     top: 1px;
 }
 .display-tools {
