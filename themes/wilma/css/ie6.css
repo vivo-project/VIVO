@@ -187,3 +187,15 @@ form.customForm #requiredLegend {
     width: 48%;
     clear: left;
 }
+/* Fix for verbose mode */
+#verbose-mode {
+    float: left;
+    clear: left;
+    margin-top: -14px;
+}
+.verbose-toggle {
+    top: 12px;
+}
+#admin .uri-link {
+    padding-top: 5px;
+}
