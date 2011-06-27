@@ -109,6 +109,10 @@ fix to maintain sanity in rendering sections of site admin targets IE7 and below
 #individual-intro.person #individual-info {
     width: 72%;
 }
+/* Fix for dropdown user menu */
+ul.dropdown {
+    z-index: 9999;
+}
 /* Fix for menupages */
 nav#alpha-browse-container {
     width: 542px;

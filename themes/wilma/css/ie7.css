@@ -18,6 +18,10 @@
   *display: inline !important;
   *vertical-align: top !important;
 }
+/* Fix for dropdown user menu */
+ul.dropdown {
+    z-index: 9999;
+}
 /* Fix for photo upload */
 #photoUploadForm input.submit, 
 #photoUploadForm input.submit:visited,
