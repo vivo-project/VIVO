@@ -67,6 +67,7 @@ xmlns:vitro="&vitro;"
 <owl:DatatypeProperty rdf:about="&vitro;keywordSource"/>
 <owl:DatatypeProperty rdf:about="&vitro;keywordComments"/>
 <owl:DatatypeProperty rdf:about="&vitro;keywordOrigin"/>
+<owl:ObjectProperty rdf:about="&vitro;keyword"/>
 <owl:Class rdf:about="&vitro;KeywordRelation"/>
 <owl:ObjectProperty rdf:about="&vitro;involvesIndividual"/>
 <owl:ObjectProperty rdf:about="&vitro;involvesKeyword"/>

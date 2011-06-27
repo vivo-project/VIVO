@@ -20,5 +20,5 @@ Construct {
      ?person core:hasOrganizerRole _:role  .
      _:role core:organizerRoleOf ?person .
 } where {
-     ?person bibo:organizer ?something .
+     ?something bibo:organizer ?person .
 }
