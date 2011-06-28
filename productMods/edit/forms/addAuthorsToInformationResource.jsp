@@ -414,7 +414,7 @@ SPARQL queries for existing values. --%>
 </form>
 </div>
 
-<c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false&stem=false" />
+<c:url var="acUrl" value="/autocomplete?type=${foaf}Person&tokenize=false" />
 <c:url var="reorderUrl" value="/edit/reorder" />
 
 <script type="text/javascript">

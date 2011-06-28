@@ -444,7 +444,7 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
 </form>
 
 
-<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="acUrl" value="/autocomplete?tokenize=true" />
 <c:url var="sparqlQueryUrl" value="/ajax/sparqlQuery" />
 
 <%-- Must be all one line for JavaScript. --%>

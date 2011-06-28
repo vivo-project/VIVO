@@ -550,7 +550,7 @@ This goes to an experimental FM based form:
     <p id="requiredLegend" class="requiredHint">* required fields</p>
 </form>
 
-<c:url var="acUrl" value="/autocomplete?tokenize=true&stem=true" />
+<c:url var="acUrl" value="/autocomplete?tokenize=true" />
 
 <script type="text/javascript">
 var customFormData  = {
