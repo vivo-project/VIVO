@@ -57,27 +57,6 @@ xmlns:vitro="&vitro;"
 <owl:AnnotationProperty rdf:about="&vitro;isExternalId"/>
 <owl:AnnotationProperty rdf:about="&vitro;originalId"/>
 
-<!-- Keyword related -->
-
-<owl:Class rdf:about="&vitro;Keyword"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordStem"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordType"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordSource"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordComments"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordOrigin"/>
-<owl:Class rdf:about="&vitro;KeywordRelation"/>
-<owl:ObjectProperty rdf:about="&vitro;involvesIndividual"/>
-<owl:ObjectProperty rdf:about="&vitro;involvesKeyword"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordMode"/>
-
-<!-- Link related -->
-
-<owl:ObjectProperty rdf:about="&vitro;primaryLink"/>
-<owl:ObjectProperty rdf:about="&vitro;additionalLink"/>
-<owl:Class rdf:about="&vitro;Link"/>
-<owl:DatatypeProperty rdf:about="&vitro;linkAnchor"/>
-<owl:DatatypeProperty rdf:about="&vitro;linkURL"/>
-
 <!-- other Individual-related -->
 
 <owl:DatatypeProperty rdf:about="&vitro;curatorNote">
