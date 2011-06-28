@@ -58,15 +58,15 @@ public class TestFileController extends FreemarkerHttpServlet {
 
     private static final String POST_TO = "/vivo/harvester/harvest";
     
-    private static final String JOB_CSV_GRANT = "csvGrant";
-    private static final String JOB_CSV_PERSON = "csvPerson";
-    
     private static final String MODE_HARVEST = "harvest";
     private static final String MODE_CHECK_STATUS = "checkStatus";
     private static final String MODE_DOWNLOAD_TEMPLATE = "template";
 
-
-    private static final List<String> knownJobs = Arrays.asList(JOB_CSV_GRANT.toLowerCase(), JOB_CSV_PERSON.toLowerCase());
+    /**
+     * A list of known job parameters (that is, "job=" values from the query string which we will accept from the browser).
+     * This should be filled in the static initializer and then never written to again.
+     */
+    private static final List<String> knownJobs = new ArrayList<String>();
     
     
     /**
@@ -96,8 +96,28 @@ public class TestFileController extends FreemarkerHttpServlet {
     public static final String PATH_TO_HARVESTER_SCRIPTS = "scripts/";
     
     
+    static {
+        fillKnownJobTypesList();
+    }
     
-    
+    /**
+     * Fill the known job types list.  Any time a new job type is added, we need to make sure this method is adding it to the list.
+     * By "new job type" is meant a new "job=" parameter that we understand when we see it in the query string.  This typically means
+     * we have also handled seeing this parameter in the getJob() method of this class.
+     * 
+     * The exception to all this is a new CSV job, which is entirely handled by adding a new CsvFileHarvestJob.JobType enum value.  This
+     * method as well as this class's getJob() method already handle the rest.
+     */
+    private static void fillKnownJobTypesList() {
+        
+        //fill known CSV job types
+        CsvFileHarvestJob.JobType[] csvFileHarvestJobTypes = CsvFileHarvestJob.JobType.values();
+        for(CsvFileHarvestJob.JobType csvFileHarvestJobType : csvFileHarvestJobTypes) {
+            knownJobs.add(csvFileHarvestJobType.httpParameterName.toLowerCase());
+        }
+    }
+
+
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
@@ -120,8 +140,10 @@ public class TestFileController extends FreemarkerHttpServlet {
             body.put("job", job);
             body.put("jobKnown", jobKnown);
             body.put("postTo", POST_TO + "?" + PARAMETER_JOB + "=" + job);
-            body.put("jobSpecificHeader", jobObject.getPageHeader());
-            body.put("jobSpecificLinkHeader", jobObject.getLinkHeader());
+            body.put("jobSpecificHeader", (jobObject != null) ? jobObject.getPageHeader() : "");
+            body.put("jobSpecificLinkHeader", (jobObject != null) ? jobObject.getLinkHeader() : "");
+            body.put("jobSpecificDownloadHelp", (jobObject != null) ? jobObject.getTemplateDownloadHelp() : "");
+            body.put("jobSpecificFillInHelp", (jobObject != null) ? jobObject.getTemplateFillInHelp() : "");
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {
             log.error(e, e);
@@ -172,19 +194,16 @@ public class TestFileController extends FreemarkerHttpServlet {
     private FileHarvestJob getJob(VitroRequest vreq, String jobParameter)
     {
         String namespace = vreq.getWebappDaoFactory().getDefaultNamespace();
-        
+
         FileHarvestJob job = null; 
-        
-        //todo: complete
+
         if(jobParameter == null)
             log.error("No job specified.");
-        else if(jobParameter.equalsIgnoreCase(JOB_CSV_GRANT))
-            job = new CsvFileHarvestJob(vreq, "granttemplate.csv", "testCSVtoRDFgrant.sh", namespace, "Grant", new String[] {"http://vivoweb.org/ontology/core#Grant"});
-        else if(jobParameter.equalsIgnoreCase(JOB_CSV_PERSON))
-            job = new CsvFileHarvestJob(vreq, "persontemplate.csv", "testCSVtoRDFpeople.sh", namespace, "Person", new String[] {"http://xmlns.com/foaf/0.1/Person"});
+        else if(CsvFileHarvestJob.JobType.containsTypeWithHttpParameterName(jobParameter)) //check if this is a CSV job
+            job = CsvFileHarvestJob.createJob(CsvFileHarvestJob.JobType.getByHttpParameterName(jobParameter), vreq, namespace);
         else
             log.error("Invalid job: " + jobParameter);
-        
+
         return job;
     }
 

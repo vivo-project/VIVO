@@ -24,6 +24,66 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 class CsvFileHarvestJob implements FileHarvestJob {
 
     /**
+     * Contains constant constructor inputs for CsvFileHarvestJob
+     * @author mbarbieri
+     */
+    public enum JobType {
+        GRANT("csvGrant", "granttemplate.csv", "testCSVtoRDFgrant.sh", "Grant", "Imported Grants", new String[] {"http://vivoweb.org/ontology/core#Grant"}),
+        PERSON("csvPerson", "persontemplate.csv", "testCSVtoRDFpeople.sh", "Person", "Imported Persons", new String[] {"http://xmlns.com/foaf/0.1/Person"});
+        
+        public final String httpParameterName;
+        private final String templateFileName;
+        private final String scriptFileName;
+        private final String friendlyName;
+        private final String linkHeader;
+        private final String[] rdfTypesForLinks;
+
+        /**
+         * Determines if there is a JobType with the specified HTTP parameter name.
+         * @param httpParameterName the HTTP parameter name to look for a Job Type for
+         * @return true if there is such a JobType, false otherwise
+         */
+        public static boolean containsTypeWithHttpParameterName(String httpParameterName) {
+            return (getByHttpParameterName(httpParameterName) != null);
+        }
+        
+        /**
+         * Returns the JobType with the specified HTTP parameter name.  This is essentially a string identifier for the job type.  This
+         * method accepts nulls, returning null in that case.
+         * @param httpParameterName the HTTP parameter name to find the job for
+         * @return the JobType with the specified HTTP parameter name, or null if there is none or httpParameterName was null
+         */
+        public static JobType getByHttpParameterName(String httpParameterName) {
+            JobType returnValue = null;
+
+            if(httpParameterName != null) {
+                JobType[] values = JobType.values();
+                for(JobType jobType : values) {
+                    if(jobType.httpParameterName.equalsIgnoreCase(httpParameterName)) {
+                        returnValue = jobType;
+                        break;
+                    }
+                }
+            }
+            return returnValue;
+        }
+        
+        private JobType(String httpParameterName, String templateFileName, String scriptFileName, String friendlyName, String linkHeader, String[] rdfTypesForLinks) {
+            this.httpParameterName = httpParameterName;
+            this.templateFileName = templateFileName;
+            this.scriptFileName = scriptFileName;
+            this.friendlyName = friendlyName;
+            this.linkHeader = linkHeader;
+            this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
+        }
+        
+        private CsvFileHarvestJob constructCsvFileHarvestJob(VitroRequest vreq, String namespace) {
+            return new CsvFileHarvestJob(vreq, this.templateFileName, this.scriptFileName, namespace, this.friendlyName, this.linkHeader, this.rdfTypesForLinks);
+        }
+    }
+
+    
+    /**
      * Logger.
      */
     private static final Log log = LogFactory.getLog(CsvFileHarvestJob.class);
@@ -54,21 +114,32 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private final String friendlyName;
 
     /**
+     * A heading to be shown above the area where links to profiles of newly-harvested entities are listed.
+     */
+    private final String linkHeader;
+
+    /**
      * An array of rdf:type values which will be used for links.
      */
     private final String[] rdfTypesForLinks;
 
+    
+    public static CsvFileHarvestJob createJob(JobType jobType, VitroRequest vreq, String namespace) {
+        return jobType.constructCsvFileHarvestJob(vreq, namespace);
+    }
+    
     /**
      * Constructor.
      * @param templateFileName just the name of the template file.  The directory is assumed to be standard.
      */
-    public CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName, String[] rdfTypesForLinks) {
+    private CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName, String linkHeader, String[] rdfTypesForLinks) {
         this.vreq = vreq;
         this.templateFile = new File(getTemplateFileDirectory() + templateFileName);
         this.scriptFile = new File(getScriptFileDirectory() + scriptFileName);
         log.error(getTemplateFileDirectory() + templateFileName);
         this.namespace = namespace;
         this.friendlyName = friendlyName;
+        this.linkHeader = linkHeader;
         this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
     }
 
@@ -252,14 +323,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
 
     @Override
     public String getLinkHeader() {
-        return "Imported " + pluralize(this.friendlyName);
-    }
-    
-    private String pluralize(String input) {
-        String plural = input + "s";
-        if(input.endsWith("s") || input.endsWith("x"))
-            plural = input + "es";
-        return plural;
+        return this.linkHeader;
     }
 
     @Override
@@ -272,6 +336,20 @@ class CsvFileHarvestJob implements FileHarvestJob {
         return Arrays.copyOf(this.rdfTypesForLinks, this.rdfTypesForLinks.length);
     }
 
+    @Override
+    public String getTemplateDownloadHelp() {
+        return "Click here to download a template file to assist you with harvesting the data.";
+    }
+
+    @Override
+    public String getTemplateFillInHelp() {
+        String newline = "\n";
+        String help = "";
+        help += "<p>A CSV, or <b>C</b>omma-<b>S</b>eparated <b>V</b>alues file, is a method of storing tabular data in plain text.  The first line of a CSV file contains header information, while each subsequent line contains a data record.</p>" + newline;
+        help += "<p>The template we provide contains only the header, which you will then fill in accordingly.  For example, if the template contains the text \"firstName,lastName\", then you might add two more lines, \"John,Doe\" and \"Jane,Public\".</p>" + newline;
+        return help;
+    }
+    
 }
 
 

@@ -15,6 +15,9 @@
 	
 	function doHarvest()
 	{
+		document.getElementById("harvestButton").disabled = true;
+		document.getElementById("harvestButtonHelpText").innerHTML = "Please wait while your data is harvested.";
+	
 		var request = createRequest();
 		request.onreadystatechange=function() {
 			if(request.readyState == 4 && request.status == 200) {
@@ -53,14 +56,19 @@
 			request.send("${paramMode}=${modeCheckStatus}");
 		} else {
 		
-			var importedGrants = document.getElementById("importedGrants")
+			var linkHeader = document.getElementById("linkHeader");
+			linkHeader.style.display = "inline";
+			
+			var importedItems = document.getElementById("importedItems")
 			
 			for(var i = 0; i < json.newlyAddedUrls.length; i++) {
 
 				var newLi = document.createElement("li");
 				newLi.innerHTML = "<a href=\"" + json.newlyAddedUrls[i] + "\">" + json.newlyAddedUris[i] + "</a>";
-				importedGrants.appendChild(newLi);
+				importedItems.appendChild(newLi);
 			}
+			
+			document.getElementById("harvestButtonHelpText").innerHTML = "Harvest complete.  For another, please refresh the page.";
 		}
 	}
 	
@@ -114,10 +122,11 @@
 		
 		//document.getElementById("responseArea").innerHTML = response;
 	}
-
-
+	
 	function init()
 	{
+		document.getElementById("harvestButton").disabled = false;
+
 		document.getElementById("${paramFirstUpload}").value = "true";
 		document.getElementById("fileUploadForm").onsubmit = function()
 		{
@@ -130,6 +139,7 @@
 		}
 	}
 	window.onload = init;
+
 </script>
 
 
@@ -161,7 +171,7 @@
 		<h4 class="testfile-step-subheader">Download template</h4>
 		<form id="downloadTemplateForm" method="post" action=${postTo}>
 			<input type="hidden" id="${paramMode}" name="${paramMode}" value="${modeDownloadTemplate}" />
-			<p><input type="submit" name="submit" value="Download" style="margin-right:10px" />We are providing a helpful template file for you to download.</p>
+			<p><input type="submit" name="submit" value="Download" style="margin-right:10px" />${jobSpecificDownloadHelp}</p>
 		</form>
 	</div>
 	<div class="clearBothDiv" />
@@ -172,8 +182,7 @@
 		<h4 class="testfile-step-subheader">Fill in data <a style="font-size:smaller;margin-left:10px" onclick="toggleCsvHelp();return false;" href="#">Help</a></h4>
 		<div id="csvHelp-collapsible" style="display:none">
 			<div id="csvHelp-indented" style="margin-left:20px;font-size:smaller">
-				<p>A CSV, or <b>C</b>omma-<b>S</b>eparated <b>V</b>alues file, is a method of storing tabular data in plain text.  The first line of a CSV file contains header information, while each subsequent line contains a data record.</p>
-				<p>The template we provide contains only the header, which you will then fill in accordingly.  For example, if the template contains the text "firstName,lastName", then you might add two more lines, "John,Doe" and "Jane,Public".</p>
+				${jobSpecificFillInHelp}
 			</div>
 		</div>
 		<p>Fill in the template with your data.  You may fill in multiple templates if you wish to harvest multiple files at once.</p>
@@ -219,7 +228,7 @@
 				</ul>
 			</div>
 		</div>
-		<p><input type="button" value="Harvest" style="margin-right:10px" onclick="doFunStuff();" />Click the button to harvest your file(s).</p>
+		<p><input type="button" name="harvestButton" id="harvestButton" value="Harvest" style="margin-right:10px" onclick="doFunStuff();" /><span id="harvestButtonHelpText">Click the button to harvest your file(s).</span></p>
 	</div>
 	<div class="clearBothDiv" />
 </div>
@@ -230,11 +239,11 @@
 	<div id="step5-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">View results</h4>
 		<div id="progress">
-			<textarea cols="100" rows="50" readonly="readonly" id="progressTextArea"></textarea>		
+			<textarea cols="100" rows="20" readonly="readonly" id="progressTextArea"></textarea>		
 		</div>
 		<div id="summary">
-			<h5>${jobSpecificLinkHeader}</h5>
-			<ul id="importedGrants">
+			<h5 id="linkHeader" style="display:none">${jobSpecificLinkHeader}</h5>
+			<ul id="importedItems">
 			</ul>
 		</div>
 	</div>

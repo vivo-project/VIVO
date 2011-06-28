@@ -55,5 +55,17 @@ interface FileHarvestJob {
      * @return an array of types to be used in links
      */
     String[] getRdfTypesForLinks();
+    
+    /**
+     * Get the HTML to be shown on the page immediately next to the "Download" button for the template.
+     * @return the HTML to be shown on the page immediately next to the "Download" button for the template.
+     */
+    String getTemplateDownloadHelp();
+    
+    /**
+     * Get the HTML to be shown in the collapsible "Help" area in the "Fill in data" section of the page.
+     * @return the HTML to be shown in the collapsible "Help" area in the "Fill in data" section of the page.
+     */
+    String getTemplateFillInHelp();
 }
 
