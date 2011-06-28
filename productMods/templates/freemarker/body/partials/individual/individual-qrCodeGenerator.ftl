@@ -35,7 +35,7 @@
         <#elseif (display == "icon")>
             <li role="listitem">
                 <a id="qrIcon" title="vCard QR Code" href="${individual.doQrData().exportQrCodeUrl}"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
-                <span id="qrCodeImage" class="hide">${qrCodeLinkedImage} <a class="qrCloseLink" href="#">Close</a></span>
+                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#">Close</a></span>
             </li>
         <#else>
             <p class="notice">You have passed an invalid value for the qrCode display parameter.</p>
