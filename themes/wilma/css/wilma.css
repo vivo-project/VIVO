@@ -1497,90 +1497,12 @@ h2#personInPosition .verbosePropertyListing,
 h2#hasResearchArea .verbosePropertyListing {
     display: block;
 }
+
 /* ------------------------------------------------->  */
 /* ACCOUNT PAGE ------------------------------------>  */
 /* ------------------------------------------------->  */
-.account-feedback p {
-    line-height: 1.5em;
-    border: 1px dotted #E2C822;
-    background-color: #FFF9D7;
-    padding: .5em;  
-    margin-bottom: 20px;
-}
-table#account {
-    table-layout: auto;
-    width: 930px;
-    text-align: left;
-    margin: 0 auto; 
-    border-collapse: collapse;
-    empty-cells: show;
-    caption-side: top;
-    margin: 20px 0 20px 0;
-}
-table#account caption {
-    display: none;
-}
-table#account th {
-    background-color: #F7F9F9;
-    height: 40px;
-    color: #064D68;
-    padding-top: 7px;
-    border: 1px solid #d9e4ea;
-    border-bottom: none;
-    padding-left: 6px;
-}
-table#account td {
-    vertical-align: top;
-    padding: .5em;
-    border: 1px solid #d9e4ea; 
-    font-size: .9em;
-}  
-table#account tr {
-    background-color: #fff;
-}
-table#account tr:nth-child(2n+1) {
-    background-color: rgba(200, 200, 180,.25);
-}
-#filter-roles {
-    float: left;
-    padding-bottom: 20px;
-}
-#search-accounts {
-    float: right;
-    height: 60px;
-}
-.account-alpha-browse {
-    width: 10px; 
-    height: 22px;
-    float: right; 
-    padding-right: 10px; 
-}
-.sort-asc {
-     width: 9px;
-     height:10px;
-     padding-top: 4px; 
-     background: url(../images/sort-asc.gif) 0 4px no-repeat;
-     display: block;
-}
-.sort-desc {
-     width: 9px;
-     height:10px;
-     padding-bottom: 4px; 
-     background: url(../images/sort-desc.gif) 0 4px no-repeat;
-     display: block;
-}
-.accounts {
-    clear: left;
-    height: 60px;
-    border-top: 1px dotted #e1e5e7;
-    padding-top: 0;
-    border-bottom: 1px dotted #e1e5e7;
-    padding-bottom: 0;
-    width: 100%;
-}
-section.accounts .delete-account{
-    float: left;
-    margin-top: 10px;
+form.customForm p {
+    margin-top: 8px;
 }
 section.accounts input.delete,
 section.accounts input.delete:visited {
@@ -1598,85 +1520,17 @@ section.accounts input.delete:active {
 }
 input.add-account,
 input.add-account:visited {
-    background: url(../../../images/addNewAccount.png) 0 0 no-repeat;
+    background: url(../images/addNewAccount.png) 0 0 no-repeat;
     color: #fff;
     padding-left: 35px;
 }
 input.add-account:hover {
     color: #fff;
     background-color: #88acbb;
-    background: url(../../../images/addNewAccountOver.png) 0 0 no-repeat;
+    background: url(../images/addNewAccountOver.png) 0 0 no-repeat;
 }
 input.add-account:active {
     top: 1px;
-}
-.display-tools {
-    float: left;
-    font-size: .875em;
-}
-.hide {
-    display: none;
-}
-.accounts-per-page-form {
-    display: inline-block;
-}
-nav.alpha-browse-account {
-    width: 20px;
-    border: 1px solid green;
-    width: 18px;
-    height: 12px;
-}
-nav.alpha-browse-account a {
-    margin: 0;
-    padding: 0;
-}
-/* ADD ACCOUNTS ------>  */
-form.customForm p {
-    margin-top: 8px;
-}
-form.customForm #reset-password {
-    margin-top: 20px;
-    margin-left: 0;
-}
-form.customForm p.note{
-     padding-bottom: 20px;
-     padding-top: 0;
-}
-#add-account p.note {
-    margin-top: 20px;
-    width: 400px;
-}
-#add-account input[type="text"],
-#create-account input[type="text"],
-#edit-account input[type="text"],
-#my-account input[type="text"],
-#my-account input[type="password"] {
-    width: 20em;
-}
-/* CREATE PASSWORD ------>  */
-#create-password p.note {
-     margin-top: 0;
-}
-/* EDIT ACCOUNT ------>  */
-#edit-account p.note {
-     margin-top: 3px;
-     width: 400px;
-}
-/* MY ACCOUNT ------>  */
-#my-account p.note {
-     padding-bottom: 10px;
-     width: 400px;
-}
-#my-account input#email-address,
-#my-account input#new-password {
-    margin-bottom: 0;
-}
-section.account-feedback img {
-padding-right: 5px;
-}
-/* RESET PASSWORD ------>  */
-#reset-password p.note {
-     margin-top: 0;
 }
 
 /* ------------------------------------------------->  */
