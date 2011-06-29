@@ -91,11 +91,12 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
                 browseByVClass.pagination(pages, page);
             }
             
-            $('h3.selected-class').text(results.vclass.name);
-            
-            // set selected class, alpha and page
-            browseByVClass.selectedVClass(results.vclass.URI);
-            browseByVClass.selectedAlpha(alpha);
         }
+        
+        // Set selected class, alpha and page
+        // Do this whether or not there are any results
+        $('h3.selected-class').text(results.vclass.name);
+        browseByVClass.selectedVClass(results.vclass.URI);
+        browseByVClass.selectedAlpha(alpha);
     });
 };
