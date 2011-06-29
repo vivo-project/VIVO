@@ -780,6 +780,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>AccountsAjax</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.admin.ajax.UserAccountsAjaxController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountsAjax</servlet-name>
+    <url-pattern>/accountsAjax/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>AccountsUser</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.user.UserAccountsUserController</servlet-class>
   </servlet>
