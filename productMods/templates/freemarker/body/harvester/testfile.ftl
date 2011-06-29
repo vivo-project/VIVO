@@ -1,5 +1,11 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<#if !(user.loggedIn && user.hasSiteAdminAccess)>
+
+<p>You must be an administrator to use this tool.</p>
+
+<#else>
+
 <#if jobKnown == "false">
 <p>Error: No file harvest job was specified, or an unknown job was specified.</p>
 <p>The end user should not see this error under normal circumstances, so this is probably a bug and should be reported.</p>
@@ -61,10 +67,17 @@
 			
 			var importedItems = document.getElementById("importedItems")
 			
-			for(var i = 0; i < json.newlyAddedUrls.length; i++) {
-
+			if(json.newlyAddedUrls.length > 0) {
+				for(var i = 0; i < json.newlyAddedUrls.length; i++) {
+	
+					var newLi = document.createElement("li");
+					newLi.innerHTML = "<a href=\"" + json.newlyAddedUrls[i] + "\" target=\"_blank\">" + json.newlyAddedUris[i] + "</a>";
+					importedItems.appendChild(newLi);
+				}
+			} else {
+			
 				var newLi = document.createElement("li");
-				newLi.innerHTML = "<a href=\"" + json.newlyAddedUrls[i] + "\">" + json.newlyAddedUris[i] + "</a>";
+				newLi.innerHTML = "<a href=\"No new grants were imported.\" target=\"_blank\">" + json.newlyAddedUris[i] + "</a>";
 				importedItems.appendChild(newLi);
 			}
 			
@@ -250,6 +263,10 @@
 	<div class="clearBothDiv" />
 </div>
 
+<#-- if job known -->
+</#if>
+
+<#-- if user is logged-in with site admin access -->
 </#if>
 
 

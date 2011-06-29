@@ -6,16 +6,17 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -29,7 +30,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.skife.csv.SimpleReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -57,18 +57,24 @@ public class TestFileController extends FreemarkerHttpServlet {
     private static final String PARAMETER_JOB = "job";
 
     private static final String POST_TO = "/vivo/harvester/harvest";
-    
+
     private static final String MODE_HARVEST = "harvest";
     private static final String MODE_CHECK_STATUS = "checkStatus";
     private static final String MODE_DOWNLOAD_TEMPLATE = "template";
+
+
+    /**
+     * Stores information about the Harvester thread for a particular user session.
+     */
+    private Map<String, SessionInfo> sessionIdToSessionInfo = new Hashtable<String, SessionInfo>(); //Hashtable is threadsafe, HashMap is not
 
     /**
      * A list of known job parameters (that is, "job=" values from the query string which we will accept from the browser).
      * This should be filled in the static initializer and then never written to again.
      */
     private static final List<String> knownJobs = new ArrayList<String>();
-    
-    
+
+
     /**
      * Relative path from the VIVO Uploads directory to the root location where user-uploaded files will be stored.  Include
      * final slash.
@@ -81,35 +87,36 @@ public class TestFileController extends FreemarkerHttpServlet {
     private static final String PATH_TO_HARVESTER = "/home/mbarbieri/workspace/HarvesterDev/";
 
     /**
-     * Relative path from the Harvester root directory to the Additions file containing rdf/xml added to VIVO from Harvest run.
+     * Relative path from the Harvester root directory to the main area reserved for the VIVO File Harvest feature.  Include
+     * final slash.
      */
-    public static final String PATH_TO_ADDITIONS_FILE = "harvested-data/csv/additions.rdf.xml"; //todo: this is job-specific
-    
+    private static final String PATH_TO_FILE_HARVEST_ROOT = "vivo/";
+
     /**
      * Relative path from the Harvester root directory to the directory where user-downloadable template files are stored.
      */
-    public static final String PATH_TO_TEMPLATE_FILES = "files/";
-    
+    public static final String PATH_TO_TEMPLATE_FILES = PATH_TO_FILE_HARVEST_ROOT + "templates/";
+
     /**
      * Relative path from the Harvester root directory to the directory containing the script templates.  Include final slash.
      */
-    public static final String PATH_TO_HARVESTER_SCRIPTS = "scripts/";
-    
-    
+    public static final String PATH_TO_HARVESTER_SCRIPTS = PATH_TO_FILE_HARVEST_ROOT + "scripts/";
+
+
     static {
         fillKnownJobTypesList();
     }
-    
+
     /**
      * Fill the known job types list.  Any time a new job type is added, we need to make sure this method is adding it to the list.
      * By "new job type" is meant a new "job=" parameter that we understand when we see it in the query string.  This typically means
      * we have also handled seeing this parameter in the getJob() method of this class.
-     * 
+     *
      * The exception to all this is a new CSV job, which is entirely handled by adding a new CsvFileHarvestJob.JobType enum value.  This
      * method as well as this class's getJob() method already handle the rest.
      */
     private static void fillKnownJobTypesList() {
-        
+
         //fill known CSV job types
         CsvFileHarvestJob.JobType[] csvFileHarvestJobTypes = CsvFileHarvestJob.JobType.values();
         for(CsvFileHarvestJob.JobType csvFileHarvestJobType : csvFileHarvestJobTypes) {
@@ -121,13 +128,15 @@ public class TestFileController extends FreemarkerHttpServlet {
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
+            cleanUpOldSessions();
+
             String job = vreq.getParameter(PARAMETER_JOB);
             String jobKnown = "false";
             if((job != null) && TestFileController.knownJobs.contains(job.toLowerCase()))
                 jobKnown = "true";
-            
+
             FileHarvestJob jobObject = getJob(vreq, job);
-            
+
             Map<String, Object> body = new HashMap<String, Object>();
             //body.put("uploadPostback", "false");
             body.put("paramFirstUpload", PARAMETER_FIRST_UPLOAD);
@@ -144,6 +153,7 @@ public class TestFileController extends FreemarkerHttpServlet {
             body.put("jobSpecificLinkHeader", (jobObject != null) ? jobObject.getLinkHeader() : "");
             body.put("jobSpecificDownloadHelp", (jobObject != null) ? jobObject.getTemplateDownloadHelp() : "");
             body.put("jobSpecificFillInHelp", (jobObject != null) ? jobObject.getTemplateFillInHelp() : "");
+            body.put("jobSpecificNoNewDataMessage", (jobObject != null) ? jobObject.getNoNewDataMessage() : "");
             return new TemplateResponseValues(TEMPLATE_DEFAULT, body);
         } catch (Throwable e) {
             log.error(e, e);
@@ -164,6 +174,16 @@ public class TestFileController extends FreemarkerHttpServlet {
     {
         String harvesterPath = PATH_TO_HARVESTER;
         return harvesterPath;
+    }
+
+    /**
+     * Returns the path on this machine of the area within Harvester reserved for File Harvest.
+     * @return the path on this machine of the area within Harvester reserved for File Harvest
+     */
+    public static String getFileHarvestRootPath()
+    {
+        String fileHarvestRootPath = PATH_TO_HARVESTER + PATH_TO_FILE_HARVEST_ROOT;
+        return fileHarvestRootPath;
     }
 
     /**
@@ -195,7 +215,7 @@ public class TestFileController extends FreemarkerHttpServlet {
     {
         String namespace = vreq.getWebappDaoFactory().getDefaultNamespace();
 
-        FileHarvestJob job = null; 
+        FileHarvestJob job = null;
 
         if(jobParameter == null)
             log.error("No job specified.");
@@ -228,8 +248,6 @@ public class TestFileController extends FreemarkerHttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        log.error("this is a post.");
-        
         try {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
             String mode = request.getParameter(PARAMETER_MODE);
@@ -260,7 +278,6 @@ public class TestFileController extends FreemarkerHttpServlet {
     private void doFileUploadPost(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
 
-        log.error("file upload post.");
         JSONObject json = new JSONObject();
         try {
             VitroRequest vreq = new VitroRequest(request);
@@ -275,8 +292,8 @@ public class TestFileController extends FreemarkerHttpServlet {
 
             //get the job parameter
             String jobParameter = req.getParameter(PARAMETER_JOB);
-            
-            //get the location where we want to save the files (it will end in a slash), then create a File object out of it 
+
+            //get the location where we want to save the files (it will end in a slash), then create a File object out of it
             String path = getUploadPath(vreq);
             File directory = new File(path);
 
@@ -285,7 +302,6 @@ public class TestFileController extends FreemarkerHttpServlet {
             //  upload directory if it exists (a "first upload" parameter, initialized to "true" but which gets set to
             //  "false" once the user starts uploading stuff is used for this).
             String firstUpload = req.getParameter(PARAMETER_FIRST_UPLOAD); //clear directory on first upload
-            log.error(firstUpload);
             if(firstUpload.toLowerCase().equals("true")) {
                 if(directory.exists()) {
                     File[] children = directory.listFiles();
@@ -305,14 +321,14 @@ public class TestFileController extends FreemarkerHttpServlet {
             //get the files out of the parsed request (there should only be one)
             Map<String, List<FileItem>> fileStreams = req.getFiles();
             if(fileStreams.get(PARAMETER_UPLOADED_FILE) != null && fileStreams.get(PARAMETER_UPLOADED_FILE).size() > 0) {
-                
+
                 //get the individual file data from the request
                 FileItem csvStream = fileStreams.get(PARAMETER_UPLOADED_FILE).get(0);
                 String name = csvStream.getName();
-                
+
                 //if another uploaded file exists with the same name, alter the name so that it is unique
                 name = handleNameCollision(name, directory);
-                
+
                 //write the file from the request to the upload directory
                 File file = new File(path + name);
                 try {
@@ -344,7 +360,7 @@ public class TestFileController extends FreemarkerHttpServlet {
                 }
 
             } else {
-                
+
                 //if for some reason no file was included with the request, send an error back
                 try {
                     json.put("success", false);
@@ -358,7 +374,7 @@ public class TestFileController extends FreemarkerHttpServlet {
             }
         } catch(ExceptionVisibleToUser e) {
             log.error(e, e);
-            
+
             //handle exceptions whose message is for the user
             try {
                 json.put("success", false);
@@ -385,18 +401,15 @@ public class TestFileController extends FreemarkerHttpServlet {
      */
     private void doHarvestPost(HttpServletRequest request, HttpServletResponse response) {
 
-        log.error("harvest post.");
         try {
             VitroRequest vreq = new VitroRequest(request);
             FileHarvestJob job = getJob(vreq, vreq.getParameter(PARAMETER_JOB));
-    
+
             //String path = getUploadPath(vreq);
 
             String script = job.getScript();
             String additionsFilePath = job.getAdditionsFilePath();
-            log.error("start harvest");
             runScript(getSessionId(request), script, additionsFilePath);
-            log.error("end harvest");
 
             JSONObject json = new JSONObject();
             json.put("progressSinceLastCheck", "");
@@ -408,7 +421,7 @@ public class TestFileController extends FreemarkerHttpServlet {
             log.error(e, e);
         }
     }
-    
+
     /**
      * This is for posts automatically sent by the client during the harvest, to check on the status of the harvest and
      * return updated log data and whether the harvest is complete or still running.  An HTTP post is redirected here
@@ -418,48 +431,47 @@ public class TestFileController extends FreemarkerHttpServlet {
      */
     private void doCheckHarvestStatusPost(HttpServletRequest request, HttpServletResponse response) {
 
-        log.error("check harvest status post.");
-        
         try {
             String newline = "\n";
-            
+
             String sessionId = getSessionId(request);
-            
-            ArrayList<String> unsentLogLinesList = sessionIdToUnsentLogLines.get(sessionId);
-            String[] unsentLogLines;
-            if(unsentLogLinesList != null) {
+            SessionInfo sessionInfo = sessionIdToSessionInfo.get(sessionId);
+
+            //if we have started a thread, check the status and return it to the user
+            if(sessionInfo != null) {
+
+                String[] unsentLogLines;
+                ArrayList<String> unsentLogLinesList = sessionInfo.unsentLogLines;
+
+                //don't let the harvester thread add data to the unsent log lines list until we have both copied it and cleared it
                 synchronized (unsentLogLinesList) {
                     unsentLogLines = unsentLogLinesList.toArray(new String[unsentLogLinesList.size()]);
                     unsentLogLinesList.clear();
                 }
-                
+
                 String progressSinceLastCheck = "";
                 for(int i = 0; i < unsentLogLines.length; i++) {
                     progressSinceLastCheck += unsentLogLines[i] + newline;
                 }
-                
-                boolean finished = !sessionIdToHarvestThread.containsKey(sessionId);
-                
+
+                boolean finished = sessionInfo.isFinished();
+
                 VitroRequest vreq = new VitroRequest(request);
                 ArrayList<String> newlyAddedUrls = new ArrayList<String>();
                 ArrayList<String> newlyAddedUris = new ArrayList<String>();
                 if(finished) {
-                    newlyAddedUris = sessionIdToNewlyAddedUris.get(sessionId);
+                    newlyAddedUris = sessionInfo.newlyAddedUris;
                     if(newlyAddedUris != null) {
                         for(String uri : newlyAddedUris) {
-                            
-                            String namespaceRoot = vreq.getWebappDaoFactory().getDefaultNamespace();
-                            
-                            String suffix = uri.substring(namespaceRoot.length());
-                            String url = "display/" + suffix;
-                            
-                            //newlyAddedUrls.add(uri);
-                            //newlyAddedUrls.add(url);
+
                             newlyAddedUrls.add(UrlBuilder.getIndividualProfileUrl(uri, vreq));
                         }
                     }
+
+                    //remove all entries in "sessionIdTo..." mappings for this session ID
+                    clearSessionInfo(sessionId);
                 }
-                
+
                 JSONObject json = new JSONObject();
                 json.put("progressSinceLastCheck", progressSinceLastCheck);
                 json.put("finished", finished);
@@ -467,18 +479,20 @@ public class TestFileController extends FreemarkerHttpServlet {
                 json.put("newlyAddedUrls", newlyAddedUrls);
 
                 response.getWriter().write(json.toString());
+            } else { //if we have not started a harvest thread, the browser should not have made this request to begin with.  Bad browser, very bad browser.
+                log.error("Attempt to check status of a harvest that was never started!  (Session ID " + sessionId + ")");
             }
         } catch(Exception e) {
             log.error(e, e);
         }
     }
-    
+
     private void doDownloadTemplatePost(HttpServletRequest request, HttpServletResponse response) {
-        
+
         VitroRequest vreq = new VitroRequest(request);
         FileHarvestJob job = getJob(vreq, vreq.getParameter(PARAMETER_JOB));
         File fileToSend = new File(job.getTemplateFilePath());
-        
+
         response.setContentType("application/octet-stream");
         response.setContentLength((int)(fileToSend.length()));
         response.setHeader("Content-Disposition", "attachment; filename=\"" + fileToSend.getName() + "\"");
@@ -486,12 +500,12 @@ public class TestFileController extends FreemarkerHttpServlet {
         try {
             byte[] byteBuffer = new byte[(int)(fileToSend.length())];
             DataInputStream inStream = new DataInputStream(new FileInputStream(fileToSend));
-            
+
             ServletOutputStream outputStream = response.getOutputStream();
             for(int length = inStream.read(byteBuffer); length != -1; length = inStream.read(byteBuffer)) {
                 outputStream.write(byteBuffer, 0, length);
             }
-            
+
             inStream.close();
             outputStream.flush();
             outputStream.close();
@@ -499,7 +513,7 @@ public class TestFileController extends FreemarkerHttpServlet {
             log.error(e, e);
         }
     }
-    
+
 
     private File createScriptFile(String script) throws IOException {
         File scriptDirectory = new File(getHarvesterPath() + "scripts/temp");
@@ -518,13 +532,12 @@ public class TestFileController extends FreemarkerHttpServlet {
 
 
     private void runScript(String sessionId, String script, String additionsFilePath) {
-        
-        if(!sessionIdToHarvestThread.containsKey(sessionId)) {
-            
-            ScriptRunner runner = new ScriptRunner(sessionId, script, additionsFilePath);
-            sessionIdToHarvestThread.put(sessionId, runner);
-            runner.start();
-        }
+        clearSessionInfo(sessionId);
+
+        ScriptRunner runner = new ScriptRunner(sessionId, script, additionsFilePath);
+        SessionInfo info = new SessionInfo(sessionId, runner);
+        sessionIdToSessionInfo.put(sessionId, info);
+        runner.start();
     }
 
 
@@ -567,23 +580,25 @@ public class TestFileController extends FreemarkerHttpServlet {
         return request.getSession().getId();
     }
 
-    private ArrayList<String> extractNewlyAddedUris(File additionsFile) {
-        ArrayList<String> newlyAddedUris = new ArrayList<String>();
+    /**
+     * Parse an additions file (RDF/XML) to get the URIs of newly-harvested data, which will be sent to the browser and
+     * displayed to the user as links.
+     * @param additionsFile the file containing the newly-added RDF/XML
+     * @param newlyAddedUris a list in which to place the newly added URIs
+     */
+    private void extractNewlyAddedUris(File additionsFile, List<String> newlyAddedUris) {
 
-        log.error(additionsFile.getAbsolutePath());
-        
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             Document document = factory.newDocumentBuilder().parse(additionsFile);
             //Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(additionsFile);
             NodeList descriptionNodes = document.getElementsByTagNameNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "Description");
-            log.error("Description nodes: " + descriptionNodes.getLength());
-            
+
             int numNodes = descriptionNodes.getLength();
             for(int i = 0; i < numNodes; i++) {
                 Node node = descriptionNodes.item(i);
-                
+
                 ArrayList<String> types = getRdfTypes(node);
                 if(types.contains("http://vivoweb.org/ontology/core#Grant")) { //todo: generalize
 
@@ -595,19 +610,20 @@ public class TestFileController extends FreemarkerHttpServlet {
                     }
                 }
             }
-            
-            
 
         } catch(Exception e) {
             log.error(e, e);
         }
-
-        return newlyAddedUris;
     }
-    
+
+    /**
+     * Parse an XML node for all subnodes with qualified name "rdf:type", and return each's "rdf:resource" value in a list.
+     * @param descriptionNode the RDF description node
+     * @return a list of rdf:types of the given description node
+     */
     private ArrayList<String> getRdfTypes(Node descriptionNode) {
         ArrayList<String> rdfTypesList = new ArrayList<String>();
-        
+
         NodeList children = descriptionNode.getChildNodes();
         int numChildren = children.getLength();
         for(int i = 0; i < numChildren; i++) {
@@ -631,6 +647,44 @@ public class TestFileController extends FreemarkerHttpServlet {
         return rdfTypesList;
     }
 
+    /**
+     * If a session info object exists for this session ID, abort the thread if it is still running and remove the object.
+     * @param sessionId the session ID for which to clear info
+     */
+    private void clearSessionInfo(String sessionId) {
+        SessionInfo sessionInfo = this.sessionIdToSessionInfo.get(sessionId);
+        if(sessionInfo != null) {
+            if(!sessionInfo.isFinished()) {
+                if(sessionInfo.harvestThread.isAlive()) {
+                    sessionInfo.harvestThread.abortRun();
+                }
+            }
+            this.sessionIdToSessionInfo.remove(sessionId);
+        }
+    }
+
+    /**
+     * If all goes according to plan, clearSessionInfo() should be called once the client gets the last bit of information from the
+     * harvest.  However, if the client doesn't request it (because the browser was closed, etc.) then the method will never get called.
+     * This method gets called every time the page is initially loaded, to look for session data that is 6 hours old or more, and remove
+     * it.
+     */
+    private void cleanUpOldSessions() {
+        int minutesToAllowSession = 360;
+        long millisecondsToAllowSession = minutesToAllowSession * 60 * 1000;
+
+        Date now = new Date();
+        Set<String> keySet = this.sessionIdToSessionInfo.keySet();
+        for(String sessionId : keySet) {
+            SessionInfo info = this.sessionIdToSessionInfo.get(sessionId);
+            Date startTime = info.createTime;
+            long differenceInMilliseconds = now.getTime() - startTime.getTime();
+            if(differenceInMilliseconds > millisecondsToAllowSession) {
+                log.debug("Removing old session: " + sessionId);
+                clearSessionInfo(sessionId);
+            }
+        }
+    }
 
 
 
@@ -639,8 +693,59 @@ public class TestFileController extends FreemarkerHttpServlet {
 
 
 
+    /**
+     * Information relating to a particular user session, created just before the harvester thread is starting.
+     * @author mbarbieri
+     */
+    private class SessionInfo {
+
+        /**
+         * The session ID for this user session.
+         */
+        @SuppressWarnings("unused")
+        public final String sessionId;
+
+        /**
+         * The time this object was created.
+         */
+        public final Date createTime;
+
+        /**
+         * The Harvester thread for his user session.
+         */
+        public final ScriptRunner harvestThread;
+
+        /**
+         * Harvester output that has not yet been sent back to the browser, for this user session.
+         */
+        public final ArrayList<String> unsentLogLines = new ArrayList<String>();
+
+        /**
+         * Flag indicating that the thread has finished.
+         */
+        private boolean finished = false;
 
 
+        /**
+         * Newly added entries to VIVO, for this user session.
+         */
+        public final ArrayList<String> newlyAddedUris = new ArrayList<String>();
+
+        public SessionInfo(String sessionId, ScriptRunner harvestThread) {
+
+            this.createTime = new Date();
+
+            this.sessionId = sessionId;
+            this.harvestThread = harvestThread;
+        }
+
+        public void finish() {
+            finished = true;
+        }
+        public boolean isFinished() {
+            return finished;
+        }
+    }
 
 
 
@@ -657,14 +762,13 @@ public class TestFileController extends FreemarkerHttpServlet {
     }
 
 
-    private Map<String, ScriptRunner> sessionIdToHarvestThread = new Hashtable<String, ScriptRunner>(); //Hashtable is threadsafe, HashMap is not
-    private Map<String, ArrayList<String>> sessionIdToUnsentLogLines = new Hashtable<String, ArrayList<String>>(); //Hashtable is threadsafe, HashMap is not
-    private Map<String, ArrayList<String>> sessionIdToNewlyAddedUris = new Hashtable<String, ArrayList<String>>();
     private class ScriptRunner extends Thread {
 
         private final String sessionId;
         private final String script;
         private final String additionsFilePath;
+
+        private volatile boolean abort = false;
 
         public ScriptRunner(String sessionId, String script, String additionsFilePath) {
             this.sessionId = sessionId;
@@ -672,61 +776,77 @@ public class TestFileController extends FreemarkerHttpServlet {
             this.additionsFilePath = additionsFilePath;
         }
 
+        public void abortRun() {
+            abort = true;
+        }
+
+
         @Override
         public void run() {
-            try {
-                ArrayList<String> unsentLogLines = sessionIdToUnsentLogLines.get(sessionId);
-                if(unsentLogLines == null) {
-                    unsentLogLines = new ArrayList<String>();
-                    sessionIdToUnsentLogLines.put(this.sessionId, unsentLogLines);
-                }
-                
-                File scriptFile = createScriptFile(this.script);
-
-                String command = "/bin/bash " + getHarvesterPath() + "scripts/temp/" + scriptFile.getName();
-
-                log.info("Running command: " + command);
-                Process pr = Runtime.getRuntime().exec(command);
-
-                //try { Thread.sleep(15000); } catch(InterruptedException e) {log.error(e, e);}
-
-                BufferedReader processOutputReader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-                for(String line = processOutputReader.readLine(); line != null; line = processOutputReader.readLine()) {
-                    synchronized(unsentLogLines) {
-                        unsentLogLines.add(line);
-                    }
-                    log.info("Harvester output: " + line);
-                }
-
-                BufferedReader processErrorReader = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
-                for(String line = processErrorReader.readLine(); line != null; line = processErrorReader.readLine()) {
-                    log.info("Harvester error: " + line);
-                }
-
-                int exitVal;
-
+            SessionInfo sessionInfo = sessionIdToSessionInfo.get(sessionId);
+            if(sessionInfo != null) {
                 try {
-                    exitVal = pr.waitFor();
-                }
-                catch(InterruptedException e) {
-                    throw new IOException(e.getMessage(), e);
-                }
+                    ArrayList<String> unsentLogLines = sessionInfo.unsentLogLines;
 
-//                int exitVal = 0;
-//                unsentLogLines.add("Screw the harvest, let's get to the last part");
-                
-                File additionsFile = new File(this.additionsFilePath);
-                ArrayList<String> newlyAddedUris = extractNewlyAddedUris(additionsFile);
-                log.error("newly added URIs size: " + newlyAddedUris.size());
-                sessionIdToNewlyAddedUris.put(this.sessionId, newlyAddedUris);
-                
-                log.debug("Harvester script exited with error code " + exitVal);
-                log.info("Harvester script execution complete");
-            } catch (IOException e) {
-                log.error(e, e);
-            } finally {
-                if(sessionIdToHarvestThread.containsKey(sessionId)) {
-                    sessionIdToHarvestThread.remove(sessionId);
+                    File scriptFile = createScriptFile(this.script);
+
+                    String command = "/bin/bash " + getHarvesterPath() + "scripts/temp/" + scriptFile.getName();
+
+                    log.info("Running command: " + command);
+                    Process pr = Runtime.getRuntime().exec(command);
+
+                    //try { Thread.sleep(15000); } catch(InterruptedException e) {log.error(e, e);}
+
+                    BufferedReader processOutputReader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+                    for(String line = processOutputReader.readLine(); line != null; line = processOutputReader.readLine()) {
+
+                        //don't add stuff to this list if the main thread is running a "transaction" of copying out the data to send to client and then clearing the list
+                        synchronized(unsentLogLines) {
+                            unsentLogLines.add(line);
+                        }
+                        log.info("Harvester output: " + line);
+
+                        if(this.abort)
+                            break;
+                    }
+
+                    if(!this.abort){
+                        BufferedReader processErrorReader = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
+                        for(String line = processErrorReader.readLine(); line != null; line = processErrorReader.readLine()) {
+                            log.info("Harvester error: " + line);
+
+                            if(this.abort)
+                                break;
+                        }
+                    }
+
+                    if(this.abort) {
+                        log.debug("Aborting harvester script for session " + this.sessionId + ".");
+                        pr.destroy();
+                    } else {
+                        int exitVal;
+
+                        try {
+                            exitVal = pr.waitFor();
+                        }
+                        catch(InterruptedException e) {
+                            throw new IOException(e.getMessage(), e);
+                        }
+
+                        log.debug("Harvester script for session " + this.sessionId + " exited with error code " + exitVal);
+
+                        File additionsFile = new File(this.additionsFilePath);
+                        if(additionsFile.exists())
+                            extractNewlyAddedUris(additionsFile, sessionInfo.newlyAddedUris);
+                        else
+                            log.error("Additions file not found: " + this.additionsFilePath);
+                    }
+
+                    log.info("Harvester script execution complete");
+                } catch (IOException e) {
+                    log.error(e, e);
+                } finally {
+                    sessionInfo.finish();
                 }
             }
         }

@@ -67,5 +67,11 @@ interface FileHarvestJob {
      * @return the HTML to be shown in the collapsible "Help" area in the "Fill in data" section of the page.
      */
     String getTemplateFillInHelp();
+    
+    /**
+     * Get the message to show to the user if there are no newly-harvested entities to show them.
+     * @return the message to show to the user if there are no newly-harvested entities to show them
+     */
+    String getNoNewDataMessage();
 }
 

@@ -28,14 +28,15 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * @author mbarbieri
      */
     public enum JobType {
-        GRANT("csvGrant", "granttemplate.csv", "testCSVtoRDFgrant.sh", "Grant", "Imported Grants", new String[] {"http://vivoweb.org/ontology/core#Grant"}),
-        PERSON("csvPerson", "persontemplate.csv", "testCSVtoRDFpeople.sh", "Person", "Imported Persons", new String[] {"http://xmlns.com/foaf/0.1/Person"});
-        
+        GRANT("csvGrant", "granttemplate.csv", "CSVtoRDFgrant.sh", "Grant", "Imported Grants", "No new grants were imported.", new String[] {"http://vivoweb.org/ontology/core#Grant"}),
+        PERSON("csvPerson", "persontemplate.csv", "CSVtoRDFperson.sh", "Person", "Imported Persons", "No new persons were imported.", new String[] {"http://xmlns.com/foaf/0.1/Person"});
+
         public final String httpParameterName;
         private final String templateFileName;
         private final String scriptFileName;
         private final String friendlyName;
         private final String linkHeader;
+        private final String noNewDataMessage;
         private final String[] rdfTypesForLinks;
 
         /**
@@ -46,7 +47,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
         public static boolean containsTypeWithHttpParameterName(String httpParameterName) {
             return (getByHttpParameterName(httpParameterName) != null);
         }
-        
+
         /**
          * Returns the JobType with the specified HTTP parameter name.  This is essentially a string identifier for the job type.  This
          * method accepts nulls, returning null in that case.
@@ -68,17 +69,18 @@ class CsvFileHarvestJob implements FileHarvestJob {
             return returnValue;
         }
         
-        private JobType(String httpParameterName, String templateFileName, String scriptFileName, String friendlyName, String linkHeader, String[] rdfTypesForLinks) {
+        private JobType(String httpParameterName, String templateFileName, String scriptFileName, String friendlyName, String linkHeader, String noNewDataMessage, String[] rdfTypesForLinks) {
             this.httpParameterName = httpParameterName;
             this.templateFileName = templateFileName;
             this.scriptFileName = scriptFileName;
             this.friendlyName = friendlyName;
             this.linkHeader = linkHeader;
+            this.noNewDataMessage = noNewDataMessage;
             this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
         }
         
         private CsvFileHarvestJob constructCsvFileHarvestJob(VitroRequest vreq, String namespace) {
-            return new CsvFileHarvestJob(vreq, this.templateFileName, this.scriptFileName, namespace, this.friendlyName, this.linkHeader, this.rdfTypesForLinks);
+            return new CsvFileHarvestJob(vreq, this.templateFileName, this.scriptFileName, namespace, this.friendlyName, this.linkHeader, this.noNewDataMessage, this.rdfTypesForLinks);
         }
     }
 
@@ -106,6 +108,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
     /**
      * The namespace to be used for the harvest.
      */
+    @SuppressWarnings("unused")
     private final String namespace;
 
     /**
@@ -119,9 +122,19 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private final String linkHeader;
 
     /**
+     * The message to show to the user if there are no newly-harvested entities to show them.
+     */
+    private final String noNewDataMessage;
+
+    /**
      * An array of rdf:type values which will be used for links.
      */
     private final String[] rdfTypesForLinks;
+    
+    /**
+     * The session ID of this user session.
+     */
+    private final String sessionId;
 
     
     public static CsvFileHarvestJob createJob(JobType jobType, VitroRequest vreq, String namespace) {
@@ -132,15 +145,17 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * Constructor.
      * @param templateFileName just the name of the template file.  The directory is assumed to be standard.
      */
-    private CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName, String linkHeader, String[] rdfTypesForLinks) {
+    private CsvFileHarvestJob(VitroRequest vreq, String templateFileName, String scriptFileName, String namespace, String friendlyName, String linkHeader, String noNewDataMessage, String[] rdfTypesForLinks) {
         this.vreq = vreq;
         this.templateFile = new File(getTemplateFileDirectory() + templateFileName);
         this.scriptFile = new File(getScriptFileDirectory() + scriptFileName);
-        log.error(getTemplateFileDirectory() + templateFileName);
         this.namespace = namespace;
         this.friendlyName = friendlyName;
         this.linkHeader = linkHeader;
+        this.noNewDataMessage = noNewDataMessage;
         this.rdfTypesForLinks = Arrays.copyOf(rdfTypesForLinks, rdfTypesForLinks.length);
+        
+        this.sessionId = this.vreq.getSession().getId();
     }
 
     /**
@@ -273,16 +288,12 @@ class CsvFileHarvestJob implements FileHarvestJob {
 
         String workingDirectory = TestFileController.getHarvesterPath();
         String fileDirectory = TestFileController.getUploadPath(vreq);
+        String harvestedDataPath = getHarvestedDataPath();
 
         replacements = replacements.replace("${WORKING_DIRECTORY}", workingDirectory);
         replacements = replacements.replace("${UPLOADS_FOLDER}", fileDirectory);
+        replacements = replacements.replace("${HARVESTED_DATA_PATH}", harvestedDataPath);
 
-        /*
-         * What needs to be replaced?
-         *
-         * task directory name
-         */
-        //todo: complete
         return replacements;
     }
 
@@ -310,12 +321,15 @@ class CsvFileHarvestJob implements FileHarvestJob {
         return scriptTemplateContents;
     }
 
+    private String getHarvestedDataPath() {
+        return TestFileController.getFileHarvestRootPath() + "harvested-data/csv/" + this.sessionId + "/";
+    }
+
     @Override
     public String getAdditionsFilePath() {
-
-        return TestFileController.getHarvesterPath() + TestFileController.PATH_TO_ADDITIONS_FILE;
+        return getHarvestedDataPath() + "additions.rdf.xml";
     }
-    
+
     @Override
     public String getPageHeader() {
         return "Harvest " + this.friendlyName + " data from CSV file(s)";
@@ -348,6 +362,11 @@ class CsvFileHarvestJob implements FileHarvestJob {
         help += "<p>A CSV, or <b>C</b>omma-<b>S</b>eparated <b>V</b>alues file, is a method of storing tabular data in plain text.  The first line of a CSV file contains header information, while each subsequent line contains a data record.</p>" + newline;
         help += "<p>The template we provide contains only the header, which you will then fill in accordingly.  For example, if the template contains the text \"firstName,lastName\", then you might add two more lines, \"John,Doe\" and \"Jane,Public\".</p>" + newline;
         return help;
+    }
+
+    @Override
+    public String getNoNewDataMessage() {
+        return this.noNewDataMessage;
     }
     
 }
