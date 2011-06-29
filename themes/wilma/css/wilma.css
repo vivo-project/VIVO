@@ -1520,14 +1520,14 @@ section.accounts input.delete:active {
 }
 input.add-account,
 input.add-account:visited {
-    background: url(../images/addNewAccount.png) 0 0 no-repeat;
+    background: url(../images/addNewAccount.png) 0 center no-repeat;
     color: #fff;
     padding-left: 35px;
 }
 input.add-account:hover {
     color: #fff;
     background-color: #88acbb;
-    background: url(../images/addNewAccountOver.png) 0 0 no-repeat;
+    background: url(../images/addNewAccountOver.png) 0 center no-repeat;
 }
 input.add-account:active {
     top: 1px;
