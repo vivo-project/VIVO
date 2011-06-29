@@ -107,27 +107,24 @@
     </listener-class>
   </listener>
 
-
-<!-- The following listener remains temporarily until SDB becomes the default triple store --> 
+  <!-- Invokes process to perform knowledge base updates to align with ontology changes if needed --> 
+  <listener>
+     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase</listener-class>
+  </listener>
+  
+  <!-- The following listener remains temporarily until SDB becomes the default triple store --> 
   <listener>
      <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels</listener-class>
   </listener>
 
-<!-- This listener sets up SimpleReasoner also in SDB mode. In SDB mode, Pellet is used for -->
-<!-- TBox reasoning and SimpleReasoner is used for ABox reasoning. In RDF mode, Pellet was -->
-<!-- used for both. -->
+  <!-- This listener sets up SimpleReasoner also in SDB mode. In SDB mode, Pellet is used for -->
+  <!-- TBox reasoning and SimpleReasoner is used for ABox reasoning. In RDF mode, Pellet was -->
+  <!-- used for both. -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.PelletReasonerSetup</listener-class>
   </listener>
-
-  <!-- Invokes process to perform knowledge base updates to align with ontology changes if needed -->
-  <!--  
-  <listener>
-     <listener-class>edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase</listener-class>
-  </listener>
-  -->
   
-  <!-- The followng listener records all edit changes, in reified form, to another database model -->
+  <!-- The following listener records all edit changes, in reified form, to another database model -->
   <!-- still at an experimental stage -->
   <!-- if used, this listener should be run after all other Jena-related listeners, to avoid logging unnecessary data and slowing the context startup process -->
 
