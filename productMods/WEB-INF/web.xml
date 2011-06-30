@@ -1356,6 +1356,15 @@
     <url-pattern>/qrcode/about</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>FileHarvestController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.harvester.FileHarvestController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileHarvestController</servlet-name>
+    <url-pattern>/harvester/harvest</url-pattern>
+  </servlet-mapping>
+
     
   <!-- ============================== servlet-mappings ======================== -->
   <servlet-mapping>

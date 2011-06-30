@@ -45,11 +45,11 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup;
 import edu.cornell.mannlib.vitro.webapp.filestorage.uploadrequest.FileUploadServletRequest;
 
-public class TestFileController extends FreemarkerHttpServlet {
+public class FileHarvestController extends FreemarkerHttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final Log log = LogFactory.getLog(TestFileController.class);
-    private static final String TEMPLATE_DEFAULT = "testfile.ftl";
+    private static final Log log = LogFactory.getLog(FileHarvestController.class);
+    private static final String TEMPLATE_DEFAULT = "fileharvest.ftl";
 
     private static final String PARAMETER_FIRST_UPLOAD = "firstUpload";
     private static final String PARAMETER_UPLOADED_FILE = "uploadedFile";
@@ -84,7 +84,8 @@ public class TestFileController extends FreemarkerHttpServlet {
     /**
      * Absolute path on the server of the Harvester root directory.  Include final slash.
      */
-    private static final String PATH_TO_HARVESTER = "/home/mbarbieri/workspace/HarvesterDev/";
+    private static final String PATH_TO_HARVESTER = "/usr/share/vivo/harvester/";
+//    private static final String PATH_TO_HARVESTER = "/home/mbarbieri/workspace/HarvesterDev/";
 
     /**
      * Relative path from the Harvester root directory to the main area reserved for the VIVO File Harvest feature.  Include
@@ -101,6 +102,11 @@ public class TestFileController extends FreemarkerHttpServlet {
      * Relative path from the Harvester root directory to the directory containing the script templates.  Include final slash.
      */
     public static final String PATH_TO_HARVESTER_SCRIPTS = PATH_TO_FILE_HARVEST_ROOT + "scripts/";
+
+    /**
+     * Relative path from the Harvester root directory to the directory containing the script templates.  Include final slash.
+     */
+    public static final String PATH_TO_HARVESTED_DATA = PATH_TO_FILE_HARVEST_ROOT + "harvested-data/";
 
 
     static {
@@ -132,7 +138,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
             String job = vreq.getParameter(PARAMETER_JOB);
             String jobKnown = "false";
-            if((job != null) && TestFileController.knownJobs.contains(job.toLowerCase()))
+            if((job != null) && FileHarvestController.knownJobs.contains(job.toLowerCase()))
                 jobKnown = "true";
 
             FileHarvestJob jobObject = getJob(vreq, job);
@@ -514,9 +520,19 @@ public class TestFileController extends FreemarkerHttpServlet {
         }
     }
 
-
+    /**
+     * Returns the location in which the ready-to-run scripts, after having template replacements made on them, will be
+     * placed.  Final slash included.
+     * @return the location in which the ready-to-run scripts will be placed
+     */
+    private static String getScriptFileLocation() {
+        return PATH_TO_HARVESTER + PATH_TO_HARVESTER_SCRIPTS + "temp/";
+    }
+    
+    
+    
     private File createScriptFile(String script) throws IOException {
-        File scriptDirectory = new File(getHarvesterPath() + "scripts/temp");
+        File scriptDirectory = new File(getScriptFileLocation());
         if(!scriptDirectory.exists()) {
             scriptDirectory.mkdirs();
         }
@@ -790,7 +806,7 @@ public class TestFileController extends FreemarkerHttpServlet {
 
                     File scriptFile = createScriptFile(this.script);
 
-                    String command = "/bin/bash " + getHarvesterPath() + "scripts/temp/" + scriptFile.getName();
+                    String command = "/bin/bash " + getScriptFileLocation() + scriptFile.getName();
 
                     log.info("Running command: " + command);
                     Process pr = Runtime.getRuntime().exec(command);

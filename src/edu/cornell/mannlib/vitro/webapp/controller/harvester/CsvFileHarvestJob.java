@@ -163,8 +163,8 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * @return the path to the directory containing the template files
      */
     private String getTemplateFileDirectory() {
-        String harvesterPath = TestFileController.getHarvesterPath();
-        String pathToTemplateFiles = harvesterPath + TestFileController.PATH_TO_TEMPLATE_FILES;
+        String harvesterPath = FileHarvestController.getHarvesterPath();
+        String pathToTemplateFiles = harvesterPath + FileHarvestController.PATH_TO_TEMPLATE_FILES;
         return pathToTemplateFiles;
     }
 
@@ -173,8 +173,8 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * @return the path to the directory containing the script files
      */
     private String getScriptFileDirectory() {
-        String harvesterPath = TestFileController.getHarvesterPath();
-        String pathToScriptFiles = harvesterPath + TestFileController.PATH_TO_HARVESTER_SCRIPTS;
+        String harvesterPath = FileHarvestController.getHarvesterPath();
+        String pathToScriptFiles = harvesterPath + FileHarvestController.PATH_TO_HARVESTER_SCRIPTS;
         return pathToScriptFiles;
     }
 
@@ -286,13 +286,15 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private String performScriptTemplateReplacements(String scriptTemplateContents) {
         String replacements = scriptTemplateContents;
 
-        String workingDirectory = TestFileController.getHarvesterPath();
-        String fileDirectory = TestFileController.getUploadPath(vreq);
+        String workingDirectory = FileHarvestController.getHarvesterPath();
+        String fileDirectory = FileHarvestController.getUploadPath(vreq);
         String harvestedDataPath = getHarvestedDataPath();
+        String globalHarvestedDataRelativePath = FileHarvestController.PATH_TO_HARVESTED_DATA;
 
         replacements = replacements.replace("${WORKING_DIRECTORY}", workingDirectory);
         replacements = replacements.replace("${UPLOADS_FOLDER}", fileDirectory);
         replacements = replacements.replace("${HARVESTED_DATA_PATH}", harvestedDataPath);
+        replacements = replacements.replace("${GLOBAL_HARVESTED_DATA_RELATIVE_PATH}", globalHarvestedDataRelativePath);
 
         return replacements;
     }
@@ -322,7 +324,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
     }
 
     private String getHarvestedDataPath() {
-        return TestFileController.getFileHarvestRootPath() + "harvested-data/csv/" + this.sessionId + "/";
+        return FileHarvestController.getHarvesterPath() + FileHarvestController.PATH_TO_HARVESTED_DATA + "csv/" + this.sessionId + "/";
     }
 
     @Override

@@ -77,7 +77,7 @@
 			} else {
 			
 				var newLi = document.createElement("li");
-				newLi.innerHTML = "<a href=\"No new grants were imported.\" target=\"_blank\">" + json.newlyAddedUris[i] + "</a>";
+				newLi.innerHTML = "${jobSpecificNoNewDataMessage}";
 				importedItems.appendChild(newLi);
 			}
 			
