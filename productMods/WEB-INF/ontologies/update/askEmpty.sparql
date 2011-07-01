@@ -1,5 +1,0 @@
-PREFIX core: <http://vivoweb.org/ontology/core#>
-
-ASK {
-    core:organizerOf ?p ?o . 
-}
