@@ -9,11 +9,11 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showRole statement />
+<@showRole statement property />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showRole statement>
+<#macro showRole statement property>
     <#local linkedIndividual>
         <#if statement.infoResource??>
             <#if statement.activity??>
@@ -23,16 +23,14 @@
             </#if>
         <#elseif statement.activity??>
             <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
-        <#else>
-            <a href="${profileUrl(statement.role)}">${statement.roleLabel!}</a>
         </#if>
     </#local>
-    
-    <#local core = "http://vivoweb.org/ontology/core#">
+
     <#local dateTime>
         <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
     </#local>
 
-    ${linkedIndividual} ${statement.roleLabel!} ${dateTime!}
+    <#-- If property is collated, then subclass label is redundant information -->
+    ${linkedIndividual} <#if ! property.collatedBySubclass>${statement.subclassLabel!}</#if> ${dateTime!}
 
 </#macro>

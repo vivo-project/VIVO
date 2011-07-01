@@ -10,11 +10,11 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showRole statement />
+<@showRole statement property />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showRole statement>
+<#macro showRole statement property>
     
     <#local linkedIndividual>
         <#if statement.indivInRole??>
@@ -29,8 +29,10 @@
     so use the type label instead. -->
     <#local roleLabel>
         <#if statement.roleLabel?has_content>${statement.roleLabel}
-        <#-- Display, e.g., "Principal Investigator" for "Principal Investigator Role" -->
-        <#elseif statement.roleTypeLabel?has_content>${statement.roleTypeLabel?replace(" Role", "")}
+        <#-- Display, e.g., "Principal Investigator" for "Principal Investigator Role",
+                            "Editor" for "Editor Role".
+             This information is redundant if the property is collated, since it appears in the subclass label. -->
+        <#elseif (! property.collatedBySubclass ) && statement.roleTypeLabel?has_content>${statement.roleTypeLabel?replace(" Role", "")}
         </#if>
     </#local>
 

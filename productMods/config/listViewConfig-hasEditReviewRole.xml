@@ -14,11 +14,10 @@
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
-        SELECT DISTINCT <collated>?subclass</collated>
+        SELECT DISTINCT <collated>?subclass</collated> ?subclassLabel
                         # send the property to the template, since this view supports multiple role properties
                         ?property
                         ?role 
-                        ?roleLabel 
                         ?activity ?activityName 
                         ?activityLabel
                         ?infoResource ?infoResourceName
@@ -35,18 +34,22 @@
             OPTIONAL {  ?role core:forInformationResource ?infoResource 
                         LET (?infoResourceName := afn:localname(?infoResource)) 
                         OPTIONAL { ?infoResource rdfs:label ?infoResourceLabel }
-                        
-                        <collated>
+                                   
                         # NB Currently we can only retrieve subclass for either the 
                         # infoResource or the activity, but not both. Later, we could have 
                         # the query retrieve both and write a custom preprocessor to merge
                         # the results into a single subclass column.
                         ?infoResource vitro:mostSpecificType ?subclass .
-                        ?subclass rdfs:subClassOf bibo:Collection  
-                        </collated>
+                        
+                        ?subclass rdfs:subClassOf ?superclass                        
+                        FILTER (  ( ?property = core:hasEditorRole &amp;&amp; ?superclass = bibo:Collection ) ||
+                                   ( ?property = core:hasReviewerRole &amp;&amp; ?superclass = core:InformationResource )
+                         ) 
+                        
+                        # Get subclass label for display in uncollated view
+                        ?subclass rdfs:label ?subclassLabel                                 
             }                     
 
-            OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
                                   ?dateTimeStartValue core:dateTime ?dateTimeStart 
@@ -71,12 +74,15 @@
             ?subject ?property ?role .
             ?role core:forInformationResource ?infoResource .
             ?infoResource vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf bibo:Collection 
+            ?subclass rdfs:subClassOf ?superclass .
+            ?subclass rdfs:label ?subclassLabel   
         } WHERE {
             ?subject ?property ?role .
             ?role core:forInformationResource ?infoResource .
             ?infoResource vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf bibo:Collection 
+            ?subclass rdfs:subClassOf ?superclass .
+            ?subclass rdfs:label ?subclassLabel  
+            FILTER ( ?superclass = bibo:Collection || ?superclass = core:InformationResource )        
         }
     </query-construct>
     
