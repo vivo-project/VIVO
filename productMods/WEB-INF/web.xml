@@ -329,7 +329,19 @@
   	<url-pattern>/ProcessRdfForm</url-pattern>
   </servlet-mapping>
 
-  --><servlet>
+  -->
+  
+  
+  <servlet>
+  	<servlet-name>EditRequestDispatch</servlet-name>
+  	<servlet-class>edu.cornell.mannlib.vitro.webapp.edit.n3editing.controller.EditRequestDispatchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>EditRequestDispatch</servlet-name>
+  	<url-pattern>/editRequestDispatch</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>IndexController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.IndexController</servlet-class>
   </servlet>

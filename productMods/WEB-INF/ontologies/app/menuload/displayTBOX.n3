@@ -133,8 +133,10 @@ rdfs:comment
 owl:Class
       a       owl:Class .
 
+#In this case, hasElement's custom entry form actually corresponds to the name of the Edit Configuration Generator class
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasElement>
-      a       owl:ObjectProperty .
+      a       owl:ObjectProperty ;   
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customEntryFormAnnot>    "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.MenuEditingFormGenerator"^^xsd:string . 
 
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title>
       a       owl:DatatypeProperty .
