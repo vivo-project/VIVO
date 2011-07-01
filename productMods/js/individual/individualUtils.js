@@ -8,7 +8,7 @@ $(document).ready(function(){
     // Change background color button when verbose mode is off
     $('a#verbosePropertySwitch:contains("Turn off")').addClass('verbose-off');
 
-    // This function creates and styles the "qTip" tooltip that displays the resource uri when the user clicks the uri icon.
+    This function creates and styles the "qTip" tooltip that displays the resource uri when the user clicks the uri icon.
     $('#uriIcon').each(function()
     {
        $(this).qtip(
@@ -44,7 +44,6 @@ $(document).ready(function(){
     // Reveal vCard QR code when QR icon is clicked
     $('#qrIcon, .qrCloseLink').click(function() {
         $('#qrCodeImage').toggleClass('hidden');
-        event.preventDefault();  //duplicates return false but necessary for IE
         return false;
     });
 });
