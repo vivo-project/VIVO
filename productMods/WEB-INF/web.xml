@@ -1143,6 +1143,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>sesame</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.SesameController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sesame</servlet-name>
+    <url-pattern>/admin/sesame</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
