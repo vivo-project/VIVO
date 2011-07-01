@@ -14,7 +14,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     ?s ?p core:DependentResource
+     ?s a core:DependentResource
 } where {
-     ?s ?p core:DependentResource 
+     ?s a core:DependentResource 
 }
