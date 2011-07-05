@@ -8,7 +8,7 @@ $(document).ready(function(){
     // Change background color button when verbose mode is off
     $('a#verbosePropertySwitch:contains("Turn off")').addClass('verbose-off');
 
-    This function creates and styles the "qTip" tooltip that displays the resource uri when the user clicks the uri icon.
+    //This function creates and styles the "qTip" tooltip that displays the resource uri when the user clicks the uri icon.
     $('#uriIcon').each(function()
     {
        $(this).qtip(
