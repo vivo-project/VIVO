@@ -1155,12 +1155,12 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>sesame</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.SesameController</servlet-class>
+    <servlet-name>friend</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FriendController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>sesame</servlet-name>
-    <url-pattern>/admin/sesame</url-pattern>
+    <servlet-name>friend</servlet-name>
+    <url-pattern>/admin/friend</url-pattern>
   </servlet-mapping>
 
   <servlet>
