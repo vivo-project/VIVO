@@ -26,6 +26,6 @@
         <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
     </#local>
     
-    ${linkedIndividual} ${statement.roleLabel!} ${dateTime!} property: ${statement.property!}
+    ${linkedIndividual} ${statement.roleLabel!} ${dateTime!}
 
 </#macro>
