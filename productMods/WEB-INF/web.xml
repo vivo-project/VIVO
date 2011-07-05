@@ -1061,6 +1061,16 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>Google Refine Property List Service</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.GrefinePropertyListServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Google Refine Property List Service</servlet-name>
+    <url-pattern>/get_properties_of_type</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>HomePageController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.HomePageController</servlet-class>
   </servlet>
