@@ -234,7 +234,7 @@ var customForm = {
                         type: customForm.acType
                     },
                     complete: function(xhr, status) {
-                        // Not sure why, but we need an explicit json parse here. jQuery
+                        // Not sure why, but we need an explicit json parse here. 
                         var results = $.parseJSON(xhr.responseText), 
                             filteredResults = customForm.filterAcResults(results);
                         customForm.acCache[request.term] = filteredResults;
