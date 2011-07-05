@@ -28,6 +28,11 @@
 		request.onreadystatechange=function() {
 			if(request.readyState == 4 && request.status == 200) {
 				harvestProgressResponse = request.responseText;
+				
+				var json = eval("(" + harvestProgressResponse + ")");
+				var scriptTextArea = document.getElementById("scriptTextArea");
+				scriptTextArea.innerHTML = json.scriptText;
+				
 				window.setTimeout(continueHarvest, 1000);
 			}
 		}
@@ -251,7 +256,12 @@
 	<h3 class="testfile-step-header">Step 5</h3>
 	<div id="step5-inner" class="testfile-step-body">
 		<h4 class="testfile-step-subheader">View results</h4>
+		<div id="script">
+			<h5>Script being executed</h5>
+			<textarea cols="100" rows="20" readonly="readonly" id="scriptTextArea"></textarea>		
+		</div>
 		<div id="progress">
+			<h5>Progress</h5>
 			<textarea cols="100" rows="20" readonly="readonly" id="progressTextArea"></textarea>		
 		</div>
 		<div id="summary">

@@ -291,6 +291,9 @@ class CsvFileHarvestJob implements FileHarvestJob {
         String harvestedDataPath = getHarvestedDataPath();
         String globalHarvestedDataRelativePath = FileHarvestController.PATH_TO_HARVESTED_DATA;
 
+        if(harvestedDataPath.endsWith("/"))
+            harvestedDataPath = harvestedDataPath.substring(0, harvestedDataPath.length() - 1);
+        
         replacements = replacements.replace("${WORKING_DIRECTORY}", workingDirectory);
         replacements = replacements.replace("${UPLOADS_FOLDER}", fileDirectory);
         replacements = replacements.replace("${HARVESTED_DATA_PATH}", harvestedDataPath);
