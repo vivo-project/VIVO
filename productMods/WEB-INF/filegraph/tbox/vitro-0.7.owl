@@ -59,19 +59,8 @@ xmlns:vitro="&vitro;"
 
 <!-- other Individual-related -->
 
-<owl:DatatypeProperty rdf:about="&vitro;curatorNote">
-     <rdfs:label xml:lang="en">curation note</rdfs:label>
-</owl:DatatypeProperty>
-<owl:DatatypeProperty rdf:about="&vitro;blurb"/>
-<owl:DatatypeProperty rdf:about="&vitro;citation"/>
-<owl:DatatypeProperty rdf:about="&vitro;description"/>
-<owl:DatatypeProperty rdf:about="&vitro;imageThumb"/>
-<owl:DatatypeProperty rdf:about="&vitro;imageFile"/>
 <owl:DatatypeProperty rdf:about="&vitro;modTime"/>
 <owl:DatatypeProperty rdf:about="&vitro;moniker"/>
-<owl:DatatypeProperty rdf:about="&vitro;sunrise"/>
-<owl:DatatypeProperty rdf:about="&vitro;sunset"/>
-<owl:DatatypeProperty rdf:about="&vitro;timekey"/>
 
 <!-- Portal-related constructs -->
 
@@ -99,7 +88,6 @@ xmlns:vitro="&vitro;"
 
 <owl:Class rdf:about="&vitro;Application"/>
 <owl:DatatypeProperty rdf:about="&vitro;rootLogotypeImage"/>
-<owl:DatatypeProperty rdf:about="&vitro;keywordHeading"/>
 
 <!-- User-related constructs -->
 
