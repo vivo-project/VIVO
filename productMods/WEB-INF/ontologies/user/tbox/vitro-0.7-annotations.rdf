@@ -9,7 +9,6 @@
     <rdfs:label xml:lang="en-US">moniker (deprecated)</rdfs:label>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</vitro:displayLimitAnnot>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">100</vitro:displayRankAnnot>
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This property is deprecated.</vitro:descriptionAnnot>
   </rdf:Description>
 </rdf:RDF>
