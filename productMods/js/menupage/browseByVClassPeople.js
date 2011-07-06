@@ -31,7 +31,7 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
     }
     
     $.getJSON(url, function(results) {
-        individualList = "";
+        var individualList = "";
         
         // Catch exceptions when empty individuals result set is returned
         // This is very likely to happen now since we don't have individual counts for each letter and always allow the result set to be filtered by any letter
@@ -39,39 +39,44 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
             browseByVClass.emptyResultSet(results.vclass, alpha)
         } else {
             $.each(results.individuals, function(i, item) {
-                label = results.individuals[i].label;
-                firstName = results.individuals[i].firstName;
-                lastName = results.individuals[i].lastName;
+                var individual,
+                    label, 
+                    firstName,
+                    lastName, 
+                    fullName,
+                    vclassName, 
+                    preferredTitle,
+                    uri, 
+                    profileUrl,
+                    image, 
+                    listItem;
+                    
+                individual = results.individuals[i];
+                label = individual.label;
+                firstName = individual.firstName;
+                lastName = individual.lastName;
                 if ( firstName && lastName ) {
                     fullName = firstName + ' ' + lastName;
                 } else {
                     fullName = label;
                 }
-                moniker = results.individuals[i].moniker;
-                vclassName = results.individuals[i].vclassName;
-                if ( results.individuals[i].preferredTitle == "") {
-                   // Use the moniker only if it's not empty and not equal to the VClass name
-                   if ( moniker != vclassName && moniker != "" ) {
-                       preferredTitle = moniker;
-                   } else {
-                       preferredTitle = "";
-                   }
-                } else {
-                   preferredTitle = results.individuals[i].preferredTitle;
+                vclassName = individual.vclassName;
+                if ( individual.preferredTitle ) {
+                    preferredTitle = individual.preferredTitle;
                 }
-                uri = results.individuals[i].URI;
-                profileUrl = results.individuals[i].profileUrl;
-                if ( !results.individuals[i].thumbUrl ) {
+                uri = individual.URI;
+                profileUrl = individual.profileUrl;
+                if ( !individual.thumbUrl ) {
                     image = browseByVClass.baseUrl + '/images/placeholders/person.thumbnail.jpg';
                 } else {
-                    image = browseByVClass.baseUrl + results.individuals[i].thumbUrl;
+                    image = browseByVClass.baseUrl + individual.thumbUrl;
                 }
                 // Build the content of each list item, piecing together each component
                 listItem = '<li class="vcard individual foaf-person" role="listitem" role="navigation">';
                 listItem += '<img src="'+ image +'" width="90" alt="'+ fullName +'" />';
                 listItem += '<h1 class="fn thumb"><a href="'+ profileUrl +'" title="View the profile page for '+ fullName +'">'+ fullName +'</a></h1>';
                 // Include the calculated preferred title (see above) only if it's not empty
-                if ( preferredTitle != "" ) {
+                if ( preferredTitle ) {
                     listItem += '<span class="title">'+ preferredTitle +'</span>';
                 }
                 listItem += '</li>';
