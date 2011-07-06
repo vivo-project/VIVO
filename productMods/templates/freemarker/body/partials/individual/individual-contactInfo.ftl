@@ -9,7 +9,7 @@
 <@emailLinks "${core}email" />   
   
 <#-- Phone --> 
-<#assign phone = propertyGroups.getPropertyAndRemoveFromList("${core}phoneNumber")!>
+<#assign phone = propertyGroups.pullProperty("${core}phoneNumber")!>
 <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
     <@p.addLinkWithLabel phone editable />
     <#if phone.statements?has_content> <#-- if there are any statements -->
@@ -25,7 +25,7 @@
 </#if>
 
 <#macro emailLinks property>
-    <#assign email = propertyGroups.getPropertyAndRemoveFromList(property)!>    
+    <#assign email = propertyGroups.pullProperty(property)!>    
     <#if property == "${core}primaryEmail">
         <#local listId = "primary-email">
         <#local label = "Primary Email">
