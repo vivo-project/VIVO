@@ -182,7 +182,7 @@
     String subjectName = ((Individual)request.getAttribute("subject")).getName();
 
     String submitLabel=""; 
-    String title=" <em>webpage</em> for " + subjectName";
+    String title=" <em>webpage</em> for " + subjectName;
     if (objectUri != null) {
         title = "Edit" + title;
         submitLabel = "Save changes";
