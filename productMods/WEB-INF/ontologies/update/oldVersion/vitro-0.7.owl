@@ -79,6 +79,7 @@ xmlns:vitro="&vitro;"
 <owl:ObjectProperty rdf:about="&vitro;additionalLink"/>
 <owl:Class rdf:about="&vitro;Link"/>
 <owl:DatatypeProperty rdf:about="&vitro;linkAnchor"/>
+<owl:DatatypeProperty rdf:about="&vitro;linkDisplayRank"/>
 <owl:DatatypeProperty rdf:about="&vitro;linkURL"/>
 
 <!-- other Individual-related -->
@@ -99,6 +100,7 @@ xmlns:vitro="&vitro;"
 
 <!-- portal flag classes -->
 
+<owl:Class rdf:about="&vitro;Flag1ValueThing"/>
 <owl:Class rdf:about="&vitro;Flag1Value0Thing"/>
 <owl:Class rdf:about="&vitro;Flag1Value1Thing"/>
 <owl:Class rdf:about="&vitro;Flag1Value2Thing"/>
