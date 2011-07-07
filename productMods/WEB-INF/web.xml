@@ -1049,7 +1049,7 @@
 
   <servlet>
     <servlet-name>JSON Reconcile Service</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONReconcileServlet</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.grefine.JSONReconcileServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -1059,7 +1059,7 @@
 
   <servlet>
     <servlet-name>Google Refine Property List Service</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.GrefinePropertyListServlet</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.grefine.GrefinePropertyListServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
