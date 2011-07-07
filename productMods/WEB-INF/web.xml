@@ -1044,17 +1044,14 @@
     <servlet-name>JSON Service</servlet-name>
     <url-pattern>/dataservice</url-pattern>
   </servlet-mapping>
-  
-  <!-- 
+
+  <!-- Google Refine servlets begins -->
+
   <servlet>
     <servlet-name>JSON Reconcile Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JSONReconcileServlet</servlet-class>
   </servlet>
-  -->
-  <servlet>
-    <servlet-name>JSON Reconcile Service</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonReconcileServlet</servlet-class>
-  </servlet>
+
   <servlet-mapping>
     <servlet-name>JSON Reconcile Service</servlet-name>
     <url-pattern>/reconcile</url-pattern>
@@ -1069,6 +1066,18 @@
     <servlet-name>Google Refine Property List Service</servlet-name>
     <url-pattern>/get_properties_of_type</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Google Refine Mqlread Service</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.grefine.GrefineMqlreadServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Google Refine Mqlread Service</servlet-name>
+    <url-pattern>/grefineMqlread</url-pattern>
+  </servlet-mapping>
+
+  <!-- Google Refine servlets ends -->
 
   <servlet>
     <servlet-name>HomePageController</servlet-name>
