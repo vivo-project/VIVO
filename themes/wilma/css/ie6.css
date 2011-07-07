@@ -199,3 +199,38 @@ form.customForm #requiredLegend {
 #admin .uri-link {
     padding-top: 5px;
 }
+/* Fix account management pages */
+table#account th {
+    position: relative;
+}
+.account-alpha-browse {
+    position: absolute;
+    float: none;
+    top: 7px;
+    right: 0;
+}
+#filter-roles {
+    clear: both;
+}
+#search-accounts {
+    width: 400px; 
+}
+#search-accounts input[type="text"] {
+    float: left;  
+}
+#search-accounts input[type="submit"] {
+    float: right;
+    margin-top: 0;
+}
+#add-account {
+    width: 400px;
+    margin-bottom: 20px;
+}
+#add-account span {
+    float: left;
+}
+#add-account input.add-account {
+    margin-top: 0;
+    margin-left: 5px;
+    float: right;
+}

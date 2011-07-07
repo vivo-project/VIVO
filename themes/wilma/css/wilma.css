@@ -1508,7 +1508,7 @@ section.accounts input.delete,
 section.accounts input.delete:visited {
     background-color: #FFF;
     color: #2485AE;
-    border: 1px solid rgba(36, 133, 174,.25);
+    border: 1px solid #96c5da;
 }
 section.accounts input.delete:hover {
     color: #fff;
@@ -1542,37 +1542,3 @@ input.add-account:active {
 #contact_form textarea {
     width: 40em;
 }
-
-/* ------------------------------------------------->  */
-/* MENU MANAGEMENT ------------------------------------>  */
-/* ------------------------------------------------->  */
-/*table#menu-management {
-    table-layout: auto;
-    width: 450px;
-    text-align: left;
-    margin: 0 auto; 
-    border-collapse: collapse;
-    empty-cells: show;
-    caption-side: top;
-    margin: 20px 0 20px 0;
-}
-table#menu-management caption {
-    display: none;
-}
-table#menu-management th{
-    background-color: #fff;
-    display: none;
-}
-table#menu-management td {
-    vertical-align: top;
-    padding: .5em;
-    border: 1px solid #F7F9F9; 
-    font-size: .9em;
-}  
-table#menu-management tr {
-    background-color: #fff;
-}
-table#menu-management tr:nth-child(2n+1) {
-    background-color: rgba(200, 200, 180,.25);
-}
-*/
