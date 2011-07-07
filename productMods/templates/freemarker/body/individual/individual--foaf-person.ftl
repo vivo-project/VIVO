@@ -4,6 +4,7 @@
 
 <#include "individual-setup.ftl">
 <#import "individual-qrCodeGenerator.ftl" as qr>
+<#import "lib-vivo-properties.ftl" as vp>
 
 <section id="individual-intro" class="vcard person" role="region">
 
@@ -41,7 +42,7 @@
             <#include "individual-contactInfo.ftl">  
                 
         <#-- Links -->  
-        <@p.vitroLinks propertyGroups namespaces editable "individual-urls-people" />
+        <@vp.webpages propertyGroups editable "individual-urls-people" />
     </section>
 
     <section id="individual-info" ${infoClass!} role="region">
