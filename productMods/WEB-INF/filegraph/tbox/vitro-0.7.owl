@@ -134,9 +134,6 @@ xmlns:vitro="&vitro;"
   <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#shortDef">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#DependentResource">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#publicDescriptionAnnot">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
   </rdf:Description>
