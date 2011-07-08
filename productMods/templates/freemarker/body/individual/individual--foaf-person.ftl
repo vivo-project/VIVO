@@ -28,7 +28,7 @@
         <nav role="navigation">
         
             <ul id ="individual-tools-people" role="list">
-                <li role="listitem"><img id="uriIcon" title="${individual.uri}" onmouseover="javascript:this.style.cursor='pointer'" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/></li>
+                <li role="listitem"><img id="uriIcon" title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/></li>
     
                 <#assign rdfUrl = individual.rdfUrl>
                 <#if rdfUrl??>

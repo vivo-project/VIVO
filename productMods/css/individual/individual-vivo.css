@@ -1,5 +1,44 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+/* <------ INDIVIDUAL INTRO FOR PERSON*/
+#individual-intro.person {
+    margin-bottom: 30px;
+    position: relative;
+    width: 100%;
+}
+#individual-intro.person #individual-info {
+    float: left;
+    width: 78%;
+    margin-bottom: 20px;
+}
+#individual-intro.person .individual-overview {
+    width: 100%;
+    float: none;
+}
+ul#individual-tools-people {
+    margin-top: 5px;
+    height: 20px;
+    padding-bottom: 20px;
+    list-style-type: none;
+    clear: both;
+    margin-bottom: 15px;
+}
+ul#individual-tools-people li {
+    position: relative;
+    display: block;
+    padding-right: 7px;
+    float: left;
+    margin-bottom: 20px;
+}
+ul.individual-urls-people {
+    clear: both;
+    list-style-type: circle;
+    padding-left: 24px;
+}
+ul.individual-urls-people li {
+    font-size: .875em;
+    line-height: 1.3em;
+}
 /* <------ INDIVIDUAL CORE:OVERVIEW */
 #overview {
     clear: left;
