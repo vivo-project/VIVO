@@ -20,7 +20,7 @@
             OPTIONAL { ?link core:linkURI ?url }
             OPTIONAL { ?link core:rank ?rank }
         <critical-data-required>
-        FILTER ( bound(?anchor) &amp;&amp; bound(?url) )    
+        FILTER ( bound(?url) )    
         </critical-data-required>
         } ORDER BY ?rank ?anchor
     </query-select>

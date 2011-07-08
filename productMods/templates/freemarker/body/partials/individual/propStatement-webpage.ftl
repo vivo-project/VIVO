@@ -7,13 +7,13 @@
  -->
 
 <#assign linkText>
-    <#if statement.anchor??>${statement.anchor}
-    <#else>${statement.linkName} (no anchor text provided for link)
+    <#if statement.anchor?has_content>${statement.anchor}
+    <#elseif statement.url?has_content>${statement.url} 
     </#if>    
 </#assign>
 
-<#if statement.url??>
+<#if statement.url?has_content>
     <a href="${statement.url}">${linkText}</a> 
 <#else>
-    <a href="${profileUrl(statement.link)}">${linkText}</a> (no url provided for link)    
+    <a href="${profileUrl(statement.link)}">${statement.linkName}</a> (no url provided for link)
 </#if>
