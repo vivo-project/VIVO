@@ -234,3 +234,6 @@ table#account th {
     margin-left: 5px;
     float: right;
 }
+p.requiredHint {
+    clear: left;
+}

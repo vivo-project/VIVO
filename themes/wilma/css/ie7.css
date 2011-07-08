@@ -149,3 +149,6 @@ table#account th {
     margin-top: 0;
     margin-left: 5px;
 }
+p.requiredHint {
+    clear: left;
+}
