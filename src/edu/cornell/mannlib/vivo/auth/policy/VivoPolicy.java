@@ -17,12 +17,19 @@ import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.ifaces.RequestedAction;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AddObjectPropStmt;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.DropObjectPropStmt;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.EditObjPropStmt;
 
 public class VivoPolicy extends DefaultInconclusivePolicy{
 	private static final Log log = LogFactory.getLog(VivoPolicy.class);
 
-	private static String AUTHORSHIP_FROM_PUB =  "http://vivoweb.org/ontology/core#informationResourceInAuthorship"; 
-	private static String AUTHORSHIP_FROM_PERSON =  "http://vivoweb.org/ontology/core#authorInAuthorship";
+	private static final String CORE = "http://vivoweb.org/ontology/core#";
+	private static final String PUB_TO_AUTHORSHIP =  CORE + "informationResourceInAuthorship"; 
+	private static final String PERSON_TO_AUTHORSHIP =  CORE + "authorInAuthorship";
+	private static final String AUTHORSHIP_TO_PERSON = CORE + "linkedAuthor";
+	private static final String AUTHORSHIP_TO_PUB = CORE + "linkedInformationResource";
+	private static final String INDIVIDUAL_TO_WEBPAGE = CORE + "webpage";
+	private static final String WEBPAGE_TO_INDIVIDUAL = CORE + "webpageOf";
+	
 	@Override
 	public PolicyDecision isAuthorized(IdentifierBundle whoToAuth,
 			RequestedAction whatToAuth) {
@@ -30,39 +37,67 @@ public class VivoPolicy extends DefaultInconclusivePolicy{
 		if( whatToAuth instanceof DropObjectPropStmt ){
 			DropObjectPropStmt dops = (DropObjectPropStmt)whatToAuth;
 			
+			String predicateUri = dops.getUriOfPredicate();
+			
 			/* Do not offer the user the option to delete so they will use the custom form instead */ 
 			/* see issue NIHVIVO-739 */
-			if( AUTHORSHIP_FROM_PUB.equals( dops.getUriOfPredicate() )) {
+			if( PUB_TO_AUTHORSHIP.equals( predicateUri )) {
 				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
 						"Use the custom edit form for core:informationResourceInAuthorship");
 			}
 			
-			if( AUTHORSHIP_FROM_PERSON.equals( dops.getUriOfPredicate() )) {
+			else if( PERSON_TO_AUTHORSHIP.equals( predicateUri )) {
 				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
 						"Use the custom edit form for core:authorInAuthorship");
 			}
 			 
-			if( "http://vivoweb.org/ontology/core#linkedAuthor".equals( dops.getUriOfPredicate())){
+			else if( AUTHORSHIP_TO_PERSON.equals( predicateUri )){
 				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
-					"Use the custom edit form for on information resource to edit authors.");
+					"Use the custom edit form on information resource to edit authors.");
 			}
 			
-			if( "http://vivoweb.org/ontology/core#linkedInformationResource".equals( dops.getUriOfPredicate())){
+			else if( AUTHORSHIP_TO_PUB.equals( predicateUri )){
 				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
-					"Use the custom edit form for on information resource to edit authors.");
-			}			
-		}
-		if( whatToAuth instanceof AddObjectPropStmt ){
-			AddObjectPropStmt aops = (AddObjectPropStmt)whatToAuth;
-			if( "http://vivoweb.org/ontology/core#linkedAuthor".equals( aops.getUriOfPredicate())){
-				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
-					"Use the custom edit form for on information resource to edit authors.");
-			}
-			
-			if( "http://vivoweb.org/ontology/core#linkedInformationResource".equals( aops.getUriOfPredicate())){
-				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
-					"Use the custom edit form for on information resource to edit authors.");
+					"Use the custom edit form on information resource to edit authors.");
 			}	
+			
+			else if ( INDIVIDUAL_TO_WEBPAGE.equals( predicateUri ) || WEBPAGE_TO_INDIVIDUAL.equals( predicateUri )) {
+                return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+                    "Use the custom edit form for core:webpage");			    
+			}
+		}
+		else if( whatToAuth instanceof AddObjectPropStmt ){
+ 
+			AddObjectPropStmt aops = (AddObjectPropStmt)whatToAuth;
+	        
+			String predicateUri = aops.getUriOfPredicate();
+			
+			if( AUTHORSHIP_TO_PERSON.equals( predicateUri )){
+				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+					"Use the custom edit form on information resource to edit authors.");
+			}
+			
+			else if( AUTHORSHIP_TO_PUB.equals( predicateUri )){
+				return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+					"Use the custom edit form on information resource to edit authors.");
+			}	
+			
+            else if( WEBPAGE_TO_INDIVIDUAL.equals( predicateUri )){
+                return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+                    "Use the custom edit form on an individual to edit webpages.");
+            }   
+		}
+		
+		else if (whatToAuth instanceof EditObjPropStmt ) {
+		    
+		    EditObjPropStmt aops = (EditObjPropStmt)whatToAuth;
+	            
+	        String predicateUri = aops.getUriOfPredicate();
+	        
+	        if( WEBPAGE_TO_INDIVIDUAL.equals( predicateUri )){	        
+	            return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+                    "Use the custom edit form on an individual to edit webpages.");	
+	        }
 		}
 		
 		return super.isAuthorized(whoToAuth, whatToAuth);						

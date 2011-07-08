@@ -1,5 +1,25 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
+<%-- Custom form for managing webpages associated with an individual
+
+Object properties: 
+core:webpage (range: core:URLLink)
+core:webpageOf (domain: core:URLLink) (inverse of core:webpage)
+
+Class: 
+core:URLLink - the link to be added to the individual
+
+Data properties of core:URLLink:
+core:linkURI
+core:linkAnchorText
+core:rank
+
+--%>
+
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Arrays" %>
+
 <%@ page import="com.hp.hpl.jena.rdf.model.Literal" %>
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
@@ -13,8 +33,8 @@
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.DataPropertyDao" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary"%>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils"%>
-
-<%@ page import="java.util.List" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -98,12 +118,13 @@
           
 </v:jsonset>
 
+<c:set var="returnPathAfterSubmit" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
 
 <c:set var="editjson" scope="request">
   {
     "formUrl" : "${formUrl}",
     "editKey" : "${editKey}",
-    "urlPatternToReturnTo" : "/entity",
+    "urlPatternToReturnTo" : "${returnPathAfterSubmit}",
     
     "subject"   : ["subject",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
@@ -190,15 +211,30 @@
         title = "Create" + title;
         submitLabel = "Create link";
     }
+    
+    List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
+            JavaScript.CUSTOM_FORM_UTILS.path(),
+            "/js/browserUtils.js",
+            "/edit/forms/js/manageWebpagesForIndividual.js"
+           ));            
+    request.setAttribute("customJs", customJs);
+
+    List<String> customCss = new ArrayList<String>(Arrays.asList(Css.JQUERY_UI.path(),
+             Css.CUSTOM_FORM.path()                                              
+            )); 
+    request.setAttribute("customCss", customCss); 
 
 %>
+
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
 <jsp:include page="${preForm}"/>
 
 <h2><%= title %></h2>
-<form action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-    <v:input type="text" label="URL" id="url" size="70"/>
-    <v:input type="text" label="Link anchor text" id="anchor" size="70"/>
+<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+    <v:input type="text" label="URL ${requiredHint}" id="url" size="70"/>
+    <v:input type="text" label="Webpage name" id="anchor" size="70"/>
+    <p><em>If left blank, the URL will be used when displaying a link to this webpage.</em></p>
     <input type="hidden" name="rank" value="-1" />
     <p class="submit"><v:input type="submit" id="submit" value="<%=submitLabel%>" cancel="true"/></p>
 </form>
