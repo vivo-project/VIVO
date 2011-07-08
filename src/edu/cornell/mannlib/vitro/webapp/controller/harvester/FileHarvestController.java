@@ -95,6 +95,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
     /**
      * Relative path from the Harvester root directory to the directory where user-downloadable template files are stored.
+     * Include final slash.
      */
     public static final String PATH_TO_TEMPLATE_FILES = PATH_TO_FILE_HARVEST_ROOT + "templates/";
 
@@ -419,6 +420,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
             JSONObject json = new JSONObject();
             json.put("progressSinceLastCheck", "");
+            json.put("scriptText", script);
             json.put("finished", false);
 
             response.getWriter().write(json.toString());

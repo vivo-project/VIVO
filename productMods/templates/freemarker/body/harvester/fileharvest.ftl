@@ -112,11 +112,6 @@
 			document.getElementById(divName).style.display = "none";
 	}
 
-	function toggleHelp()
-	{
-		toggleCollapsibleDiv("help-collapsible");
-	}
-
 	function toggleCsvHelp()
 	{
 		toggleCollapsibleDiv("csvHelp-collapsible");
@@ -230,22 +225,7 @@
 <div id="step4" class="testfile-step">
 	<h3 class="testfile-step-header">Step 4</h3>
 	<div id="step4-inner" class="testfile-step-body">
-		<h4 class="testfile-step-subheader">Harvest <a style="font-size:smaller;margin-left:10px" onclick="toggleHelp();return false;" href="#">Help</a></h4>
-		<div id="help-collapsible" style="display:none">
-			<div id="help-refworks" style="margin-left:20px;margin-bottom:10px;font-size:smaller">
-				<h4>Instructions</h4>
-				<h5>Export the file from RefWorks</h5>
-				<ul>
-					<li>From the <b>References</b> or <b>Tools</b> menu select <b>Export</b>.</li>
-					<li>Under <b>Export Format</b> select <b>BibTeX - Ref ID</b>.</li>
-					<li>Click the <b>Export to Text File</b> button to view the file and save it to your hard disk.</li>
-				</ul>		
-				<h5>Import the file into VIVO</h5>
-				<ul>
-					<li>Drag the file onto the space below and click <b>Import</b>.</li>
-				</ul>
-			</div>
-		</div>
+		<h4 class="testfile-step-subheader">Harvest</h4>
 		<p><input type="button" name="harvestButton" id="harvestButton" value="Harvest" style="margin-right:10px" onclick="doFunStuff();" /><span id="harvestButtonHelpText">Click the button to harvest your file(s).</span></p>
 	</div>
 	<div class="clearBothDiv" />
