@@ -29,6 +29,11 @@ function createScimapType(map, mapName) {
 	};
 	
 	var sciMapType = new google.maps.ImageMapType(sciMapTypeOptions);
+	new CopyrightPanel ({
+		map: map,
+		controlPositions: google.maps.ControlPosition.BOTTOM_RIGHT,
+		html: '&copy; 2008 The Regents of the University of California and <a href="http://cns.iu.edu" >CNS.IU.EDU</a>'
+	});
 	map.mapTypes.set(mapName, sciMapType);
 }
 

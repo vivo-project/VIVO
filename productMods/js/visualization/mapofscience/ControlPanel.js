@@ -133,3 +133,24 @@ var CheckBoxPanel = ControlPanel.extend({
 		return this.checkBox.attr('checked');
 	}
 });
+
+/**
+ * Copyright
+ */
+var CopyrightPanel = ControlPanel.extend({
+	init: function(options) {
+		this._super(options);
+		this.initCopyRight();
+	},
+	initCopyRight: function() {
+		var me = this;
+		var html = me.options.html;
+		var copyright = $("<div />").css("padding", "0px 5px 2px 5px").css("font-size", "75%").css("text-align", "center");
+		if (html) {
+			copyright.html(html);
+		}
+		me.copyright = copyright;
+		
+		me.getDiv().append(copyright);
+	}
+});
