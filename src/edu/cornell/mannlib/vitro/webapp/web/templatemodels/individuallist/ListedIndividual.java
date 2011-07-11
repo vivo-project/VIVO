@@ -23,7 +23,7 @@ public class ListedIndividual extends BaseListedIndividual {
     /* Access methods for templates */
     
     public String getPreferredTitle() {
-        return individual.getDataValue(CORE + "preferredTitle");
+        return cleanTextForDisplay( individual.getDataValue(CORE + "preferredTitle") );
     }
     
     // Add method to get core:webpages
