@@ -195,9 +195,6 @@
                         <a href="#tomcat_connector">Setup Apache Tomcat Connector</a>
                     </li>
                     <li>
-                        <a href="#pellet">Configure Pellet Reasoner</a>
-                    </li>
-                    <li>
                         <a href="#external_auth">Using an External Authentication
                             System with VIVO</a>
                     </li>
@@ -836,48 +833,7 @@
 				&lt;/Context&gt;<br>		
 				...
 			</pre>
-            <h3 id="pellet">XII. Configure Pellet Reasoner </h3>
-            <p>
-                This optional configuration step is only applicable to VIVO installations 
-                running in RDB mode (See section <a href="triple_store">Choose Triple Store</a>
-                for details). 
-                VIVO uses the Pellet engine to perform reasoning, which runs in the  
-                background at startup and also when the knowledge base is edited. VIVO 
-                continues serving pages while the reasoner continues working; when the  
-                reasoner finishes, the new inferences appear. Inferred statements are 
-                cached in a database graph so that they are available immediately when  
-                VIVO is restarted. 
-            </p>
-            <p>
-                By default, Pellet is fed only an incomplete view of your ontology 
-                and only certain inferences are materialized. These include rdf:type,  
-                rdfs:subClassOf, owl:equivalentClass, and owl:disjointWith. This mode 
-                is typically suitable for ontologies with a lot of instance data. If  
-                you would like to keep the default mode, skip to the next step. 
-            </p>
-            <p>
-                To enable "complete" OWL inference (materialize all significant 
-                entailed statements), open "vitro-core/webapp/config/web.xml" and  
-                search for PelletReasonerSetup. 
-            </p>
-            <p>
-                Then change the name of the listener class to 
-                PelletReasonerSetupComplete. Because "complete" reasoning can be very  
-                resource intensive, there is also an option to materialize nearly all 
-                inferences except owl:sameAs and owl:differentFrom. 
-            </p>
-            <p>
-                This is enabled by specifying PelletReasonerSetupPseudocomplete. 
-                For ontologies with large numbers of individuals, this mode can offer  
-                enormous performance improvements over the "complete" mode. 
-            </p>
-            <p>
-                Finally, a class called 
-                PelletReasonerSetupPseudocompleteIgnoreDataproperties is provided to  
-                improve performance on ontologies with large literals where data 
-                property entailments are not needed. 
-            </p>
-            <h3 id="external_auth">XIII. Using an External Authentication System 
+            <h3 id="external_auth">XII. Using an External Authentication System 
                 with VIVO </h3>
             <p>
             </p>
