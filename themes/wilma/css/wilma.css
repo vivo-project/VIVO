@@ -1407,6 +1407,9 @@ a {
 .middle {
     vertical-align: middle;
 }
+input[type="submit"] {
+    cursor: pointer;
+}
 /* EDITING DISPLAY------>  */
 .edit-individual {
     border-left: 1px dotted #B2D15A;
