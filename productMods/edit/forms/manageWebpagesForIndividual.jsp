@@ -92,7 +92,9 @@
 %>
 
 <c:url var="deleteWebpageUrl" value="/edit/primitiveDelete" />
-<c:url var="returnToIndividualUrl" value="/individual?uri=<%= subjectUri %>" />
+
+<c:set var="subjectUri" value="<%= subjectUri %>" />
+<c:url var="returnToIndividualUrl" value="/individual?uri=${subjectUri}" />
 
 <jsp:include page="${preForm}"/>
 
@@ -130,10 +132,8 @@
     </c:forEach>
 </ul>
 
-<div id="showAddForm">
-    <a href="${showAddFormUrl}" class="button">Add Web Page</a>
-    <a href="${returnToIndividualUrl}" class="">Return to Individual</a>
-</div> 
+<a href="${showAddFormUrl}" id="showAddForm" class="button">Add Web Page</a>
+<a href="${returnToIndividualUrl}" id="returnToIndividual">Return to Individual</a>
 
 <jsp:include page="${postForm}"/>
 
