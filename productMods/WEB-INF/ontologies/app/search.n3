@@ -22,5 +22,6 @@
 	vitroDisplay:excludeClass core:EducationalTraining ;	
 	vitroDisplay:excludeClass bibo:DocumentStatus ;
 	vitroDisplay:excludeClass core:DateTimeValue ;
-	vitroDisplay:excludeClass core:DateTimeInterval .
+	vitroDisplay:excludeClass core:DateTimeInterval ;
+	vitroDisplay:excludeClass core:URLLink .
 	
