@@ -201,6 +201,7 @@ form textarea {
     width: 100%;
 }
 #authorships a.remove:link,
+#manageWebpages a.remove:link,
 #showAddForm a.cancel:link,
 form a:link.cancel, 
 form a:visited.cancel {
@@ -211,6 +212,8 @@ form a:visited.cancel {
 }
 #authorships a.remove:hover,
 #authorships a.remove:active,
+#manageWebpages a.remove:hover,
+#manageWebpages a.remove:active,
 #showAddForm a.cancel:hover,
 #showAddForm a.cancel:active,
 form a:hover.cancel, 

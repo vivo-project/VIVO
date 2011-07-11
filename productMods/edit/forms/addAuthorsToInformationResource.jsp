@@ -37,10 +37,10 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
-<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.JavaScript" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Css" %>
 
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.apache.commons.logging.Log" %>
 <%@ page import="org.apache.commons.logging.LogFactory" %>
@@ -308,8 +308,6 @@ SPARQL queries for existing values. --%>
     int maxRank = 0;
     int authorshipCount = authorships.size();  
 
-    // for ( ObjectPropertyStatement stmt : authorshipStmts) {
-    //     Individual authorship = stmt.getObject();
 %>        
     <script type="text/javascript">
         var authorshipData = [];

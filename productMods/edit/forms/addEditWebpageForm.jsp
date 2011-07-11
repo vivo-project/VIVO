@@ -45,17 +45,6 @@ core:rank
 <%@ taglib prefix="v" uri="http://vitro.mannlib.cornell.edu/vitro/tags" %>
 <%! 
     public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addEditWebpageForm.jsp");
-    
-    /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned,
-     * since it's ranked highest. Preventing that would require getting all the ranks and sorting in Java,
-     * throwing out non-int values. 
-     */
-    public static String RANK_QUERY = ""
-        + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
-        + "SELECT DISTINCT ?rank WHERE { \n"
-        + "    ?subject core:webpage ?link . \n"
-        + "    ?link core:rank ?rank .\n"
-        + "} ORDER BY DESC(?rank) LIMIT 1";
 
 %>
 
@@ -264,6 +253,18 @@ core:rank
 <jsp:include page="${postForm}"/>
 
 <%!
+
+/* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned,
+ * since it's ranked highest. Preventing that would require getting all the ranks and sorting in Java,
+ * throwing out non-int values. 
+ */
+private static String RANK_QUERY = ""
+    + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+    + "SELECT DISTINCT ?rank WHERE { \n"
+    + "    ?subject core:webpage ?link . \n"
+    + "    ?link core:rank ?rank .\n"
+    + "} ORDER BY DESC(?rank) LIMIT 1";
+    
 private int getMaxRank(String objectUri, String subjectUri, VitroRequest vreq) {
 
     int maxRank = 0; // default value 
