@@ -91,7 +91,8 @@
     request.setAttribute("customCss", customCss);
 %>
 
-<c:url var="deleteWebpageHref" value="/edit/primitiveDelete" />
+<c:url var="deleteWebpageUrl" value="/edit/primitiveDelete" />
+<c:url var="returnToIndividualUrl" value="/individual?uri=<%= subjectUri %>" />
 
 <jsp:include page="${preForm}"/>
 
@@ -117,7 +118,7 @@
 	        </span>
             <span class="editingLinks">
                 <a href="" class="edit">Edit</a> | 
-                <a href="${deleteWebpageHref}" class="remove">Delete</a> 
+                <a href="${deleteWebpageUrl}" class="remove">Delete</a> 
             </span>
         </li>    
         
@@ -130,7 +131,8 @@
 </ul>
 
 <div id="showAddForm">
-    
+    <a href="${showAddFormUrl}" class="button">Add Web Page</a>
+    <a href="${returnToIndividualUrl}" class="">Return to Individual</a>
 </div> 
 
 <jsp:include page="${postForm}"/>
