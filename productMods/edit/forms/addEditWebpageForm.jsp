@@ -46,8 +46,9 @@ core:rank
 <%! 
     public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addEditWebpageForm.jsp");
     
-    /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned. 
-     * Preventing that would require getting all the ranks and ordering in Java, throwing out non-int values. 
+    /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned,
+     * since it's ranked highest. Preventing that would require getting all the ranks and sorting in Java,
+     * throwing out non-int values. 
      */
     public static String RANK_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
@@ -129,8 +130,7 @@ core:rank
       ?link <${inverseProperty}> ?subject .
 
       ?link a  <${linkClass}> ;      
-            <${linkUrl}>  ?url ;
-            <${linkAnchor}> ?anchor ;
+            <${linkUrl}>  ?url .
           
 </v:jsonset>
 
@@ -141,13 +141,14 @@ core:rank
     "formUrl" : "${formUrl}",
     "editKey" : "${editKey}",
     "urlPatternToReturnTo" : "${returnPathAfterSubmit}",
+    "urlPatternToCancelTo" : "${returnPathAfterCancel}",
     
     "subject"   : ["subject",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
     "object"    : ["link", "${objectUriJson}", "URI" ],
     
     "n3required"        : [ "${n3ForEdit}" ],
-    "n3optional"        : [ "${rankAssertion}"],
+    "n3optional"        : [ "${rankAssertion}", "${anchorAssertion}" ],
     "newResources"      : { "link" : "${defaultNamespace}" },
     "urisInScope"       : { },
     "literalsInScope"   : { },
@@ -159,7 +160,7 @@ core:rank
     "sparqlForExistingLiterals" : {
         "url"         : "${urlQuery}",
         "anchor"      : "${anchorQuery}",
-        "rank" : "${rankQuery}"
+        "rank"        : "${rankQuery}"
     },
     "sparqlForExistingUris" : { },
     "fields" : {
@@ -176,7 +177,7 @@ core:rank
       },
       "anchor" : {
          "newResource"      : "false",
-         "validators"       : [ "nonempty", "datatype:${stringDatatypeUriJson}" ],
+         "validators"       : [ "datatype:${stringDatatypeUriJson}" ],
          "optionsType"      : "UNDEFINED",
          "literalOptions"   : [ ],
          "predicateUri"     : "",
@@ -222,7 +223,49 @@ core:rank
     
     String subjectName = ((Individual)request.getAttribute("subject")).getName();
     
-    // Get largest existing rank value
+    // Get largest existing rank value to compute hidden rank field value
+    int newRank = getMaxRank(objectUri, subjectUri, vreq) + 1;
+
+%>
+
+<c:choose>
+    <c:when test="${ ! empty objectUri }">  
+        <c:set var="editMode" value="edit" />
+        <c:set var="title" value="Edit webpage of" />        
+        <c:set var="submitButtonText" value="Save changes" />
+        <c:set var="cancelUrl" value="" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="editMode" value="add" />
+        <c:set var="title" value="Add a webpage for" />        
+        <c:set var="submitButtonText" value="Add webpage" />
+        <c:set var="cancelUrl" value="/individual" />
+    </c:otherwise>
+</c:choose>
+
+<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
+
+<jsp:include page="${preForm}"/>
+
+<h2>${title}&nbsp;<%= subjectName %></h2>
+
+<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
+    <v:input type="text" label="URL ${requiredHint}" id="url" size="70"/>
+    <v:input type="text" label="Webpage Name" id="anchor" size="70"/>
+    <p><em>If left blank, the URL will be used when displaying a link to this webpage.</em></p>
+    <c:if test="${editMode == 'add'}">
+        <input type="hidden" name="rank" value="<%= newRank %>" />
+    </c:if>
+    <p class="submit">
+        <v:input type="submit" id="submit" value="${submitButtonText}" cancel="true" cancelUrl="${cancelUrl}" />
+    </p>
+</form>
+
+<jsp:include page="${postForm}"/>
+
+<%!
+private int getMaxRank(String objectUri, String subjectUri, VitroRequest vreq) {
+
     int maxRank = 0; // default value 
     if (objectUri == null) { // adding new webpage   
         String queryStr = QueryUtils.subUriForQueryVar(RANK_QUERY, "subject", subjectUri);
@@ -248,40 +291,7 @@ core:rank
             log.error(e, e);
         }
     }
+    return maxRank;
+}
 
 %>
-
-<c:choose>
-    <c:when test="${ ! empty objectUri }">  
-        <c:set var="editMode" value="edit" />
-        <c:set var="title" value="Edit webpage of" />        
-        <c:set var="submitButtonText" value="Save changes" />
-        <c:set var="cancelHref" value="" /> <%-- May need to do this in Java above --%>
-    </c:when>
-    <c:otherwise>
-        <c:set var="editMode" value="add" />
-        <c:set var="title" value="Add a webpage for" />        
-        <c:set var="submitButtonText" value="Add webpage" />
-        <c:set var="cancelHref" value="" />
-    </c:otherwise>
-</c:choose>
-
-<c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
-
-<jsp:include page="${preForm}"/>
-
-<h2>${title}&nbsp;<%= subjectName %></h2>
-
-<form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
-    <v:input type="text" label="URL ${requiredHint}" id="url" size="70"/>
-    <v:input type="text" label="Webpage Name" id="anchor" size="70"/>
-    <p><em>If left blank, the URL will be used when displaying a link to this webpage.</em></p>
-    <c:if test="${editMode == 'add'}">
-        <input type="hidden" name="rank" value="<%= maxRank + 1 %>" />
-    </c:if>
-    <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true"/></p>
-</form>
-
-<jsp:include page="${postForm}"/>
-
-
