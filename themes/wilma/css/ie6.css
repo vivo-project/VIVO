@@ -237,3 +237,6 @@ table#account th {
 p.requiredHint {
     clear: left;
 }
+add-account span.requiredHint {
+    float: none;
+ }
