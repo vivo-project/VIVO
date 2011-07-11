@@ -88,5 +88,3 @@ This visualization is based on the publications we were able to 'science locate'
 
 The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncracies may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a concern.</div>
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}
-
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/Utils.js"></script>')}

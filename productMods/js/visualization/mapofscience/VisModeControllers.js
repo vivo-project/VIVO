@@ -71,11 +71,64 @@ var EntityVisModeController = Class.extend({
 		} // end if
 	},
 	loadJsonData: function(me, data) {
+		
+		$("#" + responseContainerID).unblock();
+		
 		$.each(me.widgets, function(i, widget) {
 			widget.loadJsonData(data);
 		});
 		me.isUnloaded = false;
-		$("#" + responseContainerID).unblock();
+		
+		me.initToolTipInfo();
+	},
+	initToolTipInfo: function() {
+//		console.log("called");
+		$('.filterInfoIcon').each(function () {
+		    
+			var me = $(this);
+			
+			var tipText;
+		    var tipLocation = "topLeft";
+		    
+		    if (me.attr('id') == 'imageIconOne') {
+		        tipText = $('#toolTipOne').html();
+		    } else if (me.attr('id') == 'imageIconTwo') {
+		        tipText = $('#toolTipTwo').html();
+		    } else {
+		        tipText = $('#toolTipThree').html();
+		        tipLocation = "topRight";
+		    }
+		    
+		    me.qtip({
+		        content: {
+		            text: tipText
+		        },
+		        position: {
+		            corner: {
+		                target: 'center',
+		                tooltip: tipLocation
+		            }
+		        },
+		        show: {
+		            when: {
+		                event: 'mouseover'
+		            }
+		        },
+		        hide: {
+		            fixed: true // Make it fixed so it can be hovered over
+		        },
+		        style: {
+		            padding: '6px 6px',
+		            // Give it some extra padding
+		            width: 500,
+		            textAlign: 'left',
+		            backgroundColor: '#ffffc0',
+		            fontSize: '.7em',
+		            padding: '6px 10px 6px 10px',
+		            lineHeight: '14px'
+		        }
+		    });
+		});
 	},
 	// key can be discippline or subdiscipline
 	show: function(key) {
