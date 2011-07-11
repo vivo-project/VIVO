@@ -46,14 +46,16 @@ core:rank
 <%! 
     public static Log log = LogFactory.getLog("edu.cornell.mannlib.vitro.webapp.jsp.edit.forms.addEditWebpageForm.jsp");
     
-    public static String RANK_QUERY = 
-        "PREFIX core: <http://vivoweb.org/ontology/core#> \n" + 
-        "SELECT DISTINCT ?rank WHERE { \n" +
-        "    ?subject core:webpage ?link . \n" +
-        "    ?link core:rank ?rank .\n" +
-        "} ORDER BY DESC(?rank) \n" +
-        "LIMIT 1";
-    
+    /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned. 
+     * Preventing that would require getting all the ranks and ordering in Java, throwing out non-int values. 
+     */
+    public static String RANK_QUERY = ""
+        + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+        + "SELECT DISTINCT ?rank WHERE { \n"
+        + "    ?subject core:webpage ?link . \n"
+        + "    ?link core:rank ?rank .\n"
+        + "} ORDER BY DESC(?rank) LIMIT 1";
+
 %>
 
 <%
@@ -67,10 +69,12 @@ core:rank
 
     String stringDatatypeUriJson = MiscWebUtils.escape(XSD.xstring.toString());
     String uriDatatypeUriJson = MiscWebUtils.escape(XSD.anyURI.toString());
+    String intDatatypeUriJson = MiscWebUtils.escape(XSD.xint.toString());
 %>
 
 <c:set var="stringDatatypeUriJson" value="<%= stringDatatypeUriJson %>" />
 <c:set var="uriDatatypeUriJson" value="<%= uriDatatypeUriJson %>" />
+<c:set var="intDatatypeUriJson" value="<%= intDatatypeUriJson %>" />
 
 <c:set var="core" value="http://vivoweb.org/ontology/core#" />
 <c:set var="linkClass" value="${core}URLLink" />
@@ -188,7 +192,7 @@ core:rank
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeDatatypeUri" : "${intDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${rankAssertion}" ]      
       }
@@ -218,32 +222,33 @@ core:rank
     
     String subjectName = ((Individual)request.getAttribute("subject")).getName();
     
-    // Get largest existing rank value, increment by 1, for hidden rank field value
+    // Get largest existing rank value
     int maxRank = 0; // default value 
     if (objectUri == null) { // adding new webpage   
-        log.debug("getting max existing rank for subject");
         String queryStr = QueryUtils.subUriForQueryVar(RANK_QUERY, "subject", subjectUri);
         log.debug("Query string is: " + queryStr);
         try {
             ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
             if (results != null && results.hasNext()) { // there is at most one result
-                log.debug("found a rank");
                 QuerySolution soln = results.next(); 
                 RDFNode node = soln.get("rank");
                 if (node != null && node.isLiteral()) {
-                    log.debug("node value =" + node.asLiteral().getLexicalForm());
-                    int rank = node.asLiteral().getInt(); // what if it's not an int? - what gets returned?
+                    // node.asLiteral().getInt() won't return an xsd:string that 
+                    // can be parsed as an int.
+                    int rank = Integer.parseInt(node.asLiteral().getLexicalForm());
                     if (rank > maxRank) {  
                         log.debug("setting maxRank to " + rank);
                         maxRank = rank;
                     }
                 }
             }
+        } catch (NumberFormatException e) {
+            log.error("Invalid rank returned from query: not an integer value.");
         } catch (Exception e) {
             log.error(e, e);
         }
     }
-    maxRank++;
+
 %>
 
 <c:choose>
@@ -272,9 +277,11 @@ core:rank
     <v:input type="text" label="Webpage Name" id="anchor" size="70"/>
     <p><em>If left blank, the URL will be used when displaying a link to this webpage.</em></p>
     <c:if test="${editMode == 'add'}">
-        <input type="hidden" name="rank" value="<%= maxRank %>" />
+        <input type="hidden" name="rank" value="<%= maxRank + 1 %>" />
     </c:if>
     <p class="submit"><v:input type="submit" id="submit" value="${submitButtonText}" cancel="true"/></p>
 </form>
 
 <jsp:include page="${postForm}"/>
+
+
