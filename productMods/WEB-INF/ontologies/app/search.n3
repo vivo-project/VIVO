@@ -18,10 +18,13 @@
 	vitroDisplay:excludeClass core:AdvisingRelationship ;
 	vitroDisplay:excludeClass core:Authorship ;
 	vitroDisplay:excludeClass core:Position ; 
+	vitroDisplay:excludeClass core:AwardReceipt ;
 	vitroDisplay:excludeClass core:ResearchActivity ;
 	vitroDisplay:excludeClass core:EducationalTraining ;	
 	vitroDisplay:excludeClass bibo:DocumentStatus ;
 	vitroDisplay:excludeClass core:DateTimeValue ;
 	vitroDisplay:excludeClass core:DateTimeInterval ;
-	vitroDisplay:excludeClass core:URLLink .
-	
+	vitroDisplay:excludeClass core:AcademicDegree ;
+	vitroDisplay:excludeClass core:URLLink ;
+	vitroDisplay:excludeClass <http://vitro.mannlib.cornell.edu/ns/vitro/public#File> ;
+	vitroDisplay:excludeClass <http://vitro.mannlib.cornell.edu/ns/vitro/public#FileByteStream> .
