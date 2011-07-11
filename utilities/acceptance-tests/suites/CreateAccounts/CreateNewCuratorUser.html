@@ -35,6 +35,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Create New Curator User</td>
 	<td></td>
@@ -106,82 +111,52 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Accounts</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User accounts</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add new user account']</td>
+	<td>css=input.submit.add-account</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Account Editing Form</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>Username</td>
-	<td>Connie Curator</td>
+	<td>email-address</td>
+	<td>ConnieCurator@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>FirstName</td>
+	<td>first-name</td>
 	<td>Connie</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>LastName</td>
+	<td>last-name</td>
 	<td>Curator</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>RoleURI</td>
-	<td>label=curator</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Md5password</td>
-	<td>myPassword</td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter a mis-matched confirmation password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>passwordConfirmation</td>
-	<td>somethingElse</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>primaryAction</td>
+	<td>//input[@name='role' and @value='http://permissionSet-5']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertAlert</td>
-	<td>The passwords do not match.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now enter a correct password</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>passwordConfirmation</td>
-	<td>myPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>submitAdd</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Account Control Panel</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -190,29 +165,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//tr[1]/td[2]</td>
-	<td>Connie Curator</td>
+	<td>verifyElementPresent</td>
+	<td>link=ConnieCurator@cornell.edu</td>
+	<td></td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[2]/td[2]</td>
+	<td>//tr[1]/td[1]</td>
+	<td>ConnieCurator@cornell.edu</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[1]/td[2]</td>
 	<td>Connie</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[3]/td[2]</td>
+	<td>//tr[1]/td[3]</td>
 	<td>Curator</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[4]/td[2]</td>
-	<td>0</td>
+	<td>//tr[1]/td[4]</td>
+	<td>INACTIVE</td>
 </tr>
 <tr>
 	<td>verifyText</td>
-	<td>//tr[5]/td[2]</td>
-	<td>curator</td>
+	<td>//tr[1]/td[5]</td>
+	<td>Curator</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[1]/td[6]</td>
+	<td>0</td>
 </tr>
 <tr>
 	<td>comment</td>

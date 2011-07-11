@@ -40,6 +40,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Must not be logged in</td>
 	<td></td>
@@ -111,7 +116,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Accounts</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>User accounts</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,17 +131,7 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Sis Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add new user account']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>User Account Editing Form</td>
+	<td>SisAdmin@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
@@ -140,43 +140,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>RoleURI</td>
-	<td>label=system administrator</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Username</td>
-	<td>Sis Admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>FirstName</td>
-	<td>Sis</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>LastName</td>
-	<td>Admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>Md5password</td>
-	<td>myPassword</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>passwordConfirmation</td>
-	<td>myPassword</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>css=input.submit.add-account</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>User Account Control Panel</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>email-address</td>
+	<td>SisAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>first-name</td>
+	<td>Sis</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>last-name</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='role' and @value='http://permissionSet-50']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submitAdd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,27 +186,37 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Sis Admin</td>
+	<td>A new account for Sis Admin was successfully created. A notification email has been sent to SisAdmin@cornell.edu with instructions for activating the account and creating a password.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=SisAdmin@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>system administrator</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='See All User Accounts']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>User Accounts</td>
+	<td>Sis</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Sis Admin</td>
+	<td>Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>INACTIVE</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>0</td>
 	<td></td>
 </tr>
 <tr>
