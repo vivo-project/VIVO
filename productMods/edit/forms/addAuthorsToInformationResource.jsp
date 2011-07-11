@@ -302,8 +302,6 @@ SPARQL queries for existing values. --%>
 <%
     String rankPredicateUri = vivoCore + "authorRank";
     
-    // RY We should use whatever is used on the individual profile page to list
-    // this property in rank order...
     DataPropertyComparator comp = new DataPropertyComparator(rankPredicateUri);
     Collections.sort(authorships, comp);
         
