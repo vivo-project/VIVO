@@ -130,7 +130,6 @@ core:rank
     "formUrl" : "${formUrl}",
     "editKey" : "${editKey}",
     "urlPatternToReturnTo" : "${returnPathAfterSubmit}",
-    "urlPatternToCancelTo" : "${returnPathAfterCancel}",
     
     "subject"   : ["subject",    "${subjectUriJson}" ],
     "predicate" : ["predicate", "${predicateUriJson}" ],
@@ -228,7 +227,9 @@ core:rank
         <c:set var="editMode" value="add" />
         <c:set var="title" value="Add a webpage for" />        
         <c:set var="submitButtonText" value="Add webpage" />
-        <c:set var="cancelUrl" value="/individual" />
+        <%-- Cancel to where ever we came from: either directly from the profile page, or from
+             the Manage Web Pages screen. The latter has added a url param to signal itself. --%>
+        <c:set var="cancelUrl" value="${ param.cancelTo == 'manage' ? '' : '/individual' }" />
     </c:otherwise>
 </c:choose>
 

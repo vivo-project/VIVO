@@ -23,6 +23,10 @@ class, in case we want to re-enable DD without a page reload. */
     width: 15em;
 }
 
+#addAndCancelLinks {
+    margin-top: 1.5em;
+}
+
 #returnToIndividual {
     margin-left: 2em;
 }

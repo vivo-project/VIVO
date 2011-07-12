@@ -57,11 +57,12 @@
     } // else stay here to manage webpages
 
     VitroRequest vreq = new VitroRequest(request);
-    WebappDaoFactory wdf = vreq.getWebappDaoFactory();
-    vreq.setAttribute("defaultNamespace", wdf.getDefaultNamespace());
+    //WebappDaoFactory wdf = vreq.getWebappDaoFactory();
+    //vreq.setAttribute("defaultNamespace", wdf.getDefaultNamespace());
     
     String subjectName = ((Individual)request.getAttribute("subject")).getName();
     String subjectUri = (String) request.getAttribute("subjectUri");
+    String predicateUri = (String) request.getAttribute("predicateUri");
     
     List<Map<String, String>> webpages = getWebpages(subjectUri, vreq);
     vreq.setAttribute("webpages", webpages);
@@ -95,6 +96,11 @@
 
 <c:set var="subjectUri" value="<%= subjectUri %>" />
 <c:url var="returnToIndividualUrl" value="/individual?uri=${subjectUri}" />
+<c:url var="showAddFormUrl" value="/edit/editRequestDispatch.jsp">
+    <c:param name="subjectUri" value="<%= subjectUri %>" />
+    <c:param name="predicateUri" value="<%= predicateUri %>" />
+    <c:param name="cancelTo" value="manage" />
+</c:url>
 
 <jsp:include page="${preForm}"/>
 
@@ -132,8 +138,13 @@
     </c:forEach>
 </ul>
 
-<a href="${showAddFormUrl}" id="showAddForm" class="button">Add Web Page</a>
-<a href="${returnToIndividualUrl}" id="returnToIndividual">Return to Individual</a>
+<div id="addAndCancelLinks">
+    <%-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
+         These can just be ordinary links, rather than a v:input element, as in 
+         addAuthorsToInformationResource.jsp. --%>
+    <a href="${showAddFormUrl}" id="showAddForm" class="button green">Add Web Page</a>
+    <a href="${returnToIndividualUrl}" id="returnToIndividual" class="return">Return to Individual</a>
+</div>
 
 <jsp:include page="${postForm}"/>
 
