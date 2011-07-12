@@ -151,42 +151,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
+	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Edit</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>Moniker</td>
-	<td>label=[new moniker]</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>MonikerSelectAlt</td>
+	<td>tinymce</td>
 	<td>Assistant Librarian</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
@@ -341,7 +326,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Librarian, Lily | Assistant Librarian</td>
+	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
