@@ -92,10 +92,17 @@
     request.setAttribute("customCss", customCss);
 %>
 
-<c:url var="deleteWebpageUrl" value="/edit/primitiveDelete" />
-
 <c:set var="subjectUri" value="<%= subjectUri %>" />
+<c:set var="rankPredicate" value="http://vivoweb.org/ontology/core#rank" />
+
 <c:url var="returnToIndividualUrl" value="/individual?uri=${subjectUri}" />
+<c:url var="baseEditWebpageUrl" value="/edit/editRequestDispatch.jsp">
+    <c:param name="subjectUri" value="<%= subjectUri %>" />
+    <c:param name="predicateUri" value="<%= predicateUri %>" />
+    <c:param name="view" value="form" />
+</c:url>
+<c:url var="deleteWebpageUrl" value="/edit/primitiveDelete" />
+<c:url var="reorderUrl" value="/edit/reorder" />
 <c:url var="showAddFormUrl" value="/edit/editRequestDispatch.jsp">
     <c:param name="subjectUri" value="<%= subjectUri %>" />
     <c:param name="predicateUri" value="<%= predicateUri %>" />
@@ -125,7 +132,7 @@
 	            <a href="${webpage.url}">${anchor}</a>
 	        </span>
             <span class="editingLinks">
-                <a href="" class="edit">Edit</a> | 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link}" class="edit">Edit</a> | 
                 <a href="${deleteWebpageUrl}" class="remove">Delete</a> 
             </span>
         </li>    
@@ -145,6 +152,15 @@
     <a href="${showAddFormUrl}" id="showAddForm" class="button green">Add Web Page</a>
     <a href="${returnToIndividualUrl}" id="returnToIndividual" class="return">Return to Individual</a>
 </div>
+
+
+
+<script type="text/javascript">
+var customFormData = {
+    rankPredicate: '${rankPredicate}',
+    reorderUrl: '${reorderUrl}'
+};
+</script>
 
 <jsp:include page="${postForm}"/>
 
