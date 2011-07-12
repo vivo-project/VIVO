@@ -151,10 +151,17 @@ var manageWebpages = {
                   
     removeWebpage: function(link) {
         // RY Upgrade this to a modal window
-        var message = 'Are you sure you want to remove this web page?';
+        var removeLast = false,
+            message = 'Are you sure you want to remove this web page?';
+            
         if (!confirm(message)) {
             return false;
         }
+        
+        if ($(link)[0] === $('.remove:last')[0]) {
+            removeLast = true;
+        } 
+        
         $.ajax({
             url: $(link).attr('href'),
             type: 'POST', 
@@ -178,15 +185,16 @@ var manageWebpages = {
                         
                         // Actions that depend on the webpage having been removed from the DOM:
                         numWebpages = $('.webpage').length; // retrieve the new length after removing webpage from the DOM
-                        if (numWebpages > 0) {
-                            // Reorder to remove any gaps
+                        
+                        // If removed item not last, reorder to remove any gaps
+                        if (numWebpages > 0 && ! removeLast) {                            
                             manageWebpages.reorder();
-                            
-                            // If fewer than two webpages remaining, disable drag-drop
-                            if (numWebpages < 2) {
-                                manageWebpages.disableDD();
-                            }                           
                         }
+                            
+                        // If fewer than two webpages remaining, disable drag-drop
+                        if (numWebpages < 2) {
+                            manageWebpages.disableDD();
+                        }                           
                     });
 
                 } else {
