@@ -330,7 +330,14 @@
   </servlet-mapping>
 
   -->
-  
+    <servlet>
+  	<servlet-name>ProcessRdfFormController</servlet-name>
+  	<servlet-class>edu.cornell.mannlib.vitro.webapp.edit.n3editing.controller.ProcessRdfFormController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProcessRdfFormController</servlet-name>
+  	<url-pattern>/edit/process</url-pattern>
+  </servlet-mapping>
   
   <servlet>
   	<servlet-name>EditRequestDispatch</servlet-name>
@@ -375,6 +382,24 @@
   <servlet-mapping>
     <servlet-name>MenuN3EditController</servlet-name>
     <url-pattern>/menuN3Editor</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>MenuManagementController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuManagementController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuManagementController</servlet-name>
+    <url-pattern>/editDisplayModel</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MenuManagementEdit</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.MenuManagementEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuManagementEdit</servlet-name>
+    <url-pattern>/processEditDisplayModel</url-pattern>
   </servlet-mapping>
 
   <servlet>
