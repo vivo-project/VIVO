@@ -149,5 +149,6 @@ xmlns:vitro="&vitro;"
   
   <owl:AnnotationProperty rdf:about="&vitro;mostSpecificType"/>
   <owl:AnnotationProperty rdf:about="&vitro;extendedLinkedData"/>
-
+<!--Institutional Internal class -->
+<owl:AnnotationProperty rdf:about="&vitro;isMenuPageIntersectionClass"/>
 </rdf:RDF>
