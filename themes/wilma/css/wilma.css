@@ -204,7 +204,7 @@ form textarea {
 #manageWebpages a.remove:link,
 #showAddForm a.cancel:link,
 form a:link.cancel, 
-form a:visited.cancel {
+form a:visited.cancel{
     text-decoration: underline;
     color: #f70;
     border-color: none;
@@ -252,6 +252,19 @@ p.submit {
     border-width: 1px;
     color: #595B5B;
     padding: .3em;
+}
+a.return:link,
+a.return:visited {
+    text-decoration: underline;
+    color: #f70;
+    border-color: none;
+    padding-left: 3px;
+}
+a.return:hover,
+a.return:active {
+    text-decoration: none;
+    color: #f70;
+    background: none;
 }
 .navlinkblock {
     color: #5F6464;

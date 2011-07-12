@@ -27,18 +27,19 @@ class, in case we want to re-enable DD without a page reload. */
     margin-left: 2em;
 }
 
+#showAddForm a:hover.cancel {
+    color: #fff;
+    background: #f70;
+}
+
+#showAddForm a:hover.cancel {
+    color: #fff;
+    background: #f70;
+}
+
 #manageWebpages a:link.remove, 
 #manageWebpages a:visited.remove,  
-#manageWebpages a:hover.remove,
-#showAddForm a:hover.cancel {
-    color: #fff;
-    background: #f70;
+#manageWebpages a:hover.remove {
+    color: #f70;
+    background: #fff;
 }
-
-#manageWebpages a:hover.remove,
-#showAddForm a:hover.cancel {
-    color: #fff;
-    background: #f70;
-}
-
-
