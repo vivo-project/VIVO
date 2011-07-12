@@ -1,10 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-#manageWebpages {
+#webpageList {
     margin-left: 0;
 }
 
-#manageWebpages li {
+#webpageList li {
     list-style: none;
     margin-bottom: .75em;
 }
@@ -12,13 +12,13 @@
 /* Use class dd rather than jQuery UI's class ui-sortable, so that we can remove 
 the class if there's fewer than one author. We don't want to remove the ui-sortable
 class, in case we want to re-enable DD without a page reload. */
-#manageWebpages.dd li {
+#webpageList.dd li {
     padding-left: 1em;
     background: url("../images/sortable_icon.png") no-repeat left center;  
     cursor: move;  
 }
 
-#manageWebpages .webpageName {
+#webpageList .webpageName {
     display: inline-block;
     width: 15em;
 }
@@ -41,9 +41,9 @@ class, in case we want to re-enable DD without a page reload. */
     background: #f70;
 }
 
-#manageWebpages a:link.remove, 
-#manageWebpages a:visited.remove,  
-#manageWebpages a:hover.remove {
+#webpageList a:link.remove, 
+#webpageList a:visited.remove,  
+#webpageList a:hover.remove {
     color: #f70;
     background: #fff;
 }

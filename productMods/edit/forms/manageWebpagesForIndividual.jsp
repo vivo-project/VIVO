@@ -79,8 +79,6 @@
     }
     
     List<String> customJs = new ArrayList<String>(Arrays.asList(JavaScript.JQUERY_UI.path(),
-            JavaScript.CUSTOM_FORM_UTILS.path(),
-            //"/js/browserUtils.js",
             "/edit/forms/js/manageWebpagesForIndividual.js"
            ));            
     request.setAttribute("customJs", customJs);
@@ -119,7 +117,7 @@
     var webpageData = [];
 </script>
     
-<ul id="manageWebpages" <%= ulClass %>>
+<ul id="webpageList" <%= ulClass %>>
 
     <c:if test="${ empty webpages }">
         <p>This individual currently has no web pages specified. Add a new web page by clicking on the button below.</p>

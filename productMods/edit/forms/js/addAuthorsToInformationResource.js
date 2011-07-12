@@ -570,7 +570,7 @@ var addAuthorForm = {
                             // Reorder to remove any gaps
                             addAuthorForm.reorderAuthors();
                             
-                            // If less than two authors remaining, disable drag-drop
+                            // If fewer than two authors remaining, disable drag-drop
                             if (numAuthors < 2) {
                                 addAuthorForm.disableAuthorDD();
                             }                           
