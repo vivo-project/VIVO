@@ -27,6 +27,7 @@ public class PersonToGrantsModelConstructor implements ModelConstructor {
 	private Dataset dataset;
 	
 	public static final String MODEL_TYPE = "PERSON_TO_GRANTS"; 
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for specific person via all roles";
 	
 	private String personURI;
 	

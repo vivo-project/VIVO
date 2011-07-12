@@ -22,6 +22,7 @@ public class SubOrganizationWithinModelConstructor implements ModelConstructor {
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
 	public static final String MODEL_TYPE = "SUBORGANIZATION_WITHIN_HIERARCHY_MODEL"; 
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Bottom-up Organization hierarchy";
 	
 	private Dataset dataset;
 	

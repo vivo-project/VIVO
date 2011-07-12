@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
 
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
@@ -282,5 +283,11 @@ VisualizationRequestHandler {
 
 		return new TemplateResponseValues(dynamicTemplate, body);
 
+	}
+
+	@Override
+	public Actions getRequiredPrivileges() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -17,6 +17,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -478,6 +479,12 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			Dataset dataSource) throws MalformedQueryParametersException {
 		throw new UnsupportedOperationException("Utilities Visualization does not provide " 
 					+ "Short URL Response.");
+	}
+
+	@Override
+	public Actions getRequiredPrivileges() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

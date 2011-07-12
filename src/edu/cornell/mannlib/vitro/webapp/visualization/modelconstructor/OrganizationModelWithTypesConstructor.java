@@ -21,7 +21,8 @@ public class OrganizationModelWithTypesConstructor implements ModelConstructor {
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	public static final String MODEL_TYPE = "ORGANIZATION_MODEL_WITH_TYPES"; 
+	public static final String MODEL_TYPE = "ORGANIZATION_MODEL_WITH_TYPES";
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Organization hierarchy"; 
 	
 	private Dataset dataset;
 	

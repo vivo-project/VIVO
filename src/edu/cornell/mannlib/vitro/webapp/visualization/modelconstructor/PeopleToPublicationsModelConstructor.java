@@ -24,6 +24,7 @@ public class PeopleToPublicationsModelConstructor implements ModelConstructor {
 	private Dataset dataset;
 	
 	public static final String MODEL_TYPE = "PEOPLE_TO_PUBLICATIONS"; 
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Publications for all people";
 	
 	private Log log = LogFactory.getLog(PeopleToPublicationsModelConstructor.class.getName());
 	

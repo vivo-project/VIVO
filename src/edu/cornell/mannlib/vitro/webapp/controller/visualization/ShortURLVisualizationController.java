@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -18,6 +16,7 @@ import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
@@ -42,6 +41,25 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
     protected static final Syntax SYNTAX = Syntax.syntaxARQ;
     
     public static ServletContext servletContext;
+    
+    @Override
+    protected Actions requiredActions(VitroRequest vreq) {
+    	/*
+    	 * Based on the query parameters passed via URI get the appropriate visualization 
+    	 * request handler.
+    	 * */
+    	VisualizationRequestHandler visRequestHandler = 
+    			getVisualizationRequestHandler(vreq);
+    	
+    	if (visRequestHandler != null) {
+    		
+    		Actions requiredPrivileges = visRequestHandler.getRequiredPrivileges();
+			if (requiredPrivileges != null) {
+    			return requiredPrivileges;
+    		}
+    	}
+    	return super.requiredActions(vreq);
+    }
    
     @Override
     protected ResponseValues processRequest(VitroRequest vreq) {
@@ -145,7 +163,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 		 * url.
 		 * */
 		String subjectURI = null;
-		if (StringUtils.isBlank(matchedPatternGroups.get(1))) {
+		if (matchedPatternGroups.size() <= 1) {
 			
 			subjectURI = vitroRequest.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 			
@@ -226,21 +244,17 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 	 * as an input.
 	 */
 	private List<String> extractShortURLParameters(VitroRequest vitroRequest) {
-		
-		Matcher requestPatternMatcher = VisualizationFrameworkConstants
-											.SHORT_URL_REQUEST_PATTERN
-											.matcher(vitroRequest.getRequestURI()
-													.substring(vitroRequest.getContextPath().length()));
 
 		List<String> matchedGroups = new ArrayList<String>(); 
-		 
-		if(requestPatternMatcher.matches() && requestPatternMatcher.groupCount() >= 1) {
-			
-			for (int ii=1; ii<=requestPatternMatcher.groupCount(); ii++) {
-				 matchedGroups.add(requestPatternMatcher.group(ii));
-			 }
-			
-		} 
+		
+		String[] urlParams = vitroRequest.getRequestURI().substring(vitroRequest.getContextPath().length()+1).split("/");
+		
+		if (urlParams.length > 1 
+				&& urlParams[0].equalsIgnoreCase("vis")) {
+			for (int ii=1; ii < urlParams.length; ii++) {
+				matchedGroups.add(urlParams[ii]);
+			}
+		}
 		
 		return matchedGroups;
 	}

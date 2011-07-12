@@ -24,6 +24,7 @@ public class OrganizationToPublicationsForSubOrganizationsModelConstructor imple
 	private Dataset dataset;
 	
 	public static final String MODEL_TYPE = "ORGANIZATION_TO_PUBLICATIONS_FOR_SUBORGANIZATIONS"; 
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Publications for specific organization via all descendants";
 	
 	private String organizationURI;
 	

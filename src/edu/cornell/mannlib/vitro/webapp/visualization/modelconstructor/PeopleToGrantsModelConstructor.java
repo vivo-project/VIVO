@@ -27,6 +27,7 @@ public class PeopleToGrantsModelConstructor implements ModelConstructor {
 	private Dataset dataset;
 	
 	public static final String MODEL_TYPE = "PEOPLE_TO_GRANTS"; 
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for all people via all roles";
 	
 	private Log log = LogFactory.getLog(PeopleToGrantsModelConstructor.class.getName());
 	

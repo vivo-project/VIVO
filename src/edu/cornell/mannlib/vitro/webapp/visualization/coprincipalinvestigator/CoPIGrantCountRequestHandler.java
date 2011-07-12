@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizationController;
@@ -286,6 +287,11 @@ public class CoPIGrantCountRequestHandler implements VisualizationRequestHandler
 
 		return fileData;
 	
+	}
+
+	@Override
+	public Actions getRequiredPrivileges() {
+		return null;
 	}
 
 }

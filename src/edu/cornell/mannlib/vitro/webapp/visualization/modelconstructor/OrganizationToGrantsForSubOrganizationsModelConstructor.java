@@ -26,7 +26,8 @@ public class OrganizationToGrantsForSubOrganizationsModelConstructor implements 
 	
 	private Dataset dataset;
 	
-	public static final String MODEL_TYPE = "ORGANIZATION_TO_GRANTS_FOR_SUBORGANIZATIONS"; 
+	public static final String MODEL_TYPE = "ORGANIZATION_TO_GRANTS_FOR_SUBORGANIZATIONS";
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Grants for specific organization via all descendants"; 
 	
 	private String organizationURI;
 	

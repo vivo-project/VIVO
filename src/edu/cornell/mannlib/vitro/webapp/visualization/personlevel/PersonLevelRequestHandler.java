@@ -11,8 +11,8 @@ import org.apache.commons.logging.Log;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
@@ -290,5 +290,11 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 
 		return new TemplateResponseValues(standaloneTemplate, body);
 		
+	}
+
+	@Override
+	public Actions getRequiredPrivileges() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

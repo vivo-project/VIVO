@@ -25,13 +25,13 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMa
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
+import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 
 public class UtilityFunctions {
 	
@@ -284,5 +284,19 @@ public class UtilityFunctions {
 		}
 		
 		return "";
+	}
+	
+	public static String getIndividualLabelFromDAO(VitroRequest vitroRequest,
+												   String entityURI) {
+		
+		IndividualDao iDao = vitroRequest.getWebappDaoFactory().getIndividualDao();
+        Individual ind = iDao.getIndividualByURI(entityURI);
+        
+        String individualLabel = "Unknown Individual"; 
+        
+        if (ind != null) {
+        	individualLabel = ind.getName();
+        }
+		return individualLabel;
 	}
 }

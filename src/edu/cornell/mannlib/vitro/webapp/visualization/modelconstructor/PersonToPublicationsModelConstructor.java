@@ -23,7 +23,8 @@ public class PersonToPublicationsModelConstructor implements ModelConstructor {
 	
 	private Dataset dataset;
 	
-	public static final String MODEL_TYPE = "PERSON_TO_PUBLICATIONS"; 
+	public static final String MODEL_TYPE = "PERSON_TO_PUBLICATIONS";
+	public static final String MODEL_TYPE_HUMAN_READABLE = "Specific Person to Publications"; 
 	
 	private String personURI;
 	

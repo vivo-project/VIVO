@@ -45,7 +45,7 @@ public class DataVisualizationController extends VitroHttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException {
-    
+    	
 		VitroRequest vreq = new VitroRequest(request);
 	    	
     	/*
@@ -55,8 +55,15 @@ public class DataVisualizationController extends VitroHttpServlet {
     	VisualizationRequestHandler visRequestHandler = 
     			getVisualizationRequestHandler(vreq);
     	
-    	if (visRequestHandler != null) {
     	
+    	if (visRequestHandler != null) {
+    		
+    		if (visRequestHandler.getRequiredPrivileges() != null) {
+    			if (!isAuthorizedToDisplayPage(request, response, visRequestHandler.getRequiredPrivileges())) {
+                	return;
+                }
+    		}
+    		
     		/*
         	 * Pass the query to the selected visualization request handler & render the vis.
         	 * Since the visualization content is directly added to the response object we are side-

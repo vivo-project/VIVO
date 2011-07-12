@@ -21,7 +21,8 @@ public class OrganizationAssociatedPeopleModelWithTypesConstructor implements Mo
 	
 	protected static final Syntax SYNTAX = Syntax.syntaxARQ;
 	
-	public static final String MODEL_TYPE = "ORGANIZATION_ASSOCIATED_MODEL_WITH_TYPES"; 
+	public static final String MODEL_TYPE = "ORGANIZATION_ASSOCIATED_MODEL_WITH_TYPES";
+	public static final String MODEL_TYPE_HUMAN_READABLE = "People for specific organization"; 
 	
 	private Dataset dataset;
 	
