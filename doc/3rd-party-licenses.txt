@@ -80,6 +80,10 @@ sparqltag (licenses/sparqltag.LICENSE.txt)
 xpp3_min (licenses/extreme.LICENSE.txt)
 xstream (licenses/xstream.LICENSE.txt)
 
+BSD 3-clause
+---
+antisamy (licenses/antisamy.LICENSE.txt)
+
 
 CDDL 1.0
 --------
