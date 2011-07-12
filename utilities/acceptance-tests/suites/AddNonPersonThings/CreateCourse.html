@@ -40,6 +40,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/vivo/</td>
 	<td></td>
@@ -256,26 +261,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='organizer']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//h3[@id='prerequisiteFor']/a/img</td>
 	<td></td>
 </tr>
@@ -416,32 +401,32 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>startField.year</td>
+	<td>startField-year</td>
 	<td>2007</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>startField.month</td>
+	<td>startField-month</td>
 	<td>label=9</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>startField.day</td>
+	<td>startField-day</td>
 	<td>label=1</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>endField.year</td>
+	<td>endField-year</td>
 	<td>2007</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>endField.month</td>
+	<td>endField-month</td>
 	<td>label=12</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>endField.day</td>
+	<td>endField-day</td>
 	<td>label=15</td>
 </tr>
 <tr>
@@ -481,7 +466,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -617,11 +602,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Learn the basics about the general health of primates.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
