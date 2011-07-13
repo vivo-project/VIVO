@@ -393,8 +393,48 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+                            URL of Solr context used in local VIVO search. Should consist of:
+                            <pre>    scheme + servername + port + vivocontextpath + "solr"</pre>
+                            In the standard installation, the Solr context will be on the same server as VIVO,
+                            and in the same Tomcat instance. The path will be the VIVO webapp.name 
+                            (specified above) + "solr"
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.local.solr.url
+                        </td>
+                        <td>
+                            http://localhost:8080/vivosolr
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Restricts access to the Solr search platform. 
+                            One or more regular expressions, separated by commas. 
+                            When a request is made to Solr, the IP address of the requestor must match 
+                            one of the patterns, or the request will be rejected.
+                            <br/>
+                            Examples:
+                            <ul>
+                                <li>vitro.local.solr.ipaddress.mask = 127\.0\.0\.1</li>
+                                <li>vitro.local.solr.ipaddress.mask = 127\.0\.0\.1,0:0:0:0:0:0:0:1</li>
+                                <li>vitro.local.solr.ipaddress.mask = 169.254.*</li>
+                            </ul> 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.local.solr.ipaddress.mask
+                        </td>
+                        <td>
+                            127\.0\.0\.1,0:0:0:0:0:0:0:1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             Directory where the VIVO application will store the data that it creates.
-                            This includes uploaded files (usually imageS) and the Solr search index. 
+                            This includes uploaded files (usually images) and the Solr search index. 
                             Be sure this directory exists and is writable by the user who  
                             the Tomcat service is running as. 
                         </td>
