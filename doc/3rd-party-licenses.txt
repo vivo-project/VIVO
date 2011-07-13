@@ -6,6 +6,7 @@ Apache License 2.0
 licenses/apache.LICENSE.txt
 
 ant-jmeter
+batik-css
 commons-beanutils-core
 commons-betwixt
 commons-cli
@@ -30,6 +31,7 @@ jmeter
 joda-time
 json-taglib
 log4j
+nekohtml
 solr
 spring
 stax-api
