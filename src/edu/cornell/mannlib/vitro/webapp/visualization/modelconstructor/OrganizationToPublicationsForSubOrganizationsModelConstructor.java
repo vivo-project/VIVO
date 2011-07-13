@@ -77,7 +77,7 @@ public class OrganizationToPublicationsForSubOrganizationsModelConstructor imple
 	
 	private Model executeQuery(String constructQuery) {
 		
-		System.out.println("in constructed model fior orgh to publications fo " + organizationURI);
+		log.debug("[VIS CACHE] SubOrganizations Publications" + organizationURI);
 		
 		Model constructedModel = ModelFactory.createDefaultModel();
 

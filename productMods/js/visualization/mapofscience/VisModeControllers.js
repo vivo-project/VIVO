@@ -82,7 +82,7 @@ var EntityVisModeController = Class.extend({
 		me.initToolTipInfo();
 	},
 	initToolTipInfo: function() {
-//		console.log("called");
+
 		$('.filterInfoIcon').each(function () {
 		    
 			var me = $(this);
@@ -94,6 +94,8 @@ var EntityVisModeController = Class.extend({
 		        tipText = $('#toolTipOne').html();
 		    } else if (me.attr('id') == 'imageIconTwo') {
 		        tipText = $('#toolTipTwo').html();
+		    } else if (me.attr('id') == 'searchInfoIcon') {
+		        tipText = $('#searchInfoTooltipText').html();
 		    } else {
 		        tipText = $('#toolTipThree').html();
 		        tipLocation = "topRight";

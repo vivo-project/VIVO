@@ -71,23 +71,58 @@ mapped <span id="percent-mapped"></span>% of <span id="total-publications"></spa
 </div>
 </div>
 <div id="toolTipOne" style="display:none;">
-VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.<br /> <br /> 
+VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, 
+overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.<br /> <br /> 
 
-You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science -- <em><b>based solely on publications that have been loaded into this VIVO instance.</b></em><br /><br />
+You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science -- <em><b>based solely 
+on publications that have been loaded into this VIVO instance.</b></em><br /><br />
 
-Overlaid circles are larger if ${entityLabel} has many publications in that sub-discipline, and are smaller if ${entityLabel} has fewer publications in that sub-discipline.<br /><br /> 
+Overlaid circles are larger if ${entityLabel} has many publications in that sub-discipline, and are smaller if ${entityLabel} has 
+fewer publications in that sub-discipline.<br /><br /> 
 
-Circles are overlaid on the Map of Science itself, which is made of 554 interconnected sub-disciplines, shown as grey dots here. A sub-discipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 sub-disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are interconnected, and will be closer to one another on the map.
+Circles are overlaid on the Map of Science itself, which is made of 554 interconnected sub-disciplines, shown as grey dots here. 
+A sub-discipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 sub-disciplines using 
+similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are interconnected, 
+and will be closer to one another on the map.
 <br /><br /> 
-For more information on this and other maps of science, see <a href='http://mapofscience.com'>http://mapofscience.com</a> or <a href='http://scimaps.org'>http://scimaps.org</a></div>
+For more information on this and other maps of science, see <a href='http://mapofscience.com'>http://mapofscience.com</a> or 
+<a href='http://scimaps.org'>http://scimaps.org</a></div>
+
 <div id="toolTipTwo" style="display:none;">
 ${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 sub-disciplines on the map of science.
 <br /><br />
-The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color.  Each of these disciplines contains multiple sub-disciplines. You can hover over a discipline in the table below to show which overlaid circles it corresponds to on the map.
+The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color. 
+Each of these disciplines contains multiple sub-disciplines. You can hover over a discipline in the table below to show 
+which overlaid circles it corresponds to on the map.
 <br /><br />
-Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discipline is defined as a cluster of journals. We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. You can hover over a sub-discipline in the table below to show which overlaid circle it corresponds to on the map.</div>
-<div id="toolTipThree" style="display:none;">
-This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and therefore it may not be fully representative of the overall publication activity for ${entityLabel}.<br /><br />
+Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discipline is defined as a cluster of journals. 
+We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. 
+Sub-disciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. 
+You can hover over a sub-discipline in the table below to show which overlaid circle it corresponds to on the map.
 
-The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncracies may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a concern.</div>
+<br /><br /> 
+
+In the table below, <b># of pubs.</b> column indicates number of publications that fall under a particular field (sub-discipline or 
+discipline). Sometimes this number will be fractional. This happens when a journal in which the publication was published happens 
+to impact more than one field and hence the publication score is distributed into number of fractions based on the weight scores 
+of the journal in the different fields.<br /><br />
+
+<b>% activity</b> column indicates the percentage of publications that fall under a particular field.
+
+</div>
+
+<div id="toolTipThree" style="display:none;">
+This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and therefore it may not be 
+fully representative of the overall publication activity for ${entityLabel}.<br /><br />
+
+The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by 
+ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on 
+the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncrasies 
+may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a 
+concern.</div>
+
+<div id="searchInfoTooltipText" style="display:none;">
+	This search box is used to filter the table rows based on the sub-discipline (or discipline) label found in the first column.
+</div>
+
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}

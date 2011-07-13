@@ -36,6 +36,8 @@
 var contextPath = "${urls.base}";
 
 var scienceMapDataURL = "${entityMapOfScienceDataURL}";
+
+var baseImageFolderPrefix = "${urls.images}/";
 var imageFolderPrefix = "${urls.images}/visualization/";
 var mapOfScienceImageFolderPrefix  = imageFolderPrefix 
 											+ "mapofscience/";

@@ -112,7 +112,7 @@ a.clear-selected-entities {
 }
 
 .filterInfoIcon {
-	vertical-align:top;
+	/*vertical-align:top;*/
 	width:15px;
 	margin-left: 9px;
 }
@@ -138,6 +138,20 @@ a.clear-selected-entities {
 
 .science-area-tab {
 
+}
+
+th#activity-count-column,
+th#percentage-activity-column {
+}
+
+.corner-triangle {
+    border-left: 10px solid #F6F6F6;
+    border-top: 10px solid #2485AE;
+    float: right;
+    font-size: 0;
+    line-height: 0;
+    margin-right: 3px;
+    width: 0;
 }
 
 hr.subtle-hr {

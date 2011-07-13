@@ -116,6 +116,7 @@ var DataTableWidget = Class.extend({
 
 		var percentageActivityTH = $('<th>');
 		percentageActivityTH.html('% activity');
+		percentageActivityTH.attr("id", "percentage-activity-column");
 
 		tr.append(levelOfScienceAreaTH);
 		tr.append(scienceAreasTH);
@@ -208,7 +209,10 @@ var DataTableWidget = Class.extend({
 		
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=text]");
 		
-		searchInputBox.after("<span id='reset-search' title='Clear search query'>X</span>");
+		searchInputBox.css("width", "140px");
+		
+		searchInputBox.after("<span id='reset-search' title='Clear search query'>X</span>" 
+								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + baseImageFolderPrefix + "/iconInfo.png' alt='information icon' title='' />");
 		
 		$("#reset-search").live('click', function() {
 			me.widget.fnFilter("");
