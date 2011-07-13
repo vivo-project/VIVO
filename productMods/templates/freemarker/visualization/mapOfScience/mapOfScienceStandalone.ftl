@@ -52,8 +52,11 @@ corresponding changes in the included Templates. -->
     </div>
     
     <div id="main-science-areas-table-container"></div>
+    
+    <hr class="subtle-hr"/>
+    
     <div id="main-science-areas-table-footer">
-    <a id="csv" href="${entityMapOfScienceDisciplineCSVURL}" class="map-of-science-links">Export Complete Table</a>
+    <a id="csv" href="${entityMapOfScienceDisciplineCSVURL}" class="map-of-science-links">Export All Sub-Disciplines</a>
     <#-- <a class="clear-selected-entities map-of-science-links" title="Clear all selected entities.">Clear</a> -->
     </div>
 </div>		

@@ -535,6 +535,21 @@ public class MapOfScienceVisualizationRequestHandler implements
 			csvFileContent.append("\n");
 		}
 		
+		for (Map.Entry<Integer, String> currentDiscipline : MapOfScienceConstants.DISCIPLINE_ID_TO_LABEL.entrySet()) {
+			
+			Float currentDisciplineValue = disciplineToPublicationCount.get(currentDiscipline.getKey());
+			if (currentDisciplineValue == null) {
+			
+				csvFileContent.append(StringEscapeUtils.escapeCsv(currentDiscipline.getValue()));
+				csvFileContent.append(", ");
+				csvFileContent.append(0);
+				csvFileContent.append(", ");
+				csvFileContent.append(0);	
+				csvFileContent.append("\n");
+				
+			}
+		}
+		
 		return csvFileContent.toString();
 	}
 	
@@ -555,7 +570,9 @@ public class MapOfScienceVisualizationRequestHandler implements
 			
 			totalMappedPublications = result.getMappedPublications();
 		
-			for (Map.Entry<Integer, Float> currentMappedSubdiscipline : result.getMappedResult().entrySet()) {
+			Map<Integer, Float> mappedResult = result.getMappedResult();
+			
+			for (Map.Entry<Integer, Float> currentMappedSubdiscipline : mappedResult.entrySet()) {
 				
 				csvFileContent.append(StringEscapeUtils.escapeCsv(MapOfScienceConstants.SUB_DISCIPLINE_ID_TO_LABEL
 																	.get(currentMappedSubdiscipline.getKey())));
@@ -569,6 +586,20 @@ public class MapOfScienceVisualizationRequestHandler implements
 					csvFileContent.append("Not Available");
 				}
 				csvFileContent.append("\n");
+			}
+			
+			for (Map.Entry<Integer, String> currentSubdiscipline : MapOfScienceConstants.SUB_DISCIPLINE_ID_TO_LABEL.entrySet()) {
+				
+				Float currentMappedSubdisciplineValue = mappedResult.get(currentSubdiscipline.getKey());
+				if (currentMappedSubdisciplineValue == null) {
+					csvFileContent.append(StringEscapeUtils.escapeCsv(currentSubdiscipline.getValue()));
+					csvFileContent.append(", ");
+					csvFileContent.append(0);
+					csvFileContent.append(", ");
+					csvFileContent.append(0);	
+					csvFileContent.append("\n");
+				}
+				
 			}
 		}
 		
