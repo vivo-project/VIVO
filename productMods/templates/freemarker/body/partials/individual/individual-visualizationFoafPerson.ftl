@@ -18,7 +18,7 @@
     <section id="visualization" role="region">
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/co_author_icon.png">
-            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/vivo_scimap_icon_v001.png">
+            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/vivo_scimap.jpg">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl>
             <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl>
             

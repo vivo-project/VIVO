@@ -177,8 +177,8 @@ var DisciplineMarkerManager = ScimapMarkerManager.extend({
 		marker.setContent( 
 				'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
 				+ poly.label +'</b><br />'
-				+ addCommasToNumber(poly.value.toFixed(2)) + ' of publications (pubs.)<br />'
-				+ (poly.value * 100 / this.maxValue).toFixed(2) + '% of activity</div>'
+				+ addCommasToNumber(poly.value.toFixed(2)) + ' publications (pubs.)<br />'
+				+ (poly.value * 100 / this.maxValue).toFixed(2) + '% activity</div>'
 		);
 		return marker;
 	}
@@ -198,8 +198,8 @@ var SubdisciplineMarkerManager = ScimapMarkerManager.extend({
 		marker.setContent(
 			'<div style="font-size: 80%; padding: 5px; text-align: left;"><b>'
 			+ poly.label + '</b> in ' + disciplineLabel +'<br />' 
-			+ addCommasToNumber(poly.value.toFixed(2)) + ' of publications (pubs.)<br />'
-			+ (poly.value * 100 / this.maxValue).toFixed(2) + '% of activity</div>'
+			+ addCommasToNumber(poly.value.toFixed(2)) + ' publications (pubs.)<br />'
+			+ (poly.value * 100 / this.maxValue).toFixed(2) + '% activity</div>'
 		);
 		
 		return marker;

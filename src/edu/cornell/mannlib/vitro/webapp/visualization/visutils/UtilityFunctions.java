@@ -29,6 +29,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.IndividualDao;
 import edu.cornell.mannlib.vitro.webapp.visualization.collaborationutils.CollaborationData;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
+import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Collaborator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
@@ -251,11 +252,20 @@ public class UtilityFunctions {
 		return collaboratorshipNetworkURL != null ? collaboratorshipNetworkURL : "" ;
 	}
 	
-	public static boolean isEntityAPerson(VitroRequest vreq, String individualURI) {
-		return vreq.getWebappDaoFactory()
-					.getIndividualDao()
-					.getIndividualByURI(individualURI)
-					.isVClass("http://xmlns.com/foaf/0.1/Person");
+	public static boolean isEntityAPerson(VitroRequest vreq, String individualURI) 
+		throws MalformedQueryParametersException {
+		Individual individualByURI = vreq.getWebappDaoFactory()
+						.getIndividualDao()
+						.getIndividualByURI(individualURI);
+		
+		if (individualByURI != null) {
+
+			return individualByURI
+						.isVClass("http://xmlns.com/foaf/0.1/Person");	
+		} else {
+			throw new MalformedQueryParametersException("Individual with " + individualURI + " not found in the system.");
+		}
+		
 	}
 	
 

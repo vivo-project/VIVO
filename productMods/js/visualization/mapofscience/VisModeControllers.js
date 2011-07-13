@@ -61,11 +61,11 @@ var EntityVisModeController = Class.extend({
 		if (me.isUnloaded) {
 			if (sync) {
 				downloader.downloadAndWait(url, function(data) {
-						me.loadJsonData(me, data[0]);
+						me.loadJsonData(me, data);
 				});
 			} else {
 				downloader.download(url, function(data) {
-						me.loadJsonData(me, data[0]);
+						me.loadJsonData(me, data);
 				});
 			}
 		} // end if
@@ -74,12 +74,20 @@ var EntityVisModeController = Class.extend({
 		
 		$("#" + responseContainerID).unblock();
 		
+		if (data.error) {
+			$("#map-of-science-response").hide();
+			$("#error-container").show();
+			return;
+		} 
+		
+		data = data[0];
+		
 		$.each(me.widgets, function(i, widget) {
 			widget.loadJsonData(data);
 		});
 		me.isUnloaded = false;
-		
 		me.initToolTipInfo();
+		
 	},
 	initToolTipInfo: function() {
 

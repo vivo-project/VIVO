@@ -102,12 +102,25 @@ You can hover over a sub-discipline in the table below to show which overlaid ci
 
 <br /><br /> 
 
+<#--
 In the table below, <b># of pubs.</b> column indicates number of publications that fall under a particular field (sub-discipline or 
-discipline). Sometimes this number will be fractional. This happens when a journal in which the publication was published happens 
-to impact more than one field and hence the publication score is distributed into number of fractions based on the weight scores 
-of the journal in the different fields.<br /><br />
+discipline). Sometimes this number will be fractional. This happens when a journal in which the publication was published is associated 
+with more than one (sub)discipline. In these cases, the publication score is fractionally mapped based on the weight scores 
+of the journal.<br /><br />
 
 <b>% activity</b> column indicates the percentage of publications that fall under a particular field.
+-->
+
+The table below summarizes this institution's body of publications as plotted on the map of science.  
+Each row corresponds to a field (discipline or sub-discipline) on the map.
+<br /><br />
+
+The <b># of pubs.</b> column shows how many of the publications were mapped to each field.  
+This count can be fractional because some publication venues are associated with more than one field.  
+Each publication in such a venue contributes fractionally to all associated fields according to a weighting scheme.
+
+<br /><br />
+The <b>% activity</b> column shows what proportion of the publications were mapped to each field.
 
 </div>
 
@@ -122,7 +135,20 @@ may need to be cleaned up before they are recognized. You may contact a VIVO sys
 concern.</div>
 
 <div id="searchInfoTooltipText" style="display:none;">
-	This search box is used to filter the table rows based on the sub-discipline (or discipline) label found in the first column.
+	<!-- Search for specific sub-discipline (or discipline) label in the first column of the table. -->
+	List only map of science areas whose names contain this text.
+</div>
+
+<div id="error-container">
+
+<h1 id="noPublications-header">${entityLabel}</h1>
+
+    <h3 id="alternative-vis-info">Map of Science Visualization</h3>
+    <div id="error-body">
+        <p>This organization has neither sub-organizations nor people with publications in the system. 
+        Please visit the full ${entityLabel} <a href="${entityVivoProfileURL}">profile page</a> for a more complete overview.</p>
+    </div>
+
 </div>
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}

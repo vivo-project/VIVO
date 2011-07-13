@@ -32,6 +32,7 @@ import edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.Organizat
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.MapOfScienceActivity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.json.MapOfScience;
@@ -261,13 +262,19 @@ public class MapOfScienceVisualizationRequestHandler implements
 	}
 
 	private Map<String, String> prepareStandaloneDataErrorResponse() {
-
+		
+		GenericQueryMap errorDataResponse = new GenericQueryMap();
+		errorDataResponse.addEntry("error", "No Publications for this Entity found in VIVO.");
+		
+		Gson jsonErrorResponse = new Gson();
+		
 		Map<String, String> fileData = new HashMap<String, String>();
 		
 		fileData.put(DataVisualizationController.FILE_CONTENT_TYPE_KEY, 
 					 "application/octet-stream");
-		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
-					 "{\"error\" : \"No Publications for this Entity found in VIVO.\"}");
+		
+		fileData.put(DataVisualizationController.FILE_CONTENT_KEY, jsonErrorResponse.toJson(errorDataResponse));
+		
 		return fileData;
 	}
 
@@ -326,7 +333,8 @@ public class MapOfScienceVisualizationRequestHandler implements
 
 	private Map<String, String> prepareStandaloneDataResponse(
 										VitroRequest vitroRequest, 
-										Entity entity) {
+										Entity entity) 
+			throws MalformedQueryParametersException {
 
 		Map<String, String> fileData = new HashMap<String, String>();
 		
@@ -362,9 +370,10 @@ public class MapOfScienceVisualizationRequestHandler implements
 	 * @param vreq 
 	 * @param subentities
 	 * @param subOrganizationTypesResult  
+	 * @throws MalformedQueryParametersException 
 	 */
 	private String writeMapOfScienceDataJSON(VitroRequest vreq, 
-										     Entity subjectEntity) {
+										     Entity subjectEntity) throws MalformedQueryParametersException {
 
 		Gson json = new Gson();
 		Set jsonContent = new HashSet();

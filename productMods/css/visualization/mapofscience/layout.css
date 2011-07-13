@@ -211,3 +211,25 @@ a.map-of-science-links {
 .paginatedtabs {
 	font-size: 0.81em;
 }
+
+/* -------------------------------------------------------------->  */
+/* SPECIAL STYLES FOR THE error  */
+/* -------------------------------------------------------------->  */
+#error-container {
+    display: none;
+}
+
+#noPublications-header {
+    font-size: 1.375em;
+    color: #2485ae;
+    line-height: 1.3em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
+#noPublications-span  {
+    font-size:22px;
+}
+#noPublications-span a {
+    color: #84a655;
+    font-size:16px;
+}
