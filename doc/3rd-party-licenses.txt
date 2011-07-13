@@ -30,9 +30,6 @@ jmeter
 joda-time
 json-taglib
 log4j
-lucene-analyzers
-lucene-core
-lucene-highlighter
 solr
 spring
 stax-api

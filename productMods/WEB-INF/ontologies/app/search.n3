@@ -7,12 +7,12 @@
 @prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
-# All instances of a class can be excluded from the lucene 
+# All instances of a class can be excluded from the search 
 # index by adding a vitroDisplay:excludeClass property between 
-# vitroDisplay:PrimaryLuceneIndex and the URI of the class 
+# vitroDisplay:PrimarySearchIndex and the URI of the class 
 # that you would like to exclude.
 
- vitroDisplay:PrimaryLuceneIndex 
+ vitroDisplay:PrimarySearchIndex 
 	rdf:type owl:Thing ; 
 	vitroDisplay:excludeClass core:Role ;
 	vitroDisplay:excludeClass core:AdvisingRelationship ;
