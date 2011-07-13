@@ -936,7 +936,7 @@
 
   <servlet>
     <servlet-name>IndividualListController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.SolrIndividualListController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.IndividualListController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>IndividualListController</servlet-name>
@@ -954,7 +954,7 @@
 
   <servlet>
     <servlet-name>SearchController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrPagedSearchController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.PagedSearchController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
@@ -977,7 +977,7 @@
 
   <servlet>
     <servlet-name>AutocompleteController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SolrAutocompleteController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.AutocompleteController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -1027,7 +1027,7 @@
   
   <servlet>
     <servlet-name>JSON Service</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.SolrJsonServlet</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JsonServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>JSON Service</servlet-name>
