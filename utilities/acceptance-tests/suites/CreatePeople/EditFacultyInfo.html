@@ -141,7 +141,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,12 +166,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//ul[@id='links-primary']/li/a[2]/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>css=a.add-webpage &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -187,11 +182,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -221,43 +211,13 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[2]/article[4]/ul/li/a[2]/img</td>
+	<td>css=a.edit-hasCollaborator &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
 	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Faculty, Jane</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[2]/article[1]/ul/li/a[1]/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>Queen</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -311,7 +271,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -346,7 +306,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -396,7 +356,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[6]/article[1]/ul/li/a[1]/img</td>
+	<td>css=a.edit-outreachOverview &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,7 +381,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[7]/article[3]/ul/li/a[2]/img</td>
+	<td>css=a.edit-adviseeIn &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -431,7 +391,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -456,7 +416,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[7]/article[2]/ul/li/a[2]/img</td>
+	<td>css=a.edit-awardOrHonor &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +426,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,7 +561,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='add a new item to this list']</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -701,7 +661,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[9]/article[2]/ul/li/a[1]/img</td>
+	<td>css=a.edit-researcherId &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -726,7 +686,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[9]/article[3]/ul/li/a[1]/img</td>
+	<td>css=a.edit-scopusId &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -802,11 +762,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Assistant Professor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Queen</td>
 	<td></td>
 </tr>
 <tr>
