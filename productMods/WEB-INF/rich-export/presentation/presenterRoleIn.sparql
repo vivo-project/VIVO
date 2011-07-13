@@ -1,0 +1,9 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+CONSTRUCT {
+     ?presentation ?property ?object .
+} WHERE {
+     PERSON_URI core:hasPresenterRole ?presenterRole .
+     ?presenterRole core:roleIn ?presentation .
+     ?presentation ?property ?object .
+}
