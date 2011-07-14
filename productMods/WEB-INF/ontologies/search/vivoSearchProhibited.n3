@@ -7,10 +7,7 @@
 @prefix localNav: <http://vitro.mannlib.cornell.edu/ns/localnav#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 
-# All instances of a class can be excluded from the search 
-# index by adding a vitroDisplay:excludeClass property between 
-# vitroDisplay:SearchIndex and the URI of the class 
-# that you would like to exclude.
+# See vitroSearchProhibited.n3 for more information about files in this directory.
 
  vitroDisplay:SearchIndex 
 	rdf:type owl:Thing ; 
