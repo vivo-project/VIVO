@@ -147,9 +147,40 @@ SPARQL queries for existing values. --%>
     ?pubUri core:informationResourceInAuthorship ?authorshipUri .               
 </v:jsonset>
 
-
-<c:set var="publicationsClassGroupUri" value="${vivoOnt}#vitroClassGrouppublications" />
-<v:jsonset var="publicationsClassGroupUriJson">${publicationsClassGroupUri}</v:jsonset>
+<c:set var="publicationTypeLiteralOptions">
+    ["", "Select one"],
+    ["http://purl.org/ontology/bibo/AcademicArticle", "Academic Article"],
+    ["http://purl.org/ontology/bibo/Article", "Article"],
+    ["http://purl.org/ontology/bibo/AudioDocument", "Audio Document"],
+    ["http://vivoweb.org/ontology/core#BlogPosting", "Blog Posting"],
+    ["http://purl.org/ontology/bibo/Book", "Book"],
+    ["http://vivoweb.org/ontology/core#CaseStudy", "Case Study"],
+    ["http://vivoweb.org/ontology/core#Catalog", "Catalog"],
+    ["http://purl.org/ontology/bibo/Chapter", "Chapter"],
+    ["http://vivoweb.org/ontology/core#ConferencePaper", "Conference Paper"],
+    ["http://vivoweb.org/ontology/core#ConferencePoster", "Conference Poster"],
+    ["http://vivoweb.org/ontology/core#Database", "Database"],
+    ["http://purl.org/ontology/bibo/EditedBook", "Edited Book"],
+    ["http://vivoweb.org/ontology/core#EditorialArticle", "Editorial Article"],
+    ["http://purl.org/ontology/bibo/Film", "Film"],
+    ["http://purl.org/ontology/bibo/Issue", "Issue"],
+    ["http://purl.org/ontology/bibo/Journal", "Journal"],
+    ["http://vivoweb.org/ontology/core#Newsletter", "Newsletter"],
+    ["http://vivoweb.org/ontology/core#NewsRelease", "News Release"],
+    ["http://purl.org/ontology/bibo/Patent", "Patent"],
+    ["http://purl.org/ontology/bibo/Proceedings", "Proceedings"],
+    ["http://purl.obolibrary.org/obo/OBI_0000272", "Protocol"],
+    ["http://purl.org/ontology/bibo/Report", "Report"],
+    ["http://vivoweb.org/ontology/core#ResearchProposal", "Research Proposal"],
+    ["http://vivoweb.org/ontology/core#Review", "Review"],
+    ["http://purl.org/ontology/bibo/Series", "Series"],
+    ["http://vivoweb.org/ontology/core#Software", "Software"],
+    ["http://purl.org/ontology/bibo/Thesis", "Thesis"],
+    ["http://vivoweb.org/ontology/core#Video", "Video"],
+    ["http://purl.org/ontology/bibo/Webpage", "Webpage"],
+    ["http://purl.org/ontology/bibo/Website", "Website"],
+    ["http://vivoweb.org/ontology/core#WorkingPaper", "Working Paper"]
+</c:set>
 
 <c:set var="editjson" scope="request">
 {
@@ -193,10 +224,10 @@ SPARQL queries for existing values. --%>
       "pubType" : {
          "newResource"      : "false",
          "validators"       : [ ],
-         "optionsType"      : "VCLASSGROUP",
-         "literalOptions"   : [ "Select one" ],
+         "optionsType"      : "HARDCODED_LITERALS",
+         "literalOptions"   : [ ${publicationTypeLiteralOptions} ],
          "predicateUri"     : "",
-         "objectClassUri"   : "${publicationsClassGroupUriJson}",
+         "objectClassUri"   : "",
          "rangeDatatypeUri" : "",
          "rangeLang"        : "",
          "assertions"       : [ "${newPubTypeAssertion}" ]
