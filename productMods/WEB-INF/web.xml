@@ -398,6 +398,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>InstitutionalInternalClassController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.InstitutionalInternalClassController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InstitutionalInternalClassController</servlet-name>
+    <url-pattern>/processInstitutionalInternalClass</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ajaxSparqlQuery</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ajax.SparqlQueryAjaxController</servlet-class>    
   </servlet>
