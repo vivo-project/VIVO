@@ -910,8 +910,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Delete webpages</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -920,28 +925,53 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this web page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this web page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this web page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>returnToIndividual</td>
 	<td></td>
 </tr>
 <tr>
@@ -986,6 +1016,11 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
 	<td>Assistant Professor</td>
 	<td></td>
 </tr>
