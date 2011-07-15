@@ -7,7 +7,7 @@ var getPersonIndividuals = browseByVClass.getIndividuals;
 
 // Assigning the proxy function
 browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
-    url = this.dataServiceUrl + encodeURIComponent(vclassUri);
+    var url = this.dataServiceUrl + encodeURIComponent(vclassUri);
     if ( alpha && alpha != "all") {
         url = url + '&alpha=' + alpha;
     }
@@ -23,8 +23,8 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
     // Scroll to #menupage-intro page unless told otherwise
     if ( scroll != false ) {
         // only scroll back up if we're past the top of the #browse-by section
-        scrollPosition = browseByVClass.getPageScroll();
-        browseByOffset = $('#browse-by').offset();
+        var scrollPosition = browseByVClass.getPageScroll();
+        var browseByOffset = $('#browse-by').offset();
         if ( scrollPosition[1] > browseByOffset.top) {
             $.scrollTo('#menupage-intro', 500);
         }
@@ -38,14 +38,16 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
         if ( results.individuals.length == 0 ) {
             browseByVClass.emptyResultSet(results.vclass, alpha)
         } else {
+            var vclassName = results.vclass.name;
             $.each(results.individuals, function(i, item) {
                 var individual,
                     label, 
                     firstName,
                     lastName, 
                     fullName,
-                    vclassName, 
+                    mostSpecificTypes, 
                     preferredTitle,
+                    moreInfo,
                     uri, 
                     profileUrl,
                     image, 
@@ -60,9 +62,12 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
                 } else {
                     fullName = label;
                 }
-                vclassName = individual.vclassName;
+                mostSpecificTypes = individual.mostSpecificTypes;
                 if ( individual.preferredTitle ) {
                     preferredTitle = individual.preferredTitle;
+                    moreInfo = browseByVClass.getMoreInfo(mostSpecificTypes, vclassName, preferredTitle);
+                } else {
+                    moreInfo = browseByVClass.getMoreInfo(mostSpecificTypes, vclassName);
                 }
                 uri = individual.URI;
                 profileUrl = individual.profileUrl;
@@ -75,12 +80,10 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
                 listItem = '<li class="vcard individual foaf-person" role="listitem" role="navigation">';
                 listItem += '<img src="'+ image +'" width="90" alt="'+ fullName +'" />';
                 listItem += '<h1 class="fn thumb"><a href="'+ profileUrl +'" title="View the profile page for '+ fullName +'">'+ fullName +'</a></h1>';
-                // Include the calculated preferred title (see above) only if it's not empty
-                if ( preferredTitle ) {
-                    listItem += '<span class="title">'+ preferredTitle +'</span>';
+                if ( moreInfo != '' ) {
+                    listItem += '<span class="title">'+ moreInfo +'</span>';
                 }
                 listItem += '</li>';
-                // browseByVClass.individualsInVClass.append(listItem);
                 individualList += listItem;
             })
             
@@ -92,7 +95,7 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
             
             // Check to see if we're dealing with pagination
             if ( results.pages.length ) {
-                pages = results.pages;
+                var pages = results.pages;
                 browseByVClass.pagination(pages, page);
             }
             
