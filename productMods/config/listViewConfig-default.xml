@@ -30,9 +30,7 @@
                 ?object a foaf:Person .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
-                # Since we're only getting one (others removed during postprocessing),
-                # make sure it's one that's in a classgroup. This elimates types like
-                # the internal institutional class, etc.
+                # Display only a mostSpecificType that belongs to a classgroup.
                 ?typeUri vitro:inClassGroup ?classGroup .
                 ?classGroup a vitro:ClassGroup 
             }
@@ -79,6 +77,8 @@
         CONSTRUCT {
             ?subject ?property ?object .
             ?object vitro:mostSpecificType ?typeUri .
+            ?typeUri vitro:inClassGroup ?classGroup .
+            ?classGroup a vitro:ClassGroup .
             ?typeUri rdfs:label ?type .
             ?object core:preferredTitle ?title .
         } WHERE {
@@ -86,6 +86,8 @@
                 ?subject ?property ?object .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
+                ?typeUri vitro:inClassGroup ?classGroup .
+                ?classGroup a vitro:ClassGroup 
             } UNION {            
                 ?subject ?property ?object .
                 ?object core:preferredTitle ?title .
