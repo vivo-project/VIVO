@@ -30,6 +30,11 @@
                 ?object a foaf:Person .
                 ?object vitro:mostSpecificType ?typeUri .
                 ?typeUri rdfs:label ?type .
+                # Since we're only getting one (others removed during postprocessing),
+                # make sure it's one that's in a classgroup. This elimates types like
+                # the internal institutional class, etc.
+                ?typeUri vitro:inClassGroup ?classGroup .
+                ?classGroup a vitro:ClassGroup 
             }
             
             OPTIONAL { ?object core:preferredTitle ?title }
