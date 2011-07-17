@@ -465,66 +465,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 3 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//span[@id='legend-row-header']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Smith, Sally</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Zink, Zoe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Johnson, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input.entity-selector-checkbox</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='http://vivo.mydomain.edu/individual/n4285']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='http://vivo.mydomain.edu/individual/n4758']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='http://vivo.mydomain.edu/individual/n7915']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 4 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Furter, Frank</td>
 	<td></td>
@@ -532,11 +472,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Smith, Sally</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Zink, Zoe</td>
 	<td></td>
 </tr>
 <tr>
@@ -546,7 +481,87 @@
 </tr>
 <tr>
 	<td>comment</td>
+	<td class="comment">Clear visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
 	<td class="comment">Check out temporal graphs for dept grants</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Temporal Graph</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development - Temporal Graph Visualization</td>
 	<td></td>
 </tr>
 <tr>
@@ -710,36 +725,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Clear</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 people.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Furter, Frank</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Johnson, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Zink, Zoe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Smith, Sally</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Make dept sub-org of a college</td>
 	<td></td>
@@ -821,6 +806,51 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Clear visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
 	<td>Child Development</td>
 	<td></td>
 </tr>
@@ -965,23 +995,128 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//span[@id='legend-row-header']/a</td>
+	<td>comment</td>
+	<td class="comment">Clear visualization cache</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 organizations.</td>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>College of Human Ecology</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Check out temporal graphs for college grants</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>College of Human Ecology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Temporal Graph</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>College of Human Ecology - Temporal Graph Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>College of Human Ecology</td>
 	<td></td>
 </tr>
 <tr>
@@ -1096,21 +1231,6 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Child Development</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Clear</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You have selected 0 of a maximum 10 organizations.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
 	<td>link=Child Development</td>
 	<td></td>
 </tr>
