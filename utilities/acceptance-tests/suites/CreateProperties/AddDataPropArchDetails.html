@@ -152,17 +152,12 @@
 <tr>
 	<td>select</td>
 	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor,curator,dbAdmin</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>HiddenFromDisplayBelowRoleLevelUsingRoleUri</td>
-	<td>label=public</td>
+	<td>label=editor, curator, site administrator</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>ProhibitedFromUpdateBelowRoleLevelUsingRoleUri</td>
-	<td>label=editor,curator,dbAdmin</td>
+	<td>label=public</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -231,12 +226,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>public</td>
+	<td>editor, curator, site administrator</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>editor,curator,dbAdmin</td>
+	<td>public</td>
 	<td></td>
 </tr>
 <tr>
