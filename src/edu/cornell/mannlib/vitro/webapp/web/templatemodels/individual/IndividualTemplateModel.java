@@ -50,7 +50,7 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         // We don't want to use getAssertionsWebappDaoFactory() - that will 
         // reduce load scalability and miss out on data in different named 
         // graphs.  Instead, we will make a DAO factory from the main
-        // model associated with the request.
+        // model and dataset associated with the request.
         WebappDaoFactory wdf = new WebappDaoFactorySDB(
         		new SimpleOntModelSelector(
         				vreq.getJenaOntModel()),vreq.getDataset());
