@@ -40,9 +40,9 @@ page before final release.<br>
 <toc>
 <ol class="roman1">
   <li> <a href="#preparation">Before Performing the Upgrade</a> </li>
-  <li> <a href="#triple_store">Triple Store</a> (BL)</li>
+  <li> <a href="#triple_store">Triple Store</a></li>
   <li> <a href="#upgrade_process">The Upgrade Process</a> </li>
-  <li> <a href="#ontology">Ontology Changes</a> (SM)
+  <li> <a href="#ontology">Ontology Changes</a>
     <ol class="roman2">
       <li> <a href="#verify_ontology_upgrade">Verify Ontology upgrade
 process</a> </li>
@@ -93,9 +93,9 @@ data with the revised ontology. See the section on the <a
 <p> VIVO 1.3 now requires you to use Jena's SPARQL database (SDB) for
 the triple store technology.&nbsp; Jena's legacy relational database
 store (RDB) was used by VIVO 1.1.1 and earlier.&nbsp; Both SDB and RDB
-were available in VIVO 1.2 and 1.2.1.&nbsp; A VIVO 1.2 system running
-in RDB mode ... [<span style="color: rgb(255, 102, 102);">WHAT HAPPENS
-IF THEY UPGRADE in RDB MODE? - elly</span>]</p>
+were available in VIVO 1.2 and 1.2.1.&nbsp; A VIVO 1.2[.1] system running
+in RDB mode will be automatically converted to SDB mode when it is upgraded
+to VIVO 1.3.</span></p>
 <p> SDB mode caches only a fraction of the RDF data in memory. Most
 queries are issued directly against the underlying database. This
 allows VIVO installations to display data from large RDF models while
@@ -105,9 +105,9 @@ to load in SDB mode, and performance will depend on the configuration
 parameters of the database server. Additionally, advanced OWL reasoning
 (not enabled by default in either mode) is not possible in SDB mode.
 With SDB, only the default set of inferences (inferred rdf:type
-statements) are generated, though they are generated as soon as data is
+statements) are generated, and they are generated as soon as data is
 edited rather than in a background process. </p>
-<p> This copying process can take a number of hours to complete if the
+<p> A conversion from RDB to SDB mode can take a number of hours to complete if the
 installation contains a large amount of RDF data (roughly a million
 triples or more). See section <a href="#setup_sdb">Set Up SDB Store in
 the Background (Optional)</a> for instructions on how to run this
@@ -422,7 +422,7 @@ successfully.&nbsp; The ontology alignment process will create the
 following files in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
 </p>
 <dl>
-  <dt> <code>ontologies/update/logs/knowledgeBaseUpdate.log</code> </dt>
+  <dt> <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).log</code> </dt>
   <dd> A log of a summary of updates that were made to the knowledge
 base and notes about some recommended manual reviews. This file should
 end with "Finished knowledge base migration". If this file contains any
@@ -430,7 +430,7 @@ warnings they should be reviewed with your implementation team
 representative to see whether any corrective action needs to be taken. </dd>
 </dl>
 <dl>
-  <dt> <code>ontologies/update/logs/knowledgeBaseUpdate.error.log</code>
+  <dt> <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).error.log</code>
   </dt>
   <dd> A log of errors that were encountered during the upgrade
 process. This file should be empty if the upgrade was successful. </dd>
@@ -464,7 +464,7 @@ updated to the new name. </dd>
 </dl>
 <dl>
   <dt> Class or Property deletion </dt>
-  <dd> All individuals in a deleted class will be removed. <br>
+  <dd> All type assertions of a deleted class will be removed. <br>
 All statements using a deleted property will be changed to use the
 nearest available superproperty. If there is no available superproperty
 then the statement will be deleted from the knowledge base. Note that
