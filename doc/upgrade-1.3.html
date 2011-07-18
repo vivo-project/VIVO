@@ -52,7 +52,12 @@ manual review</a></li>
   </li>
   <li><a href="template">Template Changes</a> (RY)</li>
   <li><a href="listview">List View Changes</a> (RY)</li>
-  <li><a href="authorization">Authorization Changes</a> (JB)<br>
+  <li><a href="authorization">Authorization Changes</a><br>
+    <ol class="roman2">
+      <li> <a href="#accounts_created">User Accounts are created for externally authenticated users</a> </li>
+      <li> <a href="#email_on_accounts">E-mail address becomes an important part of User Accounts</a></li>
+      <li> <a href="#root_account">Each VIVO installation will have a “root” account</a></li>
+    </ol>
   </li>
   <li><a href="#setup_sdb">Set Up SDB Store in the Background
 (Optional)</a> </li>
@@ -521,15 +526,207 @@ fragments to be used only in the collated version of the query. </li>
   <li>This and other changes are documented in
 vitro/doc/list_view_configuration_guidelines.txt.</li>
 </ul>
-<h3 id="authorization">VII. Authorization changes [see JB for further
-details]</h3>
+
+
+<h3 id="authorization">VII. Authorization changes</h3>
+<p>
+  In release 1.3, the VIVO authorization system has some extensive changes. 
+  In summary, these are:
 <ul>
-  <li>selfEditing.idMatchingProperty will now match String literals as
-well as untyped literals.</li>
-  <li>'initialAdminUser' property is replaced by
-'rootUser.emailAddress' - initial password is 'rootPassword'</li>
-  <li>Tell what happens to user accounts in the migration.</li>
+<li>
+  Each user will have a user account,
+  even if the user logs in by Shibboleth or some other external authentication system.
+</li>
+<li>
+  E-mail is used to notify user's when an account is created for them, 
+  or when an administrator edits their account.
+</li>
+<li>
+  A "root" user account exists which has access to all pages and all data fields.
+  This is a powerful tool that can hold some surprises.
+</li>
 </ul>
+</p>
+
+<h4 id="accounts_created">i. User Accounts are created for externally authenticated users</h4>
+<dl>
+  <dd>
+    <p>
+      With release 1.3, each authenticated user will have a user account. 
+      If someone logs in using an external authentication system, 
+      and no user account matches their external login credentials, 
+      an account will be created.
+    </p>
+    <p>
+      The user will be prompted to enter information for the account being created: 
+      first name, last name, and e-mail address.
+    </p>
+  </dd>
+</dl>
+  
+<h4 id="email_on_accounts">ii. E-mail address becomes an important part of User Accounts</h4>
+<dl>
+  <dd>
+    <p>
+      Prior to release 1.3, each user account was identified by a Username field. 
+      This field was labeled as “E-mail address” on some pages in VIVO, 
+      but so mail was ever sent. 
+      In release 1.3, this has changed, so the e-mail address is fully used, 
+      both for identification and for communication with the user.
+    </p>
+  </dd>
+</dl>  
+
+<h5>a. User Account data is restructured</h5>
+<dl>
+  <dd>
+    <p>
+      Prior to release 1.3, the Username field (also referred to as “e-mail address”) 
+      was used for several purposes:
+      <ul>
+        <li>Idenfiying the user account.</li>
+        <li>Part of the user’s credentials when logging in (along with a password).</li>
+        <li>Connecting the user account to an external authentication system, like Shibboleth or CUWebAuth.</li>
+        <li>Connecting the user account to a personal Profile page.</li>
+      </ul>
+    </p>
+    <p>
+      With release 1.3, these functions are handled by two separate fields
+      called EmailAddress field and ExternalAuthId.
+      <ul>
+        <li>EmailAddress is used when logging in (along with a password).</li>
+        <li>EmailAddress is used to send notifications to the user about changes to his/her account (see below).</li>
+        <li>The ExternalAuthId is used when logging in using an external authentication system.</li>
+        <li>
+          The ExternalAuthId is used to connect the user account to a personal Profile page.
+          <blockquote>
+            <strong>Note:</strong> With release 1.3, the ExternalAuthId can now be matched against
+            either an untyped literal or a string literal in the Profile page. 
+          </blockquote>
+        </li>
+      </ul>
+    </p>
+    <p>
+      There are other changes to the internal structure of the user accounts data, 
+      but they are important mostly to the VIVO software developers, 
+      and you are not likely to notice them.
+    </p>
+  </dd>
+</dl>
+  
+<h5>b. Existing User Accounts are migrated</h5>
+<dl>
+  <dd>
+    <p>
+      If you are upgrading to VIVO release 1.3 from an existing VIVO installation, 
+      the user accounts in your system will be migrated into the new data structures. 
+      When migrating an account, both the EmailAddress field and the ExternalAuthId field 
+      will be set to the value of the Username field in the old account. 
+      The new account should behave as the old account did.
+    </p>
+    <p>
+      When creating a new user account, or editing an existing one, 
+      the system requires that your e-mail address be in a valid form, 
+      like <code>somebody@somewhere.edu</code>. 
+      You should plan for this as part of your migration to release 1.3
+    </p>
+  </dd>
+</dl>
+
+<h5>c. E-mail is incorporated into the workflow for User Accounts</h5>
+<dl>
+  <dd>
+    <p>
+      With release 1.3, VIVO users receive e-mail notifications 
+      when an account is created or modified for them or by them. 
+    </p>
+    <p>
+      When an administrator creates a user account, 
+      the user will receive an e-mail notification, 
+      telling them that the account has been created, 
+      and providing a link to VIVO that will allow them to set a password on the account.
+      <blockquote>
+        <strong>Note:</strong> when creating the account, 
+        the administrator may indicate that it will only be used 
+        with an external authentication system like Shibboleth or CUWebAuth. 
+        In this case, the account will not require a password, 
+        and the e-mail notification message to the user will not provide a password link.
+      </blockquote>
+    </p>
+    <p>
+      When an administrator edits a user account, he may choose to reset the password. 
+      As with a new account, the user will receive notification 
+      with a link to VIVO that will allow them to set a new password.
+    </p>
+    <p>
+      If a user changes the e-mail address on his account, 
+      he will receive a notification message to that effect.
+    </p>
+    <p>
+      If a user account is auto-created for a user with external authentication credentials, 
+      the user will receive a notification message.
+    </p>
+  </dd>
+</dl>
+
+<h5>d. Disabling e-mail notificiation</h5>
+<dl>
+  <dd>
+    <p>
+      The e-mail notification relies on two configuration properties: 
+      <code>email.smtpHost</code> and <code>email.replyTo</code>. 
+      If either of these properties is missing or empty, 
+      VIVO will not attempt to send e-mail notifications to users.
+    </p>
+    <p>
+      This can be useful for small or experimental installations of VIVO, 
+      or where e-mail notification is not desired.
+    </p>
+    <p>
+      If e-mail notifications are disabled, 
+      an administrator must set a password on each new account, 
+      since the user will have no way of setting it. 
+      When the user logs in for the first time, 
+      VIVO will require them to change their password to one of their own choosing.
+    </p>
+  </dd>
+</dl>
+
+<h4 id="root_account">iii. Each VIVO installation will have a “root” account.</h4>
+<dl>
+  <dd>
+    <p>
+      Prior to release 1.3, each VIVO installation was created with a default administrator’s account. 
+      In release 1.3, there is no such account. 
+      Instead, each VIVO installation will have a “root” account.
+    </p>
+    <p>
+      The email address for the root account is specified in deploy.properties, like this:
+      <pre>rootUser.emailAddress = vivo_root@mydomain.edu</pre>
+      The password for this account is automatically set to <code>rootPassword</code>, 
+      but you will be required to change the password the first time you log in.
+      <blockquote>
+        <strong>Note:</strong> the <code>initialAdminUser</code> is no longer use.
+      </blockquote>
+    </p>
+    <p>
+      The root account is not a site administrator’s account – 
+      it is more powerful than a site administrator’s acocunt. 
+      The root account is permitted to visit any page in a VIVO application. 
+      It is permitted to see any data property, and to enter data into any field. 
+      As such, the root account can be very useful and rather dangerous. 
+      It can also give you a distorted view of what your VIVO site looks like, 
+      since data is shown which other accounts cannot see.
+    </p>
+    <p>
+      The root account is not intended for routine, every day use. 
+      The best way to use the root account is to create a site administrator’s account. 
+      After  that, use the root account only when necessary.
+    </p>
+  </dd>
+</dl>
+
+
 <h3 id="setup_sdb">VIII. Set Up SDB Store in the Background (Optional)</h3>
 <p> If your VIVO installation is running in RDB mode, and you'd like to
 convert to SDB, you can start the conversion process in the background
