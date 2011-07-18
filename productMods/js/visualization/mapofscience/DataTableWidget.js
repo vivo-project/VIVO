@@ -237,7 +237,6 @@ var DataTableWidget = Class.extend({
 			}
 			me.currentSelectedFilter = SCIMAP_TYPE.SUBDISCIPLINE;
 			$("a#csv").attr("href", entityMapOfScienceSubDisciplineCSVURL);
-			$("a#csv").html("Export All Sub-Disciplines");
 			
 		} else {
 			
@@ -247,7 +246,6 @@ var DataTableWidget = Class.extend({
 				me.widget.fnSettings()._iDisplayLength = 13;
 			}
 			$("a#csv").attr("href", entityMapOfScienceDisciplineCSVURL);
-			$("a#csv").html("Export All Disciplines");
 			
 		}
 		

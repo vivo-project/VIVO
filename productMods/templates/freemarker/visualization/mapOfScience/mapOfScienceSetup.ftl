@@ -25,7 +25,7 @@
 
 </#if>
 
-<#assign mapOfScienceIcon = '${urls.images}/visualization/mapofscience/vivo_scimap.jpg'>
+<#assign mapOfScienceIcon = '${urls.images}/visualization/mapofscience/vivo-scimap.png'>
 
 <#assign entityMapOfScienceDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=json">
 <#assign entityMapOfScienceDisciplineCSVURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=csv&vis_mode=discipline">

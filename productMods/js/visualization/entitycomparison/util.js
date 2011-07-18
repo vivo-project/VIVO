@@ -627,7 +627,7 @@ function createLegendRow(entity, bottomDiv) {
      * there is no drill-down possible, so don't diaply the temporal graph icon.
      * */
     if (entity.visMode !== "PERSON") {
-    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity.entityURI) + '"><img src = "' + temporalGraphSmallIcon + '"/></a>');	
+    	labelDiv.append('<a class="temporal-vis-url" href="' + getTemporalVisURL(entity.entityURI) + '"><img src = "' + temporalGraphDrillDownIcon + '"/></a>');	
     }
     
 
