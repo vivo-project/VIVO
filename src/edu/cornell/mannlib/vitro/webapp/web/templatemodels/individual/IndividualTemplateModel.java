@@ -42,7 +42,7 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     private Map<String, String> generateQrData() {
 
         Map<String,String> qrData = new HashMap<String,String>();
-        WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
+        WebappDaoFactory wdf = vreq.getWebappDaoFactory();
         Collection<DataPropertyStatement> firstNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "firstName");
         Collection<DataPropertyStatement> lastNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "lastName");
         Collection<DataPropertyStatement> preferredTitles = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "preferredTitle");
