@@ -136,22 +136,6 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     	return getVisUrl(mapOfScienceVisURL);
     }
     
-    public String getSelfEditingId() {
-        String id = null;
-        String idMatchingProperty = ConfigurationProperties.getBean(getServletContext()).getProperty("selfEditing.idMatchingProperty");
-        if (! StringUtils.isBlank(idMatchingProperty)) {
-            // Use assertions model to side-step filtering. We need to get the value regardless of whether the property
-            // is visible to the current user.
-            WebappDaoFactory wdf = vreq.getAssertionsWebappDaoFactory();
-            Collection<DataPropertyStatement> ids = 
-                wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, idMatchingProperty);
-            if (ids.size() > 0) {
-                id = ids.iterator().next().getData();
-            }
-        }
-        return id;
-    }
-    
     public Map<String, String> doQrData() {
         if(qrData == null)
             qrData = generateQrData();
