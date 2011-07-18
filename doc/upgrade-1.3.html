@@ -50,9 +50,9 @@ process</a> </li>
 manual review</a></li>
     </ol>
   </li>
-  <li><a href="template">Template Changes</a> (RY)</li>
-  <li><a href="listview">List View Changes</a> (RY)</li>
-  <li><a href="authorization">Authorization Changes</a><br>
+  <li><a href="#template">Template Changes</a></li>
+  <li><a href="#listview">List View Changes</a></li> 
+  <li><a href="#authorization">Authorization Changes</a>
     <ol class="roman2">
       <li> <a href="#accounts_created">User Accounts are created for externally authenticated users</a> </li>
       <li> <a href="#email_on_accounts">E-mail address becomes an important part of User Accounts</a></li>
@@ -499,33 +499,37 @@ review the <a
 Administrator's Guide</a>. This document will focus on updating an
 existing pre 1.2 theme.<br>
 </p>
-<h3 id="template">V. Template changes [see RY for further details]</h3>
+<h3 id="template">V. Template changes</h3>
 <ul>
   <li>
-    <p>${stylesheets}, ${scripts}, and ${headScripts} add() methods now
+    <p>The <code>${stylesheets}</code>, <code>${scripts}</code>, and 
+<code>${headScripts}</code> <code>add()</code> methods now
 take the full tag as an argument. This will require a change to all
-calls to this method in the templates. This change allows for
-specification of the media and other attributes. Example:</p>
-    <ul>
-      <li>1.2: ${stylesheets.add("/css/individual/individual.css")}</li>
-      <li>1.3: ${stylesheets.add('&lt;link rel="stylesheet"
-href="${urls.base}/css/individual/individual.css" /&gt;')}</li>
-    </ul>
+calls to these methods in the templates. This change allows for
+specification of attributes such as <code>media</code> directly
+in the tag. For example:</p>
+    <blockquote>
+      1.2: <code>${stylesheets.add("/css/individual/individual.css")}</code><br />
+      1.3: <code>${stylesheets.add('&lt;link rel="stylesheet"
+href="${urls.base}/css/individual/individual.css" /&gt;')}</code>
+    </blockquote>
+    <p>Note the inclusion of <code>${urls.base}</code> in the 1.3 example.
+The <code>add()</code> method no longer prefixes the context path to the url, so the full
+url must be specified in the tag.</p>
   </li>
-  <li>The addFromTheme() methods of the ${stylesheets}, ${scripts}, and
-${headScripts} objects has been deleted.</li>
-  <li>propertyGroups.getPropertyAndRemoveFromList() has been
-deprecated. The replacement method is propertyGroups.pullProperty(). No
-change in functionality.</li>
+  <li>The <code>addFromTheme()</code> methods of the <code>${stylesheets}</code>, 
+<code>${scripts}</code>, and
+<code>${headScripts}</code> objects have been deleted. Substitute as shown in the
+preceding example.</li>
+  <li><code>propertyGroups.getPropertyAndRemoveFromList()</code> in the individual 
+templates has been deprecated. The replacement method is <code>propertyGroups.pullProperty()</code>. 
+There is no change in functionality.</li>
 </ul>
-<h3 id="listview">VI. List view changes [see RY for further details]</h3>
-<ul>
-  <li>&lt;query-base&gt; and &lt;query-collated&gt; have been replaced
-with a single query &lt;query-select&gt; that contains tags for
-fragments to be used only in the collated version of the query. </li>
-  <li>This and other changes are documented in
-vitro/doc/list_view_configuration_guidelines.txt.</li>
-</ul>
+<h3 id="listview">VI. List view changes</h3>
+<code>&lt;query-base&gt;</code> and <code>&lt;query-collated&gt;</code> have been replaced
+with a single query <code>&lt;query-select&gt;</code> that contains tags for
+fragments to be used only in the collated version of the query. This and other changes 
+are documented in <code>/vitro/doc/list_view_configuration_guidelines.txt</code>.
 
 
 <h3 id="authorization">VII. Authorization changes</h3>
