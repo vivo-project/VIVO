@@ -14,8 +14,7 @@
         <div id="wrapper-content" role="main">
             <h1>VIVO Release 1 v1.3 Upgrade Guide</h1>
             <small>
-                July 22, 2011 - Upgrading from Release 1 v1.2 to Release 1 
-                v1.3 
+                July 22, 2011 - Upgrading from Release 1 v1.2 to Release 1 v1.3
             </small>
             <toc>
                 <ul>
@@ -43,12 +42,99 @@
                 or software requirements for V1.3). 
             </p>
             <h3 id="announcement">Release Announcement for V1.3</h3>
-            <p>
-                https://confluence.cornell.edu/x/3B4DCQ - get content from the wiki
-                page before final release.
-                <br>
-            </p>
-            <!-- Release Announcement --><hr><!-- Page break --><!-- Upgrade process for V1.2 --><h2 id="upgrade">Upgrade process for V1.3</h2>
+            V<!-- Release Announcement -->IVO Release 1.3 incorporates changes to
+            the search indexing, user
+            accounts, menu management, ontology, and visualizations.
+            <br>
+            <h4>Search</h4>
+            VIVO 1.3 will feature notable improvements to the local search,
+            primarily to improve relevance ranking but also to boost the influence
+            of semantic relationships in the search. This will improve recall by
+            including text from related resources (e.g., adding a person’s grant
+            and publication titles to his or her search entry) and by boosting
+            overall relevance ranking based on the number and nature of connections
+            from one individual to others.
+            <br>
+            VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place
+            of Apache Lucene to improve indexing and faceting of search results.
+            The migration to Solr also aligns the local search with the VIVO
+            multi-site search site under development for release prior to the 2011
+            VIVO Conference.
+            <br>
+            <h4>Authorization</h4>
+            Release 1.3 provides an entirely new model of authorization within the
+            VIVO application to allow more granular control over system
+            configuration and editing. The first phase of the new user account
+            interface is included in V1.3. This interface provides a user search, a
+            root acount, and password reset functionality where the password gets
+            emailed to the user. The next phase will provide the ability to create
+            new roles.
+            <br>
+            <h4>Menu management</h4>
+            The menus across the top of the site (Home, People, Organizations,
+            Research, Events) can now be managed in a web form instead of editing
+            an RDF file. In addition to making site management much easier,
+            form-based editing also allows more control over what classes of data
+            are displayed and provides a mechanism to limit certain menu pages to
+            content identified as internal to the institution.
+            <br>
+            <h4>FreeMaker template improvements</h4>
+            While less directly visible to the public, version 1.3 also includes
+            additional changes focused directly on supporting open source community
+            involvement in extending and customizing VIVO. The development team
+            began a year ago to transition VIVO’s code base away from Java Server
+            Pages to the FreeMarker page templating system that much more cleanly
+            separates internal application programming logic from page display.
+            <br>
+            <h4>Visualization</h4>
+            The visualization team has implemented a Science Map visualization,
+            which allows users to visually explore the scientific strengths of a
+            university, school, department, or person in the VIVO instance. Users
+            will be able to see where an organization or person’s interests lay
+            across 13 major scientific disciplines or 554 sub-disciplines, and will
+            be able to see how these disciplines and sub-disciplines interrelate
+            with one another on the map of science. Wireframes and design
+            documentation for upcoming enhanced versions of the Science Map
+            visualization have already been developed; the Science Map
+            visualization will most likely be in the form of a PDF that a user can
+            download.
+            <br>
+            Several visualization also now provide a caching feature that improves
+            performance after the initial processing.
+            <br>
+            <h4>QR Codes</h4>
+            Pages for people in VIVO have the option of displaying QR codes.
+            <br>
+            <h4>Ontology changes</h4>
+            <ul>
+                <li>
+                    support for certifications and licenses
+                </li>
+                <li>
+                    expanded support for intellectual property (patents) (it was
+                    there as stub before but didn't allow common things such as assignee
+                    and issuer)
+                </li>
+                <li>
+                    support for editorial, reviewing and organizing activities
+                </li>
+                <li>
+                    expanded shared geographical instance data vocabulary to include
+                    the 50 U.S. states
+                </li>
+                <li>
+                    representing specific types of EducationalTraining:
+                    PostdoctoralTraining, Internship, MedicalResidency
+                </li>
+            </ul>
+            <h4>Linked open data</h4>
+            Responses to linked data requests have been enhanced to include
+            additional context about any individual, in working toward a goal of
+            being able to provide all the data in a person's profile available as
+            RDF via a single web request.
+            <br>
+            <br>
+            <hr><!-- Page break --><!-- Upgrade process for V1.2 --><h2 id="upgrade">Upgrade process for V1.3</h2>
             <toc>
                 <ol class="roman1">
                     <li>
@@ -92,13 +178,9 @@
                             </li>
                             <li>
                                 <a href="#root_account">Each VIVO installation will have a
-                                    “root” account</a>
+                                    'root' account</a>
                             </li>
                         </ol>
-                    </li>
-                    <li>
-                        <a href="#setup_sdb">Set Up SDB Store in the Background
-                            (Optional)</a>
                     </li>
                 </ol>
             </toc>
@@ -123,8 +205,8 @@
             </p>
             <ul>
                 <li>
-                    If you are still in RDB mode, it is required that you 
-                    move your triple store to SDB while still at V1.2 (see <a href="ejc12_upgrade-1.3.html#triple_store">Triple Store</a>
+                    If you are still in RDB mode, it is required that you move your 
+                    triple store to SDB while still at V1.2 (see <a href="ejc12_upgrade-1.3.html#triple_store">Triple Store</a>
                     info 
                     below).&nbsp; 
                     <br>
@@ -144,7 +226,8 @@
                     First-time login of the administrator account after the upgrade
                     process is complete will use the password previously set, NOT the
                     default password used on the first login after the initial 
-                    installation. 
+                    installation. With V1.3 there is also a new root user.  Please see the
+					section on <a href="#authorization">Authorization changes</a> for more information.
                 </li>
                 <li>
                     The first time Apache Tomcat starts up after the upgrade, it
@@ -158,15 +241,15 @@
                 VIVO 1.3 now requires you to use Jena's SPARQL database (SDB) for
                 the triple store technology.&nbsp; Jena's legacy relational database
                 store (RDB) was used by VIVO 1.1.1 and earlier.&nbsp; Both SDB and RDB
-                were available in VIVO 1.2 and 1.2.1.&nbsp; It is required that 
-                you move your triple store to SDB while still at V1.2. 
+                were available in VIVO 1.2 and 1.2.1.&nbsp; It is required that you 
+                move your triple store to SDB while still at V1.2. 
             </p>
             <p>
                 SDB mode caches only a fraction of the RDF data in memory. Most
                 queries are issued directly against the underlying database. This
                 allows VIVO installations to display data from large RDF models while
                 requiring only a small amount of server memory to run the application.
-                There is a tradeoff in response time: pages make take slightly longer
+                There is a tradeoff in response time: pages may take slightly longer
                 to load in SDB mode, and performance will depend on the configuration
                 parameters of the database server. Additionally, advanced OWL reasoning
                 (not enabled by default in either mode) is not possible in SDB mode.
@@ -176,15 +259,14 @@
             </p>
             <p>
                 A conversion from RDB to SDB mode can take a number of hours to
-                complete if the
-                installation contains a large amount of RDF data (roughly a million
-                triples or more).&nbsp; You can start the conversion process in the
-                background
-                while the RDB system is running. This will reduce the delay in initial
-                startup after the application is redeployed with deploy.properties set 
-                for SDB. <span style="font-weight: bold;">Note that it is important
-                    not to edit any data anywhere in the
-                    application while this background conversion is running</span>. 
+                complete if the installation contains a large amount of RDF data
+                (roughly a million triples or more).&nbsp; You can start the conversion
+                process in the background while the RDB system is running. This will
+                reduce the delay in initial startup after the application is redeployed 
+                with deploy.properties set for SDB. <span style="font-weight: bold;">Note
+                    that
+                    it is important not to edit any data anywhere in the application
+                    while this background conversion is running</span>. 
             </p>
             <p>
                 To start the SDB conversion, log in as a system administrator and
@@ -215,14 +297,14 @@
                 2. Create a new deploy.properties using the same values as in your
                 previous installation and set values for the new variables as described
                 below (vitro.local.solr.url, vitro.local.solr.ipaddress.mask,
-                vitro.home.directory,
-                email.smptHost, email.replyTo, rootUser.emailAddress)
+                vitro.home.directory, email.smptHost, email.replyTo, 
+                rootUser.emailAddress) 
                 <br>
             </p>
             <p>
                 <!-- deploy.properties table from install.html -->
             </p>
-            <table>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
                 <tbody>
                     <tr>
                         <th>
@@ -324,14 +406,14 @@
                             Examples:
                             <ul>
                                 <li>
-                                    vitro.local.solr.ipaddress.mask = 127\.0\.0\.1
+                                    vitro.local.solr.ipaddress.mask = 127\.0\.0\.1 
                                 </li>
                                 <li>
-                                    vitro.local.solr.ipaddress.mask =
-                                    127\.0\.0\.1,0:0:0:0:0:0:0:1
+                                    vitro.local.solr.ipaddress.mask = 
+                                    127\.0\.0\.1,0:0:0:0:0:0:0:1 
                                 </li>
                                 <li>
-                                    vitro.local.solr.ipaddress.mask = 169.254.*
+                                    vitro.local.solr.ipaddress.mask = 169.254.* 
                                 </li>
                             </ul>
                         </td>
@@ -650,9 +732,7 @@
                         implementation sites and a copy of your institution's tracking code, 
                         see the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO
                             Google
-                            Analytics
-                            wiki
-                            page</a>. 
+                            Analytics wiki page</a>. 
                     </li>
                     <li>
                         If you had used the <code>vivo/contrib/FLShibboleth</code>
@@ -671,7 +751,7 @@
                 that modification. 
             </p>
             <p>
-                5. Stop Apache Tomcat and run ant by typing: <code>ant all</code>
+                5. Stop Apache Tomcat and from your VIVO source directory, run ant by typing: <code>ant all</code>
             </p>
             <p>
                 6. Start Apache Tomcat and log in to VIVO. 
@@ -790,14 +870,14 @@
             <ul>
                 <li>
                     <p>
-                        The <code>${stylesheets}</code>, <code>${scripts}</code>, and <code>${headScripts}</code>
+                        The <code>${stylesheets}</code>, <code>${scripts}</code>, and<code>${headScripts}</code>
                         <code>add()</code>
-                        methods now
-                        take the full tag as an argument. This will require a change to all
-                        calls to these methods in the templates. This change allows for 
-                        specification of attributes such as <code>media</code>
-                        directly
-                        in the tag. For example:
+                        methods now take
+                        the full tag as an argument. This will require a change to all calls to
+                        these methods in the templates. This change allows for specification of 
+                        attributes such as <code>media</code>
+                        directly in the tag. For 
+                        example: 
                     </p>
                     <blockquote>
                         1.2: <code>${stylesheets.add("/css/individual/individual.css")}</code>
@@ -807,53 +887,48 @@
                     </blockquote>
                     <p>
                         Note the inclusion of <code>${urls.base}</code>
-                        in the 1.3
-                        example. 
-                        The <code>add()</code>
-                        method no longer prefixes the context path to
-                        the url, so the full
-                        url must be specified in the tag.
+                        in the 1.3 
+                        example. The <code>add()</code>
+                        method no longer prefixes the context 
+                        path to the url, so the full url must be specified in the tag. 
                     </p>
                 </li>
                 <li>
                     The <code>addFromTheme()</code>
-                    methods of the <code>${stylesheets}</code>,<code>${scripts}</code>, and<code>${headScripts}</code>
-                    objects have been deleted. Substitute
-                    as shown in the
-                    preceding example.
+                    methods of the <code>${stylesheets}</code>,<code>${scripts}</code>,
+                    and<code>${headScripts}</code>
+                    objects have been deleted. Substitute as 
+                    shown in the preceding example. 
                 </li>
                 <li>
                     <code>propertyGroups.getPropertyAndRemoveFromList()</code>
-                    in the 
-                    individual templates has been deprecated. The replacement method is <code>propertyGroups.pullProperty()</code>.
-                    There is no change in functionality.
+                    in
+                    the individual templates has been deprecated. The replacement method is<code>propertyGroups.pullProperty()</code>. There is no change in 
+                    functionality. 
                 </li>
             </ul>
             <h3 id="listview">VI. List view changes</h3>
             <code>&lt;query-base&gt;</code>
             and <code>&lt;query-collated&gt;</code>
-            have been replaced 
-            with a single query <code>&lt;query-select&gt;</code>
-            that contains
-            tags for
-            fragments to be used only in the collated version of the query. This 
-            and other changes are documented in <code>/vitro/doc/list_view_configuration_guidelines.txt</code>.<h3 id="authorization">VII. Authorization changes</h3>
+            have been replaced with a single query <code>&lt;query-select&gt;</code>
+            that contains tags for fragments to be used only in the collated 
+            version of the query. This and other changes are documented in <code>/vitro/doc/list_view_configuration_guidelines.txt</code>.<h3 id="authorization">VII. Authorization changes</h3>
             <p>
-                In release 1.3, the VIVO authorization system has some extensive
-                changes. In summary, these are:
+                In release 1.3, the VIVO authorization system has some extensive 
+                changes. In summary, these are: 
             </p>
             <ul>
                 <li>
-                    Each user will have a user account, even if the user logs in by
-                    Shibboleth or some other external authentication system.
+                    Each user will have a user account, even if the user logs in by 
+                    Shibboleth or some other external authentication system. 
                 </li>
                 <li>
-                    E-mail is used to notify user's when an account is created for
-                    them, or when an administrator edits their account.
+                    E-mail is used to notify user's when an account is created for 
+                    them, or when an administrator edits their account. 
                 </li>
                 <li>
-                    A "root" user account exists which has access to all pages and
-                    all data fields. This is a powerful tool that can hold some surprises.
+                    A "root" user account exists which has access to all pages and 
+                    all data fields. This is a powerful tool that can hold some surprises. 
                 </li>
             </ul>
             <h4 id="accounts_created">i. User Accounts are created for externally
@@ -879,7 +954,7 @@
                     <p>
                         Prior to release 1.3, each user account was identified by a
                         Username field. This field was labeled as “E-mail address” on some
-                        pages in VIVO, but so mail was ever sent. In release 1.3, this has
+                        pages in VIVO, but no mail was ever sent. In release 1.3, this has
                         changed, so the e-mail address is fully used, both for identification 
                         and for communication with the user. 
                     </p>
@@ -890,22 +965,22 @@
                 <dd>
                     <p>
                         Prior to release 1.3, the Username field (also referred to as 
-                        “e-mail address”) was used for several purposes: 
+                        'e-mail address') was used for several purposes: 
                     </p>
                     <ul>
                         <li>
-                            Idenfiying the user account.
+                            Idenfiying the user account. 
                         </li>
                         <li>
-                            Part of the user’s credentials when logging in (along with a
-                            password).
+                            Part of the user’s credentials when logging in (along with a 
+                            password). 
                         </li>
                         <li>
-                            Connecting the user account to an external authentication
-                            system, like Shibboleth or CUWebAuth.
+                            Connecting the user account to an external authentication 
+                            system, like Shibboleth or CUWebAuth. 
                         </li>
                         <li>
-                            Connecting the user account to a personal Profile page.
+                            Connecting the user account to a personal Profile page. 
                         </li>
                     </ul>
                     <p>
@@ -914,15 +989,16 @@
                     </p>
                     <ul>
                         <li>
-                            EmailAddress is used when logging in (along with a password).
+                            EmailAddress is used when logging in (along with a 
+                            password). 
                         </li>
                         <li>
-                            EmailAddress is used to send notifications to the user about
-                            changes to his/her account (see below).
+                            EmailAddress is used to send notifications to the user about 
+                            changes to his/her account (see below). 
                         </li>
                         <li>
-                            The ExternalAuthId is used when logging in using an external
-                            authentication system.
+                            The ExternalAuthId is used when logging in using an external 
+                            authentication system. 
                         </li>
                         <li>
                             The ExternalAuthId is used to connect the user account to a
@@ -955,8 +1031,9 @@
                     </p>
                     <p>
                         When creating a new user account, or editing an existing one, 
-                        the system requires that your e-mail address be in a valid form, like <code>somebody@somewhere.edu</code>. 
-                        You should plan for this as part of your migration to release 1.3 
+                        the system requires that your e-mail address be in a valid form, like <code>somebody@somewhere.edu</code>.
+                        You 
+                        should plan for this as part of your migration to release 1.3 
                     </p>
                 </dd>
             </dl>
@@ -1003,9 +1080,9 @@
                 <dd>
                     <p>
                         The e-mail notification relies on two configuration properties:<code>email.smtpHost</code>
-                        and <code>email.replyTo</code>. If
-                        either of these properties is missing or empty, VIVO will not attempt 
-                        to send e-mail notifications to users. 
+                        and <code>email.replyTo</code>. If either of these properties is
+                        missing or empty, VIVO will not attempt to send e-mail notifications to 
+                        users. 
                     </p>
                     <p>
                         This can be useful for small or experimental installations of 
@@ -1019,7 +1096,7 @@
                     </p>
                 </dd>
             </dl>
-            <h4 id="root_account">iii. Each VIVO installation will have a “root”
+            <h4 id="root_account">iii. Each VIVO installation will have a 'root'
                 account.</h4>
             <dl>
                 <dd>
@@ -1034,7 +1111,8 @@
                     </p>
                     <pre>rootUser.emailAddress = vivo_root@mydomain.edu</pre>
                     The password for this account is automatically set to <code>rootPassword</code>,
-                    but you will be required to change the password the first time you log
+                    but
+                    you will be required to change the password the first time you log
                     in.
                     <blockquote>
                         <strong>Note:</strong>
