@@ -7,3 +7,5 @@
 <a href="${individual.profileUrl}">${individual.name}</a>
 
 <@p.displayTitle individual />
+
+<p>${individual.snippet}</p>
