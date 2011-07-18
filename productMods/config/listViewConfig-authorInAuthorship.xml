@@ -28,7 +28,7 @@
             <critical-data-required>
             FILTER ( bound(?infoResource) )
             </critical-data-required>
-        } ORDER BY <collated> ?subclass </collated> ?infoResourceName   
+        } ORDER BY <collated> ?subclass </collated> DESC(?dateTime) ?infoResourceName   
     </query-select>
 
     <query-construct>
