@@ -19,6 +19,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMa
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.Route;
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.SimpleOntModelSelector;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.WebappDaoFactorySDB;
 
 public class IndividualTemplateModel extends BaseIndividualTemplateModel {
 
@@ -42,7 +44,17 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     private Map<String, String> generateQrData() {
 
         Map<String,String> qrData = new HashMap<String,String>();
-        WebappDaoFactory wdf = vreq.getWebappDaoFactory();
+        
+        // BJL23 - Apparently this needs a special DAO factory because the 
+        // normal one (usually) filters the contact info.
+        // We don't want to use getAssertionsWebappDaoFactory() - that will 
+        // reduce load scalability and miss out on data in different named 
+        // graphs.  Instead, we will make a DAO factory from the main
+        // model associated with the request.
+        WebappDaoFactory wdf = new WebappDaoFactorySDB(
+        		new SimpleOntModelSelector(
+        				vreq.getJenaOntModel()),vreq.getDataset());
+        
         Collection<DataPropertyStatement> firstNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "firstName");
         Collection<DataPropertyStatement> lastNames = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, FOAF + "lastName");
         Collection<DataPropertyStatement> preferredTitles = wdf.getDataPropertyStatementDao().getDataPropertyStatementsForIndividualByDataPropertyURI(individual, CORE + "preferredTitle");
