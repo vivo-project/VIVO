@@ -29,7 +29,7 @@
 <#assign organizationPublicationTemporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_comparison&uri=${organizationURI}&vis_mode=json">
 <#assign organizationGrantTemporalGraphDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=entity_grant_count&uri=${organizationURI}&vis_mode=json">
 
-<#assign temporalGraphSmallIcon = '${urls.images}/visualization/temporalgraph/temporal-drill-up.png'>
+<#assign temporalGraphDrillUpIcon = '${urls.images}/visualization/temporalgraph/temporal-drill-up.png'>
 <#assign temporalGraphDrillDownIcon = '${urls.images}/visualization/temporalgraph/temporal-drill-down.png'>
 
 <#assign temporalGraphDownloadCSVCommonURL = '${urls.base}${dataVisualizationURLRoot}?uri=${organizationURI}&labelField=label'>
@@ -101,7 +101,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 <script language="JavaScript" type="text/javascript">
     
 var contextPath = "${urls.base}";
-var temporalGraphSmallIcon = "${temporalGraphSmallIcon}";
+var temporalGraphDrillUpIcon = "${temporalGraphDrillUpIcon}";
 var temporalGraphDrillDownIcon = "${temporalGraphDrillDownIcon}";
 var subOrganizationVivoProfileURL = "${subOrganizationVivoProfileURL}";
 

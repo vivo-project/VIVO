@@ -7,7 +7,7 @@
         <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a></span>
         <span id="subject-parent-entity"><span>|&nbsp;&nbsp;</span>
             <a id="subject-parent-entity-profile-url" href="#" title="Parent organization of ${organizationLabel}"></a>&nbsp;
-            <a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphSmallIcon}" width="15px" height="15px"/></a>
+            <a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphDrillUpIcon}" width="15px" height="15px"/></a>
         </span></h2><br>
         
         <div id="leftblock">
