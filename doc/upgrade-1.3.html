@@ -348,11 +348,8 @@ impact on memory usage if
         <li> The organization tree is deep, </li>
         <li> The number of grants and publications is large. </li>
       </ul>
-The VIVO developers are working to make this visualization more
-efficient. In the meantime, VIVO release 1.2 guards against this impact
-by disabling the temporal graph visualization unless the
-"visualization.temporal" flag is set to "enabled". To enable it,
-uncomment the line for this setting. </td>
+VIVO 1.3 release mitigates this problem by the way of a caching mechanism and 
+ hence we can safely set this to be enabled by default. </td>
     </tr>
     <tr class="odd_row">
       <td> visualization.temporal </td>
@@ -375,7 +372,7 @@ http://vivo.psm.edu/individual/n2862</span> <br>
     </tr>
     <tr class="odd_row">
       <td> visualization.topLevelOrg </td>
-      <td> http://vivo-trunk.indiana.edu/individual/topLevelOrgURI </td>
+      <td> 	http://vivo.mydomain.edu/individual/topLevelOrgURI </td>
     </tr>
   </tbody>
 </table>
