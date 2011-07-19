@@ -168,9 +168,8 @@ var DisciplineMarkerManager = ScimapMarkerManager.extend({
 		this._super(map, colorStrategy, sizeCoder);
 		this.layer = DISCIPLINES;
 	},
-	createMarker: function(subdisciplineKey, density) {
+	createMarker: function(key, density) {
 		var me = this;
-		var key = SUBDISCIPLINES[subdisciplineKey].discipline;
 		var marker = this._super(key, density);
 		var poly = marker.polygon;
 		
