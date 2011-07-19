@@ -8,4 +8,4 @@
 
 <@p.displayTitle individual />
 
-<p>${individual.snippet}</p>
+<p class="snippet">${individual.snippet}</p>
