@@ -6,6 +6,7 @@ var ScimapWidget = Class.extend({
 		me.activeManager = null;
 		me.isUnloaded = true;
 		me.map = map;
+		
 		me.sliderControl = sliderControl;
 		me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map);
 		me.disciplineLabelsControl = new CheckBoxPanel({ 
@@ -65,24 +66,47 @@ var ScimapWidget = Class.extend({
 		me.pubsWithInvalidJournals = data.pubsWithInvalidJournals;
 		me.pubsMapped = data.pubsMapped;
 		
+		var scienceActivities = {};
+		scienceActivities[SCIMAP_TYPE.DISCIPLINE] = me._collateDisciplineActivity(data.subdisciplineActivity);
+		scienceActivities[SCIMAP_TYPE.SUBDISCIPLINE] = data.subdisciplineActivity;
+		
 		this.isUnloaded = false;
+		
 		$.each(this.keyToMarkerManagers, function(key, manager) {
+			
 			// Need to create the AreaSizeCoding function
 			manager.setSizeCoder(new CircleSizeCoder({ 
 				scaler: new Scaler({ maxValue: me.pubsMapped }) 
 			}));
-			//markerManager.setSiseCodingFunction(new AreaSizeCoding(0, data.pubsMapped));
-			$.each(data.subdisciplineActivity, function(subdiscipline, density) {
+			
+			$.each(scienceActivities[key], function(science, density) {
 		
 				// Create marker and add it to manager
-				var marker = manager.createMarker(subdiscipline, density);
+				var marker = manager.createMarker(science, density);
 				
-			}); // end each subdisciplineActivity
+			}); // end each scienceActivity
 			
 			manager.sort();
 		}); // end each markerManagers
 		me.updateMap();
 	},
+	
+	_collateDisciplineActivity: function(subdiscipline) {
+		
+		var disciplineToActivity = {};
+		
+		$.each(DISCIPLINES, function(id, discipline) {
+			disciplineToActivity[id] = 0.0;
+		});
+		
+		$.each(subdiscipline, function(key, activity) {
+			var currentSubdisciplinesDiscipline = SUBDISCIPLINES[key].discipline;
+			disciplineToActivity[currentSubdisciplinesDiscipline] += activity; 
+		});
+		
+		return disciplineToActivity;
+	},
+	
 	mouseIn: function(key, childKey) {
 		var manager = this.getMarkerManager(key);
 		// Focus if only it is an active manager

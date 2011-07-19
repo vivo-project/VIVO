@@ -110,9 +110,11 @@ var CirclePolygon = Polygon.extend({
 			var projection = map.getProjection();
 			var centerPoint = projection.fromLatLngToPoint(me.options.center);
 			var radius = me.options.radius;
-	
+			
+			var incrementDegreeBy = (radius > 2) ? 1 : 10;
+			
 			// Create polygon points (extra point to close polygon)
-			for (var degree = 0; degree < 360; degree++) {
+			for (var degree = 0; degree < 360; degree+=incrementDegreeBy) {
 				var radian = degreeToRadians(degree);
 				var x = centerPoint.x + (radius * Math.sin(radian));
 				var y = centerPoint.y + (radius * Math.cos(radian));
@@ -147,4 +149,3 @@ var CirclePolygon = Polygon.extend({
 		}));
 	}
 });
-
