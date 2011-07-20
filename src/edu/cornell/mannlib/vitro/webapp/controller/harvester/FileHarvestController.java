@@ -85,7 +85,6 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      * Absolute path on the server of the Harvester root directory.  Include final slash.
      */
     private static final String PATH_TO_HARVESTER = "/usr/share/vivo/harvester/";
-//    private static final String PATH_TO_HARVESTER = "/home/mbarbieri/workspace/HarvesterDev/";
 
     /**
      * Relative path from the Harvester root directory to the main area reserved for the VIVO File Harvest feature.  Include
