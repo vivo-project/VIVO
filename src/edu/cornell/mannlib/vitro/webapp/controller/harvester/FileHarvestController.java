@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -82,11 +83,6 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     private static final String PATH_TO_UPLOADS = "harvester/";
 
     /**
-     * Absolute path on the server of the Harvester root directory.  Include final slash.
-     */
-    private static final String PATH_TO_HARVESTER = "/usr/share/vivo/harvester/";
-
-    /**
      * Relative path from the Harvester root directory to the main area reserved for the VIVO File Harvest feature.  Include
      * final slash.
      */
@@ -130,8 +126,22 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         }
     }
 
+    /**
+     * This is the absolute path on the server of the Harvester root directory, including the final slash.
+     * Unfortunately, this value is not known at the time the servlet is loaded, so we need to initialize
+     * this in the init() method. I hope nobody calls for this before the servlet is initialized.
+     */
+    private static volatile String pathToHarvester;
 
     @Override
+	public void init() throws ServletException {
+    	pathToHarvester = ConfigurationProperties.getBean(getServletContext()).getProperty("harvester.location"); 
+    	if (pathToHarvester == null) {
+    		throw new UnavailableException("The deploy.properties file does not contain a value for 'harvester.location'");
+    	}
+	}
+
+	@Override
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
             cleanUpOldSessions();
@@ -178,8 +188,10 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     public static String getHarvesterPath()
     {
-        String harvesterPath = PATH_TO_HARVESTER;
-        return harvesterPath;
+    	if (pathToHarvester == null) {
+    		throw new IllegalStateException("FileHarvestController has not been initialized yet.");
+    	}
+    	return pathToHarvester;
     }
 
     /**
@@ -188,7 +200,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     public static String getFileHarvestRootPath()
     {
-        String fileHarvestRootPath = PATH_TO_HARVESTER + PATH_TO_FILE_HARVEST_ROOT;
+        String fileHarvestRootPath = getHarvesterPath() + PATH_TO_FILE_HARVEST_ROOT;
         return fileHarvestRootPath;
     }
 
@@ -527,7 +539,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      * @return the location in which the ready-to-run scripts will be placed
      */
     private static String getScriptFileLocation() {
-        return PATH_TO_HARVESTER + PATH_TO_HARVESTER_SCRIPTS + "temp/";
+        return getHarvesterPath() + PATH_TO_HARVESTER_SCRIPTS + "temp/";
     }
     
     
