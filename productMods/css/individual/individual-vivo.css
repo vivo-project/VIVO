@@ -1,5 +1,87 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+/* <------ INDIVIDUAL INTRO - LEFT SIDE CONTENT */
+ul#individual-tools {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 20px;
+    list-style-type: none;
+}
+ul#individual-tools li {
+    padding-right: 9px;
+    float: left;
+}
+.qtip-content h5 {
+    margin: 0;
+    padding: 0;
+}
+input#uriLink {
+    margin: 0;
+    width: 350px;
+    font-size: .8em;
+}
+a.close {
+    float: right;
+    margin-right: .3em;
+    font-size: .8em;
+}
+ul#individual-phone {
+    clear: both;
+    list-style-type: circle;
+}
+ul#individual-phone li {
+    font-size: .875em;
+}
+ul#individual-phone li:last-child {
+    margin-bottom: 10px;
+}
+ul#individual-phone li:first-child {
+    margin-top: 10px;
+}
+.icon-phone, .icon-email {
+    padding-right: 5px;
+}
+#individual-intro ul.individual-urls {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+#individual-intro ul.individual-urls li {
+    font-size: .875em;
+    line-height: 1.7em;
+}
+ul.individual-emails {
+    clear: both;
+    padding-left: 0;
+}
+#additional-emails li:last-child {
+    margin-bottom: 18px;
+}
+ul.individual-emails li {
+    font-size: .875em;
+    line-height: 1.3em;
+}
+ul#webpages{
+    margin-bottom: 5px;
+}
+ul#webpages li,
+ul#primary-email li,
+ul#additional-emails li {
+    word-wrap: break-word;
+}
+#phoneNumber {
+    margin-top: 10px;
+}
+/* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
+#individual-info.withThumb {
+    width: 78%;
+}
+#individual-intro .individual-overview {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    display: inline;
+    clear: both;
+    float: left;
+}
 /* <------ INDIVIDUAL INTRO FOR PERSON*/
 #individual-intro.person {
     margin-bottom: 30px;
@@ -56,6 +138,41 @@ div.overview-value :last-child {
     padding-right: 10px;
     padding-top: 10px;
     width: 100%;
+}
+/* <------ INDIVIDUAL VISUALIZATION */
+#visualization {
+    padding: 0 0 20px 20px;
+    padding-top: 0;
+    float: right;
+    background-color: #fff;
+}
+#visualization h3 {
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.publication-year-range {
+    display: block;
+    padding-top: 5px;
+}
+/* <------ COAUTHORS */
+#co-authors {
+    padding: 0 20px 30px 20px;
+}
+img.co-author {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+#co-authors h3 {
+    margin-bottom: 10px;
+}
+#co-authors ul li {
+    display: block;
+    float: left;
+}
+p.view-all-coauthors {
+    clear: both;
+    width:  200px;
+    text-align: left;
 }
 /* <------ INDIVIDUAL TEMPORAL GRAPH */
 #temporal-graph {
@@ -130,4 +247,10 @@ a.qrCloseLink {
     float: right;
     margin-right: .5em;
     font-size: .8em;
+}
+/* MISCELLANEOUS------>  */
+.listDateTime {
+    padding: 0.2em 0.4em;
+    font-size: 0.8em;
+    background: #f4f4f4;
 }
