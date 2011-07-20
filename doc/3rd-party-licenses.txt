@@ -155,6 +155,7 @@ MIT
 blueprintcss (licenses/blueprintcss.LICENSE.txt)
 html5js (licenses/mit.LICENSE.txt)
 icu4j (licenses/icu.LICENSE.txt)
+jsoup (licenses/jsoup.LICENSE.txt)
 jquery (licenses/mit.LICENSE.txt)
 jquery-plugins (licenses/mit.LICENSE.txt)
 prototype (licenses/mit.LICENSE.txt)
