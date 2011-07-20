@@ -135,6 +135,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
     @Override
 	public void init() throws ServletException {
+    	super.init();
     	pathToHarvester = ConfigurationProperties.getBean(getServletContext()).getProperty("harvester.location"); 
     	if (pathToHarvester == null) {
     		throw new UnavailableException("The deploy.properties file does not contain a value for 'harvester.location'");
