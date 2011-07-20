@@ -49,7 +49,7 @@
             VIVO 1.3 will feature notable improvements to the local search,
             primarily to improve relevance ranking but also to boost the influence
             of semantic relationships in the search. This will improve recall by 
-            including text from related resources (e.g., adding a person’s grant 
+            including text from related resources (e.g., adding a person&#39;s grant 
             and publication titles to his or her search entry) and by boosting  
             overall relevance ranking based on the number and nature of connections 
             from one individual to others. 
@@ -81,7 +81,7 @@
             While less directly visible to the public, version 1.3 also includes
             additional changes focused directly on supporting open source community 
             involvement in extending and customizing VIVO. The development team 
-            began a year ago to transition VIVO’s code base away from Java Server  
+            began a year ago to transition VIVO&#39;s code base away from Java Server  
             Pages to the FreeMarker page templating system that much more cleanly 
             separates internal application programming logic from page display. 
             <br>
@@ -89,7 +89,7 @@
             The visualization team has implemented a Map of Science visualization,
             which allows users to visually explore the scientific strengths of a
             university, school, department, or person in the VIVO instance. Users
-            will be able to see where an organization or person’s interests lay
+            will be able to see where an organization or person&#39;s interests lay
             across 13 major scientific disciplines or 554 sub-disciplines, and will
             be able to see how these disciplines and sub-disciplines interrelate
             with one another on the map of science. Wireframes and design 
@@ -409,7 +409,7 @@
                     <dd>
                         <p>
                             Prior to release 1.3, each user account was identified by a 
-                            Username field. This field was labeled as “E-mail address” on some 
+                            Username field. This field was labeled as &quot;E-mail address&quot; on some 
                             pages in VIVO, but no mail was ever sent. In release 1.3, this has  
                             changed, so the e-mail address is fully used, both for identification 
                             and for communication with the user. 
@@ -434,7 +434,7 @@
                                 Idenfiying the user account. 
                             </li>
                             <li>
-                                Part of the user’s credentials when logging in (along with 
+                                Part of the user&#39;s credentials when logging in (along with 
                                 a  
                                 password). 
                             </li>
@@ -600,8 +600,8 @@
                             Prior to release 1.3, each VIVO 
                             installation was created with 
                             a  
-                            default administrator’s account. In release 1.3, there is no such 
-                            account. Instead, each VIVO installation will have a “root” account. 
+                            default administrator&#39;s account. In release 1.3, there is no such 
+                            account. Instead, each VIVO installation will have a &quot;root&quot; account. 
                         </p>
                         <p style="margin-left: 40px;">
                             The email address for the root 
@@ -627,9 +627,9 @@
                         </blockquote>
                         <p style="margin-left: 40px;">
                             The root account is not a site
-                            administrator’s account – it
+                            administrator&#39;s account &mdash; it
                             is
-                            more powerful than a site administrator’s acocunt. The root account is
+                            more powerful than a site administrator&#39;s acocunt. The root account is
                             permitted to visit any page in a VIVO application. It is permitted to 
                             see any data property, and to enter data into any field. As such, the 
                             root account can be very useful and rather dangerous. It can also give  
@@ -640,7 +640,7 @@
                             The root account is not intended for 
                             routine, every day use. 
                             The best way to use the root account is to create a site  
-                            administrator’s account. After that, use the root account only when 
+                            administrator&#39;s account. After that, use the root account only when 
                             necessary. 
                         </p>
                     </dd>
@@ -741,7 +741,7 @@
                         <tr>
                             <td colspan="2">
                                 URL of Solr context used in local VIVO search.
-                                Should consist of:<pre> scheme + servername + port + vivocontextpath + "solr"</pre>
+                                Should consist of:<pre> scheme + servername + port + vivo_webapp_name + "solr"</pre>
                                 In the standard installation, the Solr context will be on the same 
                                 server as VIVO, and in the same Tomcat instance. The path will be the  
                                 VIVO webapp.name (specified above) + "solr" 
@@ -763,6 +763,7 @@
                                 patterns, or the request will be rejected. 
                                 <br>
                                 Examples:
+                                <code>
                                 <ul>
                                     <li>
                                         vitro.local.solr.ipaddress.mask = 127\.0\.0\.1 
@@ -775,6 +776,7 @@
                                         vitro.local.solr.ipaddress.mask = 169.254.* 
                                     </li>
                                 </ul>
+                                </code>
                             </td>
                         </tr>
                         <tr class="odd_row blue">
@@ -1049,8 +1051,8 @@
                                 being passed an explicit org. For example, to use "Ponce School of 
                                 Medicine" as the top organization: 
                                 <br>
-                                <span style="font-style: italic;">visualization.topLevelOrg =
-                                    http://vivo.psm.edu/individual/n2862</span>
+                                <code>visualization.topLevelOrg =
+                                    http://vivo.psm.edu/individual/n2862</code>
                                 <br>
                             </td>
                         </tr>

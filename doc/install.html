@@ -418,6 +418,7 @@
                             patterns, or the request will be rejected. 
                             <br>
                             Examples:
+                            <code>
                             <ul>
                                 <li>
                                     vitro.local.solr.ipaddress.mask = 127\.0\.0\.1 
@@ -430,6 +431,7 @@
                                     vitro.local.solr.ipaddress.mask = 169.254.* 
                                 </li>
                             </ul>
+                            </code>
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -709,8 +711,8 @@
                             being passed an explicit org. For example, to use "Ponce School of 
                             Medicine" as the top organization: 
                             <br>
-                            <span style="font-style: italic;">visualization.topLevelOrg =
-                                http://vivo.psm.edu/individual/n2862</span>
+                            <code>visualization.topLevelOrg =
+                                http://vivo.psm.edu/individual/n2862</code>
                             <br>
                         </td>
                     </tr>
@@ -781,16 +783,19 @@
                 or <code>localhost.log</code>
             </p>
             <h3 id="add_rdf">VIII. Log in and add RDF data </h3>
-            <p>
+           <p>
                 If the startup was successful, you will see a welcome message
                 informing you that you have successfully installed VIVO. Click the "Log 
                 in" link near the upper right corner. Log in with the <code>rootUser.emailAddress</code>
                 you set up in Step IV. The initial password for the root account is
                 "rootPassword" (without the quotes). On first login, you will be 
-                prompted to select a new password and verify it a second time. 
+                prompted to select a new password and verify it a second time. When login is 
+                complete, the search index is checked and, if it is empty,
+                a full index build will be triggered in the background, in order to ensure
+                complete functionality throughout the site. 
             </p>
             <p>
-                After verifying your new password, you will be presented with a
+                After logging in, you will be presented with a
                 menu of editing options. Here you can create OWL classes, object
                 properties, data properties, and configure the display of data.
                 Currently, any classes you wish to make visible on your website must be
