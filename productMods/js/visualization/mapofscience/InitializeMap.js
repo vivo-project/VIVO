@@ -6,6 +6,8 @@ var currentVisMode;
 var currentController;
 var visModeControllers = {};
 var responseContainerID = "map-of-science-response";
+var ERROR_DISPLAY_WIDGET = '';
+
 var loadingScreenTimeout;
 
 /*
@@ -84,6 +86,11 @@ function helper() {
 
 /* Using .load instead of .ready due to issue with IE and Google Maps API */
 $(window).load(function() {
+	
+	ERROR_DISPLAY_WIDGET = new ErrorDisplayWidget({
+		containerID: 'error-container'
+	});
+	
 	setupLoadingScreen();
 	initMap();
 	initVisModeController();

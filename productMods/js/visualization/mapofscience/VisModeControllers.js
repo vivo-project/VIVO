@@ -74,11 +74,11 @@ var EntityVisModeController = Class.extend({
 		
 		$("#" + responseContainerID).unblock();
 		
-		if (data.error) {
+		if (ERROR_DISPLAY_WIDGET.isErrorConditionTriggered(data)) {
 			$("#map-of-science-response").hide();
-			$("#error-container").show();
+			ERROR_DISPLAY_WIDGET.show(ENTITY_TYPE, data);
 			return;
-		} 
+		}
 		
 		data = data[0];
 		
