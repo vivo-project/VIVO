@@ -423,7 +423,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
     public String getTemplateFillInHelp() {
         String newline = "\n";
         String help = "";
-        help += "<p>A CSV, or <b>C</b>omma-<b>S</b>eparated <b>V</b>alues file, is a method of storing tabular data in plain text.  The first line of a CSV file contains header information, while each subsequent line contains a data record.</p>" + newline;
+        help += "<p>A CSV, or <strong>C</strong>omma-<strong>S</strong>eparated </strong>V</strong>alues file, is a method of storing tabular data in plain text.  The first line of a CSV file contains header information, while each subsequent line contains a data record.</p>" + newline;
         help += "<p>The template we provide contains only the header, which you will then fill in accordingly.  For example, if the template contains the text \"firstName,lastName\", then you might add two more lines, \"John,Doe\" and \"Jane,Public\".</p>" + newline;
         return help;
     }
