@@ -173,7 +173,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * @return the path to the directory containing the template files
      */
     private String getTemplateFileDirectory() {
-        String harvesterPath = FileHarvestController.getHarvesterPath();
+        String harvesterPath = FileHarvestController.getHarvesterPath(vreq);
         String pathToTemplateFiles = harvesterPath + FileHarvestController.PATH_TO_TEMPLATE_FILES;
         return pathToTemplateFiles;
     }
@@ -183,7 +183,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
      * @return the path to the directory containing the script files
      */
     private String getScriptFileDirectory() {
-        String harvesterPath = FileHarvestController.getHarvesterPath();
+        String harvesterPath = FileHarvestController.getHarvesterPath(vreq);
         String pathToScriptFiles = harvesterPath + FileHarvestController.PATH_TO_HARVESTER_SCRIPTS;
         return pathToScriptFiles;
     }
@@ -322,7 +322,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
     private String performScriptTemplateReplacements(String scriptTemplateContents) {
         String replacements = scriptTemplateContents;
 
-        String workingDirectory = FileHarvestController.getHarvesterPath();
+        String workingDirectory = FileHarvestController.getHarvesterPath(vreq);
         String fileDirectory = FileHarvestController.getUploadPath(vreq);
         String harvestedDataPath = getHarvestedDataPath();
         String globalHarvestedDataRelativePath = FileHarvestController.PATH_TO_HARVESTED_DATA;
@@ -386,7 +386,7 @@ class CsvFileHarvestJob implements FileHarvestJob {
     }
 
     private String getHarvestedDataPath() {
-        return FileHarvestController.getHarvesterPath() + FileHarvestController.PATH_TO_HARVESTED_DATA + "csv/" + this.sessionId + "/";
+        return FileHarvestController.getHarvesterPath(vreq) + FileHarvestController.PATH_TO_HARVESTED_DATA + "csv/" + this.sessionId + "/";
     }
 
     @Override
