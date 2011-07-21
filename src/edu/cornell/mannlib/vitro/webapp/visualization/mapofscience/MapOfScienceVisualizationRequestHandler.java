@@ -82,11 +82,6 @@ public class MapOfScienceVisualizationRequestHandler implements
 		}
 		
 		
-//		System.out.println("current models in the system are");
-//		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
-//			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
-//		}
-//		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 	
@@ -160,23 +155,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
 										organizationEntity,
 										organizationWithAssociatedPeople);
-		} /*else {
-			
-			
-			 // This is for just people.
-			Set<SubEntity> test = new HashSet<SubEntity>();
-			
-			test.add(new SubEntity(subjectEntityURI));
-			
-			documentURIForAssociatedPeopleTOVO = SelectOnModelUtilities
-					.getPublicationsWithJournalForAssociatedPeople(dataset, test);
-
-			organizationEntity = OrganizationUtilityFunctions.mergeEntityIfShareSameURI(
-										organizationEntity,
-										organizationWithAssociatedPeople);
-			
-			
-		}*/
+		} 
 		
 		if (allDocumentURIToVOs.isEmpty() && documentURIForAssociatedPeopleTOVO.isEmpty()) {
 			
@@ -347,19 +326,28 @@ public class MapOfScienceVisualizationRequestHandler implements
 	}
 	
 	private TemplateResponseValues prepareStandaloneMarkupResponse(VitroRequest vreq,
-																   String entityURI) {
+																   String entityURI) 
+				throws MalformedQueryParametersException {
 
         String standaloneTemplate = "mapOfScienceStandalone.ftl";
 		
-        String organizationLabel = OrganizationUtilityFunctions
-        									.getEntityLabelFromDAO(vreq,
-        														   entityURI);
+        String entityLabel = UtilityFunctions.getIndividualLabelFromDAO(
+        									vreq,
+        									entityURI);
         
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("title", organizationLabel + " - Map of Science Visualization");
+        body.put("title", entityLabel + " - Map of Science Visualization");
         body.put("entityURI", entityURI);
         body.put("entityLocalName", UtilityFunctions.getIndividualLocalName(entityURI, vreq));
-        body.put("entityLabel", organizationLabel);
+        body.put("entityLabel", entityLabel);
+        
+        if (UtilityFunctions.isEntityAPerson(vreq, entityURI)) {
+        	body.put("entityType", "PERSON");
+        	
+        } else {
+        	body.put("entityType", "ORGANIZATION");
+        }
+        
         body.put("vivoDefaultNamespace", vreq.getWebappDaoFactory().getDefaultNamespace());
         
         return new TemplateResponseValues(standaloneTemplate, body);
