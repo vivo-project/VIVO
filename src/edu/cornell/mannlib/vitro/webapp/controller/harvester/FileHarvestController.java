@@ -57,7 +57,7 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     private static final String PARAMETER_MODE = "mode";
     private static final String PARAMETER_JOB = "job";
 
-    private static final String POST_TO = "/vivo/harvester/harvest";
+    private static final String POST_TO = UrlBuilder.getUrl("/harvester/harvest");
 
     private static final String MODE_HARVEST = "harvest";
     private static final String MODE_CHECK_STATUS = "checkStatus";
