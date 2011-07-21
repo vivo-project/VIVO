@@ -1,0 +1,20 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+#localClassName {
+    margin-bottom: 0;
+}
+#createNewLocalClass p.note {
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+#noLocalOntologyExists {
+    padding: 1em;
+    background: #f4f4f4;
+    display: inline-block;
+}
+#noLocalOntologyExists blockquote {
+    margin: .4em 0 .4em 1em;
+    padding: .5em;
+    background: #ffc;
+    display: inline-block;
+}
