@@ -18,8 +18,7 @@
 
             var harvestProgressResponse;
 
-            function doHarvest()
-            {
+            function doHarvest() {
                 document.getElementById("harvestButton").disabled = true;
                 document.getElementById("harvestButtonHelpText").innerHTML = "Please wait while your data is harvested.";
 
@@ -29,6 +28,9 @@
                         harvestProgressResponse = request.responseText;
 
                         var json = eval("(" + harvestProgressResponse + ")");
+                        if(checkForFatalError(json))
+                            return;
+                        
                         var scriptTextArea = document.getElementById("scriptTextArea");
                         scriptTextArea.innerHTML = json.scriptText;
 
@@ -42,10 +44,11 @@
             }
 
 
-            function continueHarvest()
-            {
+            function continueHarvest() {
                 var response = harvestProgressResponse;
                 var json = eval("(" + response + ")");
+                if(checkForFatalError(json))
+                    return;
 
                 var logAppend = json.progressSinceLastCheck;
                 var progressTextArea = document.getElementById("progressTextArea");
@@ -102,10 +105,11 @@
                 return request;
             }   
 
-            function fileResponse()
-            {
+            function fileResponse() {
                 var response = frames["uploadTarget"].document.getElementsByTagName("body")[0].innerHTML;
                 var json = eval("(" + response + ")");
+                if(checkForFatalError(json))
+                    return;
 
                 var fileListing = document.getElementById("fileListing")
                 var newLi = document.createElement("li");
@@ -121,21 +125,40 @@
                 //document.getElementById("responseArea").innerHTML = response;
             }
 
-            function init()
-            {
-                document.getElementById("harvestButton").disabled = false;
-
-                document.getElementById("${paramFirstUpload}").value = "true";
-                document.getElementById("fileUploadForm").onsubmit = function()
-                {
-                    document.getElementById("fileUploadForm").target = "uploadTarget";
-                    document.getElementById("uploadTarget").onload = fileResponse;
-                }
-                document.getElementById("downloadTemplateForm").onsubmit = function()
-                {
-                    document.getElementById("downloadTemplateForm").target = "uploadTarget";
+            function init() {
+                <#if harvesterPathError == "true">
+                	handleFatalError();
+                <#else>
+	                document.getElementById("harvestButton").disabled = false;
+	
+	                document.getElementById("${paramFirstUpload}").value = "true";
+	                document.getElementById("fileUploadForm").onsubmit = function()
+	                {
+	                    document.getElementById("fileUploadForm").target = "uploadTarget";
+	                    document.getElementById("uploadTarget").onload = fileResponse;
+	                }
+	                document.getElementById("downloadTemplateForm").onsubmit = function()
+	                {
+	                    document.getElementById("downloadTemplateForm").target = "uploadTarget";
+	                }
+                </#if>
+            }
+            
+            function checkForFatalError(json) {
+                if(json.fatalError) {
+                	handleFatalError();
+                    return true;
+                } else {
+                    return false;
                 }
             }
+            
+            function handleFatalError() {
+                document.getElementById("fileHarvestErrorHelp").style.display = "inline";
+                document.getElementById("fileHarvestForm").style.display = "none";
+            } 
+            
+            
             
             window.onload = init;
             
@@ -153,85 +176,98 @@
 
         </script>
         
-        <h2><a class="ingestMenu" href="${urls.base}/ingest">Ingest Menu</a> > ${jobSpecificHeader}</h2>
-        
-        <div id="step1" class="testfile-step">
-            <h3 class="testfile-step-header">Step 1</h3>
-            <div id="step1-inner" class="testfile-step-body">
-                <h4 class="testfile-step-subheader">Download template</h4>
-                <form id="downloadTemplateForm" method="post" action=${postTo}>
-                    <input type="hidden" id="${paramMode}" name="${paramMode}" value="${modeDownloadTemplate}" />
-                    <p><input id="submit" type="submit" name="submit" value="Download" /> ${jobSpecificDownloadHelp}</p>
-                </form>
-            </div>
-            <div class="clearBothDiv" />
-        </div>
-        
-        <div id="step2" class="testfile-step">
-            <h3 class="testfile-step-header">Step 2</h3>
-            <div id="step2-inner" class="testfile-step-body">
-                <h4 class="testfile-step-subheader">Fill in data <a class="help" href="#">Help</a></h4>
-                <div id="csvHelp-collapsible" class="hidden">
-                    <div id="csvHelp-indented">
-                        ${jobSpecificFillInHelp}
-                    </div>
-                </div>
-                <p>Fill in the template with your data.  You may fill in multiple templates if you wish to harvest multiple files at once.</p>
-                <div id="csvHelp">
-                </div>
-            </div>
-            <div class="clearBothDiv" />
-        </div>
-        
-        <div id="step3" class="testfile-step">
-            <h3 class="testfile-step-header">Step 3</h3>
-            <div id="step3-inner" class="testfile-step-body">
-                <h4 class="testfile-step-subheader">Upload file(s)</h4>
-                <p>Upload your filled-in template(s).</p>
-                <form id="fileUploadForm" method="post" enctype="multipart/form-data" action=${postTo}>
-                    <input type="hidden" id="${paramFirstUpload}" name="${paramFirstUpload}" value="true" />
-                    <!--<input type="hidden" id="${paramJob}" name="${paramJob}" value="${job}" /> -->
-                    <input type="file" name="${paramUploadedFile}" />
-                    <input type="submit" name="submit" value="Upload" />
-                    <iframe id="uploadTarget" name="uploadTarget" src=""></iframe>
-                </form>
-                <h5>Uploaded files</h5>
-                <ul id="fileListing">
-                </ul>
-            </div>
-            <div class="clearBothDiv" />
-        </div>
-        
-        <div id="step4" class="testfile-step">
-            <h3 class="testfile-step-header">Step 4</h3>
-            <div id="step4-inner" class="testfile-step-body">
-                <h4 class="testfile-step-subheader">Harvest</h4>
-                <p><input type="button" name="harvestButton" id="harvestButton" class="green button" value="Harvest" /><span id="harvestButtonHelpText">Click the button to harvest your file(s).</span></p>
-            </div>
-            <div class="clearBothDiv" />
-        </div>
-        
-        <div id="step5" class="testfile-step">
-            <h3 class="testfile-step-header">Step 5</h3>
-            <div id="step5-inner" class="testfile-step-body">
-                <h4 class="testfile-step-subheader">View results</h4>
-                <div id="script">
-                    <h5>Script being executed</h5>
-                    <textarea cols="100" rows="20" readonly="readonly" id="scriptTextArea"></textarea>      
-                </div>
-                <div id="progress">
-                    <h5>Progress</h5>
-                    <textarea cols="100" rows="20" readonly="readonly" id="progressTextArea"></textarea>        
-                </div>
-                <div id="summary">
-                    <h5 id="linkHeader" class="hidden">${jobSpecificLinkHeader}</h5>
-                    <ul id="importedItems">
-                    </ul>
-                </div>
-            </div>
-            <div class="clearBothDiv" />
-        </div>
-        
+		<div id="fileHarvestErrorHelp">
+			<p>An error has occurred and the file harvest cannot continue.</p>
+			<p>This is most likely due to an improper Harvester configuration.  Please ensure the following:</p>
+			<ul>
+				<li>VIVO Harvester is installed.</li>
+				<li>The harvester.location setting in deploy.properties pointed to the Harvester installation directory.</li>
+				<li>In VIVO Harvester, the web server user (typically tomcat6) has read and write access to the vivo/ directory and all of its children.</li>
+				<li>In VIVO Harvester, the logs/ directory exists and the web server user has read and write access to it.</li>
+				<li>In VIVO Harvester, the file vivo/config/vivo.xml is properly configured with your database information and namespace.</li>
+			</ul>
+		</div>
+
+		<div id="fileHarvestForm">
+	        <h2><a class="ingestMenu" href="${urls.base}/ingest">Ingest Menu</a> > ${jobSpecificHeader}</h2>
+
+	        <div id="step1" class="testfile-step">
+	            <h3 class="testfile-step-header">Step 1</h3>
+	            <div id="step1-inner" class="testfile-step-body">
+	                <h4 class="testfile-step-subheader">Download template</h4>
+	                <form id="downloadTemplateForm" method="post" action=${postTo}>
+	                    <input type="hidden" id="${paramMode}" name="${paramMode}" value="${modeDownloadTemplate}" />
+	                    <p><input id="submit" type="submit" name="submit" value="Download" /> ${jobSpecificDownloadHelp}</p>
+	                </form>
+	            </div>
+	            <div class="clearBothDiv" />
+	        </div>
+	        
+	        <div id="step2" class="testfile-step">
+	            <h3 class="testfile-step-header">Step 2</h3>
+	            <div id="step2-inner" class="testfile-step-body">
+	                <h4 class="testfile-step-subheader">Fill in data <a class="help" href="#">Help</a></h4>
+	                <div id="csvHelp-collapsible" class="hidden">
+	                    <div id="csvHelp-indented">
+	                        ${jobSpecificFillInHelp}
+	                    </div>
+	                </div>
+	                <p>Fill in the template with your data.  You may fill in multiple templates if you wish to harvest multiple files at once.</p>
+	                <div id="csvHelp">
+	                </div>
+	            </div>
+	            <div class="clearBothDiv" />
+	        </div>
+	        
+	        <div id="step3" class="testfile-step">
+	            <h3 class="testfile-step-header">Step 3</h3>
+	            <div id="step3-inner" class="testfile-step-body">
+	                <h4 class="testfile-step-subheader">Upload file(s)</h4>
+	                <p>Upload your filled-in template(s).</p>
+	                <form id="fileUploadForm" method="post" enctype="multipart/form-data" action=${postTo}>
+	                    <input type="hidden" id="${paramFirstUpload}" name="${paramFirstUpload}" value="true" />
+	                    <!--<input type="hidden" id="${paramJob}" name="${paramJob}" value="${job}" /> -->
+	                    <input type="file" name="${paramUploadedFile}" />
+	                    <input type="submit" name="submit" value="Upload" />
+	                    <iframe id="uploadTarget" name="uploadTarget" src=""></iframe>
+	                </form>
+	                <h5>Uploaded files</h5>
+	                <ul id="fileListing">
+	                </ul>
+	            </div>
+	            <div class="clearBothDiv" />
+	        </div>
+	        
+	        <div id="step4" class="testfile-step">
+	            <h3 class="testfile-step-header">Step 4</h3>
+	            <div id="step4-inner" class="testfile-step-body">
+	                <h4 class="testfile-step-subheader">Harvest</h4>
+	                <p><input type="button" name="harvestButton" id="harvestButton" class="green button" value="Harvest" /><span id="harvestButtonHelpText">Click the button to harvest your file(s).</span></p>
+	            </div>
+	            <div class="clearBothDiv" />
+	        </div>
+	        
+	        <div id="step5" class="testfile-step">
+	            <h3 class="testfile-step-header">Step 5</h3>
+	            <div id="step5-inner" class="testfile-step-body">
+	                <h4 class="testfile-step-subheader">View results</h4>
+	                <div id="script">
+	                    <h5>Script being executed</h5>
+	                    <textarea cols="100" rows="20" readonly="readonly" id="scriptTextArea"></textarea>      
+	                </div>
+	                <div id="progress">
+	                    <h5>Progress</h5>
+	                    <textarea cols="100" rows="20" readonly="readonly" id="progressTextArea"></textarea>        
+	                </div>
+	                <div id="summary">
+	                    <h5 id="linkHeader" class="hidden">${jobSpecificLinkHeader}</h5>
+	                    <ul id="importedItems">
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="clearBothDiv" />
+	        </div>
+		</div>        
         ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/harvester/fileharvest.css" />')}
         
     <#-- if job known -->
