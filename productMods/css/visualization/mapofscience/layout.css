@@ -233,3 +233,8 @@ a.map-of-science-links {
     color: #84a655;
     font-size:16px;
 }
+
+ul.error-list li {
+    font-size: 0.81em;
+    list-style: disc inside none;
+}

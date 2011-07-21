@@ -142,13 +142,11 @@ concern.</div>
 <div id="error-container">
 
 <h1 id="noPublications-header">${entityLabel}</h1>
-
-    <h3 id="alternative-vis-info">Map of Science Visualization</h3>
+    <h3 id="vis-title">Map of Science Visualization</h3>
     <div id="error-body">
-        <p>This organization has neither sub-organizations nor people with publications in the system. 
-        Please visit the full ${entityLabel} <a href="${entityVivoProfileURL}">profile page</a> for a more complete overview.</p>
+        <p><span id="variable-error-text">No publications in the system have been attributed to this organization.</span><hr /> 
+        Please visit the ${entityLabel} <a href="${entityVivoProfileURL}">profile page</a> for a complete overview.</p>
     </div>
-
 </div>
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>')}
