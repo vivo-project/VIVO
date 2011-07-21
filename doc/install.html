@@ -28,99 +28,106 @@
                     </li>
                 </ul>
             </toc>
-            <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.3</h2>
-            VIVO Release 1.3 incorporates changes to the search indexing, user
-            accounts, menu management, ontology, and visualizations.
+            <!-- Release Announcement -->
+			<h2 id="announcement">Release anouncement for V1.3</h2>
+<!-- Release Announcement -->VIVO Release 1.3 incorporates changes to the search 
+			indexing, user accounts, menu management, ontology, and visualizations, and begins 
+			integration of VIVO Harvester functions with VIVO's own ingest tools. 
             <br>
             <h4>Search</h4>
-            VIVO 1.3 will feature notable improvements to the local search,
-            primarily to improve relevance ranking but also to boost the influence
-            of semantic relationships in the search. This will improve recall by
-            including text from related resources (e.g., adding a person’s grant
-            and publication titles to his or her search entry) and by boosting
-            overall relevance ranking based on the number and nature of connections
-            from one individual to others.
-            <br>
-            VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place
-            of Apache Lucene to improve indexing and faceting of search results.
-            The migration to Solr also aligns the local search with the VIVO
-            multi-site search site under development for release prior to the 2011
-            VIVO Conference.
-            <br>
+            <p>VIVO 1.3 will feature notable improvements to the local search, primarily to 
+			improve relevance ranking but also to boost the influence of semantic relationships 
+			in the search. This will improve recall by including text from related resources 
+			(e.g., adding a person's grant and publication titles to his or her search entry) 
+			and by boosting overall relevance ranking based on the number and nature of 
+			connections from one individual to others.</p>
+			<p>VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place of 
+			Apache Lucene to improve indexing and faceting of search results. The migration 
+			to Solr also aligns the local search with the VIVO multi-site search site under 
+			 development for release prior to the 2011 VIVO Conference.
+            </p>
             <h4>Authorization</h4>
-            Release 1.3 provides an entirely new model of authorization within the
+            <p>Release 1.3 provides an entirely new model of authorization within the
             VIVO application to allow more granular control over system
-            configuration and editing. The first phase of the new user account
-            interface is included in V1.3. This interface provides a user search, a
-            root acount, and password reset functionality where the password gets
-            emailed to the user. The next phase will provide the ability to create
-            new roles.
-            <br>
+            configuration and editing. The first phase of the new user account 
+            interface is included in V1.3. This interface provides a user search, a 
+            root acount, and password reset functionality where the password gets  
+            emailed to the user. The next phase will provide the ability to create 
+            new roles. 
+            </p>
             <h4>Menu management</h4>
-            The menus across the top of the site (Home, People, Organizations,
-            Research, Events) can now be managed in a web form instead of editing
-            an RDF file. In addition to making site management much easier,
-            form-based editing also allows more control over what classes of data
-            are displayed and provides a mechanism to limit certain menu pages to
-            content identified as internal to the institution.
-            <br>
+            <p>The menus across the top of the site (Home, People, Organizations,
+            Research, Events) can now be managed in a web form instead of editing 
+            an RDF file. In addition to making site management much easier, 
+            form-based editing also allows more control over what classes of data  
+            are displayed and provides a mechanism to limit certain menu pages to 
+            content identified as internal to the institution. 
+            </p>
             <h4>FreeMaker template improvements</h4>
-            While less directly visible to the public, version 1.3 also includes
-            additional changes focused directly on supporting open source community
-            involvement in extending and customizing VIVO. The development team
-            began a year ago to transition VIVO’s code base away from Java Server
-            Pages to the FreeMarker page templating system that much more cleanly
-            separates internal application programming logic from page display.
-            <br>
+            <p>While less directly visible to the public, version 1.3 also includes
+            additional changes focused directly on supporting open source community 
+            involvement in extending and customizing VIVO. The development team 
+            began a year ago to transition VIVO&#39;s code base away from Java Server  
+            Pages to the FreeMarker page templating system that much more cleanly 
+            separates internal application programming logic from page display. 
+            </p>
             <h4>Visualization</h4>
-            The visualization team has implemented a Science Map visualization,
+            <p>The visualization team has implemented a Map of Science visualization,
             which allows users to visually explore the scientific strengths of a
             university, school, department, or person in the VIVO instance. Users
-            will be able to see where an organization or person’s interests lay
+            will be able to see where an organization or person&#39;s interests lay
             across 13 major scientific disciplines or 554 sub-disciplines, and will
             be able to see how these disciplines and sub-disciplines interrelate
-            with one another on the map of science. Wireframes and design
-            documentation for upcoming enhanced versions of the Science Map
-            visualization have already been developed; the Science Map
-            visualization will most likely be in the form of a PDF that a user can
-            download.
-            <br>
-            Several visualization also now provide a caching feature that improves
-            performance after the initial processing.
-            <br>
+            with one another on the map of science. Wireframes and design 
+            documentation for upcoming enhanced versions of the Map of Science 
+            visualization have already been developed; the Map of Science  
+            visualization will most likely be in the form of a PDF that a user can 
+            download. 
+            </p>
+            <p>Several visualization also now provide a caching feature that improves 
+            performance after the initial processing. 
+            </p>
             <h4>QR Codes</h4>
-            Pages for people in VIVO have the option of displaying QR codes.
-            <br>
+            <p>Pages for people in VIVO now have an icon for displaying QR codes to allow 
+			capturing names and available contact information on mobile devices.
+            </p>
+			<h4>Harvester Integration</h4>
+			<p>VIVO sites have the option with Release 1.3 of coordinating the configuration 
+			of VIVO and the Harvester to enable many Harvester functions to be initiated 
+			from the VIVO Ingest Tools menu in support of more unified and centralized 
+			management for data ingest. 
+			</p>
             <h4>Ontology changes</h4>
             <ul>
                 <li>
-                    support for certifications and licenses
+                    support for certifications and licenses 
                 </li>
                 <li>
-                    expanded support for intellectual property (patents) (it was
-                    there as stub before but didn't allow common things such as assignee
-                    and issuer)
+                    expanded support for intellectual property (patents) (it was 
+                    there as stub before but didn't allow common things such as assignee  
+                    and issuer) 
                 </li>
                 <li>
-                    support for editorial, reviewing and organizing activities
+                    support for editorial, reviewing and organizing activities 
                 </li>
                 <li>
-                    expanded shared geographical instance data vocabulary to include
-                    the 50 U.S. states
+                    expanded shared geographical instance data vocabulary to include 
+                    the 50 U.S. states 
                 </li>
                 <li>
-                    representing specific types of EducationalTraining:
-                    PostdoctoralTraining, Internship, MedicalResidency
+                    representing specific types of EducationalTraining: 
+                    PostdoctoralTraining, Internship, MedicalResidency 
                 </li>
             </ul>
             <h4>Linked open data</h4>
-            Responses to linked data requests have been enhanced to include
-            additional context about any individual, in working toward a goal of
-            being able to provide all the data in a person's profile available as
-            RDF via a single web request.
-            <br>
-            <br>
-            <hr><!-- Page break --><!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.3</h2>
+            <p>Responses to linked data requests have been enhanced to include 
+            additional context about any individual, in working toward a goal of  
+            being able to provide all the data in a person's profile available as 
+            RDF via a single web request. 
+            </p>
+            <br>			
+            <hr><!-- Page break --><!-- Installation process for V1.2 -->
+			<h2 id="installation">Installation process for V1.3</h2>
             <p>
                 This document is a summary of the VIVO installation process. This 
                 and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
@@ -228,6 +235,9 @@
                     <li>
                         <a href="#installation_check">Was the installation successful?</a>
                     </li>
+					<li>
+						<a href="#termsofuse">Review the VIVO Terms of Use</a>
+					</li>
                 </ol>
             </toc>
             <h3 id="required_software">I. Install required software </h3>
@@ -1077,16 +1087,30 @@
                     administrator and go to "http://your-vivo-url/SearchIndex". 
                 </li>
             </ul>
-        </div>
-        <!-- #wrapper-content -->
-        <div id="footer" role="contentinfo">
-            <p class="copyright">
-                <small>
-                    ©2011 All Rights Reserved | <a class="terms" href="/termsOfUse">Terms of Use</a>
-                </small>
-                | Powered 
-                by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
-            </p>
+				<h3 id="termsofuse">XIII. Review the VIVO Terms of Use</h3>
+	                <p>
+	                    VIVO comes with a "Terms of Use" statement linked from the footer.  
+						The "Site Name" you assign in the "Site Information" form under the 
+						<strong>Site Admin</strong> area will be inserted into the "Terms of Use" 
+						statement.  If you want to edit the text content more than just  the 
+						"Site Name", the file can be found here:
+						<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+	                    Be sure to make the changes in your source files and deploy them to your 
+						tomcat so you don't lose your changes next time you deploy for another reason.
+	                </p>
+				<h3>Next Step ...</h3>
+					<p>Now that you have VIVO up and running, please go read the 
+					<a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>.</p>
+				</div>
+                <!-- #wrapper-content -->
+                <div id="footer" role="contentinfo">
+                    <p class="copyright">
+                        <small>
+                            ©2011 All Rights Reserved
+                        </small>
+                        | Powered 
+                        by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+                    </p>
             <div id="nav" role="navigation">
                 <ul id="footer-nav" role="list">
                     <li role="listitem">
