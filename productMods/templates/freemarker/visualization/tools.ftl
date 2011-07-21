@@ -8,24 +8,19 @@
 <a href="${refreshCacheURL}">Refresh Cached Models for Visualization</a> 
 
 <h5>Why</h5>
-Certain class of visualizations like Temporal graph and Map of Science that work on a large scale 
-attempt to calculate counts of publications (or grants) for all the organizations within an organization. 
-These queries tend to be both memory intensive and time consuming. In order to provide a good user experience when 
-these visualizations are served we decided to save the results of these queries to be reused later.
+Large-scale visualizations like the Temporal Graph or the Map of Science involve calculating total counts of publications or 
+of grants for some entity. Since this means checking also through of its all sub-entities, the underlying queries can be both 
+memory-intensive and time-consuming. For a faster user experience, we wish to save the results of these queries for later re-use.
 
 <h5>What</h5>
-To this end we have devised a caching solution which will store information about the organization 
-hierarchy, which publications were published from which organizations etc (among other things) in 
-semantic way (i.e. we store the rdf model).<br/>
-
-We're currently caching these models in-memory, which works nicely, for now. Currently the cache is only built 
-once, on first user request after a server restart, so the visualization will essentially never be updated 
-until the server is restarted again. It is not being updated real-time or periodically. This means that the data in these 
-models might be stale depending upon when was it last created. In future releases we will come 
-up with a solution that stores these models on disk and be updated periodically.<br /> 
+To this end we have devised a caching solution which will retain information about the hierarchy of organizations-namely, 
+which publications are attributed to which organizations-by storing the RDF model. <br />
+We're currently caching these models in memory.  The cache is built (only once) on the first user request after a server restart.  
+Because of this, the same model will be served until the next restart. This means that the data in these models may become stale 
+depending upon when it was last created. This works well enough for now. In future releases we will improve this solution so that 
+models are stored on disk and periodically updated.
 
 <h5>How</h5>
-To refresh these models either restart the server or click on "refresh cache" link above. We realize that 
-in production VIVO instances it is not feasible to restart the server to refresh these models. Hence we 
-recommend the above link. Administrators can use this link to trigger regeneration of all the existing 
-models.<br />
+The models are refreshed each time the server restarts.  Since this is not generally practical on production instances, 
+administrators can instead use the “refresh cache” link above to do this without a restart.
+<br />
