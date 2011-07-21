@@ -126,23 +126,8 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         }
     }
 
-    /**
-     * This is the absolute path on the server of the Harvester root directory, including the final slash.
-     * Unfortunately, this value is not known at the time the servlet is loaded, so we need to initialize
-     * this in the init() method. I hope nobody calls for this before the servlet is initialized.
-     */
-    private static volatile String pathToHarvester;
 
     @Override
-	public void init() throws ServletException {
-    	super.init();
-    	pathToHarvester = ConfigurationProperties.getBean(getServletContext()).getProperty("harvester.location"); 
-    	if (pathToHarvester == null) {
-    		throw new UnavailableException("The deploy.properties file does not contain a value for 'harvester.location'");
-    	}
-	}
-
-	@Override
     protected ResponseValues processRequest(VitroRequest vreq) {
         try {
             cleanUpOldSessions();
@@ -187,10 +172,12 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      * Returns the root location of the VIVO Harvester on this machine.
      * @return the root location of the VIVO Harvester on this machine
      */
-    public static String getHarvesterPath()
+    public static String getHarvesterPath(HttpServletRequest req)
     {
+    	String pathToHarvester = ConfigurationProperties.getBean(req).getProperty("harvester.location"); 
     	if (pathToHarvester == null) {
-    		throw new IllegalStateException("FileHarvestController has not been initialized yet.");
+    		log.error("The deploy.properties file does not contain a value for 'harvester.location'");
+    		return "";
     	}
     	return pathToHarvester;
     }
@@ -199,9 +186,9 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      * Returns the path on this machine of the area within Harvester reserved for File Harvest.
      * @return the path on this machine of the area within Harvester reserved for File Harvest
      */
-    public static String getFileHarvestRootPath()
+    public static String getFileHarvestRootPath(HttpServletRequest req)
     {
-        String fileHarvestRootPath = getHarvesterPath() + PATH_TO_FILE_HARVEST_ROOT;
+        String fileHarvestRootPath = getHarvesterPath(req) + PATH_TO_FILE_HARVEST_ROOT;
         return fileHarvestRootPath;
     }
 
@@ -428,7 +415,8 @@ public class FileHarvestController extends FreemarkerHttpServlet {
 
             String script = job.getScript();
             String additionsFilePath = job.getAdditionsFilePath();
-            runScript(getSessionId(request), script, additionsFilePath);
+            String scriptFileLocation = getScriptFileLocation(vreq);
+            runScript(getSessionId(request), script, additionsFilePath, scriptFileLocation);
 
             JSONObject json = new JSONObject();
             json.put("progressSinceLastCheck", "");
@@ -539,14 +527,14 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      * placed.  Final slash included.
      * @return the location in which the ready-to-run scripts will be placed
      */
-    private static String getScriptFileLocation() {
-        return getHarvesterPath() + PATH_TO_HARVESTER_SCRIPTS + "temp/";
+    private static String getScriptFileLocation(HttpServletRequest req) {
+        return getHarvesterPath(req) + PATH_TO_HARVESTER_SCRIPTS + "temp/";
     }
     
     
     
-    private File createScriptFile(String script) throws IOException {
-        File scriptDirectory = new File(getScriptFileLocation());
+    private File createScriptFile(String scriptFileLocation, String script) throws IOException {
+        File scriptDirectory = new File(scriptFileLocation);
         if(!scriptDirectory.exists()) {
             scriptDirectory.mkdirs();
         }
@@ -561,10 +549,10 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     }
 
 
-    private void runScript(String sessionId, String script, String additionsFilePath) {
+    private void runScript(String sessionId, String script, String additionsFilePath, String scriptFileLocation) {
         clearSessionInfo(sessionId);
 
-        ScriptRunner runner = new ScriptRunner(sessionId, script, additionsFilePath);
+        ScriptRunner runner = new ScriptRunner(sessionId, script, additionsFilePath, scriptFileLocation);
         SessionInfo info = new SessionInfo(sessionId, runner);
         sessionIdToSessionInfo.put(sessionId, info);
         runner.start();
@@ -797,13 +785,15 @@ public class FileHarvestController extends FreemarkerHttpServlet {
         private final String sessionId;
         private final String script;
         private final String additionsFilePath;
+        private final String scriptFileLocation;
 
         private volatile boolean abort = false;
 
-        public ScriptRunner(String sessionId, String script, String additionsFilePath) {
+        public ScriptRunner(String sessionId, String script, String additionsFilePath, String scriptFileLocation) {
             this.sessionId = sessionId;
             this.script = script;
             this.additionsFilePath = additionsFilePath;
+            this.scriptFileLocation = scriptFileLocation; 
         }
 
         public void abortRun() {
@@ -818,9 +808,9 @@ public class FileHarvestController extends FreemarkerHttpServlet {
                 try {
                     ArrayList<String> unsentLogLines = sessionInfo.unsentLogLines;
 
-                    File scriptFile = createScriptFile(this.script);
+                    File scriptFile = createScriptFile(this.scriptFileLocation, this.script);
 
-                    String command = "/bin/bash " + getScriptFileLocation() + scriptFile.getName();
+                    String command = "/bin/bash " + this.scriptFileLocation + scriptFile.getName();
 
                     log.info("Running command: " + command);
                     Process pr = Runtime.getRuntime().exec(command);
