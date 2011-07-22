@@ -28,8 +28,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFr
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.MapOfScienceConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VOConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.constants.VisConstants;
-import edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.OrganizationUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
+import edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.OrganizationUtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;

@@ -29,10 +29,10 @@
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
 
     <bean id="pub_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.TemporalPublicationVisualizationRequestHandler" />		
+        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalPublicationVisualizationRequestHandler" />		
 
     <bean id="grant_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.TemporalGrantVisualizationRequestHandler" />	
+        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalGrantVisualizationRequestHandler" />	
 	
     <bean id="map_of_science"
         class="edu.cornell.mannlib.vitro.webapp.visualization.mapofscience.MapOfScienceVisualizationRequestHandler" />
