@@ -3,7 +3,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -13,7 +12,6 @@ import com.hp.hpl.jena.iri.IRIFactory;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
@@ -25,7 +23,6 @@ import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryP
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.GenericQueryMap;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.GenericQueryRunner;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
 
 public class OrganizationUtilityFunctions {
@@ -101,28 +98,6 @@ public class OrganizationUtilityFunctions {
 		return highestLevelOrgURI;
 	}
 	
-	public static Map<String, Set<String>> getSubEntityTypes(Log log,
-			Dataset dataset, String subjectOrganization)
-			throws MalformedQueryParametersException {
-		
-		ModelConstructor constructQueryRunnerForSubOrganizationTypes = 
-				new EntitySubOrganizationTypesConstructQueryRunner(subjectOrganization, 
-																   dataset, 
-																   log);
-		
-		Model constructedModelForSubOrganizationTypes = constructQueryRunnerForSubOrganizationTypes
-															.getConstructedModel();
-		
-		QueryRunner<Map<String, Set<String>>> queryManagerForsubOrganisationTypes = 
-				new EntitySubOrganizationTypesQueryRunner(
-						subjectOrganization, constructedModelForSubOrganizationTypes, log);
-
-		Map<String, Set<String>> subOrganizationTypesResult = queryManagerForsubOrganisationTypes
-				.getQueryResult();
-		
-		return subOrganizationTypesResult;
-	}
-
 	public static String getEntityLabelFromDAO(VitroRequest vitroRequest,
 			String entityURI) {
 		
