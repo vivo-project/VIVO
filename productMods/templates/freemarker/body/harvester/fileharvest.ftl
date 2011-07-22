@@ -1,7 +1,5 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- <@dump var="harvesterLocation" /> -->
-
 <#if !(user.loggedIn && user.hasSiteAdminAccess)>
 
     <p>You must be an administrator to use this tool.</p>
