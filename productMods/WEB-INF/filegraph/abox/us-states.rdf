@@ -117,27 +117,27 @@
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/New_Hampshire">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">New_Hampshire</rdfs:label>
+      <rdfs:label xml:lang="en">New Hampshire</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/New_Jersey">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">New_Jersey</rdfs:label>
+      <rdfs:label xml:lang="en">New Jersey</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/New_Mexico">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">New_Mexico</rdfs:label>
+      <rdfs:label xml:lang="en">New Mexico</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/New_York">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">New_York</rdfs:label>
+      <rdfs:label xml:lang="en">New York</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/North_Carolina">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">North_Carolina</rdfs:label>
+      <rdfs:label xml:lang="en">North Carolina</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/North_Dakota">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">North_Dakota</rdfs:label>
+      <rdfs:label xml:lang="en">North Dakota</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Ohio">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
@@ -157,15 +157,15 @@
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Rhode_Island">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">Rhode_Island</rdfs:label>
+      <rdfs:label xml:lang="en">Rhode Island</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/South_Carolina">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">South_Carolina</rdfs:label>
+      <rdfs:label xml:lang="en">South Carolina</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/South_Dakota">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">South_Dakota</rdfs:label>
+      <rdfs:label xml:lang="en">South Dakota</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Tennessee">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
@@ -193,7 +193,7 @@
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/West_Virginia">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
-      <rdfs:label xml:lang="en">West_Virginia</rdfs:label>
+      <rdfs:label xml:lang="en">West Virginia</rdfs:label>
    </rdf:Description>
    <rdf:Description rdf:about="http://dbpedia.org/resource/Wisconsin">
       <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
