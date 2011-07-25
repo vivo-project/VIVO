@@ -474,7 +474,7 @@ function setupLoadingScreen(visContainerDIV) {
     				+ refreshPageImageLink 
 	    			+ '" />&nbsp;Data for <i>' + organizationLabel
 	    			+ '</i> is now being refreshed. The visualization will load as soon as we are done computing, ' 
-	    			+ 'or you can come back in a few minutes.</h3>')
+	    			+ 'or you can search or browse other data in VIVO and come back in a few minutes.</h3>')
 	    	.css({'cursor': 'pointer'});
     	
     }, 10 * 1000);
