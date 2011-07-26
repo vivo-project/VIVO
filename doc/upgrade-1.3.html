@@ -1147,8 +1147,18 @@
                     by typing: <code>ant all</code>
                 </p>
                 <p>
-                    6. Start Apache Tomcat and log in to VIVO. 
+                    6. Start Apache Tomcat and log into VIVO as the root user when the upgrade is 
+					completed.  Depending on the size of your database, the migration process may 
+					take up to several hours. When it is complete, you will 
+					see a message in the catalina.log file that the server has started.
+					<pre>INFO: Server startup in XXXXX ms</pre>
                 </p>
+				<p>
+					7. As root or an administrator, request a rebuild of the Solr search index:  
+					Go to the "Site Admin" page and click on "Rebuild Search Index" under the 
+					heading "Refresh Content".  You can check on the 
+					rebuild status by looking at the vivo.all.log in the tomcat logs.
+				</p>
                 <h3 id="ontology">IV. Ontology Changes</h3>
                 <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
                 <p>
