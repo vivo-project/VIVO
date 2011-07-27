@@ -209,7 +209,7 @@ function visLoaded(nodes){
 	var jsonedNodes = jQuery.parseJSON(nodes);
 	
 	$(document).ready(function() { 
-		 createTable(collaboratorTableMetadata.tableID, collaboratorTableMetadata.tableContainer, jsonedNodes.slice(1));
+		 createTable(collaboratorTableMetadata.tableID, collaboratorTableMetadata.tableContainer, jsonedNodes);
 	});
 
 }
@@ -238,14 +238,20 @@ function createTable(tableID, tableContainer, tableData) {
 
 	$.each(tableData, function(i, item){ 
 		
-		number_of_works = item[collaboratorTableMetadata.jsonNumberWorksProperty];
-		
-		var row = $('<tr>'); 
-
-		row.append($('<td>').html(item.label));
-		row.append($('<td>').html(number_of_works));
-
-		table.append(row);
+		/*
+		 * Make sure that we dont append a row that belong to the ego in the "co-investigator/author" table.
+		 * */
+		if (item.url !== unEncodedEgoURI) {
+			
+			number_of_works = item[collaboratorTableMetadata.jsonNumberWorksProperty];
+			
+			var row = $('<tr>'); 
+	
+			row.append($('<td>').html(item.label));
+			row.append($('<td>').html(number_of_works));
+	
+			table.append(row);
+		}
 
 	});	
 
