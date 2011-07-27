@@ -176,8 +176,6 @@ public class MapOfScienceVisualizationRequestHandler implements
 	}
 	
 	/**
-	 * Provides response when json file containing the publication count over the
-	 * years is requested.
 	 * @param vitroRequest 
 	 * 
 	 * @param entity
@@ -209,6 +207,14 @@ public class MapOfScienceVisualizationRequestHandler implements
 						 getSubDisciplineToPublicationsCSVContent(entity));
 			
 			outputFileName += "_subdiscipline-to-publications" + ".csv";
+			
+		} else if (VisualizationFrameworkConstants.SCIENCE_UNLOCATED_JOURNALS_VIS_MODE
+				.equalsIgnoreCase(vitroRequest.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
+			
+			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
+						 getUnlocatedJournalsCSVContent(entity));
+			
+			outputFileName += "_unlocated-journals" + ".csv";
 			
 		} else {
 			
@@ -440,7 +446,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 			
 		} 
 		
-		return new PublicationJournalStats(publicationsWithNoJournalCount, journalToPublicationCount);
+		return new PublicationJournalStats(publicationsWithNoJournalCount, journalToPublicationCount, null);
 	}
 
 	private void updateEntityMapOfScienceInformation(MapOfScience entityJson,
@@ -488,7 +494,8 @@ public class MapOfScienceVisualizationRequestHandler implements
 		
 		csvFileContent.append("Discipline, Publication Count, % Activity\n");
 		
-		ScienceMappingResult result = extractScienceMappingResultFromActivities(subjectEntity); 
+		PublicationJournalStats stats = extractScienceMappingResultFromActivities(subjectEntity);
+		ScienceMappingResult result = stats.scienceMapping;
 		
 		Map<Integer, Float> disciplineToPublicationCount = new HashMap<Integer, Float>();
 		
@@ -550,14 +557,47 @@ public class MapOfScienceVisualizationRequestHandler implements
 		return csvFileContent.toString();
 	}
 	
+	private String getUnlocatedJournalsCSVContent(Entity subjectEntity) {
 
+		StringBuilder csvFileContent = new StringBuilder();
+		
+		csvFileContent.append("Journal, Publication Count\n");
+		
+		PublicationJournalStats stats = extractScienceMappingResultFromActivities(subjectEntity);
+		ScienceMappingResult result = stats.scienceMapping;
+
+		DecimalFormat percentageActivityFormat = new DecimalFormat("#.#");
+		
+		csvFileContent.append(StringEscapeUtils.escapeCsv("No Journal"));
+		csvFileContent.append(", ");
+		csvFileContent.append(percentageActivityFormat.format(stats.noJournalCount));
+		csvFileContent.append("\n");
+		
+		if (result != null) {
+			
+			Map<String, Float> mappedResult = result.getUnmappedResult();
+			
+			for (Map.Entry<String, Float> currentUnMappedJournal : mappedResult.entrySet()) {
+				
+				csvFileContent.append(StringEscapeUtils.escapeCsv(currentUnMappedJournal.getKey()));
+				csvFileContent.append(", ");
+				csvFileContent.append(percentageActivityFormat.format(currentUnMappedJournal.getValue()));
+				csvFileContent.append("\n");
+			}
+			
+		}
+		
+		return csvFileContent.toString();
+	}
+	
 	private String getSubDisciplineToPublicationsCSVContent(Entity subjectEntity) {
 
 		StringBuilder csvFileContent = new StringBuilder();
 		
 		csvFileContent.append("Sub-Discipline, Publication Count, % Activity\n");
 		
-		ScienceMappingResult result = extractScienceMappingResultFromActivities(subjectEntity); 
+		PublicationJournalStats stats = extractScienceMappingResultFromActivities(subjectEntity);
+		ScienceMappingResult result = stats.scienceMapping;
 		
 		Float totalMappedPublications = new Float(0);
 		
@@ -603,7 +643,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 		return csvFileContent.toString();
 	}
 
-	private ScienceMappingResult extractScienceMappingResultFromActivities(
+	private PublicationJournalStats extractScienceMappingResultFromActivities(
 			Entity subjectEntity) {
 		Set<Activity> publicationsForEntity = new HashSet<Activity>();
 		
@@ -615,20 +655,24 @@ public class MapOfScienceVisualizationRequestHandler implements
 		
 		PublicationJournalStats publicationStats = getPublicationJournalStats(publicationsForEntity);
 		
-		ScienceMappingResult result = getScienceMappingResult(publicationStats.journalToPublicationCount);
-		return result;
+		publicationStats.scienceMapping = getScienceMappingResult(publicationStats.journalToPublicationCount);
+		
+		return publicationStats;
 	}
 	
 	private class PublicationJournalStats {
 		
 		int noJournalCount;
 		Map<String, Integer> journalToPublicationCount;
+		ScienceMappingResult scienceMapping;
 		
 		public PublicationJournalStats(int noJournalCount,
-								Map<String, Integer> journalToPublicationCount) {
+									   Map<String, Integer> journalToPublicationCount,
+									   ScienceMappingResult scienceMapping) {
 
 			this.noJournalCount = noJournalCount;
 			this.journalToPublicationCount = journalToPublicationCount;
+			this.scienceMapping = scienceMapping;
 		}
 		
 	}

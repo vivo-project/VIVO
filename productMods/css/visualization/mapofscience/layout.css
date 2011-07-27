@@ -200,6 +200,22 @@ a.map-of-science-links {
     padding: 4px 5px 3px;
 }
 
+#download-unlocated-journal-info {
+    background-color: #2485AE;
+    height: 20px;
+    margin-top: 10px;
+    max-width: 260px;
+    padding: 4px 5px 3px;
+    text-align: center;
+}
+
+#download-unlocated-journal-info a {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 #main-science-areas-table-container {
     margin-top: 0;
 }

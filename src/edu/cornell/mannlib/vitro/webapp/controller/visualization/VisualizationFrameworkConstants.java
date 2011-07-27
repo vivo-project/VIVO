@@ -93,6 +93,7 @@ public class VisualizationFrameworkConstants {
 	 * */
 	public static final String DISCIPLINE_TO_ACTIVTY_VIS_MODE = "discipline";
 	public static final String SUBDISCIPLINE_TO_ACTIVTY_VIS_MODE = "subdiscipline";
+	public static final String SCIENCE_UNLOCATED_JOURNALS_VIS_MODE = "unlocated_journals";
 	
 	
 	/*

@@ -66,7 +66,15 @@ corresponding changes in the included Templates. -->
 mapped <span id="percent-mapped"></span>% of <span id="total-publications"></span> publications
 	<img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo.png" 
 		alt="information icon" 
-		title="" /></div>
+		title="" />
+		
+		<div id="download-unlocated-journal-info">
+			<a href="${entityMapOfScienceUnlocatedJournalsCSVURL}">Save Unlocated Journals</a>
+		</div>
+		
+		</div>
+
+
 
 </div>
 </div>

@@ -108,7 +108,6 @@ $("input[type=checkbox].easyDeselectCheckbox").live('click', function(){
     var entityToBeRemoved = URIToEntityRecord[checkboxValue];
 
     if(!checkbox.is(':checked')){
-        //console.log("Easy deselect checkbox is unclicked!");
         updateRowHighlighter(linkedCheckbox);
         removeUsedColor(entityToBeRemoved);
         removeEntityUnChecked(renderedObjects, entityToBeRemoved);                          
@@ -168,8 +167,6 @@ $(".filter-option").live('click', function() {
 			$("#people-filter").removeClass('active-filter');
 			temporalGraphProcessor.currentSelectedFilter = "ORGANIZATIONS";
 		} 
-		
-//		clearRenderedObjects();
 		
 		$(this).addClass('active-filter');
 		
@@ -379,7 +376,7 @@ var processJSONData = {
 	 *  dynamically generate checkboxes
 	 */
 	loadData: function(jsonData, dataTableParams) {
-	    
+		
 		processJSONData.setupGlobals(jsonData, true);
 		
 		temporalGraphProcessor.dataTable = prepareTableForDataTablePagination(jsonData, dataTableParams);
@@ -395,7 +392,7 @@ var processJSONData = {
 	 *  dynamically generate checkboxes
 	 */
 	reloadData: function(preselectedEntityURIs, jsonData) {
-	    
+		
 		processJSONData.setupGlobals(jsonData);
 		
 		temporalGraphProcessor.dataTable = reloadDataTablePagination(preselectedEntityURIs, jsonData);
@@ -419,6 +416,8 @@ function entityCheckboxOperatedOnEventListener() {
         var checkboxValue = $(this).attr("value");
         var entity = URIToEntityRecord[checkboxValue];
         
+        temporalGraphProcessor.isDefaultSelectionsMaintained = false;
+        
         if (checkbox.is(':checked')) {
         
             performEntityCheckboxSelectedActions(entity, checkboxValue, checkbox);
@@ -436,8 +435,6 @@ function renderTemporalGraphVisualization(parameters) {
 	
     setupLoadingScreen(parameters.responseContainer);
     
-    //return;
-
     getTemporalGraphData(parameters.dataURL,
     					 parameters.bodyContainer,
                          parameters.errorContainer,
@@ -570,6 +567,8 @@ var entitySelector = {
 
 temporalGraphProcessor = {
 		
+	isDefaultSelectionsMaintained: true,
+		
 	loadingScreenTimeout: '',
 	
 	currentSelectedFilter: 'ORGANIZATIONS',
@@ -626,9 +625,20 @@ temporalGraphProcessor = {
 		
 		var currentSelectedEntityURIs = [];
 		
-		$.each(URIToCheckedEntities, function(index, entity){
-			currentSelectedEntityURIs.push(index);
-		});
+		/*
+		 * We want to make sure that the currently selected entities are preserved only if they 
+		 * were somehow manipulated by the users.
+		 * */
+		if (!temporalGraphProcessor.isDefaultSelectionsMaintained) {
+			$.each(URIToCheckedEntities, function(index, entity){
+				currentSelectedEntityURIs.push(index);
+			});	
+		}
+		
+		/*
+		 * Reset the "is default selections maintained" value. 
+		 * */
+		temporalGraphProcessor.isDefaultSelectionsMaintained = true;
 		
 		clearRenderedObjects();
 		
@@ -658,6 +668,13 @@ temporalGraphProcessor = {
         		}
         	});
         } else {
+        	
+        	/*
+        	 * We have to redraw the table so that top 3 entities are selected. fnDraw() triggers sorting of the 
+        	 * table and other filters. 
+        	 * */
+        	temporalGraphProcessor.dataTable.fnDraw();
+        	
 	        /*
 	         * This will make sure that top 3 entities are selected by default when the page loads.
 	        */      
