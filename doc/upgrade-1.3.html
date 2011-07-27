@@ -165,10 +165,10 @@
                             <a href="#theme">Theme</a>
                         </li>
                         <li>
-                            <a href="#template">Template</a>
+                            <a href="#template">Templates</a>
                         </li>
                         <li>
-                            <a href="#listview">List View</a>
+                            <a href="#listview">List Views</a>
                         </li>
                         <li>
                             <a href="#authorization">Authorization</a>
@@ -319,7 +319,7 @@
                     theme.
                 </p>
             </toc>
-            <h4 id="template">iii. Template</h4>
+            <h4 id="template">iii. Templates</h4>
             <toc>
                 <ul>
                     <li>
@@ -360,15 +360,26 @@
                     </li>
                 </ul>
             </toc>
-            <h4 id="listview">v. List view</h4>
+            <h4 id="listview">v. List views</h4>
             <toc>
-                <code>&lt;query-base&gt;</code>
-                and <code>&lt;query-collated&gt;</code>
-                have been replaced with a single query <code>&lt;query-select&gt;</code>
-                that contains tags for fragments to be used only in the collated 
-                version of the query. This and other changes are documented in <code>/vitro/doc/list_view_configuration_guidelines.txt</code>.
-                <br>
-                <br>
+                <ul>
+                    <li>
+                        The file used to register list views has changed to a directory where new
+                        <code>.rdf</code> or <code>.n3</code> files can be placed: 
+                        <code>/vivo/productMods/WEB-INF/ontologies/app/loadedAtStartup</code>. The rdf required
+                        to register a new view has not changed.
+                    </li>
+                    <li>
+                        <code>&lt;query-base&gt;</code> and <code>&lt;query-collated&gt;</code>                      
+                        have been replaced with a single query <code>&lt;query-select&gt;</code>
+                        that contains tags for fragments to be used only in the collated 
+                        version of the query.
+                    </li>
+                </ul>
+                <p>
+                    These and other changes are documented in greater detail in
+                    <code style="whitespace:nowrap;">/vitro/doc/list_view_configuration_guidelines.txt</code>.
+                </p>
             </toc>
             <h4 id="authorization">v. Authorization</h4>
             <toc>
