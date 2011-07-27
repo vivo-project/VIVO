@@ -1,0 +1,4 @@
+# Note: The classes mentioned below must be present in 
+# edu.cornell.mannlib.vitro.webapp.utils.smoketest package.
+
+SolrContextChecker
