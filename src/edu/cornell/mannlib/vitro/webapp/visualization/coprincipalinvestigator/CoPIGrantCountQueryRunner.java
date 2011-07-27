@@ -65,10 +65,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		+ "			?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 		+			"?dateTimeIntervalValue core:start ?startDate . "		
 		+			"?startDate core:dateTime ?startDateTimeValue . " 	
-		+			"OPTIONAL {"	
-		+				"?dateTimeIntervalValue core:end ?endDate . "	
-		+				"?endDate core:dateTime ?endDateTimeValue . " 			
-		+			"}"
+//		+			"OPTIONAL {"	
+//		+				"?dateTimeIntervalValue core:end ?endDate . "	
+//		+				"?endDate core:dateTime ?endDateTimeValue . " 			
+//		+			"}"
 		+ 		"} . ";	
 	
 	private static final String SPARQL_QUERY_COMMON_OPTIONAL_BLOCK_FOR_GRANT_DATE_TIME = ""
@@ -76,10 +76,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		+ "			?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 		+			"?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "		
 		+			"?startDateForGrant core:dateTime ?startDateTimeValueForGrant . " 	
-		+			"OPTIONAL {"	
-		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
-		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
-		+			"}"
+//		+			"OPTIONAL {"	
+//		+				"?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "	
+//		+				"?endDateForGrant core:dateTime ?endDateTimeValueForGrant . " 			
+//		+			"}"
 		+ 		"}";	
 	
 	
@@ -101,11 +101,11 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			+ "		(str(<" + queryURI + ">) as ?" + QueryFieldLabels.PI_URL + ") " 
 			+ "		(str(?PILabel) as ?" + QueryFieldLabels.PI_LABEL + ") " 
 			+ "		(str(?Grant) as ?"	+ QueryFieldLabels.GRANT_URL + ") "	
-			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") " 
+//			+ "		(str(?GrantLabel) as ?" + QueryFieldLabels.GRANT_LABEL + ") " 
 			+ " 	(str(?startDateTimeValue) as ?grantStartDateLit) "
-			+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
+//			+ "		(str(?endDateTimeValue) as ?grantEndDateLit)  "
 			+ " 	(str(?startDateTimeValueForGrant) as ?grantStartDateForGrantLit) "
-			+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "			
+//			+ "		(str(?endDateTimeValueForGrant) as ?grantEndDateForGrantLit)  "			
 			+ "		(str(?CoPI) as ?" + QueryFieldLabels.CO_PI_URL + ") "
 			+ "		(str(?CoPILabel) as ?" + QueryFieldLabels.CO_PI_LABEL + ") "
 			+ "WHERE "
@@ -117,9 +117,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "
-
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
 
@@ -139,9 +137,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "
-
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
@@ -162,9 +158,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "
-
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 
@@ -186,9 +180,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
 
@@ -209,9 +201,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
@@ -232,9 +222,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 
@@ -255,9 +243,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
@@ -278,9 +264,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 
@@ -301,9 +285,7 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 
 			+			"?Role core:roleIn ?Grant . "
 
-			+			"?Grant rdfs:label ?GrantLabel ; "		
-					
-			+			"core:relatedRole ?RelatedRole . "
+			+			"?Grant core:relatedRole ?RelatedRole . "
 
 			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
 
@@ -316,8 +298,6 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			
 			+ 		"} "			
 			+ "} ";
-
-		//System.out.println("\n\nCOPI QUERY - " + sparqlQuery + "\n\n");
 		return sparqlQuery;
 	}
 
@@ -647,10 +627,10 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 		
 		Activity grant = new Activity(grantURL);
 
-		RDFNode grantLabelNode = solution.get(QueryFieldLabels.GRANT_LABEL);
-		if (grantLabelNode != null) {
-			grant.setIndividualLabel(grantLabelNode.toString());
-		}
+//		RDFNode grantLabelNode = solution.get(QueryFieldLabels.GRANT_LABEL);
+//		if (grantLabelNode != null) {
+//			grant.setIndividualLabel(grantLabelNode.toString());
+//		}
 
 
 		RDFNode grantStartYear = solution.get(QueryFieldLabels.ROLE_START_DATE);

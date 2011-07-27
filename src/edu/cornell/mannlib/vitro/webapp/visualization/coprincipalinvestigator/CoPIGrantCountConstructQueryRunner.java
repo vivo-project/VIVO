@@ -39,7 +39,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 
 	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = 
 			"?Role core:roleIn ?Grant . "
-			+ "?Grant rdfs:label ?GrantLabel . "
+//			+ "?Grant rdfs:label ?GrantLabel . "
 			+ "?Grant core:relatedRole ?RelatedRole . ";
 
 	public CoPIGrantCountConstructQueryRunner(String egoURI, Dataset dataset,
@@ -134,18 +134,20 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 				+ "?dateTimeIntervalValue core:start ?startDate . "
 				+ "?startDate core:dateTime ?startDateTimeValue . "
-				+ "?dateTimeIntervalValue core:end ?endDate . "
-				+ "?endDate core:dateTime ?endDateTimeValue . " + "}"
+//				+ "?dateTimeIntervalValue core:end ?endDate . "
+//				+ "?endDate core:dateTime ?endDateTimeValue . " 
+				+ "}"
 				+ "WHERE { " + "{" + "<" + queryURI + ">" + preboundProperty
 				+ " ?Role . "
 				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
 				+ "?dateTimeIntervalValue core:start ?startDate . "
 				+ "?startDate core:dateTime ?startDateTimeValue . "
-				+ "} UNION " + "{" + "<" + queryURI + ">" + preboundProperty
-				+ " ?Role . "
-				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
-				+ "?dateTimeIntervalValue core:end ?endDate . "
-				+ "?endDate core:dateTime ?endDateTimeValue . " + "}" + "}";
+//				+ "} UNION " + "{" + "<" + queryURI + ">" + preboundProperty
+//				+ " ?Role . "
+//				+ "?Role core:dateTimeInterval ?dateTimeIntervalValue . "
+//				+ "?dateTimeIntervalValue core:end ?endDate . "
+//				+ "?endDate core:dateTime ?endDateTimeValue . " 
+				+ "}" + "}";
 
 		return sparqlQuery;
 	}
@@ -162,8 +164,8 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 				+ "?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
 				+ "?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
-				+ "?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "
-				+ "?endDateForGrant core:dateTime ?endDateTimeValueForGrant . "
+//				+ "?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "
+//				+ "?endDateForGrant core:dateTime ?endDateTimeValueForGrant . "
 				+ "}"
 				+ "WHERE { "
 				+ "{"
@@ -176,17 +178,17 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 				+ "?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
 				+ "?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
-				+ "} UNION "
-				+ "{"
-				+ "<"
-				+ queryURI
-				+ ">"
-				+ preboundProperty
-				+ " ?Role . "
-				+ "?Role core:roleIn ?Grant ."
-				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
-				+ "?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "
-				+ "?endDateForGrant core:dateTime ?endDateTimeValueForGrant . "
+//				+ "} UNION "
+//				+ "{"
+//				+ "<"
+//				+ queryURI
+//				+ ">"
+//				+ preboundProperty
+//				+ " ?Role . "
+//				+ "?Role core:roleIn ?Grant ."
+//				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
+//				+ "?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "
+//				+ "?endDateForGrant core:dateTime ?endDateTimeValueForGrant . "
 				+ "}" + "}";
 
 		return sparqlQuery;
