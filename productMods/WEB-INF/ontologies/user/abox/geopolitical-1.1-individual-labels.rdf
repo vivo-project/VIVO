@@ -852,7 +852,7 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Slovakia</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#northern_America">
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">northern America</rdfs:label>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">North America</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Germany">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Germany</rdfs:label>
