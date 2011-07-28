@@ -14,7 +14,7 @@
         <div id="wrapper-content" role="main">
             <h1>VIVO Release 1 V1.3 Upgrade Guide</h1>
             <small>
-                July 28, 2011 - Upgrading from Release 1 V1.2 to Release 1 V1.3
+                July 29, 2011 - Upgrading from Release 1 V1.2 to Release 1 V1.3
             </small>
             <toc>
                 <ul>
@@ -61,30 +61,30 @@
             </p>
             <h4>Authorization</h4>
             <p>
-                Release V1.3 provides an entirely new model of authorization within the
+                Release V1.3 provides an entirely new model of authorization within the 
                 VIVO application to allow more granular control over system 
-                configuration and editing. The first phase of the new user account 
-                interface is included in V1.3. This interface provides a user search, a  
-                root acount, and password reset functionality where the password gets 
-                emailed to the user. The next phase will provide the ability to create  
+                configuration and editing. The first phase of the new user account  
+                interface is included in V1.3. This interface provides a user search, a 
+                root acount, and password reset functionality where the password gets  
+                emailed to the user. The next phase will provide the ability to create 
                 new roles. 
             </p>
             <h4>Menu management</h4>
             <p>
                 The menus across the top of the site (Home, People, Organizations, 
-                Research, Events) can now be managed in a web form instead of editing 
-                an RDF file. In addition to making site management much easier,  
-                form-based editing also allows more control over what classes of data 
-                are displayed and provides a mechanism to limit certain menu pages to  
+                Research, Events) can now be managed in a web form instead of editing  
+                an RDF file. In addition to making site management much easier, 
+                form-based editing also allows more control over what classes of data  
+                are displayed and provides a mechanism to limit certain menu pages to 
                 content identified as internal to the institution. 
             </p>
             <h4>FreeMarker template improvements</h4>
             <p>
                 While less directly visible to the public, V1.3 also includes 
-                additional changes focused directly on supporting open source community 
-                involvement in extending and customizing VIVO. The development team  
-                began a year ago to transition VIVO&#39;s code base away from Java Server 
-                Pages to the FreeMarker page templating system that much more cleanly  
+                additional changes focused directly on supporting open source community  
+                involvement in extending and customizing VIVO. The development team 
+                began a year ago to transition VIVO&#39;s code base away from Java Server  
+                Pages to the FreeMarker page templating system that much more cleanly 
                 separates internal application programming logic from page display. 
             </p>
             <h4>Visualization</h4>
@@ -93,12 +93,12 @@
                 which allows users to visually explore the scientific strengths of a
                 university, school, department, or person in the VIVO instance. Users
                 will be able to see where an organization or person&#39;s interests lay
-                across 13 major scientific disciplines or 554 sub-disciplines, and will
+                across 13 major scientific disciplines or 554 sub-disciplines, and will 
                 be able to see how these disciplines and sub-disciplines interrelate 
-                with one another on the Map of Science. Wireframes and design 
-                documentation for upcoming enhanced versions of the Map of Science  
-                visualization have already been developed; the Map of Science 
-                visualization will most likely be in the form of a PDF that a user can  
+                with one another on the Map of Science. Wireframes and design  
+                documentation for upcoming enhanced versions of the Map of Science 
+                visualization have already been developed; the Map of Science  
+                visualization will most likely be in the form of a PDF that a user can 
                 download. 
             </p>
             <p>
@@ -227,10 +227,10 @@
                     </li>
                     <li>
                         DO NOT reinstall MySQL or recreate the MySQL database. Please 
-                        ensure that you back-up the MySQL database. Also note that VIVO 1.2 
-                        will not run on older versions of MySQL that may have worked with  
-                        1.1.1. Be sure to run VIVO 1.2 with MySQL 5.1 or higher. Using 
-                        unsupported versions may result in strange error messages related to  
+                        ensure that you back-up the MySQL database. Also note that VIVO 1.2  
+                        will not run on older versions of MySQL that may have worked with 
+                        1.1.1. Be sure to run VIVO 1.2 with MySQL 5.1 or higher. Using  
+                        unsupported versions may result in strange error messages related to 
                         table formatting or other unexpected problems. 
                     </li>
                     <li>
@@ -238,10 +238,10 @@
                     </li>
                     <li>
                         First-time login of the administrator account after the 
-                        upgrade 
-                        process is complete will use the password previously set, NOT the  
-                        default password used on the first login after the initial 
-                        installation. With V1.3 there is also a new root user. Please see the  
+                        upgrade  
+                        process is complete will use the password previously set, NOT the 
+                        default password used on the first login after the initial  
+                        installation. With V1.3 there is also a new root user. Please see the 
                         section on <a href="#authorization">Authorization changes</a>
                         for more 
                         information. 
@@ -269,20 +269,20 @@
                     queries are issued directly against the underlying database. This
                     allows VIVO installations to display data from large RDF models while
                     requiring only a small amount of server memory to run the application.
-                    There is a tradeoff in response time: pages may take slightly longer to
+                    There is a tradeoff in response time: pages may take slightly longer to 
                     load in SDB mode, and performance will depend on the configuration 
-                    parameters of the database server. Additionally, advanced OWL reasoning 
-                    (not enabled by default in either mode) is not possible in SDB mode.  
-                    With SDB, only the default set of inferences (inferred rdf:type 
-                    statements) are generated, and they are generated as soon as data is  
+                    parameters of the database server. Additionally, advanced OWL reasoning  
+                    (not enabled by default in either mode) is not possible in SDB mode. 
+                    With SDB, only the default set of inferences (inferred rdf:type  
+                    statements) are generated, and they are generated as soon as data is 
                     edited rather than in a background process. 
                 </p>
                 <p>
                     A conversion from RDB to SDB mode can take a number of hours to 
-                    complete if the installation contains a large amount of RDF data 
-                    (roughly a million triples or more).&nbsp; You can start the conversion  
-                    process in the background while the RDB system is running. This will 
-                    reduce the delay in initial startup after the application is redeployed  
+                    complete if the installation contains a large amount of RDF data  
+                    (roughly a million triples or more).&nbsp; You can start the conversion 
+                    process in the background while the RDB system is running. This will  
+                    reduce the delay in initial startup after the application is redeployed 
                     with deploy.properties set for SDB. <span style="font-weight: bold;">Note
                         that it is important not to edit any data anywhere in the application
                         while this background conversion is running</span>. 
@@ -298,12 +298,12 @@
                 </p>
                 <p>
                     During the course of the SDB setup, which may take several hours
-                    on
+                    on 
                     a large database, subsequent requests to /sdbsetup will display a 
-                    message that the operation is still in progress. When a request for 
-                    this page shows a message that the SDB setup has completed  
-                    successfully, shut down Tomcat, set deploy.properties to SDB mode, 
-                    redeploy, and restart Tomcat. VIVO will now be running from the SDB  
+                    message that the operation is still in progress. When a request for  
+                    this page shows a message that the SDB setup has completed 
+                    successfully, shut down Tomcat, set deploy.properties to SDB mode,  
+                    redeploy, and restart Tomcat. VIVO will now be running from the SDB 
                     store. 
                 </p>
                 <p>
@@ -364,21 +364,21 @@
             <toc>
                 <ul>
                     <li>
-                        The file used to register list views has changed to a directory where new
-                        <code>.rdf</code> or <code>.n3</code> files can be placed: 
-                        <code>/vivo/productMods/WEB-INF/ontologies/app/loadedAtStartup</code>. The rdf required
+                        The file used to register list views has changed to a directory where new<code>.rdf</code>
+                        or <code>.n3</code>
+                        files can be placed: <code>/vivo/productMods/WEB-INF/ontologies/app/loadedAtStartup</code>. The rdf required
                         to register a new view has not changed.
                     </li>
                     <li>
-                        <code>&lt;query-base&gt;</code> and <code>&lt;query-collated&gt;</code>                      
+                        <code>&lt;query-base&gt;</code>
+                        and <code>&lt;query-collated&gt;</code>
                         have been replaced with a single query <code>&lt;query-select&gt;</code>
                         that contains tags for fragments to be used only in the collated 
                         version of the query.
                     </li>
                 </ul>
                 <p>
-                    These and other changes are documented in greater detail in
-                    <code style="whitespace:nowrap;">/vitro/doc/list_view_configuration_guidelines.txt</code>.
+                    These and other changes are documented in greater detail in<code style="whitespace:nowrap;">/vitro/doc/list_view_configuration_guidelines.txt</code>.
                 </p>
             </toc>
             <h4 id="authorization">v. Authorization</h4>
@@ -507,23 +507,23 @@
                 <dl style="margin-left: 40px;">
                     <dd>
                         <p>
-                            If you are upgrading to VIVO V1.3 from an existing
+                            If you are upgrading to VIVO V1.3 from an existing 
                             VIVO 
-                            installation, the user accounts in your system will be migrated into 
-                            the new data structures. When migrating an account, both the  
-                            EmailAddress field and the ExternalAuthId field will be set to the 
-                            value of the Username field in the old account. The new account should  
+                            installation, the user accounts in your system will be migrated into  
+                            the new data structures. When migrating an account, both the 
+                            EmailAddress field and the ExternalAuthId field will be set to the  
+                            value of the Username field in the old account. The new account should 
                             behave as the old account did. 
                         </p>
                         <p>
                             When creating a new user account, or editing an existing one, 
                             the system requires that your e-mail address be in a valid form, like <code>somebody@somewhere.edu</code>.
-                            You
+                            You 
                             should 
-                            plan 
-                            for  
-                            this 
-                            as  
+                            plan  
+                            for 
+                            this  
+                            as 
                             part of your migration to V1.3 
                         </p>
                     </dd>
@@ -552,10 +552,10 @@
                         <blockquote>
                             <strong>Note:</strong>
                             when creating the account, 
-                            the 
-                            administrator may indicate that it will only be used with an external  
-                            authentication system like Shibboleth or CUWebAuth. In this case, the 
-                            account will not require a password, and the e-mail notification  
+                            the  
+                            administrator may indicate that it will only be used with an external 
+                            authentication system like Shibboleth or CUWebAuth. In this case, the  
+                            account will not require a password, and the e-mail notification 
                             message to the user will not provide a password link. 
                         </blockquote>
                         <p>
@@ -625,12 +625,12 @@
                         <div style="margin-left: 40px;">
                             The password for this account is 
                             automatically set to <code>rootPassword</code>,
-                            but
+                            but 
                             you 
-                            will 
-                            be  
-                            required 
-                            to change the password the first time you log  
+                            will  
+                            be 
+                            required  
+                            to change the password the first time you log 
                             in. 
                         </div>
                         <blockquote style="margin-left: 40px;">
@@ -641,11 +641,11 @@
                         <p style="margin-left: 40px;">
                             The root account is not a site
                             administrator&#39;s account &mdash; it
-                            is
+                            is 
                             more powerful than a site administrator&#39;s account. The root account is 
-                            permitted to visit any page in a VIVO application. It is permitted to 
-                            see any data property, and to enter data into any field. As such, the  
-                            root account can be very useful and rather dangerous. It can also give 
+                            permitted to visit any page in a VIVO application. It is permitted to  
+                            see any data property, and to enter data into any field. As such, the 
+                            root account can be very useful and rather dangerous. It can also give  
                             you a distorted view of what your VIVO site looks like, since data is 
                             shown here which ins not visible to other accounts.
                         </p>
@@ -665,10 +665,10 @@
                 </p>
                 <p>
                     2. Create a new deploy.properties using the same values as in 
-                    your 
-                    previous installation and set values for the new variables as described  
-                    below (vitro.local.solr.url, vitro.local.solr.ipaddress.mask, 
-                    vitro.home.directory, email.smptHost, email.replyTo,  
+                    your  
+                    previous installation and set values for the new variables as described 
+                    below (vitro.local.solr.url, vitro.local.solr.ipaddress.mask,  
+                    vitro.home.directory, email.smptHost, email.replyTo, 
                     rootUser.emailAddress) 
                     <br>
                 </p>
@@ -835,10 +835,10 @@
                         <tr>
                             <td colspan="2">
                                 Specify an email address which will appear as 
-                                the sender in e-mail notifications to users (Optional). If a user 
-                                replies to the notification, this address will receive the reply. If a  
-                                user's e-mail address is invalid, this address will receive the error 
-                                notice. If this is left blank, users will not be notified of changes to  
+                                the sender in e-mail notifications to users (Optional). If a user  
+                                replies to the notification, this address will receive the reply. If a 
+                                user's e-mail address is invalid, this address will receive the error  
+                                notice. If this is left blank, users will not be notified of changes to 
                                 their accounts. 
                             </td>
                         </tr>
@@ -891,23 +891,6 @@
                             </td>
                             <td>
                                 password 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                Specify the Jena triple store technology to 
-                                use.  
-                                SDB is Jena's SPARQL database; this setting allows RDF data to scale 
-                                beyond the limits of the JVM heap. Set to RDB to use the older Jena RDB  
-                                store with in-memory caching. 
-                            </td>
-                        </tr>
-                        <tr class="odd_row">
-                            <td>
-                                VitroConnection.DataSource.tripleStoreType 
-                            </td>
-                            <td>
-                                SDB 
                             </td>
                         </tr>
                         <tr>
@@ -1024,13 +1007,31 @@
                         </tr>
                         <tr>
                             <td colspan="2">
+                                If an external authentication system like Shibboleth or CUWebAuth is to be 
+                                used, these properties say how the login button should be labeled, and which  
+                                HTTP header will contain the user ID from the authentication system. If such 
+                                a system is not to be used, leave these commented out. Consult the installation  
+                                instructions for more details. 
+                            </td>
+                        </tr>
+                        <tr class="odd_row">
+                            <td>
+                                externalAuth.buttonText
+                                <br/>
+                                externalAuth.netIdHeaderName
+                            </td>
+                            <td>
+                                Log in using BearCat Shibboleth
+                                <br/>
+                                remote_userID 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
                                 The temporal graph visualization can require
                                 extensive machine resources. This can have a particularly noticable
                                 impact on memory usage if
                                 <ul>
-                                    <li>
-                                        VIVO is configured to use Jena SDB, 
-                                    </li>
                                     <li>
                                         The organization tree is deep, 
                                     </li>
@@ -1055,12 +1056,12 @@
                                 The temporal graph visualization is used to
                                 compare different organizations/people within an organization on
                                 parameters like number of publications or grants. By default, the app
-                                will attempt to make its best guess at the top level organization in
+                                will attempt to make its best guess at the top level organization in 
                                 your instance. If you're unhappy with this selection, uncomment out the 
-                                property below and set it to the URI of the organization individual you 
-                                want to identify as the top level organization. It will be used as the  
-                                default whenever the temporal graph visualization is rendered without 
-                                being passed an explicit org. For example, to use "Ponce School of  
+                                property below and set it to the URI of the organization individual you  
+                                want to identify as the top level organization. It will be used as the 
+                                default whenever the temporal graph visualization is rendered without  
+                                being passed an explicit org. For example, to use "Ponce School of 
                                 Medicine" as the top organization: 
                                 <br>
                                 <code>visualization.topLevelOrg =
@@ -1078,7 +1079,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                An absolute file path, pointing to the root directory of the Harvester utility.
+                                An absolute file path, pointing to the root directory of the Harvester utility. 
                                 You must include the final slash. 
                                 Setting a value for harvester.location indicates that the Harvester is installed at 
                                 this path. This will enable the Harvester functions in the Ingest Tools page.
@@ -1121,10 +1122,10 @@
                             the theme:<pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
                             A sample <code>googleAnalytics.ftl</code>
                             is included in the built-in 
-                            theme. This file serves only as an example, and you must replace the 
-                            tracking code shown with your institution's own tracking code. For  
-                            additional information about the GATC for the NIH-funded VIVO 
-                            implementation sites and a copy of your institution's tracking code,  
+                            theme. This file serves only as an example, and you must replace the  
+                            tracking code shown with your institution's own tracking code. For 
+                            additional information about the GATC for the NIH-funded VIVO  
+                            implementation sites and a copy of your institution's tracking code, 
                             see the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO
                                 Google
                                 Analytics
@@ -1222,10 +1223,10 @@
                 </p>
                 <p>
                     When Apache Tomcat starts up following the upgrade, it will 
-                    initiate a process to examine the knowledge base and apply necessary 
-                    changes. Not all of the modifications that may be required can be  
-                    automated, so manual review of the knowledge base is recommended after 
-                    the automated upgrade process. The automated process will make only the  
+                    initiate a process to examine the knowledge base and apply necessary  
+                    changes. Not all of the modifications that may be required can be 
+                    automated, so manual review of the knowledge base is recommended after  
+                    the automated upgrade process. The automated process will make only the 
                     following types of changes: 
                 </p>
                 <dl>
