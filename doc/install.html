@@ -28,75 +28,84 @@
                     </li>
                 </ul>
             </toc>
-            <!-- Release Announcement -->
-			<h2 id="announcement">Release anouncement for V1.3</h2>
-<!-- Release Announcement -->VIVO Release 1.3 incorporates changes to the search 
-			indexing, user accounts, menu management, ontology, and visualizations, and begins 
-			integration of VIVO Harvester functions with VIVO's own ingest tools. 
+            <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.3</h2>
+            <!-- Release Announcement -->VIVO Release 1.3 incorporates changes to the search 
+            indexing, user accounts, menu management, ontology, and visualizations, and begins  
+            integration of VIVO Harvester functions with VIVO's own ingest tools. 
             <br>
             <h4>Search</h4>
-            <p>VIVO 1.3 will feature notable improvements to the local search, primarily to 
-			improve relevance ranking but also to boost the influence of semantic relationships 
-			in the search. This will improve recall by including text from related resources 
-			(e.g., adding a person's grant and publication titles to his or her search entry) 
-			and by boosting overall relevance ranking based on the number and nature of 
-			connections from one individual to others.</p>
-			<p>VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place of 
-			Apache Lucene to improve indexing and faceting of search results. The migration 
-			to Solr also aligns the local search with the VIVO multi-site search site under 
-			 development for release prior to the 2011 VIVO Conference.
+            <p>
+                VIVO 1.3 will feature notable improvements to the local search, primarily to 
+                improve relevance ranking but also to boost the influence of semantic relationships  
+                in the search. This will improve recall by including text from related resources 
+                (e.g., adding a person's grant and publication titles to his or her search entry)  
+                and by boosting overall relevance ranking based on the number and nature of 
+                connections from one individual to others.
+            </p>
+            <p>
+                VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place of 
+                Apache Lucene to improve indexing and faceting of search results. The migration  
+                to Solr also aligns the local search with the VIVO multi-site search site under 
+                development for release prior to the 2011 VIVO Conference.
             </p>
             <h4>Authorization</h4>
-            <p>Release 1.3 provides an entirely new model of authorization within the
-            VIVO application to allow more granular control over system
-            configuration and editing. The first phase of the new user account 
-            interface is included in V1.3. This interface provides a user search, a 
-            root acount, and password reset functionality where the password gets  
-            emailed to the user. The next phase will provide the ability to create 
-            new roles. 
+            <p>
+                Release 1.3 provides an entirely new model of authorization within the 
+                VIVO application to allow more granular control over system 
+                configuration and editing. The first phase of the new user account  
+                interface is included in V1.3. This interface provides a user search, a 
+                root acount, and password reset functionality where the password gets  
+                emailed to the user. The next phase will provide the ability to create 
+                new roles. 
             </p>
             <h4>Menu management</h4>
-            <p>The menus across the top of the site (Home, People, Organizations,
-            Research, Events) can now be managed in a web form instead of editing 
-            an RDF file. In addition to making site management much easier, 
-            form-based editing also allows more control over what classes of data  
-            are displayed and provides a mechanism to limit certain menu pages to 
-            content identified as internal to the institution. 
+            <p>
+                The menus across the top of the site (Home, People, Organizations, 
+                Research, Events) can now be managed in a web form instead of editing  
+                an RDF file. In addition to making site management much easier, 
+                form-based editing also allows more control over what classes of data  
+                are displayed and provides a mechanism to limit certain menu pages to 
+                content identified as internal to the institution. 
             </p>
             <h4>FreeMaker template improvements</h4>
-            <p>While less directly visible to the public, version 1.3 also includes
-            additional changes focused directly on supporting open source community 
-            involvement in extending and customizing VIVO. The development team 
-            began a year ago to transition VIVO&#39;s code base away from Java Server  
-            Pages to the FreeMarker page templating system that much more cleanly 
-            separates internal application programming logic from page display. 
+            <p>
+                While less directly visible to the public, version 1.3 also includes 
+                additional changes focused directly on supporting open source community  
+                involvement in extending and customizing VIVO. The development team 
+                began a year ago to transition VIVO&#39;s code base away from Java Server  
+                Pages to the FreeMarker page templating system that much more cleanly 
+                separates internal application programming logic from page display. 
             </p>
             <h4>Visualization</h4>
-            <p>The visualization team has implemented a Map of Science visualization,
-            which allows users to visually explore the scientific strengths of a
-            university, school, department, or person in the VIVO instance. Users
-            will be able to see where an organization or person&#39;s interests lay
-            across 13 major scientific disciplines or 554 sub-disciplines, and will
-            be able to see how these disciplines and sub-disciplines interrelate
-            with one another on the map of science. Wireframes and design 
-            documentation for upcoming enhanced versions of the Map of Science 
-            visualization have already been developed; the Map of Science  
-            visualization will most likely be in the form of a PDF that a user can 
-            download. 
+            <p>
+                The visualization team has implemented a Map of Science visualization,
+                which allows users to visually explore the scientific strengths of a
+                university, school, department, or person in the VIVO instance. Users
+                will be able to see where an organization or person&#39;s interests lay
+                across 13 major scientific disciplines or 554 sub-disciplines, and will 
+                be able to see how these disciplines and sub-disciplines interrelate 
+                with one another on the map of science. Wireframes and design  
+                documentation for upcoming enhanced versions of the Map of Science 
+                visualization have already been developed; the Map of Science  
+                visualization will most likely be in the form of a PDF that a user can 
+                download. 
             </p>
-            <p>Several visualization also now provide a caching feature that improves 
-            performance after the initial processing. 
+            <p>
+                Several visualization also now provide a caching feature that improves 
+                performance after the initial processing. 
             </p>
             <h4>QR Codes</h4>
-            <p>Pages for people in VIVO now have an icon for displaying QR codes to allow 
-			capturing names and available contact information on mobile devices.
+            <p>
+                Pages for people in VIVO now have an icon for displaying QR codes to allow 
+                capturing names and available contact information on mobile devices.
             </p>
-			<h4>Harvester Integration</h4>
-			<p>VIVO sites have the option with Release 1.3 of coordinating the configuration 
-			of VIVO and the Harvester to enable many Harvester functions to be initiated 
-			from the VIVO Ingest Tools menu in support of more unified and centralized 
-			management for data ingest. 
-			</p>
+            <h4>Harvester Integration</h4>
+            <p>
+                VIVO sites have the option with Release 1.3 of coordinating the configuration 
+                of VIVO and the Harvester to enable many Harvester functions to be initiated  
+                from the VIVO Ingest Tools menu in support of more unified and centralized 
+                management for data ingest. 
+            </p>
             <h4>Ontology changes</h4>
             <ul>
                 <li>
@@ -120,14 +129,14 @@
                 </li>
             </ul>
             <h4>Linked open data</h4>
-            <p>Responses to linked data requests have been enhanced to include 
-            additional context about any individual, in working toward a goal of  
-            being able to provide all the data in a person's profile available as 
-            RDF via a single web request. 
+            <p>
+                Responses to linked data requests have been enhanced to include 
+                additional context about any individual, in working toward a goal of  
+                being able to provide all the data in a person's profile available as 
+                RDF via a single web request. 
             </p>
-            <br>			
-            <hr><!-- Page break --><!-- Installation process for V1.2 -->
-			<h2 id="installation">Installation process for V1.3</h2>
+            <br>
+            <hr><!-- Page break --><!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.3</h2>
             <p>
                 This document is a summary of the VIVO installation process. This 
                 and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
@@ -136,9 +145,9 @@
             <ul>
                 <li>
                     These instructions assume that you are performing a clean
-                    install, including emptying an existing database, emptying the VIVO
-                    home directory, and removing a previous installation from the Tomcat
-                    webapps directory. Product functionality may not be as expected if you 
+                    install, including emptying an existing database, emptying the VIVO 
+                    home directory, and removing a previous installation from the Tomcat 
+                    webapps directory. Product functionality may not be as expected if you  
                     install over an existing installation of an earlier version. 
                 </li>
                 <li>
@@ -147,8 +156,8 @@
                 </li>
             </ul>
             <p>
-                VIVO Developers: If you are working on the VIVO source code from
-                Subversion, the instructions are slightly different. Please consult 
+                VIVO Developers: If you are working on the VIVO source code from 
+                Subversion, the instructions are slightly different. Please consult  
                 developers.txt in this directory. 
             </p>
             <h3>Where does VIVO live on your computer?</h3>
@@ -166,31 +175,31 @@
             <h4>VIVO inside Tomcat</h4>
             <p>
                 When you run the build script to compile and deploy VIVO (see <a href="#deploy">Step VI</a>, below), the files will be deployed to a
-                directory inside Tomcat. This is the actual executing code for VIVO,
-                but you won’t need to look at it or change it. If you need to change
-                VIVO, make the changes in the distribution directory, and run the build 
+                directory inside Tomcat. This is the actual executing code for VIVO, 
+                but you won’t need to look at it or change it. If you need to change 
+                VIVO, make the changes in the distribution directory, and run the build  
                 script again. Tell the build script where to find Tomcat by setting <code>tomcat.home</code>
                 in the deploy.properties file (see <a href="#deploy_properties">Step V</a>,
                 below).
             </p>
             <h4>The VIVO home directory</h4>
             <p>
-                VIVO will use this area to store some of the data it uses. Uploaded
-                image files are stored here, and the search index is stored here also.
-                You can create this wherever you choose. Tell VIVO where to find the 
+                VIVO will use this area to store some of the data it uses. Uploaded 
+                image files are stored here, and the search index is stored here also. 
+                You can create this wherever you choose. Tell VIVO where to find the  
                 home directory by setting <code>vitro.home.directory</code>
                 in the 
-                deploy.properties file (see <a href="#deploy_properties">Step V</a>,
-                below). You must create this directory before starting VIVO, and you
-                must ensure that Tomcat has permission to read and write to this 
+                deploy.properties file (see <a href="#deploy_properties">Step V</a>, 
+                below). You must create this directory before starting VIVO, and you 
+                must ensure that Tomcat has permission to read and write to this  
                 directory when it runs. 
             </p>
             <h4>The MySQL database</h4>
             <p>
-                Essentially all of the data that you store in VIVO will be given to
-                MySQL for storage. The actual location of this data depends on what 
-                system you have, and on how you install MySQL (see <a href="#required_software">Step I</a>, below). but you won’t need to
-                know the location. You will access the data through VIVO, or 
+                Essentially all of the data that you store in VIVO will be given to 
+                MySQL for storage. The actual location of this data depends on what  
+                system you have, and on how you install MySQL (see <a href="#required_software">Step I</a>, below). but you won’t need to 
+                know the location. You will access the data through VIVO, or  
                 occasionally through the MySQL client application. 
             </p>
             <toc>
@@ -235,9 +244,9 @@
                     <li>
                         <a href="#installation_check">Was the installation successful?</a>
                     </li>
-					<li>
-						<a href="#termsofuse">Review the VIVO Terms of Use</a>
-					</li>
+                    <li>
+                        <a href="#termsofuse">Review the VIVO Terms of Use</a>
+                    </li>
                 </ol>
             </toc>
             <h3 id="required_software">I. Install required software </h3>
@@ -263,14 +272,14 @@
             <p>
                 Be sure to set up the environment variables for <code java_home="">JAVA_HOME</code>
                 and <code>ANT_HOME</code>
-                and add the executables to your path per
-                your operating system and installation directions from the software 
+                and add the executables to your path per 
+                your operating system and installation directions from the software  
                 support websites. 
             </p>
             <p>
-                * Note that VIVO 1.2 will not run on older versions of MySQL that
-                may have worked with 1.1.1. Be sure to run VIVO 1.2 with MySQL 5.1 or
-                higher. Using unsupported versions may result in strange error messages 
+                * Note that VIVO V1.2 or V1.3 will not run on older versions of MySQL that 
+                may have worked with 1.1.1. Be sure to run VIVO 1.2 with MySQL 5.1 or 
+                higher. Using unsupported versions may result in strange error messages  
                 related to table formatting or other unexpected problems. 
             </p>
             <p>
@@ -280,13 +289,13 @@
             <p>
                 Decide on a database name, username, and password. Log into your 
                 MySQL server and create a new database in MySQL that uses <code>UTF-8
-                    encoding</code>. You will need these values for Step IV when you
-                configure the deployment properties. At the MySQL command line you can
-                create the database and user with these commands substituting your 
+                    encoding</code>. You will need these values for Step IV when you 
+                configure the deployment properties. At the MySQL command line you can 
+                create the database and user with these commands substituting your  
                 values for <code>dbname</code>, <code>username</code>, and <code>password</code>.
-                Most
-                of
-                the 
+                Most 
+                of 
+                the  
                 time, the hostname will equal <code>localhost</code>. 
             </p>
             <pre>                CREATE DATABASE dbname CHARACTER SET utf8;<br></pre>
@@ -302,8 +311,8 @@
                 <br>
             </h3>
             <p>
-                Download the VIVO application source as either <code>rel-1.2.zip</code>
-                or <code>rel-1.2.gz</code>
+                Download the VIVO application source as either <code>rel-1.3.zip</code>
+                or <code>rel-1.3.gz</code>
                 file and unpack it on your web server: 
                 <br>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
@@ -316,15 +325,15 @@
             </p>
             <p>
                 <em>Windows:</em>
-                For those installing on Windows operating
-                system, include the windows drive and use the forward slash "/" and not 
+                For those installing on Windows operating 
+                system, include the windows drive and use the forward slash "/" and not  
                 the back slash "\" in the directory locations, e.g. <code>c:/tomcat</code>.
             </p>
             <p>
                 <em>External authentication:</em>
-                If you want to use an external
-                authentication system like Shibboleth or CUWebAuth, you will need to
-                set two additional properties in this file. See the section below 
+                If you want to use an external 
+                authentication system like Shibboleth or CUWebAuth, you will need to 
+                set two additional properties in this file. See the section below  
                 entitled <a href="#external_auth">Using an External Authentication
                     System with VIVO</a>. 
             </p>
@@ -364,8 +373,8 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Directory where Vitro code is located. In most
-                            deployments, this is set to ./vitro-core (It is not uncommon for this 
+                            Directory where Vitro code is located. In most 
+                            deployments, this is set to ./vitro-core (It is not uncommon for this  
                             setting to point elsewhere in development environments). 
                         </td>
                     </tr>
@@ -407,8 +416,8 @@
                         <td colspan="2">
                             URL of Solr context used in local VIVO search.
                             Should consist of:<pre>    scheme + servername + port + vivo_webapp_name + "solr"</pre>
-                            In the standard installation, the Solr context will be on the same
-                            server as VIVO, and in the same Tomcat instance. The path will be the 
+                            In the standard installation, the Solr context will be on the same 
+                            server as VIVO, and in the same Tomcat instance. The path will be the  
                             VIVO webapp.name (specified above) + "solr" 
                         </td>
                     </tr>
@@ -422,25 +431,24 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Restricts access to the Solr search platform.
-                            One or more regular expressions, separated by commas. When a request is
-                            made to Solr, the IP address of the requestor must match one of the 
+                            Restricts access to the Solr search platform. 
+                            One or more regular expressions, separated by commas. When a request is 
+                            made to Solr, the IP address of the requestor must match one of the  
                             patterns, or the request will be rejected. 
                             <br>
-                            Examples:
-                            <code>
-                            <ul>
-                                <li>
-                                    vitro.local.solr.ipaddress.mask = 127\.0\.0\.1 
-                                </li>
-                                <li>
-                                    vitro.local.solr.ipaddress.mask = 
-                                    127\.0\.0\.1,0:0:0:0:0:0:0:1 
-                                </li>
-                                <li>
-                                    vitro.local.solr.ipaddress.mask = 169.254.* 
-                                </li>
-                            </ul>
+                            Examples:<code>
+                                <ul>
+                                    <li>
+                                        vitro.local.solr.ipaddress.mask = 127\.0\.0\.1 
+                                    </li>
+                                    <li>
+                                        vitro.local.solr.ipaddress.mask = 
+                                        127\.0\.0\.1,0:0:0:0:0:0:0:1 
+                                    </li>
+                                    <li>
+                                        vitro.local.solr.ipaddress.mask = 169.254.* 
+                                    </li>
+                                </ul>
                             </code>
                         </td>
                     </tr>
@@ -454,9 +462,9 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Directory where the VIVO application will store
-                            the data that it creates. This includes uploaded files (usually images)
-                            and the Solr search index. Be sure this directory exists and is 
+                            Directory where the VIVO application will store 
+                            the data that it creates. This includes uploaded files (usually images) 
+                            and the Solr search index. Be sure this directory exists and is  
                             writable by the user who the Tomcat service is running as. 
                         </td>
                     </tr>
@@ -470,9 +478,9 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify an SMTP host that the application will
-                            use for sending e-mail (Optional). If this is left blank, the contact
-                            form will be hidden and disabled, and users will not be notified of 
+                            Specify an SMTP host that the application will 
+                            use for sending e-mail (Optional). If this is left blank, the contact 
+                            form will be hidden and disabled, and users will not be notified of  
                             changes to their accounts. 
                         </td>
                     </tr>
@@ -488,9 +496,9 @@
                         <td colspan="2">
                             Specify an email address which will appear as
                             the sender in e-mail notifications to users (Optional). If a user
-                            replies to the notification, this address will receive the reply. If a
-                            user's e-mail address is invalid, this address will receive the error
-                            notice. If this is left blank, users will not be notified of changes to 
+                            replies to the notification, this address will receive the reply. If a 
+                            user's e-mail address is invalid, this address will receive the error 
+                            notice. If this is left blank, users will not be notified of changes to  
                             their accounts. 
                         </td>
                     </tr>
@@ -546,25 +554,17 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify the Jena triple store technology to use.
-                            SDB is Jena's SPARQL database; this setting allows RDF data to scale
-                            beyond the limits of the JVM heap. Set to RDB to use the older Jena RDB 
+                            Specify the Jena triple store technology to use. 
+                            SDB is Jena's SPARQL database; this setting allows RDF data to scale 
+                            beyond the limits of the JVM heap. Set to RDB to use the older Jena RDB  
                             store with in-memory caching. 
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                            VitroConnection.DataSource.tripleStoreType 
-                        </td>
-                        <td>
-                            SDB 
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify the maximum number of active connections
-                            in the database connection pool to support the anticipated number of
-                            concurrent page requests. It is not necessary to adjust this value when 
+                            Specify the maximum number of active connections 
+                            in the database connection pool to support the anticipated number of 
+                            concurrent page requests. It is not necessary to adjust this value when  
                             using the RDB configuration. 
                         </td>
                     </tr>
@@ -578,8 +578,8 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify the maximum number of database
-                            connections that will be allowed to remain idle in the connection pool. 
+                            Specify the maximum number of database 
+                            connections that will be allowed to remain idle in the connection pool.  
                             Default is 25% of the maximum number of active connections. 
                         </td>
                     </tr>
@@ -594,9 +594,9 @@
                     <tr>
                         <td colspan="2">
                             Change the dbtype setting to use a database
-                            other than MySQL. Otherwise, leave this value unchanged. Possible
-                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and
-                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported 
+                            other than MySQL. Otherwise, leave this value unchanged. Possible 
+                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and 
+                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported  
                             for additional information. 
                         </td>
                     </tr>
@@ -610,9 +610,9 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify a driver class name to use a database
-                            other than MySQL. Otherwise, leave this value unchanged. This JAR file
-                            for this driver must be added to the the webapp/lib directory within 
+                            Specify a driver class name to use a database 
+                            other than MySQL. Otherwise, leave this value unchanged. This JAR file 
+                            for this driver must be added to the the webapp/lib directory within  
                             the vitro.core.dir specified above. 
                         </td>
                     </tr>
@@ -626,8 +626,8 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Change the validation query used to test
-                            database connections only if necessary to use a database other than 
+                            Change the validation query used to test 
+                            database connections only if necessary to use a database other than  
                             MySQL. Otherwise, leave this value unchanged. 
                         </td>
                     </tr>
@@ -646,9 +646,9 @@
                             temporary password of 'rootPassword'. You will be prompted to create a
                             new password on first login.
                             <p>
-                                NOTE: The root user account has access to all data and all
-                                operations in VIVO. Data views may be surprising when logged in as the
-                                root user. It is best to create a Site Admin account to use for every 
+                                NOTE: The root user account has access to all data and all 
+                                operations in VIVO. Data views may be surprising when logged in as the 
+                                root user. It is best to create a Site Admin account to use for every  
                                 day administrative tasks. 
                             </p>
                         </td>
@@ -663,9 +663,9 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            The URI of a property that can be used to
-                            associate an Individual with a user account. When a user logs in with a
-                            name that matches the value of this property, the user will be 
+                            The URI of a property that can be used to 
+                            associate an Individual with a user account. When a user logs in with a 
+                            name that matches the value of this property, the user will be  
                             authorized to edit that Individual. 
                         </td>
                     </tr>
@@ -679,13 +679,31 @@
                     </tr>
                     <tr>
                         <td colspan="2">
+                            If an external authentication system like Shibboleth or CUWebAuth is to be 
+                            used, these properties say how the login button should be labeled, and which  
+                            HTTP header will contain the user ID from the authentication system. If such 
+                            a system is not to be used, leave these commented out. Consult the installation  
+                            instructions for more details. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            externalAuth.buttonText
+                            <br/>
+                            externalAuth.netIdHeaderName
+                        </td>
+                        <td>
+                            Log in using BearCat Shibboleth
+                            <br/>
+                            remote_userID 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             The temporal graph visualization can require
                             extensive machine resources. This can have a particularly noticable
                             impact on memory usage if
                             <ul>
-                                <li>
-                                    VIVO is configured to use Jena SDB, 
-                                </li>
                                 <li>
                                     The organization tree is deep, 
                                 </li>
@@ -693,11 +711,8 @@
                                     The number of grants and publications is large. 
                                 </li>
                             </ul>
-                            The VIVO developers are working to make this visualization more
-                            efficient. In the meantime, VIVO release 1.2 guards against this impact
-                            by disabling the temporal graph visualization unless the
-                            "visualization.temporal" flag is set to "enabled". To enable it, 
-                            uncomment the line for this setting. 
+                            VIVO V1.3 mitigates this problem by the way of a caching 
+                            mechanism and hence we can safely set this to be enabled by default. 
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -716,9 +731,9 @@
                             will attempt to make its best guess at the top level organization in
                             your instance. If you're unhappy with this selection, uncomment out the
                             property below and set it to the URI of the organization individual you
-                            want to identify as the top level organization. It will be used as the
-                            default whenever the temporal graph visualization is rendered without
-                            being passed an explicit org. For example, to use "Ponce School of 
+                            want to identify as the top level organization. It will be used as the 
+                            default whenever the temporal graph visualization is rendered without 
+                            being passed an explicit org. For example, to use "Ponce School of  
                             Medicine" as the top organization: 
                             <br>
                             <code>visualization.topLevelOrg =
@@ -762,14 +777,14 @@
             <h3 id="tomcat_settings">VI. Set Tomcat JVM parameters and security
                 limits</h3>
             <p>
-                Currently, VIVO copies the contents of your RDF database into
-                memory in order to serve Web requests quickly (the in-memory copy and 
+                Currently, VIVO copies the contents of your RDF database into 
+                memory in order to serve Web requests quickly (the in-memory copy and  
                 the underlying database are kept in synch as edits are performed). 
             </p>
             <p>
-                VIVO will require more memory than that allocated to Tomcat by
-                default. With most installations of Tomcat, the "setenv.sh" or
-                "setenv.bat" file in Tomcat's bin directory is a convenient place to 
+                VIVO will require more memory than that allocated to Tomcat by 
+                default. With most installations of Tomcat, the "setenv.sh" or 
+                "setenv.bat" file in Tomcat's bin directory is a convenient place to  
                 set the memory parameters. <em>If this file does not exist in Tomcat's
                     bin directory, you can create it.</em>
                 <br>
@@ -779,9 +794,9 @@
             <p>
                 This sets Tomcat to allocate an initial heap of 2048 megabytes, a
                 maximum heap of 1024 megabytes, and a PermGen space of 128 megs. 1024
-                megabytes is a minimum practical heap size for production installations
-                storing data for large academic institutions, and additional heap space
-                is preferable. For testing with small sets of data, 256m to 512m should 
+                megabytes is a minimum practical heap size for production installations 
+                storing data for large academic institutions, and additional heap space 
+                is preferable. For testing with small sets of data, 256m to 512m should  
                 be sufficient. 
             </p>
             <p>
@@ -789,9 +804,9 @@
                 be remedied by increasing the heap parameters and restarting Tomcat. 
             </p>
             <p>
-                Security limits: VIVO is a multithreaded web application that may
-                require more threads than are permitted under your Linux installation's
-                default configuration. Ensure that your installation can support the 
+                Security limits: VIVO is a multithreaded web application that may 
+                require more threads than are permitted under your Linux installation's 
+                default configuration. Ensure that your installation can support the  
                 required number of threads by making the following edits to <code>/etc/security/limits.conf</code>:
             </p>
             <pre>                    apache	hard	nproc	400<br>                    tomcat6	hard	nproc	1500 <br>                </pre>
@@ -800,39 +815,39 @@
                 Most Tomcat installations can be started by running <code>startup.sh</code>
                 or <code>startup.bat</code>
                 in Tomcat's bin directory. Point your
-                browser to "http://localhost:8080/vivo/" to test the application. If
-                Tomcat does not start up, or the VIVO application is not visible, check
-                the files in Tomcat's logs directory. Error messages are commonly found 
+                browser to "http://localhost:8080/vivo/" to test the application. If 
+                Tomcat does not start up, or the VIVO application is not visible, check 
+                the files in Tomcat's logs directory. Error messages are commonly found  
                 in <code>catalina.out</code>
                 or <code>localhost.log</code>
             </p>
             <h3 id="add_rdf">VIII. Log in and add RDF data </h3>
-           <p>
-                If the startup was successful, you will see a welcome message
-                informing you that you have successfully installed VIVO. Click the "Log 
+            <p>
+                If the startup was successful, you will see a welcome message 
+                informing you that you have successfully installed VIVO. Click the "Log  
                 in" link near the upper right corner. Log in with the <code>rootUser.emailAddress</code>
-                you set up in Step IV. The initial password for the root account is
-                "rootPassword" (without the quotes). On first login, you will be 
+                you set up in Step IV. The initial password for the root account is 
+                "rootPassword" (without the quotes). On first login, you will be  
                 prompted to select a new password and verify it a second time. When login is 
-                complete, the search index is checked and, if it is empty,
-                a full index build will be triggered in the background, in order to ensure
+                complete, the search index is checked and, if it is empty, 
+                a full index build will be triggered in the background, in order to ensure 
                 complete functionality throughout the site. 
             </p>
             <p>
                 After logging in, you will be presented with a
                 menu of editing options. Here you can create OWL classes, object
                 properties, data properties, and configure the display of data.
-                Currently, any classes you wish to make visible on your website must be
-                part of a class group, and there are a number of visibility and display
-                options available for each ontology entity. VIVO comes with a core VIVO 
+                Currently, any classes you wish to make visible on your website must be 
+                part of a class group, and there are a number of visibility and display 
+                options available for each ontology entity. VIVO comes with a core VIVO  
                 ontology, but you may also upload other ontologies from an RDF file. 
             </p>
             <p>
                 Under the "Advanced Data Tools" click "Add/Remove RDF Data." Note
                 that Vitro currently works best with OWL-DL ontologies and has only
-                limited support for pure RDF data. You can enter a URL pointing to the
-                RDF data you wish to load or upload from a file on your local machine.
-                Ensure that the "add RDF" radio button is selected. You will also 
+                limited support for pure RDF data. You can enter a URL pointing to the 
+                RDF data you wish to load or upload from a file on your local machine. 
+                Ensure that the "add RDF" radio button is selected. You will also  
                 likely want to check "create classgroups automatically." 
             </p>
             <p>
@@ -847,29 +862,29 @@
                 "Contact Us" form)</h3>
             <p>
                 If you have configured your application to use the "Contact Us"
-                feature in Step IV (<code>email.smtpHost</code>), you will also need to
-                add an email address to the VIVO application.&nbsp; This is the email
-                to which the contact form will submit. It can be a list server or an 
+                feature in Step IV (<code>email.smtpHost</code>), you will also need to 
+                add an email address to the VIVO application.&nbsp; This is the email 
+                to which the contact form will submit. It can be a list server or an  
                 individual's email address. 
             </p>
             <p>
                 Log in as a system administrator. Navigate to the "Site Admin"
-                table of contents (link in the right side of the header). Go to "Site
-                Information" (under "Site Configuration"). In the "Site Information
-                Editing Form," enter a functional email address in the field "Contact 
+                table of contents (link in the right side of the header). Go to "Site 
+                Information" (under "Site Configuration"). In the "Site Information 
+                Editing Form," enter a functional email address in the field "Contact  
                 Email Address" and submit the change. 
             </p>
             <p>
                 If you set the <code>email.smtpHost</code>
-                in Step IV and do NOT
-                provide an email address in this step, your users will receive a java 
+                in Step IV and do NOT 
+                provide an email address in this step, your users will receive a java  
                 error in the interface. 
             </p>
             <h3 id="tomcat_connector">X. Set up Apache Tomcat Connector </h3>
             <p>
-                It is recommended that a Tomcat Connector such as mod_jk be used to
-                ensure that the site address does not include the port number (e.g.
-                8080) and an additional reference to the Tomcat context name (e.g. 
+                It is recommended that a Tomcat Connector such as mod_jk be used to 
+                ensure that the site address does not include the port number (e.g. 
+                8080) and an additional reference to the Tomcat context name (e.g.  
                 /vivo). 
             </p>
             <p>
@@ -888,9 +903,9 @@
                 After setting up the mod_jk connector above, you will need to 
                 modify the Tomcat's server.xml (located in <code>[tomcat root]/conf/</code>)
                 to
-                respond
-                to
-                requests from Apache via the connector. Look for the 
+                respond 
+                to 
+                requests from Apache via the connector. Look for the  
                 &lt;connector&gt; directive and add the following properties: 
             </p>
             <pre>                connectionTimeout="20000" maxThreads="320" keepAliveTimeout="20000"&nbsp; <br>            </pre>
@@ -914,15 +929,15 @@
                 system like Shibboleth or CUWebAuth. 
             </p>
             <p>
-                VIVO must be accessible only through an Apache HTTP server. The
-                Apache server will be configured to invoke the external authentication
-                system. When the user completes the authentication, the Apache server 
+                VIVO must be accessible only through an Apache HTTP server. The 
+                Apache server will be configured to invoke the external authentication 
+                system. When the user completes the authentication, the Apache server  
                 will pass a network ID to VIVO, to identify the user. 
             </p>
             <p>
-                If VIVO has an account for that user, the user will be logged in
-                with the privileges of that account. In the absence of an account, VIVO
-                will try to find a page associated with the user. If such a page is 
+                If VIVO has an account for that user, the user will be logged in 
+                with the privileges of that account. In the absence of an account, VIVO 
+                will try to find a page associated with the user. If such a page is  
                 found, the user can log in to edit his own profile information. 
             </p>
             <h4>Configuring the Apache server</h4>
@@ -950,9 +965,9 @@
                     <h5>The name of the HTTP header that will hold the external user's
                         network ID.</h5>
                     <p>
-                        When a user completes the authentication process, the Apache
-                        server will put the user's network ID into one of the headers of the
-                        HTTP request. The instructions from your institution should tell you 
+                        When a user completes the authentication process, the Apache 
+                        server will put the user's network ID into one of the headers of the 
+                        HTTP request. The instructions from your institution should tell you  
                         which header is used for this purpose. 
                     </p>
                     <p>
@@ -989,9 +1004,9 @@
                     <p>
                         In addition, VIVO will try to associate the user with a profile
                         page, so the user may edit his own profile data. VIVO will search the
-                        data model for a person with a property that matches the User’s network
-                        ID (the value of the property must be either a String literal or an
-                        untyped literal). You need to tell VIVO what property should be used 
+                        data model for a person with a property that matches the User’s network 
+                        ID (the value of the property must be either a String literal or an 
+                        untyped literal). You need to tell VIVO what property should be used  
                         for matching. Insert a line like this in the deploy.properties file: 
                     </p>
                     <pre>selfEditing.idMatchingProperty = [the URI of the property]</pre>
@@ -1026,9 +1041,9 @@
                     You should see a "locations" section, with links for "Country" and
                     "Geographic Location." The index is built in a background thread, so on
                     your first login, you may see an empty index instead. Refresh the page
-                    periodically to see whether the index will be populated. This may take
-                    some time: with VIVO installed on a modest laptop computer, loading the
-                    ontology files and building the index took more than 5 minutes from the 
+                    periodically to see whether the index will be populated. This may take 
+                    some time: with VIVO installed on a modest laptop computer, loading the 
+                    ontology files and building the index took more than 5 minutes from the  
                     time that Tomcat was started. 
                 </li>
                 <li>
@@ -1048,30 +1063,30 @@
                     be prompted to change the password. 
                 </li>
                 <li>
-                    After you have successfully logged in, click "site admin" in the
-                    upper right corner. In the drop down under "Data Input" select "Faculty 
+                    After you have successfully logged in, click "site admin" in the 
+                    upper right corner. In the drop down under "Data Input" select "Faculty  
                     Member(core)" and click the "Add individual of this class" button. 
                 </li>
                 <li>
-                    Enter the name "test individual" under the field "Individual
-                    Name," scroll to the bottom, and click "Create New Record." You will be
-                    taken to the "Individual Control Panel." Make note of the value of the 
+                    Enter the name "test individual" under the field "Individual 
+                    Name," scroll to the bottom, and click "Create New Record." You will be 
+                    taken to the "Individual Control Panel." Make note of the value of the  
                     field "URI" - it will be used in the next step. 
                 </li>
                 <li>
                     Open a new web browser or browser tab to the page <a href="http://marbles.sourceforge.net/">http://marbles.sourceforge.net/</a>.
                     In
-                    the
-                    pink
-                    box on that page enter the URI of the individual you 
+                    the 
+                    pink 
+                    box on that page enter the URI of the individual you  
                     created in the previous step and click "open." 
                 </li>
                 <li>
                     In the resulting page search for the URI of the "test
                     individual." You should find it towards the bottom of the page next to
-                    a red dot followed by "redirect (303)." This indicates that you are
-                    successfully serving linked RDF data. If the URI of the "test
-                    individual" is followed by "failed (400)" you are not successfully 
+                    a red dot followed by "redirect (303)." This indicates that you are 
+                    successfully serving linked RDF data. If the URI of the "test 
+                    individual" is followed by "failed (400)" you are not successfully  
                     serving linked data. 
                 </li>
             </ul>
@@ -1081,36 +1096,36 @@
             <ul>
                 <li>
                     Type the word "Australia" into the search box, and click on the
-                    Search button.You should see a page of results, with links to countries
-                    that border Australia, individuals that include Australia, and to
-                    Australia itself. To trigger the search index, you can log in as a site 
+                    Search button.You should see a page of results, with links to countries 
+                    that border Australia, individuals that include Australia, and to 
+                    Australia itself. To trigger the search index, you can log in as a site  
                     administrator and go to "http://your-vivo-url/SearchIndex". 
                 </li>
             </ul>
-				<h3 id="termsofuse">XIII. Review the VIVO Terms of Use</h3>
-	                <p>
-	                    VIVO comes with a "Terms of Use" statement linked from the footer.  
-						The "Site Name" you assign in the "Site Information" form under the 
-						<strong>Site Admin</strong> area will be inserted into the "Terms of Use" 
-						statement.  If you want to edit the text content more than just  the 
-						"Site Name", the file can be found here:
-						<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
-	                    Be sure to make the changes in your source files and deploy them to your 
-						tomcat so you don't lose your changes next time you deploy for another reason.
-	                </p>
-				<h3>Next Step ...</h3>
-					<p>Now that you have VIVO up and running, please go read the 
-					<a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>.</p>
-				</div>
-                <!-- #wrapper-content -->
-                <div id="footer" role="contentinfo">
-                    <p class="copyright">
-                        <small>
-                            ©2011 All Rights Reserved
-                        </small>
-                        | Powered 
-                        by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
-                    </p>
+            <h3 id="termsofuse">XIII. Review the VIVO Terms of Use</h3>
+            <p>
+                VIVO comes with a "Terms of Use" statement linked from the footer. 
+                The "Site Name" you assign in the "Site Information" form under the <strong>Site Admin</strong>
+                area will be inserted into the "Terms of Use" 
+                statement.  If you want to edit the text content more than just  the 
+                "Site Name", the file can be found here:<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+                Be sure to make the changes in your source files and deploy them to your 
+                tomcat so you don't lose your changes next time you deploy for another reason.
+            </p>
+            <h3>Next Step ...</h3>
+            <p>
+                Now that you have VIVO up and running, please go read the <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>.
+            </p>
+        </div>
+        <!-- #wrapper-content -->
+        <div id="footer" role="contentinfo">
+            <p class="copyright">
+                <small>
+                    ©2011 All Rights Reserved
+                </small>
+                | Powered 
+                by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+            </p>
             <div id="nav" role="navigation">
                 <ul id="footer-nav" role="list">
                     <li role="listitem">
