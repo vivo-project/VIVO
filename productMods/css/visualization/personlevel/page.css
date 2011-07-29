@@ -111,7 +111,7 @@ table.sparkline_wrapper_table td, th {
 #ego_profile {
   height: 1%; /* this was the key to killing the IE6 bug (no upper photo and sparklines jump on hover). Solution? Give the parent layout */
   background: #fff;
-  min-height: 100px;
+/*  min-height: 100px;   tlw72 -- adding this to IE6.css; otherwise, this puts too much space between the h2 and h3 */
   float: left;
   max-width: 50%;
 }
