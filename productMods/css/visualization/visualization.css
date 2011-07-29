@@ -37,6 +37,9 @@ span.incomplete-data-holder,
     font-size: .9em !important;
     text-decoration: underline;
 }
+.collaboratorship-link h3 a:hover {
+    text-decoration: none;
+}
 .collaboratorship-link-container {
     width: 180px;
 }
