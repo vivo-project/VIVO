@@ -45,7 +45,7 @@ var mapOfScienceImageFolderPrefix  = imageFolderPrefix
 											+ "mapofscience/";
 var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
 											
-var entityLabel = '${entityLabel}';
+var entityLabel = "${entityLabel}";
 
 var ENTITY_TYPE = '${entityType}';
 
