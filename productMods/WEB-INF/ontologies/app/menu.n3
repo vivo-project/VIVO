@@ -59,7 +59,8 @@ display:Home
     a display:HomePage ;    
     a display:Page ;
     display:title "Home" ;    
-    display:urlMapping "/" .
+    display:urlMapping "/" ;
+    display:hasDataGetter display:homeDataGetter .
 
 display:Events 
     a display:Page ;    
@@ -96,21 +97,24 @@ display:Research
 
 #The data getter objects used above
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#peopleDataGetter>
-      a       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ClassGroupPage> ;
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.ClassGroupPageData>;
       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
               <http://vivoweb.org/ontology#vitroClassGrouppeople> .
 
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#researchDataGetter>
-      a       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ClassGroupPage> ;
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.ClassGroupPageData>;
       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
               <http://vivoweb.org/ontology#vitroClassGrouppublications> .
 
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#organizationsDataGetter>
-      a       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ClassGroupPage> ;
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.ClassGroupPageData>;
       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
               <http://vivoweb.org/ontology#vitroClassGrouporganizations> .
                             
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#eventsDataGetter>
-      a       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ClassGroupPage> ;
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.ClassGroupPageData>;
       <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
               <http://vivoweb.org/ontology#vitroClassGroupevents> .
+              
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#homeDataGetter>
+      a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.BrowseDataGetter> .

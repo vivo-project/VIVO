@@ -9,7 +9,7 @@
         <#assign disableClass = 'class="disable inline" disabled="disabled"' />
     </#if>
 
-    <input type="checkbox" ${disableClass} name="display-internalClass" value="${internalClassUri}" id="display-internalClass" <#if pageInternalOnly?has_content>checked</#if> role="input" />
+                <input type="checkbox" ${disableClass} name="display-internalClass" value="${internalClassUri}" id="display-internalClass" <#if internalClass?has_content && isInternal?has_content>checked</#if> role="input" />
     <label ${disableClass} class="inline" for="display-internalClass">Only display <em>${associatedPage}</em> within my institution</label>
 
     ${enableInternalClass}
