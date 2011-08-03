@@ -82,7 +82,7 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     }
     
     
-    /* Access methods for templates */
+    /* Template properties */
 
     public boolean isPerson() {
         return isVClass(PERSON_CLASS);
@@ -128,6 +128,9 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     	String mapOfScienceVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";    	
     	return getVisUrl(mapOfScienceVisURL);
     }
+    
+    
+    /* Template methods */
     
     public Map<String, String> doQrData() {
         if(qrData == null)
