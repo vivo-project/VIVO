@@ -762,6 +762,10 @@ input.search-home-vivo {
     margin-top: 2px;
 }
 /* BROWSE ------>  */
+ul#browse-classgroups a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 ul#browse-classgroups a:hover {
     background: url(../images/arrow.gif) 0 10px no-repeat;
     color: #2ea0cf;
