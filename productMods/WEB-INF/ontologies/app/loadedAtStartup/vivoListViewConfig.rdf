@@ -140,10 +140,6 @@
     
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-webpage.xml</display:listViewConfigFile>
-    </rdf:Description>
-    
-    <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasElement">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasElement.xml</display:listViewConfigFile>
-    </rdf:Description>
+    </rdf:Description>        
     
 </rdf:RDF>
