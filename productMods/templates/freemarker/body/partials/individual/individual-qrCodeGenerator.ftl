@@ -27,14 +27,14 @@
  -->
 <#macro renderCode display="icon" width="125">
     <#if hasValidVCard()>
-        <#assign qrCodeLinkedImage><a title="Export QR codes" href="${individual.doQrData().exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#assign>
+        <#assign qrCodeLinkedImage><a title="Export QR codes" href="${individual.qrData().exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#assign>
         
         <#if (display == "full")>
             <h5 class="qrCode">vCard QR</h5>
             ${qrCodeLinkedImage}
         <#elseif (display == "icon")>
             <li role="listitem">
-                <a id="qrIcon" title="vCard QR Code" href="${individual.doQrData().exportQrCodeUrl}"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
+                <a id="qrIcon" title="vCard QR Code" href="${individual.qrData().exportQrCodeUrl}"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
                 <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#">Close</a></span>
             </li>
         <#else>
@@ -48,7 +48,7 @@
 
 <#function getQrCodeUrlForVCard qrCodeWidth>
 
-    <#local qrData = individual.doQrData() >
+    <#local qrData = individual.qrData() >
 
     <#local core = "http://vivoweb.org/ontology/core#">
     <#local foaf = "http://xmlns.com/foaf/0.1/">
@@ -93,7 +93,7 @@
 
 <#function getQrCodeUrlForLink qrCodeWidth>
 
-    <#local qrData = individual.doQrData() >
+    <#local qrData = individual.qrData() >
 
     <#local url = qrData.externalUrl! >
 
@@ -129,7 +129,7 @@
 
 <#function hasValidVCard>
 
-    <#local qrData = individual.doQrData() >
+    <#local qrData = individual.qrData() >
 
     <#local firstName = qrData.firstName! >
     <#local lastName = qrData.lastName! >

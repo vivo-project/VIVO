@@ -20,12 +20,10 @@ public class ListedIndividual extends BaseListedIndividual {
         super(individual, vreq);
     }
     
-    /* Access methods for templates */
+    /* Template properties */
     
     public String getPreferredTitle() {
         return cleanTextForDisplay( individual.getDataValue(CORE + "preferredTitle") );
     }
-    
-    // Add method to get core:webpages
     
 }

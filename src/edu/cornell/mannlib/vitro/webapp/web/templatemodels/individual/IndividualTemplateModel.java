@@ -31,17 +31,15 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
     private static final String CORE = "http://vivoweb.org/ontology/core#";
     private static final String PERSON_CLASS = FOAF + "Person";
     private static final String ORGANIZATION_CLASS = FOAF + "Organization";
+    private static final String BASE_VISUALIZATION_URL = 
+        UrlBuilder.getUrl(Route.VISUALIZATION_SHORT.path());
     
     private Map<String, String> qrData = null;
     
     public IndividualTemplateModel(Individual individual, VitroRequest vreq) {
         super(individual, vreq);
     }
-    
-    private String getBaseVisUrl() {
-        return getUrl(Route.VISUALIZATION_SHORT.path());
-    }
- 
+
     private Map<String, String> generateQrData() {
 
         Map<String,String> qrData = new HashMap<String,String>();
@@ -81,62 +79,60 @@ public class IndividualTemplateModel extends BaseIndividualTemplateModel {
         return qrData;
     }
     
+    private String getVisUrl(String visPath) {
+        String visUrl;
+        boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
+                                                getUri(),
+                                                vreq);
+        
+        if (isUsingDefaultNameSpace) {          
+            visUrl = visPath + getLocalName();           
+        } else {            
+            visUrl = UrlBuilder.addParams(
+                    visPath, 
+                    new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, getUri())); 
+        }
+        
+        return visUrl;
+    }
     
-    /* Template properties */
+    /* Template methods (for efficiency, not pre-computed) */
 
-    public boolean isPerson() {
+    public boolean person() {
         return isVClass(PERSON_CLASS);
     }
     
-    public boolean isOrganization() {
+    public boolean organization() {
         return isVClass(ORGANIZATION_CLASS);        
     }
     
-    public String getCoAuthorVisUrl() {   	
-        String coauthorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";    	
-    	return getVisUrl(coauthorVisURL);
+    public String coAuthorVisUrl() {   	
+        String url = BASE_VISUALIZATION_URL + "/" + VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(url);
     }
 
-    public String getCoInvestigatorVisUrl() {    	
-    	String coinvestigatorVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";    	
-    	return getVisUrl(coinvestigatorVisURL);
+    public String coInvestigatorVisUrl() {    	
+    	String url = 
+    	    BASE_VISUALIZATION_URL + "/" + VisualizationFrameworkConstants.COINVESTIGATOR_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(url);
     }
 
-	private String getVisUrl(String coinvestigatorVisURL) {
-		boolean isUsingDefaultNameSpace = UrlBuilder.isUriInDefaultNamespace(
-												getUri(),
-												vreq);
-        
-        if (isUsingDefaultNameSpace) {        	
-        	return coinvestigatorVisURL + getLocalName();        	
-        } else {        	
-        	return UrlBuilder.addParams(
-        			coinvestigatorVisURL, 
-        			new ParamMap(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, getUri())); 
-        }
-	}
-
-    public String getTemporalGraphUrl() {
-        if (!isOrganization()) {
-            return null;
-        }        
-        String temporalVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";    	
-    	return getVisUrl(temporalVisURL);
+    public String temporalGraphUrl() {  
+        String url = 
+            BASE_VISUALIZATION_URL + "/" + VisualizationFrameworkConstants.PUBLICATION_TEMPORAL_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(url);
     }
 
-    public String getMapOfScienceUrl() {
-    	String mapOfScienceVisURL = getBaseVisUrl() + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";    	
-    	return getVisUrl(mapOfScienceVisURL);
+    public String mapOfScienceUrl() {
+    	String url = 
+    	    BASE_VISUALIZATION_URL + "/" + VisualizationFrameworkConstants.MAP_OF_SCIENCE_VIS_SHORT_URL + "/";    	
+    	return getVisUrl(url);
     }
     
-    
-    /* Template methods */
-    
-    public Map<String, String> doQrData() {
+    public Map<String, String> qrData() {
         if(qrData == null)
             qrData = generateQrData();
         return qrData;
     }
-
 
 }
