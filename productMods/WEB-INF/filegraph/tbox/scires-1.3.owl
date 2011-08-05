@@ -22,15 +22,15 @@
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An individual animal, part of or derived an animal, plant, part of a plant, or microorganism.</vitro:exampleAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A portion or quantity of a biological material for use in testing, examination, or study.</vitro:shortDef>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
-    <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
-  </rdf:Description>
   <rdf:Description rdf:nodeID="A0">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
     <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
     <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
+    <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">number of human participants in the study (trial).</vitro:descriptionAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/OBI_0000272">
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
