@@ -27,14 +27,15 @@
  -->
 <#macro renderCode display="icon" width="125">
     <#if hasValidVCard()>
-        <#assign qrCodeLinkedImage><a title="Export QR codes" href="${individual.qrData().exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#assign>
+        <#local qrData = individual.qrData()>
+        <#local qrCodeLinkedImage><a title="Export QR codes" href="${qrData.exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#local>
         
         <#if (display == "full")>
             <h5 class="qrCode">vCard QR</h5>
             ${qrCodeLinkedImage}
         <#elseif (display == "icon")>
             <li role="listitem">
-                <a id="qrIcon" title="vCard QR Code" href="${individual.qrData().exportQrCodeUrl}"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
+                <a id="qrIcon" title="vCard QR Code" href="${qrData.exportQrCodeUrl}"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
                 <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#">Close</a></span>
             </li>
         <#else>
@@ -48,7 +49,7 @@
 
 <#function getQrCodeUrlForVCard qrCodeWidth>
 
-    <#local qrData = individual.qrData() >
+    <#local qrData = individual.qrData()>
 
     <#local core = "http://vivoweb.org/ontology/core#">
     <#local foaf = "http://xmlns.com/foaf/0.1/">
@@ -63,21 +64,20 @@
     <#local url = qrData.externalUrl! >
     <#local photo = individual.thumbUrl! >
     <#local rev = "" >
-
-    <#local qrCodeUrl = "">
+    
     <#if firstName != "" && lastName != "">
         <#local vCard><#t>
             BEGIN:VCARD<#lt>
             VERSION:3.0<#lt>
             N:${lastName};${firstName}<#lt>
             FN:${firstName} ${lastName}<#lt>
-            <#if org != ""> ORG:${org}</#if><#lt>
-            <#if title != "">TITLE:${title}</#if><#lt>
-            <#if phoneNumber != "">TEL;TYPE=WORK,VOICE:${phoneNumber}</#if><#lt>
-            <#if email != "">EMAIL;TYPE=PREF,INTERNET:${email}</#if><#lt>
-            <#if url != "">URL:${url}</#if><#lt>
-            <#if photo != "">PHOTO;VALUE=URL;TYPE=JPG:${photo}</#if><#lt>
-            <#if rev != "">REV:${rev}</#if><#lt>
+            <#if org?has_content> ORG:${org}</#if><#lt>
+            <#if title?has_content>TITLE:${title}</#if><#lt>
+            <#if phoneNumber?has_content>TEL;TYPE=WORK,VOICE:${phoneNumber}</#if><#lt>
+            <#if email?has_content>EMAIL;TYPE=PREF,INTERNET:${email}</#if><#lt>
+            <#if url?has_content>URL:${url}</#if><#lt>
+            <#if photo?has_content>PHOTO;VALUE=URL;TYPE=JPG:${photo}</#if><#lt>
+            <#if rev?has_content>REV:${rev}</#if><#lt>
             END:VCARD<#t>
         </#local><#t>
 
@@ -93,7 +93,7 @@
 
 <#function getQrCodeUrlForLink qrCodeWidth>
 
-    <#local qrData = individual.qrData() >
+    <#local qrData = individual.qrData()>
 
     <#local url = qrData.externalUrl! >
 
@@ -129,7 +129,7 @@
 
 <#function hasValidVCard>
 
-    <#local qrData = individual.qrData() >
+    <#local qrData = individual.qrData()>
 
     <#local firstName = qrData.firstName! >
     <#local lastName = qrData.lastName! >
