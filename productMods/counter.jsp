@@ -7,11 +7,13 @@
 <%@ page import="java.net.URLDecoder" %>
 
 <div id="content">
+
 <h2>Linkage Information</h2>
 <ul>
 	<!--
 		Author-Resource
 	-->
+	<sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="inforauthorships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -25,11 +27,14 @@
 				  ?infor rdf:type core:InformationResource .
 	          }
 	      </sparql:select>
-					<c:forEach items="${inforauthorships.rows}" var="inforauthorship" varStatus="counter">
-						<li><a href="#">'Person'-'InformationResource' linkages</a> (${inforauthorship.counts.string})</li>
-					</c:forEach>
-	  </sparql:sparql>
-  <sparql:sparql>
+          <c:forEach items="${inforauthorships.rows}" var="inforauthorship" varStatus="counter">
+             <li><a href="#">'Person'-'InformationResource' linkages</a> (${inforauthorship.counts.string})</li>
+          </c:forEach>
+	</sparql:sparql>
+	</sparql:lock>
+	
+	<sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="inforauthors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -47,8 +52,11 @@
 				<c:forEach items="${inforauthors.rows}" var="inforauthor" varStatus="counter">
 					<li><a href="#">'Person' entities which published 'InformationResource' entities</a> (${inforauthor.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
-<sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
+    
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="infors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -63,16 +71,16 @@
 				<c:forEach items="${infors.rows}" var="infor" varStatus="counter">
 					<li><a href="#">'InformationResource' entities</a> (${infor.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
-
+    </sparql:sparql>
+    </sparql:lock>    
 </ul>
 
-<ul>
 
+<ul>
 	<!--
 		Author-Conference_Paper
 	-->
-
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="confauthorships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -89,9 +97,11 @@
 					<c:forEach items="${confauthorships.rows}" var="confauthorship" varStatus="counter">
 						<li><a href="#">'Person'-'ConferencePaper' linkages</a> (${confauthorship.counts.string})</li>
 					</c:forEach>
-	  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-  <sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="confauthors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -109,9 +119,11 @@
 				<c:forEach items="${confauthors.rows}" var="confauthor" varStatus="counter">
 					<li><a href="#">'Person' entities which published 'ConferencePaper' entities</a> (${confauthor.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-<sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="confs">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -126,15 +138,16 @@
 				<c:forEach items="${confs.rows}" var="conf" varStatus="counter">
 					<li><a href="#">'ConferencePaper' entities</a> (${conf.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>    
 </ul>
 
-<ul>
 
+<ul>
 	<!--
 		Author-Academic_Article
 	-->
-	
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="acaauthorships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -151,9 +164,11 @@
 					<c:forEach items="${acaauthorships.rows}" var="acaauthorship" varStatus="counter">
 						<li><a href="#">'Person'-'AcademicArticle' linkages</a> (${acaauthorship.counts.string})</li>
 					</c:forEach>
-	  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-  <sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="acaauthors">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -171,11 +186,11 @@
 				<c:forEach items="${acaauthors.rows}" var="acaauthor" varStatus="counter">
 					<li><a href="#">'Person' entities which published 'AcademicArticle' entities</a> (${acaauthor.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-
-
-<sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="acas">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -190,8 +205,8 @@
 				<c:forEach items="${acas.rows}" var="aca" varStatus="counter">
 					<li><a href="#">'AcademicArticle' entities</a> (${aca.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
-
+    </sparql:sparql>
+    </sparql:lock>
 </ul>
 
 
@@ -199,7 +214,7 @@
 	<!--
 		Investigator-Grant
 	-->
-
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="piships">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -214,8 +229,11 @@
 					<c:forEach items="${piships.rows}" var="piship" varStatus="counter">
 						<li><a href="#">'Person'-'Grant' linkages</a> (${piship.counts.string})</li>
 					</c:forEach>
-	  </sparql:sparql>
-<sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
+    
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="pis">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -230,10 +248,11 @@
 				<c:forEach items="${pis.rows}" var="pi" varStatus="counter">
 					<li><a href="#">'Person' entities which are (co-)investigators on 'Grant' entities</a> (${pi.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-
-<sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">    
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="grants">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -247,14 +266,16 @@
 				<c:forEach items="${grants.rows}" var="grant" varStatus="counter">
 					<li><a href="#">'Grant' entities</a> (${grant.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 </ul>
-<ul>
 
+
+<ul>
 	<!--
 		Teacher-Course
 	-->
-
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="teachings">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -269,9 +290,11 @@
 					<c:forEach items="${teachings.rows}" var="teaching" varStatus="counter">
 						<li><a href="#">'Person'-'CourseSection' linkages</a> (${teaching.counts.string})</li>
 					</c:forEach>
-	  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-<sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">          
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="teachers">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -285,10 +308,11 @@
 				<c:forEach items="${teachers.rows}" var="teacher" varStatus="counter">
 					<li><a href="#">'Person' entities which teach 'CourseSection' entities</a> (${teacher.counts.string})</li>
 				</c:forEach>
-  </sparql:sparql>
+    </sparql:sparql>
+    </sparql:lock>
 
-
-<sparql:sparql>
+    <sparql:lock model="${applicationScope.jenaOntModel }">
+    <sparql:sparql>
       <sparql:select model="${applicationScope.jenaOntModel}" var="courses">
           PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       	  PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -302,14 +326,16 @@
 				<c:forEach items="${courses.rows}" var="course" varStatus="counter">
 					<li><a href="#">'CourseSection' entities</a> (${course.counts.string})</li>
 				</c:forEach>	
-  </sparql:sparql>
-	
+    </sparql:sparql>
+    </sparql:lock>
 </ul>
+
+
 <ul>
 	<!--
 		Co-Author Linkage
 	-->
-	
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="coauthors">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -329,12 +355,13 @@
 					<c:forEach items="${coauthors.rows}" var="coauthor" varStatus="counter">
 						<li><a href="#">Total co-author linkages</a> (${coauthor.counts.string})</li>
 					</c:forEach>
-	  </sparql:sparql>
+    </sparql:sparql>
+	</sparql:lock>
 	
 	<!--
 		Distinct Co-Author Linkage
 	-->
-
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="discoauthors">
 	        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -352,13 +379,16 @@
 			}
 	      </sparql:select>
 		<li><a href="#">Unique co-author linkages</a> (${fn:length(discoauthors.rows)})</li>
-	  </sparql:sparql>
-	</ul>
-	<ul>	
+    </sparql:sparql>
+    </sparql:lock>
+</ul>
+	
+	
+<ul>	
 	<!--
 		Co-Investigator Linkage
 	-->
-	
+	<sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="copis">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -375,12 +405,13 @@
 					<c:forEach items="${copis.rows}" var="copi" varStatus="counter">
 						<li><a href="#">Total co-investigator linkages</a> (${copi.counts.string})</li>
 					</c:forEach>
-	  </sparql:sparql>
-	
+    </sparql:sparql>
+	</sparql:lock>
+	 
 	<!--
 		Distinct Co-Investigator Linkage
 	-->
-
+    <sparql:lock model="${applicationScope.jenaOntModel }">
 	<sparql:sparql>
 	      <sparql:select model="${applicationScope.jenaOntModel}" var="discopis">
 	          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -393,8 +424,11 @@
 				  ?grant core:hasInvestigator ?pi2 .
 				  FILTER (str(?pi1) < str(?pi2))
 	          }
-	      </sparql:select>
-	<li><a href="#">Unique co-investigator linkages</a> (${fn:length(discopis.rows)})</li>
-	  </sparql:sparql>
+            </sparql:select>
+            <li><a href="#">Unique co-investigator linkages</a> (${fn:length(discopis.rows)})</li>
+    </sparql:sparql>
+    </sparql:lock>    
+    
 </ul>
+
 </div>
