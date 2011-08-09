@@ -22,11 +22,6 @@
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An individual animal, part of or derived an animal, plant, part of a plant, or microorganism.</vitro:exampleAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A portion or quantity of a biological material for use in testing, examination, or study.</vitro:shortDef>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/scientific-research#studyPopulationCount">
     <rdfs:domain rdf:resource="http://purl.obolibrary.org/obo/ERO_0000016"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
@@ -170,5 +165,10 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service in which a service consumer receives the right to use a resource (instrument, database, software, etc) that is owned or managed by a service provider.  Ownership of the accessed resource remains with the service provider during and after provision of service.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service in which a service consumer receives the right to use a resource (instrument, database, software, etc) that is owned or managed by a service provider.  Ownership of the accessed resource remains with the service provider during and after provisi</vitro:shortDef>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
 </rdf:RDF>
