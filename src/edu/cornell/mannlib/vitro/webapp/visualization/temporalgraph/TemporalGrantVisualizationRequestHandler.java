@@ -87,6 +87,8 @@ public class TemporalGrantVisualizationRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		VisConstants.DataVisMode currentDataMode = VisConstants.DataVisMode.CSV;
+		
 		/*
 		 * This will provide the data in json format mainly used for standalone temporal vis. 
 		 * */
@@ -94,39 +96,27 @@ public class TemporalGrantVisualizationRequestHandler implements
 					.equalsIgnoreCase(vitroRequest
 							.getParameter(VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
-			if (StringUtils.isNotBlank(entityURI)) {
-				
-				return getSubjectEntityAndGenerateDataResponse(
-								vitroRequest, 
-								log,
-								dataset, 
-								entityURI,
-								VisConstants.DataVisMode.JSON);
-			} else {
-				
-				return getSubjectEntityAndGenerateDataResponse(
-								vitroRequest, 
-								log,
-								dataset,
-								OrganizationUtilityFunctions
-										.getStaffProvidedOrComputedHighestLevelOrganization(
-												log,
-												dataset, 
-												vitroRequest),
-								VisConstants.DataVisMode.JSON);
-			}
+			currentDataMode = VisConstants.DataVisMode.JSON;
 			
-		} else {
-			/*
-			 * This provides csv download files for the content in the tables.
-			 * */		
-			return getSubjectEntityAndGenerateDataResponse(
-					vitroRequest, 
-					log,
-					dataset,
-					entityURI,
-					VisConstants.DataVisMode.CSV);
-		}
+			if (StringUtils.isBlank(entityURI)) {
+				
+				entityURI = OrganizationUtilityFunctions
+								.getStaffProvidedOrComputedHighestLevelOrganization(
+										log,
+										dataset,
+										vitroRequest);								
+								
+			} 
+			
+		} 		
+		
+		return getSubjectEntityAndGenerateDataResponse(
+				vitroRequest, 
+				log,
+				dataset,
+				entityURI,
+				currentDataMode);
+		
 	}
 	
 	private Map<String, String> prepareDataErrorResponse() {

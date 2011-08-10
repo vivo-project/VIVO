@@ -4,7 +4,6 @@ package edu.cornell.mannlib.vitro.webapp.visualization.personlevel;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
@@ -23,14 +22,14 @@ import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.Co
 import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
-import edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount.PersonGrantCountVisCodeGenerator;
-import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountQueryRunner;
 import edu.cornell.mannlib.vitro.webapp.visualization.personpubcount.PersonPublicationCountVisCodeGenerator;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.ModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -102,6 +101,8 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 		
 		if (VisualizationFrameworkConstants.COPI_VIS_MODE.equalsIgnoreCase(visMode)) { 
         	
+			
+			
         	ModelConstructor constructQueryRunner = 
         			new CoPIGrantCountConstructQueryRunner(egoURI, dataset, log);
     		Model constructedModel = constructQueryRunner.getConstructedModel();
@@ -109,23 +110,24 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
     		QueryRunner<CollaborationData> coPIQueryManager = 
     				new CoPIGrantCountQueryRunner(egoURI, constructedModel, log);
            
-            QueryRunner<Set<Activity>> grantQueryManager = 
-            		new PersonGrantCountQueryRunner(egoURI, dataset, log);
-            
             CollaborationData coPIData = coPIQueryManager.getQueryResult();
             
 	    	/*
 	    	 * grants over time sparkline
 	    	 */
-			
-			Set<Activity> piGrants = grantQueryManager.getQueryResult();
-			
-	    	/*
-	    	 * Create a map from the year to number of grants. Use the Grant's
-	    	 * parsedGrantYear to populate the data.
-	    	 * */
-	    	Map<String, Integer> yearToGrantCount = 
-	    			UtilityFunctions.getYearToActivityCount(piGrants);	    	
+    		SubEntity person = new SubEntity(egoURI,
+											 UtilityFunctions
+											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
+
+    		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
+    		
+        	/*
+        	 * Create a map from the year to number of grants. Use the Grant's
+        	 * parsedGrantYear to populate the data.
+        	 * */
+        	Map<String, Integer> yearToGrantCount = 
+    			UtilityFunctions.getYearToActivityCount(grantsToURI.values());
+        	
 	    	
 	    	PersonGrantCountVisCodeGenerator personGrantCountVisCodeGenerator = 
 	    		new PersonGrantCountVisCodeGenerator(
@@ -166,9 +168,6 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
         	QueryRunner<CollaborationData> coAuthorshipQueryManager = 
         			new CoAuthorshipQueryRunner(egoURI, dataset, log);
         
-        	QueryRunner<Set<Activity>> publicationQueryManager = 
-        			new PersonPublicationCountQueryRunner(egoURI, dataset, log);
-        	
         	CollaborationData coAuthorshipData = coAuthorshipQueryManager.getQueryResult();
         	
         	/*
@@ -176,14 +175,18 @@ public class PersonLevelRequestHandler implements VisualizationRequestHandler {
 			 * sparklines. This will prepare all the data for the sparklines & other requested 
 			 * files.
 			 * */
-			Set<Activity> authorDocuments = publicationQueryManager.getQueryResult();
+    		SubEntity person = new SubEntity(egoURI,
+											 UtilityFunctions
+											 	.getIndividualLabelFromDAO(vitroRequest, egoURI));
+
+    		Map<String, Activity> publicationsToURI = SelectOnModelUtilities.getPublicationsForPerson(dataset, person, false);
 			
 	    	/*
 	    	 * Create a map from the year to number of publications. Use the BiboDocument's
 	    	 * parsedPublicationYear to populate the data.
 	    	 * */
 	    	Map<String, Integer> yearToPublicationCount = 
-	    			UtilityFunctions.getYearToActivityCount(authorDocuments);
+	    			UtilityFunctions.getYearToActivityCount(publicationsToURI.values());
 	    														
 	    	/*
 	    	 * Computations required to generate HTML for the sparklines & related context.

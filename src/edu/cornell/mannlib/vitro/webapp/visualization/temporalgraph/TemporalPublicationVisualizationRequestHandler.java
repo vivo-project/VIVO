@@ -76,11 +76,6 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		}
 		
 		
-//		System.out.println("current models in the system are");
-//		for (Map.Entry<String, Model> entry : ConstructedModelTracker.getAllModels().entrySet()) {
-//			System.out.println(entry.getKey() + " -> " + entry.getValue().size());
-//		}
-//		
 		return prepareStandaloneMarkupResponse(vitroRequest, entityURI);
 	}
 
@@ -204,6 +199,8 @@ public class TemporalPublicationVisualizationRequestHandler implements
 		String entityURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
+		VisConstants.DataVisMode currentDataMode = VisConstants.DataVisMode.CSV;
+		
 		/*
 		 * This will provide the data in json format mainly used for standalone tmeporal vis. 
 		 * */
@@ -211,41 +208,26 @@ public class TemporalPublicationVisualizationRequestHandler implements
 					.equalsIgnoreCase(vitroRequest.getParameter(
 							VisualizationFrameworkConstants.VIS_MODE_KEY))) {
 			
-			if (StringUtils.isNotBlank(entityURI)) {
+			currentDataMode = VisConstants.DataVisMode.JSON;
+			
+			if (StringUtils.isBlank(entityURI)) {
 				
-				return getSubjectEntityAndGenerateDataResponse(
-								vitroRequest, 
-								log,
-								dataset, 
-								entityURI,
-								VisConstants.DataVisMode.JSON);
-			} else {
+				entityURI = OrganizationUtilityFunctions
+								.getStaffProvidedOrComputedHighestLevelOrganization(
+										log,
+										dataset,
+										vitroRequest);	
 				
-				return getSubjectEntityAndGenerateDataResponse(
-								vitroRequest, 
-								log,
-								dataset,
-								OrganizationUtilityFunctions
-										.getStaffProvidedOrComputedHighestLevelOrganization(
-												log,
-												dataset, 
-												vitroRequest),
-								VisConstants.DataVisMode.JSON);
-			}
+			} 
 			
-		} else {
-			/*
-			 * This provides csv download files for the content in the tables.
-			 * */
-			
-				return getSubjectEntityAndGenerateDataResponse(
-						vitroRequest, 
-						log,
-						dataset,
-						entityURI,
-						VisConstants.DataVisMode.CSV);
-			
-		}
+		} 
+		
+		return getSubjectEntityAndGenerateDataResponse(
+				vitroRequest, 
+				log,
+				dataset,
+				entityURI,
+				currentDataMode);
 		
 	}
 	
