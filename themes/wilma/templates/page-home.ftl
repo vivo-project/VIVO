@@ -11,7 +11,7 @@
     
     <body class="${bodyClasses!}">
         <#include "identity.ftl">
-        
+
         <#include "menu.ftl">
 
         <section id="intro" role="region">
