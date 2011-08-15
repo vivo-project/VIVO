@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?address
+                        ?label    
+                        ?street                    
+                        ?city 
+                        ?state
+                        ?postalCode
+                        ?country    WHERE {
+            ?subject ?property ?address 
+            OPTIONAL { ?address rdfs:label ?label  }
+            OPTIONAL { ?address core:addressStreet ?street  }
+            OPTIONAL { ?address core:addressCity ?city  }
+            OPTIONAL { ?address core:addressState ?state  }
+            OPTIONAL { ?address core:addressPostalCode ?postalCode  }
+            OPTIONAL { ?address core:addressCountry ?country  }
+            
+            
+            OPTIONAL { ?address a ?subclass .
+                       ?subclass rdfs:subClassOf core:Address 
+            } 
+            
+        } ORDER BY <collated>?subclass</collated> ?label
+    </query-select>
+       
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:Address 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:Address 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?address .
+            ?address ?addressProperty ?addressValue 
+        } WHERE {
+            {
+               ?subject ?property ?address 
+            } UNION {
+               ?subject ?property ?address .
+               ?address ?addressProperty ?addressValue 
+            } 
+        } 
+    </query-construct>
+              
+    <template>propStatement-mailingAddress.ftl</template>
+</list-view-config>
