@@ -1047,6 +1047,24 @@
     <servlet-name>JSON Service</servlet-name>
     <url-pattern>/dataservice</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>UMLSTerminology</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.servlet.UMLSTerminologyAnnotation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UMLSTerminology</servlet-name>
+    <url-pattern>/UMLSTermsRetrieval</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ProcessTerminologyAnnotation</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.servlet.ProcessTerminologyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessTerminologyAnnotation</servlet-name>
+    <url-pattern>/edit/processTerminologyAnnotation</url-pattern>
+  </servlet-mapping>
 
   <!-- Google Refine servlets begins -->
 

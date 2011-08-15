@@ -143,6 +143,10 @@
     
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#webpage">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-webpage.xml</display:listViewConfigFile>
-    </rdf:Description>        
+    </rdf:Description>    
+  
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#terminologyAnnotation">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-terminologyAnnotation.xml</display:listViewConfigFile>
+    </rdf:Description>            
     
 </rdf:RDF>

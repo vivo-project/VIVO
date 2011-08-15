@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        
+        SELECT ?terminologyContextNode ?referencedTerm ?entryTerm ?termLabel WHERE {
+         	?subject ?property ?terminologyContextNode .
+    		?terminologyContextNode core:referencedTerm ?referencedTerm .
+    		?terminologyContextNode core:entryTerm ?entryTerm .
+    		?terminologyContextNode core:termLabel ?termLabel .
+        } ORDER BY ?termLabel 
+        
+          
+    </query-select>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT {
+           ?subject ?property ?terminologyContextNode .
+    		?terminologyContextNode core:referencedTerm ?referencedTerm .
+    		?terminologyContextNode core:entryTerm ?entryTerm .
+    		?terminologyContextNode core:termLabel ?termLabel .
+        } WHERE {
+        	
+   			 ?subject ?property ?terminologyContextNode .
+    		?terminologyContextNode core:referencedTerm ?referencedTerm .
+   			 ?terminologyContextNode core:entryTerm ?entryTerm .
+    		?terminologyContextNode core:termLabel ?termLabel .
+    		
+        }
+    </query-construct>
+
+   
+    
+    <template>propStatement-terminologyAnnotation.ftl</template>
+</list-view-config>
