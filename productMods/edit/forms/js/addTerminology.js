@@ -189,7 +189,7 @@ var addTerminologyForm = {
     	"<div class='row'>" + 
     	"<span class='column termLabel'>" +
     	"<input type='checkbox'  id='CUI' name='CUI' value='" + cuiURI + "' label='" + label + "' termType='" + type + "'/>" + 
-    	label + "( " + type + ")</span>" + 
+    	label + " (" + type + ")</span>" + 
     	"<span class='column termDefinition'>" + definition + "</span>" + 
     	"</div>" +  
     	"</li>";	

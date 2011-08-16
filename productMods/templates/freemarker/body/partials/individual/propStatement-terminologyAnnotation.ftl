@@ -14,5 +14,5 @@
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showTerm statement>
-	<a href="${statement.referencedTerm}">${statement.termLabel}</a>  
+	<a href="${statement.referencedTerm}">${statement.termLabel} (${statement.termType})</a>  
 </#macro>

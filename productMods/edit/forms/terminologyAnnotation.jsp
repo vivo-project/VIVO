@@ -58,6 +58,7 @@ SPARQL queries for existing values. --%>
     ?terminologyContextNode core:referencedTerm ?referencedTerm .
     ?terminologyContextNode core:entryTerm ?entryTerm .
     ?terminologyContextNode core:termLabel ?termLabel .
+    ?terminologyContextNode core:termType ?termType .
 </v:jsonset>
 
 <c:set var="returnPathAfterSubmit" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
@@ -82,7 +83,7 @@ SPARQL queries for existing values. --%>
     "urisInScope"    : { },
     "literalsInScope": { },
     "urisOnForm"     : [ "referencedTerm" ],
-    "literalsOnForm" : [ "entryTerm", "termLabel" ],
+    "literalsOnForm" : [ "entryTerm", "termLabel", "termType" ],
     "filesOnForm"    : [ ],
     "sparqlForLiterals" : { },
     "sparqlForUris" : {  },
@@ -107,7 +108,7 @@ SPARQL queries for existing values. --%>
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${n3ForTerminology}" ]
       },   
@@ -118,7 +119,18 @@ SPARQL queries for existing values. --%>
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : [ "${n3ForTerminology}" ]
+      }
+      ,"termType" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${n3ForTerminology}" ]
       }
@@ -201,14 +213,16 @@ SPARQL queries for existing values. --%>
     
 <%    
 	String termLabelUri = vivoCore + "termLabel";
+	String termTypeUri = vivoCore + "termType";
     for ( Individual termNode : terminologyAnnotationNodes ) {
         request.setAttribute("termNodeUri", termNode.getURI());
 		//Get label and type only as mirroring authorship where labels but no links for individuals incoldued
 		DataPropertyStatement termLabelStatement = termNode.getDataPropertyStatement(termLabelUri);
 		String termLabel = termLabelStatement.getData();
         request.setAttribute("termLabel", termLabel); 
-        //Possible to get referenced term using object property statement?
-
+       	DataPropertyStatement termTypeStatement = termNode.getDataPropertyStatement(termTypeUri);
+		String termType = termTypeStatement.getData();
+		request.setAttribute("termType", termType);
 %> 
         <li class="existingTerm">
             <%-- span.author will be used in the next phase, when we display a message that the author has been
@@ -218,7 +232,7 @@ SPARQL queries for existing values. --%>
                 for the case when it's followed by an em tag - we want the width to apply to the whole thing. --%>
                 <span class="termWrapper">
                    <span class="termLabel">
-                   ${termLabel}</span> 
+                   ${termLabel} (${termType})</span> 
                 </span>
                 <c:url var="deleteTermHref" value="/edit/primitiveDelete" />
                 <a href="${deleteTermHref}" class="remove">Remove</a>

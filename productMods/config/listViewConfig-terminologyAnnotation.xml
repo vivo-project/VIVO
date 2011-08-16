@@ -9,11 +9,12 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT ?terminologyContextNode ?referencedTerm ?entryTerm ?termLabel WHERE {
+        SELECT ?terminologyContextNode ?referencedTerm ?entryTerm ?termLabel ?termType WHERE {
          	?subject ?property ?terminologyContextNode .
     		?terminologyContextNode core:referencedTerm ?referencedTerm .
     		?terminologyContextNode core:entryTerm ?entryTerm .
     		?terminologyContextNode core:termLabel ?termLabel .
+    		?terminologyContextNode core:termType ?termType .
         } ORDER BY ?termLabel 
         
           
@@ -27,13 +28,14 @@
     		?terminologyContextNode core:referencedTerm ?referencedTerm .
     		?terminologyContextNode core:entryTerm ?entryTerm .
     		?terminologyContextNode core:termLabel ?termLabel .
+    		?terminologyContextNode core:termType ?termType .
         } WHERE {
         	
    			 ?subject ?property ?terminologyContextNode .
     		?terminologyContextNode core:referencedTerm ?referencedTerm .
    			 ?terminologyContextNode core:entryTerm ?entryTerm .
     		?terminologyContextNode core:termLabel ?termLabel .
-    		
+    		?terminologyContextNode core:termType ?termType .
         }
     </query-construct>
 

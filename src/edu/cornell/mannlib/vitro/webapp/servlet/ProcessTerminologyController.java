@@ -25,12 +25,19 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.DefaultObjectWrapper;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
 import javax.servlet.RequestDispatcher;
+import com.hp.hpl.jena.vocabulary.XSD;
 public class ProcessTerminologyController extends VitroHttpServlet {
     
     private static final long serialVersionUID = 1L;
     private static final Log log = LogFactory.getLog(ProcessTerminologyController.class);
     private static final String submissionUrl = "/edit/processRdfForm2.jsp";
-    
+    //Field names/variables names for n3 - these will have numbers added as suffix if more than one term
+    private static String referencedBase = "referencedTerm";
+	private static String entryBase = "entryTerm";
+	private static String labelBase = "termLabel";
+	private static String typeBase = "termType";
+	//String datatype
+	private static String xsdStringType = XSD.xstring.toString();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
@@ -101,19 +108,19 @@ public class ProcessTerminologyController extends VitroHttpServlet {
     	String[] termsArray = termParam.split(",");
 		String[] termLabels = labelParam.split(",");
 		String[] termTypes = typeParam.split(",");
-		String entryTerm = vreq.getParameter("entryTerm");
+		
 		int numberParameters = termsArray.length;
 		int index;
-		String referencedBase = "referencedTerm";
-		String labelBase = "termLabel";
-		String termBase = "termType";
+		
 		//Should already include entry term so no need to include here
+		//If that changes, then add entry term here
+		//String entryTerm = vreq.getParameter("entryTerm");
 		//newUrl += "&entryTerm=" + URLEncoder.encode(entryTerm);
-		//Add entry 
+		//Process values and generate url matching field name to value
 		for(index = 1; index <= numberParameters; index++) {
 			String referencedInputName = referencedBase + index;
 			String termLabelInputName = labelBase + index;
-			String termTypeInputName =termBase + index;
+			String termTypeInputName =typeBase + index;
 			//array is set to start at 0, not 1
 			String referencedTerm = termsArray[index - 1];
 			String termLabel = termLabels[index - 1];
@@ -141,7 +148,7 @@ public class ProcessTerminologyController extends VitroHttpServlet {
 	}
 	
 	/*
-	 *       "referencedTerm" : {
+	 *     "referencedTerm" : {
          "newResource"      : "false",
          "validators"       : [ "nonempty" ],
          "optionsType"      : "UNDEFINED", //UNSURE WHAT TO KEEP HERE
@@ -159,7 +166,7 @@ public class ProcessTerminologyController extends VitroHttpServlet {
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${n3ForTerminology}" ]
       },   
@@ -170,7 +177,18 @@ public class ProcessTerminologyController extends VitroHttpServlet {
          "literalOptions"   : [ ],
          "predicateUri"     : "",
          "objectClassUri"   : "",
-         "rangeDatatypeUri" : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
+         "rangeLang"        : "",
+         "assertions"       : [ "${n3ForTerminology}" ]
+      }
+      ,"termType" : {
+         "newResource"      : "false",
+         "validators"       : [ "nonempty" ],
+         "optionsType"      : "UNDEFINED",
+         "literalOptions"   : [ ],
+         "predicateUri"     : "",
+         "objectClassUri"   : "",
+         "rangeDatatypeUri" : "${stringDatatypeUriJson}",
          "rangeLang"        : "",
          "assertions"       : [ "${n3ForTerminology}" ]
       }
@@ -179,23 +197,20 @@ public class ProcessTerminologyController extends VitroHttpServlet {
 	private void addFields(EditConfiguration editConfig, VitroRequest vreq, int numberTerms) {
 		Map<String, Field> fieldMap = new HashMap<String, Field>();
 		int index;
-		String referencedBase = "referencedTerm";
-		String entryBase = "entryTerm";
-		String labelBase = "termLabel";
 		
 		//Entry only needs to be added once
-		fieldMap.put(entryBase, generateField(editConfig));
+		fieldMap.put(entryBase, generateField(editConfig, xsdStringType));
 		
 		//First one already included so add new ones here
 		for(index = 1; index <= numberTerms; index++) {
 			int suffix = index;
 			String referencedTerm = referencedBase + suffix;
 			String label = labelBase + suffix;
-			//need to add termType
+			String type = typeBase + suffix;
 			//Generate Field for each
-			fieldMap.put(referencedTerm, generateField(editConfig));
-			fieldMap.put(label, generateField(editConfig));
-			//termType would also go in here
+			fieldMap.put(referencedTerm, generateField(editConfig, null));
+			fieldMap.put(label, generateField(editConfig, xsdStringType));
+			fieldMap.put(type, generateField(editConfig, xsdStringType));
 		}
 		editConfig.setFields(fieldMap);
 	}
@@ -210,7 +225,7 @@ public class ProcessTerminologyController extends VitroHttpServlet {
     "rangeDatatypeUri" : "",
     "rangeLang"        : "",
     "assertions"       : [ "${n3ForTerminology}" ]*/
-	private Field generateField(EditConfiguration editConfig) {
+	private Field generateField(EditConfiguration editConfig, String dataType) {
 		List<String> n3Required = editConfig.getN3Required();
 		Field field = new Field();
 		field.setNewResource(false);
@@ -221,8 +236,13 @@ public class ProcessTerminologyController extends VitroHttpServlet {
 		field.setLiteralOptions(new ArrayList<List<String>>());
 		field.setPredicateUri("");
 		field.setObjectClassUri("");
-		field.setRangeDatatypeUri("");
-		field.setRangeLang("");
+		if(dataType == null || dataType.isEmpty()) {
+			field.setRangeLang("");
+			field.setRangeDatatypeUri("");
+		} else {
+			field.setRangeDatatypeUri(dataType);
+		}
+		
 		field.setAssertions(n3Required);
 		return field;
 	}
@@ -238,9 +258,6 @@ public class ProcessTerminologyController extends VitroHttpServlet {
 		List<String> literalsOnForm = new ArrayList<String>();
 		
 		int index;
-		String referencedBase = "referencedTerm";
-		String entryBase = "entryTerm";
-		String labelBase = "termLabel";
 		//entry term needs to be added only once
 		literalsOnForm.add(entryBase);
 
@@ -249,8 +266,10 @@ public class ProcessTerminologyController extends VitroHttpServlet {
 			int suffix = index;
 			String referencedTerm = referencedBase + suffix;
 			String label = labelBase + suffix;
+			String type = typeBase + suffix;
 			urisOnForm.add(referencedTerm);
 			literalsOnForm.add(label);
+			literalsOnForm.add(type);
 		}
 		editConfig.setUrisOnform(urisOnForm);
 		editConfig.setLiteralsOnForm(literalsOnForm);
@@ -268,21 +287,23 @@ public class ProcessTerminologyController extends VitroHttpServlet {
 		List<String> n3Required = new ArrayList<String>();
 		int index;
 		String nodeBase = "?terminologyContextNode";
-		String referencedBase = "?referencedTerm";
-		//there's only one entry term in this case
-		String entryBase = "?entryTerm";
-		String labelBase = "?termLabel";
+		String entryVar = "?" + entryBase;
+		String referencedVar = "?" + referencedBase;
+		String labelVar = "?" + labelBase;
+		String typeVar = "?" + typeBase;
 		String prefixStr = "@prefix core: <http://vivoweb.org/ontology/core#> .";
 		//First one already included so add new ones here
 		for(index = 1; index <= numberTerms; index++) {
 			int suffix = index;
 			String node = nodeBase + suffix;
-			String referencedTerm = referencedBase + suffix;
-			String label = labelBase + suffix;
+			String referencedTerm = referencedVar + suffix;
+			String label = labelVar + suffix;
+			String type = typeVar + suffix;
 			String n3String = prefixStr;
 			n3String += "?subject ?predicate " + node + " . " + 
-			node + " core:entryTerm " + entryBase + " . " + 
+			node + " core:entryTerm " + entryVar + " . " + 
 			node + " core:termLabel " + label + " . " + 
+			node + " core:termType " + type + " . " + 
 			node + " core:referencedTerm " + referencedTerm + " . ";
 			n3Required.add(n3String);
 		}
