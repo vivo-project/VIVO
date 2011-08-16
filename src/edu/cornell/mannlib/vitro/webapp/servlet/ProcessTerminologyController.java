@@ -53,6 +53,7 @@ public class ProcessTerminologyController extends VitroHttpServlet {
     		}
         	
     		int numberTerms = termsArray.length;
+    		log.debug("Number of terms included is " + numberTerms);
     		//if multiple values then need to process this differently by adding additional
     		//fields, assertions, etc. as well as changing the URL slightly
     		String url = "/edit/processRdfForm2.jsp?" + vreq.getQueryString();
@@ -68,7 +69,7 @@ public class ProcessTerminologyController extends VitroHttpServlet {
     			//Generate new url which will map input fields to value
     			url = generateUrl(editConfig, vreq);
     		}
-    		
+    		log.debug("Submitting to url using the following parameters " + url);
     		RequestDispatcher dispatcher = req.getRequestDispatcher(url);
     		dispatcher.forward(req, resp);
         	

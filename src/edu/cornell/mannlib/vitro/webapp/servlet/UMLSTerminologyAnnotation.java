@@ -47,7 +47,7 @@ public class UMLSTerminologyAnnotation extends VitroHttpServlet {
         try{
           //Get parameter
         	String entryText = vreq.getParameter("searchTerm");
-        	System.out.println("Entry text is " + entryText);
+        	log.debug("Executing UMLS term retrieval using " + entryText);
         	//TODO: Find a non-deprecated mechanism to do so
         	String dataUrl = submissionUrl + "textToProcess=" + URLEncoder.encode(entryText) + "&format=json";
         	try{

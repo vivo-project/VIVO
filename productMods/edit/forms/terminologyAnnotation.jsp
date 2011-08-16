@@ -61,7 +61,7 @@ SPARQL queries for existing values. --%>
 </v:jsonset>
 
 <c:set var="returnPathAfterSubmit" value="/edit/editRequestDispatch.jsp?subjectUri=${subjectUri}&predicateUri=${predicateUri}" />
-<c:set var="submitSearchUrl" value="/UMLSTermsRetrieval"/>
+<c:url var="submitSearchUrl" value="/UMLSTermsRetrieval"/>
 <c:url var="UMLSCUIURL" value="http://link.informatics.stonybrook.edu/umls/CUI/" />
 <c:set var="editjson" scope="request">
 {
@@ -246,10 +246,7 @@ SPARQL queries for existing values. --%>
 </div> 
 
 <form id="addTerminologyForm" class="customForm" action="<c:url value="/edit/processTerminologyAnnotation"/>" >
-
-    <h3>Search UMLS Terms</h3>
-
-    <p class="inline"><v:input type="text" id="searchTerm" label="Search UMLS" cssClass="acSelector" size="35" />
+    <p class="inline"><v:input type="text" id="searchTerm" label="Search UMLS Terms" cssClass="acSelector" size="35" />
     <input type="button" id="searchButton" name="searchButton" value="Search"/>
     </p>
    	<input type="hidden" id="entryTerm" name="entryTerm" value="" />  <!-- Field value populated by JavaScript -->
@@ -267,7 +264,7 @@ SPARQL queries for existing values. --%>
        <!-- Field value populated by JavaScript -->
     	
     </div>
-
+	<div id="errors" name="errors"></div>
     
     <p class="submit"><v:input type="submit" id="submit" name="submit" value="Add Term" cancel="true" /></p>
 

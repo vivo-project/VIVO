@@ -31,12 +31,8 @@ var addTerminologyForm = {
     mixIn: function() {
         // Mix in the custom form utility methods
         $.extend(this, vitro.customFormUtils);
-        
         // Get the custom form data from the page
         $.extend(this, customFormData);
-        //test
-        alert(addTerminologyForm.UMLSCUIURL);
-        alert(addTerminologyForm.dataServiceUri);
     },
     // On page load, create references for easy access to form elements.
     initObjects: function() {
@@ -58,6 +54,7 @@ var addTerminologyForm = {
         this.termLabel = $('#termLabel');
         this.termType = $('#termType');
         this.removeTermLinks = $('a.remove');
+        this.errors = $('#errors');
     },
     
     initPage: function() {
@@ -68,6 +65,7 @@ var addTerminologyForm = {
     bindEventListeners: function() {
     	this.searchSubmit.click(function() {
             addTerminologyForm.submitSearchTerm();
+            addTerminologyForm.clearErrors();
             return false;
          });
     	
@@ -110,6 +108,9 @@ var addTerminologyForm = {
     },
     clearSearchResults:function() {
     	$('#selectedTerm').empty();
+    },
+    clearErrors:function() {
+    	addTerminologyForm.errors.empty();
     },
     showTermListOnlyView: function() {
         this.hideForm();
@@ -159,6 +160,9 @@ var addTerminologyForm = {
     },
     prepareSubmit:function() {
     	var checkedElements = $("#CUI:checked");
+    	if(!addTerminologyForm.validateTermSelection(checkedElements)) {
+    		return false;
+    	}
     	var i;
     	var len = checkedElements.length;
     	var checkedTerm, checkedTermElement, termLabel, termType;
@@ -190,6 +194,13 @@ var addTerminologyForm = {
     	"</div>" +  
     	"</li>";	
     	return htmlAdd;
+    }, validateTermSelection:function(checkedElements) {
+    	var numberElements = checkedElements.length;
+    	if(numberElements < 1) {
+    		addTerminologyForm.errors.html("<p class='validationError'>Please select at least one term from search results to add or click cancel.</p>");
+    		return false;
+    	}
+    	return true;
     }, removeExistingTerm: function(link) {
         var removeLast = false,
             message = 'Are you sure you want to remove this term?';
@@ -227,7 +238,7 @@ var addTerminologyForm = {
                     });
 
                 } else {
-                    alert('Error processing request: author not removed');
+                    alert('Error processing request: term not removed');
                 }
             }
         });        
