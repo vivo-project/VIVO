@@ -32,7 +32,7 @@
              	    <div class="extended-address">${cityStateZip}</div>
              	</#if>
             <#else>
-                <div class="locality">${statement.city!}</div>
+                <#if statement.city?has_content><div class="locality">${statement.city!}</div></#if>
                 <#if statement.state?has_content><div class="region">${statement.state}</div></#if>
                 <#if statement.postalCode?has_content><div class="postal-code">${statement.postalCode}</div></#if>
             </#if>
