@@ -75,7 +75,7 @@ var ErrorDisplayWidget = Class.extend({
 			
 			var publicationsText = (responseData.pubsWithNoJournals > 1) ? "publications" : "publication";
 			
-			newErrorMessage += "<li>" + responseData.pubsWithNoJournals + " " + publicationsText + " have no journal" 
+			newErrorMessage += "<li>" + responseData.pubsWithNoJournals + " " + publicationsText + " with no journal" 
 				+ " information.</li>"
 				
 		}
