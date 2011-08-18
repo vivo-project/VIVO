@@ -15,31 +15,8 @@
     		?terminologyContextNode core:entryTerm ?entryTerm .
     		?terminologyContextNode core:termLabel ?termLabel .
     		?terminologyContextNode core:termType ?termType .
-        } ORDER BY ?termLabel 
-        
-          
+        } ORDER BY ?termLabel                   
     </query-select>
 
-    <query-construct>
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
-        CONSTRUCT {
-           ?subject ?property ?terminologyContextNode .
-    		?terminologyContextNode core:referencedTerm ?referencedTerm .
-    		?terminologyContextNode core:entryTerm ?entryTerm .
-    		?terminologyContextNode core:termLabel ?termLabel .
-    		?terminologyContextNode core:termType ?termType .
-        } WHERE {
-        	
-   			 ?subject ?property ?terminologyContextNode .
-    		?terminologyContextNode core:referencedTerm ?referencedTerm .
-   			 ?terminologyContextNode core:entryTerm ?entryTerm .
-    		?terminologyContextNode core:termLabel ?termLabel .
-    		?terminologyContextNode core:termType ?termType .
-        }
-    </query-construct>
-
-   
-    
     <template>propStatement-terminologyAnnotation.ftl</template>
 </list-view-config>

@@ -11,20 +11,23 @@
         
         SELECT DISTINCT ?subclass 
                         ?address
+                        ?localName
                         ?label    
                         ?street                    
                         ?city 
                         ?state
                         ?postalCode
-                        ?country    WHERE {
+                        ?country   
+                        
+        WHERE {
             ?subject ?property ?address 
+            LET ( ?localName := afn:localname(?address) )
             OPTIONAL { ?address rdfs:label ?label  }
             OPTIONAL { ?address core:addressStreet ?street  }
             OPTIONAL { ?address core:addressCity ?city  }
             OPTIONAL { ?address core:addressState ?state  }
             OPTIONAL { ?address core:addressPostalCode ?postalCode  }
-            OPTIONAL { ?address core:addressCountry ?country  }
-            
+            OPTIONAL { ?address core:addressCountry ?country  }            
             
             OPTIONAL { ?address a ?subclass .
                        ?subclass rdfs:subClassOf core:Address 

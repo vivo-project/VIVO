@@ -10,29 +10,47 @@
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-     <#macro showAddress statement>
-     
-        <#-- Pre-1.4 addresses may only have an rdfs:label, so display that when  -->
-        <#-- there's no street number.                                            -->
-        <#if statement.street??>
-            <div class="adr">
+<#macro showAddress statement>
+ 
+    <#if ( statement.street?has_content || statement.city?has_content || statement.state?has_content ||
+         statement.postalCode?has_content || statement.country?has_content )>
+         
+        <div class="adr">
+            <#if statement.street?has_content>
                 <div class="street-address">${statement.street}</div>
-                <#-- If the subclass is core:US Postal Address, or if the country is     -->
-                <#-- the US, display the city, state, and postal code on a single line.  -->
-                <#local cityStateZip><@s.join [ statement.city!, statement.state!, statement.postalCode!], "&nbsp;" /></#local>
-                <#if ( statement.subclass?? && statement.subclass?contains("USPostalAddress") ) ||  ( statement.country?? && statement.country?contains("United States") ) >
-                    <#if cityStateZip?has_content>
-                 	    <div class="extended-address">${cityStateZip}</div>
-                 	</#if>
-                <#else>
-                    <div class="locality">${statement.city!}</div>
-                    <#if statement.state??><div class="region">${statement.state}</div></#if>
-                    <#if statement.postalCode??><div class="postal-code">${statement.postalCode}</div></#if>
-                </#if>
-                <#if statement.country??><div class="country-name">${statement.country}</div></#if>
-            </div>
-        <#else>
-            <a href="${profileUrl(statement.address)}">${statement.label!}</a>
-        </#if>
+            </#if>
+            
+            <#-- If the subclass is core:US Postal Address, or if the country is     
+                 the US, display the city, state, and postal code on a single line.  -->           
+            <#if ( statement.subclass?? && statement.subclass?contains("USPostalAddress") ) ||  
+                 ( statement.country?? && ( statement.country?contains("United States") ||
+                                            statement.country == "US" ||
+                                            statement.country == "USA" ) )>
+                <#local cityState><@s.join [statement.city!, statement.state!], ", " /></#local>                      
+                <#local cityStateZip><@s.join [ cityState!, statement.postalCode!], "&nbsp;" /></#local>
+                <#if cityStateZip?has_content>
+             	    <div class="extended-address">${cityStateZip}</div>
+             	</#if>
+            <#else>
+                <div class="locality">${statement.city!}</div>
+                <#if statement.state?has_content><div class="region">${statement.state}</div></#if>
+                <#if statement.postalCode?has_content><div class="postal-code">${statement.postalCode}</div></#if>
+            </#if>
+            
+            <#if statement.country?has_content>
+                <div class="country-name">${statement.country}</div>
+            </#if>
+        </div>
         
-     </#macro>
+    <#-- Pre-1.4 addresses may only have an rdfs:label, since users using the default
+         object property form sometimes entered the entire address as the label. Display that when  
+         there's no address data. -->
+    <#elseif statement.editable>
+        <#-- This can be removed when the custom form is available. Until then, provide a link to the
+             address profile so the data can be edited. -->
+        <a href="${profileUrl(statement.address)}">${statement.label!statement.localName}</a>
+    <#else>
+        ${statement.label!}
+    </#if>
+    
+ </#macro>
