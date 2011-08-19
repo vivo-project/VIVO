@@ -12,7 +12,8 @@
         SELECT DISTINCT ?subclass 
                         ?address
                         ?localName
-                        ?label    
+                        ?label   
+                        ?dept
                         ?street                    
                         ?city 
                         ?state
@@ -23,6 +24,7 @@
             ?subject ?property ?address 
             LET ( ?localName := afn:localname(?address) )
             OPTIONAL { ?address rdfs:label ?label  }
+            OPTIONAL { ?address core:addressDepartment ?dept }
             OPTIONAL { ?address core:addressStreet ?street  }
             OPTIONAL { ?address core:addressCity ?city  }
             OPTIONAL { ?address core:addressState ?state  }

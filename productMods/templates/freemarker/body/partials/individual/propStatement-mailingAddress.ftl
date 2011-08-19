@@ -12,10 +12,14 @@
      next statement -->
 <#macro showAddress statement>
  
-    <#if ( statement.street?has_content || statement.city?has_content || statement.state?has_content ||
-         statement.postalCode?has_content || statement.country?has_content )>
+    <#if ( statement.dept?has_content || statement.street?has_content || statement.city?has_content || 
+           statement.state?has_content ||statement.postalCode?has_content || statement.country?has_content )>
          
         <div class="adr">
+            <#if statement.dept?has_content>
+                <div class="address-dept">${statement.dept}</div>
+            </#if>
+            
             <#if statement.street?has_content>
                 <div class="street-address">${statement.street}</div>
             </#if>
