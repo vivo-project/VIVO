@@ -1,6 +1,7 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
 
 CONSTRUCT {
+     ?dateTimeInterval core:end ?date .
      ?date ?property ?object .
 } WHERE {
      PERSON_URI core:educationalTraining ?educationalTraining . 
