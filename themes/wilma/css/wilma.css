@@ -1116,6 +1116,12 @@ ul#alpha-browse-individuals .count-classes {
 .alphaIndex {    
     font-size: .8em;
 }
+nav#alpha-browse-container {
+    border: 1px solid #dde4e3;
+    background-color: #fff;
+    border-left: 1px solid #dde4e3;
+    border-bottom: none;
+}
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
     width: 629px;
