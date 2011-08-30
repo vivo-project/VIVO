@@ -487,11 +487,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>EmptyController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.EmptyController</servlet-class>
+    <servlet-name>StaticPageController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.StaticPageController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EmptyController</servlet-name>
+    <servlet-name>StaticPageController</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
       
