@@ -9,7 +9,7 @@
 <h2>Export QR Code <em>(<a href="${individual.qrData().aboutQrCodesUrl}" title="More info on QR codes">What is this?</a>)</em></h2>
 
 <#assign thumbUrl = individual.thumbUrl! "${urls.images}/placeholders/person.thumbnail.jpg" >
-<img class="qrCode" src="${thumbUrl}" width="160" />
+<img class="individual-photo qrCode" src="${thumbUrl}" width="160" />
 
 <h3 class="qrCode"><a href="${individual.profileUrl}" title="View this person's profile">${individual.nameStatement.value}</a></h3>
 

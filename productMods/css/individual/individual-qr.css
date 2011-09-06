@@ -2,9 +2,11 @@
 
 .qrCode {
     float: left;
+    padding-left: .7em;
 }
 img.qrCode {
     margin-bottom: 2em;
+    padding-left: 0;
 }
 .vcard {
     clear: left;
