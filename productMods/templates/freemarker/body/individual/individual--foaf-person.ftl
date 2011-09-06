@@ -70,9 +70,9 @@
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}">&larr; return to ${relatedSubject.name}</a></p>
             <#else>                
-                <h1 class="fn foaf-person">
+                <h1 class="vcard foaf-person">
                     <#-- Label -->
-                    <@p.label individual editable />
+                    <span class="fn"><@p.label individual editable /></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
