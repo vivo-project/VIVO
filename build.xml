@@ -31,15 +31,9 @@
 	      message="${deploy.properties.file} must contain a value for vitro.core.dir" />
 
 	<!--
-		Locate the core script in terms that the product script requires.
-	-->
-	<property name="inner.basedir" location="${vitro.core.dir}/webapp" />
-
-	<!--
 		Override the default location for project modifications.
 	-->
 	<property name="product.modifications.dir" location="./productMods" />
-
 
 	<!--
 		Set this property so the core themes will not be included in the build.
