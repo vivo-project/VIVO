@@ -1512,7 +1512,6 @@ article.property h3 {
     padding: 10px 0 10px 20px;
     margin: 0;
 }
-h2#preferredTitle .verbosePropertyListing,
 h2#personInPosition .verbosePropertyListing,
 h2#hasResearchArea .verbosePropertyListing {
     display: block;
@@ -1552,7 +1551,10 @@ input.add-account:hover {
 input.add-account:active {
     top: 1px;
 }
-
+.disabledSubmit {
+    color: #ede ! important;
+    background-color: #b2d15a ! important;
+}
 /* ------------------------------------------------->  */
 /* CONTACT FORM ------------------------------------>  */
 /* ------------------------------------------------->  */
