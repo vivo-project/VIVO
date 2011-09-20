@@ -71,6 +71,7 @@
 			<include name="test/**/*" />
 			<include name="themes/**/*" />
 			<include name="config/*.properties" />
+			<include name="config/*.txt" />
 			<include name="config/solr/*" />
 			<include name="context.xml" />
 		</patternset>
