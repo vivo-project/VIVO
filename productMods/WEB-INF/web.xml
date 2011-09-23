@@ -52,6 +52,15 @@
 	 then filter-mapping <servlet-name> order in web.xml -->
 
   <filter>
+    <filter-name>Startup Status Display Filter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.filters.StartupStatusDisplayFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Startup Status Display Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
     <filter-name>Session Timeout Limiting Filter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.SessionTimeoutLimitingFilter</filter-class>
   </filter>
@@ -691,6 +700,15 @@
   <servlet-mapping>
     <servlet-name>ShowAuth</servlet-name>
     <url-pattern>/admin/showAuth</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StartupStatus</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.StartupStatusController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StartupStatus</servlet-name>
+    <url-pattern>/startupStatus</url-pattern>
   </servlet-mapping>
 
   <servlet>
