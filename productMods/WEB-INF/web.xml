@@ -41,7 +41,10 @@
 
   <!-- Listeners ****************************************************** -->
 
-  <!-- StartupManager instantiates and runs the listeners from startup_listeners.txt -->
+  <!-- 
+      StartupManager instantiates and runs the listeners from startup_listeners.txt 
+      All ServletContextListeners should be listed there instead of here.           
+  -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.startup.StartupManager</listener-class>
   </listener>
