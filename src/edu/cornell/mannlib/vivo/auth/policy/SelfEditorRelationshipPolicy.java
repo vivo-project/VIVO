@@ -23,7 +23,6 @@ import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.Abstrac
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.ifaces.RequestedAction;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractDataPropertyAction;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractObjectPropertyAction;
-import edu.cornell.mannlib.vitro.webapp.servlet.setup.AbortStartup;
 
 /**
  * Permit self-editors to edit the properties of classes with which they share a
@@ -366,22 +365,11 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 		public void contextInitialized(ServletContextEvent sce) {
 			ServletContext ctx = sce.getServletContext();
 
-			if (AbortStartup.isStartupAborted(ctx)) {
-				return;
-			}
+			OntModel ontModel = (OntModel) sce.getServletContext()
+					.getAttribute("jenaOntModel");
 
-			try {
-				OntModel ontModel = (OntModel) sce.getServletContext()
-						.getAttribute("jenaOntModel");
-
-				ServletPolicyList.addPolicy(ctx,
-						new SelfEditorRelationshipPolicy(ctx, ontModel));
-			} catch (Exception e) {
-				log.error("could not run " + this.getClass().getSimpleName()
-						+ ": " + e);
-				AbortStartup.abortStartup(ctx);
-				throw new RuntimeException(e);
-			}
+			ServletPolicyList.addPolicy(ctx, new SelfEditorRelationshipPolicy(
+					ctx, ontModel));
 		}
 
 		@Override
