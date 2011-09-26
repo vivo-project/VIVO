@@ -1,5 +1,8 @@
 #
-# ServletContextListeners for Vitro, to be instantiated and run by the StartupManager.
+# ServletContextListeners for VIVO, to be instantiated and run by the StartupManager.
+# 
+# For more information, 
+#     https://sourceforge.net/apps/mediawiki/vivo/index.php?title=The_StartupManager
 #
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
