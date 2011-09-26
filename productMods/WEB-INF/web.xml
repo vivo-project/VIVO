@@ -43,7 +43,7 @@
 
   <!-- 
       StartupManager instantiates and runs the listeners from startup_listeners.txt 
-      All ServletContextListeners should be listed there instead of here.           
+      All ServletContextListeners should be listed there, not here.           
   -->
   <listener>
     <listener-class>edu.cornell.mannlib.vitro.webapp.startup.StartupManager</listener-class>
