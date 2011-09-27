@@ -17,7 +17,8 @@ public class SiteAdminController extends BaseSiteAdminController {
     private static final long serialVersionUID = 1L;
     private static final Log log = LogFactory.getLog(SiteAdminController.class);
     
-    protected Map<String, String> getIndexCacheRebuildUrls(VitroRequest vreq) {
+    @Override
+	protected Map<String, String> getIndexCacheRebuildUrls(VitroRequest vreq) {
         
         Map<String, String> urls = super.getIndexCacheRebuildUrls(vreq);
 
@@ -28,14 +29,15 @@ public class SiteAdminController extends BaseSiteAdminController {
         return urls;
     }
     
-    protected Map<String, String> getSiteConfigUrls(VitroRequest vreq) {
+    @Override
+	protected Map<String, Object> getSiteConfigData(VitroRequest vreq) {
 
-        Map<String, String> urls = super.getSiteConfigUrls(vreq);
+        Map<String, Object> data = super.getSiteConfigData(vreq);
         
         if (PolicyHelper.isAuthorizedForActions(vreq, new UseMiscellaneousCuratorPages())) {
-            urls.put("internalClass", UrlBuilder.getUrl("/processInstitutionalInternalClass"));
+            data.put("internalClass", UrlBuilder.getUrl("/processInstitutionalInternalClass"));
         }
         
-        return urls;
+        return data;
     }
 }
