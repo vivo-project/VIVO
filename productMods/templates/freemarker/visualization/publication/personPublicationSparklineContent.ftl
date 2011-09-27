@@ -154,7 +154,7 @@
                                         sparksText += ' (' + totalPublicationCount + ' total)' ; 
                                     }
                                     
-                                    sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application.' />" ;
+                                    sparksText += "&nbsp;<img class='infoIcon' src='" + infoIconSrc + "' height='16px' width='16px' alt='information icon' title='These numbers are based solely on publications that have been loaded into this VIVO application. If this is your profile, you can enter additional publications below.' />" ;
 
                                  <#else>
             
