@@ -15,6 +15,13 @@
 	     ====================================================================== -->
 <project name="nihvivo" default="describe">
 
+	<!-- 
+		The build directory goes in the product directory. 
+		Everything else hangs from the build directory. 
+	-->
+	<property name="build.dir" location="./.build" />
+	<property name="appbase.dir" location="${build.dir}/appBase" />
+
 	<!--
 		Load the properties from deploy.properties.
 	-->
@@ -31,31 +38,90 @@
 	      message="${deploy.properties.file} must contain a value for vitro.core.dir" />
 
 	<!--
-		Locate the core script in terms that the product script requires.
+		Base it all on the core build file. 
 	-->
-	<property name="inner.basedir" location="${vitro.core.dir}/webapp" />
+	<import file="${vitro.core.dir}/webapp/build.xml" />
 
-	<!--
-		Override the default location for project modifications.
-	-->
-	<property name="product.modifications.dir" location="./productMods" />
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: prepare                      
+          
+          Override the core version, so we can merge the three levels before building.                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="prepare" depends="compileUtilities,product-prepare,vitroCore.prepare" />
 
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: product-prepare                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="product-prepare">
+		<mkdir dir="${appbase.dir}" />
+		<mkdir dir="${appbase.dir}/web" />
 
-	<!--
-		Set this property so the core themes will not be included in the build.
-	-->
-	<property name="skip.core.themes" value="true" />
+		<copy todir="${appbase.dir}/web" includeemptydirs="true">
+			<dirDifference dir="${corebase.dir}/web">
+				<blockingPath>
+					<pathelement location="./productMods" />
+				</blockingPath>
+			</dirDifference>
+			<fileset dir="./productMods" />
+		</copy>
 
-	<!--
-		Tell the licenser where to find its properties for this product.
-	-->
-	<property name="licenser.product.properties.file"
-	          location="config/licenser/licenser.properties" />
+		<patternset id="appbase.patterns">
+			<include name="src/**/*" />
+			<include name="lib/**/*" />
+			<include name="test/**/*" />
+			<include name="themes/**/*" />
+			<include name="config/*.properties" />
+			<include name="config/*.txt" />
+			<include name="config/solr/*" />
+			<include name="context.xml" />
+		</patternset>
 
-	<!--
-		Now get the standard product-build file.
-	-->
-	<import file="${vitro.core.dir}/webapp/product-build.xml" />
+		<copy todir="${appbase.dir}" includeemptydirs="true">
+			<dirDifference dir="${corebase.dir}">
+				<patternset refid="appbase.patterns" />
+				<exclude name="themes/**/*" if="skip.core.themes" />
+				<blockingPath>
+					<pathelement location="." />
+				</blockingPath>
+			</dirDifference>
+			<fileset dir=".">
+				<patternset refid="appbase.patterns" />
+			</fileset>
+		</copy>
+	</target>
+
+	<import file="${vitro.core.dir}/webapp/build.xml" />
+
+	<!-- ================================= 
+	      target: revisionInfo              
+	     
+	      Override the core version, to get the 2-level effect.                      
+	     ================================= -->
+	<target name="revisionInfo"
+	        depends="vitroCore.revisionInfo"
+	        description="--> Store revision info in build">
+		<addRevisionInfoLine productName="${ant.project.name}" productCheckoutDir="${basedir}" />
+	</target>
+
+	<!-- ================================= 
+          target: licenser             
+          
+          In regular use, checks that all appropriate source files have license tags.
+          At release time, applies license text to source files.
+          The files are handled as properties so they can be overridden from the command line, if desired.
+	     
+	      Override the core version, to get the 2-level effect.                      
+         ================================= -->
+	<target name="licenser" description="--> Check source files for licensing tags">
+		<property name="licenser.product.properties.file"
+		          location="./config/licenser/licenser.properties" />
+		<property name="licenser.core.properties.file"
+		          location="${corebase.dir}/config/licenser/licenser.properties" />
+		<runLicenserScript productname="${ant.project.name}"
+		                   propertiesfile="${licenser.product.properties.file}" />
+		<runLicenserScript productname="Vitro core"
+		                   propertiesfile="${licenser.core.properties.file}" />
+	</target>
 
 	<!-- ================================= 
           target: acceptance              
