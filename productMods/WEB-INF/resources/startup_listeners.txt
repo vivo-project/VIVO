@@ -35,13 +35,9 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateUserAccounts
 # Needs to run before submodels are attached and Pellet is set up -->
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
 
-# The following listener remains temporarily until SDB becomes the default triple store 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.AttachSubmodels
+edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
-# This listener sets up SimpleReasoner also in SDB mode. In SDB mode, Pellet is used for
-# TBox reasoning and SimpleReasoner is used for ABox reasoning. In RDF mode, Pellet was
-# used for both.
-edu.cornell.mannlib.vitro.webapp.servlet.setup.PelletReasonerSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsLoader
 
