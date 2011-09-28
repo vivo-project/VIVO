@@ -1406,7 +1406,7 @@ article.property ul.property-list {
     color: #5e6363;
 }
 article.property ul.property-list li a {
-    color: #2485ae;
+    /*color: #2485ae;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
     line-height: 1.6em;
 }
 /* MISCELLANEOUS ------>  */
