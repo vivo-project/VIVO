@@ -3,6 +3,9 @@
 
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
+<!-- Note: ?workshop is a generic name for any intervening event between a presentation and -->
+<!-- a conference, such as a workshop or session or exhibit.  tlw72 -->
+
 <list-view-config>
     <query-select>    
         PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
@@ -15,7 +18,8 @@
         SELECT DISTINCT <collated>?subclass</collated>
                         ?role ?roleLabel                         
                         ?presentation ?presentationName ?presentationLabel
-                        ?conference ?conferenceLabel  
+                        ?conference ?conferenceLabel
+                        ?workshop 
                         ?dateTime
                         
             WHERE {
@@ -37,6 +41,16 @@
                                        }  UNION {                                                                                                              
                                            ?conference core:includesEvent ?presentation 
                                        }
+                            }
+                            OPTIONAL {
+                                       { 
+                                           ?presentation core:eventWithin ?workshop .
+                                           ?workshop core:eventWithin ?conference 
+                                       }  UNION {                                                                                                              
+                                           ?workshop core:includesEvent ?presentation .
+                                           ?conference core:includesEvent ?workshop 
+                                       }
+                                       OPTIONAL { ?conference rdfs:label ?conferenceLabel }
                             }
                             
                             <collated>
@@ -146,6 +160,50 @@
                 ?role core:roleIn ?presentation .
                 ?conference a bibo:Conference .
                 ?conference core:includesEvent ?presentation .
+                ?conference rdfs:label ?conferenceLabel
+            }
+        }        
+    </query-construct>
+
+    <query-construct>
+        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?workshop core:eventWithin ?conference .
+            ?conference core:includesEvent ?workshop .
+            ?conference a bibo:Conference .
+            ?presentation core:eventWithin ?workshop .
+            ?workshop core:includesEvent ?presentation .
+            ?conference rdfs:label ?conferenceLabel
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role core:roleIn ?presentation .
+                ?conference a bibo:Conference .
+                ?presentation core:eventWithin ?workshop .
+                ?workshop core:eventWithin ?conference 
+            } UNION {
+                ?subject ?property ?role .
+                ?role core:roleIn ?presentation .
+                ?conference a bibo:Conference .
+                ?presentation core:eventWithin ?workshop .
+                ?workshop core:eventWithin ?conference .
+                ?conference rdfs:label ?conferenceLabel
+            } UNION {
+                ?subject ?property ?role .
+                ?role core:roleIn ?presentation .
+                ?conference a bibo:Conference .
+                ?conference core:includesEvent ?workshop . 
+                ?workshop core:includesEvent ?presentation 
+            } UNION {
+                ?subject ?property ?role .
+                ?role core:roleIn ?presentation .
+                ?conference a bibo:Conference .
+                ?conference core:includesEvent ?workshop . 
+                ?workshop core:includesEvent ?presentation .
                 ?conference rdfs:label ?conferenceLabel
             }
         }        
