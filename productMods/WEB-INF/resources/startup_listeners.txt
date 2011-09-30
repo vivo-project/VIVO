@@ -11,9 +11,6 @@ edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
 
-# DefaultThemeSetup needs to run before the JenaDataSourceSetup to allow creation of default portal and tab
-edu.cornell.mannlib.vitro.webapp.servlet.setup.DefaultThemeSetup
-
 # Comment out this listener to run Vitro without a database
 # If used, this listener must be run before JenaDataSourceSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
@@ -38,6 +35,9 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
 edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
+
+# Must run after JenaDataSourceSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ThemeInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsLoader
 
