@@ -37,51 +37,66 @@ $(document).ready(function(){
             $toggleLink.click(function() {
                 $itemContainer.hide();
                 $(this).attr('href', '#show more content');
-                $(this).text('more');
+                $(this).text('more...');
                 togglePropDisplay.showMore($toggleLink, $itemContainer);
                 return false;
             });
         }
     };
     
+    // var $propList = $('.property-list').not('>li>ul');
     var $propList = $('.property-list:not(:has(>li>ul))');
     $propList.each(function() {
         var $additionalItems = $(this).find('li:gt(2)');
         if ( $additionalItems.exists() ) {
-            // create toggle link
-            var $toggleLink = $('<a class="more-less" href="#show more content">more</a>').appendTo(this);
-            
             // create container for additional elements
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
+            
+            // create toggle link
+            var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo(this);
             
             $additionalItems.appendTo($itemContainer);
             
             $itemContainer.hide();
             
             togglePropDisplay.showMore($toggleLink, $itemContainer);
-            
-            // $wrappedItems.hide();
-            
-            // var moreLess = $(this).find(':visible:last-child').after(' <a class="more-less" href="#show more content">more</a>');
-            // $(additionalItems).first().before(' <a class="more-less" href="#show more content">more</a>');
-            // $wrappedItems.before(' <a class="more-less" href="#show more content">more</a>');
-            // togglePropDisplay.showMore($wrappedItems);
-            // $('.more-less').click(function() {
-            //                 $(additionalItems).show();
-            //                 $('.more-less').attr('href', '#show less content').text('less');
-            //                 
-            //             });
         }
     });
     
-    var subPropList = '.subclass-property-list';
-    $(subPropList).each(function() {
-        var additionalItems = $(this).find('li:gt(4)');
-        if ( additionalItems.exists() ) {
-            $(additionalItems).hide();
-            $(this).append(' <a class="more-less" href="#show more content">more</a>');
+    var $subPropList = $('.subclass-property-list');
+    $subPropList.each(function() {
+        var $additionalItems = $(this).find('li:gt(2)');
+        if ( $additionalItems.exists() ) {
+            // create container for additional elements
+            var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
+            
+            // create toggle link
+            var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo(this);
+            
+            $additionalItems.appendTo($itemContainer);
+            
+            $itemContainer.hide();
+            
+            togglePropDisplay.showMore($toggleLink, $itemContainer);
         }
     });
+    
+    var $subPropSibs = $subPropList.closest('li').last().nextAll();
+    var $subPropParent = $subPropList.closest('li').last().parent();
+    var $additionalItems = $subPropSibs.slice(3);
+    if ( $additionalItems.length > 0 ) {
+        // create container for additional elements
+        var $itemContainer = $('<div class="additionalItems" />').appendTo($subPropParent);
+        
+        // create toggle link
+        var $toggleLink = $('<a class="more-less" href="#show more content">more...</a>').appendTo($subPropParent);
+        
+        $additionalItems.appendTo($itemContainer);
+        
+        $itemContainer.hide();
+        
+        togglePropDisplay.showMore($toggleLink, $itemContainer);
+    }
     
     // Change background color button when verbose mode is off
     $('a#verbosePropertySwitch:contains("Turn off")').addClass('verbose-off');
