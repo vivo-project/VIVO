@@ -241,6 +241,25 @@
   </servlet-mapping>
   
    <servlet>
+    <servlet-name>DeletePropertyController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.DeletePropertyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePropertyController</servlet-name>
+    <url-pattern>/deletePropertyController</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>PostEditCleanupController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.edit.n3editing.controller.PostEditCleanupController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostEditCleanupController</servlet-name>
+    <url-pattern>/postEditCleanupController</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
     <servlet-name>MenuManagementController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuManagementController</servlet-class>
   </servlet>
