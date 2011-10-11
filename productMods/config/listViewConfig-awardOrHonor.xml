@@ -52,7 +52,7 @@
                                }
                     }  
 
-        }  ORDER BY ?label
+        }  ORDER BY  DESC(?dateTime) DESC(?dateTimeEnd)
     </query-select>
        
     <query-construct>
