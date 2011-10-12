@@ -45,7 +45,7 @@
 	<!-- - - - - - - - - - - - - - - - - - 
           target: prepare                      
           
-          Override the core version, so we can merge the three levels before building.                      
+          Override the core version, so we can merge the two levels before building.                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="prepare" depends="compileUtilities,product-prepare,vitroCore.prepare" />
 
