@@ -35,6 +35,10 @@
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-organizationForPosition.xml</display:listViewConfigFile>
     </rdf:Description>
     
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#organizationForTraining">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-organizationForTraining.xml</display:listViewConfigFile>
+    </rdf:Description>
+    
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#mailingAddress">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-mailingAddress.xml</display:listViewConfigFile>
     </rdf:Description>
