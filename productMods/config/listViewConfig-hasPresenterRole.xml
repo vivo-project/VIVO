@@ -75,7 +75,7 @@
                 FILTER ( bound(?presentation) )
                 </critical-data-required>
         
-            } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) ?presentationLabel ?presentationName
+            } ORDER BY <collated>?subclass</collated> DESC(?dateTime) ?presentationLabel ?presentationName
     </query-select>
  
     <query-construct> 
