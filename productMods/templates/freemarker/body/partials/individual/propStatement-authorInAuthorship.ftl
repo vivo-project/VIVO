@@ -14,16 +14,89 @@
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showAuthorship statement>
-
-    <#local linkedIndividual>
+    <#local resourceTitle>
         <#if statement.infoResource??>
-            <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceName}</a>
+            <a href="${profileUrl(statement.infoResource)}">${statement.infoResourceName}</a>.&nbsp;
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.authorship)}">missing information resource</a>
+            <a href="${profileUrl(statement.authorship)}">missing information resource</a>.&nbsp;
         </#if>
     </#local>
 
-    ${linkedIndividual} <@dt.yearSpan "${statement.dateTime!}" />
+    <#local citationDetails>
+        <#if statement.subclass??>
+            <#if statement.subclass?contains("Article")>
+                <#if statement.journal??>
+                    <em>${statement.journal!}</em>.&nbsp;
+                    <#if statement.volume?? && statement.startPage?? && statement.endPage??>
+                        ${statement.volume!}:${statement.startPage!}-${statement.endPage!}.
+                    <#elseif statement.volume?? && statement.startPage??>
+                        ${statement.volume!}:${statement.startPage!}.
+                    <#elseif statement.volume??>
+                        ${statement.volume!}.
+                    <#elseif statement.startPage?? && statement.endPage??>
+                        ${statement.startPage!}-${statement.endPage!}.
+                    <#elseif statement.startPage??>
+                        ${statement.startPage!}.
+                    </#if>
+                </#if>
+            <#elseif statement.subclass?contains("Chapter")>
+                <#if statement.journal??>
+                    <em>${statement.journal!}</em>.
+                <#elseif statement.appearsIn??>
+                    <em>${statement.appearsIn!}</em>.
+                <#elseif statement.partOf??>
+                    <em>${statement.partOf!}</em>.
+                </#if>
+                <#if statement.editor??>
+                    Ed.&nbsp;${statement.editor!}.&nbsp;
+                </#if>
+                <#if statement.locale?? && statement.publisher??>
+                    ${statement.locale!}:&nbsp;${statement.publisher!}.
+                <#elseif statement.locale??>
+                    ${statement.locale!}.
+                <#elseif statement.publisher??>
+                    ${statement.publisher!}.
+                </#if>
+                <#if statement.startPage?? && statement.endPage??>
+                    ${statement.startPage!}-${statement.endPage!}.
+                <#elseif statement.startPage??>
+                    ${statement.startPage!}.
+                </#if>
+            <#elseif statement.subclass?contains("Book")>
+                <#if statement.volume??>
+                    Vol.&nbsp;${statement.volume!}.&nbsp;
+                </#if>
+                <#if statement.editor??>
+                    Ed.&nbsp;${statement.editor!}.&nbsp;
+                </#if>
+                <#if statement.locale?? && statement.publisher??>
+                    ${statement.locale!}:&nbsp;${statement.publisher!}.
+                <#elseif statement.locale??>
+                    ${statement.locale!}.
+                <#elseif statement.publisher??>
+                    ${statement.publisher!}.
+                </#if>
+            <#else>
+                <#if statement.journal??>
+                    <em>${statement.journal!}</em>.
+                <#elseif statement.appearsIn??>
+                    <em>${statement.appearsIn!}</em>.
+                <#elseif statement.partOf??>
+                    <em>${statement.partOf!}</em>.
+                </#if>
+                <#if statement.editor??>
+                    Ed. ${statement.editor!}.&nbsp;
+                </#if>
+                <#if statement.startPage?? && statement.endPage??>
+                    ${statement.startPage!}-${statement.endPage!}.
+                <#elseif statement.startPage??>
+                    ${statement.startPage!}.
+                </#if>
+            </#if>
+        </#if>
+    </#local>
+
+    ${resourceTitle} ${citationDetails}  <@dt.yearSpan "${statement.dateTime!}" />
 
 </#macro>
