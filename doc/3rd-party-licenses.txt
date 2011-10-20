@@ -7,14 +7,9 @@ licenses/apache.LICENSE.txt
 
 ant-jmeter
 batik-css
-commons-beanutils-core
-commons-betwixt
-commons-cli
 commons-codec
 commons-collections
 commons-dbcp
-commons-digester
-commons-discovery
 commons-fileupload
 commons-httpclient
 commons-io
@@ -26,26 +21,17 @@ csv
 dwr
 gson
 jakarta-jstl
-jakarta-oro
 jmeter
 joda-time
-json-taglib
 log4j
 nekohtml
 solr
 spring
 stax-api
-taglibs-mailer
-taglibs-random
-taglibs-string
-taglibs-standard
 toggle
 xalan
-xbean
-xbean-spring
 xercesImpl
 xml-apis
-XmlSchema
 wstx-asl
 
 
@@ -53,7 +39,6 @@ BSD
 ---
 aduna-appbase (licenses/aduna.LICENSE.txt)
 aduna-commons (licenses/aduna.LICENSE.txt)
-antlr (licenses/antlr.LICENSE.txt)
 arq-extra (licenses/jena.LICENSE.txt)
 arq (licenses/jena.LICENSE.txt)
 dojo (licenses/dojo.LICENSE.txt)
@@ -64,17 +49,12 @@ jena (licenses/jena.LICENSE.txt)
 jenatest (licenses/jena.LICENSE.txt)
 ldap (licenses/ldap.LICENSE.txt)
 sdb (licenses/sdb.LICENSE.txt)
-sesame-console (licenses/aduna.LICENSE.txt)
 sesame-http (licenses/aduna.LICENSE.txt)
 sesame-model (licenses/aduna.LICENSE.txt)
 sesame-query (licenses/aduna.LICENSE.txt)
-sesame-queryalgebra (licenses/aduna.LICENSE.txt)
-sesame-queryparser (licenses/aduna.LICENSE.txt)
 sesame-queryresultio (licenses/aduna.LICENSE.txt)
 sesame-repository (licenses/aduna.LICENSE.txt)
 sesame-rio (licenses/aduna.LICENSE.txt)
-sesame-runtime (licenses/aduna.LICENSE.txt)
-sesame-sail (licenses/aduna.LICENSE.txt)
 sparqltag (licenses/sparqltag.LICENSE.txt)
 xpp3_min (licenses/extreme.LICENSE.txt)
 xstream (licenses/xstream.LICENSE.txt)
@@ -119,7 +99,6 @@ jaxrpc
 jsontofmmodel
 mysql-connector-java
 rowset
-rsslib4j
 saaj
 
 
@@ -128,9 +107,7 @@ GNU LGPL 2.1
 licenses/lgpl2.LICENSE.txt
 
 betterdateinput
-jcalendar
 tinymce
-wstx-asl
 
 
 GNU LGPL 3
@@ -184,7 +161,6 @@ Others
 ------
 cos (licenses/cos.LICENSE.txt)
 googleanalytics (license/googleanalytics.LICENSE.txt)
-jdom (licenses/jdom.LICENSE.txt)
 json (licenses/json.LICENSE.txt)
 jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
@@ -199,5 +175,4 @@ xsdlib
 
 None
 ----
-Concurrent
 Trippi
