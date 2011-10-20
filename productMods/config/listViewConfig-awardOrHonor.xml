@@ -26,15 +26,8 @@
                     ?subject ?property ?award
                     LET ( ?localName := afn:localname(?award) )
                     OPTIONAL { ?award rdfs:label ?awardLabel  }
-                    OPTIONAL { ?conferredBy a foaf:Organization .
-                                   OPTIONAL { ?conferredBy rdfs:label ?conferredByLabel }
-                                   { 
-                                       ?award core:awardConferredBy ?conferredBy 
-                                   }  UNION 
-                                   {
-                                       ?conferredBy core:awardConferred ?award 
-                                   }                
-
+                    OPTIONAL { ?award core:awardConferredBy ?conferredBy .
+                               ?conferredBy rdfs:label ?conferredByLabel   
                     }
                     OPTIONAL { ?award core:dateTimeInterval ?dateTimeInterval 
                                OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
@@ -82,20 +75,16 @@
             CONSTRUCT {
                 ?subject ?property ?award .
                 ?award core:awardConferredBy ?conferredBy .
-                ?conferredBy a foaf:Organization .
-                ?conferredBy core:awardConferred ?award .
                 ?conferredBy rdfs:label ?conferredByLabel
             } WHERE {
                 {
-                    ?subject ?property ?award .
-                    ?conferredBy a foaf:Organization .
-                    ?award core:awardConferredBy ?conferredBy .
-                    ?conferredBy core:awardConferred ?award 
+                    ?subject ?property ?award 
                 } UNION {
                     ?subject ?property ?award .
-                    ?conferredBy a foaf:Organization .
-                     ?award core:awardConferredBy ?conferredBy .
-                     ?conferredBy core:awardConferred ?award .
+                    ?award core:awardConferredBy ?conferredBy
+                } UNION {
+                    ?subject ?property ?award .
+                    ?award core:awardConferredBy ?conferredBy .
                     ?conferredBy rdfs:label ?conferredByLabel
                 }
             }        

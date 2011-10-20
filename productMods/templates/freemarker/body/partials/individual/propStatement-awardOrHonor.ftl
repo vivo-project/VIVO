@@ -15,7 +15,7 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.award)}" title="crap">${statement.awardLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.award)}">${statement.awardLabel!statement.localName}</a>
         </#if>
     </#local>
 
