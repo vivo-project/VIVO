@@ -15,11 +15,11 @@
     </#if>
 </#macro>
 
-
 <#-- core:webpage
      
      Note that this macro has a side-effect in the call to propertyGroups.pullProperty().
 -->
+
 <#macro webpages propertyGroups editable linkListClass="individual-urls">
     <#local webpage = propertyGroups.pullProperty("${core}webpage")!>
 
@@ -28,9 +28,7 @@
             <#local label = "Web Pages">  
             <@p.addLinkWithLabel webpage editable label />           
             <#if webpage.statements?has_content> <#-- if there are any statements -->
-                <ul class="${linkListClass}" id="webpages" role="list">
-                    <@p.objectPropertyList webpage editable />
-                </ul>
+                <#include "lib-vivo-property-webpage.ftl">
             </#if>
         </nav>
     </#if>
