@@ -10,12 +10,12 @@
 <#import "lib-sequence.ftl" as s>
 <#import "lib-datetime.ftl" as dt>
 
-<@showRole statement property />
+<@showRole statement property  />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showRole statement property>
-    
+<#macro showRole statement property >
+  
     <#local linkedIndividual>
         <#if statement.indivInRole??>
             <a href="${profileUrl(statement.indivInRole)}">${statement.indivLabel!statement.indivName}</a>
@@ -26,16 +26,20 @@
     </#local>
 
     <#-- Generally roles are assigned a label when entered through a custom form. Investigator and its subclasses do not,
-    so use the type label instead. -->
+    so use the type label instead if not collated by subclass. -->
     <#local roleLabel>
-        <#if statement.roleLabel?has_content>${statement.roleLabel}
-        <#-- Display, e.g., "Principal Investigator" for "Principal Investigator Role",
-                            "Editor" for "Editor Role".
-             This information is redundant if the property is collated, since it appears in the subclass label. -->
+    <#-- Display, e.g., "Principal Investigator" for "Principal Investigator Role",
+                        "Editor" for "Editor Role".
+         This information is redundant if the property is collated, since it appears in the subclass label. -->
+       
+        <#if statement.roleLabel?has_content>
+            <#if statement.roleLabel?lower_case?replace(" role", "") != subclassName?lower_case?replace(" role", "")>
+                ${statement.roleLabel?replace(" Role", "")}
+            </#if>
         <#elseif (! property.collatedBySubclass ) && statement.roleTypeLabel?has_content>${statement.roleTypeLabel?replace(" Role", "")}
         </#if>
     </#local>
 
-    ${linkedIndividual} ${roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+    ${linkedIndividual} ${roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" /> 
 
 </#macro>
