@@ -33,13 +33,13 @@
          This information is redundant if the property is collated, since it appears in the subclass label. -->
        
         <#if statement.roleLabel?has_content>
-            <#if statement.roleLabel?lower_case?replace(" role", "") != subclassName?lower_case?replace(" role", "")>
+            <#if statement.roleLabel?lower_case?replace(" role", "") != statement.roleTypeLabel?lower_case?replace(" role", "")>
                 ${statement.roleLabel?replace(" Role", "")}
             </#if>
         <#elseif (! property.collatedBySubclass ) && statement.roleTypeLabel?has_content>${statement.roleTypeLabel?replace(" Role", "")}
         </#if>
     </#local>
 
-    ${linkedIndividual} ${roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" /> 
+    ${linkedIndividual} ${roleLabel!} <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
 
 </#macro>
