@@ -27,7 +27,8 @@
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
                         
                         <collated>
-                        ?activity vitro:mostSpecificType ?subclass   
+                        ?activity vitro:mostSpecificType ?subclass .
+                        ?subclass rdfs:subClassOf core:hasInvestigatorRole  
                         </collated>
             }           
             OPTIONAL { ?activity core:grantAwardedBy ?awardedBy .
@@ -61,10 +62,12 @@
             ?subject ?property ?role .
             ?role core:roleIn ?activity .
             ?activity vitro:mostSpecificType ?subclass .
+            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
         } WHERE {
             ?subject ?property ?role .
             ?role core:roleIn ?activity .
-            ?activity vitro:mostSpecificType ?subclass
+            ?activity vitro:mostSpecificType ?subclass .
+            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
         }
     </query-construct>
     

@@ -10,6 +10,7 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
         SELECT DISTINCT <collated> ?subclass </collated>
                         ?localName
@@ -33,7 +34,7 @@
                        OPTIONAL { ?degree core:abbreviation ?degreeAbbr }   
             }     
             <collated>           
-            OPTIONAL { ?training a ?subclass .
+            OPTIONAL { ?training vitro:mostSpecificType ?subclass .
                        ?subclass rdfs:subClassOf core:EducationalTraining 
             }   
             </collated>
@@ -57,10 +58,15 @@
     
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
-        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;  
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt; 
         CONSTRUCT {
+            ?subject ?property ?training .
+            ?training vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf core:EducationalTraining 
         } WHERE {
+            ?subject ?property ?training .
+            ?training vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf core:EducationalTraining 
         }
     </query-construct>
