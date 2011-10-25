@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.dao.VClassDao;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 
@@ -40,32 +41,42 @@ public class ModelUtils {
 	 * BFO Process and a parent that is not a BFO Process and issue
 	 * a warning if so.
 	 */
-	public static PropertyURIPair getPropertyForRoleInClass(String classURI, WebappDaoFactory wadf) {
-		
-		PropertyURIPair propertyURIPair= null;
+	public static ObjectProperty getPropertyForRoleInClass(String classURI, WebappDaoFactory wadf) {
 		
 		if (classURI == null) {
 			log.error("input classURI is null");
-			return propertyURIPair;
+			return null;
 		}
 		
 		if (wadf == null) {
 			log.error("input WebappDaoFactory is null");
-			return propertyURIPair;
+			return null;
 		}
 		
 		VClassDao vcd = wadf.getVClassDao();
 		List<String> superClassURIs = vcd.getSuperClassURIs(classURI, false);
 		Iterator<String> iter = superClassURIs.iterator();
 		
+		ObjectProperty op = new ObjectProperty();
+		boolean isBFOProcess = false;
+
 	    while (iter.hasNext()) {
 	    	String superClassURI = iter.next();
 	    	
 	    	if (processClass.contains(superClassURI)) {
-	    		return new PropertyURIPair(processPropertyURI, processPropertyInverseURI);
+	    		isBFOProcess = true;
+	    		break;
 	    	}
 	    }
 		
-		return new PropertyURIPair(nonProcessPropertyURI, nonProcessPropertyInverseURI);
+	    if (isBFOProcess) {
+			op.setURI(processPropertyURI);
+			op.setURIInverse(processPropertyInverseURI);    	
+	    } else {
+			op.setURI(nonProcessPropertyURI);
+			op.setURIInverse(nonProcessPropertyInverseURI);    		    	
+	    }
+	    
+		return op;
 	}	
 }
