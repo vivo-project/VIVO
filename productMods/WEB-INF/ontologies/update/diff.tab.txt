@@ -3,6 +3,8 @@ http://vivoweb.org/ontology/core#hasSubjectArea		No	Delete	Delete
 http://vivoweb.org/ontology/core#hasResearchArea		No	Delete	Delete
 http://vivoweb.org/ontology/core#subjectAreaOf		No	Delete	Delete
 http://vivoweb.org/ontology/core#researchAreaOf		No	Delete	Delete
+http://vivoweb.org/ontology/core#roleIn		No	Delete	Delete
+http://vivoweb.org/ontology/core#relatedRole		No	Delete	Delete
 http://vivoweb.org/ontology/core#VocabularySourceReference	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#sourceVocabularyReference	http://vivoweb.org/ontology/core#webpage	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#vocabularyReferenceFor	http://vivoweb.org/ontology/core#webpageOf	Yes	Map	Directly-changed
