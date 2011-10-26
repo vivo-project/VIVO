@@ -1104,6 +1104,13 @@
     <vitro:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">terminologyAnnotation.jsp</vitro:customEntryFormAnnot>
     <vitro:offerCreateNewOptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:offerCreateNewOptionAnnot>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#address3">
+    <rdfs:label xml:lang="en-US">address3</rdfs:label>
+    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</vitro:displayRankAnnot>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupaddress"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasCo-PrincipalInvestigatorRole">
     <vitro:customEntryFormAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">addGrantRoleToPerson.jsp</vitro:customEntryFormAnnot>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
