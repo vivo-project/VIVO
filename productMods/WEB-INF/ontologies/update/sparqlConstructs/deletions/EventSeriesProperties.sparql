@@ -11,12 +11,15 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     ?entity core:webpage ?link .
-     ?link core:webpageOf ?entity
+     ?something vivo:eventWithin ?series .
+     ?series vivo:includesEvent ?something
 } where {
-     ?entity vitro:additionalLink ?link .
-     ?link a vitro:Link .
+     {?something vivo:eventWithin ?series}
+     union
+     {?series vivo:includesEvent ?something}
+     
+     ?series rdf:type vivo:EventSeries
 }

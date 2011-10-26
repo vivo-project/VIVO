@@ -1,3 +1,6 @@
+http://vivoweb.org/ontology/core#SubjectArea		No	Delete	Delete
+http://vivoweb.org/ontology/core#hasSubjectArea		No	Delete	Delete
+http://vivoweb.org/ontology/core#hasResearchArea		No	Delete	Delete
 http://vivoweb.org/ontology/core#subjectAreaOf		No	Delete	Delete
 http://vivoweb.org/ontology/core#researchAreaOf		No	Delete	Delete
 http://vivoweb.org/ontology/core#VocabularySourceReference	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
