@@ -264,6 +264,13 @@
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">55</vitro:displayRankAnnot>
     <rdfs:label xml:lang="en-US">place of publication</rdfs:label>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#address1">
+    <rdfs:label xml:lang="en-US">address1</rdfs:label>
+    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</vitro:displayRankAnnot>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupaddress"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#offersDegree">
     <vitro:fullPropertyNameAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">offers degree</vitro:fullPropertyNameAnnot>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This relates an organization to the academic degrees offered.</vitro:publicDescriptionAnnot>
@@ -947,6 +954,13 @@
     <rdfs:label xml:lang="en-US">Librarian Position</rdfs:label>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
     <vitro:extendedLinkedData rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</vitro:extendedLinkedData>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#address2">
+    <rdfs:label xml:lang="en-US">address2</rdfs:label>
+    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</vitro:displayRankAnnot>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupaddress"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#nameShortIT">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
@@ -2506,15 +2520,6 @@
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
     <rdfs:label xml:lang="en-US">Invited Talk</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#addressStreet">
-    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</vitro:displayRankAnnot>
-    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <rdfs:label xml:lang="en-US">street</rdfs:label>
-    <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGrouplocation"/>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A public way or thoroughfare in a city or town, usually with a sidewalk or sidewalks.</vitro:publicDescriptionAnnot>
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/uri">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupidentifiers"/>
@@ -2641,8 +2646,8 @@
     <rdfs:label xml:lang="en-US">Edited Book</rdfs:label>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:inClassGroup rdf:resource="http://vivoweb.org/ontology#vitroClassGrouppublications"/>
-    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/doi">
@@ -2756,15 +2761,6 @@
     <rdfs:label xml:lang="en-US">area</rdfs:label>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#addressDepartment">
-    <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
-    <rdfs:label xml:lang="en-US">department</rdfs:label>
-    <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A distinct, usually specialized group of a large organization.</vitro:publicDescriptionAnnot>
-    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:inPropertyGroupAnnot rdf:resource="http://vivoweb.org/ontology#vitroPropertyGroupaddress"/>
-    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</vitro:displayRankAnnot>
-  </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#codeFAOTERM">
     <rdfs:label xml:lang="en-US">codeFAOTERM</rdfs:label>
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
@@ -2806,8 +2802,8 @@
     <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:publicDescriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Number of credits assigned a course by an learning institution.</vitro:publicDescriptionAnnot>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</vitro:displayLimitAnnot>
-    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</vitro:displayRankAnnot>
     <rdfs:label xml:lang="en-US">credits</rdfs:label>
+    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">50</vitro:displayRankAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.org/ontology/bibo/issue">
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">21</vitro:displayRankAnnot>
@@ -3618,6 +3614,13 @@
     <vitro:inClassGroup rdf:resource="http://vivoweb.org/ontology#vitroClassGrouporganizations"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
   </rdf:Description>
+  <rdf:Description rdf:about="http://purl.org/ontology/bibo/ThesisDegree">
+    <rdfs:label xml:lang="en-US">Thesis Degree</rdfs:label>
+    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
+    <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Hospital">
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
     <rdfs:label xml:lang="en-US">Hospital</rdfs:label>
@@ -3625,13 +3628,6 @@
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
     <vitro:inClassGroup rdf:resource="http://vivoweb.org/ontology#vitroClassGrouporganizations"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://purl.org/ontology/bibo/ThesisDegree">
-    <rdfs:label xml:lang="en-US">Thesis Degree</rdfs:label>
-    <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
-    <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/provenance-support#PersonAsListed">
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#nobody"/>
@@ -3817,8 +3813,8 @@
     <rdfs:label xml:lang="en-US">self_governing</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vivoweb.org/ontology/core#Database">
-    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayLimitAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayLimitAnnot>
+    <vitro:prohibitedFromUpdateBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <rdfs:label xml:lang="en-US">Database</rdfs:label>
     <vitro:hiddenFromDisplayBelowRoleLevelAnnot rdf:resource="http://vitro.mannlib.cornell.edu/ns/vitro/role#public"/>
     <vitro:displayRankAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#int">-1</vitro:displayRankAnnot>
