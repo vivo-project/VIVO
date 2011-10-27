@@ -47,7 +47,7 @@ $(document).ready(function(){
     // var $propList = $('.property-list').not('>li>ul');
     var $propList = $('.property-list:not(:has(>li>ul))');
     $propList.each(function() {
-        var $additionalItems = $(this).find('li:gt(2)');
+        var $additionalItems = $(this).find('li:gt(4)');
         if ( $additionalItems.exists() ) {
             // create container for additional elements
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
@@ -65,7 +65,7 @@ $(document).ready(function(){
     
     var $subPropList = $('.subclass-property-list');
     $subPropList.each(function() {
-        var $additionalItems = $(this).find('li:gt(2)');
+        var $additionalItems = $(this).find('li:gt(4)');
         if ( $additionalItems.exists() ) {
             // create container for additional elements
             var $itemContainer = $('<div class="additionalItems" />').appendTo(this);
