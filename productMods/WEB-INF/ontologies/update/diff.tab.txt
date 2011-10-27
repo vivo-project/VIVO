@@ -5,8 +5,8 @@ http://vivoweb.org/ontology/core#subjectAreaFor		No	Delete	Delete
 http://vivoweb.org/ontology/core#researchAreaOf		No	Delete	Delete
 http://vivoweb.org/ontology/core#roleIn		No	Delete	Delete
 http://vivoweb.org/ontology/core#relatedRole		No	Delete	Delete
-http://vivoweb.org/ontology/core#VocabularySourceReference	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#sourceVocabularyReference	http://vivoweb.org/ontology/core#webpage	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#vocabularyReferenceFor	http://vivoweb.org/ontology/core#webpageOf	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#URLLink		No	Delete	Delete
+http://vivoweb.org/ontology/core#sourceVocabularyReference		No	Delete	Delete
+http://vivoweb.org/ontology/core#vocabularyReferenceFor		No	Delete	Delete
 http://vivoweb.org/ontology/core#addressStreet	http://vivoweb.org/ontology/core#address1	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#addressDepartment	http://vivoweb.org/ontology/core#address2	Yes	Map	Directly-changed
