@@ -21,9 +21,9 @@ Construct {
         union
      {?something vivo:relatedRole ?role}
      
-     {?something rdf:type vivo:Process}
+     {?something rdf:type vivo:Project}
         union
-     {?something rdf:type vivo:Event}
+     {?something rdf:type event:Event}
         union
      {?something rdf:type vivo:EventSeries}
 }
