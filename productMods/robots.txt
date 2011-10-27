@@ -15,6 +15,7 @@ Disallow: /coauthors/
 Disallow: /pubsbyorg/
 Disallow: /fedsearch/
 Disallow: /comments.jsp
+Disallow: /dataservice/
 
 # VIVO additions
 Disallow: /visualizationfm/
