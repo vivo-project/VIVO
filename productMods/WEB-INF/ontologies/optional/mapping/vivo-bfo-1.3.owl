@@ -135,21 +135,18 @@
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
-
     <!-- http://vivoweb.org/ontology/core#Equipment -->
 
     <owl:Class rdf:about="&core;Equipment">
         <rdfs:subClassOf rdf:resource="&snap;Object"/>
     </owl:Class>
     
-
     <!-- http://vivoweb.org/ontology/core#EventSeries -->
 
     <owl:Class rdf:about="&core;EventSeries">
-        <rdfs:subClassOf rdf:resource="&span;Process"/>
+        <rdfs:subClassOf rdf:resource="&span;ProcessAggregate"/>
     </owl:Class>
     
-
     <!-- http://vivoweb.org/ontology/core#InformationResource -->
 
     <owl:Class rdf:about="&core;InformationResource">
