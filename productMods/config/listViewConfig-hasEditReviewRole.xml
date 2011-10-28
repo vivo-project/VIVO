@@ -26,7 +26,12 @@
                         
             ?subject ?property ?role  
             
-            OPTIONAL {  ?role core:roleIn ?activity 
+            OPTIONAL {  ?role core:roleContributesTo ?activity 
+                        LET (?activityName := afn:localname(?activity)) 
+                        OPTIONAL { ?activity rdfs:label ?activityLabel }
+            } 
+            
+            OPTIONAL {  ?role core:roleRealizedIn ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
             } 
@@ -101,7 +106,11 @@
                ?role ?roleProperty ?roleValue 
             } UNION {
                ?subject ?property ?role .
-               ?role core:roleIn ?activity . 
+               ?role core:roleContributesTo ?activity . 
+               ?activity rdfs:label ?activityName 
+            } UNION {
+               ?subject ?property ?role .
+               ?role core:roleRealizedIn ?activity . 
                ?activity rdfs:label ?activityName 
             }
         } 

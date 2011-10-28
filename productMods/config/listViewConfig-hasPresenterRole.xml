@@ -28,7 +28,7 @@
                 
                 OPTIONAL { ?role rdfs:label ?roleLabel }
                 
-                OPTIONAL {  ?role core:roleIn ?presentation 
+                OPTIONAL {  ?role core:roleRealizedIn ?presentation 
                             LET (?presentationName := afn:localname(?presentation)) 
                         
                             OPTIONAL { ?presentation rdfs:label ?presentationLabel }
@@ -86,19 +86,19 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role core:roleIn ?presentation .
+            ?role core:roleRealizedIn ?presentation .
             ?presentation vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf core:Presentation .
             ?subclass owl:equivalentClass core:Presentation .
         } WHERE {
             { 
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?presentation vitro:mostSpecificType ?subclass .
                 ?subclass rdfs:subClassOf core:Presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?presentation vitro:mostSpecificType ?subclass .
                 ?subclass owl:equivalentClass core:Presentation 
             }   
@@ -120,7 +120,7 @@
                 ?role ?roleProperty ?roleValue 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation . 
+                ?role core:roleRealizedIn ?presentation . 
                 ?presentation rdfs:label ?presentationLabel 
             }
         } 
@@ -141,23 +141,23 @@
         
             {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?presentation core:eventWithin ?conference 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?presentation core:eventWithin ?conference .
                 ?conference rdfs:label ?conferenceLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?conference core:includesEvent ?presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?conference core:includesEvent ?presentation .
                 ?conference rdfs:label ?conferenceLabel
@@ -181,26 +181,26 @@
         } WHERE {
             {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?presentation core:eventWithin ?workshop .
                 ?workshop core:eventWithin ?conference 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?presentation core:eventWithin ?workshop .
                 ?workshop core:eventWithin ?conference .
                 ?conference rdfs:label ?conferenceLabel
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?conference core:includesEvent ?workshop . 
                 ?workshop core:includesEvent ?presentation 
             } UNION {
                 ?subject ?property ?role .
-                ?role core:roleIn ?presentation .
+                ?role core:roleRealizedIn ?presentation .
                 ?conference a bibo:Conference .
                 ?conference core:includesEvent ?workshop . 
                 ?workshop core:includesEvent ?presentation .

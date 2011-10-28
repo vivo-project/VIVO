@@ -5,7 +5,7 @@ http://vivoweb.org/ontology/core#subjectAreaFor		No	Delete	Delete
 http://vivoweb.org/ontology/core#researchAreaOf		No	Delete	Delete
 http://vivoweb.org/ontology/core#roleIn		No	Delete	Delete
 http://vivoweb.org/ontology/core#relatedRole		No	Delete	Delete
-http://vivoweb.org/ontology/core#URLLink		No	Delete	Delete
+http://vivoweb.org/ontology/core#VocabularySourceReference		No	Delete	Delete
 http://vivoweb.org/ontology/core#sourceVocabularyReference		No	Delete	Delete
 http://vivoweb.org/ontology/core#vocabularyReferenceFor		No	Delete	Delete
 http://vivoweb.org/ontology/core#addressStreet	http://vivoweb.org/ontology/core#address1	Yes	Map	Directly-changed

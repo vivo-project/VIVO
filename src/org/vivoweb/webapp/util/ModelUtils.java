@@ -26,9 +26,9 @@ public class ModelUtils {
 	
 	private static Set<String> processClass = new HashSet<String>();
 	static {
-		processClass.add("http://vivoweb.org/ontology/core#Process");
+		processClass.add("http://vivoweb.org/ontology/core#Project");
 		processClass.add("http://purl.org/NET/c4dm/event.owl#Event");
-		processClass.add("http://xmlns.com/foaf/0.1/Agent");
+		processClass.add("http://vivoweb.org/ontology/core#EventSeries");
 	}
 
 	/*

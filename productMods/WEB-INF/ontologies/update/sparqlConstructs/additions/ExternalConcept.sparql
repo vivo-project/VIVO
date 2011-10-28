@@ -22,6 +22,6 @@ Construct {
      {?something vivo:hasResearchArea ?concept}
      
      ?concept rdf:type vivo:SubjectArea .
-     ?concept vivo:vocabularySourceReference ?urllink .
+     ?concept vivo:sourceVocabularyReference ?urllink .
      ?urllink vivo:linkURI ?uri
 }

@@ -131,7 +131,11 @@
      ****************************************************************** 
     -->
         
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#relatedRole">
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#realizedRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-relatedRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#contributingRole">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-relatedRole.xml</display:listViewConfigFile>
     </rdf:Description>
 
