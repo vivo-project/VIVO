@@ -528,8 +528,11 @@ var addAuthorForm = {
      
     removeAuthorship: function(link) {
         // RY Upgrade this to a modal window
+
+        authorName = $(link).prev().children().text();
+
         var removeLast = false,
-            message = 'Are you sure you want to remove this author?';
+            message = 'Are you sure you want to remove this author:\n\n' + authorName + ' ?\n\n';
             
         if (!confirm(message)) {
             return false;
