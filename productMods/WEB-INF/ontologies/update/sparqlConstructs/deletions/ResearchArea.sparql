@@ -14,11 +14,9 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX vivo: <http://vivoweb.org/ontology/core#>
 
 Construct {
-     ?something vivo:hasAssociatedConcept ?uri .
-     ?uri vivo:conceptAssociatedWith ?something 
+     ?person vivo:hasResearchArea ?concept .
+     ?concept vivo:researchAreaOf ?person 
 } where {
-     ?something vivo:hasSubjectArea ?concept .
+     ?person vivo:hasResearchArea ?concept .
      ?concept rdf:type vivo:SubjectArea .
-     ?concept vivo:sourceVocabularyReference ?urllink .
-     ?urllink vivo:linkURI ?uri
 }

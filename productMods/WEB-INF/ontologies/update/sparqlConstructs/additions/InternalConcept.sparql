@@ -19,15 +19,9 @@ Construct {
      _:concept rdf:type skos:Concept .
      _:concept rdfs:label ?label
 } where {
-     {?something vivo:hasSubjectArea ?concept}
-     union
-     {?something vivo:hasResearchArea ?concept}
-     
+     ?something vivo:hasSubjectArea ?concept .     
      ?concept rdf:type vivo:SubjectArea .
-     
      optional {?concept rdfs:label ?label}
-     
-     optional {?concept vivo:vocabularySourceReference ?urllink}
-      
+     optional {?concept vivo:sourceVocabularyReference ?urllink}
      filter (!bound(?urllink))
 }

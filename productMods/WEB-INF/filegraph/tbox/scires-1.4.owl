@@ -64,6 +64,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 2 trials, an experimental study drug or treatment is given to a larger group of people (100-300) to see if it is effective and to further evaluate its safety.</vitro:descriptionAnnot>
   </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
+    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000392">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A service in which a service consumer provides some material or data as input which a service provider stores and returns as output.</vitro:descriptionAnnot>
@@ -129,11 +134,6 @@ NOTE that we are not addressing for now the issue of whether a foaf:Person is a 
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Phase 3 Clinical Trial</vitro:shortDef>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In Phase 3 trials, an experimental study drug or treatment is given to large groups of people (1,000-3,000) to confirm its effectiveness, monitor side effects, compare it to commonly used treatments, and collect information that will allow the experimental drug or treatment to be used safely.
 </vitro:descriptionAnnot>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
-    <owl:onProperty rdf:resource="http://purl.obolibrary.org/obo/ERO_0000460"/>
-    <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://purl.obolibrary.org/obo/ERO_0000004">
     <rdfs:subClassOf rdf:nodeID="A0"/>
