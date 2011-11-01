@@ -12,19 +12,23 @@
      next statement -->
 <#macro showAddress statement>
  
-    <#if ( statement.dept?has_content || statement.street?has_content || statement.city?has_content || 
+    <#if ( statement.street1?has_content || statement.street2?has_content || statement.street3?has_content || statement.city?has_content || 
            statement.state?has_content ||statement.postalCode?has_content || statement.country?has_content )>
          
         <div class="adr">
-            <#if statement.dept?has_content>
-                <div class="address-dept">${statement.dept}</div>
+            <#if statement.street1?has_content>
+                <div class="address-street1">${statement.street1}</div>
             </#if>
             
-            <#if statement.street?has_content>
-                <div class="street-address">${statement.street}</div>
+            <#if statement.street2?has_content>
+                <div class="address-street2">${statement.street2}</div>
             </#if>
             
-            <#-- If the subclass is core:US Postal Address, or if the country is     
+            <#if statement.street3?has_content>
+                <div class="address-street3">${statement.street3}</div>
+            </#if>
+
+            <#-- If the subclass is vivo:US Postal Address, or if the country is     
                  the US, display the city, state, and postal code on a single line.  -->           
             <#if ( statement.subclass?? && statement.subclass?contains("USPostalAddress") ) ||  
                  ( statement.country?? && ( statement.country?contains("United States") ||
@@ -56,5 +60,5 @@
     <#else>
         ${statement.label!}
     </#if>
-    
+  
  </#macro>
