@@ -56,6 +56,9 @@ edu.cornell.mannlib.vivo.auth.policy.SelfEditorRelationshipPolicy$Setup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.RestrictHomeMenuItemEditingPolicy$Setup
 
+# Add VIVO specific DocumentModifers, this must come before SolrSetup
+edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
+
 # The Solr index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up.
 edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
 
