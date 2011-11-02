@@ -21,7 +21,6 @@ var ControlPanel = Class.extend({
 			opt.jQueryDiv.addClass(opt.divClass);
 		}
 		this.div = opt.jQueryDiv[0];
-		opt.map.controls[opt.controlPositions].push(this.div);
 	},
 	getDiv: function() {
 		/* Allow to edit everything start from div level by returning div jquery object */
@@ -38,6 +37,14 @@ var ControlPanel = Class.extend({
 		if (div) {
 			div.style.display = "block";
 		}
+	},
+	addToMap: function() {
+		var opt = this.options;
+		opt.map.controls[opt.controlPositions].push(this.div);
+	},
+	removeFromMap: function() {
+		var opt = this.options;
+		opt.map.controls[opt.controlPositions].pop();
 	}
 });
 
@@ -141,6 +148,7 @@ var CopyrightPanel = ControlPanel.extend({
 	init: function(options) {
 		this._super(options);
 		this.initCopyRight();
+		this.addToMap();
 	},
 	initCopyRight: function() {
 		var me = this;

@@ -1,7 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 var map;
 var downloader;
-var sliderControl;
 var currentVisMode;
 var currentController;
 var visModeControllers = {};
@@ -63,18 +62,13 @@ function initMap() {
 	var mapName = 'Scimap';
 	createScimapType(map, mapName);
 	map.setMapTypeId(mapName);
-
-	sliderControl = new SliderControlPanel({ 
-		map:map, 
-		controlPositions: google.maps.ControlPosition.RIGHT_BOTTOM
-	});
 	
 	downloader = new DownloadManager();
 	
 }
 
 function initVisModeController() {
-	var controller = new EntityVisModeController(map, sliderControl);
+	var controller = new EntityVisModeController(map);
 	visModeControllers[controller.visMode] = controller;
 	switchVisMode(controller.visMode);
 	currentController.loadData(scienceMapDataURL, false);
