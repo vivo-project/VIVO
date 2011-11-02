@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+        PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+        
+        SELECT ?conceptLabel ?concept
+        WHERE {
+         	?subject ?property ?concept .
+         	?concept rdf:type skos:Concept .
+         	?concept rdfs:label ?conceptLabel .
+
+        } ORDER BY ?conceptLabel                   
+    </query-select>
+
+    <template>propStatement-hasAssociatedConcept.ftl</template>
+</list-view-config>

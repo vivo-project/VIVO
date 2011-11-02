@@ -15,8 +15,13 @@ PREFIX vivo: <http://vivoweb.org/ontology/core#>
 
 Construct {
      ?person vivo:hasResearchArea ?concept .
-     ?concept vivo:researchAreaOf ?person 
+     ?concept ?property ?object .
+     ?subject ?property2 ?concept . 
 } where {
      ?person vivo:hasResearchArea ?concept .
      ?concept rdf:type vivo:SubjectArea .
+     ?concept vivo:sourceVocabularyReference ?urllink .
+     ?urllink vivo:linkURI ?uri .
+     ?concept ?property ?object .
+     ?subject ?property2 ?concept .
 }
