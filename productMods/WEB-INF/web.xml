@@ -924,6 +924,7 @@
     <url-pattern>/contact</url-pattern>
   </servlet-mapping>
   
+  
   <servlet>
     <servlet-name>JSON Service</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.JsonServlet</servlet-class>

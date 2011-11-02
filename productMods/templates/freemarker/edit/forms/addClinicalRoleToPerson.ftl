@@ -7,14 +7,19 @@ roleDescriptor.
 The other required values (roleType, optionsType, objectClassUri, and literalOptions are
 set in the JAVA class corresponding to the form, e.g. AddClinicalRoleToPersonGenerator.java.
 
-Optional values can be set, but each of these has default values
+Optional values can be set in Freemarker, but each of these has default values
 set in addRoleToPersonTwoStage.ftl:
 
 buttonText
 typeSelectorLabel
 numDateFields
-showRoleLAbelField
-roleExamples-->
+roleExamples
+
+Optional values set in JAVA include 
+ShowRoleLabelField
+ActivityToRolePredicate
+RoleToActivityPredicate
+-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->

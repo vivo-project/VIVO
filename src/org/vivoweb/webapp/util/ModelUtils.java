@@ -19,10 +19,10 @@ public class ModelUtils {
 	
 	private static final Log log = LogFactory.getLog(ModelUtils.class.getName());
 		
-	private static final String processPropertyURI = "http://vivoweb.org/ontology/core#roleRealizedIn";
-	private static final String processPropertyInverseURI = "http://vivoweb.org/ontology/core#realizedRole";
-	private static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
-	private static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#ContributingRole";
+	public static final String processPropertyURI = "http://vivoweb.org/ontology/core#roleRealizedIn";
+	public static final String processPropertyInverseURI = "http://vivoweb.org/ontology/core#realizedRole";
+	public static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
+	public static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#ContributingRole";
 	
 	private static Set<String> processClass = new HashSet<String>();
 	static {
