@@ -161,7 +161,7 @@
                </#if>
             </#if>
         </div>
-        <input type="hidden" id="editKey" name="editKey" value="${editKey} />
+        <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
         <p class="submit">
             <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or <a class="cancel" href="${cancelUrl}">Cancel</a>
         </p>

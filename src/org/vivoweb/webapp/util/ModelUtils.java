@@ -2,6 +2,7 @@
 
 package org.vivoweb.webapp.util;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -19,10 +20,10 @@ public class ModelUtils {
 	
 	private static final Log log = LogFactory.getLog(ModelUtils.class.getName());
 		
-	public static final String processPropertyURI = "http://vivoweb.org/ontology/core#roleRealizedIn";
-	public static final String processPropertyInverseURI = "http://vivoweb.org/ontology/core#realizedRole";
-	public static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
-	public static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#ContributingRole";
+	private static final String processPropertyURI = "http://vivoweb.org/ontology/core#roleRealizedIn";
+	private static final String processPropertyInverseURI = "http://vivoweb.org/ontology/core#realizedRole";
+	private static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
+	private static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#ContributingRole";
 	
 	private static Set<String> processClass = new HashSet<String>();
 	static {
@@ -79,4 +80,19 @@ public class ModelUtils {
 	    
 		return op;
 	}	
+	
+	//Return list of all possible predicates
+	public static List<String> getPossiblePropertiesForRole() {
+		List<String> properties = new ArrayList<String>();
+		properties.add(processPropertyURI);
+		properties.add(nonProcessPropertyURI);
+		return properties;
+	}
+	
+	public static List<String> getPossibleInversePropertiesForRole() {
+		List<String> properties = new ArrayList<String>();
+		properties.add(processPropertyInverseURI);
+		properties.add(nonProcessPropertyInverseURI);
+		return properties;
+	}
 }

@@ -32,28 +32,56 @@ import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.BaseEditSubmissionPreprocessorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import org.vivoweb.webapp.util.ModelUtils;
 
-public class RoleToActivityPredicatePreprocessor implements ModelChangePreprocessor {
+public class RoleToActivityPredicatePreprocessor extends BaseEditSubmissionPreprocessorVTwo {
 
     private static final Log log = LogFactory.getLog(CreateLabelFromNameFields.class.getName());
-    public RoleToActivityPredicatePreprocessor() {
-        super();
+    private WebappDaoFactory wadf = null;
+    //Need the webapp dao factory to try to figure out what the predicate should be
+    public RoleToActivityPredicatePreprocessor(EditConfigurationVTwo editConfig, WebappDaoFactory wadf) {
+        super(editConfig);
+        this.wadf = wadf;
     }
 
-    public void preprocess(Model retractionsModel, Model additionsModel, HttpServletRequest request) {
+    public void preprocess(MultiValueEditSubmission submission) {
     	//Query for all statements using the original roleIn predicate replace
     	//with the appropriate roleRealizedIn or roleContributesTo
     	//In addition, need to ensure the inverse predicate is also set correctly
 	
     	try {
-    		VitroRequest vreq = new VitroRequest(request);
-    		WebappDaoFactory wadf = vreq.getWebappDaoFactory();
-    		replacePredicates(retractionsModel, wadf);
-    		replacePredicates(additionsModel, wadf);
+    		//Get the uris from form
+    		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
+    		//Get the type of the activity selected
+    		List<String> activityTypes = urisFromForm.get("roleActivityType");
+    		//Really should just be one here
+    		if(activityTypes != null && activityTypes.size() > 0) {
+    			String type = activityTypes.get(0);
+    			ObjectProperty roleToActivityProperty = getCorrectProperty(type, wadf);
+    			String roleToActivityPredicate = roleToActivityProperty.getURI();
+    			String activityToRolePredicate = roleToActivityProperty.getURIInverse();
+    			List<String> predicates = new ArrayList<String>();
+    			predicates.add(roleToActivityPredicate);
+
+    			List<String> inversePredicates = new ArrayList<String>();
+    			inversePredicates.add(activityToRolePredicate);
+    			//Populate the two fields in edit submission
+    			if(urisFromForm.containsKey("roleToActivityPredicate")) {
+    				urisFromForm.remove("roleToActivityPredicate");
+    			}
+    			
+    			urisFromForm.put("roleToActivityPredicate", predicates);
+    			
+    			if(urisFromForm.containsKey("activityToRolePredicate")) {
+    				urisFromForm.remove("activityToRolePredicate");
+    			}
+    			urisFromForm.put("activityToRolePredicate", inversePredicates);
+
+    		}
     		
         } catch (Exception e) {
             log.error("Error retrieving name values from edit submission.");
@@ -61,108 +89,9 @@ public class RoleToActivityPredicatePreprocessor implements ModelChangePreproces
         
     }
     
-    private void replacePredicates(Model inputModel, WebappDaoFactory wadf) {
-		executeQueryAndReplace(inputModel, wadf);
-	}
-  private void executeQueryAndReplace(Model inputModel, WebappDaoFactory wadf) {
-    	String queryString= getRoleAndActivityQuery();
-        Query query = QueryFactory.create(queryString);
-        QueryExecution qe = QueryExecutionFactory.create(query, inputModel);
-        ResultSet rs = qe.execSelect();
-     
-        while(rs.hasNext()) {
-        	QuerySolution qs = rs.nextSolution();
-        	Resource role = null, activity = null, mostSpecificType = null;
-        	role = getResourceFromSolution(qs, "role");
-        	activity = getResourceFromSolution(qs, "activity");
-        	mostSpecificType = getResourceFromSolution(qs, "mostSpecificType");
-        	
-        	//Within the input model, replace predicate linking role and activity and vice versa
-        	//based on the most specific type of the activity
-        	replacePredicatesForRoleAndActivity(inputModel, role, activity, mostSpecificType, wadf);
-        	
-        }
-    }
-   private void replacePredicatesForRoleAndActivity(Model inputModel,
-			Resource role, Resource activity, Resource mostSpecificType,
-			WebappDaoFactory wadf) {
-    	Property roleToActivityPredicate = ResourceFactory.createProperty(getGenericRoleToActivityPredicate());
-    	Property activityToRolePredicate = ResourceFactory.createProperty(getGenericActivityToRolePredicate());
-		if(role != null && activity != null && mostSpecificType != null) {
-			
-			ObjectProperty newRoleToActivityProperty = getCorrectProperty(mostSpecificType.getURI(), wadf);
-			String propertyURI = newRoleToActivityProperty.getURI();
-			String inversePropertyURI = newRoleToActivityProperty.getURIInverse();
-			//Remove all the old statements connecting role and activity
-			inputModel.enterCriticalSection(Lock.WRITE);
-			try {
-				Model removeRoleToActivityModel = ModelFactory.createDefaultModel();
-				removeRoleToActivityModel.add(inputModel.listStatements(
-						role, 
-						roleToActivityPredicate, 
-						activity));
-				Model removeActivityToRoleModel = ModelFactory.createDefaultModel();
-				removeActivityToRoleModel.add(inputModel.listStatements(
-						activity, 
-						activityToRolePredicate, 
-						role));
-				//Add statements
-				inputModel.add(inputModel.createStatement(
-						role, 
-						ResourceFactory.createProperty(propertyURI), 
-						activity));
-				
-				inputModel.add(inputModel.createStatement(
-						activity, 
-						ResourceFactory.createProperty(inversePropertyURI), 
-						role));
-				
-				//Remove all roleToActivityPredicates and replace with the new predicate
-				inputModel.remove(removeRoleToActivityModel);
-				//Remove all activity to role predicates and replace with new predicate
-				inputModel.remove(removeActivityToRoleModel);
-			} catch(Exception ex) {
-				log.error("Exception occurred in replacing predicates in model ", ex);
-			} finally {
-				inputModel.leaveCriticalSection();
-			}
-		}
-		
-	}
-
 	private ObjectProperty getCorrectProperty(String uri, WebappDaoFactory wadf) {
-    	//ObjectProperty correctProperty = 				ModelUtils.getPropertyForRoleInClass(uri, wadf);
-    	ObjectProperty op = new ObjectProperty();
-    	op.setURI( "http://vivoweb.org/ontology/core#roleRealizedIn");
-		op.setURIInverse("http://vivoweb.org/ontology/core#realizedRole"); 
-		return op;
-}
+    	ObjectProperty correctProperty = 	ModelUtils.getPropertyForRoleInClass(uri, wadf);
+		return correctProperty;
+	}
 
-	private String getRoleAndActivityQuery() {
-    	String roleToActivityPredicate = getGenericRoleToActivityPredicate();
-    	String query = "PREFIX core: <http://vivoweb.org/ontology/core#>" +   
-		  "SELECT ?role ?activity ?mostSpecificType WHERE { ?role  <" + roleToActivityPredicate + "> ?activity . \n" +
-		  "?activity <" + VitroVocabulary.RDF_TYPE + "> ?mostSpecificType. \n" + 
-		  "}";
-    	return query;
-    }
-    
-    private Resource getResourceFromSolution(QuerySolution qs, String variableName) {
-    	Resource resource = null;
-    	if(qs.get(variableName) != null && qs.get(variableName).isResource()) {
-    		resource = qs.getResource(variableName);
-    	}
-    	return resource;
-    }
-    
-
-	//Values used in the forms
-    private static String getGenericRoleToActivityPredicate() {
-    	return "http://vivoweb.org/ontology/core#roleIn";
-    }
-    
-    private static String getGenericActivityToRolePredicate() {
-    	return "http://vivoweb.org/ontology/core#relatedRole";
-
-    }
 }
