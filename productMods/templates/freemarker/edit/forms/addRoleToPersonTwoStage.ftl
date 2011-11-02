@@ -27,7 +27,7 @@
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
 <#if editConfiguration.objectUri?has_content>
 	<#assign titleVerb = "Edit"/>
-	<#assign submitButtonText>Edit ${buttonText}</#assign>
+	<#assign submitButtonText>Edit ${buttonText?capitalize}</#assign>
 	<#if editMode = "repair">
 		<#assign disabledVal = ""/>
 	<#else>
@@ -35,7 +35,7 @@
 	</#if>
 <#else>
 	<#assign titleVerb = "Create"/>
-	<#assign submitButtonText>${buttonText}</#assign>
+	<#assign submitButtonText>${buttonText?capitalize}</#assign>
 	<#assign disabledVal = ""/>
 	<#assign editMode = "add" />
 </#if>
@@ -87,7 +87,7 @@
     
     <form id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
-       <p class="inline"><label for="typeSelector">${roleDescriptor?capitalize} Type ${requiredHint}</label>
+       <p class="inline"><label for="typeSelector">${typeSelectorLabel?capitalize} ${requiredHint}</label>
            <select id="typeSelector" name="roleActivityType" 
            <#if disabledVal?has_content>
            	disabled = "${disabledVal}"
@@ -161,8 +161,8 @@
                </#if>
             </#if>
         </div>
-        <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
         <p class="submit">
+            <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
             <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or <a class="cancel" href="${cancelUrl}">Cancel</a>
         </p>
 
@@ -188,5 +188,4 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
-
- </section>   
+</section>   

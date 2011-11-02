@@ -20,7 +20,7 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "organizer of" />
 <#assign typeSelectorLabel = "organizer of" />
-
+<#assign buttonText = "Organizer Role" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

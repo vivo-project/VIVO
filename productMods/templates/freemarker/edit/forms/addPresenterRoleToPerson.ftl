@@ -20,7 +20,7 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "presentation" />
 <#assign typeSelectorLabel = "presentation type" />
-
+<#assign buttonText = "Presentation Role" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

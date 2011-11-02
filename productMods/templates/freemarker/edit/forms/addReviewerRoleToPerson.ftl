@@ -20,7 +20,7 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "reviewer of" />
 <#assign typeSelectorLabel = "reviewer of" />
-
+<#assign buttonText = "Reviewer Role" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
