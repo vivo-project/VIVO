@@ -61,7 +61,8 @@
 	<#assign roleLabel = literalValues.roleLabel[0] />
 </#if>
 
-
+<#assign requiredHint = "<span class='requiredHint'> *</span>" />
+<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
 <h2>${titleVerb}&nbsp;${roleDescriptor} entry for ${editConfiguration.subjectName}</h2>
 
@@ -86,7 +87,7 @@
     
     <form id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
-       <p class="inline"><label for="typeSelector">${roleDescriptor?capitalize} Type <span class='requiredHint'> *</span></label>
+       <p class="inline"><label for="typeSelector">${roleDescriptor?capitalize} Type ${requiredHint}</label>
            <select id="typeSelector" name="roleActivityType" 
            <#if disabledVal?has_content>
            	disabled = "${disabledVal}"
@@ -101,11 +102,7 @@
            		<#assign roleActivityTypeSelect = editConfiguration.pageData.roleActivityType />
            		<#assign roleActivityTypeKeys = roleActivityTypeSelect?keys />
                 <#list roleActivityTypeKeys as key>
-                    <option value="${key}"
-                    <#if selectedActivityType = key>selected</#if>
-                    >
-                    ${roleActivityTypeSelect[key]}
-                    </option>
+                    <option value="${key}"<#if selectedActivityType = key>selected</#if>>${roleActivityTypeSelect[key]}</option>
                 </#list>
            </select>
        </p>
@@ -114,7 +111,7 @@
        
    <div class="fullViewOnly">        
             <p>
-                <label for="relatedIndLabel">${roleDescriptor?capitalize} Name <span class='requiredHint'> *</span></label>
+                <label for="relatedIndLabel">${roleDescriptor?capitalize} Name ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="activityLabel"  value="${activityLabelValue}" 
                 <#if disabledVal?has_content>
                 	disabled=${disabledVal}
@@ -141,7 +138,7 @@
             </div>
             
             <#if showRoleLabelField = true>
-            <p><label for="roleLabel">Role in ### <span class='requiredHint'> *</span> ${roleExamples}</label>
+            <p><label for="roleLabel">Role in ### ${requiredHint} ${roleExamples}</label>
                 <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
             </p>
         	</#if>
@@ -149,17 +146,17 @@
             <#if numDateFields == 1 >
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
-                	<label for="startField">Start Year <span class='hint'>(YYYY)</span></label>
+                	<label for="startField">Start Year ${yearHint}</label>
                		${htmlForElements["startField"]}
                </#if>
             <#else>
                 <h4>Years of Participation in ${roleDescriptor?capitalize}</h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
-                	 <label for="startField">Start Year <span class='hint'>(YYYY)</span></label>
+                	 <label for="startField">Start Year ${yearHint}</label>
                		${htmlForElements["startField"]}
                </#if>
                <#if htmlForElements?keys?seq_contains("endField")>
-               		<label for="endField">End Year <span class='hint'>(YYYY)</span></label>
+               		<label for="endField">End Year ${yearHint}</label>
                		${htmlForElements["endField"]}
                </#if>
             </#if>
