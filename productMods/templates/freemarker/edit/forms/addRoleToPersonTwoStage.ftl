@@ -124,7 +124,7 @@
             
             <#if editMode = "edit">
             	<input type="hidden" id="roleActivityType" name="roleActivityType" value="${activityTypeValue}"/>
-            	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}}"/>
+            	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}"/>
             </#if>
 
             <div class="acSelection">
