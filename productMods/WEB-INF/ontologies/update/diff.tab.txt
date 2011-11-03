@@ -1,8 +1,9 @@
-http://vivoweb.org/ontology/core#hasSubjectArea		No	Delete	Delete
-http://vivoweb.org/ontology/core#subjectAreaFor		No	Delete	Delete
 http://vivoweb.org/ontology/core#VocabularySourceReference		No	Delete	Delete
 http://vivoweb.org/ontology/core#sourceVocabularyReference		No	Delete	Delete
 http://vivoweb.org/ontology/core#vocabularyReferenceFor		No	Delete	Delete
+http://vivoweb.org/ontology/core#forInformationResource	http://vivoweb.org/ontology/core#roleContributesTo	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#linkedRole	http://vivoweb.org/ontology/core#contributingRole	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#SubjectArea	http://www.w3.org/2004/02/skos/core#Concept	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#Process	http://www.w3.org/2002/07/owl#Thing	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#addressStreet	http://vivoweb.org/ontology/core#address1	Yes	Map	Directly-changed
 http://vivoweb.org/ontology/core#addressDepartment	http://vivoweb.org/ontology/core#address2	Yes	Map	Directly-changed

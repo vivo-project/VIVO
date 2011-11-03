@@ -19,7 +19,6 @@ Construct {
      ?subject ?property2 ?concept . 
 } where {
      ?something vivo:hasSubjectArea ?concept .
-     ?concept rdf:type vivo:SubjectArea .
      ?concept vivo:sourceVocabularyReference ?urllink .
      ?urllink vivo:linkURI ?uri .
      ?concept ?property ?object .

@@ -18,7 +18,6 @@ Construct {
      ?uri vivo:researchAreaOf ?person 
 } where {
      ?person vivo:hasResearchArea ?concept .
-     ?concept rdf:type vivo:SubjectArea .
      ?concept vivo:sourceVocabularyReference ?urllink .
      ?urllink vivo:linkURI ?uri
 }
