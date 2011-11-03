@@ -716,6 +716,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ManageProxies</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.manageproxies.ManageProxiesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageProxies</servlet-name>
+    <url-pattern>/manageProxies/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ShowAuth</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowAuthController</servlet-class>
   </servlet>
