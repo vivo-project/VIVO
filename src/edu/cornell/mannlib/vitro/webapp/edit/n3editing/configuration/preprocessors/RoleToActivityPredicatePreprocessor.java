@@ -38,60 +38,26 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmis
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import org.vivoweb.webapp.util.ModelUtils;
 
-public class RoleToActivityPredicatePreprocessor extends BaseEditSubmissionPreprocessorVTwo {
-
-    private static final Log log = LogFactory.getLog(CreateLabelFromNameFields.class.getName());
-    private WebappDaoFactory wadf = null;
-    //Need the webapp dao factory to try to figure out what the predicate should be
-    public RoleToActivityPredicatePreprocessor(EditConfigurationVTwo editConfig, WebappDaoFactory wadf) {
-        super(editConfig);
-        this.wadf = wadf;
+public class RoleToActivityPredicatePreprocessor extends RoleToPredicatePreprocessor {
+	public RoleToActivityPredicatePreprocessor(EditConfigurationVTwo editConfig, WebappDaoFactory wadf) {
+        super(editConfig, wadf);
     }
 
-    public void preprocess(MultiValueEditSubmission submission) {
-    	//Query for all statements using the original roleIn predicate replace
-    	//with the appropriate roleRealizedIn or roleContributesTo
-    	//In addition, need to ensure the inverse predicate is also set correctly
-	
-    	try {
-    		//Get the uris from form
-    		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
-    		//Get the type of the activity selected
-    		List<String> activityTypes = urisFromForm.get("roleActivityType");
-    		//Really should just be one here
-    		if(activityTypes != null && activityTypes.size() > 0) {
-    			String type = activityTypes.get(0);
-    			ObjectProperty roleToActivityProperty = getCorrectProperty(type, wadf);
-    			String roleToActivityPredicate = roleToActivityProperty.getURI();
-    			String activityToRolePredicate = roleToActivityProperty.getURIInverse();
-    			List<String> predicates = new ArrayList<String>();
-    			predicates.add(roleToActivityPredicate);
-
-    			List<String> inversePredicates = new ArrayList<String>();
-    			inversePredicates.add(activityToRolePredicate);
-    			//Populate the two fields in edit submission
-    			if(urisFromForm.containsKey("roleToActivityPredicate")) {
-    				urisFromForm.remove("roleToActivityPredicate");
-    			}
-    			
-    			urisFromForm.put("roleToActivityPredicate", predicates);
-    			
-    			if(urisFromForm.containsKey("activityToRolePredicate")) {
-    				urisFromForm.remove("activityToRolePredicate");
-    			}
-    			urisFromForm.put("activityToRolePredicate", inversePredicates);
-
-    		}
-    		
-        } catch (Exception e) {
-            log.error("Error retrieving name values from edit submission.");
-        }
-        
+    protected void setupVariableNames() {
+    	this.itemType = "roleActivityType";
+    	this.roleToItemPredicate = "roleToActivityPredicate";
+    	this.itemToRolePredicate = "activityToRolePredicate";
     }
     
-	private ObjectProperty getCorrectProperty(String uri, WebappDaoFactory wadf) {
-    	ObjectProperty correctProperty = 	ModelUtils.getPropertyForRoleInClass(uri, wadf);
-		return correctProperty;
-	}
-
+    protected String getItemType(MultiValueEditSubmission submission) {
+    	String type = null;
+    	Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
+		//Get the type of the activity selected
+		List<String> itemTypes = urisFromForm.get(itemType);
+		//Really should just be one here
+		if(itemTypes != null && itemTypes.size() > 0) {
+			type = itemTypes.get(0);
+		}
+		return type;
+    }
 }

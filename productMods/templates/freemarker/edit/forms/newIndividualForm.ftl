@@ -2,8 +2,11 @@
 
 <#-- Template for adding a new individual from the Site Admin page: VIVO version -->
 
+<#--Retrieve certain edit configuration information-->
+<#assign typeName = editConfiguration.pageData.typeName />
+<#assign isPersonType = editConfiguration.pageData.isPersonType />
 
-<h2>Create a new ${subclassName}</h2>
+<h2>Create a new ${typeName}</h2>
 
 <#if errorFirstNameIsEmpty??>
     <#assign errorMessage = "Enter a first name." />
@@ -30,7 +33,7 @@
     
     <form id="newIndividual" class="customForm noIE67" action="${submitUrl}"  role="add new individual">
  
-    <#if isPersonType >       
+    <#if isPersonType = "true">       
         <p>
             <label for="firstName">First Name ${requiredHint}</label>
             <input size="30"  type="text" id="firstName" name="firstName" value="" />
@@ -43,14 +46,14 @@
     <#else>       
         <p>
             <label for="name">Name ${requiredHint}</label>
-            <input size="30"  type="text" id="name" name="name" value="" />
+            <input size="30"  type="text" id="label" name="label" value="" />
         </p>
     </#if>
 
     <p class="submit">
-        <input type="hidden" name = "editKey" value="${???}"/>
-        <input type="submit" id="submit" value="editConfiguration.submitLabel"/>
-        <span class="or"> or <a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
+        <input type="hidden" name = "editKey" value="${editKey}"/>
+        <input type="submit" id="submit" value="Create ${typeName}"/>
+        <span class="or"> or <a class="cancel" href="${urls.base}/siteAdmin">Cancel</a>
     </p>
 
     <p id="requiredLegend" class="requiredHint">* required fields</p>
