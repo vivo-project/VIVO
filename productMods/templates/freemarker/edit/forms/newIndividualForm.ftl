@@ -53,7 +53,7 @@
     <p class="submit">
         <input type="hidden" name = "editKey" value="${editKey}"/>
         <input type="submit" id="submit" value="Create ${typeName}"/>
-        <span class="or"> or <a class="cancel" href="${urls.base}/siteAdmin">Cancel</a>
+        <span class="or"> or </span><a class="cancel" href="${urls.base}/siteAdmin">Cancel</a>
     </p>
 
     <p id="requiredLegend" class="requiredHint">* required fields</p>

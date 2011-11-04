@@ -91,7 +91,7 @@
 
     <p class="submit">
         <input type="hidden" name = "editKey" value="${???}"/>
-        <input type="submit" id="submit" value="editConfiguration.submitLabel"/><span class="or"> or <a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
+        <input type="submit" id="submit" value="editConfiguration.submitLabel"/><span class="or"> or </span><a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
     </p>
 
     <p id="requiredLegend" class="requiredHint">* required fields</p>
