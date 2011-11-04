@@ -32,6 +32,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
 /**
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
@@ -648,6 +649,25 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
         }
     }
     
+	/**Methods for checking edit mode **
+	 * 
+	 */
+	public EditMode getEditMode(VitroRequest vreq) {
+		List<String> roleToGrantPredicates = getPossibleRoleToGrantPredicates();
+		return AddRoleUtils.getEditMode(vreq, roleToGrantPredicates);
+	}
+
+	private boolean isAddMode(VitroRequest vreq) {
+    	return AddRoleUtils.isAddMode(getEditMode(vreq));
+    }
+    
+    private boolean isEditMode(VitroRequest vreq) {
+    	return AddRoleUtils.isEditMode(getEditMode(vreq));
+    }
+    
+    private boolean isRepairMode(VitroRequest vreq) {
+    	return AddRoleUtils.isRepairMode(getEditMode(vreq));
+    }
    
 
      
@@ -728,80 +748,14 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		
 	}
 	
-	public List<String> getPossibleroleToGrantPredicates() {
+	public List<String> getPossibleRoleToGrantPredicates() {
 		return ModelUtils.getPossiblePropertiesForRole();
 	}
 	
-	public List<String> getPossiblegrantToRolePredicates() {
+	public List<String> getPossibleGrantToRolePredicates() {
 		return ModelUtils.getPossibleInversePropertiesForRole();
 	}
 	
-	/**
-	 * Methods that check edit mode
-	 */
-	
-	 //Get edit mode
-    private EditMode getEditMode(VitroRequest vreq) {
-    	List<String> roleToGrantPredicates = getPossibleroleToGrantPredicates();
-    	//We're making some assumptions here: That there is only one role objec tot one activity object
-    	//pairing, i.e. the same role object can't be related to a different activity object
-    	//That said, there should only be one role to Activity predicate linking a role to an activity
-    	//So if 
-    	Individual object = EditConfigurationUtils.getObjectIndividual(vreq);
-    	boolean foundErrorMode = false;
-    	int numberEditModes = 0;
-    	int numberRepairModes = 0;
-    	int numberPredicates = roleToGrantPredicates.size();
-    	for(String predicate:roleToGrantPredicates) {
-    		EditMode mode = FrontEndEditingUtils.getEditMode(vreq, object, predicate);
-    		//Any error  mode should result in error
-    		if(mode == EditMode.ERROR) {
-    			foundErrorMode = true;
-    			break;
-    		}
-    		if(mode == EditMode.EDIT) {
-    			numberEditModes++;
-    		}
-    		else if(mode == EditMode.REPAIR) {
-    			numberEditModes++;
-    		}
-    		
-    	}
-    	
-    	//if found an error or if more than one edit mode returned, incorrect
-
-    	if(foundErrorMode || numberEditModes > 1) 
-    	{
-    		return EditMode.ERROR;
-    	}
-    	EditMode mode = EditMode.ADD;
-    	//if exactly one edit mode found, then edit mode
-    	if(numberEditModes == 1) {
-    		mode = EditMode.EDIT;
-    	}
-    	//if all modes are repair, this means that all of them have zero statements returning
-    	//which is incorrect
-    	if(numberRepairModes == numberPredicates) {
-    		mode = EditMode.REPAIR;
-    	}    	
-    	//otherwise all the modes are Add and Add will be returned
-    	return mode;
-    }
-   private boolean isAddMode(VitroRequest vreq) {
-    	EditMode mode = getEditMode(vreq);
-    	return (mode == EditMode.ADD);
-    }
-    
-    private boolean isEditMode(VitroRequest vreq) {
-    	EditMode mode = getEditMode(vreq);
-    	return (mode == EditMode.EDIT);
-    }
-    
-    private boolean isRepairMode(VitroRequest vreq) {
-    	EditMode mode = getEditMode(vreq);
-    	return (mode == EditMode.REPAIR);
-    }
-	    
     
 	/**
 	 * Methods to return URIS for various predicates

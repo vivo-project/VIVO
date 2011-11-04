@@ -49,6 +49,7 @@ import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
 import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
 /**
  * Generates the edit configuration for adding a Role to a Person.  
   
@@ -1092,68 +1093,26 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	 * Methods that check edit mode
 	 */
 	
-	 //Get edit mode
-    private EditMode getEditMode(VitroRequest vreq) {
-    	List<String> roleToActivityPredicates = getPossibleRoleToActivityPredicates();
-    	//We're making some assumptions here: That there is only one role objec tot one activity object
-    	//pairing, i.e. the same role object can't be related to a different activity object
-    	//That said, there should only be one role to Activity predicate linking a role to an activity
-    	//So if 
-    	Individual object = EditConfigurationUtils.getObjectIndividual(vreq);
-    	boolean foundErrorMode = false;
-    	int numberEditModes = 0;
-    	int numberRepairModes = 0;
-    	int numberPredicates = roleToActivityPredicates.size();
-    	for(String predicate:roleToActivityPredicates) {
-    		EditMode mode = FrontEndEditingUtils.getEditMode(vreq, object, predicate);
-    		//Any error  mode should result in error
-    		if(mode == EditMode.ERROR) {
-    			foundErrorMode = true;
-    			break;
-    		}
-    		if(mode == EditMode.EDIT) {
-    			numberEditModes++;
-    		}
-    		else if(mode == EditMode.REPAIR) {
-    			numberEditModes++;
-    		}
-    		
-    	}
-    	
-    	//if found an error or if more than one edit mode returned, incorrect
+	
+	/**Methods for checking edit mode **
+	 * 
+	 */
+	public EditMode getEditMode(VitroRequest vreq) {
+		List<String> roleToGrantPredicates = getPossibleRoleToActivityPredicates();
+		return AddRoleUtils.getEditMode(vreq, roleToGrantPredicates);
+	}
 
-    	if(foundErrorMode || numberEditModes > 1) 
-    	{
-    		return EditMode.ERROR;
-    	}
-    	EditMode mode = EditMode.ADD;
-    	//if exactly one edit mode found, then edit mode
-    	if(numberEditModes == 1) {
-    		mode = EditMode.EDIT;
-    	}
-    	//if all modes are repair, this means that all of them have zero statements returning
-    	//which is incorrect
-    	if(numberRepairModes == numberPredicates) {
-    		mode = EditMode.REPAIR;
-    	}    	
-    	//otherwise all the modes are Add and Add will be returned
-    	return mode;
-    }
-   private boolean isAddMode(VitroRequest vreq) {
-    	EditMode mode = getEditMode(vreq);
-    	return (mode == EditMode.ADD);
+	private boolean isAddMode(VitroRequest vreq) {
+    	return AddRoleUtils.isAddMode(getEditMode(vreq));
     }
     
     private boolean isEditMode(VitroRequest vreq) {
-    	EditMode mode = getEditMode(vreq);
-    	return (mode == EditMode.EDIT);
+    	return AddRoleUtils.isEditMode(getEditMode(vreq));
     }
     
     private boolean isRepairMode(VitroRequest vreq) {
-    	EditMode mode = getEditMode(vreq);
-    	return (mode == EditMode.REPAIR);
+    	return AddRoleUtils.isRepairMode(getEditMode(vreq));
     }
-	    
     
 	/**
 	 * Methods to return URIS for various predicates

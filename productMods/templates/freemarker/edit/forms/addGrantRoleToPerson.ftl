@@ -10,19 +10,30 @@
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 <#assign disabledVal = ""/>
 <#if editMode = "edit">
-	<#assign disabledVal = "" />
+	<#assign disabledVal = "disabled=\"disabled\"" />
 </#if>
 
 <#--the heading and submit button label depend on the predicate uri-->
+
 <#assign formHeading =  "investigator entry for "/>
-<#assign submitButtonLabel = "Edit Investigator" />
+<#assign submitButtonLabel = "Investigator" />
 <#if editConfiguration.predicateUri?ends_with("hasPrincipalInvestigatorRole") >
 	<#assign formHeading = "principal investigator entry for "/>
-	<#assign submitButtonLabel = "Edit Principal Investigator" />
+	<#assign submitButtonLabel = "Principal Investigator" />
 <#elseif editConfiguration.predicateUri?ends_with("hasCo-PrincipalInvestigatorRole") >
  	<#assign formHeading = "co-principal investigator entry for "/>
- 		<#assign submitButtonLabel = "Edit Co-Principal Investigator" />
+ 		<#assign submitButtonLabel = "Co-Principal Investigator" />
 </#if>
+
+<#if editMode = "add">
+	<#assign formHeading> Create ${formHeading} </#assign>
+<#else>
+	<#assign formHeading> Edit ${formHeading} </#assign>
+	<#assign submitButtonLabel> Edit ${submitButtonLabel} </#assign>
+
+</#if>
+
+
 
 <#--Get existing value for specific data literals and uris-->
 

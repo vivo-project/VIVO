@@ -952,6 +952,15 @@
     <url-pattern>/UMLSTermsRetrieval</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>ConceptSearchService</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.servlet.ConceptSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConceptSearchService</servlet-name>
+    <url-pattern>/conceptSearchService</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>ProcessTerminologyAnnotation</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.servlet.ProcessTerminologyController</servlet-class>

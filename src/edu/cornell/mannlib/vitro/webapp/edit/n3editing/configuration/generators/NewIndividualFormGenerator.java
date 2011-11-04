@@ -163,7 +163,9 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	
     	editConfiguration.setVarNameForSubject("subjectNotUsed");
     	editConfiguration.setSubjectUri(subjectUri);
-    	editConfiguration.setEntityToReturnTo("?newInd");
+    	//Note, the spaces are important - they were added by ProcessRdfFormController earlier
+    	//as a means of ensuring the substitution worked correctly - as the regex expects spaces
+    	editConfiguration.setEntityToReturnTo(" ?newInd ");
     	editConfiguration.setVarNameForPredicate("predicateNotUsed");
     	editConfiguration.setPredicateUri(predicateUri);
     	
@@ -213,7 +215,7 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	List<String> n3Optional = new ArrayList<String>();
     	String editString = "@prefix foaf:<http://xmlns.com/foaf/0.1/> ." + 
     	 " ?newInd foaf:firstName ?firstName ; " +
-    	 " ?newInd foaf:lastName ?lastName .";
+    	 " foaf:lastName ?lastName .";
     	n3Optional.add(editString);
     	n3Optional.add("?newInd <" + RDFS.label.getURI() + "> ?label .");
     	return n3Optional;
