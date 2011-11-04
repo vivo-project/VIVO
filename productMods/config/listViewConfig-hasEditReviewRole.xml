@@ -3,9 +3,6 @@
 
 <!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
 
-<!-- Discussion with Brian C: This file is a modification of listViewConfig-hasRole.xml -
-     it might be decided to merge the two. (sjm222 6/7/2011) -->
-
 <list-view-config>
     <query-select>    
         PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
@@ -36,9 +33,6 @@
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
             } 
             
-            OPTIONAL {  ?role core:forInformationResource ?infoResource 
-                        LET (?infoResourceName := afn:localname(?infoResource)) 
-                        OPTIONAL { ?infoResource rdfs:label ?infoResourceLabel }
                                    
                         # NB Currently we can only retrieve subclass for either the 
                         # infoResource or the activity, but not both. Later, we could have 
@@ -52,8 +46,7 @@
                          ) 
                         
                         # Get subclass label for display in uncollated view
-                        ?subclass rdfs:label ?subclassLabel                                 
-            }                     
+                        ?subclass rdfs:label ?subclassLabel                                                      
 
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
@@ -66,7 +59,7 @@
             <critical-data-required>
             FILTER ( bound(?infoResource) )
             </critical-data-required>
-        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?infoResourceLabel ?infoResourceName
+        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
     
     <query-construct>
@@ -77,13 +70,13 @@
         
         CONSTRUCT {
             ?subject ?property ?role .
-            ?role core:forInformationResource ?infoResource .
+            ?role core:roleContributesTo ?infoResource .
             ?infoResource vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf ?superclass .
             ?subclass rdfs:label ?subclassLabel   
         } WHERE {
             ?subject ?property ?role .
-            ?role core:forInformationResource ?infoResource .
+            ?role core:roleContributesTo ?infoResource .
             ?infoResource vitro:mostSpecificType ?subclass .
             ?subclass rdfs:subClassOf ?superclass .
             ?subclass rdfs:label ?subclassLabel  
@@ -161,7 +154,7 @@
                 ?role ?roleProperty ?roleValue .
             } UNION {
                 ?subject ?property ?role .
-                ?role core:forInformationResource ?infoResource . 
+                ?role core:roleContributesTo ?infoResource . 
                 ?infoResource rdfs:label ?infoResourceLabel .  
             }
         } 
