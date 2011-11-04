@@ -163,7 +163,7 @@
         </div>
         <p class="submit">
             <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
-            <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or <a class="cancel" href="${cancelUrl}">Cancel</a>
+            <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
         </p>
 
         <p id="requiredLegend" class="requiredHint">* required fields</p>
