@@ -11,6 +11,7 @@ import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -58,7 +59,16 @@ public class UMLSConceptSearch extends AbstractConceptSearch{
 			}
 			
 			if(json.has("BestMatch")) {
-				
+				JSONArray bestMatchArray = json.getJSONArray("BestMatch");
+				int len = bestMatchArray.length();
+				int i;
+				for(i = 0; i < len; i++) {
+					JSONObject o = bestMatchArray.getJSONObject(i);
+					String definition = o.getString("definition");
+					String label = o.getString("label");
+					String CUI = o.getString("CUI");
+					String type = o.getString("type");
+				}
 			}
 		} catch(Exception ex) {
 			log.error("Error making json object out of output");

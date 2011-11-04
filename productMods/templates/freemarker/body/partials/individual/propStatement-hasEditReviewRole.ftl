@@ -15,7 +15,9 @@
      next statement -->
 <#macro showRole statement property>
     <#local linkedIndividual>
-        <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
+    		<#if statement?has_content && statement.activity?has_content>
+        	<a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
+        </#if>
     </#local>
 
     <#local dateTime>

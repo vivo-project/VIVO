@@ -66,13 +66,13 @@ public abstract class RoleToPredicatePreprocessor extends BaseEditSubmissionPrep
     		Map<String, List<String>> urisFromForm = submission.getUrisFromForm();
     		if(type != null) {
     			ObjectProperty roleToItemProperty = getCorrectProperty(type, wadf);
-    			String roleToItemPredicate = roleToItemProperty.getURI();
-    			String itemToRolePredicate = roleToItemProperty.getURIInverse();
+    			String roleToItemPredicateURI = roleToItemProperty.getURI();
+    			String itemToRolePredicateURI = roleToItemProperty.getURIInverse();
     			List<String> predicates = new ArrayList<String>();
-    			predicates.add(roleToItemPredicate);
+    			predicates.add(roleToItemPredicateURI);
 
     			List<String> inversePredicates = new ArrayList<String>();
-    			inversePredicates.add(itemToRolePredicate);
+    			inversePredicates.add(itemToRolePredicateURI);
     			//Populate the two fields in edit submission
     			if(urisFromForm.containsKey(roleToItemPredicate)) {
     				urisFromForm.remove(roleToItemPredicate);

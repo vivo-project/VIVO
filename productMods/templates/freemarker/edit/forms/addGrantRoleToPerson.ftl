@@ -39,6 +39,8 @@
 
 
 <#--Get selected activity type value if it exists, this is alternative to below-->
+Test grant label: ${lvf.getFormFieldValue(editSubmission, editConfiguration, "grantLabel")} End Test
+
 <#assign grantLabel = ""/>
 <#if literalValues?keys?seq_contains("grantLabel") && (literalValues.grantLabel?size > 0)>
 	<#assign grantLabel = literalValues.grantLabel[0] />

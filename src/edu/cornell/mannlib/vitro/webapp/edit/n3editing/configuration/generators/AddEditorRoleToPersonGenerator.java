@@ -85,17 +85,6 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 		editConfiguration.setTemplate(template);
 	}
 
-
-    //The default activityToRolePredicate and roleToActivityPredicates are 
-	//correct for this subclass so they don't need to be overwritten
-	public String getActivityToRolePredicate(VitroRequest vreq) {
-		return "http://vivoweb.org/ontology/core#linkedRole";
-	}
-
-	public String getRoleToActivityPredicate(VitroRequest vreq) {
-		return "http://vivoweb.org/ontology/core#forInformationResource";
-	}
-	
 	//role type will always be set based on particular form
 	public String getRoleType(VitroRequest vreq) {
 		//TODO: Get dynamic way of including vivoweb ontology

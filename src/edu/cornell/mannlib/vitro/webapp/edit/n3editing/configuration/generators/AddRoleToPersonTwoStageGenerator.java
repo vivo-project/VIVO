@@ -540,11 +540,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	    //Replacement should only happen when we have an actual predicate
 	    
 		String replaceRoleToActivityPredicate = getRoleToActivityPredicate(vreq);
-		//if no filters to add, this means an actual parameter exists for the role to activity predicate and that should be utilized
-		//as the replacement
-		if(!doAddFilterToRoleToActivityQuery(vreq)) {
-			activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "predicate", replaceRoleToActivityPredicate);
-		}
+		activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "predicate", replaceRoleToActivityPredicate);
 		log.debug("Activity type query: " + activityTypeQuery);
 		
 	    return activityTypeQuery;
@@ -557,9 +553,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	    "SELECT ?existingActivityType WHERE { \n" +
 	    "    ?role ?predicate ?existingActivity . \n" +
 	    "    ?existingActivity vitro:mostSpecificType ?existingActivityType . \n";
-		if(doAddFilterToRoleToActivityQuery(vreq)) {
-			query += getFilterRoleToActivityPredicate("predicate");
-		}
+		query += getFilterRoleToActivityPredicate("predicate");
 	    query+= "}"; 
 		return query;
 	}
@@ -572,9 +566,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	    "    ?role ?predicate ?existingActivity . \n" +
 	    "    ?existingActivity vitro:mostSpecificType ?existingActivityType . \n" +
 	    "    ?existingActivityType rdfs:subClassOf ?objectClassUri . \n";
-		if(doAddFilterToRoleToActivityQuery(vreq)) {
-			query += getFilterRoleToActivityPredicate("predicate");
-		}
+		query += getFilterRoleToActivityPredicate("predicate");
 	    query+= "}"; 
 		return query;
 	}
@@ -586,9 +578,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	    "    ?role ?predicate ?existingActivity . \n" +
 	    "    ?existingActivity vitro:mostSpecificType ?existingActivityType . \n" +
 	    "    ?existingActivityType vitro:inClassGroup ?classgroup . \n";
-		if(doAddFilterToRoleToActivityQuery(vreq)) {
-			query += getFilterRoleToActivityPredicate("predicate");
-		}
+		query += getFilterRoleToActivityPredicate("predicate");
 	    query+= "}"; 
 		return query;
 	}
@@ -601,18 +591,12 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 
 		String roleToActivityPredicate = getRoleToActivityPredicate(vreq);
 		//Portion below for multiple possible predicates
-		if(doAddFilterToRoleToActivityQuery(vreq))  {
-			List<String> predicates = getPossibleRoleToActivityPredicates();
-			List<String> addToQuery = new ArrayList<String>();
-			query += "SELECT ?existingActivity WHERE { \n" + 
-			" ?role ?predicate ?existingActivity . \n ";	
-			query += getFilterRoleToActivityPredicate("predicate");
-			query += "}";
-		} else {
-			
-			query +=  "SELECT ?existingActivity WHERE { ?role  <" +roleToActivityPredicate + "> ?existingActivity . }";
-		}
-		 
+		List<String> predicates = getPossibleRoleToActivityPredicates();
+		List<String> addToQuery = new ArrayList<String>();
+		query += "SELECT ?existingActivity WHERE { \n" + 
+		" ?role ?predicate ?existingActivity . \n ";	
+		query += getFilterRoleToActivityPredicate("predicate");
+		query += "}";
 		return query;
 	}
 
@@ -658,20 +642,11 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		"PREFIX rdfs: <" + RDFS.getURI() + "> \n";
 
 		String roleToActivityPredicate = getRoleToActivityPredicate(vreq);
-		if(doAddFilterToRoleToActivityQuery(vreq)) {
-
-			query +=  "SELECT ?existingTitle WHERE { \n" + 
-			"?role ?predicate ?existingActivity . \n" +		
-			"?existingActivity rdfs:label ?existingTitle . \n";
-			query += getFilterRoleToActivityPredicate("predicate");
-	    	query += "}";
-			
-		} else {
-			query +=  "SELECT ?existingTitle WHERE { \n" + 
-	        "?role  <" + roleToActivityPredicate + "> ?existingActivity . \n" +		
-	        "?existingActivity rdfs:label ?existingTitle . }";
-		}
-		 
+		query +=  "SELECT ?existingTitle WHERE { \n" + 
+		"?role ?predicate ?existingActivity . \n" +		
+		"?existingActivity rdfs:label ?existingTitle . \n";
+		query += getFilterRoleToActivityPredicate("predicate");
+    	query += "}"; 
 		return query;
 	}
 
@@ -1055,7 +1030,6 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	
 	public String getActivityToRolePredicate(VitroRequest vreq) {
 		return getActivityToRolePlaceholder();
-    	//return getDefaultActivityToRolePredicate();
     }
     
     //This has a default value, but note that even that will not be used
@@ -1065,22 +1039,11 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	//placeholder value by default
 	public String getRoleToActivityPredicate(VitroRequest vreq) {
 		return getRoleToActivityPlaceholder();
-		//return getDefaultRoleToActivityPredicate();
 	}
 	//Ensure when overwritten that this includes the <> b/c otherwise the query won't work
 
 	//Some values will have a default value
-	//activityToRolePredicate
-	public String getDefaultActivityToRolePredicate() {
-		return "http://vivoweb.org/ontology/core#relatedRole";
-	}
-	
-	//roleToActivityPredicate
-	public String getDefaultRoleToActivityPredicate() {
-		return "http://vivoweb.org/ontology/core#roleIn";
-		
-	}
-	
+
 	public List<String> getPossibleRoleToActivityPredicates() {
 		return ModelUtils.getPossiblePropertiesForRole();
 	}
@@ -1171,15 +1134,6 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		formSpecificData.put("showRoleLabelField", isShowRoleLabelField(vreq));
 		//Put in the fact that we require field
 		editConfiguration.setFormSpecificData(formSpecificData);
-	}
-	
-	//Do add filter fo rroel to activity or activity to role predicates
-	public boolean doAddFilterToRoleToActivityQuery(VitroRequest vreq) {
-		return (getRoleToActivityPredicate(vreq) == getRoleToActivityPlaceholder());
-	}
-	
-	public boolean doAddFilterToActivityToRoleQuery(VitroRequest vreq) {
-		return (getActivityToRolePredicate(vreq) == getActivityToRolePlaceholder());
 	}
 	
 	
