@@ -34,6 +34,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.FoafNameToRdfsLabelPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
@@ -95,6 +96,9 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	//set fields
     	setFields(editConfiguration, vreq, EditConfigurationUtils.getPredicateUri(vreq));
     	
+    	//Add preproprocessors
+    	
+    	
     //	No need to put in session here b/c put in session within edit request dispatch controller instead
     	//placing in session depends on having edit key which is handled in edit request dispatch controller
     //	editConfiguration.putConfigInSession(editConfiguration, session);
@@ -111,13 +115,23 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	//Set edit key
     	setEditKey(editConfiguration, vreq);
         addFormSpecificData(editConfiguration, vreq);
+        
+        
+        addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
+
 
     	return editConfiguration;
     	
 
     }
     
-    private Map<String, String> generateNewResources(VitroRequest vreq) {
+    private void addPreprocessors(EditConfigurationVTwo editConfiguration,
+			WebappDaoFactory webappDaoFactory) {
+		editConfiguration.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());
+		
+	}
+
+	private Map<String, String> generateNewResources(VitroRequest vreq) {
     	HashMap<String, String> newResources = new HashMap<String, String>();
 		//TODO: Get default namespace
 		String defaultNamespace = vreq.getWebappDaoFactory().getDefaultNamespace();
@@ -275,6 +289,7 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	getLabelField(editConfiguration, vreq, fields);
     	getFirstNameField(editConfiguration, vreq, fields);
     	getLastNameField(editConfiguration, vreq, fields);
+    	editConfiguration.setFields(fields);
     }
     
     private void getLastNameField(EditConfigurationVTwo editConfiguration,

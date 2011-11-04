@@ -861,9 +861,9 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		String predicate = EditConfigurationUtils.getPredicateUri(vreq);
 		
 		
-		String query = "PREFIX core:<" + getVivoCoreNamespace() + "> \n" + 
-		"SELECT ?grantUri WHERE { \n" + 
-			"<" + subject + "> <" + predicate + "> ?grantRole .\n" +
+		String query = "PREFIX core:<" + getVivoCoreNamespace() + "> " + 
+		"SELECT ?grantUri WHERE { " + 
+			"<" + subject + "> <" + predicate + "> ?grantRole ." +
 			"?grantRole <" + getRoleToGrantPredicate(vreq) + "> ?grantUri . }";
 		return query;
 	}
