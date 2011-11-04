@@ -2,30 +2,27 @@
 
 package edu.cornell.mannlib.vitro.webapp.servlet; 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
-import javax.servlet.ServletOutputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.template.DefaultObjectWrapper;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
-import javax.servlet.RequestDispatcher;
+
 import com.hp.hpl.jena.vocabulary.XSD;
+
+import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 public class ProcessTerminologyController extends VitroHttpServlet {
     
     private static final long serialVersionUID = 1L;
