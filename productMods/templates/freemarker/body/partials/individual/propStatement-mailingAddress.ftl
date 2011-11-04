@@ -14,18 +14,26 @@
  
     <#if ( statement.street1?has_content || statement.street2?has_content || statement.street3?has_content || statement.city?has_content || 
            statement.state?has_content ||statement.postalCode?has_content || statement.country?has_content )>
-         
+        <#-- until the custom form is ready, provide a link to the address profile for editing --> 
         <div class="adr">
             <#if statement.street1?has_content>
-                <div class="address-street1">${statement.street1}</div>
+                <div class="address-street1"><a href="${profileUrl(statement.address)}">${statement.street1}</a></div>
             </#if>
             
             <#if statement.street2?has_content>
-                <div class="address-street2">${statement.street2}</div>
+                <#if !statement.street1?has_content>
+                    <div class="address-street2"><a href="${profileUrl(statement.address)}">${statement.street2}</a></div>
+                <#else>
+                    <div class="address-street2">${statement.street2}</div>
+                </#if>
             </#if>
             
             <#if statement.street3?has_content>
-                <div class="address-street3">${statement.street3}</div>
+                <#if !statement.street1?has_content && !statement.street2?has_content>
+                    <div class="address-street3"><a href="${profileUrl(statement.address)}">${statement.street3}</a></div>
+                <#else>
+                    <div class="address-street3">${statement.street3}</div>
+                </#if>
             </#if>
 
             <#-- If the subclass is vivo:US Postal Address, or if the country is     
