@@ -1,0 +1,304 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import com.hp.hpl.jena.vocabulary.XSD;
+
+import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+
+/**
+    Form for adding an educational attainment to an individual
+
+    Classes: 
+    core:EducationalTraining - primary new individual being created
+    foaf:Person - existing individual
+    foaf:Organization - new or existing individual
+    core:AcademicDegree - existing individual
+    
+    Data properties of EducationalTraining:
+    core:majorField
+    core:departmentOrSchool
+    core:supplementalInformation
+    
+    Object properties (domain : range)
+    
+    core:educationalTraining (Person : EducationalTraining) - inverse of core:educationalTrainingOf
+    core:educationalTrainingOf (EducationalTraining : Person) - inverse of core:educationalTraining
+    
+    core:degreeEarned (EducationalTraining : AcademicDegree) - inverse of core:degreeOutcomeOf
+    core:degreeOutcomeOf (AcademicDegree : EducationalTraining) - inverse of core:degreeEarned
+    
+    core:organizationGrantingDegree (EducationalTraining : Organization) - no inverse
+    
+    Future version
+    --------------
+    Classes:
+    core:DateTimeValue
+    core:DateTimeValuePrecision
+    Object properties:
+    core:dateTimeValue (EducationalTraining : DateTimeValue)
+    core:dateTimePrecision (DateTimeValue : DateTimeValuePrecision)
+
+   
+    There are 4 modes that this form can be in: 
+     1.  Add, there is a subject and a predicate but no position and nothing else. 
+           
+     2. normal edit where everything should already be filled out.  There is a subject, a object and an individual on
+        the other end of the object's core:trainingAtOrganization stmt. 
+     
+     3. Repair a bad role node.  There is a subject, prediate and object but there is no individual on the 
+        other end of the object's core:trainingAtOrganization stmt.  This should be similar to an add but the form should be expanded.
+        
+     4. Really bad node. multiple core:trainingAtOrganization statements.   
+
+ * @author bdc34
+ *
+ */
+public class PersonHasEducationalTraining  extends VivoBaseGenerator implements EditConfigurationGenerator{            
+
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
+ 
+        EditConfigurationVTwo conf = new EditConfigurationVTwo();
+        
+        initBasics(conf, vreq);
+        initPropertyParameters(vreq, session, conf);
+        initObjectPropForm(conf, vreq);               
+        
+        conf.setVarNameForSubject("person");
+        conf.setVarNameForPredicate("predicate");
+        conf.setVarNameForObject("edTraining");
+        
+        conf.setN3Required( Arrays.asList( n3ForNewEdTraining, orgLabelAssertion, orgTypeAssertion ) );
+        conf.setN3Optional(Arrays.asList( 
+                n3ForEdTrainingToOrg, majorFieldAssertion, degreeAssertion, 
+                deptAssertion, infoAssertion, 
+                n3ForStart, n3ForEnd  ));
+        
+        conf.addNewResource("edTraining", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("org",DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("intervalNode",DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("startNode",DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("endNode",DEFAULT_NS_FOR_NEW_RESOURCE);
+        
+        //uris in scope: none                
+        //literals in scope: none
+        
+        conf.setUrisOnform( Arrays.asList( "org", "orgType", "degree"));
+        conf.setLiteralsOnForm( Arrays.asList("orgLabel","majorField","dept","info"));
+
+        conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
+        conf.addSparqlForExistingLiteral("majorField", majorFieldQuery);
+        conf.addSparqlForExistingLiteral("dept", deptQuery);
+        conf.addSparqlForExistingLiteral("info", infoQuery);
+        conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
+        
+        conf.addSparqlForExistingUris("org",orgQuery);
+        conf.addSparqlForExistingUris("orgType",orgTypeQuery);
+        conf.addSparqlForExistingUris("degree", degreeQuery);
+        conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
+        conf.addSparqlForExistingUris("startNode", existingStartNodeQuery);
+        conf.addSparqlForExistingUris("endNode", existingEndNodeQuery);
+        conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
+        conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
+        
+        conf.addField( new FieldVTwo().                        
+                setName("degree").
+                setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
+                setObjectClassUri( degreeClass ).
+                setAssertions( degreeAssertion ));
+
+        conf.addField( new FieldVTwo().
+                setName("majorField").
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setAssertions( majorFieldAssertion ));
+                //setValidators( ) datatype:stringDatatypeUriJson
+                
+        conf.addField( new FieldVTwo().
+                setName("startField").
+                setAssertions(n3ForStart));
+        
+        conf.addField( new FieldVTwo().
+                setName("endField").
+                setAssertions(n3ForEnd));
+        
+        conf.addField( new FieldVTwo().
+                setName("org").
+                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
+                setObjectClassUri( orgClass ).
+                setAssertions( n3ForEdTrainingToOrg ));
+                //setLiteralOptions( [ "Select One" } )
+        
+        conf.addField( new FieldVTwo().
+                setName("orgLabel").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setAssertions( orgLabelAssertion));
+                //setValidators( ["nonempty"] )
+                
+        conf.addField( new FieldVTwo().
+                setName("orgType").
+                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
+                setObjectClassUri( orgClass ). 
+                setAssertions( orgTypeAssertion ));
+                //setValidators( ["nonempty"])
+                //setLiteralOptions( [ "Select one" ] )
+                
+        conf.addField( new FieldVTwo().
+                setName("dept").
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setAssertions( deptAssertion ));
+                
+        conf.addField( new FieldVTwo().
+                setName("info").
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setAssertions( infoAssertion));
+        
+        return conf;
+    }
+        
+
+    
+    /* N3 assertions for working with educational training */
+    
+    final static String orgTypeAssertion =
+        "?org a ?orgType .";
+
+    final static String orgLabelAssertion =
+        "?org "+ label +" ?orgLabel .";
+
+    final static String degreeAssertion  =      
+        "?edTraining "+ degreeEarned +" ?degree ."+
+        "?degree "+ degreeOutcomeOf +" ?edTraining .";
+
+    final static String majorFieldAssertion  =      
+        "?edTraining "+ majorFieldPred +" ?majorField .";
+
+    final static String n3ForStart =
+        "?edTraining      "+ ToInterval +" ?intervalNode .    "+
+        "?intervalNode  "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToStart +" ?startNode .    "+
+        "?startNode  "+ type +" "+ dateTimeValueType +" ."+
+        "?startNode  "+ dateTimeValue +" ?startField-value ."+
+        "?startNode  "+ dateTimePrecision +" ?startField-precision .";
+
+    final static String n3ForEnd =
+        "?edTraining      "+ ToInterval +" ?intervalNode .    "+
+        "?intervalNode  "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToEnd +" ?endNode ."+
+        "?endNode  "+ type +" "+ dateTimeValueType +" ."+
+        "?endNode  "+ dateTimeValue +" ?endField-value ."+
+        "?endNode  "+ dateTimePrecision +" ?endField-precision .";
+
+    final static String deptAssertion  =      
+        "?edTraining "+ deptPred +" ?dept .";
+
+    final static String infoAssertion  =      
+        "?edTraining "+ infoPred +" ?info .";
+
+    final static String n3ForNewEdTraining =       
+        "@prefix core: "+ vivoCore +" .     "+
+        "?person core:educationalTraining  ?edTraining ."+            
+        "?edTraining  a core:EducationalTraining ;"+
+        "core:educationalTrainingOf ?person ;"+
+        ""+ trainingAtOrg +" ?org .";
+
+    final static String n3ForEdTrainingToOrg  =      
+        "?edTraining "+ trainingAtOrg +" ?org .";
+    
+    
+    /* Queries for editing an existing educational training entry */
+
+    final static String orgQuery  =      
+        "SELECT ?existingOrg WHERE {"+
+        "?edTraining "+ trainingAtOrg +" ?existingOrg . }";
+
+    final static String orgLabelQuery  =      
+        "SELECT ?existingOrgLabel WHERE {"+
+        "?edTraining "+ trainingAtOrg +" ?existingOrg ."+
+        "?existingOrg "+ label +" ?existingOrgLabel ."+
+        "}";
+
+    /* Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
+    type is returned and we don't get a match to the select element options. */
+    final static String orgTypeQuery  =      
+        "PREFIX rdfs: "+ rdfs +"   "+
+        "SELECT ?existingOrgType WHERE {"+
+        "?edTraining "+ trainingAtOrg +" ?existingOrg ."+
+        "?existingOrg a ?existingOrgType ."+
+        "?existingOrgType rdfs:subClassOf "+ orgClass +" ."+
+        "}";
+
+    final static String degreeQuery  =      
+        "SELECT ?existingDegree WHERE {"+
+        "?edTraining "+ degreeEarned +" ?existingDegree . }";
+
+    final static String majorFieldQuery  =  
+        "SELECT ?existingMajorField WHERE {"+
+        "?edTraining "+ majorFieldPred +" ?existingMajorField . }";
+
+    final static String deptQuery  =  
+        "SELECT ?existingDept WHERE {"+
+        "?edTraining "+ deptPred +" ?existingDept . }";
+
+    final static String infoQuery  =  
+        "SELECT ?existingInfo WHERE {"+
+        "?edTraining "+ infoPred +" ?existingInfo . }";
+
+    final static String existingIntervalNodeQuery  =  
+        "SELECT ?existingIntervalNode WHERE {"+
+        "?edTraining "+ ToInterval +" ?existingIntervalNode ."+
+        "?existingIntervalNode "+ type +" "+ intervalType +" . }";
+     
+    final static String existingStartNodeQuery  =  
+        "SELECT ?existingStartNode WHERE {"+
+        "?edTraining "+ ToInterval +" ?intervalNode ."+
+        "?intervalNode "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToStart +" ?existingStartNode . "+
+        "?existingStartNode "+ type +" "+ dateTimeValueType +" .}              ";
+
+    final static String existingStartDateQuery  =  
+        "SELECT ?existingDateStart WHERE {"+
+        "?edTraining "+ ToInterval +" ?intervalNode ."+
+        "?intervalNode "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToStart +" ?startNode ."+
+        "?startNode "+ type +" "+ dateTimeValueType +" ."+
+        "?startNode "+ dateTimeValue +" ?existingDateStart . }";
+
+    final static String existingStartPrecisionQuery  =  
+        "SELECT ?existingStartPrecision WHERE {"+
+        "?edTraining "+ ToInterval +" ?intervalNode ."+
+        "?intervalNode "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToStart +" ?startNode ."+
+        "?startNode "+ type +" "+ dateTimeValueType +" .          "+
+        "?startNode "+ dateTimePrecision +" ?existingStartPrecision . }";
+
+    final static String existingEndNodeQuery  =  
+        "SELECT ?existingEndNode WHERE {"+
+        "?edTraining "+ ToInterval +" ?intervalNode ."+
+        "?intervalNode "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToEnd +" ?existingEndNode . "+
+        "?existingEndNode "+ type +" "+ dateTimeValueType +" .}              ";
+
+    final static String existingEndDateQuery  =  
+        "SELECT ?existingEndDate WHERE {"+
+        "?edTraining "+ ToInterval +" ?intervalNode ."+
+        "?intervalNode "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToEnd +" ?endNode ."+
+        "?endNode "+ type +" "+ dateTimeValueType +" ."+
+        "?endNode "+ dateTimeValue +" ?existingEndDate . }";
+
+    final static String existingEndPrecisionQuery  =  
+        "SELECT ?existingEndPrecision WHERE {"+
+        "?edTraining "+ ToInterval +" ?intervalNode ."+
+        "?intervalNode "+ type +" "+ intervalType +" ."+
+        "?intervalNode "+ intervalToEnd +" ?endNode ."+
+        "?endNode "+ type +" "+ dateTimeValueType +" .          "+
+        "?endNode "+ dateTimePrecision +" ?existingEndPrecision . }";
+
+}
