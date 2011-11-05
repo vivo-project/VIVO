@@ -14,9 +14,7 @@
         SELECT ?conceptLabel ?concept
         WHERE {
          	?subject ?property ?concept .
-         	?concept rdf:type skos:Concept .
-         	?concept rdfs:label ?conceptLabel .
-
+         	optional {?concept rdfs:label ?conceptLabel}
         } ORDER BY ?conceptLabel                   
     </query-select>
 
