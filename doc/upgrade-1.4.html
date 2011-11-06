@@ -23,7 +23,27 @@
                 <li><code>${stylesheets.list}</code>, <code>${scripts.list}</code>, and <code>${headscripts.list}</code> have changed to 
                     <code>${stylesheets.list()}</code>, <code>${scripts.list()}</code>, and <code>${headscripts.list()}</code>, respectively.
                 </li>
-                
+                (ryounes)
+            </ul>
+            
+            <h2>addition to deploy.properties</h2>
+            <ul>
+                <li> What types of individuals may have proxy editors?
+                <pre>proxy.eligibleTypeList = http://xmlns.com/foaf/0.1/Person, http://xmlns.com/foaf/0.1/Organization</pre>
+                </li>
+                (jblake)
+            </ul>
+            
+            <h2>changes to the build script</h2>
+            <ul>
+                <li> Incremental builds go much faster, but at some cost:
+                    <ul>
+                	    <li>full builds go a little slower</li>
+                	    <li>if you delete a source file, you must do a full build to really get rid of it.</li>
+                    </ul>
+                </li>
+                <li> Changes to solr deploy.</li>
+                (jblake)
             </ul>
             
                 <!-- #wrapper-content -->
