@@ -6,13 +6,11 @@
      is also used to generate the property statement during a deletion.  
  -->
  
-<#import "lib-sequence.ftl" as s>
-<#import "lib-datetime.ftl" as dt>
 
-<@showTerm statement />
+<@showConcept statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
-<#macro showTerm statement>
-	<a href="${statement.concept}">${statement.conceptLabel}</a>  
+<#macro showConcept statement>
+     <a href="${statement.concept}">${statement.conceptLabel!statement.conceptName}</a> 
 </#macro>

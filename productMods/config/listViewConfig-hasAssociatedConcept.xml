@@ -8,12 +8,14 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT ?conceptLabel ?concept
+        SELECT ?concept ?conceptLabel ?conceptName
         WHERE {
          	?subject ?property ?concept .
-         	?concept rdfs:label ?conceptLabel
-        } ORDER BY ?conceptLabel                   
+         	LET (?conceptName := afn:localname(?concept)) 
+         	optional {?concept rdfs:label ?conceptLabel}
+        } ORDER BY ?conceptLabel ?conceptName 
     </query-select>
 
     <query-construct>
@@ -23,7 +25,7 @@
             ?concept rdfs:label ?conceptLabel 
         } WHERE {
             ?subject ?property ?concept .
-            ?concept rdfs:label ?conceptLabel 
+            optional {?concept rdfs:label ?conceptLabel} 
         } 
     </query-construct>
     <template>propStatement-hasAssociatedConcept.ftl</template>
