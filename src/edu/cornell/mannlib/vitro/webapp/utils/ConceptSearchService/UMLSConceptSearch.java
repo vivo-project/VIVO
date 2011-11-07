@@ -4,18 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URL;
-import java.net.URLEncoder;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.servlet.UMLSTerminologyAnnotation;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 
 public class UMLSConceptSearch extends AbstractConceptSearch{
     private static final String submissionUrl = "http://link.informatics.stonybrook.edu/MeaningLookup/MlServiceServlet?";
