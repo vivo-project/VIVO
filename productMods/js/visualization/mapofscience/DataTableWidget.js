@@ -2,30 +2,27 @@
 
 var DataTableWidget = Class.extend({
 	
-	widgetType: "MAIN_SCIENCE_AREAS",
-	
-	currentSelectedFilter: SCIMAP_TYPE.DISCIPLINE,
-	
 	dom: {
 		searchBarParentContainerClass : "searchbar",
 		paginationContainerClass : "paginatedtabs",
 		containerID: "main-science-areas-table-container",
 		footerID: "main-science-areas-table-footer",
-		disciplineFilterID: "discipline-filter",
-		subdisciplinesFilterID: "subdisciplines-filter",
+		firstFilterID: "first-filter",
+		secondFilterID: "second-filter",
 		filterOptionClass: "filter-option",
-		activeFilterClass: "active-filter"
+		activeFilterClass: "active-filter",
+		filterInfoIconClass: "filterInfoIcon"
 	},
-	
-	widget: '',
-	
 	init: function(sciMapWidget) {
-		this.sciMapWidget = sciMapWidget;
-		
-		this.subdisciplineInfo = {};
-		this.disciplineInfo = {};
-		
 		var me = this;
+		me.sciMapWidget = sciMapWidget;
+		me.widgetType = "MAIN_SCIENCE_AREAS";
+		me.currentSelectedFilter = SCIMAP_TYPE.SUBDISCIPLINE;
+		me.subdisciplineInfo = {};
+		me.disciplineInfo = {};
+		me.widget = '';
+		me.tableDiv = $('<div />');
+		$("#" + me.dom.containerID).append(this.tableDiv);
 		
 		$.each(DISCIPLINES, function(index, item) {
 			var emptyScienceAreaElement = {
@@ -42,7 +39,6 @@ var DataTableWidget = Class.extend({
 			};
 			me.subdisciplineInfo[index] = emptyScienceAreaElement;
 		});
-		
 	},
 	loadJsonData: function(data) {
 		
@@ -74,12 +70,17 @@ var DataTableWidget = Class.extend({
 		return (this.keyToMarkerManagers.hasOwnProperty(key));
 	},
 	show: function(key) {
+		this.tableDiv.show();
 	},
 	hide: function(key) {
+		this.tableDiv.hide();
 	},
-	cleanUp: function() {
+	cleanView: function() {
+		this.hide();
 	},
 	initView: function() {
+		this.show();
+		this.changeFilter(me.currentSelectedFilter);
 	},
 	parseIDIntoScienceTypeAreaID: function(rawID) {
 		
@@ -91,6 +92,15 @@ var DataTableWidget = Class.extend({
 	setupView: function() {
 		
 		var me = this;
+		
+		var dom = me.dom;
+		var filter = $('<div class="science-areas-filter">' +
+				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">Sub-Disciplines</span> | ' +
+		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">Disciplines</span>' +
+		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
+		me.tableDiv.append(filter);
+		createToolTip($("#imageIconTwo"), $('#toolTipTwo').html(), "topLeft");
+		initFilter(dom);
 		
 		var table = $('<table>');
 		table.attr('id', 'datatable');
@@ -150,7 +160,7 @@ var DataTableWidget = Class.extend({
 		tbody.append(rowsToInsert.join(''));
 
 		table.append(tbody);
-		$("#" + me.dom.containerID).append(table);
+		me.tableDiv.append(table);
 		
 		table.children("tbody").children("tr").mouseenter(function() {
 			
@@ -208,16 +218,18 @@ var DataTableWidget = Class.extend({
 		
 		
 		var searchInputBox = $("." + me.dom.searchBarParentContainerClass).find("input[type=text]");
-		
 		searchInputBox.css("width", "140px");
-		
 		searchInputBox.after("<span id='reset-search' title='Clear search query'>X</span>" 
-								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + baseImageFolderPrefix + "/iconInfo.png' alt='information icon' title='' />");
-		
+								+ "<img class='filterInfoIcon' id='searchInfoIcon' src='" + infoIconUrl + "' alt='information icon' title='' />");
 		$("#reset-search").live('click', function() {
 			me.widget.fnFilter("");
 		});
+		createToolTip($("#searchInfoIcon"), $('#searchInfoTooltipText').html(), "topLeft");
 		
+		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a id="csv" href="' +
+						entityMapOfScienceSubDisciplineCSVURL + 
+						'" class="map-of-science-links">Save All as CSV</a></div>';
+		this.tableDiv.append(csvButton);
 		
 		var totalPublications = me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped;
 		$("#mapped-publications").text(addCommasToNumber(me.pubsMapped));
@@ -228,7 +240,6 @@ var DataTableWidget = Class.extend({
 	},
 	changeFilter: function(filterType) {
 		var me = this;
-		
 		if (filterType === SCIMAP_TYPE.SUBDISCIPLINE) {
 			
 			$("#science-areas-th").html("Sub-Disciplines");
@@ -250,6 +261,7 @@ var DataTableWidget = Class.extend({
 		}
 		
 		ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER = me.currentSelectedFilter;
+
 		if (me.widget) {
 			me.widget.fnDraw();
 		}

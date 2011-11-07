@@ -68,9 +68,10 @@ function initMap() {
 }
 
 function initVisModeController() {
-	var controller = new EntityVisModeController(map);
-	visModeControllers[controller.visMode] = controller;
+	var controller = getVisModeController(ENTITY_VIS_MODE);
 	switchVisMode(controller.visMode);
+	initVisModeTypeButton();
+	initGlobalToolTips();
 	currentController.loadData(scienceMapDataURL, false);
 }
 

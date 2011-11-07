@@ -2,6 +2,8 @@
 var ENTITY_VIS_MODE = "ENTITY";
 var COMPARISON_VIS_MODE = "COMPARISON";
 
+var dataMarket = {};
+
 var VisModeController = Class.extend({
 	init: function(map) {
 		this.visMode = ENTITY_VIS_MODE;
@@ -13,6 +15,47 @@ var VisModeController = Class.extend({
 	},
 	needLoaded: function() {
 		return this.isUnloaded;
+	},
+	loadData: function(url, sync) {
+		
+		// Download data from server and add to markerManager if not gotten already
+		var me = this;
+		if (me.isUnloaded) {
+			// Lazy loading
+			if (!dataMarket[url]) {
+				if (sync) {
+					downloader.downloadAndWait(url, function(data) {
+						dataMarket[url] = data;
+						me.loadJsonData(me, data);
+					});
+				} else {
+					downloader.download(url, function(data) {
+						dataMarket[url] = data;
+						me.loadJsonData(me, data);
+					});
+				}
+			} else {
+				me.loadJsonData(me, dataMarket[url]);
+			}
+		} // end if
+	},
+	loadJsonData: function(me, data) {
+		
+		$("#" + responseContainerID).unblock();
+		
+		if (ERROR_DISPLAY_WIDGET.isErrorConditionTriggered(data)) {
+			$("#map-of-science-response").hide();
+			ERROR_DISPLAY_WIDGET.show(ENTITY_TYPE, data);
+			return;
+		}
+		
+		data = data[0];
+		
+		$.each(me.widgets, function(i, widget) {
+			widget.loadJsonData(data);
+		});
+		//me.initToolTipInfo();
+		me.isUnloaded = false;
 	},
 	initView: function() {
 		$.each(this.widgets, function(i, widget) {
@@ -30,49 +73,32 @@ var VisModeController = Class.extend({
 			widget.hide(key);
 		});
 	},
-	cleanUp: function() {
+	cleanView: function() {
 		$.each(this.widgets, function(i, widget) {
-			widget.cleanUp(key);
+			widget.cleanView();
 		});
-	}
+	},
+	changeFilter: function(value) {
+		var type = this.getFilterType(value);
+		
+		$.each(this.widgets, function(i, widget) {
+			widget.changeFilter(type);
+		});
+	},
 });
 
 var EntityVisModeController = VisModeController.extend({
 	init: function(map) {
 		this._super(map);
 		this.visMode = ENTITY_VIS_MODE;
-		this.initFilter();
+		this.firstFilterLabel = "554 Sub-Disciplines";
+		this.secondFilterLabel = "13 Disciplines";
 	},
-	initFilter: function() {
-		var widgets = this.widgets;
-		var dom = {
-			disciplineFilterID: "discipline-filter",
-			subdisciplinesFilterID: "subdisciplines-filter",
-			filterOptionClass: "filter-option",
-			activeFilterClass: "active-filter"
-		};
-		
-		$("." + dom.filterOptionClass).live('click', function() {
-			if (!$(this).hasClass(dom.activeFilterClass)) {
-				if ($(this).attr('id') === dom.subdisciplinesFilterID) {
-					$("#" + dom.disciplineFilterID).removeClass(dom.activeFilterClass);
-					$.each(widgets, function(i, widget) {
-						widget.changeFilter(SCIMAP_TYPE.SUBDISCIPLINE);
-					});
-					
-				} else if ($(this).attr('id') === dom.disciplineFilterID) {
-					$("#" + dom.subdisciplinesFilterID).removeClass(dom.activeFilterClass);
-					$.each(widgets, function(i, widget) {
-						widget.changeFilter(SCIMAP_TYPE.DISCIPLINE);
-					});
-				}
-					
-				$(this).addClass('active-filter');	
-			}
-		});
-		
-		/* Init default filter */
-		$("#" + dom.subdisciplinesFilterID).trigger('click');
+	getFilterType: function(value) {
+		if (value === 1) {
+			return SCIMAP_TYPE.SUBDISCIPLINE;
+		}
+		return SCIMAP_TYPE.DISCIPLINE;
 	},
 	initWidgets: function(map) {
 		var widgets = {};
@@ -80,223 +106,27 @@ var EntityVisModeController = VisModeController.extend({
 		widgets['sci_area_table'] = new DataTableWidget(widgets['scimap']);
 		
 		this.widgets = widgets;
-	},
-	loadData: function(url, sync) {
-		
-		// Download data from server and add to markerManager if not gotten already
-		var me = this;
-		if (me.isUnloaded) {
-			if (sync) {
-				downloader.downloadAndWait(url, function(data) {
-						me.loadJsonData(me, data);
-				});
-			} else {
-				downloader.download(url, function(data) {
-						me.loadJsonData(me, data);
-				});
-			}
-		} // end if
-	},
-	loadJsonData: function(me, data) {
-		
-		$("#" + responseContainerID).unblock();
-		
-		if (ERROR_DISPLAY_WIDGET.isErrorConditionTriggered(data)) {
-			$("#map-of-science-response").hide();
-			ERROR_DISPLAY_WIDGET.show(ENTITY_TYPE, data);
-			return;
-		}
-		
-		data = data[0];
-		
-		$.each(me.widgets, function(i, widget) {
-			widget.loadJsonData(data);
-		});
-		me.isUnloaded = false;
-		me.initToolTipInfo();
-		
-	},
-	initToolTipInfo: function() {
-
-		$('.filterInfoIcon').each(function () {
-		    
-			var me = $(this);
-			
-			var tipText;
-		    var tipLocation = "topLeft";
-		    
-		    if (me.attr('id') == 'imageIconOne') {
-		        tipText = $('#toolTipOne').html();
-		    } else if (me.attr('id') == 'imageIconTwo') {
-		        tipText = $('#toolTipTwo').html();
-		    } else if (me.attr('id') == 'searchInfoIcon') {
-		        tipText = $('#searchInfoTooltipText').html();
-		    } else {
-		        tipText = $('#toolTipThree').html();
-		        tipLocation = "topRight";
-		    }
-		    
-		    me.qtip({
-		        content: {
-		            text: tipText
-		        },
-		        position: {
-		            corner: {
-		                target: 'center',
-		                tooltip: tipLocation
-		            }
-		        },
-		        show: {
-		            when: {
-		                event: 'mouseover'
-		            }
-		        },
-		        hide: {
-		            fixed: true // Make it fixed so it can be hovered over
-		        },
-		        style: {
-		            padding: '6px 6px',
-		            // Give it some extra padding
-		            width: 500,
-		            textAlign: 'left',
-		            backgroundColor: '#ffffc0',
-		            fontSize: '.7em',
-		            padding: '6px 10px 6px 10px',
-		            lineHeight: '14px'
-		        }
-		    });
-		});
 	}
 });
 
-var ComparisonVisModeController = Class.extend({
+var ComparisonVisModeController = VisModeController.extend({
 	init: function(map) {
 		this._super(map);
 		this.visMode = COMPARISON_VIS_MODE;
-		this.initFilter();
+		this.firstFilterLabel = "Organizations";
+		this.secondFilterLabel = "People";
 	},
-	initFilter: function() {
-		var widgets = this.widgets;
-		var dom = {
-			disciplineFilterID: "discipline-filter",
-			subdisciplinesFilterID: "subdisciplines-filter",
-			filterOptionClass: "filter-option",
-			activeFilterClass: "active-filter"
-		};
-		
-		$("." + dom.filterOptionClass).live('click', function() {
-			if (!$(this).hasClass(dom.activeFilterClass)) {
-				if ($(this).attr('id') === dom.subdisciplinesFilterID) {
-					$("#" + dom.disciplineFilterID).removeClass(dom.activeFilterClass);
-					$.each(widgets, function(i, widget) {
-						widget.changeFilter(SCIMAP_TYPE.SUBDISCIPLINE);
-					});
-					
-				} else if ($(this).attr('id') === dom.disciplineFilterID) {
-					$("#" + dom.subdisciplinesFilterID).removeClass(dom.activeFilterClass);
-					$.each(widgets, function(i, widget) {
-						widget.changeFilter(SCIMAP_TYPE.DISCIPLINE);
-					});
-				}
-					
-				$(this).addClass('active-filter');	
-			}
-		});
-		
-		/* Init default filter */
-		$("#" + dom.subdisciplinesFilterID).trigger('click');
+	getFilterType: function(value) {
+		if (value === 1) {
+			return COMPARISON_TYPE.ORGANIZATION;
+		}
+		return COMPARISON_TYPE.PERSON;
 	},
 	initWidgets: function(map) {
 		var widgets = {};
-		widgets['scimap'] = new ScimapWidget(map);
-		widgets['sci_area_table'] = new DataTableWidget(widgets['scimap']);
+		widgets['scimap'] = new ComparisonScimapWidget(map);
+		widgets['sci_area_table'] = new ComparisonDataTableWidget(widgets['scimap']);
 		
 		this.widgets = widgets;
-	},
-	loadData: function(url, sync) {
-		
-		// Download data from server and add to markerManager if not gotten already
-		var me = this;
-		if (me.isUnloaded) {
-			if (sync) {
-				downloader.downloadAndWait(url, function(data) {
-						me.loadJsonData(me, data);
-				});
-			} else {
-				downloader.download(url, function(data) {
-						me.loadJsonData(me, data);
-				});
-			}
-		} // end if
-	},
-	loadJsonData: function(me, data) {
-		
-		$("#" + responseContainerID).unblock();
-		
-		if (ERROR_DISPLAY_WIDGET.isErrorConditionTriggered(data)) {
-			$("#map-of-science-response").hide();
-			ERROR_DISPLAY_WIDGET.show(ENTITY_TYPE, data);
-			return;
-		}
-		
-		data = data[0];
-		
-		$.each(me.widgets, function(i, widget) {
-			widget.loadJsonData(data);
-		});
-		me.isUnloaded = false;
-		me.initToolTipInfo();
-		
-	},
-	initToolTipInfo: function() {
-
-		$('.filterInfoIcon').each(function () {
-		    
-			var me = $(this);
-			
-			var tipText;
-		    var tipLocation = "topLeft";
-		    
-		    if (me.attr('id') == 'imageIconOne') {
-		        tipText = $('#toolTipOne').html();
-		    } else if (me.attr('id') == 'imageIconTwo') {
-		        tipText = $('#toolTipTwo').html();
-		    } else if (me.attr('id') == 'searchInfoIcon') {
-		        tipText = $('#searchInfoTooltipText').html();
-		    } else {
-		        tipText = $('#toolTipThree').html();
-		        tipLocation = "topRight";
-		    }
-		    
-		    me.qtip({
-		        content: {
-		            text: tipText
-		        },
-		        position: {
-		            corner: {
-		                target: 'center',
-		                tooltip: tipLocation
-		            }
-		        },
-		        show: {
-		            when: {
-		                event: 'mouseover'
-		            }
-		        },
-		        hide: {
-		            fixed: true // Make it fixed so it can be hovered over
-		        },
-		        style: {
-		            padding: '6px 6px',
-		            // Give it some extra padding
-		            width: 500,
-		            textAlign: 'left',
-		            backgroundColor: '#ffffc0',
-		            fontSize: '.7em',
-		            padding: '6px 10px 6px 10px',
-		            lineHeight: '14px'
-		        }
-		    });
-		});
 	}
 });

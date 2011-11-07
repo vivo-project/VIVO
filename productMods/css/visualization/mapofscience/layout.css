@@ -99,36 +99,36 @@ a.clear-selected-entities {
 
 /* filter */
 
-.filter-option {
+.filter-option, .comparison-filter-option {
 	color: #2485AE;
 	cursor: pointer;
 	/*padding-right: 5px;*/
 	text-decoration: underline;
 }
 
-.active-filter {
+.active-filter, .comparison-active-filter {
 	color: #595B5B;
 	text-decoration: none;
 }
 
-.filterInfoIcon {
+.filterInfoIcon, .comparisonFilterInfoIcon {
 	/*vertical-align:top;*/
 	width:15px;
 	margin-left: 9px;
 }
 
-#science-areas-filter {
+.science-areas-filter {
 	margin-bottom: 10px;
 } 
 
 /* search in table */
 
-.sDomSearchBar {
+.sDomSearchBar, .sDomComparisonSearchBar {
     margin-bottom: -10px;
     margin-left: 41%;
 }
 
-#reset-search {
+#reset-search, #comparison-reset-search {
     color: #2485AE;
     cursor: pointer;
     margin-left: 10px;

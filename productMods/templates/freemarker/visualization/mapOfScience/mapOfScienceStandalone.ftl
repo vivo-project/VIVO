@@ -39,26 +39,18 @@ corresponding changes in the included Templates. -->
             <h1>&#035;{title}</h1>
             <p>&#035;{text}</p>
         </div>
+    </div>
     
+    <#-- VIEW TYPE FILTER -->
+    <div id="view-type-filter" style="display:${viewTypeFilterDisplay};">
+    	<input type="radio" name="view-type" value="ENTITY"> Explore ${entityLabel} </input><br>
+		<input type="radio" name="view-type" value="COMPARISON"> Compare organizations (or people) </input><br><br>
     </div>
     
     <!-- <h3>What do you want to compare?</h3> -->
-    <div id="science-areas-filter">
-    	<span id="discipline-filter" class="filter-option active-filter">13 Disciplines</span> | 
-    	<span id="subdisciplines-filter" class="filter-option">554 Sub-Disciplines</span>
-    	<img class="filterInfoIcon" id="imageIconTwo" src="${urls.images}/iconInfo.png" 
-    		 alt="information icon" 
-    		 title="" />
-    </div>
     
     <div id="main-science-areas-table-container"></div>
-    
-    <hr class="subtle-hr"/>
-    
-    <div id="main-science-areas-table-footer">
-    <a id="csv" href="${entityMapOfScienceDisciplineCSVURL}" class="map-of-science-links">Save All as CSV</a>
-    <#-- <a class="clear-selected-entities map-of-science-links" title="Clear all selected entities.">Clear</a> -->
-    </div>
+
 </div>		
 
 <div id="right-column"><div id="map_area"></div>
@@ -78,6 +70,9 @@ mapped <span id="percent-mapped"></span>% of <span id="total-publications"></spa
 
 </div>
 </div>
+
+<#-- START TOOLTIP TEXT -->
+
 <div id="toolTipOne" style="display:none;">
 VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, 
 overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.<br /> <br /> 
@@ -144,8 +139,32 @@ concern.</div>
 
 <div id="searchInfoTooltipText" style="display:none;">
 	<!-- Search for specific sub-discipline (or discipline) label in the first column of the table. -->
-	List only map of science areas whose names contain this text.
+	List only sub-disciplines (or disciplines) whose name contains this text.
 </div>
+
+
+<#-- COMPARISON TOOLTIP TEXT -->
+
+<div id="comparisonToolTipTwo" style="display:none;">
+The organizations or people listed below are only those which are directly beneath ${entityLabel} in the 
+organization hierarchy. You may 'drill down' to see the organizations or people below a given sub-organization 
+by selecting the chart icon next to a selected sub-organization's name below the graph on the right.
+<br /><br />
+
+The <b># of pubs.</b> column shows how many of the publications were mapped to each field.  
+This count can be fractional because some publication venues are associated with more than one field.  
+Each publication in such a venue contributes fractionally to all associated fields according to a weighting scheme.
+
+<br /><br />
+The <b>% activity</b> column shows what proportion of the publications were mapped to each field.
+
+</div>
+
+<div id="comparisonSearchInfoTooltipText" style="display:none;">
+	<!-- Search for specific sub-discipline (or discipline) label in the first column of the table. -->
+	List only organizations (or people) whose name contains this text.
+</div>
+<#-- END TOOLTIP TEXT -->
 
 <div id="error-container">
 

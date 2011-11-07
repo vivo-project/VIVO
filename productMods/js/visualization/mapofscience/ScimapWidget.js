@@ -13,7 +13,15 @@ var ScimapWidget = Class.extend({
 		var me = this;
 		me.initControlPanels();
 		me.initMarkerManagers();
-		me.show(SCIMAP_TYPE.SUBDISCIPLINE);
+		me.activeManager.addMarkersToMap();
+		me.updateDisplayedMarkers();
+	},
+	cleanView: function() {
+		var me = this;
+		me._cleanUpMarkers();
+		me.sliderControl.removeFromMap();
+		me.disciplineLabelsControl.removeFromMap();
+		me.labelsMarkerManager.removeMarkersFromMap();
 	},
 	initControlPanels: function() {
 		var me = this;
@@ -30,7 +38,7 @@ var ScimapWidget = Class.extend({
 		me.sliderControl.addToMap();
 		me.sliderControl.setChangeEventHandler(function(event, ui) {
 			if (me.keyToMarkerManagers) {
-				me.updateDisplayedMarkers(ui.value);
+				me.updateDisplayedMarkers();
 			}
 		});
 		
@@ -53,6 +61,7 @@ var ScimapWidget = Class.extend({
 		
 		/* Display labels if checked */
 		me.disciplineLabelsControl.addToMap();
+		me.labelsMarkerManager.addMarkersToMap();
 		if (me.disciplineLabelsControl.isChecked()) {
 			me.labelsMarkerManager.showMarkers();
 		}
@@ -75,6 +84,7 @@ var ScimapWidget = Class.extend({
 				null
 			);
 			this.keyToMarkerManagers = managers;
+			this.show(SCIMAP_TYPE.SUBDISCIPLINE);
 		}
 	},
 	needLoaded: function(){
@@ -185,14 +195,8 @@ var ScimapWidget = Class.extend({
 			INFO_WINDOW.close();
 		}
 	},
-	cleanup: function() {
-		var me = this;
-		me._cleanUpMarkers();
-		me.sliderControl.RemoveFromMap();
-		me.disciplineLabelsControl.RemoveFromMap();
-	},
-	updateDisplayedMarkers: function(numberOfMarkers) {
-		this.activeManager.display(numberOfMarkers);
+	updateDisplayedMarkers: function() {
+		this.activeManager.display(this.sliderControl.getValue());
 	},
 	updateMap: function() {
 		var manager = this.activeManager;

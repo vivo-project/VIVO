@@ -26,19 +26,20 @@ var ScinodePolygon = CirclePolygon.extend({
 	registerEvents : function() {
 		var me = this;
 		var polygon = me.polygon;
-		this._super();
-		this.registerEvent(addClickListener(polygon, function() {
+		me._super();
+		
+		me.registerEvent(addClickListener(polygon, function() {
 			INFO_WINDOW.setPosition(this.center);
 			var content = this.content;
 			INFO_WINDOW.setContent(content);
 			INFO_WINDOW.open(this.map);
 		}));
 		
-		this.registerEvent(addMouseOverListener(polygon, function() {
+		me.registerEvent(addMouseOverListener(polygon, function() {
 			me.focus();
 		}));
 		
-		this.registerEvent(addMouseOutListener(polygon, function() {
+		me.registerEvent(addMouseOutListener(polygon, function() {
 			me.unfocus();
 		}));
 	}

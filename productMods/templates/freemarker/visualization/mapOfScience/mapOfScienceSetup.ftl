@@ -36,18 +36,23 @@
 <script language="JavaScript" type="text/javascript">
 
 var contextPath = "${urls.base}";
+var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=json&uri=";
+var scienceMapDataURL = scienceMapDataPrefix + "${entityURI}";
 
-var scienceMapDataURL = "${entityMapOfScienceDataURL}";
-
-var baseImageFolderPrefix = "${urls.images}/";
+var infoIconUrl = "${urls.images}/iconInfo.png";
 var imageFolderPrefix = "${urls.images}/visualization/";
 var mapOfScienceImageFolderPrefix  = imageFolderPrefix 
 											+ "mapofscience/";
 var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
 											
-var entityLabel = "${entityLabel}";
+var entityLabel = '${entityLabel}';
 
 var ENTITY_TYPE = '${entityType}';
+<#if entityType == "PERSON" >
+	<#assign viewTypeFilterDisplay = "none">
+<#else>
+	<#assign viewTypeFilterDisplay = "block">
+</#if>
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
@@ -81,6 +86,8 @@ ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/a
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/MarkerManager.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ScimapWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/DataTableWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonScimapWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonDataTableWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisModeControllers.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisCommonControl.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/InitializeMap.js"></script>')}              
