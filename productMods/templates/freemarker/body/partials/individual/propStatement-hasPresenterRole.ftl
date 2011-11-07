@@ -30,6 +30,8 @@
     <#local conference>
         <#if statement.conference?has_content && statement.conferenceLabel?has_content>
             <a href="${profileUrl(statement.conference)}">${statement.conferenceLabel}</a>
+        <#elseif statement.series?has_content && statement.seriesLabel?has_content>
+            <a href="${profileUrl(statement.series)}">${statement.seriesLabel}</a>
         </#if>
     </#local>
 
