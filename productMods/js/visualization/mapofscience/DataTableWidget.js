@@ -80,7 +80,7 @@ var DataTableWidget = Class.extend({
 	},
 	initView: function() {
 		this.show();
-		this.changeFilter(me.currentSelectedFilter);
+		this.changeFilter(this.currentSelectedFilter);
 	},
 	parseIDIntoScienceTypeAreaID: function(rawID) {
 		
