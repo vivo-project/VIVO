@@ -44,7 +44,7 @@ corresponding changes in the included Templates. -->
     <#-- VIEW TYPE FILTER -->
     <div id="view-type-filter" style="display:${viewTypeFilterDisplay};">
     	<input type="radio" name="view-type" value="ENTITY"> Explore ${entityLabel} </input><br>
-		<input type="radio" name="view-type" value="COMPARISON"> Compare organizations (or people) </input><br><br>
+		<input type="radio" name="view-type" value="COMPARISON"> Compare organizations <#--/ people --></input><br><br>
     </div>
     
     <!-- <h3>What do you want to compare?</h3> -->
@@ -61,12 +61,8 @@ mapped <span id="percent-mapped"></span>% of <span id="total-publications"></spa
 		title="" />
 		
 		<div id="download-unlocated-journal-info">
-			<a href="${entityMapOfScienceUnlocatedJournalsCSVURL}">Save Unlocated Journals</a>
+			<a href="${entityMapOfScienceUnlocatedJournalsCSVURL}">Save Unmapped Publications</a>
 		</div>
-		
-		</div>
-
-
 
 </div>
 </div>

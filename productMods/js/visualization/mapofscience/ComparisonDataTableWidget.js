@@ -58,8 +58,11 @@ var ComparisonDataTableWidget = Class.extend({
 		/* Create filter */
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter">' +
-	    	'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">Organizations</span> | ' +
-	    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">People</span>' +
+	    	'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">Organizations</span>'+
+	    	/* This is temporary removed due to the person's publications mapping rate is too low to be displayed.
+		    	' | ' +
+		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">People</span>' +
+	    	*/
 	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);
 		createToolTip($("#comparisonImageIconTwo"), $("#comparisonToolTipTwo").html(), "topLeft");
@@ -199,8 +202,9 @@ var ComparisonDataTableWidget = Class.extend({
 		createToolTip($("#comparisonSearchInfoIcon"), $("#comparisonSearchInfoTooltipText").html(), "topLeft");
 		
 		/* Create csv download button */
-		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a id="csv" href="' +
-						entityMapOfScienceSubDisciplineCSVURL + 
+		console.log(comparisonScienceMapCsvDataUrlPrefix + me.uri);
+		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a href="' +
+						comparisonScienceMapCsvDataUrlPrefix + me.uri +
 						'" class="map-of-science-links">Save All as CSV</a></div>';
 		me.tableDiv.append(csvButton);
 		
@@ -218,12 +222,10 @@ var ComparisonDataTableWidget = Class.extend({
 			
 			$("#comparison-science-areas-th").html("Organization");
 			me.currentSelectedFilter = COMPARISON_TYPE.ORGANIZATION;
-			$("a#csv").attr("href", entityMapOfScienceSubDisciplineCSVURL);
 		} else {
 			
 			$("#comparison-science-areas-th").html("Person");
 			me.currentSelectedFilter = COMPARISON_TYPE.PERSON;
-			$("a#csv").attr("href", entityMapOfScienceDisciplineCSVURL);
 			
 		}
 		

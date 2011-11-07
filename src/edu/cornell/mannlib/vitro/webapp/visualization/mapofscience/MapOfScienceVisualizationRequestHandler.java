@@ -214,7 +214,7 @@ public class MapOfScienceVisualizationRequestHandler implements
 			fileData.put(DataVisualizationController.FILE_CONTENT_KEY, 
 						 getUnlocatedJournalsCSVContent(entity));
 			
-			outputFileName += "_unlocated-journals" + ".csv";
+			outputFileName += "_unmapped-journals" + ".csv";
 			
 		} else {
 			
@@ -561,14 +561,14 @@ public class MapOfScienceVisualizationRequestHandler implements
 
 		StringBuilder csvFileContent = new StringBuilder();
 		
-		csvFileContent.append("Journal, Publication Count\n");
+		csvFileContent.append("Publication Venue, Publication Count\n");
 		
 		PublicationJournalStats stats = extractScienceMappingResultFromActivities(subjectEntity);
 		ScienceMappingResult result = stats.scienceMapping;
 
 		DecimalFormat percentageActivityFormat = new DecimalFormat("#.#");
 		
-		csvFileContent.append(StringEscapeUtils.escapeCsv("No Journal"));
+		csvFileContent.append(StringEscapeUtils.escapeCsv("No Publication Venue Name"));
 		csvFileContent.append(", ");
 		csvFileContent.append(percentageActivityFormat.format(stats.noJournalCount));
 		csvFileContent.append("\n");
