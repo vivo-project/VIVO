@@ -1,3 +1,5 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 package org.vivoweb.reasoner.plugin;
 
 import edu.cornell.mannlib.vitro.webapp.reasoner.ReasonerPlugin;
