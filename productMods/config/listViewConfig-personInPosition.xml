@@ -15,10 +15,18 @@
                         ?positionTitle    
                         ?hrJobTitle                    
                         ?org ?orgName 
+                        ?middleOrg ?middleOrgName
+                        ?outerOrg ?outerOrgName
                         ?dateTimeStart ?dateTimeEnd WHERE {
             ?subject ?property ?position 
             OPTIONAL { ?position core:positionInOrganization ?org .
                        ?org rdfs:label ?orgName 
+                       OPTIONAL { ?org core:subOrganizationWithin ?middleOrg .
+                                  ?middleOrg rdfs:label ?middleOrgName
+                                  OPTIONAL { ?middleOrg core:subOrganizationWithin ?outerOrg .
+                                             ?outerOrg rdfs:label ?outerOrgName
+                                  }
+                       }
             }
             OPTIONAL { ?position rdfs:label ?positionTitle } 
             OPTIONAL { ?position core:hrJobTitle ?hrJobTitle }
@@ -62,7 +70,11 @@
         CONSTRUCT { 
             ?subject ?property ?position .
             ?position ?positionProperty ?positionValue .
-            ?org rdfs:label ?orgName  
+            ?org rdfs:label ?orgName .
+            ?org core:subOrganizationWithin ?middleOrg .
+            ?middleOrg rdfs:label ?middleOrgName .
+            ?middleOrg core:subOrganizationWithin ?outerOrg .
+            ?outerOrg rdfs:label ?outerOrgName
         } WHERE {
             {
                ?subject ?property ?position 
@@ -73,6 +85,26 @@
                ?subject ?property ?position .
                ?position core:positionInOrganization ?org . 
                ?org rdfs:label ?orgName 
+            } UNION {
+                ?subject ?property ?position .
+                ?position core:positionInOrganization ?org . 
+                ?org core:subOrganizationWithin ?middleOrg
+            } UNION {
+                ?subject ?property ?position .
+                ?position core:positionInOrganization ?org . 
+                ?org core:subOrganizationWithin ?middleOrg .
+                ?middleOrg rdfs:label ?middleOrgName
+            } UNION {
+                ?subject ?property ?position .
+                ?position core:positionInOrganization ?org . 
+                ?org core:subOrganizationWithin ?middleOrg .
+                ?middleOrg core:subOrganizationWithin ?outerOrg
+            } UNION {
+                ?subject ?property ?position .
+                ?position core:positionInOrganization ?org . 
+                ?org core:subOrganizationWithin ?middleOrg .
+                ?middleOrg core:subOrganizationWithin ?outerOrg .
+                ?outerOrg rdfs:label ?outerOrgName
             }
         } 
     </query-construct>
