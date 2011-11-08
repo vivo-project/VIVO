@@ -21,6 +21,7 @@ csv
 dwr
 gson
 jakarta-jstl
+jarjar
 jmeter
 joda-time
 log4j
