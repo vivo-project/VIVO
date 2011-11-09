@@ -96,6 +96,7 @@ input.block {
 }
 label {
     margin-top: .5em;
+    margin-bottom: .5em;
 }
 label.inline {
     display: inline;
@@ -398,6 +399,12 @@ a.account-menu:hover,
 a.account-menu:active {
     text-decoration: none;
     color: #5E6363;
+}
+ul.ingestMenu {
+    margin-bottom: 1.5em;
+}
+.toBeDeleted {
+    margin-bottom: 0;
 }
 
 /* ------------------------------------------------->  */
@@ -1513,7 +1520,8 @@ article.property h3 {
     margin: 0;
 }
 h2#personInPosition .verbosePropertyListing,
-h2#hasResearchArea .verbosePropertyListing {
+h2#hasResearchArea .verbosePropertyListing,
+h2#preferredTitle .verbosePropertyListing {
     display: block;
 }
 
