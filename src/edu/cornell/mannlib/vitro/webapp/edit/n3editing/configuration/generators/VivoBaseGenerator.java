@@ -29,7 +29,7 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String dateTimeValueType =vivoCore+"DateTimeValue";
     final static String dateTimePrecision =vivoCore+"dateTimePrecision";
 
-    final static String ToInterval =vivoCore+"dateTimeInterval";
+    final static String toInterval =vivoCore+"dateTimeInterval";
     final static String intervalType =vivoCore+"DateTimeInterval";
     final static String intervalToStart =vivoCore+"start";
     final static String intervalToEnd =vivoCore+"end";

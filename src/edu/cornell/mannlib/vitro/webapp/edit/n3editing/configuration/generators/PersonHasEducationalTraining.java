@@ -2,14 +2,14 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 
@@ -66,10 +66,12 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
  
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
-        
+                
         initBasics(conf, vreq);
         initPropertyParameters(vreq, session, conf);
         initObjectPropForm(conf, vreq);               
+        
+        conf.setTemplate("personHasEducationalTraining.ftl");
         
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
@@ -107,7 +109,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addSparqlForExistingUris("endNode", existingEndNodeQuery);
         conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
         conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
-        
+                        
         conf.addField( new FieldVTwo().                        
                 setName("degree").
                 setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
@@ -118,15 +120,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setName("majorField").
                 setRangeDatatypeUri( XSD.xstring.toString() ).
                 setAssertions( majorFieldAssertion ));
-                //setValidators( ) datatype:stringDatatypeUriJson
-                
-        conf.addField( new FieldVTwo().
-                setName("startField").
-                setAssertions(n3ForStart));
-        
-        conf.addField( new FieldVTwo().
-                setName("endField").
-                setAssertions(n3ForEnd));
+                //setValidators( ) datatype:stringDatatypeUriJson                        
         
         conf.addField( new FieldVTwo().
                 setName("org").
@@ -158,10 +152,25 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setName("info").
                 setRangeDatatypeUri( XSD.xstring.toString() ).
                 setAssertions( infoAssertion));
+
+        conf.addField(new FieldVTwo().
+            setName("startField").            
+            setAssertions(n3ForStart).
+            setEditElement(
+                    new DateTimeWithPrecisionVTwo(null, 
+                    VitroVocabulary.Precision.YEAR.uri(),
+                    VitroVocabulary.Precision.NONE.uri())));
+                        
+        conf.addField( new FieldVTwo().
+                setName("endField").
+                setAssertions(n3ForEnd).
+                setEditElement(
+                        new DateTimeWithPrecisionVTwo(null, 
+                        VitroVocabulary.Precision.YEAR.uri(),
+                        VitroVocabulary.Precision.NONE.uri())));
         
         return conf;
     }
-        
 
     
     /* N3 assertions for working with educational training */
@@ -170,135 +179,135 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?org a ?orgType .";
 
     final static String orgLabelAssertion =
-        "?org "+ label +" ?orgLabel .";
+        "?org <"+ label +"> ?orgLabel .";
 
     final static String degreeAssertion  =      
-        "?edTraining "+ degreeEarned +" ?degree ."+
-        "?degree "+ degreeOutcomeOf +" ?edTraining .";
+        "?edTraining <"+ degreeEarned +"> ?degree .\n"+
+        "?degree <"+ degreeOutcomeOf +"> ?edTraining .";
 
     final static String majorFieldAssertion  =      
-        "?edTraining "+ majorFieldPred +" ?majorField .";
+        "?edTraining <"+ majorFieldPred +"> ?majorField .";
 
     final static String n3ForStart =
-        "?edTraining      "+ ToInterval +" ?intervalNode .    "+
-        "?intervalNode  "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToStart +" ?startNode .    "+
-        "?startNode  "+ type +" "+ dateTimeValueType +" ."+
-        "?startNode  "+ dateTimeValue +" ?startField-value ."+
-        "?startNode  "+ dateTimePrecision +" ?startField-precision .";
+        "?edTraining      <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode  <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToStart +"> ?startNode .\n"+
+        "?startNode  <"+ type +"> <"+ dateTimeValueType +"> .\n"+
+        "?startNode  <"+ dateTimeValue +"> ?startField-value .\n"+
+        "?startNode  <"+ dateTimePrecision +"> ?startField-precision .";
 
     final static String n3ForEnd =
-        "?edTraining      "+ ToInterval +" ?intervalNode .    "+
-        "?intervalNode  "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToEnd +" ?endNode ."+
-        "?endNode  "+ type +" "+ dateTimeValueType +" ."+
-        "?endNode  "+ dateTimeValue +" ?endField-value ."+
-        "?endNode  "+ dateTimePrecision +" ?endField-precision .";
+        "?edTraining      <"+ toInterval +"> ?intervalNode . \n"+
+        "?intervalNode  <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToEnd +"> ?endNode .\n"+
+        "?endNode  <"+ type +"> <"+ dateTimeValueType +"> .\n"+
+        "?endNode  <"+ dateTimeValue +"> ?endField-value .\n"+
+        "?endNode  <"+ dateTimePrecision +"> ?endField-precision .";
 
     final static String deptAssertion  =      
-        "?edTraining "+ deptPred +" ?dept .";
+        "?edTraining <"+ deptPred +"> ?dept .";
 
     final static String infoAssertion  =      
-        "?edTraining "+ infoPred +" ?info .";
+        "?edTraining <"+ infoPred +"> ?info .";
 
     final static String n3ForNewEdTraining =       
-        "@prefix core: "+ vivoCore +" .     "+
-        "?person core:educationalTraining  ?edTraining ."+            
-        "?edTraining  a core:EducationalTraining ;"+
-        "core:educationalTrainingOf ?person ;"+
-        ""+ trainingAtOrg +" ?org .";
+        "@prefix core: <"+ vivoCore +"> .\n"+
+        "?person core:educationalTraining  ?edTraining .\n"+            
+        "?edTraining  a core:EducationalTraining ;\n"+
+        "core:educationalTrainingOf ?person ;\n"+
+        "<"+ trainingAtOrg +"> ?org .\n";
 
     final static String n3ForEdTrainingToOrg  =      
-        "?edTraining "+ trainingAtOrg +" ?org .";
+        "?edTraining <"+ trainingAtOrg +"> ?org .";
     
     
     /* Queries for editing an existing educational training entry */
 
     final static String orgQuery  =      
-        "SELECT ?existingOrg WHERE {"+
-        "?edTraining "+ trainingAtOrg +" ?existingOrg . }";
+        "SELECT ?existingOrg WHERE {\n"+
+        "?edTraining <"+ trainingAtOrg +"> ?existingOrg . }\n";
 
     final static String orgLabelQuery  =      
-        "SELECT ?existingOrgLabel WHERE {"+
-        "?edTraining "+ trainingAtOrg +" ?existingOrg ."+
-        "?existingOrg "+ label +" ?existingOrgLabel ."+
+        "SELECT ?existingOrgLabel WHERE {\n"+
+        "?edTraining <"+ trainingAtOrg +"> ?existingOrg .\n"+
+        "?existingOrg "+ label +" ?existingOrgLabel .\n"+
         "}";
 
     /* Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
     type is returned and we don't get a match to the select element options. */
     final static String orgTypeQuery  =      
-        "PREFIX rdfs: "+ rdfs +"   "+
-        "SELECT ?existingOrgType WHERE {"+
-        "?edTraining "+ trainingAtOrg +" ?existingOrg ."+
-        "?existingOrg a ?existingOrgType ."+
-        "?existingOrgType rdfs:subClassOf "+ orgClass +" ."+
+        "PREFIX rdfs: <"+ rdfs +">   \n"+
+        "SELECT ?existingOrgType WHERE {\n"+
+        "?edTraining <"+ trainingAtOrg +"> ?existingOrg .\n"+
+        "?existingOrg a ?existingOrgType .\n"+
+        "?existingOrgType rdfs:subClassOf "+ orgClass +" .\n"+
         "}";
 
     final static String degreeQuery  =      
-        "SELECT ?existingDegree WHERE {"+
+        "SELECT ?existingDegree WHERE {\n"+
         "?edTraining "+ degreeEarned +" ?existingDegree . }";
 
     final static String majorFieldQuery  =  
-        "SELECT ?existingMajorField WHERE {"+
-        "?edTraining "+ majorFieldPred +" ?existingMajorField . }";
+        "SELECT ?existingMajorField WHERE {\n"+
+        "?edTraining <"+ majorFieldPred +"> ?existingMajorField . }";
 
     final static String deptQuery  =  
-        "SELECT ?existingDept WHERE {"+
-        "?edTraining "+ deptPred +" ?existingDept . }";
+        "SELECT ?existingDept WHERE {\n"+
+        "?edTraining <"+ deptPred +"> ?existingDept . }";
 
     final static String infoQuery  =  
-        "SELECT ?existingInfo WHERE {"+
-        "?edTraining "+ infoPred +" ?existingInfo . }";
+        "SELECT ?existingInfo WHERE {\n"+
+        "?edTraining <"+ infoPred +"> ?existingInfo . }";
 
     final static String existingIntervalNodeQuery  =  
-        "SELECT ?existingIntervalNode WHERE {"+
-        "?edTraining "+ ToInterval +" ?existingIntervalNode ."+
-        "?existingIntervalNode "+ type +" "+ intervalType +" . }";
+        "SELECT ?existingIntervalNode WHERE {\n"+
+        "?edTraining <"+ toInterval +"> ?existingIntervalNode .\n"+
+        "?existingIntervalNode <"+ type +"> <"+ intervalType +"> . }";
      
     final static String existingStartNodeQuery  =  
-        "SELECT ?existingStartNode WHERE {"+
-        "?edTraining "+ ToInterval +" ?intervalNode ."+
-        "?intervalNode "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToStart +" ?existingStartNode . "+
-        "?existingStartNode "+ type +" "+ dateTimeValueType +" .}              ";
+        "SELECT ?existingStartNode WHERE {\n"+
+        "?edTraining <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToStart +"> ?existingStartNode . \n"+
+        "?existingStartNode <"+ type +"> <"+ dateTimeValueType +"> .}";
 
     final static String existingStartDateQuery  =  
-        "SELECT ?existingDateStart WHERE {"+
-        "?edTraining "+ ToInterval +" ?intervalNode ."+
-        "?intervalNode "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToStart +" ?startNode ."+
-        "?startNode "+ type +" "+ dateTimeValueType +" ."+
-        "?startNode "+ dateTimeValue +" ?existingDateStart . }";
+        "SELECT ?existingDateStart WHERE {\n"+
+        "?edTraining <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToStart +"> ?startNode .\n"+
+        "?startNode <"+ type +"> <"+ dateTimeValueType +"> .\n"+
+        "?startNode <"+ dateTimeValue +"> ?existingDateStart . }";
 
     final static String existingStartPrecisionQuery  =  
-        "SELECT ?existingStartPrecision WHERE {"+
-        "?edTraining "+ ToInterval +" ?intervalNode ."+
-        "?intervalNode "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToStart +" ?startNode ."+
-        "?startNode "+ type +" "+ dateTimeValueType +" .          "+
-        "?startNode "+ dateTimePrecision +" ?existingStartPrecision . }";
+        "SELECT ?existingStartPrecision WHERE {\n"+
+        "?edTraining <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToStart +"> ?startNode .\n"+
+        "?startNode <"+ type +"> <"+ dateTimeValueType +"> . \n"+
+        "?startNode <"+ dateTimePrecision +"> ?existingStartPrecision . }";
 
     final static String existingEndNodeQuery  =  
-        "SELECT ?existingEndNode WHERE {"+
-        "?edTraining "+ ToInterval +" ?intervalNode ."+
-        "?intervalNode "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToEnd +" ?existingEndNode . "+
-        "?existingEndNode "+ type +" "+ dateTimeValueType +" .}              ";
+        "SELECT ?existingEndNode WHERE { \n"+
+        "?edTraining <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToEnd +"> ?existingEndNode . \n"+
+        "?existingEndNode <"+ type +"> <"+ dateTimeValueType +"> .}";
 
     final static String existingEndDateQuery  =  
-        "SELECT ?existingEndDate WHERE {"+
-        "?edTraining "+ ToInterval +" ?intervalNode ."+
-        "?intervalNode "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToEnd +" ?endNode ."+
-        "?endNode "+ type +" "+ dateTimeValueType +" ."+
-        "?endNode "+ dateTimeValue +" ?existingEndDate . }";
+        "SELECT ?existingEndDate WHERE {\n"+
+        "?edTraining <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToEnd +"> ?endNode .\n"+
+        "?endNode <"+ type +"> <"+ dateTimeValueType +"> .\n"+
+        "?endNode <"+ dateTimeValue +"> ?existingEndDate . }";
 
     final static String existingEndPrecisionQuery  =  
-        "SELECT ?existingEndPrecision WHERE {"+
-        "?edTraining "+ ToInterval +" ?intervalNode ."+
-        "?intervalNode "+ type +" "+ intervalType +" ."+
-        "?intervalNode "+ intervalToEnd +" ?endNode ."+
-        "?endNode "+ type +" "+ dateTimeValueType +" .          "+
-        "?endNode "+ dateTimePrecision +" ?existingEndPrecision . }";
+        "SELECT ?existingEndPrecision WHERE {\n"+
+        "?edTraining <"+ toInterval +"> ?intervalNode .\n"+
+        "?intervalNode <"+ type +"> <"+ intervalType +"> .\n"+
+        "?intervalNode <"+ intervalToEnd +"> ?endNode .\n"+
+        "?endNode <"+ type +"> <"+ dateTimeValueType +"> .\n"+
+        "?endNode <"+ dateTimePrecision +"> ?existingEndPrecision . }";
 
 }
