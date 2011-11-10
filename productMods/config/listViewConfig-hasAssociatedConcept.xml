@@ -10,11 +10,13 @@
         PREFIX rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT ?concept ?conceptLabel ?conceptName
+        SELECT ?concept ?conceptLabel ?conceptName ?vocabularySource ?vocabularySourceName
         WHERE {
          	?subject ?property ?concept .
          	LET (?conceptName := afn:localname(?concept)) 
          	optional {?concept rdfs:label ?conceptLabel}
+         	optional {?concept rdfs:isDefinedBy ?vocabularySource
+         	          optional { ?vocabularySource rdfs:label ?vocabularySourceName}}
         } ORDER BY ?conceptLabel ?conceptName 
     </query-select>
 
@@ -22,11 +24,45 @@
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
         CONSTRUCT { 
             ?subject ?property ?concept .
+        } WHERE {
+            ?subject ?property ?concept .
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?concept .
             ?concept rdfs:label ?conceptLabel 
         } WHERE {
             ?subject ?property ?concept .
-            optional {?concept rdfs:label ?conceptLabel} 
+            ?concept rdfs:label ?conceptLabel 
         } 
     </query-construct>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?concept .
+            ?concept rdfs:isDefinedBy ?vocabularySource
+        } WHERE {
+            ?subject ?property ?concept .
+            ?concept rdfs:isDefinedBy ?vocabularySource
+        } 
+    </query-construct>
+    
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?concept .
+            ?concept rdfs:isDefinedBy ?vocabularySource .
+            ?vocabularySource rdfs:label ?vocabularySourceName
+        } WHERE {
+            ?subject ?property ?concept .
+            ?concept rdfs:isDefinedBy ?vocabularySource .
+            ?vocabularySource rdfs:label ?vocabularySourceName
+        } 
+    </query-construct>
+    
     <template>propStatement-hasAssociatedConcept.ftl</template>
 </list-view-config>

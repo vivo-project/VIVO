@@ -6,11 +6,14 @@
      is also used to generate the property statement during a deletion.  
  -->
  
-
 <@showConcept statement />
 
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showConcept statement>
-     <a href="${statement.concept}">${statement.conceptLabel!statement.conceptName}</a> 
+      <#if statement.vocabularySourceName??>
+          <a href="${statement.concept}">${statement.conceptLabel!statement.conceptName}</a>  (<a href="${statement.vocabularySource}">${statement.vocabularySourceName}</a>)
+      <#else>
+          <a href="${statement.concept}">${statement.conceptLabel!statement.conceptName}</a> 
+      </#if>
 </#macro>
