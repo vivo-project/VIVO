@@ -33,6 +33,19 @@
 	height: 480px;
 }
 
+#subEntityTableArea {
+	clear: both;
+	width: 100%; 
+	padding-top:5px; 
+}
+
+.subEntityTable {
+	width: 32%; 
+	padding-top:5px;
+	padding-right: 8px;
+	float: left;
+}
+
 #percent-mapped-info {
 	float:right;
 	display: none;
@@ -117,9 +130,33 @@ a.clear-selected-entities {
 	margin-left: 9px;
 }
 
+.drillDownIcon {
+	width:25px;
+	margin-left: 9px;
+	float: right;
+}
+
+
 .science-areas-filter {
 	margin-bottom: 10px;
-} 
+}
+
+.organization-header {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.suborganization-title {
+	vertical-align: middle; 
+	font-weight: bold;
+}
+
+.mapped-result {
+	font-size: 0.9em;
+	font-weight: bold;
+	float: right;
+	padding-top: 4px;
+}
 
 /* search in table */
 
@@ -179,7 +216,12 @@ hr.subtle-hr {
 	width: 100%;
 }
 
-table.datatable-table  tbody tr {
+.entity-datatable-table {
+	font-size: 0.9em;
+	width: 100%;
+}
+
+table.datatable-table tbody tr {
 	border-top: 3px solid;
 }
 
@@ -226,6 +268,19 @@ a.map-of-science-links {
 
 .paginatedtabs {
 	font-size: 0.81em;
+}
+
+.subpaginatedtabs {
+    margin-bottom: 10px;
+    font-size: 0.81em;
+    float:right;
+    margin-top: 15px;
+}
+
+.subpaginatedtabs span {
+    padding-right: 5px; 
+    cursor: pointer;
+    color: #2485AE;
 }
 
 /* -------------------------------------------------------------->  */

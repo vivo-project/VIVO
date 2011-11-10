@@ -3,15 +3,17 @@
 var DataTableWidget = Class.extend({
 	
 	dom: {
-		searchBarParentContainerClass : "searchbar",
-		paginationContainerClass : "paginatedtabs",
+		searchBarParentContainerClass: "searchbar",
+		paginationContainerClass: "paginatedtabs",
 		containerID: "main-science-areas-table-container",
 		footerID: "main-science-areas-table-footer",
 		firstFilterID: "first-filter",
 		secondFilterID: "second-filter",
 		filterOptionClass: "filter-option",
 		activeFilterClass: "active-filter",
-		filterInfoIconClass: "filterInfoIcon"
+		filterInfoIconClass: "filterInfoIcon",
+		
+		percentMappedInfoID: "percent-mapped-info"
 	},
 	init: function(sciMapWidget) {
 		var me = this;
@@ -21,6 +23,7 @@ var DataTableWidget = Class.extend({
 		me.subdisciplineInfo = {};
 		me.disciplineInfo = {};
 		me.widget = '';
+		me.percentMappedDiv = $("#" + me.dom.percentMappedInfoID);
 		me.tableDiv = $('<div />');
 		$("#" + me.dom.containerID).append(this.tableDiv);
 		
@@ -71,9 +74,11 @@ var DataTableWidget = Class.extend({
 	},
 	show: function(key) {
 		this.tableDiv.show();
+		this.percentMappedDiv.show();
 	},
 	hide: function(key) {
 		this.tableDiv.hide();
+		this.percentMappedDiv.hide();
 	},
 	cleanView: function() {
 		this.hide();
@@ -233,7 +238,6 @@ var DataTableWidget = Class.extend({
 		
 		var totalPublications = me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped;
 		$("#mapped-publications").text(addCommasToNumber(me.pubsMapped));
-		$("#percent-mapped-info").show();
 		$("#percent-mapped").text((100 * me.pubsMapped / totalPublications).toFixed(2));
 		$("#total-publications").text(addCommasToNumber(totalPublications));
 		

@@ -17,7 +17,7 @@ corresponding changes in the included Templates. -->
         
 <h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a></span></h2>
 
-<div id="map-of-science-info" class="hide-dom-on-init"> Explore <span id="mapped-publications" style="font-weight: bold"></span> publications activity across 554 scientific sub-disciplines 
+<div id="map-of-science-info" class="hide-dom-on-init"> Explore <span id="mapped-publications" style="font-weight: bold"></span> publications activity across 554 scientific subdisciplines 
 	<img class="filterInfoIcon" id="imageIconOne"  src="${urls.images}/iconInfo.png" 
 		alt="information icon" 
     	title="" /> 
@@ -34,10 +34,10 @@ corresponding changes in the included Templates. -->
         </div>
         
         <div id="warning-notification" class="ui-state-highlight ui-corner-all" >
-        <a class="ui-notify-close ui-notify-cross" href="#">x</a>
-        <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
-            <h1>&#035;{title}</h1>
-            <p>&#035;{text}</p>
+	        <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+	        <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
+	        <h1>&#035;{title}</h1>
+	        <p>&#035;{text}</p>
         </div>
     </div>
     
@@ -53,18 +53,21 @@ corresponding changes in the included Templates. -->
 
 </div>		
 
-<div id="right-column"><div id="map_area"></div>
-<div id="percent-mapped-info">
-mapped <span id="percent-mapped"></span>% of <span id="total-publications"></span> publications
-	<img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo.png" 
-		alt="information icon" 
-		title="" />
-		
+<div id="right-column">
+	<div id="map_area"></div>
+	<div id="percent-mapped-info">
+		mapped <span id="percent-mapped"></span>% of <span id="total-publications"></span> publications
+		<img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="information icon" title="" />
+			
 		<div id="download-unlocated-journal-info">
 			<a href="${entityMapOfScienceUnlocatedJournalsCSVURL}">Save Unmapped Publications</a>
 		</div>
-
+	</div>
+	<br />
+	<div id="subEntityTableArea"></div>
 </div>
+
+
 </div>
 
 <#-- START TOOLTIP TEXT -->
@@ -76,33 +79,33 @@ overlaid on the map of science. This particular page shows the publication activ
 You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science -- <em><b>based solely 
 on publications that have been loaded into this VIVO instance.</b></em><br /><br />
 
-Overlaid circles are larger if ${entityLabel} has many publications in that sub-discipline, and are smaller if ${entityLabel} has 
-fewer publications in that sub-discipline.<br /><br /> 
+Overlaid circles are larger if ${entityLabel} has many publications in that subdiscipline, and are smaller if ${entityLabel} has 
+fewer publications in that subdiscipline.<br /><br /> 
 
-Circles are overlaid on the Map of Science itself, which is made of 554 interconnected sub-disciplines, shown as grey dots here. 
-A sub-discipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 sub-disciplines using 
-similarities in their lists of references and key terms. Sub-disciplines that are especially similar to one another are interconnected, 
+Circles are overlaid on the Map of Science itself, which is made of 554 interconnected subdisciplines, shown as grey dots here. 
+A subdiscipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 subdisciplines using 
+similarities in their lists of references and key terms. Subdisciplines that are especially similar to one another are interconnected, 
 and will be closer to one another on the map.
 <br /><br /> 
 For more information on this and other maps of science, see <a href='http://mapofscience.com'>http://mapofscience.com</a> or 
 <a href='http://scimaps.org'>http://scimaps.org</a></div>
 
 <div id="toolTipTwo" style="display:none;">
-${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 sub-disciplines on the map of science.
+${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 subdisciplines on the map of science.
 <br /><br />
 The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color. 
-Each of these disciplines contains multiple sub-disciplines. You can hover over a discipline in the table below to show 
+Each of these disciplines contains multiple subdisciplines. You can hover over a discipline in the table below to show 
 which overlaid circles it corresponds to on the map.
 <br /><br />
-Each grey dot on the map represents one of the 554 sub-disciplines. A sub-discipline is defined as a cluster of journals. 
+Each grey dot on the map represents one of the 554 subdisciplines. A subdiscipline is defined as a cluster of journals. 
 We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. 
-Sub-disciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. 
-You can hover over a sub-discipline in the table below to show which overlaid circle it corresponds to on the map.
+Subdisciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. 
+You can hover over a subdiscipline in the table below to show which overlaid circle it corresponds to on the map.
 
 <br /><br /> 
 
 <#--
-In the table below, <b># of pubs.</b> column indicates number of publications that fall under a particular field (sub-discipline or 
+In the table below, <b># of pubs.</b> column indicates number of publications that fall under a particular field (subdiscipline or 
 discipline). Sometimes this number will be fractional. This happens when a journal in which the publication was published is associated 
 with more than one (sub)discipline. In these cases, the publication score is fractionally mapped based on the weight scores 
 of the journal.<br /><br />
@@ -111,7 +114,7 @@ of the journal.<br /><br />
 -->
 
 The table below summarizes this institution's body of publications as plotted on the map of science.  
-Each row corresponds to a field (discipline or sub-discipline) on the map.
+Each row corresponds to a field (discipline or subdiscipline) on the map.
 <br /><br />
 
 The <b># of pubs.</b> column shows how many of the publications were mapped to each field.  
@@ -134,8 +137,8 @@ may need to be cleaned up before they are recognized. You may contact a VIVO sys
 concern.</div>
 
 <div id="searchInfoTooltipText" style="display:none;">
-	<!-- Search for specific sub-discipline (or discipline) label in the first column of the table. -->
-	List only sub-disciplines (or disciplines) whose name contains this text.
+	<!-- Search for specific subdiscipline (or discipline) label in the first column of the table. -->
+	List only subdisciplines (or disciplines) whose name contains this text.
 </div>
 
 
@@ -143,8 +146,8 @@ concern.</div>
 
 <div id="comparisonToolTipTwo" style="display:none;">
 The organizations or people listed below are only those which are directly beneath ${entityLabel} in the 
-organization hierarchy. You may 'drill down' to see the organizations or people below a given sub-organization 
-by selecting the chart icon next to a selected sub-organization's name below the graph on the right.
+organization hierarchy. You may 'drill down' to see the organizations or people below a given suborganization 
+by selecting the chart icon next to a selected suborganization's name below the graph on the right.
 <br /><br />
 
 The <b># of pubs.</b> column shows how many of the publications were mapped to each field.  
@@ -157,7 +160,7 @@ The <b>% activity</b> column shows what proportion of the publications were mapp
 </div>
 
 <div id="comparisonSearchInfoTooltipText" style="display:none;">
-	<!-- Search for specific sub-discipline (or discipline) label in the first column of the table. -->
+	<!-- Search for specific subdiscipline (or discipline) label in the first column of the table. -->
 	List only organizations (or people) whose name contains this text.
 </div>
 <#-- END TOOLTIP TEXT -->

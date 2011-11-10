@@ -15,10 +15,10 @@ var ScinodePolygon = CirclePolygon.extend({
 		this.setZIndex(-size);
 	},
 	focus: function() {
-		this.setOptions({strokeWeight: 3.0});
+		this.setOptions({strokeWeight: 1.2, strokeColor: '#000'});
 	},
 	unfocus: function() {
-		this.setOptions({strokeWeight: 1.0});
+		this.setOptions({strokeWeight: 1.0, strokeColor: '#808080'});
 	},
 	setContent: function(content) {
 		this.polygon.content = content;
@@ -49,7 +49,7 @@ function createScinodeMarker(map, label, value, radius, color, latlng) {
 	var circleOptions = {
 		label: label,
 		value: value,
-		strokeColor: '#000',
+		strokeColor: '#808080',
 		strokeOpacity: 1.0,
 		strokeWeight: 1.0,
 		fillColor: color,

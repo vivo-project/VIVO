@@ -35,15 +35,19 @@
 
 <script language="JavaScript" type="text/javascript">
 
+var entityVivoProfileURLPrefix = "${urls.base}/individual?uri=";
+var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/";
 var contextPath = "${urls.base}";
 var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=json&uri=";
 var scienceMapDataURL = scienceMapDataPrefix + "${entityURI}";
+var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=unlocated_journals&uri=";
+
+var imageFolderPrefix = "${urls.images}/visualization/";
+var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
+var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
 
 var infoIconUrl = "${urls.images}/iconInfo.png";
-var imageFolderPrefix = "${urls.images}/visualization/";
-var mapOfScienceImageFolderPrefix  = imageFolderPrefix 
-											+ "mapofscience/";
-var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
+var drillDownIconUrl = "${urls.images}/visualization/mapofscience/vivo-scimap.png";
 											
 var entityLabel = '${entityLabel}';
 
@@ -58,6 +62,7 @@ var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicato
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
 											
 var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot}?labelField=label&vis=entity_comparison&uri=";
+var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=subdiscipline&&uri="
 var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL}";
 var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL}";											
 
@@ -87,6 +92,8 @@ ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/a
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ScimapWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/DataTableWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonScimapWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/SimpleDataTableWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/EntityTablesWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonDataTableWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisModeControllers.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisCommonControl.js"></script>',

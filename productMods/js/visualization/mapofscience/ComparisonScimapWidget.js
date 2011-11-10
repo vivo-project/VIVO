@@ -1,8 +1,8 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 COMPARISON = {
-	"one":{ "name": "one", "color": "#1e90ff"},
-	"two":{ "name": "two", "color": "#ff69b4"},
-	"three":{ "name": "three", "color": "#32cd32"}
+	"one":{ "name": "one", "color": "#99CC00"},
+	"two":{ "name": "two", "color": "#FF9900"},
+	"three":{ "name": "three", "color": "#3399FF"}
 }
 
 COMPARISON_TYPE = {
@@ -127,7 +127,6 @@ var ComparisonScimapWidget = Class.extend({
 		}
 	},
 	loadJsonData: function(data) {
-		this.isUnloaded = false;
 	},
 	loadEntity: function(data) {
 		var me = this;
@@ -190,6 +189,22 @@ var ComparisonScimapWidget = Class.extend({
 		if (compositeManager == this.activeCompositeManager) {
 			// Unfocus all
 			compositeManager.mouseOut(childKey);
+		}
+	},
+	mouseInNode: function(key, childKey, subdisciplineId) {
+		var compositeManager = this.getCompositeManager(key);
+		// Focus if only it is a valid manager
+		if (compositeManager == this.activeCompositeManager) {
+			// Focus all
+			compositeManager.registry.register(childKey).mouseIn(subdisciplineId);
+		}
+	},
+	mouseOutNode: function(key, childKey, subdisciplineId) {
+		var compositeManager = this.getCompositeManager(key);
+		
+		// Unfocus if only it is a valid manager
+		if (compositeManager == this.activeCompositeManager) {
+			compositeManager.registry.register(childKey).mouseOut(subdisciplineId);
 		}
 	},
 	removeManager: function(key, childKey) {

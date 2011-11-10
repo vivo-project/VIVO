@@ -110,7 +110,7 @@ var subOrganizationPublicationTemporalGraphCommonURL = "${subOrganizationPublica
 
 var jsonString = '${jsonContent!}';
 var vivoDefaultNamespace = '${vivoDefaultNamespace!}';
-var organizationLabel = "${organizationLabel}";
+var organizationLabel = '${organizationLabel}';
 var organizationVIVOProfileURL = "${organizationVivoProfileURL}";
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";

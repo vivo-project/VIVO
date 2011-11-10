@@ -13,9 +13,10 @@ var ComparisonDataTableWidget = Class.extend({
 		activeFilterClass: "comparison-active-filter",
 		filterInfoIconClass: "comparisonFilterInfoIcon"
 	},
-	init: function(sciMapWidget) {
+	init: function(sciMapWidget, entityTablesWidget) {
 		var me = this;
 		me.sciMapWidget = sciMapWidget;
+		me.entityTablesWidget = entityTablesWidget;
 		me.widgetType = "COMPARISON_SCIENCE_AREAS";
 		me.currentSelectedFilter = COMPARISON_TYPE.ORGANIZATION;
 		me.widget = '';
@@ -90,7 +91,7 @@ var ComparisonDataTableWidget = Class.extend({
 			scienceAreasTH.html('Person');
 		}
 		
-		var activityCountTH = $('<th>');
+		var activityCountTH = $('<th width="53">');
 		activityCountTH.html('# of pubs.');
 		activityCountTH.attr("id", "activity-count-column");
 
@@ -112,7 +113,7 @@ var ComparisonDataTableWidget = Class.extend({
 			rowsToInsert[i++] = '<tr id="' + index + '" style="color: grey;"><td>' + item.type + '</td>';
 			rowsToInsert[i++] = '<td><input class="chk" type="checkbox" value="' + index + '"/></td>';
 			rowsToInsert[i++] = '<td>' + item.label + '</td>';
-			rowsToInsert[i++] = '<td>' + item.pubs.toFixed(2) + '</td></tr>';
+			rowsToInsert[i++] = '<td>' + item.pubs + '</td></tr>';
 		});
 		
 		tbody.append(rowsToInsert.join(''));
@@ -202,19 +203,10 @@ var ComparisonDataTableWidget = Class.extend({
 		createToolTip($("#comparisonSearchInfoIcon"), $("#comparisonSearchInfoTooltipText").html(), "topLeft");
 		
 		/* Create csv download button */
-		console.log(comparisonScienceMapCsvDataUrlPrefix + me.uri);
 		var csvButton = '<hr class="subtle-hr"/><div id="main-science-areas-table-footer"><a href="' +
 						comparisonScienceMapCsvDataUrlPrefix + me.uri +
 						'" class="map-of-science-links">Save All as CSV</a></div>';
 		me.tableDiv.append(csvButton);
-		
-		/* Create mapping statistic result */
-		var totalPublications = me.pubsWithNoJournals + me.pubsWithInvalidJournals + me.pubsMapped;
-		$("#mapped-publications").text(addCommasToNumber(me.pubsMapped));
-		$("#percent-mapped-info").show();
-		$("#percent-mapped").text((100 * me.pubsMapped / totalPublications).toFixed(2));
-		$("#total-publications").text(addCommasToNumber(totalPublications));
-		
 	},
 	changeFilter: function(filterType) {
 		var me = this;
@@ -232,7 +224,6 @@ var ComparisonDataTableWidget = Class.extend({
 		ACTIVE_DISCIPLINE_SUBDISCIPLINE_FILTER = me.currentSelectedFilter;
 
 		if (me.widget) {
-			me.widget.fnSettings()._iDisplayLength = 10;
 			me.widget.fnDraw();
 			// load one item if no item is selected. Need to be improved
 			if ($("input:checkbox[class=chk]:checked").length == 0) {
@@ -253,15 +244,18 @@ var ComparisonDataTableWidget = Class.extend({
 		// Download data from server and add to markerManager if not gotten already
 		var me = this;
 		var url = scienceMapDataPrefix + uri;
-		downloader.download(url, function(data) {
+		downloader.downloadAndWait(url, function(data) {
 			me.sciMapWidget.loadEntity(data[0]);
 			
 			// This is ugly, need fix!!!
-			$("#comparisonTbody > tr[id=" + index + "]").css("color", me.sciMapWidget.getColor(me.currentSelectedFilter, me.subEntities[index].label));
+			var color = me.sciMapWidget.getColor(me.currentSelectedFilter, me.subEntities[index].label);
+			$("#comparisonTbody > tr[id=" + index + "]").css("color", color);
+			me.entityTablesWidget.loadEntity(data[0], color);
 		});
 	},
 	unloadEntity: function(key, childKey, index) {
 		this.sciMapWidget.unloadEntity(key, childKey);
+		this.entityTablesWidget.unloadEntity(childKey);
 		
 		// This is ugly, need fix!!!
 		$("#comparisonTbody > tr[id=" + index + "]").css("color", "grey");

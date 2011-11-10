@@ -51,6 +51,7 @@ function initMap() {
 	var mapOptions = {
 		center: centerLatLng,
 		zoom: 1,
+		streetViewControl: false,
 		mapTypeControlOptions: {
 		  mapTypeIds: []
 		}

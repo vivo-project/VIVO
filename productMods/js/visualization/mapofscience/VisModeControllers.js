@@ -125,7 +125,8 @@ var ComparisonVisModeController = VisModeController.extend({
 	initWidgets: function(map) {
 		var widgets = {};
 		widgets['scimap'] = new ComparisonScimapWidget(map);
-		widgets['sci_area_table'] = new ComparisonDataTableWidget(widgets['scimap']);
+		widgets['entity_area_table'] = new EntityTablesWidget(widgets['scimap']);
+		widgets['sci_area_table'] = new ComparisonDataTableWidget(widgets['scimap'], widgets['entity_area_table']);
 		
 		this.widgets = widgets;
 	}
