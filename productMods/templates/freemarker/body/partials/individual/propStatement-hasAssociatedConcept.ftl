@@ -12,8 +12,8 @@
      next statement -->
 <#macro showConcept statement>
       <#if statement.vocabularySourceName??>
-          <a href="${statement.concept}">${statement.conceptLabel!statement.conceptName}</a>  (<a href="${statement.vocabularySource}">${statement.vocabularySourceName}</a>)
+          <a href="${profileUrl(statement.concept)}">${statement.conceptLabel!statement.conceptName}</a> (${statement.vocabularySourceName})
       <#else>
-          <a href="${statement.concept}">${statement.conceptLabel!statement.conceptName}</a> 
+          <a href="${profileUrl(statement.concept)}">${statement.conceptLabel!statement.conceptName}</a> 
       </#if>
 </#macro>
