@@ -725,6 +725,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ProxiesAjax</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.accounts.manageproxies.ajax.ManageProxiesAjaxController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProxiesAjax</servlet-name>
+    <url-pattern>/proxiesAjax/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ShowAuth</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowAuthController</servlet-class>
   </servlet>
