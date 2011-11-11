@@ -74,47 +74,35 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
  *
  */
 public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
+	private static String TEMPLATE = "addEditorRoleToPerson.ftl";
 	
-	private Log log = LogFactory.getLog(AddEditorRoleToPersonGenerator.class);
-	private static String template = "addEditorRoleToPerson.ftl";
-	
-    //Should this be overridden
 	@Override
-	protected void setTemplate(EditConfigurationVTwo editConfiguration,
-			VitroRequest vreq) {
-		editConfiguration.setTemplate(template);
-	}
+	String getTemplate(){ return TEMPLATE; }
 
-	//role type will always be set based on particular form
-	public String getRoleType(VitroRequest vreq) {
-		//TODO: Get dynamic way of including vivoweb ontology
+	@Override
+	String getRoleType() {
 		return "http://vivoweb.org/ontology/core#EditorRole";
 	}
 	
-	//Each subclass generator will return its own type of option here:
-	//whether literal hardcoded, based on class group, or subclasses of a specific class
-	//The latter two will apparently lend some kind of uri to objectClassUri ?
-	public RoleActivityOptionTypes getRoleActivityTypeOptionsType(VitroRequest vreq) {
+	@Override
+	public RoleActivityOptionTypes getRoleActivityTypeOptionsType() {
 		return RoleActivityOptionTypes.CHILD_VCLASSES;
 	}
 	
-	//This too will depend on the specific subclass of generator
+	@Override
 	public String getRoleActivityTypeObjectClassUri(VitroRequest vreq) {
 		return "http://purl.org/ontology/bibo/Collection";
 	}
 	
-
 	//Editor role involves hard-coded options for the "right side" of the role or activity
-	protected HashMap<String, String> getRoleActivityTypeLiteralOptions(VitroRequest vreq) {
+	@Override
+	protected HashMap<String, String> getRoleActivityTypeLiteralOptions() {
 		HashMap<String, String> literalOptions = new HashMap<String, String>();
 		literalOptions.put("", "Select type");
 		return literalOptions;
 	}
 
-	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
-	public boolean isShowRoleLabelField(VitroRequest vreq) {
-		return false;
-	}
-
-    
+	/** Do not show the role label field for the AddEditorRoleToPerson form */
+	@Override	
+	boolean isShowRoleLabelField() { return false;	}
 }

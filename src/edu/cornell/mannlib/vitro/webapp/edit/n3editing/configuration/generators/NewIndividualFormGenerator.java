@@ -168,16 +168,11 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	editConfiguration.setPredicateUri(predicateUri);
     	
 		//not concerned about remainder, can move into default obj prop form if required
-		this.isObjectPropForm = true;
-		this.initObjectParameters(vreq);
+		this.isObjectPropForm = true;		
+		objectUri = EditConfigurationUtils.getObjectUri(vreq);
+		
 		this.processObjectPropForm(vreq, editConfiguration);
     }
-
-    
-	private void initObjectParameters(VitroRequest vreq) {
-		//in case of object property
-    	objectUri = EditConfigurationUtils.getObjectUri(vreq);
-	}
 
 	private void processObjectPropForm(VitroRequest vreq, EditConfigurationVTwo editConfiguration) {
     	editConfiguration.setVarNameForObject("objectNotUsed");    	

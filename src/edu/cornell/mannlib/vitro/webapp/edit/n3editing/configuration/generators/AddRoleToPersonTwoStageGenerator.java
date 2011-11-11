@@ -2,52 +2,36 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.lang.StringUtils;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.vivoweb.webapp.util.ModelUtils;
 
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
-
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
-
-import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
-import com.hp.hpl.jena.ontology.OntModel;
-import edu.cornell.mannlib.vitro.webapp.beans.DataProperty;
-import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
+
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
-import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
-import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
-import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
 /**
@@ -68,80 +52,116 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
   ?someActivity rdfs:label "activity title" .
   
   
+  
   Important: This form cannot be directly used as a custom form.  It has parameters that must be set.
   See addClinicalRoleToPerson.jsp for an example.
      
     roleToActivityPredicate and activityToRolePredicate are both dependent on the type of
     the activity itself. For a new statement, the predicate type is not known.
     For an existing statement, the predicate is known but may change based on the type of the activity newly selected.  
-     
+    
+ 
+   bdc34:
+   TODO: figure out what needs to be customized per role form, document it here in comments
+   TODO: rewrite class as an abstract class with simple, documented, required methods to override
+  
+   AddRoleToPersonTwoStageGenerator is abstract, each subclass will need to configure:
+   From the old JSP version:
+   
+   showRoleLabelField boolean
+   roleType URI   
+   roleToActivityPredicate URI
+   activityToRolePredicate URI      
+   roleActivityType_optionsType
+   roleActivityType_objectClassURI
+   roleActivityType_literalOptions
+   
+   For the new generator version:
+    template
  *
  */
-public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurationGenerator {
+public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
 	
 	private Log log = LogFactory.getLog(AddRoleToPersonTwoStageGenerator.class);
-	private boolean isObjectPropForm = false;
-	private String subjectUri = null;
-	private String predicateUri = null;
-	private String objectUri = null;
-	private String datapropKeyStr= null;
-	private int dataHash = 0;
-	private DataPropertyStatement dps = null;
-	private String dataLiteral = null;
-	private String template = "addRoleToPersonTwoStage.ftl";
-	private static HashMap<String,String> defaultsForXSDtypes ;
 	
-	//Types of options to populate drop-down for types for the "right side" of the role
-	public static enum RoleActivityOptionTypes {
-		VCLASSGROUP,
-		CHILD_VCLASSES,
-		HARDCODED_LITERALS
-	};
+    /* ***** Methods that are REQUIRED to be implemented in subclasses ***** */
+
+	/** Freemarker template to use */
+	abstract String getTemplate();
 	
+	/** URI of type for the role context node */ 
+    abstract String getRoleType();
+    
+    /** In the case of literal options, subclass generator will set the options to be returned */
+    abstract HashMap<String, String> getRoleActivityTypeLiteralOptions();
+    
+    /**
+     * Each subclass generator will return its own type of option here:    
+     * whether literal hardcoded, based on class group, or subclasses of a specific class
+     * The latter two will apparently lend some kind of uri to objectClassUri ? */
+    abstract RoleActivityOptionTypes getRoleActivityTypeOptionsType();
+    
+    /** The URI of a Class to use with options if required. An option type like
+     * CHILD_VCLASSES would reqire a role activity object class URI. */
+    abstract String getRoleActivityTypeObjectClassUri(VitroRequest vreq);
+    
+    /** If true an input should be shown on the form for a 
+     * label for the role context node 
+     * TODO: move this to the FTL and have label optional. */
+    abstract boolean isShowRoleLabelField();
+    
+    /** URI of predicate between role context node and activity */
+    //Bdc34: not used anywhere? that's odd
+//    abstract String getActivityToRolePredicate();            
+		
     @Override
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
-    	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {    	
+        EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	    	
+    	initProcessParameters(vreq, session, editConfiguration);
     	
-    	//process subject, predicate, object parameters
-    	this.initProcessParameters(vreq, session, editConfiguration);
+        editConfiguration.setVarNameForSubject("person");               
+        editConfiguration.setVarNameForPredicate("rolePredicate");      
+        editConfiguration.setVarNameForObject("role");
+        
+    	// Required N3
+    	editConfiguration.setN3Required(list(    	            	        
+    	        N3_PREFIX + "\n" +
+    	        "?person ?rolePredicate ?role .\n" +
+    	        "?role a ?roleType .\n"+
+    	        "?role " + getRoleToActivityPlaceholder() + " ?roleActivity .\n"+
+    	        "?roleActivity " + getActivityToRolePlaceholder() + " ?role ."
+    	));    
     	
-      	//Assumes this is a simple case of subject predicate var
-    	editConfiguration.setN3Required(this.generateN3Required(vreq));
-    	    	
-    	//n3 optional
-    	editConfiguration.setN3Optional(this.generateN3Optional());
+    	// Optional N3 
+    	editConfiguration.setN3Optional( list(
+    	        "?role ?inverseRolePredicate ?person .",
+    	        getN3ForActivityLabel(),
+    	        getN3ForActivityType(),                              
+    	        getN3RoleLabelAssertion(),
+    	        getN3ForStart(),
+    	        getN3ForEnd() ));	
+        	    	        
+    	editConfiguration.setNewResources( newResources(vreq) );
     	
-    	//Todo: what do new resources depend on here?
-    	//In original form, these variables start off empty
-    	editConfiguration.setNewResources(generateNewResources(vreq));
     	//In scope
-    	this.setUrisAndLiteralsInScope(editConfiguration, vreq);
+    	setUrisAndLiteralsInScope(editConfiguration, vreq);
     	
     	//on Form
-    	this.setUrisAndLiteralsOnForm(editConfiguration, vreq);
-    	
-    	editConfiguration.setFilesOnForm(new ArrayList<String>());
-    	
+    	setUrisAndLiteralsOnForm(editConfiguration, vreq);
+    	    	
     	//Sparql queries
-    	this.setSparqlQueries(editConfiguration, vreq);
+    	setSparqlQueries(editConfiguration, vreq);
     	
     	//set fields
     	setFields(editConfiguration, vreq, EditConfigurationUtils.getPredicateUri(vreq));
-    	
-    //	No need to put in session here b/c put in session within edit request dispatch controller instead
-    	//placing in session depends on having edit key which is handled in edit request dispatch controller
-    //	editConfiguration.putConfigInSession(editConfiguration, session);
-
-    	prepareForUpdate(vreq, session, editConfiguration);
     	
     	//Form title and submit label now moved to edit configuration template
     	//TODO: check if edit configuration template correct place to set those or whether
     	//additional methods here should be used and reference instead, e.g. edit configuration template could call
     	//default obj property form.populateTemplate or some such method
     	//Select from existing also set within template itself
-    	setTemplate(editConfiguration, vreq);
-    	//Set edit key
-    	setEditKey(editConfiguration, vreq);
+    	editConfiguration.setTemplate(getTemplate());
+    	    	
     	//Add validator
         editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") ); 
         //Add preprocessors
@@ -149,178 +169,76 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
     	return editConfiguration;
-    }
-    
- 
+    }    	
 
-	private void setEditKey(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-    	String editKey = EditConfigurationUtils.getEditKey(vreq);	
-    	editConfiguration.setEditKey(editKey);
-    }
+    private void initProcessParameters(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {    	        
+    	editConfiguration.setFormUrl(EditConfigurationUtils.getFormUrl(vreq));    	
+        editConfiguration.setEntityToReturnTo(EditConfigurationUtils.getSubjectUri(vreq));        
+    }           
     
-	protected void setTemplate(EditConfigurationVTwo editConfiguration,
-			VitroRequest vreq) {
-    	editConfiguration.setTemplate(template);
-		
-	}
-
-	//Initialize setup: process parameters
-	//There will be specialized parameters as well, we may include them here or in a
-	//separate method
-    private void initProcessParameters(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {
-    	String formUrl = EditConfigurationUtils.getFormUrl(vreq);
-
-    	subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
-    	predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
+    /* N3 Required and Optional Generators as well as supporting methods */
     
-    	editConfiguration.setFormUrl(formUrl);
-    	
-    	editConfiguration.setUrlPatternToReturnTo("/individual");
-    	
-    	editConfiguration.setVarNameForSubject("person");
-    	editConfiguration.setSubjectUri(subjectUri);
-    	editConfiguration.setEntityToReturnTo(subjectUri);
-    	editConfiguration.setVarNameForPredicate("rolePredicate");
-    	editConfiguration.setPredicateUri(predicateUri);
-    	//by definition, this is an object property
-		this.initObjectParameters(vreq);
-		this.processObjectPropForm(vreq, editConfiguration);
-    	
-    }
-    
-
-    
-	private void initObjectParameters(VitroRequest vreq) {
-		//in case of object property
-    	objectUri = EditConfigurationUtils.getObjectUri(vreq);
-	}
-
-	private void processObjectPropForm(VitroRequest vreq, EditConfigurationVTwo editConfiguration) {
-    	editConfiguration.setVarNameForObject("role");    	
-    	editConfiguration.setObject(objectUri);
-    	//this needs to be set for the editing to be triggered properly, otherwise the 'prepare' method
-    	//pretends this is a data property editing statement and throws an error
-    	//TODO: Check if null in case no object uri exists but this is still an object property
-    }
-   
-    
-   /*
-    * N3 Required and Optional Generators as well as supporting methods 
-    */
-	
-	private String getPrefixesString() {
-		//TODO: Include dynamic way of including this
-		return "@prefix core: <http://vivoweb.org/ontology/core#> .";
-	}
-	
-	//TODO: Check if single string or multiple strings - check rdfslabel form etc. for prefix
-	//processing
-    private List<String> generateN3Required(VitroRequest vreq) {
-    	List<String> n3ForEdit = new ArrayList<String>();
-    	String editString = getPrefixesString();
-    	editString += "?person ?rolePredicate ?role .";
-    	editString += "?role a <" + getRoleType(vreq) + "> .";
-    	editString += "?role " + getRoleToActivityPredicate(vreq) + " ?roleActivity .";
-    	editString += "?roleActivity " + getActivityToRolePredicate(vreq) + " ?role .";
-    	n3ForEdit.add(editString);
-    	return n3ForEdit;
-    }                  
-    
-	private List<String> generateN3Optional() {
-    	List<String> n3Optional = new ArrayList<String>();
-    	//n3 for activity label
-		n3Optional.add(getN3ForActivityLabel());
-		//n3 for activity type
-		n3Optional.add(getN3ForActivityType());
-		//n3 for inverse
-		n3Optional.add("?role ?inverseRolePredicate ?person .");
-		//N3ForStart
-		n3Optional.addAll(getN3ForStart());
-		//N3 For End
-		n3Optional.addAll(getN3ForEnd());
-		//role label assertion
-		n3Optional.add(getN3RoleLabelAssertion());
-    	return n3Optional;	
-    }
-	
-	
-    public String getN3ForActivityLabel() {
+	private String getN3ForActivityLabel() {
     	return "?roleActivity <" + RDFS.label.getURI() + "> ?activityLabel .";
     }
     
-    public String getN3ForActivityType() {
+    private String getN3ForActivityType() {
     	return "?roleActivity a ?roleActivityType .";
     }
     
-    public String getN3RoleLabelAssertion() {
+    private String getN3RoleLabelAssertion() {
     	return "?role <" + RDFS.label.getURI() + "> ?roleLabel .";
     }
 	
 	//Method b/c used in two locations, n3 optional and n3 assertions
 	private List<String> getN3ForStart() {
 		List<String> n3ForStart = new ArrayList<String>();
-		n3ForStart.add("?role  <" + getRoleToIntervalURI() + "> ?intervalNode ." +     
-			    "?intervalNode  <" + RDF.type.getURI() + "> <" + getIntervalTypeURI() + "> ." + 
-			    "?intervalNode <" + getIntervalToStartURI() + "> ?startNode ." +     
-			    "?startNode  <" + RDF.type.getURI() + "> <" + getDateTimeValueTypeURI() + "> ." + 
-			    "?startNode  <" + getDateTimeValueURI() + "> ?startField-value ." + 
-			    "?startNode  <" + getDateTimePrecisionURI() + "> ?startField-precision .");
+		n3ForStart.add("?role  <" + RoleToIntervalURI + "> ?intervalNode ." +     
+			    "?intervalNode  <" + RDF.type.getURI() + "> <" + IntervalTypeURI + "> ." + 
+			    "?intervalNode <" + IntervalToStartURI + "> ?startNode ." +     
+			    "?startNode  <" + RDF.type.getURI() + "> <" + DateTimeValueTypeURI + "> ." + 
+			    "?startNode  <" + DateTimeValueURI + "> ?startField-value ." + 
+			    "?startNode  <" + DateTimePrecisionURI + "> ?startField-precision .");
 		return n3ForStart;
 	}
 	
 	private List<String> getN3ForEnd() {
 		List<String> n3ForEnd = new ArrayList<String>();
-		n3ForEnd.add("?role      <" + getRoleToIntervalURI() + "> ?intervalNode .  " +   
-			    "?intervalNode  <" + RDF.type.getURI() + "> <" + getIntervalTypeURI() + "> ." + 
-			    "?intervalNode <" + getIntervalToEndURI() + "> ?endNode ." + 
-			    "?endNode  <" + RDF.type.getURI() + "> <" + getDateTimeValueTypeURI() + "> ." + 
-			    "?endNode  <" + getDateTimeValueURI() + "> ?endField-value ." + 
-			    "?endNode  <" + getDateTimePrecisionURI() + "> ?endField-precision .");
-		return n3ForEnd;
-		
+		n3ForEnd.add("?role      <" + RoleToIntervalURI + "> ?intervalNode .  " +   
+			    "?intervalNode  <" + RDF.type.getURI() + "> <" + IntervalTypeURI + "> ." + 
+			    "?intervalNode <" + IntervalToEndURI + "> ?endNode ." + 
+			    "?endNode  <" + RDF.type.getURI() + "> <" + DateTimeValueTypeURI + "> ." + 
+			    "?endNode  <" + DateTimeValueURI + "> ?endField-value ." + 
+			    "?endNode  <" + DateTimePrecisionURI+ "> ?endField-precision .");
+		return n3ForEnd;		
 	}
-	
-	
-	/*
-	 * Get new resources
-	 */
-	 private Map<String, String> generateNewResources(VitroRequest vreq) {
-			HashMap<String, String> newResources = new HashMap<String, String>();
-			//TODO: Get default namespace
-			String defaultNamespace = vreq.getWebappDaoFactory().getDefaultNamespace();
-			newResources.put("role", defaultNamespace + "individual");
-			newResources.put("roleActivity", defaultNamespace + "individual");
-			newResources.put("intervalNode", defaultNamespace + "individual");
-			newResources.put("startNode", defaultNamespace + "individual");
-			newResources.put("endNode", defaultNamespace + "individual");
+		
+	/**  Get new resources	 */
+	 private Map<String, String> newResources(VitroRequest vreq) {					
+			String DEFAULT_NS_TOKEN=null; //null forces the default NS
+			
+			HashMap<String, String> newResources = new HashMap<String, String>();			
+			newResources.put("role", DEFAULT_NS_TOKEN);
+			newResources.put("roleActivity", DEFAULT_NS_TOKEN);
+			newResources.put("intervalNode", DEFAULT_NS_TOKEN);
+			newResources.put("startNode", DEFAULT_NS_TOKEN);
+			newResources.put("endNode", DEFAULT_NS_TOKEN);
 			return newResources;
 		}
-    
-
 	
-	
-	/*
-	 * Set URIS and Literals In Scope and on form and supporting methods
-	 */
-    
+	/** Set URIS and Literals In Scope and on form and supporting methods	 */   
     private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
-    	//note that at this point the subject, predicate, and object var parameters have already been processed
-    	//these two were always set when instantiating an edit configuration object from json,
-    	//although the json itself did not specify subject/predicate as part of uris in scope
-    	urisInScope.put(editConfiguration.getVarNameForSubject(), 
-    			Arrays.asList(new String[]{editConfiguration.getSubjectUri()}));
-    	urisInScope.put(editConfiguration.getVarNameForPredicate(), 
-    			Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
+    	
     	//Setting inverse role predicate
-    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));
+    	urisInScope.put("inverseRolePredicate", getInversePredicate(vreq));    
+    	urisInScope.put("roleType", list( getRoleType() ) );
     	
-    	
-    	editConfiguration.setUrisInScope(urisInScope);
     	//Uris in scope include subject, predicate, and object var
+    	editConfiguration.setUrisInScope(urisInScope);    	
+    	
     	//literals in scope empty initially, usually populated by code in prepare for update
     	//with existing values for variables
-    	editConfiguration.setLiteralsInScope(new HashMap<String, List<Literal>>());
     }
     
     private List<String> getInversePredicate(VitroRequest vreq) {
@@ -332,12 +250,8 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		return inversePredicateArray;
 	}
 
-	//n3 should look as follows
-    //?subject ?predicate ?objectVar 
-    
     private void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-    	List<String> urisOnForm = new ArrayList<String>();
-    	List<String> literalsOnForm = new ArrayList<String>();
+    	List<String> urisOnForm = new ArrayList<String>();    	
     	//add role activity and roleActivityType to uris on form
     	urisOnForm.add("roleActivity");
     	urisOnForm.add("roleActivityType");
@@ -346,119 +260,109 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	urisOnForm.add("roleToActivityPredicate");
     	urisOnForm.add("activityToRolePredicate");
     	editConfiguration.setUrisOnform(urisOnForm);
+    	
     	//activity label and role label are literals on form
+    	List<String> literalsOnForm = new ArrayList<String>();
     	literalsOnForm.add("activityLabel");
     	literalsOnForm.add("roleLabel");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
+    }    
+    
+    /** Set SPARQL Queries and supporting methods. */        
+    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {        
+        //Queries for activity label, role label, start Field value, end Field value
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("activityLabel", getActivityLabelQuery(vreq));
+        map.put("roleLabel", getRoleLabelQuery(vreq));
+        map.put("startField-value", getExistingStartDateQuery(vreq));
+        map.put("endField-value", getExistingEndDateQuery(vreq));
+        
+    	editConfiguration.setSparqlForExistingLiterals(map);
+    	  
+    	//Queries for role activity, activity type query, interval node, 
+    	// start node, end node, start field precision, endfield precision
+        map = new HashMap<String, String>();        
+        map.put("roleActivity", getRoleActivityQuery(vreq));
+        map.put("roleActivityType", getActivityTypeQuery(vreq));
+        map.put("intervalNode", getIntervalNodeQuery(vreq));
+        map.put("startNode", getStartNodeQuery(vreq));
+        map.put("endNode", getEndNodeQuery(vreq));
+        map.put("startField-precision", getStartPrecisionQuery(vreq));
+        map.put("endField-precision", getEndPrecisionQuery(vreq));
+        //Also need sparql queries for roleToActivityPredicate and activityToRolePredicate
+        map.put("roleToActivityPredicate", getRoleToActivityPredicateQuery(vreq));
+        map.put("activityToRolePredicate", getActivityToRolePredicateQuery(vreq));    	            	       
+    	        
+    	editConfiguration.setSparqlForExistingUris(map);
     }
-    
-    
-    /**
-     * Set SPARQL Queries and supporting methods
-     */
-    
-    
-    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-    	//Sparql queries defining retrieval of literals etc.
-    	editConfiguration.setSparqlForAdditionalLiteralsInScope(new HashMap<String, String>());
-    	
-    	Map<String, String> urisInScope = new HashMap<String, String>();
-    	editConfiguration.setSparqlForAdditionalUrisInScope(urisInScope);
-    	
-    	editConfiguration.setSparqlForExistingLiterals(generateSparqlForExistingLiterals(vreq));
-    	editConfiguration.setSparqlForExistingUris(generateSparqlForExistingUris(vreq));
-    }
-    
-    
-    //Get page uri for object
-    private HashMap<String, String> generateSparqlForExistingUris(VitroRequest vreq) {
-    	HashMap<String, String> map = new HashMap<String, String>();
-    	//Queries for role activity, activity type query, interval node, start node, end node, start field precision, endfield precision
-    	map.put("roleActivity", getRoleActivityQuery(vreq));
-    	map.put("roleActivityType", getActivityTypeQuery(vreq));
-    	map.put("intervalNode", getIntervalNodeQuery(vreq));
-    	map.put("startNode", getStartNodeQuery(vreq));
-    	map.put("endNode", getEndNodeQuery(vreq));
-    	map.put("startField-precision", getStartPrecisionQuery(vreq));
-    	map.put("endField-precision", getEndPrecisionQuery(vreq));
-    	//Also need sparql queries for roleToActivityPredicate and activityToRolePredicate
-    	map.put("roleToActivityPredicate", getRoleToActivityPredicateQuery(vreq));
-    	map.put("activityToRolePredicate", getActivityToRolePredicateQuery(vreq));
-
-    	return map;
-    }
-    
+        
     private String getActivityToRolePredicateQuery(VitroRequest vreq) {
     	String query = "SELECT ?existingActivityToRolePredicate \n " + 
 		"WHERE { \n" +
-	      "?roleActivity ?existingActivityToRolePredicate ?role .";
+	      "?roleActivity ?existingActivityToRolePredicate ?role .\n";
 		//Get possible predicates
 		List<String> addToQuery = new ArrayList<String>();
 		List<String> predicates = getPossibleActivityToRolePredicates();
 		for(String p:predicates) {
 			addToQuery.add("(?existingActivityToRolePredicate=<" + p + ">)");
 		}
-		query += "FILTER (" + StringUtils.join(addToQuery, " || ") + ")";
+		query += "FILTER (" + StringUtils.join(addToQuery, " || ") + ")\n";
 		query += "}";
 		return query;
 	}
-
-
 
 	private String getRoleToActivityPredicateQuery(VitroRequest vreq) {
 		String query = "SELECT ?existingRoleToActivityPredicate \n " + 
 		"WHERE { \n" +
-	      "?role ?existingRoleToActivityPredicate ?roleActivity .";
+	      "?role ?existingRoleToActivityPredicate ?roleActivity .\n";
 		//Get possible predicates
 		query += getFilterRoleToActivityPredicate("existingRoleToActivityPredicate");
-		query += "}";
+		query += "\n}";
 		return query;
 	}
 
-
-
 	private String getEndPrecisionQuery(VitroRequest vreq) {
-		String query = "SELECT ?existingEndPrecision WHERE {" +
-		      "?role <" + getRoleToIntervalURI() + "> ?intervalNode ." +
-		    	      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> ." +
-		    	      "?intervalNode <" + getIntervalToEndURI() + "> ?endNode ." +
-		    	      "?endNode <" + VitroVocabulary.RDF_TYPE + "> <" + getDateTimeValueTypeURI() + "> .  " +        
-		    	      "?endNode <" + getDateTimePrecisionURI() + "> ?existingEndPrecision . }";
+		String query = "SELECT ?existingEndPrecision WHERE {\n" +
+		      "?role <" + RoleToIntervalURI + "> ?intervalNode .\n" +
+		    	      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> .\n" +
+		    	      "?intervalNode <" + IntervalToEndURI + "> ?endNode .\n" +
+		    	      "?endNode <" + VitroVocabulary.RDF_TYPE + "> <" + DateTimeValueTypeURI + "> .  \n" +        
+		    	      "?endNode <" + DateTimePrecisionURI + "> ?existingEndPrecision . }";
 		return query;
 	}
 
 	private String getStartPrecisionQuery(VitroRequest vreq) {
-		String query =  "SELECT ?existingStartPrecision WHERE {" +
-	      "?role <" + getRoleToIntervalURI() + "> ?intervalNode ." +
-	    	      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> ." +
-	    	      "?intervalNode <" + getIntervalToStartURI() + "> ?startNode ." +
-	    	      "?startNode <" + VitroVocabulary.RDF_TYPE + "> <" + getDateTimeValueTypeURI() + "> .  " +        
-	    	      "?startNode <" + getDateTimePrecisionURI() + "> ?existingStartPrecision . }";
+		String query =  "SELECT ?existingStartPrecision WHERE {\n" +
+	      "?role <" + RoleToIntervalURI + "> ?intervalNode .\n" +
+	      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> .\n" +
+	      "?intervalNode <" + IntervalToStartURI + "> ?startNode .\n" +
+	      "?startNode <" + VitroVocabulary.RDF_TYPE + "> <" + DateTimeValueTypeURI + "> .  \n" +        
+	      "?startNode <" + DateTimePrecisionURI + "> ?existingStartPrecision . }";
 		return query;
 	}
 
 	private String getEndNodeQuery(VitroRequest vreq) {
-		String query =  "SELECT ?existingEndNode WHERE {"+
-		      "?role <" + getRoleToIntervalURI() + "> ?intervalNode ."+
-		    	      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> ."+
-		    	     " ?intervalNode <" + getIntervalToEndURI() + "> ?existingEndNode . "+
-		    	      "?existingEndNode <" + VitroVocabulary.RDF_TYPE + "> <" + getDateTimeValueTypeURI() + "> .}";      
+		String query =  "SELECT ?existingEndNode WHERE {\n"+
+		      "?role <" + RoleToIntervalURI + "> ?intervalNode .\n"+
+		      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> .\n"+
+		      "?intervalNode <" + IntervalToEndURI + "> ?existingEndNode . \n"+
+		      "?existingEndNode <" + VitroVocabulary.RDF_TYPE + "> <" + DateTimeValueTypeURI + "> .}\n";      
 		return query;
 	}
 
 	private String getStartNodeQuery(VitroRequest vreq) {
-		String query =  "SELECT ?existingStartNode WHERE {"+ 
-		      "?role <" + getRoleToIntervalURI() + "> ?intervalNode ."+ 
-		      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> ."+ 
-		      "?intervalNode <" + getIntervalToStartURI() + "> ?existingStartNode . "+ 
-		      "?existingStartNode <" + VitroVocabulary.RDF_TYPE + "> <" + getDateTimeValueTypeURI() + "> .}";      
+		String query =  "SELECT ?existingStartNode WHERE {\n"+ 
+		      "?role <" + RoleToIntervalURI + "> ?intervalNode .\n"+ 
+		      "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> .\n"+ 
+		      "?intervalNode <" + IntervalToStartURI + "> ?existingStartNode . \n"+ 
+		      "?existingStartNode <" + VitroVocabulary.RDF_TYPE + "> <" + DateTimeValueTypeURI + "> .}";      
 		return query;
 	}
 
 	private String getIntervalNodeQuery(VitroRequest vreq) {
-		String query =  "SELECT ?existingIntervalNode WHERE { " + 
-	          "?role <" + getRoleToIntervalURI() + "> ?existingIntervalNode . " + 
-	          " ?existingIntervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> . }";
+		String query =  "SELECT ?existingIntervalNode WHERE { \n" + 
+	          "?role <" + RoleToIntervalURI + "> ?existingIntervalNode . \n" + 
+	          " ?existingIntervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> . }\n";
 		return query;
 	}
 
@@ -479,7 +383,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 
 		//roleActivityType_optionsType: This gets you whether this is a literal
 		//
-		RoleActivityOptionTypes optionsType = getRoleActivityTypeOptionsType(vreq);
+		RoleActivityOptionTypes optionsType = getRoleActivityTypeOptionsType();
 
 	    // Note that this value is overloaded to specify either object class uri or classgroup uri
 	    String objectClassUri = getRoleActivityTypeObjectClassUri(vreq);
@@ -503,7 +407,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		} else if (RoleActivityOptionTypes.HARDCODED_LITERALS.equals(optionsType)) { 	    
 		  
 			//literal options
-	        HashMap<String, String> typeLiteralOptions = getRoleActivityTypeLiteralOptions(vreq);
+	        HashMap<String, String> typeLiteralOptions = getRoleActivityTypeLiteralOptions();
 	        if (typeLiteralOptions.size() > 0) {           
 	            try {
 	                List<String> typeUris = new ArrayList<String>();
@@ -542,7 +446,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 
 	
 	private String getDefaultActivityTypeQuery(VitroRequest vreq) {
-		String query =   "PREFIX core: <" + getVivoCoreNamespace() + ">\n" +
+		String query =   "PREFIX core: <" + VIVO_NS + ">\n" +
 	    "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
 	    "SELECT ?existingActivityType WHERE { \n" +
 	    "    ?role ?predicate ?existingActivity . \n" +
@@ -553,7 +457,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	}
 
 	private String getSubclassActivityTypeQuery(VitroRequest vreq) {
-		String query = "PREFIX core: <" + getVivoCoreNamespace() + ">\n" +
+		String query = "PREFIX core: <" + VIVO_NS + ">\n" +
 	    "PREFIX rdfs: <" + VitroVocabulary.RDFS + ">\n" +
 	    "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
 	    "SELECT ?existingActivityType WHERE {\n" +
@@ -566,7 +470,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	}
 
 	private String getClassgroupActivityTypeQuery(VitroRequest vreq) {
-		String query = "PREFIX core: <" + getVivoCoreNamespace() + ">\n" +
+		String query = "PREFIX core: <" + VIVO_NS + ">\n" +
 	    "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
 	    "SELECT ?existingActivityType WHERE { \n" +
 	    "    ?role ?predicate ?existingActivity . \n" +
@@ -581,9 +485,8 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	private String getRoleActivityQuery(VitroRequest vreq) {
 		//If role to activity predicate is the default query, then we need to replace with a union
 		//of both realizedIn and the other
-		String query =  "PREFIX core: <" + getVivoCoreNamespace() + ">"; 
-
-		String roleToActivityPredicate = getRoleToActivityPredicate(vreq);
+		String query =  "PREFIX core: <" + VIVO_NS + ">"; 
+		
 		//Portion below for multiple possible predicates
 		List<String> predicates = getPossibleRoleToActivityPredicates();
 		List<String> addToQuery = new ArrayList<String>();
@@ -593,49 +496,38 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		query += "}";
 		return query;
 	}
-
-	private HashMap<String, String> generateSparqlForExistingLiterals(VitroRequest vreq) {
-    	HashMap<String, String> map = new HashMap<String, String>();
-    	//Queries for activity label, role label, start Field value, end Field value
-    	map.put("activityLabel", getActivityLabelQuery(vreq));
-    	map.put("roleLabel", getRoleLabelQuery(vreq));
-    	map.put("startField-value", getExistingStartDateQuery(vreq));
-    	map.put("endField-value", getExistingEndDateQuery(vreq));
-    	return map;
-    }
-
     
     private String getExistingEndDateQuery(VitroRequest vreq) {
     	String query = " SELECT ?existingEndDate WHERE {\n" + 
-    		"?role <" + getRoleToIntervalURI() + "> ?intervalNode .\n" + 
-    		"?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> .\n" + 
-    		"?intervalNode <" + getIntervalToEndURI() + "> ?endNode .\n" + 
-    		"?endNode <" + VitroVocabulary.RDF_TYPE + "> <" + getDateTimeValueTypeURI() + "> .\n" + 
-    		"?endNode <" + getDateTimeValueURI() + "> ?existingEndDate . }";
+    		"?role <" + RoleToIntervalURI + "> ?intervalNode .\n" + 
+    		"?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> .\n" + 
+    		"?intervalNode <" + IntervalToEndURI + "> ?endNode .\n" + 
+    		"?endNode <" + VitroVocabulary.RDF_TYPE + "> <" + DateTimeValueTypeURI + "> .\n" + 
+    		"?endNode <" + DateTimeValueURI + "> ?existingEndDate . }";
     	return query;
 	}
 
 	private String getExistingStartDateQuery(VitroRequest vreq) {
 		String query = "SELECT ?existingDateStart WHERE {\n" + 
-	     "?role <" + getRoleToIntervalURI() + "> ?intervalNode .\n" + 
-	     "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + getIntervalTypeURI() + "> .\n" + 
-	     "?intervalNode <" +  getIntervalToStartURI() + "> ?startNode .\n" + 
-	     "?startNode <" + VitroVocabulary.RDF_TYPE + "> <" + getDateTimeValueTypeURI() + "> .\n" + 
-	     "?startNode <" +  getDateTimeValueURI() + "> ?existingDateStart . }";
+	     "?role <" + RoleToIntervalURI + "> ?intervalNode .\n" + 
+	     "?intervalNode <" + VitroVocabulary.RDF_TYPE + "> <" + IntervalTypeURI + "> .\n" + 
+	     "?intervalNode <" +  IntervalToStartURI+ "> ?startNode .\n" + 
+	     "?startNode <" + VitroVocabulary.RDF_TYPE + "> <" + DateTimeValueTypeURI + "> .\n" + 
+	     "?startNode <" +  DateTimeValueURI + "> ?existingDateStart . }";
 
 	return query;
 	}
 
 	private String getRoleLabelQuery(VitroRequest vreq) {
-		String query = "SELECT ?existingRoleLabel WHERE { ?role  <" + VitroVocabulary.LABEL + "> ?existingRoleLabel . }";
+		String query = "SELECT ?existingRoleLabel WHERE { \n" +
+				"?role  <" + VitroVocabulary.LABEL + "> ?existingRoleLabel . }";
 		return query;
 	}
 
 	private String getActivityLabelQuery(VitroRequest vreq) {
-		String query =  "PREFIX core: <" + getVivoCoreNamespace() + ">" + 
+		String query =  "PREFIX core: <" + VIVO_NS + ">" + 
 		"PREFIX rdfs: <" + RDFS.getURI() + "> \n";
 
-		String roleToActivityPredicate = getRoleToActivityPredicate(vreq);
 		query +=  "SELECT ?existingTitle WHERE { \n" + 
 		"?role ?predicate ?existingActivity . \n" +		
 		"?existingActivity rdfs:label ?existingTitle . \n";
@@ -689,14 +581,9 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	field.setObjectClassUri(null);
     	field.setRangeDatatypeUri(null);
     	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-
-    	fields.put(field.getName(), field);	
-		
+    	field.setLiteralOptions(new ArrayList<List<String>>());    	
+    	fields.put(field.getName(), field);			
 	}
-
-
 
 	private void getRoleToActivityPredicateField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq,
@@ -721,14 +608,10 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	field.setObjectClassUri(null);
     	field.setRangeDatatypeUri(null);
     	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
+    	field.setLiteralOptions(new ArrayList<List<String>>());    	
     
-    	fields.put(field.getName(), field);	
-		
+    	fields.put(field.getName(), field);			
 	}
-
-
 
 	//Label of "right side" of role, i.e. label for role roleIn Activity
 	private void getActivityLabelField(EditConfigurationVTwo editConfiguration,
@@ -756,11 +639,9 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	field.setPredicateUri(null);
     	field.setObjectClassUri(null);
     	field.setRangeDatatypeUri(stringDatatypeUri);
-    	
-    	
+    	    	
     	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-    	
+    	    	
     	fields.put(field.getName(), field);	
 	}
 	
@@ -782,14 +663,14 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	
     	//subjectUri and subjectClassUri are not being used in Field
     	//TODO: Check if this is correct
-    	field.setOptionsType(getRoleActivityTypeOptionsType(vreq).toString());
+    	field.setOptionsType(getRoleActivityTypeOptionsType().toString());
     	//why isn't predicate uri set for data properties?
     	field.setPredicateUri(null);
     	field.setObjectClassUri(getRoleActivityTypeObjectClassUri(vreq));
     	field.setRangeDatatypeUri(null);
     	
     	
-    	HashMap<String, String> literalOptionsMap = getRoleActivityTypeLiteralOptions(vreq);
+    	HashMap<String, String> literalOptionsMap = getRoleActivityTypeLiteralOptions();
     	List<List<String>> fieldLiteralOptions = new ArrayList<List<String>>();
     	Set<String> optionUris = literalOptionsMap.keySet();
     	for(String optionUri: optionUris) {
@@ -826,8 +707,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	fields.put(field.getName(), field);
-		
+    	fields.put(field.getName(), field);	
 	}
 	
 	private void getRoleLabelField(EditConfigurationVTwo editConfiguration,
@@ -840,7 +720,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
-    	if(isShowRoleLabelField(vreq)) {
+    	if(isShowRoleLabelField()) {
     		validators.add("nonempty");
     	}
     	field.setValidators(validators);
@@ -855,11 +735,8 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	    	
-    	fields.put(field.getName(), field);
-		
-	}
-	
-	
+    	fields.put(field.getName(), field);		
+	}	
 
 	private void getStartField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
@@ -887,8 +764,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
                         VitroVocabulary.Precision.YEAR.uri(),
                         VitroVocabulary.Precision.NONE.uri()));   
     	
-    	fields.put(field.getName(), field);
-		
+    	fields.put(field.getName(), field);		
 	}
 
 	private void getEndField(EditConfigurationVTwo editConfiguration,
@@ -917,34 +793,9 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
                          VitroVocabulary.Precision.YEAR.uri(),
                          VitroVocabulary.Precision.NONE.uri()));
     	
-    	fields.put(field.getName(), field);
-		
+    	fields.put(field.getName(), field);		
 	}
-
-	/**
-	 * Prepare edit configuration for update
-	 * @param vreq
-	 * @param session
-	 * @param editConfiguration
-	 */
-	
-	private void prepareForUpdate(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {
-    	//Here, retrieve model from 
-    	Model model = (Model) session.getServletContext().getAttribute("jenaOntModel");
-    	//Object property by definition
-    	String objectUri = EditConfigurationUtils.getObjectUri(vreq);
-    	if(objectUri != null) {
-    		//update existing object
-    		editConfiguration.prepareForObjPropUpdate(model);
-    	}  else {
-    		//new object to be created
-            editConfiguration.prepareForNonUpdate( model );
-        }
-    }
-    
-   
-    //Add preprocessor
-	
+       	
    private void addPreprocessors(EditConfigurationVTwo editConfiguration, WebappDaoFactory wadf) {
 	   //Add preprocessor that will replace the role to activity predicate and inverse
 	   //with correct properties based on the activity type
@@ -952,40 +803,14 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 			   new RoleToActivityPredicatePreprocessor(editConfiguration, wadf));
 	   
 	}
-     
-    /**
-     * Methods that are REQUIRED to be implemented in subclasses
-     **/
-  //role type will always be set based on particular form
-	abstract public String getRoleType(VitroRequest vreq);
-	//In the case of literal options, subclass generator will set the options to be returned
-	abstract protected HashMap<String, String> getRoleActivityTypeLiteralOptions(VitroRequest vreq);
-	//Each subclass generator will return its own type of option here:
-	//whether literal hardcoded, based on class group, or subclasses of a specific class
-	//The latter two will apparently lend some kind of uri to objectClassUri ?
-	abstract public RoleActivityOptionTypes getRoleActivityTypeOptionsType(VitroRequest vreq);
-	//This too will depend on the specific subclass of generator
-	abstract public String getRoleActivityTypeObjectClassUri(VitroRequest vreq);
-	
-	/**
-	 * Methods with default values that may be overwritten when required by a subclass
-	 * Both Default value and method that can be overwritten are included below
-	 **/
-    
-	public boolean isShowRoleLabelField(VitroRequest vreq) {
-		return true;
-	}
-	
-	public String getActivityToRolePredicate(VitroRequest vreq) {
-		return getActivityToRolePlaceholder();
-    }
-    
+   
     //This has a default value, but note that even that will not be used
     //in the update with realized in or contributes to
     //Overridden when need be in subclassed generator
 	//Also note that for now we're going to actually going to return a 
-	//placeholder value by default
+	//placeholder value by default	
 	public String getRoleToActivityPredicate(VitroRequest vreq) {
+	  //TODO: <uri> and ?placeholder are incompatible
 		return getRoleToActivityPlaceholder();
 	}
 	//Ensure when overwritten that this includes the <> b/c otherwise the query won't work
@@ -1000,14 +825,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		return ModelUtils.getPossibleInversePropertiesForRole();
 	}
 	
-	/**
-	 * Methods that check edit mode
-	 */
-	
-	
-	/**Methods for checking edit mode **
-	 * 
-	 */
+	/* Methods that check edit mode	 */	
 	public EditMode getEditMode(VitroRequest vreq) {
 		List<String> roleToGrantPredicates = getPossibleRoleToActivityPredicates();
 		return AddRoleUtils.getEditMode(vreq, roleToGrantPredicates);
@@ -1025,48 +843,18 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	return AddRoleUtils.isRepairMode(getEditMode(vreq));
     }
     
-	/**
-	 * Methods to return URIS for various predicates
-	**/
-	public String getVivoCoreNamespace() {
-		return "http://vivoweb.org/ontology/core#";
-	}
+	/* URIS for various predicates */
+	private final String VIVO_NS="http://vivoweb.org/ontology/core#";
 	
-	public String getRoleToIntervalURI() {
-		return getVivoCoreNamespace() + "dateTimeInterval";
-	}
-	
-	public String getIntervalTypeURI() {
-		return getVivoCoreNamespace() + "DateTimeInterval";
-	}
-	
-	public String getIntervalToStartURI() {
-		return getVivoCoreNamespace() + "start";
-	}
-	
-	public String getIntervalToEndURI() {
-		return getVivoCoreNamespace() + "end";
-	}
-	
-	public String getStartYearPredURI() {
-		return getVivoCoreNamespace() + "startYear";
-	}
-	
-	public String getEndYearPredURI() {
-		return getVivoCoreNamespace() + "endYear";
-	}
-	
-	public String getDateTimeValueTypeURI() {
-		return getVivoCoreNamespace() + "DateTimeValue";
-	}
-	
-	public String getDateTimePrecisionURI() {
-		return getVivoCoreNamespace() + "dateTimePrecision";
-	}
-	
-	public String getDateTimeValueURI() {
-		return getVivoCoreNamespace() + "dateTime";
-	}
+	private final String RoleToIntervalURI =  VIVO_NS + "dateTimeInterval";	
+	private final String IntervalTypeURI =    VIVO_NS + "DateTimeInterval";		
+	private final String IntervalToStartURI = VIVO_NS + "start";		
+	private final String IntervalToEndURI =   VIVO_NS + "end";		
+	private final String StartYearPredURI =   VIVO_NS + "startYear";	
+	private final String EndYearPredURI =     VIVO_NS + "endYear";
+	private final String DateTimeValueTypeURI=VIVO_NS + "DateTimeValue";	
+	private final String DateTimePrecisionURI=VIVO_NS + "dateTimePrecision";	
+	private final String DateTimeValueURI =   VIVO_NS + "dateTime";	
 	
 	//Form specific data
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
@@ -1079,12 +867,11 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		//TODO: Check if this is the proper way to do this?
 		formSpecificData.put("objectSelect", objectSelect);
 		//Also put in show role label field
-		formSpecificData.put("showRoleLabelField", isShowRoleLabelField(vreq));
+		formSpecificData.put("showRoleLabelField", isShowRoleLabelField());
 		//Put in the fact that we require field
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
-	
-	
+		
 	public String getFilterRoleToActivityPredicate(String predicateVar) {
 		String addFilter = "FILTER (";
 		List<String> predicates = getPossibleRoleToActivityPredicates();
@@ -1098,12 +885,20 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		return addFilter;
 	}
 	
-	public String getRoleToActivityPlaceholder() {
+	private String getRoleToActivityPlaceholder() {
 		return "?roleToActivityPredicate";
 	}
 	
-	public String getActivityToRolePlaceholder() {
+	private String getActivityToRolePlaceholder() {
 		return "?activityToRolePredicate";
 	}
-	
+
+	//Types of options to populate drop-down for types for the "right side" of the role
+    public static enum RoleActivityOptionTypes {
+        VCLASSGROUP,
+        CHILD_VCLASSES,
+        HARDCODED_LITERALS
+    };
+    
+	private final String N3_PREFIX = "@prefix core: <http://vivoweb.org/ontology/core#> .";
 }

@@ -144,17 +144,10 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	editConfiguration.setVarNameForPredicate("rolePredicate");
     	editConfiguration.setPredicateUri(predicateUri);
     	//by definition, this is an object property
-		this.initObjectParameters(vreq);
-		this.processObjectPropForm(vreq, editConfiguration);
-    	
-    }
-    
-
-    
-	private void initObjectParameters(VitroRequest vreq) {
-		//in case of object property
     	objectUri = EditConfigurationUtils.getObjectUri(vreq);
-	}
+    	
+		this.processObjectPropForm(vreq, editConfiguration);    	
+    }    
 
 	private void processObjectPropForm(VitroRequest vreq, EditConfigurationVTwo editConfiguration) {
     	editConfiguration.setVarNameForObject("role");    	
