@@ -60,7 +60,7 @@ var SimpleDataTableWidget = Class.extend({
 		var organizationHeader = $('<div><a class="suborganization-title" href="' + 
 				entityVivoProfileURLPrefix + me.uri +'">' + 
 				truncateText(me.label, 23) + '</a><a href="' + entityMapOfScienceURLPrefix + 
-				me.label.replace(/\s+/g, '') + '"><img class="drillDownIcon" src="' + 
+				me.uri + '"><img class="drillDownIcon" src="' + 
 				drillDownIconUrl + '" alt="drill down" title="drill down" /></a></div>');
 		me.tableDiv.append(organizationHeader);
 		
@@ -78,7 +78,7 @@ var SimpleDataTableWidget = Class.extend({
 		
 		var scienceAreasTH = $('<th>');
 		scienceAreasTH.attr("id", "entity-science-areas-th");
-		scienceAreasTH.html('Sub-Disciplines');
+		scienceAreasTH.html('Subdisciplines');
 		
 		var activityCountTH = $('<th width="53">');
 		activityCountTH.html('# of pubs.');

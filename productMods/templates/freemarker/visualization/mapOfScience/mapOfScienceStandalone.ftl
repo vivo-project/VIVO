@@ -43,8 +43,10 @@ corresponding changes in the included Templates. -->
     
     <#-- VIEW TYPE FILTER -->
     <div id="view-type-filter" style="display:${viewTypeFilterDisplay};">
-    	<input type="radio" name="view-type" value="ENTITY"> Explore ${entityLabel} </input><br>
-		<input type="radio" name="view-type" value="COMPARISON"> Compare organizations <#--/ people --></input><br><br>
+    	<input type="radio" name="view-type" value="ENTITY"> Explore ${entityLabel} </input>
+    	<img class="filterInfoIcon" id="exploreInfoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="" /><br>
+		<input type="radio" name="view-type" value="COMPARISON"> Compare organizations <#--/ people --></input>
+		<img class="filterInfoIcon" id="compareInfoIcon" src="${urls.images}/iconInfo.png" alt="information icon" title="" /><br><br>
     </div>
     
     <!-- <h3>What do you want to compare?</h3> -->
@@ -104,15 +106,6 @@ You can hover over a subdiscipline in the table below to show which overlaid cir
 
 <br /><br /> 
 
-<#--
-In the table below, <b># of pubs.</b> column indicates number of publications that fall under a particular field (subdiscipline or 
-discipline). Sometimes this number will be fractional. This happens when a journal in which the publication was published is associated 
-with more than one (sub)discipline. In these cases, the publication score is fractionally mapped based on the weight scores 
-of the journal.<br /><br />
-
-<b>% activity</b> column indicates the percentage of publications that fall under a particular field.
--->
-
 The table below summarizes this institution's body of publications as plotted on the map of science.  
 Each row corresponds to a field (discipline or subdiscipline) on the map.
 <br /><br />
@@ -136,8 +129,15 @@ the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal 
 may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a 
 concern.</div>
 
+<div id="exploreTooltipText" style="display:none;">
+	Overlay and examine expertise profiles for one or more organizations. Color coding by discipline.
+</div>
+
+<div id="compareTooltipText" style="display:none;">
+	Overlay and examine expertise profiles for one or more organizations. Color coding by organization.
+</div>
+
 <div id="searchInfoTooltipText" style="display:none;">
-	<!-- Search for specific subdiscipline (or discipline) label in the first column of the table. -->
 	List only subdisciplines (or disciplines) whose name contains this text.
 </div>
 
@@ -145,17 +145,18 @@ concern.</div>
 <#-- COMPARISON TOOLTIP TEXT -->
 
 <div id="comparisonToolTipTwo" style="display:none;">
-The organizations or people listed below are only those which are directly beneath ${entityLabel} in the 
-organization hierarchy. You may 'drill down' to see the organizations or people below a given suborganization 
-by selecting the chart icon next to a selected suborganization's name below the graph on the right.
+The listed organizations are children of the University of Florida node in the organizational hierarchy. 
+You may 'drill down' to see the organizations below a given sub-organization by selecting the chart icon 
+next to a selected sub-organization's name below the graph on the right.
 <br /><br />
 
-The <b># of pubs.</b> column shows how many of the publications were mapped to each field.  
-This count can be fractional because some publication venues are associated with more than one field.  
-Each publication in such a venue contributes fractionally to all associated fields according to a weighting scheme.
+The <b># of pubs.</b> column shows how many of the publications were mapped to each subdiscipline. This 
+count can be fractional because some publication venues are associated with more than one subdiscipline. 
+Each publication in such a venue contributes fractionally to all associated subdisciplines according to 
+a weighting scheme. 
 
 <br /><br />
-The <b>% activity</b> column shows what proportion of the publications were mapped to each field.
+The <b>% activity</b> column shows what proportion of the publications were mapped to each subdiscipline.
 
 </div>
 

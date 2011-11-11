@@ -91,8 +91,6 @@ var EntityVisModeController = VisModeController.extend({
 	init: function(map) {
 		this._super(map);
 		this.visMode = ENTITY_VIS_MODE;
-		this.firstFilterLabel = "554 Sub-Disciplines";
-		this.secondFilterLabel = "13 Disciplines";
 	},
 	getFilterType: function(value) {
 		if (value === 1) {
@@ -113,8 +111,6 @@ var ComparisonVisModeController = VisModeController.extend({
 	init: function(map) {
 		this._super(map);
 		this.visMode = COMPARISON_VIS_MODE;
-		this.firstFilterLabel = "Organizations";
-		this.secondFilterLabel = "People";
 	},
 	getFilterType: function(value) {
 		if (value === 1) {

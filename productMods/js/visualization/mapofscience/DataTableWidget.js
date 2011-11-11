@@ -3,6 +3,9 @@
 var DataTableWidget = Class.extend({
 	
 	dom: {
+		firstFilterLabel: "554 Subdisciplines",
+		secondFilterLabel: "13 Disciplines",
+		
 		searchBarParentContainerClass: "searchbar",
 		paginationContainerClass: "paginatedtabs",
 		containerID: "main-science-areas-table-container",
@@ -100,8 +103,8 @@ var DataTableWidget = Class.extend({
 		
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter">' +
-				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">Sub-Disciplines</span> | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">Disciplines</span>' +
+				'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span> | ' +
+		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 		    	'<img class="'+ dom.filterInfoIconClass +'" id="imageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);
 		createToolTip($("#imageIconTwo"), $('#toolTipTwo').html(), "topLeft");
@@ -120,7 +123,7 @@ var DataTableWidget = Class.extend({
 		var scienceAreasTH = $('<th>');
 		scienceAreasTH.attr("id", "science-areas-th");
 		if (this.currentSelectedFilter === SCIMAP_TYPE.SUBDISCIPLINE ) {
-			scienceAreasTH.html('Sub-Disciplines');
+			scienceAreasTH.html('Subdisciplines');
 		} else {
 			scienceAreasTH.html('Disciplines');
 		}
@@ -246,7 +249,7 @@ var DataTableWidget = Class.extend({
 		var me = this;
 		if (filterType === SCIMAP_TYPE.SUBDISCIPLINE) {
 			
-			$("#science-areas-th").html("Sub-Disciplines");
+			$("#science-areas-th").html("Subdisciplines");
 			if (me.widget) {
 				me.widget.fnSettings()._iDisplayLength = 10;
 			}

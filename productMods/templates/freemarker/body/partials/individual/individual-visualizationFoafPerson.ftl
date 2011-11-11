@@ -17,8 +17,8 @@
     
     <section id="visualization" role="region">
         <#if isAuthor>
-            <#assign coAuthorIcon = "${urls.images}/visualization/co_author_icon.png">
-            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/vivo-scimap.png">
+            <#assign coAuthorIcon = "${urls.images}/visualization/coauthorship/co_author_icon.png">
+            <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
             <#assign coAuthorVisUrl = individual.coAuthorVisUrl()>
             <#assign mapOfScienceVisUrl = individual.mapOfScienceUrl()>
             
@@ -62,7 +62,7 @@
         
         <#if isInvestigator>
             <#assign coInvestigatorVisUrl = individual.coInvestigatorVisUrl()>
-            <#assign coInvestigatorIcon = "${urls.images}/visualization/co_investigator_icon.png">
+            <#assign coInvestigatorIcon = "${urls.images}/visualization/coauthorship/co_investigator_icon.png">
             
             <div id="coinvestigator_link_container" class="collaboratorship-link-container">
                 <div class="collaboratorship-icon">

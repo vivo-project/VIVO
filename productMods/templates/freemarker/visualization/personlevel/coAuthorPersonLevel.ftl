@@ -29,7 +29,7 @@
 <#assign coAuthorPersonLevelJavaScript = '${urls.base}/js/visualization/coauthorship/coauthorship-personlevel.js'>
 <#assign commonPersonLevelJavaScript = '${urls.base}/js/visualization/personlevel/person-level.js'>
 
-<#assign coInvestigatorIcon = '${urls.images}/visualization/co_investigator_icon.png'>
+<#assign coInvestigatorIcon = '${urls.images}/visualization/coauthorship/co_investigator_icon.png'>
 
 
 <script type="text/javascript" src="${adobeFlashDetector}"></script>

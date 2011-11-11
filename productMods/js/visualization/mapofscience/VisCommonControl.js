@@ -87,6 +87,8 @@ function initVisModeTypeButton() {
 function initGlobalToolTips() {
 
 	createToolTip($("#imageIconOne"), $('#toolTipOne').html(), "topLeft");
+	createToolTip($("#exploreInfoIcon"), $('#exploreTooltipText').html(), "topLeft");
+	createToolTip($("#compareInfoIcon"), $('#compareTooltipText').html(), "topLeft");
 	createToolTip($("#imageIconThree"), $('#toolTipThree').html(), "topRight");
 }
 

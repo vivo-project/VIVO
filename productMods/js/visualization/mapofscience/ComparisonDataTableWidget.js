@@ -3,6 +3,9 @@
 var ComparisonDataTableWidget = Class.extend({
 	
 	dom: {
+		firstFilterLabel: "Organizations",
+		secondFilterLabel: "People",
+		
 		searchBarParentContainerClass : "comparisonSearchbar",
 		paginationContainerClass : "paginatedtabs",
 		containerID: "main-science-areas-table-container",
@@ -59,10 +62,10 @@ var ComparisonDataTableWidget = Class.extend({
 		/* Create filter */
 		var dom = me.dom;
 		var filter = $('<div class="science-areas-filter">' +
-	    	'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">Organizations</span>'+
+	    	'<span id="' + dom.firstFilterID + '" class="' + dom.filterOptionClass + ' ' + dom.activeFilterClass + '">' + dom.firstFilterLabel + '</span>'+
 	    	/* This is temporary removed due to the person's publications mapping rate is too low to be displayed.
 		    	' | ' +
-		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">People</span>' +
+		    	'<span id="' + dom.secondFilterID + '" class="' + dom.filterOptionClass + '">' + dom.secondFilterLabel + '</span>' +
 	    	*/
 	    	'<img class="' + dom.filterInfoIconClass + '" id="comparisonImageIconTwo" src="'+ infoIconUrl +'" alt="information icon" title="" /></div>');
 		me.tableDiv.append(filter);

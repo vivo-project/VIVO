@@ -75,7 +75,7 @@ span.incomplete-data-holder,
     padding-left: 1.6em;
 }
 .temporal-graph {
-    background: url(../../images/visualization/temporal_vis_small_icon.jpg) top left no-repeat;
+    background: url(../../images/visualization/temporalgraph/temporal_graph_icon.png) top left no-repeat;
 }
 .infoIcon {
     padding-right:30px;

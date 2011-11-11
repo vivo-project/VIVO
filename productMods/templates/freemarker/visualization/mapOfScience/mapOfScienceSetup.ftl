@@ -25,7 +25,7 @@
 
 </#if>
 
-<#assign mapOfScienceIcon = '${urls.images}/visualization/mapofscience/vivo-scimap.png'>
+<#assign mapOfScienceIcon = '${urls.images}/visualization/mapofscience/scimap_icon.png'>
 
 <#assign entityMapOfScienceDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=json">
 
@@ -36,7 +36,7 @@
 <script language="JavaScript" type="text/javascript">
 
 var entityVivoProfileURLPrefix = "${urls.base}/individual?uri=";
-var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}/";
+var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}?uri=";
 var contextPath = "${urls.base}";
 var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=json&uri=";
 var scienceMapDataURL = scienceMapDataPrefix + "${entityURI}";
@@ -47,7 +47,7 @@ var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
 var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
 
 var infoIconUrl = "${urls.images}/iconInfo.png";
-var drillDownIconUrl = "${urls.images}/visualization/mapofscience/vivo-scimap.png";
+var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";
 											
 var entityLabel = '${entityLabel}';
 
