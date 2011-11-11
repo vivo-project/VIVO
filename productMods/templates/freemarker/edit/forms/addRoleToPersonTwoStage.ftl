@@ -111,7 +111,7 @@
        
    <div class="fullViewOnly">        
             <p>
-                <label for="relatedIndLabel">${roleDescriptor?capitalize} Name ${requiredHint}</label>
+                <label for="relatedIndLabel">### Name ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="activityLabel"  value="${activityLabelValue}" 
                 <#if disabledVal?has_content>
                 	disabled=${disabledVal}
