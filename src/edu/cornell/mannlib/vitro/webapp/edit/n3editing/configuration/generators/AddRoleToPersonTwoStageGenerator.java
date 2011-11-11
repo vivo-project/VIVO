@@ -100,9 +100,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 	
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
-    	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
-    	//Set n3 generator
-    	editConfiguration.setN3Generator(new EditN3GeneratorVTwo(editConfiguration));
+    	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	
     	
     	//process subject, predicate, object parameters
     	this.initProcessParameters(vreq, session, editConfiguration);
@@ -203,9 +201,6 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	//this needs to be set for the editing to be triggered properly, otherwise the 'prepare' method
     	//pretends this is a data property editing statement and throws an error
     	//TODO: Check if null in case no object uri exists but this is still an object property
-    	if(objectUri != null) {
-    		editConfiguration.setObjectResource(true);
-    	}
     }
    
     
@@ -229,9 +224,8 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	editString += "?roleActivity " + getActivityToRolePredicate(vreq) + " ?role .";
     	n3ForEdit.add(editString);
     	return n3ForEdit;
-    }
+    }                  
     
-   
 	private List<String> generateN3Optional() {
     	List<String> n3Optional = new ArrayList<String>();
     	//n3 for activity label
@@ -680,8 +674,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		String stringDatatypeUri = XSD.xstring.toString();
 		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);
+    	field.setName(fieldName);    	
     	//queryForExisting is not being used anywhere in Field
     	
     	//Not really interested in validators here
@@ -698,10 +691,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add("?roleActivity ?activityToRolePredicate ?role .");
-    	field.setAssertions(assertions);
+
     	fields.put(field.getName(), field);	
 		
 	}
@@ -716,8 +706,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		String stringDatatypeUri = XSD.xstring.toString();
 		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);
+    	field.setName(fieldName);    	
     	//queryForExisting is not being used anywhere in Field
     	
     	//Not really interested in validators here
@@ -734,10 +723,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add("?role ?roleToActivityPredicate ?roleActivity .");
-    	field.setAssertions(assertions);
+    
     	fields.put(field.getName(), field);	
 		
 	}
@@ -752,10 +738,8 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		String stringDatatypeUri = XSD.xstring.toString();
 		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);
-    	//queryForExisting is not being used anywhere in Field
-    	
+    	field.setName(fieldName);    	
+    	//queryForExisting is not being used anywhere in Field    	
     	
     	List<String> validators = new ArrayList<String>();
     	//If add mode or repair, etc. need to add label required validator
@@ -776,10 +760,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add(getN3ForActivityLabel());
-    	field.setAssertions(assertions);
+    	
     	fields.put(field.getName(), field);	
 	}
 	
@@ -791,10 +772,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		//get range data type uri and range language
 		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(true);
-    	//queryForExisting is not being used anywhere in Field
-    	
+    	field.setName(fieldName);    	
     	
     	List<String> validators = new ArrayList<String>();
     	if(isAddMode(vreq) || isRepairMode(vreq)) {
@@ -822,10 +800,6 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	}
     	field.setLiteralOptions(fieldLiteralOptions);
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add(getN3ForActivityType());
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);
 		
 	}    
@@ -837,8 +811,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		//get range data type uri and range language
 		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(true);    	
+    	field.setName(fieldName);    	
     	
     	List<String> validators = new ArrayList<String>();
     	field.setValidators(validators);
@@ -853,14 +826,6 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	//N3ForRoleToActivity
-    	String n3ForRoleToActivity = "@prefix core: <" + getVivoCoreNamespace() + "> ." +     
-        "?role " + getRoleToActivityPredicate(vreq) + " ?roleActivity ." +
-        "?roleActivity " + getActivityToRolePredicate(vreq) + " ?role .";   
-    	assertions.add(n3ForRoleToActivity);
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);
 		
 	}
@@ -870,10 +835,8 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		String fieldName = "roleLabel";
 		String stringDatatypeUri = XSD.xstring.toString();
 
-		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);    	
+    	field.setName(fieldName);  
     	
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
@@ -891,11 +854,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	field.setRangeDatatypeUri(stringDatatypeUri);
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add(getN3RoleLabelAssertion());
-    	field.setAssertions(assertions);
+    	    	
     	fields.put(field.getName(), field);
 		
 	}
@@ -907,8 +866,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		String fieldName = "startField";
 
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);    	
+    	field.setName(fieldName);    	    
     	
     	List<String> validators = new ArrayList<String>();
     	field.setValidators(validators);
@@ -922,12 +880,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	field.setRangeDatatypeUri(null);
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.addAll(getN3ForStart());
-    	field.setAssertions(assertions);
-    	
+    	    	
     	//This logic was originally after edit configuration object created from json in original jsp
     	field.setEditElement(
                 new DateTimeWithPrecisionVTwo(field, 
@@ -943,8 +896,7 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
 		String fieldName = "endField";
 
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);    	
+    	field.setName(fieldName);    	
     	
     	List<String> validators = new ArrayList<String>();
     	field.setValidators(validators);
@@ -959,10 +911,6 @@ public abstract class AddRoleToPersonTwoStageGenerator implements EditConfigurat
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.addAll(getN3ForEnd());
-    	field.setAssertions(assertions);
     	//Set edit element
     	 field.setEditElement(
                  new DateTimeWithPrecisionVTwo(field, 

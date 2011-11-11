@@ -67,8 +67,6 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
     	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
-    	//Set n3 generator
-    	editConfiguration.setN3Generator(new EditN3GeneratorVTwo(editConfiguration));
     	
     	//process subject, predicate, object parameters
     	this.initProcessParameters(vreq, session, editConfiguration);
@@ -187,13 +185,11 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	//this needs to be set for the editing to be triggered properly, otherwise the 'prepare' method
     	//pretends this is a data property editing statement and throws an error
     	//TODO: Check if null in case no object uri exists but this is still an object property
-    	if(objectUri != null) {
-    		editConfiguration.setObjectResource(true);
-    	}
+
     }
     
     private void processDataPropForm(VitroRequest vreq, EditConfigurationVTwo editConfiguration) {
-    	editConfiguration.setObjectResource(false);
+
     	//set data prop value, data prop key str, 
     	editConfiguration.setDatapropKey((datapropKeyStr==null)?"":datapropKeyStr);
     	editConfiguration.setVarNameForObject(dataLiteral);
@@ -297,8 +293,7 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     private void getLastNameField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
     	FieldVTwo field = new FieldVTwo();
-    	field.setName("lastName");
-    	field.setNewResource(false);
+    	field.setName("lastName");    	
     	//queryForExisting is not being used anywhere in Field
 		String stringDatatypeUri = XSD.xstring.toString();
 
@@ -319,9 +314,6 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);
 		
 	}
@@ -329,8 +321,7 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
 	private void getFirstNameField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
 		FieldVTwo field = new FieldVTwo();
-    	field.setName("firstName");
-    	field.setNewResource(false);
+    	field.setName("firstName");    	
     	//queryForExisting is not being used anywhere in Field
 		String stringDatatypeUri = XSD.xstring.toString();
 
@@ -351,9 +342,6 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);
 		
 		
@@ -362,8 +350,7 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
 	private void getLabelField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
     	FieldVTwo field = new FieldVTwo();
-    	field.setName("label");
-    	field.setNewResource(false);
+    	field.setName("label");    	
     	//queryForExisting is not being used anywhere in Field
 		String stringDatatypeUri = XSD.xstring.toString();
 
@@ -384,9 +371,6 @@ public class NewIndividualFormGenerator implements EditConfigurationGenerator {
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);
 		
 	}

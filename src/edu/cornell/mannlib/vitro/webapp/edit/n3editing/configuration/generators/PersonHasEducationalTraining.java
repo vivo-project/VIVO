@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -113,57 +114,48 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addField( new FieldVTwo().                        
                 setName("degree").
                 setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
-                setObjectClassUri( degreeClass ).
-                setAssertions( degreeAssertion ));
+                setObjectClassUri( degreeClass ));
 
         conf.addField( new FieldVTwo().
                 setName("majorField").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setAssertions( majorFieldAssertion ));
+                setRangeDatatypeUri( XSD.xstring.toString() ));
                 //setValidators( ) datatype:stringDatatypeUriJson                        
         
         conf.addField( new FieldVTwo().
                 setName("org").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( orgClass ).
-                setAssertions( n3ForEdTrainingToOrg ));
+                setObjectClassUri( orgClass ));
                 //setLiteralOptions( [ "Select One" } )
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ).
-                setAssertions( orgLabelAssertion));
+                setRangeDatatypeUri(XSD.xstring.toString() ));
                 //setValidators( ["nonempty"] )
                 
         conf.addField( new FieldVTwo().
                 setName("orgType").
                 setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri( orgClass ). 
-                setAssertions( orgTypeAssertion ));
+                setObjectClassUri( orgClass ));
                 //setValidators( ["nonempty"])
                 //setLiteralOptions( [ "Select one" ] )
                 
         conf.addField( new FieldVTwo().
                 setName("dept").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setAssertions( deptAssertion ));
+                setRangeDatatypeUri( XSD.xstring.toString() ));
                 
         conf.addField( new FieldVTwo().
                 setName("info").
-                setRangeDatatypeUri( XSD.xstring.toString() ).
-                setAssertions( infoAssertion));
+                setRangeDatatypeUri( XSD.xstring.toString() ));
 
         conf.addField(new FieldVTwo().
-            setName("startField").            
-            setAssertions(n3ForStart).
+            setName("startField").                        
             setEditElement(
                     new DateTimeWithPrecisionVTwo(null, 
                     VitroVocabulary.Precision.YEAR.uri(),
                     VitroVocabulary.Precision.NONE.uri())));
                         
         conf.addField( new FieldVTwo().
-                setName("endField").
-                setAssertions(n3ForEnd).
+                setName("endField").                
                 setEditElement(
                         new DateTimeWithPrecisionVTwo(null, 
                         VitroVocabulary.Precision.YEAR.uri(),
@@ -230,7 +222,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String orgLabelQuery  =      
         "SELECT ?existingOrgLabel WHERE {\n"+
         "?edTraining <"+ trainingAtOrg +"> ?existingOrg .\n"+
-        "?existingOrg "+ label +" ?existingOrgLabel .\n"+
+        "?existingOrg <"+ label +"> ?existingOrgLabel .\n"+
         "}";
 
     /* Limit type to subclasses of foaf:Organization. Otherwise, sometimes owl:Thing or another
@@ -240,12 +232,12 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "SELECT ?existingOrgType WHERE {\n"+
         "?edTraining <"+ trainingAtOrg +"> ?existingOrg .\n"+
         "?existingOrg a ?existingOrgType .\n"+
-        "?existingOrgType rdfs:subClassOf "+ orgClass +" .\n"+
+        "?existingOrgType rdfs:subClassOf <"+ orgClass +"> .\n"+
         "}";
 
     final static String degreeQuery  =      
         "SELECT ?existingDegree WHERE {\n"+
-        "?edTraining "+ degreeEarned +" ?existingDegree . }";
+        "?edTraining <"+ degreeEarned +"> ?existingDegree . }";
 
     final static String majorFieldQuery  =  
         "SELECT ?existingMajorField WHERE {\n"+

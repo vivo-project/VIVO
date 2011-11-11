@@ -63,8 +63,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
     	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
-    	//Set n3 generator
-    	editConfiguration.setN3Generator(new EditN3GeneratorVTwo(editConfiguration));
     	
     	//process subject, predicate, object parameters
     	this.initProcessParameters(vreq, session, editConfiguration);
@@ -163,10 +161,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	editConfiguration.setObject(objectUri);
     	//this needs to be set for the editing to be triggered properly, otherwise the 'prepare' method
     	//pretends this is a data property editing statement and throws an error
-    	//TODO: Check if null in case no object uri exists but this is still an object property
-    	if(objectUri != null) {
-    		editConfiguration.setObjectResource(true);
-    	}
+    	//TODO: Check if null in case no object uri exists but this is still an object property    	
     }
    
     
@@ -465,7 +460,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		
 		FieldVTwo field = new FieldVTwo();
     	field.setName(fieldName);
-    	field.setNewResource(false);
     	//queryForExisting is not being used anywhere in Field
     	
     	List<String> validators = new ArrayList<String>();
@@ -481,10 +475,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add(getN3ForGrantRole(vreq));
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);	
 		
 	}
@@ -497,7 +487,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		
 		FieldVTwo field = new FieldVTwo();
     	field.setName(fieldName);
-    	field.setNewResource(false);
     	//queryForExisting is not being used anywhere in Field
     	
     	//Not really interested in validators here
@@ -517,12 +506,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	field.setRangeDatatypeUri(null);
     	
     	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.add(getN3ForGrantLabel(vreq));
-    	assertions.add(getN3ForGrantRole(vreq));
-    	field.setAssertions(assertions);
+
     	fields.put(field.getName(), field);	
 		
 	}
@@ -534,8 +518,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		String fieldName = "existingGrantLabel";
 		
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);
+    	field.setName(fieldName);    	
     	//queryForExisting is not being used anywhere in Field
     	
     	//Not really interested in validators here
@@ -551,9 +534,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	field.setRangeDatatypeUri(null);
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	field.setAssertions(assertions);
     	fields.put(field.getName(), field);	
 	}
 
@@ -562,8 +542,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		String fieldName = "startField";
 
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);    	
+    	field.setName(fieldName);    	    
     	
     	List<String> validators = new ArrayList<String>();
     	field.setValidators(validators);
@@ -576,12 +555,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	field.setObjectClassUri(null);
     	field.setRangeDatatypeUri(null);
     	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.addAll(getN3ForStart());
-    	field.setAssertions(assertions);
+    	field.setLiteralOptions(new ArrayList<List<String>>());    	
     	
     	//This logic was originally after edit configuration object created from json in original jsp
     	field.setEditElement(
@@ -598,8 +572,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		String fieldName = "endField";
 
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);
-    	field.setNewResource(false);    	
+    	field.setName(fieldName);    	
     	
     	List<String> validators = new ArrayList<String>();
     	field.setValidators(validators);
@@ -614,10 +587,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	//empty
     	field.setLiteralOptions(new ArrayList<List<String>>());
     	
-    	//set assertions
-    	List<String> assertions = new ArrayList<String>();
-    	assertions.addAll(getN3ForEnd());
-    	field.setAssertions(assertions);
     	//Set edit element
     	 field.setEditElement(
                  new DateTimeWithPrecisionVTwo(field, 
