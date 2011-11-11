@@ -17,7 +17,7 @@ corresponding changes in the included Templates. -->
         
 <h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a></span></h2>
 
-<div id="map-of-science-info" class="hide-dom-on-init"> Explore <span id="mapped-publications" style="font-weight: bold"></span> publications activity across 554 scientific subdisciplines 
+<div id="map-of-science-info" class="hide-dom-on-init"> Explore activity (<span id="mapped-publications" style="font-weight: bold"></span> publications) across 554 scientific subdisciplines 
 	<img class="filterInfoIcon" id="imageIconOne"  src="${urls.images}/iconInfo.png" 
 		alt="information icon" 
     	title="" /> 
@@ -75,62 +75,60 @@ corresponding changes in the included Templates. -->
 <#-- START TOOLTIP TEXT -->
 
 <div id="toolTipOne" style="display:none;">
-VIVO's Map of Science visualization shows the publication activity of any organization, person, or university in a VIVO instance, 
-overlaid on the map of science. This particular page shows the publication activity of ${entityLabel}.<br /> <br /> 
+The Map of Science visualization shows the publication activity of any organization, person, or university in 
+a VIVO instance mapped by the area of science or subdiscipline being researched.<br /> <br /> 
 
-You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science -- <em><b>based solely 
-on publications that have been loaded into this VIVO instance.</b></em><br /><br />
+You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science, 
+<em><b>although only publications that have been loaded into this VIVO site will appear.</b></em><br /><br />
 
-Overlaid circles are larger if ${entityLabel} has many publications in that subdiscipline, and are smaller if ${entityLabel} has 
-fewer publications in that subdiscipline.<br /><br /> 
-
-Circles are overlaid on the Map of Science itself, which is made of 554 interconnected subdisciplines, shown as grey dots here. 
-A subdiscipline is defined as a cluster of journals. The Map of Science groups over 16,000 journals into 554 subdisciplines using 
-similarities in their lists of references and key terms. Subdisciplines that are especially similar to one another are interconnected, 
-and will be closer to one another on the map.
+Colored circles are drawn for subdisciplines where the organization has publications. The more publications the 
+organization has, the larger the circle drawn. Those subdisciplines without any publications are marked in gray.
 <br /><br /> 
+
+Circles are overlaid on the Map of Science, which is made of 554 interconnected subdisciplines, shown as grey 
+dots here. A subdiscipline is defined as a cluster of journals that share a common topic. The Map of Science 
+groups over 16,000 journals into 554 subdisciplines using similarities in their lists of references and key 
+terms. Subdisciplines that are especially similar to one another are connected by lines, and will be closer to 
+one another on the map.<br /><br /> 
+
 For more information on this and other maps of science, see <a href='http://mapofscience.com'>http://mapofscience.com</a> or 
 <a href='http://scimaps.org'>http://scimaps.org</a></div>
 
 <div id="toolTipTwo" style="display:none;">
-${entityLabel}'s publication activity can be categorized into 13 disciplines or 554 subdisciplines on the map of science.
-<br /><br />
-The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own color. 
-Each of these disciplines contains multiple subdisciplines. You can hover over a discipline in the table below to show 
-which overlaid circles it corresponds to on the map.
-<br /><br />
-Each grey dot on the map represents one of the 554 subdisciplines. A subdiscipline is defined as a cluster of journals. 
-We grouped over 16,000 journals into 554 disciplines using similarities in their lists of references and key terms. 
-Subdisciplines that are especially similar to one another are connected by lines, and are closer to one another on the map. 
-You can hover over a subdiscipline in the table below to show which overlaid circle it corresponds to on the map.
+Any organization's publication activity can be categorized into 13 disciplines or 554 subdisciplines on the map 
+of science.<br /><br />
 
-<br /><br /> 
+The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own 
+color. Each of these disciplines contains multiple subdisciplines. You can switch between the discipline and 
+subdiscipline view. You also can hover over a discipline (or subdiscipline) in the table below to show which 
+overlaid circles it corresponds to on the map.  The selected dot will have a darker ring around it than the 
+thers.<br /><br />
 
-The table below summarizes this institution's body of publications as plotted on the map of science.  
-Each row corresponds to a field (discipline or subdiscipline) on the map.
-<br /><br />
+The table below summarizes the organization's body of publications as plotted on the map of science. Each row 
+corresponds to a field (discipline or subdiscipline) on the map.<br /><br />
 
-The <b># of pubs.</b> column shows how many of the publications were mapped to each field.  
-This count can be fractional because some publication venues are associated with more than one field.  
-Each publication in such a venue contributes fractionally to all associated fields according to a weighting scheme.
+The <b># of pubs.</b> column shows how many of the publications were mapped to each discipline or subdiscipline. 
+This count can be fractional because some publication venues are associated with more than one. Each publication 
+in such a venue contributes fractionally to all associated discipline or subciscipline according to an assigned 
+weight.<br /><br />
 
-<br /><br />
-The <b>% activity</b> column shows what proportion of the publications were mapped to each field.
+The <b>% of activity</b> column shows what proportion of the publications were mapped to each discipline or 
+subdiscipline.
 
 </div>
 
 <div id="toolTipThree" style="display:none;">
-This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and therefore it may not be 
-fully representative of the overall publication activity for ${entityLabel}.<br /><br />
+This visualization is based on the publications we were able to 'science locate' for ${entityLabel}, and 
+therefore it may not be fully representative of the overall publication activity for ${entityLabel}.<br /><br />
 
-The publication coverage of this visualization can be improved by including more publication data in the VIVO system, and by 
-ensuring that each publication in the VIVO system is associated with a journal that the Map of Science recognizes (based on 
-the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal names containing typos or other idiosyncrasies 
-may need to be cleaned up before they are recognized. You may contact a VIVO system administrator if publication coverage is a 
-concern.</div>
+The publication coverage of this visualization can be improved by including more publication data in the VIVO 
+system, and by ensuring that each publication in the VIVO system is associated with a journal that the Map of 
+Science recognizes (based on the holdings of Thomson's ISI database and Elsevier's Scopus database). Journal 
+names containing typos or other idiosyncrasies may need to be cleaned up before they are recognized. You may 
+contact a VIVO system administrator if publication coverage is a concern.</div>
 
 <div id="exploreTooltipText" style="display:none;">
-	Overlay and examine expertise profiles for one or more organizations. Color coding by discipline.
+	Overlay and examine expertise profiles for a organization. Color coding by discipline.
 </div>
 
 <div id="compareTooltipText" style="display:none;">
@@ -156,7 +154,7 @@ Each publication in such a venue contributes fractionally to all associated subd
 a weighting scheme. 
 
 <br /><br />
-The <b>% activity</b> column shows what proportion of the publications were mapped to each subdiscipline.
+The <b>% of activity</b> column shows what proportion of the publications were mapped to each subdiscipline.
 
 </div>
 

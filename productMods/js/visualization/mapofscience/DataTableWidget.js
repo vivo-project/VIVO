@@ -133,7 +133,7 @@ var DataTableWidget = Class.extend({
 		activityCountTH.attr("id", "activity-count-column");
 
 		var percentageActivityTH = $('<th>');
-		percentageActivityTH.html('% activity');
+		percentageActivityTH.html('% of activity');
 		percentageActivityTH.attr("id", "percentage-activity-column");
 
 		tr.append(levelOfScienceAreaTH);
