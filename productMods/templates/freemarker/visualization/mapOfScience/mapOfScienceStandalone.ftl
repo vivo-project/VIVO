@@ -162,7 +162,7 @@ The <b>% activity</b> column shows what proportion of the publications were mapp
 
 <div id="comparisonSearchInfoTooltipText" style="display:none;">
 	<!-- Search for specific subdiscipline (or discipline) label in the first column of the table. -->
-	List only organizations (or people) whose name contains this text.
+	List only organizations <!--(or people) -->whose name contains this text.
 </div>
 <#-- END TOOLTIP TEXT -->
 
