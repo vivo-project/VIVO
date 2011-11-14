@@ -11,5 +11,10 @@
 <#if ! statement.valueStart?? && ! statement.valueEnd??>
     <a href="${profileUrl(statement.dateTimeInterval)}">incomplete date/time interval</a>
 <#else>
-    ${dt.dateTimeIntervalLong("${statement.dateTimeStart!}", "${statement.precisionStart!}", "${statement.dateTimeEnd!}", "${statement.precisionEnd!}")}
+    <#if statement.label??>
+        ${statement.label!}
+    <#else>
+        ${dt.dateTimeIntervalLong("${statement.dateTimeStart!}", "${statement.precisionStart!}", "${statement.dateTimeEnd!}", "${statement.precisionEnd!}")}
+    </#if>
 </#if>
+

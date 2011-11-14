@@ -9,7 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         
-        SELECT DISTINCT ?dateTimeInterval
+        SELECT DISTINCT ?dateTimeInterval ?label
                         ?valueStart ?valueStartName
                         ?dateTimeStart 
                         ?precisionStart
@@ -32,6 +32,8 @@
                                       LET (?precisionEnd := afn:localname(?dateTimePrecisionEnd))  
                        }
             }
+            OPTIONAL {?dateTimeInterval rdfs:label ?label}
+            
             <critical-data-required>
             FILTER ( bound(?dateTimeStart) || bound(?dateTimeEnd) ) 
             </critical-data-required>
@@ -40,11 +42,13 @@
 
     <query-construct>
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 
         CONSTRUCT {
             ?subject ?property ?dateTimeInterval .
             ?dateTimeInterval core:start ?valueStart .
-            ?dateTimeInterval core:end ?valueEnd
+            ?dateTimeInterval core:end ?valueEnd .
+            ?dateTimeInterval rdfs:label ?label
         } WHERE {
             {
                 ?subject ?property ?dateTimeInterval
@@ -56,6 +60,10 @@
             UNION {
                 ?subject ?property ?dateTimeInterval .
                 ?dateTimeInterval core:end ?valueEnd
+            }
+            UNION {
+                ?subject ?property ?dateTimeInterval .
+                ?dateTimeInterval rdfs:label ?label
             }
         }
     </query-construct>
