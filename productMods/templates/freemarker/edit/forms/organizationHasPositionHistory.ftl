@@ -98,11 +98,10 @@
 
 </form>
 
-<#assign acUrl="/autocomplete?tokenize=true&stem=true" >
 
 <script type="text/javascript">
 var customFormData  = {
-    acUrl: '${acUrl}?url',
+    acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
     editMode: '${editMode}',
     submitButtonTextType: 'compound',
     defaultTypeName: 'person'
@@ -112,3 +111,14 @@ var customFormData  = {
 </section>
 
 </#if>
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
+
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
+
