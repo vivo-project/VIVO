@@ -6,9 +6,7 @@
 
 <#import "lib-vivo-form.ftl" as lvf>
 
-<#assign subjectName="Fake name hardcoded in FTL"/>
-<#assign requiredHint="*"/>
-<#assign yearHint="Do it his year!!!"/>
+<#assign subjectName=""/>
 <#assign roleActivityUri="mysteryRoleActivityURI"/>
 <#assign orgLabel="mysteryOrgLabel"/>
 
@@ -18,7 +16,7 @@
     <#assign editMode = "add">
 </#if>
 
-<#if editMode == "edit">        
+<#if editMode == "edit">    
         <#assign titleVerb="Edit">        
         <#assign submitButtonText="Edit Educational Training">
         <#assign disabledVal="disabled">
@@ -39,7 +37,7 @@
 <#else>
 -->
 
-<h2>${titleVerb}&nbsp;educational training entry for ${subjectName}</h2>
+<h2>${titleVerb}&nbsp;educational training entry for ${subjectName}${editConfiguration.subjectName}</h2>
 
 <#--
 <#if errorTypeFieldIsEmpty??>
@@ -63,23 +61,24 @@
     <form id="personHasEducationalTraining" class="customForm noIE67" action="${submitUrl}"  role="add/edit educational training">
 
     
-        
-    <label for="orgType">Select Organization Type ${requiredHint}</label>
-    <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-    <select id="typeSelector" name="orgType"  >
-        <option value="" selected="selected">Select one</option>                
-        <#list orgTypeOpts?keys as key>             
-        <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
-        <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
-        <#else>
-        <option value="${key}">${orgTypeOpts[key]}</option>
-        </#if>             
-        </#list>
-    </select>        
+    <p class="inline">    
+        <label for="orgType">Organization Type ${requiredHint}</label>
+        <#assign orgTypeOpts = editConfiguration.pageData.orgType />
+        <select id="typeSelector" name="orgType"  >
+            <option value="" selected="selected">Select one</option>                
+            <#list orgTypeOpts?keys as key>             
+                <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
+                    <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
+                <#else>
+                    <option value="${key}">${orgTypeOpts[key]}</option>
+                </#if>             
+            </#list>
+        </select>   
+    </p>     
     
     <p>
-        <label for="relatedIndLabel">Organization Name ${requiredHint}</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" disabled="${disabledVal}" value="" />
+        <label for="relatedIndLabel">### Name ${requiredHint}</label>
+        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="" />
     </p>
     
     <div class="acSelection">
@@ -94,7 +93,7 @@
     </div>
     
     <p>
-        <label for="dept">Department or School Name within the Organization</label>
+        <label for="dept">Department or School Name within the ###</label>
         <input  size="50"  type="text" id="dept" name="dept" value="" />
     </p>
     
@@ -119,7 +118,7 @@
     <p>    
         <label for="info">Supplemental Information</label>
         <input  size="50"  type="text" id="info" name="info" value="" />
-        <p>e.g., <em>Postdoctoral training</em> or <em>Transferred</em></p>    
+        <br />e.g., <em>Postdoctoral training</em> or <em>Transferred</em>    
     </p>
                                     
     <label for="startField">Start Year ${yearHint}</label>
@@ -142,20 +141,27 @@
 
 </form>
 
-<#assign acUrl="/autocomplete?tokenize=true&stem=true" >
 
-<#--
 <script type="text/javascript">
 var customFormData  = {
-    acUrl: '${acUrl}',
+    acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
     editMode: '${editMode}',
     submitButtonTextType: 'compound',
     defaultTypeName: 'organization'
 };
 </script>
--->
 
 </section>
  
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
+
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
 
