@@ -7,6 +7,7 @@
 <c:set var="themeDir" value="${contextPath}/${portal.themeDir}"/>
 
 <div id="ie67DisableWrapper">
+<h1>JSP form, must be removed for the 1.4!</h1>
 	<div id="ie67DisableContent">
 		<img src="${themeDir}site_icons/iconAlertBig.png" alt="Alert Icon"/>
 		<p>This form is not supported in versions of Internet Explorer below version 8. Please upgrade your browser, or

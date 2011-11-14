@@ -320,6 +320,8 @@
 
 <jsp:include page="${preForm}"/>
 
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 <h2>${title}</h2>
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >
 	<v:input type="text" label="Position Title ${requiredHint}" id="title" size="30"/>

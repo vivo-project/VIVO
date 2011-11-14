@@ -64,6 +64,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
  */
 public class PersonHasEducationalTraining  extends VivoBaseGenerator implements EditConfigurationGenerator{            
 
+    //TODO: can we get rid of the session and get it form the vreq?
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
  
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
@@ -77,7 +78,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.setVarNameForSubject("person");
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("edTraining");
-        
+                
         conf.setN3Required( Arrays.asList( n3ForNewEdTraining, orgLabelAssertion, orgTypeAssertion ) );
         conf.setN3Optional(Arrays.asList( 
                 n3ForEdTrainingToOrg, majorFieldAssertion, degreeAssertion, 
@@ -90,7 +91,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addNewResource("startNode",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode",DEFAULT_NS_FOR_NEW_RESOURCE);
         
-        //uris in scope: none                
+        //uris in scope: none   
         //literals in scope: none
         
         conf.setUrisOnform( Arrays.asList( "org", "orgType", "degree"));

@@ -500,6 +500,8 @@ log.debug("TYPE QUERY: " + vreq.getAttribute("typeQuery"));
 
 <jsp:include page="${preForm}" />
 
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 <% if( mode == EditMode.ERROR ){ %>
  <div>This form is unable to handle the editing of this role because it is associated with 
       multiple ${param.roleDescriptor} individuals.</div>      

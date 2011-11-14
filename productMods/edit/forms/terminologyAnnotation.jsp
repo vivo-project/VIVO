@@ -192,6 +192,8 @@ SPARQL queries for existing values. --%>
 <c:set var="title" value="<em>${subjectName}</em>"/>
 
 <jsp:include page="${preForm}" />
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE ON THIS PAGE WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <h2>${title}</h2>
