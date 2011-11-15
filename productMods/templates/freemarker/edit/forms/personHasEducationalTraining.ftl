@@ -133,7 +133,7 @@
     
     <input type="hidden" id="editKey" name="editKey" value="${editConfiguration.editKey}"/>
     <p class="submit">
-        <input type="submit" id="submit" value="editConfiguration.submitLabel"/><span class="or"> or </span>
+        <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span>
         <a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
     </p>
 
