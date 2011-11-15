@@ -61,7 +61,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
         //This combines the first and last name into the rdfs:label
         config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        
 
-        String formUrl = EditConfigurationUtils.getFormUrl(vreq);       
+        String formUrl = EditConfigurationUtils.getFormUrlWithoutContext(vreq);       
         config.setFormUrl(formUrl);
         
         //Note, the spaces are important - they were added by ProcessRdfFormController earlier

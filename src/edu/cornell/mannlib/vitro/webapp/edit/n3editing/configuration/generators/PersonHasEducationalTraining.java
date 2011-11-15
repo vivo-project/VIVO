@@ -10,6 +10,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
@@ -102,6 +103,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addSparqlForExistingLiteral("dept", deptQuery);
         conf.addSparqlForExistingLiteral("info", infoQuery);
         conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
+        conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
+
         
         conf.addSparqlForExistingUris("org",orgQuery);
         conf.addSparqlForExistingUris("orgType",orgTypeQuery);
@@ -148,20 +151,23 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setName("info").
                 setRangeDatatypeUri( XSD.xstring.toString() ));
 
-        conf.addField(new FieldVTwo().
-            setName("startField").                        
+        FieldVTwo startField = new FieldVTwo().
+        						setName("startField");
+        conf.addField(startField.                        
             setEditElement(
-                    new DateTimeWithPrecisionVTwo(null, 
+                    new DateTimeWithPrecisionVTwo(startField, 
                     VitroVocabulary.Precision.YEAR.uri(),
                     VitroVocabulary.Precision.NONE.uri())));
-                        
-        conf.addField( new FieldVTwo().
-                setName("endField").                
+        
+        FieldVTwo endField = new FieldVTwo().
+								setName("endField");
+        conf.addField( endField.                
                 setEditElement(
-                        new DateTimeWithPrecisionVTwo(null, 
+                        new DateTimeWithPrecisionVTwo(endField, 
                         VitroVocabulary.Precision.YEAR.uri(),
                         VitroVocabulary.Precision.NONE.uri())));
-        
+        //Add validator
+        conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         return conf;
     }
 

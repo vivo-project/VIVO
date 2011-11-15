@@ -55,7 +55,7 @@ return - returns empty string if no value found-->
 </#function>
 
 
-<#--Given edit submission object find values->
+<#--Given edit submission object find values-->
 <#function getEditSubmissionLiteralValue submission varName>
 	<#local literalValues = submission.literalsFromForm >
 	<#if (literalValues?keys?seq_contains(varName)) && (literalValues[varName]?size > 0)>
@@ -79,7 +79,7 @@ return - returns empty string if no value found-->
 	<#local returnValue = getEditSubmissionUriValue(submission, varName) />
 	<#if (returnValue?length = 0)>
 		<#local returnValue = getEditSubmissionLiteralValue(submission, varName) />
-	</#if>
+	</#if> 
 	<#return returnValue>
 </#function>
 
@@ -92,4 +92,14 @@ return - returns empty string if no value found-->
 		<#local returnValue = getEditConfigValue(config varName)>
 	</#if>
 	<#return returnValue>
+</#function>
+
+<#--Check if submission error exists for a field name-->
+<#function submissionErrorExists editSubmission fieldName>
+	<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+		<#if editSubmission.validationErrors?keys?seq_contains(fieldName)>
+			<#return true>
+		</#if>
+	</#if>
+	<#return false>
 </#function>

@@ -172,7 +172,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     }    	
 
     private void initProcessParameters(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {    	        
-    	editConfiguration.setFormUrl(EditConfigurationUtils.getFormUrl(vreq));    	
+    	editConfiguration.setFormUrl(EditConfigurationUtils.getFormUrlWithoutContext(vreq));    	
         editConfiguration.setEntityToReturnTo(EditConfigurationUtils.getSubjectUri(vreq));        
     }           
     
@@ -438,7 +438,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	    //Replacement should only happen when we have an actual predicate
 	    
 		String replaceRoleToActivityPredicate = getRoleToActivityPredicate(vreq);
-		activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "predicate", replaceRoleToActivityPredicate);
+		activityTypeQuery = QueryUtils.replaceQueryVar(activityTypeQuery, "predicate", getRoleToActivityPlaceholderName());
 		log.debug("Activity type query: " + activityTypeQuery);
 		
 	    return activityTypeQuery;
@@ -886,8 +886,13 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	}
 	
 	private String getRoleToActivityPlaceholder() {
-		return "?roleToActivityPredicate";
+		return "?" + getRoleToActivityPlaceholderName();
 	}
+	
+	private String getRoleToActivityPlaceholderName() {
+		return "roleToActivityPredicate";
+	}
+	
 	
 	private String getActivityToRolePlaceholder() {
 		return "?activityToRolePredicate";

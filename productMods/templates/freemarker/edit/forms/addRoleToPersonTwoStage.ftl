@@ -1,4 +1,5 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+<#import "lib-vivo-form.ftl" as lvf>
 
 <#--Retrieve certain edit configuration information-->
 <#assign editMode = editConfiguration.pageData.editMode />
@@ -6,6 +7,10 @@
 <#assign uriValues = editConfiguration.existingUriValues />
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 <#assign showRoleLabelField = editConfiguration.pageData.showRoleLabelField />
+<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
+</#if>
 <#--Freemarker variables with default values that can be overridden by specific forms-->
 
 
@@ -44,22 +49,15 @@
 
 
 <#--Get selected activity type value if it exists, this is alternative to below-->
-<#assign activityTypeValue = ""/>
-<#if uriValues?keys?seq_contains("roleActivityType") && (uriValues.roleActivityType?size > 0)>
-	<#assign activityTypeValue = uriValues.roleActivityType[0] />
-</#if>
+<#assign activityTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleActivityType")/>
 
  <#--Get activity label value-->
-<#assign activityLabelValue = "" />
-<#if literalValues?keys?seq_contains("activityLabel") && (literalValues.activityLabel?size > 0)>
-	<#assign activityLabelValue = literalValues.activityLabel[0] />
-</#if>
+<#assign activityLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "activityLabel") />
+
 
 <#--Get role label-->
-<#assign roleLabel = "" />
-<#if literalValues?keys?seq_contains("roleLabel") && (literalValues.roleLabel?size > 0) >
-	<#assign roleLabel = literalValues.roleLabel[0] />
-</#if>
+<#assign roleLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleLabel") />
+
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
@@ -67,18 +65,26 @@
 <h2>${titleVerb}&nbsp;${roleDescriptor} entry for ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
-<#if errorNameFieldIsEmpty??>
-    <#assign errorMessage = "Enter a name for the ." />
-</#if>
 
-<#if errorRoleFieldIsEmpty??>
-    <#assign errorMessage = "Specify a role for this ." />
-</#if>
 
-<#if errorMessage?has_content>
+<#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
-        <p>${errorMessage}</p>
+        <p>
+        <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
+        <#list submissionErrors?keys as errorFieldName>
+        	${errorFieldName}: ${submissionErrors[errorFieldName]}
+        	<br/>
+        </#list>
+        <#--Checking if role field is empty-->
+        <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
+        	Specify a role for this activity.
+        </#if>
+         <#if lvf.submissionErrorExists(editSubmission, "activityLabel")>
+				        	Enter a name for the activity.
+        </#if>
+        
+        </p>
     </section>
 </#if>
 
@@ -106,7 +112,6 @@
                 </#list>
            </select>
        </p>
-       
        
        
    <div class="fullViewOnly">        

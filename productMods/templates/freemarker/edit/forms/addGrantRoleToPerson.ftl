@@ -1,7 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
 <#-- Template for adding a grant role, such as principal investigator, to a foaf:Persons -->
-<#import "lib-vivo-form.ftl" as lvf>
 <#--Retrieve certain edit configuration information-->
 <#assign editMode = editConfiguration.pageData.editMode />
 <#assign literalValues = editConfiguration.existingLiteralValues />
@@ -40,10 +39,8 @@
 
 <#--Get selected activity type value if it exists, this is alternative to below-->
 
-<#assign grantLabel = ""/>
-<#if literalValues?keys?seq_contains("grantLabel") && (literalValues.grantLabel?size > 0)>
-	<#assign grantLabel = literalValues.grantLabel[0] />
-</#if>
+<#assign grantLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "grantLabel")/>
+
 
  <#--Get existing grant label value-->
 <#assign existingGrantLabel = "" />

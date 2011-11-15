@@ -129,7 +129,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	//There will be specialized parameters as well, we may include them here or in a
 	//separate method
     private void initProcessParameters(VitroRequest vreq, HttpSession session, EditConfigurationVTwo editConfiguration) {
-    	String formUrl = EditConfigurationUtils.getFormUrl(vreq);
+    	String formUrl = EditConfigurationUtils.getFormUrlWithoutContext(vreq);
 
     	subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
     	predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
