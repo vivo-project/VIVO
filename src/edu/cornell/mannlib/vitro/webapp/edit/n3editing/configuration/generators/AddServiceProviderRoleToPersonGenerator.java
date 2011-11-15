@@ -68,9 +68,7 @@ public class AddServiceProviderRoleToPersonGenerator extends AddRoleToPersonTwoS
         literalOptions.put("http://vivoweb.org/ontology/core#University", "University");  
 		return literalOptions;
 	}
+	@Override
+	boolean isShowRoleLabelField(){return true;}
 
-	@Override   
-    boolean isShowRoleLabelField() { return false;  }
-
-    
 }

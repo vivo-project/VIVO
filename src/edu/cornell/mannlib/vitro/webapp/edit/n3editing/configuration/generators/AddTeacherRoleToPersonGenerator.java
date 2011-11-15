@@ -42,7 +42,7 @@ public class AddTeacherRoleToPersonGenerator extends AddRoleToPersonTwoStageGene
 		return literalOptions;
 	}
 
-	@Override   
-    boolean isShowRoleLabelField() { return false;  }
-    
+	@Override
+	boolean isShowRoleLabelField(){return true;}
+
 }
