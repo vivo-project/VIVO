@@ -5,7 +5,7 @@
 Required Values to be set for each form that includes addRoleToPersonTwoStage.ftl are:
 roleDescriptor.
 The other required values (roleType, optionsType, objectClassUri, and literalOptions are
-set in the JAVA class corresponding to the form, e.g. AddOutreachRoleToPersonGenerator.java.
+set in the JAVA class corresponding to the form, e.g. AddOutreachProviderRoleToPersonGenerator.java.
 
 Optional values can be set, but each of these has default values
 set in addRoleToPersonTwoStage.ftl:
