@@ -73,15 +73,28 @@
         <p>
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
         <#list submissionErrors?keys as errorFieldName>
-        	${errorFieldName}: ${submissionErrors[errorFieldName]}
-        	<br/>
+        	<#if errorFieldName == "startField">
+        	    <#if submissionErrors[errorFieldName]?contains("before")>
+        	        The Start Year must be earlier than the End Year.
+        	    <#else>
+        	        ${submissionErrors[errorFieldName]}
+        	    </#if>
+        	    <br />
+        	<#elseif errorFieldName == "endField">
+    	        <#if submissionErrors[errorFieldName]?contains("after")>
+    	            The End Year must be later than the Start Year.
+    	        <#else>
+    	            ${submissionErrors[errorFieldName]}
+    	        </#if>
+	        </#if>
         </#list>
         <#--Checking if role field is empty-->
         <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
-        	Specify a role for this activity.
+    	    Please specify a role for this activity.
         </#if>
+        <#--Checking if Name field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "activityLabel")>
-				        	Enter a name for the activity.
+ 	        Please enter or select a value in the Name field.
         </#if>
         
         </p>
