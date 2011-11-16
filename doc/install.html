@@ -910,7 +910,29 @@
                 directive 
                 and update as follows: 
             </p>
-            <pre>	    <br>			&lt;Host name="localhost" appBase="webapps"<br>	        <br>				DeployOnStartup="false"<br>	        <br>				unpackWARs="true" autoDeploy="false"<br>	        <br>				xmlValidation="false" xmlNamespaceAware="false"&gt;<br>	<br>		<br>				&lt;Alias&gt;example.com&lt;/Alias&gt;<br>		<br>				&lt;Context path=""<br>			<br>					docBase="/usr/local/tomcat/webapps/vivo"<br>			<br>					reloadable="true"<br>			<br>					cookies="true" &gt;<br>			<br>					&lt;Manager pathname="" /&gt;<br>			<br>					&lt;Environment type="java.lang.String" override="false" <br>				<br>						name="path.configuration" <br>				<br>						value="deploy.properties"<br>			<br>					/&gt;<br>		<br>				&lt;/Context&gt;<br>		<br>				...<br>			</pre>
+            <pre>              &lt;Host name="localhost" appBase="webapps"
+                       DeployOnStartup="false"
+                       unpackWARs="true" autoDeploy="false"
+                       xmlValidation="false" xmlNamespaceAware="false"&gt;
+                   
+                   &lt;Alias&gt;example.com&lt;/Alias&gt;
+                   
+                   &lt;Context path=""
+                           docBase="/usr/local/tomcat/webapps/vivo"
+                           reloadable="true"
+                           cookies="true" &gt;
+                   
+                       &lt;Manager pathname="" /&gt;
+                   
+                       &lt;Environment type="java.lang.String" override="false"
+                               name="path.configuration"
+                               value="deploy.properties"
+                       /&gt;
+                   &lt;/Context&gt;
+                  
+                   ...
+            </pre>
+
             <h3 id="external_auth">XI. Using an External Authentication System 
                 with VIVO </h3>
             <p>
@@ -989,11 +1011,7 @@
                 <li>
                     <h5>Associating a User with a profile page.</h5>
                     <p>
-                        If VIVO has an account for the user, the user will be given the 
-                        privileges assigned to that account. 
-                    </p>
-                    <p>
-                        In addition, VIVO will try to associate the user with a profile
+                        VIVO will try to associate the user with a profile
                         page, so the user may edit his own profile data. VIVO will search the
                         data model for a person with a property that matches the User’s network 
                         ID (the value of the property must be either a String literal or an 
