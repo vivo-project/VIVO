@@ -1,7 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +17,8 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalVali
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
 
 /**
     Form for adding an educational attainment to an individual
@@ -168,6 +173,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                         VitroVocabulary.Precision.NONE.uri())));
         //Add validator
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
+      //Adding additional data, specifically edit mode
+        addFormSpecificData(conf, vreq);
         return conf;
     }
 
@@ -308,5 +315,18 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?intervalNode <"+ intervalToEnd +"> ?endNode .\n"+
         "?endNode <"+ type +"> <"+ dateTimeValueType +"> .\n"+
         "?endNode <"+ dateTimePrecision +"> ?existingEndPrecision . }";
+    
+  //Adding form specific data such as edit mode
+	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
+		formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
+		editConfiguration.setFormSpecificData(formSpecificData);
+	}
+	
+	public EditMode getEditMode(VitroRequest vreq) {
+		List<String> predicates = new ArrayList<String>();
+		predicates.add(trainingAtOrg);
+		return AddRoleUtils.getEditMode(vreq, predicates);
+	}
 
 }

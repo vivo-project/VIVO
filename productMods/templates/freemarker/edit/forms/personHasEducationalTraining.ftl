@@ -10,11 +10,17 @@
 <#assign roleActivityUri="mysteryRoleActivityURI"/>
 <#assign orgLabel="mysteryOrgLabel"/>
 
-<#if editConfiguration.object?has_content>
-    <#assign editMode = "edit">
-<#else>
-    <#assign editMode = "add">
-</#if>
+<#--Retrieve certain edit configuration information-->
+<#assign editMode = editConfiguration.pageData.editMode />
+<#assign htmlForElements = editConfiguration.pageData.htmlForElements />
+
+<#--Retrieve variables needed-->
+<#assign orgTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgType")/>
+<#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel") />
+<#assign deptValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "dept") />
+<#assign infoValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "info") />
+<#assign majorFieldValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "majorField") />
+<#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
 
 <#if editMode == "edit">    
         <#assign titleVerb="Edit">        
@@ -67,7 +73,7 @@
         <select id="typeSelector" name="orgType"  >
             <option value="" selected="selected">Select one</option>                
             <#list orgTypeOpts?keys as key>             
-                <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
+                <#if orgTypeValue = key>
                     <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
                 <#else>
                     <option value="${key}">${orgTypeOpts[key]}</option>
@@ -78,8 +84,14 @@
     
     <p>
         <label for="relatedIndLabel">### Name ${requiredHint}</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="" />
+        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabelValue}" />
     </p>
+    
+    <#--Store values in hidden fields-->
+    <#if editMode="edit">
+    	<input type="hidden" name="orgType" id="orgType" value="${orgTypeValue}"/>
+    	<input type="hidden" name="orgLabel" id="orgLabel" value="${orgLabelValue}"/>
+    </#if>
     
     <div class="acSelection">
         <p class="inline">
@@ -87,14 +99,14 @@
             <span class="acSelectionInfo"></span>
             <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="${roleActivityUri}" name="org" value="" />
+        <input class="acUriReceiver" type="hidden" id="org" name="org" value="" /> <!--Field populated by javascript-->
 
-        <input class="acLabelReceiver" type="hidden" id="existingOrgLabel" name="existingOrgLabel" value="${orgLabel}" />
+        <input class="acLabelReceiver" type="hidden" id="existingOrgLabel" name="existingOrgLabel" value="" />
     </div>
     
     <p>
         <label for="dept">Department or School Name within the ###</label>
-        <input  size="50"  type="text" id="dept" name="dept" value="" />
+        <input  size="50"  type="text" id="dept" name="dept" value="${deptValue}" />
     </p>
     
     <div class="entry">
@@ -102,39 +114,41 @@
     
       <#assign degreeOpts = editConfiguration.pageData.degree />  
       <select name="degree" id="degreeUri" >
-        <option value="" selected="selected">Select one</option>        
+        <option value="" <#if degreeValue = "">selected</#if>>Select one</option>        
        
         <#list degreeOpts?keys as key>                 
-        <option value="${key}">${degreeOpts[key]}</option>                    
+        <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
         </#list>                                
       </select>    
     </div>
     
     <p>    
         <label for="majorField">Major Field of Degree</label>
-        <input type="text" id="majorField" name="majorField" size="30" value=""/>   
+        <input type="text" id="majorField" name="majorField" size="30" value="${majorFieldValue}"/>   
     </p>   
           
     <p>    
         <label for="info">Supplemental Information</label>
-        <input  size="50"  type="text" id="info" name="info" value="" />
+        <input  size="50"  type="text" id="info" name="info" value="${infoValue}" />
         <br />e.g., <em>Postdoctoral training</em> or <em>Transferred</em>    
     </p>
-                                    
-    <label for="startField">Start Year ${yearHint}</label>
-    <fieldset class="dateTime">              
-        <input class="text-field" name="startField-year" id="startField-year" type="text" value="" size="4" maxlength="4" />
-    </fieldset>
-
-    <label for="endField">End Year ${yearHint}</label>
-    <fieldset class="dateTime">              
-        <input class="text-field" name="endField-year" id="endField-year" type="text" value="" size="4" maxlength="4" />
-    </fieldset>
     
-    <input type="hidden" id="editKey" name="editKey" value="${editConfiguration.editKey}"/>
+    <#--Need to draw edit elements for dates here-->
+     <#if htmlForElements?keys?seq_contains("startField")>
+							<label for="startField">Start Year ${yearHint}</label>
+							${htmlForElements["startField"]}
+     </#if>
+     <#if htmlForElements?keys?seq_contains("endField")>
+		 							<label for="endField">Start Year ${yearHint}</label>
+		 							${htmlForElements["startField"]}
+     </#if>
+                                    
+  	<#--End draw elements-->
+    
+    <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
         <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span>
-        <a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
+        <a class="cancel" href="${cancelUrl}">Cancel</a>
     </p>
 
     <p id="requiredLegend" class="requiredHint">* required fields</p>
