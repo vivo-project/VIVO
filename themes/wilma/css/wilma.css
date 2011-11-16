@@ -113,7 +113,9 @@ input.submit:visited,
 for editing forms which require an id and do not allow a class. This will be 
 removed once we refactor the editing forms to Freemarker */
 input#submit, 
-input#submit:visited {
+input#submit:visited,
+input.form-button,
+input.form-button:visited {
     background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
     padding: 5px 18px 7px;
@@ -173,7 +175,8 @@ input#delete:visited {
 .verbose-toggle:hover,
 #showAddFormButton:hover,
 input.submit:hover,
-input#submit:hover {
+input#submit:hover,
+input.form-button:hover {
     color: #fff;
     background-color: #b2d15a;
 }
@@ -188,7 +191,8 @@ input#delete:hover {
 input.delete:active,
 input#delete:active,
 input.submit:active,
-input#submit:active {
+input#submit:active,
+input.form-button:active {
     top: 1px;
 }
 form textarea {
@@ -406,7 +410,23 @@ ul.ingestMenu {
 .toBeDeleted {
     margin-bottom: 0;
 }
-
+/* BACK-END FORMS -------------->  */
+.display-inline {
+    display: inline-block;
+}
+.theme-dir {
+    clear: both;
+}
+tr.editformcell td input[type="text"] {
+    width: 30% !important;
+}
+tr.editformcell td select {
+    font-size: .8em;
+}
+.editingForm table {
+    width: 100%;
+    border: none;
+}
 /* ------------------------------------------------->  */
 /* HOMEPAGE AND INTERIOR PAGES STYLES -------------->  */
 /* ------------------------------------------------->  */
