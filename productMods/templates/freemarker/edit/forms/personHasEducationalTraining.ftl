@@ -70,7 +70,7 @@
     <p class="inline">    
         <label for="orgType">Organization Type ${requiredHint}</label>
         <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-        <select id="typeSelector" name="orgType"  >
+        <select id="typeSelector" name="orgType"  <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>>
             <option value="" selected="selected">Select one</option>                
             <#list orgTypeOpts?keys as key>             
                 <#if orgTypeValue = key>
@@ -84,7 +84,7 @@
     
     <p>
         <label for="relatedIndLabel">### Name ${requiredHint}</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabelValue}" />
+        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabelValue}"  <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>/>
     </p>
     
     <#--Store values in hidden fields-->
