@@ -2,9 +2,13 @@
 
 <#-- Template for adding a position history-->
 
-<#import "lib-vivo-form.ftl" as lf>
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#if editConfig.object?has_content>
+<#-- Template for adding a position history-->
+
+<#import "lib-vivo-form.ftl" as lvf>
+
+<#if editConfiguration.objectUri?has_content>
     <#assign editMode = "edit">
 <#else>
     <#assign editMode = "add">
@@ -15,14 +19,21 @@
         <#assign submitButtonText="Edit Position">
 <#else>
         <#assign formAction="Create">        
-        <#assign submitButtonText="Create">
+        <#assign submitButtonText="Create Position">
 </#if>
+
+<#--Get existing value for specific data literals and uris-->
+
+<#assign orgLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel")/>
+<#assign positionTitle = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle")/>
+<#assign startField = lvf.getFormFieldValue(editSubmission, editConfiguration, "startField") />
+<#assign endField = lvf.getFormFieldValue(editSubmission, editConfiguration, "endField") />
 
 <#assign requiredHint="<span class='requiredHint'> *</span>"/> 
 
-<@lf.unsupportedBrowser>
+<#-- <@lvf.unsupportedBrowser urls.base /> -->
 
-<h2>${formAction} position entry for ${subjectName}</h2>
+<h2>${formAction} position entry for ${editConfiguration.subjectName}</h2>
 
 <#if errorOrgType??>
     <#assign errorMessage = "You must supply an organization type." />
@@ -48,73 +59,88 @@
 </#if>
 
 <form class="customForm" action ="${submitUrl}" class="customForm" role="${formAction} position entry">
-    <label for="typeSelector">Organization Type ${requiredHint}</label>
-
-    <select id="typeSelector" name="orgType"> 
-        <option value="" <#if typeSelector = "">selected</#if> >Select one</option>
-        <#list orgType as key>
-        <option value="${key.uri}" <#if key = key.uri>selected</#if> >${key.label}</option>
+  <p class="inline">    
+    <label for="orgType">Organization Type ${requiredHint}</label>
+    <#assign orgTypeOpts = editConfiguration.pageData.orgType />
+    <select id="typeSelector" name="orgType"  >
+        <option value="" selected="selected">Select one</option>                
+        <#list orgTypeOpts?keys as key>             
+            <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
+                <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
+            <#else>
+                <option value="${key}">${orgTypeOpts[key]}</option>
+            </#if>             
         </#list>
-    </select>
-    
-    <a title="Cancel" href="${formUrl}" class="cancel <#if key??>hidden</#>">Cancel</a>
+    </select>   
+  </p>
 
-    <#if orgType??>
-        <label for="relatedIndLabel">${organizationType.label} ${requiredHint}</label>
-        <input type="text" value="Select an existing ${orgType.label} or create a new one." name="orgLabel" id="relatedIndLabel" size="50" class="acSelector ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+  <div class="fullViewOnly">        
+  <p>
+    <label for="relatedIndLabel">### Name ${requiredHint}</label>
+    <input type="text" name="orgLabel" id="relatedIndLabel" size="50" class="acSelector" value="${orgLabel}" >
+  </p>
 
-        <label for="positionTitle">Position Title ${requiredHint}</label>
-        <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitle}" role="input" />
+    <@lvf.acSelection urls.base />
 
-        <label for="positionType">Position Type ${requiredHint}</label>
-        <select id="positionType" name="positionType" role="select">    
-            <option value="" role="option" <#if positionType = "">selected</#if> >Select one</option>
-            <#list positionTypes as positionType>
-            <option value="${positionType.uri}" role="option" <#if positionType = positionType.uri>selected</#if> >${positionType.label}</option>
-            </#list>
-        </select> <#--Should we do something like this  <@widget name="SelectList" fieldName="orgType" />, have a macro where we specified 
-                      the type of form element and the type of list, in this case an organization type-->
 
-        <label for="startField">Start Year</label>
-        <input class="text-field" name="startField-year" id="startField-year" type="textxt" value="<#if startField-year??>${startField-year}</#if>" size="4" maxlength="4" role="input" />
-        <span class='hint'>(YYYY)</span>
+    <label for="positionTitle">Position Title ${requiredHint}</label>
+    <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitle}" role="input" />
 
-        <label for="endField">End Year</label>
-        <input class="text-field" name="endField-year" id="endField-year" type="text" value="<#if endField-year??>${endField-year}</#if>" size="4" maxlength="4" role="input" />        
-        <span class='hint'>(YYYY)</span>
-        
-        <input type="hidden" name = "editKey" value="${editKey}" role="input"/>
+      <label for="positionType">Position Type ${requiredHint}</label>
+      <#assign posnTypeOpts = editConfiguration.pageData.positionType />
+      <select id="typeSelector" name="positionType" style="margin-top:-2px" >
+          <option value="" selected="selected">Select one</option>                
+          <#list posnTypeOpts?keys as key>             
+              <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
+                  <option value="${key}"  selected >${posnTypeOpts[key]}</option>     
+              <#else>
+                  <option value="${key}">${posnTypeOpts[key]}</option>
+              </#if>             
+          </#list>
+      </select>   
 
+      <label for="startField">Start Year</label>
+      <input class="text-field" name="startField-year" id="startField-year" type="text" value="${startField}" size="4" maxlength="4" role="input" />
+      <span class='hint'>(YYYY)</span>
+      <label for="endField">End Year</label>
+      <input class="text-field" name="endField-year" id="endField-year" type="text" value="${endField}" size="4" maxlength="4" role="input" />        
+      <span class='hint'>(YYYY)</span>
+      <input type="hidden" name = "editKey" value="${editKey}" role="input"/>
+
+   </div>
+      <p class="submit">
         <#if editMode == "edit">  
-            <input type="submit" name="submit-${titleAction}" value="${submitButtonText}" class="submit" /> 
+            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
         <#else>
-            <input type="submit" name="submit-${titleAction}" value="${submitButtonText} ${positionType.uri} and Position" class="submit" /> 
+            <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
         </#if>
 
-        or <a class="cancel" href="${formUrl.cancel}">Cancel</a>
-
-        <p class="requiredHint">* required fields</p>
-    </#if>
+        <span class="or"> or </span><a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
+      </p>
+      <p class="requiredHint"  id="requiredLegend" >* required fields</p>
+      
 </form>
-    
-    <#assign acUrl="//autocomplete?tokenize=true" >
 
-    <script type="text/javascript">
-    var customFormData  = {
-        acUrl: '${acUrl?url}',
-        editMode: '${editMode}',
-        submitButtonTextType: 'compound',
-        defaultTypeName: 'organization' // used in repair mode, to generate button text and org name field label
-    };
-    </script>
+<script type="text/javascript">
+var customFormData  = {
+    acUrl: '${urls.base}/autocomplete?tokenize=true',
+    editMode: '${editMode}',
+    submitButtonTextType: 'compound',
+    defaultTypeName: 'organization' // used in repair mode, to generate button text and org name field label
+};
+</script>
 
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/edit/forms/css/personHasEducationalTraining.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}   
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
 
 

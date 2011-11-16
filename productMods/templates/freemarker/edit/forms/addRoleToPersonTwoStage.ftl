@@ -144,17 +144,8 @@
             	<input type="hidden" id="roleActivityType" name="roleActivityType" value="${activityTypeValue}"/>
             	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}"/>
             </#if>
+            <@lvf.acSelection urls.base />
 
-            <div class="acSelection">
-                <p class="inline">
-                    <label>Selected ${roleDescriptor?capitalize}:</label>
-                    <span class="acSelectionInfo"></span>
-                    <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
-                    </p>
-                    <input class="acUriReceiver" type="hidden" id="roleActivityUri" name="roleActivity" value="" />
-                    <!-- Field value populated by JavaScript -->
-            </div>
-            
             <#if showRoleLabelField = true>
             <p><label for="roleLabel">Role in ### ${requiredHint} ${roleExamples}</label>
                 <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabel}" />
