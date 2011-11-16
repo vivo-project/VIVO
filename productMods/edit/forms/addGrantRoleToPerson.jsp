@@ -78,8 +78,7 @@ This is intended to create a set of statements like:
         %> <c:set var="editMode" value="repair"/><%
     }
    %>
-   
-%>
+
 
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
