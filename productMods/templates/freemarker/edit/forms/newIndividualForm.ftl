@@ -2,28 +2,41 @@
 
 <#-- Template for adding a new individual from the Site Admin page: VIVO version -->
 
+<#import "lib-vivo-form.ftl" as lvf>
+
 <#--Retrieve certain edit configuration information-->
 <#assign typeName = editConfiguration.pageData.typeName />
 <#assign isPersonType = editConfiguration.pageData.isPersonType />
 
+<#--Get existing value for specific data literals and uris-->
+<#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName")/>
+<#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName")/>
+<#assign labelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "label")/>
+
+<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
+</#if>
+
+
 <h2>Create a new ${typeName}</h2>
 
-<#if errorFirstNameIsEmpty??>
-    <#assign errorMessage = "Enter a first name." />
-</#if>
 
-<#if errorLastNameIsEmpty??>
-    <#assign errorMessage = "Enter a last name." />
-</#if>
-
-<#if errorNameFieldIsEmpty??>
-    <#assign errorMessage = "Enter a name." />
-</#if>
-
-<#if errorMessage?has_content>
+<#if submissionErrors?has_content >
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
-        <p>${errorMessage}</p>
+        <p>
+        <#list submissionErrors?keys as errorFieldName>
+    	    <#if errorFieldName == "firstName">
+    	        Please enter a First Name for this person.
+    	    <#elseif  errorFieldName == "lastName">
+    	        Please enter a Last Name for this person.
+        	<#elseif  errorFieldName == "lastName">
+        	    ${submissionErrors[errorFieldName]}
+    	    </#if>
+    	    <br />${errorFieldName}
+    	</#list>
+        </p>
     </section>
 </#if>
 
@@ -36,17 +49,17 @@
     <#if isPersonType = "true">       
         <p>
             <label for="firstName">First Name ${requiredHint}</label>
-            <input size="30"  type="text" id="firstName" name="firstName" value="" />
+            <input size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" />
         </p>
 
         <p>
             <label for="lastName">Last Name ${requiredHint}</label>
-            <input size="30"  type="text" id="lastName" name="lastName" value="" />
+            <input size="30"  type="text" id="lastName" name="lastName" value="${lastNameValue}" />
         </p>
     <#else>       
         <p>
             <label for="name">Name ${requiredHint}</label>
-            <input size="30"  type="text" id="label" name="label" value="" />
+            <input size="30"  type="text" id="label" name="label" value="${labelValue}" />
         </p>
     </#if>
 
