@@ -22,6 +22,11 @@
 <#assign majorFieldValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "majorField") />
 <#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
 
+<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
+</#if>
+
 <#if editMode == "edit">    
         <#assign titleVerb="Edit">        
         <#assign submitButtonText="Edit Educational Training">
@@ -45,23 +50,40 @@
 
 <h2>${titleVerb}&nbsp;educational training entry for ${subjectName}${editConfiguration.subjectName}</h2>
 
-<#--
-<#if errorTypeFieldIsEmpty??>
-    <#assign errorMessage = "Select a type of organization." />
-</#if>
-
-<#if errorNameFieldIsEmpty??>
-    <#assign errorMessage = "Enter a name for the organization." />
-</#if>
--->
-
-<#if errorMessage?has_content>
+<#--Display error messages if any-->
+<#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
-        <p>${errorMessage}</p>
+        <p>
+        <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
+        <#list submissionErrors?keys as errorFieldName>
+        	<#if errorFieldName == "startField">
+        	    <#if submissionErrors[errorFieldName]?contains("before")>
+        	        The Start Year must be earlier than the End Year.
+        	    <#else>
+        	        ${submissionErrors[errorFieldName]}
+        	    </#if>
+        	    <br />
+        	<#elseif errorFieldName == "endField">
+    	        <#if submissionErrors[errorFieldName]?contains("after")>
+    	            The End Year must be later than the Start Year.
+    	        <#else>
+    	            ${submissionErrors[errorFieldName]}
+    	        </#if>
+	        </#if>
+        </#list>
+        <#--Checking if Org Type field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "orgType")>
+ 	        Please select a value in the Organization Type field.
+        </#if>
+        <#--Checking if Org Name field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "orgLabel")>
+ 	        Please enter or select a value in the Name field.
+        </#if>
+        
+        </p>
     </section>
 </#if>
-
 <section id="personHasEducationalTraining" role="region">        
     
     <form id="personHasEducationalTraining" class="customForm noIE67" action="${submitUrl}"  role="add/edit educational training">
@@ -81,6 +103,8 @@
             </#list>
         </select>   
     </p>     
+
+  <div class="fullViewOnly">        
     
     <p>
         <label for="relatedIndLabel">### Name ${requiredHint}</label>
@@ -93,16 +117,9 @@
     	<input type="hidden" name="orgLabel" id="orgLabel" value="${orgLabelValue}"/>
     </#if>
     
-    <div class="acSelection">
-        <p class="inline">
-            <label>Selected Organization:</label>
-            <span class="acSelectionInfo"></span>
-            <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
-        </p>
-        <input class="acUriReceiver" type="hidden" id="org" name="org" value="" /> <!--Field populated by javascript-->
+    <@lvf.acSelection urls.base />
 
-        <input class="acLabelReceiver" type="hidden" id="existingOrgLabel" name="existingOrgLabel" value="" />
-    </div>
+    <input class="acLabelReceiver" type="hidden" id="existingOrgLabel" name="existingOrgLabel" value="" />
     
     <p>
         <label for="dept">Department or School Name within the ###</label>
@@ -135,16 +152,17 @@
     
     <#--Need to draw edit elements for dates here-->
      <#if htmlForElements?keys?seq_contains("startField")>
-							<label for="startField">Start Year ${yearHint}</label>
-							${htmlForElements["startField"]}
+			<label class="dateTime" for="startField">Start</label>
+			${htmlForElements["startField"]} ${yearHint}
      </#if>
+     <p></p>
      <#if htmlForElements?keys?seq_contains("endField")>
-		 							<label for="endField">Start Year ${yearHint}</label>
-		 							${htmlForElements["startField"]}
+			<label class="dateTime" for="endField">End</label>
+		 	${htmlForElements["endField"]} ${yearHint}
      </#if>
                                     
   	<#--End draw elements-->
-    
+  </div>    
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
     <p class="submit">
         <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span>
