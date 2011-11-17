@@ -8,6 +8,10 @@
 <#assign uriValues = editConfiguration.existingUriValues />
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
+<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
+</#if>
 <#assign disabledVal = ""/>
 <#if editMode = "edit">
 	<#assign disabledVal = "disabled=\"disabled\"" />
@@ -56,20 +60,40 @@
 
 <h2>${formHeading} ${editConfiguration.subjectName}</h2>
 
-<#if errorNameFieldIsEmpty??>
-    <#assign errorMessage = "Enter a name for the grant." />
-</#if>
-
-<#if errorMessage?has_content>
+<#--Display error messages if any-->
+<#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
-        <p>${errorMessage}</p>
+        <p>
+        <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
+        <#list submissionErrors?keys as errorFieldName>
+        	<#if errorFieldName == "startField">
+        	    <#if submissionErrors[errorFieldName]?contains("before")>
+        	        The Start Year must be earlier than the End Year.
+        	    <#else>
+        	        ${submissionErrors[errorFieldName]}
+        	    </#if>
+        	    <br />
+        	<#elseif errorFieldName == "endField">
+    	        <#if submissionErrors[errorFieldName]?contains("after")>
+    	            The End Year must be later than the Start Year.
+    	        <#else>
+    	            ${submissionErrors[errorFieldName]}
+    	        </#if>
+	        </#if>
+        </#list>
+        <#--Checking if Name field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "grantLabel")>
+ 	        Please enter or select a value in the Grant Name field.
+        </#if>
+        
+        </p>
     </section>
 </#if>
 
 <section id="addGrantRoleToPerson" role="region">        
     
-<@lvf.unsupportedBrowser/>
+<@lvf.unsupportedBrowser  urls.base />
 
 
     <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
@@ -80,19 +104,10 @@
         </p>
 
         <#if editMode = "edit">
-						<input type="hidden" id="grantLabel"  name="grantLabel" value="${grantLabel}"/>
+				<input type="hidden" id="grantLabel"  name="grantLabel" value="${grantLabel}"/>
          </#if>
-        <div class="acSelection">
-            <p class="inline">
-                <label>Selected Grant:</label>
-                <span class="acSelectionInfo"></span>
-                <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
-            </p>
-             <input class="acUriReceiver" type="hidden" id="grant" name="grant" value="" />
 
-            <#--Field value populated by  javascript above-->
-            <input class="acLabelReceiver" type="hidden" id="existingGrantLabel" name="existingGrantLabel" value="${existingGrantLabel}" />
-        </div>
+        <@lvf.acSelection urls.base />
 
         <h4>Years of Participation in Grant</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>
