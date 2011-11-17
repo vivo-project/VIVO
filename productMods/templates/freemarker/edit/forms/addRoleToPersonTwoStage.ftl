@@ -88,13 +88,13 @@
     	        </#if>
 	        </#if>
         </#list>
-        <#--Checking if role field is empty-->
-        <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
-    	    Please specify a role for this activity.
-        </#if>
         <#--Checking if Name field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "activityLabel")>
  	        Please enter or select a value in the Name field.
+        </#if>
+        <#--Checking if role field is empty-->
+        <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
+    	    Please specify a role for this activity.
         </#if>
         
         </p>
@@ -155,18 +155,19 @@
             <#if numDateFields == 1 >
                <#--Generated html is a map with key name mapping to html string-->
                <#if htmlForElements?keys?seq_contains("startField")>
-                	<label for="startField">Start Year ${yearHint}</label>
-               		${htmlForElements["startField"]}
+                	<label class="dateTimeLabel" for="startField">Start Year</label>
+               		${htmlForElements["startField"]} ${yearHint}
                </#if>
             <#else>
                 <h4>Years of Participation in ${roleDescriptor?capitalize}</h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
-                	 <label for="startField">Start Year ${yearHint}</label>
-               		${htmlForElements["startField"]}
+                	    <label class="dateTime" for="startField">Start</label>
+               		    ${htmlForElements["startField"]} ${yearHint}
                </#if>
+               <p></p>
                <#if htmlForElements?keys?seq_contains("endField")>
-               		<label for="endField">End Year ${yearHint}</label>
-               		${htmlForElements["endField"]}
+               		    <label class="dateTime" for="endField">End</label>
+               		    ${htmlForElements["endField"]} ${yearHint}
                </#if>
             </#if>
         </div>

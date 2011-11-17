@@ -111,12 +111,13 @@
 
         <h4>Years of Participation in Grant</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>
-			 							 <label for="startField">Start Year ${yearHint}</label>
-			 							${htmlForElements["startField"]}
+			 							 <label class="dateTime" for="startField">Start</label>
+			 							${htmlForElements["startField"]} ${yearHint}
 			 					 </#if>
+			 					 <p></p>
 			 					 <#if htmlForElements?keys?seq_contains("endField")>
-			 							<label for="endField">End Year ${yearHint}</label>
-			 							${htmlForElements["endField"]}
+			 							<label class="dateTime" for="endField">End</label>
+			 							${htmlForElements["endField"]} ${yearHint}
 					 	</#if>
 					 
             <p class="submit">
