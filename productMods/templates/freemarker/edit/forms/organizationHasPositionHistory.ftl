@@ -47,7 +47,7 @@
 
 <section id="organizationHasPositionHistory" role="region">        
     
-<@lvf.unsupportedBrowser>
+<@lvf.unsupportedBrowser urls.base/>
 
     <form id="organizationHasPositionHistory" class="customForm noIE67" action="${submitUrl}"  role="add/edit position history">
 
