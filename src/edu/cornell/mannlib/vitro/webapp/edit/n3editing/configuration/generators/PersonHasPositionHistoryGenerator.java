@@ -14,6 +14,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
@@ -153,7 +154,10 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
                               )
                 );
         
-        return conf;
+              conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
+            //Adding additional data, specifically edit mode
+              addFormSpecificData(conf, vreq);
+              return conf;
     }
 
     final static String n3ForNewPosition = 
