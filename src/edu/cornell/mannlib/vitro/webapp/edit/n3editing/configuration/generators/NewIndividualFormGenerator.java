@@ -36,7 +36,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	config.setTemplate( "newIndividualForm.ftl" );
     	
     	config.setN3Required( list(
-    	        "?newInd ?rdfType ?typeOfNew ."
+    	        "?newInd <" + VitroVocabulary.RDF_TYPE  + "> <" + getTypeOfNew(vreq) + "> ."
     	));    
     	//Optional because user may have selected either person or individual of another kind
     	//Person uses first name and last name whereas individual of other class would use label 
