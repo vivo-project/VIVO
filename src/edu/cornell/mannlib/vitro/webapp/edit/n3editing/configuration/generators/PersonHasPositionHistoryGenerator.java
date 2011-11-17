@@ -2,7 +2,10 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +17,8 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
 
 public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -264,4 +269,17 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "  ?endNode a <" + dateTimeValueType + "> . \n" +          
         "  ?endNode <" + dateTimePrecision + "> ?existingEndPrecision . }";
     
+    //Adding form specific data such as edit mode
+  	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+  		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
+  		formSpecificData.put("editMode", getEditMode(vreq).name().toLowerCase());
+  		editConfiguration.setFormSpecificData(formSpecificData);
+  	}
+
+  	public EditMode getEditMode(VitroRequest vreq) {
+  		List<String> predicates = new ArrayList<String>();
+  		predicates.add(trainingAtOrg);
+  		return AddRoleUtils.getEditMode(vreq, predicates);
+  	}
+
 }
