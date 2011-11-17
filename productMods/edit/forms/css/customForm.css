@@ -93,6 +93,12 @@ div.acSelection {
     display: none;
 }
 /* <------ DATE TIME*/
+form.customForm label.dateTime {
+    display: inline;
+}
+form.customForm fieldset {
+    display: inline;
+}
 fieldset.dateTime label {
     display: inline;
 }
