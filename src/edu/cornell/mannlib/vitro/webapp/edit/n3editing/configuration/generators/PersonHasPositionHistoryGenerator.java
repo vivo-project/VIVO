@@ -127,7 +127,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
                 );
         
         conf.addField( new FieldVTwo().
-                setName("orgType").setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
+                setName("orgType").
+                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
                 setObjectClassUri(orgClass)
                 );
         
@@ -159,16 +160,16 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "?org <" + orgForPositionPred + "> ?position .";    
     
     final static String positionTitleAssertion =
-        "?position <" + RDFS.label.getURI() + "> ?positionTitle";
+        "?position <" + RDFS.label.getURI() + "> ?positionTitle .";
     
     final static String positionTypeAssertion =
-        "?position a ?positionType";
+        "?position a ?positionType .";
     
     final static String orgLabelAssertion =
-        "?org <" + RDFS.label.getURI() + "> ?orgLabel";
+        "?org <" + RDFS.label.getURI() + "> ?orgLabel .";
     
     final static String orgTypeAssertion = 
-        "?org a ?orgType";
+        "?org a ?orgType .";
     
     final static String n3ForStart =
         "?position <" + positionToInterval + "> ?intervalNode . \n" +    
