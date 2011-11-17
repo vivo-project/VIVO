@@ -109,15 +109,15 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         
         conf.addField( new FieldVTwo().                        
                 setName("positionTitle")
-                .setRangeDatatypeUri( XSD.xstring.toString() )
-                // .setValidators("[nonempty]")
+                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                setValidators( list("nonempty") )
                 );
         
         conf.addField( new FieldVTwo().
                 setName("positionType").
                 setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
-                setObjectClassUri(positionClass)
-                //setValidators( ["nonempty"])
+                setObjectClassUri(positionClass).
+                setValidators( list("nonempty") )
                 );
  
         conf.addField( new FieldVTwo().
@@ -128,8 +128,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
-                setRangeDatatypeUri(XSD.xstring.toString())
-                // .setValidators("[nonempty]")
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("nonempty") )
                 );
         
         conf.addField( new FieldVTwo().

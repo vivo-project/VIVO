@@ -31,10 +31,10 @@
     	        Please enter a First Name for this person.
     	    <#elseif  errorFieldName == "lastName">
     	        Please enter a Last Name for this person.
-        	<#elseif  errorFieldName == "lastName">
-        	    ${submissionErrors[errorFieldName]}
+        	<#elseif  errorFieldName == "label">
+        	    Please enter a value in the name field.
     	    </#if>
-    	    <br />${errorFieldName}
+    	    <br />
     	</#list>
         </p>
     </section>
