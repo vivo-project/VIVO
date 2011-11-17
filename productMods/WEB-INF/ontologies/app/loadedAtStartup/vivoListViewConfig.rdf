@@ -60,6 +60,7 @@
      ** core:hasResearcherRole
      ** core:hasTeacherRole
      ** core:hasOrganizerRole
+     ** core:hasAttendeeRole
      these three are an exception, and share a separate config
      ** core:hasInvestigatorRole
      ** core:hasCo-PrincipalInvestigatorRole
@@ -97,7 +98,11 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasOrganizerRole">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
     </rdf:Description>
-    
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasAttendeeRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+        
     
     <!-- The next two roles may not have a "role in" anything -->
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasEditorRole">

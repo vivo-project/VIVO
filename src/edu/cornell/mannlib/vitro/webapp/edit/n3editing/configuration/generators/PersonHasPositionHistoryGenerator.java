@@ -154,10 +154,12 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
                               )
                 );
         
-              conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
-            //Adding additional data, specifically edit mode
-              addFormSpecificData(conf, vreq);
-              return conf;
+        conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
+
+        //Adding additional data, specifically edit mode
+        addFormSpecificData(conf, vreq);
+
+        return conf;
     }
 
     final static String n3ForNewPosition = 
@@ -240,12 +242,12 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         
     final static String existingIntervalNodeQuery =
         "SELECT ?existingIntervalNode WHERE { \n" + 
-        "  ?position <${positionToInterval}> ?existingIntervalNode . \n" +
+        "  ?position <" + positionToInterval + "> ?existingIntervalNode . \n" +
         "  ?existingIntervalNode a <" + intervalType + "> . }";
     
     final static String existingStartNodeQuery = 
         "SELECT ?existingStartNode WHERE { \n" +
-        "  ?position <${positionToInterval}> ?intervalNode . \n" +
+        "  ?position <" + positionToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?existingStartNode . \n" + 
         "  ?existingStartNode a <" + dateTimeValueType + "> .}   ";
@@ -262,8 +264,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "  ?position <" + positionToInterval + "> ?intervalNode . \n" +
         "  ?intervalNode a <" + intervalType + "> . \n" +
         "  ?intervalNode <" + intervalToStart + "> ?startNode . \n" +
-        "  ?startNode a <${dateTimeValueType}> . \n" +           
-        "  ?startNode <${dateTimePrecision}> ?existingStartPrecision . }";
+        "  ?startNode a  <" + dateTimeValueType + "> . \n" +           
+        "  ?startNode <" + dateTimePrecision + "> ?existingStartPrecision . }";
     
     final static String existingEndPrecisionQuery = 
         "SELECT ?existingEndPrecision WHERE { \n" +
