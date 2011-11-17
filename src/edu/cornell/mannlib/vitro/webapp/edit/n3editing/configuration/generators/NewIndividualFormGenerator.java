@@ -2,11 +2,15 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.hp.hpl.jena.rdf.model.Literal;
+import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
@@ -32,29 +36,36 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	config.setTemplate( "newIndividualForm.ftl" );
     	
     	config.setN3Required( list(
-    	        "?newInd ?rdfType ?typeOfNew .",
-    	        N3_PREFIX + "?newInd foaf:firstName ?firstName .",             
-                N3_PREFIX + "?newInd foaf:lastName  ?lastName ."
+    	        "?newInd ?rdfType ?typeOfNew ."
     	));    
+    	//Optional because user may have selected either person or individual of another kind
+    	//Person uses first name and last name whereas individual of other class would use label 
+    	config.setN3Optional(list(
+    	        N3_PREFIX + "?newInd foaf:firstName ?firstName ; foaf:lastName ?lastName .",             
+                N3_PREFIX + "?newInd <" + RDFS.label.getURI() + "> ?label ."
+    	));
     	                    
-    	config.addNewResource("newInd", null);
-    	
-    	config.addUrisInScope("typeOfNew",list( getTypeOfNew(vreq) ) )
-    	      .addUrisInScope("rdfType",  list( VitroVocabulary.RDF_TYPE ));
+    	config.addNewResource("newInd", vreq.getWebappDaoFactory().getDefaultNamespace());
     	    	
-        config.setLiteralsOnForm( list( "firstName", "lastName" ));            	
-    	
+    	config.setUrisOnform(list ());
+        config.setLiteralsOnForm( list( "label", "firstName", "lastName" ));            	
+    	setUrisAndLiteralsInScope(config);
     	//No SPARQL queries for existing since this is only used to create new, never for edit    	
     	    	
     	config.addField(new FieldVTwo().
     	        setName("firstName").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
-    	        setValidators(list("nonempty")));
+    	        setValidators(getFirstNameValidators(vreq)));
     	
     	config.addField(new FieldVTwo().
                 setName("lastName").
     	        setRangeDatatypeUri(XSD.xstring.getURI()).
-                setValidators(list("nonempty")));    	    	        
+                setValidators(getLastNameValidators(vreq)));    	
+    
+    	config.addField(new FieldVTwo().
+                setName("label").
+    	        setRangeDatatypeUri(XSD.xstring.getURI()).
+                setValidators(getLabelValidators(vreq)));    	  
     	    	
         addFormSpecificData(config, vreq);        
         
@@ -71,7 +82,33 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
     	return config;
     }
     
-    //Get parameter from HTTP request for type of new individual
+    //first and last name have validators if is person is true
+    private List<String> getFirstNameValidators(VitroRequest vreq) {
+		List<String> validators = new ArrayList<String>();
+		if(isPersonType(vreq)) {
+			validators.add("nonempty");
+		}
+		return validators;
+	}
+
+	private List<String> getLastNameValidators(VitroRequest vreq) {
+		List<String> validators = new ArrayList<String>();
+		if(isPersonType(vreq)) {
+			validators.add("nonempty");
+		}
+		return validators;
+	}
+
+	//validate label if person is not true
+	private List<String> getLabelValidators(VitroRequest vreq) {
+		List<String> validators = new ArrayList<String>();
+		if(!isPersonType(vreq)) {
+			validators.add("nonempty");
+		}
+		return validators;
+	}
+
+	//Get parameter from HTTP request for type of new individual
     private String getTypeOfNew(VitroRequest vreq) {
         String typeUri = vreq.getParameter("typeOfNew");
         if( typeUri == null || typeUri.trim().isEmpty() )
@@ -120,6 +157,18 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
 	    }
 	    return isPersonType;
 	}
+	 private void setUrisAndLiteralsInScope(EditConfigurationVTwo editConfiguration) {
+	    	HashMap<String, List<String>> urisInScope = new HashMap<String, List<String>>();
+	    	//note that at this point the subject, predicate, and object var parameters have already been processed
+	    	urisInScope.put(editConfiguration.getVarNameForSubject(), 
+	    			Arrays.asList(new String[]{editConfiguration.getSubjectUri()}));
+	    	urisInScope.put(editConfiguration.getVarNameForPredicate(), 
+	    			Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
+	    	editConfiguration.setUrisInScope(urisInScope);
+	    	//Uris in scope include subject, predicate, and object var
+	    	
+	    	editConfiguration.setLiteralsInScope(new HashMap<String, List<Literal>>());
+	    }
 	
 	private String N3_PREFIX = "@prefix foaf:<http://xmlns.com/foaf/0.1/> .\n";
 }

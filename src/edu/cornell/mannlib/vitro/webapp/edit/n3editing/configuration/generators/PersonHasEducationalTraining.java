@@ -127,8 +127,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
         conf.addField( new FieldVTwo().
                 setName("majorField").
-                setRangeDatatypeUri( XSD.xstring.toString() ));
-                //setValidators( ) datatype:stringDatatypeUriJson                        
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setValidators(list("datatype:" + XSD.xstring.toString())));
         
         conf.addField( new FieldVTwo().
                 setName("org").
@@ -138,23 +138,25 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
-                setRangeDatatypeUri(XSD.xstring.toString() ));
-                //setValidators( ["nonempty"] )
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("nonempty") ));
                 
         conf.addField( new FieldVTwo().
                 setName("orgType").
                 setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri( orgClass ));
-                //setValidators( ["nonempty"])
+                setObjectClassUri( orgClass ).
+                setValidators( list("nonempty")));
                 //setLiteralOptions( [ "Select one" ] )
                 
         conf.addField( new FieldVTwo().
                 setName("dept").
-                setRangeDatatypeUri( XSD.xstring.toString() ));
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setValidators(list("datatype:" + XSD.xstring.toString())));
                 
         conf.addField( new FieldVTwo().
                 setName("info").
-                setRangeDatatypeUri( XSD.xstring.toString() ));
+                setRangeDatatypeUri( XSD.xstring.toString() ).
+                setValidators(list("datatype:" + XSD.xstring.toString())));
 
         FieldVTwo startField = new FieldVTwo().
         						setName("startField");

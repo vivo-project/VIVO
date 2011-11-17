@@ -35,4 +35,8 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String intervalToEnd =vivoCore+"end";
 
     final static String orgClass ="http://xmlns.com/foaf/0.1/Organization" ;
+    
+    //TODO: Define these elsewhere
+    final static String UMLSClass = vivoCore + "UMLS";
+    final static String AgrovocClass = vivoCore + "Agrovoc";
 }
