@@ -35,7 +35,7 @@ function createScimapType(map, mapName) {
 		html: '&copy; 2008 The Regents of the University of California and SciTech Strategies.<br>' +
 				'Map updated by <a href="http://mapofscience.com">SciTech Strategies</a>, ' +
 				'<a href="http://www.ost.uqam.ca/" title="Observatoire des sciences et des technologies">OST</a>, ' +
-				'and <a href="http://cns.iu.edu" title="CyberInfrastructure for Network Science">CNS</a> in 2010'
+				'and <a href="http://cns.iu.edu" title="CyberInfrastructure for Network Science">CNS</a> in 2011.'
 	});
 	map.mapTypes.set(mapName, sciMapType);
 }
