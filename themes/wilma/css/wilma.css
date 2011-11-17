@@ -1251,6 +1251,10 @@ h2#mainImage, #share-contact h2 {
 img.individual-photo {
     border: 7px solid #ebebeb;
 }
+.rdf-url {
+    padding-top: .8em;
+    display: block;
+}
 ul#individual-tools-people {
     border-bottom: 1px solid #e8ece9;
     color: #b2d15a;

@@ -108,7 +108,7 @@ $(document).ready(function(){
         {
             content: {
                 prerender: true, // We need this for the .click() event listener on 'a.close'
-                text: '<h5>share the URI for this profile</h5> <input id="uriLink" type="text" value="' + $('#uriIcon').attr('title') + '" /> <a class="close" href="#">close</a>'
+                text: '<h5>share the URI for this profile</h5> <input id="uriLink" type="text" value="' + $('#uriIcon').attr('title') + '" /><h5><a class ="rdf-url" href="' + individualRdfUrl + '">view profile in RDF format</a></h5><a class="close" href="#">close</a>'
             },
             position: {
                 corner: {
@@ -127,8 +127,8 @@ $(document).ready(function(){
                 }
             },
             style: {
-                padding: '6px',
-                width: 380,
+                padding: '1em',
+                width: 400,
                 backgroundColor: '#f1f2ee'
             }
         });
