@@ -841,6 +841,9 @@ footer p.copyright {
     padding-left: 30px;
     width: 500px;
 }
+footer p.copyright small {
+    font-size: 1em;
+}
 ul#footer-nav {
     float: right;
     list-style: none;
