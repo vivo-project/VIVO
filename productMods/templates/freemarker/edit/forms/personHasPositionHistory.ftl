@@ -61,19 +61,19 @@
         </#list>
         <#--Checking if Org Type field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "orgType")>
- 	        Please select a value in the Organization Type field.
+ 	        Please select a value in the Organization Type field.<br />
         </#if>
         <#--Checking if Org Name field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "orgLabel")>
- 	        Please enter or select a value in the Name field.
+ 	        Please enter or select a value in the Name field.<br />
         </#if>
         <#--Checking if Position Title field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "positionTitle")>
- 	        Please enter a value in the Position Title field.
+ 	        Please enter a value in the Position Title field.<br />
         </#if>
         <#--Checking if Position Type field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "positionType")>
- 	        Please select a value in the Position Type field.
+ 	        Please select a value in the Position Type field.<br />
         </#if>
         
         </p>
@@ -89,7 +89,7 @@
         <#list orgTypeOpts?keys as key>             
             <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
         </#list>
-    </select>   
+    </select>
   </p>
 
   <div class="fullViewOnly">        
@@ -110,11 +110,11 @@
       <label for="positionType">Position Type ${requiredHint}</label>
       <#assign posnTypeOpts = editConfiguration.pageData.positionType />
       <select name="positionType" style="margin-top:-2px" >
-          <option value="" selected="selected">Select one</option>                
+          <option value="" <#if positionTypeValue == "">selected</#if>>Select one</option>                
           <#list posnTypeOpts?keys as key>             
-              <option value="${key}"  <#if positionTypeValue = key>selected</#if>>${posnTypeOpts[key]}</option>         
+              <option value="${key}"  <#if positionTypeValue == key>selected</#if>>${posnTypeOpts[key]}</option>         
           </#list>
-      </select>   
+      </select>
       <p></p>
       <#--Need to draw edit elements for dates here-->
        <#if htmlForElements?keys?seq_contains("startField")>
@@ -153,7 +153,6 @@ var customFormData  = {
     defaultTypeName: 'organization' // used in repair mode, to generate button text and org name field label
 };
 </script>
-
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}

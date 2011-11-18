@@ -90,7 +90,7 @@
         </#list>
         <#--Checking if Name field is empty-->
          <#if lvf.submissionErrorExists(editSubmission, "activityLabel")>
- 	        Please enter or select a value in the Name field.
+ 	        Please enter or select a value in the Name field.<br />
         </#if>
         <#--Checking if role field is empty-->
         <#if lvf.submissionErrorExists(editSubmission, "roleLabel")>
