@@ -284,7 +284,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
 
   	public EditMode getEditMode(VitroRequest vreq) {
   		List<String> predicates = new ArrayList<String>();
-  		predicates.add(trainingAtOrg);
+  		predicates.add(positionInOrgPred);
   		return AddRoleUtils.getEditMode(vreq, predicates);
   	}
 
