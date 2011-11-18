@@ -13,7 +13,7 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
 
     final static String vivoCore ="http://vivoweb.org/ontology/core#" ;
     final static String rdfs =VitroVocabulary.RDFS ;
-    
+    final static String foaf = "http://xmlns.com/foaf/0.1/";
     final static String type =VitroVocabulary.RDF_TYPE ;            
     final static String label =rdfs+"label" ;
     
@@ -24,7 +24,9 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String degreeEarned =vivoCore+"degreeEarned" ;
     final static String degreeOutcomeOf =vivoCore+"degreeOutcomeOf" ;
     final static String trainingAtOrg =vivoCore+"trainingAtOrganization" ;
-
+    final static String authorRankPredicate = vivoCore + "authorRank";
+    final static String linkedAuthorPredicate = vivoCore + "linkedAuthor";
+    
     final static String dateTimeValue =vivoCore+"dateTime";
     final static String dateTimeValueType =vivoCore+"DateTimeValue";
     final static String dateTimePrecision =vivoCore+"dateTimePrecision";
@@ -35,6 +37,7 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String intervalToEnd =vivoCore+"end";
 
     final static String orgClass ="http://xmlns.com/foaf/0.1/Organization" ;
+    final static String personClass = foaf + "Person";
     
     //TODO: Define these elsewhere
     final static String UMLSClass = vivoCore + "UMLS";

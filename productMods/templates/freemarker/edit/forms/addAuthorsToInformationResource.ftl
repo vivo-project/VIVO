@@ -4,7 +4,20 @@
 
 <#import "lib-vivo-form.ftl" as lf>
 
-<#assign title="<em>${infoResourceName}</em>" />
+<#--Retrieve certain page specific information information-->
+<#assign newRank = editConfiguration.pageData.newRank />
+<#assign existingAuthorInfo = editConfiguration.pageData.existingAuthorInfo />
+<#assign rankPredicate = editConfiguration.pageData.rankPredicate />
+
+<#--Values from edit configuration to populate fields -->
+
+<#--UL class based on size of existing authors-->
+<#assign urlClass = ""/>
+<#if (existingAuthorInfo?size > 0)>
+	<#assign urlClass = "class='dd'"/>
+</#if>
+
+<#assign title="<em>${editConfiguration.subjectName}</em>" />
 <#assign requiredHint="<span class='requiredHint'> *</span>" />
 <#assign initialHint="<span class='hint'>(initial okay)</span>" />
 
@@ -18,41 +31,38 @@
     var authorshipData = [];
 </script>
 
-<#list authors as author>
-<li class="authorship">
-    <#-- span.author will be used in the next phase, when we display a message that the author has been
-    removed. That text will replace the a.authorName, which will be removed. -->    
-    <span class="author">
-        <#-- This span is here to assign a width to. We can't assign directly to the a.authorName,
-        for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
-        <span class="authorNameWrapper">
-            <#if author <#--<c:when test="${!empty author}">-->>
-                <#assign authorUri=author.URI />
-                <#assign authorName=author.name />
-                <#assign authorHref="/individual" />
-                <#-- I don't know how to "translate"" this in to freemarker <c:param name="uri" value="${authorUri}"/>-->
-                <span class="authorName">${authorName}</span>
-              <#else>      
-                <#assign authorUri="" />
-                <#assign authorName="" />
-                <#assign authorHref="/individual" />
-                <#-- I don't know how to "translate" this in to freemarker  <c:param name="uri" value="${authorshipUri}"/>-->
-                <span class="authorName">${authorshipName}</span><em> (no linked author)</em>
-            </#if>
-        </span>
-        
-        <#assign deleteAuthorshipHref="/edit/primitiveDelete" />
-        <a href="${deleteAuthorshipHref}" class="remove">Remove</a>
-    </span>
-</li>
 
-<script type="text/javascript">
-    authorshipData.push({
-        "authorshipUri": "${authorshipUri}",
-        "authorUri": "${authorUri}",
-        "authorName": "${authorName}"                
-    });
-</script>
+<#assign authorHref="/individual?uri=" />
+<#--This should be a list of java objects where URI and name can be retrieved-->
+<#list existingAuthorInfo as authorship>
+	<#local authorUri = authorship.authorUri/>
+	<#local authorName = authorship.authorName/>
+
+	<li class="authorship">
+			<#-- span.author will be used in the next phase, when we display a message that the author has been
+			removed. That text will replace the a.authorName, which will be removed. -->    
+			<span class="author">
+					<#-- This span is here to assign a width to. We can't assign directly to the a.authorName,
+					for the case when it's followed by an em tag - we want the width to apply to the whole thing. -->
+					<span class="authorNameWrapper">
+							<#if (authorUri?length > 0)>
+									<span class="authorName">${authorName}</span>
+								<#else>      
+									<span class="authorName">${authorship.authorshipName}</span><em> (no linked author)</em>
+							</#if>
+					</span>
+
+					<a href="${urls.base}/edit/primitiveDelete" class="remove">Remove</a>
+			</span>
+	</li>
+
+	<script type="text/javascript">
+			authorshipData.push({
+					"authorshipUri": "${authorship.authorshipUri}",
+					"authorUri": "${authorUri}",
+					"authorName": "${authorName}"                
+			});
+	</script>
 </#list>
 
     <#--// A new author will be ranked last when added.
@@ -65,10 +75,10 @@
 
 <section id="showAddForm" role="region">
     <input type="hidden" name = "editKey" value="${editKey}" />
-    <input type="submit" id="showAddFormButton" value="${editConfiguration.submitLabel}" role="button" />
+    <input type="submit" id="showAddFormButton" value="replace submit label" role="button" />
 
     <span class="or"> or </span>
-    <a class="cancel" href="${editConfiguration.cancelUrl}" title="Cancel">Return to Publication</a>
+    <a class="cancel" href="${cancelUrl}" title="Cancel">Return to Publication</a>
 </section> 
 
 <form id="addAuthorForm" action ="${submitUrl}" class="customForm">
@@ -92,12 +102,12 @@
         <input type="hidden" name="rank" id="rank" value="${newRank}" role="input" />
     
         <p class="submit">
-            <input type="hidden" name = "editKey" value="${keyValue}" role="input" />
-            <input type="submit" id="submit" value="${submitButtonText}" role="button" role="input" />
+            <input type="hidden" name = "editKey" value="${editKey}" role="input" />
+            <input type="submit" id="submit" value="Add Author" role="button" role="input" />
             
             <span class="or"> or </span>
             
-            <a class="cancel" href="${editConfiguration.cancelUrl}" title="Cancel">Cancel</a>
+            <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
         </p>
 
         <p id="requiredLegend" class="requiredHint">* required fields</p>
@@ -105,16 +115,19 @@
 
 <script type="text/javascript">
 var customFormData = {
-    rankPredicate: ${rankPredicate},
-    acUrl: ${acUrl},
-    reorderUrl: '/edit/reorder'
+    rankPredicate: '${rankPredicate}',
+    acUrl: '${urls.base}/autocomplete?tokenize=true',
+    reorderUrl: '{urls.base}/edit/reorder'
 };
 </script>
 
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
+									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/autocomplete.css" />',
                   '<link rel="stylesheet" href="${urls.base}/edit/forms/css/addAuthorsToInformationResource.css" />')}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>',
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>'),
+							'<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
+							'<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/edit/forms/js/addAuthorsToInformationResource.js"></script>')}

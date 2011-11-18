@@ -124,9 +124,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
  
 
 	private void setVarNames(EditConfigurationVTwo editConfiguration) {
-		  editConfiguration.setVarNameForSubject("person");
+		  editConfiguration.setVarNameForSubject("subject");
 	      editConfiguration.setVarNameForPredicate("predicate");
-	      editConfiguration.setVarNameForObject("edTraining");
+	      editConfiguration.setVarNameForObject("conceptNode");
 	}
 
 	protected void setTemplate(EditConfigurationVTwo editConfiguration,
@@ -171,10 +171,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	 */
 	 private Map<String, String> generateNewResources(VitroRequest vreq) {
 			HashMap<String, String> newResources = new HashMap<String, String>();
-			//TODO: Get default namespace
-			String defaultNamespace = vreq.getWebappDaoFactory().getDefaultNamespace();
-			newResources.put("conceptNode", defaultNamespace + "individual");
-			//Only the node itself will be new for a newly created concept node
+			//There are no new resources here, the concept node uri doesn't
+			//get created but already exists, and vocab uri should already exist as well
 			return newResources;
 		}
     
@@ -221,6 +219,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	List<String> urisOnForm = new ArrayList<String>();
     	List<String> literalsOnForm = new ArrayList<String>();
     	//The URI of the node that defines the concept
+    	urisOnForm.add("conceptURI");
     	urisOnForm.add("vocabURI");
     	//Also need to add the label of the concept
     	literalsOnForm.add("conceptLabel");
@@ -249,7 +248,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     private HashMap<String, String> generateSparqlForExistingUris(VitroRequest vreq) {
     	HashMap<String, String> map = new HashMap<String, String>();
     	//Existing uris here might include is defined by
-    	map.put("vocabURI", getExistingVocabURIQuery());
+    	//map.put("vocabURI", getExistingVocabURIQuery());
     	return map;
     }
     
@@ -290,11 +289,23 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	 */
 	
 	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
-    	
+    	setConceptNodeField(editConfiguration, vreq);
     	setConceptLabelField(editConfiguration, vreq);
     	setVocabURIField(editConfiguration, vreq);
     }
     
+	//this field will be hidden and include the concept node URI
+	private void setConceptNodeField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq) {
+		editConfiguration.addField(new FieldVTwo().
+				setName("conceptNode").
+				setValidators(new ArrayList<String>()).
+				setOptionsType("UNDEFINED"));
+		
+	}
+
+
+
 	private void setVocabURIField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
