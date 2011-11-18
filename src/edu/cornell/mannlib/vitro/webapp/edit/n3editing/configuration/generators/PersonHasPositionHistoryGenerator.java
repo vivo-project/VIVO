@@ -236,9 +236,11 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "  ?existingOrgType rdfs:subClassOf <" + orgClass + "> " +
         "} ";
     
+    //Huda: changed this from rdf:type to vitro:mostSpecificType since returning thing
     final static String positionTypeQuery = 
+    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
         "SELECT ?existingPositionType WHERE { \n" + 
-        "  ?position a ?existingPositionType . }";
+        "  ?position vitro:mostSpecificType ?existingPositionType . }";
         
     final static String existingIntervalNodeQuery =
         "SELECT ?existingIntervalNode WHERE { \n" + 
