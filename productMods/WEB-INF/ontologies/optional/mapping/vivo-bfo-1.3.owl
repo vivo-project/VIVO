@@ -168,9 +168,9 @@
     </owl:Class>
     
 
-    <!-- http://vivoweb.org/ontology/core#Process -->
+    <!-- http://vivoweb.org/ontology/core#Project -->
 
-    <owl:Class rdf:about="&core;Process">
+    <owl:Class rdf:about="&core;Project">
         <rdfs:subClassOf rdf:resource="&span;Process"/>
     </owl:Class>
     
