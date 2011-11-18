@@ -92,7 +92,7 @@
     <p class="inline">    
         <label for="orgType">Organization Type ${requiredHint}</label>
         <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-        <select id="typeSelector" name="orgType"  <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>>
+        <select id="typeSelector" name="orgType"  ${disabledVal}>
             <option value="" selected="selected">Select one</option>                
             <#list orgTypeOpts?keys as key>             
                 <#if orgTypeValue = key>
@@ -108,7 +108,7 @@
     
     <p>
         <label for="relatedIndLabel">### Name ${requiredHint}</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabelValue}"  <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>/>
+        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabelValue}" <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if> />
     </p>
     
     <#--Store values in hidden fields-->
@@ -118,8 +118,6 @@
     </#if>
     
     <@lvf.acSelection urls.base />
-
-    <input class="acLabelReceiver" type="hidden" id="existingOrgLabel" name="existingOrgLabel" value="" />
     
     <p>
         <label for="dept">Department or School Name within the ###</label>
@@ -132,8 +130,7 @@
       <#assign degreeOpts = editConfiguration.pageData.degree />  
       <select name="degree" id="degreeUri" >
         <option value="" <#if degreeValue = "">selected</#if>>Select one</option>        
-       
-        <#list degreeOpts?keys as key>                 
+               <#list degreeOpts?keys as key>                 
         <option value="${key}" <#if degreeValue = key>selected</#if>>${degreeOpts[key]}</option>                    
         </#list>                                
       </select>    
@@ -145,11 +142,11 @@
     </p>   
           
     <p>    
-        <label for="info">Supplemental Information</label>
+        <label for="info">Supplemental Information (e.g., <em>Postdoctoral training</em> or <em>Transferred</em>)</label>
         <input  size="50"  type="text" id="info" name="info" value="${infoValue}" />
-        <br />e.g., <em>Postdoctoral training</em> or <em>Transferred</em>    
+        
     </p>
-    
+    <p></p>
     <#--Need to draw edit elements for dates here-->
      <#if htmlForElements?keys?seq_contains("startField")>
 			<label class="dateTime" for="startField">Start</label>

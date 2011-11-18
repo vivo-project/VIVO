@@ -4,53 +4,79 @@
 
 <#import "lib-vivo-form.ftl" as lvf>
 
-<#if editConfiguration.objectUri?has_content>
-    <#assign editMode = "edit">
-<#else>
-    <#assign editMode = "add">
+<#--Retrieve certain edit configuration information-->
+<#assign htmlForElements = editConfiguration.pageData.htmlForElements />
+<#assign editMode = editConfiguration.pageData.editMode />
+
+<#--Get existing value for specific data literals and uris-->
+<#assign orgTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgType")/>
+<#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel")/>
+<#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle")/>
+<#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType")/>
+
+<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
+<#assign disabledVal = ""/>
 <#if editMode == "edit">        
         <#assign formAction="Edit">        
         <#assign submitButtonText="Edit Position">
+        <#assign disabledVal="disabled">
 <#else>
         <#assign formAction="Create">        
         <#assign submitButtonText="Create Position">
+        <#assign disabledVal="">
 </#if>
 
-<#--Get existing value for specific data literals and uris-->
-
-<#assign orgLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel")/>
-<#assign positionTitle = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle")/>
-<#assign startField = lvf.getFormFieldValue(editSubmission, editConfiguration, "startField") />
-<#assign endField = lvf.getFormFieldValue(editSubmission, editConfiguration, "endField") />
-
 <#assign requiredHint="<span class='requiredHint'> *</span>"/> 
+<#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
-<#-- <@lvf.unsupportedBrowser urls.base /> -->
+<@lvf.unsupportedBrowser urls.base /> 
 
 <h2>${formAction} position entry for ${editConfiguration.subjectName}</h2>
 
-<#if errorOrgType??>
-    <#assign errorMessage = "You must supply an organization type." />
-</#if>
-
-<#if errorOrgLabel??>
-    <#assign errorMessage = "You must supply an organization name." />
-</#if>
-
-<#if errorPositionTitle??>
-    <#assign errorMessage = "You must supply a position title." />
-</#if>
-
-<#if errorPositionType??>
-    <#assign errorMessage = "You must supply a position type." />
-</#if>
-
-<#if errorMessage?has_content>
+<#--Display error messages if any-->
+<#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
-        <p>${errorMessage}</p>
+        <p>
+        <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
+        <#list submissionErrors?keys as errorFieldName>
+        	<#if errorFieldName == "startField">
+        	    <#if submissionErrors[errorFieldName]?contains("before")>
+        	        The Start Year must be earlier than the End Year.
+        	    <#else>
+        	        ${submissionErrors[errorFieldName]}
+        	    </#if>
+        	    <br />
+        	<#elseif errorFieldName == "endField">
+    	        <#if submissionErrors[errorFieldName]?contains("after")>
+    	            The End Year must be later than the Start Year.
+    	        <#else>
+    	            ${submissionErrors[errorFieldName]}
+    	        </#if>
+	        </#if>
+        </#list>
+        <#--Checking if Org Type field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "orgType")>
+ 	        Please select a value in the Organization Type field.
+        </#if>
+        <#--Checking if Org Name field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "orgLabel")>
+ 	        Please enter or select a value in the Name field.
+        </#if>
+        <#--Checking if Position Title field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "positionTitle")>
+ 	        Please enter a value in the Position Title field.
+        </#if>
+        <#--Checking if Position Type field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "positionType")>
+ 	        Please select a value in the Position Type field.
+        </#if>
+        
+        </p>
     </section>
 </#if>
 
@@ -58,14 +84,10 @@
   <p class="inline">    
     <label for="orgType">Organization Type ${requiredHint}</label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-    <select id="typeSelector" name="orgType"  >
+    <select id="typeSelector" name="orgType"  ${disabledVal} >
         <option value="" selected="selected">Select one</option>                
         <#list orgTypeOpts?keys as key>             
-            <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
-                <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
-            <#else>
-                <option value="${key}">${orgTypeOpts[key]}</option>
-            </#if>             
+            <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
         </#list>
     </select>   
   </p>
@@ -73,34 +95,40 @@
   <div class="fullViewOnly">        
   <p>
     <label for="relatedIndLabel">### Name ${requiredHint}</label>
-    <input type="text" name="orgLabel" id="relatedIndLabel" size="50" class="acSelector" value="${orgLabel}" >
+    <input type="text" name="orgLabel" id="relatedIndLabel" size="50" class="acSelector" value="${orgLabelValue}" <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>  >
   </p>
+  <#if editMode = "edit">
+			<input type="hidden" id="orgLabel"  name="orgLabel" value="${orgLabelValue}"/>
+   </#if>
 
     <@lvf.acSelection urls.base />
 
 
     <label for="positionTitle">Position Title ${requiredHint}</label>
-    <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitle}" role="input" />
+    <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
 
       <label for="positionType">Position Type ${requiredHint}</label>
       <#assign posnTypeOpts = editConfiguration.pageData.positionType />
-      <select id="typeSelector" name="positionType" style="margin-top:-2px" >
+      <select name="positionType" style="margin-top:-2px" >
           <option value="" selected="selected">Select one</option>                
           <#list posnTypeOpts?keys as key>             
-              <#if editConfiguration.objectUri?has_content && editConfiguration.objectUri = key>
-                  <option value="${key}"  selected >${posnTypeOpts[key]}</option>     
-              <#else>
-                  <option value="${key}">${posnTypeOpts[key]}</option>
-              </#if>             
+              <option value="${key}"  <#if positionTypeValue = key>selected</#if>>${posnTypeOpts[key]}</option>         
           </#list>
       </select>   
+      <p></p>
+      <#--Need to draw edit elements for dates here-->
+       <#if htmlForElements?keys?seq_contains("startField")>
+  			<label class="dateTime" for="startField">Start</label>
+  			${htmlForElements["startField"]} ${yearHint}
+       </#if>
+       <p></p>
+       <#if htmlForElements?keys?seq_contains("endField")>
+  			<label class="dateTime" for="endField">End</label>
+  		 	${htmlForElements["endField"]} ${yearHint}
+       </#if>
 
-      <label for="startField">Start Year</label>
-      <input class="text-field" name="startField-year" id="startField-year" type="text" value="${startField}" size="4" maxlength="4" role="input" />
-      <span class='hint'>(YYYY)</span>
-      <label for="endField">End Year</label>
-      <input class="text-field" name="endField-year" id="endField-year" type="text" value="${endField}" size="4" maxlength="4" role="input" />        
-      <span class='hint'>(YYYY)</span>
+    	<#--End draw elements-->
+    	
       <input type="hidden" name = "editKey" value="${editKey}" role="input"/>
 
    </div>
@@ -135,9 +163,6 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/cust
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
-
-
-
-
