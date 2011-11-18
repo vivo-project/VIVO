@@ -8,16 +8,16 @@
   <#assign ulClass="class='dd'">
 </#if>
 
-<#assign baseEditWebpageUrl=editConfiguration.pageData.baseEditWebpageUrl>
-<#assign deleteWebpageUrl=editConfiguration.pageData.deleteWebpageUrl>
-<#assign showAddFormUrl=editConfiguration.pageData.showAddFormUrl>
+<#assign baseEditWebpageUrl=editConfiguration.pageData.baseEditWebpageUrl!"baseEditWebpageUrl is undefined">
+<#assign deleteWebpageUrl=editConfiguration.pageData.deleteWebpageUrl!"deleteWebpageUrl is undefined">
+<#assign showAddFormUrl=editConfiguration.pageData.showAddFormUrl!"showAddFormUrl is undefined">
 
 <#if (editConfiguration.pageData.subjectName??) >
 <h2><em>${editConfiguration.pageData.subjectName}</em></h2>
 </#if>
 
 <h3>Manage Web Pages</h3>
-
+       
 <script type="text/javascript">
     var webpageData = [];
 </script>
@@ -29,7 +29,7 @@
    
     <#list editConfiguration.pageData.webpages as webpage>
         <li class="webpage" role="listitem">
-            <#if webpage.anchor>
+            <#if webpage.anchor??>
                 <#assign anchor=webpage.anchor >
             <#else>
                 <#assign anchor=webpage.url >
@@ -39,7 +39,7 @@
                 <a href="${webpage.url}">${anchor}</a>
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link}" class="edit">Edit</a> | 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}" class="edit">Edit</a> | 
                 <a href="${deleteWebpageUrl}" class="remove">Delete</a> 
             </span>
         </li>    
@@ -58,8 +58,9 @@
          addAuthorsToInformationResource.jsp. -->
     <a href="${showAddFormUrl}" id="showAddForm" class="button green">Add Web Page</a>
        
-    <a href="/indiviudal?uri=${editConfiguration.subjectUri}" id="returnToIndividual" class="return">Return to Individual</a>
+    <a href="${cancelUrl}" id="returnToIndividual" class="return">Return to Individual</a>
 </section>
+
 
 <script type="text/javascript">
 var customFormData = {

@@ -16,6 +16,8 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder.ParamMap;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
@@ -25,6 +27,8 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
  * It is not an example of the normal use of the RDF editing system and
  * was just migrated over from an odd use of the JSP RDF editing system
  * during the 1.4 release. 
+ * 
+ * This mainly sets up pageData for the template to use.
  */
 public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
     public static Log log = LogFactory.getLog(ManageWebpagesForIndividualGenerator.class);
@@ -35,6 +39,10 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         EditConfigurationVTwo config = new EditConfigurationVTwo();
         config.setTemplate("manageWebpagesForIndividual.ftl");
         
+        initBasics(config, vreq);
+        initPropertyParameters(vreq, session, config);
+        initObjectPropForm(config, vreq);
+        
         config.setSubjectUri(EditConfigurationUtils.getSubjectUri(vreq));
         config.setEntityToReturnTo( EditConfigurationUtils.getSubjectUri(vreq));
         
@@ -42,30 +50,25 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         config.addFormSpecificData("webpages",webpages);
 
         config.addFormSpecificData("rankPredicate", "http://vivoweb.org/ontology/core#rank" );
-        config.addFormSpecificData("reorderUrl", "/edit/reorder" );
-        
-
-        config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");
-        //<c:url var="deleteWebpageUrl" value="/edit/primitiveDelete" />
-              
-       config.addFormSpecificData("deleteWebpageUrl", "/edit/reorder");
-       //<c:url var="reorderUrl" value="/edit/reorder" />
+        config.addFormSpecificData("reorderUrl", "/edit/reorder" );       
+        config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");              
        
-        config.addFormSpecificData("baseEditWebpageUrl", "TODO.BASICEDITWEBPAGEURL");
-        /*
-        <c:url var="baseEditWebpageUrl" value="/edit/editRequestDispatch.jsp">
-            <c:param name="subjectUri" value="<%= subjectUri %>" />
-            <c:param name="predicateUri" value="<%= predicateUri %>" />
-            <c:param name="view" value="form" />
-        </c:url>
-        */               
+       ParamMap paramMap = new ParamMap();
+       paramMap.put("subjectUri", config.getSubjectUri());
+       paramMap.put("editForm", AddEditWebpageFormGenerator.class.getName());
+       paramMap.put("view", "form");
+       String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
+       
+        config.addFormSpecificData("baseEditWebpageUrl", path);                 
         
-        config.addFormSpecificData("showAddFormUrl", "TODO.SHOWADDFORMURL");
-//        <c:url var="showAddFormUrl" value="/edit/editRequestDispatch.jsp">
-//            <c:param name="subjectUri" value="<%= subjectUri %>" />
-//            <c:param name="predicateUri" value="<%= predicateUri %>" />
-//            <c:param name="cancelTo" value="manage" />
-//        </c:url>        
+        paramMap = new ParamMap();
+        paramMap.put("subjectUri", config.getSubjectUri());
+        paramMap.put("predicateUri", config.getPredicateUri());
+        paramMap.put("editForm" , AddEditWebpageFormGenerator.class.getName() );
+        paramMap.put("cancelTo", "manage");
+        path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
+        
+        config.addFormSpecificData("showAddFormUrl", path);          
         
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(config.getSubjectUri());
         if( subject != null && subject.getName() != null ){
