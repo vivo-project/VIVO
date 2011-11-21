@@ -2,10 +2,10 @@
 
 <#-- Custom form for managing web pages for individuals -->
 
-<#if (editConfiguration.pageData.webpages?size > 0) >
-  <#assign ulClass="">
-<#else>
+<#if (editConfiguration.pageData.webpages?size > 1) >
   <#assign ulClass="class='dd'">
+<#else>
+  <#assign ulClass="">
 </#if>
 
 <#assign baseEditWebpageUrl=editConfiguration.pageData.baseEditWebpageUrl!"baseEditWebpageUrl is undefined">
@@ -46,9 +46,9 @@
         
         <script type="text/javascript">
             webpageData.push({
-                "webpageUri": "${webpage.link}"              
+                "webpageUri": "${webpage.link?url}"              
             });
-        </script>             
+        </script>      
     </#list>  
 </ul>
 
@@ -70,8 +70,10 @@ var customFormData = {
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/edit/forms/css/manageWebpagesForIndividual.css" />')}
+                  '<link rel="stylesheet" href="${urls.base}/edit/forms/css/manageWebpagesForIndividual.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/edit/forms/js/manageWebpagesForIndividual.js"></script>')}
