@@ -7,12 +7,12 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
+<#--This is set for testing purposes - will be retrieved dynamically from the generator later-->
+<#assign sources = [{"uri":"UMLS", "label":"UMLS"}, {"uri":"Agrovoc", "label":"Agrovoc"}]/>
 
 
 <h2>Manage Associated Concepts</h2>
-
-<#--Display error messages if any-->
-
+    
 
 <#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
@@ -28,8 +28,10 @@
     </section>
 </#if>
 
+<#--@lvf.unsupportedBrowser-->
 
-<section id="addAssociatedConcept" role="region">        
+<div class="noIE67">
+
     
     
 <ul id="existingTerms" >
@@ -38,8 +40,7 @@
         var existingTermsData = [];
     </script>
     
-    <#list existingConcepts?keys as key>
-    	<#assign existingConcept = existingConcepts[key] />
+    <#list existingConcepts as existingConcept>
         <li class="existingTerm">
               
             <span class="term">
@@ -63,4 +64,58 @@
       </#list>    
 
 </ul>
-</section>
+       
+
+<#if (existingConcepts?size = 0) >   
+        <p>There are currently no concepts specified.</p>
+</#if>
+
+<div id="showAddForm">
+    <input type="submit" value="Add Term" id="showAddFormButton" name="showAddFormButton">  or 
+    <a class="cancel" href="${cancelUrl}">Return</a>
+</div> 
+    <form id="addTerminologyForm" class="customForm" action="${urls.base}/edit/processTerminologyAnnotation">
+
+    <#list sources as source>
+        <input type="radio" name="source" value="${source.uri}" role="radio" <#if selectedSource = source.uri>checked</#if> />
+        <label class="inline" for="${source.label}"> ${source.label}</label>
+        <br />
+    </#list>
+
+    <p class="inline">
+        <input type="text" id="searchTerm" label="Search UMLS Terms" class="acSelector" size="35" />
+        <input type="button" id="searchButton" name="searchButton" value="Search"/>
+    </p>
+    <input type="hidden" id="externalConceptURI" name="externalConceptURI" value=""/> <!-- Field value populated by JavaScript -->
+    <input type="hidden" id="externalConceptLabel" name="externalConceptLabel" value="" />  <!-- Field value populated by JavaScript -->
+
+    <div id="selectedTerm" name="selectedTerm" class="acSelection">
+        <%-- RY maybe make this a label and input field. See what looks best. --%>
+        <p class="inline">
+        </p>
+        <!-- Field value populated by JavaScript -->
+    </div>
+    	
+    <p class="submit">
+        <input type="submit" id="submit" name="submit" value="Add Term" />
+        <span class="or"> or <a class="cancel" href="${cancelUrl}">Cancel</a>
+    </p>
+
+    </form>
+</div>
+
+
+
+    <script type="text/javascript">
+    var customFormData = {
+        dataServiceUrl: '${urls.base}/UMLSTermsRetrieval',
+        UMLSCUIURL: 'http://link.informatics.stonybrook.edu/umls/CUI/'
+    };
+    </script>
+
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addTerminology.js"></script>')}
+
+
+
+

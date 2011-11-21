@@ -23,7 +23,7 @@
 <#assign requiredHint="<span class='requiredHint'> *</span>" />
 <#assign initialHint="<span class='hint'>(initial okay)</span>" />
 
-<#--include unsupported browser message-->
+<#--unsupported browser message-->
 <h2>${title}</h2>
 
 <ul id="authorships" ${ulClass}>

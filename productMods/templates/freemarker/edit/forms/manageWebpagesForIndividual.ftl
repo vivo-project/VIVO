@@ -40,7 +40,7 @@
             </span>
             <span class="editingLinks">
                 <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}" class="edit">Edit</a> | 
-                <a href="${deleteWebpageUrl}" class="remove">Delete</a> 
+                <a href="${urls.base}${deleteWebpageUrl}" class="remove">Delete</a> 
             </span>
         </li>    
         
@@ -65,7 +65,7 @@
 <script type="text/javascript">
 var customFormData = {
     rankPredicate: '${editConfiguration.pageData.rankPredicate}',
-    reorderUrl: '${editConfiguration.pageData.reorderUrl}'
+    reorderUrl: '${urls.base}/edit/reorder'
 };
 </script>
 
