@@ -145,13 +145,23 @@
 	<td>Faculty</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=externalAuthId</td>
+	<td>JaneFaculty@cornell.edu</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//input[@name='role' and @value='http://permissionSet-1']</td>
+	<td>id=verifyProfileLink</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submitAdd</td>
+	<td>waitForPopUp</td>
+	<td>verifyMatchWindow</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='role' and @value='http://permissionSet-1']</td>
 	<td></td>
 </tr>
 <tr>
