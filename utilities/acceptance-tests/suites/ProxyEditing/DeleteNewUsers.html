@@ -41,7 +41,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Delete new Curator account</td>
+	<td class="comment">Delete all test user account</td>
 	<td></td>
 </tr>
 <tr>
@@ -115,33 +115,48 @@
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Verify 3 user accounts exist before trying to delete them</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=ConnieCurator@cornell.edu</td>
+	<td>ConnieCurator@cornell.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>EddieEditor@cornell.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>JaneFaculty@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Delete the account</td>
+	<td class="comment">Delete the accounts</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>deleteAccount</td>
+	<td>//input[@name='deleteAccount' and @value='http://vivo.mydomain.edu/individual/u7032']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='deleteAccount' and @value='http://vivo.mydomain.edu/individual/u884']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=deleteAccount</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>delete-account</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this account?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>name=delete-account</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,18 +165,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>User accounts</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Deleted 1 accounts.</td>
+	<td>comment</td>
+	<td class="comment">Verify 3 user accounts are gone</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=ConnieCurator@cornell.edu</td>
+	<td>ConnieCurator@cornell.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>EddieEditor@cornell.edu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>JaneFaculty@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>

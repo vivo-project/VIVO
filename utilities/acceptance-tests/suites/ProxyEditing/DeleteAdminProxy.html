@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Validate Admin Proxy Editing</td>
+	<td class="comment">Delete Admin Proxy Editing Relationships</td>
 	<td></td>
 </tr>
 <tr>
@@ -101,262 +101,17 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that correct fields and text are present</td>
+	<td class="comment">Verify relationships exist</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Manage profile editing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Relate profile editors and profiles</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select editors</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select profiles</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Profile editors</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter nothing and get error message</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=createRelationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must select a minimum of 1 editor and profile.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select profile, but not editor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//form[@id='add-relation']/fieldset[2]/section/input</td>
-	<td>Facult</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//form[@id='add-relation']/fieldset[2]/section/input</td>
-	<td>fac</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=createRelationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must select a minimum of 1 editor and profile.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select editor, but not profile</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=selectProfileEditors</td>
-	<td>edito</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=createRelationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must select a minimum of 1 editor and profile.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Enter one of each</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=selectProfileEditors</td>
-	<td>editor</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Editor, Eddie |</td>
+	<td>Curator, Connie |</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//form[@id='add-relation']/fieldset[2]/section/input</td>
-	<td>faculty</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane | Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Remove editor and attempt to save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=createRelationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must select a minimum of 1 editor and profile.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add back editor and then remove profile</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=selectProfileEditors</td>
-	<td>editor</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=p.proxy-info-profile &gt; a.remove-proxy</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=createRelationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must select a minimum of 1 editor and profile.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add one link</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Editor, Eddie |</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//form[@id='add-relation']/fieldset[2]/section/input</td>
-	<td>faculty</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=ui-active-menuitem</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane | Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=createRelationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify relationship is set</td>
+	<td>link=Delete profile editor</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,16 +126,6 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add profile</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Selected profiles:</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Faculty, Jane | Faculty Member</td>
 	<td></td>
 </tr>
@@ -390,33 +135,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Librarian, Lily | Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Remove selection</td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
-	<td class="comment">Try to add relationship again</td>
+	<td class="comment">Delete all proxy editing relationships</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=selectProfileEditors</td>
-	<td>editor</td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>id=ui-active-menuitem</td>
+	<td>link=Remove selection</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>//form[@id='add-relation']/fieldset[2]/section/input</td>
-	<td>facul</td>
+	<td>click</td>
+	<td>link=Remove selection</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=ui-active-menuitem</td>
+	<td>link=Remove selection</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=createRelationship</td>
+	<td>link=Delete profile editor</td>
 	<td></td>
 </tr>
 <tr>
@@ -425,18 +175,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=addProfile</td>
-	<td>faculty</td>
+	<td>clickAndWait</td>
+	<td>link=Delete profile editor</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>no match</td>
+	<td>assertTitle</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test that editing works</td>
+	<td class="comment">Verify everything is gone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Curator, Connie |</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Editor, Eddie |</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Faculty, Jane | Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Librarian, Lily | Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Test that editing no longer works for Eddie Editor</td>
 	<td></td>
 </tr>
 <tr>
@@ -457,7 +232,7 @@
 <tr>
 	<td>type</td>
 	<td>id=loginPassword</td>
-	<td>myPassword</td>
+	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -470,23 +245,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=newPassword</td>
-	<td>Password</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=confirmPassword</td>
-	<td>Password</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=passwordChangeForm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=My profile</td>
 	<td></td>
 </tr>
 <tr>
@@ -510,63 +270,78 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=a.add-overview &gt; img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>I am able to edit.</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>I am able to edit.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=My profile</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Edit this individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Check My profile</td>
+	<td class="comment">Test that editing no longer works for Connie Curator</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=loginName</td>
+	<td>ConnieCurator@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
 	<td>link=My profile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Edit this individual</td>
 	<td></td>
 </tr>
 <tr>
