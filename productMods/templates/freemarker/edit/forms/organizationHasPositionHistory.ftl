@@ -91,7 +91,8 @@
                 </#list>
 	        </#if>
 	    </select>
-	    <p>
+       
+  	    <p>
 	        <label for="relatedIndLabel">Person</label>
 	        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" />
 	    </p>
@@ -102,10 +103,11 @@
 	            <span class="acSelectionInfo"></span>
 	            <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
 	        </p>
-	        <input class="acUriReceiver" type="hidden" id="personUri" name="org" value="" />
+	        <input class="acUriReceiver" type="hidden" id="personUri" name="personLabel" value="" />
 	        <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="existingPersonLabel" value="${personLabelValue}" />
 	    </div>
-
+        
+        <br />
         <#--Need to draw edit elements for dates here-->
         <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
         <#if htmlForElements?keys?seq_contains("startField")>
@@ -118,6 +120,7 @@
   		 	${htmlForElements["endField"]} ${yearHint}
         </#if>
     	<#--End draw elements-->
+
 
         <p class="submit">
             <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
@@ -149,5 +152,6 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/cust
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
