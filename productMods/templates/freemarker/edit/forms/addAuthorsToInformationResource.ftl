@@ -11,18 +11,19 @@
 
 <#--Values from edit configuration to populate fields -->
 
+
+
 <#--UL class based on size of existing authors-->
-<#assign urlClass = ""/>
+<#assign ulClass = ""/>
 <#if (existingAuthorInfo?size > 0)>
-	<#assign urlClass = "class='dd'"/>
+	<#assign ulClass = "class='dd'"/>
 </#if>
 
 <#assign title="<em>${editConfiguration.subjectName}</em>" />
 <#assign requiredHint="<span class='requiredHint'> *</span>" />
 <#assign initialHint="<span class='hint'>(initial okay)</span>" />
 
-<@lf.unsupportedBrowser>
-
+<#--include unsupported browser message-->
 <h2>${title}</h2>
 
 <ul id="authorships" ${ulClass}>
@@ -35,8 +36,8 @@
 <#assign authorHref="/individual?uri=" />
 <#--This should be a list of java objects where URI and name can be retrieved-->
 <#list existingAuthorInfo as authorship>
-	<#local authorUri = authorship.authorUri/>
-	<#local authorName = authorship.authorName/>
+	<#assign authorUri = authorship.authorUri/>
+	<#assign authorName = authorship.authorName/>
 
 	<li class="authorship">
 			<#-- span.author will be used in the next phase, when we display a message that the author has been
@@ -75,7 +76,7 @@
 
 <section id="showAddForm" role="region">
     <input type="hidden" name = "editKey" value="${editKey}" />
-    <input type="submit" id="showAddFormButton" value="replace submit label" role="button" />
+    <input type="submit" id="showAddFormButton" value="Add Author" role="button" />
 
     <span class="or"> or </span>
     <a class="cancel" href="${cancelUrl}" title="Cancel">Return to Publication</a>
@@ -117,17 +118,17 @@
 var customFormData = {
     rankPredicate: '${rankPredicate}',
     acUrl: '${urls.base}/autocomplete?tokenize=true',
-    reorderUrl: '{urls.base}/edit/reorder'
+    reorderUrl: '${urls.base}/edit/reorder'
 };
 </script>
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
+									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
 									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/autocomplete.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/edit/forms/css/addAuthorsToInformationResource.css" />')}
+									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/addAuthorsToInformationResource.css" />')}
 
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>'),
-							'<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
-							'<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/edit/forms/js/addAuthorsToInformationResource.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addAuthorsToInformationResource.js"></script>')}

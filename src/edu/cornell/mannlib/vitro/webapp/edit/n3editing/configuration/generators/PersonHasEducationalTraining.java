@@ -18,7 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisio
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
 /**
     Form for adding an educational attainment to an individual
@@ -328,7 +328,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 	public EditMode getEditMode(VitroRequest vreq) {
 		List<String> predicates = new ArrayList<String>();
 		predicates.add(trainingAtOrg);
-		return AddRoleUtils.getEditMode(vreq, predicates);
+		return EditModeUtils.getEditMode(vreq, predicates);
 	}
 
 }

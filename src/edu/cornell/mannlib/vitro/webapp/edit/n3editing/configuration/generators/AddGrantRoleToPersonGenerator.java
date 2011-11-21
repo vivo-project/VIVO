@@ -32,7 +32,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
@@ -616,19 +616,19 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	 */
 	public EditMode getEditMode(VitroRequest vreq) {
 		List<String> roleToGrantPredicates = getPossibleRoleToGrantPredicates();
-		return AddRoleUtils.getEditMode(vreq, roleToGrantPredicates);
+		return EditModeUtils.getEditMode(vreq, roleToGrantPredicates);
 	}
 
 	private boolean isAddMode(VitroRequest vreq) {
-    	return AddRoleUtils.isAddMode(getEditMode(vreq));
+    	return EditModeUtils.isAddMode(getEditMode(vreq));
     }
     
     private boolean isEditMode(VitroRequest vreq) {
-    	return AddRoleUtils.isEditMode(getEditMode(vreq));
+    	return EditModeUtils.isEditMode(getEditMode(vreq));
     }
     
     private boolean isRepairMode(VitroRequest vreq) {
-    	return AddRoleUtils.isRepairMode(getEditMode(vreq));
+    	return EditModeUtils.isRepairMode(getEditMode(vreq));
     }
    
 

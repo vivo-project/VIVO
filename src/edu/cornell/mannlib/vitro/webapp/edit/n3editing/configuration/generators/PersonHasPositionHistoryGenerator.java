@@ -19,7 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisio
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
 public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -287,7 +287,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
   	public EditMode getEditMode(VitroRequest vreq) {
   		List<String> predicates = new ArrayList<String>();
   		predicates.add(positionInOrgPred);
-  		return AddRoleUtils.getEditMode(vreq, predicates);
+  		return EditModeUtils.getEditMode(vreq, predicates);
   	}
 
 }

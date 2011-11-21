@@ -49,7 +49,7 @@ import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
 import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
  * Generates the edit configuration for importing concepts from external
  * search services, e.g. UMLS etc.      

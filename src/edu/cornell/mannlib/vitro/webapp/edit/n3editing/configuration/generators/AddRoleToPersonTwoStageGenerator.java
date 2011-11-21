@@ -33,7 +33,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.AddRoleUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
  * Generates the edit configuration for adding a Role to a Person.  
   
@@ -828,19 +828,19 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	/* Methods that check edit mode	 */	
 	public EditMode getEditMode(VitroRequest vreq) {
 		List<String> roleToGrantPredicates = getPossibleRoleToActivityPredicates();
-		return AddRoleUtils.getEditMode(vreq, roleToGrantPredicates);
+		return EditModeUtils.getEditMode(vreq, roleToGrantPredicates);
 	}
 
 	private boolean isAddMode(VitroRequest vreq) {
-    	return AddRoleUtils.isAddMode(getEditMode(vreq));
+    	return EditModeUtils.isAddMode(getEditMode(vreq));
     }
     
     private boolean isEditMode(VitroRequest vreq) {
-    	return AddRoleUtils.isEditMode(getEditMode(vreq));
+    	return EditModeUtils.isEditMode(getEditMode(vreq));
     }
     
     private boolean isRepairMode(VitroRequest vreq) {
-    	return AddRoleUtils.isRepairMode(getEditMode(vreq));
+    	return EditModeUtils.isRepairMode(getEditMode(vreq));
     }
     
 	/* URIS for various predicates */
