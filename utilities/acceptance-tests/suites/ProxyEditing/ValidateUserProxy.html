@@ -101,7 +101,7 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Curator, Connie |</td>
+	<td>Proxy, Polly |</td>
 	<td></td>
 </tr>
 <tr>
@@ -127,7 +127,7 @@
 <tr>
 	<td>type</td>
 	<td>id=addProfileEditor</td>
-	<td>cura</td>
+	<td>prox</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -151,7 +151,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Curator, Connie | </td>
+	<td>Proxy, Polly |</td>
 	<td></td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Editor, Eddie | </td>
+	<td>Editor, Eddie |</td>
 	<td></td>
 </tr>
 <tr>
@@ -210,13 +210,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Edit this individual</td>
+	<td>verifyTextPresent</td>
+	<td>Overview</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test that editing works for Connie Curator</td>
+	<td class="comment">Test that editing works for Polly Proxy</td>
 	<td></td>
 </tr>
 <tr>
@@ -237,7 +237,7 @@
 <tr>
 	<td>type</td>
 	<td>id=loginName</td>
-	<td>ConnieCurator@cornell.edu</td>
+	<td>PollyProxy@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -260,8 +260,98 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Overview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify that test admin sees the relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>testAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage profile editing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Editor, Eddie | </td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=Edit this individual</td>
+	<td>link=Delete profile editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Proxy, Polly | </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Delete profile editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane | Faculty Member </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Remove selection</td>
 	<td></td>
 </tr>
 <tr>

@@ -106,7 +106,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Curator, Connie |</td>
+	<td>Proxy, Polly |</td>
 	<td></td>
 </tr>
 <tr>
@@ -160,13 +160,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Remove selection</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=Delete profile editor</td>
+	<td>name=modifyProfileList</td>
 	<td></td>
 </tr>
 <tr>
@@ -182,6 +177,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>The operation was successful.</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,7 +191,7 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Curator, Connie |</td>
+	<td>Proxy, Polly |</td>
 	<td></td>
 </tr>
 <tr>
@@ -270,8 +270,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Edit this individual</td>
+	<td>verifyTextNotPresent</td>
+	<td>Overview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian, Lily</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Overview</td>
 	<td></td>
 </tr>
 <tr>
@@ -297,7 +332,7 @@
 <tr>
 	<td>type</td>
 	<td>id=loginName</td>
-	<td>ConnieCurator@cornell.edu</td>
+	<td>PollyProxy@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -340,8 +375,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Edit this individual</td>
+	<td>verifyTextNotPresent</td>
+	<td>Overview</td>
 	<td></td>
 </tr>
 <tr>

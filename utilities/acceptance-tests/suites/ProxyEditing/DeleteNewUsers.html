@@ -121,17 +121,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>ConnieCurator@cornell.edu</td>
+	<td>link=EddieEditor@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>EddieEditor@cornell.edu</td>
+	<td>link=JaneFaculty@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>JaneFaculty@cornell.edu</td>
+	<td>link=PollyProxy@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
@@ -140,18 +140,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//input[@name='deleteAccount' and @value='http://vivo.mydomain.edu/individual/u7032']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@name='deleteAccount' and @value='http://vivo.mydomain.edu/individual/u884']</td>
+	<td>assertTitle</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>name=deleteAccount</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='deleteAccount' and @value='http://vivo.mydomain.edu/individual/u5108']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@name='deleteAccount' and @value='http://vivo.mydomain.edu/individual/u7926']</td>
 	<td></td>
 </tr>
 <tr>
@@ -165,23 +170,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Deleted 3 accounts. </td>
+	<td></td>
+</tr>
+<tr>
 	<td>comment</td>
 	<td class="comment">Verify 3 user accounts are gone</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>ConnieCurator@cornell.edu</td>
+	<td>link=EddieEditor@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>EddieEditor@cornell.edu</td>
+	<td>link=JaneFaculty@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>JaneFaculty@cornell.edu</td>
+	<td>link=PollyProxy@cornell.edu</td>
 	<td></td>
 </tr>
 <tr>
