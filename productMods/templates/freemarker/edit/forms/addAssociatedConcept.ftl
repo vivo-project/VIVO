@@ -7,11 +7,12 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
+
 <#--This is set for testing purposes - will be retrieved dynamically from the generator later-->
 <#assign sources = [{"uri":"UMLS", "label":"UMLS"}, {"uri":"Agrovoc", "label":"Agrovoc"}]/>
+<#assign selectedSource = "UMLS" />
 
-
-<h2>Manage Associated Concepts</h2>
+<h2>Manage Concepts</h2>
     
 
 <#if submissionErrors?has_content>
@@ -28,7 +29,7 @@
     </section>
 </#if>
 
-<#--@lvf.unsupportedBrowser-->
+<@lvf.unsupportedBrowser/>
 
 <div class="noIE67">
 
@@ -95,6 +96,8 @@
         </p>
         <!-- Field value populated by JavaScript -->
     </div>
+    
+    <a href="" > Can't find the concept you want? Create your own.</a>
     	
     <p class="submit">
         <input type="submit" id="submit" name="submit" value="Add Term" />
