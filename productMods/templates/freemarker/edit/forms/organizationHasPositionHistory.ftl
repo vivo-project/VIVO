@@ -4,7 +4,7 @@
 
 <#import "lib-vivo-form.ftl" as lvf>
 
-<#if editConfig.object?has_content>
+<#if editConfiguration.objectUri?has_content>
     <#assign editMode = "edit">
 <#else>
     <#assign editMode = "add">
@@ -23,94 +23,124 @@
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
-<#if editMode = “ERROR”>
- <div>This form is unable to handle the editing of this position because it is associated with 
-      multiple Position individuals.</div>      
-<#else>
+<#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle") />
+<#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType") />
+<#assign personLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "personLabel") />
 
-<h2>${titleVerb}&nbsp;educational training entry for ${subjectName}</h2>
-
-<#if errorTitleFieldIsEmpty??>
-    <#assign errorMessage = "Enter a position title." />
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<#if errorTypeFieldIsEmpty??>
-    <#assign errorMessage = "Select a position type." />
-</#if>
+<h2>${titleVerb}&nbsp;educational training entry for ${editConfiguration.subjectName}</h2>
 
-<#if errorMessage?has_content>
+<#if submissionErrors?has_content>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
-        <p>${errorMessage}</p>
+        <p>
+        <#if lvf.submissionErrorExists(editSubmission, "positionTitle")>
+            Please enter a value in the Position Title field.
+        </#if> 
+        <#if lvf.submissionErrorExists(editSubmission, "positionType")>
+            Please select a value in the Position Type field.
+        </#if>
+        <#if lvf.submissionErrorExists(editSubmission, "personLabel")>
+ 	        Please enter a value in the Person field.
+        </#if> 
+        
+        <#list submissionErrors?keys as errorFieldName>
+        	<#if errorFieldName == "startField">
+        	    <#if submissionErrors[errorFieldName]?contains("before")>
+        	        The Start Year must be earlier than the End Year.
+        	    <#else>
+        	        ${submissionErrors[errorFieldName]}
+        	    </#if>
+        	    <br />
+        	<#elseif errorFieldName == "endField">
+    	        <#if submissionErrors[errorFieldName]?contains("after")>
+    	            The End Year must be later than the Start Year.
+    	        <#else>
+    	            ${submissionErrors[errorFieldName]}
+    	        </#if>
+	        </#if>
+        </#list>
+        </p>
     </section>
 </#if>
 
 <section id="organizationHasPositionHistory" role="region">        
     
-<@lvf.unsupportedBrowser urls.base/>
+    <@lvf.unsupportedBrowser urls.base/>
 
-    <form id="organizationHasPositionHistory" class="customForm noIE67" action="${submitUrl}"  role="add/edit position history">
+	<form id="organizationHasPositionHistory" class="customForm noIE67" action="${submitUrl}"  role="add/edit position history">
+	    <p>
+	        <label for="positionTitle">Position Title ${requiredHint}</label>
+	        <input size="30" type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" />
+	    </p>
+	    
+	    <label for="positionType">Position Type ${requiredHint}</label>
+        <#assign posnTypeOpts = editConfiguration.pageData.positionType />
+	    <select id="positionType" name="positionType">
+	        <option value="" selected="selected">Select one</option>
+	        <#if (posnTypeOpts?keys)??>
+		        <#list posnTypeOpts?keys as key>
+                    <#if positionTypeValue?has_content && positionTypeValue = key>
+                        <option value="${key}" selected >${posnTypeOpts[key]}</option>     
+                    <#else>
+                        <option value="${key}">${posnTypeOpts[key]}</option>
+                    </#if>        
+                </#list>
+	        </#if>
+	    </select>
+	    <p>
+	        <label for="relatedIndLabel">Person</label>
+	        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" />
+	    </p>
+	
+	    <div class="acSelection">
+	        <p class="inline">
+	            <label>Selected Person:</label>
+	            <span class="acSelectionInfo"></span>
+	            <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
+	        </p>
+	        <input class="acUriReceiver" type="hidden" id="personUri" name="org" value="" />
+	        <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="existingPersonLabel" value="${personLabelValue}" />
+	    </div>
 
-    <p>
-        <label for="positionTitle">Position Title ${requiredHint}</label>
-        <input size="30" type="text" id="positionTitle" name="positionTitle" value="${positionTitle}" />
-    </p>
-    <label for="positionType">Position Type ${requiredHint}</label>
-    <select id="positionType" name="positionType">
-         <option value="" selected="selected">Select one</option>
-         <#list rangeOptionKeys as key>
-             <opton value="${key}"
-             <#if editConfiguration.objectUri?has_content && editConfiguration.object.Uri = key>selected</#if>
-         </#list>
-    </select>
-    <p>
-        <label for="relatedIndLabel">Person</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabel}" />
-    </p>
+        <#--Need to draw edit elements for dates here-->
+        <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
+        <#if htmlForElements?keys?seq_contains("startField")>
+  	        <label class="dateTime" for="startField">Start</label>
+  			${htmlForElements["startField"]} ${yearHint}
+        </#if>
+        <br/>
+        <#if htmlForElements?keys?seq_contains("endField")>
+  			<label class="dateTime" for="endField">End</label>
+  		 	${htmlForElements["endField"]} ${yearHint}
+        </#if>
+    	<#--End draw elements-->
 
-    <div class="acSelection">
-        <p class="inline">
-            <label>Selected Person:</label>
-            <span class="acSelectionInfo"></span>
-            <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
+        <p class="submit">
+            <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
+            <input type="submit" id="submit" value="${submitButtonText}"/>
+            <span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="${roleActivityUri}" name="org" value="" />
+	
+	    <p id="requiredLegend" class="requiredHint">* required fields</p>
 
-        <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="existingPersonLabel" value="${personLabel}" />
-    </div>
-    <label for="startField">Start Year ${yearHint}</label>
-
-    <fieldset class="dateTime" >              
-        <input class="text-field" name="startField-year" id="startField-year" type="text" value="${startYear}" size="4" maxlength="4" />
-    </fieldset>
-
-    <label for="endField">End Year ${yearHint}</label>
-    <fieldset class="dateTime">              
-        <input class="text-field" name="endField-year" id="endField-year" type="text" value="${endYear}" size="4" maxlength="4" />
-    </fieldset>
-
-    <p class="submit">
-        <input type="hidden" name = "editKey" value="${???}"/>
-        <input type="submit" id="submit" value="editConfiguration.submitLabel"/><span class="or"> or </span><a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
-    </p>
-
-    <p id="requiredLegend" class="requiredHint">* required fields</p>
-
-</form>
-
-
-<script type="text/javascript">
-var customFormData  = {
-    acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
-    editMode: '${editMode}',
-    submitButtonTextType: 'compound',
-    defaultTypeName: 'person'
-};
-</script>
+	</form>
+	
+	
+	<script type="text/javascript">
+	var customFormData  = {
+	    acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
+	    editMode: '${editMode}',
+	    submitButtonTextType: 'compound',
+	    defaultTypeName: 'person'
+	};
+	</script>
 
 </section>
 
-</#if>
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
@@ -121,4 +151,3 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
-
