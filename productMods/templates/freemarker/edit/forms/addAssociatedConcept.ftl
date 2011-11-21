@@ -39,7 +39,7 @@
     </script>
     
     <#list existingConcepts?keys as key>
-    	<#local existingConcept = existingConcepts[key] />
+    	<#assign existingConcept = existingConcepts[key] />
         <li class="existingTerm">
               
             <span class="term">

@@ -277,7 +277,6 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	private void setPersonUriField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("personUri").
-				setValidators(list("")).
 				setObjectClassUri(personClass)
 				);
 		

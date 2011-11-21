@@ -79,19 +79,28 @@
     <input type="submit" id="showAddFormButton" value="Add Author" role="button" />
 
     <span class="or"> or </span>
-    <a class="cancel" href="${cancelUrl}" title="Cancel">Return to Publication</a>
+    <a class="cancel" href="${cancelUrl}&url=/individual" title="Cancel">Return to Publication</a>
 </section> 
 
 <form id="addAuthorForm" action ="${submitUrl}" class="customForm">
     <h3>Add an Author</h3>
+    		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
+    		should be visible even when first name/middle name are not, the parents should be separate for each field-->
+    		<p class="inline">
         <label for="lastName">Last name <span class='requiredHint'> *</span></label>
         <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="" role="input" />
-
+        </p>
+				
+				<p class="inline">
         <label for="firstName">First name ${requiredHint} ${initialHint}</label>
         <input  size="20"  type="text" id="firstName" name="firstName" value=""  role="input" />
+        </p>
+        
 
-        <label for="middleName">Middle name <span class='hint'>(initial okay)</span></label>
+				<p class="inline">
+				<label for="middleName">Middle name <span class='hint'>(initial okay)</span></label>
         <input  size="20"  type="text" id="middleName" name="middleName" value=""  role="input" />
+        </p>
       
         <input type="hidden" id="label" name="label" value=""  role="input" />  <!-- Field value populated by JavaScript -->
 
