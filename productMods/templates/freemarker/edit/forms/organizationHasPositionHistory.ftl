@@ -32,7 +32,7 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-<h2>${titleVerb}&nbsp;educational training entry for ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;position history entry for ${editConfiguration.subjectName}</h2>
 
 <#if submissionErrors?has_content>
     <section id="error-alert" role="alert">

@@ -115,7 +115,8 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "    core:positionInOrganization ?organization ; \n"
 			+ "    core:positionForPerson ?person . \n" //
 			+ "\n" //
-			+ "?person core:personInPosition ?position .";
+			+ "?person core:personInPosition ?position ;"
+			+ "     rdfs:label ?personLabel";
 
 	private static final String N3_NEW_START_NODE = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
