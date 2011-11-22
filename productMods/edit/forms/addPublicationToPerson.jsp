@@ -27,7 +27,7 @@ core:informationResourceInAuthorship (InformationResource : Authorship) - invers
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidatorOld" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
@@ -253,7 +253,7 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
-    editConfig.addValidator(new PersonHasPublicationValidator());
+    editConfig.addValidator(new PersonHasPublicationValidatorOld());
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     

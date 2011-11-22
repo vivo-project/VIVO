@@ -29,8 +29,6 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 	    	 initBasics(editConfiguration, vreq);
 	         initPropertyParameters(vreq, session, editConfiguration);
 	         initObjectPropForm(editConfiguration, vreq);               
-	     		//Overriding url to return to
-	         setUrlToReturnTo(editConfiguration, vreq);
 	         setVarNames(editConfiguration);
 	        
 	         
@@ -75,12 +73,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 			
 		}
 		
-		
-		
-		private void setUrlToReturnTo(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-			editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));
-			
-		}
+	
 		
 		/***N3 strings both required and optional***/
 		private List<String> generateN3Optional() {

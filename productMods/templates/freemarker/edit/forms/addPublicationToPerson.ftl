@@ -38,7 +38,7 @@
         <p>
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
         <#list submissionErrors?keys as errorFieldName>
-        	${errorFieldName} :  ${submissionErrors[errorFieldName]}
+        	${errorFieldName} :  ${submissionErrors[errorFieldName]} <br/>
         </#list>
         
         </p>

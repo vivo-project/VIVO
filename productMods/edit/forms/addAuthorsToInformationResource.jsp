@@ -33,7 +33,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidatorOld" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
@@ -234,7 +234,7 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
-    editConfig.addValidator(new PublicationHasAuthorValidator());
+    editConfig.addValidator(new PublicationHasAuthorValidatorOld());
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
