@@ -20,13 +20,10 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
 	private final static String NS_VIVO_CORE = "http://vivoweb.org/ontology/core#";
 
-	private final static String URI_RDFS_LABEL = RDFS.label.getURI();
-
 	private static final String URI_PRECISION_NONE = Precision.NONE.uri();
 	private static final String URI_PRECISION_YEAR = Precision.YEAR.uri();
 
 	private final static String URI_POSITION_CLASS = vivoCore("Position");
-	private final static String URI_POSITION_FOR_PERSON = vivoCore("positionForPerson");
 	private final static String URI_INTERVAL_FOR_POSITION = vivoCore("dateTimeInterval");
 	private final static String URI_DATE_TIME_INTERVAL_CLASS = vivoCore("DateTimeInterval");
 	private final static String URI_DATE_TIME_VALUE_CLASS = vivoCore("DateTimeValue");
@@ -40,23 +37,33 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		return NS_VIVO_CORE + localName;
 	}
 
-	private static final String QUERY_EXISTING_POSITION_TITLE = "SELECT ?existingPositionTitle WHERE { \n"
-			+ "?position <" + URI_RDFS_LABEL + "> ?existingPositionTitle . }";
+	private static final String QUERY_EXISTING_POSITION_TITLE = ""
+			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+			+ "SELECT ?existingPositionTitle WHERE { \n"
+			+ "  ?position rdfs:label ?existingPositionTitle . }";
 
-	private static final String QUERY_EXISTING_POSITION_TYPE = "SELECT ?existingPositionType WHERE { \n"
+	private static final String QUERY_EXISTING_POSITION_TYPE = ""
+			+ "SELECT ?existingPositionType WHERE { \n"
 			+ "  ?position a ?existingPositionType . }";
 
-	private static final String QUERY_EXISTING_PERSON_LABEL = String.format(
-			"SELECT ?existingPersonLabel WHERE { \n"
-					+ "  ?position <%1$s> ?existingPerson . \n"
-					+ "  ?existingPerson <%2$s> ?existingPersonLabel . }",
-			URI_POSITION_FOR_PERSON, URI_RDFS_LABEL);
+	private static final String QUERY_EXISTING_PERSON = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+			+ "SELECT ?existingPerson WHERE { \n"
+			+ "  ?position core:positionForPerson ?existingPerson .}";
 
-	private static final String QUERY_EXISTING_INTERVAL_NODE = String.format(
-			"SELECT ?existingIntervalNode WHERE { \n"
-					+ "  ?position <%1$s> ?existingIntervalNode . \n"
-					+ "  ?existingIntervalNode a <%2$s> . }",
-			URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS);
+	private static final String QUERY_EXISTING_PERSON_LABEL = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+			+ "SELECT ?existingPersonLabel WHERE { \n"
+			+ "  ?position core:positionForPerson ?existingPerson . \n"
+			+ "  ?existingPerson rdfs:label ?existingPersonLabel . }";
+
+	private static final String QUERY_EXISTING_INTERVAL_NODE = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingIntervalNode WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?existingIntervalNode . \n"
+			+ "  ?existingIntervalNode a core:DateTimeInterval . }";
 
 	private static final String QUERY_EXISTING_START_NODE = String.format(
 			"SELECT ?existingStartNode WHERE { \n"
@@ -180,9 +187,10 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 
-		conf.setUrisOnform(Arrays.asList("position", "positionType"));
+		conf.setUrisOnform(Arrays.asList("person", "position", "positionType"));
 		conf.addSparqlForExistingUris("positionType",
 				QUERY_EXISTING_POSITION_TYPE);
+		conf.addSparqlForExistingUris("person", QUERY_EXISTING_PERSON);
 
 		conf.addSparqlForExistingUris("intervalNode",
 				QUERY_EXISTING_INTERVAL_NODE);
@@ -214,6 +222,10 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addField(new FieldVTwo().setName("positionTitle")
 				.setRangeDatatypeUri(XSD.xstring.toString())
 				.setValidators(list("nonempty")));
+
+		conf.addField(new FieldVTwo().setName("person")
+				.setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS)
+				.setObjectClassUri(personClass));
 
 		conf.addField(new FieldVTwo().setName("personLabel")
 				.setRangeDatatypeUri(XSD.xstring.toString())

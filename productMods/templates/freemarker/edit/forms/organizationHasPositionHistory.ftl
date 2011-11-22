@@ -25,6 +25,7 @@
 
 <#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle") />
 <#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType") />
+<#assign personValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "person") />
 <#assign personLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "personLabel") />
 
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -94,7 +95,12 @@
        
   	    <p>
 	        <label for="relatedIndLabel">Person</label>
-	        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" />
+	        <#if editMode == "edit">
+	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" disabled="disabled" >
+                <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="personLabel" value="${personLabelValue}" />
+	        <#else>
+	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" >
+	        </#if>
 	    </p>
 	
 	    <div class="acSelection">
@@ -103,8 +109,7 @@
 	            <span class="acSelectionInfo"></span>
 	            <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
 	        </p>
-	        <input class="acUriReceiver" type="hidden" id="personUri" name="personLabel" value="" />
-	        <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="existingPersonLabel" value="${personLabelValue}" />
+	        <input class="acUriReceiver" type="hidden" id="personUri" name="person" value="${personValue}" />
 	    </div>
         
         <br />
