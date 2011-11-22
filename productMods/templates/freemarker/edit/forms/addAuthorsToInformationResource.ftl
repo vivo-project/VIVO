@@ -2,7 +2,7 @@
 
 <#-- Custom form for adding authors to information resources -->
 
-<#import "lib-vivo-form.ftl" as lf>
+<#import "lib-vivo-form.ftl" as lvf>
 
 <#--Retrieve certain page specific information information-->
 <#assign newRank = editConfiguration.pageData.newRank />
@@ -23,7 +23,8 @@
 <#assign requiredHint="<span class='requiredHint'> *</span>" />
 <#assign initialHint="<span class='hint'>(initial okay)</span>" />
 
-<#--unsupported browser message-->
+<@lvf.unsupportedBrowser urls.base/>
+
 <h2>${title}</h2>
 
 <ul id="authorships" ${ulClass}>

@@ -29,7 +29,7 @@
     </section>
 </#if>
 
-<@lvf.unsupportedBrowser/>
+<@lvf.unsupportedBrowser urls.base/>
 
 <div class="noIE67">
 
