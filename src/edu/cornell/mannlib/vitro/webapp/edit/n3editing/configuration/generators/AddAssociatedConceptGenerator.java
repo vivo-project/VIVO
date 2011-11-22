@@ -33,6 +33,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
@@ -354,9 +355,22 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		List<AssociatedConceptInfo> testInfo = new ArrayList<AssociatedConceptInfo>();
 		testInfo.add(new AssociatedConceptInfo("testLabel", "testURI", "testVocabURI", "testVocabLabel"));
 		formSpecificData.put("existingConcepts", testInfo);
+		//Return url for adding user defined concept
+		formSpecificData.put("userDefinedConceptUrl", getUserDefinedConceptUrl(vreq));
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 	
+	private Object getUserDefinedConceptUrl(VitroRequest vreq) {
+		String subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
+		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
+		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddUserDefinedConceptGenerator";
+		String editUrl = EditConfigurationUtils.getEditUrl(vreq);
+		
+		return editUrl + "?subject=" + UrlBuilder.urlEncode(subjectUri) + 
+		"&predicate=" + UrlBuilder.urlEncode(predicateUri) + 
+		"&editForm=" + UrlBuilder.urlEncode(generatorName);
+	}
+
 	public class AssociatedConceptInfo {
 		private String conceptLabel;
 		private String conceptURI;

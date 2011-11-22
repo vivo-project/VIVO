@@ -2,6 +2,8 @@
 <#import "lib-vivo-form.ftl" as lvf>
 
 <#assign existingConcepts = editConfiguration.pageData.existingConcepts/>
+<#assign userDefinedConceptUrl = editConfiguration.pageData.userDefinedConceptUrl/>
+
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
 	<#assign submissionErrors = editSubmission.validationErrors/>
@@ -97,7 +99,7 @@
         <!-- Field value populated by JavaScript -->
     </div>
     
-    <a href="" > Can't find the concept you want? Create your own.</a>
+    <a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
     	
     <p class="submit">
         <input type="submit" id="submit" name="submit" value="Add Term" />

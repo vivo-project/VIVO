@@ -3,30 +3,31 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.N3Validator;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.EditSubmission;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.N3ValidatorVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.MultiValueEditSubmission;
 
-public class PublicationHasAuthorValidator implements N3Validator {
+public class PublicationHasAuthorValidator implements N3ValidatorVTwo {
 
     private static String MISSING_FIRST_NAME_ERROR = "Must specify the author's first name.";
     private static String MISSING_LAST_NAME_ERROR = "Must specify the author's last name.";
     private static String MALFORMED_LAST_NAME_ERROR = "Last name may not contain a comma. Please enter first name in first name field.";
 ;    
     @Override
-    public Map<String, String> validate(EditConfiguration editConfig,
-            EditSubmission editSub) {
-        Map<String,String> urisFromForm = editSub.getUrisFromForm();
-        Map<String,Literal> literalsFromForm = editSub.getLiteralsFromForm();
+    public Map<String, String> validate(EditConfigurationVTwo editConfig,
+            MultiValueEditSubmission editSub) {
+        Map<String,List<String>> urisFromForm = editSub.getUrisFromForm();
+        Map<String,List<Literal>> literalsFromForm = editSub.getLiteralsFromForm();
 
         Map<String,String> errors = new HashMap<String,String>();   
         
-        String personUri = urisFromForm.get("personUri");
-        if ("".equals(personUri)) {
+        List<String> personUri = urisFromForm.get("personUri");
+        if (allListElementsEmpty(personUri)) {
             personUri = null;
         }
         // If there's a personUri, then we're done. The firstName and lastName fields are
@@ -35,11 +36,24 @@ public class PublicationHasAuthorValidator implements N3Validator {
             return null;
         }
         
-        Literal firstName = literalsFromForm.get("firstName");
-        if( firstName != null && firstName.getLexicalForm() != null && "".equals(firstName.getLexicalForm()) )
+        //Expecting only one first name in this case
+        //To Do: update logic if multiple first names considered
+        Literal firstName = null;
+        List<Literal> firstNameList = literalsFromForm.get("firstName");
+        if(firstNameList != null && firstNameList.size() > 0) {
+        	firstName = firstNameList.get(0);
+        }
+        if( firstName != null && 
+        		firstName.getLexicalForm() != null && 
+        		"".equals(firstName.getLexicalForm()) )
             firstName = null;
 
-        Literal lastName = literalsFromForm.get("lastName");
+
+        List<Literal> lastNameList = literalsFromForm.get("lastName");
+        Literal lastName = null;
+        if(lastNameList != null && lastNameList.size() > 0) {
+        	lastName = lastNameList.get(0);
+        }
         String lastNameValue = "";
         if (lastName != null) {
             lastNameValue = lastName.getLexicalForm();
@@ -60,6 +74,22 @@ public class PublicationHasAuthorValidator implements N3Validator {
         }       
         
         return errors.size() != 0 ? errors : null;
+    }
+    
+    private boolean allListElementsEmpty(List<String> checkList) {
+    	if(checkList == null)
+    		return true;
+    	if(checkList.isEmpty()) {
+    		return true;
+    	}
+    	boolean allEmpty = true;
+    	for(String s: checkList) {
+    		if(s.length() != 0){
+    			allEmpty = false;
+    			break;
+    		}
+    	}
+    	return allEmpty;
     }
 
 }

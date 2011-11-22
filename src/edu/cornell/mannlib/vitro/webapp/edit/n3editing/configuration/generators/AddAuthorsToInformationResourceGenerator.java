@@ -19,6 +19,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator;
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
@@ -60,10 +61,11 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
      	
      	//template file
      	editConfiguration.setTemplate("addAuthorsToInformationResource.ftl");
-     	//no validators or preprocessors
+     	//add validators
+     	editConfiguration.addValidator(new PublicationHasAuthorValidator());
      	
          //Adding additional data, specifically edit mode
-         addFormSpecificData(editConfiguration, vreq);
+        addFormSpecificData(editConfiguration, vreq);
      	return editConfiguration;
     }
 

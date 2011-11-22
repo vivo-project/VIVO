@@ -9,7 +9,15 @@
 <#assign existingAuthorInfo = editConfiguration.pageData.existingAuthorInfo />
 <#assign rankPredicate = editConfiguration.pageData.rankPredicate />
 
-<#--Values from edit configuration to populate fields -->
+<#--If edit submission exists, then retrieve validation errors if they exist-->
+<#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
+	<#assign submissionErrors = editSubmission.validationErrors/>
+</#if>
+
+<#--Submission values for these fields may be returned if user did not fill out fields for new person-->
+<#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
+<#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
+<#assign middleNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "middleName") />
 
 
 
@@ -26,6 +34,20 @@
 <@lvf.unsupportedBrowser urls.base/>
 
 <h2>${title}</h2>
+
+<#if submissionErrors?has_content>
+    <section id="error-alert" role="alert" class="validationError">
+        <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
+        <p>
+        <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
+        <#list submissionErrors?keys as errorFieldName>
+        	${errorFieldName} :  ${submissionErrors[errorFieldName]} <br/>
+        </#list>
+        
+        </p>
+    </section>
+</#if>
+
 
 <ul id="authorships" ${ulClass}>
 
@@ -89,18 +111,18 @@
     		should be visible even when first name/middle name are not, the parents should be separate for each field-->
     		<p class="inline">
         <label for="lastName">Last name <span class='requiredHint'> *</span></label>
-        <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="" role="input" />
+        <input class="acSelector" size="35"  type="text" id="lastName" name="lastName" value="${lastNameValue}" role="input" />
         </p>
 				
 				<p class="inline">
         <label for="firstName">First name ${requiredHint} ${initialHint}</label>
-        <input  size="20"  type="text" id="firstName" name="firstName" value=""  role="input" />
+        <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
         </p>
         
 
 				<p class="inline">
 				<label for="middleName">Middle name <span class='hint'>(initial okay)</span></label>
-        <input  size="20"  type="text" id="middleName" name="middleName" value=""  role="input" />
+        <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
       
         <input type="hidden" id="label" name="label" value=""  role="input" />  <!-- Field value populated by JavaScript -->
