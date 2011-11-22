@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -23,19 +22,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 	private static final String URI_PRECISION_NONE = Precision.NONE.uri();
 	private static final String URI_PRECISION_YEAR = Precision.YEAR.uri();
 
-	private final static String URI_POSITION_CLASS = vivoCore("Position");
-	private final static String URI_INTERVAL_FOR_POSITION = vivoCore("dateTimeInterval");
-	private final static String URI_DATE_TIME_INTERVAL_CLASS = vivoCore("DateTimeInterval");
-	private final static String URI_DATE_TIME_VALUE_CLASS = vivoCore("DateTimeValue");
-	private final static String URI_DATE_TIME_VALUE = vivoCore("dateTime");
-	private final static String URI_DATE_TIME_PRECISION = vivoCore("dateTimePrecision");
-
-	private final static String URI_INTERVAL_TO_START = vivoCore("start");
-	private final static String URI_INTERVAL_TO_END = vivoCore("end");
-
-	private static String vivoCore(String localName) {
-		return NS_VIVO_CORE + localName;
-	}
+	private final static String URI_POSITION_CLASS = NS_VIVO_CORE + "Position";
 
 	private static final String QUERY_EXISTING_POSITION_TITLE = ""
 			+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
@@ -65,66 +52,57 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "  ?position core:dateTimeInterval ?existingIntervalNode . \n"
 			+ "  ?existingIntervalNode a core:DateTimeInterval . }";
 
-	private static final String QUERY_EXISTING_START_NODE = String.format(
-			"SELECT ?existingStartNode WHERE { \n"
-					+ "  ?position <%1$s> ?intervalNode .\n"
-					+ "  ?intervalNode a <%2$s> ;\n"
-					+ "      <%3$s> ?existingStartNode . \n"
-					+ "  ?existingStartNode a <%4$s> . }",
-			URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS,
-			URI_INTERVAL_TO_START, URI_DATE_TIME_VALUE_CLASS);
+	private static final String QUERY_EXISTING_START_NODE = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingStartNode WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?intervalNode .\n"
+			+ "  ?intervalNode a core:DateTimeInterval ;\n"
+			+ "      core:start ?existingStartNode . \n"
+			+ "  ?existingStartNode a core:DateTimeValue . }";
 
-	private static final String QUERY_EXISTING_START_VALUE = String.format(
-			"SELECT ?existingDateStart WHERE { \n"
-					+ "  ?position <%1$s> ?intervalNode .\n"
-					+ "  ?intervalNode a <%2$s> ; \n"
-					+ "      <%3$s> ?startNode . \n"
-					+ "  ?startNode a <%4$s> ; \n"
-					+ "      <%5$s> ?existingDateStart . }",
-			URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS,
-			URI_INTERVAL_TO_START, URI_DATE_TIME_VALUE_CLASS,
-			URI_DATE_TIME_VALUE);
+	private static final String QUERY_EXISTING_START_VALUE = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingDateStart WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?intervalNode .\n"
+			+ "  ?intervalNode a core:DateTimeInterval ; \n"
+			+ "      core:start ?startNode . \n"
+			+ "  ?startNode a core:DateTimeValue ; \n"
+			+ "      core:dateTime ?existingDateStart . }";
 
-	private static final String QUERY_EXISTING_START_PRECISION = String.format(
-			"SELECT ?existingStartPrecision WHERE { \n"
-					+ "  ?position <%1$s> ?intervalNode .\n"
-					+ "  ?intervalNode a <%2$s> ;\n"
-					+ "      <%3$s> ?startNode . \n"
-					+ "  ?startNode a <%4$s> ; \n"
-					+ "      <%5$s> ?existingStartPrecision . }",
-			URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS,
-			URI_INTERVAL_TO_START, URI_DATE_TIME_VALUE_CLASS,
-			URI_DATE_TIME_PRECISION);
+	private static final String QUERY_EXISTING_START_PRECISION = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingStartPrecision WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?intervalNode .\n"
+			+ "  ?intervalNode a core:DateTimeInterval ;\n"
+			+ "      core:start ?startNode . \n"
+			+ "  ?startNode a core:DateTimeValue ; \n"
+			+ "      core:dateTimePrecision ?existingStartPrecision . }";
 
-	private static final String QUERY_EXISTING_END_VALUE = String
-			.format("SELECT ?existingDateEnd WHERE { \n"
-					+ "  ?position <%1$s> ?intervalNode .\n"
-					+ "  ?intervalNode a <%2$s> ; \n"
-					+ "        <%3$s> ?endNode . \n"
-					+ "  ?endNode a <%4$s> ; \n"
-					+ "        <%5$s> ?existingDateEnd . }",
-					URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS,
-					URI_INTERVAL_TO_END, URI_DATE_TIME_VALUE_CLASS,
-					URI_DATE_TIME_VALUE);
+	private static final String QUERY_EXISTING_END_NODE = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingEndNode WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?intervalNode .\n"
+			+ "  ?intervalNode a core:DateTimeInterval ;\n"
+			+ "      core:end ?existingEndNode . \n"
+			+ "  ?existingEndNode a core:DateTimeValue . }";
 
-	private static final String QUERY_EXISTING_END_PRECISION = String.format(
-			"SELECT ?existingEndPrecision WHERE { \n"
-					+ "  ?position <%1$s> ?intervalNode .\n"
-					+ "  ?intervalNode a <%2$s> ;\n"
-					+ "      <%3$s> ?endNode . \n" + "  ?endNode a <%4$s> ; \n"
-					+ "      <%5$s> ?existingEndPrecision . }",
-			URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS,
-			URI_INTERVAL_TO_END, URI_DATE_TIME_VALUE_CLASS,
-			URI_DATE_TIME_PRECISION);
+	private static final String QUERY_EXISTING_END_VALUE = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingDateEnd WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?intervalNode .\n"
+			+ "  ?intervalNode a core:DateTimeInterval ; \n"
+			+ "        core:end ?endNode . \n"
+			+ "  ?endNode a core:DateTimeValue ; \n"
+			+ "        core:dateTime ?existingDateEnd . }";
 
-	private static final String QUERY_EXISTING_END_NODE = String.format(
-			"SELECT ?existingEndNode WHERE { \n"
-					+ "  ?position <%1$s> ?intervalNode .\n"
-					+ "  ?intervalNode a <%2$s> ;\n"
-					+ "      <%3$s> ?existingEndNode . \n"
-					+ "  ?existingEndNode a <%4$s> .}",
-			URI_INTERVAL_FOR_POSITION, URI_DATE_TIME_INTERVAL_CLASS,
-			URI_INTERVAL_TO_END, URI_DATE_TIME_VALUE_CLASS);
+	private static final String QUERY_EXISTING_END_PRECISION = ""
+			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
+			+ "SELECT ?existingEndPrecision WHERE { \n"
+			+ "  ?position core:dateTimeInterval ?intervalNode .\n"
+			+ "  ?intervalNode a core:DateTimeInterval ;\n"
+			+ "      core:end ?endNode . \n"
+			+ "  ?endNode a core:DateTimeValue ; \n"
+			+ "      core:dateTimePrecision ?existingEndPrecision . }";
 
 	private static final String N3_NEW_POSITION = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
