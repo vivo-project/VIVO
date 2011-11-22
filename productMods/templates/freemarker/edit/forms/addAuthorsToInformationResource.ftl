@@ -41,7 +41,7 @@
         <p>
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
         <#list submissionErrors?keys as errorFieldName>
-        	${errorFieldName} :  ${submissionErrors[errorFieldName]} <br/>
+        		  ${submissionErrors[errorFieldName]} <br/>
         </#list>
         
         </p>
@@ -89,11 +89,7 @@
 	</script>
 </#list>
 
-    <#--// A new author will be ranked last when added.
-    // This value is now inserted by JavaScript, but leave it here as a safety net in case page
-    // load reordering returns an error. 
-    request.setAttribute("newRank", maxRank + 1);
-    request.setAttribute("rankPredicate", rankPredicateUri);-->
+   
 
 </ul>
 
