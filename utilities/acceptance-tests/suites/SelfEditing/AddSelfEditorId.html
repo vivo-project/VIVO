@@ -77,7 +77,7 @@
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>JaneFaculty@cornell.edu</td>
+	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -126,12 +126,12 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Edit some fields</td>
+	<td class="comment">Add self-editor link field</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-overview &gt; img.add-individual</td>
+	<td>css=a.add-orcidId &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -140,9 +140,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
-	<td>I am updating my own profile.</td>
+	<td>JaneFaculty@cornell.edu</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -156,37 +161,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>I am updating my own profile.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=a.edit-overview &gt; img.edit-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>I am updating my own profile.&nbsp;&nbsp;Yippee!</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>I am updating my own profile. Yippee!</td>
+	<td>JaneFaculty@cornell.edu </td>
 	<td></td>
 </tr>
 <tr>
