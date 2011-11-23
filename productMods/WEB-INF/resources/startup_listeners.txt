@@ -68,3 +68,6 @@ edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
 org.apache.commons.fileupload.servlet.FileCleanerCleanup
 
 edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
+
+# This should be near the end, because it will issue a warning if the connection to Solr times out.
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest
