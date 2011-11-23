@@ -11,13 +11,12 @@
 <h2>Add Your Own Concept</h2>
 
 
-<form id="addUserDefinedConceptForm" class="editForm" action = "${submitUrl}" method="post">
+<form id="addUserDefinedConceptForm" class="customForm noIE67" action = "${submitUrl}" method="post">
     <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
    <#--Autocomplete for looking up existing skos concepts -->
-		<p>
+						<p>
 		            <label for="relatedIndLabel">Concept <span class='requiredHint'> *</span></label>
-		            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="conceptLabel" 
-		            <#if (disabledVal?length > 0)>disabled="${disabledVal}"</#if> value="" />
+		            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="conceptLabel" value="" />
 		        </p>
 		
 		        <div class="acSelection">
@@ -42,13 +41,14 @@
     
 </form>
 
-<#assign sparqlQueryUrl = "/ajax/sparqlQuery" >
+<#assign sparqlQueryUrl = "${urls.base}/ajax/sparqlQuery" >
 
     <script type="text/javascript">
     var customFormData  = {
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
         acUrl: '${urls.base}/autocomplete?tokenize=true',
+        acType: 'http://www.w3.org/2004/02/skos/core#Concept',
         submitButtonTextType: 'simple',
         editMode: 'add',
         defaultTypeName: 'concept' // used in repair mode to generate button text

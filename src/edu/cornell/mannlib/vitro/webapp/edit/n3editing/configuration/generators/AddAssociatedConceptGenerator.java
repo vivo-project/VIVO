@@ -41,6 +41,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
@@ -147,20 +148,20 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		return "@prefix core: <http://vivoweb.org/ontology/core#> .";
 	}
 	
-	//TODO: Check if single string or multiple strings - check rdfslabel form etc. for prefix
-	//processing
+	//The only string always required is that linking the subject to the concept node
+	//Since the concept node from an external vocabulary may already be in the system
+	//The label and is defined by may already be defined and don't require re-saving
     private List<String> generateN3Required(VitroRequest vreq) {
     	return list(    	            	        
     	        getPrefixesString() + "\n" +
-    	        "?subject ?predicate ?conceptNode .\n" +
-    	        "?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" + 
-    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?vocabURI ."
+    	        "?subject ?predicate ?conceptNode .\n"
     	);
     }
     
    //Don't think there's any n3 optional here
 	private List<String> generateN3Optional() {
-		return list(    	            	        
+		return list("?conceptNode <" + RDFS.label.getURI() + "> ?conceptLabel .\n" + 
+    	        "?conceptNode <" + RDFS.isDefinedBy.getURI() + "> ?conceptSource ."  	            	        
     	);
     }
 	
@@ -220,8 +221,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	List<String> urisOnForm = new ArrayList<String>();
     	List<String> literalsOnForm = new ArrayList<String>();
     	//The URI of the node that defines the concept
-    	urisOnForm.add("conceptURI");
-    	urisOnForm.add("vocabURI");
+    	urisOnForm.add("conceptNode");
+    	urisOnForm.add("conceptSource");
     	//Also need to add the label of the concept
     	literalsOnForm.add("conceptLabel");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
@@ -236,53 +237,11 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	//Sparql queries defining retrieval of literals etc.
     	editConfiguration.setSparqlForAdditionalLiteralsInScope(new HashMap<String, String>());
-    	
-    	Map<String, String> urisInScope = new HashMap<String, String>();
-    	editConfiguration.setSparqlForAdditionalUrisInScope(urisInScope);
-    	
-    	editConfiguration.setSparqlForExistingLiterals(generateSparqlForExistingLiterals(vreq));
-    	editConfiguration.setSparqlForExistingUris(generateSparqlForExistingUris(vreq));
+    	editConfiguration.setSparqlForAdditionalUrisInScope(new HashMap<String, String>());
+      	editConfiguration.setSparqlForExistingLiterals(new HashMap<String, String>());
+    	editConfiguration.setSparqlForExistingUris(new HashMap<String, String>());
     }
     
-    
-    //Get page uri for object
-    private HashMap<String, String> generateSparqlForExistingUris(VitroRequest vreq) {
-    	HashMap<String, String> map = new HashMap<String, String>();
-    	//Existing uris here might include is defined by
-    	//map.put("vocabURI", getExistingVocabURIQuery());
-    	return map;
-    }
-    
-    private String getExistingVocabURIQuery() {
-    	String query = "SELECT ?existingVocabURI \n " + 
-		"WHERE { \n" +
-	      "?conceptNode <" + RDFS.isDefinedBy.getURI() + ">  ?existingVocabURI ."
-	      + "}";
-		return query;
-	}
-
-
-
-
-	private HashMap<String, String> generateSparqlForExistingLiterals(VitroRequest vreq) {
-    	HashMap<String, String> map = new HashMap<String, String>();
-    	//Queries for existing concept label 
-    	//Vocab uri label is something that can be retrieved
-    	map.put("conceptLabel", getConceptLabelQuery());
-    	return map;
-    }
-
-    
-   
-	private String getConceptLabelQuery() {
-		String query = "SELECT ?existingConceptLabel \n " + 
-		"WHERE { \n" +
-	      "?conceptNode <" + RDFS.label.getURI() + ">  ?existingConceptLabel ."
-	      + "}";
-		return query;
-	}
-
-
 
 	/**
 	 * 
@@ -300,7 +259,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptNode").
-				setValidators(new ArrayList<String>()).
+				setValidators(list("nonempty")).
 				setOptionsType("UNDEFINED"));
 		
 	}
@@ -310,9 +269,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	private void setVocabURIField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
-				setName("vocabURI").
-				setValidators(new ArrayList<String>()).
-				setOptionsType("UNDEFINED"));
+				setName("conceptSource"));
 	}
 
 
@@ -321,27 +278,19 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptLabel").
-				setValidators(new ArrayList<String>()).
-				setOptionsType("UNDEFINED").
 				setRangeDatatypeUri(XSD.xstring.toString())
 				);
 	}
-
-
-
-	
-
-	
     
    
     //Add preprocessor
 	
    private void addPreprocessors(EditConfigurationVTwo editConfiguration, WebappDaoFactory wadf) {
-	   //Will be a completely different type of preprocessor
-	  /*
+	  //An Edit submission preprocessor for enabling addition of multiple terms for a single search
+	  
 	   editConfiguration.addEditSubmissionPreprocessor(
-			   new RoleToActivityPredicatePreprocessor(editConfiguration, wadf));
-	   */
+			   new AddAssociatedConceptsPreprocessor(editConfiguration));
+	  
 	}
      
    
@@ -351,9 +300,10 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		//Existing concepts should probably be a hash map or a hash map of classes
 		//with URI of concept node to label and information about existing URI
 		//This would be a sparql query and would need to be run here?
-		//For test purposes
+		//-------------------->For test purposes
 		List<AssociatedConceptInfo> testInfo = new ArrayList<AssociatedConceptInfo>();
-		testInfo.add(new AssociatedConceptInfo("testLabel", "testURI", "testVocabURI", "testVocabLabel"));
+		testInfo.add(new AssociatedConceptInfo("testLabel", "testURI", "testVocabURI", "testVocabLabel", null));
+		testInfo.add(new AssociatedConceptInfo("user defined label", "testUserURI", null, null, "http://www.w3.org/2004/02/skos/core#Concept"));
 		formSpecificData.put("existingConcepts", testInfo);
 		//Return url for adding user defined concept
 		formSpecificData.put("userDefinedConceptUrl", getUserDefinedConceptUrl(vreq));
@@ -376,11 +326,13 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		private String conceptURI;
 		private String vocabURI;
 		private String vocabLabel;
-		public AssociatedConceptInfo(String inputLabel, String inputURI, String inputVocabURI, String inputVocabLabel) {
+		private String type; //In case of SKOS concept, will have skos concept type
+		public AssociatedConceptInfo(String inputLabel, String inputURI, String inputVocabURI, String inputVocabLabel, String inputType) {
 			this.conceptLabel = inputLabel;
 			this.conceptURI = inputURI;
 			this.vocabURI = inputVocabURI;
 			this.vocabLabel = inputVocabLabel;
+			this.type = inputType;
 		}
 		
 		//Getters
@@ -398,6 +350,10 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		
 		public  String getVocabLabel(){
 			return vocabLabel;
+		}
+		
+		public  String getType(){
+			return type;
 		}
 		
 	}

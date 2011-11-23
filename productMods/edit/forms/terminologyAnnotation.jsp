@@ -10,6 +10,7 @@
 
 <%@ page import="com.hp.hpl.jena.rdf.model.Model" %>
 <%@ page import="com.hp.hpl.jena.vocabulary.XSD" %>
+<%@ page import="com.hp.hpl.jena.vocabulary.RDFS" %>
 
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.Individual" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator" %>
@@ -219,12 +220,12 @@ SPARQL queries for existing values. --%>
     for ( Individual termNode : terminologyAnnotationNodes ) {
         request.setAttribute("termNodeUri", termNode.getURI());
 		//Get label and type only as mirroring authorship where labels but no links for individuals incoldued
-		DataPropertyStatement termLabelStatement = termNode.getDataPropertyStatement(termLabelUri);
+		DataPropertyStatement termLabelStatement = termNode.getDataPropertyStatement(RDFS.label.getURI());
 		String termLabel = termLabelStatement.getData();
-        request.setAttribute("termLabel", termLabel); 
-       	DataPropertyStatement termTypeStatement = termNode.getDataPropertyStatement(termTypeUri);
-		String termType = termTypeStatement.getData();
-		request.setAttribute("termType", termType);
+        //request.setAttribute("termLabel", termLabel); 
+       	//DataPropertyStatement termTypeStatement = termNode.getDataPropertyStatement(termTypeUri);
+		//String termType = termTypeStatement.getData();
+		request.setAttribute("termType", "fake");
 %> 
         <li class="existingTerm">
             <%-- span.author will be used in the next phase, when we display a message that the author has been

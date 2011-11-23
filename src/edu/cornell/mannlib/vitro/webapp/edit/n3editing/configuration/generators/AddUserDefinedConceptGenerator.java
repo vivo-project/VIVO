@@ -292,16 +292,17 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
 		formSpecificData.put("sparqlForAcFilter", getSparqlForAcFilter(vreq));
+		formSpecificData.put("conceptType", SKOSConceptType);
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 	
 	
 	public String getSparqlForAcFilter(VitroRequest vreq) {
 		String subject = EditConfigurationUtils.getSubjectUri(vreq);			
-		
+		String predicate = EditConfigurationUtils.getPredicateUri(vreq);
 		String query = "PREFIX core:<" + vivoCore + "> " + 
 		"SELECT ?conceptNode WHERE { " + 
-			"<" + subject + "> ?predicate ?conceptNode ." + 
+			"<" + subject + "> <" + predicate + "> ?conceptNode ." + 
 			"?conceptNode <" + VitroVocabulary.RDF_TYPE + "> <" + SKOSConceptType + "> . }";
 		return query;
 	}

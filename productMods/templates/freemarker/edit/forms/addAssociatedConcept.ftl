@@ -37,20 +37,22 @@
 
     
     
-<ul id="existingTerms" >
+<ul id="existingConcepts" >
       
     <script type="text/javascript">
-        var existingTermsData = [];
+        var existingConceptsData = [];
     </script>
     
     <#list existingConcepts as existingConcept>
-        <li class="existingTerm">
+        <li class="existingConcept">
               
-            <span class="term">
+            <span class="concept">
 
-                <span class="termWrapper">
-                   <span class="termLabel">
-                   ${existingConcept.conceptLabel} 
+                <span class="conceptWrapper">
+                   <span class="conceptLabel"> ${existingConcept.conceptLabel} 
+                   	<#if existingConcept.vocabURI?has_content && existingConcept.vocabLabel?has_content>
+                   		(${existingConcept.vocabLabel})
+                   	</#if>
                    </span> 
                 </span>
                 <a href="${urls.base}/edit/primitiveDelete" class="remove">Remove</a>
@@ -58,7 +60,7 @@
         </li>    
         
         <script type="text/javascript">
-            existingTermsData.push({
+            existingConceptsData.push({
                 "conceptNodeUri": "${existingConcept.conceptURI}",
                 "conceptLabel": "${existingConcept.conceptLabel}"      
             });
@@ -74,25 +76,26 @@
 </#if>
 
 <div id="showAddForm">
-    <input type="submit" value="Add Term" id="showAddFormButton" name="showAddFormButton">  or 
+    <input type="submit" value="Add Concept" id="showAddFormButton" name="showAddFormButton">  or 
     <a class="cancel" href="${cancelUrl}">Return</a>
 </div> 
-    <form id="addTerminologyForm" class="customForm" action="${urls.base}/edit/processTerminologyAnnotation">
+    <form id="addConceptForm" class="customForm" action="${submitUrl}">
 
     <#list sources as source>
-        <input type="radio" name="source" value="${source.uri}" role="radio" <#if selectedSource = source.uri>checked</#if> />
+        <input type="radio" id="source" name="source" value="${source.uri}" role="radio" <#if selectedSource = source.uri>checked</#if> />
         <label class="inline" for="${source.label}"> ${source.label}</label>
         <br />
     </#list>
 
     <p class="inline">
-        <input type="text" id="searchTerm" label="Search UMLS Terms" class="acSelector" size="35" />
+        <input type="text" id="searchTerm" label="Search" class="acSelector" size="35" />
         <input type="button" id="searchButton" name="searchButton" value="Search"/>
     </p>
-    <input type="hidden" id="externalConceptURI" name="externalConceptURI" value=""/> <!-- Field value populated by JavaScript -->
-    <input type="hidden" id="externalConceptLabel" name="externalConceptLabel" value="" />  <!-- Field value populated by JavaScript -->
-
-    <div id="selectedTerm" name="selectedTerm" class="acSelection">
+    <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
+    <input type="hidden" id="ConceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
+    <!--TODO: Change this so this is populated by the javascript-->
+		<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
+    <div id="selectedConcept" name="selectedConcept" class="acSelection">
         <%-- RY maybe make this a label and input field. See what looks best. --%>
         <p class="inline">
         </p>
@@ -118,8 +121,12 @@
     };
     </script>
 
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addTerminology.js"></script>')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/addConcept.css" />')}
+
+${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addConcept.js"></script>')}
 
 
 

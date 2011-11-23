@@ -1,29 +1,29 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-.terminology .column {
+.concepts .column {
 	float:left;
 	padding-right:3px;
 	
 }
 
-.terminology .row {
+.concepts .row {
 	clear:both;
 	float:left;
 	border-bottom: 1px solid #5F6464;
 }
 
-.termLabel {
+.conceptLabel {
 	width:220px;
 	font-weight:bold;
 }
 
-.termType {
+.conceptType {
 	width: 40px;
 }
-.termDefinition{
+.conceptDefinition{
 	width:400px;
 }
 
-form#addTerminologyForm {
+form#addConceptForm {
 	display:none;
 }
