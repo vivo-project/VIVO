@@ -219,8 +219,7 @@
                         <a href="#deploy">Compile and deploy</a>
                     </li>
                     <li>
-                        <a href="#tomcat_settings">Set Tomcat JVM parameters and
-                            security limits</a>
+                        <a href="#tomcat_settings">Configure Tomcat</a>
                     </li>
                     <li>
                         <a href="#start_tomcat">Start Tomcat</a>
@@ -765,15 +764,15 @@
             <p>
                 to build VIVO and deploy to Tomcat's webapps directory. 
             </p>
-            <h3 id="tomcat_settings">VI. Set Tomcat JVM parameters and security
-                limits</h3>
+            <h3 id="tomcat_settings">VI. Configure Tomcat</h3>
+            <h4>Set JVM parameters</h4>
             <p>
-                Currently, VIVO copies the contents of your RDF database into 
+                VIVO copies small sections of your RDF database into 
                 memory in order to serve Web requests quickly (the in-memory copy and  
                 the underlying database are kept in synch as edits are performed). 
             </p>
             <p>
-                VIVO will require more memory than that allocated to Tomcat by 
+                VIVO may require more memory than that allocated to Tomcat by 
                 default. With most installations of Tomcat, the "setenv.sh" or 
                 "setenv.bat" file in Tomcat's bin directory is a convenient place to  
                 set the memory parameters. <em>If this file does not exist in Tomcat's
@@ -781,26 +780,45 @@
                 <br>
                 For example: 
             </p>
-            <pre>                    export CATALINA_OPTS="-Xms2048m -Xmx1024m -XX:MaxPermSize=128m"<br>                </pre>
+            <pre>                    export CATALINA_OPTS="-Xms512m -Xmx512m -XX:MaxPermSize=128m"<br>                </pre>
             <p>
-                This sets Tomcat to allocate an initial heap of 2048 megabytes, a
-                maximum heap of 1024 megabytes, and a PermGen space of 128 megs. 1024
-                megabytes is a minimum practical heap size for production installations 
-                storing data for large academic institutions, and additional heap space 
-                is preferable. For testing with small sets of data, 256m to 512m should  
-                be sufficient. 
+                This sets Tomcat to allocate an initial heap of 512 megabytes, a
+                maximum heap of 512 megabytes, and a PermGen space of 128 megs. Lower 
+                values may suffice, especially for small test installations.
             </p>
             <p>
                 If an OutOfMemoryError is encountered during VIVO execution, it can 
                 be remedied by increasing the heap parameters and restarting Tomcat. 
             </p>
+            <h4>Set security limits</h4>
             <p>
-                Security limits: VIVO is a multithreaded web application that may 
+                VIVO is a multithreaded web application that may 
                 require more threads than are permitted under your Linux installation's 
                 default configuration. Ensure that your installation can support the  
                 required number of threads by making the following edits to <code>/etc/security/limits.conf</code>:
             </p>
             <pre>                    apache	hard	nproc	400<br>                    tomcat6	hard	nproc	1500 <br>                </pre>
+            <h4>Set URI encoding</h4>
+            <p>
+                In order for Solr to correctly search for international characters (>127), 
+                you must configure Tomcat to conform to the URI standard by 
+                accepting percent-encoded UTF-8.
+            </p>
+            <p>
+                Edit Tomcat's conf/server.xml and add the following attribute to each of the 
+                Connector elements: URIEncoding="UTF-8".
+            <pre>
+                    &lt;Server ...>
+                      &lt;Service ...>
+                        &lt;Connector ... URIEncoding="UTF-8"/>
+                          ...
+                        &lt;/Connector>
+                      &lt;/Service>
+                    &lt;/Server>
+            </pre>
+            </p>
+            <p>
+
             <h3 id="start_tomcat">VII. Start Tomcat </h3>
             <p>
                 Most Tomcat installations can be started by running <code>startup.sh</code>
