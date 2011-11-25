@@ -807,17 +807,30 @@
             <p>
                 Edit Tomcat's conf/server.xml and add the following attribute to each of the 
                 Connector elements: URIEncoding="UTF-8".
+            </p>
             <pre>
-                    &lt;Server ...>
-                      &lt;Service ...>
-                        &lt;Connector ... URIEncoding="UTF-8"/>
+                    &lt;Server ...&gt;
+                      &lt;Service ...&gt;
+                        &lt;Connector ... URIEncoding="UTF-8"/&gt;
                           ...
-                        &lt;/Connector>
-                      &lt;/Service>
-                    &lt;/Server>
+                        &lt;/Connector&gt;
+                      &lt;/Service&gt;
+                    &lt;/Server&gt;
             </pre>
+            <h4>Take care when creating Context elements</h4>
+            <p>
+                Each of the webapps in the VIVO distribution (VIVO and Solr) includes a "context fragment" file,
+                containing some of the deployment information for that webapp.
             </p>
             <p>
+                Tomcat allows you to override these context fragments by adding Context elements to "server.xml".
+                If you decide to do this, be sure that your new Context element includes the necessary 
+                deployment parameters from the overridden context fragment.
+            </p>
+            <p>
+                See <a href="#tomcat_connector">Section X</a> below, 
+                for an example of overriding the VIVO context fragment.
+            </p>
 
             <h3 id="start_tomcat">VII. Start Tomcat </h3>
             <p>
