@@ -99,12 +99,6 @@
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
     </rdf:Description>
 
-    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasAttendeeRole">
-        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasRole.xml</display:listViewConfigFile>
-    </rdf:Description>
-        
-    
-    <!-- The next two roles may not have a "role in" anything -->
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasEditorRole">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasEditReviewRole.xml</display:listViewConfigFile>
     </rdf:Description>
@@ -117,6 +111,10 @@
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasPresenterRole.xml</display:listViewConfigFile>
     </rdf:Description>
     
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasAttendeeRole">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasAttendeeRole.xml</display:listViewConfigFile>
+    </rdf:Description>
+        
     <!-- The next three roles use a different config -->
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#hasInvestigatorRole">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-hasInvestigatorRole.xml</display:listViewConfigFile>
