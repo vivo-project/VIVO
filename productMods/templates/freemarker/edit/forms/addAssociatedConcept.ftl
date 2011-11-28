@@ -92,7 +92,7 @@
         <input type="button" id="searchButton" name="searchButton" value="Search"/>
     </p>
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
-    <input type="hidden" id="ConceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
+    <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
     <!--TODO: Change this so this is populated by the javascript-->
 		<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
     <div id="selectedConcept" name="selectedConcept" class="acSelection">
@@ -102,8 +102,9 @@
         <!-- Field value populated by JavaScript -->
     </div>
     
-    <a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
-    	
+    <div><a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
+    </div>	
+    <input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
     <p class="submit">
         <input type="submit" id="submit" name="submit" value="Add Term" />
         <span class="or"> or <a class="cancel" href="${cancelUrl}">Cancel</a>
@@ -125,7 +126,9 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/addConcept.css" />')}
-
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addConcept.js"></script>')}
 
 

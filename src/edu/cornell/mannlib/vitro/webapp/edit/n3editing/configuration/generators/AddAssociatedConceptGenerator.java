@@ -223,6 +223,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     	//The URI of the node that defines the concept
     	urisOnForm.add("conceptNode");
     	urisOnForm.add("conceptSource");
+    	editConfiguration.setUrisOnform(urisOnForm);
     	//Also need to add the label of the concept
     	literalsOnForm.add("conceptLabel");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);

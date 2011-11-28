@@ -120,7 +120,6 @@ var addConceptForm = {
     submitSearchTerm: function() {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
-    	this.entryTerm.val(searchValue);
     	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue);
         $.getJSON(dataServiceUrl, function(results) {
             if ( results.array.length == 0 ) {
@@ -170,7 +169,7 @@ var addConceptForm = {
     	return bestMatchResults;
     },
     addResultsHeader:function() {
-    	var htmlAdd = "<li class='terminology'><div class='row'><span class='column conceptLabel'>Label (Type) </span><span class='column conceptDefinition'>Definition</span></div></li>";
+    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>Label (Type) </span><span class='column conceptDefinition'>Definition</span></div></li>";
     	return htmlAdd;
     },
     hideSearchResults:function() {
@@ -190,11 +189,11 @@ var addConceptForm = {
     	
     	checkedElements.each(function() {
     		checkedConceptElement = $(this);
-    		checkedConcept = checkedTermElement.val();
+    		checkedConcept = checkedConceptElement.val();
     		conceptLabel = checkedConceptElement.attr("label");
     		conceptSource = checkedConceptElement.attr("conceptDefinedBy");
     		conceptNodes.push(checkedConcept);
-    		conceptLabels.push(termLabel);
+    		conceptLabels.push(conceptLabel);
     		conceptSources.push(conceptSource);
     	});
     	this.externalConceptURI.val(conceptNodes);
