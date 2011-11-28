@@ -4,37 +4,30 @@ package edu.cornell.mannlib.vitro.webapp.controller.freemarker;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.shared.Lock;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Statement;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.shared.Lock;
 
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.usepages.ManageMenus;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
-
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.edit.utils.LocalNamespaceClassUtils;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.RedirectResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache;
-
 import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.event.EditEvent;
-import edu.cornell.mannlib.vitro.webapp.controller.edit.utils.LocalNamespaceClassUtils;
 /*
  * Custom controller for menu management.  This will be replaced later once N3 Editing
  * has been successfully refactored and integrated with menu management.
@@ -77,7 +70,7 @@ public class InstitutionalInternalClassController extends FreemarkerHttpServlet 
     		//no local namespaces exist and one must be created
     		processCreateOntologies(vreq, data);
     	} else {
-    		
+    		log.error("Don't recognize the type of request.");
     	}
     	//Retrieve local namespaces
     	

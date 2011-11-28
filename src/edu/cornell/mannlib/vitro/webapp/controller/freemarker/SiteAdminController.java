@@ -9,7 +9,6 @@ import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.usepages.RefreshVisualizationCacheAction;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.usepages.UseMiscellaneousCuratorPages;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 
 public class SiteAdminController extends BaseSiteAdminController {
@@ -34,7 +33,7 @@ public class SiteAdminController extends BaseSiteAdminController {
 
         Map<String, Object> data = super.getSiteConfigData(vreq);
         
-        if (PolicyHelper.isAuthorizedForActions(vreq, new UseMiscellaneousCuratorPages())) {
+        if (PolicyHelper.isAuthorizedForActions(vreq, InstitutionalInternalClassController.REQUIRED_ACTIONS)) {
             data.put("internalClass", UrlBuilder.getUrl("/processInstitutionalInternalClass"));
         }
         
