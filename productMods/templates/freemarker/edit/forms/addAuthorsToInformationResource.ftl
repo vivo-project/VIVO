@@ -48,6 +48,7 @@
     </section>
 </#if>
 
+<h3>Manage Authors</h3>
 
 <ul id="authorships" ${ulClass}>
 
