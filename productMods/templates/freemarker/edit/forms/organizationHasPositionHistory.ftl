@@ -16,7 +16,7 @@
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="Create">        
-        <#assign submitButtonText="Create Position">
+        <#assign submitButtonText="Position">
         <#assign disabledVal=""/>
 </#if>
 
@@ -39,13 +39,13 @@
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
         <#if lvf.submissionErrorExists(editSubmission, "positionTitle")>
-            Please enter a value in the Position Title field.
+            Please enter a value in the Position Title field.<br />
         </#if> 
         <#if lvf.submissionErrorExists(editSubmission, "positionType")>
-            Please select a value in the Position Type field.
+            Please select a value in the Position Type field.<br />
         </#if>
         <#if lvf.submissionErrorExists(editSubmission, "personLabel")>
- 	        Please enter a value in the Person field.
+ 	        Please select an existing value or enter a new value in the Person field.
         </#if> 
         
         <#list submissionErrors?keys as errorFieldName>
@@ -55,14 +55,14 @@
         	    <#else>
         	        ${submissionErrors[errorFieldName]}
         	    </#if>
-        	    <br />
+        	    
         	<#elseif errorFieldName == "endField">
     	        <#if submissionErrors[errorFieldName]?contains("after")>
     	            The End Year must be later than the Start Year.
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
-	        </#if>
+	        </#if><br />
         </#list>
         </p>
     </section>
@@ -92,9 +92,9 @@
                 </#list>
 	        </#if>
 	    </select>
-       
+       <select id="typeSelector" style="display:none"><option value="http://xmlns.com/foaf/0.1/Person" selected="selected">Person</option></select>
   	    <p>
-	        <label for="relatedIndLabel">Person</label>
+	        <label for="relatedIndLabel">Person ${requiredHint}</label>
 	        <#if editMode == "edit">
 	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" disabled="disabled" >
                 <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="personLabel" value="${personLabelValue}" />

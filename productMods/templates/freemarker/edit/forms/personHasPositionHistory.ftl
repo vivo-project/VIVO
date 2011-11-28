@@ -26,7 +26,7 @@
         <#assign disabledVal="disabled">
 <#else>
         <#assign formAction="Create">        
-        <#assign submitButtonText="Create Position">
+        <#assign submitButtonText="Position">
         <#assign disabledVal="">
 </#if>
 

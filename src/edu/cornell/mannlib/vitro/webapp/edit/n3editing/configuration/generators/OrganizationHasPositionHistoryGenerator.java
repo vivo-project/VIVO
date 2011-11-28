@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
@@ -30,8 +31,9 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "  ?position rdfs:label ?existingPositionTitle . }";
 
 	private static final String QUERY_EXISTING_POSITION_TYPE = ""
+            + "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n"
 			+ "SELECT ?existingPositionType WHERE { \n"
-			+ "  ?position a ?existingPositionType . }";
+			+ "  ?position vitro:mostSpecificType ?existingPositionType . }";
 
 	private static final String QUERY_EXISTING_PERSON = ""
 			+ "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
