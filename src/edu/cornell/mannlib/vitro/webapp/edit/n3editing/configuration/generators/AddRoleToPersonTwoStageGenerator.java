@@ -881,7 +881,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 		}
 		addFilter += StringUtils.join(filterPortions, " || ");
 		addFilter += ")";
-		System.out.println("Add filter is " + addFilter);
 		return addFilter;
 	}
 	

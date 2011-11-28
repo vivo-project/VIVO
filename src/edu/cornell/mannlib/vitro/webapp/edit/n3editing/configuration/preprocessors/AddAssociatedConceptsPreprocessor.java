@@ -163,7 +163,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		int index;
 		// First one already included in generator so add additional ones here
 		for (index = 1; index <= numberConcepts; index++) {
-			int suffix = index + 1;
+			int suffix = index;
 			String conceptNode = conceptNodeBase + suffix;
 			String label = labelBase + suffix;
 			String source = sourceBase + suffix;

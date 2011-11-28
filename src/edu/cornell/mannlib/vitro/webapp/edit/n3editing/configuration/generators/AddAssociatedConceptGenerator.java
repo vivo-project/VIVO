@@ -4,6 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +29,11 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.XSD;
 import com.hp.hpl.jena.ontology.OntModel;
 import edu.cornell.mannlib.vitro.webapp.beans.DataProperty;
+import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator;
 import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
+import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -41,6 +44,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator.AuthorshipInfo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
@@ -72,7 +76,10 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	private String dataLiteral = null;
 	private String template = "addAssociatedConcept.ftl";
 	private static HashMap<String,String> defaultsForXSDtypes ;
+	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 	
+	
+
 	
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
@@ -305,12 +312,17 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		List<AssociatedConceptInfo> testInfo = new ArrayList<AssociatedConceptInfo>();
 		testInfo.add(new AssociatedConceptInfo("testLabel", "testURI", "testVocabURI", "testVocabLabel", null));
 		testInfo.add(new AssociatedConceptInfo("user defined label", "testUserURI", null, null, "http://www.w3.org/2004/02/skos/core#Concept"));
+		
+		//Adding concepts
+		testInfo.addAll(getExistingConcepts(vreq));
 		formSpecificData.put("existingConcepts", testInfo);
 		//Return url for adding user defined concept
 		formSpecificData.put("userDefinedConceptUrl", getUserDefinedConceptUrl(vreq));
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 	
+	
+	//
 	private Object getUserDefinedConceptUrl(VitroRequest vreq) {
 		String subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
 		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
@@ -322,6 +334,57 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
 	}
 
+	private List<AssociatedConceptInfo> getExistingConcepts(VitroRequest vreq) {
+		Individual individual = EditConfigurationUtils.getSubjectIndividual(vreq);
+	    List<Individual> concepts = individual.getRelatedIndividuals(
+	    		EditConfigurationUtils.getPredicateUri(vreq));  
+	    //TODO: Check if sorted correctly
+	    sortConceptIndividuals(concepts);
+		
+		return getAssociatedConceptInfo(concepts);
+	}
+	
+	
+	private void sortConceptIndividuals(List<Individual> authorships) {
+		DataPropertyComparator comp = new DataPropertyComparator(RDFS.label.getURI());
+	    Collections.sort(authorships, comp);
+	}
+	
+	private List<AssociatedConceptInfo> getAssociatedConceptInfo(
+			List<Individual> concepts) {
+		List<AssociatedConceptInfo> info = new ArrayList<AssociatedConceptInfo>();
+		 for ( Individual conceptIndividual : concepts ) {
+			 	boolean isSKOSConcept = false;
+			 	String conceptUri =  conceptIndividual.getURI();
+			 	String conceptLabel = conceptIndividual.getName();
+			 	//Check if SKOS Concept type
+			 	List<ObjectPropertyStatement> osl = conceptIndividual.getObjectPropertyStatements(RDF.type.getURI());
+			 	for(ObjectPropertyStatement os: osl) {
+			 		if(os.getObjectURI().equals(SKOSConceptType)) {
+			 			isSKOSConcept = true;
+			 			break;
+			 		}
+			 	}
+			 	
+			 	if(isSKOSConcept) {
+			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, null, null, SKOSConceptType));
+			 	} else {
+			 		//Get the vocab source and vocab label
+			 		List<ObjectPropertyStatement> vocabList = conceptIndividual.getObjectPropertyStatements(RDFS.isDefinedBy.getURI());
+			 		String vocabSource = null;
+			 		String vocabLabel = null;
+			 		if(vocabList != null && vocabList.size() > 0) {
+			 			vocabSource = vocabList.get(0).getObjectURI();
+			 			//vocab label? Right now set as same to vocab source until we get the correct input
+			 			vocabLabel = vocabSource;
+			 		}
+			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null));
+
+			 	}
+		 }
+		 return info;
+	}
+	
 	public class AssociatedConceptInfo {
 		private String conceptLabel;
 		private String conceptURI;
