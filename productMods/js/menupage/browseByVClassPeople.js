@@ -35,7 +35,7 @@ browseByVClass.getIndividuals = function(vclassUri, alpha, page, scroll) {
         
         // Catch exceptions when empty individuals result set is returned
         // This is very likely to happen now since we don't have individual counts for each letter and always allow the result set to be filtered by any letter
-        if ( results.individuals.length == 0 ) {
+        if ( !results.individuals || results.individuals.length == 0 ) {
             browseByVClass.emptyResultSet(results.vclass, alpha)
         } else {
             var vclassName = results.vclass.name;
