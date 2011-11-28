@@ -54,7 +54,7 @@ var addConceptForm = {
         this.externalConceptLabel = $('#conceptLabel');
         this.externalConceptSource = $('#conceptSource');
         //remove links
-        this.removeTermLinks = $('a.remove');
+        this.removeConceptLinks = $('a.remove');
         this.errors = $('#errors');
     },
     
@@ -74,7 +74,7 @@ var addConceptForm = {
 			return addConceptForm.prepareSubmit(); 
         });     
     	
-    	this.addTermButton.click(function() {
+    	this.addConceptButton.click(function() {
     		addConceptForm.initForm();
     		
     	});
@@ -145,7 +145,7 @@ var addConceptForm = {
 	                	var definedBy = conceptResult.definedBy;
 	                	var type = conceptResult.type;
 	                	var uri = conceptResult.uri;
-	                	htmlAdd+= addConceptForm.generateIndividualTermDisplay(uri, label, definition, type, definedBy);
+	                	htmlAdd+= addConceptForm.generateIndividualConceptDisplay(uri, label, definition, type, definedBy);
 	                }
 	                htmlAdd+= "</ul>";
                 } else {
@@ -202,7 +202,7 @@ var addConceptForm = {
     	this.externalConceptSource.val(conceptSources);
     	return true;
     }, 
-    generateIndividualTermDisplay: function(cuiURI, label, definition, type, definedBy) {
+    generateIndividualConceptDisplay: function(cuiURI, label, definition, type, definedBy) {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
     	"<span class='column conceptLabel'>" +
