@@ -27,7 +27,7 @@
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="Add webpage for">        
-        <#assign submitButtonText="Add webpage">
+        <#assign submitButtonText="Add Web Page">
         <#assign disabledVal=""/>
 </#if>
 

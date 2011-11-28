@@ -56,7 +56,8 @@
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
          These can just be ordinary links, rather than a v:input element, as in 
          addAuthorsToInformationResource.jsp. -->
-    <a href="${showAddFormUrl}" id="showAddForm" class="button green">Add Web Page</a>
+    <br />     
+    <a href="${showAddFormUrl}" id="showAddForm" class="button green">Add New Web Page</a>
        
     <a href="${cancelUrl}" id="returnToIndividual" class="return">Return to Individual</a>
 </section>
