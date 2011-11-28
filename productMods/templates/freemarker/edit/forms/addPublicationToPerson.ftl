@@ -68,6 +68,7 @@
              </#list>
         </select>
     </p>
+    <div class="fullViewOnly">        
         <p>
             <label for="relatedIndLabel">Title ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="title" 
@@ -83,21 +84,13 @@
             <input class="acUriReceiver" type="hidden" id="pubUri" name="pubUri" value="" />
         </div>
         
-        
-        <#--Commenting out as unclear whether this contains any dates to begin with 
-         <#if htmlForElements?keys?seq_contains("dateField")>
-				               		    <label class="dateTime" for="dateField">Publication Date ${yearHint}</label>
-				               		    ${htmlForElements["dateField"]} ${yearHint}
-         </#if>
-				-->
+   </div>
+       <p class="submit">
+            <input type="hidden" name = "editKey" value="${editKey}"/>
+            <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
+       </p>
 
-
-            <p class="submit">
-                <input type="hidden" name = "editKey" value="${editKey}"/>
-                <input type="submit" id="submit" value="${submitButtonText}"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
-            </p>
-
-            <p id="requiredLegend" class="requiredHint">* required fields</p>
+       <p id="requiredLegend" class="requiredHint">* required fields</p>
     </form>
 
 
