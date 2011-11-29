@@ -121,7 +121,7 @@
     
     <p>
         <label for="dept">Department or School Name within the ###</label>
-        <input  size="50"  type="text" id="dept" name="dept" value="${deptValue}" />
+        <input  size="60"  type="text" id="dept" name="dept" value="${deptValue}" />
     </p>
     
     <div class="entry">
@@ -142,8 +142,10 @@
     </p>   
           
     <p>    
-        <label for="info">Supplemental Information (e.g., <em>Postdoctoral training</em> or <em>Transferred</em>)</label>
-        <input  size="50"  type="text" id="info" name="info" value="${infoValue}" />
+        <label for="info">Supplemental Information 
+            <span class="hint">&nbsp;(e.g., Postdoctoral training or Transferred)</span>
+        </label>
+        <input  size="60"  type="text" id="info" name="info" value="${infoValue}" />
         
     </p>
     <p></p>

@@ -21,7 +21,7 @@ roleExamples-->
 <#assign roleDescriptor = "presentation" />
 <#assign typeSelectorLabel = "presentation type" />
 <#assign buttonText = "Presentation Role" />
-<#assign roleExamples = "(e.g., Moderator, Speaker, Panelist)" />
+<#assign roleExamples = "<span class='hint'>&nbsp;(e.g., Moderator, Speaker, Panelist)</span>" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
