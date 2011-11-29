@@ -15,7 +15,7 @@
 <#assign anchor = lvf.getFormFieldValue(editSubmission, editConfiguration, "anchor") />
 <#assign newRank = lvf.getFormFieldValue(editSubmission, editConfiguration, "newRank") />
 
-<#if editConfiguration.object?has_content>
+<#if url?has_content>
     <#assign editMode = "edit">
 <#else>
     <#assign editMode = "add">
