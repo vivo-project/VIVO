@@ -27,14 +27,14 @@
         <@dt.yearSpan statement.dateTime! /> 
     </#local>
     
-    <#local superEvent>
+    <#local attendedEvent>
         <#if statement.event2?has_content && statement.event2Label?has_content>
-            <a href="${profileUrl(statement.event2)}">${statement.event2Label}</a>
+            at <a href="${profileUrl(statement.event2)}">${statement.event2Label}</a>
         <#elseif statement.series?has_content && statement.seriesLabel?has_content>
-            <a href="${profileUrl(statement.series)}">${statement.seriesLabel}</a>
+            at <a href="${profileUrl(statement.series)}">${statement.seriesLabel}</a>
         </#if>
     </#local>
 
-    <@s.join [ linkedIndividual, statement.roleLabel!, superEvent! ] /> ${dateTime!}
+    <@s.join [ linkedIndividual, attendedEvent! ] /> ${dateTime!}
 
 </#macro>
