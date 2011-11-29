@@ -15,14 +15,14 @@
 </#macro>
 
 <#-- After selecting an individual via autocomplete, display highlighted and with verify link -->
-<#macro acSelection urlsBase>
+<#macro acSelection urlsBase inputName inputId inputValue>
 <div class="acSelection">
     <p class="inline">
         <label></label>
         <span class="acSelectionInfo"></span>
         <a href="${urlsBase}/individual?uri=" class="verifyMatch">(Verify this match)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="org" name="org" value="" />
+        <input class="acUriReceiver" type="hidden" id="${inputId}" name="${inputName}" value="${inputValue}" />
         <!-- Field value populated by JavaScript -->
 </div>
 </#macro>

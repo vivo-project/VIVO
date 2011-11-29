@@ -21,6 +21,7 @@
 <#assign infoValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "info") />
 <#assign majorFieldValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "majorField") />
 <#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
+<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org") />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -117,7 +118,7 @@
     	<input type="hidden" name="orgLabel" id="orgLabel" value="${orgLabelValue}"/>
     </#if>
     
-    <@lvf.acSelection urls.base />
+    <@lvf.acSelection urls.base "org" "org" existingOrgValue/>
     
     <p>
         <label for="dept">Department or School Name within the ###</label>

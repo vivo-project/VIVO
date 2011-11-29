@@ -47,7 +47,8 @@
 <#assign grantLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "grantLabel")/>
 <#--Get existing grant label value-->
 <#assign existingGrantLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingGrantLabel")/>
-
+<#--Get existing grant value-->
+<#assign existingGrantValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "grant")/>
 
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
@@ -107,7 +108,7 @@
 				<input type="hidden" id="grantLabel"  name="grantLabel" value="${grantLabel}"/>
          </#if>
 
-        <@lvf.acSelection urls.base />
+        <@lvf.acSelection urls.base "grant" "grant" existingGrantValue/>
 
         <h4>Years of Participation in Grant</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>

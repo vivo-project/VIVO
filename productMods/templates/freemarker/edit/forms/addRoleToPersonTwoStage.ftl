@@ -58,6 +58,9 @@
 <#--Get role label-->
 <#assign roleLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleLabel") />
 
+<#--For role activity uri-->
+<#assign existingRoleActivityValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleActivity") />
+
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
@@ -144,7 +147,7 @@
             	<input type="hidden" id="roleActivityType" name="roleActivityType" value="${activityTypeValue}"/>
             	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}"/>
             </#if>
-            <@lvf.acSelection urls.base />
+            <@lvf.acSelection urls.base "roleActivity" "roleActivityUri" existingRoleActivityValue />
 
             <#if showRoleLabelField = true>
             <p><label for="roleLabel">Role in ### ${requiredHint} ${roleExamples}</label>
@@ -159,7 +162,7 @@
                		${htmlForElements["startField"]} ${yearHint}
                </#if>
             <#else>
-                <h4>Years of Participation in ${roleDescriptor?capitalize}</h4>
+                <h4 class="label">Years of Participation in ### </h4>
                 <#if htmlForElements?keys?seq_contains("startField")>
                 	    <label class="dateTime" for="startField">Start</label>
                		    ${htmlForElements["startField"]} ${yearHint}
