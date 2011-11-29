@@ -13,6 +13,7 @@
 <#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel")/>
 <#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle")/>
 <#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType")/>
+<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org")/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -101,7 +102,7 @@
 			<input type="hidden" id="orgLabel"  name="orgLabel" value="${orgLabelValue}"/>
    </#if>
 
-    <@lvf.acSelection urls.base />
+    <@lvf.acSelection urls.base "org" "org" existingOrgValue/>
 
 
     <label for="positionTitle">Position Title ${requiredHint}</label>
