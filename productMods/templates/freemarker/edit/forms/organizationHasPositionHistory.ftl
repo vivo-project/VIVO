@@ -92,7 +92,6 @@
                 </#list>
 	        </#if>
 	    </select>
-       <select id="typeSelector" style="display:none"><option value="http://xmlns.com/foaf/0.1/Person" selected="selected">Person</option></select>
   	    <p>
 	        <label for="relatedIndLabel">Person ${requiredHint}</label>
 	        <#if editMode == "edit">
@@ -140,7 +139,7 @@
 	
 	<script type="text/javascript">
 	var customFormData  = {
-	    acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
+	    acUrl: '${urls.base}/autocomplete?type=http://xmlns.com/foaf/0.1/Person&tokenize=true&stem=true',
 	    editMode: '${editMode}',
 	    submitButtonTextType: 'compound',
 	    defaultTypeName: 'person'

@@ -146,7 +146,7 @@
 <script type="text/javascript">
 var customFormData = {
     rankPredicate: '${rankPredicate}',
-    acUrl: '${urls.base}/autocomplete?tokenize=true',
+    acUrl: '${urls.base}/autocomplete?type=http://xmlns.com/foaf/0.1/Person&tokenize=true',
     reorderUrl: '${urls.base}/edit/reorder'
 };
 </script>
