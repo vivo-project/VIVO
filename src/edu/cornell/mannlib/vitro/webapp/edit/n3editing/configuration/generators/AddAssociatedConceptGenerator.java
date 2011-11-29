@@ -161,7 +161,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
     private List<String> generateN3Required(VitroRequest vreq) {
     	return list(    	            	        
     	        getPrefixesString() + "\n" +
-    	        "?subject ?predicate ?conceptNode .\n"
+    	        "?subject ?predicate ?conceptNode .\n" + 
+    	        "?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
     	);
     }
     

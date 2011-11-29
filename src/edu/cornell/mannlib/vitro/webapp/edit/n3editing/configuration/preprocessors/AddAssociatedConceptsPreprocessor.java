@@ -30,7 +30,10 @@ public class AddAssociatedConceptsPreprocessor extends
 	private static String conceptNodeBase = "conceptNode";
 	private static String sourceBase = "conceptSource";
 	private static String labelBase = "conceptLabel";
-	//Also storing submission
+	//Also storing submission values
+	private static String conceptNodeValues = null;
+	private static String conceptLabelValues = null;
+	private static String conceptSourceValues = null;
 	private static MultiValueEditSubmission submission = null;
 
 	// String datatype
@@ -46,7 +49,7 @@ public class AddAssociatedConceptsPreprocessor extends
 		// Get the input elements for concept node and concept label as well
 		// as vocab uri (which is based on thge
 		// For query parameters, check whether CUI
-		String conceptNodeValues = getConceptNodeValues();
+		copySubmissionValues();
 
 		if (conceptNodeValues != null) {
 			String[] conceptNodes = convertDelimitedStringToArray(conceptNodeValues);
@@ -60,11 +63,22 @@ public class AddAssociatedConceptsPreprocessor extends
 		}
 
 	}
+	
+	//Since we will change the uris and literals from form, we should make copies
+	//of the original values and store them, this will also make iterations
+	//and updates to the submission independent from accessing the values
+	private void copySubmissionValues() {
+		conceptLabelValues = getConceptLabelValues();
+		conceptNodeValues = getConceptNodeValues();
+		conceptSourceValues = getConceptSourceValues();
+	}
 
 	private void processConceptNodes(int numberConcepts) {
 		//There are no "new" resources b/c the concept nodes are URIs from external vocabularies
 		// Add N3Required
 		addN3Required(numberConcepts);
+		//Add N3 Optional as well
+		addN3Optional(numberConcepts);
 		// Add URIs on Form and Add Literals On Form
 		addLiteralsAndUrisOnForm(numberConcepts);
 		// Add fields
@@ -88,13 +102,13 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 
 	private void addConceptNodeInputs(int numberConcepts) {
-		//Get the current value
-		String conceptNodeValues = getConceptNodeValues();
+		
 		String[] conceptNodes = convertDelimitedStringToArray(conceptNodeValues);
 		if(conceptNodes != null && conceptNodes.length == numberConcepts) {
 			int i;
-			for(i = 1; i <= numberConcepts; i++) {
-				int suffix = i;
+			//iterate through the concept nodes converted string array
+			for(i = 0; i < numberConcepts; i++) {
+				int suffix = i + 1;
 				String conceptInputName = conceptNodeBase + suffix;
 				String[] nodeValues = new String[1];
 				nodeValues[0] = conceptNodes[i];
@@ -110,12 +124,11 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 
 	private void addConceptSourceInputs(int numberConcepts) {
-		String conceptSourceValues = getConceptSourceValues();
 		String[] conceptSources = convertDelimitedStringToArray(conceptSourceValues);
 		if(conceptSources != null && conceptSources.length == numberConcepts) {
 			int i;
-			for(i = 1; i <= numberConcepts; i++) {
-				int suffix = i;
+			for(i = 0; i < numberConcepts; i++) {
+				int suffix = i + 1;
 				String conceptInputName = sourceBase + suffix;
 				String[] sourceValues = new String[1];
 				sourceValues[0] = conceptSources[i];
@@ -130,12 +143,11 @@ public class AddAssociatedConceptsPreprocessor extends
 	}
 
 	private void addConceptLabelInputs(int numberConcepts) {
-		String conceptLabelValues = getConceptLabelValues();
 		String[] labels = convertDelimitedStringToArray(conceptLabelValues);
 		if(labels != null && labels.length == numberConcepts) {
 			int i;
-			for(i = 1; i <= numberConcepts; i++) {
-				int suffix = i;
+			for(i = 0; i < numberConcepts; i++) {
+				int suffix = i + 1;
 				String labelInputName = labelBase + suffix;
 				String[] labelValues = new String[1];
 				labelValues[0] = labels[i];
@@ -301,5 +313,7 @@ public class AddAssociatedConceptsPreprocessor extends
 			return null;
 		return inputList.get(0);
 	}
+	
+	
 
 }

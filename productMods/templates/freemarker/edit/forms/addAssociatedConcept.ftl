@@ -11,7 +11,7 @@
 
 
 <#--This is set for testing purposes - will be retrieved dynamically from the generator later-->
-<#assign sources = [{"uri":"UMLS", "label":"UMLS"}, {"uri":"Agrovoc", "label":"Agrovoc"}]/>
+<#assign sources = [{"uri":"http://link.informatics.stonybrook.edu/umls/", "label":"UMLS"}, {"uri":"http://www.agrovoc.com", "label":"Agrovoc"}]/>
 <#assign selectedSource = "UMLS" />
 
 <h2>Manage Concepts</h2>
