@@ -48,7 +48,6 @@ var addConceptForm = {
         //input for search term form
         this.searchTerm = $('#searchTerm');
         this.searchSubmit = $('#searchButton');
-        this.vocabSource = $('#source');
         //Hidden inputs for eventual submission
         this.externalConceptURI = $('#conceptNode');
         this.externalConceptLabel = $('#conceptLabel');
@@ -120,11 +119,13 @@ var addConceptForm = {
     submitSearchTerm: function() {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
-    	var vocabSourceValue = this.vocabSource.val();
+    	var vocabSourceValue = $('input:radio[name="source"]:checked').val();
     	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue) + "&source=" + encodeURIComponent(vocabSourceValue);
         $.getJSON(dataServiceUrl, function(results) {
-            if ( results.array.length == 0 ) {
-            	alert("results not correct length");
+            var htmlAdd = "";
+
+            if ( results== null || results.array == null || results.array.length == 0 ) {
+            	htmlAdd = "<p>No search results</p>";
             } else {
             	//array is an array of objects representing concept information
             	//loop through and find all the best matches
@@ -133,7 +134,6 @@ var addConceptForm = {
                 var numberMatches = bestMatchResults.length;
                 var i;
                 //For each result, display
-                var htmlAdd = "";
                 if(numberMatches > 0) {
                 	htmlAdd = "<ul class='dd' id='concepts' name='concepts'>";
                 	htmlAdd+= addConceptForm.addResultsHeader();
