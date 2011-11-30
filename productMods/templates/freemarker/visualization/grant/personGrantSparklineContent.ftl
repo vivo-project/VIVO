@@ -190,7 +190,7 @@
                     }                                        
                                
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" >(.CSV File)</a> ';                    
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}"  title="csv file">(.CSV File)</a> ';                    
                     }                                                
                                          
                  </#if>
@@ -265,7 +265,7 @@
     
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
-            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}">View all VIVO grants and corresponding co-investigator network.</a></p>
+            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}" title="view all grants">View all VIVO grants and corresponding co-investigator network.</a></p>
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Grant Counts per Year -->
@@ -280,7 +280,7 @@
                 
                 <#include "yearToActivityCountTable.ftl">
     
-                Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                Download data as <a href="${sparklineVO.downloadDataLink}" title="csv link">.csv</a> file.
                 <br />
             </p>
         

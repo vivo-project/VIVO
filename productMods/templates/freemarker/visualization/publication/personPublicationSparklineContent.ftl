@@ -187,7 +187,7 @@
                     }
 
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';                    
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv file">(.CSV File)</a> ';                    
                     }
                                                                                 
                  </#if>
@@ -278,7 +278,7 @@
                 
                 <#include "yearToActivityCountTable.ftl">
     
-                Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                Download data as <a href="${sparklineVO.downloadDataLink}" title="csv download link">.csv</a> file.
                 <br />
             </p>
         

@@ -118,7 +118,7 @@ $(document).ready(function(){
     <div id="ego_profile">
     
         <#-- Label -->
-        <h2><a href="${egoVivoProfileURL}"><span id="ego_label" class="author_name"></span></a></h2>
+        <h2><a href="${egoVivoProfileURL}" title="author name"><span id="ego_label" class="author_name"></span></a></h2>
     
         <#-- Moniker-->
         <em id="ego_moniker" class="moniker"></em>
@@ -127,9 +127,9 @@ $(document).ready(function(){
     
     <div class = "toggle_visualization">
         <div id="coinvestigator_link_container" class="collaboratorship-link-container">
-            <div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}"><img src="${coInvestigatorIcon}" /></a></div>
+            <div class="collaboratorship-icon"><a href="${coprincipalinvestigatorURL}" title="co-investigator"><img src="${coInvestigatorIcon}" /></a></div>
             <div class="collaboratorship-link">
-                <h3><a href="${coprincipalinvestigatorURL}">Co-Investigator Network</a></h3>
+                <h3><a href="${coprincipalinvestigatorURL}" title="co-investigator">Co-Investigator Network</a></h3>
             </div>
         </div>
     </div>
@@ -149,7 +149,7 @@ $(document).ready(function(){
                 </#if>
                 
                 <div id="no_coauthorships">Currently there are no ${authorsText!} papers for 
-                    <a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> 
+                    <a href="${egoVivoProfileURL}" title="co-authorship"><span id="no_coauthorships_person" class="author_name">this author</span></a> 
                     in the VIVO database.
                 </div>                      
         </#if>
@@ -157,7 +157,7 @@ $(document).ready(function(){
     <#else>
     
         <span id="no_coauthorships">Currently there are no papers for 
-            <a href="${egoVivoProfileURL}"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the 
+            <a href="${egoVivoProfileURL}" title="co-authorship"><span id="no_coauthorships_person" class="author_name">this author</span></a> in the 
             VIVO database.
         </span>
     
@@ -182,7 +182,7 @@ $(document).ready(function(){
                 <h4><span id="authorName" class="neutral_author_name">&nbsp;</span></h4>
                 
                 <em id="profileMoniker" class="moniker"></em>
-                <div id="profile-links"><a href="#" id="profileUrl">VIVO profile</a></div>
+                <div id="profile-links"><a href="#" id="profileUrl" title="VIVO profile">VIVO profile</a></div>
 
                 <div class="author_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
                 <span class="author_stats_text">Publication(s)</span></div>

@@ -4,10 +4,10 @@
 
 
         
-        <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}">${organizationLabel}</a></span>
+        <h2 id="header-entity-label"><span><a id="organizationMoniker" href="${organizationVivoProfileURL}" title="organizationname">${organizationLabel}</a></span>
         <span id="subject-parent-entity"><span>|&nbsp;&nbsp;</span>
             <a id="subject-parent-entity-profile-url" href="#" title="Parent organization of ${organizationLabel}"></a>&nbsp;
-            <a id="subject-parent-entity-temporal-url" href="#"><img src="${temporalGraphDrillUpIcon}" width="15px" height="15px"/></a>
+            <a id="subject-parent-entity-temporal-url" href="#" title="temporal graph drill up"><img src="${temporalGraphDrillUpIcon}" width="15px" height="15px"/></a>
         </span></h2><br>
         
         <div id="leftblock">
@@ -46,7 +46,7 @@
                 <div id="notification-container" style="display:none">
         
                     <div id="error-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
-                        <a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
+                        <a class="ui-notify-close" href="#" title="error notification"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
                         <span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
                         <h1>&#035;{title}</h1>
                         <p>&#035;{text}</p>
@@ -54,7 +54,7 @@
                     </div>
                     
                     <div id="warning-notification" class="ui-state-highlight ui-corner-all" >
-                    <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+                    <a class="ui-notify-close ui-notify-cross" href="#" title="error notification">x</a>
                     <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
                         <h1>&#035;{title}</h1>
                         <p>&#035;{text}</p>
@@ -72,7 +72,7 @@
                 
                 <div id="paginatedTable"></div>
                 <div id="paginated-table-footer">
-                <a id="csv" href="${temporalGraphDownloadFileLink}" class="temporalGraphLinks">Save All as CSV</a>
+                <a id="csv" href="${temporalGraphDownloadFileLink}" class="temporalGraphLinks" title="save all">Save All as CSV</a>
                 <a class="clear-selected-entities temporalGraphLinks" title="Clear all selected entities.">Clear</a>
                 </div>
             </div>

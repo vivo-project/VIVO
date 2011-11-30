@@ -16,7 +16,7 @@
 		
 		<#else>
 		
-			<a href="${urls.base}/individual?uri=${model.uri?url}">${model.individualLabel}</a>
+			<a href="${urls.base}/individual?uri=${model.uri?url}" title="label">${model.individualLabel}</a>
 			
 		</#if>
 		<span class="display-title">${model.humanReadableType}</span> 

@@ -193,7 +193,7 @@
                     }
                     
                     if (totalPublicationCount) {
-                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}">(.CSV File)</a> ';
+                        sparksText += ' <br /><a href="${sparklineVO.downloadDataLink}" title="csv file">(.CSV File)</a> ';
                     }
                                          
                  </#if>
@@ -271,7 +271,7 @@
 
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
-            <p><a class="all-vivo-publications" href="${sparklineVO.fullTimelineNetworkLink}">View full timeline and co-author network.</a></p>
+            <p><a class="all-vivo-publications" href="${sparklineVO.fullTimelineNetworkLink}" title="view full timeline">View full timeline and co-author network.</a></p>
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Couauthor Counts per Year -->
@@ -287,7 +287,7 @@
                     
                     <#include "yearToActivityCountTable.ftl">
         
-                    Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                    Download data as <a href="${sparklineVO.downloadDataLink}" title="csv download">.csv</a> file.
                     <br />
                 </p>
         

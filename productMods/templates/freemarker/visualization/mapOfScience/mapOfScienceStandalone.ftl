@@ -10,12 +10,12 @@ corresponding changes in the included Templates. -->
 
 <#--
 <div id="subject-parent-entity" class="hide-dom-on-init">
-	<a id="subject-parent-entity-profile-url" href="#"></a>&nbsp;
-    <a id="subject-parent-entity-temporal-url" href="#"><img src="${mapOfScienceIcon}" width="15px" height="15px"/></a>
+	<a id="subject-parent-entity-profile-url" href="#" title="parent entity"></a>&nbsp;
+    <a id="subject-parent-entity-temporal-url" href="#" title="map of science"><img src="${mapOfScienceIcon}" width="15px" height="15px"/></a>
 </div>
 -->
         
-<h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}">${entityLabel}</a></span></h2>
+<h2 id="header-entity-label" class="hide-dom-on-init"><span><a id="entityMoniker" href="${entityVivoProfileURL}" title="entity label">${entityLabel}</a></span></h2>
 
 <div id="map-of-science-info" class="hide-dom-on-init"> Explore activity (<span id="mapped-publications" style="font-weight: bold"></span> publications) across 554 scientific subdisciplines 
 	<img class="filterInfoIcon" id="imageIconOne"  src="${urls.images}/iconInfo.png" 
@@ -26,7 +26,7 @@ corresponding changes in the included Templates. -->
 <div id="left-column" class="hide-dom-on-init">
 	<div id="notification-container" style="display:none">
         <div id="error-notification" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
-            <a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
+            <a class="ui-notify-close" href="#" title="error notification"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
             <span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
             <h1>&#035;{title}</h1>
             <p>&#035;{text}</p>
@@ -34,7 +34,7 @@ corresponding changes in the included Templates. -->
         </div>
         
         <div id="warning-notification" class="ui-state-highlight ui-corner-all" >
-	        <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+	        <a class="ui-notify-close ui-notify-cross" href="#" title="error notification">x</a>
 	        <span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>
 	        <h1>&#035;{title}</h1>
 	        <p>&#035;{text}</p>
@@ -62,7 +62,7 @@ corresponding changes in the included Templates. -->
 		<img class="filterInfoIcon" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="information icon" title="" />
 			
 		<div id="download-unlocated-journal-info">
-			<a href="${entityMapOfScienceUnlocatedJournalsCSVURL}">Save Unmapped Publications</a>
+			<a href="${entityMapOfScienceUnlocatedJournalsCSVURL}" title="save unmapped publications">Save Unmapped Publications</a>
 		</div>
 	</div>
 	<br />
