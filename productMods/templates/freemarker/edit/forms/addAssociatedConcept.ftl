@@ -3,16 +3,13 @@
 
 <#assign existingConcepts = editConfiguration.pageData.existingConcepts/>
 <#assign userDefinedConceptUrl = editConfiguration.pageData.userDefinedConceptUrl/>
+<#assign sources = editConfiguration.pageData.searchServices/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
-
-<#--This is set for testing purposes - will be retrieved dynamically from the generator later-->
-<#assign sources = [{"uri":"http://link.informatics.stonybrook.edu/umls/", "label":"UMLS"}, {"uri":"http://www.fao.org/webservices/Agrovoc", "label":"Agrovoc"}]/>
-<#assign selectedSource = "UMLS" />
 
 <h2>Manage Concepts</h2>
     
@@ -81,9 +78,9 @@
 </div> 
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
 
-    <#list sources as source>
-        <input type="radio" id="source" name="source" value="${source.uri}" role="radio" <#if selectedSource = source.uri>checked</#if> />
-        <label class="inline" for="${source.label}"> ${source.label}</label>
+    <#list sources?keys as sourceUri>
+        <input type="radio" id="source" name="source" value="${sourceUri}" role="radio" />
+        <label class="inline" for="${sources[sourceUri]}"> ${sources[sourceUri]}</label>
         <br />
     </#list>
 

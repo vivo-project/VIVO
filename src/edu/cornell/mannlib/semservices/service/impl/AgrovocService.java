@@ -66,7 +66,7 @@ public class AgrovocService implements ExternalConceptService  {
             //XMLUtils.serializeNode(node); System.out.println();
 
             Concept concept = new Concept();
-            concept.setDefinedBy("Agrovoc");
+            concept.setDefinedBy("http://aims.fao.org/aos/agrovoc/agrovocScheme");
             concept.setConceptId(termcode);
 
             NamedNodeMap attrs = node.getAttributes();

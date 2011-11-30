@@ -19,8 +19,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 public class ConceptSearchServiceUtils {
     private static final Log log = LogFactory.getLog(ConceptSearchServiceUtils.class);
     //Get the appropriate search service class
-    private static final String UMLSVocabSource = "http://link.informatics.stonybrook.edu/umls/";
-    private static final String AgrovocVocabSource = "http://www.fao.org/webservices/Agrovoc";
+    //TODO: Change this so retrieved from the system instead using a query
+    private static final String UMLSVocabSource = "http://link.informatics.stonybrook.edu/umls";
+    private static final String AgrovocVocabSource = "http://aims.fao.org/aos/agrovoc/agrovocScheme";
     //Get the class that corresponds to the appropriate search
 	public static String getConceptSearchServiceClassName(String searchServiceName) {
 		HashMap<String, String> map = getMapping();
@@ -44,8 +45,8 @@ public class ConceptSearchServiceUtils {
     //Get the hashmap mapping service name to Service class
     private static HashMap<String, String> getMapping() {
     	HashMap<String, String> map = new HashMap<String, String>();
-    	map.put("http://link.informatics.stonybrook.edu/umls/", "edu.cornell.mannlib.semservices.service.impl.UMLSService");
-    	map.put("http://www.fao.org/webservices/Agrovoc", "edu.cornell.mannlib.semservices.service.impl.AgrovocService");
+    	map.put(UMLSVocabSource, "edu.cornell.mannlib.semservices.service.impl.UMLSService");
+    	map.put(AgrovocVocabSource, "edu.cornell.mannlib.semservices.service.impl.AgrovocService");
 
     	return map;
     }

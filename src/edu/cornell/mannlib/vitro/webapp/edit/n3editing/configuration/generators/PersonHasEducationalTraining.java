@@ -89,7 +89,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.setN3Optional(Arrays.asList( 
                 n3ForEdTrainingToOrg, majorFieldAssertion, degreeAssertion, 
                 deptAssertion, infoAssertion, 
-                n3ForStart, n3ForEnd  ));
+                n3ForStart, n3ForEnd, n3ForOrgToEdTraining  ));
         
         conf.addNewResource("edTraining", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("org",DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -119,6 +119,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addSparqlForExistingUris("endNode", existingEndNodeQuery);
         conf.addSparqlForExistingUris("startField-precision", existingStartPrecisionQuery);
         conf.addSparqlForExistingUris("endField-precision", existingEndPrecisionQuery);
+        //Add sparql to include inverse property as well
+        conf.addSparqlForAdditionalUrisInScope("inverseTrainingAtOrg", inverseTrainingAtOrgQuery);
                         
         conf.addField( new FieldVTwo().                        
                 setName("degree").
@@ -228,7 +230,9 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String n3ForEdTrainingToOrg  =      
         "?edTraining <"+ trainingAtOrg +"> ?org .";
     
-    
+    //The inverse of the above
+    final static String n3ForOrgToEdTraining  =      
+        "?org ?inverseTrainingAtOrg ?edTraining .";
     /* Queries for editing an existing educational training entry */
 
     final static String orgQuery  =      
@@ -318,6 +322,13 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?endNode <"+ type +"> <"+ dateTimeValueType +"> .\n"+
         "?endNode <"+ dateTimePrecision +"> ?existingEndPrecision . }";
     
+    //Query for inverse property
+    final static String inverseTrainingAtOrgQuery  =
+    	  "PREFIX owl:  <http://www.w3.org/2002/07/owl#>"
+			+ " SELECT ?inverseTrainingAtOrg "
+			+ "    WHERE { ?inverseTrainingAtOrg owl:inverseOf <"+ trainingAtOrg +"> . } ";
+    
+    
   //Adding form specific data such as edit mode
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
@@ -331,4 +342,6 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 		return EditModeUtils.getEditMode(vreq, predicates);
 	}
 
+	
+	
 }

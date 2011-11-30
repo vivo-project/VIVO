@@ -206,7 +206,7 @@ var addConceptForm = {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
     	"<span class='column conceptLabel'>" +
-    	addConceptForm.generateIndividualCUIInput(cuiURI, label, definition, type, definedBy) +  
+    	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy) +  
     	label + addConceptForm.generateIndividualTypeDisplay(type) + "</span>" + 
     	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
     	"</div>" +  

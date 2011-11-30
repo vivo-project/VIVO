@@ -54,6 +54,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
 import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
@@ -306,19 +307,12 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	//Form specific data
 	public void addFormSpecificData(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
 		HashMap<String, Object> formSpecificData = new HashMap<String, Object>();
-		//Existing concepts should probably be a hash map or a hash map of classes
-		//with URI of concept node to label and information about existing URI
-		//This would be a sparql query and would need to be run here?
-		//-------------------->For test purposes
-		List<AssociatedConceptInfo> testInfo = new ArrayList<AssociatedConceptInfo>();
-		testInfo.add(new AssociatedConceptInfo("testLabel", "testURI", "testVocabURI", "testVocabLabel", null));
-		testInfo.add(new AssociatedConceptInfo("user defined label", "testUserURI", null, null, "http://www.w3.org/2004/02/skos/core#Concept"));
-		
-		//Adding concepts
-		testInfo.addAll(getExistingConcepts(vreq));
-		formSpecificData.put("existingConcepts", testInfo);
+		//These are the concepts that already exist currently
+		formSpecificData.put("existingConcepts", getExistingConcepts(vreq));
 		//Return url for adding user defined concept
 		formSpecificData.put("userDefinedConceptUrl", getUserDefinedConceptUrl(vreq));
+		//Add URIs and labels for different services
+		formSpecificData.put("searchServices", ConceptSearchServiceUtils.getVocabSources());
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 	
@@ -342,17 +336,17 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	    //TODO: Check if sorted correctly
 	    sortConceptIndividuals(concepts);
 		
-		return getAssociatedConceptInfo(concepts);
+		return getAssociatedConceptInfo(concepts, vreq);
 	}
 	
 	
-	private void sortConceptIndividuals(List<Individual> authorships) {
+	private void sortConceptIndividuals(List<Individual> concepts) {
 		DataPropertyComparator comp = new DataPropertyComparator(RDFS.label.getURI());
-	    Collections.sort(authorships, comp);
+	    Collections.sort(concepts, comp);
 	}
 	
 	private List<AssociatedConceptInfo> getAssociatedConceptInfo(
-			List<Individual> concepts) {
+			List<Individual> concepts, VitroRequest vreq) {
 		List<AssociatedConceptInfo> info = new ArrayList<AssociatedConceptInfo>();
 		 for ( Individual conceptIndividual : concepts ) {
 			 	boolean isSKOSConcept = false;
@@ -376,8 +370,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			 		String vocabLabel = null;
 			 		if(vocabList != null && vocabList.size() > 0) {
 			 			vocabSource = vocabList.get(0).getObjectURI();
-			 			//vocab label? Right now set as same to vocab source until we get the correct input
-			 			vocabLabel = vocabSource;
+			 			Individual sourceIndividual = EditConfigurationUtils.getIndividual(vreq, vocabSource);
+			 			//Assuming name will get label
+			 			vocabLabel = sourceIndividual.getName();
 			 		}
 			 		info.add(new AssociatedConceptInfo(conceptLabel, conceptUri, vocabSource, vocabLabel, null));
 
