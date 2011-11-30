@@ -206,13 +206,26 @@ var addConceptForm = {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
     	"<span class='column conceptLabel'>" +
-    	"<input type='checkbox'  id='CUI' name='CUI' value='" + cuiURI + "' label='" + label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "'/>" + 
-    	label + " (" + type + ")</span>" + 
-    	"<span class='column conceptDefinition'>" + definition + "</span>" + 
+    	addConceptForm.generateIndividualCUIInput(cuiURI, label, definition, type, definedBy) +  
+    	label + addConceptForm.generateIndividualTypeDisplay(type) + "</span>" + 
+    	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
     	"</div>" +  
     	"</li>";	
     	return htmlAdd;
-    }, validateConceptSelection:function(checkedElements) {
+    }, 
+    generateIndividualCUIInput:function(cuiURI, label, type, definedBy) {
+    	return 	"<input type='checkbox'  id='CUI' name='CUI' value='" + cuiURI + "' label='" + label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "'/>";
+    },
+    generateIndividualTypeDisplay:function(type) {
+    	if(type != null && type.length > 0) {
+    		return " (" + type + ")";
+    	}
+    	return "";
+    },
+    generateIndividualDefinitionDisplay:function(definition) {
+    	return "<span class='column conceptDefinition'>" + definition + "</span>";
+    },
+    validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
     	if(numberElements < 1) {
     		addConceptForm.errors.html("<p class='validationError'>Please select at least one term from search results to add or click cancel.</p>");
