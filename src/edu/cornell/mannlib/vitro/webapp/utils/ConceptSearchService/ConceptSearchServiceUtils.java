@@ -19,7 +19,8 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 public class ConceptSearchServiceUtils {
     private static final Log log = LogFactory.getLog(ConceptSearchServiceUtils.class);
     //Get the appropriate search service class
-    
+    private static final String UMLSVocabSource = "http://link.informatics.stonybrook.edu/umls/";
+    private static final String AgrovocVocabSource = "http://www.fao.org/webservices/Agrovoc";
     //Get the class that corresponds to the appropriate search
 	public static String getConceptSearchServiceClassName(String searchServiceName) {
 		HashMap<String, String> map = getMapping();
@@ -33,8 +34,8 @@ public class ConceptSearchServiceUtils {
 	//URL to label
 	public static HashMap<String, String> getVocabSources() {
 		HashMap<String, String> map = new HashMap<String, String>();
-    	map.put("http://link.informatics.stonybrook.edu/umls/", "UMLS");
-    	map.put("http://www.fao.org/webservices/Agrovoc", "Agrovoc");
+    	map.put(UMLSVocabSource, "UMLS");
+    	map.put(AgrovocVocabSource, "Agrovoc");
     	return map;
 	}
 	
