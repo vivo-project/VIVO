@@ -1,4 +1,7 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
 /*
+
  * $Id: BeanToJsonSerializer.java 66350 2007-08-20 21:11:41Z xluan $
  *
  * Copyright 2006- Revolution Health Group.  All rights reserved.

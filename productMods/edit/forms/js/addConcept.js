@@ -163,7 +163,7 @@ var addConceptForm = {
     	var i;
     	for(i = 0; i < arrayLen; i++) {
     		var concept = resultsArray[i];
-    		if(concept.bestMatch == "true") {
+    		if(concept.bestMatch != "false") {
     			bestMatchResults.push(concept);
     		}
     	}
