@@ -52,6 +52,6 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 
     @Override   
     boolean isShowRoleLabelField() { 
-        return true;  
+        return false;  
     }	  
 }
