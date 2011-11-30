@@ -15,10 +15,10 @@
 <#macro showRole statement>
     <#local linkedIndividual>
         <#if statement.activity??>
-            <a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
+            <a href="${profileUrl(statement.activity)}" title="activity name">${statement.activityLabel!statement.activityName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}">missing activity</a>
+            <a href="${profileUrl(statement.role)}" title="missing activity">missing activity</a>
         </#if>
     </#local>
     

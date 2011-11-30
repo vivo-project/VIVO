@@ -29,10 +29,10 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${profileUrl(statement.org)}">${statement.orgName}</a>
+            <a href="${profileUrl(statement.org)}" title="organization name">${statement.orgName}</a>
         <#elseif editable>
             <#-- Show the link to the context node only if the user is editing the page. -->
-            <a href="${profileUrl(statement.edTraining)}">missing organization</a>
+            <a href="${profileUrl(statement.edTraining)}" title="missing organization">missing organization</a>
         </#if>
     </#local>
 

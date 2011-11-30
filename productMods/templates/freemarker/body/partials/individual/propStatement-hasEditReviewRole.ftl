@@ -16,7 +16,7 @@
 <#macro showRole statement property>
     <#local linkedIndividual>
     		<#if statement?has_content && statement.activity?has_content>
-        	<a href="${profileUrl(statement.activity)}">${statement.activityLabel!statement.activityName}</a>
+        	<a href="${profileUrl(statement.activity)}" title="activity name">${statement.activityLabel!statement.activityName}</a>
         </#if>
     </#local>
 

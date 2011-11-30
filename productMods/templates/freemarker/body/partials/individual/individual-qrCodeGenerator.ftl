@@ -28,15 +28,15 @@
 <#macro renderCode display="icon" width="125">
     <#if hasValidVCard()>
         <#local qrData = individual.qrData()>
-        <#local qrCodeLinkedImage><a title="Export QR codes" href="${qrData.exportQrCodeUrl}"><@qrCodeVCard qrCodeWidth=width /></a></#local>
+        <#local qrCodeLinkedImage><a title="Export QR codes" href="${qrData.exportQrCodeUrl}" title="QR Code"><@qrCodeVCard qrCodeWidth=width /></a></#local>
         
         <#if (display == "full")>
             <h5 class="qrCode">vCard QR</h5>
             ${qrCodeLinkedImage}
         <#elseif (display == "icon")>
             <li role="listitem">
-                <a id="qrIcon" title="vCard QR Code" href="${qrData.exportQrCodeUrl}"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
-                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#">Close</a></span>
+                <a id="qrIcon" title="vCard QR Code" href="${qrData.exportQrCodeUrl}" title="QR Code"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
+                <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#"  title="QR Code">Close</a></span>
             </li>
         <#else>
             <p class="notice">You have passed an invalid value for the qrCode display parameter.</p>

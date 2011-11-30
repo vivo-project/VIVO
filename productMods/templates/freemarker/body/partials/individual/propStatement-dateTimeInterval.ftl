@@ -13,7 +13,7 @@
 -->
 
 <#if ! statement.valueStart?? && ! statement.valueEnd?? && ! statement.label?? >
-    <a href="${profileUrl(statement.dateTimeInterval)}">incomplete date/time interval</a>
+    <a href="${profileUrl(statement.dateTimeInterval)}" title="incomplete date time">incomplete date/time interval</a>
 <#else>
     <#if statement.label??>
         ${statement.label!}

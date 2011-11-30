@@ -64,7 +64,7 @@
     <#elseif statement.editable>
         <#-- This can be removed when the custom form is available. Until then, provide a link to the
              address profile so the data can be edited. -->
-        <a href="${profileUrl(statement.address)}">${statement.label!statement.localName}</a>
+        <a href="${profileUrl(statement.address)}" title="address label">${statement.label!statement.localName}</a>
     <#else>
         ${statement.label!}
     </#if>

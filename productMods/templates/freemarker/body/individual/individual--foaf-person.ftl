@@ -50,11 +50,11 @@
             </header>
 
             <ul role="list">
-                <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
-                <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
+                <li role="listitem"><a href="#" title="co-author image"><img class="co-author" src="" /></a></li>
+                <li role="listitem"><a href="#" title="co-author image"><img class="co-author" src="" /></a></li>
             </ul>
 
-            <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
+            <p class="view-all-coauthors"><a class="view-all-style" href="#" title="view all">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
         </section>
         -->
         
@@ -63,7 +63,7 @@
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
-                <p><a href="${relatedSubject.url}">&larr; return to ${relatedSubject.name}</a></p>
+                <p><a href="${relatedSubject.url}" title="return to">&larr; return to ${relatedSubject.name}</a></p>
             <#else>                
                 <h1 class="vcard foaf-person">
                     <#-- Label -->

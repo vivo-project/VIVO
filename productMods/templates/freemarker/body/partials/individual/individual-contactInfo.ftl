@@ -40,7 +40,7 @@
                 <#list email.statements as statement>
                     <li role="listitem">
                         <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon" />
-                        <a class="email" href="mailto:${statement.value}">${statement.value}</a>
+                        <a class="email" href="mailto:${statement.value}" title="email">${statement.value}</a>
                         <@p.editingLinks "${email.localName}" statement editable />
                     </li>
                 </#list>
