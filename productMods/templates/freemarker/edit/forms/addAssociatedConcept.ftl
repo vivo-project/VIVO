@@ -11,7 +11,7 @@
 
 
 <#--This is set for testing purposes - will be retrieved dynamically from the generator later-->
-<#assign sources = [{"uri":"http://link.informatics.stonybrook.edu/umls/", "label":"UMLS"}, {"uri":"http://www.agrovoc.com", "label":"Agrovoc"}]/>
+<#assign sources = [{"uri":"http://link.informatics.stonybrook.edu/umls/", "label":"UMLS"}, {"uri":"http://www.fao.org/webservices/Agrovoc", "label":"Agrovoc"}]/>
 <#assign selectedSource = "UMLS" />
 
 <h2>Manage Concepts</h2>
@@ -117,7 +117,7 @@
 
     <script type="text/javascript">
     var customFormData = {
-        dataServiceUrl: '${urls.base}/UMLSTermsRetrieval',
+        dataServiceUrl: '${urls.base}/conceptSearchService',
         UMLSCUIURL: 'http://link.informatics.stonybrook.edu/umls/CUI/'
     };
     </script>

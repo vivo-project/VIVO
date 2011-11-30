@@ -120,7 +120,8 @@ var addConceptForm = {
     submitSearchTerm: function() {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
-    	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue);
+    	var vocabSourceValue = this.vocabSource.val();
+    	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue) + "&source=" + encodeURIComponent(vocabSourceValue);
         $.getJSON(dataServiceUrl, function(results) {
             if ( results.array.length == 0 ) {
             	alert("results not correct length");
