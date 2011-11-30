@@ -140,7 +140,7 @@
             <input type="submit" id="submit" name="submit-${formAction}" value="${submitButtonText}" class="submit" /> 
         </#if>
 
-        <span class="or"> or </span><a class="cancel" href="${editConfiguration.cancelUrl}">Cancel</a>
+        <span class="or"> or </span><a class="cancel" href="${editConfiguration.cancelUrl}" title="Cancel">Cancel</a>
       </p>
       <p class="requiredHint"  id="requiredLegend" >* required fields</p>
       

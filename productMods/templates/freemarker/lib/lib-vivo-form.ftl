@@ -20,7 +20,7 @@
     <p class="inline">
         <label></label>
         <span class="acSelectionInfo"></span>
-        <a href="${urlsBase}/individual?uri=" class="verifyMatch">(Verify this match)</a>
+        <a href="${urlsBase}/individual?uri=" class="verifyMatch" title="verify match">(Verify this match)</a>
         </p>
         <input class="acUriReceiver" type="hidden" id="${inputId}" name="${inputName}" value="${inputValue}" />
         <!-- Field value populated by JavaScript -->

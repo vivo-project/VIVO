@@ -106,7 +106,7 @@
 	        <p class="inline">
 	            <label>Selected Person:</label>
 	            <span class="acSelectionInfo"></span>
-	            <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
+	            <a href="/vivo/individual?uri=" class="verifyMatch"  title="verify match">(Verify this match)</a>
 	        </p>
 	        <input class="acUriReceiver" type="hidden" id="personUri" name="person" value="${personValue}" />
 	    </div>
@@ -129,7 +129,7 @@
         <p class="submit">
             <input type="hidden" id="editKey" name="editKey" value="${editKey}" />
             <input type="submit" id="submit" value="${submitButtonText}"/>
-            <span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
+            <span class="or"> or </span><a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
         </p>
 	
 	    <p id="requiredLegend" class="requiredHint">* required fields</p>

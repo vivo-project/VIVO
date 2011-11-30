@@ -36,11 +36,11 @@
             </#if>
             
             <span class="webpageName">
-                <a href="${webpage.url}">${anchor}</a>
+                <a href="${webpage.url}" title="webpage url">${anchor}</a>
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}" class="edit">Edit</a> | 
-                <a href="${urls.base}${deleteWebpageUrl}" class="remove">Delete</a> 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}" class="edit" title="edit web page link">Edit</a> | 
+                <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="delete web page link">Delete</a> 
             </span>
         </li>    
         
@@ -57,9 +57,9 @@
          These can just be ordinary links, rather than a v:input element, as in 
          addAuthorsToInformationResource.jsp. -->
     <br />     
-    <a href="${showAddFormUrl}" id="showAddForm" class="button green">Add New Web Page</a>
+    <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="add new web page">Add New Web Page</a>
        
-    <a href="${cancelUrl}" id="returnToIndividual" class="return">Return to Individual</a>
+    <a href="${cancelUrl}" id="returnToIndividual" class="return" title="return to individual">Return to Individual</a>
 </section>
 
 

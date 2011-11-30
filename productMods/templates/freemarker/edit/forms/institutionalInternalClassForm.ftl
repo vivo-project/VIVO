@@ -27,7 +27,7 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
                 <p>In order for a local ontology to be recognized here, its namespace URI must follow this pattern:</p>
                 <blockquote>${localOntologyNamespace}ontology/<em>yourOntologyName</em></blockquote>
             </#if>
-            <p>Please create a <a href='${urls.base}/editForm?controller=Ontology'>new local ontology</a> and then return here to define the institutional internal class.</p>
+            <p>Please create a <a href='${urls.base}/editForm?controller=Ontology' title="new local ontology">new local ontology</a> and then return here to define the institutional internal class.</p>
         </section>
         
         <#--else if local ontologies exist and local classes exist, show drop-down of local classes-->
@@ -46,7 +46,7 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
                 </#list>
             </select>
             
-            <p>Can't find an appropriate class? Create a <a href="${formUrl}?cmd=createClass">new one</a>.</p>
+            <p>Can't find an appropriate class? Create a <a href="${formUrl}?cmd=createClass" title="create new class">new one</a>.</p>
         </section>
 
         <#--if parameter to create new class passed or if there are local ontologies but no local classes, show create new class page-->
@@ -80,7 +80,7 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
 
         <#--only show submit and cancel if ontologies exist-->
         <#if ontologiesExist = true>
-            <input type="submit" name="submit-internalClass" value="${submitAction}" class="submit" /> or <a class="cancel" href="${cancelUrl}">Cancel</a>
+            <input type="submit" name="submit-internalClass" value="${submitAction}" class="submit" /> or <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
         </#if>
     </form>
 </section>

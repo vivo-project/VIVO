@@ -77,7 +77,7 @@
 							</#if>
 					</span>
 
-					<a href="${urls.base}/edit/primitiveDelete" class="remove">Remove</a>
+					<a href="${urls.base}/edit/primitiveDelete" class="remove" title="remove author link">Remove</a>
 			</span>
 	</li>
 
