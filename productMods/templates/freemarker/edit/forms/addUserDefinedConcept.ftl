@@ -6,7 +6,6 @@
 </#if>
 
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
-<#assign returnUrl = ""/>
 
 <h2>Add Your Own Concept</h2>
 
@@ -34,7 +33,7 @@
     
 		<p class="submit">
 				<input type="hidden" name = "editKey" value="${editKey}"/>
-				<input type="submit" id="submit" value="Add Concept"/><span class="or"> or </span><a class="cancel" href="${returnUrl}">Return to Manage Concepts</a>
+				<input type="submit" id="submit" value="Add Concept"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Return to Manage Concepts</a>
 		</p>
 		
 		<p id="requiredLegend" class="requiredHint">* required fields</p>

@@ -33,6 +33,7 @@ import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
@@ -117,11 +118,23 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
         //and entity 
         //Adding term should return to this same page, not the subject
         //Return takes the page back to the individual form
-        editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));
+        editConfiguration.setUrlPatternToReturnTo(getUrlPatternToReturnTo(vreq));
     	return editConfiguration;
     }
     
  
+
+	private String getUrlPatternToReturnTo(VitroRequest vreq) {
+		String subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
+		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
+		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAssociatedConceptGenerator";
+		String editUrl = EditConfigurationUtils.getEditUrlWithoutContext(vreq);
+		return editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
+		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) + 
+		"&editForm=" + UrlBuilder.urlEncode(generatorName);
+	}
+
+
 
 	private void setVarNames(EditConfigurationVTwo editConfiguration) {
 		  editConfiguration.setVarNameForSubject("subject");

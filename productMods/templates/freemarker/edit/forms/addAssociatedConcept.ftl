@@ -74,7 +74,7 @@
 
 <div id="showAddForm">
     <input type="submit" value="Add Concept" id="showAddFormButton" name="showAddFormButton">  or 
-    <a class="cancel" href="${cancelUrl}">Return</a>
+    <a class="cancel" href="${cancelUrl}&url=/individual">Return</a>
 </div> 
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
 

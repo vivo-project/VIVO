@@ -5,6 +5,7 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -313,6 +314,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		formSpecificData.put("userDefinedConceptUrl", getUserDefinedConceptUrl(vreq));
 		//Add URIs and labels for different services
 		formSpecificData.put("searchServices", ConceptSearchServiceUtils.getVocabSources());
+		
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 	
@@ -324,8 +326,8 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddUserDefinedConceptGenerator";
 		String editUrl = EditConfigurationUtils.getEditUrl(vreq);
 		
-		return editUrl + "?subject=" + UrlBuilder.urlEncode(subjectUri) + 
-		"&predicate=" + UrlBuilder.urlEncode(predicateUri) + 
+		return editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
+		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) + 
 		"&editForm=" + UrlBuilder.urlEncode(generatorName);
 	}
 
@@ -333,18 +335,18 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		Individual individual = EditConfigurationUtils.getSubjectIndividual(vreq);
 	    List<Individual> concepts = individual.getRelatedIndividuals(
 	    		EditConfigurationUtils.getPredicateUri(vreq));  
-	    //TODO: Check if sorted correctly
-	    sortConceptIndividuals(concepts);
-		
-		return getAssociatedConceptInfo(concepts, vreq);
+		List<AssociatedConceptInfo> associatedConcepts = getAssociatedConceptInfo(concepts, vreq);
+		sortConcepts(associatedConcepts);
+		return associatedConcepts;
 	}
 	
 	
-	private void sortConceptIndividuals(List<Individual> concepts) {
-		DataPropertyComparator comp = new DataPropertyComparator(RDFS.label.getURI());
-	    Collections.sort(concepts, comp);
+	private void sortConcepts(List<AssociatedConceptInfo> concepts) {
+	    Collections.sort(concepts, new AssociatedConceptInfoComparator());
+	    log.debug("Concepts should be sorted now" + concepts.toString());
 	}
 	
+    
 	private List<AssociatedConceptInfo> getAssociatedConceptInfo(
 			List<Individual> concepts, VitroRequest vreq) {
 		List<AssociatedConceptInfo> info = new ArrayList<AssociatedConceptInfo>();
@@ -416,6 +418,14 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			return type;
 		}
 		
+	}
+	
+	public class AssociatedConceptInfoComparator implements Comparator<AssociatedConceptInfo>{
+		public int compare(AssociatedConceptInfo concept1, AssociatedConceptInfo concept2) {
+	    	String concept1Label = concept1.getConceptLabel().toLowerCase();
+	    	String concept2Label = concept2.getConceptLabel().toLowerCase();
+	    	return concept1Label.compareTo(concept2Label);
+	    }
 	}
 	
 	
