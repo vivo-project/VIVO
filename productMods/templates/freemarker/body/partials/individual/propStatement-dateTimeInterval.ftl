@@ -7,8 +7,12 @@
  -->
 
 <#import "lib-datetime.ftl" as dt>
+<#--
+     Added ! statement.label?? to this if statement. Otherwise, we display the incomplete message
+     even when there is a valid label (possibly via ingest), such as Spring 2010.  tlw72
+-->
 
-<#if ! statement.valueStart?? && ! statement.valueEnd??>
+<#if ! statement.valueStart?? && ! statement.valueEnd?? && ! statement.label?? >
     <a href="${profileUrl(statement.dateTimeInterval)}">incomplete date/time interval</a>
 <#else>
     <#if statement.label??>

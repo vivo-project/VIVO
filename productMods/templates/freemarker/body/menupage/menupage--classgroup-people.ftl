@@ -14,9 +14,9 @@
                 <#assign courseUri = "http://vivoweb.org/ontology/core#Course" />
                 
                 <ul id="find-filters">
-                    <li><a href="${urls.base}/individuallist?vclassId=${subjectAreaUri?url}">Subject Area</a></li>
-                    <li><a href="${urls.base}/individuallist?vclassId=${departmentUri?url}">Department</a></li>
-                    <li><a href="${urls.base}/individuallist?vclassId=${courseUri?url}">Courses</a></li>
+                    <li><a href="${urls.base}/individuallist?vclassId=${subjectAreaUri?url}" title="subject area">Subject Area</a></li>
+                    <li><a href="${urls.base}/individuallist?vclassId=${departmentUri?url}" title="department">Department</a></li>
+                    <li><a href="${urls.base}/individuallist?vclassId=${courseUri?url}" title="courses">Courses</a></li>
                 </ul>
             </nav>
         </section>
