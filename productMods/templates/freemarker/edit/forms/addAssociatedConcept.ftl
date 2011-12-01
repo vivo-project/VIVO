@@ -80,8 +80,9 @@
 		<#assign checkedSource = false />
 	<h5 class="services">External Vocabulary Services</h5>
     <#list sources?keys as sourceUri>
+    		<#assign thisSource = sources[sourceUri]/>
         <input type="radio"  name="source" value="${sourceUri}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
-        <label class="inline" for="${sources[sourceUri]}"> ${sources[sourceUri]} &nbsp;(${vocabDesc})</label>
+        <label class="inline" for="${thisSource.label}"> <a href="${thisSource.url}">${thisSource.label}</a> &nbsp;(${thisSource.description})</label>
         <br />
     </#list>
 
