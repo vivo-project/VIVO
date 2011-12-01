@@ -22,6 +22,8 @@ public class ConceptSearchServiceUtils {
     //TODO: Change this so retrieved from the system instead using a query
     private static final String UMLSVocabSource = "http://link.informatics.stonybrook.edu/umls";
     private static final String AgrovocVocabSource = "http://aims.fao.org/aos/agrovoc/agrovocScheme";
+    private static final String GemetVocabSource = "http://www.eionet.europa.eu/gemet/gemetThesaurus";
+
     //Get the class that corresponds to the appropriate search
 	public static String getConceptSearchServiceClassName(String searchServiceName) {
 		HashMap<String, String> map = getMapping();
@@ -36,7 +38,9 @@ public class ConceptSearchServiceUtils {
 	public static HashMap<String, String> getVocabSources() {
 		HashMap<String, String> map = new HashMap<String, String>();
     	map.put(UMLSVocabSource, "UMLS");
-    	map.put(AgrovocVocabSource, "Agrovoc");
+    	map.put(AgrovocVocabSource, "AGROVOC");
+    	map.put(GemetVocabSource, "GEMET");
+
     	return map;
 	}
 	
@@ -47,7 +51,7 @@ public class ConceptSearchServiceUtils {
     	HashMap<String, String> map = new HashMap<String, String>();
     	map.put(UMLSVocabSource, "edu.cornell.mannlib.semservices.service.impl.UMLSService");
     	map.put(AgrovocVocabSource, "edu.cornell.mannlib.semservices.service.impl.AgrovocService");
-
+    	map.put(GemetVocabSource, "edu.cornell.mannlib.semservices.service.impl.GemetService");
     	return map;
     }
     
