@@ -73,6 +73,7 @@
 </#if>
 
 <div id="showAddForm">
+    
     <input type="submit" value="Add Concept" id="showAddFormButton" name="showAddFormButton">  or 
     <a class="cancel" href="${cancelUrl}&url=/individual">Return to Profile Page</a>
 </div> 
@@ -85,10 +86,9 @@
         <label class="inline" for="${thisSource.label}"> <a href="${thisSource.url}">${thisSource.label}</a> &nbsp;(${thisSource.description})</label>
         <br />
     </#list>
-
-    <p class="inline">
+    <p class="inline-search">
         <input type="text" id="searchTerm" label="Search" class="acSelector" size="35" />
-        <input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="Search"/>
+        &nbsp;<input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="Search"/>
     </p>
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
@@ -100,13 +100,13 @@
     </div>
     <div id="errors" name="errors"></div>
     
-    <div id="createOwn"><br /><a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
-    </div>	
     <input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
     <p class="submit">
         <input type="submit" id="submit" name="submit" value="Add Selected Concept" />
         <span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
     </p>
+    <div id="createOwn"><br /><a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
+    </div>	
 
     </form>
 </div>

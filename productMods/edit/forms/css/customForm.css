@@ -99,9 +99,16 @@ form.customForm input.concept-search {
     background-color: #317e95;
 }
 form.customForm h5.services {
-    margin-bottom: -10px;
+    margin-bottom: -8px;
+    margin-top: -12px;
 }
-
+form.customForm p.inline-search {
+    float: left;
+    clear: left;
+}
+form.customForm p.inline-search #searchTerm{
+    margin-top: 6px;
+}
 /* <------ DATE TIME*/
 form.customForm label.dateTime {
     display: inline;
