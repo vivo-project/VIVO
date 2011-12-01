@@ -77,9 +77,9 @@
     <a class="cancel" href="${cancelUrl}&url=/individual">Return</a>
 </div> 
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
-
+		<#assign checkedSource = false />
     <#list sources?keys as sourceUri>
-        <input type="radio" id="source" name="source" value="${sourceUri}" role="radio" />
+        <input type="radio"  name="source" value="${sourceUri}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
         <label class="inline" for="${sources[sourceUri]}"> ${sources[sourceUri]}</label>
         <br />
     </#list>
@@ -90,14 +90,13 @@
     </p>
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
-    <!--TODO: Change this so this is populated by the javascript-->
 		<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
     <div id="selectedConcept" name="selectedConcept" class="acSelection">
-        <%-- RY maybe make this a label and input field. See what looks best. --%>
         <p class="inline">
         </p>
-        <!-- Field value populated by JavaScript -->
+        <!-- Search results populated by JavaScript -->
     </div>
+    <div id="errors" name="errors"></div>
     
     <div><a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
     </div>	
@@ -114,8 +113,7 @@
 
     <script type="text/javascript">
     var customFormData = {
-        dataServiceUrl: '${urls.base}/conceptSearchService',
-        UMLSCUIURL: 'http://link.informatics.stonybrook.edu/umls/CUI/'
+        dataServiceUrl: '${urls.base}/conceptSearchService'
     };
     </script>
 

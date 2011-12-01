@@ -64,8 +64,8 @@ var addConceptForm = {
     },
     bindEventListeners: function() {
     	this.searchSubmit.click(function() {
+    		addConceptForm.clearErrors();
             addConceptForm.submitSearchTerm();
-            addConceptForm.clearErrors();
             return false;
          });
     	
@@ -86,7 +86,8 @@ var addConceptForm = {
         // Hide the button that shows the form
         this.showFormButtonWrapper.hide(); 
         this.clearSearchResults();
-
+        //Also clear the search input
+        this.searchTerm.val("");
         this.cancel.unbind('click');
         this.cancel.bind('click', function() {
         	//show only list of existing terms and hide adding term form
@@ -119,13 +120,18 @@ var addConceptForm = {
     submitSearchTerm: function() {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
-    	var vocabSourceValue = $('input:radio[name="source"]:checked').val();
+    	var checkedVocabSource = $('input:radio[name="source"]:checked');
+    	if(!checkedVocabSource.length) {
+    		addConceptForm.showUncheckedSourceError();
+    		return;
+    	}
+    	var vocabSourceValue = checkedVocabSource.val();
     	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue) + "&source=" + encodeURIComponent(vocabSourceValue);
         $.getJSON(dataServiceUrl, function(results) {
             var htmlAdd = "";
 
             if ( results== null || results.array == null || results.array.length == 0 ) {
-            	htmlAdd = "<p>No search results</p>";
+            	htmlAdd = "<p>No search results found.</p>";
             } else {
             	//array is an array of objects representing concept information
             	//loop through and find all the best matches
@@ -151,10 +157,13 @@ var addConceptForm = {
                 } else {
                 	htmlAdd+= "<p>No search results found.</p>";
                 }
+            	
+            }
+            if(htmlAdd.length) {
             	$('#selectedConcept').html(htmlAdd);
             }
-   
           });
+        return true;
     },
     parseResults:function(resultsArray) {
     	//Loop through array and check if this is the best match
@@ -177,7 +186,7 @@ var addConceptForm = {
     	this.selectedConcept.hide();
     },
     prepareSubmit:function() {
-    	var checkedElements = $("#CUI:checked");
+    	var checkedElements = $("input[name='CUI']:checked");
     	if(!addConceptForm.validateConceptSelection(checkedElements)) {
     		return false;
     	}
@@ -214,7 +223,7 @@ var addConceptForm = {
     	return htmlAdd;
     }, 
     generateIndividualCUIInput:function(cuiURI, label, type, definedBy) {
-    	return 	"<input type='checkbox'  id='CUI' name='CUI' value='" + cuiURI + "' label='" + label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "'/>";
+    	return 	"<input type='checkbox'  name='CUI' value='" + cuiURI + "' label='" + label + "' conceptType='" + type + "' conceptDefinedBy='" + definedBy + "'/>";
     },
     generateIndividualTypeDisplay:function(type) {
     	if(type != null && type.length > 0) {
@@ -232,7 +241,11 @@ var addConceptForm = {
     		return false;
     	}
     	return true;
-    }, removeExistingConcept: function(link) {
+    }, 
+    showUncheckedSourceError:function() {
+		addConceptForm.errors.html("<p class='validationError'>Please select at least one external vocabulary source to search.</p>");
+    },
+    removeExistingConcept: function(link) {
         var removeLast = false,
             message = 'Are you sure you want to remove this term?';
             
