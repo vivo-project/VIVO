@@ -15,13 +15,13 @@
          an rdfs:label. So check to see if there's an advisee first. If not, just display the label.  -->
     <#local linkedIndividual>
         <#if statement.advisee??>
-            <a href="${profileUrl(statement.advisee)}" title="advisee label">${statement.adviseeLabel!}</a>,
+            <a href="${profileUrl(statement.uri("advisee"))}" title="advisee label">${statement.adviseeLabel!}</a>,
             <#if statement.degreeLabel??>
                 ${statement.degreeAbbr!statement.degreeLabel!} 
                 <#if statement.dateTimeStart??>&nbsp;candidate,<#else>&nbsp;candidate</#if>
             </#if>
         <#elseif statement.advisoryLabel??>
-            <a href="${profileUrl(statement.advisory)}" title="advisory label">${statement.advisoryLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("advisory"))}" title="advisory label">${statement.advisoryLabel!statement.localName}</a>
         </#if>
     </#local>
 

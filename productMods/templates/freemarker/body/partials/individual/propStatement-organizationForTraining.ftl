@@ -17,10 +17,10 @@
     
     <#local linkedIndividual>
         <#if statement.person??>
-            <a href="${profileUrl(statement.person)}" title="person name">${statement.personName}</a>
+            <a href="${profileUrl(statement.uri("person"))}" title="person name">${statement.personName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.training)}" title="missing person">missing person in this position</a>
+            <a href="${profileUrl(statement.uri("training"))}" title="missing person">missing person in this position</a>
         </#if>
     </#local>
     <#local detailedInfo>

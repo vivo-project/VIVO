@@ -16,5 +16,5 @@
 <#if statement.url?has_content>
     <a href="${statement.url}" title="link text">${linkText}</a> 
 <#else>
-    <a href="${profileUrl(statement.link)}" title="link name">${statement.linkName}</a> (no url provided for link)
+    <a href="${profileUrl(statement.uri("link"))}" title="link name">${statement.linkName}</a> (no url provided for link)
 </#if>

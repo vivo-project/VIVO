@@ -15,7 +15,7 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.award)}" title="award name">${statement.awardLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName}</a>
         </#if>
     </#local>
 
@@ -29,7 +29,7 @@
 
     <#local conferredByOrg>
         <#if statement.conferredBy?has_content && statement.conferredByLabel?has_content>
-             conferred by <a href="${profileUrl(statement.conferredBy)}" title="conferred by">${statement.conferredByLabel}</a>
+             conferred by <a href="${profileUrl(statement.uri("conferredBy"))}" title="conferred by">${statement.conferredByLabel}</a>
         </#if>
     </#local>
 

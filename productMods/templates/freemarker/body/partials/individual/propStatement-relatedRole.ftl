@@ -18,10 +18,10 @@
   
     <#local linkedIndividual>
         <#if statement.indivInRole??>
-            <a href="${profileUrl(statement.indivInRole)}" title="name">${statement.indivLabel!statement.indivName}</a>
+            <a href="${profileUrl(statement.uri("indivInRole"))}" title="name">${statement.indivLabel!statement.indivName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}"  title="missing person">missing person in this role</a>
+            <a href="${profileUrl(statement.uri("role"))}"  title="missing person">missing person in this role</a>
         </#if>
     </#local>
 

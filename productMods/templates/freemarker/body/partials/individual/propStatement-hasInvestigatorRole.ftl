@@ -15,18 +15,18 @@
 <#macro showRole statement>
     <#local linkedIndividual>
         <#if statement.activity??>
-            <a href="${profileUrl(statement.activity)}" title="activity name">${statement.activityLabel!statement.activityName!}</a>
+            <a href="${profileUrl(statement.uri("activity"))}" title="activity name">${statement.activityLabel!statement.activityName!}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}" title="missing activity">missing activity</a>
+            <a href="${profileUrl(statement.uri("role"))}" title="missing activity">missing activity</a>
         </#if>
     </#local>
     
     <#local awardOrAdminBy>
         <#if statement.awardedByLabel??>
-            &nbsp;awarded by&nbsp;<a href="${profileUrl(statement.awardedBy)}" title="awarded by">${statement.awardedByLabel!}</a>
+            &nbsp;awarded by&nbsp;<a href="${profileUrl(statement.uri("awardedBy"))}" title="awarded by">${statement.awardedByLabel!}</a>
         <#elseif statement.adminedByLabel??>
-            &nbsp;administered by&nbsp;<a href="${profileUrl(statement.adminedBy)}" title="administered by">${statement.adminedByLabel!}</a>
+            &nbsp;administered by&nbsp;<a href="${profileUrl(statement.uri("adminedBy"))}" title="administered by">${statement.adminedByLabel!}</a>
         </#if>
     </#local>
         

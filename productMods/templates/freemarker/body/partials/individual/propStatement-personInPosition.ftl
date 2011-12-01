@@ -17,17 +17,17 @@
     
     <#local linkedIndividual>
         <#if statement.org??>
-            <a href="${profileUrl(statement.org)}" title="organization name">${statement.orgName}</a>
+            <a href="${profileUrl(statement.uri("org"))}" title="organization name">${statement.orgName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.position)}" title="missing organization">missing organization</a>
+            <a href="${profileUrl(statement.uri("position"))}" title="missing organization">missing organization</a>
         </#if>
     </#local>
     <#-- The sparql query returns both the org's parent (middleOrg) and grandparent (outerOrg).
          For now, we are only displaying the parent in the list view. -->
     <#local middleOrganization>
         <#if statement.middleOrg??>
-            <a href="${profileUrl(statement.middleOrg)}" title="middle organization">${statement.middleOrgName!}</a>
+            <a href="${profileUrl(statement.uri("middleOrg"))}" title="middle organization">${statement.middleOrgName!}</a>
         </#if>
     </#local>
     

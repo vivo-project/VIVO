@@ -16,10 +16,10 @@
 <#macro showRole statement>
     <#local linkedIndividual>
         <#if statement.event1??>
-            <a href="${profileUrl(statement.event1)}" title="event name">${statement.event1Label!statement.event1Name}</a>
+            <a href="${profileUrl(statement.uri("event1"))}" title="event name">${statement.event1Label!statement.event1Name}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.role)}" title="event name">missing event</a>
+            <a href="${profileUrl(statement.uri("role"))}" title="event name">missing event</a>
         </#if>
     </#local>
     
@@ -29,9 +29,9 @@
     
     <#local attendedEvent>
         <#if statement.event2?has_content && statement.event2Label?has_content>
-            at <a href="${profileUrl(statement.event2)}" title="event label">${statement.event2Label}</a>
+            at <a href="${profileUrl(statement.uri("event2"))}" title="event label">${statement.event2Label}</a>
         <#elseif statement.series?has_content && statement.seriesLabel?has_content>
-            at <a href="${profileUrl(statement.series)}" title="event label">${statement.seriesLabel}</a>
+            at <a href="${profileUrl(statement.uri("series"))}" title="event label">${statement.seriesLabel}</a>
         </#if>
     </#local>
 

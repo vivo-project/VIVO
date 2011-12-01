@@ -16,10 +16,10 @@
 <#macro showAuthorship statement>
     <#local resourceTitle>
         <#if statement.infoResource??>
-            <a href="${profileUrl(statement.infoResource)}"  title="resource name">${statement.infoResourceName}</a>.&nbsp;
+            <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>.&nbsp;
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.authorship)}" title="missing resource">missing information resource</a>.&nbsp;
+            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>.&nbsp;
         </#if>
     </#local>
 
