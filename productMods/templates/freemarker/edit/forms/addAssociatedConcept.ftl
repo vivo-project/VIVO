@@ -78,9 +78,10 @@
 </div> 
     <form id="addConceptForm" class="customForm" action="${submitUrl}">
 		<#assign checkedSource = false />
+	<h5 class="services">External Vocabulary Services</h5>
     <#list sources?keys as sourceUri>
         <input type="radio"  name="source" value="${sourceUri}" role="radio" <#if checkedSource = false><#assign checkedSource = true/>checked="checked"</#if>>
-        <label class="inline" for="${sources[sourceUri]}"> ${sources[sourceUri]}</label>
+        <label class="inline" for="${sources[sourceUri]}"> ${sources[sourceUri]} &nbsp;(${vocabDesc})</label>
         <br />
     </#list>
 
