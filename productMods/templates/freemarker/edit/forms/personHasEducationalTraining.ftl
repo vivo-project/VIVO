@@ -42,13 +42,6 @@
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
 
-<#--
-<#if editMode = “ERROR”>
- <div>This form is unable to handle the editing of this position because it is associated with 
-      multiple Position individuals.</div>      
-<#else>
--->
-
 <h2>${titleVerb}&nbsp;educational training entry for ${subjectName}${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
@@ -85,6 +78,9 @@
         </p>
     </section>
 </#if>
+
+<@lvf.unsupportedBrowser urls.base /> 
+
 <section id="personHasEducationalTraining" role="region">        
     
     <form id="personHasEducationalTraining" class="customForm noIE67" action="${submitUrl}"  role="add/edit educational training">
@@ -192,6 +188,9 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/cust
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
 

@@ -102,7 +102,7 @@
     <a class="cancel" href="${cancelUrl}&url=/individual" title="Cancel">Return to Publication</a>
 </section> 
 
-<form id="addAuthorForm" action ="${submitUrl}" class="customForm">
+<form id="addAuthorForm" action ="${submitUrl}" class="customForm noIE67">
     <h3>Add an Author</h3>
     		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
     		should be visible even when first name/middle name are not, the parents should be separate for each field-->

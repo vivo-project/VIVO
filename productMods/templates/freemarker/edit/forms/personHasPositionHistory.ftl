@@ -34,8 +34,6 @@
 <#assign requiredHint="<span class='requiredHint'> *</span>"/> 
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
-<@lvf.unsupportedBrowser urls.base /> 
-
 <h2>${formAction} position entry for ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
@@ -81,7 +79,9 @@
     </section>
 </#if>
 
-<form class="customForm" action ="${submitUrl}" class="customForm" role="${formAction} position entry">
+<@lvf.unsupportedBrowser urls.base /> 
+
+<form class="customForm" action ="${submitUrl}" class="customForm noIE67" role="${formAction} position entry">
   <p class="inline">    
     <label for="orgType">Organization Type ${requiredHint}</label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
@@ -162,5 +162,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/cust
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
              '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
