@@ -1,5 +1,5 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
-
+<#import "lib-vivo-form.ftl" as lvf>
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
 	<#assign submissionErrors = editSubmission.validationErrors/>
@@ -9,6 +9,7 @@
 
 <h2>Create Your Own Concept</h2>
 
+<@lvf.unsupportedBrowser urls.base /> 
 
 <form id="addUserDefinedConceptForm" class="customForm noIE67" action = "${submitUrl}" method="post">
     <input type="hidden" name="editKey" id="editKey" value="${editKey}" role="input" />
