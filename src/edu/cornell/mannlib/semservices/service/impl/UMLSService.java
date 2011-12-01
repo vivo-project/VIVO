@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 
 /**
  * @author jaf30
