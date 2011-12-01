@@ -38,8 +38,8 @@ public class ConceptSearchServiceUtils {
 	public static HashMap<String, VocabSourceDescription> getVocabSources() {
 		HashMap<String, VocabSourceDescription> map = new HashMap<String, VocabSourceDescription>();
     	map.put(UMLSVocabSource, new VocabSourceDescription("UMLS", UMLSVocabSource, "http://www.nlm.nih.gov/research/umls/", "Unified Medical Language System"));
-    	map.put(AgrovocVocabSource, new VocabSourceDescription("AGROVOC", AgrovocVocabSource, "www.fao.org/agrovoc/", "Agricultural Vocabulary"));
-    	map.put(GemetVocabSource, new VocabSourceDescription("GEMET", GemetVocabSource, "http://www.eionet.europa.eu/gemet", "GEneral Multilingual Environmental Thesaurus"));
+    	map.put(AgrovocVocabSource, new VocabSourceDescription("AGROVOC", AgrovocVocabSource, "http://www.fao.org/agrovoc/", "Agricultural Vocabulary"));
+    	map.put(GemetVocabSource, new VocabSourceDescription("GEMET", GemetVocabSource, "http://www.eionet.europa.eu/gemet", "General Multilingual Environmental Thesaurus"));
     	return map;
 	}
 	
