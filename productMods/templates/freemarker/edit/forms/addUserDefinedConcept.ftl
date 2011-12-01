@@ -7,7 +7,7 @@
 
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 
-<h2>Add Your Own Concept</h2>
+<h2>Create Your Own Concept</h2>
 
 
 <form id="addUserDefinedConceptForm" class="customForm noIE67" action = "${submitUrl}" method="post">
@@ -33,7 +33,7 @@
     
 		<p class="submit">
 				<input type="hidden" name = "editKey" value="${editKey}"/>
-				<input type="submit" id="submit" value="Add Concept"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Return to Manage Concepts</a>
+				<input type="submit" id="submit" value="Concept"/><span class="or"> or </span><a class="cancel" href="${cancelUrl}">Return to Manage Concepts</a>
 		</p>
 		
 		<p id="requiredLegend" class="requiredHint">* required fields</p>
@@ -50,6 +50,7 @@
         acType: 'http://www.w3.org/2004/02/skos/core#Concept',
         submitButtonTextType: 'simple',
         editMode: 'add',
+        typeName: 'Concept',
         defaultTypeName: 'concept' // used in repair mode to generate button text
     };
     </script>
