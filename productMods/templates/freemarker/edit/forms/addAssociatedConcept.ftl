@@ -70,6 +70,8 @@
 
 <#if (existingConcepts?size = 0) >   
         <p>There are currently no concepts specified.</p>
+<#else>
+        &nbsp;
 </#if>
 
 <div id="showAddForm">
