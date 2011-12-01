@@ -94,7 +94,7 @@
     </form>
 
 
-<#assign sparqlQueryUrl = "/ajax/sparqlQuery" >
+<#assign sparqlQueryUrl = "${urls.base}/ajax/sparqlQuery" >
 
     <script type="text/javascript">
     var customFormData  = {
@@ -118,7 +118,3 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/sm
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',             
               '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
-
-<#--              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
- '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
--->
