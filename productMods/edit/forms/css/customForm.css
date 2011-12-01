@@ -92,6 +92,13 @@ div.acSelection {
 #ie67DisableWrapper {
     display: none;
 }
+form.customForm input.concept-search {
+    float: right;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    background-color: #317e95;
+}
+
 /* <------ DATE TIME*/
 form.customForm label.dateTime {
     display: inline;

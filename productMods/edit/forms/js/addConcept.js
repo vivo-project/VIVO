@@ -55,6 +55,8 @@ var addConceptForm = {
         //remove links
         this.removeConceptLinks = $('a.remove');
         this.errors = $('#errors');
+        this.createOwn = $('#createOwn');
+        this.orSpan = $('span.or')
     },
     
     initPage: function() {
@@ -86,6 +88,10 @@ var addConceptForm = {
         // Hide the button that shows the form
         this.showFormButtonWrapper.hide(); 
         this.clearSearchResults();
+        // Hide the create own link, add selected button and "or"" span
+        this.orSpan.hide();
+        this.createOwn.hide();
+        this.submit.hide();
         //Also clear the search input
         this.searchTerm.val("");
         this.cancel.unbind('click');
@@ -112,6 +118,11 @@ var addConceptForm = {
     },
     clearErrors:function() {
     	addConceptForm.errors.empty();
+    },
+    showHiddenElements:function() {
+        this.orSpan.show();
+        this.createOwn.show();
+        this.submit.show();
     },
     showConceptListOnlyView: function() {
         this.hideForm();
@@ -161,6 +172,7 @@ var addConceptForm = {
             }
             if(htmlAdd.length) {
             	$('#selectedConcept').html(htmlAdd);
+                addConceptForm.showHiddenElements();
             }
           });
         return true;
