@@ -92,7 +92,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
                 
         //might be null
         config.addFormSpecificData("subjectName", getName( config, vreq));
-        
+        prepare(vreq, config);
         return config;
     }
 

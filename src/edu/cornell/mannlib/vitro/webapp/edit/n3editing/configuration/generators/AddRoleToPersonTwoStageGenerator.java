@@ -168,6 +168,8 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
         addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
+        //prepare
+        prepare(vreq, editConfiguration);
     	return editConfiguration;
     }    	
 

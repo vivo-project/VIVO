@@ -158,7 +158,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(conf, vreq);
-
+        prepare(vreq, conf);
         return conf;
     }
 

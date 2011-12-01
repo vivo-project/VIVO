@@ -76,7 +76,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         }else{
             config.addFormSpecificData("subjectName", null);
         }
-        
+        prepare(vreq, config);
         return config;
     }
   

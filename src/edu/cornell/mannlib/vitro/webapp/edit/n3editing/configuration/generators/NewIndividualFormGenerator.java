@@ -78,7 +78,7 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
         //Note, the spaces are important - they were added by ProcessRdfFormController earlier
         //as a means of ensuring the substitution worked correctly - as the regex expects spaces
         config.setEntityToReturnTo(" ?newInd ");
-        
+        prepare(vreq, config);
     	return config;
     }
     

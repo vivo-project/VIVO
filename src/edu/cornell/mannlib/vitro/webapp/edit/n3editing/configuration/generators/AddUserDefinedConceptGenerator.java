@@ -119,7 +119,8 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
         //Adding term should return to this same page, not the subject
         //Return takes the page back to the individual form
         editConfiguration.setUrlPatternToReturnTo(getUrlPatternToReturnTo(vreq));
-    	return editConfiguration;
+    	prepare(vreq, editConfiguration);
+        return editConfiguration;
     }
     
  

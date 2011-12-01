@@ -179,6 +179,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
       //Adding additional data, specifically edit mode
         addFormSpecificData(conf, vreq);
+        prepare(vreq, conf);
         return conf;
     }
 

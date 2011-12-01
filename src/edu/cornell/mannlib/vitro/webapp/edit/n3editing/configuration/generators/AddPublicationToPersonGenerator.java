@@ -92,6 +92,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
         // Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
+        prepare(vreq, editConfiguration);
         return editConfiguration;
     }
 

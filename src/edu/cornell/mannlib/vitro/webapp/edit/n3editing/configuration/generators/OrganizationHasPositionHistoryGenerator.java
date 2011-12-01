@@ -222,7 +222,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
 		conf.addValidator(new DateTimeIntervalValidationVTwo("startField",
 				"endField"));
-
+		prepare(vreq, conf);
 		return conf;
 	}
 }
