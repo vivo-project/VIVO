@@ -130,8 +130,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//ul[@id='individual-hasResearchArea']/li/a[2]/img</td>
+	<td>css=a.add-hasResearchArea &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -140,8 +145,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>link=exact:Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,12 +161,37 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=relatedIndLabel</td>
 	<td>Primatia Africana</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Manage Concepts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -205,6 +240,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>I am named after Jane in the Tarzan stories.&nbsp;&nbsp;Yes, my last name really is faculty.</td>
@@ -250,6 +290,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>I study apes, of course.</td>
@@ -277,7 +322,17 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=Country (core)</td>
+	<td>label=Country (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -350,6 +405,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>I teach apes how to communicate with humans.</td>
@@ -372,6 +432,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -470,6 +535,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>E.</td>
@@ -492,6 +562,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -542,6 +617,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -605,6 +685,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>Mrs.</td>
@@ -627,6 +712,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -655,6 +745,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>11111</td>
@@ -677,6 +772,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -705,6 +805,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>3333333</td>
@@ -727,6 +832,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -762,7 +872,7 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=License (core)</td>
+	<td>label=License (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -802,7 +912,7 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=Licensure (core)</td>
+	<td>label=Licensure (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -837,6 +947,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
