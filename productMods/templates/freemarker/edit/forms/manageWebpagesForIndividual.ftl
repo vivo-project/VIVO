@@ -46,7 +46,7 @@
         
         <script type="text/javascript">
             webpageData.push({
-                "webpageUri": "${webpage.link?url}"              
+                "webpageUri": "${webpage.link}"              
             });
         </script>      
     </#list>  
