@@ -52,7 +52,7 @@
                    	</#if>
                    </span> 
                 </span>
-                <a href="${urls.base}/edit/primitiveDelete" class="remove">Remove</a>
+                &nbsp;<a href="${urls.base}/edit/primitiveDelete" class="remove">Remove</a>
             </span>
         </li>    
         
