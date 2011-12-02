@@ -55,7 +55,8 @@ var addConceptForm = {
         //remove links
         this.removeConceptLinks = $('a.remove');
         this.errors = $('#errors');
-        this.createOwn = $('#createOwn');
+        this.createOwn1 = $('#createOwnOne');
+        this.createOwn2 = $('#createOwnTwo');
         this.orSpan = $('span.or')
     },
     
@@ -90,7 +91,7 @@ var addConceptForm = {
         this.clearSearchResults();
         // Hide the create own link, add selected button and "or"" span
         this.orSpan.hide();
-        this.createOwn.hide();
+        this.createOwn2.hide();
         this.submit.hide();
         //Also clear the search input
         this.searchTerm.val("");
@@ -114,14 +115,17 @@ var addConceptForm = {
     clearErrors:function() {
     	addConceptForm.errors.empty();
     },
-    showHiddenElements:function() {
-        this.orSpan.show();
-        this.createOwn.show();
-        this.submit.show();
-    },
-    showSpanAndCreateOption:function() {
-        this.orSpan.show();
-        this.createOwn.show();
+    showHiddenElements:function(results) {
+        this.createOwn1.hide();
+        if ( results ) {
+            this.orSpan.show();
+            this.createOwn2.show();
+            this.submit.show();
+        }
+        else {
+            this.orSpan.show();
+            this.createOwn2.show();
+        }
     },
     showConceptListOnlyView: function() {
         this.hideForm();
@@ -131,7 +135,7 @@ var addConceptForm = {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
     	var checkedVocabSource = $('input:radio[name="source"]:checked');
-    	var createLink = this.createOwn;
+    	var hasResults = false;
     	if(!checkedVocabSource.length) {
     		addConceptForm.showUncheckedSourceError();
     		return;
@@ -173,10 +177,11 @@ var addConceptForm = {
             if(htmlAdd.length) {
             	$('#selectedConcept').html(htmlAdd);
             	if (htmlAdd.indexOf("No search results") >= 0) {
-            	    addConceptForm.showSpanAndCreateOption();
+            	    addConceptForm.showHiddenElements(hasResults);
             	}
             	else {
-                   addConceptForm.showHiddenElements();
+            	   hasResults = true;
+                   addConceptForm.showHiddenElements(hasResults);
                 }
             }
           });

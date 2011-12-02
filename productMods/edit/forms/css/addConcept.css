@@ -26,3 +26,8 @@
 form#addConceptForm {
 	display:none;
 }
+
+form#addConceptForm span#createOwnOne{
+	float:left;
+	margin-top:24px
+}

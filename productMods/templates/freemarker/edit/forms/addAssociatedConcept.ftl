@@ -90,8 +90,8 @@
     </#list>
     <p class="inline-search">
         <input type="text" id="searchTerm" label="Search" class="acSelector" size="35" />
-        &nbsp;<input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="Search"/>
-    </p>
+        <input type="button" class="submit concept-search" id="searchButton" name="searchButton" value="Search"/>&nbsp;
+    </p><span id="createOwnOne"> or &nbsp;<a href="${userDefinedConceptUrl}" >Create your own concept&nbsp;</a></span>
     <input type="hidden" id="conceptNode" name="conceptNode" value=""/> <!-- Field value populated by JavaScript -->
     <input type="hidden" id="conceptLabel" name="conceptLabel" value="" />  <!-- Field value populated by JavaScript -->
 		<input type="hidden" id="conceptSource" name="conceptSource" value="" /> <!-- Field value populated by JavaScript -->
@@ -107,7 +107,7 @@
         <input type="submit" id="submit" name="submit" value="Add Selected Concept" />
         
     </p>
-    <div id="createOwn"><br />
+    <div id="createOwnTwo"><br />
         <a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
         
     </div>	
