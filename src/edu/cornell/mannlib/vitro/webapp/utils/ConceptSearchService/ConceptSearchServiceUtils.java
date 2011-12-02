@@ -40,7 +40,7 @@ public class ConceptSearchServiceUtils {
     	map.put(UMLSVocabSource, new VocabSourceDescription("UMLS", UMLSVocabSource, "http://www.nlm.nih.gov/research/umls/", "Unified Medical Language System"));
     	//Commenting out agrovoc for now until implementation is updated
     	//	map.put(AgrovocVocabSource, new VocabSourceDescription("AGROVOC", AgrovocVocabSource, "www.fao.org/agrovoc/", "Agricultural Vocabulary"));
-    	map.put(GemetVocabSource, new VocabSourceDescription("GEMET", GemetVocabSource, "http://www.eionet.europa.eu/gemet", "GEneral Multilingual Environmental Thesaurus"));
+    	map.put(GemetVocabSource, new VocabSourceDescription("GEMET", GemetVocabSource, "http://www.eionet.europa.eu/gemet", "General Multilingual Environmental Thesaurus"));
     	return map;
 	}
 	

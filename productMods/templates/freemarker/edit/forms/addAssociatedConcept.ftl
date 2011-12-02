@@ -105,11 +105,15 @@
     <input type="hidden" name="editKey" id="editKey" value="${editKey}"/>
     <p class="submit">
         <input type="submit" id="submit" name="submit" value="Add Selected Concept" />
-        <span class="or"> or </span><a class="cancel" href="${cancelUrl}">Cancel</a>
+        
     </p>
-    <div id="createOwn"><br /><a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
+    <div id="createOwn"><br />
+        <a href="${userDefinedConceptUrl}" > Can't find the concept you want? Create your own.</a>
+        
     </div>	
-
+        <p>
+            <span class="or"> or </span><a class="cancel" href="${cancelUrl}&url=/individual">Return to Profile Page</a>
+        </p>
     </form>
 </div>
 

@@ -95,11 +95,6 @@ var addConceptForm = {
         //Also clear the search input
         this.searchTerm.val("");
         this.cancel.unbind('click');
-        this.cancel.bind('click', function() {
-        	//show only list of existing terms and hide adding term form
-            addConceptForm.showConceptListOnlyView();
-            return false;
-        });  
 
         // Show the form
         this.form.show();                 
@@ -124,6 +119,10 @@ var addConceptForm = {
         this.createOwn.show();
         this.submit.show();
     },
+    showSpanAndCreateOption:function() {
+        this.orSpan.show();
+        this.createOwn.show();
+    },
     showConceptListOnlyView: function() {
         this.hideForm();
         this.showFormButtonWrapper.show();
@@ -132,6 +131,7 @@ var addConceptForm = {
     	//Get value of search term
     	var searchValue = this.searchTerm.val();
     	var checkedVocabSource = $('input:radio[name="source"]:checked');
+    	var createLink = this.createOwn;
     	if(!checkedVocabSource.length) {
     		addConceptForm.showUncheckedSourceError();
     		return;
@@ -172,7 +172,12 @@ var addConceptForm = {
             }
             if(htmlAdd.length) {
             	$('#selectedConcept').html(htmlAdd);
-                addConceptForm.showHiddenElements();
+            	if (htmlAdd.indexOf("No search results") >= 0) {
+            	    addConceptForm.showSpanAndCreateOption();
+            	}
+            	else {
+                   addConceptForm.showHiddenElements();
+                }
             }
           });
         return true;
@@ -249,7 +254,7 @@ var addConceptForm = {
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
     	if(numberElements < 1) {
-    		addConceptForm.errors.html("<p class='validationError'>Please select at least one term from search results to add or click cancel.</p>");
+    		addConceptForm.errors.html("<p class='validationError'>Please select at least one term from the search search results.</p>");
     		return false;
     	}
     	return true;
