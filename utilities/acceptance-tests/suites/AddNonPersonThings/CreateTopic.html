@@ -236,112 +236,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test affiliation entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='researchAreaOf']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add an entry to: research area of</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test links entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='sourceVocabularyReference']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Vocabulary Source Reference for Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Not sure</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Test other entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='subjectAreaFor']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Thing for Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Introduction to Primate Health</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -356,7 +251,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Subject Area for Primate Health</td>
+	<td>Select an existing Concept for Primate Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,7 +266,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Edit &quot;narrower term&quot; entry for Primate Health</td>
+	<td>Create &quot;narrower term&quot; entry for Primate Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -401,17 +296,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Subject Area for Primate Health</td>
+	<td>Select an existing Concept for Primate Health</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Elderly Care</td>
+	<td>clickAndWait</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create &quot;related&quot; entry for Primate Health </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Elderly Care</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -427,21 +337,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Animal Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Librarian, Lily</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Not sure</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Introduction to Primate Health</td>
 	<td></td>
 </tr>
 <tr>

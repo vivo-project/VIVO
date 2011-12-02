@@ -386,8 +386,8 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>objectVar</td>
-	<td>label=the Congo</td>
+	<td>id=objectVar</td>
+	<td>label=Congo</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -516,7 +516,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasSubjectArea']/a/img</td>
+	<td>css=a.delete-hasSubjectArea &gt; img.delete-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasSubjectArea &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -525,13 +540,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Subject Area for Primate Health Conference</td>
+	<td>click</td>
+	<td>id=showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=searchTerm</td>
+	<td>Animal Health</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=searchButton</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=exact:Can't find the concept you want? Create your own.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=relatedIndLabel</td>
+	<td>Anim</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Profile Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,7 +656,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>the Congo</td>
+	<td>Congo</td>
 	<td></td>
 </tr>
 <tr>

@@ -545,13 +545,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=searchTerm</td>
+	<td>Animal Health</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=searchButton</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>Select an existing Subject Area for Introduction to Primate Health</td>
+	<td>No search results found.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=exact:Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -561,12 +576,22 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=relatedIndLabel</td>
 	<td>Animal Health</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Profile Page</td>
 	<td></td>
 </tr>
 <tr>

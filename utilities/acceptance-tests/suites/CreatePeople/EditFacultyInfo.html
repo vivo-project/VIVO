@@ -130,11 +130,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>null</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasResearchArea &gt; img.add-individual</td>
 	<td></td>
@@ -152,6 +147,21 @@
 <tr>
 	<td>click</td>
 	<td>id=showAddFormButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=searchTerm</td>
+	<td>Primatia Africana</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=searchButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>No search results found.</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,7 +191,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Return</td>
+	<td>link=Return to Profile Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -313,16 +323,6 @@
 	<td>select</td>
 	<td>typeOfNew</td>
 	<td>label=Country (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
