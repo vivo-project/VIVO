@@ -18,6 +18,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.semservices.bo.Concept;
+import edu.cornell.mannlib.semservices.bo.ConceptInfo;
+import edu.cornell.mannlib.semservices.bo.SemanticServicesError;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroHttpServlet;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.BeanToJsonSerializer;
@@ -40,9 +42,23 @@ public class ConceptSearchServlet extends VitroHttpServlet {
 
         try{
         	ServletContext ctx = vreq.getSession().getServletContext();
+        	//Captures both concept list and any errors if they exist
+        	ConceptInfo conceptInfo = new ConceptInfo();
+    		conceptInfo.setSemanticServicesError(null);
+
         	//Json output should be written out
-        	List<Concept> results = ConceptSearchServiceUtils.getSearchResults(ctx, vreq);
-        	String json = renderJson(results);
+        	List<Concept> results =  null;
+        	try {
+        		results = ConceptSearchServiceUtils.getSearchResults(ctx, vreq);
+        	} 
+        	catch (Exception ex) {
+        		 SemanticServicesError semanticServicesError = new SemanticServicesError(
+        	               "Exception encountered ", ex.getMessage(), "fatal");
+        		 log.error("An error occurred retrieving search results");
+        		 conceptInfo.setSemanticServicesError(semanticServicesError);
+        	}
+        	conceptInfo.setConceptList(results);
+        	String json = renderJson(conceptInfo);
         	json = StringUtils.replaceChars(json, "\r\t\n", "");
             PrintWriter writer = resp.getWriter();
             resp.setContentType("application/json");
@@ -54,10 +70,10 @@ public class ConceptSearchServlet extends VitroHttpServlet {
         }        
     }
     
-    protected String renderJson(List<Concept> conceptList) {
+    protected String renderJson(ConceptInfo conceptInfo) {
 
         JSONObject jsonObject = null;
-        jsonObject = BeanToJsonSerializer.serializeToJsonObject(conceptList);
+        jsonObject = BeanToJsonSerializer.serializeToJsonObject(conceptInfo);
         log.debug(jsonObject.toString());
         return jsonObject.toString();
     }

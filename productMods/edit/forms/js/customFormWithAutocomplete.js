@@ -231,7 +231,8 @@ var customForm = {
                     dataType: 'json',
                     data: {
                         term: request.term,
-                        type: customForm.acType
+                        type: customForm.acType,
+                        multipleTypes:(customForm.acMultipleTypes == undefined || customForm.acMultipleTypes == null)? null: customForm.acMultipleTypes
                     },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. 

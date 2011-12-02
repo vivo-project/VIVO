@@ -29,7 +29,7 @@ public class UMLSService implements ExternalConceptService {
    private static final String submissionUrl = "http://link.informatics.stonybrook.edu/MeaningLookup/MlServiceServlet?";
    private static final String baseUri = "http://link.informatics.stonybrook.edu/umls/CUI/";
 
-   public List<Concept> processResults(String term) {
+   public List<Concept> processResults(String term) throws Exception{
       String results = null;
       String dataUrl = submissionUrl + "textToProcess="
             + URLEncoder.encode(term) + "&format=json";
@@ -50,9 +50,8 @@ public class UMLSService implements ExternalConceptService {
 
       } catch (Exception ex) {
          logger.error("error occurred in servlet", ex);
-         return null;
+         throw ex;
       }
-      //System.out.println("results before processing: "+results);
       List<Concept> conceptList = processOutput(results);
       return conceptList;
    }

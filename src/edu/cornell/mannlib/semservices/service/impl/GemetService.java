@@ -49,7 +49,7 @@ public class GemetService implements ExternalConceptService  {
    private final String exampleUri = "http://www.w3.org/2004/02/skos/core%23example";
    private final String acronymLabelUri = "http://www.w3.org/2004/02/skos/core%23acronymLabel";
 
-   public List<Concept> processResults(String term) {
+   public List<Concept> processResults(String term) throws Exception {
       List<Concept> conceptList = new ArrayList<Concept>();
       String results = getConceptsMatchingKeyword(term);
       conceptList = processOutput(results);
@@ -121,7 +121,7 @@ public class GemetService implements ExternalConceptService  {
    }
 
 
-   protected String getAvailableLangs(String concept_uri) {
+   protected String getAvailableLangs(String concept_uri) throws Exception {
       String result = new String();
       String serviceUrl = GemetWS_address + "getAvailableLanguages" +
       "?concept_uri=" + concept_uri;
@@ -129,7 +129,7 @@ public class GemetService implements ExternalConceptService  {
       return result;
    }
 
-   protected String getConcept(String concept_uri) {
+   protected String getConcept(String concept_uri) throws Exception {
       String result = new String();
       String serviceUrl = GemetWS_address + "getConcept" +
       "?concept_uri=" + concept_uri +
@@ -137,7 +137,7 @@ public class GemetService implements ExternalConceptService  {
       result = getGemetResults(serviceUrl);
       return result;
    }
-   protected String getAllTranslationsForConcept(String concept_uri, String property) {
+   protected String getAllTranslationsForConcept(String concept_uri, String property) throws Exception  {
       String result = new String();
       String property_uri = new String();
       if (property.equals("definition")) {
@@ -163,7 +163,7 @@ public class GemetService implements ExternalConceptService  {
    }
 
 
-   protected String getRelatedConcepts(String concept_uri, String relation) {
+   protected String getRelatedConcepts(String concept_uri, String relation) throws Exception {
       String result = new String();
       String relation_uri = new String();
       if (relation.equals("broader")) {
@@ -183,7 +183,7 @@ public class GemetService implements ExternalConceptService  {
 
 
 
-   protected String getConceptsMatchingKeyword(String keyword) {
+   protected String getConceptsMatchingKeyword(String keyword) throws Exception {
       String result = new String();
       String serviceUrl = GemetWS_address + "getConceptsMatchingKeyword" +
       "?keyword="  + keyword +
@@ -196,7 +196,7 @@ public class GemetService implements ExternalConceptService  {
 
    }
 
-   protected String getGemetResults(String url) {
+   protected String getGemetResults(String url) throws Exception {
       String results = new String();
       //System.out.println("url: "+url);
       try {
@@ -215,7 +215,7 @@ public class GemetService implements ExternalConceptService  {
 
       } catch (Exception ex) {
          logger.error("error occurred in servlet", ex);
-         return null;
+         throw ex;
       }
       return results;
    }

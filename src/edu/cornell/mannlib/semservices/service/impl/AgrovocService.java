@@ -35,7 +35,7 @@ public class AgrovocService implements ExternalConceptService  {
    protected final Log logger = LogFactory.getLog(getClass());
    private java.lang.String AgrovocWS_address = "http://www.fao.org/webservices/AgrovocWS";
 
-   public List<Concept> processResults(String term) {
+   public List<Concept> processResults(String term) throws Exception {
       List<Concept> conceptList = new ArrayList<Concept>();
 
       String termcode;
@@ -43,7 +43,7 @@ public class AgrovocService implements ExternalConceptService  {
          termcode = getTermcodeByTerm(term);
       } catch (Exception e1) {
          logger.error("Could not get termcode from service", e1);
-         return null;
+         throw e1;
       }
 
       String format = "SKOS";
@@ -89,9 +89,6 @@ public class AgrovocService implements ExternalConceptService  {
          e.printStackTrace();
       }
       return conceptList;
-      //JSONObject jsonObject = null;
-      //jsonObject = BeanToJsonSerializer.serializeToJsonObject(conceptList);
-      //return jsonObject.toString();
    }
 
 

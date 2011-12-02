@@ -142,16 +142,17 @@ var addConceptForm = {
     	}
     	var vocabSourceValue = checkedVocabSource.val();
     	var dataServiceUrl = addConceptForm.dataServiceUrl + "?searchTerm=" + encodeURIComponent(searchValue) + "&source=" + encodeURIComponent(vocabSourceValue);
-        $.getJSON(dataServiceUrl, function(results) {
+        //This should return an object including the concept list or any errors if there are any
+    	$.getJSON(dataServiceUrl, function(results) {
             var htmlAdd = "";
-
-            if ( results== null || results.array == null || results.array.length == 0 ) {
-            	htmlAdd = "<p>No search results found.</p>";
-            } else {
+            var vocabUnavailable = "<p>The vocabulary service is unavailable. Please try again later.</p>";
+            if ( results== null  || results.semanticServicesError != null || results.conceptList == null) {
+            	htmlAdd = vocabUnavailable;
+            }
+            else {
             	//array is an array of objects representing concept information
             	//loop through and find all the best matches
-            	
-            	var bestMatchResults = addConceptForm.parseResults(results.array);
+            	var bestMatchResults = addConceptForm.parseResults(results.conceptList);
                 var numberMatches = bestMatchResults.length;
                 var i;
                 //For each result, display
@@ -170,7 +171,7 @@ var addConceptForm = {
 	                }
 	                htmlAdd+= "</ul>";
                 } else {
-                	htmlAdd+= "<p>No search results found.</p>";
+                	htmlAdd+= "<p>No search results were found.</p>";
                 }
             	
             }
