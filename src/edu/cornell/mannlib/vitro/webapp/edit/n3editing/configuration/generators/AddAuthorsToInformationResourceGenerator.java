@@ -25,103 +25,96 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 
+/**
+ * This is a slightly unusual generator that is used by Manage Authors on
+ * information resources. 
+ *
+ * It is intended to always be an add, and never an update. 
+ */
 public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) {
-    	 EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	    	
-    	 initBasics(editConfiguration, vreq);
-         initPropertyParameters(vreq, session, editConfiguration);
-         initObjectPropForm(editConfiguration, vreq);               
-     		//Overriding url to return to
-         setUrlToReturnTo(editConfiguration, vreq);
-         setVarNames(editConfiguration);
+        EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	    	
+        initBasics(editConfiguration, vreq);
+        initPropertyParameters(vreq, session, editConfiguration);
+
+        //Overriding URL to return to
+        setUrlToReturnTo(editConfiguration, vreq);
+
+        //set variable names
+        editConfiguration.setVarNameForSubject("infoResource");               
+        editConfiguration.setVarNameForPredicate("predicate");      
+        editConfiguration.setVarNameForObject("authorshipUri");                          
+
+        // Required N3
+        editConfiguration.setN3Required( list( getN3NewAuthorship() ) );    
+
+        // Optional N3 
+        editConfiguration.setN3Optional( generateN3Optional());	
+
+        editConfiguration.addNewResource("authorshipUri", DEFAULT_NS_TOKEN);
+        editConfiguration.addNewResource("newPerson", DEFAULT_NS_TOKEN);
         
-         
-     	// Required N3
-     	editConfiguration.setN3Required(generateN3Required());    
-     	
-     	// Optional N3 
-     	editConfiguration.setN3Optional( generateN3Optional());	
-         	    	        
-     	editConfiguration.setNewResources( generateNewResources(vreq) );
-     	
-     	//In scope
-     	setUrisAndLiteralsInScope(editConfiguration, vreq);
-     	
-     	//on Form
-     	setUrisAndLiteralsOnForm(editConfiguration, vreq);
-     	    	
-     	//Sparql queries
-     	setSparqlQueries(editConfiguration, vreq);
-     	
-     	//set fields
-     	setFields(editConfiguration, vreq, EditConfigurationUtils.getPredicateUri(vreq));
-     	
-     	//template file
-     	editConfiguration.setTemplate("addAuthorsToInformationResource.ftl");
-     	//add validators
-     	editConfiguration.addValidator(new PublicationHasAuthorValidator());
-     	
-         //Adding additional data, specifically edit mode
+        //In scope
+        setUrisAndLiteralsInScope(editConfiguration, vreq);
+
+        //on Form
+        setUrisAndLiteralsOnForm(editConfiguration, vreq);
+
+        //Sparql queries
+        setSparqlQueries(editConfiguration, vreq);
+
+        //set fields
+        setFields(editConfiguration, vreq, EditConfigurationUtils.getPredicateUri(vreq));
+
+        //template file
+        editConfiguration.setTemplate("addAuthorsToInformationResource.ftl");
+        //add validators
+        editConfiguration.addValidator(new PublicationHasAuthorValidator());
+
+        //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
-        prepare(vreq, editConfiguration);
-     	return editConfiguration;
+        
+        //NOITCE this generator does not run prepare() since it 
+        //is never an update and has no SPARQL for existing
+        
+        return editConfiguration;
     }
-
-
-
-
-
-	private void setVarNames(EditConfigurationVTwo editConfiguration) {
-		 editConfiguration.setVarNameForSubject("infoResource");               
-         editConfiguration.setVarNameForPredicate("predicate");      
-         editConfiguration.setVarNameForObject("authorshipUri");
 		
-	}
-	
-	
-	
 	private void setUrlToReturnTo(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
-		editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));
-		
+		editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));		
 	}
 	
 	/***N3 strings both required and optional***/
 	
 	public String getN3PrefixString() {
-		return "@prefix core: <" + vivoCore + "> ." + 
-		 "@prefix foaf: <" + foaf + "> .  "   ;
-	}
-
-
-	//n3 for new authorship, authorship rank assertion
-	private List<String> generateN3Required() {
-		return list(getN3NewAuthorship(),
-                getN3AuthorshipRank());
+		return "@prefix core: <" + vivoCore + "> .\n" + 
+		 "@prefix foaf: <" + foaf + "> .  \n"   ;
 	}
 	
 	private String getN3NewAuthorship() {
 		return getN3PrefixString() + 
-		"?authorshipUri a core:Authorship ;" + 
-        "  core:linkedInformationResource ?infoResource ;" + 
-        "  core:authorRank ?rank . " +
-       "?infoResource core:informationResourceInAuthorship ?authorshipUri .      ";
+		"?authorshipUri a core:Authorship ;\n" + 
+        "  core:linkedInformationResource ?infoResource .\n" + 
+        "?infoResource core:informationResourceInAuthorship ?authorshipUri .";
 	}
 	
 	private String getN3AuthorshipRank() {
-		return getN3PrefixString() +  
+		return getN3PrefixString() +   
         "?authorshipUri core:authorRank ?rank .";
 	}
 	
 	//first name, middle name, last name, and new perseon for new author being created, and n3 for existing person
 	//if existing person selected as author
 	private List<String> generateN3Optional() {
-		return list(getN3NewPersonFirstName() ,
+		return list(
+		        getN3NewPersonFirstName() ,
                 getN3NewPersonMiddleName(),
-                getN3NewPersonLastName(),
+                getN3NewPersonLastName(),                
                 getN3NewPerson(),
+                getN3AuthorshipRank(),
                 getN3ForExistingPerson());
 		
 	}
@@ -144,15 +137,15 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	
 	private String getN3NewPerson() {
 		return  getN3PrefixString() + 
-        "?newPerson a foaf:Person ;" + 
-        "<" + RDFS.label.getURI() + "> ?label ." + 
-        "?authorshipUri core:linkedAuthor ?newPerson ." + 
-        "?newPerson core:authorInAuthorship ?authorshipUri .  ";
+        "?newPerson a foaf:Person ;\n" + 
+        "<" + RDFS.label.getURI() + "> ?label .\n" + 
+        "?authorshipUri core:linkedAuthor ?newPerson .\n" + 
+        "?newPerson core:authorInAuthorship ?authorshipUri . ";
 	}
 	
 	private String getN3ForExistingPerson() {
 		return getN3PrefixString() + 
-		"?authorshipUri core:linkedAuthor ?personUri ." + 
+		"?authorshipUri core:linkedAuthor ?personUri .\n" + 
 		"?personUri core:authorInAuthorship ?authorshipUri .";
 	}
 	
@@ -160,7 +153,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	//A new authorship uri will always be created when an author is added
 	//A new person may be added if a person not in the system will be added as author
 	 private Map<String, String> generateNewResources(VitroRequest vreq) {					
-			String DEFAULT_NS_TOKEN=null; //null forces the default NS
+			
 			
 			HashMap<String, String> newResources = new HashMap<String, String>();			
 			newResources.put("authorshipUri", DEFAULT_NS_TOKEN);
@@ -177,10 +170,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
     	urisInScope.put(editConfiguration.getVarNameForPredicate(), 
     			Arrays.asList(new String[]{editConfiguration.getPredicateUri()}));
     	editConfiguration.setUrisInScope(urisInScope);
-    	//no literals in scope
-    	HashMap<String, List<Literal>> literalsInScope = new HashMap<String, List<Literal>>();
-    	editConfiguration.setLiteralsInScope(literalsInScope);    	
-
+    	//no literals in scope    	    
     }
 	
     private void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
@@ -384,6 +374,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 			return authorName;
 		}
 	}
-
+	
+	static final String DEFAULT_NS_TOKEN=null; //null forces the default NS
 
 }
