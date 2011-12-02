@@ -23,7 +23,7 @@
 		            <p class="inline">
 		                <label>Selected Publication:</label>
 		                <span class="acSelectionInfo"></span>
-		                <a href="/vivo/individual?uri=" class="verifyMatch">(Verify this match)</a>
+		                <a href="${urls.base}/individual?uri=" class="verifyMatch">(Verify this match)</a>
 		            </p>
 		            <input class="acUriReceiver" type="hidden" id="conceptNode" name="conceptNode" value="" />
         </div>

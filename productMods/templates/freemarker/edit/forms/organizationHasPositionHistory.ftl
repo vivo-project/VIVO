@@ -106,7 +106,7 @@
 	        <p class="inline">
 	            <label>Selected Person:</label>
 	            <span class="acSelectionInfo"></span>
-	            <a href="/vivo/individual?uri=" class="verifyMatch"  title="verify match">(Verify this match)</a>
+	            <a href="${urls.base}/individual?uri=" class="verifyMatch"  title="verify match">(Verify this match)</a>
 	        </p>
 	        <input class="acUriReceiver" type="hidden" id="personUri" name="person" value="${personValue}" />
 	    </div>
