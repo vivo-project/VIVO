@@ -60,6 +60,7 @@ var addAuthorForm = {
         this.selectedAuthor = $('#selectedAuthor');
         this.selectedAuthorName = $('#selectedAuthorName');
         this.acHelpTextClass = 'acSelectorWithHelpText';
+        this.verifyMatch = this.form.find('.verifyMatch');    
 
     },
     
@@ -78,6 +79,8 @@ var addAuthorForm = {
         
         this.initAutocomplete();
         
+        this.initElementData();
+
         this.initAuthorDD();
         
         if (this.findValidationErrors()) {
@@ -125,7 +128,9 @@ var addAuthorForm = {
         
         this.initForm();
         
-        this.hideFieldsForNewPerson();
+        // There's a conflict bewteen the last name fields .blur event and the cancel
+        // button's click. So display the middle and first names along with the last name tlw72
+        //this.hideFieldsForNewPerson();
 
         // This shouldn't be needed, because calling this.hideFormFields(this.lastNameWrapper)
         // from showSelectedAuthor should do it. However, it doesn't work from there,
@@ -156,7 +161,8 @@ var addAuthorForm = {
         
         // Reset the last name field. It had been hidden if we selected an author from
         // the autocomplete field.
-        this.lastNameWrapper.show();         
+        this.lastNameWrapper.show(); 
+        this.showFieldsForNewPerson();        
 
         // Show the form
         this.form.show();                 
@@ -232,6 +238,10 @@ var addAuthorForm = {
 
     },
 
+    initElementData: function() {   
+        this.verifyMatch.data('baseHref', this.verifyMatch.attr('href'));
+    },
+
     setAcFilter: function() {
         this.acFilter = [];
         
@@ -293,6 +303,7 @@ var addAuthorForm = {
         // since the keydown event on the last name field is also triggered (and
         // executes first). So re-hide them here.
         this.hideFieldsForNewPerson(); 
+        this.verifyMatch.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
         
         // Cancel restores initial form view
         this.cancel.unbind('click');
@@ -439,6 +450,11 @@ var addAuthorForm = {
             }
             addAuthorForm.onLastNameChange();
         });
+
+        this.verifyMatch.click(function() {
+            window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
+            return false;
+        });   
 
     	this.acSelector.focus(function() {
         	addAuthorForm.deleteAcHelpText();

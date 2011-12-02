@@ -125,10 +125,13 @@
         <input type="hidden" id="label" name="label" value=""  role="input" />  <!-- Field value populated by JavaScript -->
 
         <div id="selectedAuthor" class="acSelection">
-            <label>Selected author: </label><span class="acSelectionInfo" id="selectedAuthorName"></span></p>
-            <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
+            <p class="inline">
+                <label>Selected author:&nbsp;</label>
+                <span class="acSelectionInfo" id="selectedAuthorName"></span>
+                <a href="${urls.base}/individual?uri=" class="verifyMatch"  title="verify match">(Verify this match)</a>
+                <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
+            </p>
         </div>
-
         <input type="hidden" name="rank" id="rank" value="${newRank}" role="input" />
     
         <p class="submit">
