@@ -23,7 +23,7 @@
 <#assign egoCoInvestigatorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copis'>
 <#assign egoCoInvestigationNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_download'>
 
-<#assign coInvestigatorIcon = '${urls.images}/visualization/coauthorship/co_investigator_icon.png'>
+<#assign coAuthorIcon = '${urls.images}/visualization/coauthorship/co_author_icon.png'>
 
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
 <#assign adobeFlashDetector = '${urls.base}/js/visualization/coauthorship/AC_OETags.js'>
@@ -126,9 +126,9 @@ $(document).ready(function(){
     
     <div class = "toggle_visualization">
         <div id="coauthorship_link_container" class="collaboratorship-link-container">
-            <div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="co-investigator"><img src="${coInvestigatorIcon}" /></a></div>
+        	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="co-author"><img src="${coAuthorIcon}" /></a></div>
             <div class="collaboratorship-link">
-                <h3><a href="${coauthorshipURL}" title="co-investigator network">Co-Investigator Network</a></h3>
+                <h3><a href="${coauthorshipURL}" title="co-author network">Co-Author Network</a></h3>
             </div>
         </div>
     </div>
