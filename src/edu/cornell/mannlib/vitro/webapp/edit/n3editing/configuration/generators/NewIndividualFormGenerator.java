@@ -21,6 +21,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.FoafNameToRdfsLabelPreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 
 /**
  * Generates the edit configuration for a default property form.
@@ -68,6 +69,8 @@ public class NewIndividualFormGenerator extends BaseEditConfigurationGenerator i
                 setValidators(getLabelValidators(vreq)));    	  
     	    	
         addFormSpecificData(config, vreq);        
+        
+        config.addValidator(new AntiXssValidation());
         
         //This combines the first and last name into the rdfs:label
         config.addModelChangePreprocessor(new FoafNameToRdfsLabelPreprocessor());        

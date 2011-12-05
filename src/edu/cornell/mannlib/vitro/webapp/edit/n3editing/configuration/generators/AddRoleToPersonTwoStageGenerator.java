@@ -32,6 +32,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
@@ -163,11 +164,14 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	editConfiguration.setTemplate(getTemplate());
     	    	
     	//Add validator
-        editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") ); 
+        editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") );
+        editConfiguration.addValidator(new AntiXssValidation());
+        
         //Add preprocessors
         addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
+        
         //prepare
         prepare(vreq, editConfiguration);
     	return editConfiguration;

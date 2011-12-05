@@ -42,6 +42,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
@@ -109,7 +110,9 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
     	
     
     	setTemplate(editConfiguration, vreq);
-    	//No validators required here
+    	
+    	editConfiguration.addValidator(new AntiXssValidation());
+    	
         //Add preprocessors
         addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
         //Adding additional data, specifically edit mode

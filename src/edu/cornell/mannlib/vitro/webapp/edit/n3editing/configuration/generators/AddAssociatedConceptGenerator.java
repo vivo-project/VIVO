@@ -48,6 +48,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator.AuthorshipInfo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
@@ -129,6 +130,9 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
         //Adding term should return to this same page, not the subject
         //Return takes the page back to the individual form
         editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));
+        
+        editConfiguration.addValidator(new AntiXssValidation());
+        
     	//prepare
         prepare(vreq, editConfiguration);
         return editConfiguration;

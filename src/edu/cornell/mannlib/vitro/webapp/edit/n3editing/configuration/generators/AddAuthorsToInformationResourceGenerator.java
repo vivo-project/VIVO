@@ -24,6 +24,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalVali
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 
 /**
  * This is a slightly unusual generator that is used by Manage Authors on
@@ -76,6 +77,8 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
+        
+        editConfiguration.addValidator(new AntiXssValidation());
         
         //NOITCE this generator does not run prepare() since it 
         //is never an update and has no SPARQL for existing

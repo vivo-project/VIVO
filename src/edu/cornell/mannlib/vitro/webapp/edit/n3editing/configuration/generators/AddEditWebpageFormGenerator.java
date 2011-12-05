@@ -17,6 +17,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 /**
 
 Custom form for adding or editing a webpage associated with an individual. The primary page,
@@ -90,6 +91,8 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
                             EditConfigurationUtils.getSubjectUri(vreq), vreq )
                         + 1 );
                 
+        config.addValidator(new AntiXssValidation());
+        
         //might be null
         config.addFormSpecificData("subjectName", getName( config, vreq));
         prepare(vreq, config);

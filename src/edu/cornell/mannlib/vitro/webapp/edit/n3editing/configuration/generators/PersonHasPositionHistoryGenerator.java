@@ -18,6 +18,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalVali
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
@@ -155,7 +156,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
                 );
         
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
-
+        conf.addValidator(new AntiXssValidation());
+        
         //Adding additional data, specifically edit mode
         addFormSpecificData(conf, vreq);
         prepare(vreq, conf);

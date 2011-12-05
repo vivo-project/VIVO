@@ -35,41 +35,41 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
-        
+
         EditConfigurationVTwo config = new EditConfigurationVTwo();
         config.setTemplate("manageWebpagesForIndividual.ftl");
-        
+
         initBasics(config, vreq);
         initPropertyParameters(vreq, session, config);
         initObjectPropForm(config, vreq);
-        
+
         config.setSubjectUri(EditConfigurationUtils.getSubjectUri(vreq));
         config.setEntityToReturnTo( EditConfigurationUtils.getSubjectUri(vreq));
-        
+
         List<Map<String,String>> webpages = getWebpages(config.getSubjectUri(), vreq);
         config.addFormSpecificData("webpages",webpages);
 
         config.addFormSpecificData("rankPredicate", "http://vivoweb.org/ontology/core#rank" );
         config.addFormSpecificData("reorderUrl", "/edit/reorder" );       
         config.addFormSpecificData("deleteWebpageUrl", "/edit/primitiveDelete");              
-       
-       ParamMap paramMap = new ParamMap();
-       paramMap.put("subjectUri", config.getSubjectUri());
-       paramMap.put("editForm", AddEditWebpageFormGenerator.class.getName());
-       paramMap.put("view", "form");
-       String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
-       
+
+        ParamMap paramMap = new ParamMap();
+        paramMap.put("subjectUri", config.getSubjectUri());
+        paramMap.put("editForm", AddEditWebpageFormGenerator.class.getName());
+        paramMap.put("view", "form");
+        String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
+
         config.addFormSpecificData("baseEditWebpageUrl", path);                 
-        
+
         paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
         paramMap.put("predicateUri", config.getPredicateUri());
         paramMap.put("editForm" , AddEditWebpageFormGenerator.class.getName() );
         paramMap.put("cancelTo", "manage");
         path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
-        
+
         config.addFormSpecificData("showAddFormUrl", path);          
-        
+
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(config.getSubjectUri());
         if( subject != null && subject.getName() != null ){
             config.addFormSpecificData("subjectName", subject.getName());

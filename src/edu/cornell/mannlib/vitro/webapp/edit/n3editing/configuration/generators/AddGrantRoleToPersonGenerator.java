@@ -30,6 +30,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUti
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
@@ -104,8 +105,11 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	setTemplate(editConfiguration, vreq);
     	//Set edit key
     	setEditKey(editConfiguration, vreq);
-    	//Add validator
-        editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") ); 
+    	
+    	//Add validators
+        editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") );
+        editConfiguration.addValidator(new AntiXssValidation());
+        
         //no preprocessors required here
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
