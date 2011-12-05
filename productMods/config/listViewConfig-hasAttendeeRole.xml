@@ -19,7 +19,8 @@
                         ?event2 ?event2Label
                         ?series ?seriesLabel
                         ?event3 
-                        ?dateTime
+                        ?dateTimeStart 
+                        ?dateTimeEnd
                         
             WHERE {
                         
@@ -88,7 +89,10 @@
         
                 OPTIONAL { ?role vivo:dateTimeInterval ?dateTimeInterval 
                            OPTIONAL { ?dateTimeInterval vivo:start ?dateTimeStartValue .
-                                      ?dateTimeStartValue vivo:dateTime ?dateTime 
+                                      ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
+                           }
+                           OPTIONAL { ?dateTimeInterval vivo:end ?dateTimeEndValue .
+                                      ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
                            }
                 }  
                 
@@ -331,6 +335,20 @@
             ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
         } 
     </query-construct>
-    
+
+    <query-construct>
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role vivo:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval vivo:end ?dateTimeEndValue .
+            ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role vivo:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval vivo:end ?dateTimeEndValue .
+            ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>    
     <template>propStatement-hasAttendeeRole.ftl</template>
 </list-view-config>

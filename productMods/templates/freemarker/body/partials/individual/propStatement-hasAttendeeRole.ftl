@@ -24,7 +24,7 @@
     </#local>
     
     <#local dateTime>
-        <@dt.yearSpan statement.dateTime! /> 
+       <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" /> 
     </#local>
     
     <#local attendedEvent>
