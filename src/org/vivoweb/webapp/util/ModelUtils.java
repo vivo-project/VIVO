@@ -23,7 +23,7 @@ public class ModelUtils {
 	private static final String processPropertyURI = "http://vivoweb.org/ontology/core#roleRealizedIn";
 	private static final String processPropertyInverseURI = "http://vivoweb.org/ontology/core#realizedRole";
 	private static final String nonProcessPropertyURI = "http://vivoweb.org/ontology/core#roleContributesTo";
-	private static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#ContributingRole";
+	private static final String nonProcessPropertyInverseURI = "http://vivoweb.org/ontology/core#contributingRole";
 	
 	private static Set<String> processClass = new HashSet<String>();
 	static {

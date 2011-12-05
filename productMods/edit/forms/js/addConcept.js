@@ -279,12 +279,13 @@ var addConceptForm = {
         if ($(link)[0] === $('.remove:last')[0]) {
             removeLast = true;
         } 
-        
+        //Using primitive rdf edit which expects an n3 string for deletion
         $.ajax({
             url: $(link).attr('href'),
             type: 'POST', 
             data: {
-                deletion: $(link).parents('.existingConcept').data('conceptNodeUri')
+        		additions: '', 
+                retractions: addConceptForm.generateDeletionN3($(link).parents('.existingConcept').data('conceptNodeUri'))
             },
             dataType: 'json',
             context: link, // context for callback
@@ -309,6 +310,14 @@ var addConceptForm = {
                 }
             }
         });        
+    },
+    generateDeletionN3: function(conceptNodeUri) {
+    	var n3String = "<" + addConceptForm.subjectUri + "> <" + addConceptForm.predicateUri + "> <" + conceptNodeUri + "> .";
+    	//add inverse string to also be removed
+    	if(addConceptForm.inversePredicateUri.length > 0) {
+    		n3String += "<" + conceptNodeUri + "> <" + addConceptForm.inversePredicateUri + "> <" + addConceptForm.subjectUri + "> .";
+    	}
+    	return n3String;
     }
 };
 

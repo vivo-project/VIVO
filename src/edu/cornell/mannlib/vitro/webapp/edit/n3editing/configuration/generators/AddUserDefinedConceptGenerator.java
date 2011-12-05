@@ -163,18 +163,25 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
 	
 	//Here, the node is typed as a skos concept
     private List<String> generateN3Required(VitroRequest vreq) {
-    	return list(    	            	        
+    	List<String> n3Required = list(    	            	        
     	        getPrefixesString() + "\n" +
     	        "?subject ?predicate ?conceptNode .\n" 
     	);
+    	List<String> inversePredicate = getInversePredicate(vreq);
+		//Adding inverse predicate if it exists
+		if(inversePredicate.size() > 0) {
+			n3Required.add("?conceptNode <" + inversePredicate.get(0) + "> ?subject .");
+		}
+    	return n3Required;
     }
     
    //Optional b/c user may select an existing SKOS concept
 	private List<String> generateN3Optional() {
 		return list(    
-				"?conceptNode <" + VitroVocabulary.RDF_TYPE + "> <" + SKOSConceptType + "> .\n" + 
-				"?conceptNode <" + label + "> ?conceptLabel ."
-    	);
+					"?conceptNode <" + VitroVocabulary.RDF_TYPE + "> <" + SKOSConceptType + "> .\n" + 
+					"?conceptNode <" + label + "> ?conceptLabel ."
+	    	);
+		
     }
 	
 	

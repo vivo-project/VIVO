@@ -4,6 +4,7 @@
 <#assign existingConcepts = editConfiguration.pageData.existingConcepts/>
 <#assign userDefinedConceptUrl = editConfiguration.pageData.userDefinedConceptUrl/>
 <#assign sources = editConfiguration.pageData.searchServices/>
+<#assign inversePredicate = editConfiguration.pageData.inversePredicate />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -52,7 +53,7 @@
                    	</#if>
                    </span> 
                 </span>
-                &nbsp;<a href="${urls.base}/edit/primitiveDelete" class="remove">Remove</a>
+                &nbsp;<a href="${urls.base}/edit/primitiveRdfEdit" class="remove">Remove</a>
             </span>
         </li>    
         
@@ -121,7 +122,10 @@
 
     <script type="text/javascript">
     var customFormData = {
-        dataServiceUrl: '${urls.base}/conceptSearchService'
+        dataServiceUrl: '${urls.base}/conceptSearchService',
+        subjectUri: '${editConfiguration.subjectUri}',
+        predicateUri: '${editConfiguration.predicateUri}',
+        inversePredicateUri: '${inversePredicate}'
     };
     </script>
 

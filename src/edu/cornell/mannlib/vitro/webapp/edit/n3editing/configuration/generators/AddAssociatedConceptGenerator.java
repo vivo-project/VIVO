@@ -163,11 +163,17 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 	//Since the concept node from an external vocabulary may already be in the system
 	//The label and is defined by may already be defined and don't require re-saving
     private List<String> generateN3Required(VitroRequest vreq) {
-    	return list(    	            	        
+    	List<String> n3Required = list(    	            	        
     	        getPrefixesString() + "\n" +
     	        "?subject ?predicate ?conceptNode .\n" + 
     	        "?conceptNode <" + RDF.type.getURI() + "> <http://www.w3.org/2002/07/owl#Thing> ."
     	);
+    	List<String> inversePredicate = getInversePredicate(vreq);
+		//Adding inverse predicate if it exists
+		if(inversePredicate.size() > 0) {
+			n3Required.add("?conceptNode <" + inversePredicate.get(0) + "> ?subject .");
+		}
+		return n3Required;
     }
     
    //Don't think there's any n3 optional here
@@ -316,7 +322,12 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		formSpecificData.put("userDefinedConceptUrl", getUserDefinedConceptUrl(vreq));
 		//Add URIs and labels for different services
 		formSpecificData.put("searchServices", ConceptSearchServiceUtils.getVocabSources());
-		
+		List<String> inversePredicate = getInversePredicate(vreq);
+		if(inversePredicate.size() > 0) {
+			formSpecificData.put("inversePredicate", inversePredicate.get(0));
+		} else {
+			formSpecificData.put("inversePredicate", "");
+		}
 		editConfiguration.setFormSpecificData(formSpecificData);
 	}
 	

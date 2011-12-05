@@ -196,7 +196,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	editString += "?role a <" + getRoleType(vreq) + "> .";
     	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?grant .";
     	editString += "?grant a core:Grant ;" +
-    		"core:relatedRole ?role .";
+    		"<" + getGrantToRolePredicate(vreq) + "> ?role .";
     	return editString;
 	}
 	
@@ -650,7 +650,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	}
 	
 	private Object getHasCoPrincipalInvestigatorURI() {
-		return getVivoOntologyCoreNamespace() + "hasPrincipalInvestigatorRole";
+		return getVivoOntologyCoreNamespace() + "hasCo-PrincipalInvestigatorRole";
 	}
 
 
@@ -660,7 +660,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	}
 
 	private Object getHasPrincipalInvestigatorURI() {
-		return getVivoOntologyCoreNamespace() + "hasCo-PrincipalInvestigatorRole";
+		return getVivoOntologyCoreNamespace() + "hasPrincipalInvestigatorRole";
 
 	}
 
