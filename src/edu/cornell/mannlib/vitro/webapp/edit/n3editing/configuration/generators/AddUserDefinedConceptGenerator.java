@@ -235,6 +235,7 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
     	List<String> literalsOnForm = new ArrayList<String>();
     	//The URI of the node that defines the concept
     	urisOnForm.add("conceptNode");
+    	editConfiguration.setUrisOnform(urisOnForm);
     	//In case the user defines a new concept, will add a concept label
     	literalsOnForm.add("conceptLabel");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);

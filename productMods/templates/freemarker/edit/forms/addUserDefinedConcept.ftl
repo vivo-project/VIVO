@@ -21,7 +21,7 @@
 		
 		        <div class="acSelection">
 		            <p class="inline">
-		                <label>Selected Publication:</label>
+		                <label>Selected Concept:</label>
 		                <span class="acSelectionInfo"></span>
 		                <a href="${urls.base}/individual?uri=" class="verifyMatch">(Verify this match)</a>
 		            </p>
