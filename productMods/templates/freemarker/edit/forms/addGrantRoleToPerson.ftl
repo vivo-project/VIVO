@@ -108,7 +108,7 @@
 				<input type="hidden" id="grantLabel"  name="grantLabel" value="${grantLabel}"/>
          </#if>
 
-        <@lvf.acSelection urls.base "grant" "grant" existingGrantValue/>
+        <@lvf.acSelection urls.base "grant" "grant" existingGrantValue "Selected Grant"/>
 
         <h4>Years of Participation in Grant</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>

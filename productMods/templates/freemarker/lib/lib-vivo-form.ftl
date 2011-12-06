@@ -15,10 +15,10 @@
 </#macro>
 
 <#-- After selecting an individual via autocomplete, display highlighted and with verify link -->
-<#macro acSelection urlsBase inputName inputId inputValue>
+<#macro acSelection urlsBase inputName inputId inputValue labelValue="">
 <div class="acSelection">
     <p class="inline">
-        <label></label>
+        <label>${labelValue}</label>
         <span class="acSelectionInfo"></span>
         <a href="${urlsBase}/individual?uri=" class="verifyMatch" title="verify match">(Verify this match)</a>
         </p>
