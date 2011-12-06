@@ -115,9 +115,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
 
@@ -135,9 +135,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
@@ -156,9 +156,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasCo-PrincipalInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 
@@ -178,9 +178,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
 
@@ -199,9 +199,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
@@ -220,9 +220,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasPrincipalInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 
@@ -241,9 +241,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:investigatorRoleOf ?CoPI . " 
 
@@ -262,9 +262,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:co-PrincipalInvestigatorRoleOf ?CoPI . " 
 
@@ -283,9 +283,9 @@ public class CoPIGrantCountQueryRunner implements QueryRunner<CollaborationData>
 			        	
 			+			"<" + queryURI + "> core:hasInvestigatorRole ?Role . "
 
-			+			"?Role core:roleIn ?Grant . "
+			+			"?Role core:roleContributesTo ?Grant . "
 
-			+			"?Grant core:relatedRole ?RelatedRole . "
+			+			"?Grant core:contributingRole ?RelatedRole . "
 
 			+			"?RelatedRole core:principalInvestigatorRoleOf ?CoPI . " 
 

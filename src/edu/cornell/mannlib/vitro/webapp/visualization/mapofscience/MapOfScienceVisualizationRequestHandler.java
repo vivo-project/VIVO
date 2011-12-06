@@ -568,10 +568,12 @@ public class MapOfScienceVisualizationRequestHandler implements
 
 		DecimalFormat percentageActivityFormat = new DecimalFormat("#.#");
 		
-		csvFileContent.append(StringEscapeUtils.escapeCsv("No Publication Venue Given"));
-		csvFileContent.append(", ");
-		csvFileContent.append(percentageActivityFormat.format(stats.noJournalCount));
-		csvFileContent.append("\n");
+		if (stats.noJournalCount > 0) {
+			csvFileContent.append(StringEscapeUtils.escapeCsv("No Publication Venue Given"));
+			csvFileContent.append(", ");
+			csvFileContent.append(percentageActivityFormat.format(stats.noJournalCount));
+			csvFileContent.append("\n");
+		}
 		
 		if (result != null) {
 			
