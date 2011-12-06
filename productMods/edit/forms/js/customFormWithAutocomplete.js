@@ -77,6 +77,14 @@ var customForm = {
                 this.formSteps = 2;
             }
         }
+        
+        //Handles special case such as autocomplete which allows for editing with autocomplete
+        //By default set to false
+        if(!this.supportEdit) {
+        	this.supportEdit = false;
+        } else {
+        	this.supportEdit = true;
+        }
                 
         this.bindEventListeners();
         
@@ -94,11 +102,13 @@ var customForm = {
         
         // Put this case first, because in edit mode with
         // validation errors we just want initFormFullView.
-        if (this.editMode == 'edit' || this.editMode == 'repair') {
+        if ((!this.supportEdit) && (this.editMode == 'edit' || this.editMode == 'repair')) {
             this.initFormFullView();
         }
         else if (this.findValidationErrors()) {
             this.initFormWithValidationErrors();
+        } else if(this.supportEdit && this.editMode == 'edit') {
+        	this.initFormWithSupportEdit();
         }
         // If type is already selected when the page loads (Firefox retains value
         // on a refresh), go directly to full view. Otherwise user has to reselect
@@ -165,6 +175,11 @@ var customForm = {
         }
        
     },
+    initFormWithSupportEdit: function() {
+       this.initFormWithValidationErrors();
+       //Hide verify match when edit mode
+       this.verifyMatch.hide();
+    },
     
     // Bind event listeners that persist over the life of the page. Event listeners
     // that depend on the view should be initialized in the view setup method.
@@ -209,7 +224,7 @@ var customForm = {
     
     initAutocomplete: function() {
 
-        if (this.editMode === 'edit') {
+        if (this.editMode === 'edit' && !this.supportEdit) {
             return;
         }
         
@@ -350,7 +365,10 @@ var customForm = {
         this.acSelector.val(label);        
         this.acSelectionInfo.html(label);
         this.verifyMatch.attr('href', this.verifyMatch.data('baseHref') + uri);
-        
+        //Verify match is hidden in edit mode and support edit so unhide it
+        if(this.editMode == 'edit' && this.supportEdit) {
+        	this.verifyMatch.show();
+        }
         this.setButtonText('existing');            
 
         this.cancel.unbind('click');
@@ -431,6 +449,11 @@ var customForm = {
         if (this.editMode === 'edit') {
             return;
         }  
+        
+        //if support select editing, keep button label same
+        if(this.supportEdit) {
+        	return;
+        }
 
         typeText = this.getTypeNameForLabels();
                 
