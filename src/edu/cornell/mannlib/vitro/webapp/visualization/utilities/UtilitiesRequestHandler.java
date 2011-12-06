@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
+import org.vivoweb.webapp.util.ModelUtils;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.iri.IRI;
@@ -18,6 +19,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.Actions;
+import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.config.ConfigurationProperties;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
@@ -145,18 +147,21 @@ public class UtilitiesRequestHandler implements VisualizationRequestHandler {
 			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
 			
 			String aggregationRules = "(count(DISTINCT ?Grant) AS ?numOfGrants)";
-			
+			String grantType = "http://vivoweb.org/ontology#Grant";
+
+			ObjectProperty predicate = ModelUtils.getPropertyForRoleInClass(grantType, vitroRequest.getWebappDaoFactory());
+			String roleToGrantPredicate = "<" + predicate.getURI() + ">";
 			String whereClause = "{ <" + individualURI + "> rdf:type foaf:Person ;" 
 										+ " core:hasCo-PrincipalInvestigatorRole ?Role . \n"
-									+ "?Role core:roleIn ?Grant . }"
+									+ "?Role " + roleToGrantPredicate + " ?Grant . }"
 									+ "UNION \n"
 									+ "{ <" + individualURI + "> rdf:type foaf:Person ;" 
 										+ " core:hasPrincipalInvestigatorRole ?Role . \n"
-									+ "?Role core:roleIn ?Grant . }"
+									+ "?Role " + roleToGrantPredicate + " ?Grant . }"
 									+ "UNION \n"
 									+ "{ <" + individualURI + "> rdf:type foaf:Person ;" 
 										+ " core:hasInvestigatorRole ?Role . \n"
-									+ "?Role core:roleIn ?Grant . }";
+									+ "?Role " + roleToGrantPredicate + " ?Grant . }";
 
 			QueryRunner<ResultSet> numberOfGrantsQueryHandler = 
 			new GenericQueryRunner(fieldLabelToOutputFieldLabel,
