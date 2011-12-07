@@ -23,8 +23,13 @@
 		<#assign selectedObjectUri = ""/>
 </#if>
 
+<#if editConfiguration.formTitle?contains("collaborator") >
+    <#assign formTitle = "Select an existing Collaborator for ${editConfiguration.subjectName}" />
+<#else>
+    <#assign formTitle = editConfiguration.formTitle />
+</#if>
 
-<h2>${editConfiguration.formTitle}</h2>
+<h2>${formTitle}</h2>
 
 <#if editConfiguration.propertySelectFromExisting = true>
     <#if rangeOptionsExist  = true >
@@ -34,11 +39,9 @@
                 <p>${editConfiguration.propertyPublicDescription}</p>
              </#if>     
              
-             
-             
             <#---This section should become autocomplete instead--> 
             <p>
-								<label for="relatedIndLabel"> ${titleVerb} <span class='requiredHint'> *</span></label>
+								<label for="relatedIndLabel"> ${propertyNameForDisplay?capitalize} Name<span class='requiredHint'> *</span></label>
 								<input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="objectLabel" value="${objectLabel}" />
 						</p>
 								
@@ -68,7 +71,7 @@
         <p> There are no entries in the system from which to select.  </p>  
     </#if>
 </#if>
-
+<p>&nbsp;</p>
 <#if editConfiguration.propertyOfferCreateNewOption = true>
 <#include "defaultOfferCreateNewOptionForm.ftl">
 
@@ -100,7 +103,6 @@
         defaultTypeName: '${propertyNameForDisplay}' // used in repair mode to generate button text
     };
     </script>
-
 
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}

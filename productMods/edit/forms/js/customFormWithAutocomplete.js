@@ -185,6 +185,7 @@ var customForm = {
     	}
        //Disable submit button until selection made
        this.button.attr('disabled', 'disabled');
+       this.button.addClass('disabledSubmit');  // tlw
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
@@ -378,6 +379,7 @@ var customForm = {
         if(this.supportEdit) {
         	//On initialization in this mode, submit button is disabled
         	this.button.removeAttr('disabled');
+        	this.button.removeClass('disabledSubmit');  // tlw
         }
         this.setButtonText('existing');            
 
@@ -408,10 +410,11 @@ var customForm = {
             if (this.formSteps > 1) {
                 this.acSelection.find('label').html('Selected ');
             }
-            
+
             //Resetting so disable submit button again for object property autocomplete
             if(this.supportEdit) {
-            	//this.button.attr('disabled', 'disabled');
+            	this.button.attr('disabled', 'disabled');
+            	this.button.addClass('disabledSubmit');
             }
            
         }      
