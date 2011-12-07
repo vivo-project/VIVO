@@ -10,6 +10,10 @@ function getDisciplineLabelImageURL(key) {
 	return disciplineLabelImageUrlPrefix + DISCIPLINES[key].image;
 }
 
+function getDisciplineBlackLabelImageURL(key) {
+	return disciplineBlackLabelImageUrlPrefix + DISCIPLINES[key].image;
+}
+
 function createScimapType(map, mapName) {
 	var sciMapTypeOptions = {
 		getTileUrl: function(coord, zoom) {

@@ -81,7 +81,7 @@ var ComparisonScimapWidget = Class.extend({
 		
 		/* create */
 		if (me.disciplineLabelsControl == null) {
-			me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map);
+			me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map, getDisciplineBlackLabelImageURL);
 			me.disciplineLabelsControl = new CheckBoxPanel({ 
 				map: map,
 				checked: true,

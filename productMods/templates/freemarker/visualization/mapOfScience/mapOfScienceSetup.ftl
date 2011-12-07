@@ -45,6 +45,7 @@ var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot
 var imageFolderPrefix = "${urls.images}/visualization/";
 var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
 var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
+var disciplineBlackLabelImageUrlPrefix = disciplineLabelImageUrlPrefix + "black/";
 
 var infoIconUrl = "${urls.images}/iconInfo.png";
 var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";

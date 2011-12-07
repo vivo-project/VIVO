@@ -58,9 +58,13 @@ var MarkerManager = Class.extend({
  * Customized Discipline labels MarkerManager for Science map purpose. It is an abstract class 
  */
 var DisciplineLabelsMarkerManager = MarkerManager.extend({
-	init: function(map) {
+	init: function(map, getLabelURL) {
 		this._super();
 		this.map = map;
+		this.getLabelURL = getDisciplineLabelImageURL;
+		if (getLabelURL != null) {
+			this.getLabelURL = getLabelURL;
+		}
 		this.initMarkers(map);
 	},
 	initMarkers: function(map) {
@@ -69,7 +73,7 @@ var DisciplineLabelsMarkerManager = MarkerManager.extend({
 			var opts = {
 					map: map,
 					position: createNoWrapLatLng(discipline.labelLatitude, discipline.labelLongitude),
-					icon: getDisciplineLabelImageURL(id),
+					icon: me.getLabelURL(id),
 					clickable: false
 				};
 			me.addMarker(id, new Marker(opts));
