@@ -183,7 +183,7 @@
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedGrantYear?c}</span>';
+                                        + ' through ${sparklineVO.latestRenderedGrantYear?c}</span>';
                                         
                     if (totalGrants !== totalGrantCount) {
                         sparksText += ' (' + totalGrantCount + ' total)';
@@ -273,7 +273,7 @@
         
             <p> 
                 <#assign tableID = "grant_sparkline_data_table" />
-                <#assign tableCaption = "Grants per year " />
+                <#assign tableCaption = "Grants per year" />
                 <#assign tableActivityColumnName = "Grants" />
                 <#assign tableContent = sparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = sparklineVO.downloadDataLink />

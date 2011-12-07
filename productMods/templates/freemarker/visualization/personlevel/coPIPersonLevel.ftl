@@ -225,13 +225,14 @@ $(document).ready(function(){
         <div class="vis_stats">
         
         <div class="sub_headings" id="table_heading"><h3>Tables</h3></div>
+            <p style="float:left;font-size:.9em">The information in the following tables is for all years.&nbsp;<img class="filterInfoIcon" width="16px" height="16px" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="information icon" title="The spark lines shown above reflect grants through the last complete calendar year. These tables, however, show the grant information for all years, based on the information loaded in the VIVO system." /></p>
         
             <div class="vis-tables">
 
                 <p id="grants_table_container" class="datatable">
 
                 <#assign tableID = "grant_data_table" />
-                <#assign tableCaption = "Grants per year " />
+                <#assign tableCaption = "Grants per year" />
                 <#assign tableActivityColumnName = "Grants" />
                 <#assign tableContent = egoGrantSparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = egoGrantSparklineVO.downloadDataLink />
