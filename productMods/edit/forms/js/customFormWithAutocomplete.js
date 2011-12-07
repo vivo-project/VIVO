@@ -179,6 +179,8 @@ var customForm = {
        this.initFormWithValidationErrors();
        //Hide verify match when edit mode
        this.verifyMatch.hide();
+       //Disable submit button until selection made
+       this.button.attr('disabled', true);
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
@@ -369,6 +371,10 @@ var customForm = {
         if(this.editMode == 'edit' && this.supportEdit) {
         	this.verifyMatch.show();
         }
+        if(this.supportEdit) {
+        	//On initialization in this mode, submit button is disabled
+        	this.button.removeAttr('disabled');
+        }
         this.setButtonText('existing');            
 
         this.cancel.unbind('click');
@@ -398,6 +404,12 @@ var customForm = {
             if (this.formSteps > 1) {
                 this.acSelection.find('label').html('Selected ');
             }
+            
+            //Resetting so disable submit button again for object property autocomplete
+            if(this.supportEdit) {
+            	this.button.attr('disabled', true);
+            }
+           
         }      
     },
     
@@ -491,7 +503,12 @@ var customForm = {
         // First case applies on page load; second case applies when the type gets changed.
         if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {            
         	typeText = this.getTypeNameForLabels();            
-			this.acSelector.val("Select an existing " + typeText + " or create a new one.")
+        	var helpText = "Select an existing " + typeText + " or create a new one.";
+        	//Different for object property autocomplete
+        	if(this.supportEdit) {
+        		helpText = "Select an existing " + typeText;
+        	}
+			this.acSelector.val(helpText)
 		               	   .addClass(this.acHelpTextClass);     
 		}
 	},

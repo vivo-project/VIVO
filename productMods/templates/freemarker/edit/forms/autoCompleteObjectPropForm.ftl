@@ -9,6 +9,10 @@
 <#assign objectTypes = editConfiguration.pageData.objectTypes />
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 <#assign editMode = editConfiguration.pageData.editMode />
+<#assign propertyNameForDisplay = "" />
+<#if editConfiguration.objectPropertyNameForDisplay?has_content>
+	<#assign propertyNameForDisplay = editConfiguration.objectPropertyNameForDisplay />
+</#if>
 <#if editMode = "edit" >
 	<#assign titleVerb = "Edit" />
 	<#assign objectLabel = editConfiguration.pageData.objectLabel />
@@ -88,11 +92,11 @@
         acMultipleTypes: 'true',
         submitButtonTextType: 'simple',
         editMode: '${editMode}',
-        typeName:'object',
+        typeName:'${propertyNameForDisplay}',
         supportEdit: 'true',
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
-        defaultTypeName: 'thing' // used in repair mode to generate button text
+        defaultTypeName: '${propertyNameForDisplay}' // used in repair mode to generate button text
     };
     </script>
 
