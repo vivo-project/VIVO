@@ -97,6 +97,13 @@
         </#if>
     </#local>
 
-    ${resourceTitle} ${citationDetails}  <@dt.yearSpan "${statement.dateTime!}" />
+    <#-- if there's no citation details, we want to strip away the closing period that's placed after the
+         the resource name in the resourceTitle section above
+    -->
+    <#if citationDetails?has_content>
+        ${resourceTitle} ${citationDetails}  <@dt.yearSpan "${statement.dateTime!}" />
+    <#else>
+         ${resourceTitle?substring(0,resourceTitle?last_index_of(".") - 1)}   <@dt.yearSpan "${statement.dateTime!}" />
+    </#if>
 
 </#macro>
