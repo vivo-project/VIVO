@@ -140,7 +140,7 @@ var customFormData  = {
     sparqlQueryUrl: '${urls.base}${sparqlQueryUrl}',
     acUrl: '${urls.base}${acUrl}',
     acType: 'http://vivoweb.org/ontology/core#Grant',
-    editMode: 'add',
+    editMode: '${editMode}',
     submitButtonTextType: 'compound',
     typeName: 'Grant'         
 };
