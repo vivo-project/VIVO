@@ -107,7 +107,7 @@ var customForm = {
         }
         else if (this.findValidationErrors()) {
             this.initFormWithValidationErrors();
-        } else if(this.supportEdit && this.editMode == 'edit') {
+        } else if(this.supportEdit) {
         	this.initFormWithSupportEdit();
         }
         // If type is already selected when the page loads (Firefox retains value
@@ -176,11 +176,15 @@ var customForm = {
        
     },
     initFormWithSupportEdit: function() {
-       this.initFormWithValidationErrors();
-       //Hide verify match when edit mode
-       this.verifyMatch.hide();
+    	if(this.editMode == 'edit') {
+    		this.initFormWithValidationErrors();
+    		//Hide verify match when edit mode
+    		this.verifyMatch.hide();
+    	} else {
+    		 this.initFormFullView();
+    	}
        //Disable submit button until selection made
-       this.button.attr('disabled', true);
+       this.button.attr('disabled', 'disabled');
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
@@ -407,7 +411,7 @@ var customForm = {
             
             //Resetting so disable submit button again for object property autocomplete
             if(this.supportEdit) {
-            	this.button.attr('disabled', true);
+            	//this.button.attr('disabled', 'disabled');
             }
            
         }      

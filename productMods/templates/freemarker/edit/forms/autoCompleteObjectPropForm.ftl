@@ -58,7 +58,8 @@
             
             
             <p>
-                <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button "/>
+                <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button" disabled="disabled"/>
+           
                 <span class="or"> or </span>
                 <a title="Cancel" class="cancel" href="${cancelUrl}">Cancel</a>
             </p>
