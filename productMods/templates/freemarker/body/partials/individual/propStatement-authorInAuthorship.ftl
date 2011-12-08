@@ -16,10 +16,10 @@
 <#macro showAuthorship statement>
     <#local resourceTitle>
         <#if statement.infoResource??>
-            <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>.&nbsp;
+            <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>
         <#else>
             <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>.&nbsp;
+            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>
         </#if>
     </#local>
 
@@ -101,9 +101,9 @@
          the resource name in the resourceTitle section above
     -->
     <#if citationDetails?has_content>
-        ${resourceTitle} ${citationDetails}  <@dt.yearSpan "${statement.dateTime!}" />
+        ${resourceTitle}.&nbsp;${citationDetails}  <@dt.yearSpan "${statement.dateTime!}" />
     <#else>
-         ${resourceTitle?substring(0,resourceTitle?last_index_of(".") - 1)}   <@dt.yearSpan "${statement.dateTime!}" />
+         ${resourceTitle} <@dt.yearSpan "${statement.dateTime!}" />
     </#if>
 
 </#macro>
