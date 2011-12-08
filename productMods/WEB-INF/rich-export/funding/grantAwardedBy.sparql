@@ -10,7 +10,7 @@ CONSTRUCT {
       {PERSON_URI core:hasCo-PrincipalInvestigatorRole ?investigatorRole }   
      }
      
-     ?investigatorRole core:roleIn ?grant .
+     ?investigatorRole core:roleContributesTo ?grant .
      ?grant a core:Grant .
      ?grant core:grantAwardedBy ?awardingOrganization .
      ?awardingOrganization ?p ?o 

@@ -4,6 +4,6 @@ CONSTRUCT {
      ?course ?property ?object .
 } WHERE {
      PERSON_URI core:hasTeacherRole ?teacherRole .
-     ?teacherRole core:roleIn ?course .
+     ?teacherRole core:roleRealizedIn ?course .
      ?course ?property ?object .
 }

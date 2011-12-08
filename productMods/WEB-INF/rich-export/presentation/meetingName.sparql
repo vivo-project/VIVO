@@ -5,7 +5,7 @@ CONSTRUCT {
      ?containingEvent rdfs:label ?containingEventName
 } WHERE {
      PERSON_URI core:hasPresenterRole ?presenterRole .
-     ?presenterRole core:roleIn ?presentation .
+     ?presenterRole core:roleRealizedIn ?presentation .
      ?presentation core:eventWithin ?containingEvent .
      ?containingEvent rdfs:label ?containingEventName
 }

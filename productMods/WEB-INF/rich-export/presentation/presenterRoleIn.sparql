@@ -4,6 +4,8 @@ CONSTRUCT {
      ?presentation ?property ?object .
 } WHERE {
      PERSON_URI core:hasPresenterRole ?presenterRole .
-     ?presenterRole core:roleIn ?presentation .
+     
+     ?presenterRole core:roleRealizedIn ?presentation .
+     
      ?presentation ?property ?object .
 }

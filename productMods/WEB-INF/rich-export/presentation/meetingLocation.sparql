@@ -5,7 +5,7 @@ CONSTRUCT {
      ?location rdfs:label ?locationName .
 } WHERE {
      PERSON_URI core:hasPresenterRole ?presenterRole .
-     ?presenterRole core:roleIn ?presentation .
+     ?presenterRole core:roleRealizedIn ?presentation .
      ?presentation core:eventWithin ?containingEvent .
      ?containingEvent core:hasGeographicLocation ?location .
      ?location rdfs:label ?locationName .
