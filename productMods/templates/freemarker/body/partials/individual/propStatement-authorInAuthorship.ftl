@@ -14,14 +14,6 @@
 <#-- Use a macro to keep variable assignments local; otherwise the values carry over to the
      next statement -->
 <#macro showAuthorship statement>
-    <#local resourceTitle>
-        <#if statement.infoResource??>
-            <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>
-        <#else>
-            <#-- This shouldn't happen, but we must provide for it -->
-            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>
-        </#if>
-    </#local>
 
     <#local citationDetails>
         <#if statement.subclass??>
@@ -97,13 +89,19 @@
         </#if>
     </#local>
 
-    <#-- if there's no citation details, we want to strip away the closing period that's placed after the
-         the resource name in the resourceTitle section above
-    -->
-    <#if citationDetails?has_content>
-        ${resourceTitle}.&nbsp;${citationDetails}  <@dt.yearSpan "${statement.dateTime!}" />
-    <#else>
-         ${resourceTitle} <@dt.yearSpan "${statement.dateTime!}" />
-    </#if>
+    <#local resourceTitle>
+        <#if statement.infoResource??>
+            <#if citationDetails?has_content>
+                <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>.&nbsp;
+            <#else>
+                <a href="${profileUrl(statement.uri("infoResource"))}"  title="resource name">${statement.infoResourceName}</a>
+            </#if>
+        <#else>
+            <#-- This shouldn't happen, but we must provide for it -->
+            <a href="${profileUrl(statement.uri("authorship"))}" title="missing resource">missing information resource</a>
+        </#if>
+    </#local>
+
+    ${resourceTitle} ${citationDetails} <@dt.yearSpan "${statement.dateTime!}" />
 
 </#macro>
