@@ -18,9 +18,9 @@ roleExamples-->
 
 
 <#--Variable assignments for Add Clinical Role To Person-->
-<#assign roleDescriptor = "head of" />
-<#assign typeSelectorLabel = "head of" />
-
+<#assign roleDescriptor = "leadership" />
+<#assign typeSelectorLabel = "organization type" />
+<#assign buttonText = "Leadership Role" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
