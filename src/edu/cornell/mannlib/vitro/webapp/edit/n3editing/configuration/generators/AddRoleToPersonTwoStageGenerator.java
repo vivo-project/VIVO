@@ -128,13 +128,20 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	editConfiguration.setN3Required(list(    	            	        
     	        N3_PREFIX + "\n" +
     	        "?person ?rolePredicate ?role .\n" +
-    	        "?role a ?roleType .\n"+
-    	        "?role " + getRoleToActivityPlaceholder() + " ?roleActivity .\n"+
-    	        "?roleActivity " + getActivityToRolePlaceholder() + " ?role ."
+    	        "?role a ?roleType .\n"
     	));    
     	
     	// Optional N3 
+    	//Note here we are placing the role to activity relationships as optional, since
+    	//it's possible to delete this relationship from the activity
+    	//On submission, if we kept these statements in n3required, the retractions would
+    	//not have all variables substituted, leading to an error
+    	//Note also we are including the relationship as a separate string in the array, to allow it to be
+    	//independently evaluated and passed back with substitutions even if the other strings are not 
+    	//substituted correctly. 
     	editConfiguration.setN3Optional( list(
+    			"?role " + getRoleToActivityPlaceholder() + " ?roleActivity .\n"+
+    	        "?roleActivity " + getActivityToRolePlaceholder() + " ?role .",
     	        "?role ?inverseRolePredicate ?person .",
     	        getN3ForActivityLabel(),
     	        getN3ForActivityType(),                              
