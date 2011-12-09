@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>VIVO Release 1 V1.3 Installation Guide</title>
+        <title>VIVO Release V1.4 Installation Guide</title>
         <link rel="stylesheet" href="./css/doc.css" media="screen">
     </head>
     <body>
@@ -12,132 +12,16 @@
         </div>
         <!-- Start of content -->
         <div id="wrapper-content" role="main">
-            <h1>VIVO Release 1 V1.3 Installation Guide</h1>
-            <small>
-                July 29, 2011 
-            </small>
-            <toc>
-                <ul>
-                    <li>
-                        <a href="#announcement">Release announcement for V1.3</a>
-                    </li>
-                    <li>
-                        <a href="#installation">Installation process for V1.3</a>
-                    </li>
-                </ul>
-            </toc>
-            <!-- Release Announcement --><h2 id="announcement">Release anouncement for V1.3</h2>
-            <!-- Release Announcement -->VIVO Release 1.3 incorporates changes to the search 
-            indexing, user accounts, menu management, ontology, and visualizations, and begins  
-            integration of VIVO Harvester functions with VIVO's own ingest tools. 
-            <br>
-            <h4>Search</h4>
+            <h1>VIVO Release V1.4 Installation Guide</h1>
+            <div>
+                December 10, 2011
+            </div>
+
+
             <p>
-                VIVO 1.3 will feature notable improvements to the local search, primarily to 
-                improve relevance ranking but also to boost the influence of semantic relationships  
-                in the search. This will improve recall by including text from related resources 
-                (e.g., adding a person's grant and publication titles to his or her search entry)  
-                and by boosting overall relevance ranking based on the number and nature of 
-                connections from one individual to others.
-            </p>
-            <p>
-                VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place of 
-                Apache Lucene to improve indexing and faceting of search results. The migration  
-                to Solr also aligns the local search with the VIVO multi-site search site under 
-                development for release prior to the 2011 VIVO Conference.
-            </p>
-            <h4>Authorization</h4>
-            <p>
-                Release 1.3 provides an entirely new model of authorization within the 
-                VIVO application to allow more granular control over system 
-                configuration and editing. The first phase of the new user account  
-                interface is included in V1.3. This interface provides a user search, a 
-                root acount, and password reset functionality where the password gets  
-                emailed to the user. The next phase will provide the ability to create 
-                new roles. 
-            </p>
-            <h4>Menu management</h4>
-            <p>
-                The menus across the top of the site (Home, People, Organizations, 
-                Research, Events) can now be managed in a web form instead of editing  
-                an RDF file. In addition to making site management much easier, 
-                form-based editing also allows more control over what classes of data  
-                are displayed and provides a mechanism to limit certain menu pages to 
-                content identified as internal to the institution. 
-            </p>
-            <h4>FreeMaker template improvements</h4>
-            <p>
-                While less directly visible to the public, version 1.3 also includes 
-                additional changes focused directly on supporting open source community  
-                involvement in extending and customizing VIVO. The development team 
-                began a year ago to transition VIVO&#39;s code base away from Java Server  
-                Pages to the FreeMarker page templating system that much more cleanly 
-                separates internal application programming logic from page display. 
-            </p>
-            <h4>Visualization</h4>
-            <p>
-                The visualization team has implemented a Map of Science visualization,
-                which allows users to visually explore the scientific strengths of a
-                university, school, department, or person in the VIVO instance. Users
-                will be able to see where an organization or person&#39;s interests lay
-                across 13 major scientific disciplines or 554 sub-disciplines, and will 
-                be able to see how these disciplines and sub-disciplines interrelate 
-                with one another on the map of science. Wireframes and design  
-                documentation for upcoming enhanced versions of the Map of Science 
-                visualization have already been developed; the Map of Science  
-                visualization will most likely be in the form of a PDF that a user can 
-                download. 
-            </p>
-            <p>
-                Several visualization also now provide a caching feature that improves 
-                performance after the initial processing. 
-            </p>
-            <h4>QR Codes</h4>
-            <p>
-                Pages for people in VIVO now have an icon for displaying QR codes to allow 
-                capturing names and available contact information on mobile devices.
-            </p>
-            <h4>Harvester Integration</h4>
-            <p>
-                VIVO sites have the option with Release 1.3 of coordinating the configuration 
-                of VIVO and the Harvester to enable many Harvester functions to be initiated  
-                from the VIVO Ingest Tools menu in support of more unified and centralized 
-                management for data ingest. 
-            </p>
-            <h4>Ontology changes</h4>
-            <ul>
-                <li>
-                    support for certifications and licenses 
-                </li>
-                <li>
-                    expanded support for intellectual property (patents) (it was 
-                    there as stub before but didn't allow common things such as assignee  
-                    and issuer) 
-                </li>
-                <li>
-                    support for editorial, reviewing and organizing activities 
-                </li>
-                <li>
-                    expanded shared geographical instance data vocabulary to include 
-                    the 50 U.S. states 
-                </li>
-                <li>
-                    representing specific types of EducationalTraining: 
-                    PostdoctoralTraining, Internship, MedicalResidency 
-                </li>
-            </ul>
-            <h4>Linked open data</h4>
-            <p>
-                Responses to linked data requests have been enhanced to include 
-                additional context about any individual, in working toward a goal of  
-                being able to provide all the data in a person's profile available as 
-                RDF via a single web request. 
-            </p>
-            <br>
-            <hr><!-- Page break --><!-- Installation process for V1.2 --><h2 id="installation">Installation process for V1.3</h2>
-            <p>
-                This document is a summary of the VIVO installation process. This 
-                and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
+                This document is a summary of the VIVO installation
+                process. This and other documentation can be found on
+                the <a href="http://vivoweb.org/support">support page</a>
                 at <a href="http://vivoweb.org">VIVOweb.org</a>
             </p>
             <ul>
@@ -150,14 +34,20 @@
                 </li>
                 <li>
                     If you are going to upgrade an existing service, please consult 
-                    the "upgrade" files in this directory. 
+                    the <a href="upgrades.html">upgrade</a> in this directory. 
+                </li>
+                <li>
+                    If you are intrested in the changes in
+                    VIVO v1.4, please consult the <a href="release.html">VIVO v1.4 Release
+                    Announcement</a>.
+                </li>
+
+                <li>
+                  VIVO Developers: If you are working on the VIVO source code from 
+                  Subversion, the instructions are slightly different. Please consult  
+                  <a href="developers.txt">developers.txt</a> in this directory. 
                 </li>
             </ul>
-            <p>
-                VIVO Developers: If you are working on the VIVO source code from 
-                Subversion, the instructions are slightly different. Please consult  
-                developers.txt in this directory. 
-            </p>
             <h3>Where does VIVO live on your computer?</h3>
             <p>
                 Before beginning the installation, let's look at the four locations 
@@ -253,17 +143,17 @@
             </p>
             <ul>
                 <li>
-                    Java (SE) 1.6 or higher, <a href="http://java.sun.com">http://java.sun.com</a>
+                    Java (SE) 1.6.x* <a href="http://java.sun.com">http://java.sun.com</a>
                     (Not OpenJDK) 
                 </li>
                 <li>
-                    Apache Tomcat 6.x, <a href="http://tomcat.apache.org">http://tomcat.apache.org</a>
+                    Apache Tomcat 6.x or 7.x <a href="http://tomcat.apache.org">http://tomcat.apache.org</a>
                 </li>
                 <li>
                     Apache Ant 1.7 or higher, <a href="http://ant.apache.org">http://ant.apache.org</a>
                 </li>
                 <li>
-                    MySQL 5.1 or higher*, <a href="http://www.mysql.com">http://www.mysql.com</a>
+                    MySQL 5.1 or higher**, <a href="http://www.mysql.com">http://www.mysql.com</a>
                 </li>
             </ul>
             <p>
@@ -274,13 +164,14 @@
                 support websites. 
             </p>
             <p>
-                * Note that VIVO V1.2 or V1.3 will not run on older versions of MySQL that 
-                may have worked with 1.1.1. Be sure to run VIVO 1.2 with MySQL 5.1 or 
-                higher. Using unsupported versions may result in strange error messages  
-                related to table formatting or other unexpected problems. 
+              * Note that vivo does not yet work with Java 1.7
             </p>
             <p>
-                * Note that VIVO is not yet compatible with Tomcat 7. 
+                ** Note that from version V1.2 onward VIVO will does
+                not support older versions of MySQL that 
+                may have worked with 1.1.1. Be sure to use MySQL 5.1 or 
+                higher. Using unsupported versions may result in strange error messages  
+                related to table formatting or other unexpected problems. 
             </p>
             <h3 id="create_database">II. Create an empty MySQL database </h3>
             <p>
@@ -308,8 +199,8 @@
                 <br>
             </h3>
             <p>
-                Download the VIVO application source as either <code>rel-1.3.zip</code>
-                or <code>rel-1.3.gz</code>
+                Download the VIVO application source as either <code>rel-1.4.zip</code>
+                or <code>rel-1.4.gz</code>
                 file and unpack it on your web server: 
                 <br>
                 <a href="http://vivoweb.org/download">http://vivoweb.org/download</a>
@@ -701,7 +592,7 @@
                                     The number of grants and publications is large. 
                                 </li>
                             </ul>
-                            VIVO V1.3 mitigates this problem by the way of a caching 
+                            VIVO V1.4 mitigates this problem by the way of a caching 
                             mechanism and hence we can safely set this to be enabled by default. 
                         </td>
                     </tr>
@@ -753,6 +644,22 @@
                             /usr/local/vivo/harvester/ 
                         </td>
                     </tr>
+
+                    <tr>
+                        <td colspan="2">
+                          Types of individual for which we can create proxy editors.
+                          If this is omitted, defaults to http://www.w3.org/2002/07/owl#Thing
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          proxy.eligibleTypeList
+                        </td>
+                        <td>
+                           http://xmlns.com/foaf/0.1/Person, http://xmlns.com/foaf/0.1/Organization
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
             <h3 id="deploy">V. Compile and deploy</h3>
@@ -792,15 +699,17 @@
             </p>
             <h4>Set security limits</h4>
             <p>
-                VIVO is a multithreaded web application that may 
-                require more threads than are permitted under your Linux installation's 
-                default configuration. Ensure that your installation can support the  
-                required number of threads by making the following edits to <code>/etc/security/limits.conf</code>:
+                VIVO is a multithreaded web application that may
+                require more threads than are permitted under your
+                Linux installation's default configuration. Ensure
+                that your installation can support the required number
+                of threads by making the following edits
+                to <code>/etc/security/limits.conf</code>:
             </p>
             <pre>                    apache	hard	nproc	400<br>                    tomcat6	hard	nproc	1500 <br>                </pre>
             <h4>Set URI encoding</h4>
             <p>
-                In order for Solr to correctly search for international characters (>127), 
+                In order for VIVO on Tomcat to correctly handle for international characters, 
                 you must configure Tomcat to conform to the URI standard by 
                 accepting percent-encoded UTF-8.
             </p>
@@ -819,13 +728,16 @@
             </pre>
             <h4>Take care when creating Context elements</h4>
             <p>
-                Each of the webapps in the VIVO distribution (VIVO and Solr) includes a "context fragment" file,
-                containing some of the deployment information for that webapp.
+                Each of the webapps in the VIVO distribution (VIVO and
+                Solr) includes a "context fragment" file, containing
+                some of the deployment information for that webapp.
             </p>
             <p>
-                Tomcat allows you to override these context fragments by adding Context elements to "server.xml".
-                If you decide to do this, be sure that your new Context element includes the necessary 
-                deployment parameters from the overridden context fragment.
+                Tomcat allows you to override these context fragments
+                by adding Context elements to "server.xml".  If you
+                decide to do this, be sure that your new Context
+                element includes the necessary deployment parameters
+                from the overridden context fragment.
             </p>
             <p>
                 See <a href="#tomcat_connector">Section X</a> below, 
@@ -837,40 +749,63 @@
                 Most Tomcat installations can be started by running <code>startup.sh</code>
                 or <code>startup.bat</code>
                 in Tomcat's bin directory. Point your
-                browser to "http://localhost:8080/vivo/" to test the application. If 
-                Tomcat does not start up, or the VIVO application is not visible, check 
-                the files in Tomcat's logs directory. Error messages are commonly found  
-                in <code>catalina.out</code>
-                or <code>localhost.log</code>
+                browser to "http://localhost:8080/vivo/" to test the
+                application. 
+            </p>
+            <p>
+               On start up VIVO will run some diagnostic tests. If a
+               problem is detected the normal VIVO pages will redirect
+               to a startup status page describing the problem. You
+               can stop tomcat, attempt to fix the problem and
+               proceeded from <a href="#deploy">Section V</a>. The
+               startup status page may offer a continue link which
+               will allow you to use VIVO inspite of the problems.
+
+            <p>
+                If Tomcat does not start up, or the VIVO application
+                is not visible, check the files in Tomcat's logs
+                directory. Error messages are commonly found
+                in <code>tomcat/logs/catalina.out</code>
+                or <code>tomcat/logs/vivo.all.log</code>
+                or <code>tomcat/logs/localhost.log</code>
             </p>
             <h3 id="add_rdf">VIII. Log in and add RDF data </h3>
             <p>
-                If the startup was successful, you will see a welcome message 
-                informing you that you have successfully installed VIVO. Click the "Log  
-                in" link near the upper right corner. Log in with the <code>rootUser.emailAddress</code>
-                you set up in Step IV. The initial password for the root account is 
-                "rootPassword" (without the quotes). On first login, you will be  
-                prompted to select a new password and verify it a second time. When login is 
-                complete, the search index is checked and, if it is empty, 
-                a full index build will be triggered in the background, in order to ensure 
-                complete functionality throughout the site. 
+                If the startup was successful, you will see a welcome
+                message informing you that you have successfully
+                installed VIVO. Click the "Log in" link near the upper
+                right corner. Log in with
+                the <code>rootUser.emailAddress</code> you set up in
+                Step IV. The initial password for the root account is
+                "rootPassword" (without the quotes). On first login,
+                you will be prompted to select a new password and
+                verify it a second time. When login is complete, the
+                search index is checked and, if it is empty, øa full
+                index build will be triggered in the background, in
+                order to ensure complete functionality throughout the
+                site.
             </p>
             <p>
-                After logging in, you will be presented with a
-                menu of editing options. Here you can create OWL classes, object
-                properties, data properties, and configure the display of data.
-                Currently, any classes you wish to make visible on your website must be 
-                part of a class group, and there are a number of visibility and display 
-                options available for each ontology entity. VIVO comes with a core VIVO  
-                ontology, but you may also upload other ontologies from an RDF file. 
+                After logging in, you will be presented with a menu of
+                editing options. Here you can create OWL classes,
+                object properties, data properties, and configure the
+                display of data.  Currently, any classes you wish to
+                make visible on your website must be part of a class
+                group and any individual must have an rdfs:label.
+                There are a number of visibility and display options
+                available for classes and properites. VIVO comes with a
+                core VIVO ontology, but you may also upload other
+                ontologies from an RDF file.
             </p>
             <p>
-                Under the "Advanced Data Tools" click "Add/Remove RDF Data." Note
-                that Vitro currently works best with OWL-DL ontologies and has only
-                limited support for pure RDF data. You can enter a URL pointing to the 
-                RDF data you wish to load or upload from a file on your local machine. 
-                Ensure that the "add RDF" radio button is selected. You will also  
-                likely want to check "create classgroups automatically." 
+                Under the "Advanced Data Tools" click "Add/Remove RDF
+                Data." Note that Vitro currently works best with
+                OWL-DL ontologies and has only limited support for
+                pure RDF data. You can enter a URL pointing to the
+                RDF data you wish to load or upload from a file on
+                your local machine.  Ensure that the "add RDF" radio
+                button is selected. You will also likely want to check
+                "create classgroups automatically."
             </p>
             <p>
                 Clicking the "Index" tab in the navigation bar at the top right of 
@@ -1072,6 +1007,11 @@
                 </li>
             </ul>
             <p>
+              The startup status will indicate if the basic
+              configuration of the system was successful. It can be
+              accessed from <strong>siteAdmin -> Startup status</strong>.
+            </p>
+            <p>
                 Here is a simple test to see whether the ontology files were 
                 loaded: 
             </p>
@@ -1114,12 +1054,11 @@
                     field "URI" - it will be used in the next step. 
                 </li>
                 <li>
-                    Open a new web browser or browser tab to the page <a href="http://marbles.sourceforge.net/">http://marbles.sourceforge.net/</a>.
-                    In
-                    the 
-                    pink 
-                    box on that page enter the URI of the individual you  
-                    created in the previous step and click "open." 
+                    Open a new web browser or browser tab to the
+                    page <a href="http://marbles.sourceforge.net/">http://marbles.sourceforge.net/</a>.
+                    In the pink box on that page enter the URI of the
+                    individual you created in the previous step and
+                    click "open."
                 </li>
                 <li>
                     In the resulting page search for the URI of the "test
@@ -1135,11 +1074,14 @@
             </p>
             <ul>
                 <li>
-                    Type the word "Australia" into the search box, and click on the
-                    Search button.You should see a page of results, with links to countries 
-                    that border Australia, individuals that include Australia, and to 
-                    Australia itself. To trigger the search index, you can log in as a site  
-                    administrator and go to "http://your-vivo-url/SearchIndex". 
+                    Type the word "Australia" into the search box, and
+                    click on the Search button.You should see a page
+                    of results, with links to countries that border
+                    Australia, individuals that include Australia, and
+                    to Australia itself. To trigger the search index,
+                    you can log in as a site administrator and go
+                    to <strong> Site Admin -> Rebuild search
+                    index</strong>.
                 </li>
             </ul>
             <h3 id="termsofuse">XIII. Review the VIVO Terms of Use</h3>
