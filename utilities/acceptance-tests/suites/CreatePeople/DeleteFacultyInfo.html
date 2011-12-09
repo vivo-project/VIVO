@@ -345,23 +345,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to remove this web page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>returnToIndividual</td>
+	<td>id=returnToIndividual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1661,12 +1646,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Subject Area</td>
+	<td>link=Concept</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Subject Area</td>
+	<td>Concept</td>
 	<td></td>
 </tr>
 <tr>
@@ -1731,12 +1716,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Subject Area</td>
+	<td>link=Concept</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Subject Area</td>
+	<td>Concept</td>
 	<td></td>
 </tr>
 <tr>
@@ -1801,12 +1786,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Subject Area</td>
+	<td>link=Concept</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Subject Area</td>
+	<td>Concept</td>
 	<td></td>
 </tr>
 <tr>
@@ -2042,6 +2027,136 @@
 <tr>
 	<td>click</td>
 	<td>_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>jungle</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>jungle - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Jungle 1234, Africa, 1234-56789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jungle 1234, Africa, 1234-56789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>jungle</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>jungle - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=The Jungle, Africa, 12345678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>The Jungle, Africa, 12345678</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
 	<td></td>
 </tr>
 <tr>
