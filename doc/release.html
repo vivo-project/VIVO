@@ -1,154 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
-        <title>VIVO Release 1 V1.4 Announcement</title>
-        <link rel="stylesheet" href="./css/doc.css" media="screen">
-    </head>
-    <body>
-        <div id="branding" role="banner">
-            <h1 class="vivo-logo"><a href="http://vivoweb.org"><span class="displace">VIVO</span></a></h1>
-        </div>
-        <!-- Start of content -->
-        <div id="wrapper-content" role="main">
-            <h1>VIVO Release 1 V1.4 Announcement</h1>
-            <small>
-                December 10, 2011
-            </small>
-            <p>
-            VIVO Release 1.4 incorporates changes to the search 
-            indexing, user accounts, menu management, ontology, and visualizations, and begins  
-            integration of VIVO Harvester functions with VIVO's own ingest tools. 
-            </p>
-            <toc>
-                <ul>
-                    <li>
-                        <a href="#Search">Search</a>
-                    </li>
-                    <li>
-                        <a href="#Authorization">Authorization</a>
-                    </li>
-                    <li>
-                        <a href="#Menu management">Menu management</a>
-                    </li>
-                    <li>
-                        <a href="#FreeMaker template improvements">FreeMaker template improvements</a>
-                    </li>
-                    <li>
-                        <a href="#Visualization">Visualization</a>
-                    </li>
-                    <li>
-                        <a href="#QR Codes">QR Codes</a>
-                    </li>
-                    <li>
-                        <a href="#Harvester Integration">Harvester Integration</a>
-                    </li>
 
-                </ul>
-            </toc>
-            <h4 id="Search">Search</h4>
-            <p>
-                VIVO 1.4 will feature notable improvements to the local search, primarily to 
-                improve relevance ranking but also to boost the influence of semantic relationships  
-                in the search. This will improve recall by including text from related resources 
-                (e.g., adding a person's grant and publication titles to his or her search entry)  
-                and by boosting overall relevance ranking based on the number and nature of 
-                connections from one individual to others.
-            </p>
-            <p>
-                VIVO is now using Apache Solr (http://lucene.apache.org/solr/) in place of 
-                Apache Lucene to improve indexing and faceting of search results. The migration  
-                to Solr also aligns the local search with the VIVO multi-site search site under 
-                development for release prior to the 2011 VIVO Conference.
-            </p>
-            <h4 id="Authorization">Authorization</h4>
-            <p>
-                Release 1.4 provides an entirely new model of authorization within the 
-                VIVO application to allow more granular control over system 
-                configuration and editing. The first phase of the new user account  
-                interface is included in V1.4. This interface provides a user search, a 
-                root acount, and password reset functionality where the password gets  
-                emailed to the user. The next phase will provide the ability to create 
-                new roles. 
-            </p>
-            <h4 id="Menu management">Menu management</h4>
-            <p>
-                The menus across the top of the site (Home, People, Organizations, 
-                Research, Events) can now be managed in a web form instead of editing  
-                an RDF file. In addition to making site management much easier, 
-                form-based editing also allows more control over what classes of data  
-                are displayed and provides a mechanism to limit certain menu pages to 
-                content identified as internal to the institution. 
-            </p>
-            <h4 id="FreeMaker template improvements">FreeMaker template improvements</h4>
-            <p>
-                While less directly visible to the public, version 1.4 also includes 
-                additional changes focused directly on supporting open source community  
-                involvement in extending and customizing VIVO. The development team 
-                began a year ago to transition VIVO&#39;s code base away from Java Server  
-                Pages to the FreeMarker page templating system that much more cleanly 
-                separates internal application programming logic from page display. 
-            </p>
-            <h4 id="Visualization">Visualization</h4>
-            <p>
-                The visualization team has implemented a Map of Science visualization,
-                which allows users to visually explore the scientific strengths of a
-                university, school, department, or person in the VIVO instance. Users
-                will be able to see where an organization or person&#39;s interests lay
-                across 13 major scientific disciplines or 554 sub-disciplines, and will 
-                be able to see how these disciplines and sub-disciplines interrelate 
-                with one another on the map of science. Wireframes and design  
-                documentation for upcoming enhanced versions of the Map of Science 
-                visualization have already been developed; the Map of Science  
-                visualization will most likely be in the form of a PDF that a user can 
-                download. 
-            </p>
-            <p>
-                Several visualization also now provide a caching feature that improves 
-                performance after the initial processing. 
-            </p>
-            <h4 id="QR Codes">QR Codes</h4>
-            <p>
-                Pages for people in VIVO now have an icon for displaying QR codes to allow 
-                capturing names and available contact information on mobile devices.
-            </p>
-            <h4 id="Harvester Integration">Harvester Integration</h4>
-            <p>
-                VIVO sites have the option with Release 1.4 of coordinating the configuration 
-                of VIVO and the Harvester to enable many Harvester functions to be initiated  
-                from the VIVO Ingest Tools menu in support of more unified and centralized 
-                management for data ingest. 
-            </p>
-            <h4 id="Ontology changes">Ontology changes</h4>
-            <ul>
-                <li>
-                    support for certifications and licenses 
-                </li>
-                <li>
-                    expanded support for intellectual property (patents) (it was 
-                    there as stub before but didn't allow common things such as assignee  
-                    and issuer) 
-                </li>
-                <li>
-                    support for editorial, reviewing and organizing activities 
-                </li>
-                <li>
-                    expanded shared geographical instance data vocabulary to include 
-                    the 50 U.S. states 
-                </li>
-                <li>
-                    representing specific types of EducationalTraining: 
-                    PostdoctoralTraining, Internship, MedicalResidency 
-                </li>
-            </ul>
-            <h4 id="Linked open data">Linked open data</h4>
-            <p>
-                Responses to linked data requests have been enhanced to include 
-                additional context about any individual, in working toward a goal of  
-                being able to provide all the data in a person's profile available as 
-                RDF via a single web request. 
-            </p>
-        </div>
-    </body>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>VIVO Release 1 V1.4 Announcement</title>
+    <link rel="stylesheet" href="./css/doc.css" media="screen">
+  </head>
+
+  <body>
+    <div id="branding" role="banner">
+      <h1 class="vivo-logo"><a href="http://vivoweb.org"><span class="displace">VIVO</span></a></h1>
+    </div>
+
+    <div id="wrapper-content" role="main">
+      <h1>VIVO Release 1 V1.4 Announcement</h1>
+      <small>
+        December 10, 2011
+      </small>
+      <toc>
+        <ul> <!-- filled out by js --> </ul>
+      </toc>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Overview"></a>Overview</h4>
+      <p>VIVO 1.4 introduces two significant new features as well as
+        extending development introduced in previous releases. Proxy editing
+        allows any VIVO user to designate another user as his or her proxy for
+        editing, a much-requested feature, and VIVO 1.4 also includes the
+        ability to leverage external terminology services in annotating VIVO
+        entries with terms from controlled vocabularies.</p>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Proxyediting"></a>Proxy editing</h4>
+      <p>VIVO now allows anyone with a VIVO profile to delegate editing
+        privileges for his or her entry to another user, or proxy.
+        Proxy-based editing facilitates adoption and updating of VIVO in
+        settings where researchers do not have the time to maintain their own
+        entries and wish to delegate editing to specific persons.  Proxy
+        editing also supports granting a VIVO user the rights to edit entries
+        for specific organizations, events, or projects, furthering
+        sustainability by controlled distribution of editing
+        responsibility. Proxy privileges can be managed by VIVO administrators
+        on behalf of multiple users or by individual users on their own
+        behalf.</p>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Linkingtoexternalvocabularies"></a>Linking to external vocabularies</h4>
+      <p>Many people have requested support for associating terms from
+        established controlled vocabularies with people, publications, grants,
+        organizations, and other types of data in VIVO. While small,
+        self-contained taxonomies or vocabularies may most easily be imported
+        in their entirety into VIVO, a number of the more popular controlled
+        vocabularies are very large in proportion to the number of terms
+        likely to be referenced within a single VIVO instance. The controlled
+        vocabularies in most active use typically also evolve, and
+        incorporating terms by reference helps keep terms in sync and is more
+        consistent with linked data principles.</p>
+
+      <p>Through one of the 2011 VIVO mini-grants, Stony Brook University's
+        Department of Medical Bioinformatics, led by Dr. Moisés Eisenberg,
+        hosts an RDF version of the National Library of Medicine's Unified
+        Medical Language System or UMLS
+        (<a href="http://www.nlm.nih.gov/research/umls/" class="external-link"
+            rel="nofollow">http://www.nlm.nih.gov/research/umls/</a>).  Stony
+        Brook has developed a web service that accepts incoming term requests
+        from VIVO or other applications and returns one or more matching UMLS
+        concepts with stable URIs. VIVO stores the label associated with the
+        UMLS concept for local searching and display but retains the concept's
+        URI to ensure that references remain unambiguous, even across multiple
+        VIVO instances at different institutions.</p>
+
+      <p>VIVO 1.4 is also configured to allow users to search and reference
+        terms in AGROVOC, a comprehensive thesaurus of over 40,000 concepts in
+        more than 20 languages developed by the United Nations Food and
+        Agriculture Organization
+        (<a href="http://aims.fao.org/website/AGROVOC-Thesaurus"
+            class="external-link"
+            rel="nofollow">http://aims.fao.org/website/AGROVOC-Thesaurus</a>). The
+        interface from VIVO to the UMLS and AGROVOC services has been
+        implemented to allow linking to additional vocabulary services with a
+        minimum of additional programming effort, and we hope to offer
+        additional choices in upcoming releases.</p>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Freemarkerconversion"></a>Freemarker conversion</h4>
+      <p>VIVO 1.4 continues the major effort begun with version 1.2 and
+        continued in 1.3 to convert VIVO's entire user-facing code base from
+        Java Server Pages (JSPs) to FreeMarker, the Java template engine
+        library (<a href="http://freemarker.sourceforge.net/"
+                    class="external-link"
+                    rel="nofollow">http://freemarker.sourceforge.net/</a>). FreeMarker
+        more cleanly separates internal application programming logic from
+        page display, making the VIVO application more understandable and
+        extensible, especially for developers new to VIVO.</p>
+
+      <p>With VIVO 1.4 the entire user-facing editing system has been
+        refactored to simplify the configuration of custom forms and allow
+        more rigorous code testing and data verification; we expect this
+        refactoring to significantly lower the effort required to add new
+        editing forms or modify existing forms, for the ultimate benefit of
+        both casual and regular content editors.</p>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Visualizations"></a>Visualizations</h4>
+      <p>The VIVO 1.4 release features a novel science maps visualization
+        that supports the comparison of publication profiles of up to three
+        organizations.</p>
+
+      <p>All science map visualizations now feature the updated basemap of
+        science that uses 10 years of publication data (2001-2010) from
+        Elsevier's Scopus and Thomson Reuters' Web of Science.  The UCSD map
+        was originally created by the Regents of the University of California
+        and SciTech Strategies in 2008. It was updated by SciTech Strategies,
+        L'Observatoire des sciences et des technologies, and Indiana
+        University's Cyberinfrastructure for Network Science Center (CNS) in
+        2011.</p>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Ontologychanges"></a>Ontology changes</h4>
+      <p>Ontology changes from 1.3 to 1.4 were relatively minor, including
+        an update to the Geopolitical Ontology and changes to support linking
+        to external vocabulary references as described above. Changes for each
+        release are documented on the VIVO wiki on Sourceforge
+        at <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Ontology"
+              class="external-link"
+              rel="nofollow">http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Ontology</a>.</p>
+
+      <p>With version 1.4, the VIVO ontology will be submitted to the
+        Bioportal (<a href="http://www.bioontology.org/bioportal"
+                      class="external-link"
+                      rel="nofollow">http://www.bioontology.org/bioportal</a>), an open
+        repository of ontologies hosted by the National Center for Biomedical
+        Ontology, to facilitate access and dissemination.</p>
+
+      <h4><a name="VIVORelease1.4AnnouncementDRAFT-Vitroasastandaloneapplication"></a>Vitro as a standalone application</h4>
+      <p>VIVO extends the underlying Vitro open-source semantic web
+        application with the VIVO ontology, software customizations specific
+        to the VIVO ontology, and visual theming.  With version 1.4 of VIVO,
+        the underlying Vitro software has been packaged for use independently
+        of the VIVO ontology. Vitro supports ontology creation and editing as
+        well as importing existing ontologies, and is an excellent tool for
+        populating ontologies with instance data, for publishing RDF as linked
+        data, and for hands-on teaching about ontologies and semantic web
+        concepts.</p>
+    </div>
+
+    <div id="footer" role="contentinfo">
+      <p class="copyright">
+        <small>
+          All Rights Reserved <a href="license.txt">see license</a>
+        </small>              
+      </p>
+      <div id="nav" role="navigation">
+        <ul id="footer-nav" role="list">
+          <li role="listitem">
+            <a href="http://vivoweb.org/about">About</a>
+          </li>
+          <li role="listitem">
+            <a href="http://vivoweb.org/contact">Contact Us</a>
+          </li>
+          <li role="listitem">
+            <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      
+      function init(){
+
+        //fill out TOC
+        var tocList = document.querySelector('toc>ul');
+        var h4Anchors = document.querySelectorAll('a[name]');
+        
+        for( var i = 0 ; i < h4Anchors.length ; i++){
+          var a = document.createElement('a');
+          a.href= '#' + h4Anchors[i].name;
+          a.textContent = h4Anchors[i].parentNode.textContent
+          var li = document.createElement('li');
+          li.appendChild( a );
+          tocList.appendChild(li);
+        }
+        
+      }
+      window.onload = init;
+    </script>
+
+  </body>
 </html>
