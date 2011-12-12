@@ -1,0 +1,222 @@
+List view configuration guidelines
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-------------------------
+REGISTERING THE LIST VIEW
+-------------------------
+
+A custom list view is associated with an object property in the RDF files in
+the directory /vivo/productMods/WEB-INF/ontologies/app/loadedAtStartup. 
+To register a list view, create a new .rdf or .n3 file in that directory.  
+The file must be well formed RDF/XML or N3.
+ 
+Example of registering a new association in a file named newListViews.n3:
+
+    <http://vivoweb.org/ontology/core#authorInAuthorship>
+    <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#listViewConfigFile>
+    "listViewConfig-authorInAuthorship.xml" .
+
+Place this file in /vivo/productMods/WEB-INF/ontologies/app/loadedAtStartup, 
+redeploy and restart tomcat to put the new custom list view in effect.    
+ 
+
+-----------------
+REQUIRED ELEMENTS
+-----------------
+
+- list-view-config: root element
+- query-select: sparql query used to retrieve data
+- template: the name of the template used to display a single property statement
+
+
+-----------------
+OPTIONAL ELEMENTS
+----------------- 
+   
+- query-construct: one or more construct queries used to construct a model that the
+                   select query is run against 
+- postprocessor: a Java class that postprocesses the data retrieved from the query before
+                 sending it to the template. If no postprocessor is specified, the default
+                 postprocessor will be invoked.
+                 
+                 
+-----------------
+CONSTRUCT QUERIES
+-----------------                
+
+- Because SPARQL queries with multiple OPTIONAL clauses are converted to highly inefficient
+SQL by the Jena API, one or more construct queries should be included to improve query
+performance. They are used to construct a model significantly smaller than the entire 
+dataset that the select query can be run against with reasonable performance. 
+
+- The construct queries themselves should not contain multiple OPTIONAL clauses, to prevent
+the same type of inefficiency. Instead, use multiple construct queries to construct a 
+model that includes all the necessary data.
+
+- In the absence of any construct queries, the select query is run against the
+entire dataset. If your select query does not involve a lot of OPTIONAL clauses, you do not
+need to include construct queries.
+
+- The construct queries must be designed to collect all the data that the
+select query will request. They can be flexibly constructed to contain more data than
+is currently selected, to allow for possible future expansion of the SELECT and to
+simplify the WHERE clause. For example, one of the construct queries for core:hasRole 
+includes:
+
+CONSTRUCT { 
+    ?role ?roleProperty ?roleValue . 
+    ...
+} WHERE {
+    ?role ?roleProperty ?roleValue . 
+    ...
+}
+    
+That is, it includes all the properties of the role, rather than just those currently
+selected by the select query.
+
+- The ordering of the construct queries is not significant.
+               
+               
+----------------
+THE SELECT QUERY
+----------------
+
+---------------------------------
+General select query requirements
+---------------------------------
+
+- Use a SELECT DISTINCT clause rather than a simple SELECT. There can still be cases where 
+the same individual is retrieved more than once, if there are multiple solutions to the
+other assertions, but DISTINCT provides a start at uniqueness.
+      
+- The WHERE clause must contain a statement ?subject ?property ?object, with the variables
+?subject and ?property named as such. For a default list view, the ?object variable must
+also be named as such. For a custom list view, the object can be given any name, but it must be 
+included in the SELECT terms retrieved by the query. This is the statement that will be edited 
+from the edit links.
+
+
+------------------------------------------------------------
+Data which is required in public view, optional when editing
+------------------------------------------------------------
+
+- Incomplete data can result in a missing linked individual or other critical data (such as
+  a URL or anchor text on a link object). When the user has editing privileges on the page,
+  these statements are displayed so that the user can edit them and provide the missing data.
+  They should be hidden from non-editors. Follow these steps in the select query to ensure
+  this behavior:
+
+    - Enclose the clause for the linked individual in an OPTIONAL block.
+     
+    - Select the object's localname using the ARQ localname function, so that the template can 
+      display the local name in the absence of the linked individual. Alternatively, this can be 
+      retrieved in the template using the localname(uri) method. 
+      
+    - Require the optional information in the public view by adding a filter clause which ensures
+      that the variable has been bound, inside tag <critical-data-required>. For example:
+      
+      OPTIONAL { ?authorship core:linkedInformationResource ?infoResource }
+      
+      This statement is optional because when editing we want to display an authorship that
+      is missing a link to an information resource.
+      
+      Then add:
+      
+      <critical-data-required>
+      FILTER ( bound(?infoResource) )
+      </critical-data-required>
+      
+      The Java code will preprocess the query to remove the <critical-data-required> tag, 
+      either retaining its text content (in public view) or removing the content (when
+      editing), so that the appropriate query is executed.
+      
+    
+-------------------------------
+Collated vs. uncollated queries
+-------------------------------
+
+- The query should contain <collated> elements, which are used when the property is 
+collated. For uncollated queries, the fragments are removed by a query preprocessor. Since any 
+ontology property can be collated in the Ontology Editor, all queries should contain the 
+following <collated> elements:
+
+    - A ?subclass variable, named as such, in the SELECT clause. If the ?subclass variable
+    is missing, the property will be displayed without collation.
+
+        SELECT DISTINCT <collated> ?subclass </collated> ...
+
+    - ?subclass must be the first term in the ORDER BY clause.
+
+        ORDER BY <collated> ?subclass </collated> ...
+
+    - Include the following in the WHERE clause, substituting in the relevant variables for
+    ?infoResource and core:InformationResource:
+
+        <collated>
+        OPTIONAL { ?infoResource a ?subclass                   
+                   ?subclass rdfs:subClassOf core:InformationResource .
+        }  
+        </collated>
+    
+- Postprocessing removes all but the most specific subclass value from the query result set.
+
+- Alternatively (and preferably):
+        <collated>
+        OPTIONAL { ?infoResource vitro:mostSpecificType ?subclass                   
+                   ?subclass rdfs:subClassOf core:InformationResource .
+        }  
+        </collated>
+
+  Automatic postprocessing to filter out all but the most specific subclass will be removed 
+  in favor of this implementation in the future.
+
+- Both collated and uncollated versions of the query should be tested, since the collation value
+  is user-configurable via the ontology editor.
+
+----------------------
+Datetimes in the query
+----------------------
+
+- To retrieve a datetime interval, use the following fragment, substituting the appropriate variable for
+?edTraining:
+
+    OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
+               OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
+                          ?dateTimeStartValue core:dateTime ?dateTimeStart 
+               }
+               OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .   
+                          ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+               }                                       
+    }    
+
+- The variables ?dateTimeStart and ?dateTimeEnd are included in the SELECT clause.
+
+- Many properties that retrieve dates order by end datetime descending (most recent first). In this
+case, a postprocessor must apply to sort null values at the top rather than the bottom of the list, 
+which is the ordering returned by the SPARQL ORDER BY clause in the case of nulls in a descending order.
+In that case, the variable names must be exactly as shown to allow the postprocessor to do its work.
+   
+    
+------------
+THE TEMPLATE
+------------
+
+- To ensure that values set in the template on one iteration do not bleed into the next statement:
+    - The template should consist of a macro that controls the display, and a single line that invokes the macro.
+    - Variables defined inside the macro should be defined with <#local> rather than <#assign>.
+
+- To allow for a missing linked individual, the template should include code such as:
+    <#local linkedIndividual>
+        <#if statement.org??>
+            <a href="${url(statement.org)}">${statement.orgName}</a>
+        <#else>
+            <#-- This shouldn't happen, but we must provide for it -->
+            <a href="${url(statement.edTraining)}">${statement.edTrainingName}</a> (no linked organization)
+        </#if>
+    </#local>
+        
+The query must have been constructed to return orgName (see above under "General select query requirements"), 
+or alternatively the template can use the localname function: ${localname(org)}.
+
+- If a variable is in an OPTIONAL clause in the query, the display of the value in the template should 
+include the default value operator ! to prevent an error on null values.
