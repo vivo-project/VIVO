@@ -33,8 +33,9 @@ http://vivoweb.org/ontology/core#realizedRole and http://vivoweb.org/ontology/co
                        OPTIONAL { ?subclass rdfs:label ?roleTypeLabel }
                        ?roleProp rdfs:subPropertyOf core:roleOf ;
                                  rdfs:domain ?subclass . 
-                       ?role ?roleProp ?indivInRole 
-                       OPTIONAL { ?indivInRole rdfs:label ?indivLabel } 
+                       OPTIONAL { ?role ?roleProp ?indivInRole 
+                                  OPTIONAL { ?indivInRole rdfs:label ?indivLabel }
+                                } 
             }
 
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
