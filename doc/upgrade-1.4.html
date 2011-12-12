@@ -31,7 +31,7 @@
                 or software requirements for V1.4). 
             </p>
             <p>
-              For a description of the release contents see the <a href="TODOaddLinkToAnnouncement">Release announcement for V1.4</a>.
+              For a description of the release contents see the <a href="./release.html">Release announcement for V1.4</a>.
             </p> 
             <hr/>
             <!-- Upgrade process for V1.4 --><h3 id="tableofcontents">Table of Contents</h3>
@@ -85,16 +85,19 @@
             <hr/>
             <h3 id="preparation">I. Before Performing the Upgrade</h3>
             <br/>
-                Create backups of the: 
+                Create backups of: 
             <ul style="list-style-type: square;">
                 <li>
-                    Tomcat webapps directory 
+                    The VIVO distribution directory (which contains the source for VIVO 1.3)
                 </li>
                 <li>
-                    Original source directory  (TODO: I think we should specifically name the directory (I don't know what's intended) sjm) 
+                    The VIVO home directory (pointed to by your deploy.properties file)
                 </li>
                 <li>
-                    MySQL database (mysqldump) 
+                    The webapps directory in Tomcat 
+                </li>
+                <li>
+                    MySQL database (most people use mysqldump to create the backup) 
                 </li>
             </ul>
             <p>
@@ -122,37 +125,37 @@
             </ul>
 
             <h3 id="changes">II. Noteworthy Changes</h3>
-            
-                <p>(TOTO: I think this should contain only changes to the upgrade process itself. Changes to the source code that are too detailed for the release announcement could go in
-                an appendix (final section) to this document until such time as there is an granual release changes document.</p>
-                
-                <h4 id="template_changes">i. Template changes
-                </h4>
-                <ul>
-	                <li><code>${stylesheets.list}</code>, <code>${scripts.list}</code>, and <code>${headscripts.list}</code> have changed to 
-	                    <code>${stylesheets.list()}</code>, <code>${scripts.list()}</code>, and <code>${headscripts.list()}</code>, respectively.
-	                </li>
-                (ryounes)
-                </ul>
-
-                <h4 id="proxy_editing">ii. Profile editing by Proxies
-                </h4>
-                <ul>
-	                <li>addition to deploy.properties</li>
-	                <li> What types of individuals may have proxy editors?
-	                <pre>proxy.eligibleTypeList = http://xmlns.com/foaf/0.1/Person, http://xmlns.com/foaf/0.1/Organization</pre>
-	                </li>
-                (jblake)
-                </ul>
-            
-                <h4 id="tomcat_setup">iii. Change to Tomcat configuration
-                </h4>
-                <ul>
-                    <li>Tomcat configuration</hli>
-                    <li>Specify URI encoding
-                    </li>
-                </ul>
-                (jblake)
+            	<ul>
+            	    <li>
+                	    <h4>New property in deploy.properties</h4>
+                	    <p>
+            	            <code>proxy.eligibleTypeList</code> describes which classes of Individuals are 
+             	            eligible for "self-editing" by proxy.
+             	            See the table in <a href="upgrade_process">Section III</a> for more details.
+             	        </p>
+                	</li>
+            	    <li>
+                	    <h4>Change to Tomcat configuration</h4>
+                        <p>
+                            In order for VIVO to correctly handle international characters,
+                            you must configure Tomcat to conform to the URI standard by
+                            accepting percent-encoded UTF-8.
+                        </p>
+                        <p>
+                            Edit Tomcat's conf/server.xml and add the following attribute to each of the
+                            Connector elements: URIEncoding="UTF-8".
+                        </p>
+                        <pre>
+                    &lt;Server ...&gt;
+                      &lt;Service ...&gt;
+                        &lt;Connector ... URIEncoding="UTF-8"/&gt;
+                          ...
+                        &lt;/Connector&gt;
+                      &lt;/Service&gt;
+                    &lt;/Server&gt;
+                        </pre>
+                	</li>
+               </ul>
 
             <h3 id="upgrade_process">III. The Upgrade Process</h3>
                 <p>
@@ -587,6 +590,20 @@
                         </td>
                         <td>
                             /usr/local/vivo/harvester/ 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                          Types of individual for which we can create proxy editors.
+                          If this is omitted, defaults to http://www.w3.org/2002/07/owl#Thing
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          proxy.eligibleTypeList
+                        </td>
+                        <td>
+                           http://xmlns.com/foaf/0.1/Person, http://xmlns.com/foaf/0.1/Organization
                         </td>
                     </tr>
                 </tbody>
