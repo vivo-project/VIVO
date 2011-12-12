@@ -36,10 +36,6 @@
             <hr/>
             <!-- Upgrade process for V1.4 --><h3 id="tableofcontents">Table of Contents</h3>
             <toc>
-                <ol class="roman1">
-                    <li>
-                        <a>Upgrade process for V1.4</a>
-                        <br>
                         <ol class="roman2">
                            <li>
                               <a href="#preparation">Before Performing the Upgrade</a>
@@ -49,18 +45,15 @@
                               <br>
 	                          <ol class="roman2">
 	                             <li>
-	                               <a href="#template_changes">Template changes</a>
+	                               <a href="#newproperty">New Property in deploy.properties</a>
 	                             </li>
 	                             <li>
-	                               <a href="#proxy_editing">Profile editing by Proxies</a>
-	                             </li>
-	                             <li>
-	                               <a href="#tomcat_setup">Change to Tomcat configuration</a>
+	                               <a href="#changetoconfig">Change to tomcat configuration</a>
 	                             </li>
 	                          </ol>
                            </li>
                            <li>
-                             <a href="#upgrade_process">The Upgrade Process</a>
+                             <a href="#upgrade_process">Upgrade Instructions</a>
                            </li>
                            <li>
                               <a href="#kbm">Knowledge Base Migration</a>
@@ -73,7 +66,6 @@
                                 </li>
                               </ol>
                            </li>
-                        </ol>
                     <li>
                         <a href="#termsofuse">Review the VIVO Terms of Use</a>
                     </li>
@@ -127,7 +119,7 @@
             <h3 id="changes">II. Noteworthy Changes</h3>
             	<ul>
             	    <li>
-                	    <h4>New property in deploy.properties</h4>
+                	    <h4 id="newproperty">New property in deploy.properties</h4>
                 	    <p>
             	            <code>proxy.eligibleTypeList</code> describes which classes of Individuals are 
              	            eligible for "self-editing" by proxy.
@@ -135,7 +127,7 @@
              	        </p>
                 	</li>
             	    <li>
-                	    <h4>Change to Tomcat configuration</h4>
+                	    <h4 id="changetoconfig">Change to Tomcat configuration</h4>
                         <p>
                             In order for VIVO to correctly handle international characters,
                             you must configure Tomcat to conform to the URI standard by
@@ -157,7 +149,7 @@
                 	</li>
                </ul>
 
-            <h3 id="upgrade_process">III. The Upgrade Process</h3>
+            <h3 id="upgrade_process">III. Upgrade Instructions</h3>
                 <p>
                     1. Download the new distribution file and unpack it into a new 
                     source directory. 
