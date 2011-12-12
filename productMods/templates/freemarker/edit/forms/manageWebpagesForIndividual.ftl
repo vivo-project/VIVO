@@ -22,11 +22,11 @@
     var webpageData = [];
 </script>
 
+<#if !editConfiguration.pageData.webpages?has_content>
+    <p>This individual currently has no web pages specified. Add a new web page by clicking on the button below.</p>
+</#if>
+
 <ul id="webpageList" ${ulClass} role="list">
-    <#if !editConfiguration.pageData.webpages?has_content>
-        <p>This individual currently has no web pages specified. Add a new web page by clicking on the button below.</p>
-    </#if>
-   
     <#list editConfiguration.pageData.webpages as webpage>
         <li class="webpage" role="listitem">
             <#if webpage.anchor??>
@@ -55,8 +55,7 @@
 <section id="addAndCancelLinks" role="section">
     <#-- There is no editConfig at this stage, so we don't need to go through postEditCleanup.jsp on cancel.
          These can just be ordinary links, rather than a v:input element, as in 
-         addAuthorsToInformationResource.jsp. -->
-    <br />     
+         addAuthorsToInformationResource.jsp. -->   
     <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="add new web page">Add New Web Page</a>
        
     <a href="${cancelUrl}" id="returnToIndividual" class="return" title="return to individual">Return to Individual</a>
