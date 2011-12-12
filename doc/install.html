@@ -434,10 +434,9 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Specify the maximum number of active connections 
-                            in the database connection pool to support the anticipated number of 
-                            concurrent page requests. It is not necessary to adjust this value when  
-                            using the RDB configuration. 
+                            Specify the maximum number of active connections
+                            in the database connection pool to support the anticipated number of
+                            concurrent page requests.
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -649,11 +648,6 @@
             </p>
             <h3 id="tomcat_settings">VI. Configure Tomcat</h3>
             <h4>Set JVM parameters</h4>
-            <p>
-                VIVO copies small sections of your RDF database into 
-                memory in order to serve Web requests quickly (the in-memory copy and  
-                the underlying database are kept in synch as edits are performed). 
-            </p>
             <p>
                 VIVO may require more memory than that allocated to Tomcat by 
                 default. With most installations of Tomcat, the "setenv.sh" or 
