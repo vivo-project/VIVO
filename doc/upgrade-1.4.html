@@ -16,19 +16,9 @@
             <small>
                 December 9, 2011 - Upgrading from Release 1 V1.3 to Release 1 V1.4
             </small>
-            <toc>
-                <ul>
-                    <li>
-                        <a href="#announcement">Release announcement for V1.4</a>
-                    </li>
-                    <li>
-                        <a href="#upgrade">Upgrade process for V1.4</a>
-                    </li>
-                </ul>
-            </toc>
             <p>
-                This document provides a short description of the steps involved in 
-                upgrading your installation of VIVO from Version 1.3 to Version 1.4.  
+                This document contains instructions on how to upgrade your 
+                installation of VIVO from Version 1.3 to Version 1.4.  
                 This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
                 at <a href="http://vivoweb.org/">VIVOweb.org</a>
             </p>
@@ -40,108 +30,102 @@
                 list of the required software and versions (there are no new hardware  
                 or software requirements for V1.4). 
             </p>
-            <h3 id="announcement">Release Announcement for V1.4</h3>
-            <!-- Release Announcement -->
-            <p><em>TBD</em></p> 
-            <br>
- 
-            <hr><!-- Page break --><!-- Upgrade process for V1.4 --><h2 id="upgrade">Upgrade process for V1.4</h2>
+            <p>
+              For a description of the release contents see the <a href="TODOaddLinkToAnnouncement">Release announcement for V1.4</a>.
+            </p> 
+            <hr/>
+            <!-- Upgrade process for V1.4 --><h3 id="tableofcontents">Table of Contents</h3>
             <toc>
                 <ol class="roman1">
                     <li>
-                        <a href="#preparation">Before Performing the Upgrade</a>
-                    </li>
-                    <li>
-                        <a href="#changes">Noteworthy Changes</a>
+                        <a>Upgrade process for V1.4</a>
                         <br>
-	                    <ol class="roman2">
-	                        <li>
-	                            <a href="#template_changes">Template changes</a>
-	                        </li>
-	                        <li>
-	                            <a href="#proxy_editing">Profile editing by Proxies</a>
-	                        </li>
-	                        <li>
-	                            <a href="#tomcat_setup">Change to Tomcat configuration</a>
-	                        </li>
-	                    </ol>
-                    </li>
-                    <li>
-                        <a href="#upgrade_process">The Upgrade Process</a>
-                    </li>
-                    <li>
-                        <a href="#ontology">Ontology Changes</a>
-                        <ol class="roman3">
-                            <li>
-                                <a href="#verify_ontology_upgrade">Verify
-                                    Ontology upgrade process</a>
-                            </li>
-                            <li>
-                                <a href="#ontology_knowledge_base">Ontology
-                                    knowledge
-                                    base
-                                    manual review</a>
-                            </li>
+                        <ol class="roman2">
+                           <li>
+                              <a href="#preparation">Before Performing the Upgrade</a>
+                           </li>
+                           <li>
+                              <a href="#changes">Noteworthy Changes</a>
+                              <br>
+	                          <ol class="roman2">
+	                             <li>
+	                               <a href="#template_changes">Template changes</a>
+	                             </li>
+	                             <li>
+	                               <a href="#proxy_editing">Profile editing by Proxies</a>
+	                             </li>
+	                             <li>
+	                               <a href="#tomcat_setup">Change to Tomcat configuration</a>
+	                             </li>
+	                          </ol>
+                           </li>
+                           <li>
+                             <a href="#upgrade_process">The Upgrade Process</a>
+                           </li>
+                           <li>
+                              <a href="#kbm">Knowledge Base Migration</a>
+                              <ol class="roman3">
+                                <li>
+                                    <a href="#verifymigration">Knowledge Base Migration Process</a>
+                                </li>
+                                <li>
+                                    <a href="#reviewkbm">Knowledge Base Manual Review for Local Extensions</a>
+                                </li>
+                              </ol>
+                           </li>
                         </ol>
-                    </li>
                     <li>
                         <a href="#termsofuse">Review the VIVO Terms of Use</a>
                     </li>
+                    <li>
+                        <a href="#nextsteps">Next Steps</a>
+                    </li>
                 </ol>
             </toc>
-
+            <hr/>
             <h3 id="preparation">I. Before Performing the Upgrade</h3>
-            <p>
-                Please ensure that backups are created of the: 
-            </p>
+            <br/>
+                Create backups of the: 
             <ul style="list-style-type: square;">
                 <li>
                     Tomcat webapps directory 
                 </li>
                 <li>
-                    Original source directory 
+                    Original source directory  (TODO: I think we should specifically name the directory (I don't know what's intended) sjm) 
                 </li>
                 <li>
                     MySQL database (mysqldump) 
                 </li>
             </ul>
             <p>
-                The upgrade process is similar to the original install process 
+                The upgrade process is similar to the initial install process 
                 with  
-                the following EXCEPTIONS: 
+                the following exceptions: 
             </p>
             <ul>
                 <li>
-                    If you are still in RDB mode, it is required that you move 
-                    your  
-                    triple store to SDB while still at V1.2 (see <a href="#triple_store">Triple
-                        Store</a>
-                    info below).&nbsp; 
-                    <br>
-                </li>
-                <li>
-                    DO NOT reinstall MySQL or recreate the MySQL database. Please 
-                    ensure that you back-up the MySQL database. 
-                </li>
-                <li>
-                    It is not necessary to add RDF data. 
+                    You do not need to reinstall MySQL or recreate the MySQL database. Please 
+                    backup your MySQL database as noted above. 
                 </li>
                 <li>
                     First-time login of the root account after the upgrade  
-                    process is complete will use the password previously set, NOT the 
+                    process is complete will use the password previously set (not the 
                     default password used on the first login after the initial  
-                    installation. 
+                    installation.) 
                 </li>
                 <li>
-                    The first time Apache Tomcat starts up after the upgrade, it 
-                    will initiate a process that modifies the knowledge base to align the  
-                    data with the revised ontology. See the section on the <a href="#ontology">Ontology Upgrade</a>
-                    below for more information. 
+                    The first time Apache Tomcat starts up after the upgrade, an automated 
+                    process will modify the knowledge base to align the  
+                    data with any ontology updates made for the new release. See the section on the <a href="#ontology">Ontology Upgrade</a>
+                    below for more information. Note that 
                 </li>
             </ul>
 
             <h3 id="changes">II. Noteworthy Changes</h3>
             
+                <p>(TOTO: I think this should contain only changes to the upgrade process itself. Changes to the source code that are too detailed for the release announcement could go in
+                an appendix (final section) to this document until such time as there is an granual release changes document.</p>
+                
                 <h4 id="template_changes">i. Template changes
                 </h4>
                 <ul>
@@ -176,9 +160,8 @@
                     source directory. 
                 </p>
                 <p>
-                    2. Create a new deploy.properties using the same values as in 
-                    your  
-                    previous installation and set values for the new variables as described 
+                    2. Create a new deploy.properties using the same settings as in 
+                    your previous installation and set values for the new variables as described 
                     below (vitro.local.solr.url, vitro.local.solr.ipaddress.mask,  
                     vitro.home.directory, email.smptHost, email.replyTo, 
                     rootUser.emailAddress) 
@@ -650,12 +633,6 @@
                     </ul>
                 </blockquote>
                 <p>
-                    4. If you had modified <code>web.xml</code>
-                    to configure the 
-                    Pellet Reasoner (as described in the installation instructions), repeat  
-                    that modification. 
-                </p>
-                <p>
                     5. Stop Apache Tomcat and from your VIVO source directory, run 
                     ant  
                     by typing: <code>ant all</code>
@@ -671,13 +648,12 @@
                     Go to the "Site Admin" page and click on "Rebuild Search Index" under the  
                     heading "Refresh Content". 
                 </p>
-                <h3 id="ontology">IV. Ontology Changes</h3>
-                <h4 id="verify_ontology_upgrade">i. Verify Ontology upgrade process</h4>
                 <p>
-                    After Apache Tomcat is started, these files should be reviewed to 
-                    verify that the automated upgrade process was executed  
-                    successfully.&nbsp; The ontology alignment process will create the 
-                    following files in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
+                    8. Review and save aside the knowledge base migration logs. 
+                    The knowledge base migration process described in the next section will generate logs. 
+                    These logs will be overwritten if you redeploy the VIVO application (but not if you restart tomcat), and since
+                    they may be a useful reference if questions come up about your 1.4 VIVO data after deployment, you should save them aside.
+                    The logs are created in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
                 </p>
                 <dl>
                     <dt>
@@ -685,10 +661,9 @@
                     </dt>
                     <dd>
                         A log of a summary of updates that were made to the knowledge 
-                        base and notes about some recommended manual reviews. This file should  
-                        end with "Finished knowledge base migration". If this file contains any 
-                        warnings they should be reviewed with your implementation team  
-                        representative to see whether any corrective action needs to be taken. 
+                        base. This file should end with "Finished knowledge base migration". 
+                        If this file contains any warnings they should be reviewed with your 
+                        implementation team representative to see whether any corrective action needs to be taken. 
                     </dd>
                 </dl>
                 <dl>
@@ -697,43 +672,25 @@
                     </dt>
                     <dd>
                         A log of errors that were encountered during the upgrade 
-                        process. This file should be empty if the upgrade was successful. 
+                        process. This file should be empty if the upgrade was successful. If any errors are encountered
+                        you will need to rerun the knowledge base migration.
                     </dd>
                 </dl>
-                <dl>
-                    <dt>
-                        <code>ontologies/update/changedData/removedData.n3</code>
-                    </dt>
-                    <dd>
-                        An N3 file containing all the statements that were removed 
-                        from  
-                        the knowledge base. 
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <code>ontologies/update/changedData/addedData.n3</code>
-                    </dt>
-                    <dd>
-                        An N3 file containing all the statements that were added to 
-                        the  
-                        knowledge base. 
-                    </dd>
-                </dl>
-                <h4 id="ontology_knowledge_base">ii. Ontology knowledge base manual
-                    review</h4>
                 <p>
-                    Changes to the VIVO core ontology may require corresponding 
-                    modifications of the knowledge base instance data and local ontology  
-                    extensions. 
+                  
+                </p>
+                </p>
+                <h3 id="kbm">IV. Knowledge Base Migration</h3>
+                <h4 id="kbmprocess">i.Knowledge Base Migration Process</h4>
+                <p>
+                   For an description of changes to the VIVO ontology in version 1.4 see the <a href="https://sourceforge.net/apps/mediawiki/vivo/index.php?title=Ontology_changes_from_version_1.3_to_1.4">sourceforge wiki page on ontology changes</a>
                 </p>
                 <p>
-                    When Apache Tomcat starts up following the upgrade, it will 
+                    Changes to the VIVO core ontology may require corresponding 
+                    modifications to the knowledge base instance data and ontology annotations.
+                    When VIVO first starts up following the upgrade, it will 
                     initiate a process to examine the knowledge base and apply necessary  
-                    changes. Not all of the modifications that may be required can be 
-                    automated, so manual review of the knowledge base is recommended after  
-                    the automated upgrade process. The automated process will make only the 
-                    following types of changes: 
+                    changes. The knowledge base migration process will make the following types of changes: 
                 </p>
                 <dl>
                     <dt>
@@ -741,8 +698,7 @@
                     </dt>
                     <dd>
                         All references to the class (in the subject or object 
-                        position)  
-                        will be updated to the new name. References to the property will be 
+                        position) will be updated to the new name. References to the property will be 
                         updated to the new name. 
                     </dd>
                 </dl>
@@ -762,16 +718,6 @@
                 </dl>
                 <dl>
                     <dt>
-                        Property addition 
-                    </dt>
-                    <dd>
-                        If a newly added property is the inverse of a previously 
-                        existing property, the inverse of any statements using the pre-existing  
-                        property will be asserted. 
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
                         Annotation property default values 
                     </dt>
                     <dd>
@@ -785,6 +731,38 @@
                         new default value will be propagated to the knowledge base. 
                     </dd>
                 </dl>
+                <dl>
+                    <dt>
+                        Structural changes 
+                    </dt>
+                    <dd>
+                        Changes in the way individuals (intances of classes) are related to other individuals.
+                    </dd>
+                </dl>
+                <p>
+                    In addition to the logs described in <strong>step 8</strong> of the <a href="#upgrade_process">previous section</a>, the knowledge base migration
+                    process will log copies of all additions and deletions that were made to the knowledge base in the following files:
+                </p>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/removedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were removed from the knowledge base. 
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/addedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were added to the knowledge base. 
+                    </dd>
+                </dl>
+                <h4 id="reviewkbm">ii. Knowledge Base Manual Review for Local Extensions</h4>
+                Not all of the modifications that may be required are  
+                    automated. If you have local extensions to areas of the ontology that have changed, a manual review of the knowledge base is recommended after  
+                    the automated upgrade process.
                 <h3 id="termsofuse">V. Review the VIVO Terms of Use</h3>
                 <p>
                     VIVO comes with a "Terms of Use" statement linked from the footer.  The "Site Name" 
@@ -795,9 +773,10 @@
                     Be sure to make the changes in your source files and deploy them to your tomcat so you don't lose 
                     your changes next time you deploy for another reason.
                 </p>
-                <h3>Next Step ...</h3>
+                <h3 id="nextsteps">Next Steps</h3>
                 <p>
-                    Now that you have VIVO up and running, please go read the <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>.
+                    Now that you have VIVO up and running, please refer to the <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>
+                     for information about its operation.
                 </p>
                 </div>
             
