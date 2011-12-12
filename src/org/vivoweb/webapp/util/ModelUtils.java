@@ -56,6 +56,7 @@ public class ModelUtils {
 		
 		VClassDao vcd = wadf.getVClassDao();
 		List<String> superClassURIs = vcd.getSuperClassURIs(classURI, false);
+		superClassURIs.add(classURI);
 		Iterator<String> iter = superClassURIs.iterator();
 		
 		ObjectProperty op = new ObjectProperty();
