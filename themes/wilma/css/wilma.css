@@ -1608,3 +1608,9 @@ input.add-account:active {
 #contact_form textarea {
     width: 40em;
 }
+/* ------------------------------------------------->  */
+/* ASSOCIATE PROFILE ------------------------------->  */
+/* ------------------------------------------------->  */
+#associateProfileBackgroundThree {
+    margin-top:-120px; 
+}
