@@ -7,9 +7,11 @@ licenses/apache.LICENSE.txt
 
 ant-jmeter
 batik-css
+commons-beanutils
 commons-codec
 commons-collections
 commons-dbcp
+commons-discovery
 commons-fileupload
 commons-httpclient
 commons-io
@@ -19,11 +21,13 @@ commons-pool
 contenttype
 csv
 dwr
+ezmorph
 gson
 jakarta-jstl
 jarjar
 jmeter
 joda-time
+json-lib
 log4j
 nekohtml
 solr
@@ -70,6 +74,9 @@ CDDL 1.0
 jaxrpc (licenses/cddl.LICENSE.txt)
 saaj (licenses/cddl.LICENSE.txt)
 
+ECLIPSE PUBLIC LICENSE v1.0
+--------
+webserviceutils (licenses/eclipse.LICENSE.txt)
 
 GNU AGPL 3
 ----------	
