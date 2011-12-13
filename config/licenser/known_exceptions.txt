@@ -37,7 +37,7 @@ productMods/js/visualization/entitycomparison/jquery_plugins/*
 # PROBLEM: Can't find any info on licensing.
 productMods/js/jquery_plugins/jquery.truncator.js
 
-# PROBLEM: Modified from original source and no info on licensing.
-# Copyrighted Revolution Health Group 2006. 
+# See /doc/3rd-party-licenses.txt for LICENSE file
+src/edu/cornell/mannlib/semservices/util/ObjectUtils.java
 src/edu/cornell/mannlib/semservices/util/XMLGregorianCalendarConverter.java
 src/edu/cornell/mannlib/vitro/webapp/utils/ConceptSearchService/BeanToJsonSerializer.java
