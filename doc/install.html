@@ -307,10 +307,10 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            Restricts access to the Solr search platform.
-                            One or more regular expressions, separated by commas. When a request is
-                            made to Solr, the IP address of the requestor must match one of the
-                            patterns, or the request will be rejected.
+                            Restricts access to the Solr search platform. 
+                            The value is a regular expression. When a request is
+                            made to Solr, the IP address of the requestor must the expression, 
+                            or the request will be rejected.
                             <br>
                             Examples:<code>
                                 <ul>
@@ -319,7 +319,7 @@
                                     </li>
                                     <li>
                                         vitro.local.solr.ipaddress.mask =
-                                        127\.0\.0\.1,0:0:0:0:0:0:0:1
+                                        127\.0\.0\.1|0:0:0:0:0:0:0:1
                                     </li>
                                     <li>
                                         vitro.local.solr.ipaddress.mask = 169.254.*
