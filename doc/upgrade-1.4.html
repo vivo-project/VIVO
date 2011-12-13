@@ -119,10 +119,18 @@
             <h3 id="changes">II. Noteworthy Changes</h3>
             	<ul>
             	    <li>
-                	    <h4 id="newproperty">New property in deploy.properties</h4>
+                	    <h4 id="newproperty">New properties in deploy.properties</h4>
+                	    <ul>
+                	        <li>
+                	            <code>profile.eligibleTypeList</code> describes which classes of Individuals may
+                	            be assigned as profile pages.
+                	        </li>
+                	        <li>
+                	            <code>proxy.eligibleTypeList</code> describes which classes of Individuals are
+                 	            eligible for "self-editing" by proxy.
+                	        </li>
+                	    </ul>
                 	    <p>
-            	            <code>proxy.eligibleTypeList</code> describes which classes of Individuals are
-             	            eligible for "self-editing" by proxy.
              	            See the table in <a href="#upgrade_process">Section III</a> for more details.
              	        </p>
                 	</li>
@@ -581,6 +589,20 @@
                         </td>
                         <td>
                             /usr/local/vivo/harvester/
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                          Types of individual which can be selected as profile pages for user accounts.
+                          If this is omitted, defaults to http://www.w3.org/2002/07/owl#Thing
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          profile.eligibleTypeList
+                        </td>
+                        <td>
+                           http://xmlns.com/foaf/0.1/Person
                         </td>
                     </tr>
                     <tr>
