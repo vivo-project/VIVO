@@ -1,0 +1,13 @@
+#! /usr/bin/ruby
+
+=begin
+--------------------------------------------------------------------------------
+
+See whether our Tomcat is running (not the Tomcat that runs the national index).
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+=end
+
+puts system("ps -ef | grep tomcat | grep -v usr/local/tomcat")
+

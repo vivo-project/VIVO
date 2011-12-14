@@ -1,0 +1,39 @@
+#! /usr/bin/ruby
+
+=begin
+--------------------------------------------------------------------------------
+
+Build and deploy the currently selected version of VIVO.
+
+Remove vivo from Tomcat, so we know we start with clean slate.
+Create the deploy.properties file by substituting current values into the 
+template. Then run the build script.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+=end
+
+require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+require 'erb'
+
+def build_deploy_properties
+  File.open(@deploy_properties_source) do |source_file|
+    File.open(@deploy_properties_target, 'w') do |target_file|
+      raw = source_file.read()
+      cooked = ERB.new(raw).result
+      target_file.write(cooked)
+    end
+  end
+end
+
+puts system("rm -r ~/LoadTesting/tomcat/webapps/vivo*")
+puts system("rm -r ~/LoadTesting/tomcat/conf/Catalina/localhost/vivo*")
+
+@deploy_properties_source = "/home/jeb228/LoadTesting/distros/#{@distro_name}/deploy.properties.template"
+@deploy_properties_target = "/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo/deploy.properties"
+build_deploy_properties()
+
+Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo") do |path|
+  system "ant clean deploy"
+end
+

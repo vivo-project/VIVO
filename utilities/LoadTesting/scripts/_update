@@ -1,0 +1,21 @@
+#! /usr/bin/ruby
+
+=begin
+--------------------------------------------------------------------------------
+
+Use SVN to get the latest revisions to the currently-selected distro.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+=end
+
+require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+
+Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vitro") do |path|
+  system "svn update"
+end
+
+Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo") do |path|
+  system "svn update"
+end
+

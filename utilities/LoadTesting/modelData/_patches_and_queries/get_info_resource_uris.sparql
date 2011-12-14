@@ -1,0 +1,9 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+SELECT ?uri
+WHERE
+{
+   ?uri a core:InformationResource .
+}
+limit 300
+
