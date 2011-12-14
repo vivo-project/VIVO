@@ -1608,3 +1608,13 @@ input.add-account:active {
 #contact_form textarea {
     width: 40em;
 }
+/* ------------------------------------------------->  */
+/* ASSOCIATE PROFILE ------------------------------->  */
+/* ------------------------------------------------->  */
+#associateProfileBackgroundThree {
+    margin-top:-120px; 
+}
+#associateProfileBackgroundTwo {
+    padding:7px 94px 45px 0;
+    margin-top:-120px; 
+}
