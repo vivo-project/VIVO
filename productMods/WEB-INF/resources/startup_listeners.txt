@@ -36,6 +36,8 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
 # Must run after JenaDataSourceSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ThemeInfoSetup
 
+edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionRegistry$Setup
+
 edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsLoader
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper$Setup
