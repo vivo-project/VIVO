@@ -3,6 +3,7 @@
 package edu.cornell.mannlib.vitro.webapp.visualization.visutils;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -66,6 +67,11 @@ public class UtilityFunctions {
     	}
 
 		return yearToActivityCount;
+	}
+	
+	public static Map<String, Integer> getYearToActivityCount(
+			Collection<Activity> activities) {
+		return getYearToActivityCount(new HashSet<Activity>(activities));
 	}
 	
 	/**

@@ -66,11 +66,6 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=People (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
 	<td>link=Activities (4)</td>
 	<td></td>
 </tr>
@@ -96,37 +91,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Research (11)</td>
+	<td>link=Research (12)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Locations (313)</td>
+	<td>link=Locations (321)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=People (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Activities (4)</td>
+	<td>link=Activities (5)</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,6 +117,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Agreement</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Award or Honor Receipt</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +236,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Research (11)</td>
+	<td>link=Research (12)</td>
 	<td></td>
 </tr>
 <tr>
@@ -271,7 +251,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Book</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Concept</td>
 	<td></td>
 </tr>
 <tr>
@@ -291,17 +281,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Subject Area</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Webpage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Locations (314)</td>
+	<td>link=Locations (321)</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,7 +301,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Campus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Continent</td>
 	<td></td>
 </tr>
 <tr>
@@ -326,7 +326,32 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Facility</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Geographic Location</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Geographic Region</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Room</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>State Or Province</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Transnational Region</td>
 	<td></td>
 </tr>
 <tr>
@@ -335,148 +360,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Librarian (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Person (1)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Find By</td>
+	<td>There is currently no People content in the system</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>You can browse all of the public content currently in the system using the index page.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Subject Area</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Courses</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check Subject Area browse</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Subject Area</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Subject Area</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Animal Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Elderly Care</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Diet</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check Department browse</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check Courses browse</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Courses</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Course</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Introduction to Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>People</td>
+	<td>link=index page</td>
 	<td></td>
 </tr>
 <tr>
@@ -681,6 +581,11 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Concept (5)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Database (1)</td>
 	<td></td>
 </tr>
@@ -696,12 +601,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Subject Area (4)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Webpage (1)</td>
+	<td>link=Webpage (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -717,6 +617,76 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=PHC Proceedings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Proceedings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li[@id='concept']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Animal Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Ape Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Elderly Care</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Diet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li[@id='concept']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=P</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Diet</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -776,36 +746,6 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//li[@id='subjectArea']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Animal Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Elderly Care</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Diet</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Health</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>//li[@id='webpage']/a</td>
 	<td></td>
 </tr>
@@ -817,36 +757,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=exact:http://primatehealthintro.cornell.edu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//li[@id='subjectArea']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=P</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Diet</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Health</td>
 	<td></td>
 </tr>
 <tr>
@@ -867,6 +777,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Conference (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Event (4)</td>
 	<td></td>
 </tr>
 <tr>
@@ -892,6 +807,51 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li[@id='event']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Introduction to Primate Health</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Course</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invited Talk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Conference</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Conference</td>
 	<td></td>
 </tr>
 <tr>
@@ -922,6 +882,11 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primate Health and Fitness</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Invited Talk</td>
 	<td></td>
 </tr>
 <tr>

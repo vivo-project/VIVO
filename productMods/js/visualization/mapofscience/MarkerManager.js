@@ -47,6 +47,10 @@ var MarkerManager = Class.extend({
 		$.each(this.keyToMarker, function(i, marker) {
 			marker.removeFromMap();
 		});
+	},
+	removeAll: function() {
+		this.removeMarkersFromMap();
+		this.keyToMarker = {};
 	}
 });
 
@@ -54,9 +58,13 @@ var MarkerManager = Class.extend({
  * Customized Discipline labels MarkerManager for Science map purpose. It is an abstract class 
  */
 var DisciplineLabelsMarkerManager = MarkerManager.extend({
-	init: function(map) {
+	init: function(map, getLabelURL) {
 		this._super();
 		this.map = map;
+		this.getLabelURL = getDisciplineLabelImageURL;
+		if (getLabelURL != null) {
+			this.getLabelURL = getLabelURL;
+		}
 		this.initMarkers(map);
 	},
 	initMarkers: function(map) {
@@ -65,7 +73,7 @@ var DisciplineLabelsMarkerManager = MarkerManager.extend({
 			var opts = {
 					map: map,
 					position: createNoWrapLatLng(discipline.labelLatitude, discipline.labelLongitude),
-					icon: getDisciplineLabelImageURL(id),
+					icon: me.getLabelURL(id),
 					clickable: false
 				};
 			me.addMarker(id, new Marker(opts));
@@ -202,5 +210,97 @@ var SubdisciplineMarkerManager = ScimapMarkerManager.extend({
 		);
 		
 		return marker;
+	}
+});
+
+var CompositeMarkerManager = Class.extend({
+	init: function() {
+		this.keyToManager = {};
+	},
+	addManager: function(key, manager) {
+		this.keyToManager[key] = manager;
+	},
+	length: function() {
+		var size = 0;
+
+		$.each(this.keyToManager, function(i, manager) {
+			msize = manager.length();
+			if (size < msize) {
+				size = msize;
+			}
+		});
+		return size;
+	},
+	getManager: function(key) {
+		return this.keyToManager[key];
+	},
+	getManagerArray: function() {
+		var array = [];
+		$.each(this.keyToManager, function(i, e){ 
+			array.push(e); 
+		});
+		return array;
+	},
+	hasKey: function(key) {
+		return (this.keyToManager.hasOwnProperty(key));
+	},
+	showManager: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.showMarkers();
+		});
+	},
+	hideManager: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.hideMarkers();
+		});
+	},
+	addManagersToMap: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.addMarkersToMap();
+		});
+	},
+	removeManagersFromMap: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.removeMarkersFromMap();
+		});
+	},
+	removeManager: function(key) {
+		if (this.hasKey(key)) {
+			this.getManager(key).removeAll();
+			delete this.keyToManager[key];
+		}
+	},
+	removeAll: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.removeAll();
+		});
+		this.keyToManager = {};
+	},
+	mouseIn: function(key) {
+		var manager = this.getManager(key);
+		if (manager) {
+			manager.mouseInAll();
+		}
+	},
+	mouseInAll: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.mouseInAll();
+		});
+	},
+	mouseOut: function(key) {
+		var manager = this.getManager(key);
+		if (manager) {
+			manager.mouseOutAll();
+		}
+	},
+	mouseOutAll: function() {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.mouseOutAll();
+		});
+	},
+	display: function(numberOfMarkers) {
+		$.each(this.keyToManager, function(i, manager) {
+			manager.display(numberOfMarkers);
+		});
 	}
 });

@@ -1,0 +1,42 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
+
+import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+
+/**
+ * Adds static Strings that may be useful for forms that are part of VIVO.
+ *  
+ * @author bdc34
+ *
+ */
+public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
+
+    final static String vivoCore ="http://vivoweb.org/ontology/core#" ;
+    final static String rdfs =VitroVocabulary.RDFS ;
+    final static String foaf = "http://xmlns.com/foaf/0.1/";
+    final static String type =VitroVocabulary.RDF_TYPE ;            
+    final static String label =rdfs+"label" ;
+    
+    final static String degreeClass =vivoCore+"AcademicDegree" ;    
+    final static String majorFieldPred =vivoCore+"majorField" ;
+    final static String deptPred =vivoCore+"departmentOrSchool" ;
+    final static String infoPred =vivoCore+"supplementalInformation" ;
+    final static String degreeEarned =vivoCore+"degreeEarned" ;
+    final static String degreeOutcomeOf =vivoCore+"degreeOutcomeOf" ;
+    final static String trainingAtOrg =vivoCore+"trainingAtOrganization" ;
+    final static String authorRankPredicate = vivoCore + "authorRank";
+    final static String linkedAuthorPredicate = vivoCore + "linkedAuthor";
+    
+    final static String dateTimeValue =vivoCore+"dateTime";
+    final static String dateTimeValueType =vivoCore+"DateTimeValue";
+    final static String dateTimePrecision =vivoCore+"dateTimePrecision";
+
+    final static String toInterval =vivoCore+"dateTimeInterval";
+    final static String intervalType =vivoCore+"DateTimeInterval";
+    final static String intervalToStart =vivoCore+"start";
+    final static String intervalToEnd =vivoCore+"end";
+
+    final static String orgClass ="http://xmlns.com/foaf/0.1/Organization" ;
+    final static String personClass = foaf + "Person";
+    
+}

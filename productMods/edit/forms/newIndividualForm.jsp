@@ -173,6 +173,8 @@ parameter set up by editRequestDispatch.
 
 <jsp:include page="${preForm}" />
 
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 <h2>Create a new ${typeName}</h2>
 
 <form class="customForm" action="<c:url value="/edit/processRdfForm2.jsp"/>" >

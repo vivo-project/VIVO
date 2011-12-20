@@ -14,9 +14,9 @@
      next statement -->
 <#macro showAuthorship statement>
     <#if statement.person??>
-        <a href="${profileUrl(statement.person)}">${statement.personName}</a>
+        <a href="${profileUrl(statement.uri("person"))}" title="author name">${statement.personName}</a>
     <#else>
         <#-- This shouldn't happen, but we must provide for it -->
-        <a href="${profileUrl(statement.authorship)}">missing author</a>
+        <a href="${profileUrl(statement.uri("authorship"))}" title="missing author">missing author</a>
     </#if>
 </#macro>

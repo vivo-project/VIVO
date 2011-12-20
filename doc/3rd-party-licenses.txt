@@ -7,13 +7,10 @@ licenses/apache.LICENSE.txt
 
 ant-jmeter
 batik-css
-commons-beanutils-core
-commons-betwixt
-commons-cli
+commons-beanutils
 commons-codec
 commons-collections
 commons-dbcp
-commons-digester
 commons-discovery
 commons-fileupload
 commons-httpclient
@@ -24,28 +21,22 @@ commons-pool
 contenttype
 csv
 dwr
+ezmorph
 gson
 jakarta-jstl
-jakarta-oro
+jarjar
 jmeter
 joda-time
-json-taglib
+json-lib
 log4j
 nekohtml
 solr
 spring
 stax-api
-taglibs-mailer
-taglibs-random
-taglibs-string
-taglibs-standard
 toggle
 xalan
-xbean
-xbean-spring
 xercesImpl
 xml-apis
-XmlSchema
 wstx-asl
 
 
@@ -53,7 +44,6 @@ BSD
 ---
 aduna-appbase (licenses/aduna.LICENSE.txt)
 aduna-commons (licenses/aduna.LICENSE.txt)
-antlr (licenses/antlr.LICENSE.txt)
 arq-extra (licenses/jena.LICENSE.txt)
 arq (licenses/jena.LICENSE.txt)
 dojo (licenses/dojo.LICENSE.txt)
@@ -64,17 +54,12 @@ jena (licenses/jena.LICENSE.txt)
 jenatest (licenses/jena.LICENSE.txt)
 ldap (licenses/ldap.LICENSE.txt)
 sdb (licenses/sdb.LICENSE.txt)
-sesame-console (licenses/aduna.LICENSE.txt)
 sesame-http (licenses/aduna.LICENSE.txt)
 sesame-model (licenses/aduna.LICENSE.txt)
 sesame-query (licenses/aduna.LICENSE.txt)
-sesame-queryalgebra (licenses/aduna.LICENSE.txt)
-sesame-queryparser (licenses/aduna.LICENSE.txt)
 sesame-queryresultio (licenses/aduna.LICENSE.txt)
 sesame-repository (licenses/aduna.LICENSE.txt)
 sesame-rio (licenses/aduna.LICENSE.txt)
-sesame-runtime (licenses/aduna.LICENSE.txt)
-sesame-sail (licenses/aduna.LICENSE.txt)
 sparqltag (licenses/sparqltag.LICENSE.txt)
 xpp3_min (licenses/extreme.LICENSE.txt)
 xstream (licenses/xstream.LICENSE.txt)
@@ -89,6 +74,9 @@ CDDL 1.0
 jaxrpc (licenses/cddl.LICENSE.txt)
 saaj (licenses/cddl.LICENSE.txt)
 
+ECLIPSE PUBLIC LICENSE v1.0
+--------
+webserviceutils (licenses/eclipse.LICENSE.txt)
 
 GNU AGPL 3
 ----------	
@@ -119,7 +107,6 @@ jaxrpc
 jsontofmmodel
 mysql-connector-java
 rowset
-rsslib4j
 saaj
 
 
@@ -128,9 +115,7 @@ GNU LGPL 2.1
 licenses/lgpl2.LICENSE.txt
 
 betterdateinput
-jcalendar
 tinymce
-wstx-asl
 
 
 GNU LGPL 3
@@ -152,18 +137,20 @@ jai_core
 
 MIT
 ---
+BeanToJsonSerializer.java (licenses/mit.LICENSE.txt)
 blueprintcss (licenses/blueprintcss.LICENSE.txt)
 html5js (licenses/mit.LICENSE.txt)
 icu4j (licenses/icu.LICENSE.txt)
 jsoup (licenses/jsoup.LICENSE.txt)
 jquery (licenses/mit.LICENSE.txt)
 jquery-plugins (licenses/mit.LICENSE.txt)
+ObjectUtils.java (licenses/mit.LICENSE.txt)
 prototype (licenses/mit.LICENSE.txt)
 raphael (licenses/mit.LICENSE.txt)
 selectivizr (licenses/mit.LICENSE.txt)
 slf4j-api (licenses/mit.LICENSE.txt)
 slf4j-log4j12 (licenses/mit.LICENSE.txt)
-
+XMLGregorianCalendarConverter.java (licenses/mit.LICENSE.txt)
 
 MPL 1.1
 -------
@@ -184,7 +171,6 @@ Others
 ------
 cos (licenses/cos.LICENSE.txt)
 googleanalytics (license/googleanalytics.LICENSE.txt)
-jdom (licenses/jdom.LICENSE.txt)
 json (licenses/json.LICENSE.txt)
 jtidy (licenses/jtidy.LICENSE.txt)
 ojdbc (licenses/oracle.LICENSE.txt)
@@ -199,5 +185,4 @@ xsdlib
 
 None
 ----
-Concurrent
 Trippi

@@ -9,22 +9,22 @@
 
     <nav role="navigation">
         <ul id="header-nav" role="list">
-            <li role="listitem"><a href="${urls.index}">Index</a></li>
+            <li role="listitem"><a href="${urls.index}" title="index">Index</a></li>
             <#if user.loggedIn>
                 <#if user.hasSiteAdminAccess>
-                    <li role="listitem"><a href="${urls.siteAdmin}">Site Admin</a></li>
+                    <li role="listitem"><a href="${urls.siteAdmin}" title="site admin">Site Admin</a></li>
                 </#if>
                     <li>
                         <ul class="dropdown">
-                            <li id="user-menu"><a href="#">${user.loginName}</a>
+                            <li id="user-menu"><a href="#" title="user">${user.loginName}</a>
                                 <ul class="sub_menu">
                                      <#if user.hasProfile>
-                                         <li role="listitem"><a href="${user.profileUrl}">My profile</a></li>
+                                         <li role="listitem"><a href="${user.profileUrl}" title="my profile">My profile</a></li>
                                      </#if>
                                      <#if urls.myAccount??>
-                                         <li role="listitem"><a href="${urls.myAccount}">My account</a></li>
+                                         <li role="listitem"><a href="${urls.myAccount}" title="my account">My account</a></li>
                                      </#if>
-                                     <li role="listitem"><a href="${urls.logout}">Log out</a></li>
+                                     <li role="listitem"><a href="${urls.logout}" title="log out">Log out</a></li>
                                 </ul>
                             </li>
                          </ul>
@@ -43,7 +43,7 @@
         <fieldset>
             <legend>Search form</legend>
             
-            <form id="search-form" action="${urls.search}" name="search" role="search"> 
+            <form id="search-form" action="${urls.search}" name="search" role="search" accept-charset="UTF-8" method="POST"> 
                 <div id="search-field">
                     <input type="text" name="querytext" class="search-vivo" value="${querytext!}" autocapitalize="off" />
                     <input type="submit" value="Search" class="search">

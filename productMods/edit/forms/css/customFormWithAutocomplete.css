@@ -28,3 +28,6 @@ form.customForm h4 {
     background: none;
     color: #000;
 }
+.disabledSubmit {
+    cursor: default ! important;
+}

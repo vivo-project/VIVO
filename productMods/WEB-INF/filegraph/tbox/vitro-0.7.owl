@@ -49,7 +49,6 @@ xmlns:vitro="&vitro;"
 <!-- ObjectProperty-related constructs -->
 
 <owl:AnnotationProperty rdf:about="&vitro;fullPropertyNameAnnot"/>
-<owl:AnnotationProperty rdf:about="&vitro;individualSortFieldAnnot"/>
 <owl:AnnotationProperty rdf:about="&vitro;individualSortDirectionAnnot"/>
 
 <!-- externalID-related constructs -->

@@ -29,7 +29,7 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import edu.cornell.mannlib.vitro.testing.AbstractTestClass;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.ArrayIdentifierBundle;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.IdentifierBundle;
-import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.HasAssociatedIndividual;
+import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.HasProfile;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.Authorization;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
@@ -419,8 +419,8 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 	// helper methods
 	// ----------------------------------------------------------------------
 
-	private HasAssociatedIndividual makeSelfEditingId(String uri) {
-		return new HasAssociatedIndividual(uri);
+	private HasProfile makeSelfEditingId(String uri) {
+		return new HasProfile(uri);
 	}
 
 	private void assertDecision(Authorization expected, PolicyDecision decision) {

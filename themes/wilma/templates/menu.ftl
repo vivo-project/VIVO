@@ -3,7 +3,7 @@
 <nav role="navigation">
     <ul id="main-nav" role="list">
         <#list menu.items as item>
-            <li role="listitem"><a href="${item.url}" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
+            <li role="listitem"><a href="${item.url}" title="menu item" <#if item.active> class="selected" </#if>>${item.linkText}</a></li>
         </#list>
     </ul>
 </nav>
@@ -23,6 +23,6 @@
     
     <!--[if lte IE 8]>
     <noscript>
-        <p class="ie-alert">This site uses HTML elements that are not recognized by Internet Explorer 8 and below in the absence of JavaScript. As a result, the site will not be rendered appropriately. To correct this, please either enable JavaScript, upgrade to Internet Explorer 9, or use another browser. Here are the <a href="http://www.enable-javascript.com">instructions for enabling JavaScript in your web browser</a>.</p>
+        <p class="ie-alert">This site uses HTML elements that are not recognized by Internet Explorer 8 and below in the absence of JavaScript. As a result, the site will not be rendered appropriately. To correct this, please either enable JavaScript, upgrade to Internet Explorer 9, or use another browser. Here are the <a href="http://www.enable-javascript.com"  title="java script instructions">instructions for enabling JavaScript in your web browser</a>.</p>
     </noscript>
     <![endif]-->

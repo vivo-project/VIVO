@@ -58,10 +58,12 @@ var Polygon = Class.extend({
 	registerEvents : function() {
 	},
 	unregisterEvents : function() {
-		$.each(this.handlers, function(){
-			removeListener(this);
-		});
-		this.handlers = null;
+		if (this.handlers) {
+			$.each(this.handlers, function(i, handler) {
+				removeListener(handler);
+			});
+			this.handlers = null;
+		}
 	}
 });
 
@@ -92,7 +94,6 @@ var CirclePolygon = Polygon.extend({
 		if (!this.isPointsCreated()) {
 			this.initCirclePoints();
 		}
-		
 		this._super();
 	},
 	isPointsCreated: function() {

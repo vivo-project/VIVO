@@ -4,6 +4,12 @@ CONSTRUCT {
      ?endeavor ?property ?object .
 } WHERE {
      PERSON_URI core:hasOutreachProviderRole ?outreachRole .
-     ?outreachRole core:roleIn ?endeavor .
+     
+     {
+       { ?memberRole core:roleRealizedIn ?endeavor }
+          union
+       { ?memberRole core:roleContributesTo ?endeavor }
+     }
+     
      ?endeavor ?property ?object .
 }

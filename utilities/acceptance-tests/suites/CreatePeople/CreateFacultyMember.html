@@ -107,7 +107,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Faculty Member (core)</td>
+	<td>label=Faculty Member (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -132,7 +132,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Faculty Member (core)</td>
+	<td>label=Faculty Member (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -156,7 +156,12 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>Please enter a Last Name for this person.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please enter a First Name for this person.</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,7 +186,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>Please enter a Last Name for this person.</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,7 +211,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>Please enter a First Name for this person.</td>
 	<td></td>
 </tr>
 <tr>
@@ -250,6 +255,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>Assistant Professor</td>
@@ -267,31 +277,6 @@
 <tr>
 	<td>pause</td>
 	<td>50000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -372,31 +357,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Search']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
 	<td></td>
 </tr>
 <tr>

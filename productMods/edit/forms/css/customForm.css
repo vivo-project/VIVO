@@ -92,7 +92,30 @@ div.acSelection {
 #ie67DisableWrapper {
     display: none;
 }
+form.customForm input.concept-search {
+    float: right;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    background-color: #317e95;
+}
+form.customForm h4.services {
+    margin-bottom: -5px;
+    margin-top: -12px;
+}
+form.customForm p.inline-search {
+    float: left;
+    clear: left;
+}
+form.customForm p.inline-search #searchTerm{
+    margin-top: 6px;
+}
 /* <------ DATE TIME*/
+form.customForm label.dateTime {
+    display: inline;
+}
+form.customForm fieldset {
+    display: inline;
+}
 fieldset.dateTime label {
     display: inline;
 }

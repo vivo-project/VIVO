@@ -107,7 +107,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Department (core)</td>
+	<td>label=Department (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -145,19 +145,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
+	<td>verifyTextPresent</td>
 	<td>Create position history entry for Child Development</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>title</td>
+	<td>id=positionTitle</td>
 	<td>Dr.</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>positionType</td>
 	<td>label=Faculty Position</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=relatedIndLabel</td>
+	<td>Furter</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -180,24 +190,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
+	<td>verifyTextPresent</td>
 	<td>Create position history entry for Child Development</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>personUri</td>
-	<td>label=Johnson, Jane</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>title</td>
+	<td>id=positionTitle</td>
 	<td>Ms.</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>positionType</td>
 	<td>label=Faculty Position</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=relatedIndLabel</td>
+	<td>John</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -220,24 +235,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
+	<td>verifyTextPresent</td>
 	<td>Create position history entry for Child Development</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>personUri</td>
-	<td>label=Smith, Sally</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>title</td>
+	<td>id=positionTitle</td>
 	<td>Dr.</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>positionType</td>
 	<td>label=Faculty Position</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=relatedIndLabel</td>
+	<td>smith</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -260,24 +280,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
+	<td>verifyTextPresent</td>
 	<td>Create position history entry for Child Development</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>personUri</td>
-	<td>label=Zink, Zoe</td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>title</td>
+	<td>id=positionTitle</td>
 	<td>Mrs.</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>positionType</td>
 	<td>label=Faculty Position</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=relatedIndLabel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=relatedIndLabel</td>
+	<td>Zink</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -292,6 +322,31 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify all people are correct</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank, Dr. 2010 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Johnson, Jane, Ms. 2009 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Smith, Sally, Dr. 2008 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Zink, Zoe, Mrs. 2007 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -711,12 +766,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Johnson, Jane</td>
+	<td>link=Zink, Zoe</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Smith, Sally</td>
+	<td>link=Johnson, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -747,7 +802,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=College (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

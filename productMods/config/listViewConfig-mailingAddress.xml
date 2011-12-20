@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        
+        SELECT DISTINCT ?subclass 
+                        ?address
+                        ?localName
+                        ?label   
+                        ?street1
+                        ?street2
+                        ?street3                   
+                        ?city 
+                        ?state
+                        ?postalCode
+                        ?country   
+                        
+        WHERE {
+            ?subject ?property ?address 
+            LET ( ?localName := afn:localname(?address) )
+            OPTIONAL { ?address rdfs:label ?label  }
+            OPTIONAL { ?address vivo:address1 ?street1  }
+            OPTIONAL { ?address vivo:address2 ?street2 }
+            OPTIONAL { ?address vivo:address3 ?street3  }
+            OPTIONAL { ?address vivo:addressCity ?city  }
+            OPTIONAL { ?address vivo:addressState ?state  }
+            OPTIONAL { ?address vivo:addressPostalCode ?postalCode  }
+            OPTIONAL { ?address vivo:addressCountry ?country  }            
+            
+            OPTIONAL { ?address vitro:mostSpecificType ?subclass .
+                       ?subclass rdfs:subClassOf vivo:Address 
+            } 
+            
+        } ORDER BY ?country ?label
+    </query-select>
+       
+    <query-construct>
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;  
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf vivo:Address 
+        } WHERE {
+            ?subclass rdfs:subClassOf vivo:Address 
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?address .
+            ?address ?addressProperty ?addressValue 
+        } WHERE {
+            {
+               ?subject ?property ?address 
+            } UNION {
+               ?subject ?property ?address .
+               ?address ?addressProperty ?addressValue 
+            } 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        CONSTRUCT { 
+            ?subject ?property ?address .  
+            ?address vitro:mostSpecificType ?subclass . 
+            ?subclass rdfs:subClassOf vivo:Address
+        } WHERE {
+            ?subject ?property ?address .
+            ?address vitro:mostSpecificType ?subclass . 
+            ?subclass rdfs:subClassOf vivo:Address 
+        } 
+    </query-construct>
+              
+    <template>propStatement-mailingAddress.ftl</template>
+</list-view-config>

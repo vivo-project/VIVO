@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX bibo:  &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX core:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+
+        SELECT DISTINCT  <collated>?subclass</collated>
+                         ?advisory
+                         ?advisoryLabel
+                         ?localName
+                         ?advisee
+                         ?adviseeLabel
+                         ?degreeLabel
+                         ?degreeAbbr
+                         ?dateTimeStart
+                         ?dateTimeEnd
+
+         WHERE {
+                     ?subject ?property ?advisory
+                     LET ( ?localName := afn:localname(?advisory) )
+                     OPTIONAL { ?advisory rdfs:label ?advisoryLabel  }
+                     OPTIONAL { ?advisory core:advisee ?advisee 
+                                OPTIONAL { ?advisee rdfs:label ?adviseeLabel }
+                     }
+                     OPTIONAL { ?advisory core:degreeCandidacy ?degree 
+                                OPTIONAL { ?degree rdfs:label ?degreeLabel }
+                                OPTIONAL { ?degree core:abbreviation ?degreeAbbr }
+                     }
+                     <collated>
+                         OPTIONAL { ?advisory vitro:mostSpecificType ?subclass .
+                                    ?subclass rdfs:subClassOf core:AdvisingRelationship  
+                         }
+                     </collated>     
+                     OPTIONAL { ?advisory core:dateTimeInterval ?dateTimeInterval 
+                                OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
+                                           ?dateTimeStartValue core:dateTime ?dateTimeStart 
+                                }
+                     }  
+                     OPTIONAL { ?advisory core:dateTimeInterval ?dateTimeInterval 
+                                OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
+                                           ?dateTimeEndValue core:dateTime ?dateTimeEnd
+                                }
+                     }  
+
+
+         }  ORDER BY  <collated>?subclass</collated> DESC(?dateTimeEnd)
+    </query-select>
+       
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT {
+            ?subclass rdfs:subClassOf core:AdvisingRelationship 
+        } WHERE {
+            ?subclass rdfs:subClassOf core:AdvisingRelationship 
+        }
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?advisory .
+            ?advisory ?advisoryProperty ?advisoryValue .
+            ?advisory rdfs:label ?advisoryLabel 
+        } WHERE {
+            {
+               ?subject ?property ?advisory 
+            } UNION {
+               ?subject ?property ?advisory .
+               ?advisory ?advisoryProperty ?advisoryValue
+            } UNION {
+               ?subject ?property ?advisory .
+               ?advisory ?advisoryProperty ?advisoryValue .
+               ?advisory rdfs:label ?advisoryLabel
+            } 
+        }
+    </query-construct>
+    
+    <query-construct>
+            PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
+            PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt; 
+            PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+            PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
+
+            CONSTRUCT {
+                ?subject ?property ?advisory .
+                ?advisory core:advisee ?advisee .
+                ?advisee rdfs:label ?adviseeLabel .
+                ?advisory core:degreeCandidacy ?degree .
+                ?degree rdfs:label ?degreeLabel .
+                ?degree core:abbreviation ?degreeAbbr
+            } WHERE {
+                {
+                    ?subject ?property ?advisory 
+                } UNION {
+                    ?subject ?property ?advisory. 
+                    ?advisory core:advisee ?advisee 
+                } UNION {
+                    ?subject ?property ?advisory .
+                    ?advisory core:advisee ?advisee .
+                    ?advisee rdfs:label ?adviseeLabel
+                } UNION {
+                    ?subject ?property ?advisory .
+                    ?advisory core:degreeCandidacy ?degree 
+                } UNION {
+                    ?subject ?property ?advisory .
+                    ?advisory core:degreeCandidacy ?degree .
+                    ?degree rdfs:label ?degreeLabel
+                } UNION {
+                    ?subject ?property ?advisory .
+                    ?advisory core:degreeCandidacy ?degree .
+                    ?degree rdfs:label ?degreeLabel .
+                    ?degree core:abbreviation ?degreeAbbr
+                }
+            }        
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        CONSTRUCT { 
+            ?subject ?property ?advisory .  
+            ?advisory vitro:mostSpecificType ?subclass . 
+            ?subclass rdfs:subClassOf core:AdvisingRelationship
+        } WHERE {
+            ?subject ?property ?advisory .
+            ?advisory vitro:mostSpecificType ?subclass . 
+            ?subclass rdfs:subClassOf core:AdvisingRelationship 
+        } 
+    </query-construct>
+
+    <query-construct>
+            PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+            CONSTRUCT { 
+                ?subject ?property ?award .  
+                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .
+                ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            } WHERE {
+                ?subject ?property ?award .  
+                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:start ?dateTimeStartValue .
+                ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            } 
+    </query-construct>
+
+    <query-construct>
+            PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+            CONSTRUCT { 
+                ?subject ?property ?award .  
+                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:end ?dateTimeEndValue .
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+            } WHERE {
+                ?subject ?property ?award .  
+                ?award core:dateTimeInterval ?dateTimeInterval .
+                ?dateTimeInterval core:end ?dateTimeEndValue .
+                ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+            } 
+    </query-construct>
+              
+    <template>propStatement-advisorIn.ftl</template>
+</list-view-config>

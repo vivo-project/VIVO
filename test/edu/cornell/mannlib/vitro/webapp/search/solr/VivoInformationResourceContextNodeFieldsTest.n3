@@ -1,0 +1,19 @@
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vitro:   <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://example.com/vivo/individual/n7474>
+      a       <http://purl.org/ontology/bibo/Document> , owl:Thing , <http://purl.org/ontology/bibo/AudioDocument> , <http://vivoweb.org/ontology/core#InformationResource> ;
+      rdfs:label "Test Document X"@en-US ;
+      <http://purl.org/dc/terms/creator>
+              <http://caruso-laptop.mannlib.cornell.edu:8090/vivo/individual/n4782> ;
+      <http://purl.org/dc/terms/title>
+              "Test Document X"@en-US ;
+      vitro:modTime "2011-11-01T11:11:49"^^xsd:dateTime ;
+      vitro:mostSpecificType
+              <http://purl.org/ontology/bibo/AudioDocument> ;
+      <http://vivoweb.org/ontology/core#informationResourceInAuthorship>
+              <http://caruso-laptop.mannlib.cornell.edu:8090/vivo/individual/n7484> .

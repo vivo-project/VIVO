@@ -109,6 +109,8 @@
 
 <jsp:include page="${preForm}"/>
 
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 <h2><em><%= subjectName %></em></h2>
 
 <h3>Manage Web Pages</h3>

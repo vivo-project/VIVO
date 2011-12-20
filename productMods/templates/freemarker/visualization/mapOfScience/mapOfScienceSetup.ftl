@@ -25,32 +25,45 @@
 
 </#if>
 
-<#assign mapOfScienceIcon = '${urls.images}/visualization/mapofscience/vivo-scimap.png'>
+<#assign mapOfScienceIcon = '${urls.images}/visualization/mapofscience/scimap_icon.png'>
 
 <#assign entityMapOfScienceDataURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=json">
+
 <#assign entityMapOfScienceDisciplineCSVURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=csv&vis_mode=discipline">
 <#assign entityMapOfScienceSubDisciplineCSVURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=csv&vis_mode=subdiscipline">
+<#assign entityMapOfScienceUnlocatedJournalsCSVURL = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&uri=${entityURI}&output=csv&vis_mode=unlocated_journals">
 
 <script language="JavaScript" type="text/javascript">
 
+var entityVivoProfileURLPrefix = "${urls.base}/individual?uri=";
+var entityMapOfScienceURLPrefix = "${urls.base}${shortVisualizationURLRoot}/${mapOfScienceVisParam}?uri=";
 var contextPath = "${urls.base}";
+var scienceMapDataPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=json&uri=";
+var scienceMapDataURL = scienceMapDataPrefix + "${entityURI}";
+var entityUnmappedJournalsCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=unlocated_journals&uri=";
 
-var scienceMapDataURL = "${entityMapOfScienceDataURL}";
-
-var baseImageFolderPrefix = "${urls.images}/";
 var imageFolderPrefix = "${urls.images}/visualization/";
-var mapOfScienceImageFolderPrefix  = imageFolderPrefix 
-											+ "mapofscience/";
+var mapOfScienceImageFolderPrefix  = imageFolderPrefix + "mapofscience/";
 var disciplineLabelImageUrlPrefix = mapOfScienceImageFolderPrefix + "labels/";
+var disciplineBlackLabelImageUrlPrefix = disciplineLabelImageUrlPrefix + "black/";
+
+var infoIconUrl = "${urls.images}/iconInfo.png";
+var drillDownIconUrl = "${urls.images}/visualization/drill_down_icon.png";
 											
 var entityLabel = '${entityLabel}';
 
 var ENTITY_TYPE = '${entityType}';
+<#if entityType == "PERSON" >
+	<#assign viewTypeFilterDisplay = "none">
+<#else>
+	<#assign viewTypeFilterDisplay = "block">
+</#if>
 
 var loadingImageLink = contextPath + "/images/visualization/ajax-loader-indicator.gif";
 var refreshPageImageLink = contextPath + "/images/visualization/refresh-green.png";
 											
-											
+var comparisonScienceMapCsvDataUrlPrefix = "${urls.base}${dataVisualizationURLRoot}?labelField=label&vis=entity_comparison&uri=";
+var entityMapOfScienceSubDisciplineCSVURLPrefix = "${urls.base}${dataVisualizationURLRoot}?vis=${mapOfScienceVisParam}&output=csv&vis_mode=subdiscipline&&uri="
 var entityMapOfScienceDisciplineCSVURL = "${entityMapOfScienceDisciplineCSVURL}";
 var entityMapOfScienceSubDisciplineCSVURL = "${entityMapOfScienceSubDisciplineCSVURL}";											
 
@@ -79,6 +92,10 @@ ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/a
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/MarkerManager.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ScimapWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/DataTableWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonScimapWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/SimpleDataTableWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/EntityTablesWidget.js"></script>',
+			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/ComparisonDataTableWidget.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisModeControllers.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/VisCommonControl.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/visualization/mapofscience/InitializeMap.js"></script>')}              
@@ -88,3 +105,4 @@ ${scripts.add('<script type="text/javascript" src="http://maps.google.com/maps/a
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/visualization/entitycomparison/jquery_plugins/datatable/demo_table.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/visualization/mapofscience/layout.css" />')}
+

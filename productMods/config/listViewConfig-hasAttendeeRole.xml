@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
+<!-- See guidelines in vitro/doc/list_view_configuration_guidelines.txt -->
+
+<list-view-config>
+    <query-select>    
+        PREFIX afn:   &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
+        PREFIX bibo:  &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX vivo:  &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX event: &lt;http://purl.org/NET/c4dm/event.owl#&gt;
+        
+        SELECT DISTINCT <collated>?subclass</collated>
+                        ?role ?roleLabel                         
+                        ?event1 ?event1Name ?event1Label
+                        ?event2 ?event2Label
+                        ?series ?seriesLabel
+                        ?event3 
+                        ?dateTimeStart 
+                        ?dateTimeEnd
+                        
+            WHERE {
+                        
+                ?subject ?property ?role  
+                
+                OPTIONAL { ?role rdfs:label ?roleLabel }
+                
+                OPTIONAL {  ?role vivo:roleRealizedIn ?event1 
+                            LET (?event1Name := afn:localname(?event1)) 
+                        
+                            OPTIONAL { ?event1 rdfs:label ?event1Label }
+                        
+                            OPTIONAL { ?event2 a event:Event .
+                                       OPTIONAL { ?event2 rdfs:label ?event2Label }
+                                       
+                                       { 
+                                           ?event1 vivo:eventWithin ?event2 
+                                       }  UNION {                                                                                                              
+                                           ?event2 vivo:includesEvent ?event1 
+                                       }
+                            }
+                            OPTIONAL {
+                                       { 
+                                            ?event1 vivo:eventWithin ?event3 .
+                                            ?event3 vivo:eventWithin ?event2 
+                                       }  UNION {   
+                                            ?event2 vivo:includesEvent ?event3 .                                                                                                          
+                                            ?event3 vivo:includesEvent ?event1 
+                                           
+                                       }
+                                       OPTIONAL { ?event2 rdfs:label ?event2Label }
+                            }
+                            
+
+                            OPTIONAL { ?series a vivo:EventSeries .
+                                       OPTIONAL { ?series rdfs:label ?seriesLabel }
+                                       
+                                       { 
+                                           ?event1 vivo:inEventWithin ?series
+                                       }  UNION {                                                                                                              
+                                           ?series vivo:seriesForEvent ?event1 
+                                       }
+                            }
+                            OPTIONAL {
+                                       { 
+                                           ?event1 vivo:eventWithin ?event3 .
+                                           ?event3 vivo:inEventSeries ?series 
+                                       }  UNION {                                                                                                              
+                                           ?event3 vivo:includesEvent ?event1 .
+                                           ?series vivo:seriesForEvent ?event3 
+                                       }
+                                       OPTIONAL { ?series rdfs:label ?seriesLabel }
+                            }
+
+                            <collated>
+                            ?event1 vitro:mostSpecificType ?subclass .
+                            
+                            { 
+                                ?subclass rdfs:subClassOf event:Event 
+                            } UNION {
+                                ?subclass  owl:equivalentClass event:Event 
+                            }
+                            </collated>
+                           
+                }   
+        
+                OPTIONAL { ?role vivo:dateTimeInterval ?dateTimeInterval 
+                           OPTIONAL { ?dateTimeInterval vivo:start ?dateTimeStartValue .
+                                      ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
+                           }
+                           OPTIONAL { ?dateTimeInterval vivo:end ?dateTimeEndValue .
+                                      ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
+                           }
+                }  
+                
+                <critical-data-required>
+                FILTER ( bound(?event1) )
+                </critical-data-required>
+        
+            } ORDER BY <collated>?subclass</collated> DESC(?dateTime) ?event1Label ?event1Name
+    </query-select>
+ 
+    <query-construct> 
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;          
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
+        PREFIX event: &lt;http://purl.org/NET/c4dm/event.owl#&gt;
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?role vivo:roleRealizedIn ?event1 .
+            ?event1 vitro:mostSpecificType ?subclass .
+            ?subclass rdfs:subClassOf event:Event .
+            ?subclass owl:equivalentClass event:Event .
+        } WHERE {
+            { 
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event1 vitro:mostSpecificType ?subclass .
+                ?subclass rdfs:subClassOf event:Event 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event1 vitro:mostSpecificType ?subclass .
+                ?subclass owl:equivalentClass event:Event 
+            }   
+        }
+    </query-construct>
+    
+    <query-construct>
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;    
+        CONSTRUCT { 
+            ?subject ?property ?role .
+            ?role ?roleProperty ?roleValue . 
+            ?event1 rdfs:label ?event1Label 
+        } WHERE {
+            {
+                ?subject ?property ?role 
+            } UNION {
+                ?subject ?property ?role .
+                ?role ?roleProperty ?roleValue 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 . 
+                ?event1 rdfs:label ?event1Label 
+            }
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX event: &lt;http://purl.org/NET/c4dm/event.owl#&gt; 
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?event2 a event:Event .
+            ?event1 vivo:eventWithin ?event2 .
+            ?event2 vivo:includesEvent ?event1 .
+            ?event2 rdfs:label ?event2Label
+        } WHERE {
+        
+            {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event1 vivo:eventWithin ?event2 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event1 vivo:eventWithin ?event2 .
+                ?event2 rdfs:label ?event2Label
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event2 vivo:includesEvent ?event1 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event2 vivo:includesEvent ?event1 .
+                ?event2 rdfs:label ?event2Label
+            }
+        }        
+    </query-construct>
+
+    <query-construct>
+        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+        PREFIX event: &lt;http://purl.org/NET/c4dm/event.owl#&gt; 
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?event3 vivo:eventWithin ?event2 .
+            ?event2 vivo:includesEvent ?event3 .
+            ?event2 a event:Event .
+            ?event1 vivo:eventWithin ?event3 .
+            ?event3 vivo:includesEvent ?event1 .
+            ?event2 rdfs:label ?event2Label 
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event1 vivo:eventWithin ?event3 .
+                ?event3 vivo:eventWithin ?event2 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event1 vivo:eventWithin ?event3 .
+                ?event3 vivo:eventWithin ?event2 .
+                ?event2 rdfs:label ?event2Label
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event2 vivo:includesEvent ?event3 . 
+                ?event3 vivo:includesEvent ?event1 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?event2 a event:Event .
+                ?event2 vivo:includesEvent ?event3 . 
+                ?event3 vivo:includesEvent ?event1 .
+                ?event2 rdfs:label ?event2Label
+            }
+        }        
+    </query-construct>
+
+    <query-construct>
+        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+        PREFIX event: &lt;http://purl.org/NET/c4dm/event.owl#&gt; 
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?series a vivo:EventSeries .
+            ?event1 vivo:inEventSeries ?series .
+            ?series vivo:seriesForEvent ?event1 .
+            ?series rdfs:label ?seriesLabel
+        } WHERE {
+        
+            {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?event1 vivo:inEventSeries ?series 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?event1 vivo:inEventSeries ?series .
+                ?series rdfs:label ?seriesLabel
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?series vivo:seriesForEvent ?event1 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?series vivo:seriesForEvent ?event1 .
+                ?series rdfs:label ?seriesLabel
+            }
+        }        
+    </query-construct>
+
+    <query-construct>
+        PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt;
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt; 
+        PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+        
+        CONSTRUCT {
+            ?subject ?property ?role .
+            ?workshop vivo:inEventSeries ?series .
+            ?series vivo:seriesForEvent ?event3 .
+            ?series a vivo:EventSeries .
+            ?event1 vivo:eventWithin ?event3 .
+            ?event3 vivo:includesEvent ?event1 .
+            ?series rdfs:label ?seriesLabel
+        } WHERE {
+            {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?event1 vivo:eventWithin ?event3 .
+                ?event3 vivo:inEventSeries ?series 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?event1 vivo:eventWithin ?event3 .
+                ?event3 vivo:inEventSeries ?series .
+                ?series rdfs:label ?seriesLabel
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?series vivo:seriesForEvent ?event3 . 
+                ?workshop vivo:includesEvent ?event1 
+            } UNION {
+                ?subject ?property ?role .
+                ?role vivo:roleRealizedIn ?event1 .
+                ?series a vivo:EventSeries .
+                ?series vivo:seriesForEvent ?event3 . 
+                ?event3 vivo:includesEvent ?event1 .
+                ?series rdfs:label ?seriesLabel
+            }
+        }        
+    </query-construct>
+
+    <query-construct>
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role vivo:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval vivo:start ?dateTimeStartValue .
+            ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role vivo:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval vivo:start ?dateTimeStartValue .
+            ?dateTimeStartValue vivo:dateTime ?dateTimeStart 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX vivo: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role vivo:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval vivo:end ?dateTimeEndValue .
+            ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role vivo:dateTimeInterval ?dateTimeInterval .
+            ?dateTimeInterval vivo:end ?dateTimeEndValue .
+            ?dateTimeEndValue vivo:dateTime ?dateTimeEnd 
+        } 
+    </query-construct>    
+    <template>propStatement-hasAttendeeRole.ftl</template>
+</list-view-config>

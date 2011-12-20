@@ -5,10 +5,8 @@ package edu.cornell.mannlib.vitro.webapp.visualization.persongrantcount;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 
 import com.hp.hpl.jena.query.Dataset;
@@ -21,9 +19,9 @@ import edu.cornell.mannlib.vitro.webapp.controller.visualization.DataVisualizati
 import edu.cornell.mannlib.vitro.webapp.controller.visualization.VisualizationFrameworkConstants;
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
-import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Individual;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SparklineData;
-import edu.cornell.mannlib.vitro.webapp.visualization.visutils.QueryRunner;
+import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.SubEntity;
+import edu.cornell.mannlib.vitro.webapp.visualization.visutils.SelectOnModelUtilities;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
 
@@ -53,23 +51,21 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String personURI = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY);
 		
-		QueryRunner<Set<Activity>> queryManager = 
-				new PersonGrantCountQueryRunner(personURI, dataset, log);
+		SubEntity person = new SubEntity(
+									personURI,
+									UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
 		
-		Set<Activity> piGrants = queryManager.getQueryResult();
+		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
+		
 		
 		/*
     	 * Create a map from the year to number of grants. Use the Grant's
     	 * parsedGrantYear to populate the data.
     	 * */
     	Map<String, Integer> yearToGrantCount = 
-			UtilityFunctions.getYearToActivityCount(piGrants);
+			UtilityFunctions.getYearToActivityCount(grantsToURI.values());
 	
-    	Individual investigator = ((PersonGrantCountQueryRunner) queryManager)
-    									.getPrincipalInvestigator();
-    	
-    	return prepareDataResponse(investigator,
-				piGrants,
+    	return prepareDataResponse(person,
 				yearToGrantCount);
 
 	
@@ -96,17 +92,18 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 		
-		QueryRunner<Set<Activity>> queryManager = 
-				new PersonGrantCountQueryRunner(personURI, dataset, log);
-		
-		Set<Activity> piGrants = queryManager.getQueryResult();
+		SubEntity person = new SubEntity(
+				personURI,
+				UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
+
+		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
 		
     	/*
     	 * Create a map from the year to number of grants. Use the Grant's
     	 * parsedGrantYear to populate the data.
     	 * */
     	Map<String, Integer> yearToGrantCount = 
-			UtilityFunctions.getYearToActivityCount(piGrants);
+			UtilityFunctions.getYearToActivityCount(grantsToURI.values());
     	
 
 		boolean shouldVIVOrenderVis = yearToGrantCount.size() > 0 ? true : false;
@@ -145,18 +142,19 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 
 		String visContainer = vitroRequest
 				.getParameter(VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
+		
+		SubEntity person = new SubEntity(
+				personURI,
+				UtilityFunctions.getIndividualLabelFromDAO(vitroRequest, personURI));
 
-		QueryRunner<Set<Activity>> queryManager = 
-				new PersonGrantCountQueryRunner(personURI, dataset, log);
-	
-		Set<Activity> piGrants = queryManager.getQueryResult();
+		Map<String, Activity> grantsToURI = SelectOnModelUtilities.getGrantsForPerson(dataset, person, false);
 		
     	/*
     	 * Create a map from the year to number of grants. Use the Grant's
     	 * parsedGrantYear to populate the data.
     	 * */
     	Map<String, Integer> yearToGrantCount = 
-			UtilityFunctions.getYearToActivityCount(piGrants);
+			UtilityFunctions.getYearToActivityCount(grantsToURI.values());
 	
     	/*
     	 * Computations required to generate HTML for the sparkline & related context.
@@ -195,32 +193,14 @@ public class PersonGrantCountRequestHandler implements VisualizationRequestHandl
 	 * Provides response when csv file containing the grant count over the years
 	 * is requested.
 	 * @param investigator
-	 * @param piGrants
 	 * @param yearToGrantCount
 	 * @return 
 	 */
 	private Map<String, String> prepareDataResponse(
-						Individual investigator,
-						Set<Activity> piGrants,
+						SubEntity investigator,
 						Map<String, Integer> yearToGrantCount) {
 		
-		
-		String piName = null; 
-		
-		/*
-		* To protect against cases where there are no PI grants associated with the
-		* individual. 
-		* */
-		if (piGrants.size() > 0) {
-		piName = investigator.getIndividualLabel();
-		}
-		
-		/*
-		* To make sure that null/empty records for PI names do not cause any mischief.
-		* */
-		if (StringUtils.isBlank(piName)) {
-		piName = "no-principal-investigator";
-		}
+		String piName = investigator.getIndividualLabel();
 		
 		String outputFileName = UtilityFunctions.slugify(piName) 
 										+ "_grants-per-year" + ".csv";

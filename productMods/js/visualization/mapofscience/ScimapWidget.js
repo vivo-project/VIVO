@@ -1,39 +1,70 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 var ScimapWidget = Class.extend({
-	init: function(map, sliderControl) {
+	init: function(map) {
 		var me = this;
 		me.activeManager = null;
 		me.isUnloaded = true;
 		me.map = map;
 		
-		me.sliderControl = sliderControl;
-		me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map);
-		me.disciplineLabelsControl = new CheckBoxPanel({ 
-			map: map,
-			checked: true,
-			text: "Show discipline labels",
-			click: function() {
-				if($(this).attr('checked')) {
-					me.labelsMarkerManager.showMarkers();
-				} else {
-					me.labelsMarkerManager.hideMarkers();
-				}
-			}
-		});
 		me.initView();
 	},
 	initView: function(){
 		var me = this;
+		me.initControlPanels();
+		me.initMarkerManagers();
+		me.activeManager.addMarkersToMap();
+		me.updateDisplayedMarkers();
+	},
+	cleanView: function() {
+		var me = this;
+		me._cleanUpMarkers();
+		me.sliderControl.removeFromMap();
+		me.disciplineLabelsControl.removeFromMap();
+		me.labelsMarkerManager.removeMarkersFromMap();
+	},
+	initControlPanels: function() {
+		var me = this;
+		
+		/* Create slider control panel */
+		if (me.sliderControl == null) {
+			me.sliderControl = new SliderControlPanel({ 
+				map:me.map, 
+				controlPositions: google.maps.ControlPosition.RIGHT_BOTTOM
+			});
+		}
+		
+		/* Register event */
+		me.sliderControl.addToMap();
+		me.sliderControl.setChangeEventHandler(function(event, ui) {
+			if (me.keyToMarkerManagers) {
+				me.updateDisplayedMarkers();
+			}
+		});
+		
+		/* create */
+		if (me.disciplineLabelsControl == null) {
+			me.labelsMarkerManager = new DisciplineLabelsMarkerManager(map);
+			me.disciplineLabelsControl = new CheckBoxPanel({ 
+				map: map,
+				checked: true,
+				text: "Show discipline labels",
+				click: function() {
+					if($(this).attr('checked')) {
+						me.labelsMarkerManager.showMarkers();
+					} else {
+						me.labelsMarkerManager.hideMarkers();
+					}
+				}
+			});
+		}
+		
 		/* Display labels if checked */
+		me.disciplineLabelsControl.addToMap();
+		me.labelsMarkerManager.addMarkersToMap();
 		if (me.disciplineLabelsControl.isChecked()) {
 			me.labelsMarkerManager.showMarkers();
 		}
-		me.initMarkerManagers();
-		me.sliderControl.setChangeEventHandler(function(event, ui) {
-			me.updateDisplayedMarkers(ui.value);
-		});
-		me.show(SCIMAP_TYPE.SUBDISCIPLINE);
 	},
 	initMarkerManagers: function() {
 		if (this.keyToMarkerManagers == null) {
@@ -53,6 +84,7 @@ var ScimapWidget = Class.extend({
 				null
 			);
 			this.keyToMarkerManagers = managers;
+			this.show(SCIMAP_TYPE.SUBDISCIPLINE);
 		}
 	},
 	needLoaded: function(){
@@ -146,25 +178,25 @@ var ScimapWidget = Class.extend({
 	hide: function(key) {
 		var manager = this.getMarkerManager(key);
 		if (this.activeManager == manager) {
-			this.cleanup();
+			this._cleanupMarkers();
 		}
 	},
 	_switchActiveManager: function(manager) {
 		if (this.activeManager != manager) {
-			this.cleanUp();
+			this._cleanUpMarkers();
 			manager.addMarkersToMap();
 			this.activeManager = manager;
 			this.updateMap();
 		}
 	},
-	cleanUp: function() {
+	_cleanUpMarkers: function() {
 		if (this.activeManager) {
 			this.activeManager.removeMarkersFromMap();
 			INFO_WINDOW.close();
 		}
 	},
-	updateDisplayedMarkers: function(numberOfMarkers) {
-		this.activeManager.display(numberOfMarkers);
+	updateDisplayedMarkers: function() {
+		this.activeManager.display(this.sliderControl.getValue());
 	},
 	updateMap: function() {
 		var manager = this.activeManager;

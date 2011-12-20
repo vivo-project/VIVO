@@ -88,7 +88,7 @@ $(document).ready(function() {
 
 <h2 id="ajax_activator">Hello World!</h2>
 
-<a href="${testURL}">vis query for person -> "Crane, Brian"</a>
+<a href="${testURL}" title="query">vis query for person -> "Crane, Brian"</a>
 
 
 <div id="ajax_recipient">iioio</div>

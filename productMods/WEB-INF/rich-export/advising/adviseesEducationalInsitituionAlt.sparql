@@ -1,0 +1,12 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+     ?educationalInstitution rdfs:label ?label
+} WHERE {
+     PERSON_URI core:advisorIn ?advisingRelationship .
+     ?advisingRelationship core:advisee ?advisee .
+     ?advisee core:educationalTraining ?educationalTraining .
+     ?educationalTraining core:trainingAtOrganization ?educationalInstitution .
+     ?educationalInstitution rdfs:label ?label
+}

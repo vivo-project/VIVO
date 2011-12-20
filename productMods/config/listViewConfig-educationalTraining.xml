@@ -9,6 +9,7 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
         PREFIX afn:  &lt;http://jena.hpl.hp.com/ARQ/function#&gt;
         PREFIX foaf:  &lt;http://xmlns.com/foaf/0.1/&gt;
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
         SELECT DISTINCT <collated> ?subclass </collated>
                         ?edTraining 
@@ -21,8 +22,8 @@
                 OPTIONAL { ?edTraining core:trainingAtOrganization ?org .                                 
                            ?org rdfs:label ?orgName  
                            <collated>
-                           OPTIONAL { ?subclass rdfs:subClassOf foaf:Organization .
-                                      ?org a ?subclass 
+                           OPTIONAL { ?org vitro:mostSpecificType ?subclass .
+                                      ?subclass rdfs:subClassOf foaf:Organization  
                            }  
                            </collated>                         
                 }        
@@ -94,13 +95,15 @@
     <query-construct>
         PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;   
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;
-
+        PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         CONSTRUCT {
-            ?org a ?subclass
+            ?subject ?property ?edTraining .
+            ?org vitro:mostSpecificType ?subclass .
+            ?edTraining core:trainingAtOrganization ?org
         } WHERE {
             ?subject ?property ?edTraining .
-            ?edTraining core:trainingAtOrganization ?org .
-            ?org a ?subclass
+            ?org vitro:mostSpecificType ?subclass .
+            ?edTraining core:trainingAtOrganization ?org
         }
     </query-construct>
 

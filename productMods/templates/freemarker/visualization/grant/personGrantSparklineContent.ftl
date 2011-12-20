@@ -183,14 +183,14 @@
                     $('#${sparklineContainerID} td.sparkline_number').text(totalGrants).css("font-weight", "bold").attr("class", "grey").append("<span style='color: #2485AE;'> " + grantDisplay + " <br/></span>");
             
                     var sparksText = '  from <span class="sparkline_range">${sparklineVO.earliestYearConsidered?c}' 
-                                        + ' to ${sparklineVO.latestRenderedGrantYear?c}</span>';
+                                        + ' through ${sparklineVO.latestRenderedGrantYear?c}</span>';
                                         
                     if (totalGrants !== totalGrantCount) {
                         sparksText += ' (' + totalGrantCount + ' total)';
                     }                                        
                                
                     if (totalGrantCount) {
-                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}" >(.CSV File)</a> ';                    
+                        sparksText += '<br /> <a href="${sparklineVO.downloadDataLink}"  title="csv file">(.CSV File)</a> ';                    
                     }                                                
                                          
                  </#if>
@@ -265,7 +265,7 @@
     
     <#if sparklineVO.shortVisMode>
         <#--<span class="vis_link">-->
-            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}">View all VIVO grants and corresponding co-investigator network.</a></p>
+            <p><a class="all-vivo-grants" href="${sparklineVO.fullTimelineNetworkLink}" title="view all grants">View all VIVO grants and corresponding co-investigator network.</a></p>
         <#--</span>-->
     <#else>
         <!-- For Full Sparkline - Print the Table of Grant Counts per Year -->
@@ -273,14 +273,14 @@
         
             <p> 
                 <#assign tableID = "grant_sparkline_data_table" />
-                <#assign tableCaption = "Grants per year " />
+                <#assign tableCaption = "Grants per year" />
                 <#assign tableActivityColumnName = "Grants" />
                 <#assign tableContent = sparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = sparklineVO.downloadDataLink />
                 
                 <#include "yearToActivityCountTable.ftl">
     
-                Download data as <a href="${sparklineVO.downloadDataLink}">.csv</a> file.
+                Download data as <a href="${sparklineVO.downloadDataLink}" title="csv link">.csv</a> file.
                 <br />
             </p>
         

@@ -1,21 +1,9 @@
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1Value1Thing		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Flag1ValueThing		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#DependentResource		No	Delete	Delete
-http://vivoweb.org/ontology/core#DependentResource		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Keyword		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#keyword		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#primaryLink		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkDisplayRank		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#sunrise		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#sunset		No	Delete	Delete
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#timekey		No	Delete	Delete
-http://vivoweb.org/ontology/core#organizerOf		No	Delete	Delete
-http://purl.org/ontology/bibo/organizer		No	Delete	Delete
-http://vivoweb.org/ontology/core#PrimaryURLLink	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Link	http://vivoweb.org/ontology/core#URLLink	Yes	Map	Directly-changed
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkAnchor	http://vivoweb.org/ontology/core#linkAnchorText	Yes	Map	Directly-changed
-http://vitro.mannlib.cornell.edu/ns/vitro/0.7#linkURL	http://vivoweb.org/ontology/core#linkURI	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#uspc	http://vivoweb.org/ontology/core#cclCode	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#wipo-ipc	http://vivoweb.org/ontology/core#iclCode	Yes	Map	Directly-changed
-http://vivoweb.org/ontology/core#email	http://vivoweb.org/ontology/core#primaryEmail	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#VocabularySourceReference		No	Delete	Delete
+http://vivoweb.org/ontology/core#sourceVocabularyReference		No	Delete	Delete
+http://vivoweb.org/ontology/core#vocabularyReferenceFor		No	Delete	Delete
+http://vivoweb.org/ontology/core#forInformationResource	http://vivoweb.org/ontology/core#roleContributesTo	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#linkedRole	http://vivoweb.org/ontology/core#contributingRole	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#SubjectArea	http://www.w3.org/2004/02/skos/core#Concept	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#Process	http://www.w3.org/2002/07/owl#Thing	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#addressStreet	http://vivoweb.org/ontology/core#address1	Yes	Map	Directly-changed
+http://vivoweb.org/ontology/core#addressDepartment	http://vivoweb.org/ontology/core#address2	Yes	Map	Directly-changed

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>VIVO Release 1 V1.4 Announcement</title>
+    <link rel="stylesheet" href="./css/doc.css" media="screen">
+  </head>
+
+  <body>
+    <div id="branding" role="banner">
+      <h1 class="vivo-logo"><a href="http://vivoweb.org"><span class="displace">VIVO</span></a></h1>
+    </div>
+
+    <div id="wrapper-content" role="main">
+      <h1>VIVO Release 1 V1.4 Announcement</h1>
+      <small>
+        December 10, 2011
+      </small>
+      <toc>
+        <ul> <!-- filled out by js --> </ul>
+      </toc>
+
+      <div class="wiki-content">
+        <!--  last edited by Jon Corson-Rikert on Dec 11, 2011  -->
+        <h4><a
+        name="VIVORelease1.4AnnouncementDRAFT-Overview"></a>Overview</h4>
+        <p>VIVO 1.4 introduces two significant new features as well as
+        extending development begun in previous releases. Proxy
+        editing allows any VIVO user to designate another user as his
+        or her proxy for review or update, a much-requested feature,
+        and VIVO 1.4 also includes the ability to annotate VIVO
+        entries with terms from controlled vocabularies using external
+        terminology services. </p>
+
+        <h4><a
+        name="VIVORelease1.4AnnouncementDRAFT-Proxyediting"></a>Proxy
+        editing</h4> <p>VIVO now allows anyone with a VIVO profile to
+        delegate editing privileges for his or her entry to another
+        user, or proxy.  Proxy-based editing facilitates adoption and
+        updating of VIVO in settings where researchers do not have the
+        time to maintain their own entries and wish to delegate
+        editing to specific persons.  Proxy editing also supports
+        granting a VIVO user the rights to edit other entities such as
+        specific organizations, furthering sustainability by
+        controlled distribution of editing responsibility. Proxy
+        privileges can be managed by VIVO administrators on behalf of
+        multiple users or by an individual user on his or her own
+        behalf.</p>
+
+        <h4><a
+        name="VIVORelease1.4AnnouncementDRAFT-Linkingtoexternalvocabularies"></a>Linking
+        to external vocabularies</h4> <p>Many people have requested
+        support for associating terms from established controlled
+        vocabularies with people, publications, grants, organizations,
+        and other types of data in VIVO. While small taxonomies or
+        vocabularies may most easily be imported in their entirety
+        into VIVO, a number of the more popular controlled
+        vocabularies are very large in proportion to the number of
+        terms likely to be referenced within a single VIVO
+        instance. Incorporating terms by reference helps keep terms in
+        sync as these vocabularies continue to evolve and is more
+        consistent with linked data principles.
+        </p>
+
+        <p>
+          Stony Brook University's Department of Medical
+          Bioinformatics, led by Dr. Moisés Eisenberg, hosts an RDF
+          version of the National Library of Medicine's Unified
+          Medical Language System or UMLS
+          (<a href="http://www.nlm.nih.gov/research/umls/"
+          class="external-link"
+          rel="nofollow">http://www.nlm.nih.gov/research/umls/</a>). Through
+          a 2011 VIVO mini-grant, Stony Brook has developed a web
+          service that accepts incoming term requests from VIVO and
+          returns one or more matching UMLS concepts with stable
+          URIs. VIVO displays the label associated with the UMLS
+          concept but the concept's URI ensures that references remain
+          unambiguous, even across multiple VIVO instances at
+          different institutions.</p>
+
+        <p>
+          The interface from VIVO to the UMLS service has been
+          implemented to allow linking to additional vocabulary services such as
+          GEMET (<a href="http://www.eionet.europa.eu/gemet"
+                    class="external-link"
+                    rel="nofollow">http://www.eionet.europa.eu/gemet</a>), and we will
+          offer additional choices in upcoming releases. </p>
+
+        <h4><a name="VIVORelease1.4AnnouncementDRAFT-Visualizations"></a>Visualizations</h4>
+        <p>The VIVO 1.4 release features a novel science maps visualization that supports the comparison of publication profiles of up to three organizations.</p>
+
+        <p>All science map visualizations also now feature the updated
+        basemap of science that uses 10 years of publication data
+        (2001-2010) from Elsevier's Scopus and Thomson Reuters' Web of
+        Science.  The UCSD map was originally created by the Regents
+        of the University of California and SciTech Strategies in
+        2008. It was updated by SciTech Strategies, L'Observatoire des
+        sciences et des technologies, and Indiana University's
+        Cyberinfrastructure for Network Science Center (CNS) in
+        2011.</p>
+
+        <h4><a name="VIVORelease1.4AnnouncementDRAFT-Ontologychanges"></a>Ontology changes</h4>
+        <p>Ontology changes from 1.3 to 1.4 were relatively minor,
+        including an update to the Geopolitical Ontology and changes
+        to support linking to external vocabulary references as
+        described above. Changes for each release are documented on
+        the VIVO wiki on Sourceforge
+        at <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Ontology"
+        class="external-link"
+        rel="nofollow">http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Ontology</a>.</p>
+
+        <p>With version 1.4, the VIVO ontology will be submitted to
+        the Bioportal (<a href="http://www.bioontology.org/bioportal"
+        class="external-link"
+        rel="nofollow">http://www.bioontology.org/bioportal</a>), an
+        open repository of ontologies hosted by the National Center
+        for Biomedical Ontology, to facilitate access and
+        dissemination.</p>
+
+        <h4><a name="VIVORelease1.4AnnouncementDRAFT-Freemarkerconversion"></a>Freemarker conversion</h4>
+        <p>VIVO 1.4 continues the major effort begun with version 1.2
+        and continued in 1.3 to convert VIVO's entire user-facing code
+        base from Java Server Pages (JSPs) to FreeMarker, the Java
+        template engine library
+        (<a href="http://freemarker.sourceforge.net/"
+        class="external-link"
+        rel="nofollow">http://freemarker.sourceforge.net/</a>). FreeMarker
+        more cleanly separates internal application programming logic
+        from page display, making the VIVO application more
+        understandable and extensible, especially for developers new
+        to VIVO. The entire user-facing editing system has been
+        refactored for VIVO 1.4 to simplify the configuration of
+        custom forms and allow more rigorous code testing and data
+        verification.</p>
+
+        <h4><a name="VIVORelease1.4AnnouncementDRAFT-Improveddiagnostics"></a>Improved diagnostics</h4>
+        <p>VIVO 1.4 features improved diagnostic messages to help with
+        configuration issues. As VIVO starts up, it runs a series of
+        tests looking for common configuration errors. If VIVO finds a
+        problem it will display an error or warning message in the
+        browser, instead of the VIVO home page. These start-time
+        diagnostics and prominent display make it even easier to
+        install VIVO.</p>
+
+        <h4><a name="VIVORelease1.4AnnouncementDRAFT-Vitroasastandaloneapplication"></a>Vitro as a standalone application</h4>
+        <p>VIVO extends the underlying Vitro open-source semantic web
+        application with the VIVO ontology, software customizations
+        specific to the VIVO ontology, and visual theming.  With
+        version 1.4 of VIVO, the underlying Vitro software has been
+        packaged for use independently of the VIVO ontology. Vitro
+        supports ontology creation and editing as well as importing
+        existing ontologies, and is an excellent tool for populating
+        ontologies with instance data, for publishing RDF as linked
+        data, and for hands-on teaching about ontologies and semantic
+        web concepts.</p>
+    </div>      <!-- wiki content -->
+        
+    <div id="footer" role="contentinfo">
+      <p class="copyright">
+        <small>
+          All Rights Reserved <a href="license.txt">see license</a>
+        </small>              
+      </p>
+      <div id="nav" role="navigation">
+        <ul id="footer-nav" role="list">
+          <li role="listitem">
+            <a href="http://vivoweb.org/about">About</a>
+          </li>
+          <li role="listitem">
+            <a href="http://vivoweb.org/contact">Contact Us</a>
+          </li>
+          <li role="listitem">
+            <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      
+      function init(){
+
+        //fill out TOC
+        var tocList = document.querySelector('toc>ul');
+        var h4Anchors = document.querySelectorAll('a[name]');
+        
+        for( var i = 0 ; i < h4Anchors.length ; i++){
+          var a = document.createElement('a');
+          a.href= '#' + h4Anchors[i].name;
+          a.textContent = h4Anchors[i].parentNode.textContent
+          var li = document.createElement('li');
+          li.appendChild( a );
+          tocList.appendChild(li);
+        }
+        
+      }
+      window.onload = init;
+    </script>
+
+  </body>
+</html>

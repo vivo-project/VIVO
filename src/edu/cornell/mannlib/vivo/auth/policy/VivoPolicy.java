@@ -29,6 +29,11 @@ public class VivoPolicy extends DefaultInconclusivePolicy{
 	private static final String AUTHORSHIP_TO_PUB = CORE + "linkedInformationResource";
 	private static final String INDIVIDUAL_TO_WEBPAGE = CORE + "webpage";
 	private static final String WEBPAGE_TO_INDIVIDUAL = CORE + "webpageOf";
+	private static final String HAS_RESEARCH_AREA = CORE + "hasResearchArea";
+	private static final String HAS_SUBJECT_AREA = CORE + "hasSubjectArea";
+	private static final String RESEARCH_AREA_OF = CORE + "researchAreaOf";
+	private static final String SUBJECT_AREA_OF = CORE + "subjectAreaOf";
+
 	
 	@Override
 	public PolicyDecision isAuthorized(IdentifierBundle whoToAuth,
@@ -64,6 +69,14 @@ public class VivoPolicy extends DefaultInconclusivePolicy{
 			else if ( INDIVIDUAL_TO_WEBPAGE.equals( predicateUri ) || WEBPAGE_TO_INDIVIDUAL.equals( predicateUri )) {
                 return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
                     "Use the custom edit form for core:webpage");			    
+			} 
+			else if ( HAS_RESEARCH_AREA.equals( predicateUri ) || RESEARCH_AREA_OF.equals( predicateUri )) {
+                return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+                "Use the custom edit form for core:hasResearchArea");			    
+			}
+			else if ( HAS_SUBJECT_AREA.equals( predicateUri ) || SUBJECT_AREA_OF.equals( predicateUri )) {
+                return new BasicPolicyDecision(Authorization.UNAUTHORIZED, 
+                    "Use the custom edit form for core:hasSubjectArea");			    
 			}
 		}
 		else if( whatToAuth instanceof AddObjectPropStmt ){

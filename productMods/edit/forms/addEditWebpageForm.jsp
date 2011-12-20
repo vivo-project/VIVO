@@ -236,6 +236,8 @@ core:rank
 <c:set var="requiredHint" value="<span class='requiredHint'> *</span>" />
 
 <jsp:include page="${preForm}"/>
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 
 <h2>${title}&nbsp;<%= subjectName %></h2>
 

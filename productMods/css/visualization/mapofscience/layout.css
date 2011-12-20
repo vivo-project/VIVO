@@ -33,6 +33,19 @@
 	height: 480px;
 }
 
+#subEntityTableArea {
+	clear: both;
+	width: 100%; 
+	padding-top:5px; 
+}
+
+.subEntityTable {
+	width: 32%; 
+	padding-top:5px;
+	padding-right: 8px;
+	float: left;
+}
+
 #percent-mapped-info {
 	float:right;
 	display: none;
@@ -99,36 +112,60 @@ a.clear-selected-entities {
 
 /* filter */
 
-.filter-option {
+.filter-option, .comparison-filter-option {
 	color: #2485AE;
 	cursor: pointer;
 	/*padding-right: 5px;*/
 	text-decoration: underline;
 }
 
-.active-filter {
+.active-filter, .comparison-active-filter {
 	color: #595B5B;
 	text-decoration: none;
 }
 
-.filterInfoIcon {
+.filterInfoIcon, .comparisonFilterInfoIcon {
 	/*vertical-align:top;*/
 	width:15px;
 	margin-left: 9px;
 }
 
-#science-areas-filter {
+.drillDownIcon {
+	width:25px;
+	margin-left: 9px;
+	float: right;
+}
+
+
+.science-areas-filter {
 	margin-bottom: 10px;
-} 
+}
+
+.organization-header {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.suborganization-title {
+	vertical-align: middle; 
+	font-weight: bold;
+}
+
+.mapped-result {
+	font-size: 0.9em;
+	font-weight: bold;
+	float: right;
+	padding-top: 4px;
+}
 
 /* search in table */
 
-.sDomSearchBar {
+.sDomSearchBar, .sDomComparisonSearchBar {
     margin-bottom: -10px;
     margin-left: 41%;
 }
 
-#reset-search {
+#reset-search, #comparison-reset-search {
     color: #2485AE;
     cursor: pointer;
     margin-left: 10px;
@@ -179,7 +216,12 @@ hr.subtle-hr {
 	width: 100%;
 }
 
-table.datatable-table  tbody tr {
+.entity-datatable-table {
+	font-size: 0.9em;
+	width: 100%;
+}
+
+table.datatable-table tbody tr {
 	border-top: 3px solid;
 }
 
@@ -200,6 +242,22 @@ a.map-of-science-links {
     padding: 4px 5px 3px;
 }
 
+#download-unlocated-journal-info {
+    background-color: #2485AE;
+    height: 20px;
+    margin-top: 10px;
+    max-width: 260px;
+    padding: 4px 5px 3px;
+    text-align: center;
+}
+
+#download-unlocated-journal-info a {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 #main-science-areas-table-container {
     margin-top: 0;
 }
@@ -210,6 +268,19 @@ a.map-of-science-links {
 
 .paginatedtabs {
 	font-size: 0.81em;
+}
+
+.subpaginatedtabs {
+    margin-bottom: 10px;
+    font-size: 0.81em;
+    float:right;
+    margin-top: 15px;
+}
+
+.subpaginatedtabs span {
+    padding-right: 5px; 
+    cursor: pointer;
+    color: #2485AE;
 }
 
 /* -------------------------------------------------------------->  */

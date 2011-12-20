@@ -1,0 +1,840 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>VIVO Release 1 V1.4 Upgrade Guide</title>
+        <link rel="stylesheet" href="./css/doc.css" media="screen">
+    </head>
+    <body>
+        <div id="branding" role="banner">
+            <h1 class="vivo-logo"><a href="/"><span class="displace">VIVO</span></a></h1>
+        </div>
+        <!-- Start of content -->
+        <div id="wrapper-content" role="main">
+            <h1>VIVO Release 1 V1.4 Upgrade Guide</h1>
+            <small>
+                December 9, 2011 - Upgrading from Release 1 V1.3 to Release 1 V1.4
+            </small>
+            <p>
+                This document contains instructions on how to upgrade your
+                installation of VIVO from Version 1.3 to Version 1.4.
+                This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
+                at <a href="http://vivoweb.org/">VIVOweb.org</a>
+            </p>
+            <p>
+                If you need to do a fresh install, please consult the VIVO Release V1.4 Installation
+                Guide found on <a href="http://vivoweb.org/support">vivoweb.org</a>
+                or the install.html file located in the <code>doc</code>
+                directory of the VIVO source code distribution. The installation document also has a
+                list of the required software and versions (there are no new hardware
+                or software requirements for V1.4).
+            </p>
+            <p>
+              For a description of the release contents see the <a href="./release.html">Release announcement for V1.4</a>.
+            </p>
+            <hr/>
+            <!-- Upgrade process for V1.4 --><h3 id="tableofcontents">Table of Contents</h3>
+            <toc>
+                        <ol class="roman2">
+                           <li>
+                              <a href="#preparation">Before Performing the Upgrade</a>
+                           </li>
+                           <li>
+                              <a href="#changes">Noteworthy Changes</a>
+                              <br>
+	                          <ol class="roman2">
+	                             <li>
+	                               <a href="#newproperty">New Property in deploy.properties</a>
+	                             </li>
+	                             <li>
+	                               <a href="#changetoconfig">Change to tomcat configuration</a>
+	                             </li>
+	                          </ol>
+                           </li>
+                           <li>
+                             <a href="#upgrade_process">Upgrade Instructions</a>
+                           </li>
+                           <li>
+                              <a href="#kbm">Knowledge Base Migration</a>
+                              <ol class="roman3">
+                                <li>
+                                    <a href="#verifymigration">Knowledge Base Migration Process</a>
+                                </li>
+                                <li>
+                                    <a href="#reviewkbm">Knowledge Base Manual Review for Local Extensions</a>
+                                </li>
+                              </ol>
+                           </li>
+                    <li>
+                        <a href="#termsofuse">Review the VIVO Terms of Use</a>
+                    </li>
+                    <li>
+                        <a href="#nextsteps">Next Steps</a>
+                    </li>
+                </ol>
+            </toc>
+            <hr/>
+            <h3 id="preparation">I. Before Performing the Upgrade</h3>
+            <br/>
+                Create backups of:
+            <ul style="list-style-type: square;">
+                <li>
+                    The VIVO distribution directory (which contains the source for VIVO 1.3)
+                </li>
+                <li>
+                    The VIVO home directory (pointed to by your deploy.properties file)
+                </li>
+                <li>
+                    The webapps directory in Tomcat
+                </li>
+                <li>
+                    MySQL database (most people use mysqldump to create the backup)
+                </li>
+            </ul>
+            <p>
+                The upgrade process is similar to the initial install process
+                with
+                the following exceptions:
+            </p>
+            <ul>
+                <li>
+                    You do not need to reinstall MySQL or recreate the MySQL database. Please
+                    backup your MySQL database as noted above.
+                </li>
+                <li>
+                    First-time login of the root account after the upgrade
+                    process is complete will use the password previously set (not the
+                    default password used on the first login after the initial
+                    installation.)
+                </li>
+                <li>
+                    The first time Apache Tomcat starts up after the upgrade, an automated
+                    process will modify the knowledge base to align the
+                    data with any ontology updates made for the new release. See the section on the <a href="#kbm">Knowledge Base Migration</a>
+                    below for more information.
+                </li>
+            </ul>
+
+            <h3 id="changes">II. Noteworthy Changes</h3>
+            	<ul>
+            	    <li>
+                	    <h4 id="newproperty">New properties in deploy.properties</h4>
+                	    <ul>
+                	        <li>
+                	            <code>profile.eligibleTypeList</code> describes which classes of Individuals may
+                	            be assigned as profile pages.
+                	        </li>
+                	        <li>
+                	            <code>proxy.eligibleTypeList</code> describes which classes of Individuals are
+                 	            eligible for "self-editing" by proxy.
+                	        </li>
+                	    </ul>
+                	    <p>
+             	            See the table in <a href="#upgrade_process">Section III</a> for more details.
+             	        </p>
+                	</li>
+            	    <li>
+                	    <h4 id="changetoconfig">Change to Tomcat configuration</h4>
+                        <p>
+                            In order for VIVO to correctly handle international characters,
+                            you must configure Tomcat to conform to the URI standard by
+                            accepting percent-encoded UTF-8.
+                        </p>
+                        <p>
+                            Edit Tomcat's conf/server.xml and add the following attribute to each of the
+                            Connector elements: URIEncoding="UTF-8".
+                        </p>
+                        <pre>
+                    &lt;Server ...&gt;
+                      &lt;Service ...&gt;
+                        &lt;Connector ... URIEncoding="UTF-8"/&gt;
+                          ...
+                        &lt;/Connector&gt;
+                      &lt;/Service&gt;
+                    &lt;/Server&gt;
+                        </pre>
+                	</li>
+               </ul>
+
+            <h3 id="upgrade_process">III. Upgrade Instructions</h3>
+                <p>
+                    1. Download the new distribution file and unpack it into a new
+                    source directory.
+                </p>
+                <p>
+                    2. Create a new deploy.properties using the same settings as in
+                    your previous installation and set values for the new variables as described
+                    below (vitro.local.solr.url, vitro.local.solr.ipaddress.mask,
+                    vitro.home.directory, email.smptHost, email.replyTo,
+                    rootUser.emailAddress)
+                    <br>
+                </p>
+                <p>
+                    <!-- deploy.properties table from install.html -->
+                </p>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <th>
+                            Property Name
+                        </th>
+                        <th>
+                            Example Value
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Default namespace: VIVO installations make their
+                            RDF resources available for harvest using linked data. Requests for RDF
+                            resource URIs redirect to HTML or RDF representations as specified by
+                            the client. To make this possible, VIVO's default namespace must have a
+                            certain structure and begin with the public web address of the VIVO
+                            installation. For example, if the web address of a VIVO installation is
+                            "http://vivo.example.edu/" the default namespace must be set to
+                            "http://vivo.example.edu/individual/" in order to support linked data.
+                            Similarly, if VIVO is installed at "http://www.example.edu/vivo" the
+                            default namespace must be set to
+                            "http://www.example.edu/vivo/individual/"<h5>* The namespace must end with "individual/" (including the
+                                trailing slash).</h5>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            Vitro.defaultNamespace
+                        </td>
+                        <td>
+                            http://vivo.mydomain.edu/individual/
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where Vitro code is located. In most
+                            deployments, this is set to ./vitro-core (It is not uncommon for this
+                            setting to point elsewhere in development environments).
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.core.dir
+                        </td>
+                        <td>
+                            ./vitro-core
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where tomcat is installed.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            tomcat.home
+                        </td>
+                        <td>
+                            /usr/local/tomcat
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Name of your VIVO application.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            webapp.name
+                        </td>
+                        <td>
+                            vivo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            URL of Solr context used in local VIVO search.
+                            Should consist of:<pre>    scheme + servername + port + vivo_webapp_name + "solr"</pre>
+                            In the standard installation, the Solr context will be on the same
+                            server as VIVO, and in the same Tomcat instance. The path will be the
+                            VIVO webapp.name (specified above) + "solr"
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.local.solr.url
+                        </td>
+                        <td>
+                            http://localhost:8080/vivosolr
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Restricts access to the Solr search platform.
+                            One or more regular expressions, separated by commas. When a request is
+                            made to Solr, the IP address of the requestor must match one of the
+                            patterns, or the request will be rejected.
+                            <br>
+                            Examples:<code>
+                                <ul>
+                                    <li>
+                                        vitro.local.solr.ipaddress.mask = 127\.0\.0\.1
+                                    </li>
+                                    <li>
+                                        vitro.local.solr.ipaddress.mask =
+                                        127\.0\.0\.1,0:0:0:0:0:0:0:1
+                                    </li>
+                                    <li>
+                                        vitro.local.solr.ipaddress.mask = 169.254.*
+                                    </li>
+                                </ul>
+                            </code>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.local.solr.ipaddress.mask
+                        </td>
+                        <td>
+                            127\.0\.0\.1,0:0:0:0:0:0:0:1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Directory where the VIVO application will store
+                            the data that it creates. This includes uploaded files (usually images)
+                            and the Solr search index. Be sure this directory exists and is
+                            writable by the user who the Tomcat service is running as.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            vitro.home.directory
+                        </td>
+                        <td>
+                            /usr/local/vivo/data
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify an SMTP host that the application will
+                            use for sending e-mail (Optional). If this is left blank, the contact
+                            form will be hidden and disabled, and users will not be notified of
+                            changes to their accounts.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            email.smtpHost
+                        </td>
+                        <td>
+                            smtp.servername.edu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify an email address which will appear as
+                            the sender in e-mail notifications to users (Optional). If a user
+                            replies to the notification, this address will receive the reply. If a
+                            user's e-mail address is invalid, this address will receive the error
+                            notice. If this is left blank, users will not be notified of changes to
+                            their accounts.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            email.replyTo
+                        </td>
+                        <td>
+                            vivoAdmin@my.domain.edu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the JDBC URL of your database. Change
+                            the end of the URL to reflect your database name (if it is not "vivo").
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.url
+                        </td>
+                        <td>
+                            jdbc:mysql://localhost/vivo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the username to match the authorized user
+                            you created in MySQL.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.username
+                        </td>
+                        <td>
+                            username
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the password to match the password you
+                            created in MySQL.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.password
+                        </td>
+                        <td>
+                            password
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the maximum number of active connections
+                            in the database connection pool to support the anticipated number of
+                            concurrent page requests.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.pool.maxActive
+                        </td>
+                        <td>
+                            40
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the maximum number of database
+                            connections that will be allowed to remain idle in the connection pool.
+                            Default is 25% of the maximum number of active connections.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.pool.maxIdle
+                        </td>
+                        <td>
+                            10
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the dbtype setting to use a database
+                            other than MySQL. Otherwise, leave this value unchanged. Possible
+                            values are DB2, derby, HSQLDB, H2, MySQL, Oracle, PostgreSQL, and
+                            SQLServer. Refer to http://openjena.org/wiki/SDB/Databases_Supported
+                            for additional information.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.dbtype
+                        </td>
+                        <td>
+                            MySQL
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify a driver class name to use a database
+                            other than MySQL. Otherwise, leave this value unchanged. This JAR file
+                            for this driver must be added to the the webapp/lib directory within
+                            the vitro.core.dir specified above.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.driver
+                        </td>
+                        <td>
+                            com.mysql.jdbc.Driver
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Change the validation query used to test
+                            database connections only if necessary to use a database other than
+                            MySQL. Otherwise, leave this value unchanged.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            VitroConnection.DataSource.validationQuery
+                        </td>
+                        <td>
+                            SELECT 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Specify the email address of the root user
+                            account for the VIVO application. This user will have an initial
+                            temporary password of 'rootPassword'. You will be prompted to create a
+                            new password on first login.
+                            <p>
+                                NOTE: The root user account has access to all data and all
+                                operations in VIVO. Data views may be surprising when logged in as the
+                                root user. It is best to create a Site Admin account to use for every
+                                day administrative tasks.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            rootUser.emailAddress
+                        </td>
+                        <td>
+                            vivoAdmin@my.domain.edu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The URI of a property that can be used to
+                            associate an Individual with a user account. When a user logs in with a
+                            name that matches the value of this property, the user will be
+                            authorized to edit that Individual
+                            (the value of the property must be either a String literal or an untyped literal).
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            selfEditing.idMatchingProperty
+                        </td>
+                        <td>
+                            http://vivo.mydomain.edu/ns#networkId
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            If an external authentication system like Shibboleth or CUWebAuth is to be
+                            used, these properties say how the login button should be labeled, and which
+                            HTTP header will contain the user ID from the authentication system. If such
+                            a system is not to be used, leave these commented out. Consult the installation
+                            instructions for more details.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            externalAuth.buttonText
+                            <br/>
+                            externalAuth.netIdHeaderName
+                        </td>
+                        <td>
+                            Log in using BearCat Shibboleth
+                            <br/>
+                            remote_userID
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The temporal graph visualization can require
+                            extensive machine resources. This can have a particularly noticable
+                            impact on memory usage if
+                            <ul>
+                                <li>
+                                    The organization tree is deep,
+                                </li>
+                                <li>
+                                    The number of grants and publications is large.
+                                </li>
+                            </ul>
+                            VIVO V1.4 mitigates this problem by the way of a caching
+                            mechanism and hence we can safely set this to be enabled by default.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            visualization.temporal
+                        </td>
+                        <td>
+                            enabled
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            The temporal graph visualization is used to
+                            compare different organizations/people within an organization on
+                            parameters like number of publications or grants. By default, the app
+                            will attempt to make its best guess at the top level organization in
+                            your instance. If you're unhappy with this selection, uncomment out the
+                            property below and set it to the URI of the organization individual you
+                            want to identify as the top level organization. It will be used as the
+                            default whenever the temporal graph visualization is rendered without
+                            being passed an explicit org. For example, to use "Ponce School of
+                            Medicine" as the top organization:
+                            <br>
+                            <code>visualization.topLevelOrg =
+                                http://vivo.psm.edu/individual/n2862</code>
+                            <br>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            visualization.topLevelOrg
+                        </td>
+                        <td>
+                            http://vivo-trunk.indiana.edu/individual/topLevelOrgURI
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            An absolute file path, pointing to the root directory of the Harvester utility.
+                            You must include the final slash.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                            harvester.location
+                        </td>
+                        <td>
+                            /usr/local/vivo/harvester/
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                          Types of individual which can be selected as profile pages for user accounts.
+                          If this is omitted, defaults to http://www.w3.org/2002/07/owl#Thing
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          profile.eligibleTypeList
+                        </td>
+                        <td>
+                           http://xmlns.com/foaf/0.1/Person
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                          Types of individual for which we can create proxy editors.
+                          If this is omitted, defaults to http://www.w3.org/2002/07/owl#Thing
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          proxy.eligibleTypeList
+                        </td>
+                        <td>
+                           http://xmlns.com/foaf/0.1/Person, http://xmlns.com/foaf/0.1/Organization
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+                <p>
+                    3. Apply any previous changes you have made to the new source
+                    directory.
+                </p>
+                <blockquote>
+                    <strong>Special notes regarding source files</strong>
+                    <ul>
+                        <li>
+                            This process assumes any changes made to the application
+                            were
+                            made in the source directory and deployed, and were not made directly
+                            within the Tomcat webapps directory.
+                        </li>
+                        <li>
+                            In many cases, simply copying the modified files from your
+                            original source directory will not work since the files on which they
+                            are based have changed. It will be necessary to inspect the new source
+                            files and add any changes to them at that time.
+                        </li>
+                        <li>
+                            NIH-funded VIVO implementations will need to apply the
+                            Google
+                            Analytics Tracking Code (GATC) to <code>googleAnalytics.ftl</code>
+                            in
+                            the theme:<pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
+                            A sample <code>googleAnalytics.ftl</code>
+                            is included in the built-in
+                            theme. This file serves only as an example, and you must replace the
+                            tracking code shown with your institution's own tracking code. For
+                            additional information about the GATC for the NIH-funded VIVO
+                            implementation sites and a copy of your institution's tracking code,
+                            see the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO
+                                Google
+                                Analytics
+                                wiki
+                                page</a>.
+                        </li>
+                    </ul>
+                </blockquote>
+                <p>
+                    5. Stop Apache Tomcat and from your VIVO source directory, run
+                    ant
+                    by typing: <code>ant all</code>
+                </p>
+                <p>
+                    6. Start Apache Tomcat and log into VIVO as the root user when the upgrade is
+                    completed.  Depending on the size of your database, the migration process may
+                    take up to several hours. When it is complete, you will
+                    see a message in the catalina.log file that the server has started.<pre>INFO: Server startup in XXXXX ms</pre>
+                </p>
+                <p>
+                    7. As root or an administrator, request a rebuild of the Solr search index:
+                    Go to the "Site Admin" page and click on "Rebuild Search Index" under the
+                    heading "Refresh Content".
+                </p>
+                <p>
+                    8. Review and save aside the knowledge base migration logs.
+                    The knowledge base migration process described in the next section will generate logs.
+                    These logs will be overwritten if you redeploy the VIVO application (but not if you restart tomcat), and since
+                    they may be a useful reference if questions come up about your 1.4 VIVO data after deployment, you should save them aside.
+                    The logs are created in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
+                </p>
+                <dl>
+                    <dt>
+                        <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).log</code>
+                    </dt>
+                    <dd>
+                        A log of a summary of updates that were made to the knowledge
+                        base. This file should end with "Finished knowledge base migration".
+                        If this file contains any warnings they should be reviewed with your
+                        implementation team representative to see whether any corrective action needs to be taken.
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).error.log</code>
+                    </dt>
+                    <dd>
+                        A log of errors that were encountered during the upgrade
+                        process. This file should be empty if the upgrade was successful. If any errors are encountered
+                        you will need to rerun the knowledge base migration.
+                    </dd>
+                </dl>
+                <p>
+
+                </p>
+                </p>
+                <h3 id="kbm">IV. Knowledge Base Migration</h3>
+                <h4 id="kbmprocess">i.Knowledge Base Migration Process</h4>
+                <p>
+                   For a description of changes to the VIVO ontology in version 1.4 see the <a href="https://sourceforge.net/apps/mediawiki/vivo/index.php?title=Ontology_changes_from_version_1.3_to_1.4">sourceforge wiki page on ontology changes</a>.
+                </p>
+                <p>
+                    Changes to the VIVO core ontology may require corresponding
+                    modifications to the knowledge base instance data and ontology annotations.
+                    When VIVO first starts up following the upgrade, it will
+                    initiate a process to examine the knowledge base and apply necessary
+                    changes. The knowledge base migration process will make the following types of changes:
+                </p>
+                <dl>
+                    <dt>
+                        Class or Property renaming
+                    </dt>
+                    <dd>
+                        All references to the class (in the subject or object
+                        position) will be updated to the new name. References to the property will be
+                        updated to the new name.
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Class or Property deletion
+                    </dt>
+                    <dd>
+                        All type assertions of a deleted class will be removed.
+                        <br>
+                        All statements using a deleted property will be changed to use the
+                        nearest available superproperty. If there is no available superproperty
+                        then the statement will be deleted from the knowledge base. Note that
+                        all removed and added data is recorded in the files in the changedData
+                        directory.
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Annotation property default values
+                    </dt>
+                    <dd>
+                        If a site has modified the value of a vitro annotation (such
+                        as
+                        displayRankAnnot or displayLimitAnnot) so that it is no longer using
+                        the default, then that setting will be left unchanged.
+                        <br>
+                        If a site is using the default value of a vitro annotation, and the
+                        default has been changed in the new version of the ontology, then the
+                        new default value will be propagated to the knowledge base.
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Structural changes
+                    </dt>
+                    <dd>
+                        Changes in the way individuals (intances of classes) are related to other individuals.
+                    </dd>
+                </dl>
+                <p>
+                    In addition to the logs described in <strong>step 8</strong> of the <a href="#upgrade_process">previous section</a>, the knowledge base migration
+                    process will log copies of all additions and deletions that were made to the knowledge base in the following files:
+                </p>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/removedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were removed from the knowledge base.
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/addedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were added to the knowledge base.
+                    </dd>
+                </dl>
+                <h4 id="reviewkbm">ii. Knowledge Base Manual Review for Local Extensions</h4>
+                Not all of the modifications that may be required are
+                    automated. If you have local extensions to areas of the ontology that have changed, a manual review of the knowledge base is recommended after
+                    the automated upgrade process.
+                <h3 id="termsofuse">V. Review the VIVO Terms of Use</h3>
+                <p>
+                    VIVO comes with a "Terms of Use" statement linked from the footer.  The "Site Name"
+                    you assign in the "Site Information" form under the <strong>Site Admin</strong>
+                    area will be
+                    inserted into the "Terms of Use" statement.  If you want to edit the text content more than just
+                    the "Site Name", the file can be found here:<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+                    Be sure to make the changes in your source files and deploy them to your tomcat so you don't lose
+                    your changes next time you deploy for another reason.
+                </p>
+                <h3 id="nextsteps">Next Steps</h3>
+                <p>
+                    Now that you have VIVO up and running, please refer to the <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>
+                     for information about its operation.
+                </p>
+                </div>
+
+                <!-- #wrapper-content -->
+                <div id="footer" role="contentinfo">
+                    <p class="copyright">
+                        <small>
+                            ©2011 All Rights Reserved
+                        </small>
+                        | Powered
+                        by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+                    </p>
+                    <div id="nav" role="navigation">
+                        <ul id="footer-nav" role="list">
+                            <li role="listitem">
+                                <a href="http://vivoweb.org/about">About</a>
+                            </li>
+                            <li role="listitem">
+                                <a href="http://vivoweb.org/contact">Contact Us</a>
+                            </li>
+                            <li role="listitem">
+                                <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- #footer -->
+
+        </div>
+    </body>
+</html>

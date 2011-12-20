@@ -29,11 +29,6 @@
         
             <ul id ="individual-tools-people" role="list">
                 <li role="listitem"><img id="uriIcon" title="${individual.uri}" class="middle" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/></li>
-    
-                <#assign rdfUrl = individual.rdfUrl>
-                <#if rdfUrl??>
-                    <li role="listitem"><a title="View this individual in RDF format" class="icon-rdf" href="${rdfUrl}">RDF</a></li>
-                </#if>
                 
                 <@qr.renderCode />
             </ul>
@@ -55,11 +50,11 @@
             </header>
 
             <ul role="list">
-                <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
-                <li role="listitem"><a href="#"><img class="co-author" src="" /></a></li>
+                <li role="listitem"><a href="#" title="co-author image"><img class="co-author" src="" /></a></li>
+                <li role="listitem"><a href="#" title="co-author image"><img class="co-author" src="" /></a></li>
             </ul>
 
-            <p class="view-all-coauthors"><a class="view-all-style" href="#">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
+            <p class="view-all-coauthors"><a class="view-all-style" href="#" title="view all">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
         </section>
         -->
         
@@ -68,11 +63,11 @@
         <header>
             <#if relatedSubject??>
                 <h2>${relatedSubject.relatingPredicateDomainPublic} for ${relatedSubject.name}</h2>
-                <p><a href="${relatedSubject.url}">&larr; return to ${relatedSubject.name}</a></p>
+                <p><a href="${relatedSubject.url}" title="return to">&larr; return to ${relatedSubject.name}</a></p>
             <#else>                
-                <h1 class="fn foaf-person">
+                <h1 class="vcard foaf-person">
                     <#-- Label -->
-                    <@p.label individual editable />
+                    <span class="fn"><@p.label individual editable /></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
@@ -117,6 +112,14 @@
 <#-- Ontology properties -->
 <#include "individual-properties.ftl">
 
+<#assign rdfUrl = individual.rdfUrl>
+
+<#if rdfUrl??>
+    <script>
+        var individualRdfUrl = '${rdfUrl}';
+    </script>
+</#if>
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
@@ -125,5 +128,8 @@ ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
+              

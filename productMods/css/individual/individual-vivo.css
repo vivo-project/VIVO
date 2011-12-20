@@ -11,20 +11,6 @@ ul#individual-tools li {
     padding-right: 9px;
     float: left;
 }
-.qtip-content h5 {
-    margin: 0;
-    padding: 0;
-}
-input#uriLink {
-    margin: 0;
-    width: 350px;
-    font-size: .8em;
-}
-a.close {
-    float: right;
-    margin-right: .3em;
-    font-size: .8em;
-}
 ul#individual-phone {
     clear: both;
     list-style-type: circle;
@@ -141,7 +127,7 @@ div.overview-value :last-child {
 }
 /* <------ INDIVIDUAL VISUALIZATION */
 #visualization {
-    padding: 0 0 20px 20px;
+    padding: 0 0 0 20px;
     padding-top: 0;
     float: right;
     background-color: #fff;

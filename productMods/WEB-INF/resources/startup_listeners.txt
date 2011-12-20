@@ -1,0 +1,73 @@
+#
+# ServletContextListeners for VIVO, to be instantiated and run by the StartupManager.
+# 
+# For more information, 
+#     https://sourceforge.net/apps/mediawiki/vivo/index.php?title=The_StartupManager
+#
+
+edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
+
+edu.cornell.mannlib.vitro.webapp.servlet.setup.BasicSmokeTests
+
+edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
+
+edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
+
+# Comment out this listener to run Vitro without a database
+# If used, this listener must be run before JenaDataSourceSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
+
+# This listener is required in order to use a Jena triple store (currently the only option)
+edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaDataSourceSetup
+
+edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
+
+# Invokes a process to move any uploaded files into the new file storage system.
+# Needs to run after FileStorageSetup and JenaDataSourceSetup.
+# Should run before Pellet is set up.  
+edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateUploadedFiles
+
+# Update to the new UserAccounts model (1.3). Needs to run after JenaDataSourceSetup.
+edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateUserAccounts
+
+# Invokes process to perform updates to align with ontology changes if needed -->
+# Needs to run before submodels are attached and Pellet is set up -->
+edu.cornell.mannlib.vitro.webapp.servlet.setup.UpdateKnowledgeBase
+
+edu.cornell.mannlib.vitro.webapp.servlet.setup.FileGraphSetup
+
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SimpleReasonerSetup
+
+# Must run after JenaDataSourceSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ThemeInfoSetup
+
+edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsLoader
+
+edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper$Setup
+
+# vivo specific, must appear before other policies
+edu.cornell.mannlib.vivo.auth.policy.VivoPolicy$Setup
+  
+edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
+
+edu.cornell.mannlib.vitro.webapp.auth.policy.RootUserPolicy$Setup
+
+edu.cornell.mannlib.vivo.auth.policy.SelfEditorRelationshipPolicy$Setup
+
+edu.cornell.mannlib.vitro.webapp.auth.policy.RestrictHomeMenuItemEditingPolicy$Setup
+
+# Add VIVO specific DocumentModifers, this must come before SolrSetup
+edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
+
+# The Solr index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up.
+edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
+
+edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
+
+# On shutdown, this will kill the background thread started by Apache Commons File Upload
+org.apache.commons.fileupload.servlet.FileCleanerCleanup
+
+edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
+
+# This should be near the end, because it will issue a warning if the connection to Solr times out.
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest

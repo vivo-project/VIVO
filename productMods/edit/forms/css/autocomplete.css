@@ -9,7 +9,7 @@ that don't load customFormWithAutocomplete.css still have access to these styles
 }
 .acSelectionInfo {
     background-color: #d9d9d9;
-    padding: .5em 1em;
+    padding: .2em .35em;
 }
 ul.ui-autocomplete {
     font-size: .95em;

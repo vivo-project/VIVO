@@ -28,17 +28,11 @@
 	<bean id="coprincipalinvestigator"
 		class="edu.cornell.mannlib.vitro.webapp.visualization.coprincipalinvestigator.CoPIGrantCountRequestHandler" />
 
-	<bean id="entity_comparison"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.EntityPublicationCountRequestHandler" />
-
     <bean id="pub_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.cached.TemporalPublicationVisualizationRequestHandler" />		
-
-	<bean id="entity_grant_count"
-		class="edu.cornell.mannlib.vitro.webapp.visualization.entitygrantcount.EntityGrantCountRequestHandler" />
+        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalPublicationVisualizationRequestHandler" />		
 
     <bean id="grant_temporal"
-        class="edu.cornell.mannlib.vitro.webapp.visualization.entitycomparison.cached.TemporalGrantVisualizationRequestHandler" />	
+        class="edu.cornell.mannlib.vitro.webapp.visualization.temporalgraph.TemporalGrantVisualizationRequestHandler" />	
 	
     <bean id="map_of_science"
         class="edu.cornell.mannlib.vitro.webapp.visualization.mapofscience.MapOfScienceVisualizationRequestHandler" />

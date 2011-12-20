@@ -50,7 +50,11 @@ var Marker = Class.extend({
 		this.handlers = handlers;
 	},
 	unregisterEvents : function() {
-		removeListeners(this.handlers);
-		this.handlers = null;
+		if (this.handlers) {
+			$.each(this.handlers, function(i, handler) {
+				removeListener(handler);
+			});
+			this.handlers = null;
+		}
 	}
 });

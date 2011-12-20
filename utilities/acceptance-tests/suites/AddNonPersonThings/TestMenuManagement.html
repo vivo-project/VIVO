@@ -236,12 +236,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=option[value=http://vivoweb.org/ontology#vitroClassGroupcourses]</td>
+	<td>submit-Add</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>submit-Add</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -317,6 +317,11 @@
 <tr>
 	<td>click</td>
 	<td>submit-Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -400,6 +405,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
 	<td>Default Menu</td>
 	<td></td>
@@ -480,8 +490,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Primate Habitat Research Grant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Grant</td>
 	<td></td>
 </tr>
 <tr>
@@ -490,8 +510,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>Grant</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Service (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -525,6 +555,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Course</td>
 	<td></td>
@@ -552,6 +587,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Equipment (2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,7 +626,27 @@
 </tr>
 <tr>
 	<td>click</td>
+	<td>link=Address (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=1234 Northern African Nation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Building (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -601,7 +661,62 @@
 </tr>
 <tr>
 	<td>click</td>
+	<td>link=Campus (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Laboratory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Facility (3)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Jane Memorial Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Building</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Lab Admin Office</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Room</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Research Lab Room 123</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Room (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,7 +756,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/ul/li[5]/span/a[2]/img</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]/span/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -661,7 +776,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/ul/li[5]/span/a[2]/img</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]/span/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -681,7 +796,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/ul/li[5]/span/a[2]/img</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]/span/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Remove Menu Item</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>removeMenuItem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Default Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='wrapper-content']/ul/li[6]/span/a[2]/img</td>
 	<td></td>
 </tr>
 <tr>

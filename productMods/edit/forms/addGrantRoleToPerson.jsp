@@ -78,8 +78,6 @@ This is intended to create a set of statements like:
         %> <c:set var="editMode" value="repair"/><%
     }
    %>
-   
-%>
 
 <%@page import="edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty"%><c:set var="vivoOnt" value="http://vivoweb.org/ontology" />
 <c:set var="vivoCore" value="${vivoOnt}/core#" />
@@ -407,6 +405,8 @@ if ( ((String)request.getAttribute("predicateUri")).endsWith("hasPrincipalInvest
 <c:set var="yearHint" value="<span class='hint'>(YYYY)</span>" />
 
 <jsp:include page="${preForm}" />
+<h1>JSP form, must be removed for the 1.4!</h1>
+
 
 <% if( mode == EditMode.ERROR ){ %>
  <div>This form is unable to handle the editing of this position because it is associated with 

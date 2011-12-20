@@ -23,7 +23,7 @@
 <#assign egoCoInvestigatorsListDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copis'>
 <#assign egoCoInvestigationNetworkDataFileURL = '${urls.base}${dataVisualizationURLRoot}?vis=coprincipalinvestigator&uri=${egoURI}&vis_mode=copi_network_download'>
 
-<#assign coAuthorIcon = '${urls.images}/visualization/co_author_icon.png'>
+<#assign coAuthorIcon = '${urls.images}/visualization/coauthorship/co_author_icon.png'>
 
 <#assign swfLink = '${urls.images}/visualization/coauthorship/EgoCentric.swf'>
 <#assign adobeFlashDetector = '${urls.base}/js/visualization/coauthorship/AC_OETags.js'>
@@ -117,7 +117,7 @@ $(document).ready(function(){
     <div id="ego_profile">
             
         <#-- Label -->
-            <h2><a href="${egoVivoProfileURL}"><span id="ego_label" class="investigator_name"></span></a></h2>
+            <h2><a href="${egoVivoProfileURL}" title="investigator name"><span id="ego_label" class="investigator_name"></span></a></h2>
     
         <#-- Moniker-->
             <em id="ego_moniker" class="moniker"></em>
@@ -126,9 +126,9 @@ $(document).ready(function(){
     
     <div class = "toggle_visualization">
         <div id="coauthorship_link_container" class="collaboratorship-link-container">
-            <div class="collaboratorship-icon"><a href="${coauthorshipURL}"><img src="${coAuthorIcon}" /></a></div>
+        	<div class="collaboratorship-icon"><a href="${coauthorshipURL}" title="co-author"><img src="${coAuthorIcon}" /></a></div>
             <div class="collaboratorship-link">
-                <h3><a href="${coauthorshipURL}">Co-Author Network</a></h3>
+                <h3><a href="${coauthorshipURL}" title="co-author network">Co-Author Network</a></h3>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@ $(document).ready(function(){
         <div class="sub_headings"><h3 >Co-Investigator Network </h3></div>
         
         <#if (numOfCoInvestigations?? && numOfCoInvestigations > 0) || (numOfInvestigators?? && numOfInvestigators > 0) > 
-                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}">(GraphML File)</a></div>
+                <div class = "graphml-file-link"><a href="${egoCoInvestigationNetworkDataFileURL}" title="co-investigator">(GraphML File)</a></div>
         <#else>
 
             <#if numOfInvestigators?? && numOfInvestigators <= 0 >
@@ -148,7 +148,7 @@ $(document).ready(function(){
             </#if>
             
             <span id="no_coinvestigations">Currently there are no ${investigatorsText!} grants for 
-                <a href="${egoVivoProfileURL}"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> 
+                <a href="${egoVivoProfileURL}" title="investigator name"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> 
                 in the VIVO database.
             </span>                     
         </#if>
@@ -156,7 +156,7 @@ $(document).ready(function(){
     <#else>
     
         <span id="no_coinvestigations">Currently there are no grants for 
-            <a href="${egoVivoProfileURL}"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> in the 
+            <a href="${egoVivoProfileURL}" title="co-investigator"><span id="no_coinvestigations_person" class="investigator_name">this investigator</span></a> in the 
             VIVO database.
         </span>
     
@@ -182,7 +182,7 @@ $(document).ready(function(){
                 
                 <em id="profileMoniker" class="moniker"></em>
                 
-                <div id="profile-links"><a href="#" id="profileUrl">VIVO profile</a></div> 
+                <div id="profile-links"><a href="#" id="profileUrl" title="VIVO profile">VIVO profile</a></div> 
 
                 <div class="investigator_stats" id="num_works"><span class="numbers" style="width: 40px;" id="works"></span>&nbsp;&nbsp;
                 <span class="investigator_stats_text">Grant(s)</span></div>
@@ -225,13 +225,14 @@ $(document).ready(function(){
         <div class="vis_stats">
         
         <div class="sub_headings" id="table_heading"><h3>Tables</h3></div>
+            <p style="float:left;font-size:.9em">The information in the following tables is for all years.&nbsp;<img class="filterInfoIcon" width="16px" height="16px" id="imageIconThree" src="${urls.images}/iconInfo.png" alt="information icon" title="The spark lines shown above reflect grants through the last complete calendar year. These tables, however, show the grant information for all years, based on the information loaded in the VIVO system." /></p>
         
             <div class="vis-tables">
 
                 <p id="grants_table_container" class="datatable">
 
                 <#assign tableID = "grant_data_table" />
-                <#assign tableCaption = "Grants per year " />
+                <#assign tableCaption = "Grants per year" />
                 <#assign tableActivityColumnName = "Grants" />
                 <#assign tableContent = egoGrantSparklineVO.yearToActivityCount />
                 <#assign fileDownloadLink = egoGrantSparklineVO.downloadDataLink />

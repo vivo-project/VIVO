@@ -38,9 +38,9 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 			.getLog(CoPIGrantCountConstructQueryRunner.class.getName());
 
 	private static final String SPARQL_QUERY_COMMON_CONSTRUCT_AND_WHERE_STRING = 
-			"?Role core:roleIn ?Grant . "
+			"?Role core:roleContributesTo ?Grant . "
 //			+ "?Grant rdfs:label ?GrantLabel . "
-			+ "?Grant core:relatedRole ?RelatedRole . ";
+			+ "?Grant core:contributingRole ?RelatedRole . ";
 
 	public CoPIGrantCountConstructQueryRunner(String egoURI, Dataset dataset,
 			Log log) {
@@ -160,7 +160,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
-				+ "?Role core:roleIn ?Grant ."
+				+ "?Role core:roleContributesTo ?Grant ."
 				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 				+ "?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
 				+ "?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
@@ -174,7 +174,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 				+ ">"
 				+ preboundProperty
 				+ " ?Role . "
-				+ "?Role core:roleIn ?Grant ."
+				+ "?Role core:roleContributesTo ?Grant ."
 				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 				+ "?dateTimeIntervalValueForGrant core:start ?startDateForGrant . "
 				+ "?startDateForGrant core:dateTime ?startDateTimeValueForGrant . "
@@ -185,7 +185,7 @@ public class CoPIGrantCountConstructQueryRunner implements ModelConstructor {
 //				+ ">"
 //				+ preboundProperty
 //				+ " ?Role . "
-//				+ "?Role core:roleIn ?Grant ."
+//				+ "?Role core:roleContributesTo ?Grant ."
 //				+ "?Grant core:dateTimeInterval ?dateTimeIntervalValueForGrant . "
 //				+ "?dateTimeIntervalValueForGrant core:end ?endDateForGrant . "
 //				+ "?endDateForGrant core:dateTime ?endDateTimeValueForGrant . "

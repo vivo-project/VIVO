@@ -25,6 +25,8 @@ import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.Organizat
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.OrganizationToPublicationsForSubOrganizationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PeopleToGrantsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PeopleToPublicationsModelConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PersonToGrantsModelConstructor;
+import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.PersonToPublicationsModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.modelconstructor.SubOrganizationWithinModelConstructor;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Activity;
 import edu.cornell.mannlib.vitro.webapp.visualization.valueobjects.Entity;
@@ -419,7 +421,8 @@ public class SelectOnModelUtilities {
 	
 	private static void getPublicationForEntity(
 			ResultSet queryResult,
-			SubEntity subEntity, Map<String, Activity> allDocumentURIToVOs) {
+			SubEntity subEntity, 
+			Map<String, Activity> allDocumentURIToVOs) {
 		
 		Set<Activity> currentEntityPublications = new HashSet<Activity>();
 
@@ -685,59 +688,136 @@ public class SelectOnModelUtilities {
 												dataset);
 
 		for (SubEntity person : people) {
-		
-			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-			fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
-			fieldLabelToOutputFieldLabel.put("grantLabel", QueryFieldLabels.GRANT_LABEL);
-			fieldLabelToOutputFieldLabel.put("grantStartDate", QueryFieldLabels.GRANT_START_DATE);
-			fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
-			
-			String whereClause = ""
-				+ "{"
-				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsAnInvestigator ?grant . "
-				+ " ?grant rdfs:label ?grantLabel . "
-				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
-				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
-				+ "}"
-				+ "UNION"
-				+ "{"
-				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsPI ?grant . "
-				+ " ?grant rdfs:label ?grantLabel . "
-				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
-				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
-				+ "}"
-				+ "UNION"
-				+ "{"
-				+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsCoPI ?grant . "
-				+ " ?grant rdfs:label ?grantLabel . "
-				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
-				+ " OPTIONAL { "
-				+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
-				+ "}";
-			
-			QueryRunner<ResultSet> personGrantsQuery = 
-				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
-										"",
-										whereClause,
-										"",
-										peopleGrantsModel);
-			
-			getGrantForEntity(personGrantsQuery.getQueryResult(), person, allGrantURIToVOs);
-			
-			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
-					person, 
-					peopleGrantsModel);
-
-			person.setLastCachedAtDateTime(lastCachedAtForEntity);
-			
-			
+			updateGrantsForPerson(person, allGrantURIToVOs, peopleGrantsModel);
 		}
 		return allGrantURIToVOs;
+	}
+
+	/**
+	 * This method side-effects person and the central grants map.
+	 * @param person
+	 * @param allGrantURIToVOs
+	 * @param personGrantsModel
+	 * @throws MalformedQueryParametersException
+	 */
+	private static void updateGrantsForPerson(SubEntity person,
+			Map<String, Activity> allGrantURIToVOs, Model personGrantsModel)
+			throws MalformedQueryParametersException {
+		
+		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+		fieldLabelToOutputFieldLabel.put("grant", QueryFieldLabels.GRANT_URL);
+		fieldLabelToOutputFieldLabel.put("grantLabel", QueryFieldLabels.GRANT_LABEL);
+		fieldLabelToOutputFieldLabel.put("grantStartDate", QueryFieldLabels.GRANT_START_DATE);
+		fieldLabelToOutputFieldLabel.put("roleStartDate", QueryFieldLabels.ROLE_START_DATE);
+		
+		String whereClause = ""
+			+ "{"
+			+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsAnInvestigator ?grant . "
+			+ " ?grant rdfs:label ?grantLabel . "
+			+ " OPTIONAL { "
+			+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+			+ " OPTIONAL { "
+			+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+			+ "}"
+			+ "UNION"
+			+ "{"
+			+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsPI ?grant . "
+			+ " ?grant rdfs:label ?grantLabel . "
+			+ " OPTIONAL { "
+			+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+			+ " OPTIONAL { "
+			+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+			+ "}"
+			+ "UNION"
+			+ "{"
+			+ " <" + person.getIndividualURI() + "> vivosocnet:hasGrantAsCoPI ?grant . "
+			+ " ?grant rdfs:label ?grantLabel . "
+			+ " OPTIONAL { "
+			+ " 	?grant vivosocnet:startDateTimeOnGrant ?grantStartDate } . "
+			+ " OPTIONAL { "
+			+ " 	?grant vivosocnet:startDateTimeOnRole ?roleStartDate } . "
+			+ "}";
+		
+		QueryRunner<ResultSet> personGrantsQuery = 
+			new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+									"",
+									whereClause,
+									"",
+									personGrantsModel);
+		
+		getGrantForEntity(personGrantsQuery.getQueryResult(), person, allGrantURIToVOs);
+		
+		String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+				person, 
+				personGrantsModel);
+
+		person.setLastCachedAtDateTime(lastCachedAtForEntity);
+	}
+	
+	public static Map<String, Activity> getGrantsForPerson(
+			Dataset dataset, SubEntity person, boolean doCache)
+			throws MalformedQueryParametersException {
+		
+		Map<String, Activity> allGrantURIToVOs = new HashMap<String, Activity>();
+		
+		Model personGrantsModel = null;
+		
+
+		/*
+		 * If we dont want to cache the results then create the model directly without
+		 * using the ModelConstructorUtilities. Use case is the co-pi ego-centric 
+		 * visualization. 
+		 * */
+		if (doCache) {
+			personGrantsModel = ModelConstructorUtilities
+											.getOrConstructModel(
+													person.getIndividualURI(),
+													PersonToGrantsModelConstructor.MODEL_TYPE,
+													dataset);	
+		} else {
+			
+			ModelConstructor model = new PersonToGrantsModelConstructor(person.getIndividualURI(), dataset);
+			personGrantsModel = model.getConstructedModel();
+		}
+		
+		
+		updateGrantsForPerson(person, allGrantURIToVOs, personGrantsModel);
+			
+			
+		return allGrantURIToVOs;
+	}
+	
+	
+	public static Map<String, Activity> getPublicationsForPerson(
+			Dataset dataset, SubEntity person, boolean doCache)
+			throws MalformedQueryParametersException {
+		
+		Map<String, Activity> allPublicationURIToVOs = new HashMap<String, Activity>();
+		
+		Model personPublicationsModel = null;
+		
+
+		/*
+		 * If we dont want to cache the results then create the model directly without
+		 * using the ModelConstructorUtilities. Use case is the co-author ego-centric 
+		 * visualization. 
+		 * */
+		if (doCache) {
+			personPublicationsModel = ModelConstructorUtilities
+											.getOrConstructModel(
+													person.getIndividualURI(),
+													PersonToPublicationsModelConstructor.MODEL_TYPE,
+													dataset);	
+		} else {
+			
+			ModelConstructor model = new PersonToPublicationsModelConstructor(person.getIndividualURI(), dataset);
+			personPublicationsModel = model.getConstructedModel();
+		}
+		
+		
+		updatePublicationsForPerson(person, allPublicationURIToVOs, personPublicationsModel);
+			
+		return allPublicationURIToVOs;
 	}
 	
 	public static Map<String, Activity> getPublicationsForAssociatedPeople(
@@ -753,39 +833,53 @@ public class SelectOnModelUtilities {
 		
 		for (SubEntity person : people) {
 			
-//			System.out.println("getting publications for " + person.getIndividualLabel());
-			
-			Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
-			fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
-			fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
-			fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
-			
-			String whereClause = ""
-				+ " <" + person.getIndividualURI() + "> vivosocnet:hasPublication ?document . "
-				+ " ?document rdfs:label ?documentLabel . "
-				+ " OPTIONAL { "
-				+ " 	?document core:dateTimeValue ?dateTimeValue . "
-				+ "     ?dateTimeValue core:dateTime ?documentPublicationDate } . ";
-			
-			QueryRunner<ResultSet> personPublicationsQuery = 
-				new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
-										"",
-										whereClause,
-										"",
-										peoplePublicationsModel);
-			
-			getPublicationForEntity(personPublicationsQuery.getQueryResult(),
-									person,
-									allDocumentURIToVOs);
-			
-			String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
-					person, 
+			updatePublicationsForPerson(person, allDocumentURIToVOs,
 					peoplePublicationsModel);
-
-			person.setLastCachedAtDateTime(lastCachedAtForEntity);
 			
 		}
 		return allDocumentURIToVOs;
+	}
+
+	/**
+	 * This method side-effects the person and the central documents map.
+	 * @param person
+	 * @param allDocumentURIToVOs
+	 * @param peoplePublicationsModel
+	 * @throws MalformedQueryParametersException
+	 */
+	private static void updatePublicationsForPerson(SubEntity person,
+			Map<String, Activity> allDocumentURIToVOs,
+			Model peoplePublicationsModel)
+			throws MalformedQueryParametersException {
+		
+		Map<String, String> fieldLabelToOutputFieldLabel = new HashMap<String, String>();
+		fieldLabelToOutputFieldLabel.put("document", QueryFieldLabels.DOCUMENT_URL);
+		fieldLabelToOutputFieldLabel.put("documentLabel", QueryFieldLabels.DOCUMENT_LABEL);
+		fieldLabelToOutputFieldLabel.put("documentPublicationDate", QueryFieldLabels.DOCUMENT_PUBLICATION_DATE);
+		
+		String whereClause = ""
+			+ " <" + person.getIndividualURI() + "> vivosocnet:hasPublication ?document . "
+			+ " ?document rdfs:label ?documentLabel . "
+			+ " OPTIONAL { "
+			+ " 	?document core:dateTimeValue ?dateTimeValue . "
+			+ "     ?dateTimeValue core:dateTime ?documentPublicationDate } . ";
+		
+		QueryRunner<ResultSet> personPublicationsQuery = 
+			new GenericQueryRunnerOnModel(fieldLabelToOutputFieldLabel,
+									"",
+									whereClause,
+									"",
+									peoplePublicationsModel);
+		
+		getPublicationForEntity(personPublicationsQuery.getQueryResult(),
+								person,
+								allDocumentURIToVOs);
+		
+		String lastCachedAtForEntity = getLastCachedAtDateTimeForEntityInModel(
+				person, 
+				peoplePublicationsModel);
+
+		person.setLastCachedAtDateTime(lastCachedAtForEntity);
 	}
 	
 	public static Map<String, Activity> getPublicationsWithJournalForAssociatedPeople(

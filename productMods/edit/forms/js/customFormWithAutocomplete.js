@@ -77,6 +77,14 @@ var customForm = {
                 this.formSteps = 2;
             }
         }
+        
+        //Handles special case such as autocomplete which allows for editing with autocomplete
+        //By default set to false
+        if(!this.supportEdit) {
+        	this.supportEdit = false;
+        } else {
+        	this.supportEdit = true;
+        }
                 
         this.bindEventListeners();
         
@@ -94,11 +102,13 @@ var customForm = {
         
         // Put this case first, because in edit mode with
         // validation errors we just want initFormFullView.
-        if (this.editMode == 'edit' || this.editMode == 'repair') {
+        if ((!this.supportEdit) && (this.editMode == 'edit' || this.editMode == 'repair')) {
             this.initFormFullView();
         }
         else if (this.findValidationErrors()) {
             this.initFormWithValidationErrors();
+        } else if(this.supportEdit) {
+        	this.initFormWithSupportEdit();
         }
         // If type is already selected when the page loads (Firefox retains value
         // on a refresh), go directly to full view. Otherwise user has to reselect
@@ -165,6 +175,18 @@ var customForm = {
         }
        
     },
+    initFormWithSupportEdit: function() {
+    	if(this.editMode == 'edit') {
+    		this.initFormWithValidationErrors();
+    		//Hide verify match when edit mode
+    		this.verifyMatch.hide();
+    	} else {
+    		 this.initFormFullView();
+    	}
+       //Disable submit button until selection made
+       this.button.attr('disabled', 'disabled');
+       this.button.addClass('disabledSubmit');  // tlw
+    },
     
     // Bind event listeners that persist over the life of the page. Event listeners
     // that depend on the view should be initialized in the view setup method.
@@ -209,7 +231,7 @@ var customForm = {
     
     initAutocomplete: function() {
 
-        if (this.editMode === 'edit') {
+        if (this.editMode === 'edit' && !this.supportEdit) {
             return;
         }
         
@@ -231,7 +253,8 @@ var customForm = {
                     dataType: 'json',
                     data: {
                         term: request.term,
-                        type: customForm.acType
+                        type: customForm.acType,
+                        multipleTypes:(customForm.acMultipleTypes == undefined || customForm.acMultipleTypes == null)? null: customForm.acMultipleTypes
                     },
                     complete: function(xhr, status) {
                         // Not sure why, but we need an explicit json parse here. 
@@ -349,7 +372,15 @@ var customForm = {
         this.acSelector.val(label);        
         this.acSelectionInfo.html(label);
         this.verifyMatch.attr('href', this.verifyMatch.data('baseHref') + uri);
-        
+        //Verify match is hidden in edit mode and support edit so unhide it
+        if(this.editMode == 'edit' && this.supportEdit) {
+        	this.verifyMatch.show();
+        }
+        if(this.supportEdit) {
+        	//On initialization in this mode, submit button is disabled
+        	this.button.removeAttr('disabled');
+        	this.button.removeClass('disabledSubmit');  // tlw
+        }
         this.setButtonText('existing');            
 
         this.cancel.unbind('click');
@@ -379,6 +410,13 @@ var customForm = {
             if (this.formSteps > 1) {
                 this.acSelection.find('label').html('Selected ');
             }
+
+            //Resetting so disable submit button again for object property autocomplete
+            if(this.supportEdit) {
+            	this.button.attr('disabled', 'disabled');
+            	this.button.addClass('disabledSubmit');
+            }
+           
         }      
     },
     
@@ -430,6 +468,11 @@ var customForm = {
         if (this.editMode === 'edit') {
             return;
         }  
+        
+        //if support select editing, keep button label same
+        if(this.supportEdit) {
+        	return;
+        }
 
         typeText = this.getTypeNameForLabels();
                 
@@ -467,7 +510,12 @@ var customForm = {
         // First case applies on page load; second case applies when the type gets changed.
         if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {            
         	typeText = this.getTypeNameForLabels();            
-			this.acSelector.val("Select an existing " + typeText + " or create a new one.")
+        	var helpText = "Select an existing " + typeText + " or create a new one.";
+        	//Different for object property autocomplete
+        	if(this.supportEdit) {
+        		helpText = "Select an existing " + typeText;
+        	}
+			this.acSelector.val(helpText)
 		               	   .addClass(this.acHelpTextClass);     
 		}
 	},

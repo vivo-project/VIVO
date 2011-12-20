@@ -1,0 +1,12 @@
+PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+     ?location rdfs:label ?locationName .
+} WHERE {
+     PERSON_URI core:hasPresenterRole ?presenterRole .
+     ?presenterRole core:roleRealizedIn ?presentation .
+     ?presentation core:eventWithin ?containingEvent .
+     ?containingEvent core:hasGeographicLocation ?location .
+     ?location rdfs:label ?locationName .
+}

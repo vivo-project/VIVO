@@ -33,7 +33,7 @@ core:authorInAuthorship (Person : Authorship) - inverse of linkedAuthor
 <%@ page import="edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.EditConfiguration" %>
-<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidator" %>
+<%@ page import="edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValidatorOld" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.controller.VitroRequest" %>
 <%@ page import="edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils" %>
@@ -234,7 +234,7 @@ SPARQL queries for existing values. --%>
         EditConfiguration.putConfigInSession(editConfig,session);
     }
     
-    editConfig.addValidator(new PublicationHasAuthorValidator());
+    editConfig.addValidator(new PublicationHasAuthorValidatorOld());
     
     Model model = (Model) application.getAttribute("jenaOntModel");
     String objectUri = (String) request.getAttribute("objectUri");
@@ -289,6 +289,8 @@ SPARQL queries for existing values. --%>
 <c:set var="initialHint" value="<span class='hint'>(initial okay)</span>" />
 
 <jsp:include page="${preForm}" />
+
+<h1>JSP form, must be removed for the 1.4!</h1>
 
 <%-- DO NOT CHANGE IDS, CLASSES, OR HTML STRUCTURE ON THIS PAGE WITHOUT UNDERSTANDING THE IMPACT ON THE JAVASCRIPT! --%>
 <h2>${title}</h2>

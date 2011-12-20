@@ -1,0 +1,2 @@
+org.vivoweb.reasoner.plugin.DCTitleForDocuments
+org.vivoweb.reasoner.plugin.DCCreatorForDocuments

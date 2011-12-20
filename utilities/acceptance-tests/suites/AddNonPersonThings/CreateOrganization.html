@@ -112,7 +112,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=College (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -152,7 +152,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=College (core)</td>
+	<td>label=College (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -186,7 +186,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>Please enter a value in the name field.</td>
 	<td></td>
 </tr>
 <tr>
@@ -222,6 +222,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -366,7 +371,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -477,7 +482,7 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=Laboratory (core)</td>
+	<td>label=Laboratory (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -517,7 +522,7 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=Library (core)</td>
+	<td>label=Library (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -551,12 +556,12 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Create position history entry for Primate College of America</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>title</td>
+	<td>id=positionTitle</td>
 	<td>Dr.</td>
 </tr>
 <tr>
@@ -568,6 +573,11 @@
 	<td>type</td>
 	<td>startField-year</td>
 	<td>1999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=relatedIndLabel</td>
+	<td>Polly Person</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -920,6 +930,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>info@primates.edu</td>
@@ -945,6 +960,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>555-555-5555</td>
@@ -967,6 +987,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -996,7 +1021,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1065,6 +1090,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>tinymce</td>
 	<td>PCoA</td>
@@ -1087,6 +1117,11 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -1166,7 +1201,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Librarian, Lily, Dr. 1999 -</td>
+	<td>Polly Person, Dr. 1999 -</td>
 	<td></td>
 </tr>
 <tr>

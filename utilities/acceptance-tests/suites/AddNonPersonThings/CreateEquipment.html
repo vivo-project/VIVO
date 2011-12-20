@@ -112,7 +112,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Equipment (core)</td>
+	<td>label=Equipment (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -147,7 +147,7 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Equipment (core)</td>
+	<td>label=Equipment (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -176,7 +176,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This field must not be empty.</td>
+	<td>Please enter a value in the name field.</td>
 	<td></td>
 </tr>
 <tr>
@@ -257,7 +257,7 @@
 <tr>
 	<td>select</td>
 	<td>typeOfNew</td>
-	<td>label=Facility (core)</td>
+	<td>label=Facility (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -271,7 +271,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Edit &quot;in facility&quot; entry for Primate Feeder</td>
+	<td>Create &quot;in facility&quot; entry for Primate Feeder</td>
 	<td></td>
 </tr>
 <tr>
@@ -296,36 +296,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='hasSubjectArea']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Subject Area for Primate Feeder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Diet</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Primate Feeder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//h3[@id='freetextKeyword']/a/img</td>
 	<td></td>
 </tr>
@@ -337,6 +307,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Add new entry for: keywords</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
@@ -367,11 +342,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Primate Research Lab Room 123</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Diet</td>
 	<td></td>
 </tr>
 <tr>

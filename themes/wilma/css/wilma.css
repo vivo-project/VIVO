@@ -96,6 +96,7 @@ input.block {
 }
 label {
     margin-top: .5em;
+    margin-bottom: .5em;
 }
 label.inline {
     display: inline;
@@ -112,7 +113,9 @@ input.submit:visited,
 for editing forms which require an id and do not allow a class. This will be 
 removed once we refactor the editing forms to Freemarker */
 input#submit, 
-input#submit:visited {
+input#submit:visited,
+input.form-button,
+input.form-button:visited {
     background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
     padding: 5px 18px 7px;
@@ -172,7 +175,8 @@ input#delete:visited {
 .verbose-toggle:hover,
 #showAddFormButton:hover,
 input.submit:hover,
-input#submit:hover {
+input#submit:hover,
+input.form-button:hover {
     color: #fff;
     background-color: #b2d15a;
 }
@@ -187,7 +191,8 @@ input#delete:hover {
 input.delete:active,
 input#delete:active,
 input.submit:active,
-input#submit:active {
+input#submit:active,
+input.form-button:active {
     top: 1px;
 }
 form textarea {
@@ -399,7 +404,29 @@ a.account-menu:active {
     text-decoration: none;
     color: #5E6363;
 }
-
+ul.ingestMenu {
+    margin-bottom: 1.5em;
+}
+.toBeDeleted {
+    margin-bottom: 0;
+}
+/* BACK-END FORMS -------------->  */
+.display-inline {
+    display: inline-block;
+}
+.theme-dir {
+    clear: both;
+}
+tr.editformcell td input[type="text"] {
+    width: 30% !important;
+}
+tr.editformcell td select {
+    font-size: .8em;
+}
+.editingForm table {
+    width: 100%;
+    border: none;
+}
 /* ------------------------------------------------->  */
 /* HOMEPAGE AND INTERIOR PAGES STYLES -------------->  */
 /* ------------------------------------------------->  */
@@ -762,6 +789,10 @@ input.search-home-vivo {
     margin-top: 2px;
 }
 /* BROWSE ------>  */
+ul#browse-classgroups a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 ul#browse-classgroups a:hover {
     background: url(../images/arrow.gif) 0 10px no-repeat;
     color: #2ea0cf;
@@ -809,6 +840,9 @@ footer p.copyright {
     padding-top: 55px;
     padding-left: 30px;
     width: 500px;
+}
+footer p.copyright small {
+    font-size: 1em;
 }
 ul#footer-nav {
     float: right;
@@ -1117,10 +1151,6 @@ nav#alpha-browse-container {
     background-color: #fff;
     border-left: 1px solid #dde4e3;
     border-bottom: none;
-    width: 619px;
-    float: left;
-    padding-left: 10px;
-    margin-left: 1px;
 }
 /* BROWSE INDIVIDUALS------>  */
 #individuals-in-class {
@@ -1223,6 +1253,10 @@ h2#mainImage, #share-contact h2 {
 /* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
 img.individual-photo {
     border: 7px solid #ebebeb;
+}
+.rdf-url {
+    padding-top: .8em;
+    display: block;
 }
 ul#individual-tools-people {
     border-bottom: 1px solid #e8ece9;
@@ -1406,7 +1440,7 @@ article.property ul.property-list {
     color: #5e6363;
 }
 article.property ul.property-list li a {
-    color: #2485ae;
+    /*color: #2485ae;*/   /* cappadona: seems unnecessarily specific and is overriding .more-less from individual.css so I'm commenting out for now */
     line-height: 1.6em;
 }
 /* MISCELLANEOUS ------>  */
@@ -1454,6 +1488,15 @@ input[type="submit"] {
   margin-left: .6em;
   font-weight: bold;
 }
+#adminDashboard .pageBodyGroup h4 a {
+  color: #5E6363;
+  font-size: 1em;
+  margin-left: 0;
+  font-weight: bold;
+}
+
+
+
 
 /* ------------------------------------------------->  */
 /* REVISION INFO ----------------------------------->  */
@@ -1513,7 +1556,8 @@ article.property h3 {
     margin: 0;
 }
 h2#personInPosition .verbosePropertyListing,
-h2#hasResearchArea .verbosePropertyListing {
+h2#hasResearchArea .verbosePropertyListing,
+h2#preferredTitle .verbosePropertyListing {
     display: block;
 }
 
@@ -1551,7 +1595,10 @@ input.add-account:hover {
 input.add-account:active {
     top: 1px;
 }
-
+.disabledSubmit {
+    color: #ede ! important;
+    background-color: #b2d15a ! important;
+}
 /* ------------------------------------------------->  */
 /* CONTACT FORM ------------------------------------>  */
 /* ------------------------------------------------->  */
@@ -1560,4 +1607,14 @@ input.add-account:active {
 }
 #contact_form textarea {
     width: 40em;
+}
+/* ------------------------------------------------->  */
+/* ASSOCIATE PROFILE ------------------------------->  */
+/* ------------------------------------------------->  */
+#associateProfileBackgroundThree {
+    margin-top:-120px; 
+}
+#associateProfileBackgroundTwo {
+    padding:7px 94px 45px 0;
+    margin-top:-120px; 
 }
