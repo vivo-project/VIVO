@@ -1,8 +1,8 @@
 <%-- $This file is distributed under the terms of the license in /doc/license.txt$ --%>
 
 <%@taglib prefix="vitro" uri="/WEB-INF/tlds/VitroUtils.tld" %>
-<%@page import="edu.cornell.mannlib.vitro.webapp.auth.requestedAction.usepages.UseAdvancedDataToolsPages" %>
-<% request.setAttribute("requestedActions", new UseAdvancedDataToolsPages()); %>
+<%@page import="edu.cornell.mannlib.vitro.webapp.auth.permissions.SimplePermission" %>
+<% request.setAttribute("requestedActions", SimplePermission.USE_ADVANCED_DATA_TOOLS_PAGES.ACTION); %>
 <vitro:confirmAuthorization />
 
 <h2>Ingest Menu</h2>
