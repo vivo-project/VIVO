@@ -8,8 +8,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import edu.cornell.mannlib.vitro.webapp.auth.policy.PolicyHelper;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.usepages.RefreshVisualizationCacheAction;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.visualization.tools.ToolsRequestHandler;
 
 public class SiteAdminController extends BaseSiteAdminController {
     
@@ -21,7 +21,7 @@ public class SiteAdminController extends BaseSiteAdminController {
         
         Map<String, String> urls = super.getIndexCacheRebuildUrls(vreq);
 
-        if (PolicyHelper.isAuthorizedForActions(vreq, new RefreshVisualizationCacheAction())) {
+        if (PolicyHelper.isAuthorizedForActions(vreq, ToolsRequestHandler.REQUIRED_ACTIONS)) {
             urls.put("rebuildVisCache", UrlBuilder.getUrl("/vis/tools"));            
         }
         
