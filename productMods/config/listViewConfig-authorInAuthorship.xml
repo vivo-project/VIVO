@@ -11,7 +11,7 @@
         PREFIX bibo: &lt;http://purl.org/ontology/bibo/&gt; 
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
               
-        SELECT DISTINCT <collated> ?subclass </collated> 
+        SELECT DISTINCT ?subclass 
                         ?authorship
                         ?infoResource ?infoResourceName 
                         ?dateTime
@@ -46,11 +46,9 @@
                                   ?partOfObj rdfs:label ?partOf
                        }
 
-                       <collated> 
                        OPTIONAL {  ?infoResource vitro:mostSpecificType ?subclass .
                                    ?subclass rdfs:subClassOf core:InformationResource
                        }     
-                       </collated>                       
                        OPTIONAL { ?infoResource core:hasPublicationVenue ?publishedIn .
                                     ?publishedIn  rdfs:label ?journal 
                        }
@@ -61,7 +59,7 @@
             <critical-data-required>
             FILTER ( bound(?infoResource) )
             </critical-data-required>
-        } ORDER BY <collated> ?subclass </collated> DESC(?dateTime) ?infoResourceName   
+        } ORDER BY ?subclass  DESC(?dateTime) ?infoResourceName   
     </query-select>
 
     <query-construct>
