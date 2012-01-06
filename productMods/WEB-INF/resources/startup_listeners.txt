@@ -56,7 +56,8 @@ edu.cornell.mannlib.vitro.webapp.auth.policy.RestrictHomeMenuItemEditingPolicy$S
 # Add VIVO specific DocumentModifers, this must come before SolrSetup
 edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
 
-# The Solr index uses a "public" filter, so the PropertyRestrictionPolicyHelper must already be set up.
+# The Solr index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
+#   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.search.solr.SolrSetup
 
 edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
@@ -64,6 +65,8 @@ edu.cornell.mannlib.vitro.webapp.controller.freemarker.FreemarkerSetup
 # On shutdown, this will kill the background thread started by Apache Commons File Upload
 org.apache.commons.fileupload.servlet.FileCleanerCleanup
 
+# The VClassGroupCache index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
+#   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
 
 # This should be near the end, because it will issue a warning if the connection to Solr times out.
