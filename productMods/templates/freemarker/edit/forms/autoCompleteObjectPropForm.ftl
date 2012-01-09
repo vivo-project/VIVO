@@ -37,6 +37,8 @@
 <#else>
     <#assign formTitle = editConfiguration.formTitle />
 </#if>
+<#--In order to fill out the subject-->
+<#assign acFilterForIndividuals =  "['" + editConfiguration.subjectUri + "']" />
 
 <h2>${formTitle}</h2>
 
@@ -115,6 +117,7 @@ Also multiple types parameter set to true only if more than one type returned-->
         supportEdit: 'true',
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
+        acFilterForIndividuals: ${acFilterForIndividuals},
         defaultTypeName: '${propertyNameForDisplay}' // used in repair mode to generate button text
     };
     </script>
