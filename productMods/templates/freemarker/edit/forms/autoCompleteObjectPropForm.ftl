@@ -7,6 +7,15 @@
 	<#assign rangeOptionsExist = true/>
 </#if>
 <#assign objectTypes = editConfiguration.pageData.objectTypes />
+<#assign objectTypesSize = objectTypes?length />
+<#assign objectTypesExist = false />
+<#assign multipleTypes = false />
+<#if (objectTypesSize > 1)>
+	<#assign objectTypesExist = true />
+</#if>
+<#if objectTypes?contains(",")>
+	<#assign multipleTypes = true/>
+</#if>
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 <#assign editMode = editConfiguration.pageData.editMode />
 <#assign propertyNameForDisplay = "" />
@@ -88,12 +97,18 @@
 
 
 <#assign sparqlQueryUrl = "${urls.base}/ajax/sparqlQuery" >
-
-    <script type="text/javascript">
+<#--Passing in object types only if there are any types returned, otherwise
+the parameter should not be passed at all to the solr search.
+Also multiple types parameter set to true only if more than one type returned-->
+    <script type="text/javascript">	
     var customFormData  = {
         acUrl: '${urls.base}/autocomplete?tokenize=true',
+        <#if objectTypesExist = true>
         acType: '${objectTypes}',
+        </#if>
+        <#if multipleTypes = true>
         acMultipleTypes: 'true',
+        </#if>
         submitButtonTextType: 'simple',
         editMode: '${editMode}',
         typeName:'${propertyNameForDisplay}',

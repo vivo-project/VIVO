@@ -59,9 +59,18 @@ public class AutocompleteObjectPropertyFormGenerator extends DefaultObjectProper
         for(VClass v: vclasses) {
         	types.add(v.getURI());
         }
+        //if types array contains only owl:Thing, the search will not return any results
+        //In this case, return an empty array
+        if(isOWLThing(types)) {
+        	return new ArrayList<String>();
+        }
         return types;
 	}
 	
+	private boolean isOWLThing(List<String> types) {
+		return(types.size() == 1 && types.get(0).equals(VitroVocabulary.OWL_THING));
+	}
+
 	public EditMode getEditMode(VitroRequest vreq) {
 		//In this case, the original jsp didn't rely on FrontEndEditingUtils
 		//but instead relied on whether or not the object Uri existed
