@@ -1,0 +1,24 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* Styles for autocomplete and autocomplete selections using jQuery UI. This is separated out so that forms
+that don't load customFormWithAutocomplete.css still have access to these styles. */
+
+.acSelection {
+    display: none;
+    margin-top: 2em;
+}
+.acSelectionInfo {
+    background-color: #d9d9d9;
+    padding: .2em .35em;
+}
+ul.ui-autocomplete {
+    font-size: .95em;
+}
+li.ui-menu-item a.ui-corner-all {
+    text-align: left;
+    padding-left: .25em;
+}
+.acSelectorWithHelpText{
+    font-style: italic;
+    color: #555;	
+}

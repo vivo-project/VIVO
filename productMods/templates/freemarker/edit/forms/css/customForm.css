@@ -1,0 +1,124 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+form.customForm div {
+    clear: left;
+}
+form.customForm h6 {
+    font-size: 110%;
+}
+form.customForm div.addNewLink {
+    float: left;
+    clear: none;
+    margin-left: 5em;
+    margin-top: .9em;
+    width: 200px;
+    padding: .8em;
+    border: 1px solid #9c9c9c;
+    display: none; /* Hide if Javascript disabled. Javascript will show. */
+}
+form.customForm .existing span.requiredHint, 
+form.customForm .new span.requiredHint {
+    display: none; /* Hide if Javascript disabled. Javascript will show. */
+}
+form.customForm .existing {
+    float: left;
+    clear: none;
+}
+.existingOrNew {
+    font-style: italic;
+    margin-left: 1em;
+}
+.new {
+    padding: .6em 0 .6em 1.5em;
+    border: 1px solid #9c9c9c;
+    width: 300px;
+}
+form.customForm p.inline input,
+form.customForm p.inline label {
+    float: left;
+    clear: left;
+}
+form.customForm p.inline.year input {
+    margin-top: -1.75em;
+}
+input,
+select, 
+form.customForm p {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+option {
+    padding: 0 2px;
+}
+form.customForm .hint {
+    color: #9c9c9c;
+    font-weight: normal;
+}
+form.customForm .requiredHint {
+    color: #c00;
+    font-weight: normal;
+    font-size: small;
+}
+form.customForm #requiredLegend {
+    font-style: italic;
+    margin-top: .5em;
+}
+form.customForm p.validationError {
+    clear: both;
+    margin-bottom: 1.8em;
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: .4em;
+    font-size: .8em;
+}
+form.customForm a.close {
+    float: right;
+    margin-right: 1em;
+    font-size: 90%;    
+}
+form.customForm a.close:link, 
+form.customForm a.close:visited {
+    border-color: #ff7700;
+    color: #ff7700;
+}
+form.customForm textarea {
+    width: 30%;
+}
+div.acSelection {
+    margin-bottom: 15px;
+}
+#ie67DisableWrapper {
+    display: none;
+}
+form.customForm input.concept-search {
+    float: right;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    background-color: #317e95;
+}
+form.customForm h4.services {
+    margin-bottom: -5px;
+    margin-top: -12px;
+}
+form.customForm p.inline-search {
+    float: left;
+    clear: left;
+}
+form.customForm p.inline-search #searchTerm{
+    margin-top: 6px;
+}
+/* <------ DATE TIME*/
+form.customForm label.dateTime {
+    display: inline;
+}
+form.customForm fieldset {
+    display: inline;
+}
+fieldset.dateTime label {
+    display: inline;
+}
+fieldset.dateTime select {
+    margin-top: 0;
+}

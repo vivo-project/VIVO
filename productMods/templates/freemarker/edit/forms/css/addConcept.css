@@ -1,0 +1,33 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+.concepts .column {
+	float:left;
+	padding-right:3px;
+	
+}
+
+.concepts .row {
+	clear:both;
+	float:left;
+	border-bottom: 1px solid #5F6464;
+}
+
+.conceptLabel {
+	width:220px;
+}
+
+.conceptType {
+	width: 40px;
+}
+.conceptDefinition{
+	width:400px;
+}
+
+form#addConceptForm {
+	display:none;
+}
+
+form#addConceptForm span#createOwnOne{
+	float:left;
+	margin-top:24px
+}

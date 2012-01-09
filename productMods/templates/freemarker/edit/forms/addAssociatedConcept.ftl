@@ -130,13 +130,13 @@
     </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/addConcept.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addConcept.css" />')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addConcept.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/addConcept.js"></script>')}
 
 
 

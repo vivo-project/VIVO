@@ -85,5 +85,5 @@ edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.Institu
     </form>
 </section>
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/institutionalInternalClass.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/institutionalInternalClass.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
