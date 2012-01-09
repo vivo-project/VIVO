@@ -236,6 +236,9 @@ var customForm = {
         }
         
         this.getAcFilter();
+        //If specific individuals are to be filtered out, add them here
+        //to the filtering list
+        this.getAcFilterForIndividuals();
         this.acCache = {};
         
         this.acSelector.autocomplete({
@@ -289,7 +292,7 @@ var customForm = {
    
         this.verifyMatch.data('baseHref', this.verifyMatch.attr('href'));
     },
-    
+    //get autocomplete filter with sparql query
     getAcFilter: function() {
 
         if (!this.sparqlForAcFilter) {
@@ -344,7 +347,18 @@ var customForm = {
         });
         return filteredResults;
     },
+    //To filter out specific individuals, not part of a query
+    //Pass in list of individuals to be filtered out
+    getAcFilterForIndividuals: function() {
 
+        if (!this.acFilterForIndividuals || !this.acFilterForIndividuals.length) {
+            this.acFilterForIndividuals = null;
+            return;
+        }
+       //add this list to the ac filter list
+        customForm.acFilter = customForm.acFilter.concat(this.acFilterForIndividuals);
+        
+    },
     // Reset some autocomplete values after type is changed
     resetAutocomplete: function(typeVal) {
         // Append the type parameter to the base autocomplete url
