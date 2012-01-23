@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddFacultyInfo</title>
+<title>FirstTimeCuratorLogin</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,7 +27,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddFacultyInfo</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">FirstTimeCuratorLogin</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -36,12 +36,12 @@
 </tr>
 <tr>
 	<td>setTimeout</td>
-	<td>500000</td>
+	<td>100000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add all available fields that aren't tested elsewhere</td>
+	<td class="comment">Check first time login process</td>
 	<td></td>
 </tr>
 <tr>
@@ -56,7 +56,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Must not be logged in</td>
+	<td class="comment">Must not be logged in already</td>
 	<td></td>
 </tr>
 <tr>
@@ -71,18 +71,18 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
+	<td class="comment">Try logging in with wrong password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>testAdmin@cornell.edu</td>
+	<td>JaneFaculty@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>loginPassword</td>
-	<td>Password</td>
+	<td>myPassword</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -90,78 +90,58 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Find Jane Faculty via Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Change Password to Log in</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add self-editor link field</td>
+	<td class="comment">Now it's time to change the password</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=a.add-orcidId &gt; img.add-individual</td>
+	<td>verifyTextPresent</td>
+	<td>New Password</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
+	<td>verifyTextPresent</td>
+	<td>Confirm Password</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>tinymce</td>
-	<td>JaneFaculty@cornell.edu</td>
+	<td>newPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>confirmPassword</td>
+	<td>Password</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>id=submit</td>
+	<td>passwordChangeForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify that account is logged in</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>JaneFaculty@cornell.edu</td>
+	<td>Jane</td>
 	<td></td>
 </tr>
 <tr>
