@@ -22,6 +22,7 @@
 <#assign majorFieldValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "majorField") />
 <#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
 <#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org") />
+<#assign trainingTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "trainingType")/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -116,6 +117,14 @@
     
     <@lvf.acSelection urls.base "org" "org" existingOrgValue/>
     
+    <label for="positionType">Type of Educational Training ${requiredHint}</label>
+    <#assign trainingTypeOpts = editConfiguration.pageData.trainingType />
+    <select name="trainingType" style="margin-top:-2px" >
+        <option value="" <#if trainingTypeValue == "">selected</#if>>Select one</option>                
+        <#list trainingTypeOpts?keys as key>             
+            <option value="${key}"  <#if trainingTypeValue == key>selected</#if>>${trainingTypeOpts[key]}</option>         
+        </#list>
+    </select>
     <p>
         <label for="dept">Department or School Name within the ###</label>
         <input  size="60"  type="text" id="dept" name="dept" value="${deptValue}" />

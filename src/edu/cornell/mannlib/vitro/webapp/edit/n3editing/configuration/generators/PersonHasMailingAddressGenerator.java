@@ -37,22 +37,7 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
     final static String mailingAddressPred =vivoCore+"mailingAddress" ;
     
     public PersonHasMailingAddressGenerator() {}
-
-    // There are 4 modes that this form can be in: 
-    //  1. Add. There is a subject and a predicate but no position and 
-    //     nothing else. 
-    //        
-    //  2. Normal edit where everything should already be filled out.  
-    //     There is a subject, a object and an individual on
-    //     the other end of the object's core:personInOrganization stmt. 
-    //  
-    //  3. Repair a bad role node.  There is a subject, predicate and object 
-    //     but there is no individual on the other end of the object's 
-    //     core:personInOrganization stmt.  This should be similar to an add 
-    //     but the form should be expanded.
-    //     
-    //  4. Really bad node. multiple core:personInOrganization statements.   
-    
+   
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
             HttpSession session) {
@@ -154,11 +139,12 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
         return conf;
     }
 
+    /* N3 assertions  */
+
     final static String n3ForNewAddress = 
         "@prefix vivo: <" + vivoCore + "> . \n\n" +   
         "?person vivo:mailingAddress  ?address . \n" +
         "?address a vivo:Address . \n" +              
-//        "?address a ?addressType . \n" +              
         "?address vivo:mailingAddressFor ?person . \n" ;    
     
     final static String addrLineOneAssertion  =      
@@ -188,45 +174,40 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
     final static String addressTypeAssertion =
         "?address a ?addressType .";
 
+
+    /* Queries for editing an existing entry */
+
     final static String addrLabelQuery =
         "SELECT ?existingAddrLabel WHERE { \n" +
-//        " ?person <"+ mailingAddressPred +">  ?address . \n" +
         "  ?address <" + label + "> ?existingAddrLabel . \n" +
         "}";
 
     final static String addrLineOneQuery  =      
         "SELECT ?existingaddrLineOne WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ addrLine1Pred +"> ?existingaddrLineOne . }";
 
     final static String addrLineTwoQuery  =  
         "SELECT ?existingaddrLineTwo WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ addrLine2Pred +"> ?existingaddrLineTwo . }";
 
     final static String addrLineThreeQuery  =  
         "SELECT ?existingaddrLineThree WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ addrLine3Pred +"> ?existingaddrLineThree . }";
 
     final static String cityQuery  =  
         "SELECT ?existingCity WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ cityPred +"> ?existingCity . }";
 
     final static String stateQuery  =  
         "SELECT ?existingState WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ statePred +"> ?existingState . }";
 
     final static String postalCodeQuery  =  
         "SELECT ?existingPostalCode WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ postalCodePred +"> ?existingPostalCode . }";
 
     final static String countryQuery  =  
         "SELECT ?existingCountry WHERE {\n"+
-//        "?person <"+ mailingAddressPred +">  ?address . \n" +
         "?address <"+ countryPred +"> ?existingCountry . }";
 
     final static String addressTypeQuery = 

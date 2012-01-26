@@ -86,7 +86,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("edTraining");
                 
-        conf.setN3Required( Arrays.asList( n3ForNewEdTraining, orgLabelAssertion, orgTypeAssertion ) );
+        conf.setN3Required( Arrays.asList( n3ForNewEdTraining, orgLabelAssertion, orgTypeAssertion, trainingTypeAssertion ) );
         conf.setN3Optional(Arrays.asList( 
                 n3ForEdTrainingToOrg, majorFieldAssertion, degreeAssertion, 
                 deptAssertion, infoAssertion, 
@@ -101,7 +101,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform( Arrays.asList( "org", "orgType", "degree"));
+        conf.setUrisOnform( Arrays.asList( "org", "orgType", "degree", "trainingType"));
         conf.setLiteralsOnForm( Arrays.asList("orgLabel","majorField","dept","info"));
 
         conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
@@ -112,8 +112,9 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
 
         
-        conf.addSparqlForExistingUris("org",orgQuery);
-        conf.addSparqlForExistingUris("orgType",orgTypeQuery);
+        conf.addSparqlForExistingUris("org", orgQuery);
+        conf.addSparqlForExistingUris("orgType", orgTypeQuery);
+        conf.addSparqlForExistingUris("trainingType", trainingTypeQuery);
         conf.addSparqlForExistingUris("degree", degreeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
         conf.addSparqlForExistingUris("startNode", existingStartNodeQuery);
@@ -151,6 +152,13 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setValidators( list("nonempty")));
                 //setLiteralOptions( [ "Select one" ] )
                 
+        conf.addField( new FieldVTwo().
+                setName("trainingType").
+                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
+                setObjectClassUri(trainingClass).
+                setValidators( list("nonempty") )
+                );
+
         conf.addField( new FieldVTwo().
                 setName("dept").
                 setRangeDatatypeUri( XSD.xstring.toString() ).
@@ -195,6 +203,9 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String orgLabelAssertion =
         "?org <"+ label +"> ?orgLabel .";
 
+    final static String trainingTypeAssertion =
+        "?edTraining a ?trainingType .";
+    
     final static String degreeAssertion  =      
         "?edTraining <"+ degreeEarned +"> ?degree .\n"+
         "?degree <"+ degreeOutcomeOf +"> ?edTraining .";
@@ -259,6 +270,11 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?existingOrgType rdfs:subClassOf <"+ orgClass +"> .\n"+
         "}";
 
+    final static String trainingTypeQuery = 
+    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "SELECT ?existingTrainingType WHERE { \n" + 
+        "  ?edTraining vitro:mostSpecificType ?existingTrainingType . }";
+        
     final static String degreeQuery  =      
         "SELECT ?existingDegree WHERE {\n"+
         "?edTraining <"+ degreeEarned +"> ?existingDegree . }";

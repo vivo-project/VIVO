@@ -17,6 +17,7 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String type =VitroVocabulary.RDF_TYPE ;            
     final static String label =rdfs+"label" ;
     
+    final static String trainingClass = vivoCore+"EducationalTraining" ;    
     final static String degreeClass =vivoCore+"AcademicDegree" ;    
     final static String majorFieldPred =vivoCore+"majorField" ;
     final static String deptPred =vivoCore+"departmentOrSchool" ;
