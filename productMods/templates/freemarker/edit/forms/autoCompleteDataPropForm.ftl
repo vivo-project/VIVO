@@ -7,7 +7,7 @@
 
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 <#assign editMode = editConfiguration.pageData.editMode />
-
+<#assign propertyPublicName = editConfiguration.propertyPublicName/>
 <h2>${editConfiguration.formTitle}</h2>
 
 <#--Display error messages if any-->
@@ -66,10 +66,9 @@ Also multiple types parameter set to true only if more than one type returned-->
       	property: '${editConfiguration.predicateUri}',
         submitButtonTextType: 'simple',
         editMode: '${editMode}', //Change this to check whether adding or editing
-        supportEdit: 'true',
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
-        defaultTypeName: 'string'
+        defaultTypeName: '${propertyPublicName}'
     };
     </script>
 

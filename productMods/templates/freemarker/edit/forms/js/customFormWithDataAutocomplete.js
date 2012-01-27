@@ -363,7 +363,7 @@ var customForm = {
     // Set field labels based on type selection. Although these won't change in edit
     // mode, it's easier to specify the text here than in the jsp.
     setLabels: function() {
-        var typeName = "string";
+        var typeName = this.defaultTypeName;
 
         this.labelsWithPlaceholders.each(function() {
             var newLabel = $(this).data('baseText').replace(customForm.placeholderText, typeName);
@@ -375,7 +375,11 @@ var customForm = {
     // Set button text based on both type selection and whether it's an autocomplete selection
     // or a new related individual. Called when setting up full view of form, and after
     // an autocomplete selection.
+    //Commenting out for now because keeping in synch with regular data property form and
+    //not changing the button text at all
     setButtonText: function(newOrExisting) {
+    	
+    	/*
         var typeText, 
             buttonText,
             baseButtonText = this.button.data('baseText');
@@ -385,7 +389,7 @@ var customForm = {
             return;
         }  
 
-        typeText = "string";
+        typeText = this.defaultTypeName;
                 
         // Creating new related individual      
         if (newOrExisting === 'new') {
@@ -405,12 +409,13 @@ var customForm = {
         } 
         
         this.button.val(buttonText);
+        */
     },
     
 
     // Set the initial help text that appears in the autocomplete field and change the class name
     addAcHelpText: function() {
-        var typeText = "string";
+        var typeText = this.defaultTypeName;
     
         // First case applies on page load; second case applies when the type gets changed.
         if (!this.acSelector.val() || this.acSelector.hasClass(this.acHelpTextClass)) {            
