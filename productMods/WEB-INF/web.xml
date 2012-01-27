@@ -905,6 +905,15 @@
     <servlet-name>AutocompleteController</servlet-name>
     <url-pattern>/populateselect</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>DataAutocompleteController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.DataAutocompleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DataAutocompleteController</servlet-name>
+    <url-pattern>/dataautocomplete</url-pattern>
+  </servlet-mapping>
  
   <servlet>
     <servlet-name>ReorderController</servlet-name>

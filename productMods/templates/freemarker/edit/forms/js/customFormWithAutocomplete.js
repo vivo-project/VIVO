@@ -184,8 +184,7 @@ var customForm = {
     		 this.initFormFullView();
     	}
        //Disable submit button until selection made
-       this.button.attr('disabled', 'disabled');
-       this.button.addClass('disabledSubmit');  // tlw
+       this.disableSubmit();  // tlw
     },
     
     // Bind event listeners that persist over the life of the page. Event listeners
@@ -392,8 +391,7 @@ var customForm = {
         }
         if(this.supportEdit) {
         	//On initialization in this mode, submit button is disabled
-        	this.button.removeAttr('disabled');
-        	this.button.removeClass('disabledSubmit');  // tlw
+        	this.enableSubmit();  // tlw
         }
         this.setButtonText('existing');            
 
@@ -427,8 +425,7 @@ var customForm = {
 
             //Resetting so disable submit button again for object property autocomplete
             if(this.supportEdit) {
-            	this.button.attr('disabled', 'disabled');
-            	this.button.addClass('disabledSubmit');
+            	this.disableSubmit();
             }
            
         }      
@@ -539,6 +536,15 @@ var customForm = {
 			this.acSelector.val('')
 		                   .removeClass(this.acHelpTextClass);
 		}
+	},
+	disableSubmit: function() {
+		 //Disable submit button until selection made
+      this.button.attr('disabled', 'disabled');
+      this.button.addClass('disabledSubmit');  // tlw
+	},
+	enableSubmit:function() {
+		this.button.removeAttr('disabled');
+		this.button.removeClass('disabledSubmit');
 	}
 	
 };
