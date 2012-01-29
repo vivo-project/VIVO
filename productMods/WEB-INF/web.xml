@@ -1080,7 +1080,7 @@
   
   <servlet>
     <servlet-name>individual</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.IndividualController</servlet-class>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.individual.IndividualController</servlet-class>
   </servlet>
 
   <servlet>
