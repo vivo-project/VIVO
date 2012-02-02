@@ -752,6 +752,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>RestrictLogins</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.RestrictLoginsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestrictLogins</servlet-name>
+    <url-pattern>/admin/restrictLogins</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>StatementChangeListingController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.jena.StatementChangeListingController</servlet-class>
   </servlet>
@@ -1130,17 +1139,17 @@
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
 
- <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION 
+ <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION --> 
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
-    <load-on-startup />
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <url-pattern>/admin/fakeExternalAuth</url-pattern>
   </servlet-mapping>
--->
+<!--  -->
  
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
