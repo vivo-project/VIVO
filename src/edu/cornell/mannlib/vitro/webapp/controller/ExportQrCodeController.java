@@ -52,7 +52,12 @@ public class ExportQrCodeController extends FreemarkerHttpServlet {
 
 	@Override
     protected String getTitle(String siteName, VitroRequest vreq) {
-        return "Export QR Code for " + getIndividualFromRequest(vreq).getRdfsLabel();
+        try {
+            return "Export QR Code for " + getIndividualFromRequest(vreq).getRdfsLabel();
+        } catch (Throwable e) {
+            log.error(e, e);
+            return "There was an error in the system. The individual could not be found";
+        }
     }
 
 }
