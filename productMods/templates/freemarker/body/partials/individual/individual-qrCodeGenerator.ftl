@@ -4,7 +4,7 @@
 
 <#macro qrCodeVCard qrCodeWidth>
 
-    <#local qrCodeUrl = getQrCodeUrlForVCard(qrCodeWidth)>
+    <#local qrCodeUrl = getQrCodeUrlForVCard(qrCodeWidth)!>
 
     <#if qrCodeUrl != "">
         <img src="${qrCodeUrl}" />
@@ -13,7 +13,7 @@
 
 <#macro qrCodeLink qrCodeWidth>
 
-    <#local qrCodeUrl = getQrCodeUrlForLink(qrCodeWidth)>
+    <#local qrCodeUrl = getQrCodeUrlForLink(qrCodeWidth)!>
 
     <#if qrCodeUrl != "">
         <img src="${qrCodeUrl}" />

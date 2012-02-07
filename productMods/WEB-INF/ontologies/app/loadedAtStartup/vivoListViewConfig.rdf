@@ -46,9 +46,15 @@
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#awardOrHonor">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-awardOrHonor.xml</display:listViewConfigFile>
     </rdf:Description>
+
     <rdf:Description rdf:about="http://vivoweb.org/ontology/core#advisorIn">
         <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-advisorIn.xml</display:listViewConfigFile>
     </rdf:Description>
+
+    <rdf:Description rdf:about="http://vivoweb.org/ontology/core#researchAreaOf">
+        <display:listViewConfigFile rdf:datatype="http://www.w3.org/2001/XMLSchema#string">listViewConfig-researchAreaOf.xml</display:listViewConfigFile>
+    </rdf:Description>
+
     <!--
      ******************************************************************
      all roles use same config...is there a better way to specify this?
