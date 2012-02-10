@@ -83,7 +83,7 @@ public class InternalClassesDataGetter extends IndividualsForClassesDataGetter{
 	
 	@Override
     public String getType(){
-        return DataGetterUtils.generateDataGetterTypeURI(InternalClassesDataGetter.class.getName());
+        return PageDataGetterUtils.generateDataGetterTypeURI(InternalClassesDataGetter.class.getName());
     } 
     
 }

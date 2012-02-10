@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-package edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter;
+package edu.cornell.mannlib.vitro.webapp.utils.menuManagement;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache;
+import edu.cornell.mannlib.vitro.webapp.utils.menuManagement.MenuManagementDataUtils;
 
 /*
  * This class includes methods that help in selecting a data getter based on 
