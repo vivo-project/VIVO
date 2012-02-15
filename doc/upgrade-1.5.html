@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>VIVO Release 1 V1.5 Upgrade Guide</title>
+        <link rel="stylesheet" href="./css/doc.css" media="screen">
+    </head>
+    <body>
+        <div id="branding" role="banner">
+            <h1 class="vivo-logo"><a href="/"><span class="displace">VIVO</span></a></h1>
+        </div>
+        <!-- Start of content -->
+        <div id="wrapper-content" role="main">
+            <h1>VIVO Release 1 V1.5 Upgrade Guide</h1>
+            <small>
+                February 15, 2012 - Upgrading from Release 1 V1.4 to Release 1 V1.5
+            </small>
+            <p>
+                This document contains instructions on how to upgrade your 
+                installation of VIVO from Version 1.4 (or 1.4.1) to Version 1.5.  
+                This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
+                at <a href="http://vivoweb.org/">VIVOweb.org</a>
+            </p>
+            <p>
+                If you need to do a fresh install, please consult the VIVO Release V1.5 Installation 
+                Guide found on <a href="http://vivoweb.org/support">vivoweb.org</a>
+                or the install.html file located in the <code>doc</code>
+                directory of the VIVO source code distribution. The installation document also has a 
+                list of the required software and versions. 
+            </p>
+            <p>
+              For a description of the release contents see the <a href="./release.html">Release announcement for V1.5</a>.
+            </p> 
+            <hr/>
+		    <h3 id="tableofcontents">Table of Contents</h3>
+			<toc>
+				<ol class="roman2">
+					<li><a href="#preparation">Before Performing the Upgrade</a></li>
+					<li><a href="#changes">Noteworthy Changes</a> <br>
+					<li><a href="#upgrade_process">Upgrade Instructions</a></li>
+					<li><a href="#kbm">Knowledge Base Migration</a></li>
+					<li><a href="#termsofuse">Review the VIVO Terms of Use</a></li>
+					<li><a href="#nextsteps">Next Steps</a></li>
+				</ol>
+			</toc>
+			<hr/>
+            <h3 id="preparation">I. Before Performing the Upgrade</h3>
+            <br/>
+                Create backups of: 
+            <ul style="list-style-type: square;">
+                <li>
+                    The VIVO distribution directory (which contains the source for VIVO 1.4 or VIVO 1.4.1)
+                </li>
+                <li>
+                    The VIVO home directory (pointed to by your deploy.properties file)
+                </li>
+                <li>
+                    The webapps directory in Tomcat 
+                </li>
+                <li>
+                    MySQL database (most people use mysqldump to create the backup) 
+                </li>
+            </ul>
+            <p>
+                The upgrade process is similar to the initial install process 
+                with  
+                the following exceptions: 
+            </p>
+            <ul>
+                <li>
+                    You do not need to reinstall MySQL or recreate the MySQL database. Please 
+                    backup your MySQL database as noted above. 
+                </li>
+                <li>
+                    First-time login of the root account after the upgrade  
+                    process is complete will use the password previously set (not the 
+                    default password used on the first login after the initial  
+                    installation.) 
+                </li>
+                <li>
+                    The first time Apache Tomcat starts up after the upgrade, an automated 
+                    process will modify the knowledge base to align the  
+                    data with any ontology updates made for the new release. See the section on the <a href="#kbm">Knowledge Base Migration</a>
+                    below for more information. 
+                </li>
+            </ul>
+
+			<h1>BOGUS -- INSERT REAL STUFF HERE, EVENTUALLY</h1>
+            <h3 id="changes">II. Noteworthy Changes</h3>
+            	<ul>
+            	    <li>
+                	    <h4 id="upgradeAnt">Ant version 1.8 required</h4>
+                	    <p>
+            	            See J.Blake for details.
+             	        </p>
+                	</li>
+               </ul>
+
+
+				<h1>BOGUS -- INSERT REAL STUFF HERE, EVENTUALLY</h1>
+                <h3 id="#upgrade_process">III. Upgrade Instructions</h3>
+
+				<h1>BOGUS -- INSERT REAL STUFF HERE, EVENTUALLY</h1>
+                <h3 id="#kbm">IV. Knowledge Base Migration</h3>
+                
+                <h3 id="termsofuse">V. Review the VIVO Terms of Use</h3>
+                <p>
+                    VIVO comes with a "Terms of Use" statement linked from the footer.  The "Site Name" 
+                    you assign in the "Site Information" form under the <strong>Site Admin</strong>
+                    area will be 
+                    inserted into the "Terms of Use" statement.  If you want to edit the text content more than just 
+                    the "Site Name", the file can be found here:<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+                    Be sure to make the changes in your source files and deploy them to your tomcat so you don't lose 
+                    your changes next time you deploy for another reason.
+                </p>
+                <h3 id="nextsteps">Next Steps</h3>
+                <p>
+                    Now that you have VIVO up and running, please refer to the <a href="http://sourceforge.net/apps/mediawiki/vivo/index.php?title=Site_Administrator_Guide">Site Administrator's Guide</a>
+                     for information about its operation.
+                </p>
+                </div>
+            
+                <!-- #wrapper-content -->
+                <div id="footer" role="contentinfo">
+                    <p class="copyright">
+                        <small>
+                            ©2011 All Rights Reserved
+                        </small>
+                        | Powered 
+                        by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+                    </p>
+                    <div id="nav" role="navigation">
+                        <ul id="footer-nav" role="list">
+                            <li role="listitem">
+                                <a href="http://vivoweb.org/about">About</a>
+                            </li>
+                            <li role="listitem">
+                                <a href="http://vivoweb.org/contact">Contact Us</a>
+                            </li>
+                            <li role="listitem">
+                                <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- #footer -->
+
+        </div>
+    </body>
+</html>
