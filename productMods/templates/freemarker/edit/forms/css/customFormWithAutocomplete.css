@@ -31,3 +31,6 @@ form.customForm h4 {
 .disabledSubmit {
     cursor: default ! important;
 }
+span.readOnly {
+    color: #000;
+}

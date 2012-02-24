@@ -23,17 +23,16 @@
 <#assign submitButtonLabel = "Investigator" />
 <#if editConfiguration.predicateUri?ends_with("hasPrincipalInvestigatorRole") >
 	<#assign formHeading = "principal investigator entry for "/>
-	<#assign submitButtonLabel = "Principal Investigator" />
 <#elseif editConfiguration.predicateUri?ends_with("hasCo-PrincipalInvestigatorRole") >
  	<#assign formHeading = "co-principal investigator entry for "/>
- 		<#assign submitButtonLabel = "Co-Principal Investigator" />
 </#if>
 
 <#if editMode = "add">
 	<#assign formHeading> Create ${formHeading} </#assign>
+	<#assign submitButtonLabel>Create Entry</#assign>
 <#else>
 	<#assign formHeading> Edit ${formHeading} </#assign>
-	<#assign submitButtonLabel> Edit ${submitButtonLabel} </#assign>
+	<#assign submitButtonLabel>Save Changes</#assign>
 
 </#if>
 
@@ -100,15 +99,11 @@
     <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
         
         <p>
-            <label for="relatedIndLabel">Grant Name ${requiredHint}</label>
-            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="grantLabel" ${disabledVal} value="${grantLabel}" />
+            <label for="grant">Grant Name ${requiredHint}</label>
+            <input class="acSelector" size="50"  type="text" id="grant" acGroupName="grant" name="grantLabel"  value="${grantLabel}" />
         </p>
 
-        <#if editMode = "edit">
-				<input type="hidden" id="grantLabel"  name="grantLabel" value="${grantLabel}"/>
-         </#if>
-
-        <@lvf.acSelection urls.base "grant" "grant" existingGrantValue "Selected Grant"/>
+        <@lvf.acSelection urls.base "grant" "grant" "grant" existingGrantValue "Selected Grant"/>
 
         <h4>Years of Participation in Grant</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>
@@ -139,10 +134,10 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${urls.base}${sparqlQueryUrl}',
     acUrl: '${urls.base}${acUrl}',
-    acType: 'http://vivoweb.org/ontology/core#Grant',
+    acTypes: {grant: 'http://vivoweb.org/ontology/core#Grant'},
     editMode: '${editMode}',
-    submitButtonTextType: 'compound',
-    typeName: 'Grant'         
+    typeName: 'Grant',
+    baseHref: '${urls.base}/individual?uri='
 };
 </script>
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}

@@ -14,10 +14,8 @@
 <#--Freemarker variables with default values that can be overridden by specific forms-->
 
 
-<#--buttonText, typeSelectorLabel, numDateFields,  roleExamples-->
-<#if !buttonText?has_content>
-	<#assign buttonText = roleDescriptor />
-</#if>
+<#-- typeSelectorLabel, numDateFields,  roleExamples-->
+
 <#if !typeSelectorLabel?has_content>
 	<#assign typeSelectorLabel = roleDescriptor />
 </#if>
@@ -32,7 +30,7 @@
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
 <#if editConfiguration.objectUri?has_content>
 	<#assign titleVerb = "Edit"/>
-	<#assign submitButtonText>Edit ${buttonText?capitalize}</#assign>
+	<#assign submitButtonText>Save Changes</#assign>
 	<#if editMode = "repair">
 		<#assign disabledVal = ""/>
 	<#else>
@@ -40,7 +38,7 @@
 	</#if>
 <#else>
 	<#assign titleVerb = "Create"/>
-	<#assign submitButtonText>${buttonText?capitalize}</#assign>
+	<#assign submitButtonText>Create Entry</#assign>
 	<#assign disabledVal = ""/>
 	<#assign editMode = "add" />
 </#if>
@@ -110,45 +108,48 @@
     
     <form id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
-       <p class="inline"><label for="typeSelector">${typeSelectorLabel?capitalize} ${requiredHint}</label>
-           <select id="typeSelector" name="roleActivityType" 
-           <#if disabledVal?has_content>
-           	disabled = "${disabledVal}"
-           </#if>
-            >
-            <#--Code below allows for selection of first 'select one' option if no activity type selected-->
-            <#if activityTypeValue?has_content>
-            	<#assign selectedActivityType = activityTypeValue />
-            <#else>
-            	<#assign selectedActivityType = "" />
-            </#if>
-           		<#assign roleActivityTypeSelect = editConfiguration.pageData.roleActivityType />
-           		<#assign roleActivityTypeKeys = roleActivityTypeSelect?keys />
+       <p class="inline">
+        <label for="typeSelector">${typeSelectorLabel?capitalize}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+        <#--Code below allows for selection of first 'select one' option if no activity type selected-->
+        <#if activityTypeValue?has_content>
+        	<#assign selectedActivityType = activityTypeValue />
+        <#else>
+        	<#assign selectedActivityType = "" />
+        </#if>
+       		<#assign roleActivityTypeSelect = editConfiguration.pageData.roleActivityType />
+       		<#assign roleActivityTypeKeys = roleActivityTypeSelect?keys />
+        <#if editMode == "edit">
+          <#list roleActivityTypeKeys as key>             
+              <#if selectedActivityType = key >
+                <span class="readOnly" id="typeSelectorSpan">${roleActivityTypeSelect[key]}</span> 
+                <input type="hidden" id="typeSelectorInput" name="roleActivityType" acGroupName="activity" value="${activityTypeValue}" >
+              </#if>           
+          </#list>
+        <#else>
+           <select id="typeSelector" name="roleActivityType" acGroupName="activity">
                 <#list roleActivityTypeKeys as key>
                     <option value="${key}"<#if selectedActivityType = key>selected</#if>>${roleActivityTypeSelect[key]}</option>
                 </#list>
            </select>
+        </#if>
        </p>
        
        
    <div class="fullViewOnly">        
             <p>
-                <label for="relatedIndLabel">### Name ${requiredHint}</label>
-                <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="activityLabel"  value="${activityLabelValue}" 
-                <#if disabledVal?has_content>
-                	disabled=${disabledVal}
-                </#if>
-                />
+                <label for="activity">### Name ${requiredHint}</label>
+                <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
             </p>
             
             <input type="hidden" id="roleToActivityPredicate" name="roleToActivityPredicate" value="" />
             <!--Populated or modified by JavaScript based on type of activity, type returned from AJAX request-->
-            
+<#--            
             <#if editMode = "edit">
             	<input type="hidden" id="roleActivityType" name="roleActivityType" value="${activityTypeValue}"/>
             	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}"/>
             </#if>
-            <@lvf.acSelection urls.base "roleActivity" "roleActivityUri" existingRoleActivityValue />
+-->
+            <@lvf.acSelection urls.base "roleActivity" "roleActivityUri" "activity" existingRoleActivityValue />
 
             <#if showRoleLabelField = true>
             <p><label for="roleLabel">Role in ### ${requiredHint} ${roleExamples}</label>
@@ -189,8 +190,8 @@
 	var customFormData  = {
 	    acUrl: '${urls.base}/autocomplete?tokenize=true',
 	    editMode: '${editMode}',
-	    submitButtonTextType: 'compound',
-	    defaultTypeName: 'activity' // used in repair mode, to generate button text and org name field label
+	    defaultTypeName: 'activity', // used in repair mode, to generate button text and org name field label
+	    baseHref: '${urls.base}/individual?uri='
 	};
 	</script>
 

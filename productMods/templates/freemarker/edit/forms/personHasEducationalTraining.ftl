@@ -31,11 +31,11 @@
 
 <#if editMode == "edit">    
         <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Edit Educational Training">
+        <#assign submitButtonText="Save Changes">
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="Create">        
-        <#assign submitButtonText="Educational Training">
+        <#assign submitButtonText="Create Entry">
         <#assign disabledVal=""/>
 </#if>
 
@@ -75,6 +75,11 @@
          <#if lvf.submissionErrorExists(editSubmission, "orgLabel")>
  	        Please enter or select a value in the Name field.
         </#if>
+        <#--Checking if Training Type field is empty-->
+         <#if lvf.submissionErrorExists(editSubmission, "trainingType")>
+ 	        Please select a value in the Type of Educational Training field.<br />
+        </#if>
+        
         
         </p>
     </section>
@@ -90,32 +95,35 @@
     <p class="inline">    
         <label for="orgType">Organization Type ${requiredHint}</label>
         <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-        <select id="typeSelector" name="orgType"  ${disabledVal}>
-            <option value="" selected="selected">Select one</option>                
-            <#list orgTypeOpts?keys as key>             
-                <#if orgTypeValue = key>
-                    <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
-                <#else>
-                    <option value="${key}">${orgTypeOpts[key]}</option>
-                </#if>             
-            </#list>
-        </select>   
+        <#if editMode == "edit">
+          <#list orgTypeOpts?keys as key>             
+              <#if orgTypeValue = key >
+                <span class="readOnly" id="typeSelectorSpan">${orgTypeOpts[key]}</span> 
+                <input type="hidden" id="typeSelectorInput" name="orgType" acGroupName="org" value="${orgTypeValue}" >
+              </#if>           
+          </#list>
+        <#else>
+            <select id="typeSelector" name="orgType" acGroupName="org" ${disabledVal}>
+                <option value="" selected="selected">Select one</option>                
+                <#list orgTypeOpts?keys as key>             
+                    <#if orgTypeValue = key>
+                        <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
+                    <#else>
+                        <option value="${key}">${orgTypeOpts[key]}</option>
+                    </#if>             
+                </#list>
+            </select>
+        </#if>   
     </p>     
 
   <div class="fullViewOnly">        
     
     <p>
         <label for="relatedIndLabel">### Name ${requiredHint}</label>
-        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" value="${orgLabelValue}" <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if> />
+        <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" acGroupName="org" value="${orgLabelValue}"  />
     </p>
-    
-    <#--Store values in hidden fields-->
-    <#if editMode="edit">
-    	<input type="hidden" name="orgType" id="orgType" value="${orgTypeValue}"/>
-    	<input type="hidden" name="orgLabel" id="orgLabel" value="${orgLabelValue}"/>
-    </#if>
-    
-    <@lvf.acSelection urls.base "org" "org" existingOrgValue/>
+        
+    <@lvf.acSelection urls.base "org" "org" "org" existingOrgValue/>
     
     <label for="positionType">Type of Educational Training ${requiredHint}</label>
     <#assign trainingTypeOpts = editConfiguration.pageData.trainingType />
@@ -127,7 +135,7 @@
     </select>
     <p>
         <label for="dept">Department or School Name within the ###</label>
-        <input  size="60"  type="text" id="dept" name="dept" value="${deptValue}" />
+        <input  size="50"  type="text" id="dept" name="dept" value="${deptValue}" />
     </p>
     
     <div class="entry">
@@ -183,8 +191,8 @@
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
     editMode: '${editMode}',
-    submitButtonTextType: 'compound',
-    defaultTypeName: 'organization'
+    defaultTypeName: 'organization',
+    baseHref: '${urls.base}/individual?uri='
 };
 </script>
 

@@ -26,10 +26,12 @@
 	<#assign titleVerb = "Edit" />
 	<#assign objectLabel = editConfiguration.pageData.objectLabel />
 	<#assign selectedObjectUri = editConfiguration.objectUri />
+	<#assign submitButtonText = "Save Change" />
 <#else>
 	<#assign titleVerb = "Add" >
 	<#assign objectLabel = "" />
-		<#assign selectedObjectUri = ""/>
+	<#assign selectedObjectUri = ""/>
+	<#assign submitButtonText = "Create Entry" />
 </#if>
 
 <#if editConfiguration.formTitle?contains("collaborator") >
@@ -52,27 +54,24 @@
              
             <#---This section should become autocomplete instead--> 
             <p>
-								<label for="relatedIndLabel"> ${propertyNameForDisplay?capitalize} Name<span class='requiredHint'> *</span></label>
-								<input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="objectLabel" value="${objectLabel}" />
-						</p>
+				<label for="object"> ${propertyNameForDisplay?capitalize} Name<span class='requiredHint'> *</span></label>
+				<input class="acSelector" size="50"  type="text" id="object" name="objectLabel" acGroupName="object" value="${objectLabel}" />
+			</p>
 								
-							<div class="acSelection"> 
-							<p class="inline">
-							<label>Selected:</label> 
-							<span class="acSelectionInfo"></span> 
-							<a href="/vivo/individual?uri="
-									class="verifyMatch">(Verify this match)</a> 
-							<a href="#"
-									class="cancel">(Change selection)</a> 
-							</p> <input class="acUriReceiver" type="hidden" id="objectVar" name="objectVar" value="${selectedObjectUri}" />
-							</div>
+			<div class="acSelection" acGroupName="object" > 
+				<p class="inline">
+					<label>Selected:</label> 
+					<span class="acSelectionInfo"></span>
+					<a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+                    <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+                </p>
+                <input class="acUriReceiver" type="hidden" id="objectVar" name="objectVar" value="${selectedObjectUri}" />
+			</div>
 
-            
             <#--The above section should be autocomplete-->
             
-            
             <p>
-                <input type="submit" id="submit" value="${editConfiguration.submitLabel}" role="button" disabled="disabled"/>
+                <input type="submit" id="submit" value="${submitButtonText}" role="button" disabled="disabled"/>
            
                 <span class="or"> or </span>
                 <a title="Cancel" class="cancel" href="${cancelUrl}">Cancel</a>
@@ -106,22 +105,25 @@ Also multiple types parameter set to true only if more than one type returned-->
     var customFormData  = {
         acUrl: '${urls.base}/autocomplete?tokenize=true',
         <#if objectTypesExist = true>
-        acType: '${objectTypes}',
+            acTypes: {object: '${objectTypes}'},
         </#if>
         <#if multipleTypes = true>
-        acMultipleTypes: 'true',
+            acMultipleTypes: 'true',
         </#if>
-        submitButtonTextType: 'simple',
         editMode: '${editMode}',
         typeName:'${propertyNameForDisplay}',
-        supportEdit: 'true',
+        acSelectOnly: 'true',
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
         acFilterForIndividuals: ${acFilterForIndividuals},
-        defaultTypeName: '${propertyNameForDisplay}' // used in repair mode to generate button text
+        defaultTypeName: '${propertyNameForDisplay}', // used in repair mode to generate button text
+        baseHref: '${urls.base}/individual?uri='
     };
     </script>
-
+<#--
+	 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AutocompleteObjectPropertyFormGenerator
+	 edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAttendeeRoleToPersonGenerator
+-->
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
  ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}

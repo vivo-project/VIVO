@@ -6,6 +6,8 @@
 
 <#--Retrieve certain edit configuration information-->
 <#assign editMode = editConfiguration.pageData.editMode />
+
+
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 
 <#--assign htmlForElements = editConfiguration.pageData.htmlForElements ! {}/-->
@@ -20,13 +22,15 @@
 <#--In case of submission error, may already have publication type or title - although latter not likely, but storing values to be on safe side-->
 <#assign publicationTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "pubType") />
 <#assign titleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "title") />
+<#assign pubUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "pubUri") />
+
 <#if editMode == "edit">        
         <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Edit Publication">
+        <#assign submitButtonText="Save Changes">
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="Create">        
-        <#assign submitButtonText="Publication">
+        <#assign submitButtonText="Create Entry">
         <#assign disabledVal=""/>
 </#if>
 
@@ -60,8 +64,8 @@
 <form id="addpublicationToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit publication">
         
         <#--TODO: Check if possible to have existing publication options here in order to select-->
-    <p class="inline"><label for="typeSelector">Publication Type ${requiredHint}</label>
-        <select id="typeSelector" name="pubType" <#if (disabledVal?length > 0)>disabled="${disabledVal}"</#if> >
+    <p class="inline"><label for="typeSelector">Publication Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+        <select id="typeSelector" name="pubType" acGroupName="publication" >
              <option value="" <#if (publicationTypeValue?length = 0)>selected="selected"</#if>>Select one</option>
              <#list pubTypeLiteralOptions?keys as key>
                  <option value="${key}" <#if (publicationTypeValue = key)>selected="selected"</#if>>${pubTypeLiteralOptions[key]}</option>
@@ -71,17 +75,17 @@
     <div class="fullViewOnly">        
         <p>
             <label for="relatedIndLabel">Title ${requiredHint}</label>
-            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="title" 
-            <#if (disabledVal?length > 0)>disabled="${disabledVal}"</#if> value="" />
+            <input class="acSelector" size="50"  type="text" id="title" name="title" acGroupName="publication"  value="${titleValue}" />
         </p>
 
-        <div class="acSelection">
+        <div class="acSelection" acGroupName="publication" >
             <p class="inline">
                 <label>Selected Publication:</label>
                 <span class="acSelectionInfo"></span>
-                <a href="${urls.base}/individual?uri=" class="verifyMatch" title"verify match">(Verify this match)</a>
+                <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+                <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
             </p>
-            <input class="acUriReceiver" type="hidden" id="pubUri" name="pubUri" value="" />
+            <input class="acUriReceiver" type="hidden" id="pubUri" name="pubUri" value="${pubUriValue}" />
         </div>
         
    </div>
@@ -101,9 +105,9 @@
         sparqlForAcFilter: '${sparqlForAcFilter}',
         sparqlQueryUrl: '${sparqlQueryUrl}',
         acUrl: '${urls.base}/autocomplete?tokenize=true',
-        submitButtonTextType: 'simple',
         editMode: '${editMode}',
-        defaultTypeName: 'publication' // used in repair mode to generate button text
+        defaultTypeName: 'publication', // used in repair mode to generate button text
+        baseHref: '${urls.base}/individual?uri='
     };
     </script>
 </section>

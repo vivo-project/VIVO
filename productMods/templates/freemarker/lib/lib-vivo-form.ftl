@@ -15,8 +15,8 @@
 </#macro>
 
 <#-- After selecting an individual via autocomplete, display highlighted and with verify link -->
-<#macro acSelection urlsBase inputName inputId inputValue labelValue="">
-<div class="acSelection">
+<#macro acSelection urlsBase inputName inputId acGroupName inputValue labelValue="">
+<div class="acSelection" acGroupName="${acGroupName}">
     <p class="inline">
         <label>${labelValue}</label>
         <span class="acSelectionInfo"></span>

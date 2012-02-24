@@ -23,11 +23,11 @@
 <#assign disabledVal = ""/>
 <#if editMode == "edit">        
         <#assign formAction="Edit">        
-        <#assign submitButtonText="Edit Position">
+        <#assign submitButtonText="Save Changes">
         <#assign disabledVal="disabled">
 <#else>
         <#assign formAction="Create">        
-        <#assign submitButtonText="Position">
+        <#assign submitButtonText="Create Entry">
         <#assign disabledVal="">
 </#if>
 
@@ -83,27 +83,31 @@
 
 <form class="customForm" action ="${submitUrl}" class="customForm noIE67" role="${formAction} position entry">
   <p class="inline">    
-    <label for="orgType">Organization Type ${requiredHint}</label>
+    <label for="orgType">Organization Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-    <select id="typeSelector" name="orgType"  ${disabledVal} >
+    <#if editMode == "edit">
+      <#list orgTypeOpts?keys as key>             
+          <#if orgTypeValue = key >
+            <span class="readOnly" id="typeSelectorSpan">${orgTypeOpts[key]}</span> 
+            <input type="hidden" id="typeSelectorInput" name="orgType" acGroupName="org" value="${orgTypeValue}" >
+          </#if>           
+      </#list>
+    <#else>
+    <select id="typeSelector" name="orgType"  ${disabledVal} acGroupName="org">
         <option value="" selected="selected">Select one</option>                
         <#list orgTypeOpts?keys as key>             
             <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
         </#list>
     </select>
+    </#if>
   </p>
 
   <div class="fullViewOnly">        
   <p>
     <label for="relatedIndLabel">### Name ${requiredHint}</label>
-    <input type="text" name="orgLabel" id="relatedIndLabel" size="50" class="acSelector" value="${orgLabelValue}" <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>  >
+    <input type="text" name="orgLabel" id="orgLabel" acGroupName="org" size="50" class="acSelector" value="${orgLabelValue}" >
   </p>
-  <#if editMode = "edit">
-			<input type="hidden" id="orgLabel"  name="orgLabel" value="${orgLabelValue}"/>
-   </#if>
-
-    <@lvf.acSelection urls.base "org" "org" existingOrgValue/>
-
+    <@lvf.acSelection urls.base "org" "org" "org" existingOrgValue /> 
 
     <label for="positionTitle">Position Title ${requiredHint}</label>
     <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
@@ -150,8 +154,8 @@
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true',
     editMode: '${editMode}',
-    submitButtonTextType: 'compound',
-    defaultTypeName: 'organization' // used in repair mode, to generate button text and org name field label
+    defaultTypeName: 'organization', // used in repair mode, to generate button text and org name field label
+    baseHref: '${urls.base}/individual?uri='
 };
 </script>
 

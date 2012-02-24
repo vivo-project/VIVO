@@ -12,11 +12,11 @@
 
 <#if editMode == "edit">        
         <#assign titleVerb="Edit">        
-        <#assign submitButtonText="Edit Position">
+        <#assign submitButtonText="Save Changes">
         <#assign disabledVal="disabled">
 <#else>
         <#assign titleVerb="Create">        
-        <#assign submitButtonText="Position">
+        <#assign submitButtonText="Create Entry">
         <#assign disabledVal=""/>
 </#if>
 
@@ -94,19 +94,15 @@
 	    </select>
   	    <p>
 	        <label for="relatedIndLabel">Person ${requiredHint}</label>
-	        <#if editMode == "edit">
-	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" disabled="disabled" >
-                <input class="acLabelReceiver" type="hidden" id="existingPersonLabel" name="personLabel" value="${personLabelValue}" />
-	        <#else>
-	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" value="${personLabelValue}" >
-	        </#if>
+	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" acGroupName="person" value="${personLabelValue}" >
 	    </p>
 	
-	    <div class="acSelection">
+	    <div class="acSelection" acGroupName="person">
 	        <p class="inline">
 	            <label>Selected Person:</label>
 	            <span class="acSelectionInfo"></span>
-	            <a href="${urls.base}/individual?uri=" class="verifyMatch"  title="verify match">(Verify this match)</a>
+                <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+                <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
 	        </p>
 	        <input class="acUriReceiver" type="hidden" id="personUri" name="person" value="${personValue}" />
 	    </div>
@@ -139,10 +135,11 @@
 	
 	<script type="text/javascript">
 	var customFormData  = {
-	    acUrl: '${urls.base}/autocomplete?type=http://xmlns.com/foaf/0.1/Person&tokenize=true&stem=true',
+	    acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
+        acTypes: {person: 'http://xmlns.com/foaf/0.1/Person'},
 	    editMode: '${editMode}',
-	    submitButtonTextType: 'compound',
-	    defaultTypeName: 'person'
+	    defaultTypeName: 'person',
+	    baseHref: '${urls.base}/individual?uri='
 	};
 	</script>
 
