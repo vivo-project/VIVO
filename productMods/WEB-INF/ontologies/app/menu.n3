@@ -50,11 +50,8 @@ display:EventsMenuItem
     a display:NavigationElement ;
     display:menuPosition 5;
     display:linkText "Events";
-    display:toPage display:Events .
-
-########## Pages ############
-#Instead of type, now using dataGetter which uses an object that specifies information for data getter
-
+    display:toPage display:Events .        
+    
 display:Home 
     a display:HomePage ;    
     a display:Page ;
@@ -95,6 +92,8 @@ display:Research
     display:urlMapping "/research" ;
     display:hasDataGetter display:researchDataGetter .
 
+
+    
 #The data getter objects used above
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#peopleDataGetter>
       a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.ClassGroupPageData>;
@@ -118,3 +117,27 @@ display:Research
               
 <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#homeDataGetter>
       a <java:edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.BrowseDataGetter> .
+      
+      
+## display model pages ###
+
+display:pageListPage
+    a display:Page ;              
+    display:title "Pages" ;
+    display:urlMapping "/pageList" ;
+    display:requiresBodyTemplate "page-pageList.ftl" ;   
+    display:hasDataGetter display:pageListData .
+
+display:pageListData
+    a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter>;
+    display:queryModel <vitro:contextDisplayModel> ;                        
+    display:saveToVar "pages" ;
+     
+    display:query """
+    PREFIX display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> 
+    SELECT ?pageUri ?title ?urlMapping      
+    WHERE { 
+        ?pageUri a display:Page .
+        OPTIONAL{ ?pageUri display:urlMapping ?urlMapping }
+        OPTIONAL{ ?pageUri display:title  ?title }  
+     } """ .                    

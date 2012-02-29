@@ -11,6 +11,9 @@
         <ul id="header-nav" role="list">
             <li role="listitem"><a href="${urls.index}" title="index">Index</a></li>
             <#if user.loggedIn>
+                <#if (page??) && (page.URLToEditPage??) >
+                   <li role="listitem"><a href="${page.URLToEditPage}" title="edit page">Edit Page</a></li>
+                </#if>
                 <#if user.hasSiteAdminAccess>
                     <li role="listitem"><a href="${urls.siteAdmin}" title="site admin">Site Admin</a></li>
                 </#if>
@@ -29,6 +32,8 @@
                             </li>
                          </ul>
                      </li>
+                     
+
                 
                 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
                 
