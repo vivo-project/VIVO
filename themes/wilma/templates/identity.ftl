@@ -11,7 +11,7 @@
         <ul id="header-nav" role="list">
             <li role="listitem"><a href="${urls.index}" title="index">Index</a></li>
             <#if user.loggedIn>
-                <#if (page??) && (page.URLToEditPage??) >
+                <#if (page??) && (page?is_hash || page?is_hash_ex) && (page.URLToEditPage??) >
                    <li role="listitem"><a href="${page.URLToEditPage}" title="edit page">Edit Page</a></li>
                 </#if>
                 <#if user.hasSiteAdminAccess>

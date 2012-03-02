@@ -42,7 +42,8 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache;
 import edu.cornell.mannlib.vitro.webapp.utils.menuManagement.ProcessIndividualsForClasses;
-import edu.cornell.mannlib.vitro.webapp.utils.pageDataGetter.InternalClassesDataGetter;
+import edu.cornell.mannlib.vitro.webapp.utils.dataGetter.DataGetterUtils;
+import edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter;
 
 /*
  * Handle processing of data retrieved from IndividualsForClasses data getter to return to form template
@@ -72,7 +73,7 @@ public class ProcessInternalClasses extends ProcessIndividualsForClasses {
 		return(internalClassSelected(vreq) || !allClassesSelected(vreq));
 	}
 	public  Model processSubmission(VitroRequest vreq, Resource dataGetterResource) {
-		String dataGetterTypeUri = new InternalClassesDataGetter().getType();
+		String dataGetterTypeUri = DataGetterUtils.generateDataGetterTypeURI(InternalClassesDataGetter.class.getName());
 		String[] selectedClasses = vreq.getParameterValues("classInClassGroup");
 		Model dgModel = ModelFactory.createDefaultModel();
 		dgModel.add(dgModel.createStatement(dataGetterResource, 
