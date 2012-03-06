@@ -11,7 +11,7 @@ var customForm = {
         }
         this.mixIn();
         this.initObjects();                 
-        this.initPage();       
+        this.initPage();
     },
     
     disableFormInUnsupportedBrowsers: function() {       
@@ -54,7 +54,7 @@ var customForm = {
         // the verify popup window. Although there could be multiple verifyMatch objects
         // selecting one and binding the event works for all of them     
         this.verifyMatch = this.form.find('.verifyMatch');
-        
+                
         // find all the acSelector input elements 
         this.acSelectors = [] ;
         
@@ -209,10 +209,9 @@ var customForm = {
             
             // If an autocomplete selection has been made, undo it.
             // NEED TO LINK THE TYPE SELECTOR TO THE ACSELECTOR IT'S ASSOCIATED WITH
-            // BECAUSE THERE COULD BE MORE THAN ON AC FIELD. ASSOCIATION IS MADE BY
-            // SHARING THE SAME ID -- "typeSelector" -- AMONG THE SELECT AND THE INPUT 
-            // AND THE AC SELECTION DIV
-            // DO WE NEED AN IF STATEMENT AROUND THIS ****
+            // BECAUSE THERE COULD BE MORE THAN ONE AC FIELD. ASSOCIATION IS MADE VIA
+            // THE SPECIAL "acGroupName" ATTRIBUTE WHICH IS SHARED AMONG THE SELECT AND  
+            // THE INPUT AND THE AC SELECTION DIV.
             customForm.undoAutocompleteSelection($(this));
 
             // Reinitialize view. If no type selection in a two-step form, go back to type view;
@@ -246,7 +245,6 @@ var customForm = {
     },
     
     initAutocomplete: function(selectedObj) {
-
         this.getAcFilter();
         //If specific individuals are to be filtered out, add them here
         //to the filtering list
@@ -387,6 +385,9 @@ var customForm = {
 
         var $acDiv = this.acSelections[$(selectedObj).attr('acGroupName')];
 
+        // provides a way to monitor selection in other js files, e.g. to hide fields upon selection
+        $acDiv.addClass("userSelected");
+
         // If the form has a type selector, add type name to label in add mode. In edit mode, use typeSelectorSpan
         // html. The second case is an "else if" and not an else because the template may not be passing the label
         // to the acSelection macro or it may not be using the macro at all and the label is hard-coded in the html.
@@ -403,7 +404,6 @@ var customForm = {
         $acDiv.find("a.verifyMatch").attr('href', this.baseHref + uri);
 
         $changeLink = $acDiv.find('a.changeSelection');
-        $changeLink.unbind('click');
         $changeLink.click(function() {
             customForm.undoAutocompleteSelection($acDiv);
         });
@@ -430,25 +430,24 @@ var customForm = {
         else {
             $acSelectionObj = $(selectedObj);
         }
-        if ( !$acSelectionObj.is(':hidden') ) {
-            var $acSelector = null;
-            $.each(this.acSelectors, function() {
-                if ( $(this).attr('acGroupName') == $acSelectionObj.attr('acGroupName') ) {
-                    $acSelector = $(this);
-                }
-            });
-            $acSelector.parent("p").show();
-            this.hideFields($acSelectionObj);
-            $acSelectionObj.find("input.acUriReceiver").val('');
-            $acSelectionObj.find("span").text('');
-            $acSelectionObj.find("a.verifyMatch").attr('href', this.baseHref);
-            $acSelector.val(''); 
-            customForm.addAcHelpText($acSelector);
-
-            //Resetting so disable submit button again for object property autocomplete
-            if ( this.acSelectOnly ) {
-            	this.disableSubmit();
+        var $acSelector = null;
+        $.each(this.acSelectors, function() {
+            if ( $(this).attr('acGroupName') == $acSelectionObj.attr('acGroupName') ) {
+                $acSelector = $(this);
             }
+        });
+        $acSelector.parent("p").show();
+        this.hideFields($acSelectionObj);
+        $acSelectionObj.removeClass('userSelected');
+        $acSelectionObj.find("input.acUriReceiver").val('');
+        $acSelectionObj.find("span").text('');
+        $acSelectionObj.find("a.verifyMatch").attr('href', this.baseHref);
+        $acSelector.val(''); 
+        customForm.addAcHelpText($acSelector);
+
+        //Resetting so disable submit button again for object property autocomplete
+        if ( this.acSelectOnly ) {
+        	this.disableSubmit();
         }
     },
     
@@ -496,12 +495,15 @@ var customForm = {
         // If this.acType is empty, we are either in a one-step form with no type yet selected,
         // or in repair mode in a two-step form with no type selected. Use the default type
         // name specified in the form data.
-        if ( selectedObj && this.hasMultipleTypeNames ) {
+        if ( !selectedObj || !this.hasMultipleTypeNames ) {
+            return this.acTypes ? this.typeName : this.capitalize(this.defaultTypeName);
+        }
+        else if ( selectedObj && ( $(selectedObj).attr('acGroupName') == this.typeSelector.attr('acGroupName') ) ) {
+            return this.acTypes ? this.typeName : this.capitalize(this.defaultTypeName);
+        }
+        else {
             var name = customForm.multipleTypeNames[$(selectedObj).attr('id')];
             return this.capitalize(name);
-        } 
-        else {
-            return this.acTypes ? this.typeName : this.capitalize(this.defaultTypeName);
         }
     },
 
@@ -510,7 +512,7 @@ var customForm = {
         var typeText;
         // First case applies on page load; second case applies when the type gets changed. With multiple
         // ac fields there are cases where we also have to check if the help text is already there
-        if (!$(selectedObj).val() || $(selectedObj).hasClass(this.acHelpTextClass) || $(selectedObj).val().substring(0, 18) == "Select an existing" ) {            
+        if (!$(selectedObj).val() || $(selectedObj).hasClass(this.acHelpTextClass) || $(selectedObj).val().substring(0, 18) == "Select an existing" ) {
         	typeText = this.getTypeNameForLabels($(selectedObj));            
         	var helpText = "Select an existing " + typeText + " or create a new one.";
         	//Different for object property autocomplete

@@ -34,3 +34,17 @@ form.customForm h4 {
 span.readOnly {
     color: #000;
 }
+/* special styles for addPublicationToPerson.ftl 
+   volume, number, issue fields and start/end page fields */
+label.vniLabels {
+    padding-left: 50px;
+}
+input.vniInputs {
+    margin-left: 57px;
+}
+label.sepLabels {
+    padding-left: 31px;
+}
+input.sepInputs {
+    margin-left: 57px;
+}

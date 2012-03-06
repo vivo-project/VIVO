@@ -110,17 +110,15 @@
         <label for="description">Description</label>
         <input  size="50"  type="text" id="description" name="description" value="${descriptionValue}" />
     </p>
-
+    <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
     <p>
-        <label for="yearAwarded" id="yearAwarded">Year Awarded</label>
-        <input  size="4"  type="text" id="yearAwarded" name="yearAwarded" value="${yearAwardedValue}" /> ${yearHint}
+        <label for="yearAwardedDisplay" id="yearAwarded">Year Awarded</label>
+        <input  size="4"  type="text" id="yearAwardedDisplay" name="yearAwardedDisplay" value="" /> ${yearHint}
     </p>
-
     <p>
         <h4>Years Inclusive <span class="hint">&nbsp;(e.g., for multi-year awards)</span></h4>
     </p>
     <#--Need to draw edit elements for dates here-->
-    <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
     <#if htmlForElements?keys?seq_contains("startField")>
         <label class="dateTime" for="startField">Start</label>
 		${htmlForElements["startField"]} ${yearHint}
@@ -141,6 +139,13 @@
     </p>
 
     <p id="requiredLegend" class="requiredHint">* required fields</p>
+
+    <#-- hide the html that gets written, and use java script to pass the value between the two -->
+    <div class="hidden">
+        <#if htmlForElements?keys?seq_contains("yearAwarded")>
+		    ${htmlForElements["yearAwarded"]} 
+        </#if>
+    </div>
 
 </form>
 
