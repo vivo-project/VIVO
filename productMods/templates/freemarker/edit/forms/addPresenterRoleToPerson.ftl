@@ -124,7 +124,7 @@
   </p>
   <div class="acSelection" acGroupName="conference">
       <p class="inline">
-          <label>Selected Conference:</label>
+          <label>Selected conference:</label>
           <span class="acSelectionInfo"></span>
           <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
           <a href="#" class="changeSelection" id="changeSelection">change selection)</a>

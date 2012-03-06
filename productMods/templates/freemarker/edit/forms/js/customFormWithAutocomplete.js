@@ -391,11 +391,14 @@ var customForm = {
         // If the form has a type selector, add type name to label in add mode. In edit mode, use typeSelectorSpan
         // html. The second case is an "else if" and not an else because the template may not be passing the label
         // to the acSelection macro or it may not be using the macro at all and the label is hard-coded in the html.
-        if (this.typeSelector.length) {
+        if ( this.typeSelector.length && ($acDiv.attr('acGroupName') == this.typeSelector.attr('acGroupName')) ) {
              $acDiv.find('label').html('Selected ' + this.typeName + ':');
         }
-        else if ( this.typeSelectorSpan.html() ) {
+        else if ( this.typeSelectorSpan.html() && ($acDiv.attr('acGroupName') == this.typeSelectorInput.attr('acGroupName')) ) {
             $acDiv.find('label').html('Selected ' + this.typeSelectorSpan.html() + ':');
+        }
+        else if ( $acDiv.find('label').html() == '' ) {
+            $acDiv.find('label').html('Selected ' + this.multipleTypeNames[$(selectedObj).attr('acGroupName')] + ':');
         }
         
         $acDiv.show();
