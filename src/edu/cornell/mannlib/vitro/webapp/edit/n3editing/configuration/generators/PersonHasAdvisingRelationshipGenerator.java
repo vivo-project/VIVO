@@ -72,8 +72,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                                            degreeAssertion,
                                            firstNameAssertion,
                                            lastNameAssertion,
-                                           n3ForSubjAreaAssertion,
-                                           subjAreaLabelAssertion,
+                                           n3ForSubjAreaAssertion + "\n" + subjAreaLabelAssertion, //putting these statements together to prevent an empty label from generating a new URI
                                            n3ForStart, 
                                            n3ForEnd ) );
         

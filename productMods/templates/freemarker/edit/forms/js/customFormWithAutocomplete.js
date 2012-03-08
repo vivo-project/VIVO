@@ -254,6 +254,10 @@ var customForm = {
         $(selectedObj).autocomplete({
             minLength: 3,
             source: function(request, response) {
+        		//Reset the URI of the input to one that says new uri required
+        		//That will be overwritten if value selected from autocomplete
+        		//We do this everytime the user types anything in the autocomplete box
+        		customForm.initDefaultNewURI(selectedObj);
                 if (request.term in customForm.acCache) {
                     // console.log('found term in cache');
                     response(customForm.acCache[request.term]);
@@ -442,7 +446,9 @@ var customForm = {
         $acSelector.parent("p").show();
         this.hideFields($acSelectionObj);
         $acSelectionObj.removeClass('userSelected');
-        $acSelectionObj.find("input.acUriReceiver").val('');
+        //Might be useful here to replace the uri with the default "new uri needs to be created" value
+        //$acSelectionObj.find("input.acUriReceiver").val('');
+        $acSelectionObj.find("input.acUriReceiver").val(customForm.newUriSentinel);
         $acSelectionObj.find("span").text('');
         $acSelectionObj.find("a.verifyMatch").attr('href', this.baseHref);
         $acSelector.val(''); 
@@ -553,6 +559,13 @@ var customForm = {
 	enableSubmit:function() {
 		this.button.removeAttr('disabled');
 		this.button.removeClass('disabledSubmit');
+	},
+	initDefaultNewURI:function(selectedObj) {
+		//get uri input for selected object and set to value indicating
+		//this will require a new uri when submitted if the uri is not replaced
+		//with one selected from autocomplete selection
+        var $acDiv = this.acSelections[$(selectedObj).attr('acGroupName')];
+        $acDiv.find("input").val(customForm.newUriSentinel);
 	}
 	
 };

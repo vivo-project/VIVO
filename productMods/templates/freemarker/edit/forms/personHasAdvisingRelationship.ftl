@@ -1,5 +1,8 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
-
+<#assign newUriSentinel = "" />
+<#if editConfigurationConstants?has_content>
+	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
+</#if>
 <#-- this is in request.subject.name -->
 
 <#-- leaving this edit/add mode code in for reference in case we decide we need it -->
@@ -187,7 +190,8 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acFilterForIndividuals: ${acFilterForIndividuals},
-    baseHref: '${urls.base}/individual?uri='
+    baseHref: '${urls.base}/individual?uri=',
+    newUriSentinel : '${newUriSentinel}'
 };
 </script>
 
