@@ -145,17 +145,11 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 getN3NewPubNameAssertion(),
                 getN3NewPubTypeAssertion(),
                 getN3ForCollection(),
-                getN3CollectionNameAssertion(),
                 getN3ForBook(),
-                getN3BookNameAssertion(),
                 getN3ForConference(),
-                getN3ConferenceNameAssertion(),
                 getN3ForEvent(),
-                getN3EventNameAssertion(),
                 getN3ForEditor(),
-                getN3EditorNameAssertion(),
                 getN3ForPublisher(),
-                getN3PublisherNameAssertion(),
                 getN3ForLocaleAssertion(),
                 getN3ForVolumeAssertion(),
                 getN3ForNumberAssertion(),
@@ -205,66 +199,48 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:hasPublicationVenue ?collectionUri . \n" +
         "?collectionUri a <" + collectionClass + ">  . \n" +
-        "?collectionUri vivo:publicationVenueFor ?pubUri . ";
-    }
-
-    private String getN3CollectionNameAssertion() {
-        return "?collectionUri <" + label + "> ?collection .";
+        "?collectionUri vivo:publicationVenueFor ?pubUri . \n" + 
+        "?collectionUri <" + label + "> ?collection .";
     }
 
     private String getN3ForBook() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:hasPublicationVenue ?bookUri . \n" +
         "?bookUri a <" + bookClass + ">  . \n" +
-        "?bookUri vivo:publicationVenueFor ?pubUri . ";
-    }
-
-    private String getN3BookNameAssertion() {
-        return "?bookUri <" + label + "> ?book .";
+        "?bookUri vivo:publicationVenueFor ?pubUri . \n " + 
+        "?bookUri <" + label + "> ?book .";
     }
 
     private String getN3ForConference() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri <" + presentedAtPred + "> ?conferenceUri . \n" +
         "?conferenceUri a <" + conferenceClass + ">  . \n" +
-        "?conferenceUri vivo:includesEvent ?pubUri . ";
-    }
-
-    private String getN3ConferenceNameAssertion() {
-        return "?conferenceUri <" + label + "> ?conference .";
+        "?conferenceUri vivo:includesEvent ?pubUri . \n" + 
+        "?conferenceUri <" + label + "> ?conference .";
     }
 
     private String getN3ForEvent() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:proceedingsOf ?eventUri . \n" +
         "?eventUri a <" + conferenceClass + ">  . \n" +
-        "?eventUri vivo:hasProceedings ?pubUri . ";
-    }
-
-    private String getN3EventNameAssertion() {
-        return "?eventUri <" + label + "> ?event .";
+        "?eventUri vivo:hasProceedings ?pubUri . \n" + 
+        "?eventUri <" + label + "> ?event .";
     }
 
     private String getN3ForEditor() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:editor ?editorUri . \n" +
         "?editorUri a <" + editorClass + ">  . \n" +
-        "?editorUri vivo:editorOf ?pubUri . ";
-    }
-
-    private String getN3EditorNameAssertion() {
-        return "?editorUri <" + label + "> ?editor .";
+        "?editorUri vivo:editorOf ?pubUri . \n" + 
+        "?editorUri <" + label + "> ?editor .";
     }
 
     private String getN3ForPublisher() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:publisher ?publisherUri . \n" +
         "?publisherUri a <" + publisherClass + ">  . \n" +
-        "?publisherUri vivo:publisherOf ?pubUri . ";
-    }
-
-    private String getN3PublisherNameAssertion() {
-        return "?publisherUri <" + label + "> ?publisher .";
+        "?publisherUri vivo:publisherOf ?pubUri . \n" + 
+        "?publisherUri <" + label + "> ?publisher .";
     }
 
     private String getN3ForLocaleAssertion() {
@@ -351,6 +327,12 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         //activity label and role label are literals on form
         List<String> literalsOnForm = new ArrayList<String>();
         literalsOnForm.add("title");
+        literalsOnForm.add("collection");
+        literalsOnForm.add("book");
+        literalsOnForm.add("conference");
+        literalsOnForm.add("event");
+        literalsOnForm.add("editor");
+        literalsOnForm.add("publisher");
         literalsOnForm.add("locale");
         literalsOnForm.add("volume");
         literalsOnForm.add("number");

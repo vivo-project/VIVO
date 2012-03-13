@@ -64,7 +64,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
                                            roleLabelAssertion, 
                                            presTypeAssertion, 
                                            presLabelAssertion ) );
-        conf.setN3Optional( Arrays.asList( n3ForConference, n3ForConfLabel, n3ForStart, n3ForEnd ) );
+        conf.setN3Optional( Arrays.asList( n3ForConference, n3ForStart, n3ForEnd ) );
         
         conf.addNewResource("presentation", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("conference", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -178,9 +178,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
     final static String n3ForConference =
         "?conference a <" +  conferenceClass + "> . \n" +
         "?conference <" + includesEventPred + "> ?presentation . \n" +
-        "?presentation <" + eventWithinPred + "> ?conference . ";
-
-    final static String n3ForConfLabel =
+        "?presentation <" + eventWithinPred + "> ?conference . \n" +
         "?conference <" + label + "> ?conferenceLabel .";
     
     final static String n3ForStart =

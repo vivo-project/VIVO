@@ -3,13 +3,14 @@
 
 var awardReceiptUtils = {
 
-    onLoad: function(mode) {
+    onLoad: function(mode, subjectName) {
         this.initObjectReferences();                 
         this.bindEventListeners();
         // in edit mode, copy the year awarded to the displayed input element
         if ( mode == "edit" ) {
             this.displayedYear.val(this.yearAwarded.val());
         }
+        this.subjectName = subjectName;
     },
 
     initObjectReferences: function() {
@@ -35,7 +36,7 @@ var awardReceiptUtils = {
     buildAwardReceiptLabel: function() {
         var rdfsLabel = this.award.val();
         if ( this.yearAwarded.val().length ) {
-            rdfsLabel += " (" + this.yearAwarded.val() + ")";
+            rdfsLabel += " (" + this.subjectName + ' - ' + this.yearAwarded.val() + ")";
         }
         this.recLabel.val(rdfsLabel);
     },

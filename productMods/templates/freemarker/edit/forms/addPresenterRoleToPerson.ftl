@@ -13,6 +13,11 @@
     <#assign editMode = "add">
 </#if>
 
+<#assign newUriSentinel = "" />
+<#if editConfigurationConstants?has_content>
+	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
+</#if>
+
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
@@ -41,7 +46,7 @@
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
-<h2>${titleVerb}&nbsp;award or honor for ${editConfiguration.subjectName}</h2>
+<h2>${titleVerb}&nbsp;presentation entry for ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
@@ -177,7 +182,8 @@ var customFormData  = {
     editMode: '${editMode}',
     defaultTypeName: 'presentation',
     multipleTypeNames: {presentation: 'presentation', conference: 'conference'},
-    baseHref: '${urls.base}/individual?uri='
+    baseHref: '${urls.base}/individual?uri=',
+    newUriSentinel : '${newUriSentinel}'
 };
 </script>
 

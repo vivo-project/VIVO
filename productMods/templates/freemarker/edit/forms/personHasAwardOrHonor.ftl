@@ -13,6 +13,11 @@
     <#assign editMode = "add">
 </#if>
 
+<#assign newUriSentinel = "" />
+<#if editConfigurationConstants?has_content>
+	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
+</#if>
+
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
@@ -159,14 +164,15 @@ var customFormData  = {
     editMode: '${editMode}',
     defaultTypeName: 'award',
     multipleTypeNames: {award: 'award', org: 'organization'},
-    baseHref: '${urls.base}/individual?uri='
+    baseHref: '${urls.base}/individual?uri=',
+    newUriSentinel : '${newUriSentinel}'
 };
 </script>
 
  
 <script type="text/javascript">
  $(document).ready(function(){
-    awardReceiptUtils.onLoad("${editMode}");
+    awardReceiptUtils.onLoad('${editMode}', '${editConfiguration.subjectName}');
 }); 
 </script>
  

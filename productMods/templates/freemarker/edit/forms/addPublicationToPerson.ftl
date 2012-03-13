@@ -7,6 +7,10 @@
 <#--Retrieve certain edit configuration information-->
 <#assign editMode = editConfiguration.pageData.editMode />
 
+<#assign newUriSentinel = "" />
+<#if editConfigurationConstants?has_content>
+	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
+</#if>
 
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
 
@@ -114,7 +118,7 @@
 
     <div class="acSelection" acGroupName="collection" >
         <p class="inline">
-            <label>Selected Venue:</label>
+            <label>Selected Journal:</label>
             <span class="acSelectionInfo"></span>
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
@@ -130,7 +134,7 @@
 
     <div class="acSelection" acGroupName="book" >
         <p class="inline">
-            <label>Selected Venue:</label>
+            <label>Selected Book:</label>
             <span class="acSelectionInfo"></span>
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
@@ -146,7 +150,7 @@
 
     <div class="acSelection" acGroupName="conference" >
         <p class="inline">
-            <label>Selected Venue:</label>
+            <label>Selected Event:</label>
             <span class="acSelectionInfo"></span>
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
@@ -169,6 +173,7 @@
         </p>
         <input class="acUriReceiver" type="hidden" id="eventUri" name="eventUri" value="${eventUriValue}" />
     </div>
+
 
     <#-- Editor -->
     <p>
@@ -261,13 +266,14 @@
         editMode: '${editMode}',
         defaultTypeName: 'publication', // used in repair mode to generate button text
         multipleTypeNames: {collection: 'publication', book: 'book', conference: 'conference', event: 'event', editor: 'editor', publisher: 'publisher'},
-        baseHref: '${urls.base}/individual?uri='
+        baseHref: '${urls.base}/individual?uri=',
+        newUriSentinel : '${newUriSentinel}'
     };
     </script>
     
     <script type="text/javascript">
      $(document).ready(function(){
-        publicationToPersonUtils.onLoad();
+        publicationToPersonUtils.onLoad('${urls.base}/individual?uri=', '${newUriSentinel}');
     }); 
     </script>
 </section>

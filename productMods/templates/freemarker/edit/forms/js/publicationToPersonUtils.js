@@ -3,11 +3,13 @@
 
 var publicationToPersonUtils = {
 
-    onLoad: function(mode) {
+    onLoad: function(href, sentinel) {
         this.initObjectReferences();                 
         this.bindEventListeners();
-        
         this.autoDateLabel.hide();
+        this.baseHref = href;
+        this.newUriSentinel = sentinel;
+        $.extend(this, vitro.customFormUtils);
     },
 
     initObjectReferences: function() {
@@ -32,6 +34,8 @@ var publicationToPersonUtils = {
         this.endPage = $('#endPage');
         this.ePLabel = $('#ePLabel');
         this.typeSelector = $('#typeSelector');
+        this.cancel = $('.cancel');
+        this.fullViewOnly = $('.fullViewOnly');
         this.autoDateLabel = null;
         
         this.form.find('label').each(function() {
@@ -50,8 +54,13 @@ var publicationToPersonUtils = {
         this.idCache = {};
         
         this.typeSelector.change(function() {
+            // controls the fieldsForNewPub div. If the user selects an existing pub/title, 
+            // this div gets hidden. 
             publicationToPersonUtils.showFieldsForPub(); 
-            publicationToPersonUtils.displayFieldsForType(); 
+            // after a cancel, the first reset of the type selector resulted in all fields being displayed.
+            // by delaying this function just slightly, the timing issue between this js and the 
+            // customFormWithAutocomplete js is resolved 
+            window.setTimeout('publicationToPersonUtils.displayFieldsForType()', 60);
         });
         
         // we need the delay in the next two functions to ensure the correct timing after the user
@@ -67,6 +76,7 @@ var publicationToPersonUtils = {
         this.changeLink.click( function() {
            publicationToPersonUtils.showFieldsForPub(); 
         });
+                
     },
     
     hideFieldsForPub: function() {
@@ -76,12 +86,24 @@ var publicationToPersonUtils = {
     },
     
     showFieldsForPub: function() {
-           this.fieldsForNewPub.show();
+        this.fieldsForNewPub.show();
     },
     
-    displayFieldsForType: function() {
-        // hide everything, then show what's needed based on type
-        // simpler in the event the user changes the type
+    resetAcSelection: function(groupName) {
+        var $acSelection = this.form.find('div.acSelection').attr('acGroupName', groupName);
+        this.hideFields($acSelection);
+        $acSelection.removeClass('userSelected');
+        $acSelection.find("input.acUriReceiver").val(this.newUriSentinel);
+        $acSelection.find("span").text('');
+        $acSelection.find("a.verifyMatch").attr('href', this.baseHref);
+    },
+    
+    getAcUriReceiverVal: function(groupName) {
+        var $collectionDiv = this.form.find('div.acSelection').attr('acGroupName', groupName);
+        return $collectionDiv.find('input#'+ groupName + 'Uri').val();
+    },
+
+    hideAllFields: function() {
         this.collection.parent('p').hide();
         this.book.parent('p').hide();
         this.presentedAt.parent('p').hide();
@@ -97,10 +119,21 @@ var publicationToPersonUtils = {
         this.issueLabel.hide();
         this.startPage.parent('p').hide();
         this.sPLabel.parent('p').hide();
-        
+    },
+
+    displayFieldsForType: function() {
+        // hide everything, then show what's needed based on type
+        // simpler in the event the user changes the type
+        this.hideAllFields();
         var selectedType = this.typeSelector.find(':selected').text();
+
         if ( selectedType == 'Academic Article' || selectedType == 'Article' || selectedType == 'Editorial Article' || selectedType == 'Review') {
-            this.collection.parent('p').show();
+            // if the user has changed type, keep any relevant values and display the 
+            // acSelection as appropriate
+            var ckForVal = this.getAcUriReceiverVal('collection');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.collection.parent('p').show();
+            }
             this.volume.show();
             this.volLabel.show();
             this.number.show();
@@ -109,31 +142,222 @@ var publicationToPersonUtils = {
             this.issueLabel.show();
             this.startPage.parent('p').show();
             this.sPLabel.parent('p').show();
+            
+            // if the user has changed type, ensure that irrelevant fields are cleared
+            // and reset an acSelection divs
+            if ( this.book.val() != '' && this.book.val().substring(0, 18) != "Select an existing" ) {
+                alert(this.book.val());
+                this.book.val('');
+                this.resetAcSelection('book');
+                alert(this.book.val());
+            }
+            if ( this.editor.val() != ''  && this.editor.val().substring(0, 18) != "Select an existing" ) {
+                this.editor.val('');
+                this.resetAcSelection('editor');
+            }
+            if ( this.publisher.val() != ''  && this.publisher.val().substring(0, 18) != "Select an existing" ) {
+                this.publisher.val('');
+                this.resetAcSelection('publisher');
+            }
+            if ( this.presentedAt.val() != ''  && this.presentedAt.val().substring(0, 18) != "Select an existing" ) {
+                this.presentedAt.val('');
+                this.resetAcSelection('conference');
+            }
+            if ( this.proceedingsOf.val() != ''  && this.proceedingsOf.val().substring(0, 18) != "Select an existing" ) {
+                this.proceedingsOf.val('');
+                this.resetAcSelection('event');
+            }
+                        
+            this.locale.val('');
         }
         else if ( selectedType == 'Chapter' ) {
-            this.book.parent('p').show();
-            this.editor.parent('p').show();
-            this.publisher.parent('p').show();
+            // if the user has changed type, keep any relevant values and display the 
+            // acSelection as appropriate
+            var ckForVal = this.getAcUriReceiverVal('book');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.book.parent('p').show();
+            }
+            ckForVal = this.getAcUriReceiverVal('editor');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.editor.parent('p').show();
+            }
+            ckForVal = this.getAcUriReceiverVal('publisher');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.publisher.parent('p').show();
+            }
+            
             this.locale.parent('p').show();            
             this.volume.show();
             this.volLabel.show();
+            
+            // if the user is changing type, ensure that irrelevant fields are cleared
+            // and reset an acSelection divs
+            if ( this.collection.val() != ''  && this.collection.val().substring(0, 18) != "Select an existing" ) {
+                this.collection.val('');
+                this.resetAcSelection('collection');                
+            }
+            if ( this.presentedAt.val() != ''  && this.presentedAt.val().substring(0, 18) != "Select an existing" ) {
+                this.presentedAt.val('');
+                this.resetAcSelection('conference');
+            }
+            if ( this.proceedingsOf.val() != ''  && this.proceedingsOf.val().substring(0, 18) != "Select an existing" ) {
+                this.proceedingsOf.val('');
+                this.resetAcSelection('event');
+            }
+                                    
+            this.number.val('');
+            this.issue.val('');
+            this.startPage.val('');
+            this.endPage.val('');
         }
         else if ( selectedType == 'Book' || selectedType == 'Edited Book' ) {
-            this.editor.parent('p').show();
-            this.publisher.parent('p').show();
+            // if the user has changed type, keep any relevant values and display the 
+            // acSelection as appropriate
+            var ckForVal = this.getAcUriReceiverVal('editor');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.editor.parent('p').show();
+            }
+            ckForVal = this.getAcUriReceiverVal('publisher');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.publisher.parent('p').show();
+            }
+            
             this.locale.parent('p').show();            
             this.volume.show();
             this.volLabel.show();
+
+            // if the user is changing type, ensure that irrelevant fields are cleared
+            // and reset an acSelection divs
+            if ( this.collection.val() != ''  && this.collection.val().substring(0, 18) != "Select an existing" ) {
+                this.collection.val('');
+                this.resetAcSelection('collection');                
+            }
+            if ( this.presentedAt.val() != ''  && this.presentedAt.val().substring(0, 18) != "Select an existing" ) {
+                this.presentedAt.val('');
+                this.resetAcSelection('conference');
+            }
+            if ( this.proceedingsOf.val() != ''  && this.proceedingsOf.val().substring(0, 18) != "Select an existing" ) {
+                this.proceedingsOf.val('');
+                this.resetAcSelection('event');
+            }
+                        
+            this.number.val('');
+            this.issue.val('');
+            this.startPage.val('');
+            this.endPage.val('');
         }
         else if ( selectedType == 'Conference Paper' ) {
-//            this.collection.parent('p').show();
-            this.presentedAt.parent('p').show();
-//            this.startPage.parent('p').show();
-//            this.sPLabel.parent('p').show();
+            // if the user has changed type, keep any relevant values and display the 
+            // acSelection as appropriate
+            var ckForVal = this.getAcUriReceiverVal('collection');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.collection.parent('p').show();
+            }
+            ckForVal = this.getAcUriReceiverVal('conference');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.presentedAt.parent('p').show();
+            }
+            
+            this.startPage.parent('p').show();
+            this.sPLabel.parent('p').show();
+
+            // if the user is changing type, ensure that irrelevant fields are cleared
+            // and reset an acSelection divs
+            if ( this.book.val() != '' && this.book.val().substring(0, 18) != "Select an existing" ) {
+                this.book.val('');
+                this.resetAcSelection('book');
+            }
+            if ( this.editor.val() != '' && this.editor.val().substring(0, 18) != "Select an existing" ) {
+                this.editor.val('');
+                this.resetAcSelection('editor');
+            }
+            if ( this.publisher.val() != '' && this.publisher.val().substring(0, 18) != "Select an existing" ) {
+                this.publisher.val('');
+                this.resetAcSelection('publisher');
+            }
+            if ( this.proceedingsOf.val() != '' && this.proceedingsOf.val().substring(0, 18) != "Select an existing" ) {
+                this.proceedingsOf.val('');
+                this.resetAcSelection('event');
+            }
+
+            this.number.val('');
+            this.issue.val('');
+            this.startPage.val('');
+            this.endPage.val('');
         }
         else if ( selectedType == 'Conference Poster' || selectedType == 'Speech') {
-            this.presentedAt.parent('p').show();
+            // if the user has changed type, keep any relevant values and display the 
+            // acSelection as appropriate
+            var ckForVal = this.getAcUriReceiverVal('conference');
+            if ( ckForVal == '' || ckForVal == this.newUriSentinel ) {
+                this.presentedAt.parent('p').show();
+            }
+
+            // if the user is changing type, ensure that irrelevant fields are cleared
+            // and reset an acSelection divs
+            if ( this.collection.val() != '' && this.collection.val().substring(0, 18) != "Select an existing" ) {
+                this.collection.val('');
+                this.resetAcSelection('collection');                
+            }
+            if ( this.book.val() != '' && this.book.val().substring(0, 18) != "Select an existing" ) {
+                this.book.val('');
+                this.resetAcSelection('book');
+            }
+            if ( this.editor.val() != '' && this.editor.val().substring(0, 18) != "Select an existing" ) {
+                this.editor.val('');
+                this.resetAcSelection('editor');
+            }
+            if ( this.publisher.val() != '' && this.publisher.val().substring(0, 18) != "Select an existing" ) {
+                this.publisher.val('');
+                this.resetAcSelection('publisher');
+            }
+            if ( this.proceedingsOf.val() != '' && this.proceedingsOf.val().substring(0, 18) != "Select an existing" ) {
+                this.proceedingsOf.val('');
+                this.resetAcSelection('event');
+            }
+
+            this.number.val('');
+            this.issue.val('');
+            this.startPage.val('');
+            this.endPage.val('');
         }
+        else {
+
+            // if the user is changing type, ensure that irrelevant fields are cleared
+            // and reset an acSelection divs
+            if ( this.collection.val() != '' && this.collection.val().substring(0, 18) != "Select an existing" ) {
+                this.collection.val('');
+                this.resetAcSelection('collection');                
+            }
+            if ( this.book.val() != '' && this.book.val().substring(0, 18) != "Select an existing" ) {
+                this.book.val('');
+                this.resetAcSelection('book');
+            }
+            if ( this.editor.val() != '' && this.editor.val().substring(0, 18) != "Select an existing" ) {
+                this.editor.val('');
+                this.resetAcSelection('editor');
+            }
+            if ( this.publisher.val() != '' && this.publisher.val().substring(0, 18) != "Select an existing" ) {
+                this.publisher.val('');
+                this.resetAcSelection('publisher');
+            }
+            if ( this.proceedingsOf.val() != '' && this.proceedingsOf.val().substring(0, 18) != "Select an existing" ) {
+                this.proceedingsOf.val('');
+                this.resetAcSelection('event');
+            }
+            if ( this.presentedAt.val() != '' && this.presentedAt.val().substring(0, 18) != "Select an existing" ) {
+                this.presentedAt.val('');
+                this.resetAcSelection('conference');
+            }
+
+            this.volume.val('');
+            this.number.val('');
+            this.issue.val('');
+            this.startPage.val('');
+            this.endPage.val('');
+            
+        }
+        
      }
    
 }

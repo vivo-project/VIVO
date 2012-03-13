@@ -82,6 +82,9 @@ var customForm = {
         if ( this.multipleTypeNames != undefined || this.multipleTypeNames != null ) {
             this.hasMultipleTypeNames = true;
         }
+        // Used with the cancel link. If the user cancels after a type selection, this check
+        // ensures that any a/c fields (besides the one associated with the type) will be reset
+        this.clearAcSelections = false;
         
     },
 
@@ -170,6 +173,7 @@ var customForm = {
             this.cancel.click(function() {
                 customForm.clearFormData(); // clear any input and validation errors
                 customForm.initFormTypeView();
+                customForm.clearAcSelections = true;
                 return false;            
             });
         // In one-step forms, if there is a type selection field, but no value is selected,
@@ -206,6 +210,7 @@ var customForm = {
 
         this.typeSelector.change(function() {
             var typeVal = $(this).val();
+            this.acCache = {};
             
             // If an autocomplete selection has been made, undo it.
             // NEED TO LINK THE TYPE SELECTOR TO THE ACSELECTOR IT'S ASSOCIATED WITH
@@ -371,16 +376,6 @@ var customForm = {
         customForm.acFilter = customForm.acFilter.concat(this.acFilterForIndividuals);
         
     },
-    // Reset some autocomplete values after type is changed
-    resetAutocomplete: function(typeVal) {
-        // Append the type parameter to the base autocomplete url
-        var glue = this.baseAcUrl.indexOf('?') > -1 ? '&' : '?';
-        this.acUrl = this.baseAcUrl + glue + 'type=' + typeVal;
-        
-        // Flush autocomplete cache when type is reset, since the cached values 
-        // pertain only to the previous type.
-        this.acCache = {};
-    },       
         
     showAutocompleteSelection: function(label, uri, selectedObj) {
         // hide the acSelector field and set it's value to the selected ac item
@@ -428,36 +423,73 @@ var customForm = {
         // change the type but keep the value. If no new value has been selected, form initialization
         // below will correctly empty the value anyway.
 
-        // Check to see if the parameter is the typeSelector. If it is, we need to get the acSelection div
-        // that is associated with it.
         var $acSelectionObj = null;
+        var $acSelector = null;
+
+        // Check to see if the parameter is the typeSelector. If it is, we need to get the acSelection div
+        // that is associated with it.  Also, when the type is changed, we need to determine whether the user
+        // has selected an existing individual in the corresponding name field or typed the label for a new
+        // individual. If the latter, we do not want to clear the value on type change. The clearAcSelectorVal
+        // boolean controls whether the acSelector value gets cleared.
+
+        var clearAcSelectorVal = true;
+        
         if ( $(selectedObj).attr('id') == "typeSelector" ) {
             $acSelectionObj = customForm.acSelections[$(selectedObj).attr('acGroupName')];
+            if ( $acSelectionObj.is(':hidden') ) {
+                clearAcSelectorVal = false;
+            }
+            // if the type is being changed after a cancel, any additional a/c fields that may have been set
+            // by the user should be "undone". Only loop through these if this is not the initial type selection
+            if ( customForm.clearAcSelections ) {
+                $.each(customForm.acSelections, function(i, acS) {
+                    var $checkSelection = customForm.acSelections[i];
+                    if ( $checkSelection.is(':hidden') && $checkSelection.attr('acGroupName') != $acSelectionObj.attr('acGroupName') ) {
+                        customForm.resetAcSelection($checkSelection);
+                        $acSelector = customForm.getAcSelector($checkSelection);
+                        $acSelector.parent("p").show();
+                    }
+            });
+        }
         }
         else {
             $acSelectionObj = $(selectedObj);
         }
-        var $acSelector = null;
-        $.each(this.acSelectors, function() {
-            if ( $(this).attr('acGroupName') == $acSelectionObj.attr('acGroupName') ) {
-                $acSelector = $(this);
-            }
-        });
+
+        $acSelector = this.getAcSelector($acSelectionObj);
         $acSelector.parent("p").show();
-        this.hideFields($acSelectionObj);
-        $acSelectionObj.removeClass('userSelected');
-        //Might be useful here to replace the uri with the default "new uri needs to be created" value
-        //$acSelectionObj.find("input.acUriReceiver").val('');
-        $acSelectionObj.find("input.acUriReceiver").val(customForm.newUriSentinel);
-        $acSelectionObj.find("span").text('');
-        $acSelectionObj.find("a.verifyMatch").attr('href', this.baseHref);
-        $acSelector.val(''); 
+        this.resetAcSelection($acSelectionObj);
+        if ( clearAcSelectorVal == true ) {
+            $acSelector.val(''); 
+        }
         customForm.addAcHelpText($acSelector);
 
         //Resetting so disable submit button again for object property autocomplete
         if ( this.acSelectOnly ) {
         	this.disableSubmit();
         }
+        this.clearAcSelections = false;
+    },
+    
+    // this is essentially a subtask of undoAutocompleteSelection
+    resetAcSelection: function(selectedObj) {
+        this.hideFields($(selectedObj));
+        $(selectedObj).removeClass('userSelected');
+        $(selectedObj).find("input.acUriReceiver").val(this.newUriSentinel);
+        $(selectedObj).find("span").text('');
+        $(selectedObj).find("a.verifyMatch").attr('href', this.baseHref);
+    },
+
+    // loops through the array of acSelector fields and returns the one
+    // associated with the selected object
+    getAcSelector: function(selectedObj){
+        var $selector = null
+        $.each(this.acSelectors, function() {
+            if ( $(this).attr('acGroupName') == $(selectedObj).attr('acGroupName') ) {
+                $selector = $(this);
+            }
+        });
+        return $selector;
     },
     
     // Set type uri for autocomplete, and type name for labels and button text.
