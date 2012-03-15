@@ -76,6 +76,8 @@ var customForm = {
             this.acTypes = new Object();
         }
         
+     
+        
         // forms with multi ac fields will have this defined in customFormData
         // this is helpful when the type to display is not a single word, like "Subject Area"
         this.hasMultipleTypeNames = false;
@@ -94,6 +96,12 @@ var customForm = {
         if (!this.editMode) {
             this.editMode = 'add'; // edit vs add: default to add
         }
+        
+        //Flag to clear label of selected object from autocomplete on submission
+        //This is used in the case where the label field is submitted only when a new object is being created
+        if(!this.flagClearLabelForExisting) {
+        	this.flagClearLabelForExisting = null;
+        }
                
         if (!this.formSteps) { // Don't override formSteps specified in form data
             if ( !this.fullViewOnly.length || this.editMode === 'edit' || this.editMode === 'repair' ) {
@@ -103,6 +111,10 @@ var customForm = {
             else {
                 this.formSteps = 2;
             }
+        }
+        
+        if(!this.doNotRemoveOriginalObject) {
+        	this.doNotRemoveOriginalObject = false;
         }
         
         this.bindEventListeners();
@@ -245,6 +257,27 @@ var customForm = {
         });
         
         this.form.submit(function() {
+        	//TODO: update the following
+        	//custom submission for edit mode in case where existing object should not remove original object 
+        	//if edit mode and custom flag and original uri not equivalent to new uri, then
+        	//clear out label field entirely
+        	//originally checked edit mode but want to add to work the same way in case an existing object
+        	//is selected since the n3 now governs how labels 
+        	if(customForm.flagClearLabelForExisting != null) {
+        		//Find the elements that have had autocomplete executed, tagged by class "userSelected"
+        		customForm.form.find('.acSelection.userSelected').each(function() {
+        			var groupName = $(this).attr("acGroupName");
+        			var inputs = $(this).find("input.acUriReceiver");
+        			//if user selected, then clear out the label since we only
+        			//want to submit the label as value on form if it's a new label
+        			if(inputs.length && $(inputs.eq(0)).attr(customForm.flagClearLabelForExisting)) {
+            		//if(inputs.length) {
+        				$("input.acSelector[acGroupName='" + groupName + "']").each(function() {
+    						$(this).val('');
+    					});
+        			} 
+                });
+        	}
             customForm.deleteAcHelpText();
         });
     },
@@ -262,7 +295,7 @@ var customForm = {
         		//Reset the URI of the input to one that says new uri required
         		//That will be overwritten if value selected from autocomplete
         		//We do this everytime the user types anything in the autocomplete box
-        		customForm.initDefaultNewURI(selectedObj);
+        		customForm.initDefaultBlankURI(selectedObj);
                 if (request.term in customForm.acCache) {
                     // console.log('found term in cache');
                     response(customForm.acCache[request.term]);
@@ -475,7 +508,7 @@ var customForm = {
     resetAcSelection: function(selectedObj) {
         this.hideFields($(selectedObj));
         $(selectedObj).removeClass('userSelected');
-        $(selectedObj).find("input.acUriReceiver").val(this.newUriSentinel);
+        $(selectedObj).find("input.acUriReceiver").val(this.blankSentinel);
         $(selectedObj).find("span").text('');
         $(selectedObj).find("a.verifyMatch").attr('href', this.baseHref);
     },
@@ -592,12 +625,13 @@ var customForm = {
 		this.button.removeAttr('disabled');
 		this.button.removeClass('disabledSubmit');
 	},
-	initDefaultNewURI:function(selectedObj) {
-		//get uri input for selected object and set to value indicating
-		//this will require a new uri when submitted if the uri is not replaced
-		//with one selected from autocomplete selection
+	initDefaultBlankURI:function(selectedObj) {
+		//get uri input for selected object and set to value specified as "blank sentinel"
+		//If blank sentinel is neither null nor an empty string, this means if the user edits an
+		//existing relationship to an object and does not select anything from autocomplete
+		//from that object, the old relationship will be removed in n3 processing
         var $acDiv = this.acSelections[$(selectedObj).attr('acGroupName')];
-        $acDiv.find("input").val(customForm.newUriSentinel);
+        $acDiv.find("input").val(customForm.blankSentinel);
 	}
 	
 };

@@ -72,13 +72,14 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                                            degreeAssertion,
                                            firstNameAssertion,
                                            lastNameAssertion,
-                                           n3ForSubjAreaAssertion + "\n" + subjAreaLabelAssertion, //putting these statements together to prevent an empty label from generating a new URI
+                                           n3ForExistingSubjAreaAssertion, //relationship to existing subject area
+                                           n3ForNewSubjAreaAssertion, //this will include all the new information that needs to be captured
                                            n3ForStart, 
                                            n3ForEnd ) );
         
         conf.addNewResource("advisingRelationship", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("advisee", DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("subjArea", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newSubjArea", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -86,7 +87,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform(Arrays.asList("advisingRelType", "subjArea", "degree", "advisee"));
+        conf.setUrisOnform(Arrays.asList("advisingRelType", "existingSubjArea", "degree", "advisee"));
         conf.setLiteralsOnForm(Arrays.asList("advisingRelLabel", "subjAreaLabel", "adviseeLabel", "firstName", "lastName" ));
         
         conf.addSparqlForExistingLiteral("advisingRelLabel", advisingRelLabelQuery);
@@ -99,7 +100,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
         
         conf.addSparqlForExistingUris("advisingRelType", advisingRelTypeQuery);
-        conf.addSparqlForExistingUris("subjArea", subjAreaQuery);
+        conf.addSparqlForExistingUris("existingSubjArea", subjAreaQuery);
         conf.addSparqlForExistingUris("advisee", adviseeQuery);
         conf.addSparqlForExistingUris("degree", degreeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
@@ -134,7 +135,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                 );
 
         conf.addField( new FieldVTwo().
-                setName("subjArea").
+                setName("existingSubjArea").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
                 setObjectClassUri( subjAreaClass )
                 );
@@ -220,12 +221,22 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
     final static String degreeAssertion  =      
         "?advisingRelationship <"+ degreePred +"> ?degree .";
 
-    final static String n3ForSubjAreaAssertion  =      
-        "?advisingRelationship <"+ subjAreaPred +"> ?subjArea .\n" +
-        "?subjArea a <" + subjAreaClass + "> . ";    
+    final static String n3ForSubjAreaType = 
+    	"?subjArea a <" + subjAreaClass + "> . ";   
     
-    final static String subjAreaLabelAssertion  =      
-        "?subjArea <"+ label + "> ?subjAreaLabel . ";    
+    //This is for an existing subject area
+    //Where we only need the existing subject area label
+    final static String n3ForExistingSubjAreaAssertion  =      
+        "?advisingRelationship <"+ subjAreaPred +"> ?existingSubjArea .";   
+    //For new subject area, we include all new information
+    //new subject area should always be a new resource
+    //and the following should only get evaluated 
+    //when there is something in the label
+    
+    final static String n3ForNewSubjAreaAssertion  =   
+    	"?advisingRelationship <"+ subjAreaPred +"> ?newSubjArea . \n" + 
+        "?newSubjArea <"+ label + "> ?subjAreaLabel . \n" + 
+        "?newSubjArea a <" + subjAreaClass + "> . ";    
 
     final static String n3ForStart =
         "?advisingRelationship <" + advisingRelToInterval + "> ?intervalNode . \n" +    

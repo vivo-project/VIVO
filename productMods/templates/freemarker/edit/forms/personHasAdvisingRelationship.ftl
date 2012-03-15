@@ -1,11 +1,16 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
-<#assign newUriSentinel = "" />
-<#if editConfigurationConstants?has_content>
-	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
-</#if>
-<#-- this is in request.subject.name -->
+<#--The blank sentinel indicates what value should be put in a URI when no autocomplete result has been selected.
+If the blank value is non-null or non-empty, n3 editing for an existing object will remove the original relationship
+if nothing is selected for that object-->
 
-<#-- leaving this edit/add mode code in for reference in case we decide we need it -->
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
 
 <#import "lib-vivo-form.ftl" as lvf>
 
@@ -25,7 +30,7 @@
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign advisingRelTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisingRelType") />
 <#assign advisingRelLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisingRelLabel") />
-<#assign subjAreaValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "subjArea") />
+<#assign subjAreaValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingSubjArea") />
 <#assign subjAreaLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "subjAreaLabel") />
 <#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
 <#assign acFilterForIndividuals =  "['" + editConfiguration.subjectUri + "']" />
@@ -135,7 +140,9 @@
               <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
               <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
           </p>
-          <input class="acUriReceiver" type="hidden" id="subjAreaUri" name="subjArea" value="${subjAreaValue}" />
+          <#--When no autocomplete value is selected, the value of this field will be set to the 'blank sentinel'.
+          When an autocomplete value is selected, the 'flagClearLabelField' attribute will clear out the associated label input. -->
+          <input class="acUriReceiver" type="hidden" id="subjAreaUri" name="existingSubjArea" value="${subjAreaValue}"  ${flagClearLabelForExisting}="true"/>
       </div>
 
     <p>
@@ -178,8 +185,8 @@
 </form>
 
 </section>
-
 <#assign sparqlQueryUrl = "${urls.base}/ajax/sparqlQuery" >
+<#assign doNotRemoveOriginalObject = "true" />
 <script type="text/javascript">
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
@@ -191,8 +198,11 @@ var customFormData  = {
     sparqlQueryUrl: '${sparqlQueryUrl}',
     acFilterForIndividuals: ${acFilterForIndividuals},
     baseHref: '${urls.base}/individual?uri=',
-    newUriSentinel : '${newUriSentinel}'
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
 };
+<#--Removing this line for now from above : newUriSentinel : '${newUriSentinel}',-->
+<#--Also removed this: ,doNotRemoveOriginalObject: '${doNotRemoveOriginalObject}'-->
 </script>
 
 <script type="text/javascript">
