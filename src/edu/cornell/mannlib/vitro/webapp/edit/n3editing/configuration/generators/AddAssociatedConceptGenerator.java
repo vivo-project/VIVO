@@ -38,8 +38,8 @@ import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearch
  * Generates the edit configuration for importing concepts from external
  * search services, e.g. UMLS etc.      
  * 
- * The N3 for this is set with the default settinf of 
- *
+ * Since editing/deletion is handled by separate custom code, this generator always assumes
+ * property addition mode. 
  */
 public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator {
 	
@@ -65,8 +65,6 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 		// n3 optional
 		editConfiguration.setN3Optional(this.generateN3Optional());
 
-		// Todo: what do new resources depend on here?
-		// In original form, these variables start off empty
 		editConfiguration.setNewResources(generateNewResources(vreq));
 		// In scope
 		this.setUrisAndLiteralsInScope(editConfiguration, vreq);
