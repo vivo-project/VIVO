@@ -144,7 +144,7 @@
     <!-- http://vivoweb.org/ontology/core#EventSeries -->
 
     <owl:Class rdf:about="&core;EventSeries">
-        <rdfs:subClassOf rdf:resource="&span;ProcessAggregate"/>
+        <rdfs:subClassOf rdf:resource="&span;Process"/>
     </owl:Class>
     
     <!-- http://vivoweb.org/ontology/core#InformationResource -->
