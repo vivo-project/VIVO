@@ -78,9 +78,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
                 setRangeDatatypeUri(XSD.anyURI.toString()));
         
         config.addField(new FieldVTwo().
-                setName("anchor").
-                setValidators(list("datatype:"+XSD.anyURI.toString())).
-                setRangeDatatypeUri(XSD.anyURI.toString()));
+                setName("anchor"));
         
         config.addField(new FieldVTwo().
                 setName("rank").
