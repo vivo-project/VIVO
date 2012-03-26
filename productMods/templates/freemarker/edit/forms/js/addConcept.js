@@ -152,22 +152,27 @@ var addConceptForm = {
             else {
             	//array is an array of objects representing concept information
             	//loop through and find all the best matches
-            	var bestMatchResults = addConceptForm.parseResults(results.conceptList);
-                var numberMatches = bestMatchResults.length;
+            	var allResults = addConceptForm.parseResults(results.conceptList);
+            	var bestMatchResults = allResults["bestMatch"];
+            	var alternateResults = allResults["alternate"];
+                var numberBestMatches = bestMatchResults.length;
+                var numberAlternateMatches = alternateResults.length;
+            	var numberTotalMatches = numberBestMatches + numberAlternateMatches;
+
                 var i;
                 //For each result, display
-                if(numberMatches > 0) {
+                if(numberTotalMatches > 0) {
                 	htmlAdd = "<ul class='dd' id='concepts' name='concepts'>";
                 	htmlAdd+= addConceptForm.addResultsHeader();
-	                for(i = 0; i < numberMatches; i++) {
+                	//Show best matches first
+	                for(i = 0; i < numberBestMatches; i++) {
 	                	var conceptResult = bestMatchResults[i];
-	                	var conceptId = conceptResult.conceptId;
-	                	var label = conceptResult.label;
-	                	var definition = conceptResult.definition;
-	                	var definedBy = conceptResult.definedBy;
-	                	var type = conceptResult.type;
-	                	var uri = conceptResult.uri;
-	                	htmlAdd+= addConceptForm.generateIndividualConceptDisplay(uri, label, definition, type, definedBy);
+	                	htmlAdd+= addConceptForm.displayConceptSearchResult(conceptResult, true);
+	                }
+	                //If any alternate matches, show that next
+	                for(i = 0; i < numberAlternateMatches; i++) {
+	                	var conceptResult = alternateResults[i];
+	                	htmlAdd+= addConceptForm.displayConceptSearchResult(conceptResult, false);
 	                }
 	                htmlAdd+= "</ul>";
                 } else {
@@ -188,21 +193,35 @@ var addConceptForm = {
           });
         return true;
     },
+    displayConceptSearchResult:function(conceptResult, isBestMatch) {
+    	var conceptId = conceptResult.conceptId;
+    	var label = conceptResult.label;
+    	var definition = conceptResult.definition;
+    	var definedBy = conceptResult.definedBy;
+    	var type = conceptResult.type;
+    	var uri = conceptResult.uri;
+    	return addConceptForm.generateIndividualConceptDisplay(uri, label, definition, type, definedBy, isBestMatch);
+    },
+    //This should now return all best matches in one array and other results in another
     parseResults:function(resultsArray) {
     	//Loop through array and check if this is the best match
     	var arrayLen = resultsArray.length;
     	var bestMatchResults = new Array();
+    	//this is for results that are not best match results
+    	var alternateResults = new Array();
     	var i;
     	for(i = 0; i < arrayLen; i++) {
     		var concept = resultsArray[i];
     		if(concept.bestMatch != "false") {
     			bestMatchResults.push(concept);
+    		} else {
+    			alternateResults.push(concept);
     		}
     	}
-    	return bestMatchResults;
+    	return {"bestMatch":bestMatchResults, "alternate":alternateResults};
     },
     addResultsHeader:function() {
-    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>Label (Type) </span><span class='column conceptDefinition'>Definition</span></div></li>";
+    	var htmlAdd = "<li class='concepts'><div class='row'><span class='column conceptLabel'>Label (Type) </span><span class='column conceptDefinition'>Definition</span><span class='column'>Best Match</span></div></li>";
     	return htmlAdd;
     },
     hideSearchResults:function() {
@@ -234,13 +253,14 @@ var addConceptForm = {
     	this.externalConceptSource.val(conceptSources);
     	return true;
     }, 
-    generateIndividualConceptDisplay: function(cuiURI, label, definition, type, definedBy) {
+    generateIndividualConceptDisplay: function(cuiURI, label, definition, type, definedBy, isBestMatch) {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
     	"<span class='column conceptLabel'>" +
     	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy) +  
     	label + addConceptForm.generateIndividualTypeDisplay(type) + "</span>" + 
     	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
+    	addConceptForm.generateBestOrAlternate(isBestMatch) +
     	"</div>" +  
     	"</li>";	
     	return htmlAdd;
@@ -256,6 +276,14 @@ var addConceptForm = {
     },
     generateIndividualDefinitionDisplay:function(definition) {
     	return "<span class='column conceptDefinition'>" + definition + "</span>";
+    },
+    //adds another div with "best match" next to it if best match
+    generateBestOrAlternate:function(isBestMatch) {
+    	var content = "&nbsp;";
+    	if(isBestMatch) {
+    		content = "(Best Match)"
+    	}
+    	return "<span class='column'>" + content + "</span>";	
     },
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;
