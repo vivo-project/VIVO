@@ -271,10 +271,10 @@ var customForm = {
         			//if user selected, then clear out the label since we only
         			//want to submit the label as value on form if it's a new label
         			if(inputs.length && $(inputs.eq(0)).attr(customForm.flagClearLabelForExisting)) {
-            		//if(inputs.length) {
-        				$("input.acSelector[acGroupName='" + groupName + "']").each(function() {
-    						$(this).val('');
-    					});
+        			    var $selectorInput = $("input.acSelector[acGroupName='" + groupName + "']");
+        			    var $displayInput = $("input.display[acGroupName='" + groupName + "']");
+    					$displayInput.val($selectorInput.val());
+    					$selectorInput.val('');
         			} 
                 });
         	}
@@ -480,7 +480,7 @@ var customForm = {
                     if ( $checkSelection.is(':hidden') && $checkSelection.attr('acGroupName') != $acSelectionObj.attr('acGroupName') ) {
                         customForm.resetAcSelection($checkSelection);
                         $acSelector = customForm.getAcSelector($checkSelection);
-                        $acSelector.parent("p").show();
+                        $acSelector.parent('p').show();
                     }
             });
         }
@@ -490,7 +490,7 @@ var customForm = {
         }
 
         $acSelector = this.getAcSelector($acSelectionObj);
-        $acSelector.parent("p").show();
+        $acSelector.parent('p').show();
         this.resetAcSelection($acSelectionObj);
         if ( clearAcSelectorVal == true ) {
             $acSelector.val(''); 

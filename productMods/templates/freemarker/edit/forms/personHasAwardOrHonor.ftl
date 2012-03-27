@@ -13,21 +13,31 @@
     <#assign editMode = "add">
 </#if>
 
-<#assign newUriSentinel = "" />
-<#if editConfigurationConstants?has_content>
-	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
+<#--The blank sentinel indicates what value should be put in a URI when no autocomplete result has been selected.
+If the blank value is non-null or non-empty, n3 editing for an existing object will remove the original relationship
+if nothing is selected for that object-->
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
 </#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign awardValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "award") />
+<#assign awardValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAward") />
 <#assign awardLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "awardLabel") />
 <#assign awardReceiptLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "awardReceiptLabel") />
-<#assign orgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org") />
+<#assign orgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingOrg") />
 <#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel") />
 <#assign descriptionValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "description") />
-<#assign yearAwardedValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "yearAwarded") />
+<#assign yearAwardedDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "yearAwardedDisplay") />
+<#assign orgLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabelDisplay") />
+<#assign awardLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "awardLabelDisplay") />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -51,6 +61,8 @@
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#assign orgLabelValue = orgLabelDisplayValue />
+    <#assign awardLabelValue = awardLabelDisplayValue />
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -86,31 +98,41 @@
     <p>
         <label for="relatedIndLabel">Award or Honor Name ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="award" acGroupName="award" name="awardLabel" value="${awardLabelValue}">
+            <input class="display" type="hidden" id="awardDisplay" acGroupName="award" name="awardLabelDisplay" value="${awardLabelDisplayValue}">
     </p>
 
-    <div class="acSelection" acGroupName="award">
+    <div class="acSelection" acGroupName="award" id="awardAcSelection">
         <p class="inline">
             <label>Selected Award:</label>
             <span class="acSelectionInfo"></span>
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="awardUri" name="award" value="${awardValue}" />
+        <input class="acUriReceiver" type="hidden" id="awardUri" name="existingAward" value="${awardValue}" ${flagClearLabelForExisting}="true" />
     </div>
   <p>
       <label for="org">Conferred by</label>
       <input  class="acSelector" size="50" acGroupName="org" type="text" id="org" name="orgLabel" value="${orgLabelValue}" />
+      <input  class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}" />
   </p>
-  <div class="acSelection" acGroupName="org">
+  
+  <div class="acSelection" acGroupName="org" id="orgAcSelection">
       <p class="inline">
           <label>Selected Conferrer:</label>
           <span class="acSelectionInfo"></span>
-          <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
-          <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
       </p>
-      <input class="acUriReceiver" type="hidden" id="orgUri" name="org" value="${orgValue}" />
+      <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${orgValue}" ${flagClearLabelForExisting}="true"/>
   </div>
-    
+<#if editMode == "edit">
+  <div class="hidden" id="hiddenOrgLabel">
+    <p class="inline">
+        <label>Selected Conferrer: </label>
+        <span class="readOnly">${orgLabelValue}</span>
+    </p>
+  </div>
+</#if>
     <p>
         <label for="description">Description</label>
         <input  size="50"  type="text" id="description" name="description" value="${descriptionValue}" />
@@ -118,7 +140,7 @@
     <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
     <p>
         <label for="yearAwardedDisplay" id="yearAwarded">Year Awarded</label>
-        <input  size="4"  type="text" id="yearAwardedDisplay" name="yearAwardedDisplay" value="" /> ${yearHint}
+        <input  size="4"  type="text" id="yearAwardedDisplay" name="yearAwardedDisplay" value="${yearAwardedDisplayValue}" /> ${yearHint}
     </p>
     <p>
         <h4>Years Inclusive <span class="hint">&nbsp;(e.g., for multi-year awards)</span></h4>
@@ -165,17 +187,17 @@ var customFormData  = {
     defaultTypeName: 'award',
     multipleTypeNames: {award: 'award', org: 'organization'},
     baseHref: '${urls.base}/individual?uri=',
-    newUriSentinel : '${newUriSentinel}'
-};
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'};
 </script>
 
  
 <script type="text/javascript">
  $(document).ready(function(){
-    awardReceiptUtils.onLoad('${editMode}', '${editConfiguration.subjectName}');
+    awardReceiptUtils.onLoad('${editMode}', '${editConfiguration.subjectName}', '${urls.base}/individual?uri=');
 }); 
 </script>
- 
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}

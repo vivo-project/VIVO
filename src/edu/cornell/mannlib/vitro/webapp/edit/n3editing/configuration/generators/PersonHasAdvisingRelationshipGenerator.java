@@ -67,8 +67,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         conf.setN3Required( Arrays.asList( n3ForNewAdvisingRelationship,
                                            advisingRelLabelAssertion,
                                            advisingRelTypeAssertion  ) );
-        conf.setN3Optional( Arrays.asList( n3ForAdviseeAssertion,
-                                           adviseeLabelAssertion,
+        conf.setN3Optional( Arrays.asList( n3ForNewAdviseeAssertion,
+                                           n3ForExistingAdviseeAssertion,
                                            degreeAssertion,
                                            firstNameAssertion,
                                            lastNameAssertion,
@@ -78,7 +78,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                                            n3ForEnd ) );
         
         conf.addNewResource("advisingRelationship", DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("advisee", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newAdvisee", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newSubjArea", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -87,21 +87,18 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform(Arrays.asList("advisingRelType", "existingSubjArea", "degree", "advisee"));
-        conf.setLiteralsOnForm(Arrays.asList("advisingRelLabel", "subjAreaLabel", "adviseeLabel", "firstName", "lastName" ));
+        conf.setUrisOnform(Arrays.asList("advisingRelType", "existingSubjArea", "degree", "existingAdvisee"));
+        conf.setLiteralsOnForm(Arrays.asList("advisingRelLabel", "subjAreaLabel", "adviseeLabel", "firstName", "lastName", "subjAreaLabelDisplay", "adviseeLabelDisplay" ));
         
         conf.addSparqlForExistingLiteral("advisingRelLabel", advisingRelLabelQuery);
         conf.addSparqlForExistingLiteral("adviseeLabel", adviseeLabelQuery);
-// may not need these two because in edit mode the display will be an acSelection div
-//        conf.addSparqlForExistingLiteral("firstName", firstNameQuery);
-//        conf.addSparqlForExistingLiteral("lastName", lastNameQuery);
         conf.addSparqlForExistingLiteral("subjAreaLabel", subjAreaLabelQuery);
         conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
         
         conf.addSparqlForExistingUris("advisingRelType", advisingRelTypeQuery);
         conf.addSparqlForExistingUris("existingSubjArea", subjAreaQuery);
-        conf.addSparqlForExistingUris("advisee", adviseeQuery);
+        conf.addSparqlForExistingUris("existingAdvisee", adviseeQuery);
         conf.addSparqlForExistingUris("degree", degreeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
         conf.addSparqlForExistingUris("startNode", existingStartNodeQuery);
@@ -153,13 +150,25 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                 );
 
         conf.addField( new FieldVTwo().
-                setName("advisee").
+                setName("existingAdvisee").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
                 setObjectClassUri( adviseeClass ) 
                 );
 
         conf.addField( new FieldVTwo().
                 setName("adviseeLabel").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                );
+
+        conf.addField( new FieldVTwo().
+                setName("subjAreaLabelDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                );
+
+        conf.addField( new FieldVTwo().
+                setName("adviseeLabelDisplay").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
@@ -203,27 +212,27 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
     final static String advisingRelTypeAssertion  =      
         "?advisingRelationship a ?advisingRelType .";
 
-    final static String n3ForAdviseeAssertion  =      
-        "?advisingRelationship <" + adviseePred + "> ?advisee . \n" +
-        "?advisee <" + adviseeInPred + "> ?advisingRelationship . ";
+    final static String n3ForNewAdviseeAssertion  =      
+        "?advisingRelationship <" + adviseePred + "> ?newAdvisee . \n" +
+        "?newAdvisee <" + adviseeInPred + "> ?advisingRelationship . \n" +
+        "?newAdvisee <" + label + "> ?adviseeLabel . \n" +
+        "?newAdvisee a <" + adviseeClass + ">  . ";
     
-    final static String adviseeLabelAssertion  =      
-        "?advisee <" + label + "> ?adviseeLabel .";
+    final static String n3ForExistingAdviseeAssertion  =      
+        "?advisingRelationship <" + adviseePred + "> ?existingAdvisee . \n" +
+        "?existingAdvisee <" + adviseeInPred + "> ?advisingRelationship . "; 
     
     final static String firstNameAssertion  =      
         "@prefix foaf: <" + foaf + "> .  \n" +
-        "?advisee foaf:firstName ?firstName .";
+        "?newAdvisee foaf:firstName ?firstName .";
     
     final static String lastNameAssertion  =      
         "@prefix foaf: <" + foaf + "> .  \n" +
-        "?advisee foaf:lastName ?lastName .";
+        "?newAdvisee foaf:lastName ?lastName .";
     
     final static String degreeAssertion  =      
         "?advisingRelationship <"+ degreePred +"> ?degree .";
 
-    final static String n3ForSubjAreaType = 
-    	"?subjArea a <" + subjAreaClass + "> . ";   
-    
     //This is for an existing subject area
     //Where we only need the existing subject area label
     final static String n3ForExistingSubjAreaAssertion  =      
@@ -273,21 +282,6 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         " ?existingAdvisee <"  + label + "> ?existingAdviseeLabel . \n" +
         "}";
 
-/*  May not need these
-     final static String firstNameQuery =
-        "prefix foaf: <" + foaf + ">   \n" +
-        "SELECT ?existingFirstName WHERE { \n" +
-        " ?advisingRelationship <" + adviseePred + "> ?existingAdvisee . \n" +
-        " ?existingAdvisee foaf:firstName ?existingFirstName . \n" +
-        "}";
-
-    final static String lastNameQuery =
-        "prefix foaf: <" + foaf + ">   \n" +
-        "SELECT ?existingLastName WHERE { \n" +
-        " ?advisingRelationship <" + adviseePred + "> ?existingAdvisee . \n" +
-        " ?existingAdvisee foaf:lastName ?existingLastName . \n" +
-        "}";
-*/
     final static String subjAreaQuery =
         "SELECT ?existingSubjArea WHERE { \n" +
         " ?advisingRelationship <" + subjAreaPred + "> ?existingSubjArea . \n" +

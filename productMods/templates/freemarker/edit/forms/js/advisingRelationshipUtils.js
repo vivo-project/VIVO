@@ -2,8 +2,12 @@
 
 var advisingRelUtils = {
         
-    onLoad: function(subject) {
-        if ( subject ) { subjName = subject; }
+    onLoad: function(subject,blankSentinel) {
+        this.subjName = '';
+        if ( subject ) { this.subjName = subject; }
+        
+        this.sentinel = '';
+        if ( blankSentinel ) { this.sentinel = blankSentinel; }
 
         this.initObjectReferences();                 
         this.bindEventListeners();
@@ -12,17 +16,35 @@ var advisingRelUtils = {
     initObjectReferences: function() {
     
     this.form = $('#personHasAdvisingRelationship');
-    this.label = $('#advisingRelLabel');
+    this.adRelshiplabel = $('#advisingRelLabel');
     this.advisee = $('#advisee');
     this.subjArea = $('#SubjectArea');
     this.firstName = $('#firstName');
     this.lastName = $('#lastName');
     this.adviseeUri = $('#adviseeUri');
+    this.subjAreaUri = $('#subjAreaUri');
+    this.saveAdviseeLabel = $('#saveAdviseeLabel');
+    this.adviseeAcSelection = $('div#adviseeAcSelection');
+    
+
+    // may not need this
+    this.firstName.attr('disabled', '');
     
     },
     
     bindEventListeners: function() {
         this.idCache = {};
+        
+        //we want to use the advisee label in the relationship label.
+        // since the former gets cleared on submit in some cases, store
+        //the value in a hidden field and map to relationship label
+        this.advisee.change( function(objEvent) {
+           window.setTimeout('advisingRelUtils.mapAdviseeValue()', 180); 
+        });
+        this.advisee.blur( function(objEvent) {
+           window.setTimeout('advisingRelUtils.mapAdviseeValue()', 180); 
+        });
+        
         
         this.form.submit(function() {
             advisingRelUtils.resolveAdviseeNames();
@@ -30,17 +52,18 @@ var advisingRelUtils = {
         });            
     },
     
+    mapAdviseeValue: function() {
+       if ( this.adviseeAcSelection.attr('class').indexOf('userSelected') != -1 ) {
+           this.saveAdviseeLabel.val(this.advisee.val());
+       }
+    },
     resolveAdviseeNames: function() {
         var firstName,
             lastName,
             name;
 
         // If selecting an existing person, don't submit name fields
-        if (this.adviseeUri.val() != '') {
-            this.firstName.attr('disabled', 'disabled');
-            this.lastName.attr('disabled', 'disabled');
-        } 
-        else {
+        if (this.adviseeUri.val() == '' || this.adviseeUri.val() == this.sentinel ) {
             firstName = this.firstName.val();
             lastName = this.advisee.val();
             
@@ -50,19 +73,22 @@ var advisingRelUtils = {
             }            
             this.advisee.val(name);
             this.lastName.val(lastName);
-            
+        } 
+        else {
+            this.firstName.attr('disabled', 'disabled');
+            this.lastName.attr('disabled', 'disabled');
         }
 
     },    
     buildAdvisingRelLabel: function() {
-        if ( this.advisee.val().substring(0, 18) != "Select an existing") {
-            this.label.val(subjName + " advising " + this.advisee.val());
+        if ( this.advisee.val() != "" ) {
+            this.adRelshiplabel.val(this.subjName + " advising " + this.advisee.val());
         }
-        else if ( this.subjArea.val().substring(0, 18) != "Select an existing" ) {
-            this.label.val(subjName + " advising in " + this.subjArea.val());
+        else if ( this.saveAdviseeLabel.val() != "" ){
+            this.adRelshiplabel.val(this.subjName + " advising " + this.saveAdviseeLabel.val());
         }
         else {
-            this.label.val(subjName + " advising relationship");
+            this.adRelshiplabel.val(this.subjName + " advising relationship");
         }
     }
     

@@ -26,7 +26,7 @@ public class PersonHasAdviseesValidator implements N3ValidatorVTwo {
 
         Map<String,String> errors = new HashMap<String,String>();   
         
-        List<String> adviseeUri = urisFromForm.get("advisee");
+        List<String> adviseeUri = urisFromForm.get("existingAdvisee");
         if (allListElementsEmpty(adviseeUri)) {
             adviseeUri = null;
         }

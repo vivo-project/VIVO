@@ -24,14 +24,16 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign adviseeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisee") />
+<#assign adviseeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingAdvisee") />
 <#assign adviseeLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "adviseeLabel") />
+<#assign adviseeLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "adviseeLabelDisplay") />
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign advisingRelTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisingRelType") />
 <#assign advisingRelLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "advisingRelLabel") />
 <#assign subjAreaValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingSubjArea") />
 <#assign subjAreaLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "subjAreaLabel") />
+<#assign subjAreaLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "subjAreaLabelDisplay") />
 <#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
 <#assign acFilterForIndividuals =  "['" + editConfiguration.subjectUri + "']" />
 <#assign sparqlForAcFilter = editConfiguration.pageData.sparqlForAcFilter />
@@ -58,6 +60,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#assign adviseeLabelValue = adviseeLabelDisplayValue />
+    <#assign subjAreaLabelValue = subjAreaLabelDisplayValue />
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -117,21 +121,23 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <input class="acSelector" size="50"  type="text" acGroupName="advisee" id="advisee" name="adviseeLabel" value="${adviseeLabelValue}" >
             <input  size="30"  type="text" id="firstName" name="firstName" value="" ><br />
             <input type="hidden" id="lastName" name="lastName" value="">
+            <input class="display" type="hidden" acGroupName="advisee" id="adviseeDisplay" name="adviseeLabelDisplay" value="${adviseeLabelDisplayValue}" >
     </p>
 
-    <div class="acSelection" acGroupName="advisee">
+    <div class="acSelection" acGroupName="advisee" id="adviseeAcSelection">
         <p class="inline">
             <label>Selected Advisee:</label>
             <span class="acSelectionInfo" id="arf"></span>
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="adviseeUri" name="advisee" value="${adviseeValue}" />
+        <input class="acUriReceiver" type="hidden" id="adviseeUri" name="existingAdvisee" value="${adviseeValue}" ${flagClearLabelForExisting}="true"/>
     </div>
 
     <p>
         <label for="SubjectArea">Subject Area</label>
               <input class="acSelector" size="50"  type="text" id="SubjectArea" acGroupName="SubjectArea" name="subjAreaLabel" value="${subjAreaLabelValue}" />
+              <input class="display" type="hidden" id="SubjectAreaDisplay" acGroupName="SubjectArea" name="subjAreaLabelDisplay" value="${subjAreaLabelDisplayValue}" />
     </p>
       <div class="acSelection" acGroupName="SubjectArea">
           <p class="inline">
@@ -172,7 +178,8 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 	 	${htmlForElements["endField"]} ${yearHint}
     </#if>
 	<#--End draw elements-->
-    <input type="hidden" size="50" id="advisingRelLabel" name="advisingRelLabel" value="${advisingRelLabelValue}"/>
+    <input type="hidden" id="advisingRelLabel" name="advisingRelLabel" value="${advisingRelLabelValue}"/>
+    <input type="hidden" id="saveAdviseeLabel" name="saveAdviseeLabel" value="${adviseeLabelValue}"/>
     <input type="hidden" id="editKey" name="editKey" value="${editKey}"/>
 
    <p class="submit">
@@ -207,7 +214,7 @@ var customFormData  = {
 
 <script type="text/javascript">
 $(document).ready(function(){
-    advisingRelUtils.onLoad("${editConfiguration.subjectName}");
+    advisingRelUtils.onLoad('${editConfiguration.subjectName}', '${blankSentinel}');
 });
 </script> 
  

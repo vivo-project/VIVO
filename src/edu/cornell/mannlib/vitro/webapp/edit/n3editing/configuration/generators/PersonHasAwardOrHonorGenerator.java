@@ -22,6 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasAwardOrHonorValidator;
 
 public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -65,18 +66,20 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         
         conf.setN3Required( Arrays.asList( n3ForNewAwardReceipt,
                                            awardReceiptLabelAssertion  ) );
-        conf.setN3Optional( Arrays.asList( n3ForReceiptToAward, 
-                                           n3ForAwardToReceipt, 
+        conf.setN3Optional( Arrays.asList( n3ForNewAwardAssertion, 
+                                           n3ForExistingAwardAssertion, 
                                            descriptionAssertion, 
-                                           n3ForOrgAssertion,
-                                           awardLabelAssertion, 
+                                           n3ForNewOrgNewAwardAssertion,
+                                           n3ForExistingOrgNewAwardAssertion,
+                                           n3ForNewOrgExistingAwardAssertion,
+                                           n3ForExistingOrgExistingAwardAssertion,
                                            n3ForYearAwarded, 
                                            n3ForStart, 
                                            n3ForEnd ) );
         
         conf.addNewResource("award", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("awardReceipt", DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("org", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newOrg", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("yearAwardedNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -85,8 +88,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform(Arrays.asList("award", "org"));
-        conf.setLiteralsOnForm(Arrays.asList("description", "awardReceiptLabel", "awardLabel", "orgLabel" ));
+        conf.setUrisOnform(Arrays.asList("existingAward", "existingOrg"));
+        conf.setLiteralsOnForm(Arrays.asList("description", "awardReceiptLabel", "awardLabel", "orgLabel", "yearAwardedDisplay", "orgLabelDisplay", "awardLabelDisplay" ));
         
         conf.addSparqlForExistingLiteral("awardReceiptLabel", awardReceiptLabelQuery);
         conf.addSparqlForExistingLiteral("awardLabel", awardLabelQuery);
@@ -96,8 +99,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         conf.addSparqlForExistingLiteral("startField-value", existingStartDateQuery);
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
         
-        conf.addSparqlForExistingUris("award", awardQuery);
-        conf.addSparqlForExistingUris("org", orgQuery);
+        conf.addSparqlForExistingUris("existingAward", existingAwardQuery);
+        conf.addSparqlForExistingUris("existingOrg", existingOrgQuery); 
         conf.addSparqlForExistingUris("yearAwardedNode",existingYearAwardedNodeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
         conf.addSparqlForExistingUris("startNode", existingStartNodeQuery);
@@ -113,13 +116,13 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
                 );
 
         conf.addField( new FieldVTwo().
-                setName("org").
+                setName("existingOrg").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
                 setObjectClassUri( orgClass )
                 );
 
         conf.addField( new FieldVTwo().
-                setName("award").
+                setName("existingAward").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
                 setObjectClassUri( awardClass ) 
                 );
@@ -139,7 +142,25 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         conf.addField( new FieldVTwo().
                 setName("awardLabel").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
+                setValidators( list("datatype:" + XSD.xstring.toString()))
+                );
+
+        conf.addField( new FieldVTwo().
+                setName("yearAwardedDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()))
+                );
+
+        conf.addField( new FieldVTwo().
+                setName("orgLabelDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()))
+                );
+
+        conf.addField( new FieldVTwo().
+                setName("awardLabelDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()))
                 );
 
         conf.addField( new FieldVTwo().setName("yearAwarded").
@@ -168,7 +189,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
-        
+        conf.addValidator(new PersonHasAwardOrHonorValidator());
         prepare(vreq, conf);
         return conf;
     }
@@ -179,30 +200,43 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         "@prefix vivo: <" + vivoCore + "> . \n\n" +   
         "?person <" + awardReceiptPred + ">  ?awardReceipt . \n" +
         "?awardReceipt a  <" + awardReceiptClass + "> . \n" +              
-        "?awardReceipt <" + awardForPred + "> ?person . \n" +    
-        "?awardReceipt <" + receiptOfPred + "> ?award . \n" +
-        "?award a <" + awardClass + ">  . " ;    
+        "?awardReceipt <" + awardForPred + "> ?person . " ;    
     
     final static String awardReceiptLabelAssertion  =      
         "?awardReceipt <"+ label + "> ?awardReceiptLabel .";
     
-    final static String n3ForReceiptToAward  =      
-        "?awardReceipt <" + receiptOfPred + "> ?award .";
-
-    final static String awardLabelAssertion  =      
+    final static String n3ForNewAwardAssertion  =      
+        "?awardReceipt <" + receiptOfPred + "> ?award . \n" +
+        "?award a <" + awardClass + ">  . \n" +
+         "?award <" + receiptPred + "> ?awardReceipt . \n" +
         "?award <"+ label + "> ?awardLabel .";
     
-    final static String n3ForAwardToReceipt  =      
-        "?award <" + receiptPred + "> ?awardReceipt .";
+    final static String n3ForExistingAwardAssertion  =      
+        "?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        "?existingAward <" + receiptPred + "> ?awardReceipt . " ;
     
     final static String descriptionAssertion  =      
         "?awardReceipt <"+ descriptionPred +"> ?description .";
 
-    final static String n3ForOrgAssertion  =      
-        "?award <" + awardConferredByPred +"> ?org . \n" +
-        "?org a <" + orgClass + "> . \n" +
-        "?org <" + awardConferredPred + "> ?award . \n" +    
-        "?org <"+ label + "> ?orgLabel .";    
+    final static String n3ForExistingOrgNewAwardAssertion  =      
+        "?award <" + awardConferredByPred +"> ?existingOrg . \n" +
+        "?existingOrg <" + awardConferredPred + "> ?award . ";    
+
+    final static String n3ForExistingOrgExistingAwardAssertion  =      
+        "?existingAward <" + awardConferredByPred +"> ?existingOrg . \n" +
+        "?existingOrg <" + awardConferredPred + "> ?existingAward . ";    
+
+    final static String n3ForNewOrgNewAwardAssertion  =      
+        "?newOrg a <" + orgClass + "> . \n" +
+        "?award <" + awardConferredByPred +"> ?newOrg . \n" +
+        "?newOrg <" + awardConferredPred + "> ?award . \n" +    
+        "?newOrg <"+ label + "> ?orgLabel .";    
+
+    final static String n3ForNewOrgExistingAwardAssertion  =      
+        "?newOrg a <" + orgClass + "> . \n" +
+        "?existingAward <" + awardConferredByPred +"> ?newOrg . \n" +
+        "?newOrg <" + awardConferredPred + "> ?existingAward . \n" +    
+        "?newOrg <"+ label + "> ?orgLabel .";    
 
 	final static String n3ForYearAwarded = 
         "?awardReceipt <" + yearAwardedPred + "> ?yearAwardedNode . \n" +
@@ -228,15 +262,16 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
     /* Queries for editing an existing entry */
 
-    final static String awardQuery =
+    final static String existingAwardQuery =
         "SELECT ?existingAward WHERE { \n" +
         " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
         "}";
 
-    final static String orgQuery  =      
+    final static String existingOrgQuery  =      
         "SELECT ?existingOrg WHERE { \n" +
-        " ?award <" + awardConferredByPred + "> ?existingOrg . \n" +
-        " ?existingOrg <" + awardConferredPred + "> ?award . }";
+        " ?awardReceipt <" + receiptOfPred + "> ?existingAward . \n" +
+        " ?existingAward<" + awardConferredByPred + "> ?existingOrg . \n" +
+        " ?existingOrg <" + awardConferredPred + "> ?existingAward . }";
 
     final static String awardReceiptLabelQuery =
         "SELECT ?existingAwardReceiptLabel WHERE { \n" +
