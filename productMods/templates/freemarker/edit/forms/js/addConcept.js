@@ -256,9 +256,9 @@ var addConceptForm = {
     generateIndividualConceptDisplay: function(cuiURI, label, definition, type, definedBy, isBestMatch) {
     	var htmlAdd = "<li class='concepts'>" + 
     	"<div class='row'>" + 
-    	"<span class='column conceptLabel'>" +
+    	"<div class='column conceptLabel'>" +
     	addConceptForm.generateIndividualCUIInput(cuiURI, label, type, definedBy) +  
-    	label + addConceptForm.generateIndividualTypeDisplay(type) + "</span>" + 
+    	label + addConceptForm.generateIndividualTypeDisplay(type) + "</div>" + 
     	addConceptForm.generateIndividualDefinitionDisplay(definition) + 
     	addConceptForm.generateBestOrAlternate(isBestMatch) +
     	"</div>" +  
@@ -275,15 +275,20 @@ var addConceptForm = {
     	return "";
     },
     generateIndividualDefinitionDisplay:function(definition) {
-    	return "<span class='column conceptDefinition'>" + definition + "</span>";
+    	//The definition in some cases may be an empty string, so to prevent the div
+    	//from not appearing, we are replacing with 
+    	if(definition == null || definition.length == 0) {
+    		definition = "&nbsp;";
+    	}
+    	return "<div class='column conceptDefinition'>" + definition + "</div>";
     },
     //adds another div with "best match" next to it if best match
     generateBestOrAlternate:function(isBestMatch) {
-    	var content = "&nbsp;";
+    	var className = "emptyColumn";
     	if(isBestMatch) {
-    		content = "(Best Match)"
+    		className = "bestMatchFlag";
     	}
-    	return "<span class='column'>" + content + "</span>";	
+    	return "<div class='column'><div class='" + className + "'>&nbsp;</div></div>";	
     },
     validateConceptSelection:function(checkedElements) {
     	var numberElements = checkedElements.length;

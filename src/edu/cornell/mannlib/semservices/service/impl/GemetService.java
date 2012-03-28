@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 import edu.cornell.mannlib.semservices.bo.Concept;
 import edu.cornell.mannlib.semservices.service.ExternalConceptService;
 import edu.cornell.mannlib.semservices.util.XMLUtils;
+import edu.cornell.mannlib.vitro.webapp.web.URLEncoder;
 
 public class GemetService implements ExternalConceptService  {
    protected final Log logger = LogFactory.getLog(getClass());
@@ -187,7 +188,7 @@ public class GemetService implements ExternalConceptService  {
    protected String getConceptsMatchingKeyword(String keyword) throws Exception {
       String result = new String();
       String serviceUrl = GemetWS_address + "getConceptsMatchingKeyword" +
-      "?keyword="  + keyword +
+      "?keyword="  + URLEncoder.encode(keyword) +
       "&search_mode=0" +
       "&thesaurus_uri=http://www.eionet.europa.eu/gemet/concept/" +
       "&language=en";
