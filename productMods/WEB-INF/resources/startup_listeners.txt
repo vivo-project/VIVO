@@ -44,9 +44,6 @@ edu.cornell.mannlib.vitro.webapp.auth.permissions.PermissionSetsLoader
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.bean.PropertyRestrictionPolicyHelper$Setup
 
-# vivo specific, must appear before other policies
-edu.cornell.mannlib.vivo.auth.policy.VivoPolicy$Setup
-  
 edu.cornell.mannlib.vitro.webapp.auth.policy.setup.CommonPolicyFamilySetup
 
 edu.cornell.mannlib.vitro.webapp.auth.policy.RootUserPolicy$Setup
