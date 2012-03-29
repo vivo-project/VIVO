@@ -1284,15 +1284,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>authtest</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.auth.AuthTestController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>authtest</servlet-name>
-    <url-pattern>/authtest</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
   	<servlet-name>primitiveRdfEdit</servlet-name>
   	<servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.PrimitiveRdfEdit</servlet-class>  	
   </servlet>
