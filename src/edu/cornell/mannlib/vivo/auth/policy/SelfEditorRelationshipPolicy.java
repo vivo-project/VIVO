@@ -124,8 +124,8 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 	}
 
 	private DistilledAction distill(AbstractObjectPropertyStatementAction action) {
-		return new DistilledAction(action.getUriOfPredicate(),
-				action.getUriOfSubject(), action.getUriOfObject());
+		return new DistilledAction(action.getPredicateUri(),
+				action.getSubjectUri(), action.getObjectUri());
 	}
 
 	private PolicyDecision isAuthorized(IdentifierBundle ids,
