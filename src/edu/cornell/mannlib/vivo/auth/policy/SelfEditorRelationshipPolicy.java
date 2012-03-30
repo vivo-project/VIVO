@@ -21,8 +21,8 @@ import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyDecision;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.ifaces.PolicyIface;
 import edu.cornell.mannlib.vitro.webapp.auth.policy.specialrelationships.AbstractRelationshipPolicy;
 import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.ifaces.RequestedAction;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractDataPropertyAction;
-import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractObjectPropertyAction;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractDataPropertyStatementAction;
+import edu.cornell.mannlib.vitro.webapp.auth.requestedAction.propstmt.AbstractObjectPropertyStatementAction;
 
 /**
  * Permit self-editors to edit the properties of classes with which they share a
@@ -100,12 +100,12 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 
 		if (whatToAuth == null) {
 			decision = inconclusiveDecision("whatToAuth was null");
-		} else if (whatToAuth instanceof AbstractDataPropertyAction) {
+		} else if (whatToAuth instanceof AbstractDataPropertyStatementAction) {
 			decision = isAuthorized(whoToAuth,
-					distill((AbstractDataPropertyAction) whatToAuth));
-		} else if (whatToAuth instanceof AbstractObjectPropertyAction) {
+					distill((AbstractDataPropertyStatementAction) whatToAuth));
+		} else if (whatToAuth instanceof AbstractObjectPropertyStatementAction) {
 			decision = isAuthorized(whoToAuth,
-					distill((AbstractObjectPropertyAction) whatToAuth));
+					distill((AbstractObjectPropertyStatementAction) whatToAuth));
 		} else {
 			decision = inconclusiveDecision("Does not authorize "
 					+ whatToAuth.getClass().getSimpleName() + " actions");
@@ -118,12 +118,12 @@ public class SelfEditorRelationshipPolicy extends AbstractRelationshipPolicy
 		}
 	}
 
-	private DistilledAction distill(AbstractDataPropertyAction action) {
+	private DistilledAction distill(AbstractDataPropertyStatementAction action) {
 		return new DistilledAction(action.getPredicateUri(),
 				action.getSubjectUri());
 	}
 
-	private DistilledAction distill(AbstractObjectPropertyAction action) {
+	private DistilledAction distill(AbstractObjectPropertyStatementAction action) {
 		return new DistilledAction(action.uriOfPredicate, action.uriOfSubject,
 				action.uriOfObject);
 	}
