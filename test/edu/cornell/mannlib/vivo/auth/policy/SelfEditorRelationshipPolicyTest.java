@@ -122,7 +122,7 @@ public class SelfEditorRelationshipPolicyTest extends AbstractTestClass {
 				.getInstance(new String[] { NS_RESTRICTED });
 		PropertyRestrictionPolicyHelper.setBean(ctx, prph);
 
-		policy = new SelfEditorRelationshipPolicy(ctx, ontModel);
+		policy = new SelfEditorRelationshipPolicy(ctx);
 	}
 
 	private IdentifierBundle idNobody;
