@@ -17,7 +17,7 @@ public class PersonHasAdviseesValidator implements N3ValidatorVTwo {
     private static String MISSING_FIRST_NAME_ERROR = "You must enter a value in the First Name field.";
     private static String MISSING_LAST_NAME_ERROR = "You must enter a value in the Last Name field.";
     private static String MALFORMED_LAST_NAME_ERROR = "The last name field may not contain a comma. Please enter first name in First Name field.";
-;    
+    
     @Override
     public Map<String, String> validate(EditConfigurationVTwo editConfig,
             MultiValueEditSubmission editSub) {
@@ -27,7 +27,7 @@ public class PersonHasAdviseesValidator implements N3ValidatorVTwo {
         Map<String,String> errors = new HashMap<String,String>();   
         
         List<String> adviseeUri = urisFromForm.get("existingAdvisee");
-        if (allListElementsEmpty(adviseeUri)) {
+        if (allListElementsEmpty(adviseeUri) || adviseeUri.contains(">SUBMITTED VALUE WAS BLANK<")) {
             adviseeUri = null;
         }
         // If there's an adviseeUri, then we're done. The firstName and lastName fields are

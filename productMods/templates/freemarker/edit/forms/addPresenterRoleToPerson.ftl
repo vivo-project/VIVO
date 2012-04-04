@@ -13,20 +13,27 @@
     <#assign editMode = "add">
 </#if>
 
-<#assign newUriSentinel = "" />
-<#if editConfigurationConstants?has_content>
-	<#assign newUriSentinel = editConfigurationConstants["NEW_URI_SENTINEL"] />
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
 </#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign presentationValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentation") />
+<#assign presentationValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingPresentation") />
 <#assign presentationLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentationLabel") />
+<#assign presentationLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentationLabelDisplay") />
 <#assign presentationTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentationType") />
 <#assign roleLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleLabel") />
-<#assign conferenceValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "conference") />
+<#assign conferenceValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingConference") />
 <#assign conferenceLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "conferenceLabel") />
+<#assign conferenceLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "conferenceLabelDisplay") />
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -50,6 +57,12 @@
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#if conferenceLabelDisplayValue?has_content >
+        <#assign conferenceLabelValue = conferenceLabelDisplayValue />
+    </#if>
+    <#if presentationLabelDisplayValue?has_content >
+        <#assign presentationLabelValue = presentationLabelDisplayValue />
+    </#if>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -91,7 +104,7 @@
       <#if editMode == "edit">
         <#list presentationTypeOpts?keys as key>             
             <#if presentationTypeValue = key >
-              <span class="readOnly" id="typeSelectorSpan">${presentationTypeOpts[key]}</span> 
+              <span class="readOnly" id="typeSelectorSpan"><#if presentationTypeOpts[key] == "Other">Presentation<#else>${presentationTypeOpts[key]}</#if></span> 
               <input type="hidden" id="typeSelectorInput" name="presentationType" acGroupName="presentation" value="${presentationTypeValue}">
             </#if>           
         </#list>
@@ -109,6 +122,7 @@
     <p>
         <label for="presentation">### Name ${requiredHint}</label>
             <input class="acSelector" size="50"  type="text" id="presentation" acGroupName="presentation" name="presentationLabel" value="${presentationLabelValue}">
+            <input class="display" type="hidden" id="presentationDisplay" acGroupName="presentation" name="presentationLabelDisplay" value="${presentationLabelDisplayValue}">
     </p>
 
     <div class="acSelection" acGroupName="presentation">
@@ -118,7 +132,7 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="presentationUri" name="presentation" value="${presentationValue}" />
+        <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${presentationValue}" ${flagClearLabelForExisting}="true" />
     </div>
     <p><label for="roleLabel">Role in ### ${requiredHint} <span class="hint">(e.g., Moderator, Speaker, Panelist)</span></label>
         <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />
@@ -126,6 +140,7 @@
   <p>
       <label for="org">Presented At</label>
       <input  class="acSelector" size="50" acGroupName="conference" type="text" id="conference" name="conferenceLabel" value="${conferenceLabelValue}" />
+      <input  class="display" acGroupName="conference" type="hidden" id="conferenceDisplay" name="conferenceLabelDisplay" value="${conferenceLabelDisplayValue}" />
   </p>
   <div class="acSelection" acGroupName="conference">
       <p class="inline">
@@ -134,7 +149,7 @@
           <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
           <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
       </p>
-      <input class="acUriReceiver" type="hidden" id="conferenceUri" name="conference" value="${conferenceValue}" />
+      <input class="acUriReceiver" type="hidden" id="conferenceUri" name="existingConference" value="${conferenceValue}" ${flagClearLabelForExisting}="true" />
   </div>
     <p>
         <h4>Years of Participation in ###</h4>
@@ -183,7 +198,8 @@ var customFormData  = {
     defaultTypeName: 'presentation',
     multipleTypeNames: {presentation: 'presentation', conference: 'conference'},
     baseHref: '${urls.base}/individual?uri=',
-    newUriSentinel : '${newUriSentinel}'
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
 };
 </script>
 

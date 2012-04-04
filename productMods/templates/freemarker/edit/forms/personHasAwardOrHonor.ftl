@@ -61,8 +61,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
-    <#assign orgLabelValue = orgLabelDisplayValue />
-    <#assign awardLabelValue = awardLabelDisplayValue />
+    <#if orgLabelDisplayValue?has_content >
+        <#assign orgLabelValue = orgLabelDisplayValue />
+    </#if>
+    <#if awardLabelDisplayValue?has_content >
+        <#assign awardLabelValue = awardLabelDisplayValue />
+    </#if>
+        
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>

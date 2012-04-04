@@ -8,6 +8,7 @@ var awardReceiptUtils = {
         this.bindEventListeners();
         this.baseHref = href;
         this.editMode = mode;
+        $.extend(this, vitro.customFormUtils);
         // in edit mode copy the year awarded to the displayed input element
         if ( this.editMode == "edit"  ) {
             this.hiddenOrgDiv = $('div#hiddenOrgLabel');
@@ -18,7 +19,6 @@ var awardReceiptUtils = {
             }
         }
         this.subjectName = subjectName;
-        $.extend(this, vitro.customFormUtils);
     },
 
     initObjectReferences: function() {

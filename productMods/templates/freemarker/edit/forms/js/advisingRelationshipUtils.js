@@ -11,6 +11,12 @@ var advisingRelUtils = {
 
         this.initObjectReferences();                 
         this.bindEventListeners();
+        
+        $.extend(this, vitro.customFormUtils);
+
+        if ( this.findValidationErrors() ) {
+            this.resetLastNameLabel();
+        }
     },
 
     initObjectReferences: function() {
@@ -80,6 +86,7 @@ var advisingRelUtils = {
         }
 
     },    
+
     buildAdvisingRelLabel: function() {
         if ( this.advisee.val() != "" ) {
             this.adRelshiplabel.val(this.subjName + " advising " + this.advisee.val());
@@ -89,6 +96,14 @@ var advisingRelUtils = {
         }
         else {
             this.adRelshiplabel.val(this.subjName + " advising relationship");
+        }
+    },
+
+    resetLastNameLabel: function() {
+        var indx = this.advisee.val().indexOf(", ");
+        if ( indx != -1 ) {
+            var temp = this.advisee.val().substr(0,indx);
+            this.advisee.val(temp);
         }
     }
     

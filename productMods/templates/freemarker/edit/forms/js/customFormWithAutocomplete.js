@@ -76,8 +76,6 @@ var customForm = {
             this.acTypes = new Object();
         }
         
-     
-        
         // forms with multi ac fields will have this defined in customFormData
         // this is helpful when the type to display is not a single word, like "Subject Area"
         this.hasMultipleTypeNames = false;
@@ -209,7 +207,7 @@ var customForm = {
             var $acSelection = customForm.acSelections[$(this).attr('acGroupName')];
             var uri   = $acSelection.find('input.acUriReceiver').val(),
                 label = $(this).val();
-            if (uri) {            
+            if (uri && uri != ">SUBMITTED VALUE WAS BLANK<") {            
                 customForm.showAutocompleteSelection(label, uri, $(this));
             }
         });
@@ -278,6 +276,7 @@ var customForm = {
         			} 
                 });
         	}
+        	
             customForm.deleteAcHelpText();
         });
     },

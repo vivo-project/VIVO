@@ -22,7 +22,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasAwardOrHonorValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -189,7 +189,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
-        conf.addValidator(new PersonHasAwardOrHonorValidator());
+        conf.addValidator(new AutocompleteRequiredInputValidator("existingAward", "awardLabel"));
         prepare(vreq, conf);
         return conf;
     }

@@ -60,8 +60,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
-    <#assign adviseeLabelValue = adviseeLabelDisplayValue />
-    <#assign subjAreaLabelValue = subjAreaLabelDisplayValue />
+    <#if adviseeLabelDisplayValue?has_content >
+        <#assign adviseeLabelValue = adviseeLabelDisplayValue />
+    </#if>
+    <#if subjAreaLabelDisplayValue?has_content >
+        <#assign subjAreaLabelValue = subjAreaLabelDisplayValue />
+    </#if>
+    
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -119,7 +124,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <p >
         <label for="advisee">Advisee: Last Name  ${requiredHint}<span style="padding-left:322px">First Name  ${requiredHint}</span></label>
             <input class="acSelector" size="50"  type="text" acGroupName="advisee" id="advisee" name="adviseeLabel" value="${adviseeLabelValue}" >
-            <input  size="30"  type="text" id="firstName" name="firstName" value="" ><br />
+            <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
             <input type="hidden" id="lastName" name="lastName" value="">
             <input class="display" type="hidden" acGroupName="advisee" id="adviseeDisplay" name="adviseeLabelDisplay" value="${adviseeLabelDisplayValue}" >
     </p>

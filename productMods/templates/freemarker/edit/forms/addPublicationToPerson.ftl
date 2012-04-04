@@ -23,21 +23,42 @@
 	<#assign submissionErrors = editSubmission.validationErrors/>
 </#if>
 
+<#--The blank sentinel indicates what value should be put in a URI when no autocomplete result has been selected.
+If the blank value is non-null or non-empty, n3 editing for an existing object will remove the original relationship
+if nothing is selected for that object-->
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
+
 <#--In case of submission error, may already have publication type or title - although latter not likely, but storing values to be on safe side-->
 <#assign publicationTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "pubType") />
 <#assign titleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "title") />
 <#assign pubUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "pubUri") />
 <#assign collectionValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "collection") />
+<#assign collectionDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "collectionDisplay") />
 <#assign collectionUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "collectionUri") />
 <#assign bookValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "book") />
+<#assign bookDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "bookDisplay") />
 <#assign bookUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "bookUri") />
 <#assign conferenceValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "conference") />
+<#assign conferenceDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "conferenceDisplay") />
 <#assign conferenceUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "conferenceUri") />
 <#assign eventValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "event") />
+<#assign eventDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "eventDisplay") />
 <#assign eventUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "eventUri") />
 <#assign editorValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "editor") />
+<#assign editorDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "editorDisplay") />
 <#assign editorUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "editorUri") />
+<#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
+<#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign publisherValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "publisher") />
+<#assign publisherDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "publisherDisplay") />
 <#assign publisherUriValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "publisherUri") />
 <#assign localeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "locale") />
 <#assign volumeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "volume") />
@@ -59,6 +80,26 @@
 <h2>${titleVerb}&nbsp;publication entry for ${editConfiguration.subjectName}</h2>
 
 <#if submissionErrors?has_content>
+
+    <#if collectionDisplayValue?has_content >
+        <#assign collectionValue = collectionDisplayValue />
+    </#if>
+    <#if bookDisplayValue?has_content >
+        <#assign bookValue = bookDisplayValue />
+    </#if>
+    <#if conferenceDisplayValue?has_content >
+        <#assign conferenceValue = conferenceDisplayValue />
+    </#if>
+    <#if eventDisplayValue?has_content >
+        <#assign eventValue = eventDisplayValue />
+    </#if>
+    <#if editorDisplayValue?has_content >
+        <#assign editorValue = editorDisplayValue />
+    </#if>
+    <#if publisherDisplayValue?has_content >
+        <#assign publisherValue = publisherDisplayValue />
+    </#if>
+
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -114,6 +155,7 @@
     <p>
         <label for="collection">Published in</label>
         <input class="acSelector" size="50"  type="text" id="collection" name="collection" acGroupName="collection"  value="${collectionValue}" />
+        <input class="display" type="hidden" id="collectionDisplay" name="collectionDisplay" acGroupName="collection"  value="${collectionDisplayValue}" />
     </p>
 
     <div class="acSelection" acGroupName="collection" >
@@ -123,14 +165,15 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="collectionUri" name="collectionUri" value="${collectionUriValue}" />
+        <input class="acUriReceiver" type="hidden" id="collectionUri" name="collectionUri" value="${collectionUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
 
     <#-- Published In: book -->
     <p>
         <label for="book">Published in</label>
         <input class="acSelector" size="50"  type="text" id="book" name="book" acGroupName="book"  value="${bookValue}" />
-    </p>
+        <input class="display" type="hidden"  id="bookDisplay" name="bookDisplay" acGroupName="book"  value="${bookDisplayValue}" />
+    </p> 
 
     <div class="acSelection" acGroupName="book" >
         <p class="inline">
@@ -139,13 +182,14 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="bookUri" name="bookUri" value="${bookUriValue}" />
+        <input class="acUriReceiver" type="hidden" id="bookUri" name="bookUri" value="${bookUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
 
     <#-- Presented At -->
     <p>
         <label for="conference">Presented at</label>
         <input class="acSelector" size="50"  type="text" id="conference" name="conference" acGroupName="conference"  value="${conferenceValue}" />
+        <input class="display" type="hidden" id="conferenceDisplay" name="conferenceDisplay" acGroupName="conference"  value="${conferenceDisplayValue}" />
     </p>
 
     <div class="acSelection" acGroupName="conference" >
@@ -155,13 +199,14 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="conferenceUri" name="conferenceUri" value="${conferenceUriValue}" />
+        <input class="acUriReceiver" type="hidden" id="conferenceUri" name="conferenceUri" value="${conferenceUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
         
     <#-- Proceedings of -->
     <p>
         <label for="event">Proceedings of</label>
         <input class="acSelector" size="50"  type="text" id="event" name="event" acGroupName="event"  value="${eventValue}" />
+        <input class="display" type="hidden" id="eventDisplay" name="eventDisplay" acGroupName="event"  value="${eventDisplayValue}" />
     </p>
 
     <div class="acSelection" acGroupName="event" >
@@ -171,14 +216,17 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="eventUri" name="eventUri" value="${eventUriValue}" />
+        <input class="acUriReceiver" type="hidden" id="eventUri" name="eventUri" value="${eventUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
 
 
     <#-- Editor -->
     <p>
-        <label for="editor">Editor</label>
+        <label for="editor">Editor: Last Name<span style="padding-left:322px">First Name  ${requiredHint}</span></label>
         <input class="acSelector" size="50"  type="text" id="editor" name="editor" acGroupName="editor"  value="${editorValue}" />
+        <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
+        <input type="hidden" id="lastName" name="lastName" value="">
+        <input class="display" type="hidden" id="editorDisplay" name="editorDisplay" acGroupName="editor"  value="${editorDisplayValue}" />
     </p>
 
     <div class="acSelection" acGroupName="editor" >
@@ -188,13 +236,14 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="editorUri" name="editorUri" value="${editorUriValue}" />
+        <input class="acUriReceiver" type="hidden" id="editorUri" name="editorUri" value="${editorUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
 
     <#-- Publisher -->
     <p>
         <label for="publisher">Publisher</label>
         <input class="acSelector" size="50"  type="text" id="publisher" name="publisher" acGroupName="publisher"  value="${publisherValue}" />
+        <input class="display" type="hidden" id="publisherDisplay" name="publisherDisplay" acGroupName="publisher" value="${publisherDisplayValue}" />
     </p>
 
     <div class="acSelection" acGroupName="publisher" >
@@ -204,7 +253,7 @@
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="publisherUri" name="publisherUri" value="${publisherUriValue}" />
+        <input class="acUriReceiver" type="hidden" id="publisherUri" name="publisherUri" value="${publisherUriValue}" ${flagClearLabelForExisting}="true" />
     </div>
     
     <#-- Place of Publication -->
@@ -267,13 +316,14 @@
         defaultTypeName: 'publication', // used in repair mode to generate button text
         multipleTypeNames: {collection: 'publication', book: 'book', conference: 'conference', event: 'event', editor: 'editor', publisher: 'publisher'},
         baseHref: '${urls.base}/individual?uri=',
-        newUriSentinel : '${newUriSentinel}'
+        blankSentinel: '${blankSentinel}',
+        flagClearLabelForExisting: '${flagClearLabelForExisting}'
     };
     </script>
     
     <script type="text/javascript">
      $(document).ready(function(){
-        publicationToPersonUtils.onLoad('${urls.base}/individual?uri=', '${newUriSentinel}');
+        publicationToPersonUtils.onLoad('${urls.base}/individual?uri=', '${blankSentinel}');
     }); 
     </script>
 </section>

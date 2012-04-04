@@ -19,8 +19,10 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisio
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -61,13 +63,11 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         conf.setVarNameForObject("role");
         
         conf.setN3Required( Arrays.asList( n3ForNewRole, 
-                                           roleLabelAssertion, 
-                                           presTypeAssertion, 
-                                           presLabelAssertion ) );
-        conf.setN3Optional( Arrays.asList( n3ForConference, n3ForStart, n3ForEnd ) );
+                                           roleLabelAssertion) );
+        conf.setN3Optional( Arrays.asList( n3ForNewPresentation, presTypeAssertion, n3ForExistingPresentation, n3ForNewConference, n3ForExistingConference, n3ForStart, n3ForEnd ) );
         
         conf.addNewResource("presentation", DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("conference", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newConference", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("role", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -76,14 +76,14 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform(Arrays.asList("presentation", "conference", "role", "presentationType"));
-        conf.setLiteralsOnForm(Arrays.asList("presentationLabel", "conferenceLabel", "roleLabel"));
+        conf.setUrisOnform(Arrays.asList("existingPresentation", "existingConference", "presentationType"));
+        conf.setLiteralsOnForm(Arrays.asList("presentationLabel", "presentationLabelDisplay", "conferenceLabel", "conferenceLabelDisplay", "roleLabel"));
         
         conf.addSparqlForExistingLiteral("presentationLabel", presentationLabelQuery);
         conf.addSparqlForExistingLiteral("conferenceLabel", conferenceLabelQuery);
         conf.addSparqlForExistingLiteral("roleLabel", roleLabelQuery);
-        conf.addSparqlForExistingUris("presentation", presentationQuery);
-        conf.addSparqlForExistingUris("conference", conferenceQuery);
+        conf.addSparqlForExistingUris("existingPresentation", presentationQuery);
+        conf.addSparqlForExistingUris("existingConference", existingConferenceQuery);
         conf.addSparqlForExistingUris("presentationType", presentationTypeQuery);
         conf.addSparqlForExistingLiteral(
                 "startField-value", existingStartDateQuery);
@@ -99,15 +99,21 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
                 existingEndPrecisionQuery);
         
         conf.addField( new FieldVTwo().
-                setName("presentation").
+                setName("existingPresentation").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
                 setObjectClassUri(presentationClass)
                 );
 
         conf.addField( new FieldVTwo().                        
+                setName("presentationLabelDisplay")
+                .setRangeDatatypeUri( XSD.xstring.toString() ).
+                setValidators( list("datatype:" + XSD.xstring.toString()) )
+                );
+
+        conf.addField( new FieldVTwo().                        
                 setName("presentationLabel")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
+                setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
         
         conf.addField( new FieldVTwo().
@@ -124,13 +130,18 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
                 );
 
         conf.addField( new FieldVTwo().
-                setName("conference").
+                setName("existingConference").
                 setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
                 setObjectClassUri(conferenceClass)
                 );
         
         conf.addField( new FieldVTwo().
                 setName("conferenceLabel").
+                setRangeDatatypeUri(XSD.xstring.toString() )
+                );
+        
+        conf.addField( new FieldVTwo().
+                setName("conferenceLabelDisplay").
                 setRangeDatatypeUri(XSD.xstring.toString() )
                 );
         
@@ -152,7 +163,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
-        
+        conf.addValidator(new AutocompleteRequiredInputValidator("existingPresentation", "presentationLabel"));
         prepare(vreq, conf);
         return conf;
     }
@@ -162,24 +173,33 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         "@prefix core: <" + vivoCore + "> . \n\n" +   
         "?person <" + hasRolePred + ">  ?role . \n" +
         "?role a  <" + roleClass + "> . \n" +              
-        "?role <" + roleOfPred + "> ?person . \n" +
-        "?role <" + roleRealizedInPred + "> ?presentation . \n" + 
-        "?presentation <" + realizedRolePred + "> ?role .";    
-    
+        "?role <" + roleOfPred + "> ?person . ";
+         
     final static String roleLabelAssertion =
         "?role <" + label + "> ?roleLabel .";
         
-    final static String presLabelAssertion =
+    final static String n3ForNewPresentation = 
+        "?role <" + roleRealizedInPred + "> ?presentation . \n" + 
+        "?presentation <" + realizedRolePred + "> ?role . \n" +    
         "?presentation <" + label + "> ?presentationLabel .";
+    
+    final static String n3ForExistingPresentation = 
+        "?role <" + roleRealizedInPred + "> ?existingPresentation . \n" + 
+        "?existingPresentation <" + realizedRolePred + "> ?role . ";    
     
     final static String presTypeAssertion =
         "?presentation a ?presentationType .";
     
-    final static String n3ForConference =
-        "?conference a <" +  conferenceClass + "> . \n" +
-        "?conference <" + includesEventPred + "> ?presentation . \n" +
-        "?presentation <" + eventWithinPred + "> ?conference . \n" +
-        "?conference <" + label + "> ?conferenceLabel .";
+    final static String n3ForNewConference =
+        "?presentation <" + eventWithinPred + "> ?newConference . \n" +
+        "?newConference <" + includesEventPred + "> ?presentation . \n" +
+        "?newConference a <" +  conferenceClass + "> . \n" +
+        "?newConference <" + label + "> ?conferenceLabel .";
+    
+    final static String n3ForExistingConference =
+        "?existingConference a <" +  conferenceClass + "> . \n" +
+        "?existingConference <" + includesEventPred + "> ?presentation . \n" +
+        "?presentation <" + eventWithinPred + "> ?existingConference . ";
     
     final static String n3ForStart =
         "?role <" + roleToInterval + "> ?intervalNode . \n" +    
@@ -217,7 +237,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         "?role <" + roleRealizedInPred + "> ?existingPresentation . " +
         "?existingPresentation vitro:mostSpecificType ?existingPresentationType . }";
     
-    final static String conferenceQuery = 
+    final static String existingConferenceQuery = 
         "SELECT ?existingConference WHERE { \n" +
         "?role <" + roleRealizedInPred + "> ?existingPresentation . " +
         "?existingPresentation <" + eventWithinPred + "> ?existingConference . }";
