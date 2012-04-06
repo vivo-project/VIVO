@@ -34,6 +34,8 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
+
 /**
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
      and hasPrincipalInvestigatorRole.
@@ -109,7 +111,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	//Add validators
         editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") );
         editConfiguration.addValidator(new AntiXssValidation());
-        
+        editConfiguration.addValidator(new AutocompleteRequiredInputValidator("existingGrant","grantLabel"));
         //no preprocessors required here
         //Adding additional data, specifically edit mode
         addFormSpecificData(editConfiguration, vreq);
@@ -183,8 +185,10 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
    
 	private List<String> generateN3Optional(VitroRequest vreq) {
     	List<String> n3Optional = new ArrayList<String>();
-    	//n3 for grant label
-		n3Optional.add(getN3ForGrantLabel(vreq));
+    	//n3 for new grant
+		n3Optional.add(getN3ForNewGrant(vreq));
+    	//n3 for existing grant
+		n3Optional.add(getN3ForExistingGrant(vreq));
 		//n3 for inverse
 		n3Optional.add("?role ?inverseRolePredicate ?person .");
 		//N3ForStart
@@ -198,17 +202,25 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	String editString = getPrefixesString();
     	editString += "?person ?rolePredicate ?role .";
     	editString += "?role a <" + getRoleType(vreq) + "> .";
-    	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?grant .";
-    	editString += "?grant a core:Grant ;" +
-    		"<" + getGrantToRolePredicate(vreq) + "> ?role .";
     	return editString;
 	}
 	
-	public String getN3ForGrantLabel(VitroRequest vreq) {
-    	return "?grant <" + RDFS.label.getURI() + "> ?grantLabel .";
-
+	public String getN3ForNewGrant(VitroRequest vreq) {
+    	String editString = getPrefixesString();
+    	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?grant .";
+    	editString += "?grant a core:Grant . ";
+    	editString += "?grant <" + getGrantToRolePredicate(vreq) + "> ?role .";
+    	editString += "?grant <" + RDFS.label.getURI() + "> ?grantLabel .";
+    	return editString;
 	}
-
+	
+	public String getN3ForExistingGrant(VitroRequest vreq) {
+    	String editString = getPrefixesString();
+    	editString += "?role <" + getRoleToGrantPredicate(vreq) + "> ?existingGrant . "; 
+    	editString += "?existingGrant <" + getGrantToRolePredicate(vreq) + "> ?role .";
+    	return editString;
+	}
+	
 	//Method b/c used in two locations, n3 optional and n3 assertions
 	private List<String> getN3ForStart() {
 		List<String> n3ForStart = new ArrayList<String>();
@@ -248,9 +260,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 			newResources.put("endNode", defaultNamespace + "individual");
 			return newResources;
 		}
-    
-
-	
 	
 	/*
 	 * Set URIS and Literals In Scope and on form and supporting methods
@@ -295,10 +304,11 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	List<String> literalsOnForm = new ArrayList<String>();
     	//add role activity and roleActivityType to uris on form
     	urisOnForm.add("grant");
+    	urisOnForm.add("existingGrant");
     	editConfiguration.setUrisOnform(urisOnForm);
     	//activity label and role label are literals on form
     	literalsOnForm.add("grantLabel");
-    	literalsOnForm.add("existingGrantLabel");
+    	literalsOnForm.add("grantLabelDisplay");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }
     
@@ -324,7 +334,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     private HashMap<String, String> generateSparqlForExistingUris(VitroRequest vreq) {
     	HashMap<String, String> map = new HashMap<String, String>();
     	//Queries for role activity, activity type query, interval node, start node, end node, start field precision, endfield precision
-    	map.put("grant", getGrantQuery(vreq));
+    	map.put("existingGrant", getExistingGrantQuery(vreq));
     	map.put("intervalNode", getIntervalNodeQuery(vreq));
     	map.put("startNode", getStartNodeQuery(vreq));
     	map.put("endNode", getEndNodeQuery(vreq));
@@ -390,7 +400,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	map.put("endField-value", getExistingEndDateQuery(vreq));
     	return map;
     }
-
     
     private String getGrantLabelQuery(VitroRequest vreq) {
 		String query =  "PREFIX core: <" + getVivoCoreNamespace() + ">" + 
@@ -404,7 +413,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		return query;
 	}
 
-    private String getGrantQuery(VitroRequest vreq) {
+    private String getExistingGrantQuery(VitroRequest vreq) {
 		String query =  "PREFIX core: <" + getVivoCoreNamespace() + ">" + 
 		"PREFIX rdfs: <" + RDFS.getURI() + "> \n";
 
@@ -445,7 +454,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	//Multiple fields
     	getGrantField(editConfiguration, vreq, fields);
     	getGrantLabelField(editConfiguration, vreq, fields);
-    	getExistingGrantLabelField(editConfiguration, vreq, fields);
+    	getGrantLabelDisplayField(editConfiguration, vreq, fields);
+    	getExistingGrantField(editConfiguration, vreq, fields);
     	getStartField(editConfiguration, vreq, fields);
     	getEndField(editConfiguration, vreq, fields);
     	editConfiguration.setFields(fields);
@@ -489,9 +499,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	//Not really interested in validators here
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
-    	if(isAddMode(vreq) || isRepairMode(vreq)) {
-    		validators.add("nonempty");
-    	}
     	field.setValidators(validators);
     	
     	//subjectUri and subjectClassUri are not being used in Field
@@ -508,11 +515,34 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		
 	}
 	
+	private void getGrantLabelDisplayField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq, Map<String, FieldVTwo> fields) {
+		String fieldName = "grantLabelDisplay";
+		//get range data type uri and range language
+		String stringDatatypeUri = XSD.xstring.toString();
+		
+		FieldVTwo field = new FieldVTwo();
+    	field.setName(fieldName);
+    	//queryForExisting is not being used anywhere in Field
+    	    	
+    	//subjectUri and subjectClassUri are not being used in Field
+    	
+    	field.setOptionsType("UNDEFINED");
+    	//why isn't predicate uri set for data properties?
+    	field.setPredicateUri(null);
+    	field.setObjectClassUri(null);
+    	field.setRangeDatatypeUri(null);
+    	
+    	field.setLiteralOptions(new ArrayList<List<String>>());
+
+    	fields.put(field.getName(), field);	
+		
+	}
 	//Need if returning from an invalid submission
-	private void getExistingGrantLabelField(
+	private void getExistingGrantField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq,
 			Map<String, FieldVTwo> fields) {
-		String fieldName = "existingGrantLabel";
+		String fieldName = "existingGrant";
 		
 		FieldVTwo field = new FieldVTwo();
     	field.setName(fieldName);    	
@@ -634,9 +664,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     private boolean isRepairMode(VitroRequest vreq) {
     	return EditModeUtils.isRepairMode(getEditMode(vreq));
     }
-   
-
-     
+        
     /**
      * Methods that are REQUIRED to be implemented in subclasses
      **/
@@ -668,10 +696,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 
 	}
 
-
-
-	
-	
 	/**
 	 * Methods with default values that may be overwritten when required by a subclass
 	 * Both Default value and method that can be overwritten are included below

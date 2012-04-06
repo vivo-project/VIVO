@@ -23,10 +23,22 @@
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
 <#assign yearHint     = "<span class='hint'>(YYYY)</span>" />
 
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 <#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle") />
 <#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType") />
-<#assign personValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "person") />
+<#assign existingPersonValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingPerson") />
 <#assign personLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "personLabel") />
+<#assign personLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "personLabelDisplay") />
+<#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
+<#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
 	<#assign submissionErrors = editSubmission.validationErrors/>
@@ -35,6 +47,9 @@
 <h2>${titleVerb}&nbsp;position history entry for ${editConfiguration.subjectName}</h2>
 
 <#if submissionErrors?has_content>
+    <#if personLabelDisplayValue?has_content >
+        <#assign personLabelValue = personLabelDisplayValue />
+    </#if>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -62,6 +77,8 @@
     	        <#else>
     	            ${submissionErrors[errorFieldName]}
     	        </#if>
+	        <#else>
+    	        ${submissionErrors[errorFieldName]}
 	        </#if><br />
         </#list>
         </p>
@@ -93,8 +110,11 @@
 	        </#if>
 	    </select>
   	    <p>
-	        <label for="relatedIndLabel">Person ${requiredHint}</label>
-	            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="personLabel" acGroupName="person" value="${personLabelValue}" >
+	        <label for="relatedIndLabel">Person: Last Name ${requiredHint}<span style="padding-left:322px">First Name  ${requiredHint}</span></label>
+	            <input class="acSelector" size="50"  type="text" id="person" name="personLabel" acGroupName="person" value="${personLabelValue}" >
+                <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
+                <input type="hidden" id="lastName" name="lastName" value="">
+                <input class="display" type="hidden" acGroupName="person" id="personDisplay" name="personLabelDisplay" value="${personLabelDisplayValue}" >
 	    </p>
 	
 	    <div class="acSelection" acGroupName="person">
@@ -104,7 +124,7 @@
                 <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
                 <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
 	        </p>
-	        <input class="acUriReceiver" type="hidden" id="personUri" name="person" value="${personValue}" />
+	        <input class="acUriReceiver" type="hidden" id="personUri" name="existingPerson" value="${existingPersonValue}" ${flagClearLabelForExisting}="true" />
 	    </div>
         
         <br />
@@ -139,11 +159,19 @@
         acTypes: {person: 'http://xmlns.com/foaf/0.1/Person'},
 	    editMode: '${editMode}',
 	    defaultTypeName: 'person',
-	    baseHref: '${urls.base}/individual?uri='
+	    baseHref: '${urls.base}/individual?uri=',
+        blankSentinel: '${blankSentinel}',
+        flagClearLabelForExisting: '${flagClearLabelForExisting}'
+        
 	};
 	</script>
 
 </section>
+<script type="text/javascript">
+$(document).ready(function(){
+    orgHasPositionUtils.onLoad('${blankSentinel}');
+});
+</script> 
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
@@ -153,6 +181,7 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarke
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
+             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/orgHasPositionUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
              '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}

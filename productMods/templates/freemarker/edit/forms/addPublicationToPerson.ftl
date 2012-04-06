@@ -104,10 +104,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
         <#--below shows examples of both printing out all error messages and checking the error message for a specific field-->
-        <#list submissionErrors?keys as errorFieldName>
-        	${submissionErrors[errorFieldName]} <br/>
-        </#list>
-        
+        <#if lvf.submissionErrorExists(editSubmission, "title")>
+ 	        Please select an existing publication in the Title field or enter a new one.<br />
+        <#else> 
+            <#list submissionErrors?keys as errorFieldName>
+        	    ${submissionErrors[errorFieldName]} <br/>
+            </#list>
+        </#if>
         </p>
     </section>
 </#if>
@@ -222,7 +225,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <#-- Editor -->
     <p>
-        <label for="editor">Editor: Last Name<span style="padding-left:322px">First Name  ${requiredHint}</span></label>
+        <label class="editor" for="editor">Editor: Last Name<span style="padding-left:338px">First Name  ${requiredHint}</span></label>
         <input class="acSelector" size="50"  type="text" id="editor" name="editor" acGroupName="editor"  value="${editorValue}" />
         <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
         <input type="hidden" id="lastName" name="lastName" value="">

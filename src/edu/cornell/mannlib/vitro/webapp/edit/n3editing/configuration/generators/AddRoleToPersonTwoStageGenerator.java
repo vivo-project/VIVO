@@ -35,6 +35,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocesso
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 /**
  * Generates the edit configuration for adding a Role to a Person.  
   
@@ -128,7 +129,8 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	editConfiguration.setN3Required(list(    	            	        
     	        N3_PREFIX + "\n" +
     	        "?person ?rolePredicate ?role .\n" +
-    	        "?role a ?roleType .\n"
+    	        "?role a ?roleType .\n" +
+    	        "?role ?inverseRolePredicate ?person ."
     	));    
     	
     	// Optional N3 
@@ -140,10 +142,8 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	//independently evaluated and passed back with substitutions even if the other strings are not 
     	//substituted correctly. 
     	editConfiguration.setN3Optional( list(
-    			"?role " + getRoleToActivityPlaceholder() + " ?roleActivity .\n"+
-    	        "?roleActivity " + getActivityToRolePlaceholder() + " ?role .",
-    	        "?role ?inverseRolePredicate ?person .",
-    	        getN3ForActivityLabel(),
+    	        getN3ForNewRoleActivity(),
+    	        getN3ForExistingRoleActivity(),
     	        getN3ForActivityType(),                              
     	        getN3RoleLabelAssertion(),
     	        getN3ForStart(),
@@ -173,6 +173,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	//Add validator
         editConfiguration.addValidator(new DateTimeIntervalValidationVTwo("startField","endField") );
         editConfiguration.addValidator(new AntiXssValidation());
+        editConfiguration.addValidator(new AutocompleteRequiredInputValidator("existingRoleActivity", "activityLabel"));
         
         //Add preprocessors
         addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
@@ -191,8 +192,19 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     
     /* N3 Required and Optional Generators as well as supporting methods */
     
-	private String getN3ForActivityLabel() {
-    	return "?roleActivity <" + RDFS.label.getURI() + "> ?activityLabel .";
+	private List<String> getN3ForNewRoleActivity() {
+	    List<String> n3ForNewRoleActivity = new ArrayList<String>();
+        n3ForNewRoleActivity.add("?role " + getRoleToActivityPlaceholder() + " ?roleActivity .\n"+
+        "?roleActivity " + getActivityToRolePlaceholder() + " ?role . \n" +
+        "?roleActivity <" + RDFS.label.getURI() + "> ?activityLabel .");
+    	return n3ForNewRoleActivity;
+    }
+    
+	private List<String> getN3ForExistingRoleActivity() {
+	    List<String> n3ForExistingRoleActivity = new ArrayList<String>();
+        n3ForExistingRoleActivity.add("?role " + getRoleToActivityPlaceholder() + " ?existingRoleActivity .\n"+
+        "?existingRoleActivity " + getActivityToRolePlaceholder() + " ?role . ");
+    	return n3ForExistingRoleActivity;
     }
     
     private String getN3ForActivityType() {
@@ -266,7 +278,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     private void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	List<String> urisOnForm = new ArrayList<String>();    	
     	//add role activity and roleActivityType to uris on form
-    	urisOnForm.add("roleActivity");
+    	urisOnForm.add("existingRoleActivity");
     	urisOnForm.add("roleActivityType");
     	//Also adding the predicates
     	//TODO: Check how to override this in case of default parameter? Just write hidden input to form?
@@ -277,6 +289,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	//activity label and role label are literals on form
     	List<String> literalsOnForm = new ArrayList<String>();
     	literalsOnForm.add("activityLabel");
+    	literalsOnForm.add("activityLabelDisplay");
     	literalsOnForm.add("roleLabel");
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }    
@@ -295,7 +308,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	//Queries for role activity, activity type query, interval node, 
     	// start node, end node, start field precision, endfield precision
         map = new HashMap<String, String>();        
-        map.put("roleActivity", getRoleActivityQuery(vreq));
+        map.put("existingRoleActivity", getExistingRoleActivityQuery(vreq));
         map.put("roleActivityType", getActivityTypeQuery(vreq));
         map.put("intervalNode", getIntervalNodeQuery(vreq));
         map.put("startNode", getStartNodeQuery(vreq));
@@ -495,7 +508,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	}
 
 
-	private String getRoleActivityQuery(VitroRequest vreq) {
+	private String getExistingRoleActivityQuery(VitroRequest vreq) {
 		//If role to activity predicate is the default query, then we need to replace with a union
 		//of both realizedIn and the other
 		String query =  "PREFIX core: <" + VIVO_NS + ">"; 
@@ -503,8 +516,8 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 		//Portion below for multiple possible predicates
 		List<String> predicates = getPossibleRoleToActivityPredicates();
 		List<String> addToQuery = new ArrayList<String>();
-		query += "SELECT ?existingActivity WHERE { \n" + 
-		" ?role ?predicate ?existingActivity . \n ";	
+		query += "SELECT ?existingRoleActivity WHERE { \n" + 
+		" ?role ?predicate ?existingRoleActivity . \n ";	
 		query += getFilterRoleToActivityPredicate("predicate");
 		query += "}";
 		return query;
@@ -558,8 +571,9 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	Map<String, FieldVTwo> fields = new HashMap<String, FieldVTwo>();
     	//Multiple fields
     	getActivityLabelField(editConfiguration, vreq, fields);
+    	getActivityLabelDisplayField(editConfiguration, vreq, fields);
     	getRoleActivityTypeField(editConfiguration, vreq, fields);
-    	getRoleActivityField(editConfiguration, vreq, fields);
+    	getExistingRoleActivityField(editConfiguration, vreq, fields);
     	getRoleLabelField(editConfiguration, vreq, fields);
     	getStartField(editConfiguration, vreq, fields);
     	getEndField(editConfiguration, vreq, fields);
@@ -638,10 +652,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	//queryForExisting is not being used anywhere in Field    	
     	
     	List<String> validators = new ArrayList<String>();
-    	//If add mode or repair, etc. need to add label required validator
-    	if(isAddMode(vreq) || isRepairMode(vreq)) {
-    		validators.add("nonempty");
-    	}
     	validators.add("datatype:" + stringDatatypeUri);
     	field.setValidators(validators);
     	
@@ -658,6 +668,29 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	fields.put(field.getName(), field);	
 	}
 	
+	private void getActivityLabelDisplayField(EditConfigurationVTwo editConfiguration,
+			VitroRequest vreq, Map<String, FieldVTwo> fields) {
+		String fieldName = "activityLabelDisplay";
+		//get range data type uri and range language
+		String stringDatatypeUri = XSD.xstring.toString();
+		
+		FieldVTwo field = new FieldVTwo();
+    	field.setName(fieldName);    	
+    	//queryForExisting is not being used anywhere in Field    	
+    	    	
+    	//subjectUri and subjectClassUri are not being used in Field
+    	
+    	field.setOptionsType("UNDEFINED");
+    	//why isn't predicate uri set for data properties?
+    	field.setPredicateUri(null);
+    	field.setObjectClassUri(null);
+    	field.setRangeDatatypeUri(stringDatatypeUri);
+    	    	
+    	field.setLiteralOptions(new ArrayList<List<String>>());
+    	    	
+    	fields.put(field.getName(), field);	
+	}
+
 	//type of "right side" of role, i.e. type of activity from role roleIn activity
 	private void getRoleActivityTypeField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq,
@@ -699,9 +732,9 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	}    
 	
 	//Assuming URI for activity for role?
-	private void getRoleActivityField(EditConfigurationVTwo editConfiguration,
+	private void getExistingRoleActivityField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
-		String fieldName = "roleActivity";
+		String fieldName = "existingRoleActivity";
 		//get range data type uri and range language
 		
 		FieldVTwo field = new FieldVTwo();

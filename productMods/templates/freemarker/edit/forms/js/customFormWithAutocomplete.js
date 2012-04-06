@@ -492,7 +492,8 @@ var customForm = {
         $acSelector.parent('p').show();
         this.resetAcSelection($acSelectionObj);
         if ( clearAcSelectorVal == true ) {
-            $acSelector.val(''); 
+            $acSelector.val('');
+            $("input.display[acGroupName='" + $acSelectionObj.attr('acGroupName') + "']").val("");
         }
         customForm.addAcHelpText($acSelector);
 

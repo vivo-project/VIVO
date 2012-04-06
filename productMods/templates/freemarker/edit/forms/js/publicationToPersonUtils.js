@@ -381,23 +381,35 @@ var publicationToPersonUtils = {
 
          // If editorUri contains the sentinel value, we need to process the name fields
          // otherwise, disable them so they are not submitted
-         if ( this.editorUri.val() == this.sentinel ) {
-             firstName = this.firstName.val();
-             lastName = this.editor.val();
-             name = lastName;
-             if (firstName) {
-                 name += ', ' + firstName;
-             }            
-             this.editor.val(name);
-             this.lastName.val(lastName);
-         } 
-         else {
-             this.firstName.attr('disabled', 'disabled');
-             this.lastName.attr('disabled', 'disabled');
-         }
-
+         if (this.editor.parent('p').is(':visible') ) {
+             if ( this.editor.val().indexOf('Select an existing') != -1 ) {
+                 this.editor.val('');
+             }
+             if ( this.editorUri.val() == '' || this.editorUri.val() == this.sentinel ) {
+                 firstName = this.firstName.val();
+                 lastName = this.editor.val();
+                 name = lastName;
+                 if (firstName) {
+                     name += ', ' + firstName;
+                 }            
+                 this.editor.val(name);
+                 this.lastName.val(lastName);
+             } 
+             else {
+                 this.disableNameFields();
+             }
+        }
+        else {
+            this.disableNameFields();
+        }
+        
      },
      
+     disableNameFields: function() {
+         this.firstName.attr('disabled', 'disabled');
+         this.lastName.attr('disabled', 'disabled');
+     },
+
      resetLastNameLabel: function() {
          var indx = this.editor.val().indexOf(", ");
          if ( indx != -1 ) {

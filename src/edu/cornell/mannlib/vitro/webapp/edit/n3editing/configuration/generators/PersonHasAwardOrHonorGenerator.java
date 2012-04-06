@@ -86,7 +86,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         
         //uris in scope: none   
-        //literals in scope: none
+        //literals in scope: none 
         
         conf.setUrisOnform(Arrays.asList("existingAward", "existingOrg"));
         conf.setLiteralsOnForm(Arrays.asList("description", "awardReceiptLabel", "awardLabel", "orgLabel", "yearAwardedDisplay", "orgLabelDisplay", "awardLabelDisplay" ));

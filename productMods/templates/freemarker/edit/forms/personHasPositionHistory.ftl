@@ -8,12 +8,22 @@
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 <#assign editMode = editConfiguration.pageData.editMode />
 
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 <#--Get existing value for specific data literals and uris-->
 <#assign orgTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgType")/>
+<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingOrg")/>
 <#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel")/>
+<#assign orgLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabelDisplay")/>
 <#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle")/>
 <#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType")/>
-<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org")/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -38,6 +48,9 @@
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#if orgLabelDisplayValue?has_content >
+        <#assign orgLabelValue = orgLabelDisplayValue />
+    </#if>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -106,9 +119,18 @@
   <p>
     <label for="relatedIndLabel">### Name ${requiredHint}</label>
     <input type="text" name="orgLabel" id="orgLabel" acGroupName="org" size="50" class="acSelector" value="${orgLabelValue}" >
+    <input class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
   </p>
-    <@lvf.acSelection urls.base "org" "org" "org" existingOrgValue /> 
-
+    <div class="acSelection" acGroupName="org">
+        <p class="inline">
+            <label>Selected Organization:</label>
+            <span class="acSelectionInfo"></span>
+            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+        </p>
+        <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${existingOrgValue}" ${flagClearLabelForExisting}="true" />
+    </div>
+    
     <label for="positionTitle">Position Title ${requiredHint}</label>
     <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
 
@@ -155,8 +177,10 @@ var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true',
     editMode: '${editMode}',
     defaultTypeName: 'organization', // used in repair mode, to generate button text and org name field label
-    baseHref: '${urls.base}/individual?uri='
-};
+    baseHref: '${urls.base}/individual?uri=',
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
+    };
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}

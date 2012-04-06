@@ -15,6 +15,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisio
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.OrganizationHasPositionValidator;
 
 public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		implements EditConfigurationGenerator {
@@ -115,11 +116,33 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 			+ "\n" //
 			+ "?position a core:Position , ?positionType ; \n"
 			+ "    rdfs:label ?positionTitle ; \n"
-			+ "    core:positionInOrganization ?organization ; \n"
-			+ "    core:positionForPerson ?person . \n" //
-			+ "\n" //
-			+ "?person core:personInPosition ?position ;"
-			+ "     rdfs:label ?personLabel";
+			+ "    core:positionInOrganization ?organization ; ";
+
+    private static final String N3_NEW_PERSON = ""
+			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
+			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
+			+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
+    		+ "\n" //
+    		+ "?position core:positionForPerson ?person . \n" //
+    		+ "?person core:personInPosition ?position . \n"
+    		+ "?person a foaf:Person . \n"
+    		+ "?person rdfs:label ?personLabel";
+
+    private static final String N3_NEW_FIRST_NAME = ""
+    		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
+    		+ "\n" //
+        	+ "?person foaf:firstName ?firstName .";
+
+    private static final String N3_NEW_LAST_NAME = ""
+    		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
+    		+ "\n" //
+        	+ "?person foaf:lastName ?lastName .";
+
+    private static final String N3_EXISTING_PERSON = ""
+			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
+    		+ "\n" //
+        	+ "?position core:positionForPerson ?existingPerson . \n" //
+        	+ "?existingPerson core:personInPosition ?position . ";
 
 	private static final String N3_NEW_START_NODE = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
@@ -161,7 +184,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.setTemplate("organizationHasPositionHistory.ftl");
 
 		conf.setN3Required(Arrays.asList(N3_NEW_POSITION));
-		conf.setN3Optional(Arrays.asList(N3_NEW_START_NODE, N3_NEW_END_NODE));
+		conf.setN3Optional(Arrays.asList(N3_NEW_PERSON, N3_EXISTING_PERSON, N3_NEW_START_NODE, N3_NEW_END_NODE, N3_NEW_FIRST_NAME, N3_NEW_LAST_NAME));
 
 		conf.addNewResource("position", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("person", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -169,7 +192,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 		conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
 
-		conf.setUrisOnform(Arrays.asList("person", "position", "positionType"));
+		conf.setUrisOnform(Arrays.asList("existingPerson", "position", "positionType"));
 		conf.addSparqlForExistingUris("positionType",
 				QUERY_EXISTING_POSITION_TYPE);
 		conf.addSparqlForExistingUris("person", QUERY_EXISTING_PERSON);
@@ -179,12 +202,13 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addSparqlForExistingUris("startNode", QUERY_EXISTING_START_NODE);
 		conf.addSparqlForExistingUris("endNode", QUERY_EXISTING_END_NODE);
 
-		conf.setLiteralsOnForm(Arrays.asList("positionTitle", "personLabel"));
+		conf.setLiteralsOnForm(Arrays.asList("positionTitle", "personLabelDisplay", "personLabel", "firstName", "lastName"));
 		conf.addSparqlForExistingLiteral("positionTitle",
 				QUERY_EXISTING_POSITION_TITLE);
 		conf.addSparqlForExistingLiteral("personLabel",
 				QUERY_EXISTING_PERSON_LABEL);
-
+		conf.addSparqlForExistingUris("existingPerson",
+				QUERY_EXISTING_PERSON);
 		conf.addSparqlForExistingLiteral("startField-value",
 				QUERY_EXISTING_START_VALUE);
 		conf.addSparqlForExistingUris("startField-precision",
@@ -205,13 +229,25 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 				.setRangeDatatypeUri(XSD.xstring.toString())
 				.setValidators(list("nonempty")));
 
-		conf.addField(new FieldVTwo().setName("person")
+		conf.addField(new FieldVTwo().setName("existingPerson")
 				.setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS)
 				.setObjectClassUri(personClass));
 
 		conf.addField(new FieldVTwo().setName("personLabel")
 				.setRangeDatatypeUri(XSD.xstring.toString())
-				.setValidators(list("nonempty")));
+				.setValidators( list("datatype:" + XSD.xstring.toString()) ));
+
+    	conf.addField(new FieldVTwo().setName("firstName")
+    			.setRangeDatatypeUri(XSD.xstring.toString())
+				.setValidators( list("datatype:" + XSD.xstring.toString()) ));
+
+    	conf.addField(new FieldVTwo().setName("lastName")
+    			.setRangeDatatypeUri(XSD.xstring.toString())
+				.setValidators( list("datatype:" + XSD.xstring.toString()) ));
+
+    	conf.addField(new FieldVTwo().setName("personLabelDisplay")
+    			.setRangeDatatypeUri(XSD.xstring.toString())
+    			.setValidators( list("datatype:" + XSD.xstring.toString()) ));
 
 		FieldVTwo startField = new FieldVTwo().setName("startField");
 		conf.addField(startField.setEditElement(new DateTimeWithPrecisionVTwo(
@@ -221,6 +257,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.addField(endField.setEditElement(new DateTimeWithPrecisionVTwo(
 				endField, URI_PRECISION_YEAR, URI_PRECISION_NONE)));
 
+        conf.addValidator(new OrganizationHasPositionValidator());
 		conf.addValidator(new AntiXssValidation());
 		conf.addValidator(new DateTimeIntervalValidationVTwo("startField",
 				"endField"));

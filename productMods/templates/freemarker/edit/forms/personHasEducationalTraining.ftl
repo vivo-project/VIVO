@@ -14,14 +14,27 @@
 <#assign editMode = editConfiguration.pageData.editMode />
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
+<#--The blank sentinel indicates what value should be put in a URI when no autocomplete result has been selected.
+If the blank value is non-null or non-empty, n3 editing for an existing object will remove the original relationship
+if nothing is selected for that object-->
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 <#--Retrieve variables needed-->
 <#assign orgTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgType")/>
 <#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel") />
+<#assign orgLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabelDisplay") />
 <#assign deptValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "dept") />
 <#assign infoValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "info") />
 <#assign majorFieldValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "majorField") />
 <#assign degreeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "degree") />
-<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org") />
+<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingOrg") />
 <#assign trainingTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "trainingType")/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
@@ -47,6 +60,9 @@
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#if orgLabelDisplayValue?has_content >
+        <#assign orgLabelValue = orgLabelDisplayValue />
+    </#if>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -121,9 +137,18 @@
     <p>
         <label for="relatedIndLabel">### Name ${requiredHint}</label>
         <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="orgLabel" acGroupName="org" value="${orgLabelValue}"  />
+        <input class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
     </p>
         
-    <@lvf.acSelection urls.base "org" "org" "org" existingOrgValue/>
+    <div class="acSelection" acGroupName="org">
+        <p class="inline">
+            <label>Selected Organization:</label>
+            <span class="acSelectionInfo"></span>
+            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+        </p>
+        <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${existingOrgValue}" ${flagClearLabelForExisting}="true" />
+    </div>
     
     <label for="positionType">Type of Educational Training ${requiredHint}</label>
     <#assign trainingTypeOpts = editConfiguration.pageData.trainingType />
@@ -157,7 +182,7 @@
           
     <p>    
         <label for="info">Supplemental Information 
-            <span class="hint">&nbsp;(e.g., Postdoctoral training or Transferred)</span>
+            <span class="hint">&nbsp;(e.g., Thesis title, Transfer info, etc.)</span>
         </label>
         <input  size="60"  type="text" id="info" name="info" value="${infoValue}" />
         
@@ -192,7 +217,9 @@ var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true&stem=true',
     editMode: '${editMode}',
     defaultTypeName: 'organization',
-    baseHref: '${urls.base}/individual?uri='
+    baseHref: '${urls.base}/individual?uri=',
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
 };
 </script>
 

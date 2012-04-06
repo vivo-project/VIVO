@@ -26,7 +26,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 
 <#--Retrieve variables needed-->
-<#assign presentationValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingPresentation") />
+<#assign existingPresentationValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingPresentation") />
 <#assign presentationLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentationLabel") />
 <#assign presentationLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentationLabelDisplay") />
 <#assign presentationTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "presentationType") />
@@ -132,7 +132,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
             <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
         </p>
-        <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${presentationValue}" ${flagClearLabelForExisting}="true" />
+        <input class="acUriReceiver" type="hidden" id="presentationUri" name="existingPresentation" value="${existingPresentationValue}" ${flagClearLabelForExisting}="true" />
     </div>
     <p><label for="roleLabel">Role in ### ${requiredHint} <span class="hint">(e.g., Moderator, Speaker, Panelist)</span></label>
         <input  size="50"  type="text" id="roleLabel" name="roleLabel" value="${roleLabelValue}" />

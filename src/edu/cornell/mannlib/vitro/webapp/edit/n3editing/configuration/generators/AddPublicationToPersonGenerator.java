@@ -153,6 +153,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                     getN3ForConference(),
                     getN3ForEvent(),
                     getN3ForEditor(),
+                    getN3FirstNameAssertion(),
+                    getN3LastNameAssertion(),
                     getN3ForPublisher(),
                     getN3ForLocaleAssertion(),
                     getN3ForVolumeAssertion(),
@@ -271,6 +273,16 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?pubUri vivo:editor ?editorUri . \n" +
         "?editorUri vivo:editorOf ?pubUri . "; 
+    }
+
+    private String getN3FirstNameAssertion() {
+        return "@prefix foaf: <" + foaf + "> .  \n" +
+        "?newEditor foaf:firstName ?firstName .";
+    }
+
+    private String getN3LastNameAssertion() {
+        return "@prefix foaf: <" + foaf + "> .  \n" +
+        "?newEditor foaf:lastName ?lastName .";
     }
 
     private String getN3ForNewPublisher() {
