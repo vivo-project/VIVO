@@ -67,6 +67,7 @@
 		<patternset id="appbase.patterns">
 			<include name="src/**/*" />
 			<include name="lib/**/*" />
+			<include name="bundles/framework/*" />
 			<include name="test/**/*" />
 			<include name="themes/**/*" />
 			<include name="config/*.properties" />
