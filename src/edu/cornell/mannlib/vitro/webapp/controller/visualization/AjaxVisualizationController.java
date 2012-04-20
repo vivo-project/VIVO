@@ -24,7 +24,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.Tem
 import edu.cornell.mannlib.vitro.webapp.visualization.exceptions.MalformedQueryParametersException;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.UtilityFunctions;
 import edu.cornell.mannlib.vitro.webapp.visualization.visutils.VisualizationRequestHandler;
-import freemarker.template.Configuration;
 
 /**
  * Services a visualization request. This will return a simple error message and a 501 if
@@ -74,10 +73,9 @@ public class AjaxVisualizationController extends FreemarkerHttpServlet {
 		
 		if (ajaxResponse instanceof TemplateResponseValues) {
 			
-			Configuration config = getConfig(vreq);
 			TemplateResponseValues trv = (TemplateResponseValues) ajaxResponse;
 			try {
-                writeTemplate(trv.getTemplateName(), trv.getMap(), config, request, response);
+                writeTemplate(trv.getTemplateName(), trv.getMap(), vreq, response);
             } catch (TemplateProcessingException e) {
                 log.error(e.getMessage(), e);
             }
