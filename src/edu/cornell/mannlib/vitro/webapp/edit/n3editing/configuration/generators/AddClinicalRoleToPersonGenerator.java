@@ -5,6 +5,8 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 import java.util.HashMap;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 		
@@ -21,24 +23,14 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 		return "http://vivoweb.org/ontology/core#ClinicalRole";
 	}
 	
-	@Override
-	RoleActivityOptionTypes getRoleActivityTypeOptionsType() {
-		return RoleActivityOptionTypes.HARDCODED_LITERALS;
-	}
-		
-	@Override
-	String getRoleActivityTypeObjectClassUri(VitroRequest vreq) {
-		return null; //not needed since the options are hard coded
-	}
-	
-	//Clinical role involves hard-coded options for the "right side" of the role or activity
-	@Override
-	HashMap<String, String> getRoleActivityTypeLiteralOptions() {
-		HashMap<String, String> literalOptions = new HashMap<String, String>();
-		literalOptions.put("", "Select one");
-		literalOptions.put("http://vivoweb.org/ontology/core#Project", "Project");
-		literalOptions.put("http://vivoweb.org/ontology/core#Service","Service");
-		return literalOptions;
+	/** Clinical role involves hard-coded options for the "right side" of the role or activity. */
+    @Override
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {        
+		return new ConstantFieldOptions(
+		        "",  "Select one", 
+		        "http://vivoweb.org/ontology/core#Project", "Project", 
+		        "http://vivoweb.org/ontology/core#Service", "Service"
+		);		
 	}
 
 	//isShowRoleLabelField remains true for this so doesn't need to be overwritten
@@ -46,5 +38,7 @@ public class AddClinicalRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
 	boolean isShowRoleLabelField(){
 	    return true;
 	}
+
+
     
 }

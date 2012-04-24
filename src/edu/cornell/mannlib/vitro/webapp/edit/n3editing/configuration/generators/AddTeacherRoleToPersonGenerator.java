@@ -2,9 +2,9 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.HashMap;
-
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddTeacherRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 	
@@ -20,26 +20,16 @@ public class AddTeacherRoleToPersonGenerator extends AddRoleToPersonTwoStageGene
 		return "http://vivoweb.org/ontology/core#TeacherRole";
 	}
 	
-	@Override	
-	RoleActivityOptionTypes getRoleActivityTypeOptionsType() {
-		return RoleActivityOptionTypes.HARDCODED_LITERALS;
-	}
 	
+	/** Teacher role involves hard-coded options for the "right side" 
+	 * of the role or activity. */
 	@Override
-	String getRoleActivityTypeObjectClassUri(VitroRequest vreq) {
-		return null;
-	}
-	
-
-	//Teacher role involves hard-coded options for the "right side" of the role or activity
-	@Override
-	HashMap<String, String> getRoleActivityTypeLiteralOptions() {
-		HashMap<String, String> literalOptions = new HashMap<String, String>();
-		literalOptions.put("", "Select one");
-		literalOptions.put("http://purl.org/ontology/bibo/Conference", "Conference");
-		literalOptions.put("http://vivoweb.org/ontology/core#Course","Course");
-		literalOptions.put("http://purl.org/ontology/bibo/Workshop","Workshop");
-		return literalOptions;
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+		return new ConstantFieldOptions(
+          "", "Select one",
+          "http://purl.org/ontology/bibo/Conference", "Conference", 
+          "http://vivoweb.org/ontology/core#Course",  "Course",
+          "http://purl.org/ontology/bibo/Workshop",   "Workshop");		
 	}
 
 	@Override

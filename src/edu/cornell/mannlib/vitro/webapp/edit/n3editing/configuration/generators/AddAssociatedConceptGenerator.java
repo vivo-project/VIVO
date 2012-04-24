@@ -30,7 +30,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
@@ -270,9 +270,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptNode").
-				setValidators(list("nonempty")).
-				setOptionsType("UNDEFINED"));
-		
+				setValidators(list("nonempty")));		
 	}
 
 

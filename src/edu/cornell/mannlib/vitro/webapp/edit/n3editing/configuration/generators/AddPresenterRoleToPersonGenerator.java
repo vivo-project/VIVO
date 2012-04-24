@@ -2,27 +2,22 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -48,7 +43,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
         
@@ -100,8 +95,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         
         conf.addField( new FieldVTwo().
                 setName("existingPresentation").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri(presentationClass)
+                setOptions(new IndividualsViaVClassOptions(presentationClass))                
                 );
 
         conf.addField( new FieldVTwo().                        
@@ -118,9 +112,9 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         
         conf.addField( new FieldVTwo().
                 setName("presentationType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
-                setObjectClassUri(presentationClass).
-                setValidators( list("nonempty") )
+                setValidators( list("nonempty") ).
+                setOptions( new ChildVClassesOptions(
+                        presentationClass))                                
                 );
  
         conf.addField( new FieldVTwo().                        
@@ -131,8 +125,7 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
 
         conf.addField( new FieldVTwo().
                 setName("existingConference").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri(conferenceClass)
+                setOptions(new IndividualsViaVClassOptions(conferenceClass))
                 );
         
         conf.addField( new FieldVTwo().

@@ -2,14 +2,14 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.HashMap;
-
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaClassGroupOptions;
 
 public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 	
 	private static String template = "addMemberRoleToPerson.ftl";
-	
+	private static String VCLASS_GROUP_URI = "http://vivoweb.org/ontology#vitroClassGrouporganizations";
 	@Override
 	String getTemplate() {
 		return template;
@@ -20,26 +20,12 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 		return "http://vivoweb.org/ontology/core#MemberRole";
 	}
 	
-	@Override
-	RoleActivityOptionTypes getRoleActivityTypeOptionsType() {
-		return RoleActivityOptionTypes.VCLASSGROUP;
+    @Override
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {     
+        return new IndividualsViaClassGroupOptions(VCLASS_GROUP_URI)
+            .setDefaultOptionLabel( "Select one");		
 	}
 	
 	@Override
-	public String getRoleActivityTypeObjectClassUri(VitroRequest vreq) {
-	    //this is needed since the OptionTypes is VCLASSGROUP
-		return "http://vivoweb.org/ontology#vitroClassGrouporganizations";
-	}
-	
-
-	@Override
-	HashMap<String, String> getRoleActivityTypeLiteralOptions() {
-		HashMap<String, String> literalOptions = new HashMap<String, String>();
-		literalOptions.put("", "Select type");
-		return literalOptions;
-	}
-
-	@Override
-	boolean isShowRoleLabelField(){return true;}
-    
+	boolean isShowRoleLabelField(){return true;}    
 }

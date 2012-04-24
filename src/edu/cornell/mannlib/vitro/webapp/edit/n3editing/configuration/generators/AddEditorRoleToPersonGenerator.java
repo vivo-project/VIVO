@@ -39,8 +39,10 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTw
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.SelectListGeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
 import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
@@ -75,6 +77,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.
  */
 public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 	private static String TEMPLATE = "addEditorRoleToPerson.ftl";
+	private static String OPTION_CLASS_URI = "http://purl.org/ontology/bibo/Collection";
 	
 	@Override
 	String getTemplate(){ return TEMPLATE; }
@@ -83,26 +86,16 @@ public class AddEditorRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 	String getRoleType() {
 		return "http://vivoweb.org/ontology/core#EditorRole";
 	}
-	
-	@Override
-	public RoleActivityOptionTypes getRoleActivityTypeOptionsType() {
-		return RoleActivityOptionTypes.CHILD_VCLASSES;
-	}
-	
-	@Override
-	public String getRoleActivityTypeObjectClassUri(VitroRequest vreq) {
-		return "http://purl.org/ontology/bibo/Collection";
-	}
-	
-	//Editor role involves hard-coded options for the "right side" of the role or activity
-	@Override
-	protected HashMap<String, String> getRoleActivityTypeLiteralOptions() {
-		HashMap<String, String> literalOptions = new HashMap<String, String>();
-		literalOptions.put("", "Select type");
-		return literalOptions;
-	}
 
+    @Override
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+        return new 
+        ChildVClassesOptions(OPTION_CLASS_URI)
+            .setDefaultOptionLabel("Select type");
+    }
+    
 	/** Do not show the role label field for the AddEditorRoleToPerson form */
 	@Override	
 	boolean isShowRoleLabelField() { return false;	}
+
 }

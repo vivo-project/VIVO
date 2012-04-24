@@ -2,28 +2,24 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasAdviseesValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasAdviseesValidator;
 
 public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -50,7 +46,7 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
         
@@ -108,9 +104,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         
         conf.addField( new FieldVTwo().                        
                 setName("advisingRelType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
-                setObjectClassUri(advisingRelClass).
-                setValidators( list("nonempty") )
+                setValidators( list("nonempty") ).
+                setOptions( new ChildVClassesWithParent(advisingRelClass))
                 );
 
         conf.addField( new FieldVTwo().
@@ -133,9 +128,9 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
 
         conf.addField( new FieldVTwo().
                 setName("existingSubjArea").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( subjAreaClass )
-                );
+                setOptions(
+                        new IndividualsViaVClassOptions(subjAreaClass))
+                );             
 
         conf.addField( new FieldVTwo().
                 setName("subjAreaLabel").
@@ -145,15 +140,15 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
 
         conf.addField( new FieldVTwo().
                 setName("degree").
-                setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
-                setObjectClassUri( degreeClass )
+                setOptions( 
+                        new IndividualsViaVClassOptions(degreeClass))
                 );
 
         conf.addField( new FieldVTwo().
                 setName("existingAdvisee").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( adviseeClass ) 
-                );
+                setOptions( 
+                        new IndividualsViaVClassOptions(adviseeClass))
+        );                
 
         conf.addField( new FieldVTwo().
                 setName("adviseeLabel").

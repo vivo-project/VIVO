@@ -13,7 +13,9 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary.Precision;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.OrganizationHasPositionValidator;
 
@@ -170,7 +172,7 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
 	@Override
 	public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-			HttpSession session) {
+			HttpSession session) throws Exception {
 		EditConfigurationVTwo conf = new EditConfigurationVTwo();
 
 		initBasics(conf, vreq);
@@ -220,18 +222,18 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 
 		conf.addField(new FieldVTwo()
 				.setName("positionType")
-				.setOptionsType(
-						FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT)
-				.setObjectClassUri(URI_POSITION_CLASS)
-				.setValidators(list("nonempty")));
+				.setValidators(list("nonempty"))
+				.setOptions( 
+				        new ChildVClassesWithParent(URI_POSITION_CLASS))
+				);
 
 		conf.addField(new FieldVTwo().setName("positionTitle")
 				.setRangeDatatypeUri(XSD.xstring.toString())
 				.setValidators(list("nonempty")));
 
 		conf.addField(new FieldVTwo().setName("existingPerson")
-				.setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS)
-				.setObjectClassUri(personClass));
+		        .setOptions( 
+		                new IndividualsViaVClassOptions(personClass)));
 
 		conf.addField(new FieldVTwo().setName("personLabel")
 				.setRangeDatatypeUri(XSD.xstring.toString())

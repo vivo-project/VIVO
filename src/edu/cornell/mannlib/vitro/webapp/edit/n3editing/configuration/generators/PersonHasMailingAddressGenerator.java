@@ -2,25 +2,19 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 
 public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -40,7 +34,7 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
    
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
         
@@ -80,58 +74,50 @@ public class PersonHasMailingAddressGenerator extends VivoBaseGenerator implemen
         
     conf.addField( new FieldVTwo().                        
             setName("country").
-            setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
-            setObjectClassUri( countryClass ) .
-            setValidators( list("nonempty") )
-            );
+            setValidators( list("nonempty") ).
+            setOptions( 
+                    new IndividualsViaVClassOptions(
+                            countryClass)));
 
         conf.addField( new FieldVTwo().                        
                 setName("addrLineOne")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ));
         
         conf.addField( new FieldVTwo().                        
                 setName("addrLineTwo")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
-                );
+                setValidators( list("datatype:" + XSD.xstring.toString()) ));
 
         conf.addField( new FieldVTwo().                        
                 setName("addrLineThree")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
-                );
+                setValidators( list("datatype:" + XSD.xstring.toString()) ));
 
         conf.addField( new FieldVTwo().                        
                 setName("postalCode")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ));
 
         conf.addField( new FieldVTwo().                        
                 setName("city")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ) );
 
         conf.addField( new FieldVTwo().                        
                 setName("state")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
-                );
+                setValidators( list("datatype:" + XSD.xstring.toString()) ) );
 
         conf.addField( new FieldVTwo().                        
                 setName("addrLabel")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
-                );
+                setValidators( list("datatype:" + XSD.xstring.toString()) ) );
 
         conf.addField( new FieldVTwo().
                 setName("addressType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri(addressClass)
-                );
+                setOptions(new ChildVClassesOptions(
+                                addressClass)) );
 
         conf.addValidator(new AntiXssValidation());
         

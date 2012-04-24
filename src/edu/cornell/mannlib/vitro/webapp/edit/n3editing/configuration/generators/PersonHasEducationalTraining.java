@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -16,11 +15,13 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 /**
     Form for adding an educational attainment to an individual
@@ -73,7 +74,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInput
 public class PersonHasEducationalTraining  extends VivoBaseGenerator implements EditConfigurationGenerator{            
 
     //TODO: can we get rid of the session and get it form the vreq?
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
  
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
                 
@@ -126,8 +127,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                         
         conf.addField( new FieldVTwo().                        
                 setName("degree").
-                setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
-                setObjectClassUri( degreeClass ));
+                setOptions( new IndividualsViaVClassOptions(
+                        degreeClass)));
 
         conf.addField( new FieldVTwo().
                 setName("majorField").
@@ -136,9 +137,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         
         conf.addField( new FieldVTwo().
                 setName("existingOrg").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( orgClass ));
-                //setLiteralOptions( [ "Select One" } )
+                setOptions( new IndividualsViaVClassOptions(
+                        orgClass)));        
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
@@ -151,17 +151,15 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 
         conf.addField( new FieldVTwo().
                 setName("orgType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri( orgClass ).
-                setValidators( list("nonempty")));
-                //setLiteralOptions( [ "Select one" ] )
+                setValidators( list("nonempty")).
+                setOptions( new ChildVClassesOptions(
+                        orgClass)));
                 
         conf.addField( new FieldVTwo().
                 setName("trainingType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
-                setObjectClassUri(trainingClass).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ).
+                setOptions( 
+                        new ChildVClassesWithParent(trainingClass)));
 
         conf.addField( new FieldVTwo().
                 setName("dept").

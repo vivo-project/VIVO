@@ -2,27 +2,21 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -50,7 +44,7 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
         
@@ -117,15 +111,15 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
         conf.addField( new FieldVTwo().
                 setName("existingOrg").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( orgClass )
-                );
+                setOptions( new IndividualsViaVClassOptions(
+                                orgClass))
+        );
 
         conf.addField( new FieldVTwo().
                 setName("existingAward").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( awardClass ) 
-                );
+                setOptions( new IndividualsViaVClassOptions(
+                        awardClass))
+        );        
 
         conf.addField( new FieldVTwo().
                 setName("awardReceiptLabel").

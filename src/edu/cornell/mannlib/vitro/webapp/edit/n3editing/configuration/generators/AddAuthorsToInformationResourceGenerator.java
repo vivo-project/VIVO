@@ -23,7 +23,7 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PublicationHasAuthorValid
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 
 /**
@@ -272,8 +272,8 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 
 	private void setPersonUriField(EditConfigurationVTwo editConfiguration) {
 		editConfiguration.addField(new FieldVTwo().
-				setName("personUri").
-				setObjectClassUri(personClass)
+				setName("personUri")
+				//.setObjectClassUri(personClass)
 				);
 		
 	}

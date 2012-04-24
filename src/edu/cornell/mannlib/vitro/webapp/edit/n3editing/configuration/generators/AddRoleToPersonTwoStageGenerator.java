@@ -3,11 +3,9 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +14,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.vivoweb.webapp.util.ModelUtils;
 
-import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
@@ -26,16 +23,20 @@ import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaClassGroupOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 /**
  * Generates the edit configuration for adding a Role to a Person.  
   
@@ -94,30 +95,39 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	/** URI of type for the role context node */ 
     abstract String getRoleType();
     
+    /** return the java object that generates the role activity field options for 
+     * the subclass. 
+     * @throws Exception */
+    abstract FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception;
+    
     /** In the case of literal options, subclass generator will set the options to be returned */
-    abstract HashMap<String, String> getRoleActivityTypeLiteralOptions();
+    //not needed any more since the FieldOption can be returned
+    //abstract HashMap<String, String> getRoleActivityTypeLiteralOptions();
     
     /**
      * Each subclass generator will return its own type of option here:    
      * whether literal hardcoded, based on class group, or subclasses of a specific class
      * The latter two will apparently lend some kind of uri to objectClassUri ? */
-    abstract RoleActivityOptionTypes getRoleActivityTypeOptionsType();
+    //not needed any more since the FieldOption can be returned
+    //abstract RoleActivityOptionTypes getRoleActivityTypeOptionsType();
     
     /** The URI of a Class to use with options if required. An option type like
      * CHILD_VCLASSES would reqire a role activity object class URI. */
-    abstract String getRoleActivityTypeObjectClassUri(VitroRequest vreq);
+    //not needed any more since the FieldOption can be returned
+    //abstract String getRoleActivityTypeObjectClassUri(VitroRequest vreq);
     
     /** If true an input should be shown on the form for a 
      * label for the role context node 
      * TODO: move this to the FTL and have label optional. */
     abstract boolean isShowRoleLabelField();
     
-    /** URI of predicate between role context node and activity */
+    /** URI of predicate between role context node and activity 
+     * @throws Exception */
     //Bdc34: not used anywhere? that's odd
-//    abstract String getActivityToRolePredicate();            
+    //abstract String getActivityToRolePredicate();            
 		
     @Override
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {    	
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {    	
         EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();    	    	
     	initProcessParameters(vreq, session, editConfiguration);
     	
@@ -294,8 +304,9 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	editConfiguration.setLiteralsOnForm(literalsOnForm);
     }    
     
-    /** Set SPARQL Queries and supporting methods. */        
-    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {        
+    /** Set SPARQL Queries and supporting methods. 
+     * @throws Exception */        
+    private void setSparqlQueries(EditConfigurationVTwo editConfiguration, VitroRequest vreq) throws Exception {        
         //Queries for activity label, role label, start Field value, end Field value
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("activityLabel", getActivityLabelQuery(vreq));
@@ -392,7 +403,55 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 		return query;
 	}
 
+	/**
+	 * Utility method for subclasses to make a query for type from a ConstantFieldOptions object.
+	 * @throws Exception 
+	 */
+	protected String getActivityTypeQueryForConstantOptions(VitroRequest vreq, ConstantFieldOptions  fieldOptions )
+	throws Exception{
+	            
+        //make list of type URIs from options, this can be called with null since 
+	    //ConstantFieldOptions doesn't use any of the arguments. 
+	    Map<String,String> options = fieldOptions.getOptions(null, null, null) ;
+	    
+        if (options != null && options.size() > 0) {                           
+            List<String> typeUris = new ArrayList<String>();                       
+            for(String typeUri: options.keySet()) {
+                if(typeUri != null && !typeUri.isEmpty()) {
+                    typeUris.add("(?existingActivityType = <" + typeUri + ">)");
+                }
+            }    
+            
+            String defaultActivityTypeQuery = getDefaultActivityTypeQuery(vreq);
+            String typeFilters = "FILTER (" + StringUtils.join(typeUris, "||") + ")";
+            return defaultActivityTypeQuery.replaceAll("}$", "") + typeFilters + "}";                
+        } else { 
+            return getDefaultActivityTypeQuery(vreq);      
+        }         
+	}
 	
+	/**
+     * Utility method for subclasses to make a query for type from a ChildVClassesOptions object.
+     * @throws Exception 
+     */
+	protected String getActivityTypeQueryForChildVClassOptions(VitroRequest vreq, ChildVClassesOptions opts){
+	    log.debug("objectClassUri = " + opts.getClassUri());
+        return QueryUtils.subUriForQueryVar(
+                getSubclassActivityTypeQuery(vreq), 
+                "objectClassUri", opts.getClassUri());         
+	}
+	
+	/**
+     * Utility method for subclasses to make a query for type from a IndividualsViaClassGroupOptions object.
+     * @throws Exception 
+     */
+    protected String getActivityTypeQueryForIndividualsViaClassGroupOptions(VitroRequest vreq, IndividualsViaClassGroupOptions opts){
+        log.debug("ClassGroupUri = " + opts.getClassGroupUri());
+        return QueryUtils.subUriForQueryVar(
+                getClassgroupActivityTypeQuery(vreq), 
+                "classgroup", opts.getClassGroupUri());         
+    }
+    
 	/*
 	 * The activity type query results must be limited to the values in the activity type select element. 
 	 * Sometimes the query returns a superclass such as owl:Thing instead.
@@ -402,71 +461,36 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	 * is in the select list.
 	 * We could still have problems if the value from the select list is not a vitro:mostSpecificType, 
 	 * but that is unlikely.
+	 * 
 	 */
-	//This method had some code already setup in the jsp file
-	private String getActivityTypeQuery(VitroRequest vreq) {
-		String activityTypeQuery = null;
+	private String getActivityTypeQuery(VitroRequest vreq) throws Exception {		
 
-		//roleActivityType_optionsType: This gets you whether this is a literal
-		//
-		RoleActivityOptionTypes optionsType = getRoleActivityTypeOptionsType();
-
-	    // Note that this value is overloaded to specify either object class uri or classgroup uri
-	    String objectClassUri = getRoleActivityTypeObjectClassUri(vreq);
+	    String activityTypeQuery = null;
 	    
-	    if (StringUtils.isNotBlank(objectClassUri)) { 
-	        log.debug("objectClassUri = " + objectClassUri);
-	        
-			if (RoleActivityOptionTypes.VCLASSGROUP.equals(optionsType)) {
-			    activityTypeQuery = getClassgroupActivityTypeQuery(vreq);
-			    activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "classgroup", objectClassUri);    	
-			    
-			} else if (RoleActivityOptionTypes.CHILD_VCLASSES.equals(optionsType)) { 
-			    activityTypeQuery = getSubclassActivityTypeQuery(vreq);
-			    activityTypeQuery = QueryUtils.subUriForQueryVar(activityTypeQuery, "objectClassUri", objectClassUri); 
-			    
-			} else {
-			    activityTypeQuery = getDefaultActivityTypeQuery(vreq);  
-			}
-			
-		// Select options are hardcoded
-		} else if (RoleActivityOptionTypes.HARDCODED_LITERALS.equals(optionsType)) { 	    
-		  
-			//literal options
-	        HashMap<String, String> typeLiteralOptions = getRoleActivityTypeLiteralOptions();
-	        if (typeLiteralOptions.size() > 0) {           
-	            try {
-	                List<String> typeUris = new ArrayList<String>();
-	                Set<String> optionUris = typeLiteralOptions.keySet();
-	                for(String uri: optionUris) {
-	                	if(!uri.isEmpty()) {
-	                		typeUris.add("(?existingActivityType = <" + uri + ">)");
-	                	}
-	                }
-	                String typeFilters = "FILTER (" + StringUtils.join(typeUris, "||") + ")";
-	                String defaultActivityTypeQuery = getDefaultActivityTypeQuery(vreq);
-	                activityTypeQuery = defaultActivityTypeQuery.replaceAll("}$", "") + typeFilters + "}";
-	            } catch (Exception e) {
-	                activityTypeQuery = getDefaultActivityTypeQuery(vreq);
-	            }
-
-		    } else { 
-		        activityTypeQuery = getDefaultActivityTypeQuery(vreq);	    
-		    } 
-
-		} else {
-		    activityTypeQuery = getDefaultActivityTypeQuery(vreq);   
-		}
+		FieldOptions fieldOpts = getRoleActivityFieldOptions(vreq);		
+		try{
+		    if( fieldOpts == null ){
+		        activityTypeQuery = getDefaultActivityTypeQuery(vreq);
+		    }if( fieldOpts instanceof ConstantFieldOptions ){
+		        activityTypeQuery = getActivityTypeQueryForConstantOptions(vreq, (ConstantFieldOptions)fieldOpts);                // 
+    		}else if (fieldOpts instanceof ChildVClassesOptions ){
+    		    activityTypeQuery = getActivityTypeQueryForChildVClassOptions(vreq, (ChildVClassesOptions)fieldOpts);
+    		}else if( fieldOpts instanceof IndividualsViaClassGroupOptions){
+    		    activityTypeQuery = getActivityTypeQueryForIndividualsViaClassGroupOptions(vreq, (IndividualsViaClassGroupOptions)fieldOpts);    
+    		}
+		}catch(Exception ex){
+		    log.debug("error while building activity type query",ex);
+		}		
+		activityTypeQuery = getDefaultActivityTypeQuery(vreq);
 
 	    //The replacement of activity type query's predicate was only relevant when we actually
 	    //know which predicate is definitely being used here
 	    //Here we have multiple values possible for predicate so the original 
-	    //Replacement should only happen when we have an actual predicate
-	    
-		String replaceRoleToActivityPredicate = getRoleToActivityPredicate(vreq);
+	    //Replacement should only happen when we have an actual predicate	    
+		//String replaceRoleToActivityPredicate = getRoleToActivityPredicate(vreq);
 		activityTypeQuery = QueryUtils.replaceQueryVar(activityTypeQuery, "predicate", getRoleToActivityPlaceholderName());
-		log.debug("Activity type query: " + activityTypeQuery);
 		
+		log.debug("Activity type query: " + activityTypeQuery);		
 	    return activityTypeQuery;
 	}
 
@@ -513,9 +537,6 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 		//of both realizedIn and the other
 		String query =  "PREFIX core: <" + VIVO_NS + ">"; 
 		
-		//Portion below for multiple possible predicates
-		List<String> predicates = getPossibleRoleToActivityPredicates();
-		List<String> addToQuery = new ArrayList<String>();
 		query += "SELECT ?existingRoleActivity WHERE { \n" + 
 		" ?role ?predicate ?existingRoleActivity . \n ";	
 		query += getFilterRoleToActivityPredicate("predicate");
@@ -565,9 +586,10 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	/**
 	 * 
 	 * Set Fields and supporting methods
+	 * @throws Exception 
 	 */
 	
-	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
+	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) throws Exception {
     	Map<String, FieldVTwo> fields = new HashMap<String, FieldVTwo>();
     	//Multiple fields
     	getActivityLabelField(editConfiguration, vreq, fields);
@@ -588,54 +610,31 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	private void getActivityToRolePredicateField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq,
 			Map<String, FieldVTwo> fields) {
-		String fieldName = "activityToRolePredicate";
-		//get range data type uri and range language
-		String stringDatatypeUri = XSD.xstring.toString();
-		
+						
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);    	
-    	//queryForExisting is not being used anywhere in Field
+		
+		String fieldName = "activityToRolePredicate";
+    	field.setName(fieldName);    	  
     	
-    	//Not really interested in validators here
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
+    	//get range data type uri and range language
+        String stringDatatypeUri = XSD.xstring.toString();
+    	field.setRangeDatatypeUri( stringDatatypeUri );
     	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());    	
     	fields.put(field.getName(), field);			
 	}
 
 	private void getRoleToActivityPredicateField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq,
 			Map<String, FieldVTwo> fields) {
-		String fieldName = "roleToActivityPredicate";
-		//get range data type uri and range language
-		String stringDatatypeUri = XSD.xstring.toString();
-		
+						
 		FieldVTwo field = new FieldVTwo();
+		
+		String fieldName = "roleToActivityPredicate";
     	field.setName(fieldName);    	
-    	//queryForExisting is not being used anywhere in Field
     	
-    	//Not really interested in validators here
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());    	
+    	//get range data type uri and range language
+        String stringDatatypeUri = XSD.xstring.toString();
+        field.setRangeDatatypeUri(stringDatatypeUri);
     
     	fields.put(field.getName(), field);			
 	}
@@ -643,50 +642,32 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	//Label of "right side" of role, i.e. label for role roleIn Activity
 	private void getActivityLabelField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
-		String fieldName = "activityLabel";
-		//get range data type uri and range language
-		String stringDatatypeUri = XSD.xstring.toString();
-		
+				
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);    	
-    	//queryForExisting is not being used anywhere in Field    	
+		String fieldName = "activityLabel";
+    	field.setName(fieldName);    	    	    
     	
+    	//get range data type uri and range language
+        String stringDatatypeUri = XSD.xstring.toString();   
+        field.setRangeDatatypeUri(stringDatatypeUri);
+        
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(stringDatatypeUri);
-    	    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	    	
+    	field.setValidators(validators);    	        
+    	    	    	    	
     	fields.put(field.getName(), field);	
 	}
 	
 	private void getActivityLabelDisplayField(EditConfigurationVTwo editConfiguration,
-			VitroRequest vreq, Map<String, FieldVTwo> fields) {
-		String fieldName = "activityLabelDisplay";
-		//get range data type uri and range language
-		String stringDatatypeUri = XSD.xstring.toString();
-		
+			VitroRequest vreq, Map<String, FieldVTwo> fields) {				
 		FieldVTwo field = new FieldVTwo();
+		
+		String fieldName = "activityLabelDisplay";
     	field.setName(fieldName);    	
-    	//queryForExisting is not being used anywhere in Field    	
-    	    	
-    	//subjectUri and subjectClassUri are not being used in Field
     	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
+    	//get range data type uri and range language
+        String stringDatatypeUri = XSD.xstring.toString();        
     	field.setRangeDatatypeUri(stringDatatypeUri);
-    	    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
     	    	
     	fields.put(field.getName(), field);	
 	}
@@ -694,7 +675,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	//type of "right side" of role, i.e. type of activity from role roleIn activity
 	private void getRoleActivityTypeField(
 			EditConfigurationVTwo editConfiguration, VitroRequest vreq,
-			Map<String, FieldVTwo> fields) {
+			Map<String, FieldVTwo> fields) throws Exception {
 		String fieldName = "roleActivityType";
 		//get range data type uri and range language
 		
@@ -707,104 +688,66 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	}
     	field.setValidators(validators);
     	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	//TODO: Check if this is correct
-    	field.setOptionsType(getRoleActivityTypeOptionsType().toString());
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(getRoleActivityTypeObjectClassUri(vreq));
-    	field.setRangeDatatypeUri(null);
+    	field.setOptions( getRoleActivityFieldOptions(vreq) );
     	
-    	
-    	HashMap<String, String> literalOptionsMap = getRoleActivityTypeLiteralOptions();
-    	List<List<String>> fieldLiteralOptions = new ArrayList<List<String>>();
-    	Set<String> optionUris = literalOptionsMap.keySet();
-    	for(String optionUri: optionUris) {
-    		List<String> uriLabelArray = new ArrayList<String>();
-    		uriLabelArray.add(optionUri);
-    		uriLabelArray.add(literalOptionsMap.get(optionUri));
-    		fieldLiteralOptions.add(uriLabelArray);
-    	}
-    	field.setLiteralOptions(fieldLiteralOptions);
+//    	field.setOptionsType(getRoleActivityTypeOptionsType().toString());    	
+//    	field.setObjectClassUri(getRoleActivityTypeObjectClassUri(vreq));    	    	
+//    	
+//    	HashMap<String, String> literalOptionsMap = getRoleActivityTypeLiteralOptions();
+//    	List<List<String>> fieldLiteralOptions = new ArrayList<List<String>>();
+//    	Set<String> optionUris = literalOptionsMap.keySet();
+//    	for(String optionUri: optionUris) {
+//    		List<String> uriLabelArray = new ArrayList<String>();
+//    		uriLabelArray.add(optionUri);
+//    		uriLabelArray.add(literalOptionsMap.get(optionUri));
+//    		fieldLiteralOptions.add(uriLabelArray);
+//    	}
+//    	field.setLiteralOptions(fieldLiteralOptions);
     	
     	fields.put(field.getName(), field);
 		
 	}    
 	
-	//Assuming URI for activity for role?
+
+
+    //Assuming URI for activity for role?
 	private void getExistingRoleActivityField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
 		String fieldName = "existingRoleActivity";
-		//get range data type uri and range language
 		
 		FieldVTwo field = new FieldVTwo();
     	field.setName(fieldName);    	
-    	
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
+    	    	       	
     	fields.put(field.getName(), field);	
 	}
 	
 	private void getRoleLabelField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
 		String fieldName = "roleLabel";
-		String stringDatatypeUri = XSD.xstring.toString();
-
+		
 		FieldVTwo field = new FieldVTwo();
     	field.setName(fieldName);  
     	
+    	String stringDatatypeUri = XSD.xstring.toString();
+        field.setRangeDatatypeUri(stringDatatypeUri);
+
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
     	if(isShowRoleLabelField()) {
     		validators.add("nonempty");
     	}
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(stringDatatypeUri);
-    	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());
+    	field.setValidators(validators);    	    	    	    	
     	    	
     	fields.put(field.getName(), field);		
 	}	
 
 	private void getStartField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
-		String fieldName = "startField";
-
-		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);    	    
-    	
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	    	
-    	//This logic was originally after edit configuration object created from json in original jsp
+	    FieldVTwo field = new FieldVTwo();
+	    
+		String fieldName = "startField";		
+    	field.setName(fieldName);    	        	
+    	    	    	    	
     	field.setEditElement(
                 new DateTimeWithPrecisionVTwo(field, 
                         VitroVocabulary.Precision.YEAR.uri(),
@@ -815,25 +758,11 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 
 	private void getEndField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
-		String fieldName = "endField";
-
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);    	
-    	
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
-    	//Set edit element
+		
+	    String fieldName = "endField";   
+    	field.setName(fieldName);    	    	    	
+
     	 field.setEditElement(
                  new DateTimeWithPrecisionVTwo(field, 
                          VitroVocabulary.Precision.YEAR.uri(),

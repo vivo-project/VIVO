@@ -13,21 +13,21 @@ import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
+import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.PersonHasPublicationValidator;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
+import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
+import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
+
 
 /**
  * On an add/new, this will show a form, on an edit/update this will skip to the
@@ -55,7 +55,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     public AddPublicationToPersonGenerator() {}
     
 	@Override
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
      
      if( EditConfigurationUtils.getObjectUri(vreq) == null ){
          return doAddNew(vreq,session);
@@ -83,7 +83,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
 
     protected EditConfigurationVTwo doAddNew(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
         initBasics(editConfiguration, vreq);
         initPropertyParameters(vreq, session, editConfiguration);
@@ -417,9 +417,10 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     /**
      * 
      * Set Fields and supporting methods
+     * @throws Exception 
      */
 
-    private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+    private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq) throws Exception {
         setTitleField(editConfiguration);
         setPubTypeField(editConfiguration);
         setPubUriField(editConfiguration);
@@ -460,18 +461,19 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                 setRangeDatatypeUri(stringDatatypeUri));
     }
 
-    private void setPubTypeField(EditConfigurationVTwo editConfiguration) {
+    private void setPubTypeField(EditConfigurationVTwo editConfiguration) throws Exception {
         editConfiguration.addField(new FieldVTwo().
                 setName("pubType").
-                setOptionsType("HARDCODED_LITERALS").
-                setLiteralOptions(getPublicationTypeLiteralOptions()).
-                setValidators( list("nonempty") ));
+                setValidators( list("nonempty") ).
+                setOptions( new ConstantFieldOptions("pubType", getPublicationTypeLiteralOptions() ))                                
+                );
     }
 
     private void setPubUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("pubUri").
-                setObjectClassUri(personClass));			
+                setName("pubUri"));
+                //Bdc34: What is this for? I'm sure that this will break autocomplete
+                //setObjectClassUri(personClass));			
     }
 
     private void setCollectionLabelField(EditConfigurationVTwo editConfiguration) {
@@ -492,8 +494,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private void setCollectionUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("collectionUri").
-                setObjectClassUri(collectionClass));			
+                setName("collectionUri"));
+        //Bdc34: What is this for? I'm sure that commenting this out will break autocomplete
+                //setObjectClassUri(collectionClass));			
     }
     
     private void setBookLabelField(EditConfigurationVTwo editConfiguration) {
@@ -514,8 +517,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private void setBookUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("bookUri").
-                setObjectClassUri(bookClass));			
+                setName("bookUri"));
+         //Bdc34: What is this for? I'm sure that commenting this out will break autocomplete
+                //setObjectClassUri(bookClass));			
     }
     
     private void setConferenceLabelField(EditConfigurationVTwo editConfiguration) {
@@ -536,8 +540,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private void setConferenceUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("conferenceUri").
-                setObjectClassUri(conferenceClass));			
+                setName("conferenceUri"));
+                //Bdc34: What is this for? I'm sure that commenting this out will break autocomplete
+                //setObjectClassUri(conferenceClass));			
     }
     
     private void setEventLabelField(EditConfigurationVTwo editConfiguration) {
@@ -574,8 +579,8 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     }
     private void setEventUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("eventUri").
-                setObjectClassUri(conferenceClass));			
+                setName("eventUri"));
+                //setObjectClassUri(conferenceClass));			
     }
     
     private void setEditorLabelField(EditConfigurationVTwo editConfiguration) {
@@ -596,8 +601,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private void setEditorUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("editorUri").
-                setObjectClassUri(editorClass));			
+                setName("editorUri"));
+                //Bdc34: What is this for? I'm sure that commenting this out will break autocomplete
+        //setObjectClassUri(editorClass));			
     }
     
     private void setPublisherLabelField(EditConfigurationVTwo editConfiguration) {
@@ -618,8 +624,9 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
 
     private void setPublisherUriField(EditConfigurationVTwo editConfiguration) {
         editConfiguration.addField(new FieldVTwo().
-                setName("publisherUri").
-                setObjectClassUri(publisherClass));			
+                setName("publisherUri"));
+            //Bdc34: What is this for? I'm sure that commenting this out will break autocomplete
+                //setObjectClassUri(publisherClass));			
     }
     
     private void setLocaleField(EditConfigurationVTwo editConfiguration) {

@@ -45,8 +45,8 @@ import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocesso
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.SelectListGeneratorVTwo;
 import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
 import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
@@ -280,9 +280,7 @@ public class AddUserDefinedConceptGenerator  extends VivoBaseGenerator implement
 	private void setConceptNodeField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
-				setName("conceptNode").
-				setOptionsType("UNDEFINED"));
-		
+				setName("conceptNode"));		
 	}
 
 

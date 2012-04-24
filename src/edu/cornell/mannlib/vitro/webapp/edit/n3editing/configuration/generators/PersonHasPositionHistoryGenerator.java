@@ -9,19 +9,21 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator implements
         EditConfigurationGenerator {
@@ -57,7 +59,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
         
@@ -110,38 +112,33 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         conf.addField( new FieldVTwo().                        
                 setName("positionTitle")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ) );
         
         conf.addField( new FieldVTwo().
                 setName("positionType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
-                setObjectClassUri(positionClass).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ). 
+                setOptions( 
+                        new ChildVClassesWithParent(positionClass)));
  
         conf.addField( new FieldVTwo().
                 setName("existingOrg").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri(orgClass)
-                );
+                setOptions( 
+                        new IndividualsViaVClassOptions(
+                                orgClass)));
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("datatype:" + XSD.xstring.toString()) )
-                );
+                setValidators( list("datatype:" + XSD.xstring.toString()) ) );
 
         conf.addField( new FieldVTwo().
                 setName("orgLabelDisplay").
-                setRangeDatatypeUri(XSD.xstring.toString() )
-                );
+                setRangeDatatypeUri(XSD.xstring.toString() ) );
         
         conf.addField( new FieldVTwo().
                 setName("orgType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri(orgClass)
-                );
+                setOptions( 
+                        new ChildVClassesOptions(orgClass)));
         
         conf.addField( new FieldVTwo().setName("startField").
                 setEditElement( 

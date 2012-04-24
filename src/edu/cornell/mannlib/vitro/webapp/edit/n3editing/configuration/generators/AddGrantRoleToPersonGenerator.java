@@ -20,21 +20,18 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 
 /**
  *  Custom form for adding a grant to an person for the predicates hasCo-PrincipalInvestigatorRole
@@ -470,17 +467,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	//queryForExisting is not being used anywhere in Field
     	
     	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(getGrantType());
-    	field.setRangeDatatypeUri(null);
-    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
+    	field.setValidators(validators);    	    	    
     	
     	fields.put(field.getName(), field);	
 		
@@ -499,17 +486,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	//Not really interested in validators here
     	List<String> validators = new ArrayList<String>();
     	validators.add("datatype:" + stringDatatypeUri);
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
+    	field.setValidators(validators);    	    	
 
     	fields.put(field.getName(), field);	
 		
@@ -517,23 +494,14 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	
 	private void getGrantLabelDisplayField(EditConfigurationVTwo editConfiguration,
 			VitroRequest vreq, Map<String, FieldVTwo> fields) {
-		String fieldName = "grantLabelDisplay";
-		//get range data type uri and range language
-		String stringDatatypeUri = XSD.xstring.toString();
-		
-		FieldVTwo field = new FieldVTwo();
+	    
+	    FieldVTwo field = new FieldVTwo();
+	    
+		String fieldName = "grantLabelDisplay";					
     	field.setName(fieldName);
-    	//queryForExisting is not being used anywhere in Field
-    	    	
-    	//subjectUri and subjectClassUri are not being used in Field
     	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	
-    	field.setLiteralOptions(new ArrayList<List<String>>());
+    	String stringDatatypeUri = XSD.xstring.toString();
+    	field.setRangeDatatypeUri(null);    	
 
     	fields.put(field.getName(), field);	
 		
@@ -548,19 +516,6 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	field.setName(fieldName);    	
     	//queryForExisting is not being used anywhere in Field
     	
-    	//Not really interested in validators here
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
     	fields.put(field.getName(), field);	
 	}
 
@@ -569,21 +524,8 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 		String fieldName = "startField";
 
 		FieldVTwo field = new FieldVTwo();
-    	field.setName(fieldName);    	    
-    	
-    	List<String> validators = new ArrayList<String>();
-    	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());    	
-    	
+    	field.setName(fieldName);    	        	
+   
     	//This logic was originally after edit configuration object created from json in original jsp
     	field.setEditElement(
                 new DateTimeWithPrecisionVTwo(field, 
@@ -603,17 +545,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
     	
     	List<String> validators = new ArrayList<String>();
     	field.setValidators(validators);
-    	
-    	//subjectUri and subjectClassUri are not being used in Field
-    	
-    	field.setOptionsType("UNDEFINED");
-    	//why isn't predicate uri set for data properties?
-    	field.setPredicateUri(null);
-    	field.setObjectClassUri(null);
-    	field.setRangeDatatypeUri(null);
-    	//empty
-    	field.setLiteralOptions(new ArrayList<List<String>>());
-    	
+
     	//Set edit element
     	 field.setEditElement(
                  new DateTimeWithPrecisionVTwo(field, 
