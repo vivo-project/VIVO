@@ -117,7 +117,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                 <input class="display" type="hidden" acGroupName="person" id="personDisplay" name="personLabelDisplay" value="${personLabelDisplayValue}" >
 	    </p>
 	
-	    <div class="acSelection" acGroupName="person">
+	    <div class="acSelection" id="personAcSelection" acGroupName="person">
 	        <p class="inline">
 	            <label>Selected Person:</label>
 	            <span class="acSelectionInfo"></span>
