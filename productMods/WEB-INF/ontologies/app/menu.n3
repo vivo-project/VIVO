@@ -79,7 +79,6 @@ display:People
     a display:Page ;    
     a display:ClassGroupPage;
     display:forClassGroup vivoweb:vitroClassGrouppeople ;
-    display:requiresBodyTemplate "menupage--classgroup-people.ftl" ;
     display:title "People" ;
     display:urlMapping "/people" ;
    	display:hasDataGetter display:peopleDataGetter .
