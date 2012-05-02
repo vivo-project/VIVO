@@ -2,7 +2,6 @@
 
 package edu.cornell.mannlib.vitro.webapp.utils.dataGetter;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,12 +9,9 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONObject;
 
-import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -29,18 +25,10 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
-import edu.cornell.mannlib.vitro.webapp.beans.Individual;
-import edu.cornell.mannlib.vitro.webapp.beans.VClass;
-import edu.cornell.mannlib.vitro.webapp.beans.VClassGroup;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.PageDao;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache;
-import edu.cornell.mannlib.vitro.webapp.web.templatemodels.VClassGroupTemplateModel;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
-import  edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter;
 
 /**
  * This will pass these variables to the template:
@@ -53,8 +41,8 @@ public class InternalClassesDataGetter extends IndividualsForClassesDataGetter{
     /**
      * Constructor with display model and data getter URI that will be called by reflection.
      */
-    public InternalClassesDataGetter(Model displayModel, String dataGetterURI){
-        super(displayModel, dataGetterURI);
+    public InternalClassesDataGetter(VitroRequest vreq, Model displayModel, String dataGetterURI){
+        super(vreq, displayModel, dataGetterURI);
     }   
     
     
