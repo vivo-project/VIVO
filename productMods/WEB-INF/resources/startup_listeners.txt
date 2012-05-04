@@ -7,18 +7,22 @@
 
 edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSetup
 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.BasicSmokeTests
+edu.cornell.mannlib.vitro.webapp.config.ConfigurationPropertiesSmokeTests
 
 edu.cornell.mannlib.vitro.webapp.config.RevisionInfoSetup
 
 edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
 
-# Comment out this listener to run Vitro without a database
-# If used, this listener must be run before JenaDataSourceSetup
+### this listener must be run before SDBSetup, all models setups and WebappDaoSetup ###
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
+ 
+edu.cornell.mannlib.vitro.webapp.servlet.setup.SDBSetup
 
-# This listener is required in order to use a Jena triple store (currently the only option)
-edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaDataSourceSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ApplicationModelSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.UserModelSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.ModelSetup
+
+edu.cornell.mannlib.vitro.webapp.servlet.setup.WebappDaoSDBSetup
 
 edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
 
