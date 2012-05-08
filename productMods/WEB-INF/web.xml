@@ -635,11 +635,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>AllClassGroupsListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.AllClassGroupsListingController</servlet-class>
+    <servlet-name>ListClassGroupsController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListClassGroupsController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AllClassGroupsListingController</servlet-name>
+    <servlet-name>ListClassGroupsController</servlet-name>
     <url-pattern>/listGroups</url-pattern>
   </servlet-mapping>
 
@@ -779,11 +779,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>VClassWebappsListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.VClassWebappsListingController</servlet-class>
+    <servlet-name>ListVClassWebappsController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListVClassWebappsController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>VClassWebappsListingController</servlet-name>
+    <servlet-name>ListVClassWebappsController</servlet-name>
     <url-pattern>/listVClassWebapps</url-pattern>
   </servlet-mapping>
 
@@ -798,11 +798,11 @@
 
 
   <servlet>
-    <servlet-name>ClassHierarchyListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.ClassHierarchyListingController</servlet-class>
+    <servlet-name>ShowClassHierarchyController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ShowClassHierarchyController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ClassHierarchyListingController</servlet-name>
+    <servlet-name>ShowClassHierarchyController</servlet-name>
     <url-pattern>/showClassHierarchy</url-pattern>
   </servlet-mapping>
 

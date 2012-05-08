@@ -1618,3 +1618,22 @@ input.add-account:active {
     padding:7px 94px 45px 0;
     margin-top:-120px; 
 }
+/* ------------------------------------------------->  */
+/* CLASS HIERARCHY  -------------------------------->  */
+/* ------------------------------------------------->  */
+span.headerSpanPlus {
+    width: 12px;
+    background: url(../images/green_plus_sign.gif) left center no-repeat;
+}
+span.headerSpanMinus {
+    width: 12px;
+    background: url(../images/green_minus_sign.gif) left center no-repeat;
+}
+span.subclassExpandPlus {
+    padding-right: 14px;
+    background: url(../images/green_plus_sign.gif) left center no-repeat;
+}
+span.subclassExpandMinus {
+    padding-right: 14px;
+    background: url(../images/green_minus_sign.gif) left center no-repeat;
+}
