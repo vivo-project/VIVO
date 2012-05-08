@@ -1,0 +1,1177 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo:     <http://aims.fao.org/aos/geopolitical.owl#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcelem:  <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+
+geo:hasCoordinate
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:territory ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> .
+
+geo:nameShortFR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:disputed
+      a       owl:Class ;
+      rdfs:subClassOf geo:territory .
+
+geo:area
+      a       owl:Class ;
+      rdfs:subClassOf owl:Thing ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortFR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListFR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeGAUL
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialIT
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:validUntil
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:validSince
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortES
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeISO3
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialAR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListES
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeFAOTERM
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeDBPediaID
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortIT
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListZH
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeFAOSTAT
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeUN
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialRU
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListRU
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeAGROVOC
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListEN
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortRU
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialES
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListIT
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortZH
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeUNDP
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortAR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialZH
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeISO2
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialFR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameListAR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameOfficialEN
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameShortEN
+              ] .
+
+geo:agriculturalAreaNotes
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:agriculturalArea .
+
+geo:nameListZH
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameListES
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeFAOTERM
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameListAR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeCurrency
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:populationYear
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> ;
+      rdfs:subPropertyOf geo:population .
+
+dcterms:source
+      a       owl:AnnotationProperty .
+
+geo:nationalityES
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:sourceModified
+      a       owl:AnnotationProperty .
+
+geo:nameOfficialRU
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:economic_region
+      a       owl:Class ;
+      rdfs:subClassOf geo:group .
+
+geo:codeUNDP
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode .
+
+geo:non_self_governing
+      a       owl:Class ;
+      rdfs:subClassOf geo:territory ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:minCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:isAdministeredBy
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:allValuesFrom geo:self_governing ;
+                owl:onProperty geo:isAdministeredBy
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:isAdministeredBy
+              ] ;
+      geo:sourceCreator "UN Cartographic Section, Department of Field Support"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.un.org/Depts/Cartographic/map/profile/world00.pdf"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2010-05-01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "UN Cartographic Section, Department of Field Support http://www.un.org/Depts/Cartographic/map/profile/world00.pdf"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameShortES
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:HDIUnit
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:HDI .
+
+geo:isPredecessorOf
+      a       owl:TransitiveProperty , owl:ObjectProperty ;
+      rdfs:domain geo:area ;
+      rdfs:range geo:area ;
+      geo:sourceCreator "United Nations Statistics Division"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://unstats.un.org/unsd/methods/m49/m49chgef.htm"@fr , "http://unstats.un.org/unsd/methods/m49/m49chang.htm"@en ;
+      geo:sourceModified "2010-04-15"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49chang.htm"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      owl:inverseOf geo:isSuccessorOf .
+
+geo:GDPTotalInCurrentPrices
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> ;
+      rdfs:subPropertyOf geo:GDP .
+
+geo:hasMaxLatitude
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCoordinate .
+
+geo:hasStatistics
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:territory .
+
+geo:other
+      a       owl:Class ;
+      rdfs:subClassOf geo:territory .
+
+geo:hasCurrency
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:territory ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+geo:GDP
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasStatistics ;
+      geo:sourceCreator "World Bank"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "ttp://datos.bancomundial.org/indicador/NY.GDP.MKTP.CD"@es , "http://donnees.banquemondiale.org/indicateur/NY.GDP.MKTP.CD"@fr , "http://data.worldbank.org/indicator/NY.GDP.MKTP.CD"@en , "http://data.worldbank.org/indicator/NY.GDP.MKTP.CD"^^<http://www.w3.org/2001/XMLSchema#string> , "http://data.albankaldawli.org/indicator/NY.GDP.MKTP.CD"@ar ;
+      geo:sourceModified "2010-12-16"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:description "GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in current U.S. dollars. Dollar figures for GDP are converted from domestic currencies using single year official exchange rates. For a few countries where the official exchange rate does not reflect the rate effectively applied to actual foreign exchange transactions, an alternative conversion factor is used. Source: World Bank national accounts data, and OECD National Accounts data files. http://data.worldbank.org/indicator/NY.GDP.MKTP.CD"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "World Bank http://data.worldbank.org/indicator/NY.GDP.MKTP.CD"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:landArea
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasStatistics ;
+      geo:sourceCreator "FAOSTAT"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=es#ancor"@es , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=fr#ancor"@fr , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"@en ;
+      geo:sourceModified "2011-07-21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:description "Land area is the total area of the country excluding area under inland water bodies. Possible variations in the data may be due to updating and revisions of the country data and not necessarily to any change of area. Data are expressed in 1 000 hectares. http://faostat.fao.org/site/375/default.aspx "^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAOSTAT http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameListIT
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:countryAreaNotes
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:countryArea .
+
+geo:populationUnit
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:population .
+
+geo:nameCurrencyRU
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+dcterms:description
+      a       owl:AnnotationProperty .
+
+geo:hasBorderWith
+      a       owl:ObjectProperty , owl:SymmetricProperty ;
+      rdfs:domain geo:territory ;
+      rdfs:range geo:territory ;
+      geo:sourceCreator "United Nations cartographic maps"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.un.org/Depts/Cartographic/map/profile/world00.pdf"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2010-05-01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations cartographic maps http://www.un.org/Depts/Cartographic/map/profile/world00.pdf"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      owl:inverseOf geo:hasBorderWith .
+
+geo:landAreaUnit
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:landArea .
+
+<http://aims.fao.org/aos/geopolitical.owl>
+      a       owl:Ontology ;
+      rdfs:comment " prior version : \" http://aims.fao.org/aos/geopolitical_v10.owl\"   "^^<http://www.w3.org/2001/XMLSchema#string> , "The use of the information presented on the FAO Country Profiles portal is governed by FAO's copyright reservation. Any queries regarding the content, sources or use, please contact FAO-country-profiles@fao.org or visit http://www.fao.org/countryprofiles. "^^<http://www.w3.org/2001/XMLSchema#string> , "FAO DISCLAIMER:  Information on the FAO Country Profiles portal is provided as and when available. The designations employed and the presentation of information do not imply the expression of any opinion whatsoever on the part of the Food and Agriculture Organization of the United Nations (FAO) concerning the legal status of any country, territory, city or area, or of its authorities, or concerning the delimitation of its frontiers or boundaries. FAO makes every effort to ensure, but does not guarantee, the accuracy or completeness of and declines responsibility for any loss, damage, liability or expense suffered which is claimed to result from its use. "^^<http://www.w3.org/2001/XMLSchema#string> , """Version 1.1 of the ontology includes a structured description of sources (source creator, source identifier by language, and last updated date on source) . 
+   """^^<http://www.w3.org/2001/XMLSchema#string> , "FAO's geopolitical ontology version 1.1 was populated with FAO, UN and internationally recognized data sources.    "^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:modified "2011-08-11"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      owl:versionInfo "version 1.1"@en .
+
+geo:nationalityAR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameCurrencyEN
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameOfficialAR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:validSince
+      a       owl:DatatypeProperty ;
+      rdfs:comment "The value of the datatype property *validSince* associated to a particular area (territory or group) indicates the area's  first year of validity.  The geopolitical ontology traces back historic changes only until 1985, therefore, if an area has a validSince = 1985, this indicates that the area is/was valid since 1985 or before.       "^^<http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:domain geo:area ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> .
+
+geo:isInGroup
+      a       owl:ObjectProperty ;
+      rdfs:domain geo:territory ;
+      rdfs:range geo:group ;
+      owl:inverseOf geo:hasMember .
+
+geo:nameListEN
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:hasCode
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:area ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameListFR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:organization
+      a       owl:Class ;
+      rdfs:subClassOf geo:group .
+
+geo:countryAreaYear
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> ;
+      rdfs:subPropertyOf geo:countryArea .
+
+geo:hasShortName
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:area ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeGAUL
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "Global Administrative Unit Layers"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/geonetwork/srv/en/metadata.show?id=12691"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2008-12-10"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "Global Administrative Unit Layers http://www.fao.org/geonetwork/srv/en/metadata.show?id=12691"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameListRU
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasListName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:HDI
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasStatistics ;
+      geo:sourceCreator "UNDP - HDRO"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://hdrstats.undp.org/en/indicators/49806.html"^^<http://www.w3.org/2001/XMLSchema#string> , "http://hdrstats.undp.org/en/indicators/49806.html"@en , "http://hdrstats.undp.org/es/indicadores/49806.html"@es , "http://hdrstats.undp.org/fr/indicateurs/49806.html"@fr ;
+      geo:sourceModified "2010-11-04"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:description " composite index measuring average achievement in three basic dimensions of human development—a long and healthy life, knowledge and a decent standard of living. Source: Calculated based on data from UNDESA (2009d), Barro and Lee (2010), UNESCO Institute for Statistics (2010b), World Bank (2010b) and IMF(2010a) . http://hdrstats.undp.org/en/indicators/49806.html"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "UNDP - HDRO http://hdrstats.undp.org/en/indicators/49806.html"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:populationNotes
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:population .
+
+geo:HDINotes
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:HDI .
+
+geo:hasMinLongitude
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCoordinate .
+
+geo:nameShortAR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:validUntil
+      a       owl:DatatypeProperty ;
+      rdfs:comment """The value of the datatype property *validUntil* associated to a particular area (territory or group) indicates the area's last year of validity. In case the area is currently valid, this value is set by default to 9999.
+      """^^<http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:domain geo:area ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> .
+
+geo:hasMember
+      a       owl:ObjectProperty ;
+      rdfs:domain geo:group ;
+      rdfs:range geo:territory ;
+      owl:inverseOf geo:isInGroup .
+
+geo:hasMinLatitude
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCoordinate .
+
+geo:GDPYear
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> ;
+      rdfs:subPropertyOf geo:GDP .
+
+geo:agriculturalAreaYear
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> ;
+      rdfs:subPropertyOf geo:agriculturalArea .
+
+geo:nameOfficialEN
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:territory
+      a       owl:Class ;
+      rdfs:subClassOf geo:area ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameCurrencyES
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:landAreaYear
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:countryAreaNotes
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:hasMaxLongitude
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:agriculturalAreaTotal
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:landAreaNotes
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityRU
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityZH
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:populationTotal
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:populationNotes
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityEN
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameCurrencyRU
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:GDPTotalInCurrentPrices
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:landAreaUnit
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameCurrencyZH
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameCurrencyEN
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:landAreaTotal
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:hasMaxLatitude
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameCurrencyIT
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nameCurrencyFR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:HDIYear
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:codeCurrency
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:agriculturalAreaUnit
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityIT
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:HDIUnit
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:agriculturalAreaYear
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityFR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:GDPYear
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:countryAreaUnit
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:HDINotes
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:countryAreaYear
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:hasMinLongitude
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:hasMinLatitude
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:countryAreaTotal
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:GDPNotes
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:populationYear
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:populationUnit
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:agriculturalAreaNotes
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:HDITotal
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityES
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:nationalityAR
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:maxCardinality "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+                owl:onProperty geo:GDPUnit
+              ] .
+
+geo:agriculturalArea
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasStatistics ;
+      geo:sourceCreator "FAOSTAT"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=es#ancor"@es , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=fr#ancor"@fr , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"@en , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2010-07-21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:description "Agricultural area, this category is the sum of areas under a) arable land - land under temporary agricultural crops (multiple-cropped areas are counted only once), temporary meadows for mowing or pasture, land under market and kitchen gardens and land temporarily fallow (less than five years). The abandoned land resulting from shifting cultivation is not included in this category. Data for “Arable land” are not meant to indicate the amount of land that is potentially cultivable; (b) permanent crops - land cultivated with long-term crops which do not have to be replanted for several years (such as cocoa and coffee); land under trees and shrubs producing flowers, such as roses and jasmine; and nurseries (except those for forest trees, which should be classified under \"forest\"); and (c) permanent meadows and pastures - land used permanently (five years or more) to grow herbaceous forage crops, either cultivated or growing wild (wild prairie or grazing land). Data are expressed in 1000 hectares. http://faostat.fao.org/site/375/default.aspx "^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAOSTAT http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameCurrencyAR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:HDITotal
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> ;
+      rdfs:subPropertyOf geo:HDI .
+
+geo:nameOfficialZH
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:sourceCreator
+      a       owl:AnnotationProperty .
+
+geo:GDPNotes
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:GDP .
+
+geo:nationalityZH
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameOfficialES
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:populationTotal
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> ;
+      rdfs:subPropertyOf geo:population .
+
+geo:population
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasStatistics ;
+      geo:sourceCreator "FAOSTAT"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://faostat.fao.org/DesktopDefault.aspx?PageID=550&lang=fr#ancor"@fr , "http://faostat.fao.org/DesktopDefault.aspx?PageID=550&lang=es#ancor"@es , "http://faostat.fao.org/DesktopDefault.aspx?PageID=550&lang=en#ancor"@en , "http://faostat.fao.org/DesktopDefault.aspx?PageID=550&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2009-09-21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:description "The total population usually refers to the present-in-area (de facto) population which includes all persons physically present within the present geographical boundaries of countries at the mid-point of the reference period.  http://faostat.fao.org/site/375/default.aspx"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAOSTAT http://faostat.fao.org/site/550/default.aspx"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nationalityFR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameCurrencyZH
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameOfficialIT
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:landAreaYear
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> ;
+      rdfs:subPropertyOf geo:landArea .
+
+geo:nationalityIT
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:group
+      a       owl:Class ;
+      rdfs:subClassOf geo:area .
+
+geo:nameShortEN
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameCurrencyIT
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:hasListName
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:area ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+geo:agriculturalAreaTotal
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> ;
+      rdfs:subPropertyOf geo:agriculturalArea .
+
+geo:landAreaNotes
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:landArea .
+
+geo:hasMaxLongitude
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCoordinate .
+
+geo:nameShortRU
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nationalityEN
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeISO3
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "United Nations Statistics Division"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://unstats.un.org/unsd/methods/m49/m49alpha.htm"@en , "http://unstats.un.org/unsd/methods/m49/m49alphaf.htm"@fr ;
+      geo:sourceModified "2010-04-01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49alpha.htm"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:special_group
+      a       owl:Class ;
+      rdfs:subClassOf geo:group .
+
+geo:countryAreaUnit
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:countryArea .
+
+geo:hasOfficialName
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:area ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeDBPediaID
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "DBpedia"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://dbpedia.org/About"@en ;
+      geo:sourceModified "2010-04-28"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "DBpedia http://dbpedia.org/About"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:sourceIdentifier
+      a       owl:AnnotationProperty .
+
+geo:countryArea
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasStatistics ;
+      geo:sourceCreator "FAOSTAT"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=es#ancor"@es , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=fr#ancor"@fr , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"@en , "http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2011-07-21"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:description "Country area, area of the country including area under inland water bodies, but excluding offshore territorial waters. Possible variations in the data may be due to updating and revisions of the country data and not necessarily to any change of area. Data are expressed in 1000 hectares. http://faostat.fao.org/site/375/default.aspx "^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAOSTAT http://faostat.fao.org/DesktopDefault.aspx?PageID=377&lang=en#ancor"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameShortIT
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeFAOSTAT
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "FAOSTAT"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://faostat.fao.org"@en , "http://faostat.fao.org/default.aspx?lang=es"@es , "http://faostat.fao.org/default.aspx?lang=fr"@fr ;
+      dcterms:source "FAOSTAT http://faostat.fao.org"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameCurrencyFR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:GDPUnit
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:GDP .
+
+dcterms:modified
+      a       owl:AnnotationProperty .
+
+geo:codeAGROVOC
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "AGROVOC"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://aims.fao.org/ar/website/Search-AGROVOC/sub"@ar , "http://aims.fao.org/website/Search-AGROVOC/sub"@en , "http://aims.fao.org/fr/website/Search-AGROVOC/sub"@fr , "http://aims.fao.org/es/website/Search-AGROVOC/sub"@es , "http://aims.fao.org/zh-hans/website/Search-AGROVOC/sub"@zh ;
+      dcterms:source "AGROVOC http://aims.fao.org/website/Search-AGROVOC/sub"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:hasNationality
+      a       owl:DatatypeProperty ;
+      rdfs:domain geo:territory ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameShortZH
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasShortName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:isSuccessorOf
+      a       owl:TransitiveProperty , owl:ObjectProperty ;
+      rdfs:domain geo:area ;
+      rdfs:range geo:area ;
+      geo:sourceCreator "United Nations Statistics Division"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://unstats.un.org/unsd/methods/m49/m49chgef.htm"@fr , "http://unstats.un.org/unsd/methods/m49/m49chang.htm"@en ;
+      geo:sourceModified "2010-04-15"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49chang.htm"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      owl:inverseOf geo:isPredecessorOf .
+
+geo:nameCurrencyES
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCurrency ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:countryAreaTotal
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> ;
+      rdfs:subPropertyOf geo:countryArea .
+
+geo:agriculturalAreaUnit
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#string> ;
+      rdfs:subPropertyOf geo:agriculturalArea .
+
+geo:geographical_region
+      a       owl:Class ;
+      rdfs:subClassOf geo:group ;
+      geo:sourceCreator "United Nations statistics department"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://unstats.un.org/unsd/methods/m49/m49regnf.htm"@fr , "http://unstats.un.org/unsd/methods/m49/m49regin.htm"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceModified "2010-04-01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations statistics department http://unstats.un.org/unsd/methods/m49/m49regin.htm"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeISO2
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "ISO 3166-1"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "ISO 3166-1 http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nationalityRU
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasNationality ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:nameOfficialFR
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasOfficialName ;
+      geo:sourceCreator "FAO terminology"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.fao.org/termportal/contr/en/"@en , "http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> , "http://www.fao.org/termportal/contr/zh/"@zh , "http://www.fao.org/termportal/contr/es/"@es , "http://www.fao.org/termportal/contr/ar/"@ar , "http://www.fao.org/termportal/contr/fr/"@fr ;
+      geo:sourceModified "2010-06-24"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "FAO terminology http://www.fao.org/termportal/en/"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:HDIYear
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#int> ;
+      rdfs:subPropertyOf geo:HDI .
+
+geo:self_governing
+      a       owl:Class ;
+      rdfs:subClassOf geo:territory ;
+      geo:sourceCreator "United Nations Map Library"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.un.org/depts/dhl/maplib/countinfo.htm"@en ;
+      geo:sourceModified "2010-09-08"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations Map Library http://www.un.org/depts/dhl/maplib/countinfo.htm"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:codeUN
+      a       owl:DatatypeProperty ;
+      rdfs:subPropertyOf geo:hasCode ;
+      geo:sourceCreator "United Nations Statistics Division"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://unstats.un.org/unsd/methods/m49/m49alpha.htm"@en , "http://unstats.un.org/unsd/methods/m49/m49alphaf.htm"@fr ;
+      geo:sourceModified "2010-04-01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations Statistics Division http://unstats.un.org/unsd/methods/m49/m49alpha.htm"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+geo:landAreaTotal
+      a       owl:DatatypeProperty ;
+      rdfs:range <http://www.w3.org/2001/XMLSchema#float> ;
+      rdfs:subPropertyOf geo:landArea .
+
+geo:isAdministeredBy
+      a       owl:ObjectProperty ;
+      rdfs:domain geo:non_self_governing ;
+      rdfs:range geo:self_governing ;
+      geo:sourceCreator "United Nations cartographic maps"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      geo:sourceIdentifier
+              "http://www.un.org/Depts/Cartographic/map/profile/world00.pdf"@en ;
+      geo:sourceModified "2010-05-01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+      dcterms:source "United Nations cartographic maps http://www.un.org/Depts/Cartographic/map/profile/world00.pdf"^^<http://www.w3.org/2001/XMLSchema#string> .
