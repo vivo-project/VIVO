@@ -22,8 +22,6 @@ edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
 # This listener is required in order to use a Jena triple store (currently the only option)
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaDataSourceSetup
 
-edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
-
 edu.cornell.mannlib.vitro.webapp.web.images.PlaceholderUtil$Setup
 
 # Update the URIs on Permission Sets on UserAccounts from model (1.4) to 1.5.
@@ -69,6 +67,9 @@ org.apache.commons.fileupload.servlet.FileCleanerCleanup
 # The VClassGroupCache index uses a "public" permission, so the PropertyRestrictionPolicyHelper 
 #   and the PermissionRegistry must already be set up.
 edu.cornell.mannlib.vitro.webapp.dao.jena.VClassGroupCache$Setup
+
+# This should be near the end, to allow OSGi-based modules to initialize
+edu.cornell.mannlib.vitro.webapp.osgi.smoketests.OsgiModulesSmokeTest
 
 # This should be near the end, because it will issue a warning if the connection to Solr times out.
 edu.cornell.mannlib.vitro.webapp.servlet.setup.SolrSmokeTest

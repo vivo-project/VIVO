@@ -20,7 +20,6 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,7 +42,6 @@ import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ExceptionResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup;
 import edu.cornell.mannlib.vitro.webapp.filestorage.uploadrequest.FileUploadServletRequest;
 
 public class FileHarvestController extends FreemarkerHttpServlet {
@@ -65,8 +63,18 @@ public class FileHarvestController extends FreemarkerHttpServlet {
     private static final String MODE_CHECK_STATUS = "checkStatus";
     private static final String MODE_DOWNLOAD_TEMPLATE = "template";
 
+	/**
+	 * Use this key to ask ConfigurationProperties for the Vitro home directory.
+	 */
+	public static final String PROPERTY_VITRO_HOME_DIR = "vitro.home.directory";
 
-    /**
+	/**
+	 * This path leads from the Vitro home directory to the base directory of
+	 * the File Storage System.
+	 */
+	public static final String FILE_STORAGE_SUBDIRECTORY = "uploads";
+
+	/**
      * Stores information about the Harvester thread for a particular user session.
      */
     private Map<String, SessionInfo> sessionIdToSessionInfo = new Hashtable<String, SessionInfo>(); //Hashtable is threadsafe, HashMap is not
@@ -204,12 +212,12 @@ public class FileHarvestController extends FreemarkerHttpServlet {
      */
     private static String getUploadPathBase(ServletContext context) throws Exception
     {
-        String vitroHomeDirectoryName = ConfigurationProperties.getBean(context).getProperty(FileStorageSetup.PROPERTY_VITRO_HOME_DIR);
+        String vitroHomeDirectoryName = ConfigurationProperties.getBean(context).getProperty(PROPERTY_VITRO_HOME_DIR);
         if (vitroHomeDirectoryName == null) {
             throw new Exception("Vitro home directory name could not be found.");
         }
 
-        String pathBase = vitroHomeDirectoryName + "/" + FileStorageSetup.FILE_STORAGE_SUBDIRECTORY + "/" + PATH_TO_UPLOADS;
+        String pathBase = vitroHomeDirectoryName + "/" + FILE_STORAGE_SUBDIRECTORY + "/" + PATH_TO_UPLOADS;
         return pathBase;
     }
 
