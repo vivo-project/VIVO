@@ -4,12 +4,12 @@ package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaClassGroupOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
 
 public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 	
 	private static String template = "addMemberRoleToPerson.ftl";
-	private static String VCLASS_GROUP_URI = "http://vivoweb.org/ontology#vitroClassGrouporganizations";
+	private static String VCLASS_URI = "http://xmlns.com/foaf/0.1/Organization";
 	@Override
 	String getTemplate() {
 		return template;
@@ -22,7 +22,7 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 	
     @Override
     FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {     
-        return new IndividualsViaClassGroupOptions(VCLASS_GROUP_URI)
+        return new ChildVClassesOptions(VCLASS_URI)
             .setDefaultOptionLabel( "Select one");		
 	}
 	
