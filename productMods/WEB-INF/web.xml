@@ -129,6 +129,17 @@
     <dispatcher>request</dispatcher>
   </filter-mapping>
   
+   <filter>
+    <filter-name>OsgiHttpServiceFilter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.osgi.baseservices.httpservice.HttpServiceFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>OsgiHttpServiceFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>request</dispatcher>
+    <dispatcher>forward</dispatcher>
+  </filter-mapping>
+  
   <!--  Spring setup ****************************************************  -->
 <!--
   <context-param>
