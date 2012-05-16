@@ -154,7 +154,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	editConfiguration.setN3Optional( list(
     	        getN3ForNewRoleActivity(),
     	        getN3ForExistingRoleActivity(),
-    	        getN3ForActivityType(),                              
+//    	        getN3ForActivityType(),                              
     	        getN3RoleLabelAssertion(),
     	        getN3ForStart(),
     	        getN3ForEnd() ));	
@@ -206,26 +206,24 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	    List<String> n3ForNewRoleActivity = new ArrayList<String>();
         n3ForNewRoleActivity.add("?role " + getRoleToActivityPlaceholder() + " ?roleActivity .\n"+
         "?roleActivity " + getActivityToRolePlaceholder() + " ?role . \n" +
-        "?roleActivity <" + RDFS.label.getURI() + "> ?activityLabel .");
+        "?roleActivity <" + RDFS.label.getURI() + "> ?activityLabel . \n" +
+        "?roleActivity a ?roleActivityType .");
     	return n3ForNewRoleActivity;
     }
     
 	private List<String> getN3ForExistingRoleActivity() {
 	    List<String> n3ForExistingRoleActivity = new ArrayList<String>();
         n3ForExistingRoleActivity.add("?role " + getRoleToActivityPlaceholder() + " ?existingRoleActivity .\n"+
-        "?existingRoleActivity " + getActivityToRolePlaceholder() + " ?role . ");
+        "?existingRoleActivity " + getActivityToRolePlaceholder() + " ?role . \n" +
+        "?existingRoleActivity a ?roleActivityType .");
     	return n3ForExistingRoleActivity;
     }
     
-    private String getN3ForActivityType() {
-    	return "?roleActivity a ?roleActivityType .";
-    }
     
     private String getN3RoleLabelAssertion() {
     	return "?role <" + RDFS.label.getURI() + "> ?roleLabel .";
     }
 	
-	//Method b/c used in two locations, n3 optional and n3 assertions
 	private List<String> getN3ForStart() {
 		List<String> n3ForStart = new ArrayList<String>();
 		n3ForStart.add("?role  <" + RoleToIntervalURI + "> ?intervalNode ." +     

@@ -113,62 +113,51 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 	private static final String N3_NEW_POSITION = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
-			+ "\n" //
 			+ "?organization core:organizationForPosition ?position . \n"
-			+ "\n" //
-			+ "?position a core:Position , ?positionType ; \n"
-			+ "    rdfs:label ?positionTitle ; \n"
-			+ "    core:positionInOrganization ?organization ; ";
+			+ "?position a core:Position . \n" 
+			+ "?position a  ?positionType . \n"
+			+ "?position rdfs:label ?positionTitle . \n"
+			+ "?position core:positionInOrganization ?organization . ";
 
     private static final String N3_NEW_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
 			+ "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . \n"
 			+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-    		+ "\n" //
-    		+ "?position core:positionForPerson ?person . \n" //
+    		+ "?position core:positionForPerson ?person . \n" 
     		+ "?person core:personInPosition ?position . \n"
     		+ "?person a foaf:Person . \n"
-    		+ "?person rdfs:label ?personLabel";
+    		+ "?person rdfs:label ?personLabel . ";
 
     private static final String N3_NEW_FIRST_NAME = ""
     		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-    		+ "\n" //
         	+ "?person foaf:firstName ?firstName .";
 
     private static final String N3_NEW_LAST_NAME = ""
     		+ "@prefix foaf: <http://xmlns.com/foaf/0.1/> . \n"
-    		+ "\n" //
         	+ "?person foaf:lastName ?lastName .";
 
     private static final String N3_EXISTING_PERSON = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
-    		+ "\n" //
-        	+ "?position core:positionForPerson ?existingPerson . \n" //
-        	+ "?existingPerson core:personInPosition ?position . ";
+        	+ "?position core:positionForPerson ?existingPerson . \n" 
+        	+ "?existingPerson core:personInPosition ?position . \n";
 
 	private static final String N3_NEW_START_NODE = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
-			+ "\n" //
 			+ "?position core:dateTimeInterval ?intervalNode . \n"
-			+ "\n" //
-			+ "?intervalNode a core:DateTimeInterval ; \n"
-			+ "    core:start ?startNode . \n "
-			+ "\n" //
-			+ "?startNode a core:DateTimeValue ; \n"
-			+ "    core:dateTime ?startField-value ; \n"
-			+ "    core:dateTimePrecision ?startField-precision . ";
+			+ "?intervalNode a core:DateTimeInterval . \n"
+			+ "?intervalNode core:start ?startNode . \n "
+			+ "?startNode a core:DateTimeValue . \n"
+			+ "?startNode core:dateTime ?startField-value. \n"
+			+ "?startNode core:dateTimePrecision ?startField-precision . ";
 
 	private static final String N3_NEW_END_NODE = ""
 			+ "@prefix core: <http://vivoweb.org/ontology/core#> . \n"
-			+ "\n" //
 			+ "?position core:dateTimeInterval ?intervalNode . \n"
-			+ "\n" //
-			+ "?intervalNode a core:DateTimeInterval ; \n"
-			+ "    core:end ?endNode . \n "
-			+ "\n" //
-			+ "?endNode a core:DateTimeValue ; \n"
-			+ "    core:dateTime ?endField-value ; \n"
-			+ "    core:dateTimePrecision ?endField-precision . ";
+			+ "?intervalNode a core:DateTimeInterval . \n"
+			+ "?intervalNode core:end ?endNode . \n "
+			+ "?endNode a core:DateTimeValue . \n"
+			+ "?endNode core:dateTime ?endField-value . \n"
+			+ "?endNode core:dateTimePrecision ?endField-precision . ";
 
 	@Override
 	public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
@@ -197,8 +186,6 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 		conf.setUrisOnform(Arrays.asList("existingPerson", "position", "positionType"));
 		conf.addSparqlForExistingUris("positionType",
 				QUERY_EXISTING_POSITION_TYPE);
-		conf.addSparqlForExistingUris("person", QUERY_EXISTING_PERSON);
-
 		conf.addSparqlForExistingUris("intervalNode",
 				QUERY_EXISTING_INTERVAL_NODE);
 		conf.addSparqlForExistingUris("startNode", QUERY_EXISTING_START_NODE);

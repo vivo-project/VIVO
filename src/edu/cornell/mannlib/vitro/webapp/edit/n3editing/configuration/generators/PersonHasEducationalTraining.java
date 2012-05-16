@@ -90,7 +90,7 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 
         conf.setN3Required( Arrays.asList( n3ForNewEdTraining, trainingTypeAssertion ) );
         conf.setN3Optional(Arrays.asList( 
-                n3ForNewOrg, n3ForExistingOrg, orgTypeAssertion, majorFieldAssertion, degreeAssertion, 
+                n3ForNewOrg, n3ForExistingOrg, majorFieldAssertion, degreeAssertion, 
                 deptAssertion, infoAssertion, n3ForStart, n3ForEnd ));
         
         conf.addNewResource("edTraining", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -210,15 +210,14 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
 
     final static String n3ForNewOrg  =      
         "?edTraining <"+ trainingAtOrg +"> ?newOrg . \n" +
-        "?newOrg ?inverseTrainingAtOrg ?edTraining .\n" +
-        "?newOrg <"+ label +"> ?orgLabel .";
+        "?newOrg ?inverseTrainingAtOrg ?edTraining . \n" +
+        "?newOrg <"+ label +"> ?orgLabel . \n" +
+        "?newOrg a ?orgType .";
     
     final static String n3ForExistingOrg  =      
         "?edTraining <"+ trainingAtOrg +"> ?existingOrg . \n" +
-        "?existingOrg ?inverseTrainingAtOrg ?edTraining . ";
-
-    final static String orgTypeAssertion =
-        "?newOrg a ?orgType .";
+        "?existingOrg ?inverseTrainingAtOrg ?edTraining . \n" +
+        "?existingOrg a ?orgType . ";
     
     final static String degreeAssertion  =      
         "?edTraining <"+ degreeEarned +"> ?degree .\n"+

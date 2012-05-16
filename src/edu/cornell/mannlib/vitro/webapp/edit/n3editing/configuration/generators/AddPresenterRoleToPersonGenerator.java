@@ -60,7 +60,14 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         
         conf.setN3Required( Arrays.asList( n3ForNewRole, 
                                            roleLabelAssertion) );
-        conf.setN3Optional( Arrays.asList( n3ForNewPresentation, presTypeAssertion, n3ForExistingPresentation, n3ForNewConference, n3ForExistingConference, n3ForStart, n3ForEnd ) );
+        conf.setN3Optional( Arrays.asList( n3ForNewPresentation, 
+                                           n3ForExistingPresentation, 
+                                           n3ForNewConferenceNewPres, 
+                                           n3ForNewConferenceExistingPres, 
+                                           n3ForExistingConferenceNewPres, 
+                                           n3ForExistingConferenceExistingPres, 
+                                           n3ForStart, 
+                                           n3ForEnd ) );
         
         conf.addNewResource("presentation", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newConference", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -175,26 +182,35 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
     final static String n3ForNewPresentation = 
         "?role <" + roleRealizedInPred + "> ?presentation . \n" + 
         "?presentation <" + realizedRolePred + "> ?role . \n" +    
-        "?presentation <" + label + "> ?presentationLabel .";
+        "?presentation <" + label + "> ?presentationLabel . \n" +
+        "?presentation a ?presentationType .";
     
     final static String n3ForExistingPresentation = 
         "?role <" + roleRealizedInPred + "> ?existingPresentation . \n" + 
-        "?existingPresentation <" + realizedRolePred + "> ?role . ";    
-    
-    final static String presTypeAssertion =
-        "?presentation a ?presentationType .";
-    
-    final static String n3ForNewConference =
+        "?existingPresentation <" + realizedRolePred + "> ?role . \n" +
+        "?existingPresentation a ?presentationType .";
+        
+    final static String n3ForNewConferenceNewPres =
         "?presentation <" + eventWithinPred + "> ?newConference . \n" +
         "?newConference <" + includesEventPred + "> ?presentation . \n" +
         "?newConference a <" +  conferenceClass + "> . \n" +
         "?newConference <" + label + "> ?conferenceLabel .";
+
+    final static String n3ForNewConferenceExistingPres =
+        "?existingPresentation <" + eventWithinPred + "> ?newConference . \n" +
+        "?newConference <" + includesEventPred + "> ?existingPresentation . \n" +
+        "?newConference a <" +  conferenceClass + "> . \n" +
+        "?newConference <" + label + "> ?conferenceLabel .";
     
-    final static String n3ForExistingConference =
-        "?existingConference a <" +  conferenceClass + "> . \n" +
+    final static String n3ForExistingConferenceNewPres =
         "?existingConference <" + includesEventPred + "> ?presentation . \n" +
-        "?presentation <" + eventWithinPred + "> ?existingConference . ";
+        "?presentation <" + eventWithinPred + "> ?existingConference . \n" +
+        "?presentation <" + label + "> ?presentationLabel . ";
     
+    final static String n3ForExistingConferenceExistingPres =
+        "?existingConference <" + includesEventPred + "> ?existingPresentation . \n" +
+        "?existingPresentation <" + eventWithinPred + "> ?existingConference . ";
+
     final static String n3ForStart =
         "?role <" + roleToInterval + "> ?intervalNode . \n" +    
         "?intervalNode a <" + intervalType + "> . \n" +

@@ -214,7 +214,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
 
     final static String n3ForExistingOrgNewAwardAssertion  =      
         "?award <" + awardConferredByPred +"> ?existingOrg . \n" +
-        "?existingOrg <" + awardConferredPred + "> ?award . ";    
+        "?existingOrg <" + awardConferredPred + "> ?award . \n" +
+        "?award <"+ label + "> ?awardLabel .";    
 
     final static String n3ForExistingOrgExistingAwardAssertion  =      
         "?existingAward <" + awardConferredByPred +"> ?existingOrg . \n" +
@@ -223,7 +224,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
     final static String n3ForNewOrgNewAwardAssertion  =      
         "?newOrg a <" + orgClass + "> . \n" +
         "?award <" + awardConferredByPred +"> ?newOrg . \n" +
-        "?newOrg <" + awardConferredPred + "> ?award . \n" +    
+        "?newOrg <" + awardConferredPred + "> ?award . \n" +
+        "?award <"+ label + "> ?awardLabel . \n" +   
         "?newOrg <"+ label + "> ?orgLabel .";    
 
     final static String n3ForNewOrgExistingAwardAssertion  =      

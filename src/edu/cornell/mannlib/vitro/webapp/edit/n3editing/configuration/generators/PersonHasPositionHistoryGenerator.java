@@ -76,7 +76,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         conf.setN3Required( Arrays.asList( n3ForNewPosition, 
                                            positionTitleAssertion, 
                                            positionTypeAssertion ) );
-        conf.setN3Optional( Arrays.asList( n3ForNewOrg, n3ForExistingOrg, orgTypeAssertion, n3ForStart, n3ForEnd ) );
+        conf.setN3Optional( Arrays.asList( n3ForNewOrg, n3ForExistingOrg, n3ForStart, n3ForEnd ) );
         
         conf.addNewResource("position", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("newOrg", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -181,15 +181,14 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
     final static String n3ForNewOrg = 
         "?position <" + positionInOrgPred + "> ?newOrg . \n" +
         "?newOrg <" + orgForPositionPred + "> ?position . \n" +
-        "?newOrg <" + label + "> ?orgLabel .";    
+        "?newOrg <" + label + "> ?orgLabel . \n" +
+        "?newOrg a ?orgType .";    
 
     final static String n3ForExistingOrg = 
         "?position <" + positionInOrgPred + "> ?existingOrg . \n" +
-        "?existingOrg <" + orgForPositionPred + "> ?position . " ;
-    
-    final static String orgTypeAssertion = 
-        "?newOrg a ?orgType .";
-    
+        "?existingOrg <" + orgForPositionPred + "> ?position . \n" +
+        "?existingOrg a ?orgType .";
+        
     final static String n3ForStart =
         "?position <" + positionToInterval + "> ?intervalNode . \n" +    
         "?intervalNode a <" + intervalType + "> . \n" +
