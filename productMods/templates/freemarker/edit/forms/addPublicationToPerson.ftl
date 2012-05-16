@@ -151,7 +151,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                 <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
                 <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
             </p>
-            <input class="acUriReceiver" type="hidden" id="pubUri" name="pubUri" value="${pubUriValue}" />
+            <input class="acUriReceiver" type="hidden" id="pubUri" name="pubUri" value="${pubUriValue}"  ${flagClearLabelForExisting}="true" />
         </div>
     <div id="fieldsForNewPub">
     <#-- Published In: collection -->

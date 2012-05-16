@@ -13,8 +13,17 @@
 </#if>
 <#--Freemarker variables with default values that can be overridden by specific forms-->
 
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
 
-<#-- typeSelectorLabel, numDateFields,  roleExamples-->
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
+
+<#-- typeSelectorLabel, numDateFields,  roleExamples, roleActivityVClass -->
 
 <#if !typeSelectorLabel?has_content>
 	<#assign typeSelectorLabel = roleDescriptor />
@@ -25,6 +34,10 @@
 
 <#if !roleExamples?has_content>
 	<#assign roleExamples = "" />
+</#if>
+
+<#if !roleActivityVClass?has_content>
+	<#assign roleActivityVClass = "" />
 </#if>
 
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
@@ -51,13 +64,14 @@
 
  <#--Get activity label value-->
 <#assign activityLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "activityLabel") />
+<#assign activityLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "activityLabelDisplay") />
 
 
 <#--Get role label-->
 <#assign roleLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleLabel") />
 
 <#--For role activity uri-->
-<#assign existingRoleActivityValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleActivity") />
+<#assign existingRoleActivityValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingRoleActivity") />
 
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
@@ -118,19 +132,20 @@
         </#if>
        		<#assign roleActivityTypeSelect = editConfiguration.pageData.roleActivityType />
        		<#assign roleActivityTypeKeys = roleActivityTypeSelect?keys />
-        <#if editMode == "edit">
-          <#list roleActivityTypeKeys as key>             
-              <#if selectedActivityType = key >
-                <span class="readOnly" id="typeSelectorSpan">${roleActivityTypeSelect[key]}</span> 
-                <input type="hidden" id="typeSelectorInput" name="roleActivityType" acGroupName="activity" value="${activityTypeValue}" >
-              </#if>           
-          </#list>
-        <#else>
-           <select id="typeSelector" name="roleActivityType" acGroupName="activity">
+
+        <#if editMode != "edit" || ( editMode == "edit" && roleActivityVClass == "organizations") >
+            <select id="typeSelector" name="roleActivityType" acGroupName="activity">
                 <#list roleActivityTypeKeys as key>
                     <option value="${key}"<#if selectedActivityType = key>selected</#if>>${roleActivityTypeSelect[key]}</option>
                 </#list>
-           </select>
+            </select>
+        <#else>
+           <#list roleActivityTypeKeys as key>             
+               <#if selectedActivityType = key >
+                 <span class="readOnly" id="typeSelectorSpan">${roleActivityTypeSelect[key]}</span> 
+                 <input type="hidden" id="typeSelectorInput" name="roleActivityType" acGroupName="activity" value="${activityTypeValue}" >
+               </#if>           
+           </#list>
         </#if>
        </p>
        
@@ -139,17 +154,23 @@
             <p>
                 <label for="activity">### Name ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
+                <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="$activityLabelDisplayValue}">
             </p>
             
             <input type="hidden" id="roleToActivityPredicate" name="roleToActivityPredicate" value="" />
             <!--Populated or modified by JavaScript based on type of activity, type returned from AJAX request-->
-<#--            
-            <#if editMode = "edit">
-            	<input type="hidden" id="roleActivityType" name="roleActivityType" value="${activityTypeValue}"/>
-            	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}"/>
-            </#if>
--->
-            <@lvf.acSelection urls.base "roleActivity" "roleActivityUri" "activity" existingRoleActivityValue />
+
+            <div class="acSelection" acGroupName="activity">
+                <p class="inline">
+                    <label></label>
+                    <span class="acSelectionInfo"></span>
+                    <a href="/vivo/individual?uri=" class="verifyMatch" title="verify match">(Verify this match</a> or 
+                    <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+
+                    </p>
+                    <input class="acUriReceiver" type="hidden" id="roleActivityUri" name="existingRoleActivity"  value="${existingRoleActivityValue}" ${flagClearLabelForExisting}="true" />
+                    <!-- Field value populated by JavaScript -->
+            </div>
 
             <#if showRoleLabelField = true>
             <p><label for="roleLabel">Role in ### ${requiredHint} ${roleExamples}</label>
@@ -191,7 +212,9 @@
 	    acUrl: '${urls.base}/autocomplete?tokenize=true',
 	    editMode: '${editMode}',
 	    defaultTypeName: 'activity', // used in repair mode, to generate button text and org name field label
-	    baseHref: '${urls.base}/individual?uri='
+	    baseHref: '${urls.base}/individual?uri=',
+        blankSentinel: '${blankSentinel}',
+        flagClearLabelForExisting: '${flagClearLabelForExisting}'
 	};
 	</script>
 

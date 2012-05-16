@@ -101,21 +101,12 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <p class="inline">    
       <label for="presentationType">Presentation Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
       <#assign presentationTypeOpts = editConfiguration.pageData.presentationType />
-      <#if editMode == "edit">
-        <#list presentationTypeOpts?keys as key>             
-            <#if presentationTypeValue = key >
-              <span class="readOnly" id="typeSelectorSpan"><#if presentationTypeOpts[key] == "Other">Presentation<#else>${presentationTypeOpts[key]}</#if></span> 
-              <input type="hidden" id="typeSelectorInput" name="presentationType" acGroupName="presentation" value="${presentationTypeValue}">
-            </#if>           
-        </#list>
-      <#else>
       <select id="typeSelector" name="presentationType" acGroupName="presentation">
-          <option value="" selected="selected">Select one</option>                
-          <#list presentationTypeOpts?keys as key>             
-              <option value="${key}" <#if presentationTypeValue = key>selected</#if>> <#if presentationTypeOpts[key] == "Other">Presentation<#else>${presentationTypeOpts[key]}</#if></option>            
-          </#list>
-      </select>
-      </#if>
+        <option value="" selected="selected">Select one</option>                
+        <#list presentationTypeOpts?keys as key>             
+            <option value="${key}" <#if presentationTypeValue = key>selected</#if>> <#if presentationTypeOpts[key] == "Other">Presentation<#else>${presentationTypeOpts[key]}</#if></option>            
+        </#list>
+    </select>
     </p>
 
     <div class="fullViewOnly">        

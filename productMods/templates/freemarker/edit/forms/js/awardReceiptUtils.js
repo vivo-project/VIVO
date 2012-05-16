@@ -26,6 +26,7 @@ var awardReceiptUtils = {
     this.form = $('#personHasAwardOrHonor');
     this.recLabel = $('#awardReceiptLabel');
     this.award = $('#award');
+    this.awardDisplay = $('#awardDisplay');
     this.org = $('#org');
     this.yearAwarded = $('#yearAwarded-year');
     this.displayedYear = $('#yearAwardedDisplay');
@@ -87,7 +88,13 @@ var awardReceiptUtils = {
     },
 
     buildAwardReceiptLabel: function() {
-        var rdfsLabel = this.award.val();
+        var rdfsLabel = "";
+        if ( this.editMode == "edit"  ) {
+            rdfsLabel = this.awardDisplay.val();
+        }
+        else {
+            rdfsLabel = this.award.val();
+        }
         if ( this.yearAwarded.val().length ) {
             rdfsLabel += " (" + this.subjectName + ' - ' + this.yearAwarded.val() + ")";
         }

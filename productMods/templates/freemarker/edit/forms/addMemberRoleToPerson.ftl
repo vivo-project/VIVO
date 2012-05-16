@@ -20,7 +20,7 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "membership" />
 <#assign typeSelectorLabel = "membership in" />
-
+<#assign roleActivityVClass = "organizations" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">

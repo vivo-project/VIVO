@@ -227,8 +227,9 @@ var customForm = {
             // BECAUSE THERE COULD BE MORE THAN ONE AC FIELD. ASSOCIATION IS MADE VIA
             // THE SPECIAL "acGroupName" ATTRIBUTE WHICH IS SHARED AMONG THE SELECT AND  
             // THE INPUT AND THE AC SELECTION DIV.
-            customForm.undoAutocompleteSelection($(this));
-
+            if (customForm.editMode != "edit") {
+                customForm.undoAutocompleteSelection($(this));
+            }
             // Reinitialize view. If no type selection in a two-step form, go back to type view;
             // otherwise, reinitialize full view.
 			if (!typeVal.length && customForm.formSteps > 1) {

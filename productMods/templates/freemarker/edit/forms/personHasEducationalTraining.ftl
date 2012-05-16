@@ -111,6 +111,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
     <p class="inline">    
         <label for="orgType">Organization Type ${requiredHint}</label>
         <#assign orgTypeOpts = editConfiguration.pageData.orgType />
+<#--
         <#if editMode == "edit">
           <#list orgTypeOpts?keys as key>             
               <#if orgTypeValue = key >
@@ -130,6 +131,17 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
                 </#list>
             </select>
         </#if>   
+-->
+<select id="typeSelector" name="orgType" acGroupName="org">
+    <option value="" selected="selected">Select one</option>                
+    <#list orgTypeOpts?keys as key>             
+        <#if orgTypeValue = key>
+            <option value="${key}"  selected >${orgTypeOpts[key]}</option>     
+        <#else>
+            <option value="${key}">${orgTypeOpts[key]}</option>
+        </#if>             
+    </#list>
+</select>
     </p>     
 
   <div class="fullViewOnly">        
