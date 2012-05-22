@@ -798,6 +798,15 @@
 
 
   <servlet>
+    <servlet-name>ManagePublicationsForIndividualController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.generators.ManagePublicationsForIndividualController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagePublicationsForIndividualController</servlet-name>
+    <url-pattern>/managePublications</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ShowClassHierarchyController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ShowClassHierarchyController</servlet-class>
   </servlet>

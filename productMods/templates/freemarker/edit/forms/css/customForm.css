@@ -122,3 +122,28 @@ fieldset.dateTime label {
 fieldset.dateTime select {
     margin-top: 0;
 }
+/* ---------------------------------- */
+/* ----- FOR MANAGE PUBLICATIONS ---- */
+/* ---------------------------------- */
+section#pubsContainer {
+    margin-top:-8px;
+    padding-left:25px;
+}
+section#pubsContainer ul {
+    padding-left:25px;
+    text-indent:-25px;
+}
+section#pubsContainer li {
+    margin-bottom:6px;
+    line-height:20px;
+}
+section#pubsContainer input {
+    margin-right:8px;
+}
+
+
+
+
+
+
+
