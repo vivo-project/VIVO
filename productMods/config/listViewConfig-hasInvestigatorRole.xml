@@ -10,7 +10,7 @@
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
-        SELECT DISTINCT <collated>?subclass</collated>
+        SELECT DISTINCT 
                         ?role 
                         ?activity ?activityName 
                         ?activityLabel
@@ -27,20 +27,10 @@
             OPTIONAL {  ?role core:roleRealizedIn ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
-                        
-                        <collated>
-                        ?activity vitro:mostSpecificType ?subclass .
-                        ?subclass rdfs:subClassOf core:hasInvestigatorRole  
-                        </collated>
             }   
             OPTIONAL {  ?role core:roleContributesTo ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
-                        
-                        <collated>
-                        ?activity vitro:mostSpecificType ?subclass .
-                        ?subclass rdfs:subClassOf core:hasInvestigatorRole  
-                        </collated>
             }                   
             OPTIONAL { ?activity core:grantAwardedBy ?awardedBy .
                        ?awardedBy rdfs:label ?awardedByLabel
@@ -48,8 +38,6 @@
             OPTIONAL { ?activity core:administeredBy ?adminedBy .
                        ?adminedBy rdfs:label ?adminedByLabel
             }
-
-            OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeIntervalRole 
                        OPTIONAL { ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
                                   ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
@@ -58,7 +46,6 @@
                                   ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
                        }
             }  
-            OPTIONAL { ?role rdfs:label ?roleLabel }
             OPTIONAL { ?role core:roleContributesTo ?grant .
                        ?grant core:dateTimeInterval ?dateTimeIntervalGrant 
                        OPTIONAL { ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
@@ -71,7 +58,7 @@
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>
-        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
+        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
     
     <query-construct>
@@ -82,13 +69,17 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role core:roleRealizedIn ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            ?activity rdfs:label ?activityLabel
         } WHERE {
+        {
+            ?subject ?property ?role .
+            ?role core:roleContributesTo ?activity 
+        } UNION
+        {
             ?subject ?property ?role .
             ?role core:roleRealizedIn ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            ?activity rdfs:label ?activityLabel 
+        }
         }
     </query-construct>
     
@@ -100,13 +91,17 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role core:roleContributesTo ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            ?activity rdfs:label ?activityLabel 
         } WHERE {
-            ?subject ?property ?role .
-            ?role core:roleContributesTo ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            {
+                ?subject ?property ?role .
+                ?role core:roleContributesTo ?activity 
+            } UNION
+            {
+                ?subject ?property ?role .
+                ?role core:roleContributesTo ?activity .
+                ?activity rdfs:label ?activityLabel 
+            }
         }
     </query-construct>
     
