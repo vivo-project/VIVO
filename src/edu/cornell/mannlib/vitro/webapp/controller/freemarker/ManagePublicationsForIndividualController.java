@@ -1,5 +1,5 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
-package edu.cornell.mannlib.vitro.webapp.controller.freemarker.generators;
+package edu.cornell.mannlib.vitro.webapp.controller.freemarker;
 
 import java.util.ArrayList;
 import java.util.Collections;
