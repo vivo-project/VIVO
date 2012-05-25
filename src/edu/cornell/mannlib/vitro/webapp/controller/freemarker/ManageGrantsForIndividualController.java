@@ -31,11 +31,11 @@ import edu.cornell.mannlib.vitro.webapp.dao.VClassDao;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 
 
-public class ManagePublicationsForIndividualController extends FreemarkerHttpServlet {
+public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
 
-    private static final Log log = LogFactory.getLog(ManagePublicationsForIndividualController.class.getName());
+    private static final Log log = LogFactory.getLog(ManageGrantsForIndividualController.class.getName());
     private VClassDao vcDao = null;
-    private static final String TEMPLATE_NAME = "managePublicationsForIndividual.ftl";
+    private static final String TEMPLATE_NAME = "manageGrantsForIndividual.ftl";
     private List<String> allSubclasses;
     
     @Override
@@ -58,9 +58,9 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         	vcDao = vreq.getFullWebappDaoFactory().getVClassDao();
         }
 
-        HashMap<String, List<Map<String,String>>>  publications = getPublications(subjectUri, vreq);
-        log.debug("publications = " + publications);
-        body.put("publications", publications);
+        HashMap<String, List<Map<String,String>>>  grants = getGrants(subjectUri, vreq);
+        log.debug("grants = " + grants);
+        body.put("grants", grants);
         body.put("allSubclasses", allSubclasses);
         
         Individual subject = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(subjectUri);
@@ -73,27 +73,30 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
         return new TemplateResponseValues(TEMPLATE_NAME, body);
     }
   
-    
-    private static String PUBLICATION_QUERY = ""
+    private static String GRANT_QUERY = ""
         + "PREFIX core: <http://vivoweb.org/ontology/core#> \n"
         + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
         + "PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#> \n"
-        + "PREFIX afn: <http://jena.hpl.hp.com/ARQ/function#> \n"
-        + "SELECT DISTINCT ?subclass ?authorship (str(?label) as ?title) ?pub ?hideThis WHERE { \n"
-        + "    ?subject core:authorInAuthorship ?authorship . \n"
-        + "    OPTIONAL { ?authorship core:linkedInformationResource ?pub . " 
-        + "               ?pub rdfs:label ?label } \n"
-        + "    OPTIONAL { ?pub vitro:mostSpecificType ?subclass . \n"
-        + "              ?subclass rdfs:subClassOf core:InformationResource } \n"
-        + "    OPTIONAL { ?authorship core:hideFromDisplay ?hideThis } \n "
-        + "} ORDER BY ?subclass ?title";
+        + "PREFIX afn:  <http://jena.hpl.hp.com/ARQ/function#> \n"
+        + "SELECT DISTINCT ?subclass ?role (str(?label2) as ?label) ?activity ?hideThis WHERE { \n"
+        + "    ?subject ?roleProp ?role . \n"
+        + "    ?roleProp rdfs:subPropertyOf core:hasResearcherRole . \n"
+        + "    ?role vitro:mostSpecificType ?subclass \n"
+        + "    OPTIONAL { ?role core:roleRealizedIn ?activity  \n" 
+        + "             OPTIONAL { ?activity rdfs:label ?label2 } \n" 
+        + "    } \n"
+        + "    OPTIONAL { ?role core:roleContributesTo ?activity  \n" 
+        + "             OPTIONAL { ?activity rdfs:label ?label2 } \n" 
+        + "    } \n"
+        + "    OPTIONAL { ?role core:hideFromDisplay ?hideThis } \n" 
+        + "} ORDER BY ?subclass ?label2";
     
        
-    HashMap<String, List<Map<String,String>>>  getPublications(String subjectUri, VitroRequest vreq) {
+    HashMap<String, List<Map<String,String>>>  getGrants(String subjectUri, VitroRequest vreq) {
           
-        String queryStr = QueryUtils.subUriForQueryVar(PUBLICATION_QUERY, "subject", subjectUri);
+        String queryStr = QueryUtils.subUriForQueryVar(GRANT_QUERY, "subject", subjectUri);
         log.debug("queryStr = " + queryStr);
-        HashMap<String, List<Map<String,String>>>  subclassToPublications = new HashMap<String, List<Map<String,String>>>();
+        HashMap<String, List<Map<String,String>>>  subclassToGrants = new HashMap<String, List<Map<String,String>>>();
         try {
             ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
             while (results.hasNext()) {
@@ -101,20 +104,20 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
                 String subclassUri = soln.get("subclass").toString();
                 VClass vClass = (VClass) vcDao.getVClassByURI(subclassUri);
                 String subclass = ((vClass.getName() == null) ? subclassUri : vClass.getName());
-                if(!subclassToPublications.containsKey(subclass)) {
-                    subclassToPublications.put(subclass, new ArrayList<Map<String,String>>()); //list of publication information
+                if(!subclassToGrants.containsKey(subclass)) {
+                    subclassToGrants.put(subclass, new ArrayList<Map<String,String>>()); //list of grant information
                 }
- 
-                List<Map<String,String>> publicationsList = subclassToPublications.get(subclass);
-                publicationsList.add(QueryUtils.querySolutionToStringValueMap(soln));        
+                String label = soln.get("label").toString();
+                List<Map<String,String>> grantsList = subclassToGrants.get(subclass);
+                    grantsList.add(QueryUtils.querySolutionToStringValueMap(soln));        
             }
         } catch (Exception e) {
             log.error(e, e);
         }    
        
-        allSubclasses = new ArrayList<String>(subclassToPublications.keySet());
+        allSubclasses = new ArrayList<String>(subclassToGrants.keySet());
         Collections.sort(allSubclasses);
-        return subclassToPublications;
+        return subclassToGrants;
     }
 }
 

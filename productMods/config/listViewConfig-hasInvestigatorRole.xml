@@ -54,7 +54,8 @@
                        OPTIONAL { ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
                                   ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
                        }
-            }  
+            }
+            NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>

@@ -796,6 +796,14 @@
     <url-pattern>/listIndividuals</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ManageGrantsForIndividualController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ManageGrantsForIndividualController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageGrantsForIndividualController</servlet-name>
+    <url-pattern>/manageGrants</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>ManagePublicationsForIndividualController</servlet-name>
