@@ -13,21 +13,17 @@
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#yearMonthDayPrecision">
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearMonthDayPrecision">
     <rdfs:label xml:lang="en-US">yearMonthDayPrecision</rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#DateTimeValuePrecision"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#yearMonthPrecision">
+  </core:DateTimeValuePrecision>
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearMonthPrecision">
     <rdfs:label xml:lang="en-US">yearMonthPrecision</rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#DateTimeValuePrecision"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#yearPrecision">
+  </core:DateTimeValuePrecision>
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearPrecision">
     <rdfs:label xml:lang="en-US">yearPrecision</rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#DateTimeValuePrecision"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vivoweb.org/ontology/core#yearMonthDayTimePrecision">
+  </core:DateTimeValuePrecision>
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearMonthDayTimePrecision">
     <rdfs:label xml:lang="en-US">yearMonthDayTimePrecision</rdfs:label>
-    <rdf:type rdf:resource="http://vivoweb.org/ontology/core#DateTimeValuePrecision"/>
-  </rdf:Description>
+  </core:DateTimeValuePrecision>
 </rdf:RDF>
