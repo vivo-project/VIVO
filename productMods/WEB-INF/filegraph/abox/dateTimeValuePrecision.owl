@@ -1,0 +1,29 @@
+<rdf:RDF
+    xmlns:j.0="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:core="http://vivoweb.org/ontology/core#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearMonthDayPrecision">
+    <rdfs:label xml:lang="en-US">yearMonthDayPrecision</rdfs:label>
+  </core:DateTimeValuePrecision>
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearMonthPrecision">
+    <rdfs:label xml:lang="en-US">yearMonthPrecision</rdfs:label>
+  </core:DateTimeValuePrecision>
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearPrecision">
+    <rdfs:label xml:lang="en-US">yearPrecision</rdfs:label>
+  </core:DateTimeValuePrecision>
+  <core:DateTimeValuePrecision rdf:about="http://vivoweb.org/ontology/core#yearMonthDayTimePrecision">
+    <rdfs:label xml:lang="en-US">yearMonthDayTimePrecision</rdfs:label>
+  </core:DateTimeValuePrecision>
+</rdf:RDF>
