@@ -1,0 +1,52 @@
+<rdf:RDF
+    xmlns:j.0="http://aims.fao.org/aos/geopolitical.owl#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:event="http://purl.org/NET/c4dm/event.owl#"
+    xmlns:dcelem="http://purl.org/dc/elements/1.1/"
+    xmlns:core="http://vivoweb.org/ontology/core#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:vitro="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:bibo="http://purl.org/ontology/bibo/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/peerReviewed">
+    <rdfs:label xml:lang="en-US">peer reviewed</rdfs:label>
+    <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >&amp;nbsp;Peer review is the process by which articles are chosen to be included in a refereed journal. An editorial board consisting of experts in the same field as the author review the article and decide if it is authoritative enough for publication.</core:description>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://vivoweb.org/ontology/core#inPress">
+    <rdfs:label xml:lang="en-US">in press</rdfs:label>
+    <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Document to be published</core:description>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://vivoweb.org/ontology/core#invited">
+    <rdfs:label xml:lang="en-US">invited</rdfs:label>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/rejected">
+    <rdfs:label xml:lang="en-US">rejected</rdfs:label>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/unpublished">
+    <rdfs:label xml:lang="en-US">unpublished</rdfs:label>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://vivoweb.org/ontology/core#submitted">
+    <rdfs:label xml:lang="en-US">submitted</rdfs:label>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/accepted">
+    <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Accepted for publication after peer reviewing</core:description>
+    <rdfs:label xml:lang="en-US">accepted</rdfs:label>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/published">
+    <rdfs:label xml:lang="en-US">published</rdfs:label>
+    <core:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Published document</core:description>
+  </bibo:DocumentStatus>
+  <bibo:DocumentStatus rdf:about="http://purl.org/ontology/bibo/draft">
+    <rdfs:label xml:lang="en-US">draft</rdfs:label>
+  </bibo:DocumentStatus>
+</rdf:RDF>
