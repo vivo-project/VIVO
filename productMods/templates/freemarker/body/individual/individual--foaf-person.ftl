@@ -98,6 +98,20 @@
         <#if researchAreas?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
             <@p.objectPropertyListing researchAreas editable />
         </#if>   
+
+		<#-- VIVO OpenSocial Extension by UCSF -->
+		<#if openSocial??>
+			<#if openSocial.visible>
+				<#-- It would likely make sense to remove the #if logic as it is safe and -->
+				<#-- arguably better to just have both divs in all conditions -->
+				<#if editable>								  
+	            	<div id="gadgets-edit" class="gadgets-gadget-parent"></div>
+	            <#else>
+	            	<div id="gadgets-view" class="gadgets-gadget-parent"></div>
+	            </#if>	            	
+            </#if>	
+		</#if>	
+           
     </section>
     
 </section>

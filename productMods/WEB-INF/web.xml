@@ -1356,6 +1356,20 @@
     <url-pattern>/harvester/harvest</url-pattern>
   </servlet-mapping>
 
+  <!-- VIVO OpenSocial Extension by UCSF -->
+  <servlet>
+    <servlet-name>GadgetController</servlet-name>
+    <servlet-class>edu.ucsf.vitro.opensocial.GadgetController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GadgetController</servlet-name>
+    <url-pattern>/gadget</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GadgetController</servlet-name>
+    <url-pattern>/gadget/sandbox</url-pattern>
+  </servlet-mapping>
+
     
   <!-- ============================== servlet-mappings ======================== -->
   <servlet-mapping>

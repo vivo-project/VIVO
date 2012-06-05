@@ -49,7 +49,7 @@
             <p>
                 This is created when you unpack the VIVO distribution file (see <a href="#download_code">Step III</a>, below). This is where you will 
                 create your deploy.properties file (see <a href="#deploy_properties">Step
-                    V</a>, below), and where you will make any modifications to the VIVO 
+                    IV</a>, below), and where you will make any modifications to the VIVO 
                 theme or code. You can create this wherever you choose. 
             </p>
             <h4>VIVO inside Tomcat</h4>
@@ -59,7 +59,7 @@
                 but you won’t need to look at it or change it. If you need to change 
                 VIVO, make the changes in the distribution directory, and run the build  
                 script again. Tell the build script where to find Tomcat by setting <code>tomcat.home</code>
-                in the deploy.properties file (see <a href="#deploy_properties">Step V</a>,
+                in the deploy.properties file (see <a href="#deploy_properties">Step IV</a>,
                 below).
             </p>
             <h4>The VIVO home directory</h4>
@@ -68,7 +68,7 @@
                 image files are stored here, and the Solr home directory is stored here also. 
                 You can create this wherever you choose. Tell VIVO where to find the  
                 home directory by setting <code>vitro.home.directory</code>
-                in the deploy.properties file (see <a href="#deploy_properties">Step V</a>, 
+                in the deploy.properties file (see <a href="#deploy_properties">Step IV</a>, 
                 below). You must create this directory before starting VIVO, and you 
                 must ensure that Tomcat has permission to read and write to this  
                 directory when it runs. 
@@ -118,6 +118,9 @@
                     <li>
                         <a href="#external_auth">Using an External Authentication
                             System with VIVO</a>
+                    </li>
+                    <li>
+                        <a href="#external_auth">Using VIVO as an OpenSocial platform</a>
                     </li>
                     <li>
                         <a href="#installation_check">Was the installation successful?</a>
@@ -981,7 +984,25 @@
                     <pre>selfEditing.idMatchingProperty = http://vivo.mydomain.edu/ns#networkId</pre>
                 </li>
             </ul>
-            <h3 id="installation_check">XII. Was the installation successful? </h3>
+            
+            <h3 id="external_auth">XII. Using VIVO as an OpenSocial platform </h3>
+            <p>
+            	VIVO now supports an extension of the OpenSocial API, 
+            	known as Open Research Networking Gadgets, or ORNG (pronounced "ORNG")
+            	(see http://www.opengadgets.org/index.html).
+            </p>
+            <p>
+            	Configuring VIVO to support ORNG requires several steps, including 
+            	additions to the VIVO properties, modifications to Tomcat configuration 
+            	creation of an ORNG-compatible version of Apache Shindig, and use of a 
+            	security certificate for safe network operations.
+            </p>
+            <p>
+            	For instructions, consult the file  
+            	<a href="setting_up_orng.html">setting_up_orng.html</a> in this directory.
+            </p>
+            
+            <h3 id="installation_check">XIII. Was the installation successful? </h3>
             <p>
                 If you have completed the previous steps, you have good indications 
                 that the installation was successful. 

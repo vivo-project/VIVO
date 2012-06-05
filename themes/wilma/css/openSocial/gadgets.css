@@ -1,0 +1,113 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+ 
+.gadgets-gadget-chrome {
+  float: left;
+  margin: 4px 6px 4px 0;
+  border: 1px solid #7aa5d6;
+  border: 1px solid #CCC; 
+}
+.col2 .gadgets-gadget-chrome { 
+  margin-left: 9px;
+}
+
+.gadgets-gadget 
+{
+  width: 100%;
+  border: none;
+}
+
+.gadgets-gadget-title-bar {
+  padding: 4px 4px 2px;
+  background-color: #e5ecf9;
+  background-color: #EEEBE5;
+}
+.gadgets-gadget-title-bar:hover { background-color: #e7e3db; } 
+.gadgets-gadget-title-bar img,
+.gadgets-gadget-title-button {
+  vertical-align: top;
+}
+
+.gadgets-gadget-title a, .gadgets-gadget-title a:hover {
+  font-weight: bold;
+  font-size: 14px;
+  color: #CA7C29;
+}
+.EditBody .gadgets-gadget-title a {
+  color:#3B6394;
+} 
+.EditBody .gadgets-gadget-title a:hover {
+  color:#1E416C;
+}
+
+.gadgets-gadget-title-button-bar {
+  font-size: smaller;
+}
+
+.gadgets-gadget-canvas-title {
+  color: #000;
+  padding-left: 6px;
+}
+
+.gadgets-gadget-user-prefs-dialog {
+  background-color: #e5ecf9;
+}
+
+.gadgets-gadget-user-prefs-dialog-action-bar {
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+.gadgets-gadget-title-button img {
+  border: 2px solid #4F5CC7;
+  border: none;           
+  float: right;                           
+  margin-right: 2px; 
+} 
+.EditBody .gadgets-gadget-title-button img {
+  float: left;
+  margin-right: 8px; 
+}
+
+.gadgets-gadget-content {
+  padding: 4px;
+}
+
+.gadgets-log-entry {
+}
+
+/* Used to style messages produced during rewriting by CajaContentRewriter */
+.gadgets-messages {
+	
+}
+
+.gadgets-gadget-status {
+  font-weight: bold;
+  float: right;
+/*  text-align: center; */
+  font-size: 12px;
+  padding-right: 6px;
+}
+* html .gadgets-gadget-status { margin-top: -18px; padding-right: 30px; } /* fudge line break for IE6 */
+*+html .gadgets-gadget-status { margin-top: -18px; padding-right: 30px; } /* fudge line break for IE7 */
+
+/* list tool fix ticket #135 */
+* html #ctl00_ctl00_left_pnlOpenSocialTools { height: 130px; }
+*+html #ctl00_ctl00_left_pnlOpenSocialTools { height: 130px; }
+* html #ctl00_ctl00_left_pnlOpenSocialTools { margin-left: -8px; }
