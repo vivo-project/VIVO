@@ -44,7 +44,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	private List<String> addInternalClassN3(int counter) {
 		List<String> internalClassN3 = new ArrayList<String>();
     	String dataGetterVar = getDataGetterVar(counter);
-		internalClassN3.add(dataGetterVar + "<" + DisplayVocabulary.RESTRICT_RESULTS_BY_INTERNAL + "> " + 
+		internalClassN3.add(dataGetterVar + " <" + DisplayVocabulary.RESTRICT_RESULTS_BY_INTERNAL + "> " + 
 				this.getN3VarName(internalClassVarNameBase, counter) + " .");
 		return internalClassN3;
 		
