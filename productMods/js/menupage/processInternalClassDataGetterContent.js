@@ -1,6 +1,6 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
-var processIndividualsForClassesDataGetterContent = {
+var processInternalClassDataGetterContent = {
 	dataGetterClass:null,
 	//can use this if expect to initialize from elsewhere
 	initProcessor:function(dataGetterClassInput) {
@@ -15,13 +15,13 @@ var processIndividualsForClassesDataGetterContent = {
 			classesSelected.push($(this).val());
 		});
 		//If internal class selected, include here
-		var isInternal:false;
+		var isInternal=false;
 		//if this checkbox is checked, then isInternal should be true
 		pageContentSection.find("input[name='display-internalClass']:checked").each(function() {
-			isInternal:true;
+			isInternal=true;
 		});
-		var returnObject = {classGroup:classGroup, 
-				classesSelectedInClassGroup:classesSelected, 
+		//Not returning class group although could if need be.. 
+		var returnObject = { classesSelectedInClassGroup:classesSelected, 
 				isInternal:isInternal,
 				dataGetterClass:this.dataGetterClass};
 		return returnObject;
