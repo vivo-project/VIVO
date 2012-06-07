@@ -60,8 +60,20 @@ var addAuthorForm = {
         this.selectedAuthor = $('#selectedAuthor');
         this.selectedAuthorName = $('#selectedAuthorName');
         this.acHelpTextClass = 'acSelectorWithHelpText';
-        this.verifyMatch = this.form.find('.verifyMatch');    
-
+        this.verifyMatch = this.form.find('.verifyMatch');  
+        this.personRadio = $('input.person-radio');  
+        this.orgRadio = $('input.org-radio');
+        this.personSection = $('section#personFields');  
+        this.orgSection = $('section#organizationFields');  
+        this.orgName = $('input#orgName');
+        this.orgNameWrapper = this.orgName.parent();
+        this.orgUriField = $('input#orgUri');
+        this.selectedOrg = $('div#selectedOrg');
+        this.selectedOrgName = $('span#selectedOrgName');
+        this.orgLink = $('a#orgLink');
+        this.personLink = $('a#personLink');
+        
+        this.orgSection.hide();
     },
     
     // Initial page setup. Called only at page load.
@@ -138,7 +150,7 @@ var addAuthorForm = {
         // however.
         $('#lastName').val(''); 
         // Set the initial autocomplete help text in the acSelector field.
-        this.addAcHelpText();
+        this.addAcHelpText(this.acSelector);
         
         return false; 
         
@@ -151,11 +163,13 @@ var addAuthorForm = {
         // Hide the button that shows the form
         this.showFormButtonWrapper.hide(); 
 
-        this.hideSelectedAuthor();
+        this.hideSelectedPerson();
+        this.hideSelectedOrg();
 
         this.cancel.unbind('click');
         this.cancel.bind('click', function() {
             addAuthorForm.showAuthorListOnlyView();
+            addAuthorForm.setAuthorType("person");
             return false;
         });
         
@@ -169,10 +183,16 @@ var addAuthorForm = {
         //this.lastNameField.focus();
     },   
     
-    hideSelectedAuthor: function() {
+    hideSelectedPerson: function() {
         this.selectedAuthor.hide();
         this.selectedAuthorName.html('');
         this.personUriField.val('');
+    },
+
+    hideSelectedOrg: function() {
+        this.selectedOrg.hide();
+        this.selectedOrgName.html('');
+        this.orgUriField.val('');
     },
 
     showFieldsForNewPerson: function() {    
@@ -193,9 +213,22 @@ var addAuthorForm = {
         // Make cache a property of this so we can access it after removing 
         // an author.
         this.acCache = {};  
-        this.setAcFilter();    
+        this.setAcFilter();
+        var $acField;
+        var urlString;
+        var authType;
         
-        this.lastNameField.autocomplete({
+        if  ( this.personRadio.attr("checked") ) {
+            $acField = this.lastNameField;
+            urlString = addAuthorForm.acUrl + addAuthorForm.personUrl + addAuthorForm.tokenize;
+            authType = "person";
+        }
+        else {
+            $acField = this.orgName;
+            urlString = addAuthorForm.acUrl + addAuthorForm.orgUrl + addAuthorForm.tokenize;
+            authType = "org";
+        }  
+        $acField.autocomplete({
             minLength: 2,
             source: function(request, response) {
                 if (request.term in addAuthorForm.acCache) {
@@ -209,7 +242,7 @@ var addAuthorForm = {
                 // here instead of a get. Add the exclude uris to the data
                 // rather than to the url.
                 $.ajax({
-                    url: addAuthorForm.acUrl,
+                    url: urlString,
                     dataType: 'json',
                     data: {
                         term: request.term
@@ -232,7 +265,7 @@ var addAuthorForm = {
             // select event has been triggered. To trigger a select, the user must hit enter
             // or click on the selection with the mouse. This appears to confuse some users.
             select: function(event, ui) {
-                addAuthorForm.showSelectedAuthor(ui); 
+                addAuthorForm.showSelectedAuthor(ui,authType); 
             }
         });
 
@@ -288,27 +321,41 @@ var addAuthorForm = {
     },
     
     // Action taken after selecting an author from the autocomplete list
-    showSelectedAuthor: function(ui) {
+    showSelectedAuthor: function(ui,authType) {
 
-        this.personUriField.val(ui.item.uri);
-        this.selectedAuthor.show();
+        if ( authType == "person" ) {
+            this.personUriField.val(ui.item.uri);
+            this.selectedAuthor.show();
 
-        // Transfer the name from the autocomplete to the selected author
-        // name display, and hide the last name field.
-        this.selectedAuthorName.html(ui.item.label);
-        // NB For some reason this doesn't delete the value from the last name
-        // field when the form is redisplayed. Thus it's done explicitly in initFormView.
-        this.hideFields(this.lastNameWrapper);
-        // These get displayed if the selection was made through an enter keystroke,
-        // since the keydown event on the last name field is also triggered (and
-        // executes first). So re-hide them here.
-        this.hideFieldsForNewPerson(); 
-        this.verifyMatch.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
-        
+            // Transfer the name from the autocomplete to the selected author
+            // name display, and hide the last name field.
+            this.selectedAuthorName.html(ui.item.label);
+            // NB For some reason this doesn't delete the value from the last name
+            // field when the form is redisplayed. Thus it's done explicitly in initFormView.
+            this.hideFields(this.lastNameWrapper);
+            // These get displayed if the selection was made through an enter keystroke,
+            // since the keydown event on the last name field is also triggered (and
+            // executes first). So re-hide them here.
+            this.hideFieldsForNewPerson(); 
+            this.personLink.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
+        }
+        else {
+            // do the same as above but for the organization fields
+            this.orgUriField.val(ui.item.uri); 
+            this.selectedOrg.show();
+
+            this.selectedOrgName.html(ui.item.label);
+
+            this.hideFields(this.orgNameWrapper); 
+
+            this.orgLink.attr('href', this.verifyMatch.data('baseHref') + ui.item.uri);
+        }
+
         // Cancel restores initial form view
         this.cancel.unbind('click');
         this.cancel.bind('click', function() {
             addAuthorForm.initFormView();
+            addAuthorForm.setAuthorType(authType);
             return false;
         });
     },
@@ -432,11 +479,20 @@ var addAuthorForm = {
             return false;
         });
         
+        this.orgRadio.click(function() {
+            addAuthorForm.setAuthorType("org");
+        });
+
+        this.personRadio.click(function() {
+            addAuthorForm.setAuthorType("person");
+        });
+
         this.form.submit(function() {
             // NB Important JavaScript scope issue: if we call it this way, this = addAuthorForm 
             // in prepareSubmit. If we do this.form.submit(this.prepareSubmit); then
             // this != addAuthorForm in prepareSubmit.
-            addAuthorForm.deleteAcHelpText();
+            $selectedObj = addAuthorForm.form.find('input.acSelector');
+            addAuthorForm.deleteAcHelpText($selectedObj);
 			addAuthorForm.prepareSubmit(); 
         });     
 
@@ -451,17 +507,30 @@ var addAuthorForm = {
             addAuthorForm.onLastNameChange();
         });
 
-        this.verifyMatch.click(function() {
+        this.personLink.click(function() {
+            window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
+            return false;
+        });   
+
+        this.orgLink.click(function() {
             window.open($(this).attr('href'), 'verifyMatchWindow', 'width=640,height=640,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,location=no');
             return false;
         });   
 
     	this.acSelector.focus(function() {
-        	addAuthorForm.deleteAcHelpText();
+        	addAuthorForm.deleteAcHelpText(this);
     	});   
 
     	this.acSelector.blur(function() {
-        	addAuthorForm.addAcHelpText();
+        	addAuthorForm.addAcHelpText(this);
+    	}); 
+                
+    	this.orgName.focus(function() {
+        	addAuthorForm.deleteAcHelpText(this);
+    	});   
+
+    	this.orgName.blur(function() {
+        	addAuthorForm.addAcHelpText(this);
     	}); 
                 
         // When hitting enter in last name field, show first and middle name fields.
@@ -495,7 +564,7 @@ var addAuthorForm = {
             name;
         
         // If selecting an existing person, don't submit name fields
-        if (this.personUriField.val() != '') {
+        if (this.personUriField.val() != '' || this.orgUriField.val() != '' || this.orgName.val() != '' ) {
             this.firstNameField.attr('disabled', 'disabled');
             this.middleNameField.attr('disabled', 'disabled');
             this.lastNameField.attr('disabled', 'disabled');
@@ -639,21 +708,94 @@ var addAuthorForm = {
     },
 
 	// Set the initial help text in the lastName field and change the class name.
-	addAcHelpText: function() {
+	addAcHelpText: function(selectedObj) {
         var typeText;
-
-        if (!this.acSelector.val()) {
-			this.acSelector.val("Select an existing Author or add a new one.")
+        if ( $(selectedObj).attr('id') == "lastName" ) {
+            typeText = "Author";
+        }
+        else {
+            typeText = "Organization";
+        }
+        
+        if (!$(selectedObj).val()) {
+			$(selectedObj).val("Select an existing " + typeText + " or add a new one.")
 						   .addClass(this.acHelpTextClass);
 		}
 	},
 	
-	deleteAcHelpText: function() {
-	    if (this.acSelector.hasClass(this.acHelpTextClass)) {
-	            this.acSelector.val('')
-	                           .removeClass(this.acHelpTextClass);
-	        }
+	deleteAcHelpText: function(selectedObj) {
+	    if ($(selectedObj).hasClass(this.acHelpTextClass)) {
+	            $(selectedObj).val('')
+	                          .removeClass(this.acHelpTextClass);
 	    }
+	},
+
+    // Depending on whether the author is a person or an organization,
+    // we need to set the correct class names for fields like the acSelector, acSelection, etc.
+    // as well as clear and disable fields, call other functions ...
+	setAuthorType: function(authType) {
+	    if ( authType == "org" ) {
+	        this.personSection.hide();
+	        this.orgSection.show();
+	        // person fields
+            this.personRadio.attr('checked', false);  // needed for reset when cancel button is clicked
+	        this.acSelector.removeClass("acSelector");
+	        this.acSelector.removeClass(this.acHelpTextClass);
+	        this.selectedAuthor.removeClass("acSelection");
+	        this.selectedAuthorName.removeClass("acSelectionInfo");
+	        this.personLink.removeClass("verifyMatch");
+	        this.acSelector.attr('disabled', 'disabled');
+	        this.firstNameField.attr('disabled', 'disabled');
+	        this.middleNameField.attr('disabled', 'disabled');
+	        this.lastNameField.attr('disabled', 'disabled');
+	        this.acSelector.val('');
+	        this.firstNameField.val('');
+	        this.middleNameField.val('');
+	        this.lastNameField.val('');
+	        // org fields
+	        this.orgRadio.attr('checked', true); // needed for reset when cancel button is clicked
+	        this.orgName.addClass("acSelector");
+	        this.selectedOrg.addClass("acSelection");
+	        this.selectedOrgName.addClass("acSelectionInfo");
+	        this.orgLink.addClass("verifyMatch");
+	        this.orgName.attr('disabled', '');
+	        this.orgUriField.attr('disabled', '');
+
+	        addAuthorForm.addAcHelpText(this.orgName);
+	        addAuthorForm.initAutocomplete();
+	        addAuthorForm.hideSelectedPerson();
+	    }
+	    else if ( authType == "person" ) {
+	        this.orgSection.hide();
+	        this.personSection.show();
+	        // org fields
+	        this.orgRadio.attr('checked', false);  // needed for reset when cancel button is clicked
+	        this.orgName.removeClass("acSelector");
+	        this.orgName.removeClass(this.acHelpTextClass);
+	        this.selectedOrg.removeClass("acSelection");
+	        this.selectedOrgName.removeClass("acSelectionInfo");
+	        this.orgLink.removeClass("verifyMatch");
+	        this.orgName.attr('disabled', 'disabled');
+	        this.orgUriField.attr('disabled', 'disabled');
+	        this.orgName.val('');
+	        this.orgUriField.val('');
+            // person fields
+            this.acSelector.addClass("acSelector");
+            this.personRadio.attr('checked', true);  // needed for reset when cancel button is clicked
+	        this.selectedAuthor.addClass("acSelection");
+	        this.selectedAuthorName.addClass("acSelectionInfo");
+	        this.personLink.addClass("verifyMatch");
+	        this.acSelector.attr('disabled', '');
+	        this.firstNameField.attr('disabled', '');
+	        this.middleNameField.attr('disabled', '');
+	        this.lastNameField.attr('disabled', '');
+
+	        addAuthorForm.addAcHelpText(this.acSelector);
+	        addAuthorForm.initAutocomplete();
+	        addAuthorForm.hideSelectedOrg();
+	        
+	    }
+    }
 };
 
 $(document).ready(function() {   
