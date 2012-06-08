@@ -58,6 +58,8 @@ edu.cornell.mannlib.vitro.webapp.auth.policy.RestrictHomeMenuItemEditingPolicy$S
 
 edu.cornell.mannlib.vitro.webapp.services.shortview.ShortViewServiceSetup
 
+edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
+
 # Add VIVO specific DocumentModifers, this must come before SolrSetup
 edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
 
