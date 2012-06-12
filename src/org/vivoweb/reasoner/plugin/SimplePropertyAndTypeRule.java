@@ -14,6 +14,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 import edu.cornell.mannlib.vitro.webapp.reasoner.ReasonerPlugin;
+import edu.cornell.mannlib.vitro.webapp.reasoner.SimpleReasoner;
 
 /**
  * handles rules of the form
@@ -27,6 +28,7 @@ public abstract class SimplePropertyAndTypeRule implements ReasonerPlugin {
 	private Property ASSERTED_PROP;
 	private Resource TYPE;
 	private Property INFERRED_PROP;
+	private SimpleReasoner simpleReasoner;
 	
 	protected SimplePropertyAndTypeRule(String assertedProp, String type, String inferredProp) {
 		TYPE = ResourceFactory.createResource(type);
@@ -82,8 +84,8 @@ public abstract class SimplePropertyAndTypeRule implements ReasonerPlugin {
 		// this should be part of a superclass or some class that provides
 		// reasoning framework functions
 		Statement s = ResourceFactory.createStatement(subject, predicate, object);
-		if (!aboxAssertionsModel.contains(s) && !aboxInferencesModel.contains(s)) {
-			aboxInferencesModel.add(s);
+		if (simpleReasoner != null) {
+			simpleReasoner.addInference(s,aboxInferencesModel);
 		}
 	}
 
@@ -97,8 +99,9 @@ public abstract class SimplePropertyAndTypeRule implements ReasonerPlugin {
 //    				stmt.getSubject(), RDF.type, BIBO_DOCUMENT)
 //    			        || aboxInferencesModel.contains(
 //    						stmt.getSubject(), RDF.type, BIBO_DOCUMENT)) {
-    			aboxInferencesModel.remove(
-    					stmt.getSubject(), INFERRED_PROP, stmt.getObject());
+    		    if (simpleReasoner != null) {
+    		       simpleReasoner.removeInference(ResourceFactory.createStatement(stmt.getSubject(), INFERRED_PROP, stmt.getObject()), aboxInferencesModel);
+    		    }    
 //    		}
     	} else if (isRelevantType(stmt, TBoxInferencesModel)) {
     		if(!aboxInferencesModel.contains(
@@ -107,8 +110,7 @@ public abstract class SimplePropertyAndTypeRule implements ReasonerPlugin {
     					stmt.getSubject(), ASSERTED_PROP, (RDFNode) null);
     			while (groundIt.hasNext()) {
     				Statement groundStmt = groundIt.nextStatement();
-    				aboxInferencesModel.remove(
-    						groundStmt.getSubject(), INFERRED_PROP, groundStmt.getObject());
+        		    simpleReasoner.removeInference(ResourceFactory.createStatement(groundStmt.getSubject(), INFERRED_PROP, groundStmt.getObject()), aboxInferencesModel);
     			}
     		}
     	}
@@ -124,5 +126,12 @@ public abstract class SimplePropertyAndTypeRule implements ReasonerPlugin {
     private boolean isRelevantPredicate(Statement stmt) {
 		return (ASSERTED_PROP.equals(stmt.getPredicate()));
     }
-
+    
+	public void setSimpleReasoner(SimpleReasoner simpleReasoner) {
+		this.simpleReasoner = simpleReasoner;
+	}
+	
+	public SimpleReasoner getSimpleReasoner() {
+		return this.simpleReasoner;		
+	}
 }
