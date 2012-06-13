@@ -806,6 +806,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ManageLabelsForIndividualController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ManageLabelsForIndividualController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageLabelsForIndividualController</servlet-name>
+    <url-pattern>/manageLabels</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ManagePublicationsForIndividualController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ManagePublicationsForIndividualController</servlet-class>
   </servlet>

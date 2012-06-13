@@ -4,7 +4,9 @@
 <#include "individual-setup.ftl">
 <#import "individual-qrCodeGenerator.ftl" as qr>
 <#import "lib-vivo-properties.ftl" as vp>
-
+<#if !labelCount??>
+    <#assign labelCount = 0 >
+</#if>
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
@@ -65,7 +67,7 @@
             <#else>                
                 <h1 class="vcard foaf-person">
                     <#-- Label -->
-                    <span class="fn"><@p.label individual editable /></span>
+                    <span class="fn"><@p.label individual editable labelCount/></span>
 
                     <#--  Display preferredTitle if it exists; otherwise mostSpecificTypes -->
                     <#assign title = propertyGroups.pullProperty("${core}preferredTitle")!>
