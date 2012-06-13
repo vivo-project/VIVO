@@ -9,6 +9,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
@@ -22,6 +32,8 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	private static String classType = "java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter";
 
 	private static String internalClassVarNameBase = "isInternal";
+	private Log log = LogFactory.getLog(ProcessInternalClassDataGetterN3.class);
+
 	public ProcessInternalClassDataGetterN3(JSONObject jsonObject){
 		super(jsonObject);
 		
@@ -94,7 +106,57 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
    public String getClassType() {
 	   return classType;
    }
+   
+   
+   public JSONObject getExistingValuesJSON(String dataGetterURI, OntModel queryModel) {
+	   JSONObject jo = new JSONObject();
+	   return jo;
+   }
+   
+   //Existing values
+   //TODO: Correct
+   //How to override methods in here and access elements required?
+   //Unclear?
+   /*
+   @Override
+   public void populateExistingValues(String dataGetterURI, int counter, OntModel queryModel) {
+	   //First, put dataGetterURI within scope as well
+	   existingUriValues.put(this.getDataGetterVar(counter), new ArrayList<String>(Arrays.asList(dataGetterURI)));
+	   //Sparql queries for values to be executed
+	   //And then placed in the correct place/literal or uri
+	   String querystr = getExistingValuesSparqlQuery(dataGetterURI);
+	   QueryExecution qe = null;
+       try{
+           Query query = QueryFactory.create(querystr);
+           qe = QueryExecutionFactory.create(query, queryModel);
+           ResultSet results = qe.execSelect();
+           while( results.hasNext()){
+        	   QuerySolution qs = results.nextSolution();
+        	   Literal saveToVarLiteral = qs.getLiteral("saveToVar");
+        	   Literal htmlValueLiteral = qs.getLiteral("htmlValue");
+        	   //Put both literals in existing literals
+        	   existingLiteralValues.put(this.getVarName("saveToVar", counter),
+        			   new ArrayList<Literal>(Arrays.asList(saveToVarLiteral, htmlValueLiteral)));
+           }
+       } catch(Exception ex) {
+    	   log.error("Exception occurred in retrieving existing values with query " + querystr, ex);
+       }
+	   
+	   
+   }
+  
+   
+   //?dataGetter a FixedHTMLDataGetter ; display:saveToVar ?saveToVar; display:htmlValue ?htmlValue .
+   @Override
+   protected String getExistingValuesSparqlQuery(String dataGetterURI) {
+	   String query = super.getSparqlPrefix() + "SELECT ?saveToVar ?htmlValue WHERE {" + 
+			   "<" + dataGetterURI + "> display:saveToVar ?saveToVar . \n" + 
+			   "<" + dataGetterURI + "> display:htmlValue ?htmlValue . \n" + 
+			   "}";
+	   return query;
+   }
 
+*/
 
 }
 
