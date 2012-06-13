@@ -140,10 +140,10 @@ section#pubsContainer li {
 section#pubsContainer input {
     margin-right:8px;
 }
-
-
-
-
-
-
+/* ---------------------------------- */
+/* --------- MISCELLANEOUS -------- */
+/* ------------------------------- */
+img#indicator {
+    padding-left:60px;
+}
 

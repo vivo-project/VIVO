@@ -59,6 +59,7 @@
     <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="add new web page">Add New Web Page</a>
        
     <a href="${cancelUrl}" id="returnToIndividual" class="return" title="return to individual">Return to Individual</a>
+    <img id="indicator" class="hidden" src="${urls.base}/images/indicatorWhite.gif" />
 </section>
 
 
@@ -69,7 +70,7 @@ var customFormData = {
 };
 </script>
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
                   '<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/manageWebpagesForIndividual.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 

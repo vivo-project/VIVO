@@ -157,6 +157,9 @@ var manageWebpages = {
         if (!confirm(message)) {
             return false;
         }
+
+        $('a#returnToIndividual').hide();
+        $('img#indicator').removeClass('hidden');
         
         if ($(link)[0] === $('.remove:last')[0]) {
             removeLast = true;
@@ -182,7 +185,7 @@ var manageWebpages = {
                         
                         // Remove from the DOM                       
                         $(this).remove();
-                        
+
                         // Actions that depend on the webpage having been removed from the DOM:
                         numWebpages = $('.webpage').length; // retrieve the new length after removing webpage from the DOM
                         
@@ -195,6 +198,13 @@ var manageWebpages = {
                         if (numWebpages < 2) {
                             manageWebpages.disableDD();
                         }                           
+                        $('img#indicator').fadeOut(100, function() {
+                            $(this).addClass('hidden');
+                        })
+
+                        $('a#returnToIndividual').fadeIn(100, function() {
+                            $(this).show();
+                        });
                     });
 
                 } else {
