@@ -16,13 +16,12 @@ edu.cornell.mannlib.vitro.webapp.email.FreemarkerEmailFactory$Setup
 ### this listener must be run before SDBSetup, all models setups and WebappDaoSetup ###
 edu.cornell.mannlib.vitro.webapp.servlet.setup.JenaPersistentDataSourceSetup
  
-edu.cornell.mannlib.vitro.webapp.servlet.setup.SDBSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.RDFServiceSetup
 
 edu.cornell.mannlib.vitro.webapp.servlet.setup.ApplicationModelSetup
 edu.cornell.mannlib.vitro.webapp.servlet.setup.UserModelSetup
-edu.cornell.mannlib.vitro.webapp.servlet.setup.ModelSetup
 
-edu.cornell.mannlib.vitro.webapp.servlet.setup.WebappDaoSDBSetup
+edu.cornell.mannlib.vitro.webapp.servlet.setup.WebappDaoSetup
 
 edu.cornell.mannlib.vitro.webapp.filestorage.backend.FileStorageSetup
 
