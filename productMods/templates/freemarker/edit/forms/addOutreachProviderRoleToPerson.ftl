@@ -20,7 +20,6 @@ roleExamples-->
 <#--Variable assignments for Add Clinical Role To Person-->
 <#assign roleDescriptor = "outreach & community service" />
 <#assign typeSelectorLabel = "outreach & community service in" />
-<#assign roleActivityVClass = "organizations" />
 
 
 <#--Each of the two stage forms will include the form below-->

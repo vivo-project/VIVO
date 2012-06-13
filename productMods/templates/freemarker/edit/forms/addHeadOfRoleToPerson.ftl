@@ -21,7 +21,6 @@ roleExamples-->
 <#assign roleDescriptor = "leadership" />
 <#assign typeSelectorLabel = "organization type" />
 <#assign buttonText = "Leadership Role" />
-<#assign roleActivityVClass = "organizations" />
 
 <#--Each of the two stage forms will include the form below-->
 <#include "addRoleToPersonTwoStage.ftl">
