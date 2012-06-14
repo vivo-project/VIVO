@@ -2,7 +2,8 @@ PREFIX core: <http://vivoweb.org/ontology/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 CONSTRUCT {
-     ?grant ?property ?object
+     ?grant ?property ?object .
+     ?investigatorRole core:roleContributesTo ?grant .
 } WHERE {
     {
       {PERSON_URI core:hasPrincipalInvestigatorRole ?investigatorRole }
