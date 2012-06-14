@@ -149,5 +149,4 @@ display:pageListData
         OPTIONAL {?pageUri display:requiresBodyTemplate ?template .}
         OPTIONAL {?menuItem display:toPage ?pageUri .}
      }  """ .       
-##Originally, included this         OPTIONAL {?pageUri display:hasDataGetter ?dataGetter . ?dataGetter rdfs:label ?dataGetterTypeLabel . }
              
