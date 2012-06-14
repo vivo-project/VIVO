@@ -1,10 +1,12 @@
 PREFIX core: <http://vivoweb.org/ontology/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 CONSTRUCT {
-     ?subOrganization ?property ?object .
+     ?organization core:hasSubOrganization ?subOrganization .
+     ?subOrganization rdfs:label ?label .
 } WHERE {
      PERSON_URI core:personInPosition ?position . 
      ?position core:positionInOrganization ?organization .
      ?organization core:hasSubOrganization ?subOrganization .
-     ?subOrganization ?property ?object .
+     ?subOrganization rdfs:label ?label .
 }
