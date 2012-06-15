@@ -100,7 +100,8 @@
     <input type="submit" id="showAddFormButton" value="Add Author" role="button" />
 
     <span class="or"> or </span>
-    <a class="cancel" href="${cancelUrl}&url=/individual" title="Cancel">Return to Publication</a>
+    <a id="returnLink" class="cancel" href="${cancelUrl}&url=/individual" title="Cancel">Return to Publication</a>
+    <img id="indicatorOne" class="indicator hidden" title="one" src="${urls.base}/images/indicatorWhite.gif" />
 </section> 
 
 <form id="addAuthorForm" action ="${submitUrl}" class="customForm noIE67">
@@ -167,7 +168,8 @@
             
             <span class="or"> or </span>
             
-            <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+            <a id="returnLink" class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+            <img id="indicatorTwo" title="two" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" />
         </p>
 
         <p id="requiredLegend" class="requiredHint">* required fields</p>

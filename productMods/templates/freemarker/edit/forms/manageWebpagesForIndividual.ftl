@@ -59,7 +59,7 @@
     <a href="${showAddFormUrl}" id="showAddForm" class="button green" title="add new web page">Add New Web Page</a>
        
     <a href="${cancelUrl}" id="returnToIndividual" class="return" title="return to individual">Return to Individual</a>
-    <img id="indicator" class="hidden" src="${urls.base}/images/indicatorWhite.gif" />
+    <img id="indicator" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" />
 </section>
 
 

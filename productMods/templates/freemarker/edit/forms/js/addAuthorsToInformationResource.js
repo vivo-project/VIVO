@@ -72,6 +72,7 @@ var addAuthorForm = {
         this.selectedOrgName = $('span#selectedOrgName');
         this.orgLink = $('a#orgLink');
         this.personLink = $('a#personLink');
+        this.returnLink = $('a#returnLink');
         
         this.orgSection.hide();
     },
@@ -618,11 +619,23 @@ var addAuthorForm = {
 
         var removeLast = false,
             message = 'Are you sure you want to remove this author:\n\n' + authorName + ' ?\n\n';
-            
         if (!confirm(message)) {
             return false;
         }
-        
+
+        if ( addAuthorForm.showFormButtonWrapper.is(':visible') ) {
+            addAuthorForm.returnLink.hide();
+            $('img#indicatorOne').removeClass('hidden');
+            addAuthorForm.showFormButton.addClass('disabledSubmit');
+            addAuthorForm.showFormButton.attr('disabled','disabled');
+        }
+        else {
+            addAuthorForm.cancel.hide();
+            $('img#indicatorTwo').removeClass('hidden');            
+            addAuthorForm.submit.addClass('disabledSubmit');
+            addAuthorForm.submit.attr('disabled','disabled');
+        }
+              
         if ($(link)[0] === $('.remove:last')[0]) {
             removeLast = true;
         } 
@@ -671,15 +684,34 @@ var addAuthorForm = {
                         if (numAuthors < 2) {
                             addAuthorForm.disableAuthorDD();
                         }                           
+
+                        if ( $('img#indicatorOne').is(':visible') ) {
+                            $('img#indicatorOne').fadeOut(100, function() {
+                                $(this).addClass('hidden');
+                            });
+
+                            addAuthorForm.returnLink.fadeIn(100, function() {
+                                $(this).show();
+                            });
+                            addAuthorForm.showFormButton.removeClass('disabledSubmit');
+                            addAuthorForm.showFormButton.attr('disabled','');
+                        }
+                        else {
+                            $('img#indicatorTwo').fadeOut(100, function() {
+                                 $(this).addClass('hidden');
+                             });
+
+                             addAuthorForm.cancel.fadeIn(100, function() {
+                                 $(this).show();
+                             });
+                             addAuthorForm.submit.removeClass('disabledSubmit');
+                             addAuthorForm.submit.attr('disabled','');
+                        }
                     });
 
-//                  $(this).hide();
-//                  $(this).siblings('.undo').show();
-//                  author.html(authorName + ' has been removed');
-//                  author.css('width', 'auto');
-//                  author.effect('highlight', {}, 3000);
                 } else {
                     alert('Error processing request: author not removed');
+                    
                 }
             }
         });        

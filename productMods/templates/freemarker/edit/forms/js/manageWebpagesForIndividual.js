@@ -160,6 +160,8 @@ var manageWebpages = {
 
         $('a#returnToIndividual').hide();
         $('img#indicator').removeClass('hidden');
+        $('a#showAddForm').addClass('disabledSubmit');
+        $('a#showAddForm').attr('disabled', 'disabled');
         
         if ($(link)[0] === $('.remove:last')[0]) {
             removeLast = true;
@@ -200,15 +202,17 @@ var manageWebpages = {
                         }                           
                         $('img#indicator').fadeOut(100, function() {
                             $(this).addClass('hidden');
-                        })
+                        });
 
                         $('a#returnToIndividual').fadeIn(100, function() {
                             $(this).show();
                         });
+                        $('a#showAddForm').removeClass('disabledSubmit');
+                        $('a#showAddForm').attr('disabled', '');
                     });
 
                 } else {
-                    alert('Error processing request: web page not removed');
+                    alert('Error processing request: web page not removed.');
                 }
             }
         });        
