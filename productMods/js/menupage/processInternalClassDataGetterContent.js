@@ -31,9 +31,12 @@ var processInternalClassDataGetterContent = {
 	},
 	//For an existing set of content where form is already set, fill in the values 
 	populatePageContentSection:function(existingContentObject, pageContentSection) {
-		var classGroupValue = existingContentObject["classGroup"];
-		var classesSelected = existingContentObject["classesSelectedInClassGroup"];
+		//var classGroupValue = existingContentObject["classGroup"];
+		//var classesSelected = existingContentObject["classesSelectedInClassGroup"];
 		var isInternal = existingContentObject["isInternal"];
+		//Select the class group, display classes in class group, and select classes that are included
+		processIndividualsForClassesDataGetterContent.populatePageContentSection(existingContentObject, pageContentSection);
+		/*
 		//Set class group
 		pageContentSection.find("select[name='selectClassGroup']").val(classGroupValue);
 		//Set classes selected within class group
@@ -43,19 +46,23 @@ var processInternalClassDataGetterContent = {
 		for(i = 0; i < numberSelected; i++) {
 			var classSelected = classesSelected[i];
 			pageContentSection.find("input[name='classInClassGroup'][value='" + classSelected + "']").attr("checked", "checked");
-		}
+		}*/
 		//Also internal class needs to be selected
 		if(isInternal == "true") {
 			pageContentSection.find("input[name='display-internalClass']").attr("checked", "checked");
 		} 
 		//Since this is populating content from the template, no need to "uncheck" anything
+		var results = pageContentSection.results;
+		if(results != null && results.classGroupName != null) {
+	    	var displayInternalMessage = pageContentSection.find('label[for="display-internalClass"] em');
+	    	displayInternalMessage.filter(":first").html(results.classGroupName);
+		}
 		
 	},
 	//For the label of the content section for editing, need to add additional value
 	retrieveAdditionalLabelText:function(existingContentObject) {
-		//Right now return empty but can hook this into a hashmap with labels and uris
-		//set up in browse class group
-		return "";
+		return processClassGroupDataGetterContent.retrieveAdditionalLabelText(existingContentObject);
+
 	}
 		
 }

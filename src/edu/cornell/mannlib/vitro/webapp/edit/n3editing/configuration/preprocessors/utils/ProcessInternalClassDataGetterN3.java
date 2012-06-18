@@ -25,6 +25,7 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
 import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import javax.servlet.ServletContext;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -171,9 +172,17 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
    }
 
    
-   public JSONObject getExistingValuesJSON(String dataGetterURI, OntModel queryModel) {
+   public JSONObject getExistingValuesJSON(String dataGetterURI, OntModel queryModel, ServletContext context) {
 	   JSONObject jObject = new JSONObject();
 	   jObject.element("dataGetterClass", classType);
+	   //Get selected class group, if internal class, and classes selected from class group
+	   getExistingClassGroupAndInternalClass(dataGetterURI, jObject, queryModel);
+	   //Get all classes in the class group
+	   ((ProcessClassGroupDataGetterN3) this).getExistingClassesInClassGroup(context, dataGetterURI, jObject);
+	   return jObject;
+   }
+   
+   private void getExistingClassGroupAndInternalClass(String dataGetterURI, JSONObject jObject, OntModel queryModel) {
 	   String querystr = getExistingValuesInternalClass(dataGetterURI);
 	   QueryExecution qe = null;
 	   Literal internalClassLiteral = null;
@@ -212,9 +221,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
        } catch(Exception ex) {
     	   log.error("Exception occurred in retrieving existing values with query " + querystr, ex);
        }
-	   return jObject;
    }
-
 
 }
 
