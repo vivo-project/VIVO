@@ -19,9 +19,9 @@
  
 .gadgets-gadget-chrome {
   float: left;
-  margin: 4px 6px 4px 0;
-  border: 1px solid #7aa5d6;
-  border: 1px solid #CCC; 
+  margin: 4px 6px 4px 12px; /* changed the left value from 0 tlw72*/
+  border: 1px solid #CCC;
+  border: 1px solid #dfebe5; /*#7aa5d6;*/
 }
 .col2 .gadgets-gadget-chrome { 
   margin-left: 9px;
@@ -31,23 +31,27 @@
 {
   width: 100%;
   border: none;
+  background-color:#fff; /*tlw72*/
 }
 
 .gadgets-gadget-title-bar {
   padding: 4px 4px 2px;
-  background-color: #e5ecf9;
   background-color: #EEEBE5;
+  background-color: #f1f2ee; /* #e5ecf9; */
 }
-.gadgets-gadget-title-bar:hover { background-color: #e7e3db; } 
+/*.gadgets-gadget-title-bar:hover { background-color: #e7e3db; } */
 .gadgets-gadget-title-bar img,
 .gadgets-gadget-title-button {
   vertical-align: top;
 }
 
+/* title bar */
 .gadgets-gadget-title a, .gadgets-gadget-title a:hover {
-  font-weight: bold;
-  font-size: 14px;
-  color: #CA7C29;
+ /* font-weight: bold; */
+  font-size: 16px; /*14px*/
+  color: #2485AE; /*#CA7C29*/
+  padding-left:8px; /*tlw72*/
+  text-decoration: none; /*tlw72*/
 }
 .EditBody .gadgets-gadget-title a {
   color:#3B6394;
@@ -77,8 +81,9 @@
 .gadgets-gadget-title-button img {
   border: 2px solid #4F5CC7;
   border: none;           
-  float: right;                           
-  margin-right: 2px; 
+  float: left; /*right*/                           
+  margin-left: 2px; /*margin-right*/
+  margin-top:6px; /*tlw72*/
 } 
 .EditBody .gadgets-gadget-title-button img {
   float: left;
