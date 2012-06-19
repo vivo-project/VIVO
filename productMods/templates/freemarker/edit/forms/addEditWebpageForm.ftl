@@ -12,6 +12,7 @@
 
 <#--Retrieve variables needed-->
 <#assign url = lvf.getFormFieldValue(editSubmission, editConfiguration, "url")/>
+<#assign urlTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "urlType")/>
 <#assign anchor = lvf.getFormFieldValue(editSubmission, editConfiguration, "anchor") />
 <#assign newRank = lvf.getFormFieldValue(editSubmission, editConfiguration, "newRank") />
 
@@ -48,6 +49,14 @@
     
 <form class="customForm" action ="${submitUrl}" class="customForm">
 
+    <label for="urlType">URL Type${requiredHint}</label>
+    <#assign urlTypeOpts = editConfiguration.pageData.urlType />
+    <select name="urlType" style="margin-top:-2px" >
+        <option value="" <#if editMode == "add">selected</#if>>Select one</option>                
+        <#list urlTypeOpts?keys as key>             
+            <option value="${key}"  <#if editMode == "edit" && urlTypeValue == key>selected</#if>>${urlTypeOpts[key]}</option>         
+        </#list>
+    </select>
     <label for="url">URL ${requiredHint}</label>
     <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
    
