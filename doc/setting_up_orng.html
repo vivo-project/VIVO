@@ -38,136 +38,20 @@
 		    <h3 id="tableofcontents">Table of Contents</h3>
 			<toc>
 				<ol class="roman2">
-					<li><a href="#config_files">Create configuration files</a></li>
 					<li><a href="#database">Create database tables and procedures</a></li>
+					<li><a href="#config_files">Create configuration directory and key file</a></li>
 					<li><a href="#tomcat_settings">Modify Tomcat settings</a></li>
-					<li><a href="#deploy">Deploy the web application</a> <br>
 					<li><a href="#vivo_settings">Configure VIVO</a></li>
+					<li><a href="#deploy">Run the deployment script</a></li>
 					<li><a href="#confirm">Does it work?</a></li>
 				</ol>
 			</toc>
 			<hr/>
-            <h3 id="config_files">I. Create configuration files</h3>
-            <p>
-            	In your VIVO home directory, create a directory called <em>shindig</em>. 
-            	Under that, create directories called <em>conf</em> and <em>openssl</em>. 
-            	Your VIVO home directory will look something like this:
-            	<pre>     [VIVO home directory]
-      |
-      |--shindig
-      |   |
-      |   |--conf
-      |   |
-      |   |--openssl
-      |
-      |--solr
-      |
-      |--uploads</pre>
-            </p>
 
-            <h4>A. Create a secure key file</h4>
-            <p>
-            	Shindig uses an encryption key to insure that the communication 
-            	between the gadget and the server is secure. 
-            	You should create a file that contains the encryption key, 
-            	and store that file in the <em>shindig/openssl</em> directory that you created.
-            </p>
-            <p>
-            	On Unix-based systems (like Linux or Mac OS X), this command will create
-            	an encryption key from a random seed:
-            	<pre>dd if=/dev/random bs=32 count=1 | openssl base64 > <em>[key-file]</em></pre>
-            	For example, if your VIVO home directory is <em>/usr/local/vivo/data</em>, 
-            	you might use the command this way:
-            	<pre>dd if=/dev/random bs=32 count=1 | openssl base64 > /usr/local/vivo/data/shindig/openssl/securitytokenkey.txt</pre>
-            </p>
-            <p>
-            	If your VIVO installation is installed on a machine that runs Microsoft Windows, 
-            	you will need to find another way to create an encryption key. 
-            	The easiest way might be to find a Unix-based machine,
-            	issue the command above, and copy the resulting file to your Windows machine.
-            </p>
-            
-            <h4>B. Create the Create configuration files</h4>
-            <p>
-            	In your VIVO distribution directory, find the file called 
-            	<pre>vitro-core/opensocial/shindig.orng.properties</pre> and copy it to the 
-            	<em>shindig/conf</em> directory that you created.
-            </p>
-            <p>
-            	Set these values in the <em>shindig.orng.properties</em> file
-            </p>
-            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
-                <tbody>
-                    <tr>
-                        <th>
-                            Property Name 
-                        </th>
-                        <th>
-                            Example Value 
-                        </th>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                        	Specify the location of the encryption key file.
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                        	shindig.signing.key-file
-                        </td>
-                        <td>
-                        	/usr/local/vivo/data/shindig/openssl/securitytokenkey.txt
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Specify the JDBC URL of your database. Change
-                            the end of the URL to reflect your database name (if it is not "vivo").
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                        	orng.dbURL
-                        </td>
-                        <td>
-                        	jdbc:mysql://localhost/vivo
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Change the username to match the authorized user 
-                            you created in MySQL when installing VIVO. 
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                        	orng.dbUser
-                        </td>
-                        <td>
-                        	username
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Change the password to match the password you 
-                            created in MySQL when installing VIVO. 
-                        </td>
-                    </tr>
-                    <tr class="odd_row">
-                        <td>
-                        	orng.dbPassword
-                        </td>
-                        <td>
-                        	password
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3 id="database">II. Create database tables and procedures</h3>
+            <h3 id="database">I. Create database tables and procedures</h3>
             <p>
             	Shindig uses several database tables in MySQL to store its data: 
-            	which gadgets appear on which pages, what size are the gadgets, 
+            	which gadgets appear on which pages, how large are the gadgets, 
             	what information applies to each individual, and more.
             	Shindig also creates stored procedures in MySQL. These are small 
             	pieces of code that simplify the use of the database tables.
@@ -201,6 +85,45 @@
             	process the file.
             </p>
             
+            <h3 id="config_files">II. Create configuration directory and key file</h3>
+            <p>
+            	In your VIVO home directory, create a directory called <em>shindig</em>. 
+            	Under that, create directories called <em>conf</em> and <em>openssl</em>. 
+            	Your VIVO home directory will look something like this:
+            	<pre>     [VIVO home directory]
+      |
+      |--shindig
+      |   |
+      |   |--conf
+      |   |
+      |   |--openssl
+      |
+      |--solr
+      |
+      |--uploads</pre>
+            </p>
+
+            <p>
+            	Shindig uses an encryption key to insure that the communication 
+            	between the gadget and the server is secure. 
+            	You should create a file that contains the encryption key, 
+            	and store that file in the <em>shindig/openssl</em> directory that you created.
+            </p>
+            <p>
+            	On Unix-based systems (like Linux or Mac OS X), this command will create
+            	an encryption key from a random seed:
+            	<pre>dd if=/dev/random bs=32 count=1 | openssl base64 > <em>[key-file]</em></pre>
+            	For example, if your VIVO home directory is <em>/usr/local/vivo/data</em>, 
+            	you might use the command this way:
+            	<pre>dd if=/dev/random bs=32 count=1 | openssl base64 > /usr/local/vivo/data/shindig/openssl/securitytokenkey.txt</pre>
+            </p>
+            <p>
+            	If your VIVO installation is installed on a machine that runs Microsoft Windows, 
+            	you will need to find another way to create an encryption key. 
+            	The easiest way might be to find a Unix-based machine,
+            	issue the command above, and copy the resulting file to your Windows machine.
+            </p>
+            
             <h3 id="tomcat_settings">III. Modify Tomcat settings</h3>
             <p>
             	The Shindig application must know where to find the configuration file that you created in 
@@ -226,16 +149,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
 export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
 			</p>            
             
-            <h3 id="deploy">IV. Deploy the web application</h3>
-            <p>
-            	In the VIVO distribution directory, a file called <em>vitro-core/opensocial/shindigorng.war</em>
-            	contains the ORNG-Shindig web application. 
-            	Copy this file to the <em>webapps</em> directory of your Tomcat server.
-            	For example, if your Tomcat server is located at <em>/usr/local/tomcat</em>, 
-            	then you should copy this file to <em>/usr/local/tomcat/webapps/shindigorng.war</em> 
-            </p>
-            
-            <h3 id="vivo_settings">V. Configure VIVO</h3>
+            <h3 id="vivo_settings">IV. Configure VIVO</h3>
             <p>
             	In the VIVO distribution directory, the file called <em>deploy.properties</em>
             	contains configuration options for the VIVO application.
@@ -265,7 +179,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
                     <tr>
                         <td colspan="2">
                         	The host name and port number of the Token Service that ORNG shindig creates.
-                        	For now, a value of <em>localhost</em> or <em>127.0.0.1</em> will not work. 
+                        	Note that a value of <em>localhost</em> or <em>127.0.0.1</em> will not work. 
                         	You must provide the actual host name of your machine, followed by <em>:8777</em>
                         </td>
                     </tr>
@@ -273,8 +187,28 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
                         <td>OpenSocial.tokenService</td>
                         <td>myhost.mydomain.edu:8777</td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                        	The path to a key file that will be used to generate security tokens. This is the
+                        	file that was created in Step I of this process.
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>OpenSocial.tokenKeyFile</td>
+                        <td>/usr/local/vivo/data/shindig/openssl/securitytokenkey.txt</td>
+                    </tr>
                 </tbody>
             </table>
+            
+            <h3 id="deploy">V. Run the deployment script</h3>
+            <p>
+                At the command line, from the top level of the VIVO distribution 
+                directory, type: 
+            </p>
+            <pre>                ant orng<br>            </pre>
+            <p>
+                to configure the ORNG Shindig application and deploy it to Tomcat's webapps directory. 
+            </p>
             
             <h3 id="confirm">VI. Does it work?</h3>
             <p>
@@ -341,20 +275,23 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             		<td>
             			<ul>
 	            			<li>
-	            				Gadgets appear to work as desired.
+	            				"Smoke tests" fail at startup.
+	            				<pre>Token key file for Shindig does not exist</pre>
 	            			</li>
 	            			<li>
-		            			Tomcat "catalina" log file contains an error message:
-        		    			<pre>org.apache.shindig.protocol.ProtocolException: java.net.UnknownHostException:</pre>
+	            				Pages that display gadgets "hang" in the browser.
+	            			</li>
+	            			<li>
+		            			Tomcat "localhost" log file contains error messages, including:
+        		    			<pre>com.google.inject.CreationException: Guice creation errors</pre>
 	            			</li>
             			</ul>
             		</td>
             		<td>
             			<ul>
 	            			<li>
-	            				<b>What's up? 
-	            				This is a result of not setting key-file, or pointing it to a file that doesn't exist. 
-	            				Is there no better diagnostic?</b>
+	            				<em>OpenSocial.tokenKeyFile</em> is not set in <em>deploy.properties</em>,
+	            				or the file does not exist at the specified location.
 	            			</li>
             			</ul>
             		</td>
