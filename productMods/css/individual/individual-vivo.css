@@ -241,7 +241,7 @@ a.qrCloseLink {
     background: #f4f4f4;
 }
 /* <---- Manage Prop Link, individual-properties.ftl -----*/
-a#managePropLink {
+a.manageLinks {
     float:right;font-size:.8em;
     padding-right:10px;
     display:inline;
