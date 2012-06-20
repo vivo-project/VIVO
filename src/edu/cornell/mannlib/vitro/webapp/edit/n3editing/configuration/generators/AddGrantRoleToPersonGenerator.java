@@ -654,7 +654,7 @@ public class AddGrantRoleToPersonGenerator implements EditConfigurationGenerator
 	}
 	
 	public String getGrantType() {
-		return "http://vivoweb.org/ontology#Grant";
+		return "http://vivoweb.org/ontology/core#Grant";
 	}
 	//Ensure when overwritten that this includes the <> b/c otherwise the query won't work
 
