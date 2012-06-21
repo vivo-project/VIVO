@@ -80,6 +80,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <h2>${titleVerb}&nbsp;${roleDescriptor} entry for ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
+<#if activityLabelDisplayValue?has_content >
+    <#assign activityLabelValue = activityLabelDisplayValue />
+</#if>
 
 
 <#if submissionErrors?has_content>
@@ -154,7 +157,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
             <p>
                 <label for="activity">### Name ${requiredHint}</label>
                 <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
-                <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="$activityLabelDisplayValue}">
+                <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="${activityLabelDisplayValue}">
             </p>
             
             <input type="hidden" id="roleToActivityPredicate" name="roleToActivityPredicate" value="" />
