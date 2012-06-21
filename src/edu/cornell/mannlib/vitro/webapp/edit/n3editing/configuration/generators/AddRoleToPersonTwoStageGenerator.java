@@ -89,6 +89,10 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 	
     /* ***** Methods that are REQUIRED to be implemented in subclasses ***** */
 
+//	abstract String getStartDatePrecision();
+
+//    abstract String getEndDatePrecision();
+
 	/** Freemarker template to use */
 	abstract String getTemplate();
 	
@@ -748,7 +752,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     	    	    	    	
     	field.setEditElement(
                 new DateTimeWithPrecisionVTwo(field, 
-                        VitroVocabulary.Precision.YEAR.uri(),
+                        getStartDatePrecision(),
                         VitroVocabulary.Precision.NONE.uri()));   
     	
     	fields.put(field.getName(), field);		
@@ -763,7 +767,7 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
 
     	 field.setEditElement(
                  new DateTimeWithPrecisionVTwo(field, 
-                         VitroVocabulary.Precision.YEAR.uri(),
+                         getEndDatePrecision(),
                          VitroVocabulary.Precision.NONE.uri()));
     	
     	fields.put(field.getName(), field);		
@@ -878,4 +882,16 @@ public abstract class AddRoleToPersonTwoStageGenerator extends BaseEditConfigura
     };
     
 	private final String N3_PREFIX = "@prefix core: <http://vivoweb.org/ontology/core#> .";
+	
+	protected String getStartDatePrecision() {
+	    String precision = VitroVocabulary.Precision.YEAR.uri();
+		return precision;
+	}
+
+	protected String getEndDatePrecision() {
+	    String precision = VitroVocabulary.Precision.YEAR.uri();
+		return precision;
+	}
+	
+    
 }

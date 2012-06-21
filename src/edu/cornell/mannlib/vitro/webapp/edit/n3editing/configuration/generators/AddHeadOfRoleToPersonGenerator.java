@@ -3,13 +3,14 @@
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddHeadOfRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
 	
 	private static String template = "addHeadOfRoleToPerson.ftl";
-	
+
     //Should this be overridden
 	@Override
 	String getTemplate() {
@@ -61,6 +62,21 @@ public class AddHeadOfRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 	@Override
 	boolean isShowRoleLabelField(){return true;}
 
+   /* 
+    * Use the methods below to change the date/time precision in the
+    * custom form associated with this generator. When not used, the
+    * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
+    * MINUTE, TIME and NONE.
+    */
+/*
+    public String getStartDatePrecision() {
+        String precision = VitroVocabulary.Precision.MONTH.uri();
+	    return precision;
+    }
 
-    
+    public String getEndDatePrecision() {
+        String precision = VitroVocabulary.Precision.DAY.uri();
+	    return precision;
+    }
+*/    
 }

@@ -28,4 +28,22 @@ public class AddMemberRoleToPersonGenerator extends AddRoleToPersonTwoStageGener
 	
 	@Override
 	boolean isShowRoleLabelField(){return true;}    
+
+   /* 
+    * Use the methods below to change the date/time precision in the
+    * custom form associated with this generator. When not used, the
+    * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
+    * MINUTE, TIME and NONE.
+    */
+/*
+    public String getStartDatePrecision() {
+        String precision = VitroVocabulary.Precision.MONTH.uri();
+	    return precision;
+    }
+
+    public String getEndDatePrecision() {
+        String precision = VitroVocabulary.Precision.DAY.uri();
+	    return precision;
+    }
+*/    
 }
