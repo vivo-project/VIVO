@@ -35,20 +35,32 @@
             </p>
 
             <hr/>
-		    <h3 id="tableofcontents">Table of Contents</h3>
+		    <h2 id="tableofcontents">Table of Contents</h2>
 			<toc>
-				<ol class="roman2">
-					<li><a href="#database">Create database tables and procedures</a></li>
-					<li><a href="#config_files">Create configuration directory and key file</a></li>
-					<li><a href="#tomcat_settings">Modify Tomcat settings</a></li>
-					<li><a href="#vivo_settings">Configure VIVO</a></li>
-					<li><a href="#deploy">Run the deployment script</a></li>
-					<li><a href="#confirm">Does it work?</a></li>
+				<ol class="roman1">
+					<li> <a href="#installation">Installing and Configuring</a>
+						<ol class="roman2">
+							<li><a href="#database">Create database tables and procedures</a></li>
+							<li><a href="#config_files">Create configuration directory and key file</a></li>
+							<li><a href="#tomcat_settings">Modify Tomcat settings</a></li>
+							<li><a href="#vivo_settings">Configure VIVO</a></li>
+							<li><a href="#deploy">Run the deployment script</a></li>
+							<li><a href="#confirm">Does it work?</a></li>
+						</ol>
+					</li>
+					<li> <a href="#gadgets">Setting up the Gadgets</a>
+						<ol class="roman2">
+							<li><a href="#shindig_apps">The <em>shindig_apps</em> database table</a></li>
+							<li><a href="#shindig_app_views">The <em>shindig_app_views</em> database table</a></li>
+						</ol>
+					</li>
 				</ol>
 			</toc>
 			<hr/>
 
-            <h3 id="database">I. Create database tables and procedures</h3>
+            <h2 id="installation">I. Installing and Configuring</h2>
+            
+            <h3 id="database">I.i. Create database tables and procedures</h3>
             <p>
             	Shindig uses several database tables in MySQL to store its data: 
             	which gadgets appear on which pages, how large are the gadgets, 
@@ -85,7 +97,7 @@
             	process the file.
             </p>
             
-            <h3 id="config_files">II. Create configuration directory and key file</h3>
+            <h3 id="config_files">I.ii. Create configuration directory and key file</h3>
             <p>
             	In your VIVO home directory, create a directory called <em>shindig</em>. 
             	Under that, create directories called <em>conf</em> and <em>openssl</em>. 
@@ -124,7 +136,7 @@
             	issue the command above, and copy the resulting file to your Windows machine.
             </p>
             
-            <h3 id="tomcat_settings">III. Modify Tomcat settings</h3>
+            <h3 id="tomcat_settings">I.iii. Modify Tomcat settings</h3>
             <p>
             	The Shindig application must know where to find the configuration file that you created in 
             	Step I. 
@@ -149,7 +161,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
 export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
 			</p>            
             
-            <h3 id="vivo_settings">IV. Configure VIVO</h3>
+            <h3 id="vivo_settings">I.iv Configure VIVO</h3>
             <p>
             	In the VIVO distribution directory, the file called <em>deploy.properties</em>
             	contains configuration options for the VIVO application.
@@ -200,7 +212,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
                 </tbody>
             </table>
             
-            <h3 id="deploy">V. Run the deployment script</h3>
+            <h3 id="deploy">I.v. Run the deployment script</h3>
             <p>
                 At the command line, from the top level of the VIVO distribution 
                 directory, type: 
@@ -210,7 +222,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
                 to configure the ORNG Shindig application and deploy it to Tomcat's webapps directory. 
             </p>
             
-            <h3 id="confirm">VI. Does it work?</h3>
+            <h3 id="confirm">I.vi Does it work?</h3>
             <p>
             	Start VIVO. Enter a search term in the search box, and view the results. Check the gadgets there. 
             	Navigate to a person's profile page. Again, check for the expected gadgets. 
@@ -341,7 +353,191 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             	</tr>
             	<tr class="odd_row"><td colspan="2"></td></tr>
             </table>
+        
+	        <h2 id="gadgets">II. Setting up the Gadgets</h2>
+
+            <p>
+            	VIVO will look at tables in MySQL to determine what gadgets should be made available, 
+            	where they should appear, how big they will be, and much more. 
+            	At this time, VIVO doesn't provide a user interface to edit the contents of these tables.
+            	Administrators will need to use a MySQL admin client, or SQL commands, to set these 
+            	parameters. 
+            </p>
+            <p>
+            	The tables are named <em>shindig_apps</em> and <em>shindig_app_views</em>, 
+            	and are described in the following sections.
+            </p>
+    
+    		<h3 id="shindig_apps">II.i The <em>shindig_apps</em> database table</h3>
+    		
+    		<table>
+    			<tr>
+    				<th>Field</th>
+    				<th>Type</th>
+    				<th>Usage</th>
+    			</tr>
+    			<tr>
+    				<td>appid</td>
+    				<td>int(11)</td>
+    				<td>
+    					Identifies the gadget. 
+    					In particular, this will be used to determine which rows in the 
+    					<em>shindig_app_views</em> table should apply to this gadget. 
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>name</td>
+    				<td>varchar(255)</td>
+    				<td>
+    					A user-friendly name for the gadget. 
+    					This will be displayed in the gadget's "Title Bar".
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>url</td>
+    				<td>varchar(255)</td>
+    				<td>
+    					The location where the gadget's contents and behavior are defined.
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>PersonFilterID</td>
+    				<td>int(11)</td>
+    				<td>unknown</td>
+    			</tr>
+    			<tr>
+    				<td>enabled</td>
+    				<td>tinyint(1)</td>
+    				<td>
+    					If set to 0, this gadget will never be displayed. 
+    					If set to 1, it is displayed according to the rules in the <em>shindig_app_views</em> table.
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>channels</td>
+    				<td>varchar(255)</td>
+    				<td>unknown</td>
+    			</tr>
+    		</table>
+
+    		<h3 id="shindig_app_views">II.ii The <em>shindig_app_views</em> database table</h3>
+
+    		<table>
+    			<tr>
+    				<th>Field</th>
+    				<th>Type</th>
+    				<th>Usage</th>
+    			</tr>
+    			<tr>
+    				<td>appid</td>
+    				<td>int(11)</td>
+    				<td>
+    					Determines which gadget in <em>shindig_apps</em> is affected by this rule.
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>viewer_req</td>
+    				<td>char(1)</td>
+    				<td>
+    					unknown
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>owner_req</td>
+    				<td>char(1)</td>
+    				<td>
+    					unknown
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>page</td>
+    				<td>varchar(50)</td>
+    				<td>
+    					What page does this rule apply to? 
+    					A single gadget might have several views, but no more than one view per page.
+    					Recognized values are
+    					<ul>
+    						<li>
+    							<em>individual</em> -- The profile page of an individual, when it is not in "edit" mode.
+    							This applies when the viewer is not logged in, or does not have the right to edit the profile page. 
+    						</li>
+    						<li>
+    							<em>individual-EDIT-MODE</em> -- The profile page of an individual, when it is in "edit" mode.
+    							This applies when the viewer is logged in as an administrator or other privileged user, or
+    							as the owner of the profile page.
+    						</li>
+    						<li>
+    							<em>search</em> -- The search results page. 
+    						</li>
+    						<li>
+    							<em>gadgetDetails</em> -- A page that contains only the selected gadget. This usually occurs when
+    							the user clicks on an icon or a link that expands the gadget to full-page mode. 
+    						</li>
+    					</ul> 
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>view</td>
+    				<td>varchar(50)</td>
+    				<td>
+    					What is the view-mode of the gadget? These are defined as part of the OpenSocial standards.
+    					<ul>
+    						<li>
+    							<em>profile</em> -- The "standard" view, commonly used on the profile page of an individual
+    						</li>
+    						<li>
+    							<em>small</em> -- The "condensed" view.
+    						</li>
+    						<li>
+    							<em>home</em> -- The view which allows the user to change the gadget's settings.
+    						</li>
+    						<li>
+    							<em>canvas</em> -- The "expanded", commonly used when the gadget is the only thing on a page.
+    						</li>
+    					</ul> 
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>closed_width</td>
+    				<td>int(11)</td>
+    				<td>
+    					How wide is the gadget when it is closed? (in pixels)
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>open_width</td>
+    				<td>int(11)</td>
+    				<td>
+    					How wide is the gadget when it is open? (in pixels)
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>start_closed</td>
+    				<td>tinyint(1)</td>
+    				<td>
+    					When the page is first loaded, is the gadget open or closed (1 = closed, 0 = open)
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>chromeId</td>
+    				<td>varchar(50)</td>
+    				<td>
+    					The gadget will be displayed on the page inside a &lt;div&gt; with this id.
+    					Note: the page must contain this &lt;div&gt; and its contents 
+    					will be replaced with this gadget (or gadgets). 
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>display_order</td>
+    				<td>int(11)</td>
+    				<td>
+    					If more than one gadget has the same chromeId, they will be displayed in order by this field.
+    				</td>
+    			</tr>
+    		</table>
+
         </div>
+        
     </body>
 </html>
             
