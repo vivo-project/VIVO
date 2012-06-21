@@ -45,7 +45,7 @@
         # Order by ?type is important, because if the object has more than one mostSpecificType,
         # they all get returned, but postprocessing culls out all but one. Ordering by ?type
         # will ensure that at least we'll get the same one every time.
-        } ORDER BY <collated> ?subclass </collated> ?label ?localName ?type 
+        } ORDER BY <collated> ?subclass </collated> ASC( ?label ) ASC( ?localName ) ?type 
     </query-select>
 
     <query-construct>
