@@ -118,12 +118,7 @@ display:Research
       a <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> .
       
 
-#Data getter type labels
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>  rdfs:label "Class Group Page" .
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> rdfs:label "Browse Page" . 
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> rdfs:label "Class Group Page - Selected Classes" .
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> rdfs:label "Class Group Page - Institutional Internal Class" .
-<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> rdfs:label "Sparql Query Results" .
+
 ## display model pages ###
 
 display:pageListPage
@@ -141,12 +136,18 @@ display:pageListData
     display:query """
     PREFIX display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> 
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    SELECT ?pageUri ?title ?urlMapping ?template ?menuItem
+    SELECT ?listedPageUri ?listedPageTitle ?listedPageUrlMapping ?listedPageTemplate ?listedPageMenuItem
     WHERE { 
-        ?pageUri a display:Page .
-        OPTIONAL{ ?pageUri display:urlMapping ?urlMapping. }
-        OPTIONAL{ ?pageUri display:title  ?title. }  
-        OPTIONAL {?pageUri display:requiresBodyTemplate ?template .}
-        OPTIONAL {?menuItem display:toPage ?pageUri .}
+        ?listedPageUri a display:Page .
+        OPTIONAL{ ?listedPageUri display:urlMapping ?listedPageUrlMapping. }
+        OPTIONAL{ ?listedPageUri display:title  ?listedPageTitle. }  
+        OPTIONAL {?listedPageUri display:requiresBodyTemplate ?listedPageTemplate .}
+        OPTIONAL {?listedPageMenuItem display:toPage ?listedPageUri .}
      }  """ .       
-             
+
+#Data getter type labels
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>  rdfs:label "Class Group Page" .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.BrowseDataGetter> rdfs:label "Browse Page" . 
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.IndividualsForClassesDataGetter> rdfs:label "Class Group Page - Selected Classes" .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.SparqlQueryDataGetter> rdfs:label "Sparql Query Results" .
+<java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.InternalClassesDataGetter> rdfs:label "Class Group Page - Institutional Internal Class" .
