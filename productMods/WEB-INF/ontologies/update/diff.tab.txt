@@ -1,0 +1,1 @@
+http://vivoweb.org/ontology/core#ResearchLaboratory	http://vivoweb.org/ontology/core#Laboratory	Yes	Map	Directly-changed

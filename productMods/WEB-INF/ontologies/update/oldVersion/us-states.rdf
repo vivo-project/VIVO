@@ -1,0 +1,206 @@
+<rdf:RDF
+    xmlns:vivo="http://vivoweb.org/ontology/core#"
+    xmlns:dbpedia="http://dbpedia.org/resource/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Alabama">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Alabama</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Alaska">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Alaska</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Arizona">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Arizona</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Arkansas">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Arkansas</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/California">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">California</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Colorado">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Colorado</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Connecticut">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Connecticut</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Delaware">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Delaware</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Florida">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Florida</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Georgia">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Georgia</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Hawaii">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Hawaii</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Idaho">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Idaho</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Illinois">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Illinois</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Indiana">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Indiana</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Iowa">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Iowa</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Kansas">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Kansas</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Kentucky">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Kentucky</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Louisiana">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Louisiana</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Maine">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Maine</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Maryland">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Maryland</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Massachusetts">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Massachusetts</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Michigan">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Michigan</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Minnesota">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Minnesota</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Mississipi">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Mississipi</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Missouri">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Missouri</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Montana">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Montana</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Nebraska">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Nebraska</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Nevada">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Nevada</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/New_Hampshire">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">New Hampshire</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/New_Jersey">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">New Jersey</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/New_Mexico">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">New Mexico</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/New_York">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">New York</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/North_Carolina">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">North Carolina</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/North_Dakota">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">North Dakota</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Ohio">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Ohio</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Oklahoma">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Oklahoma</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Oregon">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Oregon</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Pennsylvania">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Pennsylvania</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Rhode_Island">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Rhode Island</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/South_Carolina">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">South Carolina</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/South_Dakota">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">South Dakota</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Tennessee">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Tennessee</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Texas">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Texas</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Utah">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Utah</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Vermont">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Vermont</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Virginia">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Virginia</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Washington">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Washington</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/West_Virginia">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">West Virginia</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Wisconsin">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Wisconsin</rdfs:label>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://dbpedia.org/resource/Wyoming">
+      <rdf:type rdf:resource="http://vivoweb.org/ontology/core#StateOrProvince"/>
+      <rdfs:label xml:lang="en">Wyoming</rdfs:label>
+   </rdf:Description>
+</rdf:RDF>

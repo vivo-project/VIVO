@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf [
+<!ENTITY vitro "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"> 
+<!ENTITY list "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#"> ]>
+
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:owl="http://www.w3.org/2002/07/owl#"
+xmlns:vitro="&vitro;"
+>
+
+
+<!-- Vitro Application Ontology version 0.7 -->
+
+<!-- This ontology is used internally by the Vitro 0.7 Java application.  It is not user viewable or editable:  editing this file could have various unintended consequences --> 
+
+<owl:Ontology rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vitro internals</rdfs:label>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</owl:versionInfo>
+</owl:Ontology>
+
+<!-- general Vitro constructs -->
+
+<owl:AnnotationProperty rdf:about="&vitro;descriptionAnnot"/>
+<owl:DatatypeProperty rdf:about="&vitro;displayLimit"/>
+<owl:AnnotationProperty rdf:about="&vitro;displayLimitAnnot"/>
+<owl:DatatypeProperty rdf:about="&vitro;displayRank"/>
+<owl:AnnotationProperty rdf:about="&vitro;displayRankAnnot"/>
+<owl:AnnotationProperty rdf:about="&vitro;exampleAnnot"/>
+<owl:DatatypeProperty rdf:about="&vitro;hidden"/>
+<owl:AnnotationProperty rdf:about="&vitro;hiddenAnnot"/>
+<owl:AnnotationProperty rdf:about="&vitro;modTimeAnnot"/>
+<owl:AnnotationProperty rdf:about="&vitro;shortDefAnnot"/>
+<owl:AnnotationProperty rdf:about="&vitro;oldId"/>
+
+<!-- VClassGroup-related constructs -->
+
+<owl:Class rdf:about="&vitro;ClassGroup"/>
+
+<!-- VClass-related constructs -->
+
+<owl:AnnotationProperty rdf:about="&vitro;harvestId"/>
+<owl:AnnotationProperty rdf:about="&vitro;inClassGroup"/>
+
+<!-- ObjectProperty-related constructs -->
+
+<owl:AnnotationProperty rdf:about="&vitro;fullPropertyNameAnnot"/>
+<owl:AnnotationProperty rdf:about="&vitro;individualSortDirectionAnnot"/>
+
+<!-- externalID-related constructs -->
+
+<owl:AnnotationProperty rdf:about="&vitro;isExternalId"/>
+<owl:AnnotationProperty rdf:about="&vitro;originalId"/>
+
+<!-- other Individual-related -->
+
+<owl:DatatypeProperty rdf:about="&vitro;modTime"/>
+<owl:DatatypeProperty rdf:about="&vitro;moniker"/>
+
+<!-- Portal-related constructs -->
+
+<owl:Class rdf:about="&vitro;Portal"/>
+<owl:ObjectProperty rdf:about="&vitro;rootTab"/>
+<owl:DatatypeProperty rdf:about="&vitro;themeDir"/>
+<owl:DatatypeProperty rdf:about="&vitro;bannerImage"/>
+<owl:DatatypeProperty rdf:about="&vitro;contactMail"/>
+<owl:DatatypeProperty rdf:about="&vitro;shortHand"/>
+<owl:DatatypeProperty rdf:about="&vitro;aboutText"/>
+<owl:DatatypeProperty rdf:about="&vitro;acknowledgeText"/>
+<owl:DatatypeProperty rdf:about="&vitro;bannerWidth"/>
+<owl:DatatypeProperty rdf:about="&vitro;bannerHeight"/>
+<owl:DatatypeProperty rdf:about="&vitro;copyrightURL"/>
+<owl:DatatypeProperty rdf:about="&vitro;copyrightAnchor"/>
+<owl:DatatypeProperty rdf:about="&vitro;rootBreadCrumbURL"/>
+<owl:DatatypeProperty rdf:about="&vitro;rootBreadCrumbAnchor"/>
+<owl:DatatypeProperty rdf:about="&vitro;logotypeImage"/>
+<owl:DatatypeProperty rdf:about="&vitro;logotypeHeight"/>
+<owl:DatatypeProperty rdf:about="&vitro;logotypeWidth"/>
+<owl:DatatypeProperty rdf:about="&vitro;imageThumbWidth"/>
+<owl:DatatypeProperty rdf:about="&vitro;urlPrefix"/>
+
+<!-- Application-related constructs -->
+
+<owl:Class rdf:about="&vitro;Application"/>
+<owl:DatatypeProperty rdf:about="&vitro;rootLogotypeImage"/>
+
+<!-- User-related constructs -->
+
+<owl:Class rdf:about="&vitro;User"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#username"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#md5password"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#oldpassword"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#modTime"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#firstTime"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#loginCount"/>
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#roleURI"/>
+
+<!-- Namespace metadata -->
+<owl:DatatypeProperty rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#namespaceURI"/>
+<owl:Class rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Namespace"/>
+
+
+<!-- additions -->
+
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#hiddenFromDisplayBelowRoleLevelAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#forceStubDeletionAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#offerCreateNewOptionAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customShortViewAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#objectIndividualSortProperty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#PropertyGroup">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customEntryFormAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#inPropertyGroupAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#shortDef">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#publicDescriptionAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#prohibitedFromUpdateBelowRoleLevelAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#selectFromExistingAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customDisplayViewAnnot">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  
+  <owl:AnnotationProperty rdf:about="&vitro;mostSpecificType"/>
+  <owl:AnnotationProperty rdf:about="&vitro;extendedLinkedData"/>
+<!--Institutional Internal class -->
+<owl:AnnotationProperty rdf:about="&vitro;isMenuPageIntersectionClass"/>
+</rdf:RDF>
