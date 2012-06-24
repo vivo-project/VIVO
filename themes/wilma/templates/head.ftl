@@ -13,7 +13,7 @@
         ${stylesheets.add('<link rel="stylesheet" href="${urls.theme}/css/openSocial/gadgets.css" />')}			
         ${headScripts.add('<script type="text/javascript" src="${openSocial.containerJavascriptSrc}"></script>',
                           '<script type="text/javascript" language="javascript">${openSocial.gadgetJavascript}</script>',
-                          '<script type="text/javascript" src="${urls.base}/js/openSocial/shindig.js"></script>')}
+                          '<script type="text/javascript" src="${urls.base}/js/openSocial/orng.js"></script>')}
     </#if>	
 </#if>	
 
