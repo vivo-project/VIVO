@@ -258,6 +258,14 @@
     <url-pattern>/postEditCleanupController</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>DeletePageController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.DeletePageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePageController</servlet-name>
+    <url-pattern>/deletePageController</url-pattern>
+  </servlet-mapping>
   
    <servlet>
     <servlet-name>MenuManagementController</servlet-name>

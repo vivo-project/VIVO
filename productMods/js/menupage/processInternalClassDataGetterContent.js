@@ -63,6 +63,10 @@ var processInternalClassDataGetterContent = {
 	retrieveAdditionalLabelText:function(existingContentObject) {
 		return processClassGroupDataGetterContent.retrieveAdditionalLabelText(existingContentObject);
 
+	},
+	//Validation on form submit: Check to see that class group has been selected 
+	validateFormSubmission: function(pageContentSection) {
+		return processClassGroupDataGetterContent.validateFormSubmission(pageContentSection);
 	}
 		
 }

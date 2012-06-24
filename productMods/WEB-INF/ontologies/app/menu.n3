@@ -138,14 +138,15 @@ display:pageListData
     display:query """
     PREFIX display: <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#> 
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    SELECT ?listedPageUri ?listedPageTitle ?listedPageUrlMapping ?listedPageTemplate ?listedPageMenuItem
+    SELECT ?listedPageUri ?listedPageTitle ?listedPageUrlMapping ?listedPageTemplate ?listedPageMenuItem ?listedPageCannotDeletePage
     WHERE { 
         ?listedPageUri a display:Page .
         OPTIONAL{ ?listedPageUri display:urlMapping ?listedPageUrlMapping. }
         OPTIONAL{ ?listedPageUri display:title  ?listedPageTitle. }  
         OPTIONAL {?listedPageUri display:requiresBodyTemplate ?listedPageTemplate .}
         OPTIONAL {?listedPageMenuItem display:toPage ?listedPageUri .}
-     }  """ .       
+        OPTIONAL {?listedPageUri display:cannotDeletePage ?listedPageCannotDeletePage .}
+     }  ORDER BY ?listedPageTitle """ .       
 
 #Data getter type labels
 <java:edu.cornell.mannlib.vitro.webapp.utils.dataGetter.ClassGroupPageData>  rdfs:label "Class Group Page" .

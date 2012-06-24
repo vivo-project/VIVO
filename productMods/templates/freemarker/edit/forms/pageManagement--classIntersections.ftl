@@ -11,7 +11,7 @@
     </#if>
 
                 <input type="checkbox" ${disableClass} name="display-internalClass" value="${internalClassUri}" id="display-internalClass" <#if editConfiguration.pageData.internalClass?has_content && editConfiguration.pageData.isInternal?has_content>checked</#if> role="input" />
-    <label ${disableClass} class="inline" for="display-internalClass">Only display <em>${editConfiguration.pageData.associatedPage}</em> within my institution</label>
+    <label ${disableClass} class="inline" for="display-internalClass">Only display <em> </em> within my institution</label>
 
     ${enableInternalClass}
 </section>
