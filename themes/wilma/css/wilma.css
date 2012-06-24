@@ -1637,3 +1637,14 @@ span.subclassExpandMinus {
     padding-right: 14px;
     background: url(../images/green_minus_sign.gif) left center no-repeat;
 }
+/* ------------------------------------------------->  */
+/* PAGE MANAGEMENT  -------------------------------->  */
+/* ------------------------------------------------->  */
+.expandArrow {
+    background:url(../images/green_plus_sign.gif) right center no-repeat;
+    min-height:18px;
+}
+.collapseArrow {
+    background:url(../images/green_minus_sign.gif) right center no-repeat;
+    min-height:18px;
+}
