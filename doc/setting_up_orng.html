@@ -30,7 +30,7 @@
             </p>
             <p>
             	ORNG supports gadgets using a modified version of Apache Shindig.
-            	These instructions tell you how to install the ORNG Shindig web application,
+            	These instructions tell you how to install the Shindig-ORNG web application,
             	and how to configure it to work with VIVO.
             </p>
 
@@ -50,8 +50,8 @@
 					</li>
 					<li> <a href="#gadgets">Setting up the Gadgets</a>
 						<ol class="roman2">
-							<li><a href="#shindig_apps">The <em>shindig_apps</em> database table</a></li>
-							<li><a href="#shindig_app_views">The <em>shindig_app_views</em> database table</a></li>
+							<li><a href="#orng_apps">The <em>orng_apps</em> database table</a></li>
+							<li><a href="#orng_app_views">The <em>orng_app_views</em> database table</a></li>
 						</ol>
 					</li>
 				</ol>
@@ -62,17 +62,17 @@
             
             <h3 id="database">I.i. Create database tables and procedures</h3>
             <p>
-            	Shindig uses several database tables in MySQL to store its data: 
+            	Shindig-ORNG uses several database tables in MySQL to store its data: 
             	which gadgets appear on which pages, how large are the gadgets, 
             	what information applies to each individual, and more.
-            	Shindig also creates stored procedures in MySQL. These are small 
+            	Shindig-ORNG also creates stored procedures in MySQL. These are small 
             	pieces of code that simplify the use of the database tables.
             </p>
             <p>
             	In the VIVO distribution directory, a file called 
             	<em>vitro-core/opensocial/shindig_orng_tables.sql</em> 
             	contains SQL commands that create the tables and 
-            	stored procedures for Shindig to use.
+            	stored procedures for Shindig-ORNG to use.
             </p>
             <p>
             	Tell MySQL to process this file with a command like this:
@@ -116,7 +116,7 @@
             </p>
 
             <p>
-            	Shindig uses an encryption key to insure that the communication 
+            	Shindig-ORNG uses an encryption key to insure that the communication 
             	between the gadget and the server is secure. 
             	You should create a file that contains the encryption key, 
             	and store that file in the <em>shindig/openssl</em> directory that you created.
@@ -138,7 +138,7 @@
             
             <h3 id="tomcat_settings">I.iii. Modify Tomcat settings</h3>
             <p>
-            	The Shindig application must know where to find the configuration file that you created in 
+            	The Shindig-ORNG application must know where to find the configuration file that you created in 
             	Step I. 
             	It must also know its own URL, so that URL can be inserted into the gadgets.
 			</p>            
@@ -150,13 +150,13 @@
                 <em>If this file does not exist in Tomcat's bin directory, you can create it.</em>
             </p>
 			<p>
-				Here is an example of the setenv file, showing only the Shindig requirements:
+				Here is an example of the setenv file, showing only the Shindig-ORNG requirements:
 				<pre>export CLASSPATH=/usr/local/vivo/data/shindig/conf
 export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
 				This assumes that your setenv file was empty before starting this process, 
-				and that you used the default location for the Shindig configuration file in Step I.
+				and that you used the default location for the Shindig-ORNG configuration file in Step I.
 				In fact, it's more common for the setenv file to contain other parameters besides 
-				those used for Shindig. In that case, it might look more like this:
+				those used for Shindig-ORNG. In that case, it might look more like this:
 				<pre>export CLASSPATH=/usr/local/vivo/data/shindig/conf
 export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
 			</p>            
@@ -165,7 +165,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             <p>
             	In the VIVO distribution directory, the file called <em>deploy.properties</em>
             	contains configuration options for the VIVO application.
-            	You must set some additional parameters so VIVO will be able to communicate with Shindig. 
+            	You must set some additional parameters so VIVO will be able to communicate with Shindig-ORNG. 
             </p>
             <table border='1' bordercolor="#CCCCCC" cellspacing="5">
                 <tbody>
@@ -179,7 +179,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
                     </tr>
                     <tr>
                         <td colspan="2">
-                        	The base URL that VIVO will use when contacting the ORNG Shindig application. 
+                        	The base URL that VIVO will use when contacting the Shindig-ORNG application. 
                         	Usually, this is the same host and port number as VIVO itself, 
                         	with a context path of <em>shindigorng</em>
                         </td>
@@ -190,7 +190,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
                     </tr>
                     <tr>
                         <td colspan="2">
-                        	The host name and port number of the Token Service that ORNG shindig creates.
+                        	The host name and port number of the Token Service that Shindig-ORNG creates.
                         	Note that a value of <em>localhost</em> or <em>127.0.0.1</em> will not work. 
                         	You must provide the actual host name of your machine, followed by <em>:8777</em>
                         </td>
@@ -219,7 +219,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             </p>
             <pre>                ant orng<br>            </pre>
             <p>
-                to configure the ORNG Shindig application and deploy it to Tomcat's webapps directory. 
+                to configure the Shindig-ORNG application and deploy it to Tomcat's webapps directory. 
             </p>
             
             <h3 id="confirm">I.vi Does it work?</h3>
@@ -317,7 +317,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
 	            			</li>
 	            			<li>
 		            			vivo.all.log contains an error message:
-        		    			<pre>MySQLSyntaxErrorException: Table 'vivo.shindig_apps' doesn't exist</pre>
+        		    			<pre>MySQLSyntaxErrorException: Table 'vivo.orng_apps' doesn't exist</pre>
 	            			</li>
             			</ul>
             		</td>
@@ -364,11 +364,16 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             	parameters. 
             </p>
             <p>
-            	The tables are named <em>shindig_apps</em> and <em>shindig_app_views</em>, 
+            	The tables are named <em>orng_apps</em> and <em>orng_app_views</em>, 
             	and are described in the following sections.
             </p>
     
-    		<h3 id="shindig_apps">II.i The <em>shindig_apps</em> database table</h3>
+    		<h3 id="orng_apps">II.i The <em>orng_apps</em> database table</h3>
+    		<p>
+    			This table acts as a dictionary of the available gadgets. 
+    			Includes the name and ID of the gadget and where the source code is stored on the web.
+    			Also a flag for disabling the gadget, and some additional fields.
+    		</p>
     		
     		<table>
     			<tr>
@@ -382,7 +387,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     				<td>
     					Identifies the gadget. 
     					In particular, this will be used to determine which rows in the 
-    					<em>shindig_app_views</em> table should apply to this gadget. 
+    					<em>orng_app_views</em> table should apply to this gadget. 
     				</td>
     			</tr>
     			<tr>
@@ -410,17 +415,17 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     				<td>tinyint(1)</td>
     				<td>
     					If set to 0, this gadget will never be displayed. 
-    					If set to 1, it is displayed according to the rules in the <em>shindig_app_views</em> table.
+    					If set to 1, it is displayed according to the rules in the <em>orng_app_views</em> table.
     				</td>
     			</tr>
     			<tr>
     				<td>channels</td>
     				<td>varchar(255)</td>
-    				<td>unknown</td>
+    				<td>Keywords that identify the communication channels between the gadget and VIVO.</td>
     			</tr>
     		</table>
 
-    		<h3 id="shindig_app_views">II.ii The <em>shindig_app_views</em> database table</h3>
+    		<h3 id="orng_app_views">II.ii The <em>orng_app_views</em> database table</h3>
 
     		<table>
     			<tr>
@@ -432,7 +437,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     				<td>appid</td>
     				<td>int(11)</td>
     				<td>
-    					Determines which gadget in <em>shindig_apps</em> is affected by this rule.
+    					Determines which gadget in <em>orng_apps</em> is affected by this rule.
     				</td>
     			</tr>
     			<tr>
