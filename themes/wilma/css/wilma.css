@@ -1598,6 +1598,7 @@ input.add-account:active {
 .disabledSubmit {
     color: #ede ! important;
     background-color: #b2d15a ! important;
+    cursor: default ! important;
 }
 /* ------------------------------------------------->  */
 /* CONTACT FORM ------------------------------------>  */
