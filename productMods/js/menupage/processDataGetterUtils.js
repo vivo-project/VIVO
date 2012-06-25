@@ -30,5 +30,11 @@ var processDataGetterUtils = {
 	    },
 	    isRelatedToBrowseClassGroup:function(contentType) {
 	    	return (contentType == "browseClassGroup" || contentType == "internalClass");
+	    },
+	    getContentTypeForCloning:function(contentType) {
+	    	if(contentType == "browseClassGroup" || contentType == "internalClass") {
+	    		return "browseClassGroup";
+	    	} 
+	    	return contentType;
 	    }
 };

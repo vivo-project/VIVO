@@ -31,22 +31,19 @@ var processInternalClassDataGetterContent = {
 	},
 	//For an existing set of content where form is already set, fill in the values 
 	populatePageContentSection:function(existingContentObject, pageContentSection) {
-		//var classGroupValue = existingContentObject["classGroup"];
-		//var classesSelected = existingContentObject["classesSelectedInClassGroup"];
-		var isInternal = existingContentObject["isInternal"];
-		//Select the class group, display classes in class group, and select classes that are included
-		processIndividualsForClassesDataGetterContent.populatePageContentSection(existingContentObject, pageContentSection);
-		/*
-		//Set class group
-		pageContentSection.find("select[name='selectClassGroup']").val(classGroupValue);
-		//Set classes selected within class group
-		//TODO: Add magic for "all" if all classes selected
+		//select class group in dropdown and append the classes within that class group
+		processClassGroupDataGetterContent.populatePageContentSection(existingContentObject, pageContentSection);
+		var classesSelected = existingContentObject["classesSelectedInClassGroup"];
 		var numberSelected = classesSelected.length;
 		var i;
+		//Uncheck all since default is checked
+		pageContentSection.find("input[name='classInClassGroup']").removeAttr("checked");
 		for(i = 0; i < numberSelected; i++) {
 			var classSelected = classesSelected[i];
 			pageContentSection.find("input[name='classInClassGroup'][value='" + classSelected + "']").attr("checked", "checked");
-		}*/
+		}
+		//internal class
+		var isInternal = existingContentObject["isInternal"];
 		//Also internal class needs to be selected
 		if(isInternal == "true") {
 			pageContentSection.find("input[name='display-internalClass']").attr("checked", "checked");
@@ -60,13 +57,17 @@ var processInternalClassDataGetterContent = {
 		
 	},
 	//For the label of the content section for editing, need to add additional value
+	retrieveContentLabel:function() {
+		return processClassGroupDataGetterContent.retrieveContentLabel();
+	},
+	//For the label of the content section for editing, need to add additional value
 	retrieveAdditionalLabelText:function(existingContentObject) {
 		return processClassGroupDataGetterContent.retrieveAdditionalLabelText(existingContentObject);
 
 	},
 	//Validation on form submit: Check to see that class group has been selected 
-	validateFormSubmission: function(pageContentSection) {
-		return processClassGroupDataGetterContent.validateFormSubmission(pageContentSection);
+	validateFormSubmission: function(pageContentSection, pageContentSectionLabel) {
+		return processClassGroupDataGetterContent.validateFormSubmission(pageContentSection, pageContentSectionLabel);
 	}
 		
 }

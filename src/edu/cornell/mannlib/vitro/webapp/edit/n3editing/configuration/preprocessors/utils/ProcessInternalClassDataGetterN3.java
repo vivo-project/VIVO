@@ -37,8 +37,8 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	private static String internalClassVarNameBase = "isInternal";
 	private Log log = LogFactory.getLog(ProcessInternalClassDataGetterN3.class);
 
-	public ProcessInternalClassDataGetterN3(JSONObject jsonObject){
-		super(jsonObject);
+	public ProcessInternalClassDataGetterN3(){
+		super();
 		
 	}
 	//Pass in variable that represents the counter 
@@ -46,13 +46,6 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
     //That can be included here if need be, but for now just adding the type alone
     public List<String> retrieveN3Required(int counter) {
     	return super.retrieveN3Required(counter);
-    	/*
-    	List<String> requiredN3 = new ArrayList<String>();
-    	String partialN3 = this.getN3ForTypePartial(counter) + ".";
-    	requiredN3.add(getPrefixes() + partialN3); 
-    	requiredN3.addAll(this.addIndividualClassesN3(counter));
-    	return requiredN3;
-    	*/
     }
     
     
@@ -211,12 +204,12 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
            
           jObject.element("classGroup", classGroupURI);
           //this is a json array
-          jObject.element("individualsForClasses", individualsForClasses);
+          jObject.element(individualClassVarNameBase, individualsForClasses);
           //Internal class - if null then add false otherwise use the value
           if(internalClassLiteral != null) {
-        	  jObject.element("internalClass", internalClassLiteral.getString());
+        	  jObject.element(internalClassVarNameBase, internalClassLiteral.getString());
           } else {
-        	  jObject.element("internalClass", "false");
+        	  jObject.element(internalClassVarNameBase, "false");
           }
        } catch(Exception ex) {
     	   log.error("Exception occurred in retrieving existing values with query " + querystr, ex);
