@@ -4,7 +4,7 @@ package edu.cornell.mannlib.vitro.webapp.search.solr;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hp.hpl.jena.rdf.model.Model;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 
 /**
  * Class that adds text from context nodes to Solr Documents for 
@@ -17,8 +17,8 @@ public class VivoInformationResourceContextNodeFields extends ContextNodeFields{
     
     static List<String> queriesForInformationResource = new ArrayList<String>();
     
-    public VivoInformationResourceContextNodeFields(Model model){        
-        super(model,queriesForInformationResource);
+    public VivoInformationResourceContextNodeFields(RDFServiceFactory rdfServiceFactory){        
+        super(queriesForInformationResource, rdfServiceFactory);
     }
       
   protected static final String prefix = 

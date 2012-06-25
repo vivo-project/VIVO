@@ -7,11 +7,12 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
-import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.DatasetFactory;
 
 import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
 
 public class VivoDocumentModifiers implements javax.servlet.ServletContextListener{
     
@@ -19,16 +20,16 @@ public class VivoDocumentModifiers implements javax.servlet.ServletContextListen
     public void contextInitialized(ServletContextEvent sce) {
         
         ServletContext context = sce.getServletContext();
+		RDFServiceFactory rdfServiceFactory = RDFServiceUtils.getRDFServiceFactory(context);
         
         Dataset dataset = DatasetFactory.create(ModelContext.getJenaOntModel(context));
-        OntModel jenaOntModel = ModelContext.getJenaOntModel(context);
         
         /* put DocumentModifiers into servlet context for use later in startup by SolrSetup */        
         
         List<DocumentModifier> modifiers = new ArrayList<DocumentModifier>();                                        
         modifiers.add(new CalculateParameters(dataset));        //
-        modifiers.add(new VivoAgentContextNodeFields(jenaOntModel));
-        modifiers.add(new VivoInformationResourceContextNodeFields(jenaOntModel));
+        modifiers.add(new VivoAgentContextNodeFields(rdfServiceFactory));
+        modifiers.add(new VivoInformationResourceContextNodeFields(rdfServiceFactory));
         
         context.setAttribute("DocumentModifiers", modifiers);
     }
