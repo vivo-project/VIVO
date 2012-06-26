@@ -79,9 +79,10 @@
       <label for="country" style="margin-bottom:-4px">Country ${requiredHint}</label>
       <#assign countryOpts = editConfiguration.pageData.country />
       <select id="country" name="country" >
-          <#list countryOpts?keys as key>             
-              <option value="${countryOpts[key]?uncap_first?replace("the ", "")?cap_first}" >
-                ${countryOpts[key]?uncap_first?replace("the ", "")?cap_first} 
+          <#list countryOpts?keys as key>  
+              <#assign countryName = countryOpts[key]?uncap_first?replace("the ", "")?cap_first >
+              <option value="${countryName}" <#if countryName == countryValue>selected</#if>>
+                ${countryName} 
               </option>            
           </#list>
       </select>

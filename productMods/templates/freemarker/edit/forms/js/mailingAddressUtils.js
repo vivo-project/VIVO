@@ -7,7 +7,7 @@ var mailingAddressUtils = {
         this.bindEventListeners();
         this.sortCountrySelector(mode,country);
 
-        if ( mode == "add" ) {
+        if ( mode == "add" && !this.errorSection.attr('id') ) {
             this.containerDiv.hide();
             this.submitButton.hide();
         }
@@ -35,7 +35,7 @@ var mailingAddressUtils = {
     this.submitButton = $('#submit');
     this.containerDiv = $('#addressDetails');
     this.orSpan = $('span.or');
-    
+    this.errorSection = $('section#error-alert');
     },
     
     bindEventListeners: function() {
@@ -118,7 +118,14 @@ var mailingAddressUtils = {
         // if it's add mode, add the "select one" option have it be selected;
         // if it's edit mode, add the "Select one" option but have the correct country selected.
         // if it's repair mode, add the "Select one" option but only select it if there's no country
-        if ( mode == "add" ) {
+        
+        if ( this.errorSection.is(':visible') ) {
+            this.countrySelector.prepend($("<option></option>")
+                                .attr("value","")
+                                .text("Select one"));
+            this.countrySelector.val(country);                 
+        }
+        else if ( mode == "add" ) {
             this.countrySelector.prepend($("<option selected></option>")
                                 .attr("value","")
                                 .text("Select one"));
@@ -136,5 +143,4 @@ var mailingAddressUtils = {
             this.countrySelector.val(country);
         } 
     }
-    
 }
