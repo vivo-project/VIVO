@@ -143,7 +143,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
       <input class="acUriReceiver" type="hidden" id="conferenceUri" name="existingConference" value="${conferenceValue}" ${flagClearLabelForExisting}="true" />
   </div>
     <p>
-        <h4>Years of Participation in ###</h4>
+        <h4 class="label">Years of Participation in ###</h4>
     </p>
     <#--Need to draw edit elements for dates here-->
     <#assign htmlForElements = editConfiguration.pageData.htmlForElements />

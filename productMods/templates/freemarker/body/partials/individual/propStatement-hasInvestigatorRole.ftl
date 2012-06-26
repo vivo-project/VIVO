@@ -31,7 +31,7 @@
     </#local>
         
     <#local dateTime>
-        <#if statement.dateTimeStartRole?has_content >
+        <#if statement.dateTimeStartRole?has_content || statement.dateTimeEndRole?has_content>
             <@dt.yearIntervalSpan "${statement.dateTimeStartRole!}" "${statement.dateTimeEndRole!}" />
         <#else>
             <@dt.yearIntervalSpan "${statement.dateTimeStartGrant!}" "${statement.dateTimeEndGrant!}" />
