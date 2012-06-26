@@ -13,6 +13,10 @@ import com.hp.hpl.jena.query.DatasetFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.ModelContext;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceUtils;
+import edu.cornell.mannlib.vitro.webapp.search.solr.VivoAgentContextNodeFields;
+import edu.cornell.mannlib.vitro.webapp.search.solr.VivoInformationResourceContextNodeFields;
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.CalculateParameters;
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.DocumentModifier;
 
 public class VivoDocumentModifiers implements javax.servlet.ServletContextListener{
     
