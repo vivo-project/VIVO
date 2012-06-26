@@ -225,6 +225,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=urlType</td>
+	<td>label=Other</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>url</td>
 	<td>http://mannlib.cornell.edu</td>
@@ -285,6 +290,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Librar</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
 	<td></td>
@@ -335,9 +350,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Africa</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Afri</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -360,23 +380,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
+	<td>select</td>
+	<td>id=selector</td>
+	<td>label=Postdoc or Fellow Advising Relationship</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=advisee</td>
+	<td>Smtih</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Joe</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=SubjectArea</td>
 	<td>Primates-R-Us Fellowship</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -451,7 +476,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -635,14 +660,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
+	<td>select</td>
+	<td>id=country</td>
+	<td>label=Democratic Republic of Congo</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>The Jungle, Africa, 12345678</td>
+	<td>id=addrLineOne</td>
+	<td>The Jungle</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=city</td>
+	<td>Congo City</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
