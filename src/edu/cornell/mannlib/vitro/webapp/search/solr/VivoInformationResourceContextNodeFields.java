@@ -7,6 +7,8 @@ import java.util.List;
 import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
 import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ContextNodeFields;
 
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ContextNodeFields;
+
 /**
  * Class that adds text from context nodes to Solr Documents for 
  * core:InformationResource individuals.
