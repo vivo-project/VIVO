@@ -19,6 +19,10 @@ import edu.cornell.mannlib.vitro.testing.AbstractTestClass;
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.WebappDaoFactoryJena;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFService;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.RDFServiceFactorySingle;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.impl.jena.model.RDFServiceModel;
 
 public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestClass {
 
@@ -27,9 +31,8 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
     String DOCUMENT_URI = "http://example.com/vivo/individual/n7474";
     
     @Test
-   
     public void testNoLabel() throws IOException{
-    	/*
+    	
         //Test that rdfs:label is NOT added by the VivoInformationResourceContextNodeFields
         
         //setup a model & wdf with test RDF file
@@ -41,15 +44,17 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
         OntModel ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM,model);
         ontModel.prepare();
         Assert.assertTrue("ontModel had no statements" , ontModel.size() > 0 );
-                
+         
         WebappDaoFactory wadf = new WebappDaoFactoryJena(ontModel);        
         Individual ind = wadf.getIndividualDao().getIndividualByURI(DOCUMENT_URI);
         Assert.assertNotNull(ind);
         
+        RDFService rdfService = new RDFServiceModel(ontModel);
+        RDFServiceFactory rdfServiceFactory = new RDFServiceFactorySingle(rdfService);
         SolrInputDocument doc = new SolrInputDocument();
         doc.addField("ALLTEXT", "");                
         
-        VivoInformationResourceContextNodeFields vircnf = new VivoInformationResourceContextNodeFields(ontModel);
+        VivoInformationResourceContextNodeFields vircnf = new VivoInformationResourceContextNodeFields(rdfServiceFactory);
         vircnf.modifyDocument(ind, doc, new StringBuffer());                
         
         Collection values = doc.getFieldValues("ALLTEXT");
@@ -57,9 +62,9 @@ public class VivoInformationResourceContextNodeFieldsTest extends AbstractTestCl
             Assert.assertFalse("rdf:label erroneously added by document modifier:", value.toString().contains(RDFS_LABEL_VALUE));
         }
         
-        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(ontModel);
+        VivoAgentContextNodeFields vacnf = new VivoAgentContextNodeFields(rdfServiceFactory);
         vacnf.modifyDocument(ind, doc, new StringBuffer());
-        */
+        
      }
        
      
