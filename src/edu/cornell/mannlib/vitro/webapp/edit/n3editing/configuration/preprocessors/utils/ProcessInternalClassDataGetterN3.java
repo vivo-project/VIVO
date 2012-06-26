@@ -156,10 +156,10 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
    
    //?dataGetter a FixedHTMLDataGetter ; display:saveToVar ?saveToVar; display:htmlValue ?htmlValue .
    protected String getExistingValuesInternalClass(String dataGetterURI) {
-	   String query = this.getSparqlPrefix() + "SELECT ?classGroup  ?individualForClass ?internalClass WHERE {" + 
+	   String query = this.getSparqlPrefix() + " SELECT ?classGroup  ?individualForClass ?internalClass WHERE {" + 
 			   "<" + dataGetterURI + "> <" + DisplayVocabulary.FOR_CLASSGROUP + "> ?classGroup  . \n" +
-			   "<" + dataGetterURI + "> <" + DisplayVocabulary.GETINDIVIDUALS_FOR_CLASS + "> ?individualForClass . \n" + 
-			   "OPTIONAL {<" + dataGetterURI + "> <" + DisplayVocabulary.RESTRICT_RESULTS_BY_INTERNAL + "> ?internaClass .} \n" + 
+			   "OPTIONAL {<" + dataGetterURI + "> <" + DisplayVocabulary.GETINDIVIDUALS_FOR_CLASS + "> ?individualForClass . }\n" + 
+			   "OPTIONAL {<" + dataGetterURI + "> <" + DisplayVocabulary.RESTRICT_RESULTS_BY_INTERNAL + "> ?internalClass .} \n" + 
 			   "}";
 	   return query;
    }
@@ -191,9 +191,11 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	        	   Resource classGroupResource = qs.getResource("classGroup");
 	        	   classGroupURI = classGroupResource.getURI();
         	   }
-        	   //individuals for classes
-        	   Resource individualForClassResource = qs.getResource("individualForClass");
-        	   individualsForClasses.add(individualForClassResource.getURI());
+        	   //individuals for classes - this may also be optional in case entire class group selected and internal class
+        	   if(qs.get("individualForClassResource") != null ) {
+        		   Resource individualForClassResource = qs.getResource("individualForClass");
+        		   individualsForClasses.add(individualForClassResource.getURI());
+        	   }
         	 //Put both literals in existing literals
         	 //If internal class value is present and we have not already saved it in a previous result iteration
         	   if(qs.get("internalClass") != null && internalClassLiteral == null) {

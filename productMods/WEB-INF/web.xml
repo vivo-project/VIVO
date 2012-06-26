@@ -230,15 +230,6 @@
      <servlet-name>SDBSetupController</servlet-name>
      <url-pattern>/sdbsetup</url-pattern>
   </servlet-mapping>
-
-   <servlet>
-    <servlet-name>MenuN3EditController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuN3EditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MenuN3EditController</servlet-name>
-    <url-pattern>/menuN3Editor</url-pattern>
-  </servlet-mapping>
   
    <servlet>
     <servlet-name>DeletePropertyController</servlet-name>
@@ -265,15 +256,6 @@
   <servlet-mapping>
     <servlet-name>DeletePageController</servlet-name>
     <url-pattern>/deletePageController</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
-    <servlet-name>MenuManagementController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.MenuManagementController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MenuManagementController</servlet-name>
-    <url-pattern>/menuManagementController</url-pattern>
   </servlet-mapping>
   
   <servlet>

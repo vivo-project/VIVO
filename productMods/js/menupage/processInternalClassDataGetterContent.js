@@ -36,11 +36,14 @@ var processInternalClassDataGetterContent = {
 		var classesSelected = existingContentObject["classesSelectedInClassGroup"];
 		var numberSelected = classesSelected.length;
 		var i;
-		//Uncheck all since default is checked
-		pageContentSection.find("input[name='classInClassGroup']").removeAttr("checked");
-		for(i = 0; i < numberSelected; i++) {
-			var classSelected = classesSelected[i];
-			pageContentSection.find("input[name='classInClassGroup'][value='" + classSelected + "']").attr("checked", "checked");
+		//Uncheck all since default is checked - but only if classesSelected is nonempty - 
+		//if no individual classes returned, then assume entire class group is selected
+		if(numberSelected > 0) {
+			pageContentSection.find("input[name='classInClassGroup']").removeAttr("checked");
+			for(i = 0; i < numberSelected; i++) {
+				var classSelected = classesSelected[i];
+				pageContentSection.find("input[name='classInClassGroup'][value='" + classSelected + "']").attr("checked", "checked");
+			}
 		}
 		//internal class
 		var isInternal = existingContentObject["isInternal"];
