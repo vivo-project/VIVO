@@ -225,7 +225,9 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 
     <#-- Editor -->
     <p>
-        <label class="editor" for="editor">Editor: Last Name<span style="padding-left:338px">First Name  ${requiredHint}</span></label>
+        <label class="editor" for="editor">Editor: Last Name<span style="padding-left:338px">First Name  ${requiredHint}</span>
+            <span class="note">(required with new Last Name)</span>
+        </label>
         <input class="acSelector" size="50"  type="text" id="editor" name="editor" acGroupName="editor"  value="${editorValue}" />
         <input  size="30"  type="text" id="firstName" name="firstName" value="${firstNameValue}" ><br />
         <input type="hidden" id="lastName" name="lastName" value="">
