@@ -98,6 +98,9 @@ var awardReceiptUtils = {
         if ( this.yearAwarded.val().length ) {
             rdfsLabel += " (" + this.subjectName + ' - ' + this.yearAwarded.val() + ")";
         }
+        else {
+            rdfsLabel += " (" + this.subjectName + ")";
+        }
         this.recLabel.val(rdfsLabel);
     },
 
