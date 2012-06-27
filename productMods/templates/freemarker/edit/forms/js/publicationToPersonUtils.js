@@ -203,6 +203,10 @@ var publicationToPersonUtils = {
             this.locale.parent('p').show();            
             this.volume.show();
             this.volLabel.show();
+            this.number.show();
+            this.nbrLabel.show();
+            this.startPage.parent('p').show();
+            this.sPLabel.parent('p').show();
             
             // if the user is changing type, ensure that irrelevant fields are cleared
             // and reset an acSelection divs
