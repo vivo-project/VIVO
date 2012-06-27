@@ -63,7 +63,6 @@
             </option>         
         </#list>
     </select>
-    urlTypeVAlue = ${urlTypeValue!}
     <label for="url">URL ${requiredHint}</label>
     <input  size="70"  type="text" id="url" name="url" value="${url}" role="input" />
    
