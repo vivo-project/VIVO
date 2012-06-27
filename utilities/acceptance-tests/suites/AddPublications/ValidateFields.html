@@ -251,7 +251,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Must specify a publication title.</td>
+	<td>Please select an existing publication in the Title field or enter a new one.</td>
 	<td></td>
 </tr>
 <tr>
@@ -286,8 +286,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=title</td>
 	<td>Nintendo O.K. for Kids</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=book</td>
+	<td>Raising Children in the 21st Century</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -316,7 +321,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo O.K. for Kids</td>
+	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minnie.&nbsp;&nbsp;New York: Marcel Decker. 2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -466,7 +471,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='add']</td>
+	<td>css=img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -506,6 +511,11 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>URL Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>URL</td>
 	<td></td>
 </tr>
@@ -526,7 +536,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='add']</td>
+	<td>css=img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -560,18 +570,58 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>urlType: This field must not be empty. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=urlType</td>
+	<td>label=Other</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>url: This field must not be empty. </td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>url</td>
 	<td>http://www.nintendo.com/</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>anchor</td>
+	<td>clickAndWait</td>
+	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>urlType: This field must not be empty. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=urlType</td>
+	<td>label=Other</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>url</td>
+	<td>http://www.nintendo.com/</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -581,7 +631,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.edit-webpage &gt; img.edit-individual</td>
+	<td>css=img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -611,32 +661,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>anchor</td>
-	<td>Company Homepage</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>url: This field must not be empty.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
-	<td>http://www.nintendo.com/</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>anchor</td>
+	<td>id=anchor</td>
 	<td>Company Homepage</td>
 </tr>
 <tr>
@@ -730,11 +755,6 @@
 	<td>Mouse</td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>firstName</td>
 	<td>Minnie</td>
@@ -767,191 +787,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Return to Publication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Editor, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='editor']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Person for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='editor']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Mouse, Minnie M</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Volume, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='volume']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: volume</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>A volume number.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='volume']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Number, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='number']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: number</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>A generic item or document number. Not to be confused with issue number. A barcode, perhaps?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='number']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1221,186 +1056,6 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Publisher, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='publisher']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Organization for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>There are no entries in the system from which to select.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please create a new entry.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='publisher']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Publisher (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='publisher']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Publisher (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Marcel Decker</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Place of Publication, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='placeOfPublication']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: place of publication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>City in which the publication was done.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='placeOfPublication']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>New York</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Add Abstract, validating field first</td>
 	<td></td>
 </tr>
@@ -1453,76 +1108,6 @@
 	<td>type</td>
 	<td>tinymce</td>
 	<td>This is a chapter in a book that provides various professional viewpoints as to the impact of Nintendo usage on kids.</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Published In, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='hasPublicationVenue']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Collection for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='hasPublicationVenue']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Collection (bibo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Raising Children in the 21st Century</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1632,6 +1217,16 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='presentedAt']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1771,7 +1366,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1910,63 +1505,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>id=objectVar</td>
-	<td>label=United States of America</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>United States of</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>id=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Year, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='dateTimeValue']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Create date time value for Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='dateTimeValue']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>dateTimeField-year</td>
-	<td>2009</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -2426,7 +1976,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>objectVar</td>
+	<td>id=objectVar</td>
 	<td>label=Kids Now Conference Proceedings</td>
 </tr>
 <tr>
@@ -2437,6 +1987,451 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add documentation for</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-documentationFor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Add an entry to: documentation for</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Documentation For Name *</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-documentationFor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Kids Now Conference</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add has global citation frequency</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasGlobalCitationFrequency &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Global Citation Count for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>There are no entries in the system from which to select. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please create a new entry.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasGlobalCitationFrequency &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>99</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add presented at</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-presentedAt &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-presentedAt &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Kids Now Conference</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add part of</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-partOf &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Relates a component of something to the whole thing.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-partOf &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add cited by</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-citedBy &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-citedBy &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Kids Today</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">cites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-cites &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Select an existing Document for Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If you don't find the appropriate entry on the selection list above:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Kids of the 21st Century</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-cites &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Children Today</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
