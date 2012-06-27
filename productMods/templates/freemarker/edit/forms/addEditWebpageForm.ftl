@@ -54,7 +54,13 @@
     <select name="urlType" style="margin-top:-2px" >
         <option value="" <#if editMode == "add">selected</#if>>Select one</option>                
         <#list urlTypeOpts?keys as key>             
-            <option value="${key}"  <#if editMode == "edit" && urlTypeValue == key>selected</#if>>${urlTypeOpts[key]}</option>         
+            <option value="${key}"  <#if editMode == "edit" && urlTypeValue == key>selected</#if> >
+                <#if urlTypeOpts[key] == "F1000 Link">
+                    Faculty of 1000 Link
+                <#else>
+                    Standard Web Link
+                </#if>
+            </option>         
         </#list>
     </select>
     <label for="url">URL ${requiredHint}</label>
