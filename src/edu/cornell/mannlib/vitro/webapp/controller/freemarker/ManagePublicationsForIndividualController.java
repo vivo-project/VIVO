@@ -98,15 +98,17 @@ public class ManagePublicationsForIndividualController extends FreemarkerHttpSer
             ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
-                String subclassUri = soln.get("subclass").toString();
-                VClass vClass = (VClass) vcDao.getVClassByURI(subclassUri);
-                String subclass = ((vClass.getName() == null) ? subclassUri : vClass.getName());
-                if(!subclassToPublications.containsKey(subclass)) {
-                    subclassToPublications.put(subclass, new ArrayList<Map<String,String>>()); //list of publication information
+                RDFNode subclassUri= soln.get("subclass");
+                if ( subclassUri != null ) {
+                    String subclassUriStr = soln.get("subclass").toString();
+                    VClass vClass = (VClass) vcDao.getVClassByURI(subclassUriStr);
+                    String subclass = ((vClass.getName() == null) ? subclassUriStr : vClass.getName());
+                    if(!subclassToPublications.containsKey(subclass)) {
+                        subclassToPublications.put(subclass, new ArrayList<Map<String,String>>()); //list of publication information
+                    }
+                    List<Map<String,String>> publicationsList = subclassToPublications.get(subclass);
+                    publicationsList.add(QueryUtils.querySolutionToStringValueMap(soln));
                 }
- 
-                List<Map<String,String>> publicationsList = subclassToPublications.get(subclass);
-                publicationsList.add(QueryUtils.querySolutionToStringValueMap(soln));        
             }
         } catch (Exception e) {
             log.error(e, e);

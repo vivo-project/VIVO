@@ -101,15 +101,17 @@ public class ManageGrantsForIndividualController extends FreemarkerHttpServlet {
             ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
-                String subclassUri = soln.get("subclass").toString();
-                VClass vClass = (VClass) vcDao.getVClassByURI(subclassUri);
-                String subclass = ((vClass.getName() == null) ? subclassUri : vClass.getName());
-                if(!subclassToGrants.containsKey(subclass)) {
-                    subclassToGrants.put(subclass, new ArrayList<Map<String,String>>()); //list of grant information
-                }
-                String label = soln.get("label").toString();
-                List<Map<String,String>> grantsList = subclassToGrants.get(subclass);
-                    grantsList.add(QueryUtils.querySolutionToStringValueMap(soln));        
+                RDFNode subclassUri= soln.get("subclass");
+                if ( subclassUri != null ) {
+                    String subclassUriStr = soln.get("subclass").toString();
+                    VClass vClass = (VClass) vcDao.getVClassByURI(subclassUriStr);
+                    String subclass = ((vClass.getName() == null) ? subclassUriStr : vClass.getName());
+                    if(!subclassToGrants.containsKey(subclass)) {
+                        subclassToGrants.put(subclass, new ArrayList<Map<String,String>>()); //list of grant information
+                    }
+                    List<Map<String,String>> grantsList = subclassToGrants.get(subclass);
+                    grantsList.add(QueryUtils.querySolutionToStringValueMap(soln)); 
+                }       
             }
         } catch (Exception e) {
             log.error(e, e);

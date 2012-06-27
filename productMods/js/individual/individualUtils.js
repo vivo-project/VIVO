@@ -98,15 +98,5 @@ $(document).ready(function(){
         return false;
     });
     
-    // if there are no selected pub, hide the manage link; same for grants
-    if ( $('ul#authorInAuthorshipList').children('li').length < 1 ) {
-        $('a#managePropLink').hide();
-    }
-    if ( $('ul#hasResearcherRoleList').children('li').length < 1 && 
-                $('ul#hasPrincipalInvestigatorRoleList').children('li').length < 1 &&
-                $('ul#hasCo-PrincipalInvestigatorRoleList').children('li').length < 1 && 
-                $('ul#hasInvestigatorRoleList').children('li').length < 1 ) {
-        $('a#manageGrantLink').hide();
-    }
 
 });
