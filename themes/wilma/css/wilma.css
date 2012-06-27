@@ -318,8 +318,10 @@ a.return:active {
     font-size: 1em;
 }
 .verticalfieldlabel {
-    color: #5F6464;
-    font-size: .8em;
+    color: #5E6363; /*#5F6464;*/
+    font-style: normal !important;
+    font-size: 10pt !important;
+    line-height: 2em !important;
 }
 .row, .rowvert {
     background-color: #f7f9f9;
@@ -338,7 +340,8 @@ a.return:active {
 .rowbold {
     background-color: #FFFAFA;
     color: #5F6464;
-    font-size: 1em;
+    font-size: 10pt; /*1em;*/
+    line-height: 2em;
 }
 .rownum {
     background-color: #F1F2EE;
@@ -419,6 +422,28 @@ ul.ingestMenu {
 }
 tr.editformcell td input[type="text"] {
     width: 30% !important;
+}
+tr.editformcell td input.fullWidthInput {
+    width: 70% !important;
+    margin-top: 0.7em !important;
+}
+tr.editformcell td input.shortInput {
+    width: 20% !important;
+    margin-top: 0.7em !important;
+}
+tr.editformcell td textarea.matchingInput {
+    width: 95%;
+    height:10ex;
+    margin-top:0.7em;
+    font-style: normal !important;
+}
+hr.formDivider {
+    background-color: #3196C4;
+    border: 0 none;
+    height: 1px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    opacity: 0.3;   
 }
 tr.editformcell td select {
     font-size: .8em;
