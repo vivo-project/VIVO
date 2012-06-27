@@ -141,8 +141,56 @@
                 <h3 id="#upgrade_process">III. Upgrade Instructions</h3>
 
 				<h1>BOGUS -- INSERT REAL STUFF HERE, EVENTUALLY</h1>
-                <h3 id="#kbm">IV. Knowledge Base Migration</h3>
-                
+                <h3 id="kbm">IV .Knowledge Base Migration</h3>
+                <p>
+                    Changes to the VIVO core ontology may require corresponding 
+                    modifications to the knowledge base instance data and ontology annotations.
+                    When VIVO first starts up following the upgrade, it will 
+                    initiate a process to examine the knowledge base and apply necessary  
+                    changes. The knowledge base migration process for release 1.5 will make
+                    the following types of changes: 
+                </p>
+                <dl>
+                    <dt>
+                        The vivo:ResearchLaboratory class has been removed. All instances of vivo:ResearchLaboratory will be 
+                        retyped to its superclass vivo:Laboratory. 
+                    </dt>
+                </dl>
+                <dl>
+                    <dt>
+                        Annotation property default values 
+                    </dt>
+                    <dd>
+                        If a site has modified the value of a vitro annotation (such 
+                        as  
+                        displayRankAnnot or displayLimitAnnot) so that it is no longer using 
+                        the default, then that setting will be left unchanged. 
+                        <br>
+                        If a site is using the default value of a vitro annotation, and the 
+                        default has been changed in the new version of the ontology, then the  
+                        new default value will be propagated to the knowledge base. 
+                    </dd>
+                </dl>
+                <p>
+                    In addition to the logs described in <strong>step 8</strong> of the <a href="#upgrade_process">previous section</a>, the knowledge base migration
+                    process will log copies of all additions and deletions that were made to the knowledge base in the following files:
+                </p>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/removedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were removed from the knowledge base. 
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/addedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were added to the knowledge base. 
+                    </dd>
+                </dl>
                 <h3 id="termsofuse">V. Review the VIVO Terms of Use</h3>
                 <p>
                     VIVO comes with a "Terms of Use" statement linked from the footer.  The "Site Name" 
