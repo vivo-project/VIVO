@@ -227,7 +227,7 @@
 <tr>
 	<td>select</td>
 	<td>name=urlType</td>
-	<td>label=Other</td>
+	<td>label=Standard Web Link</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -387,7 +387,7 @@
 <tr>
 	<td>type</td>
 	<td>id=advisee</td>
-	<td>Smtih</td>
+	<td>Smith</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -510,18 +510,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=award</td>
 	<td>Monkey Trainer of the Year</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -673,6 +668,11 @@
 	<td>type</td>
 	<td>id=city</td>
 	<td>Congo City</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=postalCode</td>
+	<td>1234567890</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -911,7 +911,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -930,13 +930,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -976,7 +971,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1076,7 +1071,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1151,12 +1146,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Assistant Professor</td>
+	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -1175,8 +1170,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>postdoc or fellow advising relationship</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primates-R-Us Fellowship</td>
+	<td>link=Smith, Joe</td>
 	<td></td>
 </tr>
 <tr>
@@ -1231,7 +1231,22 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=The Jungle, Africa, 12345678</td>
+	<td>link=The Jungle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congo City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Democratic Republic of Congo</td>
 	<td></td>
 </tr>
 <tr>

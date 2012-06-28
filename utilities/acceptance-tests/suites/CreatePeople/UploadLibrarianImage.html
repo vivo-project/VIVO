@@ -426,7 +426,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Upload photo']</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -435,23 +435,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Photo Upload</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Your profile photo will look like the image below.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>To make adjustments, you can drag around and resize the photo to the right. When you are happy with your photo click the &quot;Save Photo&quot; button.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Save photo']</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>

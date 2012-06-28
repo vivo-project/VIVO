@@ -131,7 +131,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.edit-hasResearchArea &gt; img.edit-individual</td>
+	<td>css=a.delete-overview &gt; img.delete-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasResearchArea &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,6 +170,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Remove</td>
 	<td></td>
@@ -157,6 +182,26 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to remove this term?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Remove</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this term?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -165,18 +210,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//section[@id='individual-info']/div/a[2]/img</td>
+	<td>css=img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +226,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,7 +236,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,7 +246,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -216,7 +256,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,7 +266,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,7 +276,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,102 +286,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img.edit-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to remove this web page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to remove this web page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=returnToIndividual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -365,13 +315,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=returnToIndividual</td>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this web page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=returnToIndividual</td>
 	<td></td>
 </tr>
 <tr>
@@ -386,7 +346,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=img.delete-individual</td>
+	<td>css=a.delete-hasCollaborator &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -411,7 +371,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-researchOverview &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -421,7 +381,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -431,7 +391,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-geographicFocus &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -441,7 +401,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -451,7 +411,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-geographicFocus &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -461,7 +421,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.delete-geographicFocus &gt; img.delete-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -476,7 +456,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-teachingOverview &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -486,7 +466,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -496,7 +476,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-advisorIn &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -506,7 +486,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -516,7 +496,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-advisorIn &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -526,7 +506,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -541,7 +521,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-outreachOverview &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -551,7 +531,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -566,7 +546,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-eligibleFor &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -576,7 +556,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,7 +566,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-eligibleFor &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -596,7 +576,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -606,7 +586,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-hasCredential &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -616,7 +596,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -626,7 +606,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-hasCredential &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -636,7 +616,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -646,7 +626,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-awardOrHonor &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -656,7 +636,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -666,7 +646,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-awardOrHonor &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -676,7 +656,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -686,7 +666,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-adviseeIn &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -696,7 +676,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -706,7 +686,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-adviseeIn &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -716,7 +696,27 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.delete-adviseeIn &gt; img.delete-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -731,7 +731,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-firstName &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -741,7 +741,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -751,7 +751,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-middleName &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -761,7 +761,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -771,7 +771,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-lastName &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -781,7 +781,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -791,7 +791,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-prefixName &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -801,7 +801,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -811,7 +811,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-suffixName &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -821,7 +821,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -831,7 +831,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-faxNumber &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -841,7 +841,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -851,7 +851,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-faxNumber &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -861,7 +861,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -871,7 +871,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-mailingAddress &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -881,7 +881,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -891,7 +891,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-mailingAddress &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -901,7 +901,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -916,7 +916,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-orcidId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -926,7 +926,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -936,7 +936,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-orcidId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -946,7 +946,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -956,7 +956,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-eRACommonsId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -966,7 +966,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -976,7 +976,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-eRACommonsId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -986,7 +986,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -996,7 +996,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-researcherId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1006,7 +1006,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1016,7 +1016,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-researcherId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1026,7 +1026,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1036,7 +1036,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-scopusId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1046,7 +1046,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1056,7 +1056,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-scopusId &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1066,7 +1066,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1081,7 +1081,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-assigneeFor &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1091,7 +1091,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1101,7 +1101,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-assigneeFor &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1111,7 +1111,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1121,7 +1121,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-freetextKeyword &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1131,7 +1131,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1141,7 +1141,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[@alt='delete']</td>
+	<td>css=a.delete-freetextKeyword &gt; img.delete-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -1151,12 +1151,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1170,8 +1165,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextNotPresent</td>
+	<td>I am named after Jane in the Tarzan stories. Yes, my last name really is faculty. </td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementNotPresent</td>
 	<td>link=African Primates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Primatia</td>
 	<td></td>
 </tr>
 <tr>
@@ -1181,7 +1186,22 @@
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=CUL Homepage</td>
+	<td>link=jane@gmail.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=mejane@primates-r-us.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>607-266-6666 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>607-288-8888 </td>
 	<td></td>
 </tr>
 <tr>
@@ -1190,23 +1210,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>I am named after Jane in the Tarzan stories. Yes, my last name really is faculty.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Assistant Professor</td>
+	<td>link=CUL Homepage</td>
 	<td></td>
 </tr>
 <tr>
@@ -1216,12 +1221,7 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Assistant Librarian</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Queen</td>
+	<td>Librarian, Lily Assistant Librarian </td>
 	<td></td>
 </tr>
 <tr>
@@ -1235,33 +1235,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>geographical_region</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyElementNotPresent</td>
 	<td>link=Mozamia</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=Primate Foundation of Africa</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Advising Relationship</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=SPCA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Advising Relationship</td>
+	<td>link=southern Africa</td>
 	<td></td>
 </tr>
 <tr>
@@ -1271,27 +1251,42 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
+	<td>postdoc or fellow advising relationship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Smith, Joe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=SPCA, The</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
 	<td>I travel the world teaching apes how to communicate with humans.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=Humane Society of Africa</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Advising Relationship</td>
+	<td>link=Primate Expert Association</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=Primates Unite</td>
+	<td>link=Primate Experts</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>Advising Relationship</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Licensed Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Licensed Primate Instructor</td>
 	<td></td>
 </tr>
 <tr>
@@ -1300,8 +1295,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>Award or Honor</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Monkey Trainer of the Year</td>
 	<td></td>
 </tr>
 <tr>
@@ -1311,52 +1306,22 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Award or Honor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>E.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>607-288-8888</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>607-277-7777</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>jane@gmail.com</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>mejane@primates-r-us.com</td>
+	<td>Monkey Trainer of the Year, conferred by Ape Trainer of the Decade</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=CIT, Cornell University, Ithaca, NY, 14853</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Address</td>
+	<td>link=Humane Society of Africa</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=Jungle 1234, Africa, 1234-56789</td>
+	<td>link=Primates Foundation of America</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>Address</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Primates Unite</td>
 	<td></td>
 </tr>
 <tr>
@@ -1367,6 +1332,86 @@
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>Jr.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>607-277-7777 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>607-299-9999 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Jungle 1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Congo City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Democratic Republic of Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=CIT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Cornell University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Ithaca, New York&nbsp;&nbsp;14853</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>United States of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ABC121212 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>ABC123987 </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=USA1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=USABC123456789</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>African Apes </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>African Primates </td>
 	<td></td>
 </tr>
 <tr>
@@ -1397,56 +1442,6 @@
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>3333333</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>African Primates</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>African Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Primate Expert Association</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Primate Experts</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Licensed Primate Expert</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Licensed Primate Instructor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>ABC123987</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>ABC121212</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=USA1234567890</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=USABC123456789</td>
 	<td></td>
 </tr>
 <tr>
@@ -1875,228 +1870,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Search for more stuff to be deleted</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>querytext</td>
-	<td>primate</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>css=input.search</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>primate - VIVO Search Results</td>
+	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Primate Experts</td>
+	<td>link=Smtih, Joe</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Primate Experts</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>querytext</td>
-	<td>primate</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input.search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>primate - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Licensed Primate Expert</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Licensed Primate Expert</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>querytext</td>
-	<td>primate</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input.search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>primate - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Licensed Primate Instructor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Licensed Primate Instructor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value=&quot;Edit This Individual&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=querytext</td>
-	<td>jungle</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input.search</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>jungle - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Jungle 1234, Africa, 1234-56789</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jungle 1234, Africa, 1234-56789</td>
+	<td>Smtih, Joe</td>
 	<td></td>
 </tr>
 <tr>
@@ -2140,28 +1930,733 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=querytext</td>
-	<td>jungle</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>css=input.search</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>jungle - VIVO Search Results</td>
+	<td>Index of Contents</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=The Jungle, Africa, 12345678</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>The Jungle, Africa, 12345678</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SPCA, The</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>SPCA, The</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Award or Honor Receipt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Award or Honor Receipt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Chimp Lover for Life</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Chimp Lover for Life</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Award or Honor Receipt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Award or Honor Receipt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Monkey Trainer of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Monkey Trainer of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issued Credential</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Issued Credential</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Licensed Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Licensed Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Issued Credential</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Issued Credential</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Licensed Primate Instructor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Licensed Primate Instructor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Ape Trainer of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ape Trainer of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Chimp Lover for Life</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Chimp Lover for Life</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Monkey Trainer of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Monkey Trainer of the Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Concept</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Concept</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Foundation of Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Foundation of Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Concept</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Concept</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primates-R-Us Fellowship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primates-R-Us Fellowship</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Credential</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Credential</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Experts</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Experts</td>
 	<td></td>
 </tr>
 <tr>
@@ -2226,12 +2721,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=CIT, Cornell University, Ithaca, NY, 14853</td>
+	<td>link=CIT Ithaca New York</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>CIT, Cornell University, Ithaca, NY, 14853</td>
+	<td>CIT Ithaca New York</td>
 	<td></td>
 </tr>
 <tr>
@@ -2262,6 +2757,86 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Address</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Jungle 1234 Congo City Democratic Republic of Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jungle 1234 Congo City Democratic Republic of Congo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>
@@ -2317,6 +2892,141 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Mozamia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Search for more stuff to be deleted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>querytext</td>
+	<td>primate</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>primate - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primates Unite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primates Unite</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>primate</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>primate - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primates Foundation of America</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primates Foundation of America</td>
 	<td></td>
 </tr>
 <tr>

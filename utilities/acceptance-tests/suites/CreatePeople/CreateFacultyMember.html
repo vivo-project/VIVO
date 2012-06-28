@@ -61,7 +61,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
+	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,7 +72,7 @@
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>testAdmin</td>
+	<td>testAdmin@cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -82,6 +82,16 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,12 +106,17 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Faculty Member (core)</td>
+	<td>id=VClassURI</td>
+	<td>label=Faculty Member (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -136,37 +151,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=edit this individual</td>
+	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>MonikerSelectAlt</td>
+	<td>tinymce</td>
 	<td>Assistant Professor</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>primaryAction</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
+	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,7 +206,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Search</td>
+	<td>css=input.search</td>
 	<td></td>
 </tr>
 <tr>
@@ -241,7 +251,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane | Assistant Professor</td>
+	<td>Faculty, Jane Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
