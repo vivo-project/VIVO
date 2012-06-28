@@ -435,7 +435,8 @@ tr.editformcell td textarea.matchingInput {
     width: 95%;
     height:10ex;
     margin-top:0.7em;
-    font-style: normal !important;
+    font-family: "Lucida Sans Unicode","Lucida Grande", Geneva, helvetica, sans-serif; 
+    font-size:0.95em;
 }
 hr.formDivider {
     background-color: #3196C4;
@@ -1484,6 +1485,9 @@ a {
 }
 input[type="submit"] {
     cursor: pointer;
+}
+.checkboxSpacer {
+    margin-left:150px;
 }
 /* EDITING DISPLAY------>  */
 .edit-individual {
