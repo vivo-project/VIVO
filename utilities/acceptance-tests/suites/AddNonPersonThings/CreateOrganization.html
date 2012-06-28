@@ -486,7 +486,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -526,7 +526,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -576,8 +576,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=relatedIndLabel</td>
-	<td>Polly Person</td>
+	<td>id=person</td>
+	<td>Person</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Polly</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -606,7 +611,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=activity</td>
 	<td>Primates-r-us</td>
 </tr>
 <tr>
@@ -671,7 +676,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=activity</td>
 	<td>Primate Colleges of the World</td>
 </tr>
 <tr>
@@ -705,9 +710,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate History Library</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Primate His</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -736,8 +746,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
-	<td>Primate Heart Health Clinic</td>
+	<td>id=activity</td>
+	<td>Primate Heart Health</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -781,7 +791,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=title</td>
 	<td>Primate Info</td>
 </tr>
 <tr>
@@ -811,7 +821,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=presentation</td>
 	<td>Primate Health and Fitness</td>
 </tr>
 <tr>
@@ -826,7 +836,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -856,7 +866,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=activity</td>
 	<td>Primate Health Check</td>
 </tr>
 <tr>
@@ -900,9 +910,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=northern Africa</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>northern Afr</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1020,6 +1035,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=country</td>
+	<td>label=Morocco</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
 	<td></td>
@@ -1031,12 +1056,22 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=addrLineOne</td>
 	<td>1234 Northern African Nation</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=city</td>
+	<td>Morocco City</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=postalCode</td>
+	<td>1234567890</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1201,7 +1236,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Polly Person, Dr. 1999 -</td>
+	<td>Person, Polly, Dr. 1999 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -1226,7 +1261,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Primate Heart Health Clinic Founder 2010 -</td>
+	<td>Primate Heart Health Founder 2010 -</td>
 	<td></td>
 </tr>
 <tr>
@@ -1270,8 +1305,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=1234 Northern African Nation</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>1234 Northern African Nation</td>
+	<td>Morocco City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Morocco</td>
 	<td></td>
 </tr>
 <tr>
