@@ -35,11 +35,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Add a Faculty member named Jane Faculty</td>
 	<td></td>
@@ -66,7 +61,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Log in to VIVO</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -77,7 +72,7 @@
 <tr>
 	<td>type</td>
 	<td>loginName</td>
-	<td>testAdmin@cornell.edu</td>
+	<td>testAdmin</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -87,11 +82,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>loginForm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,111 +97,11 @@
 <tr>
 	<td>select</td>
 	<td>VClassURI</td>
-	<td>label=Faculty Member (vivo)</td>
+	<td>label=Faculty Member (core)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add individual of this class']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate adding individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Faculty Member (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a Last Name for this person.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a First Name for this person.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstName</td>
-	<td>Jane</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastName</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a Last Name for this person.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstName</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastName</td>
-	<td>Faculty</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a First Name for this person.</td>
 	<td></td>
 </tr>
 <tr>
@@ -246,42 +136,42 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
+	<td>link=edit this individual</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>tinymce</td>
+	<td>MonikerSelectAlt</td>
 	<td>Assistant Professor</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>primaryAction</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>50000</td>
+	<td>Individual Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify that Jane Faculty was created</td>
+	<td class="comment">Verify that account was created</td>
 	<td></td>
 </tr>
 <tr>
@@ -296,57 +186,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Browse for new faculty member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty Member (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Person</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Person (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Search for new faculty member</td>
+	<td class="comment">Take a break for indexing</td>
 	<td></td>
 </tr>
 <tr>
@@ -356,7 +196,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Search']</td>
+	<td>link=Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -376,7 +241,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
+	<td>Faculty, Jane | Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>
