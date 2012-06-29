@@ -295,8 +295,43 @@
 	<td>Raising Children in the 21st Century</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=editor</td>
+	<td>Mouse</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Minne</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=publisher</td>
+	<td>Marcel Dekker</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=locale</td>
+	<td>New York</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=volume</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=number</td>
+	<td>15</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTime-year</td>
+	<td>2009</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -321,7 +356,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minnie.&nbsp;&nbsp;New York: Marcel Decker. 2009</td>
+	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minne.&nbsp;&nbsp;New York: Marcel Dekker. 123-144. 2009</td>
 	<td></td>
 </tr>
 <tr>
@@ -456,7 +491,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Save photo']</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -577,7 +612,7 @@
 <tr>
 	<td>select</td>
 	<td>name=urlType</td>
-	<td>label=Other</td>
+	<td>label=Standard Web Link</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -602,26 +637,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>urlType: This field must not be empty. </td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>name=urlType</td>
-	<td>label=Other</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
-	<td>http://www.nintendo.com/</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -652,11 +667,6 @@
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>url</td>
 	<td></td>
 </tr>
 <tr>
@@ -751,18 +761,13 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>lastName</td>
-	<td>Mouse</td>
+	<td>id=lastName</td>
+	<td>Mou</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>firstName</td>
-	<td>Minnie</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>middleName</td>
-	<td>M</td>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -775,88 +780,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>id=returnLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Mouse, Minnie M</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Publication</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Start Page, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='pageStart']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: start page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Starting page number within a continuous page range.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='pageStart']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>123</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
+	<td>Mouse, Minnie</td>
 	<td></td>
 </tr>
 <tr>
@@ -931,71 +871,6 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add End Page, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='pageEnd']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: end page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Ending page number within a continuous page range.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='pageEnd']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>144</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Add Features, validating field first</td>
 	<td></td>
 </tr>
@@ -1041,12 +916,12 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Mouse, Minnie M</td>
+	<td>id=objectVar</td>
+	<td>label=Mouse, Minnie</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -1121,71 +996,6 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Edition, validating field first</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='edition']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Add new entry for: edition</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The name defining a special edition of a document. Normally its a literal value composed of a version number and words.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='edition']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>First</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Add Presented At, validating field first</td>
 	<td></td>
 </tr>
@@ -1225,23 +1035,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=offerCreate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
-	<td>typeOfNew</td>
+	<td>id=typeOfNew</td>
 	<td>label=Conference (bibo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1441,7 +1241,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1777,11 +1577,6 @@
 <tr>
 	<td>click</td>
 	<td>id=searchButton</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=exact:Can't find the concept you want? Create your own.</td>
 	<td></td>
 </tr>
 <tr>
@@ -2260,13 +2055,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Nintendo O.K. for Kids</td>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
-	<td></td>
-	<td></td>
+	<td>assertTitle</td>
+	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
 <tr>
@@ -2430,11 +2225,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Verify all fields display properly</td>
 	<td></td>
@@ -2461,7 +2251,7 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Mouse, Minnie M</td>
+	<td>link=Mouse, Minnie</td>
 	<td></td>
 </tr>
 <tr>
@@ -2486,17 +2276,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Mouse, Minnie M</td>
+	<td>Mouse, Minnie</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Marcel Decker</td>
+	<td>link=Marcel Dekker</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Marcel Decker</td>
+	<td>Marcel Dekker</td>
 	<td></td>
 </tr>
 <tr>
@@ -2517,11 +2307,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Raising Children in the 21st Century</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>First</td>
 	<td></td>
 </tr>
 <tr>

@@ -181,12 +181,42 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=title</td>
 	<td>Too Much Nintendo</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=collection</td>
+	<td>Child Development</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=volume</td>
+	<td>29</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=issue</td>
+	<td>Supplement</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startPage</td>
+	<td>298</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=endPage</td>
+	<td>344</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTime-year</td>
+	<td>2010</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -227,126 +257,6 @@
 <tr>
 	<td>comment</td>
 	<td class="comment">Add details for Article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='volume']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>29</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='pageStart']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>298</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='pageEnd']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>344</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='dateTimeValue']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>dateTimeField-year</td>
-	<td>2010</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>dateTimeField-month</td>
-	<td>label=10</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>dateTimeField-day</td>
-	<td>label=27</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,36 +496,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='issue']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>Supplement</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Too Much Nintendo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//h3[@id='doi']/a/img</td>
 	<td></td>
 </tr>
@@ -710,8 +590,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
-	<td>research</td>
+	<td>Faculty Member (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Organization (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Publisher</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publisher (1)</td>
 	<td></td>
 </tr>
 <tr>
@@ -780,18 +695,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyTextPresent</td>
+	<td>academic article</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyElementPresent</td>
 	<td>link=Too Much Nintendo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>academic article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Too Much Nintendo 2010</td>
+	<td>Too Much Nintendo.&nbsp;&nbsp;Child Development.&nbsp;&nbsp;29:298-344. 2010</td>
 	<td></td>
 </tr>
 <tr>
@@ -836,7 +751,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>October 27, 2010</td>
+	<td>2010</td>
 	<td></td>
 </tr>
 <tr>
