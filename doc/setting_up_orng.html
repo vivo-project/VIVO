@@ -48,10 +48,17 @@
 							<li><a href="#confirm">Does it work?</a></li>
 						</ol>
 					</li>
-					<li> <a href="#gadgets">Setting up the Gadgets</a>
+					<li> <a href="#gadgets">Changing the gadget configurations</a>
 						<ol class="roman2">
 							<li><a href="#orng_apps">The <em>orng_apps</em> database table</a></li>
 							<li><a href="#orng_app_views">The <em>orng_app_views</em> database table</a></li>
+						</ol>
+					</li>
+					<li> <a href="#additional">Additional Considerations</a>
+						<ol class="roman2">
+							<li><a href="#redeploying">Re-running the deployment script</a></li>
+							<li><a href="#cache">Resetting the gadget cache</a></li>
+							<li><a href="#LOD_issues">Issues with Linked Open Data</a></li>
 						</ol>
 					</li>
 				</ol>
@@ -150,15 +157,27 @@
                 <em>If this file does not exist in Tomcat's bin directory, you can create it.</em>
             </p>
 			<p>
-				Here is an example of the setenv file, showing only the Shindig-ORNG requirements:
+				Here is an example of the setenv.sh file, showing only the Shindig-ORNG requirements:
 				<pre>export CLASSPATH=/usr/local/vivo/data/shindig/conf
 export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
+            </p>
+			<p>
+				Here is the equivalent file for an installation in Windows.
+				<pre>set CLASSPATH=C:\vivo\data\shindig\conf
+set CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
+            </p>
+			<p>
 				This assumes that your setenv file was empty before starting this process, 
 				and that you used the default location for the Shindig-ORNG configuration file in Step I.
 				In fact, it's more common for the setenv file to contain other parameters besides 
 				those used for Shindig-ORNG. In that case, it might look more like this:
 				<pre>export CLASSPATH=/usr/local/vivo/data/shindig/conf
 export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
+			</p>            
+			<p>
+				Or, for Windows:
+				<pre>set CLASSPATH=C:\vivo\data\shindig\conf
+set CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
 			</p>            
             
             <h3 id="vivo_settings">I.iv Configure VIVO</h3>
@@ -216,17 +235,77 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             <p>
                 At the command line, from the top level of the VIVO distribution 
                 directory, type: 
-            </p>
-            <pre>                ant orng<br>            </pre>
-            <p>
+	            <pre>                ant orng</pre>
                 to configure the Shindig-ORNG application and deploy it to Tomcat's webapps directory. 
+            </p>
+            <p>
+            	The main VIVO application must also be re-deployed in order to accept the new settings
+            	in <em>deploy.properties</em>. At the command line, from the top level of the VIVO distribution 
+                directory, type: 
+	            <pre>                ant deploy</pre>
+	            to re-deploy VIVO with the new settings.
             </p>
             
             <h3 id="confirm">I.vi Does it work?</h3>
+
+            <h4>Startup tests</h4>
+
             <p>
-            	Start VIVO. Enter a search term in the search box, and view the results. Check the gadgets there. 
-            	Navigate to a person's profile page. Again, check for the expected gadgets. 
+            	Start VIVO, and verify that you can see VIVO's home page in a browser.
             </p>
+            <p>
+            	On startup, VIVO runs a series of self-diagnostics, or "smoke tests". If these tests find 
+            	any problems with the OpenSocial configuration, you will see a warning message instead of 
+            	the VIVO home page.
+            </p>
+            <p>
+            	Some of VIVO's "smoke tests" are run after the startup is finished, and may take up to a minute
+            	to complete. If one of these tests fails, you will see the warning message as you 
+            	navigate from one VIVO page to the next.
+            </p>
+            <p>
+            	If one of the OpenSocial tests fails, you may continue to use VIVO, but it is
+            	likely that no gadgets will be shown. 
+            	You can review the warning message by seleting the "Startup Status"
+            	link from the "Site Admin" page.
+            </p>
+            
+            <h4>Search page</h4>
+            
+            <p>
+            	If you loaded the example gadgets, you should be able to see the "Google Search" gadget on the
+            	Search Results page in VIVO.
+            </p>
+            <p>
+            	Every VIVO installation comes with a geographic data model, so type "Chile" in the search box, 
+            	and view the results. Near the bottom of the page, you should see the "OpenSocial" section heading,
+            	and beneath it, a gadget offering "Full Text Search Results". This gadget does a google search
+            	at UCSF, using the search term that you entered. Again, this gadget is just an example, to show
+            	what is possible with OpenSocial gadgets and VIVO.
+            </p>
+            <p>
+            	The first time you bring up the search page, it may take several seconds for the gadget to 
+            	appear. After the first time, the gadget response should be must faster.
+            </p>
+            
+            <h4>Profile page</h4>
+            
+            <p>
+            	If your VIVO installation contains profiles of people, you can see several gadgets on their 
+            	profile pages. You must be logged in to VIVO, with authority to edit the profile you are 
+            	viewing.
+            </p>
+            <p>
+            	Go to a personal profile page in VIVO. If you loaded the example gadgets, you will see
+            	the "OpenSocial" section heading above the property lists, with an assortment of
+            	example gadgets available for experimentation.
+            </p>
+            <p>
+            	As with the search page, the first appearance of the gadgets may be slow.
+            </p>
+            
+            <h4>Troubleshooting</h4>
+
             <p>
             	If the gadgets do not appear as you expect, look for these symptoms, 
             	and check for the corresponding possible causes.
@@ -240,11 +319,32 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             		<td>
             			<ul>
 	            			<li>
+	            				The "OpenSocial" heading does not appear on Individual page or in search results.
+	            			</li>
+	            			<li>
+		            			Tomcat log files do not contain errors.
+	            			</li>
+            			</ul>
+            		</td>
+            		<td>
+            			<ul>
+	            			<li>
+	            				VIVO was not re-deployed with <tt>ant deploy</tt> after the OpenSocial
+	            				values were set in <em>deploy.properties</em>
+	            			</li>
+            			</ul>
+            		</td>
+            	</tr>
+            	<tr class="odd_row"><td colspan="2"></td></tr>
+            	<tr>
+            		<td>
+            			<ul>
+	            			<li>
 	            				Gadgets do not appear on Individual page or in search results.
 	            			</li>
 	            			<li>
 		            			Tomcat "localhost" log file contains an error message:
-        		    			<pre>Unable to load properties: shindig.orng.properties</pre>
+        		    			<pre>Unable to load properties: shindigorng.properties</pre>
 	            			</li>
             			</ul>
             		</td>
@@ -354,7 +454,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
             	<tr class="odd_row"><td colspan="2"></td></tr>
             </table>
         
-	        <h2 id="gadgets">II. Setting up the Gadgets</h2>
+	        <h2 id="gadgets">II. Changing the gadget configurations</h2>
 
             <p>
             	VIVO will look at tables in MySQL to determine what gadgets should be made available, 
@@ -371,8 +471,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     		<h3 id="orng_apps">II.i The <em>orng_apps</em> database table</h3>
     		<p>
     			This table acts as a dictionary of the available gadgets. 
-    			Includes the name and ID of the gadget and where the source code is stored on the web.
-    			Also a flag for disabling the gadget, and some additional fields.
+    			It includes the name and ID of the gadget and where the source code is stored on the web.
     		</p>
     		
     		<table>
@@ -408,7 +507,7 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     			<tr>
     				<td>PersonFilterID</td>
     				<td>int(11)</td>
-    				<td>unknown</td>
+    				<td>deprecated - usually set to <em>NULL</em></td>
     			</tr>
     			<tr>
     				<td>enabled</td>
@@ -427,6 +526,23 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
 
     		<h3 id="orng_app_views">II.ii The <em>orng_app_views</em> database table</h3>
 
+			<p>
+				This table tells how, where, and when to display the gadgets that are described in <em>orng_apps</em>.
+				Each row in this table is a "view", describing a single gadget and the rules that determine whether
+				the gadget will be displayed on a particular page.
+			</p>
+
+			<p>
+				Note: If a gadget is described and enabled in the <em>orng_apps</em> table, but has no records in the 
+				<em>orng_app_views</em> table, the gadget will be displayed without restriction on all ORNG-enabled
+				pages. This can be helpful when developing a new gadget. To avoid this, either
+				<ul>
+					<li>remove the gadget from <em>orng_apps</em>, or </li>
+					<li>set the <em>enabled</em> flag in <em>orng_apps</em> to <em>0</em>, or</li>
+ 					<li>create a rule for the gadget in <em>orng_app_views.</em></li>
+				</ul> 
+			</p>
+
     		<table>
     			<tr>
     				<th>Field</th>
@@ -444,14 +560,36 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     				<td>viewer_req</td>
     				<td>char(1)</td>
     				<td>
-    					unknown
+    					What requirements must the viewer satisfy in order to see this view?
+    					<ul>
+    						<li>
+    							<em>NULL</em> -- There are no requirements on the viewer.
+    						</li>
+    						<li>
+    							<em>'U'</em> -- The viewer must be logged in to VIVO.
+    						</li>
+    						<li>
+    							<em>'R'</em> -- The viewer must be logged in, and must be registered as a user of this gadget.
+    						</li>
+    					</ul>
     				</td>
     			</tr>
     			<tr>
     				<td>owner_req</td>
     				<td>char(1)</td>
     				<td>
-    					unknown
+    					What requirements must the owner of this page satisfy in order to see this view?
+    					<ul>
+    						<li>
+    							<em>NULL</em> -- There are no requirements on the owner of the page.
+    						</li>
+    						<li>
+    							<em>'R'</em> -- The owner of the page must choose to display this gadget to the public.
+    						</li>
+    						<li>
+    							<em>'S'</em> -- The viewer must be the owner of the page being viewed.
+    						</li>
+    					</ul>
     				</td>
     			</tr>
     			<tr>
@@ -541,6 +679,46 @@ export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.he
     			</tr>
     		</table>
 
+
+	        <h2 id="additional">III. Additional Considerations</h2>
+	        
+	        <p>
+	        	Some things to be aware of when working with OpenSocial gadgets.
+	        </p>
+	        
+	        <h3 id="redeploying">III.i. Re-running the deployment script</h2>
+	        
+	        <p>
+	        	The OpenSocial framework relies on several of the settings in the <em>deploy.properties</em> file, 
+	        	in addition to the ones that are explicitly linked to it.
+	        </p>
+	        <p>
+	        	Each time you change the settings in <em>deploy.properties</em>, you should re-deploy
+	        	the framework with
+	        	<pre>          ant orng</pre>
+	        </p>
+	        
+	        <h3 id="cache">III.ii. Resetting the gadget cache</h2>
+	        <p>
+	        	For efficiency, VIVO reads the gadget configuration only when it starts up. VIVO keeps
+	        	a copy of the database tables in memory, for efficiency.
+	        </p>
+	        <p>
+	        	This means that if you change the gadget configuration in the database tables, you must
+	        	either tell VIVO to read the tables again. Direct your browser to 
+	        	the <tt>orng/clearcache</tt> page within VIVO. For example, 
+	        	<pre>        http://localhost:8080/vivo/orng/clearcache</pre>
+	        	VIVO will re-read the gadget configuration, and display the VIVO home page.
+	        </p>
+	        <p>
+	        	You can achieve the same effect by restarting VIVO.
+	        </p>
+	        
+	        <h3 id="LOD_issues">III.iii. Issues with Linked Open Data</h2>
+
+			<p>
+				<b>TBD</b>
+			</p>
         </div>
         
     </body>
