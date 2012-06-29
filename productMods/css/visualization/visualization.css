@@ -80,3 +80,12 @@ span.incomplete-data-holder,
 .infoIcon {
     padding-right:30px;
 }
+/* ---------------------------*/
+/* Visualization Tools -------*/
+/* ---------------------------*/
+section.visualizationTools h3, p {
+    margin-left:20px;
+}
+section.visualizationTools p {
+    margin-left:20px;
+}
