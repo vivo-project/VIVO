@@ -45,6 +45,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
     final static String volumePred = bibo + "volume";
     final static String numberPred = bibo + "number";
     final static String issuePred = bibo + "issue";
+    final static String chapterNbrPred = bibo + "chapter";
     final static String startPagePred = bibo + "pageStart";
     final static String endPagePred = bibo + "pageEnd";
     final static String dateTimePred = vivoCore + "dateTimeValue";
@@ -174,6 +175,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                     getN3ForVolumeAssertion(),
                     getN3ForNumberAssertion(),
                     getN3ForIssueAssertion(),
+                    getN3ForChapterNbrAssertion(),
                     getN3ForStartPageAssertion(),
                     getN3ForEndPageAssertion(),
                     getN3ForDateTimeAssertion()
@@ -405,6 +407,11 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?newPublication <" + issuePred + "> ?issue .  ";
     }
 
+    private String getN3ForChapterNbrAssertion() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newPublication <" + chapterNbrPred + "> ?chapterNbr .  ";
+    }
+
     private String getN3ForStartPageAssertion() {
         return "@prefix vivo: <" + vivoCore + "> . \n" +
         "?newPublication <" + startPagePred + "> ?startPage . ";
@@ -485,6 +492,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         literalsOnForm.add("volume");
         literalsOnForm.add("number");
         literalsOnForm.add("issue");
+        literalsOnForm.add("chapterNbr");
         literalsOnForm.add("startPage");
         literalsOnForm.add("endPage");
         literalsOnForm.add("firstName");
@@ -535,6 +543,7 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         setVolumeField(editConfiguration);
         setNumberField(editConfiguration);
         setIssueField(editConfiguration);
+        setChapterNbrField(editConfiguration);
         setStartPageField(editConfiguration);
         setEndPageField(editConfiguration);
         setDateTimeField(editConfiguration);
@@ -731,6 +740,14 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         String stringDatatypeUri = XSD.xstring.toString();
         editConfiguration.addField(new FieldVTwo().
                 setName("issue").
+                setValidators(list("datatype:" + stringDatatypeUri)).
+                setRangeDatatypeUri(stringDatatypeUri));
+    }
+
+    private void setChapterNbrField(EditConfigurationVTwo editConfiguration) {
+        String stringDatatypeUri = XSD.xstring.toString();
+        editConfiguration.addField(new FieldVTwo().
+                setName("chapterNbr").
                 setValidators(list("datatype:" + stringDatatypeUri)).
                 setRangeDatatypeUri(stringDatatypeUri));
     }

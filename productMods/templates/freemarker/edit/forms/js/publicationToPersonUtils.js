@@ -36,6 +36,8 @@ var publicationToPersonUtils = {
         this.volLabel = $('#volLabel');
         this.number = $('#number');
         this.nbrLabel = $('#nbrLabel');
+        this.chapterNbr = $('#chapterNbr');
+        this.chapterNbrLabel = $('#chapterNbrLabel');
         this.issue = $('#issue');
         this.issueLabel = $('#issueLabel');
         this.startPage = $('#startPage');
@@ -133,6 +135,8 @@ var publicationToPersonUtils = {
         this.nbrLabel.hide();
         this.issue.hide();
         this.issueLabel.hide();
+        this.chapterNbr.hide();
+        this.chapterNbrLabel.hide();
         this.startPage.parent('p').hide();
         this.sPLabel.parent('p').hide();
     },
@@ -152,8 +156,6 @@ var publicationToPersonUtils = {
             }
             this.volume.show();
             this.volLabel.show();
-            this.number.show();
-            this.nbrLabel.show();
             this.issue.show();
             this.issueLabel.show();
             this.startPage.parent('p').show();
@@ -183,6 +185,8 @@ var publicationToPersonUtils = {
             }
                         
             this.locale.val('');
+            this.number.val('');
+            this.chapterNbr.val('');
         }
         else if ( selectedType == 'Chapter' ) {
             // if the user has changed type, keep any relevant values and display the 
@@ -203,8 +207,8 @@ var publicationToPersonUtils = {
             this.locale.parent('p').show();            
             this.volume.show();
             this.volLabel.show();
-            this.number.show();
-            this.nbrLabel.show();
+            this.chapterNbr.show();
+            this.chapterNbrLabel.show();
             this.startPage.parent('p').show();
             this.sPLabel.parent('p').show();
             
@@ -263,6 +267,7 @@ var publicationToPersonUtils = {
             this.issue.val('');
             this.startPage.val('');
             this.endPage.val('');
+            this.chapterNbr.val('');
         }
         else if ( selectedType == 'Conference Paper' ) {
             // if the user has changed type, keep any relevant values and display the 
@@ -302,6 +307,7 @@ var publicationToPersonUtils = {
             this.issue.val('');
             this.startPage.val('');
             this.endPage.val('');
+            this.chapterNbr.val('');
         }
         else if ( selectedType == 'Conference Poster' || selectedType == 'Speech') {
             // if the user has changed type, keep any relevant values and display the 
@@ -338,6 +344,7 @@ var publicationToPersonUtils = {
             this.issue.val('');
             this.startPage.val('');
             this.endPage.val('');
+            this.chapterNbr.val('');
         }
         else {
 
@@ -373,7 +380,7 @@ var publicationToPersonUtils = {
             this.issue.val('');
             this.startPage.val('');
             this.endPage.val('');
-            
+            this.chapterNbr.val('');     
         }
         
      },

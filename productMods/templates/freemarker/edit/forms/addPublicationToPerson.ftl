@@ -64,6 +64,7 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
 <#assign volumeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "volume") />
 <#assign numberValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "number") />
 <#assign issueValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "issue") />
+<#assign chapterNbrValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "chapterNbr") />
 <#assign startPageValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "startPage") />
 <#assign endPageValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "endPage") />
 
@@ -272,11 +273,13 @@ Set this flag on the input acUriReceiver where you would like this behavior to o
         <label for="volume" id="volLabel">Volume</label>
         <label for="number" id="nbrLabel" class="vniLabels">Number</label>
         <label for="issue" id="issueLabel" class="vniLabels">Issue</label>
+        <label for="issue" id="chapterNbrLabel" class="vniLabels">Chapter</label>
     </p>
     <p>
         <input  size="4" type="text" id="volume" name="volume" value="${volumeValue}" />
         <input  size="4" class="vniInputs" type="text" id="number" name="number" value="${numberValue}" />
         <input  size="4" class="vniInputs" type="text" id="issue" name="issue" value="${issueValue}" />
+        <input  size="4" class="vniInputs" type="text" id="chapterNbr" name="chapterNbr" value="${chapterNbrValue}" />
     </p>
 
     <#-- Start/End Pages -->
