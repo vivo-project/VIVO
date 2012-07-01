@@ -2,7 +2,7 @@
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-<http://vitro.mannlib.cornell.edu/default/vitro-kb-2> <vitro:updatedToOntology> <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.5> .
+<http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.5> .
 <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.5> rdf:type owl:Thing .
 <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.5> vitro:updatedOntology <http://vivoweb.org/ontology/core> .
 <http://vitro.mannlib.cornell.edu/ns/vitro/metadata/migration/v1.5> vitro:fromOntologyVersion "1.4" .
