@@ -106,12 +106,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Menu management</td>
+	<td>link=Page management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,47 +121,57 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>id=pageName</td>
 	<td>Activities</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>prettyUrl</td>
+	<td>name=prettyUrl</td>
 	<td>/activities</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=selectClassGroup</td>
 	<td>label=activities</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>allSelected</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupactivities&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>submit-Add</td>
+	<td>id=doneWithContent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,52 +211,57 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>id=pageName</td>
 	<td>Courses</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>prettyUrl</td>
+	<td>name=prettyUrl</td>
 	<td>/courses</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
-	<td>label=people</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>changeContentType</td>
-	<td></td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=selectClassGroup</td>
 	<td>label=courses</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>submit-Add</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupactivities&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -291,42 +306,142 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>id=pageName</td>
 	<td>Equipment</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>prettyUrl</td>
+	<td>name=prettyUrl</td>
 	<td>/equipment</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=selectClassGroup</td>
 	<td>label=equipment</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>submit-Add</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupactivities&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pageName</td>
+	<td>Courses</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=prettyUrl</td>
+	<td>/courses</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=selectClassGroup</td>
+	<td>label=courses</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupactivities&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=pageSave</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -376,42 +491,57 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>id=pageName</td>
 	<td>Locations</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>prettyUrl</td>
+	<td>name=prettyUrl</td>
 	<td>/locations</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=selectClassGroup</td>
 	<td>label=locations</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submit-Add</td>
+	<td>click</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupactivities&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -442,16 +572,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Courses</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Equipment</td>
 	<td></td>
 </tr>
 <tr>
