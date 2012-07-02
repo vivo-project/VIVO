@@ -159,12 +159,12 @@
 			<p>
 				Here is an example of the setenv.sh file, showing only the Shindig-ORNG requirements:
 				<pre>export CLASSPATH=/usr/local/vivo/data/shindig/conf
-export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
+export CATALINA_OPTS="-Dshindig.host=localhost -Dshindig.port=8080"</pre>
             </p>
 			<p>
 				Here is the equivalent file for an installation in Windows.
 				<pre>set CLASSPATH=C:\vivo\data\shindig\conf
-set CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
+set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080</pre>
             </p>
 			<p>
 				This assumes that your setenv file was empty before starting this process, 
@@ -172,12 +172,12 @@ set CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080'</pre>
 				In fact, it's more common for the setenv file to contain other parameters besides 
 				those used for Shindig-ORNG. In that case, it might look more like this:
 				<pre>export CLASSPATH=/usr/local/vivo/data/shindig/conf
-export CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
+export CATALINA_OPTS="-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m"</pre>
 			</p>            
 			<p>
 				Or, for Windows:
 				<pre>set CLASSPATH=C:\vivo\data\shindig\conf
-set CATALINA_OPTS='-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m'</pre>
+set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:MaxPermSize=128m</pre>
 			</p>            
             
             <h3 id="vivo_settings">I.iv Configure VIVO</h3>
