@@ -171,7 +171,7 @@
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +186,7 @@
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,7 +201,7 @@
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,7 +316,7 @@
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -327,6 +327,11 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to remove this web page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -542,26 +547,6 @@
 <tr>
 	<td>comment</td>
 	<td class="comment">Delete Background info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=a.delete-eligibleFor &gt; img.delete-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>id=submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
@@ -1871,6 +1856,16 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Person</td>
 	<td></td>
 </tr>
@@ -1881,12 +1876,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Smtih, Joe</td>
+	<td>link=Smith, Joe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Chimp Lover for Life (Faculty, Jane)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Smtih, Joe</td>
+	<td>Smith, Joe</td>
 	<td></td>
 </tr>
 <tr>
@@ -2021,12 +2021,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Chimp Lover for Life</td>
+	<td>link=Chimp Lover for Life (Faculty, Jane)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Chimp Lover for Life</td>
+	<td>Chimp Lover for Life (Faculty, Jane)</td>
 	<td></td>
 </tr>
 <tr>
@@ -2091,12 +2091,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Monkey Trainer of the Year</td>
+	<td>link=Monkey Trainer of the Year (Faculty, Jane)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Monkey Trainer of the Year</td>
+	<td>Monkey Trainer of the Year (Faculty, Jane)</td>
 	<td></td>
 </tr>
 <tr>
