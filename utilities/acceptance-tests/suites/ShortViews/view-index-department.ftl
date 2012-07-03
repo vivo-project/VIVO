@@ -1,3 +1,5 @@
+<#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
+
 <#import "lib-vivo-properties.ftl" as p>
 
 <a href="${individual.profileUrl}" title="individual name">${individual.name}</a>
@@ -7,7 +9,7 @@
 <#if locations??>
     <#list locations as location>
         <#if (location.label)?? >
-            <span class="title">Not valid in ${location.label}</span>
+            <span class="title">Located in ${location.label}</span>
         </#if>
     </#list>
 </#if>

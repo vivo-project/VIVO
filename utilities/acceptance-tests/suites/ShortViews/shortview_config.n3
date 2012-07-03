@@ -115,7 +115,8 @@ PREFIX vivo: <http://vivoweb.org/ontology/core#>
 SELECT ?label
 WHERE
 {
-?individualUri vivo:currentlyHeadedBy ?head .
+?individualUri vivo:contributingRole ?role .
+?role vivo:leaderRoleOf ?head .
 ?head rdfs:label ?label .
 }
 LIMIT 1
