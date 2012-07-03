@@ -59,6 +59,7 @@
 							<li><a href="#redeploying">Re-running the deployment script</a></li>
 							<li><a href="#cache">Resetting the gadget cache</a></li>
 							<li><a href="#LOD_issues">Issues with Linked Open Data</a></li>
+							<li><a href="#disabling">Disabling the OpenSocial gadgets</a></li>
 						</ol>
 					</li>
 				</ol>
@@ -719,6 +720,84 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
 			<p>
 				<b>TBD</b>
 			</p>
+
+	        <h3 id="disabling">III.iv. Disabling the OpenSocial gadgets</h2>
+
+			<p>
+				If you decide not to use OpenSocial gadgets in your VIVO installation, 
+				there are several ways to deactivate them, depending on how firm your decision is,
+				and how thorough you wish to be.
+			</p>
+			
+			<h4>Disable the gadgets</h4>
+			
+			<p>
+				You can disable any or all of the installed gadgets 
+				by setting the <em>enabled</em> flag in <em>orng_apps</em> to zero 
+				(see <a href="#orng_apps">section II.i. The <em>orng_apps</em> database table</a>).
+			</p>
+			
+			<p>
+				To make this change take effect, restart Tomcat, or clear the OpenSocial cache
+				(see <a href="#cache">section III.ii. Resetting the gadget cache</a>).
+			</p>
+
+			<h4>Disable the connection</h4>
+			
+			<p>
+				Disabling the gadgets, as above, will remove essentially all of the OpenSocial processing
+				within VIVO. To remove the remainder of it, you can disable the connection between
+				VIVO and the OpenSocial service. Do this by removing or commenting 
+				the <em>OpenSocial</em> properties in <em>deploy.properties</em> 
+				(see <a href="#vivo_settings">section I.iv. Configure VIVO</a>).
+			</p>
+			
+			<p>
+				To make this change take effect, re-deploy VIVO and restart Tomcat.
+			</p>
+			
+			<h4>Remove the OpenSocial webapp from Tomcat</h4>
+			
+			<p>
+				Disabling the connection, as above, will remove all of the OpenSocial processing
+				from your VIVO requests. However, you may still see that Tomcat takes longer to 
+				start up, and requires more memory.
+			</p>
+			
+			<p>
+				To remove the OpenSocial webapp from Tomcat, 
+				<ul>
+					<li>stop Tomcat;</li>
+					<li>in the <tt>[tomcat]/webapps</tt> directory, delete <tt>shindigorng.war</tt> and the 
+					<tt>shindigorng</tt> sub-directory;</li>
+					<li>start Tomcat.</li>
+				</ul>
+			</p>
+			
+			<h4>Clean up the remnants</h4>
+			
+			<p>
+				To remove all traces of OpenSocial from your VIVO installation, you should take the steps
+				outlined above, and also:
+				<ul>
+					<li>
+						Remove the <em>orng</em> tables from your MySQL database.
+					</li>
+					<li>
+						Remove the changes to Tomcat by restoring your <em>setenv</em> file to its previous state.
+					</li>
+					<li>
+						Remove the <em>shindig</em> directory and subdirectories from your VIVO home directory.
+					</li>
+				</ul>
+			</p>
+			
+			<p>
+				These steps will have no appreciable effect on the operation of VIVO, Tomcat, or MySQL.
+				However, if these artifacts are not removed they could be a source of puzzlement for
+				future VIVO maintainers.
+			</p>
+			
         </div>
         
     </body>
