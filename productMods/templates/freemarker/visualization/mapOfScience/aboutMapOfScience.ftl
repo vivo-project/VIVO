@@ -2,7 +2,7 @@
 
 <#assign aboutImagesRoot = '${urls.images}/visualization/mapofscience/about/'>
 
-<h2>About VIVO Map of Science Visualization</h2>
+<h2>About VIVO's Map of Science Visualization</h2>
 <h3>Reference Basemap</h3>
 <p>The VIVO Map of Science visualization uses the UCSD map of science and classification 
 system that was computed using paper-level data from about 25,000 journals from Elsevier's 

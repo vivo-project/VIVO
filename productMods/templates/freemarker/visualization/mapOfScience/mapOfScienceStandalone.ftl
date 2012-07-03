@@ -75,45 +75,22 @@ corresponding changes in the included Templates. -->
 <#-- START TOOLTIP TEXT -->
 
 <div id="toolTipOne" style="display:none;">
-The Map of Science visualization shows the publication activity of any organization, person, or university in 
-a VIVO instance mapped by the area of science or subdiscipline being researched.<br /> <br /> 
+VIVO's Map of Science visualization depicts the topical expertise a university, organization, or person has 
+based on past publications loaded into VIVO. Shown here is the expertise profile of the ${entityLabel}--larger 
+circle sizes denote more publications per topic area.<br /><br />
 
-You can use VIVO's Map of Science visualization to see where ${entityLabel} is active in the world of science, 
-<em><b>although only publications that have been loaded into this VIVO site will appear.</b></em><br /><br />
-
-Colored circles are drawn for subdisciplines where the organization has publications. The more publications the 
-organization has, the larger the circle drawn. Those subdisciplines without any publications are marked in gray.
-<br /><br /> 
-
-Circles are overlaid on the Map of Science, which is made of 554 interconnected subdisciplines, shown as grey 
-dots here. A subdiscipline is defined as a cluster of journals that share a common topic. The Map of Science 
-groups over 16,000 journals into 554 subdisciplines using similarities in their lists of references and key 
-terms. Subdisciplines that are especially similar to one another are connected by lines, and will be closer to 
-one another on the map.<br /><br /> 
-
-For more information on this and other maps of science, see <a href='http://mapofscience.com'>http://mapofscience.com</a> or 
-<a href='http://scimaps.org'>http://scimaps.org</a></div>
+<a href='${subEntityMapOfScienceCommonURL}/about'>Learn more about VIVO's Map of Science visualization?</a>
+</div>
 
 <div id="toolTipTwo" style="display:none;">
-Any organization's publication activity can be categorized into 13 disciplines or 554 subdisciplines on the map 
-of science.<br /><br />
+The table below summarizes the publications plotted on the Map of Science. Each row corresponds to a 
+(sub)discipline on the map<br /><br />
 
-The map of science is divided into 13 disciplines, each of which has its own area on the map, as well as its own 
-color. Each of these disciplines contains multiple subdisciplines. You can switch between the discipline and 
-subdiscipline view. You also can hover over a discipline (or subdiscipline) in the table below to show which 
-overlaid circles it corresponds to on the map.  The selected dot will have a darker ring around it than the 
-thers.<br /><br />
+The <b># of pubs.</b> column shows how many of the publications were mapped to each (sub)discipline. This count can be 
+fractional because some publication venues are associated with more than one (sub)discipline. Each publication 
+in such a venue contributes fractionally to all associated (sub)disciplines according to a weighting scheme.<br /><br />
 
-The table below summarizes the organization's body of publications as plotted on the map of science. Each row 
-corresponds to a field (discipline or subdiscipline) on the map.<br /><br />
-
-The <b># of pubs.</b> column shows how many of the publications were mapped to each discipline or subdiscipline. 
-This count can be fractional because some publication venues are associated with more than one. Each publication 
-in such a venue contributes fractionally to all associated discipline or subciscipline according to an assigned 
-weight.<br /><br />
-
-The <b>% of activity</b> column shows what proportion of the publications were mapped to each discipline or 
-subdiscipline.
+The <b>% of activity</b> column shows what proportion of the publications were mapped to each (sub)discipline.
 
 </div>
 
@@ -136,14 +113,14 @@ contact a VIVO system administrator if publication coverage is a concern.</div>
 </div>
 
 <div id="searchInfoTooltipText" style="display:none;">
-	List only subdisciplines (or disciplines) whose name contains this text.
+	List only (sub)disciplines whose names contain this text.
 </div>
 
 
 <#-- COMPARISON TOOLTIP TEXT -->
 
 <div id="comparisonToolTipTwo" style="display:none;">
-The listed organizations are children of the University of Florida node in the organizational hierarchy. 
+The listed organizations are children of the ${entityLabel} node in the organizational hierarchy. 
 You may 'drill down' to see the organizations below a given sub-organization by selecting the chart icon 
 next to a selected sub-organization's name below the graph on the right.
 <br /><br />
