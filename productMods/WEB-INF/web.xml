@@ -634,11 +634,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>PropertyGroupsListingController</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.PropertyGroupsListingController</servlet-class>
+    <servlet-name>ListPropertyGroupsController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ListPropertyGroupsController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>PropertyGroupsListingController</servlet-name>
+    <servlet-name>ListPropertyGroupsController</servlet-name>
     <url-pattern>/listPropertyGroups</url-pattern>
   </servlet-mapping>
 
