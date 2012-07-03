@@ -61,12 +61,18 @@ public class MapOfScienceVisualizationRequestHandler implements
 			Map<String, String> parameters, VitroRequest vitroRequest, Log log,
 			Dataset dataset) throws MalformedQueryParametersException {
 
-		
-		return generateStandardVisualizationForScienceMapVis(
-				vitroRequest, log, dataset, parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
-		
+		if (vitroRequest.getRequestURI().endsWith("/about")) {
+			return generateAboutScienceMapVisPage();
+		} else {
+			return generateStandardVisualizationForScienceMapVis(
+					vitroRequest, log, dataset, parameters.get(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY));
+		}
 	}
 
+	private ResponseValues generateAboutScienceMapVisPage() {
+		return new TemplateResponseValues("aboutMapOfScience.ftl");
+	}
+	
 	private ResponseValues generateStandardVisualizationForScienceMapVis(
 			VitroRequest vitroRequest, Log log, Dataset dataset,
 			String entityURI) throws MalformedQueryParametersException {

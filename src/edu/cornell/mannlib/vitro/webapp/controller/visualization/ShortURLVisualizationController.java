@@ -108,19 +108,15 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
             												  errorMessage, 
             												  vitroRequest);
         }
-		
-		Dataset dataset = setupJENADataSource(vitroRequest);
         
+		Dataset dataset = setupJENADataSource(vitroRequest);
+		
 		if (dataset != null && visRequestHandler != null) {
         	
         	try {
-        		
-        		
         		List<String> matchedPatternGroups = extractShortURLParameters(vitroRequest);
         		
-        		
         		Map<String, String> parametersForVis = getParamatersForVis(matchedPatternGroups, vitroRequest);
-        		
         		
 				return visRequestHandler.generateVisualizationForShortURLRequests(
 								parametersForVis,
@@ -145,8 +141,6 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
     		return UtilityFunctions.handleMalformedParameters("Visualization Query Error", 
     														  errorMessage, 
     														  vitroRequest);
-    		
-			
         }
 	}
 
