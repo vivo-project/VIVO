@@ -286,42 +286,67 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input.submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
+	<td>comment</td>
+	<td class="comment">Verify awards are still listed correctly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Best Professor, conferred by Carroll College, 2002</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade, conferred by Carroll College, 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Expert, conferred by Primates-R-Us, 2004 - 2005</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-R-Us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Remove the year for the last award</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//img[@alt='edit'])[4]</td>
+	<td>css=a.edit-awardOrHonor &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -337,12 +362,12 @@
 <tr>
 	<td>type</td>
 	<td>id=startField-year</td>
-	<td>2004</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=endField-year</td>
-	<td>2005</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -351,72 +376,57 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify positions are still listed correctly</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Assistant Professor, Cornell University 1986 - 2010</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Associate Professor, Carroll University 1981 - 1985</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Lecturer, Carroll College 1977 - 1981</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
-	<td class="comment">Change the title for Cornell University position</td>
+	<td class="comment">Verify awards are still listed correctly</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//section[@id='individual-info']/header/ul/li[1]/a[2]/img</td>
+	<td>verifyTextPresent</td>
+	<td>Best Professor, conferred by Carroll College, 2002</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>positionTitle</td>
-	<td>Professor</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>endField-year</td>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade, conferred by Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Expert, conferred by Primates-R-Us, 2004 - 2005</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-R-Us</td>
 	<td></td>
 </tr>
 <tr>
@@ -456,17 +466,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Professor, Cornell University 1986 - </td>
+	<td>Best Professor, conferred by Carroll College, 2002</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Associate Professor, Carroll University 1981 - 1985</td>
+	<td>Primate Expert, conferred by Primates-R-Us, 2004 - 2005</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Lecturer, Carroll College 1977 - 1981</td>
+	<td>Professor of the Decade, conferred by Carroll College</td>
 	<td></td>
 </tr>
 <tr>
