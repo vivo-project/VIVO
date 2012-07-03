@@ -31,7 +31,7 @@
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add test Faculty member named Jane Faculty</td>
+	<td class="comment">Check short view results</td>
 	<td></td>
 </tr>
 <tr>
@@ -86,112 +86,412 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>loginForm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
+	<td>name=loginForm</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Data Input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Faculty Member (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Add Jane Faculty</td>
+	<td class="comment">Check Index view of Faculty member</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstName</td>
-	<td>Jane</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastName</td>
-	<td>Faculty</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Edit Jane Faculty to add title</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Index of Contents</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
 	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Add new entry for: preferred title</td>
+	<td>Baker, Able Professor</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>Assistant Professor</td>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Member of Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dog, Charlie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check Index view of Person</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>link=Index</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
+	<td>Index of Contents</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Assistant Professor</td>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Faculty Member Member of Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dog, Charlie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Jenkins, Iris</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check Browse view of Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Faculty Member (4)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dog, Charlie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Member of Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check Browse view of Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Person (5)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dog, Charlie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Member of Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Jenkins, Iris</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Search for Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>person</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>person - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jenkins, Iris Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Jenkins, Iris</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Faculty Member Member of Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dog, Charlie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check Index view of Academic Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Academic Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Academic Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Academic Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Department B</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check Index view of Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Department A</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Department B Academic Department</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Department B</td>
 	<td></td>
 </tr>
 <tr>
