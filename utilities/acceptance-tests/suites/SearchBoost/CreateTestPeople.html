@@ -4,7 +4,7 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>DeleteTestFacultyMember</title>
+<title>CreateTestFacultyMember</title>
 <style type="text/css">
 .testName {
   color: blue;
@@ -27,16 +27,21 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">DeleteTestFacultyMember</td></tr>
+<tr><td rowspan="1" colspan="3" class="testName">CreateTestFacultyMember</td></tr>
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Delete departments and building</td>
+	<td class="comment">Add five test people</td>
 	<td></td>
 </tr>
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000000</td>
 	<td></td>
 </tr>
 <tr>
@@ -51,7 +56,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Must not be logged in</td>
+	<td class="comment">Must be logged off to start</td>
 	<td></td>
 </tr>
 <tr>
@@ -66,7 +71,7 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
+	<td class="comment">Must login as the site admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,198 +90,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Delete them all</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Academic Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Academic Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Department A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Department A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Academic Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Academic Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Department B</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Department B</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Building A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Building A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit this individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Edit This Individual']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Individual Editing Form</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=_delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td>link=Site Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -286,7 +101,232 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Verify everything is gone</td>
+	<td class="comment">Add faculty Able Baker</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=VClassURI</td>
+	<td>label=Faculty Member (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Able</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Baker</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Baker, Able</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add faculty Charlie Dog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=VClassURI</td>
+	<td>label=Faculty Member (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Charlie</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Dog</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dog, Charlie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add faculty Echo Foxtrot </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=VClassURI</td>
+	<td>label=Faculty Member (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Echo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Foxtrot</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add faculty George Henry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=VClassURI</td>
+	<td>label=Faculty Member (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>George</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Henry</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add emeritus Iris Jenkins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=VClassURI</td>
+	<td>label=Faculty Member Emeritus (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Iris</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Jenkins</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jenkins, Iris</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify all people exist</td>
 	<td></td>
 </tr>
 <tr>
@@ -320,38 +360,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member (4)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member Emeritus (1)</td>
 	<td></td>
 </tr>
 <tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refreshAndWait</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Academic Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Building</td>
+	<td>verifyTextPresent</td>
+	<td>Person (5)</td>
 	<td></td>
 </tr>
 <tr>
