@@ -31,7 +31,7 @@
 </thead><tbody>
 <tr>
 	<td>comment</td>
-	<td class="comment">Delete departments and building</td>
+	<td class="comment">Delete people</td>
 	<td></td>
 </tr>
 <tr>
@@ -95,28 +95,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTitle</td>
-	<td>Index of Contents</td>
+	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Academic Department</td>
+	<td>link=Baker, Able</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Academic Department</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Department A</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Department A</td>
+	<td>Baker, Able</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,22 +161,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Academic Department</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Academic Department</td>
+	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Department B</td>
+	<td>link=Dog, Charlie</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Department B</td>
+	<td>Dog, Charlie</td>
 	<td></td>
 </tr>
 <tr>
@@ -231,22 +226,152 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Building</td>
+	<td>link=Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Building</td>
+	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Building A</td>
+	<td>link=Foxtrot, Echo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Building A</td>
+	<td>Foxtrot, Echo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Henry, George</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Edit This Individual']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Individual Editing Form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=_delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you SURE you want to delete this individual? If in doubt, CANCEL.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Jenkins, Iris</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jenkins, Iris</td>
 	<td></td>
 </tr>
 <tr>
@@ -346,12 +471,12 @@
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Academic Department</td>
+	<td>Faculty Member</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>Building</td>
+	<td>Person</td>
 	<td></td>
 </tr>
 <tr>
