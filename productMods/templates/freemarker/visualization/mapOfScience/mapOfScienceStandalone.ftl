@@ -79,7 +79,7 @@ VIVO's Map of Science visualization depicts the topical expertise a university, 
 based on past publications loaded into VIVO. Shown here is the expertise profile of the ${entityLabel}--larger 
 circle sizes denote more publications per topic area.<br /><br />
 
-<a href='${subEntityMapOfScienceCommonURL}/about'>Learn more about VIVO's Map of Science visualization?</a>
+<a href='${subEntityMapOfScienceCommonURL}about'>Learn more about VIVO's Map of Science visualization?</a>
 </div>
 
 <div id="toolTipTwo" style="display:none;">
