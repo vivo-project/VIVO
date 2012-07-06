@@ -203,6 +203,11 @@ var ScimapWidget = Class.extend({
 		if (manager) {
 			var length = manager.length();
 			var slider = this.sliderControl;
+			if (this.getMarkerManager(SCIMAP_TYPE.DISCIPLINE) == manager) {
+				slider.setTypeString("disciplines");
+			} else {
+				slider.setTypeString("subdisciplines");
+			}
 			slider.setMin(Math.min(1, length));
 			slider.setMax(length);
 			slider.setValue(length);
