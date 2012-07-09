@@ -126,6 +126,12 @@
 <#include "individual-propertyGroupMenu.ftl">
 
 <#-- Ontology properties -->
+<#if !editable>
+	<#-- We don't want to see the first name and last name unless we might edit them. -->
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/firstName")!> 
+	<#assign skipThis = propertyGroups.pullProperty("http://xmlns.com/foaf/0.1/lastName")!> 
+</#if>
+
 <#include "individual-properties.ftl">
 
 <#assign rdfUrl = individual.rdfUrl>
