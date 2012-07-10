@@ -1642,12 +1642,17 @@ input.add-account:active {
 /* ASSOCIATE PROFILE ------------------------------->  */
 /* ------------------------------------------------->  */
 #associateProfileBackgroundThree {
-    margin-top:-120px; 
+    padding:7px 94px 26px 12px; 
+    margin-top:-136px; 
 }
 #associateProfileBackgroundTwo {
-    padding:7px 94px 45px 0;
-    margin-top:-120px; 
+    padding:7px 94px 40px 0;
+    margin-top:-136px; 
 }
+#associateProfileBackgroundFour {
+    margin-top:-12px;
+}
+
 /* ------------------------------------------------->  */
 /* CLASS HIERARCHY  -------------------------------->  */
 /* ------------------------------------------------->  */
