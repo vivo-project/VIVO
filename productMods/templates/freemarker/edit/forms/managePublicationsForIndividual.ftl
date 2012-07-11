@@ -1,5 +1,7 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
+<#import "lib-vivo-form.ftl" as lvf>
+
 <#-- Custom form for managing web pages for individuals -->
 <#if subjectName?contains(",") >
 <#assign lastName = subjectName?substring(0,subjectName?index_of(",")) />
@@ -14,6 +16,9 @@ Check those publications you want to exclude from the profile page.
     var publicationData = [];
 </script>
 </p>
+
+<@lvf.unsupportedBrowser urls.base /> 
+
        
     <#list allSubclasses as sub>
     <h4>${sub}s</h4>

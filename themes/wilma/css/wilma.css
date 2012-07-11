@@ -1659,18 +1659,22 @@ input.add-account:active {
 span.headerSpanPlus {
     width: 12px;
     background: url(../images/green_plus_sign.gif) left center no-repeat;
+    cursor:default;
 }
 span.headerSpanMinus {
     width: 12px;
     background: url(../images/green_minus_sign.gif) left center no-repeat;
+    cursor:default;
 }
 span.subclassExpandPlus {
     padding-right: 14px;
     background: url(../images/green_plus_sign.gif) left center no-repeat;
+    cursor:default;
 }
 span.subclassExpandMinus {
     padding-right: 14px;
     background: url(../images/green_minus_sign.gif) left center no-repeat;
+    cursor:default;
 }
 /* ------------------------------------------------->  */
 /* PAGE MANAGEMENT  -------------------------------->  */
