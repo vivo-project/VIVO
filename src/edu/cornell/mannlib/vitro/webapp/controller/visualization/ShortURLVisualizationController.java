@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Syntax;
@@ -167,6 +168,7 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 							+ matchedPatternGroups.get(1);
 		}
 		
+		subjectURI = StringEscapeUtils.escapeHtml(subjectURI);
 		parameters.put(VisualizationFrameworkConstants.INDIVIDUAL_URI_KEY, subjectURI);
 
 		if (VisualizationFrameworkConstants.COAUTHORSHIP_VIS_SHORT_URL
@@ -240,8 +242,8 @@ public class ShortURLVisualizationController extends FreemarkerHttpServlet {
 	private List<String> extractShortURLParameters(VitroRequest vitroRequest) {
 
 		List<String> matchedGroups = new ArrayList<String>(); 
-		
-		String[] urlParams = vitroRequest.getRequestURI().substring(vitroRequest.getContextPath().length()+1).split("/");
+		String subURIString = vitroRequest.getRequestURI().substring(vitroRequest.getContextPath().length()+1);
+		String[] urlParams = StringEscapeUtils.escapeHtml(subURIString).split("/");
 		
 		if (urlParams.length > 1 
 				&& urlParams[0].equalsIgnoreCase("vis")) {
