@@ -144,10 +144,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                         new IndividualsViaVClassOptions(degreeClass))
                 );
 
-        conf.addField( new FieldVTwo().
-                setName("existingAdvisee").
-                setOptions( 
-                        new IndividualsViaVClassOptions(adviseeClass))
+        conf.addField( new FieldVTwo(). //options set by auto complete JS
+                setName("existingAdvisee")                
         );                
 
         conf.addField( new FieldVTwo().

@@ -109,10 +109,8 @@ public class PersonHasAwardOrHonorGenerator extends VivoBaseGenerator implements
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
 
-        conf.addField( new FieldVTwo().
-                setName("existingOrg").
-                setOptions( new IndividualsViaVClassOptions(
-                                orgClass))
+        conf.addField( new FieldVTwo().//options will be added in browser by auto complete JS
+                setName("existingOrg")      
         );
 
         conf.addField( new FieldVTwo().

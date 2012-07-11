@@ -120,11 +120,9 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
                 setOptions( 
                         new ChildVClassesWithParent(positionClass)));
  
+
         conf.addField( new FieldVTwo().
-                setName("existingOrg").
-                setOptions( 
-                        new IndividualsViaVClassOptions(
-                                orgClass)));
+                setName("existingOrg")); //options set in browser by auto complete JS
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").

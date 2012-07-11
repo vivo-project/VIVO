@@ -218,9 +218,8 @@ public class OrganizationHasPositionHistoryGenerator extends VivoBaseGenerator
 				.setRangeDatatypeUri(XSD.xstring.toString())
 				.setValidators(list("nonempty")));
 
-		conf.addField(new FieldVTwo().setName("existingPerson")
-		        .setOptions( 
-		                new IndividualsViaVClassOptions(personClass)));
+		//options for existingPerson will be added in browser by auto complete JS
+		conf.addField(new FieldVTwo().setName("existingPerson"));
 
 		conf.addField(new FieldVTwo().setName("personLabel")
 				.setRangeDatatypeUri(XSD.xstring.toString())

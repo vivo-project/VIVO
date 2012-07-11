@@ -136,9 +136,9 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setValidators(list("datatype:" + XSD.xstring.toString())));
         
         conf.addField( new FieldVTwo().
-                setName("existingOrg").
-                setOptions( new IndividualsViaVClassOptions(
-                        orgClass)));        
+                setName("existingOrg")
+                //options will be added in browser by auto complete JS  
+                );        
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
