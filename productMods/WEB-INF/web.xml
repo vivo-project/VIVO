@@ -1155,7 +1155,7 @@
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
 
- <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION --> 
+ <!-- THIS SHOULD BE COMMENTED OUT FOR PRODUCTION 
   <servlet>
     <servlet-name>FakeExternalAuthController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FakeExternalAuthController</servlet-class>
@@ -1165,7 +1165,7 @@
     <servlet-name>FakeExternalAuthController</servlet-name>
     <url-pattern>/admin/fakeExternalAuth</url-pattern>
   </servlet-mapping>
-<!--  -->
+-->
  
   <servlet>
     <servlet-name>browsecontroller</servlet-name>
