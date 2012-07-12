@@ -17,23 +17,35 @@
 	<#assign disabledVal = "disabled=\"disabled\"" />
 </#if>
 
+
+<#--The blank sentinel indicates what value should be put in a URI when no autocomplete result has been selected.
+If the blank value is non-null or non-empty, n3 editing for an existing object will remove the original relationship
+if nothing is selected for that object-->
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 <#--the heading and submit button label depend on the predicate uri-->
 
 <#assign formHeading =  "investigator entry for "/>
 <#assign submitButtonLabel = "Investigator" />
 <#if editConfiguration.predicateUri?ends_with("hasPrincipalInvestigatorRole") >
 	<#assign formHeading = "principal investigator entry for "/>
-	<#assign submitButtonLabel = "Principal Investigator" />
 <#elseif editConfiguration.predicateUri?ends_with("hasCo-PrincipalInvestigatorRole") >
  	<#assign formHeading = "co-principal investigator entry for "/>
- 		<#assign submitButtonLabel = "Co-Principal Investigator" />
 </#if>
 
 <#if editMode = "add">
 	<#assign formHeading> Create ${formHeading} </#assign>
+	<#assign submitButtonLabel>Create Entry</#assign>
 <#else>
 	<#assign formHeading> Edit ${formHeading} </#assign>
-	<#assign submitButtonLabel> Edit ${submitButtonLabel} </#assign>
+	<#assign submitButtonLabel>Save Changes</#assign>
 
 </#if>
 
@@ -44,11 +56,10 @@
 
 <#--Get selected activity type value if it exists, this is alternative to below-->
 
-<#assign grantLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "grantLabel")/>
-<#--Get existing grant label value-->
-<#assign existingGrantLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingGrantLabel")/>
+<#assign grantLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "grantLabel")/>
+<#assign grantLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "grantLabelDisplay")/>
 <#--Get existing grant value-->
-<#assign existingGrantValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "grant")/>
+<#assign existingGrantValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingGrant")/>
 
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
@@ -63,6 +74,10 @@
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#if grantLabelDisplayValue?has_content >
+        <#assign grantLabelValue = grantLabelDisplayValue />
+    </#if>
+
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -100,15 +115,20 @@
     <form id="addGrantRoleToPerson" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
         
         <p>
-            <label for="relatedIndLabel">Grant Name ${requiredHint}</label>
-            <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="grantLabel" ${disabledVal} value="${grantLabel}" />
+            <label for="grant">Grant Name ${requiredHint}</label>
+            <input class="acSelector" size="50"  type="text" id="grant" acGroupName="grant" name="grantLabel"  value="${grantLabelValue}" />
+            <input class="display" type="hidden" id="grantDisplay" acGroupName="grant" name="grantLabelDisplay" value="${grantLabelDisplayValue}">
         </p>
 
-        <#if editMode = "edit">
-				<input type="hidden" id="grantLabel"  name="grantLabel" value="${grantLabel}"/>
-         </#if>
-
-        <@lvf.acSelection urls.base "grant" "grant" existingGrantValue "Selected Grant"/>
+        <div class="acSelection" acGroupName="grant" id="grantAcSelection">
+            <p class="inline">
+                <label>Selected Grant:</label>
+                <span class="acSelectionInfo"></span>
+                <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+                <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+            </p>
+            <input class="acUriReceiver" type="hidden" id="grantUri" name="existingGrant" value="${existingGrantValue}" ${flagClearLabelForExisting}="true" />
+        </div>
 
         <h4>Years of Participation in Grant</h4>							 
 			 						<#if htmlForElements?keys?seq_contains("startField")>
@@ -139,18 +159,20 @@ var customFormData  = {
     sparqlForAcFilter: '${sparqlForAcFilter}',
     sparqlQueryUrl: '${urls.base}${sparqlQueryUrl}',
     acUrl: '${urls.base}${acUrl}',
-    acType: 'http://vivoweb.org/ontology/core#Grant',
+    acTypes: {grant: 'http://vivoweb.org/ontology/core#Grant'},
     editMode: '${editMode}',
-    submitButtonTextType: 'compound',
-    typeName: 'Grant'         
-};
+    typeName: 'Grant',
+    baseHref: '${urls.base}/individual?uri=',
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
+    };
 </script>
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 </#if>

@@ -1,0 +1,36 @@
+#! /usr/bin/ruby
+
+=begin
+--------------------------------------------------------------------------------
+
+Look through the uploads directory in the currently selected version, and insure
+that an image file exists wherever the data model expects one.
+
+This requires an imageFileInfo.csv, which was produced by a SPARQL query against
+the data model.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+=end
+
+require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+require "#{File.dirname(__FILE__)}/subscripts/upload_file_faker"
+
+properties  = {}
+
+properties["uploads_directory"] = "/home/jeb228/LoadTesting/versions/#{@version_name}/data/uploads"
+properties["file_info_file"] = "/home/jeb228/LoadTesting/modelData/#{@site_name}/imageFileInfo.csv"
+properties["template_file"] = "#{File.dirname(__FILE__)}/subscripts/dummy_image_file.jpg"
+
+if ARGV.length == 1 && ARGV[0] == "doit"
+  properties["scan_only"] = "false"
+else
+  puts "Just scanning unless you say: \"doit\""
+  properties["scan_only"] = "true"
+end
+
+uff = UploadFileFaker.new(properties)
+uff.process
+
+puts "UploadFileFaker was successful."
+

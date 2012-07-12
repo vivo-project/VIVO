@@ -140,12 +140,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Remove</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>id=showAddFormButton</td>
 	<td></td>
 </tr>
@@ -190,23 +185,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this web page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=showAddForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=urlType</td>
+	<td>label=Standard Web Link</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>url</td>
+	<td>id=url</td>
 	<td>http://library.cornell.edu</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>anchor</td>
+	<td>id=anchor</td>
 	<td>CUL Homepage</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>returnToIndividual</td>
 	<td></td>
 </tr>
 <tr>
@@ -311,7 +326,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -322,7 +337,7 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Mozambique</td>
+	<td>Mozamia</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -336,7 +351,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[5]/article[3]/ul/li/a[2]/img</td>
+	<td>css=a.edit-advisorIn &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -345,23 +360,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
+	<td>click</td>
+	<td>xpath=(//a[contains(text(),'change selection)')])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=SubjectArea</td>
 	<td>Primate Foundation of Africa</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -441,7 +451,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -475,23 +485,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=org</td>
 	<td>Ape Trainer of the Decade</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -621,17 +621,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='wrapper-content']/section[8]/article[7]/ul/li/a[2]/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>css=a.edit-mailingAddress &gt; img.edit-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,8 +631,8 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>Jungle 1234, Africa, 1234-56789</td>
+	<td>id=addrLineOne</td>
+	<td>Jungle 1234</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -856,7 +846,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -896,7 +886,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -961,7 +951,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -1036,12 +1026,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Assistant Professor</td>
+	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -1051,12 +1041,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Mozambique</td>
+	<td>link=Mozamia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>postdoc or fellow advising relationship</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primate Foundation of Africa</td>
+	<td>link=Smith, Joe</td>
 	<td></td>
 </tr>
 <tr>
@@ -1111,7 +1106,22 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Jungle 1234, Africa, 1234-56789</td>
+	<td>link=Jungle 1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congo City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Democratic Republic of Congo</td>
 	<td></td>
 </tr>
 <tr>

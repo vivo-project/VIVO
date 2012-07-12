@@ -2,9 +2,9 @@
 
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.HashMap;
-
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ConstantFieldOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldOptions;
 
 public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGenerator {
     
@@ -17,41 +17,48 @@ public class AddAttendeeRoleToPersonGenerator extends AddRoleToPersonTwoStageGen
     String getRoleType() {
         return "http://vivoweb.org/ontology/core#AttendeeRole";
     }
-    
+            
+    /** Editor role involves hard-coded options for the "right side" of the role or activity. */
     @Override
-    public String getRoleActivityTypeObjectClassUri(VitroRequest vreq) {
-        //no ClassURI since it uses hard coded literals
-        return null;
-    }   
-    
-    @Override
-    public RoleActivityOptionTypes getRoleActivityTypeOptionsType() {
-        return RoleActivityOptionTypes.HARDCODED_LITERALS;        
-    }    
-    
-    //Editor role involves hard-coded options for the "right side" of the role or activity
-    @Override
-    protected HashMap<String, String> getRoleActivityTypeLiteralOptions() {
-        HashMap<String, String> literalOptions = new HashMap<String, String>();
-        literalOptions.put("", "Select type");
-        literalOptions.put("http://purl.org/NET/c4dm/event.owl#Event", "Event");
-        literalOptions.put("http://vivoweb.org/ontology/core#Competition", "Competition");
-        literalOptions.put("http://purl.org/ontology/bibo/Conference", "Conference");
-        literalOptions.put("http://vivoweb.org/ontology/core#Course", "Course");
-        literalOptions.put("http://vivoweb.org/ontology/core#Exhibit", "Exhibit");                     
-        literalOptions.put("http://vivoweb.org/ontology/core#Meeting", "Meeting");
-        literalOptions.put("http://vivoweb.org/ontology/core#Presentation", "Presentation");
-        literalOptions.put("http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk");
-        literalOptions.put("http://purl.org/ontology/bibo/Workshop", "Workshop");
-        literalOptions.put("http://vivoweb.org/ontology/core#EventSeries", "Event Series");
-        literalOptions.put("http://vivoweb.org/ontology/core#ConferenceSeries", "Conference Series");
-        literalOptions.put("http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series");
-        literalOptions.put("http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series");
-        return literalOptions;
+    FieldOptions getRoleActivityFieldOptions(VitroRequest vreq) throws Exception {
+        return new ConstantFieldOptions(
+        "", "Select type",
+        "http://purl.org/NET/c4dm/event.owl#Event", "Event",
+        "http://vivoweb.org/ontology/core#Competition", "Competition",
+        "http://purl.org/ontology/bibo/Conference", "Conference",
+        "http://vivoweb.org/ontology/core#Course", "Course",
+        "http://vivoweb.org/ontology/core#Exhibit", "Exhibit",
+        "http://vivoweb.org/ontology/core#Meeting", "Meeting",
+        "http://vivoweb.org/ontology/core#Presentation", "Presentation",
+        "http://vivoweb.org/ontology/core#InvitedTalk", "Invited Talk",
+        "http://purl.org/ontology/bibo/Workshop", "Workshop",
+        "http://vivoweb.org/ontology/core#EventSeries", "Event Series",
+        "http://vivoweb.org/ontology/core#ConferenceSeries", "Conference Series",
+        "http://vivoweb.org/ontology/core#SeminarSeries", "Seminar Series",
+        "http://vivoweb.org/ontology/core#WorkshopSeries", "Workshop Series"
+        );
     }
-
+    
     @Override   
     boolean isShowRoleLabelField() { 
         return false;  
-    }	  
+    }
+
+       /* 
+        * Use the methods below to change the date/time precision in the
+        * custom form associated with this generator. When not used, the
+        * precision will be YEAR. The other precisons are MONTH, DAY, HOUR,
+        * MINUTE, TIME and NONE.
+        */
+    /*
+        public String getStartDatePrecision() {
+            String precision = VitroVocabulary.Precision.MONTH.uri();
+    	    return precision;
+        }
+
+        public String getEndDatePrecision() {
+            String precision = VitroVocabulary.Precision.DAY.uri();
+    	    return precision;
+        }
+    */    
 }

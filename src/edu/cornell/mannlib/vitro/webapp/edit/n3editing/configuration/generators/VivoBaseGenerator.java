@@ -16,7 +16,9 @@ public abstract class VivoBaseGenerator extends BaseEditConfigurationGenerator i
     final static String foaf = "http://xmlns.com/foaf/0.1/";
     final static String type =VitroVocabulary.RDF_TYPE ;            
     final static String label =rdfs+"label" ;
+    final static String bibo = "http://purl.org/ontology/bibo/";
     
+    final static String trainingClass = vivoCore+"EducationalTraining" ;    
     final static String degreeClass =vivoCore+"AcademicDegree" ;    
     final static String majorFieldPred =vivoCore+"majorField" ;
     final static String deptPred =vivoCore+"departmentOrSchool" ;

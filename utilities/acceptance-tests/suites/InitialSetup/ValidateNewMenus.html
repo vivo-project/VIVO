@@ -106,7 +106,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Menu management</td>
+	<td>link=Menu ordering</td>
 	<td></td>
 </tr>
 <tr>
@@ -121,32 +121,37 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Name *</td>
+	<td>Title</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Pretty URL *</td>
+	<td>Content Type</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Must begin with a leading forward slash: / (e.g., /people)</td>
+	<td>Pretty URL</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Template *</td>
+	<td>Must begin with a leading forward slash</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Template</td>
 	<td></td>
 </tr>
 <tr>
@@ -161,12 +166,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Select content type for the associated page *</td>
+	<td>This is a menu page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>or Cancel</td>
+	<td>Menu Item Name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>If left blank, the page title will be used.</td>
 	<td></td>
 </tr>
 <tr>
@@ -175,13 +185,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>* required fields</td>
+	<td>click</td>
+	<td>id=cancelPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Cancel</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Menu ordering</td>
 	<td></td>
 </tr>
 <tr>
@@ -191,147 +221,82 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>submit-Add</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a pretty URL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The pretty URL must begin with a leading forward slash</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a content type</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>name=pageName</td>
 	<td>Activities</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=selectClassGroup</td>
+	<td>label=activities</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>submit-Add</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupactivities&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a pretty URL</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The pretty URL must begin with a leading forward slash</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a content type</td>
+	<td>click</td>
+	<td>id=doneWithContent</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=prettyUrl</td>
-	<td>http://localhost:8080/vivo/activities</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>name=submit-Add</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>The pretty URL must begin with a leading forward slash</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a content type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>prettyUrl</td>
 	<td>/activities</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>submit-Add</td>
+	<td>id=menuCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You must supply a content type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>selectClassGroup</td>
-	<td>label=activities</td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Selected content type for the associated page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Change content type</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>changeContentType</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select content to display *</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Only display activities within my institution</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>To enable this option, you must first select an institutional internal class for your instance</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=institutional internal class</td>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit-Add</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Events</td>
 	<td></td>
 </tr>
 <tr>
@@ -341,27 +306,22 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
 	<td>Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Research</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Events</td>
 	<td></td>
 </tr>
 <tr>
@@ -371,52 +331,102 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>name=pageName</td>
 	<td>Courses</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>prettyUrl</td>
-	<td>/courses</td>
+	<td>select</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
-	<td>label=people</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>changeContentType</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=selectClassGroup</td>
 	<td>label=courses</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=prettyUrl</td>
+	<td>/courses</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit-Add</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Events</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -427,26 +437,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Research</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Organizations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Courses</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Events</td>
 	<td></td>
 </tr>
 <tr>
@@ -456,57 +446,102 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>name=pageName</td>
 	<td>Equipment</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>prettyUrl</td>
-	<td>/equipment</td>
+	<td>select</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=selectClassGroup</td>
 	<td>label=equipment</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGroupequipment&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=prettyUrl</td>
+	<td>/equipment</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit-Add</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Home</td>
+	<td>Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Activities</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>People</td>
+	<td>/activities</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Organizations</td>
+	<td>Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Courses</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Research</td>
+	<td>/courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/equipment</td>
 	<td></td>
 </tr>
 <tr>
@@ -516,17 +551,27 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Activities</td>
+	<td>Home</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Courses</td>
+	<td>Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Equipment</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Research</td>
 	<td></td>
 </tr>
 <tr>
@@ -536,37 +581,107 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add menu item</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Add Menu Item</td>
+	<td>Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>menuName</td>
+	<td>name=pageName</td>
 	<td>Locations</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>prettyUrl</td>
-	<td>/locations</td>
+	<td>select</td>
+	<td>id=typeSelect</td>
+	<td>label=Browse Class Group</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>selectClassGroup</td>
+	<td>id=selectClassGroup</td>
 	<td>label=locations</td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>css=option[value=&quot;http://vivoweb.org/ontology#vitroClassGrouplocations&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=doneWithContent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=prettyUrl</td>
+	<td>/locations</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=menuCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit-Add</td>
+	<td>id=pageSave</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Default Menu</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/activities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/courses</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/equipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Events</td>
 	<td></td>
 </tr>
 <tr>
@@ -576,7 +691,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>People</td>
+	<td>Locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Locations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/locations</td>
 	<td></td>
 </tr>
 <tr>
@@ -586,32 +711,17 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>People</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
 	<td>Research</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Activities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Courses</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Equipment</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Locations</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Events</td>
 	<td></td>
 </tr>
 <tr>
@@ -800,133 +910,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>comment</td>
-	<td class="comment">Change People menu name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
+	<td>verifyTextPresent</td>
+	<td>Continent</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Menu management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Default Menu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img.edit-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit Menu Item</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>menuName</td>
-	<td>People at CU</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit-Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Default Menu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=People at CU</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>People at CU</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>There is currently no People at CU content in the system</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change People menu name back</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Menu management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Default Menu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=img.edit-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit Menu Item</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>menuName</td>
-	<td>People</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit-Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Default Menu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>People</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>There is currently no People content in the system</td>
 	<td></td>
 </tr>
 <tr>

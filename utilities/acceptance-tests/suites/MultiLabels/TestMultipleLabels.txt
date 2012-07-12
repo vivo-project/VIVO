@@ -1,0 +1,3 @@
+ <http://vivo.mydomain.edu/individual/n####> <http://www.w3.org/2000/01/rdf-schema#label> "Test Label 1" .
+ <http://vivo.mydomain.edu/individual/n####> <http://www.w3.org/2000/01/rdf-schema#label> "Test Label 2" .
+ 

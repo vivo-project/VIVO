@@ -1,0 +1,20 @@
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX vitro: <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#>
+PREFIX vivo: <http://vivoweb.org/ontology/core#>
+
+Construct {
+     <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology ?u .
+     ?u a owl:Thing .
+     ?u vitro:updatedOntology <http://vivoweb.org/ontology/core> .
+     ?u vitro:fromOntologyVersion ?fromVers .
+     ?u vitro:toOntologyVersion ?toVers .
+} where {
+     <http://vitro.mannlib.cornell.edu/default/vitro-kb-2> vitro:updatedToOntology ?u .
+     ?u a owl:Thing .
+     ?u vitro:updatedOntology <http://vivoweb.org/ontology/core> .
+     ?u vitro:fromOntologyVersion ?fromVers .
+     ?u vitro:toOntologyVersion ?toVers .
+}

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>AddTestFaculty</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">AddTestFaculty</td></tr>
+</thead><tbody>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add a faculty member for test purposes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in already</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must login as site admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>testAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Select to add an Individual of Faculty</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>VClassURI</td>
+	<td>label=Faculty Member (vivo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add individual of this class']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Enter faculty member name and title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>firstName</td>
+	<td>Frank</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lastName</td>
+	<td>Furter</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Edit Frank Furter to make him an Associate Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-preferredTitle &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>Associate Professor</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify new faculty member added</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Associate Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Co Networks not showing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

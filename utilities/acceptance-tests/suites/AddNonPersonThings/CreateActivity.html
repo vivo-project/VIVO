@@ -435,9 +435,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Africa</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Afri</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -551,7 +556,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='fundingVehicleFor']/a/img</td>
+	<td>css=a.add-fundingVehicleFor &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -560,18 +565,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Add an entry to: provides funding for</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>primate</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Student of the Year</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -685,8 +690,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Student of the Year</td>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Health Check</td>
 	<td></td>
 </tr>
 <tr>

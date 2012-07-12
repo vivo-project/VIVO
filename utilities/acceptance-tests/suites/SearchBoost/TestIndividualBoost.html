@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>CreateTestFacultyMember</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">CreateTestFacultyMember</td></tr>
+</thead><tbody>
+<tr>
+	<td>comment</td>
+	<td class="comment">***Before running this test***</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">***must update BoostIndividual.txt***</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">***to identify the correct individual***</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Test individual boost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>10000000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must be logged off to start</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must login as the site admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>testAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check current search results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>faculty</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>faculty - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jenkins, Iris Faculty Member Emeritus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Change range of Echo Foxtrot</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add/Remove RDF data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ingest RDF Data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=rdfStream</td>
+	<td>C:\Users\hlm7.CORNELL\Desktop\BoostIndividual.txt</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=language</td>
+	<td>label=N3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ingest RDF Data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>RDF upload successful.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Search again--Echo should be on top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>faculty</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>faculty - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jenkins, Iris Faculty Member Emeritus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Now remove individual boosting</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add/Remove RDF data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ingest RDF Data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=rdfStream</td>
+	<td>C:\Users\hlm7.CORNELL\Desktop\BoostIndividual.txt</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@name='mode'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=language</td>
+	<td>label=N3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Ingest RDF Data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Removed RDF from file BoostIndividual.txt. Removed 1 statements.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Make sure search is back to normal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>faculty</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>faculty - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Baker, Able Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dog, Charlie Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Foxtrot, Echo Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Henry, George Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Jenkins, Iris Faculty Member Emeritus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

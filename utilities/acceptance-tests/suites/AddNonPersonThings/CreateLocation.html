@@ -201,41 +201,6 @@
 </tr>
 <tr>
 	<td>comment</td>
-	<td class="comment">Test affiliation entry</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='facilityFor']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Select an existing Thing for Jane Memorial Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Research Laboratory</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jane Memorial Building</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
 	<td class="comment">Test location entry</td>
 	<td></td>
 </tr>
@@ -256,7 +221,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -306,7 +271,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -366,7 +331,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='geographicLocationOf']/a/img</td>
+	<td>css=a.add-geographicLocationOf &gt; img.add-individual</td>
 	<td></td>
 </tr>
 <tr>
@@ -375,28 +340,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Add an entry to: geographic location of</td>
-	<td></td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>Primate Research labor</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Primate Research Lab Room 123</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Jane Memorial Building</td>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
 	<td></td>
 </tr>
 <tr>
 	<td>comment</td>
 	<td class="comment">Verify everything entered is displaying properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Jane Memorial Building</td>
 	<td></td>
 </tr>
 <tr>
@@ -417,11 +382,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Portable Primate Habitat</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Primate Research Lab Room 123</td>
 	<td></td>
 </tr>
 <tr>

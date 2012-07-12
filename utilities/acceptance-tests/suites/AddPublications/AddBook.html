@@ -176,12 +176,27 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>relatedIndLabel</td>
+	<td>id=title</td>
 	<td>Nintendo: Good or Bad for Kids?</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=publisher</td>
+	<td>Putnam</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=locale</td>
+	<td>New York</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTime-year</td>
+	<td>2010</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -201,7 +216,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Nintendo: Good or Bad for Kids?</td>
+	<td>Nintendo: Good or Bad for Kids?.&nbsp;&nbsp;New York: Putnam. 2010</td>
 	<td></td>
 </tr>
 <tr>
@@ -226,76 +241,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//h3[@id='publisher']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>typeOfNew</td>
-	<td>label=Publisher (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Putnam</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='placeOfPublication']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>tinymce</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>tinymce</td>
-	<td>New York</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>//h3[@id='status']/a/img</td>
 	<td></td>
 </tr>
@@ -308,31 +253,6 @@
 	<td>select</td>
 	<td>objectVar</td>
 	<td>label=in press</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>exact:Nintendo: Good or Bad for Kids?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//h3[@id='dateTimeValue']/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>dateTimeField-year</td>
-	<td>2010</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -612,6 +532,46 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty Member (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Person (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Organization (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Publisher</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publisher (1)</td>
 	<td></td>
 </tr>
 <tr>

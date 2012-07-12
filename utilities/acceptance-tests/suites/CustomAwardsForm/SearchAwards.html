@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>SearchPositions</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">SearchPositions</td></tr>
+</thead><tbody>
+<tr>
+	<td>comment</td>
+	<td class="comment">Search for awards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Search for professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>querytext</td>
+	<td>professor</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>professor - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Search results for 'professor'</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Best Professor Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Carroll College Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Search for primate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=querytext</td>
+	<td>primate</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>primate - VIVO Search Results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Search results for 'primate' </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=people</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Expert Award or Honor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primates-R-Us Organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-R-Us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Go to home page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

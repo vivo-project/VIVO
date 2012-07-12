@@ -1,149 +1,137 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
+
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import org.apache.commons.lang.StringUtils;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.vivoweb.webapp.util.ModelUtils;
-
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
-
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
-import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
-import com.hp.hpl.jena.ontology.OntModel;
-import edu.cornell.mannlib.vitro.webapp.beans.DataProperty;
-import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyComparator;
-import edu.cornell.mannlib.vitro.webapp.beans.DataPropertyStatement;
+
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectProperty;
 import edu.cornell.mannlib.vitro.webapp.beans.ObjectPropertyStatement;
-import edu.cornell.mannlib.vitro.webapp.beans.VClass;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.ResponseValues;
-import edu.cornell.mannlib.vitro.webapp.controller.freemarker.responsevalues.TemplateResponseValues;
-import edu.cornell.mannlib.vitro.webapp.dao.DisplayVocabulary;
-import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.WebappDaoFactory;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.Field;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.AddAuthorsToInformationResourceGenerator.AuthorshipInfo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.AddAssociatedConceptsPreprocessor;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.preprocessors.RoleToActivityPredicatePreprocessor;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.processEdit.RdfLiteralHash;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditN3GeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.SelectListGeneratorVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
-import edu.cornell.mannlib.vitro.webapp.web.MiscWebUtils;
-import edu.cornell.mannlib.vitro.webapp.search.beans.ProhibitedFromSearch;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils;
 import edu.cornell.mannlib.vitro.webapp.utils.ConceptSearchService.ConceptSearchServiceUtils;
-import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
-import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 /**
  * Generates the edit configuration for importing concepts from external
  * search services, e.g. UMLS etc.      
  * 
- * The N3 for this is set with the default settinf of 
- *
+ * Since editing/deletion is handled by separate custom code, this generator always assumes
+ * property addition mode. 
  */
 public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements EditConfigurationGenerator {
 	
 	private Log log = LogFactory.getLog(AddAssociatedConceptGenerator.class);
-	private boolean isObjectPropForm = false;
-	private String subjectUri = null;
-	private String predicateUri = null;
-	private String objectUri = null;
-	private String datapropKeyStr= null;
-	private int dataHash = 0;
-	private DataPropertyStatement dps = null;
-	private String dataLiteral = null;
 	private String template = "addAssociatedConcept.ftl";
-	private static HashMap<String,String> defaultsForXSDtypes ;
 	private static String SKOSConceptType = "http://www.w3.org/2004/02/skos/core#Concept";
 	
-	
-
-	
+		
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
     	EditConfigurationVTwo editConfiguration = new EditConfigurationVTwo();
-	  initBasics(editConfiguration, vreq);
-      initPropertyParameters(vreq, session, editConfiguration);
-      initObjectPropForm(editConfiguration, vreq);               
-      
-      editConfiguration.setTemplate(template);
-      
-      setVarNames(editConfiguration);
-    	
-    	//Assumes this is a simple case of subject predicate var
-      editConfiguration.setN3Required(this.generateN3Required(vreq));
-    	    	
-      //n3 optional
-      editConfiguration.setN3Optional(this.generateN3Optional());
-    	
-	//Todo: what do new resources depend on here?
-	//In original form, these variables start off empty
-	editConfiguration.setNewResources(generateNewResources(vreq));
-	//In scope
-	this.setUrisAndLiteralsInScope(editConfiguration, vreq);
-	
-	//on Form
-	this.setUrisAndLiteralsOnForm(editConfiguration, vreq);
-	
-	editConfiguration.setFilesOnForm(new ArrayList<String>());
-    	
-    	//Sparql queries
-    	this.setSparqlQueries(editConfiguration, vreq);
-    	
-    	//set fields
-    	setFields(editConfiguration, vreq, EditConfigurationUtils.getPredicateUri(vreq));
-    	
-    
-    	setTemplate(editConfiguration, vreq);
-    	//No validators required here
-        //Add preprocessors
-        addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
-        //Adding additional data, specifically edit mode
-        addFormSpecificData(editConfiguration, vreq);
-        //One override for basic functionality, changing url pattern
-        //and entity 
-        //Adding term should return to this same page, not the subject
-        //Return takes the page back to the individual form
-        editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils.getFormUrlWithoutContext(vreq));
-        
-        editConfiguration.addValidator(new AntiXssValidation());
-        
-    	//prepare
-        prepare(vreq, editConfiguration);
-        return editConfiguration;
+		initBasics(editConfiguration, vreq);
+		initPropertyParameters(vreq, session, editConfiguration);
+		initObjectPropForm(editConfiguration, vreq);
+
+		editConfiguration.setTemplate(template);
+
+		setVarNames(editConfiguration);
+
+		// Assumes this is a simple case of subject predicate var
+		editConfiguration.setN3Required(this.generateN3Required(vreq));
+
+		// n3 optional
+		editConfiguration.setN3Optional(this.generateN3Optional());
+
+		editConfiguration.setNewResources(generateNewResources(vreq));
+		// In scope
+		this.setUrisAndLiteralsInScope(editConfiguration, vreq);
+
+		// on Form
+		this.setUrisAndLiteralsOnForm(editConfiguration, vreq);
+
+		editConfiguration.setFilesOnForm(new ArrayList<String>());
+
+		// Sparql queries
+		this.setSparqlQueries(editConfiguration, vreq);
+
+		// set fields
+		setFields(editConfiguration, vreq, EditConfigurationUtils
+				.getPredicateUri(vreq));
+
+		setTemplate(editConfiguration, vreq);
+		// No validators required here
+		// Add preprocessors
+		addPreprocessors(editConfiguration, vreq.getWebappDaoFactory());
+		// Adding additional data, specifically edit mode
+		addFormSpecificData(editConfiguration, vreq);
+		// One override for basic functionality, changing url pattern
+		// and entity
+		// Adding term should return to this same page, not the subject
+		// Return takes the page back to the individual form
+		editConfiguration.setUrlPatternToReturnTo(EditConfigurationUtils
+				.getFormUrlWithoutContext(vreq));
+
+		editConfiguration.addValidator(new AntiXssValidation());
+
+		// prepare
+		prepare(vreq, editConfiguration);
+		return editConfiguration;
     }
     
- 
+    //In this case, the generator is not equipped to handle any deletion
+    //Editing in the usual sense does not exist for this form
+    //So we will disable editing
+    @Override
+    void initObjectPropForm(EditConfigurationVTwo editConfiguration,VitroRequest vreq) {                      
+        editConfiguration.setObject( null );        
+    }    
+    
+    //Ensuring that editing property logic does not get executed on processing
+    //since form's deletions are handled separately
+    @Override
+    void prepare(VitroRequest vreq, EditConfigurationVTwo editConfig) {
+    	Model model = vreq.getJenaOntModel();
+        //Set subject and predicate uri
+        if( editConfig.getSubjectUri() == null)
+            editConfig.setSubjectUri( EditConfigurationUtils.getSubjectUri(vreq));
+        if( editConfig.getPredicateUri() == null )
+            editConfig.setPredicateUri( EditConfigurationUtils.getPredicateUri(vreq));
+        //Always set creation
+        editConfig.prepareForNonUpdate(model);
+        
+    }
+    
 
 	private void setVarNames(EditConfigurationVTwo editConfiguration) {
 		  editConfiguration.setVarNameForSubject("subject");
 	      editConfiguration.setVarNameForPredicate("predicate");
-	      editConfiguration.setVarNameForObject("conceptNode");
+	      //We are not including concept node here since
+	      //we never actually "edit" using this form
+	      //the n3 required and optional will still be evaluated based on the form
+	      editConfiguration.setVarNameForObject("object");
 	}
 
 	protected void setTemplate(EditConfigurationVTwo editConfiguration,
@@ -282,9 +270,7 @@ public class AddAssociatedConceptGenerator  extends VivoBaseGenerator implements
 			VitroRequest vreq) {
 		editConfiguration.addField(new FieldVTwo().
 				setName("conceptNode").
-				setValidators(list("nonempty")).
-				setOptionsType("UNDEFINED"));
-		
+				setValidators(list("nonempty")));		
 	}
 
 

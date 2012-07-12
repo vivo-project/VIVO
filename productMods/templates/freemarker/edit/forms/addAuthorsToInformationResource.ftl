@@ -18,6 +18,7 @@
 <#assign lastNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "lastName") />
 <#assign firstNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "firstName") />
 <#assign middleNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "middleName") />
+<#assign orgNameValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgName") />
 
 
 
@@ -99,11 +100,21 @@
     <input type="submit" id="showAddFormButton" value="Add Author" role="button" />
 
     <span class="or"> or </span>
-    <a class="cancel" href="${cancelUrl}&url=/individual" title="Cancel">Return to Publication</a>
+    <a id="returnLink" class="cancel" href="${cancelUrl}&url=/individual" title="Cancel">Return to Publication</a>
+    <img id="indicatorOne" class="indicator hidden" title="one" src="${urls.base}/images/indicatorWhite.gif" />
 </section> 
 
 <form id="addAuthorForm" action ="${submitUrl}" class="customForm noIE67">
     <h3>Add an Author</h3>
+
+    <div style="display:inline">
+        <input type="radio" name="authorType" class="person-radio" value="" role="radio" checked style="display:inline;margin-top:20px" />
+        <label class="inline" for="Person" >Person</label>
+        <input type="radio" name="authorType" class="org-radio" value="http://xmlns.com/foaf/0.1/Organization" role="radio" style="display:inline;margin-left:18px" />
+        <label class="inline" for="Organization">Organization</label>
+    </div>
+
+    <section id="personFields" role="personContainer">
     		<#--These wrapper paragraph elements are important because javascript hides parent of these fields, since last name
     		should be visible even when first name/middle name are not, the parents should be separate for each field-->
     		<p class="inline">
@@ -116,22 +127,39 @@
         <input  size="20"  type="text" id="firstName" name="firstName" value="${firstNameValue}"  role="input" />
         </p>
         
-
 				<p class="inline">
 				<label for="middleName">Middle name <span class='hint'>(initial okay)</span></label>
         <input  size="20"  type="text" id="middleName" name="middleName" value="${middleNameValue}"  role="input" />
         </p>
       
-        <input type="hidden" id="label" name="label" value=""  role="input" />  <!-- Field value populated by JavaScript -->
-
         <div id="selectedAuthor" class="acSelection">
             <p class="inline">
                 <label>Selected author:&nbsp;</label>
                 <span class="acSelectionInfo" id="selectedAuthorName"></span>
-                <a href="${urls.base}/individual?uri=" class="verifyMatch"  title="verify match">(Verify this match)</a>
+                <a href="${urls.base}/individual?uri=" id="personLink" class="verifyMatch"  title="verify match">(Verify this match)</a>
                 <input type="hidden" id="personUri" name="personUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
             </p>
         </div>
+    </section>
+    <section id="organizationFields" role="organization">
+    		<p class="inline">
+        <label for="orgName">Organization name <span class='requiredHint'> *</span></label>
+        <input size="38"  type="text" id="orgName" name="orgName" value="${orgNameValue}" role="input" />
+        </p>
+				      
+        <div id="selectedOrg" class="acSelection">
+            <p class="inline">
+                <label>Selected organization:&nbsp;</label>
+                <span  id="selectedOrgName"></span>
+                <a href="${urls.base}/individual?uri=" id="orgLink"  title="verify match">(Verify this match)</a>
+                <input type="hidden" id="orgUri" name="orgUri" value=""  role="input" /> <!-- Field value populated by JavaScript -->
+            </p>
+        </div>
+    </section>
+
+    <input type="hidden" id="label" name="label" value=""  role="input" />  <!-- Field value populated by JavaScript -->
+
+
         <input type="hidden" name="rank" id="rank" value="${newRank}" role="input" />
     
         <p class="submit">
@@ -140,7 +168,8 @@
             
             <span class="or"> or </span>
             
-            <a class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+            <a id="returnLink" class="cancel" href="${cancelUrl}" title="Cancel">Cancel</a>
+            <img id="indicatorTwo" title="two" class="indicator hidden" src="${urls.base}/images/indicatorWhite.gif" />
         </p>
 
         <p id="requiredLegend" class="requiredHint">* required fields</p>
@@ -149,18 +178,21 @@
 <script type="text/javascript">
 var customFormData = {
     rankPredicate: '${rankPredicate}',
-    acUrl: '${urls.base}/autocomplete?type=http://xmlns.com/foaf/0.1/Person&tokenize=true',
+    acUrl: '${urls.base}/autocomplete?type=',
+    tokenize: '&tokenize=true',
+    personUrl: 'http://xmlns.com/foaf/0.1/Person',
+    orgUrl: 'http://xmlns.com/foaf/0.1/Organization',
     reorderUrl: '${urls.base}/edit/reorder'
 };
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />',
-									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />',
-									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/autocomplete.css" />',
-									'<link rel="stylesheet" href="${urls.base}/edit/forms/css/addAuthorsToInformationResource.css" />')}
+									'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />',
+									'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/autocomplete.css" />',
+									'<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/addAuthorsToInformationResource.css" />')}
 
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/addAuthorsToInformationResource.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/addAuthorsToInformationResource.js"></script>')}

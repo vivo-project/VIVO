@@ -34,8 +34,7 @@
 		</condition>
 	</fail>
 	<property file="${deploy.properties.file}" />
-	<fail unless="vitro.core.dir"
-	      message="${deploy.properties.file} must contain a value for vitro.core.dir" />
+	<fail unless="vitro.core.dir" message="${deploy.properties.file} must contain a value for vitro.core.dir" />
 
 	<!--
 		Base it all on the core build file. 
@@ -57,11 +56,11 @@
 		<mkdir dir="${appbase.dir}/web" />
 
 		<copy todir="${appbase.dir}/web" includeemptydirs="true">
-			<dirDifference dir="${corebase.dir}/web">
-				<blockingPath>
-					<pathelement location="./productMods" />
-				</blockingPath>
-			</dirDifference>
+			<fileset dir="${corebase.dir}/web">
+				<not>
+					<present targetdir="./productMods" />
+				</not>
+			</fileset>
 			<fileset dir="./productMods" />
 		</copy>
 
@@ -78,13 +77,13 @@
 		</patternset>
 
 		<copy todir="${appbase.dir}" includeemptydirs="true">
-			<dirDifference dir="${corebase.dir}">
+			<fileset dir="${corebase.dir}/">
 				<patternset refid="appbase.patterns" />
 				<exclude name="themes/**/*" if="skip.core.themes" />
-				<blockingPath>
-					<pathelement location="." />
-				</blockingPath>
-			</dirDifference>
+				<not>
+					<present targetdir="." />
+				</not>
+			</fileset>
 			<fileset dir=".">
 				<patternset refid="appbase.patterns" />
 			</fileset>
@@ -98,9 +97,7 @@
 	     
 	      Override the core version, to get the 2-level effect.                      
 	     ================================= -->
-	<target name="revisionInfo"
-	        depends="vitroCore.revisionInfo"
-	        description="--> Store revision info in build">
+	<target name="revisionInfo" depends="vitroCore.revisionInfo" description="--> Store revision info in build">
 		<addRevisionInfoLine productName="${ant.project.name}" productCheckoutDir="${basedir}" />
 	</target>
 
@@ -114,14 +111,10 @@
 	      Override the core version, to get the 2-level effect.                      
          ================================= -->
 	<target name="licenser" description="--> Check source files for licensing tags">
-		<property name="licenser.product.properties.file"
-		          location="./config/licenser/licenser.properties" />
-		<property name="licenser.core.properties.file"
-		          location="${corebase.dir}/config/licenser/licenser.properties" />
-		<runLicenserScript productname="${ant.project.name}"
-		                   propertiesfile="${licenser.product.properties.file}" />
-		<runLicenserScript productname="Vitro core"
-		                   propertiesfile="${licenser.core.properties.file}" />
+		<property name="licenser.product.properties.file" location="./config/licenser/licenser.properties" />
+		<property name="licenser.core.properties.file" location="${corebase.dir}/config/licenser/licenser.properties" />
+		<runLicenserScript productname="${ant.project.name}" propertiesfile="${licenser.product.properties.file}" />
+		<runLicenserScript productname="Vitro core" propertiesfile="${licenser.core.properties.file}" />
 	</target>
 
 	<!-- ================================= 

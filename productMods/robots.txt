@@ -23,3 +23,4 @@ Disallow: /visualization/
 Disallow: /vis/
 Disallow: /visualizationAjax/
 Disallow: /visualizationData/
+Disallow: /qrcode

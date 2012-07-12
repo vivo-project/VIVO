@@ -31,7 +31,11 @@
     </#local>
         
     <#local dateTime>
-        <@dt.yearIntervalSpan "${statement.dateTimeStart!}" "${statement.dateTimeEnd!}" />
+        <#if statement.dateTimeStartRole?has_content || statement.dateTimeEndRole?has_content>
+            <@dt.yearIntervalSpan "${statement.dateTimeStartRole!}" "${statement.dateTimeEndRole!}" />
+        <#else>
+            <@dt.yearIntervalSpan "${statement.dateTimeStartGrant!}" "${statement.dateTimeEndGrant!}" />
+        </#if>
     </#local>
     
     ${linkedIndividual} ${awardOrAdminBy} ${dateTime!}

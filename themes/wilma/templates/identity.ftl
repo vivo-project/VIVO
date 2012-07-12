@@ -11,6 +11,14 @@
         <ul id="header-nav" role="list">
             <li role="listitem"><a href="${urls.index}" title="index">Index</a></li>
             <#if user.loggedIn>
+                <#-- COMMENTING OUT THE EDIT PAGE LINK FOR RELEASE 1.5. WE NEED TO IMPLEMENT THIS IN A MORE 
+                     USER FRIENDLY WAY. PERHAPS INCLUDE A LINK ON THE PAGES THEMSELVES AND DISPLAY IF THE
+                     USER IS A SITE ADMIN. tlw72
+                     
+                     <#if (page??) && (page?is_hash || page?is_hash_ex) && (page.URLToEditPage??) >
+                        <li role="listitem"><a href="${page.URLToEditPage}" title="edit page">Edit Page</a></li>
+                     </#if>
+                -->
                 <#if user.hasSiteAdminAccess>
                     <li role="listitem"><a href="${urls.siteAdmin}" title="site admin">Site Admin</a></li>
                 </#if>
@@ -29,6 +37,8 @@
                             </li>
                          </ul>
                      </li>
+                     
+
                 
                 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/userMenu/userMenuUtils.js"></script>')}
                 

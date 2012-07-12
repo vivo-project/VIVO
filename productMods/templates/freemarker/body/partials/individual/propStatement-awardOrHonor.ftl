@@ -1,6 +1,6 @@
 <#-- $This file is distributed under the terms of the license in /doc/license.txt$ -->
 
-<#-- Custom object property statement view for http://vivoweb.org/ontology/core#mailingAddress. 
+<#-- Custom object property statement view for http://vivoweb.org/ontology/core#awardOrHonor. 
     
      This template must be self-contained and not rely on other variables set for the individual page, because it
      is also used to generate the property statement during a deletion.  
@@ -15,7 +15,7 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName!}</a>
         </#if>
     </#local>
 
@@ -33,5 +33,5 @@
         </#if>
     </#local>
 
-    <@s.join [ linkedIndividual,  conferredByOrg!, dateTimeVal! ] />   
+    <@s.join [ linkedIndividual, conferredByOrg!,  dateTimeVal! ] />
  </#macro>

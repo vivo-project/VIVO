@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>AddBook</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">AddBook</td></tr>
+</thead><tbody>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add academic articles included in Map of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in already</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must login as site admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>testAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add first journal article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create publication entry for Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=title</td>
+	<td>Dying for a Drink</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageStart &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageEnd &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>119</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-dateTimeValue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTimeField-year</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-volume &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-issue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasPublicationVenue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Journal (bibo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Alcohol</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add second journal article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create publication entry for Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=title</td>
+	<td>Alcohol Poisoning Treatment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageStart &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>222</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageEnd &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>229</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-dateTimeValue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTimeField-year</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-volume &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-issue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasPublicationVenue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add third journal article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create publication entry for Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=title</td>
+	<td>What should I drink?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageStart &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>345</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageEnd &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>367</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-dateTimeValue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTimeField-year</td>
+	<td>2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-volume &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-issue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasPublicationVenue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Journal (bibo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Alcohol And Alcoholism</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add fourth journal article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//h3[@id='authorInAuthorship']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Create publication entry for Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Publication Type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeSelector</td>
+	<td>label=Academic Article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=title</td>
+	<td>Latest Alcohol Research</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageStart &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>990</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-pageEnd &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>994</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-dateTimeValue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dateTimeField-year</td>
+	<td>2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-volume &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-issue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>tinymce</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tinymce</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-hasPublicationVenue &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=typeOfNew</td>
+	<td>label=Journal (bibo)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=offerCreate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>ALCOHOL RESEARCH &amp; HEALTH</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to Frank Furter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify Publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Latest Alcohol Research.&nbsp;&nbsp;ALCOHOL RESEARCH &amp; HEALTH.&nbsp;&nbsp;23:990-994. 2009</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Latest Alcohol Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>What should I drink?.&nbsp;&nbsp;Alcohol And Alcoholism.&nbsp;&nbsp;55:345-367. 2007</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=exact:What should I drink?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Alcohol Poisoning Treatment.&nbsp;&nbsp;Alcohol.&nbsp;&nbsp;12:222-229. 2005</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Alcohol Poisoning Treatment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Dying for a Drink.&nbsp;&nbsp;Alcohol.&nbsp;&nbsp;9:111-119. 2005</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Dying for a Drink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check Map of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Map Of Science</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Explore activity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Furter, Frank - Map of Science Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Furter, Frank</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Explore activity (4 publications) across 554 scientific subdisciplines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>554 Subdisciplines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>13 Disciplines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Neurotoxicology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>mapped 100.00% of 4 publications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Check 13 Disciplines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=second-filter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Brain Research</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[@id='DISCIPLINE-5']/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Back to 554 Subdisciplines</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=first-filter</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=td..sorting_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Neurotoxicology</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>4.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>100.0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

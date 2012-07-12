@@ -10,7 +10,7 @@
         PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
         PREFIX vitro: &lt;http://vitro.mannlib.cornell.edu/ns/vitro/0.7#&gt;
         
-        SELECT DISTINCT <collated>?subclass</collated>
+        SELECT DISTINCT 
                         ?role 
                         ?activity ?activityName 
                         ?activityLabel
@@ -18,27 +18,19 @@
                         ?adminedBy
                         ?awardedByLabel
                         ?adminedByLabel
-                        ?dateTimeStart ?dateTimeEnd WHERE {
+                        ?dateTimeStartRole ?dateTimeEndRole
+                        ?dateTimeStartGrant ?dateTimeEndGrant
+        WHERE {
                         
             ?subject ?property ?role  
             
             OPTIONAL {  ?role core:roleRealizedIn ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
-                        
-                        <collated>
-                        ?activity vitro:mostSpecificType ?subclass .
-                        ?subclass rdfs:subClassOf core:hasInvestigatorRole  
-                        </collated>
             }   
             OPTIONAL {  ?role core:roleContributesTo ?activity 
                         LET (?activityName := afn:localname(?activity)) 
                         OPTIONAL { ?activity rdfs:label ?activityLabel }
-                        
-                        <collated>
-                        ?activity vitro:mostSpecificType ?subclass .
-                        ?subclass rdfs:subClassOf core:hasInvestigatorRole  
-                        </collated>
             }                   
             OPTIONAL { ?activity core:grantAwardedBy ?awardedBy .
                        ?awardedBy rdfs:label ?awardedByLabel
@@ -46,20 +38,28 @@
             OPTIONAL { ?activity core:administeredBy ?adminedBy .
                        ?adminedBy rdfs:label ?adminedByLabel
             }
-
-            OPTIONAL { ?role rdfs:label ?roleLabel }
-            OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
-                       OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
-                                  ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            OPTIONAL { ?role core:dateTimeInterval ?dateTimeIntervalRole 
+                       OPTIONAL { ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
+                                  ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
                        }
-                       OPTIONAL { ?dateTimeInterval core:end ?dateTimeEndValue .
-                                  ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+                       OPTIONAL { ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
+                                  ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
                        }
             }  
+            OPTIONAL { ?role core:roleContributesTo ?grant .
+                       ?grant core:dateTimeInterval ?dateTimeIntervalGrant 
+                       OPTIONAL { ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+                                  ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+                       }
+                       OPTIONAL { ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+                                  ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+                       }
+            }
+            NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>
-        } ORDER BY <collated>?subclass</collated> DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
+        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
     </query-select>
     
     <query-construct>
@@ -70,13 +70,17 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role core:roleRealizedIn ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            ?activity rdfs:label ?activityLabel
         } WHERE {
+        {
+            ?subject ?property ?role .
+            ?role core:roleContributesTo ?activity 
+        } UNION
+        {
             ?subject ?property ?role .
             ?role core:roleRealizedIn ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            ?activity rdfs:label ?activityLabel 
+        }
         }
     </query-construct>
     
@@ -88,13 +92,17 @@
         CONSTRUCT {
             ?subject ?property ?role .
             ?role core:roleContributesTo ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            ?activity rdfs:label ?activityLabel 
         } WHERE {
-            ?subject ?property ?role .
-            ?role core:roleContributesTo ?activity .
-            ?activity vitro:mostSpecificType ?subclass .
-            ?subclass rdfs:subClassOf core:hasInvestigatorRole 
+            {
+                ?subject ?property ?role .
+                ?role core:roleContributesTo ?activity 
+            } UNION
+            {
+                ?subject ?property ?role .
+                ?role core:roleContributesTo ?activity .
+                ?activity rdfs:label ?activityLabel 
+            }
         }
     </query-construct>
     
@@ -149,14 +157,14 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
-            ?role core:dateTimeInterval ?dateTimeInterval .
-            ?dateTimeInterval core:start ?dateTimeStartValue .
-            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
+            ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
         } WHERE {
             ?subject ?property ?role .  
-            ?role core:dateTimeInterval ?dateTimeInterval .
-            ?dateTimeInterval core:start ?dateTimeStartValue .
-            ?dateTimeStartValue core:dateTime ?dateTimeStart 
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:start ?dateTimeStartValueRole .
+            ?dateTimeStartValueRole core:dateTime ?dateTimeStartRole 
         } 
     </query-construct>
 
@@ -164,14 +172,47 @@
         PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
         CONSTRUCT { 
             ?subject ?property ?role .  
-            ?role core:dateTimeInterval ?dateTimeInterval .
-            ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
+            ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
         } WHERE {
             ?subject ?property ?role .  
-            ?role core:dateTimeInterval ?dateTimeInterval .
-            ?dateTimeInterval core:end ?dateTimeEndValue .
-            ?dateTimeEndValue core:dateTime ?dateTimeEnd 
+            ?role core:dateTimeInterval ?dateTimeIntervalRole .
+            ?dateTimeIntervalRole core:end ?dateTimeEndValueRole .
+            ?dateTimeEndValueRole core:dateTime ?dateTimeEndRole 
+        } 
+    </query-construct>
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:roleContributesTo ?grant .
+            ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
+            ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+            ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:roleContributesTo ?grant .
+            ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
+            ?dateTimeIntervalGrant core:start ?dateTimeStartValueGrant .
+            ?dateTimeStartValueGrant core:dateTime ?dateTimeStartGrant 
+        } 
+    </query-construct>
+
+    <query-construct>
+        PREFIX core: &lt;http://vivoweb.org/ontology/core#&gt;   
+        CONSTRUCT { 
+            ?subject ?property ?role .  
+            ?role core:roleContributesTo ?grant .
+            ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
+            ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+            ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
+        } WHERE {
+            ?subject ?property ?role .  
+            ?role core:roleContributesTo ?grant .
+            ?grant core:dateTimeInterval ?dateTimeIntervalGrant .
+            ?dateTimeIntervalGrant core:end ?dateTimeEndValueGrant .
+            ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
         } 
     </query-construct>
 

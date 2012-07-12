@@ -250,6 +250,7 @@ var ComparisonScimapWidget = Class.extend({
 		if (compositeManager) {
 			var length = compositeManager.length();
 			var slider = this.sliderControl;
+			slider.setTypeString("subdisciplines");
 			slider.setMin(Math.min(1, length));
 			slider.setMax(length);
 			slider.setValue(length);

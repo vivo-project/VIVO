@@ -1,0 +1,163 @@
+# -----------------------------------------------------------------------------
+#
+# VIVO deployment properties
+#
+# This file is provided as example.deploy.properties.
+#
+# Save a copy of this file as deploy.properties, and edit the properties as 
+# needed for your deployment.
+#
+# -----------------------------------------------------------------------------
+
+# 
+# This namespace will be used when generating URIs for objects created in the 
+# editor. Change it to reflect your own domain. For example, Cornell's 
+# namespace is http://vivo.cornell.edu/individual/
+#
+# Note: it is essential that this namespace end with a trailing slash.
+#
+Vitro.defaultNamespace = <%= @default_namespace %>
+
+#
+# Where is the Vitro core directory?
+# In most deployments, this is set to ./vitro-core (It is not uncommon for this 
+# setting to point elsewhere in development environments).
+#   Examples:
+#      vitro.core.dir = ./vitro-core
+#      vitro.core.dir = ../vitro
+#      vitro.core.dir = /usr/local/vitro/trunk
+vitro.core.dir = ../vitro
+
+#
+# The base install directory for your Tomcat server. The VIVO application 
+# will be deployed in the /webapps directory below this base. 
+#
+tomcat.home = /home/jeb228/LoadTesting/tomcat
+
+#
+# The name of the VIVO application. This will be used as the name of the
+# subdirectory within your Tomcat server's /webapps directory. It also appears
+# in the URL for the application. For example, http://my.vivo.server/vivo
+#
+webapp.name = vivo
+
+# 
+# URL of Solr context used in local VIVO search. This will usually consist of:
+#     scheme + server_name + port + vivo_webapp_name + "solr"
+# In the standard installation, the Solr context will be on the same server as VIVO,
+# and in the same Tomcat instance. The path will be the VIVO webapp.name (specified
+# above) + "solr"
+#   Example:
+#     vitro.local.solr.url = http://localhost:8080/vivosolr
+vitro.local.solr.url = http://localhost:6080/vivosolr
+
+#
+# Restricts access to the Solr search platform. One or more regular expressions,
+# separated by commas. When a request is made to Solr, the IP address of the 
+# requestor must match one of the patterns, or the request will be rejected.
+#   Examples:
+#      vitro.local.solr.ipaddress.mask = 127\.0\.0\.1
+#      vitro.local.solr.ipaddress.mask = 127\.0\.0\.1,0:0:0:0:0:0:0:1
+#      vitro.local.solr.ipaddress.mask = 169.254.*
+vitro.local.solr.ipaddress.mask = 127\.0\.0\.1,0:0:0:0:0:0:0:1 
+
+#
+# The location where the VIVO application will store the data that it creates.
+# This includes uploaded files (usually images) and the search index.
+#
+vitro.home.directory = /home/jeb228/LoadTesting/versions/<%= @version_name %>/data
+
+#
+# SMTP host which the "Contact Us" form can use to send mail. If this is left 
+# empty, the "Contact Us" form will be disabled.
+#
+Vitro.smtpHost =
+
+#
+# The basic parameters for a database connection. Change the end of the 
+# URL to reflect your database name (if it is not "vitro"). Change the username 
+# and password to match the authorized database user you created. Increase the
+# maximum size of the database connection pool if you need to serve a greater
+# number of concurrent page requests.
+#
+VitroConnection.DataSource.url = jdbc:mysql://localhost/<%= @database_name %>
+VitroConnection.DataSource.username = loadUser
+VitroConnection.DataSource.password = loadPass
+
+#
+# The maximum number of active connections in the database connection pool.
+# Increase this value to support a greater number of concurrent page requests
+# with SDB.  It is not necessary to adjust this value when using the
+# RDB configuration.
+#
+VitroConnection.DataSource.pool.maxActive = 40
+
+#
+# The maximum number of database connections that will be allowed
+# to remain idle in the connection pool.  Default is 25%
+# of the maximum number of active connections.
+#
+VitroConnection.DataSource.pool.maxIdle = 10
+
+#
+# Parameters to change in order to use VIVO with a database other than 
+# MySQL.
+#
+VitroConnection.DataSource.dbtype = MySQL
+VitroConnection.DataSource.driver = com.mysql.jdbc.Driver
+VitroConnection.DataSource.validationQuery = SELECT 1
+
+#
+# The email address of the root user for the VIVO application. The password 
+# for this user is initially set to "rootPassword", but you will be asked to 
+# change the password the first time you log in.
+#
+rootUser.emailAddress = <%= @root_user %>
+
+#
+# How is a logged-in user associated with a particular Individual? One way is 
+# for the Individual to have a property whose value is the username of the user.
+# This value should be the URI for that property.
+#
+selfEditing.idMatchingProperty = http://vivoweb.org/ontology/core#scopusId
+
+#
+# If an external authentication system like Shibboleth or CUWebAuth is to be
+# used, these properties say how the login button should be labeled, and which
+# HTTP header will contain the user ID from the authentication system. If such
+# a system is not to be used, leave these commented out. Consult the 
+# installation instructions for more details. 
+#
+#externalAuth.buttonText = Log in using BearCat Shibboleth
+#externalAuth.netIdHeaderName = remote_userID 
+
+#
+# The temporal graph visualization can require extensive machine resources.
+# This can have a particularly noticable impact on memory usage if
+# - VIVO is configured to use Jena SDB,
+# - The organization tree is deep,
+# - The number of grants and publications is large.
+# VIVO release 1.2 guards against this impact by disabling the temporal graph
+# visualization unless the "visualization.temporal" flag is set to "enabled".
+#
+# visualization.temporal = enabled 
+
+#
+# The temporal graph visualization is used to compare different organizations/people
+# within an organization on parameters like number of publications or grants.
+# By default, the app will attempt to make its best guess at the top level
+# organization in your instance. If you're unhappy with this selection, uncomment out
+# the property below and set it to the URI of the organization individual you want to
+# identify as the top level organization. It will be used as the default whenever the
+# temporal graph visualization is rendered without being passed an explicit org.
+# For example, to use "Ponce School of Medicine" as the top organization:
+# visualization.topLevelOrg = http://vivo.psm.edu/individual/n2862
+#
+# visualization.topLevelOrg = http://vivo.mydomain.edu/individual/topLevelOrgURI
+
+#
+# Default type(s) for Google Refine Reconciliation Service
+# The format for this property is id, name; id1, name1; id2, name2 etc.
+# See Service Metadata from this page http://code.google.com/p/google-refine/wiki/ReconciliationServiceApi
+# for more information.
+Vitro.reconcile.defaultTypeList = http://vivoweb.org/ontology/core#Course, Course; http://vivoweb.org/ontology/core#Grant, Grant; http://aims.fao.org/aos/geopolitical.owl, Location; http://xmlns.com/foaf/0.1/Organization, Organization; http://xmlns.com/foaf/0.1/Person, Person; http://purl.org/ontology/bibo/Article, Publication

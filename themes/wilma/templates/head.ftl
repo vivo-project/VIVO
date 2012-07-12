@@ -6,6 +6,17 @@
 
 <title>${title}</title>
 
+<#-- VIVO OpenSocial Extension by UCSF -->
+<#if openSocial??>
+    <#if openSocial.visible>
+        <#-- Required to add these BEFORE stylesheets.flt and headScripts.ftl are processed -->
+        ${stylesheets.add('<link rel="stylesheet" href="${urls.theme}/css/openSocial/gadgets.css" />')}			
+        ${headScripts.add('<script type="text/javascript" src="${openSocial.containerJavascriptSrc}"></script>',
+                          '<script type="text/javascript" language="javascript">${openSocial.gadgetJavascript}</script>',
+                          '<script type="text/javascript" src="${urls.base}/js/openSocial/orng.js"></script>')}
+    </#if>	
+</#if>	
+
 <#include "stylesheets.ftl">
 <link rel="stylesheet" href="${urls.theme}/css/screen.css" />
 

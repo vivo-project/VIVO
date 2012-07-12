@@ -9,7 +9,7 @@
         <#include "head.ftl">
     </head>
     
-    <body class="${bodyClasses!}">
+    <body class="${bodyClasses!}" onload="${bodyOnload!}">
         <#include "identity.ftl">
 
         <#include "menu.ftl">
@@ -37,7 +37,7 @@
         
         <@widget name="login" />
         
-        <@allClassGroups vClassGroups />
+        <@allClassGroups vClassGroups! />
     
     <#include "footer.ftl">
     </body>

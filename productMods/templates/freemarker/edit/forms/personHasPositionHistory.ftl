@@ -8,12 +8,22 @@
 <#assign htmlForElements = editConfiguration.pageData.htmlForElements />
 <#assign editMode = editConfiguration.pageData.editMode />
 
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
+</#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
 <#--Get existing value for specific data literals and uris-->
 <#assign orgTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgType")/>
+<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingOrg")/>
 <#assign orgLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabel")/>
+<#assign orgLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "orgLabelDisplay")/>
 <#assign positionTitleValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionTitle")/>
 <#assign positionTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "positionType")/>
-<#assign existingOrgValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "org")/>
 
 <#--If edit submission exists, then retrieve validation errors if they exist-->
 <#if editSubmission?has_content && editSubmission.submissionExists = true && editSubmission.validationErrors?has_content>
@@ -23,11 +33,11 @@
 <#assign disabledVal = ""/>
 <#if editMode == "edit">        
         <#assign formAction="Edit">        
-        <#assign submitButtonText="Edit Position">
+        <#assign submitButtonText="Save Changes">
         <#assign disabledVal="disabled">
 <#else>
         <#assign formAction="Create">        
-        <#assign submitButtonText="Position">
+        <#assign submitButtonText="Create Entry">
         <#assign disabledVal="">
 </#if>
 
@@ -38,6 +48,9 @@
 
 <#--Display error messages if any-->
 <#if submissionErrors?has_content>
+    <#if orgLabelDisplayValue?has_content >
+        <#assign orgLabelValue = orgLabelDisplayValue />
+    </#if>
     <section id="error-alert" role="alert">
         <img src="${urls.images}/iconAlert.png" width="24" height="24" alert="Error alert icon" />
         <p>
@@ -83,28 +96,43 @@
 
 <form class="customForm" action ="${submitUrl}" class="customForm noIE67" role="${formAction} position entry">
   <p class="inline">    
-    <label for="orgType">Organization Type ${requiredHint}</label>
+    <label for="orgType">Organization Type<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
     <#assign orgTypeOpts = editConfiguration.pageData.orgType />
-    <select id="typeSelector" name="orgType"  ${disabledVal} >
-        <option value="" selected="selected">Select one</option>                
-        <#list orgTypeOpts?keys as key>             
-            <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
-        </#list>
-    </select>
+<#--
+    <#if editMode == "edit">
+      <#list orgTypeOpts?keys as key>             
+          <#if orgTypeValue = key >
+            <span class="readOnly" id="typeSelectorSpan">${orgTypeOpts[key]}</span> 
+            <input type="hidden" id="typeSelectorInput" name="orgType" acGroupName="org" value="${orgTypeValue}" >
+          </#if>           
+      </#list>
+    <#else>
+    </#if>
+-->
+<select id="typeSelector" name="orgType" acGroupName="org">
+    <option value="" selected="selected">Select one</option>                
+    <#list orgTypeOpts?keys as key>             
+        <option value="${key}"  <#if orgTypeValue = key>selected</#if>>${orgTypeOpts[key]}</option>            
+    </#list>
+</select>
   </p>
 
   <div class="fullViewOnly">        
   <p>
     <label for="relatedIndLabel">### Name ${requiredHint}</label>
-    <input type="text" name="orgLabel" id="relatedIndLabel" size="50" class="acSelector" value="${orgLabelValue}" <#if (disabledVal!?length > 0)>disabled="${disabledVal}"</#if>  >
+    <input type="text" name="orgLabel" id="orgLabel" acGroupName="org" size="50" class="acSelector" value="${orgLabelValue}" >
+    <input class="display" type="hidden" id="orgDisplay" acGroupName="org" name="orgLabelDisplay" value="${orgLabelDisplayValue}">
   </p>
-  <#if editMode = "edit">
-			<input type="hidden" id="orgLabel"  name="orgLabel" value="${orgLabelValue}"/>
-   </#if>
-
-    <@lvf.acSelection urls.base "org" "org" existingOrgValue/>
-
-
+    <div class="acSelection" acGroupName="org">
+        <p class="inline">
+            <label>Selected Organization:</label>
+            <span class="acSelectionInfo"></span>
+            <a href="" class="verifyMatch"  title="verify match">(Verify this match</a> or 
+            <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+        </p>
+        <input class="acUriReceiver" type="hidden" id="orgUri" name="existingOrg" value="${existingOrgValue}" ${flagClearLabelForExisting}="true" />
+    </div>
+    
     <label for="positionTitle">Position Title ${requiredHint}</label>
     <input  size="30"  type="text" id="positionTitle" name="positionTitle" value="${positionTitleValue}" role="input" />
 
@@ -150,14 +178,16 @@
 var customFormData  = {
     acUrl: '${urls.base}/autocomplete?tokenize=true',
     editMode: '${editMode}',
-    submitButtonTextType: 'compound',
-    defaultTypeName: 'organization' // used in repair mode, to generate button text and org name field label
-};
+    defaultTypeName: 'organization', // used in repair mode, to generate button text and org name field label
+    baseHref: '${urls.base}/individual?uri=',
+    blankSentinel: '${blankSentinel}',
+    flagClearLabelForExisting: '${flagClearLabelForExisting}'
+    };
 </script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}
 
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
@@ -165,4 +195,4 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/
              '<script type="text/javascript" src="${urls.base}/js/extensions/String.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>',
              '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.bgiframe.pack.js"></script>',
-             '<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
+             '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}

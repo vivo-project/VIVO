@@ -1,0 +1,3 @@
+<http://vivo.mydomain.edu/individual/n####>
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#searchBoostAnnot>
+2000.0 .

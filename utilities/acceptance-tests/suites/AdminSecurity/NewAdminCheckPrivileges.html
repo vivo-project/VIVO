@@ -156,7 +156,17 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Menu management</td>
+	<td>link=Page management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Menu ordering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Restrict Logins</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,6 +187,11 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Ontology Editor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Ontology list</td>
 	<td></td>
 </tr>
 <tr>
@@ -215,11 +230,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Ontology list</td>
-	<td></td>
-</tr>
-<tr>
 	<td>verifyTextPresent</td>
 	<td>Advanced Data Tools</td>
 	<td></td>
@@ -252,11 +262,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Refresh Content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Rebuild class group cache</td>
 	<td></td>
 </tr>
 <tr>
@@ -356,7 +361,42 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Menu management</td>
+	<td>link=Page management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Page Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Menu ordering</td>
 	<td></td>
 </tr>
 <tr>
@@ -366,7 +406,42 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Menu management</td>
+	<td>Menu Ordering</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Restrict Logins</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Restrict Logins</td>
 	<td></td>
 </tr>
 <tr>
@@ -506,7 +581,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Class Groups</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -541,7 +616,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Class Hierarchy</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -576,7 +651,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Data Property Hierarchy</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -611,7 +686,7 @@
 </tr>
 <tr>
 	<td>assertTitle</td>
-	<td>Object Property Hierarchy</td>
+	<td>VIVO</td>
 	<td></td>
 </tr>
 <tr>
@@ -897,36 +972,6 @@
 <tr>
 	<td>comment</td>
 	<td class="comment">Make sure available Refresh Content options actually open up</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Rebuild class group cache</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Index of Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Continent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>We're sorry, but you are not authorized to view the page you requested. If you think this is an error, please contact us and we'll be happy to help.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Site Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
 <tr>

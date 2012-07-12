@@ -55,6 +55,7 @@ var SliderControlPanel = ControlPanel.extend({
 	},
 	initSlider: function() {
 		var me = this;
+		me.typeString = "";
 		var label = $("<div />").width(150).css("font-size", "75%").css("text-align", "center").text("");
 		var slider = $("<div />").width(150).css("font-size","60%");
 		slider.slider({
@@ -90,8 +91,11 @@ var SliderControlPanel = ControlPanel.extend({
 		});
 		this._setLabel(value);
 	},
+	setTypeString: function(typeString) {
+		this.typeString = typeString;
+	},
 	_setLabel: function(value) {
-		var labelText = "Top " + value + " disciplines shown"
+		var labelText = "Top " + value + " " + this.typeString + " shown";
         this.labelDiv.text(labelText);
 	},
 	setChangeEventHandler: function(handlerFunc) {

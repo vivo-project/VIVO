@@ -185,6 +185,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>id=showAddForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=urlType</td>
+	<td>label=Standard Web Link</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>url</td>
 	<td>http://cit.cprnell.edu</td>
@@ -197,11 +212,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>returnToIndividual</td>
 	<td></td>
 </tr>
 <tr>
@@ -220,13 +230,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>objectVar</td>
-	<td>label=Africa</td>
+	<td>type</td>
+	<td>id=object</td>
+	<td>southern afri</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -245,23 +260,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
+	<td>select</td>
+	<td>id=selector</td>
+	<td>label=Other</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=advisee</td>
 	<td>SPCA</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>The</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -275,13 +290,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
+	<td>id=offerCreate</td>
 	<td></td>
 </tr>
 <tr>
@@ -315,23 +325,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>name</td>
+	<td>id=award</td>
 	<td>Chimp Lover for Life</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>css=input.submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -440,23 +440,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@id='submit' and @value='Add a new item of this type']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
+	<td>select</td>
+	<td>id=country</td>
+	<td>label=United States of America</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name</td>
-	<td>CIT, Cornell University, Ithaca, NY, 14853</td>
+	<td>id=addrLineOne</td>
+	<td>CIT</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=addrLineTwo</td>
+	<td>Cornell University</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=city</td>
+	<td>Ithaca</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=stateSelect</td>
+	<td>label=New York</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=postalCode</td>
+	<td>14853</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -591,46 +606,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.add-eligibleFor &gt; img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=a.add-hasCredential &gt; img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>css=a.add-eRACommonsId &gt; img.add-individual</td>
 	<td></td>
 </tr>
@@ -648,26 +623,6 @@
 	<td>type</td>
 	<td>tinymce</td>
 	<td>ABC123987</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=a.add-assigneeFor &gt; img.add-individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -721,6 +676,11 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
+	<td>link=Primatia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
 	<td>link=Primatia Africana</td>
 	<td></td>
 </tr>
@@ -741,12 +701,12 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
+	<td>link=Librarian, Lily</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Assistant Professor</td>
+	<td>Librarian, Lily Assistant Librarian</td>
 	<td></td>
 </tr>
 <tr>
@@ -761,17 +721,27 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Mozambique</td>
+	<td>link=Mozamia</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Primate Foundation of Africa</td>
+	<td>link=southern Africa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>postdoc or fellow advising relationship</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=SPCA</td>
+	<td>link=Smith, Joe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=SPCA, The</td>
 	<td></td>
 </tr>
 <tr>
@@ -841,12 +811,32 @@
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=CIT, Cornell University, Ithaca, NY, 14853</td>
+	<td>link=Jungle 1234</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Congo City</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>1234567890</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>link=Jungle 1234, Africa, 1234-56789</td>
+	<td>link=CIT</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Cornell University</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Ithaca, New York&nbsp;&nbsp;14853</td>
 	<td></td>
 </tr>
 <tr>
@@ -897,11 +887,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>African Apes</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Primate Expert Association</td>
 	<td></td>
 </tr>
 <tr>

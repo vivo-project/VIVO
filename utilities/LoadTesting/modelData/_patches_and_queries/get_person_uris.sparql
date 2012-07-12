@@ -1,0 +1,9 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX core: <http://vivoweb.org/ontology/core#>
+
+SELECT ?uri
+WHERE
+{
+   ?uri a foaf:Person ;
+}
+limit 300

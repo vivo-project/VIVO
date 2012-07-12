@@ -1,6 +1,10 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 package edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -13,10 +17,12 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 /**
 
@@ -41,7 +47,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     public static Log log = LogFactory.getLog( AddEditWebpageFormGenerator.class );
     
     @Override
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
         EditConfigurationVTwo config = new EditConfigurationVTwo();
         
         config.setTemplate("addEditWebpageForm.ftl");
@@ -51,11 +57,11 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         initObjectPropForm(config, vreq);       
                 
         config.setVarNameForSubject("subject");
-        
         config.setVarNameForObject("link");
+
         config.addNewResource("link", DEFAULT_NS_FOR_NEW_RESOURCE);
         
-        config.setN3Required(list( N3_FOR_WEBPAGE ));
+        config.setN3Required(list( N3_FOR_WEBPAGE, N3_FOR_URLTYPE ));
         config.setN3Optional(list( N3_FOR_ANCHOR, N3_FOR_RANK));
         
         config.addUrisInScope("webpageProperty",     list( core + "webpage"));
@@ -64,23 +70,28 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         config.addUrisInScope("linkURI",       list( core + "linkURI" ));
         config.addUrisInScope("linkAnchorPredicate", list( core + "linkAnchorText" ));
         config.addUrisInScope("rankPredicate",       list( core + "rank"));
-        config.addUrisInScope("linkClass",           list( core + "URLLink"));        
         
+        config.setUrisOnForm("urlType");
         config.setLiteralsOnForm(list("url","anchor","rank"));
 
         config.addSparqlForExistingLiteral("url",    URL_QUERY);
         config.addSparqlForExistingLiteral("anchor", ANCHOR_QUERY);
         config.addSparqlForExistingLiteral("rank",   MAX_RANK_QUERY);
+        config.addSparqlForExistingUris("urlType", URLTYPE_QUERY);
             
         config.addField(new FieldVTwo().
                 setName("url").
                 setValidators(list("nonempty", "datatype:"+XSD.anyURI.toString(), "httpUrl")).
                 setRangeDatatypeUri(XSD.anyURI.toString()));
         
+        config.addField( new FieldVTwo().
+                setName("urlType").
+                setValidators( list("nonempty") ).
+                setOptions( 
+                    new ChildVClassesWithParent(core + "URLLink")));
+
         config.addField(new FieldVTwo().
-                setName("anchor").
-                setValidators(list("datatype:"+XSD.anyURI.toString())).
-                setRangeDatatypeUri(XSD.anyURI.toString()));
+                setName("anchor"));
         
         config.addField(new FieldVTwo().
                 setName("rank").
@@ -112,9 +123,12 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     static String N3_FOR_WEBPAGE = 
         "?subject ?webpageProperty ?link . \n"+
         "?link    ?inverseProperty ?subject . \n"+
-        "?link    a                ?linkClass ; \n" +      
-        "         ?linkURI         ?url .";    
+        "?link    a                ?linkClass  . \n" +      
+        "?link    ?linkURI         ?url .";    
     
+    static String N3_FOR_URLTYPE =
+        "?link a ?urlType .";
+
     static String N3_FOR_ANCHOR =
         "?link ?linkAnchorPredicate ?anchor .";
     
@@ -126,15 +140,18 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     static String URL_QUERY = 
         "SELECT ?urlExisting WHERE { ?link ?linkURI ?urlExisting }";
     
+    static String URLTYPE_QUERY = 
+        "PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "SELECT ?linkClassExisting WHERE { ?link vitro:mostSpecificType ?linkClassExisting }";
+    
     static String ANCHOR_QUERY = 
         "SELECT ?anchorExisting WHERE { ?link ?linkAnchorPredicate ?anchorExisting }";
-    
+
     static String RANK_QUERY =
         "SELECT ?rankExisting WHERE { ?link ?rankPredicate ?rankExisting }";
     
     static String core = "http://vivoweb.org/ontology/core#";
     
-
     /* Note on ordering by rank in sparql: if there is a non-integer value on a link, that will be returned,
      * since it's ranked highest. Preventing that would require getting all the ranks and sorting in Java,
      * throwing out non-int values. 

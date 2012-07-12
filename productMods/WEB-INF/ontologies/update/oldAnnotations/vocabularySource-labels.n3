@@ -1,0 +1,3 @@
+<http://link.informatics.stonybrook.edu/umls> <http://www.w3.org/2000/01/rdf-schema#label> "UMLS"^^<http://www.w3.org/2001/XMLSchema#string>  .
+<http://aims.fao.org/aos/agrovoc/agrovocScheme> <http://www.w3.org/2000/01/rdf-schema#label> "AGROVOC"^^<http://www.w3.org/2001/XMLSchema#string>  .
+<http://www.eionet.europa.eu/gemet/gemetThesaurus> <http://www.w3.org/2000/01/rdf-schema#label> "GEMET"^^<http://www.w3.org/2001/XMLSchema#string>  . 

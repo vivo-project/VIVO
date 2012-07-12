@@ -1,0 +1,17 @@
+#
+# Run this sparql query and format the output as CSV to find a list of
+# everywhere that VIVO expects to find an image file.
+#
+# Process the result file with ????? to insert dummy images in all of 
+# those locations.
+#
+
+PREFIX p.1: <http://vitro.mannlib.cornell.edu/ns/vitro/public#>
+
+SELECT ?bytestreamUri ?filename
+WHERE
+{
+  ?fileUri p.1:downloadLocation ?bytestreamUri;
+           p.1:filename ?filename.
+}
+

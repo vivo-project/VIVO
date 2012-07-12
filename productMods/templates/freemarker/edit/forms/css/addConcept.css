@@ -1,0 +1,47 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+.concepts .column {
+	float:left;
+	padding-right:3px;
+	clear:none !important; /*Overriding customFor div's clearing*/
+}
+
+.concepts .row {
+	clear:both;
+	float:left;
+	border-bottom: 1px solid #5F6464;
+}
+
+.conceptLabel {
+	width:220px;
+}
+
+.conceptType {
+	width: 40px;
+}
+.conceptDefinition{
+	width:400px;
+}
+
+/* For adding an empty element under the best match column*/
+.emptyColumn {
+	width:67px;
+	height:18px;
+	background: url("../images/conceptSpacer.png") no-repeat left center;  
+}
+
+/*For adding the checkmark under the best match column*/
+.bestMatchFlag {
+	width:67px;
+	height:18px;
+	background: url("../images/conceptCheckMark.png") no-repeat left center;  
+}
+
+form#addConceptForm {
+	display:none;
+}
+
+form#addConceptForm span#createOwnOne{
+	float:left;
+	margin-top:24px
+}

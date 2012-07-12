@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>AddPositions</title>
+<style type="text/css">
+.testName {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+.comment {
+  color: blue;
+  background: rgb(80%, 80%, 80%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" class="testName">AddPositions</td></tr>
+</thead><tbody>
+<tr>
+	<td>comment</td>
+	<td class="comment">Validate this form and add awards</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>setTimeout</td>
+	<td>100000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/vivo/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must not be logged in already</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Log in to VIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Must log in as site admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginName</td>
+	<td>testAdmin@cornell.edu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>loginPassword</td>
+	<td>Password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginForm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Navigate to test faculty member via Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Select awards editing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Cancel without adding anything</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add only organization name, which results in error</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=org</td>
+	<td>Carroll College</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Please select an existing value or enter a new value in the Award or Honor Name field. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add rest of info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=award</td>
+	<td>Best Professor</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=org</td>
+	<td>Carroll College</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Yearly award for the best professor across departments.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=yearAwardedDisplay</td>
+	<td>2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify first award is listed properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Best Professor, conferred by Carroll College, 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add second award using same organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=award</td>
+	<td>Professor of the Decade</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=org</td>
+	<td>Carr</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ui-active-menuitem</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=yearAwardedDisplay</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startField-year</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=endField-year</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify both awards are listed properly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Best Professor, conferred by Carroll College, 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade, conferred by Carroll College, 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Add third award using new organization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a.add-awardOrHonor &gt; img.add-individual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=award</td>
+	<td>Primate Expert</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=org</td>
+	<td>Primates-R-Us</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=description</td>
+	<td>Yearly award for the person who does the most to improve the life of primates.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=yearAwardedDisplay</td>
+	<td>2005</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify all three positions show up</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Best Professor, conferred by Carroll College, 2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade, conferred by Carroll College, 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Primate Expert, conferred by Primates-R-Us, 2005</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-R-Us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Verify deeper</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor (Faculty, Jane - 2012)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Best Professor (Faculty, Jane - 2012)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Best Professor (Faculty, Jane - 2012)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Best Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Yearly award for the best professor across departments. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2012</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Carroll College</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Professor of the Decade (Faculty, Jane - 2010)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Professor of the Decade</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Assistant Professor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2000 - 2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2010</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Index</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Index of Contents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty Member</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primates-R-Us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert (Faculty, Jane - 2005)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Primate Expert (Faculty, Jane - 2005)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Expert (Faculty, Jane - 2005)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Primate Expert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Primate Expert (Faculty, Jane - 2005)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Faculty, Jane Assistant Professor </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Faculty, Jane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Yearly award for the person who does the most to improve the life of primates.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>2005</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

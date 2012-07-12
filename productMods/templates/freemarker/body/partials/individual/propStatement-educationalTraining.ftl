@@ -24,6 +24,8 @@
             <@s.join [ statement.degreeAbbr!statement.degreeName, statement.majorField! ], " in " /> -->
             ${statement.degreeAbbr!statement.degreeName} 
             <#if statement.majorField??> in ${statement.majorField}</#if>
+        <#elseif statement.typeName??>
+            ${statement.typeName!}
         </#if>
     </#local>
     

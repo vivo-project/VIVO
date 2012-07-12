@@ -13,11 +13,18 @@
 </#if>
 <#--Freemarker variables with default values that can be overridden by specific forms-->
 
-
-<#--buttonText, typeSelectorLabel, numDateFields,  roleExamples-->
-<#if !buttonText?has_content>
-	<#assign buttonText = roleDescriptor />
+<#assign blankSentinel = "" />
+<#if editConfigurationConstants?has_content && editConfigurationConstants?keys?seq_contains("BLANK_SENTINEL")>
+	<#assign blankSentinel = editConfigurationConstants["BLANK_SENTINEL"] />
 </#if>
+
+<#--This flag is for clearing the label field on submission for an existing object being selected from autocomplete.
+Set this flag on the input acUriReceiver where you would like this behavior to occur. -->
+<#assign flagClearLabelForExisting = "flagClearLabelForExisting" />
+
+
+<#-- typeSelectorLabel, numDateFields,  roleExamples, roleActivityVClass -->
+
 <#if !typeSelectorLabel?has_content>
 	<#assign typeSelectorLabel = roleDescriptor />
 </#if>
@@ -29,10 +36,14 @@
 	<#assign roleExamples = "" />
 </#if>
 
+<#if !roleActivityVClass?has_content>
+	<#assign roleActivityVClass = "" />
+</#if>
+
 <#--Setting values for titleVerb, submitButonText, and disabled Value-->
 <#if editConfiguration.objectUri?has_content>
 	<#assign titleVerb = "Edit"/>
-	<#assign submitButtonText>Edit ${buttonText?capitalize}</#assign>
+	<#assign submitButtonText>Save Changes</#assign>
 	<#if editMode = "repair">
 		<#assign disabledVal = ""/>
 	<#else>
@@ -40,7 +51,7 @@
 	</#if>
 <#else>
 	<#assign titleVerb = "Create"/>
-	<#assign submitButtonText>${buttonText?capitalize}</#assign>
+	<#assign submitButtonText>Create Entry</#assign>
 	<#assign disabledVal = ""/>
 	<#assign editMode = "add" />
 </#if>
@@ -53,13 +64,14 @@
 
  <#--Get activity label value-->
 <#assign activityLabelValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "activityLabel") />
+<#assign activityLabelDisplayValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "activityLabelDisplay") />
 
 
 <#--Get role label-->
 <#assign roleLabel = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleLabel") />
 
 <#--For role activity uri-->
-<#assign existingRoleActivityValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "roleActivity") />
+<#assign existingRoleActivityValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "existingRoleActivity") />
 
 
 <#assign requiredHint = "<span class='requiredHint'> *</span>" />
@@ -68,6 +80,9 @@
 <h2>${titleVerb}&nbsp;${roleDescriptor} entry for ${editConfiguration.subjectName}</h2>
 
 <#--Display error messages if any-->
+<#if activityLabelDisplayValue?has_content >
+    <#assign activityLabelValue = activityLabelDisplayValue />
+</#if>
 
 
 <#if submissionErrors?has_content>
@@ -110,45 +125,55 @@
     
     <form id="add${roleDescriptor?capitalize}RoleToPersonTwoStage" class="customForm noIE67" action="${submitUrl}"  role="add/edit grant role">
 
-       <p class="inline"><label for="typeSelector">${typeSelectorLabel?capitalize} ${requiredHint}</label>
-           <select id="typeSelector" name="roleActivityType" 
-           <#if disabledVal?has_content>
-           	disabled = "${disabledVal}"
-           </#if>
-            >
-            <#--Code below allows for selection of first 'select one' option if no activity type selected-->
-            <#if activityTypeValue?has_content>
-            	<#assign selectedActivityType = activityTypeValue />
-            <#else>
-            	<#assign selectedActivityType = "" />
-            </#if>
-           		<#assign roleActivityTypeSelect = editConfiguration.pageData.roleActivityType />
-           		<#assign roleActivityTypeKeys = roleActivityTypeSelect?keys />
+       <p class="inline">
+        <label for="typeSelector">${typeSelectorLabel?capitalize}<#if editMode != "edit"> ${requiredHint}<#else>:</#if></label>
+        <#--Code below allows for selection of first 'select one' option if no activity type selected-->
+        <#if activityTypeValue?has_content>
+        	<#assign selectedActivityType = activityTypeValue />
+        <#else>
+        	<#assign selectedActivityType = "" />
+        </#if>
+       		<#assign roleActivityTypeSelect = editConfiguration.pageData.roleActivityType />
+       		<#assign roleActivityTypeKeys = roleActivityTypeSelect?keys />
+
+        <#if editMode != "edit" || ( editMode == "edit" && roleActivityVClass == "organizations") >
+            <select id="typeSelector" name="roleActivityType" acGroupName="activity">
                 <#list roleActivityTypeKeys as key>
                     <option value="${key}"<#if selectedActivityType = key>selected</#if>>${roleActivityTypeSelect[key]}</option>
                 </#list>
-           </select>
+            </select>
+        <#else>
+           <#list roleActivityTypeKeys as key>             
+               <#if selectedActivityType = key >
+                 <span class="readOnly" id="typeSelectorSpan">${roleActivityTypeSelect[key]}</span> 
+                 <input type="hidden" id="typeSelectorInput" name="roleActivityType" acGroupName="activity" value="${activityTypeValue}" >
+               </#if>           
+           </#list>
+        </#if>
        </p>
        
        
    <div class="fullViewOnly">        
             <p>
-                <label for="relatedIndLabel">### Name ${requiredHint}</label>
-                <input class="acSelector" size="50"  type="text" id="relatedIndLabel" name="activityLabel"  value="${activityLabelValue}" 
-                <#if disabledVal?has_content>
-                	disabled=${disabledVal}
-                </#if>
-                />
+                <label for="activity">### Name ${requiredHint}</label>
+                <input class="acSelector" size="50"  type="text" id="activity" name="activityLabel"  acGroupName="activity" value="${activityLabelValue}" />
+                <input class="display" type="hidden" id="activityDisplay" acGroupName="activity" name="activityLabelDisplay" value="${activityLabelDisplayValue}">
             </p>
             
             <input type="hidden" id="roleToActivityPredicate" name="roleToActivityPredicate" value="" />
             <!--Populated or modified by JavaScript based on type of activity, type returned from AJAX request-->
-            
-            <#if editMode = "edit">
-            	<input type="hidden" id="roleActivityType" name="roleActivityType" value="${activityTypeValue}"/>
-            	<input type="hidden" id="activityLabel" name="activityLabel" value="${activityLabelValue}"/>
-            </#if>
-            <@lvf.acSelection urls.base "roleActivity" "roleActivityUri" existingRoleActivityValue />
+
+            <div class="acSelection" acGroupName="activity">
+                <p class="inline">
+                    <label></label>
+                    <span class="acSelectionInfo"></span>
+                    <a href="/vivo/individual?uri=" class="verifyMatch" title="verify match">(Verify this match</a> or 
+                    <a href="#" class="changeSelection" id="changeSelection">change selection)</a>
+
+                    </p>
+                    <input class="acUriReceiver" type="hidden" id="roleActivityUri" name="existingRoleActivity"  value="${existingRoleActivityValue}" ${flagClearLabelForExisting}="true" />
+                    <!-- Field value populated by JavaScript -->
+            </div>
 
             <#if showRoleLabelField = true>
             <p><label for="roleLabel">Role in ### ${requiredHint} ${roleExamples}</label>
@@ -189,18 +214,20 @@
 	var customFormData  = {
 	    acUrl: '${urls.base}/autocomplete?tokenize=true',
 	    editMode: '${editMode}',
-	    submitButtonTextType: 'compound',
-	    defaultTypeName: 'activity' // used in repair mode, to generate button text and org name field label
+	    defaultTypeName: 'activity', // used in repair mode, to generate button text and org name field label
+	    baseHref: '${urls.base}/individual?uri=',
+        blankSentinel: '${blankSentinel}',
+        flagClearLabelForExisting: '${flagClearLabelForExisting}'
 	};
 	</script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customForm.css" />')}
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/edit/forms/css/customFormWithAutocomplete.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customForm.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/templates/freemarker/edit/forms/css/customFormWithAutocomplete.css" />')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/browserUtils.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/edit/forms/js/customFormWithAutocomplete.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/customFormWithAutocomplete.js"></script>')}
 
 </section>   

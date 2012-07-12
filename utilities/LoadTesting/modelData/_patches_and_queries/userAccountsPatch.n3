@@ -1,0 +1,50 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://vivo.scripps.edu/individual/uSelf>
+      a       <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#UserAccount> ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#emailAddress>
+              "selfEditor@mydomain.edu"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#externalAuthId>
+              "seditor"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#firstName>
+              "self"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#hasPermissionSet>
+              <http://permissionSet-1> ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#lastLoginTime>
+              "1322673007960"^^xsd:long ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#lastName>
+              "editor"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#loginCount>
+              "2"^^xsd:int ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#md5password>
+              "DC647EB65E6711E155375218212B3964"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#passwordLinkExpires>
+              "0"^^xsd:long ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#status>
+              "ACTIVE"^^xsd:string .
+
+<http://vivo.scripps.edu/individual/uAdmin>
+      a       <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#UserAccount> ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#emailAddress>
+              "testAdmin@mydomain.edu"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#externalAuthId>
+              "tadmin"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#firstName>
+              "test"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#hasPermissionSet>
+              <http://permissionSet-50> ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#lastLoginTime>
+              "1322673030151"^^xsd:long ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#lastName>
+              "admin"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#loginCount>
+              "3"^^xsd:int ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#md5password>
+              "DC647EB65E6711E155375218212B3964"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#passwordLinkExpires>
+              "0"^^xsd:long ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/authorization#status>
+              "ACTIVE"^^xsd:string .

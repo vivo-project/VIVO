@@ -41,3 +41,6 @@ productMods/js/jquery_plugins/jquery.truncator.js
 src/edu/cornell/mannlib/semservices/util/ObjectUtils.java
 src/edu/cornell/mannlib/semservices/util/XMLGregorianCalendarConverter.java
 src/edu/cornell/mannlib/vitro/webapp/utils/ConceptSearchService/BeanToJsonSerializer.java
+
+# Part of the OpenSocial integration - should this really be under the Apache license?
+themes/wilma/css/openSocial/gadgets.css

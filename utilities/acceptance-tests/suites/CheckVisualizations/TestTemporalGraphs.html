@@ -161,7 +161,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=relatedIndLabel</td>
+	<td>id=person</td>
 	<td>Furter</td>
 </tr>
 <tr>
@@ -206,7 +206,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=relatedIndLabel</td>
+	<td>id=person</td>
 	<td>John</td>
 </tr>
 <tr>
@@ -251,7 +251,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=relatedIndLabel</td>
+	<td>id=person</td>
 	<td>smith</td>
 </tr>
 <tr>
@@ -295,14 +295,9 @@
 	<td>label=Faculty Position</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=relatedIndLabel</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=relatedIndLabel</td>
-	<td>Zink</td>
+	<td>id=person</td>
+	<td>zink</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -347,6 +342,61 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Zink, Zoe, Mrs. 2007 -</td>
+	<td></td>
+</tr>
+<tr>
+	<td>comment</td>
+	<td class="comment">Refresh visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>VIVO Site Administration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rebuild visualization cache</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Visualization Tools</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Refresh Cached Models for Visualization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Regenerate Constructed Models</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Child Development</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Child Development</td>
 	<td></td>
 </tr>
 <tr>
@@ -1135,7 +1185,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>select</td>
 	<td>//div[@id='leftUpper']/div/select</td>
 	<td>label=by Grants</td>
 </tr>

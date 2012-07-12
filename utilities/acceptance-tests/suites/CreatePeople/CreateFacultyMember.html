@@ -35,11 +35,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>setTimeout</td>
-	<td>10000000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
 	<td class="comment">Add a Faculty member named Jane Faculty</td>
 	<td></td>
@@ -90,6 +85,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTitle</td>
+	<td>VIVO</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
 	<td></td>
@@ -106,112 +106,17 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>VClassURI</td>
+	<td>id=VClassURI</td>
 	<td>label=Faculty Member (vivo)</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate adding individual</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Cancel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>VIVO Site Administration</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>VClassURI</td>
-	<td>label=Faculty Member (vivo)</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add individual of this class']</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a Last Name for this person.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a First Name for this person.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstName</td>
-	<td>Jane</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastName</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a Last Name for this person.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstName</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastName</td>
-	<td>Faculty</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>submit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Please enter a First Name for this person.</td>
 	<td></td>
 </tr>
 <tr>
@@ -266,7 +171,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>submit</td>
+	<td>id=submit</td>
 	<td></td>
 </tr>
 <tr>
@@ -275,13 +180,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>50000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>comment</td>
-	<td class="comment">Verify that Jane Faculty was created</td>
+	<td class="comment">Verify that account was created</td>
 	<td></td>
 </tr>
 <tr>
@@ -292,91 +192,6 @@
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Assistant Professor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Browse for new faculty member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Index</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty Member (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Person</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Person (1)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>Faculty Member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Search for new faculty member</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>querytext</td>
-	<td>faculty</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Search']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTitle</td>
-	<td>faculty - VIVO Search Results</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Search results for 'faculty'</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Faculty, Jane</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Faculty, Jane Assistant Professor</td>
 	<td></td>
 </tr>
 <tr>

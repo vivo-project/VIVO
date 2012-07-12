@@ -1,0 +1,35 @@
+#! /usr/bin/ruby
+
+=begin
+--------------------------------------------------------------------------------
+
+Copy the Tomcat logs into a time-stamped directory in the current "version"
+directory, for possible inspection later.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+=end
+
+require 'date'
+require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+
+def figure_time_stamp()
+  return DateTime.now.strftime("%Y-%m-%d_%H-%M-%S")
+end
+
+Dir.chdir("/home/jeb228/LoadTesting/versions/#{@version_name}") do |path|
+  @tomcat_logs_dir = "#{path}/tomcatLogs"
+  if (! File.directory?(@tomcat_logs_dir))
+    Dir.mkdir(@tomcat_logs_dir)
+  end
+end
+
+Dir.chdir(@tomcat_logs_dir) do |path|
+  @this_logs_dir = "#{path}/#{figure_time_stamp()}"
+  Dir.mkdir(@this_logs_dir)
+end
+
+Dir.chdir(@this_logs_dir) do |path|
+  system('cp ~/LoadTesting/tomcat/logs/* .')
+end
+

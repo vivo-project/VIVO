@@ -97,4 +97,6 @@ $(document).ready(function(){
         $('#qrCodeImage').toggleClass('hidden');
         return false;
     });
+    
+
 });

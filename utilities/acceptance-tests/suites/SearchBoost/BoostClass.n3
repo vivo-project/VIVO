@@ -1,0 +1,10 @@
+
+
+#<http://xmlns.com/foaf/0.1/Person> 
+#<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#searchBoostAnnot> 100000.0.
+
+#<http://vivoweb.org/ontology/core#EmeritusProfessor> 
+#	<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#searchBoostAnnot> 5000.0.
+
+<http://www.w3.org/2004/02/skos/core#Concept>
+  <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#searchBoostAnnot> 500000.0.

@@ -1,0 +1,176 @@
+# $This file is distributed under the terms of the license in /doc/license.txt$ 
+
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+#########Classes######### 
+###Basic
+owl:Class
+      a       owl:Class .
+
+owl:Ontology
+      a       owl:Class .
+      
+owl:AnnotationProperty
+      a       owl:Class .   
+      
+owl:DatatypeProperty
+      a       owl:Class .
+
+owl:ObjectProperty
+      a       owl:Class .
+      
+###Display Model 
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#MainMenu>
+      a       owl:Class ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customDisplayViewAnnot>
+              "individual-menu.ftl"^^xsd:string .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#NavigationElement>
+      a       owl:Class .          
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#Page>
+      a       owl:Class .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#HomePage>
+      a       owl:Class .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#ClassGroupPage>
+      a       owl:Class .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#IndividualsForClassesPage>
+      a       owl:Class .      
+      
+ <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#InternalClassesPage>
+  a       owl:Class .   
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#DataGetter>
+      a       owl:Class .  
+      
+      
+      
+########Data Properties#########
+
+###Basic
+
+rdfs:comment
+      a       owl:DatatypeProperty .
+      
+rdfs:label
+      a       owl:DatatypeProperty .
+
+owl:versionInfo
+      a       owl:DatatypeProperty .
+      
+###Vitro  model 
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#modTime>
+      a       owl:DatatypeProperty .
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#displayRank>
+      a       owl:DatatypeProperty .
+      
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customDisplayViewAnnot>
+      a       owl:DatatypeProperty .
+      
+###Display  model 
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#listViewConfigFile>
+      a       owl:DatatypeProperty .
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#title>
+      a       owl:DatatypeProperty .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#urlMapping>
+      a       owl:DatatypeProperty .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#requiresBodyTemplate>
+      a       owl:DatatypeProperty .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#menuPosition>
+      a       owl:DatatypeProperty ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#displayLimitAnnot>
+              "1"^^xsd:int .      
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#linkText>
+      a       owl:DatatypeProperty .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasMenuText>
+      a       owl:DatatypeProperty .  
+      
+  <http://vitro.mannlib.cornell.edu/ontologies/display/1.1#usesDataGetterClass>
+      a       owl:DatatypeProperty .      
+      
+      
+######### Object Properties#########
+###Basic
+rdfs:range
+      a       owl:ObjectProperty .
+rdfs:domain
+      a       owl:ObjectProperty .
+owl:topObjectProperty
+	a owl:ObjectProperty .
+           
+###Vitro properties without which individual templates throw errors as are required
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/public#mainImage>
+      a       owl:ObjectProperty ;
+      rdfs:range <http://vitro.mannlib.cornell.edu/ns/vitro/public#File> ;
+      rdfs:subPropertyOf <http://vitro.mannlib.cornell.edu/ns/vitro/public#mainImage> , owl:topObjectProperty .
+      
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#primaryLink>
+      a       owl:ObjectProperty ;
+      rdfs:label "Primary Link"@en-US ;
+      rdfs:range <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Link> ;
+      rdfs:subPropertyOf <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#primaryLink> , owl:topObjectProperty ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customEntryFormAnnot>
+              "defaultLinkForm.jsp"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#forceStubDeletionAnnot>
+              "true"^^xsd:boolean ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#offerCreateNewOptionAnnot>
+              "true"^^xsd:boolean ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#selectFromExistingAnnot>
+              "false"^^xsd:boolean ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#stubObjectPropertyAnnot>
+              "true"^^xsd:boolean .      
+
+<http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink>
+      a       owl:ObjectProperty ;
+      rdfs:label "Additional Link"@en-US ;
+      rdfs:range <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#Link> ;
+      rdfs:subPropertyOf <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#additionalLink> , owl:topObjectProperty ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#customEntryFormAnnot>
+              "defaultLinkForm.jsp"^^xsd:string ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#forceStubDeletionAnnot>
+              "true"^^xsd:boolean ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#offerCreateNewOptionAnnot>
+              "true"^^xsd:boolean ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#selectFromExistingAnnot>
+              "false"^^xsd:boolean ;
+      <http://vitro.mannlib.cornell.edu/ns/vitro/0.7#stubObjectPropertyAnnot>
+              "true"^^xsd:boolean .
+              
+###Display model    
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasElement>
+      a       owl:ObjectProperty .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#excludeClass>
+      a       owl:ObjectProperty .
+
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#toPage>
+      a       owl:ObjectProperty .      
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#forClassGroup>
+      a       owl:ObjectProperty .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#hasDataGetter>
+      a       owl:ObjectProperty .
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#getIndividualsForClass>
+      a       owl:ObjectProperty .  
+      
+<http://vitro.mannlib.cornell.edu/ontologies/display/1.1#restrictResultsByClass>
+      a       owl:ObjectProperty .    
+      
+        

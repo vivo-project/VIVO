@@ -4,7 +4,10 @@ package edu.cornell.mannlib.vitro.webapp.search.solr;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hp.hpl.jena.rdf.model.Model;
+import edu.cornell.mannlib.vitro.webapp.rdfservice.RDFServiceFactory;
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ContextNodeFields;
+
+import edu.cornell.mannlib.vitro.webapp.search.solr.documentBuilding.ContextNodeFields;
 
 /**
  * Class that adds text from context nodes to Solr Documents for 
@@ -14,8 +17,8 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
     
     static List<String> queriesForAgent = new ArrayList<String>();    
     
-    public VivoAgentContextNodeFields(Model model){        
-        super(model,queriesForAgent);
+    public VivoAgentContextNodeFields(RDFServiceFactory rdfServiceFactory){        
+        super(queriesForAgent,rdfServiceFactory);
     }
       
   protected static final String prefix = 
@@ -90,6 +93,20 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
             " ?c rdf:type core:Relationship . " +
             " ?c core:degreeCandidacy ?e . ?e rdfs:label ?ContextNodeProperty . }");
     
+    queriesForAgent.add(prefix +        "SELECT " +
+            "(str(?label) as ?adviseeLabel) WHERE {" +
+            " ?uri rdf:type foaf:Agent  ." +            
+            " ?c rdf:type core:Relationship . " +
+            " ?c core:advisor ?uri . " +
+            " ?c core:advisee ?d . ?d rdfs:label ?label .}" );
+    
+    queriesForAgent.add(prefix +        "SELECT " +
+            "(str(?label) as ?advisorLabel) WHERE {" +
+            " ?uri rdf:type foaf:Agent  ." +            
+            " ?c rdf:type core:Relationship . " +
+            " ?c core:advisee ?uri . " +
+            " ?c core:advisor ?d . ?d rdfs:label ?label .}" );
+    
     /* Author */
     
     queriesForAgent.add(prefix +        "SELECT " +
@@ -108,16 +125,15 @@ public class VivoAgentContextNodeFields extends ContextNodeFields{
             " ?c core:linkedInformationResource ?h . ?h rdfs:label ?ContextNodeProperty . }");
     
     /* Award */        
-    
+
     queriesForAgent.add(prefix +
             "SELECT " +
             "(str(?AwardLabel) as ?awardLabel) " +
             "(str(?AwardConferredBy) as ?awardConferredBy)  " +
-            "(str(?Description) as ?description)   WHERE {"
-            
-            + "?uri rdf:type foaf:Agent  ; ?b ?c . "
-            + " ?c rdf:type core:AwardReceipt . "
-            
+            "(str(?Description) as ?description)   " +                        
+            "WHERE {"            
+            + " ?uri rdf:type foaf:Agent  ; ?b ?c . "
+            + " ?c rdf:type core:AwardReceipt . "            
             + " OPTIONAL { ?c rdfs:label ?AwardLabel . } . "
             + " OPTIONAL { ?c core:awardConferredBy ?d . ?d rdfs:label ?AwardConferredBy . } . "
             + " OPTIONAL { ?c core:description ?Description . } . "

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
@@ -16,7 +15,10 @@ import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
@@ -72,7 +74,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 public class PersonHasEducationalTraining  extends VivoBaseGenerator implements EditConfigurationGenerator{            
 
     //TODO: can we get rid of the session and get it form the vreq?
-    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
+    public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
  
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
                 
@@ -86,14 +88,13 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.setVarNameForPredicate("predicate");
         conf.setVarNameForObject("edTraining");
                 
-        conf.setN3Required( Arrays.asList( n3ForNewEdTraining, orgLabelAssertion, orgTypeAssertion ) );
+        conf.setN3Required( Arrays.asList( n3ForNewEdTraining, trainingTypeAssertion ) );
         conf.setN3Optional(Arrays.asList( 
-                n3ForEdTrainingToOrg, majorFieldAssertion, degreeAssertion, 
-                deptAssertion, infoAssertion, 
-                n3ForStart, n3ForEnd, n3ForOrgToEdTraining  ));
+                n3ForNewOrg, n3ForExistingOrg, majorFieldAssertion, degreeAssertion, 
+                deptAssertion, infoAssertion, n3ForStart, n3ForEnd ));
         
         conf.addNewResource("edTraining", DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("org",DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newOrg",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode",DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode",DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -101,8 +102,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform( Arrays.asList( "org", "orgType", "degree"));
-        conf.setLiteralsOnForm( Arrays.asList("orgLabel","majorField","dept","info"));
+        conf.setUrisOnform( Arrays.asList( "existingOrg", "orgType", "degree", "trainingType"));
+        conf.setLiteralsOnForm( Arrays.asList("orgLabel", "orgLabelDisplay", "majorField", "dept", "info"));
 
         conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
         conf.addSparqlForExistingLiteral("majorField", majorFieldQuery);
@@ -112,8 +113,9 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         conf.addSparqlForExistingLiteral("endField-value", existingEndDateQuery);
 
         
-        conf.addSparqlForExistingUris("org",orgQuery);
-        conf.addSparqlForExistingUris("orgType",orgTypeQuery);
+        conf.addSparqlForExistingUris("existingOrg", existingOrgQuery);
+        conf.addSparqlForExistingUris("orgType", orgTypeQuery);
+        conf.addSparqlForExistingUris("trainingType", trainingTypeQuery);
         conf.addSparqlForExistingUris("degree", degreeQuery);
         conf.addSparqlForExistingUris("intervalNode",existingIntervalNodeQuery);
         conf.addSparqlForExistingUris("startNode", existingStartNodeQuery);
@@ -125,8 +127,8 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                         
         conf.addField( new FieldVTwo().                        
                 setName("degree").
-                setOptionsType( FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS ).
-                setObjectClassUri( degreeClass ));
+                setOptions( new IndividualsViaVClassOptions(
+                        degreeClass)));
 
         conf.addField( new FieldVTwo().
                 setName("majorField").
@@ -134,23 +136,31 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
                 setValidators(list("datatype:" + XSD.xstring.toString())));
         
         conf.addField( new FieldVTwo().
-                setName("org").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri( orgClass ));
-                //setLiteralOptions( [ "Select One" } )
+                setName("existingOrg")
+                //options will be added in browser by auto complete JS  
+                );        
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("nonempty") ));
+                setValidators( list("datatype:" + XSD.xstring.toString())));
+        
+        conf.addField( new FieldVTwo().
+                setName("orgLabelDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ));
                 
         conf.addField( new FieldVTwo().
                 setName("orgType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri( orgClass ).
-                setValidators( list("nonempty")));
-                //setLiteralOptions( [ "Select one" ] )
+                setValidators( list("nonempty")).
+                setOptions( new ChildVClassesOptions(
+                        orgClass)));
                 
+        conf.addField( new FieldVTwo().
+                setName("trainingType").
+                setValidators( list("nonempty") ).
+                setOptions( 
+                        new ChildVClassesWithParent(trainingClass)));
+
         conf.addField( new FieldVTwo().
                 setName("dept").
                 setRangeDatatypeUri( XSD.xstring.toString() ).
@@ -189,12 +199,26 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     
     /* N3 assertions for working with educational training */
     
-    final static String orgTypeAssertion =
-        "?org a ?orgType .";
+    final static String n3ForNewEdTraining =       
+        "@prefix core: <"+ vivoCore +"> .\n"+
+        "?person core:educationalTraining  ?edTraining .\n" +
+        "?edTraining  a core:EducationalTraining .\n" +
+        "?edTraining core:educationalTrainingOf ?person .";
 
-    final static String orgLabelAssertion =
-        "?org <"+ label +"> ?orgLabel .";
+    final static String trainingTypeAssertion =
+        "?edTraining a ?trainingType .";
 
+    final static String n3ForNewOrg  =      
+        "?edTraining <"+ trainingAtOrg +"> ?newOrg . \n" +
+        "?newOrg ?inverseTrainingAtOrg ?edTraining . \n" +
+        "?newOrg <"+ label +"> ?orgLabel . \n" +
+        "?newOrg a ?orgType .";
+    
+    final static String n3ForExistingOrg  =      
+        "?edTraining <"+ trainingAtOrg +"> ?existingOrg . \n" +
+        "?existingOrg ?inverseTrainingAtOrg ?edTraining . \n" +
+        "?existingOrg a ?orgType . ";
+    
     final static String degreeAssertion  =      
         "?edTraining <"+ degreeEarned +"> ?degree .\n"+
         "?degree <"+ degreeOutcomeOf +"> ?edTraining .";
@@ -224,22 +248,9 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
     final static String infoAssertion  =      
         "?edTraining <"+ infoPred +"> ?info .";
 
-    final static String n3ForNewEdTraining =       
-        "@prefix core: <"+ vivoCore +"> .\n"+
-        "?person core:educationalTraining  ?edTraining .\n"+            
-        "?edTraining  a core:EducationalTraining ;\n"+
-        "core:educationalTrainingOf ?person ;\n"+
-        "<"+ trainingAtOrg +"> ?org .\n";
-
-    final static String n3ForEdTrainingToOrg  =      
-        "?edTraining <"+ trainingAtOrg +"> ?org .";
-    
-    //The inverse of the above
-    final static String n3ForOrgToEdTraining  =      
-        "?org ?inverseTrainingAtOrg ?edTraining .";
     /* Queries for editing an existing educational training entry */
 
-    final static String orgQuery  =      
+    final static String existingOrgQuery  =      
         "SELECT ?existingOrg WHERE {\n"+
         "?edTraining <"+ trainingAtOrg +"> ?existingOrg . }\n";
 
@@ -259,6 +270,11 @@ public class PersonHasEducationalTraining  extends VivoBaseGenerator implements 
         "?existingOrgType rdfs:subClassOf <"+ orgClass +"> .\n"+
         "}";
 
+    final static String trainingTypeQuery = 
+    	"PREFIX vitro: <" + VitroVocabulary.vitroURI + "> \n" +
+        "SELECT ?existingTrainingType WHERE { \n" + 
+        "  ?edTraining vitro:mostSpecificType ?existingTrainingType . }";
+        
     final static String degreeQuery  =      
         "SELECT ?existingDegree WHERE {\n"+
         "?edTraining <"+ degreeEarned +"> ?existingDegree . }";

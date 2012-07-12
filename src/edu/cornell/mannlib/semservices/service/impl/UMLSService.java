@@ -104,7 +104,7 @@ public class UMLSService implements ExternalConceptService {
                JSONObject o = allArray.getJSONObject(i);
                //System.out.println(o.toString());
                Concept concept = new Concept();
-               concept.setDefinedBy("UMLS");
+               concept.setDefinedBy("http://link.informatics.stonybrook.edu/umls");
                String cui = getJsonValue(o, "CUI");
                concept.setConceptId(cui);
 

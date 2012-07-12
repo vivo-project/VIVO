@@ -1,0 +1,15 @@
+;; Object productMods/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "productMods/"
+  :tables (list 
+   (semanticdb-table "counter.jsp"
+    :major-mode 'html-mode
+    :tags '(("Linkage Information" section (:members (("'Person'-'InformationResource' linkages" section nil nil [1329 2369]) ("'Person' entities which published 'InformationResource' entities" section nil nil [2369 3292]) ("'InformationResource' entities" section nil nil [3292 4292]) ("'Person'-'ConferencePaper' linkages" section nil nil [4292 5323]) ("'Person' entities which published 'ConferencePaper' entities" section nil nil [5323 6230]) ("'ConferencePaper' entities" section nil nil [6230 7222]) ("'Person'-'AcademicArticle' linkages" section nil nil [7222 8249]) ("'Person' entities which published 'AcademicArticle' entities" section nil nil [8249 9152]) ("'AcademicArticle' entities" section nil nil [9152 10007]) ("'Person'-'Grant' linkages" section nil nil [10007 10849]) ("'Person' entities which are (co-)investigators on 'Grant' entities" section nil nil [10849 11691]) ("'Grant' entities" section nil nil [11691 12527]) ("'Person'-'CourseSection' linkages" section nil nil [12527 13358]) ("'Person' entities which teach 'CourseSection' entities" section nil nil [13358 14193]) ("'CourseSection' entities" section nil nil [14193 15236]) ("Total co-author linkages" section nil nil [15236 16200]) ("Unique co-author linkages" section nil nil [16200 17126]) ("Total co-investigator linkages" section nil nil [17126 18002]) ("Unique co-investigator linkages" section nil nil [18002 18005]))) nil [438 441]))
+    :file "counter.jsp"
+    :pointmax 18148
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre4"
+  :semanticdb-version "2.0pre4"
+  )

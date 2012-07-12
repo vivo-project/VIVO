@@ -1,0 +1,20 @@
+#! /usr/bin/ruby
+
+=begin
+--------------------------------------------------------------------------------
+
+Show the SVN status of the currently-selected distro, both VIVO and Vitro.
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+=end
+require "#{File.dirname(__FILE__)}/subscripts/loadParms"
+
+Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vitro") do |path|
+  system "svn status -u"
+end
+
+Dir.chdir("/home/jeb228/LoadTesting/distros/#{@distro_name}/vivo") do |path|
+  system "svn status -u"
+end
+

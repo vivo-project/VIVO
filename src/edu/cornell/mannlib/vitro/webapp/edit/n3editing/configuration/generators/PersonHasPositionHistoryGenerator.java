@@ -9,15 +9,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.hp.hpl.jena.vocabulary.RDFS;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.AutocompleteRequiredInputValidator;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeIntervalValidationVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.DateTimeWithPrecisionVTwo;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationVTwo;
-import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesOptions;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.ChildVClassesWithParent;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.FieldVTwo;
+import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.fields.IndividualsViaVClassOptions;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.validators.AntiXssValidation;
 import edu.cornell.mannlib.vitro.webapp.utils.FrontEndEditingUtils.EditMode;
 import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
@@ -56,7 +59,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
     
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq,
-            HttpSession session) {
+            HttpSession session) throws Exception {
         
         EditConfigurationVTwo conf = new EditConfigurationVTwo();
         
@@ -72,13 +75,11 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         
         conf.setN3Required( Arrays.asList( n3ForNewPosition, 
                                            positionTitleAssertion, 
-                                           positionTypeAssertion, 
-                                           orgLabelAssertion, 
-                                           orgTypeAssertion ) );
-        conf.setN3Optional( Arrays.asList( n3ForStart, n3ForEnd ) );
+                                           positionTypeAssertion ) );
+        conf.setN3Optional( Arrays.asList( n3ForNewOrg, n3ForExistingOrg, n3ForStart, n3ForEnd ) );
         
         conf.addNewResource("position", DEFAULT_NS_FOR_NEW_RESOURCE);
-        conf.addNewResource("org", DEFAULT_NS_FOR_NEW_RESOURCE);
+        conf.addNewResource("newOrg", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("intervalNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("startNode", DEFAULT_NS_FOR_NEW_RESOURCE);
         conf.addNewResource("endNode", DEFAULT_NS_FOR_NEW_RESOURCE);
@@ -86,8 +87,8 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         //uris in scope: none   
         //literals in scope: none
         
-        conf.setUrisOnform(Arrays.asList("org", "orgType", "positionType"));
-        conf.setLiteralsOnForm(Arrays.asList("positionTitle", "orgLabel"));
+        conf.setUrisOnform(Arrays.asList("existingOrg", "orgType", "positionType"));
+        conf.setLiteralsOnForm(Arrays.asList("positionTitle", "orgLabel", "orgLabelDisplay"));
         
         conf.addSparqlForExistingLiteral("orgLabel", orgLabelQuery);
         conf.addSparqlForExistingLiteral("positionTitle", positionTitleQuery);
@@ -96,7 +97,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         conf.addSparqlForExistingLiteral(
                 "endField-value", existingEndDateQuery);
      
-        conf.addSparqlForExistingUris("org", orgQuery);
+        conf.addSparqlForExistingUris("existingOrg", existingOrgQuery);
         conf.addSparqlForExistingUris("orgType", orgTypeQuery);
         conf.addSparqlForExistingUris("positionType", positionTypeQuery);
         conf.addSparqlForExistingUris(
@@ -111,33 +112,31 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         conf.addField( new FieldVTwo().                        
                 setName("positionTitle")
                 .setRangeDatatypeUri( XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ) );
         
         conf.addField( new FieldVTwo().
                 setName("positionType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES_WITH_PARENT).
-                setObjectClassUri(positionClass).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("nonempty") ). 
+                setOptions( 
+                        new ChildVClassesWithParent(positionClass)));
  
+
         conf.addField( new FieldVTwo().
-                setName("org").
-                setOptionsType(FieldVTwo.OptionsType.INDIVIDUALS_VIA_VCLASS).
-                setObjectClassUri(orgClass)
-                );
+                setName("existingOrg")); //options set in browser by auto complete JS
         
         conf.addField( new FieldVTwo().
                 setName("orgLabel").
                 setRangeDatatypeUri(XSD.xstring.toString() ).
-                setValidators( list("nonempty") )
-                );
+                setValidators( list("datatype:" + XSD.xstring.toString()) ) );
+
+        conf.addField( new FieldVTwo().
+                setName("orgLabelDisplay").
+                setRangeDatatypeUri(XSD.xstring.toString() ) );
         
         conf.addField( new FieldVTwo().
                 setName("orgType").
-                setOptionsType(FieldVTwo.OptionsType.CHILD_VCLASSES).
-                setObjectClassUri(orgClass)
-                );
+                setOptions( 
+                        new ChildVClassesOptions(orgClass)));
         
         conf.addField( new FieldVTwo().setName("startField").
                 setEditElement( 
@@ -157,6 +156,7 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         
         conf.addValidator(new DateTimeIntervalValidationVTwo("startField","endField"));
         conf.addValidator(new AntiXssValidation());
+        conf.addValidator(new AutocompleteRequiredInputValidator("existingOrg", "orgLabel"));
         
         //Adding additional data, specifically edit mode
         addFormSpecificData(conf, vreq);
@@ -165,25 +165,28 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
     }
 
     final static String n3ForNewPosition = 
-        "@prefix core: <" + vivoCore + "> . \n\n" +   
+        "@prefix core: <" + vivoCore + "> . \n" +   
         "?person core:personInPosition  ?position . \n" +
-        "?position a  ?positionType ; \n" +              
-        "          core:positionForPerson ?person ; \n" +
-        "          <" + positionInOrgPred + "> ?org . \n" + 
-        "?org <" + orgForPositionPred + "> ?position .";    
+        "?position a  ?positionType . \n" +              
+        "?position core:positionForPerson ?person ; ";    
     
     final static String positionTitleAssertion =
-        "?position <" + RDFS.label.getURI() + "> ?positionTitle .";
+        "?position <" + label + "> ?positionTitle .";
     
     final static String positionTypeAssertion =
-        "?position a ?positionType .";
-    
-    final static String orgLabelAssertion =
-        "?org <" + RDFS.label.getURI() + "> ?orgLabel .";
-    
-    final static String orgTypeAssertion = 
-        "?org a ?orgType .";
-    
+        "?position a ?positionType .";  
+
+    final static String n3ForNewOrg = 
+        "?position <" + positionInOrgPred + "> ?newOrg . \n" +
+        "?newOrg <" + orgForPositionPred + "> ?position . \n" +
+        "?newOrg <" + label + "> ?orgLabel . \n" +
+        "?newOrg a ?orgType .";    
+
+    final static String n3ForExistingOrg = 
+        "?position <" + positionInOrgPred + "> ?existingOrg . \n" +
+        "?existingOrg <" + orgForPositionPred + "> ?position . \n" +
+        "?existingOrg a ?orgType .";
+        
     final static String n3ForStart =
         "?position <" + positionToInterval + "> ?intervalNode . \n" +    
         "?intervalNode a <" + intervalType + "> . \n" +
@@ -203,12 +206,12 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
     final static String orgLabelQuery =
         "SELECT ?existingOrgLabel WHERE { \n" +
         "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
-        "  ?existingOrg <" + RDFS.label.getURI() + "> ?existingOrgLabel . \n" +
+        "  ?existingOrg <" + label + "> ?existingOrgLabel . \n" +
         "}";
     
     final static String positionTitleQuery =
         "SELECT ?existingPositionTitle WHERE { \n" +
-        "?position <" + RDFS.label.getURI() + "> ?existingPositionTitle . }";
+        "?position <" + label + "> ?existingPositionTitle . }";
     
     final static String existingStartDateQuery =
         "SELECT ?existingDateStart WHERE { \n" +
@@ -226,12 +229,12 @@ public class PersonHasPositionHistoryGenerator extends VivoBaseGenerator impleme
         "  ?endNode a <" + dateTimeValueType + "> . \n" +
         "  ?endNode <" + dateTimeValue + "> ?existingEndDate . }";
 
-    final static String orgQuery = 
+    final static String existingOrgQuery = 
         "SELECT ?existingOrg WHERE { \n" +
         "  ?position <" + positionInOrgPred + "> ?existingOrg . }";
     
     final static String orgTypeQuery = 
-        "PREFIX rdfs: <" + RDFS.getURI() + "> \n" +   
+        "PREFIX rdfs: <" + rdfs + "> \n" +   
         "SELECT ?existingOrgType WHERE { \n" +
         "  ?position <" + positionInOrgPred + "> ?existingOrg . \n" +
         "  ?existingOrg a ?existingOrgType . \n" +
