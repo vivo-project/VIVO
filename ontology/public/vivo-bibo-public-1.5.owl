@@ -66,12 +66,6 @@
     <rdfs:label xml:lang="en-US">Periodical</rdfs:label>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eissn"/>
@@ -87,6 +81,12 @@
         <owl:onProperty>
           <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/issn"/>
         </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
@@ -124,6 +124,11 @@
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
     </rdfs:subClassOf>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document describing an account or statement describing in detail an event, situation, or the like, usually as the result of observation, inquiry, etc.</vitro:shortDef>
+    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
+    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
+    <rdfs:comment xml:lang="en">A document describing an account or statement describing in detail an event, situation, or the like, usually as the result of observation, inquiry, etc..</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -132,11 +137,6 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A document describing an account or statement describing in detail an event, situation, or the like, usually as the result of observation, inquiry, etc.</vitro:shortDef>
-    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
-    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
-    <rdfs:comment xml:lang="en">A document describing an account or statement describing in detail an event, situation, or the like, usually as the result of observation, inquiry, etc..</rdfs:comment>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Medical Subject Heading (MeSH) definition of Technical Report: Work consisting of a formal report giving details of the investigation and results of a medical or other scientific problem. When issued by a government agency or comparable official body, its contents may be classified, unclassified, or declassified with regard to security clearance. This publication type may also cover a scientific paper or article that records the current state or current position of scientific research and development. If so labeled by the editor or publisher, this publication type may be properly used for journal articles.</vitro:descriptionAnnot>
   </owl:Class>
@@ -182,6 +182,14 @@
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentPart">
     <rdfs:label xml:lang="en-US">Document Part</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#partOf"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Short Definition from the bibo ontology </vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -205,33 +213,28 @@
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
-        </owl:allValuesFrom>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#partOf"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/Book">
     <rdfs:label xml:lang="en-US">Book</rdfs:label>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/numPages"/>
-        </owl:onProperty>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/edition"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Short Definition copied from bibo ontology</vitro:descriptionAnnot>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
+    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -241,7 +244,10 @@
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
+      </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
@@ -249,14 +255,8 @@
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/edition"/>
+          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/numPages"/>
         </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">A written or printed work of fiction or nonfiction, usually on sheets of paper fastened or bound together within covers.</rdfs:comment>
@@ -266,6 +266,14 @@
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/Collection">
     <rdfs:label xml:lang="en-US">Collection</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">A collection of Documents or Collections</rdfs:comment>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Hill Ornithology Collection; Wiley Interscience Online Books Biochemisty Collection</vitro:exampleAnnot>
@@ -277,14 +285,6 @@
     >Collection of information resources that have a unified identity</vitro:shortDef>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
     <swvs:term_status>stable</swvs:term_status>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/DocumentStatus">
     <swvs:term_status>stable</swvs:term_status>
@@ -350,6 +350,7 @@
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
     <rdfs:label xml:lang="en-US">Audio Document</rdfs:label>
+    <rdfs:comment xml:lang="en">An audio document; aka record.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -358,7 +359,6 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">An audio document; aka record.</rdfs:comment>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >phonograph record; tape; CD; DVD; DAT</vitro:exampleAnnot>
     <rdfs:subClassOf>
@@ -366,28 +366,9 @@
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/BookSection">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://purl.org/ontology/bibo/pageEnd"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/edition"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:label xml:lang="en-US">Book Section</rdfs:label>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Short Definition from the bibo ontology </vitro:descriptionAnnot>
-    <swvs:term_status>unstable</swvs:term_status>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A section of a book</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -396,9 +377,28 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <swvs:term_status>unstable</swvs:term_status>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A section of a book</vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://purl.org/ontology/bibo/pageEnd"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/DocumentPart"/>
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/edition"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">A section of a book.</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/LegalDecision">
@@ -459,15 +459,15 @@
     <swvs:term_status>stable</swvs:term_status>
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
+    <rdfs:comment xml:lang="en">A document that simultaneously contains other documents.</rdfs:comment>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Short Definition is the Medical Subject Heading (MeSH) definition</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:comment xml:lang="en">A document that simultaneously contains other documents.</rdfs:comment>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short Definition is the Medical Subject Heading (MeSH) definition</vitro:descriptionAnnot>
     <rdfs:label xml:lang="en-US">Collected Document</rdfs:label>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Work consisting of collections of previously published works</vitro:shortDef>
@@ -479,6 +479,10 @@
     <rdfs:comment xml:lang="en">An audio-visual document; film, video, and so forth.</rdfs:comment>
     <swvs:term_status>stable</swvs:term_status>
     <rdfs:subClassOf>
+      <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en-US">Audio-Visual Document</rdfs:label>
+    <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <owl:onProperty>
@@ -486,10 +490,6 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
-    </rdfs:subClassOf>
-    <rdfs:label xml:lang="en-US">Audio-Visual Document</rdfs:label>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Audiovisual recording in any format</vitro:shortDef>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -522,14 +522,14 @@
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/CollectedDocument"/>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/Patent">
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A patent is an exclusive right granted for an invention, which is a product or a process that provides, in general, a new way of doing something, or offers a new technical solution to a problem.  In order to be patentable, the invention must fulfill certain conditions. (http://www.wipo.int/patentscope/en/)</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#dateIssued"/>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A patent is an exclusive right granted for an invention, which is a product or a process that provides, in general, a new way of doing something, or offers a new technical solution to a problem.  In order to be patentable, the invention must fulfill certain conditions. (http://www.wipo.int/patentscope/en/)</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://purl.org/ontology/bibo/Document"/>
     </rdfs:subClassOf>
@@ -542,8 +542,8 @@
     >(from BIBO) A document describing the exclusive right granted by a government to an inventor to manufacture, use, or sell an invention for a certain number of years</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#dateIssued"/>
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
@@ -673,11 +673,6 @@
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Methods in Molecular Biology</vitro:exampleAnnot>
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Collection"/>
-    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
-    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A thematic collection of documents, usually books, issued at regular or irregular intervals</vitro:shortDef>
-    <rdfs:comment xml:lang="en">A loose, thematic, collection of Documents, often Books.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -686,6 +681,11 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
+    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A thematic collection of documents, usually books, issued at regular or irregular intervals</vitro:shortDef>
+    <rdfs:comment xml:lang="en">A loose, thematic, collection of Documents, often Books.</rdfs:comment>
     <rdfs:label xml:lang="en-US">Series</rdfs:label>
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -727,33 +727,7 @@
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A bounded physical representation of a body of information designed with the capacity (and usually intent) to communicate</vitro:shortDef>
     <rdfs:label xml:lang="en-US">Document</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/DocumentPart"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasPart"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short Definition from the bibo ontology</vitro:descriptionAnnot>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#features"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <owl2:term_status>stable</owl2:term_status>
-    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
-    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
-    <rdfs:comment xml:lang="en">A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -762,6 +736,32 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Short Definition from the bibo ontology</vitro:descriptionAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/DocumentPart"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasPart"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl2:term_status>stable</owl2:term_status>
+    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
+    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/oclcnum"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#features"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://purl.org/spar/c4o/GlobalCitationCount"/>
@@ -802,22 +802,22 @@
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Journal"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasPublicationVenue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en-US">Academic Article</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/eanucc13"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:label xml:lang="en-US">Academic Article</rdfs:label>
     <rdfs:comment xml:lang="en">A scholarly academic article, typically published in a journal.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://purl.org/ontology/bibo/Article"/>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://purl.org/ontology/bibo/Journal"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#hasPublicationVenue"/>
-      </owl:Restriction>
     </rdfs:subClassOf>
     <swvs:term_status>stable</swvs:term_status>
   </owl:Class>
@@ -856,6 +856,12 @@
     <rdfs:comment xml:lang="en">A seminar, discussion group, or the like, that emphasizes zxchange of ideas and the demonstration and application of techniques, skills, etc.</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/EditedBook">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">An edited book.</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
@@ -865,26 +871,20 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#placeOfPublication"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Best American Science Writing 2009</vitro:exampleAnnot>
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/CollectedDocument"/>
     <swvs:term_status>stable</swvs:term_status>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An edited collection of stand-alone articles published as a book</vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#publisher"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:label xml:lang="en-US">Edited Book</rdfs:label>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/Map">
@@ -900,32 +900,6 @@
     <rdfs:label xml:lang="en-US">Map</rdfs:label>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/Article">
-    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
-    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A specific journal article</vitro:exampleAnnot>
-    <rdfs:label xml:lang="en-US">Article</rdfs:label>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a periodical or book</vitro:shortDef>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://purl.org/ontology/bibo/pageEnd"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/doi"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short Definition modified from the bibo ontology.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -934,6 +908,32 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://purl.org/ontology/bibo/pageEnd"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
+    >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A specific journal article</vitro:exampleAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://purl.org/ontology/bibo/doi"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en-US">Article</rdfs:label>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a periodical or book</vitro:shortDef>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Short Definition modified from the bibo ontology.</vitro:descriptionAnnot>
     <rdfs:comment xml:lang="en">A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication, as a newspaper or magazine.</rdfs:comment>
     <swvs:term_status>stable</swvs:term_status>
   </owl:Class>
@@ -950,12 +950,6 @@
     <swvs:term_status>unstable</swvs:term_status>
   </owl:Class>
   <owl:Class rdf:about="http://purl.org/ontology/bibo/Conference">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:comment xml:lang="en">A meeting for consultation or discussion.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -965,6 +959,12 @@
     >2010 International Congress on Autoimmunity; American Libraries Association 2009</vitro:exampleAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A meeting for consultation or discussion.</vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#abbreviation"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:isDefinedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
     >http://purl.org/ontology/bibo/</rdfs:isDefinedBy>
     <swvs:term_status>stable</swvs:term_status>

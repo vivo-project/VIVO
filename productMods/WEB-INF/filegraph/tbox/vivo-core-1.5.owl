@@ -46,6 +46,8 @@
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Department">
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Legal (department within a company); Use for any non-academic department</vitro:exampleAnnot>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Definition modified from the definition here: http://dictionary.reference.com/browse/department. It is difficult to tell the difference between and department and a division.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -56,21 +58,11 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Definition modified from the definition here: http://dictionary.reference.com/browse/department. It is difficult to tell the difference between and department and a division.</vitro:descriptionAnnot>
-    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A distinct, usually ongoing and specialized unit within a large organization.</vitro:shortDef>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Consortium">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasCurrentMember"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
@@ -85,6 +77,14 @@
     >Independent organizations formally working together toward a common goal, under an expressed agreement</vitro:shortDef>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Committee on Institutional Cooperation (CIC); The Five Colleges of Ohio</vitro:exampleAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasCurrentMember"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Room">
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -98,13 +98,6 @@
     >Room that provides a particular service or is used for a particular activity.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Committee">
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >There could be many subclasses such as thesis committee or tenure committee, but these may typically be differentiated via the moniker unless distinct properties become important.</vitro:descriptionAnnot>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Curriculum Steering Committee; PhD Advisory Committee</vitro:exampleAnnot>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A group of people organized for a specific purpose (e.g., a reporting or advisory role), often with a charge and for a specific duration.</vitro:shortDef>
-    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Group"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -113,6 +106,13 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >There could be many subclasses such as thesis committee or tenure committee, but these may typically be differentiated via the moniker unless distinct properties become important.</vitro:descriptionAnnot>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Curriculum Steering Committee; PhD Advisory Committee</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A group of people organized for a specific purpose (e.g., a reporting or advisory role), often with a charge and for a specific duration.</vitro:shortDef>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Group"/>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#School">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -214,8 +214,6 @@
     >An article reviewing one or more other information resources (a book, one or more other articles, movies, etc)</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#AcademicDegree">
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -233,8 +231,8 @@
         </owl:onProperty>
       </owl:Restriction>
     </owl:equivalentClass>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >This list may have multiple abbreviations for some degrees.</vitro:descriptionAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An academic degree at any level, both as reported by individuals for employment and as offered by academic degree programs.</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
@@ -244,6 +242,8 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This list may have multiple abbreviations for some degrees.</vitro:descriptionAnnot>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >B.A. Bachelor of Arts</vitro:exampleAnnot>
   </owl:Class>
@@ -259,28 +259,28 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >1</owl:minCardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#addressCity"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1320 East 10th Street, Wells Library 021 Bloomington, IN 47405</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://vivoweb.org/ontology/core#Address"/>
     </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Formal address in US postal address system. </vitro:shortDef>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >1320 East 10th Street, Wells Library 021 Bloomington, IN 47405</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:minCardinality>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#addressPostalCode"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Formal address in US postal address system. </vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#addressCity"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -298,6 +298,8 @@
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An institution of higher education and research, which grants academic degrees in a variety of subjects, and provides both undergraduate education and postgraduate education.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >University of Florida; Washington University in St. Louis</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
@@ -306,8 +308,6 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >University of Florida; Washington University in St. Louis</vitro:exampleAnnot>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Definition taken from: http://en.wikipedia.org/wiki/University</vitro:descriptionAnnot>
   </owl:Class>
@@ -354,6 +354,8 @@
     >A role in an Agreement (for example, a grant) as a named investigator or key personnel.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#College">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >College of Arts &amp; Sciences; Ivy Tech Community College</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#AcademicDegree"/>
@@ -362,8 +364,6 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >College of Arts &amp; Sciences; Ivy Tech Community College</vitro:exampleAnnot>
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A primary academic unit within a University or a free-standing higher education organization without graduate degree programs.</vitro:shortDef>
@@ -378,6 +378,9 @@
     >An issued certificate</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#WorkingPaper">
+    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A document created as a basis for discussion or a very early draft of a formal paper</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -386,9 +389,6 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A document created as a basis for discussion or a very early draft of a formal paper</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#EmeritusLibrarian">
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -414,6 +414,21 @@
     >a specific period or duration, defined by (optional) start and end date/times.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#NonAcademicPosition">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A position classified as professional, staff, support, or any other non-academic role</vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position"/>
+    </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Staff, support, and other non-academic positions.</vitro:descriptionAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionInOrganization"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -424,23 +439,8 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A position classified as professional, staff, support, or any other non-academic role</vitro:shortDef>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionInOrganization"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Staff, support, and other non-academic positions.</vitro:descriptionAnnot>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Accounting &amp; Research Services Assistant; Director of Information Technology</vitro:exampleAnnot>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position"/>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Licensure">
     <rdfs:subClassOf>
@@ -519,9 +519,11 @@ Contents
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Agreement">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://vivoweb.org/ontology/core#Role"/>
+        </owl:allValuesFrom>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#contributingRole"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -530,6 +532,14 @@ Contents
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocus"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -546,16 +556,6 @@ Contents
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#administeredBy"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://vivoweb.org/ontology/core#Role"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#contributingRole"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -589,9 +589,6 @@ Contents
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Those positions are held by people who do academic work but do not have faculty positions in universities or institutes.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
-      <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position"/>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
         <owl:onProperty>
@@ -599,8 +596,6 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Researcher; Academic Extension Associate; Postdoctoral Associate</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -611,6 +606,11 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position"/>
+    </rdfs:subClassOf>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Researcher; Academic Extension Associate; Postdoctoral Associate</vitro:exampleAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A position involving academic work but without faculty status</vitro:shortDef>
   </owl:Class>
@@ -618,8 +618,6 @@ Contents
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >National Institute of Health (NIH)</vitro:exampleAnnot>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A defined class of organizations that fund Grants.</vitro:shortDef>
     <owl:equivalentClass>
       <owl:Restriction>
         <owl:onProperty>
@@ -630,6 +628,8 @@ Contents
         </owl:someValuesFrom>
       </owl:Restriction>
     </owl:equivalentClass>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A defined class of organizations that fund Grants.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Screenplay">
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
@@ -655,8 +655,6 @@ Contents
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Publisher">
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Elsevier; Harper &amp; Row; Indiana University Press</vitro:exampleAnnot>
     <owl:equivalentClass>
       <owl:Restriction>
         <owl:onProperty>
@@ -665,11 +663,13 @@ Contents
         <owl:someValuesFrom rdf:resource="http://purl.org/ontology/bibo/Document"/>
       </owl:Restriction>
     </owl:equivalentClass>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Elsevier; Harper &amp; Row; Indiana University Press</vitro:exampleAnnot>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A person or company whose business is the publishing of books, periodicals, engravings, computer software, etc.</vitro:shortDef>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Definition found here: http://dictionary.reference.com/browse/publisher</vitro:descriptionAnnot>
-    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Facility">
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -730,16 +730,18 @@ Contents
     >An article of opinion, typically published in a newspaper. For academics, most commonly Op Ed pieces</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#InformationResource">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The most general classification of an information resource</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://vivoweb.org/ontology/core#URLLink"/>
+        </owl:allValuesFrom>
         <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#freetextKeyword"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The most general classification of an information resource</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
@@ -753,6 +755,14 @@ Contents
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#freetextKeyword"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -779,16 +789,6 @@ Contents
         </owl:allValuesFrom>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeValue"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://vivoweb.org/ontology/core#URLLink"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -825,8 +825,6 @@ Contents
     >An Award or Honor</vitro:shortDef>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An Award or Honor</vitro:descriptionAnnot>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Wiley Prize in Biomedical Sciences</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -835,6 +833,8 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Wiley Prize in Biomedical Sciences</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -845,6 +845,16 @@ Contents
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Service">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://vivoweb.org/ontology/core#URLLink"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A regularly offered service in support of an academic, research, or administrative function (not personal or professional service by an individual)</vitro:shortDef>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -861,16 +871,6 @@ Contents
     </rdfs:subClassOf>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >UITS service is the information technology services provided by Indiana University. SC. </vitro:descriptionAnnot>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://vivoweb.org/ontology/core#URLLink"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#OrganizerRole">
     <rdfs:subClassOf>
@@ -907,12 +907,6 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The full URL.</vitro:descriptionAnnot>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >http://info.slis.indiana.edu/~katy/</vitro:exampleAnnot>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Uniform Resource Locator (URL) specifies where an identified resource is available and the mechanism for retrieving it.</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
@@ -921,6 +915,12 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://info.slis.indiana.edu/~katy/</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Uniform Resource Locator (URL) specifies where an identified resource is available and the mechanism for retrieving it.</vitro:shortDef>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The full URL.</vitro:descriptionAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Campus">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -936,6 +936,8 @@ Contents
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#FacultyAdministrativePosition">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An academic administrative position (associate dean, etc.) as distinct from a professional administrative position (non-academic)</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Associate Dean</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -954,13 +956,11 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Associate Dean</vitro:exampleAnnot>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >That is a position held by an academic faculty member who works for administration.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position"/>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >That is a position held by an academic faculty member who works for administration.</vitro:descriptionAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Exhibit">
     <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
@@ -968,14 +968,6 @@ Contents
     >The showing of an object or a collection of objects, in an organized manner.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Equipment">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#freetextKeyword"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A physical object provided for specific purpose, task or occupation. </vitro:shortDef>
     <rdfs:subClassOf>
@@ -990,6 +982,14 @@ Contents
     >A network server is one example. Medical schools and research laboratories can list professional equipment, such as microscopes.</vitro:descriptionAnnot>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >server; Bruker Vector-33 FT-IR</vitro:exampleAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#freetextKeyword"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#EventSeries">
     <rdfs:subClassOf>
@@ -997,6 +997,14 @@ Contents
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1014,35 +1022,7 @@ Contents
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Only use if no specific subclasses of core:EventSeries desribe the activity.</vitro:exampleAnnot>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Two or more events that occur at different times and are connected to each other.</vitro:shortDef>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A generic class which may include a conference series, a course section, a seminar series, or a workshop series. When possible, use one of these more specific classes.</vitro:descriptionAnnot>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocus"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1054,6 +1034,12 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Only use if no specific subclasses of core:EventSeries desribe the activity.</vitro:exampleAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Two or more events that occur at different times and are connected to each other.</vitro:shortDef>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A generic class which may include a conference series, a course section, a seminar series, or a workshop series. When possible, use one of these more specific classes.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -1066,8 +1052,22 @@ Contents
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocus"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus"/>
         </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
@@ -1102,12 +1102,24 @@ Contents
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Position">
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#email"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#rank"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An employment activity, whether compensated or not. Short definition comes from http://en.wikipedia.org/wiki/Position, and has been modified.</vitro:descriptionAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Particular position in an organization, commonly identified by job title, and normally associated with a job description that details the tasks and responsibilities that go with the position.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Director of Admissions and Placement; Associate University Librarian</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
@@ -1116,18 +1128,6 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >An employment activity, whether compensated or not. Short definition comes from http://en.wikipedia.org/wiki/Position, and has been modified.</vitro:descriptionAnnot>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#email"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Particular position in an organization, commonly identified by job title, and normally associated with a job description that details the tasks and responsibilities that go with the position.</vitro:shortDef>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Director of Admissions and Placement; Associate University Librarian</vitro:exampleAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#UndergraduateAdvisingRelationship">
     <rdfs:subClassOf>
@@ -1203,8 +1203,26 @@ Contents
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#IssuedCredential">
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://vivoweb.org/ontology/core#GeographicLocation"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#validIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
@@ -1224,24 +1242,6 @@ Contents
         </owl:allValuesFrom>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateIssued"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom>
-          <owl:Class rdf:about="http://vivoweb.org/ontology/core#GeographicLocation"/>
-        </owl:allValuesFrom>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#validIn"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1277,6 +1277,14 @@ Contents
     >Written musical composition for voice or instruments or both</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Grant">
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Financial assistance mechanism providing money, property, or both to an eligible entity to carry out an approved project or activity</vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/abstract"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -1285,12 +1293,12 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Financial assistance mechanism providing money, property, or both to an eligible entity to carry out an approved project or activity</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty rdf:resource="http://purl.org/ontology/bibo/abstract"/>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#supportedInformationResource"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1303,14 +1311,6 @@ Contents
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#supportedInformationResource"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1345,9 +1345,9 @@ Contents
 </vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocus"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#informationProduct"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1355,9 +1355,49 @@ Contents
     >An endeavor, frequently collaborative, that occurs over a finite period of time and is intended to achieve a particular aim.</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#InformationResource"/>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#informationProduct"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#internationalGeographicFocus"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#geographicFocus"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://vivoweb.org/ontology/core#contactInformation"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1373,55 +1413,15 @@ Contents
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Agreement"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasFundingVehicle"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#internationalGeographicFocus"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#URLLink"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#webpage"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Agreement"/>
         <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://vivoweb.org/ontology/core#contactInformation"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicRegion"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#domesticGeographicFocus"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasFundingVehicle"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1436,22 +1436,12 @@ Contents
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Credential">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#validIn"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -1460,6 +1450,16 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or  de facto authority or assumed competence to do so.</vitro:shortDef>
   </owl:Class>
@@ -1499,8 +1499,6 @@ Contents
     >A named collection of data, usually containing only one type of data</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#EducationalTraining">
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Represents educational training that has been received.</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -1521,6 +1519,8 @@ Contents
     >Currently any abstract name is given to individuals of this class. This could change in the future.</vitro:exampleAnnot>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >This connects person to their academic degree through this educational training, but can also be used when the training does not result in a degree.</vitro:descriptionAnnot>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Represents educational training that has been received.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Competition">
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1573,6 +1573,24 @@ Contents
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://vivoweb.org/ontology/core#contactInformation"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasFundingVehicle"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An offering through an ongoing program or single request of research support: internships, positions, financial awards or other forms of tangible or intangible support</vitro:shortDef>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1581,24 +1599,6 @@ Contents
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <owl:onProperty>
-          <owl:FunctionalProperty rdf:about="http://vivoweb.org/ontology/core#contactInformation"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >An offering through an ongoing program or single request of research support: internships, positions, financial awards or other forms of tangible or intangible support</vitro:shortDef>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasFundingVehicle"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1648,6 +1648,9 @@ Contents
     >A postdoctoral training appointment (job)</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Division">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Cardiovascular Medicine (division within medicine)</vitro:exampleAnnot>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#Grant"/>
@@ -1656,9 +1659,6 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Cardiovascular Medicine (division within medicine)</vitro:exampleAnnot>
-    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Definition modified from http://www.thefreedictionary.com/division.  It is difficult to tell the difference between a division and a department.</vitro:descriptionAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1701,6 +1701,8 @@ Contents
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >An informal organization brought together for the purposes of a project or event.</vitro:shortDef>
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Group"/>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >VIVO Outreach Team; VIVO Ontology Team</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -1709,8 +1711,6 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >VIVO Outreach Team; VIVO Ontology Team</vitro:exampleAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Course">
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1770,10 +1770,6 @@ Contents
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Address">
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Address has properties for department name, street, city, state or province, postal code, and country. For US specific address, classify using core:US Postal Code. core:Address will display all addresses.</vitro:descriptionAnnot>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A specification of a location. To classify US specific addresses, use core:US Postal Code.</vitro:shortDef>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >200 University Avenue West, Waterloo, Ontario, Canada N2L 3G1</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#GeographicLocation"/>
@@ -1782,8 +1778,22 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A specification of a location. To classify US specific addresses, use core:US Postal Code.</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >200 University Avenue West, Waterloo, Ontario, Canada N2L 3G1</vitro:exampleAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#LibrarianPosition">
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Librarian; Library Systems Analyst; Music Bibliographer</vitro:exampleAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionInOrganization"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
@@ -1794,21 +1804,11 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionInOrganization"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A position held  by library and information science professionals, or academic or technical experts, in support of providing information services or materials</vitro:shortDef>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Position"/>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >It is the common position in libraries.</vitro:descriptionAnnot>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Librarian; Library Systems Analyst; Music Bibliographer</vitro:exampleAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#DateTimeValuePrecision">
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1847,14 +1847,6 @@ Contents
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Presentation"/>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#AwardReceipt">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeValue"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >The bestowal of an award, honor, or distinction to a person or person's at a particular time.  </vitro:shortDef>
     <rdfs:subClassOf>
@@ -1865,6 +1857,8 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The award bestowed may be represented with the Award class.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -1875,12 +1869,18 @@ Contents
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeValue"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeValue"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >The award bestowed may be represented with the Award class.</vitro:descriptionAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#FacultyMentoringRelationship">
     <rdfs:subClassOf>
@@ -1899,10 +1899,6 @@ Contents
     >An ongoing editorial responsibility for a bibo:Collection, such as a Journal or Series</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Role">
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Only use this broad role class if no subclasses of role describe the item being classified.</vitro:descriptionAnnot>
-    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >A person's, group's or organization's role in an endeavor</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
@@ -1917,8 +1913,8 @@ Contents
         <owl:onProperty rdf:resource="http://vivoweb.org/ontology/core#description"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Only use if no specific subclasses of core:Role describe the role.</vitro:exampleAnnot>
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Only use this broad role class if no subclasses of role describe the item being classified.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
@@ -1927,6 +1923,10 @@ Contents
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A person's, group's or organization's role in an endeavor</vitro:shortDef>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Only use if no specific subclasses of core:Role describe the role.</vitro:exampleAnnot>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#NewsRelease">
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
@@ -1943,9 +1943,9 @@ Contents
     >Currently any abstract name is given to members of this class. This could change in the future.</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
         <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hideFromDisplay"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#linkedAuthor"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1956,9 +1956,9 @@ Contents
 This class allows for linking an author to a publication while indicating information about that author's authorship.</vitro:descriptionAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#linkedAuthor"/>
+          <owl:DatatypeProperty rdf:about="http://vivoweb.org/ontology/core#hideFromDisplay"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1967,20 +1967,12 @@ This class allows for linking an author to a publication while indicating inform
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#FacultyPosition">
+    <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Position"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#FacultyMember"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionForPerson"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Position"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionInOrganization"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -1990,6 +1982,14 @@ This class allows for linking an author to a publication while indicating inform
     >Professor, associate professor and assistant professor are common positions for academic faculty.</vitro:descriptionAnnot>
     <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Professor; Associate Professor; Assistant Professor</vitro:exampleAnnot>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#positionInOrganization"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#ResearchOrganization">
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -1999,9 +1999,9 @@ This class allows for linking an author to a publication while indicating inform
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#AdvisingRelationship">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -2009,18 +2009,15 @@ This class allows for linking an author to a publication while indicating inform
     >A dual relationship of one person being advised or mentored by another person, typically including start and end dates</vitro:shortDef>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="http://vivoweb.org/ontology/core#DateTimeInterval"/>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#dateTimeInterval"/>
+          <owl:ObjectProperty rdf:about="http://vivoweb.org/ontology/core#hasSubjectArea"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="http://vivoweb.org/ontology/core#Relationship"/>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Database">
-    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/CollectedDocument"/>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >PubMed</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -2029,6 +2026,9 @@ This class allows for linking an author to a publication while indicating inform
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/CollectedDocument"/>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >PubMed</vitro:exampleAnnot>
     <vitro:shortDef rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A structured file of information or a set of logically related data stored and retrieved using computer-based means</vitro:shortDef>
     <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -2049,6 +2049,10 @@ This class allows for linking an author to a publication while indicating inform
     >A geographical area which is associated with some sort of political  structure.</vitro:shortDef>
   </owl:Class>
   <owl:Class rdf:about="http://vivoweb.org/ontology/core#Catalog">
+    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Short Definition is the Medical Subject Heading (MeSH) definition </vitro:descriptionAnnot>
+    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NLM Catalog</vitro:exampleAnnot>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
@@ -2057,10 +2061,6 @@ This class allows for linking an author to a publication while indicating inform
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <vitro:descriptionAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Short Definition is the Medical Subject Heading (MeSH) definition </vitro:descriptionAnnot>
-    <vitro:exampleAnnot rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >NLM Catalog</vitro:exampleAnnot>
     <rdfs:subClassOf rdf:resource="http://purl.org/ontology/bibo/Document"/>
     <rdfs:subClassOf>
       <owl:Restriction>
