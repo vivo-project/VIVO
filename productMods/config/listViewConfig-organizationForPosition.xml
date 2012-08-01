@@ -33,7 +33,9 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd  
                        }
             # Get current positions only: end date is either null or not in the past
-            } FILTER ( !bound(?dateTimeEnd) ||                        
+            } 
+              NOT EXISTS { ?position core:hideFromDisplay ?hideThis }
+              FILTER ( !bound(?dateTimeEnd) ||                        
                        afn:substring(str(?dateTimeEnd), 0, 4) &gt;= afn:substring(str(afn:now()), 0, 4) )
               <critical-data-required>
               FILTER ( bound(?person) )
