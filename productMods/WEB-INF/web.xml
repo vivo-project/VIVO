@@ -814,6 +814,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ManagePeopleForOrganizationController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ManagePeopleForOrganizationController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagePeopleForOrganizationController</servlet-name>
+    <url-pattern>/managePeople</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>ShowClassHierarchyController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.freemarker.ShowClassHierarchyController</servlet-class>
   </servlet>
