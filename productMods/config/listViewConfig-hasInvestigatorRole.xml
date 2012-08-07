@@ -20,6 +20,7 @@
                         ?adminedByLabel
                         ?dateTimeStartRole ?dateTimeEndRole
                         ?dateTimeStartGrant ?dateTimeEndGrant
+                        ?hideThis
         WHERE {
                         
             ?subject ?property ?role  
@@ -55,7 +56,8 @@
                                   ?dateTimeEndValueGrant core:dateTime ?dateTimeEndGrant 
                        }
             }
-            NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
+            OPTIONAL { ?role core:hideFromDisplay ?hideThis }
+     #       NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>

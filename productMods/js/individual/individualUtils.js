@@ -97,6 +97,35 @@ $(document).ready(function(){
         $('#qrCodeImage').toggleClass('hidden');
         return false;
     });
-    
+
+    // For pubs and grants on the foaf:person profile, and affiliated people
+    // on the foaf:organization profile -- if a pub/grant/person has been hidden 
+    // via the "manage" link, we need to ensure that the subclass heading gets removed
+    // if there are no items to display for that subclass.
+    $.each($('h3'), function() {
+        if ( $(this).next().attr('class') == "subclass-property-list hideThis" ) {
+            if ( $(this).next().children().length == 0 ) {       
+                    $(this).closest('li').remove();
+            }
+        }
+    });
+        
+    // if there are no selected pubs, hide the manage link; same for grants
+    // and affiliated people on the org profile page
+    if ( $('ul#authorInAuthorshipList').children('li').length < 1 && $('h3#authorInAuthorship').attr('class') != "hiddenPubs" ) {
+        $('a#managePubLink').hide();
+    }
+
+    if ( $('ul#hasResearcherRoleList').children('li').length < 1 &&
+            $('ul#hasPrincipalInvestigatorRoleList').children('li').length < 1 &&
+            $('ul#hasCo-PrincipalInvestigatorRoleList').children('li').length < 1 &&
+            $('ul#hasInvestigatorRoleList').children('li').length < 1 &&
+            $('h3#hasResearcherRole').attr('class') != "hiddenGrants" ) {
+                    $('a#manageGrantLink').hide();
+    }
+
+    if ( $('ul#organizationForPositionList').children('li').length < 1 && $('h3#organizationForPosition').attr('class') != "hiddenPeople" ) {
+        $('a#managePeopleLink').hide();
+    }
 
 });
