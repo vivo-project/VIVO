@@ -24,6 +24,7 @@
                         ?appearsIn
                         ?partOf
                         ?editor
+                        ?hideThis
         WHERE {
             ?subject ?property ?authorship  
             OPTIONAL { ?authorship core:linkedInformationResource ?infoResource .                      
@@ -54,9 +55,10 @@
                        }
                        OPTIONAL { ?infoResource core:dateTimeValue ?dateTimeValue .
                                   ?dateTimeValue core:dateTime ?dateTime  
-                       }                                                      
+                       }
+                       OPTIONAL { ?authorship core:hideFromDisplay ?hideThis }                                                      
             }
-            NOT EXISTS { ?authorship core:hideFromDisplay ?hideThis } 
+    #        NOT EXISTS { ?authorship core:hideFromDisplay ?hideThis } 
             <critical-data-required>
             FILTER ( bound(?infoResource) )
             </critical-data-required>
