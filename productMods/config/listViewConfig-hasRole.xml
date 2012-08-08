@@ -17,8 +17,9 @@
                         ?roleLabel 
                         ?activity ?activityName 
                         ?activityLabel
-                        ?dateTimeStart ?dateTimeEnd WHERE {
-                        
+                        ?dateTimeStart ?dateTimeEnd 
+                        ?hideThis
+        WHERE {                
             ?subject ?property ?role  
             
             OPTIONAL {  ?role core:roleRealizedIn ?activity 
@@ -40,6 +41,7 @@
             }           
             
             OPTIONAL { ?role rdfs:label ?roleLabel }
+            OPTIONAL { ?role core:hideFromDisplay ?hideThis }
             OPTIONAL { ?role core:dateTimeInterval ?dateTimeInterval 
                        OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .
                                   ?dateTimeStartValue core:dateTime ?dateTimeStart 
@@ -48,7 +50,7 @@
                                   ?dateTimeEndValue core:dateTime ?dateTimeEnd 
                        }
             }
-            NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
+      #      NOT EXISTS { ?role core:hideFromDisplay ?hideThis }  
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>
