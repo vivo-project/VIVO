@@ -52,10 +52,17 @@ var processInternalClassDataGetterContent = {
 			pageContentSection.find("input[name='display-internalClass']").attr("checked", "checked");
 		} 
 		//Since this is populating content from the template, no need to "uncheck" anything
-		var results = pageContentSection.results;
+		var results = existingContentObject["results"];
 		if(results != null && results.classGroupName != null) {
 	    	var displayInternalMessage = pageContentSection.find('label[for="display-internalClass"] em');
 	    	displayInternalMessage.filter(":first").html(results.classGroupName);
+	    	var resultsClasses = results["classes"];
+	    	if(resultsClasses != null) {
+	    		var numberClasses = resultsClasses.length;
+	    		if(numberClasses != numberSelected) {
+	    			pageContentSection.find("input[name='allSelected']").removeAttr("checked");
+	    		}
+	    	}
 		}
 		
 	},

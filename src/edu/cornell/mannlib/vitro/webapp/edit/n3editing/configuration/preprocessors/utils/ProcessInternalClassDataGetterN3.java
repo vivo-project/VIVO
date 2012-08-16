@@ -192,7 +192,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	        	   classGroupURI = classGroupResource.getURI();
         	   }
         	   //individuals for classes - this may also be optional in case entire class group selected and internal class
-        	   if(qs.get("individualForClassResource") != null ) {
+        	   if(qs.get("individualForClass") != null ) {
         		   Resource individualForClassResource = qs.getResource("individualForClass");
         		   individualsForClasses.add(individualForClassResource.getURI());
         	   }
