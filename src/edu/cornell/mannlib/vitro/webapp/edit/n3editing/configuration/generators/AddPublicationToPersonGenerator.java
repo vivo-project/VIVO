@@ -36,7 +36,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.generators.EditModeUtils;
 public class AddPublicationToPersonGenerator extends VivoBaseGenerator implements EditConfigurationGenerator {
 
     final static String collectionClass = bibo + "Periodical";
-    final static String bookClass = bibo + "Document";
+    final static String bookClass = bibo + "Book";
     final static String conferenceClass = bibo + "Conference";
     final static String editorClass = foaf + "Person";
     final static String publisherClass = vivoCore + "Publisher";
