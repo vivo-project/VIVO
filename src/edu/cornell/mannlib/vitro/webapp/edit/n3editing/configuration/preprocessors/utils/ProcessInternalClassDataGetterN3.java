@@ -104,6 +104,8 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
 	   //First, put dataGetterURI within scope as well
 	   //((ProcessDataGetterAbstract)this).populateExistingDataGetterURI(dataGetterURI, counter);
 	   this.populateExistingDataGetterURI(dataGetterURI, counter);
+	   //Put in type
+	   this.populateExistingClassType(this.getClassType(), counter);
 	   //Sparql queries for values to be executed
 	   //And then placed in the correct place/literal or uri
 	   String querystr = getExistingValuesInternalClass(dataGetterURI);
@@ -132,7 +134,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
         	   if(qs.get("internalClass") != null && internalClassLiteral == null) {
         		   
         		   internalClassLiteral= qs.getLiteral("internalClass");
-        		   existingLiteralValues.put(this.getVarName("internalClass", counter),
+        		   existingLiteralValues.put(this.getVarName(internalClassVarNameBase, counter),
 	        			   new ArrayList<Literal>(Arrays.asList(internalClassLiteral)));
         	   }
            }
@@ -141,7 +143,7 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
     			   new ArrayList<String>(individualsForClasses));
            //Final check, in case no internal class flag was returned, set to false
            if(internalClassLiteral == null) {
-        	   existingLiteralValues.put(this.getVarName("internalClass", counter),
+        	   existingLiteralValues.put(this.getVarName(internalClassVarNameBase, counter),
         			   new ArrayList<Literal>(
         					   Arrays.asList(ResourceFactory.createPlainLiteral("false"))
         					   ));
@@ -168,6 +170,8 @@ public  class ProcessInternalClassDataGetterN3 extends ProcessIndividualsForClas
    public JSONObject getExistingValuesJSON(String dataGetterURI, OntModel queryModel, ServletContext context) {
 	   JSONObject jObject = new JSONObject();
 	   jObject.element("dataGetterClass", classType);
+	   //Update to include class type as variable
+	   jObject.element(classTypeVarBase, classType);
 	   //Get selected class group, if internal class, and classes selected from class group
 	   getExistingClassGroupAndInternalClass(dataGetterURI, jObject, queryModel);
 	   //Get all classes in the class group
