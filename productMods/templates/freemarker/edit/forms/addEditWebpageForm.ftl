@@ -47,7 +47,7 @@
 </section>
 </#if>    
     
-<form class="customForm" action ="${submitUrl}" class="customForm">
+<form class="customForm" action ="${submitUrl}">
 
     <label for="urlType">URL Type${requiredHint}</label>
     <#assign urlTypeOpts = editConfiguration.pageData.urlType />
