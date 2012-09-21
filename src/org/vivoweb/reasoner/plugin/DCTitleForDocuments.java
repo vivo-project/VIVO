@@ -17,6 +17,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 import edu.cornell.mannlib.vitro.webapp.reasoner.ReasonerPlugin;
+import edu.cornell.mannlib.vitro.webapp.reasoner.plugin.SimplePropertyAndTypeRule;
 
 public class DCTitleForDocuments extends SimplePropertyAndTypeRule implements ReasonerPlugin {
 

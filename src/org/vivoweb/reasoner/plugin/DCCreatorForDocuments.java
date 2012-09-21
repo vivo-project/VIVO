@@ -3,6 +3,7 @@
 package org.vivoweb.reasoner.plugin;
 
 import edu.cornell.mannlib.vitro.webapp.reasoner.ReasonerPlugin;
+import edu.cornell.mannlib.vitro.webapp.reasoner.plugin.SimpleBridgingRule;
 
 public class DCCreatorForDocuments extends SimpleBridgingRule implements ReasonerPlugin {
 	
