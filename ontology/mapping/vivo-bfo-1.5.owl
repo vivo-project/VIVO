@@ -2,6 +2,7 @@
 
 
 <!DOCTYPE rdf:RDF [
+    <!ENTITY c4o "http://purl.org/spar/c4o/" >
     <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
     <!ENTITY bibo "http://purl.org/ontology/bibo/" >
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
@@ -11,6 +12,7 @@
     <!ENTITY event "http://purl.org/NET/c4dm/event.owl#" >
     <!ENTITY snap "http://www.ifomis.org/bfo/1.1/snap#" >
     <!ENTITY span "http://www.ifomis.org/bfo/1.1/span#" >
+    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
 ]>
@@ -20,19 +22,22 @@
      xml:base="http://vivoweb.org/ontology/bfo"
      xmlns:foaf="http://xmlns.com/foaf/0.1/"
      xmlns:snap="http://www.ifomis.org/bfo/1.1/snap#"
-     xmlns:obo="http://purl.obolibrary.org/obo/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:obo="http://purl.obolibrary.org/obo/"
      xmlns:event="http://purl.org/NET/c4dm/event.owl#"
      xmlns:bibo="http://purl.org/ontology/bibo/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:c4o="http://purl.org/spar/c4o/"
      xmlns:core="http://vivoweb.org/ontology/core#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:span="http://www.ifomis.org/bfo/1.1/span#">
     <owl:Ontology rdf:about="http://vivoweb.org/ontology/core/bfo-extension">
         <owl:imports rdf:resource="http://www.ifomis.org/bfo/1.1"/>
     </owl:Ontology>
     
+
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -50,6 +55,13 @@
     </owl:Class>
     
 
+    <!-- http://purl.obolibrary.org/obo/OBI_0100026 -->
+
+    <owl:Class rdf:about="&obo;OBI_0100026">
+        <rdfs:subClassOf rdf:resource="&snap;MaterialEntity"/>
+    </owl:Class>
+    
+
     <!-- http://purl.org/NET/c4dm/event.owl#Event -->
 
     <owl:Class rdf:about="&event;Event">
@@ -63,12 +75,28 @@
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
+
+    <!-- http://purl.org/spar/c4o/BibliographicInformationSource -->
+
+    <rdf:Description rdf:about="&c4o;BibliographicInformationSource">
+        <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
+    </rdf:Description>
+    
+
+    <!-- http://purl.org/spar/c4o/GlobalCitationCount -->
+
+    <rdf:Description rdf:about="&c4o;GlobalCitationCount">
+        <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
+    </rdf:Description>
+    
+
     <!-- http://vivoweb.org/ontology/core#AcademicDegree -->
 
     <owl:Class rdf:about="&core;AcademicDegree">
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
+
     <!-- http://vivoweb.org/ontology/core#Address -->
 
     <owl:Class rdf:about="&core;Address">
@@ -96,17 +124,13 @@
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
+
     <!-- http://vivoweb.org/ontology/core#Credential -->
 
     <owl:Class rdf:about="&core;Credential">
         <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
     </owl:Class>
     
-    <!-- http://vivoweb.org/ontology/core#IssuedCredential -->
-
-    <owl:Class rdf:about="&core;IssuedCredential">
-        <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
-    </owl:Class>
 
     <!-- http://vivoweb.org/ontology/core#DateTimeInterval -->
 
@@ -135,24 +159,37 @@
         <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
     </owl:Class>
     
+
     <!-- http://vivoweb.org/ontology/core#Equipment -->
 
     <owl:Class rdf:about="&core;Equipment">
         <rdfs:subClassOf rdf:resource="&snap;Object"/>
     </owl:Class>
     
+
     <!-- http://vivoweb.org/ontology/core#EventSeries -->
 
     <owl:Class rdf:about="&core;EventSeries">
         <rdfs:subClassOf rdf:resource="&span;Process"/>
     </owl:Class>
     
+
+
     <!-- http://vivoweb.org/ontology/core#InformationResource -->
 
     <owl:Class rdf:about="&core;InformationResource">
         <rdfs:subClassOf rdf:resource="&snap;GenericallyDependentContinuant"/>
     </owl:Class>
     
+
+
+    <!-- http://vivoweb.org/ontology/core#IssuedCredential -->
+
+    <owl:Class rdf:about="&core;IssuedCredential">
+        <rdfs:subClassOf rdf:resource="&snap;SpecificallyDependentContinuant"/>
+    </owl:Class>
+    
+
 
     <!-- http://vivoweb.org/ontology/core#Location -->
 
@@ -161,12 +198,14 @@
     </owl:Class>
     
 
+
     <!-- http://vivoweb.org/ontology/core#Position -->
 
     <owl:Class rdf:about="&core;Position">
         <rdfs:subClassOf rdf:resource="&snap;Quality"/>
     </owl:Class>
     
+
 
     <!-- http://vivoweb.org/ontology/core#Project -->
 
@@ -196,13 +235,6 @@
     </owl:Class>
     
 
-    <!-- http://vivoweb.org/ontology/core#SubjectArea -->
-
-    <owl:Class rdf:about="&core;SubjectArea">
-        <rdfs:subClassOf rdf:resource="&snap;IndependentContinuant"/>
-    </owl:Class>
-    
-
     <!-- http://vivoweb.org/ontology/core#URLLink -->
 
     <owl:Class rdf:about="&core;URLLink">
@@ -210,18 +242,21 @@
     </owl:Class>
     
 
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+    <rdf:Description rdf:about="&skos;Concept">
+        <rdfs:subClassOf rdf:resource="&snap;IndependentContinuant"/>
+    </rdf:Description>
+    
+
     <!-- http://xmlns.com/foaf/0.1/Agent -->
 
     <owl:Class rdf:about="&foaf;Agent">
         <rdfs:subClassOf rdf:resource="&snap;MaterialEntity"/>
     </owl:Class>
-    
-    
-    <!-- obo OBI_0100026 -->
-    <owl:Class rdf:about="&obo;OBI_0100026">
-        <rdfs:subClassOf rdf:resource="&snap;MaterialEntity"/>
-    </owl:Class>
 </rdf:RDF>
 
-<!-- Generated by the OWL API (version 3.1.0.1602) http://owlapi.sourceforge.net -->
+
+
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
 
