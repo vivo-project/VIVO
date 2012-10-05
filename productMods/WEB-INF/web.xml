@@ -912,6 +912,15 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>SearchHelpController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.SearchHelpController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchHelpController</servlet-name>
+    <url-pattern>/searchHelp</url-pattern>
+  </servlet-mapping>
+  
   <!-- for now, need to make sure the links on CALS' site doesn't break -->
   <servlet-mapping>
     <servlet-name>SearchController</servlet-name>
