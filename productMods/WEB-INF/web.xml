@@ -1160,15 +1160,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>friend</servlet-name>
-    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.authenticate.FriendController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>friend</servlet-name>
-    <url-pattern>/admin/friend</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>logout</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.Logout</servlet-class>
   </servlet>
