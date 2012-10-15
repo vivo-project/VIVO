@@ -25,18 +25,27 @@
         </#if>
     </#local>
 
-    <#-- Generally roles are assigned a label when entered through a custom form. Investigator and its subclasses do not,
-    so use the type label instead if not collated by subclass. -->
+    <#-- 
+         Generally roles are assigned a label when entered through a custom form. Investigator and its subclasses do not,
+         so use the type label instead if not collated by subclass.
+    -->
     <#local roleLabel>
-    <#-- Display, e.g., "Principal Investigator" for "Principal Investigator Role",
-                        "Editor" for "Editor Role".
-         This information is redundant if the property is collated, since it appears in the subclass label. -->
+    <#-- 
+            Display, e.g., "Principal Investigator" for "Principal Investigator Role", "Editor" for "Editor Role".
+            This information is redundant if the property is collated, since it appears in the subclass label.
+    -->
        
+        <#if statement.roleTypeLabel?has_content>
+            <#assign roleTypeLabel = statement.roleTypeLabel >
+        <#else>
+            <#assign roleTypeLabel = "" >
+        </#if>
         <#if statement.roleLabel?has_content>
-            <#if statement.roleLabel?lower_case?replace(" role", "") != statement.roleTypeLabel?lower_case?replace(" role", "")>
+            <#if statement.roleLabel?lower_case?replace(" role", "") != roleTypeLabel?lower_case?replace(" role", "")>
                 ${statement.roleLabel?replace(" Role", "")}
             </#if>
-        <#elseif (! property.collatedBySubclass ) && statement.roleTypeLabel?has_content>${statement.roleTypeLabel?replace(" Role", "")}
+        <#elseif (! property.collatedBySubclass ) && roleTypeLabel?has_content>
+            ${roleTypeLabel?replace(" Role", "")}
         </#if>
     </#local>
 
