@@ -751,6 +751,24 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>ShowBackgroundThreads</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.ShowBackgroundThreadsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowBackgroundThreads</servlet-name>
+    <url-pattern>/admin/showThreads</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>WaitForBackgroundThreads</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.admin.WaitForBackgroundThreadsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WaitForBackgroundThreads</servlet-name>
+    <url-pattern>/admin/wait</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>StatementChangeListingController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.edit.listing.jena.StatementChangeListingController</servlet-class>
   </servlet>
