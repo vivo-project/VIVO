@@ -5,40 +5,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>PublicFacultyInfo</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">PublicFacultyInfo</td></tr>
+<tr><td rowspan="1" colspan="3">PublicFacultyInfo</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check what the public will see from *FacultyInfo test cases</td>
-	<td></td>
-</tr>
+<!--Check what the public will see from *FacultyInfo test cases-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -49,16 +27,8 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Do not login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Find Jane Faculty via Index</td>
-	<td></td>
-</tr>
+<!--Do not login-->
+<!--Find Jane Faculty via Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -89,11 +59,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify fields that should and shouldn't be present</td>
-	<td></td>
-</tr>
+<!--Verify fields that should and shouldn't be present-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Faculty, Jane Assistant Professor</td>
@@ -374,11 +340,7 @@
 	<td>3333333</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>

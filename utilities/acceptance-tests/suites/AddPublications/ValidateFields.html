@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>ValidateFields</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">ValidateFields</td></tr>
+<tr><td rowspan="1" colspan="3">ValidateFields</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Book Chapter to validate fields</td>
-	<td></td>
-</tr>
+<!--Add Book Chapter to validate fields-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,21 +59,13 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Index</td>
-	<td></td>
-</tr>
+<!--Navigate to Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Frank Furter</td>
-	<td></td>
-</tr>
+<!--Navigate to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Faculty Member</td>
@@ -124,11 +86,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a Publication</td>
-	<td></td>
-</tr>
+<!--Select to add a Publication-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='authorInAuthorship']/a/img</td>
@@ -149,11 +107,7 @@
 	<td>Publication Type</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before doing anything</td>
-	<td></td>
-</tr>
+<!--Cancel out before doing anything-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
@@ -164,11 +118,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a Publication again</td>
-	<td></td>
-</tr>
+<!--Select to add a Publication again-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='authorInAuthorship']/a/img</td>
@@ -189,31 +139,19 @@
 	<td>Publication Type</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a book chapter</td>
-	<td></td>
-</tr>
+<!--Select to add a book chapter-->
 <tr>
 	<td>select</td>
 	<td>typeSelector</td>
 	<td>label=Chapter</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out before entering in title</td>
-	<td></td>
-</tr>
+<!--Cancel out before entering in title-->
 <tr>
 	<td>click</td>
 	<td>link=Cancel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add an book chapter again, this time without a title</td>
-	<td></td>
-</tr>
+<!--Select to add an book chapter again, this time without a title-->
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
@@ -254,11 +192,7 @@
 	<td>Please select an existing publication in the Title field or enter a new one.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select to add a Book Chapter again, this time do it right</td>
-	<td></td>
-</tr>
+<!--Select to add a Book Chapter again, this time do it right-->
 <tr>
 	<td>assertTitle</td>
 	<td>Edit</td>
@@ -349,11 +283,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify author info is there</td>
-	<td></td>
-</tr>
+<!--Verify author info is there-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>chapter</td>
@@ -369,11 +299,7 @@
 	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minnie.&nbsp;&nbsp;New York: Marcel Dekker. 123-144.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Image, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Image, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Nintendo O.K. for Kids</td>
@@ -509,11 +435,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Web Page, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Web Page, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=img.add-individual</td>
@@ -694,11 +616,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Author, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Author, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='informationResourceInAuthorship']/a/img</td>
@@ -809,11 +727,7 @@
 	<td>Mouse, Minnie</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Chapter, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Chapter, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='chapter']/a/img</td>
@@ -879,11 +793,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Features, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Features, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='features']/a/img</td>
@@ -939,11 +849,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Abstract, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Abstract, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='abstract']/a/img</td>
@@ -1004,11 +910,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Presented At, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Presented At, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='presentedAt']/a/img</td>
@@ -1074,11 +976,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Status, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Status, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='status']/a/img</td>
@@ -1129,11 +1027,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Has Part, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Has Part, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasPart']/a/img</td>
@@ -1199,11 +1093,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Part Of, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Part Of, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='partOf']/a/img</td>
@@ -1274,11 +1164,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Domestic Geo Focus, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Domestic Geo Focus, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='geographicFocus']/a/img</td>
@@ -1334,11 +1220,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add OCLCNUM validating field first</td>
-	<td></td>
-</tr>
+<!--Add OCLCNUM validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='oclcnum']/a/img</td>
@@ -1394,11 +1276,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add PMID, validating field first</td>
-	<td></td>
-</tr>
+<!--Add PMID, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='pmid']/a/img</td>
@@ -1459,11 +1337,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Number of Pages, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Number of Pages, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='numPages']/a/img</td>
@@ -1524,11 +1398,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Subject Area, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Subject Area, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='hasSubjectArea']/a/img</td>
@@ -1614,11 +1484,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Keywords, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Keywords, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='freetextKeyword']/a/img</td>
@@ -1679,11 +1545,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Reproduced In, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Reproduced In, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='reproducedIn']/a/img</td>
@@ -1734,11 +1596,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Reproduces, validating field first</td>
-	<td></td>
-</tr>
+<!--Add Reproduces, validating field first-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='reproduces']/a/img</td>
@@ -1789,11 +1647,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add documentation for</td>
-	<td></td>
-</tr>
+<!--Add documentation for-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-documentationFor &gt; img.add-individual</td>
@@ -1864,11 +1718,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add has global citation frequency</td>
-	<td></td>
-</tr>
+<!--Add has global citation frequency-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasGlobalCitationFrequency &gt; img.add-individual</td>
@@ -1944,11 +1794,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add presented at</td>
-	<td></td>
-</tr>
+<!--Add presented at-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-presentedAt &gt; img.add-individual</td>
@@ -2009,11 +1855,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add part of</td>
-	<td></td>
-</tr>
+<!--Add part of-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-partOf &gt; img.add-individual</td>
@@ -2074,11 +1916,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add cited by</td>
-	<td></td>
-</tr>
+<!--Add cited by-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-citedBy &gt; img.add-individual</td>
@@ -2144,11 +1982,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">cites</td>
-	<td></td>
-</tr>
+<!--cites-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-cites &gt; img.add-individual</td>
@@ -2234,11 +2068,7 @@
 	<td>Nintendo O.K. for Kids</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify all fields display properly</td>
-	<td></td>
-</tr>
+<!--Verify all fields display properly-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>//img[@title='click to view larger image']</td>
@@ -2424,11 +2254,7 @@
 	<td>Kids Now Conference Proceedings</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Index is correct</td>
-	<td></td>
-</tr>
+<!--Verify Index is correct-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -2494,11 +2320,7 @@
 	<td>Publisher (1)</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate back to Frank Furter</td>
-	<td></td>
-</tr>
+<!--Navigate back to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -2524,11 +2346,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify Book Chapter is there</td>
-	<td></td>
-</tr>
+<!--Verify Book Chapter is there-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>chapter</td>
@@ -2544,11 +2362,7 @@
 	<td>Nintendo O.K. for Kids.&nbsp;&nbsp;Raising Children in the 21st Century. Ed. Mouse, Minnie.&nbsp;&nbsp;New York: Marcel Dekker. 123-144. 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

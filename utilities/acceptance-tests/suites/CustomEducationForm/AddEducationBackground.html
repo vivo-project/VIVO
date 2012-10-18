@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddEducationBackground</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddEducationBackground</td></tr>
+<tr><td rowspan="1" colspan="3">AddEducationBackground</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate Educational Background Form</td>
-	<td></td>
-</tr>
+<!--Validate Educational Background Form-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Jane Faculty via Index</td>
-	<td></td>
-</tr>
+<!--Navigate to Jane Faculty via Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -129,11 +95,7 @@
 	<td>Edit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Cancel out of form</td>
-	<td></td>
-</tr>
+<!--Cancel out of form-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Cancel</td>
@@ -149,11 +111,7 @@
 	<td>//h3[@id='educationalTraining']/a/img</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify entering no fields results in error</td>
-	<td></td>
-</tr>
+<!--Verify entering no fields results in error-->
 <tr>
 	<td>clickAndWait</td>
 	<td>submit</td>
@@ -174,11 +132,7 @@
 	<td>Please select a value in the Type of Educational Training field.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify entering just organization type</td>
-	<td></td>
-</tr>
+<!--Verify entering just organization type-->
 <tr>
 	<td>select</td>
 	<td>id=typeSelector</td>
@@ -199,11 +153,7 @@
 	<td>Please select a value in the Type of Educational Training field.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify entering just the org type and college name</td>
-	<td></td>
-</tr>
+<!--Verify entering just the org type and college name-->
 <tr>
 	<td>select</td>
 	<td>id=typeSelector</td>
@@ -229,11 +179,7 @@
 	<td>Please select a value in the Type of Educational Training field.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify entering everything</td>
-	<td></td>
-</tr>
+<!--Verify entering everything-->
 <tr>
 	<td>select</td>
 	<td>id=typeSelector</td>
@@ -299,11 +245,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify degree appears</td>
-	<td></td>
-</tr>
+<!--Verify degree appears-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -354,11 +296,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add degree from another new organization</td>
-	<td></td>
-</tr>
+<!--Add degree from another new organization-->
 <tr>
 	<td>select</td>
 	<td>id=typeSelector</td>
@@ -404,11 +342,7 @@
 	<td>submit</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify both degrees appear</td>
-	<td></td>
-</tr>
+<!--Verify both degrees appear-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -434,11 +368,7 @@
 	<td>link=Carroll University</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add third degree from new organization</td>
-	<td></td>
-</tr>
+<!--Add third degree from new organization-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='educationalTraining']/a/img</td>
@@ -519,11 +449,7 @@
 	<td>10000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify all 3 degress show up</td>
-	<td></td>
-</tr>
+<!--Verify all 3 degress show up-->
 <tr>
 	<td>assertTitle</td>
 	<td>Faculty, Jane</td>
@@ -559,11 +485,7 @@
 	<td>link=University of Wisconsin</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

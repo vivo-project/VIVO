@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>CreateFacultyMember</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CreateFacultyMember</td></tr>
+<tr><td rowspan="1" colspan="3">CreateFacultyMember</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>10000000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add people and reorder them</td>
-	<td></td>
-</tr>
+<!--Add people and reorder them-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged off to start</td>
-	<td></td>
-</tr>
+<!--Must be logged off to start-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as the site admin</td>
-	<td></td>
-</tr>
+<!--Must login as the site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add 4 people</td>
-	<td></td>
-</tr>
+<!--Add 4 people-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -269,11 +235,7 @@
 	<td>Booth, Susie</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add all people as Susie's collaborators</td>
-	<td></td>
-</tr>
+<!--Add all people as Susie's collaborators-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=a.add-hasCollaborator &gt; img.add-individual</td>
@@ -364,11 +326,7 @@
 	<td>Booth, Susie</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify order is ascending</td>
-	<td></td>
-</tr>
+<!--Verify order is ascending-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>css=#hasCollaboratorList &gt; li</td>
@@ -384,11 +342,7 @@
 	<td>//ul[@id='hasCollaboratorList']/li[3]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Turn on verbose & update object property</td>
-	<td></td>
-</tr>
+<!--Turn on verbose & update object property-->
 <tr>
 	<td>clickAndWait</td>
 	<td>id=verbosePropertySwitch</td>
@@ -434,11 +388,7 @@
 	<td>Object Property Control Panel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify order is descending</td>
-	<td></td>
-</tr>
+<!--Verify order is descending-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -484,11 +434,7 @@
 	<td>//ul[@id='hasCollaboratorList']/li[3]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change order back to ascending</td>
-	<td></td>
-</tr>
+<!--Change order back to ascending-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=exact:vivo:hasCollaborator</td>
@@ -564,11 +510,7 @@
 	<td>Booth, Susie</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify order is ascending again</td>
-	<td></td>
-</tr>
+<!--Verify order is ascending again-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>css=#hasCollaboratorList &gt; li</td>
@@ -584,11 +526,7 @@
 	<td>//ul[@id='hasCollaboratorList']/li[3]</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete test people</td>
-	<td></td>
-</tr>
+<!--Delete test people-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -869,11 +807,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

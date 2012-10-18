@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>DeleteIndexStuff</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">DeleteIndexStuff</td></tr>
+<tr><td rowspan="1" colspan="3">DeleteIndexStuff</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete everything left in the index</td>
-	<td></td>
-</tr>
+<!--Delete everything left in the index-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,21 +59,13 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Index</td>
-	<td></td>
-</tr>
+<!--Navigate to Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that everything else is still there</td>
-	<td></td>
-</tr>
+<!--Verify that everything else is still there-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>research</td>
@@ -119,11 +81,7 @@
 	<td>organizations</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Delete other stuff</td>
-	<td></td>
-</tr>
+<!--Delete other stuff-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Concept</td>
@@ -389,11 +347,7 @@
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify that everything is gone</td>
-	<td></td>
-</tr>
+<!--Verify that everything is gone-->
 <tr>
 	<td>pause</td>
 	<td>50000</td>
@@ -464,11 +418,7 @@
 	<td>organizations</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

@@ -5,40 +5,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080/" />
 <title>ValidateAdminProxy2</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">ValidateAdminProxy2</td></tr>
+<tr><td rowspan="1" colspan="3">ValidateAdminProxy2</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Validate multiple proxy editors setup by user</td>
-	<td></td>
-</tr>
+<!--Validate multiple proxy editors setup by user-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -59,11 +37,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Login as admin</td>
-	<td></td>
-</tr>
+<!--Login as admin-->
 <tr>
 	<td>type</td>
 	<td>id=loginName</td>
@@ -84,11 +58,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify existing relationship</td>
-	<td></td>
-</tr>
+<!--Verify existing relationship-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=My account</td>
@@ -119,11 +89,7 @@
 	<td>link=Remove selection</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now delete the two proxy editors</td>
-	<td></td>
-</tr>
+<!--Now delete the two proxy editors-->
 <tr>
 	<td>click</td>
 	<td>link=Remove selection</td>
@@ -149,11 +115,7 @@
 	<td>Your changes have been saved.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test that editing no longer works for Eddie Editor</td>
-	<td></td>
-</tr>
+<!--Test that editing no longer works for Eddie Editor-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>
@@ -209,11 +171,7 @@
 	<td>Overview</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test that editing no longer works for Connie Curator</td>
-	<td></td>
-</tr>
+<!--Test that editing no longer works for Connie Curator-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log out</td>
@@ -284,11 +242,7 @@
 	<td>Overview</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

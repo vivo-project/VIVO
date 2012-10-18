@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>EditSiteInfo</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">EditSiteInfo</td></tr>
+<tr><td rowspan="1" colspan="3">EditSiteInfo</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>10000000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Test Menu Management</td>
-	<td></td>
-</tr>
+<!--Test Menu Management-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must be logged out</td>
-	<td></td>
-</tr>
+<!--Must be logged out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Menu Management</td>
-	<td></td>
-</tr>
+<!--Navigate to Menu Management-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -114,11 +80,7 @@
 	<td>Default Menu</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default tabs</td>
-	<td></td>
-</tr>
+<!--Verify default tabs-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>Home</td>
@@ -144,11 +106,7 @@
 	<td>Events</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default People URL</td>
-	<td></td>
-</tr>
+<!--Verify default People URL-->
 <tr>
 	<td>open</td>
 	<td>http://localhost:8080/vivo/people</td>
@@ -199,11 +157,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default Organizations URL</td>
-	<td></td>
-</tr>
+<!--Verify default Organizations URL-->
 <tr>
 	<td>open</td>
 	<td>http://localhost:8080/vivo/organizations</td>
@@ -254,11 +208,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default Research URL</td>
-	<td></td>
-</tr>
+<!--Verify default Research URL-->
 <tr>
 	<td>open</td>
 	<td>http://localhost:8080/vivo/research</td>
@@ -309,11 +259,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default Events URL</td>
-	<td></td>
-</tr>
+<!--Verify default Events URL-->
 <tr>
 	<td>open</td>
 	<td>http://localhost:8080/vivo/events</td>
@@ -364,11 +310,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default People tab</td>
-	<td></td>
-</tr>
+<!--Verify default People tab-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=People</td>
@@ -419,11 +361,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default Organizations tab</td>
-	<td></td>
-</tr>
+<!--Verify default Organizations tab-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Organizations</td>
@@ -474,11 +412,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default Research tab</td>
-	<td></td>
-</tr>
+<!--Verify default Research tab-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Research</td>
@@ -529,11 +463,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify default Events tab</td>
-	<td></td>
-</tr>
+<!--Verify default Events tab-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Events</td>
@@ -584,11 +514,7 @@
 	<td>link=rebuilding the search index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

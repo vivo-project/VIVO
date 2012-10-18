@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddMuseumVisitingHours</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddMuseumVisitingHours</td></tr>
+<tr><td rowspan="1" colspan="3">AddMuseumVisitingHours</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Associate visiting hours with the Johnson Art Museum</td>
-	<td></td>
-</tr>
+<!--Associate visiting hours with the Johnson Art Museum-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -99,11 +69,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate Johnson Art Museum via Index</td>
-	<td></td>
-</tr>
+<!--Navigate Johnson Art Museum via Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -129,11 +95,7 @@
 	<td>Johnson Art Museum</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Set hours to 10am-4pm</td>
-	<td></td>
-</tr>
+<!--Set hours to 10am-4pm-->
 <tr>
 	<td>clickAndWait</td>
 	<td>//h3[@id='visitingHours']/a/img</td>
@@ -174,21 +136,13 @@
 	<td>Johnson Art Museum</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify visiting hours have been set</td>
-	<td></td>
-</tr>
+<!--Verify visiting hours have been set-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=10am-4pm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

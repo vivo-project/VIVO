@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddObjPropVisitingHours</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddObjPropVisitingHours</td></tr>
+<tr><td rowspan="1" colspan="3">AddObjPropVisitingHours</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add Object Property visiting hours to Property Group Place</td>
-	<td></td>
-</tr>
+<!--Add Object Property visiting hours to Property Group Place-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -99,11 +69,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Object Properties</td>
-	<td></td>
-</tr>
+<!--Navigate to Object Properties-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Object property hierarchy</td>
@@ -114,11 +80,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify visiting hours does not already exist</td>
-	<td></td>
-</tr>
+<!--Verify visiting hours does not already exist-->
 <tr>
 	<td>verifyElementNotPresent</td>
 	<td>link=visiting hours</td>
@@ -134,11 +96,7 @@
 	<td>Property Editing Form</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add visiting hours</td>
-	<td></td>
-</tr>
+<!--Add visiting hours-->
 <tr>
 	<td>select</td>
 	<td>ParentURI</td>
@@ -219,11 +177,7 @@
 	<td>Object Property Control Panel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify visiting hours has been properly added</td>
-	<td></td>
-</tr>
+<!--Verify visiting hours has been properly added-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>bibo:visitingHours</td>
@@ -299,11 +253,7 @@
 	<td>http://purl.org/ontology/bibo/visitingHours</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

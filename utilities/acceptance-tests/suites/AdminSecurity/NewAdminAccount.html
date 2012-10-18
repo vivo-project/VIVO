@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>NewAdminAccount</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">NewAdminAccount</td></tr>
+<tr><td rowspan="1" colspan="3">NewAdminAccount</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Create a second site admin account</td>
-	<td></td>
-</tr>
+<!--Create a second site admin account-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -44,11 +22,7 @@
 	<td>10000000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in</td>
-	<td></td>
-</tr>
+<!--Must not be logged in-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -94,11 +64,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select User accounts option from Site Admin page</td>
-	<td></td>
-</tr>
+<!--Select User accounts option from Site Admin page-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Site Admin</td>
@@ -124,21 +90,13 @@
 	<td>User accounts</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify test account does not exist already</td>
-	<td></td>
-</tr>
+<!--Verify test account does not exist already-->
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>SisAdmin@cornell.edu</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add new site admin account without the First Name</td>
-	<td></td>
-</tr>
+<!--Add new site admin account without the First Name-->
 <tr>
 	<td>clickAndWait</td>
 	<td>css=input.submit.add-account</td>
@@ -189,11 +147,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify new account has successfully been added</td>
-	<td></td>
-</tr>
+<!--Verify new account has successfully been added-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>A new account for Sis Admin was successfully created.</td>
@@ -234,11 +188,7 @@
 	<td>//tr[1]/td[6]</td>
 	<td>0</td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

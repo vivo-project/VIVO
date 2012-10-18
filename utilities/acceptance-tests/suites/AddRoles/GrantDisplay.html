@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddArticle</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddArticle</td></tr>
+<tr><td rowspan="1" colspan="3">AddArticle</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Change grants to display</td>
-	<td></td>
-</tr>
+<!--Change grants to display-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,21 +59,13 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Index</td>
-	<td></td>
-</tr>
+<!--Navigate to Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Frank Furter</td>
-	<td></td>
-</tr>
+<!--Navigate to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Faculty Member</td>
@@ -124,11 +86,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify grants exist</td>
-	<td></td>
-</tr>
+<!--Verify grants exist-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>History of Apes in Africa Consultant 2010 -</td>
@@ -159,11 +117,7 @@
 	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select display none</td>
-	<td></td>
-</tr>
+<!--Select display none-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td> manage grants &amp; projects </td>
@@ -249,11 +203,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify grants are gone</td>
-	<td></td>
-</tr>
+<!--Verify grants are gone-->
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>History of Apes in Africa Consultant 2010 -</td>
@@ -284,11 +234,7 @@
 	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Opt to display 3 grants</td>
-	<td></td>
-</tr>
+<!--Opt to display 3 grants-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td> manage grants &amp; projects</td>
@@ -329,11 +275,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify only 3 grants are showing</td>
-	<td></td>
-</tr>
+<!--Verify only 3 grants are showing-->
 <tr>
 	<td>verifyTextNotPresent</td>
 	<td>History of Apes in Africa Consultant 2010 -</td>
@@ -364,11 +306,7 @@
 	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now display them all again</td>
-	<td></td>
-</tr>
+<!--Now display them all again-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>manage grants &amp; projects</td>
@@ -409,11 +347,7 @@
 	<td>Faculty, Jane</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify grants all display again</td>
-	<td></td>
-</tr>
+<!--Verify grants all display again-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>History of Apes in Africa Consultant 2010 -</td>
@@ -444,11 +378,7 @@
 	<td>VIVO Cornell Grant Too 2009</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

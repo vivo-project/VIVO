@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AssociateLibToFac</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AssociateLibToFac</td></tr>
+<tr><td rowspan="1" colspan="3">AssociateLibToFac</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>500000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Associate Librarians to Faculty</td>
-	<td></td>
-</tr>
+<!--Associate Librarians to Faculty-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in</td>
-	<td></td>
-</tr>
+<!--Must not be logged in-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -99,11 +69,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to the core:Librarian in the ontology</td>
-	<td></td>
-</tr>
+<!--Navigate to the core:Librarian in the ontology-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Class hierarchy</td>
@@ -144,11 +110,7 @@
 	<td>Super/Subclass Editing Form</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Create the link</td>
-	<td></td>
-</tr>
+<!--Create the link-->
 <tr>
 	<td>select</td>
 	<td>SuperclassURI</td>
@@ -169,11 +131,7 @@
 	<td>Class Control Panel</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Make sure Lilly Librarian shows up in both categories</td>
-	<td></td>
-</tr>
+<!--Make sure Lilly Librarian shows up in both categories-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=People</td>
@@ -294,11 +252,7 @@
 	<td>Assistant Librarian</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Logout</td>
-	<td></td>
-</tr>
+<!--Logout-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

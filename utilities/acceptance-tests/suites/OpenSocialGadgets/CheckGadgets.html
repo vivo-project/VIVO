@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddChapter</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddChapter</td></tr>
+<tr><td rowspan="1" colspan="3">AddChapter</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check open social gadgets</td>
-	<td></td>
-</tr>
+<!--Check open social gadgets-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in already</td>
-	<td></td>
-</tr>
+<!--Must not be logged in already-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must login as site admin</td>
-	<td></td>
-</tr>
+<!--Must login as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -89,11 +59,7 @@
 	<td>loginForm</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Frank Furter</td>
-	<td></td>
-</tr>
+<!--Navigate to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
@@ -119,11 +85,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify gadgets appear</td>
-	<td></td>
-</tr>
+<!--Verify gadgets appear-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>OpenSocial</td>
@@ -144,11 +106,7 @@
 	<td>Hello RDF!</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Search for Frank</td>
-	<td></td>
-</tr>
+<!--Search for Frank-->
 <tr>
 	<td>type</td>
 	<td>name=querytext</td>
@@ -174,11 +132,7 @@
 	<td>Furter, Frank Faculty Member</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify gadgets appear</td>
-	<td></td>
-</tr>
+<!--Verify gadgets appear-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>OpenSocial</td>
@@ -194,11 +148,7 @@
 	<td>First 20 UCSF Profile Pages found</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

@@ -5,29 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>CheckPublicView</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">CheckPublicView</td></tr>
+<tr><td rowspan="1" colspan="3">CheckPublicView</td></tr>
 </thead><tbody>
 <tr>
 	<td>deleteAllVisibleCookies</td>
@@ -39,11 +21,7 @@
 	<td>100000</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Check public view of publications</td>
-	<td></td>
-</tr>
+<!--Check public view of publications-->
 <tr>
 	<td>open</td>
 	<td>/vivo/</td>
@@ -54,26 +32,14 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Index</td>
-	<td></td>
-</tr>
+<!--Must not be logged in-->
+<!--Navigate to Index-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Index</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Navigate to Frank Furter</td>
-	<td></td>
-</tr>
+<!--Navigate to Frank Furter-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Faculty Member</td>
@@ -94,11 +60,7 @@
 	<td>Furter, Frank</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify 4 publications show up</td>
-	<td></td>
-</tr>
+<!--Verify 4 publications show up-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>academic article</td>
@@ -159,11 +121,7 @@
 	<td>link=Nintendo Case Studies</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now verify Chapter details</td>
-	<td></td>
-</tr>
+<!--Now verify Chapter details-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Nintendo O.K. for Kids</td>
@@ -239,11 +197,7 @@
 	<td>Children</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now verify Conference Paper details</td>
-	<td></td>
-</tr>
+<!--Now verify Conference Paper details-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Furter, Frank</td>
@@ -304,11 +258,7 @@
 	<td>Children</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now verify Book details</td>
-	<td></td>
-</tr>
+<!--Now verify Book details-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Furter, Frank</td>
@@ -399,11 +349,7 @@
 	<td>Children</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Now verify Article details</td>
-	<td></td>
-</tr>
+<!--Now verify Article details-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Furter, Frank</td>
@@ -499,11 +445,7 @@
 	<td>Games</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">All done</td>
-	<td></td>
-</tr>
+<!--All done-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>

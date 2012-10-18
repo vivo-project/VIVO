@@ -5,35 +5,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
 <title>AddRDFLocalFile</title>
-<style type="text/css">
-.testName {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-.comment {
-  color: blue;
-  background: rgb(80%, 80%, 80%);
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: larger;
-  text-align: center;
-}
-</style>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3" class="testName">AddRDFLocalFile</td></tr>
+<tr><td rowspan="1" colspan="3">AddRDFLocalFile</td></tr>
 </thead><tbody>
-<tr>
-	<td>comment</td>
-	<td class="comment">Add RDF file from local machine</td>
-	<td></td>
-</tr>
+<!--Add RDF file from local machine-->
 <tr>
 	<td>deleteAllVisibleCookies</td>
 	<td></td>
@@ -54,11 +32,7 @@
 	<td>VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must not be logged on</td>
-	<td></td>
-</tr>
+<!--Must not be logged on-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Log in</td>
@@ -69,11 +43,7 @@
 	<td>Log in to VIVO</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Must log in as site admin</td>
-	<td></td>
-</tr>
+<!--Must log in as site admin-->
 <tr>
 	<td>type</td>
 	<td>loginName</td>
@@ -104,11 +74,7 @@
 	<td>VIVO Site Administration</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select Add/Remove RDF data option from Site Admin page</td>
-	<td></td>
-</tr>
+<!--Select Add/Remove RDF data option from Site Admin page-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Add/Remove RDF data</td>
@@ -119,11 +85,7 @@
 	<td>Ingest RDF Data</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Select RDF file to be added</td>
-	<td></td>
-</tr>
+<!--Select RDF file to be added-->
 <tr>
 	<td>type</td>
 	<td>rdfStream</td>
@@ -144,21 +106,13 @@
 	<td>Ingest RDF Data</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Verify add was successful</td>
-	<td></td>
-</tr>
+<!--Verify add was successful-->
 <tr>
 	<td>verifyTextPresent</td>
 	<td>RDF upload successful.</td>
 	<td></td>
 </tr>
-<tr>
-	<td>comment</td>
-	<td class="comment">Log out</td>
-	<td></td>
-</tr>
+<!--Log out-->
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Home</td>
