@@ -45,12 +45,12 @@ core:rank
 */
 public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator implements EditConfigurationGenerator {
     public static Log log = LogFactory.getLog( AddEditWebpageFormGenerator.class );
-    
+    private static String formTemplate = "addEditWebpageForm.ftl";
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
         EditConfigurationVTwo config = new EditConfigurationVTwo();
         
-        config.setTemplate("addEditWebpageForm.ftl");
+        config.setTemplate(this.getTemplate());
         
         initBasics(config, vreq);
         initPropertyParameters(vreq, session, config);
@@ -64,8 +64,8 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         config.setN3Required(list( N3_FOR_WEBPAGE, N3_FOR_URLTYPE ));
         config.setN3Optional(list( N3_FOR_ANCHOR, N3_FOR_RANK));
         
-        config.addUrisInScope("webpageProperty",     list( core + "webpage"));
-        config.addUrisInScope("inverseProperty",     list( core + "webpageOf"));
+        config.addUrisInScope("webpageProperty",     list( this.getWebpageProperty()));
+        config.addUrisInScope("inverseProperty",     list( this.getWebpageOfProperty()));
         config.addUrisInScope("linkClass",           list( core + "URLLink"));
         config.addUrisInScope("linkURI",       list( core + "linkURI" ));
         config.addUrisInScope("linkAnchorPredicate", list( core + "linkAnchorText" ));
@@ -167,7 +167,7 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
 
         int maxRank = 0; // default value 
         if (objectUri == null) { // adding new webpage   
-            String queryStr = QueryUtils.subUriForQueryVar(MAX_RANK_QUERY, "subject", subjectUri);
+            String queryStr = QueryUtils.subUriForQueryVar(this.getMaxRankQueryStr(), "subject", subjectUri);
             log.debug("Query string is: " + queryStr);
             try {
                 ResultSet results = QueryUtils.getQueryResults(queryStr, vreq);
@@ -192,5 +192,22 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
         }
         return maxRank;
     }
+    
+    protected String getTemplate() {
+    	return formTemplate;
+    }
+    
+    protected String getWebpageProperty() {
+    	return core + "webpage";
+    }
+    
+    protected String getWebpageOfProperty() {
+    	return core + "webpageOf";
+    }
+    
+    protected String getMaxRankQueryStr() {
+    	return MAX_RANK_QUERY;
+    }
+
 
 }

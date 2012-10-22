@@ -55,7 +55,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
 
         ParamMap paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
-        paramMap.put("editForm", AddEditWebpageFormGenerator.class.getName());
+        paramMap.put("editForm", this.getEditForm());
         paramMap.put("view", "form");
         String path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
@@ -64,7 +64,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         paramMap = new ParamMap();
         paramMap.put("subjectUri", config.getSubjectUri());
         paramMap.put("predicateUri", config.getPredicateUri());
-        paramMap.put("editForm" , AddEditWebpageFormGenerator.class.getName() );
+        paramMap.put("editForm" , this.getEditForm() );
         paramMap.put("cancelTo", "manage");
         path = UrlBuilder.getUrl( UrlBuilder.Route.EDIT_REQUEST_DISPATCH ,paramMap);
 
@@ -93,7 +93,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
        
     private List<Map<String, String>> getWebpages(String subjectUri, VitroRequest vreq) {
           
-        String queryStr = QueryUtils.subUriForQueryVar(WEBPAGE_QUERY, "subject", subjectUri);
+        String queryStr = QueryUtils.subUriForQueryVar(this.getQuery(), "subject", subjectUri);
         log.debug("Query string is: " + queryStr);
         List<Map<String, String>> webpages = new ArrayList<Map<String, String>>();
         try {
@@ -110,5 +110,14 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
         }    
         
         return webpages;
+    }
+    
+    //Putting this into a method allows overriding it in subclasses
+    protected String getEditForm() {
+    	return AddEditWebpageFormGenerator.class.getName();
+    }
+    
+    protected String getQuery() {
+    	return WEBPAGE_QUERY;
     }
 }
