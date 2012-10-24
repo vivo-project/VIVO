@@ -25,7 +25,7 @@
         } ORDER BY ?rank ?anchor
     </query-select>
 
-    <query-construct>
+    <query-construct>    	
         CONSTRUCT {
             ?subject ?property ?link .
             ?link ?linkProp ?linkObj

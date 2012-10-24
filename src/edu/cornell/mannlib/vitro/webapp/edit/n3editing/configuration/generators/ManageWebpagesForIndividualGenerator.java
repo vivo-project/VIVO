@@ -37,7 +37,7 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) {
 
         EditConfigurationVTwo config = new EditConfigurationVTwo();
-        config.setTemplate("manageWebpagesForIndividual.ftl");
+        config.setTemplate(this.getTemplate());
 
         initBasics(config, vreq);
         initPropertyParameters(vreq, session, config);
@@ -119,5 +119,9 @@ public class ManageWebpagesForIndividualGenerator extends BaseEditConfigurationG
     
     protected String getQuery() {
     	return WEBPAGE_QUERY;
+    }
+    
+    protected String getTemplate() {
+    	return "manageWebpagesForIndividual.ftl";
     }
 }

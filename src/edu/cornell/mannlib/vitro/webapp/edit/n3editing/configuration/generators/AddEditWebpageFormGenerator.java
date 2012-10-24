@@ -48,68 +48,77 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     private static String formTemplate = "addEditWebpageForm.ftl";
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
-        EditConfigurationVTwo config = new EditConfigurationVTwo();
-        
-        config.setTemplate(this.getTemplate());
-        
-        initBasics(config, vreq);
-        initPropertyParameters(vreq, session, config);
-        initObjectPropForm(config, vreq);       
-                
-        config.setVarNameForSubject("subject");
-        config.setVarNameForObject("link");
-
-        config.addNewResource("link", DEFAULT_NS_FOR_NEW_RESOURCE);
-        
-        config.setN3Required(list( N3_FOR_WEBPAGE, N3_FOR_URLTYPE ));
-        config.setN3Optional(list( N3_FOR_ANCHOR, N3_FOR_RANK));
-        
-        config.addUrisInScope("webpageProperty",     list( this.getWebpageProperty()));
-        config.addUrisInScope("inverseProperty",     list( this.getWebpageOfProperty()));
-        config.addUrisInScope("linkClass",           list( core + "URLLink"));
-        config.addUrisInScope("linkURI",       list( core + "linkURI" ));
-        config.addUrisInScope("linkAnchorPredicate", list( core + "linkAnchorText" ));
-        config.addUrisInScope("rankPredicate",       list( core + "rank"));
-        
-        config.setUrisOnForm("urlType");
-        config.setLiteralsOnForm(list("url","anchor","rank"));
-
-        config.addSparqlForExistingLiteral("url",    URL_QUERY);
-        config.addSparqlForExistingLiteral("anchor", ANCHOR_QUERY);
-        config.addSparqlForExistingLiteral("rank",   MAX_RANK_QUERY);
-        config.addSparqlForExistingUris("urlType", URLTYPE_QUERY);
-            
-        config.addField(new FieldVTwo().
-                setName("url").
-                setValidators(list("nonempty", "datatype:"+XSD.anyURI.toString(), "httpUrl")).
-                setRangeDatatypeUri(XSD.anyURI.toString()));
-        
-        config.addField( new FieldVTwo().
-                setName("urlType").
-                setValidators( list("nonempty") ).
-                setOptions( 
-                    new ChildVClassesWithParent(core + "URLLink")));
-
-        config.addField(new FieldVTwo().
-                setName("anchor"));
-        
-        config.addField(new FieldVTwo().
-                setName("rank").
-                setRangeDatatypeUri(XSD.integer.toString()));
-        
-        config.addFormSpecificData("newRank", 
-                getMaxRank( EditConfigurationUtils.getObjectUri(vreq), 
-                            EditConfigurationUtils.getSubjectUri(vreq), vreq )
-                        + 1 );
-                
-        config.addValidator(new AntiXssValidation());
-        
-        //might be null
-        config.addFormSpecificData("subjectName", getName( config, vreq));
+        EditConfigurationVTwo config = setupConfig(vreq, session);
         prepare(vreq, config);
         return config;
     }
 
+    //Have broken this method down into two portions to allow for overriding of edit configuration
+    //without having to copy the entire method and before prepare is called
+    
+    protected EditConfigurationVTwo setupConfig(VitroRequest vreq, HttpSession session) throws Exception{ 
+    		
+    	EditConfigurationVTwo config = new EditConfigurationVTwo();
+    
+	    config.setTemplate(this.getTemplate());
+	    
+	    initBasics(config, vreq);
+	    initPropertyParameters(vreq, session, config);
+	    initObjectPropForm(config, vreq);       
+	            
+	    config.setVarNameForSubject("subject");
+	    config.setVarNameForObject("link");
+	
+	    config.addNewResource("link", DEFAULT_NS_FOR_NEW_RESOURCE);
+	    
+	    config.setN3Required(list( this.getN3ForWebpage(), N3_FOR_URLTYPE ));
+	    config.setN3Optional(list( N3_FOR_ANCHOR, N3_FOR_RANK));
+	    
+	    config.addUrisInScope("webpageProperty",     list( this.getWebpageProperty()));
+	    config.addUrisInScope("inverseProperty",     list( this.getWebpageOfProperty()));
+	    config.addUrisInScope("linkClass",           list( this.getURLLinkClass()));
+	    config.addUrisInScope("linkURI",       list( core + "linkURI" ));
+	    config.addUrisInScope("linkAnchorPredicate", list( core + "linkAnchorText" ));
+	    config.addUrisInScope("rankPredicate",       list( core + "rank"));
+	    
+	    config.setUrisOnForm("urlType");
+	    config.setLiteralsOnForm(list("url","anchor","rank"));
+	
+	    config.addSparqlForExistingLiteral("url",    URL_QUERY);
+	    config.addSparqlForExistingLiteral("anchor", ANCHOR_QUERY);
+	    config.addSparqlForExistingLiteral("rank",   MAX_RANK_QUERY);
+	    config.addSparqlForExistingUris("urlType", URLTYPE_QUERY);
+	        
+	    config.addField(new FieldVTwo().
+	            setName("url").
+	            setValidators(list("nonempty", "datatype:"+XSD.anyURI.toString(), "httpUrl")).
+	            setRangeDatatypeUri(XSD.anyURI.toString()));
+	    
+	    config.addField( new FieldVTwo().
+	            setName("urlType").
+	            setValidators( list("nonempty") ).
+	            setOptions( 
+	                new ChildVClassesWithParent(this.getURLLinkClass())));
+	
+	    config.addField(new FieldVTwo().
+	            setName("anchor"));
+	    
+	    config.addField(new FieldVTwo().
+	            setName("rank").
+	            setRangeDatatypeUri(XSD.integer.toString()));
+	    
+	    config.addFormSpecificData("newRank", 
+	            getMaxRank( EditConfigurationUtils.getObjectUri(vreq), 
+	                        EditConfigurationUtils.getSubjectUri(vreq), vreq )
+	                    + 1 );
+	            
+	    config.addValidator(new AntiXssValidation());
+	    
+	    //might be null
+	    config.addFormSpecificData("subjectName", getName( config, vreq));
+    	return config;
+    }
+    
     /** may be null */
     private Object getName(EditConfigurationVTwo config, VitroRequest vreq) {
         Individual ind = vreq.getWebappDaoFactory().getIndividualDao().getIndividualByURI(config.getSubjectUri());
@@ -209,5 +218,13 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     	return MAX_RANK_QUERY;
     }
 
+    
+    protected String getURLLinkClass() {
+    	return core + "URLLink";
+    }
+    
+    protected String getN3ForWebpage() {
+    	return N3_FOR_WEBPAGE;
+    }
 
 }
