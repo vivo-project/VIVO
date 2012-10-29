@@ -193,7 +193,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
     	//no literals in scope    	    
     }
 	
-    private void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
+    public void setUrisAndLiteralsOnForm(EditConfigurationVTwo editConfiguration, VitroRequest vreq) {
     	List<String> urisOnForm = new ArrayList<String>();    	
     	//If an existing person is being used as an author, need to get the person uri
     	urisOnForm.add("personUri");
@@ -228,7 +228,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	 * Set Fields and supporting methods
 	 */
 	
-	private void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
+	public void setFields(EditConfigurationVTwo editConfiguration, VitroRequest vreq, String predicateUri) {
     	setLabelField(editConfiguration);
     	setFirstNameField(editConfiguration);
     	setMiddleNameField(editConfiguration);
