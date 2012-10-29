@@ -15,7 +15,9 @@
  
     <#local linkedIndividual>
         <#if statement.award??>
-            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName!}</a>
+            <a href="${profileUrl(statement.uri("award"))}" title="award name">${statement.awardLabel!statement.localName}</a>
+        <#else>
+            <a href="${profileUrl(statement.uri("awardReceipt"))}" title="award receipt name">${statement.receiptLabel!statement.localName}</a>
         </#if>
     </#local>
 
@@ -34,4 +36,5 @@
     </#local>
 
     <@s.join [ linkedIndividual, conferredByOrg!,  dateTimeVal! ] />
+
  </#macro>
