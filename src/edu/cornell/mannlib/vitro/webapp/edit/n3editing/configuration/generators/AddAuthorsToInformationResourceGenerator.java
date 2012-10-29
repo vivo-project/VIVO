@@ -112,7 +112,7 @@ public class AddAuthorsToInformationResourceGenerator extends VivoBaseGenerator 
 	
 	//first name, middle name, last name, and new perseon for new author being created, and n3 for existing person
 	//if existing person selected as author
-	private List<String> generateN3Optional() {
+	public List<String> generateN3Optional() {
 		return list(
 		        getN3NewPersonFirstName() ,
                 getN3NewPersonMiddleName(),
