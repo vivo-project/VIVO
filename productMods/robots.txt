@@ -1,5 +1,7 @@
 User-agent: *
 Disallow: /rdf/
+Disallow: /rdflist
+Disallow: /rdflist/
 Disallow: /admin/
 Disallow: /help/
 Disallow: /images/
