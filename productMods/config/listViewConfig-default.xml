@@ -38,7 +38,9 @@
             OPTIONAL { ?object core:preferredTitle ?title }
             
             <collated>
-            OPTIONAL { ?object a ?subclass } 
+            OPTIONAL { 
+                ?object a ?subclass .
+                ?subclass vitro:inClassGroup ?classgroup . } 
             FILTER ( afn:namespace(?subclass) != "http://vitro.mannlib.cornell.edu/ns/vitro/0.7#" )   
             </collated>
         
