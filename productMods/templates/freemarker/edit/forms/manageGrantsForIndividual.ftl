@@ -11,7 +11,7 @@
 <h2>Manage Grants & Projects for ${subjectName}</h2>
 </#if>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those grants and projects you want to exclude from the profile page.
+Check those grants and projects you want <strong>EXCLUDED</strong> from the profile page.
 <script type="text/javascript">
     var grantData = [];
 </script>

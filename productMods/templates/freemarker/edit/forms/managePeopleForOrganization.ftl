@@ -5,7 +5,7 @@
 <#-- Custom form for managing web pages for individuals -->
 <h2>Manage People Affiliated with ${subjectName}</h2>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those people you want to exclude from the profile page.
+Check those people you want <strong>EXCLUDED</strong> from the profile page.
 <script type="text/javascript">
     var peopleData = [];
 </script>

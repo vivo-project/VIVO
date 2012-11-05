@@ -11,7 +11,7 @@
 <h2>Manage Publications for ${subjectName}</h2>
 </#if>
 <p style="margin-left:25px;margin-bottom:12px">
-Check those publications you want to exclude from the profile page.
+Check those publications you want <strong>EXCLUDED</strong> from the profile page.
 <script type="text/javascript">
     var publicationData = [];
 </script>
