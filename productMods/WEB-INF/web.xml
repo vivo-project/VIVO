@@ -205,6 +205,15 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>EditRequestAJAX</servlet-name>
+  	<servlet-class>edu.cornell.mannlib.vitro.webapp.edit.n3editing.controller.EditRequestAJAXController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>EditRequestAJAX</servlet-name>
+  	<url-pattern>/editRequestAJAX</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>IndexController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.search.controller.IndexController</servlet-class>
   </servlet>
