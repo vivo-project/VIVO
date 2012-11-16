@@ -62,7 +62,7 @@ ul#additional-emails li {
     width: 78%;
 }
 #individual-intro .individual-overview {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     margin-top: 10px;
     display: inline;
     clear: both;
@@ -70,7 +70,7 @@ ul#additional-emails li {
 }
 /* <------ INDIVIDUAL INTRO FOR PERSON*/
 #individual-intro.person {
-    margin-bottom: 30px;
+    margin-bottom: 0;
     position: relative;
     width: 100%;
 }
@@ -101,7 +101,7 @@ ul#individual-tools-people li {
 ul.individual-urls-people {
     clear: both;
     list-style-type: circle;
-    padding-left: 24px;
+    padding-left: 15px;
 }
 ul.individual-urls-people li {
     font-size: .875em;
@@ -109,7 +109,7 @@ ul.individual-urls-people li {
 }
 /* <------ INDIVIDUAL CORE:OVERVIEW */
 #overview {
-    clear: left;
+    clear: both;
 }
 .overview-value {
     display: inline;
@@ -128,7 +128,6 @@ div.overview-value :last-child {
 /* <------ INDIVIDUAL VISUALIZATION */
 #visualization {
     padding: 0 0 0 20px;
-    padding-top: 0;
     float: right;
     background-color: #fff;
 }
@@ -207,13 +206,9 @@ ul#individual-hasResearchArea {
 ul#individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
-    padding-left: 10px;
+    margin-right: 10px;
     border-right: 1px solid #5e6363;
 }
-ul#individual-hasResearchArea li:first-child {
-    padding-left: 0;
-}
-
 /* <------ QR Code */
 h5.qrCode {
     margin-top: 1em;

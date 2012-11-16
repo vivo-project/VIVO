@@ -40,23 +40,8 @@
         <@vp.webpages propertyGroups editable "individual-urls-people" />
     </section>
 
-    <section id="individual-info" ${infoClass!} role="region">
+    <section id="individual-info" ${infoClass!} role="region"> 
         <#include "individual-visualizationFoafPerson.ftl">    
-        <#-- Disable for now until controller sends data -->
-        <#--
-        <section id="co-authors" role="region">
-            <header>
-                <h3><span class="grey">10 </span>Co-Authors</h3>
-            </header>
-
-            <ul role="list">
-                <li role="listitem"><a href="#" title="co-author image"><img class="co-author" src="" /></a></li>
-                <li role="listitem"><a href="#" title="co-author image"><img class="co-author" src="" /></a></li>
-            </ul>
-
-            <p class="view-all-coauthors"><a class="view-all-style" href="#" title="view all">View All <img src="${urls.images}/arrowIcon.gif" alt="arrow icon" /></a></p>
-        </section>
-        -->
         
         <#include "individual-adminPanel.ftl">
         
@@ -123,8 +108,12 @@
 <#assign nameForOtherGroup = "other"> <#-- used by both individual-propertyGroupMenu.ftl and individual-properties.ftl -->
 
 <#-- Property group menu -->
-<#include "individual-propertyGroupMenu.ftl">
-
+<#-- With release 1.6 the property group is no longer used. The include statement
+     remains in the event a particular VIVO site still wants to use it with the new
+     collapsible groups.
+     
+     <#include "individual-propertyGroupMenu.ftl">
+-->
 <#-- Ontology properties -->
 <#if !editable>
 	<#-- We don't want to see the first name and last name unless we might edit them. -->
@@ -141,16 +130,22 @@
         var individualRdfUrl = '${rdfUrl}';
     </script>
 </#if>
+<script>
+    var individualLocalName = "${individual.localName}";
+</script>
 
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual.css" />',
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
+                  '<link rel="stylesheet" href="${urls.base}/css/individual/individual-property-groups.css" />',
                   '<link rel="stylesheet" href="${urls.base}/js/jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
+                  '<script type="text/javascript" src="${urls.base}/js/amplify/amplify.store.min.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/individual/propertyGroupControls.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}

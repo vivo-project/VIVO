@@ -1,7 +1,9 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 $(document).ready(function(){
-    
+        
+    $.extend(this, individualLocalName);
+
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
     $('.overview-value').truncate({max_length: 500});
     
@@ -127,5 +129,10 @@ $(document).ready(function(){
     if ( $('ul#organizationForPositionList').children('li').length < 1 && $('h3#organizationForPosition').attr('class') != "hiddenPeople" ) {
         $('a#managePeopleLink').hide();
     }
-
+   
+    // if there are webpages but no contacts (email/phone), extend
+    // the webpage border the full width. Used with "standard" profile view.
+    if ( $('h2#contactHeading').length < 1 ) {
+        $('div#webpagesContainer').css('width', '100%').css('clear','both');
+    }
 });

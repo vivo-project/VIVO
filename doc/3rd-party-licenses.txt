@@ -137,6 +137,7 @@ jai_core
 
 MIT
 ---
+amplify (licenses/mit.LICENSE.txt)
 BeanToJsonSerializer.java (licenses/mit.LICENSE.txt)
 blueprintcss (licenses/blueprintcss.LICENSE.txt)
 html5js (licenses/mit.LICENSE.txt)
