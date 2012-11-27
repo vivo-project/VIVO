@@ -22,4 +22,5 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
                   '<link rel="stylesheet" href="${urls.base}/css/individual/individual-property-groups.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
+              '<script type="text/javascript" src="${urls.base}/js/individual/propertyGroupControls.js"></script>')}
