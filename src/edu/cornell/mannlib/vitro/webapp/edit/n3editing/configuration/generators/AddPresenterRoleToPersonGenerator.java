@@ -101,9 +101,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
         conf.addSparqlForExistingUris("endField-precision", 
                 existingEndPrecisionQuery);
         
-        conf.addField( new FieldVTwo().
-                setName("existingPresentation").
-                setOptions(new IndividualsViaVClassOptions(presentationClass))                
+        conf.addField( new FieldVTwo(). // an autocomplete field
+                setName("existingPresentation") 
                 );
 
         conf.addField( new FieldVTwo().                        
@@ -131,9 +130,8 @@ public class AddPresenterRoleToPersonGenerator extends VivoBaseGenerator impleme
                 setValidators( list("nonempty") )
                 );
 
-        conf.addField( new FieldVTwo().
-                setName("existingConference").
-                setOptions(new IndividualsViaVClassOptions(conferenceClass))
+        conf.addField( new FieldVTwo(). // an autocomplete field
+                setName("existingConference") 
                 );
         
         conf.addField( new FieldVTwo().
