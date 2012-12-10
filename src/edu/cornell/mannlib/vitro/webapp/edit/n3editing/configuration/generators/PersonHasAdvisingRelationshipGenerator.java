@@ -126,10 +126,8 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
                 setValidators( list("datatype:" + XSD.xstring.toString()) )
                 );
 
-        conf.addField( new FieldVTwo().
-                setName("existingSubjArea").
-                setOptions(
-                        new IndividualsViaVClassOptions(subjAreaClass))
+        conf.addField( new FieldVTwo(). // options set by auto complete JS
+                setName("existingSubjArea") 
                 );             
 
         conf.addField( new FieldVTwo().
@@ -141,10 +139,10 @@ public class PersonHasAdvisingRelationshipGenerator extends VivoBaseGenerator im
         conf.addField( new FieldVTwo().
                 setName("degree").
                 setOptions( 
-                        new IndividualsViaVClassOptions(degreeClass))
+                    new IndividualsViaVClassOptions(degreeClass))
                 );
 
-        conf.addField( new FieldVTwo(). //options set by auto complete JS
+        conf.addField( new FieldVTwo(). // options set by auto complete JS
                 setName("existingAdvisee")                
         );                
 
