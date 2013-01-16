@@ -33,6 +33,11 @@
             	These instructions tell you how to install the Shindig-ORNG web application,
             	and how to configure it to work with VIVO.
             </p>
+            <p><em>
+                Note: these instructions assume that you will be installing VIVO on Tomcat
+                using the standard installation procedure. VIVO does not yet support ORNG
+                on containers other than Tomcat.
+            </em></p>
 
             <hr/>
 		    <h2 id="tableofcontents">Table of Contents</h2>
@@ -183,7 +188,7 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
             
             <h3 id="vivo_settings">I.iv Configure VIVO</h3>
             <p>
-            	In the VIVO distribution directory, the file called <em>deploy.properties</em>
+            	In the VIVO home directory, the file called <em>runtime.properties</em>
             	contains configuration options for the VIVO application.
             	You must set some additional parameters so VIVO will be able to communicate with Shindig-ORNG. 
             </p>
@@ -240,11 +245,8 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
                 to configure the Shindig-ORNG application and deploy it to Tomcat's webapps directory. 
             </p>
             <p>
-            	The main VIVO application must also be re-deployed in order to accept the new settings
-            	in <em>deploy.properties</em>. At the command line, from the top level of the VIVO distribution 
-                directory, type: 
-	            <pre>                ant deploy</pre>
-	            to re-deploy VIVO with the new settings.
+            	You must restart Tomcat so the main VIVO application will load the new settings
+            	in <em>runtime.properties</em>. 
             </p>
             
             <h3 id="confirm">I.vi Does it work?</h3>
@@ -267,7 +269,7 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
             <p>
             	If one of the OpenSocial tests fails, you may continue to use VIVO, but it is
             	likely that no gadgets will be shown. 
-            	You can review the warning message by seleting the "Startup Status"
+            	You can review the warning message by selecting the "Startup Status"
             	link from the "Site Admin" page.
             </p>
             
@@ -286,7 +288,7 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
             </p>
             <p>
             	The first time you bring up the search page, it may take several seconds for the gadget to 
-            	appear. After the first time, the gadget response should be must faster.
+            	appear. After the first time, the gadget response should be much faster.
             </p>
             
             <h4>Profile page</h4>
@@ -331,7 +333,7 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
             			<ul>
 	            			<li>
 	            				VIVO was not re-deployed with <tt>ant deploy</tt> after the OpenSocial
-	            				values were set in <em>deploy.properties</em>
+	            				values were set in <em>runtime.properties</em>
 	            			</li>
             			</ul>
             		</td>
@@ -403,7 +405,7 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
             		<td>
             			<ul>
 	            			<li>
-	            				<em>OpenSocial.tokenKeyFile</em> is not set in <em>deploy.properties</em>,
+	            				<em>OpenSocial.tokenKeyFile</em> is not set in <em>runtime.properties</em>,
 	            				or the file does not exist at the specified location.
 	            			</li>
             			</ul>
@@ -447,7 +449,7 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
             		<td>
             			<ul>
 	            			<li>
-	            				In <em>deploy.properties</em>, <em>OpenSocial.tokenService</em> is not set correctly.
+	            				In <em>runtime.properties</em>, <em>OpenSocial.tokenService</em> is not set correctly.
 	            			</li>
             			</ul>
             		</td>
@@ -690,11 +692,11 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
 	        <h3 id="redeploying">III.i. Re-running the deployment script</h2>
 	        
 	        <p>
-	        	The OpenSocial framework relies on several of the settings in the <em>deploy.properties</em> file, 
+	        	The OpenSocial framework relies on several of the settings in the <em>runtime.properties</em> file, 
 	        	in addition to the ones that are explicitly linked to it.
 	        </p>
 	        <p>
-	        	Each time you change the settings in <em>deploy.properties</em>, you should re-deploy
+	        	Each time you change the settings in <em>runtime.properties</em>, you should re-deploy
 	        	the framework with
 	        	<pre>          ant orng</pre>
 	        </p>
@@ -748,12 +750,12 @@ set CATALINA_OPTS=-Dshindig.host=localhost -Dshindig.port=8080 -Djava.awt.headle
 				Disabling the gadgets, as above, will remove essentially all of the OpenSocial processing
 				within VIVO. To remove the remainder of it, you can disable the connection between
 				VIVO and the OpenSocial service. Do this by removing or commenting 
-				the <em>OpenSocial</em> properties in <em>deploy.properties</em> 
+				the <em>OpenSocial</em> properties in <em>runtime.properties</em> 
 				(see <a href="#vivo_settings">section I.iv. Configure VIVO</a>).
 			</p>
 			
 			<p>
-				To make this change take effect, re-deploy VIVO and restart Tomcat.
+				Restart Tomcat to make this change take effect.
 			</p>
 			
 			<h4>Remove the OpenSocial webapp from Tomcat</h4>

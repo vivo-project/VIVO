@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>VIVO Release 1 V1.6 Upgrade Guide</title>
+        <link rel="stylesheet" href="./css/doc.css" media="screen">
+    </head>
+    <body>
+        <div id="branding" role="banner">
+            <h1 class="vivo-logo"><a href="/"><span class="displace">VIVO</span></a></h1>
+        </div>
+        <!-- Start of content -->
+        <div id="wrapper-content" role="main">
+            <h1>VIVO Release 1 V1.6 Upgrade Guide</h1>
+            <small>
+                BOGUS DATE, 2013 - Upgrading from Release 1 V1.5 to Release 1 V1.6
+            </small>
+            <p>
+                This document contains instructions on how to upgrade your 
+                installation of VIVO from Version 1.5 (or 1.5.1) to Version 1.6.  
+                This and other documentation can be found on the <a href="http://vivoweb.org/support">support page</a>
+                at <a href="http://vivoweb.org/">VIVOweb.org</a>
+            </p>
+            <p>
+                If you need to do a fresh install, please consult the VIVO Release V1.6 Installation 
+                Guide found on <a href="http://vivoweb.org/support">vivoweb.org</a>
+                or the install.html file located in the <code>doc</code>
+                directory of the VIVO source code distribution. The installation document also has a 
+                list of the required software and versions. 
+            </p>
+            <p>
+              For a description of the release contents see the <a href="./release.html">Release announcement for V1.6</a>.
+            </p> 
+            <hr/>
+		    <h3 id="tableofcontents">Table of Contents</h3>
+			<toc>
+				<ol class="roman2">
+					<li><a href="#preparation">Before Performing the Upgrade</a></li>
+					<li>
+					    <a href="#changes">Noteworthy Changes</a>
+	                    <ol class="roman2">
+	                        <li><a href="#more_portable">VIVO becomes more portable</a></li>
+	                        <li><a href="#solr_insecure">Solr is no longer secured</a></li>
+	                        <li><a href="#BOGUS">ANYTHING ELSE?</a></li>
+	                    </ol>
+					</li>					
+					<li><a href="#upgrade_process">Upgrade Instructions</a></li>
+					<li><a href="#kbm">Knowledge Base Migration</a></li>
+					<li><a href="#termsofuse">Review the VIVO Terms of Use</a></li>
+					<li><a href="#nextsteps">Next Steps</a></li>
+				</ol>
+			</toc>
+			<hr/>
+            <h3 id="preparation">I. Before Performing the Upgrade</h3>
+            <br/>
+                Create backups of: 
+            <ul style="list-style-type: square;">
+                <li>
+                    The VIVO distribution directory (which contains the source for VIVO 1.5 or VIVO 1.5.1)
+                </li>
+                <li>
+                    The VIVO home directory (pointed to by your deploy.properties file)
+                </li>
+                <li>
+                    The webapps directory in Tomcat 
+                </li>
+                <li>
+                    MySQL database (most people use mysqldump to create the backup) 
+                </li>
+            </ul>
+            <p>
+                The upgrade process is similar to the initial install process 
+                with  
+                the following exceptions: 
+            </p>
+            <ul>
+                <li>
+                    You do not need to reinstall MySQL or recreate the MySQL database. Please 
+                    backup your MySQL database as noted above. 
+                </li>
+                <li>
+                    First-time login of the root account after the upgrade  
+                    process is complete will use the password previously set (not the 
+                    default password used on the first login after the initial  
+                    installation.) 
+                </li>
+                <li>
+                    The first time Apache Tomcat starts up after the upgrade, an automated 
+                    process will modify the knowledge base to align the  
+                    data with any ontology updates made for the new release. See the section on the <a href="#kbm">Knowledge Base Migration</a>
+                    below for more information. 
+                </li>
+            </ul>
+
+            <h3 id="changes">II. Noteworthy Changes</h3>
+            	<ul>
+            	    <li>
+                	    <h4 id="more_portable">VIVO becomes more portable</h4>
+             	        <p>
+             	        	The VIVO build script now includes a <code>distribute</code> target that will produce
+             	        	a file called <code>distribution.tar.gz</code>. This compressed archive contains
+             	        	these files:
+             	        	<ol>
+             	        	    <li><code>vivo.war</code> -- a WAR file for the main VIVO application.</li>
+             	        	    <li><code>vivosolr.war</code> -- a WAR file for the Solr application.</li>
+             	        	    <li><code>solrhome.tar</code> -- a Solr home directory that is configured for use with VIVO.</li>
+             	        	</ol>
+             	        	These files can be used with Tomcat, or with any container that supports 
+             	        	the Java Servlet 2.4 Specification.
+             	        </p>
+             	        <p>
+             	            To permit this portability, the <code>deploy.properties</code> file
+             	            has been split in two. <code>build.properties</code> contains only the properties
+             	            that are required for building VIVO. <code>runtime.properties</code>, 
+             	            which must be created in the Vitro home directory, contains the properties
+             	            that VIVO uses while running.
+             	        </p>
+             	        <p>
+             	        	If you are building to <code>deploy</code> to Tomcat (as with previous releases),
+             	        	then <code>build.properties</code> must contain these properties:
+             	        	<ul>
+             	        		<li><code>vitro.core.dir</code></li>
+             	        		<li><code>webapp.name</code></li>
+             	        		<li><code>tomcat.home</code></li>
+             	        		<li><code>vitro.home</code> <em>-- note that this was <code>vitro.home.directory</code>
+             	        		in previous releases</em></li>
+             	        	</ul>
+             	        </p>
+             	        <p>
+             	        	If you are building to <code>distribute</code>, the <code>build.properties</code>
+             	        	file requires only these properties:
+             	        	<ul>
+             	        		<li><code>vitro.core.dir</code></li>
+             	        		<li><code>webapp.name</code></li>
+             	        	</ul>
+             	        </p>
+
+                	    <h4 id="solr_insecure">Solr is no longer secured</h4>
+             	        <p>
+             	            In previous releases, Solr was deployed to Tomcat with a <code>RemoteAddrValve</code>
+             	            that would only permit access from certain IP addresses. 
+             	            Acceptable IP addresses were those which matched the regular expression pattern in
+             	            the <code>vitro.local.solr.ipaddress.mask</code> property.
+             	        </p>
+             	        <p>
+             	            This has been removed because:
+             	            <ul>
+             	                <li>It caused repeated problems for sites who were experimenting with VIVO.</li>
+             	                <li>It was not standards-based, but specific to Tomcat.</li>
+             	                <li>It was redundant. Production instances of VIVO are 
+             	                usually hidden behind a firewall and accessed through an Apache Http server.</li>
+             	            </ul>
+             	        </p>
+             	        <p>
+             	            Sites that need to secure Solr are now left to their own devices.
+             	        </p>
+
+                	    <h4 id="BOGUS">ANYTHING ELSE?</h4>
+             	        <p>
+             	        </p>
+                	</li>
+            	    <li>
+                	    <h4 id="browsers">Supported Browsers</h4>
+                	    <p>
+            	            For this release, the following browsers are supported.
+            	            BOGUS IS THIS LIST CURRENT?
+             	        </p>
+                	    <p>
+            	            Mac:
+             	        </p>
+             	        <ul>
+             	            <li>Chrome 8.0.552.237</li>
+             	            <li>FireFox 3.6.13</li>
+             	            <li>Opera 10.6.2</li>
+             	            <li>Safari 5.0.3</li>
+             	        </ul>
+                	    <p>
+            	            PC:
+             	        </p>
+             	        <ul>
+             	            <li>Chrome 8.0.552.273</li>
+             	            <li>FireFox 10.0.2</li>
+             	            <li>Internet Explorer 7, 8, 9</li>
+             	            <li>Opera 10.6.2</li>
+             	        </ul>
+                	</li>
+               </ul>
+
+
+                <h3 id="#upgrade_process">III. Upgrade Instructions</h3>
+
+                <p>
+                    1. Download the new distribution file and unpack it into a new 
+                    source directory. 
+                </p>
+                <p>
+                    2. Separate your existing <code>deploy.properties</code> file into two files,
+                    as described below. The new <code>build.properties</code> file is stored in
+                    the top level of the VIVO distribution directory. The new <code>runtime.properties</code>
+                    file is stored in your Vitro home directory.
+                    <br>
+                </p>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <th width="50%">
+                            Properties in <code>build.properties</code> 
+                        </th>
+                        <th>
+                            Properties in <code>runtime.properties</code> 
+                        </th>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                            <code>vitro.core.dir</code><br>
+                            <code>vitro.home</code><br>
+                            <code>tomcat.home</code><br>
+                            <code>webapp.name</code><br>
+                        </td>
+                        <td>
+                             All other properties from <code>deploy.properties</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <em>Note that <code>vitro.home</code> replaces <code>vitro.home.directory</code></em>
+                            <br> 
+                            <em>Note that <code>vitro.local.solr.ipaddress.mask</code> is no longer used.</em>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            	    <br>
+            	    If you prefer, you may start with <code>example.build.properties</code> 
+            	    and <code>example.runtime.properties</code>, make copies, 
+            	    and edit them to suit your installation.
+
+                <p>
+                    <!-- runtime.properties table from install.html -->
+                </p>
+            <table border='1' bordercolor="#CCCCCC" cellspacing="5">
+                <tbody>
+                    <tr>
+                        <th>
+                            Property Name 
+                        </th>
+                        <th>
+                            Example Value 
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        	BOGUS: ANY NEW PROPERTIES TO ADD?
+                        </td>
+                    </tr>
+                    <tr class="odd_row blue">
+                        <td>
+                          BOGUS.PROPERTYNAME
+                        </td>
+                        <td>
+                           BOGUS EXAMPLE VALUE
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+                <p>
+                    3. Apply any previous changes you have made to the new source 
+                    directory. 
+                </p>
+                <blockquote>
+                    <strong>Special notes regarding source files</strong>
+                    <ul>
+                        <li>
+                            This process assumes any changes made to the application were  
+                            made in the source directory and deployed, and were not made directly 
+                            within the Tomcat webapps directory. 
+                        </li>
+                        <li>
+                            In many cases, simply copying the modified files from your 
+                            original source directory will not work since the files on which they  
+                            are based have changed. It will be necessary to inspect the new source 
+                            files and add any changes to them at that time. 
+                        </li>
+                        <li>
+                            NIH-funded VIVO implementations will need to apply the 
+                            Google Analytics Tracking Code (GATC) to <code>googleAnalytics.ftl</code>
+                            in the theme:<pre>[new_source_directory]/themes/[theme_dir]/templates/googleAnalytics.ftl</pre>
+                            A sample <code>googleAnalytics.ftl</code> is included in the built-in 
+                            theme. This file serves only as an example, and you must replace the  
+                            tracking code shown with your institution's own tracking code. For 
+                            additional information about the GATC for the NIH-funded VIVO  
+                            implementation sites and a copy of your institution's tracking code, 
+                            see the <a href="https://confluence.cornell.edu/display/ennsrd/Google+Analytics+for+UI">VIVO
+                                Google
+                                Analytics
+                                wiki
+                                page</a>. 
+                        </li>
+                    </ul>
+                </blockquote>
+                <p>
+                    5. Stop Apache Tomcat and from your VIVO source directory, run 
+                    ant  
+                    by typing: <code>ant all</code>
+                </p>
+                <p>
+                    6. Start Apache Tomcat and log into VIVO as the root user when the upgrade is 
+                    completed.  Depending on the size of your database, the migration process may  
+                    take up to several hours. When it is complete, you will 
+                    see a message in the catalina.log file that the server has started.<pre>INFO: Server startup in XXXXX ms</pre>
+                </p>
+                <p>
+                    7. As root or an administrator, request a rebuild of the Solr search index: 
+                    Go to the "Site Admin" page and click on "Rebuild Search Index" under the  
+                    heading "Refresh Content". 
+                </p>
+                <p>
+                    8. Review and save aside the knowledge base migration logs. 
+                    The knowledge base migration process described in the next section will generate logs. 
+                    These logs will be overwritten if you redeploy the VIVO application (but not if you restart tomcat), and since
+                    they may be a useful reference if questions come up about your 1.6 VIVO data after deployment, 
+                    you should save them aside.
+                    The logs are created in the Tomcat <code>webapps/vivo/WEB-INF directory</code>:
+                </p>
+                <dl>
+                    <dt>
+                        <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).log</code>
+                    </dt>
+                    <dd>
+                        A log of a summary of updates that were made to the knowledge 
+                        base. This file should end with "Finished knowledge base migration". 
+                        If this file contains any warnings they should be reviewed with your 
+                        implementation team representative to see whether any corrective action needs to be taken. 
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <code>ontologies/update/logs/knowledgeBaseUpdate.(timestamp).error.log</code>
+                    </dt>
+                    <dd>
+                        A log of errors that were encountered during the upgrade 
+                        process. This file should be empty if the upgrade was successful. If any errors are encountered
+                        you will need to rerun the knowledge base migration.
+                    </dd>
+                </dl>
+ 
+                <h3 id="#kbm">IV. Knowledge Base Migration</h3>
+                
+                                <p>
+                    Changes to the VIVO core ontology may require corresponding 
+                    modifications to the knowledge base instance data and ontology annotations.
+                    When VIVO first starts up following the upgrade, it will 
+                    initiate a process to examine the knowledge base and apply necessary  
+                    changes. The knowledge base migration process for release 1.6 will make
+                    the following types of changes: 
+                </p>
+                <dl>
+                    <dt>
+                    	BOGUS CHANGES
+                    </dt>
+                </dl>
+                <dl>
+                    <dt>
+                        Annotation property default values 
+                    </dt>
+                    <dd>
+                        If a site has modified the value of a vitro annotation (such as  
+                        displayRankAnnot or displayLimitAnnot) so that it is no longer using 
+                        the default, then that setting will be left unchanged. 
+                        <br>
+                        If a site is using the default value of a vitro annotation, and the 
+                        default has been changed in the new version of the ontology, then the  
+                        new default value will be propagated to the knowledge base. 
+                    </dd>
+                </dl>
+                <p>
+                    In addition to the logs described in <strong>step 8</strong> of the <a href="#upgrade_process">previous section</a>, the knowledge base migration
+                    process will log copies of all additions and deletions that were made to the knowledge base in the following files:
+                </p>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/removedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were removed from the knowledge base. 
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <code>webapps/vivo/WEB-INF/ontologies/update/changedData/addedData.n3</code>
+                    </dt>
+                    <dd>
+                        An N3 file containing all the statements that were added to the knowledge base. 
+                    </dd>
+                </dl>
+                
+                <h3 id="termsofuse">V. Review the VIVO Terms of Use</h3>
+                <p>
+                    VIVO comes with a "Terms of Use" statement linked from the footer.  The "Site Name" 
+                    you assign in the "Site Information" form under the <strong>Site Admin</strong>
+                    area will be 
+                    inserted into the "Terms of Use" statement.  If you want to edit the text content more than just 
+                    the "Site Name", the file can be found here:<pre>[vivo_source_dir]/vitro-core/webapp/web/templates/freemarker/body/termsOfUse.ftl</pre>
+                    Be sure to make the changes in your source files and deploy them to your tomcat so you don't lose 
+                    your changes next time you deploy for another reason.
+                </p>
+                <h3 id="nextsteps">Next Steps</h3>
+                <p>
+                    Now that you have VIVO up and running, please refer to the 
+                    <a href="https://wiki.duraspace.org/display/VIVO/Site+Administrator+Guide">Site Administrator's Guide</a>
+                    for information about its operation.
+                </p>
+                </div>
+            
+                <!-- #wrapper-content -->
+                <div id="footer" role="contentinfo">
+                    <p class="copyright">
+                        <small>
+                            &copy;2013 All Rights Reserved
+                        </small>
+                        | Powered 
+                        by <a class="powered-by-vivo" href="http://vivoweb.org" target="_blank"><strong>VIVO</strong></a>
+                    </p>
+                    <div id="nav" role="navigation">
+                        <ul id="footer-nav" role="list">
+                            <li role="listitem">
+                                <a href="http://vivoweb.org/about">About</a>
+                            </li>
+                            <li role="listitem">
+                                <a href="http://vivoweb.org/contact">Contact Us</a>
+                            </li>
+                            <li role="listitem">
+                                <a href="http://www.vivoweb.org/support" target="blank">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- #footer -->
+
+        </div>
+    </body>
+</html>

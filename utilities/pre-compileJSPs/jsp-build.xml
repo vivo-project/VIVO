@@ -10,23 +10,23 @@
 	 ".build/war" directory is current.
 	     ====================================================================== -->
 <project name="Check JSPs for compile errors" default="all" basedir="../..">
-	<!-- Get tomcat.home and webapp.name from the deploy.properties file. -->
-	<property name="deploy.properties.file" location="deploy.properties" />
-	<fail message="You must create a &quot;${deploy.properties.file}&quot; file.">
+	<!-- Get tomcat.home and webapp.name from the build.properties file. -->
+	<property name="build.properties.file" location="build.properties" />
+	<fail message="You must create a &quot;${build.properties.file}&quot; file.">
 		<condition>
 			<not>
-				<available file="${deploy.properties.file}" />
+				<available file="${build.properties.file}" />
 			</not>
 		</condition>
 	</fail>
-	<property file="${deploy.properties.file}" />
+	<property file="${build.properties.file}" />
 	<fail unless="tomcat.home"
-	      message="${deploy.properties.file} must contain a value for tomcat.home" />
+	      message="${build.properties.file} must contain a value for tomcat.home" />
 	<fail unless="webapp.name"
-	      message="${deploy.properties.file} must contain a value for webapp.name" />
+	      message="${build.properties.file} must contain a value for webapp.name" />
 
 	<property name="build.jsp.dir" location=".build/jsp" />
-	<property name="build.war.dir" location=".build/war" />
+	<property name="build.webapp.dir" location=".build/main/webapp" />
 
 	<!-- Where are the Tomcat classes? -->
 	<path id="jasper.classpath">
@@ -41,8 +41,8 @@
 	<!-- Add in the project classes -->
 	<path id="compile.classpath">
 		<path refid="jasper.classpath" />
-		<pathelement location="${build.war.dir}/WEB-INF/classes" />
-		<fileset dir="${build.war.dir}/WEB-INF/lib">
+		<pathelement location="${build.webapp.dir}/WEB-INF/classes" />
+		<fileset dir="${build.webapp.dir}/WEB-INF/lib">
 			<include name="*.jar" />
 		</fileset>
 	</path>
@@ -65,7 +65,7 @@
 
 	<target name="jspc" depends="prepare">
 		<jasper2 validateXml="false"
-		         uriroot="${build.war.dir}"
+		         uriroot="${build.webapp.dir}"
 		         webXmlFragment="${build.jsp.dir}generated_web.xml"
 		         outputDir="${build.jsp.dir}/src"
 		         trimSpaces="true"

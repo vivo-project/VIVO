@@ -4,3 +4,5 @@
 /.settings
 /bin/
 /deploy.properties
+/build.properties
+/runtime.properties

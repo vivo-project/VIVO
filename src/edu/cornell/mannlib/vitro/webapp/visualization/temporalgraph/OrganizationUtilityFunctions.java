@@ -120,7 +120,7 @@ public class OrganizationUtilityFunctions {
 					.getProperty("visualization.topLevelOrg");
 		
 		/*
-		 * First checking if the staff has provided highest level organization in deploy.properties
+		 * First checking if the staff has provided highest level organization in runtime.properties
 		 * if so use to temporal graph vis.
 		 */
 		if (StringUtils.isNotBlank(staffProvidedHighestLevelOrganization)) {

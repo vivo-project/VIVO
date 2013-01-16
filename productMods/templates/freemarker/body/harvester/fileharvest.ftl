@@ -16,7 +16,7 @@
         
         <h2><a class="ingestMenu" href="${urls.base}/ingest" title="Return to the Data Ingest Tools menu">Ingest Menu</a> > ${jobSpecificHeader}</h2>
         
-        <#-- check to ensure harvester.location is set in deploy.properties -->
+        <#-- check to ensure harvester.location is set in runtime.properties -->
         <#if harvesterLocation?has_content>
             
             <script type="text/javascript">
@@ -181,7 +181,7 @@
                 
                 <ol>
                     <li>VIVO Harvester is installed.</li>
-                    <li>The <em>harvester.location</em> property in deploy.properties is pointed to the Harvester installation directory.</li>
+                    <li>The <em>harvester.location</em> property in runtime.properties is pointed to the Harvester installation directory.</li>
                     <li>In VIVO Harvester, the web server user (typically tomcat6) has read and write access to the <em>vivo/</em> directory and all of its children.</li>
                     <li>In VIVO Harvester, the <em>logs/</em> directory exists and the web server user has read and write access to it.</li>
                     <li>In VIVO Harvester, the file <em>vivo/config/vivo.xml</em> is properly configured with your database information and namespace.</li>
@@ -265,7 +265,7 @@
         <#else>
             
             <div id="fileHarvestErrorHelp">
-                <p>The <em>harvester.location</em> property in deploy.properties is undefined.</p>
+                <p>The <em>harvester.location</em> property in runtime.properties is undefined.</p>
                 
                 <p>In order to use this feature, please define a value for this property that points to the Harvester installation directory before redeploying and restarting the application.</p>
             </div>
