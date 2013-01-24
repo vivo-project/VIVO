@@ -305,7 +305,7 @@
                             Directory where the VIVO application will store 
                             the data that it creates. This includes uploaded files (usually images) 
                             and the Solr search index. Be sure this directory exists and is  
-                            writable by the user who the Tomcat service is running as. 
+                            writable by the Tomcat service. 
                         </td>
                     </tr>
                     <tr class="odd_row">
@@ -714,13 +714,88 @@
 
                     <tr>
                         <td colspan="2">
+                          Force VIVO to use a specific language or Locale instead of those 
+                          specified by the browser. 
+                          This affects RDF data retrieved from the model, if RDFService.languageFilter is true.  
+                          This also affects the text of pages that have been modified to support multiple languages. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          languages.forceLocale
+                        </td>
+                        <td>
+                          en_US
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                          A list of supported languages or Locales that the user may choose to
+                          use instead of the one specified by the browser. Selection images must
+                          be available in the i18n/images directory of the theme.
+                          This affects RDF data retrieved from the model, if RDFService.languageFilter is true.  
+                          This also affects the text of pages that have been modified to support multiple languages. 
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          languages.selectableLocales
+                        </td>
+                        <td>
+                           en, es, fr_FR
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                          <b>For developers only.</b>
+                          Defeat the Freemarker template cache, so each template
+                          is read from disk on each request. This permits developers to immediately
+                          see the effect of changes to the template. The default is <code>false</code>, which
+                          means that a cached copy of each template will be used for 60 seconds 
+                          before the disk is checked for a new version.
+                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          developer.defeatFreemarkerCache
+                        </td>
+                        <td>
+                          false
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                          <b>For developers only.</b>
+                          Defeat the cache of language-specific text strings,
+                          so the language file is read from disk on each request.
+                          This permits developers to immediately
+                          see the effect of changes to the text strings. 
+                          The default is <code>false</code>, which means that the language file is 
+                          read when VIVO starts up, or when a new theme is selected.
+                          <br/><b>Setting this option to "true" slows down VIVO performance.</b>
+                        </td>
+                    </tr>
+                    <tr class="odd_row">
+                        <td>
+                          developer.defeatI18nCache = true
+                        </td>
+                        <td>
+                          false
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
 							These values are used when deploying VIVO as an OpenSocial container
 							and integrating with OpenSocial gadgets 
 							(see <a href="#opensocial">Step 13</a>, below). If you are creating
 							a VIVO installation that does not use OpenSocial gadgets, these values are omitted.
                         </td>
                     </tr>
-
                     <tr class="odd_row">
                         <td>
                           OpenSocial.shindigURL<br>

@@ -59,6 +59,9 @@ edu.cornell.mannlib.vitro.webapp.services.shortview.ShortViewServiceSetup
 
 edu.ucsf.vitro.opensocial.OpenSocialSmokeTests
 
+# For multiple language support
+edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionSetup
+
 # Add VIVO specific DocumentModifers, this must come before SolrSetup
 edu.cornell.mannlib.vitro.webapp.search.solr.VivoDocumentModifiers
 

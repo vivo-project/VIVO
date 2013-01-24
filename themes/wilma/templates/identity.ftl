@@ -9,6 +9,7 @@
 
     <nav role="navigation">
         <ul id="header-nav" role="list">
+            <#include "languageSelector.ftl">
             <li role="listitem"><a href="${urls.index}" title="index">Index</a></li>
             <#if user.loggedIn>
                 <#-- COMMENTING OUT THE EDIT PAGE LINK FOR RELEASE 1.5. WE NEED TO IMPLEMENT THIS IN A MORE 

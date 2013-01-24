@@ -82,6 +82,16 @@
   </filter-mapping>
 
   <filter>
+    <description>Override the Locale in the HttpRequest, if appropriate.</description>
+    <filter-name>Locale selection filter</filter-name>
+    <filter-class>edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Locale selection filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
     <filter-name>JSession Strip Filter</filter-name>
     <filter-class>edu.cornell.mannlib.vitro.webapp.filters.JSessionStripFilter</filter-class>
   </filter>
@@ -1399,6 +1409,16 @@
   <servlet-mapping>
     <servlet-name>GadgetController</servlet-name>
     <url-pattern>/orng/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description>Multiple-language support. Allows user to select his preferred langauge</description>
+    <servlet-name>LocaleSelectionController</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.i18n.selection.LocaleSelectionController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LocaleSelectionController</servlet-name>
+    <url-pattern>/selectLocale</url-pattern>
   </servlet-mapping>
 
     
