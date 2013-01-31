@@ -15,5 +15,5 @@
      
 -->
 <#if shouldVIVOrenderVis>
-	<#include "personPublicationCountNoSparkline.ftl"> 
+	<#include "personPublicationSparklineContent.ftl"> 
 </#if>
