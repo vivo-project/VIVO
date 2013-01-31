@@ -14,9 +14,11 @@ ul#individual-tools li {
 ul#individual-phone {
     clear: both;
     list-style-type: circle;
+    margin-left: 15px;
 }
 ul#individual-phone li {
     font-size: .875em;
+    line-height: 1.5em;
 }
 ul#individual-phone li:last-child {
     margin-bottom: 10px;
@@ -25,26 +27,35 @@ ul#individual-phone li:first-child {
     margin-top: 10px;
 }
 .icon-phone, .icon-email {
-    padding-right: 5px;
+    padding-right: 2px;
 }
 #individual-intro ul.individual-urls {
     list-style-type: circle;
-    margin-left: 20px;
+    margin-left: 15px;
 }
 #individual-intro ul.individual-urls li {
     font-size: .875em;
-    line-height: 1.7em;
+    line-height: 1.5em;
+    padding-bottom:5px;
 }
 ul.individual-emails {
     clear: both;
     padding-left: 0;
+    list-style-type: circle;
+    margin-left: 20px;
 }
 #additional-emails li:last-child {
     margin-bottom: 18px;
 }
 ul.individual-emails li {
     font-size: .875em;
-    line-height: 1.3em;
+    line-height: 1.5em;
+}
+ul#individual-phone {
+    list-style: url(../../images/phoneIconSmall.gif);
+}
+ul.individual-emails {
+    list-style: url(../../images/emailIconSmall.gif);
 }
 ul#webpages{
     margin-bottom: 5px;
@@ -83,11 +94,9 @@ ul#additional-emails li {
     width: 100%;
     float: none;
 }
-ul#individual-tools-people {
-    margin-top: 5px;
+div#individual-tools-people {
     height: 20px;
-    padding-bottom: 20px;
-    list-style-type: none;
+    padding-bottom: 24px;
     clear: both;
     margin-bottom: 15px;
 }
@@ -126,12 +135,12 @@ div.overview-value :last-child {
     width: 100%;
 }
 /* <------ INDIVIDUAL VISUALIZATION */
-#visualization {
+#right-hand-column {
     padding: 0 0 0 20px;
     float: right;
     background-color: #fff;
 }
-#visualization h3 {
+#right-hand-column h3 {
     padding-top: 10px;
     margin-bottom: 10px;
 }
@@ -231,7 +240,7 @@ a.qrCloseLink {
 }
 /* MISCELLANEOUS------>  */
 .listDateTime {
-    padding: 0.2em 0.4em;
+    padding: 0 0.4em;
     font-size: 0.8em;
     background: #f4f4f4;
 }

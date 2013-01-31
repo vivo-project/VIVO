@@ -1,0 +1,32 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* Fix for quickview admin panel */
+#admin {
+    font-size:0.75em;
+    padding:0 0 0 0;
+    margin:0 0 0 0;
+    width:54%;
+}
+#admin h3 {
+    color:#fff;
+    font-size:12px;
+    padding:2px 2px 2px 2px;
+    margin:0 0 0 0;
+    float:left;
+}
+a.edit-individual {
+    margin-left:5px;
+    padding-bottom:5px;
+    float:left;
+}
+#verbose-mode {
+    padding-left:0px;
+    float:right;
+}
+
+#admin .uri-link {
+    padding-left:8px;
+}
+#verbose-mode .small {
+    padding:3px 3px 3px 3px;
+}

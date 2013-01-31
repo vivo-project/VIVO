@@ -1,0 +1,297 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* <------ INDIVIDUAL INTRO */
+#individual-intro {
+    margin-top: 15px;
+    margin-bottom: 0px; /*    margin-bottom: 20px;  out for redesign*/
+    position: relative;
+    overflow: hidden;
+}
+/* <------ INDIVIDUAL INTRO - LEFT SIDE CONTENT */
+#share-contact {
+    position: relative;
+    width: 166px;
+    float: left;
+    padding-right: 1.5em;
+    margin-right: 12px; /* added for redesign */
+    margin-bottom: 20px;
+}
+img.individual-photo {
+    width: 160px;
+    margin-left: 0;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px; /* changed for redesign, was 20px  */
+}
+ul#phone-list {
+    font-size:0.9em;
+}
+#primary-email {
+    margin-top: 0; 
+}
+#primary-email li:last-child, /* added for redesign */
+#additional-emails li:last-child {
+    margin-bottom: 0; /* changed for redesign, was 18px */
+}
+
+/* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
+.display-title-not-editable {
+    float-left;
+    font-size:1.15em;
+/*    padding-right:5em; */
+}
+.display-title-editable {
+    padding-left:0 !important;
+    margin-left:0 !important;
+    font-size:1em !important;
+    border:none !important;
+    display:inline-block;
+}
+div#titleContainer {
+    display:inline-block;
+}
+#individual-info  {
+    margin-top:6px;
+}
+#individual-info h2 {
+    padding: 25px 0 10px 0; /* changed for redesign, was padding-bottom: 10px */
+    clear:both; /* added for redesign */
+}
+#individual-info h2#contactHeading {
+    margin-bottom: 8px;
+}
+#individual-info h3#contact {
+    padding: 7px 0 5px 0;
+    margin:0 0 0 0 ;
+}
+h3.primary-email {
+    margin-top: -8px !important;
+}
+#individual-intro.person {
+    margin-bottom: 0; /* changed for redesign, was 30px */
+    position: relative;
+    width: 100%;
+}
+#individual-info h1.foaf-person {
+    float:left;
+    padding-right:8px;
+    height:20px; 
+    margin:-3px 8px 5px 0;
+}
+div#profileTypeContainer {
+    position:absolute;
+    right:0;
+    top:135px;
+}
+div#profileTypeContainer select {
+    float:none;
+    display:inline-block;
+    padding: .5em;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E0DFDF;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 14px;
+    margin-bottom: 0.8em;
+}
+div#profileTypeContainer h2 {
+    float:none;
+    display:inline-block;
+    margin: 0 0 0 0;
+    font-weight:bold;
+    font-size:1em;
+    color:#5e6363;
+    padding:0 0 0 0;
+}
+span.iconControlsEditable {
+    position:absolute;
+    right:0;
+    top:82px;
+}
+span.iconControlsNotEditable {
+    position:absolute;
+    right:0;
+    top:3px; 
+}
+#overview {
+    clear: both; /* changed for redesign, was left */
+}
+/* <------ INDIVIDUAL VISUALIZATION */
+#visualization {
+    padding: 0 0 0 0; /* changed for redesign, was 0 0 0 20px */
+    background: #fff; /* added for redesign */
+    width:174px; /* added for redesign */
+    float:none; /* float:right; out for redesign */
+}
+#visualization h3 {
+    padding-top: 10px;
+    margin-bottom: 0; /* changed for redesign, was 10px */
+}
+p#networks {
+    margin-bottom:10px;
+}
+.collaboratorship-link-separator { /* added for redesign */
+    margin-top: 10px;
+    border-top: 1px solid #DDE4E3;
+    padding-top: 10px;
+}
+.sparkline_text {
+    font-size: .9em; /* changed for redesign, was .8em */
+    text-align: left;
+    line-height: 1.5em;
+    width: 180px;
+}
+span.collaboratorship-link a img{
+    vertical-align:middle;
+}
+td#totalPubs { /* added for redesign */
+    font-size: 1.35em;
+    background: url(../../images/individual/pub-total-bkgrnd.png) top left no-repeat;
+    text-align:center;
+    vertical-align:middle;
+    width:48px;
+    height:48px;
+}
+td#tenYearCount { /* added for redesign */
+    font-size: .85em;
+    padding-left:10px;
+    vertical-align:middle;
+}
+.infoIcon {
+    padding-right: 0;
+}
+div#pub_count_short_sparkline_vis {
+    margin-top: 4px; 
+    height: 48px; 
+    margin-bottom: 20px;
+}
+/* <------ INDIVIDUAL TEMPORAL GRAPH */
+#temporal-graph {
+    padding: 0 3px 8px 0; /* changed for redesign, was 0 3px 20px 0 */
+    background-color: #fff;
+    margin-top: -4px; /* added for redesign */
+}
+#temporal-graph h3 img {
+    padding-right: 10px;
+    vertical-align: middle; /* changed for redesign, was text-top */
+}
+
+/* <------ INDIVIDUAL MAP O' SCIENCE */
+#map-of-science {
+    padding: 0 3px 24px 0; /* changed for redesign, was 0 3px 20x 0 */
+    background-color: #fff;
+}
+#map-of-science h3 img {
+    padding-right: 10px;
+    vertical-align: middle; /* changed for redesign, was text-top */
+}
+
+/* <------ POSITIONS */
+ul#individual-personInPosition {
+    list-style-type: circle;
+    padding-left: 10px; /* changed for redesign, was 20px */
+    margin: 10px 0 0 0; /* added for redesign */
+}
+ul#individual-personInPosition li {
+    line-height: 1em;
+    padding-bottom:10px; /* changed for redesign, was 15px */
+}
+ul#individual-personInPosition li:last-child {
+    padding-bottom: 3px; /* changed for redesign, was 15px */
+}
+
+/* <------ CONTACTS AND WEBPAGES */
+div#contactsWebpages {
+    width:100%;
+    display:inline;
+    clear:both
+}
+div#contactContainer {
+    width:50%;
+    float:left;
+    clear:both;
+    padding:0 21px 0 0;
+}
+div#webpagesContainer {
+    width:47%;
+    float:left;
+    clear:right;
+    padding:0 0 0 0;
+}
+div#contactOuterDiv {
+    width:100%;
+    display:inline;
+}
+div#contactEmailDiv {
+    width:68%;
+    float:left;
+    overflow:hidden;
+}
+div#contactPhoneDiv {
+    width:32%;
+    float:right;
+    text-align:right;
+}
+/* <------ RESEARCH AREA */
+ul#individual-hasResearchArea li {
+    float: left;
+    padding-right: 10px;
+    margin-right: 10px; /* added for redesign */
+    padding-left: 0;  /* padding-left: 10px; out for redesign */
+    border-right: 1px solid #5e6363;
+}
+h2#researchAreas  {
+    vertical-align:bottom;
+}
+/* <------ QR Code */
+span#qrCodeImage {
+    position: absolute;
+    top: 30px; /* changed for redesign, was -9em */
+    left: -120px !important; /* added for redesign */
+    width:180px; /* added for redesign */
+    border: solid 2px #ccc;
+    background: #fff; /* changed for redesign, was #fff */
+    text-align:middle; /* added for redesign */
+    overflow:visible;
+}
+span#qrCodeImage img {
+    padding: 1.7em 1.7em 0 1.7em; /* changed for redesign, was 1.7em 1.7 em 0 1.7 em */
+}
+a.qrCloseLink {
+    float: right; 
+    padding-right: 1em; /* added for redesign */
+    margin-right: 0; /* margin-right: .5em out for redesign */
+    font-size: .8em;
+}
+/* MISCELLANEOUS------>  */
+span#quickViewLink {
+    clear:both;
+    padding-left:47%;
+}
+span#quickViewLink img {
+    margin-top:35px;
+}
+
+a#manageLabels { /* added for redesign but will work with existing templates */
+    margin-left:20px;
+    font-size:0.7em;
+}
+/****** FROM WILMA.CSS ******/
+#individual-info h2.mainPropGroup { 
+    border-bottom: 1px solid #DDE4E3;
+    padding-bottom:1px;
+    margin-bottom:8px;
+}
+#individual-info div#contactContainer h3{ 
+    color:#8aa149; 
+}
+ul#individual-personInPosition li {
+    padding-bottom:12px;
+    margin-left:10px; 
+    line-height: 1.25em !important;
+}
+ul#individual-personInPosition li:last-child { 
+    padding-bottom: 0;
+}
+td#totalPubs { 
+    color: #2485AE;
+}

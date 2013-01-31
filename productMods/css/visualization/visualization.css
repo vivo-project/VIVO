@@ -18,7 +18,7 @@ span.incomplete-data-holder,
 }
 .collaboratorship-icon {
     float: left;
-    padding-right: 5px;
+    padding-right: 8px;
 }
 .collaboratorship-link a {
     font-size: 0.9em;
@@ -48,12 +48,12 @@ span.incomplete-data-holder,
     border-top: 1px dotted #A6B1B0;
     padding-top: 20px;
 }
-.sparkline_text {
-    font-size: .8em;
-    font-weight: bold;
+.sparkline_text, .grey-text {
+    font-size: .9em;
     text-align: left;
     line-height: 1.5em;
     width: 180px;
+    color: #5e6363;
 }
 .google-visualization-sparkline-default {
     margin-bottom: 5px;
@@ -80,6 +80,7 @@ span.incomplete-data-holder,
 .infoIcon {
     padding-right:30px;
 }
+
 /* ---------------------------*/
 /* Visualization Tools -------*/
 /* ---------------------------*/

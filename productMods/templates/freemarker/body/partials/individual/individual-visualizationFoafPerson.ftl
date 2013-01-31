@@ -14,8 +14,7 @@
  
     ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/visualization/visualization.css" />')}
     <#assign standardVisualizationURLRoot ="/visualization">
-    
-    <section id="visualization" role="region">
+        
         <#if isAuthor>
             <#assign coAuthorIcon = "${urls.images}/visualization/coauthorship/co_author_icon.png">
             <#assign mapOfScienceIcon = "${urls.images}/visualization/mapofscience/scimap_icon.png">
@@ -32,7 +31,7 @@
             
             <div id="coauthorship_link_container" class="collaboratorship-link-container">
 				<div class="collaboratorship-icon">
-                    <a href="${coAuthorVisUrl}" title="co-author"><img src="${coAuthorIcon}" alt="Co-author network icon" width="30px" height="30px" /></a>
+                    <a href="${coAuthorVisUrl}" title="co-author"><img src="${coAuthorIcon}" alt="Co-author network icon" width="25px" height="25px" /></a>
                 </div>
                 <div class="collaboratorship-link"><a href="${coAuthorVisUrl}" title="co-author network">Co-Author Network</a></div>
             </div>
@@ -41,7 +40,7 @@
             
   	      	<div id="mapofscience_link_container" class="collaboratorship-link-container">
             	<div class="collaboratorship-icon">	
-                    <a href="${mapOfScienceVisUrl}" title="map of science"><img src="${mapOfScienceIcon}" alt="Map Of Science icon" width="30px" height="30px" /></a>
+                    <a href="${mapOfScienceVisUrl}" title="map of science"><img src="${mapOfScienceIcon}" alt="Map Of Science icon" width="25px" height="25px" /></a>
                 </div>
                 <div class="collaboratorship-link"><a href="${mapOfScienceVisUrl}" title="map of science">Map Of Science</a></div>
             </div>
@@ -66,10 +65,9 @@
             
             <div id="coinvestigator_link_container" class="collaboratorship-link-container">
                 <div class="collaboratorship-icon">
-                    <a href="${coInvestigatorVisUrl}" title="co-investigator network"><img src="${coInvestigatorIcon}" alt="Co-investigator network icon" width="30px" height="30px" /></a>
+                    <a href="${coInvestigatorVisUrl}" title="co-investigator network"><img src="${coInvestigatorIcon}" alt="Co-investigator network icon" width="25px" height="25px" /></a>
                 </div>
                 <div class="collaboratorship-link"><a href="${coInvestigatorVisUrl}" title="co-investigator network">Co-Investigator Network</a></div>
             </div>
         </#if>
-    </section>
 </#if>

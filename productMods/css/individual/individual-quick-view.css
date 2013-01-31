@@ -1,0 +1,257 @@
+/* $This file is distributed under the terms of the license in /doc/license.txt$ */
+
+/* ADMIN PANEL------>  */
+#admin {
+    font-size: .8em;
+    padding: 0 0 0 0 ;
+    margin: -15px 0 4px 0;
+    float:left;
+    width:55%;
+    height:70px;
+}
+#admin h3 {
+    display: inline-block;
+    padding: 3px 4px 3px 4px !important;
+    margin-bottom: 5px;
+    font-size: 14px;
+    float: left;
+}
+#admin .uri-link {
+    padding:0 0 0 11px;
+    clear: left;
+}
+/* <------ HEADER CONTENT ---------> */
+img.individual-photo {
+    width: 56px;
+    margin: -15px 10px 4px 0;
+    float: left;
+    border-width:2px !important;
+}
+h2#mainImage {
+    margin-top:36px;
+    margin-left:-10px;
+    float:left;
+    font-weight:bold;
+    width:80px !important;
+}
+section#label-title {
+    float:left;
+    width:88%;
+}
+.display-title-not-editable {
+    float-left;
+    font-size:1.15em;
+}
+.display-title-editable {
+    padding-left:0 !important;
+    margin-left:0 !important;
+    font-size:1em !important;
+    border:none !important;
+    display:inline-block; 
+}
+div#titleContainer {
+    display:inline-block;
+}
+section#qv-share-contact {
+    width:49.1%;
+    float:left;
+    padding:0 .8em 0 0;
+    margin-left:-2em;
+    overflow:visible;
+    clear:left;
+}
+h2#preferredTitle {
+    color: #5E6363;
+    font-size: 1em;
+    font-weight: bold;
+    padding:6px 0 0 0;
+    margin-top:48px;
+}
+/* <------ QR Code */
+span#qrCodeImage {
+    position: absolute;
+    top: 30px; /* changed for redesign, was -9em */
+    left: 76% !important; /* added for redesign */
+    width:180px; /* added for redesign */
+    border: solid 2px #ccc;
+    background: #fff; /* changed for redesign, was #fff */
+    text-align:middle; /* added for redesign */
+    overflow:visible;
+}
+span#qrCodeImage img {
+    padding: 1.7em 1.7em 0 1.7em; /* changed for redesign, was 1.7em 1.7 em 0 1.7 em */
+}
+/* <----- WEBPAGE CONTENT LEFT SIDE -----> */
+.edit-mainImage {
+    position: absolute;
+/*    background: rgba(255, 255, 255, 0.6); */
+    padding: 0 0 0 0;
+    top: 44px;
+    left: 0;
+}
+.delete-mainImage {
+    position: absolute;
+    top: 44px;
+    left: 26px;
+  /*  background: rgba(255, 255, 255, 0.6); */
+    padding: 0 0 0 8px;
+}
+div#webpage-wrapper {
+    background-color: #e4e8e7;
+    margin:-7px 0 -16px 0; 
+    padding-bottom:9px; 
+    padding-top:3px;
+    display:inline-block;
+    width: 456px;
+}
+h2.websites {
+    margin-left:15px;
+    padding:4px 0 0 0;
+    border-bottom: 1px solid #a1d2e2;
+    padding-bottom:3px;
+    width:418px;
+    color: #5E6363;
+    font-size: 1em;
+    font-weight: bold;
+}
+ul.individual-webpage {
+    padding:18px 0 0 25px ;
+}
+ul.individual-webpage li:first-child {
+    padding: 0 0 0 0;    
+}
+ul.individual-webpage li {
+    padding: 5px 5px 0 0;
+    float:left;
+}
+li.weblinkLarge {
+    margin-left:-14.5em;
+    margin-top:7em
+}
+li.weblinkSmall {
+    margin-left:-7.475em;
+    margin-top:3.425em
+}
+span.webpage-indicator-qv {
+    float:left;
+    font-size:0.825em;
+}
+
+/* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
+section#individual-intro {
+    overflow:visible ;
+}
+#individual-intro h1.fn {
+    padding-right:8px;
+    height:20px; 
+    margin:-1px 8px 5px 0;
+}
+section.qv-individual-info {
+    float:left !important;
+    margin-right:-20px;
+    margin-left:7px;
+}
+#individual-info h2#personInPosition {
+    padding: 25px 0 2px 0;
+}
+span.iconControlsEditable {
+    float:right;
+    margin-top:1.2em
+}
+span.iconControlsNotEditable {
+    float:right;
+}
+div#profileTypeContainer {
+    float:right;
+    margin-right:92px;
+    margin-top:12px;
+}
+div#profileTypeContainer select {
+    float:none;
+    display:inline-block;
+    padding: .5em;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E0DFDF;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 14px;
+    margin-bottom: 0.8em;
+}
+div#profileTypeContainer h2 {
+    margin-right:8px;
+    font-weight:bold;
+    font-size:1em;
+    color:#5e6363;
+    padding:0 0 0 0;
+    float:none;
+    display:inline-block;
+}
+/* <------ INDIVIDUAL VISUALIZATION */
+#visualization {
+    width:100%;
+    clear:both;
+    padding-top:0 !important;
+    background:red !important;
+}
+ul#individual-visualization li {
+    float: left;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #5e6363;
+}
+ul#individual-visualization li:last-child {
+    border: none;
+}
+/* <------ POSITIONS ------> */
+ul#individual-personInPosition {
+    list-style-type: circle;
+    padding-left: 10px; /* changed for redesign, was 20px */
+    margin: 10px 0 0 0; /* added for redesign */
+}
+ul#individual-hasResearchArea li {
+    float: left; 
+    padding-right: 10px;
+    margin-right: 10px; /* added for redesign */
+    padding-left: 0;  /* padding-left: 10px; out for redesign */
+    border-right: 1px solid #5e6363 ;
+    white-space:nowrap !important;
+}
+ul#individual-hasResearchArea li:last-child {
+    white-space:nowrap !important;
+}
+
+ul#individual-personInPosition li {
+    margin-left: 8px !important;
+}
+/* <------ GEOGRAPHIC FOCUS */
+ul#individual-geographicFocus li {
+    float: left;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #5e6363;
+}
+ul#individual-geographicFocus li:last-child {
+    border: none;
+}
+/* <------ MISC. ------> */
+span#fullViewLink {
+    position:relative;
+    padding-left:47%;
+}
+/****** FROM WILMA.CSS ******/
+#individual-info h2.mainPropGroup { 
+    border-bottom: 1px solid #DDE4E3;
+    padding-bottom:1px;
+    margin-bottom:8px;
+}
+ul#individual-personInPosition li {
+    padding-bottom:12px;
+    margin-left:10px; 
+    line-height: 1.25em !important;
+}
+ul#individual-personInPosition li:last-child { 
+    padding-bottom: 0;
+}
+#individual-info h2 {
+    padding: 25px 0 10px 0; /* changed for redesign, was padding-bottom: 10px */
+    clear:both; /* added for redesign */
+}

@@ -34,10 +34,10 @@
             <h5 class="qrCode">vCard QR</h5>
             ${qrCodeLinkedImage}
         <#elseif (display == "icon")>
-            <li role="listitem">
-                <a id="qrIcon" title="vCard QR Code" href="${qrData.exportQrCodeUrl}" title="QR Code"><img class="middle" src="${urls.images}/individual/qr_icon.png" alt="qr icon" /></a>
+<#--            <li role="listitem"> -->
+                <a id="qrIcon" title="vCard QR Code" href="${qrData.exportQrCodeUrl}" title="QR Code"><img  src="${urls.images}/individual/qr-code-icon.png<#-- qr_icon.png -->" alt="qr icon" /></a>
                 <span id="qrCodeImage" class="hidden">${qrCodeLinkedImage} <a class="qrCloseLink" href="#"  title="QR Code">Close</a></span>
-            </li>
+<#--            </li>  -->
         <#else>
             <p class="notice">You have passed an invalid value for the qrCode display parameter.</p>
         </#if>

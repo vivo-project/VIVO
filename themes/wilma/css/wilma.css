@@ -1284,9 +1284,10 @@ img.individual-photo {
     padding-top: .8em;
     display: block;
 }
-ul#individual-tools-people {
-    border-bottom: 1px solid #e8ece9;
+div#individual-tools-people {
+    border-bottom: 1px dotted #A6B1B0; /* #e8ece9; */
     color: #b2d15a;
+    text-align:right;
 }
 ul#individual-tools-people li a {
     color: #b2d15a;  
@@ -1306,14 +1307,6 @@ ul#individual-tools li a {
 ul.individual-urls {
     list-style: url(../../../images/individual/arrow-grey.gif);
 }
-
-ul#individual-phone {
-    list-style-type: none;
-}
-ul#individual-phone li {
-    line-height: 1.6em;
-}
-
 ul.individual-urls li {
     font-size: .875em;
     line-height: 1.6em;
@@ -1379,7 +1372,7 @@ ul#individual-hasResearchArea li a {
     color: #2485ae;
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
-#visualization h3 {
+#right-hand-column h3 {
     font-size: 1.25em;
     color: #2485ae;
 }
@@ -1395,12 +1388,14 @@ a.all-vivo-publications {
     color: #2485AE;
     font-size: .8em !important;
     text-decoration: underline;
+    vertical-align:text-top;
 }
 /* <------ MAP O' SCIENCE  */
 #map-of-science h3 a {
     color: #2485AE;
     font-size: .8em !important;
     text-decoration: underline;
+    vertical-align:text-top;
 }
 /* COAUTHORS ------>  */
 img.co-author {

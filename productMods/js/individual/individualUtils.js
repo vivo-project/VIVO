@@ -131,8 +131,10 @@ $(document).ready(function(){
     }
    
     // if there are webpages but no contacts (email/phone), extend
-    // the webpage border the full width. Used with "standard" profile view.
+    // the webpage border the full width. Used with "2 column" profile view.
     if ( $('h2#contactHeading').length < 1 ) {
-        $('div#webpagesContainer').css('width', '100%').css('clear','both');
+        if ( $('div#webpagesContainer').length ) {
+             $('div#webpagesContainer').css('width', '100%').css('clear','both');
+        }
     }
 });

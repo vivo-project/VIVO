@@ -8,8 +8,8 @@
 <#assign individualProductExtension>
     <#-- Include for any class specific template additions -->
     ${classSpecificExtension!}
-    <@vp.webpages propertyGroups editable />
     <!--PREINDIVIDUAL OVERVIEW.FTL-->
+    <#include "individual-webpage.ftl">
     <#include "individual-overview.ftl">
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
@@ -18,9 +18,7 @@
 
 <#include "individual-vitro.ftl">
 
-${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />',
-                  '<link rel="stylesheet" href="${urls.base}/css/individual/individual-property-groups.css" />')}
+${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
-${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/individual/propertyGroupControls.js"></script>')}
+${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}

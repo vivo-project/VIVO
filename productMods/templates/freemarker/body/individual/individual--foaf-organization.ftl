@@ -5,7 +5,7 @@
 <#-- Do not show the link for temporal visualization unless it's enabled -->
 <#if temporalVisualizationEnabled>
     <#assign classSpecificExtension>
-        <section id="visualization" role="region">
+        <section id="right-hand-column" role="region">
             <#include "individual-visualizationTemporalGraph.ftl">
             <#include "individual-visualizationMapOfScience.ftl">
         </section> <!-- #visualization -->
