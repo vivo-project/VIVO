@@ -73,8 +73,9 @@ ul#additional-emails li {
     width: 78%;
 }
 #individual-intro .individual-overview {
-    margin-bottom: 10px;
-    margin-top: 10px;
+/*    margin-bottom: 10px;
+    margin-top: 10px; */
+    margin: 0;
     display: inline;
     clear: both;
     float: left;
@@ -249,4 +250,43 @@ a.manageLinks {
     float:right;font-size:.8em;
     padding-right:10px;
     display:inline;
+}
+/* individual-vivo.css merger ------>  */
+#individual-info h2#overview {
+    padding-bottom: 0;
+    padding-top: 20px;
+}
+ul#individual-webpage li:first-child {
+    padding: 0 0 0 0;    
+}
+ul.webpages-withThumbnails li:nth-child(2) {
+    padding: 105px 0 0 15px;
+    float:left;
+}
+ul.webpages-withThumbnails li {
+    padding: 0 10px 0 0;
+    float:left;
+}
+h2#facultyResearchAreas  {
+    clear:both;
+    padding-bottom:3px;
+    padding-top:25px
+}
+/* <------ GRADUATE FIELDS */
+section#deptGraduateFields {
+    float:none;
+/*    padding-bottom:12px; */
+    width:176px;
+}
+section#deptGraduateFields h2 {
+    font-size:0.9em;
+    font-weight: bold;
+    margin-top:-10px;
+    margin-bottom:8px
+}
+span.webpage-indicator {
+    float:left;
+    font-size:0.825em;
+    margin-right:30px;
+    margin-top:15px
 }
