@@ -10,6 +10,8 @@
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
+<#assign qrCodeIcon = "qr-code-icon.png">
+<#assign visRequestingTemplate = "foaf-person-2column">
 <section id="individual-intro" class="vcard person" role="region">
     <section id="share-contact" role="region"> 
         <#-- Image -->           
@@ -58,12 +60,13 @@
                     <@p.mostSpecificTypesPerson individual editable/>
                 </#if>
             </#if>        
-            <span class="<#if editable>iconControlsEditable<#else>iconControlsNotEditable</#if>">
+            <span id="iconControlsRightSide" class="<#if editable>iconControlsEditable<#else>iconControlsNotEditable</#if>">
                 <#include "individual-iconControls.ftl">
             </span>
             <#if editable && profilePageTypesEnabled >
                 <div id="profileTypeContainer">
-                    <h2>Profile type</h2>
+                    <!-- The text in this h2 element is set via the wilma.css file -->
+                    <h2></h2>
                     <select id="profilePageType">
                         <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >Standard profile view</option>
                         <option value="quickView" <#if profileType == "quickView">selected</#if> >Quick profile view</option>
@@ -84,7 +87,6 @@
         <#include "individual-researchAreas.ftl">
 
         <!-- Contact and Webpages -->
-        <!-- VIVO Cornell does not use the contacts properties, so that include has been removed. -->
         <div id="contactsWebpages">
             <div id="contactContainer" >
                 <#include "individual-contactInfo-2column.ftl">
@@ -162,7 +164,6 @@ ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/indi
 
 ${headScripts.add('<script type="text/javascript" src="${urls.base}/js/tiny_mce/tiny_mce.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/qtip/jquery.qtip-1.0.0-rc3.min.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/js/amplify/amplify.store.min.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/json2.js"></script>',
                   '<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 

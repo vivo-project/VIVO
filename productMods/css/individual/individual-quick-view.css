@@ -70,21 +70,20 @@ h2#preferredTitle {
 /* <------ QR Code */
 span#qrCodeImage {
     position: absolute;
-    top: 30px; /* changed for redesign, was -9em */
-    left: 76% !important; /* added for redesign */
-    width:180px; /* added for redesign */
+    top: 30px; 
+    left: 76% !important; 
+    width:180px; 
     border: solid 2px #ccc;
-    background: #fff; /* changed for redesign, was #fff */
-    text-align:middle; /* added for redesign */
+    background: #fff; 
+    text-align:middle; 
     overflow:visible;
 }
 span#qrCodeImage img {
-    padding: 1.7em 1.7em 0 1.7em; /* changed for redesign, was 1.7em 1.7 em 0 1.7 em */
+    padding: 1.7em 1.7em 0 1.7em; 
 }
 /* <----- WEBPAGE CONTENT LEFT SIDE -----> */
 .edit-mainImage {
     position: absolute;
-/*    background: rgba(255, 255, 255, 0.6); */
     padding: 0 0 0 0;
     top: 44px;
     left: 0;
@@ -93,7 +92,6 @@ span#qrCodeImage img {
     position: absolute;
     top: 44px;
     left: 26px;
-  /*  background: rgba(255, 255, 255, 0.6); */
     padding: 0 0 0 8px;
 }
 div#webpage-wrapper {
@@ -204,14 +202,14 @@ ul#individual-visualization li:last-child {
 /* <------ POSITIONS ------> */
 ul#individual-personInPosition {
     list-style-type: circle;
-    padding-left: 10px; /* changed for redesign, was 20px */
-    margin: 10px 0 0 0; /* added for redesign */
+    padding-left: 10px; 
+    margin: 10px 0 0 0; 
 }
 ul#individual-hasResearchArea li {
     float: left; 
     padding-right: 10px;
-    margin-right: 10px; /* added for redesign */
-    padding-left: 0;  /* padding-left: 10px; out for redesign */
+    margin-right: 10px; 
+    padding-left: 0;  
     border-right: 1px solid #5e6363 ;
     white-space:nowrap !important;
 }
@@ -252,6 +250,6 @@ ul#individual-personInPosition li:last-child {
     padding-bottom: 0;
 }
 #individual-info h2 {
-    padding: 25px 0 10px 0; /* changed for redesign, was padding-bottom: 10px */
-    clear:both; /* added for redesign */
+    padding: 25px 0 10px 0; 
+    clear:both; 
 }

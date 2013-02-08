@@ -6,8 +6,8 @@
 <#assign primaryEmail = propertyGroups.pullProperty("${core}primaryEmail")!>
 <#assign addlEmail = propertyGroups.pullProperty("${core}email")!>
 
-<#if !editable && (phone?has_content || primaryEmail?has_content || addlEmail?has_content) >
-    <ul style="font-size:0.9em;padding-bottom:4px"><li><strong>Contact Info</strong></li></ul>
+<#if phone?has_content || primaryEmail?has_content || addlEmail?has_content >
+    <ul style="font-size:1em;padding-bottom:4px"><li><strong>Contact Info</strong></li></ul>
 </#if>
 
 <#-- Primary Email -->    
@@ -21,10 +21,10 @@
 <#if phone?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
     <@p.addLinkWithLabel phone editable />
     <#if phone.statements?has_content> <#-- if there are any statements -->
-        <ul id="individual-phone" role="list">
+        <ul id="individual-phone" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
             <#list phone.statements as statement>
-                <li role="listitem">                           
-            <#--       <img class ="icon-phone  middle" src="${urls.images}/individual/phoneIcon.gif" alt="phone icon"/> -->${statement.value}
+                <li role="listitem">
+                    ${statement.value}
                     <@p.editingLinks "${phone.localName}" statement editable />
                 </li>
             </#list>
@@ -43,10 +43,9 @@
     <#if email?has_content> <#-- true when the property is in the list, even if not populated (when editing) -->
         <@p.addLinkWithLabel email editable label/>
         <#if email.statements?has_content> <#-- if there are any statements -->
-            <ul id="${listId}" class="individual-emails" role="list">
+            <ul id="${listId}" class="individual-emails" role="list" <#if editable>style="list-style:none;margin-left:0;"</#if>>
                 <#list email.statements as statement>
                     <li role="listitem">
-               <#--         <img class ="icon-email middle" src="${urls.images}/individual/emailIcon.gif" alt="email icon"/>  -->  
                         <a class="email" href="mailto:${statement.value}" title="email">${statement.value}</a>
                         <@p.editingLinks "${email.localName}" statement editable />
                     </li>

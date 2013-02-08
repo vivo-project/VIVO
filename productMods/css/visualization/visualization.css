@@ -44,9 +44,9 @@ span.incomplete-data-holder,
     width: 180px;
 }
 .collaboratorship-link-separator {
-    margin-top: 20px;
+    margin-top: 15px;
     border-top: 1px dotted #A6B1B0;
-    padding-top: 20px;
+    padding-top: 15px;
 }
 .sparkline_text, .grey-text {
     font-size: .9em;

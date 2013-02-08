@@ -1276,6 +1276,9 @@ ul#individual-tools {
 h2#mainImage, #share-contact h2 {
     color: #5E6363;
 }
+h2#webpage {
+    font-weight: bold;
+}
 /* INDIVIDUAL INTRO - LEFT SIDE CONTENT ------>  */
 img.individual-photo {
     border: 7px solid #ebebeb;
@@ -1283,11 +1286,6 @@ img.individual-photo {
 .rdf-url {
     padding-top: .8em;
     display: block;
-}
-div#individual-tools-people {
-    border-bottom: 1px dotted #A6B1B0; /* #e8ece9; */
-    color: #b2d15a;
-    text-align:right;
 }
 ul#individual-tools-people li a {
     color: #b2d15a;  
@@ -1305,7 +1303,7 @@ ul#individual-tools li a {
     color: #5f6464;
 }
 ul.individual-urls {
-    list-style: url(../../../images/individual/arrow-grey.gif);
+    list-style: url(../../../images/individual/arrow-green.gif);
 }
 ul.individual-urls li {
     font-size: .875em;
@@ -1326,7 +1324,7 @@ ul.individual-urls-people li a {
 }
 #individual-info h1.fn {
     font-size: 1.375em;
-    color: #2485ae;
+    color: #595B5B;
     line-height: 1.3em;
 }
 h1.fn .display-title {
@@ -1359,17 +1357,17 @@ ul#individual-personInPosition li a {
     padding-top: 10px;
     width: 100%;
 }
-ul#individual-hasResearchArea {
-    padding-bottom: 24px;
-}
 ul#individual-hasResearchArea li {
     border-right: 1px solid #A6B1B0;
 }
 ul#individual-hasResearchArea li:last-child {
     border-right: none;
 }
-ul#individual-hasResearchArea li a {
-    color: #2485ae;
+ul#individual-facultyMemberships li {
+    border-right: 1px solid #A6B1B0;
+}
+ul#individual-facultyMemberships li:last-child {
+    border-right: none;
 }
 /* INDIVIDUAL VISUALIZATION ------>  */
 #right-hand-column h3 {
@@ -1488,7 +1486,9 @@ input[type="submit"] {
 .edit-individual {
     border-left: 1px dotted #B2D15A;
 }
-
+div#profileTypeContainer h2:after {
+    content:"Profile Type";
+}
 /* ------------------------------------------------->  */
 /* SITE ADMIN DASHBOARD ---------------------------->  */
 /* ------------------------------------------------->  */

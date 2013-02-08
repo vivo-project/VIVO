@@ -11,6 +11,7 @@
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
+<#assign visRequestingTemplate = "foaf-person-wilma">
 <section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
@@ -29,6 +30,12 @@
 
         <div id="photo-wrapper">${individualImage}</div>
         <!-- Contact Info -->
+        <div id="individual-tools-people">
+            <span id="iconControlsLeftSide">
+                <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/uriIcon.gif" alt="uri icon"/>  
+                <@qr.renderCode "qr_icon.png" />
+            </span>
+        </div>
         <#include "individual-contactInfo.ftl">  
                 
         <!-- Websites -->
@@ -37,10 +44,6 @@
 
     <section id="individual-info" ${infoClass!} role="region"> 
     <section id="right-hand-column" role="region">
-        <div id="individual-tools-people">
-            <img id="uriIcon" title="${individual.uri}" src="${urls.images}/individual/share-uri-icon.png" alt="uri icon"/>  
-            <@qr.renderCode />
-        </div>
         <#include "individual-visualizationFoafPerson.ftl">    
         </section>
         <#include "individual-adminPanel.ftl">

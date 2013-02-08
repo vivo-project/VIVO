@@ -13,7 +13,7 @@ ul#individual-tools li {
 }
 ul#individual-phone {
     clear: both;
-    list-style-type: circle;
+    list-style: circle outside url(../../images/phoneIconSmall.gif);
     margin-left: 15px;
 }
 ul#individual-phone li {
@@ -24,14 +24,18 @@ ul#individual-phone li:last-child {
     margin-bottom: 10px;
 }
 ul#individual-phone li:first-child {
-    margin-top: 10px;
+    margin-top: -4px;
 }
 .icon-phone, .icon-email {
     padding-right: 2px;
 }
+#individual-intro.person ul.individual-urls {
+    list-style-type: circle;
+    margin: 0 0 0 15px;
+}
 #individual-intro ul.individual-urls {
     list-style-type: circle;
-    margin-left: 15px;
+    margin: 0 0 15px 15px;
 }
 #individual-intro ul.individual-urls li {
     font-size: .875em;
@@ -41,7 +45,7 @@ ul#individual-phone li:first-child {
 ul.individual-emails {
     clear: both;
     padding-left: 0;
-    list-style-type: circle;
+    list-style: circle outside url(../../images/emailIconSmall.gif);
     margin-left: 20px;
 }
 #additional-emails li:last-child {
@@ -49,13 +53,8 @@ ul.individual-emails {
 }
 ul.individual-emails li {
     font-size: .875em;
-    line-height: 1.5em;
-}
-ul#individual-phone {
-    list-style: url(../../images/phoneIconSmall.gif);
-}
-ul.individual-emails {
-    list-style: url(../../images/emailIconSmall.gif);
+    line-height: 1.2em;
+    padding-bottom: 6px;
 }
 ul#webpages{
     margin-bottom: 5px;
@@ -73,12 +72,15 @@ ul#additional-emails li {
     width: 78%;
 }
 #individual-intro .individual-overview {
-/*    margin-bottom: 10px;
-    margin-top: 10px; */
     margin: 0;
     display: inline;
     clear: both;
-    float: left;
+    float: none;
+}
+div#activeGrantsLink {
+    float:right;
+    clear:right;
+    margin-bottom: 25px;
 }
 /* <------ INDIVIDUAL INTRO FOR PERSON*/
 #individual-intro.person {
@@ -96,10 +98,7 @@ ul#additional-emails li {
     float: none;
 }
 div#individual-tools-people {
-    height: 20px;
-    padding-bottom: 24px;
-    clear: both;
-    margin-bottom: 15px;
+    float: right;
 }
 ul#individual-tools-people li {
     position: relative;
@@ -119,7 +118,7 @@ ul.individual-urls-people li {
 }
 /* <------ INDIVIDUAL CORE:OVERVIEW */
 #overview {
-    clear: both;
+/*    clear: both; */
 }
 .overview-value {
     display: inline;
@@ -185,7 +184,7 @@ p.view-all-coauthors {
 
 /* <------ INDIVIDUAL MAP O' SCIENCE */
 #map-of-science {
-    padding: 0 3px 20px 0;
+    padding: 0 29px 20px 0;
     background-color: #fff;
 }
 #map-of-science h3 {
@@ -210,10 +209,13 @@ ul#individual-personInPosition li:last-child {
 }
 
 /* <------ RESEARCH AREA */
-ul#individual-hasResearchArea {
-    padding-bottom: 24px;
-}
 ul#individual-hasResearchArea li {
+    float: left;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #5e6363;
+}
+ul#individual-facultyMemberships li {
     float: left;
     padding-right: 10px;
     margin-right: 10px;
@@ -226,20 +228,24 @@ h5.qrCode {
 }
 span#qrCodeImage {
     position: absolute;
-    top: -9em;
-    left: 2em;
-    border: solid 1px #ccc;
-    background: white;
+    top: 27px; 
+    left: 175px !important; 
+    width:180px; 
+    border: solid 2px #ccc;
+    background: #fff; 
+    text-align:middle; 
+    overflow:visible;
+    z-index:1000;
 }
 span#qrCodeImage img {
-    padding: 1.7em 1.7em 0 1.7em;
+    padding: 1.7em 1.7em 0 1.7em; 
 }
 a.qrCloseLink {
-    float: right;
-    margin-right: .5em;
+    float: right; 
+    padding-right: 1em; 
+    margin-right: 0; 
     font-size: .8em;
-}
-/* MISCELLANEOUS------>  */
+}/* MISCELLANEOUS------>  */
 .listDateTime {
     padding: 0 0.4em;
     font-size: 0.8em;
@@ -254,10 +260,10 @@ a.manageLinks {
 /* individual-vivo.css merger ------>  */
 #individual-info h2#overview {
     padding-bottom: 0;
-    padding-top: 20px;
+/*    padding-top: 20px; */
 }
 ul#individual-webpage li:first-child {
-    padding: 0 0 0 0;    
+    padding: 0 0 5px 0;    
 }
 ul.webpages-withThumbnails li:nth-child(2) {
     padding: 105px 0 0 15px;
@@ -268,7 +274,12 @@ ul.webpages-withThumbnails li {
     float:left;
 }
 h2#facultyResearchAreas  {
-    clear:both;
+    clear:left;
+    padding-bottom:3px;
+    padding-top:25px
+}
+h2#facultyMemberships  {
+    clear:left;
     padding-bottom:3px;
     padding-top:25px
 }

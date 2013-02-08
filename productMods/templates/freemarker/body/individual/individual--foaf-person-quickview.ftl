@@ -12,7 +12,7 @@
 <#if !labelCount??>
     <#assign labelCount = 0 >
 </#if>
-
+<#assign qrCodeIcon = "qr-code-icon.png">
 <#assign individualImage>
     <@p.image individual=individual 
               propertyGroups=propertyGroups 
@@ -76,12 +76,13 @@
     </section> <!-- end label-title  -->
     <#include "individual-adminPanel.ftl">
 
-    <span class="<#if editable >iconControlsEditable<#else>iconControlsNotEditable</#if>">
+    <span id="iconControlsRightSide" class="<#if editable >iconControlsEditable<#else>iconControlsNotEditable</#if>">
         <#include "individual-iconControls.ftl">
     </span>
     <#if editable && profilePageTypesEnabled >
         <div id="profileTypeContainer" <#if editable>style="margin-top:22px"</#if>>
-            <h2>Profile type</h2>
+            <!-- The text in this h2 element is set via the wilma.css file -->
+            <h2></h2>
             <select id="profilePageType">
                 <option value="standard" <#if profileType == "standard" || profileType == "none">selected</#if> >Standard profile view</option>
                 <option value="quickView" <#if profileType == "quickView">selected</#if> >Quick profile view</option>

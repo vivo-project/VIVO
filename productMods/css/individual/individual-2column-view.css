@@ -3,7 +3,7 @@
 /* <------ INDIVIDUAL INTRO */
 #individual-intro {
     margin-top: 15px;
-    margin-bottom: 0px; /*    margin-bottom: 20px;  out for redesign*/
+    margin-bottom: 0px; 
     position: relative;
     overflow: hidden;
 }
@@ -13,7 +13,7 @@
     width: 166px;
     float: left;
     padding-right: 1.5em;
-    margin-right: 12px; /* added for redesign */
+    margin-right: 12px; 
     margin-bottom: 20px;
 }
 img.individual-photo {
@@ -21,17 +21,22 @@ img.individual-photo {
     margin-left: 0;
     float: left;
     margin-right: 20px;
-    margin-bottom: 10px; /* changed for redesign, was 20px  */
+    margin-bottom: 10px; 
 }
 ul#phone-list {
     font-size:0.9em;
 }
+ul#individual-phone {
+    clear: both;
+    list-style-type: circle;
+    margin-top:-8px; 
+}
 #primary-email {
     margin-top: 0; 
 }
-#primary-email li:last-child, /* added for redesign */
+#primary-email li:last-child, 
 #additional-emails li:last-child {
-    margin-bottom: 0; /* changed for redesign, was 18px */
+    margin-bottom: 0; 
 }
 
 /* <------ INDIVIDUAL INTRO - RIGHT SIDE CONTENT */
@@ -54,8 +59,8 @@ div#titleContainer {
     margin-top:6px;
 }
 #individual-info h2 {
-    padding: 25px 0 10px 0; /* changed for redesign, was padding-bottom: 10px */
-    clear:both; /* added for redesign */
+    padding: 25px 0 10px 0; 
+    clear:both; 
 }
 #individual-info h2#contactHeading {
     margin-bottom: 8px;
@@ -68,7 +73,7 @@ h3.primary-email {
     margin-top: -8px !important;
 }
 #individual-intro.person {
-    margin-bottom: 0; /* changed for redesign, was 30px */
+    margin-bottom: 0; 
     position: relative;
     width: 100%;
 }
@@ -113,29 +118,34 @@ span.iconControlsNotEditable {
     top:3px; 
 }
 #overview {
-    clear: both; /* changed for redesign, was left */
+    clear: both; 
 }
 /* <------ INDIVIDUAL VISUALIZATION */
 #visualization {
-    padding: 0 0 0 0; /* changed for redesign, was 0 0 0 20px */
-    background: #fff; /* added for redesign */
-    width:174px; /* added for redesign */
-    float:none; /* float:right; out for redesign */
+    padding: 0 0 0 0; 
+    background: #fff; 
+    width:174px; 
+    float:none; 
 }
 #visualization h3 {
     padding-top: 10px;
-    margin-bottom: 0; /* changed for redesign, was 10px */
+    margin-bottom: 0; 
 }
 p#networks {
     margin-bottom:10px;
 }
-.collaboratorship-link-separator { /* added for redesign */
+.collaboratorship-link-separator { 
+    margin-top: 10px;
+    border-top: 1px solid #DDE4E3;
+    padding-top: 10px;
+}
+.collaboratorship-link-separator-solid { 
     margin-top: 10px;
     border-top: 1px solid #DDE4E3;
     padding-top: 10px;
 }
 .sparkline_text {
-    font-size: .9em; /* changed for redesign, was .8em */
+    font-size: .9em; 
     text-align: left;
     line-height: 1.5em;
     width: 180px;
@@ -143,7 +153,7 @@ p#networks {
 span.collaboratorship-link a img{
     vertical-align:middle;
 }
-td#totalPubs { /* added for redesign */
+td#totalPubs { 
     font-size: 1.35em;
     background: url(../../images/individual/pub-total-bkgrnd.png) top left no-repeat;
     text-align:center;
@@ -151,7 +161,7 @@ td#totalPubs { /* added for redesign */
     width:48px;
     height:48px;
 }
-td#tenYearCount { /* added for redesign */
+td#tenYearCount { 
     font-size: .85em;
     padding-left:10px;
     vertical-align:middle;
@@ -166,37 +176,37 @@ div#pub_count_short_sparkline_vis {
 }
 /* <------ INDIVIDUAL TEMPORAL GRAPH */
 #temporal-graph {
-    padding: 0 3px 8px 0; /* changed for redesign, was 0 3px 20px 0 */
+    padding: 0 3px 8px 0; 
     background-color: #fff;
-    margin-top: -4px; /* added for redesign */
+    margin-top: -4px; 
 }
 #temporal-graph h3 img {
     padding-right: 10px;
-    vertical-align: middle; /* changed for redesign, was text-top */
+    vertical-align: middle; 
 }
 
 /* <------ INDIVIDUAL MAP O' SCIENCE */
 #map-of-science {
-    padding: 0 3px 24px 0; /* changed for redesign, was 0 3px 20x 0 */
+    padding: 0 3px 24px 0; 
     background-color: #fff;
 }
 #map-of-science h3 img {
     padding-right: 10px;
-    vertical-align: middle; /* changed for redesign, was text-top */
+    vertical-align: middle; 
 }
 
 /* <------ POSITIONS */
 ul#individual-personInPosition {
     list-style-type: circle;
-    padding-left: 10px; /* changed for redesign, was 20px */
-    margin: 10px 0 0 0; /* added for redesign */
+    padding-left: 10px; 
+    margin: 10px 0 0 0; 
 }
 ul#individual-personInPosition li {
     line-height: 1em;
-    padding-bottom:10px; /* changed for redesign, was 15px */
+    padding-bottom:10px; 
 }
 ul#individual-personInPosition li:last-child {
-    padding-bottom: 3px; /* changed for redesign, was 15px */
+    padding-bottom: 3px; 
 }
 
 /* <------ CONTACTS AND WEBPAGES */
@@ -235,8 +245,8 @@ div#contactPhoneDiv {
 ul#individual-hasResearchArea li {
     float: left;
     padding-right: 10px;
-    margin-right: 10px; /* added for redesign */
-    padding-left: 0;  /* padding-left: 10px; out for redesign */
+    margin-right: 10px; 
+    padding-left: 0;  
     border-right: 1px solid #5e6363;
 }
 h2#researchAreas  {
@@ -245,21 +255,22 @@ h2#researchAreas  {
 /* <------ QR Code */
 span#qrCodeImage {
     position: absolute;
-    top: 30px; /* changed for redesign, was -9em */
-    left: -120px !important; /* added for redesign */
-    width:180px; /* added for redesign */
+    top: 30px; 
+    left: -120px !important; 
+    width:180px; 
     border: solid 2px #ccc;
-    background: #fff; /* changed for redesign, was #fff */
-    text-align:middle; /* added for redesign */
+    background: #fff; 
+    text-align:middle; 
     overflow:visible;
+    z-index:1000;
 }
 span#qrCodeImage img {
-    padding: 1.7em 1.7em 0 1.7em; /* changed for redesign, was 1.7em 1.7 em 0 1.7 em */
+    padding: 1.7em 1.7em 0 1.7em; 
 }
 a.qrCloseLink {
     float: right; 
-    padding-right: 1em; /* added for redesign */
-    margin-right: 0; /* margin-right: .5em out for redesign */
+    padding-right: 1em; 
+    margin-right: 0; 
     font-size: .8em;
 }
 /* MISCELLANEOUS------>  */
@@ -270,8 +281,7 @@ span#quickViewLink {
 span#quickViewLink img {
     margin-top:35px;
 }
-
-a#manageLabels { /* added for redesign but will work with existing templates */
+a#manageLabels { 
     margin-left:20px;
     font-size:0.7em;
 }

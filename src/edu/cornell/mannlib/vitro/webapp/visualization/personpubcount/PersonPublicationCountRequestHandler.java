@@ -59,6 +59,13 @@ VisualizationRequestHandler {
 								.getParameter(
 										VisualizationFrameworkConstants.VIS_CONTAINER_KEY);
 
+        /* tlw72 -- Added in 1.6 for multi-view support. There are now two different "sparkline" templates     */
+        /* and the one that gets loaded depends on which foaf person template is being used by the app. The    */
+        /* personPublicationCountDynamicActivator.ftl template needs to know which is the requesting template. */
+        String requestingTemplate = vitroRequest
+            					.getParameter(
+										VisualizationFrameworkConstants.REQUESTING_TEMPLATE_KEY);  
+
 		QueryRunner<Set<Activity>> queryManager = new PersonPublicationCountQueryRunner(
 															personURI, 
 															dataset, 
@@ -91,7 +98,7 @@ VisualizationRequestHandler {
 		SparklineData sparklineData = visualizationCodeGenerator.getValueObjectContainer();
 
 		return prepareDynamicResponse(vitroRequest, sparklineData,
-				shouldVIVOrenderVis);
+				shouldVIVOrenderVis, requestingTemplate);
 
 	}
 	
@@ -273,13 +280,14 @@ VisualizationRequestHandler {
 	 * @return
 	 */
 	private TemplateResponseValues prepareDynamicResponse(VitroRequest vreq,
-			SparklineData valueObjectContainer, boolean shouldVIVOrenderVis) {
+			SparklineData valueObjectContainer, boolean shouldVIVOrenderVis, String requestingTemplate) {
 
 		String dynamicTemplate = "personPublicationCountDynamicActivator.ftl";
 
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put("sparklineVO", valueObjectContainer);
 		body.put("shouldVIVOrenderVis", shouldVIVOrenderVis);
+		body.put("requestingTemplate", requestingTemplate); /* tlw72 -- Added in 1.6 for multi-view support.*/
 
 		return new TemplateResponseValues(dynamicTemplate, body);
 
