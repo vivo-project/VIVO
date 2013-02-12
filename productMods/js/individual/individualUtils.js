@@ -2,8 +2,6 @@
 
 $(document).ready(function(){
         
-    $.extend(this, individualLocalName);
-
     // ensures proper layout when an organization has its webpage link displayed as a thumnail.
     if ( $('ul.webpages-withThumnails') ) {
         $('div.individual-overview').css("float","left");

@@ -116,7 +116,6 @@
     </script>
 </#if>
 <script>
-    var individualLocalName = "${individual.localName}";
     var imagesPath = '${urls.images}';
 </script>
 
