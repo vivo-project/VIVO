@@ -3,7 +3,7 @@
 $(document).ready(function(){
         
     // ensures proper layout when an organization has its webpage link displayed as a thumnail.
-    if ( $('ul.webpages-withThumnails') ) {
+    if ( $('ul.webpages-withThumnails').length > 0 ) {
         $('div.individual-overview').css("float","left");
         $('div#activeGrantsLink').css("margin-top","30px");
         $('section#individual-info').children('h2#overview').css("clear","both");
