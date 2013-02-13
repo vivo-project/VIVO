@@ -178,10 +178,16 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
                     getN3ForChapterNbrAssertion(),
                     getN3ForStartPageAssertion(),
                     getN3ForEndPageAssertion(),
-                    getN3ForDateTimeAssertion()
+                    getN3ForDateTimeAssertion(),
+                    getN3ForNewBookNewEditor(),
+                    getN3ForNewBookEditor(),
+                    getN3ForNewBookNewPublisher(),
+                    getN3ForNewBookPublisher(),
+                    getN3ForNewBookVolume(),
+                    getN3ForNewBookLocale(),
+                    getN3ForNewBookPubDate()
                 );
     }
-
 
     private List<String> generateN3Required() {
         return list(getAuthorshipN3()
@@ -256,7 +262,51 @@ public class AddPublicationToPersonGenerator extends VivoBaseGenerator implement
         "?newPublication vivo:hasPublicationVenue ?newBook . \n" +
         "?newBook a <" + bookClass + ">  . \n" +
         "?newBook vivo:publicationVenueFor ?newPublication . \n " + 
-        "?newBook <" + label + "> ?book .";
+        "?newBook <" + label + "> ?book . "; 
+    }
+
+    private String getN3ForNewBookVolume() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook <" + volumePred + "> ?volume . ";
+    }
+
+    private String getN3ForNewBookLocale() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook <" + localePred + "> ?locale . ";
+    }
+
+    private String getN3ForNewBookPubDate() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook <" + dateTimePred + "> ?dateTimeNode . \n" +
+        "?dateTimeNode a <" + dateTimeValueType + "> . \n" +
+        "?dateTimeNode <" + dateTimeValue + "> ?dateTime-value . \n" +
+        "?dateTimeNode <" + dateTimePrecision + "> ?dateTime-precision .";
+    }
+
+    private String getN3ForNewBookNewEditor() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook vivo:editor ?newEditor . \n " +
+        "?newEditor vivo:editorOf ?newBook . \n" + 
+        "?newEditor <" + label + "> ?editor .";
+    }
+
+    private String getN3ForNewBookEditor() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook vivo:editor ?editorUri . \n" +
+        "?editorUri vivo:editorOf ?newBook . " ;
+    }
+
+    private String getN3ForNewBookNewPublisher() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook vivo:publisher ?newPublisher . \n " +
+        "?newPublisher vivo:publisherOf ?newBook . \n" + 
+        "?newPublisher <" + label + "> ?publisher .";
+     }
+
+    private String getN3ForNewBookPublisher() {
+        return "@prefix vivo: <" + vivoCore + "> . \n" +
+        "?newBook vivo:publisher ?publisherUri . \n" +
+        "?publisherUri vivo:publisherOf ?newBook . ";
     }
 
     private String getN3ForBookNewPub() {
