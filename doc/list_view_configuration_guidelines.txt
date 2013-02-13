@@ -180,7 +180,8 @@ Datetimes in the query
 - To retrieve a datetime interval, use the following fragment, substituting the appropriate variable for
 ?edTraining:
 
-    OPTIONAL { GRAPH ?g9 { ?edTraining core:dateTimeInterval ?dateTimeInterval }
+    OPTIONAL { 
+               ?edTraining core:dateTimeInterval ?dateTimeInterval
                OPTIONAL { ?dateTimeInterval core:start ?dateTimeStartValue .                     
                           ?dateTimeStartValue core:dateTime ?dateTimeStart 
                }
