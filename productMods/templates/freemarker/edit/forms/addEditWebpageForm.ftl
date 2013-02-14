@@ -14,7 +14,7 @@
 <#assign url = lvf.getFormFieldValue(editSubmission, editConfiguration, "url")/>
 <#assign urlTypeValue = lvf.getFormFieldValue(editSubmission, editConfiguration, "urlType")/>
 <#assign anchor = lvf.getFormFieldValue(editSubmission, editConfiguration, "anchor") />
-<#assign newRank = lvf.getFormFieldValue(editSubmission, editConfiguration, "newRank") />
+<#assign newRank = editConfiguration.pageData.newRank!"" />
 
 <#if url?has_content>
     <#assign editMode = "edit">
