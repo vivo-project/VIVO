@@ -17,6 +17,7 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 import edu.cornell.mannlib.vitro.webapp.beans.Individual;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
+import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
 import edu.cornell.mannlib.vitro.webapp.dao.VitroVocabulary;
 import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import edu.cornell.mannlib.vitro.webapp.edit.n3editing.VTwo.EditConfigurationUtils;
@@ -49,6 +50,8 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     @Override
     public EditConfigurationVTwo getEditConfiguration(VitroRequest vreq, HttpSession session) throws Exception {
         EditConfigurationVTwo config = setupConfig(vreq, session);
+
+        config.setUrlPatternToReturnTo(getUrlPatternToReturnTo(vreq));
         prepare(vreq, config);
         return config;
     }
@@ -226,5 +229,16 @@ public class AddEditWebpageFormGenerator extends BaseEditConfigurationGenerator 
     protected String getN3ForWebpage() {
     	return N3_FOR_WEBPAGE;
     }
+
+	private String getUrlPatternToReturnTo(VitroRequest vreq) {
+		String subjectUri = EditConfigurationUtils.getSubjectUri(vreq);
+		String predicateUri = EditConfigurationUtils.getPredicateUri(vreq);
+		String generatorName = "edu.cornell.mannlib.vitro.webapp.edit.n3editing.configuration.generators.ManageWebpagesForIndividualGenerator";
+		String editUrl = EditConfigurationUtils.getEditUrlWithoutContext(vreq);
+		return editUrl + "?subjectUri=" + UrlBuilder.urlEncode(subjectUri) + 
+		"&predicateUri=" + UrlBuilder.urlEncode(predicateUri) + 
+		"&editForm=" + UrlBuilder.urlEncode(generatorName);
+	}
+
 
 }
