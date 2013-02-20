@@ -11,6 +11,7 @@
 <#assign baseEditWebpageUrl=editConfiguration.pageData.baseEditWebpageUrl!"baseEditWebpageUrl is undefined">
 <#assign deleteWebpageUrl=editConfiguration.pageData.deleteWebpageUrl!"deleteWebpageUrl is undefined">
 <#assign showAddFormUrl=editConfiguration.pageData.showAddFormUrl!"showAddFormUrl is undefined">
+<#assign predicateUri=editConfiguration.predicateUri!"undefined">
 
 <#if (editConfiguration.pageData.subjectName??) >
 <h2><em>${editConfiguration.pageData.subjectName}</em></h2>
@@ -39,7 +40,7 @@
                 <a href="${webpage.url}" title="webpage url">${anchor}</a>
             </span>
             <span class="editingLinks">
-                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}" class="edit" title="edit web page link">Edit</a> | 
+                <a href="${baseEditWebpageUrl}&objectUri=${webpage.link?url}&predicateUri=${predicateUri}" class="edit" title="edit web page link">Edit</a> | 
                 <a href="${urls.base}${deleteWebpageUrl}" class="remove" title="delete web page link">Delete</a> 
             </span>
         </li>    
@@ -78,3 +79,4 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/utils.js"></s
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/customFormUtils.js"></script>',
               '<script type="text/javascript" src="${urls.base}/templates/freemarker/edit/forms/js/manageWebpagesForIndividual.js"></script>')}
+
