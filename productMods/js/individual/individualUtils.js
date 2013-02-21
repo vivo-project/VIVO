@@ -1,13 +1,16 @@
 /* $This file is distributed under the terms of the license in /doc/license.txt$ */
 
 $(document).ready(function(){
-        
+    
     // ensures proper layout when an organization has its webpage link displayed as a thumnail.
-    if ( $('ul.webpages-withThumnails').length > 0 ) {
+    // there's a timing issue, so we can't check the length here, so check the role just to see
+    // if $('ul.webpages-withThumnails') exists
+    if ( $('ul.webpages-withThumbnails').children('li').length > 0 ) {
         $('div.individual-overview').css("float","left");
         $('div#activeGrantsLink').css("margin-top","30px");
         $('section#individual-info').children('h2#overview').css("clear","both");
     }
+
     // "more"/"less" HTML truncator for showing more or less content in data property core:overview
     $('.overview-value').truncate({max_length: 500});
     
@@ -140,5 +143,5 @@ $(document).ready(function(){
         if ( $('div#webpagesContainer').length ) {
              $('div#webpagesContainer').css('width', '100%').css('clear','both');
         }
-    }
+    }    
 });
