@@ -13,20 +13,14 @@
     <#include "individual-webpage.ftl">
     <#include "individual-overview.ftl">
     ${departmentalResearchAreas!}
-    ${departmentalMemberships!}
         </section> <!-- #individual-info -->
     </section> <!-- #individual-intro -->
-    <!--postindividual overview ftl-->
-    
+    <!--postindiviudal overiew tfl-->
 </#assign>
 
 <#include "individual-vitro.ftl">
-<script>
-    var individualLocalName = "${individual.localName}";
-</script>
+
 ${stylesheets.add('<link rel="stylesheet" href="${urls.base}/css/individual/individual-vivo.css" />')}
 
-${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>',
-                  '<script type="text/javascript" src="${urls.base}/js/json2.js"></script>')}
-
+${headScripts.add('<script type="text/javascript" src="${urls.base}/js/jquery_plugins/jquery.truncator.js"></script>')}
 ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/individualUtils.js"></script>')}
