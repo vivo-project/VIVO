@@ -61,7 +61,7 @@
             <critical-data-required>
             FILTER ( bound(?activity) )
             </critical-data-required>
-        } ORDER BY DESC(?dateTimeEnd) DESC(?dateTimeStart) ?activityLabel ?activityName
+        } ORDER BY DESC(?dateTimeEndRole) DESC(?dateTimeStartRole) ?activityLabel ?activityName
     </query-select>
     
     <query-construct>
