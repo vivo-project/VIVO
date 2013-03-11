@@ -1382,12 +1382,12 @@
     </taglib>
 
     <taglib>
-      <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+      <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
       <taglib-location>/WEB-INF/tlds/c.tld</taglib-location>
     </taglib>
 
     <taglib>
-      <taglib-uri>http://java.sun.com/jstl/functions</taglib-uri>
+      <taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
       <taglib-location>/WEB-INF/tlds/fn.tld</taglib-location>
     </taglib>
 
