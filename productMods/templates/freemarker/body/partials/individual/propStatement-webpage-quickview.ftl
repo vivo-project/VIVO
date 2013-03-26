@@ -16,8 +16,7 @@
 <#assign count = property.statements?size!> 
 
 <#assign identifier>
-    <#if statement.url?has_content>
-        ${statement.url?replace(":","")?replace("/","")?replace(".","-")?replace("&amp;","")?replace("%","")?replace("?","")?replace("=","")}<#t>
+    <#if statement.url?has_content>${statement.url?replace("[^\\p{L}\\p{N}]","","r")}<#t>
     <#else>
         "noUrl"<#t>
     </#if>    
